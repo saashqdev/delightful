@@ -20,7 +20,7 @@ class ChatInstruction extends AbstractEntity
     protected string $value = '';
 
     /**
-     * 指令类型.
+     * 指令type.
      */
     protected ?InstructionConfig $instruction = null;
 
@@ -51,7 +51,7 @@ class ChatInstruction extends AbstractEntity
                 $this->instruction = new InstructionConfig($instruction);
             /* @phpstan-ignore-next-line */
             } elseif (! $instruction instanceof InstructionConfig) {
-                // 如果不是数组也不是 InstructionConfig 对象，则创建一个空的 InstructionConfig 对象
+                // 如果不是数组也不是 InstructionConfig 对象，则createone空的 InstructionConfig 对象
                 $this->instruction = new InstructionConfig([]);
             }
         } else {

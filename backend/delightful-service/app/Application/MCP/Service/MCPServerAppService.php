@@ -118,22 +118,22 @@ class MCPServerAppService extends AbstractMCPAppService
 
         $resources = [];
         if (is_null($office)) {
-            // 官方数据和组织内的，一并查询
+            // 官方data和organization内的，一并query
             $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                 $dataIsolation,
                 ResourceType::MCPServer,
                 [$dataIsolation->getCurrentUserId()]
             )[$dataIsolation->getCurrentUserId()] ?? [];
             $resourceIds = array_keys($resources);
-            // 获取官方的 code
+            // get官方的 code
             $officialCodes = $this->mcpServerDomainService->getOfficialMCPServerCodes($dataIsolation);
             $resourceIds = array_merge($resourceIds, $officialCodes);
         } else {
             if ($office) {
-                // 只查官方数据
+                // 只查官方data
                 $resourceIds = $this->mcpServerDomainService->getOfficialMCPServerCodes($dataIsolation);
             } else {
-                // 只查组织内数据
+                // 只查organization内data
                 $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $dataIsolation,
                     ResourceType::MCPServer,
@@ -158,7 +158,7 @@ class MCPServerAppService extends AbstractMCPAppService
 
             $operation = Operation::None;
             if (in_array($item->getOrganizationCode(), $dataIsolation->getOfficialOrganizationCodes(), true)) {
-                // 如果是官方组织数据，并且当前组织所在的组织是官方组织，则设置操作权限为管理员
+                // 如果是官方organizationdata，并且当前organization所在的organization是官方organization，则setting操作permission为管理员
                 if ($dataIsolation->isOfficialOrganization()) {
                     $operation = Operation::Admin;
                 }
@@ -169,7 +169,7 @@ class MCPServerAppService extends AbstractMCPAppService
         }
         $orgData['icons'] = $icons;
 
-        // 获取用户填写的配置
+        // getuser填写的configuration
         $validationResults = MCPServerConfigUtil::batchValidateUserConfigurations($dataIsolation, $orgData['list'] ?? []);
         $orgData['validation_results'] = $validationResults;
 
@@ -302,7 +302,7 @@ class MCPServerAppService extends AbstractMCPAppService
                 ];
             }, $toolsResult?->getTools() ?? []);
 
-            // 每次检测成功，都存下一次工具列表
+            // 每次检测success，都存下一次tool列表
             $this->mcpUserSettingDomainService->updateAdditionalConfig(
                 $dataIsolation,
                 $code,

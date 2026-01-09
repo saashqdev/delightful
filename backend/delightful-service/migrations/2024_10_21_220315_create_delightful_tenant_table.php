@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->softDeletes();
             $table->index(['tenant_key'], 'index_tenant_key');
             $table->index(['display_id'], 'index_display_id');
-            $table->comment('企业名称、企业编号等企业信息');
+            $table->comment('企业名称、企业编号等企业information');
         });
     }
 

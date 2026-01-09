@@ -21,12 +21,12 @@ class CreateDelightfulChatDeviceTable extends Migration
         Schema::create('delightful_chat_devices', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->default(0)->comment('账户id');
-            $table->tinyInteger('type')->comment('设备类型,1:Android；2：IOS；3：Windows; 4：MacOS；5：Web');
+            $table->tinyInteger('type')->comment('设备type,1:Android；2：IOS；3：Windows; 4：MacOS；5：Web');
             $table->string('brand', 20)->comment('手机服务商');
             $table->string('model', 20)->comment('机型');
-            $table->string('system_version', 10)->comment('系统版本');
-            $table->string('sdk_version', 10)->comment('app版本');
-            $table->tinyInteger('status')->default(0)->comment('在线状态，0：离线；1：在线');
+            $table->string('system_version', 10)->comment('系统version');
+            $table->string('sdk_version', 10)->comment('appversion');
+            $table->tinyInteger('status')->default(0)->comment('在线status，0：离线；1：在线');
             $table->string('sid', 25)->comment('连接到服务端的sid');
             $table->string('client_addr', 25)->comment('客户端地址');
             $table->index('user_id', 'idx_user_id');

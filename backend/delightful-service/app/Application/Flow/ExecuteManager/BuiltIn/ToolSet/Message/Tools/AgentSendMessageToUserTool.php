@@ -30,7 +30,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
             $params = $executionData->getTriggerData()->getParams();
             // $delightfulAgentAppService = di(DelightfulAgentAppService::class);
             $senderUserId = $executionData->getAgentUserId();
-            // 助手发送消息
+            // 助手发送message
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();
@@ -50,7 +50,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
                 );
             }
             return [
-                'message' => '发送消息成功',
+                'message' => '发送messagesuccess',
             ];
         };
     }
@@ -67,7 +67,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '发送消息给个人';
+        return '发送message给个人';
     }
 
     public function getInput(): ?NodeInput
@@ -94,8 +94,8 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
         "receiver_user_ids": {
             "type": "array",
             "key": "receiver_user_ids",
-            "title": "接收人的用户id",
-            "description": "接收人的用户id",
+            "title": "接收人的userid",
+            "description": "接收人的userid",
             "required": null,
             "value": null,
             "encryption": false,
@@ -108,8 +108,8 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
         "content": {
             "type": "string",
             "key": "content",
-            "title": "消息内容",
-            "description": "消息内容",
+            "title": "messagecontent",
+            "description": "messagecontent",
             "required": null,
             "value": null,
             "encryption": false,
@@ -169,8 +169,8 @@ JSON,
    "interval": {
        "type": "number",
        "key": "interval",
-       "title": "失败重试次数",
-       "description": "失败重试次数",
+       "title": "failed重试次数",
+       "description": "failed重试次数",
        "required": null,
        "value": null,
        "encryption": false,

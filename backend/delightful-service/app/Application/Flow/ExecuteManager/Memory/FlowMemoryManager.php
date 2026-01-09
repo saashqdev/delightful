@@ -89,7 +89,7 @@ readonly class FlowMemoryManager
     }
 
     /**
-     * 根据记忆类型查询聊天记录.
+     * 根据记忆typequery聊天记录.
      * @return LLMMemoryMessage[]
      */
     public function queries(MemoryQuery $memoryQuery, array $ignoreMessageIds = []): array
@@ -102,7 +102,7 @@ readonly class FlowMemoryManager
     }
 
     /**
-     * 接受消息.
+     * 接受message.
      */
     public function receive(MemoryType $memoryType, LLMMemoryMessage $LLMMemoryMessage, bool $nodeDebug = false): void
     {
@@ -115,7 +115,7 @@ readonly class FlowMemoryManager
     }
 
     /**
-     * 回复消息.
+     * 回复message.
      */
     public function reply(MemoryType $memoryType, LLMMemoryMessage $LLMMemoryMessage, bool $nodeDebug = false): void
     {

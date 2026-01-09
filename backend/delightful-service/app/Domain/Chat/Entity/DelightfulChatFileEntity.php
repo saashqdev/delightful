@@ -37,7 +37,7 @@ final class DelightfulChatFileEntity extends AbstractEntity
     protected ?string $externalUrl = '';
 
     /**
-     * 数据表中没有这个字段，但是为了 dto 复用，这里用 private 添加 message_id 字段.
+     * data表中没有这个字段，但是为了 dto 复用，这里用 private 添加 message_id 字段.
      */
     private ?string $messageId = null;
 
@@ -48,7 +48,7 @@ final class DelightfulChatFileEntity extends AbstractEntity
 
     public function setMessageId(?string $messageId): void
     {
-        // 数据表中没有这个字段，但是为了 dto 复用，这里用 private 添加 message_id 字段.
+        // data表中没有这个字段，但是为了 dto 复用，这里用 private 添加 message_id 字段.
         if (! empty($messageId)) {
             $this->messageId = $messageId;
             return;

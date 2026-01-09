@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_flow_execute_logs', function (Blueprint $table) {
-            $table->string('organization_code')->default('')->comment('组织代码');
+            $table->string('organization_code')->default('')->comment('organization代码');
             $table->string('flow_type')->default('')->comment('流程类型');
             $table->string('parent_flow_code')->default('')->comment('父流程代码');
             $table->string('operator_id')->default('')->comment('操作员ID');

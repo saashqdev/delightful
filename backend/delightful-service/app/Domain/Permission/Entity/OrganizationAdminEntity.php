@@ -13,7 +13,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * 组织管理员实体.
+ * organization管理员实体.
  */
 class OrganizationAdminEntity extends AbstractEntity
 {
@@ -31,7 +31,7 @@ class OrganizationAdminEntity extends AbstractEntity
 
     protected int $status = 1; // 状态: 0=禁用, 1=启用
 
-    protected bool $isOrganizationCreator = false; // 是否为组织创建人
+    protected bool $isOrganizationCreator = false; // 是否为organizationcreate人
 
     protected ?string $remarks = null;
 

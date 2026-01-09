@@ -15,7 +15,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface AgentVersionRepositoryInterface
 {
     /**
-     * 获取组织内可用的 Agent 版本.
+     * getorganization内可用的 Agent version.
      *
      * @return array{total: int, list: array<DelightfulAgentVersionEntity>}
      */

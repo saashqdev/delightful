@@ -26,7 +26,7 @@ class DelightfulAccessToken
         $llmDataIsolation = new LLMDataIsolation('', 'system');
         $llmDataIsolation->setCurrentOrganizationCode($llmDataIsolation->getOfficialOrganizationCode());
 
-        // 检查应用是否已经创建
+        // 检查应用是否已经create
         $applicationDomainService = di(ApplicationDomainService::class);
         $application = $applicationDomainService->getByCodeWithNull($llmDataIsolation, ModelGatewayOfficialApp::APP_CODE);
         if (! $application) {
@@ -51,7 +51,7 @@ class DelightfulAccessToken
         $accessToken->prepareForCreation();
         SystemAccessTokenManager::setSystemAccessToken($accessToken);
 
-        // 新增官方组织个人访问令牌常量
+        // 新增官方organization个人访问令牌常量
         $userAccessToken = new AccessTokenEntity();
         $userAccessToken->setId(2);
         $userAccessToken->setName($application->getCode());

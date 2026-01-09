@@ -18,7 +18,7 @@ return new class extends Migration {
             return;
         }
         Schema::table('delightful_chat_messages', function (Blueprint $table) {
-            $table->bigInteger('current_version_id')->nullable()->comment('当前消息版本id')->default(null);
+            $table->bigInteger('current_version_id')->nullable()->comment('当前messageversionid')->default(null);
         });
     }
 

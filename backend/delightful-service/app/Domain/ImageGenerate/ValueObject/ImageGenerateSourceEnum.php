@@ -15,7 +15,7 @@ enum ImageGenerateSourceEnum: string
     // agent
     case AGENT = 'agent';
 
-    // 工具
+    // tool
     case TOOL = 'tool';
 
     // 流程节点

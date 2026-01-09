@@ -72,7 +72,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     }
 
     /**
-     * 获取某一层级的部门.
+     * get某一层级的department.
      * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getSubDepartmentsByLevel(int $currentDepartmentLevel, string $organizationCode, int $depth, int $size, int $offset): array
@@ -98,7 +98,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
         return $this->getDepartmentsEntity($departments);
     }
 
-    // 给定的部门id是否有下级部门
+    // 给定的departmentid是否有下级department
     #[ArrayShape([
         'third_parent_department_id' => 'string',
     ])]
@@ -114,7 +114,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
 
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulThirdPlatformDepartmentEntity
     {
-        // 对于前端来说, -1 表示根部门信息.
+        // 对于前端来说, -1 表示根departmentinformation.
         $query = $this->model::query()->where('delightful_organization_code', $organizationCode);
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $query->where(function (Builder $query) {
@@ -131,7 +131,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     }
 
     /**
-     * 获取组织的所有部门.
+     * getorganization的所有department.
      * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*']): array

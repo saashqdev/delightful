@@ -12,17 +12,17 @@ use App\Infrastructure\Core\AbstractValueObject;
 class ToolOptions extends AbstractValueObject
 {
     /**
-     * 工具名称.
+     * tool名称.
      */
     protected string $name;
 
     /**
-     * 工具描述.
+     * tool描述.
      */
     protected string $description;
 
     /**
-     * 输入mode定义.
+     * inputmode定义.
      */
     protected array $inputSchema = [];
 
@@ -35,7 +35,7 @@ class ToolOptions extends AbstractValueObject
     }
 
     /**
-     * 从数组创建实例.
+     * 从数组create实例.
      */
     public static function fromArray(?array $data): self
     {

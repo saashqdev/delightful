@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_api_organization_configs', function (Blueprint $table) {
-            $table->string('organization_code', 64)->default('')->comment('组织code')->change();
+            $table->string('organization_code', 64)->default('')->comment('organizationcode')->change();
             $table->string('app_code', 64)->default('')->comment('applicationcode');
 
             $table->index(['app_code', 'organization_code']);

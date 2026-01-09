@@ -44,16 +44,16 @@ class ExceptionBuilder
     }
 
     /**
-     * @param string $message 允许传入自定义的错误信息
+     * @param string $message 允许传入自定义的errorinformation
      * @return never-return // 为了phpstan检测
      */
     public static function throw(BackedEnum $error, string $message = '', array $replace = [], ?string $locale = null, ?Throwable $throwable = null): void
     {
         if ($throwable && ! $throwable instanceof BusinessException) {
-            // 记录原始异常信息
+            // 记录原始exceptioninformation
             $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get(__CLASS__);
             $logger->error(sprintf(
-                '记录原始的 throwable 异常 message:%s, code:%d, file:%s, line:%s, trace:%s',
+                '记录原始的 throwable exception message:%s, code:%d, file:%s, line:%s, trace:%s',
                 $throwable->getMessage(),
                 $throwable->getCode(),
                 $throwable->getFile(),

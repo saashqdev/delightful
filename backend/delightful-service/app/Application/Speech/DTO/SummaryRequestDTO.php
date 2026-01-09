@@ -26,7 +26,7 @@ readonly class SummaryRequestDTO
     }
 
     /**
-     * 是否有文件ID（场景二：直接上传已有音频文件）.
+     * 是否有文件ID（场景二：直接upload已有音频文件）.
      */
     public function hasFileId(): bool
     {

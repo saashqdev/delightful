@@ -18,7 +18,7 @@ enum TargetType: int
     case UserId = 1;
 
     /**
-     * 部门.
+     * department.
      */
     case DepartmentId = 2;
 

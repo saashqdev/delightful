@@ -14,14 +14,14 @@ enum ModelStatus: string
     case Deleted = 'deleted';
 
     /**
-     * 获取状态描述.
+     * get状态描述.
      */
     public function getDescription(): string
     {
         return match ($this) {
             self::Normal => '正常',
             self::Disabled => '已禁用',
-            self::Deleted => '已删除',
+            self::Deleted => '已delete',
         };
     }
 

@@ -11,7 +11,7 @@ use App\Domain\Flow\Entity\DelightfulFlowCacheEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 
 /**
- * Flow缓存仓储接口.
+ * Flowcache仓储接口.
  */
 interface DelightfulFlowCacheRepositoryInterface
 {

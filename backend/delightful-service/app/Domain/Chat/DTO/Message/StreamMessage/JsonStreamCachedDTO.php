@@ -11,10 +11,10 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class JsonStreamCachedDTO extends AbstractEntity
 {
-    // 避免频繁操作数据库，在内存中缓存发送消息的 sender_message_id
+    // 避免频繁操作data库，在内存中cache发送message的 sender_message_id
     protected string $senderMessageId;
 
-    // 避免频繁操作数据库，在内存中缓存接收消息的 receive_message_id
+    // 避免频繁操作data库，在内存中cache接收message的 receive_message_id
     protected string $receiveMessageId;
 
     /**
@@ -28,11 +28,11 @@ class JsonStreamCachedDTO extends AbstractEntity
     protected string $receiveDelightfulId;
 
     /**
-     * 缓存大 json 数据.
+     * cache大 json data.
      */
     protected array $content;
 
-    // 避免频繁操作数据库，记录最后一次更新数据库的时间
+    // 避免频繁操作data库，记录最后一次updatedata库的时间
     protected ?int $lastUpdateDatabaseTime;
 
     public function getLastUpdateDatabaseTime(): ?int

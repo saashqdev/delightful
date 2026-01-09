@@ -45,7 +45,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 获取美图超清转换支持的样式列表.
+     * get美图超清转换支持的样式列表.
      */
     public function getStyle(): array
     {
@@ -58,7 +58,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 设置 API 密钥.
+     * setting API 密钥.
      */
     public function setSecret(string $secret): void
     {
@@ -67,7 +67,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 设置 API Key.
+     * setting API Key.
      */
     public function setKey(string $key): void
     {
@@ -76,7 +76,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 查询任务状态
+     * query任务status
      */
     public function queryTask(string $taskId): array
     {
@@ -89,7 +89,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 提交图片转换任务
+     * 提交image转换任务
      */
     public function submitTask(string $imageUrl, int $styleId): array
     {
@@ -115,7 +115,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 创建带签名的请求
+     * create带签名的请求
      */
     private function createSignedRequest(string $url, string $method, array $headers = [], string $body = ''): Request
     {
@@ -134,7 +134,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 发送请求并返回响应.
+     * 发送请求并return响应.
      *
      * @throws GuzzleException
      * @throws Exception

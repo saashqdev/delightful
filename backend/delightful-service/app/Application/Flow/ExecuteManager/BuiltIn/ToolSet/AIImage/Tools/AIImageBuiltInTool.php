@@ -31,7 +31,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图工具';
+        return '文生图tool';
     }
 
     public function getCallback(): ?Closure
@@ -76,7 +76,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "生成图片的比例",
+            "title": "生成image的比例",
             "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",默认\"1:1\"",
             "required": null,
             "value": null,
@@ -88,8 +88,8 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "用户提示词",
-            "description": "用户提示词",
+            "title": "user提示词",
+            "description": "user提示词",
             "required": null,
             "value": null,
             "encryption": false,
@@ -100,8 +100,8 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "reference_image_ids": {
             "type": "array",
             "key": "reference_image_ids",
-            "title": "引用的图片id列表",
-            "description": "引用的图片id列表",
+            "title": "引用的imageid列表",
+            "description": "引用的imageid列表",
             "required": null,
             "value": null,
             "encryption": false,

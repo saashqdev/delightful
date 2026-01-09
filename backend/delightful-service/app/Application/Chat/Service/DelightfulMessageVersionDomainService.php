@@ -13,7 +13,7 @@ use App\Domain\Chat\Service\AbstractDomainService;
 class DelightfulMessageVersionDomainService extends AbstractDomainService
 {
     /**
-     * 获取消息的版本列table，按 version_id 升序.
+     * getmessage的version列table，按 version_id 升序.
      * @return null|DelightfulMessageVersionEntity[]
      */
     public function getMessageVersions(string $delightfulMessageId): ?array

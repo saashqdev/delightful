@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Prompts;
 
 /**
  * MCP提示管理器.
- * 当前版本为空实现，仅返回空列表.
+ * 当前version为空实现，仅return空列表.
  */
 class MCPPromptManager
 {
@@ -28,8 +28,8 @@ class MCPPromptManager
     }
 
     /**
-     * 获取提示列表.
-     * 当前为空实现，返回空数组.
+     * get提示列表.
+     * 当前为空实现，return空数组.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -39,8 +39,8 @@ class MCPPromptManager
     }
 
     /**
-     * 获取指定ID的提示.
-     * 当前为空实现，始终返回null.
+     * get指定ID的提示.
+     * 当前为空实现，始终returnnull.
      */
     public function getPrompt(string $id): ?array
     {

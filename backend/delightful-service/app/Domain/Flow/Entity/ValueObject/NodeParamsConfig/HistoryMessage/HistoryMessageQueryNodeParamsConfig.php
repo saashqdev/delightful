@@ -66,13 +66,13 @@ class HistoryMessageQueryNodeParamsConfig extends NodeParamsConfig
             "type": "array",
             "key": "history_messages",
             "sort": 0,
-            "title": "历史消息",
+            "title": "历史message",
             "description": "",
             "items": {
                 "type": "object",
                 "key": "history_messages",
                 "sort": 0,
-                "title": "历史消息",
+                "title": "历史message",
                 "description": "",
                 "items": null,
                 "required": [

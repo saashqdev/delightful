@@ -18,10 +18,10 @@ class QueryPageAgentDTO extends AbstractDTO
     // 助理状态：开启/禁用
     protected ?int $status = null;
 
-    // 创建人
+    // create人
     protected ?string $createdUid = null;
 
-    // 条件查询：名称/描述
+    // 条件query：名称/描述
     protected ?string $query = null;
 
     public function getPage(): int

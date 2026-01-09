@@ -25,8 +25,8 @@ class DelightfulSettingAppService extends AbstractKernelAppService
     }
 
     /**
-     * 保存全局配置
-     * 全局配置不属于任何账号、组织或用户.
+     * 保存全局configuration
+     * 全局configuration不属于任何账号、organization或user.
      */
     public function save(GlobalConfig $config): GlobalConfig
     {
@@ -36,14 +36,14 @@ class DelightfulSettingAppService extends AbstractKernelAppService
 
         $this->delightfulUserSettingDomainService->saveGlobal($entity);
 
-        // 重置缓存
+        // 重置cache
         $this->redis->del(self::CACHE_KEY);
 
         return $config;
     }
 
     /**
-     * 获取全局配置.
+     * get全局configuration.
      */
     public function get(): GlobalConfig
     {

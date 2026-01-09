@@ -22,32 +22,32 @@ class MCPServerToolDTO extends AbstractDTO
     public string $mcpServerCode = '';
 
     /**
-     * 工具名称.
+     * tool名称.
      */
     public string $name = '';
 
     /**
-     * 工具描述.
+     * tooldescription.
      */
     public string $description = '';
 
     /**
-     * 工具来源.
+     * tool来源.
      */
     public int $source = 0;
 
     /**
-     * 关联的工具code.
+     * 关联的toolcode.
      */
     public string $relCode = '';
 
     /**
-     * 关联的工具版本code.
+     * 关联的toolversioncode.
      */
     public string $relVersionCode = '';
 
     /**
-     * 工具版本.
+     * toolversion.
      */
     public string $version = '';
 
@@ -57,14 +57,14 @@ class MCPServerToolDTO extends AbstractDTO
     public ?bool $enabled = null;
 
     /**
-     * 工具配置.
+     * toolconfiguration.
      */
     public array $options = [];
 
     public array $sourceVersion = [];
 
     /**
-     * 关联的信息，给前端使用，无业务逻辑.
+     * 关联的information，给前端使用，无业务逻辑.
      */
     public ?array $relInfo = null;
 

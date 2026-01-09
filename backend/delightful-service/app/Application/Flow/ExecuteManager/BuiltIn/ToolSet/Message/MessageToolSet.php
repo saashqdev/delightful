@@ -21,11 +21,11 @@ class MessageToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return '消息工具集';
+        return 'messagetool集';
     }
 
     public function getDescription(): string
     {
-        return '提供了发送消息相关的工具，包括发送给个人和群组';
+        return '提供了发送message相关的tool，包括发送给个人和群组';
     }
 }

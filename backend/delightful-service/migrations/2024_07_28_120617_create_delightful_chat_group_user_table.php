@@ -21,11 +21,11 @@ return new class extends Migration {
         Schema::create('delightful_chat_group_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('group_id', 64)->comment('群id');
-            $table->string('user_id', 64)->comment('用户id');
-            $table->tinyInteger('user_role')->default(1)->comment('用户角色,1:普通用户；2：管理员 3:群主');
-            $table->tinyInteger('user_type')->default(1)->comment('用户类型,0:ai；1：人类. 冗余字段');
-            $table->tinyInteger('status')->default(1)->comment('状态,1:正常；2：禁言');
-            $table->string('organization_code', 64)->comment('进群时,用户所在组织编码');
+            $table->string('user_id', 64)->comment('userid');
+            $table->tinyInteger('user_role')->default(1)->comment('user角色,1:普通user；2：管理员 3:群主');
+            $table->tinyInteger('user_type')->default(1)->comment('usertype,0:ai；1：人类. 冗余字段');
+            $table->tinyInteger('status')->default(1)->comment('status,1:正常；2：禁言');
+            $table->string('organization_code', 64)->comment('进群时,user所在organization编码');
             $table->unique(['group_id', 'user_id', 'organization_code'], 'uniq_idx_group_user');
             $table->softDeletes();
             $table->timestamps();

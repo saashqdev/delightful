@@ -12,8 +12,8 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 class FileMessage extends AbstractAttachmentMessage
 {
     /**
-     * 获取文件ID（返回第一个文件的ID）
-     * 对于单文件消息（如语音、视频等）很有用.
+     * get文件ID（return第one文件的ID）
+     * 对于单文件message（如语音、视频等）很有用.
      */
     public function getFileId(): ?string
     {
@@ -22,8 +22,8 @@ class FileMessage extends AbstractAttachmentMessage
     }
 
     /**
-     * 获取第一个附件对象
-     * 对于单附件消息（如语音、视频等）很有用.
+     * get第one附件对象
+     * 对于单附件message（如语音、视频等）很有用.
      */
     public function getAttachment(): ?object
     {

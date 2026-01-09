@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_contact_third_platform_id_mapping', static function (Blueprint $table) {
             $table->dropIndex('unique_origin_id_mapping_type');
-            // 为了检查不同第三方平台组织的用户是否已经映射过，需要调整索引 key的顺序
+            // 为了检查不同第third-party平台organization的user是否已经映射过，需要调整索引 key的顺序
             $table->unique(['origin_id', 'mapping_type', 'delightful_organization_code', 'third_platform_type'], 'unique_origin_id_mapping_type');
         });
     }

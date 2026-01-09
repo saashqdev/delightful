@@ -21,10 +21,10 @@ class SpeechSubmitDTO extends AbstractRequestDTO
     {
         parent::__construct($data);
 
-        // 初始化音频配置
+        // 初始化音频configuration
         $this->audio = new SpeechAudioDTO($data['audio'] ?? []);
 
-        // 初始化附加配置
+        // 初始化附加configuration
         if (isset($data['additions'])) {
             $this->additions = $data['additions'];
         }
@@ -76,7 +76,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
             'audio' => $this->audio->toArray(),
         ];
 
-        // 添加可选的附加配置
+        // 添加可选的附加configuration
         if ($this->additions) {
             $requestData['additions'] = $this->additions;
         }

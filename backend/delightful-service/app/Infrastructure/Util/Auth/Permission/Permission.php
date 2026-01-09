@@ -18,7 +18,7 @@ class Permission implements PermissionInterface
     /**
      * 判断是否超级管理员.
      *
-     * @param string $organizationCode 组织编码
+     * @param string $organizationCode organization编码
      * @param string $mobile 手机号
      *
      * @return bool 是否超级管理员
@@ -36,11 +36,11 @@ class Permission implements PermissionInterface
     }
 
     /**
-     * 获取该用手机号码下所拥有的组织管理员代码.
+     * get该用手机号码下所拥有的organization管理员代码.
      */
     public function getOrganizationAdminList(string $delightfulId): array
     {
-        // 通过 delightfulID 获取手机号码
+        // 通过 delightfulID get手机号码
         $accountEntity = $this->delightfulAccountDomainService->getAccountInfoByDelightfulId($delightfulId);
         if ($accountEntity === null) {
             return [];

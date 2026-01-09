@@ -89,7 +89,7 @@ class DelightfulFlowApiChatDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取指令列table.
+     * get指令列table.
      *
      * @return InstructionValue[]
      */
@@ -174,7 +174,7 @@ class DelightfulFlowApiChatDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置指令列table.
+     * setting指令列table.
      */
     public function setInstruction(?array $instruction): void
     {

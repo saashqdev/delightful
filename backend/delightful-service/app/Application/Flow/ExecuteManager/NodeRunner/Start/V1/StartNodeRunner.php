@@ -30,7 +30,7 @@ class StartNodeRunner extends AbstractStartNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
     {
-        // 触发方式从运行数据获取，触发时只能有一个触发方式
+        // 触发方式从运行dataget，触发时只能有one触发方式
         $triggerType = $executionData->getTriggerType();
         if ($appointTriggerType = $frontResults['appoint_trigger_type'] ?? null) {
             if ($appointTriggerType instanceof TriggerType) {

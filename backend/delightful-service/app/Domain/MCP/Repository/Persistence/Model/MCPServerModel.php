@@ -15,19 +15,19 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id 雪花ID
- * @property string $organization_code 组织编码
+ * @property string $organization_code organization编码
  * @property string $code 唯一编码
  * @property string $name MCP服务名称
- * @property string $description MCP服务描述
+ * @property string $description MCP服务description
  * @property string $icon MCP服务图标
- * @property string $type 服务类型 ('sse' 或 'stdio')
+ * @property string $type 服务type ('sse' 或 'stdio')
  * @property bool $enabled 是否启用
  * @property string $external_sse_url 外部SSE服务URL
- * @property null|array $service_config 服务配置
- * @property string $creator 创建者
- * @property DateTime $created_at 创建时间
+ * @property null|array $service_config 服务configuration
+ * @property string $creator create者
+ * @property DateTime $created_at creation time
  * @property string $modifier 修改者
- * @property DateTime $updated_at 更新时间
+ * @property DateTime $updated_at update time
  */
 class MCPServerModel extends AbstractModel
 {

@@ -13,12 +13,12 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * 知识库文档仓库接口.
+ * 知识库document仓库接口.
  */
 interface KnowledgeBaseDocumentRepositoryInterface
 {
     /**
-     * 创建知识库文档.
+     * create知识库document.
      */
     public function create(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity;
 
@@ -30,7 +30,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function restoreOrCreate(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity;
 
     /**
-     * 更新知识库文档.
+     * update知识库document.
      */
     public function update(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity;
 
@@ -39,41 +39,41 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function updateWordCount(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, int $deltaWordCount): void;
 
     /**
-     * @return array array<知识库code, 文档数量>
+     * @return array array<知识库code, document数量>
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array;
 
     /**
-     * @return array<string, KnowledgeBaseDocumentEntity> array<文档code, 文档名>
+     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, document名>
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array;
 
     /**
-     * 查询知识库文档列表.
+     * query知识库document列表.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query, Page $page): array;
 
     /**
-     * 通过第三方文件id查询知识库文档列表.
+     * 通过第third-party文件idquery知识库document列表.
      *
      * @return array<KnowledgeBaseDocumentEntity>
      */
     public function getByThirdFileId(KnowledgeBaseDataIsolation $dataIsolation, string $thirdPlatformType, string $thirdFileId, ?string $knowledgeBaseCode = null, ?int $lastId = null, int $pageSize = 500): array;
 
     /**
-     * 查看单个知识库文档详情.
+     * 查看单个知识库document详情.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): ?KnowledgeBaseDocumentEntity;
 
     /**
-     * 删除知识库文档.
+     * delete知识库document.
      */
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 
     /**
-     * 根据文档编码删除所有片段.
+     * 根据document编码delete所有片段.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 

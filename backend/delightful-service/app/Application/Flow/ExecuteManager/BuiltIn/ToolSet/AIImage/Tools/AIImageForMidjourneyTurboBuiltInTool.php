@@ -27,7 +27,7 @@ class AIImageForMidjourneyTurboBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图工具-Midjourney-Turbo模型';
+        return '文生图tool-Midjourney-Turbo模型';
     }
 
     public function getCallback(): ?Closure

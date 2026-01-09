@@ -11,7 +11,7 @@ use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Infrastructure\Core\AbstractEvent;
 
 /**
- * agent抛出了异常.
+ * agent抛出了exception.
  */
 class UserCallAgentFailEvent extends AbstractEvent
 {

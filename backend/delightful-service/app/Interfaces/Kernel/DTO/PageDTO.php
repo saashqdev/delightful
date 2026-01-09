@@ -18,7 +18,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 获取页码
+     * get页码
      */
     public function getPage(): int
     {
@@ -26,7 +26,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 获取总数.
+     * get总数.
      */
     public function getTotal(): int
     {
@@ -34,7 +34,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 获取列table数据.
+     * get列table数据.
      */
     public function getList(): array
     {
@@ -42,7 +42,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 设置页码
+     * setting页码
      */
     public function setPage(int $page): self
     {
@@ -51,7 +51,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 设置总数.
+     * setting总数.
      */
     public function setTotal(int $total): self
     {
@@ -60,7 +60,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 设置列table数据.
+     * setting列table数据.
      */
     public function setList(array $list): self
     {

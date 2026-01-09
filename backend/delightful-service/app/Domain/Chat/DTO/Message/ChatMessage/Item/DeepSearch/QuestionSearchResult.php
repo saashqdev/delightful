@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage\Item\DeepSearch;
 use App\Infrastructure\Core\AbstractObject;
 
 /**
- * 某个问题的搜索结果.
+ * 某个问题的search结果.
  */
 class QuestionSearchResult extends AbstractObject
 {

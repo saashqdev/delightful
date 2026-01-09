@@ -54,8 +54,8 @@ class ImageConvertHighBuiltInToolTest extends ExecuteManagerBaseTest
             "user_prompt": {
                 "type": "string",
                 "key": "user_prompt",
-                "title": "用户提示词",
-                "description": "用户提示词",
+                "title": "user提示词",
+                "description": "user提示词",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -185,7 +185,7 @@ JSON, true));
 你是ai文生图助理
 
 ## 流程
-将用户输入的提示词，使用`image_convert_high`工具生成高清图片
+将userinput的提示词，使用`image_convert_high`tool生成高清image
 
 MARKDOWN,
 

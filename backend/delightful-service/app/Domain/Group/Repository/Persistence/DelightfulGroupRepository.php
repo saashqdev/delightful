@@ -32,7 +32,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     ) {
     }
 
-    // 创建群组
+    // create群组
     public function createGroup(DelightfulGroupEntity $delightfulGroupDTO): DelightfulGroupEntity
     {
         $groupInfo = $delightfulGroupDTO->toArray();
@@ -44,7 +44,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
         return GroupAssembler::getGroupEntity($groupInfo);
     }
 
-    // 批量查询群组信息
+    // 批量query群组information
 
     /**
      * @return DelightfulGroupEntity[]
@@ -106,7 +106,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
         $users = array_column($users, null, 'user_id');
         $time = date('Y-m-d H:i:s');
         $groupUsers = [];
-        // 批量获取用户信息
+        // 批量getuserinformation
         foreach ($userIds as $userId) {
             $user = $users[$userId] ?? null;
             if (empty($user)) {
@@ -129,7 +129,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
                 'organization_code' => $user['organization_code'],
             ];
         }
-        // 批量往群组中添加用户
+        // 批量往群组中添加user
         ! empty($groupUsers) && $this->groupUserModel::query()->insert($groupUsers);
         return true;
     }
@@ -193,7 +193,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * 将用户从群组中移除.
+     * 将user从群组中移除.
      */
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
@@ -229,7 +229,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * 获取关联的用户群组.
+     * get关联的user群组.
      * @param array<string> $groupIds
      * @param array<string> $userIds
      */

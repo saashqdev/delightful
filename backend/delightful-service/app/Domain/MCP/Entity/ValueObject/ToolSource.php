@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\MCP\Entity\ValueObject;
 
 /**
- * 工具来源: 0:未知来源, 1:FlowTool.
+ * tool来源: 0:未知来源, 1:FlowTool.
  */
 enum ToolSource: int
 {
@@ -19,7 +19,7 @@ enum ToolSource: int
     case FlowTool = 1;
 
     /**
-     * 获取标签名称.
+     * get标签名称.
      */
     public function getLabel(): string
     {
@@ -30,7 +30,7 @@ enum ToolSource: int
     }
 
     /**
-     * 通过枚举值获取枚举对象.
+     * 通过枚举值get枚举对象.
      */
     public static function fromValue(int $value): ?ToolSource
     {

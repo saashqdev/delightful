@@ -25,9 +25,9 @@ class CreateDelightfulApiModelConfigTable extends Migration
             $table->unsignedDecimal('exchange_rate')->comment('汇率');
             $table->unsignedDecimal('input_cost_per_1000', 40, 6)->comment('1000 token 輸入費用');
             $table->unsignedDecimal('output_cost_per_1000', 40, 6)->comment('1000 token 輸出費用');
-            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
-            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
-            $table->timestamp('deleted_at')->comment('逻辑删除')->nullable();
+            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('creation time');
+            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('modification time')->nullable();
+            $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();
         });
     }
 

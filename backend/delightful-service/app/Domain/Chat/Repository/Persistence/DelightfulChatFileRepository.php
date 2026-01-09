@@ -103,7 +103,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
     }
 
     /**
-     * 更新文件信息.
+     * update文件信息.
      */
     public function updateFile(DelightfulChatFileEntity $fileEntity): void
     {
@@ -121,7 +121,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
 
     public function updateFileById(string $fileId, DelightfulChatFileEntity $entity)
     {
-        // 文件更新需谨慎，暂时只允许更新file_name
+        // 文件update需谨慎，暂时只允许updatefile_name
         $model = new DelightfulChatFileModel();
         $updateData = [];
         if ($entity->getFileKey()) {

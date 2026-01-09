@@ -18,7 +18,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\PromptUtil;
 use Hyperf\Odin\Message\UserMessage;
 
-#[FlowNodeDefine(type: NodeType::Tool->value, code: NodeType::Tool->name, name: '工具', paramsConfig: ToolNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: true)]
+#[FlowNodeDefine(type: NodeType::Tool->value, code: NodeType::Tool->name, name: 'tool', paramsConfig: ToolNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: true)]
 class ToolNodeRunner extends AbstractLLMNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -26,7 +26,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         /** @var ToolNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 实时获取
+        // 实时get
         $toolFlow = ToolsExecutor::getToolFlows($executionData->getDataIsolation(), [$paramsConfig->getToolId()])[0] ?? null;
         if (! $toolFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.tool.flow_not_found', ['flow_code' => $paramsConfig->getToolId()]);
@@ -47,7 +47,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         }
         $vertexResult->setInput($inputResult);
 
-        //  自定义系统输入
+        //  自定义系统input
         $customSystemInput = $paramsConfig->getCustomSystemInput()?->getFormComponent()?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
         $vertexResult->addDebugLog('custom_system_input', $customSystemInput);
 
@@ -65,7 +65,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         $systemPrompt = $this->buildSystemPrompt($delightfulFlowEntity);
         $paramsConfig->setSystemPrompt($systemPrompt);
 
-        // 一定是忽略当前消息
+        // 一定是忽略当前message
         $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
 
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), ignoreMessageIds: $ignoreMessageIds);

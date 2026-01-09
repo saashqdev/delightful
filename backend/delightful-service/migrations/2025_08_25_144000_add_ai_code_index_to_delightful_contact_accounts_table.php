@@ -26,7 +26,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_contact_accounts', function (Blueprint $table) {
-            // 删除 ai_code 索引
+            // delete ai_code 索引
             $table->dropIndex('idx_ai_code');
         });
     }

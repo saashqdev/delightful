@@ -31,16 +31,16 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 {
     use ChatAmqpTrait;
 
-    // 子类需要指明 topic 类型
+    // 子类需要指明 topic type
     protected AmqpTopicType $topic;
 
     protected LoggerInterface $logger;
 
     /**
-     * 设置队列优先级参数.
+     * setting队列优先级参数.
      */
     protected AMQPTable|array $arguments = [
-        'x-ha-policy' => ['S', 'all'], // 将队列镜像到所有节点,hyperf 默认配置
+        'x-ha-policy' => ['S', 'all'], // 将队列镜像到所有节点,hyperf 默认configuration
     ];
 
     protected MessagePriority $priority;
@@ -54,7 +54,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
         protected DelightfulSeqDomainService $delightfulSeqDomainService,
         protected DelightfulUserRepository $delightfulUserRepository,
     ) {
-        // 设置列队优先级
+        // setting列队优先级
         $this->arguments['x-max-priority'] = ['I', $this->priority->value];
         $this->exchange = $this->getExchangeName($this->topic);
         $this->routingKey = $this->getRoutingKeyName($this->topic, $this->priority);
@@ -63,7 +63,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     }
 
     /**
-     * 继承以实现设置队列相关参数.
+     * 继承以实现setting队列相关参数.
      */
     public function getQueueBuilder(): QueueBuilder
     {

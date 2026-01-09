@@ -17,7 +17,7 @@ enum Type: int
     // 子流程
     case Sub = 2;
 
-    // 工具
+    // tool
     case Tools = 3;
 
     // 组合节点，运行方式有点类似于子流程

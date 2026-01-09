@@ -57,7 +57,7 @@ enum StatusIcon: string
     case IconWand = 'IconWand';
 
     /**
-     * 从字符串获取图标实例.
+     * 从字符串get图标实例.
      */
     public static function fromString(string $icon): self
     {
@@ -162,8 +162,8 @@ enum StatusIcon: string
     }
 
     /**
-     * 获取所有可用的图标值.
-     * @return array<string> 返回所有图标值
+     * get所有可用的图标值.
+     * @return array<string> return所有图标值
      */
     public static function getValues(): array
     {

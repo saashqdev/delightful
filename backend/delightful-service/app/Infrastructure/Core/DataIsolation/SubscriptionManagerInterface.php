@@ -21,17 +21,17 @@ interface SubscriptionManagerInterface
     public function setCurrentSubscription(string $subscriptionId, array $subscriptionInfo, array $modelIdsGroupByType = []): void;
 
     /**
-     * 获取当前订阅ID.
+     * get当前订阅ID.
      */
     public function getCurrentSubscriptionId(): string;
 
     /**
-     * 获取当前订阅信息.
+     * get当前订阅information.
      */
     public function getCurrentSubscriptionInfo(): array;
 
     /**
-     * 获取当前可用的模型ID列表, 如果返回null表示不限制.
+     * get当前可用的模型ID列表, 如果returnnull表示不限制.
      *
      * @return null|array<string>
      */

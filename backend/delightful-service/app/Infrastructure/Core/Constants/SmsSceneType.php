@@ -50,7 +50,7 @@ class SmsSceneType
     public const ACCOUNT_LOGIN = 'account_login';
 
     /**
-     * 账号登录绑定第三方平台.
+     * 账号登录绑定第third-party平台.
      */
     public const ACCOUNT_LOGIN_BIND_THIRD_PLATFORM = 'account_login_bind_third_platform';
 

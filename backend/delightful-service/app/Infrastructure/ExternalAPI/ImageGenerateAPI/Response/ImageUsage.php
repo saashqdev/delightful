@@ -13,11 +13,11 @@ class ImageUsage extends Usage
 {
     /**
      * @param int $promptTokens 提示词的令牌数量
-     * @param int $completionTokens 完成内容的令牌数量
+     * @param int $completionTokens 完成content的令牌数量
      * @param int $totalTokens 使用的总令牌数量
-     * @param int $generatedImages 生成的图片数量
-     * @param array $completionTokensDetails 完成令牌的详细信息
-     * @param array $promptTokensDetails 提示令牌的详细信息
+     * @param int $generatedImages 生成的image数量
+     * @param array $completionTokensDetails 完成令牌的详细information
+     * @param array $promptTokensDetails 提示令牌的详细information
      */
     public function __construct(
         public int $promptTokens = 0,

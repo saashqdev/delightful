@@ -50,7 +50,7 @@ class HistoryMessageNodeRunnerTest extends ExecuteManagerBaseTest
                 "type": "array",
                 "key": "history_messages",
                 "sort": 0,
-                "title": "历史消息",
+                "title": "历史message",
                 "description": "",
                 "required": null,
                 "value": null,
@@ -58,7 +58,7 @@ class HistoryMessageNodeRunnerTest extends ExecuteManagerBaseTest
                     "type": "object",
                     "key": "history_messages",
                     "sort": 0,
-                    "title": "历史消息",
+                    "title": "历史message",
                     "description": "",
                     "required": [
                         "role",

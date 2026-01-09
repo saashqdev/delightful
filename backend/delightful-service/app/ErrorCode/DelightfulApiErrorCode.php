@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * delightful api 错误码范围:4000, 4999.
+ * delightful api error码范围:4000, 4999.
  */
 enum DelightfulApiErrorCode: int
 {
@@ -35,7 +35,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.expired')]
     case TOKEN_EXPIRED = 4005;
 
-    // 组织的额度不足
+    // organization的额度不足
     #[ErrorMessage(message: 'api.organization.quota_not_enough')]
     case ORGANIZATION_QUOTA_NOT_ENOUGH = 4006;
 
@@ -43,7 +43,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.quota_not_enough')]
     case TOKEN_QUOTA_NOT_ENOUGH = 4007;
 
-    // 消息为空
+    // message为空
     #[ErrorMessage(message: 'api.message.empty')]
     case MESSAGE_EMPTY = 4008;
 
@@ -51,39 +51,39 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.rate_limit')]
     case RATE_LIMIT = 4009;
 
-    // 消息为空
+    // message为空
     #[ErrorMessage(message: 'api.msg_empty')]
     case MSG_EMPTY = 4010;
 
-    // 用户不存在
+    // user不存在
     #[ErrorMessage(message: 'api.user_id_not_exist')]
     case USER_ID_NOT_EXIST = 4011;
 
-    // token 计算异常
+    // token 计算exception
     #[ErrorMessage(message: 'api.token.calculate_error')]
     case TOKEN_CALCULATE_ERROR = 4012;
 
-    // token 创建失败
+    // token createfailed
     #[ErrorMessage(message: 'api.token.create_error')]
     case TOKEN_CREATE_ERROR = 4013;
 
-    // 用户创建的token数量超过限制
+    // usercreate的token数量超过限制
     #[ErrorMessage(message: 'api.user.create_access_token_limit')]
     case USER_CREATE_ACCESS_TOKEN_LIMIT = 4014;
 
-    // 用户使用的token数量超过限制
+    // user使用的token数量超过限制
     #[ErrorMessage(message: 'api.user.use_access_token_limit')]
     case USER_USE_ACCESS_TOKEN_LIMIT = 4015;
 
-    // 用户创建accessToken频率限流
+    // usercreateaccessToken频率限流
     #[ErrorMessage(message: 'api.user.create_access_token_rate_limit')]
     case USER_CREATE_ACCESS_TOKEN_RATE_LIMIT = 4016;
 
-    // 大模型响应失败
+    // 大模型响应failed
     #[ErrorMessage(message: 'api.model.response_fail')]
     case MODEL_RESPONSE_FAIL = 4017;
 
-    // 通用验证失败
+    // 通用验证failed
     #[ErrorMessage(message: 'api.validate_failed')]
     case ValidateFailed = 4018;
 

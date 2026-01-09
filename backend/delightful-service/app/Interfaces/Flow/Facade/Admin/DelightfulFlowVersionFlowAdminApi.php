@@ -21,7 +21,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
     protected DelightfulFlowVersionAppService $delightfulFlowVersionAppService;
 
     /**
-     * 版本列table.
+     * version列table.
      */
     public function queries(string $flowId)
     {
@@ -36,7 +36,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 版本详情.
+     * version详情.
      */
     public function show(string $flowId, string $versionId)
     {
@@ -46,7 +46,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 发布版本.
+     * 发布version.
      */
     public function publish(string $flowId)
     {
@@ -63,7 +63,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 回滚版本.
+     * 回滚version.
      */
     public function rollback(string $flowId, string $versionId)
     {

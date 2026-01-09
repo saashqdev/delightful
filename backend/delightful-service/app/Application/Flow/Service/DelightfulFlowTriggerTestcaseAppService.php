@@ -23,7 +23,7 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     }
 
     /**
-     * 获取触发测试集.
+     * get触发测试集.
      */
     public function show(Authenticatable $authorization, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {
@@ -31,7 +31,7 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     }
 
     /**
-     * 删除触发测试集.
+     * delete触发测试集.
      */
     public function remove(Authenticatable $authorization, string $flowCode, string $testcaseCode): void
     {
@@ -41,7 +41,7 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     }
 
     /**
-     * 查询触发测试集.
+     * query触发测试集.
      * @return array{total: int, list: array<DelightfulFlowTriggerTestcaseEntity>, users: array}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array

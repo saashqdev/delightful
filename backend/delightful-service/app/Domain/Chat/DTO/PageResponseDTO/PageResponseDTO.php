@@ -20,12 +20,12 @@ class PageResponseDTO extends AbstractDTO
     protected string $pageToken = '';
 
     /**
-     * 响应数据响应，不限制数组中的元素类型.
+     * 响应data响应，不限制数组中的元素type.
      */
     protected array $items = [];
 
     /**
-     * 是否还有更多数据.
+     * 是否还有更多data.
      */
     protected bool $hasMore = false;
 

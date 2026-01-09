@@ -55,7 +55,7 @@ class BeAgentExtra extends AbstractDTO
     protected ?bool $enableWebSearch = null;
 
     /**
-     * 获取 mentions 的 JSON 结构数组.
+     * get mentions 的 JSON 结构数组.
      */
     public function getMentionsJsonStruct(): ?array
     {
@@ -194,7 +194,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * 获取单个动态参数.
+     * get单个动态参数.
      */
     public function getDynamicParam(string $key, mixed $default = null): mixed
     {
@@ -202,7 +202,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * 设置单个动态参数.
+     * setting单个动态参数.
      */
     public function setDynamicParam(string $key, mixed $value): void
     {

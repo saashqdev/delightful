@@ -22,7 +22,7 @@ class ConversationCreatedListener implements ListenerInterface
     }
 
     /**
-     * 处理会话创建事件.
+     * 处理conversationcreate事件.
      */
     public function process(object $event): void
     {
@@ -32,7 +32,7 @@ class ConversationCreatedListener implements ListenerInterface
 
         $conversation = $event->getConversation();
 
-        // 仅为AI会话自动创建话题
+        // 仅为AIconversation自动create话题
         if ($conversation->getReceiveType() === ConversationType::Ai) {
             $topicDomainService = di(DelightfulTopicDomainService::class);
             $topicDomainService->agentSendMessageGetTopicId($conversation, 0);

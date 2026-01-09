@@ -20,7 +20,7 @@ abstract class AbstractOpenApi
     {
         // 全面兼容 openai 的 api_key 格式
 
-        // 1. 按顺序尝试从请求头中获取
+        // 1. 按顺序尝试从请求头中get
         $headers = [
             'api-key',
             'llm-access-token',
@@ -31,25 +31,25 @@ abstract class AbstractOpenApi
             return $token;
         }
 
-        // 2. 从 Authorization 头中获取 Bearer token
+        // 2. 从 Authorization 头中get Bearer token
         $token = $this->getTokenFromBearerAuth();
         if (! empty($token)) {
             return $token;
         }
 
-        // 3. 从 HTTP Basic Auth 中获取 token
+        // 3. 从 HTTP Basic Auth 中get token
         $token = $this->getTokenFromBasicAuth();
         if (! empty($token)) {
             return $token;
         }
 
-        // 4. 从查询参数中获取
+        // 4. 从query参数中get
         $apiKey = $this->request->query('api_key');
         if (! empty($apiKey)) {
             return $apiKey;
         }
 
-        // 5. 从请求体中获取
+        // 5. 从请求体中get
         $parsedBody = $this->request->getParsedBody();
         if (is_array($parsedBody) && isset($parsedBody['api_key'])) {
             return $parsedBody['api_key'];
@@ -59,7 +59,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * 从指定的请求头列表中按顺序获取令牌.
+     * 从指定的请求头列表中按顺序get令牌.
      */
     protected function getTokenFromHeaders(array $headerNames): string
     {
@@ -73,7 +73,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * 从 Authorization 头中获取 Bearer token.
+     * 从 Authorization 头中get Bearer token.
      */
     protected function getTokenFromBearerAuth(): string
     {
@@ -88,7 +88,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * 从 HTTP Basic Auth 中获取 token.
+     * 从 HTTP Basic Auth 中get token.
      */
     protected function getTokenFromBasicAuth(): string
     {

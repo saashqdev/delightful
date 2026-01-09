@@ -20,7 +20,7 @@ enum KnowledgeType: int
     case UserTopic = 4;
 
     /*
-     * user会话
+     * userconversation
      */
     case UserConversation = 5;
 

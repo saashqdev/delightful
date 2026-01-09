@@ -43,24 +43,24 @@ class CheckPermissionAspect extends AbstractAspect
             return $proceedingJoinPoint->process();
         }
 
-        // 获取当前登录用户授权信息
+        // get当前登录user授权information
         $authorization = RequestCoContext::getUserAuthorization();
         if ($authorization === null) {
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');
         }
 
-        // 构建权限键（支持多个，任一满足即通过）
+        // 构建permission键（支持多个，任一满足即通过）
         $permissionKeys = method_exists($permissionAnnotation, 'getPermissionKeys')
             ? $permissionAnnotation->getPermissionKeys()
             : [$permissionAnnotation->getPermissionKey()];
 
-        // 构建数据隔离上下文
+        // 构建data隔离context
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 执行权限校验：任意一个权限键通过则放行
+        // 执行permission校验：任意onepermission键通过则放行
         $hasPermission = false;
         foreach ($permissionKeys as $permissionKey) {
             if ($this->roleAppService->hasPermission($dataIsolation, $authorization->getId(), $permissionKey)) {

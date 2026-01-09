@@ -29,8 +29,8 @@ class CreateTaskSchedulerCrontab extends Migration
             $table->json('callback_params')->comment('回调参数');
             $table->string('remark', 255)->default('')->comment('备注');
             $table->dateTime('deadline')->nullable()->comment('结束时间');
-            $table->string('creator', 64)->default('')->comment('创建人');
-            $table->dateTime('created_at')->comment('创建时间');
+            $table->string('creator', 64)->default('')->comment('create人');
+            $table->dateTime('created_at')->comment('creation time');
 
             $table->index(['last_gen_time']);
         });

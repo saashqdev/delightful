@@ -19,7 +19,7 @@ abstract class AbstractProviderAssembler
      * 批量转换数组到实体.
      * @template T of object
      * @param class-string<T> $entityClass 实体类名
-     * @param array $dataArray 数据数组
+     * @param array $dataArray data数组
      * @return T[]
      */
     protected static function batchToEntities(string $entityClass, array $dataArray): array
@@ -53,10 +53,10 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * 创建带国际化支持的实体.
+     * create带国际化支持的实体.
      * @template T of object
      * @param class-string<T> $entityClass 实体类名
-     * @param array $data 数据数组
+     * @param array $data data数组
      * @param bool $enableI18n 是否启用国际化
      * @return T
      */

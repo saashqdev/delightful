@@ -22,7 +22,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 {
     protected string $id;
 
-    protected string $serviceProviderConfigId; // 服务商配置ID
+    protected string $serviceProviderConfigId; // 服务商configurationID
 
     protected string $modelId = ''; // 模型真实ID
 
@@ -42,7 +42,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected Status $status;
 
-    protected ?DisabledByType $disabledBy = null; // 禁用来源：official-官方禁用，user-用户禁用，NULL-未禁用
+    protected ?DisabledByType $disabledBy = null; // 禁用来源：official-官方禁用，user-user禁用，NULL-未禁用
 
     protected int $beDelightfulDisplayState = 0;
 

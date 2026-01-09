@@ -24,7 +24,7 @@ enum FileType: int
     // Excel
     case Excel = 4;
 
-    // 图片
+    // image
     case Image = 5;
 
     // 视频
@@ -38,7 +38,7 @@ enum FileType: int
 
     public static function getTypeFromFileExtension(string $fileExtension): self
     {
-        // 从文件的扩展名，推理出文件类型
+        // 从文件的扩展名，推理出文件type
         return match (strtolower($fileExtension)) {
             // 网址
             'http', 'https' => self::Link,
@@ -48,7 +48,7 @@ enum FileType: int
             'ppt', 'pptx', 'pot', 'pps', => self::PPT,
             // excel
             'xls', 'xlsx', 'xlsm', 'xlsb' => self::Excel,
-            // 图片
+            // image
             'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp' => self::Image,
             // 视频
             'mp4', 'avi', 'rmvb', 'rm', 'mpg', 'mpeg', 'mpe', 'wmv', 'mkv', 'vob', 'mov', 'qt', 'flv', 'f4v', 'swf' => self::Video,

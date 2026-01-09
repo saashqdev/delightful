@@ -19,13 +19,13 @@ return new class extends Migration {
         }
         Schema::create('delightful_organization_admins', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('用户ID，对应delightful_contact_users.user_id');
-            $table->string('organization_code', 64)->comment('组织编码');
+            $table->string('user_id', 64)->comment('userID，对应delightful_contact_users.user_id');
+            $table->string('organization_code', 64)->comment('organization编码');
             $table->string('delightful_id', 64)->nullable()->comment('Delightful ID');
-            $table->string('grantor_user_id', 64)->nullable()->comment('授权者用户ID');
+            $table->string('grantor_user_id', 64)->nullable()->comment('授权者userID');
             $table->timestamp('granted_at')->nullable()->comment('授权时间');
-            $table->tinyInteger('status')->default(1)->comment('状态: 0=禁用, 1=启用');
-            $table->tinyInteger('is_organization_creator')->default(0)->comment('是否为组织创建人: 0=否, 1=是');
+            $table->tinyInteger('status')->default(1)->comment('status: 0=禁用, 1=启用');
+            $table->tinyInteger('is_organization_creator')->default(0)->comment('是否为organizationcreate人: 0=否, 1=是');
             $table->text('remarks')->nullable()->comment('备注');
             $table->timestamps();
             $table->softDeletes();
@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->index(['organization_code', 'is_organization_creator', 'granted_at'], 'idx_organization_code_queries');
             $table->index(['delightful_id'], 'idx_delightful_id');
 
-            $table->comment('组织管理员表');
+            $table->comment('organization管理员表');
         });
     }
 

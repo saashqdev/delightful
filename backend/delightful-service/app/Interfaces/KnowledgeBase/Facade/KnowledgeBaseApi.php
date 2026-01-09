@@ -58,7 +58,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
 
         $result = $this->knowledgeBaseAppService->queries($authorization, $query, $page);
         $codes = array_column($result['list'], 'code');
-        // 补充文档数量
+        // 补充document数量
         $knowledgeBaseDocumentCountMap = $this->knowledgeBaseDocumentAppService->getDocumentCountByKnowledgeBaseCodes($authorization, $codes);
         $list = KnowledgeBaseAssembler::entitiesToListDTO($result['list'], $result['users'], $knowledgeBaseDocumentCountMap);
         return new PageDTO($page->getPage(), $result['total'], $list);
@@ -68,7 +68,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
     {
         $userAuthorization = $this->getAuthorization();
         $delightfulFlowKnowledgeEntity = $this->knowledgeBaseAppService->show($userAuthorization, $code);
-        // 补充文档数量
+        // 补充document数量
         $knowledgeBaseDocumentCountMap = $this->knowledgeBaseDocumentAppService->getDocumentCountByKnowledgeBaseCodes($userAuthorization, [$code]);
         return KnowledgeBaseAssembler::entityToDTO($delightfulFlowKnowledgeEntity)->setDocumentCount($knowledgeBaseDocumentCountMap[$code] ?? 0);
     }
@@ -79,7 +79,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 根据 file_key 获取知识库文件链接.
+     * 根据 file_key get知识库文件链接.
      */
     public function getFileLink(RequestInterface $request): array
     {
@@ -87,7 +87,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
         if (empty($fileKey)) {
             return [];
         }
-        // 校验file_key格式，必须以组织/应用id/knowledge-base/开头
+        // 校验file_key格式，必须以organization/应用id/knowledge-base/开头
         if (! preg_match('/^[a-zA-Z0-9]+\/[0-9]+\/knowledge-base\/.*$/', $fileKey)) {
             ExceptionBuilder::throw(AuthenticationErrorCode::ValidateFailed);
         }

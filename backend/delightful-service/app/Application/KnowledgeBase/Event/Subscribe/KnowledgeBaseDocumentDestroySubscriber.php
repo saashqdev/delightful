@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         $knowledge = $event->knowledgeBaseEntity;
         $document = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // 如果是基础知识库类型，则传知识库创建者，避免权限不足
+        // 如果是基础知识库type，则传知识库create者，避免permission不足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -59,7 +59,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
 
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($dataIsolation, $document->getKnowledgeBaseCode());
 
-        // 这里需要删除所有片段，在删除文档
+        // 这里需要delete所有片段，在deletedocument
         $query = new KnowledgeBaseFragmentQuery()->setDocumentCode($document->getCode());
         /** @var KnowledgeBaseFragmentEntity[][] $fragments */
         $fragments = [];
@@ -75,7 +75,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         /** @var KnowledgeBaseFragmentEntity[] $fragments */
         $fragments = array_merge(...$fragments);
         $documentSyncStatus = KnowledgeSyncStatus::Deleted;
-        // 先删除片段
+        // 先delete片段
         $pointIds = array_column($fragments, 'point_id');
         $fragmentSyncStatus = KnowledgeSyncStatus::Deleted;
         $fragmentSyncMessage = '';
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         }
         $knowledgeBaseFragmentDomainService->batchChangeSyncStatus(array_column($fragments, 'id'), $fragmentSyncStatus, $fragmentSyncMessage);
 
-        // 删除片段完成后，将文档同步标记为已删除
+        // delete片段完成后，将document同步标记为已delete
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::createByBaseDataIsolation($dataIsolation);
         $documentDomainService->changeSyncStatus($knowledgeBaseDataIsolation, $document->setSyncStatus($documentSyncStatus->value));
     }

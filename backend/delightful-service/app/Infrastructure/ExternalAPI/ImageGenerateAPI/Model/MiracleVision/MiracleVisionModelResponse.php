@@ -14,7 +14,7 @@ class MiracleVisionModelResponse extends AbstractEntity
     // 完成状态
     protected bool $finishStatus = false;
 
-    // 图片
+    // image
     protected array $urls = [];
 
     // 进度条

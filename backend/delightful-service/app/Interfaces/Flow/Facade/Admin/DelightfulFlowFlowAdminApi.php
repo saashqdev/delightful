@@ -34,7 +34,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     protected MCPServerAppService $mcpServerAppService;
 
     /**
-     * 获取所有节点的版本.
+     * get所有节点的version.
      */
     public function nodeVersions()
     {
@@ -45,7 +45,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 获取节点配置模板.
+     * get节点configuration模板.
      */
     public function nodeTemplate()
     {
@@ -76,7 +76,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 保存基础信息.
+     * 保存基础information.
      */
     public function saveFlow()
     {
@@ -100,14 +100,14 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowDTO);
         $delightfulFlowDO->setCode($flowId);
 
-        // 触发方式、触发数据
+        // 触发方式、触发data
         $triggerConfig = $this->request->input('trigger_config', []);
 
         return $this->delightfulFlowExecuteAppService->testRun($authorization, $delightfulFlowDO, $triggerConfig);
     }
 
     /**
-     * 查询.
+     * query.
      */
     public function queries()
     {
@@ -121,7 +121,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 查询工具.
+     * querytool.
      */
     public function queryTools()
     {
@@ -133,7 +133,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 查询可用工具集.
+     * query可用tool集.
      */
     public function queryToolSets()
     {
@@ -163,7 +163,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 查询可用向量知识库.
+     * query可用向量知识库.
      */
     public function queryKnowledge()
     {
@@ -192,13 +192,13 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function changeEnable(string $flowId)
     {
-        // 从请求中获取enable参数，如果没有传递则不影响原有逻辑
+        // 从请求中getenable参数，如果没有传递则不影响原有逻辑
         $enable = $this->request->has('enable') ? (bool) $this->request->input('enable') : null;
         $this->delightfulFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
     }
 
     /**
-     * 删除.
+     * delete.
      */
     public function remove(string $flowId)
     {

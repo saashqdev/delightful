@@ -14,7 +14,7 @@ class RouteLoader
         if (! is_dir($dir)) {
             return;
         }
-        // 获取目录下的所有*php
+        // get目录下的所有*php
         $files = glob($dir . '/*.php');
         foreach ($files as $file) {
             self::loadPath($file);

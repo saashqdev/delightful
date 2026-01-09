@@ -14,7 +14,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $id;
 
     /**
-     * 指定版本id.
+     * 指定versionid.
      */
     public ?string $agentVersionId = null;
 
@@ -29,21 +29,21 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $flowCode;
 
     /**
-     * 助理名称.
+     * assistant name.
      */
     public string $agentName;
 
     public string $robotName;
 
     /**
-     * 助理头像.
+     * assistant avatar.
      */
     public string $agentAvatar;
 
     public string $robotAvatar;
 
     /**
-     * 助理描述.
+     * 助理description.
      */
     public string $agentDescription;
 
@@ -55,22 +55,22 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $createdUid;
 
     /**
-     * 助理状态：启用｜禁用.
+     * 助理status：启用｜禁用.
      */
     public ?int $status = null;
 
     /**
-     * 创建时间.
+     * creation time.
      */
     public ?string $createdAt = null;
 
     /**
-     * 更新者用户ID.
+     * update者userID.
      */
     public ?string $updatedUid = '';
 
     /**
-     * 更新时间.
+     * update time.
      */
     public ?string $updatedAt = null;
 

@@ -36,8 +36,8 @@ class EasyFileTools
         // 去掉blob的头
         $blob = substr($blob, 44);
 
-        // 将新数据追加到文件末尾
-        // 获取文件大小
+        // 将新data追加到文件末尾
+        // get文件大小
         fseek($wav1, 0, SEEK_END);
         fwrite($wav1, $blob);
         $fileSize = ftell($wav1);

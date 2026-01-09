@@ -24,7 +24,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 从沙箱 API 响应创建 DTO.
+     * 从沙箱 API 响应create DTO.
      */
     public static function fromSandboxResponse(array $response): self
     {
@@ -49,7 +49,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 检查合并是否失败.
+     * 检查合并是否failed.
      */
     public function isError(): bool
     {

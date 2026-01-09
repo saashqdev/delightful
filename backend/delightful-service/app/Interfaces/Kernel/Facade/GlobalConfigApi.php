@@ -27,14 +27,14 @@ class GlobalConfigApi
         $config = $this->delightfulSettingAppService->get();
         $result = $config->toArray();
 
-        // 合并平台设置
+        // 合并平台setting
         try {
             /** @var PlatformSettingsAppService $platformSettingsAppService */
             $platformSettingsAppService = di(PlatformSettingsAppService::class);
             $platform = $platformSettingsAppService->get();
             $result = array_merge($result, self::platformSettingsToResponse($platform->toArray()));
         } catch (Throwable $e) {
-            // 忽略平台设置异常，避免影响全局配置读取
+            // 忽略平台settingexception，避免影响全局configuration读取
         }
 
         return $result;

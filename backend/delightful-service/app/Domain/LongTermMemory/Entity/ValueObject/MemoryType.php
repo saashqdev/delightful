@@ -8,30 +8,30 @@ declare(strict_types=1);
 namespace App\Domain\LongTermMemory\Entity\ValueObject;
 
 /**
- * 记忆类型枚举.
+ * 记忆type枚举.
  */
 enum MemoryType: string
 {
-    case MANUAL_INPUT = 'manual_input';           // 手动输入
+    case MANUAL_INPUT = 'manual_input';           // 手动input
     case CONVERSATION_ANALYSIS = 'conversation_analysis';  // 对话分析
-    case USER_NOTE = 'user_note';                // 用户笔记
+    case USER_NOTE = 'user_note';                // user笔记
     case SYSTEM_KNOWLEDGE = 'system_knowledge';  // 系统知识
 
     /**
-     * 获取中文描述.
+     * get中文description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::MANUAL_INPUT => '手动输入',
+            self::MANUAL_INPUT => '手动input',
             self::CONVERSATION_ANALYSIS => '对话分析',
-            self::USER_NOTE => '用户笔记',
+            self::USER_NOTE => 'user笔记',
             self::SYSTEM_KNOWLEDGE => '系统知识',
         };
     }
 
     /**
-     * 是否为用户生成的记忆.
+     * 是否为user生成的记忆.
      */
     public function isUserGenerated(): bool
     {

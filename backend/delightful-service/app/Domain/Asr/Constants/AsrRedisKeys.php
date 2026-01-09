@@ -14,7 +14,7 @@ namespace App\Domain\Asr\Constants;
 class AsrRedisKeys
 {
     /**
-     * 任务状态 Hash Key 格式
+     * 任务status Hash Key 格式
      * 实际使用时会 MD5(user_id:task_key).
      */
     public const TASK_HASH = 'asr:task:%s';
@@ -31,7 +31,7 @@ class AsrRedisKeys
     public const SUMMARY_LOCK = 'asr:summary:task:%s';
 
     /**
-     * 任务状态扫描模式.
+     * 任务status扫描模式.
      */
     public const TASK_SCAN_PATTERN = 'asr:task:*';
 

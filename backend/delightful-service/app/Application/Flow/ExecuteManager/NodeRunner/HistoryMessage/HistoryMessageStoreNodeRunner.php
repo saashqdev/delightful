@@ -23,7 +23,7 @@ use Hyperf\Odin\Message\Role;
 #[FlowNodeDefine(
     type: NodeType::HistoryMessageStore->value,
     code: NodeType::HistoryMessageStore->name,
-    name: '历史消息 / 存储',
+    name: '历史message / 存储',
     paramsConfig: HistoryMessageStoreNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -44,10 +44,10 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // 如果是资源类的数据，那么需要提前上传了
+        // 如果是资源类的data，那么需要提前upload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由于里面会进行重命名，所以这里直接获取对应的名称传入进去
+        // 由于里面会进行重命名，所以这里直接get对应的名称传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);

@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Resources;
 
 /**
  * MCP资源管理器.
- * 当前版本为空实现，仅返回空列表.
+ * 当前version为空实现，仅return空列表.
  */
 class MCPResourceManager
 {
@@ -28,8 +28,8 @@ class MCPResourceManager
     }
 
     /**
-     * 获取资源列表.
-     * 当前为空实现，返回空数组.
+     * get资源列表.
+     * 当前为空实现，return空数组.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -39,8 +39,8 @@ class MCPResourceManager
     }
 
     /**
-     * 获取指定ID的资源.
-     * 当前为空实现，始终返回null.
+     * get指定ID的资源.
+     * 当前为空实现，始终returnnull.
      */
     public function getResource(string $id): ?array
     {

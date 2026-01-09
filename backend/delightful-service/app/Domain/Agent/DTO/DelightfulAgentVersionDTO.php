@@ -50,7 +50,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.version_publisher_is_empty');
         }
 
-        // 校验 $versionNumber ,遵循 语义化版本 规则
+        // 校验 $versionNumber ,遵循 语义化version 规则
         if (! preg_match('/^\d{1,2}+\.\d{1,2}+\.\d{1,2}+$/', $this->versionNumber)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.format_error_example_1_0_0');
         }
@@ -125,7 +125,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
     }
 
     /**
-     * 验证可见性配置格式.
+     * 验证可见性configuration格式.
      */
     private function validatesVisibilityConfig(): void
     {

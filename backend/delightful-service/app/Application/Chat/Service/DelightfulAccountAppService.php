@@ -76,8 +76,8 @@ class DelightfulAccountAppService extends AbstractAppService
                 $authorization->setDelightfulId($delightfulInfo?->getDelightfulId());
                 $authorization->setOrganizationCode($delightfulInfo?->getOrganizationCode());
             }
-            // 通过 aiCode 查询 delightful_flows 表获取所属组织。
-            // 注意超级麦吉当前是作为一个没有写入 delightful_flows 数据库的 flow 存在。 SUPER_DELIGHTFUL_CODE 写入了 accounts 表。
+            // 通过 aiCode query delightful_flows 表get所属organization。
+            // 注意超级麦吉当前是作为one没有写入 delightful_flows data库的 flow 存在。 SUPER_DELIGHTFUL_CODE 写入了 accounts 表。
             if ($aiCode !== AgentConstant::SUPER_DELIGHTFUL_CODE) {
                 $disabledDataIsolation = FlowDataIsolation::create()->disabled();
                 $delightfulFlowEntity = $this->delightfulFlowDomainService->getByCode($disabledDataIsolation, $aiCode);
@@ -88,7 +88,7 @@ class DelightfulAccountAppService extends AbstractAppService
             }
 
             $dataIsolation = $this->createDataIsolation($authorization);
-            // 智能体账号信息
+            // 智能体账号information
             if (! isset($accountDTO)) {
                 $accountDTO = new AccountEntity();
             }

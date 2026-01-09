@@ -30,7 +30,7 @@ class UserConfigDomainService extends AbstractDomainService
         }
         $userConfig = $this->userConfigRepository->getByAppCodeAndOrganizationCode($dataIsolation, $appCode, $organizationCode, $userId);
         if (! $userConfig) {
-            // 创建一个
+            // createone
             $userConfig = new UserConfigEntity();
             $userConfig->setUserId($userId);
             $userConfig->setAppCode($appCode);

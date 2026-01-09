@@ -25,7 +25,7 @@ class MCPExceptionHandler
     }
 
     /**
-     * 处理异常并转换为标准错误响应.
+     * 处理exception并转换为标准error响应.
      */
     public function handle(Throwable $exception, int $id = 0, string $jsonrpc = '2.0'): ErrorResponse
     {
@@ -47,7 +47,7 @@ class MCPExceptionHandler
     }
 
     /**
-     * 获取错误代码.
+     * geterror代码.
      */
     protected function getErrorCode(Throwable $exception): int
     {
@@ -55,7 +55,7 @@ class MCPExceptionHandler
             return $exception->getRpcCode();
         }
 
-        // 对于其他类型的异常，使用标准映射
+        // 对于其他type的exception，使用标准映射
         return match (true) {
             $exception instanceof InvalidArgumentException => -32602, // Invalid params
             $exception instanceof RuntimeException => -32603, // Internal error
@@ -64,15 +64,15 @@ class MCPExceptionHandler
     }
 
     /**
-     * 获取错误消息.
+     * geterrormessage.
      */
     protected function getErrorMessage(Throwable $exception): string
     {
-        return $exception->getMessage() ?: '未知错误';
+        return $exception->getMessage() ?: '未知error';
     }
 
     /**
-     * 记录详细错误信息.
+     * 记录详细errorinformation.
      */
     private function logError(Throwable $exception, array $context = []): void
     {

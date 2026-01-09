@@ -23,7 +23,7 @@ enum ResourceType: int
     case SubFlowCode = 2;
 
     /**
-     * 工具集.
+     * tool集.
      */
     case ToolSet = 3;
 

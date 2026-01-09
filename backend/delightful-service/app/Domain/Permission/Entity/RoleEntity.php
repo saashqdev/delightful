@@ -23,14 +23,14 @@ class RoleEntity extends AbstractEntity
 
     protected string $organizationCode;
 
-    protected ?array $permissionTag = null; // 权限标签，用于前端展示分类
+    protected ?array $permissionTag = null; // permission标签，用于前端展示分类
 
     /**
      * 是否在前端列表中展示：1=是 0=否.
      */
     protected int $isDisplay = 1;
 
-    protected int $status = 1; // 状态: 0=禁用, 1=启用
+    protected int $status = 1; // status: 0=禁用, 1=启用
 
     protected ?string $createdUid = null;
 
@@ -41,12 +41,12 @@ class RoleEntity extends AbstractEntity
     protected ?DateTime $updatedAt = null;
 
     /**
-     * 角色关联的权限键列表.
+     * 角色关联的permission键列表.
      */
     protected array $permissions = [];
 
     /**
-     * 角色关联的用户ID列表.
+     * 角色关联的userID列表.
      */
     protected array $userIds = [];
 

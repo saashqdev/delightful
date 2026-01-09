@@ -11,7 +11,7 @@ use App\Domain\Chat\Service\DelightfulSeqDomainService;
 use Throwable;
 
 /**
- * 聊天消息相关.
+ * 聊天message相关.
  */
 class DelightfulSeqAppService extends AbstractAppService
 {
@@ -20,7 +20,7 @@ class DelightfulSeqAppService extends AbstractAppService
     }
 
     /**
-     * 消息推送
+     * message推送
      * @throws Throwable
      */
     public function pushSeq(string $seqId): void

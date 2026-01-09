@@ -19,7 +19,7 @@ class LogicalIfMethod extends AbstractMethod
 
     protected string $group = '逻辑';
 
-    protected string $desc = '根据指定的条件来返回不同的结果';
+    protected string $desc = '根据指定的条件来return不同的结果';
 
     protected array $args = [
         [
@@ -30,12 +30,12 @@ class LogicalIfMethod extends AbstractMethod
         [
             'name' => 'trueValue',
             'type' => 'mixed',
-            'desc' => '逻辑为真时的返回值',
+            'desc' => '逻辑为真时的return值',
         ],
         [
             'name' => 'falseValue',
             'type' => 'mixed',
-            'desc' => '逻辑为假时的返回值',
+            'desc' => '逻辑为假时的return值',
         ],
     ];
 

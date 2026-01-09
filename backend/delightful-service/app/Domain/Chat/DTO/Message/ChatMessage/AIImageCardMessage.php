@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\ValueObject\AIImage\AIImageCardResponseType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * AI文生图的卡片消息.
+ * AI文生图的卡片message.
  */
 class AIImageCardMessage extends AbstractChatMessageStruct implements ChatFileInterface
 {

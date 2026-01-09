@@ -26,6 +26,6 @@ class FileBoxToolSet extends AbstractBuiltInToolSet
 
     public function getDescription(): string
     {
-        return '文件盒子基于合规和隐私保护统一存储和管理用户上传的图片、文档、表格等常用文件';
+        return '文件盒子基于合规和隐私保护统一存储和管理userupload的image、document、表格等常用文件';
     }
 }

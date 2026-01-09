@@ -95,7 +95,7 @@ class TriggerDataUserExtInfo
     }
 
     /**
-     * 加载 delightful 的用户信息.
+     * 加载 delightful 的user信息.
      */
     private function loadDelightfulUserDepartments(): void
     {
@@ -103,7 +103,7 @@ class TriggerDataUserExtInfo
         $departmentUserDomain = di(DelightfulDepartmentUserDomainService::class);
 
         $contactDataIsolation = ContactDataIsolation::create($this->organizationCode, $this->userId);
-        // 获取用户的部门id
+        // getuser的departmentid
         $departmentUserEntities = $departmentUserDomain->getDepartmentUsersByUserIds([$this->userId], $contactDataIsolation);
         $departmentIds = array_column($departmentUserEntities, 'department_id');
 

@@ -24,7 +24,7 @@ class AsrPaths
     public const HIDDEN_DIR_PREFIX = '.asr_recordings';
 
     /**
-     * 隐藏状态目录名称.
+     * 隐藏status目录名称.
      */
     public const STATES_DIR = '.asr_states';
 
@@ -40,7 +40,7 @@ class AsrPaths
     }
 
     /**
-     * 获取状态目录相对路径.
+     * getstatus目录相对路径.
      *
      * @return string 格式：.asr_states
      */
@@ -50,7 +50,7 @@ class AsrPaths
     }
 
     /**
-     * 获取录音目录相对路径（父目录）.
+     * get录音目录相对路径（父目录）.
      *
      * @return string 格式：.asr_recordings
      */

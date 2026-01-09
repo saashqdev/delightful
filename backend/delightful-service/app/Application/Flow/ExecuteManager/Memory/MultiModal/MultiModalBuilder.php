@@ -42,7 +42,7 @@ class MultiModalBuilder
             return null;
         }
 
-        // 调用工具提前识别
+        // 调用tool提前识别
         $visionExecutionData = clone $executionData;
         $visionExecutionData->getTriggerData()->setParams([
             'model' => $visionModel,

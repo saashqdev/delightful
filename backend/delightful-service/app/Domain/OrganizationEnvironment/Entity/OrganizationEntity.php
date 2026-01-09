@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * 组织实体.
+ * organization实体.
  */
 class OrganizationEntity extends AbstractEntity
 {
@@ -38,11 +38,11 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?string $number = null;
 
-    protected int $status = 1; // 状态: 1=正常, 2=禁用
+    protected int $status = 1; // status: 1=正常, 2=禁用
 
     protected ?string $creatorId = null;
 
-    protected int $type = 0; // 组织类型 0:团队组织 1:个人组织
+    protected int $type = 0; // organizationtype 0:团队organization 1:个人organization
 
     protected ?DateTime $createdAt = null;
 
@@ -52,9 +52,9 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?int $seats = null; // 席位数
 
-    protected ?string $syncType = null; // 同步类型
+    protected ?string $syncType = null; // 同步type
 
-    protected ?OrganizationSyncStatus $syncStatus = null; // 同步状态
+    protected ?OrganizationSyncStatus $syncStatus = null; // 同步status
 
     protected ?DateTime $syncTime = null; // 同步时间
 

@@ -36,7 +36,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 保存知识库 - 基本信息.
+     * 保存知识库 - 基本information.
      * @param array<DocumentFileInterface> $files
      */
     public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingDelightfulFlowKnowledgeEntity, array $files = []): KnowledgeBaseEntity
@@ -86,7 +86,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 查询知识库列表.
+     * query知识库列表.
      * @return array{total: int, list: array<KnowledgeBaseEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseQuery $query, Page $page): array
@@ -99,7 +99,7 @@ readonly class KnowledgeBaseDomainService
      */
     public function getByCodes(KnowledgeBaseDataIsolation $dataIsolation, array $codes): array
     {
-        // 分批查询
+        // 分批query
         $chunks = array_chunk($codes, 500);
         $entities = [];
         foreach ($chunks as $chunk) {
@@ -109,7 +109,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 查询一个知识库.
+     * queryone知识库.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $code, bool $checkCollection = false): KnowledgeBaseEntity
     {
@@ -142,7 +142,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 删除知识库.
+     * delete知识库.
      */
     #[Transactional]
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
@@ -153,7 +153,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 更新知识库状态
+     * update知识库status
      */
     public function changeSyncStatus(KnowledgeBaseEntity|KnowledgeBaseFragmentEntity $entity): void
     {

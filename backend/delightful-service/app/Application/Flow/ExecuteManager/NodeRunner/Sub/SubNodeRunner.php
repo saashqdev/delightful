@@ -29,13 +29,13 @@ class SubNodeRunner extends NodeRunner
     {
         $subFlowId = $this->node->getParams()['sub_flow_id'] ?? '';
 
-        // 运行时才获取子流程的数据，这里应该在运行时就加载好，这里为了方便先这样写
+        // 运行时才get子流程的data，这里应该在运行时就加载好，这里为了方便先这样写
         $subFlow = $this->delightfulFlowDomainService->getByCode($executionData->getDataIsolation(), $subFlowId);
         if (! $subFlow || $subFlow->getType() !== Type::Sub) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.flow_not_found', ['flow_code' => $subFlowId]);
         }
 
-        // 获取开始节点、结束节点
+        // get开始节点、结束节点
         if (! $subFlow->getStartNode()) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.start_node_not_found', ['flow_code' => $subFlowId]);
         }
@@ -75,7 +75,7 @@ class SubNodeRunner extends NodeRunner
                 ['flow_name' => $subFlow->getName(), 'error' => $throwable->getMessage()]
             );
         }
-        // 节点内部的异常在 node 的 debug 信息中记录
+        // 节点内部的exception在 node 的 debug information中记录
         foreach ($subFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(

@@ -33,7 +33,7 @@ class AgentPluginCollector
             }
             $agentPlugins[$agentPluginDefine->getCode()][$agentPluginDefine->getPriority()] = $agentPluginDefine;
         }
-        // 获取最大的
+        // get最大的
         foreach ($agentPlugins as $code => $plugins) {
             krsort($plugins);
             $agentPlugins[$code] = array_shift($plugins);

@@ -17,7 +17,7 @@ use DateTime;
 
 /**
  * 服务商模板生成仓储
- * 支持为所有 ProviderCode 生成模板配置.
+ * 支持为所有 ProviderCode 生成模板configuration.
  */
 readonly class ProviderTemplateRepository
 {
@@ -27,7 +27,7 @@ readonly class ProviderTemplateRepository
     }
 
     /**
-     * 获取所有服务商的模板列表.
+     * get所有服务商的模板列表.
      * @param Category $category 服务商分类
      * @return ProviderConfigDTO[] 服务商模板列表
      */
@@ -35,14 +35,14 @@ readonly class ProviderTemplateRepository
     {
         $templates = [];
 
-        // 获取指定分类下所有启用的服务商
+        // get指定分类下所有启用的服务商
         $providers = $this->providerRepository->getByCategory($category);
 
         foreach ($providers as $provider) {
-            // 为每个服务商创建模板配置
+            // 为每个服务商create模板configuration
             $templateId = ProviderConfigIdAssembler::generateProviderTemplate($provider->getProviderCode(), $category);
 
-            // 除了 delightful 服务商，默认状态都是关闭
+            // 除了 delightful 服务商，默认status都是关闭
             $defaultStatus = $provider->getProviderCode() === ProviderCode::Official
                 ? Status::Enabled
                 : Status::Disabled;
@@ -50,7 +50,7 @@ readonly class ProviderTemplateRepository
             $templateData = [
                 'id' => $templateId,
                 'service_provider_id' => (string) $provider->getId(),
-                'organization_code' => '', // 模板不绑定具体组织
+                'organization_code' => '', // 模板不绑定具体organization
                 'config' => [],
                 'decryptedConfig' => [],
                 'status' => $defaultStatus->value,

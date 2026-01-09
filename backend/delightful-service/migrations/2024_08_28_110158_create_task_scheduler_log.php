@@ -24,14 +24,14 @@ class CreateTaskSchedulerLog extends Migration
             $table->string('name', 64)->comment('名称');
             $table->dateTime('expect_time')->comment('预期执行时间');
             $table->dateTime('actual_time')->nullable()->comment('实际执行时间');
-            $table->tinyInteger('type')->default(2)->comment('类型');
+            $table->tinyInteger('type')->default(2)->comment('type');
             $table->integer('cost_time')->default(0)->comment('耗时');
-            $table->tinyInteger('status')->default(0)->comment('状态');
+            $table->tinyInteger('status')->default(0)->comment('status');
             $table->json('callback_method')->comment('回调方法');
             $table->json('callback_params')->comment('回调参数');
             $table->string('remark', 255)->default('')->comment('备注');
-            $table->string('creator', 64)->default('')->comment('创建人');
-            $table->dateTime('created_at')->comment('创建时间');
+            $table->string('creator', 64)->default('')->comment('create人');
+            $table->dateTime('created_at')->comment('creation time');
             $table->json('result')->nullable()->comment('结果');
             $table->index(['status', 'expect_time']);
         });

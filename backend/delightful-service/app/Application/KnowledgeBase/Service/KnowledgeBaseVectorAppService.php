@@ -45,7 +45,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
         KnowledgeBaseDocumentEntity $documentEntity
     ): bool {
         try {
-            // 先获取所有分段
+            // 先get所有分段
             $fragmentQuery = new KnowledgeBaseFragmentQuery();
             $fragmentQuery->setKnowledgeCode($knowledge->getCode());
             $fragmentQuery->setDocumentCode($documentEntity->getCode());
@@ -65,7 +65,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
              */
             $fragmentEntities = array_merge(...$fragmentEntities);
 
-            // 再删除片段
+            // 再delete片段
             foreach ($fragmentEntities as $fragmentEntity) {
                 $this->knowledgeBaseFragmentDomainService->destroy($dataIsolation, $knowledge, $fragmentEntity);
             }

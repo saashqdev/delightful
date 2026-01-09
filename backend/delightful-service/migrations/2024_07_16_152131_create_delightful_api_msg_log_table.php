@@ -18,14 +18,14 @@ class CreateDelightfulApiMsgLogTable extends Migration
     {
         Schema::create('delightful_api_msg_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('msg')->comment('消息');
+            $table->text('msg')->comment('message');
             $table->unsignedDecimal('use_amount', 40, 6)->comment('使用额度');
             $table->string('model')->comment('使用模型id');
-            $table->string('organization_code')->comment('组织id');
-            $table->string('user_id')->comment('用户id');
-            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
+            $table->string('organization_code')->comment('organizationid');
+            $table->string('user_id')->comment('userid');
+            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('create时间');
             $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
-            $table->timestamp('deleted_at')->comment('逻辑删除')->nullable();
+            $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();
         });
     }
 

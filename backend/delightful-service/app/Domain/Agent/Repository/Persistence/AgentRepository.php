@@ -21,7 +21,7 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
     protected bool $filterOrganizationCode = true;
 
     /**
-     * 查询 Agent 列table.
+     * query Agent 列table.
      *
      * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
@@ -29,7 +29,7 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
     {
         $builder = $this->createBuilder($agentDataIsolation, DelightfulAgentModel::query());
 
-        // 设置查询条件
+        // settingquery条件
         if (! is_null($agentQuery->getIds())) {
             if (empty($agentQuery->getIds())) {
                 return ['total' => 0, 'list' => []];
@@ -43,7 +43,7 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
             $builder->where('robot_name', 'like', '%' . $agentQuery->getAgentName() . '%');
         }
 
-        // 分页查询
+        // 分页query
         $data = $this->getByPage($builder, $page, $agentQuery);
         $list = [];
         /** @var DelightfulAgentModel $agent */

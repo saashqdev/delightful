@@ -16,20 +16,20 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_wait_messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code', 32)->comment('组织编码');
-            $table->string('conversation_id', 120)->comment('会话ID');
-            $table->string('origin_conversation_id', 80)->comment('原始会话ID');
-            $table->string('message_id', 80)->comment('消息ID');
+            $table->string('organization_code', 32)->comment('organization编码');
+            $table->string('conversation_id', 120)->comment('conversationID');
+            $table->string('origin_conversation_id', 80)->comment('原始conversationID');
+            $table->string('message_id', 80)->comment('messageID');
             $table->string('wait_node_id', 80)->comment('等待节点ID');
             $table->string('flow_code', 80)->comment('流程编码');
-            $table->string('flow_version', 80)->comment('流程版本');
+            $table->string('flow_version', 80)->comment('流程version');
             $table->integer('timeout')->default(0)->comment('超时时间戳');
             $table->boolean('handled')->default(false)->comment('是否已处理');
-            $table->json('persistent_data')->nullable()->comment('持久化数据');
-            $table->string('created_uid', 80)->comment('创建人');
-            $table->dateTime('created_at')->comment('创建时间');
+            $table->json('persistent_data')->nullable()->comment('持久化data');
+            $table->string('created_uid', 80)->comment('create人');
+            $table->dateTime('created_at')->comment('creation time');
             $table->string('updated_uid', 80)->comment('修改人');
-            $table->dateTime('updated_at')->comment('修改时间');
+            $table->dateTime('updated_at')->comment('modification time');
 
             $table->index(['organization_code', 'conversation_id']);
         });

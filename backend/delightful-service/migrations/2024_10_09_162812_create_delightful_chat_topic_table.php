@@ -21,17 +21,17 @@ return new class extends Migration {
         Schema::create('delightful_chat_topics', static function (Blueprint $table) {
             $table->bigIncrements('id');
             // 话题 id
-            $table->string('topic_id', 64)->comment('话题 id. 不同会话窗口中,话题id一致');
+            $table->string('topic_id', 64)->comment('话题 id. 不同conversation窗口中,话题id一致');
             // 话题名称
             $table->string('name', 50)->comment('话题名称');
-            // 话题描述
-            $table->text('description')->comment('话题描述');
-            // 所属会话ID
-            $table->bigInteger('conversation_id')->comment('所属会话ID');
-            // 组织编码
-            $table->string('organization_code', 64)->comment('组织编码');
+            // 话题description
+            $table->text('description')->comment('话题description');
+            // 所属conversationID
+            $table->bigInteger('conversation_id')->comment('所属conversationID');
+            // organization编码
+            $table->string('organization_code', 64)->comment('organization编码');
             // 话题来源
-            $table->string('source_id', 64)->default('')->comment('话题的来源。 比如甲创建了一个话题，乙的话题id就来自于甲。需要同步更新。');
+            $table->string('source_id', 64)->default('')->comment('话题的来源。 比如甲create了one话题，乙的话题id就来自于甲。需要同步update。');
             # 索引
             $table->index(['conversation_id'], 'idx_conversation_id');
             $table->index(['topic_id'], 'idx_topic_id');

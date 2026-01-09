@@ -57,7 +57,7 @@ enum ProviderTemplateId: string
     case Gemini = '22';
 
     /**
-     * 根据ProviderCode和Category获取对应的模板ID.
+     * 根据ProviderCode和Categoryget对应的模板ID.
      */
     public static function fromProviderCodeAndCategory(ProviderCode $providerCode, Category $category): ?self
     {
@@ -90,7 +90,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * 解析模板ID，返回对应的ProviderCode和Category.
+     * 解析模板ID，return对应的ProviderCode和Category.
      *
      * @return array{providerCode: ProviderCode, category: Category}
      */
@@ -124,7 +124,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * 获取模板的描述名称.
+     * get模板的description名称.
      */
     public function getDescription(): string
     {

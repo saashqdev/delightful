@@ -18,7 +18,7 @@ return new class extends Migration {
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             // 检查是否已存在字段，避免重复添加
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
-                $table->string('document_code', 255)->default('')->comment('关联文档code')->index();
+                $table->string('document_code', 255)->default('')->comment('关联documentcode')->index();
             }
 
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'word_count')) {

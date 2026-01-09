@@ -36,7 +36,7 @@ class LoaderTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '文档解析。用于解析远程文档中内容，提取文档中的内容输出。';
+        return 'document解析。用于解析远程document中content，提取document中的contentoutput。';
     }
 
     public function getCallback(): ?Closure

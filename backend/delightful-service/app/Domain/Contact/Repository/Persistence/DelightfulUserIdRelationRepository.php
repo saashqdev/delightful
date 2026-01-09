@@ -40,7 +40,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
 
     public function getRelationIdExists(DelightfulUserIdRelationEntity $userIdRelationEntity): array
     {
-        // 根据 account_id/id_type/relation_value 查询是否已经生成了关联关系
+        // 根据 account_id/id_type/relation_value query是否已经生成了关联关系
         $userIdRelationModel = $this->userIdRelationModel::query()
             ->where('delightful_id', $userIdRelationEntity->getAccountId())
             ->where('relation_type', $userIdRelationEntity->getRelationType())
@@ -50,7 +50,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
         return is_array($relation) ? $relation : [];
     }
 
-    // id_type,relation_type,relation_value 查询 user_id,然后去查询用户信息
+    // id_type,relation_type,relation_value query user_id,然后去queryuserinformation
     public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string
     {
         $query = $this->userIdRelationModel::query()

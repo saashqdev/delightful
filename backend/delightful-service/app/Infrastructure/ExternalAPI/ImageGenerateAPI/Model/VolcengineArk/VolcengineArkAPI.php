@@ -60,14 +60,14 @@ class VolcengineArkAPI
         $result = Json::decode($response->getBody()->getContents());
 
         if ($response->getStatusCode() !== 200) {
-            $errorMessage = $result['error']['message'] ?? "HTTP 错误: {$response->getStatusCode()}";
+            $errorMessage = $result['error']['message'] ?? "HTTP error: {$response->getStatusCode()}";
             throw new Exception("VolcengineArk API 请求失败: {$errorMessage}");
         }
 
         if (isset($result['error'])) {
             $errorMessage = $result['error']['message'] ?? 'Unknown error';
             $errorCode = $result['error']['code'] ?? 'unknown_error';
-            throw new Exception("VolcengineArk API 错误 [{$errorCode}]: {$errorMessage}");
+            throw new Exception("VolcengineArk API error [{$errorCode}]: {$errorMessage}");
         }
 
         return $result;

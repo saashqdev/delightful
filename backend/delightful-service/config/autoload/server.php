@@ -36,7 +36,7 @@ $servers = [
             Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
         ],
     ],
-    // 出于单测的需要，mock 所有第三方的 http 调用，提升单测速度和稳定性。
+    // 出于单测的需要，mock 所有第third-party的 http 调用，提升单测速度和稳定性。
     [
         'name' => 'mock-http-service',
         'type' => ServerInterface::SERVER_HTTP,

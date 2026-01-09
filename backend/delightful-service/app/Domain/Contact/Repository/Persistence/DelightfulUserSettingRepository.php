@@ -86,7 +86,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 通过 delightfulId + key 获取用户设置（跨组织）.
+     * 通过 delightfulId + key getusersetting（跨organization）.
      */
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity
     {
@@ -100,7 +100,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 通过 delightfulId 保存用户设置（跨组织），若已存在相同 key 则更新。
+     * 通过 delightfulId 保存usersetting（跨organization），若已存在相同 key 则update。
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
@@ -127,7 +127,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 获取全局配置（organization_code/user_id/delightful_id 均为 NULL）。
+     * get全局configuration（organization_code/user_id/delightful_id 均为 NULL）。
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
@@ -143,7 +143,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 保存全局配置.
+     * 保存全局configuration.
      */
     public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
@@ -162,7 +162,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
             $delightfulUserSettingEntity->setId($model->id);
         }
 
-        // 使用工厂生成数据后手动覆盖 NULL 字段
+        // 使用工厂生成data后手动覆盖 NULL 字段
         $delightfulUserSettingEntity->setOrganizationCode(null);
         $delightfulUserSettingEntity->setUserId(null);
         $delightfulUserSettingEntity->setDelightfulId(null);

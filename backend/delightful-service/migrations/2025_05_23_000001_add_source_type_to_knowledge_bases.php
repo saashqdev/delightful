@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             // 检查是否已存在字段，避免重复添加
             if (! Schema::hasColumn('delightful_flow_knowledge', 'source_type')) {
-                $table->integer('source_type')->nullable()->comment('数据源类型');
+                $table->integer('source_type')->nullable()->comment('data源type');
             }
         });
     }
@@ -28,7 +28,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            // 检查是否已存在字段，避免重复删除
+            // 检查是否已存在字段，避免重复delete
             if (Schema::hasColumn('delightful_flow_knowledge', 'source_type')) {
                 $table->dropColumn('source_type');
             }

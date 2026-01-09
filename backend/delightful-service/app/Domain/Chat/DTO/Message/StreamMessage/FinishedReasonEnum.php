@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\StreamMessage;
 /**
  * 结束原因：
  * 0:流程结束
- * 1.发生异常.
+ * 1.发生exception.
  */
 enum FinishedReasonEnum: int
 {

@@ -13,15 +13,15 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id 雪花ID
- * @property string $organization_code 组织编码
+ * @property string $organization_code organization编码
  * @property string $delightful_id 账号DelightfulID
- * @property string $user_id 用户ID
- * @property string $key 设置键
- * @property array $value 设置值
- * @property string $creator 创建者
- * @property DateTime $created_at 创建时间
+ * @property string $user_id userID
+ * @property string $key setting键
+ * @property array $value setting值
+ * @property string $creator create者
+ * @property DateTime $created_at create时间
  * @property string $modifier 修改者
- * @property DateTime $updated_at 更新时间
+ * @property DateTime $updated_at update时间
  */
 class UserSettingModel extends AbstractModel
 {

@@ -38,14 +38,14 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 查询草稿列table.
+     * query草稿列table.
      */
     public function queries(string $flowId)
     {
         $authorization = $this->getAuthorization();
         $query = new DelightfulFLowDraftQuery($this->request->all());
 
-        // 仅查询最新的记录
+        // 仅query最新的记录
         $page = new Page(1, DelightfulFlowDraftEntity::MAX_RECORD);
         $query->setOrder(['id' => 'desc']);
         $query->flowCode = $flowId;
@@ -56,7 +56,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 查询草稿详情.
+     * query草稿详情.
      */
     public function show(string $flowId, string $draftId)
     {
@@ -66,7 +66,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 删除草稿.
+     * delete草稿.
      */
     public function remove(string $flowId, string $draftId)
     {

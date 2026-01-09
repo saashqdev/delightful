@@ -26,7 +26,7 @@ class GPTAPI
     }
 
     /**
-     * 设置 API Key.
+     * setting API Key.
      */
     public function setApiKey(string $apiKey): void
     {
@@ -34,7 +34,7 @@ class GPTAPI
     }
 
     /**
-     * 设置 API 基础 URL.
+     * setting API 基础 URL.
      */
     public function setBaseUrl(string $baseUrl): void
     {
@@ -42,7 +42,7 @@ class GPTAPI
     }
 
     /**
-     * 获取账户信息.
+     * get账户information.
      */
     public function getAccountInfo(): array
     {
@@ -59,7 +59,7 @@ class GPTAPI
     }
 
     /**
-     * 提交GPT4o图片生成任务
+     * 提交GPT4oimage生成任务
      */
     public function submitGPT4oTask(string $prompt, array $referImages = [], ?string $hookUrl = null): array
     {
@@ -80,7 +80,7 @@ class GPTAPI
     }
 
     /**
-     * 查询GPT4o任务结果.
+     * queryGPT4o任务结果.
      */
     public function getGPT4oTaskResult(string $jobId): array
     {

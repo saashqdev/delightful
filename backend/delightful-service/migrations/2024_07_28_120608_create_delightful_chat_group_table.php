@@ -25,11 +25,11 @@ class CreateDelightfulChatGroupTable extends Migration
             $table->string('group_avatar', 255)->comment('群头像')->default('');
             $table->string('group_notice', 255)->comment('群公告')->default('');
             $table->string('group_owner', 64)->comment('群主');
-            // 群所属组织
-            $table->string('organization_code', 64)->comment('群组织编码')->default('');
+            // 群所属organization
+            $table->string('organization_code', 64)->comment('群organization编码')->default('');
             $table->string('group_tag', 64)->comment('群标签:0:无标签,1:外部群；2：内部群;3:全员群')->default('0');
-            $table->tinyInteger('group_type')->default(1)->comment('群类型,1:对话；2：话题');
-            $table->tinyInteger('group_status')->default(1)->comment('群状态,1:正常；2：解散');
+            $table->tinyInteger('group_type')->default(1)->comment('群type,1:对话；2：话题');
+            $table->tinyInteger('group_status')->default(1)->comment('群status,1:正常；2：解散');
             // 成员上限
             $table->integer('member_limit')->default(1000)->comment('群成员上限');
             $table->softDeletes();

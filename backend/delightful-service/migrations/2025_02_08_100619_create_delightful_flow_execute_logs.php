@@ -17,14 +17,14 @@ return new class extends Migration {
         Schema::dropIfExists('delightful_flow_execute_logs');
         Schema::create('delightful_flow_execute_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('execute_data_id')->default('')->comment('执行数据ID');
-            $table->string('conversation_id')->default('')->comment('会话ID');
+            $table->string('execute_data_id')->default('')->comment('执行dataID');
+            $table->string('conversation_id')->default('')->comment('conversationID');
             $table->string('flow_code')->default('')->comment('流程编码');
-            $table->string('flow_version_code')->default('')->comment('版本编码');
-            $table->integer('status')->default(0)->comment('状态 1 准备运行;2 运行中;3 完成;4 失败;5 取消')->index();
+            $table->string('flow_version_code')->default('')->comment('version编码');
+            $table->integer('status')->default(0)->comment('status 1 准备运行;2 运行中;3 完成;4 failed;5 取消')->index();
             $table->json('ext_params')->nullable()->comment('扩展参数');
             $table->json('result')->nullable()->comment('结果');
-            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->timestamp('created_at')->nullable()->comment('creation time');
         });
     }
 

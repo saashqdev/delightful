@@ -35,7 +35,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     {
         $query = $this->accountModel::getQuery()->where('email', $email)
             ->where('type', 1) // 人类账号
-            ->where('status', 0); // 正常状态
+            ->where('status', 0); // 正常status
         $accountData = Db::select($query->toSql(), $query->getBindings())[0] ?? null;
         if (! $accountData) {
             return null;
@@ -52,7 +52,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
         $query = $this->accountModel::getQuery()
             ->where('country_code', $stateCode)
             ->where('phone', $phone)
-            ->where('status', 0) // 正常状态
+            ->where('status', 0) // 正常status
             ->where('type', 1); // 人类账号
 
         $accountData = Db::select($query->toSql(), $query->getBindings())[0] ?? null;
@@ -64,12 +64,12 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * 通过DelightfulID和组织编码查找用户.
+     * 通过DelightfulID和organization编码查找user.
      */
     public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
         $query = $this->userModel::getQuery()->where('delightful_id', $delightfulId)
-            ->where('status', 1); // 已激活状态
+            ->where('status', 1); // 已激活status
 
         if (! empty($organizationCode)) {
             $query->where('organization_code', $organizationCode);

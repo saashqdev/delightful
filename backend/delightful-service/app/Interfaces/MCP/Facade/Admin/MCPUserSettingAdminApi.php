@@ -44,7 +44,7 @@ class MCPUserSettingAdminApi extends AbstractMCPAdminApi
     }
 
     /**
-     * 获取userMCP服务的设置information.
+     * getuserMCP服务的settinginformation.
      */
     public function getUserSettings(string $code)
     {

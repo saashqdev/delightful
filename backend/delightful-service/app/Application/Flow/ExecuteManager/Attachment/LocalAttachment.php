@@ -32,7 +32,7 @@ class LocalAttachment extends AbstractAttachment
         if (isset($this->attachment)) {
             return $this->attachment;
         }
-        // 上传文件
+        // upload文件
         $uploadFile = new UploadFile($this->getOriginAttachment(), 'flow-execute/external/');
 
         $fileDomainService = di(FileDomainService::class);

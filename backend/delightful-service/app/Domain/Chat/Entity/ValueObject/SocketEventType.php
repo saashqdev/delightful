@@ -8,27 +8,27 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * 事件类型.
+ * 事件type.
  */
 enum SocketEventType: string
 {
     // connect
     case Connect = 'connect';
 
-    // login. 以后登录可以投一条控制消息,来实现上线通知等逻辑
+    // login. 以后登录可以投一条控制message,来实现上线通知等逻辑
     case Login = 'login';
 
-    // 聊天消息
+    // 聊天message
     case Chat = 'chat';
 
-    // 控制消息
+    // 控制message
     case Control = 'control';
 
-    // 流式消息
+    // 流式message
     case Stream = 'stream';
 
     /**
-     * 实时性极高的过渡消息，没有 seq_id，不会被持久化，也不会被缓存。
+     * 实时性极高的过渡message，没有 seq_id，不会被持久化，也不会被cache。
      */
     case Intermediate = 'intermediate';
 }

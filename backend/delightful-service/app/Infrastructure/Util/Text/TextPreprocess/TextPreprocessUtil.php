@@ -14,7 +14,7 @@ use App\Infrastructure\Util\Text\TextPreprocess\Strategy\TextPreprocessStrategyI
 use App\Infrastructure\Util\Text\TextPreprocess\ValueObject\TextPreprocessRule;
 
 /**
- * 文本预处理工具.
+ * 文本预处理tool.
  */
 class TextPreprocessUtil
 {
@@ -24,7 +24,7 @@ class TextPreprocessUtil
      */
     public static function preprocess(array $rules, string $text): string
     {
-        // 保护标签内容
+        // 保护标签content
         $protectedContent = [];
         $text = preg_replace_callback(
             '/<DelightfulCompressibleContent[^>]*>.*?<\/DelightfulCompressibleContent>/s',
@@ -64,7 +64,7 @@ class TextPreprocessUtil
             $text = $strategy->preprocess($text);
         }
 
-        // 恢复标签内容
+        // 恢复标签content
         foreach ($protectedContent as $key => $content) {
             $text = str_replace($key, $content, $text);
         }

@@ -11,10 +11,10 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class EditMessageOptions extends AbstractEntity
 {
-    // 被编辑的消息id，用于关联消息的多个版本
+    // 被编辑的messageid，用于关联message的多个version
     protected string $delightfulMessageId;
 
-    // 版本号id，发送方不用填写，服务端自动生成
+    // version numberid，发送方不用填写，服务端自动生成
     protected ?string $messageVersionId;
 
     public function __construct(?array $data = [])

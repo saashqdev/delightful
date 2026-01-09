@@ -13,12 +13,12 @@ use App\Domain\Mode\Entity\ModeGroupEntity;
 interface ModeGroupRepositoryInterface
 {
     /**
-     * 根据ID获取分组.
+     * 根据IDget分组.
      */
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupEntity;
 
     /**
-     * 根据模式ID获取分组列表.
+     * 根据模式IDget分组列表.
      * @return ModeGroupEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
@@ -29,23 +29,23 @@ interface ModeGroupRepositoryInterface
     public function save(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity;
 
     /**
-     * 更新分组.
+     * update分组.
      */
     public function update(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity;
 
     /**
-     * 获取模式下启用的分组列表.
+     * get模式下启用的分组列表.
      * @return ModeGroupEntity[]
      */
     public function findEnabledByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * 删除分组.
+     * delete分组.
      */
     public function delete(ModeDataIsolation $dataIsolation, int|string $id): bool;
 
     /**
-     * 根据模式ID删除所有分组.
+     * 根据模式IDdelete所有分组.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 
@@ -55,7 +55,7 @@ interface ModeGroupRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $groupEntities);
 
     /**
-     * 根据多个模式ID批量获取分组列表.
+     * 根据多个模式ID批量get分组列表.
      * @param int[]|string[] $modeIds
      * @return ModeGroupEntity[]
      */

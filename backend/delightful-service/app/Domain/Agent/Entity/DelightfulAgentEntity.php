@@ -13,12 +13,12 @@ use Hyperf\Codec\Json;
 class DelightfulAgentEntity extends AbstractEntity
 {
     /**
-     * 主键.
+     * primary key.
      */
     protected string $id;
 
     /**
-     * 指定版本id.
+     * 指定versionid.
      */
     protected ?string $agentVersionId = null;
 
@@ -33,21 +33,21 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $flowCode;
 
     /**
-     * 助理名称.
+     * assistant name.
      */
     protected string $agentName = '';
 
     protected string $robotName;
 
     /**
-     * 助理头像.
+     * assistant avatar.
      */
     protected string $agentAvatar = '';
 
     protected string $robotAvatar;
 
     /**
-     * 助理描述.
+     * 助理description.
      */
     protected string $agentDescription = '';
 
@@ -59,32 +59,32 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $createdUid;
 
     /**
-     * 助理状态：启用｜禁用.
+     * 助理status：启用｜禁用.
      */
     protected ?int $status = null;
 
     /**
-     * 组织编码
+     * organization编码
      */
     protected string $organizationCode;
 
     /**
-     * 创建时间.
+     * creation time.
      */
     protected ?string $createdAt = null;
 
     /**
-     * 更新者用户ID.
+     * update者userID.
      */
     protected ?string $updatedUid = '';
 
     /**
-     * 更新时间.
+     * update time.
      */
     protected ?string $updatedAt = null;
 
     /**
-     * 删除时间.
+     * deletion time.
      */
     protected ?string $deletedAt = null;
 

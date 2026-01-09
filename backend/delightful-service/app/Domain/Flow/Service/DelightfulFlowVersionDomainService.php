@@ -42,7 +42,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * 查询版本列table.
+     * queryversion列table.
      * @return array{total: int, list: array<DelightfulFlowVersionEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array
@@ -51,7 +51,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * 获取版本详情.
+     * getversion详情.
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {
@@ -84,7 +84,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * 回滚版本.
+     * 回滚version.
      */
     public function rollback(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, string $versionCode): DelightfulFlowVersionEntity
     {

@@ -15,7 +15,7 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface DelightfulContactIdMappingRepositoryInterface
 {
     /**
-     * 获取第三方平台部门ID的映射关系.
+     * get第third-party平台departmentID的映射关系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -28,7 +28,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * 获取第三方平台用户ID的映射关系.
+     * get第third-party平台userID的映射关系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -41,7 +41,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * 获取麦吉平台用户ID的映射关系.
+     * get麦吉平台userID的映射关系.
      *
      * @param string[] $delightfulIds
      */
@@ -69,7 +69,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     public function getDepartmentRootId(string $delightfulOrganizationCode, PlatformType $platformType): string;
 
     /**
-     * 获取Delightful部门ID的映射关系.
+     * getDelightfuldepartmentID的映射关系.
      */
     public function getDelightfulDepartmentIdsMapping(
         array $delightfulDepartmentIds,
@@ -80,9 +80,9 @@ interface DelightfulContactIdMappingRepositoryInterface
     public function updateMappingEnvId(int $envId): int;
 
     /**
-     * 根据 origin_id 批量软删除第三方平台映射记录。
+     * 根据 origin_id 批量软delete第third-party平台映射记录。
      *
-     * @param string[] $originIds 第三方平台的原始ID列表
+     * @param string[] $originIds 第third-party平台的原始ID列表
      */
     public function deleteThirdPlatformIdsMapping(
         array $originIds,

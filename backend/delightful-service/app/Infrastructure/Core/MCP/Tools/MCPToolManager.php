@@ -15,7 +15,7 @@ class MCPToolManager
     private array $tools = [];
 
     /**
-     * 注册工具.
+     * 注册tool.
      */
     public function registerTool(MCPTool $tool): void
     {
@@ -23,7 +23,7 @@ class MCPToolManager
     }
 
     /**
-     * 获取所有注册的工具.
+     * get所有注册的tool.
      *
      * @return array<string, MCPTool>
      */
@@ -33,7 +33,7 @@ class MCPToolManager
     }
 
     /**
-     * 获取工具列表的Schema形式.
+     * gettool列表的Schema形式.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -47,7 +47,7 @@ class MCPToolManager
     }
 
     /**
-     * 获取指定名称的工具.
+     * get指定名称的tool.
      */
     public function getTool(string $name): ?MCPTool
     {
@@ -55,7 +55,7 @@ class MCPToolManager
     }
 
     /**
-     * 检查指定名称的工具是否存在.
+     * 检查指定名称的tool是否存在.
      */
     public function hasTool(string $name): bool
     {
@@ -63,7 +63,7 @@ class MCPToolManager
     }
 
     /**
-     * 检查是否没有任何工具.
+     * 检查是否没有任何tool.
      */
     public function isEmpty(): bool
     {

@@ -85,15 +85,15 @@ class OperationPermissionAppService extends AbstractPermissionAppService
             }
         }
         $contactDataIsolation = ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
-        // 根据 userid 获取用户信息
+        // 根据 userid getuserinformation
         $users = $this->delightfulUserDomainService->getByUserIds($contactDataIsolation, $userIds);
-        // 获取用户的 departmentId
+        // getuser的 departmentId
         $userDepartmentList = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);
         foreach ($userDepartmentList as $userDepartmentIds) {
             $departmentIds = array_merge($departmentIds, $userDepartmentIds);
         }
         $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-        // 获取群组信息
+        // get群组information
         $groups = $this->delightfulGroupDomainService->getGroupsInfoByIds($groupIds, $contactDataIsolation, true);
 
         return [
@@ -123,7 +123,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * 获取用户对某个资源的最高权限.
+     * getuser对某个资源的最高permission.
      */
     public function getOperationByResourceAndUser(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, string $userId): Operation
     {
@@ -134,7 +134,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * 获取用户对某一类资源的最高操作权限.
+     * getuser对某一类资源的最高操作permission.
      */
     #[ArrayShape([
         // userId => [resourceId => Operation]

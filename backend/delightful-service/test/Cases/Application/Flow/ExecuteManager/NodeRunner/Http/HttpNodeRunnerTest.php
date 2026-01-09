@@ -190,7 +190,7 @@ class HttpNodeRunnerTest extends ExecuteManagerBaseTest
                                 "type": "number",
                                 "key": "version",
                                 "sort": 0,
-                                "title": "版本",
+                                "title": "version",
                                 "description": "desc",
                                 "items": null,
                                 "properties": null,

@@ -110,7 +110,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
 
     public function testRunDoc()
     {
-        $this->markTestSkipped('会失败');
+        $this->markTestSkipped('会failed');
         $node = $this->createNode();
         $runner = NodeRunnerFactory::make($node);
         $vertexResult = new VertexResult();
@@ -264,7 +264,7 @@ JSON,
                 "type": "string",
                 "key": "content",
                 "sort": 0,
-                "title": "内容",
+                "title": "content",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -275,7 +275,7 @@ JSON,
                 "type": "array",
                 "key": "files_content",
                 "sort": 1,
-                "title": "文件内容",
+                "title": "文件content",
                 "description": "",
                 "items": {
                     "type": "object",
@@ -329,7 +329,7 @@ JSON,
                             "type": "string",
                             "key": "content",
                             "sort": 3,
-                            "title": "内容",
+                            "title": "content",
                             "description": "",
                             "required": null,
                             "value": null,

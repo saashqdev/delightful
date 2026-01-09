@@ -14,17 +14,17 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * 角色用户关联模型.
+ * 角色user关联模型.
  *
- * @property int $id 主键ID
+ * @property int $id primary keyID
  * @property int $role_id 角色ID
- * @property string $user_id 用户ID，对应delightful_contact_users.user_id
- * @property string $organization_code 组织编码
- * @property null|string $assigned_by 分配者用户ID
+ * @property string $user_id userID，对应delightful_contact_users.user_id
+ * @property string $organization_code organization编码
+ * @property null|string $assigned_by 分配者userID
  * @property null|Carbon $assigned_at 分配时间
- * @property Carbon $created_at 创建时间
- * @property Carbon $updated_at 更新时间
- * @property null|Carbon $deleted_at 删除时间
+ * @property Carbon $created_at creation time
+ * @property Carbon $updated_at update time
+ * @property null|Carbon $deleted_at deletion time
  */
 class RoleUserModel extends AbstractModel
 {
@@ -52,7 +52,7 @@ class RoleUserModel extends AbstractModel
     ];
 
     /**
-     * 属性类型转换.
+     * 属性type转换.
      */
     protected array $casts = [
         'id' => 'int',

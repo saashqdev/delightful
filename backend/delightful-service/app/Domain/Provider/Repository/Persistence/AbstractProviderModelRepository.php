@@ -29,12 +29,12 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
     protected array $attributeMaps = [];
 
     /**
-     * 创建新的模型实体.
+     * create新的模型实体.
      */
     public function create(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): ProviderModelEntity
     {
         $modelEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        // 创建新记录
+        // create新记录
         if ($modelEntity->getId() === null) {
             $modelEntity->setId(IdGenerator::getSnowId());
         }
@@ -47,7 +47,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
 
         $data = $modelEntity->toArray();
         $data['disabled_by'] = $data['disabled_by'] ?? '';
-        // 创建新记录
+        // create新记录
         ProviderModelModel::query()->create($data);
         return $modelEntity;
     }

@@ -11,7 +11,7 @@ use App\Domain\LongTermMemory\Entity\ValueObject\MemoryType;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 记忆查询 DTO.
+ * 记忆query DTO.
  */
 class MemoryQueryDTO extends AbstractDTO
 {
@@ -50,7 +50,7 @@ class MemoryQueryDTO extends AbstractDTO
     }
 
     /**
-     * 设置记忆类型.
+     * setting记忆类型.
      */
     public function setMemoryType(MemoryType|string $type): void
     {

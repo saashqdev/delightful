@@ -21,7 +21,7 @@ return new class extends Migration {
         Schema::create('service_provider_configs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('service_provider_id')->comment('服务商ID');
-            $table->string('organization_code', 50)->comment('组织编码');
+            $table->string('organization_code', 50)->comment('organization编码');
             $table->longText('config')->nullable()->comment('configurationinformationJSON');
             $table->tinyInteger('status')->default(0)->comment('状态：0-未启用，1-启用');
             $table->timestamps();

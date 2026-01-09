@@ -11,25 +11,25 @@ enum UserSettingKey: string
 {
     case None = 'none';
 
-    // 全局 mcp 用户配置
+    // 全局 mcp userconfiguration
     case BeDelightfulMCPServers = 'be_delightful_mcp_servers';
 
-    // 项目 mcp 用户配置
+    // 项目 mcp userconfiguration
     case BeDelightfulProjectMCPServers = 'BeDelightfulProjectMCPServers';
 
-    // 项目话题模型配置
+    // 项目话题模型configuration
     case BeDelightfulProjectTopicModel = 'BeDelightfulProjectTopicModel';
 
-    // 用户当前组织
+    // user当前organization
     case CurrentOrganization = 'CurrentOrganization';
 
-    // 全局配置
+    // 全局configuration
     case GlobalConfig = 'GlobalConfig';
 
-    // 平台设置（平台信息、Logo、Favicon、i18n 等）
+    // 平台setting（平台information、Logo、Favicon、i18n 等）
     case PlatformSettings = 'PlatformSettings';
 
-    // 智能体排序配置
+    // 智能体排序configuration
     case BeDelightfulAgentSort = 'BeDelightfulAgentSort';
 
     public static function genBeDelightfulProjectMCPServers(string $projectId): string

@@ -16,7 +16,7 @@ class KnowledgeFragmentQuery
     public int $limit = 5;
 
     /**
-     * 获取知识库编码
+     * get知识库编码
      */
     public function getKnowledgeCode(): string
     {
@@ -24,7 +24,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * 设置知识库编码
+     * setting知识库编码
      */
     public function setKnowledgeCode(string $knowledgeCode): void
     {
@@ -32,7 +32,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * 获取元数据过滤条件.
+     * get元datafilter条件.
      */
     public function getMetadataFilter(): array
     {
@@ -40,7 +40,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * 设置元数据过滤条件.
+     * setting元datafilter条件.
      */
     public function setMetadataFilter(array $metadataFilter): void
     {
@@ -48,7 +48,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * 获取限制数量.
+     * get限制数量.
      */
     public function getLimit(): int
     {
@@ -56,7 +56,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * 设置限制数量.
+     * setting限制数量.
      */
     public function setLimit(int $limit): void
     {

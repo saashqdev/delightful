@@ -27,7 +27,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     protected OrganizationAdminAppService $organizationAdminAppService;
 
     /**
-     * 获取组织管理员列表.
+     * getorganization管理员列表.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function list(): array
@@ -48,7 +48,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 获取组织管理员详情.
+     * getorganization管理员详情.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function show(int $id): array
@@ -62,7 +62,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 授予用户组织管理员权限.
+     * 授予userorganization管理员permission.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function grant(): array
@@ -76,14 +76,14 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $organizationAdmin = $this->organizationAdminAppService->grant($dataIsolation, $userId, $grantorUserId, $remarks);
 
-        // 获取包含用户信息的完整数据
+        // get包含userinformation的完整data
         $organizationAdminData = $this->organizationAdminAppService->show($dataIsolation, $organizationAdmin->getId());
 
         return OrganizationAdminAssembler::assembleWithUserInfo($organizationAdminData)->toArray();
     }
 
     /**
-     * 删除组织管理员.
+     * deleteorganization管理员.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function destroy(int $id): array
@@ -96,7 +96,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 转让组织创建人身份.
+     * 转让organizationcreate人身份.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function transferOwner(): array
@@ -107,7 +107,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $newOwnerUserId = $this->request->input('user_id');
         if (empty($newOwnerUserId)) {
-            throw new InvalidArgumentException('新的组织创建人用户ID不能为空');
+            throw new InvalidArgumentException('新的organizationcreate人userID不能为空');
         }
 
         $this->organizationAdminAppService->transferOwnership(

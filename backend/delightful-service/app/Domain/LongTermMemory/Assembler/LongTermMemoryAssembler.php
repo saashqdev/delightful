@@ -16,7 +16,7 @@ use App\Domain\LongTermMemory\Entity\LongTermMemoryEntity;
 class LongTermMemoryAssembler
 {
     /**
-     * 使用 UpdateMemoryDTO 更新记忆实体.
+     * 使用 UpdateMemoryDTO update记忆实体.
      */
     public static function updateEntityFromDTO(LongTermMemoryEntity $entity, UpdateMemoryDTO $dto): void
     {
@@ -47,7 +47,7 @@ class LongTermMemoryAssembler
         if ($dto->metadata !== null) {
             $entity->setMetadata($dto->metadata);
         }
-        // enabled 放在最后设置，确保 status 已经正确设置
+        // enabled 放在最后setting，确保 status 已经正确setting
         if ($dto->enabled !== null) {
             $entity->setEnabled($dto->enabled);
         }

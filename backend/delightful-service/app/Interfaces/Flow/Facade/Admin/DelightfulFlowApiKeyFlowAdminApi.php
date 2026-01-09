@@ -36,7 +36,7 @@ class DelightfulFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
     {
         $authorization = $this->getAuthorization();
 
-        // 获取我创建的个人密钥
+        // get我create的个人密钥
         $query = new DelightfulFlowApiKeyQuery();
         $query->setFlowCode($flowId);
         $query->setType(ApiKeyType::Personal->value);

@@ -59,7 +59,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             $waitMessageEntity->setTimeout(time() + $intervalSeconds);
         }
 
-        // 暂时还是放到数据库中，后续考虑放到 对象存储 中
+        // 暂时还是放到data库中，后续考虑放到 对象存储 中
         $persistenceData = $executionData->getPersistenceData();
         $waitMessageEntity->setPersistentData($persistenceData);
 

@@ -14,17 +14,17 @@ use App\Domain\Chat\Entity\DelightfulTopicMessageEntity;
 
 interface DelightfulChatTopicRepositoryInterface
 {
-    // 创建话题
+    // create话题
     public function createTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity;
 
-    // 更新话题
+    // update话题
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity;
 
-    // 删除话题
+    // delete话题
     public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int;
 
     /**
-     * 获取会话的会话列表.
+     * getconversation的conversation列表.
      * @param string[] $topicIds
      * @return array<DelightfulTopicEntity>
      */
@@ -51,13 +51,13 @@ interface DelightfulChatTopicRepositoryInterface
     public function getTopicMessagesByConversationId(string $conversationId): array;
 
     /**
-     * 按时间范围获取会话下某个话题的消息.
+     * 按时间范围getconversation下某个话题的message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array;
 
     /**
-     * 通过topic_id获取话题信息（不需要conversation_id）.
+     * 通过topic_idget话题information（不需要conversation_id）.
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity;
 
@@ -72,10 +72,10 @@ interface DelightfulChatTopicRepositoryInterface
 
     /**
      * Get topic messages by conversation ID, topic ID and max seq ID.
-     * @param string $conversationId 会话ID
+     * @param string $conversationId conversationID
      * @param string $topicId 话题ID
      * @param int $maxSeqId 最大序列ID（包含该ID）
-     * @return DelightfulTopicMessageEntity[] 话题消息实体数组
+     * @return DelightfulTopicMessageEntity[] 话题message实体数组
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;
 }

@@ -120,9 +120,9 @@ class GoogleSearch
 
             return Json::decode($response->getBody()->getContents());
         } catch (BadResponseException|RequestException $e) {
-            // 记录错误日志
+            // 记录error日志
             $this->logger->error(sprintf(
-                '谷歌搜索遇到错误:%s,file:%s,line:%s trace:%s, will generate again.',
+                '谷歌search遇到error:%s,file:%s,line:%s trace:%s, will generate again.',
                 $e->getResponse()?->getBody(), /* @phpstan-ignore-line */
                 $e->getFile(),
                 $e->getLine(),
@@ -130,7 +130,7 @@ class GoogleSearch
             ));
             return [];
         } catch (Throwable$e) {
-            $this->logger->error('谷歌搜索遇到错误:' . $e->getMessage());
+            $this->logger->error('谷歌search遇到error:' . $e->getMessage());
         }
         return [];
     }

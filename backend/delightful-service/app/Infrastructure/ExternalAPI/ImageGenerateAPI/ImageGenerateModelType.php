@@ -31,7 +31,7 @@ enum ImageGenerateModelType: string
     case Official = 'Official';
 
     /**
-     * 从模型名称获取对应的类型.
+     * 从模型名称get对应的type.
      */
     public static function fromModel(string $model, bool $throw = true): self
     {

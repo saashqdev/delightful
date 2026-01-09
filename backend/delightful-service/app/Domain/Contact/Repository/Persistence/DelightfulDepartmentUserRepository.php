@@ -95,7 +95,7 @@ class DelightfulDepartmentUserRepository implements DelightfulDepartmentUserRepo
             $departmentIds[] = $departmentUser['department_id'];
         }
         if ($withAllParentIds) {
-            // 获取所有部门information
+            // get所有departmentinformation
             $departmentIds = array_values(array_unique($departmentIds));
             $departments = DepartmentModel::query()
                 ->where('organization_code', $dataIsolation->getCurrentOrganizationCode())

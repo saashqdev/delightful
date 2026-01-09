@@ -25,7 +25,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 获取操作者ID.
+     * get操作者ID.
      */
     public function getUid(): string
     {
@@ -33,7 +33,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 获取操作者名称.
+     * get操作者名称.
      */
     public function getName(): string
     {
@@ -41,7 +41,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 获取操作时间.
+     * get操作时间.
      */
     public function getTime(): DateTime
     {
@@ -49,7 +49,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 设置操作者ID.
+     * setting操作者ID.
      */
     public function setUid(string $uid): self
     {
@@ -58,7 +58,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 设置操作者名称.
+     * setting操作者名称.
      */
     public function setName(string $name): self
     {
@@ -67,7 +67,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 设置操作时间.
+     * setting操作时间.
      */
     public function setTime(DateTime $time): self
     {
@@ -76,7 +76,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 创建系统用户.
+     * create系统user.
      */
     public static function createSystemUser(): self
     {
@@ -84,7 +84,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * 创建单元测试用户.
+     * create单元测试user.
      */
     public static function createUnitUser(): self
     {

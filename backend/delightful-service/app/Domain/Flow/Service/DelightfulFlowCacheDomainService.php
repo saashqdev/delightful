@@ -12,7 +12,7 @@ use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Repository\Facade\DelightfulFlowCacheRepositoryInterface;
 
 /**
- * Flow缓存领域服务
+ * Flowcache领域服务
  */
 class DelightfulFlowCacheDomainService extends AbstractDomainService
 {

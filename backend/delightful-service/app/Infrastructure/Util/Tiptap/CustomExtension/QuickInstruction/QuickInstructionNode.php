@@ -74,14 +74,14 @@ class QuickInstructionNode extends AbstractCustomNode
                 $instruction = $nodeForArray['attrs']['instruction'] ?? [];
                 $values = $instruction['values'] ?? [];
 
-                // 使用数组过滤和键值查找替代循环
+                // 使用数组filter和键值查找替代循环
                 if (! empty($values) && is_array($values)) {
                     // 查找匹配 id 的指令值
                     $matchedValues = array_filter($values, function ($item) use ($value) {
                         return isset($item['id']) && $item['id'] == $value;
                     });
 
-                    // 如果找到匹配项，取第一个匹配项的 value
+                    // 如果找到匹配项，取第one匹配项的 value
                     if (! empty($matchedValues)) {
                         $firstMatch = reset($matchedValues);
                         $value = $firstMatch['value'] ?? $value;

@@ -32,14 +32,14 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     protected string $documentCode = '';
 
     /**
-     * 片段内容.
+     * 片段content.
      */
     protected string $content;
 
     protected array $metadata = [];
 
     /**
-     * 业务 ID，可用于业务方记录自己的 ID 用来进行更新数据.
+     * 业务 ID，可用于业务方记录自己的 ID 用来进行updatedata.
      */
     protected string $businessId = '';
 
@@ -124,7 +124,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 
     public function hasModify(KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): bool
     {
-        // 如果 content 和 metadata 都没有变化，就不需要更新了
+        // 如果 content 和 metadata 都没有变化，就不需要update了
         if ($savingDelightfulFlowKnowledgeFragmentEntity->getContent() === $this->content
             && $savingDelightfulFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
             && $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId
@@ -368,7 +368,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this->wordCount;
     }
 
-    // 这里不用设置，直接根据content计算出来就行
+    // 这里不用setting，直接根据content计算出来就行
     public function setWordCount(int $wordCount): KnowledgeBaseFragmentEntity
     {
         $this->wordCount = $wordCount;
@@ -423,13 +423,13 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     {
         foreach ($this->metadata as $key => $value) {
             if (Str::startsWith($key, self::PAYLOAD_PREFIX)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元数据 key 不能以 ' . self::PAYLOAD_PREFIX . ' 开头');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data key 不能以 ' . self::PAYLOAD_PREFIX . ' 开头');
             }
             if (! is_string($key)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元数据 的 key 必须是字符串');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 key 必须是字符串');
             }
             if (! is_string($value) && ! is_numeric($value)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元数据 的 value 只能是 字符串或者数字');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 value 只能是 字符串或者数字');
             }
         }
         return $this;

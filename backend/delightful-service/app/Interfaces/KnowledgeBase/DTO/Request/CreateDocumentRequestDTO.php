@@ -41,11 +41,11 @@ class CreateDocumentRequestDTO extends AbstractRequestDTO
         return [
             'knowledge_base_code.required' => '知识库编码不能为空',
             'knowledge_base_code.max' => '知识库编码长度不能超过64个字符',
-            'name.required' => '文档名称不能为空',
-            'name.max' => '文档名称长度不能超过255个字符',
-            'doc_type.required' => '文档类型不能为空',
-            'doc_type.integer' => '文档类型必须为整数',
-            'doc_type.min' => '文档类型必须大于等于0',
+            'name.required' => 'document名称不能为空',
+            'name.max' => 'document名称长度不能超过255个字符',
+            'doc_type.required' => 'documenttype不能为空',
+            'doc_type.integer' => 'documenttype必须为整数',
+            'doc_type.min' => 'documenttype必须大于等于0',
         ];
     }
 

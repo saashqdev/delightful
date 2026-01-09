@@ -96,7 +96,7 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像编辑设置正确的生成配置
+        // 为图像编辑setting正确的生成configuration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
@@ -150,7 +150,7 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像编辑设置正确的生成配置
+        // 为图像编辑setting正确的生成configuration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
@@ -180,8 +180,8 @@ class GoogleGeminiAPI
         $result = Json::decode($response->getBody()->getContents());
 
         if ($response->getStatusCode() !== 200) {
-            $errorMessage = $result['error']['message'] ?? "HTTP 错误: {$response->getStatusCode()}";
-            throw new Exception("API 请求失败: {$errorMessage}");
+            $errorMessage = $result['error']['message'] ?? "HTTP error: {$response->getStatusCode()}";
+            throw new Exception("API 请求failed: {$errorMessage}");
         }
 
         return $result;

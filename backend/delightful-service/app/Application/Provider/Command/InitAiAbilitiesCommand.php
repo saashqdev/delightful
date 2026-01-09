@@ -31,8 +31,8 @@ class InitAiAbilitiesCommand extends HyperfCommand
     public function configure(): void
     {
         parent::configure();
-        $this->setDescription('初始化AI能力数据（从配置文件同步到数据库）');
-        $this->addArgument('organization_code', InputArgument::REQUIRED, '组织编码');
+        $this->setDescription('初始化AI能力data（从configuration文件同步到data库）');
+        $this->addArgument('organization_code', InputArgument::REQUIRED, 'organization编码');
     }
 
     public function handle(): void
@@ -41,25 +41,25 @@ class InitAiAbilitiesCommand extends HyperfCommand
 
         $organizationCode = $this->input->getArgument('organization_code');
         if (empty($organizationCode)) {
-            $this->error('请提供组织编码');
+            $this->error('请提供organization编码');
             return;
         }
 
-        $this->info("开始为组织 {$organizationCode} 初始化AI能力数据...");
+        $this->info("开始为organization {$organizationCode} 初始化AI能力data...");
 
         try {
-            // 创建一个临时的 Authorization 对象用于命令行
+            // createone临时的 Authorization 对象用于命令行
             $authorization = new DelightfulUserAuthorization();
             $authorization->setOrganizationCode($organizationCode);
 
             $count = $this->aiAbilityAppService->initializeAbilities($authorization);
-            $this->info("成功初始化 {$count} 个AI能力");
+            $this->info("success初始化 {$count} 个AI能力");
         } catch (Throwable $e) {
-            $this->error('初始化AI能力数据失败: ' . $e->getMessage());
+            $this->error('初始化AI能力datafailed: ' . $e->getMessage());
             $this->error($e->getTraceAsString());
             return;
         }
 
-        $this->info('AI能力数据初始化完成');
+        $this->info('AI能力data初始化完成');
     }
 }

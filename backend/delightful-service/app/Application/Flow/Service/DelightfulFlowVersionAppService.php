@@ -17,7 +17,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class DelightfulFlowVersionAppService extends AbstractFlowAppService
 {
     /**
-     * 查询版本列table.
+     * queryversion列table.
      * @return array{total: int, list: array<DelightfulFlowVersionEntity>, users: array}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowVersionQuery $query, Page $page): array
@@ -41,7 +41,7 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
     }
 
     /**
-     * 获取版本详情.
+     * getversion详情.
      */
     public function show(Authenticatable $authorization, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {
@@ -56,7 +56,7 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
     }
 
     /**
-     * 发布版本.
+     * 发布version.
      */
     public function publish(Authenticatable $authorization, DelightfulFlowVersionEntity $delightfulFlowVersionEntity): DelightfulFlowVersionEntity
     {
@@ -72,7 +72,7 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
     }
 
     /**
-     * 回滚版本.
+     * 回滚version.
      */
     public function rollback(Authenticatable $authorization, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {

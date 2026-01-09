@@ -23,7 +23,7 @@ enum MemoryCategory: string
     case GENERAL = 'general';
 
     /**
-     * 获取分类的中文名称.
+     * get分类的中文名称.
      */
     public function getDisplayName(): string
     {
@@ -42,7 +42,7 @@ enum MemoryCategory: string
     }
 
     /**
-     * 获取该分类的启用数量限制.
+     * get该分类的启用数量限制.
      */
     public function getEnabledLimit(): int
     {

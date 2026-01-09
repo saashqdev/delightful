@@ -23,7 +23,7 @@ class NodeDebugResult extends AbstractValueObject
     private const MAX_LOOP_RESULTS_TAIL = 10;
 
     /**
-     *  节点是否执行成功
+     *  节点是否执行success
      */
     protected bool $success = false;
 
@@ -34,7 +34,7 @@ class NodeDebugResult extends AbstractValueObject
     protected int $errorCode = 0;
 
     /**
-     *  节点执行失败时的错误信息.
+     *  节点执行failed时的errorinformation.
      */
     protected string $errorMessage = '';
 
@@ -46,12 +46,12 @@ class NodeDebugResult extends AbstractValueObject
     protected array $params = [];
 
     /**
-     *  节点执行输入.
+     *  节点执行input.
      */
     protected array $input = [];
 
     /**
-     *  节点执行输出.
+     *  节点执行output.
      */
     protected array $output = [];
 

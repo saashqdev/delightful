@@ -43,7 +43,7 @@ class QwenProvider implements IProvider
         $qwenAPI = new QwenImageAPI($apiKey);
 
         $body = [];
-        // 文生图配置
+        // 文生图configuration
         $body['prompt'] = '生成一只狗';
         $body['size'] = '1328*1328'; // 使用qwen-image支持的默认1:1尺寸
         $body['n'] = 1;
@@ -57,13 +57,13 @@ class QwenProvider implements IProvider
             // 检查响应格式
             if (! isset($response['output']['task_id'])) {
                 $connectResponse->setStatus(false);
-                $connectResponse->setMessage($response['message'] ?? '响应格式错误');
+                $connectResponse->setMessage($response['message'] ?? '响应格式error');
                 return $connectResponse;
             }
 
-            // 连通性测试成功，不需要等待任务完成
+            // 连通性测试success，不需要等待任务完成
             $connectResponse->setStatus(true);
-            $connectResponse->setMessage('连接测试成功');
+            $connectResponse->setMessage('连接测试success');
         } catch (Exception $e) {
             $connectResponse->setStatus(false);
             if ($e instanceof ClientException) {

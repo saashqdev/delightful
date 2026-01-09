@@ -74,7 +74,7 @@ class KnowledgeConfig
 
     public function setKnowledgeListByData(array $data): void
     {
-        // 实时获取知识库data
+        // 实时get知识库data
         $knowledgeCodes = array_column($data, 'knowledge_code');
         if (empty($knowledgeCodes)) {
             return;

@@ -23,9 +23,9 @@ interface RateLimiterInterface
     public function check(string $clientId, MessageInterface $request): void;
 
     /**
-     * 获取当前的限制配置.
+     * get当前的限制configuration.
      *
-     * @return array<string, bool|int> 包含限制配置的数组
+     * @return array<string, bool|int> 包含限制configuration的数组
      */
     public function getLimits(): array;
 }

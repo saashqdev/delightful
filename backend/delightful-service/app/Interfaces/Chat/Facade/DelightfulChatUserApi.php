@@ -53,7 +53,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /**
-     * 返回 ai 的头像昵称等信息.
+     * return ai 的头像昵称等information.
      * @throws Throwable
      */
     #[ArrayShape([
@@ -85,7 +85,7 @@ class DelightfulChatUserApi extends AbstractApi
         $pageToken = (string) $request->query('page_token', '');
         // 0:ai 1:人类 2: ai和人类
         $friendType = (int) $request->query('friend_type', '');
-        // 将 flow_codes 当做 数据表中的 ai_code 处理了
+        // 将 flow_codes 当做 data表中的 ai_code 处理了
         $aiCodes = (array) $request->input('flow_codes', []);
         $friendQueryDTO = new FriendQueryDTO();
         $friendType = UserType::from($friendType);
@@ -129,7 +129,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /*
-     * 是否允许更新用户信息.
+     * 是否允许updateuserinformation.
      */
     public function getUserUpdatePermission(): array
     {
@@ -138,8 +138,8 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /**
-     * 更新用户信息
-     * 支持更新字段：
+     * updateuserinformation
+     * 支持update字段：
      * 1. avatar_url: 头像
      * 2. nickname:   昵称.
      */

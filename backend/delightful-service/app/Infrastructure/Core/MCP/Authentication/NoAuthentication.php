@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 class NoAuthentication implements AuthenticationInterface
 {
     /**
-     * 验证请求的身份信息.
+     * 验证请求的身份information.
      * 在此实现中，始终允许所有请求通过.
      */
     public function authenticate(MessageInterface $request): void

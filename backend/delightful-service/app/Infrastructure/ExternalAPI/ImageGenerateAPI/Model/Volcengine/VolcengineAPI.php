@@ -29,7 +29,7 @@ class VolcengineAPI
     }
 
     /**
-     * 设置 Access Key.
+     * setting Access Key.
      */
     public function setAk(string $ak): void
     {
@@ -38,7 +38,7 @@ class VolcengineAPI
     }
 
     /**
-     * 设置 Secret Key.
+     * setting Secret Key.
      */
     public function setSk(string $sk): void
     {
@@ -61,7 +61,7 @@ class VolcengineAPI
     }
 
     /**
-     * 查询任务结果.
+     * query任务结果.
      */
     public function getTaskResult(array $params): array
     {

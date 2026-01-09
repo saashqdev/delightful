@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-// 分页组织器
+// 分页organization器
 class PageListAssembler
 {
     public static function pageByMysql(array $data, int $currentOffset = 0, int $currentLimit = 0, ?int $maxRecords = null): array

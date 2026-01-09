@@ -112,9 +112,9 @@ class CreateGroupNodeParamsConfig extends NodeParamsConfig
             'group_owner' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
             // 群成员
             'group_members' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
-            // 群类型，此处对于 \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
+            // 群type，此处对于 \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
             'group_type' => 0,
-            // 包含当前用户
+            // 包含当前user
             'include_current_user' => $this->includeCurrentUser,
             // 包含当前助理
             'include_current_assistant' => $this->includeCurrentAssistant,

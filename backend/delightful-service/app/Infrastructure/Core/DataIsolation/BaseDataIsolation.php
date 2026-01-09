@@ -12,12 +12,12 @@ use App\Infrastructure\Util\Context\CoContext;
 class BaseDataIsolation implements DataIsolationInterface
 {
     /**
-     * 当前的组织编码.
+     * 当前的organization编码.
      */
     private string $currentOrganizationCode;
 
     /**
-     * 当前的用户id.
+     * 当前的userid.
      */
     private string $currentUserId;
 
@@ -31,7 +31,7 @@ class BaseDataIsolation implements DataIsolationInterface
     private bool $enabled = true;
 
     /**
-     * 多组织下的环境 ID.
+     * 多organization下的环境 ID.
      */
     private int $envId = 0;
 
@@ -42,17 +42,17 @@ class BaseDataIsolation implements DataIsolationInterface
     private string $thirdPlatformOrganizationCode;
 
     /**
-     * 是否包含官方组织.
+     * 是否包含官方organization.
      */
     private bool $containOfficialOrganization = false;
 
     /**
-     * 是否仅仅包含官方组织.
+     * 是否仅仅包含官方organization.
      */
     private bool $onlyOfficialOrganization = false;
 
     /**
-     * 官方组织codes.
+     * 官方organizationcodes.
      */
     private array $officialOrganizationCodes = [];
 
@@ -70,7 +70,7 @@ class BaseDataIsolation implements DataIsolationInterface
         $this->subscriptionManager = \Hyperf\Support\make(SubscriptionManagerInterface::class);
 
         if (config('office_organization')) {
-            // 目前只有 1 个官方组织
+            // 目前只有 1 个官方organization
             $this->officialOrganizationCodes = [config('office_organization')];
         }
     }

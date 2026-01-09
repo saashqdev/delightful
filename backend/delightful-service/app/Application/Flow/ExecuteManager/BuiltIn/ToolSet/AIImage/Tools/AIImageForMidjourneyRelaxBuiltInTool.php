@@ -27,7 +27,7 @@ class AIImageForMidjourneyRelaxBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图工具-Midjourney-Relax模型';
+        return '文生图tool-Midjourney-Relax模型';
     }
 
     public function getCallback(): ?Closure

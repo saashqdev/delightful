@@ -38,10 +38,10 @@ class UpdateFragmentRequestDTO extends AbstractRequestDTO
             'id.required' => '知识库编码不能为空',
             'knowledge_base_code.required' => '知识库编码不能为空',
             'knowledge_base_code.max' => '知识库编码长度不能超过255个字符',
-            'document_code.required' => '文档编码不能为空',
-            'document_code.max' => '文档编码长度不能超过255个字符',
-            'content.required' => '片段内容不能为空',
-            'content.max' => '片段内容长度不能超过65535个字符',
+            'document_code.required' => 'document编码不能为空',
+            'document_code.max' => 'document编码长度不能超过255个字符',
+            'content.required' => '片段content不能为空',
+            'content.max' => '片段content长度不能超过65535个字符',
         ];
     }
 

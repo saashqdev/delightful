@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use DateTime;
 
 /**
- * 更新记忆 DTO.
+ * update记忆 DTO.
  */
 class UpdateMemoryDTO extends AbstractDTO
 {

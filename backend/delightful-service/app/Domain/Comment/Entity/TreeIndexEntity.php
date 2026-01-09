@@ -27,17 +27,17 @@ class TreeIndexEntity
     protected int $distance;
 
     /**
-     * 组织code.
+     * organizationcode.
      */
     protected string $organizationCode;
 
     /**
-     * 创建时间.
+     * create时间.
      */
     protected string $createdAt;
 
     /**
-     * 更新时间.
+     * update时间.
      */
     protected string $updatedAt;
 

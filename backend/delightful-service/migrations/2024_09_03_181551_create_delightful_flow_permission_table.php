@@ -16,13 +16,13 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code', 20)->comment('组织编码');
+            $table->string('organization_code', 20)->comment('organization编码');
             $table->unsignedTinyInteger('resource_type')->comment('资源类型');
             $table->string('resource_id', 50)->comment('资源id');
             $table->unsignedTinyInteger('target_type')->comment('目标类型');
             $table->string('target_id', 50)->comment('目标id');
             $table->unsignedTinyInteger('operation')->comment('操作');
-            $table->string('created_uid', 50)->comment('创建人');
+            $table->string('created_uid', 50)->comment('create人');
             $table->string('updated_uid', 50)->comment('修改人');
             $table->timestamps();
             $table->softDeletes();

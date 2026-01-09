@@ -29,7 +29,7 @@ class EnvManager
             return;
         }
         if (empty($envId)) {
-            // 尝试获取当前环境的环境 ID.
+            // 尝试get当前环境的环境 ID.
             $envId = $baseDataIsolation->getEnvId();
         }
 
@@ -71,7 +71,7 @@ class EnvManager
             'third_organization_code' => $baseDataIsolation->getThirdPlatformOrganizationCode(),
         ]);
 
-        // 同一个协程内无需重复加载
+        // 同one协程内无需重复加载
         Context::set('LastBaseDataIsolationInitEnv', $baseDataIsolation);
     }
 

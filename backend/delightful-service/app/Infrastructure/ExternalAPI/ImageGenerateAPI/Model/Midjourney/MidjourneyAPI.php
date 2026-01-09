@@ -26,7 +26,7 @@ class MidjourneyAPI
     }
 
     /**
-     * 设置 API Key.
+     * setting API Key.
      */
     public function setApiKey(string $apiKey): void
     {
@@ -34,7 +34,7 @@ class MidjourneyAPI
     }
 
     /**
-     * 设置 API 基础 URL.
+     * setting API 基础 URL.
      */
     public function setBaseUrl(string $baseUrl): void
     {
@@ -42,7 +42,7 @@ class MidjourneyAPI
     }
 
     /**
-     * 提交图片生成任务
+     * 提交image生成任务
      */
     public function submitTask(string $prompt, string $mode = 'fast'): array
     {
@@ -83,7 +83,7 @@ class MidjourneyAPI
     }
 
     /**
-     * 查询任务结果.
+     * query任务结果.
      */
     public function getTaskResult(string $jobId): array
     {
@@ -102,7 +102,7 @@ class MidjourneyAPI
     }
 
     /**
-     * 获取账户信息.
+     * get账户information.
      */
     public function getAccountInfo(): array
     {

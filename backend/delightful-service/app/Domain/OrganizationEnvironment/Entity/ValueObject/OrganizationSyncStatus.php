@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\OrganizationEnvironment\Entity\ValueObject;
 
 /**
- * 组织同步状态.
+ * organization同步status.
  */
 enum OrganizationSyncStatus: int
 {
@@ -18,7 +18,7 @@ enum OrganizationSyncStatus: int
     /* 已同步 */
     case Synced = 1;
 
-    /* 同步失败 */
+    /* 同步failed */
     case SyncFailed = 2;
 
     /* 同步中 */
@@ -26,7 +26,7 @@ enum OrganizationSyncStatus: int
 
     /**
      * 是否需要补偿。
-     * 与知识库状态保持一致的补偿集合。
+     * 与知识库status保持一致的补偿集合。
      */
     public static function needCompensate(): array
     {

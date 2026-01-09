@@ -515,7 +515,7 @@ class ProviderModelEntity extends AbstractEntity
     }
 
     /**
-     * 获取本地化的模型名称.
+     * get本地化的模型名称.
      */
     public function getLocalizedName(string $locale): string
     {
@@ -532,7 +532,7 @@ class ProviderModelEntity extends AbstractEntity
     }
 
     /**
-     * 获取本地化的模型描述.
+     * get本地化的模型描述.
      */
     public function getLocalizedDescription(string $locale): string
     {

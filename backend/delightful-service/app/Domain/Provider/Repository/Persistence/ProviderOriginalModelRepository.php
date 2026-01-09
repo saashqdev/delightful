@@ -59,11 +59,11 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
         $attributes = $this->getFieldAttributes($providerOriginalModelEntity);
 
         if (! $providerOriginalModelEntity->getId()) {
-            // 创建新记录
+            // create新记录
             $this->initializeEntityForCreation($providerOriginalModelEntity, $attributes);
             ProviderOriginalModelModel::query()->insert($attributes);
         } else {
-            // 更新现有记录
+            // update现有记录
             $now = new DateTime();
             $providerOriginalModelEntity->setUpdatedAt($now);
             $attributes['updated_at'] = $now->format('Y-m-d H:i:s');
@@ -89,12 +89,12 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     {
         $systemType = ProviderOriginalModelType::System;
 
-        // 第一次查询：获取系统默认模型（所有组织都可见）
+        // 第一次query：get系统默认模型（所有organization都可见）
         $systemBuilder = $this->createProviderOriginalModelQuery()
             ->where('type', $systemType->value);
         $systemModels = Db::select($systemBuilder->toSql(), $systemBuilder->getBindings());
 
-        // 第二次查询：获取当前组织的自定义模型
+        // 第二次query：get当前organization的自定义模型
         $organizationBuilder = $this->createProviderOriginalModelQuery($dataIsolation);
         $organizationModels = Db::select($organizationBuilder->toSql(), $organizationBuilder->getBindings());
 
@@ -120,8 +120,8 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除过滤的 ProviderOriginalModelModel 查询构建器.
-     * @param null|ProviderDataIsolation $dataIsolation 如果传入则添加组织代码过滤
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderOriginalModelModel query构建器.
+     * @param null|ProviderDataIsolation $dataIsolation 如果传入则添加organization代码filter
      */
     private function createProviderOriginalModelQuery(?ProviderDataIsolation $dataIsolation = null): Builder
     {

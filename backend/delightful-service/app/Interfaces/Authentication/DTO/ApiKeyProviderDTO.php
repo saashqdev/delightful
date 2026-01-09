@@ -17,7 +17,7 @@ class ApiKeyProviderDTO extends AbstractDTO
     use StringIdDTOTrait;
 
     /**
-     * 组织代码.
+     * organization代码.
      */
     protected string $organizationCode = '';
 
@@ -27,7 +27,7 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected string $relCode = '';
 
     /**
-     * 关联类型.
+     * 关联type.
      */
     protected int $relType = 0;
 
@@ -37,7 +37,7 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected string $name = '';
 
     /**
-     * API密钥描述.
+     * API密钥description.
      */
     protected string $description = '';
 
@@ -47,7 +47,7 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected string $secretKey = '';
 
     /**
-     * 会话ID.
+     * conversationID.
      */
     protected string $conversationId = '';
 

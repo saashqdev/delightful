@@ -45,7 +45,7 @@ class MiscClient extends Client
                 ],
             ];
 
-            // 将单个embedding转换为EmbeddingResponse期望的数据结构
+            // 将单个embedding转换为EmbeddingResponse期望的data结构
             if (isset($content['embedding'])) {
                 $compatibleContent['data'][] = [
                     'object' => 'embedding',
@@ -54,7 +54,7 @@ class MiscClient extends Client
                 ];
             }
 
-            // 重新创建响应对象
+            // 重新create响应对象
             $responseBody = json_encode($compatibleContent);
             $response = $response->withBody(Utils::streamFor($responseBody));
 

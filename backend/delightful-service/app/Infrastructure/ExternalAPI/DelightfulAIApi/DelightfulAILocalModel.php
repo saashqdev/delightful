@@ -89,7 +89,7 @@ class DelightfulAILocalModel extends AbstractModel
     }
 
     /**
-     * @param MessageInterface[] $messages 消息
+     * @param MessageInterface[] $messages message
      * @throws LLMFunctionCallNotSupportedException
      * @throws LLMModalityNotSupportedException
      */
@@ -110,7 +110,7 @@ class DelightfulAILocalModel extends AbstractModel
     }
 
     /**
-     * @param MessageInterface[] $messages 消息
+     * @param MessageInterface[] $messages message
      * @throws LLMFunctionCallNotSupportedException
      * @throws LLMModalityNotSupportedException
      */

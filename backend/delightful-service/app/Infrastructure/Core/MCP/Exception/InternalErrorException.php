@@ -12,7 +12,7 @@ use Throwable;
 class InternalErrorException extends MCPException
 {
     /**
-     * JSON-RPC错误码.
+     * JSON-RPCerror码.
      */
     protected int $rpcCode = -32603;
 

@@ -26,23 +26,23 @@ enum UserTaskErrorCode: int
     #[ErrorMessage('task.already_exists')]
     case TASK_ALREADY_EXISTS = 8003;
 
-    // 任务创建失败
+    // 任务createfailed
     #[ErrorMessage('task.create_failed')]
     case TASK_CREATE_FAILED = 8004;
 
-    // 任务更新失败
+    // 任务updatefailed
     #[ErrorMessage('task.update_failed')]
     case TASK_UPDATE_FAILED = 8005;
 
-    // 任务删除失败
+    // 任务deletefailed
     #[ErrorMessage('task.delete_failed')]
     case TASK_DELETE_FAILED = 8006;
 
-    // 任务列表获取失败
+    // 任务列表getfailed
     #[ErrorMessage('task.list_failed')]
     case TASK_LIST_FAILED = 8007;
 
-    // 任务获取失败
+    // 任务getfailed
     #[ErrorMessage('task.get_failed')]
     case TASK_GET_FAILED = 8008;
 

@@ -57,7 +57,7 @@ abstract class AbstractDocumentFileDTO extends AbstractDTO implements DocumentFi
     }
 
     /**
-     * 初始化文档类型.
+     * 初始化document类型.
      */
     abstract protected function initType(): DocumentFileType;
 }

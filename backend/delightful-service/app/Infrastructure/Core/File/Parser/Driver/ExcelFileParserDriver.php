@@ -131,16 +131,16 @@ class ExcelFileParserDriver implements ExcelFileParserDriverInterface
     }
 
     /**
-     * 格式化CSV单元格内容，对特殊内容添加引号.
+     * 格式化CSV单元格content，对特殊content添加引号.
      */
     private function formatCsvCell(string $value): string
     {
-        // 如果单元格内容为空，直接返回空字符串
+        // 如果单元格content为空，直接return空字符串
         if ($value === '') {
             return '';
         }
 
-        // 如果单元格内容包含以下任意字符，需要用引号包围
+        // 如果单元格content包含以下任意字符，需要用引号包围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

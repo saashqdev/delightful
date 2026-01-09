@@ -36,7 +36,7 @@ class BingInternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'Bing互联网搜索';
+        return 'Bing互联网search';
     }
 
     public function getCallback(): ?Closure
@@ -79,8 +79,8 @@ class BingInternetSearchBuiltInTool extends AbstractBuiltInTool
         "search_keyword": {
             "type": "string",
             "key": "search_keyword",
-            "title": "搜索词",
-            "description": "搜索词",
+            "title": "search词",
+            "description": "search词",
             "required": null,
             "value": null,
             "encryption": false,
@@ -91,8 +91,8 @@ class BingInternetSearchBuiltInTool extends AbstractBuiltInTool
         "result_count": {
             "type": "integer",
             "key": "result_count",
-            "title": "返回结果数量",
-            "description": "返回结果数量",
+            "title": "return结果数量",
+            "description": "return结果数量",
             "required": null,
             "value": null,
             "encryption": false,
@@ -128,8 +128,8 @@ JSON,
         "clear_search": {
             "type": "array",
             "key": "clear_search",
-            "title": "搜索结果",
-            "description": "搜索结果",
+            "title": "search结果",
+            "description": "search结果",
             "required": null,
             "value": null,
             "encryption": false,

@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace App\Infrastructure\Util;
 
 /**
- * 官方组织工具类
- * 统一管理官方组织相关的配置和判断逻辑.
+ * 官方organizationtool类
+ * 统一管理官方organization相关的configuration和判断逻辑.
  */
 class OfficialOrganizationUtil
 {
     /**
-     * 获取官方组织编码
+     * get官方organization编码
      */
     public static function getOfficialOrganizationCode(): string
     {
@@ -22,7 +22,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * 判断是否为官方组织.
+     * 判断是否为官方organization.
      */
     public static function isOfficialOrganization(string $organizationCode): bool
     {
@@ -30,9 +30,9 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * 获取包含官方组织在内的组织编码数组.
-     * @param string $currentOrganizationCode 当前组织编码
-     * @return array 去重后的组织编码数组
+     * get包含官方organization在内的organization编码数组.
+     * @param string $currentOrganizationCode 当前organization编码
+     * @return array 去重后的organization编码数组
      */
     public static function getOrganizationCodesWithOfficial(string $currentOrganizationCode): array
     {
@@ -41,7 +41,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * 检查官方组织编码是否已配置.
+     * 检查官方organization编码是否已configuration.
      */
     public static function hasOfficialOrganization(): bool
     {

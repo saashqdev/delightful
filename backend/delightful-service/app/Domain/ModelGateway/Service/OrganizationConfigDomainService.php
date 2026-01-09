@@ -22,7 +22,7 @@ class OrganizationConfigDomainService extends AbstractDomainService
     {
         $organizationConfig = $this->organizationConfigRepository->getByAppCodeAndOrganizationCode($dataIsolation, $appCode, $organizationCode);
         if (! $organizationConfig) {
-            // 创建一个
+            // createone
             $organizationConfig = new OrganizationConfigEntity();
             $organizationConfig->setAppCode($appCode);
             $organizationConfig->setOrganizationCode($organizationCode);

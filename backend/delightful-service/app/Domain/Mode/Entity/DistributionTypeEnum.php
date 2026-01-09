@@ -10,28 +10,28 @@ namespace App\Domain\Mode\Entity;
 enum DistributionTypeEnum: int
 {
     /**
-     * 独立配置模式.
+     * 独立configuration模式.
      */
     case INDEPENDENT = 1;
 
     /**
-     * 继承配置模式.
+     * 继承configuration模式.
      */
     case INHERITED = 2;
 
     /**
-     * 获取描述.
+     * getdescription.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::INDEPENDENT => '独立配置',
-            self::INHERITED => '继承配置',
+            self::INDEPENDENT => '独立configuration',
+            self::INHERITED => '继承configuration',
         };
     }
 
     /**
-     * 获取英文标识.
+     * get英文标识.
      */
     public function getIdentifier(): string
     {
@@ -42,7 +42,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 是否为独立配置.
+     * 是否为独立configuration.
      */
     public function isIndependent(): bool
     {
@@ -50,7 +50,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 是否为继承配置.
+     * 是否为继承configuration.
      */
     public function isInherited(): bool
     {
@@ -58,7 +58,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 获取所有类型.
+     * get所有type.
      */
     public static function getAllTypes(): array
     {
@@ -69,7 +69,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 从值创建枚举.
+     * 从值create枚举.
      */
     public static function fromValue(int $value): self
     {
@@ -77,7 +77,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 获取选项数组（用于前端展示）.
+     * get选项数组（用于前端展示）.
      */
     public static function getOptions(): array
     {

@@ -59,8 +59,8 @@ class EasyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "questions": {
                 "type": "array",
                 "key": "questions",
-                "title": "用户问题列表",
-                "description": "用户问题列表",
+                "title": "user问题列表",
+                "description": "user问题列表",
                 "required": null,
                 "value": {
                     "type": "expression",
@@ -163,10 +163,10 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # 角色
-互联网搜索助手
+互联网search助手
 
 ## 流程
-调用`easy_internet_search`进行搜索
+调用`easy_internet_search`进行search
 
 MARKDOWN,
 

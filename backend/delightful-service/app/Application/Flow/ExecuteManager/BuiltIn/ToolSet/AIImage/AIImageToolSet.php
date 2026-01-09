@@ -21,11 +21,11 @@ class AIImageToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return 'MageAI文生图工具合集';
+        return 'MageAI文生图tool合集';
     }
 
     public function getDescription(): string
     {
-        return 'MageAI文生图工具合集';
+        return 'MageAI文生图tool合集';
     }
 }

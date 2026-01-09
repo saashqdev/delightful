@@ -26,16 +26,16 @@ return new class extends Migration {
 
             // 同步相关字段
             if (! Schema::hasColumn('delightful_organizations', 'sync_type')) {
-                $table->string('sync_type', 32)->default('')->comment('同步类型')->after('seats');
+                $table->string('sync_type', 32)->default('')->comment('同步type')->after('seats');
             }
             if (! Schema::hasColumn('delightful_organizations', 'sync_status')) {
-                $table->tinyInteger('sync_status')->default(0)->comment('同步状态')->after('sync_type');
+                $table->tinyInteger('sync_status')->default(0)->comment('同步status')->after('sync_type');
             }
             if (! Schema::hasColumn('delightful_organizations', 'sync_time')) {
                 $table->timestamp('sync_time')->nullable()->comment('同步时间')->after('sync_status');
             }
 
-            // 索引：type（组织类型）
+            // 索引：type（organizationtype）
             $table->index('type', 'idx_delightful_org_type');
         });
     }
@@ -50,7 +50,7 @@ return new class extends Migration {
         }
 
         Schema::table('delightful_organizations', function (Blueprint $table) {
-            // 先删除索引
+            // 先delete索引
             try {
                 $table->dropIndex('idx_delightful_org_sync');
             } catch (Throwable) {
@@ -61,7 +61,7 @@ return new class extends Migration {
             } catch (Throwable) {
             }
 
-            // 删除字段
+            // delete字段
             if (Schema::hasColumn('delightful_organizations', 'sync_time')) {
                 $table->dropColumn('sync_time');
             }

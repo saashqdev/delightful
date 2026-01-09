@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\LongTermMemory\Entity\ValueObject;
 
 /**
- * 记忆状态枚举.
+ * 记忆status枚举.
  */
 enum MemoryStatus: string
 {
@@ -17,7 +17,7 @@ enum MemoryStatus: string
     case PENDING_REVISION = 'pending_revision'; // 待修订（记忆已被接受，但pending_content不为空）
 
     /**
-     * 获取状态描述.
+     * getstatusdescription.
      */
     public function getDescription(): string
     {
@@ -29,7 +29,7 @@ enum MemoryStatus: string
     }
 
     /**
-     * 获取所有状态值.
+     * get所有status值.
      */
     public static function getAllValues(): array
     {
@@ -37,7 +37,7 @@ enum MemoryStatus: string
     }
 
     /**
-     * 检查状态是否有效.
+     * 检查status是否有效.
      */
     public static function isValid(string $status): bool
     {

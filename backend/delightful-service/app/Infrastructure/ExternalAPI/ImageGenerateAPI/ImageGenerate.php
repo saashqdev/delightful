@@ -26,19 +26,19 @@ interface ImageGenerate
     public const IMAGE_GENERATE_POLL_KEY_PREFIX = 'poll:';
 
     /**
-     * 生成图像并返回标准格式的响应.
+     * 生成图像并return标准格式的响应.
      */
     public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * 生成图像并返回第三方原生格式的数据.
+     * 生成图像并return第third-party原生格式的data.
      */
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array;
 
     public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
     /**
-     * 生成图像并返回OpenAI格式响应.
+     * 生成图像并returnOpenAI格式响应.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse;
 

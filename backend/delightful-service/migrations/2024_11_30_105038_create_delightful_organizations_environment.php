@@ -16,11 +16,11 @@ return new class extends Migration {
     {
         Schema::create('delightful_organizations_environment', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('login_code', 32)->comment('登录码，用于关联组织和环境，可以在登录时手动填写。长度较短，便于记忆');
-            $table->string('delightful_organization_code', 32)->comment('麦吉组织 code');
-            $table->string('origin_organization_code', 32)->comment('原始组织 code');
+            $table->string('login_code', 32)->comment('登录码，用于关联organization和环境，可以在登录时手动填写。长度较短，便于记忆');
+            $table->string('delightful_organization_code', 32)->comment('麦吉organization code');
+            $table->string('origin_organization_code', 32)->comment('原始organization code');
             // 环境id
-            $table->unsignedBigInteger('environment_id')->comment('delightful_environment表的id。表明这个组织要使用哪个环境');
+            $table->unsignedBigInteger('environment_id')->comment('delightful_environment表的id。表明这个organization要使用哪个环境');
             $table->unique('login_code', 'idx_login_code');
             $table->unique('delightful_organization_code', 'idx_delightful_organization_code');
             $table->timestamps();

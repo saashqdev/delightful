@@ -11,7 +11,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class UserExtra extends AbstractEntity
 {
-    // 第三方平台的属性，平台类型参见 ThirdPlatformTypeEnum
+    // 第third-party平台的属性，平台类型参见 ThirdPlatformTypeEnum
     // eg. {
     //        "dingtalk": {
     //            "userid": "1",

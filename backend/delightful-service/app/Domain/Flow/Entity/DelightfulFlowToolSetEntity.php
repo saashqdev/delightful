@@ -21,22 +21,22 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一编码，仅在创建时生成，用作给前端的id.
+     * 唯一编码，仅在create时生成，用作给前端的id.
      */
     protected string $code;
 
     /**
-     * 工具集名称.
+     * tool集名称.
      */
     protected string $name;
 
     /**
-     * 工具集描述.
+     * tool集description.
      */
     protected string $description = '';
 
     /**
-     * 工具集图标.
+     * tool集图标.
      */
     protected string $icon = '';
 
@@ -51,8 +51,8 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected DateTime $updatedAt;
 
     /**
-     * 用于冗余工具的信息列表.
-     * with 查询.
+     * 用于冗余tool的information列表.
+     * with query.
      */
     private array $tools = [];
 

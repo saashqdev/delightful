@@ -55,7 +55,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 根据分组ID获取分组聚合根.
+     * 根据分组IDget分组聚合根.
      */
     public function getGroupAggregateByGroupId(string $groupId): ?ModeGroupAggregateDTO
     {
@@ -80,7 +80,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 获取所有模型ID.
+     * get所有模型ID.
      *
      * @return string[]
      */
@@ -94,7 +94,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 获取分组数量.
+     * get分组数量.
      */
     public function getGroupCount(): int
     {
@@ -102,7 +102,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 获取总模型数量.
+     * get总模型数量.
      */
     public function getTotalModelCount(): int
     {

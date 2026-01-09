@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity;
 
 /**
- * 话题所属的消息.
+ * 话题所属的message.
  */
 final class DelightfulTopicMessageEntity extends AbstractEntity
 {

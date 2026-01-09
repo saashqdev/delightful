@@ -14,7 +14,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 
 abstract class AbstractDocumentFile extends AbstractValueObject implements DocumentFileInterface
 {
-    public string $name = '未命名文档';
+    public string $name = '未命名document';
 
     public ?int $docType = null;
 
@@ -80,7 +80,7 @@ abstract class AbstractDocumentFile extends AbstractValueObject implements Docum
     }
 
     /**
-     * 初始化文档类型.
+     * 初始化document类型.
      */
     abstract protected function initType(): DocumentFileType;
 }

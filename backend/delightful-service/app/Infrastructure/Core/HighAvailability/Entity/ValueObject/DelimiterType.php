@@ -10,17 +10,17 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * 分隔符类型枚举.
+ * 分隔符type枚举.
  */
 enum DelimiterType: string
 {
     /**
-     * 高可用应用类型+模型类型+组织编码的分隔符.
+     * 高可用应用type+模型type+organization编码的分隔符.
      */
     case HIGH_AVAILABILITY = '||';
 
     /**
-     * 获取所有分隔符类型值数组.
+     * get所有分隔符type值数组.
      */
     public static function values(): array
     {
@@ -30,7 +30,7 @@ enum DelimiterType: string
     }
 
     /**
-     * 检查是否是有效的分隔符类型.
+     * 检查是否是有效的分隔符type.
      */
     public static function isValid(string $type): bool
     {
@@ -38,13 +38,13 @@ enum DelimiterType: string
     }
 
     /**
-     * 从字符串创建枚举实例.
+     * 从字符串create枚举实例.
      */
     public static function fromString(string $type): self
     {
         return match ($type) {
             self::HIGH_AVAILABILITY->value => self::HIGH_AVAILABILITY,
-            default => throw new InvalidArgumentException("无效的分隔符类型: {$type}"),
+            default => throw new InvalidArgumentException("无效的分隔符type: {$type}"),
         };
     }
 }

@@ -52,7 +52,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
         $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
         $contentMessage = $currentMessage = null;
-        // 尝试在记忆中找到 content 消息
+        // 尝试在记忆中找到 content message
         foreach ($memoryManager->getMessages() as $message) {
             if ($message->getIdentifier() === $contentMessageId) {
                 $contentMessage = $message;
@@ -68,7 +68,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     // 仅仅添加附件
                     $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                     if ($imageUrls) {
-                        // 有content且有附件，添加文本和图片内容
+                        // 有content且有附件，添加文本和imagecontent
                         $contentMessage->addContent(UserMessageContent::text($userPrompt));
                         foreach ($imageUrls as $imageUrl) {
                             $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));
@@ -77,7 +77,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $memoryManager->addMessage($contentMessage);
                 }
             } else {
-                // 创建一个新的，在后续使用
+                // createone新的，在后续使用
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
             }

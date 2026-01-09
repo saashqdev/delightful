@@ -22,9 +22,9 @@ class RedisLocker implements LockerInterface
     }
 
     /**
-     * 获取互斥锁
+     * get互斥锁
      * @param string $name 锁的名称，指定锁的名称
-     * @param string $owner 锁的所有者，指定锁的唯一标识，避免错误释放
+     * @param string $owner 锁的所有者，指定锁的唯一标识，避免error释放
      * @param int $expire 过期时间，秒
      */
     public function mutexLock(string $name, string $owner, int $expire = 180): bool
@@ -39,7 +39,7 @@ class RedisLocker implements LockerInterface
     /**
      * 自旋锁
      * @param string $name 锁的名称，指定锁的名称
-     * @param string $owner 锁的所有者，指定锁的唯一标识，避免错误释放
+     * @param string $owner 锁的所有者，指定锁的唯一标识，避免error释放
      * @param int $expire 过期时间，秒
      */
     public function spinLock(string $name, string $owner, int $expire = 10): bool

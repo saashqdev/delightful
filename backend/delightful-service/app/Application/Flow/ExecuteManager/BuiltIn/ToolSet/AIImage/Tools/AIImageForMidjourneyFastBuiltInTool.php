@@ -27,7 +27,7 @@ class AIImageForMidjourneyFastBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图工具-Midjourney-Fast模型';
+        return '文生图tool-Midjourney-Fast模型';
     }
 
     public function getCallback(): ?Closure

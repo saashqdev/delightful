@@ -24,7 +24,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采用一个 seq 推送所有的搜索相关内容，前端不再多个 seq 合并成一个渲染.
+ * 采用one seq 推送所有的search相关content，前端不再多个 seq 合并成one渲染.
  */
 class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {
@@ -40,7 +40,7 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网搜索，批量对用户的多个含义相同或者不同的问题进行互联网搜索。';
+        return '麦吉互联网search，批量对user的多个含义相同或者不同的问题进行互联网search。';
     }
 
     public function getCallback(): ?Closure
@@ -91,8 +91,8 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "questions": {
             "type": "array",
             "key": "questions",
-            "title": "用户问题列表",
-            "description": "用户问题列表",
+            "title": "user问题列表",
+            "description": "user问题列表",
             "required": null,
             "value": null,
             "encryption": false,
@@ -115,8 +115,8 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "use_deep_search": {
             "type": "boolean",
             "key": "use_deep_search",
-            "title": "是否使用深度搜索",
-            "description": "是否使用深度搜索",
+            "title": "是否使用深度search",
+            "description": "是否使用深度search",
             "required": null,
             "value": null,
             "encryption": false,

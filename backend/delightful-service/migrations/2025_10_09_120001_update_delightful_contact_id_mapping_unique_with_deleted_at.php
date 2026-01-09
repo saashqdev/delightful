@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_contact_third_platform_id_mapping', static function (Blueprint $table) {
-            // 调整唯一索引以包含 deleted_at，避免软删除记录造成的唯一约束冲突
+            // 调整唯一索引以包含 deleted_at，避免软delete记录造成的唯一约束冲突
             $table->dropIndex('unique_env_origin_mapping_type_third_type_org_code');
             $table->unique(
                 ['delightful_environment_id', 'origin_id', 'mapping_type', 'third_platform_type', 'delightful_organization_code', 'deleted_at'],

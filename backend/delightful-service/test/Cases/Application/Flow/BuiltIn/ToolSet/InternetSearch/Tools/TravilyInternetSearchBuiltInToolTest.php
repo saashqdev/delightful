@@ -59,8 +59,8 @@ class TravilyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "search_keyword": {
                 "type": "string",
                 "key": "search_keyword",
-                "title": "用户搜索词",
-                "description": "用户搜索词",
+                "title": "usersearch词",
+                "description": "usersearch词",
                 "required": null,
                 "value": {
                     "type": "const",

@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * 部门成员求和类型。
+ * department成员求和type。
  */
 enum DepartmentSumType: int
 {
-    // 1：返回部门直属用户总数，
+    // 1：returndepartment直属user总数，
     case DirectEmployee = 1;
 
-    // 2：返回本部门 + 所有子部门用户总数
+    // 2：return本department + 所有子departmentuser总数
     case All = 2;
 }

@@ -11,7 +11,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * 笔记DTO
- * 用于ASR总结中的笔记信息.
+ * 用于ASR总结中的笔记information.
  */
 readonly class NoteDTO
 {
@@ -22,17 +22,17 @@ readonly class NoteDTO
     }
 
     /**
-     * 验证文件类型是否有效.
+     * 验证文件type是否有效.
      */
     public function isValidFileType(): bool
     {
-        // 支持的文件类型
+        // 支持的文件type
         $supportedTypes = ['txt', 'md', 'json'];
         return in_array(strtolower($this->fileExtension), $supportedTypes, true);
     }
 
     /**
-     * 获取文件扩展名.
+     * get文件扩展名.
      */
     public function getFileExtension(): string
     {
@@ -56,7 +56,7 @@ readonly class NoteDTO
     }
 
     /**
-     * 检查是否有内容.
+     * 检查是否有content.
      */
     public function hasContent(): bool
     {
@@ -64,7 +64,7 @@ readonly class NoteDTO
     }
 
     /**
-     * 从数组创建实例.
+     * 从数组create实例.
      *
      * @param array $data 包含content和file_type的数组
      */

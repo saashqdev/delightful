@@ -33,7 +33,7 @@ class MCPUserSettingRepository extends MCPAbstractRepository implements MCPUserS
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPUserSettingEntity> 返回以id为key的实体对象数组
+     * @return array<int, MCPUserSettingEntity> return以id为key的实体对象数组
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array
     {

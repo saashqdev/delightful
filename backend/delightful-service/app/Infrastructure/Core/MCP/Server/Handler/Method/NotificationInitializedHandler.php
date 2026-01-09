@@ -16,7 +16,7 @@ class NotificationInitializedHandler extends AbstractMethodHandler
 {
     /**
      * 处理通知初始化请求.
-     * 不需要返回数据.
+     * 不需要return数据.
      */
     public function handle(MessageInterface $request): ?array
     {

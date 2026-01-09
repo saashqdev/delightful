@@ -29,7 +29,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         return function (ExecutionData $executionData) {
             $params = $executionData->getTriggerData()->getParams();
             $senderUserId = $executionData->getAgentUserId();
-            // 助手发送消息
+            // 助手发送message
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();
@@ -47,7 +47,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
                 receiverType: $receiverType
             );
             return [
-                'message' => '发送消息成功',
+                'message' => '发送messagesuccess',
             ];
         };
     }
@@ -64,7 +64,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '发送消息给群组';
+        return '发送message给群组';
     }
 
     public function getInput(): ?NodeInput
@@ -105,8 +105,8 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         "content": {
             "type": "string",
             "key": "content",
-            "title": "消息内容",
-            "description": "消息内容",
+            "title": "messagecontent",
+            "description": "messagecontent",
             "required": null,
             "value": null,
             "encryption": false,
@@ -166,8 +166,8 @@ JSON,
    "interval": {
        "type": "number",
        "key": "interval",
-       "title": "失败重试次数",
-       "description": "失败重试次数",
+       "title": "failed重试次数",
+       "description": "failed重试次数",
        "required": null,
        "value": null,
        "encryption": false,

@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            // 删除旧的唯一索引
+            // delete旧的唯一索引
             $table->dropUnique('unique_code_version');
 
             // 添加新的唯一索引
@@ -29,7 +29,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            // 删除新的唯一索引
+            // delete新的唯一索引
             $table->dropUnique('unique_code_version');
 
             // 恢复旧的唯一索引

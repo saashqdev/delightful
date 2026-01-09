@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\File\DTO;
 
 /**
- * 云存储文件信息DTO.
+ * 云存储文件informationDTO.
  */
 readonly class CloudFileInfoDTO
 {
@@ -21,7 +21,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 获取文件key.
+     * get文件key.
      */
     public function getKey(): string
     {
@@ -29,7 +29,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 获取文件名.
+     * get文件名.
      */
     public function getFilename(): string
     {
@@ -37,7 +37,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 获取文件大小.
+     * get文件大小.
      */
     public function getSize(): ?int
     {
@@ -45,7 +45,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 获取最后修改时间.
+     * get最后modification time.
      */
     public function getLastModified(): ?string
     {
@@ -53,7 +53,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 从数组创建DTO.
+     * 从数组createDTO.
      */
     public static function fromArray(array $data): self
     {

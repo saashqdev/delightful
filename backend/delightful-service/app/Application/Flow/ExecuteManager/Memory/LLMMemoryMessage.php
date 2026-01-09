@@ -23,17 +23,17 @@ use Hyperf\Odin\Message\UserMessageContent;
 class LLMMemoryMessage
 {
     /**
-     * @var Role 消息角色
+     * @var Role message角色
      */
     private Role $role;
 
     /**
-     * @var string 消息文本内容
+     * @var string message文本content
      */
     private string $textContent;
 
     /**
-     * @var string 消息ID
+     * @var string messageID
      */
     private string $messageId;
 
@@ -45,17 +45,17 @@ class LLMMemoryMessage
     private array $attachments = [];
 
     /**
-     * @var string 原始消息分析结果(多模态分析)
+     * @var string 原始message分析结果(多模态分析)
      */
     private string $analysisResult = '';
 
     /**
-     * @var array 原始消息内容
+     * @var array 原始messagecontent
      */
     private array $originalContent = [];
 
     /**
-     * @var string 会话ID
+     * @var string conversationID
      */
     private string $conversationId = '';
 
@@ -66,7 +66,7 @@ class LLMMemoryMessage
     private string $requestId = '';
 
     /**
-     * @var string 消息类型字符串
+     * @var string messagetype字符串
      */
     private string $messageTypeString = '';
 
@@ -129,13 +129,13 @@ class LLMMemoryMessage
             $textContent = $messageContent->getTextContent();
         }
 
-        // 获取附件
+        // get附件
         $attachments = AttachmentUtil::getByDelightfulMessageEntity($delightfulMessageEntity);
         if ($textContent === '' && empty($attachments)) {
             return null;
         }
 
-        // 根据消息类型创建对应的消息
+        // 根据messagetypecreate对应的message
         $messageType = $delightfulMessageEntity->getSenderType() ?? ConversationType::Ai;
         $role = ($messageType === ConversationType::Ai) ? Role::Assistant : Role::User;
 
@@ -154,15 +154,15 @@ class LLMMemoryMessage
 
         $content = $delightfulFlowMemoryHistoryEntity->getContent();
 
-        // 获取文本内容
+        // get文本content
         $textContent = $content['text']['content'] ?? '';
 
-        // 创建自定义消息
+        // create自定义message
         $customMessage = new LLMMemoryMessage($role, $textContent, $delightfulFlowMemoryHistoryEntity->getMessageId());
         $customMessage->setConversationId($delightfulFlowMemoryHistoryEntity->getConversationId());
         $customMessage->setOriginalContent($content);
 
-        // 设置消息类型
+        // settingmessagetype
         $customMessage->setMessageTypeString($content['type'] ?? '');
 
         // 处理附件

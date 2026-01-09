@@ -39,7 +39,7 @@ class EndNodeRunner extends NodeRunner
         $vertexResult->setResult($result);
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
 
-        // 动态设置结束节点 id
+        // 动态setting结束节点 id
         $executionData->getDelightfulFlowEntity()?->setEndNode($this->node);
     }
 }

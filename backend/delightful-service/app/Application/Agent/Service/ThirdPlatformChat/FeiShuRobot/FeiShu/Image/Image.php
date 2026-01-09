@@ -21,21 +21,21 @@ class Image implements ProviderInterface
     }
 
     /**
-     * 上传图片.
+     * uploadimage.
      *
-     * @param string $imageUrl 图片URL
-     * @param string $imageType 图片类型，可选值：message、avatar
-     * @return string 图片key
+     * @param string $imageUrl imageURL
+     * @param string $imageType imagetype，可选值：message、avatar
+     * @return string imagekey
      */
     public function uploadByUrl(string $imageUrl, string $imageType = 'message'): string
     {
-        // 下载图片内容
+        // 下载imagecontent
         $imageContent = file_get_contents($imageUrl);
         if ($imageContent === false) {
             return '';
         }
 
-        // 获取图片类型
+        // getimagetype
         $imageInfo = getimagesizefromstring($imageContent);
         $mimeType = $imageInfo['mime'] ?? 'image/jpeg';
 
@@ -66,9 +66,9 @@ class Image implements ProviderInterface
     }
 
     /**
-     * 根据MIME类型获取文件扩展名.
+     * 根据MIMEtypeget文件扩展名.
      *
-     * @param string $mimeType MIME类型
+     * @param string $mimeType MIMEtype
      * @return string 文件扩展名
      */
     private function getExtensionFromMimeType(string $mimeType): string

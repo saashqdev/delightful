@@ -30,7 +30,7 @@ class AvailableAgentDTO extends AbstractDTO
     public string $description;
 
     /**
-     * 创建时间.
+     * create时间.
      */
     public ?string $createdAt = null;
 

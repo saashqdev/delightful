@@ -31,7 +31,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 #[FlowNodeDefine(
     type: NodeType::CreateGroup->value,
     code: NodeType::CreateGroup->name,
-    name: '创建群聊',
+    name: 'create群聊',
     paramsConfig: CreateGroupNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -61,14 +61,14 @@ class CreateGroupNodeRunner extends NodeRunner
         $groupOwnerId = $groupOwner[0]['id'] ?? ($groupOwner[0]['user_id'] ?? '');
         $vertexResult->addDebugLog('group_owner', $groupOwnerId);
 
-        // 获取 owner 的用户信息
+        // get owner 的userinformation
         $groupOwnerInfo = di(DelightfulUserDomainService::class)->getUserById($groupOwnerId);
         if (! $groupOwnerInfo) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'common.not_found', ['label' => 'group_owner']);
         }
         $vertexResult->addDebugLog('group_owner_delightful_id', $groupOwnerInfo->getDelightfulId());
 
-        // 群成员，全是用户 ID
+        // 群成员，全是user ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
         $groupMemberIds = [];
         foreach ($groupMembers as $groupMember) {
@@ -98,7 +98,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $vertexResult->addDebugLog('group_members', $groupMemberIds);
         $vertexResult->addDebugLog('assistant_opening_speech', $assistantOpeningSpeech);
 
-        // 只有 IM 聊天才会创建
+        // 只有 IM 聊天才会create
         if (! $executionData->getExecutionType()->isImChat()) {
             $delightfulGroup = [
                 'group_id' => 'test_group_id',
@@ -110,7 +110,7 @@ class CreateGroupNodeRunner extends NodeRunner
             return;
         }
 
-        // 以 owner 的身份去创建
+        // 以 owner 的身份去create
         $ownerAuthorization = new DelightfulUserAuthorization();
         $ownerAuthorization->setId($groupOwnerInfo->getUserId());
         $ownerAuthorization->setOrganizationCode($groupOwnerInfo->getOrganizationCode());
@@ -123,12 +123,12 @@ class CreateGroupNodeRunner extends NodeRunner
         $delightfulGroupDTO->setGroupType($groupType);
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
-        // 通过 会话ID 获取来源 和 助理 key，并创建群聊
+        // 通过 conversationID get来源 和 助理 key，并create群聊
         $agentKey = $executionData->getTriggerData()->getAgentKey();
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 
         if (! empty($assistantOpeningSpeech)) {
-            // 助手发送群聊消息
+            // 助手发送群聊message
             $assistantMessage = new TextMessage(['content' => $assistantOpeningSpeech]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();

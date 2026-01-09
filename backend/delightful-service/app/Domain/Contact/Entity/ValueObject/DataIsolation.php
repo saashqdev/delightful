@@ -11,24 +11,24 @@ use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Infrastructure\Core\AbstractObject;
 
 /**
- * 数据隔离 SaaS化
- * 目前仅有组织隔离
+ * data隔离 SaaS化
+ * 目前仅有organization隔离
  * 显式传入，防止隐式传入，导致不知道哪些地方需要做隔离.
  */
 class DataIsolation extends AbstractObject
 {
     /**
-     * 当前的账号id. 所有账号统一注意隐私保护,不对第三方返回.
+     * 当前的账号id. 所有账号统一注意隐私保护,不对第third-partyreturn.
      */
     protected string $currentDelightfulId = '';
 
     /**
-     * 当前的组织编码.
+     * 当前的organization编码.
      */
     protected string $currentOrganizationCode = '';
 
     /**
-     * 当前的组织下的用户id.
+     * 当前的organization下的userid.
      */
     protected ?string $currentUserId = null;
 
@@ -43,7 +43,7 @@ class DataIsolation extends AbstractObject
     protected ?string $currentAppId = null;
 
     /**
-     * 第三方平台组织编码.
+     * 第third-party平台organization编码.
      */
     protected ?string $thirdPartyOrganizationCode = null;
 

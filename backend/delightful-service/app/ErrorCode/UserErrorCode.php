@@ -51,15 +51,15 @@ enum UserErrorCode: int
     case ACCOUNT_REPEAT_BIND_PARTNER = 2172;
     case ACCOUNT_REPEAT_BIND_STAFF = 2173;
 
-    // 用户创建太频繁
+    // usercreate太频繁
     #[ErrorMessage('user.create_user_too_frequently')]
     case CREATE_USER_TOO_FREQUENTLY = 2174;
 
-    // 创建id关联关系太频繁
+    // createid关联关系太频繁
     #[ErrorMessage('user.create_id_relation_too_frequently')]
     case CREATE_ID_RELATION_TOO_FREQUENTLY = 2175;
 
-    // 手机号异常
+    // 手机号exception
     #[ErrorMessage('user.phone_error')]
     case PHONE_ERROR = 2177;
 
@@ -70,27 +70,27 @@ enum UserErrorCode: int
     #[ErrorMessage('user.token_not_found')]
     case TOKEN_NOT_FOUND = 2179;
 
-    // 输入参数错误
+    // input参数error
     #[ErrorMessage('user.input_param_error')]
     case INPUT_PARAM_ERROR = 2180;
 
-    // 收件人类型异常
+    // 收件人typeexception
     #[ErrorMessage('user.receive_type_error')]
     case RECEIVE_TYPE_ERROR = 2181;
 
-    // 用户所在组织不存在
+    // user所在organization不存在
     #[ErrorMessage('user.organization_not_exist')]
     case ORGANIZATION_NOT_EXIST = 2182;
 
-    // 用户会话异常
+    // userconversationexception
     #[ErrorMessage('user.conversation_error')]
     case CONVERSATION_ERROR = 2183;
 
-    // 用户类型异常
+    // usertypeexception
     #[ErrorMessage('user.user_type_error')]
     case USER_TYPE_ERROR = 2184;
 
-    // 组织没有授权
+    // organization没有授权
     #[ErrorMessage('user.organization_not_authorize')]
     case ORGANIZATION_NOT_AUTHORIZE = 2185;
 }

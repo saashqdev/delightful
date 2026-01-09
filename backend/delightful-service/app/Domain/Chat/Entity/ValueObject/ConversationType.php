@@ -8,36 +8,36 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * 会话的消息类型.
+ * conversation的messagetype.
  */
 enum ConversationType: int
 {
-    // 与ai的会话(私聊)
+    // 与ai的conversation(私聊)
     case Ai = 0;
 
-    // 与人类的会话(私聊)
+    // 与人类的conversation(私聊)
     case User = 1;
 
     // 群聊
     case Group = 2;
 
-    // 系统消息
+    // 系统message
     case System = 3;
 
-    // 云文档
+    // 云document
     case CloudDocument = 4;
 
-    // 多维表格
+    // multidimensional table
     case MultidimensionalTable = 5;
 
     // 话题
     case Topic = 6;
 
-    // 应用消息
+    // 应用message
     case App = 7;
 
     /**
-     * 将枚举类型转换.
+     * 将枚举type转换.
      */
     public static function getCaseFromName(string $typeName): ?ConversationType
     {

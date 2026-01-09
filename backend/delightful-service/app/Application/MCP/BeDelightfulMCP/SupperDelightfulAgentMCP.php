@@ -182,7 +182,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
     }
 
     /**
-     * 获取项目的 MCP 服务器 ID 列table.
+     * get项目的 MCP 服务器 ID 列table.
      */
     private function getProjectMcpServerIds(MCPDataIsolation $mcpDataIsolation, string $projectId): array
     {
@@ -200,14 +200,14 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
     {
         $labelNames = [];
 
-        // 查询 agent information
+        // query agent information
         $agentDataIsolation = AgentDataIsolation::createByBaseDataIsolation($dataIsolation);
         $agentQuery = new DelightfulAgentQuery();
         $agentQuery->setIds($agentIds);
         $agents = $this->agentDomainService->queries($agentDataIsolation->disabled(), $agentQuery, Page::createNoPage())['list'] ?? [];
         $agentInfos = [];
 
-        // 查询 tool information
+        // query tool information
         $flowDataIsolation = FlowDataIsolation::createByBaseDataIsolation($dataIsolation);
         $flowQuery = new DelightfulFLowQuery();
         $flowQuery->setCodes($toolIds);

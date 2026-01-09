@@ -9,9 +9,9 @@ namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 
 enum SearchDeepLevel: int
 {
-    // 简单搜索
+    // 简单search
     case SIMPLE = 1;
 
-    // 深度搜索
+    // 深度search
     case DEEP = 2;
 }

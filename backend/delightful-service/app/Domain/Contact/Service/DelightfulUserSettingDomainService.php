@@ -26,7 +26,7 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * 获取全局配置.
+     * get全局configuration.
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
@@ -34,7 +34,7 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * 保存全局配置.
+     * 保存全局configuration.
      */
     public function saveGlobal(DelightfulUserSettingEntity $savingEntity): DelightfulUserSettingEntity
     {
@@ -69,11 +69,11 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * 通过 delightfulId 保存用户设置（跨组织）.
+     * 通过 delightfulId 保存usersetting（跨organization）.
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        // 获取现有记录以保持实体完整性
+        // get现有记录以保持实体完整性
         $existingEntity = $this->delightfulUserSettingRepository->getByDelightfulId($delightfulId, $delightfulUserSettingEntity->getKey());
 
         if ($existingEntity) {
@@ -86,7 +86,7 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * 通过 delightfulId 获取用户设置（跨组织）.
+     * 通过 delightfulId getusersetting（跨organization）.
      */
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity
     {

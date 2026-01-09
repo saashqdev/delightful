@@ -31,7 +31,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
         $update = [
             'status' => $delightfulFlowExecuteLogEntity->getStatus()->value,
         ];
-        // 如果是完成状态，记录结果
+        // 如果是完成status，记录结果
         if ($delightfulFlowExecuteLogEntity->getStatus()->isFinished()) {
             $update['result'] = json_encode($delightfulFlowExecuteLogEntity->getResult(), JSON_UNESCAPED_UNICODE);
         }
@@ -52,7 +52,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
             ->where('level', 0)
             // 重试次数小于 3 次
             ->where('retry_count', '<', 1)
-            // 只获取最近 2 小时内的数据，超过 2 小时的数据不再处理
+            // 只get最近 2 小时内的data，超过 2 小时的data不再处理
             ->where('created_at', '>', date('Y-m-d H:i:s', time() - 7200))
             ->where('created_at', '<', date('Y-m-d H:i:s', time() - $timeout))
             ->forPage($page->getPage(), $page->getPageNum());
@@ -71,7 +71,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
         }
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
         if (strlen($executeId) === 18 && is_numeric($executeId)) {
-            // 主键查询
+            // primary keyquery
             $model = $builder->where('id', $executeId)->first();
         } else {
             $model = $builder->where('execute_data_id', $executeId)->first();

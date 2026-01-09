@@ -19,7 +19,7 @@ interface DelightfulFlowMultiModalLogRepositoryInterface
     public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?DelightfulFlowMultiModalLogEntity;
 
     /**
-     * 批量获取多个消息ID对应的多模态日志记录.
+     * 批量get多个messageID对应的多模态日志记录.
      *
      * @param array<string> $messageIds
      * @return array<DelightfulFlowMultiModalLogEntity>

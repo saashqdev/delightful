@@ -213,12 +213,12 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         // 构建Flash语音识别请求
         $submitDTO = new FlashSpeechSubmitDTO();
 
-        // 设置音频信息
+        // setting音频information
         $audioDTO = new SpeechAudioDTO([
             'url' => $fileUrl,
         ]);
 
-        // 设置用户信息
+        // settinguserinformation
         $userDTO = new SpeechUserDTO([
             'uid' => config('asr.volcengine.app_id'),
         ]);
@@ -227,7 +227,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         $submitDTO->setUser($userDTO);
         $submitDTO->setRequest(['model_name' => 'bigmodel']);
 
-        // 调用Flash语音识别并获取响应
+        // 调用Flash语音识别并get响应
         $flashResponse = $speechClient->submitFlashTask($submitDTO);
 
         // If response contains audio duration info, set it to current object (convert to seconds)
@@ -236,7 +236,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
             $this->setDuration((int) ceil($audioDuration / 1000)); // Convert milliseconds to seconds, round up
         }
 
-        // 提取并返回文本内容
+        // 提取并return文本content
         return $flashResponse->extractTextContent();
     }
 
@@ -255,7 +255,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
             $chatFileRepository = $container->get(DelightfulChatFileRepositoryInterface::class);
             $cloudFileRepository = $container->get(CloudFileRepositoryInterface::class);
 
-            // 获取文件实体
+            // get文件实体
             $fileEntities = $chatFileRepository->getChatFileByIds([$fileId]);
             if (empty($fileEntities)) {
                 return '';
@@ -268,7 +268,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
                 return $fileEntity->getExternalUrl();
             }
 
-            // 通过CloudFile Repository获取URL
+            // 通过CloudFile RepositorygetURL
             if (! empty($fileEntity->getFileKey()) && ! empty($fileEntity->getOrganizationCode())) {
                 $fileLinks = $cloudFileRepository->getLinks(
                     $fileEntity->getOrganizationCode(),

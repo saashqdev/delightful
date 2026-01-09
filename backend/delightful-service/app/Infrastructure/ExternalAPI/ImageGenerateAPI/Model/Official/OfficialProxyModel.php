@@ -52,7 +52,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             $officialProxyRequest = $imageGenerateRequest;
             $data = $officialProxyRequest->toArray();
 
-            $this->logger->info('官方代理：发送图片生成请求', [
+            $this->logger->info('官方代理：发送image生成请求', [
                 'url' => $fullUrl,
                 'data' => $data,
             ]);
@@ -75,7 +75,7 @@ class OfficialProxyModel extends AbstractImageGenerate
 
             $responseData = Json::decode($responseBody);
 
-            $this->logger->info('官方代理：请求成功', [
+            $this->logger->info('官方代理：请求success', [
                 'url' => $this->url,
                 'data_count' => count($responseData['data'] ?? []),
             ]);
@@ -84,7 +84,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             return new OpenAIFormatResponse($responseData);
         } catch (GuzzleException $e) {
             $errorBody = '';
-            // 尝试获取响应体
+            // 尝试get响应体
             try {
                 if ($e instanceof RequestException && $e->hasResponse()) {
                     $errorBody = $e->getResponse()->getBody()->getContents();
@@ -94,20 +94,20 @@ class OfficialProxyModel extends AbstractImageGenerate
                 $errorBody = 'Failed to read response body: ' . $bodyException->getMessage();
             }
 
-            $this->logger->error('官方代理：请求失败', [
+            $this->logger->error('官方代理：请求failed', [
                 'url' => $fullUrl,
                 'error' => $e->getMessage(),
                 'code' => $e->getCode(),
                 'response_body' => $errorBody,
             ]);
 
-            // 返回错误响应
+            // returnerror响应
             return OpenAIFormatResponse::buildError(
                 code: is_array($errorBody) ? $errorBody['error']['code'] : 4001,
                 message: is_array($errorBody) ? $errorBody['error']['message'] : $errorBody,
             );
         } catch (Throwable $e) {
-            $this->logger->error('官方代理：未知错误', [
+            $this->logger->error('官方代理：未知error', [
                 'url' => $fullUrl,
                 'error' => $e->getMessage(),
                 'code' => $e->getCode(),

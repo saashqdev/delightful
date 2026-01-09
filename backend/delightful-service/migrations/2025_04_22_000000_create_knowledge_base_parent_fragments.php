@@ -15,19 +15,19 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('knowledge_base_parent_fragments', function (Blueprint $table) {
-            // 主键
+            // primary key
             $table->bigIncrements('id');
 
-            // 元数据
+            // 元data
             $table->string('knowledge_base_code', 255);
-            $table->string('knowledge_base_document_code', 255)->comment('关联知识库文档code');
-            $table->string('organization_code')->comment('组织编码');
+            $table->string('knowledge_base_document_code', 255)->comment('关联知识库documentcode');
+            $table->string('organization_code')->comment('organization编码');
 
             // 操作记录
-            $table->string('created_uid', 255)->comment('创建者ID');
-            $table->string('updated_uid', 255)->comment('更新者ID');
+            $table->string('created_uid', 255)->comment('create者ID');
+            $table->string('updated_uid', 255)->comment('update者ID');
 
-            // 状态时间点
+            // status时间点
             $table->datetimes();
             $table->softDeletes();
 

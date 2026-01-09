@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\ModelGateway\Entity\ValueObject;
 
 /**
- * 访问令牌类型: 用户、组织、应用.
- * 应用/用户是跨组织的.
+ * 访问令牌type: user、organization、应用.
+ * 应用/user是跨organization的.
  */
 enum AccessTokenType: string
 {

@@ -32,11 +32,11 @@ return new class extends Migration {
             }
 
             if (Schema::hasColumn('delightful_chat_files', 'file_type')) {
-                // 文件类型
-                $table->integer('file_type')->comment('文件类型')->change();
+                // 文件type
+                $table->integer('file_type')->comment('文件type')->change();
             } else {
-                // 文件类型
-                $table->integer('file_type')->comment('文件类型');
+                // 文件type
+                $table->integer('file_type')->comment('文件type');
             }
         });
     }

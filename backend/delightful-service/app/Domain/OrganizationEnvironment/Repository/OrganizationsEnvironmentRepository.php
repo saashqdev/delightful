@@ -78,7 +78,7 @@ readonly class OrganizationsEnvironmentRepository implements OrganizationsEnviro
     }
 
     /**
-     * 获取所有组织编码
+     * get所有organization编码
      * @return string[]
      */
     public function getAllOrganizationCodes(): array

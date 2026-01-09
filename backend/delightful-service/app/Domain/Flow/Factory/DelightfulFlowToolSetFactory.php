@@ -35,13 +35,13 @@ class DelightfulFlowToolSetFactory
     }
 
     /**
-     * 将数组转换为工具集实体.
+     * 将数组转换为tool集实体.
      */
     public static function arrayToEntity(array $toolSetData): DelightfulFlowToolSetEntity
     {
         $entity = new DelightfulFlowToolSetEntity();
 
-        // 设置基本属性
+        // setting基本属性
         $entity->setId($toolSetData['id'] ?? 0);
         $entity->setCode($toolSetData['code'] ?? '');
         $entity->setName($toolSetData['name'] ?? '');
@@ -50,21 +50,21 @@ class DelightfulFlowToolSetFactory
         $entity->setEnabled($toolSetData['enabled'] ?? true);
         $entity->setOrganizationCode($toolSetData['organization_code'] ?? '');
 
-        // 设置工具列表
+        // settingtool列表
         if (! empty($toolSetData['tools'])) {
             $entity->setTools($toolSetData['tools']);
         }
 
-        // 设置用户操作权限
+        // settinguser操作permission
         if (isset($toolSetData['user_operation'])) {
             $entity->setUserOperation($toolSetData['user_operation']);
         }
 
-        // 设置创建者和修改者信息
+        // settingcreate者和修改者information
         $entity->setCreator($toolSetData['created_uid'] ?? $toolSetData['creator'] ?? '');
         $entity->setModifier($toolSetData['updated_uid'] ?? $toolSetData['modifier'] ?? '');
 
-        // 设置时间
+        // setting时间
         if (! empty($toolSetData['created_at'])) {
             $entity->setCreatedAt(is_string($toolSetData['created_at']) ? new DateTime($toolSetData['created_at']) : $toolSetData['created_at']);
         }

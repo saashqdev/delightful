@@ -11,45 +11,45 @@ use App\Domain\OrganizationEnvironment\Entity\OrganizationEntity;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * 组织仓库接口.
+ * organization仓库接口.
  */
 interface OrganizationRepositoryInterface
 {
     /**
-     * 保存组织.
+     * 保存organization.
      */
     public function save(OrganizationEntity $organizationEntity): OrganizationEntity;
 
     /**
-     * 根据ID获取组织.
+     * 根据IDgetorganization.
      */
     public function getById(int $id): ?OrganizationEntity;
 
     /**
-     * 根据编码获取组织.
+     * 根据编码getorganization.
      */
     public function getByCode(string $code): ?OrganizationEntity;
 
     /**
-     * 根据编码列表批量获取组织.
+     * 根据编码列表批量getorganization.
      * @param string[] $codes
      * @return OrganizationEntity[]
      */
     public function getByCodes(array $codes): array;
 
     /**
-     * 根据名称获取组织.
+     * 根据名称getorganization.
      */
     public function getByName(string $name): ?OrganizationEntity;
 
     /**
-     * 查询组织列表.
+     * queryorganization列表.
      * @return array{total: int, list: OrganizationEntity[]}
      */
     public function queries(Page $page, ?array $filters = null): array;
 
     /**
-     * 删除组织.
+     * deleteorganization.
      */
     public function delete(OrganizationEntity $organizationEntity): void;
 

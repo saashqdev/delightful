@@ -27,7 +27,7 @@ class AIImageForByteeditV2BuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图工具-火山-High-Aes-General-V21-L模型';
+        return '文生图tool-火山-High-Aes-General-V21-L模型';
     }
 
     public function getCallback(): ?Closure

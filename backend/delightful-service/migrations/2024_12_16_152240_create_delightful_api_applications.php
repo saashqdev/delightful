@@ -16,13 +16,13 @@ return new class extends Migration {
     {
         Schema::create('delightful_api_applications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code', 32)->default('')->comment('组织编码');
+            $table->string('organization_code', 32)->default('')->comment('organization编码');
             $table->string('code', 64)->default('')->comment('编码');
             $table->string('name', 64)->default('')->comment('名称');
             $table->string('description', 255)->default('')->comment('描述');
             $table->string('icon', 255)->default('')->comment('icon');
-            $table->string('created_uid', 80)->default('')->comment('创建人');
-            $table->dateTime('created_at')->comment('创建时间');
+            $table->string('created_uid', 80)->default('')->comment('create人');
+            $table->dateTime('created_at')->comment('create时间');
             $table->string('updated_uid', 80)->default('')->comment('修改人');
             $table->dateTime('updated_at')->comment('修改时间');
             $table->softDeletes();

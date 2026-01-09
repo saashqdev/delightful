@@ -53,7 +53,7 @@ class StartInputTemplate
             "conversation_id": {
                 "type": "string",
                 "key": "conversation_id",
-                "title": "会话 ID",
+                "title": "conversation ID",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -73,7 +73,7 @@ class StartInputTemplate
             "message_content": {
                 "type": "string",
                 "key": "message_content",
-                "title": "消息内容",
+                "title": "messagecontent",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -83,7 +83,7 @@ class StartInputTemplate
             "message_type": {
                 "type": "string",
                 "key": "message_type",
-                "title": "消息类型",
+                "title": "messagetype",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -103,7 +103,7 @@ class StartInputTemplate
             "organization_code": {
                 "type": "string",
                 "key": "organization_code",
-                "title": "组织编码",
+                "title": "organization编码",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -190,7 +190,7 @@ class StartInputTemplate
             "user": {
                 "type": "object",
                 "key": "user",
-                "title": "用户",
+                "title": "user",
                 "description": "",
                 "items": null,
                 "required": [
@@ -205,7 +205,7 @@ class StartInputTemplate
                     "id": {
                         "type": "string",
                         "key": "id",
-                        "title": "用户 ID",
+                        "title": "user ID",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -215,7 +215,7 @@ class StartInputTemplate
                     "nickname": {
                         "type": "string",
                         "key": "nickname",
-                        "title": "用户昵称",
+                        "title": "user昵称",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -259,7 +259,7 @@ class StartInputTemplate
                     "departments": {
                         "type": "array",
                         "key": "departments",
-                        "title": "部门",
+                        "title": "department",
                         "description": "desc",
                         "required": [],
                         "encryption": false,
@@ -268,7 +268,7 @@ class StartInputTemplate
                             "type": "object",
                             "key": "departments",
                             "sort": 0,
-                            "title": "部门",
+                            "title": "department",
                             "description": "desc",
                             "required": [
                                 "id",
@@ -281,7 +281,7 @@ class StartInputTemplate
                             "properties": {
                                 "id": {
                                     "type": "string",
-                                    "title": "部门 ID",
+                                    "title": "department ID",
                                     "description": "",
                                     "key": "id",
                                     "items": null,
@@ -293,7 +293,7 @@ class StartInputTemplate
                                 },
                                 "name": {
                                     "type": "string",
-                                    "title": "部门名称",
+                                    "title": "department名称",
                                     "description": "",
                                     "key": "name",
                                     "items": null,
@@ -305,7 +305,7 @@ class StartInputTemplate
                                 },
                                 "path": {
                                     "type": "string",
-                                    "title": "部门路径",
+                                    "title": "department路径",
                                     "description": "",
                                     "key": "path",
                                     "items": null,
@@ -327,7 +327,7 @@ class StartInputTemplate
             "bot_key": {
                 "type": "string",
                 "key": "bot_key",
-                "title": "第三方聊天机器人编码",
+                "title": "第third-party聊天机器人编码",
                 "description": "",
                 "items": null,
                 "properties": null,

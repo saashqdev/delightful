@@ -20,17 +20,17 @@ class CreateDelightfulChatFriendTable extends Migration
         }
         Schema::create('delightful_chat_friends', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('用户id');
-            // 用户所属组织
-            $table->string('user_organization_code', 64)->comment('用户组织编码')->default('');
+            $table->string('user_id', 64)->comment('userid');
+            // user所属organization
+            $table->string('user_organization_code', 64)->comment('userorganization编码')->default('');
             $table->string('friend_id', 64)->comment('好友id');
-            // 好友所属组织
-            $table->string('friend_organization_code', 64)->comment('好友的组织编码')->default('');
-            // 好友类型
-            $table->tinyInteger('friend_type')->comment('好友类型，0:ai 1:人类')->default(0);
+            // 好友所属organization
+            $table->string('friend_organization_code', 64)->comment('好友的organization编码')->default('');
+            // 好友type
+            $table->tinyInteger('friend_type')->comment('好友type，0:ai 1:人类')->default(0);
             $table->string('remarks', 256)->comment('备注');
             $table->string('extra', 1024)->comment('附加属性');
-            $table->tinyInteger('status')->comment('状态，1：申请，2：同意 3：拒绝 4：忽略');
+            $table->tinyInteger('status')->comment('status，1：申请，2：同意 3：拒绝 4：忽略');
             $table->unique(['user_id', 'friend_id'], 'uk_user_id_friend_id');
             $table->timestamps();
             $table->softDeletes();

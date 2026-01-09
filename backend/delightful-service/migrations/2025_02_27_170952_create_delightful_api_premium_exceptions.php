@@ -21,12 +21,12 @@ return new class extends Migration {
 
         Schema::create('delightful_api_premium_exceptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('exception_type', 255)->comment('异常类型');
+            $table->string('exception_type', 255)->comment('exceptiontype');
             $table->boolean('can_retry')->comment('是否可以重试')->nullable();
             $table->integer('retry_max_times')->comment('重试最大次数')->nullable();
             $table->integer('retry_interval')->comment('重试时间间隔')->nullable();
             $table->datetimes();
-            $table->comment('异常信息表，储存异常类型，是否可以重试，重试最大次数，重试时间间隔');
+            $table->comment('exceptioninformation表，储存exceptiontype，是否可以重试，重试最大次数，重试时间间隔');
         });
     }
 

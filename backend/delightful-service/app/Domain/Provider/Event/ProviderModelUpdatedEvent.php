@@ -10,7 +10,7 @@ namespace App\Domain\Provider\Event;
 use App\Domain\Provider\Entity\ProviderModelEntity;
 
 /**
- * 服务商模型更新事件.
+ * 服务商模型update事件.
  */
 class ProviderModelUpdatedEvent
 {

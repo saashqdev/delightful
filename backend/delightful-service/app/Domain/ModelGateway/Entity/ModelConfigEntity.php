@@ -25,7 +25,7 @@ class ModelConfigEntity extends AbstractEntity
     protected string $model;
 
     /**
-     * 模型类型.比如：gtp4o.
+     * 模型type.比如：gtp4o.
      */
     protected string $type;
 
@@ -276,7 +276,7 @@ class ModelConfigEntity extends AbstractEntity
         if (! is_null($this->actualImplementationConfig)) {
             return $this->actualImplementationConfig;
         }
-        // 从配置中获取实际的配置
+        // 从configuration中get实际的configuration
         $configs = [];
         foreach ($this->implementationConfig as $index => $item) {
             $item = explode('|', $item);

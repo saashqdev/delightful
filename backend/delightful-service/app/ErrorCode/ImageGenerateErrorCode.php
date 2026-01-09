@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * 43000 - 43999 图片生成相关错误码
+ * 43000 - 43999 image生成相关error码
  */
 enum ImageGenerateErrorCode: int
 {

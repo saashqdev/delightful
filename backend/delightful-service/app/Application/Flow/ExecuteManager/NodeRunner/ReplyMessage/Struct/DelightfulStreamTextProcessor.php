@@ -13,7 +13,7 @@ use function Hyperf\Support\call;
 
 class DelightfulStreamTextProcessor
 {
-    private const int STATE_NORMAL = 0;    // 普通文本状态
+    private const int STATE_NORMAL = 0;    // 普通文本status
 
     private const int STATE_TAG_START = 1; // 可能是标签开始
 
@@ -26,7 +26,7 @@ class DelightfulStreamTextProcessor
     private string $buffer = '';
 
     /**
-     * @var int 状态 0 普通文本，1 标签开始，2 在标签内
+     * @var int status 0 普通文本，1 标签开始，2 在标签内
      */
     private int $state = 0;
 

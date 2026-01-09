@@ -26,7 +26,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('service_provider_models', function (Blueprint $table) {
-            // 删除 model_parent_id 和 status 联合索引
+            // delete model_parent_id 和 status 联合索引
             $table->dropIndex(['model_parent_id', 'status']);
         });
     }

@@ -47,10 +47,10 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
 
-        // 默认是创建
+        // 默认是create
         $operation = Operation::Owner;
         if (! $savingDelightfulFLowToolSetEntity->shouldCreate()) {
-            // 修改需要检查权限
+            // 修改需要检查permission
             $operation = $this->operationPermissionAppService->getOperationByResourceAndUser(
                 $permissionDataIsolation,
                 ResourceType::ToolSet,
@@ -75,7 +75,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = PermissionDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
 
-        // 仅查询目前用户具有权限的工具集
+        // 仅query目前user具有permission的tool集
         $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
             $permissionDataIsolation,
             ResourceType::ToolSet,
@@ -91,7 +91,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         foreach ($data['list'] ?? [] as $item) {
             $filePaths[] = $item->getIcon();
             if ($item->getCode() === ConstValue::TOOL_SET_DEFAULT_CODE) {
-                // 未分组的直接分配管理员权限
+                // 未分组的直接分配管理员permission
                 $item->setUserOperation(Operation::Admin->value);
             } else {
                 $operation = $resources[$item->getCode()] ?? Operation::None;

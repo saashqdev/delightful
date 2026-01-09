@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 #[FlowNodeDefine(
     type: NodeType::KnowledgeFragmentRemove->value,
     code: NodeType::KnowledgeFragmentRemove->name,
-    name: '向量数据库 / 向量删除',
+    name: '向量数据库 / 向量delete',
     paramsConfig: KnowledgeFragmentRemoveNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,
@@ -47,7 +47,7 @@ class KnowledgeFragmentRemoveNodeRunner extends AbstractKnowledgeNodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.knowledge_fragment_store.business_id_empty');
         }
 
-        // metadata 或者 business_id 必须有一个不为空
+        // metadata 或者 business_id 必须有one不为空
         if (empty($metadataFilter) && empty($businessId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.knowledge_fragment_remove.metadata_business_id_empty');
         }

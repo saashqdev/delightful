@@ -23,7 +23,7 @@ enum PermissionErrorCode: int
     #[ErrorMessage(message: 'permission.access_denied')]
     case AccessDenied = 42003;
 
-    // 组织相关错误码
+    // organization相关error码
     #[ErrorMessage(message: 'permission.organization_code_required')]
     case ORGANIZATION_CODE_REQUIRED = 42100;
 

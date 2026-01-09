@@ -30,7 +30,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * 控制消息相关.
+ * 控制message相关.
  */
 class DelightfulIntermediateMessageAppService extends AbstractAppService
 {
@@ -41,7 +41,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
     }
 
     /**
-     * 根据客户端发来的控制消息类型,分发到对应的处理模块.
+     * 根据客户端发来的控制messagetype,分发到对应的处理模块.
      * @throws Throwable
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array
@@ -57,7 +57,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
             $senderUserEntity
         );
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // 消息鉴权
+        // message鉴权
         $this->checkSendMessageAuth($conversationEntity, $dataIsolation);
 
         $messageContent = $messageDTO->getContent();
@@ -79,11 +79,11 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
 
     public function checkSendMessageAuth(DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
     {
-        // 检查会话 id所属组织，与当前传入组织编码的一致性
+        // 检查conversation id所属organization，与当前传入organization编码的一致性
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // 会话是否已被删除
+        // conversation是否已被delete
         if ($conversationEntity->getStatus() === ConversationStatus::Delete) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_DELETED);
         }

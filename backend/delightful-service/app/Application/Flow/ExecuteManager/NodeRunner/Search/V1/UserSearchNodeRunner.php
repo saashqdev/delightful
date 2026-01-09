@@ -87,7 +87,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
 
             $userDepartments = [];
-            // 一个人可以有很多部门
+            // one人可以有很多department
             foreach ($departmentUsers as $departmentUser) {
                 $userDepartments[$departmentUser['user_id']][] = $departmentUser;
             }
@@ -97,7 +97,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 $phoneDesensitization = true;
             }
             foreach ($delightfulUsers as $delightfulUser) {
-                // 如果不是人类，过滤
+                // 如果不是人类，filter
                 if ($delightfulUser->getUserType() !== UserType::Human) {
                     continue;
                 }
@@ -377,7 +377,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (empty($departmentPaths)) {
             return [];
         }
-        // 获取这些部门的所有下级部门id
+        // get这些department的所有下级departmentid
         $departmentSubIds = $this->getAllChildrenByDepartmentIds($operator, $departmentPaths);
         $departmentIds = array_merge(array_keys($departmentPaths), $departmentSubIds);
         $userDB = DepartmentUserModel::query()

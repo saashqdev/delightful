@@ -18,7 +18,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $delightfulId = null;
 
     /**
-     * 账号类型:0:ai 1:人类 2:应用.
+     * 账号type:0:ai 1:人类 2:应用.
      */
     protected ?UserType $type = null;
 
@@ -28,7 +28,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $aiCode = null;
 
     /**
-     * 账号状态,0:正常,1:禁用.
+     * 账号status,0:正常,1:禁用.
      */
     protected ?AccountStatus $status = null;
 
@@ -57,14 +57,14 @@ class AccountEntity extends AbstractEntity
      */
     protected string $password = '';
 
-    // 删除/更新/创建时间
+    // delete/update/creation time
     protected ?string $deletedAt = null;
 
     protected ?string $updatedAt = null;
 
     protected ?string $createdAt = null;
 
-    // 为了追踪哪里创建的账号，留下这个构造函数
+    // 为了追踪哪里create的账号，留下这个构造函数
     public function __construct(array $data = [])
     {
         parent::__construct($data);
@@ -104,7 +104,7 @@ class AccountEntity extends AbstractEntity
     }
 
     /**
-     * 获取国家代码 (state_code的别名).
+     * get国家代码 (state_code的别名).
      */
     public function getStateCode(): ?string
     {

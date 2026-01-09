@@ -25,10 +25,10 @@ class DepartmentQueryDTO extends AbstractEntity
      */
     protected string $pageToken = '';
 
-    // is_recursive 是否递归查询
+    // is_recursive 是否递归query
     protected bool $isRecursive = false;
 
-    // 部门成员求和类型
+    // department成员求和type
     protected DepartmentSumType $sumType = DepartmentSumType::DirectEmployee;
 
     protected int $pageSize = 100;

@@ -26,7 +26,7 @@ class MCPServerToolDomainService
     }
 
     /**
-     * 根据mcpServerCode查询工具.
+     * 根据mcpServerCodequerytool.
      * @return array<MCPServerToolEntity>
      */
     public function getByMcpServerCode(MCPDataIsolation $dataIsolation, string $mcpServerCode): array
@@ -103,7 +103,7 @@ class MCPServerToolDomainService
     }
 
     /**
-     * 根据ID和mcpServerCode联合查询工具.
+     * 根据ID和mcpServerCode联合querytool.
      */
     public function getByIdAndMcpServerCode(MCPDataIsolation $dataIsolation, int $id, string $mcpServerCode): ?MCPServerToolEntity
     {

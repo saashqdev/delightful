@@ -36,7 +36,7 @@ class RichTextMessage extends AbstractAttachmentMessage implements TextContentIn
     public function getFileIds(): array
     {
         $attachmentIds = $this->getAttachmentIds();
-        // 检查富文本中是否有图片
+        // 检查富文本中是否有image
         $content = $this->getContent();
         $editor = new Editor([
             'extensions' => [
@@ -53,11 +53,11 @@ class RichTextMessage extends AbstractAttachmentMessage implements TextContentIn
     }
 
     /**
-     * 递归查找所有图片节点的 file_id.
+     * 递归查找所有image节点的 file_id.
      *
-     * @param array $data 要搜索的数据数组
+     * @param array $data 要search的data数组
      * @param int $maxDepth 最大递归深度
-     * @return array<string> 返回找到的所有 file_id 的数组
+     * @return array<string> return找到的所有 file_id 的数组
      */
     public function findImageFileIds(array $data, int $maxDepth = 512, int $currentDepth = 0): array
     {

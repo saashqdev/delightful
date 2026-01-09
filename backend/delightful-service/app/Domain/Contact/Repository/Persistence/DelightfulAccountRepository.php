@@ -142,11 +142,11 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
     public function saveAccount(AccountEntity $accountDTO): AccountEntity
     {
         $account = $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
-        // 不存在则创建
+        // 不存在则create
         if (! $account) {
             return $this->createAccount($accountDTO);
         }
-        // 更新
+        // update
         $accountData = $accountDTO->toArray();
         $this->updateAccount($accountDTO->getDelightfulId(), $accountData);
         # 防止 $accountDTO 中参数不全,再查一次库
@@ -196,7 +196,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return UserAssembler::getAccountEntity($account);
     }
 
-    // 避免 redis 缓存序列化的对象,占用太多内存
+    // 避免 redis cache序列化的对象,占用太多内存
     #[Cacheable(prefix: 'accountDelightfulId', ttl: 60)]
     private function getAccountInfo(string $delightfulId): ?array
     {
@@ -204,7 +204,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // 避免 redis 缓存序列化的对象,占用太多内存
+    // 避免 redis cache序列化的对象,占用太多内存
     #[Cacheable(prefix: 'accountAiCode', ttl: 60)]
     private function getAccountArrayByAiCode(string $aiCode): ?array
     {

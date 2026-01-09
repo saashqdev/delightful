@@ -40,7 +40,7 @@ class VLMVolcengineProvider implements IProvider
         }
         $volcengineAPI = new VolcengineAPI($ak, $sk);
         $body = [];
-        // 文生图配置
+        // 文生图configuration
         $body['req_key'] = $modelVersion;
         $body['model_version'] = 'general_v2.1_L'; // 先写死没问题的，目前的文生图支持这个值，图生图没这个值
         $body['width'] = 512;

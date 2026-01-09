@@ -24,7 +24,7 @@ use Throwable;
 class DelightfulMessageTest extends BaseTest
 {
     /**
-     * 测试ai往群里发消息.
+     * 测试ai往群里发message.
      * @throws Throwable
      */
     public function testAgentSendMessage()
@@ -32,7 +32,7 @@ class DelightfulMessageTest extends BaseTest
         $appMessageId = IdGenerator::getUniqueId32();
         $receiveSeqDTO = new DelightfulSeqEntity();
         $messageContent = new TextMessage();
-        $messageContent->setContent('测试消息');
+        $messageContent->setContent('测试message');
         $receiveSeqDTO->setContent($messageContent);
         $receiveSeqDTO->setSeqType(ChatMessageType::Text);
         $receiveSeqDTO->setReferMessageId('');
@@ -43,7 +43,7 @@ class DelightfulMessageTest extends BaseTest
     }
 
     /**
-     * 测试模拟用户给agent 发消息.
+     * 测试模拟user给agent 发message.
      * @throws Throwable
      */
     public function testUserSendMessageToAgent()
@@ -51,7 +51,7 @@ class DelightfulMessageTest extends BaseTest
         $appMessageId = IdGenerator::getUniqueId32();
         $receiveSeqDTO = new DelightfulSeqEntity();
         $messageContent = new TextMessage();
-        $messageContent->setContent('测试消息123123123213');
+        $messageContent->setContent('测试message123123123213');
         $receiveSeqDTO->setContent($messageContent);
         $receiveSeqDTO->setSeqType(ChatMessageType::Text);
         $receiveSeqDTO->setReferMessageId('');
@@ -62,7 +62,7 @@ class DelightfulMessageTest extends BaseTest
     }
 
     /*
-    * 测试 ai 流式消息发送.
+    * 测试 ai 流式message发送.
      * @throws Throwable
      */
     public function testAgentStreamSendMessage()
@@ -70,8 +70,8 @@ class DelightfulMessageTest extends BaseTest
         $receiveUserId = 'usi_7839078ce6af2d3249b82e7aaed643b8';
         $aiUserId = 'usi_8e4bde5582491a6cabfe0d0ba8b7ae8e';
         $chatAppService = di(DelightfulChatMessageAppService::class);
-        // 将多段流式消息，通过此 id 关联起来
-        // ai 搜索卡片消息的多段响应，已经将 app_message_id 作为关联 id，流式响应需要另外的 id 来做关联
+        // 将多段流式message，通过此 id 关联起来
+        // ai search卡片message的多段响应，已经将 app_message_id 作为关联 id，流式响应需要另外的 id 来做关联
         $appMessageId = IdGenerator::getUniqueId32();
         $streamOptions = (new StreamOptions())->setStream(true)->setStreamAppMessageId($appMessageId)->setStatus(StreamMessageStatus::Start);
         $messageContent = new TextMessage();

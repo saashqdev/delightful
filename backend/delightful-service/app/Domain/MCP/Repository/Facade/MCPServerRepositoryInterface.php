@@ -18,7 +18,7 @@ interface MCPServerRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPServerEntity> 返回以id为key的实体对象数组
+     * @return array<int, MCPServerEntity> return以id为key的实体对象数组
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 
@@ -37,7 +37,7 @@ interface MCPServerRepositoryInterface
     public function save(MCPDataIsolation $dataIsolation, MCPServerEntity $entity): MCPServerEntity;
 
     /**
-     * 删除MCP服务
+     * deleteMCP服务
      */
     public function delete(MCPDataIsolation $dataIsolation, string $code): bool;
 }

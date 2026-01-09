@@ -20,7 +20,7 @@ use Throwable;
 
 /**
  * 同步模型到Official服务商监听器.
- * 监听服务商配置创建/更新事件，从外部API拉取模型并同步到Official服务商.
+ * 监听服务商configurationcreate/update事件，从外部API拉取模型并同步到Official服务商.
  */
 #[AsyncListener]
 #[Listener]
@@ -53,7 +53,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
                 default => null,
             };
         } catch (Throwable $e) {
-            $this->logger->error('从外部API同步模型失败', [
+            $this->logger->error('从外部API同步模型failed', [
                 'event' => get_class($event),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -64,15 +64,15 @@ class SyncModelsToOfficialListener implements ListenerInterface
     }
 
     /**
-     * 处理服务商配置创建或更新事件.
-     * 如果是Official服务商且是官方组织，则从外部API拉取模型并同步.
+     * 处理服务商configurationcreate或update事件.
+     * 如果是Official服务商且是官方organization，则从外部API拉取模型并同步.
      */
     private function handleProviderConfig(
         ProviderConfigCreatedEvent|ProviderConfigUpdatedEvent $event,
         ProviderModelSyncAppService $syncService,
         string $action
     ): void {
-        $this->logger->info("收到服务商配置{$action}事件", [
+        $this->logger->info("收到服务商configuration{$action}事件", [
             'config_id' => $event->providerConfigEntity->getId(),
             'organization_code' => $event->organizationCode,
             'action' => $action,

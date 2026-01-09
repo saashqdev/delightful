@@ -41,12 +41,12 @@ class DelightfulAgentDTO extends AbstractEntity
     private ?string $robotDescription = '';
 
     /**
-     * 当前组织编码
+     * 当前organization编码
      */
     private string $currentOrganizationCode = '';
 
     /**
-     * 当前的用户id.
+     * 当前的userid.
      */
     private string $currentUserId = '';
 

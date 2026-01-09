@@ -18,24 +18,24 @@ interface MCPUserSettingRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPUserSettingEntity> 返回以id为key的实体对象数组
+     * @return array<int, MCPUserSettingEntity> return以id为key的实体对象数组
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 
     /**
-     * 根据用户ID和MCP服务ID获取用户设置.
+     * 根据userID和MCP服务IDgetusersetting.
      */
     public function getByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): ?MCPUserSettingEntity;
 
     /**
-     * 根据用户ID获取所有MCP用户设置.
+     * 根据userIDget所有MCPusersetting.
      *
      * @return array<MCPUserSettingEntity>
      */
     public function getByUserId(MCPDataIsolation $dataIsolation, string $userId): array;
 
     /**
-     * 根据MCP服务ID获取所有用户设置.
+     * 根据MCP服务IDget所有usersetting.
      *
      * @return array<MCPUserSettingEntity>
      */
@@ -47,17 +47,17 @@ interface MCPUserSettingRepositoryInterface
     public function queries(MCPDataIsolation $dataIsolation, MCPUserSettingQuery $query, Page $page): array;
 
     /**
-     * 保存MCP用户设置.
+     * 保存MCPusersetting.
      */
     public function save(MCPDataIsolation $dataIsolation, MCPUserSettingEntity $entity): MCPUserSettingEntity;
 
     /**
-     * 删除MCP用户设置.
+     * deleteMCPusersetting.
      */
     public function delete(MCPDataIsolation $dataIsolation, int $id): bool;
 
     /**
-     * 删除用户的指定MCP服务设置.
+     * deleteuser的指定MCP服务setting.
      */
     public function deleteByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): bool;
 

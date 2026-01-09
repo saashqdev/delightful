@@ -19,15 +19,15 @@ return new class extends Migration {
         }
         Schema::create('delightful_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('type')->comment('类型，例如评论、动态');
+            $table->tinyInteger('type')->comment('type，例如评论、动态');
             $table->json('attachments')->comment('附件');
-            $table->string('description')->comment('对评论的简短描述，主要是给动态用的，例如创建待办、上传图片等系统动态');
-            $table->unsignedBigInteger('resource_id')->index()->comment('评论的资源id，例如云文档id、sheet表id');
-            $table->tinyInteger('resource_type')->comment('评论的资源类型，例如云文档、sheet表');
-            $table->unsignedBigInteger('parent_id')->index()->comment('父级评论的主键id');
-            $table->text('message')->comment('评论的内容');
-            $table->string('creator')->index()->comment('创建人');
-            $table->string('organization_code')->index()->comment('组织code');
+            $table->string('description')->comment('对评论的简短description，主要是给动态用的，例如create待办、uploadimage等系统动态');
+            $table->unsignedBigInteger('resource_id')->index()->comment('评论的资源id，例如云documentid、sheet表id');
+            $table->tinyInteger('resource_type')->comment('评论的资源type，例如云document、sheet表');
+            $table->unsignedBigInteger('parent_id')->index()->comment('父级评论的primary keyid');
+            $table->text('message')->comment('评论的content');
+            $table->string('creator')->index()->comment('create人');
+            $table->string('organization_code')->index()->comment('organizationcode');
             $table->softDeletes();
             $table->timestamps();
         });

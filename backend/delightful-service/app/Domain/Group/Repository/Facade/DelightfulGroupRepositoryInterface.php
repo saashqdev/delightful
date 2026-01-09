@@ -12,17 +12,17 @@ use App\Domain\Group\Entity\DelightfulGroupEntity;
 
 interface DelightfulGroupRepositoryInterface
 {
-    // 创建群组
+    // create群组
     public function createGroup(DelightfulGroupEntity $delightfulGroupDTO): DelightfulGroupEntity;
 
-    // 批量查询群组信息
+    // 批量query群组information
 
     /**
      * @return DelightfulGroupEntity[]
      */
     public function getGroupsByIds(array $groupIds): array;
 
-    // 修改群组信息
+    // 修改群组information
     public function updateGroupById(string $groupId, array $data): int;
 
     public function getGroupInfoById(string $groupId, ?string $organizationCode = null): ?DelightfulGroupEntity;
@@ -46,11 +46,11 @@ interface DelightfulGroupRepositoryInterface
 
     public function deleteGroup(DelightfulGroupEntity $delightfulGroupEntity): int;
 
-    // 用户是否在群组中
+    // user是否在群组中
     public function isUserInGroup(string $groupId, string $userId): bool;
 
     /**
-     * 用户是否在群组中.
+     * user是否在群组中.
      * @param array<string> $userIds
      */
     public function isUsersInGroup(string $groupId, array $userIds): bool;

@@ -64,7 +64,7 @@ class ToolsExecutor extends AbstractTool
                 continue;
             }
 
-            // 这里就应该检测 系统输入
+            // 这里就应该检测 系统input
             $customSystemInput = $optionTool->getCustomSystemInput()?->getFormComponent()?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
 
             $tool = new ToolsExecutor();
@@ -90,7 +90,7 @@ class ToolsExecutor extends AbstractTool
             return [];
         }
         $list = [];
-        // 优先尝试内置工具
+        // 优先尝试内置tool
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
             foreach ($builtInToolSet->getTools() as $tool) {
                 if (in_array($tool->getCode(), $codes)) {
@@ -161,7 +161,7 @@ class ToolsExecutor extends AbstractTool
                 return null;
             }
             $toolsExecutor->execute();
-            // 节点内部的异常在 node 的 debug 信息中记录
+            // 节点内部的exception在 node 的 debug information中记录
             foreach ($toolFlow->getNodes() as $node) {
                 if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                     $logger->warning(
@@ -248,7 +248,7 @@ class ToolsExecutor extends AbstractTool
         if (! $form) {
             return;
         }
-        // 暂时只处理 object 的数据
+        // 暂时只处理 object 的data
         if (! $form->getType()->isObject()) {
             return;
         }
@@ -261,9 +261,9 @@ class ToolsExecutor extends AbstractTool
             return [];
         }
         $args = $parameters;
-        // 隔离数据
+        // 隔离data
         $flow = DelightfulFlowFactory::arrayToEntity($this->delightfulFlowEntity->toArray());
-        // 内置工具特殊值
+        // 内置tool特殊值
         if ($this->delightfulFlowEntity->hasCallback()) {
             $flow->setCallback($this->delightfulFlowEntity->getCallback());
             $flow->setEndNode($this->delightfulFlowEntity->getEndNode());

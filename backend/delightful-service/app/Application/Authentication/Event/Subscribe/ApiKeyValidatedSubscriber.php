@@ -38,10 +38,10 @@ readonly class ApiKeyValidatedSubscriber implements ListenerInterface
 
         $apiKeyProvider = $event->getApiKeyProvider();
 
-        // 创建一个空的数据隔离对象
+        // createone空的数据隔离对象
         $dataIsolation = AuthenticationDataIsolation::create($apiKeyProvider->getOrganizationCode())->disabled();
 
-        // 通过领域服务更新最后使用时间
+        // 通过领域服务update最后使用时间
         $this->container->get(ApiKeyProviderDomainService::class)
             ->updateLastUsed($dataIsolation, $apiKeyProvider);
     }

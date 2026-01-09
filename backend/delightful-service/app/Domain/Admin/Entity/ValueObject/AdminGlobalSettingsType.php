@@ -12,13 +12,13 @@ enum AdminGlobalSettingsType: int
     // 全局默认好友
     case DEFAULT_FRIEND = 1;
 
-    // 助理创建管理
+    // 助理create管理
     case ASSISTANT_CREATE = 2;
 
-    // 第三方发布管控
+    // 第third-party发布管控
     case THIRD_PARTY_PUBLISH = 3;
 
-    // 获取助理全局设置类型
+    // get助理全局setting类型
     public static function getAssistantGlobalSettingsType(): array
     {
         return [

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * 模型管理后台 model_id 可能支持类型的枚举值。
- * 不要枚举服务商的接入点，这里是与服务商无关的配置.
+ * 模型管理后台 model_id 可能支持type的枚举值。
+ * 不要枚举服务商的接入点，这里是与服务商无关的configuration.
  */
 enum LLMModelEnum: string
 {

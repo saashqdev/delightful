@@ -30,7 +30,7 @@ class ImplicitWatermark
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        // 设置默认签名，在设置用户信息后会自动加密
+        // setting默认签名，在settinguserinformation后会自动加密
         $this->sign = 'be_delightful';
     }
 
@@ -41,7 +41,7 @@ class ImplicitWatermark
 
     public function setUserId(string $userId): self
     {
-        $currentSign = $this->getSign(); // 先解密获取原始签名
+        $currentSign = $this->getSign(); // 先解密get原始签名
         $this->userId = $userId;
         if (! empty($currentSign)) {
             $this->setSign($currentSign); // 重新加密签名
@@ -56,7 +56,7 @@ class ImplicitWatermark
 
     public function setOrganizationCode(string $organizationCode): self
     {
-        $currentSign = $this->getSign(); // 先解密获取原始签名
+        $currentSign = $this->getSign(); // 先解密get原始签名
         $this->organizationCode = $organizationCode;
         if (! empty($currentSign)) {
             $this->setSign($currentSign); // 重新加密签名

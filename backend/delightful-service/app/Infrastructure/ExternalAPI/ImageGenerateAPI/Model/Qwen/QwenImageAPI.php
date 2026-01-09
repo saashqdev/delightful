@@ -58,7 +58,7 @@ class QwenImageAPI
             'parameters' => [],
         ];
 
-        // 设置可选参数
+        // setting可选参数
         if (isset($params['size'])) {
             $body['parameters']['size'] = $params['size'];
         }
@@ -98,7 +98,7 @@ class QwenImageAPI
             'Content-Type' => 'application/json',
         ];
 
-        // 构建符合阿里云API文档的请求格式
+        // 构建符合阿里云APIdocument的请求格式
         $body = [
             'model' => $params['model'] ?? 'qwen-image-edit',
             'input' => [
@@ -115,7 +115,7 @@ class QwenImageAPI
             ],
         ];
 
-        // 添加图像到content中（只取第一张图片）
+        // 添加图像到content中（只取第一张image）
         if (isset($params['image_urls']) && ! empty($params['image_urls'])) {
             $body['input']['messages'][0]['content'][] = [
                 'image' => $params['image_urls'][0],
@@ -145,7 +145,7 @@ class QwenImageAPI
     }
 
     /**
-     * 查询任务结果.
+     * query任务结果.
      */
     public function getTaskResult(string $taskId): array
     {

@@ -10,6 +10,6 @@ namespace App\Domain\Admin\Entity\ValueObject;
 enum AgentFilterType: int
 {
     case ALL = -1;  // 全部
-    case SELECTED_DEFAULT_FRIEND = 1;  // 只展示设置为默认好友的列table
-    case NOT_SELECTED_DEFAULT_FRIEND = 2;  // 只展示未被设置为默认好友的列table
+    case SELECTED_DEFAULT_FRIEND = 1;  // 只展示setting为默认好友的列table
+    case NOT_SELECTED_DEFAULT_FRIEND = 2;  // 只展示未被setting为默认好友的列table
 }

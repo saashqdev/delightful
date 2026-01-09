@@ -15,7 +15,7 @@ enum ImageConvertHighResponseType: int
     // 生成完成
     case GENERATED = 2;
 
-    // 异常终止
+    // exception终止
     case TERMINATE = 3;
 
     public static function getNameFromType(ImageConvertHighResponseType $type): string
@@ -23,7 +23,7 @@ enum ImageConvertHighResponseType: int
         return match ($type) {
             self::START_GENERATE => '开始生成',
             self::GENERATED => '生成完成',
-            self::TERMINATE => '异常终止',
+            self::TERMINATE => 'exception终止',
             default => '未知类型',
         };
     }

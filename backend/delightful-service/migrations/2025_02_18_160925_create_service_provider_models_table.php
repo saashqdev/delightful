@@ -25,13 +25,13 @@ return new class extends Migration {
             $table->string('model_version', 50)->comment('模型在服务商下的名称');
             $table->string('model_id', 50)->comment('模型真实ID');
             $table->string('category')->comment('模型分类：llm/vlm');
-            $table->tinyInteger('model_type')->comment('具体类型,用于分组用');
-            $table->json('config')->comment('模型的配置信息');
-            $table->string('description', 255)->nullable()->comment('模型描述');
+            $table->tinyInteger('model_type')->comment('具体type,用于分组用');
+            $table->json('config')->comment('模型的configurationinformation');
+            $table->string('description', 255)->nullable()->comment('模型description');
             $table->integer('sort')->default(0)->comment('排序');
             $table->string('icon')->default('')->comment('图标');
-            $table->string('organization_code')->comment('组织编码');
-            $table->tinyInteger('status')->default(0)->comment('状态：0-未启用，1-启用');
+            $table->string('organization_code')->comment('organization编码');
+            $table->tinyInteger('status')->default(0)->comment('status：0-未启用，1-启用');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_service_provider_config_id');

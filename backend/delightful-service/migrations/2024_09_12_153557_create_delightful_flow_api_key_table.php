@@ -16,21 +16,21 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_api_keys', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code')->default('')->comment('组织编码');
+            $table->string('organization_code')->default('')->comment('organization编码');
             $table->string('code', 50)->default('')->comment('API Key编码')->index();
             $table->string('flow_code', 50)->default('')->comment('流程编码')->index();
-            $table->string('conversation_id', 50)->default('')->comment('会话ID');
-            $table->integer('type')->default(0)->comment('类型');
+            $table->string('conversation_id', 50)->default('')->comment('conversationID');
+            $table->integer('type')->default(0)->comment('type');
             $table->string('name')->default('')->comment('名称');
-            $table->string('description')->default('')->comment('描述');
+            $table->string('description')->default('')->comment('description');
             $table->string('secret_key', 50)->default('')->comment('密钥')->unique();
             $table->boolean('enabled')->default(false)->comment('是否启用');
             $table->timestamp('last_used')->nullable()->comment('最后使用时间');
-            $table->string('created_uid')->default('')->comment('创建者用户ID');
-            $table->timestamp('created_at')->nullable()->comment('创建时间');
-            $table->string('updated_uid')->default('')->comment('更新者用户ID');
-            $table->timestamp('updated_at')->nullable()->comment('更新时间');
-            $table->timestamp('deleted_at')->nullable()->comment('删除时间');
+            $table->string('created_uid')->default('')->comment('create者userID');
+            $table->timestamp('created_at')->nullable()->comment('creation time');
+            $table->string('updated_uid')->default('')->comment('update者userID');
+            $table->timestamp('updated_at')->nullable()->comment('update time');
+            $table->timestamp('deleted_at')->nullable()->comment('deletion time');
         });
     }
 

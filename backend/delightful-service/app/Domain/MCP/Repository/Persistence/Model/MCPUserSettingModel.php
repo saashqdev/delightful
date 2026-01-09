@@ -13,16 +13,16 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id 雪花ID
- * @property string $organization_code 组织编码
- * @property string $user_id 用户ID
+ * @property string $organization_code organization编码
+ * @property string $user_id userID
  * @property string $mcp_server_id MCP服务ID
  * @property null|array $require_fields 必填字段
  * @property null|array $oauth2_auth_result OAuth2认证结果
- * @property null|array $additional_config 附加配置
- * @property string $creator 创建者
- * @property DateTime $created_at 创建时间
+ * @property null|array $additional_config 附加configuration
+ * @property string $creator create者
+ * @property DateTime $created_at creation time
  * @property string $modifier 修改者
- * @property DateTime $updated_at 更新时间
+ * @property DateTime $updated_at update time
  */
 class MCPUserSettingModel extends AbstractModel
 {

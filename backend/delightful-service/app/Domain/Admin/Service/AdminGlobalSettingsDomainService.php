@@ -28,7 +28,7 @@ readonly class AdminGlobalSettingsDomainService
         );
 
         if ($settings === null) {
-            // 创建默认设置
+            // create默认setting
             $settings = $this->globalSettingsRepository->updateSettings(
                 (new AdminGlobalSettingsEntity())
                     ->setType($type)
@@ -59,16 +59,16 @@ readonly class AdminGlobalSettingsDomainService
             $dataIsolation->getCurrentOrganizationCode()
         );
 
-        // 获取已存在的设置类型，使用 array_flip 优化查找
+        // get已存在的settingtype，使用 array_flip 优化查找
         $existingTypes = array_flip(array_map(fn ($setting) => $setting->getType()->value, $settings));
 
-        // 找出不存在的设置类型
+        // 找出不存在的settingtype
         $missingTypes = array_filter($types, function ($type) use ($existingTypes) {
             return ! isset($existingTypes[$type->value]);
         });
 
         if (! empty($missingTypes)) {
-            // 批量创建不存在的设置
+            // 批量create不存在的setting
             $missingEntities = array_map(function ($type) use ($dataIsolation) {
                 return (new AdminGlobalSettingsEntity())
                     ->setType($type)
@@ -76,7 +76,7 @@ readonly class AdminGlobalSettingsDomainService
                     ->setStatus(AdminGlobalSettingsStatus::DISABLED);
             }, $missingTypes);
 
-            // 批量更新不存在的设置
+            // 批量update不存在的setting
             $newSettings = $this->globalSettingsRepository->updateSettingsBatch($missingEntities);
             $settings = array_merge($settings, $newSettings);
         }

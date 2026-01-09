@@ -21,7 +21,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * 用户当前组织应用服务
+ * user当前organization应用服务
  */
 class DelightfulUserOrganizationAppService
 {
@@ -44,7 +44,7 @@ class DelightfulUserOrganizationAppService
     protected OrganizationProductResolver $organizationProductResolver;
 
     /**
-     * 获取用户当前组织代码
+     * getuser当前organization代码
      */
     public function getCurrentOrganizationCode(string $delightfulId): ?array
     {
@@ -52,17 +52,17 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * 设置用户当前组织代码
+     * settinguser当前organization代码
      */
     public function setCurrentOrganizationCode(string $delightfulId, string $delightfulOrganizationCode): array
     {
-        // 1. 查询用户是否在指定组织中
+        // 1. queryuser是否在指定organization中
         $userOrganizations = $this->userDomainService->getUserOrganizationsByDelightfulId($delightfulId);
         if (! in_array($delightfulOrganizationCode, $userOrganizations, true)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 2. 查询这个组织的相关信息：delightful_organizations_environment
+        // 2. query这个organization的相关information：delightful_organizations_environment
         $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByDelightfulOrganizationCode($delightfulOrganizationCode);
         if (! $organizationEnvEntity) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
@@ -81,7 +81,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * 获取账号下可用组织列表（仅包含启用状态组织）。
+     * get账号下可用organization列表（仅包含enabled statusorganization）。
      *
      * @throws Throwable
      */

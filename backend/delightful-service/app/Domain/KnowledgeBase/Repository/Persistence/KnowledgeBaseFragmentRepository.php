@@ -106,7 +106,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         }
         if ($query->getDocumentCode() || $query->isDefaultDocumentCode()) {
             $documentCodes = [$query->getDocumentCode()];
-            // 兼容旧知识库片段，因为旧的知识库没有文档概念，如果是默认文档，就把旧知识库片段一起查出来
+            // 兼容旧知识库片段，因为旧的知识库没有document概念，如果是默认document，就把旧知识库片段一起查出来
             $query->isDefaultDocumentCode() && $documentCodes[] = '';
             $builder->whereIn('document_code', $documentCodes);
         }
@@ -247,7 +247,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
             $groupedResults[$result->document_code][] = $result->sync_status;
         }
 
-        // 判断每个文档的整体状态
+        // 判断每个document的整体status
         $statusMap = [];
         foreach ($groupedResults as $documentCode => $statuses) {
             if (in_array(KnowledgeSyncStatus::Syncing->value, $statuses)) {

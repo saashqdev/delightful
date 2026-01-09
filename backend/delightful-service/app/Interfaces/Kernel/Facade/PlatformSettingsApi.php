@@ -43,7 +43,7 @@ class PlatformSettingsApi
 
         $payload = $request->validated();
 
-        // 允许部分字段更新：仅当传入非空时替换
+        // 允许部分字段update：仅当传入非空时替换
         if (array_key_exists('logo_zh_url', $payload) && $payload['logo_zh_url'] !== null) {
             $data['logo_urls']['zh_CN'] = (string) $payload['logo_zh_url'];
         }
@@ -80,7 +80,7 @@ class PlatformSettingsApi
     }
 
     /**
-     * 简单 URL 与必填项校验（遵循需求：保存 URL；大小/类型校验在文件服务与前端处理）。
+     * 简单 URL 与必填项校验（遵循需求：保存 URL；大小/type校验在文件服务与前端处理）。
      */
     private function validateUrls(array $data): void
     {

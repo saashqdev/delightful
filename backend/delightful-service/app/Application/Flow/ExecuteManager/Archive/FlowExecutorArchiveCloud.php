@@ -17,13 +17,13 @@ class FlowExecutorArchiveCloud
     {
         $name = "{$key}.log";
 
-        // 直接检查序列化后的数据大小
+        // 直接检查序列化后的data大小
         $serializedData = serialize($data);
         $dataSize = strlen($serializedData);
         $maxSize = 100 * 1024 * 1024; // 100MB
 
         if ($dataSize > $maxSize) {
-            // 数据过大，不上传，直接返回空字符串
+            // data过大，不upload，直接return空字符串
             return '';
         }
 
@@ -31,7 +31,7 @@ class FlowExecutorArchiveCloud
         $tmpFile = "{$tmpDir}/{$name}." . uniqid();
 
         try {
-            // 数据大小符合要求，保存到临时文件
+            // data大小符合要求，保存到临时文件
             file_put_contents($tmpFile, $serializedData);
 
             $uploadFile = new UploadFile($tmpFile, dir: 'DelightfulFlowExecutorArchive', name: $name, rename: false);

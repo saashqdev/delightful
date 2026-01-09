@@ -28,11 +28,11 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
         if ($vectorDatabaseIdComponent) {
             $vectorDatabaseId = $vectorDatabaseIdComponent->getValue()->getResult($executionData->getExpressionFieldData());
             if (is_string($vectorDatabaseId) && ! empty($vectorDatabaseId)) {
-                // 如果本身就已经是 id 了，那么直接返回
+                // 如果本身就已经是 id 了，那么直接return
                 $knowledgeCode = $vectorDatabaseId;
             } elseif (is_array($vectorDatabaseId)) {
-                // 这里采用了 names 的组件形式，那么结构是一个多选
-                // 只取第一个的 id
+                // 这里采用了 names 的组件形式，那么结构是one多选
+                // 只取第one的 id
                 $knowledgeCode = $vectorDatabaseId[0]['id'] ?? '';
             }
         }

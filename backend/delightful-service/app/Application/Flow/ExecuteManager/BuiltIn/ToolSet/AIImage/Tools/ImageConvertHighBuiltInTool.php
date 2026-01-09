@@ -37,7 +37,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '图片转高清工具';
+        return 'image转高清tool';
     }
 
     public function getCallback(): ?Closure
@@ -93,8 +93,8 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "用户提示词",
-            "description": "用户提示词",
+            "title": "user提示词",
+            "description": "user提示词",
             "required": null,
             "value": null,
             "encryption": false,

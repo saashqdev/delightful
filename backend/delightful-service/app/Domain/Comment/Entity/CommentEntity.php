@@ -12,37 +12,37 @@ use App\Domain\Chat\Entity\AbstractEntity;
 class CommentEntity extends AbstractEntity
 {
     /**
-     * 主键id.
+     * primary keyid.
      */
     protected int $id;
 
     /**
-     * 类型，例如评论、动态.
+     * type，例如评论、动态.
      */
     protected int $type;
 
     /**
-     * 评论的资源id，例如云文档id、sheet表id.
+     * 评论的资源id，例如云documentid、sheet表id.
      */
     protected int $resourceId;
 
     /**
-     * 评论的资源类型，例如云文档、sheet表.
+     * 评论的资源type，例如云document、sheet表.
      */
     protected int $resourceType;
 
     /**
-     * 父级评论的主键id.
+     * 父级评论的primary keyid.
      */
     protected int $parentId;
 
     /**
-     * 对评论的简短描述，主要是给动态用的，例如创建待办、上传图片等系统动态.
+     * 对评论的简短description，主要是给动态用的，例如create待办、uploadimage等系统动态.
      */
     protected string $description = '';
 
     /**
-     * 评论的内容.
+     * 评论的content.
      */
     protected ?array $message = [];
 
@@ -52,22 +52,22 @@ class CommentEntity extends AbstractEntity
     protected ?array $attachments = null;
 
     /**
-     * 创建人.
+     * create人.
      */
     protected string $creator;
 
     /**
-     * 组织code.
+     * organizationcode.
      */
     protected string $organizationCode;
 
     /**
-     * 创建时间.
+     * creation time.
      */
     protected string $createdAt;
 
     /**
-     * 更新时间.
+     * update time.
      */
     protected string $updatedAt;
 

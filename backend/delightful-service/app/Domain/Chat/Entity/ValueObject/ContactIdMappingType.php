@@ -9,6 +9,6 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 enum ContactIdMappingType: int
 {
-    // 组织编码
+    // organization编码
     case ORGANIZATION_CODE = 0;
 }

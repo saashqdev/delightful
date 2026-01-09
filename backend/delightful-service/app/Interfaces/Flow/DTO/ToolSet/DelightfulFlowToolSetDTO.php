@@ -12,22 +12,22 @@ use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 class DelightfulFlowToolSetDTO extends AbstractFlowDTO
 {
     /**
-     * 工具集名称.
+     * tool集名称.
      */
     public string $name = '';
 
     /**
-     * 工具集描述.
+     * tool集description.
      */
     public string $description = '';
 
     /**
-     * 工具集图标.
+     * tool集图标.
      */
     public string $icon = '';
 
     /**
-     * 用于冗余工具的信息列表.
+     * 用于冗余tool的information列表.
      */
     public array $tools = [];
 

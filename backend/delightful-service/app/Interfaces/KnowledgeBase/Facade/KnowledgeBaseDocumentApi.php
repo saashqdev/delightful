@@ -20,7 +20,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
 {
     /**
-     * 创建文档.
+     * createdocument.
      */
     public function create(string $knowledgeBaseCode)
     {
@@ -34,7 +34,7 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 更新文档.
+     * updatedocument.
      */
     public function update(string $knowledgeBaseCode, string $code)
     {
@@ -49,14 +49,14 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 获取文档列表.
+     * getdocument列表.
      */
     public function queries(string $knowledgeBaseCode)
     {
         $dto = DocumentQueryRequestDTO::fromRequest($this->request);
         $query = new KnowledgeBaseDocumentQuery($this->request->all());
 
-        // 设置查询条件
+        // settingquery条件
         $query->setOrder(['updated_at' => 'desc']);
         $query->setKnowledgeBaseCode($knowledgeBaseCode);
         $query->setDocType($dto->getDocType());
@@ -73,7 +73,7 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 获取文档详情.
+     * getdocument详情.
      */
     public function show(string $knowledgeBaseCode, string $code)
     {
@@ -82,7 +82,7 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 删除文档.
+     * deletedocument.
      */
     public function destroy(string $knowledgeBaseCode, string $code)
     {

@@ -64,15 +64,15 @@ class BaseKnowledgeBaseStrategy extends AbstractKernelAppService implements Know
     }
 
     /**
-     * 获取或创建默认知识库数据源类型.
+     * get或create默认知识库data源type.
      *
      * @param KnowledgeBaseEntity $knowledgeBaseEntity 知识库实体
      *
-     * @return null|int 数据源类型
+     * @return null|int data源type
      */
     public function getOrCreateDefaultSourceType(KnowledgeBaseEntity $knowledgeBaseEntity): ?int
     {
-        // 如果source_type为null，则设置为从外部文件导入
+        // 如果source_type为null，则setting为从外部文件导入
         if ($knowledgeBaseEntity->getSourceType() === null) {
             return SourceType::EXTERNAL_FILE->value;
         }

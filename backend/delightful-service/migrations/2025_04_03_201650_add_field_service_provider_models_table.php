@@ -16,7 +16,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_models', function (Blueprint $table) {
-            $table->json('visible_organizations')->default(Db::raw('(JSON_ARRAY())'))->comment('模型可见的组织编码');
+            $table->json('visible_organizations')->default(Db::raw('(JSON_ARRAY())'))->comment('模型可见的organization编码');
         });
     }
 

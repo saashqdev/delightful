@@ -21,7 +21,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 查询角色列表.
+     * query角色列表.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(PermissionDataIsolation $dataIsolation, Page $page, ?array $filters = null): array
@@ -30,7 +30,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 创建角色.
+     * create角色.
      */
     public function createRole(PermissionDataIsolation $dataIsolation, RoleEntity $roleEntity): RoleEntity
     {
@@ -38,7 +38,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 更新角色.
+     * update角色.
      */
     public function updateRole(PermissionDataIsolation $dataIsolation, RoleEntity $roleEntity): RoleEntity
     {
@@ -46,7 +46,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取角色详情.
+     * get角色详情.
      */
     public function show(PermissionDataIsolation $dataIsolation, int $id): RoleEntity
     {
@@ -54,7 +54,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 根据名称获取角色.
+     * 根据名称get角色.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {
@@ -62,7 +62,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 删除角色.
+     * delete角色.
      */
     public function destroy(PermissionDataIsolation $dataIsolation, int $id): void
     {
@@ -71,7 +71,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取用户角色列表.
+     * getuser角色列表.
      */
     public function getUserRoles(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -79,7 +79,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取用户所有权限.
+     * getuser所有permission.
      */
     public function getUserPermissions(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -87,7 +87,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 检查用户是否拥有指定权限.
+     * 检查user是否拥有指定permission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {
@@ -95,9 +95,9 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取权限资源树结构.
+     * getpermission资源树结构.
      *
-     * @param bool $isPlatformOrganization 是否平台组织
+     * @param bool $isPlatformOrganization 是否平台organization
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array
     {

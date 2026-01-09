@@ -20,9 +20,9 @@ return new class extends Migration {
         Schema::create('delightful_role_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id')->comment('角色ID');
-            $table->string('user_id', 64)->comment('用户ID，对应delightful_contact_users.user_id');
-            $table->string('organization_code', 64)->comment('组织编码');
-            $table->string('assigned_by', 64)->nullable()->comment('分配者用户ID');
+            $table->string('user_id', 64)->comment('userID，对应delightful_contact_users.user_id');
+            $table->string('organization_code', 64)->comment('organization编码');
+            $table->string('assigned_by', 64)->nullable()->comment('分配者userID');
             $table->timestamp('assigned_at')->nullable()->comment('分配时间');
             $table->timestamps();
             $table->softDeletes();
@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->index(['organization_code', 'role_id', 'user_id'], 'idx_organization_code_role_user_id');
             $table->index(['organization_code', 'user_id'], 'idx_organization_code_user_id');
 
-            $table->comment('RBAC角色用户关联table');
+            $table->comment('RBAC角色user关联table');
         });
     }
 

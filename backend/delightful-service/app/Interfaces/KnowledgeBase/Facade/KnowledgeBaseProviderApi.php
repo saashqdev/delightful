@@ -17,7 +17,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
 {
     /**
-     * 获取官方重排序提供商列表.
+     * get官方重排序提供商列表.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getOfficialRerankProviderList(): array
@@ -32,7 +32,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $dto->setStatus(1); // 1 表示启用
         $dto->setCreatedAt(date('Y-m-d H:i:s'));
 
-        // 设置模型列表
+        // setting模型列表
         $models = [];
 
         // 基础重排序模型
@@ -55,7 +55,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 获取嵌入提供商列表.
+     * get嵌入提供商列表.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getEmbeddingProviderList(): array

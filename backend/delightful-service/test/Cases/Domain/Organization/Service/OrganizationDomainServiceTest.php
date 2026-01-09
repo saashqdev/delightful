@@ -100,12 +100,12 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
     public function testCreateOrganizationWithDuplicateNameThrowsException(): void
     {
-        // 创建第一个组织
+        // create第oneorganization
         $organization1 = $this->createTestOrganizationEntity(0);
         $savedOrganization1 = $this->organizationDomainService->create($organization1);
         $this->testOrganizationIds[] = $savedOrganization1->getId();
 
-        // 尝试创建具有相同名称的组织
+        // 尝试create具有相同名称的organization
         $organization2 = $this->createTestOrganizationEntity(1);
         $organization2->setName('Test Organization 0'); // 使用相同的名称
 
@@ -345,11 +345,11 @@ class OrganizationDomainServiceTest extends HttpTestCase
                 );
                 $this->assertNotNull($admin);
                 $this->assertTrue($admin->isOrganizationCreator());
-                $this->assertEquals('组织创建者自动获得管理员权限', $admin->getRemarks());
+                $this->assertEquals('organizationcreate者自动获得管理员permission', $admin->getRemarks());
             }
 
             // At minimum verify organization creation succeeded
-            $this->assertTrue(true, '组织创建成功');
+            $this->assertTrue(true, 'organizationcreatesuccess');
         } catch (Exception $e) {
             // If the user does not exist, an exception should be thrown (expected)
             $this->assertInstanceOf(Exception::class, $e);

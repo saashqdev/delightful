@@ -54,7 +54,7 @@ class ModeRepository extends AbstractRepository implements ModeRepositoryInterfa
     {
         $builder = $this->createBuilder($dataIsolation, ModeModel::query());
 
-        // 是否过滤默认mode
+        // 是否filter默认mode
         if ($query->isExcludeDefault()) {
             $builder->where('is_default', 0);
         }

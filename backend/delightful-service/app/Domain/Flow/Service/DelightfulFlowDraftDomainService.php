@@ -24,7 +24,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * 查询草稿列表.
+     * query草稿列表.
      * @return array{total: int, list: array<DelightfulFlowDraftEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array
@@ -33,7 +33,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * 获取草稿详情.
+     * get草稿详情.
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {
@@ -45,7 +45,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * 删除草稿.
+     * delete草稿.
      */
     public function remove(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): void
     {

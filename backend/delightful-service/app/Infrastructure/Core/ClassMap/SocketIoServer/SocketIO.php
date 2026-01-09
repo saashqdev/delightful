@@ -109,7 +109,7 @@ class SocketIO implements OnMessageInterface, OnOpenInterface, OnCloseInterface
     /* @phpstan-ignore-next-line */
     public function onMessage($server, $frame): void
     {
-        // 链接不可用时，不再尝试推送消息
+        // 链接不可用时，不再尝试推送message
         if (! $server->isAvailable()) {
             return;
         }
@@ -181,7 +181,7 @@ class SocketIO implements OnMessageInterface, OnOpenInterface, OnCloseInterface
                     $this->stdoutLogger->error("SocketIO packet type {$packet->type} not supported");
             }
         } catch (SocketException) {
-            // 不处理链接断开等 socket 异常
+            // 不处理链接断开等 socket exception
         }
     }
 

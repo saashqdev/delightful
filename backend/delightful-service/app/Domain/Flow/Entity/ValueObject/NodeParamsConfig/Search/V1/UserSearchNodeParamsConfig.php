@@ -34,13 +34,13 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
             "type": "array",
             "key": "users",
             "sort": 0,
-            "title": "用户数据",
+            "title": "userdata",
             "description": "desc",
             "items": {
                 "type": "object",
                 "key": "users",
                 "sort": 0,
-                "title": "用户数据",
+                "title": "userdata",
                 "description": "desc",
                 "required": [
                     "user_id",
@@ -123,7 +123,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                         "type": "array",
                         "key": "departments",
                         "sort": 5,
-                        "title": "部门",
+                        "title": "department",
                         "description": "desc",
                         "required": [],
                         "encryption": false,
@@ -132,7 +132,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                             "type": "object",
                             "key": "departments",
                             "sort": 0,
-                            "title": "部门",
+                            "title": "department",
                             "description": "desc",
                             "required": [
                                 "id",
@@ -145,7 +145,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                             "properties": {
                                 "id": {
                                     "type": "string",
-                                    "title": "部门 ID",
+                                    "title": "department ID",
                                     "description": "",
                                     "key": "id",
                                     "sort": 0,
@@ -158,7 +158,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                                 },
                                 "name": {
                                     "type": "string",
-                                    "title": "部门名称",
+                                    "title": "department名称",
                                     "description": "",
                                     "key": "name",
                                     "sort": 1,
@@ -171,7 +171,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                                 },
                                 "path": {
                                     "type": "string",
-                                    "title": "部门路径",
+                                    "title": "department路径",
                                     "description": "",
                                     "key": "path",
                                     "sort": 2,

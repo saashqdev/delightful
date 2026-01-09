@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_flow_memory_histories', function (Blueprint $table) {
-            $table->string('message_id')->default('')->comment('消息ID')->after('request_id');
+            $table->string('message_id')->default('')->comment('messageID')->after('request_id');
         });
     }
 

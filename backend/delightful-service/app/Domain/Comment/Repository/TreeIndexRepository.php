@@ -41,7 +41,7 @@ class TreeIndexRepository
 
     /**
      * 假设现在的父子级关系是1 -> 2 -> 3 -> 4，现在需要在4的后面插入5，那么需要做的操作是：
-     * 获取到4的所有祖先节点，然后使用4的所有祖先节点去更新5的祖先节点，然后再创建一条5 -> 5的关系。
+     * get到4的所有祖先节点，然后使用4的所有祖先节点去update5的祖先节点，然后再create一条5 -> 5的关系。
      * 1->4
      * 2->4
      * 3->4
@@ -183,12 +183,12 @@ class TreeIndexRepository
         Builder $builder,
         array $nodeIds
     ): void {
-        // 删除祖先节点是 nodeIds 的索引
+        // delete祖先节点是 nodeIds 的索引
         $builder->newModelInstance()->whereIn('ancestor_id', $nodeIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();
 
-        // 删除后代节点是 nodeIds 的索引
+        // delete后代节点是 nodeIds 的索引
         $builder->newModelInstance()->whereIn('descendant_id', $nodeIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();

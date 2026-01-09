@@ -17,29 +17,29 @@ return new class extends Migration {
         Schema::create('delightful_bot_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('flow_code')->comment('工作流code');
-            $table->string('flow_version')->comment('工作流版本');
+            $table->string('flow_version')->comment('工作流version');
             $table->json('instruct')->comment('交互指令');
             $table->bigInteger('root_id')->comment('根id');
-            $table->string('robot_name')->comment('助理名称');
-            $table->string('robot_avatar')->comment('助理头像');
-            $table->string('robot_description')->comment('助理描述');
+            $table->string('robot_name')->comment('assistant name');
+            $table->string('robot_avatar')->comment('assistant avatar');
+            $table->string('robot_description')->comment('助理description');
 
-            $table->string('version_description', 255)->default('')->comment('描述');
-            $table->string('version_number')->nullable()->comment('版本号');
+            $table->string('version_description', 255)->default('')->comment('description');
+            $table->string('version_number')->nullable()->comment('version number');
             $table->integer('release_scope')->nullable()->comment('发布范围.1:发布到企业内部 2:发布到应用市场');
 
-            $table->integer('approval_status')->default(3)->nullable(false)->comment('审批状态');
-            $table->integer('review_status')->default(0)->nullable(false)->comment('审核状态');
-            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('发布到企业内部状态');
-            $table->integer('app_market_status')->default(0)->nullable(false)->comment('发布到应用市场状态');
+            $table->integer('approval_status')->default(3)->nullable(false)->comment('审批status');
+            $table->integer('review_status')->default(0)->nullable(false)->comment('审核status');
+            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('发布到企业内部status');
+            $table->integer('app_market_status')->default(0)->nullable(false)->comment('发布到应用市场status');
 
-            $table->string('organization_code')->comment('组织编码');
+            $table->string('organization_code')->comment('organization编码');
 
             $table->string('created_uid')->default('')->comment('发布人');
-            $table->timestamp('created_at')->nullable()->comment('创建时间');
-            $table->string('updated_uid')->default('')->comment('更新者用户ID');
-            $table->timestamp('updated_at')->nullable()->comment('更新时间');
-            $table->timestamp('deleted_at')->nullable()->comment('删除时间');
+            $table->timestamp('created_at')->nullable()->comment('creation time');
+            $table->string('updated_uid')->default('')->comment('update者userID');
+            $table->timestamp('updated_at')->nullable()->comment('update time');
+            $table->timestamp('deleted_at')->nullable()->comment('deletion time');
         });
     }
 

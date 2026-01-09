@@ -27,7 +27,7 @@ class InstructDisplayType
     }
 
     /**
-     * 获取所有显示类型及其国际化标签.
+     * get所有显示类型及其国际化标签.
      * @return array<int, string>
      */
     public static function getTypeOptions(): array

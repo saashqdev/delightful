@@ -11,26 +11,26 @@ use App\Domain\ImageGenerate\Contract\ImageEnhancementProcessorInterface;
 use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
 
 /**
- * 空实现的图片增强处理器
+ * 空实现的image增强处理器
  * 在没有商业代码时提供默认实现.
  */
 class NullImageEnhancementProcessor implements ImageEnhancementProcessorInterface
 {
     public function enhanceImageData(string $imageData, ImplicitWatermark $watermark): string
     {
-        // 开源版本不进行任何增强处理，直接返回原始数据
+        // 开源version不进行任何增强处理，直接return原始data
         return $imageData;
     }
 
     public function enhanceImageUrl(string $imageUrl, ImplicitWatermark $watermark): string
     {
-        // 开源版本不进行任何增强处理，直接返回原始URL
+        // 开源version不进行任何增强处理，直接return原始URL
         return $imageUrl;
     }
 
     public function extractEnhancementFromImageData(string $imageData): ?array
     {
-        // 开源版本无法提取增强信息
+        // 开源version无法提取增强information
         return null;
     }
 }

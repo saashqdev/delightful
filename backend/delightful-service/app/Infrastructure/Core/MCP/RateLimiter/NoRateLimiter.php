@@ -21,7 +21,7 @@ class NoRateLimiter extends AbstractRateLimiter
     protected bool $enabled = false;
 
     /**
-     * 获取当前的限制配置.
+     * get当前的限制configuration.
      * 对于无限制实现，所有限制均设为 PHP_INT_MAX.
      */
     public function getLimits(): array

@@ -14,6 +14,6 @@ enum ConversationStatus: int
     // 隐藏
     case Hidden = 1;
 
-    // 删除
+    // delete
     case Delete = 2;
 }

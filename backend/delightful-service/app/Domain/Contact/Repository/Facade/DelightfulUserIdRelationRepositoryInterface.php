@@ -11,12 +11,12 @@ use App\Domain\Contact\Entity\DelightfulUserIdRelationEntity;
 
 interface DelightfulUserIdRelationRepositoryInterface
 {
-    // 创建
+    // create
     public function createUserIdRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): void;
 
-    // 查询
+    // query
     public function getRelationIdExists(DelightfulUserIdRelationEntity $userIdRelationEntity): array;
 
-    // id_type,relation_type,relation_value 查询 user_id,然后去查询userinformation
+    // id_type,relation_type,relation_value query user_id,然后去queryuserinformation
     public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string;
 }

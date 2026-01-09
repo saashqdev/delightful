@@ -35,7 +35,7 @@ class FileGetLinkBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '根据文件 key 获取文件下载的签名URL。仅能获取本流程产生的文件';
+        return '根据文件 key get文件下载的签名URL。仅能get本流程产生的文件';
     }
 
     public function getCallback(): ?Closure
@@ -50,7 +50,7 @@ class FileGetLinkBuiltInTool extends AbstractBuiltInTool
 
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-            // key 权限检测
+            // key permission检测
             if (! str_starts_with($key, $organizationCode . '/' . config('kk_brd_service.app_id') . '/' . $executionData->getParentFlowCode())) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'common.access', ['label' => $key]);
             }

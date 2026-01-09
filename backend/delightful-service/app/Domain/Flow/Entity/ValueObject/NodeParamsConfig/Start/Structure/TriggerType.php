@@ -15,7 +15,7 @@ enum TriggerType: int
     // 无触发
     case None = 0;
 
-    // 新消息时
+    // 新message时
     case ChatMessage = 1;
 
     // 打开聊天窗口
@@ -30,7 +30,7 @@ enum TriggerType: int
     // 循环体开始节点
     case LoopStart = 5;
 
-    // 等待消息
+    // 等待message
     case WaitMessage = 6;
 
     // 添加好友时

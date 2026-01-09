@@ -18,39 +18,39 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface MethodHandlerInterface
 {
     /**
-     * 处理请求并返回结果.
+     * 处理请求并return结果.
      *
-     * @return null|array<string, mixed> 处理结果，如果不需要返回数据则返回null
+     * @return null|array<string, mixed> 处理结果，如果不需要returndata则returnnull
      */
     public function handle(MessageInterface $request): ?array;
 
     /**
-     * 设置工具管理器.
+     * settingtool管理器.
      */
     public function setToolManager(MCPToolManager $toolManager): self;
 
     /**
-     * 获取工具管理器.
+     * gettool管理器.
      */
     public function getToolManager(): MCPToolManager;
 
     /**
-     * 设置资源管理器.
+     * setting资源管理器.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self;
 
     /**
-     * 获取资源管理器.
+     * get资源管理器.
      */
     public function getResourceManager(): MCPResourceManager;
 
     /**
-     * 设置提示管理器.
+     * setting提示管理器.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self;
 
     /**
-     * 获取提示管理器.
+     * get提示管理器.
      */
     public function getPromptManager(): MCPPromptManager;
 }

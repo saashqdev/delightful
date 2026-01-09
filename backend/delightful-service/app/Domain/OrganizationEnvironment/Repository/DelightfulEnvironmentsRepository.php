@@ -66,7 +66,7 @@ readonly class DelightfulEnvironmentsRepository implements EnvironmentRepository
         return new DelightfulEnvironmentEntity($delightfulOrganizationEnv);
     }
 
-    // 创建环境
+    // create环境
     public function createDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         if (empty($environmentDTO->getId())) {
@@ -84,7 +84,7 @@ readonly class DelightfulEnvironmentsRepository implements EnvironmentRepository
         return $environmentDTO;
     }
 
-    // 更新环境
+    // update环境
     #[CacheEvict(prefix: 'delightful_environment', value: '_#{environmentDTO.delightfulId}')]
     public function updateDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {

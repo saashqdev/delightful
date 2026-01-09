@@ -18,7 +18,7 @@ class StartApprovalDTO extends AbstractFlowDTO
     // 审批流data
     public array $approvalData = [];
 
-    // 部门ID
+    // departmentID
     public ?string $departmentId = null;
 
     public function getTemplateCode(): string

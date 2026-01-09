@@ -40,13 +40,13 @@ class DefaultAgent extends AbstractAgent
             'seq' => $seqEntity->toArray(),
             'message' => $logMessageData,
         ]);
-        // 获取触发类型
+        // get触发type
         $triggerType = TriggerType::fromSeqType($seqEntity->getSeqType());
         # 传入的参数:
-        // 1. $userAccountEntity 包含真名,手机号等有安全风险,应该需要auth授权的信息
-        // 2. $userEntity 用户详情,包含用户id,用户昵称,用户头像等信息
-        // 3. $seqEntity 会话窗口id,引用的message_id,消息类型(聊天消息/打开了会话窗口)
-        // 4. $messageEntity 保存有消息类型,消息的具体内容,发件人id,发送时间
+        // 1. $userAccountEntity 包含真名,手机号等有安全风险,应该需要auth授权的information
+        // 2. $userEntity user详情,包含userid,user昵称,user头像等information
+        // 3. $seqEntity conversation窗口id,引用的message_id,messagetype(聊天message/打开了conversation窗口)
+        // 4. $messageEntity 保存有messagetype,message的具体content,发件人id,发送时间
         $this->getDelightfulFlowExecuteAppService()->imChat(
             $agentAccountEntity->getAiCode(),
             $triggerType,

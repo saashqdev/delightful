@@ -73,7 +73,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
         $this->delightfulMessage::query()->where('delightful_message_id', $messageEntity->getDelightfulMessageId())->update(
             [
                 'current_version_id' => $delightfulMessageVersionEntity->getVersionId(),
-                // 编辑消息允许修改消息类型
+                // 编辑message允许修改messagetype
                 'message_type' => $messageEntity->getMessageType()->value,
                 'content' => Json::encode($messageEntity->getContent()->toArray()),
             ]
@@ -133,7 +133,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
     /**
      * Get messages by delightful message IDs.
      * @param array $delightfulMessageIds Delightful message ID数组
-     * @return DelightfulMessageEntity[] 消息实体数组
+     * @return DelightfulMessageEntity[] message实体数组
      */
     public function getMessagesByDelightfulMessageIds(array $delightfulMessageIds): array
     {
@@ -151,8 +151,8 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
 
     /**
      * Batch create messages.
-     * @param array $messagesData 消息数据数组
-     * @return bool 是否创建成功
+     * @param array $messagesData messagedata数组
+     * @return bool 是否createsuccess
      */
     public function batchCreateMessages(array $messagesData): bool
     {

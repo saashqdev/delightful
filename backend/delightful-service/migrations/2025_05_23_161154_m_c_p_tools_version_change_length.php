@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_mcp_server_tools', function (Blueprint $table) {
-            $table->string('version', 255)->default('')->comment('工具版本')->change();
+            $table->string('version', 255)->default('')->comment('toolversion')->change();
         });
     }
 

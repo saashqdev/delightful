@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::create('delightful_api_user_configs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id', 64)->default('')->comment('userid');
-            $table->string('organization_code', 64)->default('')->comment('组织code');
+            $table->string('organization_code', 64)->default('')->comment('organizationcode');
             $table->string('app_code', 64)->default('')->comment('applicationcode');
             $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度')->default(0);
             $table->unsignedDecimal('use_amount', 40, 6)->comment('使用额度')->default(0);

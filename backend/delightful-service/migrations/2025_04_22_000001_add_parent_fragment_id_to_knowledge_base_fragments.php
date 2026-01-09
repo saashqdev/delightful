@@ -29,7 +29,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // 检查是否已存在字段，避免重复删除
+            // 检查是否已存在字段，避免重复delete
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'parent_fragment_id')) {
                 $table->dropColumn('parent_fragment_id');
             }

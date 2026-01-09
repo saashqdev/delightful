@@ -12,7 +12,7 @@ use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 
 /**
- * 初始化默认助手会话分发模块.
+ * 初始化默认助手conversation分发模块.
  */
 #[Producer(exchange: 'init_default_assistant_conversation', routingKey: 'init_default_assistant_conversation')]
 class InitDefaultAssistantConversationDispatchPublisher extends ProducerMessage

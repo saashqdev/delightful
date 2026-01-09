@@ -30,7 +30,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
     public function square(): array
     {
-        // 返回 agent 列tableinformation
+        // return agent 列tableinformation
         return $this->userDomainService->getAgentList();
     }
 
@@ -44,7 +44,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $dataIsolation = DataIsolation::create();
         $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
-        // 根据flowCode 查询user_id
+        // 根据flowCode queryuser_id
         $delightfulUserEntity = $this->userDomainService->getByAiCode($dataIsolation, $flowCode);
         if (empty($delightfulUserEntity->getUserId())) {
             ExceptionBuilder::throw(AgentErrorCode::AGENT_NOT_FOUND, 'agent_user_id not found');
@@ -58,7 +58,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     public function getAgentsForAdmin(array $agentIds, Authenticatable $authenticatable): array
     {
-        // 获取机器人information
+        // get机器人information
         $delightfulAgentEntities = $this->delightfulAgentDomainService->getAgentByIds($agentIds);
 
         $filePaths = array_column($delightfulAgentEntities, 'agent_avatar');

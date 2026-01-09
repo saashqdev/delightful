@@ -12,7 +12,7 @@ use App\Domain\Chat\Event\Agent\UserCallAgentEvent;
 interface UserCallAgentInterface
 {
     /**
-     * 处理用户调用 Agent 的事件.
+     * 处理user调用 Agent 的事件.
      */
     public function process(UserCallAgentEvent $event): void;
 
@@ -22,10 +22,10 @@ interface UserCallAgentInterface
     public function canHandle(string $aiCode): bool;
 
     /**
-     * 获取处理器优先级.
+     * get处理器优先级.
      *
      * 数字越大优先级越高，默认为0
-     * 企业版可以返回更高的优先级以覆盖默认实现
+     * 企业版可以return更高的优先级以覆盖默认实现
      */
     public static function getPriority(): int;
 }

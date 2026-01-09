@@ -22,7 +22,7 @@ final class MentionAttrs extends AbstractDTO
 
     public function __construct(?array $data = null)
     {
-        // 需要先设置 type
+        // 需要先setting type
         $this->setType($data['type'] ?? '');
         parent::__construct($data);
     }

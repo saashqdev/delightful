@@ -8,17 +8,17 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * user查询类型。
+ * userquery类型。
  */
 enum UserQueryType: int
 {
     // 人员
     case User = 1;
 
-    // 人员 + 部门
+    // 人员 + department
     case UserAndDepartment = 2;
 
-    // 人员 + 部门（完整路径）
+    // 人员 + department（完整路径）
     case UserAndDepartmentFullPath = 3;
 
     /**

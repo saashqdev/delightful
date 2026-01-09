@@ -17,7 +17,7 @@ enum DelightfulMessageStatus: int
     // 已读
     case Seen = 1;
 
-    // 已查看（非纯文本的复杂类型消息，用户点击了详情）
+    // 已查看（非纯文本的复杂typemessage，user点击了详情）
     case Read = 2;
 
     // 已撤回
@@ -28,7 +28,7 @@ enum DelightfulMessageStatus: int
         return strtolower($this->name);
     }
 
-    // 根据控制消息类型获取消息状态
+    // 根据控制messagetypegetmessagestatus
     public static function getMessageStatusByControlMessageType(ControlMessageType $controlMessageType): DelightfulMessageStatus
     {
         return match ($controlMessageType) {

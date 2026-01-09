@@ -25,7 +25,7 @@ readonly class AgentDomainService
     }
 
     /**
-     * 查询 Agent 列table.
+     * query Agent 列table.
      *
      * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
@@ -35,7 +35,7 @@ readonly class AgentDomainService
     }
 
     /**
-     * 获取组织内可用的 Agent 版本.
+     * getorganization内可用的 Agent version.
      *
      * @return array{total: int, list: array<DelightfulAgentVersionEntity>}
      */

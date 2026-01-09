@@ -17,7 +17,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $id
  * @property string $organization_code
  * @property string $code
- * @property int $type 关联类型 1: flow 2: mcp
+ * @property int $type 关联type 1: flow 2: mcp
  * @property string $flow_code 关联 code
  * @property string $conversation_id
  * @property string $name

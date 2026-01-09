@@ -19,7 +19,7 @@ use InvalidArgumentException;
 class AdminModeGroupAppService extends AbstractModeAppService
 {
     /**
-     * 根据模式ID获取分组列表 (管理后台用，包含完整i18n字段).
+     * 根据模式IDget分组列表 (管理后台用，包含完整i18n字段).
      */
     public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {
@@ -35,7 +35,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * 获取分组详情 (管理后台用).
+     * get分组详情 (管理后台用).
      */
     public function getGroupById(DelightfulUserAuthorization $authorization, string $groupId): ?array
     {
@@ -57,7 +57,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * 创建分组 (管理后台用).
+     * create分组 (管理后台用).
      */
     public function createGroup(DelightfulUserAuthorization $authorization, CreateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -88,7 +88,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * 更新分组 (管理后台用).
+     * update分组 (管理后台用).
      */
     public function updateGroup(DelightfulUserAuthorization $authorization, string $groupId, UpdateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -117,7 +117,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * 删除分组.
+     * delete分组.
      */
     public function deleteGroup(DelightfulUserAuthorization $authorization, string $groupId): void
     {

@@ -12,11 +12,11 @@ use Hyperf\Contract\Arrayable;
 use JsonSerializable;
 
 /**
- * 流式推送大模型的响应消息.
+ * 流式推送大模型的响应message.
  */
 interface StreamMessageInterface extends JsonSerializable, Arrayable
 {
-    // 消息是否是流式消息
+    // message是否是流式message
     public function isStream(): bool;
 
     public function getStreamOptions(): ?StreamOptions;

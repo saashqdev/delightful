@@ -40,7 +40,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
         $result = $inputFields->getForm()->getKeyValue($executionData->getExpressionFieldData());
         $variableName = $result['variable_name'];
 
-        // 检测原来的数据是否存在，并且是数组
+        // 检测原来的data是否存在，并且是数组
         $variableElementList = $executionData->variableGet($variableName);
         if (is_null($variableElementList)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_exist', ['var_name' => $variableName]);
@@ -49,7 +49,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_array', ['var_name' => $variableName]);
         }
         $elementList = $result['element_list'];
-        // 如果变量值是通过表达式获取的，是当做一个整体
+        // 如果变量值是通过表达式get的，是当做one整体
         if ($inputFields->getForm()->getProperties()['element_list']->getExecuteValue()?->isExpression()) {
             $elementList = [$elementList];
         }

@@ -25,17 +25,17 @@ enum KnowledgeSyncStatus: int
     case Synced = 1;
 
     /*
-     * 同步失败
+     * 同步failed
      */
     case SyncFailed = 2;
 
     /*
-     * 删除成功
+     * deletesuccess
      */
     case Deleted = 4;
 
     /*
-     * 删除失败
+     * deletefailed
      */
     case DeleteFailed = 5;
 
@@ -45,7 +45,7 @@ enum KnowledgeSyncStatus: int
     case Rebuilding = 6;
 
     /*
-     * 需要进行补偿的状态
+     * 需要进行补偿的status
      */
     public static function needCompensate(): array
     {

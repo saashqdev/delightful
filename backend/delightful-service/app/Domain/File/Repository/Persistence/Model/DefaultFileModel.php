@@ -13,17 +13,17 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * @property int $id 主键ID
- * @property int $business_type 模块类型，文件属于哪个模块
- * @property int $file_type 文件类型：0:官方添加，1:组织添加
+ * @property int $id primary keyID
+ * @property int $business_type 模块type，文件属于哪个模块
+ * @property int $file_type 文件type：0:官方添加，1:organization添加
  * @property string $key 文件key
  * @property int $file_size 文件大小
- * @property string $organization 组织编码
+ * @property string $organization organization编码
  * @property string $file_extension 文件后缀
- * @property string $user_id 上传者ID
- * @property DateTime $created_at 创建时间
- * @property DateTime $updated_at 更新时间
- * @property DateTime $deleted_at 删除时间
+ * @property string $user_id upload者ID
+ * @property DateTime $created_at creation time
+ * @property DateTime $updated_at update time
+ * @property DateTime $deleted_at deletion time
  */
 class DefaultFileModel extends Model
 {

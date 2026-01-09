@@ -17,7 +17,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 聚合AI搜索的响应卡片消息.
+ * 聚合AIsearch的响应卡片message.
  */
 class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface, LLMMessageInterface
 {
@@ -36,7 +36,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
 
     protected ?array $associateQuestions = null;
 
-    // 这里要兼容老版本的json数据
+    // 这里要兼容老version的jsondata
     protected null|array|string $mindMap = null;
 
     protected ?array $searchKeywords = null;
@@ -225,7 +225,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     }
 
     /**
-     * 只返回大模型返回的文本内容， 且忽略无效的内容，如: "已经为您找到答案，请等待生成总结“.
+     * 只return大模型return的文本content， 且忽略无效的content，如: "已经为您找到答案，请等待生成总结“.
      */
     public function getTextContent(): string
     {

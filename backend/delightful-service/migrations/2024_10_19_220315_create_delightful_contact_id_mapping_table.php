@@ -21,13 +21,13 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('origin_id', 255)->comment('源id');
             $table->string('new_id', 255)->comment('新id');
-            // 映射类型：用户 id、部门 id、空间 id，组织 id
-            $table->string('mapping_type', 32)->comment('映射类型（user、department、space、organization）');
+            // 映射type：user id、department id、空间 id，organization id
+            $table->string('mapping_type', 32)->comment('映射type（user、department、space、organization）');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');
             $table->unique(['origin_id', 'mapping_type'], 'unique_origin_id_mapping_type');
-            $table->comment('部门、用户、组织编码、空间编码等的映射关系记录');
+            $table->comment('department、user、organization编码、空间编码等的映射关系记录');
         });
     }
 

@@ -28,7 +28,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
             $waitMessageEntity = clone $savingWaitMessageEntity;
             $waitMessageEntity->prepareForCreation();
         } else {
-            // 暂时只支持创建
+            // 暂时只支持create
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'unsupported update');
         }
 
@@ -50,7 +50,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
             if (! empty($waitMessage->getTimeout())) {
                 $isTimeout = $waitMessage->getTimeout() < time();
             }
-            // 如果版本变更
+            // 如果version变更
             $isVersionChanged = $waitMessage->getFlowCode() !== $flowCode || $waitMessage->getFlowVersion() !== $flowVersion;
             if ($isTimeout || $isVersionChanged) {
                 $this->handled($dataIsolation, $waitMessage->getId());

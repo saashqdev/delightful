@@ -10,27 +10,27 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * 熔断器状态枚举.
+ * 熔断器status枚举.
  */
 enum CircuitBreakerStatus: string
 {
     /**
-     * 关闭状态 - 正常服务中.
+     * 关闭status - 正常服务中.
      */
     case CLOSED = 'closed';
 
     /**
-     * 开启状态 - 熔断中.
+     * 开启status - 熔断中.
      */
     case OPEN = 'open';
 
     /**
-     * 半开状态 - 尝试恢复中.
+     * 半开status - 尝试恢复中.
      */
     case HALF_OPEN = 'half_open';
 
     /**
-     * 获取所有状态值数组.
+     * get所有status值数组.
      */
     public static function values(): array
     {
@@ -42,7 +42,7 @@ enum CircuitBreakerStatus: string
     }
 
     /**
-     * 检查是否是有效的状态值
+     * 检查是否是有效的status值
      */
     public static function isValid(string $status): bool
     {
@@ -50,7 +50,7 @@ enum CircuitBreakerStatus: string
     }
 
     /**
-     * 从字符串创建枚举实例.
+     * 从字符串create枚举实例.
      */
     public static function fromString(string $status): self
     {

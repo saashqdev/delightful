@@ -91,7 +91,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * 获取当前语言的名称.
+     * get当前语言的名称.
      */
     public function getLocalizedName(?string $locale = null): string
     {
@@ -116,7 +116,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * 获取当前语言的描述.
+     * get当前语言的description.
      */
     public function getLocalizedDescription(?string $locale = null): string
     {

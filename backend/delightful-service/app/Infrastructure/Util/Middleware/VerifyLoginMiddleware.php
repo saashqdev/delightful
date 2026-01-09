@@ -18,7 +18,7 @@ class VerifyLoginMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // 获取access_token
+        // getaccess_token
         $token = $request->getHeader('authorization')[0] ?? '';
         if (! $token) {
             ExceptionBuilder::throw(HttpErrorCode::Unauthorized);

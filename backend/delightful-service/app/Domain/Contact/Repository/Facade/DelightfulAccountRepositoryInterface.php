@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\AccountEntity;
 
 interface DelightfulAccountRepositoryInterface
 {
-    // 查询账号information
+    // query账号information
     public function getAccountInfoByDelightfulId(string $delightfulId): ?AccountEntity;
 
     /**
@@ -19,7 +19,7 @@ interface DelightfulAccountRepositoryInterface
      */
     public function getAccountByDelightfulIds(array $delightfulIds): array;
 
-    // 创建账号
+    // create账号
     public function createAccount(AccountEntity $accountDTO): AccountEntity;
 
     /**

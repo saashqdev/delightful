@@ -13,7 +13,7 @@ use Hyperf\Codec\Json;
 
 class ClientStreamSequenceResponse extends AbstractEntity
 {
-    // 要更新目标 seqId 的内容
+    // 要update目标 seqId 的content
     protected string $targetSeqId;
 
     // 为了实现丢包重传，需要记录当前的seqId。一定单调递增。
@@ -22,10 +22,10 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // 大模型的总结
     protected ?string $content;
 
-    // 有些消息的大模型响应字段不是 content，这里特殊处理
+    // 有些message的大模型响应字段不是 content，这里特殊处理
     protected ?string $llmResponse;
 
-    // 大模型的推理内容
+    // 大模型的推理content
     protected ?string $reasoningContent;
 
     protected StreamMessageStatus $status;

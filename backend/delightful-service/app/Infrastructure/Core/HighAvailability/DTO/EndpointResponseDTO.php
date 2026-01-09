@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractDTO;
 class EndpointResponseDTO extends AbstractDTO
 {
     /**
-     * 主键ID.
+     * primary keyID.
      */
     protected string $id;
 
@@ -38,37 +38,37 @@ class EndpointResponseDTO extends AbstractDTO
     protected int $responseTime;
 
     /**
-     * 响应 http 状态码
+     * 响应 http status码
      */
     protected int $httpStatusCode;
 
     /**
-     * 响应的业务状态码
+     * 响应的业务status码
      */
     protected int $businessStatusCode;
 
     /**
-     * 是否请求成功
+     * 是否请求success
      */
     protected int $isSuccess = 0;
 
     /**
-     * 异常类型.
+     * exceptiontype.
      */
     protected ?string $exceptionType = null;
 
     /**
-     * 异常信息.
+     * exceptioninformation.
      */
     protected ?string $exceptionMessage = null;
 
     /**
-     * 创建时间.
+     * creation time.
      */
     protected string $createdAt;
 
     /**
-     * 更新时间.
+     * update time.
      */
     protected string $updatedAt;
 

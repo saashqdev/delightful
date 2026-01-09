@@ -8,22 +8,22 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * id类型:user_id/open_id/union_id.
+ * idtype:user_id/open_id/union_id.
  */
 enum UserIdType: string
 {
     /**
-     * 组织内唯一
+     * organization内唯一
      */
     case UserId = 'user_id';
 
     /**
-     * 组织的某个应用下唯一
+     * organization的某个应用下唯一
      */
     case OpenId = 'open_id';
 
     /**
-     * 应用的创建组织下唯一(用于应用跨组织追踪用于).
+     * 应用的createorganization下唯一(用于应用跨organization追踪用于).
      */
     case UnionId = 'union_id';
 

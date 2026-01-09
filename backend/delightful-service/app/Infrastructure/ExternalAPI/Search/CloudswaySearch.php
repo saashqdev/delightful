@@ -32,13 +32,13 @@ class CloudswaySearch
     /**
      * Execute Cloudsway search.
      *
-     * @param string $query 搜索查询词
+     * @param string $query searchquery词
      * @param string $requestUrl 完整的 endpoint URL (from config)
      * @param string $apiKey api key for authorization (from config)
      * @param string $mkt Market code (not used by Cloudsway but kept for interface consistency)
      * @param int $count 结果数量 (10/20/30/40/50)
      * @param int $offset 分页偏移量
-     * @param string $freshness 时间过滤 (Day/Week/Month)
+     * @param string $freshness 时间filter (Day/Week/Month)
      * @param string $setLang 语言代码 (如 en-US)
      * @return array Cloudsway API response
      * @throws GuzzleException
@@ -53,7 +53,7 @@ class CloudswaySearch
         string $freshness = '',
         string $setLang = ''
     ): array {
-        // 构建查询参数
+        // 构建query参数
         $queryParams = [
             'q' => $query,
             'count' => $count,
@@ -79,10 +79,10 @@ class CloudswaySearch
         // 构建请求头
         $headers = [
             'Authorization' => 'Bearer ' . $apiKey,
-            'Pragma' => 'no-cache',  // 不使用缓存，保证实时性
+            'Pragma' => 'no-cache',  // 不使用cache，保证实时性
         ];
 
-        // 创建 Guzzle 客户端
+        // create Guzzle 客户端
         $client = new Client([
             'timeout' => self::DEFAULT_SEARCH_ENGINE_TIMEOUT,
             'headers' => $headers,
@@ -94,7 +94,7 @@ class CloudswaySearch
                 'query' => $queryParams,
             ]);
 
-            // 获取响应体
+            // get响应体
             $body = $response->getBody()->getContents();
             $data = Json::decode($body);
         } catch (RequestException $e) {

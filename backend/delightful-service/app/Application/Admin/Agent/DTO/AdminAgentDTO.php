@@ -11,37 +11,37 @@ use App\Infrastructure\Core\AbstractDTO;
 
 class AdminAgentDTO extends AbstractDTO
 {
-    // 主键
+    // primary key
     protected string $id;
 
     // 名称
     protected string $agentName;
 
-    // 描述
+    // description
     protected string $agentDescription;
 
     // 头像
     protected string $agentAvatar;
 
-    // 状态
+    // status
     protected int $status;
 
-    // 创建人id
+    // create人id
     protected string $createdUid;
 
-    // 创建时间
+    // creation time
     protected string $createdAt;
 
-    // 创建人名称
+    // create人名称
     protected string $createdName;
 
-    // 发布状态
+    // 发布status
     protected ?int $releaseScope = null;
 
-    // 审核状态
+    // 审核status
     protected ?int $reviewStatus = null;
 
-    // 审批状态
+    // 审批status
     protected ?int $approvalStatus = null;
 
     public function getId(): string

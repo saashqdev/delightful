@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Flow\Entity\ValueObject\Query;
 
 /**
- * 知识库文档查询.
+ * 知识库documentquery.
  */
 class KnowledgeBaseDocumentQuery extends Query
 {
@@ -29,7 +29,7 @@ class KnowledgeBaseDocumentQuery extends Query
     protected ?string $updatedUid = null;
 
     /**
-     * 知识库文档代码数组，用于批量查询.
+     * 知识库document代码数组，用于批量query.
      *
      * @var null|string[]
      */

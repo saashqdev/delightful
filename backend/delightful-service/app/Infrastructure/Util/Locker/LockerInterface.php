@@ -18,7 +18,7 @@ interface LockerInterface
     public function mutexLock(string $name, string $owner, int $expire = 180): bool;
 
     /**
-     * from旋lock
+     * fromrotatelock
      * @param int $expire expiretime,unit:second
      */
     public function spinLock(string $name, string $owner, int $expire = 10): bool;

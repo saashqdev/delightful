@@ -116,7 +116,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'questions' => ['明dayBeijingday气', 'want穿whatclothes'],
+            'questions' => ['cleardayBeijingdayair', 'want穿whatclothes'],
             'use_deep_search' => true,
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -195,7 +195,7 @@ call`internet_search`conductsearch,ifuserhintwordhave`deepdegreesearch`fourfield
 
 MARKDOWN,
 
-            'user_prompt' => 'deepdegreesearch:Dongguandownweekday气',
+            'user_prompt' => 'deepdegreesearch:Dongguandownweekdayair',
         ]);
         $runner->execute($vertexResult, $executionData);
 

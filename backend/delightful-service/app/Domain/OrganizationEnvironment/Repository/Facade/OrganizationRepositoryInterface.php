@@ -11,7 +11,7 @@ use App\Domain\OrganizationEnvironment\Entity\OrganizationEntity;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * organization仓libraryinterface.
+ * organizationwarehouselibraryinterface.
  */
 interface OrganizationRepositoryInterface
 {

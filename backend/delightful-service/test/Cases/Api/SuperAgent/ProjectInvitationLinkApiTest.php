@@ -332,7 +332,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertEquals(51225, $response['code']); // alreadyalreadyisprojectmember
     }
 
-    // =================== side界conditiontest ===================
+    // =================== sideboundaryconditiontest ===================
 
     /**
      * testinvalidTokenaccess.
@@ -346,7 +346,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * testpermissionside界.
+     * testpermissionsideboundary.
      */
     public function testPermissionBoundaries(): void
     {

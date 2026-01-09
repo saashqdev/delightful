@@ -16,7 +16,7 @@ use Hyperf\Codec\Json;
 
 /**
  * ASR grouploader
- * responsible ASR relatedcloseactualbodygroup装andpathconvert.
+ * responsible ASR relatedcloseactualbodygroupinstallandpathconvert.
  *
  * pathformatinstruction:
  * - workregiontopath (workspace-relative): .asr_recordings/session_xxx or recordingsummary_xxx
@@ -117,7 +117,7 @@ class AsrAssembler
     /**
      * from file_key extractworkregiontopath.
      *
-     * willcomplete file_key convertforworkregiontopath,useatsandbox API calland界surfaceshow
+     * willcomplete file_key convertforworkregiontopath,useatsandbox API callandboundarysurfaceshow
      * convertclosesystem: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey complete file_key (like: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)

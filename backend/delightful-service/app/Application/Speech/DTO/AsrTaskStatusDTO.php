@@ -65,7 +65,7 @@ class AsrTaskStatusDTO
 
     public bool $sandboxTaskCreated = false; // sandboxtaskwhetheralreadycreate
 
-    public bool $isPaused = false; // whether处atpausestatus(useattimeoutjudge)
+    public bool $isPaused = false; // whetherlocationatpausestatus(useattimeoutjudge)
 
     public ?string $sandboxId = null; // sandboxID
 
@@ -84,7 +84,7 @@ class AsrTaskStatusDTO
 
     public ?string $language = null; // languagetype(zh_CN,en_USetc),useatgeneratetitleo clockuse
 
-    public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle(useat summary 复use)
+    public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle(useat summary duplicateuse)
 
     public function __construct(array $data = [])
     {
@@ -244,7 +244,7 @@ class AsrTaskStatusDTO
     /**
      * extractrelatedtoat workspace relatedtopath
      * ifpathcontain workspace/,extractitsbackdepartmentminute
-     * this样canfromauto modifyjust Redis middlestorageoldformatdata(completepath).
+     * thisstylecanfromauto modifyjust Redis middlestorageoldformatdata(completepath).
      *
      * @param null|string $path originalpath
      * @return null|string relatedtopath

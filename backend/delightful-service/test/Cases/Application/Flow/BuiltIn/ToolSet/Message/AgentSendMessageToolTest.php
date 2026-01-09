@@ -105,7 +105,7 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachdayearlyup9pointexecute,displayoneitemreminderIcookmessage',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,fromcleardaystart,eachdayearlyup9pointexecute,displayoneitemreminderIcookmessage',
             'user_prompt' => 'helpIsendoneitemmessage,contentis:youtodaydaytruegoodlook',
         ]);
 
@@ -200,7 +200,7 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachdayearlyup9pointexecute,displayoneitemreminderIcookmessage',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,fromcleardaystart,eachdayearlyup9pointexecute,displayoneitemreminderIcookmessage',
             'user_prompt' => 'helpIsendoneitemmessage,contentis:youtodaydaytruegoodlook',
         ]);
 

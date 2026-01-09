@@ -75,7 +75,7 @@ readonly class AdminProviderAppService
             return null;
         }
 
-        // ProviderModelsDTO alreadyalreadycontain haveneeddata,统onehandle provider and models  icon andreturn
+        // ProviderModelsDTO alreadyalreadycontain haveneeddata,systemonehandle provider and models  icon andreturn
         $this->processProviderAndModelsIcons($providerModels);
         return $providerModels;
     }
@@ -510,7 +510,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 统onehandle Provider and Models graphmark,convertforcompleteURL.
+     * systemonehandle Provider and Models graphmark,convertforcompleteURL.
      */
     private function processProviderAndModelsIcons(ProviderConfigModelsDTO $providerDTO): void
     {
@@ -588,7 +588,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get联commontesttype.
+     * getunioncommontesttype.
      */
     private function getConnectivityTestType(string $category, int $modelType): NaturalLanguageProcessing
     {

@@ -210,7 +210,7 @@ class CreateGroupTool extends AbstractBuiltInTool
             "type": "string",
             "key": "opening_speech",
             "title": "openfield",
-            "description": "alreadycurrentassistantbodysharesendonetimegroup chatopenfield.defaultnot传thevalue,unlessfingersetneedsendopenfield.",
+            "description": "alreadycurrentassistantbodysharesendonetimegroup chatopenfield.defaultnotpassthevalue,unlessfingersetneedsendopenfield.",
             "required": null,
             "value": null,
             "encryption": false,

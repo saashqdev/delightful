@@ -21,7 +21,7 @@ class CreateTaskSchedulerCrontab extends Migration
             $table->bigIncrements('id');
             $table->string('external_id', 64)->comment('business id')->index();
             $table->string('name', 64)->comment('name');
-            $table->string('crontab', 64)->comment('crontabtable达type');
+            $table->string('crontab', 64)->comment('crontabtablereachtype');
             $table->dateTime('last_gen_time')->nullable()->comment('mostbackgeneratetime');
             $table->boolean('enabled')->default(true)->comment('whetherenable');
             $table->integer('retry_times')->default(0)->comment('totalretrycount');

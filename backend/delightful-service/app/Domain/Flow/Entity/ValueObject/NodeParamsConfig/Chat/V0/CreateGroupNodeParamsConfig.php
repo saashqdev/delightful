@@ -112,7 +112,7 @@ class CreateGroupNodeParamsConfig extends NodeParamsConfig
             'group_owner' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
             // groupmember
             'group_members' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
-            // grouptype,this处toat \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
+            // grouptype,thislocationtoat \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
             'group_type' => 0,
             // containwhenfrontuser
             'include_current_user' => $this->includeCurrentUser,

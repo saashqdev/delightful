@@ -27,7 +27,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 
     /**
      * 1.thisgroundopenhairo clocknotstart,avoidconsumetestenvironmentdata,causetestenvironmentuserreceivenottomessage
-     * 2.ifthisgroundopenhairo clock想debug,pleasefromlineinthisgroundbuildfrontclientenvironment,moreexchangemqhost. orpersonapplyonedevenvironment,isolationmq.
+     * 2.ifthisgroundopenhairo clockthinkdebug,pleasefromlineinthisgroundbuildfrontclientenvironment,moreexchangemqhost. orpersonapplyonedevenvironment,isolationmq.
      */
     public function isEnable(): bool
     {

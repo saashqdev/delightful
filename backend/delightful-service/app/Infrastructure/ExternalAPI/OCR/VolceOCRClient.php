@@ -51,9 +51,9 @@ class VolceOCRClient implements OCRClientInterface
         $result = Json::decode($content);
         $code = $result['code'] ?? 0; // ifnothave 'code',thenusedefaulterrorcode
         if ($code !== 10000) {
-            $message = $result['Message'] ?? 'VolcanoOCR遇toerror,message notexistsin'; // ifnothave 'message',thenusedefaultmessage
+            $message = $result['Message'] ?? 'VolcanoOCRencountertoerror,message notexistsin'; // ifnothave 'message',thenusedefaultmessage
             $this->logger->error(sprintf(
-                'VolcanoOCR遇toerror:%s,',
+                'VolcanoOCRencountertoerror:%s,',
                 $message,
             ));
             throw new OCRException($message, $code);

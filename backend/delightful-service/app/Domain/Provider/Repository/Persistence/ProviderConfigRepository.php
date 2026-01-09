@@ -93,7 +93,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $builder->whereIn('id', $query->getIds());
         }
 
-        // addsort(numbermorebigmore靠front)
+        // addsort(numbermorebigmorerelyfront)
         $builder->orderBy('sort', 'DESC')->orderBy('id', 'ASC');
 
         $result = $this->getByPage($builder, $page, $query);
@@ -255,7 +255,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // tootherservicequotientby sort fieldsort(numbermorebigmore靠front)
+        // tootherservicequotientby sort fieldsort(numbermorebigmorerelyfront)
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
                 return strcmp($a->getId(), $b->getId()); // same sort valueo clockby ID sort

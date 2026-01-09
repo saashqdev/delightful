@@ -228,7 +228,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $allModels;
         }
 
-        // cachenot命middle,executeoriginallogic
+        // cachenotcommandmiddle,executeoriginallogic
         // 1. firstqueryorganizationdownenableservicequotientconfigurationID
         $builder = ProviderConfigModel::query();
 

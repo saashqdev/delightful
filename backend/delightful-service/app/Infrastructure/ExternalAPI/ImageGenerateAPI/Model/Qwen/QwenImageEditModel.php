@@ -141,7 +141,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlike核corelogic,returnnativeresult - synccall.
+     * generategraphlikecorecorelogic,returnnativeresult - synccall.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -158,7 +158,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             'image_count' => count($imageGenerateRequest->getImageUrls()),
         ]);
 
-        // directlyhandlesinglerequest,graphlikeeditonlyhandleone张image
+        // directlyhandlesinglerequest,graphlikeeditonlyhandleonesheetimage
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $rawResults = [
@@ -265,7 +265,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                             'contentIndex' => $contentIndex,
                             'error' => $e->getMessage(),
                         ]);
-                        // continuehandledownone张image,currentimagemaintainoriginalstatus
+                        // continuehandledownonesheetimage,currentimagemaintainoriginalstatus
                     }
                 }
             }
@@ -346,7 +346,7 @@ class QwenImageEditModel extends AbstractImageGenerate
 
         // accumulatedusageinfo - general meaningthousandquestioneditusageformatadapt
         if (! empty($qwenResult['usage']) && is_array($qwenResult['usage'])) {
-            $currentUsage->addGeneratedImages(1); // editgenerate1张image
+            $currentUsage->addGeneratedImages(1); // editgenerate1sheetimage
             $currentUsage->promptTokens += $qwenResult['usage']['input_tokens'] ?? 0;
             $currentUsage->completionTokens += $qwenResult['usage']['output_tokens'] ?? 0;
             $currentUsage->totalTokens += $qwenResult['usage']['total_tokens'] ?? 0;

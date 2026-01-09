@@ -54,7 +54,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function imageConvertHigh(ImageGenerateRequest $imageGenerateRequest): string
     {
-        $this->logger->info('美graphultra clearconvert:startprocessconvertrequest', [
+        $this->logger->info('aestheticgraphultra clearconvert:startprocessconvertrequest', [
             'request_type' => get_class($imageGenerateRequest),
         ]);
 
@@ -68,19 +68,19 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($styles);
 
             $styleId = $this->determineStyleId($styles);
-            $this->logger->info('美graphultra clearconvert:alreadychooseconvert样type', ['style_id' => $styleId]);
+            $this->logger->info('aestheticgraphultra clearconvert:alreadychooseconvertstyletype', ['style_id' => $styleId]);
 
             $result = $this->api->submitTask($imageGenerateRequest->getUrl(), $styleId);
             $this->validateApiResponse($result);
 
             $taskId = $result['data']['result']['id'];
-            $this->logger->info('美graphultra clearconvert:tasksubmitsuccess', [
+            $this->logger->info('aestheticgraphultra clearconvert:tasksubmitsuccess', [
                 'task_id' => $taskId,
             ]);
 
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->error('美graphultra clearconvert:tasksubmitexception', [
+            $this->logger->error('aestheticgraphultra clearconvert:tasksubmitexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -91,10 +91,10 @@ class MiracleVisionModel extends AbstractImageGenerate
     #[RateLimit(create: 5, consume: 1, capacity: 0, key: ImageGenerate::IMAGE_GENERATE_KEY_PREFIX . ImageGenerate::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::MiracleVision->value, waitTimeout: 60)]
     public function queryTask(string $taskId): MiracleVisionModelResponse
     {
-        $this->logger->info('美graphultra clearconvert:startquerytaskstatus', ['task_id' => $taskId]);
+        $this->logger->info('aestheticgraphultra clearconvert:startquerytaskstatus', ['task_id' => $taskId]);
 
         if (empty($taskId)) {
-            $this->logger->error('美graphultra clearconvert:missingtaskIDparameter');
+            $this->logger->error('aestheticgraphultra clearconvert:missingtaskIDparameter');
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.missing_job_id');
         }
 
@@ -105,7 +105,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $response = new MiracleVisionModelResponse();
             $status = (int) ($result['data']['status'] ?? self::STATUS_FAILED);
 
-            $this->logger->info('美graphultra clearconvert:gettaskstatus', [
+            $this->logger->info('aestheticgraphultra clearconvert:gettaskstatus', [
                 'task_id' => $taskId,
                 'status' => $status,
                 'progress' => $result['data']['progress'] ?? 0,
@@ -113,7 +113,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
             return $this->handleTaskStatus($status, $result, $response);
         } catch (Exception $e) {
-            $this->logger->error('美graphultra clearconvert:querytaskstatusexception', [
+            $this->logger->error('aestheticgraphultra clearconvert:querytaskstatusexception', [
                 'task_id' => $taskId,
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -129,7 +129,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($result);
             return $result;
         } catch (Exception $e) {
-            $this->logger->error('美graphultra clearconvert:get样typelistexception', [
+            $this->logger->error('aestheticgraphultra clearconvert:getstyletypelistexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -168,31 +168,31 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function handleTaskStatus(int $status, array $result, MiracleVisionModelResponse $response): MiracleVisionModelResponse
     {
-        $this->logger->info('美graphultra clearconvert:processtaskstatusinfo', ['status' => $status]);
+        $this->logger->info('aestheticgraphultra clearconvert:processtaskstatusinfo', ['status' => $status]);
 
         switch ($status) {
             case self::STATUS_SUCCESS:
                 if (empty($result['data']['result']['urls'])) {
-                    $this->logger->error('美graphultra clearconvert:taskcompletebutmissingresultURL', ['response' => $result]);
+                    $this->logger->error('aestheticgraphultra clearconvert:taskcompletebutmissingresultURL', ['response' => $result]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
                 }
                 $response->setFinishStatus(true);
                 $response->setUrls($result['data']['result']['urls']);
-                $this->logger->info('美graphultra clearconvert:taskprocesssuccess', [
+                $this->logger->info('aestheticgraphultra clearconvert:taskprocesssuccess', [
                     'urls_count' => count($result['data']['result']['urls']),
                 ]);
                 break;
             case self::STATUS_PROCESSING:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美graphultra clearconvert:taskprocessconductmiddle', [
+                $this->logger->info('aestheticgraphultra clearconvert:taskprocessconductmiddle', [
                     'progress' => $result['data']['progress'],
                 ]);
                 // no break
             case self::STATUS_INIT:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美graphultra clearconvert:taskjustininitialize', [
+                $this->logger->info('aestheticgraphultra clearconvert:taskjustininitialize', [
                     'progress' => $result['data']['progress'],
                 ]);
                 break;
@@ -202,7 +202,7 @@ class MiracleVisionModel extends AbstractImageGenerate
                 $response->setFinishStatus(false);
                 $response->setError($result['message'] ?? 'unknownerror');
                 $this->logger->error(
-                    $status === self::STATUS_NOT_FOUND ? '美graphultra clearconvert:tasknotexistsin' : '美graphultra clearconvert:taskprocessfail',
+                    $status === self::STATUS_NOT_FOUND ? 'aestheticgraphultra clearconvert:tasknotexistsin' : 'aestheticgraphultra clearconvert:taskprocessfail',
                     ['status' => $status, 'response' => $result]
                 );
         }
@@ -213,7 +213,7 @@ class MiracleVisionModel extends AbstractImageGenerate
     private function validateRequest(ImageGenerateRequest $request): void
     {
         if (! $request instanceof MiracleVisionModelRequest) {
-            $this->logger->error('美graphultra clearconvert:requesttypenotmatch', ['class' => get_class($request)]);
+            $this->logger->error('aestheticgraphultra clearconvert:requesttypenotmatch', ['class' => get_class($request)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -222,16 +222,16 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateImageType(string $url): void
     {
-        $this->logger->info('美graphultra clearconvert:startverifyimagetype', ['url' => $url]);
+        $this->logger->info('aestheticgraphultra clearconvert:startverifyimagetype', ['url' => $url]);
 
         $type = FileType::getType($url);
         if (empty($type)) {
-            $this->logger->error('美graphultra clearconvert:nomethodidentifyimagetype', ['url' => $url]);
+            $this->logger->error('aestheticgraphultra clearconvert:nomethodidentifyimagetype', ['url' => $url]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
         if (! in_array(strtoupper($type), self::ALLOWED_IMAGE_TYPES, true)) {
-            $this->logger->error('美graphultra clearconvert:imagetypenot supported', [
+            $this->logger->error('aestheticgraphultra clearconvert:imagetypenot supported', [
                 'url' => $url,
                 'type' => $type,
                 'allowed_types' => self::ALLOWED_IMAGE_TYPES,
@@ -239,20 +239,20 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::UNSUPPORTED_IMAGE_FORMAT);
         }
 
-        $this->logger->info('美graphultra clearconvert:imagetypeverifypass', ['type' => $type]);
+        $this->logger->info('aestheticgraphultra clearconvert:imagetypeverifypass', ['type' => $type]);
     }
 
     private function validateApiResponse(array $result): void
     {
-        $this->logger->info('美graphAPI:startverifyresponsedata', ['response' => $result]);
+        $this->logger->info('aestheticgraphAPI:startverifyresponsedata', ['response' => $result]);
 
         if (! isset($result['code'])) {
-            $this->logger->warning('美graphAPI:responseformatexception', ['response' => $result]);
+            $this->logger->warning('aestheticgraphAPI:responseformatexception', ['response' => $result]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
         if ($result['code'] !== 0) {
-            $this->logger->warning('美graphAPI:interfacereturnerror', [
+            $this->logger->warning('aestheticgraphAPI:interfacereturnerror', [
                 'code' => $result['code'],
                 'message' => $result['message'] ?? '',
                 'response' => $result,
@@ -260,7 +260,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message'] ?? '');
         }
 
-        $this->logger->info('美graphAPI:responsedataverifypass');
+        $this->logger->info('aestheticgraphAPI:responsedataverifypass');
     }
 
     // todo xhy itemfrontonlycanforcereturn 26 ,factorfornomethodtoimagescenariomakematch

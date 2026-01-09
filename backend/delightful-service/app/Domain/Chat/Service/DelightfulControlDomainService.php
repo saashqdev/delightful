@@ -29,7 +29,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?DelightfulSeqEntity
     {
         $senderSeqList = $this->delightfulSeqRepository->getSenderMessagesStatusChange($senderMessageId, $senderUserId);
-        // toatreceivesidecomesay,one sender_message_id byatstatuschange,maybewillhavemultipleitemrecord,this处needmostbackstatus
+        // toatreceivesidecomesay,one sender_message_id byatstatuschange,maybewillhavemultipleitemrecord,thislocationneedmostbackstatus
         $userMessagesReadStatus = $this->getMessageLatestStatus([$senderMessageId], $senderSeqList);
         return $userMessagesReadStatus[$senderMessageId] ?? null;
     }
@@ -78,14 +78,14 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # thiswithinaddonedownminute布typelinelock,preventandhairmodifymessagereceivepersoncolumntable,造becomedataoverride.
+        # thiswithinaddonedownminute布typelinelock,preventandhairmodifymessagereceivepersoncolumntable,createbecomedataoverride.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
             if (! $this->redisLocker->spinLock($spinLockKey, $spinLockKeyOwner)) {
-                // from旋fail
+                // fromrotatefail
                 $this->logger->error(sprintf(
-                    'messageDispatch getmessagereceivepersoncolumntablefrom旋locktimeout $spinLockKey:%s $delightfulSeqEntity:%s',
+                    'messageDispatch getmessagereceivepersoncolumntablefromrotatelocktimeout $spinLockKey:%s $delightfulSeqEntity:%s',
                     $spinLockKey,
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
@@ -160,7 +160,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // writedatabase,updatemessagesendsidealreadyreadcolumntable.thisisfor复usemessagereceivehairchannel,notifycustomerclienthavenewalreadyreadreturnexecute.
+                        // writedatabase,updatemessagesendsidealreadyreadcolumntable.thisisforduplicateusemessagereceivehairchannel,notifycustomerclienthavenewalreadyreadreturnexecute.
                         $this->delightfulSeqRepository->createSequence($seqData);
                         // updateoriginal chat_seq messagereceivepersoncolumntable. avoidpullhistorymessageo clock,tosidealreadyreadmessagealsoisdisplaynotread.
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
@@ -240,7 +240,7 @@ class DelightfulControlDomainService extends AbstractDomainService
         // get havereceiveitemsideseq
         $receiveSeqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($needChangeSeqEntity->getDelightfulMessageId());
         $receiveSeqList = array_column($receiveSeqList, null, 'object_id');
-        // godropfromself,factorforneedando clockresponse,alreadyalreadysingle独generateseqandpush
+        // godropfromself,factorforneedando clockresponse,alreadyalreadysingleuniquegenerateseqandpush
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
         $seqListCreateDTO = [];
         foreach ($receiveSeqList as $receiveSeq) {

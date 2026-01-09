@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentSyncSubscriber implements ListenerInterface
         $knowledge = $event->knowledgeBaseEntity;
         $documentEntity = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnotenough
+        // ifisfoundationknowledge basetype,thenpassknowledge basecreateperson,avoidpermissionnotenough
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }

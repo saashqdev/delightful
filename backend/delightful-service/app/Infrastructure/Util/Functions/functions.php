@@ -89,7 +89,7 @@ if (! function_exists('camelize')) {
             return '';
         }
         if (! str_contains($unCamelizeWords, $separator)) {
-            // 认foralreadyalreadyissmallcamel case
+            // recognizeforalreadyalreadyissmallcamel case
             return $unCamelizeWords;
         }
         $unCamelizeWords = $separator . str_replace($separator, ' ', strtolower($unCamelizeWords));

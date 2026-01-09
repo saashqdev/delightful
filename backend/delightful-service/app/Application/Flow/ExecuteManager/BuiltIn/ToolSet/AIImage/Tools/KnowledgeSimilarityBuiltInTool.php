@@ -65,11 +65,11 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 2. combineupdowntext,analyzeuserissue,generate `names` parameter,useatfingersetanduserissuemaybehaveclosemultipleknowledge basename,according torelatedclosepropertysort,relatedclosepropertyneedcombineupdowntext,knowledge basenameandknowledge basedescriptionconductjudge;
 3. usekeywordanduserissue,call `{$this->getName()}` toolretrieveknowledge basemiddlecontent,keywordparameteris `keyword`,userissueparameteris `question`, pleaseensureparameterallbecorrectfill in,toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment;
 4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwant善atuseit们,havebydownseveraltypetag:
-    - <DelightfulImage></DelightfulImage> indicateoneimage,like <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfrontclientmessagecardrenderoutone张image;
+    - <DelightfulImage></DelightfulImage> indicateoneimage,like <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfrontclientmessagecardrenderoutonesheetimage;
     - <DelightfulVideo></DelightfulVideo> indicateonevideo,like <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfrontclientmessagecardrenderoutonevideo;
     - <DelightfulMention></DelightfulMention> indicateonepersonmemberinfo,like <DelightfulMention>cp_xxxxxxx</DelightfulMention>,eachtagallwillinfrontclientmessagecardshapebecomeone @somesomeperson effect;
 5. priorityusecontain <DelightfulImage></DelightfulImage>,<DelightfulVideo></DelightfulVideo>,<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment;
-6. combineknowledge basereturncontentorganizeback尽mayberichgroundreturnansweruserissue.
+6. combineknowledge basereturncontentorganizebackexhaustedmayberichgroundreturnansweruserissue.
 ## toolmiddleclosekeyreturnvalueinstruction
 - fragments: thistimeretrieveto haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent

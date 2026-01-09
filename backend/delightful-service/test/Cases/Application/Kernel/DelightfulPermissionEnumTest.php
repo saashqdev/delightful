@@ -105,7 +105,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         // testalllocalpermission
         $this->assertTrue($this->permissionEnum->isValidPermission(DelightfulPermission::ALL_PERMISSIONS));
 
-        // testvalidpermissiongroup合
+        // testvalidpermissiongroupcombine
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.query'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.manage'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.image_generation.query'));
@@ -169,7 +169,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * testside界situation.
+     * testsideboundarysituation.
      */
     public function testEdgeCases()
     {

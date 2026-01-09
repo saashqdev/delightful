@@ -122,7 +122,7 @@ class GoogleSearch
         } catch (BadResponseException|RequestException $e) {
             // recorderrorlog
             $this->logger->error(sprintf(
-                'Googlesearch遇toerror:%s,file:%s,line:%s trace:%s, will generate again.',
+                'Googlesearchencountertoerror:%s,file:%s,line:%s trace:%s, will generate again.',
                 $e->getResponse()?->getBody(), /* @phpstan-ignore-line */
                 $e->getFile(),
                 $e->getLine(),
@@ -130,7 +130,7 @@ class GoogleSearch
             ));
             return [];
         } catch (Throwable$e) {
-            $this->logger->error('Googlesearch遇toerror:' . $e->getMessage());
+            $this->logger->error('Googlesearchencountertoerror:' . $e->getMessage());
         }
         return [];
     }

@@ -164,7 +164,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * generate havemaybepermissiongroup合.
+     * generate havemaybepermissiongroupcombine.
      */
     public function generateAllPermissions(): array
     {
@@ -221,7 +221,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
             $platformKey = array_shift($segments); // platform,like Admin
 
-            // platformorganization独have:nonplatformorganizationo clock,filterdrop platform platformresource
+            // platformorganizationuniquehave:nonplatformorganizationo clock,filterdrop platform platformresource
             if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
                 continue;
             }
@@ -306,9 +306,9 @@ class DelightfulPermission implements DelightfulPermissionInterface
      * judgeuserpermissionsetmiddlewhetherownhavefingersetpermission(considerhiddentypecontain).
      *
      * rule:
-     *   1. likedirectly命middlepermissionkey,return true;
+     *   1. likedirectlycommandmiddlepermissionkey,return true;
      *   2. ifownhavealllocalpermission ALL_PERMISSIONS,return true;
-     *   3. ifnot命middle,thencheckbythepermissionhiddentypecontainpermissionset(for example *edit* hiddentypecontain *query*).
+     *   3. ifnotcommandmiddle,thencheckbythepermissionhiddentypecontainpermissionset(for example *edit* hiddentypecontain *query*).
      *
      * @param string $permissionKey goalpermissionkey
      * @param string[] $userPermissions useralreadyownhavepermissionkeyset
@@ -323,12 +323,12 @@ class DelightfulPermission implements DelightfulPermissionInterface
             return false;
         }
 
-        // 命middlealllocalpermissiondirectlyputline
+        // commandmiddlealllocalpermissiondirectlyputline
         if (in_array(self::ALL_PERMISSIONS, $userPermissions, true)) {
             return true;
         }
 
-        // directly命middle
+        // directlycommandmiddle
         if (in_array($permissionKey, $userPermissions, true)) {
             return true;
         }
@@ -382,7 +382,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * toatnon DelightfulResourceEnum definitionresource,childcategorycanoverridethemethodbyparsetocorresponding Operation Enum.
-     * opensourcedefault抛错.
+     * opensourcedefaultthrow错.
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string
     {

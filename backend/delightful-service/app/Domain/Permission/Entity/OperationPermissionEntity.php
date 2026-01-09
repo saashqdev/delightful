@@ -22,12 +22,12 @@ class OperationPermissionEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 资sourcetype.
+     * assetssourcetype.
      */
     protected ResourceType $resourceType;
 
     /**
-     * 资source.
+     * assetssource.
      */
     protected string $resourceId;
 

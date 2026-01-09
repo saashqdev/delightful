@@ -57,7 +57,7 @@ interface DelightfulChatSeqRepositoryInterface
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
@@ -112,10 +112,10 @@ interface DelightfulChatSeqRepositoryInterface
 
     public function deleteSeqMessageByIds(array $seqIds): int;
 
-    // formoveexcept脏datawritemethod
+    // formoveexceptdirtydatawritemethod
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array;
 
-    // formoveexcept脏datawritemethod
+    // formoveexceptdirtydatawritemethod
     public function getHasTrashMessageUsers(): array;
 
     public function updateSeqExtra(string $seqId, SeqExtra $seqExtra): bool;

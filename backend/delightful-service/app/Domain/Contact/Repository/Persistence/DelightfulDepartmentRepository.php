@@ -107,7 +107,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     {
         $departments = $this->getSubDepartmentsByLevelCache($level, $organizationCode, $depth, $size, $offset);
         $delightfulDepartmentEntities = $this->getDepartmentsEntity($departments);
-        // downonelevelchilddepartmenthavenotcanpredictionquantity,thereforeas long asreturnquantityandlimitoneto,then认forhavedownonepage
+        // downonelevelchilddepartmenthavenotcanpredictionquantity,thereforeas long asreturnquantityandlimitoneto,thenrecognizeforhavedownonepage
         $hasMore = count($delightfulDepartmentEntities) === $size;
         $pageToken = $hasMore ? (string) ($offset + $size) : '';
         return new DepartmentsPageResponseDTO([
@@ -185,7 +185,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     /**
      * getdepartment havechilddepartmentmembertotal.
-     * usefrom旋lockavoidandhair,onetimepropertyquery havedepartmentdataandcacheto Redis.
+     * usefromrotatelockavoidandhair,onetimepropertyquery havedepartmentdataandcacheto Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
@@ -200,7 +200,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             return (int) $cachedData;
         }
 
-        // usefrom旋lockavoidandhaircalculate
+        // usefromrotatelockavoidandhaircalculate
         $lockKey = sprintf('department_calc_lock:%s', $organizationCode);
         $lockOwner = uniqid('dept_calc_', true);
 
@@ -224,7 +224,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            // hairgenerateexceptiono clockdirectlycalculatenot走cache
+            // hairgenerateexceptiono clockdirectlycalculatenotwalkcache
             return $this->calculateSelfAndChildrenEmployeeSum($organizationCode, $departmentId);
         } finally {
             $this->locker->release($lockKey, $lockOwner);

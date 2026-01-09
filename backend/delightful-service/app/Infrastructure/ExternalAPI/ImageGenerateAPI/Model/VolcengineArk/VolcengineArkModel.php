@@ -142,7 +142,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         // fromnativeresultmiddleextractimageURL
         $imageData = [];
         foreach ($rawResults as $index => $result) {
-            // check嵌setdatastructure:result['data']['data'][0]['url']
+            // checkembedsetdatastructure:result['data']['data'][0]['url']
             if (! empty($result['data']['data']) && ! empty($result['data']['data'][0]['url'])) {
                 $imageData[$index] = $result['data']['data'][0]['url'];
             }
@@ -246,7 +246,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             }
         }
 
-        // directlycallAPI,exceptionfromthentoup抛
+        // directlycallAPI,exceptionfromthentoupthrow
         return $this->api->generateImage($payload);
     }
 
@@ -323,7 +323,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // VolcengineArk APIeachtimeonlycangenerateone张graph,passandhaircallimplementmultiplegraphgenerate
+        // VolcengineArk APIeachtimeonlycangenerateonesheetgraph,passandhaircallimplementmultiplegraphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];

@@ -23,14 +23,14 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->bigIncrements('id');
             // hairitemsidebelong toorganization
             $table->string('sender_id', 64)->comment('hairitemsideid');
-            $table->tinyInteger('sender_type')->comment('hairitemsideusertype,1:user(aialsobe认forisuser);2:application;3:document;4:multi-dimensionaltableformat');
+            $table->tinyInteger('sender_type')->comment('hairitemsideusertype,1:user(aialsoberecognizeforisuser);2:application;3:document;4:multi-dimensionaltableformat');
             $table->string('sender_organization_code', 64)->comment('hairitemsideorganizationencoding,maybeforemptystring')->default('');
             // receivesidebelong toorganization
             $table->string('receive_id', 64)->comment('receivesideid,maybeispersoncategory,aiorpersonapplication/document/multi-dimensionaltableformatetc');
-            $table->tinyInteger('receive_type')->comment('receivesidetype,1:user(aialsobe认forisuser);2:application;3:document;4:multi-dimensionaltableformat');
+            $table->tinyInteger('receive_type')->comment('receivesidetype,1:user(aialsoberecognizeforisuser);2:application;3:document;4:multi-dimensionaltableformat');
             $table->string('receive_organization_code', 64)->comment('receivesideorganizationencoding,maybeforemptystring')->default('');
             // messagerelatedcloseid
-            $table->string('app_message_id', 64)->comment('customerclientgeneratemessageid,useat防customerclientduplicate');
+            $table->string('app_message_id', 64)->comment('customerclientgeneratemessageid,useatpreventcustomerclientduplicate');
             $table->string('delightful_message_id', 64)->comment('serviceclientgenerateuniqueonemessageid,useatmessagewithdraw/edit');
             # ## messagestructure
             // messageprioritylevel,byatsystemstablepropertymanage

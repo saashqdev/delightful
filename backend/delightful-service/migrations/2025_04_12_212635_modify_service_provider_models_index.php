@@ -15,12 +15,12 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_models', function (Blueprint $table) {
-            // by model_id,status,organization_code group合index
+            // by model_id,status,organization_code groupcombineindex
             if (! Schema::hasIndex('service_provider_models', 'idx_model_id_status_organization_code')) {
                 $table->index(['model_id', 'status', 'organization_code'], 'idx_model_id_status_organization_code');
             }
 
-            // by organization_code,status,model_version group合index
+            // by organization_code,status,model_version groupcombineindex
             if (! Schema::hasIndex('service_provider_models', 'idx_organization_code_status_model_version')) {
                 $table->index(['organization_code', 'status', 'model_version'], 'idx_organization_code_status_model_version');
             }

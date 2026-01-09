@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('userID,toshoulddelightful_contact_users.user_id');
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->string('assigned_by', 64)->nullable()->comment('minuteallocatoruserID');
-            $table->timestamp('assigned_at')->nullable()->comment('minute配time');
+            $table->timestamp('assigned_at')->nullable()->comment('minutematchtime');
             $table->timestamps();
             $table->softDeletes();
 

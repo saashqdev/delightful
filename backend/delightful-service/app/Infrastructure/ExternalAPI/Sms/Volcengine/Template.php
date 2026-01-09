@@ -33,7 +33,7 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => 'youverifycodeis:${verification_code},valid期 ${timeout} minuteseconds.pleaseinpagemiddleinputverifycodecompleteverify.likenonthispersonoperationas,pleaseignore.',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => 'youverifycodeis:${verification_code},validperiod ${timeout} minuteseconds.pleaseinpagemiddleinputverifycodecompleteverify.likenonthispersonoperationas,pleaseignore.',
     ];
 
     /**
@@ -70,8 +70,8 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * according to传comeshortmessagetext,parsevariable. onlyvariablevalue,notmatchvariablekey!
-     * needvariableparsereason:Volcanoshortmessageonlysupportvariableshortmessagesend,whilebusinesssidewilloutatChuanglanshortmessagereason,will传come整shortmessagetextcontent,nothavevariable.
+     * according topasscomeshortmessagetext,parsevariable. onlyvariablevalue,notmatchvariablekey!
+     * needvariableparsereason:Volcanoshortmessageonlysupportvariableshortmessagesend,whilebusinesssidewilloutatChuanglanshortmessagereason,willpasscome整shortmessagetextcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
@@ -103,7 +103,7 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * @param array $pregVariableAnalyse ['templateid_xxx'=>'justthentable达type']
+     * @param array $pregVariableAnalyse ['templateid_xxx'=>'justthentablereachtype']
      */
     private function variablePregMatch(array $pregVariableAnalyse, string $message): array
     {

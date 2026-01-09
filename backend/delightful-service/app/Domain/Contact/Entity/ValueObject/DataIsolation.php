@@ -18,7 +18,7 @@ use App\Infrastructure\Core\AbstractObject;
 class DataIsolation extends AbstractObject
 {
     /**
-     * whenfrontaccountnumberid.  haveaccountnumber统onenoticeprivacyprotected,nottothethird-partyreturn.
+     * whenfrontaccountnumberid.  haveaccountnumbersystemonenoticeprivacyprotected,nottothethird-partyreturn.
      */
     protected string $currentDelightfulId = '';
 

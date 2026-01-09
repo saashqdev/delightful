@@ -40,7 +40,7 @@ class RetrievalMethod
      * hybridretrieve.
      *
      * combinesemanticretrieveandalltextretrievemethod.
-     * meanwhileexecutealltextretrieveandtoquantityretrieve,thenbackpassreloadsortstepchoosemost佳result.
+     * meanwhileexecutealltextretrieveandtoquantityretrieve,thenbackpassreloadsortstepchoosemostexcellentresult.
      * combinetwotyperetrievetechnologyadvantage,compensateeachfromnotenough.
      */
     public const string HYBRID_SEARCH = 'hybrid_search';

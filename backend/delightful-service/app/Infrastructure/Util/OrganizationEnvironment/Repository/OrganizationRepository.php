@@ -18,7 +18,7 @@ use Hyperf\Database\Model\Builder;
 use function Hyperf\Support\now;
 
 /**
- * organization仓libraryimplement.
+ * organizationwarehouselibraryimplement.
  */
 class OrganizationRepository implements OrganizationRepositoryInterface
 {
@@ -53,7 +53,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $model = OrganizationModel::create($data);
             $organizationEntity->setId($model->id);
         } else {
-            // usemodelupdateby便use casts process JSON anddatefield
+            // usemodelupdatebyconvenientuse casts process JSON anddatefield
             $model = OrganizationModel::query()
                 ->where('id', $organizationEntity->getId())
                 ->first();

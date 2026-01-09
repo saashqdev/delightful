@@ -86,7 +86,7 @@ class ServiceProviderInitializer
                 'id' => '759103339540475904',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                'description' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'llm',
@@ -102,7 +102,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'The AI model invocation is achieved through the API officially deployed by Delightful, and you can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -112,7 +112,7 @@ class ServiceProviderInitializer
                 'id' => '759109912413282304',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution,',
+                'description' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution,',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0, // Normal
                 'category' => 'llm',
@@ -128,7 +128,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution,',
+                        'zh_CN' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution,',
                     ],
                 ]),
                 'remark' => '',
@@ -138,7 +138,7 @@ class ServiceProviderInitializer
                 'id' => '759110465734258688',
                 'name' => 'Volcanoengine',
                 'provider_code' => 'Volcengine',
-                'description' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhair豆packagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voice合becomeetcmultipletypemodel.',
+                'description' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhair豆packagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -154,7 +154,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'A cloud service platform under ByteDance, with independently developed Doubao large model series. Includes Doubao general models Pro and lite with different text processing and comprehensive capabilities, as well as various models for role-playing, speech synthesis, etc.',
-                        'zh_CN' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhair豆packagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voice合becomeetcmultipletypemodel.',
+                        'zh_CN' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhair豆packagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -164,7 +164,7 @@ class ServiceProviderInitializer
                 'id' => '759115881155366912',
                 'name' => 'Volcanoengine',
                 'provider_code' => 'Volcengine',
-                'description' => 'providemultipletype智can绘graphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
+                'description' => 'providemultipletypeintelligencecan绘graphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -180,7 +180,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Provides a variety of intelligent drawing models, with diverse image generation styles, extremely high security, and can be widely applied to education, entertainment, office and other scenarios.',
-                        'zh_CN' => 'providemultipletype智can绘graphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
+                        'zh_CN' => 'providemultipletypeintelligencecan绘graphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
                     ],
                 ]),
                 'remark' => '',
@@ -188,9 +188,9 @@ class ServiceProviderInitializer
             // MiracleVision - VLM
             [
                 'id' => '759116798252494849',
-                'name' => '美graphimagination',
+                'name' => 'aestheticgraphimagination',
                 'provider_code' => 'MiracleVision',
-                'description' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetc核coredomain',
+                'description' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetccorecoredomain',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/meitu-qixiang Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -202,11 +202,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'MiracleVision',
-                        'zh_CN' => '美graphimagination',
+                        'zh_CN' => 'aestheticgraphimagination',
                     ],
                     'description' => [
                         'en_US' => 'Focused on facial technology, body technology, image recognition, image processing, image generation and other core areas',
-                        'zh_CN' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetc核coredomain',
+                        'zh_CN' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetccorecoredomain',
                     ],
                 ]),
                 'remark' => '',
@@ -216,7 +216,7 @@ class ServiceProviderInitializer
                 'id' => '759144726407426049',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => 'by Delightful passofficialdeploy API comeimplementmultipletypepopular text generationgraph,graphgenerategraphetcmodelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                'description' => 'by Delightful passofficialdeploy API comeimplementmultipletypepopular text generationgraph,graphgenerategraphetcmodelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'vlm',
@@ -232,7 +232,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Delightful implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplementmultipletypepopular text generationgraph,graphgenerategraphetcmodelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplementmultipletypepopular text generationgraph,graphgenerategraphetcmodelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -294,7 +294,7 @@ class ServiceProviderInitializer
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovidefirstenter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude systemcolumn,Meta  Llama 3.1 systemcolumnetc,coverfrom轻quantityleveltohighperformancemultipletypechoose,supporttextgenerate,conversation,graphlikehandleetcmultipletypetask,fituseatdifferentscaleandrequiremententerpriseapplication.',
+                'description' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovidefirstenter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude systemcolumn,Meta  Llama 3.1 systemcolumnetc,coverfromlightquantityleveltohighperformancemultipletypechoose,supporttextgenerate,conversation,graphlikehandleetcmultipletypetask,fituseatdifferentscaleandrequiremententerpriseapplication.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovidefirstenter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude systemcolumn,Meta  Llama 3.1 systemcolumnetc,coverfrom轻quantityleveltohighperformancemultipletypechoose,supporttextgenerate,conversation,graphlikehandleetcmultipletypetask,fituseatdifferentscaleandrequiremententerpriseapplication.',
+                        'zh_CN' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovidefirstenter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude systemcolumn,Meta  Llama 3.1 systemcolumnetc,coverfromlightquantityleveltohighperformancemultipletypechoose,supporttextgenerate,conversation,graphlikehandleetcmultipletypetask,fituseatdifferentscaleandrequiremententerpriseapplication.',
                     ],
                 ]),
                 'remark' => '',
@@ -320,7 +320,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920384',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution.',
+                'description' => 'providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -336,7 +336,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure offers a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, and is committed to providing safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution.',
+                        'zh_CN' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution.',
                     ],
                 ]),
                 'remark' => '',

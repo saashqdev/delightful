@@ -23,7 +23,7 @@ return new class extends Migration {
         // clearnullofficialorganization Delightful servicequotientconfigurationandmodel(putindeletesoftdeletedataoffront)
         $this->cleanOfficialDelightfulProviderData();
 
-        // cleanup service_provider relatedclosefour张tablemiddlesoftdeletedata
+        // cleanup service_provider relatedclosefoursheettablemiddlesoftdeletedata
         $this->cleanSoftDeletedData();
 
         // clean service_provider tablemiddle provider_code='Official' record
@@ -220,7 +220,7 @@ return new class extends Migration {
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
             $logger->info("officialorganizationencoding: {$officialOrganizationCode}");
 
-            // 2. single独transaction:resetofficialorganizationmodel model_parent_id
+            // 2. singleuniquetransaction:resetofficialorganizationmodel model_parent_id
             $this->resetOfficialModelsParentId($officialOrganizationCode, $logger);
 
             // 3. getofficialorganization haveenablemodel(notneedtransaction)
@@ -255,7 +255,7 @@ return new class extends Migration {
     }
 
     /**
-     * resetofficialorganizationmodel parent_id(single独transaction).
+     * resetofficialorganizationmodel parent_id(singleuniquetransaction).
      */
     private function resetOfficialModelsParentId(string $officialOrganizationCode, LoggerInterface $logger): void
     {
@@ -326,7 +326,7 @@ return new class extends Migration {
     }
 
     /**
-     * cleanupsingleorganizationdata(single独transaction).
+     * cleanupsingleorganizationdata(singleuniquetransaction).
      */
     private function cleanSingleOrganization(string $organizationCode, array $officialModelIds, array $officialEnabledModels): array
     {
@@ -472,7 +472,7 @@ return new class extends Migration {
                     $invalidConfigIds[] = $config['id'];
                 }
             } catch (Throwable $e) {
-                // ifdecryptfail,also认forisinvalidconfiguration
+                // ifdecryptfail,alsorecognizeforisinvalidconfiguration
                 $invalidConfigIds[] = $config['id'];
             }
         }

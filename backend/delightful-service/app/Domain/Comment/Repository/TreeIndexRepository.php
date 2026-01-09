@@ -188,7 +188,7 @@ class TreeIndexRepository
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();
 
-        // deleteback代sectionpointis nodeIds index
+        // deletebackgenerationsectionpointis nodeIds index
         $builder->newModelInstance()->whereIn('descendant_id', $nodeIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();

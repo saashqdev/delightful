@@ -25,7 +25,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals([
             'is_maintenance' => false,
             'maintenance_description' => '',
-        ], $data, 'defaultalllocalconfigurationstructurenot符', false, true);
+        ], $data, 'defaultalllocalconfigurationstructurenotsymbol', false, true);
     }
 
     public function testUpdateGlobalConfig(): void
@@ -44,7 +44,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
-        $this->assertArrayEquals($payload, $getData, 'GET returndataandexpectednot符');
+        $this->assertArrayEquals($payload, $getData, 'GET returndataandexpectednotsymbol');
     }
 
     public function testGetGlobalConfigWithPlatformSettings(): void

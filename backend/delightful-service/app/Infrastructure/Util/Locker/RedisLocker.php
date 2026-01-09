@@ -37,7 +37,7 @@ class RedisLocker implements LockerInterface
     }
 
     /**
-     * from旋lock
+     * fromrotatelock
      * @param string $name lockname,fingersetlockname
      * @param string $owner lock haveperson,fingersetlockuniqueoneidentifier,avoiderrorrelease
      * @param int $expire expiretime,second

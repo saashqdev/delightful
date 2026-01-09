@@ -283,7 +283,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('fieldname [conversation_id] andsystemretainfieldconflict,pleaseuseothername');
 
-        // createonecontainsystemretainfieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
+        // createonecontainsystemretainfieldsectionpointconfiguration,thisshouldinvalidatelevelsegmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -395,7 +395,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('JSON Schema formaterror:[user_list] Array type must have items');
 
-        // createonecontainsystemretainfieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
+        // createonecontainsystemretainfieldsectionpointconfiguration,thisshouldinvalidatelevelsegmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {

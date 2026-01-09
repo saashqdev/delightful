@@ -99,7 +99,7 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // mockworkregionthen绪status
+        // mockworkregionthenemotionstatus
         // notice:status mustreturnintegertype,toshould WorkspaceStatus constant
         return [
             'code' => 1000,

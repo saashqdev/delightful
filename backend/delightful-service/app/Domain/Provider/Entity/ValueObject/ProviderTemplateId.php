@@ -9,7 +9,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
  * servicequotienttemplateIDenum
- * willProviderCodeandCategorygroup合mappingforfixedcountvaluetypestring.
+ * willProviderCodeandCategorygroupcombinemappingforfixedcountvaluetypestring.
  */
 enum ProviderTemplateId: string
 {

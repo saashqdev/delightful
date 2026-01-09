@@ -15,7 +15,7 @@ use InvalidArgumentException;
 enum HighAvailabilityAppType: string
 {
     /**
-     * model网closetype.
+     * modelnetworkclosetype.
      */
     case MODEL_GATEWAY = 'modelGateway';
 
@@ -54,7 +54,7 @@ enum HighAvailabilityAppType: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::MODEL_GATEWAY => 'model网close',
+            self::MODEL_GATEWAY => 'modelnetworkclose',
         };
     }
 }

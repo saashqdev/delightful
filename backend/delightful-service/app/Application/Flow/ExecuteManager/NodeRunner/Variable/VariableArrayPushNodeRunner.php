@@ -49,7 +49,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_array', ['var_name' => $variableName]);
         }
         $elementList = $result['element_list'];
-        // ifchangequantityvalueispasstable达typeget,iswhenmakeone整body
+        // ifchangequantityvalueispasstablereachtypeget,iswhenmakeone整body
         if ($inputFields->getForm()->getProperties()['element_list']->getExecuteValue()?->isExpression()) {
             $elementList = [$elementList];
         }

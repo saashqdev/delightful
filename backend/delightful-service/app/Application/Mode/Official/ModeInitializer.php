@@ -250,7 +250,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'Please enter the content to converse with the agent.',
-                    'zh_CN' => 'pleaseinputand智canbodyconversationcontent',
+                    'zh_CN' => 'pleaseinputandintelligencecanbodyconversationcontent',
                 ]),
                 'identifier' => 'chat',
                 'icon' => 'IconMessages',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => 'youcaninputwill议textcontent,oruploadwill议recordingfile,exceedslevelMagicwillforyouconductcompletewill议summary. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'youcaninputwillproposaltextcontent,oruploadwillproposalrecordingfile,exceedslevelMagicwillforyouconductcompletewillproposalsummary. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',

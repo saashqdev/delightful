@@ -17,7 +17,7 @@ use DateTime;
 use function Hyperf\Support\now;
 
 /**
- * role仓libraryimplement.
+ * rolewarehouselibraryimplement.
  */
 class RoleRepository implements RoleRepositoryInterface
 {
@@ -44,7 +44,7 @@ class RoleRepository implements RoleRepositoryInterface
             $model = RoleModel::create($data);
             $roleEntity->setId($model->id);
         } else {
-            // usemodelupdateby便use casts process JSON anddatefield
+            // usemodelupdatebyconvenientuse casts process JSON anddatefield
             $model = $this->roleQuery($organizationCode)
                 ->where('id', $roleEntity->getId())
                 ->first();
@@ -134,11 +134,11 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * forroleminute配user.
+     * forroleminutematchuser.
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void
     {
-        // getcurrentalreadyminute配userlist
+        // getcurrentalreadyminutematchuserlist
         $existingUserIds = $this->roleUserQuery($organizationCode)
             ->where('role_id', $roleId)
             ->pluck('user_id')

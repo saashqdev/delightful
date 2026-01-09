@@ -19,7 +19,7 @@ interface OrganizationBasedModelFilterInterface
 {
     /**
      * based onorganizationencodingfiltermodellist
-     * thisisenterprisepackageprovidegiveopensourcepackage核corefiltermethod.
+     * thisisenterprisepackageprovidegiveopensourcepackagecorecorefiltermethod.
      *
      * @param string $organizationCode organizationencoding
      * @param array $models pendingfiltermodellist [modelId => ProviderModelEntity]

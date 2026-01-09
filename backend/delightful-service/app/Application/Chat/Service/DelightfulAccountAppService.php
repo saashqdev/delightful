@@ -58,7 +58,7 @@ class DelightfulAccountAppService extends AbstractAppService
     }
 
     /**
-     * @param null|AccountEntity $accountDTO supportenable/disable智canbody
+     * @param null|AccountEntity $accountDTO supportenable/disableintelligencecanbody
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DelightfulUserAuthorization $authorization, string $aiCode, ?AccountEntity $accountDTO = null): DelightfulUserEntity
@@ -67,7 +67,7 @@ class DelightfulAccountAppService extends AbstractAppService
 
         $spinLockKey = 'chat:aiRegister:lock:' . $aiCode;
         $spinLockKeyOwner = random_bytes(8);
-        // from旋lock
+        // fromrotatelock
         $this->locker->spinLock($spinLockKey, $spinLockKeyOwner, 3);
         try {
             $userDTO->setUserType(UserType::Ai);
@@ -88,7 +88,7 @@ class DelightfulAccountAppService extends AbstractAppService
             }
 
             $dataIsolation = $this->createDataIsolation($authorization);
-            // 智canbodyaccountnumberinformation
+            // intelligencecanbodyaccountnumberinformation
             if (! isset($accountDTO)) {
                 $accountDTO = new AccountEntity();
             }

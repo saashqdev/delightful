@@ -476,7 +476,7 @@ class AsrApi extends AbstractApi
         // handlenote
         $note = $this->parseNoteData($noteData);
 
-        // generatetitle:priorityfrom Redis middle复use upload-tokens generatetitle
+        // generatetitle:priorityfrom Redis middleduplicateuse upload-tokens generatetitle
         $generatedTitle = null;
 
         // 1. tryfrom Redis middlegetalreadygeneratetitle(filedirect uploadscenario)
@@ -484,7 +484,7 @@ class AsrApi extends AbstractApi
             $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userAuthorization->getId());
             if (! empty($taskStatus->uploadGeneratedTitle) && ! $taskStatus->isEmpty()) {
                 $generatedTitle = $taskStatus->uploadGeneratedTitle;
-                $this->logger->info('复use upload-tokens generatetitle', [
+                $this->logger->info('duplicateuse upload-tokens generatetitle', [
                     'task_key' => $taskKey,
                     'title' => $generatedTitle,
                 ]);

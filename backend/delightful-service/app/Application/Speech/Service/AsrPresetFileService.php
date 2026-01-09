@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * responsiblecreatepresetnoteandstreamidentifyfile,供frontclientwritecontent.
+ * responsiblecreatepresetnoteandstreamidentifyfile,supplyfrontclientwritecontent.
  */
 readonly class AsrPresetFileService
 {

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Asr\Constants;
 
 /**
- * ASR Redis Key 常quantity
- * 统onemanage ASR relatedclose Redis Key format.
+ * ASR Redis Key constantquantity
+ * systemonemanage ASR relatedclose Redis Key format.
  */
 class AsrRedisKeys
 {

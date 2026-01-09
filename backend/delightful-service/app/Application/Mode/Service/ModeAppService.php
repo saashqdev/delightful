@@ -32,7 +32,7 @@ class ModeAppService extends AbstractModeAppService
         // getitemfront havecanuse agent
         $beDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
         $agentData = $beDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
-        // merge常useandalldepartment agent list,常useinfront
+        // mergeconstantuseandalldepartment agent list,constantuseinfront
         /** @var array<BeDelightfulAgentEntity> $allAgents */
         $allAgents = array_merge($agentData['frequent'], $agentData['all']);
         if (empty($allAgents)) {
@@ -176,7 +176,7 @@ class ModeAppService extends AbstractModeAppService
     /**
      * batchquantitygetmodelandservicequotientstatus(performanceoptimizeversion).
      * @param array $allModelIds  haveneedquerymodelId
-     * @return array<string, ProviderModelEntity> alreadypasslevel联statusfiltercanusemodel
+     * @return array<string, ProviderModelEntity> alreadypasslevelunionstatusfiltercanusemodel
      */
     private function getModelsBatch(array $allModelIds): array
     {
@@ -206,7 +206,7 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // applicationlevel联statusfilter,returncanusemodel
+        // applicationlevelunionstatusfilter,returncanusemodel
         $availableModels = [];
         foreach ($allModels as $modelId => $models) {
             $bestModel = $this->selectBestModelForBatch($models, $providerStatuses);

@@ -18,7 +18,7 @@ class Oauth2Config extends AbstractValueObject
      * Client ID - customerclientID,isapplicationinauthorizationservicedevicemiddleuniqueoneidentifier.
      * authorizationservicedevicepasscustomerclientIDcomeidentifydifferentthreesideapplication.
      *
-     * createOAuthapplicationo clockwillminute配client_id,thisexampleinput
+     * createOAuthapplicationo clockwillminutematchclient_id,thisexampleinput
      * 813924812101982004357116497xxxx.app.coze
      */
     protected string $clientId = '';
@@ -27,7 +27,7 @@ class Oauth2Config extends AbstractValueObject
      * Client Secret - customerclientkey,andcustomerclientIDcooperateuse,useatauthapplicationbodyshare.
      * ensureonlyauthorizationapplicationcanrequestpermission.
      *
-     * createOAuthapplicationo clockwillminute配client_secret,thisexampleinput 8jmSATwI*********
+     * createOAuthapplicationo clockwillminutematchclient_secret,thisexampleinput 8jmSATwI*********
      */
     protected string $clientSecret = '';
 

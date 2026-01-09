@@ -35,7 +35,7 @@ class SmsStruct
 
     /**
      * normalshortpure messagetextcontent.
-     * like: lighthousejustininvitationyouaddinputenterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
+     * like: lighthousejustininvitationyouaddinputenterprise,pointhitlinkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 
@@ -51,7 +51,7 @@ class SmsStruct
     public ?string $language = null;
 
     /**
-     * shortmessagedefaultlanguagetype,supportbusinesssidecustomize. not传givedefaultvaluezh_CN.
+     * shortmessagedefaultlanguagetype,supportbusinesssidecustomize. notpassgivedefaultvaluezh_CN.
      */
     public ?string $defaultLanguage = null;
 

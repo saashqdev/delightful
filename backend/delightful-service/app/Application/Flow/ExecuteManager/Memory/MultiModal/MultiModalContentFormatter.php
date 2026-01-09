@@ -11,7 +11,7 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
  * multi-modalstatecontentformatizationtool
- * useat统oneprocessdifferentscenariodownmulti-modalstatecontentformatization.
+ * useatsystemoneprocessdifferentscenariodownmulti-modalstatecontentformatization.
  */
 class MultiModalContentFormatter
 {
@@ -32,7 +32,7 @@ class MultiModalContentFormatter
             return $originalContent;
         }
 
-        // minute离imageandnonimageattachment
+        // minuteleaveimageandnonimageattachment
         $imageAttachments = [];
         $nonImageAttachments = [];
 
@@ -53,7 +53,7 @@ class MultiModalContentFormatter
 
     /**
      * formatizationimagecontenttotext
-     * supportsingle张imageandmultipleimagescenario.
+     * supportsinglesheetimageandmultipleimagescenario.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse visualanalyzeresult

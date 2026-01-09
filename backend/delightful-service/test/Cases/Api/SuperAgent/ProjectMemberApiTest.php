@@ -55,7 +55,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest2();
         $this->updateFileContent($fileId, 'test2', 51202);
 
-        // addteam协as
+        // addteamcoordinateas
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -116,7 +116,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testsettopfeatureside界situation.
+     * testsettopfeaturesideboundarysituation.
      */
     public function testProjectPinEdgeCases(): void
     {
@@ -181,7 +181,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateProject($workspaceId, $projectId);
         $this->updateProject($workspaceId, $projectId);
 
-        // ensurenotwilltooriginalhavefeature造becomeimpact
+        // ensurenotwilltooriginalhavefeaturecreatebecomeimpact
         // createtopic
         $topicId = $this->createTopic($workspaceId, $projectId);
         // topiccolumntable
@@ -220,7 +220,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // 7. viewprojectmember
         $this->projectMember($projectId);
-        // 8. view协asprojectcolumntable
+        // 8. viewcoordinateasprojectcolumntable
         $this->collaborationProjects();
         $this->collaborationProjects('test');
 
@@ -245,7 +245,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 9. testprojectsettopfeature
         $this->projectPinFeature($projectId);
 
-        // 10. test协asprojectcreatepersoncolumntablefeature
+        // 10. testcoordinateasprojectcreatepersoncolumntablefeature
         //        $this->collaborationProjectCreatorFeature();
 
         // 11. clearnullnullmember
@@ -519,7 +519,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 5. testleaveedit
         $this->leaveFileEditing($fileId);
 
-        // 6. getedituserquantity - shouldonly剩1user
+        // 6. getedituserquantity - shouldonlyremaining1user
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
@@ -609,7 +609,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testfileeditside界situation.
+     * testfileeditsideboundarysituation.
      */
     public function fileEditingEdgeCases(string $fileId): void
     {
@@ -671,14 +671,14 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 1. testsettopproject
         $this->pinProject($projectId, true);
 
-        // 2. validate协asprojectcolumntablemiddleprojectbesettop
+        // 2. validatecoordinateasprojectcolumntablemiddleprojectbesettop
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
         // 3. testcancelsettop
         $this->pinProject($projectId, false);
 
-        // 4. validate协asprojectcolumntablemiddleprojectnotagainsettop
+        // 4. validatecoordinateasprojectcolumntablemiddleprojectnotagainsettop
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
@@ -714,7 +714,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协asprojectcolumntableandreturncomplete响applicationatsettopvalidate.
+     * getcoordinateasprojectcolumntableandreturncomplete响applicationatsettopvalidate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {
@@ -753,7 +753,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             }
         }
 
-        $this->assertNotNull($targetProject, "project {$projectId} shouldin协asprojectcolumntablemiddle");
+        $this->assertNotNull($targetProject, "project {$projectId} shouldincoordinateasprojectcolumntablemiddle");
         $this->assertEquals(
             $expectedPinned,
             $targetProject['is_pinned'],
@@ -779,12 +779,12 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreatepersoncolumntablefeature - completeprocesstest.
+     * testcoordinateasprojectcreatepersoncolumntablefeature - completeprocesstest.
      */
     public function collaborationProjectCreatorFeature(): void
     {
         // 1. testhavepermissionusergetcreatepersoncolumntable
-        $this->switchUserTest2(); // ensureishavepermission协asuser
+        $this->switchUserTest2(); // ensureishavepermissioncoordinateasuser
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
@@ -802,7 +802,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreatepersoncolumntablepermissioncontrol.
+     * testcoordinateasprojectcreatepersoncolumntablepermissioncontrol.
      */
     public function testCollaborationProjectCreatorsPermission(): void
     {
@@ -828,7 +828,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreatepersoncolumntableside界situation.
+     * testcoordinateasprojectcreatepersoncolumntablesideboundarysituation.
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
@@ -850,7 +850,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协asprojectcreatepersoncolumntable.
+     * getcoordinateasprojectcreatepersoncolumntable.
      */
     public function getCollaborationProjectCreators(int $expectedCode = 1000): array
     {

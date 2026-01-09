@@ -11,7 +11,7 @@ class ReplaceWhitespaceTextPreprocessStrategy extends AbstractTextPreprocessStra
 {
     public function preprocess(string $content): string
     {
-        // replacecontinuousnullwhitecharacter(exchangeline符,制table符,nullformat)
+        // replacecontinuousnullwhitecharacter(exchangelinesymbol,制tablesymbol,nullformat)
         return preg_replace('/[\s\n\t]+/', '', $content);
     }
 }

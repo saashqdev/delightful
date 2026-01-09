@@ -32,7 +32,7 @@ class DelightfulFlowWaitMessageEntity extends AbstractEntity
 
     /**
      * timeouttimestamp.
-     * 0 代table永nottimeout.
+     * 0 generationtable永nottimeout.
      */
     protected int $timeout = 0;
 

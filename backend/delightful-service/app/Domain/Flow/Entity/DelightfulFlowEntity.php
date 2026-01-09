@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * onlyfrontclientneed,process编rowputto node sectionpointconfiguration next_nodes middle.
+     * onlyfrontclientneed,processcoderowputto node sectionpointconfiguration next_nodes middle.
      */
     protected array $edges;
 

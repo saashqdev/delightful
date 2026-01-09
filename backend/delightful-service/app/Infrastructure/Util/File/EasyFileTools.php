@@ -36,7 +36,7 @@ class EasyFileTools
         // godropblobhead
         $blob = substr($blob, 44);
 
-        // willnewdataappendtofile末tail
+        // willnewdataappendtofileendtail
         // getfilesize
         fseek($wav1, 0, SEEK_END);
         fwrite($wav1, $blob);

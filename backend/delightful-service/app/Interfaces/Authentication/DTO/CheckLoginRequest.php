@@ -25,7 +25,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $password;
 
     /**
-     * organizationencoding,not传defaultfornull.
+     * organizationencoding,notpassdefaultfornull.
      */
     protected string $organizationCode = '';
 

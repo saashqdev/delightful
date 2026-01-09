@@ -50,7 +50,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
     {
-        // 1. getservicequotientconfigurationactualbody,containtemplateIDandvirtualDelightfulservicequotient统onehandle
+        // 1. getservicequotientconfigurationactualbody,containtemplateIDandvirtualDelightfulservicequotientsystemonehandle
         $providerConfigEntity = $this->getProviderConfig($dataIsolation, $configId);
         if (! $providerConfigEntity) {
             return null;
@@ -192,7 +192,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getservicequotientconfigurationactualbody,统onehandle havesituation.
+     * getservicequotientconfigurationactualbody,systemonehandle havesituation.
      * - templateID(format:providerCode_category)
      * - conventionaldatabaseconfigurationID.
      */
@@ -359,7 +359,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/
 
-        // use统oneconfigurationupdatelogic
+        // usesystemoneconfigurationupdatelogic
         return $this->updateProviderConfigData($dataIsolation, $existingConfigEntity, $providerConfigEntity);
     }
 
@@ -382,7 +382,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 统oneconfigurationdataupdatelogic.
+     * systemoneconfigurationdataupdatelogic.
      * handledesensitizedatamerge,fieldupdateandsaveoperationas.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity

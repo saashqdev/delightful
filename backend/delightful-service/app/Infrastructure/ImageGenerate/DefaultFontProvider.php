@@ -51,7 +51,7 @@ class DefaultFontProvider implements FontProviderInterface
     public function hasTransparency($image): bool
     {
         if (! imageistruecolor($image)) {
-            // 调color板graphlikechecktransparentcolorindex
+            // adjustcolor板graphlikechecktransparentcolorindex
             return imagecolortransparent($image) !== -1;
         }
 
@@ -59,7 +59,7 @@ class DefaultFontProvider implements FontProviderInterface
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // samplingcheck,avoidcheckeachlike素improveperformance
+        // samplingcheck,avoidcheckeachlikeelementimproveperformance
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));
@@ -69,7 +69,7 @@ class DefaultFontProvider implements FontProviderInterface
                 $rgba = imagecolorat($image, $x, $y);
                 $alpha = ($rgba & 0x7F000000) >> 24;
                 if ($alpha > 0) {
-                    return true; // hairshowtransparentlike素
+                    return true; // hairshowtransparentlikeelement
                 }
             }
         }

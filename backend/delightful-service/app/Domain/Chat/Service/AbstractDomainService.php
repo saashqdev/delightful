@@ -119,7 +119,7 @@ abstract class AbstractDomainService
      */
     public function dispatchSeq(SeqCreatedEvent $seqCreatedEvent): void
     {
-        // decreaseresponsedelay,尽fastgivecustomerclientreturnresponse.
+        // decreaseresponsedelay,exhaustedfastgivecustomerclientreturnresponse.
         $controlMessageCreatedMq = new MessageDispatchPublisher($seqCreatedEvent);
         if (! $this->producer->produce($controlMessageCreatedMq)) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_SEND_FAILED);
@@ -145,7 +145,7 @@ abstract class AbstractDomainService
 
     /**
      * notifyreceiveitemsidehavenewmessage(receiveitemsidemaybeisfromself,orpersonischatobject).
-     * @todo considerto seqIds mergesamecategoryitem,decreasepushcount,subtract轻network/mq/servicedevicestress
+     * @todo considerto seqIds mergesamecategoryitem,decreasepushcount,subtractlightnetwork/mq/servicedevicestress
      */
     public function pushControlSequence(DelightfulSeqEntity $seqEntity): SeqCreatedEvent
     {
@@ -314,7 +314,7 @@ abstract class AbstractDomainService
     {
         $messageType = $messageDTO->getMessageType();
         $batchResponse = [];
-        // eachitemmessagehairouto clock,thenwillinmessagebodymiddlerecord havereceiveside,by便backcontinuemessagestatuschangemore
+        // eachitemmessagehairouto clock,thenwillinmessagebodymiddlerecord havereceiveside,byconvenientbackcontinuemessagestatuschangemore
         switch ($messageType) {
             case ControlMessageType::SeenMessages:
                 /** @var MessagesSeen $messageStruct */
@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * avoid seq tablecarrytoomultiplefeature,addtoomultipleindex,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle.
+     * avoid seq tablecarrytoomultiplefeature,addtoomultipleindex,thereforewilltopicmessagesingleuniquewriteto topic_messages tablemiddle.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {
@@ -585,7 +585,7 @@ abstract class AbstractDomainService
             // according to appMsgId,givethisitemmessagecreate delightfulMsgId
             $messageDTO->setReceiveId($conversationEntity->getReceiveId());
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
-            // willconversationidreturnwriteentercontrolmessagemiddle,便atcustomerclienthandle
+            // willconversationidreturnwriteentercontrolmessagemiddle,convenientatcustomerclienthandle
             $content = $messageDTO->getContent()->toArray();
             $content['id'] = $conversationEntity->getId();
             $contentChange = MessageAssembler::getMessageStructByArray(
@@ -700,7 +700,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * getmessagemost近status.
+     * getmessagemostnearstatus.
      * @param DelightfulSeqEntity[] $seqList multiple refer_message_id relatedcloseseqList
      * @return DelightfulSeqEntity[]
      */
@@ -733,7 +733,7 @@ abstract class AbstractDomainService
     private function getReceiveMessageLatestReadStatus(array $referMessageIds, DataIsolation $dataIsolation): array
     {
         $referSeqList = $this->delightfulSeqRepository->getReceiveMessagesStatusChange($referMessageIds, $dataIsolation->getCurrentUserId());
-        // toatreceivesidecomesay,one sender_message_id byatstatuschange,maybewillhavemultipleitemrecord,this处needmostbackstatus
+        // toatreceivesidecomesay,one sender_message_id byatstatuschange,maybewillhavemultipleitemrecord,thislocationneedmostbackstatus
         return $this->getMessageLatestStatus($referMessageIds, $referSeqList);
     }
 }

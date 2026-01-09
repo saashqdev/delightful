@@ -36,7 +36,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * childissueassociateissue.supportassociateissueagainproducechildissue,butiswillbeflattenbecometwo维array.
+     * childissueassociateissue.supportassociateissueagainproducechildissue,butiswillbeflattenbecometwodimensionarray.
      * @var array<string,QuestionItem[]>
      * @example according touserinputissue,generateassociateissue.
      */
@@ -67,7 +67,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $events;
 
     /**
-     * @var string thinking导graph.markdown formatstring
+     * @var string thinkingguidegraph.markdown formatstring
      */
     protected string $mindMap;
 

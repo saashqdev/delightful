@@ -676,7 +676,7 @@ readonly class LongTermMemoryDomainService
             [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // pendingacceptstatusmaintainnotchange
             // pending_contentnotfornullo clockstatusconvert
             [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // take effectmemoryhaverevision → pendingrevision
-            // defaultsituation(notshouldto达thiswithin)
+            // defaultsituation(notshouldtoreachthiswithin)
             default => $currentStatus,
         };
     }

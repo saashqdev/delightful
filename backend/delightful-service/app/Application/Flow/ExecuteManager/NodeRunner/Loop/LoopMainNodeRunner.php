@@ -50,7 +50,7 @@ class LoopMainNodeRunner extends NodeRunner
         }
 
         $breakVariableKey = "#{$bodyId}_break";
-        // 采usevariablecomeinitializejumpoutloopconfiguration
+        // collectusevariablecomeinitializejumpoutloopconfiguration
         $executionData->variableSave($breakVariableKey, false);
 
         $params = $this->node->getParams();
@@ -165,7 +165,7 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复usecurrentexecutedata,loopbodyinsidecanaccessandmodify
+            // duplicateusecurrentexecutedata,loopbodyinsidecanaccessandmodify
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);

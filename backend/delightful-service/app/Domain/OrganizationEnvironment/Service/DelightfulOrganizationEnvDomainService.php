@@ -34,7 +34,7 @@ class DelightfulOrganizationEnvDomainService
 
     public function getOrCreateOrganizationsEnvironment(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvEntity): DelightfulOrganizationEnvEntity
     {
-        // addfrom旋lock防andhair
+        // addfromrotatelockpreventandhair
         $spinLockKey = sprintf('getOrCreateOrganizationsEnvironment:envId:%s', $delightfulEnvEntity->getId());
         $owner = random_bytes(8);
         $this->lock->spinLock($spinLockKey, $owner);
@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * currentenvironmentdefault env configuration. access saas o clockallowfrontclientnot传environment id,usedefaultenvironmentconfiguration.
+     * currentenvironmentdefault env configuration. access saas o clockallowfrontclientnotpassenvironment id,usedefaultenvironmentconfiguration.
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {

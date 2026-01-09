@@ -179,7 +179,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // if处atpausestatus,nottouchhair
+        // iflocationatpausestatus,nottouchhair
         if ($taskStatus->isPaused) {
             return false;
         }

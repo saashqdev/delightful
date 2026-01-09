@@ -119,7 +119,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.user_already_in_group')]
     case USER_ALREADY_IN_GROUP = 3024;
 
-    // pleasesendmessagebackagainuse智canrenamefeature
+    // pleasesendmessagebackagainuseintelligencecanrenamefeature
         // Send a message before using smart rename
     #[ErrorMessage('chat.topic.send_message_and_rename_topic')]
     case SEND_MESSAGE_AND_RENAME_TOPIC = 3025;

@@ -16,7 +16,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
 use Hyperf\Codec\Json;
 
 /**
- * chatandcontrolmessage基category.
+ * chatandcontrolmessagebasecategory.
  */
 abstract class DelightfulMessageStruct extends AbstractEntity implements MessageInterface
 {
@@ -47,7 +47,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
         }
         // godrop message_type field
         unset($data['control_message_type'], $data['chat_message_type'], $data['intermediate_message_type']);
-        // ifdatafornull,thengodropforeachitemmessageattach近 attachments and instructs
+        // ifdatafornull,thengodropforeachitemmessageattachnear attachments and instructs
         foreach (['attachments', 'instructs'] as $field) {
             if (empty($data[$field])) {
                 unset($data[$field]);
@@ -74,7 +74,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
      */
     public function setInstructs(?array $instructs): void
     {
-        // ensure instructs arraymiddleeachyuan素allis ChatInstruction object
+        // ensure instructs arraymiddleeachyuanelementallis ChatInstruction object
         if ($instructs !== null) {
             foreach ($instructs as $key => $instruct) {
                 /* @phpstan-ignore-next-line */

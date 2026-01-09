@@ -34,7 +34,7 @@ class RoutineConfig
         // topicconfiguration
         private readonly ?TopicConfig $topicConfig = null
     ) {
-        // saveconfigurationo clocknotagainstronglinedetect,puttogeneraterule处detect
+        // saveconfigurationo clocknotagainstronglinedetect,puttogeneraterulelocationdetect
     }
 
     public function toConfigArray(): array
@@ -210,7 +210,7 @@ class RoutineConfig
 
         $dayTimestamp = strtotime($this->day ?? '');
         if ($dayTimestamp) {
-            // timeonlycanisnotcome,havebug, whendayalsowill认forisnotcome
+            // timeonlycanisnotcome,havebug, whendayalsowillrecognizeforisnotcome
             // if (! is_null($this->day) && $dayTimestamp < time()) {
             //
             //     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date notcanispassgo');

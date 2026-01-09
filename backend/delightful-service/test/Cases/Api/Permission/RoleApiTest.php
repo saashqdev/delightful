@@ -125,7 +125,7 @@ class RoleApiTest extends AbstractHttpTest
             false
         );
 
-        // 核todatacontent
+        // coretodatacontent
         $this->assertEquals($id, $detailResp['data']['id'] ?? null);
         $this->assertEquals($requestData['name'], $detailResp['data']['name'] ?? null);
         $this->assertEquals($requestData['status'], $detailResp['data']['status'] ?? null);

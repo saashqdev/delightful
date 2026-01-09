@@ -21,7 +21,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $user_id userID,toshoulddelightful_contact_users.user_id
  * @property string $organization_code organizationencoding
  * @property null|string $assigned_by minuteallocatoruserID
- * @property null|Carbon $assigned_at minute配time
+ * @property null|Carbon $assigned_at minutematchtime
  * @property Carbon $created_at creation time
  * @property Carbon $updated_at update time
  * @property null|Carbon $deleted_at deletion time

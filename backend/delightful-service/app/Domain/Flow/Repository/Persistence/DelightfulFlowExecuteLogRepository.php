@@ -52,7 +52,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
             ->where('level', 0)
             // retrycountless than 3 time
             ->where('retry_count', '<', 1)
-            // onlygetmost近 2 hourinsidedata,exceedspass 2 hourdatanotagainprocess
+            // onlygetmostnear 2 hourinsidedata,exceedspass 2 hourdatanotagainprocess
             ->where('created_at', '>', date('Y-m-d H:i:s', time() - 7200))
             ->where('created_at', '<', date('Y-m-d H:i:s', time() - $timeout))
             ->forPage($page->getPage(), $page->getPageNum());

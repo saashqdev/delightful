@@ -294,7 +294,7 @@ readonly class RoleDomainService
      * logic:
      * 1. getcurrentorganizationdownnamefor ORGANIZATION_ADMIN_ROLE_NAME role;
      * 2. ifnotexistsindirectlyreturn;
-     * 3. call仓librarymoveexceptuserandtheroleassociateclosesystem;
+     * 3. callwarehouselibrarymoveexceptuserandtheroleassociateclosesystem;
      * 4. ifrolenotagainassociateanyuser,maintainroleitselfnotchange(likehaveneed,canconsiderbackcontinuecleanup).
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
@@ -309,7 +309,7 @@ readonly class RoleDomainService
 
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // use仓librarymoveexceptuserandroleassociate
+        // usewarehouselibrarymoveexceptuserandroleassociate
         $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), [$userId]);
     }
 }

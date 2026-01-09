@@ -47,7 +47,7 @@ class DelightfulMessageVersionsRepository implements DelightfulChatMessageVersio
         return $entities;
     }
 
-    // group装 DelightfulMessageVersionEntity object
+    // groupinstall DelightfulMessageVersionEntity object
     private function assembleMessageVersionEntity(array $data): DelightfulMessageVersionEntity
     {
         return new DelightfulMessageVersionEntity($data);

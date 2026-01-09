@@ -78,7 +78,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. synchandle(Midjourney采useroundinquiry mechanism)
+        // 3. synchandle(Midjourneycollectuseroundinquiry mechanism)
         try {
             $result = $this->generateImageRawInternal($imageGenerateRequest);
             $this->validateMidjourneyResponse($result);
@@ -293,7 +293,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlike核corelogic,returnnativeresult.
+     * generategraphlikecorecorelogic,returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {

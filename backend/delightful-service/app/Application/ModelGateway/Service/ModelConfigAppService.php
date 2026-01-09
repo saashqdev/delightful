@@ -59,12 +59,12 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * getmodel降levelchain,mergeuserpass in降levelchainandsystemdefault降levelchain.
+     * getmodeldecreaselevelchain,mergeuserpass indecreaselevelchainandsystemdefaultdecreaselevelchain.
      *
      * @param string $orgCode organizationencoding
      * @param string $userId userID
      * @param string $modelType fingersetmodeltype
-     * @param string[] $modelFallbackChain userpass in降levelchain
+     * @param string[] $modelFallbackChain userpass indecreaselevelchain
      *
      * @return string finalmodeltype
      */
@@ -86,14 +86,14 @@ class ModelConfigAppService extends AbstractLLMAppService
         // willcanusemodeltransferforhashtable,implementO(1)timecomplexdegreefind
         $availableModels = array_flip($chatModelsName);
 
-        // getsystemdefault降levelchain
+        // getsystemdefaultdecreaselevelchain
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
-        // mergeuserpass in降levelchainandsystemdefault降levelchain
-        // userpass in降levelchainprioritylevelmorehigh
+        // mergeuserpass indecreaselevelchainandsystemdefaultdecreaselevelchain
+        // userpass indecreaselevelchainprioritylevelmorehigh
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
-        // byprioritylevelordertraversemergeback降levelchain
+        // byprioritylevelordertraversemergebackdecreaselevelchain
         foreach ($mergedFallbackChain as $modelName) {
             if (isset($availableModels[$modelName])) {
                 return $modelName;

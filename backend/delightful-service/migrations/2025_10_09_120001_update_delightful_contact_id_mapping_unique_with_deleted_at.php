@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_contact_third_platform_id_mapping', static function (Blueprint $table) {
-            // adjustuniqueoneindexbycontain deleted_at,avoidsoftdeleterecord造becomeuniqueoneconstraintconflict
+            // adjustuniqueoneindexbycontain deleted_at,avoidsoftdeleterecordcreatebecomeuniqueoneconstraintconflict
             $table->dropIndex('unique_env_origin_mapping_type_third_type_org_code');
             $table->unique(
                 ['delightful_environment_id', 'origin_id', 'mapping_type', 'third_platform_type', 'delightful_organization_code', 'deleted_at'],

@@ -78,7 +78,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importassistantprocess
-     * 遇toduplicatetoolorprocesswillcreatenewinstance,andpassnameregionminute.
+     * encountertoduplicatetoolorprocesswillcreatenewinstance,andpassnameregionminute.
      */
     public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): DelightfulFlowEntity
     {
@@ -524,7 +524,7 @@ class DelightfulFlowExportImportAppService
                     }
                 }
 
-                // handleparametermiddletable达type
+                // handleparametermiddletablereachtype
                 $this->updateExpressionReferences($nodeData['params'], $idMapping);
             }
 
@@ -583,7 +583,7 @@ class DelightfulFlowExportImportAppService
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // usejustthentable达typeensureonlyreplacecompleteID
+                        // usejustthentablereachtypeensureonlyreplacecompleteID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
@@ -599,14 +599,14 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * recursionhandlearraymiddletable达typequote
-     * findandupdate havecontainsectionpointIDtable达typefield.
+     * recursionhandlearraymiddletablereachtypequote
+     * findandupdate havecontainsectionpointIDtablereachtypefield.
      */
     private function updateExpressionReferences(array &$data, array $idMapping): void
     {
         foreach ($data as &$item) {
             if (is_array($item)) {
-                // recursionhandle嵌setarray
+                // recursionhandleembedsetarray
                 $this->updateExpressionReferences($item, $idMapping);
             } elseif (is_string($item)) {
                 // skipfingercommandquote(instructions.*)
@@ -620,7 +620,7 @@ class DelightfulFlowExportImportAppService
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // usejustthentable达typeensureonlyreplacecompletesectionpointID
+                    // usejustthentablereachtypeensureonlyreplacecompletesectionpointID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -630,7 +630,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handleobjectshapetypetable达typevalue(likeformstructuremiddlefield)
+        // handleobjectshapetypetablereachtypevalue(likeformstructuremiddlefield)
         if (isset($data['field'])) {
             $field = $data['field'];
             if (is_string($field)) {
@@ -706,13 +706,13 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * handlespecialtable达typevaluefield.
+     * handlespecialtablereachtypevaluefield.
      */
     private function processSpecialNodeFieldValue(array &$value, array $idMapping): void
     {
         foreach ($value as $key => &$item) {
             if (is_array($item)) {
-                // recursionhandle嵌setarray
+                // recursionhandleembedsetarray
                 $this->processSpecialNodeFieldValue($item, $idMapping);
             } elseif (is_string($item)) {
                 // handlestringmiddlesectionpointIDquote
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // usejustthentable达typeensureonlyreplacecompletesectionpointID
+            // usejustthentablereachtypeensureonlyreplacecompletesectionpointID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
@@ -768,13 +768,13 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * handletable达typevaluemiddlesectionpointquote.
+     * handletablereachtypevaluemiddlesectionpointquote.
      */
     private function processExpressionValue(array &$expressionValue, array $idMapping): void
     {
         foreach ($expressionValue as &$item) {
             if (is_array($item)) {
-                // recursionhandle嵌setarray
+                // recursionhandleembedsetarray
                 $this->processExpressionValue($item, $idMapping);
             } elseif (is_string($item)) {
                 // handlestringmiddlesectionpointIDquote
@@ -782,7 +782,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handleobjectshapetypetable达typevalue(likeformstructuremiddlefield)
+        // handleobjectshapetypetablereachtypevalue(likeformstructuremiddlefield)
         if (isset($expressionValue['field'])) {
             $field = $expressionValue['field'];
             if (is_string($field)) {
@@ -791,17 +791,17 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handle嵌setvaluefield
+        // handleembedsetvaluefield
         if (isset($expressionValue['value']) && is_array($expressionValue['value'])) {
             $this->processExpressionValue($expressionValue['value'], $idMapping);
         }
 
-        // handleconst_valuetype嵌setstructure
+        // handleconst_valuetypeembedsetstructure
         if (isset($expressionValue['const_value']) && is_array($expressionValue['const_value'])) {
             $this->processExpressionValue($expressionValue['const_value'], $idMapping);
         }
 
-        // handleexpression_valuetype嵌setstructure
+        // handleexpression_valuetypeembedsetstructure
         if (isset($expressionValue['expression_value']) && is_array($expressionValue['expression_value'])) {
             $this->processExpressionValue($expressionValue['expression_value'], $idMapping);
         }

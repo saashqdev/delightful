@@ -42,7 +42,7 @@ class AiAbilityAssembler
         // getoriginalconfiguration
         $config = $entity->getConfig();
 
-        // recursiondesensitize have api_key field(supportany嵌setstructure)
+        // recursiondesensitize have api_key field(supportanyembedsetstructure)
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(

@@ -29,7 +29,7 @@ class DelightfulTokenEntity extends AbstractEntity
 
     protected ?DelightfulTokenExtraInterface $extra = null;
 
-    // ifthethird-partyplatform toke toolong,then搞shortpoint,便atstorageandquery
+    // ifthethird-partyplatform toke toolong,then搞shortpoint,convenientatstorageandquery
     public function getDelightfulShortToken(string $longToken): string
     {
         if (strlen($longToken) > 128) {

@@ -45,9 +45,9 @@ class IfNodeRunner extends NodeRunner
             }
             $condition = $component->getCondition()->getResult($executionData->getExpressionFieldData());
             if ($condition) {
-                // fullenoughitemitemthenwill走
+                // fullenoughitemitemthenwillwalk
                 $nextNodes = array_merge($nextNodes, $branch['next_nodes'] ?? []);
-                // 命middle if
+                // commandmiddle if
                 $if = true;
             }
             $debug[] = [
@@ -56,7 +56,7 @@ class IfNodeRunner extends NodeRunner
             ];
         }
 
-        // ifnothave命middle if,then走else
+        // ifnothavecommandmiddle if,thenwalkelse
         if (! $if && $elseBranch) {
             $nextNodes = $elseBranch['next_nodes'] ?? [];
             $debug[] = [

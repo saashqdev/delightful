@@ -83,7 +83,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
 
-        // itsactualnottoosuitable whereIn temporaryo clocknot想toothergoodway
+        // itsactualnottoosuitable whereIn temporaryo clocknotthinktoothergoodway
         $query->setCodes($resourceIds);
 
         $data = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $query, $page);
@@ -91,7 +91,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         foreach ($data['list'] ?? [] as $item) {
             $filePaths[] = $item->getIcon();
             if ($item->getCode() === ConstValue::TOOL_SET_DEFAULT_CODE) {
-                // notminutegroupdirectlyminute配administratorpermission
+                // notminutegroupdirectlyminutematchadministratorpermission
                 $item->setUserOperation(Operation::Admin->value);
             } else {
                 $operation = $resources[$item->getCode()] ?? Operation::None;

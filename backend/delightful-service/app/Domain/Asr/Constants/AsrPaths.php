@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Asr\Constants;
 
 /**
- * ASR path常quantity
- * 统onemanage ASR relatedclosedirectoryandfilepath.
+ * ASR pathconstantquantity
+ * systemonemanage ASR relatedclosedirectoryandfilepath.
  */
 class AsrPaths
 {

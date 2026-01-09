@@ -81,7 +81,7 @@ class RoleApi extends AbstractPermissionApi
             $allUserInfo = $this->userInfoAppService->getBatchUserInfo($allNeedUserIds, $contactIsolation);
         }
 
-        // reloadnewgroup装listdata
+        // reloadnewgroupinstalllistdata
         $list = [];
         foreach ($result['list'] as $index => $roleEntity) {
             $limitedIds = $roleUserIdsMap[$index] ?? [];
@@ -225,7 +225,7 @@ class RoleApi extends AbstractPermissionApi
         // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // returnemptyarraybytouchhair统one ApiResponse encapsulation
+        // returnemptyarraybytouchhairsystemone ApiResponse encapsulation
         return [];
     }
 }

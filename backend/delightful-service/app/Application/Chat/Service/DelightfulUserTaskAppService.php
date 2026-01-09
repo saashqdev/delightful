@@ -99,7 +99,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         $callbackParams = $this->getCallbackParams($userTaskDTO, $userTaskValueDTO, $flowCode);
         $enabled = true;
-        // ifisnotduplicate,thatwhatisdirectlycreate调degreetask
+        // ifisnotduplicate,thatwhatisdirectlycreateadjustdegreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomizeduplicate,thatwhatdirectlycreate调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomizeduplicate,thatwhatdirectlycreateadjustdegreetask,meanwhilecloseschedulegenerateadjustdegreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -167,7 +167,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     {
         $TaskType = TaskType::tryFrom($userTaskDTO->getType());
         if (! $TaskType) {
-            // 抛exception
+            // throwexception
             ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID);
         }
 
@@ -242,7 +242,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;
-        // ifisnotduplicate,thatwhatisdirectlycreate调degreetask
+        // ifisnotduplicate,thatwhatisdirectlycreateadjustdegreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomizeduplicate,thatwhatdirectlycreate调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomizeduplicate,thatwhatdirectlycreateadjustdegreetask,meanwhilecloseschedulegenerateadjustdegreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;

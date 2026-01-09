@@ -198,7 +198,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             // getdepartmentdetail
             $departmentsInfo = $this->departmentChartDomainService->getDepartmentFullPathByIds($dataIsolation, $departmentIds);
 
-            // group装useranddepartmentinfo
+            // groupinstalluseranddepartmentinfo
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 
@@ -336,7 +336,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getLoginCodeEnv(string $loginCode): DelightfulEnvironmentEntity
     {
         if (empty($loginCode)) {
-            // ifnothave传,thatwhatdefaultgetcurrentenvironment
+            // ifnothavepass,thatwhatdefaultgetcurrentenvironment
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getCurrentDefaultDelightfulEnv();
         } else {
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getEnvironmentEntityByLoginCode($loginCode);

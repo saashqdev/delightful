@@ -190,7 +190,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 智canbodytouchhairconversationstartinputorpersonendinput.
+     * intelligencecanbodytouchhairconversationstartinputorpersonendinput.
      * directlyoperationastosideconversationwindow,whilenotismessagehairinfromselfconversationwindowthenbackagainalreadybymessageminutehairmodepieceforwardtotosideconversationwindow.
      * @deprecated userclientcall agentOperateConversationStatusV2 methodreplace
      */

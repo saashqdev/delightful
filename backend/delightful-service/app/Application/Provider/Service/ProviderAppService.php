@@ -47,7 +47,7 @@ class ProviderAppService
         // receivecollection haveuniqueoneservicequotientconfigurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
-        // batchquantitygetservicequotientactualbody(avoid嵌setquery)
+        // batchquantitygetservicequotientactualbody(avoidembedsetquery)
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
         // batchquantitygetservicequotientconfigurationactualbody(useatgetalias)

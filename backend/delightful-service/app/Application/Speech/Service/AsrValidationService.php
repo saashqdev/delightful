@@ -92,7 +92,7 @@ readonly class AsrValidationService
             // otherbusinessexceptionconvertforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            // otherexception统oneprocessforpermissionverifyfail
+            // otherexceptionsystemoneprocessforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         }
     }

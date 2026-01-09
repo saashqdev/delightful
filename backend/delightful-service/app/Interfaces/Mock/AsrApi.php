@@ -137,7 +137,7 @@ class AsrApi
             $timestamp = '_' . $matches[1];
         }
 
-        // buildnewdirectoryname:智cantitle + timestamp
+        // buildnewdirectoryname:intelligencecantitle + timestamp
         $renamedDir = $outputFilename . $timestamp;
 
         // buildaudiofileinfo
@@ -148,7 +148,7 @@ class AsrApi
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
-            'intelligent_title' => $outputFilename, // useoutputfilenameasfor智cantitle
+            'intelligent_title' => $outputFilename, // useoutputfilenameasforintelligencecantitle
             'error_message' => null,
             'files' => [
                 'audio_file' => [
@@ -172,7 +172,7 @@ class AsrApi
         // ifhavenotefileconfigurationandfilesize > 0,addtoreturnmiddle(mocktrueactualsandboxnotefilecontentcheck)
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // userequestmiddleprovide target_path,whilenotishardencodingfilename
-            // this样cancorrectsupportinternationalizationfilename
+            // thisstylecancorrectsupportinternationalizationfilename
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 

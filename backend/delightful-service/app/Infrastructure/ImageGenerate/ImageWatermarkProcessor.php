@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * imagewatermarkhandledevice
- * 统onehandleeachtypeformatimagewatermarkadd.
+ * systemonehandleeachtypeformatimagewatermarkadd.
  */
 class ImageWatermarkProcessor
 {
@@ -52,7 +52,7 @@ class ImageWatermarkProcessor
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
-        // use统onewatermarkhandlemethod
+        // usesystemonewatermarkhandlemethod
         if ($imageGenerateRequest->isAddWatermark()) {
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
@@ -171,9 +171,9 @@ class ImageWatermarkProcessor
             // TTFfieldbodysizeneedadjust,usuallyratioinsideset fieldbodysmallonethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
-            // correctcalculateTTFfieldbody基lineposition
+            // correctcalculateTTFfieldbodybaselineposition
             if (function_exists('imagettfbbox')) {
-                // directlyusepass inYcoordinateasfor基lineposition
+                // directlyusepass inYcoordinateasforbaselineposition
                 $ttfY = $y;
             } else {
                 // ifnomethodgetsideboundary box,directlyusepass inYcoordinate
@@ -182,9 +182,9 @@ class ImageWatermarkProcessor
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
-            // 降leveluseinsideset fieldbody(onlysupportASCIIcharacter)
-            // insideset fieldbodyYcoordinateistexttopdepartment,needfrom基linepositionconvert
-            $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvertfortopdepartmentposition
+            // decreaseleveluseinsideset fieldbody(onlysupportASCIIcharacter)
+            // insideset fieldbodyYcoordinateistexttopdepartment,needfrombaselinepositionconvert
+            $builtinY = $y - (int) ($fontSize * 0.8); // frombaselinepositionconvertfortopdepartmentposition
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
             // iftextcontainmiddletextbutnothaveTTFfieldbody,recordwarning
@@ -230,11 +230,11 @@ class ImageWatermarkProcessor
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightforjust
 
             // TTFfieldbodydowndowngrademinute(descender)
-            $descender = (int) abs($bbox[1]); // 基linebydowndepartmentminute
-            $ascender = (int) abs($bbox[7]);  // 基linebyupdepartmentminute
+            $descender = (int) abs($bbox[1]); // baselinebydowndepartmentminute
+            $ascender = (int) abs($bbox[7]);  // baselinebyupdepartmentminute
             $totalTextHeight = $descender + $ascender;
         } else {
-            // 降leveluseestimatemethod
+            // decreaseleveluseestimatemethod
             // toatmiddletextcharacter,eachcharacterwidth约equalfieldbodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
@@ -254,11 +254,11 @@ class ImageWatermarkProcessor
                 return [max($margin, (int) (($width - $textWidth) / 2)), $margin + $ascender];
             case 3: // rightupangle
                 return [max($margin, $width - $textWidth - $margin), $margin + $ascender];
-            case 4: // left侧middle央
+            case 4: // leftsidemiddle央
                 return [$margin, (int) (($height + $ascender - $descender) / 2)];
             case 5: // middle央
                 return [max($margin, (int) (($width - $textWidth) / 2)), (int) (($height + $ascender - $descender) / 2)];
-            case 6: // right侧middle央
+            case 6: // rightsidemiddle央
                 return [max($margin, $width - $textWidth - $margin), (int) (($height + $ascender - $descender) / 2)];
             case 7: // leftdownangle
                 return [$margin, $height - $margin - $descender];

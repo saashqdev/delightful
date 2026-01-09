@@ -39,12 +39,12 @@ return new class extends Migration {
             $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecordnotread/alreadyread/alreadyviewuserlist');
             $table->text('extra')->comment('attachaddfield,recordonetheseextensionproperty. such astopicid.');
             // app_message_id
-            $table->string('app_message_id', 64)->default('')->comment('redundantremainderfield,customerclientgeneratemessageid,useat防customerclientduplicate');
+            $table->string('app_message_id', 64)->default('')->comment('redundantremainderfield,customerclientgeneratemessageid,useatpreventcustomerclientduplicate');
             # bydownisindexset
             // delightful_message_id index
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
             // factorforoftenneedby seq_id sort, byincreaseunionindex
-            // bydownindexcreatemovetosingle独migratefilemiddle
+            // bydownindexcreatemovetosingleuniquemigratefilemiddle
             $table->timestamps();
             $table->softDeletes();
             $table->comment('accountnumberreceiveitembox sequencecolumnnumbertable,eachaccountnumber havemessagemustsingleincrement');

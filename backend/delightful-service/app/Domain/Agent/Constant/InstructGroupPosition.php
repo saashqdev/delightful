@@ -14,8 +14,8 @@ use function Hyperf\Translation\__;
 
 enum InstructGroupPosition: int
 {
-    case TOOLBAR = 1;    // tool栏
-    case CHATBAR = 2;    // conversation栏
+    case TOOLBAR = 1;    // toolcolumn
+    case CHATBAR = 2;    // conversationcolumn
 
     public const MAX_INSTRUCTS = 5;
 

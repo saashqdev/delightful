@@ -153,7 +153,7 @@ enum SystemInstructType: int
         $toolbarGroupIndex = null;
         $toolbarGroup = null;
 
-        // findtool栏groupandshowhavesystemfingercommand
+        // findtoolcolumngroupandshowhavesystemfingercommand
         foreach ($instructs as $index => $group) {
             if (isset($group['position']) && $group['position'] === InstructGroupPosition::TOOLBAR->value) {
                 $hasSystemGroup = true;
@@ -163,7 +163,7 @@ enum SystemInstructType: int
             }
         }
 
-        // ifnothavetool栏group,createonenew
+        // ifnothavetoolcolumngroup,createonenew
         if (! $hasSystemGroup) {
             $toolbarGroup = [
                 'id' => (string) IdGenerator::getSnowId(),
@@ -172,7 +172,7 @@ enum SystemInstructType: int
             ];
         }
 
-        // minute离systemfingercommandandnonsystemfingercommand
+        // minuteleavesystemfingercommandandnonsystemfingercommand
         $systemInstructs = [];
         $normalInstructs = [];
         foreach ($toolbarGroup['items'] as $item) {
@@ -200,10 +200,10 @@ enum SystemInstructType: int
         // byenumdefinitionordersortsystemfingercommand
         ksort($systemInstructs);
 
-        // reloadnewgroup合tool栏group items,systemfingercommandinfront
+        // reloadnewgroupcombinetoolcolumngroup items,systemfingercommandinfront
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
-        // updateoraddtool栏group
+        // updateoraddtoolcolumngroup
         if ($toolbarGroupIndex !== null) {
             $instructs[$toolbarGroupIndex] = $toolbarGroup;
         } else {

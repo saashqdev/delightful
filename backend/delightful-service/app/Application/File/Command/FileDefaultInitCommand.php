@@ -228,7 +228,7 @@ class FileDefaultInitCommand extends Command
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // ifhaveneedsingle独handledefaultgraphmark,caninthiswithinimplement
+        // ifhaveneedsingleuniquehandledefaultgraphmark,caninthiswithinimplement
         // for examplehandle Midjourney etcdefaultgraphmark
     }
 }

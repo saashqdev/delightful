@@ -15,7 +15,7 @@ enum LanguageEnum: string
     case ZH_CN = 'zh_CN';
 
     /**
-     * 美typeEnglish.
+     * aesthetictypeEnglish.
      */
     case EN_US = 'en_US';
 

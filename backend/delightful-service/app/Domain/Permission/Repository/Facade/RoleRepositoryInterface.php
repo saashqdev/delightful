@@ -39,7 +39,7 @@ interface RoleRepositoryInterface
     public function delete(string $organizationCode, RoleEntity $roleEntity): void;
 
     /**
-     * forroleminute配user.
+     * forroleminutematchuser.
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void;
 

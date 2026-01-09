@@ -17,12 +17,12 @@ class TreeIndexEntity
     protected int $ancestorId;
 
     /**
-     * back代sectionpointid.
+     * backgenerationsectionpointid.
      */
     protected int $descendantId;
 
     /**
-     * ancestorsectionpointtoback代sectionpointdistance.
+     * ancestorsectionpointtobackgenerationsectionpointdistance.
      */
     protected int $distance;
 

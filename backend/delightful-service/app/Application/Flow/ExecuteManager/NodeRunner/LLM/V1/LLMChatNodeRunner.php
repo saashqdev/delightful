@@ -336,7 +336,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // haveandonlyonecurrentsectionpointtable达typequote
+        // haveandonlyonecurrentsectionpointtablereachtypequote
         $expressionItems = $contentValue->getAllFieldsExpressionItem() ?? [];
         if (count($expressionItems) !== 1) {
             return false;

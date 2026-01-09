@@ -124,7 +124,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
                 topicId: $executionData->getTopicId(),
                 limit: $modelConfig->getMaxRecord(),
             );
-            // ifcomesourceisthethird-partychattool,onlygetmost近 3 hourmemory
+            // ifcomesourceisthethird-partychattool,onlygetmostnear 3 hourmemory
             if ($executionData->isThirdPlatformChat()) {
                 $memoryQuery->setStartTime(new DateTime('-3 hours'));
             }

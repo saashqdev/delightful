@@ -31,7 +31,7 @@ class ClientMessage extends AbstractEntity
 
     protected string $type;
 
-    // returndisplaynotreadpersoncount,ifuserpoint击detail,againrequestspecificmessagecontent
+    // returndisplaynotreadpersoncount,ifuserpointhitdetail,againrequestspecificmessagecontent
     protected ?int $unreadCount;
 
     // messagesendperson,fromselforpersonheperson
@@ -40,7 +40,7 @@ class ClientMessage extends AbstractEntity
     // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clockuniqueonepropertyvalidation.
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(nonpuretextcomplextypemessage,userpoint击detail)  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(nonpuretextcomplextypemessage,userpointhitdetail)  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;

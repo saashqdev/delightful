@@ -54,7 +54,7 @@ class InstructionConfig extends AbstractEntity
     protected string $name = '';
 
     /**
-     * directlysendfingercommand,userpoint击fingercommandbackwilldirectlysendgiveassistant.
+     * directlysendfingercommand,userpointhitfingercommandbackwilldirectlysendgiveassistant.
      */
     protected bool $sendDirectly = false;
 
@@ -227,13 +227,13 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // iffirstyuan素alreadyalreadyis InstructionValue object,thendirectlyuse
+        // iffirstyuanelementalreadyalreadyis InstructionValue object,thendirectlyuse
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
         }
 
-        // nothen,willeachyuan素convertfor InstructionValue object
+        // nothen,willeachyuanelementconvertfor InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);

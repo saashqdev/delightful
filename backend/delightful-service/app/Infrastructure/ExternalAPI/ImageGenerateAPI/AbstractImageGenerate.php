@@ -18,7 +18,7 @@ use Hyperf\Redis\Redis;
 use Psr\Log\LoggerInterface;
 
 /**
- * imagegenerate统oneabstractcategory
+ * imagegeneratesystemoneabstractcategory
  * integrationwatermarkprocessandDingTalkalertfeature
  *  haveimagegenerateProviderallshouldinheritthiscategory.
  */
@@ -37,8 +37,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 统oneimagegenerateentrymethod
-     * firstcallchildcategoryimplementoriginalimagegenerate,again统oneaddwatermark.
+     * systemoneimagegenerateentrymethod
+     * firstcallchildcategoryimplementoriginalimagegenerate,againsystemoneaddwatermark.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -66,7 +66,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * getresponseobjectlock,useatandhairsecuritygroundoperationas OpenAIFormatResponse.
-     * useRedisfrom旋lockimplementrow队etcpending.
+     * useRedisfromrotatelockimplementrow队etcpending.
      *
      * @return string returnlockowner,useatreleaselock
      */
@@ -119,7 +119,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 统onewatermarkprocesslogic
+     * systemonewatermarkprocesslogic
      * supportURLandbase64twotypeformatimagewatermarkprocess.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse

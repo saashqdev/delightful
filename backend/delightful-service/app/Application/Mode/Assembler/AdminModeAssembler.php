@@ -91,7 +91,7 @@ class AdminModeAssembler
             $modelInfo = $providerModels[$modelId] ?? null;
 
             if ($modelInfo && $modelInfo['best']) {
-                // findtocanusemodel,usemost佳modelinfo
+                // findtocanusemodel,usemostexcellentmodelinfo
                 $providerModel = $modelInfo['best'];
                 $modelDTO->setModelName($providerModel->getName());
                 $modelDTO->setModelIcon($providerModel->getIcon());

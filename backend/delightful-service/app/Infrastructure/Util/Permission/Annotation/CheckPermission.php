@@ -42,17 +42,17 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * group合forcompletepermissionkey,like "console.api.assistant.query".
+     * groupcombineforcompletepermissionkey,like "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
-        // forcompatibleoldlogic,returnfirstgroup合key
+        // forcompatibleoldlogic,returnfirstgroupcombinekey
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }
 
     /**
-     * return havepermissionkeygroup合(resources x operations Cartesianproduct).
+     * return havepermissionkeygroupcombine(resources x operations Cartesianproduct).
      * whenstatementmultipleresourceormultiple operationsaso clock,permissionpassanyonekeyimmediatelycan.
      *
      * @return array<string>
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * willstring/enumoritsarray统oneforstringarray.
+     * willstring/enumoritsarraysystemoneforstringarray.
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

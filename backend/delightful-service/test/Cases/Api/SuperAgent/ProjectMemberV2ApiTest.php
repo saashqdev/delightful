@@ -123,7 +123,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test协assettingmanage.
+     * testcoordinateassettingmanage.
      */
     public function testCollaborationSettings(): void
     {
@@ -131,22 +131,22 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 1. testget协assetting - defaultclosestatus
+        // 1. testgetcoordinateassetting - defaultclosestatus
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
         $this->assertEquals(true, in_array($response['data']['default_join_permission'], ['viewer', 'editor']));
 
-        // 2. start协asfeature
+        // 2. startcoordinateasfeature
         $this->enableCollaboration($projectId);
 
-        // 3. validate协asalreadystart
+        // 3. validatecoordinateasalreadystart
         $response = $this->getCollaborationSettings($projectId);
         $this->assertTrue($response['data']['is_collaboration_enabled']);
 
-        // 4. close协asfeature
+        // 4. closecoordinateasfeature
         $this->disableCollaboration($projectId);
 
-        // 5. validate协asalreadyclose
+        // 5. validatecoordinateasalreadyclose
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
     }
@@ -177,7 +177,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * testorganizationside界control.
+     * testorganizationsideboundarycontrol.
      */
     public function testOrganizationBoundaryControl(): void
     {
@@ -208,7 +208,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * testside界situation.
+     * testsideboundarysituation.
      */
     public function testEdgeCases(): void
     {
@@ -233,9 +233,9 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 5. test协ascloseo clocknotcanaddmember
+        // 5. testcoordinateascloseo clocknotcanaddmember
         $this->disableCollaboration($projectId);
-        $this->addTeamMembers($projectId, 51202); // 协asalreadycloseerror
+        $this->addTeamMembers($projectId, 51202); // coordinateasalreadycloseerror
     }
 
     /**
@@ -250,16 +250,16 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('permission', $response['message']);
 
-        // 2. test协asnotstarterror
+        // 2. testcoordinateasnotstarterror
         $this->switchUserTest1();
         $response = $this->addTeamMembers($projectId, 51202);
-        $this->assertStringContainsString('协as', $response['message']);
+        $this->assertStringContainsString('coordinateas', $response['message']);
     }
 
     // ========== assisttestmethod ==========
 
     /**
-     * startproject协as.
+     * startprojectcoordinateas.
      */
     public function enableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -284,7 +284,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * closeproject协as.
+     * closeprojectcoordinateas.
      */
     public function disableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -303,7 +303,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * get协assetting.
+     * getcoordinateassetting.
      */
     public function getCollaborationSettings(string $projectId, int $expectedCode = 1000): array
     {

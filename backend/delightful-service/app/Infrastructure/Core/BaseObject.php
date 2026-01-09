@@ -11,7 +11,7 @@ use ArrayAccess;
 use Hyperf\Contract\Arrayable;
 
 /**
- * fastspeedpropertyaccess基category
+ * fastspeedpropertyaccessbasecategory
  * othercategorycaninheritthiscategory,convenient accesspropertysetandaccesscancapability.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable

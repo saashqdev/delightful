@@ -31,7 +31,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 {
     use ChatAmqpTrait;
 
-    // childcategoryneedfinger明 topic type
+    // childcategoryneedfingerclear topic type
     protected AmqpTopicType $topic;
 
     protected LoggerInterface $logger;

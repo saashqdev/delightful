@@ -20,7 +20,7 @@ use Hyperf\DbConnection\Db;
 use function Hyperf\Support\now;
 
 /**
- * organizationadministrator仓libraryimplement.
+ * organizationadministratorwarehouselibraryimplement.
  */
 readonly class OrganizationAdminRepository implements OrganizationAdminRepositoryInterface
 {

@@ -20,8 +20,8 @@ return new class extends Migration {
         Schema::create('delightful_comment_tree_indexes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ancestor_id')->index()->comment('ancestorsectionpointid, commentstablemainkeyid');
-            $table->unsignedBigInteger('descendant_id')->index()->comment('back代sectionpointid, commentstablemainkeyid');
-            $table->unsignedInteger('distance')->comment('ancestorsectionpointtoback代sectionpointdistance');
+            $table->unsignedBigInteger('descendant_id')->index()->comment('backgenerationsectionpointid, commentstablemainkeyid');
+            $table->unsignedInteger('distance')->comment('ancestorsectionpointtobackgenerationsectionpointdistance');
             $table->string('organization_code')->index()->comment('organizationcode');
 
             $table->timestamps();

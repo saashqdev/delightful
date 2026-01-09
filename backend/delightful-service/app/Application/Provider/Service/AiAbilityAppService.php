@@ -102,7 +102,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智canmergeconfiguration(retainbedesensitizeapi_key)
+            // intelligencecanmergeconfiguration(retainbedesensitizeapi_key)
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
@@ -130,7 +130,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智canmergeconfiguration(retainbedesensitizeapi_keyoriginalvalue).
+     * intelligencecanmergeconfiguration(retainbedesensitizeapi_keyoriginalvalue).
      *
      * @param array $dbConfig databaseoriginalconfiguration
      * @param array $frontendConfig frontclient transmissioncomeconfiguration(maybecontaindesensitizeapi_key)
@@ -160,7 +160,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             }
         }
 
-        // frontclientnot传field, thendatabasemiddlefieldfordefaultvalue ''
+        // frontclientnotpassfield, thendatabasemiddlefieldfordefaultvalue ''
         foreach ($dbConfig as $key => $value) {
             if (! array_key_exists($key, $result)) {
                 $result[$key] = '';

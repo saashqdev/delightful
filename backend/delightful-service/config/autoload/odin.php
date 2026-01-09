@@ -24,7 +24,7 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // arraytype:recursionhandleeachyuan素,retainarraystructure
+        // arraytype:recursionhandleeachyuanelement,retainarraystructure
         foreach ($value as &$item) {
             processConfigValue($item);
         }
@@ -243,14 +243,14 @@ return [
                 'total' => 350.0,     // totalbodytimeout(second)
                 'thinking' => 120.0,  // thinktimeout(second)
                 'stream_chunk' => 30.0, // streampiecebetweentimeout(second)
-                'stream_first' => 60.0, // 首streampiecetimeout(second)
+                'stream_first' => 60.0, // firststreampiecetimeout(second)
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfieldwhitelistsingleconfiguration
                 // iffornullarrayornotconfiguration,thenprint havefield
                 // ifconfigurationfieldcolumntable,thenonlyprintfingersetfield
-                // support嵌setfield,usepointsyntaxlike 'args.messages'
+                // supportembedsetfield,usepointsyntaxlike 'args.messages'
                 // notice:messages and tools fieldnotinwhitelistsinglemiddle,notwillbeprint
                 'whitelist_fields' => [
                     // basicrequestinfo

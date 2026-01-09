@@ -10,7 +10,7 @@ namespace App\Domain\Flow\Entity\ValueObject;
 /**
  * sectionpointtype
  * 1 ~ 99 atomicsectionpoint
- * 100 ~ 199 group合sectionpointhardencodingimplement.
+ * 100 ~ 199 groupcombinesectionpointhardencodingimplement.
  */
 enum NodeType: int
 {
@@ -21,7 +21,7 @@ enum NodeType: int
     case Start = 1;
 
     /*
-     * LLM Chat thiswithinishistoryreasongroup合sectionpoint
+     * LLM Chat thiswithinishistoryreasongroupcombinesectionpoint
      * biglanguagemodel optionalmodel,prompt,temperature
      */
     case LLM = 2;

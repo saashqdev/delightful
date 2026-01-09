@@ -482,7 +482,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // syncthethreesideassistant
         $this->delightfulBotThirdPlatformChatDomainService->syncBotThirdPlatformList($agent->getId(), $thirdPlatformList);
 
-        // 首timepublishaddforgoodfriend
+        // firsttimepublishaddforgoodfriend
         $result['is_add_friend'] = $isAddFriend;
 
         $delightfulAgentVersionEntity = $result['data'];
@@ -1073,7 +1073,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 if (isset($departmentsMap[$departmentId])) {
                     $department = $departmentsMap[$departmentId];
                     $pathStr = $department->getPath();
-                    // pathformatfor "-1/parent_id/department_id",goexceptfront导-1
+                    // pathformatfor "-1/parent_id/department_id",goexceptfrontguide-1
                     $allDepartmentIds[] = array_filter(explode('/', trim($pathStr, '/')), static function ($id) {
                         return $id !== '-1';
                     });
@@ -1094,8 +1094,8 @@ class DelightfulAgentAppService extends AbstractAppService
                 continue;
             }
 
-            // specificvisible - this处noneedagaintimecheckvisibilityType,factorforfrontsurfacealreadyrowexceptnullandAlltype
-            // 剩downonlymaybeisSPECIFICtype
+            // specificvisible - thislocationnoneedagaintimecheckvisibilityType,factorforfrontsurfacealreadyrowexceptnullandAlltype
+            // remainingdownonlymaybeisSPECIFICtype
             if ($this->isUserVisible($visibilityConfig, $currentUserId, $userDepartmentIds)) {
                 $visibleAgentVersions[] = $agentVersion;
             }
@@ -1354,7 +1354,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * minute离officialorganizationanduserorganizationassistant.
+     * minuteleaveofficialorganizationanduserorganizationassistant.
      *
      * @param array $agentEntities assistantactualbodyarray
      * @return array return [officialAgents, userOrgAgents]
@@ -1384,7 +1384,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function getAgentConversationMapping(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {
-        // 3. minute离officialandnonofficialassistant
+        // 3. minuteleaveofficialandnonofficialassistant
         [$officialAgents, $userOrgAgents] = $this->separateOfficialAndUserAgents($agentEntities);
 
         // extract flow_code
@@ -1438,7 +1438,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function batchGetAvatarUrls(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {
-        // minute离officialorganizationanduserorganizationassistant
+        // minuteleaveofficialorganizationanduserorganizationassistant
         [$officialAgents, $userOrgAgents] = $this->separateOfficialAndUserAgents($agentEntities);
 
         $avatarUrlMap = [];

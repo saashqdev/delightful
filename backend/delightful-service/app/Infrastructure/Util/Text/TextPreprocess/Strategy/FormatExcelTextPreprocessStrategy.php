@@ -15,7 +15,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
         $content = $this->convertToCsv($content);
         // delete ## openheadline
         $content = preg_replace('/^##.*\n/', '', $content);
-        // usejustthentable达typematchnotinimportnumberinsideexchangeline符
+        // usejustthentablereachtypematchnotinimportnumberinsideexchangelinesymbol
         return preg_replace('/(?<!")[\r\n]+(?!")/', "\n\n", $content);
     }
 
@@ -26,7 +26,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function convertToCsv(string $content): string
     {
-        // willcontentbylinesplit,butretainsingleyuanformatinsideexchangeline符
+        // willcontentbylinesplit,butretainsingleyuanformatinsideexchangelinesymbol
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];

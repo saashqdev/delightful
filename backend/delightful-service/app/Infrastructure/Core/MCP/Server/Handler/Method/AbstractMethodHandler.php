@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * MCPmethodprocessdeviceabstract基category.
+ * MCPmethodprocessdeviceabstractbasecategory.
  */
 abstract class AbstractMethodHandler implements MethodHandlerInterface
 {

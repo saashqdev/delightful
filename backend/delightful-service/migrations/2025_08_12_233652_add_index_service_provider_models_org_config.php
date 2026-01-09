@@ -41,7 +41,7 @@ return new class extends Migration {
                 $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_config_id');
             }
 
-            // addnewgroup合index:organization_code, model_parent_id(ifnotexistsin)
+            // addnewgroupcombineindex:organization_code, model_parent_id(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_models', 'idx_org_model_parent')) {
                 $table->index(['organization_code', 'model_parent_id'], 'idx_org_model_parent');
             }
@@ -62,7 +62,7 @@ return new class extends Migration {
 
         // add service_provider_original_models tableindex
         Schema::table('service_provider_original_models', function (Blueprint $table) {
-            // 核coregroup合index(ifnotexistsin)
+            // corecoregroupcombineindex(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_original_models', 'idx_org_type')) {
                 $table->index(['organization_code', 'type'], 'idx_org_type');
             }

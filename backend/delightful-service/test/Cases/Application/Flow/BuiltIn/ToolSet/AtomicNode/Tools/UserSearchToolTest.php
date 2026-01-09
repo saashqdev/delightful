@@ -83,8 +83,8 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'system_prompt' => 'whenuser想wantsearchpersonmembero clock,call user_search toolgetrelatedclosepersonmemberinformation',
-            'user_prompt' => 'Iwant to findonedown openhairdepartmentsmall明',
+            'system_prompt' => 'whenuserthinkwantsearchpersonmembero clock,call user_search toolgetrelatedclosepersonmemberinformation',
+            'user_prompt' => 'Iwant to findonedown openhairdepartmentsmallclear',
         ]);
         $runner->execute($vertexResult, $executionData);
 

@@ -14,7 +14,7 @@ use App\Interfaces\Kernel\DTO\PageDTO;
 class SubAdminAssembler
 {
     /**
-     * will RoleEntity convertforarrayformat,供frontclientuse.
+     * will RoleEntity convertforarrayformat,supplyfrontclientuse.
      */
     public static function toArray(RoleEntity $entity): array
     {

@@ -118,7 +118,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * themethodgettoonesetistrueactualcallmodel.
      * only ModelGateway domainuse.
-     * @param string $model expectedismanagebackplatform model_id,passdegree阶segmentacceptpass in model_version
+     * @param string $model expectedismanagebackplatform model_id,passdegreelevelsegmentacceptpass in model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -133,7 +133,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * themethodgettoonesetistrueactualcallmodel.
      * only ModelGateway domainuse.
-     * @param string $model modelname expectedismanagebackplatform model_id,passdegree阶segmentaccept model_version
+     * @param string $model modelname expectedismanagebackplatform model_id,passdegreelevelsegmentaccept model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {
@@ -328,7 +328,7 @@ class ModelGatewayMapper extends ModelMapper
         // get servicequotient
         $providers = $this->providerManager->getProvidersByIds($providerDataIsolation, $providerIds);
 
-        // group装data
+        // groupinstalldata
         foreach ($providerModels as $providerModel) {
             if (! $providerConfig = $providerConfigs[$providerModel->getServiceProviderConfigId()] ?? null) {
                 $modelLogs[$providerModel->getModelId()]['error'] = 'ProviderConfig not found';
@@ -397,14 +397,14 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservicequotient统onedisplayalias,ifnothavealiasthendisplay“customizeservicequotient”(needconsidermultiplelanguage)
+            // customizeservicequotientsystemonedisplayalias,ifnothavealiasthendisplay“customizeservicequotient”(needconsidermultiplelanguage)
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // insidesetservicequotient统onedisplay servicequotientname,notusedisplayalias(needconsidermultiplelanguage)
+            // insidesetservicequotientsystemonedisplay servicequotientname,notusedisplayalias(needconsidermultiplelanguage)
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // ifnotisofficialorganization,butismodelisofficialorganization,统onedisplay Delightful
+        // ifnotisofficialorganization,butismodelisofficialorganization,systemonedisplay Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -422,7 +422,7 @@ class ModelGatewayMapper extends ModelMapper
             $iconUrl = '';
         }
 
-        // according tomodeltypereturndifferentpackage装object
+        // according tomodeltypereturndifferentpackageinstallobject
         if ($providerModelEntity->getModelType()->isVLM()) {
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }

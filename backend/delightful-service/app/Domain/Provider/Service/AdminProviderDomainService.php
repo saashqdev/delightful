@@ -66,7 +66,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
         }
 
-        // 3. group装 ProviderConfigDTO
+        // 3. groupinstall ProviderConfigDTO
         $configData = $providerConfigEntity->toArray();
         $providerData = $providerEntity->toArray();
         // mergeconfigurationandservicequotientdata
@@ -148,7 +148,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         string $organizationCode,
         bool $throw = true,
     ): ?ProviderConfigEntity {
-        // 1. ifprovide modelId,走newlogic
+        // 1. ifprovide modelId,walknewlogic
         if (! empty($modelId)) {
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
@@ -291,7 +291,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         }
 
         if (empty($models)) {
-            $this->logger->warning('美graphmodelnotfindto' . $modelId);
+            $this->logger->warning('aestheticgraphmodelnotfindto' . $modelId);
             // ifnothavefindtomodel,throwexception
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
@@ -364,7 +364,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // createconfigurationIDtoconfigurationactualbodymapping,便atfastspeedfind
+        // createconfigurationIDtoconfigurationactualbodymapping,convenientatfastspeedfind
         $configMap = [];
         foreach ($serviceProviderConfigEntities as $configEntity) {
             $configMap[$configEntity->getId()] = $configEntity;
@@ -435,7 +435,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     {
         $providerModelEntities = $this->providerModelRepository->getModelsForOrganization($dataIsolation, $providerModelQuery->getCategory(), $providerModelQuery->getStatus());
 
-        // modelId alreadypassfilter,goreload选one
+        // modelId alreadypassfilter,goreloadselectone
         if ($providerModelQuery->isModelIdFilter()) {
             $uniqueModels = [];
             foreach ($providerModelEntities as $model) {

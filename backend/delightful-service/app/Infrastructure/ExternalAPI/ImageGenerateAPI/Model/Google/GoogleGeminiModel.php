@@ -180,7 +180,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         try {
             // ifhavereferencegraphlike,thenexecutegraphlikeedit
             if (! empty($referImages)) {
-                // gettheone张referencegraphlikeconductedit
+                // gettheonesheetreferencegraphlikeconductedit
                 $referImage = $referImages[0];
                 $result = $this->processImageEdit($referImage, $prompt);
             } else {
@@ -252,7 +252,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini APIeachtimeonlycangenerateone张graph,passandhaircallimplementmultiplegraphgenerate
+        // Google Gemini APIeachtimeonlycangenerateonesheetgraph,passandhaircallimplementmultiplegraphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -414,7 +414,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $usageMetadata['candidatesTokenCount'] ?? 0;
                 $currentUsage->totalTokens += $usageMetadata['totalTokenCount'] ?? 0;
             } else {
-                // ifnothaveusageinfo,defaultincrease1张image
+                // ifnothaveusageinfo,defaultincrease1sheetimage
                 $currentUsage->addGeneratedImages(1);
             }
 

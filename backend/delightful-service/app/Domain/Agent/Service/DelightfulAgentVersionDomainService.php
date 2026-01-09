@@ -190,13 +190,13 @@ class DelightfulAgentVersionDomainService
         // will PATCH departmentminuteadd 1
         $patch = (int) $patch + 1;
 
-        // if PATCH 达to 10,enterpositionto MINOR(canaccording torequirementadjustthisrule)
+        // if PATCH reachto 10,enterpositionto MINOR(canaccording torequirementadjustthisrule)
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // if MINOR 达to 10,enterpositionto MAJOR(canaccording torequirementadjustthisrule)
+        // if MINOR reachto 10,enterpositionto MAJOR(canaccording torequirementadjustthisrule)
         if ($minor > 99) {
             // notresetminor,whileisdirectly增bigmajor,avoidnotrequiredwantreset
             $minor = 0;

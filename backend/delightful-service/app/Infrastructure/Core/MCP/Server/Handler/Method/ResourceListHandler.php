@@ -10,12 +10,12 @@ namespace App\Infrastructure\Core\MCP\Server\Handler\Method;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 资sourcecolumntablemethodprocessdevice.
+ * assetssourcecolumntablemethodprocessdevice.
  */
 class ResourceListHandler extends AbstractMethodHandler
 {
     /**
-     * process资sourcecolumntablerequest.
+     * processassetssourcecolumntablerequest.
      */
     public function handle(MessageInterface $request): ?array
     {

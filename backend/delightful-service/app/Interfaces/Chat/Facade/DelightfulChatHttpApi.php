@@ -86,7 +86,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * pullusermost近onesegmenttimereceiveitemmessage.
+     * pullusermostnearonesegmenttimereceiveitemmessage.
      * @throws Throwable
      */
     public function pullRecentMessage(RequestInterface $request): array
@@ -196,7 +196,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 智canaccording totopicidgettopicname.
+     * intelligencecanaccording totopicidgettopicname.
      */
     public function intelligenceGetTopicName(string $conversationId, string $topicId): array
     {

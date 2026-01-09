@@ -24,7 +24,7 @@ use Psr\Container\ContainerInterface;
 use function mb_substr;
 
 /**
- * knowledge basedocument仓libraryimplement.
+ * knowledge basedocumentwarehouselibraryimplement.
  */
 class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository implements KnowledgeBaseDocumentRepositoryInterface
 {

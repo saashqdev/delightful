@@ -143,7 +143,7 @@ class SeqAssembler
         if ($messageType === ControlMessageType::SeenMessages) {
             // changemorestatusforalreadyread
             $seqData['status'] = DelightfulMessageStatus::Seen->value;
-            // returnwriteo clockwill $referMessageIds 拆open,eachitemmessagegenerateoneitemalreadyreadmessage
+            // returnwriteo clockwill $referMessageIds splitopen,eachitemmessagegenerateoneitemalreadyreadmessage
             $seqData['content'] = Json::encode(['refer_message_ids' => [$referMessageId]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         if ($messageType === ControlMessageType::RevokeMessage) {
@@ -290,11 +290,11 @@ class SeqAssembler
             'topic_id' => $messageTopicId,
             // messagesmallcategory.controlmessagesmallcategory:alreadyreadreturnexecute;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
             'type' => $messageTypeName,
-            // returndisplaynotreadpersoncount,ifuserpoint击detail,againrequestspecificmessagecontent
+            // returndisplaynotreadpersoncount,ifuserpointhitdetail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
             // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clockuniqueonepropertyvalidation.
             'send_time' => $carbon->getTimestamp(),
-            // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(nonpuretextcomplextypemessage,userpoint击detail)  | withdraw
+            // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(nonpuretextcomplextypemessage,userpointhitdetail)  | withdraw
             'status' => $messageStatus ?: '',
             'content' => $messageData,
         ];

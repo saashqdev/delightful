@@ -211,7 +211,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * getmodel(considerservicequotientlevel联status).
+     * getmodel(considerservicequotientlevelunionstatus).
      * @return ProviderModelEntity[]
      */
     protected function getModels(ModeAggregate $modeAggregate): array
@@ -250,7 +250,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // foreachmodel_idchoosemost佳model(considerlevel联status)
+        // foreachmodel_idchoosemostexcellentmodel(considerlevelunionstatus)
         $providerModels = [];
         foreach ($allModels as $modelId => $models) {
             $bestModel = $this->selectBestModel($models, $providerStatuses);
@@ -263,7 +263,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * getdetailedmodelinfo(useatmanagebackplatform,considerservicequotientlevel联status).
+     * getdetailedmodelinfo(useatmanagebackplatform,considerservicequotientlevelunionstatus).
      * @return array<string, array{best: null|ProviderModelEntity, all: ProviderModelEntity[], status: ModelStatus}>
      */
     protected function getDetailedModels(ModeAggregate $modeAggregate): array
@@ -319,11 +319,11 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * frommodelcolumntablemiddlechoosemost佳model(considerservicequotientlevel联status).
+     * frommodelcolumntablemiddlechoosemostexcellentmodel(considerservicequotientlevelunionstatus).
      *
      * @param ProviderModelEntity[] $models modelcolumntable
      * @param array<int, Status> $providerStatuses servicequotientstatusmapping
-     * @return null|ProviderModelEntity choosemost佳model,ifnothavecanusemodelthenreturnnull
+     * @return null|ProviderModelEntity choosemostexcellentmodel,ifnothavecanusemodelthenreturnnull
      */
     private function selectBestModel(array $models, array $providerStatuses = []): ?ProviderModelEntity
     {
@@ -361,7 +361,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * according tomodelcolumntablecertainstatus(considerservicequotientlevel联status).
+     * according tomodelcolumntablecertainstatus(considerservicequotientlevelunionstatus).
      *
      * @param ProviderModelEntity[] $models modelcolumntable
      * @param array<int, Status> $providerStatuses servicequotientstatusmapping
@@ -383,7 +383,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Disabled;
         }
 
-        // level联statusjudge
+        // levelunionstatusjudge
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;

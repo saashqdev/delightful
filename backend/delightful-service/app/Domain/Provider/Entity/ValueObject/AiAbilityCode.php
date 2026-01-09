@@ -20,7 +20,7 @@ enum AiAbilityCode: string
     case AutoCompletion = 'auto_completion';               // fromauto supplementall
     case ContentSummary = 'content_summary';               // contentsummary
     case VisualUnderstanding = 'visual_understanding';     // visualcomprehend
-    case SmartRename = 'smart_rename';                     // 智canrename
+    case SmartRename = 'smart_rename';                     // intelligencecanrename
     case AiOptimization = 'ai_optimization';               // AI optimize
 
     /**
@@ -36,7 +36,7 @@ enum AiAbilityCode: string
             self::AutoCompletion => 'fromauto supplementall',
             self::ContentSummary => 'contentsummary',
             self::VisualUnderstanding => 'visualcomprehend',
-            self::SmartRename => '智canrename',
+            self::SmartRename => 'intelligencecanrename',
             self::AiOptimization => 'AI optimize',
             default => 'Unknown',
         };
@@ -49,7 +49,7 @@ enum AiAbilityCode: string
     {
         return match ($this) {
             self::Ocr => 'thiscancoverageplatform have OCR applicationscenario,precisecaptureandextract PDF,scanitemandeachcategoryimagemiddletextinfo.',
-            self::WebSearch => 'thiscancoverageplatform AI bigmodelinternetsearchscenario,precisegetandintegrationmostnewnew闻,factanddatainfo.',
+            self::WebSearch => 'thiscancoverageplatform AI bigmodelinternetsearchscenario,precisegetandintegrationmostnewnewheard,factanddatainfo.',
             self::RealtimeSpeechRecognition => 'thiscancoverageplatform havevoicetransfertextapplicationscenario,actualo clocklisteneraudiostreamandgraduallyoutputaccuratetextcontent.',
             self::AudioFileRecognition => 'thiscancoverageplatform haveaudiofiletransfertextapplicationscenario,preciseidentifyspeakperson,audiotextetcinfo.',
             self::AutoCompletion => 'thiscancoverageplatform haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdowntextforuserfromauto supplementallcontent,byuserchoosewhetheradopt.',

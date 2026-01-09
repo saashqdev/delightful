@@ -101,14 +101,14 @@ readonly class AsrSandboxService
             $organizationCode
         );
 
-        $this->logger->info('startRecordingTask ASR recording:sandboxalreadythen绪', [
+        $this->logger->info('startRecordingTask ASR recording:sandboxalreadythenemotion', [
             'task_key' => $taskStatus->taskKey,
             'requested_sandbox_id' => $sandboxId,
             'actual_sandbox_id' => $actualSandboxId,
             'full_workdir' => $fullWorkdir,
         ]);
 
-        // buildfileconfigurationobject(复usepublicmethod)
+        // buildfileconfigurationobject(duplicateusepublicmethod)
         $noteFileConfig = $this->buildNoteFileConfig($taskStatus);
         $transcriptFileConfig = $this->buildTranscriptFileConfig($taskStatus);
 
@@ -240,7 +240,7 @@ readonly class AsrSandboxService
             ]);
         }
 
-        $this->logger->info('sandboxalreadythen绪,preparecall finish', [
+        $this->logger->info('sandboxalreadythenemotion,preparecall finish', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $actualSandboxId,
             'full_workdir' => $fullWorkdir,
@@ -273,7 +273,7 @@ readonly class AsrSandboxService
      * callsandbox finish androundqueryetcpendingcomplete.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param string $intelligentTitle 智cantitle(useatrename)
+     * @param string $intelligentTitle intelligencecantitle(useatrename)
      * @return AsrSandboxMergeResultDTO mergeresult
      */
     private function callSandboxFinishAndWait(
@@ -314,7 +314,7 @@ readonly class AsrSandboxService
         // recordstarttime
         $finishStartTime = microtime(true);
 
-        // 首timecall finish
+        // firsttimecall finish
         $response = $this->asrRecorder->finishTask(
             $sandboxId,
             $taskStatus->taskKey,
@@ -545,7 +545,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * pass AgentDomainService createsandboxandetcpendingworkregionthen绪.
+     * pass AgentDomainService createsandboxandetcpendingworkregionthenemotion.
      */
     private function ensureSandboxWorkspaceReady(
         AsrTaskStatusDTO $taskStatus,
@@ -581,9 +581,9 @@ readonly class AsrSandboxService
             $responseCode = $workspaceStatusResponse->getCode();
             $workspaceStatus = (int) $workspaceStatusResponse->getDataValue('status');
 
-            // ifresponsesuccess(code 1000)andworkregionalreadythen绪,directlyreturn
+            // ifresponsesuccess(code 1000)andworkregionalreadythenemotion,directlyreturn
             if ($responseCode === ResponseCode::SUCCESS && WorkspaceStatus::isReady($workspaceStatus)) {
-                $this->logger->info('detecttosandboxworkregionalreadythen绪,noneedinitialize', [
+                $this->logger->info('detecttosandboxworkregionalreadythenemotion,noneedinitialize', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $requestedSandboxId,
                     'status' => $workspaceStatus,
@@ -646,7 +646,7 @@ readonly class AsrSandboxService
 
     /**
      * initializeworkregion.
-     * 复use AgentDomainService::initializeAgent method,ensureinitializeconfigurationoneto.
+     * duplicateuse AgentDomainService::initializeAgent method,ensureinitializeconfigurationoneto.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $actualSandboxId actualsandboxID
@@ -706,10 +706,10 @@ readonly class AsrSandboxService
             instruction: ChatInstruction::Normal,
             agentMode: $topicEntity->getTaskMode() ?: 'general',
             workspaceId: (string) $topicEntity->getWorkspaceId(),
-            isFirstTask: false, // ASR scenariousuallynotis首timetask
+            isFirstTask: false, // ASR scenariousuallynotisfirsttimetask
         );
 
-        // 复use initializeAgent method(willfromautobuild message_subscription_config and delightful_service_host)
+        // duplicateuse initializeAgent method(willfromautobuild message_subscription_config and delightful_service_host)
         // pass inprojectorganizationencoding,useatgetcorrect STS Token
         // ASR scenariosetting skip_init_messages = true,letsandboxnotsendchatmessagepasscome
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));
@@ -753,7 +753,7 @@ readonly class AsrSandboxService
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param null|string $targetDirectory goaldirectory(optional,defaultandsourcedirectorysame)
-     * @param null|string $intelligentTitle 智cantitle(optional,useatrename)
+     * @param null|string $intelligentTitle intelligencecantitle(optional,useatrename)
      */
     private function buildNoteFileConfig(
         AsrTaskStatusDTO $taskStatus,
@@ -774,7 +774,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // needrename:use智cantitleandinternationalizationnotebacksuffixbuildgoalpath
+        // needrename:useintelligencecantitleandinternationalizationnotebacksuffixbuildgoalpath
         $fileExtension = pathinfo($workspaceRelativePath, PATHINFO_EXTENSION);
         $noteSuffix = trans('asr.file_names.note_suffix'); // according tolanguagegetinternationalization"note"/"Note"
         $noteFilename = sprintf('%s-%s.%s', $intelligentTitle, $noteSuffix, $fileExtension);

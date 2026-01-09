@@ -298,7 +298,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * applicationsetmealfilterhandle(针tomodelactualbodycolumntable).
+     * applicationsetmealfilterhandle(needletomodelactualbodycolumntable).
      *
      * @param array<ProviderModelEntity> $models modelactualbodycolumntable
      * @param string $organizationCode organizationencoding

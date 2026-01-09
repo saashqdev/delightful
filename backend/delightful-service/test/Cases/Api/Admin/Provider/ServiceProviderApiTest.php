@@ -25,9 +25,9 @@ class ServiceProviderApiTest extends BaseTest
         $uri = $this->baseUri . '?category=llm';
         $response = $this->get($uri, [], $this->getCommonHeaders());
 
-        // ifreturnauthenticationorpermissionrelatedcloseerror,skiptest(onlyvalidate路bycanuse)
+        // ifreturnauthenticationorpermissionrelatedcloseerror,skiptest(onlyvalidatepathbycanuse)
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
-            $this->markTestSkipped('interfaceauthenticationfailornopermission,路byvalidationpass');
+            $this->markTestSkipped('interfaceauthenticationfailornopermission,pathbyvalidationpass');
             return;
         }
 

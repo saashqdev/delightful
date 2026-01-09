@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // DingTalk downloadimagetimemorelong,exceedspass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
+                // DingTalk downloadimagetimemorelong,exceedspass3000ms,networkclosedirectlyreturntimeouterror.sendmessagethiso clockskip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // DingTalk downloadimagetimemorelong,exceedspass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
+                // DingTalk downloadimagetimemorelong,exceedspass3000ms,networkclosedirectlyreturntimeouterror.sendmessagethiso clockskip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);

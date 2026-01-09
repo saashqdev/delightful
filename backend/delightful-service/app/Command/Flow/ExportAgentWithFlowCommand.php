@@ -96,7 +96,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
-                // usethistypemethodpoint击linkisvalidlink
+                // usethistypemethodpointhitlinkisvalidlink
                 return 0;
             }
 

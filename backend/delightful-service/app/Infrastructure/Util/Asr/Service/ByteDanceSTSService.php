@@ -52,7 +52,7 @@ class ByteDanceSTSService
      * according touserDelightful IDgetJWT Token(withcache).
      *
      * @param string $delightfulId userDelightful ID
-     * @param int $duration valid期(second),default7200second
+     * @param int $duration validperiod(second),default7200second
      * @param bool $refresh whetherforcerefreshtoken,defaultfalse
      * @return array containJWT Tokenandrelatedcloseinfoarray
      * @throws Exception
@@ -102,7 +102,7 @@ class ByteDanceSTSService
             'delightful_id' => $delightfulId,
         ];
 
-        // cacheJWT Token,submitfront30secondexpirebyavoidside界issue
+        // cacheJWT Token,submitfront30secondexpirebyavoidsideboundaryissue
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
@@ -121,7 +121,7 @@ class ByteDanceSTSService
      *
      * @param string $appId applicationID
      * @param string $accessToken accesstoken
-     * @param int $duration valid期(second),default7200second
+     * @param int $duration validperiod(second),default7200second
      * @return string JWT token
      * @throws Exception
      */
@@ -191,7 +191,7 @@ class ByteDanceSTSService
     /**
      * useenvironmentvariableconfigurationgetJWT token.
      *
-     * @param int $duration valid期(second),default7200second
+     * @param int $duration validperiod(second),default7200second
      * @return string JWT token
      * @throws Exception
      */

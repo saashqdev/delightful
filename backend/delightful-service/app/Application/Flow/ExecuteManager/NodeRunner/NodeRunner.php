@@ -158,7 +158,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // defaultiswant抛exception
+            // defaultiswantthrowexception
             if ($throw) {
                 throw $throwable;
             }

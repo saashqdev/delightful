@@ -15,7 +15,7 @@ class SeqCreatedEvent extends AbstractEvent implements ChatEventInterface
 {
     protected array $seqIds = [];
 
-    // ifexistsin,consumeo clockbyconversation id addfrom旋lock,尽quantityguaranteereceivehairdoublesidemessageorderoneto
+    // ifexistsin,consumeo clockbyconversation id addfromrotatelock,exhaustedquantityguaranteereceivehairdoublesidemessageorderoneto
     protected ?string $conversationId = null;
 
     protected MessagePriority $seqPriority;

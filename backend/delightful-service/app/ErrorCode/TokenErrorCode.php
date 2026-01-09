@@ -30,7 +30,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.relation_not_found')]
     case TokenRelationNotFound = 9003;
 
-    // tokenmustsettingonevalid期
+    // tokenmustsettingonevalidperiod
     #[ErrorMessage(message: 'token.expired_at_must_set')]
     case TokenExpiredAtMustSet = 9004;
 

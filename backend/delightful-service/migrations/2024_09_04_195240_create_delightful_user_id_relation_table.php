@@ -21,9 +21,9 @@ return new class extends Migration {
             $table->string('id_value', 64)->comment('idtypetoshouldvalue')->default('');
             $table->string('relation_type', 12)->comment('idtoshouldassociatetype:applicationencoding/createtheapplicationorganizationencoding')->default('');
             $table->string('relation_value', 64)->comment('idtoshouldassociatetypevalue')->default('');
-            // certainuniqueonevalue,防conflict
+            // certainuniqueonevalue,preventconflict
             $table->unique(['id_type', 'id_value', 'relation_type', 'relation_value'], 'unq_id_relation');
-            // 便atbyorganization/applicationetcfind haveassociateuser
+            // convenientatbyorganization/applicationetcfind haveassociateuser
             $table->index(['relation_type', 'relation_value'], 'idx_relation');
             $table->index(['user_id'], 'idx_user_id');
             $table->comment('useridassociatetable. record user_id and open_id/union_idetcassociate');

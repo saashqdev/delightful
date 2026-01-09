@@ -82,7 +82,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * returnmostbigmessagecountdown n itemsequencecolumn.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -102,7 +102,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * return $userLocalMaxSeqId ofback $limit itemmessage.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -150,7 +150,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
     {
@@ -161,7 +161,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -219,7 +219,7 @@ sql;
 
     /**
      * getreceiveitemsidemessagestatuschangemorestream.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array
@@ -233,7 +233,7 @@ sql;
 
     /**
      * gethairitemsidemessagestatuschangemorestream.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array
@@ -258,7 +258,7 @@ sql;
     }
 
     /**
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
+     * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      */
     public function getMessageReceiveList(string $messageId, string $delightfulId, ConversationType $userType): ?array
     {
@@ -381,7 +381,7 @@ sql;
         return (int) $this->delightfulSeq::query()->whereIn('id', $seqIds)->delete();
     }
 
-    // formoveexcept脏datawritemethod
+    // formoveexceptdirtydatawritemethod
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array
     {
         $query = $this->delightfulSeq::query()
@@ -391,7 +391,7 @@ sql;
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    // formoveexcept脏datawritemethod
+    // formoveexceptdirtydatawritemethod
     public function getHasTrashMessageUsers(): array
     {
         // by delightful_id minutegroup,findouthavegarbagemessageuser
@@ -466,7 +466,7 @@ sql;
      */
     private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
     {
-        // will orWhereIn 拆minutefor 2 itemquery,avoidindexinvalid
+        // will orWhereIn splitminutefor 2 itemquery,avoidindexinvalid
         $query = $this->delightfulSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $userEntity->getDelightfulId())

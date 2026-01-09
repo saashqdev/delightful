@@ -18,7 +18,7 @@ class CompressibleContentTest extends ExecuteManagerBaseTest
 {
     public function testRun()
     {
-        $content = '1.whenIstrollinthis园middle,Ideeplybodywillto,eachone处placeallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.ifbyoneday喻fourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.too阳eacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishe爬upmountainheadofo clock.whileI,终willcalmground走downmountaingo.';
+        $content = '1.whenIstrollinthis园middle,Ideeplybodywillto,eachonelocationplaceallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.ifbyonedaymetaphorfourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.toosuneacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishecrawlupmountainheadofo clock.whileI,finalwillcalmgroundwalkdownmountaingo.';
 
         $compressibleContent = CompressibleContent::compress($content);
         $this->assertEquals($content, CompressibleContent::deCompress($compressibleContent));
@@ -26,15 +26,15 @@ class CompressibleContentTest extends ExecuteManagerBaseTest
 
     public function testRun1()
     {
-        $content = '1.whenIstrollinthis园middle,Ideeplybodywillto,eachone处placeallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.ifbyoneday喻fourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.too阳eacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishe爬upmountainheadofo clock.whileI,终willcalmground走downmountaingo.';
+        $content = '1.whenIstrollinthis园middle,Ideeplybodywillto,eachonelocationplaceallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.ifbyonedaymetaphorfourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.toosuneacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishecrawlupmountainheadofo clock.whileI,finalwillcalmgroundwalkdownmountaingo.';
 
         $compressibleContent = CompressibleContent::compress($content);
-        $this->assertEquals('1.whenIstrollinthis园middle,Ideeplybodywillto,eachone处placeallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.firstneedbecompressdata 2.ifbyoneday喻fourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\nthetwoneedbecompressdata3.too阳eacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishe爬upmountainheadofo clock.whileI,终willcalmground走downmountaingo.', CompressibleContent::deCompress($compressibleContent, false));
+        $this->assertEquals('1.whenIstrollinthis园middle,Ideeplybodywillto,eachonelocationplaceallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.firstneedbecompressdata 2.ifbyonedaymetaphorfourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\nthetwoneedbecompressdata3.toosuneacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishecrawlupmountainheadofo clock.whileI,finalwillcalmgroundwalkdownmountaingo.', CompressibleContent::deCompress($compressibleContent, false));
     }
 
     public function testRun2()
     {
-        $content = '1.whenIstrollinthis园middle,Ideeplybodywillto,eachone处placeallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">firstneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT> 2.ifbyoneday喻fourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\n<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">thetwoneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT>3.too阳eacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishe爬upmountainheadofo clock.whileI,终willcalmground走downmountaingo.';
+        $content = '1.whenIstrollinthis园middle,Ideeplybodywillto,eachonelocationplaceallonce leftdownIfootprint,whilethattheseplacealsoallhavepassmother accompanied.<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">firstneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT> 2.ifbyonedaymetaphorfourseason,morningisspringday,middlenoonissummerday,duskisautumnday,nighttheniswinterday.\n!\n<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">thetwoneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT>3.toosuneacho clockeach刻allisfalldayand旭day,whenhesunseto clock,justishecrawlupmountainheadofo clock.whileI,finalwillcalmgroundwalkdownmountaingo.';
 
         $compressibleContent = CompressibleContent::compress($content);
         $this->assertEquals($content, CompressibleContent::deCompress($compressibleContent));

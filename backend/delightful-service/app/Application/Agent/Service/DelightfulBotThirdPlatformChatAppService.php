@@ -228,7 +228,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         $thirdPlatformUserIds = [];
         $ownerThirdPlatformUserId = '';
         $result = $parallel->wait();
-        // twopositionarraytransferbecomeone维
+        // twopositionarraytransferbecomeonedimension
         foreach ($result as $item) {
             if ($item['delightful_id'] == $userAuthorization->getDelightfulId()) {
                 $ownerThirdPlatformUserId = $item['third_user_id'];

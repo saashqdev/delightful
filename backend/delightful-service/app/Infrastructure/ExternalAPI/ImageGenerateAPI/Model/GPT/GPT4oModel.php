@@ -147,7 +147,7 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthaveone张imagegeneratesuccess
+        // checkwhetherat leasthaveonesheetimagegeneratesuccess
         if (empty($imageUrls)) {
             $this->logger->error('GPT4otext generationgraph: haveimagegenerateaveragefail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
@@ -321,7 +321,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlike核corelogic,returnnativeresult.
+     * generategraphlikecorecorelogic,returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -374,7 +374,7 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthaveone张imagegeneratesuccess
+        // checkwhetherat leasthaveonesheetimagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
             $this->logger->error('GPT4otext generationgraph: haveimagegenerateaveragefail', ['errors' => $errors]);
@@ -405,7 +405,7 @@ class GPT4oModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image,currentimagemaintainoriginalstatus
+                // continuehandledownonesheetimage,currentimagemaintainoriginalstatus
             }
         }
 

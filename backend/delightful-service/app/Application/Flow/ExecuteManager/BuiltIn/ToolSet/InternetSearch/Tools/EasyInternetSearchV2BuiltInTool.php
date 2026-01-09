@@ -26,7 +26,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采useone seq push havesearchrelatedclosecontent,frontclientnotagainmultiple seq mergebecomeonerender.
+ * collectuseone seq push havesearchrelatedclosecontent,frontclientnotagainmultiple seq mergebecomeonerender.
  */
 class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {

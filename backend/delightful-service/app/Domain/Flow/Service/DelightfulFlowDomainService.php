@@ -193,7 +193,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // firstcleanuponedownhistoryscheduletaskand调degreerule
+        // firstcleanuponedownhistoryscheduletaskandadjustdegreerule
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // ifisnotduplicate,thatwhatisdirectlycreate调degreetask
+            // ifisnotduplicate,thatwhatisdirectlycreateadjustdegreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

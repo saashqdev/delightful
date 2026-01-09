@@ -351,7 +351,7 @@ JSON, true)));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'time' => 'time',
-            'input' => 'I明day想goDongguanplay',
+            'input' => 'IcleardaythinkgoDongguanplay',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 
@@ -649,7 +649,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "Iwant to findonedownsmall明",
+                    "value": "Iwant to findonedownsmallclear",
                     "name": "",
                     "args": null
                 }

@@ -142,7 +142,7 @@ class ImageGenerateFactory
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney notclosecorespecific宽highratioexample,butweretainthisfieldby防willcomeneed
+        // Midjourney notclosecorespecific宽highratioexample,butweretainthisfieldbypreventwillcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);

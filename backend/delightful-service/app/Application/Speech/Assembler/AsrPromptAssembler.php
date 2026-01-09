@@ -51,16 +51,16 @@ usersubmitonesegmentrecordingcontent,recordingcontentalreadypassvoiceidentifytra
 ## titlegeneraterequire
 
 ### priorityleveloriginalthen(reloadwant)
-1. **notepriority**:ifexistsin<notecontent>,titleshould侧reloadnotecontent
-2. **attach importancenotetitle**:ifnoteis Markdown formatandcontaintitle(# openheadline),priority采usenotemiddletitlecontent
+1. **notepriority**:ifexistsin<notecontent>,titleshouldsidereloadnotecontent
+2. **attach importancenotetitle**:ifnoteis Markdown formatandcontaintitle(# openheadline),prioritycollectusenotemiddletitlecontent
 3. **comprehensiveconsider**:meanwhilereferencevoiceidentifycontent,ensuretitlecompleteaccurate
-4. **keywordextract**:fromnoteandvoiceidentifycontentmiddleextractmost核corekeyword
+4. **keywordextract**:fromnoteandvoiceidentifycontentmiddleextractmostcorecorekeyword
 
 ### formatrequire
 1. **lengthlimit**:notexceedspass 20 character(Chinese characters by 1 charactercalculate)
 2. **languagestyle**:usestatementpropertylanguagesentence,avoidquestionsentence
-3. **conciseexplicit**:directlysummarize核coretheme,notwantaddmodificationword
-4. **puretextoutput**:onlyoutputtitlecontent,notwantaddanymarkpoint符number,importnumberorothermodification
+3. **conciseexplicit**:directlysummarizecorecoretheme,notwantaddmodificationword
+4. **puretextoutput**:onlyoutputtitlecontent,notwantaddanymarkpointsymbolnumber,importnumberorothermodification
 
 ### forbidlinefor
 - notwantreturnanswercontentmiddleissue
@@ -107,22 +107,22 @@ usersendoriginalmessagelikedown:
 ## titlegeneraterequire
 
 ### priorityleveloriginalthen(nonoftenreloadwant)
-1. **filenamepriority**:filenameusuallyisuser精corenaming,containmost核corethemeinfo,pleasereloadpointreferenceusermessagemiddle @ backsurfacefilename
-2. **智canjudge**:
-   - iffilenamesemanticclear(like"2024yearQ4productplanwill议.mp3","customerrequirementdiscussion.wav"),prioritybased onfilenamegeneratetitle
+1. **filenamepriority**:filenameusuallyisuser精corenaming,containmostcorecorethemeinfo,pleasereloadpointreferenceusermessagemiddle @ backsurfacefilename
+2. **intelligencecanjudge**:
+   - iffilenamesemanticclear(like"2024yearQ4productplanwillproposal.mp3","customerrequirementdiscussion.wav"),prioritybased onfilenamegeneratetitle
    - iffilenameisdatetimestamp(like"20241112_143025.mp3")ornomeaningcharacter(like"recording001.mp3"),thenusecommonusedescription
-3. **extractkeyword**:fromfilenamemiddleextractmost核corekeywordandtheme
+3. **extractkeyword**:fromfilenamemiddleextractmostcorecorekeywordandtheme
 
 ### formatrequire
 1. **lengthlimit**:notexceedspass 20 character(Chinese characters by 1 charactercalculate)
 2. **languagestyle**:usestatementpropertylanguagesentence,avoidquestionsentence
-3. **conciseexplicit**:directlysummarize核coretheme,notwantaddmodificationword
-4. **puretextoutput**:onlyoutputtitlecontent,notwantaddanymarkpoint符number,importnumberorothermodification
+3. **conciseexplicit**:directlysummarizecorecoretheme,notwantaddmodificationword
+4. **puretextoutput**:onlyoutputtitlecontent,notwantaddanymarkpointsymbolnumber,importnumberorothermodification
 
 ### forbidlinefor
 - notwantretainfileextensionname(.mp3,.wav,.webm etc)
 - notwantoutputtitlebyoutsideanycontent
-- notwantaddimportnumber,book titlenumberetcmarkpoint符number
+- notwantaddimportnumber,book titlenumberetcmarkpointsymbolnumber
 
 ## outputlanguage
 pleaseuse {language} languageoutputtitle.

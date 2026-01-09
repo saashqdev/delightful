@@ -35,7 +35,7 @@ class ImageGenerateRequest
     // hiddentypewatermark
     protected ?ImplicitWatermark $implicitWatermark = null;
 
-    // valid期
+    // validperiod
     protected ?int $validityPeriod = null;
 
     // userID(useatPGPsignature)

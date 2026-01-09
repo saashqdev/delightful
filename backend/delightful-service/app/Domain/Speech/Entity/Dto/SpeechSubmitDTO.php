@@ -67,7 +67,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
     }
 
     /**
-     * generatecompleteVolcanoenginerequestparameter(notcontainappfield,appfieldbyinfrastructurelayergroup装).
+     * generatecompleteVolcanoenginerequestparameter(notcontainappfield,appfieldbyinfrastructurelayergroupinstall).
      */
     public function toVolcengineRequestData(): array
     {

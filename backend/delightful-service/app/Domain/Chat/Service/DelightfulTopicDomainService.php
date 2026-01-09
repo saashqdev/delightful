@@ -192,7 +192,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 'name' => $topicEntity->getName(),
             ];
         }
-        // returnwriteentercontrolmessagemiddle,便atcustomerclientprocess
+        // returnwriteentercontrolmessagemiddle,convenientatcustomerclientprocess
         $contentChange = MessageAssembler::getControlMessageStruct($messageDTO->getMessageType(), $seqContent);
         $messageDTO->setContent($contentChange);
         $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
@@ -239,7 +239,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * agent sendmessageo clockgettopic id.
-     * @param int $getType todo 0:defaulttopic 1:most近topic 2:智cancertaintopic,temporaryo clockonlysupportdefaulttopic 3 newtopic
+     * @param int $getType todo 0:defaulttopic 1:mostneartopic 2:intelligencecancertaintopic,temporaryo clockonlysupportdefaulttopic 3 newtopic
      * @throws Throwable
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string

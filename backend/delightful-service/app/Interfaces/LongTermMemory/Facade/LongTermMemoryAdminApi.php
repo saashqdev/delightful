@@ -581,7 +581,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // verifycontentandpending_contentonlycantwo选one
+        // verifycontentandpending_contentonlycantwoselectone
         $hasContent = ! empty($validatedParams['content']);
         $hasPendingContent = ! empty($validatedParams['pending_content']);
 
@@ -652,7 +652,7 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO(lengthcheckalreadyinparameterverify阶segmentcomplete,andat leasthaveonefieldnotforempty)
+        // buildDTO(lengthcheckalreadyinparameterverifylevelsegmentcomplete,andat leasthaveonefieldnotforempty)
         $status = null;
         $explanation = null;
 

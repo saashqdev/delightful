@@ -38,7 +38,7 @@ class MiracleVisionProvider implements IProvider
 
         try {
             $miracleVisionApi = new MiracleVisionAPI($ak, $sk);
-            // 搞one张image todo xhy
+            // 搞onesheetimage todo xhy
             $url = $this->getImage();
             $miracleVisionApi->submitTask($url, 1);
         } catch (Exception $e) {
@@ -54,7 +54,7 @@ class MiracleVisionProvider implements IProvider
 
     protected function getImage(): string
     {
-        // randomuseone张imageimmediatelycan
+        // randomuseonesheetimageimmediatelycan
         $fileKey = di(DefaultFileDomainService::class)->getOnePublicKey(DefaultFileBusinessType::SERVICE_PROVIDER);
         return di(FileDomainService::class)->getLink('', $fileKey)?->getUrl();
     }

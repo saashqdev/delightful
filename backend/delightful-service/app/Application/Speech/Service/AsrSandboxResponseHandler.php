@@ -174,7 +174,7 @@ readonly class AsrSandboxResponseHandler
                 $taskStatus,
                 $relativePath,
                 'notefile',
-                false // notefilequeryfailnot抛exception
+                false // notefilequeryfailnotthrowexception
             );
 
             if ($fileEntity !== null) {

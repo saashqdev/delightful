@@ -39,7 +39,7 @@ class DelightfulAccessToken
             $application = $applicationDomainService->save($llmDataIsolation, $application);
         }
 
-        // thiswithin常quantity AccessToken notfalllibrary,onlyexistsinatinsideexistsmiddle,guaranteeinsidedepartmentcallo clockuseoneto
+        // thiswithinconstantquantity AccessToken notfalllibrary,onlyexistsinatinsideexistsmiddle,guaranteeinsidedepartmentcallo clockuseoneto
         $accessToken = new AccessTokenEntity();
         $accessToken->setId(1);
         $accessToken->setName($application->getCode());
@@ -51,7 +51,7 @@ class DelightfulAccessToken
         $accessToken->prepareForCreation();
         SystemAccessTokenManager::setSystemAccessToken($accessToken);
 
-        // newofficialorganizationpersonaccesstoken常quantity
+        // newofficialorganizationpersonaccesstokenconstantquantity
         $userAccessToken = new AccessTokenEntity();
         $userAccessToken->setId(2);
         $userAccessToken->setName($application->getCode());

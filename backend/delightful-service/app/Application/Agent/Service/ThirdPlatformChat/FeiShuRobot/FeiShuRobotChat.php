@@ -645,10 +645,10 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handlecontentyuan素.
+     * handlecontentyuanelement.
      *
-     * @param string $tag yuan素tag
-     * @param array $element yuan素content
+     * @param string $tag yuanelementtag
+     * @param array $element yuanelementcontent
      * @param array &$attachments attachmentcolumntable
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
@@ -691,7 +691,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
-            $this->logger->warning('handlecontentyuan素fail', [
+            $this->logger->warning('handlecontentyuanelementfail', [
                 'tag' => $tag,
                 'error' => $e->getMessage(),
             ]);
@@ -700,9 +700,9 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handleimageyuan素.
+     * handleimageyuanelement.
      *
-     * @param array $element yuan素content
+     * @param array $element yuanelementcontent
      * @param array &$attachments attachmentcolumntable
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
@@ -733,7 +733,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
     /**
      * parseMarkdowncontent,convertforFeishurich textformat
-     * onlyhandleimage,othercontentalldepartmentusemd样type.
+     * onlyhandleimage,othercontentalldepartmentusemdstyletype.
      *
      * @param string $markdown Markdowncontent
      * @return array Feishurich textformat
@@ -746,7 +746,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'content' => [],
         ];
 
-        // usejustthentable达typematchMarkdownmiddleimage
+        // usejustthentablereachtypematchMarkdownmiddleimage
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
         // ifnothaveimage,directlyreturnmdformat

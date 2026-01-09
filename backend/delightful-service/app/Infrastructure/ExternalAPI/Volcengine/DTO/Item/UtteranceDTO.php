@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 /**
  * Utterance DTO for speech recognition utterance information.
- * toshould JSON middle result.utterances[] arrayyuan素.
+ * toshould JSON middle result.utterances[] arrayyuanelement.
  */
 class UtteranceDTO extends AbstractDTO
 {

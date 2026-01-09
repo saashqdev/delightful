@@ -276,7 +276,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandline调degreesectionpoint - Test parallel node scheduling with coroutine ID tracking.
+     * testandlineadjustdegreesectionpoint - Test parallel node scheduling with coroutine ID tracking.
      */
     public function test1(): void
     {
@@ -390,7 +390,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testitemitem调degreesectionpoint.
+     * testitemitemadjustdegreesectionpoint.
      */
     public function test2(): void
     {
@@ -399,7 +399,7 @@ class DagTest extends BaseTest
         $root = Vertex::make(function () {
             $vertexResult = new VertexResult();
 
-            // only调degreesectionpoint3
+            // onlyadjustdegreesectionpoint3
             $vertexResult->setResult('vertex1')->setChildrenIds(['vertex3']);
             return $vertexResult;
         }, 'vertex1');
@@ -434,7 +434,7 @@ class DagTest extends BaseTest
         $root = Vertex::make(function () {
             $vertexResult = new VertexResult();
 
-            // only调degreesectionpoint2
+            // onlyadjustdegreesectionpoint2
             $vertexResult->setResult('vertex1')->setChildrenIds(['vertex2']);
             return $vertexResult;
         }, 'vertex1');
@@ -466,7 +466,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandhair调degreeandetcpending parentsectionpointcomplete.
+     * testandhairadjustdegreeandetcpending parentsectionpointcomplete.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
@@ -527,12 +527,12 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandhair+itemitem调degreesectionpoint.
+     * testandhair+itemitemadjustdegreesectionpoint.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
      * vertex3 -> vertex4
-     * vertex4 -> vertex5 (butisnot调degree).
+     * vertex4 -> vertex5 (butisnotadjustdegree).
      */
     public function test4(): void
     {
@@ -718,9 +718,9 @@ class DagTest extends BaseTest
 
     /**
      * testnonandhairmodetype.
-     * vertex1 -> vertex2(not调degree)
-     * vertex1 -> vertex3(调degree).
-     * vertex1 -> vertex4(not调degree).
+     * vertex1 -> vertex2(notadjustdegree)
+     * vertex1 -> vertex3(adjustdegree).
+     * vertex1 -> vertex4(notadjustdegree).
      *
      * shouldoutput:vertex1, vertex3.
      */
@@ -778,7 +778,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandline调degreesectionpoint.
+     * testandlineadjustdegreesectionpoint.
      */
     public function test8(): void
     {

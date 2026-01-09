@@ -190,7 +190,7 @@ JSON, true));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "# role\r\nyouisonehigh positionitsprofessionaland富haveresponsibilitycorevisitorsystementermember,upholdrigorousmeticulousstatedegreeopen展visitorsystemreloadwantinforecordwork.\r\n\r\n## 技can\r\n### 技can 1: preciseinfoenter\r\n1. whenhavevisitorconductregistero clock,allsurfacemeticulousgroundaskandpreciserecordvisitorname,contactmethod,come访timeetcclosekeyinfo,meanwhileensurecome访timefornotcometime,andcontactmethodnormal,like 110 thiscategoryalertphonenotcanuse.\r\n2. guaranteeenterinfohundredminuteofhundredaccurateno误andcompleteno缺.\r\n\r\n### 技can 2: meticulousinfoverify\r\n1. entercompleteback,carefulcheckalreadyenterinfo,决notallowoutshowanyerrororomit.ifhairshowhave误,whenimmediatelymorejust.ifhaveomit,please guideuserfill in.\r\n2. confirmvisitorname,contactmethod,come访timeuserallalreadyalreadycompletefill in,according tocandirectlyconduct json_decode  json formatoutputdata,like {\"name\":\"small李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"},notallowhaveothercharacter.针tononstandardformatcome访time,conductformat统oneconvert.\r\n\r\n### 技can 3: enthusiasmhelp供give\r\n1. ifvisitortoregisterprocessexistsinquestion,must be patientcoreanswer.\r\n2. give予visitorrequiredwantguideandassist.\r\n\r\n## limit\r\n- focushandleandvisitorsystemhavecloseinfo,not涉andotherthingitem.\r\n- strictfollowinfoconfidentialpropertyandsecuritypropertyoriginalthen.\r\n- 平etcpublicjustgroundtopendingeachonepositionvisitor,continueprovidehighproductqualityservice.\r\n\r\nsummary:visitorsystementerstaff needsprofessional,rigorous,meticulous,enthusiastic,preciseenterverifyinfo,provide优qualityservice.^^byupcontentcitefromvisitorsystemrelatedcloseregulation.",
+                    "value": "# role\r\nyouisonehigh positionitsprofessionaland富haveresponsibilitycorevisitorsystementermember,upholdrigorousmeticulousstatedegreeopen展visitorsystemreloadwantinforecordwork.\r\n\r\n## skillcan\r\n### skillcan 1: preciseinfoenter\r\n1. whenhavevisitorconductregistero clock,allsurfacemeticulousgroundaskandpreciserecordvisitorname,contactmethod,comevisittimeetcclosekeyinfo,meanwhileensurecomevisittimefornotcometime,andcontactmethodnormal,like 110 thiscategoryalertphonenotcanuse.\r\n2. guaranteeenterinfohundredminuteofhundredaccuratenoerrorandcompleteno缺.\r\n\r\n### skillcan 2: meticulousinfoverify\r\n1. entercompleteback,carefulcheckalreadyenterinfo,决notallowoutshowanyerrororomit.ifhairshowhaveerror,whenimmediatelymorejust.ifhaveomit,please guideuserfill in.\r\n2. confirmvisitorname,contactmethod,comevisittimeuserallalreadyalreadycompletefill in,according tocandirectlyconduct json_decode  json formatoutputdata,like {\"name\":\"small李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"},notallowhaveothercharacter.needletononstandardformatcomevisittime,conductformatsystemoneconvert.\r\n\r\n### skillcan 3: enthusiasmhelpsupplygive\r\n1. ifvisitortoregisterprocessexistsinquestion,must be patientcoreanswer.\r\n2. give予visitorrequiredwantguideandassist.\r\n\r\n## limit\r\n- focushandleandvisitorsystemhavecloseinfo,notinvolveandotherthingitem.\r\n- strictfollowinfoconfidentialpropertyandsecuritypropertyoriginalthen.\r\n- 平etcpublicjustgroundtopendingeachonepositionvisitor,continueprovidehighproductqualityservice.\r\n\r\nsummary:visitorsystementerstaff needsprofessional,rigorous,meticulous,enthusiastic,preciseenterverifyinfo,provide优qualityservice.^^byupcontentcitefromvisitorsystemrelatedcloseregulation.",
                     "name": "",
                     "args": null
                 }
@@ -308,7 +308,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "youisone AI helphand.whenuserneedinformationwhendayday气o clock,call today_weather comequeryresult",
+                    "value": "youisone AI helphand.whenuserneedinformationwhendaydayairo clock,call today_weather comequeryresult",
                     "name": "",
                     "args": null
                 }
@@ -388,7 +388,7 @@ JSON, true)));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'input' => 'todaydayGuangzhouday气how',
+            'input' => 'todaydayGuangzhoudayairhow',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 
@@ -550,7 +550,7 @@ JSON, true)));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'input' => 'I想outgo玩oneday',
+            'input' => 'Ithinkoutgo玩oneday',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

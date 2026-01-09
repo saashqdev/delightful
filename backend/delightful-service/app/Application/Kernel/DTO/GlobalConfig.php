@@ -18,7 +18,7 @@ class GlobalConfig
     }
 
     /**
-     * whether处atmaintainmode.
+     * whetherlocationatmaintainmode.
      */
     public function isMaintenance(): bool
     {

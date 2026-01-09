@@ -45,7 +45,7 @@ class DelightfulFlowExecutor
     private ?string $rootId = null;
 
     /**
-     * useatrecord nodes  next_nodes,asfor edges 编row.
+     * useatrecord nodes  next_nodes,asfor edges coderow.
      */
     private array $nextNodeIds = [];
 
@@ -328,7 +328,7 @@ class DelightfulFlowExecutor
 
         $this->executionData->setStreamStatus(FlowStreamStatus::Finished);
 
-        // only api layersurfaceneedthis样
+        // only api layersurfaceneedthisstyle
         if ($this->executionData->getExecutionType()->isApi()) {
             FlowEventStreamManager::write('data: [DONE]' . "\n\n");
             FlowEventStreamManager::get()->end();
@@ -455,7 +455,7 @@ class DelightfulFlowExecutor
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // defaultiswant调degreedownonelevel,ifnotneed调degree,inspecificexecutemiddlecansetfor[]
+                // defaultiswantadjustdegreedownonelevel,ifnotneedadjustdegree,inspecificexecutemiddlecansetfor[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // add flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -520,7 +520,7 @@ class DelightfulFlowExecutor
             Coroutine::create(function () use ($fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
 
-                // 利usefrom旋lockcomecontrolonlyoneinsave
+                // 利usefromrotatelockcomecontrolonlyoneinsave
                 if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->delightfulFlowExecuteLogEntity->getExecuteDataId(), 20)) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'archive file failed');
                 }

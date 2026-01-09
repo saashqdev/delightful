@@ -85,7 +85,7 @@ class ChatMemory implements MemoryPersistenceInterface
     {
         $seqLimit = $memoryQuery->getLimit();
 
-        // todo backcontinueinquery侧optimize
+        // todo backcontinueinquerysideoptimize
         // whenfor ai_card message,samemessagehave 20 item,needgoreload,butisinquerytime,isnotknowhaveduplicate
         // inthiswithinfirstputquantityquery,at mostquery 200 item,thenbackagainconductreload.
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;

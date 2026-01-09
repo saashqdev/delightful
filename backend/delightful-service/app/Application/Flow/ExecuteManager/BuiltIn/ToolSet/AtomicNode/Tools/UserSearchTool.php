@@ -137,8 +137,8 @@ class UserSearchTool extends AbstractBuiltInTool
                     "operator": {
                         "type": "string",
                         "key": "operator",
-                        "title": "filter符",
-                        "description": "filter符.optionalenumhave:equals,no_equals,contains,no_contains.minutealternativetable equal,notequal,contain,notcontain",
+                        "title": "filtersymbol",
+                        "description": "filtersymbol.optionalenumhave:equals,no_equals,contains,no_contains.minutealternativetable equal,notequal,contain,notcontain",
                         "required": null,
                         "value": null,
                         "encryption": false,

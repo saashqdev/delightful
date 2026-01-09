@@ -85,7 +85,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     {
         // checkuserthisground seq andserviceclient seq diff
         $seqID = (int) $params['max_seq_info']['user_local_seq_id'];
-        // returnmost近 N itemmessage
+        // returnmostnear N itemmessage
         return $this->delightfulSeqRepository->getAccountSeqListByDelightfulId($dataIsolation, $seqID, 50);
     }
 
@@ -97,7 +97,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     {
         // checkuserthisground seq andserviceclient seq diff
         $seqID = (int) $params['page_token'];
-        // returnmost近 N itemmessage
+        // returnmostnear N itemmessage
         $clientSeqList = $this->delightfulSeqRepository->getAccountSeqListByDelightfulId($dataIsolation, $seqID, $pageSize);
         $data = [];
         foreach ($clientSeqList as $clientSeq) {
@@ -133,7 +133,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         // checkuserthisground seq andserviceclient seq diff
         $seqId = (int) $messagesQueryDTO->getPageToken();
         $pageSize = 200;
-        // returnmost近 N itemmessage
+        // returnmostnear N itemmessage
         $clientSeqList = $this->delightfulSeqRepository->pullRecentMessage($dataIsolation, $seqId, $pageSize);
         $data = [];
         foreach ($clientSeqList as $clientSeq) {
@@ -235,7 +235,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * notifyreceiveitemsidehavenewmessage(receiveitemsidemaybeisfromself,orpersonischatobject).
-     * @todo considerto seqIds mergesamecategoryitem,decreasepushcount,subtract轻network/mq/servicedevicestress
+     * @todo considerto seqIds mergesamecategoryitem,decreasepushcount,subtractlightnetwork/mq/servicedevicestress
      */
     public function pushChatSequence(SeqCreatedEvent $seqCreatedEvent): void
     {
@@ -483,7 +483,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         try {
             Db::beginTransaction();
-            // get exceptsendpersonbyoutside  havegroupmember. (factorforsendperson seq alreadyvia anotheroutsidegenerate,single独push)
+            // get exceptsendpersonbyoutside  havegroupmember. (factorforsendperson seq alreadyvia anotheroutsidegenerate,singleuniquepush)
             $groupUsers = $this->delightfulGroupRepository->getGroupUserList($groupId, '');
             $groupUsers = array_column($groupUsers, null, 'user_id');
             $senderUserId = $messageEntity->getSenderId();
@@ -620,10 +620,10 @@ class DelightfulChatDomainService extends AbstractDomainService
             $selfSendMessageRoleType = 'user';
             $otherSendMessageRoleType = 'assistant';
         }
-        // group装bigmodelmessagerequest
+        // groupinstallbigmodelmessagerequest
         $messagesQueryDTO = new MessagesQueryDTO();
         $messagesQueryDTO->setConversationId($conversationId)->setLimit(200)->setTopicId($topicId);
-        // gettopicmost近 20 itemconversationrecord
+        // gettopicmostnear 20 itemconversationrecord
         $clientSeqResponseDTOS = $this->getConversationChatMessages($conversationId, $messagesQueryDTO);
 
         $userMessages = [];
@@ -680,7 +680,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         foreach ($delightfulIds as $delightfulId) {
             $sequences = $this->delightfulSeqRepository->getSeqByDelightfulId($delightfulId, 100);
             if (count($sequences) < 100) {
-                // onlytonewuserproduce少quantity脏data
+                // onlytonewuserproduce少quantitydirtydata
                 $deleteCount += $this->delightfulSeqRepository->deleteSeqMessageByIds(array_column($sequences, 'id'));
             }
         }
@@ -706,7 +706,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         array $thisTimeStreamMessages,
         ?StreamMessageStatus $streamMessageStatus = null
     ): JsonStreamCachedDTO {
-        // from旋lock,avoiddatacompetition.anotheroutsidealsoneedonescheduletaskscan redis ,toattimeoutstreammessage,updatedatabase.
+        // fromrotatelock,avoiddatacompetition.anotheroutsidealsoneedonescheduletaskscan redis ,toattimeoutstreammessage,updatedatabase.
         $lockKey = 'delightful_stream_message:' . $appMessageId;
         $lockOwner = random_bytes(16);
         $this->locker->spinLock($lockKey, $lockOwner);
@@ -813,7 +813,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                     ->setMessageType($messageEntity->getMessageType()->value)
                     ->setMessageContent(Json::encode($messageEntity->getContent()->toArray()));
                 $messageVersionEntity = $this->delightfulChatMessageVersionsRepository->createMessageVersion($messageVersionEntity);
-                // updatemessagecurrentversionandmessagecontent,便atfrontclient rendering
+                // updatemessagecurrentversionandmessagecontent,convenientatfrontclient rendering
                 $this->delightfulMessageRepository->updateMessageContentAndVersionId($messageEntity, $messageVersionEntity);
                 Db::commit();
             } catch (Throwable $exception) {
@@ -1033,7 +1033,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         // getDTOcompletedata
         $jsonStreamCachedData = $jsonStreamCachedDTO->toArray();
-        // single独handlecontentfield
+        // singleuniquehandlecontentfield
         $jsonContent = $jsonStreamCachedData['content'] ?? [];
 
         // initializecontentfield
@@ -1073,7 +1073,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * batchquantityget$cacheKeymiddlemultiplefield. support嵌setfield.
+     * batchquantityget$cacheKeymiddlemultiplefield. supportembedsetfield.
      */
     private function getCacheStreamData(string $cacheKey): ?JsonStreamCachedDTO
     {

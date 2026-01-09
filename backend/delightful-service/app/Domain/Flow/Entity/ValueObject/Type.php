@@ -20,7 +20,7 @@ enum Type: int
     // tool
     case Tools = 3;
 
-    // group合sectionpoint,runlinemethodhavepointanalogousatchildprocess
+    // groupcombinesectionpoint,runlinemethodhavepointanalogousatchildprocess
     case CombinedNode = 4;
 
     // loopsectionpoint

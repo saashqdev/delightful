@@ -40,7 +40,7 @@ class UserSearchNodeRunnerTest extends ExecuteManagerBaseTest
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "small明",
+                            "value": "smallclear",
                             "name": "",
                             "args": null
                         }

@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->text('description')->comment('modetypedescription');
             $table->tinyInteger('is_default')->default(0)->comment('whetherdefaultmodetype 0:no 1:is');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
-            $table->tinyInteger('distribution_type')->default(1)->comment('minute配method 1:customizeconfiguration 2:followothermodetype');
+            $table->tinyInteger('distribution_type')->default(1)->comment('minutematchmethod 1:customizeconfiguration 2:followothermodetype');
             $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('followmodetypeID,0tableshownotfollow');
             $table->json('restricted_mode_identifiers')->comment('limitmodetypeidentifierarray');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');

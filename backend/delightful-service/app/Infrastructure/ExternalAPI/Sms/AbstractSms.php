@@ -84,7 +84,7 @@ abstract class AbstractSms implements SmsInterface
 
     /**
      * willvariablevalueandvariablenameassociate,alsooriginalshortmessagecontent.
-     * @param array $variables shortmessagevariabledepartmentminute,maybeis valuearray,alsomaybeis key=>valuearray,needby$templateContentcontent,统onealsooriginalbecomekey=>valuearray
+     * @param array $variables shortmessagevariabledepartmentminute,maybeis valuearray,alsomaybeis key=>valuearray,needby$templateContentcontent,systemonealsooriginalbecomekey=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {

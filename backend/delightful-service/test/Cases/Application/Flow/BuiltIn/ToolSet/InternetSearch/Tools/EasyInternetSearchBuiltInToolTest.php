@@ -92,7 +92,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'questions' => ['明dayBeijingday气', 'want穿whatclothes'],
+            'questions' => ['cleardayBeijingdayair', 'want穿whatclothes'],
         ]);
         $runner->execute($vertexResult, $executionData, []);
 
@@ -170,7 +170,7 @@ call`easy_internet_search`conductsearch
 
 MARKDOWN,
 
-            'user_prompt' => 'Dongguandownweekday气',
+            'user_prompt' => 'Dongguandownweekdayair',
         ]);
         $runner->execute($vertexResult, $executionData);
 

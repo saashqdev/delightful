@@ -9,7 +9,7 @@ namespace App\Application\Kernel\Contract;
 
 /**
  * permissionenuminterface
- * providepermissionmanage统oneabstract
+ * providepermissionmanagesystemoneabstract
  */
 interface DelightfulPermissionInterface
 {
@@ -34,7 +34,7 @@ interface DelightfulPermissionInterface
     public function parsePermission(string $permissionKey): array;
 
     /**
-     * generate havemaybepermissiongroup合.
+     * generate havemaybepermissiongroupcombine.
      */
     public function generateAllPermissions(): array;
 

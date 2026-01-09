@@ -30,7 +30,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $senderId = '';
 
     /**
-     * sendsidetype. user:user(aialsobe认forisuser),group:group chat,system:systemmessage,cloud_document:clouddocument,multidimensional_table:multi-dimensionaltableformat topic:topic app:applicationmessage.
+     * sendsidetype. user:user(aialsoberecognizeforisuser),group:group chat,system:systemmessage,cloud_document:clouddocument,multidimensional_table:multi-dimensionaltableformat topic:topic app:applicationmessage.
      */
     protected ConversationType $senderType;
 
@@ -42,7 +42,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $receiveId = '';
 
     /**
-     * receiveobjecttype. user:user(aialsobe认forisuser),group:group chat,system:systemmessage,cloud_document:clouddocument,multidimensional_table:multi-dimensionaltableformat topic:topic app:applicationmessage.
+     * receiveobjecttype. user:user(aialsoberecognizeforisuser),group:group chat,system:systemmessage,cloud_document:clouddocument,multidimensional_table:multi-dimensionaltableformat topic:topic app:applicationmessage.
      * @see UserType
      */
     protected ConversationType $receiveType;

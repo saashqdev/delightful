@@ -144,7 +144,7 @@ class BingSearch
             }
         }
 
-        // if走tothiswithin,instruction havetryallfail
+        // ifwalktothiswithin,instruction havetryallfail
         throw new RuntimeException('Search engine error.');
     }
 }

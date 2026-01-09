@@ -180,7 +180,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $delightfulThirdPlatformIdMappingEntity->setCreatedAt($time);
             $delightfulThirdPlatformIdMappingEntity->setUpdatedAt($time);
             $thirdPlatformIdMappings[] = [
-                'id' => $id, // temporaryo clockprimary key idsetforandnew_idsamevalue,bybackhaveneedcan拆minute
+                'id' => $id, // temporaryo clockprimary key idsetforandnew_idsamevalue,bybackhaveneedcansplitminute
                 'delightful_organization_code' => $delightfulThirdPlatformIdMappingEntity->getDelightfulOrganizationCode(),
                 'mapping_type' => $delightfulThirdPlatformIdMappingEntity->getMappingType(),
                 'third_platform_type' => $delightfulThirdPlatformIdMappingEntity->getThirdPlatformType(),

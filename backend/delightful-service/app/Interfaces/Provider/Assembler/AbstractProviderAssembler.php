@@ -10,7 +10,7 @@ namespace App\Interfaces\Provider\Assembler;
 use Hyperf\Contract\TranslatorInterface;
 
 /**
- * Provider Assemblerabstract基category
+ * Provider Assemblerabstractbasecategory
  * extractpublicconvertlogic,decreasecodeduplicate.
  */
 abstract class AbstractProviderAssembler

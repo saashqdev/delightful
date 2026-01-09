@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util\Text\TextPreprocess\ValueObject;
 
 enum TextPreprocessRule: int
 {
-    // replacedropcontinuousnullformat/exchangeline符/tab
+    // replacedropcontinuousnullformat/exchangelinesymbol/tab
     case REPLACE_WHITESPACE = 1;
 
     // delete haveurlandemailitemgroundaddress
@@ -21,7 +21,7 @@ enum TextPreprocessRule: int
     public function getDescription(): string
     {
         return match ($this) {
-            self::REPLACE_WHITESPACE => 'replacedropcontinuousnullformat/exchangeline符/tab',
+            self::REPLACE_WHITESPACE => 'replacedropcontinuousnullformat/exchangelinesymbol/tab',
             self::REMOVE_URL_EMAIL => 'delete haveurlandemailitemgroundaddress',
             self::FORMAT_EXCEL => '剔excepttitleline,willExcelcontentandtitlelinesplicebecome"title:content"format,剔exceptsheetline,linebetweenexchangelineadjustfor\n\n',
         };

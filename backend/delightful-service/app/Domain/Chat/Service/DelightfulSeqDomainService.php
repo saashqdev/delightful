@@ -309,7 +309,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         );
         $content = $ControlRequestData->getMessage()->getDelightfulMessage();
         $messageType = $ControlRequestData->getMessage()->getDelightfulMessage()->getMessageTypeEnum();
-        // controlmessagereceiveside,needaccording tocontrolmessagetypeagaincertain,thereforenotinthis处handle
+        // controlmessagereceiveside,needaccording tocontrolmessagetypeagaincertain,thereforenotinthislocationhandle
         $time = date('Y-m-d H:i:s');
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($userAuth->getId());

@@ -82,7 +82,7 @@ class CreateGroupNodeRunnerTest extends ExecuteManagerBaseTest
                         },
                         {
                             "id": "usi_123456789abcdef123456789abcdef14",
-                            "name": "small明"
+                            "name": "smallclear"
                         },
                         {
                             "id": "usi_123456789abcdef123456789abcdef12",

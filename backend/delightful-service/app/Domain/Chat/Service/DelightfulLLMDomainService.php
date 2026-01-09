@@ -154,15 +154,15 @@ class DelightfulLLMDomainService
        - displaypropertynamingactualbodyextract,identifyactualbodybetweenclosesystemandproperty
        - deduceuserhiddenpropertyrequirementand潜inintentiongraph,especiallycloseimplicittimeelement
     1.2 dimensiondecompose
-       - according toidentifyoutactualbodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technologyprinciple,marketfront景,userbody验etc
+       - according toidentifyoutactualbodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technologyprinciple,marketfrontscene,userbody验etc
     1.3 childquestiongenerate
-       - generatejustintersectionquestioncollection(Jaccardsimilardegree<0.25),ensureeachchildquestioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassat宽泛orsimilarquestion
+       - generatejustintersectionquestioncollection(Jaccardsimilardegree<0.25),ensureeachchildquestioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassatwide rangeorsimilarquestion
     
     ### 2. searchproxymodepiece
     mustcalltool: batchSubQuestionsSearch
     parameterstandard:
     2.1 keywordrule
-       - generategreater thanequal 3 highqualitycanretrievekeyword,include核coreactualbody,keypropertyandrelatedcloseconcept
+       - generategreater thanequal 3 highqualitycanretrievekeyword,includecorecoreactualbody,keypropertyandrelatedcloseconcept
        - timequalifieroverriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
@@ -180,15 +180,15 @@ class DelightfulLLMDomainService
     2. generatedefaultdimension,for example:policybackground | mostnewdata | expert viewpoint | toratioanalyze | line业trend
     
     ## outputstandard
-    hybridbydownthreetypeandmoremultipletypequestion范type,byensurechildquestiondiversepropertyandoverrideproperty:
+    hybridbydownthreetypeandmoremultipletypequestionscopetype,byensurechildquestiondiversepropertyandoverrideproperty:
     [
       "XtoYimpactdiff",  // toratio/comparecategory
       "Zdomaintypicalapplication",  // application/casecategory
       "closeatABfingermark",    // fingermark/propertycategory
       "causeMhairgeneratemainreasoniswhat?", // reason/mechanismcategory
-      "whatisN?it核corefeatureiswhat?", // definition/explaincategory
+      "whatisN?itcorecorefeatureiswhat?", // definition/explaincategory
       "notcomefiveyearPdomainhair展trendiswhat?", // trend/predictioncategory
-      "针toQquestion,havewhichthesecanlineresolvesolution?" // resolvesolution/suggestioncategory
+      "needletoQquestion,havewhichthesecanlineresolvesolution?" // resolvesolution/suggestioncategory
     ]
     
     currentcontextsummary:
@@ -202,18 +202,18 @@ class DelightfulLLMDomainService
     # task
     youneedbased onusermessage,according toIprovidesearchresult,according tototalminutetotalstructure,outputhighquality,structureizationdetailedreturnanswer,formatfor markdown.
     
-    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.pleaseinfitwhensituationdowninsentencechild末tailquotecontext.pleaseaccording toquote编number[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话sourcefrommultiplecontext,pleasecolumnout haverelatedclosequote编number,for example[citation:3][citation:5],切记notwantwillquotecollectionmiddleinmostbackreturnquote编number,whileisinanswertoshould deployminutecolumnout.
+    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.pleaseinfitwhensituationdowninsentencechildendtailquotecontext.pleaseaccording toquotecodenumber[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话sourcefrommultiplecontext,pleasecolumnout haverelatedclosequotecodenumber,for example[citation:3][citation:5],remembernotwantwillquotecollectionmiddleinmostbackreturnquotecodenumber,whileisinanswertoshould deployminutecolumnout.
     inreturnanswero clock,pleasenoticebydownseveralpoint:
     - todaydayis{date_now}.
     - andnonsearchresult havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
-    - toatcolumn举categoryquestion(likecolumnraise haveflightinformation),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,mostrelatedclosecolumn举item;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
-    - toat创ascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreference编number,for example[citation:3][citation:5],notcanonlyintextchapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,富havecreatecapabilityandprofessionalpropertyanswer.you创aslengthneed尽maybe延long,toateachonewantpoint论述wantspeculateduserintentiongraph,giveout尽maybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
-    - ifreturnanswerverylong,please盡quantitystructureization,minutesegmentfallsummary.ifneedminutepointasanswer,尽quantitycontrolin5pointbyinside,andmergerelatedclosecontent.
+    - toatcolumn举categoryquestion(likecolumnraise haveflightinformation),exhaustedquantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,mostrelatedclosecolumn举item;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
+    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,富havecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybe延long,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
+    - ifreturnanswerverylong,please盡quantitystructureization,minutesegmentfallsummary.ifneedminutepointasanswer,exhaustedquantitycontrolin5pointbyinside,andmergerelatedclosecontent.
     - toatobjectivecategoryQ&A,ifquestionanswernonoften simpleshort,canfitwhensupplementonetotwosentencerelatedcloseinformation,byrichcontent.
     - youneedaccording touserrequireandreturnanswercontentchoosesuitable,beautifulreturnanswerformat,ensurecanreadpropertystrong.
     - youreturnanswershouldcomprehensivemultiple aspectsclosewebpagecomereturnanswer,notcanduplicatequoteonewebpage.
     - unlessuserrequire,nothenyoureturnanswerlanguageneedanduserasklanguagemaintainoneto.
-    - outputbeautifulmarkdown format,contentmiddleaddonetheseandthemerelatedcloseemojitable情符number.
+    - outputbeautifulmarkdown format,contentmiddleaddonetheseandthemerelatedcloseemojitable情symbolnumber.
     
     ## usermessagefor:
     {question}
@@ -223,29 +223,29 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # youisonenew闻eventgeneratedevice,userwillprovidesearchcontentandaskquestion.
+    # youisonenewheardeventgeneratedevice,userwillprovidesearchcontentandaskquestion.
     ## Current Timeis {data_now}  
     ## according touserquestion,youneedfromuserprovidesearchcontentmiddleorganizerelatedcloseevent,eventincludeeventname,eventtimeandeventoverview.
     ### noticethingitem:
     1. **eventnameformat**:
-       - ineventnamebackaddsearchquote编number,formatfor `[[citation:x]]`,编numbercomesourceatsearchcontentmiddlequotemark(like `[[citation:1]]`).
-       - ifoneevent涉andmultiplequote,merge haverelatedclosequote编number.
+       - ineventnamebackaddsearchquotecodenumber,formatfor `[[citation:x]]`,codenumbercomesourceatsearchcontentmiddlequotemark(like `[[citation:1]]`).
+       - ifoneeventinvolveandmultiplequote,merge haverelatedclosequotecodenumber.
        - notwantin "description" middleaddquote.
     2. **timehandle**:
-       - eventtime尽quantityprecisetomonthshare(like "2023-05"),ifsearchcontentnotprovidespecificmonthshare,buthavefingeroutuphalfyearorpersondownhalfyear,canuse("2023 uphalfyear"),ifnothavethen,useyearshare(like "2023").
+       - eventtimeexhaustedquantityprecisetomonthshare(like "2023-05"),ifsearchcontentnotprovidespecificmonthshare,buthavefingeroutuphalfyearorpersondownhalfyear,canuse("2023 uphalfyear"),ifnothavethen,useyearshare(like "2023").
        - ifsameoneeventinmultiplequotemiddleoutshow,priorityusemostearlytime.
        - iftimenotexplicit,according tocontextspeculatedmostearlymaybetime,andensurereasonable.
     3. **eventextractandfilter**:
-       - **eventdefinition**:eventissearchcontentmiddlemention,withhavetimeassociate(explicitorcanspeculated)independentfact,changeoractivity,includebutnotlimitatcreate,publish,open业,update,合as,activityetc.
+       - **eventdefinition**:eventissearchcontentmiddlemention,withhavetimeassociate(explicitorcanspeculated)independentfact,changeoractivity,includebutnotlimitatcreate,publish,open业,update,combineas,activityetc.
        - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichairgeneratething.
        - **skipnoclosecontent**:
          - pure and quietstatedescription(likenotchangeproperty,backgroundintroduce,notimechange).
-         - datastatisticsorfinanceinformation(like revenue,利润).
+         - datastatisticsorfinanceinformation(like revenue,profit).
          - subjectivecomment,analyzeorspeculated(unlessandeventdirectlyrelatedclose).
          - notimeassociateandandquestionnoclosedetail.
-       - **retainoriginalthen**:as long ascontentandtimerelatedcloseandmatchquestiontheme,尽quantityretainforevent.
+       - **retainoriginalthen**:as long ascontentandtimerelatedcloseandmatchquestiontheme,exhaustedquantityretainforevent.
     4. **outputrequire**:
-       - by JSON formatreturn,eventbytimereverse orderrowcolumn(from晚toearly).
+       - by JSON formatreturn,eventbytimereverse orderrowcolumn(fromlatetoearly).
        - eacheventcontain "name","time","description" threefield.
        - ifsearchcontentnotenoughbygenerateevent,returnnullarray `[]`,avoid凭nullfabricate.
     
@@ -267,7 +267,7 @@ class DelightfulLLMDomainService
     ## useinstruction
     - userneedprovidesearchcontent(containquotemarklike [[citation:x]])andspecificquestion.
     - according toquestion,fromsearchcontentmiddleextractmatcheventdefinitioncontent,byrequiregenerateoutput.
-    - ifquestion涉andcurrenttime,based on {date_now} conductcalculate.
+    - ifquestioninvolveandcurrenttime,based on {date_now} conductcalculate.
     
     ## quote
     {citations}
@@ -290,7 +290,7 @@ class DelightfulLLMDomainService
     - forbiddirectlyreturnansweruserquestion,onesetwantreturnanduserquestionhaveassociatepropertyindex.
     - search contextsformatfor "[[x]] content" ,itsmiddle x issearch contextsindex.x notcangreater than 50
     - pleasebycorrect JSON formatreplyfilterbackindex,for example:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
-    - if search keywords andtimerelatedclose,reloadpointnotice search contexts middleandcurrenttimerelatedclosecontent.andcurrenttimemore近morereloadwant.
+    - if search keywords andtimerelatedclose,reloadpointnotice search contexts middleandcurrenttimerelatedclosecontent.andcurrenttimemorenearmorereloadwant.
 
     
     ## search keywords
@@ -321,7 +321,7 @@ class DelightfulLLMDomainService
 
     public function generatePPTFromMindMap(AISearchCommonQueryVo $queryVo, string $mindMap): string
     {
-        // directlyusethinking导graphgenerate ppt
+        // directlyusethinkingguidegraphgenerate ppt
         return $mindMap;
     }
 
@@ -345,9 +345,9 @@ class DelightfulLLMDomainService
             }
         } catch (Exception) {
         }
-        // goexceptdropquote,avoidthinking导graphmiddleoutshowquote
+        // goexceptdropquote,avoidthinkingguidegraphmiddleoutshowquote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
-        // observetosystemhintwordvariable串,looklookisnotisnothavecopyonesharequestion
+        // observetosystemhintwordvariablestring,looklookisnotisnothavecopyonesharequestion
         $systemPrompt = str_replace(
             ['{question}', '{content}', '{date_now}'],
             [$question, $responseMessage, date('Yyear mmonth dday, Ho clock iminute ssecond')],
@@ -358,7 +358,7 @@ class DelightfulLLMDomainService
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
         // access llm
         try {
-            // according tosummary + useroriginalquestionalreadyalreadycangeneratethinking导graph,notneedagainpass inhistorymessage
+            // according tosummary + useroriginalquestionalreadyalreadycangeneratethinkingguidegraph,notneedagainpass inhistorymessage
             $mindMapMessage = $this->llmChat(
                 $systemPrompt,
                 $responseMessage,
@@ -369,7 +369,7 @@ class DelightfulLLMDomainService
                 $queryVo->getDelightfulApiBusinessParam()
             );
             $mindMapMessage = (string) $mindMapMessage;
-            // goreplaceline符
+            // goreplacelinesymbol
             $mindMapMessage = str_replace('\n', '', $mindMapMessage);
             $this->logger->info(Json::encode([
                 'log_title' => 'mindSearch mindMap response',
@@ -377,7 +377,7 @@ class DelightfulLLMDomainService
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
             return $this->stripMarkdownCodeBlock($mindMapMessage, 'markdown');
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch generatethinking导grapho clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch generatethinkingguidegrapho clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
@@ -580,7 +580,7 @@ class DelightfulLLMDomainService
         $searchContextsString = '';
         // cleansearchresult
         foreach ($searchContexts as $index => $context) {
-            // canpass inwebpagedetail,by便moregoodfilter
+            // canpass inwebpagedetail,byconvenientmoregoodfilter
             $searchContextsString .= '[[' . $index . ']] ' . $context->getSnippet() . "\n\n";
         }
         $systemPrompt = str_replace(
@@ -664,7 +664,7 @@ class DelightfulLLMDomainService
             ! empty($searchArrayList) && $searchArrayList = array_merge(...$searchArrayList);
             $costTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(
-                'getSearchResults searchalldepartmentkeyword end计o clock consumeo clock:%s second',
+                'getSearchResults searchalldepartmentkeyword endcalculateo clock consumeo clock:%s second',
                 number_format($costTime / 1000, 2)
             ));
         }
@@ -712,10 +712,10 @@ class DelightfulLLMDomainService
         });
         $costTime = TimeUtil::getMillisecondDiffFromNow($start);
         $this->logger->info(sprintf(
-            'getSearchResults according touseroriginalquestion,generatesearchword,end计o clock,consumeo clock::%s second',
+            'getSearchResults according touseroriginalquestion,generatesearchword,endcalculateo clock,consumeo clock::%s second',
             number_format($costTime / 1000, 2)
         ));
-        // bigmodelnothave拆孙questioniso clock,directlyusechildquestionsearch
+        // bigmodelnothavesplit孙questioniso clock,directlyusechildquestionsearch
         if (! empty($subKeywords)) {
             $searchKeywords = $subKeywords;
         } else {
@@ -768,7 +768,7 @@ class DelightfulLLMDomainService
             $clearSearch[] = $format;
         }
         $this->logger->info(sprintf(
-            'mindSearch getSearchResults searchWithBing getsearchresult,end计o clock,consumeo clock:%s second',
+            'mindSearch getSearchResults searchWithBing getsearchresult,endcalculateo clock,consumeo clock:%s second',
             number_format(TimeUtil::getMillisecondDiffFromNow($start) / 1000, 2)
         ));
         return [
@@ -928,13 +928,13 @@ class DelightfulLLMDomainService
             if (empty($subQuestions)) {
                 // nothavecalltool,tryfromresponsemiddleparse json
                 $subQuestions = $this->getSubQuestionsFromLLMStringResponse($relatedQuestionsResponse, $userMessage);
-                // bigmodel认fornotneedgenerateassociatequestion,directlygetuserquestion
+                // bigmodelrecognizefornotneedgenerateassociatequestion,directlygetuserquestion
                 empty($subQuestions) && $subQuestions = [$queryVo->getUserMessage()];
             }
 
             return $subQuestions;
         } catch (Exception $e) {
-            $this->logger->error(sprintf('mindSearch getSearchResults generaterelatedclosequestiono clock遇toerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch getSearchResults generaterelatedclosequestiono clockencountertoerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         } finally {
             // record $subQuestions
@@ -1052,7 +1052,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * buildsummarysystemhintword - publicmethod,useat复usecode
+     * buildsummarysystemhintword - publicmethod,useatduplicateusecode
      */
     private function buildSummarizeSystemPrompt(AISearchCommonQueryVo $queryVo): string
     {
@@ -1158,7 +1158,7 @@ class DelightfulLLMDomainService
             $this->logger->info(sprintf(
                 'mindSearch getSubQuestionsFromLLMStringResponse ask:%s bigmodelresponse:%s, analyzebackresult:%s',
                 $userMessage,
-                // goreplaceline符
+                // goreplacelinesymbol
                 str_replace(PHP_EOL, '', $llmResponse),
                 Json::encode($subQuestions)
             ));

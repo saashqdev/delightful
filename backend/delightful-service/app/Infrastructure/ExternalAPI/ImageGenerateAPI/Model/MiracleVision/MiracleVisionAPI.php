@@ -45,7 +45,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * get美graphultra clearconvertsupport样typecolumntable.
+     * getaestheticgraphultra clearconvertsupportstyletypecolumntable.
      */
     public function getStyle(): array
     {

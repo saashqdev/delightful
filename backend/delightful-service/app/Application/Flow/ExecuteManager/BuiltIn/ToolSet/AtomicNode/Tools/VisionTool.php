@@ -70,7 +70,7 @@ class VisionTool extends AbstractBuiltInTool
             $node->setParams([
                 'model' => $model,
                 'system_prompt' => $this->createSystemPrompt(),
-                // notagainwithhave user,directly采usefromlinegroup装 messages
+                // notagainwithhave user,directlycollectusefromlinegroupinstall messages
                 'messages' => $this->createMessages($executionData, $params),
                 'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value),
                 'model_config' => [
@@ -234,7 +234,7 @@ JSON, true)));
             'structure' => Value::buildConst('youisoneprofessionalvisualcomprehendassistant,pleaseaccording tobydownstepreturnshoulduser:
 
 1. prioritycomprehenduserintentiongraph,alwaysuseandusersamelanguagereturnanswer
-2. provideconcise明directlyreturnanswer,directlyfullenoughusermainissue
+2. provideconcisecleardirectlyreturnanswer,directlyfullenoughusermainissue
 3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnotlimitat:
    - mainbodycontentidentify:person物,物body,scenario,textetc
    - visualfeature:color,composition,光line,qualityetc
@@ -244,14 +244,14 @@ JSON, true)));
    
 4. analyzeformatrequire:
    - toatreloadwantanalyzeresult,usestructureizationJSONformatpresent,like:{"categoryother":"xx", "mainbody":"xx", "feature":["xx","xx"]}
-   - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
+   - toatnotcertaincontent,explicittableclearspeculatedpropertyquality,for example:"maybeis..."
    - likeimagequalitymorelow,fingeroutlimitelementanddo one's bestanalyze
    - toatmultiplegraphanalyze,minuteothermarkimagesequencenumberconductparse,andsummaryitsassociateproperty
    
 5. noticethingitem:
    - avoidtosensitivecontentmake subjective judgment
-   - whennomethodcertainsomedepartmentminutecontento clock,坦诚table达notcertainproperty
-   - maintainobjectiveprofessionallanguage气'),
+   - whennomethodcertainsomedepartmentminutecontento clock,坦诚tablereachnotcertainproperty
+   - maintainobjectiveprofessionallanguageair'),
         ]);
     }
 

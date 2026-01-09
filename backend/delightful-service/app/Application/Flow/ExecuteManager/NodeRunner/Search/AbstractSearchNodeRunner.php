@@ -22,19 +22,19 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null,'',0,[],false  directlyskip,whonotsearchthingthisthese.right侧not填valuenotconductsearch
+            // null,'',0,[],false  directlyskip,whonotsearchthingthisthese.rightsidenot填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
 
-            // definitionthistime range id,ifis null 代tablealsonotconductlimit
+            // definitionthistime range id,ifis null generationtablealsonotconductlimit
             $rangeIds = null;
             if ($filterType->isAll()) {
                 // ifis haveitemitemfullenough,thatwhatalreadyalready existsin id setthenisthistimerange
                 $rangeIds = $allIds;
             }
 
-            // ifrange id bedefinitionbecomeemptyarray,代tablealreadyalreadynothaveconformitemitemdata,directlyjumpoutloop
+            // ifrange id bedefinitionbecomeemptyarray,generationtablealreadyalreadynothaveconformitemitemdata,directlyjumpoutloop
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -46,7 +46,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rightValue,
                 $rangeIds
             );
-            // null 代tablenot supportedsearchtype,directlyskip
+            // null generationtablenot supportedsearchtype,directlyskip
             if ($currentIds === null) {
                 continue;
             }

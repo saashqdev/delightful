@@ -166,7 +166,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @param AccountEntity $accountDTO supportenable/disable智canbody
+     * @param AccountEntity $accountDTO supportenable/disableintelligencecanbody
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DataIsolation $dataIsolation, AccountEntity $accountDTO): DelightfulUserEntity
@@ -183,7 +183,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 $accountEntity->setRealName($userDTO->getNickname());
                 // updateaccountnumberinfo
                 if ($accountDTO->getStatus() !== null) {
-                    // enable/disable智canbody
+                    // enable/disableintelligencecanbody
                     $accountEntity->setStatus($accountDTO->getStatus());
                 }
                 $this->accountRepository->saveAccount($accountEntity);

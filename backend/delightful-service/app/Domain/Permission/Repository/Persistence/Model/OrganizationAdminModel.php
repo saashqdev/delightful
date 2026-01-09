@@ -15,7 +15,7 @@ class OrganizationAdminModel extends AbstractModel
     use SoftDeletes;
 
     /**
-     * status常quantity.
+     * statusconstantquantity.
      */
     public const STATUS_DISABLED = 0;
 

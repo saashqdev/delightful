@@ -100,7 +100,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getTopicId(),
                 $reqDTO->getReferMessageId(),
             );
-            // 计o clockstart
+            // calculateo clockstart
             $start = microtime(true);
             // roundquery600time,untilgettoimage
             $count = 600;
@@ -117,7 +117,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }
-            // 计o clockend,outputsecondleveltime
+            // calculateo clockend,outputsecondleveltime
             $end = microtime(true);
             $this->logger->info(sprintf('transferhighclearend,consumeo clock: %ssecond.', $end - $start));
             // willageimagedepositattachment

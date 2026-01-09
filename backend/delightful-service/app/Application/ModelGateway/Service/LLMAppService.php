@@ -661,7 +661,7 @@ class LLMAppService extends AbstractLLMAppService
                         $n = 1;
                     }
 
-                    // 统onetouchhairevent
+                    // systemonetouchhairevent
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -731,7 +731,7 @@ class LLMAppService extends AbstractLLMAppService
                 $imageGenerateRequest->setModel($serviceProviderConfig->getModelVersion());
                 $generateImageRaw = $imageGenerateService->generateImageRawWithWatermark($imageGenerateRequest);
                 if (! empty($generateImageRaw)) {
-                    // 统onetouchhairevent(graphgenerategraphdefault 1 张)
+                    // systemonetouchhairevent(graphgenerategraphdefault 1 sheet)
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -1174,7 +1174,7 @@ class LLMAppService extends AbstractLLMAppService
                 $n = 1;
             }
 
-            // 统onetouchhairevent
+            // systemonetouchhairevent
             $this->dispatchImageGeneratedEvent(
                 $creator,
                 $organizationCode,
@@ -1707,7 +1707,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * 统onetouchhairimagegenerateevent.
+     * systemonetouchhairimagegenerateevent.
      *
      * @param string $creator createpersonID
      * @param string $organizationCode organizationencoding

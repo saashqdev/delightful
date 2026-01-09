@@ -17,7 +17,7 @@ trait ChatAmqpTrait
         return $topicType->value;
     }
 
-    // 路byitem
+    // pathbyitem
     public function getRoutingKeyName(AmqpTopicType $topicType, MessagePriority $priority): string
     {
         return sprintf('%s.%s', $topicType->value, $priority->name);

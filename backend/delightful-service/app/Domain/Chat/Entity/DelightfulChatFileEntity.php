@@ -37,7 +37,7 @@ final class DelightfulChatFileEntity extends AbstractEntity
     protected ?string $externalUrl = '';
 
     /**
-     * datatablemiddlenothavethisfield,butfor dto 复use,thiswithinuse private add message_id field.
+     * datatablemiddlenothavethisfield,butfor dto duplicateuse,thiswithinuse private add message_id field.
      */
     private ?string $messageId = null;
 
@@ -48,7 +48,7 @@ final class DelightfulChatFileEntity extends AbstractEntity
 
     public function setMessageId(?string $messageId): void
     {
-        // datatablemiddlenothavethisfield,butfor dto 复use,thiswithinuse private add message_id field.
+        // datatablemiddlenothavethisfield,butfor dto duplicateuse,thiswithinuse private add message_id field.
         if (! empty($messageId)) {
             $this->messageId = $messageId;
             return;

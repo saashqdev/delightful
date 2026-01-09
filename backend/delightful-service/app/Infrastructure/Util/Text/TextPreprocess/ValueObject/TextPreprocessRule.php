@@ -15,7 +15,7 @@ enum TextPreprocessRule: int
     // delete haveurlandemailitemgroundaddress
     case REMOVE_URL_EMAIL = 2;
 
-    // Exceltitlelinesplice,剔exceptsheetline,linebetweenexchangelineadjustfor\n\n
+    // Exceltitlelinesplice,pickexceptsheetline,linebetweenexchangelineadjustfor\n\n
     case FORMAT_EXCEL = 3;
 
     public function getDescription(): string
@@ -23,7 +23,7 @@ enum TextPreprocessRule: int
         return match ($this) {
             self::REPLACE_WHITESPACE => 'replacedropcontinuousnullformat/exchangelinesymbol/tab',
             self::REMOVE_URL_EMAIL => 'delete haveurlandemailitemgroundaddress',
-            self::FORMAT_EXCEL => '剔excepttitleline,willExcelcontentandtitlelinesplicebecome"title:content"format,剔exceptsheetline,linebetweenexchangelineadjustfor\n\n',
+            self::FORMAT_EXCEL => 'pickexcepttitleline,willExcelcontentandtitlelinesplicebecome"title:content"format,pickexceptsheetline,linebetweenexchangelineadjustfor\n\n',
         };
     }
 

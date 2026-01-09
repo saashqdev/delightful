@@ -202,7 +202,7 @@ class ImageGenerateTest extends BaseTest
         //
         //        // createrequestinstance
         //        $qwenImageRequest = new QwenImageModelRequest();
-        //        $qwenImageRequest->setPrompt('oneonlycanlovesmallcatinflower园withinplay,sunny,colorrich colors,highqualityphotography');
+        //        $qwenImageRequest->setPrompt('oneonlycanlovesmallcatinflowergardenwithinplay,sunny,colorrich colors,highqualityphotography');
         //        $qwenImageRequest->setHeight('1328');
         //        $qwenImageRequest->setWidth('1328');
         //        $qwenImageRequest->setGenerateNum(1);

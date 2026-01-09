@@ -70,7 +70,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // ifintentiongraphidentifystartfromautoloadmemory,thatwhatneed剔exceptcurrentmessage
+        // ifintentiongraphidentifystartfromautoloadmemory,thatwhatneedpickexceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];

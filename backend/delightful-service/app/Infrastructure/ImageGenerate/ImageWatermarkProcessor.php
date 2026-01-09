@@ -250,19 +250,19 @@ class ImageWatermarkProcessor
         switch ($position) {
             case 1: // leftupangle
                 return [$margin, $margin + $ascender];
-            case 2: // upsidemiddle央
+            case 2: // upsidemiddlecentral
                 return [max($margin, (int) (($width - $textWidth) / 2)), $margin + $ascender];
             case 3: // rightupangle
                 return [max($margin, $width - $textWidth - $margin), $margin + $ascender];
-            case 4: // leftsidemiddle央
+            case 4: // leftsidemiddlecentral
                 return [$margin, (int) (($height + $ascender - $descender) / 2)];
-            case 5: // middle央
+            case 5: // middlecentral
                 return [max($margin, (int) (($width - $textWidth) / 2)), (int) (($height + $ascender - $descender) / 2)];
-            case 6: // rightsidemiddle央
+            case 6: // rightsidemiddlecentral
                 return [max($margin, $width - $textWidth - $margin), (int) (($height + $ascender - $descender) / 2)];
             case 7: // leftdownangle
                 return [$margin, $height - $margin - $descender];
-            case 8: // downsidemiddle央
+            case 8: // downsidemiddlecentral
                 return [max($margin, (int) (($width - $textWidth) / 2)), $height - $margin - $descender];
             case 9: // rightdownangle
                 return [max($margin, $width - $textWidth - $margin), $height - $margin - $descender];

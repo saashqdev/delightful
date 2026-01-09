@@ -194,7 +194,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * getlayerlevelstructurepermissiontree
-     * generatenolimit极permissiontree,rule:according topermissionresourcestring(like Admin.ai.model_management)graduallysegmentsplit,graduallylayerconstructtree.
+     * generatenolimitextremepermissiontree,rule:according topermissionresourcestring(like Admin.ai.model_management)graduallysegmentsplit,graduallylayerconstructtree.
      *
      * returnformat:
      * [

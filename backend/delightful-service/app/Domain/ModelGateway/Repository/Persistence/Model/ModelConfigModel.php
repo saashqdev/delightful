@@ -78,7 +78,7 @@ class ModelConfigModel extends Model
     ];
 
     /**
-     * frameworkfromautocallthismethodconductto称encrypt.
+     * frameworkfromautocallthismethodconducttonameencrypt.
      */
     public function setImplementationConfigAttribute(?array $config): void
     {
@@ -89,7 +89,7 @@ class ModelConfigModel extends Model
     }
 
     /**
-     * frameworkfromautocallthismethodconductto称decrypt.
+     * frameworkfromautocallthismethodconducttonamedecrypt.
      */
     public function getImplementationConfigAttribute(?string $config): array
     {

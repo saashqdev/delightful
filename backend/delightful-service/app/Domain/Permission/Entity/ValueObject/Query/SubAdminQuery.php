@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractQuery;
 /**
  * 子administratorcolumn表queryobject.
  *
- * useexample：
+ * useexample:
  * $query = new SubAdminQuery([
  *     'name' => 'rolename',
  *     'status' => 1,
@@ -20,14 +20,14 @@ use App\Infrastructure\Core\AbstractQuery;
  */
 class SubAdminQuery extends AbstractQuery
 {
-    /** 子administratorname（blurmatch） */
+    /** 子administratorname(blurmatch) */
     private ?string $name = null;
 
-    /** enabled status：1-enable 0-disable */
+    /** enabled status:1-enable 0-disable */
     private ?int $status = null;
 
     /**
-     * constructfunctionsupportfromarraybatchquantityinitializeproperty（inheritfrom AbstractObject）。
+     * constructfunctionsupportfromarraybatchquantityinitializeproperty(inheritfrom AbstractObject).
      */
 
     /* -------------------- getter / setter -------------------- */
@@ -54,7 +54,7 @@ class SubAdminQuery extends AbstractQuery
     }
 
     /**
-     * willqueryobjectconvertfor仓储layercanidentifyfilterarray。
+     * willqueryobjectconvertfor仓储layercanidentifyfilterarray.
      */
     public function toFilters(): array
     {

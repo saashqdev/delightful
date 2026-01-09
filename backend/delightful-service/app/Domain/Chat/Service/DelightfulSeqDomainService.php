@@ -95,16 +95,16 @@ class DelightfulSeqDomainService extends AbstractDomainService
         }
 
         if ($seqEntity->getObjectType() === ConversationType::Ai && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
-            // ifisgiveAIneed触hairflowprocesscontrolmessage，触hairflowprocess
+            // ifisgiveAIneed触hairflowprocesscontrolmessage,触hairflowprocess
             $agentUserEntity = $seqUserEntity; // thiso clock seqUserEntity is AI
             $agentAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
             if ($agentAccountEntity === null) {
                 $this->logger->error('UserCallAgentEventError delightful_id:{delightful_id} ai not found', ['delightful_id' => $agentUserEntity->getDelightfulId()]);
                 return;
             }
-            $senderUserEntity = null; // （personcategory）send方 user_entity
+            $senderUserEntity = null; // (personcategory)send方 user_entity
             if ($seqEntity->getConversationId()) {
-                // thiswithinconversationwindowis aifrom己，that么to方ispersoncategory（alsomaybeis另one ai，if存in ai 互撩话）
+                // thiswithinconversationwindowis aifrom己,that么to方ispersoncategory(alsomaybeis另one ai,if存in ai 互撩话)
                 $conversationEntity = $this->delightfulConversationRepository->getConversationById($seqEntity->getConversationId());
                 if ($conversationEntity === null) {
                     $this->logger->error('UserCallAgentEventError delightful_conversation_id:{delightful_conversation_id} conversation not found', ['delightful_conversation_id' => $seqEntity->getConversationId()]);
@@ -112,7 +112,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($conversationEntity->getReceiveId());
             } elseif ($seqEntity->getSeqType() === ControlMessageType::AddFriendSuccess) {
-                // 因foraddgood友nothaveconversationwindow，所byneedaccording tomessagesendid查outto方 user_entity
+                // 因foraddgood友nothaveconversationwindow,所byneedaccording tomessagesendid查outto方 user_entity
                 /** @var AddFriendMessage $seqContent */
                 $seqContent = $seqEntity->getContent();
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($seqContent->getUserId());
@@ -342,7 +342,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // getusertrue名
             $senderAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
-            // open协程，copy requestId
+            // open协程,copy requestId
             $requestId = CoContext::getRequestId();
             // 协程透传language
             $language = di(TranslatorInterface::class)->getLocale();

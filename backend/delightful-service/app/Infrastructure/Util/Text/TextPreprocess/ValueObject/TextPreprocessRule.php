@@ -15,7 +15,7 @@ enum TextPreprocessRule: int
     // delete所haveurland电子邮itemground址
     case REMOVE_URL_EMAIL = 2;
 
-    // Exceltitlelinesplice，剔exceptsheetline，linebetween换lineadjustfor\n\n
+    // Exceltitlelinesplice,剔exceptsheetline,linebetween换lineadjustfor\n\n
     case FORMAT_EXCEL = 3;
 
     public function getDescription(): string
@@ -23,7 +23,7 @@ enum TextPreprocessRule: int
         return match ($this) {
             self::REPLACE_WHITESPACE => 'replace掉连续null格/换line符/tab',
             self::REMOVE_URL_EMAIL => 'delete所haveurland电子邮itemground址',
-            self::FORMAT_EXCEL => '剔excepttitleline，willExcelcontentandtitlelinesplicebecome"title:content"format，剔exceptsheetline，linebetween换lineadjustfor\n\n',
+            self::FORMAT_EXCEL => '剔excepttitleline,willExcelcontentandtitlelinesplicebecome"title:content"format,剔exceptsheetline,linebetween换lineadjustfor\n\n',
         };
     }
 

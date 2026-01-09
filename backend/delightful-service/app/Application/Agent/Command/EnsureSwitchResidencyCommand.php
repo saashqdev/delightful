@@ -31,8 +31,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     {
         parent::configure();
         $this->setDescription('ensure所have助理switchfinger令allhave residency=true property')
-            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type：provideJSONformattestdataconductprocess', '')
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'empty运line模type：onlycheckbutnotupdatetodatabase');
+            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type:provideJSONformattestdataconductprocess', '')
+            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'empty运line模type:onlycheckbutnotupdatetodatabase');
     }
 
     public function handle()
@@ -46,7 +46,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         if ($isDryRun) {
-            $this->output->writeln('<info>运lineinempty运line模type，willnotwillactualupdatedatabase</info>');
+            $this->output->writeln('<info>运lineinempty运line模type,willnotwillactualupdatedatabase</info>');
         }
 
         $batchSize = 20;
@@ -73,7 +73,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                 // checkand修复switchfinger令 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // iffinger令havechange，saveupdate
+                // iffinger令havechange,saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentRepository->updateInstruct(
@@ -92,7 +92,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete！共process %d 助理，%s %d 助理switchfinger令',
+            'processcomplete!共process %d 助理,%s %d 助理switchfinger令',
             $total,
             $isDryRun ? 'hair现needupdate' : 'update',
             $updated
@@ -124,7 +124,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                 // checkand修复switchfinger令 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // iffinger令havechange，saveupdate
+                // iffinger令havechange,saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentVersionRepository->updateById(
@@ -141,7 +141,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete！共process %d 助理version，%s %d 助理versionswitchfinger令',
+            'processcomplete!共process %d 助理version,%s %d 助理versionswitchfinger令',
             $versionTotal,
             $isDryRun ? 'hair现needupdate' : 'update',
             $versionUpdated
@@ -179,7 +179,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         $this->output->writeln(sprintf(
-            'processcomplete！finger令collection%supdate',
+            'processcomplete!finger令collection%supdate',
             $hasChanges ? 'already' : 'no需'
         ));
 
@@ -208,12 +208,12 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
 
                 // checkwhetherisswitchfinger令(type = 2)
                 if (isset($item['type']) && (int) $item['type'] === InstructType::SWITCH->value) {
-                    // ifnothave residency property，add residency = true
+                    // ifnothave residency property,add residency = true
                     if (! isset($item['residency'])) {
                         $item['residency'] = true;
                         $hasChanges = true;
                         $this->output->writeln(sprintf(
-                            'hair现switchfinger令 [%s](%s) 缺少 residency property，alreadyadd',
+                            'hair现switchfinger令 [%s](%s) 缺少 residency property,alreadyadd',
                             $item['name'] ?? 'not命名',
                             $item['id'] ?? 'noID'
                         ));

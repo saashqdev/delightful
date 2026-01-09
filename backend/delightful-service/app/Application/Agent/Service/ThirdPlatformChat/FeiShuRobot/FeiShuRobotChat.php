@@ -130,9 +130,9 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         $messageId = $params['event']['message']['message_id'] ?? '';
 
-        // poweretcpropertyhandle：usemessageIDconductgo重
+        // poweretcpropertyhandle:usemessageIDconductgo重
         if (! $this->checkMessageIdLock($messageId)) {
-            $this->logger->info('飞书messagealreadyhandlepass，skip', ['message_id' => $messageId]);
+            $this->logger->info('飞书messagealreadyhandlepass,skip', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
             return $chatMessage;
         }
@@ -168,7 +168,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         try {
             $content = $message->getContent();
-            // parse Markdown content，convertfor飞书rich textformat
+            // parse Markdown content,convertfor飞书rich textformat
             $postContent = $this->parseMarkdownToFeiShuPost($content);
             $data = [
                 'receive_id' => $thirdPlatformChatMessage->getOriginConversationId(),
@@ -239,7 +239,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private function checkMessageIdLock(string $messageId): bool
     {
         if (empty($messageId)) {
-            $this->logger->warning('messageIDfornull，no法lock定');
+            $this->logger->warning('messageIDfornull,no法lock定');
             return false;
         }
 
@@ -270,7 +270,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $result = $this->processMessageContent($messageType, $content, $chatMessage, $organizationCode, $messageId);
 
         if ($result === false) {
-            // not supportedmessagetype，alreadysendhintandsettingeventforNone
+            // not supportedmessagetype,alreadysendhintandsettingeventforNone
             return $chatMessage;
         }
 
@@ -311,7 +311,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         try {
             $openId = $params['event']['sender']['sender_id']['open_id'] ?? '';
             if (empty($openId)) {
-                $this->logger->warning('userOpenIDfornull，no法getuserinfo');
+                $this->logger->warning('userOpenIDfornull,no法getuserinfo');
                 return null;
             }
 
@@ -421,7 +421,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setRobotCode($params['header']['app_id'] ?? '');
         $chatMessage->setUserId($openId);
         $chatMessage->setOriginConversationId($chatId);
-        $chatMessage->setNickname($openId); // initialsettingforOpenID，back续willpassuserinfoupdate
+        $chatMessage->setNickname($openId); // initialsettingforOpenID,back续willpassuserinfoupdate
     }
 
     /**
@@ -601,7 +601,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'receive_id' => $receiverId,
             'msg_type' => 'text',
             'content' => [
-                'text' => 'handlemessageo clockhair生error，请稍backagain试',
+                'text' => 'handlemessageo clockhair生error,请稍backagain试',
             ],
         ];
         $this->application->message->send($data, 'chat_id');
@@ -615,19 +615,19 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * @param array $content 飞书rich textcontent
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
-     * @return array parseresult，containmarkdowntextandattachment
+     * @return array parseresult,containmarkdowntextandattachment
      */
     private function parsePostContentToText(array $content, string $organizationCode, string $messageId): array
     {
         $markdown = '';
         $attachments = [];
 
-        // extracttitle（ifhave）
+        // extracttitle(ifhave)
         if (! empty($content['title'])) {
             $markdown .= "# {$content['title']}\n\n";
         }
 
-        // 优先usemiddle文content，ifnothavethenuseEnglishcontent
+        // 优先usemiddle文content,ifnothavethenuseEnglishcontent
         $postContent = $content['content'] ?? [];
 
         foreach ($postContent as $paragraph) {
@@ -687,7 +687,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     $text = $element['text'] ?? '';
                     return "{$text}\n";
                 default:
-                    // toatunknowntag，尝试extracttextcontent
+                    // toatunknowntag,尝试extracttextcontent
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
@@ -732,8 +732,8 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parseMarkdowncontent，convertfor飞书rich textformat
-     * onlyhandleimage，othercontentall部usemd样type.
+     * parseMarkdowncontent,convertfor飞书rich textformat
+     * onlyhandleimage,othercontentall部usemd样type.
      *
      * @param string $markdown Markdowncontent
      * @return array 飞书rich textformat
@@ -749,7 +749,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         // usejustthen表达typematchMarkdownmiddleimage
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
-        // ifnothaveimage，直接returnmdformat
+        // ifnothaveimage,直接returnmdformat
         if (! preg_match_all($pattern, $markdown, $matches, PREG_OFFSET_CAPTURE)) {
             $postContent['content'][] = [
                 [
@@ -770,7 +770,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $position = $match[1];
             $url = $matches[2][$index][0];
 
-            // addimagefronttext（ifhave）
+            // addimagefronttext(ifhave)
             $this->addTextBlockIfNotEmpty(
                 $contentBlocks,
                 substr($markdown, $lastPosition, $position - $lastPosition)
@@ -783,7 +783,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $lastPosition = $position + strlen($fullMatch);
         }
 
-        // addmostnextimagebacktext（ifhave）
+        // addmostnextimagebacktext(ifhave)
         $this->addTextBlockIfNotEmpty(
             $contentBlocks,
             substr($markdown, $lastPosition)
@@ -794,7 +794,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * addtextpiece（ifnotfornull）.
+     * addtextpiece(ifnotfornull).
      *
      * @param array &$contentBlocks contentpiecearray
      * @param string $text wantaddtext
@@ -836,7 +836,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            // ifuploadfail，addimageURLasformdtext
+            // ifuploadfail,addimageURLasformdtext
             $contentBlocks[] = [
                 [
                     'tag' => 'md',

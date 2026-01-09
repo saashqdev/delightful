@@ -16,7 +16,7 @@ use function Hyperf\Support\env;
 function processConfigValue(&$value): void
 {
     if (is_string($value)) {
-        // stringtype：parseenvironmentvariable
+        // stringtype:parseenvironmentvariable
         $parts = explode('|', $value);
         if (count($parts) > 1) {
             $value = env($parts[0], $parts[1]);
@@ -24,12 +24,12 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // arraytype：recursionhandleeachyuan素，保留array结构
+        // arraytype:recursionhandleeachyuan素,保留array结构
         foreach ($value as &$item) {
             processConfigValue($item);
         }
     }
-    // othertype（如 int, bool etc）：保留原value，notconductparse
+    // othertype(如 int, bool etc):保留原value,notconductparse
 }
 
 // handleconfigurationmiddleenvironmentvariable
@@ -205,7 +205,7 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// loaddefaultmodelconfiguration（优先levelmostlow）
+// loaddefaultmodelconfiguration(优先levelmostlow)
 $models = [];
 
 // loaddefaultmodelconfiguration
@@ -214,7 +214,7 @@ foreach ($envModelConfigs as $modelKey => $config) {
     $models[$modelKey] = $config;
 }
 
-// load odin_models.json configuration（优先levelmorehigh，willoverridedefaultconfiguration）
+// load odin_models.json configuration(优先levelmorehigh,willoverridedefaultconfiguration)
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {
@@ -237,21 +237,21 @@ return [
         ],
         'general_api_options' => [
             'timeout' => [
-                'connection' => 5.0,  // connecttimeout（second）
-                'write' => 10.0,      // writetimeout（second）
-                'read' => 300.0,      // readtimeout（second）
-                'total' => 350.0,     // 总bodytimeout（second）
-                'thinking' => 120.0,  // 思考timeout（second）
-                'stream_chunk' => 30.0, // streampiecebetweentimeout（second）
-                'stream_first' => 60.0, // 首streampiecetimeout（second）
+                'connection' => 5.0,  // connecttimeout(second)
+                'write' => 10.0,      // writetimeout(second)
+                'read' => 300.0,      // readtimeout(second)
+                'total' => 350.0,     // 总bodytimeout(second)
+                'thinking' => 120.0,  // 思考timeout(second)
+                'stream_chunk' => 30.0, // streampiecebetweentimeout(second)
+                'stream_first' => 60.0, // 首streampiecetimeout(second)
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfield白名singleconfiguration
-                // iffornullarrayornotconfiguration，thenprint所havefield
-                // ifconfigurationfieldcolumn表，thenonlyprintfinger定field
-                // support嵌setfield，usepoint语法如 'args.messages'
-                // notice：messages and tools fieldnotin白名singlemiddle，notwillbeprint
+                // iffornullarrayornotconfiguration,thenprint所havefield
+                // ifconfigurationfieldcolumn表,thenonlyprintfinger定field
+                // support嵌setfield,usepoint语法如 'args.messages'
+                // notice:messages and tools fieldnotin白名singlemiddle,notwillbeprint
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
@@ -279,7 +279,7 @@ return [
                     'usage.output_tokens',         // outputtokenquantity
                     'usage.total_tokens',          // 总tokenquantity
 
-                    // requestparameter（rowexcept敏感content）
+                    // requestparameter(rowexcept敏感content)
                     'args.temperature',            // 温degreeparameter
                     'args.max_tokens',             // mostbigtokenlimit
                     'args.max_completion_tokens',             // mostbigtokenlimit
@@ -296,41 +296,41 @@ return [
                     'token_estimate.input_tokens', // 估算inputtokens
                     'token_estimate.output_tokens', // 估算outputtokens
 
-                    // responsecontent（rowexceptspecificcontent）
+                    // responsecontent(rowexceptspecificcontent)
                     'choices.0.finish_reason',     // completereason
                     'choices.0.index',             // chooseindex
 
                     // errorinfo
                     'error',                       // errordetail
                     'error.type',                  // errortype
-                    'error.message',               // errormessage（notcontainspecificcontent）
+                    'error.message',               // errormessage(notcontainspecificcontent)
 
                     // otheryuandata
                     'created',                     // createtime戳
                     'id',                         // requestID
                     'object',                     // objecttype
                     'system_fingerprint',         // systemfinger纹
-                    'performance_flag',            // performancemark（slowrequestidentifier）
+                    'performance_flag',            // performancemark(slowrequestidentifier)
 
-                    // notice：bydownfieldberowexcept，notwillprint
+                    // notice:bydownfieldberowexcept,notwillprint
                     // - args.messages (usermessagecontent)
                     // - args.tools (tooldefinition)
                     // - choices.0.message (responsemessagecontent)
                     // - choices.0.delta (streamresponse增quantitycontent)
                     // - content (responsecontent)
                 ],
-                // whetherenablefield白名singlefilter，defaulttrue（enablefilter）
+                // whetherenablefield白名singlefilter,defaulttrue(enablefilter)
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // mostbigstringlengthlimit，超passthislengthstringwillbereplacefor [Long Text]，settingfor 0 indicatenotlimit
+                // mostbigstringlengthlimit,超passthislengthstringwillbereplacefor [Long Text],settingfor 0 indicatenotlimit
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,
         ],
         'models' => $models,
-        // all局model options，canbemodelitself options override
+        // all局model options,canbemodelitself options override
         'model_options' => [
             'error_mapping_rules' => [
-                // example：customizeerrormapping
+                // example:customizeerrormapping
                 // 'customizeerrorkeyword' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
             ],
         ],

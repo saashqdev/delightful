@@ -22,8 +22,8 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     private const string LOGIN_API = '/api/v1/sessions';
 
     /**
-     * login账number：13800138001
-     * 密码：123456.
+     * login账number:13800138001
+     * 密码:123456.
      */
     private const string TEST_PHONE = '13800138001';
 
@@ -62,13 +62,13 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         // checkresponsewhetherforarray
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifresponsecontainerrorinfo，outputdetailedinfo
+        // ifresponsecontainerrorinfo,outputdetailedinfo
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
-            // ifisauthenticationerror，wecanacceptandskiptest
+            // ifisauthenticationerror,wecanacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
-                $this->markTestSkipped('interfaceauthenticationfail，maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
+                $this->markTestSkipped('interfaceauthenticationfail,maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
                 return;
             }
         }
@@ -116,7 +116,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
             return;
@@ -147,7 +147,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
             return;
@@ -173,10 +173,10 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // nullparameterdownshouldnormalreturncurrentuserinfo，not报错
+        // nullparameterdownshouldnormalreturncurrentuserinfo,not报错
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
             return;
@@ -217,10 +217,10 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // nullvalueshouldbecorrecthandle，not导致error
+        // nullvalueshouldbecorrecthandle,not导致error
         $this->assertIsArray($response, '传入nullvalueo clock应normalreturnresponse');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
             return;
@@ -249,7 +249,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
             return;
@@ -277,10 +277,10 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // validatelongstringwhetherbecorrecthandle（maybebetruncateorreject）
+        // validatelongstringwhetherbecorrecthandle(maybebetruncateorreject)
         $this->assertIsArray($response, 'longstring应becorrecthandle');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
             return;
@@ -308,10 +308,10 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // according tobusiness逻辑，maybeacceptanystringasforavatar_url，orconductvalidate
+        // according tobusiness逻辑,maybeacceptanystringasforavatar_url,orconductvalidate
         $this->assertIsArray($response, 'invalidURLformat应be妥善handle');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
         }
@@ -325,7 +325,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         // 先logingettoken
         $this->performLogin();
 
-        // theonetimeupdate：onlyupdatenickname
+        // theonetimeupdate:onlyupdatenickname
         $firstUpdateData = [
             'nickname' => 'theonetimemorenewnickname',
         ];
@@ -333,7 +333,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $firstResponse = $this->patch(self::UPDATE_USER_INFO_API, $firstUpdateData, $this->getTestHeaders());
         $this->assertIsArray($firstResponse, 'theonetimeupdateresponseshouldisarrayformat');
 
-        // ifisauthenticationerror，skiptest
+        // ifisauthenticationerror,skiptest
         if (isset($firstResponse['code']) && ($firstResponse['code'] === 2179 || $firstResponse['code'] === 3035)) {
             $this->markTestSkipped('interfaceauthenticationfail');
             return;
@@ -345,7 +345,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $firstUserData = $firstResponse['data'];
         $originalAvatarUrl = $firstUserData['avatar_url'] ?? null;
 
-        // thetwotimeupdate：onlyupdateavatar
+        // thetwotimeupdate:onlyupdateavatar
         $secondUpdateData = [
             'avatar_url' => 'https://example.com/new-avatar-2.jpg',
         ];
@@ -357,7 +357,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $secondUserData = $secondResponse['data'];
 
-        // validatedatacompleteproperty：nickname应maintaintheonetimemorenewvalue
+        // validatedatacompleteproperty:nickname应maintaintheonetimemorenewvalue
         $this->assertEquals($firstUpdateData['nickname'], $secondUserData['nickname'], 'nickname应maintaintheonetimemorenewvalue');
         $this->assertEquals($secondUpdateData['avatar_url'], $secondUserData['avatar_url'], 'avatar应forthetwotimemorenewvalue');
     }
@@ -401,13 +401,13 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         // checkresponsewhetherforarray
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifresponsecontainerrorinfo，outputdetailedinfo
+        // ifresponsecontainerrorinfo,outputdetailedinfo
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
-            // ifisauthenticationerror，wecanacceptandskiptest
+            // ifisauthenticationerror,wecanacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
-                $this->markTestSkipped('interfaceauthenticationfail，maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
+                $this->markTestSkipped('interfaceauthenticationfail,maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
                 return;
             }
         }
@@ -482,11 +482,11 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
-        // maybereturnerrororsuccess，取决atbusiness逻辑
+        // maybereturnerrororsuccess,取决atbusiness逻辑
         $this->assertIsArray($response, 'responseshouldisarrayformat');
         $this->assertArrayHasKey('code', $response, 'response应containcodefield');
 
-        // ifsuccess，validatedata结构
+        // ifsuccess,validatedata结构
         if ($response['code'] === 1000) {
             $this->assertArrayHasKey('data', $response, 'successresponse应containdatafield');
             $permissionData = $response['data'];
@@ -505,37 +505,37 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $token = $this->performLogin();
         $headers = $this->getTestHeaders();
 
-        // testerrorHTTPmethod（POST）
+        // testerrorHTTPmethod(POST)
         $postResponse = $this->post(self::GET_USER_UPDATE_PERMISSION_API, [], $headers);
 
         // shouldreturnmethodnotallowerror
         if ($postResponse !== null) {
             $this->assertIsArray($postResponse, 'POSTresponseshouldisarrayformat');
             if (isset($postResponse['code'])) {
-                // ifnotisauthenticationissue，shouldismethoderror
+                // ifnotisauthenticationissue,shouldismethoderror
                 if (! in_array($postResponse['code'], [2179, 3035])) {
                     $this->assertNotEquals(1000, $postResponse['code'], 'POSTmethodnotshouldsuccess');
                 }
             }
         } else {
-            // ifreturnnull，instructionmethodbecorrectreject
+            // ifreturnnull,instructionmethodbecorrectreject
             $this->assertTrue(true, 'POSTmethodbecorrectreject');
         }
 
-        // testerrorHTTPmethod（PUT）
+        // testerrorHTTPmethod(PUT)
         $putResponse = $this->put(self::GET_USER_UPDATE_PERMISSION_API, [], $headers);
 
         // shouldreturnmethodnotallowerror
         if ($putResponse !== null) {
             $this->assertIsArray($putResponse, 'PUTresponseshouldisarrayformat');
             if (isset($putResponse['code'])) {
-                // ifnotisauthenticationissue，shouldismethoderror
+                // ifnotisauthenticationissue,shouldismethoderror
                 if (! in_array($putResponse['code'], [2179, 3035])) {
                     $this->assertNotEquals(1000, $putResponse['code'], 'PUTmethodnotshouldsuccess');
                 }
             }
         } else {
-            // ifreturnnull，instructionmethodbecorrectreject
+            // ifreturnnull,instructionmethodbecorrectreject
             $this->assertTrue(true, 'PUTmethodbecorrectreject');
         }
     }
@@ -545,7 +545,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
      */
     private function performLogin(): string
     {
-        // ifalready经havetoken，直接return
+        // ifalready经havetoken,直接return
         if (! empty(self::$accessToken)) {
             return self::$accessToken;
         }
@@ -572,7 +572,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         self::$accessToken = $loginResponse['data']['access_token'];
 
         // outputdebuginfo
-        echo "\nloginsuccess，获token: " . self::$accessToken . "\n";
+        echo "\nloginsuccess,获token: " . self::$accessToken . "\n";
         echo "\ncompleteloginresponse: " . json_encode($loginResponse, JSON_UNESCAPED_UNICODE) . "\n";
 
         return self::$accessToken;

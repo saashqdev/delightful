@@ -20,8 +20,8 @@ return new class extends Migration {
         Schema::create('delightful_tenant', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255)->comment('企业name');
-            $table->string('display_id', 255)->comment('企业编number，平台inside唯one');
-            $table->tinyInteger('tenant_tag')->default(0)->comment('person版/team版标志. 1：team版 2：person版');
+            $table->string('display_id', 255)->comment('企业编number,平台inside唯one');
+            $table->tinyInteger('tenant_tag')->default(0)->comment('person版/team版标志. 1:team版 2:person版');
             $table->string('tenant_key', 32)->comment('企业identifier');
             $table->text('avatar')->comment('企业avatar');
             $table->timestamps();

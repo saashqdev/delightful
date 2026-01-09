@@ -18,7 +18,7 @@ enum ControlMessageType: string
     // createsessionwindow
     case CreateConversation = 'create_conversation';
 
-    // 移exceptsessionwindow（listnotdisplay）
+    // 移exceptsessionwindow(listnotdisplay)
     case HideConversation = 'hide_conversation';
 
     // 置topsessionwindow
@@ -100,8 +100,8 @@ enum ControlMessageType: string
     case AddFriendApply = 'add_friend_apply';
 
     /**
-     * unknownmessage。
-     * byatversioniteration，hair版timediffetcreason，maybeproduceunknowntypemessage。
+     * unknownmessage.
+     * byatversioniteration,hair版timediffetcreason,maybeproduceunknowntypemessage.
      */
     case Unknown = 'unknown';
 

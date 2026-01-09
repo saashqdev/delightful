@@ -13,7 +13,7 @@ use App\Domain\Provider\Entity\ProviderModelEntity;
  * based onorganizationencodingmodelfilterserviceinterface.
  *
  * useat替代based onmodeltable visiblePackages fieldfilter逻辑
- * 企业packageimplementthisinterface，providegiveopen源packageconductmodelfilter
+ * 企业packageimplementthisinterface,providegiveopen源packageconductmodelfilter
  */
 interface OrganizationBasedModelFilterInterface
 {
@@ -40,7 +40,7 @@ interface OrganizationBasedModelFilterInterface
      * getorganizationcurrentsubscribeproductbind所havemodelidentifier.
      *
      * @param string $organizationCode organizationencoding
-     * @return array modelidentifierarray，for example: ['gpt-4o', 'claude-3', ...]
+     * @return array modelidentifierarray,for example: ['gpt-4o', 'claude-3', ...]
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
@@ -48,7 +48,7 @@ interface OrganizationBasedModelFilterInterface
      * getorganizationneed升level才canusemodelIDlist.
      *
      * @param string $organizationCode organizationencoding
-     * @return array need升levelmodelIDarray，for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
+     * @return array need升levelmodelIDarray,for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array;
 }

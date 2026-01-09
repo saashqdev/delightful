@@ -355,7 +355,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function canTriggerFlow(): bool
     {
-        // ifischatmessage，or者isaddgood友/opensessionwindowcontrolmessage，thencan触hair flow
+        // ifischatmessage,or者isaddgood友/opensessionwindowcontrolmessage,thencan触hair flow
         return $this->seqType instanceof ChatMessageType || in_array($this->seqType, [ControlMessageType::AddFriendSuccess, ControlMessageType::OpenConversation], true);
     }
 }

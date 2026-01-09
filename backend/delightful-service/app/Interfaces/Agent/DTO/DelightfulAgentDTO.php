@@ -55,7 +55,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $createdUid;
 
     /**
-     * 助理status：enable｜disable.
+     * 助理status:enable｜disable.
      */
     public ?int $status = null;
 

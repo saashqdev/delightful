@@ -199,10 +199,10 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // seq extensioninfo. ifneedretrieve话题message,请query topic_messages 表
         $topicId && $seqExtra->setTopicId($topicId);
         $seqDTO->setExtra($seqExtra);
-        // ifis跟assistantprivate chat，andnothave话题 id，from动createone话题
+        // ifis跟assistantprivate chat,andnothave话题 id,from动createone话题
         if ($conversationEntity->getReceiveType() === ConversationType::Ai && empty($seqDTO->getExtra()?->getTopicId())) {
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($conversationEntity, 0);
-            // notimpact原have逻辑，will topicId settingto extra middle
+            // notimpact原have逻辑,will topicId settingto extra middle
             $seqExtra = $seqDTO->getExtra() ?? new SeqExtra();
             $seqExtra->setTopicId($topicId);
             $seqDTO->setExtra($seqExtra);
@@ -222,7 +222,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      */
     public function checkSendMessageAuth(DelightfulSeqEntity $senderSeqDTO, DelightfulMessageEntity $senderMessageDTO, DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
     {
-        // checkconversation id所属organization，andcurrent传入organizationencodingone致property
+        // checkconversation id所属organization,andcurrent传入organizationencodingone致property
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
@@ -234,16 +234,16 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($conversationEntity->getStatus() === ConversationStatus::Delete) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_DELETED);
         }
-        // ifiseditmessage，checkbeeditmessagelegalproperty(from己hairmessage，andincurrentconversationmiddle)
+        // ifiseditmessage,checkbeeditmessagelegalproperty(from己hairmessage,andincurrentconversationmiddle)
         $this->checkEditMessageLegality($senderSeqDTO, $dataIsolation);
         return;
-        // todo ifmessagemiddlehavefile:1.judgefile所have者whetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile。
+        // todo ifmessagemiddlehavefile:1.judgefile所have者whetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile.
         /* @phpstan-ignore-next-line */
         $messageContent = $senderMessageDTO->getContent();
         if ($messageContent instanceof ChatFileInterface) {
             $fileIds = $messageContent->getFileIds();
             if (! empty($fileIds)) {
-                // batchquantityqueryfile所have权，whilenotisloopquery
+                // batchquantityqueryfile所have权,whilenotisloopquery
                 $fileEntities = $this->delightfulChatFileDomainService->getFileEntitiesByFileIds($fileIds);
 
                 // checkwhether所havefileall存in
@@ -266,7 +266,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             }
         }
 
-        // todo checkwhetherhavehairmessagepermission(needhavegood友close系，企业close系，collection团close系，合as伙伴close系etc)
+        // todo checkwhetherhavehairmessagepermission(needhavegood友close系,企业close系,collection团close系,合as伙伴close系etc)
     }
 
     /**
@@ -299,7 +299,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if ($aiUserEntity->getUserType() !== UserType::Ai) {
                 ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
             }
-            // ifisassistantandpersonprivate chat，andassistantsendmessagenothave话题 id，then报错
+            // ifisassistantandpersonprivate chat,andassistantsendmessagenothave话题 id,then报错
             if ($aiConversationEntity->getReceiveType() === ConversationType::User && empty($aiSeqDTO->getExtra()?->getTopicId())) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_ID_NOT_FOUND);
             }
@@ -332,7 +332,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * assistantgivepersoncategoryor者群hairmessage,cannot传conversationand话题 id,from动createconversation，nongroupconversationfrom动适配话题 id.
+     * assistantgivepersoncategoryor者群hairmessage,cannot传conversationand话题 id,from动createconversation,nongroupconversationfrom动适配话题 id.
      * @param string $appMessageId message防重,customer端(includeflow)from己tomessagegenerateoneitemencoding
      * @param bool $doNotParseReferMessageId cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
@@ -346,17 +346,17 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         ?Carbon $sendTime = null,
         ?ConversationType $receiverType = null
     ): array {
-        // 1.judge $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
+        // 1.judge $senderUserId and $receiverUserIdconversationwhether存in(参考getOrCreateConversationmethod)
         $senderConversationEntity = $this->delightfulConversationDomainService->getOrCreateConversation($senderUserId, $receiverId, $receiverType);
-        // alsowantcreatereceive方conversationwindow，wantnot然no法create话题
+        // alsowantcreatereceive方conversationwindow,wantnot然no法create话题
         $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
 
-        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，to话题 id
+        // 2.if $seqExtra notfor null,validationwhetherhave topic id,ifnothave,参考 agentSendMessageGetTopicId method,to话题 id
         $topicId = $aiSeqDTO->getExtra()?->getTopicId() ?? '';
         if (empty($topicId) && $receiverType !== ConversationType::Group) {
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
         }
-        // 3.group装parameter，call aiSendMessage method
+        // 3.group装parameter,call aiSendMessage method
         $aiSeqDTO->getExtra() === null && $aiSeqDTO->setExtra(new SeqExtra());
         $aiSeqDTO->getExtra()->setTopicId($topicId);
         $aiSeqDTO->setConversationId($senderConversationEntity->getId());
@@ -364,7 +364,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * personcategorygiveassistantor者群hairmessage,cannot传conversationand话题 id,from动createconversation，nongroupconversationfrom动适配话题 id.
+     * personcategorygiveassistantor者群hairmessage,cannot传conversationand话题 id,from动createconversation,nongroupconversationfrom动适配话题 id.
      * @param string $appMessageId message防重,customer端(includeflow)from己tomessagegenerateoneitemencoding
      * @param bool $doNotParseReferMessageId cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
@@ -379,13 +379,13 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         ?ConversationType $receiverType = null,
         string $topicId = ''
     ): array {
-        // 1.judge $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
+        // 1.judge $senderUserId and $receiverUserIdconversationwhether存in(参考getOrCreateConversationmethod)
         $senderConversationEntity = $this->delightfulConversationDomainService->getOrCreateConversation($senderUserId, $receiverId, $receiverType);
-        // ifreceive方nongroup，thencreate senderUserId and receiverUserId conversation.
+        // ifreceive方nongroup,thencreate senderUserId and receiverUserId conversation.
         if ($receiverType !== ConversationType::Group) {
             $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
         }
-        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，to话题 id
+        // 2.if $seqExtra notfor null,validationwhetherhave topic id,ifnothave,参考 agentSendMessageGetTopicId method,to话题 id
         if (empty($topicId)) {
             $topicId = $aiSeqDTO->getExtra()?->getTopicId() ?? '';
         }
@@ -394,12 +394,12 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
         }
 
-        // ifisgroup，thennotneedget话题 id
+        // ifisgroup,thennotneedget话题 id
         if ($receiverType === ConversationType::Group) {
             $topicId = '';
         }
 
-        // 3.group装parameter，call sendMessageToAgent method
+        // 3.group装parameter,call sendMessageToAgent method
         $aiSeqDTO->getExtra() === null && $aiSeqDTO->setExtra(new SeqExtra());
         $aiSeqDTO->getExtra()->setTopicId($topicId);
         $aiSeqDTO->setConversationId($senderConversationEntity->getId());
@@ -436,7 +436,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             // if ($aiUserEntity->getUserType() !== UserType::Ai) {
             //     ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
             // }
-            // ifisassistantandpersonprivate chat，andassistantsendmessagenothave话题 id，then报错
+            // ifisassistantandpersonprivate chat,andassistantsendmessagenothave话题 id,then报错
             if ($aiConversationEntity->getReceiveType() === ConversationType::User && empty($aiSeqDTO->getExtra()?->getTopicId())) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_ID_NOT_FOUND);
             }
@@ -533,7 +533,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // conversation所have权validation
         $this->checkConversationsOwnership($userAuthorization, [$conversationId]);
 
-        // 按timerange，getconversation/话题message
+        // 按timerange,getconversation/话题message
         $clientSeqList = $this->delightfulChatDomainService->getConversationChatMessages($conversationId, $conversationMessagesQueryDTO);
         return $this->formatConversationMessagesReturn($clientSeqList, $conversationMessagesQueryDTO);
     }
@@ -549,7 +549,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $this->checkConversationsOwnership($userAuthorization, $conversationIds);
         }
 
-        // getconversationmessage（notice，feature目andgetMessagesByConversationIddifferent）
+        // getconversationmessage(notice,feature目andgetMessagesByConversationIddifferent)
         $clientSeqList = $this->delightfulChatDomainService->getConversationsChatMessages($conversationMessagesQueryDTO);
         return $this->formatConversationMessagesReturn($clientSeqList, $conversationMessagesQueryDTO);
     }
@@ -564,7 +564,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
 
         $clientSeqList = $this->delightfulChatDomainService->getConversationsMessagesGroupById($conversationMessagesQueryDTO);
-        // 按conversation id group，return
+        // 按conversation id group,return
         $conversationMessages = [];
         foreach ($clientSeqList as $clientSeq) {
             $conversationId = $clientSeq->getSeq()->getConversationId();
@@ -593,24 +593,24 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return '';
         }
         $prompt = <<<'PROMPT'
-        youisone专业contenttitlegenerate助hand。请严格按照bydownrequireforconversationcontentgeneratetitle：
+        youisone专业contenttitlegenerate助hand.请严格按照bydownrequireforconversationcontentgeneratetitle:
 
         ## taskgoal
-        according toconversationcontent，generateone简洁、accuratetitle，can概括conversation核coretheme。
+        according toconversationcontent,generateone简洁、accuratetitle,can概括conversation核coretheme.
 
         ## theme优先level原then
-        whenconversation涉and多differentthemeo clock：
-        1. 优先close注conversationmiddlemostbackdiscussiontheme（mostnew话题）
+        whenconversation涉and多differentthemeo clock:
+        1. 优先close注conversationmiddlemostbackdiscussiontheme(mostnew话题)
         2. bymost近conversationcontentformain参考basis
-        3. ifmostbackthemediscussionmorefor充minute，thenbythisasfortitle核core
-        4. ignore早期already经end话题，unlessit们andmostnew话题密切相close
+        3. ifmostbackthemediscussionmorefor充minute,thenbythisasfortitle核core
+        4. ignore早期already经end话题,unlessit们andmostnew话题密切相close
 
         ## 严格require
-        1. titlelength：not超pass 15 character。Englishone字母算onecharacter，汉字one字算onecharacter，other语type采useanalogouscountsolution。
-        2. content相close：titlemust直接反映conversation核coretheme
-        3. languagestyle：use陈述property语sentence，avoid疑问sentence
-        4. outputformat：onlyoutputtitlecontent，notwantaddany解释、标pointorothertext
-        5. forbidlinefor：notwantreturn答conversationmiddleissue，notwantconduct额outside解释
+        1. titlelength:not超pass 15 character.Englishone字母算onecharacter,汉字one字算onecharacter,other语type采useanalogouscountsolution.
+        2. content相close:titlemust直接反映conversation核coretheme
+        3. languagestyle:use陈述property语sentence,avoid疑问sentence
+        4. outputformat:onlyoutputtitlecontent,notwantaddany解释、标pointorothertext
+        5. forbidlinefor:notwantreturn答conversationmiddleissue,notwantconduct额outside解释
 
         ## conversationcontent
         <CONVERSATION_START>
@@ -623,7 +623,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         <LANGUAGE_END>
 
         ## output
-        请直接outputtitle：
+        请直接outputtitle:
         PROMPT;
 
         $prompt = str_replace(['{language}', '{textContent}'], [$language, $textContent], $prompt);
@@ -635,10 +635,10 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * usebigmodeltotextconduct总结（usecustomizehint词）.
+     * usebigmodeltotextconduct总结(usecustomizehint词).
      *
      * @param DelightfulUserAuthorization $authorization userauthorization
-     * @param string $customPrompt completecustomizehint词（not做anyreplacehandle）
+     * @param string $customPrompt completecustomizehint词(not做anyreplacehandle)
      * @return string generatetitle
      */
     public function summarizeTextWithCustomPrompt(DelightfulUserAuthorization $authorization, string $customPrompt): string
@@ -675,14 +675,14 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     public function getFileDownUrl(array $fileDTOs, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // permissionvalidation，judgeusermessagemiddle，whethercontain本timehe想downloadfile
+        // permissionvalidation,judgeusermessagemiddle,whethercontain本timehe想downloadfile
         $fileEntities = $this->delightfulChatFileDomainService->checkAndGetFilePaths($fileDTOs, $dataIsolation);
         // downloado clockalso原file原本name
         $downloadNames = [];
         $fileDownloadUrls = [];
         $filePaths = [];
         foreach ($fileEntities as $fileEntity) {
-            // filter掉haveoutside链，butisnot file_key
+            // filter掉haveoutside链,butisnot file_key
             if (! empty($fileEntity->getExternalUrl()) && empty($fileEntity->getFileKey())) {
                 $fileDownloadUrls[$fileEntity->getFileId()] = ['url' => $fileEntity->getExternalUrl()];
             } else {
@@ -722,7 +722,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
 
         $language = CoContext::getLanguage();
-        // 审计需求：ifiseditmessage，writemessageversion表，andupdate原messageversion_id
+        // 审计需求:ifiseditmessage,writemessageversion表,andupdate原messageversion_id
         $extra = $senderSeqDTO->getExtra();
         // settinglanguageinfo
         $editMessageOptions = $extra?->getEditMessageOptions();
@@ -731,12 +731,12 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $messageVersionEntity = $this->delightfulChatDomainService->editMessage($senderMessageDTO);
             $editMessageOptions->setMessageVersionId($messageVersionEntity->getVersionId());
             $senderSeqDTO->setExtra($extra->setEditMessageOptions($editMessageOptions));
-            // again查onetime $messageEntity ，avoidduplicatecreate
+            // again查onetime $messageEntity ,avoidduplicatecreate
             $messageEntity = $this->delightfulChatDomainService->getMessageByDelightfulMessageId($senderMessageDTO->getDelightfulMessageId());
             $messageEntity && $messageEntity->setLanguage($language);
         }
 
-        // ifquotemessagebeeditpass，that么modify referMessageId fororiginalmessage id
+        // ifquotemessagebeeditpass,that么modify referMessageId fororiginalmessage id
         $this->checkAndUpdateReferMessageId($senderSeqDTO);
 
         $senderMessageDTO->setLanguage($language);
@@ -745,7 +745,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($messageStruct instanceof StreamMessageInterface && $messageStruct->isStream()) {
             // streammessage场景
             if ($messageStruct->getStreamOptions()->getStatus() === StreamMessageStatus::Start) {
-                // ifisstart，call createAndSendStreamStartSequence method
+                // ifisstart,call createAndSendStreamStartSequence method
                 $senderSeqEntity = $this->delightfulChatDomainService->createAndSendStreamStartSequence(
                     (new CreateStreamSeqDTO())->setTopicId($extra->getTopicId())->setAppMessageId($senderMessageDTO->getAppMessageId()),
                     $messageStruct,
@@ -762,7 +762,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 $senderMessageId = $streamCachedDTO->getSenderMessageId();
                 $delightfulMessageId = $streamCachedDTO->getDelightfulMessageId();
             }
-            // onlyincertain $senderSeqEntity and $messageEntity，useatreturndata结构
+            // onlyincertain $senderSeqEntity and $messageEntity,useatreturndata结构
             $senderSeqEntity = $this->delightfulSeqDomainService->getSeqEntityByMessageId($senderMessageId);
             $messageEntity = $this->delightfulChatDomainService->getMessageByDelightfulMessageId($delightfulMessageId);
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
@@ -793,7 +793,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             );
             $conversationType = $senderConversationEntity->getReceiveType();
             if (in_array($conversationType, [ConversationType::Ai, ConversationType::User], true)) {
-                // forguarantee收hairdouble方messageorderone致property，ifisprivate chat，thensyncgenerate seq
+                // forguarantee收hairdouble方messageorderone致property,ifisprivate chat,thensyncgenerate seq
                 $receiveSeqEntity = $this->syncHandlerSingleChatMessage($senderSeqEntity, $messageEntity);
             } elseif ($conversationType === ConversationType::Group) {
                 // group chatetc场景asyncgive收item方generateSeqandpushgive收item方
@@ -815,9 +815,9 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             });
         }
 
-        // ifiseditmessage，andisusereditassistanthaircomeapprovalformo clock，returnnullarray。
-        // 因forthiso clockcreate seq_id isassistant，notisuser，returnwill造become困扰。
-        // 经by mq minutehairmessageback，userwillasync收to属athefrom己messagepush。
+        // ifiseditmessage,andisusereditassistanthaircomeapprovalformo clock,returnnullarray.
+        // 因forthiso clockcreate seq_id isassistant,notisuser,returnwill造become困扰.
+        // 经by mq minutehairmessageback,userwillasync收to属athefrom己messagepush.
         if (isset($editMessageOptions) && ! empty($editMessageOptions->getDelightfulMessageId())
             && $messageEntity->getSenderId() !== $senderMessageDTO->getSenderId()) {
             return [];
@@ -828,7 +828,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * ifquotemessagebeeditpass，that么modify referMessageId fororiginalmessage id.
+     * ifquotemessagebeeditpass,that么modify referMessageId fororiginalmessage id.
      */
     public function checkAndUpdateReferMessageId(DelightfulSeqEntity $senderSeqDTO): void
     {
@@ -852,7 +852,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($delightfulSeqEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::REFER_MESSAGE_NOT_FOUND);
         }
-        // 便atfront端渲染，updatequotemessageIDfororiginalmessageID
+        // 便atfront端渲染,updatequotemessageIDfororiginalmessageID
         $senderSeqDTO->setReferMessageId($delightfulSeqEntity->getMessageId());
     }
 
@@ -873,7 +873,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * chatwindow打字o clock补alluserinput。for适配group chat，thiswithin role its实isusernickname，whilenotisroletype。
+     * chatwindow打字o clock补alluserinput.for适配group chat,thiswithin role its实isusernickname,whilenotisroletype.
      */
     public function getConversationChatCompletionsHistory(
         DelightfulUserAuthorization $userAuthorization,
@@ -886,7 +886,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $conversationMessagesQueryDTO->setConversationId($conversationId)->setLimit($limit)->setTopicId($topicId);
         // get话题most近 20 itemconversationrecord
         $clientSeqResponseDTOS = $this->delightfulChatDomainService->getConversationChatMessages($conversationId, $conversationMessagesQueryDTO);
-        // get收hairdouble方userinfo，useat补allo clockenhanceroletype
+        // get收hairdouble方userinfo,useat补allo clockenhanceroletype
         $userIds = [];
         foreach ($clientSeqResponseDTOS as $clientSeqResponseDTO) {
             // 收collection user_id
@@ -907,7 +907,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 continue;
             }
             $message = $clientSeqResponseDTO->getSeq()->getMessage()->getContent();
-            // 暂o clockonlyhandleuserinput，byandcanget纯textmessagetype
+            // 暂o clockonlyhandleuserinput,byandcanget纯textmessagetype
             $messageContent = $this->getMessageTextContent($message);
             if (empty($messageContent)) {
                 continue;
@@ -921,7 +921,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                     'content' => $messageContent,
                 ];
             } else {
-                // use传统 role，judgewhetherfor AI user
+                // use传统 role,judgewhetherfor AI user
                 $isAiUser = $delightfulUserEntity->getUserType() === UserType::Ai;
                 $role = $isAiUser ? Role::Assistant : Role::User;
 
@@ -1045,7 +1045,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * forguarantee收hairdouble方messageorderone致property，ifisprivate chat，thensyncgenerate seq.
+     * forguarantee收hairdouble方messageorderone致property,ifisprivate chat,thensyncgenerate seq.
      * @throws Throwable
      */
     private function syncHandlerSingleChatMessage(DelightfulSeqEntity $senderSeqEntity, DelightfulMessageEntity $senderMessageEntity): DelightfulSeqEntity
@@ -1064,7 +1064,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @param MessageHistory $messageHistory messagehistory
      * @param string $conversationId conversationID
-     * @param string $topicId 话题ID，optional
+     * @param string $topicId 话题ID,optional
      * @return string generatesummarytext
      */
     private function getSummaryFromLLM(
@@ -1106,7 +1106,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     private function getMessageTextContent(MessageInterface $message): string
     {
-        // 暂o clockonlyhandleuserinput，byandcanget纯textmessagetype
+        // 暂o clockonlyhandleuserinput,byandcanget纯textmessagetype
         if ($message instanceof TextContentInterface) {
             $messageContent = $message->getTextContent();
         } else {
@@ -1126,7 +1126,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $data[$seqId] = $clientSeq->toArray();
         }
         $hasMore = (count($clientSeqList) === $conversationMessagesQueryDTO->getLimit());
-        // 按照 $order indatabasemiddlequery，butistoreturnresultcollection降序rowcolumn。
+        // 按照 $order indatabasemiddlequery,butistoreturnresultcollection降序rowcolumn.
         $order = $conversationMessagesQueryDTO->getOrder();
         if ($order === Order::Desc) {
             // to $data 降序rowcolumn
@@ -1205,7 +1205,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $dataIsolation = $this->createDataIsolation($userAuthorization);
             // message鉴权
             $this->checkSendMessageAuth($senderSeqDTO, $senderMessageDTO, $senderConversationEntity, $dataIsolation);
-            // securitypropertyguarantee，validationattachmentmiddlefilewhether属atcurrentuser
+            // securitypropertyguarantee,validationattachmentmiddlefilewhether属atcurrentuser
             $senderMessageDTO = $this->checkAndFillAttachments($senderMessageDTO, $dataIsolation);
             // businessparametervalidation
             $this->validateBusinessParams($senderMessageDTO, $dataIsolation);
@@ -1223,7 +1223,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * validationattachmentmiddlefilewhether属atcurrentuser,and填充attachmentinfo.（file名/typeetcfield）.
+     * validationattachmentmiddlefilewhether属atcurrentuser,and填充attachmentinfo.(file名/typeetcfield).
      */
     private function checkAndFillAttachments(DelightfulMessageEntity $senderMessageDTO, DataIsolation $dataIsolation): DelightfulMessageEntity
     {
@@ -1277,7 +1277,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     /**
      * checkconversation所have权
-     * ensure所haveconversationIDall属atcurrent账number，否thenthrowexception.
+     * ensure所haveconversationIDall属atcurrent账number,否thenthrowexception.
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorizationinfo
      * @param array $conversationIds 待checkconversationIDarray
@@ -1305,7 +1305,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $userEntities = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($userIds);
         $userMap = array_column($userEntities, 'delightful_id', 'user_id');
 
-        // checkeachconversationwhether属atcurrentuser（passdelightful_idmatch）
+        // checkeachconversationwhether属atcurrentuser(passdelightful_idmatch)
         $currentDelightfulId = $userAuthorization->getDelightfulId();
         foreach ($conversationIds as $id) {
             $conversationEntity = $conversations[$id] ?? null;
@@ -1358,7 +1358,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR, 'chat.message.voice.attachment_empty');
         }
 
-        // according toaudio file_id callfile领域getdetail，and填充attachment缺失propertyvalue
+        // according toaudio file_id callfile领域getdetail,and填充attachment缺失propertyvalue
         $this->fillVoiceAttachmentDetails($voiceMessage, $dataIsolation);
 
         // 重newget填充backattachment
@@ -1384,7 +1384,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * according toaudio file_id callfile领域getdetail，and填充 VoiceMessage inherit ChatAttachment 缺失propertyvalue.
+     * according toaudio file_id callfile领域getdetail,and填充 VoiceMessage inherit ChatAttachment 缺失propertyvalue.
      */
     private function fillVoiceAttachmentDetails(VoiceMessage $voiceMessage, DataIsolation $dataIsolation): void
     {

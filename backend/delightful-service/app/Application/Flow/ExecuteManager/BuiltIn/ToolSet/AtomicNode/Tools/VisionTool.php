@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'provide视觉can力。useatidentifyusertoimage意graph，andreturnidentifyresult';
+        return 'provide视觉can力.useatidentifyusertoimage意graph,andreturnidentifyresult';
     }
 
     /**
@@ -70,7 +70,7 @@ class VisionTool extends AbstractBuiltInTool
             $node->setParams([
                 'model' => $model,
                 'system_prompt' => $this->createSystemPrompt(),
-                // notagain具have user，直接采usefromlinegroup装 messages
+                // notagain具have user,直接采usefromlinegroup装 messages
                 'messages' => $this->createMessages($executionData, $params),
                 'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value),
                 'model_config' => [
@@ -116,7 +116,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "model",
             "title": "model",
-            "description": "canusemodel。non必填",
+            "description": "canusemodel.non必填",
             "required": null,
             "value": null,
             "encryption": false,
@@ -128,7 +128,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "intent",
             "title": "意graph",
-            "description": "意graph。usertoimage意graph",
+            "description": "意graph.usertoimage意graph",
             "required": null,
             "value": null,
             "encryption": false,
@@ -140,7 +140,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "image_url",
             "title": "imageground址",
-            "description": "imageground址。远程imageground址",
+            "description": "imageground址.远程imageground址",
             "required": null,
             "value": null,
             "encryption": false,
@@ -152,7 +152,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "array",
             "key": "image_urls",
             "title": "file",
-            "description": "imagelinklist。多imageo clockuse",
+            "description": "imagelinklist.多imageo clockuse",
             "required": null,
             "value": null,
             "encryption": false,
@@ -161,7 +161,7 @@ class VisionTool extends AbstractBuiltInTool
                 "type": "string",
                 "key": "image_urls",
                 "title": "imageground址",
-                "description": "imageground址。远程imageground址",
+                "description": "imageground址.远程imageground址",
                 "required": null,
                 "value": null,
                 "encryption": false,
@@ -231,26 +231,26 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('youisone专业视觉comprehend助理，请按照bydownstepreturn应user：
+            'structure' => Value::buildConst('youisone专业视觉comprehend助理,请按照bydownstepreturn应user:
 
-1. 优先comprehenduser意graph，始终useandusersamelanguagereturn答
-2. provide简洁明直接return答，直接full足usermainissue
-3. againtoimagecontentconduct多维degreedetailedanalyze，includebutnot限at：
-   - 主bodycontentidentify：person物、物body、场景、textetc
-   - 视觉特征：color、composition、光line、qualityetc
-   - 语义info：activity、情绪、close系、background故事etc
-   - textidentify：如havetext，accurateextractandcomprehendimplication
-   - 技术info：如havegraphtable/data，analyzeitsimplication
+1. 优先comprehenduser意graph,始终useandusersamelanguagereturn答
+2. provide简洁明直接return答,直接full足usermainissue
+3. againtoimagecontentconduct多维degreedetailedanalyze,includebutnot限at:
+   - 主bodycontentidentify:person物、物body、场景、textetc
+   - 视觉特征:color、composition、光line、qualityetc
+   - 语义info:activity、情绪、close系、background故事etc
+   - textidentify:如havetext,accurateextractandcomprehendimplication
+   - 技术info:如havegraphtable/data,analyzeitsimplication
    
-4. analyzeformatrequire：
-   - toat重wantanalyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
-   - toatnotcertaincontent，explicittable明speculatedpropertyquality，for example："maybeis..."
-   - 如imagequalitymorelow，fingeroutlimit因素and尽力analyze
-   - toat多graphanalyze，minute别markimage序numberconductparse，and总结itsassociateproperty
+4. analyzeformatrequire:
+   - toat重wantanalyzeresult,use结构化JSONformat呈现,如:{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
+   - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
+   - 如imagequalitymorelow,fingeroutlimit因素and尽力analyze
+   - toat多graphanalyze,minute别markimage序numberconductparse,and总结itsassociateproperty
    
-5. notice事item：
+5. notice事item:
    - avoidto敏感content做主观评判
-   - whenno法certainsome部minutecontento clock，坦诚table达notcertainproperty
+   - whenno法certainsome部minutecontento clock,坦诚table达notcertainproperty
    - maintain客观专业语气'),
         ]);
     }

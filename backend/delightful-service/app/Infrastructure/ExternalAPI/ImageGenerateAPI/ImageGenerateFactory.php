@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney notuse宽highparameter，onlyneed prompt and mode，butis Request categoryinheritneedthistheseparameter
+        // Midjourney notuse宽highparameter,onlyneed prompt and mode,butis Request categoryinheritneedthistheseparameter
         // 所bywegivedefaultvalue即can
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney notclosecorespecific宽highratio例，butwe保留thisfieldby防willcomeneed
+        // Midjourney notclosecorespecific宽highratio例,butwe保留thisfieldby防willcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy 先兜bottom，因for整文生graphalsonothave闭环
+        // todo xhy 先兜bottom,因for整文生graphalsonothave闭环
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)
@@ -321,7 +321,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineArkRequest(array $data): VolcengineArkRequest
     {
-        // parse size parameterfor width and height（use VolcengineArk fixedratio例configuration）
+        // parse size parameterfor width and height(use VolcengineArk fixedratio例configuration)
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024', ImageGenerateModelType::VolcengineArk->value);
 
         $request = new VolcengineArkRequest(
@@ -365,31 +365,31 @@ class ImageGenerateFactory
 
     /**
      * parseeachtype size formatfor [width, height] array.
-     * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
+     * supportformat:1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey modelkey名，iffinger定then优先usethemodelfixedratio例configuration
+     * @param null|string $modelKey modelkey名,iffinger定then优先usethemodelfixedratio例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
         $size = trim($size);
 
-        // processstandardformat：1024x1024
+        // processstandardformat:1024x1024
         if (preg_match('/^(\d+)[x×](\d+)$/i', $size, $matches)) {
             return [(string) $matches[1], (string) $matches[2]];
         }
 
-        // processmultiplynumberformat：1024*1024
+        // processmultiplynumberformat:1024*1024
         if (preg_match('/^(\d+)\*(\d+)$/', $size, $matches)) {
             return [(string) $matches[1], (string) $matches[2]];
         }
 
-        // process k format：2k, 3k etc
+        // process k format:2k, 3k etc
         if (preg_match('/^(\d+)k$/i', $size, $matches)) {
             $resolution = (int) $matches[1] * 1024;
             return [(string) $resolution, (string) $resolution];
         }
 
-        // processratio例format：16:9, 1:1, 3:4 etc
+        // processratio例format:16:9, 1:1, 3:4 etc
         if (preg_match('/^(\d+):(\d+)$/', $size, $matches)) {
             $width = (int) $matches[1];
             $height = (int) $matches[2];
@@ -400,7 +400,7 @@ class ImageGenerateFactory
                 return $fixedSize;
             }
 
-            // ifnothavefixedconfiguration，按照normal换算（based on1024for基准）
+            // ifnothavefixedconfiguration,按照normal换算(based on1024for基准)
             if ($width >= $height) {
                 // 横to
                 $actualWidth = 1024;
@@ -420,12 +420,12 @@ class ImageGenerateFactory
     /**
      * getfinger定modelfixedratio例sizeconfiguration.
      * @param null|string $modelKey modelkey名
-     * @param string $ratioKey ratio例key名，如 "1:1", "16:9"
-     * @return null|array if存infixedconfigurationreturn [width, height] array，否thenreturn null table示needuse换算
+     * @param string $ratioKey ratio例key名,如 "1:1", "16:9"
+     * @return null|array if存infixedconfigurationreturn [width, height] array,否thenreturn null table示needuse换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
-        // ifnothavefinger定model，直接return null
+        // ifnothavefinger定model,直接return null
         if ($modelKey === null) {
             return null;
         }
@@ -435,12 +435,12 @@ class ImageGenerateFactory
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
 
-        // ifnot存in，return null table示needuse换算
+        // ifnot存in,return null table示needuse换算
         return null;
     }
 
     /**
-     * calculate宽highratio例（from LLMAppService 移passcome逻辑）.
+     * calculate宽highratio例(from LLMAppService 移passcome逻辑).
      */
     private static function calculateRatio(int $width, int $height): string
     {
@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculatemostbig公约数（from LLMAppService 移passcome逻辑）.
+     * calculatemostbig公约数(from LLMAppService 移passcome逻辑).
      */
     private static function gcd(int $a, int $b): int
     {

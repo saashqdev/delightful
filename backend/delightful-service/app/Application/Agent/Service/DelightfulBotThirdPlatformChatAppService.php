@@ -48,7 +48,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }
 
-        // 特殊逻辑，ifis飞书，andandischallenge
+        // 特殊逻辑,ifis飞书,andandischallenge
         $platform = $params['platform'] ?? '';
         if ($platform === ThirdPlatformChatType::FeiShuRobot->value && isset($params['challenge'])) {
             $chatMessage = new ThirdPlatformChatMessage();
@@ -96,7 +96,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             return;
                         }
 
-                        // thiswithiniseach平台user id，notis delightful  user_id
+                        // thiswithiniseach平台user id,notis delightful  user_id
                         $userId = $thirdPlatformChatMessage->getUserId();
                         $dataIsolation->setCurrentUserId($userId);
                         EnvManager::initDataIsolationEnv($dataIsolation);
@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => 'notgoodmeaning，meanwhile问Iissuepersontoo多啦，havepoint忙notpasscome，youcanonewill儿againcome问I？感谢谅解！']);
+                        $message = new TextMessage(['content' => 'notgoodmeaning,meanwhile问Iissuepersontoo多啦,havepoint忙notpasscome,youcanonewill儿againcome问I?感谢谅解!']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });
@@ -203,7 +203,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (! $chatEntity || ! $chatEntity->isEnabled()) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.invalid', ['label' => $key]);
         }
-        // pass $groupMemberIds getuserinfo，canuserlist
+        // pass $groupMemberIds getuserinfo,canuserlist
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $users = $this->delightfulUserDomainService->getUserByIds($groupMemberIds, $dataIsolation, ['delightful_id', 'nickname']);
         if (count($users) === 0) {
@@ -215,7 +215,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (count($accounts) === 0) {
             ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
-        // callinterface，换取thethree方user id
+        // callinterface,换取thethree方user id
         $parallel = new Parallel(2);
         $thirdPlatformChat = ThirdPlatformChatFactory::make($chatEntity);
         $requestId = CoContext::getRequestId();
@@ -256,7 +256,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function clearMemory(string $conversationId): void
     {
-        // cleanup flow from身记忆，onlymore改原sessionforbackupsession
+        // cleanup flow from身记忆,onlymore改原sessionforbackupsession
         di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId

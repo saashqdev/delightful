@@ -25,7 +25,7 @@ class TokenTextSplitterTest extends BaseTest
 
     public function testBasicTextSplitting()
     {
-        $text = "thisistheonesegment。\n\nthisisthetwosegment。\n\nthisisthethreesegment。";
+        $text = "thisistheonesegment.\n\nthisisthetwosegment.\n\nthisisthethreesegment.";
         $chunks = $this->splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -39,11 +39,11 @@ class TokenTextSplitterTest extends BaseTest
             null,
             1000,
             200,
-            '。',
-            ['。', '，', ' ']
+            '.',
+            ['.', ',', ' ']
         );
 
-        $text = 'thisistheonesegment。thisisthetwosegment。thisisthethreesegment。';
+        $text = 'thisistheonesegment.thisisthetwosegment.thisisthethreesegment.';
         $chunks = $splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -56,24 +56,24 @@ class TokenTextSplitterTest extends BaseTest
             null,
             1000,
             200,
-            '。',
-            ['。', '，', ' '],
+            '.',
+            ['.', ',', ' '],
             false,
             true
         );
 
-        $text = 'thisistheonesegment。thisisthetwosegment。thisisthethreesegment。';
+        $text = 'thisistheonesegment.thisisthetwosegment.thisisthethreesegment.';
         $chunks = $splitter->splitText($text);
 
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
         $this->assertStringStartsWith('thisistheonesegment', $chunks[0]);
-        $this->assertStringStartsWith('。thisisthetwosegment', $chunks[1]);
+        $this->assertStringStartsWith('.thisisthetwosegment', $chunks[1]);
     }
 
     public function testEncodingHandling()
     {
-        $text = mb_convert_encoding("thisistesttext。\n\nthisisthetwosegment。", 'GBK', 'UTF-8');
+        $text = mb_convert_encoding("thisistesttext.\n\nthisisthetwosegment.", 'GBK', 'UTF-8');
         $chunks = $this->splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -83,7 +83,7 @@ class TokenTextSplitterTest extends BaseTest
 
     public function testLongTextSplitting()
     {
-        $text = str_repeat('thisisonetestsentence子。', 100);
+        $text = str_repeat('thisisonetestsentence子.', 100);
         $chunks = $this->splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -100,7 +100,7 @@ class TokenTextSplitterTest extends BaseTest
         };
 
         $splitter = new TokenTextSplitter($customTokenizer);
-        $text = "thisistheonesegment。\n\nthisisthetwosegment。";
+        $text = "thisistheonesegment.\n\nthisisthetwosegment.";
         $chunks = $splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -114,28 +114,28 @@ class TokenTextSplitterTest extends BaseTest
             1000,
             200,
             "\n\n##",
-            ["\n\n##", "\n##", "\n\n", "\n", '。', ' ', ''],
+            ["\n\n##", "\n##", "\n\n", "\n", '.', ' ', ''],
             preserveSeparator: true
         );
 
         $text = <<<'EOT'
 # 主title
 
-thisistheonesegmentcontent。
+thisistheonesegmentcontent.
 
 ## twoleveltitle1
 
-thisistwoleveltitle1downcontent。
-thiswithinhaveonethesedetailinstruction。
+thisistwoleveltitle1downcontent.
+thiswithinhaveonethesedetailinstruction.
 
 ## twoleveltitle2
 
-thisistwoleveltitle2downcontent。
-thiswithinhaveonetheseotherinstruction。
+thisistwoleveltitle2downcontent.
+thiswithinhaveonetheseotherinstruction.
 
 ## twoleveltitle3
 
-thisismostbackonesegmentcontent。
+thisismostbackonesegmentcontent.
 EOT;
 
         $chunks = $splitter->splitText($text);
@@ -174,21 +174,21 @@ EOT;
         $text = <<<'EOT'
 ** 主title **
 
-thisistheonesegmentcontent。
+thisistheonesegmentcontent.
 
 ** twoleveltitle1 **
 
-thisistwoleveltitle1downcontent。
-thiswithinhaveonethesedetailinstruction。
+thisistwoleveltitle1downcontent.
+thiswithinhaveonethesedetailinstruction.
 
 ** twoleveltitle2 **
 
-thisistwoleveltitle2downcontent。
-thiswithinhaveonetheseotherinstruction。
+thisistwoleveltitle2downcontent.
+thiswithinhaveonetheseotherinstruction.
 
 ** twoleveltitle3 **
 
-thisismostbackonesegmentcontent。
+thisismostbackonesegmentcontent.
 EOT;
 
         $chunks = $splitter->splitText($text);

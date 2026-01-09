@@ -16,13 +16,13 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // wantupdategoal seqId content
     protected string $targetSeqId;
 
-    // forimplement丢package重传，needrecordwhenfrontseqId。one定single调递增。
+    // forimplement丢package重传,needrecordwhenfrontseqId.one定single调递增.
     protected ?int $seqId;
 
     // bigmodel总结
     protected ?string $content;
 
-    // havethesemessagebigmodelresponsefieldnotis content，thiswithin特殊process
+    // havethesemessagebigmodelresponsefieldnotis content,thiswithin特殊process
     protected ?string $llmResponse;
 
     // bigmodel推理content

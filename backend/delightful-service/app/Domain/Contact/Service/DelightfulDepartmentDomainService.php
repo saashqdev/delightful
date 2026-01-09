@@ -163,7 +163,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * rootdepartmentbeabstractfor -1，所bythiswithinneedconvertforactualrootdepartment id.
+     * rootdepartmentbeabstractfor -1,所bythiswithinneedconvertforactualrootdepartment id.
      */
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {
@@ -182,7 +182,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     /**
      * batchquantityget多organizationrootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return array<string,DelightfulDepartmentEntity> byorganizationcodeforkey，rootdepartment实bodyforvalueassociatearray
+     * @return array<string,DelightfulDepartmentEntity> byorganizationcodeforkey,rootdepartment实bodyforvalueassociatearray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
@@ -193,7 +193,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // processdataformat，byorganizationcodeforkey，rootdepartment实bodyforvalue
+        // processdataformat,byorganizationcodeforkey,rootdepartment实bodyforvalue
         $result = [];
         foreach ($rootDepartments as $department) {
             $result[$department->getOrganizationCode()] = $department;

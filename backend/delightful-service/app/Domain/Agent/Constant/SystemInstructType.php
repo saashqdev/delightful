@@ -136,14 +136,14 @@ enum SystemInstructType: int
     public static function requiresContent(int $type): bool
     {
         // 目front所havesystemfinger令allnotneedcontent
-        // ifnotcomehavesystemfinger令needcontent，caninthiswithinaddjudge
+        // ifnotcomehavesystemfinger令needcontent,caninthiswithinaddjudge
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };
     }
 
     /**
-     * ensuresystem交互finger令存in，if缺少then补充.
+     * ensuresystem交互finger令存in,if缺少then补充.
      * @return array return补充backfinger令array
      */
     public static function ensureSystemInstructs(array $instructs): array
@@ -163,7 +163,7 @@ enum SystemInstructType: int
             }
         }
 
-        // ifnothavetool栏group，createonenew
+        // ifnothavetool栏group,createonenew
         if (! $hasSystemGroup) {
             $toolbarGroup = [
                 'id' => (string) IdGenerator::getSnowId(),
@@ -200,7 +200,7 @@ enum SystemInstructType: int
         // 按枚举definitionordersortsystemfinger令
         ksort($systemInstructs);
 
-        // 重newgroup合tool栏group items，systemfinger令infront
+        // 重newgroup合tool栏group items,systemfinger令infront
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
         // updateoraddtool栏group

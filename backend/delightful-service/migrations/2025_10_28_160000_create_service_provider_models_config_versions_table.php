@@ -20,7 +20,7 @@ return new class extends Migration {
 
         Schema::create('service_provider_models_config_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('service_provider_model_id')->comment('modelID，associateservice_provider_models.id');
+            $table->unsignedBigInteger('service_provider_model_id')->comment('modelID,associateservice_provider_models.id');
 
             $table->decimal('creativity', 3, 2)->default(0.5)->comment('create力parameter');
             $table->integer('max_tokens')->nullable()->comment('mostbigtoken数');
@@ -44,7 +44,7 @@ return new class extends Migration {
             $table->decimal('cache_hit_cost', 10, 4)->nullable()->comment('cache命middlecost');
             $table->decimal('cache_write_cost', 10, 4)->nullable()->comment('cachewritecost');
             $table->integer('version')->default(1)->comment('versionnumber');
-            $table->boolean('is_current_version')->default(true)->comment('whethercurrentversion：1-is，0-否');
+            $table->boolean('is_current_version')->default(true)->comment('whethercurrentversion:1-is,0-否');
             $table->timestamps();
 
             $table->index(['service_provider_model_id', 'is_current_version'], 'idx_model_id_is_current');

@@ -14,7 +14,7 @@ use App\Domain\Chat\Entity\ValueObject\InstructionInsertLocation;
 use App\Domain\Chat\Entity\ValueObject\InstructionType;
 
 /**
- * finger令configuration实bodycategory，according to proto definition.
+ * finger令configuration实bodycategory,according to proto definition.
  */
 class InstructionConfig extends AbstractEntity
 {
@@ -29,7 +29,7 @@ class InstructionConfig extends AbstractEntity
     protected string $description = '';
 
     /**
-     * finger令property，1 普通finger令 2 systemfinger令.
+     * finger令property,1 普通finger令 2 systemfinger令.
      */
     protected int $displayType = InstructionDisplayType::Normal->value;
 
@@ -39,12 +39,12 @@ class InstructionConfig extends AbstractEntity
     protected string $id = '';
 
     /**
-     * finger令insertposition，1 messagecontentfront方，2 messagecontentmiddle光标position，3 messagecontentback方.
+     * finger令insertposition,1 messagecontentfront方,2 messagecontentmiddle光标position,3 messagecontentback方.
      */
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
     /**
-     * finger令type, 取value 1 forprocessfinger令，取value 2 forconversationfinger令，defaultfor conversationfinger令。
+     * finger令type, 取value 1 forprocessfinger令,取value 2 forconversationfinger令,defaultfor conversationfinger令.
      */
     protected int $instructionType = InstructionType::Conversation->value;
 
@@ -54,12 +54,12 @@ class InstructionConfig extends AbstractEntity
     protected string $name = '';
 
     /**
-     * 直接sendfinger令，userpoint击finger令backwill直接sendgive助理.
+     * 直接sendfinger令,userpoint击finger令backwill直接sendgive助理.
      */
     protected bool $sendDirectly = false;
 
     /**
-     * finger令groupitemtype，1 singleoption 2 switch 3 texttype 4 statustype.
+     * finger令groupitemtype,1 singleoption 2 switch 3 texttype 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 
@@ -81,7 +81,7 @@ class InstructionConfig extends AbstractEntity
     protected string $off = '';
 
     /**
-     * 常驻finger令，defaultonly读.
+     * 常驻finger令,defaultonly读.
      */
     protected bool $residency = true;
 
@@ -205,7 +205,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * @param null|array $values originalvaluearrayor InstructionValue objectarray，or null
+     * @param null|array $values originalvaluearrayor InstructionValue objectarray,or null
      */
     public function setValues($values): void
     {
@@ -227,13 +227,13 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // iffirstyuan素already经is InstructionValue object，then直接use
+        // iffirstyuan素already经is InstructionValue object,then直接use
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
         }
 
-        // 否then，willeachyuan素convertfor InstructionValue object
+        // 否then,willeachyuan素convertfor InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);
@@ -318,10 +318,10 @@ class InstructionConfig extends AbstractEntity
     /**
      * according tofinger令groupitemtypegetto应nameandvalue.
      *
-     * typeforswitcho clock，name 取is open/close，value 取 $instruction->getOn / $instruction->getOff
-     * typeforsingle-selecto clock, name 取is displayname，value：$instructionValue
-     * typeforstatusbuttono clock，name 取isstatustext，value: $instructionValue
-     * default name forempty， value = $instructionValue
+     * typeforswitcho clock,name 取is open/close,value 取 $instruction->getOn / $instruction->getOff
+     * typeforsingle-selecto clock, name 取is displayname,value:$instructionValue
+     * typeforstatusbuttono clock,name 取isstatustext,value: $instructionValue
+     * default name forempty, value = $instructionValue
      *
      * @param string $instructionValue finger令value
      * @return array returncontain name and value array

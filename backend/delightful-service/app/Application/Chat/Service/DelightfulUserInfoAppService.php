@@ -16,7 +16,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 /**
  * Delightfuluserinfoapplicationservice.
  *
- * aggregateuser基本info、accountinfoanddepartmentinfo，providecompleteuserinfo。
+ * aggregateuser基本info、accountinfoanddepartmentinfo,providecompleteuserinfo.
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {
@@ -80,7 +80,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      *
      * @param array $userIds userIDarray
      * @param ContactDataIsolation $dataIsolation data隔离object
-     * @return array userinfoarray，keyforuserID
+     * @return array userinfoarray,keyforuserID
      */
     public function getBatchUserInfo(array $userIds, ContactDataIsolation $dataIsolation): array
     {
@@ -108,7 +108,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      *
      * @param string $userId userID
      * @param ContactDataIsolation $dataIsolation data隔离object
-     * @return null|array maindepartmentinfo，ifnothavethenreturnnull
+     * @return null|array maindepartmentinfo,ifnothavethenreturnnull
      */
     public function getUserPrimaryDepartment(string $userId, ContactDataIsolation $dataIsolation): ?array
     {

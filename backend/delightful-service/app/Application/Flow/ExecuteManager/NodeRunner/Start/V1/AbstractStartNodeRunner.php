@@ -90,7 +90,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // ifnothaveuptime，or者distanceuptimetimesecondalready经超pass，that么thenneedexecute
+        // ifnothaveuptime,or者distanceuptimetimesecondalready经超pass,that么thenneedexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -163,10 +163,10 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // schedule入参，allbyoutside部call，judgeis哪branch
+        // schedule入参,allbyoutside部call,judgeis哪branch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
-            // nothave找toanybranch，直接运line
+            // nothave找toanybranch,直接运line
             $vertexResult->setChildrenIds([]);
             return [];
         }
@@ -254,7 +254,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜bottom，ifnothave agent processfinger令，尝试实o clockget
+        // 兜bottom,ifnothave agent processfinger令,尝试实o clockget
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
@@ -290,7 +290,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             if ($messageChatInstruction) {
                 $value = $messageChatInstruction->getValue();
             } else {
-                // ifmessagebodymiddlenothavefinger令value，usedefaultvalue
+                // ifmessagebodymiddlenothavefinger令value,usedefaultvalue
                 $value = $instructionConfig->getDefaultValue();
             }
             $instructions[$instructionConfig->getId()] = $instructionConfig->getNameAndValueByType($value);
@@ -362,7 +362,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
-            // 静默processupdatefail，notimpactmainprocess
+            // 静默processupdatefail,notimpactmainprocess
             $this->logger->warning('Failed to update voice message content (V1)', [
                 'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),

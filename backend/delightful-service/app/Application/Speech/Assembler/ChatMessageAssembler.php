@@ -30,12 +30,12 @@ readonly class ChatMessageAssembler
      *
      * @param ProcessSummaryTaskDTO $dto process总结taskDTO
      * @param AsrFileDataDTO $audioFileData audiofiledata
-     * @param null|AsrFileDataDTO $noteFileData 笔记filedata，optional
+     * @param null|AsrFileDataDTO $noteFileData 笔记filedata,optional
      * @return ChatRequest chatrequestobject
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
     {
-        // in协程environmentmiddle，use di() get translator instancebyensure协程updown文correct
+        // in协程environmentmiddle,use di() get translator instancebyensure协程updown文correct
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
@@ -65,17 +65,17 @@ readonly class ChatMessageAssembler
      *
      * @param string $modelId modelID
      * @param AsrFileDataDTO $fileData filedata
-     * @param null|AsrFileDataDTO $noteData 笔记filedata，optional
+     * @param null|AsrFileDataDTO $noteData 笔记filedata,optional
      * @return array messagecontentarray
      */
     public function buildMessageContent(string $modelId, AsrFileDataDTO $fileData, ?AsrFileDataDTO $noteData = null): array
     {
-        // in协程environmentmiddle，use di() get translator instancebyensure协程updown文correct
+        // in协程environmentmiddle,use di() get translator instancebyensure协程updown文correct
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
         if ($noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath)) {
-            // have笔记o clockmessagecontent：meanwhile提to录音fileand笔记file
+            // have笔记o clockmessagecontent:meanwhile提to录音fileand笔记file
 
             $messageContent = [
                 [
@@ -112,7 +112,7 @@ readonly class ChatMessageAssembler
                 ],
             ];
         } else {
-            // no笔记o clockmessagecontent：only提to录音file
+            // no笔记o clockmessagecontent:only提to录音file
             $messageContent = [
                 [
                     'type' => 'text',

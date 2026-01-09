@@ -14,7 +14,7 @@ class EasyFileTools
     public static function saveFile(string $path, string $stream): void
     {
         $file = fopen($path, 'wb');
-        // stream切割become1000kbsmallpiece，eachtimewritefile
+        // stream切割become1000kbsmallpiece,eachtimewritefile
 
         fwrite($file, $stream);
         fclose($file);
@@ -22,7 +22,7 @@ class EasyFileTools
 
     public static function mergeWavFiles(string $file1, string $blob): void
     {
-        // iffilenot存in，直接will blob writefornewfile
+        // iffilenot存in,直接will blob writefornewfile
         if (! file_exists($file1)) {
             self::saveFile($file1, $blob);
             return;
@@ -42,11 +42,11 @@ class EasyFileTools
         fwrite($wav1, $blob);
         $fileSize = ftell($wav1);
 
-        // 修just RIFF piecesize（file总size - 8）
+        // 修just RIFF piecesize(file总size - 8)
         fseek($wav1, 4);
         fwrite($wav1, pack('V', $fileSize - 8));
 
-        // 修just data piecesize（file总size - 44）
+        // 修just data piecesize(file总size - 44)
         fseek($wav1, 40);
         fwrite($wav1, pack('V', $fileSize - 44));
 

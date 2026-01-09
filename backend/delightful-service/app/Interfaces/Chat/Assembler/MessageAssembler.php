@@ -126,7 +126,7 @@ class MessageAssembler
         // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype，目frontonlyrecord收item方，need补充
+        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -155,7 +155,7 @@ class MessageAssembler
         // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype，目frontonlyrecord收item方，need补充
+        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -294,7 +294,7 @@ class MessageAssembler
                 continue;
             }
 
-            // ifnotiscurrentusermessage，andcontent超pass500character，thentruncate
+            // ifnotiscurrentusermessage,andcontent超pass500character,thentruncate
             if (! empty($currentUserNickname) && $role !== $currentUserNickname && mb_strlen($content, 'UTF-8') > 500) {
                 $content = mb_substr($content, 0, 500, 'UTF-8') . '...';
             }
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // ifistheoneitemmessage，even if超passlengthlimitalsowantcontain
+            // ifistheoneitemmessage,even if超passlengthlimitalsowantcontain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

@@ -17,10 +17,10 @@ class NoAuthentication implements AuthenticationInterface
 {
     /**
      * verifyrequest身shareinformation.
-     * inthisimplementmiddle，始终allow所haverequestpass.
+     * inthisimplementmiddle,始终allow所haverequestpass.
      */
     public function authenticate(MessageInterface $request): void
     {
-        // nullimplement，始终allow所haverequestpass
+        // nullimplement,始终allow所haverequestpass
     }
 }

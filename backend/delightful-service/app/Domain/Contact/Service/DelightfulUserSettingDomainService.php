@@ -69,7 +69,7 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * pass delightfulId saveusersetting（跨organization）.
+     * pass delightfulId saveusersetting(跨organization).
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
@@ -86,7 +86,7 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * pass delightfulId getusersetting（跨organization）.
+     * pass delightfulId getusersetting(跨organization).
      */
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity
     {

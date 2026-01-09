@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->integer('retry_max_times')->comment('retrymostbigcount')->nullable();
             $table->integer('retry_interval')->comment('retrytimebetween隔')->nullable();
             $table->datetimes();
-            $table->comment('exceptioninformation表，saveexceptiontype，whethercanretry，retrymostbigcount，retrytimebetween隔');
+            $table->comment('exceptioninformation表,saveexceptiontype,whethercanretry,retrymostbigcount,retrytimebetween隔');
         });
     }
 

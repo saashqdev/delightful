@@ -100,7 +100,7 @@ class GoogleGeminiAPI
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // closekey：finger定weneedgraphlikeresponse
+            'responseModalities' => ['TEXT', 'IMAGE'], // closekey:finger定weneedgraphlikeresponse
             'topP' => 0.95,
         ];
 
@@ -154,7 +154,7 @@ class GoogleGeminiAPI
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // closekey：finger定weneedgraphlikeresponse
+            'responseModalities' => ['TEXT', 'IMAGE'], // closekey:finger定weneedgraphlikeresponse
             'topP' => 0.95,
         ];
 

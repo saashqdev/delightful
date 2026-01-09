@@ -56,7 +56,7 @@ return new class extends Migration {
     }
 
     /**
-     * checkindexwhether存in，ifnot存inthencreateindex.
+     * checkindexwhether存in,ifnot存inthencreateindex.
      *
      * @param string $table table名
      * @param string $indexName indexname

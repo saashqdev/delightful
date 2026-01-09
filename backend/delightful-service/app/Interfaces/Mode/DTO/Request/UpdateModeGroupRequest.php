@@ -57,7 +57,7 @@ class UpdateModeGroupRequest extends FormRequest
 
     public function getName(): string
     {
-        // forcompatibleproperty，returnmiddle文name
+        // forcompatibleproperty,returnmiddle文name
         $nameI18n = $this->getNameI18n();
         return $nameI18n['zh_CN'] ?? '';
     }

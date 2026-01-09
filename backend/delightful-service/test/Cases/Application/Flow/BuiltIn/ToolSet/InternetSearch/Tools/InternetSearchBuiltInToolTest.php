@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本file属at灯塔engine版权所have，泄漏必究。
+ * 本file属at灯塔engine版权所have,泄漏必究.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -191,11 +191,11 @@ JSON, true));
 互联网search助hand
 
 ## process
-call`internet_search`conductsearch，ifuserhint词have`深degreesearch`four字，thenuse_deep_searchsetfortrue，否thensetforfalse
+call`internet_search`conductsearch,ifuserhint词have`深degreesearch`four字,thenuse_deep_searchsetfortrue,否thensetforfalse
 
 MARKDOWN,
 
-            'user_prompt' => '深degreesearch：东莞downweekday气',
+            'user_prompt' => '深degreesearch:东莞downweekday气',
         ]);
         $runner->execute($vertexResult, $executionData);
 

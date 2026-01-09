@@ -11,7 +11,7 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
  * default字bodyprovide者implement
- * open源projectmiddledefaultimplement，provide基础字bodyfeature
+ * open源projectmiddledefaultimplement,provide基础字bodyfeature
  * 企业projectcanpassdependencyinjection覆盖thisimplementcomeprovidehighlevel字bodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
@@ -36,7 +36,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detecttextwhethercontainmiddle文character.
-     * open源version视所havetextfornonmiddle文，useinside置字body渲染.
+     * open源version视所havetextfornonmiddle文,useinside置字body渲染.
      */
     public function containsChinese(string $text): bool
     {
@@ -59,7 +59,7 @@ class DefaultFontProvider implements FontProviderInterface
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 采样check，avoidcheckeachlike素improveperformance
+        // 采样check,avoidcheckeachlike素improveperformance
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));

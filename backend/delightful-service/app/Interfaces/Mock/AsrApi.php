@@ -63,7 +63,7 @@ class AsrApi
             'transcript_file_config' => $transcriptFileConfig,
         ]);
 
-        // initializetaskstatus（resetround询count）
+        // initializetaskstatus(resetround询count)
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 
@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * complete ASR task（supportround询）- V2 结构化version
+     * complete ASR task(supportround询)- V2 结构化version
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -130,14 +130,14 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟true实沙箱linefor：according to output_filename renamedirectory
-        // extract原directorymiddletime戳部minute（format：_YYYYMMDD_HHMMSS）
+        // 模拟true实沙箱linefor:according to output_filename renamedirectory
+        // extract原directorymiddletime戳部minute(format:_YYYYMMDD_HHMMSS)
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
         }
 
-        // buildnewdirectory名：智cantitle + time戳
+        // buildnewdirectory名:智cantitle + time戳
         $renamedDir = $outputFilename . $timestamp;
 
         // buildaudiofileinfo
@@ -159,7 +159,7 @@ class AsrApi
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // defaultfor null，table示笔记fileforemptyornot存in
+                'note_file' => null, // defaultfor null,table示笔记fileforemptyornot存in
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,15 +169,15 @@ class AsrApi
             ],
         ];
 
-        // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟true实沙箱笔记filecontentcheck）
+        // ifhave笔记fileconfigurationandfilesize > 0,addtoreturnmiddle(模拟true实沙箱笔记filecontentcheck)
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequestmiddleprovide target_path，whilenotis硬encodingfile名
+            // userequestmiddleprovide target_path,whilenotis硬encodingfile名
             // this样cancorrectsupport国际化file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟true实沙箱linefor：onlywhen笔记filehavecontento clock才returndetailedinfo
-            // thiswithinsimplifyprocess，defaultfalse设havecontent（true实沙箱willcheckfilecontentwhetherforempty）
+            // 模拟true实沙箱linefor:onlywhen笔记filehavecontento clock才returndetailedinfo
+            // thiswithinsimplifyprocess,defaultfalse设havecontent(true实沙箱willcheckfilecontentwhetherforempty)
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequestmiddle target_path
@@ -188,7 +188,7 @@ class AsrApi
             ];
         }
 
-        // ifhavestreamidentifyfileconfiguration，recorddelete操as
+        // ifhavestreamidentifyfileconfiguration,recorddelete操as
         if ($transcriptFileConfig !== null && isset($transcriptFileConfig['source_path'])) {
             $responseData['deleted_files'][] = [
                 'path' => $transcriptFileConfig['source_path'],

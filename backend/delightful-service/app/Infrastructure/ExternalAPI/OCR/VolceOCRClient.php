@@ -49,9 +49,9 @@ class VolceOCRClient implements OCRClientInterface
         $content = $response->getContents();
         $this->logger->info('火山OCRresponse: ' . $content);
         $result = Json::decode($content);
-        $code = $result['code'] ?? 0; // ifnothave 'code'，thenusedefaulterrorcode
+        $code = $result['code'] ?? 0; // ifnothave 'code',thenusedefaulterrorcode
         if ($code !== 10000) {
-            $message = $result['Message'] ?? '火山OCR遇toerror,message not存in'; // ifnothave 'message'，thenusedefaultmessage
+            $message = $result['Message'] ?? '火山OCR遇toerror,message not存in'; // ifnothave 'message',thenusedefaultmessage
             $this->logger->error(sprintf(
                 '火山OCR遇toerror:%s,',
                 $message,

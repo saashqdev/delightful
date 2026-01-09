@@ -15,22 +15,22 @@ use App\Infrastructure\Core\AbstractDTO;
 class CreateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * rolename（必填）.
+     * rolename(必填).
      */
     public string $name = '';
 
     /**
-     * rolestatus：0=disable, 1=enable（defaultenable）.
+     * rolestatus:0=disable, 1=enable(defaultenable).
      */
     public int $status = 1;
 
     /**
-     * permissionkeylist（optional）.
+     * permissionkeylist(optional).
      */
     public array $permissions = [];
 
     /**
-     * userIDlist（optional）.
+     * userIDlist(optional).
      */
     public array $userIds = [];
 
@@ -132,7 +132,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         }
 
         if (! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，onlycanis0or1';
+            $errors[] = 'rolestatusvalueinvalid,onlycanis0or1';
         }
 
         if (! empty($this->permissions)) {

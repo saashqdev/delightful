@@ -47,13 +47,13 @@ class ProviderAppService
         // 收collection所have唯oneservicequotientconfigurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
-        // batchquantitygetservicequotient实body（avoid嵌setquery）
+        // batchquantitygetservicequotient实body(avoid嵌setquery)
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
-        // batchquantitygetservicequotientconfiguration实body（useatget别名）
+        // batchquantitygetservicequotientconfiguration实body(useatget别名)
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收collection所havegraph标path按organizationencodingminutegroup（includemodelgraph标andservicequotientgraph标）
+        // 收collection所havegraph标path按organizationencodingminutegroup(includemodelgraph标andservicequotientgraph标)
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
@@ -124,7 +124,7 @@ class ProviderAppService
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
 
-            // ifhave国际化namethenuse，否thenmaintain原name
+            // ifhave国际化namethenuse,否thenmaintain原name
             if (! empty($localizedModelName)) {
                 $modelDTO->setName($localizedModelName);
             }

@@ -40,7 +40,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $baseModel->setId('official_rerank_model');
         $baseModel->setName('官方重rowmodel');
         $baseModel->setModelVersion('v1.0');
-        $baseModel->setDescription('基础重sortmodel，适useatgeneral场景');
+        $baseModel->setDescription('基础重sortmodel,适useatgeneral场景');
         $baseModel->setIcon('');
         $baseModel->setModelType(1);
         $baseModel->setCategory('rerank');

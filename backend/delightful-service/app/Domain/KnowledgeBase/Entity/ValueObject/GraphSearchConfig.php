@@ -13,21 +13,21 @@ use InvalidArgumentException;
 /**
  * graphsearchconfigurationvalueobject
  *
- * containgraphsearch相closeconfigurationparameter，如 API 端point、authinfo、timeoutsetetc
+ * containgraphsearch相closeconfigurationparameter,如 API 端point、authinfo、timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
      * close系weight.
      *
-     * graphsearchmiddleclose系weight，useatcalculatefinalsimilardegreeminute数
+     * graphsearchmiddleclose系weight,useatcalculatefinalsimilardegreeminute数
      */
     private float $relationWeight = 0.5;
 
     /**
      * mostbigsearch深degree.
      *
-     * graphsearchmostbig深degree，即fromup始sectionpointstart，at mostsearch几跳close系
+     * graphsearchmostbig深degree,即fromup始sectionpointstart,at mostsearch几跳close系
      */
     private int $maxDepth = 2;
 
@@ -53,9 +53,9 @@ class GraphSearchConfig extends AbstractValueObject
     private string $apiKey = '';
 
     /**
-     * timeouttime（second）.
+     * timeouttime(second).
      *
-     * API requesttimeouttime，unitforsecond
+     * API requesttimeouttime,unitforsecond
      */
     private float $timeout = 5.0;
 
@@ -69,14 +69,14 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * close系type.
      *
-     * searcho clock考虑close系typelist，foremptytable示所havetype
+     * searcho clock考虑close系typelist,foremptytable示所havetype
      */
     private array $relationTypes = [];
 
     /**
      * sectionpointtype.
      *
-     * searcho clock考虑sectionpointtypelist，foremptytable示所havetype
+     * searcho clock考虑sectionpointtypelist,foremptytable示所havetype
      */
     private array $nodeTypes = [];
 

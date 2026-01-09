@@ -50,10 +50,10 @@ interface ProviderModelRepositoryInterface
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array;
 
     /**
-     * getorganizationcanusemodellist（containorganizationfrom己modelandDelightfulmodel）.
+     * getorganizationcanusemodellist(containorganizationfrom己modelandDelightfulmodel).
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param null|Category $category modelcategory，foremptyo clockreturn所havecategorymodel
-     * @return ProviderModelEntity[] 按sort降序sortmodellist，containorganizationmodelandDelightfulmodel（notgo重）
+     * @param null|Category $category modelcategory,foremptyo clockreturn所havecategorymodel
+     * @return ProviderModelEntity[] 按sort降序sortmodellist,containorganizationmodelandDelightfulmodel(notgo重)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 
@@ -61,7 +61,7 @@ interface ProviderModelRepositoryInterface
      * batchquantityaccording toIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实bodyarray，byIDforkey
+     * @return ProviderModelEntity[] model实bodyarray,byIDforkey
      */
     public function getByIds(ProviderDataIsolation $dataIsolation, array $ids): array;
 
@@ -71,7 +71,7 @@ interface ProviderModelRepositoryInterface
      * batchquantityaccording toModelIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds modelidentifierarray
-     * @return array<string, ProviderModelEntity[]> model实bodyarray，bymodel_idforkey，valueforto应modellist
+     * @return array<string, ProviderModelEntity[]> model实bodyarray,bymodel_idforkey,valueforto应modellist
      */
     public function getByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array;
 
@@ -85,7 +85,7 @@ interface ProviderModelRepositoryInterface
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param ProviderModelQuery $query queryitemitem
-     * @return array<string, array<string>> 按modeltypeminutegroupmodelIDarray，format: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> 按modeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array;
 }

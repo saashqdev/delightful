@@ -28,7 +28,7 @@ enum VolcengineStatusCode: string
     case QUEUED = '20000002';
 
     /**
-     * muteaudio - no需重newquery，直接重newsubmit.
+     * muteaudio - no需重newquery,直接重newsubmit.
      */
     case SILENT_AUDIO = '20000003';
 
@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * judgewhetherforprocessmiddlestatus（includeprocessmiddleandrow队middle）.
+     * judgewhetherforprocessmiddlestatus(includeprocessmiddleandrow队middle).
      */
     public function isProcessing(): bool
     {
@@ -118,7 +118,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * judgewhetherforserviceinside部error（550xxxx系column）.
+     * judgewhetherforserviceinside部error(550xxxx系column).
      */
     public static function isInternalServerError(string $statusCode): bool
     {

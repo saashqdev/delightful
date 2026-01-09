@@ -49,11 +49,11 @@ class ByteDanceSTSService
     }
 
     /**
-     * according touserDelightful IDgetJWT Token（带cache）.
+     * according touserDelightful IDgetJWT Token(带cache).
      *
      * @param string $delightfulId userDelightful ID
-     * @param int $duration valid期（second），default7200second
-     * @param bool $refresh whetherforcerefreshtoken，defaultfalse
+     * @param int $duration valid期(second),default7200second
+     * @param bool $refresh whetherforcerefreshtoken,defaultfalse
      * @return array containJWT Tokenand相closeinfoarray
      * @throws Exception
      */
@@ -63,7 +63,7 @@ class ByteDanceSTSService
             ExceptionBuilder::throw(AsrErrorCode::InvalidDelightfulId, 'asr.config_error.invalid_delightful_id');
         }
 
-        // checkcache（ifnotisforcerefresh）
+        // checkcache(ifnotisforcerefresh)
         $cacheKey = $this->getCacheKey($delightfulId);
         if (! $refresh) {
             $cachedData = $this->getCachedJwtToken($cacheKey);
@@ -82,7 +82,7 @@ class ByteDanceSTSService
             }
         }
 
-        // cachemiddlenothaveoralreadyexpire，or者forcerefresh，getnewJWT Token
+        // cachemiddlenothaveoralreadyexpire,or者forcerefresh,getnewJWT Token
         $appId = config('asr.volcengine.app_id');
         $accessToken = config('asr.volcengine.token');
 
@@ -102,7 +102,7 @@ class ByteDanceSTSService
             'delightful_id' => $delightfulId,
         ];
 
-        // cacheJWT Token，提front30secondexpirebyavoidside界issue
+        // cacheJWT Token,提front30secondexpirebyavoidside界issue
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
@@ -121,7 +121,7 @@ class ByteDanceSTSService
      *
      * @param string $appId applicationID
      * @param string $accessToken accesstoken
-     * @param int $duration valid期（second），default7200second
+     * @param int $duration valid期(second),default7200second
      * @return string JWT token
      * @throws Exception
      */
@@ -191,7 +191,7 @@ class ByteDanceSTSService
     /**
      * useenvironmentvariableconfigurationgetJWT token.
      *
-     * @param int $duration valid期（second），default7200second
+     * @param int $duration valid期(second),default7200second
      * @return string JWT token
      * @throws Exception
      */
@@ -266,7 +266,7 @@ class ByteDanceSTSService
 
             $data = Json::decode($cachedData);
 
-            // checkwhetheralreadyexpire（额outsidesecuritycheck）
+            // checkwhetheralreadyexpire(额outsidesecuritycheck)
             if (isset($data['expires_at']) && $data['expires_at'] <= time()) {
                 $this->redis->del($cacheKey);
                 return null;
@@ -287,7 +287,7 @@ class ByteDanceSTSService
      *
      * @param string $cacheKey cachekey
      * @param array $tokenData Tokendata
-     * @param int $expiry expiretime（second）
+     * @param int $expiry expiretime(second)
      */
     private function cacheJwtToken(string $cacheKey, array $tokenData, int $expiry): void
     {

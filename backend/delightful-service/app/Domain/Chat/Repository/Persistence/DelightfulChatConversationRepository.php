@@ -251,7 +251,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
 
     /**
      * batchquantityupdatesessionwindow交互finger令.
-     * @param array $updateData formatfor：[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
+     * @param array $updateData formatfor:[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
      */
     public function batchUpdateInstructs(array $updateData): void
     {

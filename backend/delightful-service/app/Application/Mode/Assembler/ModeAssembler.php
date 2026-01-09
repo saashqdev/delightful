@@ -31,7 +31,7 @@ class ModeAssembler
         $groupAggregatesDTOs = [];
         foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
             $groupDTO = self::groupAggregateToDTO($groupAggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
-            // onlywhenminutegroupdownhavemodelorgraphlikemodelo clock才add（front台filteremptyminutegroup）
+            // onlywhenminutegroupdownhavemodelorgraphlikemodelo clock才add(front台filteremptyminutegroup)
             if (! empty($groupDTO->getModels()) || ! empty($groupDTO->getImageModels())) {
                 $groupAggregatesDTOs[] = $groupDTO;
             }
@@ -130,7 +130,7 @@ class ModeAssembler
             foreach ($groupAggregate->getRelations() as $relation) {
                 $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-                // ifprovidemodelinfo，then填充modelnameandgraph标
+                // ifprovidemodelinfo,then填充modelnameandgraph标
                 $providerModelId = $relation->getModelId();
                 if (isset($providerModels[$providerModelId])) {
                     $providerModel = $providerModels[$providerModelId];
@@ -149,7 +149,7 @@ class ModeAssembler
                 }
             }
 
-            // onlywhenminutegroupdownhavemodelo clock才add（front台filteremptyminutegroup）
+            // onlywhenminutegroupdownhavemodelo clock才add(front台filteremptyminutegroup)
             if (! empty($models)) {
                 $modeGroupDetailDTO->setModels($models);
                 $modeGroupDetailDTO->sortModels(); // tomodelsort
@@ -157,7 +157,7 @@ class ModeAssembler
             }
         }
 
-        // tominutegroupsort（降序，morebigmorefront）
+        // tominutegroupsort(降序,morebigmorefront)
         usort($flatGroups, function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });

@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         $knowledge = $event->knowledgeBaseEntity;
         $document = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // ifis基础knowledge basetype，then传knowledge basecreate者，avoidpermissionnot足
+        // ifis基础knowledge basetype,then传knowledge basecreate者,avoidpermissionnot足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -59,7 +59,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
 
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($dataIsolation, $document->getKnowledgeBaseCode());
 
-        // thiswithinneeddelete所haveslicesegment，indeletedocument
+        // thiswithinneeddelete所haveslicesegment,indeletedocument
         $query = new KnowledgeBaseFragmentQuery()->setDocumentCode($document->getCode());
         /** @var KnowledgeBaseFragmentEntity[][] $fragments */
         $fragments = [];
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         }
         $knowledgeBaseFragmentDomainService->batchChangeSyncStatus(array_column($fragments, 'id'), $fragmentSyncStatus, $fragmentSyncMessage);
 
-        // deleteslicesegmentcompleteback，willdocument同markforalreadydelete
+        // deleteslicesegmentcompleteback,willdocument同markforalreadydelete
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::createByBaseDataIsolation($dataIsolation);
         $documentDomainService->changeSyncStatus($knowledgeBaseDataIsolation, $document->setSyncStatus($documentSyncStatus->value));
     }

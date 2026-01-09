@@ -12,7 +12,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 class DefaultPackageFilter implements PackageFilterInterface
 {
     /**
-     * defaultimplement：notconductanyfilter，直接returnoriginalmodelcolumntable.
+     * defaultimplement:notconductanyfilter,直接returnoriginalmodelcolumntable.
      */
     public function getCurrentPackage(string $organizationCode): ?string
     {

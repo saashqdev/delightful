@@ -50,7 +50,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
             "type": "string",
             "key": "radio",
             "title": "generateimageratio例",
-            "description": "optional：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
+            "description": "optional:\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
             "encryption": false,
@@ -220,7 +220,7 @@ JSON,
 
     protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
-        // get助理userinfo。generateimageupload者is助理from己。
+        // get助理userinfo.generateimageupload者is助理from己.
         $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');

@@ -83,14 +83,14 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // canmeanwhilechoose多typemethod触hair，所byhe入参andout参放tothiswithincomeprocess
+            // canmeanwhilechoose多typemethod触hair,所byhe入参andout参放tothiswithincomeprocess
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // ifhavedown游sectionpoint，that么between隔timethennotcanforempty
+                    // ifhavedown游sectionpoint,that么between隔timethennotcanforempty
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
                         // second
                         $interval = $branch['config']['interval'] ?? 0;
@@ -112,7 +112,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::ParamCall:
                     $outputComponent = ComponentFactory::fastCreate($branch['output']['form'] ?? []);
-                    // parametercallcannoparameter触hair，for example触haironeevent
+                    // parametercallcannoparameter触hair,for example触haironeevent
                     if ($outputComponent) {
                         $output = new NodeOutput();
                         $output->setForm($outputComponent);
@@ -151,7 +151,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     $output = $this->getRoutineOutputTemplate();
                     break;
                 case TriggerType::LoopStart:
-                    // loopstartsectionpoint，notneedconfiguration
+                    // loopstartsectionpoint,notneedconfiguration
                     break;
                 default:
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.start.unsupported_trigger_type', ['trigger_type' => $triggerType->name]);

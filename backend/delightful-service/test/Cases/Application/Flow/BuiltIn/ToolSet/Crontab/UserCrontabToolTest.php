@@ -95,21 +95,21 @@ youisonecanhelpuserfastspeedcreateuserlevel别scheduletask助hand
 ## process
 1、call `create_user_crontab` toolcreateuserlevel别scheduletask
 2、currenttimeis:{$currentDateTime}
--topic_idis：750436587206451201
--agent_idis：725682656757252096
-​​3、youneedcheckday+time  whetherratiocurrenttimebig，ifnotbig，needreminderusertimeonlycanisnotcometime
-4、youneedguaranteeuserinputhint词middle，haveday, timeandnamevalue
+-topic_idis:750436587206451201
+-agent_idis:725682656757252096
+​​3、youneedcheckday+time  whetherratiocurrenttimebig,ifnotbig,needreminderusertimeonlycanisnotcometime
+4、youneedguaranteeuserinputhint词middle,haveday, timeandnamevalue
 
 # updown文
 
 
-user昵称is：currentuser昵称
+user昵称is:currentuser昵称
 
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮Icreateonescheduletask，taskname：reminderI做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminderI做饭message',
-            'user_prompt' => '帮Icreateonescheduletask，taskname：reminderI做饭，明day10pointreminderI，displayoneitemreminderI做饭message',
+            // 'user_prompt' => '帮Icreateonescheduletask,taskname:reminderI做饭,from明daystart,eachday早up9pointexecute,displayoneitemreminderI做饭message',
+            'user_prompt' => '帮Icreateonescheduletask,taskname:reminderI做饭,明day10pointreminderI,displayoneitemreminderI做饭message',
         ]);
 
         $runner->execute($vertexResult, $executionData);

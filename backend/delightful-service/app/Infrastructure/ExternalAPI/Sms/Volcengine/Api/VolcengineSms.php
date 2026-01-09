@@ -78,7 +78,7 @@ class VolcengineSms extends VolcengineApi
         } catch (Throwable$exception) {
             $errCode = -1;
             $msg = 'short信sendfail';
-            $this->logger->error('short信sendfail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
+            $this->logger->error('short信sendfail:' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
         // willreturnresultand创蓝统one,avoidbug
         return $sendResult->setResult($errCode, $msg);

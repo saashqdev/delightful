@@ -35,7 +35,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
         DelightfulConversationEntity $userConversationEntity,
     ): void {
         try {
-            // 1. getsend者（currentuser）info
+            // 1. getsend者(currentuser)info
             $senderUserId = $dataIsolation->getCurrentUserId();
             if (empty($senderUserId)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
@@ -51,7 +51,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
 
-            // 2. get超level麦吉（receive者）info
+            // 2. get超level麦吉(receive者)info
             $agentUserId = $messageDTO->getReceiveId();
             $agentUserEntity = $this->delightfulUserRepository->getUserById($agentUserId);
             if (! $agentUserEntity) {
@@ -86,7 +86,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             // from messageDTO middleget topicId
             $topicId = $messageDTO->getTopicId() ?? '';
 
-            // if topicId notforempty，verify话题whether属atcurrentuser
+            // if topicId notforempty,verify话题whether属atcurrentuser
             if (empty($topicId)) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
             }
@@ -95,7 +95,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $seqExtra->setTopicId($topicId);
             $seqEntity->setExtra($seqExtra);
 
-            // 5. createmessage实body (convertDTOforEntity，butnot持久化)
+            // 5. createmessage实body (convertDTOforEntity,butnot持久化)
             $messageEntity = new DelightfulMessageEntity();
             $messageEntity->setSenderId($messageDTO->getSenderId());
             $messageEntity->setSenderType($messageDTO->getSenderType());
@@ -110,7 +110,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             // 6. createsend者额outsideinfo
             $senderExtraDTO = new SenderExtraDTO();
-            // temporarymessagemaybenotneedenvironmentID，usedefaultvalue
+            // temporarymessagemaybenotneedenvironmentID,usedefaultvalue
             $senderExtraDTO->setDelightfulEnvId(null);
 
             // 7. 触hairusercall超level麦吉event
@@ -124,7 +124,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 $senderExtraDTO
             ));
         } catch (Throwable $e) {
-            // recorderrorlog，butnot阻断processprocess
+            // recorderrorlog,butnot阻断processprocess
             $this->logger?->error('HandleBeDelightfulInstructionMessage failed', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),

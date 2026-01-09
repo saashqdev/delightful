@@ -78,7 +78,7 @@ class ExecutionData
     private array $variables = [];
 
     /**
-     * attachment。processexecuteo clockproduce所havefilerecord.
+     * attachment.processexecuteo clockproduce所havefilerecord.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];
@@ -99,7 +99,7 @@ class ExecutionData
     private ?string $topicId = null;
 
     /**
-     * useas传递onethese特殊parameter，预留.
+     * useas传递onethese特殊parameter,预留.
      */
     private array $ext = [];
 

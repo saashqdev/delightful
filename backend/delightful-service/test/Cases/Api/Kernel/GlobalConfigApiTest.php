@@ -64,7 +64,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         // pass平台setinterfaceset
         $this->put('/api/v1/platform/setting', $platformPayload, $this->getCommonHeaders());
 
-        // getall局configuration，shouldcontain平台set
+        // getall局configuration,shouldcontain平台set
         $response = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
@@ -106,7 +106,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertIsBool($data['is_maintenance']);
         $this->assertIsString($data['maintenance_description']);
 
-        // ifhave平台set，verifyits结构
+        // ifhave平台set,verifyits结构
         if (isset($data['logo'])) {
             $this->assertIsArray($data['logo']);
         }

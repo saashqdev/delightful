@@ -27,7 +27,7 @@ class Attachment extends AbstractAttachment
         $this->size = $size;
         $this->chatFileId = $chatFileId;
         $this->url = trim($url);
-        // ifnothave ext，from url middleextract
+        // ifnothave ext,from url middleextract
         if (empty($this->ext)) {
             $this->ext = FileType::getType($this->url);
         } else {

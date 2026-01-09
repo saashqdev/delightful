@@ -12,7 +12,7 @@ use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
  * ASRtaskstatusDTO - manageRedis Hashfieldmapping.
- * thisnotisfrom JSON response结构come，whileisuseatmanagetaskstatus
+ * thisnotisfrom JSON response结构come,whileisuseatmanagetaskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -20,20 +20,20 @@ class AsrTaskStatusDTO
 
     public string $userId = '';
 
-    public ?string $organizationCode = null; // organizationencoding（useatfrom动总结）
+    public ?string $organizationCode = null; // organizationencoding(useatfrom动总结)
 
-    // analogous：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
+    // analogous:project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
     public ?string $filePath = null; // work区filepath
 
-    // fileID（databasemiddleactualID）
-    public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表backreturnID）
+    // fileID(databasemiddleactualID)
+    public ?string $audioFileId = null; // audiofileID(writedelightful_super_agent_task_files表backreturnID)
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名（andaudiofilein同onedirectory，fornullindicateno笔记file）
+    public ?string $noteFileName = null; // notefile名(andaudiofilein同onedirectory,fornullindicateno笔记file)
 
-    public ?string $noteFileId = null; // notefileID（useatchatmessagemiddlefilequote）
+    public ?string $noteFileId = null; // notefileID(useatchatmessagemiddlefilequote)
 
-    // presetfileinfo（useatfront端write）
+    // presetfileinfo(useatfront端write)
     public ?string $presetNoteFileId = null; // preset笔记fileID
 
     public ?string $presetTranscriptFileId = null; // presetstreamidentifyfileID
@@ -48,9 +48,9 @@ class AsrTaskStatusDTO
     public ?string $topicId = null; // 话题ID
 
     // 录音directoryinfo
-    public ?string $tempHiddenDirectory = null; // hiddendirectorypath（存放minuteslicefile）
+    public ?string $tempHiddenDirectory = null; // hiddendirectorypath(存放minuteslicefile)
 
-    public ?string $displayDirectory = null; // displaydirectorypath（存放streamtextand笔记）
+    public ?string $displayDirectory = null; // displaydirectorypath(存放streamtextand笔记)
 
     public ?int $tempHiddenDirectoryId = null; // hiddendirectoryfileID
 
@@ -59,13 +59,13 @@ class AsrTaskStatusDTO
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
     // 录音statusmanagefield
-    public ?string $modelId = null; // AI modelID，useatfrom动总结
+    public ?string $modelId = null; // AI modelID,useatfrom动总结
 
-    public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
+    public ?string $recordingStatus = null; // 录音status:start|recording|paused|stopped
 
     public bool $sandboxTaskCreated = false; // 沙箱taskwhetheralreadycreate
 
-    public bool $isPaused = false; // whether处atpausestatus（useattimeoutjudge）
+    public bool $isPaused = false; // whether处atpausestatus(useattimeoutjudge)
 
     public ?string $sandboxId = null; // 沙箱ID
 
@@ -75,16 +75,16 @@ class AsrTaskStatusDTO
 
     public bool $serverSummaryLocked = false; // service端总结whetherlock定customer端
 
-    // ASR contentand笔记（useatgeneratetitle）
+    // ASR contentand笔记(useatgeneratetitle)
     public ?string $asrStreamContent = null; // ASR streamidentifycontent
 
     public ?string $noteContent = null; // 笔记content
 
-    public ?string $noteFileType = null; // 笔记filetype（md、txt、json）
+    public ?string $noteFileType = null; // 笔记filetype(md、txt、json)
 
-    public ?string $language = null; // 语type（zh_CN、en_USetc），useatgeneratetitleo clockuse
+    public ?string $language = null; // 语type(zh_CN、en_USetc),useatgeneratetitleo clockuse
 
-    public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle（useat summary 复use）
+    public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle(useat summary 复use)
 
     public function __construct(array $data = [])
     {
@@ -102,7 +102,7 @@ class AsrTaskStatusDTO
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
-        // 录音directoryinfo（from动清洗for相topath）
+        // 录音directoryinfo(from动清洗for相topath)
         $this->tempHiddenDirectory = self::extractRelativePath(
             self::getStringValue($data, ['temp_hidden_directory', 'tempHiddenDirectory'])
         );
@@ -145,7 +145,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * convertforarray（useatstoragetoRedis）.
+     * convertforarray(useatstoragetoRedis).
      *
      * @return array<string, null|bool|int|string>
      */
@@ -187,7 +187,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * checkwhetherfornull（not存in）.
+     * checkwhetherfornull(not存in).
      */
     public function isEmpty(): bool
     {
@@ -203,8 +203,8 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check总结whetheralreadycomplete（poweretcpropertyjudge）.
-     * judgestandard：audiofilealreadymerge（audioFileId 存in）and录音alreadystop.
+     * check总结whetheralreadycomplete(poweretcpropertyjudge).
+     * judgestandard:audiofilealreadymerge(audioFileId 存in)and录音alreadystop.
      */
     public function isSummaryCompleted(): bool
     {
@@ -243,8 +243,8 @@ class AsrTaskStatusDTO
 
     /**
      * extract相toat workspace 相topath
-     * ifpathcontain workspace/，extractitsback部minute
-     * this样canfrom动修just Redis middlestorageoldformatdata（completepath）.
+     * ifpathcontain workspace/,extractitsback部minute
+     * this样canfrom动修just Redis middlestorageoldformatdata(completepath).
      *
      * @param null|string $path originalpath
      * @return null|string 相topath
@@ -255,7 +255,7 @@ class AsrTaskStatusDTO
             return $path;
         }
 
-        // ifpathcontain workspace/，extract workspace/ backsurface部minute
+        // ifpathcontain workspace/,extract workspace/ backsurface部minute
         if (str_contains($path, 'workspace/')) {
             $parts = explode('workspace/', $path, 2);
             return $parts[1] ?? $path;
@@ -265,10 +265,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetstringvalue（support snake_case and camelCase）.
+     * fromarraymiddle按优先levelgetstringvalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名column表（按优先levelsort）
+     * @param array<string> $keys key名column表(按优先levelsort)
      * @param null|string $default defaultvalue
      */
     private static function getStringValue(array $data, array $keys, ?string $default = null): ?string
@@ -282,10 +282,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetintegervalue（support snake_case and camelCase）.
+     * fromarraymiddle按优先levelgetintegervalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名column表（按优先levelsort）
+     * @param array<string> $keys key名column表(按优先levelsort)
      * @param null|int $default defaultvalue
      */
     private static function getIntValue(array $data, array $keys, ?int $default = null): ?int
@@ -299,10 +299,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetbooleanvalue（support多typeformat：true/false、1/0、'1'/'0'）.
+     * fromarraymiddle按优先levelgetbooleanvalue(support多typeformat:true/false、1/0、'1'/'0').
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名column表（按优先levelsort）
+     * @param array<string> $keys key名column表(按优先levelsort)
      */
     private static function getBoolValue(array $data, array $keys): bool
     {

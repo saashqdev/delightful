@@ -132,12 +132,12 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
 
     public function getAgentById(string $agentId): DelightfulAgentEntity
     {
-        // querydatabase，getfinger定 agentId and userId data
+        // querydatabase,getfinger定 agentId and userId data
         $agent = $this->agentModel::query()
             ->where('id', $agentId)
             ->first();
 
-        // ifqueryresultforempty，throwexceptionorreturn null，according tobusiness需求process
+        // ifqueryresultforempty,throwexceptionorreturn null,according tobusiness需求process
         if (! $agent) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
@@ -278,7 +278,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * query企业down所have助理,itemitemquery：status，createperson，search.
+     * query企业down所have助理,itemitemquery:status,createperson,search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array

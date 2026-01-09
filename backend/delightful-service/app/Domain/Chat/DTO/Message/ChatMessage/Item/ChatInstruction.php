@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage\Item;
 use App\Domain\Chat\Entity\AbstractEntity;
 
 /**
- * chatinstruction实bodycategory，according to proto definition.
+ * chatinstruction实bodycategory,according to proto definition.
  */
 class ChatInstruction extends AbstractEntity
 {
@@ -51,7 +51,7 @@ class ChatInstruction extends AbstractEntity
                 $this->instruction = new InstructionConfig($instruction);
             /* @phpstan-ignore-next-line */
             } elseif (! $instruction instanceof InstructionConfig) {
-                // ifnotisarrayalsonotis InstructionConfig object，thencreateonenull InstructionConfig object
+                // ifnotisarrayalsonotis InstructionConfig object,thencreateonenull InstructionConfig object
                 $this->instruction = new InstructionConfig([]);
             }
         } else {

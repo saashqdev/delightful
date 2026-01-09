@@ -121,19 +121,19 @@ class AsrApi extends AbstractApi
         $userId = $userAuthorization->getId();
         $summaryRequest = $this->validateAndBuildSummaryRequest($request, $userAuthorization);
 
-        // statuscheck：ifnotispass file_id hairup总结，needchecktaskstatus
+        // statuscheck:ifnotispass file_id hairup总结,needchecktaskstatus
         if (! $summaryRequest->hasFileId()) {
             $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($summaryRequest->taskKey, $userId);
 
             if (! $taskStatus->isEmpty()) {
-                // statuscheck 1：taskalreadycancel，notallow总结
+                // statuscheck 1:taskalreadycancel,notallow总结
                 if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value) {
                     ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
                 }
 
-                // statuscheck 2：taskalreadycomplete（onlyinthiswithinrecordlog，allow重new总结bymore换model）
+                // statuscheck 2:taskalreadycomplete(onlyinthiswithinrecordlog,allow重new总结bymore换model)
                 if ($taskStatus->isSummaryCompleted()) {
-                    $this->logger->info('taskalreadycomplete，allowusenewmodel重new总结', [
+                    $this->logger->info('taskalreadycomplete,allowusenewmodel重new总结', [
                         'task_key' => $summaryRequest->taskKey,
                         'old_model_id' => $taskStatus->modelId,
                         'new_model_id' => $summaryRequest->modelId,
@@ -142,7 +142,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // applicationlayeralreadyhaveminute布typelock，thiswithinno需againaddlock，直接call
+        // applicationlayeralreadyhaveminute布typelock,thiswithinno需againaddlock,直接call
         try {
             // handle总结task
             $result = $this->asrFileAppService->processSummaryWithChat($summaryRequest, $userAuthorization);
@@ -188,7 +188,7 @@ class AsrApi extends AbstractApi
             'has_file_name' => ! empty($fileName),
         ]);
 
-        // 2. getminute布typelock（preventandhaircreatedirectory）
+        // 2. getminute布typelock(preventandhaircreatedirectory)
         $lockName = sprintf('asr:upload_token:lock:%s:%s', $userId, $taskKey);
         $lockOwner = sprintf('%s:%s', $userId, microtime(true));
         $locked = $this->locker->spinLock($lockName, $lockOwner);
@@ -198,7 +198,7 @@ class AsrApi extends AbstractApi
         }
 
         try {
-            // 3. create .asr_recordings 父directory（所have录音typeallneed）
+            // 3. create .asr_recordings 父directory(所have录音typeallneed)
             try {
                 $recordingsDir = $this->directoryService->createRecordingsDirectory($organizationCode, $projectId, $userId);
                 $this->logger->info('.asr_recordings 父directorycreateorconfirm存in', [
@@ -216,7 +216,7 @@ class AsrApi extends AbstractApi
                 ]);
             }
 
-            // 4. create .asr_states directory（所have录音typeallneed）
+            // 4. create .asr_states directory(所have录音typeallneed)
             try {
                 $statesDir = $this->directoryService->createStatesDirectory($organizationCode, $projectId, $userId);
                 $this->logger->info('.asr_states directorycreateorconfirm存in', [
@@ -234,7 +234,7 @@ class AsrApi extends AbstractApi
                 ]);
             }
 
-            // 5. 预先generatetitle（forincreatedirectoryo clockuse）
+            // 5. 预先generatetitle(forincreatedirectoryo clockuse)
             $generatedTitle = null;
             // getcurrentstatusbycheckwhetheralready存intitle
             $currentTaskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
@@ -279,7 +279,7 @@ class AsrApi extends AbstractApi
             // 6. getSTS Token
             $tokenData = $this->buildStsToken($userAuthorization, $projectId, $userId);
 
-            // 7. createpresetfile（ifalsonotcreate，and录音typeneedpresetfile）
+            // 7. createpresetfile(ifalsonotcreate,and录音typeneedpresetfile)
             if (
                 empty($taskStatus->presetNoteFileId)
                 && ! empty($taskStatus->displayDirectory)
@@ -370,15 +370,15 @@ class AsrApi extends AbstractApi
         if ($statusEnum === null) {
             ExceptionBuilder::throw(
                 GenericErrorCode::ParameterMissing,
-                sprintf('invalidstatus，validvalue：%s', implode(', ', ['start', 'recording', 'paused', 'stopped', 'canceled']))
+                sprintf('invalidstatus,validvalue:%s', implode(', ', ['start', 'recording', 'paused', 'stopped', 'canceled']))
             );
         }
 
-        // statuscheck：getcurrenttaskstatus
+        // statuscheck:getcurrenttaskstatus
         $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
         if (! $taskStatus->isEmpty()) {
             if ($taskStatus->hasServerSummaryLock()) {
-                $this->logger->info('reportStatus service端总结conductmiddle，rejectstatusup报', [
+                $this->logger->info('reportStatus service端总结conductmiddle,rejectstatusup报', [
                     'task_key' => $taskKey,
                     'user_id' => $userId,
                     'retry_count' => $taskStatus->serverSummaryRetryCount,
@@ -386,12 +386,12 @@ class AsrApi extends AbstractApi
                 ExceptionBuilder::throw(AsrErrorCode::TaskIsSummarizing);
             }
 
-            // statuscheck 1：taskalreadycomplete，notallow报告status（unlessis canceled）
+            // statuscheck 1:taskalreadycomplete,notallow报告status(unlessis canceled)
             if ($statusEnum !== AsrRecordingStatusEnum::CANCELED && $taskStatus->isSummaryCompleted()) {
                 ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCompleted);
             }
 
-            // statuscheck 2：taskalreadycancel，notallowagain报告otherstatus
+            // statuscheck 2:taskalreadycancel,notallowagain报告otherstatus
             if (
                 $taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value
                 && $statusEnum !== AsrRecordingStatusEnum::CANCELED
@@ -399,7 +399,7 @@ class AsrApi extends AbstractApi
                 ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
             }
 
-            // statuscheck 3：录音alreadystopandalreadymerge，notallowagain start/recording（maybeiscore跳timeoutfrom动stop）
+            // statuscheck 3:录音alreadystopandalreadymerge,notallowagain start/recording(maybeiscore跳timeoutfrom动stop)
             if (
                 $taskStatus->recordingStatus === AsrRecordingStatusEnum::STOPPED->value
                 && ! empty($taskStatus->audioFileId)
@@ -451,7 +451,7 @@ class AsrApi extends AbstractApi
             $asrStreamContent = mb_substr($asrStreamContent, 0, 10000);
         }
 
-        // ifhavefile_idandnothavetask_key，generateone
+        // ifhavefile_idandnothavetask_key,generateone
         if (! empty($fileId) && empty($taskKey)) {
             $taskKey = uniqid('', true);
         }
@@ -476,10 +476,10 @@ class AsrApi extends AbstractApi
         // handle笔记
         $note = $this->parseNoteData($noteData);
 
-        // generatetitle：优先from Redis middle复use upload-tokens generatetitle
+        // generatetitle:优先from Redis middle复use upload-tokens generatetitle
         $generatedTitle = null;
 
-        // 1. 尝试from Redis middlegetalreadygeneratetitle（file直传场景）
+        // 1. 尝试from Redis middlegetalreadygeneratetitle(file直传场景)
         if (! empty($taskKey)) {
             $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userAuthorization->getId());
             if (! empty($taskStatus->uploadGeneratedTitle) && ! $taskStatus->isEmpty()) {
@@ -491,7 +491,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // 2. ifnothavefrom Redis gettotitle，then重newgenerate（front端录音orold逻辑）
+        // 2. ifnothavefrom Redis gettotitle,then重newgenerate(front端录音orold逻辑)
         if (empty($generatedTitle)) {
             $generatedTitle = $this->titleGeneratorService->generateTitleForScenario(
                 $userAuthorization,
@@ -536,7 +536,7 @@ class AsrApi extends AbstractApi
         if (! $note->isValidFileType()) {
             ExceptionBuilder::throw(
                 GenericErrorCode::ParameterMissing,
-                sprintf('not supportedfiletype: %s，supporttype: txt, md, json', $noteFileType)
+                sprintf('not supportedfiletype: %s,supporttype: txt, md, json', $noteFileType)
             );
         }
 
@@ -588,7 +588,7 @@ class AsrApi extends AbstractApi
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, trans('asr.exception.topic_id_empty'));
         }
 
-        // validate录音typeparameter（optional，defaultfor file_upload）
+        // validate录音typeparameter(optional,defaultfor file_upload)
         $typeString = $request->input('type', '');
         $recordingType = empty($typeString)
             ? AsrRecordingTypeEnum::default()
@@ -603,7 +603,7 @@ class AsrApi extends AbstractApi
 
         $projectId = $this->asrFileAppService->getProjectIdFromTopic((int) $topicId, $userId);
 
-        // getfile名（onlyin file_upload typeo clockuse）
+        // getfile名(onlyin file_upload typeo clockuse)
         $fileName = $request->input('file_name', '');
 
         return [$taskKey, $topicId, $projectId, $recordingType, $fileName];
@@ -623,12 +623,12 @@ class AsrApi extends AbstractApi
         $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
 
         if ($taskStatus->isEmpty()) {
-            // theonetimecall：createnewtaskstatus
+            // theonetimecall:createnewtaskstatus
             return $this->createNewTaskStatus($taskKey, $topicId, $projectId, $userId, $organizationCode, $generatedTitle);
         }
 
         if ($taskStatus->hasServerSummaryLock()) {
-            $this->logger->info('getUploadToken service端总结conductmiddle，rejecthair放uploadvoucher', [
+            $this->logger->info('getUploadToken service端总结conductmiddle,rejecthair放uploadvoucher', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'retry_count' => $taskStatus->serverSummaryRetryCount,
@@ -636,17 +636,17 @@ class AsrApi extends AbstractApi
             ExceptionBuilder::throw(AsrErrorCode::TaskIsSummarizing);
         }
 
-        // statuscheck 1：taskalreadycomplete，notallowupload
+        // statuscheck 1:taskalreadycomplete,notallowupload
         if ($taskStatus->isSummaryCompleted()) {
             ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCompleted);
         }
 
-        // statuscheck 2：taskalreadycancel，notallowupload
+        // statuscheck 2:taskalreadycancel,notallowupload
         if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value) {
             ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
         }
 
-        // statuscheck 3：录音alreadystop，notallowupload（maybeiscore跳timeoutfrom动stop）
+        // statuscheck 3:录音alreadystop,notallowupload(maybeiscore跳timeoutfrom动stop)
         if (
             $taskStatus->recordingStatus === AsrRecordingStatusEnum::STOPPED->value
             && ! empty($taskStatus->audioFileId)
@@ -654,12 +654,12 @@ class AsrApi extends AbstractApi
             ExceptionBuilder::throw(AsrErrorCode::TaskAutoStoppedByTimeout);
         }
 
-        // back续call：update必wantfield
+        // back续call:update必wantfield
         $this->asrFileAppService->validateProjectAccess($projectId, $userId, $organizationCode);
         $taskStatus->projectId = $projectId;
         $taskStatus->topicId = $topicId;
 
-        $this->logger->info('back续call getUploadToken，usealreadyhavedirectory', [
+        $this->logger->info('back续call getUploadToken,usealreadyhavedirectory', [
             'task_key' => $taskKey,
             'hidden_directory' => $taskStatus->tempHiddenDirectory,
             'display_directory' => $taskStatus->displayDirectory,
@@ -680,7 +680,7 @@ class AsrApi extends AbstractApi
         string $organizationCode,
         ?string $generatedTitle = null
     ): AsrTaskStatusDTO {
-        $this->logger->info('theonetimecall getUploadToken，createnewdirectory', [
+        $this->logger->info('theonetimecall getUploadToken,createnewdirectory', [
             'task_key' => $taskKey,
             'project_id' => $projectId,
             'topic_id' => $topicId,

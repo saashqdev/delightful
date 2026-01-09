@@ -27,7 +27,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * retrievemethod.
      *
-     * optionalvalue：
+     * optionalvalue:
      * - semantic_search: 语义retrieve
      * - full_text_search: all文retrieve
      * - hybrid_search: 混合retrieve
@@ -57,7 +57,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 重sort模type.
      *
-     * optionalvalue：
+     * optionalvalue:
      * - reranking_model: use重sortmodel
      * - weighted_score: useadd权minute数
      *

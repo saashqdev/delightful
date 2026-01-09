@@ -73,7 +73,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         // verifyknowledge basepermission
         $this->checkKnowledgeBaseOperation($dataIsolation, 'r', $query->getKnowledgeBaseCode(), $query->getCode());
 
-        // compatibleolddata，newdefaultdocument
+        // compatibleolddata,newdefaultdocument
         $fragmentQuery = new KnowledgeBaseFragmentQuery();
         $fragmentQuery->setKnowledgeCode($query->getKnowledgeBaseCode());
         $fragmentQuery->setIsDefaultDocumentCode(true);
@@ -154,11 +154,11 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         // call领域service重newtoquantity化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // byathistorydocumentnothave document_file field，notcanbe重newtoquantity化
+        // byathistorydocumentnothave document_file field,notcanbe重newtoquantity化
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }
-        // minutehairevent，重newtoquantity化
+        // minutehairevent,重newtoquantity化
         $documentSavedEvent = new KnowledgeBaseDocumentSavedEvent(
             $dataIsolation,
             $knowledgeBaseEntity,

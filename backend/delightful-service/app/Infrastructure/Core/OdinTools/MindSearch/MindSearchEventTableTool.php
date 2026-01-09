@@ -11,7 +11,7 @@ class MindSearchEventTableTool
 {
     public static string $name = 'generateRelationEventsTable';
 
-    public static string $description = 'according touser提问andsearchresult，generate相closeeventcolumn表';
+    public static string $description = 'according touser提问andsearchresult,generate相closeeventcolumn表';
 
     protected static array $parameters = [
         'type' => 'object',

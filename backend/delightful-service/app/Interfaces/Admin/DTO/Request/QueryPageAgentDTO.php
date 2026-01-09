@@ -15,13 +15,13 @@ class QueryPageAgentDTO extends AbstractDTO
 
     protected int $pageSize = 15;
 
-    // 助理status：start/disable
+    // 助理status:start/disable
     protected ?int $status = null;
 
     // createperson
     protected ?string $createdUid = null;
 
-    // itemitemquery：name/description
+    // itemitemquery:name/description
     protected ?string $query = null;
 
     public function getPage(): int

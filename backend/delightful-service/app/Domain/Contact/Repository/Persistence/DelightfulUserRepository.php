@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // thetwotimequery：according to delightful_id query所havethe账numberindifferentorganizationmiddleuserrecord
+        // thetwotimequery:according to delightful_id query所havethe账numberindifferentorganizationmiddleuserrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)

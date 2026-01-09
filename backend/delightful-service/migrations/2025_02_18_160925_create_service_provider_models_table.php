@@ -24,14 +24,14 @@ return new class extends Migration {
             $table->string('name', 50)->comment('modelname');
             $table->string('model_version', 50)->comment('modelinservicequotientdownname');
             $table->string('model_id', 50)->comment('modeltrue实ID');
-            $table->string('category')->comment('modelcategory：llm/vlm');
+            $table->string('category')->comment('modelcategory:llm/vlm');
             $table->tinyInteger('model_type')->comment('specifictype,useatminutegroupuse');
             $table->json('config')->comment('modelconfigurationinformation');
             $table->string('description', 255)->nullable()->comment('modeldescription');
             $table->integer('sort')->default(0)->comment('sort');
             $table->string('icon')->default('')->comment('graph标');
             $table->string('organization_code')->comment('organizationencoding');
-            $table->tinyInteger('status')->default(0)->comment('status：0-notenable，1-enable');
+            $table->tinyInteger('status')->default(0)->comment('status:0-notenable,1-enable');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_service_provider_config_id');

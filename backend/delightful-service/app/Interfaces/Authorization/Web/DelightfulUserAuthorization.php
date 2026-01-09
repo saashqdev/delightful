@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改thiscategoryname/property/命名emptybetween，请modify WebUserGuard.php  cacheKey ，avoidcacheno法also原
+ * if改thiscategoryname/property/命名emptybetween,请modify WebUserGuard.php  cacheKey ,avoidcacheno法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
@@ -111,12 +111,12 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多environmentdown $authorization maybeduplicate，willhaveissue（概rate趋近infinitesmall）
+        // 多environmentdown $authorization maybeduplicate,willhaveissue(概rate趋近infinitesmall)
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
             if ($delightfulEnvEntity === null) {
-                // tokennothavebindenvironment，andnothavedefaultenvironmentconfiguration
+                // tokennothavebindenvironment,andnothavedefaultenvironmentconfiguration
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }

@@ -66,7 +66,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * convertforarray（tobackcompatible）.
+     * convertforarray(tobackcompatible).
      */
     public function toArray(): array
     {

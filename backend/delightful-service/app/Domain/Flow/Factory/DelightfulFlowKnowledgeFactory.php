@@ -45,17 +45,17 @@ class DelightfulFlowKnowledgeFactory
 
         // processretrieveconfiguration
         if (! empty($model->retrieve_config)) {
-            // ifisstring（JSON string），先decoding
+            // ifisstring(JSON string),先decoding
             $config = json_decode($model->retrieve_config, true);
 
             if (is_array($config)) {
                 $entity->setRetrieveConfig(RetrieveConfig::fromArray($config));
             } else {
-                // ifconfigurationinvalid，settingdefaultconfiguration
+                // ifconfigurationinvalid,settingdefaultconfiguration
                 $entity->setRetrieveConfig(RetrieveConfig::createDefault());
             }
         } else {
-            // ifconfigurationfornull，settingdefaultconfiguration
+            // ifconfigurationfornull,settingdefaultconfiguration
             $entity->setRetrieveConfig(RetrieveConfig::createDefault());
         }
 

@@ -48,7 +48,7 @@ class RoleApi extends AbstractPermissionApi
         // createpaginationobject
         $page = $this->createPage();
 
-        // buildqueryobject（from动filter掉paginationfield）
+        // buildqueryobject(from动filter掉paginationfield)
         $query = new SubAdminQuery($this->request->all());
 
         // convertfor仓储filterarray
@@ -57,7 +57,7 @@ class RoleApi extends AbstractPermissionApi
         // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // batchquantitygetuserdetail（eachroleonly取front5userId）
+        // batchquantitygetuserdetail(eachroleonly取front5userId)
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()

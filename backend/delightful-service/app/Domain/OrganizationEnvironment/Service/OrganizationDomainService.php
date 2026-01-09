@@ -66,7 +66,7 @@ readonly class OrganizationDomainService
                     true // markfororganizationcreateperson
                 );
             } catch (Throwable $e) {
-                // if授予administratorpermissionfail，recordlogbutnotimpactorganizationcreate
+                // if授予administratorpermissionfail,recordlogbutnotimpactorganizationcreate
                 error_log("Failed to grant organization admin permission for creator {$creatorId}: " . $e->getMessage());
             }
         }
@@ -83,7 +83,7 @@ readonly class OrganizationDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
 
-        // checkencodingwhetheralready存in（rowexceptcurrentorganization）
+        // checkencodingwhetheralready存in(rowexceptcurrentorganization)
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }

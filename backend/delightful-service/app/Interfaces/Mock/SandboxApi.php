@@ -100,12 +100,12 @@ class SandboxApi
         ]);
 
         // 模拟work区then绪status
-        // notice：status mustreturnintegertype，to应 WorkspaceStatus constant
+        // notice:status mustreturnintegertype,to应 WorkspaceStatus constant
         return [
             'code' => 1000,
             'message' => 'success',
             'data' => [
-                'status' => WorkspaceStatus::READY, // initializecomplete，work区完allcanuse
+                'status' => WorkspaceStatus::READY, // initializecomplete,work区完allcanuse
                 'sandbox_id' => $sandboxId,
                 'workspace_path' => '/workspace',
                 'is_ready' => true,
@@ -146,10 +146,10 @@ class SandboxApi
     }
 
     /**
-     * initialize沙箱（simplify版，useat ASR etcnochatmessage场景）
+     * initialize沙箱(simplify版,useat ASR etcnochatmessage场景)
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
-     * requestbodyexample：
+     * requestbodyexample:
      * {
      *   "message_id": "asr_init_sandbox_001_1234567890",
      *   "type": "init",

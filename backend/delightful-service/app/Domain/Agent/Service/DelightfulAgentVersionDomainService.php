@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：直接getenable助理version，avoid传入bigquantityID.
+     * optimizeversion:直接getenable助理version,avoid传入bigquantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：getenable助理total.
+     * optimizeversion:getenable助理total.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // ifoldstatusalready经is企业or者市场，thennotallowback
+        // ifoldstatusalready经is企业or者市场,thennotallowback
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -177,28 +177,28 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // returnis语义化version，needinreturn基础up+1
+        // returnis语义化version,needinreturn基础up+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // ifversionnumberisintegerformat（如 1），willitsconvertfor语义化versionnumber（如 1.0.0）
+        // ifversionnumberisintegerformat(如 1),willitsconvertfor语义化versionnumber(如 1.0.0)
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
 
-        // parseversionnumber，for example "0.0.1" => ['0', '0', '1']
+        // parseversionnumber,for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
         // will PATCH 部minuteadd 1
         $patch = (int) $patch + 1;
 
-        // if PATCH 达to 10，enter位to MINOR（canaccording to需求adjustthisrule）
+        // if PATCH 达to 10,enter位to MINOR(canaccording to需求adjustthisrule)
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // if MINOR 达to 10，enter位to MAJOR（canaccording to需求adjustthisrule）
+        // if MINOR 达to 10,enter位to MAJOR(canaccording to需求adjustthisrule)
         if ($minor > 99) {
-            // notresetminor，whileis直接增bigmajor，avoidnot必wantreset
+            // notresetminor,whileis直接增bigmajor,avoidnot必wantreset
             $minor = 0;
             $major = (int) $major + 1;
         }
@@ -242,7 +242,7 @@ class DelightfulAgentVersionDomainService
      * based on游标paginationgetfinger定organization助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID，ifforemptystringthenfrommostnewstart
+     * @param string $cursor 游标ID,ifforemptystringthenfrommostnewstart
      * @param int $pageSize each页quantity
      * @return array<DelightfulAgentVersionEntity>
      */

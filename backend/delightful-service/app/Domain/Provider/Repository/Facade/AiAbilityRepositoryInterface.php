@@ -61,11 +61,11 @@ interface AiAbilityRepositoryInterface
     public function update(AiAbilityEntity $entity): bool;
 
     /**
-     * according tocodeupdate（supportchoosepropertyupdate）.
+     * according tocodeupdate(supportchoosepropertyupdate).
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code can力code
-     * @param array $data updatedata（status、configetc）
+     * @param array $data updatedata(status、configetc)
      * @return bool whetherupdatesuccess
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool;

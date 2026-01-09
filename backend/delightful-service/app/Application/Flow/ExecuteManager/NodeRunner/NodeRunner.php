@@ -92,7 +92,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     public function execute(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults = []): void
     {
-        // sectionpoint运linemostbigcountlimit，prevent死loop
+        // sectionpoint运linemostbigcountlimit,prevent死loop
         $max = 10000;
         $executeNum = $executionData->getExecuteNum($this->node->getNodeId());
         if ($executeNum >= $max) {
@@ -129,7 +129,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $callback($vertexResult, $executionData, $frontResults);
             } else {
                 $this->node->validate();
-                // 提frontget本timeresult，ifhave，then直接use
+                // 提frontget本timeresult,ifhave,then直接use
                 $nextExecuteNum = $executeNum + 1;
                 $historyVertexResult = $executionData->getNodeHistoryVertexResult($this->node->getNodeId(), $nextExecuteNum);
                 if ($historyVertexResult) {
@@ -206,7 +206,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // if $response itselfthenis JSON format，that么直接return
+        // if $response itselfthenis JSON format,that么直接return
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];
@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo thiswithin暂notimplementduplicateuploadissue，均when做newfileupload
-     * recordprocess所producefile，均willmeanwhileuploadto云端，back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先match.
+     * todo thiswithin暂notimplementduplicateuploadissue,均when做newfileupload
+     * recordprocess所producefile,均willmeanwhileuploadto云端,back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先match.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */
@@ -239,13 +239,13 @@ abstract class NodeRunner implements NodeRunnerInterface
             if (! is_string($attachment)) {
                 continue;
             }
-            // ifalready经存in，直接addtoresultmiddle
+            // ifalready经存in,直接addtoresultmiddle
             $path = get_path_by_url($attachment);
             if ($attachmentObj = $executionData->getAttachmentRecord($path)) {
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // ifisonelink，that么needto url conductlimit
+            // ifisonelink,that么needto url conductlimit
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

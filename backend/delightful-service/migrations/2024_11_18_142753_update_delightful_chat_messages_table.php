@@ -15,8 +15,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_chat_messages', static function (Blueprint $table) {
-            // byataggregatesearch存in，messagecontentmaybewillverylong，所bywillfieldtype改forlongText
-            $table->longText('content')->comment('messagedetail。byataggregatesearch存in，messagecontentmaybewillverylong，所bywillfieldtype改forlongText')->change();
+            // byataggregatesearch存in,messagecontentmaybewillverylong,所bywillfieldtype改forlongText
+            $table->longText('content')->comment('messagedetail.byataggregatesearch存in,messagecontentmaybewillverylong,所bywillfieldtype改forlongText')->change();
         });
     }
 

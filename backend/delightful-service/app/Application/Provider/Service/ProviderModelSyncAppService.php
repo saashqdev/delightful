@@ -47,7 +47,7 @@ class ProviderModelSyncAppService
 
     /**
      * fromoutside部APIsyncmodel.
-     * whenservicequotientconfigurationcreateorupdateo clock，ifisOfficialservicequotientandis官方organization，thenfromoutside部APIpullmodel.
+     * whenservicequotientconfigurationcreateorupdateo clock,ifisOfficialservicequotientandis官方organization,thenfromoutside部APIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,
@@ -59,7 +59,7 @@ class ProviderModelSyncAppService
         $provider = $this->providerConfigDomainService->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
 
         if (! $provider || $provider->getProviderCode() !== ProviderCode::Official) {
-            $this->logger->debug('notisOfficialservicequotient，skipsync', [
+            $this->logger->debug('notisOfficialservicequotient,skipsync', [
                 'config_id' => $providerConfigEntity->getId(),
                 'provider_code' => $provider?->getProviderCode()->value,
             ]);
@@ -76,7 +76,7 @@ class ProviderModelSyncAppService
             // 3. parseconfiguration
             $config = $providerConfigEntity->getConfig();
             if (! $config) {
-                $this->logger->warning('configurationforempty，skipsync', [
+                $this->logger->warning('configurationforempty,skipsync', [
                     'config_id' => $providerConfigEntity->getId(),
                 ]);
                 return;
@@ -85,7 +85,7 @@ class ProviderModelSyncAppService
             $url = $config->getUrl();
             $apiKey = $config->getApiKey();
             if (! $url || ! $apiKey) {
-                $this->logger->warning('configurationnotcomplete，缺少urlorapi_key', [
+                $this->logger->warning('configurationnotcomplete,缺少urlorapi_key', [
                     'config_id' => $providerConfigEntity->getId(),
                     'has_url' => ! empty($url),
                     'has_api_key' => ! empty($apiKey),
@@ -232,7 +232,7 @@ class ProviderModelSyncAppService
         // extractnewmodelmodel_id
         $newModelIds = array_column($models, 'id');
 
-        // 遍历newmodel，createorupdate
+        // 遍历newmodel,createorupdate
         foreach ($models as $modelData) {
             $modelId = $modelData['id'] ?? null;
             if (! $modelId) {
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // ifisonelink，that么needto url conductlimit
+        // ifisonelink,that么needto url conductlimit
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);

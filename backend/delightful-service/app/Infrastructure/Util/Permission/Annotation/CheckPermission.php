@@ -13,27 +13,27 @@ use BackedEnum;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 
 /**
- * permissionvalidationannotation，useatmethodorcategoryupstatement所需permission。
+ * permissionvalidationannotation,useatmethodorcategoryupstatement所需permission.
  *
- * example：
+ * example:
  * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]
  */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::TARGET_METHOD)]
 class CheckPermission extends AbstractAnnotation
 {
     /**
-     * resourceidentifier（supportsingleor多）。
+     * resourceidentifier(supportsingleor多).
      */
     public array|string $resource;
 
     /**
-     * 操asidentifier（onlysupportsingle）。
+     * 操asidentifier(onlysupportsingle).
      */
     public string $operation;
 
     /**
-     * @param array|BackedEnum|string $resource resource，string/枚举oritsarray
-     * @param BackedEnum|string $operation 操as，onlystringor枚举
+     * @param array|BackedEnum|string $resource resource,string/枚举oritsarray
+     * @param BackedEnum|string $operation 操as,onlystringor枚举
      */
     public function __construct(array|BackedEnum|string $resource, BackedEnum|string $operation)
     {
@@ -42,18 +42,18 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * group合forcompletepermissionkey，如 "console.api.assistant.query".
+     * group合forcompletepermissionkey,如 "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
-        // forcompatibleold逻辑，returnfirstgroup合key
+        // forcompatibleold逻辑,returnfirstgroup合key
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }
 
     /**
-     * return所havepermissionkeygroup合（resources x operations 笛卡尔product）。
-     * whenstatement多resourceor多操aso clock，permissionpass任意onekey即can。
+     * return所havepermissionkeygroup合(resources x operations 笛卡尔product).
+     * whenstatement多resourceor多操aso clock,permissionpass任意onekey即can.
      *
      * @return array<string>
      */
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * willstring/枚举oritsarray统oneforstringarray。
+     * willstring/枚举oritsarray统oneforstringarray.
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

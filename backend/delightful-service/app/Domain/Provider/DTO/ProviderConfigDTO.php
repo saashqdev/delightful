@@ -18,10 +18,10 @@ use App\Infrastructure\Util\StringMaskUtil;
 use Hyperf\Codec\Json;
 
 /**
- * service_provider_config_id to应servicequotient+modellist。
+ * service_provider_config_id to应servicequotient+modellist.
  *
- * 同oneservicequotientindifferentorganizationdownhavedifferent service_provider_config_id。
- * oneservice_provider_config_idto应多specificmodel。
+ * 同oneservicequotientindifferentorganizationdownhavedifferent service_provider_config_id.
+ * oneservice_provider_config_idto应多specificmodel.
  */
 class ProviderConfigDTO extends AbstractDTO
 {
@@ -41,12 +41,12 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * bigmodelspecificconfiguration，ak,sk,host 之category（already脱敏）.
+     * bigmodelspecificconfiguration,ak,sk,host 之category(already脱敏).
      */
     protected ?ProviderConfigItem $config = null;
 
     /**
-     * alreadydecryptconfiguration，notconductdata脱敏process.
+     * alreadydecryptconfiguration,notconductdata脱敏process.
      */
     protected ?ProviderConfigItem $decryptedConfig = null;
 
@@ -61,7 +61,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected bool $isModelsEnable = true;
 
     /**
-     * forinterfacecompatible，fixedreturnemptyarray.
+     * forinterfacecompatible,fixedreturnemptyarray.
      */
     protected array $models = [];
 
@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // notice：alreadydecryptconfigurationnotconductdata脱敏process
+        // notice:alreadydecryptconfigurationnotconductdata脱敏process
     }
 
     public function getIsModelsEnable(): bool

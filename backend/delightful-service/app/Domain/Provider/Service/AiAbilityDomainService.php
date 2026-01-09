@@ -30,7 +30,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * according tocan力codegetAIcan力实body（useat运lineo clock，notvalidationorganization）.
+     * according tocan力codegetAIcan力实body(useat运lineo clock,notvalidationorganization).
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code can力code
@@ -49,7 +49,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * get所haveAIcan力list（nopagination）.
+     * get所haveAIcan力list(nopagination).
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return array<AiAbilityEntity> AIcan力实bodylist
@@ -116,7 +116,7 @@ class AiAbilityDomainService
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 
-            // buildnameanddescription（ensureis多languageformat）
+            // buildnameanddescription(ensureis多languageformat)
             $name = $abilityConfig['name'];
             if (is_string($name)) {
                 $name = [

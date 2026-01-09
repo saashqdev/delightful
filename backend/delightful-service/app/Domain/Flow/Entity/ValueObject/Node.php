@@ -31,12 +31,12 @@ class Node extends AbstractValueObject
     protected string $nodeVersion = '';
 
     /**
-     * sectionpointyuandata，canuseasgivefront端locate，back端onlystorageandshow，nothaveany逻辑.
+     * sectionpointyuandata,canuseasgivefront端locate,back端onlystorageandshow,nothaveany逻辑.
      */
     protected array $meta = [];
 
     /**
-     * sectionpointparameterconfiguration，目front依靠arraycomedata传递.
+     * sectionpointparameterconfiguration,目front依靠arraycomedata传递.
      */
     protected array $params = [];
 
@@ -57,7 +57,7 @@ class Node extends AbstractValueObject
     protected ?NodeDebugResult $nodeDebugResult = null;
 
     /**
-     * sectionpointexecutecallbackfunction，ifhavethevalue，that么will直接executethechoose，whilenotispassNodeRunnercomeexecute.
+     * sectionpointexecutecallbackfunction,ifhavethevalue,that么will直接executethechoose,whilenotispassNodeRunnercomeexecute.
      * thiswithin暂o clock想toisforsingle测方便.
      */
     private ?Closure $callback = null;

@@ -18,13 +18,13 @@ return new class extends Migration {
             return;
         }
         Schema::create('delightful_chat_sequences', static function (Blueprint $table) {
-            // according toupsurface建table语sentence，outbydowncode
+            // according toupsurface建table语sentence,outbydowncode
             $table->bigIncrements('id')->comment('primary keyid,not啥use');
             $table->string('organization_code', 64)->comment('序columnnumber所属organizationencoding.')->default('');
-            $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：application;3:document;4:多维table格');
+            $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user;2:application;3:document;4:多维table格');
             $table->string('object_id', 64)->comment('objectid. ifisusero clock,table示delightful_id');
-            $table->string('seq_id', 64)->comment('message序columnnumber id，each账number所havemessagemustgradually增big');
-            $table->string('seq_type', 32)->comment('messagebigtype:controlmessage,chatmessage。');
+            $table->string('seq_id', 64)->comment('message序columnnumber id,each账number所havemessagemustgradually增big');
+            $table->string('seq_type', 32)->comment('messagebigtype:controlmessage,chatmessage.');
             $table->text('content')->comment('序columnnumberdetail. onethesenotvisiblecontrolmessage,onlyinseqtable存indetail. byand写o clockcopyonesharemessagetablecontenttoseqtableuse.');
             $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
             $table->string('message_id', 64)->comment('序columnnumberassociateusermessageid,implementalready读return执,messagewithdraw/editetc')->default(0);
@@ -37,13 +37,13 @@ return new class extends Migration {
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
             // messagereceivepersonlist
             $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecordnot读/already读/alreadyviewuserlist');
-            $table->text('extra')->comment('attachaddfield，recordonetheseextensionproperty。 such as话题id。');
+            $table->text('extra')->comment('attachaddfield,recordonetheseextensionproperty. such as话题id.');
             // app_message_id
             $table->string('app_message_id', 64)->default('')->comment('冗remainderfield,customer端generatemessageid,useat防customer端duplicate');
             # bydownisindexset
             // delightful_message_id index
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
-            // 因foroftenneed按 seq_id sort，所byincrease联合index
+            // 因foroftenneed按 seq_id sort,所byincrease联合index
             // bydownindexcreatemovetosingle独migratefilemiddle
             $table->timestamps();
             $table->softDeletes();

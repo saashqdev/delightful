@@ -81,8 +81,8 @@ class SeqAssembler
         string $seqId,
         ?array $thisTimeStreamMessages = null
     ): ?ClientJsonStreamSequenceResponse {
-        // todo forcompatibleold版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer。
-        // todo etcfront端uplineback，then移except content/reasoning_content/status/llm_response 多remainderpush
+        // todo forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer.
+        // todo etcfront端uplineback,then移except content/reasoning_content/status/llm_response 多remainderpush
         $response = (new ClientJsonStreamSequenceResponse())->setTargetSeqId($seqId);
         $content = $thisTimeStreamMessages['content'] ?? null;
         $reasoningContent = $thisTimeStreamMessages['reasoning_content'] ?? null;
@@ -90,7 +90,7 @@ class SeqAssembler
         // stronglinedelete $streamOptions middlestream_app_message_id/streamfield
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
-        // 0 willbewhen做 false handle，所bythiswithinwantjudgewhetherfor null or者 ''
+        // 0 willbewhen做 false handle,所bythiswithinwantjudgewhetherfor null or者 ''
         if ($content !== null && $content !== '') {
             $response->setContent($content);
         }
@@ -255,7 +255,7 @@ class SeqAssembler
 
     private static function getClientSequence(DelightfulSeqEntity $seqEntity, ?DelightfulMessageEntity $messageEntity = null): ClientSequence
     {
-        // byateditmessagemaybemore改messagetype，thereforeif $messageEntity notfornull，优先use $messageEntity messagetype
+        // byateditmessagemaybemore改messagetype,thereforeif $messageEntity notfornull,优先use $messageEntity messagetype
         if ($messageEntity !== null) {
             $messageType = $messageEntity->getContent()->getMessageTypeEnum();
         } else {
@@ -281,20 +281,20 @@ class SeqAssembler
         $messageTopicId = (string) $seqEntity->getExtra()?->getTopicId();
         // generatecustomer端message结构
         $clientMessageData = [
-            // service端generatemessage唯oneid，all局唯one。useatwithdraw、editmessage。
+            // service端generatemessage唯oneid,all局唯one.useatwithdraw、editmessage.
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // customer端generate，needios/安卓/webthree端共同certainonegenerate算法。useat告知customer端，delightful_message_idbycome
+            // customer端generate,needios/安卓/webthree端共同certainonegenerate算法.useat告知customer端,delightful_message_idbycome
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // messagesmallcategory。controlmessagesmallcategory：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
+            // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;入群/退群;organization架构变动; . showmessage:text,voice,img,file,videoetc
             'type' => $messageTypeName,
             // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
-            // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯onepropertyvalidation。
+            // messagesendtime,and delightful_message_id oneup,useatwithdraw、editmessageo clock唯onepropertyvalidation.
             'send_time' => $carbon->getTimestamp(),
-            // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：not读|already读|alreadyview（non纯textcomplextypemessage，userpoint击detail）  | withdraw
+            // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义:not读|already读|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
             'status' => $messageStatus ?: '',
             'content' => $messageData,
         ];
@@ -304,15 +304,15 @@ class SeqAssembler
         $clientSequenceData = [
             // 序columnnumber归属账numberid
             'delightful_id' => $seqEntity->getObjectId(),
-            // 序columnnumber，one定notduplicate，one定growth，butisnotguarantee连续。
+            // 序columnnumber,one定notduplicate,one定growth,butisnotguarantee连续.
             'seq_id' => $seqEntity->getSeqId(),
-            // usermessageid，userdown唯one。
+            // usermessageid,userdown唯one.
             'message_id' => $seqEntity->getMessageId(),
-            // 本itemmessagefingertodelightful_message_id。 useatimplementalready读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothavealter。
+            // 本itemmessagefingertodelightful_message_id. useatimplementalready读return执场景.存inquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsend方messageidnothavealter.
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversationwindow。 customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc。if本groundnothavehair现thisconversationid，主动toservice端queryconversationwindowdetail
+            // message所属conversationwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thisconversationid,主动toservice端queryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本itemmessage所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

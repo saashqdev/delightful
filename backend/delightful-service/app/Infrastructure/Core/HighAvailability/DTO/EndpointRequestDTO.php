@@ -39,7 +39,7 @@ class EndpointRequestDTO extends AbstractDTO
 
     /**
      * uptimechoose接入pointID (optional).
-     * useatconversation延续etc场景，优先chooseuptimeuse接入point.
+     * useatconversation延续etc场景,优先chooseuptimeuse接入point.
      */
     protected ?string $lastSelectedEndpointId = null;
 
@@ -54,7 +54,7 @@ class EndpointRequestDTO extends AbstractDTO
     protected StatisticsLevel $statisticsLevel = StatisticsLevel::LEVEL_MINUTE;
 
     /**
-     * statisticstimerange（minute钟）.
+     * statisticstimerange(minute钟).
      */
     protected int $timeRange = 30;
 

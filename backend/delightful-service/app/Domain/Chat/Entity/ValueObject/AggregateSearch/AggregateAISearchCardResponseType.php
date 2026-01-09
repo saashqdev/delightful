@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 
 /**
- * responseorder：5 3 0 1 byback随意.
+ * responseorder:5 3 0 1 byback随意.
  */
 class AggregateAISearchCardResponseType
 {
     /**
-     *associateissuesearchresult，include子issue(search_keywords), webpagesearchresult(search), 总词数(total_words), match词数(match_count), 页数(page_count).
+     *associateissuesearchresult,include子issue(search_keywords), webpagesearchresult(search), 总词数(total_words), match词数(match_count), 页数(page_count).
      */
     public const int SEARCH = 0;
 

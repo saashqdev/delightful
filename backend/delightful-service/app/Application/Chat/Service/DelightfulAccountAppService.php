@@ -76,8 +76,8 @@ class DelightfulAccountAppService extends AbstractAppService
                 $authorization->setDelightfulId($delightfulInfo?->getDelightfulId());
                 $authorization->setOrganizationCode($delightfulInfo?->getOrganizationCode());
             }
-            // pass aiCode query delightful_flows 表get所属organization。
-            // notice超level麦吉whenfrontisasforonenothavewrite delightful_flows datalibrary flow 存in。 SUPER_DELIGHTFUL_CODE write accounts 表。
+            // pass aiCode query delightful_flows 表get所属organization.
+            // notice超level麦吉whenfrontisasforonenothavewrite delightful_flows datalibrary flow 存in. SUPER_DELIGHTFUL_CODE write accounts 表.
             if ($aiCode !== AgentConstant::SUPER_DELIGHTFUL_CODE) {
                 $disabledDataIsolation = FlowDataIsolation::create()->disabled();
                 $delightfulFlowEntity = $this->delightfulFlowDomainService->getByCode($disabledDataIsolation, $aiCode);

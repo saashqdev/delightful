@@ -29,7 +29,7 @@ class SimpleJWT
     {
         $token = [
             'iss' => app_name(), // 签hair者 optional
-            'aud' => '', // receivetheJWTone方，optional
+            'aud' => '', // receivetheJWTone方,optional
             'exp' => time() + $expires, // expiretime
             'data' => $data, // customizedata
         ];

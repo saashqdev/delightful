@@ -59,7 +59,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // ifis ai ,直接agree
             $friendStatus = FriendStatus::Agree;
         } else {
-            // ifispersoncategory，checkhe们whether处at同oneorganization
+            // ifispersoncategory,checkhe们whether处at同oneorganization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
         // willgood友close系write friend 表.
@@ -162,7 +162,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * batchquantityaccording to aiCode（flowCode）+ organizationencodinggetassistant user_id.
+     * batchquantityaccording to aiCode(flowCode)+ organizationencodinggetassistant user_id.
      * @return array<string, string> return aiCode => userId mapping
      */
     public function getByAiCodes(DataIsolation $dataIsolation, array $aiCodes): array
@@ -222,7 +222,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserIDanduserorganizationcolumn表queryuserdetail，according touserorganizationdecidefilterstrategy.
+     * according touserIDanduserorganizationcolumn表queryuserdetail,according touserorganizationdecidefilterstrategy.
      * @param array $userIds userIDarray
      * @param array $userOrganizations currentuser拥haveorganizationencodingarray
      * @return array<UserDetailDTO>
@@ -235,7 +235,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // mergeuserorganizationand官方organization
         $orgCodes = array_filter(array_unique(array_merge($userOrganizations, [$officialOrganizationCode])));
 
-        // from user表拿基本info，support多organizationquery
+        // from user表拿基本info,support多organizationquery
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, $orgCodes);
 
         // checkcurrentuserwhether拥have官方organization
@@ -243,13 +243,13 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
         // according touserwhether拥have官方organizationcomedecidefilterstrategy
         if (! $hasOfficialOrganization) {
-            // ifusernothave官方organization，filter掉官方organizationnonAIuser
+            // ifusernothave官方organization,filter掉官方organizationnonAIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {
-                // ifnotis官方organization，直接保留
+                // ifnotis官方organization,直接保留
                 if ($user->getOrganizationCode() !== $officialOrganizationCode) {
                     return true;
                 }
-                // ifis官方organization，only保留AIuser
+                // ifis官方organization,only保留AIuser
                 return $user->getUserType() === UserType::Ai;
             });
         }
@@ -274,7 +274,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * searchusernickname（alldelightful平台retrieve）.
+     * searchusernickname(alldelightful平台retrieve).
      */
     public function searchUserByNickNameInDelightful(string $query): array
     {
@@ -347,11 +347,11 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return $cachedResult;
         }
 
-        // addlockhandle，preventandhairrequest
+        // addlockhandle,preventandhairrequest
         $owner = $this->acquireLock($lockKey);
 
         try {
-            // handle麦吉usersystemtoken，getdelightfulIdanduserId
+            // handle麦吉usersystemtoken,getdelightfulIdanduserId
             $tokenDTO = new DelightfulTokenEntity();
             $tokenDTO->setType(DelightfulTokenType::Account);
             $tokenDTO->setToken($authorization);
@@ -363,7 +363,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
             $delightfulId = $delightfulUserToken->getTypeRelationValue();
 
-            // queryuserandhandleorganizationclose系，query麦吉user
+            // queryuserandhandleorganizationclose系,query麦吉user
             $delightfulUserEntities = $this->userRepository->getUserByDelightfulIds([$delightfulId]);
             if (empty($delightfulUserEntities)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_CREATE_ACCOUNT);
@@ -587,7 +587,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     protected function cacheLoginCheckResult(string $cacheKey, array $result): void
     {
-        // forcompatiblecache，needwillDTOobjectconvertforarraystorage
+        // forcompatiblecache,needwillDTOobjectconvertforarraystorage
         $cacheDTOArray = array_map(static function ($dto) {
             return $dto->toArray();
         }, $result);

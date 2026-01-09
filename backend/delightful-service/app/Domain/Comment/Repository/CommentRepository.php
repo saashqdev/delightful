@@ -22,7 +22,7 @@ class CommentRepository
     }
 
     /**
-     * createonenewcommentand维护相closeindexandattachment。
+     * createonenewcommentand维护相closeindexandattachment.
      *
      * @param CommentEntity $commentEntity comment实body
      * @return CommentEntity createbackcomment实body
@@ -57,7 +57,7 @@ class CommentRepository
     }
 
     /**
-     * updatefinger定commentcontentandattachment。
+     * updatefinger定commentcontentandattachment.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param CommentEntity $commentEntity wantupdatecomment实body
@@ -81,7 +81,7 @@ class CommentRepository
     }
 
     /**
-     * according toitemitemgetcommentlist。
+     * according toitemitemgetcommentlist.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param GetCommentsWhereVo $whereVo queryitemitemvalueobject
@@ -104,7 +104,7 @@ class CommentRepository
     }
 
     /**
-     * according tocommentIDarraygetto应commentlist。
+     * according tocommentIDarraygetto应commentlist.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param array $commentIds commentIDarray
@@ -120,11 +120,11 @@ class CommentRepository
     }
 
     /**
-     * according tocommentIDgetsinglecomment实body。
+     * according tocommentIDgetsinglecomment实body.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param int $commentId commentID
-     * @return ?CommentEntity comment实body，ifnot存inthenreturnnull
+     * @return ?CommentEntity comment实body,ifnot存inthenreturnnull
      */
     public function getCommentById(
         RequestContext $requestContext,
@@ -145,7 +145,7 @@ class CommentRepository
     }
 
     /**
-     * deletefinger定comment。
+     * deletefinger定comment.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param int $commentId commentID
@@ -157,7 +157,7 @@ class CommentRepository
     }
 
     /**
-     * batchquantitydeletefinger定commentandits所have子comment。
+     * batchquantitydeletefinger定commentandits所have子comment.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param array $commentIds wantdeletecommentIDarray
@@ -185,7 +185,7 @@ class CommentRepository
     }
 
     /**
-     * batchquantityrestorealreadydeletecomment。
+     * batchquantityrestorealreadydeletecomment.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param array $commentIds wantrestorecommentIDarray
@@ -200,7 +200,7 @@ class CommentRepository
     }
 
     /**
-     * according toresourceIDget所have相closecomment。
+     * according toresourceIDget所have相closecomment.
      *
      * @param int $resourceId resourceID
      * @return array<CommentEntity> comment实bodyarray
@@ -215,7 +215,7 @@ class CommentRepository
     }
 
     /**
-     * according toqueryitemitemgetcommentlist。
+     * according toqueryitemitemgetcommentlist.
      *
      * @param RequestContext $requestContext requestupdown文
      * @param GetCommentsWhereVo $commentsWhereVo queryitemitemvalueobject
@@ -265,7 +265,7 @@ class CommentRepository
     }
 
     /**
-     * willCommentModelconvertforCommentEntity。
+     * willCommentModelconvertforCommentEntity.
      *
      * @param CommentModel $model commentmodel
      * @return CommentEntity convertbackcomment实body
@@ -292,7 +292,7 @@ class CommentRepository
     }
 
     /**
-     * will多CommentModelconvertforCommentEntityarray。
+     * will多CommentModelconvertforCommentEntityarray.
      *
      * @param mixed $models commentmodelset
      * @return array<CommentEntity> comment实bodyarray

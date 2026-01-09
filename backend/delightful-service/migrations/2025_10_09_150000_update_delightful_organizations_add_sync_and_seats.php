@@ -35,7 +35,7 @@ return new class extends Migration {
                 $table->timestamp('sync_time')->nullable()->comment('同time')->after('sync_status');
             }
 
-            // index：type（organizationtype）
+            // index:type(organizationtype)
             $table->index('type', 'idx_delightful_org_type');
         });
     }

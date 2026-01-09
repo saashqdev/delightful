@@ -28,29 +28,29 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     public const string NULL_PARENT_ID = '0';
 
     /**
-     * associate_questions keyfront缀，avoidfrom动willstring 0 转 int 0.
+     * associate_questions keyfront缀,avoidfrom动willstring 0 转 int 0.
      */
     public const string QUESTION_DELIMITER = 'question_';
 
-    # searchlevel别：简single/search
+    # searchlevel别:简single/search
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issueassociateissue。supportassociateissueagainproduce子issue，butiswillbe拍平becometwo维array。
+     * 子issueassociateissue.supportassociateissueagainproduce子issue,butiswillbe拍平becometwo维array.
      * @var array<string,QuestionItem[]>
-     * @example according touserinputissue，generateassociateissue。
+     * @example according touserinputissue,generateassociateissue.
      */
     protected ?array $associateQuestions;
 
     /**
-     * （所have子issue）searchwebpagelist.
+     * (所have子issue)searchwebpagelist.
      *
      * @var QuestionSearchResult[]
      */
     protected array $searchWebPages;
 
     /**
-     * byat多time子issuesearcho clock，willout现多duplicatesearchresult，所byneed ai go重back，again丢givebigmodel总结。
+     * byat多time子issuesearcho clock,willout现多duplicatesearchresult,所byneed ai go重back,again丢givebigmodel总结.
      *
      * @var SearchDetailItem[]
      */
@@ -67,20 +67,20 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $events;
 
     /**
-     * @var string 思维导graph。markdown formatstring
+     * @var string 思维导graph.markdown formatstring
      */
     protected string $mindMap;
 
     /**
-     * @var string ppt。markdown formatstring
+     * @var string ppt.markdown formatstring
      */
     protected string $ppt;
 
     /**
-     * get本timeneedstreampushfield。
-     * supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 itsmiddle * isfingerarraydown标。
-     * service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，enhancemessagecompleteproperty。
-     * for example：
+     * get本timeneedstreampushfield.
+     * supportonetimepush多fieldstreammessage,if json layerlevelmore深,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydown标.
+     * service端willcache所havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢package概rate,enhancemessagecompleteproperty.
+     * for example:
      * [
      *     'users.0.name' => 'delightful',
      *     'total' => 32,

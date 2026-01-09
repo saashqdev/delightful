@@ -109,9 +109,9 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 
-        // 4. 现intest2userbecomeformember，butpermissionnot足 - addmembershouldfail
+        // 4. 现intest2userbecomeformember,butpermissionnot足 - addmembershouldfail
         $this->switchUserTest2();
-        $this->addTeamMembers($projectId, 51202); // 仍然nopermission，因fornotismanage者
+        $this->addTeamMembers($projectId, 51202); // 仍然nopermission,因fornotismanage者
 
         // 5. givetest2usermanagepermission
         $this->switchUserTest1();
@@ -363,7 +363,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * addmore多teammember（testmanage者permission）.
+     * addmore多teammember(testmanage者permission).
      */
     public function addMoreTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -633,7 +633,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * cleanupprojectmemberdata（直接databasedelete）.
+     * cleanupprojectmemberdata(直接databasedelete).
      */
     private function cleanupProjectMembers(string $projectId): void
     {

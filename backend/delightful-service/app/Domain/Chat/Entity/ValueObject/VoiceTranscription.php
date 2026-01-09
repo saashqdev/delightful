@@ -23,7 +23,7 @@ class VoiceTranscription extends AbstractValueObject
     private ?array $transcriptions;
 
     /**
-     * errorinfo（if转录fail）.
+     * errorinfo(if转录fail).
      */
     private ?string $errorMessage;
 
@@ -33,7 +33,7 @@ class VoiceTranscription extends AbstractValueObject
     private ?int $transcribedAt;
 
     /**
-     * mainlanguagecode（default转录language）.
+     * mainlanguagecode(default转录language).
      */
     private ?string $primaryLanguage;
 
@@ -85,7 +85,7 @@ class VoiceTranscription extends AbstractValueObject
             return $this->transcriptions[$this->primaryLanguage];
         }
 
-        // ifnothavesetmainlanguage，returnfirstcanuse转录result
+        // ifnothavesetmainlanguage,returnfirstcanuse转录result
         return ! empty($this->transcriptions) ? reset($this->transcriptions) : null;
     }
 
@@ -166,7 +166,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * checkwhetherforempty（nothaveany转录result）.
+     * checkwhetherforempty(nothaveany转录result).
      */
     public function isEmpty(): bool
     {

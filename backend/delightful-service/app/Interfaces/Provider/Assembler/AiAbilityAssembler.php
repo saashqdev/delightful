@@ -42,7 +42,7 @@ class AiAbilityAssembler
         // getoriginalconfiguration
         $config = $entity->getConfig();
 
-        // recursion脱敏所have api_key field（support任意嵌set结构）
+        // recursion脱敏所have api_key field(support任意嵌set结构)
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(
@@ -126,11 +126,11 @@ class AiAbilityAssembler
         $result = [];
 
         foreach ($config as $key => $value) {
-            // ifis api_key field，conduct脱敏（front4back4）
+            // ifis api_key field,conduct脱敏(front4back4)
             if ($key === 'api_key' && is_string($value) && ! empty($value)) {
                 $result[$key] = self::maskApiKey($value);
             }
-            // ifisarray，recursionprocess
+            // ifisarray,recursionprocess
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
@@ -147,8 +147,8 @@ class AiAbilityAssembler
      * 脱敏 API Key.
      *
      * @param string $apiKey original API Key
-     * @param int $prefixLength 保留front几位（default3）
-     * @param int $suffixLength 保留back几位（default3）
+     * @param int $prefixLength 保留front几位(default3)
+     * @param int $suffixLength 保留back几位(default3)
      * @return string 脱敏back API Key
      */
     private static function maskApiKey(string $apiKey, int $prefixLength = 4, int $suffixLength = 4): string
@@ -156,7 +156,7 @@ class AiAbilityAssembler
         $length = mb_strlen($apiKey);
         $minLength = $prefixLength + $suffixLength;
 
-        // if key tooshort，all部脱敏
+        // if key tooshort,all部脱敏
         if ($length <= $minLength) {
             return str_repeat('*', $length);
         }

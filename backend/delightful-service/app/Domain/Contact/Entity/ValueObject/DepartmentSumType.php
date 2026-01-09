@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * departmentmember求andtype。
+ * departmentmember求andtype.
  */
 enum DepartmentSumType: int
 {
-    // 1：returndepartment直属usertotal，
+    // 1:returndepartment直属usertotal,
     case DirectEmployee = 1;
 
-    // 2：return本department + 所have子departmentusertotal
+    // 2:return本department + 所have子departmentusertotal
     case All = 2;
 }

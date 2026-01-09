@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // rollback：will 'active' status改return 'accepted' status
+        // rollback:will 'active' status改return 'accepted' status
         Db::table('delightful_long_term_memories')
             ->where('status', 'active')
             ->update(['status' => 'accepted']);

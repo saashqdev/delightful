@@ -72,14 +72,14 @@ abstract class AbstractKnowledgeAppService extends AbstractKernelAppService
         ?string $documentCode = null,
         ?int $fragmentId = null,
     ): Operation {
-        // if传slicesegmentid，thengetdocumentto应knowledge basecodeanddocumentcode，andconductvalidation
+        // if传slicesegmentid,thengetdocumentto应knowledge basecodeanddocumentcode,andconductvalidation
         if ($fragmentId) {
             $fragment = $this->knowledgeBaseFragmentDomainService->show($dataIsolation, $fragmentId);
             if ($knowledgeBaseCode !== $fragment->getKnowledgeCode() || $documentCode !== $fragment->getDocumentCode()) {
                 ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'common.access', ['label' => $operation]);
             }
         }
-        // if传documentcode，thengetdocumentto应knowledge basecode，andconductvalidation
+        // if传documentcode,thengetdocumentto应knowledge basecode,andconductvalidation
         if ($documentCode) {
             $document = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
             if ($knowledgeBaseCode !== $document->getKnowledgeBaseCode()) {

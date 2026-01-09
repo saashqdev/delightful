@@ -17,7 +17,7 @@ class StepFinishedDTO extends AbstractObject
     protected string $key;
 
     /**
-     * endreason：
+     * endreason:
      * 0:processend
      * 1.hair生exception.
      */

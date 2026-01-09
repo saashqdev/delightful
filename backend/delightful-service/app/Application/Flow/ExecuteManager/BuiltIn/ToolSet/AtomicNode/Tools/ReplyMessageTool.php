@@ -81,7 +81,7 @@ class ReplyMessageTool extends AbstractBuiltInTool
             "type": "string",
             "key": "type",
             "title": "messagetype",
-            "description": "messagetype；canusetypehave text、markdown、image、video、audio、file，defaultis text",
+            "description": "messagetype;canusetypehave text、markdown、image、video、audio、file,defaultis text",
             "required": null,
             "value": null,
             "encryption": false,

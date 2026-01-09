@@ -105,10 +105,10 @@ class UserAssembler
         foreach ($users as $user) {
             $account = $accounts[$user['delightful_id']] ?? null;
             if (empty($account)) {
-                $logger->warning("user[delightful_id: {$user['delightful_id']} ]not存in, skip！");
+                $logger->warning("user[delightful_id: {$user['delightful_id']} ]not存in, skip!");
                 continue;
             }
-            // if存inhand机number，willhand机numbermiddlebetweenfour位replacefor*
+            // if存inhand机number,willhand机numbermiddlebetweenfour位replacefor*
             $phone = $account->getPhone();
             if (! empty($phone)) {
                 $phone = substr_replace($phone, '****', 3, 4);
@@ -124,7 +124,7 @@ class UserAssembler
 
             foreach ($user->toArray() as $key => $value) {
                 if (isset($userDetailAdd[$key])) {
-                    // ifalready经存in，skip
+                    // ifalready经存in,skip
                     continue;
                 }
                 $userDetailAdd[$key] = $value;

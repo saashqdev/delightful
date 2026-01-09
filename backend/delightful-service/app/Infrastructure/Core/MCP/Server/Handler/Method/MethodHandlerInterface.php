@@ -20,7 +20,7 @@ interface MethodHandlerInterface
     /**
      * processrequestandreturnresult.
      *
-     * @return null|array<string, mixed> processresult，ifnotneedreturndatathenreturnnull
+     * @return null|array<string, mixed> processresult,ifnotneedreturndatathenreturnnull
      */
     public function handle(MessageInterface $request): ?array;
 

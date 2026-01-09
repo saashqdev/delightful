@@ -34,7 +34,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * judgeusermessagemiddle，whethercontain本timehe想downloadfile.
+     * judgeusermessagemiddle,whethercontain本timehe想downloadfile.
      * @param DelightfulChatFileEntity[] $fileDTOs
      * @return DelightfulChatFileEntity[]
      */
@@ -73,7 +73,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             }
         }
 
-        // judgeusermessagemiddle，whethercontain本timehe想downloadfile
+        // judgeusermessagemiddle,whethercontain本timehe想downloadfile
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
             $delightfulMessageId = $fileDTO->getDelightfulMessageId();
@@ -114,8 +114,8 @@ class DelightfulChatFileDomainService extends AbstractDomainService
 
     /**
      * saveorupdatefile
-     * iffile_keyalready存in，thenupdatefileinfo
-     * iffile_keynot存in，thencreatenewfile.
+     * iffile_keyalready存in,thenupdatefileinfo
+     * iffile_keynot存in,thencreatenewfile.
      *
      * @param DelightfulChatFileEntity $fileEntity file实body
      * @param DataIsolation $dataIsolation data隔离
@@ -126,14 +126,14 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         // passfile_keyfindfilewhether存in
         $existingFile = $this->delightfulFileRepository->getChatFileByFileKey($fileEntity->getFileKey());
 
-        // iffile存in，updatefileinfo
+        // iffile存in,updatefileinfo
         if ($existingFile) {
             $fileEntity->setFileId($existingFile->getFileId());
             $this->updateFile($fileEntity);
             return $fileEntity;
         }
 
-        // iffilenot存in，createnewfile
+        // iffilenot存in,createnewfile
         $time = date('Y-m-d H:i:s');
         $fileEntity->setUserId($dataIsolation->getCurrentUserId());
         $fileEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -154,7 +154,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileIds = array_column($attachments, 'file_id');
         $fileEntities = $this->getFileEntitiesByFileIds($fileIds);
         $fileEntities = array_column($fileEntities, null, 'file_id');
-        // todo ifmessagemiddlehavefile:1.judgefile所have者whetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile。
+        // todo ifmessagemiddlehavefile:1.judgefile所have者whetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile.
         //        foreach ($fileEntities as $fileEntity) {
         //            if ($fileEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
         //                ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);

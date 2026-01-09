@@ -77,7 +77,7 @@ class MessageUtil
                 $message = new FilesMessage([]);
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 if (is_string($linkDesc) && $linkDesc !== '') {
-                    // if具havedescription，that么shouldisrich textshapetype
+                    // if具havedescription,that么shouldisrich textshapetype
                     $message = new TextMessage([]);
                     $message->setContent($linkDesc);
                 }
@@ -96,7 +96,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // getfilename。if linkPaths only 1 ，andand linkDesc alsoisonlyone，that么can直接use linkDesc asforfilename
+                    // getfilename.if linkPaths only 1 ,andand linkDesc alsoisonlyone,that么can直接use linkDesc asforfilename
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
@@ -126,7 +126,7 @@ class MessageUtil
                     return null;
                 }
                 $contentString = $content->getKeyValue($executionData->getExpressionFieldData());
-                // todo actualupnotimplement，bydownis伪code
+                // todo actualupnotimplement,bydownis伪code
                 return new AggregateAISearchCardMessageV2([
                     'search' => $contentString['search'] ?? [],
                     'llm_response' => $contentString['llm_response'] ?? '',

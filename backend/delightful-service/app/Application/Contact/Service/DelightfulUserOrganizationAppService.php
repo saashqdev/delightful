@@ -62,13 +62,13 @@ class DelightfulUserOrganizationAppService
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 2. querythisorganization相closeinformation：delightful_organizations_environment
+        // 2. querythisorganization相closeinformation:delightful_organizations_environment
         $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByDelightfulOrganizationCode($delightfulOrganizationCode);
         if (! $organizationEnvEntity) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 3. save delightful_organization_code，origin_organization_code，environment_id，switchtime
+        // 3. save delightful_organization_code,origin_organization_code,environment_id,switchtime
         $organizationData = [
             'delightful_organization_code' => $delightfulOrganizationCode,
             'third_organization_code' => $organizationEnvEntity->getOriginOrganizationCode(),
@@ -81,7 +81,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * get账numberdowncanuseorganizationcolumn表（onlycontainenabled statusorganization）。
+     * get账numberdowncanuseorganizationcolumn表(onlycontainenabled statusorganization).
      *
      * @throws Throwable
      */

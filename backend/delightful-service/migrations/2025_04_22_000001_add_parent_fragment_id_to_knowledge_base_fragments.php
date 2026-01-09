@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // modify表结构，addnewfield
+        // modify表结构,addnewfield
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhetheralready存infield，avoidduplicateadd
+            // checkwhetheralready存infield,avoidduplicateadd
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'parent_fragment_id')) {
                 $table->unsignedBigInteger('parent_fragment_id')->nullable()->comment('父slicesegmentid')->index();
             }
@@ -29,7 +29,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhetheralready存infield，avoidduplicatedelete
+            // checkwhetheralready存infield,avoidduplicatedelete
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'parent_fragment_id')) {
                 $table->dropColumn('parent_fragment_id');
             }

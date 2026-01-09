@@ -70,7 +70,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // if意graphidentifystartfrom动load记忆，that么need剔exceptcurrentmessage
+        // if意graphidentifystartfrom动load记忆,that么need剔exceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
@@ -105,11 +105,11 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-youisone意graphidentifysectionpoint，useatanalyzeuser意graph，youwilltooneshareuserinputcontent，帮Ianalyzeoutuser意graphand置信degree。
-resultneedin限定意graphrangemiddle。
+youisone意graphidentifysectionpoint,useatanalyzeuser意graph,youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphand置信degree.
+resultneedin限定意graphrangemiddle.
 
 # 技can - 意graphidentify
-willyouresponseformat化for JSON object，format如down：
+willyouresponseformat化for JSON object,format如down:
 {
     "whetheridentify": true,
     "identifyfailreason": "",
@@ -133,15 +133,15 @@ willyouresponseformat化for JSON object，format如down：
 }    
 
 # process
-1. youwilltooneshareuserinputcontent，帮Ianalyzeoutuser意graphand置信degree。
-2. 推理user意graph，will推理procedure放to JSON middle 推导procedure field，解释for什么willoutthisthese意graphand置信degree。
-3. ifidentifyto意graph，请填写most佳matchandmatchto意graph，whetheridentifyfor true，most佳意graph one定is置信degreemosthigh，itsmiddle matchto意graphhave fieldisaccording to 置信degree frombigtosmallrowcolumn。
-4. ifincurrentrangenothave找toany意graph，whetheridentifyfor false，请填写identifyfailreason，most佳matchandmatchto意graphallshouldisempty。
-5. onlywillreturn JSON format，notwillagainreturnothercontent，ifone定needhavereturn，请放toremarkmiddle，return答contentone定canbe JSON toolparse。
+1. youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphand置信degree.
+2. 推理user意graph,will推理procedure放to JSON middle 推导procedure field,解释for什么willoutthisthese意graphand置信degree.
+3. ifidentifyto意graph,请填写most佳matchandmatchto意graph,whetheridentifyfor true,most佳意graph one定is置信degreemosthigh,itsmiddle matchto意graphhave fieldisaccording to 置信degree frombigtosmallrowcolumn.
+4. ifincurrentrangenothave找toany意graph,whetheridentifyfor false,请填写identifyfailreason,most佳matchandmatchto意graphallshouldisempty.
+5. onlywillreturn JSON format,notwillagainreturnothercontent,ifone定needhavereturn,请放toremarkmiddle,return答contentone定canbe JSON toolparse.
 
 # limit
-- 意graphrangeformatis '意graph'：'意graphdescription'。itsmiddle意graphdescriptioncanforempty。意graphand意graphdescriptionone定isuse '' package裹data。
-- notcanreturn答otherissue，onlycanreturn答意graphidentifyissue。
+- 意graphrangeformatis '意graph':'意graphdescription'.itsmiddle意graphdescriptioncanforempty.意graphand意graphdescriptionone定isuse '' package裹data.
+- notcanreturn答otherissue,onlycanreturn答意graphidentifyissue.
 
 # needanalyze意graphrange如down
 {$content}

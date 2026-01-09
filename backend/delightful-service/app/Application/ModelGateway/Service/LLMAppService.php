@@ -193,7 +193,7 @@ class LLMAppService extends AbstractLLMAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
 
-        // onlymodel_idparameter，thengetmodel_version
+        // onlymodel_idparameter,thengetmodel_version
         if (empty($modelVersion) && $modelId) {
             $providerDataIsolation = new ProviderDataIsolation($authorization->getOrganizationCode(), $authorization->getId(), $authorization->getDelightfulId());
             $imageModel = $this->modelGatewayMapper->getOrganizationImageModel($providerDataIsolation, $modelId);
@@ -617,7 +617,7 @@ class LLMAppService extends AbstractLLMAppService
         $size = $textGenerateImageDTO->getSize();
         [$width, $height] = explode('x', $size);
 
-        // calculatestringformatratio例，如 "1:1", "3:4"
+        // calculatestringformatratio例,如 "1:1", "3:4"
         $ratio = $this->calculateRatio((int) $width, (int) $height);
         $imageGenerateParamsVO->setRatio($ratio);
         $imageGenerateParamsVO->setWidth($width);
@@ -656,7 +656,7 @@ class LLMAppService extends AbstractLLMAppService
                 if (! empty($generateImageRaw)) {
                     $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
                     $n = $textGenerateImageDTO->getN();
-                    // except mj is 1 time之outside，otherall按张数算
+                    // except mj is 1 time之outside,otherall按张数算
                     if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                         $n = 1;
                     }
@@ -718,7 +718,7 @@ class LLMAppService extends AbstractLLMAppService
 
         [$width, $height] = explode('x', $size);
 
-        // calculatestringformatratio例，如 "1:1", "3:4"
+        // calculatestringformatratio例,如 "1:1", "3:4"
         $imageGenerateRequest->setWidth($width);
         $imageGenerateRequest->setHeight($height);
 
@@ -731,7 +731,7 @@ class LLMAppService extends AbstractLLMAppService
                 $imageGenerateRequest->setModel($serviceProviderConfig->getModelVersion());
                 $generateImageRaw = $imageGenerateService->generateImageRawWithWatermark($imageGenerateRequest);
                 if (! empty($generateImageRaw)) {
-                    // 统one触hairevent（graph生graphdefault 1 张）
+                    // 统one触hairevent(graph生graphdefault 1 张)
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // 直接透传original size parameter，leteachservicequotientaccording tofrom己需求process
+        // 直接透传original size parameter,leteachservicequotientaccording tofrom己需求process
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1169,7 +1169,7 @@ class LLMAppService extends AbstractLLMAppService
 
             // calculate计费quantity
             $n = $proxyModelRequest->getN();
-            // except mjand graph生graph is 1 time之outside，otherall按张数算
+            // except mjand graph生graph is 1 time之outside,otherall按张数算
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                 $n = 1;
             }
@@ -1715,7 +1715,7 @@ class LLMAppService extends AbstractLLMAppService
      * @param int $imageCount imagequantity
      * @param string $providerModelId servicequotientmodelID
      * @param string $callTime calltime
-     * @param float $startTime starttime（微second）
+     * @param float $startTime starttime(微second)
      * @param null|AccessTokenEntity $accessTokenEntity accesstoken实body
      */
     private function dispatchImageGeneratedEvent(
@@ -1728,7 +1728,7 @@ class LLMAppService extends AbstractLLMAppService
         float $startTime,
         ?AccessTokenEntity $accessTokenEntity = null
     ): void {
-        // calculateresponsetime（毫second）
+        // calculateresponsetime(毫second)
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
         // convert providerModelId forinteger

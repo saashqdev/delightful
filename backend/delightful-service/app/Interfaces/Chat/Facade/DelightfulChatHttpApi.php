@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （front端performancehaveissuetemporarysolution）按session id minutegroupget几itemmostnewmessage.
+     * (front端performancehaveissuetemporarysolution)按session id minutegroupget几itemmostnewmessage.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {
@@ -308,7 +308,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * batchquantityget群info（name、公告etc）.
+     * batchquantityget群info(name、公告etc).
      */
     public function getDelightfulGroupList(RequestInterface $request): array
     {
@@ -494,7 +494,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * @param null|string $method havetimefieldnothave区minutedegree，needaddupmethod名
+     * @param null|string $method havetimefieldnothave区minutedegree,needaddupmethod名
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {

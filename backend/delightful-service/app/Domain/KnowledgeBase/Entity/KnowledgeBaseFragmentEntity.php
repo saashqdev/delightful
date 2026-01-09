@@ -39,7 +39,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     protected array $metadata = [];
 
     /**
-     * business ID，canuseatbusiness方recordfrom己 ID usecomeconductupdatedata.
+     * business ID,canuseatbusiness方recordfrom己 ID usecomeconductupdatedata.
      */
     protected string $businessId = '';
 
@@ -124,7 +124,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 
     public function hasModify(KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): bool
     {
-        // if content and metadata allnothavechange，thennotneedupdate
+        // if content and metadata allnothavechange,thennotneedupdate
         if ($savingDelightfulFlowKnowledgeFragmentEntity->getContent() === $this->content
             && $savingDelightfulFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
             && $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId
@@ -368,7 +368,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this->wordCount;
     }
 
-    // thiswithinnotusesetting，直接according tocontentcalculateoutcomethenline
+    // thiswithinnotusesetting,直接according tocontentcalculateoutcomethenline
     public function setWordCount(int $wordCount): KnowledgeBaseFragmentEntity
     {
         $this->wordCount = $wordCount;

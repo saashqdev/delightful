@@ -152,7 +152,7 @@ class MCPHandler implements MCPHandlerInterface
             // getrequestmethodname
             $method = $request->getMethod();
 
-            // createprocess器instance（short生命period）
+            // createprocess器instance(short生命period)
             $handler = $this->methodHandlerFactory->createHandler($method);
 
             $result = null;
@@ -193,7 +193,7 @@ class MCPHandler implements MCPHandlerInterface
             return $params['sessionId'];
         }
 
-        // ifallnothave，thenuserequestID
+        // ifallnothave,thenuserequestID
         return (string) $request->getId();
     }
 }

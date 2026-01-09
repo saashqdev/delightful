@@ -26,7 +26,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function convertToCsv(string $content): string
     {
-        // willcontent按linesplit，but保留singleyuan格inside换line符
+        // willcontent按linesplit,but保留singleyuan格inside换line符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];
@@ -39,7 +39,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 continue;
             }
 
-            // ifisemptyline，skip
+            // ifisemptyline,skip
             if (empty(trim($line))) {
                 $result[] = '';
                 continue;
@@ -48,7 +48,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             // usefgetcsvmethodparseCSVline
             $row = str_getcsv($line);
 
-            // ifistheonelineandnotissheetmark，thenasfortitleline
+            // ifistheonelineandnotissheetmark,thenasfortitleline
             if (empty($headers) && ! empty($line)) {
                 $headers = $row;
                 continue;
@@ -86,23 +86,23 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // ifnothave找tominute隔符，defaultuse逗number
+        // ifnothave找tominute隔符,defaultuse逗number
         return ',';
     }
 
     /**
-     * format化CSVsingleyuan格content，to特殊contentadd引number.
+     * format化CSVsingleyuan格content,to特殊contentadd引number.
      * @param string $value singleyuan格content
      * @return string format化backsingleyuan格content
      */
     private function formatCsvCell(string $value): string
     {
-        // ifsingleyuan格contentforempty，直接returnemptystring
+        // ifsingleyuan格contentforempty,直接returnemptystring
         if ($value === '') {
             return '';
         }
 
-        // ifsingleyuan格contentcontainbydown任意character，needuse引numberpackage围
+        // ifsingleyuan格contentcontainbydown任意character,needuse引numberpackage围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('model_version')->comment('modelname');
             $table->string('organization_code')->comment('organizationencoding');
             $table->bigInteger('service_provider_config_id')->comment('to应servicequotientid');
-            $table->tinyInteger('status')->default(0)->comment('status：0-notenable，1-enable');
+            $table->tinyInteger('status')->default(0)->comment('status:0-notenable,1-enable');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_service_provider_config_id');

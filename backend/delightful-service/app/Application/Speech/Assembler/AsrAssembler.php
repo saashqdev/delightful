@@ -18,7 +18,7 @@ use Hyperf\Codec\Json;
  * ASR group装器
  * 负责 ASR 相close实bodygroup装andpathconvert.
  *
- * pathformatinstruction：
+ * pathformatinstruction:
  * - work区相topath (workspace-relative): .asr_recordings/session_xxx or 录音总结_xxx
  * - projectworkdirectory (work directory): project_123/workspace
  * - organization码+APP_ID+bucket_md5front缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
@@ -32,12 +32,12 @@ class AsrAssembler
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $relativePath 相topath（如：.asr_recordings/task_123 or 录音总结_xxx）
-     * @param string $fullPrefix completefront缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
+     * @param string $relativePath 相topath(如:.asr_recordings/task_123 or 录音总结_xxx)
+     * @param string $fullPrefix completefront缀(organization码+APP_ID+bucket_md5,如:DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir workdirectory
      * @param int $rootDirectoryId rootdirectoryID
      * @param bool $isHidden whetherforhiddendirectory
-     * @param null|string $taskKey taskkey（onlyhiddendirectoryneed）
+     * @param null|string $taskKey taskkey(onlyhiddendirectoryneed)
      */
     public static function createDirectoryEntity(
         string $userId,
@@ -69,7 +69,7 @@ class AsrAssembler
         $fileKey = WorkDirectoryUtil::getFullFileKey($fullPrefix, $workDir, $relativePath);
         $fileKey = rtrim($fileKey, '/') . '/';
 
-        // certainfile名：hiddendirectoryuse basename，displaydirectoryusecompletepath
+        // certainfile名:hiddendirectoryuse basename,displaydirectoryusecompletepath
         $fileName = $isHidden ? basename($relativePath) : $relativePath;
 
         return new TaskFileEntity([
@@ -117,7 +117,7 @@ class AsrAssembler
     /**
      * from file_key extractwork区相topath.
      *
-     * willcomplete file_key convertforwork区相topath，useat沙箱 API calland界surfaceshow
+     * willcomplete file_key convertforwork区相topath,useat沙箱 API calland界surfaceshow
      * convertclose系: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
@@ -134,13 +134,13 @@ class AsrAssembler
             // extract workspace/ backsurface部minute
             $relativePath = substr($normalizedPath, $workspacePos + 11); // 11 = strlen('/workspace/')
 
-            // if相topathnotforempty，return相topath
+            // if相topathnotforempty,return相topath
             if (! empty($relativePath)) {
                 return $relativePath;
             }
         }
 
-        // ifnothave找to /workspace/，尝试find workspace/ openhead情况
+        // ifnothave找to /workspace/,尝试find workspace/ openhead情况
         if (str_starts_with($normalizedPath, 'workspace/')) {
             $relativePath = substr($normalizedPath, 10); // 移except 'workspace/' front缀
             if (! empty($relativePath)) {
@@ -148,7 +148,7 @@ class AsrAssembler
             }
         }
 
-        // ifallnot找toworkspaceidentifier，直接returnoriginalpath（maybealready经is相topath）
+        // ifallnot找toworkspaceidentifier,直接returnoriginalpath(maybealready经is相topath)
         return $normalizedPath;
     }
 }

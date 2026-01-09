@@ -23,18 +23,18 @@ class RoutineConfig
         private ?string $day = null,
         // specifictime
         private readonly ?string $time = null,
-        // customizeperiodtime，between隔unit day / week / month / year
+        // customizeperiodtime,between隔unit day / week / month / year
         private ?IntervalUnit $unit = null,
-        // customizeperiodtime，between隔frequency，如eachday，eachweek，eachmonth，eachyear
+        // customizeperiodtime,between隔frequency,如eachday,eachweek,eachmonth,eachyear
         private ?int $interval = null,
-        // unit=weeko clockfor[1~7]，unit=montho clockfor[1~31]
+        // unit=weeko clockfor[1~7],unit=montho clockfor[1~31]
         private ?array $values = null,
-        // enddate，thedatebacknotgeneratedata
+        // enddate,thedatebacknotgeneratedata
         private readonly ?DateTime $deadline = null,
         // 话题configuration
         private readonly ?TopicConfig $topicConfig = null
     ) {
-        // saveconfigurationo clocknotagainstronglinedetect，放togeneraterule处detect
+        // saveconfigurationo clocknotagainstronglinedetect,放togeneraterule处detect
     }
 
     public function toConfigArray(): array
@@ -76,7 +76,7 @@ class RoutineConfig
             case RoutineType::DailyRepeat:
                 break;
             case RoutineType::WeeklyRepeat:
-                // 0-6 table示weekonetoweekday，所bycompatibleonedown crontab rule 0 table示weekday
+                // 0-6 table示weekonetoweekday,所bycompatibleonedown crontab rule 0 table示weekday
                 $dayOfWeek = (int) $this->day + 1;
                 if ($dayOfWeek === 7) {
                     $dayOfWeek = 0;
@@ -138,14 +138,14 @@ class RoutineConfig
             if (empty($this->interval)) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency notcanforempty');
             }
-            // onlyeachdaytime，才cancustomize interval，itsremainderallis 1
+            // onlyeachdaytime,才cancustomize interval,itsremainderallis 1
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month, IntervalUnit::Year])) {
                 $this->interval = 1;
             }
             if ($this->interval < 1 || $this->interval > 30) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency onlycanin1~30between');
             }
-            // onlyisweekor者monthtime，才canhave values
+            // onlyisweekor者monthtime,才canhave values
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month])) {
                 if (empty($this->values)) {
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency notcanforempty');
@@ -185,7 +185,7 @@ class RoutineConfig
             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time notcanforempty');
         }
 
-        // eachweektime，day table示week几 0-6  0isweekone
+        // eachweektime,day table示week几 0-6  0isweekone
         if ($this->type === RoutineType::WeeklyRepeat) {
             if (! is_numeric($this->day) || $this->day < 0 || $this->day > 6) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date onlycanin0~6between');
@@ -193,7 +193,7 @@ class RoutineConfig
             $this->day = (string) ((int) $this->day);
         }
 
-        // eachmonthtime，day table示the几day
+        // eachmonthtime,day table示the几day
         if ($this->type === RoutineType::MonthlyRepeat) {
             if (! is_numeric($this->day) || $this->day < 1 || $this->day > 31) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date onlycanin1~31between');
@@ -201,7 +201,7 @@ class RoutineConfig
             $this->day = (string) ((int) $this->day);
         }
 
-        // notduplicate、eachyear、eachmonthtime，day table示date
+        // notduplicate、eachyear、eachmonthtime,day table示date
         if (in_array($this->type, [RoutineType::NoRepeat, RoutineType::AnnuallyRepeat])) {
             if (! is_string($this->day) || empty($this->day) || ! strtotime($this->day)) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date formaterror');
@@ -210,7 +210,7 @@ class RoutineConfig
 
         $dayTimestamp = strtotime($this->day ?? '');
         if ($dayTimestamp) {
-            // timeonlycanisnotcome，havebug， whendayalsowill认forisnotcome
+            // timeonlycanisnotcome,havebug, whendayalsowill认forisnotcome
             // if (! is_null($this->day) && $dayTimestamp < time()) {
             //
             //     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date notcanispassgo');

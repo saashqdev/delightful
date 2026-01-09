@@ -44,7 +44,7 @@ class FileAppService extends AbstractAppService
             $contentType,
             $sts
         );
-        // ifis本ground驱动，that么increaseonetemporary key
+        // ifis本ground驱动,that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $this->cache->set(
@@ -122,7 +122,7 @@ class FileAppService extends AbstractAppService
 
         $keys = array_column($files, 'key');
 
-        // 按organizationencodingminutegroupfile keys，参考 ProviderAppService 做法
+        // 按organizationencodingminutegroupfile keys,参考 ProviderAppService 做法
         $keysByOrg = [];
         foreach ($keys as $key) {
             if (empty($key)) {
@@ -164,7 +164,7 @@ class FileAppService extends AbstractAppService
         // checkfilewhetheralready经存inatthebusinesstypedown
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
-            // iffilealready存in，直接returnfilelink
+            // iffilealready存in,直接returnfilelink
             return $this->fileDomainService->getLink($organizationCode, $fileKey)->getUrl();
         }
 
@@ -222,7 +222,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本ground驱动，that么increaseonetemporary key
+        // ifis本ground驱动,that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -249,7 +249,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本ground驱动，that么increaseonetemporary key
+        // ifis本ground驱动,that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];

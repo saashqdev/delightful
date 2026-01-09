@@ -171,7 +171,7 @@ JSON, true));
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
         $this->assertEquals(['node_2'], $vertexResult->getChildrenIds());
 
-        // 10sinside，所bynotwillexecute
+        // 10sinside,所bynotwillexecute
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEmpty($vertexResult->getChildrenIds());
     }
@@ -281,9 +281,9 @@ JSON,
     public function testParamCallWithSystemParamKey()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [conversation_id] andsystem保留fieldconflict，请useothername');
+        $this->expectExceptionMessage('field名 [conversation_id] andsystem保留fieldconflict,请useothername');
 
-        // createonecontainsystem保留fieldsectionpointconfiguration，thisshouldinvalidate阶segmentthrowexception
+        // createonecontainsystem保留fieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -337,7 +337,7 @@ JSON,
     public function testParamCallWithSystemParamKeyInCustomSystemOutput()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [message_type] andsystem保留fieldconflict，请useothername');
+        $this->expectExceptionMessage('field名 [message_type] andsystem保留fieldconflict,请useothername');
 
         // testincustom_system_outputmiddleusesystem保留field
         $node = Node::generateTemplate(NodeType::Start, json_decode(
@@ -393,9 +393,9 @@ JSON,
     public function testParamCallWithErrorJsonSchema()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('JSON Schema formaterror：[user_list] Array type must have items');
+        $this->expectExceptionMessage('JSON Schema formaterror:[user_list] Array type must have items');
 
-        // createonecontainsystem保留fieldsectionpointconfiguration，thisshouldinvalidate阶segmentthrowexception
+        // createonecontainsystem保留fieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {

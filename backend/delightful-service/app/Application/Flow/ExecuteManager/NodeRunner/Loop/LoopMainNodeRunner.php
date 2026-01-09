@@ -148,7 +148,7 @@ class LoopMainNodeRunner extends NodeRunner
         if (empty($childNodes)) {
             return null;
         }
-        // goexcept父 id property，not然willbefilter
+        // goexcept父 id property,not然willbefilter
         foreach ($childNodes as $node) {
             $meta = $node->getMeta();
             $meta['parent_id'] = '';
@@ -165,7 +165,7 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复usecurrentexecutedata，loopbodyinsidecanaccessandmodify
+            // 复usecurrentexecutedata,loopbodyinsidecanaccessandmodify
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);

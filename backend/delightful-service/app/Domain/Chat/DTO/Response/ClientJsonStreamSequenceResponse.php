@@ -13,14 +13,14 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use Hyperf\Codec\Json;
 
 /**
- * todo forcompatibleold版streammessage，needwill content/reasoning_content/status field放tomostoutsidelayer。
+ * todo forcompatibleold版streammessage,needwill content/reasoning_content/status field放tomostoutsidelayer.
  */
 class ClientJsonStreamSequenceResponse extends AbstractEntity
 {
     // wantupdategoal seqId content
     protected string $targetSeqId;
 
-    // forimplement丢package重传，needrecordcurrent $streamId。one定single调递增。
+    // forimplement丢package重传,needrecordcurrent $streamId.one定single调递增.
     protected ?int $streamId;
 
     /**
@@ -31,22 +31,22 @@ class ClientJsonStreamSequenceResponse extends AbstractEntity
     protected ?StreamOptions $streamOptions;
 
     /**
-     * @deprecated forcompatibleold版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?string $content;
 
     /**
-     * @deprecated forcompatibleold版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?string $reasoningContent;
 
     /**
-     * @deprecated forcompatibleold版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?int $status;
 
     /**
-     * @deprecated forcompatibleold版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?string $llmResponse;
 

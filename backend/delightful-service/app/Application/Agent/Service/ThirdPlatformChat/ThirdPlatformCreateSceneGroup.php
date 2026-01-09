@@ -27,19 +27,19 @@ class ThirdPlatformCreateSceneGroup
     // newmemberwhethercanviewhistorymessage
     private int $showHistoryType;
 
-    // whethercansearchgroup chat, 0（default）：notcansearch 1 search
+    // whethercansearchgroup chat, 0(default):notcansearch 1 search
     private int $searchable = 0;
 
-    // 入群whetherneedverify：0（default）：notverify 1：入群verify
+    // 入群whetherneedverify:0(default):notverify 1:入群verify
     private int $validationType = 0;
 
-    // @all userange： 0（default）：所havepersonallcan@all
+    // @all userange: 0(default):所havepersonallcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群managetype：0（default）：所havepersoncanmanage，1：only群主canmanage
+    // 群managetype:0(default):所havepersoncanmanage,1:only群主canmanage
     private int $managementType = 0;
 
-    // whetherstart群禁言：0（default）：not禁言，1：all员禁言
+    // whetherstart群禁言:0(default):not禁言,1:all员禁言
     private int $chatBannedType;
 
     // group唯oneidentifier

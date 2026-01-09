@@ -65,7 +65,7 @@ class MultiModalContentFormatter
         string $visionResponse,
         array $imageAttachments
     ): string {
-        // ifnothaveimageattachment，直接returnoriginalcontent
+        // ifnothaveimageattachment,直接returnoriginalcontent
         if (empty($imageAttachments)) {
             return $originalContent;
         }
@@ -98,7 +98,7 @@ class MultiModalContentFormatter
         string $originalContent,
         array $nonImageAttachments
     ): string {
-        // ifnothaveattachment，直接returnoriginalcontent
+        // ifnothaveattachment,直接returnoriginalcontent
         if (empty($nonImageAttachments)) {
             return $originalContent;
         }

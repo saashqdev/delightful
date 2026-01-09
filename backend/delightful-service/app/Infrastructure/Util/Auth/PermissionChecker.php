@@ -30,7 +30,7 @@ class PermissionChecker
     }
 
     /**
-     * inside部permissioncheckmethod，便attest.
+     * inside部permissioncheckmethod,便attest.
      *
      * @param string $mobile hand机number
      * @param SuperPermissionEnum $permission wantcheckpermission

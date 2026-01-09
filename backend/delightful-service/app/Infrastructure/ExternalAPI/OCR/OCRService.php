@@ -38,7 +38,7 @@ readonly class OCRService
         $ocrClient = $this->clientFactory->getClient($type);
         try {
             $result = retry(1, function () use ($ocrClient, $url) {
-                // ifalsohaveotherservicequotient，thiswithincan故障转移
+                // ifalsohaveotherservicequotient,thiswithincan故障转移
                 return $this->get($url, $ocrClient);
             }, 1000);
         } catch (Throwable $throwable) {
@@ -76,7 +76,7 @@ readonly class OCRService
             throw new RuntimeException("no法getheadinfo: {$url}");
         }
 
-        // extract `Last-Modified`、`ETag` and `Content-Length`（if存in）
+        // extract `Last-Modified`、`ETag` and `Content-Length`(if存in)
         $lastModified = $headers['Last-Modified'] ?? null;
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;
@@ -89,12 +89,12 @@ readonly class OCRService
             if ($lastModified && $etag) {
                 $isCacheValid = $cachedData['Last-Modified'] === $lastModified && $cachedData['Etag'] === $etag;
             }
-            // ifnothave Last-Modified or ETag，check Content-Length
+            // ifnothave Last-Modified or ETag,check Content-Length
             elseif ($contentLength) {
                 $isCacheValid = $cachedData['Content-Length'] === $contentLength;
             }
 
-            // ifcachedatavalid，直接returncachecontent
+            // ifcachedatavalid,直接returncachecontent
             if ($isCacheValid) {
                 return $cachedData['content'];
             }

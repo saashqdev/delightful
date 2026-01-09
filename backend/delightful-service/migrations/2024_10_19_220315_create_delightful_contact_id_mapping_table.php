@@ -21,8 +21,8 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('origin_id', 255)->comment('源id');
             $table->string('new_id', 255)->comment('newid');
-            // mappingtype：user id、department id、nullbetween id，organization id
-            $table->string('mapping_type', 32)->comment('mappingtype（user、department、space、organization）');
+            // mappingtype:user id、department id、nullbetween id,organization id
+            $table->string('mapping_type', 32)->comment('mappingtype(user、department、space、organization)');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');

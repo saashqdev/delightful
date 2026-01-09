@@ -14,7 +14,7 @@ use InvalidArgumentException;
 
 /**
  * servicequotienttemplateIDprocesstoolcategory
- * useatgenerateandparseservicequotienttemplateID（usefixed数value型string）.
+ * useatgenerateandparseservicequotienttemplateID(usefixed数value型string).
  */
 class ProviderConfigIdAssembler
 {

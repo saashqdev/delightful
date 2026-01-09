@@ -50,11 +50,11 @@ class FileDefaultInitCommand extends Command
 
         // get公have桶configuration
         $publicBucketConfig = config('cloudfile.storages.' . StorageBucketType::Public->value);
-        $this->line('公have桶configuration：' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
+        $this->line('公have桶configuration:' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
 
-        // ifis local 驱动，notneedinitialize
+        // ifis local 驱动,notneedinitialize
         if ($publicBucketConfig['adapter'] === 'local') {
-            $this->info('本ground驱动，notneedinitialize');
+            $this->info('本ground驱动,notneedinitialize');
             return;
         }
 
@@ -126,10 +126,10 @@ class FileDefaultInitCommand extends Command
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generatebusiness唯oneidentifier（useatduplicatecheck）
+                    // generatebusiness唯oneidentifier(useatduplicatecheck)
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
-                    // correctduplicatecheck：querysamebusinesstypedownwhetherhavesamebusinessidentifier
+                    // correctduplicatecheck:querysamebusinesstypedownwhetherhavesamebusinessidentifier
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
@@ -154,7 +154,7 @@ class FileDefaultInitCommand extends Command
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
 
-                        // 完all参考 ImageWatermarkProcessor success做法，butfinger定file名
+                        // 完all参考 ImageWatermarkProcessor success做法,butfinger定file名
                         $uploadFile = new UploadFile($base64Content, 'default-files', $fileName);
                         $this->fileDomainService->uploadByCredential(
                             $organizationCode,
@@ -162,16 +162,16 @@ class FileDefaultInitCommand extends Command
                             StorageBucketType::Public
                         );
 
-                        // immediatelyvalidatefilewhethercanget（closekeyvalidatestep）
+                        // immediatelyvalidatefilewhethercanget(closekeyvalidatestep)
                         $actualKey = $uploadFile->getKey();
-                        // from key middleextractorganizationencoding，参考 ProviderAppService correct做法
+                        // from key middleextractorganizationencoding,参考 ProviderAppService correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
-                            throw new Exception('fileuploadfail，no法getaccesslink');
+                            throw new Exception('fileuploadfail,no法getaccesslink');
                         }
 
-                        // validatesuccessback才createdatabaserecord，useactualupload key
+                        // validatesuccessback才createdatabaserecord,useactualupload key
                         $defaultFileEntity = new DefaultFileEntity();
                         $defaultFileEntity->setBusinessType($businessType->value);
                         $defaultFileEntity->setFileType(DefaultFileType::DEFAULT->value);
@@ -198,10 +198,10 @@ class FileDefaultInitCommand extends Command
             }
         }
 
-        // meanwhilehandleoriginaldefaultgraph标file（ifneed话）
+        // meanwhilehandleoriginaldefaultgraph标file(ifneed话)
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
-        $this->info("fileinitializecomplete，共handle {$totalFiles} file，skip {$skippedFiles} already存infile");
+        $this->info("fileinitializecomplete,共handle {$totalFiles} file,skip {$skippedFiles} already存infile");
     }
 
     /**
@@ -213,7 +213,7 @@ class FileDefaultInitCommand extends Command
         try {
             return DefaultFileBusinessType::from($moduleName);
         } catch (ValueError) {
-            // if直接mappingfail，尝试passnamematch
+            // if直接mappingfail,尝试passnamematch
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,
@@ -228,7 +228,7 @@ class FileDefaultInitCommand extends Command
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // ifhaveneedsingle独handledefaultgraph标，caninthiswithinimplement
+        // ifhaveneedsingle独handledefaultgraph标,caninthiswithinimplement
         // for examplehandle Midjourney etcdefaultgraph标
     }
 }

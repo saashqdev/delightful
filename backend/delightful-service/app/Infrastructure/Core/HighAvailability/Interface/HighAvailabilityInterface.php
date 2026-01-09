@@ -46,7 +46,7 @@ interface HighAvailabilityInterface
     public function getAvailableEndpoint(EndpointRequestDTO $request): ?EndpointDTO;
 
     /**
-     * record接入pointresponseandfrom动processsuccess/failedstatus，byanduseatback续dataanalyze。
+     * record接入pointresponseandfrom动processsuccess/failedstatus,byanduseatback续dataanalyze.
      *
      * themethodwill:
      * 1. recordrequeststatisticsdata

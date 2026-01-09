@@ -32,22 +32,22 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯oneencoding，onlyincreateo clockgenerate，useasgivefront端id.
+     * 唯oneencoding,onlyincreateo clockgenerate,useasgivefront端id.
      */
     protected string $code;
 
     /**
-     * processname（助理name）.
+     * processname(助理name).
      */
     protected string $name;
 
     /**
-     * processdescription （助理description）.
+     * processdescription (助理description).
      */
     protected string $description;
 
     /**
-     * processgraph标（助理avatar）.
+     * processgraph标(助理avatar).
      */
     protected string $icon = '';
 
@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * onlyfront端need，process编row放to node sectionpointconfiguration next_nodes middle.
+     * onlyfront端need,process编row放to node sectionpointconfiguration next_nodes middle.
      */
     protected array $edges;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * processcallbackfunction，ifhavethevalue，that么will直接executethechoose，whilenotispassNodeRunnercomeexecute.
+     * processcallbackfunction,ifhavethevalue,that么will直接executethechoose,whilenotispassNodeRunnercomeexecute.
      */
     private ?Closure $callback = null;
 
@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // ifiswantstart，needdetectwhetherhave nodes configuration
+            // ifiswantstart,needdetectwhetherhave nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -238,14 +238,14 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // ifalready经haveone，that么iserrorprocess，out现多startsectionpoint
+                // ifalready经haveone,that么iserrorprocess,out现多startsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多endsectionpointo clock，暂o clock取first，shouldwant做becomeonlycanhaveoneendsectionpoint
+                // 多endsectionpointo clock,暂o clock取first,shouldwant做becomeonlycanhaveoneendsectionpoint
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // result优先，ifalready经存in，thennotneed
+                // result优先,ifalready经存in,thennotneed
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }

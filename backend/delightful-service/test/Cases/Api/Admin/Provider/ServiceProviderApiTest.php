@@ -25,9 +25,9 @@ class ServiceProviderApiTest extends BaseTest
         $uri = $this->baseUri . '?category=llm';
         $response = $this->get($uri, [], $this->getCommonHeaders());
 
-        // ifreturnauthenticationorpermission相closeerror，skiptest（onlyvalidate路bycanuse）
+        // ifreturnauthenticationorpermission相closeerror,skiptest(onlyvalidate路bycanuse)
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
-            $this->markTestSkipped('interfaceauthenticationfailornopermission，路byvalidationpass');
+            $this->markTestSkipped('interfaceauthenticationfailornopermission,路byvalidationpass');
             return;
         }
 
@@ -40,7 +40,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * testmodelcreateandmorenewcompleteprocess，includeconfigurationversionvalidate.
+     * testmodelcreateandmorenewcompleteprocess,includeconfigurationversionvalidate.
      */
     public function testSaveModelToServiceProviderCreate(): void
     {
@@ -124,7 +124,7 @@ class ServiceProviderApiTest extends BaseTest
             'time_cost' => 50,
         ]);
 
-        // ========== step3: validateconfigurationversion（version=1） ==========
+        // ========== step3: validateconfigurationversion(version=1) ==========
         $this->verifyConfigVersion((int) $modelId, $createRequestData['config'], 1);
 
         // ========== step4: updatemodel ==========
@@ -196,7 +196,7 @@ class ServiceProviderApiTest extends BaseTest
             'cache_hit_cost' => 0.0003,
         ]);
 
-        // ========== step6: validateupdatebackconfigurationversion（version=2） ==========
+        // ========== step6: validateupdatebackconfigurationversion(version=2) ==========
         $this->verifyConfigVersion((int) $modelId, $updateRequestData['config'], 2);
     }
 
@@ -308,11 +308,11 @@ class ServiceProviderApiTest extends BaseTest
      *
      * @param array $detailData detailresponsedata
      * @param string $modelId modelID
-     * @return null|array 找tomodeldata，not找toreturnnull
+     * @return null|array 找tomodeldata,not找toreturnnull
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // detailinterfacemaybereturn models arrayorother结构，thiswithinneedaccording toactualinterfaceadjust
+        // detailinterfacemaybereturn models arrayorother结构,thiswithinneedaccording toactualinterfaceadjust
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {
@@ -321,7 +321,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // ifisother结构，continuefind
+        // ifisother结构,continuefind
         if (isset($detailData['id']) && (string) $detailData['id'] === (string) $modelId) {
             return $detailData;
         }
@@ -342,7 +342,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('cache_write_cost', $config, 'configshouldcontaincache_write_costfield');
         $this->assertArrayHasKey('cache_hit_cost', $config, 'configshouldcontaincache_hit_costfield');
 
-        // validatevaluewhethercorrect（allow浮point数误difference）
+        // validatevaluewhethercorrect(allow浮point数误difference)
         $this->assertEqualsWithDelta(
             $expectedCosts['input_cost'],
             (float) $config['input_cost'],
@@ -393,7 +393,7 @@ class ServiceProviderApiTest extends BaseTest
 
         $this->assertNotNull($versionEntity, 'configurationversionshould存in');
 
-        // validate int typefield（stringshouldbeconvertfor int）
+        // validate int typefield(stringshouldbeconvertfor int)
         if (isset($expectedConfig['max_output_tokens'])) {
             $this->assertSame(
                 (int) $expectedConfig['max_output_tokens'],
@@ -418,7 +418,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validate float typefield（stringshouldbeconvertfor float）
+        // validate float typefield(stringshouldbeconvertfor float)
         if (isset($expectedConfig['input_pricing'])) {
             $this->assertEqualsWithDelta(
                 (float) $expectedConfig['input_pricing'],

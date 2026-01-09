@@ -44,7 +44,7 @@ readonly class AsrFileDataDTO
     }
 
     /**
-     * convertforarrayformat，useatchatmessage.
+     * convertforarrayformat,useatchatmessage.
      */
     public function toArray(): array
     {

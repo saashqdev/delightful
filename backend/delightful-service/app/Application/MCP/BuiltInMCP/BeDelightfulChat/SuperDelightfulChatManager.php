@@ -81,7 +81,7 @@ class BeDelightfulChatManager
         // 1. query所havecanuse agent
         $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
-        // ifnothavecanuse agents，直接returnemptyarray
+        // ifnothavecanuse agents,直接returnemptyarray
         if (empty($agents)) {
             return [];
         }
@@ -93,7 +93,7 @@ class BeDelightfulChatManager
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理conductconversation
 
-canuse AI 助理list：
+canuse AI 助理list:
 
 MARKDOWN;
 
@@ -120,9 +120,9 @@ MARKDOWN;
         }
 
         $usageInstructions = <<<'MARKDOWN'
-useinstruction：
+useinstruction:
 • mustprovide agent_id and message parameter
-• conversation_id useatmaintainconversation连续property，sameIDmessagewillsharedupdown文
+• conversation_id useatmaintainconversation连续property,sameIDmessagewillsharedupdown文
 
 MARKDOWN;
 
@@ -131,17 +131,17 @@ MARKDOWN;
         // addfinger令parameterinstruction
         if (! empty($allInstructions)) {
             $instructionHelp = <<<'MARKDOWN'
-finger令parameter instruction（optional）：
-• format：[{"name": "finger令name", "value": "finger令value"}, ...]
-• single-selecttype：fromoptionalvaluemiddlechooseone，for example "yes", "no"
-• switchtype：onlycanis "on" or "off"
-• ifnotprovidefinger令parameter，willusedefaultvalue
+finger令parameter instruction(optional):
+• format:[{"name": "finger令name", "value": "finger令value"}, ...]
+• single-selecttype:fromoptionalvaluemiddlechooseone,for example "yes", "no"
+• switchtype:onlycanis "on" or "off"
+• ifnotprovidefinger令parameter,willusedefaultvalue
 
-callexample：
+callexample:
 ```json
 {
   "agent_id": "123456",
-  "message": "yougood，请帮Ianalyzeonedown...",
+  "message": "yougood,请帮Ianalyzeonedown...",
   "conversation_id": "conv_001",
   "instruction": [
     {"name": "switch", "value": "on"},
@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID，useat记忆feature，samesessionIDmessagewill具havesharedupdown文',
+                            'description' => 'sessionID,useat记忆feature,samesessionIDmessagewill具havesharedupdown文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -267,17 +267,17 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useatcontrolAI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令onlycanis "on" or "off"。',
+            'description' => 'finger令parameterarray,useatcontrolAI助理linefor.eachobjectcontain name(finger令name)and value(finger令value)field.single-selecttypefinger令needfromoptionalvaluemiddlechooseone,switchtypefinger令onlycanis "on" or "off".',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => 'finger令name，mustandAI助理definitionfinger令name完allmatch',
+                        'description' => 'finger令name,mustandAI助理definitionfinger令name完allmatch',
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtypeonlycanis "on" or "off"',
+                        'description' => 'finger令value,single-selecttypefromoptionalvaluemiddlechoose,switchtypeonlycanis "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // ifhavespecificfinger令info，generatemoredetailed schema
+        // ifhavespecificfinger令info,generatemoredetailed schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

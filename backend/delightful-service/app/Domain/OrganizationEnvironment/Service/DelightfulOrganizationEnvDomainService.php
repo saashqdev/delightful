@@ -47,7 +47,7 @@ class DelightfulOrganizationEnvDomainService
             if (! empty($orgEnvEntity)) {
                 return $orgEnvEntity;
             }
-            // createorganizationenvironment:ifis saas thennotalterorganizationencoding。
+            // createorganizationenvironment:ifis saas thennotalterorganizationencoding.
             if ($delightfulEnvEntity->getDeployment() === DeploymentEnum::SaaS) {
                 $delightfulOrganizationCode = $originOrganizationCode;
             } else {
@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * currentenvironmentdefault env configuration。 access saas o clockallowfront端not传environment id，usedefaultenvironmentconfiguration。
+     * currentenvironmentdefault env configuration. access saas o clockallowfront端not传environment id,usedefaultenvironmentconfiguration.
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {

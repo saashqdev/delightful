@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_contact_users', static function (Blueprint $table) {
             // option
-            $table->bigInteger('option')->default(null)->comment('option,如：0(hidden)')->nullable();
+            $table->bigInteger('option')->default(null)->comment('option,如:0(hidden)')->nullable();
         });
     }
 

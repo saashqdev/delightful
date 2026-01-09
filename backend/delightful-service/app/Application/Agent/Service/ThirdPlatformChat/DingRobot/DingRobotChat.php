@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemorelong，超pass3000ms，网close直接returntimeouterror。sendmessagethiso clockskip
+                // 钉钉 downloadimagetimemorelong,超pass3000ms,网close直接returntimeouterror.sendmessagethiso clockskip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemorelong，超pass3000ms，网close直接returntimeouterror。sendmessagethiso clockskip
+                // 钉钉 downloadimagetimemorelong,超pass3000ms,网close直接returntimeouterror.sendmessagethiso clockskip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -163,7 +163,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     /**
      * passhand机numbergetthethree方userid.
      * @param string $mobile hand机number码
-     * @return string thethree方userid，returnformat
+     * @return string thethree方userid,returnformat
      */
     public function getThirdPlatformUserIdByMobiles(string $mobile): string
     {

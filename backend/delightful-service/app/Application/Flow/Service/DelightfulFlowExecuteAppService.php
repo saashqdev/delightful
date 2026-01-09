@@ -100,7 +100,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::IMChat,
         );
 
-        // ifis conversation，forcestart stream 模type
+        // ifis conversation,forcestart stream 模type
         if ($triggerType === TriggerType::ChatMessage) {
             $executionData->setStream(true);
         }
@@ -114,7 +114,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
 
-        // ifhavesectionpointexecutefail，throwexception
+        // ifhavesectionpointexecutefail,throwexception
         foreach ($delightfulFlow->getNodes() as $node) {
             $nodeDebugResult = $node->getNodeDebugResult();
             if ($nodeDebugResult && ! $nodeDebugResult->isSuccess()) {
@@ -481,7 +481,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content'] ?? '']))],
             params: $triggerConfig['trigger_data'] ?? [],
             paramsForm: $triggerConfig['trigger_data_form'] ?? [],
-            // 试运lineo clock，all局variableforhand动传入
+            // 试运lineo clock,all局variableforhand动传入
             globalVariable: ComponentFactory::fastCreate($triggerConfig['global_variable'] ?? []) ?? $delightfulFlowEntity->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($triggerConfig['trigger_data']['files'] ?? []),
         );
@@ -503,7 +503,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executionData->setTopicId($topicId);
         $executionData->setAgentId($delightfulFlowEntity->getAgentId());
         $executionData->setDebug((bool) ($triggerConfig['debug'] ?? false));
-        // 运lineprocessgraph，detectwhethercan运line
+        // 运lineprocessgraph,detectwhethercan运line
         $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
         $executor->execute();
 

@@ -20,7 +20,7 @@ class SeqExtra extends AbstractEntity
     protected string $topicId = '';
 
     /**
-     * userhairthisitemmessageo clock，he所loginenvironment id.（such asin saas 生产填someprivatedeploy预publishenvironment码）
+     * userhairthisitemmessageo clock,he所loginenvironment id.(such asin saas 生产填someprivatedeploy预publishenvironment码)
      * useatrequestfinger定privatedeploytest/预publish/生产environment.
      */
     protected ?int $delightfulEnvId = null;

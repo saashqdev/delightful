@@ -123,7 +123,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * according tocodeupdate（supportchoosepropertyupdate）.
+     * according tocodeupdate(supportchoosepropertyupdate).
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
@@ -131,7 +131,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             return false;
         }
 
-        // ifneedupdateconfig，先getrecordIDconductencrypt
+        // ifneedupdateconfig,先getrecordIDconductencrypt
         if (! empty($data['config'])) {
             $builder = $this->createBuilder($dataIsolation, AiAbilityModel::query());
             $model = $builder->where('code', $code->value)->first();
@@ -187,7 +187,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $entity->setSortOrder($model->sort_order);
         $entity->setStatus($model->status);
 
-        // parseconfig（compatibleoldJSONformatandnewencryptformat）
+        // parseconfig(compatibleoldJSONformatandnewencryptformat)
         $config = $model->config ?? '';
         if (empty($config)) {
             $config = [];
@@ -195,10 +195,10 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             // 尝试asforJSONparse
             $jsonDecoded = json_decode($config, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($jsonDecoded)) {
-                // JSONparsesuccess，instructionisolddata（notencrypt）
+                // JSONparsesuccess,instructionisolddata(notencrypt)
                 $config = $jsonDecoded;
             } else {
-                // JSONparsefail，instructionisencryptdata，conductdecrypt
+                // JSONparsefail,instructionisencryptdata,conductdecrypt
                 $config = AiAbilityAssembler::decodeConfig($config, (string) $model->id);
             }
         } else {

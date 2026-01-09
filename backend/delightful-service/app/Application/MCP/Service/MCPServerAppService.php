@@ -118,7 +118,7 @@ class MCPServerAppService extends AbstractMCPAppService
 
         $resources = [];
         if (is_null($office)) {
-            // 官方dataandorganizationinside，oneandquery
+            // 官方dataandorganizationinside,oneandquery
             $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                 $dataIsolation,
                 ResourceType::MCPServer,
@@ -158,7 +158,7 @@ class MCPServerAppService extends AbstractMCPAppService
 
             $operation = Operation::None;
             if (in_array($item->getOrganizationCode(), $dataIsolation->getOfficialOrganizationCodes(), true)) {
-                // ifis官方organizationdata，andwhenfrontorganization所inorganizationis官方organization，thensetting操aspermissionforadministrator
+                // ifis官方organizationdata,andwhenfrontorganization所inorganizationis官方organization,thensetting操aspermissionforadministrator
                 if ($dataIsolation->isOfficialOrganization()) {
                     $operation = Operation::Admin;
                 }
@@ -302,7 +302,7 @@ class MCPServerAppService extends AbstractMCPAppService
                 ];
             }, $toolsResult?->getTools() ?? []);
 
-            // eachtimedetectsuccess，all存downonetimetoolcolumn表
+            // eachtimedetectsuccess,all存downonetimetoolcolumn表
             $this->mcpUserSettingDomainService->updateAdditionalConfig(
                 $dataIsolation,
                 $code,

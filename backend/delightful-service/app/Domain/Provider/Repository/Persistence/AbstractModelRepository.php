@@ -83,7 +83,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * initialize实bodyIDandtime戳（fornewcreate实bodyset）.
+     * initialize实bodyIDandtime戳(fornewcreate实bodyset).
      * @param mixed $entity
      */
     protected function initializeEntityForCreation($entity, array &$attributes): void
@@ -98,7 +98,7 @@ abstract class AbstractModelRepository extends AbstractRepository
         $entity->setUpdatedAt($now);
         $entity->setDeletedAt(null);
 
-        // setarrayproperty（useatdatabaseinsert）
+        // setarrayproperty(useatdatabaseinsert)
         $attributes['id'] = $id;
         $attributes['created_at'] = $nowString;
         $attributes['updated_at'] = $nowString;
@@ -132,7 +132,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderConfigModel querybuild器.
+     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderConfigModel querybuild器.
      */
     private function createConfigQuery(): Builder
     {
@@ -140,7 +140,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderModelModel querybuild器.
+     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

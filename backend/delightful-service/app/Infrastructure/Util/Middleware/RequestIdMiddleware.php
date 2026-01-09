@@ -17,13 +17,13 @@ class RequestIdMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // ifoutside部haverequest-id，then直接use
+        // ifoutside部haverequest-id,then直接use
         $requestId = $request->getHeaderLine('request-id');
         if ($requestId) {
             CoContext::setRequestId($requestId);
         }
 
-        // processheaderDelightful-User-Id 存in["usi_8","xxxxxxxxx"]issue，mergefor"usi_8xxxxxxxxx"
+        // processheaderDelightful-User-Id 存in["usi_8","xxxxxxxxx"]issue,mergefor"usi_8xxxxxxxxx"
         $delightfulUserId = $request->getHeader('delightful-user-id');
         if ($delightfulUserId && count($delightfulUserId) > 1) {
             $delightfulUserId = implode('', $delightfulUserId);

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message\StreamMessage;
 
 /**
- * endreason：
+ * endreason:
  * 0:processend
  * 1.hair生exception.
  */

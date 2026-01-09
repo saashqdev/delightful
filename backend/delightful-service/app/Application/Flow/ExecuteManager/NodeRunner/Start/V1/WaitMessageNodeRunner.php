@@ -41,7 +41,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             return;
         }
 
-        // ifisasfor运linesectionpoint onlyrecord，thenendwhenfrontexecute
+        // ifisasfor运linesectionpoint onlyrecord,thenendwhenfrontexecute
         $waitMessageEntity = new DelightfulFlowWaitMessageEntity();
         $waitMessageEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $waitMessageEntity->setConversationId($executionData->getConversationId());
@@ -60,7 +60,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             $waitMessageEntity->setTimeout(time() + $intervalSeconds);
         }
 
-        // 暂o clockalsois放todatalibrarymiddle，back续考虑放to objectstorage middle
+        // 暂o clockalsois放todatalibrarymiddle,back续考虑放to objectstorage middle
         $persistenceData = $executionData->getPersistenceData();
         $waitMessageEntity->setPersistentData($persistenceData);
 

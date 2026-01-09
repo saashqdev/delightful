@@ -68,7 +68,7 @@ class CreateGroupNodeRunner extends NodeRunner
         }
         $vertexResult->addDebugLog('group_owner_delightful_id', $groupOwnerInfo->getDelightfulId());
 
-        // 群member，allisuser ID
+        // 群member,allisuser ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
         $groupMemberIds = [];
         foreach ($groupMembers as $groupMember) {
@@ -90,7 +90,7 @@ class CreateGroupNodeRunner extends NodeRunner
         if ($paramsConfig->isIncludeCurrentAssistant()) {
             if ($agentUserId = $executionData->getAgentUserId()) {
                 $groupMemberIds[] = $agentUserId;
-                // only assistant start，才willhaveopen场白
+                // only assistant start,才willhaveopen场白
                 $assistantOpeningSpeech = $paramsConfig->getAssistantOpeningSpeech()?->getValue()->getResult($executionData->getExpressionFieldData()) ?? '';
             }
         }
@@ -123,7 +123,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $delightfulGroupDTO->setGroupType($groupType);
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
-        // pass conversationID getcome源 and 助理 key，andcreategroup chat
+        // pass conversationID getcome源 and 助理 key,andcreategroup chat
         $agentKey = $executionData->getTriggerData()->getAgentKey();
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 

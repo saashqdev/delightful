@@ -9,7 +9,7 @@ namespace App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request;
 
 class MidjourneyModelRequest extends ImageGenerateRequest
 {
-    // generateimagequantity(nothaveuse，butmustwant带)
+    // generateimagequantity(nothaveuse,butmustwant带)
 
     // ratio例
     private string $ratio = '1:1';

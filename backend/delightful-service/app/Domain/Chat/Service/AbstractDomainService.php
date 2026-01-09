@@ -338,7 +338,7 @@ abstract class AbstractDomainService
                     try {
                         // batchquantitygivefrom己generatestatus变moremessagestream序column
                         $this->delightfulSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
-                        // more改databasemiddlemessagestatus，avoidnew设备logino clockdisplaynot读
+                        // more改databasemiddlemessagestatus,avoidnew设备logino clockdisplaynot读
                         if (! empty($needUpdateStatusSeqIds)) {
                             $this->delightfulSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
                         }
@@ -404,12 +404,12 @@ abstract class AbstractDomainService
                         );
                         Db::beginTransaction();
                         try {
-                            // modifyoriginal seq，markalreadywithdraw
+                            // modifyoriginal seq,markalreadywithdraw
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$userSeqEntity->getId()], DelightfulMessageStatus::Revoked);
                             // batchquantitygivefrom己generatestatus变moremessagestream序column
                             $this->delightfulSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
                             $messagePriority = $this->getControlMessagePriority($userRevokedSeqEntity);
-                            // more改databasemiddlemessagestatus，avoidnew设备logino clockdisplaynot读
+                            // more改databasemiddlemessagestatus,avoidnew设备logino clockdisplaynot读
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
                             // asyncwillgeneratemessagestreamnotifyuserother设备.
                             $seqIds = [$userRevokedSeqEntity->getId()];
@@ -472,7 +472,7 @@ abstract class AbstractDomainService
         if (empty($topicId)) {
             return null;
         }
-        // ifiseditmessage，notwrite
+        // ifiseditmessage,notwrite
         if (! empty($seqEntity->getExtra()?->getEditMessageOptions()?->getDelightfulMessageId())) {
             return null;
         }
@@ -496,7 +496,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * user主动create话题handle。
+     * user主动create话题handle.
      * @throws Throwable
      */
     public function userCreateTopicHandler(TopicCreateMessage $messageStruct, DataIsolation $dataIsolation): DelightfulTopicEntity
@@ -514,7 +514,7 @@ abstract class AbstractDomainService
             // formessagereceive方create话题
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
             if ($receiveConversationEntity === null) {
-                // justaddgood友，receive方conversation id alsonotgenerate
+                // justaddgood友,receive方conversation id alsonotgenerate
                 return $senderTopicEntity;
             }
             $receiveTopicDTO = new DelightfulTopicEntity();

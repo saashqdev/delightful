@@ -15,7 +15,7 @@ enum DelightfulOperationEnum: string
     case EDIT = 'edit';
 
     /**
-     * tag，use i18n translate.
+     * tag,use i18n translate.
      */
     public function label(): string
     {

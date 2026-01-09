@@ -80,7 +80,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use chat o clock，one定isusethemethod.
+     * inside部use chat o clock,one定isusethemethod.
      * willfrom动替代for本groundproxymodel.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
@@ -97,7 +97,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use embedding o clock，one定isusethemethod.
+     * inside部use embedding o clock,one定isusethemethod.
      * willfrom动替代for本groundproxymodel.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
@@ -118,7 +118,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * themethodgettoone定istrue实callmodel.
      * only ModelGateway 领域use.
-     * @param string $model expectedismanageback台 model_id，passdegree阶segmentaccept传入 model_version
+     * @param string $model expectedismanageback台 model_id,passdegree阶segmentaccept传入 model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -133,7 +133,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * themethodgettoone定istrue实callmodel.
      * only ModelGateway 领域use.
-     * @param string $model modelname expectedismanageback台 model_id，passdegree阶segmentaccept model_version
+     * @param string $model modelname expectedismanageback台 model_id,passdegree阶segmentaccept model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {
@@ -289,7 +289,7 @@ class ModelGatewayMapper extends ModelMapper
                     }
                     break;
                 default:
-                    // ifnothavefinger定type，thenall部add
+                    // ifnothavefinger定type,thenall部add
                     break;
             }
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
@@ -397,14 +397,14 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservicequotient统onedisplay别名，ifnothave别名thendisplay“customizeservicequotient”（need考虑多language）
+            // customizeservicequotient统onedisplay别名,ifnothave别名thendisplay“customizeservicequotient”(need考虑多language)
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // inside置servicequotient统onedisplay servicequotientname，notusedisplay别名（need考虑多language）
+            // inside置servicequotient统onedisplay servicequotientname,notusedisplay别名(need考虑多language)
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // ifnotis官方organization，butismodelis官方organization，统onedisplay Delightful
+        // ifnotis官方organization,butismodelis官方organization,统onedisplay Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -412,7 +412,7 @@ class ModelGatewayMapper extends ModelMapper
 
         try {
             $fileDomainService = di(FileDomainService::class);
-            // ifis官方organization icon，switch官方organization
+            // ifis官方organization icon,switch官方organization
             if ($providerModelEntity->isOffice()) {
                 $iconUrl = $fileDomainService->getLink($providerDataIsolation->getOfficialOrganizationCode(), $providerModelEntity->getIcon())?->getUrl() ?? '';
             } else {
@@ -427,7 +427,7 @@ class ModelGatewayMapper extends ModelMapper
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }
 
-        // toatLLM/Embeddingmodel，maintain原have逻辑
+        // toatLLM/Embeddingmodel,maintain原have逻辑
         return new OdinModel(
             key: $key,
             model: $this->createModel($providerModelEntity->getModelVersion(), [

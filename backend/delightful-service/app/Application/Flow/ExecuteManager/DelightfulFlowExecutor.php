@@ -45,7 +45,7 @@ class DelightfulFlowExecutor
     private ?string $rootId = null;
 
     /**
-     * useatrecord nodes  next_nodes，asfor edges 编row.
+     * useatrecord nodes  next_nodes,asfor edges 编row.
      */
     private array $nextNodeIds = [];
 
@@ -89,7 +89,7 @@ class DelightfulFlowExecutor
 
     public function execute(?TriggerType $appointTriggerType = null): array
     {
-        // trulystartexecuteo clock，才willproduceexecute id
+        // trulystartexecuteo clock,才willproduceexecute id
         $this->createExecuteLog();
         $this->executorId = (string) $this->delightfulFlowExecuteLogEntity->getId();
 
@@ -189,7 +189,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // loopo clock，notprocessbacksurfacedata
+            // loopo clock,notprocessbacksurfacedata
             return;
         }
 
@@ -199,7 +199,7 @@ class DelightfulFlowExecutor
             $this->delightfulFlowEntity->getCreator()
         );
 
-        // forin运linemiddle，givehaveneedgetcurrentprocesssectionpointuse
+        // forin运linemiddle,givehaveneedgetcurrentprocesssectionpointuse
         ExecutionDataCollector::add($this->executionData);
     }
 
@@ -207,7 +207,7 @@ class DelightfulFlowExecutor
     {
         $nodeDebugResult = $node->getNodeDebugResult();
         if (! $nodeDebugResult->isSuccess()) {
-            // as long ashaveonesectionpointisfail，that么processthenisfail
+            // as long ashaveonesectionpointisfail,that么processthenisfail
             $this->success = false;
         }
         $this->logger->info('HandledNode', [
@@ -227,7 +227,7 @@ class DelightfulFlowExecutor
         $this->archiveToCloud($vertexResult);
 
         if (! $nodeDebugResult->isSuccess()) {
-            // ifis API request，throwerrorinfo
+            // ifis API request,throwerrorinfo
             if ($this->executionData->getExecutionType()->isApi()) {
                 // ifnotis助理parametercall 才recorderrorinfo
                 if (! $this->executionData->getTriggerData()->isAssistantParamCall()) {
@@ -304,7 +304,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // loopo clock，notcandeletethedata
+            // loopo clock,notcandeletethedata
             return;
         }
 
@@ -321,7 +321,7 @@ class DelightfulFlowExecutor
         if ($this->executionData->getStreamStatus() !== FlowStreamStatus::Processing) {
             return;
         }
-        // only主process才canend（thezerolayer）
+        // only主process才canend(thezerolayer)
         if ($this->executionData->getLevel() !== 0) {
             return;
         }
@@ -426,11 +426,11 @@ class DelightfulFlowExecutor
             if ($node->getParentId()) {
                 continue;
             }
-            // 运linefrontthen先尝试conduct所havesectionpointparameterdetect，useat提frontgenerategood NodeParamsConfig
+            // 运linefrontthen先尝试conduct所havesectionpointparameterdetect,useat提frontgenerategood NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // havetheseis悬浮sectionpoint（即inprocess运linemiddlenotwillbeusesectionpoint)，兜bottomwillinexecuteo clockagaintimeconductparameterverify
+                // havetheseis悬浮sectionpoint(即inprocess运linemiddlenotwillbeusesectionpoint),兜bottomwillinexecuteo clockagaintimeconductparameterverify
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -440,13 +440,13 @@ class DelightfulFlowExecutor
                 if (! $executionData) {
                     return $vertexResult;
                 }
-                // ifisdebug sectionpoint，andandnotis debug 模type运line，that么thesectionpointnotallow
+                // ifisdebug sectionpoint,andandnotis debug 模type运line,that么thesectionpointnotallow
                 if ($node->getDebug() && ! $executionData->isDebug()) {
                     return $vertexResult;
                 }
 
                 $vertex = $this->dag->getVertex($node->getNodeId());
-                // thiswithingeneralcome说notwillfornull，先not管null情况
+                // thiswithingeneralcome说notwillfornull,先not管null情况
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
                     // notcanfrom己连from己
@@ -455,7 +455,7 @@ class DelightfulFlowExecutor
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // defaultiswant调degreedownonelevel，ifnotneed调degree，inspecificexecutemiddlecansetfor[]
+                // defaultiswant调degreedownonelevel,ifnotneed调degree,inspecificexecutemiddlecansetfor[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // add flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -468,7 +468,7 @@ class DelightfulFlowExecutor
             $vertex = Vertex::make($job, $node->getNodeId());
             if (is_null($this->rootId)) {
                 if ($this->appointRootId) {
-                    // ifhavefinger定，thenusefinger定
+                    // ifhavefinger定,thenusefinger定
                     if ($node->getNodeId() === $this->appointRootId) {
                         $vertex->markAsRoot();
                         $this->rootId = $this->appointRootId;
@@ -507,7 +507,7 @@ class DelightfulFlowExecutor
 
     private function archiveToCloud(VertexResult $vertexResult): void
     {
-        // already经运linepass，alsonot归档
+        // already经运linepass,alsonot归档
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }

@@ -26,7 +26,7 @@ class DelightfulStreamTextProcessor
     private string $buffer = '';
 
     /**
-     * @var int status 0 普通text，1 tagstart，2 intaginside
+     * @var int status 0 普通text,1 tagstart,2 intaginside
      */
     private int $state = 0;
 
@@ -80,7 +80,7 @@ class DelightfulStreamTextProcessor
         }
 
         if ($this->state === self::STATE_IN_TAG) {
-            // ifalready经detectlengthalready经达tomostbiglength，直接response
+            // ifalready经detectlengthalready经达tomostbiglength,直接response
             if (mb_strlen($this->buffer) > max($this->successLengths)) {
                 $this->output($params);
                 return;
@@ -114,7 +114,7 @@ class DelightfulStreamTextProcessor
 
     private function isValidTagContent(): array
     {
-        // justthen挺费performance，先采usefixedstringlength
+        // justthen挺费performance,先采usefixedstringlength
         if (! in_array(mb_strlen($this->buffer), $this->successLengths)) {
             return [];
         }

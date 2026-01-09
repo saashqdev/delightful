@@ -246,13 +246,13 @@ class LongTermMemoryAdminApi extends AbstractApi
             'status' => $status,
             'enabled' => $enabled,
             'pageToken' => $validatedParams['page_token'] ?? null,
-            'limit' => (int) $pageSize, // 传递originalpagesize，letapplicationservicelayerprocesspagination逻辑
+            'limit' => (int) $pageSize, // 传递originalpagesize,letapplicationservicelayerprocesspagination逻辑
         ]);
         // parse pageToken
         $dto->parsePageToken();
         $result = $this->longTermMemoryAppService->findMemories($dto);
 
-        // 按updatetime降序sort（PHP sort）
+        // 按updatetime降序sort(PHP sort)
         if (isset($result['data']) && is_array($result['data'])) {
             usort($result['data'], static function (array $a, array $b) {
                 $timeB = isset($b['updated_at']) && ! empty($b['updated_at']) ? strtotime($b['updated_at']) : 0;
@@ -365,7 +365,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * batchquantityprocess记忆suggestion（accept/reject）.
+     * batchquantityprocess记忆suggestion(accept/reject).
      */
     public function batchProcessMemorySuggestions(RequestInterface $request): array
     {
@@ -402,7 +402,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // defaultformanageback台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
-        // verifywhen scenario is memory_card_quick o clock，delightful_message_id mustprovide
+        // verifywhen scenario is memory_card_quick o clock,delightful_message_id mustprovide
         if ($scenarioString === 'memory_card_quick' && empty($validatedParams['delightful_message_id'])) {
             return [
                 'success' => false,
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // batchquantityaccept记忆suggestion：status 改for accept，enabled for true
+                // batchquantityaccept记忆suggestion:status 改for accept,enabled for true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
@@ -652,11 +652,11 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO（lengthcheckalreadyinparameterverify阶segmentcomplete，andat leasthaveonefieldnotforempty）
+        // buildDTO(lengthcheckalreadyinparameterverify阶segmentcomplete,andat leasthaveonefieldnotforempty)
         $status = null;
         $explanation = null;
 
-        // ifupdatecontent，setstatusforACTIVE
+        // ifupdatecontent,setstatusforACTIVE
         if ($inputContent !== null) {
             $status = MemoryStatus::ACTIVE->value;
             $explanation = trans('long_term_memory.api.user_manual_edit_explanation');

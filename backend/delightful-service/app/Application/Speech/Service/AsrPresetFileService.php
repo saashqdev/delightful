@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * 负责createpreset笔记andstreamidentifyfile，供front端writecontent.
+ * 负责createpreset笔记andstreamidentifyfile,供front端writecontent.
  */
 readonly class AsrPresetFileService
 {
@@ -66,7 +66,7 @@ readonly class AsrPresetFileService
         // getorganization码+APP_ID+bucket_md5front缀
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
-        // create笔记file（放indisplaydirectory，uservisible）
+        // create笔记file(放indisplaydirectory,uservisible)
         $noteFile = $this->createNoteFile(
             $userId,
             $organizationCode,
@@ -78,7 +78,7 @@ readonly class AsrPresetFileService
             $workDir
         );
 
-        // createstreamidentifyfile（放inhiddendirectory，usernotvisible）
+        // createstreamidentifyfile(放inhiddendirectory,usernotvisible)
         $transcriptFile = $this->createTranscriptFile(
             $userId,
             $organizationCode,
@@ -103,7 +103,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * delete笔记file（笔记contentforemptyo clockcleanup）.
+     * delete笔记file(笔记contentforemptyo clockcleanup).
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -135,7 +135,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * deletestreamidentifyfile（总结completebackcleanup）.
+     * deletestreamidentifyfile(总结completebackcleanup).
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -167,7 +167,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * create笔记file（放indisplaydirectory）.
+     * create笔记file(放indisplaydirectory).
      */
     private function createNoteFile(
         string $userId,
@@ -204,7 +204,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createstreamidentifyfile（放inhiddendirectory）.
+     * createstreamidentifyfile(放inhiddendirectory).
      */
     private function createTranscriptFile(
         string $userId,
@@ -279,7 +279,7 @@ readonly class AsrPresetFileService
             'file_name' => $fileName,
             'file_extension' => 'md',
             'file_key' => $fileKey,
-            'file_size' => 0, // initialfor0，front端writebackwillupdate
+            'file_size' => 0, // initialfor0,front端writebackwillupdate
             'external_url' => '',
             'storage_type' => 'workspace',
             'is_hidden' => $isHidden,
@@ -297,10 +297,10 @@ readonly class AsrPresetFileService
             return $result;
         }
 
-        // ifinsertbeignore（filealready存in），query现haverecord
+        // ifinsertbeignore(filealready存in),query现haverecord
         $existingFile = $this->taskFileDomainService->getByProjectIdAndFileKey($projectId, $fileKey);
         if ($existingFile !== null) {
-            $this->logger->info(sprintf('%salready存in，use现haverecord', $logPrefix), [
+            $this->logger->info(sprintf('%salready存in,use现haverecord', $logPrefix), [
                 'task_key' => $taskKey,
                 'file_id' => $existingFile->getFileId(),
             ]);

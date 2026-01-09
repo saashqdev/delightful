@@ -11,7 +11,7 @@ enum Type: int
 {
     case None = 0;
 
-    // 主process（直接useas助理）
+    // 主process(直接useas助理)
     case Main = 1;
 
     // 子process
@@ -20,7 +20,7 @@ enum Type: int
     // tool
     case Tools = 3;
 
-    // group合sectionpoint，运linemethodhavepointanalogousat子process
+    // group合sectionpoint,运linemethodhavepointanalogousat子process
     case CombinedNode = 4;
 
     // loopsectionpoint

@@ -32,7 +32,7 @@ readonly class AsrTaskRepository
      * savetaskstatusto Redis.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus DTO
-     * @param int $ttl expiretime（second），default 7 day
+     * @param int $ttl expiretime(second),default 7 day
      */
     public function save(AsrTaskStatusDTO $taskStatus, int $ttl = AsrConfig::TASK_STATUS_TTL): void
     {
@@ -59,7 +59,7 @@ readonly class AsrTaskRepository
      *
      * @param string $taskKey taskkey
      * @param string $userId userID
-     * @return null|AsrTaskStatusDTO taskstatus DTO，not存ino clockreturn null
+     * @return null|AsrTaskStatusDTO taskstatus DTO,not存ino clockreturn null
      */
     public function findByTaskKey(string $taskKey, string $userId): ?AsrTaskStatusDTO
     {
@@ -158,7 +158,7 @@ readonly class AsrTaskRepository
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // 按统onerulegeneratestring，然back MD5 avoidkey名passlong
+        // 按统onerulegeneratestring,然back MD5 avoidkey名passlong
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);

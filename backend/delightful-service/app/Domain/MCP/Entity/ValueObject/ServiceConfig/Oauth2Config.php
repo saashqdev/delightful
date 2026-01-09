@@ -15,55 +15,55 @@ use App\Infrastructure\Util\SSRF\SSRFUtil;
 class Oauth2Config extends AbstractValueObject
 {
     /**
-     * Client ID - customer端ID，isapplicationinauthorizationservice器middle唯oneidentifier。
-     * authorizationservice器passcustomer端IDcomeidentifydifferentthree方application。
+     * Client ID - customer端ID,isapplicationinauthorizationservice器middle唯oneidentifier.
+     * authorizationservice器passcustomer端IDcomeidentifydifferentthree方application.
      *
-     * createOAuthapplicationo clockwillminute配client_id，本exampleinput
+     * createOAuthapplicationo clockwillminute配client_id,本exampleinput
      * 813924812101982004357116497xxxx.app.coze
      */
     protected string $clientId = '';
 
     /**
-     * Client Secret - customer端key，andcustomer端ID配合use，useatauthapplication身share。
-     * ensureonlyauthorizationapplicationcanrequestpermission。
+     * Client Secret - customer端key,andcustomer端ID配合use,useatauthapplication身share.
+     * ensureonlyauthorizationapplicationcanrequestpermission.
      *
-     * createOAuthapplicationo clockwillminute配client_secret，本exampleinput 8jmSATwI*********
+     * createOAuthapplicationo clockwillminute配client_secret,本exampleinput 8jmSATwI*********
      */
     protected string $clientSecret = '';
 
     /**
-     * Client URL - service方OAuthpageURL，useatspliceuserloginauthorization页URL。
+     * Client URL - service方OAuthpageURL,useatspliceuserloginauthorization页URL.
      *
-     * userlogino clock，扣子willwilluser引导to"[client_url]?response_type=code&client_id=
-     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台callbacksecurityground址]"。
+     * userlogino clock,扣子willwilluser引导to"[client_url]?response_type=code&client_id=
+     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台callbacksecurityground址]".
      *
-     * 参考service方authorizationdocumentgetclient_url，本example参考扣子openhairguidedocument，input
+     * 参考service方authorizationdocumentgetclient_url,本example参考扣子openhairguidedocument,input
      * https://www.coze.cn/api/permission/oauth2/authorize
      */
     protected string $clientUrl = '';
 
     /**
-     * Scope - allowapplicationprocedurerequestaccessuserdatarange。
+     * Scope - allowapplicationprocedurerequestaccessuserdatarange.
      *
-     * 参考service方authorizationdocumentinputscope。
+     * 参考service方authorizationdocumentinputscope.
      */
     protected string $scope = '';
 
     /**
-     * Authorization URL - getuseraccess_tokenURLground址。
+     * Authorization URL - getuseraccess_tokenURLground址.
      *
-     * userpassclient_urlauthorizationsuccessback，three方servicewillreturnusergettokencode，
-     * and转tocallbackground址。thiso clock，service器provide方willpassto应datatoauthorization_urlhairuprequest，
-     * getuseraccess_token。
+     * userpassclient_urlauthorizationsuccessback,three方servicewillreturnusergettokencode,
+     * and转tocallbackground址.thiso clock,service器provide方willpassto应datatoauthorization_urlhairuprequest,
+     * getuseraccess_token.
      *
-     * 参考service方authorizationdocumentgetauthorization_url，本example参考扣子openhairguidedocument，input
+     * 参考service方authorizationdocumentgetauthorization_url,本example参考扣子openhairguidedocument,input
      * https://api.coze.cn/api/permission/oauth2/token
      */
     protected string $authorizationUrl = '';
 
     /**
-     * Authorization Content Type - toOAuthprovide者senddatacontenttype。
-     * 目frontonlysupportapplication/jsontype。
+     * Authorization Content Type - toOAuthprovide者senddatacontenttype.
+     * 目frontonlysupportapplication/jsontype.
      */
     protected string $authorizationContentType = 'application/json';
 

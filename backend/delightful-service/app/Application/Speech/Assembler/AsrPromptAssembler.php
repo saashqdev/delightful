@@ -19,16 +19,16 @@ class AsrPromptAssembler
      * generate录音总结titlehint词.
      *
      * @param string $asrStreamContent voiceidentifycontent
-     * @param null|NoteDTO $note 笔记content（optional）
-     * @param string $language outputlanguage（如：zh_CN, en_US）
+     * @param null|NoteDTO $note 笔记content(optional)
+     * @param string $language outputlanguage(如:zh_CN, en_US)
      * @return string completehint词
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
     {
-        // buildcontent：use XML tagformatexplicit区minutevoiceidentifycontentand笔记content
+        // buildcontent:use XML tagformatexplicit区minutevoiceidentifycontentand笔记content
         $contentParts = [];
 
-        // ifhave笔记，先add笔记content
+        // ifhave笔记,先add笔记content
         if ($note !== null && $note->hasContent()) {
             $contentParts[] = sprintf('<笔记content>%s</笔记content>', $note->content);
         }
@@ -39,28 +39,28 @@ class AsrPromptAssembler
         $textContent = implode("\n\n", $contentParts);
 
         $template = <<<'PROMPT'
-youisone专业录音contenttitlegenerate助hand。
+youisone专业录音contenttitlegenerate助hand.
 
 ## backgroundinstruction
-usersubmitonesegment录音content，录音content经passvoiceidentify转fortext，usermaybealsowillprovidehand写笔记asfor补充instruction。现inneedyouaccording tothisthesecontentgenerateone简洁accuratetitle。
+usersubmitonesegment录音content,录音content经passvoiceidentify转fortext,usermaybealsowillprovidehand写笔记asfor补充instruction.现inneedyouaccording tothisthesecontentgenerateone简洁accuratetitle.
 
 ## contentcome源instruction
-- <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclosekeyinfo
-- <voiceidentifycontent>：passvoiceidentify技术will录音convertbecometext，反映录音actualcontent
+- <笔记content>:userhand写笔记content,isto录音重pointrecordand总结,usuallycontainclosekeyinfo
+- <voiceidentifycontent>:passvoiceidentify技术will录音convertbecometext,反映录音actualcontent
 
 ## titlegeneraterequire
 
-### 优先level原then（重want）
-1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
-2. **重视笔记title**：if笔记is Markdown formatandcontaintitle（# openheadline），优先采use笔记middletitlecontent
-3. **综合考虑**：meanwhile参考voiceidentifycontent，ensuretitlecompleteaccurate
-4. **keywordextract**：from笔记andvoiceidentifycontentmiddleextractmost核corekeyword
+### 优先level原then(重want)
+1. **笔记优先**:if存in<笔记content>,titleshould侧重笔记content
+2. **重视笔记title**:if笔记is Markdown formatandcontaintitle(# openheadline),优先采use笔记middletitlecontent
+3. **综合考虑**:meanwhile参考voiceidentifycontent,ensuretitlecompleteaccurate
+4. **keywordextract**:from笔记andvoiceidentifycontentmiddleextractmost核corekeyword
 
 ### formatrequire
-1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
-2. **languagestyle**：use陈述property语sentence，avoid疑问sentence
-3. **简洁explicit**：直接概括核coretheme，notwantaddmodification词
-4. **纯textoutput**：onlyoutputtitlecontent，notwantaddany标point符number、引numberorothermodification
+1. **lengthlimit**:not超pass 20 character(汉字按 1 charactercalculate)
+2. **languagestyle**:use陈述property语sentence,avoid疑问sentence
+3. **简洁explicit**:直接概括核coretheme,notwantaddmodification词
+4. **纯textoutput**:onlyoutputtitlecontent,notwantaddany标point符number、引numberorothermodification
 
 ### forbidlinefor
 - notwantreturn答contentmiddleissue
@@ -72,20 +72,20 @@ usersubmitonesegment录音content，录音content经passvoiceidentify转fortext�
 {textContent}
 
 ## outputlanguage
-请use {language} languageoutputtitle。
+请use {language} languageoutputtitle.
 
 ## output
-请直接outputtitle：
+请直接outputtitle:
 PROMPT;
 
         return str_replace(['{textContent}', '{language}'], [$textContent, $language], $template);
     }
 
     /**
-     * generatefileupload场景录音titlehint词（emphasizefile名重wantproperty）.
+     * generatefileupload场景录音titlehint词(emphasizefile名重wantproperty).
      *
      * @param string $userRequestMessage userinchat框sendrequestmessage
-     * @param string $language outputlanguage（如：zh_CN, en_US）
+     * @param string $language outputlanguage(如:zh_CN, en_US)
      * @return string completehint词
      */
     public static function getTitlePromptForUploadedFile(
@@ -93,42 +93,42 @@ PROMPT;
         string $language
     ): string {
         $template = <<<'PROMPT'
-youisone专业录音contenttitlegenerate助hand。
+youisone专业录音contenttitlegenerate助hand.
 
 ## backgroundinstruction
-useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneedyouaccording touserrequestmessage（itsmiddlecontainfile名），forthistime录音总结generateone简洁accuratetitle。
+useruploadoneaudiofiletosystemmiddle,andinchat框middlesend总结request.现inneedyouaccording touserrequestmessage(itsmiddlecontainfile名),forthistime录音总结generateone简洁accuratetitle.
 
 ## userinchat框request
-usersendoriginalmessage如down：
+usersendoriginalmessage如down:
 ```
 {userRequestMessage}
 ```
 
 ## titlegeneraterequire
 
-### 优先level原then（non常重want）
-1. **file名优先**：file名usuallyisuser精core命名，containmost核corethemeinfo，请重point参考usermessagemiddle @ backsurfacefile名
-2. **智canjudge**：
-   - iffile名语义clear（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
-   - iffile名isdatetime戳（如"20241112_143025.mp3"）ornomeaningcharacter（如"录音001.mp3"），thenuse通usedescription
-3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme
+### 优先level原then(non常重want)
+1. **file名优先**:file名usuallyisuser精core命名,containmost核corethemeinfo,请重point参考usermessagemiddle @ backsurfacefile名
+2. **智canjudge**:
+   - iffile名语义clear(如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"),优先based onfile名generatetitle
+   - iffile名isdatetime戳(如"20241112_143025.mp3")ornomeaningcharacter(如"录音001.mp3"),thenuse通usedescription
+3. **extractkeyword**:fromfile名middleextractmost核corekeywordandtheme
 
 ### formatrequire
-1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
-2. **languagestyle**：use陈述property语sentence，avoid疑问sentence
-3. **简洁explicit**：直接概括核coretheme，notwantaddmodification词
-4. **纯textoutput**：onlyoutputtitlecontent，notwantaddany标point符number、引numberorothermodification
+1. **lengthlimit**:not超pass 20 character(汉字按 1 charactercalculate)
+2. **languagestyle**:use陈述property语sentence,avoid疑问sentence
+3. **简洁explicit**:直接概括核coretheme,notwantaddmodification词
+4. **纯textoutput**:onlyoutputtitlecontent,notwantaddany标point符number、引numberorothermodification
 
 ### forbidlinefor
-- notwant保留fileextension名（.mp3、.wav、.webm etc）
+- notwant保留fileextension名(.mp3、.wav、.webm etc)
 - notwantoutputtitlebyoutsideanycontent
 - notwantadd引number、书名numberetc标point符number
 
 ## outputlanguage
-请use {language} languageoutputtitle。
+请use {language} languageoutputtitle.
 
 ## output
-请直接outputtitle：
+请直接outputtitle:
 PROMPT;
 
         return str_replace(

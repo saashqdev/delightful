@@ -86,10 +86,10 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             // definitionuploaddirectory
             $subDir = 'open';
 
-            // createuploadfileobject（notfrom动rename）
+            // createuploadfileobject(notfrom动rename)
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // uploadfile（finger定notfrom动createdirectory）
+            // uploadfile(finger定notfrom动createdirectory)
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
             // generatecanaccesslink

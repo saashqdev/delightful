@@ -93,7 +93,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $builder->whereIn('id', $query->getIds());
         }
 
-        // addsort（numbermorebigmore靠front）
+        // addsort(numbermorebigmore靠front)
         $builder->orderBy('sort', 'DESC')->orderBy('id', 'ASC');
 
         $result = $this->getByPage($builder, $page, $query);
@@ -129,15 +129,15 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $providerConfigEntity->setUpdatedAt($now);
             $attributes['updated_at'] = $now->format('Y-m-d H:i:s');
 
-            // update操aso clock，移exceptnotshouldbemorenewfield
+            // update操aso clock,移exceptnotshouldbemorenewfield
             unset($attributes['id'], $attributes['created_at']);
         }
 
-        // toconfigurationdataconductencrypt（if存inandnotencrypt）
+        // toconfigurationdataconductencrypt(if存inandnotencrypt)
         if (! empty($attributes['config'])) {
             $configId = (string) $providerConfigEntity->getId();
 
-            // if config isstringandisvalid JSON format（notencryptconfigurationdata），thenneedencrypt
+            // if config isstringandisvalid JSON format(notencryptconfigurationdata),thenneedencrypt
             if (is_string($attributes['config']) && json_validate($attributes['config'])) {
                 $decodedConfig = Json::decode($attributes['config']);
                 $attributes['config'] = ProviderConfigAssembler::encodeConfig($decodedConfig, $configId);
@@ -201,9 +201,9 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
 
     /**
      * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumn表.
-     * new逻辑：bydatabasemiddleactualconfigurationfor准，toatdatabasemiddlenothaveservicequotienttype，usetemplate补充
-     * support多same provider_code configuration（organizationadministratorhand动add）
-     * finalresulthandleo clock，官方organizationwillfilter掉Delightfulservicequotient，普通organizationwillwillDelightfulservicequotient置top.
+     * new逻辑:bydatabasemiddleactualconfigurationfor准,toatdatabasemiddlenothaveservicequotienttype,usetemplate补充
+     * support多same provider_code configuration(organizationadministratorhand动add)
+     * finalresulthandleo clock,官方organizationwillfilter掉Delightfulservicequotient,普通organizationwillwillDelightfulservicequotient置top.
      * @param string $organizationCode organizationencoding
      * @param Category $category servicequotienttype
      * @return ProviderConfigDTO[]
@@ -216,10 +216,10 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         // 2. getorganizationdownalreadyconfigurationservicequotient
         $organizationProviders = $this->getOrganizationProvidersFromDatabase($organizationCode, $category, $status);
 
-        // 3. firstadddatabasemiddle所haveactualconfiguration（保留多same provider_code configuration）
+        // 3. firstadddatabasemiddle所haveactualconfiguration(保留多same provider_code configuration)
         $result = $organizationProviders;
 
-        // 4. check哪theseservicequotienttypeindatabasemiddlenothaveconfiguration，forthistheseaddtemplate
+        // 4. check哪theseservicequotienttypeindatabasemiddlenothaveconfiguration,forthistheseaddtemplate
         $existingProviderCodes = [];
         foreach ($organizationProviders as $config) {
             if ($config->getProviderCode()) {
@@ -233,7 +233,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
                 $result[] = $template;
             }
         }
-        // 5. finalresulthandle：sortandfilter
+        // 5. finalresulthandle:sortandfilter
         $isOfficialOrganization = OfficialOrganizationUtil::isOfficialOrganization($organizationCode);
         $delightfulProvider = null;
         $otherProviders = [];
@@ -243,7 +243,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
                 continue;
             }
 
-            // ifis官方organization，filter掉 Delightful servicequotient（Official），因for delightful servicequotientthenis官方organizationconfigurationmodel总and
+            // ifis官方organization,filter掉 Delightful servicequotient(Official),因for delightful servicequotientthenis官方organizationconfigurationmodel总and
             /*if ($isOfficialOrganization && $provider->getProviderCode() === ProviderCode::Official) {
                 continue;
             }*/
@@ -255,15 +255,15 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // tootherservicequotient按 sort fieldsort（numbermorebigmore靠front）
+        // tootherservicequotient按 sort fieldsort(numbermorebigmore靠front)
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
                 return strcmp($a->getId(), $b->getId()); // same sort valueo clock按 ID sort
             }
-            return $b->getSort() <=> $a->getSort(); // 降序rowcolumn，numberbiginfront
+            return $b->getSort() <=> $a->getSort(); // 降序rowcolumn,numberbiginfront
         });
 
-        // if找to Delightful servicequotient，willits放intheone位（non官方organization才willhave Delightful servicequotient）
+        // if找to Delightful servicequotient,willits放intheone位(non官方organization才willhave Delightful servicequotient)
         if ($delightfulProvider !== null) {
             $result = array_merge([$delightfulProvider], $otherProviders);
         } else {
@@ -357,7 +357,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderConfigModel querybuild器.
+     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderConfigModel querybuild器.
      */
     protected function createConfigQuery(): Builder
     {

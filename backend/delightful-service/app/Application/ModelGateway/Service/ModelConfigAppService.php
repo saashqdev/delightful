@@ -59,7 +59,7 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * getmodel降level链，mergeuser传入降level链andsystemdefault降level链.
+     * getmodel降level链,mergeuser传入降level链andsystemdefault降level链.
      *
      * @param string $orgCode organizationencoding
      * @param string $userId userID
@@ -78,12 +78,12 @@ class ModelConfigAppService extends AbstractLLMAppService
             return '';
         }
 
-        // iffinger定modeltypeandthemodel存inatcanusemodellistmiddle，then直接return
+        // iffinger定modeltypeandthemodel存inatcanusemodellistmiddle,then直接return
         if (! empty($modelType) && in_array($modelType, $chatModelsName)) {
             return $modelType;
         }
 
-        // willcanusemodel转forhashtable，implementO(1)timecomplexdegreefind
+        // willcanusemodel转forhashtable,implementO(1)timecomplexdegreefind
         $availableModels = array_flip($chatModelsName);
 
         // getsystemdefault降level链
@@ -100,7 +100,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             }
         }
 
-        // back备solution：ifnothavematchany优先model，usefirstcanusemodel
+        // back备solution:ifnothavematchany优先model,usefirstcanusemodel
         return $chatModelsName[0] ?? '';
     }
 }

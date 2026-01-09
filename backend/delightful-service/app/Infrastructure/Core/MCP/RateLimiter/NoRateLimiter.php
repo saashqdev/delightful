@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
  * nolimitspeedratelimit器implement.
- * toanyrequestallnotconductlimit，适useattoperformancerequiremorehighor处atopenhair阶segmentsystem.
+ * toanyrequestallnotconductlimit,适useattoperformancerequiremorehighor处atopenhair阶segmentsystem.
  */
 class NoRateLimiter extends AbstractRateLimiter
 {
@@ -22,7 +22,7 @@ class NoRateLimiter extends AbstractRateLimiter
 
     /**
      * getwhenfrontlimitconfiguration.
-     * toatnolimitimplement，所havelimit均设for PHP_INT_MAX.
+     * toatnolimitimplement,所havelimit均设for PHP_INT_MAX.
      */
     public function getLimits(): array
     {
@@ -35,10 +35,10 @@ class NoRateLimiter extends AbstractRateLimiter
     }
 
     /**
-     * nolimitcheckimplement，始终allowrequestpass.
+     * nolimitcheckimplement,始终allowrequestpass.
      */
     protected function doCheck(string $clientId, MessageInterface $request): void
     {
-        // nullimplement，始终allowrequestpass
+        // nullimplement,始终allowrequestpass
     }
 }

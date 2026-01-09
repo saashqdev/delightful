@@ -17,20 +17,20 @@ namespace App\Application\Speech\Enum;
  * - judgeaudiominuteslicemergewhethercomplete
  *
  * 【andother枚举区别】
- * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）
- * - AsrTaskStatusEnum: inside部taskallprocessstatus（businessmanagelayer）
- * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施layer）✓ current
+ * - AsrRecordingStatusEnum: front端录音实o clockstatus(录音交互layer)
+ * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)
+ * - SandboxAsrStatusEnum: 沙箱mergetaskstatus(基础设施layer)✓ current
  *
  * 【statusstream转】waiting → running → finalizing → completed/finished | error
  */
 enum SandboxAsrStatusEnum: string
 {
-    case WAITING = 'waiting';           // etc待middle：taskalreadysubmit，etc待沙箱process
-    case RUNNING = 'running';           // 运linemiddle：沙箱justinprocessaudiominuteslice
-    case FINALIZING = 'finalizing';     // justinexecutefinalmerge：沙箱justinmergeaudioandprocess笔记file
-    case COMPLETED = 'completed';       // taskcomplete（V2 newformat）：audiomergeandfileprocessall部complete
-    case FINISHED = 'finished';         // taskcomplete（tobackcompatibleoldformat）：保留useatcompatibleoldversion沙箱
-    case ERROR = 'error';               // error：沙箱processfail
+    case WAITING = 'waiting';           // etc待middle:taskalreadysubmit,etc待沙箱process
+    case RUNNING = 'running';           // 运linemiddle:沙箱justinprocessaudiominuteslice
+    case FINALIZING = 'finalizing';     // justinexecutefinalmerge:沙箱justinmergeaudioandprocess笔记file
+    case COMPLETED = 'completed';       // taskcomplete(V2 newformat):audiomergeandfileprocessall部complete
+    case FINISHED = 'finished';         // taskcomplete(tobackcompatibleoldformat):保留useatcompatibleoldversion沙箱
+    case ERROR = 'error';               // error:沙箱processfail
 
     /**
      * getstatusdescription.
@@ -42,13 +42,13 @@ enum SandboxAsrStatusEnum: string
             self::RUNNING => '运linemiddle',
             self::FINALIZING => 'justinmerge',
             self::COMPLETED => 'alreadycomplete',
-            self::FINISHED => 'alreadycomplete（old）',
+            self::FINISHED => 'alreadycomplete(old)',
             self::ERROR => 'error',
         };
     }
 
     /**
-     * whetherforcompletestatus（containage两typeformat）.
+     * whetherforcompletestatus(containage两typeformat).
      */
     public function isCompleted(): bool
     {
@@ -64,7 +64,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whetherformiddlebetweenstatus（needcontinueround询）.
+     * whetherformiddlebetweenstatus(needcontinueround询).
      */
     public function isInProgress(): bool
     {

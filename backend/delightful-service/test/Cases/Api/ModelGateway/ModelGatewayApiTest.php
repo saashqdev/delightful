@@ -50,7 +50,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // createone Parallel instance，setmostbigandhair数for 10
+        // createone Parallel instance,setmostbigandhair数for 10
         $parallel = new Parallel(10);
 
         // definition多differentrequest场景
@@ -64,7 +64,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // addandhairtask
         $index = 0;
-        $count = 10; // enterone步decreasetestquantity，as long ashaveonesuccessthenline
+        $count = 10; // enterone步decreasetestquantity,as long ashaveonesuccessthenline
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
@@ -79,7 +79,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                         'content' => $response['choices'][0]['message']['content'] ?? '',
                     ];
                 } catch (Throwable $e) {
-                    // 直接returnfailinfo，notconductretry
+                    // 直接returnfailinfo,notconductretry
                     return [
                         'success' => false,
                         'index' => $index,
@@ -98,7 +98,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             if ($result['success']) {
                 ++$successCount;
             } else {
-                // recordfailinfo，butnotassertfail
+                // recordfailinfo,butnotassertfail
                 echo "Request {$result['index']} failed: {$result['error']} (code: {$result['error_code']})" . PHP_EOL;
             }
         }
@@ -109,7 +109,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // outputsuccessrate
         $successRate = ($successCount / $count) * 100;
         echo PHP_EOL;
-        echo "testHighAvaiable requestsuccessrate：{$successRate}% ({$successCount}/" . $count . ')' . PHP_EOL;
+        echo "testHighAvaiable requestsuccessrate:{$successRate}% ({$successCount}/" . $count . ')' . PHP_EOL;
     }
 
     /**

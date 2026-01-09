@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->tinyInteger('user_type')->comment('usertype,0:ai,1:personcategory')->default(0);
             $table->string('description', 1024)->comment('description(canuseataifromI介绍)');
             $table->integer('like_num')->comment('like数')->default(0);
-            $table->string('label', 256)->comment('fromItag，多use逗numberminute隔')->default('');
+            $table->string('label', 256)->comment('fromItag,多use逗numberminute隔')->default('');
             $table->tinyInteger('status')->comment('userintheorganizationstatus,0:freeze,1:activated,2:already离职,3:alreadyexit')->default(0);
             $table->string('nickname', 64)->comment('昵称')->default('');
             $table->text('i18n_name')->comment('国际化username');

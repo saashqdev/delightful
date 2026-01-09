@@ -38,7 +38,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统oneimagegenerate入口method
-     * 先call子categoryimplementoriginalimagegenerate，again统oneaddwatermark.
+     * 先call子categoryimplementoriginalimagegenerate,again统oneaddwatermark.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -60,28 +60,28 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 子categoryimplementoriginalimagegeneratemethod
-     * only负责calleachfromAPIgenerateimage，notuseclosecorewatermarkprocess.
+     * only负责calleachfromAPIgenerateimage,notuseclosecorewatermarkprocess.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * getresponseobjectlock，useatandhairsecurityground操as OpenAIFormatResponse.
+     * getresponseobjectlock,useatandhairsecurityground操as OpenAIFormatResponse.
      * useRedisfrom旋lockimplementrow队etc待.
      *
-     * @return string returnlockowner，useatreleaselock
+     * @return string returnlockowner,useatreleaselock
      */
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
         $lockKey = 'img_response_' . spl_object_id($response);
         $owner = bin2hex(random_bytes(8)); // 16位随机stringasforowner
 
-        // spinLockwillfrom动etc待，untilgetsuccessortimeout（30second）
+        // spinLockwillfrom动etc待,untilgetsuccessortimeout(30second)
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
             $this->logger->error('getgraphlikeresponseRedislocktimeout', [
                 'lock_key' => $lockKey,
                 'timeout' => 30,
             ]);
-            throw new Exception('getgraphlikeresponselocktimeout，请稍backretry');
+            throw new Exception('getgraphlikeresponselocktimeout,请稍backretry');
         }
 
         $this->logger->debug('Redislockgetsuccess', ['lock_key' => $lockKey, 'owner' => $owner]);
@@ -101,7 +101,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redislockreleasefail，maybealreadybeotherenter程release', [
+                $this->logger->warning('Redislockreleasefail,maybealreadybeotherenter程release', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);
@@ -114,7 +114,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // lockreleasefailnotimpactbusiness逻辑，butwantrecordlog
+            // lockreleasefailnotimpactbusiness逻辑,butwantrecordlog
         }
     }
 
@@ -137,7 +137,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToUrl($imageData, $imageGenerateRequest);
                 }
             } catch (Exception $e) {
-                // watermarkprocessfailo clock，recorderrorbutnotimpactimagereturn
+                // watermarkprocessfailo clock,recorderrorbutnotimpactimagereturn
                 $this->logger->error('imagewatermarkprocessfail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

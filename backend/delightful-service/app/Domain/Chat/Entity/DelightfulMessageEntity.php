@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 use InvalidArgumentException;
 
 /**
- * messagecontentdetail. oneitemmessagemaybebe多session/序columnnumberassociate，所bymessagecontentis独立.
+ * messagecontentdetail. oneitemmessagemaybebe多session/序columnnumberassociate,所bymessagecontentis独立.
  */
 class DelightfulMessageEntity extends AbstractEntity
 {
@@ -30,7 +30,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $senderId = '';
 
     /**
-     * send方type. user:user(aialsobe认forisuser)，group：group chat，system：systemmessage，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
+     * send方type. user:user(aialsobe认forisuser),group:group chat,system:systemmessage,cloud_document:云document,multidimensional_table:多维table格 topic:话题 app:applicationmessage.
      */
     protected ConversationType $senderType;
 
@@ -42,7 +42,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $receiveId = '';
 
     /**
-     * receiveobjecttype. user:user(aialsobe认forisuser)，group：group chat，system：systemmessage，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
+     * receiveobjecttype. user:user(aialsobe认forisuser),group:group chat,system:systemmessage,cloud_document:云document,multidimensional_table:多维table格 topic:话题 app:applicationmessage.
      * @see UserType
      */
     protected ConversationType $receiveType;

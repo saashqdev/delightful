@@ -16,14 +16,14 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerSt
 class EndpointDTO extends AbstractDTO
 {
     /**
-     * getEndpointList interfacereturn id。
-     * differentbusinessimplicationdifferent。toatmodel网closecome说，thiswithin id is service_provider_models table id。
-     * front端maybenot supported bigint，所bythiswithinuse string.
+     * getEndpointList interfacereturn id.
+     * differentbusinessimplicationdifferent.toatmodel网closecome说,thiswithin id is service_provider_models table id.
+     * front端maybenot supported bigint,所bythiswithinuse string.
      */
     protected ?string $businessId = null;
 
     /**
-     * database接入pointID（highcanusetableprimary key）.
+     * database接入pointID(highcanusetableprimary key).
      */
     protected ?string $endpointId = null;
 
@@ -48,7 +48,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * resourceconsume id list. onetimerequestmaybewillconsume多resource。
+     * resourceconsume id list. onetimerequestmaybewillconsume多resource.
      * @var null|string[]
      */
     protected ?array $resources = null;

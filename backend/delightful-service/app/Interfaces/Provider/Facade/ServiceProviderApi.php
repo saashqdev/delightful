@@ -43,7 +43,7 @@ class ServiceProviderApi extends AbstractApi
     protected ProviderAppService $providerAppService;
 
     /**
-     * notneedjudgeadministratorpermission。
+     * notneedjudgeadministratorpermission.
      * according tocategorygetservicequotientlist.
      */
     public function getServiceProviders(RequestInterface $request)
@@ -52,7 +52,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * notneedjudgeadministratorpermission。
+     * notneedjudgeadministratorpermission.
      * according tocategorygetservicequotientlist.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
@@ -201,7 +201,7 @@ class ServiceProviderApi extends AbstractApi
     /**
      * get所havenon官方LLMservicequotientlist
      * 直接fromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservicequotient
-     * notdependencyatcurrentorganization，适useatneedaddservicequotient场景.
+     * notdependencyatcurrentorganization,适useatneedaddservicequotient场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
@@ -212,13 +212,13 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * get所havecanuseLLMservicequotientlist（include官方servicequotient）.
+     * get所havecanuseLLMservicequotientlist(include官方servicequotient).
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // get所haveLLMtypeservicequotient（includeOfficial）
+        // get所haveLLMtypeservicequotient(includeOfficial)
         return $this->adminProviderAppService->getAllAvailableLlmProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -264,7 +264,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * willnewformatdataconvertforoldformat，maintaintobackcompatibleproperty.
+     * willnewformatdataconvertforoldformat,maintaintobackcompatibleproperty.
      * @param ?ProviderConfigModelsDTO $aggregateDTO aggregateDTOobject
      * @return array oldformatdata
      */
@@ -275,12 +275,12 @@ class ServiceProviderApi extends AbstractApi
         }
         $data = $aggregateDTO->toArray();
 
-        // ifnotisnewformat结构，直接return
+        // ifnotisnewformat结构,直接return
         if (! isset($data['provider_config'])) {
             return $data;
         }
 
-        // will provider_config contentenhancetorootlevel别，andadd alias and models
+        // will provider_config contentenhancetorootlevel别,andadd alias and models
         return array_merge($data['provider_config'], [
             'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
             'models' => $data['models'] ?? [],

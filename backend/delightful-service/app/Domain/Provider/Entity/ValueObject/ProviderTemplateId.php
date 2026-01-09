@@ -90,7 +90,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * parsetemplateID，returnto应ProviderCodeandCategory.
+     * parsetemplateID,returnto应ProviderCodeandCategory.
      *
      * @return array{providerCode: ProviderCode, category: Category}
      */

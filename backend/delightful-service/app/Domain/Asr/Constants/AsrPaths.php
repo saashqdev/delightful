@@ -32,7 +32,7 @@ class AsrPaths
      * generatehiddendirectory相topath.
      *
      * @param string $taskKey taskkey
-     * @return string format：.asr_recordings/{task_key}
+     * @return string format:.asr_recordings/{task_key}
      */
     public static function getHiddenDirPath(string $taskKey): string
     {
@@ -42,7 +42,7 @@ class AsrPaths
     /**
      * getstatusdirectory相topath.
      *
-     * @return string format：.asr_states
+     * @return string format:.asr_states
      */
     public static function getStatesDirPath(): string
     {
@@ -50,9 +50,9 @@ class AsrPaths
     }
 
     /**
-     * get录音directory相topath（父directory）.
+     * get录音directory相topath(父directory).
      *
-     * @return string format：.asr_recordings
+     * @return string format:.asr_recordings
      */
     public static function getRecordingsDirPath(): string
     {

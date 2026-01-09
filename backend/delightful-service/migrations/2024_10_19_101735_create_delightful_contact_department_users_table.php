@@ -30,12 +30,12 @@ return new class extends Migration {
             $table->string('organization_code', 32)->comment('麦吉organizationencoding');
             $table->string('city', 64)->comment('work城市')->default('');
             $table->string('country', 32)->comment('国家orground区 Code 缩写')->default('');
-            $table->string('join_time', 32)->comment('入职time。secondleveltime戳format，table示from 1970 year 1 month 1 daystart所经passsecond数。')->default('');
+            $table->string('join_time', 32)->comment('入职time.secondleveltime戳format,table示from 1970 year 1 month 1 daystart所经passsecond数.')->default('');
             $table->string('employee_no', 32)->comment('工number')->default('');
-            $table->tinyInteger('employee_type')->comment('员工type。1：justtype员工2：实习生3：outsidepackage4：劳务 5：顾问');
-            $table->string('orders', 256)->comment('usersortinfo。useatmark通讯录downorganization架构person员order，person员maybe存in多departmentmiddle，andhavedifferentsort')->nullable()->default('');
-            $table->text('custom_attrs')->comment('customizefield。');
-            $table->tinyInteger('is_frozen')->comment('whetherforpausestatususer。')->default(0);
+            $table->tinyInteger('employee_type')->comment('员工type.1:justtype员工2:实习生3:outsidepackage4:劳务 5:顾问');
+            $table->string('orders', 256)->comment('usersortinfo.useatmark通讯录downorganization架构person员order,person员maybe存in多departmentmiddle,andhavedifferentsort')->nullable()->default('');
+            $table->text('custom_attrs')->comment('customizefield.');
+            $table->tinyInteger('is_frozen')->comment('whetherforpausestatususer.')->default(0);
             $table->comment('麦吉departmentdownuserinfotable');
             $table->timestamps();
             $table->softDeletes();

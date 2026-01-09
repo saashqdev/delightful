@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Resources;
 
 /**
  * MCPresourcemanager.
- * whenfrontversionfornullimplement，onlyreturnnullcolumn表.
+ * whenfrontversionfornullimplement,onlyreturnnullcolumn表.
  */
 class MCPResourceManager
 {
@@ -24,12 +24,12 @@ class MCPResourceManager
      */
     public function registerResource(array $resource): void
     {
-        // nullimplement，暂notregisteranyresource
+        // nullimplement,暂notregisteranyresource
     }
 
     /**
      * getresourcecolumn表.
-     * whenfrontfornullimplement，returnnullarray.
+     * whenfrontfornullimplement,returnnullarray.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -40,7 +40,7 @@ class MCPResourceManager
 
     /**
      * getfinger定IDresource.
-     * whenfrontfornullimplement，始终returnnull.
+     * whenfrontfornullimplement,始终returnnull.
      */
     public function getResource(string $id): ?array
     {

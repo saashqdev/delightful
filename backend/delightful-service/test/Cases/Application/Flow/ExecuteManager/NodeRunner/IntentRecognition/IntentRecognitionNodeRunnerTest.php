@@ -73,7 +73,7 @@ class IntentRecognitionNodeRunnerTest extends ExecuteManagerBaseTest
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "品尝美食，喝饮料，喝水not算",
+                            "value": "品尝美食,喝饮料,喝水not算",
                             "name": "",
                             "args": null
                         }
@@ -150,7 +150,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygo广州看small蛮腰，downtime想带I朋友oneupgo',
+            'intent' => 'I今daygo广州看small蛮腰,downtime想带I朋友oneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['456'], $vertexResult->getChildrenIds());
@@ -294,7 +294,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygo广州吃莞城bigpackage，downtime想带I朋友oneupgo',
+            'intent' => 'I今daygo广州吃莞城bigpackage,downtime想带I朋友oneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());

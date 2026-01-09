@@ -71,7 +71,7 @@ class ImageWatermarkProcessor
 
     /**
      * forURLformatimageaddwatermark
-     * optional择returnformat：URL or base64.
+     * optional择returnformat:URL or base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
     {
@@ -109,7 +109,7 @@ class ImageWatermarkProcessor
 
     protected function addWaterMarkHandler(string $imageData, ImageGenerateRequest $imageGenerateRequest, ?string $format = null): string
     {
-        // detectimageformat，优先use传入format
+        // detectimageformat,优先use传入format
         $detectedFormat = $format ?? $this->detectImageFormat($imageData);
 
         $image = imagecreatefromstring($imageData);
@@ -164,11 +164,11 @@ class ImageWatermarkProcessor
         // calculatewatermarkposition
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
-        // 优先useTTF字body，especiallyistoatmiddle文text
+        // 优先useTTF字body,especiallyistoatmiddle文text
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
-            // useTTF字body渲染，supportmiddle文
-            // TTF字bodysizeneedadjust，usuallyratioinside置字bodysmallonethese
+            // useTTF字body渲染,supportmiddle文
+            // TTF字bodysizeneedadjust,usuallyratioinside置字bodysmallonethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
             // correctcalculateTTF字body基lineposition
@@ -176,18 +176,18 @@ class ImageWatermarkProcessor
                 // 直接use传入Ycoordinateasfor基lineposition
                 $ttfY = $y;
             } else {
-                // ifno法getside界框，直接use传入Ycoordinate
+                // ifno法getside界框,直接use传入Ycoordinate
                 $ttfY = $y;
             }
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
-            // 降leveluseinside置字body（onlysupportASCIIcharacter）
-            // inside置字bodyYcoordinateistexttop部，needfrom基linepositionconvert
+            // 降leveluseinside置字body(onlysupportASCIIcharacter)
+            // inside置字bodyYcoordinateistexttop部,needfrom基linepositionconvert
             $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvertfortop部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
-            // iftextcontainmiddle文butnothaveTTF字body，recordwarning
+            // iftextcontainmiddle文butnothaveTTF字body,recordwarning
             if ($this->fontProvider->containsChinese($text)) {
                 $this->logger->warning('Chinese text detected but TTF font not available, may display incorrectly');
             }
@@ -229,13 +229,13 @@ class ImageWatermarkProcessor
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightforjust
 
-            // TTF字bodydown降部minute（descender）
+            // TTF字bodydown降部minute(descender)
             $descender = (int) abs($bbox[1]); // 基linebydown部minute
             $ascender = (int) abs($bbox[7]);  // 基linebyup部minute
             $totalTextHeight = $descender + $ascender;
         } else {
             // 降leveluse估算method
-            // toatmiddle文character，eachcharacterwidth约equal字bodysize
+            // toatmiddle文character,eachcharacterwidth约equal字bodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
@@ -244,7 +244,7 @@ class ImageWatermarkProcessor
             $totalTextHeight = $textHeight;
         }
 
-        // 动stateside距：based on字bodysizecalculate，ensure足够nullbetween
+        // 动stateside距:based on字bodysizecalculate,ensure足够nullbetween
         $margin = max(20, (int) ($fontSize * 0.8));
 
         switch ($position) {
@@ -310,7 +310,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * outputimage（no损version）.
+     * outputimage(no损version).
      * @param mixed $image
      * @param string $format goalformat (png/jpeg/webp/gif)
      */
@@ -339,7 +339,7 @@ class ImageWatermarkProcessor
                     }
                     break;
                 case 'gif':
-                    // GIFlimitmore多，suggestion升levelforPNG
+                    // GIFlimitmore多,suggestion升levelforPNG
                     $this->logger->info('Converting GIF to PNG for better quality');
                     imagepng($image, null, 0);
                     break;
@@ -347,7 +347,7 @@ class ImageWatermarkProcessor
                 case 'jpg':
                 default:
                     if ($this->fontProvider->hasTransparency($image)) {
-                        // JPEGnot supported透明degree，from动转PNG
+                        // JPEGnot supported透明degree,from动转PNG
                         $this->logger->info('JPEG does not support transparency, converting to PNG');
                         imagepng($image, null, 0);
                     } else {

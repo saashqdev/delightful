@@ -10,13 +10,13 @@ namespace App\Domain\Provider\Service\ModelFilter;
 /**
  * defaultorganizationmodelfilter器implement.
  *
- * notconductanyfilter，直接returnoriginalmodellist
+ * notconductanyfilter,直接returnoriginalmodellist
  * useatopen源versionor企业packagenotconfigurationo clockbacksolution
  */
 class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInterface
 {
     /**
-     * defaultimplement：notconductfilter，return所have传入model.
+     * defaultimplement:notconductfilter,return所have传入model.
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array
     {
@@ -24,7 +24,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：所havemodelallcanuse.
+     * defaultimplement:所havemodelallcanuse.
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool
     {
@@ -32,7 +32,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：returnemptyarray，table示nothave特定modelbind.
+     * defaultimplement:returnemptyarray,table示nothave特定modelbind.
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array
     {
@@ -40,7 +40,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：returnemptyarray，table示nothavemodelneed升level.
+     * defaultimplement:returnemptyarray,table示nothavemodelneed升level.
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array
     {

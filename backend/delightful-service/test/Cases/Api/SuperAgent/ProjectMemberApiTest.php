@@ -31,7 +31,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     protected function setUp(): void
     {
-        // cleanupprojectmemberdata，avoid唯onekeyconflict
+        // cleanupprojectmemberdata,avoid唯onekeyconflict
         $this->cleanupProjectMembers($this->projectId);
         parent::setUp();
     }
@@ -93,7 +93,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先settingprojectmember，ensuretest2userhavepermission
+        // 1. 先settingprojectmember,ensuretest2userhavepermission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -105,7 +105,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 4. 清nullprojectmember，makecurrentusernothavepermission
+        // 4. 清nullprojectmember,makecurrentusernothavepermission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
@@ -508,7 +508,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 3. switchto另oneuser，test多useredit
+        // 3. switchto另oneuser,test多useredit
         $this->switchUserTest2();
         $this->joinFileEditing($fileId);
 
@@ -523,7 +523,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 7. switchreturnfirstuser，testpermission
+        // 7. switchreturnfirstuser,testpermission
         $this->switchUserTest1();
         $this->leaveFileEditing($fileId);
 
@@ -796,7 +796,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restoreprojectmemberstatus，by免impactback续test
+        // 3. restoreprojectmemberstatus,by免impactback续test
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
@@ -808,7 +808,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先settingprojectmember，ensuretest2userhavepermission
+        // 1. 先settingprojectmember,ensuretest2userhavepermission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -817,7 +817,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 3. 清nullprojectmember，makecurrentusernothavepermission
+        // 3. 清nullprojectmember,makecurrentusernothavepermission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
@@ -925,7 +925,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * cleanupprojectmemberdata（直接databasedelete）.
+     * cleanupprojectmemberdata(直接databasedelete).
      */
     private function cleanupProjectMembers(string $projectId): void
     {

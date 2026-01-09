@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Prompts;
 
 /**
  * MCPpromptmanager.
- * whenfrontversionfornullimplement，onlyreturnnullcolumn表.
+ * whenfrontversionfornullimplement,onlyreturnnullcolumn表.
  */
 class MCPPromptManager
 {
@@ -24,12 +24,12 @@ class MCPPromptManager
      */
     public function registerPrompt(array $prompt): void
     {
-        // nullimplement，暂notregisteranyprompt
+        // nullimplement,暂notregisteranyprompt
     }
 
     /**
      * getpromptcolumn表.
-     * whenfrontfornullimplement，returnnullarray.
+     * whenfrontfornullimplement,returnnullarray.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -40,7 +40,7 @@ class MCPPromptManager
 
     /**
      * getfinger定IDprompt.
-     * whenfrontfornullimplement，始终returnnull.
+     * whenfrontfornullimplement,始终returnnull.
      */
     public function getPrompt(string $id): ?array
     {

@@ -11,6 +11,6 @@ $superWhitelists = parse_json_config(env('SUPER_WHITELISTS', '[]'));
 return [
     // 超leveladministrator
     'super_whitelists' => $superWhitelists,
-    // byat暂o clocknothavepermissionsystem，env configurationorganizationadministrator
+    // byat暂o clocknothavepermissionsystem,env configurationorganizationadministrator
     'organization_whitelists' => $organizationWhitelists,
 ];

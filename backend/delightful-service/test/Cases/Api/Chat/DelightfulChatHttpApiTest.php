@@ -23,7 +23,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $requestData = [
             'conversation_id' => 'test_conversation_id',
             'topic_id' => 'test_topic_id',
-            'message' => 'yougood，testmessage',
+            'message' => 'yougood,testmessage',
             'history' => [
                 [
                     'role' => 'user',
@@ -31,7 +31,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
                 ],
                 [
                     'role' => 'assistant',
-                    'content' => 'yougood，have什么canhelpyou？',
+                    'content' => 'yougood,have什么canhelpyou?',
                 ],
             ],
         ];
@@ -64,7 +64,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
                 'request_info' => [
                     'conversation_id' => 'test_conversation_id',
                     'topic_id' => 'test_topic_id',
-                    'message' => 'yougood，testmessage',
+                    'message' => 'yougood,testmessage',
                     'history' => [],
                 ],
             ],
@@ -73,7 +73,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // useassertArrayValueTypesEqualsverifyresponse结构
         $this->assertArrayValueTypesEquals($expectedStructure, $response, 'response结构notconformexpected');
 
-        // 额outsideverifyrolewhetherisassistant（thisisprecisevalueverify）
+        // 额outsideverifyrolewhetherisassistant(thisisprecisevalueverify)
         $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'role应forassistant');
     }
 
@@ -86,7 +86,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $requestData = [
             // 缺少 conversation_id
             'topic_id' => 'test_topic_id',
-            'message' => 'yougood，testmessage',
+            'message' => 'yougood,testmessage',
         ];
 
         // setrequesthead
@@ -100,12 +100,12 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponse结构
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code，butspecific数valuemaybenotcertain，所bythiswithinonlyis占位
-            'message' => '', // onlyverify存inmessagefield，specificcontentmaybenotcertain
+            'code' => 0, // expectednotis1000code,butspecific数valuemaybenotcertain,所bythiswithinonlyis占位
+            'message' => '', // onlyverify存inmessagefield,specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisparameterverifyerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必wantparametero clock，response码not应for1000');
+        $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必wantparametero clock,response码not应for1000');
         $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponse结构notconformexpected');
     }
 
@@ -117,7 +117,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // constructrequestparameter
         $requestData = [
             'conversation_id' => 'test_conversation_id',
-            'message' => 'yougood，testmessage',
+            'message' => 'yougood,testmessage',
         ];
 
         // setinvalidrequesthead
@@ -131,12 +131,12 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponse结构
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code，specific数valuemaybenotcertain
-            'message' => '', // onlyverify存inmessagefield，specificcontentmaybenotcertain
+            'code' => 0, // expectednotis1000code,specific数valuemaybenotcertain
+            'message' => '', // onlyverify存inmessagefield,specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisauthorizationerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorizationo clock，response码not应for1000');
+        $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorizationo clock,response码not应for1000');
         $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerrorresponse结构notconformexpected');
     }
 }

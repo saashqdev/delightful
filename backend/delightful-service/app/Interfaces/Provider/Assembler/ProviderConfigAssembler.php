@@ -47,7 +47,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * willservicequotientconfigurationarrayconvertfor DTO list，containcomplete provider info.
+     * willservicequotientconfigurationarrayconvertfor DTO list,containcomplete provider info.
      * @param array $serviceProviderConfigs servicequotientconfigurationarray
      * @param array $providerMap provider ID to provider datamapping
      * @return ProviderConfigDTO[]
@@ -65,7 +65,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * willservicequotientconfigurationconvertfor DTO，containcomplete provider info.
+     * willservicequotientconfigurationconvertfor DTO,containcomplete provider info.
      * @param array $serviceProviderConfig servicequotientconfigurationdata
      * @param array $providerMap provider ID to provider datamapping
      */
@@ -94,7 +94,7 @@ class ProviderConfigAssembler
             $preparedConfig['provider_code'] = $provider['provider_code'] ?? null;
             $preparedConfig['is_models_enable'] = $provider['is_models_enable'] ?? true;
 
-            // 直接use provider translateinfo（config middleonly ak、sk etcconfiguration，nothavetranslatedata）
+            // 直接use provider translateinfo(config middleonly ak、sk etcconfiguration,nothavetranslatedata)
             if (! empty($provider['translate'])) {
                 $providerTranslate = is_string($provider['translate'])
                     ? Json::decode($provider['translate'])
@@ -131,7 +131,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * toconfigurationdataconductencoding（JSONencoding + AESencrypt）.
+     * toconfigurationdataconductencoding(JSONencoding + AESencrypt).
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -140,7 +140,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 预processservicequotientconfigurationdata，extract共同逻辑.
+     * 预processservicequotientconfigurationdata,extract共同逻辑.
      * @return array [$preparedConfig, $decodeConfig]
      */
     private static function prepareServiceProviderConfig(array $serviceProviderConfig): array

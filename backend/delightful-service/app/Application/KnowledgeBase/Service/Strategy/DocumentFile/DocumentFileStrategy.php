@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预processdocumentfile，according todocumentfiletype，conductdifferentprocess.
+     * 预processdocumentfile,according todocumentfiletype,conductdifferentprocess.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('nothaveand[' . get_class($documentFile) . ']matchtextparsestrategy！willreturnemptyvalue！');
+        $this->logger->warning('nothaveand[' . get_class($documentFile) . ']matchtextparsestrategy!willreturnemptyvalue!');
         return null;
     }
 }

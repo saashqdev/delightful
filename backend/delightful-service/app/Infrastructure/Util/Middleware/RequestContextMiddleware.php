@@ -31,7 +31,7 @@ class RequestContextMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // notice！foriterationcan控，onlycanin api layerto协程context赋value
+        // notice!foriterationcan控,onlycanin api layerto协程context赋value
         $accessToken = $request->getHeaderLine('api-key');
 
         if (! empty($accessToken)) {
@@ -39,7 +39,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         } else {
             $delightfulUserAuthorization = $this->getAuthorization();
         }
-        // willuserinformation存入协程context，方便 api layerget
+        // willuserinformation存入协程context,方便 api layerget
         RequestCoContext::setUserAuthorization($delightfulUserAuthorization);
         return $handler->handle($request);
     }
@@ -52,7 +52,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         try {
             return di(AuthManager::class)->guard(name: 'web')->user();
         } catch (BusinessException $exception) {
-            // ifisbusinessexception，直接throw，notalterexceptiontype
+            // ifisbusinessexception,直接throw,notalterexceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);
@@ -83,7 +83,7 @@ class RequestContextMiddleware implements MiddlewareInterface
             $delightfulUserAuthorization->setUserType(UserType::Human);
             return $delightfulUserAuthorization;
         } catch (BusinessException $exception) {
-            // ifisbusinessexception，直接throw，notalterexceptiontype
+            // ifisbusinessexception,直接throw,notalterexceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);

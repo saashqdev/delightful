@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 class MethodHandlerFactory
 {
     /**
-     * methodprocess器mapping，method名 => process器category名.
+     * methodprocess器mapping,method名 => process器category名.
      *
      * @var array<string, class-string<MethodHandlerInterface>>
      */
@@ -40,8 +40,8 @@ class MethodHandlerFactory
 
     /**
      * createfinger定methodprocess器instance.
-     * eachtimecallallcreatenewprocess器instance，ensureshort生命period.
-     * notice：call者needhand动forreturnprocess器set所需Managergroupitem.
+     * eachtimecallallcreatenewprocess器instance,ensureshort生命period.
+     * notice:call者needhand动forreturnprocess器set所需Managergroupitem.
      *
      * @return null|MethodHandlerInterface if找nottoto应methodprocess器thenreturnnull
      */

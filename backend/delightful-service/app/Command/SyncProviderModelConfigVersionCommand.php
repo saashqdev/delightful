@@ -135,7 +135,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * updateoldversion（ifneed）.
+     * updateoldversion(ifneed).
      */
     private function updateOldVersionsIfNeeded(ProviderModelModel $model, int $existingVersionCount, bool $isForce): void
     {
@@ -220,10 +220,10 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
         $this->logger->info('startsyncservicequotientmodelconfigurationversiondata...');
-        $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line（notwritedatabase）' : 'justtypeexecute'));
+        $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line(notwritedatabase)' : 'justtypeexecute'));
 
         if ($isForce) {
-            $this->logger->warning('force模typealreadyenable：willfor所havemodelcreatenewversion');
+            $this->logger->warning('force模typealreadyenable:willfor所havemodelcreatenewversion');
         }
 
         if ($limit > 0) {
@@ -237,7 +237,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logSummary(array $result): void
     {
         $this->logger->info('=================================');
-        $this->logger->info('synccomplete！statisticsinfo:');
+        $this->logger->info('synccomplete!statisticsinfo:');
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
         $this->logger->info(sprintf('  alreadyhaveversion: %d', $result['skipped']));
         $this->logger->info(sprintf('  newversion: %d', $result['created']));

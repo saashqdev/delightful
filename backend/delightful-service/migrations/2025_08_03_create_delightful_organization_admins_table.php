@@ -19,7 +19,7 @@ return new class extends Migration {
         }
         Schema::create('delightful_organization_admins', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('userID，to应delightful_contact_users.user_id');
+            $table->string('user_id', 64)->comment('userID,to应delightful_contact_users.user_id');
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->string('delightful_id', 64)->nullable()->comment('Delightful ID');
             $table->string('grantor_user_id', 64)->nullable()->comment('authorization者userID');

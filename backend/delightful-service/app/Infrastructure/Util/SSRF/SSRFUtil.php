@@ -12,8 +12,8 @@ use Throwable;
 /**
  * SSRF防御toolcategory.
  *
- * useexample：
- * // 简singleuse，defaultconfiguration
+ * useexample:
+ * // 简singleuse,defaultconfiguration
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com');
  *
  * // customizeparameter
@@ -62,7 +62,7 @@ class SSRFUtil
     }
 
     /**
-     * checkURLwhethersecurity（not抛exception，return布尔value）.
+     * checkURLwhethersecurity(not抛exception,return布尔value).
      *
      * @param string $url needcheckURL
      * @param array $blackList blacklistIPor域名
@@ -92,7 +92,7 @@ class SSRFUtil
      * getURLto应IP.
      *
      * @param string $url URL
-     * @return null|string IPground址ornull（ifparsefail）
+     * @return null|string IPground址ornull(ifparsefail)
      */
     public static function getUrlIp(string $url): ?string
     {

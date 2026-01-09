@@ -92,7 +92,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // buildupdatedata（supportchoosepropertyupdate）
+        // buildupdatedata(supportchoosepropertyupdate)
         $updateData = [];
         if ($request->hasStatus()) {
             $updateData['status'] = $request->getStatus();
@@ -102,12 +102,12 @@ class AiAbilityAppService extends AbstractKernelAppService
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智canmergeconfiguration（保留be脱敏api_key）
+            // 智canmergeconfiguration(保留be脱敏api_key)
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
 
-        // ifnothavewantupdatedata，直接returnsuccess
+        // ifnothavewantupdatedata,直接returnsuccess
         if (empty($updateData)) {
             return true;
         }
@@ -117,7 +117,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * initializeAIcan力data（fromconfigurationfilesynctodatabase）.
+     * initializeAIcan力data(fromconfigurationfilesynctodatabase).
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return int initializequantity
@@ -130,10 +130,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智canmergeconfiguration（保留be脱敏api_keyoriginalvalue）.
+     * 智canmergeconfiguration(保留be脱敏api_keyoriginalvalue).
      *
      * @param array $dbConfig databaseoriginalconfiguration
-     * @param array $frontendConfig front端传comeconfiguration（maybecontain脱敏api_key）
+     * @param array $frontendConfig front端传comeconfiguration(maybecontain脱敏api_key)
      * @return array mergebackconfiguration
      */
     private function mergeConfigPreservingApiKeys(array $dbConfig, array $frontendConfig): array
@@ -147,7 +147,7 @@ class AiAbilityAppService extends AbstractKernelAppService
                 // usedatabasemiddleoriginalvalue
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
-            // ifisarray，recursionprocess
+            // ifisarray,recursionprocess
             elseif (is_array($value)) {
                 $dbValue = $dbConfig[$key] ?? [];
                 $result[$key] = is_array($dbValue)

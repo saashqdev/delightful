@@ -75,7 +75,7 @@ readonly class AdminProviderAppService
             return null;
         }
 
-        // ProviderModelsDTO already经contain所haveneeddata，统onehandle provider and models  icon andreturn
+        // ProviderModelsDTO already经contain所haveneeddata,统onehandle provider and models  icon andreturn
         $this->processProviderAndModelsIcons($providerModels);
         return $providerModels;
     }
@@ -180,7 +180,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // getmodelinfo，useat触hairevent
+        // getmodelinfo,useat触hairevent
         $modelEntity = $this->providerModelDomainService->getById($dataIsolation, $id);
 
         Db::beginTransaction();
@@ -251,7 +251,7 @@ readonly class AdminProviderAppService
         }
 
         $saveProviderModelData = $saveProviderModelDTO->toArray();
-        // icon传入is url，returnalsoneedis url，butissaveindatabaseis file_key
+        // icon传入is url,returnalsoneedis url,butissaveindatabaseis file_key
         // 所by SaveProviderModelDTO  setIcon 做 url to file_keyconvert
         $saveProviderModelData['icon'] = $this->getFileUrl($saveProviderModelDTO->getIcon());
         return $saveProviderModelData;
@@ -265,7 +265,7 @@ readonly class AdminProviderAppService
      */
     public function getOrganizationProvidersModelsByCategory(string $organizationCode, Category $category): array
     {
-        // call领域layero clockpass modelTypes parameter，let仓储layercompletequeryandfilter
+        // call领域layero clockpass modelTypes parameter,let仓储layercompletequeryandfilter
         $serviceProviderModelsDTOs = $this->adminProviderDomainService->getOrganizationProvidersModelsByCategory($organizationCode, $category);
 
         // handlegraph标
@@ -299,7 +299,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所havenon官方servicequotientcolumn表，notdependencyatorganization.
+     * get所havenon官方servicequotientcolumn表,notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
@@ -321,7 +321,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所havecanuseservicequotientcolumn表（include官方servicequotient），notdependencyatorganization.
+     * get所havecanuseservicequotientcolumn表(include官方servicequotient),notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
@@ -329,7 +329,7 @@ readonly class AdminProviderAppService
      */
     public function getAllAvailableLlmProviders(Category $category, string $organizationCode): array
     {
-        // get所haveservicequotient（includeOfficial）
+        // get所haveservicequotient(includeOfficial)
         $serviceProviders = $this->adminProviderDomainService->getAllAvailableProviders($category);
 
         if (empty($serviceProviders)) {
@@ -510,7 +510,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 统onehandle Provider and Models graph标，convertforcompleteURL.
+     * 统onehandle Provider and Models graph标,convertforcompleteURL.
      */
     private function processProviderAndModelsIcons(ProviderConfigModelsDTO $providerDTO): void
     {
@@ -671,11 +671,11 @@ readonly class AdminProviderAppService
         // batchquantityget所havegraph标link
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-        // onlyhandlegraph标URL，直接return实bodyobject
+        // onlyhandlegraph标URL,直接return实bodyobject
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 
-            // ifhaveURLmapping，usemappingURL
+            // ifhaveURLmapping,usemappingURL
             if (isset($iconUrlMap[$icon])) {
                 $serviceProvider->setIcon($iconUrlMap[$icon]->getUrl());
             }

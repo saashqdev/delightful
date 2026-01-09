@@ -22,19 +22,19 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null、''、0、[]、false  直接skip，谁not事搜thisthese。right侧not填valuenotconductsearch
+            // null、''、0、[]、false  直接skip,谁not事搜thisthese.right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
 
-            // definition本time range id，ifis null 代tablealsonotconductlimit
+            // definition本time range id,ifis null 代tablealsonotconductlimit
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // ifis所haveitemitemfull足，that么already经存in id setthenis本timerange
+                // ifis所haveitemitemfull足,that么already经存in id setthenis本timerange
                 $rangeIds = $allIds;
             }
 
-            // ifrange id bedefinitionbecomeemptyarray，代tablealready经nothaveconformitemitemdata，直接跳outloop
+            // ifrange id bedefinitionbecomeemptyarray,代tablealready经nothaveconformitemitemdata,直接跳outloop
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -46,15 +46,15 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rightValue,
                 $rangeIds
             );
-            // null 代tablenot supportedsearchtype，直接skip
+            // null 代tablenot supportedsearchtype,直接skip
             if ($currentIds === null) {
                 continue;
             }
             if ($filterType->isAny()) {
-                // ifis任意itemitemfull足，that么will本time id andalreadyhave id conductmerge
+                // ifis任意itemitemfull足,that么will本time id andalreadyhave id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // ifis所haveitemitemfull足，that么will本time id andalreadyhave id conduct交collection
+                // ifis所haveitemitemfull足,that么will本time id andalreadyhave id conduct交collection
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

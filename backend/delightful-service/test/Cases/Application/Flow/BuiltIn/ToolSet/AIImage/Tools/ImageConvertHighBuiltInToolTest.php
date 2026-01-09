@@ -185,7 +185,7 @@ JSON, true));
 youisai文生graph助理
 
 ## process
-willuserinputprompt词，use`image_convert_high`toolgeneratehigh清image
+willuserinputprompt词,use`image_convert_high`toolgeneratehigh清image
 
 MARKDOWN,
 

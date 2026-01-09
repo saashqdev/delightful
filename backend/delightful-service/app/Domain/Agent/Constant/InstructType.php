@@ -68,12 +68,12 @@ enum InstructType: int
      */
     public static function requiresContent(int $type, ?int $displayType = null, ?int $instructionType = null): bool
     {
-        // ifisprocessfinger令，thennotcanconfigurationfinger令content
+        // ifisprocessfinger令,thennotcanconfigurationfinger令content
         if ($instructionType == InstructCategory::FLOW) {
             return false;
         }
 
-        // ifissystemfinger令，useSystemInstructTypejudge
+        // ifissystemfinger令,useSystemInstructTypejudge
         if ($displayType === InstructDisplayType::SYSTEM) {
             return SystemInstructType::requiresContent($type);
         }
@@ -130,7 +130,7 @@ enum InstructType: int
             $item['id'] = (string) IdGenerator::getSnowId();
         }
 
-        // ifis普通finger令，verifytype
+        // ifis普通finger令,verifytype
         if (! isset($item['display_type'])) {
             self::fromType((int) $item['type'])->validate($item);
         }
@@ -172,7 +172,7 @@ enum InstructType: int
     }
 
     /**
-     * securityverifyfinger令，catchexceptionandreturnresult.
+     * securityverifyfinger令,catchexceptionandreturnresult.
      * @return array{success: bool, message: null|string}
      */
     public static function safeValidateInstructs(array &$instructs): array

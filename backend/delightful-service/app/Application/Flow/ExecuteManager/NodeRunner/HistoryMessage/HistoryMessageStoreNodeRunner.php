@@ -44,10 +44,10 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // ifisresourcecategorydata，that么need提frontupload
+        // ifisresourcecategorydata,that么need提frontupload
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // byatwithinsurfacewillconductrename，所bythiswithin直接getto应name传入entergo
+        // byatwithinsurfacewillconductrename,所bythiswithin直接getto应name传入entergo
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);

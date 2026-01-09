@@ -299,8 +299,8 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * inside部setenablestatus（notconductbusinessrulecheck）.
-     * useatdatainitializeandinside部操as，skipbusinessrulelimit.
+     * inside部setenablestatus(notconductbusinessrulecheck).
+     * useatdatainitializeandinside部操as,skipbusinessrulelimit.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -370,7 +370,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     // businessmethod
 
     /**
-     * access记忆（updateaccesscountandtime）.
+     * access记忆(updateaccesscountandtime).
      */
     public function access(): void
     {
@@ -379,19 +379,19 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * strong化记忆（updatestrong化countandtime，enhance重wantproperty）.
+     * strong化记忆(updatestrong化countandtime,enhance重wantproperty).
      */
     public function reinforce(): void
     {
         ++$this->reinforcementCount;
         $this->lastReinforcedAt = new DateTime();
 
-        // strong化willenhance重wantproperty，buthaveup限
+        // strong化willenhance重wantproperty,buthaveup限
         $this->importance = min(1.0, $this->importance + 0.1);
     }
 
     /**
-     * calculatecurrent记忆validminute数（考虑衰subtract）.
+     * calculatecurrent记忆validminute数(考虑衰subtract).
      */
     public function getEffectiveScore(): float
     {
@@ -441,11 +441,11 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * override set method，to enabled fieldconduct特殊process.
+     * override set method,to enabled fieldconduct特殊process.
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled fieldininitializeo clockuseinside部method，skipbusinessrulecheck
+        // enabled fieldininitializeo clockuseinside部method,skipbusinessrulecheck
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;
@@ -465,7 +465,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
         $daysSinceLastAccess = (new DateTime())->diff($this->lastAccessedAt)->days;
 
-        // according toaccesstimecalculate衰subtract，at most衰subtractto 0.5
+        // according toaccesstimecalculate衰subtract,at most衰subtractto 0.5
         return max(0.5, 1.0 - ($daysSinceLastAccess * 0.01));
     }
 
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // accesscountto数addbecome，avoidpassdegreereward
+        // accesscountto数addbecome,avoidpassdegreereward
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

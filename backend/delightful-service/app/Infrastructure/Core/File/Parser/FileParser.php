@@ -72,7 +72,7 @@ class FileParser
             /** @var FileParserDriverInterface $driver */
             $driver = di($interface);
             $res = $driver->parse($tempFile, $fileUrl, $extension);
-            // ifiscsv、xlsx、xlsfile，needconduct额outsideprocess
+            // ifiscsv、xlsx、xlsfile,needconduct额outsideprocess
             if ($textPreprocess && in_array($extension, ['csv', 'xlsx', 'xls'])) {
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }
@@ -94,17 +94,17 @@ class FileParser
      *
      * @param string $url fileURLground址
      * @param string $tempFile temporaryfilepath
-     * @param int $maxSize filesizelimit（字section），0table示notlimit
+     * @param int $maxSize filesizelimit(字section),0table示notlimit
      * @throws Exception whendownloadfailorfile超限o clock
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // ifis本groundfilepath，直接return
+        // ifis本groundfilepath,直接return
         if (file_exists($url)) {
             return;
         }
 
-        // ifurlis本groundfileagreement，convertforactualpath
+        // ifurlis本groundfileagreement,convertforactualpath
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {
@@ -128,11 +128,11 @@ class FileParser
             ExceptionBuilder::throw(FlowErrorCode::Error, message: 'no法openfilestream');
         }
 
-        // iffilesizeunknown，needindownloadproceduremiddlecontrolsize
+        // iffilesizeunknown,needindownloadproceduremiddlecontrolsize
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
-            // filesizeknownorno需limit，直接copy
+            // filesizeknownorno需limit,直接copy
             stream_copy_to_stream($fileStream, $localFile);
         }
 
@@ -145,7 +145,7 @@ class FileParser
      *
      * @param resource $fileStream 远程filestreamresource
      * @param resource $localFile 本groundfilestreamresource
-     * @param int $maxSize filesizelimit（字section）
+     * @param int $maxSize filesizelimit(字section)
      * @throws Exception whenfilesize超限orwritefailo clock
      */
     private static function downloadWithSizeControl($fileStream, $localFile, int $maxSize): void
@@ -178,8 +178,8 @@ class FileParser
      * checkfilesizewhether超限.
      *
      * @param string $fileUrl fileURLground址
-     * @param int $maxSize filesizelimit（字section），0table示notlimit
-     * @return bool truetable示alreadychecksizeandinlimitinside，falsetable示ischunked传输needstreamdownload
+     * @param int $maxSize filesizelimit(字section),0table示notlimit
+     * @return bool truetable示alreadychecksizeandinlimitinside,falsetable示ischunked传输needstreamdownload
      * @throws Exception whenfilesize超passlimitorfilesizeunknownandnonchunked传输o clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
@@ -187,7 +187,7 @@ class FileParser
         if ($maxSize <= 0) {
             return true;
         }
-        // download之front，detectfilesize
+        // download之front,detectfilesize
         $headers = get_headers($fileUrl, true);
         if (isset($headers['Content-Length'])) {
             $fileSize = (int) $headers['Content-Length'];
@@ -197,18 +197,18 @@ class FileParser
             return true;
         }
 
-        // nothaveContent-Length，checkwhetherforchunked传输
+        // nothaveContent-Length,checkwhetherforchunked传输
         $transferEncoding = $headers['Transfer-Encoding'] ?? '';
         if (is_array($transferEncoding)) {
             $transferEncoding = end($transferEncoding);
         }
 
         if (strtolower(trim($transferEncoding)) === 'chunked') {
-            // chunked传输，allowstreamdownload
+            // chunked传输,allowstreamdownload
             return false;
         }
 
-        // 既nothaveContent-Length，alsonotischunked传输，rejectdownload
-        ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesizeunknown，forbiddownload');
+        // 既nothaveContent-Length,alsonotischunked传输,rejectdownload
+        ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesizeunknown,forbiddownload');
     }
 }

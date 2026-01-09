@@ -87,7 +87,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * saveprocess，only基础info.
+     * saveprocess,only基础info.
      */
     public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
@@ -110,7 +110,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * savesectionpoint，nodes、edges.
+     * savesectionpoint,nodes、edges.
      */
     public function saveNode(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
@@ -151,9 +151,9 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
-        // if传入explicitstatusvalue，then直接set
+        // if传入explicitstatusvalue,then直接set
         if ($enable !== null) {
-            // ifcurrentstatusandwantsetstatussame，thenno需操as
+            // ifcurrentstatusandwantsetstatussame,thenno需操as
             if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }
@@ -163,7 +163,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             $delightfulFlow->prepareForChangeEnable();
         }
 
-        // ifenablestatusfortrue，needconductverify
+        // ifenablestatusfortrue,needconductverify
         if ($delightfulFlow->isEnabled() && empty($delightfulFlow->getNodes())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
         }
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // ifisnotduplicate，that么is直接create调degreetask
+            // ifisnotduplicate,that么is直接create调degreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

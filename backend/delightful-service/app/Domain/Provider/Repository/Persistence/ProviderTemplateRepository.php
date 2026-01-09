@@ -42,7 +42,7 @@ readonly class ProviderTemplateRepository
             // foreachservicequotientcreatetemplateconfiguration
             $templateId = ProviderConfigIdAssembler::generateProviderTemplate($provider->getProviderCode(), $category);
 
-            // except delightful servicequotient，defaultstatusallisclose
+            // except delightful servicequotient,defaultstatusallisclose
             $defaultStatus = $provider->getProviderCode() === ProviderCode::Official
                 ? Status::Enabled
                 : Status::Disabled;

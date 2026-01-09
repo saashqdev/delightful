@@ -13,21 +13,21 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel相closeconfigurationparameter，如modelname、providequotient、API 端pointetc
+ * contain重sortmodel相closeconfigurationparameter,如modelname、providequotient、API 端pointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
     /**
      * 重sortmodelname.
      *
-     * for example：BAAI/bge-reranker-large
+     * for example:BAAI/bge-reranker-large
      */
     private string $rerankingModelName = '';
 
     /**
      * 重sortmodelprovidequotientname.
      *
-     * for example：gitee_ai、openai etc
+     * for example:gitee_ai、openai etc
      */
     private string $rerankingProviderName = '';
 
@@ -46,9 +46,9 @@ class RerankingModelConfig extends AbstractValueObject
     private string $apiKey = '';
 
     /**
-     * timeouttime（second）.
+     * timeouttime(second).
      *
-     * API requesttimeouttime，unitforsecond
+     * API requesttimeouttime,unitforsecond
      */
     private float $timeout = 3.0;
 
@@ -69,21 +69,21 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * batchprocesssize.
      *
-     * batchquantityprocessdocumentsize，useatimproveperformance
+     * batchquantityprocessdocumentsize,useatimproveperformance
      */
     private int $batchSize = 16;
 
     /**
      * whetherusecache.
      *
-     * whethercache重sortresult，useatimproveperformance
+     * whethercache重sortresult,useatimproveperformance
      */
     private bool $useCache = true;
 
     /**
-     * cacheexpiretime（second）.
+     * cacheexpiretime(second).
      *
-     * cacheexpiretime，unitforsecond
+     * cacheexpiretime,unitforsecond
      */
     private int $cacheTtl = 3600;
 

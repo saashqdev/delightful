@@ -86,7 +86,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
                 ],
                 $attributes
             );
-        // ifis软delete，thenrestore
+        // ifis软delete,thenrestore
         if ($model->trashed()) {
             $model->restore();
             $model->fill($attributes)->save();
@@ -141,7 +141,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // minutegroupaggregatequery，geteachknowledge basedocumentquantity
+        // minutegroupaggregatequery,geteachknowledge basedocumentquantity
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')
@@ -278,7 +278,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             'sync_status_message' => mb_substr($documentEntity->getSyncStatusMessage(), 0, 900),
         ];
 
-        // ifisalreadysyncorsyncfailstatus，synccountadd1
+        // ifisalreadysyncorsyncfailstatus,synccountadd1
         if (in_array($documentEntity->getSyncStatus(), [KnowledgeSyncStatus::Synced->value, KnowledgeSyncStatus::SyncFailed->value])) {
             KnowledgeBaseDocumentModel::withTrashed()
                 ->where('id', $documentEntity->getId())

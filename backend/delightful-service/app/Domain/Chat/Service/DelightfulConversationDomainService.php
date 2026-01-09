@@ -109,7 +109,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * conversationwindow：置top/移except/免打扰.
+     * conversationwindow:置top/移except/免打扰.
      * @throws Throwable
      */
     public function conversationOptionChange(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -118,7 +118,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageStruct = $messageDTO->getContent();
         $conversationId = $messageStruct->getConversationId();
         $conversationEntity = $this->checkAndGetSelfConversation($conversationId, $dataIsolation);
-        // according towant操astype，more改database
+        // according towant操astype,more改database
         $updateData = [];
         if ($messageStruct instanceof ConversationTopMessage) {
             $updateData = ['is_top' => $messageStruct->getIsTop()];
@@ -191,7 +191,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * 智canbody触hairconversationstartinputor者endinput.
-     * 直接操asto方conversationwindow，whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
+     * 直接操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      * @deprecated user端call agentOperateConversationStatusV2 method代替
      */
     public function agentOperateConversationStatus(ControlMessageType $controlMessageType, string $agentConversationId): bool
@@ -229,8 +229,8 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * use intermediate eventconductmiddlebetweenstatemessagepush，not持久化message. support话题level别“justininputmiddle”
-     * 直接操asto方conversationwindow，whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
+     * use intermediate eventconductmiddlebetweenstatemessagepush,not持久化message. support话题level别“justininputmiddle”
+     * 直接操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
     {
@@ -356,11 +356,11 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * getconversationwindow，not存inthencreate.supportuser/group chat/ai.
+     * getconversationwindow,not存inthencreate.supportuser/group chat/ai.
      */
     public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): DelightfulConversationEntity
     {
-        // according to $receiverType ，to receiveId conductparse，judgewhether存in
+        // according to $receiverType ,to receiveId conductparse,judgewhether存in
         $receiverTypeCallable = match ($receiverType) {
             null, ConversationType::User, ConversationType::Ai => function () use ($receiveId) {
                 $receiverUserEntity = $this->delightfulUserRepository->getUserById($receiveId);

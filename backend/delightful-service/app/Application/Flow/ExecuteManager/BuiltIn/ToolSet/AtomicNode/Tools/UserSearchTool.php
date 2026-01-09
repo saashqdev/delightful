@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'usersearch。notallowsearchall部person员，one定is具havefinger定filtervalue';
+        return 'usersearch.notallowsearchall部person员,one定is具havefinger定filtervalue';
     }
 
     public function getCallback(): ?Closure
@@ -93,7 +93,7 @@ class UserSearchTool extends AbstractBuiltInTool
             "type": "string",
             "key": "filter_type",
             "title": "filtertype",
-            "description": "filtertype。supportfiltertypehave：all、any。minute别代table 所haveitemitem、任意itemitem。defaultis all",
+            "description": "filtertype.supportfiltertypehave:all、any.minute别代table 所haveitemitem、任意itemitem.defaultis all",
             "required": null,
             "value": null,
             "encryption": false,
@@ -126,7 +126,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "field",
                         "title": "filterfield",
-                        "description": "filterfield。optional枚举have：username、work_number、position、position、department_name、group_name。minute别代table  user姓名、user工number、user岗位、userhand机number、departmentname、group chatname",
+                        "description": "filterfield.optional枚举have:username、work_number、position、position、department_name、group_name.minute别代table  user姓名、user工number、user岗位、userhand机number、departmentname、group chatname",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -138,7 +138,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "operator",
                         "title": "filter符",
-                        "description": "filter符。optional枚举have：equals、no_equals、contains、no_contains。minute别代table equal、notequal、contain、notcontain",
+                        "description": "filter符.optional枚举have:equals、no_equals、contains、no_contains.minute别代table equal、notequal、contain、notcontain",
                         "required": null,
                         "value": null,
                         "encryption": false,

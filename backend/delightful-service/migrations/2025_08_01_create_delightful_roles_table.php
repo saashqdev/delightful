@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->json('permission_key')->nullable()->comment('rolepermissioncolumn表');
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->tinyInteger('is_display')->default(1)->comment('whethershow: 0=否, 1=is');
-            $table->json('permission_tag')->nullable()->comment('permissiontag，useatfront端showcategory');
+            $table->json('permission_tag')->nullable()->comment('permissiontag,useatfront端showcategory');
             $table->tinyInteger('status')->default(1)->comment('status: 0=disable, 1=enable');
             $table->string('created_uid', 64)->nullable()->comment('create者userID');
             $table->string('updated_uid', 64)->nullable()->comment('update者userID');

@@ -33,7 +33,7 @@ class DelightfulFlowApiKeyEntity extends AbstractEntity
     protected string $secretKey;
 
     /**
-     * conversation ID（canis子conversation，如话题），and sk onetoonebind.
+     * conversation ID(canis子conversation,如话题),and sk onetoonebind.
      */
     protected string $conversationId;
 
@@ -205,7 +205,7 @@ class DelightfulFlowApiKeyEntity extends AbstractEntity
     public function getSecretKey(bool $isDesensitization = false): string
     {
         if ($isDesensitization) {
-            // only保留about 4 位数，剩downuse * 代替
+            // only保留about 4 位数,剩downuse * 代替
             return substr($this->secretKey, 0, 4) . str_repeat('*', strlen($this->secretKey) - 8) . substr($this->secretKey, -4);
         }
         return $this->secretKey;

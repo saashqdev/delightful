@@ -85,7 +85,7 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
             if ($e->getCode() >= 43000 && $e->getCode() < 44000) {
-                // already经is AsrErrorCode，直接重newthrow
+                // already经is AsrErrorCode,直接重newthrow
                 throw $e;
             }
 
@@ -135,7 +135,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(AsrErrorCode::UploadAudioFirst);
         }
 
-        // verifyuserIDmatch（基本securitycheck）
+        // verifyuserIDmatch(基本securitycheck)
         if ($taskStatus->userId !== $userId) {
             ExceptionBuilder::throw(AsrErrorCode::TaskNotBelongToUser);
         }
@@ -144,7 +144,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * from话题getprojectID（contain话题归属verify）.
+     * from话题getprojectID(contain话题归属verify).
      *
      * @param int $topicId 话题ID
      * @param string $userId userID

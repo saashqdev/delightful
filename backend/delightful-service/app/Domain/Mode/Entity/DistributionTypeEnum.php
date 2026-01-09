@@ -77,7 +77,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * getoptionarray（useatfront端show）.
+     * getoptionarray(useatfront端show).
      */
     public static function getOptions(): array
     {

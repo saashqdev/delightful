@@ -15,29 +15,29 @@ use App\Infrastructure\Core\AbstractDTO;
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * rolename（optional，onlyinneedupdateo clockprovide）.
+     * rolename(optional,onlyinneedupdateo clockprovide).
      */
     public ?string $name = null;
 
     /**
-     * rolestatus：0=disable, 1=enable（optional，onlyinneedupdateo clockprovide）.
+     * rolestatus:0=disable, 1=enable(optional,onlyinneedupdateo clockprovide).
      */
     public ?int $status = null;
 
     /**
-     * permissiontag，useatfront端showcategory（optional，onlyinneedupdateo clockprovide）.
+     * permissiontag,useatfront端showcategory(optional,onlyinneedupdateo clockprovide).
      */
     public ?array $permissionTag = null;
 
     /**
-     * permissionkeylist（optional，onlyinneedupdateo clockprovide）.
-     * notice：ifprovidethisfield，willreplace所have现havepermission.
+     * permissionkeylist(optional,onlyinneedupdateo clockprovide).
+     * notice:ifprovidethisfield,willreplace所have现havepermission.
      */
     public ?array $permissions = null;
 
     /**
-     * userIDlist（optional，onlyinneedupdateo clockprovide）.
-     * notice：ifprovidethisfield，willreplace所have现haveuserassociate.
+     * userIDlist(optional,onlyinneedupdateo clockprovide).
+     * notice:ifprovidethisfield,willreplace所have现haveuserassociate.
      */
     public ?array $userIds = null;
 
@@ -108,7 +108,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
      */
     public function validate(): bool
     {
-        // verifyrolename（ifprovide）
+        // verifyrolename(ifprovide)
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
                 return false;
@@ -119,12 +119,12 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
             }
         }
 
-        // verifystatusvalue（ifprovide）
+        // verifystatusvalue(ifprovide)
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
             return false;
         }
 
-        // verifypermissionlist（ifprovide）
+        // verifypermissionlist(ifprovide)
         if ($this->permissions !== null) {
             foreach ($this->permissions as $permission) {
                 if (! is_string($permission)) {
@@ -133,7 +133,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
             }
         }
 
-        // verifyuserIDlist（ifprovide）
+        // verifyuserIDlist(ifprovide)
         if ($this->userIds !== null) {
             foreach ($this->userIds as $userId) {
                 if (! is_string($userId)) {
@@ -163,7 +163,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
         }
 
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，onlycanis0or1';
+            $errors[] = 'rolestatusvalueinvalid,onlycanis0or1';
         }
 
         if ($this->permissions !== null) {

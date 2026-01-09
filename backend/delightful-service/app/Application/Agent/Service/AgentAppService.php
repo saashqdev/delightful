@@ -59,7 +59,7 @@ class AgentAppService extends AbstractAppService
             // merge
             $agentIds = array_unique(array_merge($orgAgentIds, $selfAgentIds));
 
-            // cacheresult（onlywhennotforemptyo clock）
+            // cacheresult(onlywhennotforemptyo clock)
             if (! empty($agentIds)) {
                 $this->redis->setex($cacheKey, 180, Json::encode($agentIds)); // cache 3 minute钟
             }
@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontain官方organization，按照传入IDorder重newsortresult，maintain官方organization助理infront
+        // ifcontain官方organization,按照传入IDorder重newsortresult,maintain官方organization助理infront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -100,7 +100,7 @@ class AgentAppService extends AbstractAppService
         $contactDataIsolation = $this->createContactDataIsolationByBase($agentDataIsolation);
         $userDepartmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($contactDataIsolation, $agentDataIsolation->getCurrentUserId(), true);
 
-        // ifneedcontain官方organization，thenwill官方organization助理rowinmostfrontsurface
+        // ifneedcontain官方organization,thenwill官方organization助理rowinmostfrontsurface
         if ($containOfficialOrganization) {
             $officialAgents = [];
             $nonOfficialAgents = [];
@@ -113,7 +113,7 @@ class AgentAppService extends AbstractAppService
                 }
             }
 
-            // 重newsort：官方organization助理infront
+            // 重newsort:官方organization助理infront
             $data['list'] = array_merge($officialAgents, $nonOfficialAgents);
         }
         $visibleAgents = [];

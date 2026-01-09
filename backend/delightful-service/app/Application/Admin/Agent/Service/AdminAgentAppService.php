@@ -140,7 +140,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * query企业down所have助理,itemitemquery：status，createperson，search.
+     * query企业down所have助理,itemitemquery:status,createperson,search.
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
@@ -362,13 +362,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         }
 
         $selectedDefaultFriendRootIds = array_flip($this->getSelectedDefaultFriendRootIds($authorization));
-        // iftypeforSELECTED_DEFAULT_FRIEND，thenonlyreturn选middledefaultgood友
+        // iftypeforSELECTED_DEFAULT_FRIEND,thenonlyreturn选middledefaultgood友
         if ($type === AgentFilterType::SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {
                 return isset($selectedDefaultFriendRootIds[$agent->getId()]);
             });
         }
-        // iftypeforNOT_SELECTED_DEFAULT_FRIEND，thenonlyreturnnot选middledefaultgood友
+        // iftypeforNOT_SELECTED_DEFAULT_FRIEND,thenonlyreturnnot选middledefaultgood友
         /* @phpstan-ignore-next-line */
         if ($type === AgentFilterType::NOT_SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {

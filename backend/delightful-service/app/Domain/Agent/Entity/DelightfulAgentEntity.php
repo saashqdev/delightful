@@ -59,7 +59,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $createdUid;
 
     /**
-     * 助理status：enable｜disable.
+     * 助理status:enable｜disable.
      */
     protected ?int $status = null;
 

@@ -28,10 +28,10 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('origin_id', 128)->comment('源id');
             $table->string('new_id', 64)->comment('newid');
-            // mappingtype：user id、department id、nullbetween id，organizationencoding
-            $table->string('mapping_type', 32)->comment('mappingtype（user、department、space、organization）');
-            // thethird-party平台type：企业微信、钉钉、飞书
-            $table->string('third_platform_type', 32)->comment('thethird-party平台type（wechat_work、dingtalk、lark）');
+            // mappingtype:user id、department id、nullbetween id,organizationencoding
+            $table->string('mapping_type', 32)->comment('mappingtype(user、department、space、organization)');
+            // thethird-party平台type:企业微信、钉钉、飞书
+            $table->string('third_platform_type', 32)->comment('thethird-party平台type(wechat_work、dingtalk、lark)');
             // delightful body系organizationencoding
             $table->string('delightful_organization_code', 32)->comment('delightful body系organizationencoding');
             $table->timestamps();

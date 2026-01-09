@@ -85,8 +85,8 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
         if (! empty($configData['config'])) {
             if ($decryptConfig) {
-                // whenneeddecrypto clock，settingalreadydecryptconfiguration（not脱敏)
-                // need new 两timeProviderConfigItemobject，因for setConfig methodwill操asoriginalobjectconduct脱敏
+                // whenneeddecrypto clock,settingalreadydecryptconfiguration(not脱敏)
+                // need new 两timeProviderConfigItemobject,因for setConfig methodwill操asoriginalobjectconduct脱敏
                 $mergedData['decryptedConfig'] = new ProviderConfigItem($configData['config']);
             }
             // config field set methodwill脱敏
@@ -112,7 +112,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * vlm 连通propertytest. llm/嵌入in app layer。
+     * vlm 连通propertytest. llm/嵌入in app layer.
      * @throws Exception
      */
     public function vlmConnectivityTest(string $serviceProviderConfigId, string $modelVersion, string $organizationCode): ConnectResponse
@@ -133,7 +133,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getservicequotientconfiguration（综合method）
+     * getservicequotientconfiguration(综合method)
      * according tomodelversion、modelIDandorganizationencodinggetservicequotientconfiguration.
      *
      * @param string $modelOriginId modelversion
@@ -148,17 +148,17 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         string $organizationCode,
         bool $throw = true,
     ): ?ProviderConfigEntity {
-        // 1. ifprovide modelId，走new逻辑
+        // 1. ifprovide modelId,走new逻辑
         if (! empty($modelId)) {
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
 
-        // 2. ifonly modelOriginId，先尝试findto应model
+        // 2. ifonly modelOriginId,先尝试findto应model
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
-                // if找tomodel，not直接return官方servicequotientconfiguration，whileisconductenterone步judge
-                $this->logger->info('找toto应model，judgeservicequotientconfiguration', [
+                // if找tomodel,not直接return官方servicequotientconfiguration,whileisconductenterone步judge
+                $this->logger->info('找toto应model,judgeservicequotientconfiguration', [
                     'modelVersion' => $modelOriginId,
                     'organizationCode' => $organizationCode,
                 ]);
@@ -168,7 +168,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // 3. ifallnot找to，throwexception
+        // 3. ifallnot找to,throwexception
         ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
     }
 
@@ -266,9 +266,9 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get超清修复servicequotientconfiguration。
-     * fromImageGenerateModelType::getMiracleVisionModes()[0]getmodel。
-     * if官方andnon官方allenable，优先usenon官方configuration。
+     * get超清修复servicequotientconfiguration.
+     * fromImageGenerateModelType::getMiracleVisionModes()[0]getmodel.
+     * if官方andnon官方allenable,优先usenon官方configuration.
      *
      * @param string $modelId modelversion
      * @param string $organizationCode organizationencoding
@@ -292,7 +292,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
         if (empty($models)) {
             $this->logger->warning('美graphmodelnot找to' . $modelId);
-            // ifnothave找tomodel，throwexception
+            // ifnothave找tomodel,throwexception
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
 
@@ -304,7 +304,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // ifnothaveactivatemodel，throwexception
+        // ifnothaveactivatemodel,throwexception
         if (empty($activeModels)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotActive);
         }
@@ -314,7 +314,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havenon官方servicequotientcolumn表，notdependencyatorganizationencoding
+     * get所havenon官方servicequotientcolumn表,notdependencyatorganizationencoding
      *
      * @param Category $category servicequotientcategory别
      * @return ProviderConfigModelsDTO[]
@@ -326,7 +326,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havecanuseservicequotientcolumn表（include官方servicequotient），notdependencyatorganizationencoding.
+     * get所havecanuseservicequotientcolumn表(include官方servicequotient),notdependencyatorganizationencoding.
      *
      * @param Category $category servicequotientcategory别
      * @return ProviderConfigModelsDTO[]
@@ -348,7 +348,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get官方activatemodelconfiguration（supportreturn多）.
+     * get官方activatemodelconfiguration(supportreturn多).
      * @param string $modelOriginId model
      * @return ProviderConfigItem[] servicequotientconfigurationarray
      */
@@ -360,11 +360,11 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         $filteredModels = $this->getModelsByVersionAndOrganization($modelOriginId, OfficialOrganizationUtil::getOfficialOrganizationCode());
 
         if (empty($filteredModels)) {
-            // ifnothave找tomatchactivatemodel，returnnullarray
+            // ifnothave找tomatchactivatemodel,returnnullarray
             return [];
         }
 
-        // createconfigurationIDtoconfiguration实bodymapping，便atfastspeedfind
+        // createconfigurationIDtoconfiguration实bodymapping,便atfastspeedfind
         $configMap = [];
         foreach ($serviceProviderConfigEntities as $configEntity) {
             $configMap[$configEntity->getId()] = $configEntity;
@@ -384,7 +384,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // ifnothave找toanyvalidconfiguration，returnnullarray
+        // ifnothave找toanyvalidconfiguration,returnnullarray
         return $result;
     }
 
@@ -423,7 +423,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $uniqueModels[$model->getModelId()] = $model;
         }
 
-        // according to sort sort，bigtosmall
+        // according to sort sort,bigtosmall
         usort($uniqueModels, static function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });
@@ -435,12 +435,12 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     {
         $providerModelEntities = $this->providerModelRepository->getModelsForOrganization($dataIsolation, $providerModelQuery->getCategory(), $providerModelQuery->getStatus());
 
-        // modelId 经passfilter，go重选one
+        // modelId 经passfilter,go重选one
         if ($providerModelQuery->isModelIdFilter()) {
             $uniqueModels = [];
             foreach ($providerModelEntities as $model) {
                 $modelId = $model->getModelId();
-                // ifthis modelId alsonothavebeadd，thenadd
+                // ifthis modelId alsonothavebeadd,thenadd
                 if (! isset($uniqueModels[$modelId])) {
                     $uniqueModels[$modelId] = $model;
                 }
@@ -482,7 +482,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             );
 
             if ($existingConfig !== null) {
-                $this->logger->info('servicequotientconfigurationalready存in，skip', [
+                $this->logger->info('servicequotientconfigurationalready存in,skip', [
                     'category' => $category->value,
                     'provider_id' => $provider->getId(),
                 ]);
@@ -511,7 +511,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * fromactivatemodelmiddlefindcanuseservicequotientconfiguration
-     * 优先returnnon官方configuration，ifnothavethenreturn官方configuration.
+     * 优先returnnon官方configuration,ifnothavethenreturn官方configuration.
      *
      * @param ProviderModelEntity[] $activeModels activatemodelcolumn表
      */
@@ -563,28 +563,28 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             // getservicequotienttype
             $providerType = $serviceProviderEntity->getProviderType();
 
-            // toatnon官方servicequotient，checkitswhetheractivate
+            // toatnon官方servicequotient,checkitswhetheractivate
             if ($providerType !== ProviderType::Official) {
-                // ifisnon官方servicequotientbutnotactivate，thenskip
+                // ifisnon官方servicequotientbutnotactivate,thenskip
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }
-                // 找toactivatenon官方configuration，immediatelyreturn（优先levelmosthigh）
+                // 找toactivatenon官方configuration,immediatelyreturn(优先levelmosthigh)
                 return $serviceProviderConfigEntity;
             }
 
-            // ifis官方servicequotientconfiguration，先save，ifnothave找tonon官方againuse
+            // ifis官方servicequotientconfiguration,先save,ifnothave找tonon官方againuse
             if ($officialConfig === null) {
                 $officialConfig = $serviceProviderConfigEntity;
             }
         }
 
-        // if找to官方configuration，thenreturn
+        // if找to官方configuration,thenreturn
         if ($officialConfig !== null) {
             return $officialConfig;
         }
 
-        // if官方andnon官方allnothave找toactivateconfiguration，throwexception
+        // if官方andnon官方allnothave找toactivateconfiguration,throwexception
         ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotActive);
     }
 

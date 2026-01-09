@@ -66,7 +66,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected ToolOptions $options;
 
     /**
-     * associateinformation，useatfront端show.
+     * associateinformation,useatfront端show.
      */
     protected ?array $relInfo = null;
 

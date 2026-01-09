@@ -33,7 +33,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
 
-        // foreachtestgenerate唯oneuserID，avoidtestbetweendataconflict
+        // foreachtestgenerate唯oneuserID,avoidtestbetweendataconflict
         $this->testUserIds = [
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),
@@ -226,7 +226,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGrantWithOrganizationCreatorFlagSetsIsOrganizationCreatorCorrectly(): void
     {
-        // createone普通administrator（nonorganizationcreate者）
+        // createone普通administrator(nonorganizationcreate者)
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -275,7 +275,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetOrganizationCreatorReturnsCorrectEntity(): void
     {
-        // create多administrator，itsmiddleoneisorganizationcreate者
+        // create多administrator,itsmiddleoneisorganizationcreate者
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],

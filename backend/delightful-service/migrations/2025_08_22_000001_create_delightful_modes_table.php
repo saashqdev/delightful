@@ -25,7 +25,7 @@ return new class extends Migration {
         Schema::create('delightful_modes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->json('name_i18n')->comment('模typename国际化');
-            $table->string('identifier', 50)->default('')->comment('模typeidentifier，唯one');
+            $table->string('identifier', 50)->default('')->comment('模typeidentifier,唯one');
             $table->string('icon', 255)->default('')->comment('模typegraph标');
             $table->string('color', 10)->default('')->comment('模typecolor');
             $table->bigInteger('sort')->default(0)->comment('sort');
@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->tinyInteger('is_default')->default(0)->comment('whetherdefault模type 0:否 1:is');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
             $table->tinyInteger('distribution_type')->default(1)->comment('minute配method 1:customizeconfiguration 2:跟随other模type');
-            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随模typeID，0table示not跟随');
+            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随模typeID,0table示not跟随');
             $table->json('restricted_mode_identifiers')->comment('limit模typeidentifierarray');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->string('creator_id', 64)->default('')->comment('createpersonID');

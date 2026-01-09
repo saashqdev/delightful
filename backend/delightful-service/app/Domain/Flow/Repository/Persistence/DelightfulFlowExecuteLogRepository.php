@@ -31,7 +31,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
         $update = [
             'status' => $delightfulFlowExecuteLogEntity->getStatus()->value,
         ];
-        // ifiscompletestatus，recordresult
+        // ifiscompletestatus,recordresult
         if ($delightfulFlowExecuteLogEntity->getStatus()->isFinished()) {
             $update['result'] = json_encode($delightfulFlowExecuteLogEntity->getResult(), JSON_UNESCAPED_UNICODE);
         }
@@ -52,7 +52,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
             ->where('level', 0)
             // retrycountless than 3 time
             ->where('retry_count', '<', 1)
-            // onlygetmost近 2 hourinsidedata，超pass 2 hourdatanotagainprocess
+            // onlygetmost近 2 hourinsidedata,超pass 2 hourdatanotagainprocess
             ->where('created_at', '>', date('Y-m-d H:i:s', time() - 7200))
             ->where('created_at', '<', date('Y-m-d H:i:s', time() - $timeout))
             ->forPage($page->getPage(), $page->getPageNum());

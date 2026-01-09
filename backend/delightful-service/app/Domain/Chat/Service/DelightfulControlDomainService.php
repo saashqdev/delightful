@@ -130,7 +130,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $unreadList = $senderReceiveList->getUnreadList();
                     if (! in_array($receiveUserEntity->getUserId(), $unreadList, true)) {
                         $this->logger->error(sprintf(
-                            'messageDispatch usernotinmessagenot读column表middle（maybeother设备already读） $unreadList:%s $delightfulSeqEntity:%s',
+                            'messageDispatch usernotinmessagenot读column表middle(maybeother设备already读) $unreadList:%s $delightfulSeqEntity:%s',
                             Json::encode($unreadList),
                             Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
@@ -160,16 +160,16 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写database,updatemessagesend方already读column表。thisisfor复usemessage收hairchannel，notifycustomer端havenewalready读return执。
+                        // 写database,updatemessagesend方already读column表.thisisfor复usemessage收hairchannel,notifycustomer端havenewalready读return执.
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // updateoriginal chat_seq messagereceivepersoncolumn表。 avoidpullhistorymessageo clock，to方already读messagealsoisdisplaynot读。
+                        // updateoriginal chat_seq messagereceivepersoncolumn表. avoidpullhistorymessageo clock,to方already读messagealsoisdisplaynot读.
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);
                             $this->delightfulSeqRepository->updateReceiveList($originalSeq);
                         } else {
                             $this->logger->error(sprintf(
-                                'messageDispatch updateoriginal chat_seq fail，not找tooriginalmessage $senderMessageId:%s',
+                                'messageDispatch updateoriginal chat_seq fail,not找tooriginalmessage $senderMessageId:%s',
                                 $senderMessageId
                             ));
                         }

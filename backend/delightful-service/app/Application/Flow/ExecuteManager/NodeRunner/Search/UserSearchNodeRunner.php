@@ -91,7 +91,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 $phoneDesensitization = true;
             }
             foreach ($delightfulUsers as $delightfulUser) {
-                // ifnotispersoncategory，filter
+                // ifnotispersoncategory,filter
                 if ($delightfulUser->getUserType() !== UserType::Human) {
                     continue;
                 }
@@ -137,7 +137,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    // -------- bydownmethodtenminute粗暴，notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之categoryoutcomeagainoptimize
+    // -------- bydownmethodtenminute粗暴,notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之categoryoutcomeagainoptimize
 
     private function getUserIdsByUsername(Operator $operator, OperatorType $operatorType, mixed $username, ?array $filterUserIds = null): array
     {

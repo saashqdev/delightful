@@ -326,7 +326,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex2executetimeratiovertex3long，所byvertex3will先execute，先outputresult
+        // 因forvertex2executetimeratiovertex3long,所byvertex3will先execute,先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex2'], array_keys($result));
 
         // Verify concurrent execution - vertex2 and vertex3 should run in different coroutines
@@ -380,7 +380,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex3executetimeratiovertex2long，所byvertex2will先execute，先outputresult
+        // 因forvertex3executetimeratiovertex2long,所byvertex2will先execute,先outputresult
         $this->assertEquals(['vertex1', 'vertex2', 'vertex3'], array_keys($result));
 
         // Verify concurrent execution again
@@ -532,7 +532,7 @@ class DagTest extends BaseTest
      * root -> vertex3
      * vertex2 -> vertex5
      * vertex3 -> vertex4
-     * vertex4 -> vertex5 （butisnot调degree）.
+     * vertex4 -> vertex5 (butisnot调degree).
      */
     public function test4(): void
     {
@@ -718,11 +718,11 @@ class DagTest extends BaseTest
 
     /**
      * testnonandhair模type.
-     * vertex1 -> vertex2（not调degree）
-     * vertex1 -> vertex3（调degree）.
-     * vertex1 -> vertex4（not调degree）.
+     * vertex1 -> vertex2(not调degree)
+     * vertex1 -> vertex3(调degree).
+     * vertex1 -> vertex4(not调degree).
      *
-     * shouldoutput：vertex1, vertex3.
+     * shouldoutput:vertex1, vertex3.
      */
     public function test7(): void
     {
@@ -839,7 +839,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex2executetimeratiovertex3long，所byvertex3will先execute，先outputresult
+        // 因forvertex2executetimeratiovertex3long,所byvertex3will先execute,先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex5', 'vertex2', 'vertex4', 'vertex6'], array_keys($result));
     }
 

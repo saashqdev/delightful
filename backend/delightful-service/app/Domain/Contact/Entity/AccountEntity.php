@@ -53,7 +53,7 @@ class AccountEntity extends AbstractEntity
     protected int $delightfulEnvironmentId = 0;
 
     /**
-     * 密码（SHA256encrypt）.
+     * 密码(SHA256encrypt).
      */
     protected string $password = '';
 
@@ -64,7 +64,7 @@ class AccountEntity extends AbstractEntity
 
     protected ?string $createdAt = null;
 
-    // fortrace哪withincreate账number，留downthisconstructfunction
+    // fortrace哪withincreate账number,留downthisconstructfunction
     public function __construct(array $data = [])
     {
         parent::__construct($data);

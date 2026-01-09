@@ -19,15 +19,15 @@ class CreateDelightfulChatMessageTable extends Migration
             return;
         }
         Schema::create('delightful_chat_messages', static function (Blueprint $table) {
-            // according toupsurface建table语sentence，outbydowncode
+            // according toupsurface建table语sentence,outbydowncode
             $table->bigIncrements('id');
             // hairitem方所属organization
             $table->string('sender_id', 64)->comment('hairitem方id');
-            $table->tinyInteger('sender_type')->comment('hairitem方usertype,1:user(aialsobe认forisuser)；2：application;3:document;4:多维table格');
+            $table->tinyInteger('sender_type')->comment('hairitem方usertype,1:user(aialsobe认forisuser);2:application;3:document;4:多维table格');
             $table->string('sender_organization_code', 64)->comment('hairitem方organizationencoding,maybeforemptystring')->default('');
             // receive方所属organization
-            $table->string('receive_id', 64)->comment('receive方id，maybeispersoncategory、aior者application/document/多维table格etc');
-            $table->tinyInteger('receive_type')->comment('receive方type,1:user(aialsobe认forisuser)；2：application;3:document;4:多维table格');
+            $table->string('receive_id', 64)->comment('receive方id,maybeispersoncategory、aior者application/document/多维table格etc');
+            $table->tinyInteger('receive_type')->comment('receive方type,1:user(aialsobe认forisuser);2:application;3:document;4:多维table格');
             $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,maybeforemptystring')->default('');
             // message相closeid
             $table->string('app_message_id', 64)->comment('customer端generatemessageid,useat防customer端duplicate');

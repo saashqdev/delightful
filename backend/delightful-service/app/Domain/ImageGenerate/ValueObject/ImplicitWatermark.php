@@ -30,7 +30,7 @@ class ImplicitWatermark
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        // settingdefaultsignature，insettinguserinformationbackwillfrom动encrypt
+        // settingdefaultsignature,insettinguserinformationbackwillfrom动encrypt
         $this->sign = 'be_delightful';
     }
 

@@ -105,9 +105,9 @@ readonly class FileDomainService
     }
 
     /**
-     * batchquantitygetfilelink（from动frompathextractorganizationencodingandminutegroupprocess）.
-     * @param string[] $filePaths containorganizationencodingfilepatharray，format：orgCode/path/file.ext
-     * @param null|StorageBucketType $bucketType storage桶type，defaultforPublic
+     * batchquantitygetfilelink(from动frompathextractorganizationencodingandminutegroupprocess).
+     * @param string[] $filePaths containorganizationencodingfilepatharray,format:orgCode/path/file.ext
+     * @param null|StorageBucketType $bucketType storage桶type,defaultforPublic
      * @return array<string,FileLink> filepathtoFileLinkmapping
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
@@ -160,7 +160,7 @@ readonly class FileDomainService
     /**
      * start sts 模type.
      * gettemporaryvouchergivefront端use.
-     * @todo securityissue，dir nothavevalidation，nothaveorganization隔离
+     * @todo securityissue,dir nothavevalidation,nothaveorganization隔离
      */
     public function getStsTemporaryCredential(
         string $organizationCode,
@@ -234,7 +234,7 @@ readonly class FileDomainService
     public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         $prefix = $this->getFullPrefix($organizationCode);
-        # judgemostnextcharacterwhetheris /,ifis，go掉
+        # judgemostnextcharacterwhetheris /,ifis,go掉
         if (substr($prefix, -1) === '/') {
             $prefix = substr($prefix, 0, -1);
         }
@@ -285,7 +285,7 @@ readonly class FileDomainService
                 key: $objectKey,
                 filename: $filename,
                 size: $object['size'] ?? null,
-                lastModified: null // ASRbusinessmiddlenotusethefield，直接传null
+                lastModified: null // ASRbusinessmiddlenotusethefield,直接传null
             );
         }
         return $files;

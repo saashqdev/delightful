@@ -40,7 +40,7 @@ class SessionAppService implements SessionInterface
                 }
             }
 
-            // ifhaveorganizationcode，batchquantityget所haveorganizationrootdepartmentinformation
+            // ifhaveorganizationcode,batchquantityget所haveorganizationrootdepartmentinformation
             if (! empty($orgCodes)) {
                 // onetimepropertybatchquantityget所haveorganizationrootdepartmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);

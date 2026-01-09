@@ -27,8 +27,8 @@ return new class extends Migration {
             $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入pointid');
             // requestparameterlength
             $table->integer('request_length')->nullable()->default(null)->comment('requestparameterlength');
-            // responseconsumetime，unit：毫second
-            $table->integer('response_time')->nullable()->default(null)->comment('responseconsumetime，unit：毫second');
+            // responseconsumetime,unit:毫second
+            $table->integer('response_time')->nullable()->default(null)->comment('responseconsumetime,unit:毫second');
             // response http status码
             $table->integer('http_status_code')->nullable()->default(null)->comment('response http status码');
             // responsebusinessstatus码
@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->text('exception_message')->comment('exceptioninfo')->nullable();
             $table->datetimes();
             $table->index(['request_id'], 'request_id_index');
-            // for endpoint_id and created_at add联合index，useat按timerangequery特定端pointresponse
+            // for endpoint_id and created_at add联合index,useat按timerangequery特定端pointresponse
             $table->index(['endpoint_id', 'created_at'], 'endpoint_id_created_at_index');
             $table->comment('接入pointresponserecordtable');
         });

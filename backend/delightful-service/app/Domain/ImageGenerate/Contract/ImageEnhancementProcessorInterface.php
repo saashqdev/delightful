@@ -11,7 +11,7 @@ use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
 
 /**
  * imageenhanceprocess器interface
- * useatforimage嵌入enhanceinformation（如隐typewatermarketc）.
+ * useatforimage嵌入enhanceinformation(如隐typewatermarketc).
  */
 interface ImageEnhancementProcessorInterface
 {

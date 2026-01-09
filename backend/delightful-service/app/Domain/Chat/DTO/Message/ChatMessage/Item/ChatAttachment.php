@@ -11,12 +11,12 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
 
 /**
- * attachmentnotisonetypemessagetype，whileismessageone部minute.
+ * attachmentnotisonetypemessagetype,whileismessageone部minute.
  */
 class ChatAttachment extends AbstractEntity
 {
     /**
-     * chatfileneed先uploadto chat fileservice器，then才cansendmessage.
+     * chatfileneed先uploadto chat fileservice器,then才cansendmessage.
      * this id is delightful_chat_file 表primary key.
      */
     protected string $fileId = '';

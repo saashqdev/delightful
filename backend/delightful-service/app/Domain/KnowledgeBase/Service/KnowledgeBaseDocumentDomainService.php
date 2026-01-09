@@ -38,7 +38,7 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $this->prepareForCreation($documentEntity);
         $entity = $this->knowledgeBaseDocumentRepository->create($dataIsolation, $documentEntity);
-        // ifhavefile，syncfile
+        // ifhavefile,syncfile
         if ($documentEntity->getDocumentFile()) {
             $event = new KnowledgeBaseDocumentSavedEvent($dataIsolation, $knowledgeBaseEntity, $entity, true);
             AsyncEventUtil::dispatch($event);
@@ -122,14 +122,14 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // ifforce重建or者syncstatusforfail，then重newsync
+        // ifforce重建or者syncstatusforfail,then重newsync
         if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
             $document->setSyncStatus(0); // 0 table示notsync
             $document->setSyncStatusMessage('');
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触hair重建（thiswithincansendeventor者add入queue）
+            // async触hair重建(thiswithincansendeventor者add入queue)
             // TODO: 触hair重建toquantityevent
         }
     }
@@ -171,7 +171,7 @@ readonly class KnowledgeBaseDocumentDomainService
         if ($documentEntity) {
             return $documentEntity;
         }
-        // ifdocumentnot存in，createnewdefaultdocument
+        // ifdocumentnot存in,createnewdefaultdocument
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
             ->setName('not命名document.txt')

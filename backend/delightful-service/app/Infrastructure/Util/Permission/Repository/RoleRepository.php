@@ -198,7 +198,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * batchquantitygetroleuserlist，return [roleId => userIds[]]。
+     * batchquantitygetroleuserlist,return [roleId => userIds[]].
      */
     public function getRoleUsersMap(string $organizationCode, array $roleIds): array
     {

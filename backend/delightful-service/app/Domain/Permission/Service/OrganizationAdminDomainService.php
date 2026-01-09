@@ -95,9 +95,9 @@ class OrganizationAdminDomainService
      */
     public function destroy(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): void
     {
-        // indeleteorganizationadministratorrecord之front，先移exceptitsinpermissionsystemmiddle role_user associate
+        // indeleteorganizationadministratorrecord之front,先移exceptitsinpermissionsystemmiddle role_user associate
         try {
-            // createpermission隔离object，useat操asroleservice
+            // createpermission隔离object,useat操asroleservice
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
                 $dataIsolation->getCurrentUserId() ?? ''
@@ -180,7 +180,7 @@ class OrganizationAdminDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.user_not_organization_admin', ['userId' => $userId]);
         }
 
-        // checkwhetherfororganizationcreateperson，organizationcreatepersonnotcandeleteadministratorpermission
+        // checkwhetherfororganizationcreateperson,organizationcreatepersonnotcandeleteadministratorpermission
         $organizationAdmin = $this->getByUserId($dataIsolation, $userId);
         if ($organizationAdmin && $organizationAdmin->isOrganizationCreator()) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.organization_creator_cannot_be_revoked', ['userId' => $userId]);
@@ -234,7 +234,7 @@ class OrganizationAdminDomainService
         // checknewcreatepersonwhetheralready经isorganizationadministrator
         $newCreator = $this->getByUserId($dataIsolation, $newCreatorUserId);
         if (! $newCreator) {
-            // ifnewcreatepersonalsonotisadministrator，先授予administratorpermission
+            // ifnewcreatepersonalsonotisadministrator,先授予administratorpermission
             $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转letorganizationcreateperson身shareo clockfrom动授予administratorpermission');
         }
 

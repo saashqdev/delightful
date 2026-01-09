@@ -68,7 +68,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     // onlyonlyaddattachment
                     $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                     if ($imageUrls) {
-                        // havecontentandhaveattachment，addtextandimagecontent
+                        // havecontentandhaveattachment,addtextandimagecontent
                         $contentMessage->addContent(UserMessageContent::text($userPrompt));
                         foreach ($imageUrls as $imageUrl) {
                             $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));
@@ -77,7 +77,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $memoryManager->addMessage($contentMessage);
                 }
             } else {
-                // createonenew，inback续use
+                // createonenew,inback续use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
             }

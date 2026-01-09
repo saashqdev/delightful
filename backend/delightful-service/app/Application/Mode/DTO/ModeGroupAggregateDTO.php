@@ -19,7 +19,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     protected array $models = [];
 
     /**
-     * @var ModeGroupModelDTO[] theminutegroupto应graphlikemodeldetailedinfoarray（VLM）
+     * @var ModeGroupModelDTO[] theminutegroupto应graphlikemodeldetailedinfoarray(VLM)
      */
     protected array $imageModels = [];
 
@@ -67,7 +67,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * addmodelID（tobackcompatible，butnotrecommendeduse）.
+     * addmodelID(tobackcompatible,butnotrecommendeduse).
      */
     public function addModelId(string $modelId): void
     {
@@ -114,7 +114,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * getmodelIDarray（tobackcompatible）.
+     * getmodelIDarray(tobackcompatible).
      * @return string[]
      */
     public function getModelIds(): array
@@ -123,12 +123,12 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * setmodelIDarray（tobackcompatible，butnotrecommendeduse）.
+     * setmodelIDarray(tobackcompatible,butnotrecommendeduse).
      * @param string[] $modelIds
      */
     public function setModelIds(array $modelIds): void
     {
-        // thismethod保留useattobackcompatible，butactualupneedcompletemodelinfo
+        // thismethod保留useattobackcompatible,butactualupneedcompletemodelinfo
         // suggestionuse setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {

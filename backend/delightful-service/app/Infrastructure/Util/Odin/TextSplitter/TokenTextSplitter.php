@@ -17,7 +17,7 @@ use Yethee\Tiktoken\EncoderProvider;
 class TokenTextSplitter extends TextSplitter
 {
     /**
-     * setmostbigcachetextlength（character数）
+     * setmostbigcachetextlength(character数)
      * 超passthislengthtextwillnotwillbecachein协程updown文middle.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
@@ -69,7 +69,7 @@ class TokenTextSplitter extends TextSplitter
         $this->chunkSize = $chunkSize;
         $this->chunkOverlap = $chunkOverlap;
         $this->fixedSeparator = $fixedSeparator;
-        $this->separators = $separators ?? ["\n\n", "\n", '。', ' ', ''];
+        $this->separators = $separators ?? ["\n\n", "\n", '.', ' ', ''];
         $this->tokenizer = $tokenizer ?? $this->getDefaultTokenizer();
         $this->keepSeparator = $keepSeparator;
         $this->preserveSeparator = $preserveSeparator;
@@ -86,7 +86,7 @@ class TokenTextSplitter extends TextSplitter
     {
         $text = $this->ensureUtf8Encoding($text);
 
-        // saveoriginaltext，useatalso原tag
+        // saveoriginaltext,useatalso原tag
         $originalText = $text;
 
         // 1. 先原文middle0x00replacebecome0x000x00
@@ -110,7 +110,7 @@ class TokenTextSplitter extends TextSplitter
         $finalChunks = [];
         foreach ($chunks as $i => $chunk) {
             if ($chunksLengths[$i] > $this->chunkSize) {
-                // ifchunktoobig，conductrecursionsplit
+                // ifchunktoobig,conductrecursionsplit
                 $finalChunks = array_merge($finalChunks, $this->recursiveSplitText($chunk));
             } else {
                 $finalChunks[] = $chunk;
@@ -179,7 +179,7 @@ class TokenTextSplitter extends TextSplitter
         if ($separator === ' ') {
             $chunks = preg_split('/\s+/', $text);
         } else {
-            // ifminute隔符contain0x00，replacebecome0x000x00
+            // ifminute隔符contain0x00,replacebecome0x000x00
             $separator = str_replace("\x00", "\x00\x00", $separator);
             $chunks = explode($separator, $text);
             if ($this->preserveSeparator) {
@@ -192,7 +192,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * processminute隔符，willminute隔符splicetoeachminutepiecefrontsurface（exceptfirst）.
+     * processminute隔符,willminute隔符splicetoeachminutepiecefrontsurface(exceptfirst).
      */
     private function preserveSeparator(array $chunks, string $separator): array
     {
@@ -358,7 +358,7 @@ class TokenTextSplitter extends TextSplitter
             }
             return count($this->defaultEncoder->encode($text));
         } catch (Throwable $e) {
-            // ifcalculatetokenfail，returnoneestimatedvalue
+            // ifcalculatetokenfail,returnoneestimatedvalue
             return (int) ceil(mb_strlen($text) / 4);
         }
     }
@@ -366,7 +366,7 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // iftextlength超passlimit，直接calculatenotcache
+            // iftextlength超passlimit,直接calculatenotcache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }
@@ -409,7 +409,7 @@ class TokenTextSplitter extends TextSplitter
         // 尝试detectencoding
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // ifno法detecttoencoding，尝试use iconv detect
+            // ifno法detecttoencoding,尝试use iconv detect
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
                 return 'UTF-8'; // defaultuse UTF-8

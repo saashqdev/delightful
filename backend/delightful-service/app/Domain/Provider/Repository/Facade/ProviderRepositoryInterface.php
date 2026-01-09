@@ -47,7 +47,7 @@ interface ProviderRepositoryInterface
     public function getByCodeAndCategory(ProviderCode $providerCode, Category $category): ?ProviderEntity;
 
     /**
-     * according toIDgetservicequotient实body（not按organizationfilter，all局query）.
+     * according toIDgetservicequotient实body(not按organizationfilter,all局query).
      *
      * @param int $id servicequotientID
      * @return null|ProviderEntity servicequotient实body
@@ -55,7 +55,7 @@ interface ProviderRepositoryInterface
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderEntity;
 
     /**
-     * according toIDarraygetservicequotient实bodylist（not按organizationfilter，all局query）.
+     * according toIDarraygetservicequotient实bodylist(not按organizationfilter,all局query).
      *
      * @param array<int> $ids servicequotientIDarray
      * @return array<int, ProviderEntity> returnbyidforkeyservicequotient实bodyarray

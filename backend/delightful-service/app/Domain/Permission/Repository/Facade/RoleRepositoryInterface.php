@@ -54,7 +54,7 @@ interface RoleRepositoryInterface
     public function getRoleUsers(string $organizationCode, int $roleId): array;
 
     /**
-     * batchquantityget多roleusercolumn表。
+     * batchquantityget多roleusercolumn表.
      * returnformatfor [roleId => userId[]].
      *
      * @param string $organizationCode organizationencoding

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\AIImage\Tools;
 
 /*
- * 本file属at灯塔engine版权所have，泄漏必究。
+ * 本file属at灯塔engine版权所have,泄漏必究.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -166,7 +166,7 @@ JSON, true));
 youisai文生graph助理
 
 ## process
-willuserinputprompt词，use`ai_image`toolgenerateimage
+willuserinputprompt词,use`ai_image`toolgenerateimage
 
 MARKDOWN,
 

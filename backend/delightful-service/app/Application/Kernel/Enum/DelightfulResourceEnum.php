@@ -12,11 +12,11 @@ use function Hyperf\Translation\__;
 /**
  * Delightful resource枚举.
  *
- * 1. use Backed Enum willeachresourcemappingfor唯onestring key。
- * 2. passmethodprovide label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
- * 3. onlydefinitionresourceitself，not涉and操astype（如 query / edit）。
+ * 1. use Backed Enum willeachresourcemappingfor唯onestring key.
+ * 2. passmethodprovide label / parent  etcyuaninfo,方便back续generatepermissiontree、做 i18n etc.
+ * 3. onlydefinitionresourceitself,not涉and操astype(如 query / edit).
  *
- * notice：ifyoumodifythisfile，请executesingleyuantest PermissionApiTest.testGetPermissionTree.
+ * notice:ifyoumodifythisfile,请executesingleyuantest PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
@@ -25,7 +25,7 @@ enum DelightfulResourceEnum: string
     case ADMIN = 'admin'; # organizationmanageback台
     case ADMINPLUS = 'admin_plus'; # organizationmanageback台plus
 
-    // ===== twolevel：模piece =====
+    // ===== twolevel:模piece =====
     case ADMIN_AI = 'admin.ai'; # 平台manageback台-AImanage
     case ADMIN_SAFE = 'admin.safe'; # security管控
     case PLATFORM_AI = 'platform.ai'; # 平台manageback台-AImanage
@@ -33,7 +33,7 @@ enum DelightfulResourceEnum: string
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organizationmanage
     case ADMINPLUS_AI = 'admin_plus.ai'; # organizationmanageback台plus-AImanage
 
-    // ===== threelevel：specificresource (useatspecificbindinterface）=====
+    // ===== threelevel:specificresource (useatspecificbindinterface)=====
     case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AImanage-modelmanage
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AImanage-智can绘graphmanage
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AImanage-模typemanagemanage
@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * uplevelresource.
-     * notice：new操asresourcebackwant补充thisconfiguration.
+     * notice:new操asresourcebackwant补充thisconfiguration.
      */
     public function parent(): ?self
     {
@@ -108,9 +108,9 @@ enum DelightfulResourceEnum: string
     }
 
     /**
-     * returnandtheresourcebind Operation Enum category名。
-     * defaultuse DelightfulOperationEnum。
-     * 如需for特定resourcecustomize操ascollection，caninthisreturncustomize Enum::class。
+     * returnandtheresourcebind Operation Enum category名.
+     * defaultuse DelightfulOperationEnum.
+     * 如需for特定resourcecustomize操ascollection,caninthisreturncustomize Enum::class.
      */
     public function operationEnumClass(): string
     {

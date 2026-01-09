@@ -45,7 +45,7 @@ class SSRFDefense
         $this->isValid($allowRedirect);
 
         $url = $this->url;
-        // replacebecome ip access，thiso clockneedinrequestmiddleadd Host 才line
+        // replacebecome ip access,thiso clockneedinrequestmiddleadd Host 才line
         if ($this->options->isReplaceIp()) {
             $url = str_replace($this->host, $this->ip, $url);
         }
@@ -162,7 +162,7 @@ class SSRFDefense
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_NOBODY, true);              // onlygetHTTPhead，notdownloadbody
+        curl_setopt($ch, CURLOPT_NOBODY, true);              // onlygetHTTPhead,notdownloadbody
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);

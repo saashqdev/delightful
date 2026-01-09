@@ -15,22 +15,22 @@ use Hyperf\DbConnection\Db;
 
 class ProviderModelConfigVersionRepository extends AbstractProviderModelRepository implements ProviderModelConfigVersionRepositoryInterface
 {
-    // configurationversiontablenotneedorganization隔离（pass service_provider_model_id associatealready经隔离）
+    // configurationversiontablenotneedorganization隔离(pass service_provider_model_id associatealready经隔离)
     protected bool $filterOrganizationCode = false;
 
     /**
-     * savemodelconfigurationversion（intransactionmiddlecompleteversionnumber递增、markoldversion、createnewversion）.
+     * savemodelconfigurationversion(intransactionmiddlecompleteversionnumber递增、markoldversion、createnewversion).
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void
     {
         Db::transaction(function () use ($dataIsolation, $entity) {
             $serviceProviderModelId = $entity->getServiceProviderModelId();
 
-            // 1. getmostnewversionnumberandcalculatenewversionnumber（use FOR UPDATE linelockpreventandhairissue）
+            // 1. getmostnewversionnumberandcalculatenewversionnumber(use FOR UPDATE linelockpreventandhairissue)
             $builder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $latestVersion = $builder
                 ->where('service_provider_model_id', $serviceProviderModelId)
-                ->lockForUpdate()  // 悲观lock，preventandhair
+                ->lockForUpdate()  // 悲观lock,preventandhair
                 ->max('version');
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
@@ -46,7 +46,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
             $entity->setVersion($newVersion);
             $entity->setIsCurrentVersion(true);
 
-            // convertforarrayand移except null  created_at，let Model from动processtime戳
+            // convertforarrayand移except null  created_at,let Model from动processtime戳
             $data = $entity->toArray();
 
             ProviderModelConfigVersionModel::query()->create($data);

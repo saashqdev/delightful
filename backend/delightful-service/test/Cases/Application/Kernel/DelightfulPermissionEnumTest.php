@@ -76,7 +76,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $permissions = $this->permissionEnum->generateAllPermissions();
 
         $this->assertIsArray($permissions);
-        // shouldhave 2 resource × 2 操as = 4 permission（rowexceptexport操as）
+        // shouldhave 2 resource × 2 操as = 4 permission(rowexceptexport操as)
         $this->assertCount(4, $permissions);
 
         // checkpermission结构
@@ -125,7 +125,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     {
         $tree = $this->permissionEnum->getPermissionTree();
 
-        // default情况down（non平台organization）notcontain platform 平台sectionpoint
+        // default情况down(non平台organization)notcontain platform 平台sectionpoint
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
@@ -178,7 +178,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertFalse($this->permissionEnum->isOperation(''));
         $this->assertFalse($this->permissionEnum->isValidPermission(''));
 
-        // testnullvalueprocess（PHPwillconvertforstring）
+        // testnullvalueprocess(PHPwillconvertforstring)
         $this->assertFalse($this->permissionEnum->isValidPermission('null'));
     }
 

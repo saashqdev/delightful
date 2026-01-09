@@ -13,22 +13,22 @@ namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 enum StatisticsLevel: int
 {
     /**
-     * statisticslevel别：secondlevel.
+     * statisticslevel别:secondlevel.
      */
     case LEVEL_SECOND = 0;
 
     /**
-     * statisticslevel别：minute钟level.
+     * statisticslevel别:minute钟level.
      */
     case LEVEL_MINUTE = 1;
 
     /**
-     * statisticslevel别：hourlevel.
+     * statisticslevel别:hourlevel.
      */
     case LEVEL_HOUR = 2;
 
     /**
-     * statisticslevel别：daylevel.
+     * statisticslevel别:daylevel.
      */
     case LEVEL_DAY = 3;
 
@@ -46,7 +46,7 @@ enum StatisticsLevel: int
     }
 
     /**
-     * getstatisticslevel别name（静statemethod，useatcompatibleoldcode）.
+     * getstatisticslevel别name(静statemethod,useatcompatibleoldcode).
      * @deprecated use枚举instance getName() method代替
      */
     public static function getLevelName(int|self $level): string

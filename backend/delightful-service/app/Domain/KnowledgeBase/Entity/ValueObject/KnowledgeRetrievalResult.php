@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge baseretrieveresultvalueobject.
  *
- * 统onetable示fromdifferentretrievemethod（语义retrieve、all文retrieve、graphretrieveetc）return知识slicesegment
+ * 统onetable示fromdifferentretrievemethod(语义retrieve、all文retrieve、graphretrieveetc)return知识slicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
@@ -57,7 +57,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private array $metadata = [];
 
     /**
-     * type（semantic, fulltext, graph, hybridetc）.
+     * type(semantic, fulltext, graph, hybridetc).
      */
     private string $type = self::TYPE_SEMANTIC;
 

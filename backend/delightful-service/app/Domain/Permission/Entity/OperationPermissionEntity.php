@@ -27,7 +27,7 @@ class OperationPermissionEntity extends AbstractEntity
     protected ResourceType $resourceType;
 
     /**
-     * 资source。
+     * 资source.
      */
     protected string $resourceId;
 
@@ -37,7 +37,7 @@ class OperationPermissionEntity extends AbstractEntity
     protected TargetType $targetType;
 
     /**
-     * goal。
+     * goal.
      */
     protected string $targetId;
 

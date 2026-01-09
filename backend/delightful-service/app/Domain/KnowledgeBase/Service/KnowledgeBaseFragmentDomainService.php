@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // ifhavebusinessid，andandbusiness ID 存in，alsocan相whenatupdate
+        // ifhavebusinessid,andandbusiness ID 存in,alsocan相whenatupdate
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseFragmentDomainService
             if (empty($knowledgeBaseFragmentEntity)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] nothave找to");
             }
-            // ifnothavechange，thennotneedupdate
+            // ifnothavechange,thennotneedupdate
             if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
                 return $knowledgeBaseFragmentEntity;
             }
@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * according to point_id get所have相closeslicesegment，按 version 倒序sort.
+     * according to point_id get所have相closeslicesegment,按 version 倒序sort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array
@@ -195,17 +195,17 @@ readonly class KnowledgeBaseFragmentDomainService
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
         // 先conduct预process
-        // needfilterREPLACE_WHITESPACErule，REPLACE_WHITESPACEruleinminutesegmentbackconductprocess
+        // needfilterREPLACE_WHITESPACErule,REPLACE_WHITESPACEruleinminutesegmentbackconductprocess
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
-        $this->logger->info('front置text预processstart。');
+        $this->logger->info('front置text预processstart.');
         $content = TextPreprocessUtil::preprocess($filterPreprocessRule, $content);
-        $this->logger->info('front置text预processend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('front置text预processend,耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // againconductminutesegment
         // process转义minute隔符
         $start = microtime(true);
-        $this->logger->info('textminutesegmentstart。');
+        $this->logger->info('textminutesegmentstart.');
         $separator = stripcslashes($selectedFragmentConfig->getSegmentRule()->getSeparator());
         $splitter = new TokenTextSplitter(
             chunkSize: $selectedFragmentConfig->getSegmentRule()->getChunkSize(),
@@ -215,17 +215,17 @@ readonly class KnowledgeBaseFragmentDomainService
         );
 
         $fragments = $splitter->splitText($content);
-        $this->logger->info('textminutesegmentend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('textminutesegmentend,耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // need额outsideconductprocessrule
         $start = microtime(true);
-        $this->logger->info('back置text预processstart。');
+        $this->logger->info('back置text预processstart.');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {
             foreach ($fragments as &$fragment) {
                 $fragment = TextPreprocessUtil::preprocess([TextPreprocessRule::REPLACE_WHITESPACE], $fragment);
             }
         }
-        $this->logger->info('back置text预processend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('back置text预processend,耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // filter掉emptystring
         return array_values(array_filter($fragments, function ($fragment) {

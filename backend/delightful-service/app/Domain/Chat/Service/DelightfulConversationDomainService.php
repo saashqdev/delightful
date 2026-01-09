@@ -62,13 +62,13 @@ class DelightfulConversationDomainService extends AbstractDomainService
         // 判断 uid 和 receiverId 是否已经存在conversation
         $existsConversation = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($existsConversation) {
-            // 改变messagetype,从createconversation窗口,变更为打开conversation窗口
+            // 改变messagetype,从createconversation窗口,变更为openconversation窗口
             $conversationEntity = $existsConversation;
             $messageTypeInterface = MessageAssembler::getMessageStructByArray(
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // need同时修改type和content,才能把messagecontent变更为打开conversation窗口
+            // need同时修改type和content,才能把messagecontent变更为openconversation窗口
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
@@ -90,7 +90,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 打开conversation窗口.
+     * openconversation窗口.
      * 控制message,只在seq表writedata,不在message表写.
      * @throws Throwable
      */
@@ -437,10 +437,10 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * getuser与多个receive者的conversationID映射.
+     * getuser与多个receive者的conversationIDmapping.
      * @param string $userId userID
      * @param array $receiveIds receive者IDarray
-     * @return array receive者ID => conversationID的映射array
+     * @return array receive者ID => conversationID的mappingarray
      */
     public function getConversationIdMappingByReceiveIds(string $userId, array $receiveIds): array
     {

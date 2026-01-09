@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('bot_id', 64)->default('')->comment('机器人ID');
             $table->string('key', 64)->comment('唯一标识')->unique();
             $table->string('type', 64)->default('')->comment('平台type');
-            $table->boolean('enabled')->default(true)->comment('是否启用');
+            $table->boolean('enabled')->default(true)->comment('是否enable');
             $table->text('options')->comment('configuration');
             $table->softDeletes();
         });

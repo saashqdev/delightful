@@ -58,7 +58,7 @@ class DelightfulAccountAppService extends AbstractAppService
     }
 
     /**
-     * @param null|AccountEntity $accountDTO 支持启用/禁用智能体
+     * @param null|AccountEntity $accountDTO 支持enable/disable智能体
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DelightfulUserAuthorization $authorization, string $aiCode, ?AccountEntity $accountDTO = null): DelightfulUserEntity

@@ -21,7 +21,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 关联的mcp服务code.
+     * associate的mcp服务code.
      */
     protected string $mcpServerCode;
 
@@ -41,12 +41,12 @@ class MCPServerToolEntity extends AbstractEntity
     protected ToolSource $source;
 
     /**
-     * 关联的toolcode.
+     * associate的toolcode.
      */
     protected string $relCode = '';
 
     /**
-     * 关联的toolversioncode.
+     * associate的toolversioncode.
      */
     protected string $relVersionCode = '';
 
@@ -56,7 +56,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected string $version = '';
 
     /**
-     * 是否启用.
+     * 是否enable.
      */
     protected bool $enabled = false;
 
@@ -66,7 +66,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected ToolOptions $options;
 
     /**
-     * 关联的information，用于前端展示.
+     * associate的information，用于前端展示.
      */
     protected ?array $relInfo = null;
 

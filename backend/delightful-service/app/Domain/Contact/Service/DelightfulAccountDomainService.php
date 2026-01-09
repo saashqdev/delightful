@@ -141,7 +141,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 账号存在,但是该organization下没有userinfo
                 $accountEntity = $existsAccount;
             }
-            // 将generate的账号info关联到userEntity
+            // 将generate的账号infoassociate到userEntity
             $userDTO->setDelightfulId($accountEntity->getDelightfulId());
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
             if ($userEntity && $userEntity->getUserId()) {
@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 确定user_id的generate规则
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概率下,user_idwill重复,will被mysql唯一索引拦截,让user重新登录一次就行.
+                // 1.47x(10**-29) 概率下,user_idwill重复,will被mysql唯一索引拦截,让user重新login一次就行.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -166,7 +166,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @param AccountEntity $accountDTO 支持启用/禁用智能体
+     * @param AccountEntity $accountDTO 支持enable/disable智能体
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DataIsolation $dataIsolation, AccountEntity $accountDTO): DelightfulUserEntity
@@ -183,7 +183,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 $accountEntity->setRealName($userDTO->getNickname());
                 // update账号info
                 if ($accountDTO->getStatus() !== null) {
-                    // 启用/禁用智能体
+                    // enable/disable智能体
                     $accountEntity->setStatus($accountDTO->getStatus());
                 }
                 $this->accountRepository->saveAccount($accountEntity);

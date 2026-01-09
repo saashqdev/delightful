@@ -202,7 +202,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测并转换文本encoding
+     * 检测并convert文本encoding
      */
     private function ensureUtf8Encoding(string $text): string
     {

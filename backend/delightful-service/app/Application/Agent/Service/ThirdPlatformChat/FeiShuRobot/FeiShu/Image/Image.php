@@ -24,7 +24,7 @@ class Image implements ProviderInterface
      * uploadimage.
      *
      * @param string $imageUrl imageURL
-     * @param string $imageType imagetype，optional值：message、avatar
+     * @param string $imageType imagetype，optionalvalue：message、avatar
      * @return string imagekey
      */
     public function uploadByUrl(string $imageUrl, string $imageType = 'message'): string

@@ -42,7 +42,7 @@ enum MemoryCategory: string
     }
 
     /**
-     * get该category的启用quantity限制.
+     * get该category的enablequantity限制.
      */
     public function getEnabledLimit(): int
     {

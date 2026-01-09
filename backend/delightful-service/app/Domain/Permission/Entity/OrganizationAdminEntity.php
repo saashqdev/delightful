@@ -29,7 +29,7 @@ class OrganizationAdminEntity extends AbstractEntity
 
     protected ?DateTime $grantedAt = null;
 
-    protected int $status = 1; // status: 0=禁用, 1=启用
+    protected int $status = 1; // status: 0=disable, 1=enable
 
     protected bool $isOrganizationCreator = false; // 是否为organizationcreate人
 

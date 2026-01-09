@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 class MethodHandlerFactory
 {
     /**
-     * methodprocess器映射，method名 => process器类名.
+     * methodprocess器mapping，method名 => process器类名.
      *
      * @var array<string, class-string<MethodHandlerInterface>>
      */
@@ -75,7 +75,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * 注册customizemethodprocess器.
+     * registercustomizemethodprocess器.
      *
      * @param string $method method名
      * @param class-string<MethodHandlerInterface> $handlerClass process器类名

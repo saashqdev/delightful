@@ -43,7 +43,7 @@ class PlatformSettingsApi
 
         $payload = $request->validated();
 
-        // allow部分字段update：仅when传入非null时替换
+        // allow部分fieldupdate：仅when传入非null时替换
         if (array_key_exists('logo_zh_url', $payload) && $payload['logo_zh_url'] !== null) {
             $data['logo_urls']['zh_CN'] = (string) $payload['logo_zh_url'];
         }

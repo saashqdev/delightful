@@ -17,7 +17,7 @@ class MCPServerToolDTO extends AbstractDTO
     use StringIdDTOTrait;
 
     /**
-     * 关联的MCP服务code.
+     * associate的MCP服务code.
      */
     public string $mcpServerCode = '';
 
@@ -37,12 +37,12 @@ class MCPServerToolDTO extends AbstractDTO
     public int $source = 0;
 
     /**
-     * 关联的toolcode.
+     * associate的toolcode.
      */
     public string $relCode = '';
 
     /**
-     * 关联的toolversioncode.
+     * associate的toolversioncode.
      */
     public string $relVersionCode = '';
 
@@ -52,7 +52,7 @@ class MCPServerToolDTO extends AbstractDTO
     public string $version = '';
 
     /**
-     * 是否启用.
+     * 是否enable.
      */
     public ?bool $enabled = null;
 
@@ -64,7 +64,7 @@ class MCPServerToolDTO extends AbstractDTO
     public array $sourceVersion = [];
 
     /**
-     * 关联的information，给前端use，无业务逻辑.
+     * associate的information，给前端use，无业务逻辑.
      */
     public ?array $relInfo = null;
 

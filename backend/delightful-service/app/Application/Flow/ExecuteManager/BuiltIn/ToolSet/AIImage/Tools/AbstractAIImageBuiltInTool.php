@@ -206,7 +206,7 @@ JSON,
             ->setUserMessage($textMessage)
             ->setAttachments($executionData->getTriggerData()?->getAttachments())
             ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId());
-        // setactualrequest的尺寸和比例
+        // setactualrequest的size和比例
         $enumModel = ImageGenerateModelType::fromModel($model, false);
         $imageGenerateParamsVO = $reqDto->getParams();
         $imageGenerateParamsVO->setSourceId($this->getCode());

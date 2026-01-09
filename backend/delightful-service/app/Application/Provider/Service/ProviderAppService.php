@@ -102,7 +102,7 @@ class ProviderAppService
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
 
-        // updateservice商图标URL映射
+        // updateservice商图标URLmapping
         $providerIconUrls = [];
         foreach ($iconToProviderMap as $icon => $configIds) {
             if (! isset($iconUrlMap[$icon])) {

@@ -28,7 +28,7 @@ class EasyFileTools
             return;
         }
 
-        // 打开 file1 file以读写mode
+        // open file1 file以读写mode
         $wav1 = fopen($file1, 'r+b');
         if (! $wav1) {
             throw new InvalidArgumentException('Failed to open the base file.');

@@ -162,7 +162,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 // 这些user已经从群membertable中移除,但是他们还未收到被移除的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所有人都是被移除的.这里减少stream量消耗.
+                    // 解散group chat,所有人都是被移除的.这里减少stream量consume.
                     $content['user_ids'] = [];
                 }
             }

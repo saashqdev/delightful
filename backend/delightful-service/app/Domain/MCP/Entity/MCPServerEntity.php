@@ -49,7 +49,7 @@ class MCPServerEntity extends AbstractEntity
     protected ServiceConfigInterface $serviceConfig;
 
     /**
-     * 是否启用.
+     * 是否enable.
      */
     protected ?bool $enabled = null;
 

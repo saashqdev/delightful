@@ -12,7 +12,7 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum UserStatus: int
 {
-    // 0:冻结 (刚同过来没激活)
+    // 0:freeze (刚同过来没activate)
     case Frozen = 0;
 
     // 1:activated
@@ -21,6 +21,6 @@ enum UserStatus: int
     // 2:已离职
     case Resigned = 2;
 
-    // 3:已退出
+    // 3:已exit
     case Exited = 3;
 }

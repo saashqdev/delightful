@@ -92,7 +92,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         }
         // execute所有并发task并getresult
         $results = $parallel->wait();
-        // 统计success和fail的request
+        // statisticssuccess和fail的request
         $successCount = 0;
         foreach ($results as $result) {
             if ($result['success']) {

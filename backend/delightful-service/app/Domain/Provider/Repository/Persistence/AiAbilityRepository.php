@@ -173,7 +173,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 将Model转换为Entity.
+     * 将Modelconvert为Entity.
      */
     private function modelToEntity(AiAbilityModel $model): AiAbilityEntity
     {

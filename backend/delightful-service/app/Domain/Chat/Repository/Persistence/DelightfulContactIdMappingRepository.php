@@ -27,7 +27,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * get第三方平台departmentID的映射关系.
+     * get第三方平台departmentID的mapping关系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -66,7 +66,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getDelightfuldepartmentID的映射关系.
+     * getDelightfuldepartmentID的mapping关系.
      *
      * @param string[] $delightfulDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -90,7 +90,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * get第三方平台userID的映射关系.
+     * get第三方平台userID的mapping关系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -127,7 +127,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * get麦吉平台userID的映射关系.
+     * get麦吉平台userID的mapping关系.
      *
      * @param string[] $delightfulIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publish和生产can看做是一个环境，所以这里process一下关联的环境 ids.
+     * 预publish和生产can看做是一个环境，所以这里process一下associate的环境 ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {
@@ -261,7 +261,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 将arraydata转换为实体object
+     * 将arraydataconvert为实体object
      * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     private function convertToEntities(array $dataArrays): array

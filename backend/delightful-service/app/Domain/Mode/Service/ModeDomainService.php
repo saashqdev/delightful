@@ -157,7 +157,7 @@ class ModeDomainService
         }
         $mode = $modeAggregate->getMode();
 
-        // default模式不能被禁用
+        // default模式不能被disable
         if ($mode->isDefaultMode() && ! $status) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IN_USE_CANNOT_DELETE);
         }
@@ -258,14 +258,14 @@ class ModeDomainService
             return [];
         }
 
-        // 第一步：建立跟随关系映射 followMap[跟随者ID] = 被跟随者ID
+        // 第一步：建立跟随关系mapping followMap[跟随者ID] = 被跟随者ID
         $followMap = [];
         $modeIds = [];
 
         foreach ($modes as $mode) {
             $modeIds[] = $mode->getId();
 
-            // 如果是跟随模式，建立映射关系
+            // 如果是跟随模式，建立mapping关系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
                 $modeIds[] = $mode->getFollowModeId(); // 也要收集被跟随的模式ID
@@ -302,7 +302,7 @@ class ModeDomainService
             // buildgroupaggregate根array
             $groupAggregates = [];
             foreach ($groups as $group) {
-                // get该group下的所有关联关系
+                // get该group下的所有associate关系
                 $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
                 usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -320,7 +320,7 @@ class ModeDomainService
      */
     private function buildModeAggregate(ModeDataIsolation $dataIsolation, ModeEntity $mode): ModeAggregate
     {
-        // getgroup和关联关系
+        // getgroup和associate关系
         $groups = $this->groupRepository->findByModeId($dataIsolation, $mode->getId());
         $relations = $this->relationRepository->findByModeId($dataIsolation, $mode->getId());
 
@@ -332,7 +332,7 @@ class ModeDomainService
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }
 
-            // get该group下的所有关联关系
+            // get该group下的所有associate关系
             $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
             usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -374,9 +374,9 @@ class ModeDomainService
     }
 
     /**
-     * according to跟随关系映射递归查找final源模式ID.
+     * according to跟随关系mapping递归查找final源模式ID.
      * @param int $modeId current模式ID
-     * @param array $followMap 跟随关系映射 [跟随者ID => 被跟随者ID]
+     * @param array $followMap 跟随关系mapping [跟随者ID => 被跟随者ID]
      * @param array $visited 防止循环跟随
      * @return int final源模式ID
      */

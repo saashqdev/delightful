@@ -30,7 +30,7 @@ use Throwable;
 class SSRFUtil
 {
     /**
-     * getSSRF防御安全链接.
+     * getSSRF防御安全link.
      *
      * @param string $url needcheck的URL
      * @param array $blackList blacklistIP或域名

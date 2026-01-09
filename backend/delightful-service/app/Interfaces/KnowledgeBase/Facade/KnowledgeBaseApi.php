@@ -79,7 +79,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * according to file_key getknowledge basefile链接.
+     * according to file_key getknowledge basefilelink.
      */
     public function getFileLink(RequestInterface $request): array
     {

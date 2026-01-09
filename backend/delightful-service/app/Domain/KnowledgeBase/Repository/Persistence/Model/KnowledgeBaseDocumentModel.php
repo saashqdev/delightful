@@ -20,7 +20,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name 文档name
  * @property string $code 文档encoding
  * @property int $version version号
- * @property bool $enabled 是否启用
+ * @property bool $enabled 是否enable
  * @property int $doc_type 文档type
  * @property array $doc_metadata 文档元data
  * @property DocumentFileInterface $document_file 文档fileinfo
@@ -40,7 +40,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $created_at createtime
  * @property string $updated_at updatetime
  * @property null|string $deleted_at deletetime
- * @property int $word_count 字数统计
+ * @property int $word_count 字数statistics
  */
 class KnowledgeBaseDocumentModel extends Model
 {
@@ -93,7 +93,7 @@ class KnowledgeBaseDocumentModel extends Model
     ];
 
     /**
-     * type转换.
+     * typeconvert.
      */
     protected array $casts = [
         'id' => 'integer',

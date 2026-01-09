@@ -128,7 +128,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生result中提取imageURL
+        // 从nativeresult中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $data = $result['data'];
@@ -152,7 +152,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生result.
+     * generate图像的核心逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -355,7 +355,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     case 'generating':
                         break;
                     case 'not_found':
-                        $this->logger->error('火山文生图：task未找到或已过期', ['taskId' => $taskId]);
+                        $this->logger->error('火山文生图：task未找到或已expire', ['taskId' => $taskId]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                         // no break
                     default:
@@ -386,7 +386,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     private function validateVolcengineV3Response(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('火山引擎V3responsedataformaterror：缺少data字段');
+            throw new Exception('火山引擎V3responsedataformaterror：缺少datafield');
         }
 
         $data = $result['data'];

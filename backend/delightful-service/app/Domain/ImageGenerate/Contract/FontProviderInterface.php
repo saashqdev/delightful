@@ -9,7 +9,7 @@ namespace App\Domain\ImageGenerate\Contract;
 
 /**
  * 字体提供者interface
- * 用于在开源项目中定义字体管理规范，由企业项目implement具体逻辑.
+ * 用于在开源项目中定义字体管理standard，由企业项目implement具体逻辑.
  */
 interface FontProviderInterface
 {

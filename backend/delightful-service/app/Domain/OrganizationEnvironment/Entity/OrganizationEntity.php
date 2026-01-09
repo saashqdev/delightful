@@ -38,7 +38,7 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?string $number = null;
 
-    protected int $status = 1; // status: 1=正常, 2=禁用
+    protected int $status = 1; // status: 1=正常, 2=disable
 
     protected ?string $creatorId = null;
 

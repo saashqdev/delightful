@@ -46,7 +46,7 @@ class AsrConfig
     public const int FILE_RECORD_QUERY_TIMEOUT = 120;
 
     /**
-     * 沙箱启动timeout（秒）.
+     * 沙箱starttimeout（秒）.
      */
     public const int SANDBOX_STARTUP_TIMEOUT = 121;
 
@@ -70,7 +70,7 @@ class AsrConfig
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 
     /**
-     * 沙箱启动最大retry次数.
+     * 沙箱start最大retry次数.
      */
     public const int SANDBOX_STARTUP_MAX_RETRY = 3;
 
@@ -106,7 +106,7 @@ class AsrConfig
     // ==================== scheduletaskconfiguration ====================
 
     /**
-     * 心跳monitorscheduletask互斥lock过期time（秒）.
+     * 心跳monitorscheduletask互斥lockexpiretime（秒）.
      */
     public const int HEARTBEAT_MONITOR_MUTEX_EXPIRES = 60;
 }

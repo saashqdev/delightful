@@ -36,9 +36,9 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issue的关联issue。支持关联issue再产生子issue，但是will被拍平成二维array。
+     * 子issue的associateissue。支持associateissue再产生子issue，但是will被拍平成二维array。
      * @var array<string,QuestionItem[]>
-     * @example according touserinput的issue，generate关联issue。
+     * @example according touserinput的issue，generateassociateissue。
      */
     protected ?array $associateQuestions;
 

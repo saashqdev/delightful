@@ -25,7 +25,7 @@ return new class extends Migration {
             // ai_code
             $table->string('ai_code', 64)->comment('aiencoding')->default('');
             // 账号status
-            $table->tinyInteger('status')->comment('账号status,0:正常,1:禁用')->default(0);
+            $table->tinyInteger('status')->comment('账号status,0:正常,1:disable')->default(0);
             // 国际冠码
             $table->string('country_code', 16)->comment('国际冠码')->default('');
             // 手机号

@@ -331,7 +331,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 转换为array.
+     * convert为array.
      */
     public function toArray(): array
     {

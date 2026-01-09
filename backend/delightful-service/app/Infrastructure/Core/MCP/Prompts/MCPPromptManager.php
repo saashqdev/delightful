@@ -19,12 +19,12 @@ class MCPPromptManager
     private array $prompts = [];
 
     /**
-     * 注册prompt.
+     * registerprompt.
      * when前为nullimplement.
      */
     public function registerPrompt(array $prompt): void
     {
-        // nullimplement，暂不注册任何prompt
+        // nullimplement，暂不register任何prompt
     }
 
     /**

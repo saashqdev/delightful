@@ -111,7 +111,7 @@ class ModeAssembler
     }
 
     /**
-     * 将ModeAggregate转换为扁平化的分组DTOarray.
+     * 将ModeAggregateconvert为扁平化的分组DTOarray.
      * @param $providerModels ProviderModelEntity[]
      * @return ModeGroupDetailDTO[]
      */

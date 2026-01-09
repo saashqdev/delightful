@@ -188,7 +188,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 启用/禁用.
+     * enable/disable.
      */
     public function changeEnable(string $flowId)
     {

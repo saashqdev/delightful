@@ -316,7 +316,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             // 清理另一个organization的data
             $this->cleanUpOrganizationAdmins($this->anotherOrganizationCode);
         } catch (Exception $e) {
-            // 忽略清理error
+            // ignore清理error
         }
     }
 
@@ -337,7 +337,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
                 }
             }
         } catch (Exception $e) {
-            // 忽略清理error
+            // ignore清理error
         }
     }
 }

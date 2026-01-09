@@ -66,7 +66,7 @@ JSON, true));
                 "type": "string",
                 "key": "cache_value",
                 "sort": 0,
-                "title": "cache值",
+                "title": "cachevalue",
                 "description": "",
                 "required": null,
                 "value": null,

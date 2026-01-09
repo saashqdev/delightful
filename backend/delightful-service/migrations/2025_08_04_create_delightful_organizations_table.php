@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('contact_mobile', 32)->nullable()->comment('联系电话');
             $table->string('industry_type')->comment('organization行业type');
             $table->string('number', 32)->nullable()->comment('企业规模');
-            $table->tinyInteger('status')->default(1)->comment('status 1:正常 2:禁用');
+            $table->tinyInteger('status')->default(1)->comment('status 1:正常 2:disable');
             $table->string('creator_id', 64)->nullable()->comment('create人');
             $table->tinyInteger('type')->default(0)->comment('organizationtype 0:团队organization 1:个人organization');
             $table->timestamps();

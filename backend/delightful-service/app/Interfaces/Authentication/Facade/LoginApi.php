@@ -20,7 +20,7 @@ class LoginApi
     }
 
     /**
-     * verifyuser登录.
+     * verifyuserlogin.
      */
     public function login(RequestInterface $request): CheckLoginResponse
     {

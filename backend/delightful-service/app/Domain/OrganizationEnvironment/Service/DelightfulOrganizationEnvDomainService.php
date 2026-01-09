@@ -153,7 +153,7 @@ class DelightfulOrganizationEnvDomainService
         if ($data) {
             return new DelightfulEnvironmentEntity(Json::decode($data));
         }
-        // query token 是否已经绑定 (call了 delightful/auth/check)
+        // query token 是否已经bind (call了 delightful/auth/check)
         $tokenDTO = new DelightfulTokenEntity();
         $tokenDTO->setType(DelightfulTokenType::Account);
         $tokenDTO->setToken($tokenDTO->getDelightfulShortToken($authorization));

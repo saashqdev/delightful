@@ -22,12 +22,12 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected string $organizationCode = '';
 
     /**
-     * 关联code.
+     * associatecode.
      */
     protected string $relCode = '';
 
     /**
-     * 关联type.
+     * associatetype.
      */
     protected int $relType = 0;
 
@@ -52,7 +52,7 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected string $conversationId = '';
 
     /**
-     * 是否启用.
+     * 是否enable.
      */
     protected bool $enabled = true;
 

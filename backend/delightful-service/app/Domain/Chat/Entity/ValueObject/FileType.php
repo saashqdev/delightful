@@ -12,7 +12,7 @@ enum FileType: int
     // file
     case File = 0;
 
-    // 链接
+    // link
     case Link = 1;
 
     // Word

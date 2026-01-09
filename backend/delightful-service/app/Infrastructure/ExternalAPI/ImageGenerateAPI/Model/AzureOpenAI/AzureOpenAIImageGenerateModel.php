@@ -187,7 +187,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     {
         try {
             if (! isset($result['data'])) {
-                $this->logger->error('Azure OpenAI图像generate：responseformaterror - 缺少data字段', [
+                $this->logger->error('Azure OpenAI图像generate：responseformaterror - 缺少datafield', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, 'image_generate.response_format_error');
@@ -322,11 +322,11 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     private function validateAzureOpenAIResponse(array $result): void
     {
         if (! isset($result['data'])) {
-            throw new Exception('Azure OpenAIresponsedataformaterror：缺少data字段');
+            throw new Exception('Azure OpenAIresponsedataformaterror：缺少datafield');
         }
 
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Azure OpenAIresponsedataformaterror：data字段为null或不是array');
+            throw new Exception('Azure OpenAIresponsedataformaterror：datafield为null或不是array');
         }
 
         $hasValidImage = false;

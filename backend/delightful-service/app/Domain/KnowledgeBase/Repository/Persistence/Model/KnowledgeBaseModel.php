@@ -35,7 +35,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $retrieve_config
  * @property array $fragment_config
  * @property array $embedding_config
- * @property int $word_count 字数统计
+ * @property int $word_count 字数statistics
  * @property string $icon icon
  * @property ?int $source_type
  */

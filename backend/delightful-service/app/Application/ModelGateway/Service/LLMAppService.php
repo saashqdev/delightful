@@ -1731,7 +1731,7 @@ class LLMAppService extends AbstractLLMAppService
         // 计算responsetime（毫秒）
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
-        // 转换 providerModelId 为整数
+        // convert providerModelId 为整数
         $serviceProviderModelsId = is_numeric($providerModelId) ? (int) $providerModelId : null;
 
         // get价格configurationversionID

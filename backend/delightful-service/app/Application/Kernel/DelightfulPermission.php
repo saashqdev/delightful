@@ -215,7 +215,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             // 将资源path按 '.' split
             $segments = explode('.', $permission['resource']);
             if (count($segments) < 2) {
-                // at least应contain平台 + 资源两级，若不足则跳过
+                // at least应contain平台 + 资源两级，若不足则skip
                 continue;
             }
 
@@ -273,7 +273,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             ];
         }
 
-        // 将关联array children 转为索引array，保持returnformat
+        // 将associatearray children 转为索引array，保持returnformat
         return array_values($this->normalizeTree($tree));
     }
 
@@ -349,7 +349,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * parse资源绑定的 Operation Enum，return该资源可用的操作集合（stringarray）。
+     * parse资源bind的 Operation Enum，return该资源可用的操作集合（stringarray）。
      */
     protected function getOperationsByResource(string $resource): array
     {
@@ -372,8 +372,8 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * return资源绑定的 Operation Enum 类名，defaultread `DelightfulResourceEnum::operationEnumClass()`。
-     * 企业版可override本method，将企业资源映射到customize的 Operation Enum。
+     * return资源bind的 Operation Enum 类名，defaultread `DelightfulResourceEnum::operationEnumClass()`。
+     * 企业版可override本method，将企业资源mapping到customize的 Operation Enum。
      */
     protected function resolveOperationEnumClass(DelightfulResourceEnum $resourceEnum): string
     {

@@ -20,7 +20,7 @@ enum DelimiterType: string
     case HIGH_AVAILABILITY = '||';
 
     /**
-     * get所有分隔符type值array.
+     * get所有分隔符typevaluearray.
      */
     public static function values(): array
     {

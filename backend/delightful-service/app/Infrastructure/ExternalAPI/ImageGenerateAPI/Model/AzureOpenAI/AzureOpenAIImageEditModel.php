@@ -211,7 +211,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     {
         try {
             if (! isset($result['data'])) {
-                $this->logger->error('Azure OpenAI图像edit：responseformaterror - 缺少data字段', [
+                $this->logger->error('Azure OpenAI图像edit：responseformaterror - 缺少datafield', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, 'image_generate.response_format_error');
@@ -227,7 +227,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $images = [];
             foreach ($result['data'] as $index => $item) {
                 if (! isset($item['b64_json'])) {
-                    $this->logger->warning('Azure OpenAI图像edit：跳过invalid的图像data', [
+                    $this->logger->warning('Azure OpenAI图像edit：skipinvalid的图像data', [
                         'index' => $index,
                         'item' => $item,
                     ]);
@@ -296,11 +296,11 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     private function validateAzureOpenAIEditResponse(array $result): void
     {
         if (! isset($result['data'])) {
-            throw new Exception('Azure OpenAI图像editresponsedataformaterror：缺少data字段');
+            throw new Exception('Azure OpenAI图像editresponsedataformaterror：缺少datafield');
         }
 
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Azure OpenAI图像editresponsedataformaterror：data字段为null或不是array');
+            throw new Exception('Azure OpenAI图像editresponsedataformaterror：datafield为null或不是array');
         }
 
         $hasValidImage = false;

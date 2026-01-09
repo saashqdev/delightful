@@ -113,7 +113,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $entity = new ProviderModelEntity($data);
 
         if ($dto->getId()) {
-            // 准备updatedata，只contain有变化的字段
+            // 准备updatedata，只contain有变化的field
             $updateData = $this->serializeEntityToArray($entity);
             $updateData['updated_at'] = date('Y-m-d H:i:s');
             $success = ProviderModelModel::query()
@@ -229,7 +229,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         }
 
         // cache未命中，execute原逻辑
-        // 1. 先queryorganization下启用的服务商configurationID
+        // 1. 先queryorganization下enable的服务商configurationID
         $builder = ProviderConfigModel::query();
 
         if ($status !== null) {
@@ -243,7 +243,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $enabledConfigIds = Db::select($enabledConfigQuery->toSql(), $enabledConfigQuery->getBindings());
         $enabledConfigIdArray = array_column($enabledConfigIds, 'id');
 
-        // 2. use启用的configurationIDqueryorganization自己的启用model
+        // 2. useenable的configurationIDqueryorganization自己的enablemodel
         $organizationModels = [];
         if (! empty($enabledConfigIdArray)) {
             $organizationModelsBuilder = $this->createProviderModelQuery()
@@ -324,7 +324,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
-            ->orderBy('status', 'desc') // 优先sort：启用status在前
+            ->orderBy('status', 'desc') // 优先sort：enablestatus在前
             ->orderBy('id'); // 其次按IDsort，保证result一致性
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -412,7 +412,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $builder->where('model_type', $query->getModelType()->value);
         }
 
-        // 选择 model_id 和 model_type 字段
+        // 选择 model_id 和 model_type field
         $builder->select('model_id', 'model_type');
 
         // applicationsort

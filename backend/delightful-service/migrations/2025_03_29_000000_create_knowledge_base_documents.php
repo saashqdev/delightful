@@ -18,22 +18,22 @@ return new class extends Migration {
             // primary key
             $table->bigIncrements('id');
 
-            // 关联field
-            $table->string('knowledge_base_code', 255)->comment('关联knowledge basecode')->index();
+            // associatefield
+            $table->string('knowledge_base_code', 255)->comment('associateknowledge basecode')->index();
 
             // 文档元data
             $table->string('name', 255)->comment('文档name');
             $table->string('description', 255)->comment('description');
             $table->string('code', 255)->comment('文档code');
             $table->unsignedInteger('version')->default(1)->comment('version');
-            $table->boolean('enabled')->default(true)->comment('1 启用 0 禁用');
+            $table->boolean('enabled')->default(true)->comment('1 enable 0 disable');
             $table->unsignedInteger('doc_type')->comment('文档type');
             $table->json('doc_metadata')->nullable()->comment('文档元data');
             $table->tinyInteger('sync_status')->default(0)->comment('syncstatus');
             $table->tinyInteger('sync_times')->default(0)->comment('sync次数');
             $table->string('sync_status_message', 1000)->default('')->comment('syncstatusmessage');
             $table->string('organization_code')->comment('organizationencoding');
-            $table->unsignedBigInteger('word_count')->default(0)->comment('字数统计');
+            $table->unsignedBigInteger('word_count')->default(0)->comment('字数statistics');
 
             // configurationinfo
             $table->string('embedding_model', 255)->comment('嵌入model');

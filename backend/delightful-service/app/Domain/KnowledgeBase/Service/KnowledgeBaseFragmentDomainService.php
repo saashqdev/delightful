@@ -244,9 +244,9 @@ readonly class KnowledgeBaseFragmentDomainService
     #[Transactional]
     public function updateWordCount(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $entity, int $deltaWordCount): void
     {
-        // updatedatabase字数统计
+        // updatedatabase字数statistics
         $this->knowledgeBaseRepository->updateWordCount($dataIsolation, $entity->getKnowledgeCode(), $deltaWordCount);
-        // update文档字数统计
+        // update文档字数statistics
         $this->knowledgeBaseDocumentRepository->updateWordCount($dataIsolation, $entity->getKnowledgeCode(), $entity->getDocumentCode(), $deltaWordCount);
     }
 }

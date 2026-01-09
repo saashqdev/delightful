@@ -27,11 +27,11 @@ return new class extends Migration {
             $table->json('name_i18n')->comment('模式name国际化');
             $table->string('identifier', 50)->default('')->comment('模式标识，唯一');
             $table->string('icon', 255)->default('')->comment('模式图标');
-            $table->string('color', 10)->default('')->comment('模式颜色');
+            $table->string('color', 10)->default('')->comment('模式color');
             $table->bigInteger('sort')->default(0)->comment('sort');
             $table->text('description')->comment('模式description');
             $table->tinyInteger('is_default')->default(0)->comment('是否default模式 0:否 1:是');
-            $table->tinyInteger('status')->default(1)->comment('status 0:禁用 1:启用');
+            $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
             $table->tinyInteger('distribution_type')->default(1)->comment('分配方式 1:customizeconfiguration 2:跟随其他模式');
             $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随的模式ID，0table示不跟随');
             $table->json('restricted_mode_identifiers')->comment('限制的模式标识array');

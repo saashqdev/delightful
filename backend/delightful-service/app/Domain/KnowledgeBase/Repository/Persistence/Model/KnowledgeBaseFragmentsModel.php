@@ -27,7 +27,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property DateTime $created_at
  * @property string $updated_uid
  * @property DateTime $updated_at
- * @property int $word_count 字数统计
+ * @property int $word_count 字数statistics
  * @property int $version version
  */
 class KnowledgeBaseFragmentsModel extends AbstractModel

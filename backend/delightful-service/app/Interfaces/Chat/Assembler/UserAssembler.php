@@ -105,7 +105,7 @@ class UserAssembler
         foreach ($users as $user) {
             $account = $accounts[$user['delightful_id']] ?? null;
             if (empty($account)) {
-                $logger->warning("user[delightful_id: {$user['delightful_id']} ]不存在, 跳过！");
+                $logger->warning("user[delightful_id: {$user['delightful_id']} ]不存在, skip！");
                 continue;
             }
             // 如果存在手机号，将手机号的中间四位替换为*
@@ -124,7 +124,7 @@ class UserAssembler
 
             foreach ($user->toArray() as $key => $value) {
                 if (isset($userDetailAdd[$key])) {
-                    // 如果已经存在，跳过
+                    // 如果已经存在，skip
                     continue;
                 }
                 $userDetailAdd[$key] = $value;
@@ -151,7 +151,7 @@ class UserAssembler
         /** @var array<UserDepartmentDetailDTO> $usersDepartmentDetailDTOList */
         $usersDepartmentDetailDTOList = [];
 
-        // 步骤1: builduserID到department关系的映射
+        // 步骤1: builduserID到department关系的mapping
         $userDepartmentMap = [];
         foreach ($departmentUsers as $departmentUser) {
             $userDepartmentMap[$departmentUser->getUserId()][] = $departmentUser;

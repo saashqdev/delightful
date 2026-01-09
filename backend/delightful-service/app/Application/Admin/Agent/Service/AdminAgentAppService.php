@@ -158,13 +158,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionIds = array_filter(array_column($delightfulAgentEntities, 'agent_version_id'), fn ($agentVersionId) => $agentVersionId !== null);
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentByIds($agentVersionIds);
 
-        // buildcreate人映射
+        // buildcreate人mapping
         $createdUserMap = [];
         foreach ($createdUsers as $user) {
             $createdUserMap[$user->getUserId()] = $user;
         }
 
-        // build助理version映射
+        // build助理versionmapping
         $agentVersionMap = [];
         foreach ($agentVersions as $version) {
             $agentVersionMap[$version->getId()] = $version;
@@ -249,7 +249,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             return isset($agentSettingsTypes[$setting->getType()->value]);
         });
 
-        // 转换为实体object
+        // convert为实体object
         $entities = array_map(function ($setting) {
             /** @var AbstractSettingExtraDTO $extra */
             $extra = $setting->getExtra();
@@ -262,7 +262,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // 一次性update所有set
         $updatedSettings = $this->globalSettingsDomainService->updateSettingsBatch($entities, $dataIsolation);
 
-        // 转换为DTOreturn
+        // convert为DTOreturn
         return array_map(fn ($setting) => new AgentGlobalSettingsDTO($setting->toArray()), $updatedSettings);
     }
 
@@ -272,13 +272,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         /** @var DelightfulUserAuthorization $authorization */
         $organizationCode = $authorization->getOrganizationCode();
 
-        // get启用的机器人list
+        // getenable的机器人list
         $enabledAgents = $this->delightfulAgentDomainService->getEnabledAgents();
 
         // according to筛选typefilter
         $enabledAgents = $this->filterEnableAgentsByType($authorization, $enabledAgents, $type);
 
-        // 提取启用机器人list中的 agent_version_id
+        // 提取enable机器人list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
         // get指定organization和机器人version的机器人data及其total
@@ -297,7 +297,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $avatars = array_column($agentVersions, 'agent_avatar');
         $fileLinks = $this->fileDomainService->getLinks($organizationCode, $avatars);
 
-        // 转换为AgentItemDTOformat
+        // convert为AgentItemDTOformat
         /** @var array<AgentItemDTO> $result */
         $result = [];
         foreach ($agentVersions as $agent) {

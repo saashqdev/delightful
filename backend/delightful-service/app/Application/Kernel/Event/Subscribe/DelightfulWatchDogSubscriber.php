@@ -42,7 +42,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         $quantum = 10 * 1000 * 1000; // 单位：毫秒
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
         // 看门狗找同阻塞的地方
-        $logger->info('麦吉看门狗，启动！');
+        $logger->info('麦吉看门狗，start！');
         $alertCountMap = new WeakMap();
         Watchdog::run($quantum * 5, 0, static function () use (&$alertCountMap, $logger) {
             $coroutine = Coroutine::getCurrent();

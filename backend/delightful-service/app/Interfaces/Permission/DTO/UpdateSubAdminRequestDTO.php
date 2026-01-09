@@ -20,7 +20,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     public ?string $name = null;
 
     /**
-     * rolestatus：0=禁用, 1=启用（optional，仅在needupdate时提供）.
+     * rolestatus：0=disable, 1=enable（optional，仅在needupdate时提供）.
      */
     public ?int $status = null;
 
@@ -37,7 +37,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
     /**
      * userIDlist（optional，仅在needupdate时提供）.
-     * 注意：如果提供了此field，将替换所有现有user关联.
+     * 注意：如果提供了此field，将替换所有现有userassociate.
      */
     public ?array $userIds = null;
 

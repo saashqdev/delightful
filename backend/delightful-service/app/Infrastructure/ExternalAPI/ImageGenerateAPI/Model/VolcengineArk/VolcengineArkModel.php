@@ -139,7 +139,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生result中提取imageURL
+        // 从nativeresult中提取imageURL
         $imageData = [];
         foreach ($rawResults as $index => $result) {
             // check嵌套的data结构：result['data']['data'][0]['url']
@@ -196,7 +196,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // 如果有参考图像，则添加image字段（支持多张image）
+        // 如果有参考图像，则添加imagefield（支持多张image）
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -237,7 +237,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // 如果有参考图像，则添加image字段（支持多张image）
+        // 如果有参考图像，则添加imagefield（支持多张image）
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];

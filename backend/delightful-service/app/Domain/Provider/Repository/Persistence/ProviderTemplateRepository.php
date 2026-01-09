@@ -35,7 +35,7 @@ readonly class ProviderTemplateRepository
     {
         $templates = [];
 
-        // get指定category下所有启用的服务商
+        // get指定category下所有enable的服务商
         $providers = $this->providerRepository->getByCategory($category);
 
         foreach ($providers as $provider) {
@@ -50,7 +50,7 @@ readonly class ProviderTemplateRepository
             $templateData = [
                 'id' => $templateId,
                 'service_provider_id' => (string) $provider->getId(),
-                'organization_code' => '', // template不绑定具体organization
+                'organization_code' => '', // template不bind具体organization
                 'config' => [],
                 'decryptedConfig' => [],
                 'status' => $defaultStatus->value,

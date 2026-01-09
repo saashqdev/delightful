@@ -422,7 +422,7 @@ class DelightfulFlowExecutor
     private function addNodes(DelightfulFlowEntity $delightfulFlowEntity): void
     {
         foreach ($delightfulFlowEntity->getNodes() as $node) {
-            // 跳过在循环体中的节点
+            // skip在循环体中的节点
             if ($node->getParentId()) {
                 continue;
             }

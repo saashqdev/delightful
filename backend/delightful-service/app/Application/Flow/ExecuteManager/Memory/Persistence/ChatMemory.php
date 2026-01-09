@@ -118,7 +118,7 @@ class ChatMemory implements MemoryPersistenceInterface
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
-            // 特殊process, 当开启去重，且return的条数greater thanequal limit，则不再继续query
+            // 特殊process, 当开启去重，且return的条数greater thanequal limit，则不再continuequery
             if (count($messageIds) >= $memoryQuery->getLimit()) {
                 break;
             }

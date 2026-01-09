@@ -180,7 +180,7 @@ class MessageAssembler
     {
         $appMessageId = $controlRequest->getData()->getMessage()->getAppMessageId();
         $messageStruct = $controlRequest->getData()->getMessage()->getDelightfulMessage();
-        # 将protobuf的message转换为对应的object
+        # 将protobuf的messageconvert为对应的object
         $messageEntity = new DelightfulMessageEntity();
         $messageEntity->setSenderId($userAuthorization->getId());
         $messageEntity->setSenderType($conversationType);

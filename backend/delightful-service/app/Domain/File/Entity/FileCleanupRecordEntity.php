@@ -171,7 +171,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * get过期time.
+     * getexpiretime.
      */
     public function getExpireAt(): string
     {
@@ -179,7 +179,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * set过期time.
+     * setexpiretime.
      */
     public function setExpireAt(string $expireAt): self
     {
@@ -273,7 +273,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否已过期.
+     * check是否已expire.
      */
     public function isExpired(): bool
     {

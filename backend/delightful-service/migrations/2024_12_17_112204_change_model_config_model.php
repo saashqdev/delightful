@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::table('delightful_api_model_configs', function (Blueprint $table) {
             $table->string('model', 80)->default('')->comment('model')->index()->change();
             $table->string('name', 80)->default('')->comment('customizename');
-            $table->boolean('enabled')->default(1)->comment('是否启用');
+            $table->boolean('enabled')->default(1)->comment('是否enable');
             $table->string('implementation', 100)->default('')->comment('implement类');
             $table->text('implementation_config')->nullable()->comment('implement类configuration');
         });

@@ -338,7 +338,7 @@ abstract class AbstractDomainService
                     try {
                         // 批量给自己generatestatus变更的messagestream序列
                         $this->delightfulSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
-                        // 更改database中message的status，避免新设备登录时显示未读
+                        // 更改database中message的status，避免新设备login时显示未读
                         if (! empty($needUpdateStatusSeqIds)) {
                             $this->delightfulSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
                         }
@@ -409,7 +409,7 @@ abstract class AbstractDomainService
                             // 批量给自己generatestatus变更的messagestream序列
                             $this->delightfulSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
                             $messagePriority = $this->getControlMessagePriority($userRevokedSeqEntity);
-                            // 更改database中message的status，避免新设备登录时显示未读
+                            // 更改database中message的status，避免新设备login时显示未读
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
                             // async将generate的messagestreamnotifyuser的其他设备.
                             $seqIds = [$userRevokedSeqEntity->getId()];

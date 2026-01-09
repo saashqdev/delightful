@@ -32,7 +32,7 @@ class OperationPermissionApiTest extends AbstractHttpTest
         // sendGETrequest到APIinterface
         $response = $this->get(self::API, [], $this->getCommonHeaders());
 
-        // 如果returnautherror，跳过test
+        // 如果returnautherror，skiptest
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
             $this->markTestSkipped('interfaceauthfail，可能need其他authconfiguration - interfacerouteverify正常');
             return;

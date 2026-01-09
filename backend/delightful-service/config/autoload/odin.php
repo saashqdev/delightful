@@ -237,7 +237,7 @@ return [
         ],
         'general_api_options' => [
             'timeout' => [
-                'connection' => 5.0,  // 连接timeout（秒）
+                'connection' => 5.0,  // connecttimeout（秒）
                 'write' => 10.0,      // writetimeout（秒）
                 'read' => 300.0,      // readtimeout（秒）
                 'total' => 350.0,     // 总体timeout（秒）
@@ -247,11 +247,11 @@ return [
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
-                // log字段白名单configuration
-                // 如果为nullarray或未configuration，则打印所有字段
-                // 如果configuration了字段列表，则只打印指定的字段
-                // 支持嵌套字段，use点语法如 'args.messages'
-                // 注意：messages 和 tools 字段不在白名单中，不will被打印
+                // logfield白名单configuration
+                // 如果为nullarray或未configuration，则打印所有field
+                // 如果configuration了field列表，则只打印指定的field
+                // 支持嵌套field，use点语法如 'args.messages'
+                // 注意：messages 和 tools field不在白名单中，不will被打印
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
@@ -288,7 +288,7 @@ return [
                     'args.frequency_penalty',      // 频率惩罚
                     'args.presence_penalty',       // 存在惩罚
                     'args.stream',                 // streamresponse标志
-                    'args.stop',                   // 停止词
+                    'args.stop',                   // stop词
                     'args.seed',                   // 随机种子
 
                     // Token预估info
@@ -312,14 +312,14 @@ return [
                     'system_fingerprint',         // 系统指纹
                     'performance_flag',            // performancemark（慢request标识）
 
-                    // 注意：以下字段被排除，不will打印
+                    // 注意：以下field被排除，不will打印
                     // - args.messages (usermessagecontent)
                     // - args.tools (工具定义)
                     // - choices.0.message (responsemessagecontent)
                     // - choices.0.delta (streamresponse增量content)
                     // - content (responsecontent)
                 ],
-                // 是否启用字段白名单filter，defaulttrue（启用filter）
+                // 是否enablefield白名单filter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
                 // 最大stringlength限制，超过此length的string将被替换为 [Long Text]，setting为 0 表示不限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
@@ -330,7 +330,7 @@ return [
         // 全局model options，可被model本身的 options override
         'model_options' => [
             'error_mapping_rules' => [
-                // 示例：customizeerror映射
+                // 示例：customizeerrormapping
                 // 'customizeerror关键词' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
             ],
         ],

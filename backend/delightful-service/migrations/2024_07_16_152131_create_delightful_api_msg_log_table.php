@@ -19,7 +19,7 @@ class CreateDelightfulApiMsgLogTable extends Migration
         Schema::create('delightful_api_msg_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('msg')->comment('message');
-            $table->unsignedDecimal('use_amount', 40, 6)->comment('use额度');
+            $table->unsignedDecimal('use_amount', 40, 6)->comment('usequota');
             $table->string('model')->comment('usemodelid');
             $table->string('organization_code')->comment('organizationid');
             $table->string('user_id')->comment('userid');

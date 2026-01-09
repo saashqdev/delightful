@@ -64,7 +64,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * 是否为中间status（need继续轮询）.
+     * 是否为中间status（needcontinue轮询）.
      */
     public function isInProgress(): bool
     {

@@ -163,7 +163,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             $delightfulFlow->prepareForChangeEnable();
         }
 
-        // 如果启用status为true，need进行verify
+        // 如果enablestatus为true，need进行verify
         if ($delightfulFlow->isEnabled() && empty($delightfulFlow->getNodes())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
         }

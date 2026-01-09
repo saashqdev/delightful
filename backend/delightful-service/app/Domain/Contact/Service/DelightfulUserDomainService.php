@@ -163,7 +163,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     /**
      * 批量according to aiCode（flowCode）+ organizationencodinggetassistant的 user_id.
-     * @return array<string, string> return aiCode => userId 的映射
+     * @return array<string, string> return aiCode => userId 的mapping
      */
     public function getByAiCodes(DataIsolation $dataIsolation, array $aiCodes): array
     {
@@ -191,7 +191,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 4. filterorganizationencoding并build delightfulId => userId 映射
+        // 4. filterorganizationencoding并build delightfulId => userId mapping
         $delightfulIdToUserIdMap = [];
         foreach ($users as $user) {
             // 只保留currentorganization的user
@@ -200,7 +200,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             }
         }
 
-        // 5. buildfinal的 aiCode => userId 映射
+        // 5. buildfinal的 aiCode => userId mapping
         $result = [];
         foreach ($aiCodeToDelightfulIdMap as $aiCode => $delightfulId) {
             if (isset($delightfulIdToUserIdMap[$delightfulId])) {
@@ -332,7 +332,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 麦吉user体系下的登录校验.
+     * 麦吉user体系下的login校验.
      * @return LoginResponseDTO[]
      */
     public function delightfulUserLoginCheck(string $authorization, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
@@ -582,7 +582,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * cache登录校验result.
+     * cachelogin校验result.
      * @param array<LoginResponseDTO> $result
      */
     protected function cacheLoginCheckResult(string $cacheKey, array $result): void
@@ -618,7 +618,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getcache的登录校验result.
+     * getcache的login校验result.
      * @return null|array<LoginResponseDTO>
      */
     private function getCachedLoginCheckResult(string $cacheKey): ?array

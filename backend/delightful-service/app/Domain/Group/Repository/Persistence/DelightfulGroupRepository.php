@@ -229,7 +229,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * get关联的usergroup.
+     * getassociate的usergroup.
      * @param array<string> $groupIds
      * @param array<string> $userIds
      */

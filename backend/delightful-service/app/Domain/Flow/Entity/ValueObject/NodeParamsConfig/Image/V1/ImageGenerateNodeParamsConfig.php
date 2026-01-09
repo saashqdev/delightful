@@ -105,7 +105,7 @@ class ImageGenerateNodeParamsConfig extends NodeParamsConfig
                     "type": "array",
                     "key": "",
                     "sort": 0,
-                    "title": "image链接",
+                    "title": "imagelink",
                     "description": "",
                     "items": null,
                     "properties":null, 

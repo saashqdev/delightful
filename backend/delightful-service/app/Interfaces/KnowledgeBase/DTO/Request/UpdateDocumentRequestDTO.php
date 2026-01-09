@@ -42,7 +42,7 @@ class UpdateDocumentRequestDTO extends AbstractRequestDTO
             'code.max' => 'documentencodinglengthcannot超过64个字符',
             'name.required' => 'documentnamecannot为null',
             'name.max' => 'documentnamelengthcannot超过255个字符',
-            'enabled.boolean' => 'enabled statusmust为boolean值',
+            'enabled.boolean' => 'enabled statusmust为booleanvalue',
         ];
     }
 

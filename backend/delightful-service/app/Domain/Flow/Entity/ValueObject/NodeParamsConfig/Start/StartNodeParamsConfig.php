@@ -276,7 +276,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                 "type": "string",
                 "key": "open_time",
                 "sort": 2,
-                "title": "打开time",
+                "title": "opentime",
                 "description": "",
                 "items": null,
                 "properties": null,

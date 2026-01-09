@@ -18,8 +18,8 @@ enum DelightfulAgentVersionStatus: int
     // AI Agentpublish (企业)
     case ENTERPRISE_UNPUBLISHED = 5; // 未publish
     case ENTERPRISE_PUBLISHED = 6; // 已publish
-    case ENTERPRISE_ENABLED = 7; // 启用
-    case ENTERPRISE_DISABLED = 8; // 禁用
+    case ENTERPRISE_ENABLED = 7; // enable
+    case ENTERPRISE_DISABLED = 8; // disable
 
     // AI Agentpublish (平台)
     case APP_MARKET_UNLISTED = 9; // 未上架

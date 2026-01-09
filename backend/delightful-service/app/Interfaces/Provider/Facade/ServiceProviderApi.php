@@ -68,7 +68,7 @@ class ServiceProviderApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $providerConfigAggregateDTO = $this->adminProviderAppService->getProviderModelsByConfigId($authenticatable, $serviceProviderConfigId);
-        // 将新formatdata转换为旧format以保持向后compatible性
+        // 将新formatdataconvert为旧format以保持向后compatible性
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
@@ -264,7 +264,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 将新formatdata转换为旧format，保持向后compatible性.
+     * 将新formatdataconvert为旧format，保持向后compatible性.
      * @param ?ProviderConfigModelsDTO $aggregateDTO 聚合DTOobject
      * @return array 旧formatdata
      */

@@ -32,7 +32,7 @@ readonly class AsrTaskRepository
      * savetaskstatus到 Redis.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus DTO
-     * @param int $ttl 过期time（秒），default 7 天
+     * @param int $ttl expiretime（秒），default 7 天
      */
     public function save(AsrTaskStatusDTO $taskStatus, int $ttl = AsrConfig::TASK_STATUS_TTL): void
     {
@@ -42,7 +42,7 @@ readonly class AsrTaskRepository
             // savetaskstatusdata
             $this->redis->hMSet($redisKey, $taskStatus->toArray());
 
-            // set过期time
+            // setexpiretime
             $this->redis->expire($redisKey, $ttl);
         } catch (Throwable $e) {
             // Redis 操作fail时record但不throwexception

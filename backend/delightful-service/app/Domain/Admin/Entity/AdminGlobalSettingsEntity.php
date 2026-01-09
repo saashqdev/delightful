@@ -129,7 +129,7 @@ class AdminGlobalSettingsEntity extends AbstractEntity
             AdminGlobalSettingsType::DEFAULT_FRIEND => DefaultFriendExtra::class,
             AdminGlobalSettingsType::ASSISTANT_CREATE => AssistantCreateExtra::class,
             AdminGlobalSettingsType::THIRD_PARTY_PUBLISH => ThirdPartyPublishExtra::class,
-            // 添加其他type的映射...
+            // 添加其他type的mapping...
             default => null,
         };
     }

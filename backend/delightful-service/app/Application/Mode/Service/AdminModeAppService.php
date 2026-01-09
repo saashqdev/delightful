@@ -52,7 +52,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         $providerModels = $this->getDetailedModels($modeAggregate);
 
-        // 转换为DTO
+        // convert为DTO
         $modeAggregateDTO = AdminModeAssembler::aggregateToAdminDTO($modeAggregate, $providerModels);
 
         // processicon
@@ -69,7 +69,7 @@ class AdminModeAppService extends AbstractModeAppService
             ExceptionBuilder::throw(ModeErrorCode::MODE_NOT_FOUND);
         }
         $providerModels = $this->getDetailedModels($modeAggregate);
-        // 转换为DTO
+        // convert为DTO
         $modeAggregateDTO = AdminModeAssembler::aggregateToAdminDTO($modeAggregate, $providerModels);
 
         // processicon
@@ -175,7 +175,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将DTO转换为领域object
+            // 将DTOconvert为领域object
             $modeAggregateEntity = AdminModeAssembler::aggregateDTOToEntity($modeAggregateDTO);
 
             $this->modeDomainService->saveModeConfig($dataIsolation, $modeAggregateEntity);

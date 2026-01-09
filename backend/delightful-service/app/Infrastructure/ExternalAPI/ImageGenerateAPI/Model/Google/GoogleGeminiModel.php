@@ -309,7 +309,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function extractImageDataFromResponse(array $result): string
     {
         if (! isset($result['candidates']) || ! is_array($result['candidates'])) {
-            throw new Exception('response中缺少candidates字段');
+            throw new Exception('response中缺少candidatesfield');
         }
 
         foreach ($result['candidates'] as $candidate) {
@@ -353,7 +353,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function validateGoogleGeminiResponse(array $result): void
     {
         if (! isset($result['candidates']) || ! is_array($result['candidates'])) {
-            throw new Exception('Google Geminiresponsedataformaterror：缺少candidates字段');
+            throw new Exception('Google Geminiresponsedataformaterror：缺少candidatesfield');
         }
 
         $hasValidImage = false;

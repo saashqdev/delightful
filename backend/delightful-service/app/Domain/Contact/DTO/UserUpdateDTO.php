@@ -42,7 +42,7 @@ class UserUpdateDTO extends AbstractEntity
     }
 
     /**
-     * 转换为arrayformat，filter掉null值
+     * convert为arrayformat，filter掉nullvalue
      */
     public function toUpdateArray(): array
     {

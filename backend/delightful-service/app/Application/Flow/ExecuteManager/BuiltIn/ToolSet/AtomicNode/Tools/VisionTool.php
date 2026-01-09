@@ -152,7 +152,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "array",
             "key": "image_urls",
             "title": "file",
-            "description": "image链接list。多个image时use",
+            "description": "imagelinklist。多个image时use",
             "required": null,
             "value": null,
             "encryption": false,
@@ -237,7 +237,7 @@ JSON, true)));
 2. 提供简洁明了的直接回答，直接满足user的主要issue
 3. 再对imagecontent进行多维度详细分析，include但不限于：
    - 主体content识别：人物、物体、场景、文字等
-   - 视觉特征：颜色、构图、光线、质量等
+   - 视觉特征：color、构图、光线、quality等
    - 语义info：活动、情绪、关系、背景故事等
    - 文字识别：如有文字，准确提取并理解含义
    - 技术info：如有图table/data，分析其含义
@@ -245,8 +245,8 @@ JSON, true)));
 4. 分析format要求：
    - 对于重要分析result，use结构化JSONformat呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
    - 对于不确定content，明确table明推测性质，for example："可能是..."
-   - 如image质量较低，指出限制因素并尽力分析
-   - 对于多图分析，分别markimage序号进行parse，并总结其关联性
+   - 如imagequality较低，指出限制因素并尽力分析
+   - 对于多图分析，分别markimage序号进行parse，并总结其associate性
    
 5. 注意事项：
    - 避免对敏感content做主观评判

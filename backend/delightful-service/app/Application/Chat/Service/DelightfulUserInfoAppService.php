@@ -49,7 +49,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
             $accountEntity = $this->accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());
         }
 
-        // getdepartmentuser关联info
+        // getdepartmentuserassociateinfo
         $departmentUserEntities = $this->departmentUserDomainService->getDepartmentUsersByUserIds([$userId], $dataIsolation);
 
         // 提取工号和职位
@@ -119,7 +119,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
     /**
      * getdepartmentinfo.
      *
-     * @param array $departmentUserEntities departmentuser关联info
+     * @param array $departmentUserEntities departmentuserassociateinfo
      * @param ContactDataIsolation $dataIsolation data隔离object
      * @return array departmentinfoarray
      */

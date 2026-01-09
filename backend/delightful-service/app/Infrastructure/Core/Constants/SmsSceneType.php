@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\Constants;
 class SmsSceneType
 {
     /**
-     * 设备登出.
+     * 设备logout.
      */
     public const DEVICE_LOGOUT = 'device_logout';
 
@@ -20,7 +20,7 @@ class SmsSceneType
     public const CHANGE_PASSWORD = 'change_password';
 
     /**
-     * 绑定手机.
+     * bind手机.
      */
     public const BIND_PHONE = 'bind_phone';
 
@@ -30,27 +30,27 @@ class SmsSceneType
     public const CHANGE_PHONE = 'change_phone';
 
     /**
-     * 账号注册.
+     * 账号register.
      */
     public const REGISTER_ACCOUNT = 'register_account';
 
     /**
-     * 账号登录激活.
+     * 账号loginactivate.
      */
     public const ACCOUNT_LOGIN_ACTIVE = 'account_login_active';
 
     /**
-     * 账号注册激活.
+     * 账号registeractivate.
      */
     public const ACCOUNT_REGISTER_ACTIVE = 'account_register_active';
 
     /**
-     * 账号登录.
+     * 账号login.
      */
     public const ACCOUNT_LOGIN = 'account_login';
 
     /**
-     * 账号登录绑定第third-party平台.
+     * 账号loginbind第third-party平台.
      */
     public const ACCOUNT_LOGIN_BIND_THIRD_PLATFORM = 'account_login_bind_third_platform';
 

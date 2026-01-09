@@ -224,7 +224,7 @@ readonly class AsrSandboxResponseHandler
         string $fileTypeName,
         bool $throwOnTimeout = true
     ): ?TaskFileEntity {
-        // check必要的taskstatus字段
+        // check必要的taskstatusfield
         if (empty($taskStatus->projectId) || empty($taskStatus->userId) || empty($taskStatus->organizationCode)) {
             $this->logger->error('taskstatusinfo不完整，无法queryfilerecord', [
                 'task_key' => $taskStatus->taskKey,
@@ -352,7 +352,7 @@ readonly class AsrSandboxResponseHandler
 
         $deleted = $this->presetFileService->deleteNoteFile($noteFileId);
         if ($deleted) {
-            // 清nulltaskstatus中的笔记file相关字段
+            // 清nulltaskstatus中的笔记file相关field
             $taskStatus->presetNoteFileId = null;
             $taskStatus->presetNoteFilePath = null;
             $taskStatus->noteFileId = null;

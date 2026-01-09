@@ -571,7 +571,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         switch ($delightfulFlow->getType()) {
             case Type::Main:
                 $agent = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlow->getCode());
-                // 仅allowcreate人can在禁用status下call
+                // 仅allowcreate人can在disablestatus下call
                 if ($agent->getCreatedUid() !== $dataIsolation->getCurrentUserId() && ! $agent->isAvailable()) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.agent_disabled');
                 }

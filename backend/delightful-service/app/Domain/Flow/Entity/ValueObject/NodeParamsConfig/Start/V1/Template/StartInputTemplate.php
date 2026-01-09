@@ -150,7 +150,7 @@ class StartInputTemplate
                         "url": {
                             "type": "string",
                             "key": "url",
-                            "title": "file链接",
+                            "title": "filelink",
                             "description": "",
                             "required": null,
                             "value": null,

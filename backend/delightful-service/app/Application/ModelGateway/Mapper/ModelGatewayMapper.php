@@ -480,7 +480,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerModelEntity->getStatus()->isEnabled()) {
-            $this->logger->info('model被禁用', ['model' => $model]);
+            $this->logger->info('model被disable', ['model' => $model]);
             return null;
         }
 
@@ -499,7 +499,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerConfigEntity->getStatus()->isEnabled()) {
-            $this->logger->info('服务商configuration被禁用', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('服务商configuration被disable', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
 

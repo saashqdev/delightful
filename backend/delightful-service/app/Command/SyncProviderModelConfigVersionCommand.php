@@ -127,7 +127,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 判断是否should跳过.
+     * 判断是否shouldskip.
      */
     private function shouldSkip(int $existingVersionCount, bool $isForce): bool
     {
@@ -175,7 +175,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
             'is_current_version' => true,
         ];
 
-        // configurationfield映射
+        // configurationfieldmapping
         $configFields = [
             'creativity', 'max_tokens', 'temperature', 'max_output_tokens',
             'billing_type', 'billing_currency', 'time_pricing',
@@ -223,7 +223,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不writedatabase）' : '正式execute'));
 
         if ($isForce) {
-            $this->logger->warning('force模式已启用：将为所有modelcreate新version');
+            $this->logger->warning('force模式已enable：将为所有modelcreate新version');
         }
 
         if ($limit > 0) {
@@ -232,12 +232,12 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * output统计info.
+     * outputstatisticsinfo.
      */
     private function logSummary(array $result): void
     {
         $this->logger->info('=================================');
-        $this->logger->info('synccomplete！统计info:');
+        $this->logger->info('synccomplete！statisticsinfo:');
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
         $this->logger->info(sprintf('  已有version: %d', $result['skipped']));
         $this->logger->info(sprintf('  新增version: %d', $result['created']));
@@ -246,12 +246,12 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * record跳过log.
+     * recordskiplog.
      */
     private function logSkipped(ProviderModelModel $model, int $existingVersionCount): void
     {
         $this->logger->debug(sprintf(
-            '[跳过] model ID: %d, name: %s (已有 %d 个configurationversion)',
+            '[skip] model ID: %d, name: %s (已有 %d 个configurationversion)',
             $model->id,
             $model->name ?: $model->model_id,
             $existingVersionCount

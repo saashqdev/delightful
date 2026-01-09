@@ -16,7 +16,7 @@ use Hyperf\Codec\Json;
 
 /**
  * ASR 组装器
- * 负责 ASR 相关的实体组装和path转换.
+ * 负责 ASR 相关的实体组装和pathconvert.
  *
  * pathformatinstruction：
  * - 工作区相对path (workspace-relative): .asr_recordings/session_xxx 或 录音总结_xxx
@@ -99,7 +99,7 @@ class AsrAssembler
     /**
      * build完整 file_key.
      *
-     * 转换关系: file_key = fullPrefix + workDir + "/" + relativePath
+     * convert关系: file_key = fullPrefix + workDir + "/" + relativePath
      *
      * @param string $fullPrefix organization码+APP_ID+bucket_md5前缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir 项目工作directory (如: project_123/workspace)
@@ -117,8 +117,8 @@ class AsrAssembler
     /**
      * 从 file_key 提取工作区相对path.
      *
-     * 将完整的 file_key 转换为工作区相对path，用于沙箱 API call和界面展示
-     * 转换关系: relativePath = extractWorkspaceRelativePath(file_key)
+     * 将完整的 file_key convert为工作区相对path，用于沙箱 API call和界面展示
+     * convert关系: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      * @return string 工作区相对path (如: .asr_recordings/session_xxx)

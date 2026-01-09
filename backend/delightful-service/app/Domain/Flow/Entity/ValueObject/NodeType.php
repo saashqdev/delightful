@@ -16,7 +16,7 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * 用作触发器。窗口打开时、有新message时、schedule;parametercall（仅子process可用）
+     * 用作触发器。窗口open时、有新message时、schedule;parametercall（仅子process可用）
      */
     case Start = 1;
 

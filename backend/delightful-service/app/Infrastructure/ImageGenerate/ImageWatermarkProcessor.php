@@ -205,7 +205,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * create透明颜色.
+     * create透明color.
      * @param mixed $image
      */
     private function createTransparentColor($image, float $opacity): int
@@ -220,14 +220,14 @@ class ImageWatermarkProcessor
      */
     private function calculateWatermarkPosition(int $width, int $height, string $text, int $fontSize, int $position): array
     {
-        // 更精确的文字宽度估算
+        // 更精确的文字width估算
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && $this->fontProvider->supportsTTF() && function_exists('imagettfbbox')) {
             // useTTF字体计算actual文本边界框
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // 增加20%安全边距
-            $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝对valueensure高度为正
+            $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝对valueensureheight为正
 
             // TTF字体的下降部分（descender）
             $descender = (int) abs($bbox[1]); // 基线以下的部分
@@ -235,7 +235,7 @@ class ImageWatermarkProcessor
             $totalTextHeight = $descender + $ascender;
         } else {
             // 降级use估算method
-            // 对于中文字符，每个字符宽度约equal字体size
+            // 对于中文字符，每个字符width约equal字体size
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // 增加安全边距
             $textHeight = $fontSize;
@@ -321,7 +321,7 @@ class ImageWatermarkProcessor
             if ($this->fontProvider->hasTransparency($image)) {
                 $format = 'png'; // 有透明度usePNG
             } else {
-                $format = 'jpeg'; // 无透明度useJPEG高质量
+                $format = 'jpeg'; // 无透明度useJPEG高quality
             }
         }
 
@@ -351,7 +351,7 @@ class ImageWatermarkProcessor
                         $this->logger->info('JPEG does not support transparency, converting to PNG');
                         imagepng($image, null, 0);
                     } else {
-                        imagejpeg($image, null, 100); // JPEG最高质量
+                        imagejpeg($image, null, 100); // JPEG最高quality
                     }
                     break;
             }

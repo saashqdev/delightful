@@ -58,7 +58,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
 
         $flowCode = $agent->getFlowCode();
         if (empty($flowCode)) {
-            $this->output->error('助理没有关联的process');
+            $this->output->error('助理没有associate的process');
             return 1;
         }
 
@@ -92,15 +92,15 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             // uploadfile（指定不自动createdirectory）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
-            // generate可access的链接
+            // generate可access的link
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
-                // use这种方式点击链接是valid的链接
+                // use这种方式点击link是valid的link
                 return 0;
             }
 
-            $this->output->error('generatefile链接fail');
+            $this->output->error('generatefilelinkfail');
             return 1;
         } catch (Throwable $e) {
             $this->output->error("uploadfilefail: {$e->getMessage()}");

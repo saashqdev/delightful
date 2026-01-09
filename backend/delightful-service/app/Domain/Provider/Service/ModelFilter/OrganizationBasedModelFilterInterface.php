@@ -37,7 +37,7 @@ interface OrganizationBasedModelFilterInterface
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool;
 
     /**
-     * getorganizationcurrentsubscribe产品绑定的所有model标识符.
+     * getorganizationcurrentsubscribe产品bind的所有model标识符.
      *
      * @param string $organizationCode organizationencoding
      * @return array model标识符array，for example: ['gpt-4o', 'claude-3', ...]

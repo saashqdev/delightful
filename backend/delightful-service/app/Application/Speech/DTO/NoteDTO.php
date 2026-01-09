@@ -77,7 +77,7 @@ readonly class NoteDTO
     }
 
     /**
-     * 转换为array.
+     * convert为array.
      */
     public function toArray(): array
     {

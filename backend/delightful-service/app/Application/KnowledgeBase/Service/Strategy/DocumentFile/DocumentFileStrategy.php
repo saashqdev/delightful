@@ -151,7 +151,7 @@ class DocumentFileStrategy
                     $this->cache->set($cacheKey, $fileKey, 3600);
                 }
 
-                // 替换image链接
+                // 替换imagelink
                 $content = str_replace($fullMatches[$index], '<DelightfulCompressibleContent Type="Image">![image](delightful_knowledge_base_file_' . $fileKey . ')</DelightfulCompressibleContent>', $content);
             } catch (Throwable $e) {
                 $this->logger->error('Failed to process image', [

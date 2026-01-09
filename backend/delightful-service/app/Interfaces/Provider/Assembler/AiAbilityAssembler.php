@@ -21,7 +21,7 @@ use function Hyperf\Config\config;
 class AiAbilityAssembler
 {
     /**
-     * AI能力Entity转换为ListDTO.
+     * AI能力Entityconvert为ListDTO.
      */
     public static function entityToListDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityListDTO
     {
@@ -35,7 +35,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力Entity转换为DetailDTO.
+     * AI能力Entityconvert为DetailDTO.
      */
     public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityDetailDTO
     {
@@ -58,7 +58,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力Entitylist转换为ListDTOlist.
+     * AI能力Entitylistconvert为ListDTOlist.
      *
      * @param array<AiAbilityEntity> $entities
      * @return array<AiAbilityListDTO>

@@ -8,32 +8,32 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 
 /**
- * 统计级别枚举类.
+ * statistics级别枚举类.
  */
 enum StatisticsLevel: int
 {
     /**
-     * 统计级别：秒级.
+     * statistics级别：秒级.
      */
     case LEVEL_SECOND = 0;
 
     /**
-     * 统计级别：分钟级.
+     * statistics级别：分钟级.
      */
     case LEVEL_MINUTE = 1;
 
     /**
-     * 统计级别：小时级.
+     * statistics级别：小时级.
      */
     case LEVEL_HOUR = 2;
 
     /**
-     * 统计级别：天级.
+     * statistics级别：天级.
      */
     case LEVEL_DAY = 3;
 
     /**
-     * get统计级别name.
+     * getstatistics级别name.
      */
     public function getName(): string
     {
@@ -46,7 +46,7 @@ enum StatisticsLevel: int
     }
 
     /**
-     * get统计级别name（静态method，用于compatible旧code）.
+     * getstatistics级别name（静态method，用于compatible旧code）.
      * @deprecated use枚举实例的 getName() method代替
      */
     public static function getLevelName(int|self $level): string

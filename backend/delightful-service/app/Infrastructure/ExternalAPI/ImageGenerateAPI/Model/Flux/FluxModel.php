@@ -137,7 +137,7 @@ class FluxModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生result中提取imageURL
+        // 从nativeresult中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             if (! empty($result['data']['imageUrl'])) {
@@ -227,7 +227,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 轮询taskresult并return原生data.
+     * 轮询taskresult并returnnativedata.
      */
     #[RateLimit(create: 40, consume: 1, capacity: 40, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -243,7 +243,7 @@ class FluxModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接return完整的原生data
+                    // 直接return完整的nativedata
                     return $result;
                 }
 
@@ -293,7 +293,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生result.
+     * generate图像的核心逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -337,7 +337,7 @@ class FluxModel extends AbstractImageGenerate
         // get所有并行task的result
         $results = $parallel->wait();
 
-        // handleresult，保持原生format
+        // handleresult，保持nativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
@@ -390,11 +390,11 @@ class FluxModel extends AbstractImageGenerate
     private function validateFluxResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Fluxresponsedataformaterror：缺少data字段');
+            throw new Exception('Fluxresponsedataformaterror：缺少datafield');
         }
 
         if (empty($result['data']['imageUrl'])) {
-            throw new Exception('Fluxresponsedataformaterror：缺少imageUrl字段');
+            throw new Exception('Fluxresponsedataformaterror：缺少imageUrlfield');
         }
     }
 

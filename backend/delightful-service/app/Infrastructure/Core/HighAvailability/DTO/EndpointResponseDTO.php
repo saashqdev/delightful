@@ -33,7 +33,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected int $requestLength;
 
     /**
-     * response消耗的时间，单位：毫秒.
+     * responseconsume的时间，单位：毫秒.
      */
     protected int $responseTime;
 

@@ -14,15 +14,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 修改表结构，添加新字段
+        // 修改表结构，添加新field
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // check是否已存在字段，避免重复添加
+            // check是否已存在field，避免重复添加
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
-                $table->string('document_code', 255)->default('')->comment('关联documentcode')->index();
+                $table->string('document_code', 255)->default('')->comment('associatedocumentcode')->index();
             }
 
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'word_count')) {
-                $table->unsignedBigInteger('word_count')->default(0)->comment('字数统计');
+                $table->unsignedBigInteger('word_count')->default(0)->comment('字数statistics');
             }
         });
     }
@@ -32,7 +32,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 移除添加的字段
+        // 移除添加的field
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
                 $table->dropColumn('document_code');

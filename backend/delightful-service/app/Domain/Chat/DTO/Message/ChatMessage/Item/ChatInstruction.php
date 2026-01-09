@@ -15,7 +15,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 class ChatInstruction extends AbstractEntity
 {
     /**
-     * instruction值.
+     * instructionvalue.
      */
     protected string $value = '';
 

@@ -129,7 +129,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $providerConfigEntity->setUpdatedAt($now);
             $attributes['updated_at'] = $now->format('Y-m-d H:i:s');
 
-            // update操作时，移除不should被更new字段
+            // update操作时，移除不should被更newfield
             unset($attributes['id'], $attributes['created_at']);
         }
 
@@ -255,7 +255,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // 对其他服务商按 sort 字段sort（number越大越靠前）
+        // 对其他服务商按 sort fieldsort（number越大越靠前）
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
                 return strcmp($a->getId(), $b->getId()); // same sort value时按 ID sort
@@ -409,7 +409,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     /**
      * according toconfigurationdata批量query对应的 provider info.
      * @param array $configsResult configurationqueryresult
-     * @return array provider ID 到 provider array的映射
+     * @return array provider ID 到 provider array的mapping
      */
     private function getProviderMapByConfigs(array $configsResult): array
     {
@@ -433,7 +433,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             ->whereIn('id', $providerIds);
         $providersResult = Db::select($providerQuery->toSql(), $providerQuery->getBindings());
 
-        // create provider ID 到 provider data的映射
+        // create provider ID 到 provider data的mapping
         $providerMap = [];
         foreach ($providersResult as $provider) {
             $providerMap[$provider['id']] = $provider;

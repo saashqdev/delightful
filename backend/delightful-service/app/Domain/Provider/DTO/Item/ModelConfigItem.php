@@ -323,7 +323,7 @@ class ModelConfigItem extends AbstractDTO
     }
 
     /**
-     * parseboolean值（统一process逻辑）.
+     * parsebooleanvalue（统一process逻辑）.
      */
     private function parseBooleanValue(null|bool|int|string $value): bool
     {

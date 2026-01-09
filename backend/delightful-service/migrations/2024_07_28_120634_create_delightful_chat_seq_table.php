@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('seq_type', 32)->comment('message大type:控制message,chatmessage。');
             $table->text('content')->comment('序列号detail. 一些不可见的控制message,只在seqtable存在detail. 以及写时复制一份messagetablecontent到seqtable用.');
             $table->string('delightful_message_id', 64)->comment('service端generate的唯一messageid,用于messagewithdraw/edit');
-            $table->string('message_id', 64)->comment('序列号关联的usermessageid,implement已读回执,messagewithdraw/edit等')->default(0);
+            $table->string('message_id', 64)->comment('序列号associate的usermessageid,implement已读回执,messagewithdraw/edit等')->default(0);
             // quote的messageid
             $table->string('refer_message_id', 64)->comment('quote的messageid,implement已读回执,messagewithdraw/edit等');
             // sender_message_id

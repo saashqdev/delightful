@@ -28,7 +28,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $aiCode = null;
 
     /**
-     * 账号status,0:正常,1:禁用.
+     * 账号status,0:正常,1:disable.
      */
     protected ?AccountStatus $status = null;
 

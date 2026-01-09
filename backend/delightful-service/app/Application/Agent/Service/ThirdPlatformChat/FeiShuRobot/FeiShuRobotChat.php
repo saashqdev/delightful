@@ -63,7 +63,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const int LOCK_TTL = 7200;
 
     /**
-     * imagedefault尺寸.
+     * imagedefaultsize.
      */
     private const int DEFAULT_IMAGE_WIDTH = 300;
 
@@ -132,7 +132,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         // 幂等性handle：usemessageID进行去重
         if (! $this->checkMessageIdLock($messageId)) {
-            $this->logger->info('飞书message已handle过，跳过', ['message_id' => $messageId]);
+            $this->logger->info('飞书message已handle过，skip', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
             return $chatMessage;
         }

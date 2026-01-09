@@ -161,7 +161,7 @@ return new class extends Migration {
     private function cleanOfficialProviderData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清洗 Official 服务商的 description 和 translate 字段');
+        $logger->info('start清洗 Official 服务商的 description 和 translate field');
 
         try {
             // usetransactionensuredata一致性
@@ -177,13 +177,13 @@ return new class extends Migration {
                     $needUpdate = false;
                     $updateData = [];
 
-                    // handle description 字段
+                    // handle description field
                     if (! empty($provider['description']) && strpos($provider['description'], '!') !== false) {
                         $updateData['description'] = str_replace('!', 'I', $provider['description']);
                         $needUpdate = true;
                     }
 
-                    // handle translate 字段
+                    // handle translate field
                     if (! empty($provider['translate']) && strpos($provider['translate'], '!') !== false) {
                         $updateData['translate'] = str_replace('!', 'I', $provider['translate']);
                         $needUpdate = true;
@@ -223,7 +223,7 @@ return new class extends Migration {
             // 2. 单独transaction：reset官方organizationmodel的 model_parent_id
             $this->resetOfficialModelsParentId($officialOrganizationCode, $logger);
 
-            // 3. get官方organization所有启用的model（不needtransaction）
+            // 3. get官方organization所有enable的model（不needtransaction）
             $officialEnabledModels = Db::table('service_provider_models')
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('status', Status::Enabled->value)
@@ -234,7 +234,7 @@ return new class extends Migration {
                 ->toArray();
 
             $officialModelIds = array_keys($officialEnabledModels);
-            $logger->info('get官方organization启用modelquantity: ' . count($officialModelIds));
+            $logger->info('get官方organizationenablemodelquantity: ' . count($officialModelIds));
 
             // 4. get所有非官方organizationencoding（不needtransaction）
             $allOrganizationCodes = Db::table('service_provider_models')

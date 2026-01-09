@@ -77,7 +77,7 @@ class AIImageGenerateParamsVO extends AbstractValueObject
      */
     public function setRatioForModel(string $ratio, ImageGenerateModelType $model): AIImageGenerateParamsVO
     {
-        // Flux不支持的尺寸比例，将比例setting为推荐比例
+        // Flux不支持的size比例，将比例setting为推荐比例
         if ($model === ImageGenerateModelType::Flux) {
             $ratio = match ($ratio) {
                 Radio::TwoToThree->value, Radio::ThreeToFour->value => Radio::NineToSixteen->value,
@@ -179,7 +179,7 @@ class AIImageGenerateParamsVO extends AbstractValueObject
 
     public function setSizeFromRadioAndModel(string $radio, ImageGenerateModelType $modelType = ImageGenerateModelType::Volcengine): AIImageGenerateParamsVO
     {
-        // 火山 尺寸映射
+        // 火山 sizemapping
         $volcengineRadioSizeMap = [
             Radio::OneToOne->value => ['width' => '768', 'height' => '768'],
             Radio::TwoToThree->value => ['width' => '512', 'height' => '768'],
@@ -189,7 +189,7 @@ class AIImageGenerateParamsVO extends AbstractValueObject
             Radio::FourToThree->value => ['width' => '768', 'height' => '576'],
             Radio::SixteenToNine->value => ['width' => '768', 'height' => '432'],
         ];
-        // flux 尺寸映射
+        // flux sizemapping
         $fluxRadioSizeMap = [
             Radio::OneToOne->value => ['width' => '1024', 'height' => '1024'],
             Radio::NineToSixteen->value => ['width' => '1024', 'height' => '1792'],

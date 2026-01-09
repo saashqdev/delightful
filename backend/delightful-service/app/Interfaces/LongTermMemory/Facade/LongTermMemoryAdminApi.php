@@ -453,7 +453,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批量update记忆启用status.
+     * 批量update记忆enablestatus.
      */
     public function batchUpdateMemoryStatus(RequestInterface $request): array
     {
@@ -479,7 +479,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * get记忆统计.
+     * get记忆statistics.
      */
     public function getMemoryStats(): array
     {

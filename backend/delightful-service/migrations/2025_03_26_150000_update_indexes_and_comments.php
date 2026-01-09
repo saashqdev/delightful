@@ -16,9 +16,9 @@ class UpdateIndexesAndComments extends Migration
         // 清null delightful_api_premium_endpoint_statistics 表data
         Db::table('delightful_api_premium_endpoint_statistics')->truncate();
 
-        // 修改 delightful_api_premium_endpoint_statistics 表的 statistics_level 注释
+        // 修改 delightful_api_premium_endpoint_statistics 表的 statistics_level comment
         Schema::table('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
-            $table->integer('statistics_level')->comment('统计级别：0-秒级，1-分钟级，2-小时级，3-天级')->change();
+            $table->integer('statistics_level')->comment('statistics级别：0-秒级，1-分钟级，2-小时级，3-天级')->change();
             // 修改 statistics_time 的datatype为 datetime
             $table->dateTime('statistics_time')->change();
         });

@@ -14,7 +14,7 @@ use App\Interfaces\Permission\DTO\OrganizationAdminResponseDTO;
 class OrganizationAdminAssembler
 {
     /**
-     * 将单个organization管理员实体转换为responseDTO.
+     * 将单个organization管理员实体convert为responseDTO.
      */
     public static function assembleSingle(OrganizationAdminEntity $entity): OrganizationAdminResponseDTO
     {
@@ -32,7 +32,7 @@ class OrganizationAdminAssembler
     }
 
     /**
-     * 将organization管理员实体list转换为responseDTO.
+     * 将organization管理员实体listconvert为responseDTO.
      *
      * @param OrganizationAdminEntity[] $entities
      */
@@ -49,7 +49,7 @@ class OrganizationAdminAssembler
     }
 
     /**
-     * 将带有userinfo的data转换为responseDTO.
+     * 将带有userinfo的dataconvert为responseDTO.
      *
      * @param array $data containorganization管理员实体和userinfo的array
      */
@@ -75,7 +75,7 @@ class OrganizationAdminAssembler
     }
 
     /**
-     * 将带有userinfo的datalist转换为responseDTO.
+     * 将带有userinfo的datalistconvert为responseDTO.
      *
      * @param array $dataList containorganization管理员实体和userinfo的arraylist
      */

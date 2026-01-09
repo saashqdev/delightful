@@ -35,7 +35,7 @@ class AiAbilityDomainService
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code
      * @return AiAbilityEntity AI能力实体
-     * @throws Exception 当能力不存在或未启用时throwexception
+     * @throws Exception 当能力不存在或未enable时throwexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {

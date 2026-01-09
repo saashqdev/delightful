@@ -103,13 +103,13 @@ class ModeAppService extends AbstractModeAppService
             $providerImageModels = $allAggregateImageModels;
         }
 
-        // 转换为DTOarray
+        // convert为DTOarray
         $modeAggregateDTOs = [];
         foreach ($modeAggregates as $aggregate) {
             $modeAggregateDTOs[$aggregate->getMode()->getIdentifier()] = ModeAssembler::aggregateToDTO($aggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
         }
 
-        // process图标URL转换
+        // process图标URLconvert
         foreach ($modeAggregateDTOs as $aggregateDTO) {
             $this->processModeAggregateIcons($aggregateDTO);
         }
@@ -128,7 +128,7 @@ class ModeAppService extends AbstractModeAppService
             if (empty($modeAggregateDTO->getAllModelIds())) {
                 continue;
             }
-            // 转换
+            // convert
             $list[] = [
                 'mode' => [
                     'id' => $agent->getCode(),
@@ -167,7 +167,7 @@ class ModeAppService extends AbstractModeAppService
         $providerModels = $this->getModels($modeAggregate);
         $modeGroupDetailDTOS = ModeAssembler::aggregateToFlatGroupsDTO($modeAggregate, $providerModels);
 
-        // process图标path转换为完整URL
+        // process图标pathconvert为完整URL
         $this->processModeGroupDetailIcons($authorization, $modeGroupDetailDTOS);
 
         return $modeGroupDetailDTOS;
@@ -221,7 +221,7 @@ class ModeAppService extends AbstractModeAppService
     /**
      * 为批量queryoptimize的model选择method.
      * @param ProviderModelEntity[] $models modellist
-     * @param array $providerStatuses service商status映射
+     * @param array $providerStatuses service商statusmapping
      */
     private function selectBestModelForBatch(array $models, array $providerStatuses): ?ProviderModelEntity
     {
@@ -229,17 +229,17 @@ class ModeAppService extends AbstractModeAppService
             return null;
         }
 
-        // 优先选择service商启用且model启用的model
+        // 优先选择service商enable且modelenable的model
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // service商禁用，跳过该model
+            // service商disable，skip该model
             if ($providerStatus === Status::Disabled) {
                 continue;
             }
 
-            // service商启用，checkmodelstatus
+            // service商enable，checkmodelstatus
             if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return $model;
             }

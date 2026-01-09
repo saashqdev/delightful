@@ -144,7 +144,7 @@ class QwenImageModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生result中提取imageURL
+        // 从nativeresult中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $output = $result['output'];
@@ -162,7 +162,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生result.
+     * generate图像的核心逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -174,7 +174,7 @@ class QwenImageModel extends AbstractImageGenerate
         // 其他文生图是 x ，阿里是 * ，保持上游一致，final传入还是 *
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
 
-        // 校验image尺寸
+        // 校验imagesize
         $this->validateImageSize($size, $imageGenerateRequest->getModel());
 
         $count = $imageGenerateRequest->getGenerateNum();
@@ -222,7 +222,7 @@ class QwenImageModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // handleresult，保持原生format
+        // handleresult，保持nativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
@@ -378,7 +378,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验image尺寸是否match通义千问model的规格
+     * 校验imagesize是否match通义千问model的规格
      */
     private function validateImageSize(string $size, string $model): void
     {
@@ -396,11 +396,11 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验qwen-imagemodel的固定尺寸列表.
+     * 校验qwen-imagemodel的固定size列表.
      */
     private function validateQwenImageSize(string $size): void
     {
-        // qwen-image支持的固定尺寸列表
+        // qwen-image支持的固定size列表
         $supportedSizes = [
             '1664x928',   // 16:9
             '1472x1140',  // 4:3
@@ -410,7 +410,7 @@ class QwenImageModel extends AbstractImageGenerate
         ];
 
         if (! in_array($size, $supportedSizes, true)) {
-            $this->logger->error('通义千问文生图：qwen-image不支持的image尺寸', [
+            $this->logger->error('通义千问文生图：qwen-image不支持的imagesize', [
                 'requested_size' => $size,
                 'supported_sizes' => $supportedSizes,
                 'model' => 'qwen-image',
@@ -428,13 +428,13 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验wan2.2-t2i-flashmodel的区间尺寸.
+     * 校验wan2.2-t2i-flashmodel的区间size.
      */
     private function validateWan22FlashSize(string $size): void
     {
         $dimensions = explode('x', $size);
         if (count($dimensions) !== 2) {
-            $this->logger->error('通义千问文生图：wan2.2-t2i-flash尺寸formaterror', [
+            $this->logger->error('通义千问文生图：wan2.2-t2i-flashsizeformaterror', [
                 'requested_size' => $size,
                 'model' => 'wan2.2-t2i-flash',
             ]);
@@ -450,7 +450,7 @@ class QwenImageModel extends AbstractImageGenerate
         $maxSize = 1440;
 
         if ($width < $minSize || $width > $maxSize || $height < $minSize || $height > $maxSize) {
-            $this->logger->error('通义千问文生图：wan2.2-t2i-flash尺寸超出支持range', [
+            $this->logger->error('通义千问文生图：wan2.2-t2i-flashsize超出支持range', [
                 'requested_size' => $size,
                 'width' => $width,
                 'height' => $height,
@@ -508,12 +508,12 @@ class QwenImageModel extends AbstractImageGenerate
     private function validateQwenResponse(array $result): void
     {
         if (empty($result['output']) || ! is_array($result['output'])) {
-            throw new Exception('通义千问responsedataformaterror：缺少output字段');
+            throw new Exception('通义千问responsedataformaterror：缺少outputfield');
         }
 
         $output = $result['output'];
         if (empty($output['results']) || ! is_array($output['results'])) {
-            throw new Exception('通义千问responsedataformaterror：缺少results字段');
+            throw new Exception('通义千问responsedataformaterror：缺少resultsfield');
         }
 
         // checkfirstresult是否有URL

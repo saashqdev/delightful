@@ -8,27 +8,27 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\OdinTools\MindSearch;
 
 /**
- * 批量generate关联问题的子问题，then批量互联网search.
+ * 批量generateassociate问题的子问题，then批量互联网search.
  */
 class AssociationsSubQuestionsTool
 {
     public static string $name = 'associationsSubQuestionsSearch';
 
-    public static string $description = '将每个关联问题拆分为多个子问题，then批量互联网search';
+    public static string $description = '将每个associate问题拆分为多个子问题，then批量互联网search';
 
     protected static array $parameters = [
         'type' => 'object',
         'properties' => [
             'association' => [
                 'type' => 'string',
-                'description' => '关联问题',
+                'description' => 'associate问题',
             ],
             'subQuestions' => [
                 'type' => 'array',
                 'items' => [
                     'type' => 'string',
                 ],
-                'description' => '关联问题的多个子问题',
+                'description' => 'associate问题的多个子问题',
             ],
         ],
         'required' => ['association', 'subQuestions'],

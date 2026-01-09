@@ -11,7 +11,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
 {
     public function preprocess(string $content): string
     {
-        // 转换为csvformat
+        // convert为csvformat
         $content = $this->convertToCsv($content);
         // delete ## 开头的行
         $content = preg_replace('/^##.*\n/', '', $content);
@@ -20,9 +20,9 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * 将content转换为CSVformat.
+     * 将contentconvert为CSVformat.
      * @param string $content originalcontent
-     * @return string 转换后的CSVformatcontent
+     * @return string convert后的CSVformatcontent
      */
     private function convertToCsv(string $content): string
     {
@@ -39,7 +39,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 continue;
             }
 
-            // 如果是空行，跳过
+            // 如果是空行，skip
             if (empty(trim($line))) {
                 $result[] = '';
                 continue;

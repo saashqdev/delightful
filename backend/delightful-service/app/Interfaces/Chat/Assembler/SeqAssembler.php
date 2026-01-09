@@ -81,13 +81,13 @@ class SeqAssembler
         string $seqId,
         ?array $thisTimeStreamMessages = null
     ): ?ClientJsonStreamSequenceResponse {
-        // todo 为了compatible旧版streammessage，need将 content/reasoning_content/status/llm_response 字段放到最外层。
+        // todo 为了compatible旧版streammessage，need将 content/reasoning_content/status/llm_response field放到最外层。
         // todo 等前端上线后，就移除 content/reasoning_content/status/llm_response 的多余push
         $response = (new ClientJsonStreamSequenceResponse())->setTargetSeqId($seqId);
         $content = $thisTimeStreamMessages['content'] ?? null;
         $reasoningContent = $thisTimeStreamMessages['reasoning_content'] ?? null;
         $llmResponse = $thisTimeStreamMessages['llm_response'] ?? null;
-        // 强行delete $streamOptions 中的stream_app_message_id/stream字段
+        // 强行delete $streamOptions 中的stream_app_message_id/streamfield
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
         // 0 will被当做 false handle，所以这里要判断是否为 null 或者 ''
@@ -136,7 +136,7 @@ class SeqAssembler
             $referMessageId = $originSeqEntity->getReferMessageId();
         }
         $statusChangeSeqEntity = clone $originSeqEntity;
-        // message的receive方不needrecord收件人列表,清null该字段info
+        // message的receive方不needrecord收件人列表,清null该fieldinfo
         $statusChangeSeqEntity->setReceiveList(null);
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
@@ -308,7 +308,7 @@ class SeqAssembler
             'seq_id' => $seqEntity->getSeqId(),
             // user的messageid，user下唯一。
             'message_id' => $seqEntity->getMessageId(),
-            // 本条message指向的delightful_message_id。 用于implement已读回执场景。存在quote关系时，send_msg_id字段不再return，因为send方的messageid没有改变。
+            // 本条message指向的delightful_message_id。 用于implement已读回执场景。存在quote关系时，send_msg_idfield不再return，因为send方的messageid没有改变。
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方的messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),

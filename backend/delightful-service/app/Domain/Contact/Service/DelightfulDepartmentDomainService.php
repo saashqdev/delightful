@@ -163,7 +163,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根department被抽象为 -1，所以这里need转换为actual的根department id.
+     * 根department被抽象为 -1，所以这里needconvert为actual的根department id.
      */
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {
@@ -182,7 +182,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     /**
      * 批量get多个organization的根departmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return array<string,DelightfulDepartmentEntity> 以organizationcode为键，根department实体为value的关联array
+     * @return array<string,DelightfulDepartmentEntity> 以organizationcode为键，根department实体为value的associatearray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {

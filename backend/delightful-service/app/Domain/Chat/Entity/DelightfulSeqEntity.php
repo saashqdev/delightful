@@ -73,7 +73,7 @@ final class DelightfulSeqEntity extends AbstractEntity
     public function __construct(?array $data = [])
     {
         if ($data) {
-            // processmessage的contenttype转换
+            // processmessage的contenttypeconvert
             if (! empty($data['content'])) {
                 if (is_string($data['content'])) {
                     $data['content'] = Json::decode($data['content']);
@@ -355,7 +355,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function canTriggerFlow(): bool
     {
-        // 如果是chatmessage，或者是加好友/打开session窗口的控制message，就能触发 flow
+        // 如果是chatmessage，或者是加好友/opensession窗口的控制message，就能触发 flow
         return $this->seqType instanceof ChatMessageType || in_array($this->seqType, [ControlMessageType::AddFriendSuccess, ControlMessageType::OpenConversation], true);
     }
 }

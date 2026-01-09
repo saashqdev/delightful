@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->tinyInteger('is_display')->default(1)->comment('是否展示: 0=否, 1=是');
             $table->json('permission_tag')->nullable()->comment('permissiontag，用于前端展示category');
-            $table->tinyInteger('status')->default(1)->comment('status: 0=禁用, 1=启用');
+            $table->tinyInteger('status')->default(1)->comment('status: 0=disable, 1=enable');
             $table->string('created_uid', 64)->nullable()->comment('create者userID');
             $table->string('updated_uid', 64)->nullable()->comment('update者userID');
             $table->timestamps();

@@ -47,9 +47,9 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将service商configurationarray转换为 DTO list，contain完整的 provider info.
+     * 将service商configurationarrayconvert为 DTO list，contain完整的 provider info.
      * @param array $serviceProviderConfigs service商configurationarray
-     * @param array $providerMap provider ID 到 provider data的映射
+     * @param array $providerMap provider ID 到 provider data的mapping
      * @return ProviderConfigDTO[]
      */
     public static function toDTOListWithProviders(array $serviceProviderConfigs, array $providerMap): array
@@ -65,9 +65,9 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将service商configuration转换为 DTO，contain完整的 provider info.
+     * 将service商configurationconvert为 DTO，contain完整的 provider info.
      * @param array $serviceProviderConfig service商configurationdata
-     * @param array $providerMap provider ID 到 provider data的映射
+     * @param array $providerMap provider ID 到 provider data的mapping
      */
     public static function toDTOWithProvider(array $serviceProviderConfig, array $providerMap): ProviderConfigDTO
     {

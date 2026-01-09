@@ -83,8 +83,8 @@ class InternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "use_deep_search": {
                 "type": "boolean",
                 "key": "use_deep_search",
-                "title": "是否启用深度search",
-                "description": "是否启用深度search",
+                "title": "是否enable深度search",
+                "description": "是否enable深度search",
                 "required": null,
                 "value": {
                     "type": "const",

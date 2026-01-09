@@ -15,7 +15,7 @@ class MCPToolManager
     private array $tools = [];
 
     /**
-     * 注册tool.
+     * registertool.
      */
     public function registerTool(MCPTool $tool): void
     {
@@ -23,7 +23,7 @@ class MCPToolManager
     }
 
     /**
-     * get所有注册的tool.
+     * get所有register的tool.
      *
      * @return array<string, MCPTool>
      */

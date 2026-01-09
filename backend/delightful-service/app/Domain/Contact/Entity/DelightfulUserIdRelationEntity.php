@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\ValueObject\UserIdRelationType;
 use App\Domain\Contact\Entity\ValueObject\UserIdType;
 
 /**
- * user_id 与 open_id/union_id的映射关系.
+ * user_id 与 open_id/union_id的mapping关系.
  */
 class DelightfulUserIdRelationEntity extends AbstractEntity
 {

@@ -51,7 +51,7 @@ class RoleApi extends AbstractPermissionApi
         // buildqueryobject（自动filter掉paginationfield）
         $query = new SubAdminQuery($this->request->all());
 
-        // 转换为仓储filterarray
+        // convert为仓储filterarray
         $filters = $query->toFilters();
 
         // queryrolelist
@@ -113,7 +113,7 @@ class RoleApi extends AbstractPermissionApi
         // getroledetail
         $roleEntity = $this->roleAppService->show($dataIsolation, $id);
 
-        // getrole关联的userinfo
+        // getroleassociate的userinfo
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()

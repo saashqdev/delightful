@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Db;
 
 class ProviderModelConfigVersionRepository extends AbstractProviderModelRepository implements ProviderModelConfigVersionRepositoryInterface
 {
-    // configurationversiontable不needorganization隔离（pass service_provider_model_id 关联已经隔离）
+    // configurationversiontable不needorganization隔离（pass service_provider_model_id associate已经隔离）
     protected bool $filterOrganizationCode = false;
 
     /**
@@ -46,7 +46,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
             $entity->setVersion($newVersion);
             $entity->setIsCurrentVersion(true);
 
-            // 转换为array并移除 null 的 created_at，让 Model 自动processtime戳
+            // convert为array并移除 null 的 created_at，让 Model 自动processtime戳
             $data = $entity->toArray();
 
             ProviderModelConfigVersionModel::query()->create($data);

@@ -63,7 +63,7 @@ class DelightfulFlowKnowledgeFactory
     }
 
     /**
-     * 将实体转换为modelpropertyarray.
+     * 将实体convert为modelpropertyarray.
      */
     public static function entityToAttributes(KnowledgeBaseEntity $entity): array
     {

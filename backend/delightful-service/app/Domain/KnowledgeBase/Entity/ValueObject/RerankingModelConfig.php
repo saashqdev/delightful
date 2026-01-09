@@ -81,9 +81,9 @@ class RerankingModelConfig extends AbstractValueObject
     private bool $useCache = true;
 
     /**
-     * cache过期time（秒）.
+     * cacheexpiretime（秒）.
      *
-     * cache的过期time，单位为秒
+     * cache的expiretime，单位为秒
      */
     private int $cacheTtl = 3600;
 
@@ -253,7 +253,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * getcache过期time.
+     * getcacheexpiretime.
      */
     public function getCacheTtl(): int
     {
@@ -261,7 +261,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * setcache过期time.
+     * setcacheexpiretime.
      */
     public function setCacheTtl(int $cacheTtl): self
     {
@@ -331,7 +331,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 转换为array.
+     * convert为array.
      */
     public function toArray(): array
     {

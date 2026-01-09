@@ -11,7 +11,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class EditMessageOptions extends AbstractEntity
 {
-    // 被edit的messageid，用于关联message的多个version
+    // 被edit的messageid，用于associatemessage的多个version
     protected string $delightfulMessageId;
 
     // version numberid，send方不用填写，服务端自动generate

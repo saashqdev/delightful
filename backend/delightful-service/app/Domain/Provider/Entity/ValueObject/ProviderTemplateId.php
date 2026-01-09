@@ -9,7 +9,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
  * 服务商templateID枚举
- * 将ProviderCode和Category的组合映射为固定的数值型string.
+ * 将ProviderCode和Category的组合mapping为固定的数value型string.
  */
 enum ProviderTemplateId: string
 {

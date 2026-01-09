@@ -164,10 +164,10 @@ class DelightfulAgentDomainService
         // getdata隔离object并getcurrentorganization的organizationcode
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // get启用的助理list
+        // getenable的助理list
         $enabledAgents = $this->getEnabledAgents();
 
-        // 提取启用助理list中的 agent_version_id
+        // 提取enable助理list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
         // get指定organization和助理version的助理data及其total
@@ -194,7 +194,7 @@ class DelightfulAgentDomainService
             }
         }
 
-        // 按organization批量get链接
+        // 按organization批量getlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->cloudFileRepository->getLinks($orgCode, $fileKeys);
@@ -204,7 +204,7 @@ class DelightfulAgentDomainService
             $links = array_merge(...$links);
         }
 
-        // 替换每个助理的avatar链接
+        // 替换每个助理的avatarlink
         foreach ($agents as &$agent) {
             $avatarKey = $agent['agent_avatar'];
             $fileLink = $links[$avatarKey] ?? null;

@@ -256,7 +256,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentMaxVersion($authorization, $agentId);
     }
 
-    // 启用｜禁用助理
+    // enable｜disable助理
     public function updateAgentStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */

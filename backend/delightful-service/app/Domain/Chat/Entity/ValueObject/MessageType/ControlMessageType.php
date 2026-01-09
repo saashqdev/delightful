@@ -45,7 +45,7 @@ enum ControlMessageType: string
     // 结束在session窗口input
     case EndConversationInput = 'end_conversation_input';
 
-    // 打开session窗口
+    // opensession窗口
     case OpenConversation = 'open_conversation';
 
     // create话题

@@ -66,7 +66,7 @@ interface ProviderConfigRepositoryInterface
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 
     /**
-     * getorganization下所有启用的service商configuration.
+     * getorganization下所有enable的service商configuration.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @return array<ProviderConfigEntity> service商configuration实体array

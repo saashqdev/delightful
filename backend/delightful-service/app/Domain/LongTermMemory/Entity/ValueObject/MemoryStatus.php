@@ -29,7 +29,7 @@ enum MemoryStatus: string
     }
 
     /**
-     * get所有status值.
+     * get所有statusvalue.
      */
     public static function getAllValues(): array
     {

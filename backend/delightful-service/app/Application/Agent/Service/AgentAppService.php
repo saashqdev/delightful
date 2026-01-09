@@ -156,7 +156,7 @@ class AgentAppService extends AbstractAppService
             return $agents;
         }
 
-        // 快速create ID 到实体的映射
+        // 快速create ID 到实体的mapping
         $agentMap = [];
         foreach ($agents as $agent) {
             $agentMap[$agent->getId()] = $agent;

@@ -44,7 +44,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR 沙箱服务
- * 负责沙箱task启动、merge、轮询和filerecordcreate.
+ * 负责沙箱taskstart、merge、轮询和filerecordcreate.
  */
 readonly class AsrSandboxService
 {
@@ -65,7 +65,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * 启动录音task.
+     * start录音task.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $userId userID
@@ -121,7 +121,7 @@ readonly class AsrSandboxService
             'transcript_file_config' => $transcriptFileConfig?->toArray(),
         ]);
 
-        // call沙箱启动task
+        // call沙箱starttask
         // 注意：沙箱 API 只接受工作区相对path (如: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
@@ -479,7 +479,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * 等待沙箱启动（canresponseinterface）.
+     * 等待沙箱start（canresponseinterface）.
      * ASR feature不need工作区initialize，只need沙箱canresponse getWorkspaceStatus interface即可.
      *
      * @param string $sandboxId 沙箱ID
@@ -490,7 +490,7 @@ readonly class AsrSandboxService
         string $sandboxId,
         string $taskKey
     ): void {
-        $this->logger->info('ASR 录音：等待沙箱启动', [
+        $this->logger->info('ASR 录音：等待沙箱start', [
             'task_key' => $taskKey,
             'sandbox_id' => $sandboxId,
             'timeout_seconds' => AsrConfig::SANDBOX_STARTUP_TIMEOUT,
@@ -502,11 +502,11 @@ readonly class AsrSandboxService
 
         while (time() < $endTime) {
             try {
-                // 尝试get工作区status，只要interface能successreturn就instruction沙箱已启动
+                // 尝试get工作区status，只要interface能successreturn就instruction沙箱已start
                 $response = $this->agentDomainService->getWorkspaceStatus($sandboxId);
                 $status = $response->getDataValue('status');
 
-                $this->logger->info('ASR 录音：沙箱已启动并可response', [
+                $this->logger->info('ASR 录音：沙箱已start并可response', [
                     'task_key' => $taskKey,
                     'sandbox_id' => $sandboxId,
                     'status' => $status,
@@ -514,11 +514,11 @@ readonly class AsrSandboxService
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // interfacesuccessreturn，沙箱已启动
+                // interfacesuccessreturn，沙箱已start
                 return;
             } catch (Throwable $e) {
-                // interfacecallfail，instruction沙箱还未启动，continue等待
-                $this->logger->debug('ASR 录音：沙箱尚未启动，continue等待', [
+                // interfacecallfail，instruction沙箱还未start，continue等待
+                $this->logger->debug('ASR 录音：沙箱尚未start，continue等待', [
                     'task_key' => $taskKey,
                     'sandbox_id' => $sandboxId,
                     'error' => $e->getMessage(),
@@ -531,7 +531,7 @@ readonly class AsrSandboxService
         }
 
         // timeout
-        $this->logger->error('ASR 录音：等待沙箱启动timeout', [
+        $this->logger->error('ASR 录音：等待沙箱starttimeout', [
             'task_key' => $taskKey,
             'sandbox_id' => $sandboxId,
             'timeout_seconds' => AsrConfig::SANDBOX_STARTUP_TIMEOUT,
@@ -540,7 +540,7 @@ readonly class AsrSandboxService
         ExceptionBuilder::throw(
             AsrErrorCode::SandboxTaskCreationFailed,
             '',
-            ['message' => '等待沙箱启动timeout（' . AsrConfig::SANDBOX_STARTUP_TIMEOUT . '秒）']
+            ['message' => '等待沙箱starttimeout（' . AsrConfig::SANDBOX_STARTUP_TIMEOUT . '秒）']
         );
     }
 
@@ -569,7 +569,7 @@ readonly class AsrSandboxService
         try {
             $workspaceStatusResponse = $this->agentDomainService->getWorkspaceStatus($requestedSandboxId);
         } catch (Throwable $throwable) {
-            $this->logger->warning('get沙箱工作区statusfail，沙箱可能未启动，将create新沙箱', [
+            $this->logger->warning('get沙箱工作区statusfail，沙箱可能未start，将create新沙箱', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'error' => $throwable->getMessage(),
@@ -610,7 +610,7 @@ readonly class AsrSandboxService
             return $requestedSandboxId;
         }
 
-        // 工作区statusresponse不存在，沙箱未启动，needcreate沙箱
+        // 工作区statusresponse不存在，沙箱未start，needcreate沙箱
         $dataIsolation = DataIsolation::simpleMake($organizationCode, $userId);
 
         $this->logger->info('准备call AgentDomainService create沙箱', [
@@ -627,13 +627,13 @@ readonly class AsrSandboxService
             $fullWorkdir
         );
 
-        $this->logger->info('沙箱createrequestcomplete，等待沙箱启动', [
+        $this->logger->info('沙箱createrequestcomplete，等待沙箱start', [
             'task_key' => $taskStatus->taskKey,
             'requested_sandbox_id' => $requestedSandboxId,
             'actual_sandbox_id' => $actualSandboxId,
         ]);
 
-        // 等待沙箱启动（canresponseinterface）
+        // 等待沙箱start（canresponseinterface）
         $this->waitForSandboxStartup($actualSandboxId, $taskStatus->taskKey);
 
         $taskStatus->sandboxId = $actualSandboxId;
@@ -659,7 +659,7 @@ readonly class AsrSandboxService
         string $userId,
         string $organizationCode
     ): void {
-        $this->logger->info('沙箱已启动，准备sendinitializemessage', [
+        $this->logger->info('沙箱已start，准备sendinitializemessage', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'topic_id' => $taskStatus->topicId,
@@ -834,7 +834,7 @@ readonly class AsrSandboxService
         // get topic 实体
         $topicEntity = $this->topicDomainService->getTopicById((int) $taskStatus->topicId);
         if (! $topicEntity) {
-            $this->logger->error('ASR task关联的 topic 不存在', [
+            $this->logger->error('ASR taskassociate的 topic 不存在', [
                 'task_key' => $taskStatus->taskKey,
                 'topic_id' => $taskStatus->topicId,
             ]);
@@ -860,7 +860,7 @@ readonly class AsrSandboxService
         }
 
         // topic 没有currenttask，为 ASR 场景create一个新task
-        $this->logger->info('ASR task关联的 topic 没有currenttask，准备create新task', [
+        $this->logger->info('ASR taskassociate的 topic 没有currenttask，准备create新task', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,
             'project_id' => $taskStatus->projectId,

@@ -50,7 +50,7 @@ interface OrganizationAdminRepositoryInterface
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity;
 
     /**
-     * 撤销userorganization管理员permission.
+     * undouserorganization管理员permission.
      */
     public function revoke(DataIsolation $dataIsolation, string $userId): void;
 

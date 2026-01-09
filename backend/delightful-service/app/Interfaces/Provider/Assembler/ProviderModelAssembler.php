@@ -34,7 +34,7 @@ class ProviderModelAssembler extends AbstractProviderAssembler
     }
 
     /**
-     * 将 ProviderModelEntity 转换为 ProviderModelConfigVersionEntity.
+     * 将 ProviderModelEntity convert为 ProviderModelConfigVersionEntity.
      */
     public static function toConfigVersionEntity(ProviderModelEntity $modelEntity): ProviderModelConfigVersionEntity
     {

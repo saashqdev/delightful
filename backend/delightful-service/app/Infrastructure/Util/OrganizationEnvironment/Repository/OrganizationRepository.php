@@ -233,7 +233,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 将model映射为实体.
+     * 将modelmapping为实体.
      */
     private function mapToEntity(OrganizationModel $model): OrganizationEntity
     {

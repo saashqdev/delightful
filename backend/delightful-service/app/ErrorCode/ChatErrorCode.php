@@ -144,7 +144,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;
 
-    // 请先转让群主再退出group chat
+    // 请先转让群主再exitgroup chat
         // Transfer ownership before leaving the group
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;
@@ -169,7 +169,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.department.not_found')]
     case DEPARTMENT_NOT_FOUND = 3034;
 
-    // 登录fail
+    // loginfail
         // Login failed
     #[ErrorMessage('chat.login.failed')]
     case LOGIN_FAILED = 3035;

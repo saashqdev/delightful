@@ -21,7 +21,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $organization_code organizationencoding
  * @property null|array $permission_tag permissiontag，用于前端展示category
  * @property int $is_display 是否显示
- * @property int $status status: 0=禁用, 1=启用
+ * @property int $status status: 0=disable, 1=enable
  * @property null|string $created_uid create者userID
  * @property null|string $updated_uid update者userID
  * @property Carbon $created_at createtime
@@ -41,7 +41,7 @@ class RoleModel extends AbstractModel
     public const int STATUS_ENABLED = 1;
 
     /**
-     * 与model关联的table名.
+     * 与modelassociate的table名.
      */
     protected ?string $table = 'delightful_roles';
 
@@ -64,7 +64,7 @@ class RoleModel extends AbstractModel
     ];
 
     /**
-     * propertytype转换.
+     * propertytypeconvert.
      */
     protected array $casts = [
         'id' => 'int',
@@ -114,7 +114,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * checkrole是否启用.
+     * checkrole是否enable.
      */
     public function isEnabled(): bool
     {
@@ -122,7 +122,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 启用role.
+     * enablerole.
      */
     public function enable(): void
     {
@@ -130,7 +130,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 禁用role.
+     * disablerole.
      */
     public function disable(): void
     {

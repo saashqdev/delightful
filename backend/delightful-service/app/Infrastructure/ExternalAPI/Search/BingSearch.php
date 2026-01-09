@@ -100,7 +100,7 @@ class BingSearch
 
         while ($attempt < $maxAttempts) {
             try {
-                // 如果是retry(第二次尝试)，禁用SSLverify
+                // 如果是retry(第二次尝试)，disableSSLverify
                 if ($attempt !== 0) {
                     $clientConfig['verify'] = false;
                     $this->logger->warning('Retrying request with SSL verification disabled', [
@@ -119,7 +119,7 @@ class BingSearch
                 // getresponse体content
                 $body = $response->getBody()->getContents();
 
-                // 如果need将 JSON 转换为array或object，canuse json_decode
+                // 如果need将 JSON convert为array或object，canuse json_decode
                 // requestsuccess，returndata
                 return Json::decode($body);
             } catch (RequestException $e) {

@@ -19,12 +19,12 @@ class MCPResourceManager
     private array $resources = [];
 
     /**
-     * 注册资源.
+     * register资源.
      * when前为nullimplement.
      */
     public function registerResource(array $resource): void
     {
-        // nullimplement，暂不注册任何资源
+        // nullimplement，暂不register任何资源
     }
 
     /**

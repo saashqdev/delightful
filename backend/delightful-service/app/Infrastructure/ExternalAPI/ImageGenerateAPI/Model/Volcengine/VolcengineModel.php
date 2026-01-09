@@ -209,7 +209,7 @@ class VolcengineModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // handleresult，保持原生format
+        // handleresult，保持nativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
@@ -251,7 +251,7 @@ class VolcengineModel extends AbstractImageGenerate
             'imagequantity' => $count,
         ]);
 
-        // 从原生result中提取imageURL
+        // 从nativeresult中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $data = $result['data'];
@@ -266,7 +266,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生result.
+     * generate图像的核心逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -515,7 +515,7 @@ class VolcengineModel extends AbstractImageGenerate
                     case 'generating':
                         break;
                     case 'not_found':
-                        $this->logger->error('火山文生图：task未找到或已过期', ['taskId' => $taskId]);
+                        $this->logger->error('火山文生图：task未找到或已expire', ['taskId' => $taskId]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                         // no break
                     default:
@@ -558,7 +558,7 @@ class VolcengineModel extends AbstractImageGenerate
     private function validateVolcengineResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('火山引擎responsedataformaterror：缺少data字段');
+            throw new Exception('火山引擎responsedataformaterror：缺少datafield');
         }
 
         $data = $result['data'];
@@ -661,7 +661,7 @@ class VolcengineModel extends AbstractImageGenerate
         $imageDimensions = $this->getImageDimensions($referenceImageUrl);
 
         if (! $imageDimensions) {
-            $this->logger->warning('火山图生图：无法get参考图尺寸，跳过长宽比例校验', ['image_url' => $referenceImageUrl]);
+            $this->logger->warning('火山图生图：无法get参考图size，skip长宽比例校验', ['image_url' => $referenceImageUrl]);
             return; // Skip validation and continue execution
         }
 
@@ -674,7 +674,7 @@ class VolcengineModel extends AbstractImageGenerate
         $maxDimension = max($width, $height);
 
         if ($minDimension <= 0) {
-            $this->logger->warning('火山图生图：image尺寸invalid，跳过长宽比例校验', ['width' => $width, 'height' => $height]);
+            $this->logger->warning('火山图生图：imagesizeinvalid，skip长宽比例校验', ['width' => $width, 'height' => $height]);
             return; // Skip validation and continue execution
         }
 
@@ -713,7 +713,7 @@ class VolcengineModel extends AbstractImageGenerate
                 'height' => $imageInfo[1],
             ];
         } catch (Exception $e) {
-            $this->logger->warning('火山图生图：getimage尺寸fail', [
+            $this->logger->warning('火山图生图：getimagesizefail', [
                 'image_url' => $imageUrl,
                 'error' => $e->getMessage(),
             ]);

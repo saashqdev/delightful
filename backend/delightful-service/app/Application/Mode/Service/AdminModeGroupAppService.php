@@ -19,7 +19,7 @@ use InvalidArgumentException;
 class AdminModeGroupAppService extends AbstractModeAppService
 {
     /**
-     * according tomodeIDget分组列表 (管理后台用，contain完整i18n字段).
+     * according tomodeIDget分组列表 (管理后台用，contain完整i18nfield).
      */
     public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {
@@ -96,7 +96,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 从requestobject直接转换为实体
+            // 从requestobject直接convert为实体
             $groupEntity = AdminModeAssembler::updateModeGroupRequestToEntity($request, $groupId);
 
             $updatedGroup = $this->groupDomainService->updateGroup($dataIsolation, $groupEntity);

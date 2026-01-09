@@ -104,7 +104,7 @@ class FileParser
             return;
         }
 
-        // 如果url是本地file协议，转换为actualpath
+        // 如果url是本地file协议，convert为actualpath
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {
@@ -125,7 +125,7 @@ class FileParser
         $localFile = fopen($tempFile, 'w');
 
         if (! $fileStream || ! $localFile) {
-            ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法打开filestream');
+            ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法openfilestream');
         }
 
         // 如果filesize未知，need在download过程中控制size

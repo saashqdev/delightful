@@ -105,7 +105,7 @@ class MultiModalContentFormatter
 
         $content = $originalContent;
 
-        // 添加非imageattachment的链接
+        // 添加非imageattachment的link
         foreach ($nonImageAttachments as $attachment) {
             $url = $attachment->getUrl();
             $name = $attachment->getName();

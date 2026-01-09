@@ -80,7 +80,7 @@ if (! function_exists('is_unit_test')) {
 if (! function_exists('camelize')) {
     /**
      * 下划线转驼峰.
-     * @param string $unCamelizeWords need转换的string
+     * @param string $unCamelizeWords needconvert的string
      * @param string $separator 分隔符
      */
     function camelize(string $unCamelizeWords, string $separator = '_'): string
@@ -100,7 +100,7 @@ if (! function_exists('camelize')) {
 if (! function_exists('un_camelize')) {
     /**
      * 驼峰命名转下划线命名.
-     * @param string $camelCaps need转换的string
+     * @param string $camelCaps needconvert的string
      * @param string $separator 分隔符
      */
     function un_camelize(string $camelCaps, string $separator = '_'): string
@@ -115,7 +115,7 @@ if (! function_exists('un_camelize')) {
 if (! function_exists('string_to_hump')) {
     /**
      * 下划线转成驼峰命名,default小驼峰.
-     * @param string $string 要转换的string
+     * @param string $string 要convert的string
      * @param bool $firstUp 是否首字母大写,default否
      */
     function string_to_hump(string $string, bool $firstUp = false): string
@@ -128,7 +128,7 @@ if (! function_exists('string_to_hump')) {
 if (! function_exists('string_to_line')) {
     /**
      * 驼峰命名转下划线
-     * @param string $string 要转换的string
+     * @param string $string 要convert的string
      */
     function string_to_line(string $string, string $separator = '_'): string
     {
@@ -138,8 +138,8 @@ if (! function_exists('string_to_line')) {
 
 if (! function_exists('array_key_to_line')) {
     /**
-     * 转换arraykey成下划线
-     * @param array $array 要转换的array
+     * convertarraykey成下划线
+     * @param array $array 要convert的array
      */
     function array_key_to_line(array $array): array
     {
@@ -158,8 +158,8 @@ if (! function_exists('array_key_to_line')) {
 
 if (! function_exists('array_key_to_hump')) {
     /**
-     * 转换arraykey成驼峰.
-     * @param array $array 要转换的array
+     * convertarraykey成驼峰.
+     * @param array $array 要convert的array
      */
     function array_key_to_hump(array $array, bool $firstUp = false, bool $loop = true): array
     {

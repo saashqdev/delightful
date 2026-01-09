@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->integer('sort')->default(0)->comment('sort');
             $table->string('icon')->default('')->comment('图标');
             $table->string('organization_code')->comment('organizationencoding');
-            $table->tinyInteger('status')->default(0)->comment('status：0-未启用，1-启用');
+            $table->tinyInteger('status')->default(0)->comment('status：0-未enable，1-enable');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_service_provider_config_id');

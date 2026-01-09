@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('description', 255)->default('')->comment('MCP服务description');
             $table->string('icon', 255)->default('')->comment('MCP服务图标');
             $table->string('type', 16)->default('sse')->comment('服务type: sse或stdio');
-            $table->boolean('enabled')->default(false)->comment('是否启用: 0-禁用, 1-启用');
+            $table->boolean('enabled')->default(false)->comment('是否enable: 0-disable, 1-enable');
             $table->string('creator', 64)->default('')->comment('create者');
             $table->dateTime('created_at')->comment('creation time');
             $table->string('modifier', 64)->default('')->comment('修改者');

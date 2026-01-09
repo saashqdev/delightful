@@ -123,20 +123,20 @@ readonly class LongTermMemoryDomainService
                 // 批量query记忆
                 $memories = $this->repository->findByIds($memoryIds);
 
-                // 批量接受记忆建议：将pending_content移动到content，settingstatus为已接受，启用记忆
+                // 批量接受记忆建议：将pending_content移动到content，settingstatus为已接受，enable记忆
                 foreach ($memories as $memory) {
                     // 如果有pending_content，则将其移动到content
                     if ($memory->getPendingContent() !== null) {
-                        // 将pending_content的value复制到content字段
+                        // 将pending_content的value复制到contentfield
                         $memory->setContent($memory->getPendingContent());
-                        // 清nullpending_content字段
+                        // 清nullpending_contentfield
                         $memory->setPendingContent(null);
                     }
 
                     // settingstatus为已生效
                     $memory->setStatus(MemoryStatus::ACTIVE);
 
-                    // 启用记忆
+                    // enable记忆
                     $memory->setEnabledInternal(true);
                 }
 
@@ -523,9 +523,9 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 批量启用或禁用记忆.
+     * 批量enable或disable记忆.
      * @param array $memoryIds 记忆ID列表
-     * @param bool $enabled 启用status
+     * @param bool $enabled enablestatus
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
@@ -556,7 +556,7 @@ readonly class LongTermMemoryDomainService
                 return 0;
             }
 
-            // 如果是启用记忆，进行quantity限制check
+            // 如果是enable记忆，进行quantity限制check
             if ($enabled) {
                 $this->validateMemoryEnablementLimits($validMemoryIds, $orgId, $appId, $userId);
             }
@@ -574,7 +574,7 @@ readonly class LongTermMemoryDomainService
      */
     public function shouldMemoryBeEvicted(LongTermMemoryEntity $memory): bool
     {
-        // 过期时间check
+        // expire时间check
         if ($memory->getExpiresAt() && $memory->getExpiresAt() < new DateTime()) {
             return true;
         }
@@ -596,19 +596,19 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * validate记忆启用quantity限制.
-     * @param array $memoryIds 要启用的记忆ID列表
+     * validate记忆enablequantity限制.
+     * @param array $memoryIds 要enable的记忆ID列表
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @throws BusinessException 当启用quantity超过限制时throwexception
+     * @throws BusinessException 当enablequantity超过限制时throwexception
      */
     private function validateMemoryEnablementLimits(array $memoryIds, string $orgId, string $appId, string $userId): void
     {
-        // get要启用的记忆实体
+        // get要enable的记忆实体
         $memoriesToEnable = $this->repository->findByIds($memoryIds);
 
-        // getcurrent项目记忆和全局记忆的启用quantity
+        // getcurrent项目记忆和全局记忆的enablequantity
         $currentProjectCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::PROJECT);
         $currentGeneralCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::GENERAL);
 
@@ -617,7 +617,7 @@ readonly class LongTermMemoryDomainService
             MemoryCategory::GENERAL->value => $currentGeneralCount,
         ];
 
-        // 计算启用后各类别的quantity
+        // 计算enable后各类别的quantity
         $projectedCounts = $currentEnabledCounts;
 
         foreach ($memoriesToEnable as $memory) {
@@ -629,7 +629,7 @@ readonly class LongTermMemoryDomainService
                 $projectedCounts[$categoryKey] = 0;
             }
 
-            // 只有current未启用的记忆才will增加count
+            // 只有current未enable的记忆才will增加count
             if (! $memory->isEnabled()) {
                 ++$projectedCounts[$categoryKey];
             }

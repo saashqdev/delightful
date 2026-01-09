@@ -16,19 +16,19 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_cache', function (Blueprint $table) {
             $table->id();
-            $table->string('cache_hash', 32)->unique()->comment('cache键MD5哈希值(cache_prefix+cache_key)');
+            $table->string('cache_hash', 32)->unique()->comment('cache键MD5哈希value(cache_prefix+cache_key)');
             $table->string('cache_prefix')->comment('cache前缀');
             $table->string('cache_key')->comment('cache键名');
             $table->string('scope_tag', 10)->comment('作用域标识');
-            $table->longText('cache_value')->comment('cache值content');
+            $table->longText('cache_value')->comment('cachevaluecontent');
             $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTL秒数（0代表permanentcache）');
-            $table->timestamp('expires_at')->comment('过期时间戳');
+            $table->timestamp('expires_at')->comment('expire时间戳');
             $table->string('organization_code', 64)->comment('organization隔离');
             $table->string('created_uid', 64)->default('')->comment('create人');
             $table->string('updated_uid', 64)->default('')->comment('update人');
             $table->timestamps();
 
-            // 索引 - useMD5哈希值作为主要query索引
+            // 索引 - useMD5哈希value作为主要query索引
             $table->unique('cache_hash', 'uk_cache_hash');
             $table->index('expires_at', 'idx_expires_at');
             $table->index('organization_code', 'idx_organization_code');

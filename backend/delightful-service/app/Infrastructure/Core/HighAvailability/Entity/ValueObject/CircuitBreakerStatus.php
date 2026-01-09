@@ -30,7 +30,7 @@ enum CircuitBreakerStatus: string
     case HALF_OPEN = 'half_open';
 
     /**
-     * get所有status值array.
+     * get所有statusvaluearray.
      */
     public static function values(): array
     {
@@ -42,7 +42,7 @@ enum CircuitBreakerStatus: string
     }
 
     /**
-     * check是否是valid的status值
+     * check是否是valid的statusvalue
      */
     public static function isValid(string $status): bool
     {

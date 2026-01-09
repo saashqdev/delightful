@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ValueObject\ModelType;
 interface SubscriptionManagerInterface
 {
     /**
-     * 是否启用subscribefeature.
+     * 是否enablesubscribefeature.
      */
     public function isEnabled(): bool;
 

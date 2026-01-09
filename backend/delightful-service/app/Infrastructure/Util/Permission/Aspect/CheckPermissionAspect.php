@@ -43,7 +43,7 @@ class CheckPermissionAspect extends AbstractAspect
             return $proceedingJoinPoint->process();
         }
 
-        // getwhen前登录userauthorizationinformation
+        // getwhen前loginuserauthorizationinformation
         $authorization = RequestCoContext::getUserAuthorization();
         if ($authorization === null) {
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');

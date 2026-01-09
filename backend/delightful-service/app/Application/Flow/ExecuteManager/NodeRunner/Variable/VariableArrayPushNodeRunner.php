@@ -49,7 +49,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_array', ['var_name' => $variableName]);
         }
         $elementList = $result['element_list'];
-        // if变量值是pass表达式get的，是when做one整体
+        // if变量value是pass表达式get的，是when做one整体
         if ($inputFields->getForm()->getProperties()['element_list']->getExecuteValue()?->isExpression()) {
             $elementList = [$elementList];
         }

@@ -210,7 +210,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         )
         SELECT * FROM RankedMessages WHERE row_num <= ? ORDER BY conversation_id, seq_id DESC
 sql;
-        // generatepdo绑定
+        // generatepdobind
         $pdoBinds = implode(',', array_fill(0, count($conversationIds), '?'));
         $query = sprintf($rawSql, $pdoBinds);
         $seqList = Db::select($query, [...$conversationIds, $messagesQueryDTO->getLimit()]);

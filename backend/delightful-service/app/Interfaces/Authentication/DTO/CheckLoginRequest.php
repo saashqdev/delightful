@@ -10,7 +10,7 @@ namespace App\Interfaces\Authentication\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 登录requestDTO.
+ * loginrequestDTO.
  */
 class CheckLoginRequest extends AbstractDTO
 {
@@ -45,7 +45,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $redirect = '';
 
     /**
-     * 登录type.
+     * logintype.
      */
     protected string $type = 'email_password';
 

@@ -51,7 +51,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        // pass回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
+        // pass回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id field,这是一个不好的design,随时cancel)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
@@ -195,7 +195,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // pass回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
+        // pass回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id field,这是一个不好的design,随时cancel)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(

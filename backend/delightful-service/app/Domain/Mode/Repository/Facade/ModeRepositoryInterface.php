@@ -50,7 +50,7 @@ interface ModeRepositoryInterface
     public function isIdentifierUnique(ModeDataIsolation $dataIsolation, string $identifier, ?string $excludeId = null): bool;
 
     /**
-     * get所有启用的mode.
+     * get所有enable的mode.
      */
     public function findEnabledModes(ModeDataIsolation $dataIsolation): array;
 

@@ -116,7 +116,7 @@ class MidjourneyModel extends AbstractImageGenerate
     {
         $rawResult = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生result中提取imageURL
+        // 从nativeresult中提取imageURL
         if (! empty($rawResult['data']['images']) && is_array($rawResult['data']['images'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, $rawResult['data']['images']);
         }
@@ -133,7 +133,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 轮询taskresult并return原生data.
+     * 轮询taskresult并returnnativedata.
      * @throws Exception
      */
     protected function pollTaskResultForRaw(string $jobId): array
@@ -159,7 +159,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 ]);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接return完整的原生data
+                    // 直接return完整的nativedata
                     return $result;
                 }
 
@@ -293,7 +293,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生result.
+     * generate图像的核心逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -379,16 +379,16 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * validateMidjourney APIresponsedataformat（仅checkimages字段）.
+     * validateMidjourney APIresponsedataformat（仅checkimagesfield）.
      */
     private function validateMidjourneyResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Midjourneyresponsedataformaterror：缺少data字段');
+            throw new Exception('Midjourneyresponsedataformaterror：缺少datafield');
         }
 
         if (empty($result['data']['images']) || ! is_array($result['data']['images'])) {
-            throw new Exception('Midjourneyresponsedataformaterror：缺少images字段或images不是array');
+            throw new Exception('Midjourneyresponsedataformaterror：缺少imagesfield或images不是array');
         }
 
         if (count($result['data']['images']) === 0) {
@@ -397,14 +397,14 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Midjourneyimagedata添加到OpenAIresponseobject中（仅handleimages字段）.
+     * 将Midjourneyimagedata添加到OpenAIresponseobject中（仅handleimagesfield）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $midjourneyResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 从Midjourneyresponse中提取data.images字段
+        // 从Midjourneyresponse中提取data.imagesfield
         if (empty($midjourneyResult['data']['images']) || ! is_array($midjourneyResult['data']['images'])) {
             return;
         }

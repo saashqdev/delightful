@@ -29,7 +29,7 @@ class ProviderConfigModelsDTO extends ProviderConfigDTO
         parent::__construct($data);
     }
 
-    // ===== model相关字段的Getter/Setter =====
+    // ===== model相关field的Getter/Setter =====
 
     /**
      * @return ProviderModelDetailDTO[]
@@ -58,7 +58,7 @@ class ProviderConfigModelsDTO extends ProviderConfigDTO
 
     public function addModel(ProviderModelEntity $model): void
     {
-        // 把model转换为ProviderModelDetailDTO
+        // 把modelconvert为ProviderModelDetailDTO
         $modelDTO = new ProviderModelDetailDTO($model->toArray());
         $this->models[] = $modelDTO;
     }

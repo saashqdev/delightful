@@ -34,7 +34,7 @@ interface ModeGroupRepositoryInterface
     public function update(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity;
 
     /**
-     * getmode下启用的分组列表.
+     * getmode下enable的分组列表.
      * @return ModeGroupEntity[]
      */
     public function findEnabledByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;

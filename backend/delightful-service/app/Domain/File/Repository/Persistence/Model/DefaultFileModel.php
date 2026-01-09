@@ -31,12 +31,12 @@ class DefaultFileModel extends Model
     use SoftDeletes;
 
     /**
-     * 与model关联的表名.
+     * 与modelassociate的表名.
      */
     protected ?string $table = 'default_files';
 
     /**
-     * 可批量赋值的property.
+     * 可批量赋value的property.
      */
     protected array $fillable = [
         'id',

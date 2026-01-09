@@ -69,7 +69,7 @@ class ByteDanceSTSService
             $cachedData = $this->getCachedJwtToken($cacheKey);
 
             if ($cachedData !== null) {
-                // 计算剩余validtime
+                // 计算remainingvalidtime
                 $remainingDuration = $cachedData['expires_at'] - time();
                 $cachedData['duration'] = max(0, $remainingDuration);
 
@@ -82,7 +82,7 @@ class ByteDanceSTSService
             }
         }
 
-        // cache中没有或已过期，或者forcerefresh，getnewJWT Token
+        // cache中没有或已expire，或者forcerefresh，getnewJWT Token
         $appId = config('asr.volcengine.app_id');
         $accessToken = config('asr.volcengine.token');
 
@@ -102,7 +102,7 @@ class ByteDanceSTSService
             'delightful_id' => $delightfulId,
         ];
 
-        // cacheJWT Token，提前30秒过期以避免边界issue
+        // cacheJWT Token，提前30秒expire以避免边界issue
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
@@ -266,7 +266,7 @@ class ByteDanceSTSService
 
             $data = Json::decode($cachedData);
 
-            // check是否已过期（额外的安全check）
+            // check是否已expire（额外的安全check）
             if (isset($data['expires_at']) && $data['expires_at'] <= time()) {
                 $this->redis->del($cacheKey);
                 return null;
@@ -287,7 +287,7 @@ class ByteDanceSTSService
      *
      * @param string $cacheKey cache键
      * @param array $tokenData Tokendata
-     * @param int $expiry 过期time（秒）
+     * @param int $expiry expiretime（秒）
      */
     private function cacheJwtToken(string $cacheKey, array $tokenData, int $expiry): void
     {

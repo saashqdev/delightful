@@ -255,7 +255,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $toolSetIds = array_keys($toolSetResources);
 
-        // 再filter一下启用的工具集
+        // 再filter一下enable的工具集
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
@@ -314,7 +314,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私有工具，need有高级图像转换URIpermission才能显示
+                    // 私有工具，need有高级图像convertURIpermission才能显示
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -440,7 +440,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 修改启用status.
+     * 修改enablestatus.
      */
     #[Transactional]
     public function changeEnable(Authenticatable $authorization, string $flowId, ?bool $enable = null): void

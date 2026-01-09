@@ -21,7 +21,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 #[FlowNodeDefine(
     type: NodeType::VariableArrayShift->value,
     code: NodeType::VariableArrayShift->name,
-    name: '变量 / array头部取值',
+    name: '变量 / array头部取value',
     paramsConfig: VariableArrayShiftNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

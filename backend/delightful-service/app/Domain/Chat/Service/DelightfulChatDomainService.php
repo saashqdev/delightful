@@ -269,7 +269,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         $receiveConversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($receiveConversationDTO);
         if ($receiveConversationEntity === null) {
-            // 自动为收件人createconversation窗口,但不用触发收件人的窗口打开event
+            // 自动为收件人createconversation窗口,但不用触发收件人的窗口openevent
             $receiveConversationEntity = $this->delightfulConversationRepository->addConversation($receiveConversationDTO);
         }
         // 如果收件方已经隐藏了这个conversation窗口，改为正常
@@ -689,11 +689,11 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * 1.need先call createAndSendStreamStartSequence create一个 seq ，然后再call streamSendJsonMessage sendmessage.
-     * 2.streamsendJsonmessage,每次update json 的某个字段message。
+     * 2.streamsendJsonmessage,每次update json 的某个fieldmessage。
      * 3.use本机内存进行messagecache，提升大 json 读写performance。
      * @todo 如果要对外提供stream api，need改为 redis cache，以支持断线重连。
      *
-     *  支持一次push多个字段的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
+     *  支持一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
      *  服务端willcache所有stream的data，并在streamend时一次性push，以减少丢package的概率，提升message完整性。
      *  for example：
      *  [
@@ -1033,10 +1033,10 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         // getDTO的完整data
         $jsonStreamCachedData = $jsonStreamCachedDTO->toArray();
-        // 单独handlecontent字段
+        // 单独handlecontentfield
         $jsonContent = $jsonStreamCachedData['content'] ?? [];
 
-        // initializecontent字段
+        // initializecontentfield
         $memoryCacheContent = $memoryCache['content'] ?? [];
 
         foreach ($jsonContent as $key => $value) {
@@ -1056,10 +1056,10 @@ class DelightfulChatDomainService extends AbstractDomainService
             Arr::set($memoryCacheContent, $key, $value);
         }
 
-        // 移除content字段，避免后面重复handle
+        // 移除contentfield，避免后面重复handle
         unset($jsonStreamCachedData['content']);
 
-        // 直接update其他所有非null字段
+        // 直接update其他所有非nullfield
         foreach ($jsonStreamCachedData as $key => $value) {
             if ($value !== null) {
                 $memoryCache[$key] = $value;
@@ -1068,12 +1068,12 @@ class DelightfulChatDomainService extends AbstractDomainService
         // updatestreamdata
         $jsonStreamCachedDTO->setContent($memoryCacheContent);
         $memoryCache['content'] = $memoryCacheContent;
-        // updatecache，use更长的TTL以减少过期重建频率
-        $this->memoryDriver->set($cacheKey, $memoryCache, 600); // setting10分钟过期时间
+        // updatecache，use更长的TTL以减少expire重建频率
+        $this->memoryDriver->set($cacheKey, $memoryCache, 600); // setting10分钟expire时间
     }
 
     /**
-     * 批量get$cacheKey中的多个字段. 支持嵌套字段.
+     * 批量get$cacheKey中的多个field. 支持嵌套field.
      */
     private function getCacheStreamData(string $cacheKey): ?JsonStreamCachedDTO
     {
@@ -1099,7 +1099,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     private function handlerGroupReceiverConversation(array $groupUserConversations): void
     {
         $needUpdateIds = [];
-        // 如果conversation窗口被隐藏，那么再次打开
+        // 如果conversation窗口被隐藏，那么再次open
         foreach ($groupUserConversations as $groupUserConversation) {
             if ($groupUserConversation->getStatus() !== ConversationStatus::Normal) {
                 $needUpdateIds[] = $groupUserConversation->getId();

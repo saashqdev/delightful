@@ -418,7 +418,7 @@ class ProviderConfigDTO extends AbstractDTO
 
     public function addModel(ProviderModelEntity $model): void
     {
-        // 把model转换为ProviderModelDetailDTO
+        // 把modelconvert为ProviderModelDetailDTO
         $modelDTO = new ProviderModelDetailDTO($model->toArray());
         $this->models[] = $modelDTO;
     }

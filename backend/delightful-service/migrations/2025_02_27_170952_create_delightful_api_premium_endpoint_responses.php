@@ -27,8 +27,8 @@ return new class extends Migration {
             $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入点id');
             // requestparameterlength
             $table->integer('request_length')->nullable()->default(null)->comment('requestparameterlength');
-            // response消耗的time，单位：毫秒
-            $table->integer('response_time')->nullable()->default(null)->comment('response消耗的time，单位：毫秒');
+            // responseconsume的time，单位：毫秒
+            $table->integer('response_time')->nullable()->default(null)->comment('responseconsume的time，单位：毫秒');
             // response http status码
             $table->integer('http_status_code')->nullable()->default(null)->comment('response http status码');
             // response的业务status码

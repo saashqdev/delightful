@@ -26,14 +26,14 @@ return new class extends Migration {
             $table->string('provider', 255)->comment('提供商')->nullable();
             $table->string('name', 255)->comment('接入点name');
             $table->text('config')->comment('让user自己存一些configurationinfo')->nullable();
-            $table->tinyInteger('enabled')->default(1)->comment('是否启用: 1=启用, 0=禁用');
+            $table->tinyInteger('enabled')->default(1)->comment('是否enable: 1=enable, 0=disable');
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
                 ->comment('熔断status: closed=正常service中, open=熔断中, half_open=尝试restore中');
-            $table->string('resources', 255)->comment('资源的消耗 id list，一次request可能消耗多种资源')->nullable();
+            $table->string('resources', 255)->comment('资源的consume id list，一次request可能consume多种资源')->nullable();
             $table->datetimes();
             $table->unique(['enabled', 'type', 'provider', 'name'], 'unique_enabled_type_provider_name');
-            $table->comment('API接入点table，关联了接入点的可消耗资源info');
+            $table->comment('API接入点table，associate了接入点的可consume资源info');
         });
     }
 

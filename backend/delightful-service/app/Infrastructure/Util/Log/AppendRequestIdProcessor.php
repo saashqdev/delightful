@@ -30,7 +30,7 @@ class AppendRequestIdProcessor implements ProcessorInterface
             $requestId = CoContext::getOrSetRequestId();
             $traceId = CoContext::getTraceId();
         } catch (Throwable $e) {
-            // whencontext不可用时，usenull值
+            // whencontext不可用时，usenullvalue
             $requestId = '';
             $traceId = '';
         }

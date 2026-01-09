@@ -139,7 +139,7 @@ class GPT4oModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生result中提取imageURL
+        // 从nativeresult中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             if (! empty($result['imageUrl'])) {
@@ -275,7 +275,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 轮询taskresult，return原生dataformat.
+     * 轮询taskresult，returnnativedataformat.
      */
     #[Retry(
         maxAttempts: self::GENERATE_RETRY_COUNT,
@@ -321,7 +321,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生result.
+     * generate图像的核心逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -365,7 +365,7 @@ class GPT4oModel extends AbstractImageGenerate
         // get所有并行task的result
         $results = $parallel->wait();
 
-        // handleresult，保持原生format
+        // handleresult，保持nativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
@@ -418,7 +418,7 @@ class GPT4oModel extends AbstractImageGenerate
     private function validateGPT4oResponse(array $result): void
     {
         if (empty($result['imageUrl'])) {
-            throw new Exception('GPT4oresponsedataformaterror：缺少imageUrl字段');
+            throw new Exception('GPT4oresponsedataformaterror：缺少imageUrlfield');
         }
     }
 

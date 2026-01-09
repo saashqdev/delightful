@@ -322,7 +322,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      * 从model列表中选择最佳model（考虑服务商级联status）.
      *
      * @param ProviderModelEntity[] $models model列表
-     * @param array<int, Status> $providerStatuses 服务商status映射
+     * @param array<int, Status> $providerStatuses 服务商statusmapping
      * @return null|ProviderModelEntity 选择的最佳model，如果没有可用model则returnnull
      */
     private function selectBestModel(array $models, array $providerStatuses = []): ?ProviderModelEntity
@@ -341,17 +341,17 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // 优先选择服务商启用且model启用的model
+        // 优先选择服务商enable且modelenable的model
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // 服务商禁用，跳过该model
+            // 服务商disable，skip该model
             if ($providerStatus === Status::Disabled) {
                 continue;
             }
 
-            // 服务商启用，checkmodelstatus
+            // 服务商enable，checkmodelstatus
             if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return $model;
             }
@@ -364,7 +364,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      * according tomodel列表确定status（考虑服务商级联status）.
      *
      * @param ProviderModelEntity[] $models model列表
-     * @param array<int, Status> $providerStatuses 服务商status映射
+     * @param array<int, Status> $providerStatuses 服务商statusmapping
      * @return ModelStatus status：Normal、Disabled、Deleted
      */
     private function determineStatus(array $models, array $providerStatuses = []): ModelStatus
@@ -388,7 +388,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // 服务商启用且model启用才算正常
+            // 服务商enable且modelenable才算正常
             if ($providerStatus === Status::Enabled && $model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return ModelStatus::Normal;
             }

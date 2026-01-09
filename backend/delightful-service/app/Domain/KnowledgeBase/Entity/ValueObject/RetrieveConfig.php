@@ -50,7 +50,7 @@ class RetrieveConfig extends AbstractValueObject
     protected float $scoreThreshold = 0.5;
 
     /**
-     * 是否启用分数阈valuefilter.
+     * 是否enable分数阈valuefilter.
      */
     protected bool $scoreThresholdEnabled = false;
 
@@ -66,7 +66,7 @@ class RetrieveConfig extends AbstractValueObject
     protected string $rerankingMode = RerankMode::WEIGHTED_SCORE;
 
     /**
-     * 是否启用重sort.
+     * 是否enable重sort.
      */
     protected bool $rerankingEnable = false;
 
@@ -188,7 +188,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 是否启用分数阈valuefilter.
+     * 是否enable分数阈valuefilter.
      */
     public function isScoreThresholdEnabled(): bool
     {
@@ -196,7 +196,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set是否启用分数阈valuefilter.
+     * set是否enable分数阈valuefilter.
      */
     public function setScoreThresholdEnabled(bool $scoreThresholdEnabled): self
     {
@@ -225,7 +225,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 是否启用重sort.
+     * 是否enable重sort.
      */
     public function isRerankingEnable(): bool
     {
@@ -233,7 +233,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set是否启用重sort.
+     * set是否enable重sort.
      */
     public function setRerankingEnable(bool $rerankingEnable): self
     {
@@ -351,7 +351,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 转换为array.
+     * convert为array.
      */
     public function toArray(): array
     {

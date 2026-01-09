@@ -18,7 +18,7 @@ use Throwable;
 
 /**
  * messagepush模块.
- * according togenerate的seq以及它的优先级,用长连接push给user.
+ * according togenerate的seq以及它的优先级,用长connectpush给user.
  * 每个seq可能要推给user的1到几十个客户端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
@@ -26,7 +26,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     protected AmqpTopicType $topic = AmqpTopicType::Seq;
 
     /**
-     * 1.本地开发时不启动,避免消费了test环境的data,导致test环境的user收不到message
+     * 1.本地开发时不start,避免消费了test环境的data,导致test环境的user收不到message
      * 2.如果本地开发时想debug,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
      */
     public function isEnable(): bool
@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessage质量保证模块,如果是service器stress大导致的fail,则放入delayretryqueue,并指数级延长retrytime间隔
+            // todo callmessagequality保证模块,如果是service器stress大导致的fail,则放入delayretryqueue,并指数级延长retrytime间隔
             return Result::REQUEUE;
         }
         return Result::ACK;

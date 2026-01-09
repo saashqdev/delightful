@@ -19,8 +19,8 @@ class CreateDelightfulApiOrganizationConfigTable extends Migration
         Schema::create('delightful_api_organization_configs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code')->comment('organizationencoding');
-            $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度');
-            $table->unsignedDecimal('use_amount', 40, 6)->comment('use额度')->default(0);
+            $table->unsignedDecimal('total_amount', 40, 6)->comment('总quota');
+            $table->unsignedDecimal('use_amount', 40, 6)->comment('usequota')->default(0);
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('create时间');
             $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
             $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();

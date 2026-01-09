@@ -135,7 +135,7 @@ class FileAppService extends AbstractAppService
             $keysByOrg[$keyOrganizationCode][] = $key;
         }
 
-        // 批量get各organization的file链接
+        // 批量get各organization的filelink
         $allFileLinks = [];
         foreach ($keysByOrg as $orgCode => $orgKeys) {
             $links = $this->fileDomainService->getLinks($orgCode, $orgKeys);
@@ -164,7 +164,7 @@ class FileAppService extends AbstractAppService
         // checkfile是否已经存在于该业务type下
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
-            // 如果file已存在，直接returnfile链接
+            // 如果file已存在，直接returnfilelink
             return $this->fileDomainService->getLink($organizationCode, $fileKey)->getUrl();
         }
 

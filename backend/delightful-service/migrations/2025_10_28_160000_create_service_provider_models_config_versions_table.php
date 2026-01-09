@@ -20,7 +20,7 @@ return new class extends Migration {
 
         Schema::create('service_provider_models_config_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('service_provider_model_id')->comment('modelID，关联service_provider_models.id');
+            $table->unsignedBigInteger('service_provider_model_id')->comment('modelID，associateservice_provider_models.id');
 
             $table->decimal('creativity', 3, 2)->default(0.5)->comment('创造力parameter');
             $table->integer('max_tokens')->nullable()->comment('最大token数');

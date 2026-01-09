@@ -23,7 +23,7 @@ class CreateTaskSchedulerCrontab extends Migration
             $table->string('name', 64)->comment('name');
             $table->string('crontab', 64)->comment('crontab表达式');
             $table->dateTime('last_gen_time')->nullable()->comment('最后generate时间');
-            $table->boolean('enabled')->default(true)->comment('是否启用');
+            $table->boolean('enabled')->default(true)->comment('是否enable');
             $table->integer('retry_times')->default(0)->comment('总retry次数');
             $table->json('callback_method')->comment('callbackmethod');
             $table->json('callback_params')->comment('callbackparameter');

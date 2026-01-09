@@ -21,7 +21,7 @@ class DelightfulAILocalModelTest extends TestCase
     {
         parent::setUp();
 
-        // initialize启动
+        // initializestart
         make(OfficialAppTokenCheckSubscriber::class)->process(new class {});
     }
 

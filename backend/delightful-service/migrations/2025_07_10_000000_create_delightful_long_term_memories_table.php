@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->text('origin_text')->nullable()->comment('original文本content');
             $table->string('memory_type', 50)->default('manual_input')->comment('记忆type');
             $table->string('status', 20)->default('pending')->comment('记忆status：pending-待接受, active-已生效, pending_revision-待修订');
-            $table->tinyInteger('enabled')->default(0)->comment('是否启用：0-禁用，1-启用（仅 active status的记忆canset）');
+            $table->tinyInteger('enabled')->default(0)->comment('是否enable：0-disable，1-enable（仅 active status的记忆canset）');
             $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('置信度(0-1)');
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重要性(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('access次数');
@@ -36,7 +36,7 @@ return new class extends Migration {
             $table->string('user_id', 36)->comment('userID');
             $table->timestamp('last_accessed_at')->nullable()->comment('最后accesstime');
             $table->timestamp('last_reinforced_at')->nullable()->comment('最后强化time');
-            $table->timestamp('expires_at')->nullable()->comment('过期time');
+            $table->timestamp('expires_at')->nullable()->comment('expiretime');
             $table->timestamp('created_at')->useCurrent()->comment('createtime');
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('updatetime');
             $table->softDeletes()->comment('deletetime');

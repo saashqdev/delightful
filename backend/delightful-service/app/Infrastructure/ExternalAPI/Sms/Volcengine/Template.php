@@ -33,11 +33,11 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的verify码是：${verification_code}，valid期 ${timeout} 分钟。请在page中inputverify码completeverify。如非本人操作，请忽略。',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的verify码是：${verification_code}，valid期 ${timeout} 分钟。请在page中inputverify码completeverify。如非本人操作，请ignore。',
     ];
 
     /**
-     * 短messagetemplateId与message组的映射.
+     * 短messagetemplateId与message组的mapping.
      */
     protected array $templateToGroupIdMap = [
         self::DEFAULT_MESSAGE_GROUP_ID => [

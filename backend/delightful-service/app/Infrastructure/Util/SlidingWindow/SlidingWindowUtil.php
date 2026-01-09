@@ -40,7 +40,7 @@ class SlidingWindowUtil
         float $delayVerificationSeconds = 0.5
     ): bool {
         $uniqueRequestId = uniqid('req_', true) . '_' . getmypid();
-        // 键的过期time应greater thandelayverifytime，以作为安全保障
+        // 键的expiretime应greater thandelayverifytime，以作为安全保障
         $totalExpirationSeconds = (int) ceil($delayVerificationSeconds) + 1;
         $latestRequestRedisKey = $debounceKey . ':last_req';
 

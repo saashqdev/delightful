@@ -59,7 +59,7 @@ class ProviderModelSyncAppService
         $provider = $this->providerConfigDomainService->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
 
         if (! $provider || $provider->getProviderCode() !== ProviderCode::Official) {
-            $this->logger->debug('不是Officialservice商，跳过sync', [
+            $this->logger->debug('不是Officialservice商，skipsync', [
                 'config_id' => $providerConfigEntity->getId(),
                 'provider_code' => $provider?->getProviderCode()->value,
             ]);
@@ -76,7 +76,7 @@ class ProviderModelSyncAppService
             // 3. parseconfiguration
             $config = $providerConfigEntity->getConfig();
             if (! $config) {
-                $this->logger->warning('configuration为空，跳过sync', [
+                $this->logger->warning('configuration为空，skipsync', [
                     'config_id' => $providerConfigEntity->getId(),
                 ]);
                 return;
@@ -223,7 +223,7 @@ class ProviderModelSyncAppService
         // get现有的所有model
         $existingModels = $this->providerModelDomainService->getByProviderConfigId($dataIsolation, (string) $configId);
 
-        // 建立model_id -> entity的映射
+        // 建立model_id -> entity的mapping
         $existingModelMap = [];
         foreach ($existingModels as $model) {
             $existingModelMap[$model->getModelId()] = $model;
@@ -252,7 +252,7 @@ class ProviderModelSyncAppService
                     'model_id' => $modelId,
                     'error' => $e->getMessage(),
                 ]);
-                // 继续process其他model
+                // continueprocess其他model
             }
         }
 
@@ -261,7 +261,7 @@ class ProviderModelSyncAppService
             if (! in_array($modelId, $newModelIds)) {
                 try {
                     $this->providerModelDomainService->deleteById($dataIsolation, (string) $existingModel->getId());
-                    $this->logger->info('delete过期model', [
+                    $this->logger->info('deleteexpiremodel', [
                         'model_id' => $modelId,
                         'entity_id' => $existingModel->getId(),
                     ]);
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // 如果是一个链接，那么need对 url 进行限制
+        // 如果是一个link，那么need对 url 进行限制
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);
@@ -374,7 +374,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * buildmodelAPI链接.
+     * buildmodelAPIlink.
      */
     private function buildModelsApiUrl(string $baseUrl): string
     {

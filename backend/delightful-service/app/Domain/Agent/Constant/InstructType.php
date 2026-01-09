@@ -314,12 +314,12 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_text_required');
         }
 
-        // verify文本颜色
+        // verify文本color
         if (! isset($item['text_color'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_required');
         }
 
-        // use TextColor 枚举verify颜色value
+        // use TextColor 枚举verifycolorvalue
         if (! TextColor::isValid($item['text_color'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_invalid');
         }

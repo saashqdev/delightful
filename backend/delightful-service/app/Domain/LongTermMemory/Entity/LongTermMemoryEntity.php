@@ -299,8 +299,8 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 内部set启用status（不进行业务规则check）.
-     * 用于datainitialize和内部操作，跳过业务规则限制.
+     * 内部setenablestatus（不进行业务规则check）.
+     * 用于datainitialize和内部操作，skip业务规则限制.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -445,7 +445,7 @@ final class LongTermMemoryEntity extends AbstractEntity
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled field在initialize时use内部method，跳过业务规则check
+        // enabled field在initialize时use内部method，skip业务规则check
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;

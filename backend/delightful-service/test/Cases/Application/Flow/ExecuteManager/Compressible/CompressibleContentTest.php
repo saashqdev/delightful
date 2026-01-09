@@ -45,10 +45,10 @@ class CompressibleContentTest extends ExecuteManagerBaseTest
         $compressibleContent = '![向日葵download](cp_678f7584c980a) ![image](cp_678f7584c9801)';
 
         $id = 'compressible_content_cp_678f7584c980a';
-        di(CacheInterface::class)->set($id, 'compress的链接1', 60);
+        di(CacheInterface::class)->set($id, 'compress的link1', 60);
         $id = 'compressible_content_cp_678f7584c9801';
-        di(CacheInterface::class)->set($id, 'compress的链接2', 60);
+        di(CacheInterface::class)->set($id, 'compress的link2', 60);
 
-        $this->assertEquals('![向日葵download](compress的链接1) ![image](compress的链接2)', CompressibleContent::deCompress($compressibleContent));
+        $this->assertEquals('![向日葵download](compress的link1) ![image](compress的link2)', CompressibleContent::deCompress($compressibleContent));
     }
 }

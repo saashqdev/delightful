@@ -201,7 +201,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             }
 
             foreach ($group['items'] as &$item) {
-                // 跳过系统指令process
+                // skip系统指令process
                 if (isset($item['display_type']) && (int) $item['display_type'] === InstructDisplayType::SYSTEM) {
                     continue;
                 }

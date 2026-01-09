@@ -95,7 +95,7 @@ class OrganizationAdminDomainService
      */
     public function destroy(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): void
     {
-        // 在deleteorganization管理员record之前，先移除其在permission系统中的 role_user 关联
+        // 在deleteorganization管理员record之前，先移除其在permission系统中的 role_user associate
         try {
             // createpermission隔离object，用于操作roleservice
             $permissionIsolation = PermissionDataIsolation::create(
@@ -171,7 +171,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 撤销userorganization管理员permission.
+     * undouserorganization管理员permission.
      */
     public function revoke(DataIsolation $dataIsolation, string $userId): void
     {

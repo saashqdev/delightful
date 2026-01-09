@@ -33,14 +33,14 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $id = '';
 
     /**
-     * user注册后generate的delightful_id,全局唯一
+     * userregister后generate的delightful_id,全局唯一
      */
     protected string $delightfulId = '';
 
     protected UserType $userType;
 
     /**
-     * user在该organization下的status:0:冻结,1:activated,2:已离职,3:已退出.
+     * user在该organization下的status:0:freeze,1:activated,2:已离职,3:已exit.
      */
     protected string $status;
 
@@ -107,7 +107,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             $delightfulUserId = $beDelightfulAgentUserId;
             $delightfulEnvEntity = null;
             $loginResponseDTO = null;
-            // 直接登录
+            // 直接login
             goto create_user;
         }
 
@@ -116,7 +116,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
             if ($delightfulEnvEntity === null) {
-                // token没有绑定环境，且没有default环境configuration
+                // token没有bind环境，且没有default环境configuration
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }

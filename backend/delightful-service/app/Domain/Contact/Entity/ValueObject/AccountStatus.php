@@ -12,7 +12,7 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum AccountStatus: int
 {
-    // 禁用
+    // disable
     case Disable = 0;
 
     // 正常

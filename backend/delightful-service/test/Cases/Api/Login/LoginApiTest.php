@@ -12,18 +12,18 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 
 /**
  * @internal
- * user登录sessionAPItest
+ * userloginsessionAPItest
  */
 class LoginApiTest extends AbstractHttpTest
 {
     public const string API = '/api/v1/sessions';
 
     /**
-     * test手机号密码登录.
+     * test手机号密码login.
      */
     public function testPhonePasswordLogin(): string
     {
-        // 构造requestparameter - 手机号密码登录
+        // 构造requestparameter - 手机号密码login
         $requestData = [
             'state_code' => '+86',
             'phone' => '13812345678', // test环境中不存在的账号

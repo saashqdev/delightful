@@ -49,12 +49,12 @@ class EndpointRequestDTO extends AbstractDTO
     protected LoadBalancingType $balancingType = LoadBalancingType::RANDOM;
 
     /**
-     * 统计级别.
+     * statistics级别.
      */
     protected StatisticsLevel $statisticsLevel = StatisticsLevel::LEVEL_MINUTE;
 
     /**
-     * 统计timerange（分钟）.
+     * statisticstimerange（分钟）.
      */
     protected int $timeRange = 30;
 

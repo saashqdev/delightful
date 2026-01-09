@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 修改表结构，添加新字段
+        // 修改表结构，添加新field
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // check是否已存在字段，避免重复添加
+            // check是否已存在field，避免重复添加
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'version')) {
                 $table->unsignedInteger('version')->default(1)->comment('version number');
             }
@@ -54,7 +54,7 @@ return new class extends Migration {
                 $table->index(['document_code'], 'knowledge_base_fragments_document_code_index');
             }
 
-            // check是否已存在字段，避免重复delete
+            // check是否已存在field，避免重复delete
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'version')) {
                 $table->dropColumn('version');
             }

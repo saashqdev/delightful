@@ -324,8 +324,8 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertIsArray($response['data']);
 
         // validateresponse结构
-        $this->assertArrayHasKey('list', $response['data'], 'response应containlist字段');
-        $this->assertArrayHasKey('total', $response['data'], 'response应containtotal字段');
+        $this->assertArrayHasKey('list', $response['data'], 'response应containlistfield');
+        $this->assertArrayHasKey('total', $response['data'], 'response应containtotalfield');
         if (! is_null($count)) {
             $this->assertEquals(0, count($response['data']['list']));
         } else {
@@ -360,8 +360,8 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertIsArray($response['data']);
 
         // validateresponse结构
-        $this->assertArrayHasKey('list', $response['data'], 'response应containlist字段');
-        $this->assertArrayHasKey('total', $response['data'], 'response应containtotal字段');
+        $this->assertArrayHasKey('list', $response['data'], 'response应containlistfield');
+        $this->assertArrayHasKey('total', $response['data'], 'response应containtotalfield');
         if (! is_null($count)) {
             $this->assertEquals($count, count($response['data']['list']));
         } else {
@@ -725,13 +725,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // validateresponse结构contain置顶相关字段
-        $this->assertArrayHasKey('list', $response['data'], 'response应containlist字段');
-        $this->assertArrayHasKey('total', $response['data'], 'response应containtotal字段');
+        // validateresponse结构contain置顶相关field
+        $this->assertArrayHasKey('list', $response['data'], 'response应containlistfield');
+        $this->assertArrayHasKey('total', $response['data'], 'response应containtotalfield');
 
         if (! empty($response['data']['list'])) {
             $project = $response['data']['list'][0];
-            $this->assertArrayHasKey('is_pinned', $project, '项目应containis_pinned字段');
+            $this->assertArrayHasKey('is_pinned', $project, '项目应containis_pinnedfield');
             $this->assertIsBool($project['is_pinned'], 'is_pinnedshould是booleanvalue');
         }
 
@@ -881,18 +881,18 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // validatecreate者data结构
         $creator = $response['data'][0];
-        $this->assertArrayHasKey('id', $creator, 'create者应containid字段');
-        $this->assertArrayHasKey('name', $creator, 'create者应containname字段');
-        $this->assertArrayHasKey('user_id', $creator, 'create者应containuser_id字段');
-        $this->assertArrayHasKey('avatar_url', $creator, 'create者应containavatar_url字段');
+        $this->assertArrayHasKey('id', $creator, 'create者应containidfield');
+        $this->assertArrayHasKey('name', $creator, 'create者应containnamefield');
+        $this->assertArrayHasKey('user_id', $creator, 'create者应containuser_idfield');
+        $this->assertArrayHasKey('avatar_url', $creator, 'create者应containavatar_urlfield');
 
-        // validate字段type
+        // validatefieldtype
         $this->assertIsString($creator['id'], 'idshould是string');
         $this->assertIsString($creator['name'], 'nameshould是string');
         $this->assertIsString($creator['user_id'], 'user_idshould是string');
         $this->assertIsString($creator['avatar_url'], 'avatar_urlshould是string');
 
-        // validate必填字段不为null
+        // validate必填field不为null
         $this->assertNotEmpty($creator['id'], 'id不should为null');
         $this->assertNotEmpty($creator['user_id'], 'user_id不should为null');
     }

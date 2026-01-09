@@ -516,8 +516,8 @@ readonly class AdminProviderAppService
     {
         // 收集所有图标path和对应的organizationencoding
         $iconsByOrg = [];
-        $providerIconMap = [];  // provider图标映射
-        $modelIconMap = [];     // model图标映射
+        $providerIconMap = [];  // provider图标mapping
+        $modelIconMap = [];     // model图标mapping
 
         // handle provider 图标
         $providerIcon = $providerDTO->getIcon();
@@ -549,7 +549,7 @@ readonly class AdminProviderAppService
                 }
                 $iconsByOrg[$organizationCode][] = $icon;
 
-                // record图标到model的映射关系
+                // record图标到model的mapping关系
                 if (! isset($modelIconMap[$icon])) {
                     $modelIconMap[$icon] = [];
                 }
@@ -608,7 +608,7 @@ readonly class AdminProviderAppService
         }
         $proxyModelRequest->setModel($modelPrimaryId);
         $proxyModelRequest->setInput('test');
-        $proxyModelRequest->setEnableHighAvailability(false); // 连通性test时不启用高可用
+        $proxyModelRequest->setEnableHighAvailability(false); // 连通性test时不enable高可用
         $proxyModelRequest->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -635,7 +635,7 @@ readonly class AdminProviderAppService
         }
         $completionDTO->setMessages([['role' => 'user', 'content' => '你好']]);
         $completionDTO->setModel($modelPrimaryId);
-        $completionDTO->setEnableHighAvailability(false); // 连通性test时不启用高可用
+        $completionDTO->setEnableHighAvailability(false); // 连通性test时不enable高可用
         $completionDTO->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -668,14 +668,14 @@ readonly class AdminProviderAppService
             $icons[] = $serviceProvider->getIcon();
         }
 
-        // 批量get所有图标的链接
+        // 批量get所有图标的link
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
         // 只handle图标URL，直接return实体object
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 
-            // 如果有URL映射，use映射的URL
+            // 如果有URLmapping，usemapping的URL
             if (isset($iconUrlMap[$icon])) {
                 $serviceProvider->setIcon($iconUrlMap[$icon]->getUrl());
             }

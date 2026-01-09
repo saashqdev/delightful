@@ -21,7 +21,7 @@ class DepartmentQueryDTO extends AbstractEntity
     protected array $departmentIds = [];
 
     /**
-     * 下一页的token, 用于pagination. 暂时值为mysql的offset,后续可能为es的scroll_id,or自行implementsnapshot机制.
+     * 下一页的token, 用于pagination. 暂时value为mysql的offset,后续可能为es的scroll_id,or自行implementsnapshot机制.
      */
     protected string $pageToken = '';
 

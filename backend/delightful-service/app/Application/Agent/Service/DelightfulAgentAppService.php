@@ -292,7 +292,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $organizationCode = $authorization->getOrganizationCode();
         $currentUserId = $authorization->getId();
 
-        // get启用的assistantversion列表
+        // getenable的assistantversion列表
         $agentVersions = $this->getEnabledAgentVersions($organizationCode, $page, $pageSize, $agentName);
         if (empty($agentVersions)) {
             return $this->getEmptyPageResult($page, $pageSize);
@@ -351,10 +351,10 @@ class DelightfulAgentAppService extends AbstractAppService
         /** @var DelightfulAgentEntity[] $agentEntities */
         $agentEntities = $fullData['list'];
 
-        // getassistantconversation映射
+        // getassistantconversationmapping
         [$flowCodeToUserIdMap, $conversationMap] = $this->getAgentConversationMapping($agentEntities, $authorization);
 
-        // 批量getavatar链接
+        // 批量getavatarlink
         $avatarUrlMap = $this->batchGetAvatarUrls($agentEntities, $authorization);
 
         // convert为arrayformat并添加conversationID
@@ -362,13 +362,13 @@ class DelightfulAgentAppService extends AbstractAppService
         foreach ($agentEntities as $agent) {
             $agentData = $agent->toArray();
 
-            // 添加 agent_id 字段，value同 id
+            // 添加 agent_id field，value同 id
             $agentData['agent_id'] = $agentData['id'];
 
             // 添加是否为官方organization标识
             $agentData['is_office'] = OfficialOrganizationUtil::isOfficialOrganization($agent->getOrganizationCode());
 
-            // handleavatar链接
+            // handleavatarlink
             $agentData['agent_avatar'] = $avatarUrlMap[$agent->getAgentAvatar()] ?? null;
             $agentData['robot_avatar'] = $agentData['agent_avatar'];
 
@@ -396,7 +396,7 @@ class DelightfulAgentAppService extends AbstractAppService
     // getapplication市场assistant
     public function getAgentsFromMarketplacePage(int $page, int $pageSize): array
     {
-        // 查出启用的assistant
+        // 查出enable的assistant
         $agents = $this->delightfulAgentDomainService->getEnabledAgents();
         // use array_column 提取 agent_version_id
         $agentIds = array_column($agents, 'agent_version_id');
@@ -445,13 +445,13 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $isAddFriend = $agent->getAgentVersionId() === null;
 
-        // 如果assistantstatus是禁用则不可publish
+        // 如果assistantstatus是disable则不可publish
         if ($agent->getStatus() === DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_status_disabled_cannot_publish');
         }
         $delightfulAgentVersionEntity = $this->buildAgentVersion($agent, $agentVersionDTO);
 
-        // publish最新连接stream
+        // publish最新connectstream
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
         if ($publishDelightfulFlowEntity && ! $publishDelightfulFlowEntity->shouldCreate()) {
             $publishDelightfulFlowEntity->setCode($agent->getFlowCode());
@@ -738,7 +738,7 @@ class DelightfulAgentAppService extends AbstractAppService
         foreach ($defaultConversationAICodes as $aiCode) {
             $aiUserEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, $aiCode);
             $agentName = $aiUserEntity?->getNickname();
-            // 判断conversation是否已经initialize，如果已initialize则跳过
+            // 判断conversation是否已经initialize，如果已initialize则skip
             if ($this->delightfulAgentDomainService->isDefaultAssistantConversationExist($userEntity->getUserId(), $aiCode)) {
                 continue;
             }
@@ -871,7 +871,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * 为新注册的organizationcreate人initialize一个Chat.
+     * 为新register的organizationcreate人initialize一个Chat.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -899,7 +899,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * 为新注册的organizationcreate人initialize一个文生图Agent.
+     * 为新register的organizationcreate人initialize一个文生图Agent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -928,7 +928,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * 为新注册的organizationcreate人initialize一个文档parseAgent.
+     * 为新register的organizationcreate人initialize一个文档parseAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -1029,12 +1029,12 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * get启用的assistantversion列表.
+     * getenable的assistantversion列表.
      * optimize：直接在领域服务层进行JOINquery，避免传入过多ID.
      */
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
-        // 直接call领域服务get该organization下启用的assistantversion，避免先get所有ID再query
+        // 直接call领域服务get该organization下enable的assistantversion，避免先get所有ID再query
         return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
     }
 
@@ -1156,7 +1156,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function enrichAgentAvatarAndFriendStatus(array &$agentVersions, DelightfulUserAuthorization $authorization): void
     {
-        // 批量收集needget链接的filepath和flow_code
+        // 批量收集needgetlink的filepath和flow_code
         $avatarPaths = [];
         $flowCodes = [];
         foreach ($agentVersions as $agent) {
@@ -1166,7 +1166,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $flowCodes[] = $agent['flow_code'];
         }
 
-        // 批量getavatar链接，避免循环callgetLink
+        // 批量getavatarlink，避免循环callgetLink
         $fileLinks = [];
         if (! empty($avatarPaths)) {
             $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), array_unique($avatarPaths));
@@ -1261,7 +1261,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return $instructs;
         }
 
-        // get所有image的链接
+        // get所有image的link
         $fileLinks = $this->fileDomainService->getLinks($organizationCode, array_unique($imagePaths));
         $imageUrlMap = [];
         foreach ($fileLinks as $fileLink) {
@@ -1376,7 +1376,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getassistantconversation映射.
+     * getassistantconversationmapping.
      *
      * @param DelightfulAgentEntity[] $agentEntities assistant实体array
      * @param DelightfulUserAuthorization $authorization userauthorizationobject
@@ -1434,7 +1434,7 @@ class DelightfulAgentAppService extends AbstractAppService
      *
      * @param DelightfulAgentEntity[] $agentEntities assistant实体array
      * @param DelightfulUserAuthorization $authorization userauthorizationobject
-     * @return array avatarpath到URL的映射
+     * @return array avatarpath到URL的mapping
      */
     private function batchGetAvatarUrls(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {
@@ -1443,7 +1443,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $avatarUrlMap = [];
 
-        // 批量get官方organization的avatar链接
+        // 批量get官方organization的avatarlink
         if (! empty($officialAgents) && OfficialOrganizationUtil::hasOfficialOrganization()) {
             $officialAvatars = array_filter(array_map(static fn ($agent) => $agent->getAgentAvatar(), $officialAgents));
             if (! empty($officialAvatars)) {
@@ -1458,7 +1458,7 @@ class DelightfulAgentAppService extends AbstractAppService
             }
         }
 
-        // 批量getuserorganization的avatar链接
+        // 批量getuserorganization的avatarlink
         if (! empty($userOrgAgents)) {
             $userOrgAvatars = array_filter(array_map(static fn ($agent) => $agent->getAgentAvatar(), $userOrgAgents));
             if (! empty($userOrgAvatars)) {

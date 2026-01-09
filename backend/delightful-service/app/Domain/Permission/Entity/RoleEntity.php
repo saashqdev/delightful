@@ -30,7 +30,7 @@ class RoleEntity extends AbstractEntity
      */
     protected int $isDisplay = 1;
 
-    protected int $status = 1; // status: 0=禁用, 1=启用
+    protected int $status = 1; // status: 0=disable, 1=enable
 
     protected ?string $createdUid = null;
 
@@ -41,12 +41,12 @@ class RoleEntity extends AbstractEntity
     protected ?DateTime $updatedAt = null;
 
     /**
-     * role关联的permission键列表.
+     * roleassociate的permission键列表.
      */
     protected array $permissions = [];
 
     /**
-     * role关联的userID列表.
+     * roleassociate的userID列表.
      */
     protected array $userIds = [];
 

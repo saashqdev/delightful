@@ -186,7 +186,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // 群主不能退出group chat,need先转移群主身份
+        // 群主不能exitgroup chat,need先转移群主身份
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);
@@ -200,7 +200,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
                 return $this->noticeGroupChangeSeq($seqEntity);
             }
         }
-        // 退出group chat
+        // exitgroup chat
         $userSeq = $this->groupRemoveUsers($dataIsolation, $groupEntity, $userIds, $controlMessageType);
         return $this->noticeGroupChangeSeq($userSeq);
     }

@@ -65,7 +65,7 @@ class VariableArrayPushNodeRunnerTest extends ExecuteManagerBaseTest
                         "type": "string",
                         "key": "element_list",
                         "sort": 1,
-                        "title": "值",
+                        "title": "value",
                         "description": "",
                         "required": null,
                         "value": {

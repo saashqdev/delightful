@@ -79,7 +79,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         }
 
         // 4. 没有找到configuration，buildtemplatedata的 ProviderConfigDTO
-        // 如果指定了status且不是启用status，则不returntemplatedata
+        // 如果指定了status且不是enablestatus，则不returntemplatedata
         if ($status !== null && $status !== Status::Enabled) {
             return null;
         }
@@ -111,7 +111,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * according toorganizationencoding和类别get Delightful 服务商启用中的model列表.
+     * according toorganizationencoding和类别get Delightful 服务商enable中的model列表.
      *
      * @param string $organizationCode organizationencoding
      * @param null|Category $category 服务商类别，为null时return所有categorymodel
@@ -122,7 +122,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return [];
         }
-        // data集 A：get官方organization下所有启用的model（containconfigurationfilter）
+        // data集 A：get官方organization下所有enable的model（containconfigurationfilter）
         $officialModels = $this->getOfficialEnabledModels($category);
 
         // 如果没有官方model，直接returnnullarray
@@ -148,7 +148,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $configResult = Db::select($configBuilder->toSql(), $configBuilder->getBindings());
         $modelEntities = ProviderModelAssembler::toEntities($configResult);
 
-        // createconfigurationmodel的映射表，以 model_parent_id 为 key
+        // createconfigurationmodel的mapping表，以 model_parent_id 为 key
         $modelMap = [];
         foreach ($modelEntities as $modelEntity) {
             if ($modelEntity->getModelParentId()) {
@@ -156,7 +156,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             }
         }
 
-        // 如果configurationmodel映射为null，直接return官方model列表
+        // 如果configurationmodelmapping为null，直接return官方model列表
         if (empty($modelMap)) {
             $finalModels = $officialModels;
         } else {
@@ -236,7 +236,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         }
 
         try {
-            // 1. check官方model是否被官方禁用
+            // 1. check官方model是否被官方disable
             if ($this->isOfficiallyDisabled($officialModel)) {
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelOfficiallyDisabled);
             }
@@ -260,7 +260,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * get官方organization下所有启用的model（containconfigurationfilter）.
+     * get官方organization下所有enable的model（containconfigurationfilter）.
      *
      * @param null|Category $category 服务商类别，为null时return所有categorymodel
      * @return array<ProviderModelEntity> filter后的官方model列表
@@ -270,7 +270,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         // get官方organizationencoding
         $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-        // 1. 先query官方organization下启用的服务商configurationID
+        // 1. 先query官方organization下enable的服务商configurationID
         $enabledConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $officialOrganizationCode)
             ->where('status', Status::Enabled->value)
@@ -278,7 +278,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $enabledConfigIds = Db::select($enabledConfigQuery->toSql(), $enabledConfigQuery->getBindings());
         $enabledConfigIdArray = array_column($enabledConfigIds, 'id');
 
-        // 2. use启用的configurationIDquery官方organization的启用model
+        // 2. useenable的configurationIDquery官方organization的enablemodel
         if (! empty($enabledConfigIdArray)) {
             $officialBuilder = $this->createProviderModelQuery()
                 ->where('organization_code', $officialOrganizationCode)
@@ -330,7 +330,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * check官方model是否被官方禁用.
+     * check官方model是否被官方disable.
      */
     private function isOfficiallyDisabled(ProviderModelEntity $officialModel): bool
     {
@@ -362,7 +362,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): ProviderModelEntity {
-        // create新modelrecord(避免新增字段导致复制报错，直接全量 copy 然后 set 新value)
+        // create新modelrecord(避免新增field导致复制报错，直接全量 copy 然后 set 新value)
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());

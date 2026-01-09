@@ -67,7 +67,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * get过期的待清理record.
+     * getexpire的待清理record.
      */
     public function getExpiredRecords(int $limit = 50): array
     {
@@ -171,7 +171,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * get清理统计data.
+     * get清理statisticsdata.
      */
     public function getCleanupStats(?string $sourceType = null): array
     {
@@ -223,7 +223,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 将Model转换为Entity.
+     * 将Modelconvert为Entity.
      */
     private function modelToEntity(FileCleanupRecordModel $model): FileCleanupRecordEntity
     {
@@ -247,7 +247,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 将多个Model转换为Entityarray.
+     * 将多个Modelconvert为Entityarray.
      */
     private function modelsToEntities(Collection $models): array
     {

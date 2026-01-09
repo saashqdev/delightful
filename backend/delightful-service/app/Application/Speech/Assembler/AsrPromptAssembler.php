@@ -58,7 +58,7 @@ usersubmit了一段录音content，录音content经过voice识别转为文字，
 
 ### format要求
 1. **length限制**：不超过 20 个字符（汉字按 1 个字符计算）
-2. **语言风格**：use陈述性语句，避免疑问句
+2. **语言style**：use陈述性语句，避免疑问句
 3. **简洁明确**：直接概括核心theme，不要添加修饰词
 4. **纯文本output**：只outputtitlecontent，不要添加任何标点符号、引号或其他修饰
 
@@ -115,7 +115,7 @@ usersend的originalmessage如下：
 
 ### format要求
 1. **length限制**：不超过 20 个字符（汉字按 1 个字符计算）
-2. **语言风格**：use陈述性语句，避免疑问句
+2. **语言style**：use陈述性语句，避免疑问句
 3. **简洁明确**：直接概括核心theme，不要添加修饰词
 4. **纯文本output**：只outputtitlecontent，不要添加任何标点符号、引号或其他修饰
 

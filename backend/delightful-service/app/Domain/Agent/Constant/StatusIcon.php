@@ -110,7 +110,7 @@ enum StatusIcon: string
     }
 
     /**
-     * verify图标值是否valid.
+     * verify图标value是否valid.
      */
     public static function isValid(string $icon): bool
     {
@@ -162,8 +162,8 @@ enum StatusIcon: string
     }
 
     /**
-     * get所有可用的图标值.
-     * @return array<string> return所有图标值
+     * get所有可用的图标value.
+     * @return array<string> return所有图标value
      */
     public static function getValues(): array
     {

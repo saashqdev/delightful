@@ -20,7 +20,7 @@ return new class extends Migration {
 
             // 元data
             $table->string('knowledge_base_code', 255);
-            $table->string('knowledge_base_document_code', 255)->comment('关联knowledge basedocumentcode');
+            $table->string('knowledge_base_document_code', 255)->comment('associateknowledge basedocumentcode');
             $table->string('organization_code')->comment('organizationencoding');
 
             // 操作record

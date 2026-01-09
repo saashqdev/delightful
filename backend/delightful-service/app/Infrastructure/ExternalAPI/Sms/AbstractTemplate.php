@@ -12,7 +12,7 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 abstract class AbstractTemplate implements TemplateInterface
 {
     /**
-     * 短信type与templateid的映射关系.
+     * 短信type与templateid的mapping关系.
      */
     protected array $typeToIdMap = [];
 

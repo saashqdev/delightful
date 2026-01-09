@@ -95,7 +95,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $seqExtra->setTopicId($topicId);
             $seqEntity->setExtra($seqExtra);
 
-            // 5. createmessage实体 (转换DTO为Entity，但不持久化)
+            // 5. createmessage实体 (convertDTO为Entity，但不持久化)
             $messageEntity = new DelightfulMessageEntity();
             $messageEntity->setSenderId($messageDTO->getSenderId());
             $messageEntity->setSenderType($messageDTO->getSenderType());

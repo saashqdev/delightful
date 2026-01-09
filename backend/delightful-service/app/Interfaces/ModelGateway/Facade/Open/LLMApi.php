@@ -43,7 +43,7 @@ class LLMApi extends AbstractOpenApi
 
     /**
      * process文本嵌入request.
-     * 将文本转换为向量table示.
+     * 将文本convert为向量table示.
      */
     public function embeddings(RequestInterface $request)
     {

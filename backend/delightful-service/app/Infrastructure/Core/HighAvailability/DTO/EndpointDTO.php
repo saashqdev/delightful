@@ -48,13 +48,13 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * 资源的消耗的 id list. 一次request可能will消耗多个资源。
+     * 资源的consume的 id list. 一次request可能willconsume多个资源。
      * @var null|string[]
      */
     protected ?array $resources = null;
 
     /**
-     * 接入点是否启用.
+     * 接入点是否enable.
      */
     protected bool $enabled = true;
 
@@ -184,7 +184,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * set接入点是否启用.
+     * set接入点是否enable.
      * @param bool|int|string $enabled 可传入布尔value、整数或string
      */
     public function setEnabled(bool|int|string $enabled): static

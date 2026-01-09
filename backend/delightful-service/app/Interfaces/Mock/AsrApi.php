@@ -41,7 +41,7 @@ class AsrApi
     }
 
     /**
-     * 启动 ASR task
+     * start ASR task
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/start.
      */
     public function startTask(RequestInterface $request): array
@@ -101,7 +101,7 @@ class AsrApi
         // use Redis 计数器模拟轮询进度
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $count = (int) $this->redis->incr($countKey);
-        $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10分钟过期
+        $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10分钟expire
 
         // recordcalllog
         $this->logger->info('[Mock Sandbox ASR] Finish task called (V2)', [

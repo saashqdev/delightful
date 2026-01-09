@@ -92,7 +92,7 @@ JSON, true));
                 "type": "string",
                 "key": "value",
                 "sort": 0,
-                "title": "值",
+                "title": "value",
                 "description": "",
                 "required": null,
                 "value": null,

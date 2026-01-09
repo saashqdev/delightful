@@ -24,7 +24,7 @@ return new class extends Migration {
                 $table->unsignedInteger('seats')->default(0)->comment('席位quantity')->after('number');
             }
 
-            // 同相关字段
+            // 同相关field
             if (! Schema::hasColumn('delightful_organizations', 'sync_type')) {
                 $table->string('sync_type', 32)->default('')->comment('同type')->after('seats');
             }
@@ -61,7 +61,7 @@ return new class extends Migration {
             } catch (Throwable) {
             }
 
-            // delete字段
+            // deletefield
             if (Schema::hasColumn('delightful_organizations', 'sync_time')) {
                 $table->dropColumn('sync_time');
             }

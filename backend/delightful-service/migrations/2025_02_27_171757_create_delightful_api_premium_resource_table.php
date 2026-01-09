@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('endpoint_id', 64)->comment('接入点ID');
             $table->string('resource_name', 64)->comment('资源name');
-            $table->integer('billing_cycle_value')->default(0)->comment('计费周期值');
+            $table->integer('billing_cycle_value')->default(0)->comment('计费周期value');
             $table->tinyInteger('billing_cycle_type')->default(0)->comment('0: 总量, 1：秒, 2：分钟, 3：小时, 4：天');
             $table->integer('total_usage')->default(0)->comment('总量');
             $table->timestamps();

@@ -32,7 +32,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private const STATUS_NOT_FOUND = -1;
 
-    // 注释掉的是目前用不到
+    // comment掉的是目前用不到
     //    private const STYLE_PORTRAIT = 25;
     private const STYLE_GENERAL = 26;
     //    private const STYLE_LANDSCAPE = 28;
@@ -54,7 +54,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function imageConvertHigh(ImageGenerateRequest $imageGenerateRequest): string
     {
-        $this->logger->info('美图超清转换：开始process转换request', [
+        $this->logger->info('美图超清convert：开始processconvertrequest', [
             'request_type' => get_class($imageGenerateRequest),
         ]);
 
@@ -68,19 +68,19 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($styles);
 
             $styleId = $this->determineStyleId($styles);
-            $this->logger->info('美图超清转换：已选择转换样式', ['style_id' => $styleId]);
+            $this->logger->info('美图超清convert：已选择convert样式', ['style_id' => $styleId]);
 
             $result = $this->api->submitTask($imageGenerateRequest->getUrl(), $styleId);
             $this->validateApiResponse($result);
 
             $taskId = $result['data']['result']['id'];
-            $this->logger->info('美图超清转换：tasksubmitsuccess', [
+            $this->logger->info('美图超清convert：tasksubmitsuccess', [
                 'task_id' => $taskId,
             ]);
 
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->error('美图超清转换：tasksubmitexception', [
+            $this->logger->error('美图超清convert：tasksubmitexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -91,10 +91,10 @@ class MiracleVisionModel extends AbstractImageGenerate
     #[RateLimit(create: 5, consume: 1, capacity: 0, key: ImageGenerate::IMAGE_GENERATE_KEY_PREFIX . ImageGenerate::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::MiracleVision->value, waitTimeout: 60)]
     public function queryTask(string $taskId): MiracleVisionModelResponse
     {
-        $this->logger->info('美图超清转换：开始querytaskstatus', ['task_id' => $taskId]);
+        $this->logger->info('美图超清convert：开始querytaskstatus', ['task_id' => $taskId]);
 
         if (empty($taskId)) {
-            $this->logger->error('美图超清转换：缺少taskIDparameter');
+            $this->logger->error('美图超清convert：缺少taskIDparameter');
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.missing_job_id');
         }
 
@@ -105,7 +105,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $response = new MiracleVisionModelResponse();
             $status = (int) ($result['data']['status'] ?? self::STATUS_FAILED);
 
-            $this->logger->info('美图超清转换：gettaskstatus', [
+            $this->logger->info('美图超清convert：gettaskstatus', [
                 'task_id' => $taskId,
                 'status' => $status,
                 'progress' => $result['data']['progress'] ?? 0,
@@ -113,7 +113,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
             return $this->handleTaskStatus($status, $result, $response);
         } catch (Exception $e) {
-            $this->logger->error('美图超清转换：querytaskstatusexception', [
+            $this->logger->error('美图超清convert：querytaskstatusexception', [
                 'task_id' => $taskId,
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -129,7 +129,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($result);
             return $result;
         } catch (Exception $e) {
-            $this->logger->error('美图超清转换：get样式listexception', [
+            $this->logger->error('美图超清convert：get样式listexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -168,31 +168,31 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function handleTaskStatus(int $status, array $result, MiracleVisionModelResponse $response): MiracleVisionModelResponse
     {
-        $this->logger->info('美图超清转换：processtaskstatusinfo', ['status' => $status]);
+        $this->logger->info('美图超清convert：processtaskstatusinfo', ['status' => $status]);
 
         switch ($status) {
             case self::STATUS_SUCCESS:
                 if (empty($result['data']['result']['urls'])) {
-                    $this->logger->error('美图超清转换：taskcomplete但缺少resultURL', ['response' => $result]);
+                    $this->logger->error('美图超清convert：taskcomplete但缺少resultURL', ['response' => $result]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
                 }
                 $response->setFinishStatus(true);
                 $response->setUrls($result['data']['result']['urls']);
-                $this->logger->info('美图超清转换：taskprocesssuccess', [
+                $this->logger->info('美图超清convert：taskprocesssuccess', [
                     'urls_count' => count($result['data']['result']['urls']),
                 ]);
                 break;
             case self::STATUS_PROCESSING:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美图超清转换：taskprocess进行中', [
+                $this->logger->info('美图超清convert：taskprocess进行中', [
                     'progress' => $result['data']['progress'],
                 ]);
                 // no break
             case self::STATUS_INIT:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美图超清转换：task正在initialize', [
+                $this->logger->info('美图超清convert：task正在initialize', [
                     'progress' => $result['data']['progress'],
                 ]);
                 break;
@@ -202,7 +202,7 @@ class MiracleVisionModel extends AbstractImageGenerate
                 $response->setFinishStatus(false);
                 $response->setError($result['message'] ?? '未知error');
                 $this->logger->error(
-                    $status === self::STATUS_NOT_FOUND ? '美图超清转换：task不存在' : '美图超清转换：taskprocessfail',
+                    $status === self::STATUS_NOT_FOUND ? '美图超清convert：task不存在' : '美图超清convert：taskprocessfail',
                     ['status' => $status, 'response' => $result]
                 );
         }
@@ -213,7 +213,7 @@ class MiracleVisionModel extends AbstractImageGenerate
     private function validateRequest(ImageGenerateRequest $request): void
     {
         if (! $request instanceof MiracleVisionModelRequest) {
-            $this->logger->error('美图超清转换：requesttype不匹配', ['class' => get_class($request)]);
+            $this->logger->error('美图超清convert：requesttype不匹配', ['class' => get_class($request)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -222,16 +222,16 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateImageType(string $url): void
     {
-        $this->logger->info('美图超清转换：开始verifyimagetype', ['url' => $url]);
+        $this->logger->info('美图超清convert：开始verifyimagetype', ['url' => $url]);
 
         $type = FileType::getType($url);
         if (empty($type)) {
-            $this->logger->error('美图超清转换：无法识别imagetype', ['url' => $url]);
+            $this->logger->error('美图超清convert：无法识别imagetype', ['url' => $url]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
         if (! in_array(strtoupper($type), self::ALLOWED_IMAGE_TYPES, true)) {
-            $this->logger->error('美图超清转换：imagetype不支持', [
+            $this->logger->error('美图超清convert：imagetype不支持', [
                 'url' => $url,
                 'type' => $type,
                 'allowed_types' => self::ALLOWED_IMAGE_TYPES,
@@ -239,7 +239,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::UNSUPPORTED_IMAGE_FORMAT);
         }
 
-        $this->logger->info('美图超清转换：imagetypeverifypass', ['type' => $type]);
+        $this->logger->info('美图超清convert：imagetypeverifypass', ['type' => $type]);
     }
 
     private function validateApiResponse(array $result): void

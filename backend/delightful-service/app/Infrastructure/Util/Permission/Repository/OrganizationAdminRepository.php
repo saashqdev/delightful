@@ -171,7 +171,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 撤销userorganization管理员permission.
+     * undouserorganization管理员permission.
      */
     public function revoke(DataIsolation $dataIsolation, string $userId): void
     {
@@ -239,7 +239,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 映射arraydata到实体.
+     * mappingarraydata到实体.
      * @param mixed $row
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity

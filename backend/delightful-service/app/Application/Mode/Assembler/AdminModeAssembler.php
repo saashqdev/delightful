@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实体转换为管理后台DTO (contain完整的i18nfield).
+     * 实体convert为管理后台DTO (contain完整的i18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {
@@ -42,7 +42,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 关联实体转换为DTO.
+     * associate实体convert为DTO.
      */
     public static function relationEntityToDTO(ModeGroupRelationEntity $entity): ModeGroupRelationDTO
     {
@@ -50,10 +50,10 @@ class AdminModeAssembler
     }
 
     /**
-     * 聚合根转换为DTO.
+     * 聚合根convert为DTO.
      *
      * @param ModeAggregate $aggregate 模式聚合根
-     * @param array $providerModels optional的modelinfo映射 [modelId => ProviderModelEntity]
+     * @param array $providerModels optional的modelinfomapping [modelId => ProviderModelEntity]
      */
     public static function aggregateToAdminDTO(ModeAggregate $aggregate, array $providerModels = []): AdminModeAggregateDTO
     {
@@ -71,10 +71,10 @@ class AdminModeAssembler
     }
 
     /**
-     * 分组聚合根转换为DTO.
+     * 分组聚合根convert为DTO.
      *
      * @param ModeGroupAggregate $groupAggregate 分组聚合根
-     * @param array $providerModels optional的modelinfo映射 [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
+     * @param array $providerModels optional的modelinfomapping [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
      */
     public static function groupAggregateToAdminDTO(ModeGroupAggregate $groupAggregate, array $providerModels = []): AdminModeGroupAggregateDTO
     {
@@ -123,7 +123,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 实体array转换为管理后台DTOarray.
+     * 实体arrayconvert为管理后台DTOarray.
      */
     public static function entitiesToAdminDTOs(array $entities): array
     {
@@ -131,7 +131,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 分组实体array转换为管理后台DTOarray.
+     * 分组实体arrayconvert为管理后台DTOarray.
      */
     public static function groupEntitiesToAdminDTOs(array $entities): array
     {
@@ -139,7 +139,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 关联实体array转换为DTOarray.
+     * associate实体arrayconvert为DTOarray.
      */
     public static function relationEntitiesToDTOs(array $entities): array
     {
@@ -152,7 +152,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeAggregateDTO转换为ModeAggregate实体.
+     * ModeAggregateDTOconvert为ModeAggregate实体.
      */
     public static function aggregateDTOToEntity(AdminModeAggregateDTO $dto): ModeAggregate
     {
@@ -167,7 +167,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupAggregateDTO转换为ModeGroupAggregate实体.
+     * ModeGroupAggregateDTOconvert为ModeGroupAggregate实体.
      */
     public static function groupAggregateDTOToEntity(AdminModeGroupAggregateDTO $dto): ModeGroupAggregate
     {
@@ -184,7 +184,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupDTO转换为ModeGroupEntity实体.
+     * ModeGroupDTOconvert为ModeGroupEntity实体.
      */
     public static function groupDTOToEntity(AdminModeGroupDTO $dto): ModeGroupEntity
     {
@@ -192,7 +192,7 @@ class AdminModeAssembler
     }
 
     /**
-     * CreateModeRequest转换为ModeEntity.
+     * CreateModeRequestconvert为ModeEntity.
      */
     public static function createModeRequestToEntity(CreateModeRequest $request): ModeEntity
     {
@@ -242,7 +242,7 @@ class AdminModeAssembler
     }
 
     /**
-     * CreateModeGroupRequest转换为ModeGroupEntity.
+     * CreateModeGroupRequestconvert为ModeGroupEntity.
      */
     public static function createModeGroupRequestToEntity(CreateModeGroupRequest $request): ModeGroupEntity
     {
@@ -250,7 +250,7 @@ class AdminModeAssembler
     }
 
     /**
-     * UpdateModeGroupRequest转换为ModeGroupEntity.
+     * UpdateModeGroupRequestconvert为ModeGroupEntity.
      */
     public static function updateModeGroupRequestToEntity(UpdateModeGroupRequest $request, string $groupId): ModeGroupEntity
     {

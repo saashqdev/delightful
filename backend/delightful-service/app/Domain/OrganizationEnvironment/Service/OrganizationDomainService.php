@@ -160,7 +160,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 启用organization.
+     * enableorganization.
      */
     public function enable(int $id): OrganizationEntity
     {
@@ -176,7 +176,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 禁用organization.
+     * disableorganization.
      */
     public function disable(int $id): OrganizationEntity
     {

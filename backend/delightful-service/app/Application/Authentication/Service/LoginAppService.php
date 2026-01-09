@@ -33,7 +33,7 @@ readonly class LoginAppService
     }
 
     /**
-     * checkuser登录info并颁发token.
+     * checkuserlogininfo并颁发token.
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {
@@ -51,7 +51,7 @@ readonly class LoginAppService
     }
 
     /**
-     * according to登录typeverifyaccountinfo并returnaccount实体.
+     * according tologintypeverifyaccountinfo并returnaccount实体.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -62,7 +62,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verify手机号登录.
+     * verify手机号login.
      */
     private function verifyPhoneAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -83,7 +83,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verify邮箱登录.
+     * verify邮箱login.
      */
     private function verifyEmailAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -119,7 +119,7 @@ readonly class LoginAppService
     }
 
     /**
-     * build登录response.
+     * buildloginresponse.
      */
     private function buildLoginResponse(string $authorization, AccountEntity $account, DelightfulUserEntity $user): CheckLoginResponse
     {

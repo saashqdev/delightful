@@ -20,7 +20,7 @@ class SeqExtra extends AbstractEntity
     protected string $topicId = '';
 
     /**
-     * user发这条message时，他所登录的环境 id.（such as在 saas 生产填了某个私有化deploy预publish环境的码）
+     * user发这条message时，他所login的环境 id.（such as在 saas 生产填了某个私有化deploy预publish环境的码）
      * 用于request指定私有化deploy的test/预publish/生产环境.
      */
     protected ?int $delightfulEnvId = null;
@@ -49,7 +49,7 @@ class SeqExtra extends AbstractEntity
         return $this;
     }
 
-    // seqExtra 有些字段是不allow复制的
+    // seqExtra 有些field是不allow复制的
     public function getExtraCanCopyData(): array
     {
         return [

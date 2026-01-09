@@ -11,12 +11,12 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * Provider Assembler抽象基类
- * 提取公共的转换逻辑，减少code重复.
+ * 提取公共的convert逻辑，减少code重复.
  */
 abstract class AbstractProviderAssembler
 {
     /**
-     * 批量转换array到实体.
+     * 批量convertarray到实体.
      * @template T of object
      * @param class-string<T> $entityClass 实体类名
      * @param array $dataArray dataarray
@@ -36,7 +36,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * 批量转换实体到array.
+     * 批量convert实体到array.
      * @param array $entities 实体array
      */
     protected static function batchToArrays(array $entities): array
@@ -57,7 +57,7 @@ abstract class AbstractProviderAssembler
      * @template T of object
      * @param class-string<T> $entityClass 实体类名
      * @param array $data dataarray
-     * @param bool $enableI18n 是否启用国际化
+     * @param bool $enableI18n 是否enable国际化
      * @return T
      */
     protected static function createEntityFromArray(string $entityClass, array $data, bool $enableI18n = true): object
@@ -73,7 +73,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * null值check助手method.
+     * nullvaluecheck助手method.
      */
     protected static function isEmptyArray(?array $data): bool
     {

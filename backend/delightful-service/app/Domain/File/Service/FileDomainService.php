@@ -105,10 +105,10 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量getfile链接（自动从path提取organizationencoding并分组process）.
+     * 批量getfilelink（自动从path提取organizationencoding并分组process）.
      * @param string[] $filePaths containorganizationencoding的filepatharray，format：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type，default为Public
-     * @return array<string,FileLink> filepath到FileLink的映射
+     * @return array<string,FileLink> filepath到FileLink的mapping
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
@@ -128,7 +128,7 @@ readonly class FileDomainService
             }
         }
 
-        // 批量getfile链接
+        // 批量getfilelink
         $allLinks = [];
         foreach ($pathsByOrg as $orgCode => $paths) {
             $orgLinks = $this->getLinks($orgCode, $paths, $bucketType);

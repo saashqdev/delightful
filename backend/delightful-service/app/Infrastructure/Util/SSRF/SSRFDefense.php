@@ -167,7 +167,7 @@ class SSRFDefense
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);                // timeout5秒
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // 连接timeout3秒
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // connecttimeout3秒
         curl_setopt($ch, CURLOPT_MAXREDIRS, 0);              // 不跟随重定向
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);      // verifySSL证书
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);         // verifySSL主机

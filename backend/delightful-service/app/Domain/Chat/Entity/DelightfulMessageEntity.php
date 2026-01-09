@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 use InvalidArgumentException;
 
 /**
- * message的contentdetail. 一条message可能被多个session/序列号关联，所以messagecontent是独立的.
+ * message的contentdetail. 一条message可能被多个session/序列号associate，所以messagecontent是独立的.
  */
 class DelightfulMessageEntity extends AbstractEntity
 {

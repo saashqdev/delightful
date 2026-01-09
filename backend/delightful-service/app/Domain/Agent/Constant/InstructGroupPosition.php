@@ -30,7 +30,7 @@ enum InstructGroupPosition: int
 
     /**
      * get所有组type及其国际化tag.
-     * @return array<string, int> returntypename和对应的值
+     * @return array<string, int> returntypename和对应的value
      */
     public static function getTypeOptions(): array
     {

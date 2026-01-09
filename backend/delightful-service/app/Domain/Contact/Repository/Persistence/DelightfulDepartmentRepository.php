@@ -442,7 +442,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             $parentId = (string) ($department['parent_department_id'] ?? '');
 
             if ($parentId === '' || $parentId === '-1') {
-                continue; // 跳过无父级或根节点
+                continue; // skip无父级或根节点
             }
 
             $childSum = (int) ($departmentSums[$deptId] ?? 0);
@@ -467,7 +467,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 $this->redis->multi();
                 // use hmset 一次性set多个 hash field
                 $this->redis->hmset($cacheKey, $stringDepartmentSums);
-                // setcache过期time
+                // setcacheexpiretime
                 $this->redis->expire($cacheKey, 60 * 5);
                 $results = $this->redis->exec();
 

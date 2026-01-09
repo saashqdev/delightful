@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
             // todo xhy 目前是这么简短design，已和大白和陪哥discussion 2024-12-30
-            $table->boolean('start_page')->default(false)->comment('启动页开关');
+            $table->boolean('start_page')->default(false)->comment('start页开关');
         });
     }
 

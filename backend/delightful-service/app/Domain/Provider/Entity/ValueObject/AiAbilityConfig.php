@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * AI 能力configuration值object.
+ * AI 能力configurationvalueobject.
  */
 class AiAbilityConfig
 {
@@ -82,7 +82,7 @@ class AiAbilityConfig
     }
 
     /**
-     * 转换为array.
+     * convert为array.
      */
     public function toArray(): array
     {

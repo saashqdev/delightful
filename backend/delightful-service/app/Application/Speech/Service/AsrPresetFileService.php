@@ -297,7 +297,7 @@ readonly class AsrPresetFileService
             return $result;
         }
 
-        // 如果插入被忽略（file已存在），query现有record
+        // 如果插入被ignore（file已存在），query现有record
         $existingFile = $this->taskFileDomainService->getByProjectIdAndFileKey($projectId, $fileKey);
         if ($existingFile !== null) {
             $this->logger->info(sprintf('%s已存在，use现有record', $logPrefix), [

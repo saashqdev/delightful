@@ -100,7 +100,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $this->organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-        // 忽略execute
+        // ignoreexecute
         if ($this->node->getNodeParamsConfig()->isSkipExecute()) {
             return;
         }
@@ -245,7 +245,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // 如果是一个链接，那么need对 url 进行限制
+            // 如果是一个link，那么need对 url 进行限制
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

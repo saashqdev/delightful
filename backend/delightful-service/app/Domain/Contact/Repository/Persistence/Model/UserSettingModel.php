@@ -17,7 +17,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $delightful_id 账号DelightfulID
  * @property string $user_id userID
  * @property string $key setting键
- * @property array $value setting值
+ * @property array $value settingvalue
  * @property string $creator create者
  * @property DateTime $created_at create时间
  * @property string $modifier 修改者

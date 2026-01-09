@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('organization_code', 32)->default('')->comment('organizationencoding');
             $table->string('user_id', 64)->comment('userID');
             $table->string('mcp_server_id', 80)->comment('MCP服务ID')->index();
-            $table->json('require_fields')->nullable()->comment('必填字段');
+            $table->json('require_fields')->nullable()->comment('必填field');
             $table->json('oauth2_auth_result')->nullable()->comment('OAuth2authenticationresult');
             $table->json('additional_config')->nullable()->comment('附加configuration');
             $table->string('creator', 64)->default('')->comment('create者');

@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->tinyInteger('employee_type')->comment('员工type。1：正式员工2：实习生3：外package4：劳务 5：顾问');
             $table->string('orders', 256)->comment('usersortinfo。用于mark通讯录下organization架构的人员顺序，人员可能存在多个department中，且有different的sort')->nullable()->default('');
             $table->text('custom_attrs')->comment('customizefield。');
-            $table->tinyInteger('is_frozen')->comment('是否为暂停status的user。')->default(0);
+            $table->tinyInteger('is_frozen')->comment('是否为pausestatus的user。')->default(0);
             $table->comment('麦吉department下的userinfotable');
             $table->timestamps();
             $table->softDeletes();

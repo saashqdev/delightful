@@ -96,7 +96,7 @@ readonly class ProviderModelDomainService
             // updatemodel：verifymodel是否存在（getByIdwill在不存在时throwexception）
             $this->providerModelRepository->getById($dataIsolation, $providerModelDTO->getId());
         } else {
-            // createmodel时default启用
+            // createmodel时defaultenable
             $providerModelDTO->setStatus(Status::Enabled);
         }
         // verify service_provider_config_id 是否存在
@@ -215,7 +215,7 @@ readonly class ProviderModelDomainService
             return;
         }
 
-        // 转换为configurationversion实体并save（transaction、version号递增、markcurrentversion都在 Repository 内complete）
+        // convert为configurationversion实体并save（transaction、version号递增、markcurrentversion都在 Repository 内complete）
         $versionEntity = ProviderModelAssembler::toConfigVersionEntity($modelEntity);
         $this->providerModelConfigVersionRepository->saveVersionWithTransaction($dataIsolation, $versionEntity);
     }

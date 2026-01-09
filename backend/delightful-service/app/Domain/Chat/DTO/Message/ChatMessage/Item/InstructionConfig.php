@@ -71,7 +71,7 @@ class InstructionConfig extends AbstractEntity
     protected array $values = [];
 
     /**
-     * 开关打开status的文本description.
+     * 开关openstatus的文本description.
      */
     protected string $on = '';
 
@@ -233,7 +233,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // 否则，将每个元素转换为 InstructionValue object
+        // 否则，将每个元素convert为 InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);
@@ -242,7 +242,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * get开关打开status的文本description.
+     * get开关openstatus的文本description.
      */
     public function getOn(): string
     {
@@ -250,7 +250,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * set开关打开status的文本description.
+     * set开关openstatus的文本description.
      * @param mixed $on
      */
     public function setOn($on): void

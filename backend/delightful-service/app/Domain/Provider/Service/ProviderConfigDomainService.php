@@ -79,9 +79,9 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 批量get服务商实体，pass服务商configurationID映射.
+     * 批量get服务商实体，pass服务商configurationIDmapping.
      * @param array<int> $configIds 服务商configurationIDarray
-     * @return array<int, ProviderEntity> configurationID到服务商实体的映射
+     * @return array<int, ProviderEntity> configurationID到服务商实体的mapping
      */
     public function getProviderEntitiesByConfigIds(ProviderDataIsolation $dataIsolation, array $configIds): array
     {
@@ -109,7 +109,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // 建立configurationID到服务商实体的映射
+        // 建立configurationID到服务商实体的mapping
         // 两个array都是以 id 为 key，can直接access
         $configToProviderMap = [];
         foreach ($configEntities as $configId => $config) {
@@ -383,7 +383,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
 
     /**
      * 统一的configurationdataupdate逻辑.
-     * handle脱敏datamerge、字段update和save操作.
+     * handle脱敏datamerge、fieldupdate和save操作.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity
     {
@@ -396,7 +396,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         // updateconfigurationdata
         $existingConfig->setConfig($processedConfig);
 
-        // update其他字段（如果有提供）
+        // update其他field（如果有提供）
         if ($newConfigData->getAlias()) {
             $existingConfig->setAlias($newConfigData->getAlias());
         }
@@ -412,11 +412,11 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * checkProviderConfigItemconfiguration是否为null（所有字段都是nullvalue）.
+     * checkProviderConfigItemconfiguration是否为null（所有field都是nullvalue）.
      */
     private function isProviderConfigEmpty(ProviderConfigItem $config): bool
     {
-        // check所有configuration字段是否都为null
+        // check所有configurationfield是否都为null
         return empty($config->getAk())
                && empty($config->getSk())
                && empty($config->getApiKey())

@@ -89,7 +89,7 @@ readonly class AsrValidationService
                 throw $e;
             }
 
-            // 其他业务exception转换为permissionverifyfail
+            // 其他业务exceptionconvert为permissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
             // 其他exception统一process为permissionverifyfail

@@ -86,7 +86,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             'open_time' => $openChatTime->format('Y-m-d H:i:s'),
         ];
 
-        // get上次打开触发的time
+        // get上次open触发的time
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
@@ -351,7 +351,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $container = ApplicationContext::getContainer();
             $messageRepository = $container->get(DelightfulMessageRepositoryInterface::class);
 
-            // 将 VoiceMessage 转换为arrayformat用于update
+            // 将 VoiceMessage convert为arrayformat用于update
             $messageContent = $voiceMessage->toArray();
 
             $messageRepository->updateMessageContent($delightfulMessageId, $messageContent);

@@ -31,15 +31,15 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.ip_not_in_white_list')]
     case TOKEN_IP_NOT_IN_WHITE_LIST = 4004;
 
-    // token过期
+    // tokenexpire
     #[ErrorMessage(message: 'api.token.expired')]
     case TOKEN_EXPIRED = 4005;
 
-    // organization的额度不足
+    // organization的quota不足
     #[ErrorMessage(message: 'api.organization.quota_not_enough')]
     case ORGANIZATION_QUOTA_NOT_ENOUGH = 4006;
 
-    // accessToken 额度不足
+    // accessToken quota不足
     #[ErrorMessage(message: 'api.token.quota_not_enough')]
     case TOKEN_QUOTA_NOT_ENOUGH = 4007;
 
@@ -87,7 +87,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.validate_failed')]
     case ValidateFailed = 4018;
 
-    // token被禁用
+    // token被disable
     #[ErrorMessage(message: 'api.token.disabled')]
     case TOKEN_DISABLED = 4019;
 }

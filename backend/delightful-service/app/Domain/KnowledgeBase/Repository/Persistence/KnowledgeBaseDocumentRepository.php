@@ -56,7 +56,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $attrs['organization_code'] = $documentEntity->getOrganizationCode();
             $attrs['created_at'] = date('Y-m-d H:i:s');
             $attrs['updated_at'] = date('Y-m-d H:i:s');
-            // 将arraytype的field转换为 JSON string
+            // 将arraytype的fieldconvert为 JSON string
             foreach ($attrs as $key => $attr) {
                 if (is_array($attr)) {
                     $attrs[$key] = Json::encode($attr);
@@ -329,7 +329,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $builder->where('name', 'like', '%' . $query->getName() . '%');
         }
 
-        // 按启用statusfilter
+        // 按enablestatusfilter
         if ($query->getEnabled() !== null) {
             $builder->where('enabled', $query->getEnabled());
         }

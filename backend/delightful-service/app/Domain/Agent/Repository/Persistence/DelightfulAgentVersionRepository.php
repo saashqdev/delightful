@@ -76,13 +76,13 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
         }
         return $builder
             ->where('organization_code', $organizationCode)
-            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // ensure外层筛选启用status
+            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // ensure外层筛选enablestatus
             ->whereIn('id', $agentIds)
             ->count();
     }
 
     /**
-     * optimizeversion：直接passJOINqueryget启用的助理version，避免传入大量ID.
+     * optimizeversion：直接passJOINquerygetenable的助理version，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -108,7 +108,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimizeversion：get启用助理的total.
+     * optimizeversion：getenable助理的total.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -143,7 +143,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function getAgentsFromMarketplaceCount(array $agentIds): int
     {
-        // use count() method来统计符合条件的record数
+        // use count() method来statistics符合条件的record数
         return $this->agentVersionModel::query()
             ->whereIn('id', $agentIds)
             ->where('app_market_status', DelightfulAgentVersionStatus::APP_MARKET_LISTED)

@@ -67,7 +67,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo 统计好友quantity
+        // todo statistics好友quantity
         return [$popular, $latest];
     }
 
@@ -270,7 +270,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo 统计好友quantity
+        // todo statistics好友quantity
         return [$popular, $latest];
     }
 

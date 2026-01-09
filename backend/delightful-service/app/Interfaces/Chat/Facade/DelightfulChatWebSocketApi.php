@@ -89,7 +89,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[VerifyStructure]
     public function onConnect(Socket $socket)
     {
-        // 链接时refresh sid cache的permissioninfo，避免极端情况下，用了以前的 sid permission
+        // link时refresh sid cache的permissioninfo，避免极端情况下，用了以前的 sid permission
         $this->logger->info(sprintf('sid:%s connect', $socket->getSid()));
     }
 
@@ -344,7 +344,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     private function keepSubscribeAlive(): void
     {
-        // 只need一个进程能schedulepublishmessage,让subscribe的redis链接保活即可.
+        // 只need一个进程能schedulepublishmessage,让subscribe的redislink保活即可.
         // 不把lock放在最外层,是为了防止pod频繁重启时,没有任何一个进程canpublishmessage
         co(function () {
             // 每 5 秒推一次message
@@ -357,7 +357,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                     SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'delightful-im:subscribe:keepalive', ControlMessageType::Ping->value);
 
                     $producer = ApplicationContext::getContainer()->get(Producer::class);
-                    // 对所有queue投一条message,以保活链接/queue
+                    // 对所有queue投一条message,以保活link/queue
                     $messagePriorities = MessagePriority::cases();
                     foreach ($messagePriorities as $priority) {
                         $seqCreatedEvent = new SeqCreatedEvent([ControlMessageType::Ping->value]);

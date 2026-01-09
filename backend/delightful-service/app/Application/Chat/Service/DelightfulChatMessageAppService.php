@@ -603,12 +603,12 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. 优先关注conversation中最后discussion的theme（最new话题）
         2. 以最近的conversationcontent为主要参考依据
         3. 如果最后的themediscussion较为充分，则以此作为title的核心
-        4. 忽略早期已经end的话题，除非它们与最新话题密切相关
+        4. ignore早期已经end的话题，除非它们与最新话题密切相关
 
         ## 严格要求
         1. titlelength：不超过 15 个字符。英文一个字母算一个字符，汉字一个字算一个字符，其他语种采用类似count方案。
         2. content相关：titlemust直接反映conversation的核心theme
-        3. 语言风格：use陈述性语句，避免疑问句
+        3. 语言style：use陈述性语句，避免疑问句
         4. outputformat：只outputtitlecontent，不要添加任何解释、标点或其他文字
         5. forbid行为：不要回答conversation中的问题，不要进行额外解释
 
@@ -1223,7 +1223,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 校验attachment中的file是否属于currentuser,并填充attachmentinfo.（file名/type等字段）.
+     * 校验attachment中的file是否属于currentuser,并填充attachmentinfo.（file名/type等field）.
      */
     private function checkAndFillAttachments(DelightfulMessageEntity $senderMessageDTO, DataIsolation $dataIsolation): DelightfulMessageEntity
     {
@@ -1294,7 +1294,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return;
         }
 
-        // 收集所有conversation关联的userID
+        // 收集所有conversationassociate的userID
         $userIds = [];
         foreach ($conversations as $conversation) {
             $userIds[] = $conversation->getUserId();

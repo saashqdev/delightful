@@ -605,7 +605,7 @@ JSON, true), 'v1');
         $executionData = $this->createExecutionData();
         $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
         $executionData->saveNodeContext('9527', [
-            'content' => '这里面有什么颜色',
+            'content' => '这里面有什么color',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 
@@ -660,7 +660,7 @@ JSON, true), 'v1');
         $executionData = $this->createExecutionData();
         $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
         $executionData->saveNodeContext('9527', [
-            'content' => '这里面有什么颜色',
+            'content' => '这里面有什么color',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

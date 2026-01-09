@@ -11,7 +11,7 @@ use App\Application\Speech\Enum\AsrRecordingStatusEnum;
 use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
- * ASRtaskstatusDTO - 管理Redis Hash字段映射.
+ * ASRtaskstatusDTO - 管理Redis Hashfieldmapping.
  * 这不是从 JSON response结构来的，而是用于管理taskstatus
  */
 class AsrTaskStatusDTO
@@ -58,18 +58,18 @@ class AsrTaskStatusDTO
 
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
-    // 录音status管理字段
+    // 录音status管理field
     public ?string $modelId = null; // AI modelID，用于自动总结
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
 
     public bool $sandboxTaskCreated = false; // 沙箱task是否已create
 
-    public bool $isPaused = false; // 是否处于暂停status（用于timeout判断）
+    public bool $isPaused = false; // 是否处于pausestatus（用于timeout判断）
 
     public ?string $sandboxId = null; // 沙箱ID
 
-    public int $sandboxRetryCount = 0; // 沙箱启动retry次数
+    public int $sandboxRetryCount = 0; // 沙箱startretry次数
 
     public int $serverSummaryRetryCount = 0; // 服务端总结触发retry次数
 
@@ -112,7 +112,7 @@ class AsrTaskStatusDTO
         $this->tempHiddenDirectoryId = self::getIntValue($data, ['temp_hidden_directory_id', 'tempHiddenDirectoryId']);
         $this->displayDirectoryId = self::getIntValue($data, ['display_directory_id', 'displayDirectoryId']);
 
-        // 录音status管理字段
+        // 录音status管理field
         $this->modelId = self::getStringValue($data, ['model_id', 'modelId']);
         $this->recordingStatus = self::getStringValue($data, ['recording_status', 'recordingStatus']);
         $this->sandboxTaskCreated = self::getBoolValue($data, ['sandbox_task_created', 'sandboxTaskCreated']);
@@ -204,7 +204,7 @@ class AsrTaskStatusDTO
 
     /**
      * check总结是否已complete（幂等性判断）.
-     * 判断标准：audiofile已merge（audioFileId 存在）且录音已停止.
+     * 判断标准：audiofile已merge（audioFileId 存在）且录音已stop.
      */
     public function isSummaryCompleted(): bool
     {

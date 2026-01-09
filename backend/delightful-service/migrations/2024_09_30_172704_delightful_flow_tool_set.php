@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('name', 64)->comment('tool集name');
             $table->string('description', 255)->comment('tool集description');
             $table->string('icon', 255)->comment('tool集图标');
-            $table->boolean('enabled')->default(true)->comment('是否启用');
+            $table->boolean('enabled')->default(true)->comment('是否enable');
             $table->string('created_uid', 80)->comment('create人');
             $table->dateTime('created_at')->comment('creation time');
             $table->string('updated_uid', 80)->comment('修改人');

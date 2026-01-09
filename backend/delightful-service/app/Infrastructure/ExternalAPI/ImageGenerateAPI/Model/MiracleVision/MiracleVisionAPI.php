@@ -45,7 +45,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * get美图超清转换支持的样式列表.
+     * get美图超清convert支持的样式列表.
      */
     public function getStyle(): array
     {
@@ -89,7 +89,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * submitimage转换task
+     * submitimageconverttask
      */
     public function submitTask(string $imageUrl, int $styleId): array
     {

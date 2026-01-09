@@ -19,8 +19,8 @@ return new class extends Migration {
             $table->string('user_id', 64)->default('')->comment('userid');
             $table->string('organization_code', 64)->default('')->comment('organizationcode');
             $table->string('app_code', 64)->default('')->comment('applicationcode');
-            $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度')->default(0);
-            $table->unsignedDecimal('use_amount', 40, 6)->comment('use额度')->default(0);
+            $table->unsignedDecimal('total_amount', 40, 6)->comment('总quota')->default(0);
+            $table->unsignedDecimal('use_amount', 40, 6)->comment('usequota')->default(0);
             $table->unsignedInteger('rpm')->comment('RPM限stream')->default(0);
             $table->datetimes();
             $table->softDeletes();

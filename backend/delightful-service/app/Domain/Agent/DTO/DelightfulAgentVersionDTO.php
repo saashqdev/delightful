@@ -136,7 +136,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
         }
 
         $visibilityType = VisibilityType::tryFrom($visibilityConfig->getVisibilityType());
-        // verifyvisibility_type字段
+        // verifyvisibility_typefield
         if (! $visibilityType) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.invalid_visibility_type');
         }

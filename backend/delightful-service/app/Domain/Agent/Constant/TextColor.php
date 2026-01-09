@@ -20,7 +20,7 @@ enum TextColor: string
     case RED = 'red';
 
     /**
-     * 从stringget颜色实例.
+     * 从stringgetcolor实例.
      */
     public static function fromString(string $color): self
     {
@@ -34,8 +34,8 @@ enum TextColor: string
     }
 
     /**
-     * get所有颜色option及其国际化tag.
-     * @return array<string, string> return颜色name和对应的值
+     * get所有coloroption及其国际化tag.
+     * @return array<string, string> returncolorname和对应的value
      */
     public static function getColorOptions(): array
     {
@@ -48,7 +48,7 @@ enum TextColor: string
     }
 
     /**
-     * verify颜色值是否valid.
+     * verifycolorvalue是否valid.
      */
     public static function isValid(string $color): bool
     {

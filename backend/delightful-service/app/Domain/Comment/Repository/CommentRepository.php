@@ -265,10 +265,10 @@ class CommentRepository
     }
 
     /**
-     * 将CommentModel转换为CommentEntity。
+     * 将CommentModelconvert为CommentEntity。
      *
      * @param CommentModel $model commentmodel
-     * @return CommentEntity 转换后的comment实体
+     * @return CommentEntity convert后的comment实体
      */
     private function modelToEntity(CommentModel $model): CommentEntity
     {
@@ -292,7 +292,7 @@ class CommentRepository
     }
 
     /**
-     * 将多个CommentModel转换为CommentEntityarray。
+     * 将多个CommentModelconvert为CommentEntityarray。
      *
      * @param mixed $models commentmodel集合
      * @return array<CommentEntity> comment实体array

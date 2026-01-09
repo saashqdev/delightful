@@ -30,7 +30,7 @@ use Throwable;
     rule: '* * * * *',                    // 每分钟execute一次
     name: 'AsrHeartbeatMonitor',
     singleton: true,                      // 单例模式防止重复execute
-    mutexExpires: 60,                     // 互斥lock过期time（秒），对应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
+    mutexExpires: 60,                     // 互斥lockexpiretime（秒），对应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
     onOneServer: true,                    // 仅在一台service器上execute
     callback: 'execute',
     memo: 'ASR recording heartbeat monitoring task'
@@ -179,7 +179,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // 如果处于暂停status，不触发
+        // 如果处于pausestatus，不触发
         if ($taskStatus->isPaused) {
             return false;
         }
@@ -211,9 +211,9 @@ class AsrHeartbeatMonitor
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
         try {
-            // 幂等性check：如果task已complete，跳过process
+            // 幂等性check：如果task已complete，skipprocess
             if ($taskStatus->isSummaryCompleted()) {
-                $this->logger->info('task已complete，跳过心跳timeoutprocess', [
+                $this->logger->info('task已complete，skip心跳timeoutprocess', [
                     'task_key' => $taskStatus->taskKey,
                     'audio_file_id' => $taskStatus->audioFileId,
                     'status' => $taskStatus->status->value,

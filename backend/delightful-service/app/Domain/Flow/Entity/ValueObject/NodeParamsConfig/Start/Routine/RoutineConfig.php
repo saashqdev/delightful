@@ -220,9 +220,9 @@ class RoutineConfig
             }
         }
 
-        // 截止time只能是未来的
+        // deadlinetime只能是未来的
         if (! is_null($this->deadline) && $this->deadline->getTimestamp() < time()) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '截止日期 不能是过去的');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'deadline日期 不能是过去的');
         }
     }
 }

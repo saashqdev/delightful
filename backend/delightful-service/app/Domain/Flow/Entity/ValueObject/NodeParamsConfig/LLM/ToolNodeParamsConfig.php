@@ -73,7 +73,7 @@ class ToolNodeParamsConfig extends AbstractLLMNodeParamsConfig
 
         $this->async = (bool) ($params['async'] ?? false);
 
-        // 先loaddefault值
+        // 先loaddefaultvalue
         $this->model = $this->createModelComponentByName($this->getDefaultModelString());
         $this->modelConfig = new ModelConfig();
         $this->userPrompt = ComponentFactory::generateTemplate(StructureType::Value);
@@ -118,7 +118,7 @@ class ToolNodeParamsConfig extends AbstractLLMNodeParamsConfig
             'custom_system_input' => $customSystemInput->toArray(),
             'async' => false,
 
-            // whenselect LLM mode时，need有以下值
+            // whenselect LLM mode时，need有以下value
             'model' => $this->getDefaultModelString(),
             'model_config' => (new ModelConfig())->getLLMChatConfig(),
             'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value)->toArray(),

@@ -30,7 +30,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
     protected int $maxRequestsPerDay = 5000;
 
     /**
-     * 是否启用速率限制.
+     * 是否enable速率限制.
      */
     protected bool $enabled = true;
 

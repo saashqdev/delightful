@@ -67,16 +67,16 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 4. knowledge base检索出来的content里willcontain一些customize的 Delightful tag，你要善于use它们，有以下几种tag：
     - <DelightfulImage></DelightfulImage> 表示一个image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，每个tag都will在前端messagecard渲染出一张image；
     - <DelightfulVideo></DelightfulVideo> 表示一个video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，每个tag都will在前端messagecard渲染出一个video；
-    - <DelightfulMention></DelightfulMention> 表示一个人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，每个tag都will在前端messagecard形成一个 @某某人 的效果；
+    - <DelightfulMention></DelightfulMention> 表示一个人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，每个tag都will在前端messagecard形成一个 @某某人 的effect；
 5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> 等有 Delightful tag的片段；
 6. 结合knowledge basereturn的content整理后尽可能丰富地回答user的问题。
 ## 工具中关键的returnvalueinstruction
 - fragments: 本次检索到的所有knowledge base片段
 - fragments.*.content: 片段content
-- fragments.*.metadata.url: current片段的原文链接
+- fragments.*.metadata.url: current片段的原文link
 - graph.*.content: 来自知识图谱的data，能增强info，让你更好回答问题
 ## 限制
-- 回答的content中不allow出现不是Delightfultag的链接。
+- 回答的content中不allow出现不是Delightfultag的link。
 MARKDOWN;
     }
 

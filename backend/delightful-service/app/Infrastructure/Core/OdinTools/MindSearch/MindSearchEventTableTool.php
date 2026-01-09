@@ -23,20 +23,20 @@ class MindSearchEventTableTool
                     'properties' => [
                         'event_name' => [
                             'type' => 'string',
-                            'description' => '关联event名',
+                            'description' => 'associateevent名',
                         ],
                         'event_time' => [
                             'type' => 'string',
-                            'description' => '关联event发生时间',
+                            'description' => 'associateevent发生时间',
                         ],
                         'event_description' => [
                             'type' => 'string',
-                            'description' => '关联eventdescription',
+                            'description' => 'associateeventdescription',
                         ],
                         'related_citations' => [
                             'type' => 'array',
                             'items' => ['type' => 'string'],
-                            'description' => '关联eventquote的searchresult',
+                            'description' => 'associateeventquote的searchresult',
                         ],
                     ],
                     'required' => ['event_name', 'event_time', 'event_description', 'related_citations'],

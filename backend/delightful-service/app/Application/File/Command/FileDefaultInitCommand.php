@@ -100,11 +100,11 @@ class FileDefaultInitCommand extends Command
             $moduleName = basename($moduleDir);
 
             try {
-                // 尝试将模块名映射到对应的业务type
+                // 尝试将模块名mapping到对应的业务type
                 $businessType = $this->mapModuleToBusinessType($moduleName);
 
                 if ($businessType === null) {
-                    $this->warn("  - 跳过未知模块: {$moduleName}");
+                    $this->warn("  - skip未知模块: {$moduleName}");
                     continue;
                 }
 
@@ -133,7 +133,7 @@ class FileDefaultInitCommand extends Command
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
-                        // use userId 字段storage业务标识来判断重复
+                        // use userId fieldstorage业务标识来判断重复
                         if ($existingFile->getUserId() === $businessIdentifier) {
                             $isDuplicate = true;
                             break;
@@ -141,7 +141,7 @@ class FileDefaultInitCommand extends Command
                     }
 
                     if ($isDuplicate) {
-                        $this->line("    - 跳过重复file: {$fileName}");
+                        $this->line("    - skip重复file: {$fileName}");
                         ++$skippedFiles;
                         continue;
                     }
@@ -168,7 +168,7 @@ class FileDefaultInitCommand extends Command
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
-                            throw new Exception('fileuploadfail，无法getaccess链接');
+                            throw new Exception('fileuploadfail，无法getaccesslink');
                         }
 
                         // validatesuccess后才createdatabaserecord，useactual的upload key
@@ -201,19 +201,19 @@ class FileDefaultInitCommand extends Command
         // 同时handleoriginal的default图标file（如果need的话）
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
-        $this->info("fileinitializecomplete，共handle {$totalFiles} 个file，跳过 {$skippedFiles} 个已存在的file");
+        $this->info("fileinitializecomplete，共handle {$totalFiles} 个file，skip {$skippedFiles} 个已存在的file");
     }
 
     /**
-     * 将模块名映射到对应的业务type.
+     * 将模块名mapping到对应的业务type.
      */
     protected function mapModuleToBusinessType(string $moduleName): ?DefaultFileBusinessType
     {
-        // 尝试直接映射
+        // 尝试直接mapping
         try {
             return DefaultFileBusinessType::from($moduleName);
         } catch (ValueError) {
-            // 如果直接映射fail，尝试passname匹配
+            // 如果直接mappingfail，尝试passname匹配
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,

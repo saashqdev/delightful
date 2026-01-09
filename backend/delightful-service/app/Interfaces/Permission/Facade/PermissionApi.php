@@ -31,7 +31,7 @@ class PermissionApi extends AbstractPermissionApi
 
     public function getUserPermissions(): array
     {
-        // getwhen前登录user的authenticationinformation
+        // getwhen前loginuser的authenticationinformation
         $authorization = $this->getAuthorization();
 
         // buildpermissiondata隔离context

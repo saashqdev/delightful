@@ -160,9 +160,9 @@ class DelightfulLLMDomainService
     
     ### 2. search代理模块
     mustcall工具: batchSubQuestionsSearch
-    parameter规范：
+    parameterstandard：
     2.1 key词规则
-       - generategreater thanequal 3 个高质量的可检索key词，include核心实体、keyproperty和相关概念
+       - generategreater thanequal 3 个高quality的可检索key词，include核心实体、keyproperty和相关概念
        - 时间限定符override率≥30%
        - 对比类question占比≥20%
     
@@ -176,10 +176,10 @@ class DelightfulLLMDomainService
     
     ## contextexceptionhandle
     当 {context} 为null时：
-    1. 启动备选generate策略，application5W1H框架（Who/What/When/Where/Why/How），并结合user的originalquestion进行填充
+    1. start备选generate策略，application5W1H框架（Who/What/When/Where/Why/How），并结合user的originalquestion进行填充
     2. generatedefaultdimension，for example：政策背景 | 最新data | 专家观点 | 对比分析 | 行业趋势
     
-    ## output规范
+    ## outputstandard
     混合以下三种及更多type的question范式，以ensure子question的多样性和override性：
     [
       "X对Y的影响差异",  // 对比/比较类
@@ -200,7 +200,7 @@ class DelightfulLLMDomainService
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    你needbased onuser的message，according to我提供的searchresult，按照总分总的结构，output高质量，结构化的详细回答，format为 markdown。
+    你needbased onuser的message，according to我提供的searchresult，按照总分总的结构，output高quality，结构化的详细回答，format为 markdown。
     
     在我给你的searchresult中，每个result都是[webpage X begin]...[webpage X end]format的，X代表每篇文章的number索引。请在适当的情况下在句子末尾quotecontext。请按照quote编号[citation:X]的format在答案中对应部分quotecontext。如果一句话源自多个context，请列出所有相关的quote编号，for example[citation:3][citation:5]，切记不要将quote集中在最后returnquote编号，而是在答案对应部分列出。
     在回答时，请注意以下几点：
@@ -236,17 +236,17 @@ class DelightfulLLMDomainService
        - 若同一event在多个quote中出现，优先use最早的时间。
        - 若时间不明确，according tocontext推测最早可能的时间，并ensure合理。
     3. **event提取与筛选**：
-       - **event定义**：event是searchcontent中mention的、具有时间关联（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、update、合作、活动等。
+       - **event定义**：event是searchcontent中mention的、具有时间associate（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、update、合作、活动等。
        - according touserquestion，提取与之相关的event，保持description简洁，聚焦具体发生的事情。
-       - **跳过无关content**：
+       - **skip无关content**：
          - 纯静态description（如不变的property、背景介绍，无时间变化）。
          - datastatistics或财务information（如营收、利润）。
          - 主观comment、分析或推测（除非与event直接相关）。
-         - 无时间关联且与question无关的细节。
+         - 无时间associate且与question无关的细节。
        - **保留原则**：只要content与时间相关且matchquestiontheme，尽量保留为event。
     4. **output要求**：
        - 以 JSON formatreturn，event按时间倒序排列（从晚到早）。
-       - 每个eventcontain "name"、"time"、"description" 三个字段。
+       - 每个eventcontain "name"、"time"、"description" 三个field。
        - 若searchcontent不足以generateevent，returnnullarray `[]`，避免凭null臆造。
     
     ## output示例：
@@ -284,10 +284,10 @@ class DelightfulLLMDomainService
     {date_now}
     
     ## task
-    return"search contexts"中与"search keywords"有关联性的 20 至 50 个 索引。
+    return"search contexts"中与"search keywords"有associate性的 20 至 50 个 索引。
     
     ## 要求
-    - forbid直接回答user的question，一定要return与userquestion有关联性的索引。
+    - forbid直接回答user的question，一定要return与userquestion有associate性的索引。
     - search contexts的format为 "[[x]] content" ，其中 x 是search contexts的索引。x 不能greater than 50
     - 请以correct的 JSON formatreply筛选后的索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     - 如果 search keywords 与时间相关，重点注意 search contexts 中与current时间相关的content。与current时间越近越重要。
@@ -928,7 +928,7 @@ class DelightfulLLMDomainService
             if (empty($subQuestions)) {
                 // 没有call工具，尝试从response中parse json
                 $subQuestions = $this->getSubQuestionsFromLLMStringResponse($relatedQuestionsResponse, $userMessage);
-                // 大model认为不needgenerate关联question，直接拿user的question
+                // 大model认为不needgenerateassociatequestion，直接拿user的question
                 empty($subQuestions) && $subQuestions = [$queryVo->getUserMessage()];
             }
 

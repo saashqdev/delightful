@@ -241,7 +241,7 @@ class RoleRepository implements RoleRepositoryInterface
 
         $models = $this->roleQuery($organizationCode)
             ->whereIn('id', $roleIds)
-            ->where('status', RoleModel::STATUS_ENABLED) // 只return启用的role
+            ->where('status', RoleModel::STATUS_ENABLED) // 只returnenable的role
             ->get();
 
         $roles = [];
@@ -284,7 +284,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 映射model到实体.
+     * mappingmodel到实体.
      */
     private function mapToEntity(RoleModel $model): RoleEntity
     {

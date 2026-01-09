@@ -32,7 +32,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：return空array，table示没有特定的model绑定.
+     * defaultimplement：return空array，table示没有特定的modelbind.
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array
     {

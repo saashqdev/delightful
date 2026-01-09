@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：直接get启用的助理version，避免传入大量ID.
+     * optimizeversion：直接getenable的助理version，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：get启用助理的total.
+     * optimizeversion：getenable助理的total.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -179,7 +179,7 @@ class DelightfulAgentVersionDomainService
     {
         // return的是语义化version，need在return的基础上+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // 如果version号是整数format（如 1），将其转换为语义化version号（如 1.0.0）
+        // 如果version号是整数format（如 1），将其convert为语义化version号（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }

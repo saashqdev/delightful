@@ -45,7 +45,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
         if ($filterNull) {
             $data = array_filter($data, static fn ($value) => $value !== null);
         }
-        // 去掉 message_type 字段
+        // 去掉 message_type field
         unset($data['control_message_type'], $data['chat_message_type'], $data['intermediate_message_type']);
         // ifdata为null，则去掉为每条message附近的 attachments 和 instructs
         foreach (['attachments', 'instructs'] as $field) {

@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 class NoRateLimiter extends AbstractRateLimiter
 {
     /**
-     * 是否启用速率限制.
+     * 是否enable速率限制.
      */
     protected bool $enabled = false;
 

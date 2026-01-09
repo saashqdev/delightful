@@ -178,7 +178,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertFalse($this->permissionEnum->isOperation(''));
         $this->assertFalse($this->permissionEnum->isValidPermission(''));
 
-        // testnullvalueprocess（PHPwill转换为string）
+        // testnullvalueprocess（PHPwillconvert为string）
         $this->assertFalse($this->permissionEnum->isValidPermission('null'));
     }
 

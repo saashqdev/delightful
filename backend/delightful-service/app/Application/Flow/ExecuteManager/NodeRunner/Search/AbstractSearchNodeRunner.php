@@ -22,7 +22,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null、''、0、[]、false  直接跳过吧，谁没事搜这些啊。右侧没填value的不进行search
+            // null、''、0、[]、false  直接skip吧，谁没事搜这些啊。右侧没填value的不进行search
             if (empty($rightValue)) {
                 continue;
             }
@@ -46,7 +46,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rightValue,
                 $rangeIds
             );
-            // null 代table不支持的searchtype，直接跳过
+            // null 代table不支持的searchtype，直接skip
             if ($currentIds === null) {
                 continue;
             }

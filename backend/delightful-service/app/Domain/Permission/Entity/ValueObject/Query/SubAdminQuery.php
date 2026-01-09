@@ -23,7 +23,7 @@ class SubAdminQuery extends AbstractQuery
     /** 子管理员name（模糊匹配） */
     private ?string $name = null;
 
-    /** enabled status：1-启用 0-禁用 */
+    /** enabled status：1-enable 0-disable */
     private ?int $status = null;
 
     /**
@@ -54,7 +54,7 @@ class SubAdminQuery extends AbstractQuery
     }
 
     /**
-     * 将queryobject转换为仓储层可识别的filterarray。
+     * 将queryobjectconvert为仓储层可识别的filterarray。
      */
     public function toFilters(): array
     {

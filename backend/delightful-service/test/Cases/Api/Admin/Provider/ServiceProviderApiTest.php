@@ -25,7 +25,7 @@ class ServiceProviderApiTest extends BaseTest
         $uri = $this->baseUri . '?category=llm';
         $response = $this->get($uri, [], $this->getCommonHeaders());
 
-        // 如果returnauthentication或permission相关error，跳过test（仅validate路由可用）
+        // 如果returnauthentication或permission相关error，skiptest（仅validate路由可用）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
             $this->markTestSkipped('interfaceauthenticationfail或无permission，路由校验pass');
             return;
@@ -102,7 +102,7 @@ class ServiceProviderApiTest extends BaseTest
         $modelId = $createResponse['data']['id'];
         $this->assertNotEmpty($modelId, 'modelID不应为null');
 
-        // ========== 步骤2: calldetailinterfacevalidate4个成本字段 ==========
+        // ========== 步骤2: calldetailinterfacevalidate4个成本field ==========
         $detailUri = $this->baseUri . '/' . $serviceProviderConfigId;
         $detailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
@@ -114,8 +114,8 @@ class ServiceProviderApiTest extends BaseTest
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
         $this->assertNotNull($createdModel, 'should能在detail中找到create的model');
 
-        // validate4个成本字段存在且valuecorrect
-        $this->assertArrayHasKey('config', $createdModel, 'modelshould有config字段');
+        // validate4个成本field存在且valuecorrect
+        $this->assertArrayHasKey('config', $createdModel, 'modelshould有configfield');
         $this->verifyConfigCostFields($createdModel['config'], [
             'input_cost' => 0.001,
             'output_cost' => 0.002,
@@ -177,7 +177,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('data', $updateResponse);
         $this->assertSame($modelId, $updateResponse['data']['id'], 'update后modelID应保持不变');
 
-        // ========== 步骤5: 再次calldetailinterfacevalidateupdate后的4个成本字段 ==========
+        // ========== 步骤5: 再次calldetailinterfacevalidateupdate后的4个成本field ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($updatedDetailResponse);
@@ -187,8 +187,8 @@ class ServiceProviderApiTest extends BaseTest
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
         $this->assertNotNull($updatedModel, 'should能在detail中找到update后的model');
 
-        // validateupdate后的4个成本字段
-        $this->assertArrayHasKey('config', $updatedModel, 'update后的modelshould有config字段');
+        // validateupdate后的4个成本field
+        $this->assertArrayHasKey('config', $updatedModel, 'update后的modelshould有configfield');
         $this->verifyConfigCostFields($updatedModel['config'], [
             'input_cost' => 0.003,
             'output_cost' => 0.006,
@@ -330,17 +330,17 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * validateconfiguration中的4个成本字段.
+     * validateconfiguration中的4个成本field.
      *
      * @param array $config configurationdata
      * @param array $expectedCosts expect的成本value
      */
     private function verifyConfigCostFields(array $config, array $expectedCosts): void
     {
-        $this->assertArrayHasKey('input_cost', $config, 'configshouldcontaininput_cost字段');
-        $this->assertArrayHasKey('output_cost', $config, 'configshouldcontainoutput_cost字段');
-        $this->assertArrayHasKey('cache_write_cost', $config, 'configshouldcontaincache_write_cost字段');
-        $this->assertArrayHasKey('cache_hit_cost', $config, 'configshouldcontaincache_hit_cost字段');
+        $this->assertArrayHasKey('input_cost', $config, 'configshouldcontaininput_costfield');
+        $this->assertArrayHasKey('output_cost', $config, 'configshouldcontainoutput_costfield');
+        $this->assertArrayHasKey('cache_write_cost', $config, 'configshouldcontaincache_write_costfield');
+        $this->assertArrayHasKey('cache_hit_cost', $config, 'configshouldcontaincache_hit_costfield');
 
         // validatevalue是否correct（allow浮点数误差）
         $this->assertEqualsWithDelta(
@@ -393,7 +393,7 @@ class ServiceProviderApiTest extends BaseTest
 
         $this->assertNotNull($versionEntity, 'configurationversionshould存在');
 
-        // validate int type字段（stringshould被convert为 int）
+        // validate int typefield（stringshould被convert为 int）
         if (isset($expectedConfig['max_output_tokens'])) {
             $this->assertSame(
                 (int) $expectedConfig['max_output_tokens'],
@@ -418,7 +418,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validate float type字段（stringshould被convert为 float）
+        // validate float typefield（stringshould被convert为 float）
         if (isset($expectedConfig['input_pricing'])) {
             $this->assertEqualsWithDelta(
                 (float) $expectedConfig['input_pricing'],
@@ -522,7 +522,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // validate bool type字段
+        // validate bool typefield
         if (isset($expectedConfig['support_function'])) {
             $this->assertSame(
                 (bool) $expectedConfig['support_function'],
@@ -547,7 +547,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validate string type字段
+        // validate string typefield
         if (isset($expectedConfig['billing_currency'])) {
             $this->assertSame(
                 $expectedConfig['billing_currency'],

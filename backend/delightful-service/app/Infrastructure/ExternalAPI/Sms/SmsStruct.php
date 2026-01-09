@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 use App\Infrastructure\ExternalAPI\Sms\Enum\SignEnum;
 
 /**
- * 所有短信驱动的returnresultmust转换为此object
+ * 所有短信驱动的returnresultmustconvert为此object
  */
 class SmsStruct
 {
@@ -27,7 +27,7 @@ class SmsStruct
     public ?string $type = null;
 
     /**
-     * variable短信的variablecontent. 可能为关联array,也可能为索引array.
+     * variable短信的variablecontent. 可能为associatearray,也可能为索引array.
      * @example {"product_name": "商品A", "payer": "供应商A","amount": 10}
      * @example ["商品A","供应商A",10]
      */
@@ -35,7 +35,7 @@ class SmsStruct
 
     /**
      * 普通短信的纯文本content.
-     * 如: 灯塔正在邀请你加入企业，点击链接注册或登录 https://xxxx.com/sso?r_ce=vB5932.
+     * 如: 灯塔正在邀请你加入企业，点击linkregister或login https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 

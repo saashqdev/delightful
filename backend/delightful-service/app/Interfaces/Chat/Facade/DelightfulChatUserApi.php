@@ -139,7 +139,7 @@ class DelightfulChatUserApi extends AbstractApi
 
     /**
      * updateuserinformation
-     * 支持update字段：
+     * 支持updatefield：
      * 1. avatar_url: avatar
      * 2. nickname:   昵称.
      */

@@ -18,7 +18,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.not_found')]
     case TokenNotFound = 9000;
 
-    // token过期
+    // tokenexpire
     #[ErrorMessage(message: 'token.expired')]
     case TokenExpired = 9001;
 
@@ -26,7 +26,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.type_error')]
     case TokenTypeError = 9002;
 
-    // 没有检测到Token关联的data
+    // 没有检测到Tokenassociate的data
     #[ErrorMessage(message: 'token.relation_not_found')]
     case TokenRelationNotFound = 9003;
 
@@ -34,7 +34,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.expired_at_must_set')]
     case TokenExpiredAtMustSet = 9004;
 
-    // token必选关联one值
+    // token必选associateonevalue
     #[ErrorMessage(message: 'token.relation_value_must_set')]
     case TokenRelationValueMustSet = 9005;
 

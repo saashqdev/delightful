@@ -26,8 +26,8 @@ return new class extends Migration {
             $table->string('icon', 255)->nullable()->comment('服务商图标');
             $table->tinyInteger('provider_type')->default(0)->comment('服务商type：0-普通，1-官方');
             $table->string('category', 20)->comment('category：llm-大model，vlm-视觉model');
-            $table->tinyInteger('status')->default(0)->comment('status：0-未启用，1-启用');
-            $table->tinyInteger('is_models_enable')->default(0)->comment('model列表get：0-未启用，1-启用');
+            $table->tinyInteger('status')->default(0)->comment('status：0-未enable，1-enable');
+            $table->tinyInteger('is_models_enable')->default(0)->comment('model列表get：0-未enable，1-enable');
             $table->timestamps();
             $table->softDeletes();
             $table->index('category', 'idx_category');

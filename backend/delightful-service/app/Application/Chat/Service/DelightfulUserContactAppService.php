@@ -233,7 +233,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
         // 通讯录和search相关interface，filter隐藏department和隐藏user。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
-        // 由于 $usersPageResponseDTO 的 items 限制的parametertype，从code规范的角度，再 new 一个通用的 PageResponseDTO， 按pagination的结构return
+        // 由于 $usersPageResponseDTO 的 items 限制的parametertype，从codestandard的角度，再 new 一个通用的 PageResponseDTO， 按pagination的结构return
         // 另外，由于filter逻辑的存在，可能本次return的 items quantity少于 $limit,但是又有下一页。
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
@@ -479,7 +479,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
         }
 
-        // 按organization批量get链接
+        // 按organization批量getlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->fileDomainService->getLinks($orgCode, $fileKeys);

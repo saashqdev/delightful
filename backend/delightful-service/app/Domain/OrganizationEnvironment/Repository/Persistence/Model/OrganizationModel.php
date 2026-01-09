@@ -25,7 +25,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property null|string $contact_mobile 联系电话
  * @property string $industry_type organization行业type
  * @property null|string $number 企业规模
- * @property int $status status 1:正常 2:禁用
+ * @property int $status status 1:正常 2:disable
  * @property null|string $creator_id create人
  * @property int $type
  * @property null|int $seats 席位数
@@ -49,7 +49,7 @@ class OrganizationModel extends AbstractModel
     public const int STATUS_DISABLED = 2;
 
     /**
-     * 与model关联的table名.
+     * 与modelassociate的table名.
      */
     protected ?string $table = 'delightful_organizations';
 
@@ -80,7 +80,7 @@ class OrganizationModel extends AbstractModel
     ];
 
     /**
-     * propertytype转换.
+     * propertytypeconvert.
      */
     protected array $casts = [
         'id' => 'int',
@@ -106,7 +106,7 @@ class OrganizationModel extends AbstractModel
     ];
 
     /**
-     * 启用organization.
+     * enableorganization.
      */
     public function enable(): void
     {
@@ -114,7 +114,7 @@ class OrganizationModel extends AbstractModel
     }
 
     /**
-     * 禁用organization.
+     * disableorganization.
      */
     public function disable(): void
     {

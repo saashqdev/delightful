@@ -28,8 +28,8 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('origin_id', 128)->comment('源id');
             $table->string('new_id', 64)->comment('新id');
-            // 映射type：user id、department id、null间 id，organizationencoding
-            $table->string('mapping_type', 32)->comment('映射type（user、department、space、organization）');
+            // mappingtype：user id、department id、null间 id，organizationencoding
+            $table->string('mapping_type', 32)->comment('mappingtype（user、department、space、organization）');
             // 第third-party平台type：企业微信、钉钉、飞书
             $table->string('third_platform_type', 32)->comment('第third-party平台type（wechat_work、dingtalk、lark）');
             // delightful 体系的organizationencoding
@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');
             $table->unique(['delightful_organization_code', 'third_platform_type', 'mapping_type', 'origin_id'], 'unique_origin_id_mapping_type');
-            $table->comment('department、user、null间encoding等的映射关系record');
+            $table->comment('department、user、null间encoding等的mapping关系record');
         });
     }
 

@@ -30,12 +30,12 @@ class LogicalIfMethod extends AbstractMethod
         [
             'name' => 'trueValue',
             'type' => 'mixed',
-            'desc' => '逻辑为true时的return值',
+            'desc' => '逻辑为true时的returnvalue',
         ],
         [
             'name' => 'falseValue',
             'type' => 'mixed',
-            'desc' => '逻辑为false时的return值',
+            'desc' => '逻辑为false时的returnvalue',
         ],
     ];
 

@@ -20,7 +20,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
     public string $name = '';
 
     /**
-     * rolestatus：0=禁用, 1=启用（default启用）.
+     * rolestatus：0=disable, 1=enable（defaultenable）.
      */
     public int $status = 1;
 

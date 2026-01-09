@@ -23,7 +23,7 @@ class SessionAppService implements SessionInterface
     }
 
     /**
-     * 登录校验.
+     * login校验.
      * @return LoginResponseDTO[]
      */
     public function LoginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
@@ -45,7 +45,7 @@ class SessionAppService implements SessionInterface
                 // 一次性批量get所有organization的根departmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
 
-                // 填充登录responseinformation
+                // 填充loginresponseinformation
                 foreach ($loginResponses as $loginResponse) {
                     $orgCode = $loginResponse->getDelightfulOrganizationCode();
                     if (! empty($orgCode) && isset($rootDepartments[$orgCode])) {

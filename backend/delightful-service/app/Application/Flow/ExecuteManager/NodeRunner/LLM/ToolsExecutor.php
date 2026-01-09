@@ -263,7 +263,7 @@ class ToolsExecutor extends AbstractTool
         $args = $parameters;
         // 隔离data
         $flow = DelightfulFlowFactory::arrayToEntity($this->delightfulFlowEntity->toArray());
-        // 内置tool特殊值
+        // 内置tool特殊value
         if ($this->delightfulFlowEntity->hasCallback()) {
             $flow->setCallback($this->delightfulFlowEntity->getCallback());
             $flow->setEndNode($this->delightfulFlowEntity->getEndNode());

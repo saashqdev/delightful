@@ -27,7 +27,7 @@ class AIImageForMidjourneyFastBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生graphtool-Midjourney-Fastmodel';
+        return 'text generationgraphtool-Midjourney-Fastmodel';
     }
 
     public function getCallback(): ?Closure

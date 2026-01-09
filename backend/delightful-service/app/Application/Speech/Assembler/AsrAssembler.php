@@ -140,7 +140,7 @@ class AsrAssembler
             }
         }
 
-        // ifnothave找to /workspace/,tryfind workspace/ openhead情况
+        // ifnothave找to /workspace/,tryfind workspace/ openheadsituation
         if (str_starts_with($normalizedPath, 'workspace/')) {
             $relativePath = substr($normalizedPath, 10); // 移except 'workspace/' front缀
             if (! empty($relativePath)) {

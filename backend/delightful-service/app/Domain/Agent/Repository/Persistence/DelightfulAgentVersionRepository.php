@@ -186,8 +186,8 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     // according to助理idgetmostbig version_number
     public function getAgentMaxVersion(string $agentId): string
     {
-        // queryfinger定 agent_id and user_id downmostbigversionnumber,thiswithinnotcanuse max 取 version,因forwillout现 0.3 greater than 0.10情况,butisactualis 0.10greater than 0.3
-        // whileversionnumberonlycan递增,thereforeusetime倒序取first即can
+        // queryfinger定 agent_id and user_id downmostbigversionnumber,thiswithinnotcanuse max 取 version,因forwillout现 0.3 greater than 0.10situation,butisactualis 0.10greater than 0.3
+        // whileversionnumberonlycan递增,thereforeusetimereverse order取first即can
         $maxVersion = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')

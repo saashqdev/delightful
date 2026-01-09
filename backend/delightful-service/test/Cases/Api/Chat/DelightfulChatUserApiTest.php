@@ -383,7 +383,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserupdatepermission - normal情况.
+     * testgetuserupdatepermission - normalsituation.
      */
     public function testGetUserUpdatePermissionSuccess(): void
     {

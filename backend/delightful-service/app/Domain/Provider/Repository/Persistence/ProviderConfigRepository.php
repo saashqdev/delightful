@@ -201,9 +201,9 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
 
     /**
      * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumntable.
-     * newlogic:bydatabasemiddleactualconfigurationfor准,toatdatabasemiddlenothaveservicequotienttype,usetemplate补充
+     * newlogic:bydatabasemiddleactualconfigurationfor准,toatdatabasemiddlenothaveservicequotienttype,usetemplatesupplement
      * support多same provider_code configuration(organizationadministratorhand动add)
-     * finalresulthandleo clock,官方organizationwillfilter掉Delightfulservicequotient,normalorganizationwillwillDelightfulservicequotient置top.
+     * finalresulthandleo clock,officialorganizationwillfilter掉Delightfulservicequotient,normalorganizationwillwillDelightfulservicequotient置top.
      * @param string $organizationCode organizationencoding
      * @param Category $category servicequotienttype
      * @return ProviderConfigDTO[]
@@ -243,7 +243,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
                 continue;
             }
 
-            // ifis官方organization,filter掉 Delightful servicequotient(Official),因for delightful servicequotientthenis官方organizationconfigurationmodel总and
+            // ifisofficialorganization,filter掉 Delightful servicequotient(Official),因for delightful servicequotientthenisofficialorganizationconfigurationmodel总and
             /*if ($isOfficialOrganization && $provider->getProviderCode() === ProviderCode::Official) {
                 continue;
             }*/
@@ -263,7 +263,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             return $b->getSort() <=> $a->getSort(); // descendingrowcolumn,numberbiginfront
         });
 
-        // if找to Delightful servicequotient,willits放intheone位(non官方organization才willhave Delightful servicequotient)
+        // if找to Delightful servicequotient,willits放intheone位(nonofficialorganization才willhave Delightful servicequotient)
         if ($delightfulProvider !== null) {
             $result = array_merge([$delightfulProvider], $otherProviders);
         } else {

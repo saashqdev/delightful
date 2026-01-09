@@ -261,7 +261,7 @@ readonly class AsrTitleGeneratorService
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // havenote情况:"请帮I @yearwillsolutiondiscussion.webm recordingcontentand @yearwillnote.md contentconversionforoneshare超level产物"
+            // havenotesituation:"请帮I @yearwillsolutiondiscussion.webm recordingcontentand @yearwillnote.md contentconversionforoneshare超level产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofile情况:"请帮I @yearwillsolutiondiscussion.webm recordingcontentconversionforoneshare超level产物"
+        // onlyaudiofilesituation:"请帮I @yearwillsolutiondiscussion.webm recordingcontentconversionforoneshare超level产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

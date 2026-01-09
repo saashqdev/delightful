@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace App\Infrastructure\Util;
 
 /**
- * 官方organizationtoolcategory
- * 统onemanage官方organization相closeconfigurationandjudgelogic.
+ * officialorganizationtoolcategory
+ * 统onemanageofficialorganization相closeconfigurationandjudgelogic.
  */
 class OfficialOrganizationUtil
 {
     /**
-     * get官方organizationencoding
+     * getofficialorganizationencoding
      */
     public static function getOfficialOrganizationCode(): string
     {
@@ -22,7 +22,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * judgewhetherfor官方organization.
+     * judgewhetherforofficialorganization.
      */
     public static function isOfficialOrganization(string $organizationCode): bool
     {
@@ -30,7 +30,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * getcontain官方organizationininsideorganizationencodingarray.
+     * getcontainofficialorganizationininsideorganizationencodingarray.
      * @param string $currentOrganizationCode whenfrontorganizationencoding
      * @return array go重backorganizationencodingarray
      */
@@ -41,7 +41,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * check官方organizationencodingwhetheralreadyconfiguration.
+     * checkofficialorganizationencodingwhetheralreadyconfiguration.
      */
     public static function hasOfficialOrganization(): bool
     {

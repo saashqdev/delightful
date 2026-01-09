@@ -20,11 +20,11 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name organizationname
  * @property null|string $platform_type platformtype
  * @property null|string $logo organizationlogo
- * @property null|string $introduction 企业description
+ * @property null|string $introduction enterprisedescription
  * @property null|string $contact_user 联系person
  * @property null|string $contact_mobile 联系电话
  * @property string $industry_type organizationline业type
- * @property null|string $number 企业规模
+ * @property null|string $number enterprisescale
  * @property int $status status 1:normal 2:disable
  * @property null|string $creator_id createperson
  * @property int $type

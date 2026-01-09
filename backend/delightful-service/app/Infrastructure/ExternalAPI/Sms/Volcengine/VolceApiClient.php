@@ -52,9 +52,9 @@ class VolceApiClient extends AbstractSms
     {
         $variables = $smsStruct->variables;
         $smsStruct->language = $this->getContentLanguage($smsStruct);
-        // 火山short信onlysupportvariableshort信,according tocomplete $message adaptto应 templatevariable
+        // Volcanoshort信onlysupportvariableshort信,according tocomplete $message adaptto应 templatevariable
 
-        // $variables maybeforindexarray ["quotient品A","供应quotientA",10],火山short信needalso原becomeassociatearray
+        // $variables maybeforindexarray ["quotient品A","供应quotientA",10],Volcanoshort信needalso原becomeassociatearray
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
             // 1.gettemplatecontent,certainvariablekey
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';

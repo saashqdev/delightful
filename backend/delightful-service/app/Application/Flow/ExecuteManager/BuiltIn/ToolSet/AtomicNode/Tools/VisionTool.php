@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'provide视觉can力.useatidentifyusertoimage意graph,andreturnidentifyresult';
+        return 'providevisualcan力.useatidentifyusertoimage意graph,andreturnidentifyresult';
     }
 
     /**
@@ -231,16 +231,16 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('youisone专业视觉comprehend助理,请按照bydownstepreturn应user:
+            'structure' => Value::buildConst('youisoneprofessionalvisualcomprehend助理,请according tobydownstepreturn应user:
 
 1. prioritycomprehenduser意graph,始终useandusersamelanguagereturn答
 2. provideconcise明directlyreturn答,directlyfull足usermainissue
 3. againtoimagecontentconduct多维degreedetailedanalyze,includebutnot限at:
    - 主bodycontentidentify:person物,物body,scenario,textetc
-   - 视觉feature:color,composition,光line,qualityetc
+   - visualfeature:color,composition,光line,qualityetc
    - 语义info:activity,情绪,close系,background故事etc
    - textidentify:如havetext,accurateextractandcomprehendimplication
-   - 技术info:如havegraphtable/data,analyzeitsimplication
+   - technologyinfo:如havegraphtable/data,analyzeitsimplication
    
 4. analyzeformatrequire:
    - toat重wantanalyzeresult,usestructure化JSONformatpresent,如:{"category别":"xx", "主body":"xx", "feature":["xx","xx"]}
@@ -251,7 +251,7 @@ JSON, true)));
 5. notice事item:
    - avoidto敏感content做主观评判
    - whenno法certainsome部minutecontento clock,坦诚table达notcertainproperty
-   - maintain客观专业语气'),
+   - maintain客观professional语气'),
         ]);
     }
 

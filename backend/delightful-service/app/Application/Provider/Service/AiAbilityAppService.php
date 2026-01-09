@@ -154,7 +154,7 @@ class AiAbilityAppService extends AbstractKernelAppService
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // other情况directlyusefront端value
+            // othersituationdirectlyusefront端value
             else {
                 $result[$key] = $value;
             }

@@ -100,7 +100,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponsestructure
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code,butspecific数valuemaybenotcertain,所bythiswithinonlyis占位
+            'code' => 0, // expectednotis1000code,butspecific数valuemaybenotcertain,所bythiswithinonlyisplaceholder
             'message' => '', // onlyverify存inmessagefield,specificcontentmaybenotcertain
         ];
 

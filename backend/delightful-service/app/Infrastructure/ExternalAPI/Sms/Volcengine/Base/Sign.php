@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Sms\Volcengine\Base;
 
 /**
- * 火山apisignaturecategory.
+ * Volcanoapisignaturecategory.
  */
 class Sign
 {

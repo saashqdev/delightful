@@ -49,7 +49,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 1. judgeorganizationencodingwhetheris官方organization,ifis,thenreturn null
+        // 1. judgeorganizationencodingwhetherisofficialorganization,ifis,thenreturn null
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return null;
         }
@@ -122,21 +122,21 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return [];
         }
-        // datacollection A:get官方organizationdown所haveenablemodel(containconfigurationfilter)
+        // datacollection A:getofficialorganizationdown所haveenablemodel(containconfigurationfilter)
         $officialModels = $this->getOfficialEnabledModels($category);
 
-        // ifnothave官方model,directlyreturnnullarray
+        // ifnothaveofficialmodel,directlyreturnnullarray
         if (empty($officialModels)) {
             return [];
         }
 
-        // extract官方modelIDarray
+        // extractofficialmodelIDarray
         $officialModelIds = [];
         foreach ($officialModels as $officialModel) {
             $officialModelIds[] = $officialModel->getId();
         }
 
-        // datacollection B:querycurrentorganizationdown model_parent_id in官方model ID columntablemiddlemodel
+        // datacollection B:querycurrentorganizationdown model_parent_id inofficialmodel ID columntablemiddlemodel
         $configBuilder = $this->createProviderModelQuery();
         $configBuilder->where('organization_code', $organizationCode)->whereIn('model_parent_id', $officialModelIds);
 
@@ -156,11 +156,11 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             }
         }
 
-        // ifconfigurationmodelmappingfornull,directlyreturn官方modelcolumntable
+        // ifconfigurationmodelmappingfornull,directlyreturnofficialmodelcolumntable
         if (empty($modelMap)) {
             $finalModels = $officialModels;
         } else {
-            // handle官方modelstatusmerge
+            // handleofficialmodelstatusmerge
             $finalModels = [];
             foreach ($officialModels as $officialModel) {
                 $modelId = $officialModel->getId();
@@ -169,7 +169,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 if (isset($modelMap[$modelId])) {
                     $organizationModel = $modelMap[$modelId];
 
-                    // directlyuseconfigurationmodelstatusreplace官方modelstatus
+                    // directlyuseconfigurationmodelstatusreplaceofficialmodelstatus
                     $officialModel->setStatus($organizationModel->getStatus());
                 }
                 $finalModels[] = $officialModel;
@@ -216,7 +216,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * non官方organizationupdate Delightful modelstatus(写o clockcopylogic).
+     * nonofficialorganizationupdate Delightful modelstatus(写o clockcopylogic).
      */
     public function updateDelightfulModelStatus(
         ProviderDataIsolation $dataIsolation,
@@ -236,7 +236,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         }
 
         try {
-            // 1. check官方modelwhetherbe官方disable
+            // 1. checkofficialmodelwhetherbeofficialdisable
             if ($this->isOfficiallyDisabled($officialModel)) {
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelOfficiallyDisabled);
             }
@@ -260,17 +260,17 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * get官方organizationdown所haveenablemodel(containconfigurationfilter).
+     * getofficialorganizationdown所haveenablemodel(containconfigurationfilter).
      *
      * @param null|Category $category servicequotientcategory别,fornullo clockreturn所havecategorymodel
-     * @return array<ProviderModelEntity> filterback官方modelcolumntable
+     * @return array<ProviderModelEntity> filterbackofficialmodelcolumntable
      */
     private function getOfficialEnabledModels(?Category $category = null): array
     {
-        // get官方organizationencoding
+        // getofficialorganizationencoding
         $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-        // 1. 先query官方organizationdownenableservicequotientconfigurationID
+        // 1. 先queryofficialorganizationdownenableservicequotientconfigurationID
         $enabledConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $officialOrganizationCode)
             ->where('status', Status::Enabled->value)
@@ -278,7 +278,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $enabledConfigIds = Db::select($enabledConfigQuery->toSql(), $enabledConfigQuery->getBindings());
         $enabledConfigIdArray = array_column($enabledConfigIds, 'id');
 
-        // 2. useenableconfigurationIDquery官方organizationenablemodel
+        // 2. useenableconfigurationIDqueryofficialorganizationenablemodel
         if (! empty($enabledConfigIdArray)) {
             $officialBuilder = $this->createProviderModelQuery()
                 ->where('organization_code', $officialOrganizationCode)
@@ -306,7 +306,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
      */
     private function applyPackageFilteringToModels(array $models, string $organizationCode): array
     {
-        // ifis官方organization,directlyreturn所have
+        // ifisofficialorganization,directlyreturn所have
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return $models;
         }
@@ -330,7 +330,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * check官方modelwhetherbe官方disable.
+     * checkofficialmodelwhetherbeofficialdisable.
      */
     private function isOfficiallyDisabled(ProviderModelEntity $officialModel): bool
     {
@@ -356,7 +356,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 官方organizationmodelwhen做 Delightful Model writenon官方organization.
+     * officialorganizationmodelwhen做 Delightful Model writenonofficialorganization.
      */
     private function copyOfficeModelToOrganization(
         ProviderDataIsolation $dataIsolation,

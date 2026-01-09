@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * uplevelresource.
-     * notice:new操asresourcebackwant补充thisconfiguration.
+     * notice:new操asresourcebackwantsupplementthisconfiguration.
      */
     public function parent(): ?self
     {

@@ -58,7 +58,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
 
         $result = $this->knowledgeBaseAppService->queries($authorization, $query, $page);
         $codes = array_column($result['list'], 'code');
-        // 补充documentquantity
+        // supplementdocumentquantity
         $knowledgeBaseDocumentCountMap = $this->knowledgeBaseDocumentAppService->getDocumentCountByKnowledgeBaseCodes($authorization, $codes);
         $list = KnowledgeBaseAssembler::entitiesToListDTO($result['list'], $result['users'], $knowledgeBaseDocumentCountMap);
         return new PageDTO($page->getPage(), $result['total'], $list);
@@ -68,7 +68,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
     {
         $userAuthorization = $this->getAuthorization();
         $delightfulFlowKnowledgeEntity = $this->knowledgeBaseAppService->show($userAuthorization, $code);
-        // 补充documentquantity
+        // supplementdocumentquantity
         $knowledgeBaseDocumentCountMap = $this->knowledgeBaseDocumentAppService->getDocumentCountByKnowledgeBaseCodes($userAuthorization, [$code]);
         return KnowledgeBaseAssembler::entityToDTO($delightfulFlowKnowledgeEntity)->setDocumentCount($knowledgeBaseDocumentCountMap[$code] ?? 0);
     }

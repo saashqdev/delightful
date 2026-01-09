@@ -192,7 +192,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getservicequotientconfiguration实body,统onehandle所have情况.
+     * getservicequotientconfiguration实body,统onehandle所havesituation.
      * - templateID(format:providerCode_category)
      * - 常规databaseconfigurationID.
      */
@@ -209,7 +209,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             $providerCode = $parsed['providerCode'];
             $category = $parsed['category'];
             if ($providerCode === ProviderCode::Official && OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
-                // 官方organizationnotallowuse官方servicequotient
+                // officialorganizationnotallowuseofficialservicequotient
                 return null;
             }
             // getto应servicequotient实body
@@ -354,7 +354,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
         }
 
-        // supportmodify官方servicequotient
+        // supportmodifyofficialservicequotient
         /*if ($provider->getProviderType() === ProviderType::Official) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/

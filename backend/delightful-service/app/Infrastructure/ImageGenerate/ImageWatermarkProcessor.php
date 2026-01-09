@@ -117,7 +117,7 @@ class ImageWatermarkProcessor
             throw new Exception('no法parseURLimagedata: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
-        // add视觉watermark
+        // addvisualwatermark
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
         // usedetecttoformatconductno损output

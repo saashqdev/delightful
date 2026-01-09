@@ -147,7 +147,7 @@ class FluxModel extends AbstractImageGenerate
 
         // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($imageUrls)) {
-            $this->logger->error('Flux文生graph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Fluxtext generationgraph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -155,7 +155,7 @@ class FluxModel extends AbstractImageGenerate
         ksort($imageUrls);
         $imageUrls = array_values($imageUrls);
 
-        $this->logger->info('Flux文生graph:generateend', [
+        $this->logger->info('Fluxtext generationgraph:generateend', [
             'totalImages' => count($imageUrls),
             'requestedImages' => $imageGenerateRequest->getGenerateNum(),
         ]);
@@ -177,7 +177,7 @@ class FluxModel extends AbstractImageGenerate
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
         $mode = $imageGenerateRequest->getModel();
         // recordrequeststart
-        $this->logger->info('Flux文生graph:start生graph', [
+        $this->logger->info('Fluxtext generationgraph:start生graph', [
             'prompt' => $prompt,
             'size' => $size,
             'mode' => $mode,
@@ -187,21 +187,21 @@ class FluxModel extends AbstractImageGenerate
             $result = $this->api->submitTask($prompt, $size, $mode);
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('Flux文生graph:generaterequestfail', ['message' => $result['message'] ?? 'unknownerror']);
+                $this->logger->warning('Fluxtext generationgraph:generaterequestfail', ['message' => $result['message'] ?? 'unknownerror']);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
             }
 
             if (empty($result['data']['jobId'])) {
-                $this->logger->error('Flux文生graph:missingtaskID', ['response' => $result]);
+                $this->logger->error('Fluxtext generationgraph:missingtaskID', ['response' => $result]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
             $taskId = $result['data']['jobId'];
-            $this->logger->info('Flux文生graph:submittasksuccess', [
+            $this->logger->info('Fluxtext generationgraph:submittasksuccess', [
                 'taskId' => $taskId,
             ]);
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->warning('Flux文生graph:callimagegenerateinterfacefail', ['error' => $e->getMessage()]);
+            $this->logger->warning('Fluxtext generationgraph:callimagegenerateinterfacefail', ['error' => $e->getMessage()]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
     }
@@ -222,7 +222,7 @@ class FluxModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['imageUrl']]);
         }
 
-        $this->logger->error('Flux文生graph:notgettoimageURL', ['response' => $rawResult]);
+        $this->logger->error('Fluxtext generationgraph:notgettoimageURL', ['response' => $rawResult]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
     }
 
@@ -248,19 +248,19 @@ class FluxModel extends AbstractImageGenerate
                 }
 
                 if ($result['status'] === 'FAILED') {
-                    $this->logger->error('Flux文生graph:taskexecutefail', ['message' => $result['message'] ?? 'unknownerror']);
+                    $this->logger->error('Fluxtext generationgraph:taskexecutefail', ['message' => $result['message'] ?? 'unknownerror']);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
                 }
 
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->warning('Flux文生graph:round询taskresultfail', ['error' => $e->getMessage(), 'jobId' => $jobId]);
+                $this->logger->warning('Fluxtext generationgraph:round询taskresultfail', ['error' => $e->getMessage(), 'jobId' => $jobId]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::POLLING_FAILED);
             }
         }
 
-        $this->logger->error('Flux文生graph:taskexecutetimeout', ['jobId' => $jobId]);
+        $this->logger->error('Fluxtext generationgraph:taskexecutetimeout', ['jobId' => $jobId]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT);
     }
 
@@ -298,7 +298,7 @@ class FluxModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof FluxModelRequest) {
-            $this->logger->error('Flux文生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Fluxtext generationgraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -321,7 +321,7 @@ class FluxModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Flux文生graph:imagegeneratefail', [
+                    $this->logger->error('Fluxtext generationgraph:imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -349,7 +349,7 @@ class FluxModel extends AbstractImageGenerate
         // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Flux文生graph:所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Fluxtext generationgraph:所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 

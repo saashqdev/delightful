@@ -133,7 +133,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getservicequotientconfiguration(综合method)
+     * getservicequotientconfiguration(comprehensivemethod)
      * according tomodelversion,modelIDandorganizationencodinggetservicequotientconfiguration.
      *
      * @param string $modelOriginId modelversion
@@ -157,7 +157,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
-                // if找tomodel,notdirectlyreturn官方servicequotientconfiguration,whileisconductenterone步judge
+                // if找tomodel,notdirectlyreturnofficialservicequotientconfiguration,whileisconductenterone步judge
                 $this->logger->info('找toto应model,judgeservicequotientconfiguration', [
                     'modelVersion' => $modelOriginId,
                     'organizationCode' => $organizationCode,
@@ -268,7 +268,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     /**
      * get超清修复servicequotientconfiguration.
      * fromImageGenerateModelType::getMiracleVisionModes()[0]getmodel.
-     * if官方andnon官方allenable,priorityusenon官方configuration.
+     * ifofficialandnonofficialallenable,priorityusenonofficialconfiguration.
      *
      * @param string $modelId modelversion
      * @param string $organizationCode organizationencoding
@@ -314,7 +314,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havenon官方servicequotientcolumntable,notdependencyatorganizationencoding
+     * get所havenonofficialservicequotientcolumntable,notdependencyatorganizationencoding
      *
      * @param Category $category servicequotientcategory别
      * @return ProviderConfigModelsDTO[]
@@ -326,7 +326,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havecanuseservicequotientcolumntable(include官方servicequotient),notdependencyatorganizationencoding.
+     * get所havecanuseservicequotientcolumntable(includeofficialservicequotient),notdependencyatorganizationencoding.
      *
      * @param Category $category servicequotientcategory别
      * @return ProviderConfigModelsDTO[]
@@ -348,7 +348,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get官方activatemodelconfiguration(supportreturn多).
+     * getofficialactivatemodelconfiguration(supportreturn多).
      * @param string $modelOriginId model
      * @return ProviderConfigItem[] servicequotientconfigurationarray
      */
@@ -511,7 +511,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * fromactivatemodelmiddlefindcanuseservicequotientconfiguration
-     * priorityreturnnon官方configuration,ifnothavethenreturn官方configuration.
+     * priorityreturnnonofficialconfiguration,ifnothavethenreturnofficialconfiguration.
      *
      * @param ProviderModelEntity[] $activeModels activatemodelcolumntable
      */
@@ -563,28 +563,28 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             // getservicequotienttype
             $providerType = $serviceProviderEntity->getProviderType();
 
-            // toatnon官方servicequotient,checkitswhetheractivate
+            // toatnonofficialservicequotient,checkitswhetheractivate
             if ($providerType !== ProviderType::Official) {
-                // ifisnon官方servicequotientbutnotactivate,thenskip
+                // ifisnonofficialservicequotientbutnotactivate,thenskip
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }
-                // 找toactivatenon官方configuration,immediatelyreturn(prioritylevelmosthigh)
+                // 找toactivatenonofficialconfiguration,immediatelyreturn(prioritylevelmosthigh)
                 return $serviceProviderConfigEntity;
             }
 
-            // ifis官方servicequotientconfiguration,先save,ifnothave找tonon官方againuse
+            // ifisofficialservicequotientconfiguration,先save,ifnothave找tononofficialagainuse
             if ($officialConfig === null) {
                 $officialConfig = $serviceProviderConfigEntity;
             }
         }
 
-        // if找to官方configuration,thenreturn
+        // if找toofficialconfiguration,thenreturn
         if ($officialConfig !== null) {
             return $officialConfig;
         }
 
-        // if官方andnon官方allnothave找toactivateconfiguration,throwexception
+        // ifofficialandnonofficialallnothave找toactivateconfiguration,throwexception
         ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotActive);
     }
 

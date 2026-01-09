@@ -19,7 +19,7 @@ class MultiModalContentFormatter
      * will所haveattachmentformat化totextmiddle.
      *
      * @param string $originalContent originaltextcontent
-     * @param string $visionResponse 视觉analyzeresult
+     * @param string $visionResponse visualanalyzeresult
      * @param AttachmentInterface[] $attachments 所haveattachmentarray
      * @return string format化backtextcontent
      */
@@ -56,7 +56,7 @@ class MultiModalContentFormatter
      * supportsingle张imageand多张imagescenario.
      *
      * @param string $originalContent originaltextcontent
-     * @param string $visionResponse 视觉analyzeresult
+     * @param string $visionResponse visualanalyzeresult
      * @param AttachmentInterface[] $imageAttachments imageattachmentarray
      * @return string addimageinfotextcontent
      */

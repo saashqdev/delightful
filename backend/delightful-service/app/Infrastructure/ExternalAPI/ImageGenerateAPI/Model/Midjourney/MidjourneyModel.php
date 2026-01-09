@@ -126,7 +126,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['cdnImage']]);
         }
 
-        $this->logger->error('MJ文生graph:notgettoimageURL', [
+        $this->logger->error('MJtext generationgraph:notgettoimageURL', [
             'rawResult' => $rawResult,
         ]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
@@ -145,14 +145,14 @@ class MidjourneyModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if (! isset($result['status'])) {
-                    $this->logger->error('MJ文生graph:round询responseformaterror', [
+                    $this->logger->error('MJtext generationgraph:round询responseformaterror', [
                         'jobId' => $jobId,
                         'response' => $result,
                     ]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
                 }
 
-                $this->logger->info('MJ文生graph:round询status', [
+                $this->logger->info('MJtext generationgraph:round询status', [
                     'jobId' => $jobId,
                     'status' => $result['status'],
                     'retryCount' => $retryCount,
@@ -164,7 +164,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 }
 
                 if ($result['status'] === 'FAILED') {
-                    $this->logger->error('MJ文生graph:taskexecutefail', [
+                    $this->logger->error('MJtext generationgraph:taskexecutefail', [
                         'jobId' => $jobId,
                         'message' => $result['message'] ?? 'unknownerror',
                     ]);
@@ -175,7 +175,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->error('MJ文生graph:round询taskresultfail', [
+                $this->logger->error('MJtext generationgraph:round询taskresultfail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                     'retryCount' => $retryCount,
@@ -184,7 +184,7 @@ class MidjourneyModel extends AbstractImageGenerate
             }
         }
 
-        $this->logger->error('MJ文生graph:taskexecutetimeout', [
+        $this->logger->error('MJtext generationgraph:taskexecutetimeout', [
             'jobId' => $jobId,
             'maxRetries' => self::MAX_RETRIES,
             'totalTime' => self::MAX_RETRIES * self::RETRY_INTERVAL,
@@ -198,33 +198,33 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->api->submitTask($prompt, $mode);
 
             if (! isset($result['status'])) {
-                $this->logger->error('MJ文生graph:responseformaterror', [
+                $this->logger->error('MJtext generationgraph:responseformaterror', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
             }
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->error('MJ文生graph:submitfail', [
+                $this->logger->error('MJtext generationgraph:submitfail', [
                     'message' => $result['message'] ?? 'unknownerror',
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
             }
 
             if (empty($result['data']['jobId'])) {
-                $this->logger->error('MJ文生graph:missingtaskID', [
+                $this->logger->error('MJtext generationgraph:missingtaskID', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
 
             $jobId = $result['data']['jobId'];
-            $this->logger->info('MJ文生graph:submittasksuccess', [
+            $this->logger->info('MJtext generationgraph:submittasksuccess', [
                 'jobId' => $jobId,
             ]);
             return $jobId;
         } catch (Exception $e) {
-            $this->logger->error('MJ文生graph:submittaskexception', [
+            $this->logger->error('MJtext generationgraph:submittaskexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -242,22 +242,22 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->api->checkPrompt($prompt);
 
             if (! isset($result['status'])) {
-                $this->logger->error('MJ文生graph:Promptvalidationresponseformaterror', [
+                $this->logger->error('MJtext generationgraph:Promptvalidationresponseformaterror', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
             }
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('MJ文生graph:Promptvalidationfail', [
+                $this->logger->warning('MJtext generationgraph:Promptvalidationfail', [
                     'message' => $result['message'] ?? 'unknownerror',
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::INVALID_PROMPT);
             }
 
-            $this->logger->info('MJ文生graph:Promptvalidationcomplete');
+            $this->logger->info('MJtext generationgraph:Promptvalidationcomplete');
         } catch (Exception $e) {
-            $this->logger->error('MJ文生graph:Promptvalidationrequestfail', [
+            $this->logger->error('MJtext generationgraph:Promptvalidationrequestfail', [
                 'error' => $e->getMessage(),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::PROMPT_CHECK_FAILED);
@@ -298,7 +298,7 @@ class MidjourneyModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('MJ文生graph:invalidrequesttype', [
+            $this->logger->error('MJtext generationgraph:invalidrequesttype', [
                 'class' => get_class($imageGenerateRequest),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
@@ -316,7 +316,7 @@ class MidjourneyModel extends AbstractImageGenerate
         $prompt .= ' --v 7.0';
 
         // recordrequeststart
-        $this->logger->info('MJ文生graph:start生graph', [
+        $this->logger->info('MJtext generationgraph:start生graph', [
             'prompt' => $prompt,
             'ratio' => $imageGenerateRequest->getRatio(),
             'negativePrompt' => $imageGenerateRequest->getNegativePrompt(),
@@ -330,13 +330,13 @@ class MidjourneyModel extends AbstractImageGenerate
 
             $rawResult = $this->pollTaskResultForRaw($jobId);
 
-            $this->logger->info('MJ文生graph:generateend', [
+            $this->logger->info('MJtext generationgraph:generateend', [
                 'jobId' => $jobId,
             ]);
 
             return $rawResult;
         } catch (Exception $e) {
-            $this->logger->error('MJ文生graph:fail', [
+            $this->logger->error('MJtext generationgraph:fail', [
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),

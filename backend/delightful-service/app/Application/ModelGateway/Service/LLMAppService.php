@@ -1124,7 +1124,7 @@ class LLMAppService extends AbstractLLMAppService
         $modelVersion = $imageModel->getModelVersion();
 
         if ($imageModel->getProviderCode()->isOfficial()) {
-            // use官方servicequotient
+            // useofficialservicequotient
             $imageGenerateType = ImageGenerateModelType::fromModel(ImageGenerateModelType::Official->value, false);
         } else {
             $imageGenerateType = ImageGenerateModelType::fromModel($modelVersion, false);

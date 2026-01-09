@@ -13,13 +13,13 @@ use App\Domain\Provider\Entity\ProviderModelEntity;
  * based onorganizationencodingmodelfilterserviceinterface.
  *
  * useat替代based onmodeltable visiblePackages fieldfilterlogic
- * 企业packageimplementthisinterface,providegiveopen源packageconductmodelfilter
+ * enterprisepackageimplementthisinterface,providegiveopen源packageconductmodelfilter
  */
 interface OrganizationBasedModelFilterInterface
 {
     /**
      * based onorganizationencodingfiltermodellist
-     * thisis企业packageprovidegiveopen源package核corefiltermethod.
+     * thisisenterprisepackageprovidegiveopen源package核corefiltermethod.
      *
      * @param string $organizationCode organizationencoding
      * @param array $models 待filtermodellist [modelId => ProviderModelEntity]

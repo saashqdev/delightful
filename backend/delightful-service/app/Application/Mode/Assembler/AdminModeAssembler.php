@@ -108,7 +108,7 @@ class AdminModeAssembler
                 // maintaintobackcompatible,set providerModelId forfindtomodelID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // back台manageneeddisplay所havestatus,includenocanusemodel情况
+                // back台manageneeddisplay所havestatus,includenocanusemodelsituation
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);

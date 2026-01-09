@@ -13,7 +13,7 @@ use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Server\Event\MainCoroutineServerStart;
 
 /**
- * 官方applicationcheck.
+ * officialapplicationcheck.
  */
 #[Listener]
 class OfficialAppTokenCheckSubscriber implements ListenerInterface

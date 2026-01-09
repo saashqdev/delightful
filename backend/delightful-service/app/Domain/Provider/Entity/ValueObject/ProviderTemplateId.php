@@ -130,8 +130,8 @@ enum ProviderTemplateId: string
     {
         $mapping = $this->toProviderCodeAndCategory();
         $providerName = match ($mapping['providerCode']) {
-            ProviderCode::Official => '官方',
-            ProviderCode::Volcengine => '火山engine',
+            ProviderCode::Official => 'official',
+            ProviderCode::Volcengine => 'Volcanoengine',
             ProviderCode::OpenAI => 'OpenAI',
             ProviderCode::MicrosoftAzure => 'Microsoft Azure',
             ProviderCode::Qwen => '通义thousand问',
@@ -141,7 +141,7 @@ enum ProviderTemplateId: string
             ProviderCode::MiracleVision => 'MiracleVision',
             ProviderCode::AWSBedrock => 'AWS Bedrock',
             ProviderCode::Google => 'Google',
-            ProviderCode::VolcengineArk => '火山engine-Ark',
+            ProviderCode::VolcengineArk => 'Volcanoengine-Ark',
             ProviderCode::Gemini => 'Google Gemini',
             default => 'unknownservicequotient',
         };

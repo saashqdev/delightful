@@ -93,7 +93,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->updateModelStatus($authenticatable, $modelId, $status);
     }
 
-    // getcurrentorganizationwhetheris官方organization
+    // getcurrentorganizationwhetherisofficialorganization
     public function isCurrentOrganizationOfficial(): array
     {
         $organizationCode = $this->getAuthorization()->getOrganizationCode();
@@ -199,7 +199,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * get所havenon官方LLMservicequotientlist
+     * get所havenonofficialLLMservicequotientlist
      * directlyfromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservicequotient
      * notdependencyatcurrentorganization,适useatneedaddservicequotientscenario.
      */
@@ -207,12 +207,12 @@ class ServiceProviderApi extends AbstractApi
     public function getNonOfficialLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // directlyget所haveLLMtypenon官方servicequotient
+        // directlyget所haveLLMtypenonofficialservicequotient
         return $this->adminProviderAppService->getAllNonOfficialProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
     /**
-     * get所havecanuseLLMservicequotientlist(include官方servicequotient).
+     * get所havecanuseLLMservicequotientlist(includeofficialservicequotient).
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()

@@ -143,8 +143,8 @@ enum SystemInstructType: int
     }
 
     /**
-     * ensuresystem交互finger令存in,if缺少then补充.
-     * @return array return补充backfinger令array
+     * ensuresystem交互finger令存in,if缺少thensupplement.
+     * @return array returnsupplementbackfinger令array
      */
     public static function ensureSystemInstructs(array $instructs): array
     {
@@ -184,7 +184,7 @@ enum SystemInstructType: int
             }
         }
 
-        // checkmissingsystemfinger令typeand补充
+        // checkmissingsystemfinger令typeandsupplement
         foreach (self::cases() as $case) {
             if (! in_array($case->value, $systemTypes)) {
                 $systemInstructs[$case->value] = [

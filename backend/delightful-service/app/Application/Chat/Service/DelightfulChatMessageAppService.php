@@ -266,7 +266,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             }
         }
 
-        // todo checkwhetherhavehairmessagepermission(needhavegood友close系,企业close系,collection团close系,合as伙伴close系etc)
+        // todo checkwhetherhavehairmessagepermission(needhavegood友close系,enterpriseclose系,collection团close系,合as伙伴close系etc)
     }
 
     /**
@@ -593,7 +593,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return '';
         }
         $prompt = <<<'PROMPT'
-        youisone专业contenttitlegenerate助hand.请strict按照bydownrequireforconversationcontentgeneratetitle:
+        youisoneprofessionalcontenttitlegenerate助hand.请strictaccording tobydownrequireforconversationcontentgeneratetitle:
 
         ## taskgoal
         according toconversationcontent,generateoneconcise,accuratetitle,cansummarizeconversation核coretheme.
@@ -603,12 +603,12 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. priorityclose注conversationmiddlemostbackdiscussiontheme(mostnewtopic)
         2. bymost近conversationcontentformainreferencebasis
         3. ifmostbackthemediscussionmorefor充minute,thenbythisasfortitle核core
-        4. ignore早期already经endtopic,unlessit们andmostnewtopic密切相close
+        4. ignore早期already经endtopic,unlessit们andmostnewtopicclosely relatedclose
 
         ## strictrequire
         1. titlelength:not超pass 15 character.Englishone字母算onecharacter,汉字one字算onecharacter,other语type采useanalogouscountsolution.
-        2. content相close:titlemustdirectly反映conversation核coretheme
-        3. languagestyle:use陈述property语sentence,avoid疑问sentence
+        2. content相close:titlemustdirectlyreflectconversation核coretheme
+        3. languagestyle:usestatementproperty语sentence,avoidquestionsentence
         4. outputformat:onlyoutputtitlecontent,notwantaddanyexplain,标pointorothertext
         5. forbidlinefor:notwantreturn答conversationmiddleissue,notwantconduct额outsideexplain
 
@@ -1126,7 +1126,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $data[$seqId] = $clientSeq->toArray();
         }
         $hasMore = (count($clientSeqList) === $conversationMessagesQueryDTO->getLimit());
-        // 按照 $order indatabasemiddlequery,butistoreturnresultcollectiondescendingrowcolumn.
+        // according to $order indatabasemiddlequery,butistoreturnresultcollectiondescendingrowcolumn.
         $order = $conversationMessagesQueryDTO->getOrder();
         if ($order === Order::Desc) {
             // to $data descendingrowcolumn

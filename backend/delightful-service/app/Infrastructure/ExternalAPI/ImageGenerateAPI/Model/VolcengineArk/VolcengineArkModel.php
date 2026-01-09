@@ -149,7 +149,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('VolcengineArk文生graph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('VolcengineArktext generationgraph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -251,17 +251,17 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * validate火山ArkAPIresponsedataformat.
+     * validateVolcanoArkAPIresponsedataformat.
      */
     private function validateVolcengineArkResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data']) || empty($result['data'][0]['url'])) {
-            throw new Exception('火山Arkresponsedataformaterror');
+            throw new Exception('VolcanoArkresponsedataformaterror');
         }
     }
 
     /**
-     * will火山ArkimagedataaddtoOpenAIresponseobjectmiddle.
+     * willVolcanoArkimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -271,7 +271,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         // useRedislockensureandhairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from火山Arkresponsemiddleextractdata
+            // fromVolcanoArkresponsemiddleextractdata
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -319,7 +319,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof VolcengineArkRequest) {
-            $this->logger->error('VolcengineArk文生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('VolcengineArktext generationgraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -343,7 +343,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('VolcengineArk文生graph:imagegeneratefail', [
+                    $this->logger->error('VolcengineArktext generationgraph:imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -368,7 +368,7 @@ class VolcengineArkModel extends AbstractImageGenerate
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('VolcengineArk文生graph:所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('VolcengineArktext generationgraph:所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -377,7 +377,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * for火山engineArkoriginaldataaddwatermark.
+     * forVolcanoengineArkoriginaldataaddwatermark.
      */
     private function processVolcengineArkRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {

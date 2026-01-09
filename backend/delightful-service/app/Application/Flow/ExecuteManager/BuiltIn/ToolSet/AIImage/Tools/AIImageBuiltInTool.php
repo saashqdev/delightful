@@ -31,12 +31,12 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生graphtool';
+        return 'text generationgraphtool';
     }
 
     public function getCallback(): ?Closure
     {
-        // canacceptparameterfinger定任意 model,defaultis火山.
+        // canacceptparameterfinger定任意 model,defaultisVolcano.
         return function (ExecutionData $executionData) {
             $args = $executionData->getTriggerData()?->getParams();
             $model = $args['model'] ?? ImageGenerateModelType::Volcengine->value;
@@ -64,7 +64,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "model": {
             "type": "string",
             "key": "model",
-            "title": "所use文生graphmodel",
+            "title": "所usetext generationgraphmodel",
             "description": "optional:Volcengine,Midjourney,Flux1-Schnell,defaultVolcengine,TTAPI-GPT4o",
             "required": null,
             "value": null,

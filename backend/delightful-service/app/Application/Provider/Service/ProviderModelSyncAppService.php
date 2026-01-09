@@ -47,7 +47,7 @@ class ProviderModelSyncAppService
 
     /**
      * fromoutside部APIsyncmodel.
-     * whenservicequotientconfigurationcreateorupdateo clock,ifisOfficialservicequotientandis官方organization,thenfromoutside部APIpullmodel.
+     * whenservicequotientconfigurationcreateorupdateo clock,ifisOfficialservicequotientandisofficialorganization,thenfromoutside部APIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,

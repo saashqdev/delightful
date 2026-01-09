@@ -93,7 +93,7 @@ abstract class AbstractSms implements SmsInterface
         }
         // conductvariablematchshort信match
         if (! empty($variables)) {
-            // compatible火山templatevariablereplace,先will $message middlevariableparseoutcome such aswill[123456] parsefor['VerificationCode'=>123456]back,againconducttemplatecontentreplace
+            // compatibleVolcanotemplatevariablereplace,先will $message middlevariableparseoutcome such aswill[123456] parsefor['VerificationCode'=>123456]back,againconducttemplatecontentreplace
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
             $i = 1;
             foreach ($variables as $k => $v) {

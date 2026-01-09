@@ -156,7 +156,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $senderSeqData = $senderLatestSeq->toArray();
                     $senderSeqData['content'] = ['refer_message_ids' => [$senderMessageId]];
                     $senderSeenSeqEntity = SeqAssembler::generateStatusChangeSeqEntity($senderSeqData, $senderMessageId);
-                    // byat存inbatchquantitywrite情况,thiswithinonlygenerateentity,notcallcreatemethod
+                    // byat存inbatchquantitywritesituation,thiswithinonlygenerateentity,notcallcreatemethod
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {

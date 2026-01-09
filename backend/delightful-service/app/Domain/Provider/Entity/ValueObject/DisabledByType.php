@@ -9,6 +9,6 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 enum DisabledByType: string
 {
-    case OFFICIAL = 'OFFICIAL'; // 官方disable
+    case OFFICIAL = 'OFFICIAL'; // officialdisable
     case USER = 'USER'; // userdisable
 }

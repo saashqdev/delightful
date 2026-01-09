@@ -198,7 +198,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $messages = $this->getConversationChatMessages($aiConversationEntity->getId(), $conversationMessagesQueryDTO);
         $userSendCount = 0;
         $aiSendCount = 1;
-        // messageisconversationwindowshow倒序
+        // messageisconversationwindowshowreverse order
         foreach ($messages as $message) {
             $senderMessageId = $message->getSeq()->getSenderMessageId();
             if (! empty($senderMessageId)) {// to方send
@@ -904,7 +904,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * createonestream seq andimmediatelypush,byatfrontclient rendering占位.notice,streammessagenotcanusecomeupdatealready经pushcompletedmessage,avoid篡改originalcontent!
+     * createonestream seq andimmediatelypush,byatfrontclient renderingplaceholder.notice,streammessagenotcanusecomeupdatealready经pushcompletedmessage,avoid篡改originalcontent!
      * ifneedtoalready经hairoutmessageconductupdate,needuse editMessage method,editmessagewillrecordcompletemessagehistoryversion.
      */
     public function createAndSendStreamStartSequence(CreateStreamSeqDTO $createStreamSeqDTO, MessageInterface $messageStruct, DelightfulConversationEntity $senderConversationEntity): DelightfulSeqEntity
@@ -977,7 +977,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             Db::rollBack();
             throw $exception;
         }
-        // frontclient renderingneed:ifisstreamstarto clock,推onenormal seq givefront端,useatrender占位,butis seq_id andnothave落library.
+        // frontclient renderingneed:ifisstreamstarto clock,推onenormal seq givefront端,useatrenderplaceholder,butis seq_id andnothave落library.
         SocketIOUtil::sendSequenceId($receiveSeqEntity);
         return $senderSeqEntity;
     }

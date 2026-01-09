@@ -9,7 +9,7 @@ namespace App\Domain\ImageGenerate\Contract;
 
 /**
  * 字bodyprovide者interface
- * useatinopen源projectmiddledefinition字bodymanagestandard,by企业projectimplementspecificlogic.
+ * useatinopen源projectmiddledefinition字bodymanagestandard,byenterpriseprojectimplementspecificlogic.
  */
 interface FontProviderInterface
 {

@@ -162,7 +162,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * 麦吉互联网search简single版,adaptprocess,onlysupport简singlesearch.
+     * MagicInternetsearch简single版,adaptprocess,onlysupport简singlesearch.
      * @throws Throwable
      * @throws RedisException
      */
@@ -349,7 +349,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode())
             ->setModel($modelInterface);
-        // according touserupdown文,decompose子issue.needcomprehenduser想问what,againgo拆searchkeyword.
+        // according touserupdown文,decompose子issue.needcomprehenduserwant to askwhat,againgo拆searchkeyword.
         $searchKeywords = $this->delightfulLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
         $queryVo->setSearchKeywords($searchKeywords);
         $searchDetailItems = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
@@ -439,7 +439,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             $noRepeatSearchContexts = $this->delightfulLLMDomainService->filterSearchContexts($queryVo);
             $costMircoTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(
-                'mindSearch getSearchResults filterSearchContexts cleansearchresultmiddleduplicateitem cleanfront:%s cleanback:%s end计o clock 累计耗o clock %s second',
+                'mindSearch getSearchResults filterSearchContexts cleansearchresultmiddleduplicateitem cleanfront:%s cleanback:%s end计o clock accumulated costo clock %s second',
                 count($allSearchContexts),
                 count($noRepeatSearchContexts),
                 $costMircoTime / 1000
@@ -579,7 +579,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $extraContentParallel = new Parallel(3);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $extraContentParallel->add(function () use ($summarize, $dto, $modelInterface) {
-            // odin willmodify vo objectmiddlevalue,avoid污染,copyagainpass in
+            // odin willmodify vo objectmiddlevalue,avoidpollution,copyagainpass in
             CoContext::setRequestId($dto->getRequestId());
             // thinking导graph
             $mindMapQueryVo = $this->getSearchVOByAggregateSearchDTO($dto, $summarize);
@@ -745,7 +745,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             ->setStreamOptions(
                 (new StreamOptions())->setStatus(StreamMessageStatus::Start)->setStream(true)
             );
-        # pushstreamstartfrontgenerateone seq,markstreamstart,useatfrontclient rendering占位
+        # pushstreamstartfrontgenerateone seq,markstreamstart,useatfrontclient renderingplaceholder
         $senderSeqEntity = $this->delightfulChatDomainService->createAndSendStreamStartSequence(
             (new CreateStreamSeqDTO())->setTopicId($dto->getTopicId())->setAppMessageId($dto->getAppMessageId()),
             $messageContent,
@@ -797,7 +797,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         foreach ($noRepeatSearchContexts as $context) {
             $requestId = CoContext::getRequestId();
             $parallel->add(function () use ($context, $detailReadMaxNum, $requestId, &$currentDetailReadCount, $readPagesDetailChannel, $perReadResponseNum, &$questionsNum) {
-                // 知乎读notonepoint
+                // Zhihu readingnotonepoint
                 if (str_contains($context->getCachedPageUrl(), 'zhihu.com')) {
                     return;
                 }
@@ -837,7 +837,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             --$questionsNum;
         }
         $this->logger->info(sprintf(
-            'mindSearch getSearchResults intensive reading所havesearchresult intensive reading累计耗o clock:%s second',
+            'mindSearch getSearchResults intensive reading所havesearchresult intensive readingaccumulated costo clock:%s second',
             number_format(TimeUtil::getMillisecondDiffFromNow($timeStart) / 1000, 2)
         ));
     }
@@ -901,7 +901,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         });
         $parallel->wait();
         $this->logger->info(sprintf(
-            'mindSearch getSearchResults generateassociateissue子issue,andintensive reading所havesearchresult,end 累计耗o clock:%s second',
+            'mindSearch getSearchResults generateassociateissue子issue,andintensive reading所havesearchresult,end accumulated costo clock:%s second',
             number_format(TimeUtil::getMillisecondDiffFromNow($timeStart) / 1000, 2)
         ));
     }

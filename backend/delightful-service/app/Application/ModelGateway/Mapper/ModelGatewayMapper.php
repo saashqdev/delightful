@@ -298,7 +298,7 @@ class ModelGatewayMapper extends ModelMapper
         // getcurrentset餐downcanusemodel
         $availableModelIds = $dataIsolation->getSubscriptionManager()->getAvailableModelIds($modelType);
 
-        // needcontain官方organizationdata
+        // needcontainofficialorganizationdata
         $providerDataIsolation = ProviderDataIsolation::createByBaseDataIsolation($dataIsolation);
         $providerDataIsolation->setContainOfficialOrganization(true);
 
@@ -350,7 +350,7 @@ class ModelGatewayMapper extends ModelMapper
             $list[$model->getAttributes()->getKey()] = $model;
         }
 
-        // 按照 $availableModelIds sort
+        // according to $availableModelIds sort
         if ($availableModelIds !== null) {
             $orderedList = [];
             foreach ($availableModelIds as $modelId) {
@@ -404,7 +404,7 @@ class ModelGatewayMapper extends ModelMapper
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // ifnotis官方organization,butismodelis官方organization,统onedisplay Delightful
+        // ifnotisofficialorganization,butismodelisofficialorganization,统onedisplay Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -412,7 +412,7 @@ class ModelGatewayMapper extends ModelMapper
 
         try {
             $fileDomainService = di(FileDomainService::class);
-            // ifis官方organization icon,switch官方organization
+            // ifisofficialorganization icon,switchofficialorganization
             if ($providerModelEntity->isOffice()) {
                 $iconUrl = $fileDomainService->getLink($providerDataIsolation->getOfficialOrganizationCode(), $providerModelEntity->getIcon())?->getUrl() ?? '';
             } else {

@@ -134,7 +134,7 @@ class ChatMemory implements MemoryPersistenceInterface
                 }
             }
         }
-        // 按 key 倒序
+        // 按 key reverse order
         krsort($messageLists);
         return $messageLists;
     }

@@ -161,7 +161,7 @@ readonly class RoleDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_not_found', ['id' => $id]);
         }
 
-        // 补充roleassociateuserIDinfo
+        // supplementroleassociateuserIDinfo
         $roleUsers = $this->roleRepository->getRoleUsers($dataIsolation->getCurrentOrganizationCode(), $id);
         $roleEntity->setUserIds($roleUsers);
 
@@ -175,7 +175,7 @@ readonly class RoleDomainService
     {
         $roleEntity = $this->roleRepository->getByName($dataIsolation->getCurrentOrganizationCode(), $name);
 
-        // 补充roleassociateuserIDinfo,avoidcall方getnotto userIds
+        // supplementroleassociateuserIDinfo,avoidcall方getnotto userIds
         if ($roleEntity !== null) {
             $userIds = $this->roleRepository->getRoleUsers($dataIsolation->getCurrentOrganizationCode(), $roleEntity->getId());
             $roleEntity->setUserIds($userIds);

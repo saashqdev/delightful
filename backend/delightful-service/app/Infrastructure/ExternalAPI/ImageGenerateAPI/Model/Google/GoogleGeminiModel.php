@@ -141,7 +141,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('Google Gemini文生graph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Google Geminitext generationgraph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -248,7 +248,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('Google Gemini文生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Google Geminitext generationgraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -273,7 +273,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Google Gemini文生graph:imagegeneratefail', [
+                    $this->logger->error('Google Geminitext generationgraph:imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -298,7 +298,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Google Gemini文生graph:所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Google Geminitext generationgraph:所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 

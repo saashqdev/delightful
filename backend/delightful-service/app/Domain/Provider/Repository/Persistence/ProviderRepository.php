@@ -151,10 +151,10 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * getfinger定category别non官方servicequotient (Legacy).
+     * getfinger定category别nonofficialservicequotient (Legacy).
      *
      * @param Category $category servicequotientcategory别
-     * @return ProviderEntity[] non官方servicequotientlist
+     * @return ProviderEntity[] nonofficialservicequotientlist
      */
     public function getNonOfficialByCategory(Category $category): array
     {

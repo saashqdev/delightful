@@ -41,7 +41,7 @@ class RetrievalMethod
      *
      * combine语义retrieveandall文retrievemethod.
      * meanwhileexecuteall文retrieveandtoquantityretrieve,然backpass重sortstepchoosemost佳result.
-     * combine两typeretrieve技术advantage,弥补eachfromnot足.
+     * combine两typeretrievetechnologyadvantage,弥补eachfromnot足.
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
 

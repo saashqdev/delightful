@@ -20,7 +20,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 清null官方organization Delightful servicequotientconfigurationandmodel(放indelete软deletedata之front)
+        // 清nullofficialorganization Delightful servicequotientconfigurationandmodel(放indelete软deletedata之front)
         $this->cleanOfficialDelightfulProviderData();
 
         // cleanup service_provider 相closefour张tablemiddle软deletedata
@@ -91,23 +91,23 @@ return new class extends Migration {
     }
 
     /**
-     * 清null官方organization Delightful servicequotientconfigurationandmodel.
+     * 清nullofficialorganization Delightful servicequotientconfigurationandmodel.
      */
     private function cleanOfficialDelightfulProviderData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清null官方organization Delightful servicequotientconfigurationandmodel');
+        $logger->info('start清nullofficialorganization Delightful servicequotientconfigurationandmodel');
 
         try {
             // usetransactionensuredataone致property
             Db::transaction(function () use ($logger) {
-                // get官方organizationencoding
+                // getofficialorganizationencoding
                 $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
-                $logger->info("官方organizationencoding: {$officialOrganizationCode}");
+                $logger->info("officialorganizationencoding: {$officialOrganizationCode}");
 
                 $totalDeleted = 0;
 
-                // 1. find官方organizationmiddle Delightful servicequotientconfigurationID
+                // 1. findofficialorganizationmiddle Delightful servicequotientconfigurationID
                 $delightfulProviderConfigQuery = Db::table('service_provider_configs as configs')
                     ->join('service_provider as providers', 'configs.service_provider_id', '=', 'providers.id')
                     ->select('configs.id')
@@ -120,37 +120,37 @@ return new class extends Migration {
                 if (! empty($delightfulConfigIds)) {
                     $logger->info('找to Delightful servicequotientconfigurationquantity: ' . count($delightfulConfigIds));
 
-                    // 2. delete官方organizationmiddle Delightful servicequotientdownmodel
+                    // 2. deleteofficialorganizationmiddle Delightful servicequotientdownmodel
                     $deletedModelsCount = Db::table('service_provider_models')
                         ->where('organization_code', $officialOrganizationCode)
                         ->whereIn('service_provider_config_id', $delightfulConfigIds)
                         ->delete();
                     $totalDeleted += $deletedModelsCount;
-                    $logger->info("delete官方organization Delightful servicequotientmodel: {$deletedModelsCount} item");
+                    $logger->info("deleteofficialorganization Delightful servicequotientmodel: {$deletedModelsCount} item");
 
-                    // 3. delete官方organization Delightful servicequotientconfiguration
+                    // 3. deleteofficialorganization Delightful servicequotientconfiguration
                     $deletedConfigsCount = Db::table('service_provider_configs')
                         ->where('organization_code', $officialOrganizationCode)
                         ->whereIn('id', $delightfulConfigIds)
                         ->delete();
                     $totalDeleted += $deletedConfigsCount;
-                    $logger->info("delete官方organization Delightful servicequotientconfiguration: {$deletedConfigsCount} item");
+                    $logger->info("deleteofficialorganization Delightful servicequotientconfiguration: {$deletedConfigsCount} item");
                 } else {
                     $logger->info('not找toneedcleanup Delightful servicequotientconfiguration');
                 }
 
-                // 4. 额outsidecleanup:delete所have is_office=1 官方organizationmodel
+                // 4. 额outsidecleanup:delete所have is_office=1 officialorganizationmodel
                 $deletedOfficeModelsCount = Db::table('service_provider_models')
                     ->where('organization_code', $officialOrganizationCode)
                     ->where('is_office', 1)
                     ->delete();
                 $totalDeleted += $deletedOfficeModelsCount;
-                $logger->info("delete官方organization Delightful model(is_office=1): {$deletedOfficeModelsCount} item");
+                $logger->info("deleteofficialorganization Delightful model(is_office=1): {$deletedOfficeModelsCount} item");
 
-                $logger->info("官方organization Delightful servicequotientdatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
+                $logger->info("officialorganization Delightful servicequotientdatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
-            $logger->error('cleanup官方organization Delightful servicequotientdataproceduremiddlehair生error: ' . $e->getMessage());
+            $logger->error('cleanupofficialorganization Delightful servicequotientdataproceduremiddlehair生error: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -216,14 +216,14 @@ return new class extends Migration {
         $logger->info('startcleanup service_provider_models table冗remainderdata');
 
         try {
-            // 1. get官方organizationencoding
+            // 1. getofficialorganizationencoding
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
-            $logger->info("官方organizationencoding: {$officialOrganizationCode}");
+            $logger->info("officialorganizationencoding: {$officialOrganizationCode}");
 
-            // 2. single独transaction:reset官方organizationmodel model_parent_id
+            // 2. single独transaction:resetofficialorganizationmodel model_parent_id
             $this->resetOfficialModelsParentId($officialOrganizationCode, $logger);
 
-            // 3. get官方organization所haveenablemodel(notneedtransaction)
+            // 3. getofficialorganization所haveenablemodel(notneedtransaction)
             $officialEnabledModels = Db::table('service_provider_models')
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('status', Status::Enabled->value)
@@ -234,9 +234,9 @@ return new class extends Migration {
                 ->toArray();
 
             $officialModelIds = array_keys($officialEnabledModels);
-            $logger->info('get官方organizationenablemodelquantity: ' . count($officialModelIds));
+            $logger->info('getofficialorganizationenablemodelquantity: ' . count($officialModelIds));
 
-            // 4. get所havenon官方organizationencoding(notneedtransaction)
+            // 4. get所havenonofficialorganizationencoding(notneedtransaction)
             $allOrganizationCodes = Db::table('service_provider_models')
                 ->where('organization_code', '!=', $officialOrganizationCode)
                 ->whereNull('deleted_at')
@@ -255,7 +255,7 @@ return new class extends Migration {
     }
 
     /**
-     * reset官方organizationmodel parent_id(single独transaction).
+     * resetofficialorganizationmodel parent_id(single独transaction).
      */
     private function resetOfficialModelsParentId(string $officialOrganizationCode, LoggerInterface $logger): void
     {
@@ -264,7 +264,7 @@ return new class extends Migration {
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('model_parent_id', '!=', 0)
                 ->update(['model_parent_id' => 0]);
-            $updatedCount && $logger->info("官方organizationmodel model_parent_id resetfor 0: {$updatedCount} item");
+            $updatedCount && $logger->info("officialorganizationmodel model_parent_id resetfor 0: {$updatedCount} item");
         });
     }
 
@@ -331,17 +331,17 @@ return new class extends Migration {
     private function cleanSingleOrganization(string $organizationCode, array $officialModelIds, array $officialEnabledModels): array
     {
         return Db::transaction(function () use ($organizationCode, $officialModelIds, $officialEnabledModels) {
-            // get官方organizationencodinguseatsecurityguard
+            // getofficialorganizationencodinguseatsecurityguard
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-            // guardcheck:ensurenothandle官方organization
+            // guardcheck:ensurenothandleofficialorganization
             if ($organizationCode === $officialOrganizationCode) {
                 return ['deleted_count' => 0];
             }
 
             $totalDeletedCount = 0;
 
-            // 1. delete所have is_office = 1 data(guard:non官方organization)
+            // 1. delete所have is_office = 1 data(guard:nonofficialorganization)
             $isOfficeDeletedCount = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
                 ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
@@ -372,14 +372,14 @@ return new class extends Migration {
             foreach ($modelsWithParent as $model) {
                 $parentId = $model['model_parent_id'];
 
-                // check model_parent_id whetherin官方organizationmodel id middle
+                // check model_parent_id whetherinofficialorganizationmodel id middle
                 if (! in_array($parentId, $officialModelIds)) {
-                    // model_parent_id in官方organization找notto,markdelete
+                    // model_parent_id inofficialorganization找notto,markdelete
                     $deleteIds[] = $model['id'];
                     continue;
                 }
 
-                // if model_parent_id 存in,butstatusand官方organizationone致,alsodelete
+                // if model_parent_id 存in,butstatusandofficialorganizationone致,alsodelete
                 $officialModel = $officialEnabledModels[$parentId] ?? null;
                 if ($officialModel && $model['status'] == $officialModel['status']) {
                     $deleteIds[] = $model['id'];

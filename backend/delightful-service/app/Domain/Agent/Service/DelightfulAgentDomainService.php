@@ -230,7 +230,7 @@ class DelightfulAgentDomainService
             // validationnormal交互finger令
             InstructType::validateInstructs($instructs);
 
-            // ensuresystem交互finger令存in,if缺少then补充
+            // ensuresystem交互finger令存in,if缺少thensupplement
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * query企业down所have助理,itemitemquery:status,createperson,search.
+     * queryenterprisedown所have助理,itemitemquery:status,createperson,search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -258,7 +258,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * get企业down所have助理create者.
+     * getenterprisedown所have助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

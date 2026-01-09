@@ -448,7 +448,7 @@ class VolcengineStandardClient
     }
 
     /**
-     * verify火山engineAPIresponsestatus码
+     * verifyVolcanoengineAPIresponsestatus码
      * onlyuseatsubmittasko clockverifywhethersuccesssubmit(20000000).
      *
      * @param array $responseHeaders responseheadarray

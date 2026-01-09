@@ -85,7 +85,7 @@ class PermissionCheckerTest extends TestCase
     }
 
     /**
-     * testnopermission情况.
+     * testnopermissionsituation.
      */
     public function testNoPermission(): void
     {
@@ -102,7 +102,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // permissionnot存in情况
+        // permissionnot存insituation
         $this->assertFalse(PermissionChecker::checkPermission(
             '13800000003',
             SuperPermissionEnum::HIDE_USER_OR_DEPT,

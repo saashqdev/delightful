@@ -280,7 +280,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * get企业inside部assistant.
+     * getenterpriseinside部assistant.
      * @param DelightfulUserAuthorization $authorization
      */
     public function getAgentsByOrganizationPage(Authenticatable $authorization, int $page, int $pageSize, string $agentName): array
@@ -336,7 +336,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return ['total' => 0, 'list' => []];
         }
 
-        // 1. use queriesAvailable query官方+userorganizationassistant(allquantitydata)
+        // 1. use queriesAvailable queryofficial+userorganizationassistant(allquantitydata)
         $fullQuery = clone $query;
         $fullPage = Page::createNoPage(); // getallquantitydata
         $agentAppService = di(AgentAppService::class);
@@ -365,7 +365,7 @@ class DelightfulAgentAppService extends AbstractAppService
             // add agent_id field,value同 id
             $agentData['agent_id'] = $agentData['id'];
 
-            // addwhetherfor官方organizationidentifier
+            // addwhetherforofficialorganizationidentifier
             $agentData['is_office'] = OfficialOrganizationUtil::isOfficialOrganization($agent->getOrganizationCode());
 
             // handleavatarlink
@@ -426,7 +426,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $agentVersionDTO->check();
 
-        // onlypublishto企业才from己giveadd
+        // onlypublishtoenterprise才from己giveadd
         if ($agentVersionDTO->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             $visibilityConfig = $agentVersionDTO->getVisibilityConfig();
             if (! $visibilityConfig) {
@@ -899,7 +899,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * fornewregisterorganizationcreatepersoninitializeone文生graphAgent.
+     * fornewregisterorganizationcreatepersoninitializeonetext generationgraphAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -916,7 +916,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $loadPresetConfig = $this->loadPresetConfig('generate_image', ['modelName' => $modelName]);
         // prepare基本configuration
         $config = [
-            'agent_name' => '文生graph助hand',
+            'agent_name' => 'text generationgraph助hand',
             'agent_description' => 'onestrongbigAItextgenerategraphlike助hand,canaccording to您descriptioncreate精美graphlike.',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
@@ -1354,7 +1354,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * minute离官方organizationanduserorganizationassistant.
+     * minute离officialorganizationanduserorganizationassistant.
      *
      * @param array $agentEntities assistant实bodyarray
      * @return array return [officialAgents, userOrgAgents]
@@ -1384,17 +1384,17 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function getAgentConversationMapping(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {
-        // 3. minute离官方andnon官方assistant
+        // 3. minute离officialandnonofficialassistant
         [$officialAgents, $userOrgAgents] = $this->separateOfficialAndUserAgents($agentEntities);
 
         // extract flow_code
         $officialFlowCodes = array_map(static fn ($agent) => $agent->getFlowCode(), $officialAgents);
         $userOrgFlowCodes = array_map(static fn ($agent) => $agent->getFlowCode(), $userOrgAgents);
 
-        // 4. minute别query官方anduserorganizationassistantuserID
+        // 4. minute别queryofficialanduserorganizationassistantuserID
         $flowCodeToUserIdMap = [];
 
-        // 4.1 query官方assistantuserID
+        // 4.1 queryofficialassistantuserID
         if (! empty($officialFlowCodes) && OfficialOrganizationUtil::hasOfficialOrganization()) {
             $officialDataIsolation = new ContactDataIsolation();
             $officialDataIsolation->setCurrentUserId($authorization->getId());
@@ -1438,12 +1438,12 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function batchGetAvatarUrls(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {
-        // minute离官方organizationanduserorganizationassistant
+        // minute离officialorganizationanduserorganizationassistant
         [$officialAgents, $userOrgAgents] = $this->separateOfficialAndUserAgents($agentEntities);
 
         $avatarUrlMap = [];
 
-        // batchquantityget官方organizationavatarlink
+        // batchquantitygetofficialorganizationavatarlink
         if (! empty($officialAgents) && OfficialOrganizationUtil::hasOfficialOrganization()) {
             $officialAvatars = array_filter(array_map(static fn ($agent) => $agent->getAgentAvatar(), $officialAgents));
             if (! empty($officialAvatars)) {
@@ -1478,7 +1478,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * will DelightfulAgentEntity convertfor DelightfulAgentVersionEntity.
-     * useathandle私personassistantnothavepublishversion情况.
+     * useathandle私personassistantnothavepublishversionsituation.
      *
      * @param DelightfulAgentEntity $agentEntity assistant实body
      * @return DelightfulAgentVersionEntity assistantversion实body

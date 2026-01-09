@@ -446,7 +446,7 @@ class DelightfulFlowExecutor
                 }
 
                 $vertex = $this->dag->getVertex($node->getNodeId());
-                // thiswithingeneralcome说notwillfornull,先not管null情况
+                // thiswithingeneralcome说notwillfornull,先not管nullsituation
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
                     // notcanfrom己连from己

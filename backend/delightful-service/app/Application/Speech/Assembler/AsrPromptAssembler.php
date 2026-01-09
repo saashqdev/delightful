@@ -39,26 +39,26 @@ class AsrPromptAssembler
         $textContent = implode("\n\n", $contentParts);
 
         $template = <<<'PROMPT'
-youisone专业recordingcontenttitlegenerate助hand.
+youisoneprofessionalrecordingcontenttitlegenerate助hand.
 
 ## backgroundinstruction
-usersubmitonesegmentrecordingcontent,recordingcontent经passvoiceidentify转fortext,usermaybealsowillprovidehand写noteasfor补充instruction.现inneedyouaccording tothisthesecontentgenerateoneconciseaccuratetitle.
+usersubmitonesegmentrecordingcontent,recordingcontent经passvoiceidentify转fortext,usermaybealsowillprovidehand写noteasforsupplementinstruction.现inneedyouaccording tothisthesecontentgenerateoneconciseaccuratetitle.
 
 ## contentcome源instruction
 - <notecontent>:userhand写notecontent,istorecording重pointrecordandsummary,usuallycontainclosekeyinfo
-- <voiceidentifycontent>:passvoiceidentify技术willrecordingconvertbecometext,反映recordingactualcontent
+- <voiceidentifycontent>:passvoiceidentifytechnologywillrecordingconvertbecometext,reflectrecordingactualcontent
 
 ## titlegeneraterequire
 
 ### prioritylevel原then(重want)
 1. **notepriority**:if存in<notecontent>,titleshould侧重notecontent
 2. **重视notetitle**:ifnoteis Markdown formatandcontaintitle(# openheadline),priority采usenotemiddletitlecontent
-3. **综合consider**:meanwhilereferencevoiceidentifycontent,ensuretitlecompleteaccurate
+3. **comprehensiveconsider**:meanwhilereferencevoiceidentifycontent,ensuretitlecompleteaccurate
 4. **keywordextract**:fromnoteandvoiceidentifycontentmiddleextractmost核corekeyword
 
 ### formatrequire
-1. **lengthlimit**:not超pass 20 character(汉字按 1 charactercalculate)
-2. **languagestyle**:use陈述property语sentence,avoid疑问sentence
+1. **lengthlimit**:not超pass 20 character(Chinese characters by 1 charactercalculate)
+2. **languagestyle**:usestatementproperty语sentence,avoidquestionsentence
 3. **conciseexplicit**:directlysummarize核coretheme,notwantaddmodification词
 4. **纯textoutput**:onlyoutputtitlecontent,notwantaddany标point符number,引numberorothermodification
 
@@ -93,7 +93,7 @@ PROMPT;
         string $language
     ): string {
         $template = <<<'PROMPT'
-youisone专业recordingcontenttitlegenerate助hand.
+youisoneprofessionalrecordingcontenttitlegenerate助hand.
 
 ## backgroundinstruction
 useruploadoneaudiofiletosystemmiddle,andinchat框middlesendsummaryrequest.现inneedyouaccording touserrequestmessage(itsmiddlecontainfile名),forthistimerecordingsummarygenerateoneconciseaccuratetitle.
@@ -114,8 +114,8 @@ usersendoriginalmessage如down:
 3. **extractkeyword**:fromfile名middleextractmost核corekeywordandtheme
 
 ### formatrequire
-1. **lengthlimit**:not超pass 20 character(汉字按 1 charactercalculate)
-2. **languagestyle**:use陈述property语sentence,avoid疑问sentence
+1. **lengthlimit**:not超pass 20 character(Chinese characters by 1 charactercalculate)
+2. **languagestyle**:usestatementproperty语sentence,avoidquestionsentence
 3. **conciseexplicit**:directlysummarize核coretheme,notwantaddmodification词
 4. **纯textoutput**:onlyoutputtitlecontent,notwantaddany标point符number,引numberorothermodification
 

@@ -58,12 +58,12 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($executionData->getDataIsolation()->getCurrentOrganizationCode(), $executionData->getDataIsolation()->getCurrentUserId());
         $model = $this->modelGatewayMapper->getChatModelProxy($dataIsolation, $modelName);
 
-        // default视觉modelconfigurationthenisfrom己
+        // defaultvisualmodelconfigurationthenisfrom己
         if ($paramsConfig->getModelConfig()->getVisionModel() === '') {
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // if主动close视觉can力.or者 currentmodelsupport,butischoose别model,alsois相whenatwantclosecurrentmodel视觉can力
+        // if主动closevisualcan力.or者 currentmodelsupport,butischoose别model,alsois相whenatwantclosecurrentmodelvisualcan力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -132,7 +132,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // only currentmodeland视觉modelnotone致,or者 currentmodelnot supported多模state o clock.in视觉modeltoolmiddle,currentmodelequal视觉modelandand具have视觉can力,thennotwillproduce死loop
+                // only currentmodelandvisualmodelnotone致,or者 currentmodelnot supported多模state o clock.invisualmodeltoolmiddle,currentmodelequalvisualmodelandand具havevisualcan力,thennotwillproduce死loop
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -174,7 +174,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     // 重neworganization多模state
                     if ($model->getModelOptions()->isMultiModal()) {
                         $message->addContent(UserMessageContent::text($content));
-                        // 补充多模state
+                        // supplement多模state
                         $imageUrls = [];
                         foreach ($lastMessage->getContents() ?? [] as $userContent) {
                             if (! empty($userContent->getImageUrl())) {

@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // ifoldstatusalready经is企业or者市场,thennotallowback
+        // ifoldstatusalready经isenterpriseor者市场,thennotallowback
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -92,7 +92,7 @@ class DelightfulAgentVersionDomainService
             // personuse
             $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
-            // publishto企业inside部
+            // publishtoenterpriseinside部
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
                 $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);

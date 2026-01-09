@@ -116,7 +116,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test置topfeatureside界情况.
+     * test置topfeatureside界situation.
      */
     public function testProjectPinEdgeCases(): void
     {
@@ -609,7 +609,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testfileeditside界情况.
+     * testfileeditside界situation.
      */
     public function fileEditingEdgeCases(string $fileId): void
     {
@@ -828,7 +828,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreate者columntableside界情况.
+     * test协asprojectcreate者columntableside界situation.
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {

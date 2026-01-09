@@ -46,7 +46,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * 火山云short信signature暂notsupportinternationalization.
+     * Volcano云short信signature暂notsupportinternationalization.
      */
     protected array $signMap = [
         '灯塔engine' => [
@@ -71,7 +71,7 @@ class Template extends AbstractTemplate
 
     /**
      * according to传comeshort信text,parsevariable. onlyvariablevalue,notmatchvariablekey!
-     * needvariableparsereason:火山short信onlysupportvariableshort信send,whilebusiness方willoutat创蓝short信reason,will传come整short信textcontent,nothavevariable.
+     * needvariableparsereason:Volcanoshort信onlysupportvariableshort信send,whilebusiness方willoutat创蓝short信reason,will传come整short信textcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
@@ -85,7 +85,7 @@ class Template extends AbstractTemplate
             // ifaccording toshort信contentmatchtotemplateid,then变morepass intemplateidvalue
             $pregMatch && [$templateId, $matchedVariables] = $this->variablePregMatch([$templateId => $pregMatch], $message);
         } elseif (isset($this->variablePregAnalyse[$language])) {
-            // 火山normalshort信,andno法according totype + language certaintemplateid,tryaccording toshort信textcontent + language certaintemplateidandvariable
+            // Volcanonormalshort信,andno法according totype + language certaintemplateid,tryaccording toshort信textcontent + language certaintemplateidandvariable
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {

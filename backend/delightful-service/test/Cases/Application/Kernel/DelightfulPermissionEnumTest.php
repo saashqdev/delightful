@@ -125,7 +125,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     {
         $tree = $this->permissionEnum->getPermissionTree();
 
-        // default情况down(nonplatformorganization)notcontain platform platformsectionpoint
+        // defaultsituationdown(nonplatformorganization)notcontain platform platformsectionpoint
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
@@ -169,7 +169,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * testside界情况.
+     * testside界situation.
      */
     public function testEdgeCases()
     {

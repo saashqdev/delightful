@@ -86,7 +86,7 @@ class ServiceProviderInitializer
                 'id' => '759103339540475904',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => 'by Delightful pass官方deploy API comeimplement AI modelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                'description' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuse海quantitybigmodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'llm',
@@ -102,7 +102,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'The AI model invocation is achieved through the API officially deployed by Delightful, and you can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful pass官方deploy API comeimplement AI modelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuse海quantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -112,7 +112,7 @@ class ServiceProviderInitializer
                 'id' => '759109912413282304',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'Azure provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,致力atsecurity,can靠andcancontinueAIresolvesolution,',
+                'description' => 'Azure provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution,',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0, // Normal
                 'category' => 'llm',
@@ -128,7 +128,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,致力atsecurity,can靠andcancontinueAIresolvesolution,',
+                        'zh_CN' => 'Azure provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution,',
                     ],
                 ]),
                 'remark' => '',
@@ -136,9 +136,9 @@ class ServiceProviderInitializer
             // Volcengine - LLM
             [
                 'id' => '759110465734258688',
-                'name' => '火山engine',
+                'name' => 'Volcanoengine',
                 'provider_code' => 'Volcengine',
-                'description' => '字section跳动旗down云serviceplatform,havefrom主研hair豆packagebigmodel系column.涵盖豆package通usemodel Pro,lite,具备differenttexthandleand综合can力,alsohaverole扮演,voice合becomeetc多typemodel.',
+                'description' => '字sectionByteDancedown云serviceplatform,havefrommain researchhair豆packagebigmodel系column.cover Doubanpackage通usemodel Pro,lite,havedifferenttexthandleandcomprehensivecan力,alsohaveroleplay,voice合becomeetc多typemodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -154,7 +154,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'A cloud service platform under ByteDance, with independently developed Doubao large model series. Includes Doubao general models Pro and lite with different text processing and comprehensive capabilities, as well as various models for role-playing, speech synthesis, etc.',
-                        'zh_CN' => '字section跳动旗down云serviceplatform,havefrom主研hair豆packagebigmodel系column.涵盖豆package通usemodel Pro,lite,具备differenttexthandleand综合can力,alsohaverole扮演,voice合becomeetc多typemodel.',
+                        'zh_CN' => '字sectionByteDancedown云serviceplatform,havefrommain researchhair豆packagebigmodel系column.cover Doubanpackage通usemodel Pro,lite,havedifferenttexthandleandcomprehensivecan力,alsohaveroleplay,voice合becomeetc多typemodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -162,9 +162,9 @@ class ServiceProviderInitializer
             // Volcengine - VLM
             [
                 'id' => '759115881155366912',
-                'name' => '火山engine',
+                'name' => 'Volcanoengine',
                 'provider_code' => 'Volcengine',
-                'description' => 'provide多type智can绘graphbigmodel,生graphstylediverse,securityproperty极high,can亠泛application干教育,娱乐,办公etc场quantity.',
+                'description' => 'provide多type智can绘graphbigmodel,生graphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -176,11 +176,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Volcengine',
-                        'zh_CN' => '火山engine',
+                        'zh_CN' => 'Volcanoengine',
                     ],
                     'description' => [
                         'en_US' => 'Provides a variety of intelligent drawing models, with diverse image generation styles, extremely high security, and can be widely applied to education, entertainment, office and other scenarios.',
-                        'zh_CN' => 'provide多type智can绘graphbigmodel,生graphstylediverse,securityproperty极high,can亠泛application干教育,娱乐,办公etc场quantity.',
+                        'zh_CN' => 'provide多type智can绘graphbigmodel,生graphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
                     ],
                 ]),
                 'remark' => '',
@@ -188,9 +188,9 @@ class ServiceProviderInitializer
             // MiracleVision - VLM
             [
                 'id' => '759116798252494849',
-                'name' => '美graph奇想',
+                'name' => '美graphimagination',
                 'provider_code' => 'MiracleVision',
-                'description' => '专注atperson脸技术,personbody技术,graphlikeidentify,graphlikehandle,graphlikegenerateetc核coredomain',
+                'description' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetc核coredomain',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/meitu-qixiang Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -202,11 +202,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'MiracleVision',
-                        'zh_CN' => '美graph奇想',
+                        'zh_CN' => '美graphimagination',
                     ],
                     'description' => [
                         'en_US' => 'Focused on facial technology, body technology, image recognition, image processing, image generation and other core areas',
-                        'zh_CN' => '专注atperson脸技术,personbody技术,graphlikeidentify,graphlikehandle,graphlikegenerateetc核coredomain',
+                        'zh_CN' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetc核coredomain',
                     ],
                 ]),
                 'remark' => '',
@@ -216,7 +216,7 @@ class ServiceProviderInitializer
                 'id' => '759144726407426049',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => 'by Delightful pass官方deploy API comeimplement多type热门文生graph,graph生graphetcmodelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                'description' => 'by Delightful passofficialdeploy API comeimplement多typepopular text generationgraph,graph生graphetcmodelcall,candirectlypurchasepointsuse海quantitybigmodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'vlm',
@@ -232,7 +232,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Delightful implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful pass官方deploy API comeimplement多type热门文生graph,graph生graphetcmodelcall,candirectlypurchasepointsuse海quantitybigmodel.',
+                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplement多typepopular text generationgraph,graph生graphetcmodelcall,candirectlypurchasepointsuse海quantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -242,7 +242,7 @@ class ServiceProviderInitializer
                 'id' => '759145734546132992',
                 'name' => 'TTAPI.io',
                 'provider_code' => 'TTAPI',
-                'description' => '整合多platform文生graph,文生videocan力,Midjourney API,DALL·E 3,Luma文生video,Flux APIserviceetcetc.',
+                'description' => 'integrate multipleplatformtext generationgraph,text generationvideocan力,Midjourney API,DALL·E 3,Lumatext generationvideo,Flux APIserviceetcetc.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/TTAPI.io Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -258,7 +258,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Integrates multi-platform text-to-image, text-to-video capabilities, Midjourney API, DALL·E 3, Luma text-to-video, Flux API service, etc.',
-                        'zh_CN' => '整合多platform文生graph,文生videocan力,Midjourney API,DALL·E 3,Luma文生video,Flux APIserviceetcetc.',
+                        'zh_CN' => 'integrate multipleplatformtext generationgraph,text generationvideocan力,Midjourney API,DALL·E 3,Lumatext generationvideo,Flux APIserviceetcetc.',
                     ],
                 ]),
                 'remark' => '',
@@ -294,7 +294,7 @@ class ServiceProviderInitializer
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock is亚马逊 AWS provideoneitemservice,专注atfor企业provide先enter AI languagemodeland视觉model.itsmodel家族include Anthropic  Claude 系column,Meta  Llama 3.1 系columnetc,涵盖from轻quantityleveltohighperformance多typechoose,supporttextgenerate,conversation,graphlikehandleetc多typetask,适useatdifferent规模andrequirement企业application.',
+                'description' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovide先enter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude 系column,Meta  Llama 3.1 系columnetc,coverfrom轻quantityleveltohighperformance多typechoose,supporttextgenerate,conversation,graphlikehandleetc多typetask,适useatdifferentscaleandrequiremententerpriseapplication.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock is亚马逊 AWS provideoneitemservice,专注atfor企业provide先enter AI languagemodeland视觉model.itsmodel家族include Anthropic  Claude 系column,Meta  Llama 3.1 系columnetc,涵盖from轻quantityleveltohighperformance多typechoose,supporttextgenerate,conversation,graphlikehandleetc多typetask,适useatdifferent规模andrequirement企业application.',
+                        'zh_CN' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovide先enter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude 系column,Meta  Llama 3.1 系columnetc,coverfrom轻quantityleveltohighperformance多typechoose,supporttextgenerate,conversation,graphlikehandleetc多typetask,适useatdifferentscaleandrequiremententerpriseapplication.',
                     ],
                 ]),
                 'remark' => '',
@@ -320,7 +320,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920384',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,致力atsecurity,can靠andcancontinueAIresolvesolution.',
+                'description' => 'provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -336,7 +336,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure offers a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, and is committed to providing safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,致力atsecurity,can靠andcancontinueAIresolvesolution.',
+                        'zh_CN' => 'Azure provide多type先enterAImodel,includeGPT-3.5andmostnewGPT-4系column,support多typedatatypeandcomplextask,dedicateatsecurity,can靠andcancontinueAIresolvesolution.',
                     ],
                 ]),
                 'remark' => '',
@@ -346,7 +346,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920385',
                 'name' => 'Qwen',
                 'provider_code' => 'Qwen',
-                'description' => 'provide通usegraphlikegeneratemodel,support多type艺术style,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
+                'description' => 'provide通usegraphlikegeneratemodel,support多typeartstyle,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/qwen Avatars White.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -362,7 +362,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'It provides a universal image generation model, supports multiple artistic styles, and is particularly skilled at complex text rendering, especially in both Chinese and English text rendering.',
-                        'zh_CN' => 'provide通usegraphlikegeneratemodel,support多type艺术style,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
+                        'zh_CN' => 'provide通usegraphlikegeneratemodel,support多typeartstyle,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
                     ],
                 ]),
                 'remark' => '',
@@ -372,7 +372,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920386',
                 'name' => 'Google Cloud',
                 'provider_code' => 'Google-Image',
-                'description' => 'provide Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel,具备roleone致propertyhigh,精准graphlikeeditetc.',
+                'description' => 'provide Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel,haveroleone致propertyhigh,precisegraphlikeeditetc.',
                 'icon' => $orgCode . '/713471849556451329/2c17c6393771ee3048ae34d6b380c5ec/Q-2terxwePTElOJ_ONtrw.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -388,7 +388,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Gemini 2.5 Flash Image (Nano Banana) image generation model is provided, featuring high character consistency and precise image editing, etc.',
-                        'zh_CN' => 'provide Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel,具备roleone致propertyhigh,精准graphlikeeditetc.',
+                        'zh_CN' => 'provide Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel,haveroleone致propertyhigh,precisegraphlikeeditetc.',
                     ],
                 ]),
                 'remark' => '',
@@ -398,7 +398,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920387',
                 'name' => 'VolcengineArk',
                 'provider_code' => 'VolcengineArk',
-                'description' => '火山engineArk',
+                'description' => 'VolcanoengineArk',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -410,7 +410,7 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'VolcengineArk',
-                        'zh_CN' => '火山engine(Ark)',
+                        'zh_CN' => 'Volcanoengine(Ark)',
                     ],
                     'description' => [
                         'en_US' => '',

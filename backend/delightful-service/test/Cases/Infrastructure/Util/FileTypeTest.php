@@ -109,7 +109,7 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * testfiletoobig情况.
+     * testfiletoobigsituation.
      */
     public function testFileTooLarge()
     {

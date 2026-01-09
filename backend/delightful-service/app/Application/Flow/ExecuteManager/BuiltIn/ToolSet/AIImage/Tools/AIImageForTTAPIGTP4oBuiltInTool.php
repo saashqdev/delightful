@@ -31,7 +31,7 @@ class AIImageForTTAPIGTP4oBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生graphtool-gpt-4omodel';
+        return 'text generationgraphtool-gpt-4omodel';
     }
 
     public function getCallback(): ?Closure

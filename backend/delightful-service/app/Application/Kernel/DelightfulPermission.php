@@ -373,7 +373,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * returnresourcebind Operation Enum category名,defaultread `DelightfulResourceEnum::operationEnumClass()`.
-     * 企业版canoverride本method,will企业resourcemappingtocustomize Operation Enum.
+     * enterprise版canoverride本method,willenterpriseresourcemappingtocustomize Operation Enum.
      */
     protected function resolveOperationEnumClass(DelightfulResourceEnum $resourceEnum): string
     {

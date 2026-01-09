@@ -45,7 +45,7 @@ use function Hyperf\Translation\__;
 use function mb_strlen;
 
 /**
- * AI文生graph.
+ * AItext generationgraph.
  */
 class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 {

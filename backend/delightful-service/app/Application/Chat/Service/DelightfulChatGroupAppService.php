@@ -117,7 +117,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // mostbigperson数limitsubtractgocurrentperson数
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
         $chatGroupUserNumLimit -= $groupUserCount;
-        // get本timeneedadd群member (综合 finger定user_id + departmentiddownuser)
+        // get本timeneedadd群member (comprehensive finger定user_id + departmentiddownuser)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
         // judge哪theseuseralready经ingroup chatmiddle

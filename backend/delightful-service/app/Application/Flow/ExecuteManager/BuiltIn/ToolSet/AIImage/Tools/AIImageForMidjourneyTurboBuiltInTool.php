@@ -27,7 +27,7 @@ class AIImageForMidjourneyTurboBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生graphtool-Midjourney-Turbomodel';
+        return 'text generationgraphtool-Midjourney-Turbomodel';
     }
 
     public function getCallback(): ?Closure

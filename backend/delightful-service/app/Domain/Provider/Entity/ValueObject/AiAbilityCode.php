@@ -19,7 +19,7 @@ enum AiAbilityCode: string
     case AudioFileRecognition = 'audio_file_recognition';  // audiofileidentify
     case AutoCompletion = 'auto_completion';               // from动补all
     case ContentSummary = 'content_summary';               // contentsummary
-    case VisualUnderstanding = 'visual_understanding';     // 视觉comprehend
+    case VisualUnderstanding = 'visual_understanding';     // visualcomprehend
     case SmartRename = 'smart_rename';                     // 智canrename
     case AiOptimization = 'ai_optimization';               // AI optimize
 
@@ -35,7 +35,7 @@ enum AiAbilityCode: string
             self::AudioFileRecognition => 'audiofileidentify',
             self::AutoCompletion => 'from动补all',
             self::ContentSummary => 'contentsummary',
-            self::VisualUnderstanding => '视觉comprehend',
+            self::VisualUnderstanding => 'visualcomprehend',
             self::SmartRename => '智canrename',
             self::AiOptimization => 'AI optimize',
             default => 'Unknown',
@@ -48,13 +48,13 @@ enum AiAbilityCode: string
     public function description(): string
     {
         return match ($this) {
-            self::Ocr => '本can力覆盖platform所have OCR applicationscenario,精准捕捉andextract PDF,扫描itemandeachcategoryimagemiddletextinfo.',
-            self::WebSearch => '本can力覆盖platform AI bigmodel互联网searchscenario,精准getand整合mostnewnew闻,事实anddatainfo.',
+            self::Ocr => '本can力覆盖platform所have OCR applicationscenario,precise捕捉andextract PDF,扫描itemandeachcategoryimagemiddletextinfo.',
+            self::WebSearch => '本can力覆盖platform AI bigmodel互联网searchscenario,precisegetand整合mostnewnew闻,事实anddatainfo.',
             self::RealtimeSpeechRecognition => '本can力覆盖platform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamand逐步outputaccuratetextcontent.',
-            self::AudioFileRecognition => '本can力覆盖platform所haveaudiofile转textapplicationscenario,精准identify说话person,audiotextetcinfo.',
+            self::AudioFileRecognition => '本can力覆盖platform所haveaudiofile转textapplicationscenario,preciseidentify说话person,audiotextetcinfo.',
             self::AutoCompletion => '本can力覆盖platform所haveinputcontentfrom动补allapplicationscenario,according tocomprehendupdown文foruserfrom动补allcontent,byuserchoosewhether采纳.',
             self::ContentSummary => '本can力覆盖platform所havecontentsummaryapplicationscenario,tolong篇document,reportorwebpage文chapterconduct深degreeanalyze.',
-            self::VisualUnderstanding => '本can力覆盖platform所haveneedletbigmodelconduct视觉comprehendapplicationscenario,精准comprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
+            self::VisualUnderstanding => '本can力覆盖platform所haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
             self::SmartRename => '本can力覆盖platform所havesupport AI renameapplicationscenario,according tocomprehendupdown文foruserfrom动conductcontenttitle命名.',
             self::AiOptimization => '本can力覆盖platform所havesupport AI optimizecontentapplicationscenario,according tocomprehendupdown文foruserfrom动tocontentconductoptimize.',
             default => 'Unknown',

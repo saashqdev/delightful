@@ -135,7 +135,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
                     $this->associateQuestions[$itemKey][] = $questionItem;
                 }
             } else {
-                // singleQuestionItem情况
+                // singleQuestionItemsituation
                 $questionItem = $data instanceof QuestionItem ? $data : new QuestionItem($data);
                 $itemKey = self::QUESTION_DELIMITER . $questionItem->getParentQuestionId();
                 $this->associateQuestions[$itemKey][] = $questionItem;

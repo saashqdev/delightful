@@ -44,7 +44,7 @@ use function Hyperf\Translation\__;
 use function mb_strlen;
 
 /**
- * AI文生graph.
+ * AItext generationgraph.
  */
 class DelightfulChatAIImageAppService extends AbstractAIImageAppService
 {
@@ -99,10 +99,10 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
             if (! empty($reqDTO->getAttachments())) {
-                // toquotecontent重new文生graph
+                // toquotecontent重newtext generationgraph
                 $this->handleGenerateImageByReference($requestContext, $reqDTO);
             } else {
-                // 文生graph
+                // text generationgraph
                 $this->handleGenerateImage($requestContext, $reqDTO);
             }
         } catch (Throwable $e) {
@@ -112,7 +112,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * toquotecontent重new文生graph.
+     * toquotecontent重newtext generationgraph.
      */
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
@@ -124,7 +124,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 文生graph.
+     * text generationgraph.
      */
     private function handleGenerateImage(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {

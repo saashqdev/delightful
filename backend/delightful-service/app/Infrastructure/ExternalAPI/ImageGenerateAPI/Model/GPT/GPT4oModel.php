@@ -149,7 +149,7 @@ class GPT4oModel extends AbstractImageGenerate
 
         // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($imageUrls)) {
-            $this->logger->error('GPT4o文生graph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('GPT4otext generationgraph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -157,7 +157,7 @@ class GPT4oModel extends AbstractImageGenerate
         ksort($imageUrls);
         $imageUrls = array_values($imageUrls);
 
-        $this->logger->info('GPT4o文生graph:generateend', [
+        $this->logger->info('GPT4otext generationgraph:generateend', [
             'totalImages' => count($imageUrls),
             'requestedImages' => $imageGenerateRequest->getGenerateNum(),
         ]);
@@ -199,7 +199,7 @@ class GPT4oModel extends AbstractImageGenerate
         $referImages = $imageGenerateRequest->getReferImages();
 
         // recordrequeststart
-        $this->logger->info('GPT4o文生graph:start生graph', [
+        $this->logger->info('GPT4otext generationgraph:start生graph', [
             'prompt' => $prompt,
             'referImages' => $referImages,
         ]);
@@ -208,21 +208,21 @@ class GPT4oModel extends AbstractImageGenerate
             $result = $this->api->submitGPT4oTask($prompt, $referImages);
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('GPT4o文生graph:generaterequestfail', ['message' => $result['message'] ?? 'unknownerror']);
+                $this->logger->warning('GPT4otext generationgraph:generaterequestfail', ['message' => $result['message'] ?? 'unknownerror']);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
             }
 
             if (empty($result['data']['jobId'])) {
-                $this->logger->error('GPT4o文生graph:missingtaskID', ['response' => $result]);
+                $this->logger->error('GPT4otext generationgraph:missingtaskID', ['response' => $result]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
             $taskId = $result['data']['jobId'];
-            $this->logger->info('GPT4o文生graph:submittasksuccess', [
+            $this->logger->info('GPT4otext generationgraph:submittasksuccess', [
                 'taskId' => $taskId,
             ]);
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->warning('GPT4o文生graph:callimagegenerateinterfacefail', ['error' => $e->getMessage()]);
+            $this->logger->warning('GPT4otext generationgraph:callimagegenerateinterfacefail', ['error' => $e->getMessage()]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
     }
@@ -252,7 +252,7 @@ class GPT4oModel extends AbstractImageGenerate
 
                 // iftaskalsoinconductmiddle,etc待backcontinueround询
                 if ($result['status'] === 'ON_QUEUE') {
-                    $this->logger->info('GPT4o文生graph:taskhandlemiddle', [
+                    $this->logger->info('GPT4otext generationgraph:taskhandlemiddle', [
                         'jobId' => $jobId,
                         'attempt' => $attempts + 1,
                     ]);
@@ -263,7 +263,7 @@ class GPT4oModel extends AbstractImageGenerate
 
                 throw new Exception('unknowntaskstatus:' . $result['status']);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o文生graph:round询taskfail', [
+                $this->logger->error('GPT4otext generationgraph:round询taskfail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                 ]);
@@ -298,7 +298,7 @@ class GPT4oModel extends AbstractImageGenerate
 
                 // iftaskalsoinconductmiddle,etc待backcontinueround询
                 if ($result['status'] === 'ON_QUEUE') {
-                    $this->logger->info('GPT4o文生graph:taskhandlemiddle', [
+                    $this->logger->info('GPT4otext generationgraph:taskhandlemiddle', [
                         'jobId' => $jobId,
                         'attempt' => $attempts + 1,
                     ]);
@@ -309,7 +309,7 @@ class GPT4oModel extends AbstractImageGenerate
 
                 throw new Exception('unknowntaskstatus:' . $result['status']);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o文生graph:round询taskfail', [
+                $this->logger->error('GPT4otext generationgraph:round询taskfail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                 ]);
@@ -326,7 +326,7 @@ class GPT4oModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GPT4oModelRequest) {
-            $this->logger->error('GPT4o文生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('GPT4otext generationgraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -349,7 +349,7 @@ class GPT4oModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('GPT4o文生graph:imagegeneratefail', [
+                    $this->logger->error('GPT4otext generationgraph:imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -377,7 +377,7 @@ class GPT4oModel extends AbstractImageGenerate
         // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('GPT4o文生graph:所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('GPT4otext generationgraph:所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 

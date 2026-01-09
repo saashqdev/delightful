@@ -15,7 +15,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id primary keyID
  * @property int $business_type 模piecetype,file属at哪模piece
- * @property int $file_type filetype:0:官方add,1:organizationadd
+ * @property int $file_type filetype:0:officialadd,1:organizationadd
  * @property string $key filekey
  * @property int $file_size filesize
  * @property string $organization organizationencoding

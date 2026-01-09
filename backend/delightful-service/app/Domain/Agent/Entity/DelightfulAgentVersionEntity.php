@@ -69,7 +69,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?string $versionNumber = '';
 
     /**
-     * publishrange. 0:personuse,1:企业inside部,2:application市场.
+     * publishrange. 0:personuse,1:enterpriseinside部,2:application市场.
      */
     protected ?int $releaseScope = 0;
 
@@ -84,7 +84,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $reviewStatus;
 
     /**
-     * publishto企业inside部status.
+     * publishtoenterpriseinside部status.
      */
     protected ?int $enterpriseReleaseStatus;
 

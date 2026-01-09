@@ -16,7 +16,7 @@ enum Category: string
     {
         return match ($this) {
             self::LLM => 'bigmodel',
-            self::VLM => '视觉model',
+            self::VLM => 'visualmodel',
         };
     }
 }

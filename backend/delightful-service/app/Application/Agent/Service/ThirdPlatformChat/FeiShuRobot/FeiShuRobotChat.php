@@ -760,7 +760,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             return $postContent;
         }
 
-        // handlecontainimage情况
+        // handlecontainimagesituation
         $lastPosition = 0;
         $contentBlocks = [];
 

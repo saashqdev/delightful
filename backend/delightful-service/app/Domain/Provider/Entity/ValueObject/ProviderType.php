@@ -17,7 +17,7 @@ enum ProviderType: int
     {
         return match ($this) {
             self::Normal => 'normal',
-            self::Official => '官方',
+            self::Official => 'official',
             self::Custom => 'customize',
         };
     }

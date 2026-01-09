@@ -305,7 +305,7 @@ class TokenTextSplitter extends TextSplitter
         }, $splits);
 
         if ($separator !== '') {
-            // processhaveminute隔符情况
+            // processhaveminute隔符situation
             $goodSplits = [];
             $goodSplitsLengths = [];
             $actualSeparator = $this->keepSeparator ? $separator : '';

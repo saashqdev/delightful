@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
 
 /**
- * AI文生graphrequestparameter.
+ * AItext generationgraphrequestparameter.
  */
 class AIImageGenerateParamsVO extends AbstractValueObject
 {
@@ -179,7 +179,7 @@ class AIImageGenerateParamsVO extends AbstractValueObject
 
     public function setSizeFromRadioAndModel(string $radio, ImageGenerateModelType $modelType = ImageGenerateModelType::Volcengine): AIImageGenerateParamsVO
     {
-        // 火山 sizemapping
+        // Volcano sizemapping
         $volcengineRadioSizeMap = [
             Radio::OneToOne->value => ['width' => '768', 'height' => '768'],
             Radio::TwoToThree->value => ['width' => '512', 'height' => '768'],

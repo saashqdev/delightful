@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontain官方organization,按照pass inIDorder重newsortresult,maintain官方organization助理infront
+        // ifcontainofficialorganization,according topass inIDorder重newsortresult,maintainofficialorganization助理infront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -100,7 +100,7 @@ class AgentAppService extends AbstractAppService
         $contactDataIsolation = $this->createContactDataIsolationByBase($agentDataIsolation);
         $userDepartmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($contactDataIsolation, $agentDataIsolation->getCurrentUserId(), true);
 
-        // ifneedcontain官方organization,thenwill官方organization助理rowinmostfrontsurface
+        // ifneedcontainofficialorganization,thenwillofficialorganization助理rowinmostfrontsurface
         if ($containOfficialOrganization) {
             $officialAgents = [];
             $nonOfficialAgents = [];
@@ -113,7 +113,7 @@ class AgentAppService extends AbstractAppService
                 }
             }
 
-            // 重newsort:官方organization助理infront
+            // 重newsort:officialorganization助理infront
             $data['list'] = array_merge($officialAgents, $nonOfficialAgents);
         }
         $visibleAgents = [];
@@ -144,7 +144,7 @@ class AgentAppService extends AbstractAppService
     }
 
     /**
-     * 按照finger定IDorderto助理listconductsort.
+     * according tofinger定IDorderto助理listconductsort.
      *
      * @param array<DelightfulAgentEntity> $agents 助理实bodyarray
      * @param array $sortedIds sortIDarray
@@ -162,7 +162,7 @@ class AgentAppService extends AbstractAppService
             $agentMap[$agent->getId()] = $agent;
         }
 
-        // 按照finger定order重neworganizationarray
+        // according tofinger定order重neworganizationarray
         $sortedAgents = [];
         foreach ($sortedIds as $id) {
             if (isset($agentMap[$id])) {

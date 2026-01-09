@@ -9,7 +9,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 enum ModelType: int
 {
-    case TEXT_TO_IMAGE = 0; // 文生graph
+    case TEXT_TO_IMAGE = 0; // text generationgraph
     case IMAGE_TO_IMAGE = 1; // graph生graph
     case IMAGE_ENHANCE = 2; // imageenhance
     case LLM = 3; // bigmodel
@@ -18,7 +18,7 @@ enum ModelType: int
     public function label(): string
     {
         return match ($this) {
-            self::TEXT_TO_IMAGE => '文生graph',
+            self::TEXT_TO_IMAGE => 'text generationgraph',
             self::IMAGE_TO_IMAGE => 'graph生graph',
             self::IMAGE_ENHANCE => 'imageenhance',
             self::LLM => 'bigmodel',

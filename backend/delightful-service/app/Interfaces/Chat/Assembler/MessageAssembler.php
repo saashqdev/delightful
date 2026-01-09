@@ -126,7 +126,7 @@ class MessageAssembler
         // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,need补充
+        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,needsupplement
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -155,7 +155,7 @@ class MessageAssembler
         // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,need补充
+        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,needsupplement
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());

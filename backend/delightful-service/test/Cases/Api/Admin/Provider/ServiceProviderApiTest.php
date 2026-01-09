@@ -219,12 +219,12 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * create官方servicequotient.
+     * createofficialservicequotient.
      */
     public function testCreateLLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方servicequotientsingleyuantest',
+            'alias' => 'officialservicequotientsingleyuantest',
             'config' => [
                 // 国际接入point
                 'url' => 'international_access_point',
@@ -237,7 +237,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方servicequotientsingleyuantest',
+                    'zh_CN' => 'officialservicequotientsingleyuantest',
                 ],
             ],
         ];
@@ -247,19 +247,19 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方servicequotientsingleyuantest', $detail['alias']);
+        $this->assertEquals('officialservicequotientsingleyuantest', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('****', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);
     }
 
     /**
-     * create官方servicequotient.
+     * createofficialservicequotient.
      */
     public function testCreateVLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方servicequotientsingleyuantest',
+            'alias' => 'officialservicequotientsingleyuantest',
             'config' => [
                 // 国际接入point
                 'proxy_url' => 'international_access_point',
@@ -272,7 +272,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方servicequotientsingleyuantest',
+                    'zh_CN' => 'officialservicequotientsingleyuantest',
                 ],
             ],
         ];
@@ -282,7 +282,7 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方servicequotientsingleyuantest', $detail['alias']);
+        $this->assertEquals('officialservicequotientsingleyuantest', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('sk-*****************************bab', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);

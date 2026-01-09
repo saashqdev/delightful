@@ -125,7 +125,7 @@ class DelightfulFlowEntity extends AbstractEntity
 
     public function prepareTestRun(): void
     {
-        // 试运lineiswant按照starto clockcalculate
+        // 试运lineiswantaccording tostarto clockcalculate
         $this->enabled = true;
 
         // process试运lineits实onlyneed nodes
@@ -207,7 +207,7 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->modifier = $publisher;
         $this->updatedAt = new DateTime('now');
 
-        // publisho clockneed按照startcomeprocess
+        // publisho clockneedaccording tostartcomeprocess
         $enable = $this->enabled;
         $this->enabled = true;
         $this->nodeValidate(true);

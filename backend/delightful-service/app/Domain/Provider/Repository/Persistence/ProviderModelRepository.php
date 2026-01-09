@@ -145,13 +145,13 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         // 2. judgemodelbelong toorganizationwhetherandcurrentorganizationone致
         if ($modelOrganizationCode !== $currentOrganizationCode) {
-            // organizationnotone致:judgemodelbelong toorganizationwhetheris官方organization
+            // organizationnotone致:judgemodelbelong toorganizationwhetherisofficialorganization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
-                // model属at官方organizationandcurrentorganizationnotis官方organization:走写o clockcopylogic
+                // model属atofficialorganizationandcurrentorganizationnotisofficialorganization:走写o clockcopylogic
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
-                // other情况:nopermission操as
+                // othersituation:nopermission操as
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
             }
         } else {
@@ -184,12 +184,12 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array
     {
-        // ifis官方servicequotient,needconductdatamergeandstatusjudge
+        // ifisofficialservicequotient,needconductdatamergeandstatusjudge
         if ($providerEntity->getProviderCode() === ProviderCode::Official && ! OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
-        // non官方servicequotient,按原logicqueryfinger定configurationdownmodel
+        // nonofficialservicequotient,按原logicqueryfinger定configurationdownmodel
         if (! is_numeric($configId)) {
             return [];
         }
@@ -250,7 +250,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 ->where('organization_code', $organizationCode)
                 ->whereIn('service_provider_config_id', $enabledConfigIdArray);
             if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
-                // querynormalorganizationfrom己model. 官方organizationmodel现in model_parent_id equalitfrom己,need洗data.
+                // querynormalorganizationfrom己model. officialorganizationmodel现in model_parent_id equalitfrom己,need洗data.
                 $organizationModelsBuilder->where('model_parent_id', 0);
             }
             // iffinger定category,addcategoryfiltercondition
@@ -266,7 +266,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $organizationModels = ProviderModelAssembler::toEntities($organizationModelsResult);
         }
 
-        // 3. getDelightfulmodel(ifnotis官方organization)
+        // 3. getDelightfulmodel(ifnotisofficialorganization)
         $delightfulModels = [];
         if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             $delightfulModels = $this->delightfulProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
@@ -462,7 +462,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * whetheris官方organization.
+     * whetherisofficialorganization.
      */
     private function isOfficialOrganization(string $organizationCode): bool
     {

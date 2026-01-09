@@ -16,7 +16,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * 火山引upshort信categoryinterface.
+ * Volcano引upshort信categoryinterface.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 class VolcengineSms extends VolcengineApi
@@ -39,7 +39,7 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * sendverify码,火山verify码short信not supportedpass infinger定number.
+     * sendverify码,Volcanoverify码short信not supportedpass infinger定number.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {

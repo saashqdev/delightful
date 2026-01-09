@@ -43,7 +43,7 @@ class QwenProvider implements IProvider
         $qwenAPI = new QwenImageAPI($apiKey);
 
         $body = [];
-        // 文生graphconfiguration
+        // text generationgraphconfiguration
         $body['prompt'] = 'generateoneonly狗';
         $body['size'] = '1328*1328'; // useqwen-imagesupportdefault1:1size
         $body['n'] = 1;

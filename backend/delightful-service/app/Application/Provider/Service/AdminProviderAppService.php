@@ -299,15 +299,15 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所havenon官方servicequotientcolumntable,notdependencyatorganization.
+     * get所havenonofficialservicequotientcolumntable,notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
-     * @return ProviderConfigModelsDTO[] non官方servicequotientcolumntable
+     * @return ProviderConfigModelsDTO[] nonofficialservicequotientcolumntable
      */
     public function getAllNonOfficialProviders(Category $category, string $organizationCode): array
     {
-        // get所havenon官方servicequotient
+        // get所havenonofficialservicequotient
         $serviceProviders = $this->adminProviderDomainService->getAllNonOfficialProviders($category);
 
         if (empty($serviceProviders)) {
@@ -321,7 +321,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所havecanuseservicequotientcolumntable(include官方servicequotient),notdependencyatorganization.
+     * get所havecanuseservicequotientcolumntable(includeofficialservicequotient),notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
@@ -403,7 +403,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get官方organizationdown所havecanusemodel.
+     * getofficialorganizationdown所havecanusemodel.
      * @return ProviderModelDetailDTO[]
      */
     public function queriesModels(DelightfulUserAuthorization $authorization, ProviderModelQuery $providerModelQuery): array
@@ -580,7 +580,7 @@ readonly class AdminProviderAppService
         }
     }
 
-    // whetheris官方organization
+    // whetherisofficialorganization
     private function isOfficialOrganization(string $organizationCode): bool
     {
         $officialOrganization = config('service_provider.office_organization');

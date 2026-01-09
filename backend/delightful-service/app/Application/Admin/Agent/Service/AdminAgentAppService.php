@@ -104,7 +104,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * get企业down所have助理create者.
+     * getenterprisedown所have助理create者.
      * @return array<array{user_id:string,nickname:string,avatar:string}>
      */
     public function getOrganizationAgentsCreators(DelightfulUserAuthorization $authorization): array
@@ -140,7 +140,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * query企业down所have助理,itemitemquery:status,createperson,search.
+     * queryenterprisedown所have助理,itemitemquery:status,createperson,search.
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {

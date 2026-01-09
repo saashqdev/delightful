@@ -38,7 +38,7 @@ class QwenImageAPI
     }
 
     /**
-     * submit文生graphtask
+     * submittext generationgraphtask
      */
     public function submitTask(array $params): array
     {

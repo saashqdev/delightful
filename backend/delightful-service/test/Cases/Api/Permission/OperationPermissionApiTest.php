@@ -25,7 +25,7 @@ class OperationPermissionApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserorganizationadministratorlist - success情况.
+     * testgetuserorganizationadministratorlist - successsituation.
      */
     public function testGetUserOrganizationAdminListSuccess(): void
     {

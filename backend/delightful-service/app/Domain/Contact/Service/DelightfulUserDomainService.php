@@ -229,27 +229,27 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     public function getUserDetailByUserIdsWithOrgCodes(array $userIds, array $userOrganizations): array
     {
-        // get官方organizationencoding
+        // getofficialorganizationencoding
         $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-        // mergeuserorganizationand官方organization
+        // mergeuserorganizationandofficialorganization
         $orgCodes = array_filter(array_unique(array_merge($userOrganizations, [$officialOrganizationCode])));
 
         // from usertable拿基本info,support多organizationquery
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, $orgCodes);
 
-        // checkcurrentuserwhether拥have官方organization
+        // checkcurrentuserwhether拥haveofficialorganization
         $hasOfficialOrganization = in_array($officialOrganizationCode, $userOrganizations, true);
 
-        // according touserwhether拥have官方organizationcomedecidefilterstrategy
+        // according touserwhether拥haveofficialorganizationcomedecidefilterstrategy
         if (! $hasOfficialOrganization) {
-            // ifusernothave官方organization,filter掉官方organizationnonAIuser
+            // ifusernothaveofficialorganization,filter掉officialorganizationnonAIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {
-                // ifnotis官方organization,directlyretain
+                // ifnotisofficialorganization,directlyretain
                 if ($user->getOrganizationCode() !== $officialOrganizationCode) {
                     return true;
                 }
-                // ifis官方organization,onlyretainAIuser
+                // ifisofficialorganization,onlyretainAIuser
                 return $user->getUserType() === UserType::Ai;
             });
         }

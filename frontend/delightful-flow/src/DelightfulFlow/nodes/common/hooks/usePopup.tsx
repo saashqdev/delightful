@@ -1,5 +1,5 @@
 ﻿/**
- * 处理Node type下拉状态和行为
+ * Handle Node type dropdown state and behavior
  */
 
 import { DelightfulFlow } from "@/DelightfulFlow/types/flow"

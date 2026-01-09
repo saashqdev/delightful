@@ -27,17 +27,17 @@ export const FullscreenModal = ({
 	debugLogs?: TestingResultRow[]
 	allowDebug: boolean
 }) => {
-	// 创建一个引用，用于小地图导航
+	// Create a reference for minimap navigation
 	const contentRef = useRef<HTMLDivElement>(null)
 
-	// 用于跟踪复制状态
+	// Track copy status
 	const [copyStates, setCopyStates] = useState({
 		input: false,
 		output: false,
 		debug: false,
 	})
 
-	// 防止滚动穿透
+	// Prevent scroll penetration
 	useEffect(() => {
 		if (visible) {
 			document.body.style.overflow = "hidden"

@@ -33,13 +33,13 @@ exports[`DelightfulTable > Snapshot Test > Basic Table Snapshot 1`] = `
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      姓名
+                      Name
                     </th>
                     <th
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      年龄
+                      Age
                     </th>
                   </tr>
                 </thead>
@@ -77,7 +77,7 @@ exports[`DelightfulTable > Snapshot Test > Basic Table Snapshot 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      张三
+                      Zhang San
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -92,7 +92,7 @@ exports[`DelightfulTable > Snapshot Test > Basic Table Snapshot 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      李四
+                      Li Si
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -223,13 +223,13 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Pagination 1`] = 
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      姓名
+                      Name
                     </th>
                     <th
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      年龄
+                      Age
                     </th>
                   </tr>
                 </thead>
@@ -267,7 +267,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Pagination 1`] = 
                     <td
                       class="delightful-table-cell"
                     >
-                      张三
+                      Zhang San
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -282,7 +282,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Pagination 1`] = 
                     <td
                       class="delightful-table-cell"
                     >
-                      李四
+                      Li Si
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -410,7 +410,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Sorting 1`] = `
                 >
                   <tr>
                     <th
-                      aria-label="姓名"
+                      aria-label="Name"
                       class="delightful-table-cell delightful-table-column-has-sorters"
                       scope="col"
                       tabindex="0"
@@ -422,7 +422,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Sorting 1`] = `
                         <span
                           class="delightful-table-column-title"
                         >
-                          姓名
+                          Name
                         </span>
                         <span
                           class="delightful-table-column-sorter delightful-table-column-sorter-full"
@@ -474,7 +474,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Sorting 1`] = `
                       </div>
                     </th>
                     <th
-                      aria-label="年龄"
+                      aria-label="Age"
                       class="delightful-table-cell delightful-table-column-has-sorters"
                       scope="col"
                       tabindex="0"
@@ -486,7 +486,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Sorting 1`] = `
                         <span
                           class="delightful-table-column-title"
                         >
-                          年龄
+                          Age
                         </span>
                         <span
                           class="delightful-table-column-sorter delightful-table-column-sorter-full"
@@ -573,7 +573,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Sorting 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      张三
+                      Zhang San
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -588,7 +588,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Sorting 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      李四
+                      Li Si
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -748,13 +748,13 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Selection 1`] = `
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      姓名
+                      Name
                     </th>
                     <th
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      年龄
+                      Age
                     </th>
                   </tr>
                 </thead>
@@ -820,7 +820,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Selection 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      张三
+                      Zhang San
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -854,7 +854,7 @@ exports[`DelightfulTable > Snapshot Test > Table Snapshot with Selection 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      李四
+                      Li Si
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -985,13 +985,13 @@ exports[`DelightfulTable > Snapshot Test > Empty Data Table Snapshot 1`] = `
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      姓名
+                      Name
                     </th>
                     <th
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      年龄
+                      Age
                     </th>
                   </tr>
                 </thead>
@@ -1123,13 +1123,13 @@ exports[`DelightfulTable > Snapshot Test > Compact Table Snapshot 1`] = `
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      姓名
+                      Name
                     </th>
                     <th
                       class="delightful-table-cell"
                       scope="col"
                     >
-                      年龄
+                      Age
                     </th>
                   </tr>
                 </thead>
@@ -1167,7 +1167,7 @@ exports[`DelightfulTable > Snapshot Test > Compact Table Snapshot 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      张三
+                      Zhang San
                     </td>
                     <td
                       class="delightful-table-cell"
@@ -1182,7 +1182,7 @@ exports[`DelightfulTable > Snapshot Test > Compact Table Snapshot 1`] = `
                     <td
                       class="delightful-table-cell"
                     >
-                      李四
+                      Li Si
                     </td>
                     <td
                       class="delightful-table-cell"

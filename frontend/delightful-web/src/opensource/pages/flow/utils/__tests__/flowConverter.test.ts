@@ -3,28 +3,28 @@ import fs from "fs"
 import path from "path"
 import { FlowConverter } from "../flowConverter"
 
-describe.skip("测试 FlowConverter", () => {
-	// 测试简单案例的JSON和YAML互转
-	describe("简单案例测试", () => {
+describe.skip("Test FlowConverter", () => {
+	// Test simple JSON and YAML conversion
+	describe("Simple case test", () => {
 		const simpleJson = {
 			id: "DELIGHTFUL-FLOW-test",
-			name: "简单测试",
+			name: "Simple test",
 			nodes: [{ id: "node-1", type: "1" }],
 			edges: [],
 		}
 
-		it("应能将简单JSON对象转为YAML字符串", () => {
+		it("Should convert simple JSON object to YAML string", () => {
 			const yaml = FlowConverter.jsonToYamlString(simpleJson)
 			expect(yaml).toBeDefined()
 			expect(yaml.includes("id: DELIGHTFUL-FLOW-test")).toBe(true)
-			expect(yaml.includes("name: 简单测试")).toBe(true)
+			expect(yaml.includes("name: Simple test")).toBe(true)
 		})
 
-		it("应能将YAML字符串转回JSON对象，保持数据一致", () => {
+		it("Should convert YAML string back to JSON object while maintaining data consistency", () => {
 			const yaml = FlowConverter.jsonToYamlString(simpleJson)
 			const jsonFromYaml = FlowConverter.yamlToJson(yaml)
 
-			// 检查基本字段
+			// Check basic fields
 			expect(jsonFromYaml.id).toBe(simpleJson.id)
 			expect(jsonFromYaml.name).toBe(simpleJson.name)
 			expect(Array.isArray(jsonFromYaml.nodes)).toBe(true)
@@ -32,11 +32,11 @@ describe.skip("测试 FlowConverter", () => {
 		})
 	})
 
-	// 测试小型完整案例
-	describe("小型完整案例测试", () => {
+	// Test small complete case
+	describe("Small complete case test", () => {
 		let smallJson: any
 
-		// 读取测试数据
+		// Read test data
 		beforeEach(() => {
 			const filePath = path.resolve(
 				__dirname,
@@ -46,32 +46,32 @@ describe.skip("测试 FlowConverter", () => {
 			smallJson = JSON.parse(fileContent)
 		})
 
-		it("应能将小型JSON对象转换为YAML并保持数据完整性", () => {
-			// JSON转YAML
+		it("Should convert small JSON object to YAML and maintain data integrity", () => {
+			// JSON to YAML
 			const yaml = FlowConverter.jsonToYamlString(smallJson)
 			expect(yaml).toBeDefined()
 
-			// YAML转回JSON
+			// YAML back to JSON
 			const jsonFromYaml = FlowConverter.yamlToJson(yaml)
 
-			// 检查基本信息
+			// Check basic information
 			expect(jsonFromYaml.id).toBe(smallJson.id)
 			expect(jsonFromYaml.name).toBe(smallJson.name)
 			expect(jsonFromYaml.description).toBe(smallJson.description)
 			expect(jsonFromYaml.type).toBe(smallJson.type)
 
-			// 检查节点数量和基本信息
+			// Check node count and basic information
 			expect(jsonFromYaml.nodes.length).toBe(smallJson.nodes.length)
 			expect(jsonFromYaml.nodes[0].id).toBe(smallJson.nodes[0].id)
 			expect(jsonFromYaml.nodes[0].node_type).toBe(smallJson.nodes[0].node_type)
 			expect(jsonFromYaml.nodes[0].name).toBe(smallJson.nodes[0].name)
 
-			// 检查边
+			// Check edges
 			expect(jsonFromYaml.edges.length).toBe(smallJson.edges.length)
 			expect(jsonFromYaml.edges[0].source).toBe(smallJson.edges[0].source)
 			expect(jsonFromYaml.edges[0].target).toBe(smallJson.edges[0].target)
 
-			// 检查全局变量
+			// Check global variables
 			expect(jsonFromYaml.global_variable).toBeDefined()
 			if (smallJson.global_variable && jsonFromYaml.global_variable) {
 				expect(jsonFromYaml.global_variable.variables[0].name).toBe(
@@ -83,24 +83,24 @@ describe.skip("测试 FlowConverter", () => {
 			}
 		})
 
-		it("转换后的YAML应能转回JSON并与原始JSON匹配", () => {
+		it("Converted YAML should be convertible back to JSON and match original JSON", () => {
 			// 1. JSON -> YAML
 			const yaml = FlowConverter.jsonToYamlString(smallJson)
 
 			// 2. YAML -> JSON
 			const convertedJson = FlowConverter.yamlToJson(yaml)
 
-			// 3. 再次转换: YAML -> JSON -> YAML，确保多次转换的稳定性
+			// 3. Convert again: YAML -> JSON -> YAML to ensure stability of multiple conversions
 			const secondYaml = FlowConverter.jsonToYamlString(convertedJson)
 			const secondJson = FlowConverter.yamlToJson(secondYaml)
 
-			// 检查关键属性是否保持一致
+			// Check that key properties remain consistent
 			function checkObjectEquality(original: any, converted: any, path = "") {
-				// 检查基本信息
+				// Check basic information
 				expect(converted.id, `${path}.id`).toBe(original.id)
 				expect(converted.name, `${path}.name`).toBe(original.name)
 
-				// 检查节点匹配
+				// Check node matching
 				expect(converted.nodes.length, `${path}.nodes.length`).toBe(original.nodes.length)
 				for (let i = 0; i < original.nodes.length; i++) {
 					expect(converted.nodes[i].id, `${path}.nodes[${i}].id`).toBe(
@@ -111,7 +111,7 @@ describe.skip("测试 FlowConverter", () => {
 					)
 				}
 
-				// 检查边匹配
+				// Check edge matching
 				expect(converted.edges.length, `${path}.edges.length`).toBe(original.edges.length)
 				for (let i = 0; i < original.edges.length; i++) {
 					expect(converted.edges[i].source, `${path}.edges[${i}].source`).toBe(
@@ -123,16 +123,16 @@ describe.skip("测试 FlowConverter", () => {
 				}
 			}
 
-			// 检查一次转换的一致性
+			// Check first conversion consistency
 			checkObjectEquality(smallJson, convertedJson, "first-conversion")
 
-			// 检查二次转换的一致性
+			// Check second conversion consistency
 			checkObjectEquality(convertedJson, secondJson, "second-conversion")
 		})
 	})
 
-	// 测试API接口
-	describe("测试API接口方法", () => {
+	// Test API interface
+	describe("Test API interface methods", () => {
 		const testJson = {
 			id: "test",
 			name: "test",
@@ -147,21 +147,21 @@ nodes:
   - id: node1
 edges: []`
 
-		it("jsonToYamlString 方法应正常工作", () => {
+		it("jsonToYamlString method should work correctly", () => {
 			const yaml = FlowConverter.jsonToYamlString(testJson)
 			expect(yaml).toBeDefined()
 			expect(typeof yaml).toBe("string")
 		})
 
-		it("yamlToJsonString 方法应正常工作", () => {
+		it("yamlToJsonString method should work correctly", () => {
 			const json = FlowConverter.yamlToJsonString(testYaml)
 			expect(json).toBeDefined()
 			expect(typeof json).toBe("string")
-			// 应该是有效的JSON字符串
+			// Should be a valid JSON string
 			expect(() => JSON.parse(json)).not.toThrow()
 		})
 
-		it("jsonStringToYamlString 方法应正常工作", () => {
+		it("jsonStringToYamlString method should work correctly", () => {
 			const jsonString = JSON.stringify(testJson)
 			const yaml = FlowConverter.jsonStringToYamlString(jsonString)
 			expect(yaml).toBeDefined()
@@ -169,15 +169,15 @@ edges: []`
 		})
 	})
 
-	// 测试边界情况和错误处理
-	describe("边界情况和错误处理", () => {
-		it("处理空对象", () => {
+	// Test edge cases and error handling
+	describe("Edge cases and error handling", () => {
+		it("Handle empty object", () => {
 			const emptyJson = {}
 			expect(() => FlowConverter.jsonToYamlString(emptyJson)).not.toThrow()
 		})
 
-		it("处理字段缺失的对象", () => {
-			const incompleteJson = { id: "test" } // 没有必需的nodes和edges字段
+		it("Handle object with missing fields", () => {
+			const incompleteJson = { id: "test" } // Missing required nodes and edges fields
 			expect(() => FlowConverter.jsonToYamlString(incompleteJson)).not.toThrow()
 		})
 	})

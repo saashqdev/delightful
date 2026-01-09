@@ -19,7 +19,7 @@ const DebuggerComp = memo(
 		const { debuggerMode } = useFlowData()
 		const { currentNode } = useCurrentNode()
 
-		// 使用useCallback替代useMemoizedFn，减少依赖
+		// Use useCallback instead of useMemoizedFn to reduce dependencies
 		const clickNode = useCallback(() => {
 			console.log("debug node", nodeConfig)
 			copyToClipboard(id)
@@ -31,7 +31,7 @@ const DebuggerComp = memo(
 			return null
 		}
 
-		// 提取节点版本，避免在JSX中计算
+		// Extract node version to avoid calculations in JSX
 		const nodeVersion = currentNode?.node_version || DefaultNodeVersion
 
 		return (

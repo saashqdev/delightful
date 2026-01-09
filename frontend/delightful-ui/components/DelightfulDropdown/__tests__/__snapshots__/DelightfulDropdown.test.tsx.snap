@@ -15,7 +15,7 @@ exports[`DelightfulDropdown > Snapshot tests > dropdown menu with icon snapshot 
   <div
     class="delightful-dropdown-trigger"
   >
-    🏠 下拉菜单
+    🏠 Dropdown Menu
   </div>
 </DocumentFragment>
 `;
@@ -25,7 +25,7 @@ exports[`DelightfulDropdown > Snapshot tests > dropdown menu with button style s
   <button
     class="delightful-dropdown-trigger"
   >
-    按钮下拉
+    Button Dropdown
   </button>
 </DocumentFragment>
 `;
@@ -35,7 +35,7 @@ exports[`DelightfulDropdown > Snapshot tests > dropdown menu with custom class s
   <span
     class="delightful-dropdown-trigger custom-dropdown"
   >
-    下拉菜单
+    Dropdown Menu
   </span>
 </DocumentFragment>
 `;
@@ -45,7 +45,7 @@ exports[`DelightfulDropdown > Snapshot tests > dropdown menu with custom attribu
   <span
     class="delightful-dropdown-trigger"
   >
-    下拉菜单
+    Dropdown Menu
   </span>
 </DocumentFragment>
 `;
@@ -55,7 +55,7 @@ exports[`DelightfulDropdown > Snapshot tests > dropdown menu with menu items sna
   <span
     class="delightful-dropdown-trigger"
   >
-    下拉菜单
+    Dropdown Menu
   </span>
 </DocumentFragment>
 `;
@@ -66,7 +66,7 @@ exports[`DelightfulDropdown > Snapshot tests > disabled state dropdown menu snap
     class="delightful-dropdown-trigger"
     disabled=""
   >
-    下拉菜单
+    Dropdown Menu
   </span>
 </DocumentFragment>
 `;

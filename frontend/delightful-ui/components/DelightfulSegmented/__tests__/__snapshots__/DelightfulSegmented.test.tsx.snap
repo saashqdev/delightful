@@ -23,9 +23,9 @@ exports[`DelightfulSegmented > Snapshot tests > block level segmented control sn
         <div
           aria-selected="true"
           class="delightful-segmented-item-label"
-          title="选项1"
+          title="Option 1"
         >
-          选项1
+          Option 1
         </div>
       </label>
       <label
@@ -39,9 +39,9 @@ exports[`DelightfulSegmented > Snapshot tests > block level segmented control sn
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项2"
+          title="Option 2"
         >
-          选项2
+          Option 2
         </div>
       </label>
     </div>
@@ -72,9 +72,9 @@ exports[`DelightfulSegmented > Snapshot tests > basic segmented control snapshot
         <div
           aria-selected="true"
           class="delightful-segmented-item-label"
-          title="选项1"
+          title="Option 1"
         >
-          选项1
+          Option 1
         </div>
       </label>
       <label
@@ -88,9 +88,9 @@ exports[`DelightfulSegmented > Snapshot tests > basic segmented control snapshot
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项2"
+          title="Option 2"
         >
-          选项2
+          Option 2
         </div>
       </label>
       <label
@@ -104,9 +104,9 @@ exports[`DelightfulSegmented > Snapshot tests > basic segmented control snapshot
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项3"
+          title="Option 3"
         >
-          选项3
+          Option 3
         </div>
       </label>
     </div>
@@ -137,9 +137,9 @@ exports[`DelightfulSegmented > Snapshot tests > large size segmented control sna
         <div
           aria-selected="true"
           class="delightful-segmented-item-label"
-          title="选项1"
+          title="Option 1"
         >
-          选项1
+          Option 1
         </div>
       </label>
       <label
@@ -153,9 +153,9 @@ exports[`DelightfulSegmented > Snapshot tests > large size segmented control sna
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项2"
+          title="Option 2"
         >
-          选项2
+          Option 2
         </div>
       </label>
     </div>
@@ -186,9 +186,9 @@ exports[`DelightfulSegmented > Snapshot tests > small size segmented control sna
         <div
           aria-selected="true"
           class="delightful-segmented-item-label"
-          title="选项1"
+          title="Option 1"
         >
-          选项1
+          Option 1
         </div>
       </label>
       <label
@@ -202,9 +202,9 @@ exports[`DelightfulSegmented > Snapshot tests > small size segmented control sna
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项2"
+          title="Option 2"
         >
-          选项2
+          Option 2
         </div>
       </label>
     </div>
@@ -244,7 +244,7 @@ exports[`DelightfulSegmented > Snapshot tests > segmented control with icon snap
             </span>
           </span>
           <span>
-            选项1
+            Option 1
           </span>
         </div>
       </label>
@@ -268,7 +268,7 @@ exports[`DelightfulSegmented > Snapshot tests > segmented control with icon snap
             </span>
           </span>
           <span>
-            选项2
+            Option 2
           </span>
         </div>
       </label>
@@ -299,9 +299,9 @@ exports[`DelightfulSegmented > Snapshot tests > segmented control with default v
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项1"
+          title="Option 1"
         >
-          选项1
+          Option 1
         </div>
       </label>
       <label
@@ -316,9 +316,9 @@ exports[`DelightfulSegmented > Snapshot tests > segmented control with default v
         <div
           aria-selected="true"
           class="delightful-segmented-item-label"
-          title="选项2"
+          title="Option 2"
         >
-          选项2
+          Option 2
         </div>
       </label>
       <label
@@ -332,9 +332,9 @@ exports[`DelightfulSegmented > Snapshot tests > segmented control with default v
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项3"
+          title="Option 3"
         >
-          选项3
+          Option 3
         </div>
       </label>
     </div>
@@ -365,9 +365,9 @@ exports[`DelightfulSegmented > Snapshot tests > disabled state segmented control
         <div
           aria-selected="true"
           class="delightful-segmented-item-label"
-          title="选项1"
+          title="Option 1"
         >
-          选项1
+          Option 1
         </div>
       </label>
       <label
@@ -382,9 +382,9 @@ exports[`DelightfulSegmented > Snapshot tests > disabled state segmented control
         <div
           aria-selected="false"
           class="delightful-segmented-item-label"
-          title="选项2"
+          title="Option 2"
         >
-          选项2
+          Option 2
         </div>
       </label>
     </div>

@@ -16,7 +16,7 @@ const useStyles = createStyles(({ token }) => ({
 }))
 
 const getTextAvatar = (text: string | ReactNode, backgroundColor?: string, color?: string) => {
-	const textString = typeof text === "string" ? text : "未知"
+	const textString = typeof text === "string" ? text : "Unknown"
 	return drawTextAvatar(textString, backgroundColor, color) ?? ""
 }
 
@@ -35,12 +35,7 @@ const DelightfulAvatar = forwardRef<HTMLSpanElement, DelightfulAvatarProps>(
 				typeof src === "string" && src
 					? src
 					: getTextAvatar(
-							typeof children === "string" ? children : "未知",
-							style?.backgroundColor,
-							style?.color,
-					  ),
-			)
-		}, [src, children, style?.backgroundColor, style?.color])
+						typeof children === "string" ? children : "Unknown",
 
 		const mergedStyle = useMemo(
 			() => ({

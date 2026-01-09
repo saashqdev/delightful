@@ -53,13 +53,13 @@ export default function OnceResult({
 				typeof value === "object" ? JSON.stringify(value, null, 2) : value.toString()
 			navigator.clipboard.writeText(textToCopy)
 
-			// 设置对应的复制状态为成功
+			// Set corresponding copy state to success
 			setCopyStates((prev) => ({
 				...prev,
 				[key]: true,
 			}))
 
-			// 2秒后恢复状态
+			// Reset state after 2 seconds
 			setTimeout(() => {
 				setCopyStates((prev) => ({
 					...prev,
@@ -204,7 +204,7 @@ export default function OnceResult({
 				</div>
 			)}
 
-			{/* 使用新的Portal版本的全屏模态窗口 */}
+			{/* Use new Portal version of fullscreen modal window */}
 			<FullscreenModal
 				visible={fullscreenModalVisible}
 				onClose={closeFullscreenModal}

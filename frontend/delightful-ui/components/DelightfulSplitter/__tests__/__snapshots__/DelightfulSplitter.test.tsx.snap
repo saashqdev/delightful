@@ -26,7 +26,7 @@ exports[`DelightfulSplitter > Snapshot test > Basic splitter snapshot 1`] = `
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      右侧内容
+      Right content
     </div>
   </div>
 </DocumentFragment>
@@ -83,7 +83,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with class name snapshot
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      左侧内容
+      Left content
     </div>
     <div
       aria-valuemax="0"
@@ -100,7 +100,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with class name snapshot
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      右侧内容
+      Right content
     </div>
   </div>
 </DocumentFragment>
@@ -115,7 +115,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with class name snapshot
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      左侧内容
+      Left content
     </div>
     <div
       aria-valuemax="0"
@@ -132,7 +132,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with class name snapshot
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      右侧内容
+      Right content
     </div>
   </div>
 </DocumentFragment>
@@ -148,7 +148,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with custom styles snaps
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      左侧内容
+      Left content
     </div>
     <div
       aria-valuemax="0"
@@ -165,7 +165,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with custom styles snaps
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      右侧内容
+      Right content
     </div>
   </div>
 </DocumentFragment>
@@ -181,7 +181,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with custom styles snaps
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      左侧内容
+      Left content
     </div>
     <div
       aria-valuemax="0"
@@ -198,7 +198,7 @@ exports[`DelightfulSplitter > Snapshot tests > Splitter with custom styles snaps
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      右侧内容
+      Right content
     </div>
   </div>
 </DocumentFragment>

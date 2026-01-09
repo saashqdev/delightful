@@ -1,15 +1,15 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulIcon > 快照测试 > 不同图标快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulIcon > Snapshot tests > different icons snapshot 1`] = `<DocumentFragment />`;
 
-exports[`DelightfulIcon > 快照测试 > 基础图标快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulIcon > Snapshot tests > basic icon snapshot 1`] = `<DocumentFragment />`;
 
-exports[`DelightfulIcon > 快照测试 > 大尺寸图标快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulIcon > Snapshot tests > large size icon snapshot 1`] = `<DocumentFragment />`;
 
-exports[`DelightfulIcon > 快照测试 > 小尺寸图标快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulIcon > Snapshot tests > small size icon snapshot 1`] = `<DocumentFragment />`;
 
-exports[`DelightfulIcon > 快照测试 > 带点击事件图标快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulIcon > Snapshot tests > icon with click event snapshot 1`] = `<DocumentFragment />`;
 
-exports[`DelightfulIcon > 快照测试 > 带类名图标快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulIcon > Snapshot tests > icon with class name snapshot 1`] = `<DocumentFragment />`;
 
-exports[`DelightfulIcon > 快照测试 > 带自定义样式图标快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulIcon > Snapshot tests > icon with custom style snapshot 1`] = `<DocumentFragment />`;

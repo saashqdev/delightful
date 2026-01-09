@@ -21,7 +21,7 @@ exports[`DelightfulPageContainer > Snapshot tests > basic page container snapsho
               class="delightful-flex css-dev-only-do-not-override-yotw4n css-var-r1 delightful-flex-align-center"
               style="gap: 8px;"
             >
-              页面标题
+              Page title
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@ exports[`DelightfulPageContainer > Snapshot tests > basic page container snapsho
     <div
       class="delightful-card-body acss-jnieq4"
     >
-      页面内容
+      Page content
     </div>
   </div>
 </DocumentFragment>
@@ -57,7 +57,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with action b
               class="delightful-flex css-dev-only-do-not-override-yotw4n css-var-r4 delightful-flex-align-center"
               style="gap: 8px;"
             >
-              页面标题
+              Page title
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with action b
           class="delightful-card-extra"
         >
           <button>
-            操作按钮
+            Action button
           </button>
         </div>
       </div>
@@ -73,7 +73,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with action b
     <div
       class="delightful-card-body acss-jnieq4"
     >
-      页面内容
+      Page content
     </div>
   </div>
 </DocumentFragment>
@@ -100,7 +100,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with tab snap
               class="delightful-flex css-dev-only-do-not-override-yotw4n css-var-r5 delightful-flex-align-center"
               style="gap: 8px;"
             >
-              页面标题
+              Page title
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with tab snap
                   role="tab"
                   tabindex="0"
                 >
-                  标签1
+                  Tag 1
                 </div>
               </div>
               <div
@@ -147,7 +147,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with tab snap
                   role="tab"
                   tabindex="-1"
                 >
-                  标签2
+                  Tag 2
                 </div>
               </div>
               <div
@@ -210,7 +210,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with tab snap
     <div
       class="delightful-card-body acss-jnieq4"
     >
-      页面内容
+      Page content
     </div>
   </div>
 </DocumentFragment>
@@ -237,7 +237,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with custom c
               class="delightful-flex css-dev-only-do-not-override-yotw4n css-var-r2 delightful-flex-align-center"
               style="gap: 8px;"
             >
-              页面标题
+              Page title
             </div>
           </div>
         </div>
@@ -246,7 +246,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with custom c
     <div
       class="delightful-card-body acss-jnieq4"
     >
-      页面内容
+      Page content
     </div>
   </div>
 </DocumentFragment>
@@ -274,7 +274,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with custom a
               class="delightful-flex css-dev-only-do-not-override-yotw4n css-var-r3 delightful-flex-align-center"
               style="gap: 8px;"
             >
-              页面标题
+              Page title
             </div>
           </div>
         </div>
@@ -283,7 +283,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with custom a
     <div
       class="delightful-card-body acss-jnieq4"
     >
-      页面内容
+      Page content
     </div>
   </div>
 </DocumentFragment>
@@ -311,7 +311,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with custom s
               class="delightful-flex css-dev-only-do-not-override-yotw4n css-var-r7 delightful-flex-align-center"
               style="gap: 8px;"
             >
-              页面标题
+              Page title
             </div>
           </div>
         </div>
@@ -320,7 +320,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container with custom s
     <div
       class="delightful-card-body acss-jnieq4"
     >
-      页面内容
+      Page content
     </div>
   </div>
 </DocumentFragment>
@@ -354,7 +354,7 @@ exports[`DelightfulPageContainer > Snapshot tests > page container without title
     <div
       class="delightful-card-body acss-jnieq4"
     >
-      页面内容
+      Page content
     </div>
   </div>
 </DocumentFragment>

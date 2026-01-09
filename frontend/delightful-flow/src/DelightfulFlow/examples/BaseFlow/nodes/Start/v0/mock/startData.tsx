@@ -1,7 +1,7 @@
 ﻿export const startData = {
 	node_id: "DELIGHTFUL-FLOW-NODE-662ef85bbf58a1-16520272",
-	name: "开始节点",
-	description: "当以下事件被触发时，流程将会从这个模块开始执行",
+	name: "Start node",
+	description: "When the following events are triggered, the workflow will start executing from this module",
 	node_type: 1,
 	meta: [],
 	params: {

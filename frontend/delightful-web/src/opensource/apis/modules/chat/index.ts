@@ -35,8 +35,8 @@ import type { ChatWebSocket } from "../../clients/chatWebSocket"
 import { fetchPaddingData } from "@/utils/request"
 export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	/**
-	 * 登录
-	 * @param authorization 授权
+	 * Login
+	 * @param authorization Authorization
 	 * @returns
 	 */
 	login(authorization: string) {
@@ -47,7 +47,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 					message: {
 						type: "text",
 						text: {
-							content: "登录",
+							content: "Login",
 						},
 						app_message_id: genAppMessageId(),
 					},
@@ -61,9 +61,9 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 		)
 	},
 	/**
-	 * 发送消息
-	 * @param chatMessage 消息内容
-	 * @param penddingIndex 等待发送索引
+	 * Send message
+	 * @param chatMessage Message content
+	 * @param penddingIndex Pending send index
 	 * @returns
 	 */
 	chat(
@@ -82,9 +82,9 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 创建会话
-	 * @param receive_type 接收者类型
-	 * @param receive_id 接收者id
+	 * Create conversation
+	 * @param receive_type Receiver type
+	 * @param receive_id Receiver id
 	 * @returns
 	 */
 	createConversation(receive_type: MessageReceiveType, receive_id: string) {
@@ -108,8 +108,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 标记消息已读
-	 * @param messageIds 消息id列表
+	 * Mark messages as read
+	 * @param messageIds Message id list
 	 * @returns
 	 */
 	seenMessages(messageIds: string[]) {
@@ -133,8 +133,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取多个会话详情
-	 * @param ids 会话id列表
+	 * Get multiple conversation details
+	 * @param ids Conversation id list
 	 * @returns
 	 */
 	getConversationList(
@@ -156,8 +156,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 拉取离线消息
-	 * @param max_seq_info 最大序号
+	 * Pull offline messages
+	 * @param max_seq_info Maximum sequence number
 	 * @returns
 	 */
 	messagePull(data: { page_token: string }) {
@@ -167,8 +167,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 拉取最近离线消息
-	 * @param max_seq_info 最大序号
+	 * Pull recent offline messages
+	 * @param max_seq_info Maximum sequence number
 	 * @returns
 	 */
 	messagePullCurrent(data: { page_token: string }) {
@@ -178,9 +178,9 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 创建话题
-	 * @param topicName 话题名称
-	 * @param conversation_id 会话id
+	 * Create topic
+	 * @param topicName Topic name
+	 * @param conversation_id Conversation id
 	 * @returns
 	 */
 	createTopic(topicName: string | undefined, conversation_id: string) {
@@ -201,9 +201,9 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 更新话题
-	 * @param topicId 话题id
-	 * @param topicName 话题名称
+	 * Update topic
+	 * @param topicId Topic id
+	 * @param topicName Topic name
 	 * @returns
 	 */
 	updateTopic(conversation_id: string, topicId: string, topicName: string) {
@@ -222,8 +222,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 删除话题
-	 * @param topicId 话题id
+	 * Delete topic
+	 * @param topicId Topic id
 	 * @returns
 	 */
 	deleteTopic(conversation_id: string, topicId: string) {
@@ -244,9 +244,9 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取AI 总结话题名称
-	 * @param conversation_id 会话id
-	 * @param id 话题id
+	 * Get AI summary topic name
+	 * @param conversation_id Conversation id
+	 * @param id Topic id
 	 * @returns
 	 */
 	getDelightfulTopicName(conversation_id: string, id: string) {
@@ -259,8 +259,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取话题列表
-	 * @param conversation_id 会话id
+	 * Get topic list
+	 * @param conversation_id Conversation id
 	 * @returns
 	 */
 	getTopicList(conversationId: string) {
@@ -270,8 +270,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取话题消息
-	 * @param {string | Array<string>} topic_ids 话题id列表
+	 * Get topic messages
+	 * @param {string | Array<string>} topic_ids Topic id list
 	 * @returns
 	 */
 	getTopicMessages(topicIds: string | string[]) {
@@ -281,8 +281,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 开始会话输入
-	 * @param conversation_id 会话id
+	 * Start conversation input
+	 * @param conversation_id Conversation id
 	 * @returns
 	 */
 	startConversationInput(conversation_id: string) {
@@ -299,8 +299,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 结束会话输入
-	 * @param conversation_id 会话id
+	 * End conversation input
+	 * @param conversation_id Conversation id
 	 * @returns
 	 */
 	endConversationInput(conversation_id: string) {
@@ -317,8 +317,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 创建群聊
-	 * @param data 创建群聊参数
+	 * Create group chat
+	 * @param data Create group chat parameters
 	 * @returns
 	 */
 	createGroupConversation(data: CreateGroupConversationParams) {
@@ -329,8 +329,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 批量获取群聊详情
-	 * @param data 获取群聊详情参数
+	 * Get group chat details in batch
+	 * @param data Get group chat details parameters
 	 * @returns
 	 */
 	getGroupConversationDetails(data: { group_ids: string[]; page_token?: string }) {
@@ -341,8 +341,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取群聊成员
-	 * @param conversation_id 会话id
+	 * Get group chat members
+	 * @param conversation_id Conversation id
 	 * @returns
 	 */
 	getGroupConversationMembers(data: { group_id: string; page_token?: string }) {
@@ -358,8 +358,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取消息接收者列表
-	 * @param messageId 消息id
+	 * Get message receiver list
+	 * @param messageId Message id
 	 * @returns
 	 */
 	getMessageReceiveList(messageId: string) {
@@ -369,8 +369,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 添加群组成员
-	 * @param data 添加群组成员参数
+	 * Add group members
+	 * @param data Add group members parameters
 	 * @returns
 	 */
 	addGroupUsers(data: { group_id: string; user_ids?: string[]; department_ids?: string[] }) {
@@ -378,8 +378,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 撤回消息
-	 * @param messageId 消息id
+	 * Revoke message
+	 * @param messageId Message id
 	 * @returns
 	 */
 	revokeMessage(messageId: string) {
@@ -401,8 +401,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 退出群聊
-	 * @param data 退出群聊参数
+	 * Leave group chat
+	 * @param data Leave group chat parameters
 	 * @returns
 	 */
 	leaveGroup(data: { group_id: string }) {
@@ -410,8 +410,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 踢出群聊
-	 * @param data 踢出群聊参数
+	 * Kick out from group chat
+	 * @param data Kick out from group chat parameters
 	 * @returns
 	 */
 	kickGroupUsers(data: { group_id: string; user_ids: string[] }) {
@@ -419,8 +419,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 解散群聊
-	 * @param data 解散群聊参数
+	 * Dismiss group chat
+	 * @param data Dismiss group chat parameters
 	 * @returns
 	 */
 	removeGroup(data: { group_id: string }) {
@@ -428,8 +428,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 更新群信息
-	 * @param data 更新群信息参数
+	 * Update group information
+	 * @param data Update group information parameters
 	 * @returns
 	 */
 	updateGroupInfo(data: { group_id: string; group_name?: string; group_avatar?: string }) {
@@ -440,8 +440,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取聊天文件信息
-	 * @param data 获取聊天文件参数
+	 * Get chat file information
+	 * @param data Get chat file parameters
 	 * @returns
 	 */
 	getChatFileUrls(data: { file_id: string; message_id: string }[]) {
@@ -452,7 +452,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 置顶会话
+	 * Pin conversation
 	 */
 	topConversation(conversation_id: string, is_top: 0 | 1) {
 		return socket.apiSend(
@@ -489,7 +489,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 免打扰消息
+	 * Do not disturb messages
 	 */
 	muteConversation(conversation_id: string, is_not_disturb: 0 | 1) {
 		return socket.apiSend(
@@ -508,7 +508,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取AI 总结消息
+	 * Get AI summary message
 	 * @returns
 	 * @param data
 	 */
@@ -526,8 +526,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取 AI助理对应的机器人信息
-	 * @param data 获取 AI助理对应的机器人信息参数
+	 * Get bot information corresponding to AI assistant
+	 * @param data Get bot information corresponding to AI assistant parameters
 	 * @returns
 	 */
 	getAiAssistantBotInfo(data: { user_id: string }) {
@@ -537,7 +537,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 更新 AI会话 快捷指令配置
+	 * Update AI conversation quick command configuration
 	 * @param data
 	 * @returns
 	 */
@@ -567,17 +567,17 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 拉取离线消息
-	 * 当WebSocket重连或页面从不可见变为可见时调用
+	 * Pull offline messages
+	 * Called when WebSocket reconnects or page changes from invisible to visible
 	 */
 	pullOfflineMessages() {
-		// 获取当前最新的seq_id
+		// Get the current latest seq_id
 		const lastSeqId = localStorage.getItem("lastSeqId") || "0"
 		return this.messagePull({ page_token: lastSeqId })
 	},
 
 	/**
-	 * 批量获取会话消息
+	 * Get conversation messages in batch
 	 * @param arg0
 	 * @returns
 	 */
@@ -589,8 +589,8 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 根据应用消息ID获取消息
-	 * @param appMessageId 应用消息ID
+	 * Get message by application message ID
+	 * @param appMessageId Application message ID
 	 * @returns
 	 */
 	getMessagesByAppMessageId(appMessageId: string) {
@@ -647,7 +647,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 创建用户任务
+	 * Create user task
 	 * @param {CreateTaskParams} data
 	 * @returns
 	 */

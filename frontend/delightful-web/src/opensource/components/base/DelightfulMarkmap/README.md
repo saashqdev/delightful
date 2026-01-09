@@ -2,7 +2,7 @@
 
 `DelightfulMarkmap` is a component for rendering and displaying mind maps, implemented based on the Markmap library, supporting conversion of Markdown-formatted text into interactive mind maps.
 
-## 属性
+## Properties
 
 | Property | Type    | Default | Description                          |
 | -------- | ------- | ------- | ------------------------------------ |

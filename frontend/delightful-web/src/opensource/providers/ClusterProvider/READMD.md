@@ -1,51 +1,51 @@
-# 多集群登录上下文
+# Multi-Cluster Login Context
 
-## 概述
+## Overview
 
-`ClusterProvider` 是一个React上下文提供者，用于管理多集群环境下的登录状态和集群配置。它提供了在不同集群环境之间切换的能力，确保应用程序能够无缝连接到正确的服务后端。
+`ClusterProvider` is a React context provider for managing login state and cluster configuration in a multi-cluster environment. It provides the ability to switch between different cluster environments, ensuring the application can seamlessly connect to the correct service backend.
 
-## 功能特性
+## Features
 
--   管理当前活跃的集群代码（`clusterCode`）
--   在集群变更时提供回调机制
--   自动同步集群配置信息
--   支持集群环境之间的切换
--   在用户登录后自动获取并设置相应的集群配置
+-   Manages the currently active cluster code (`clusterCode`)
+-   Provides callback mechanism when cluster changes
+-   Automatically syncs cluster configuration information
+-   Supports switching between cluster environments
+-   Automatically retrieves and sets the appropriate cluster configuration after user login
 
-## 组件结构
+## Component Structure
 
 ```
 ClusterProvider/
-├── ClusterProvider.tsx       # 主要Provider组件
-├── ClusterConfigSyncProvider.tsx  # 集群配置同步组件
-├── cluster.context.store.ts  # Mobx状态管理
+├── ClusterProvider.tsx       # Main Provider component
+├── ClusterConfigSyncProvider.tsx  # Cluster configuration sync component
+├── cluster.context.store.ts  # Mobx state management
 ├── hooks/
-│   └── useClusterCode.ts     # 自定义Hook，用于组件访问集群代码
-└── index.ts                  # 导出文件
+│   └── useClusterCode.ts     # Custom Hook for components to access cluster code
+└── index.ts                  # Export file
 ```
 
-## 使用方法
+## Usage
 
-### 1. 在应用程序根组件中包装
+### 1. Wrap in Application Root Component
 
 ```tsx
 import { ClusterProvider } from "@/opensource/providers/ClusterProvider"
 
 function App() {
 	const handleClusterChange = (clusterCode: string) => {
-		// 当集群变更时执行必要的操作，例如切换API基础URL
+		// Perform necessary operations when cluster changes, such as switching API base URL
 		apiClient.setBaseURL(env("API_BASE_URL", false, clusterCode))
 	}
 
 	return (
 		<ClusterProvider onClusterChange={handleClusterChange}>
-			{/* 应用程序其他组件 */}
+			{/* Other application components */}
 		</ClusterProvider>
 	)
 }
 ```
 
-### 2. 在组件中使用集群代码
+### 2. Use Cluster Code in Components
 
 ```tsx
 import { useClusterCode } from "@/opensource/providers/ClusterProvider"
@@ -53,47 +53,47 @@ import { useClusterCode } from "@/opensource/providers/ClusterProvider"
 function MyComponent() {
   const { clusterCode, setClusterCode } = useClusterCode()
 
-  // 使用当前集群代码
+  // Use current cluster code
   useEffect(() => {
     if (clusterCode) {
-      // 执行依赖集群的操作
+      // Perform cluster-dependent operations
     }
   }, [clusterCode])
 
-  // 切换到另一个集群
+  // Switch to another cluster
   const switchCluster = (newClusterCode: string) => {
     setClusterCode(newClusterCode)
   }
 
-  return (/* 组件内容 */)
+  return (/* Component content */)
 }
 ```
 
-## 工作原理
+## How It Works
 
-1. `ClusterProvider` 创建一个Mobx状态存储，用于管理集群代码
-2. 提供 `onClusterChange` 回调，当集群代码变更时触发
-3. `ClusterConfigSyncProvider` 在用户登录后自动同步集群配置
-4. 使用 `useClusterCode` Hook获取和设置当前集群代码
+1. `ClusterProvider` creates a Mobx state store to manage cluster code
+2. Provides `onClusterChange` callback that triggers when cluster code changes
+3. `ClusterConfigSyncProvider` automatically syncs cluster configuration after user login
+4. Use `useClusterCode` Hook to get and set current cluster code
 
-## 与登录流程的集成
+## Integration with Login Flow
 
-在用户成功登录后，`ClusterConfigSyncProvider` 组件会自动：
+After successful user login, the `ClusterConfigSyncProvider` component will automatically:
 
-1. 从后端API获取用户的集群配置信息
-2. 设置当前活跃的集群代码
-3. 触发 `onClusterChange` 回调，使应用程序可以响应集群变化
+1. Retrieve user's cluster configuration information from backend API
+2. Set the currently active cluster code
+3. Trigger `onClusterChange` callback, allowing the application to respond to cluster changes
 
-## 多集群切换
+## Multi-Cluster Switching
 
-当用户需要在不同集群之间切换时，可以通过 `setClusterCode` 函数更改当前集群。这会触发以下流程：
+When users need to switch between different clusters, they can change the current cluster through the `setClusterCode` function. This triggers the following flow:
 
-1. 更新内部状态存储中的集群代码
-2. 通知所有使用 `useClusterCode` 的组件
-3. 触发 `onClusterChange` 回调，允许应用程序响应变化（例如切换API端点）
+1. Update cluster code in internal state store
+2. Notify all components using `useClusterCode`
+3. Trigger `onClusterChange` callback, allowing the application to respond to changes (e.g., switch API endpoints)
 
-## 注意事项
+## Notes
 
--   确保在正确的位置初始化 `ClusterProvider`，通常是在应用程序的根组件
--   提供适当的 `onClusterChange` 处理函数以响应集群变化
--   集群代码状态在应用程序重启后会丢失，除非手动实现持久化
+-   Ensure `ClusterProvider` is initialized in the correct location, typically in the application's root component
+-   Provide an appropriate `onClusterChange` handler function to respond to cluster changes
+-   Cluster code state will be lost after application restart unless manually implemented for persistence

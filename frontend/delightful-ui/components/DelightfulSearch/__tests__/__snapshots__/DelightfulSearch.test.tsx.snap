@@ -30,7 +30,7 @@ exports[`DelightfulSearch > Snapshot tests > basic search box snapshot 1`] = `
     </span>
     <input
       class="delightful-input css-dev-only-do-not-override-yotw4n"
-      placeholder="搜索..."
+      placeholder="Search..."
       type="text"
       value=""
     />
@@ -68,7 +68,7 @@ exports[`DelightfulSearch > Snapshot tests > large size search box snapshot 1`] 
     </span>
     <input
       class="delightful-input delightful-input-lg css-dev-only-do-not-override-yotw4n"
-      placeholder="搜索..."
+      placeholder="Search..."
       type="text"
       value=""
     />
@@ -106,7 +106,7 @@ exports[`DelightfulSearch > Snapshot tests > small size search box snapshot 1`] 
     </span>
     <input
       class="delightful-input delightful-input-sm css-dev-only-do-not-override-yotw4n"
-      placeholder="搜索..."
+      placeholder="Search..."
       type="text"
       value=""
     />
@@ -128,7 +128,7 @@ exports[`DelightfulSearch > Snapshot tests > search box with prefix icon snapsho
     </span>
     <input
       class="delightful-input css-dev-only-do-not-override-yotw4n"
-      placeholder="搜索..."
+      placeholder="Search..."
       type="text"
       value=""
     />
@@ -166,7 +166,7 @@ exports[`DelightfulSearch > Snapshot tests > search box with suffix icon snapsho
     </span>
     <input
       class="delightful-input css-dev-only-do-not-override-yotw4n"
-      placeholder="搜索..."
+      placeholder="Search..."
       type="text"
       value=""
     />
@@ -211,7 +211,7 @@ exports[`DelightfulSearch > Snapshot tests > search box with border snapshot 1`]
     </span>
     <input
       class="delightful-input css-dev-only-do-not-override-yotw4n"
-      placeholder="搜索..."
+      placeholder="Search..."
       type="text"
       value=""
     />
@@ -250,7 +250,7 @@ exports[`DelightfulSearch > Snapshot tests > search box with default value snaps
     <input
       class="delightful-input css-dev-only-do-not-override-yotw4n"
       type="text"
-      value="默认搜索词"
+      value="Default Search...
     />
   </span>
 </DocumentFragment>
@@ -287,7 +287,7 @@ exports[`DelightfulSearch > Snapshot tests > disabled state search box snapshot 
     <input
       class="delightful-input delightful-input-disabled css-dev-only-do-not-override-yotw4n"
       disabled=""
-      placeholder="搜索..."
+      placeholder="Search..."
       type="text"
       value=""
     />

@@ -18,7 +18,7 @@ exports[`DelightfulMenu > Snapshot tests > vertical menu snapshot 1`] = `
       <span
         class="delightful-menu-title-content"
       >
-        菜单项1
+        Menu Item 1
       </span>
     </li>
     <li
@@ -31,7 +31,7 @@ exports[`DelightfulMenu > Snapshot tests > vertical menu snapshot 1`] = `
       <span
         class="delightful-menu-title-content"
       >
-        菜单项2
+        Menu Item 2
       </span>
     </li>
   </ul>
@@ -60,7 +60,7 @@ exports[`DelightfulMenu > Snapshot tests > basic menu snapshot 1`] = `
       <span
         class="delightful-menu-title-content"
       >
-        菜单项1
+        Menu Item 1
       </span>
     </li>
     <li
@@ -73,7 +73,7 @@ exports[`DelightfulMenu > Snapshot tests > basic menu snapshot 1`] = `
       <span
         class="delightful-menu-title-content"
       >
-        菜单项2
+        Menu Item 2
       </span>
     </li>
   </ul>
@@ -107,7 +107,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with icon snapshot 1`] = `
       <span
         class="delightful-menu-title-content"
       >
-        菜单项1
+        Menu Item 1
       </span>
     </li>
     <li
@@ -125,7 +125,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with icon snapshot 1`] = `
       <span
         class="delightful-menu-title-content"
       >
-        菜单项2
+        Menu Item 2
       </span>
     </li>
   </ul>
@@ -160,7 +160,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with submenu snapshot 1`] = `
         <span
           class="delightful-menu-title-content"
         >
-          父菜单
+          Parent Menu
         </span>
         <i
           class="delightful-menu-submenu-arrow"
@@ -193,7 +193,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with custom class snapshot 1`] =
       <span
         class="delightful-menu-title-content"
       >
-        菜单项1
+        Menu Item 1
       </span>
     </li>
     <li
@@ -206,7 +206,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with custom class snapshot 1`] =
       <span
         class="delightful-menu-title-content"
       >
-        菜单项2
+        Menu Item 2
       </span>
     </li>
   </ul>
@@ -236,7 +236,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with custom style snapshot 1`] =
       <span
         class="delightful-menu-title-content"
       >
-        菜单项1
+        Menu Item 1
       </span>
     </li>
     <li
@@ -249,7 +249,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with custom style snapshot 1`] =
       <span
         class="delightful-menu-title-content"
       >
-        菜单项2
+        Menu Item 2
       </span>
     </li>
   </ul>
@@ -278,7 +278,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with selected state snapshot 1`]
       <span
         class="delightful-menu-title-content"
       >
-        菜单项1
+        Menu Item 1
       </span>
     </li>
     <li
@@ -291,7 +291,7 @@ exports[`DelightfulMenu > Snapshot tests > menu with selected state snapshot 1`]
       <span
         class="delightful-menu-title-content"
       >
-        菜单项2
+        Menu Item 2
       </span>
     </li>
   </ul>

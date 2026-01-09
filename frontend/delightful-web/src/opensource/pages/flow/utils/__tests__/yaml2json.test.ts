@@ -4,10 +4,10 @@ import path from "path"
 import { yaml2json, yamlString2json, yamlString2jsonString } from "../yaml2json"
 import { json2yamlString } from "../flow2yaml"
 
-describe.skip("测试 yaml2json 模块", () => {
-	// 测试基础YAML转换
-	describe("基础YAML转换", () => {
-		it("应正确将基本YAML对象转换为Flow对象", () => {
+describe.skip("Test yaml2json module", () => {
+	// Test basic YAML conversion
+	describe("Basic YAML conversion", () => {
+		it("Should correctly convert basic YAML object to Flow object", () => {
 			const yamlDSL = {
 				flow: {
 					id: "test-flow-id",
@@ -25,25 +25,25 @@ describe.skip("测试 yaml2json 模块", () => {
 
 			const flow = yaml2json(yamlDSL)
 
-			// 检查基本信息
+			// Check basic information
 			expect(flow.id).toBe(yamlDSL.flow.id)
 			expect(flow.name).toBe(yamlDSL.flow.name)
 			expect(flow.description).toBe(yamlDSL.flow.description)
 			expect(flow.version_code).toBe(yamlDSL.flow.version)
-			expect(flow.type).toBe(1) // workflow应该转为1
+			expect(flow.type).toBe(1) // workflow should convert to 1
 			expect(flow.enabled).toBe(yamlDSL.flow.enabled)
 			expect(Array.isArray(flow.nodes)).toBe(true)
 			expect(Array.isArray(flow.edges)).toBe(true)
 		})
 
-		it("应正确处理不同类型的流程", () => {
+		it("Should correctly handle different flow types", () => {
 			const chatDSL = {
 				flow: {
 					id: "test-flow-id",
-					name: "测试流程",
-					description: "测试描述",
+					name: "Test flow",
+					description: "Test description",
 					version: "1.0.0",
-					type: "chat", // 聊天类型
+					type: "chat", // Chat type
 					icon: "test-icon",
 					enabled: true,
 				},
@@ -54,19 +54,19 @@ describe.skip("测试 yaml2json 模块", () => {
 
 			const flow = yaml2json(chatDSL)
 
-			// 检查流程类型
-			expect(flow.type).toBe(2) // chat应该转为2
+			// Check flow type
+			expect(flow.type).toBe(2) // chat should convert to 2
 		})
 	})
 
-	// 测试节点转换
-	describe("节点转换", () => {
-		it("应正确转换节点类型", () => {
+	// Test node conversion
+	describe("Node conversion", () => {
+		it("Should correctly convert node types", () => {
 			const yamlWithNodes = {
 				flow: {
 					id: "test-flow-id",
-					name: "测试流程",
-					description: "测试描述",
+					name: "Test flow",
+					description: "Test description",
 					version: "1.0.0",
 					type: "workflow",
 				},
@@ -99,24 +99,24 @@ describe.skip("测试 yaml2json 模块", () => {
 
 			const flow = yaml2json(yamlWithNodes)
 
-			// 检查节点
+			// Check nodes
 			expect(flow.nodes.length).toBe(2)
-			expect(flow.nodes[0].node_type).toBe("1") // start应该转为1
-			expect(flow.nodes[0].name).toBe("开始节点")
+			expect(flow.nodes[0].node_type).toBe("1") // start should convert to 1
+			expect(flow.nodes[0].name).toBe("Start node")
 
-			expect(flow.nodes[1].node_type).toBe("2") // llm应该转为2
-			expect(flow.nodes[1].name).toBe("LLM节点")
+			expect(flow.nodes[1].node_type).toBe("2") // llm should convert to 2
+			expect(flow.nodes[1].name).toBe("LLM node")
 			expect(flow.nodes[1].params.model).toBe("gpt-4")
 		})
 	})
 
-	// 测试边转换
-	describe("边转换", () => {
-		it("应正确转换边并添加默认样式", () => {
+	// Test edge conversion
+	describe("Edge conversion", () => {
+		it("Should correctly convert edges and add default styles", () => {
 			const yamlWithEdges = {
 				flow: {
 					id: "test-flow-id",
-					name: "测试流程",
+					name: "Test flow",
 					version: "1.0.0",
 					type: "workflow",
 				},
@@ -135,7 +135,7 @@ describe.skip("测试 yaml2json 模块", () => {
 
 			const flow = yaml2json(yamlWithEdges)
 
-			// 检查边
+			// Check edges
 			expect(flow.edges.length).toBe(1)
 			expect(flow.edges[0].id).toBe("edge-1")
 			expect(flow.edges[0].source).toBe("node-1")
@@ -144,20 +144,20 @@ describe.skip("测试 yaml2json 模块", () => {
 			expect(flow.edges[0].targetHandle).toBe("input")
 			expect(flow.edges[0].type).toBe("commonEdge")
 
-			// 检查是否添加了默认样式
+			// Check if default styles were added
 			expect(flow.edges[0].markerEnd).toBeDefined()
 			expect(flow.edges[0].style).toBeDefined()
 			expect(flow.edges[0].data).toBeDefined()
 		})
 	})
 
-	// 测试全局变量转换
-	describe("全局变量转换", () => {
-		it("应正确转换全局变量", () => {
+	// Test global variable conversion
+	describe("Global variable conversion", () => {
+		it("Should correctly convert global variables", () => {
 			const yamlWithVariables = {
 				flow: {
 					id: "test-flow-id",
-					name: "测试流程",
+					name: "Test flow",
 					version: "1.0.0",
 					type: "workflow",
 				},
@@ -181,7 +181,7 @@ describe.skip("测试 yaml2json 模块", () => {
 
 			const flow = yaml2json(yamlWithVariables)
 
-			// 检查全局变量
+			// Check global variables
 			expect(flow.global_variable).toBeDefined()
 			expect(flow.global_variable.variables.length).toBe(2)
 			expect(flow.global_variable.variables[0].name).toBe("testVar")
@@ -194,11 +194,11 @@ describe.skip("测试 yaml2json 模块", () => {
 			expect(flow.global_variable.variables[1].default_value).toBe(123)
 		})
 
-		it("应处理空变量列表", () => {
+		it("Should handle empty variable list", () => {
 			const yamlWithoutVariables = {
 				flow: {
 					id: "test-flow-id",
-					name: "测试流程",
+					name: "Test flow",
 					version: "1.0.0",
 					type: "workflow",
 				},
@@ -209,14 +209,14 @@ describe.skip("测试 yaml2json 模块", () => {
 
 			const flow = yaml2json(yamlWithoutVariables)
 
-			// 检查全局变量为null
+			// Check global variable is null
 			expect(flow.global_variable).toBeNull()
 		})
 	})
 
-	// 测试YAML字符串解析
-	describe("YAML字符串解析", () => {
-		it("应正确解析YAML字符串", () => {
+	// Test YAML string parsing
+	describe("YAML string parsing", () => {
+		it("Should correctly parse YAML string", () => {
 			const yamlString = `
 flow:
   id: test-flow-id
@@ -233,26 +233,26 @@ edges: []
 
 			const flow = yamlString2json(yamlString)
 
-			// 检查基本信息
+			// Check basic information
 			expect(flow.id).toBe("test-flow-id")
-			expect(flow.name).toBe("测试流程")
-			expect(flow.description).toBe("测试描述")
+			expect(flow.name).toBe("Test flow")
+			expect(flow.description).toBe("Test description")
 			expect(flow.version_code).toBe("1.0.0")
 			expect(flow.type).toBe(1)
 			expect(flow.icon).toBe("test-icon")
 			expect(flow.enabled).toBe(true)
 		})
 
-		it("应处理格式错误的YAML字符串并抛出错误", () => {
+		it("Should handle malformed YAML string and throw error", () => {
 			const invalidYamlString = "invalid yaml: [\n]test:"
 
 			expect(() => yamlString2json(invalidYamlString)).toThrow()
 		})
 	})
 
-	// 测试YAML到JSON字符串转换
-	describe("YAML到JSON字符串转换", () => {
-		it("应正确将YAML字符串转换为JSON字符串", () => {
+	// Test YAML to JSON string conversion
+	describe("YAML to JSON string conversion", () => {
+		it("Should correctly convert YAML string to JSON string", () => {
 			const yamlString = `
 flow:
   id: test-flow-id
@@ -267,15 +267,15 @@ edges: []
 
 			const jsonString = yamlString2jsonString(yamlString)
 
-			// 检查JSON字符串
+			// Check JSON string
 			expect(jsonString).toBeDefined()
 			expect(typeof jsonString).toBe("string")
 
-			// 解析回对象检查
+			// Parse back to object to check
 			const parsedJson = JSON.parse(jsonString)
 			expect(parsedJson.id).toBe("test-flow-id")
-			expect(parsedJson.name).toBe("测试流程")
-			expect(parsedJson.description).toBe("测试描述")
+			expect(parsedJson.name).toBe("Test flow")
+			expect(parsedJson.description).toBe("Test description")
 			expect(parsedJson.type).toBe(1)
 		})
 	})
@@ -286,8 +286,8 @@ edges: []
 			// 创建测试数据
 			const originalJson = {
 				id: "test-flow-id",
-				name: "测试流程",
-				description: "测试描述",
+				name: "Test flow",
+				description: "Test description",
 				icon: "test-icon",
 				type: 1,
 				tool_set_id: "test-tool-set",
@@ -349,13 +349,13 @@ edges: []
 			// YAML -> JSON
 			const convertedJson = yamlString2json(yamlString)
 
-			// 检查关键属性
+			// Check key properties
 			expect(convertedJson.id).toBe(originalJson.id)
 			expect(convertedJson.name).toBe(originalJson.name)
 			expect(convertedJson.description).toBe(originalJson.description)
 			expect(convertedJson.type).toBe(originalJson.type)
 
-			// 检查节点
+			// Check nodes
 			expect(convertedJson.nodes.length).toBe(originalJson.nodes.length)
 			expect(convertedJson.nodes[0].id).toBe(originalJson.nodes[0].id)
 			expect(convertedJson.nodes[0].node_type).toBe(originalJson.nodes[0].node_type)
@@ -363,7 +363,7 @@ edges: []
 			expect(convertedJson.nodes[1].node_type).toBe(originalJson.nodes[1].node_type)
 			expect(convertedJson.nodes[1].params.model).toBe(originalJson.nodes[1].params.model)
 
-			// 检查边
+			// Check edges
 			expect(convertedJson.edges.length).toBe(originalJson.edges.length)
 			expect(convertedJson.edges[0].source).toBe(originalJson.edges[0].source)
 			expect(convertedJson.edges[0].target).toBe(originalJson.edges[0].target)
@@ -379,11 +379,11 @@ edges: []
 		})
 	})
 
-	// 测试与实际小型案例的转换
-	describe("小型实际案例测试", () => {
+	// Test with actual small case conversion
+	describe("Small actual case test", () => {
 		let smallJson: any
 
-		// 读取测试数据
+		// Read test data
 		beforeEach(() => {
 			const filePath = path.resolve(
 				__dirname,
@@ -393,7 +393,7 @@ edges: []
 			smallJson = JSON.parse(fileContent)
 		})
 
-		it("应能正确进行JSON->YAML->JSON转换并保持数据完整性", () => {
+		it("Should correctly perform JSON->YAML->JSON conversion and maintain data integrity", () => {
 			// JSON -> YAML
 			const yamlString = json2yamlString(smallJson)
 
@@ -406,7 +406,7 @@ edges: []
 			expect(convertedJson.description).toBe(smallJson.description)
 			expect(convertedJson.type).toBe(smallJson.type)
 
-			// 检查节点数量和内容
+			// Check node count and content
 			expect(convertedJson.nodes.length).toBe(smallJson.nodes.length)
 			expect(convertedJson.nodes[0].id).toBe(smallJson.nodes[0].id)
 			expect(convertedJson.nodes[0].node_type).toBe(smallJson.nodes[0].node_type)
@@ -416,7 +416,7 @@ edges: []
 			expect(convertedJson.nodes[1].node_type).toBe(smallJson.nodes[1].node_type)
 			expect(convertedJson.nodes[1].name).toBe(smallJson.nodes[1].name)
 
-			// 检查LLM节点的参数
+			// Check LLM node parameters
 			const originalLLM = smallJson.nodes.find((n: any) => n.node_type === "2")
 			const convertedLLM = convertedJson.nodes.find((n: any) => n.node_type === "2")
 			expect(convertedLLM.params.model).toBe(originalLLM.params.model)

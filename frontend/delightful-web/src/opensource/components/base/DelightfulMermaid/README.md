@@ -65,7 +65,7 @@ import { DelightfulMermaid } from '@/components/base/DelightfulMermaid';
     stateDiagram-v2
     [*] --> State1
     State1 --> State2: Trigger
-    状态2 --> [*]
+    State2 --> [*]
   `}
 />
 ```

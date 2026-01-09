@@ -148,7 +148,7 @@ const mockItemsTransform = (item: unknown): TestItemData => {
 	return {
 		id: typedItem.id,
 		name: typedItem.name,
-		// 基础DelightfulListItemData属性
+		// Base DelightfulListItemData properties
 		title: typedItem.name,
 		avatar: "",
 		desc: `Description ${typedItem.id}`,

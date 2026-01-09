@@ -1,7 +1,7 @@
 ﻿/**
- * 判断字符串是否可能是JSON
- * @param str 要检查的字符串
- * @returns 是否可能是JSON格式
+ * Check if a string is possibly JSON
+ * @param str The string to check
+ * @returns Whether it is possibly JSON format
  */
 export const isJsonString = (str: string): boolean => {
     if (typeof str !== "string") return false
@@ -12,28 +12,28 @@ export const isJsonString = (str: string): boolean => {
 }
 
 /**
- * 格式化可能是JSON字符串的值
- * @param value 可能是JSON的字符串
- * @returns 格式化后的JSON字符串
+ * Format a value that might be a JSON string
+ * @param value The string that might be JSON
+ * @returns Formatted JSON string
  */
 export const formatValue = (value: string): string => {
     if (!isJsonString(value)) return value
 
     try {
-        // 尝试解析JSON
+        // Try to parse JSON
         const parsed = JSON.parse(value)
-        // 重新格式化为美观的JSON字符串
+        // Reformat to beautified JSON string
         return JSON.stringify(parsed, null, 2)
-    } catch (e) {
-        // 如果解析失败，返回原始值
+    } catch {
+        // If parsing fails, return original value
         return value
     }
 }
 
 /**
- * 判断是否为复杂的JSON字符串（对象或数组）
- * @param value 要检查的字符串
- * @returns 是否为复杂JSON结构
+ * Check if it's a complex JSON string (object or array)
+ * @param value The string to check
+ * @returns Whether it's a complex JSON structure
  */
 export const isComplexValue = (value: string): boolean => {
     return isJsonString(value) && value.length > 20

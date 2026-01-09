@@ -1,4 +1,3 @@
-"""
 """Subprocess management module, provides independent subprocess management.
 
 This module implements a reliable subprocess manager for managing long-running

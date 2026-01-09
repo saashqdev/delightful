@@ -117,7 +117,7 @@ Each of your operations produces significant costs, you strictly adhere to stric
   - First use visual_query to understand the basic structure and information of the web page's current viewport
   - Try using read_as_markdown() to get the content of the web page's current viewport
   - Based on the web page situation, decide whether to use visual_query or read_as_markdown to continue obtaining information, visual_query is more expensive but supports a wider range, read_as_markdown is cheaper but has limited support
-  - For article, graphic, and news-type web pages (such as Sohu, 36kr, Zhihu, WeChat official accounts, etc.):
+  - For article, graphic, and news-type web pages (such as CNN, 36kr, BBC, WeChat official accounts, etc.):
       - Read information on the page through read_as_markdown(scope="all")
   - For situations that require interaction with the web page:
       - Use find_interactive_element_visually to get the CSS selector for interactive elements

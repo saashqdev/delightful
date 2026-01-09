@@ -26,7 +26,7 @@ export default function useTextEditableEdit({ title = "", onChange }: UseTextEdi
 		(e: any) => {
 			/** Handle Enter key commit */
 			if ([KEY_CODE_MAP.ENTER].includes(e.keyCode)) {
-				// console.log("确认", e.target.value)
+				// console.log("Confirm", e.target.value)
 				setCurrentTitle(e.target.value)
 				setIsEdit(false)
 				if (onChange) onChange(e.target.value)

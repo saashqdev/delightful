@@ -39,7 +39,7 @@ exports[`DelightfulCollapse > Snapshot tests > basic collapse panel snapshot 1`]
         <span
           class="delightful-collapse-header-text"
         >
-          标题1
+          Title 1
         </span>
       </div>
     </div>
@@ -86,7 +86,7 @@ exports[`DelightfulCollapse > Snapshot tests > multiple panel collapse snapshot 
         <span
           class="delightful-collapse-header-text"
         >
-          标题1
+          Title 1
         </span>
       </div>
     </div>
@@ -124,7 +124,7 @@ exports[`DelightfulCollapse > Snapshot tests > multiple panel collapse snapshot 
         <span
           class="delightful-collapse-header-text"
         >
-          标题2
+          Title 2
         </span>
       </div>
     </div>
@@ -162,7 +162,7 @@ exports[`DelightfulCollapse > Snapshot tests > multiple panel collapse snapshot 
         <span
           class="delightful-collapse-header-text"
         >
-          标题3
+          Title 3
         </span>
       </div>
     </div>
@@ -209,7 +209,7 @@ exports[`DelightfulCollapse > Snapshot tests > small size collapse panel snapsho
         <span
           class="delightful-collapse-header-text"
         >
-          标题1
+          Title 1
         </span>
       </div>
     </div>
@@ -256,7 +256,7 @@ exports[`DelightfulCollapse > Snapshot tests > collapse panel with icon snapshot
         <span
           class="delightful-collapse-header-text"
         >
-          标题1
+          Title 1
         </span>
         <div
           class="delightful-collapse-extra"
@@ -311,7 +311,7 @@ exports[`DelightfulCollapse > Snapshot tests > accordion mode snapshot 1`] = `
         <span
           class="delightful-collapse-header-text"
         >
-          标题1
+          Title 1
         </span>
       </div>
     </div>
@@ -349,7 +349,7 @@ exports[`DelightfulCollapse > Snapshot tests > accordion mode snapshot 1`] = `
         <span
           class="delightful-collapse-header-text"
         >
-          标题2
+          Title 2
         </span>
       </div>
     </div>
@@ -397,7 +397,7 @@ exports[`DelightfulCollapse > Snapshot tests > disabled panel snapshot 1`] = `
         <span
           class="delightful-collapse-header-text"
         >
-          标题1
+          Title 1
         </span>
       </div>
     </div>
@@ -444,7 +444,7 @@ exports[`DelightfulCollapse > Snapshot tests > default expanded panel snapshot 1
         <span
           class="delightful-collapse-header-text"
         >
-          标题1
+          Title 1
         </span>
       </div>
       <div
@@ -453,7 +453,7 @@ exports[`DelightfulCollapse > Snapshot tests > default expanded panel snapshot 1
         <div
           class="delightful-collapse-content-box"
         >
-          内容1
+          Content 1
         </div>
       </div>
     </div>
@@ -491,7 +491,7 @@ exports[`DelightfulCollapse > Snapshot tests > default expanded panel snapshot 1
         <span
           class="delightful-collapse-header-text"
         >
-          标题2
+          Title 2
         </span>
       </div>
     </div>

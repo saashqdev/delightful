@@ -57,7 +57,7 @@ interface DelightfulChatSeqRepositoryInterface
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 

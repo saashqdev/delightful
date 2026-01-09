@@ -27,7 +27,7 @@ class SubAdminQuery extends AbstractQuery
     private ?int $status = null;
 
     /**
-     * 构造functionsupportfromarray批quantityinitializeproperty（inheritfrom AbstractObject）。
+     * 构造functionsupportfromarraybatchquantityinitializeproperty（inheritfrom AbstractObject）。
      */
 
     /* -------------------- getter / setter -------------------- */

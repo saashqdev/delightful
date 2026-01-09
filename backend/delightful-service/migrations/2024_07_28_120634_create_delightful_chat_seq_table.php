@@ -25,29 +25,29 @@ return new class extends Migration {
             $table->string('object_id', 64)->comment('objectid. ifisusero clock,table示delightful_id');
             $table->string('seq_id', 64)->comment('message序columnnumber id，each账number所havemessagemust逐渐增大');
             $table->string('seq_type', 32)->comment('message大type:控制message,chatmessage。');
-            $table->text('content')->comment('序columnnumberdetail. 一些notvisible控制message,只inseqtable存indetail. byand写o clockcopy一sharemessagetablecontenttoseqtableuse.');
-            $table->string('delightful_message_id', 64)->comment('service端generate唯一messageid,useatmessagewithdraw/edit');
+            $table->text('content')->comment('序columnnumberdetail. one些notvisible控制message,只inseqtable存indetail. byand写o clockcopyonesharemessagetablecontenttoseqtableuse.');
+            $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
             $table->string('message_id', 64)->comment('序columnnumberassociateusermessageid,implement已读return执,messagewithdraw/editetc')->default(0);
             // quotemessageid
             $table->string('refer_message_id', 64)->comment('quotemessageid,implement已读return执,messagewithdraw/editetc');
             // sender_message_id
             $table->string('sender_message_id', 64)->comment('send方messageid,useatmessagewithdraw/edit');
             // sessionid
-            $table->string('conversation_id', 64)->comment('message所属sessionid,冗余field');
+            $table->string('conversation_id', 64)->comment('message所属sessionid,冗remainderfield');
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
             // messagereceivepersonlist
             $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecord未读/已读/已viewuserlist');
-            $table->text('extra')->comment('attach加field，record一些extensionproperty。 such as话题id。');
+            $table->text('extra')->comment('attachaddfield，recordone些extensionproperty。 such as话题id。');
             // app_message_id
-            $table->string('app_message_id', 64)->default('')->comment('冗余field,customer端generatemessageid,useat防customer端重复');
+            $table->string('app_message_id', 64)->default('')->comment('冗remainderfield,customer端generatemessageid,useat防customer端重复');
             # bydownis索引set
             // delightful_message_id 索引
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
             // 因for经常need按 seq_id sort，所byincrease联合索引
-            // bydown索引create移动to单独migratefilemiddle
+            // bydown索引create移动tosingle独migratefilemiddle
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('账number收item箱序columnnumbertable,each账number所havemessagemust单调递增');
+            $table->comment('账number收item箱序columnnumbertable,each账number所havemessagemustsingle调递增');
         });
     }
 

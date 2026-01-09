@@ -21,7 +21,7 @@ class MessageToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return 'messagetool集';
+        return 'messagetoolcollection';
     }
 
     public function getDescription(): string

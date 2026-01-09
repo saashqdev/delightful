@@ -136,7 +136,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批quantitygetdepartment所have子department.
+     * batchquantitygetdepartment所have子department.
      * @return DelightfulDepartmentEntity[]
      */
     public function getAllChildrenByDepartmentIds(array $departmentIds, DataIsolation $dataIsolation): array
@@ -180,7 +180,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批quantityget多organizationrootdepartmentinfo.
+     * batchquantityget多organizationrootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
      * @return array<string,DelightfulDepartmentEntity> byorganizationcodefor键，rootdepartment实bodyforvalueassociatearray
      */

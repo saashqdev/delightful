@@ -76,7 +76,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $organizationAdmin = $this->organizationAdminAppService->grant($dataIsolation, $userId, $grantorUserId, $remarks);
 
-        // getcontainuserinformation完整data
+        // getcontainuserinformationcompletedata
         $organizationAdminData = $this->organizationAdminAppService->show($dataIsolation, $organizationAdmin->getId());
 
         return OrganizationAdminAssembler::assembleWithUserInfo($organizationAdminData)->toArray();

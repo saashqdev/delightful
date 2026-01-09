@@ -623,7 +623,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setWidth($width);
         $imageGenerateParamsVO->setHeight($height);
 
-        // fromservice商configurationarraymiddle取firstconductprocess
+        // fromservicequotientconfigurationarraymiddle取firstconductprocess
         if (empty($serviceProviderConfigs)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
@@ -661,7 +661,7 @@ class LLMAppService extends AbstractLLMAppService
                         $n = 1;
                     }
 
-                    // 统一触hairevent
+                    // 统one触hairevent
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -731,7 +731,7 @@ class LLMAppService extends AbstractLLMAppService
                 $imageGenerateRequest->setModel($serviceProviderConfig->getModelVersion());
                 $generateImageRaw = $imageGenerateService->generateImageRawWithWatermark($imageGenerateRequest);
                 if (! empty($generateImageRaw)) {
-                    // 统一触hairevent（graph生graphdefault 1 张）
+                    // 统one触hairevent（graph生graphdefault 1 张）
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -1124,7 +1124,7 @@ class LLMAppService extends AbstractLLMAppService
         $modelVersion = $imageModel->getModelVersion();
 
         if ($imageModel->getProviderCode()->isOfficial()) {
-            // use官方service商
+            // use官方servicequotient
             $imageGenerateType = ImageGenerateModelType::fromModel(ImageGenerateModelType::Official->value, false);
         } else {
             $imageGenerateType = ImageGenerateModelType::fromModel($modelVersion, false);
@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // 直接透传original size parameter，leteachservice商according tofrom己需求process
+        // 直接透传original size parameter，leteachservicequotientaccording tofrom己需求process
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1174,7 +1174,7 @@ class LLMAppService extends AbstractLLMAppService
                 $n = 1;
             }
 
-            // 统一触hairevent
+            // 统one触hairevent
             $this->dispatchImageGeneratedEvent(
                 $creator,
                 $organizationCode,
@@ -1707,13 +1707,13 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * 统一触hairimagegenerateevent.
+     * 统one触hairimagegenerateevent.
      *
      * @param string $creator create者ID
      * @param string $organizationCode organizationencoding
      * @param AbstractRequestDTO $requestDTO requestDTO
      * @param int $imageCount imagequantity
-     * @param string $providerModelId service商modelID
+     * @param string $providerModelId servicequotientmodelID
      * @param string $callTime calltime
      * @param float $startTime starttime（微second）
      * @param null|AccessTokenEntity $accessTokenEntity accesstoken实body
@@ -1731,7 +1731,7 @@ class LLMAppService extends AbstractLLMAppService
         // 计算responsetime（毫second）
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
-        // convert providerModelId for整数
+        // convert providerModelId forinteger
         $serviceProviderModelsId = is_numeric($providerModelId) ? (int) $providerModelId : null;
 
         // getpriceconfigurationversionID
@@ -1753,7 +1753,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * getservice商modelpriceconfigurationversionID.
+     * getservicequotientmodelpriceconfigurationversionID.
      */
     private function getPriceIdByServiceProviderModelId(?int $serviceProviderModelsId, string $organizationCode): ?int
     {

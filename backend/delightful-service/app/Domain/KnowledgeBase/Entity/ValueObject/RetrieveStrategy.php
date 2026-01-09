@@ -11,15 +11,15 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  * 检索strategy枚举category.
  *
  * definition两type检索strategy：
- * - SINGLE: 单一检索，from单knowledge basemiddle检索info
+ * - SINGLE: single检索，fromsingleknowledge basemiddle检索info
  * - MULTIPLE: 多重检索，meanwhilefrom多knowledge basemiddle检索info，然backtoresultconduct重新sort
  */
 class RetrieveStrategy
 {
     /**
-     * 单一检索.
+     * single检索.
      *
-     * from单knowledge basemiddle检索info。
+     * fromsingleknowledge basemiddle检索info。
      * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */
@@ -31,7 +31,7 @@ class RetrieveStrategy
      * meanwhilefrom多knowledge basemiddle检索info，然backtoresultconduct重新sort。
      * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
-     * 它supportdifferent重sortstrategy，如use重sortmodelor加权minute数。
+     * 它supportdifferent重sortstrategy，如use重sortmodeloradd权minute数。
      */
     public const MULTIPLE = 'multiple';
 

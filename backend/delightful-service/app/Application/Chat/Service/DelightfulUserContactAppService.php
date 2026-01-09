@@ -91,7 +91,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         if (! $this->userDomainService->addFriend($dataIsolation, $friendId)) {
             return false;
         }
-        // sendadd好友message。加好友splitfor：好友申请/好友同意/好友reject
+        // sendadd好友message。add好友splitfor：好友申请/好友同意/好友reject
         if ($addFriendType === AddFriendType::PASS) {
             // sendadd好友控制message
             $friendUserEntity = new DelightfulUserEntity();
@@ -161,7 +161,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 批quantityqueryorganization架构、ai 、or者person版user.
+     * batchquantityqueryorganization架构、ai 、or者person版user.
      */
     public function getUserDetailByIds(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
@@ -225,7 +225,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         foreach ($departmentsInfo as $departmentInfo) {
             $departmentsInfoWithFullPath[$departmentInfo->getDepartmentId()] = [$departmentInfo];
         }
-        // getuser真名/nickname/hand机number/avataretcinfo
+        // getusertrue名/nickname/hand机number/avataretcinfo
         $userIds = array_values(array_unique(array_column($departmentUsers, 'user_id')));
         $usersDetail = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
@@ -233,8 +233,8 @@ class DelightfulUserContactAppService extends AbstractAppService
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
         // 通讯录andsearch相closeinterface，filterhiddendepartmentandhiddenuser。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
-        // byat $usersPageResponseDTO  items 限制parametertype，fromcodestandardangledegree，again new 一通use PageResponseDTO， 按pagination结构return
-        // 另outside，byatfilter逻辑存in，maybe本timereturn items quantity少at $limit,butisagainhavedown一页。
+        // byat $usersPageResponseDTO  items 限制parametertype，fromcodestandardangledegree，again new one通use PageResponseDTO， 按pagination结构return
+        // 另outside，byatfilter逻辑存in，maybe本timereturn items quantity少at $limit,butisagainhavedownone页。
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
         $pageResponseDTO->setHasMore($usersPageResponseDTO->getHasMore());
@@ -243,7 +243,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 按 usernickname/真名/hand机number/email/departmentpath/position searchuser.
+     * 按 usernickname/true名/hand机number/email/departmentpath/position searchuser.
      */
     public function searchDepartmentUser(UserQueryDTO $queryDTO, DelightfulUserAuthorization $authorization): array
     {
@@ -264,7 +264,7 @@ class DelightfulUserContactAppService extends AbstractAppService
 
         // 按nicknamesearch
         $usersByNickname = $this->userDomainService->searchUserByNickName($queryDTO->getQuery(), $dataIsolation);
-        // 按hand机number/真名search
+        // 按hand机number/true名search
         $usersByPhoneOrRealName = $this->accountDomainService->searchUserByPhoneOrRealName($queryDTO->getQuery(), $dataIsolation);
 
         // mergeresult
@@ -479,7 +479,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
         }
 
-        // 按organization批quantitygetlink
+        // 按organizationbatchquantitygetlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->fileDomainService->getLinks($orgCode, $fileKeys);

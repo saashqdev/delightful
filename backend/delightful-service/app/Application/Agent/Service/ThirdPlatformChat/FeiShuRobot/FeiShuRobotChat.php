@@ -130,7 +130,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         $messageId = $params['event']['message']['message_id'] ?? '';
 
-        // 幂etcpropertyhandle：usemessageIDconductgo重
+        // poweretcpropertyhandle：usemessageIDconductgo重
         if (! $this->checkMessageIdLock($messageId)) {
             $this->logger->info('飞书message已handlepass，skip', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);

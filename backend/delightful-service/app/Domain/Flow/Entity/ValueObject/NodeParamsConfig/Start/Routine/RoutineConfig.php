@@ -76,7 +76,7 @@ class RoutineConfig
             case RoutineType::DailyRepeat:
                 break;
             case RoutineType::WeeklyRepeat:
-                // 0-6 table示week一toweekday，所by得compatible一down crontab rule 0 table示weekday
+                // 0-6 table示weekonetoweekday，所by得compatibleonedown crontab rule 0 table示weekday
                 $dayOfWeek = (int) $this->day + 1;
                 if ($dayOfWeek === 7) {
                     $dayOfWeek = 0;
@@ -133,12 +133,12 @@ class RoutineConfig
         }
         if ($this->type === RoutineType::CustomRepeat) {
             if (empty($this->unit)) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔unit not能for空');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔unit not能forempty');
             }
             if (empty($this->interval)) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能for空');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能forempty');
             }
-            // onlyeachdaytime，才能customize interval，其余allis 1
+            // onlyeachdaytime，才能customize interval，其remainderallis 1
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month, IntervalUnit::Year])) {
                 $this->interval = 1;
             }
@@ -148,12 +148,12 @@ class RoutineConfig
             // onlyisweekor者monthtime，才能have values
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month])) {
                 if (empty($this->values)) {
-                    ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能for空');
+                    ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能forempty');
                 }
                 if ($this->unit === IntervalUnit::Week) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能is整数');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能isinteger');
                         }
                         if ($value < 0 || $value > 6) {
                             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能in0~6between');
@@ -163,7 +163,7 @@ class RoutineConfig
                 if ($this->unit === IntervalUnit::Month) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能is整数');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能isinteger');
                         }
                         if ($value < 1 || $value > 31) {
                             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能in1~31between');
@@ -179,13 +179,13 @@ class RoutineConfig
             $this->values = null;
         }
         if ($this->type->needDay() && is_null($this->day)) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date not能for空');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date not能forempty');
         }
         if ($this->type->needTime() && is_null($this->time)) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time not能for空');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time not能forempty');
         }
 
-        // eachweektime，day table示week几 0-6  0isweek一
+        // eachweektime，day table示week几 0-6  0isweekone
         if ($this->type === RoutineType::WeeklyRepeat) {
             if (! is_numeric($this->day) || $this->day < 0 || $this->day > 6) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date 只能in0~6between');

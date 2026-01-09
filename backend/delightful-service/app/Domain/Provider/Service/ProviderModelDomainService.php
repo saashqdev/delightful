@@ -133,7 +133,7 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 批quantityaccording toIDgetmodel.
+     * batchquantityaccording toIDgetmodel.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
@@ -150,7 +150,7 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 批quantityaccording toModelIDgetmodel.
+     * batchquantityaccording toModelIDgetmodel.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds model标识array
@@ -210,7 +210,7 @@ readonly class ProviderModelDomainService
      */
     private function saveConfigVersion(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): void
     {
-        // ifconfigurationfor空，notcreateversionrecord
+        // ifconfigurationforempty，notcreateversionrecord
         if ($modelEntity->getConfig() === null) {
             return;
         }

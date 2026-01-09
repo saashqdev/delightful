@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统一管理 ASR 相close所haveconfigurationconstant，includetimeouttime、round询between隔、retrycountetc.
+ * 统one管理 ASR 相close所haveconfigurationconstant，includetimeouttime、round询between隔、retrycountetc.
  */
 class AsrConfig
 {
@@ -82,19 +82,19 @@ class AsrConfig
     public const int SANDBOX_MERGE_LOG_INTERVAL = 10;
 
     /**
-     * 沙箱audiomergelogrecordfrequency（eachNtime尝试record一time）.
+     * 沙箱audiomergelogrecordfrequency（eachNtime尝试recordonetime）.
      */
     public const int SANDBOX_MERGE_LOG_FREQUENCY = 10;
 
     /**
-     * audiofilerecordquerylogrecordfrequency（eachNtime尝试record一time）.
+     * audiofilerecordquerylogrecordfrequency（eachNtime尝试recordonetime）.
      */
     public const int FILE_RECORD_QUERY_LOG_FREQUENCY = 3;
 
     // ==================== Redis configuration ====================
 
     /**
-     * Redis 扫描批timesize.
+     * Redis 扫描batchtimesize.
      */
     public const int REDIS_SCAN_BATCH_SIZE = 200;
 

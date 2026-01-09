@@ -43,12 +43,12 @@ class ModeAppService extends AbstractModeAppService
         $query = new ModeQuery(status: true);
         $modeEnabledList = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage())['list'];
 
-        // 批quantitybuild模typeaggregateroot
+        // batchquantitybuild模typeaggregateroot
         $modeAggregates = $this->modeDomainService->batchBuildModeAggregates($modeDataIsolation, $modeEnabledList);
 
-        // ===== performanceoptimize：批quantity预query =====
+        // ===== performanceoptimize：batchquantity预query =====
 
-        // step1：预收集所haveneedmodelId
+        // step1：预收collection所haveneedmodelId
         $allModelIds = [];
         foreach ($modeAggregates as $aggregate) {
             foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
@@ -58,19 +58,19 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // step2：批quantityquery所havemodelandservice商status
+        // step2：batchquantityquery所havemodelandservicequotientstatus
         $allProviderModelsWithStatus = $this->getModelsBatch(array_unique($allModelIds));
 
         // step3：organizationmodelfilter
 
-        // first收集所haveneedfiltermodel（LLM）
+        // first收collection所haveneedfiltermodel（LLM）
         $allAggregateModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateModels = $this->getModelsForAggregate($aggregate, $allProviderModelsWithStatus);
             $allAggregateModels = array_merge($allAggregateModels, $aggregateModels);
         }
 
-        // 收集所haveneedfiltergraphlikemodel（VLM）
+        // 收collection所haveneedfiltergraphlikemodel（VLM）
         $allAggregateImageModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateImageModels = $this->getImageModelsForAggregate($aggregate, $allProviderModelsWithStatus);
@@ -167,14 +167,14 @@ class ModeAppService extends AbstractModeAppService
         $providerModels = $this->getModels($modeAggregate);
         $modeGroupDetailDTOS = ModeAssembler::aggregateToFlatGroupsDTO($modeAggregate, $providerModels);
 
-        // processgraph标pathconvertfor完整URL
+        // processgraph标pathconvertforcompleteURL
         $this->processModeGroupDetailIcons($authorization, $modeGroupDetailDTOS);
 
         return $modeGroupDetailDTOS;
     }
 
     /**
-     * 批quantitygetmodelandservice商status（performanceoptimizeversion）.
+     * batchquantitygetmodelandservicequotientstatus（performanceoptimizeversion）.
      * @param array $allModelIds 所haveneedquerymodelId
      * @return array<string, ProviderModelEntity> 已passlevel联statusfiltercanusemodel
      */
@@ -186,10 +186,10 @@ class ModeAppService extends AbstractModeAppService
 
         $providerDataIsolation = new ProviderDataIsolation(OfficialOrganizationUtil::getOfficialOrganizationCode());
 
-        // 批quantitygetmodel
+        // batchquantitygetmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, $allModelIds);
 
-        // extract所haveservice商ID
+        // extract所haveservicequotientID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -197,7 +197,7 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // 批quantitygetservice商status（the2timeSQLquery）
+        // batchquantitygetservicequotientstatus（the2timeSQLquery）
         $providerStatuses = [];
         if (! empty($providerConfigIds)) {
             $providerConfigs = $this->providerConfigDomainService->getByIds($providerDataIsolation, array_unique($providerConfigIds));
@@ -219,9 +219,9 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * for批quantityqueryoptimizemodelchoosemethod.
+     * forbatchquantityqueryoptimizemodelchoosemethod.
      * @param ProviderModelEntity[] $models modellist
-     * @param array $providerStatuses service商statusmapping
+     * @param array $providerStatuses servicequotientstatusmapping
      */
     private function selectBestModelForBatch(array $models, array $providerStatuses): ?ProviderModelEntity
     {
@@ -229,17 +229,17 @@ class ModeAppService extends AbstractModeAppService
             return null;
         }
 
-        // 优先chooseservice商enableandmodelenablemodel
+        // 优先chooseservicequotientenableandmodelenablemodel
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // service商disable，skip该model
+            // servicequotientdisable，skip该model
             if ($providerStatus === Status::Disabled) {
                 continue;
             }
 
-            // service商enable，checkmodelstatus
+            // servicequotientenable，checkmodelstatus
             if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return $model;
             }
@@ -249,9 +249,9 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * from批quantityqueryresultmiddleextract特定aggregaterootmodel（LLM）.
+     * frombatchquantityqueryresultmiddleextract特定aggregaterootmodel（LLM）.
      * @param ModeAggregate $aggregate 模typeaggregateroot
-     * @param array<string, ProviderModelEntity> $allProviderModels 批quantityquery所havemodelresult
+     * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
      * @return array<string, ProviderModelEntity> 该aggregateroot相closemodel
      */
     private function getModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
@@ -276,9 +276,9 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * from批quantityqueryresultmiddleextract特定aggregaterootgraphlikemodel（VLM）.
+     * frombatchquantityqueryresultmiddleextract特定aggregaterootgraphlikemodel（VLM）.
      * @param ModeAggregate $aggregate 模typeaggregateroot
-     * @param array<string, ProviderModelEntity> $allProviderModels 批quantityquery所havemodelresult
+     * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
      * @return array<string, ProviderModelEntity> 该aggregateroot相closegraphlikemodel
      */
     private function getImageModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array

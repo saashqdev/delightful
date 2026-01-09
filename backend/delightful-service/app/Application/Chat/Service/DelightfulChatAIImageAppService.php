@@ -70,7 +70,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // ifisgraph生graph，thensize保持andoriginalimagesize一致
+        // ifisgraph生graph，thensize保持andoriginalimagesizeone致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
             // setactualrequestsizeandratio例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
@@ -117,7 +117,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
         $reqDTO->getParams()->setGenerateNum(1);
-        // clear空value
+        // clearemptyvalue
         $urls = array_filter(array_map(fn ($attachment) => $attachment->getUrl(), $reqDTO->getAttachments()));
         $reqDTO->getParams()->setReferenceImages($urls);
         $this->handleGenerateImage($requestContext, $reqDTO);
@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯一标识
+        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯one标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

@@ -36,7 +36,7 @@ $servers = [
             Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
         ],
     ],
-    // outat单测need，mock 所havethethird-party http call，提升单测speeddegreeandstableproperty。
+    // outatsingle测need，mock 所havethethird-party http call，提升single测speeddegreeandstableproperty。
     [
         'name' => 'mock-http-service',
         'type' => ServerInterface::SERVER_HTTP,

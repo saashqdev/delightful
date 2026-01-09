@@ -31,7 +31,7 @@ interface OrganizationRepositoryInterface
     public function getByCode(string $code): ?OrganizationEntity;
 
     /**
-     * according toencodingcolumn表批quantitygetorganization.
+     * according toencodingcolumn表batchquantitygetorganization.
      * @param string[] $codes
      * @return OrganizationEntity[]
      */

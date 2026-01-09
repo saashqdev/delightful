@@ -213,7 +213,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 批quantitycheckuserwhetherfororganizationadministrator.
+     * batchquantitycheckuserwhetherfororganizationadministrator.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array
     {

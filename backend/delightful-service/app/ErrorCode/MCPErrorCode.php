@@ -48,30 +48,30 @@ enum MCPErrorCode: int
     case OAuth2TokenRefreshFailed = 51532; // OAuth2tokenrefreshfail
 
     #[ErrorMessage(message: 'mcp.oauth2.invalid_response')]
-    case OAuth2InvalidResponse = 51533; // OAuth2提供商responseinvalid
+    case OAuth2InvalidResponse = 51533; // OAuth2提供quotientresponseinvalid
 
     #[ErrorMessage(message: 'mcp.oauth2.provider_error')]
-    case OAuth2ProviderError = 51534; // OAuth2提供商returnerror
+    case OAuth2ProviderError = 51534; // OAuth2提供quotientreturnerror
 
     #[ErrorMessage(message: 'mcp.oauth2.missing_access_token')]
     case OAuth2MissingAccessToken = 51535; // OAuth2responsemiddle缺少accesstoken
 
     // OAuth2bindverify相closeerror码
     #[ErrorMessage(message: 'mcp.oauth2.binding.code_empty')]
-    case OAuth2BindingCodeEmpty = 51540; // OAuth2bindauthorization码for空
+    case OAuth2BindingCodeEmpty = 51540; // OAuth2bindauthorization码forempty
 
     #[ErrorMessage(message: 'mcp.oauth2.binding.state_empty')]
-    case OAuth2BindingStateEmpty = 51541; // OAuth2bindstatusparameterfor空
+    case OAuth2BindingStateEmpty = 51541; // OAuth2bindstatusparameterforempty
 
     #[ErrorMessage(message: 'mcp.oauth2.binding.mcp_server_code_empty')]
-    case OAuth2BindingMcpServerCodeEmpty = 51542; // OAuth2bindMCPservicecodefor空
+    case OAuth2BindingMcpServerCodeEmpty = 51542; // OAuth2bindMCPservicecodeforempty
 
     // 必填fieldverify相closeerror码
     #[ErrorMessage(message: 'mcp.required_fields.missing')]
     case RequiredFieldsMissing = 51550; // 必填field缺失
 
     #[ErrorMessage(message: 'mcp.required_fields.empty')]
-    case RequiredFieldsEmpty = 51551; // 必填fieldfor空
+    case RequiredFieldsEmpty = 51551; // 必填fieldforempty
 
     // STDIOexecute器相closeerror码
     #[ErrorMessage(message: 'mcp.executor.stdio.connection_failed')]

@@ -32,7 +32,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：return空array，table示nothave特定modelbind.
+     * defaultimplement：returnemptyarray，table示nothave特定modelbind.
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array
     {
@@ -40,7 +40,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：return空array，table示nothavemodelneed升level.
+     * defaultimplement：returnemptyarray，table示nothavemodelneed升level.
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array
     {

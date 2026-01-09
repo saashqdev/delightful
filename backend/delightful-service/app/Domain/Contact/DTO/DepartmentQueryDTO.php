@@ -21,7 +21,7 @@ class DepartmentQueryDTO extends AbstractEntity
     protected array $departmentIds = [];
 
     /**
-     * down一页token, useatpagination. 暂o clockvalueformysqloffset,back续maybeforesscroll_id,orfromlineimplementsnapshot机制.
+     * downone页token, useatpagination. 暂o clockvalueformysqloffset,back续maybeforesscroll_id,orfromlineimplementsnapshot机制.
      */
     protected string $pageToken = '';
 

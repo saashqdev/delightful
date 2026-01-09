@@ -17,7 +17,7 @@ use SplStack;
 class Dag implements Runner
 {
     /**
-     * etc待mode.（sectionpoint只allow运line一time）.
+     * etc待mode.（sectionpoint只allow运lineonetime）.
      */
     public const int WAITING_MODE = 1;
 

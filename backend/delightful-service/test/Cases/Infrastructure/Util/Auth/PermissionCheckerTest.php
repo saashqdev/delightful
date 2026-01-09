@@ -63,7 +63,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // 一usercanhave多permission
+        // oneusercanhave多permission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000004',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -136,7 +136,7 @@ class PermissionCheckerTest extends TestCase
             '特定permissionuser' => ['13800000003', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], true],
             '无permissionuser' => ['13800000099', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
             'permissionnot存in' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
-            '空hand机number' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
+            'emptyhand机number' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
         ];
     }
 }

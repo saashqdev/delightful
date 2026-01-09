@@ -54,7 +54,7 @@ class OrganizationModel extends AbstractModel
     protected ?string $table = 'delightful_organizations';
 
     /**
-     * can批quantity赋valueproperty.
+     * canbatchquantity赋valueproperty.
      */
     protected array $fillable = [
         'id',

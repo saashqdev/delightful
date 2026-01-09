@@ -140,7 +140,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         Db::beginTransaction();
         try {
             $controlMessageType = $groupUserChangeSeqEntity->getSeqType();
-            // 批quantitygenerate群member变moremessage
+            // batchquantitygenerate群member变moremessage
             /** @var GroupCreateMessage|GroupInfoUpdateMessage|GroupOwnerChangeMessage|GroupUserAddMessage|GroupUserRemoveMessage $content */
             $content = $groupUserChangeSeqEntity->getContent();
             $groupId = $content->getGroupId();
@@ -251,7 +251,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     private function getGroupUpdateReceiveUsers(string $groupId): array
     {
-        // 批quantitygenerate群member变moremessage
+        // batchquantitygenerate群member变moremessage
         $groupEntity = $this->delightfulGroupRepository->getGroupInfoById($groupId);
         if ($groupEntity === null || $groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             return [];
@@ -270,13 +270,13 @@ class DelightfulGroupDomainService extends AbstractDomainService
     private function batchCreateGroupUserSeqEntity(array $userIds, ControlMessageType $controlMessageType, array $content): void
     {
         $operateUserId = $content['operate_user_id'] ?? '';
-        // 批quantitygetuserEntity
+        // batchquantitygetuserEntity
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
         $time = date('Y-m-d H:i:s');
         $seqListCreateDTO = [];
         $groupId = $content['group_id'] ?? '';
-        // 群memberincreaseo clock,for新加入memberreturnsessionid
+        // 群memberincreaseo clock,for新add入memberreturnsessionid
         $userConversations = $this->getGroupUserConversationsByUserIds(array_keys($users), $groupId);
         $userContent = $content;
         foreach ($users as $user) {

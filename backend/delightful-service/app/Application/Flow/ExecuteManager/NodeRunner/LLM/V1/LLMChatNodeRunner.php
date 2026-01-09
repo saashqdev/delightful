@@ -119,7 +119,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $memoryManager->addMessage($contentMessage);
                     }
                 } else {
-                    // create一new，inback续use
+                    // createonenew，inback续use
                     $currentMessage = new UserMessage();
                     $currentMessage->setContent($userPrompt);
                     $memoryManager->addMessage($currentMessage);
@@ -132,7 +132,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // only currentmodeland视觉modelnot一致，or者 currentmodelnot supported多模state o clock。in视觉modeltoolmiddle，currentmodelequal视觉modelandand具have视觉能力，thennotwill产生死loop
+                // only currentmodeland视觉modelnotone致，or者 currentmodelnot supported多模state o clock。in视觉modeltoolmiddle，currentmodelequal视觉modelandand具have视觉能力，thennotwill产生死loop
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -192,7 +192,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
         } else {
             if ($userPrompt !== '') {
-                // create一new，inback续use
+                // createonenew，inback续use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
                 $memoryManager->addMessage($currentMessage);
@@ -312,7 +312,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
     private function isIntrovertedReplyMessageNode(VertexResult $vertexResult, ExecutionData $executionData): bool
     {
-        // only一子sectionpoint
+        // onlyone子sectionpoint
         if (count($vertexResult->getChildrenIds()) !== 1) {
             return false;
         }
@@ -336,7 +336,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // haveandonly一currentsectionpointtable达typequote
+        // haveandonlyonecurrentsectionpointtable达typequote
         $expressionItems = $contentValue->getAllFieldsExpressionItem() ?? [];
         if (count($expressionItems) !== 1) {
             return false;

@@ -45,7 +45,7 @@ interface ModeRepositoryInterface
     public function delete(ModeDataIsolation $dataIsolation, string $id): bool;
 
     /**
-     * checkidentifierwhether唯一
+     * checkidentifierwhether唯one
      */
     public function isIdentifierUnique(ModeDataIsolation $dataIsolation, string $identifier, ?string $excludeId = null): bool;
 

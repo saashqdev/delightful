@@ -10,7 +10,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 /**
  * 检索method枚举category.
  *
- * definition四type检索method：
+ * definitionfourtype检索method：
  * - SEMANTIC_SEARCH: 语义检索，based ontoquantitysimilardegree检索method
  * - FULL_TEXT_SEARCH: all文检索，based onkeyword匹配检索method
  * - HYBRID_SEARCH: 混合检索，结合语义检索andall文检索method
@@ -31,7 +31,7 @@ class RetrievalMethod
      * all文检索.
      *
      * based onkeyword匹配检索method。
-     * 索引documentmiddle所have单词，returncontainquery词textslicesegment。
+     * 索引documentmiddle所havesingle词，returncontainquery词textslicesegment。
      * 适合精确匹配（如productname、person名、ID）and低频词匹配。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';

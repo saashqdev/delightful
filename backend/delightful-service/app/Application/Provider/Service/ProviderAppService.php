@@ -44,16 +44,16 @@ class ProviderAppService
         // builddata隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // 收集所have唯一service商configurationID
+        // 收collection所have唯oneservicequotientconfigurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
-        // 批quantitygetservice商实body（避免嵌setquery）
+        // batchquantitygetservicequotient实body（避免嵌setquery）
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
-        // 批quantitygetservice商configuration实body（useatget别名）
+        // batchquantitygetservicequotientconfiguration实body（useatget别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所havegraph标path按organizationencodingminutegroup（includemodelgraph标andservice商graph标）
+        // 收collection所havegraph标path按organizationencodingminutegroup（includemodelgraph标andservicequotientgraph标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
@@ -74,7 +74,7 @@ class ProviderAppService
             }
             $iconToModelMap[$modelIcon][] = $model;
 
-            // processservice商graph标
+            // processservicequotientgraph标
             $configId = $model->getServiceProviderConfigId();
             if (! isset($providerEntities[$configId])) {
                 continue;
@@ -94,7 +94,7 @@ class ProviderAppService
             $iconToProviderMap[$providerIcon][] = $configId;
         }
 
-        // 批quantitygetgraph标URL
+        // batchquantitygetgraph标URL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $iconOrganizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($iconOrganizationCode, array_unique($icons));
@@ -102,7 +102,7 @@ class ProviderAppService
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
 
-        // updateservice商graph标URLmapping
+        // updateservicequotientgraph标URLmapping
         $providerIconUrls = [];
         foreach ($iconToProviderMap as $icon => $configIds) {
             if (! isset($iconUrlMap[$icon])) {
@@ -139,7 +139,7 @@ class ProviderAppService
                 }
             }
 
-            // createservice商DTO
+            // createservicequotientDTO
             $configId = $model->getServiceProviderConfigId();
             $providerEntity = $providerEntities[$configId] ?? null;
             if ($providerEntity) {
@@ -164,7 +164,7 @@ class ProviderAppService
     }
 
     /**
-     * getservice商displayname.
+     * getservicequotientdisplayname.
      */
     private function getProviderDisplayName(
         ProviderEntity $providerEntity,
@@ -172,12 +172,12 @@ class ProviderAppService
         bool $isRecommended,
         string $locale
     ): string {
-        // 1. 推荐service商优先
+        // 1. 推荐servicequotient优先
         if ($isRecommended) {
             return $this->translator->trans('common.recommended');
         }
 
-        // 2. customizeservice商andhave别名
+        // 2. customizeservicequotientandhave别名
         if ($this->isCustomProvider($providerEntity)
             && $configEntity
             && ! empty($configEntity->getAlias())) {
@@ -189,7 +189,7 @@ class ProviderAppService
     }
 
     /**
-     * 判断whetherforcustomizeservice商.
+     * 判断whetherforcustomizeservicequotient.
      */
     private function isCustomProvider(ProviderEntity $providerEntity): bool
     {

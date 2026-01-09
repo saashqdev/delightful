@@ -126,7 +126,7 @@ class FileDefaultInitCommand extends Command
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generate业务唯一标识（useat重复check）
+                    // generate业务唯one标识（useat重复check）
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
                     // correct重复check：querysame业务typedownwhetherhavesame业务标识
@@ -228,7 +228,7 @@ class FileDefaultInitCommand extends Command
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // ifhaveneed单独handledefaultgraph标，canin这withinimplement
+        // ifhaveneedsingle独handledefaultgraph标，canin这withinimplement
         // for examplehandle Midjourney etcdefaultgraph标
     }
 }

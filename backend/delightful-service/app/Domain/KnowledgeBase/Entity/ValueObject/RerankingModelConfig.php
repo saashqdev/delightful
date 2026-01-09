@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel相closeconfigurationparameter，如modelname、提供商、API 端pointetc
+ * contain重sortmodel相closeconfigurationparameter，如modelname、提供quotient、API 端pointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -25,7 +25,7 @@ class RerankingModelConfig extends AbstractValueObject
     private string $rerankingModelName = '';
 
     /**
-     * 重sortmodel提供商name.
+     * 重sortmodel提供quotientname.
      *
      * for example：gitee_ai、openai etc
      */
@@ -67,9 +67,9 @@ class RerankingModelConfig extends AbstractValueObject
     private int $topN = 3;
 
     /**
-     * 批processsize.
+     * batchprocesssize.
      *
-     * 批quantityprocessdocumentsize，useat提高performance
+     * batchquantityprocessdocumentsize，useat提高performance
      */
     private int $batchSize = 16;
 
@@ -105,7 +105,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get重sortmodel提供商name.
+     * get重sortmodel提供quotientname.
      */
     public function getRerankingProviderName(): string
     {
@@ -113,7 +113,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set重sortmodel提供商name.
+     * set重sortmodel提供quotientname.
      */
     public function setRerankingProviderName(string $rerankingProviderName): self
     {
@@ -216,7 +216,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get批processsize.
+     * getbatchprocesssize.
      */
     public function getBatchSize(): int
     {
@@ -224,7 +224,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set批processsize.
+     * setbatchprocesssize.
      */
     public function setBatchSize(int $batchSize): self
     {

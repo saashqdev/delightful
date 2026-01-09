@@ -283,7 +283,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledown一张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimage保持originalstatus
             }
         }
 
@@ -347,7 +347,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data
             }
 
-            // 只returnURLformat，and其他model保持一致
+            // 只returnURLformat，and其他model保持one致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

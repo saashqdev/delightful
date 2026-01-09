@@ -22,12 +22,12 @@ use Hyperf\Di\Annotation\AbstractAnnotation;
 class CheckPermission extends AbstractAnnotation
 {
     /**
-     * resource标识（support单or多）。
+     * resource标识（supportsingleor多）。
      */
     public array|string $resource;
 
     /**
-     * 操as标识（仅support单）。
+     * 操as标识（仅supportsingle）。
      */
     public string $operation;
 
@@ -42,7 +42,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * group合for完整permission键，如 "console.api.assistant.query".
+     * group合forcompletepermission键，如 "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
@@ -52,8 +52,8 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * return所havepermission键group合（resources x operations 笛卡尔积）。
-     * whenstatement多resourceor多操aso clock，permissionpass任意一键即can。
+     * return所havepermission键group合（resources x operations 笛卡尔product）。
+     * whenstatement多resourceor多操aso clock，permissionpass任意one键即can。
      *
      * @return array<string>
      */
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * willstring/枚举or其array统一forstringarray。
+     * willstring/枚举or其array统oneforstringarray。
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

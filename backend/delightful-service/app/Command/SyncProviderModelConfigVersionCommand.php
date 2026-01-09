@@ -70,7 +70,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $models = $this->fetchModels($limit);
         $stats['total'] = $models->count();
 
-        $this->logger->info(sprintf('找to %d service商modelneedprocess', $stats['total']));
+        $this->logger->info(sprintf('找to %d servicequotientmodelneedprocess', $stats['total']));
 
         foreach ($models as $model) {
             try {
@@ -101,7 +101,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * getservice商modellist.
+     * getservicequotientmodellist.
      */
     private function fetchModels(int $limit)
     {
@@ -219,7 +219,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
      */
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
-        $this->logger->info('startsyncservice商modelconfigurationversiondata...');
+        $this->logger->info('startsyncservicequotientmodelconfigurationversiondata...');
         $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line（notwritedatabase）' : '正typeexecute'));
 
         if ($isForce) {

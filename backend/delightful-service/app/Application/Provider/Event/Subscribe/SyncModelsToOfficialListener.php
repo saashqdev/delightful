@@ -19,8 +19,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 同modeltoOfficialservice商listen器.
- * listenservice商configurationcreate/updateevent，fromoutside部APIpullmodeland同toOfficialservice商.
+ * 同modeltoOfficialservicequotientlisten器.
+ * listenservicequotientconfigurationcreate/updateevent，fromoutside部APIpullmodeland同toOfficialservicequotient.
  */
 #[AsyncListener]
 #[Listener]
@@ -64,15 +64,15 @@ class SyncModelsToOfficialListener implements ListenerInterface
     }
 
     /**
-     * processservice商configurationcreateorupdateevent.
-     * ifisOfficialservice商andis官方organization，thenfromoutside部APIpullmodeland同.
+     * processservicequotientconfigurationcreateorupdateevent.
+     * ifisOfficialservicequotientandis官方organization，thenfromoutside部APIpullmodeland同.
      */
     private function handleProviderConfig(
         ProviderConfigCreatedEvent|ProviderConfigUpdatedEvent $event,
         ProviderModelSyncAppService $syncService,
         string $action
     ): void {
-        $this->logger->info("收toservice商configuration{$action}event", [
+        $this->logger->info("收toservicequotientconfiguration{$action}event", [
             'config_id' => $event->providerConfigEntity->getId(),
             'organization_code' => $event->organizationCode,
             'action' => $action,

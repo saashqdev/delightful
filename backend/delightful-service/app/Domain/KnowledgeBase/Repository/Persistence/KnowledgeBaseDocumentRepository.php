@@ -214,7 +214,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * view单knowledge basedocumentdetail.
+     * viewsingleknowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): ?KnowledgeBaseDocumentEntity
     {
@@ -278,7 +278,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             'sync_status_message' => mb_substr($documentEntity->getSyncStatusMessage(), 0, 900),
         ];
 
-        // ifis已syncorsyncfailstatus，synccount加1
+        // ifis已syncorsyncfailstatus，synccountadd1
         if (in_array($documentEntity->getSyncStatus(), [KnowledgeSyncStatus::Synced->value, KnowledgeSyncStatus::SyncFailed->value])) {
             KnowledgeBaseDocumentModel::withTrashed()
                 ->where('id', $documentEntity->getId())
@@ -349,7 +349,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $builder->where('updated_uid', $query->getUpdatedUid());
         }
 
-        // 按documentencodingarray批quantityquery
+        // 按documentencodingarraybatchquantityquery
         if ($query->getCodes() !== null && ! empty($query->getCodes())) {
             $builder->whereIn('code', $query->getCodes());
         }
@@ -358,7 +358,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * generate唯一documentencoding
+     * generate唯onedocumentencoding
      */
     protected function generateDocumentCode(): string
     {

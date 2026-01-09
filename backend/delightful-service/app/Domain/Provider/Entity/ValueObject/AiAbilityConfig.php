@@ -12,7 +12,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
  */
 class AiAbilityConfig
 {
-    // service商code
+    // servicequotientcode
     private ?string $providerCode = null;
 
     // apikey
@@ -48,7 +48,7 @@ class AiAbilityConfig
     }
 
     /**
-     * 判断whetherhave提供商code.
+     * 判断whetherhave提供quotientcode.
      */
     public function hasProviderCode(): bool
     {

@@ -105,14 +105,14 @@ readonly class FileDomainService
     }
 
     /**
-     * 批quantitygetfilelink（from动frompathextractorganizationencodingandminutegroupprocess）.
+     * batchquantitygetfilelink（from动frompathextractorganizationencodingandminutegroupprocess）.
      * @param string[] $filePaths containorganizationencodingfilepatharray，format：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type，defaultforPublic
      * @return array<string,FileLink> filepathtoFileLinkmapping
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
-        // filter空pathand已经isURLpath
+        // filteremptypathand已经isURLpath
         $validPaths = array_filter($filePaths, static fn ($path) => ! empty($path) && ! is_url($path));
 
         if (empty($validPaths)) {
@@ -128,7 +128,7 @@ readonly class FileDomainService
             }
         }
 
-        // 批quantitygetfilelink
+        // batchquantitygetfilelink
         $allLinks = [];
         foreach ($pathsByOrg as $orgCode => $paths) {
             $orgLinks = $this->getLinks($orgCode, $paths, $bucketType);

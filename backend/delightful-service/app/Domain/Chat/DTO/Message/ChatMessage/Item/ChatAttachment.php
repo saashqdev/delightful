@@ -11,7 +11,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
 
 /**
- * attachmentnotis一typemessagetype，whileismessage一部minute.
+ * attachmentnotisonetypemessagetype，whileismessageone部minute.
  */
 class ChatAttachment extends AbstractEntity
 {

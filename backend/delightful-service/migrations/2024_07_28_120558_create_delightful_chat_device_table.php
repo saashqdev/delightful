@@ -22,7 +22,7 @@ class CreateDelightfulChatDeviceTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->default(0)->comment('accountid');
             $table->tinyInteger('type')->comment('设备type,1:Android；2：IOS；3：Windows; 4：MacOS；5：Web');
-            $table->string('brand', 20)->comment('hand机service商');
+            $table->string('brand', 20)->comment('hand机servicequotient');
             $table->string('model', 20)->comment('机型');
             $table->string('system_version', 10)->comment('systemversion');
             $table->string('sdk_version', 10)->comment('appversion');

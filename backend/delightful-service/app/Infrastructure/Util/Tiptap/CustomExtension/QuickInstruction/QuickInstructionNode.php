@@ -69,7 +69,7 @@ class QuickInstructionNode extends AbstractCustomNode
                 return htmlspecialchars($nodeForArray['text'] ?? '', ENT_QUOTES, 'UTF-8');
             case InstructionType::SINGLE_CHOICE:
             default:
-                // front端传 value is id thereforeneedprocess一down
+                // front端传 value is id thereforeneedprocessonedown
                 $value = $nodeForArray['attrs']['value'] ?? '';
                 $instruction = $nodeForArray['attrs']['instruction'] ?? [];
                 $values = $instruction['values'] ?? [];

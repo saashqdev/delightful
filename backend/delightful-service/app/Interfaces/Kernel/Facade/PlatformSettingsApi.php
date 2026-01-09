@@ -80,7 +80,7 @@ class PlatformSettingsApi
     }
 
     /**
-     * 简单 URL and必填item校验（遵循需求：save URL；size/type校验infileserviceandfront端process）。
+     * 简single URL and必填item校验（遵循需求：save URL；size/type校验infileserviceandfront端process）。
      */
     private function validateUrls(array $data): void
     {
@@ -89,7 +89,7 @@ class PlatformSettingsApi
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'platform_settings.validation_failed');
             }
         }
-        // 简单 https check
+        // 简single https check
         $urls = [];
         $urls[] = $data['favicon_url'] ?? '';
         $urls[] = $data['logo_urls']['zh_CN'] ?? '';

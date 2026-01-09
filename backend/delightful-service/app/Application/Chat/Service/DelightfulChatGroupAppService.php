@@ -101,7 +101,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * group chat加person.
+     * group chataddperson.
      */
     public function groupAddUsers(array $groupAddUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
@@ -114,7 +114,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         // currentgroup chatperson数
         $groupUserCount = $this->delightfulGroupDomainService->getGroupUserCount($groupId);
-        // most大person数限制减gocurrentperson数
+        // most大person数限制subtractgocurrentperson数
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
         $chatGroupUserNumLimit -= $groupUserCount;
         // get本timeneedadd群member (综合 finger定user_id + departmentiddownuser)
@@ -191,7 +191,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);
         }
-        // 幂etc.checkuserwhether已leavegroup
+        // poweretc.checkuserwhether已leavegroup
         $isInGroup = $this->delightfulGroupDomainService->isUserInGroup($groupId, $dataIsolation->getCurrentUserId());
         if (! $isInGroup) {
             // returnuseruptimeleavegroup chat seq
@@ -360,7 +360,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * group chat减person.
+     * group chatsubtractperson.
      */
     protected function groupRemoveUsers(
         DataIsolation $dataIsolation,

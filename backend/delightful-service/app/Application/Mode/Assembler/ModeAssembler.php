@@ -31,7 +31,7 @@ class ModeAssembler
         $groupAggregatesDTOs = [];
         foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
             $groupDTO = self::groupAggregateToDTO($groupAggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
-            // onlywhenminutegroupdownhavemodelorgraphlikemodelo clock才add（front台filter空minutegroup）
+            // onlywhenminutegroupdownhavemodelorgraphlikemodelo clock才add（front台filteremptyminutegroup）
             if (! empty($groupDTO->getModels()) || ! empty($groupDTO->getImageModels())) {
                 $groupAggregatesDTOs[] = $groupDTO;
             }
@@ -149,7 +149,7 @@ class ModeAssembler
                 }
             }
 
-            // onlywhenminutegroupdownhavemodelo clock才add（front台filter空minutegroup）
+            // onlywhenminutegroupdownhavemodelo clock才add（front台filteremptyminutegroup）
             if (! empty($models)) {
                 $modeGroupDetailDTO->setModels($models);
                 $modeGroupDetailDTO->sortModels(); // tomodelsort

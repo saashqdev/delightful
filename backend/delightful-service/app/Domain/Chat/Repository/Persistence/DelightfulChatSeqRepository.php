@@ -82,7 +82,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * returnmost大message倒数 n item序column.
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -102,7 +102,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * return $userLocalMaxSeqId 之back $limit itemmessage.
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -150,7 +150,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
     {
@@ -161,7 +161,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -219,7 +219,7 @@ sql;
 
     /**
      * get收item方messagestatus变morestream.
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array
@@ -233,7 +233,7 @@ sql;
 
     /**
      * gethairitem方messagestatus变morestream.
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array
@@ -258,7 +258,7 @@ sql;
     }
 
     /**
-     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
      */
     public function getMessageReceiveList(string $messageId, string $delightfulId, ConversationType $userType): ?array
     {
@@ -490,7 +490,7 @@ sql;
     }
 
     /**
-     * toresult集force重新降序rowcolumn.
+     * toresultcollectionforce重新降序rowcolumn.
      * @return ClientSequenceResponse[]
      */
     private function getClientSequencesResponse(array $seqInfos): array
@@ -507,7 +507,7 @@ sql;
         if (! empty($delightfulMessageIds)) {
             $messages = $this->delightfulMessageRepository->getMessages($delightfulMessageIds);
         }
-        // will控制message/chatmessage一up放入usermessagestreammiddle
+        // will控制message/chatmessageoneup放入usermessagestreammiddle
         return SeqAssembler::getClientSeqStructs($seqInfos, $messages);
     }
 
@@ -529,7 +529,7 @@ sql;
     }
 
     /**
-     * 批quantityreturncustomer端needSeq结构.
+     * batchquantityreturncustomer端needSeq结构.
      * @return ClientSequenceResponse[]
      */
     private function getMessagesBySeqList(array $seqList, Order $order = Order::Desc): array

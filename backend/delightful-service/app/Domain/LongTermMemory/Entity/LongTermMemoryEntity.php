@@ -391,16 +391,16 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 计算current记忆validminute数（考虑衰减）.
+     * 计算current记忆validminute数（考虑衰subtract）.
      */
     public function getEffectiveScore(): float
     {
         $baseScore = $this->importance * $this->confidence;
 
-        // 计算time衰减
+        // 计算time衰subtract
         $timeDecay = $this->calculateTimeDecay();
 
-        // 计算accessfrequency加become
+        // 计算accessfrequencyaddbecome
         $accessBonus = $this->calculateAccessBonus();
 
         return $baseScore * $timeDecay * $this->decayFactor + $accessBonus;
@@ -455,7 +455,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 计算time衰减因子.
+     * 计算time衰subtract因子.
      */
     private function calculateTimeDecay(): float
     {
@@ -465,12 +465,12 @@ final class LongTermMemoryEntity extends AbstractEntity
 
         $daysSinceLastAccess = (new DateTime())->diff($this->lastAccessedAt)->days;
 
-        // according toaccesstime计算衰减，at most衰减to 0.5
+        // according toaccesstime计算衰subtract，at most衰subtractto 0.5
         return max(0.5, 1.0 - ($daysSinceLastAccess * 0.01));
     }
 
     /**
-     * 计算accessfrequency加become.
+     * 计算accessfrequencyaddbecome.
      */
     private function calculateAccessBonus(): float
     {
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // accesscountto数加become，避免passdegreereward
+        // accesscountto数addbecome，避免passdegreereward
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

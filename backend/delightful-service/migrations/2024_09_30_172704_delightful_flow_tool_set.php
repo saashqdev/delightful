@@ -17,10 +17,10 @@ return new class extends Migration {
         Schema::create('delightful_flow_tool_sets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('organizationencoding');
-            $table->string('code', 80)->comment('tool集encoding');
-            $table->string('name', 64)->comment('tool集name');
-            $table->string('description', 255)->comment('tool集description');
-            $table->string('icon', 255)->comment('tool集graph标');
+            $table->string('code', 80)->comment('toolcollectionencoding');
+            $table->string('name', 64)->comment('toolcollectionname');
+            $table->string('description', 255)->comment('toolcollectiondescription');
+            $table->string('icon', 255)->comment('toolcollectiongraph标');
             $table->boolean('enabled')->default(true)->comment('whetherenable');
             $table->string('created_uid', 80)->comment('createperson');
             $table->dateTime('created_at')->comment('creation time');

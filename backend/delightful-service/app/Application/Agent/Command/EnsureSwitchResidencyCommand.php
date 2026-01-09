@@ -32,7 +32,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         parent::configure();
         $this->setDescription('ensure所have助理switchfinger令allhave residency=true property')
             ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type：提供JSONformattestdataconductprocess', '')
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, '空运line模type：只checkbutnotupdatetodatabase');
+            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'empty运line模type：只checkbutnotupdatetodatabase');
     }
 
     public function handle()
@@ -46,7 +46,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         if ($isDryRun) {
-            $this->output->writeln('<info>运linein空运line模type，willnotwillactualupdatedatabase</info>');
+            $this->output->writeln('<info>运lineinempty运line模type，willnotwillactualupdatedatabase</info>');
         }
 
         $batchSize = 20;
@@ -57,7 +57,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln('startprocess助理switchfinger令...');
 
         while (true) {
-            // minute批get助理
+            // minutebatchget助理
             $agents = $this->agentRepository->getAgentsByBatch($offset, $batchSize);
             if (empty($agents)) {
                 break;
@@ -106,7 +106,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln('\nstartprocess助理versionswitchfinger令...');
 
         while (true) {
-            // minute批get助理version
+            // minutebatchget助理version
             $versions = $this->agentVersionRepository->getAgentVersionsByBatch($offset, $batchSize);
             if (empty($versions)) {
                 break;
@@ -152,7 +152,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
      * processtest模type.
      *
      * @param string $testData JSONformattestdata
-     * @param bool $isDryRun whetherfor空运line模type
+     * @param bool $isDryRun whetherforempty运line模type
      */
     private function handleTestMode(string $testData, bool $isDryRun): int
     {
@@ -179,7 +179,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         $this->output->writeln(sprintf(
-            'processcomplete！finger令集%supdate',
+            'processcomplete！finger令collection%supdate',
             $hasChanges ? '已' : '无需'
         ));
 

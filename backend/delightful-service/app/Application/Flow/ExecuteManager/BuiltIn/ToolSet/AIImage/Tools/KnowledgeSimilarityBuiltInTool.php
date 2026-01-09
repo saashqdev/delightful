@@ -64,10 +64,10 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 1. 结合updown文提炼userissue，generate多keyword，at mostnot超pass 5 ，多keyworduseEnglish逗number"," 隔open，useatusedifferentkeywordfromknowledge basemiddle检索most相closeinfo；
 2. 结合updown文，analyzeuserissue，generate `names` parameter，useatfinger定anduserissuemaybehaveclose多knowledge basename，按照相closepropertysort，相closeproperty需结合updown文、knowledge basenameandknowledge basedescriptionconduct判断；
 3. usekeywordanduserissue，call `{$this->getName()}` tool检索knowledge basemiddlecontent，keywordparameteris `keyword`，userissueparameteris `question`, 请ensureparameterallbecorrect填入，toolwillreturnanduserissuesimilardegreemost高contentslicesegment；
-4. knowledge base检索outcomecontentwithinwillcontain一些customize Delightful tag，你要善atuse它们，havebydown几typetag：
-    - <DelightfulImage></DelightfulImage> 表示一image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染out一张image；
-    - <DelightfulVideo></DelightfulVideo> 表示一video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染out一video；
-    - <DelightfulMention></DelightfulMention> 表示一person员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecome一 @somesomeperson effect；
+4. knowledge base检索outcomecontentwithinwillcontainone些customize Delightful tag，你要善atuse它们，havebydown几typetag：
+    - <DelightfulImage></DelightfulImage> 表示oneimage，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染outone张image；
+    - <DelightfulVideo></DelightfulVideo> 表示onevideo，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染outonevideo；
+    - <DelightfulMention></DelightfulMention> 表示oneperson员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecomeone @somesomeperson effect；
 5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment；
 6. 结合knowledge basereturncontent整理back尽maybe丰富groundreturn答userissue。
 ## toolmiddleclose键returnvalueinstruction

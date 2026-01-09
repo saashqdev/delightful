@@ -99,7 +99,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     $response->setProviderErrorMessage($e->getMessage());
                 }
 
-                $this->logger->error('VolcengineV3 OpenAIformat生graph：单requestfail', [
+                $this->logger->error('VolcengineV3 OpenAIformat生graph：singlerequestfail', [
                     'error_code' => $e->getCode(),
                     'error_message' => $e->getMessage(),
                     'index' => $i,
@@ -407,7 +407,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // uselockensureandhairsecurity（althoughV3usesync，but保持一致property）
+        // uselockensureandhairsecurity（althoughV3usesync，but保持one致property）
         $lockOwner = $this->lockResponse($response);
         try {
             // from火山engineV3responsemiddleextractdata
@@ -472,7 +472,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willberelease
+            // ensurelockone定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }
@@ -511,7 +511,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledown一张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimage保持originalstatus
             }
         }
 

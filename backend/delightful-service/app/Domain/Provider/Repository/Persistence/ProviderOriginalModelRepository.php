@@ -89,12 +89,12 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     {
         $systemType = ProviderOriginalModelType::System;
 
-        // the一timequery：getsystemdefaultmodel（所haveorganizationallvisible）
+        // theonetimequery：getsystemdefaultmodel（所haveorganizationallvisible）
         $systemBuilder = $this->createProviderOriginalModelQuery()
             ->where('type', $systemType->value);
         $systemModels = Db::select($systemBuilder->toSql(), $systemBuilder->getBindings());
 
-        // the二timequery：getwhenfrontorganizationcustomizemodel
+        // thetwotimequery：getwhenfrontorganizationcustomizemodel
         $organizationBuilder = $this->createProviderOriginalModelQuery($dataIsolation);
         $organizationModels = Db::select($organizationBuilder->toSql(), $organizationBuilder->getBindings());
 

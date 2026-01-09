@@ -66,8 +66,8 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * according to多service商configurationIDgetmodellist.
-     * @param array $configIds service商configurationIDarray
+     * according to多servicequotientconfigurationIDgetmodellist.
+     * @param array $configIds servicequotientconfigurationIDarray
      * @return ProviderModelEntity[]
      */
     public function getModelsByServiceProviderConfigIds(array $configIds): array

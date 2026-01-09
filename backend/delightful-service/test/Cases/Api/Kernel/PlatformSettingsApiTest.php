@@ -54,7 +54,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'AI,Test',
             ],
             'description_i18n' => [
-                'zh_CN' => '这is一test平台',
+                'zh_CN' => '这isonetest平台',
                 'en_US' => 'This is a test platform',
             ],
         ];
@@ -96,7 +96,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
     public function testUpdatePlatformSettingsPartially(): void
     {
-        // firstset完整data
+        // firstsetcompletedata
         $initialPayload = [
             'logo_zh_url' => 'https://example.com/initial_logo_zh.png',
             'logo_en_url' => 'https://example.com/initial_logo_en.png',
@@ -157,15 +157,15 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 尝试clear favicon (传入空stringnotwillupdate，所bynotshouldfail)
+        // 尝试clear favicon (传入emptystringnotwillupdate，所bynotshouldfail)
         $payload = [
-            'favicon_url' => '', // 空string
+            'favicon_url' => '', // emptystring
             'default_language' => 'zh_CN',
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon should保持原value（因for空stringnotwillupdate）
+        // favicon should保持原value（因foremptystringnotwillupdate）
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }

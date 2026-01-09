@@ -22,20 +22,20 @@ class SmsStruct
     /**
      * 短信type,such as:registration_rewards (order已hair货),arrival_notice(to货notify).
      * 1.if搭配 language field,meanwhileusevariable短信,canimplement多language适配,byand语type兜bottom
-     * 2.电商相close短信use此field,butisnothave language 传入.
+     * 2.电quotient相close短信use此field,butisnothave language 传入.
      */
     public ?string $type = null;
 
     /**
      * variable短信variablecontent. maybeforassociatearray,alsomaybefor索引array.
-     * @example {"product_name": "商品A", "payer": "供应商A","amount": 10}
-     * @example ["商品A","供应商A",10]
+     * @example {"product_name": "quotient品A", "payer": "供应quotientA","amount": 10}
+     * @example ["quotient品A","供应quotientA",10]
      */
     public ?array $variables = null;
 
     /**
      * 普通短信纯textcontent.
-     * 如: 灯塔正in邀请你加入企业，point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
+     * 如: 灯塔正in邀请你add入企业，point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 

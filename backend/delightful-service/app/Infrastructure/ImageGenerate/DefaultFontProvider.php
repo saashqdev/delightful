@@ -55,7 +55,7 @@ class DefaultFontProvider implements FontProviderInterface
             return imagecolortransparent($image) !== -1;
         }
 
-        // 真彩colorgraphlikecheckalpha通道
+        // true彩colorgraphlikecheckalpha通道
         $width = imagesx($image);
         $height = imagesy($image);
 

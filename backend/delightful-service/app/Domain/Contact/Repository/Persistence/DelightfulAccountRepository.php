@@ -149,7 +149,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         // update
         $accountData = $accountDTO->toArray();
         $this->updateAccount($accountDTO->getDelightfulId(), $accountData);
-        # 防止 $accountDTO middleparameternotall,again查一timelibrary
+        # 防止 $accountDTO middleparameternotall,again查onetimelibrary
         return $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
     }
 
@@ -187,7 +187,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
 
     private function getDelightfulEntityWithoutCache(string $delightfulId): ?AccountEntity
     {
-        # 防止 $accountDTO middleparameternotall,again查一timelibrary
+        # 防止 $accountDTO middleparameternotall,again查onetimelibrary
         $account = $this->accountModel::query()->where('delightful_id', $delightfulId);
         $account = Db::select($account->toSql(), $account->getBindings())[0] ?? null;
         if (empty($account)) {

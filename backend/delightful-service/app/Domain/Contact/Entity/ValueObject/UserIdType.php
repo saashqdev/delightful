@@ -13,17 +13,17 @@ namespace App\Domain\Contact\Entity\ValueObject;
 enum UserIdType: string
 {
     /**
-     * organizationinside唯一
+     * organizationinside唯one
      */
     case UserId = 'user_id';
 
     /**
-     * organizationsomeapplicationdown唯一
+     * organizationsomeapplicationdown唯one
      */
     case OpenId = 'open_id';
 
     /**
-     * applicationcreateorganizationdown唯一(useatapplication跨organizationtraceuseat).
+     * applicationcreateorganizationdown唯one(useatapplication跨organizationtraceuseat).
      */
     case UnionId = 'union_id';
 

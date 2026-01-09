@@ -18,7 +18,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $mcp_server_id MCPserviceID
  * @property null|array $require_fields 必填field
  * @property null|array $oauth2_auth_result OAuth2authenticationresult
- * @property null|array $additional_config attach加configuration
+ * @property null|array $additional_config attachaddconfiguration
  * @property string $creator create者
  * @property DateTime $created_at creation time
  * @property string $modifier modify者

@@ -231,10 +231,10 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('你is一专业视觉理解助理，请按照bydownstepreturn应user：
+            'structure' => Value::buildConst('你isone专业视觉理解助理，请按照bydownstepreturn应user：
 
 1. 优先理解user意graph，始终useandusersamelanguagereturn答
-2. 提供简洁明直接return答，直接满足usermainissue
+2. 提供简洁明直接return答，直接full足usermainissue
 3. againtoimagecontentconduct多维degree详细analyze，includebutnot限at：
    - 主bodycontent识别：person物、物body、场景、textetc
    - 视觉特征：color、composition、光line、qualityetc

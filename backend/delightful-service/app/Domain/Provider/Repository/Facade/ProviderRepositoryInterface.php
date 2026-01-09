@@ -32,33 +32,33 @@ interface ProviderRepositoryInterface
     public function getAllNonOfficialProviders(Category $category): array;
 
     /**
-     * according tocategoryget所haveservice商.
+     * according tocategoryget所haveservicequotient.
      * @param Category $category category
-     * @return ProviderEntity[] service商实bodylist
+     * @return ProviderEntity[] servicequotient实bodylist
      */
     public function getByCategory(Category $category): array;
 
     /**
-     * according toProviderCodeandCategorygetservice商.
-     * @param ProviderCode $providerCode service商encoding
+     * according toProviderCodeandCategorygetservicequotient.
+     * @param ProviderCode $providerCode servicequotientencoding
      * @param Category $category category
-     * @return null|ProviderEntity service商实body
+     * @return null|ProviderEntity servicequotient实body
      */
     public function getByCodeAndCategory(ProviderCode $providerCode, Category $category): ?ProviderEntity;
 
     /**
-     * according toIDgetservice商实body（not按organizationfilter，all局query）.
+     * according toIDgetservicequotient实body（not按organizationfilter，all局query）.
      *
-     * @param int $id service商ID
-     * @return null|ProviderEntity service商实body
+     * @param int $id servicequotientID
+     * @return null|ProviderEntity servicequotient实body
      */
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderEntity;
 
     /**
-     * according toIDarraygetservice商实bodylist（not按organizationfilter，all局query）.
+     * according toIDarraygetservicequotient实bodylist（not按organizationfilter，all局query）.
      *
-     * @param array<int> $ids service商IDarray
-     * @return array<int, ProviderEntity> returnbyidforkeyservice商实bodyarray
+     * @param array<int> $ids servicequotientIDarray
+     * @return array<int, ProviderEntity> returnbyidforkeyservicequotient实bodyarray
      */
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 }

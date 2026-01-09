@@ -28,7 +28,7 @@ class EndpointRequestDTO extends AbstractDTO
     protected string $orgCode;
 
     /**
-     * service提供商 (optional).
+     * service提供quotient (optional).
      */
     protected ?string $provider = null;
 

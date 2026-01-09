@@ -127,7 +127,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 return;
             }
         }
-        // 加lock防止andhair
+        // addlock防止andhair
         $key = sprintf('addUserAndAccount:%s', $delightfulId);
         if (! $this->locker->mutexLock($key, $delightfulId, 5)) {
             ExceptionBuilder::throw(UserErrorCode::CREATE_USER_TOO_FREQUENTLY);
@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 确定user_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwill重复,willbemysql唯一索引拦截,letuser重新login一timethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwill重复,willbemysql唯one索引拦截,letuser重新loginonetimethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -193,7 +193,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                     # 账number存in,butis该organizationdownnothaveuserinfo. generateuserinfo
                     $userEntity = $this->createUser($userDTO, $dataIsolation);
                 } else {
-                    // 账numberanduserinfoall存in,update一downuserinfo
+                    // 账numberanduserinfoall存in,updateonedownuserinfo
                     $userEntity->setNickname($userDTO->getNickname());
                     $userEntity->setAvatarUrl($userDTO->getAvatarUrl());
                     $userEntity->setDescription($userDTO->getDescription());

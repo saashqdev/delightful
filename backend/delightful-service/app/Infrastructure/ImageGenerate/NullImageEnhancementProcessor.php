@@ -12,7 +12,7 @@ use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
 
 /**
  * nullimplementimageenhanceprocess器
- * innothave商业codeo clock提供defaultimplement.
+ * innothavequotient业codeo clock提供defaultimplement.
  */
 class NullImageEnhancementProcessor implements ImageEnhancementProcessorInterface
 {

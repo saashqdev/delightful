@@ -12,11 +12,11 @@ use function Hyperf\Translation\__;
 /**
  * Delightful resource枚举.
  *
- * 1. use Backed Enum willeachresourcemappingfor唯一string key。
+ * 1. use Backed Enum willeachresourcemappingfor唯onestring key。
  * 2. passmethod提供 label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
  * 3. 仅definitionresource本身，not涉and操astype（如 query / edit）。
  *
- * 注意：if你modify这file，请execute单yuantest PermissionApiTest.testGetPermissionTree.
+ * 注意：if你modify这file，请executesingleyuantest PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
@@ -25,7 +25,7 @@ enum DelightfulResourceEnum: string
     case ADMIN = 'admin'; # organization管理back台
     case ADMINPLUS = 'admin_plus'; # organization管理back台plus
 
-    // ===== 二level：模piece =====
+    // ===== twolevel：模piece =====
     case ADMIN_AI = 'admin.ai'; # 平台管理back台-AI管理
     case ADMIN_SAFE = 'admin.safe'; # security管控
     case PLATFORM_AI = 'platform.ai'; # 平台管理back台-AI管理
@@ -33,7 +33,7 @@ enum DelightfulResourceEnum: string
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
     case ADMINPLUS_AI = 'admin_plus.ai'; # organization管理back台plus-AI管理
 
-    // ===== 三level：specificresource (useatspecificbindinterface）=====
+    // ===== threelevel：specificresource (useatspecificbindinterface）=====
     case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-model管理
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘graph管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模type管理管理
@@ -110,7 +110,7 @@ enum DelightfulResourceEnum: string
     /**
      * returnand该resourcebind Operation Enum category名。
      * defaultuse DelightfulOperationEnum。
-     * 如需for特定resourcecustomize操as集，canin此returncustomize Enum::class。
+     * 如需for特定resourcecustomize操ascollection，canin此returncustomize Enum::class。
      */
     public function operationEnumClass(): string
     {

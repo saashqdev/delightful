@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯一标识
+        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯one标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

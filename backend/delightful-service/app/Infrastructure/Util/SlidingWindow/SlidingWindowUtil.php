@@ -15,7 +15,7 @@ use Throwable;
 
 /**
  * 防抖toolcategory
- * implement"executemostback一timerequest"防抖strategy.
+ * implement"executemostbackonetimerequest"防抖strategy.
  */
 class SlidingWindowUtil
 {
@@ -28,8 +28,8 @@ class SlidingWindowUtil
     }
 
     /**
-     * 防抖interface - executemostback一timerequeststrategy
-     * infinger定timewindowinside，onlymostback一timerequestwillbeexecute.
+     * 防抖interface - executemostbackonetimerequeststrategy
+     * infinger定timewindowinside，onlymostbackonetimerequestwillbeexecute.
      *
      * @param string $debounceKey 防抖键
      * @param float $delayVerificationSeconds delayverifytime（second），alsoisactual防抖window

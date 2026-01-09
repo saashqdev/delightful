@@ -78,7 +78,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departmentIds = array_column($departmentUsers, 'department_id');
 
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-            // add path goagain查一time
+            // add path goagain查onetime
             foreach ($departments as $department) {
                 $pathDepartments = explode('/', $department->getPath());
                 $departmentIds = array_merge($departmentIds, $pathDepartments);
@@ -142,7 +142,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    // -------- bydownmethod十minute粗暴，notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之categoryoutcomeagainoptimize
+    // -------- bydownmethodtenminute粗暴，notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之categoryoutcomeagainoptimize
 
     private function getUserIdsByUsername(Operator $operator, OperatorType $operatorType, mixed $username, ?array $filterUserIds = null): array
     {

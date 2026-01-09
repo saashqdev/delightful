@@ -137,7 +137,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
             ->where('id', $agentId)
             ->first();
 
-        // ifqueryresultfor空，throwexceptionorreturn null，according to业务需求process
+        // ifqueryresultforempty，throwexceptionorreturn null，according to业务需求process
         if (! $agent) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
@@ -257,9 +257,9 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * minute批get助理list.
+     * minutebatchget助理list.
      * @param int $offset offsetquantity
-     * @param int $limit each批quantity
+     * @param int $limit eachbatchquantity
      * @return array 助理list
      */
     public function getAgentsByBatch(int $offset, int $limit): array

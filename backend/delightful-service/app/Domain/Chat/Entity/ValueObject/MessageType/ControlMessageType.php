@@ -57,7 +57,7 @@ enum ControlMessageType: string
     // delete话题
     case DeleteTopic = 'delete_topic';
 
-    // setsession话题(setfor空table示leave话题)
+    // setsession话题(setforemptytable示leave话题)
     case SetConversationTopic = 'set_conversation_topic';
 
     // creategroup chat
@@ -66,7 +66,7 @@ enum ControlMessageType: string
     // updategroup chat
     case GroupUpdate = 'group_update';
 
-    // systemnotify(xx加入/leavegroup chat,群温馨reminderetc)
+    // systemnotify(xxadd入/leavegroup chat,群温馨reminderetc)
     case SystemNotice = 'system_notice';
 
     // 群member变more
@@ -78,7 +78,7 @@ enum ControlMessageType: string
     // 解散group chat
     case GroupDisband = 'group_disband';
 
-    // 群memberrole变more(批quantitysetadministrator/普通member)
+    // 群memberrole变more(batchquantitysetadministrator/普通member)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转let群主

@@ -27,7 +27,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.organization_not_support')]
     case TOKEN_ORGANIZATION_NOT_SUPPORT = 4003;
 
-    // ipnotin白名单
+    // ipnotin白名single
     #[ErrorMessage(message: 'api.token.ip_not_in_white_list')]
     case TOKEN_IP_NOT_IN_WHITE_LIST = 4004;
 

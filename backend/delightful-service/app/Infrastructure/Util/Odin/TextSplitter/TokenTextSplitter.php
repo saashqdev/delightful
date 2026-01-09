@@ -358,7 +358,7 @@ class TokenTextSplitter extends TextSplitter
             }
             return count($this->defaultEncoder->encode($text));
         } catch (Throwable $e) {
-            // if计算tokenfail，return一估计value
+            // if计算tokenfail，returnone估计value
             return (int) ceil(mb_strlen($text) / 4);
         }
     }

@@ -23,7 +23,7 @@ use Hyperf\DbConnection\Db;
 class AdminModeAppService extends AbstractModeAppService
 {
     /**
-     * get模typelist (管理back台use，contain完整i18nfield).
+     * get模typelist (管理back台use，containcompletei18nfield).
      */
     public function getModes(DelightfulUserAuthorization $authorization, Page $page): array
     {
@@ -110,7 +110,7 @@ class AdminModeAppService extends AbstractModeAppService
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
-        // 先get现have完整实body
+        // 先get现havecomplete实body
         $existingMode = $this->modeDomainService->getModeById($dataIsolation, $modeId);
         if (! $existingMode) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_NOT_FOUND);

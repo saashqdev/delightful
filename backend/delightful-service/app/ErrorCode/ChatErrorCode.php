@@ -189,7 +189,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.id_not_found')]
     case TOPIC_ID_NOT_FOUND = 3038;
 
-    // not supportedsync这the三方平台departmentdata
+    // not supportedsync这thethree方平台departmentdata
         // Syncing department data from this third-party platform is not supported
     #[ErrorMessage('chat.department.sync_not_support')]
     case DEPARTMENT_SYNC_NOT_SUPPORT = 3039;

@@ -70,7 +70,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlikeandreturnOpenAIformatresponse - V2一body化version.
+     * generategraphlikeandreturnOpenAIformatresponse - V2onebody化version.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -108,7 +108,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('VolcengineArk OpenAIformat生graph：单requestfail', [
+                    $this->logger->error('VolcengineArk OpenAIformat生graph：singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -311,7 +311,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willberelease
+            // ensurelockone定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }
@@ -323,7 +323,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // VolcengineArk APIeachtime只能generate一张graph，passandhaircallimplement多graphgenerate
+        // VolcengineArk APIeachtime只能generateone张graph，passandhaircallimplement多graphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];

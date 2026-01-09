@@ -23,14 +23,14 @@ return new class extends Migration {
         Schema::create('delightful_api_premium_endpoints', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type', 255)->comment('接入pointtype。userneedfrom己保证notand其他业务重复');
-            $table->string('provider', 255)->comment('提供商')->nullable();
+            $table->string('provider', 255)->comment('提供quotient')->nullable();
             $table->string('name', 255)->comment('接入pointname');
-            $table->text('config')->comment('letuserfrom己存一些configurationinfo')->nullable();
+            $table->text('config')->comment('letuserfrom己存one些configurationinfo')->nullable();
             $table->tinyInteger('enabled')->default(1)->comment('whetherenable: 1=enable, 0=disable');
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
                 ->comment('circuit breakstatus: closed=normalservicemiddle, open=circuit breakmiddle, half_open=尝试restoremiddle');
-            $table->string('resources', 255)->comment('resourceconsume id list，一timerequestmaybeconsume多typeresource')->nullable();
+            $table->string('resources', 255)->comment('resourceconsume id list，onetimerequestmaybeconsume多typeresource')->nullable();
             $table->datetimes();
             $table->unique(['enabled', 'type', 'provider', 'name'], 'unique_enabled_type_provider_name');
             $table->comment('API接入pointtable，associate接入pointcanconsumeresourceinfo');

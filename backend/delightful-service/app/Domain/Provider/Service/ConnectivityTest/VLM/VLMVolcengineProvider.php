@@ -18,7 +18,7 @@ use Hyperf\Codec\Json;
 use function Hyperf\Translation\__;
 
 /**
- * 火山service商.
+ * 火山servicequotient.
  */
 class VLMVolcengineProvider implements IProvider
 {
@@ -45,7 +45,7 @@ class VLMVolcengineProvider implements IProvider
         $body['model_version'] = 'general_v2.1_L'; // 先写死notissue，目front文生graphsupport这value，graph生graphnot这value
         $body['width'] = 512;
         $body['height'] = 512;
-        $body['prompt'] = 'generate一只狗';
+        $body['prompt'] = 'generateone只狗';
         try {
             $volcengineAPI->submitTask($body);
         } catch (Exception $e) {

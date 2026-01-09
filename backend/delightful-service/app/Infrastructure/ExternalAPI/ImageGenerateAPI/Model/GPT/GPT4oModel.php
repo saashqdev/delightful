@@ -108,7 +108,7 @@ class GPT4oModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GPT4o OpenAIformat生graph：单requestfail', [
+                    $this->logger->error('GPT4o OpenAIformat生graph：singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -147,7 +147,7 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthave一张imagegeneratesuccess
+        // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($imageUrls)) {
             $this->logger->error('GPT4o文生graph：所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
@@ -374,7 +374,7 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthave一张imagegeneratesuccess
+        // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
             $this->logger->error('GPT4o文生graph：所haveimagegenerate均fail', ['errors' => $errors]);
@@ -405,7 +405,7 @@ class GPT4oModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledown一张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimage保持originalstatus
             }
         }
 
@@ -466,7 +466,7 @@ class GPT4oModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willberelease
+            // ensurelockone定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }

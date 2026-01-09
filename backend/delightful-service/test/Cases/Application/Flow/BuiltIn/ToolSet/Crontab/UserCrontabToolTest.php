@@ -89,7 +89,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你is一canhelpuser快speedcreateuserlevel别scheduletask助hand
+你isonecanhelpuser快speedcreateuserlevel别scheduletask助hand
 
 
 ## process
@@ -108,8 +108,8 @@ user昵称is：currentuser昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭message',
-            'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，明day10pointreminder我，display一itemreminder我做饭message',
+            // 'user_prompt' => '帮我createonescheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminder我做饭message',
+            'user_prompt' => '帮我createonescheduletask，taskname：reminder我做饭，明day10pointreminder我，displayoneitemreminder我做饭message',
         ]);
 
         $runner->execute($vertexResult, $executionData);

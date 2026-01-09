@@ -102,14 +102,14 @@ class DelightfulFlowExportImportAppService
             'errors' => [],
         ];
 
-        // 1. 先importtool集
+        // 1. 先importtoolcollection
         if (! empty($importData['tool_sets'])) {
             foreach ($importData['tool_sets'] as $toolSetId => $toolSetData) {
                 try {
                     $newToolSetId = $this->importToolSet($dataIsolation, $toolSetData, $idMapping, $importReport);
                     $idMapping['tool_sets'][$toolSetId] = $newToolSetId;
                 } catch (Throwable $e) {
-                    $importReport['errors'][] = "importtool集 {$toolSetData['name']} fail: {$e->getMessage()}";
+                    $importReport['errors'][] = "importtoolcollection {$toolSetData['name']} fail: {$e->getMessage()}";
                 }
             }
         }
@@ -292,7 +292,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * import单process
+     * importsingleprocess
      * generate新IDandcheckname重复.
      */
     private function importSingleFlow(FlowDataIsolation $dataIsolation, array $flowData, array &$idMapping, array &$importReport): string
@@ -315,7 +315,7 @@ class DelightfulFlowExportImportAppService
         // updatesectionpointIDmapping
         $this->updateNodeIdsMapping($flowData, $idMapping);
 
-        // handletool集IDquote
+        // handletoolcollectionIDquote
         if (! empty($flowData['tool_set_id']) && $flowData['tool_set_id'] !== 'not_grouped') {
             $oldToolSetId = $flowData['tool_set_id'];
             $newToolSetId = $idMapping['tool_sets'][$oldToolSetId] ?? $oldToolSetId;
@@ -350,7 +350,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * importtool集
+     * importtoolcollection
      * generate新IDandcheckname重复.
      */
     private function importToolSet(FlowDataIsolation $dataIsolation, array $toolSetData, array &$idMapping, array &$importReport): string
@@ -362,11 +362,11 @@ class DelightfulFlowExportImportAppService
         // generate新ID
         $toolSetData['code'] = Code::DelightfulFlowToolSet->gen();
 
-        // checkwhether存in同名tool集，if存inthen重命名
+        // checkwhether存in同名toolcollection，if存inthen重命名
         $newName = $this->generateUniqueToolSetName($dataIsolation, $originalName);
         if ($newName !== $originalName) {
             $toolSetData['name'] = $newName;
-            $importReport['renamed'][] = "tool集 '{$originalName}' 重命名for '{$newName}'";
+            $importReport['renamed'][] = "toolcollection '{$originalName}' 重命名for '{$newName}'";
         }
 
         // updateorganizationinfo
@@ -382,12 +382,12 @@ class DelightfulFlowExportImportAppService
         $toolSetData['created_at'] = new DateTime();
         $toolSetData['updated_at'] = new DateTime();
 
-        // use工厂methodcreatetool集实body
+        // use工厂methodcreatetoolcollection实body
         $toolSetEntity = DelightfulFlowToolSetFactory::arrayToEntity($toolSetData);
 
-        // savetool集
+        // savetoolcollection
         $savedToolSet = $this->delightfulFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
-        $importReport['created'][] = "createtool集: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
+        $importReport['created'][] = "createtoolcollection: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
 
         // record新旧IDmappingclose系
         $idMapping['tool_sets'][$originalCode] = $savedToolSet->getCode();
@@ -396,7 +396,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * generate唯一processname
+     * generate唯oneprocessname
      * when检测to同名processo clock，add(n)back缀
      */
     private function generateUniqueName(FlowDataIsolation $dataIsolation, string $name, Type $type): string
@@ -404,7 +404,7 @@ class DelightfulFlowExportImportAppService
         $newName = $name;
         $counter = 1;
 
-        // toolnotuse重名，因fortool集notsame
+        // toolnotuse重名，因fortoolcollectionnotsame
         if ($type === Type::Tools) {
             return $name;
         }
@@ -418,15 +418,15 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * generate唯一tool集name
-     * when检测to同名tool集o clock，add(n)back缀
+     * generate唯onetoolcollectionname
+     * when检测to同名toolcollectiono clock，add(n)back缀
      */
     private function generateUniqueToolSetName(FlowDataIsolation $dataIsolation, string $name): string
     {
         $newName = $name;
         $counter = 1;
 
-        // usequeryobjectcheckwhether存in同名tool集
+        // usequeryobjectcheckwhether存in同名toolcollection
         while (true) {
             $query = new DelightfulFlowToolSetQuery();
             $query->setName($newName);
@@ -583,7 +583,7 @@ class DelightfulFlowExportImportAppService
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // use正then表达typeensure只替换完整ID
+                        // use正then表达typeensure只替换completeID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
@@ -620,7 +620,7 @@ class DelightfulFlowExportImportAppService
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // use正then表达typeensure只替换完整sectionpointID
+                    // use正then表达typeensure只替换completesectionpointID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -660,23 +660,23 @@ class DelightfulFlowExportImportAppService
      */
     private function isBuiltInTool(string $toolId, string $toolSetId): bool
     {
-        // 常见inside置tool集front缀
+        // 常见inside置toolcollectionfront缀
         $builtInToolSetPrefixes = [
-            'file_box',      // file盒tool集
-            'search_engine', // searchenginetool集
-            'web_browse',    // webpagebrowsetool集
-            'system',        // systemtool集
-            'knowledge',     // knowledge basetool集
+            'file_box',      // file盒toolcollection
+            'search_engine', // searchenginetoolcollection
+            'web_browse',    // webpagebrowsetoolcollection
+            'system',        // systemtoolcollection
+            'knowledge',     // knowledge basetoolcollection
         ];
 
-        // 判断whether属atinside置tool集
+        // 判断whether属atinside置toolcollection
         foreach ($builtInToolSetPrefixes as $prefix) {
             if ($toolSetId === $prefix || strpos($toolSetId, $prefix . '_') === 0) {
                 return true;
             }
         }
 
-        // 判断toolIDwhetherbytool集IDopenhead，这isinside置tool常见模type
+        // 判断toolIDwhetherbytoolcollectionIDopenhead，这isinside置tool常见模type
         if (! empty($toolSetId) && strpos($toolId, $toolSetId . '_') === 0) {
             return true;
         }
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // use正then表达typeensure只替换完整sectionpointID
+            // use正then表达typeensure只替换completesectionpointID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
@@ -831,7 +831,7 @@ class DelightfulFlowExportImportAppService
         array &$processedFlowCodes,
         array &$processedToolSetIds
     ): void {
-        // 1. handletool集
+        // 1. handletoolcollection
         $this->processToolSet($dataIsolation, $flow, $exportData, $processedToolSetIds);
 
         // 2. handle子processsectionpoint
@@ -842,7 +842,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * handletool集.
+     * handletoolcollection.
      */
     private function processToolSet(
         FlowDataIsolation $dataIsolation,
@@ -851,12 +851,12 @@ class DelightfulFlowExportImportAppService
         array &$processedToolSetIds
     ): void {
         $toolSetId = $flow->getToolSetId();
-        // skip官方tool(not_grouped)and已handletool集
+        // skip官方tool(not_grouped)and已handletoolcollection
         if (empty($toolSetId) || $toolSetId === 'not_grouped' || in_array($toolSetId, $processedToolSetIds)) {
             return;
         }
 
-        // gettool集info
+        // gettoolcollectioninfo
         $toolSet = $this->delightfulFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
         // markfor已handle
         $processedToolSetIds[] = $toolSetId;
@@ -952,7 +952,7 @@ class DelightfulFlowExportImportAppService
                             continue;
                         }
 
-                        // handletool集quote
+                        // handletoolcollectionquote
                         if (! empty($toolSetId) && $toolSetId !== 'not_grouped' && ! in_array($toolSetId, $processedToolSetIds)) {
                             $toolSet = $this->delightfulFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
                             $processedToolSetIds[] = $toolSetId;

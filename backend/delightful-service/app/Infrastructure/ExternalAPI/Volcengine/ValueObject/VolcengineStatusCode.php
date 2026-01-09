@@ -18,12 +18,12 @@ enum VolcengineStatusCode: string
     case SUCCESS = '20000000';
 
     /**
-     * 正inprocessmiddle - responsebodyfor空.
+     * 正inprocessmiddle - responsebodyforempty.
      */
     case PROCESSING = '20000001';
 
     /**
-     * taskinqueuemiddle - responsebodyfor空.
+     * taskinqueuemiddle - responsebodyforempty.
      */
     case QUEUED = '20000002';
 
@@ -38,7 +38,7 @@ enum VolcengineStatusCode: string
     case INVALID_PARAMS = '45000001';
 
     /**
-     * 空audio.
+     * emptyaudio.
      */
     case EMPTY_AUDIO = '45000002';
 
@@ -103,7 +103,7 @@ enum VolcengineStatusCode: string
             self::QUEUED => 'taskinqueuemiddle',
             self::SILENT_AUDIO => 'muteaudio',
             self::INVALID_PARAMS => 'requestparameterinvalid',
-            self::EMPTY_AUDIO => '空audio',
+            self::EMPTY_AUDIO => 'emptyaudio',
             self::INVALID_AUDIO_FORMAT => 'audioformatnotcorrect',
             self::SERVER_BUSY => 'service器繁忙',
         };

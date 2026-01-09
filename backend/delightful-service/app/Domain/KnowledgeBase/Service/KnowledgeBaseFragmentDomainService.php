@@ -227,7 +227,7 @@ readonly class KnowledgeBaseFragmentDomainService
         }
         $this->logger->info('back置text预processend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // filter掉空string
+        // filter掉emptystring
         return array_values(array_filter($fragments, function ($fragment) {
             return trim($fragment) !== '';
         }));

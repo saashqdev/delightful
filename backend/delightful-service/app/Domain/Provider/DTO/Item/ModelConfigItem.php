@@ -323,7 +323,7 @@ class ModelConfigItem extends AbstractDTO
     }
 
     /**
-     * parsebooleanvalue（统一process逻辑）.
+     * parsebooleanvalue（统oneprocess逻辑）.
      */
     private function parseBooleanValue(null|bool|int|string $value): bool
     {
@@ -339,7 +339,7 @@ class ModelConfigItem extends AbstractDTO
     }
 
     /**
-     * verifyandsettingprice/cost（统一process逻辑）.
+     * verifyandsettingprice/cost（统oneprocess逻辑）.
      */
     private function validateAndSetPricing(null|float|string $value): ?string
     {

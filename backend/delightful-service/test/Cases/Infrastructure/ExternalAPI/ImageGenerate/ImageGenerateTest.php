@@ -95,7 +95,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByVolcengine()
     {
         $volcengineModelRequest = new VolcengineModelRequest();
-        $volcengineModelRequest->setPrompt('摄影as品，真person写真style，一画着万圣section装扮女personhandwithin拿着一南瓜灯，该design冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超详细，UHD');
+        $volcengineModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画着ten thousand圣section装扮女personhandwithin拿着one南瓜灯，该design冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超详细，UHD');
         $volcengineModelRequest->setGenerateNum(1);
         $volcengineModelRequest->setWidth('1024');
         $volcengineModelRequest->setHeight('1024');
@@ -108,7 +108,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByFluix()
     {
         $FluxModelRequest = new FluxModelRequest();
-        $FluxModelRequest->setPrompt('摄影as品，真person写真style，一画着万圣section装扮女personhandwithin拿着一南瓜灯，该design冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超详细，UHD');
+        $FluxModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画着ten thousand圣section装扮女personhandwithin拿着one南瓜灯，该design冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超详细，UHD');
         $FluxModelRequest->setGenerateNum(1);
         $FluxModelRequest->setWidth('1024');
         $FluxModelRequest->setHeight('1024');
@@ -121,7 +121,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByMJ()
     {
         $MjModelRequest = new MidjourneyModelRequest();
-        $MjModelRequest->setPrompt('摄影as品，真person写真style，一画着万圣section装扮女personhandwithin拿着一南瓜灯，该design冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超详细，UHD');
+        $MjModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画着ten thousand圣section装扮女personhandwithin拿着one南瓜灯，该design冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超详细，UHD');
         $MjModelRequest->setGenerateNum(1);
         $MjModelRequest->setModel('relax');
         $MjModel = new MidjourneyModel();
@@ -137,7 +137,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('一只小金毛正in草原up欢快奔跑');
+        $gpt4oModelRequest->setPrompt('one只小金毛正in草原up欢快奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
 
         // generateimage
@@ -163,7 +163,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('adjust一群女巫handwithin捧着南瓜in膜拜一person');
+        $gpt4oModelRequest->setPrompt('adjustone群女巫handwithin捧着南瓜in膜拜oneperson');
         $gpt4oModelRequest->setGenerateNum(1);
 
         // set参考image
@@ -195,14 +195,14 @@ class ImageGenerateTest extends BaseTest
         //
         //        $providerModelsByConfig = $di->getProviderConfig(ProviderDataIsolation::create('TGosRaFhvb'), '814826843393773568');
         //        $config = $providerModelsByConfig->getConfig();
-        //        // createservice提供商configuration
+        //        // createservice提供quotientconfiguration
         //
-        //        // create通义千问model实例
+        //        // create通义thousand问model实例
         //        $qwenImageModel = new QwenImageModel($config);
         //
         //        // createrequest实例
         //        $qwenImageRequest = new QwenImageModelRequest();
-        //        $qwenImageRequest->setPrompt('一只can爱小猫咪inflower园within玩耍，阳光明媚，color彩丰富，高quality摄影');
+        //        $qwenImageRequest->setPrompt('one只can爱小猫咪inflower园within玩耍，阳光明媚，color彩丰富，高quality摄影');
         //        $qwenImageRequest->setHeight('1328');
         //        $qwenImageRequest->setWidth('1328');
         //        $qwenImageRequest->setGenerateNum(1);

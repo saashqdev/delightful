@@ -43,7 +43,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
         }
         try {
             $seqEntity = $event->seqEntity;
-            // 助理infrom己conversationwindow，hair一item国际化failedreminder
+            // 助理infrom己conversationwindow，haironeitem国际化failedreminder
             $conversationId = $seqEntity->getConversationId();
             $messageStruct = [
                 'content' => __('chat.agent.user_call_agent_fail_notice'),

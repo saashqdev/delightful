@@ -76,7 +76,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
             // 预processdocumentFile
             $processedDocumentFiles = $documentFileStrategy->preProcessDocumentFiles($dataIsolation, $event->documentFiles);
 
-            // according tofiles批quantitycreatedocument
+            // according tofilesbatchquantitycreatedocument
             foreach ($processedDocumentFiles as $file) {
                 $documentEntity = (new KnowledgeBaseDocumentEntity())
                     ->setKnowledgeBaseCode($knowledge->getCode())

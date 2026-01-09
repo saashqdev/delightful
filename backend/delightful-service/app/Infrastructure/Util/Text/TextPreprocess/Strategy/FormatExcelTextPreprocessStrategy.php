@@ -26,7 +26,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function convertToCsv(string $content): string
     {
-        // willcontent按linesplit，but保留单yuan格inside换line符
+        // willcontent按linesplit，but保留singleyuan格inside换line符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];
@@ -39,7 +39,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 continue;
             }
 
-            // ifis空line，skip
+            // ifisemptyline，skip
             if (empty(trim($line))) {
                 $result[] = '';
                 continue;
@@ -48,7 +48,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             // usefgetcsvmethodparseCSVline
             $row = str_getcsv($line);
 
-            // ifisthe一lineandnotissheetmark，thenasfortitleline
+            // ifistheonelineandnotissheetmark，thenasfortitleline
             if (empty($headers) && ! empty($line)) {
                 $headers = $row;
                 continue;
@@ -91,25 +91,25 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * format化CSV单yuan格content，to特殊contentadd引number.
-     * @param string $value 单yuan格content
-     * @return string format化back单yuan格content
+     * format化CSVsingleyuan格content，to特殊contentadd引number.
+     * @param string $value singleyuan格content
+     * @return string format化backsingleyuan格content
      */
     private function formatCsvCell(string $value): string
     {
-        // if单yuan格contentfor空，直接return空string
+        // ifsingleyuan格contentforempty，直接returnemptystring
         if ($value === '') {
             return '';
         }
 
-        // if单yuan格contentcontainbydown任意character，needuse引numberpackage围
+        // ifsingleyuan格contentcontainbydown任意character，needuse引numberpackage围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")
             || str_contains($value, "\r")
             || str_starts_with($value, ' ')
             || str_ends_with($value, ' ')) {
-            // 转义双引number
+            // 转义double引number
             $value = str_replace('"', '""', $value);
             return '"' . $value . '"';
         }

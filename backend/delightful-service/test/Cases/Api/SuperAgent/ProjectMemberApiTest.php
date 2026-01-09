@@ -31,7 +31,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     protected function setUp(): void
     {
-        // cleanupprojectmemberdata，避免唯一键conflict
+        // cleanupprojectmemberdata，避免唯one键conflict
         $this->cleanupProjectMembers($this->projectId);
         parent::setUp();
     }
@@ -112,7 +112,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 5. 切换tonothavepermissionusertestpermission控制
         $this->switchUserTest2();
         // testnonprojectmembernot能置top - shouldreturnpermissionerror
-        $this->pinProject($projectId, true, 51202); // 假设51202ispermissionerror码
+        $this->pinProject($projectId, true, 51202); // false设51202ispermissionerror码
     }
 
     /**
@@ -127,7 +127,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($projectId);
         $this->switchUserTest2();
 
-        // 1. 重复置top同一project - shouldnormalhandle
+        // 1. 重复置top同oneproject - shouldnormalhandle
         $this->pinProject($projectId, true);
         $this->pinProject($projectId, true); // 重复置top
 
@@ -330,7 +330,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             $this->assertEquals(0, count($response['data']['list']));
         } else {
             $this->assertIsArray($response['data']['list'], 'listshouldisarray');
-            $this->assertIsInt($response['data']['total'], 'totalshouldis整数');
+            $this->assertIsInt($response['data']['total'], 'totalshouldisinteger');
             $project = $response['data']['list'][0];
             $this->assertArrayHasKey('id', $project);
             $this->assertArrayHasKey('project_name', $project);
@@ -366,7 +366,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             $this->assertEquals($count, count($response['data']['list']));
         } else {
             $this->assertIsArray($response['data']['list'], 'listshouldisarray');
-            $this->assertIsInt($response['data']['total'], 'totalshouldis整数');
+            $this->assertIsInt($response['data']['total'], 'totalshouldisinteger');
             $project = $response['data']['list'][0];
             $this->assertArrayHasKey('id', $project);
             $this->assertArrayHasKey('project_name', $project);
@@ -495,20 +495,20 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testfileeditstatus管理 - 完整processtest.
+     * testfileeditstatus管理 - completeprocesstest.
      */
     public function fileEditingStatusManagement(string $fileId): void
     {
         $this->switchUserTest1();
 
-        // 1. test加入edit
+        // 1. testadd入edit
         $this->joinFileEditing($fileId);
 
         // 2. testgetedituserquantity - shouldhave1userinedit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 3. 切换to另一user，test多useredit
+        // 3. 切换to另oneuser，test多useredit
         $this->switchUserTest2();
         $this->joinFileEditing($fileId);
 
@@ -533,7 +533,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test加入fileedit.
+     * testadd入fileedit.
      */
     public function joinFileEditing(string $fileId, int $expectedCode = 1000): array
     {
@@ -598,8 +598,8 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest2();
 
-        // test无permission加入edit - shouldreturnerror
-        $this->joinFileEditing($unauthorizedFileId, 51202); // 假设51200is无permissionerror码
+        // test无permissionadd入edit - shouldreturnerror
+        $this->joinFileEditing($unauthorizedFileId, 51202); // false设51200is无permissionerror码
 
         // test无permissionleaveedit - shouldreturnerror
         $this->leaveFileEditing($unauthorizedFileId, 51202);
@@ -615,9 +615,9 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest1();
 
-        // 1. 重复加入edit - shouldnormalhandle
+        // 1. 重复add入edit - shouldnormalhandle
         $this->joinFileEditing($fileId);
-        $this->joinFileEditing($fileId); // 重复加入
+        $this->joinFileEditing($fileId); // 重复add入
 
         // validateuserquantity仍然is1
         $editingCount = $this->getEditingUsers($fileId);
@@ -633,7 +633,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // 3. testinvalidfileIDformat
         $invalidFileId = 'invalid_file_id';
-        $this->joinFileEditing($invalidFileId, 51202); // 假设400isparametererror
+        $this->joinFileEditing($invalidFileId, 51202); // false设400isparametererror
     }
 
     public function updateFileContent(int $fileId, string $content, int $expectedCode): void
@@ -661,7 +661,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testproject置topfeature - 完整processtest.
+     * testproject置topfeature - completeprocesstest.
      */
     public function projectPinFeature(string $projectId): void
     {
@@ -714,7 +714,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协asprojectcolumn表andreturn完整响applicationat置topvalidate.
+     * get协asprojectcolumn表andreturncomplete响applicationat置topvalidate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {
@@ -779,7 +779,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreate者column表feature - 完整processtest.
+     * test协asprojectcreate者column表feature - completeprocesstest.
      */
     public function collaborationProjectCreatorFeature(): void
     {
@@ -837,14 +837,14 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($this->projectId);
         $this->switchUserTest2();
 
-        // 1. 多timecallAPI - shouldreturn一致result
+        // 1. 多timecallAPI - shouldreturnone致result
         $response1 = $this->getCollaborationProjectCreators();
         $response2 = $this->getCollaborationProjectCreators();
 
         $this->assertEquals($response1['code'], $response2['code']);
         $this->assertEquals(count($response1['data']), count($response2['data']));
 
-        // 2. validatecreate者go重 - 同一create者只shouldout现一time
+        // 2. validatecreate者go重 - 同onecreate者只shouldout现onetime
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListDeduplication($response);
     }
@@ -876,8 +876,8 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data'], 'responsedatashouldisarray');
 
-        // validateat leasthave一create者
-        $this->assertGreaterThan(0, count($response['data']), 'shouldat leasthave一create者');
+        // validateat leasthaveonecreate者
+        $this->assertGreaterThan(0, count($response['data']), 'shouldat leasthaveonecreate者');
 
         // validatecreate者data结构
         $creator = $response['data'][0];

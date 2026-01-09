@@ -369,7 +369,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         if (! $log) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
-        // 只能querythe一layerdata
+        // 只能querytheonelayerdata
         if (! $log->isTop()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
@@ -510,7 +510,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         // get node 运lineresult
         foreach ($delightfulFlowEntity->getNodes() as $node) {
             if ($node->getNodeDebugResult()) {
-                // have一failthen判定forfail
+                // haveonefailthen判定forfail
                 if (! $node->getNodeDebugResult()->isSuccess()) {
                     $result['success'] = false;
                 }

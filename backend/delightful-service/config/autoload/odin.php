@@ -247,11 +247,11 @@ return [
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
-                // logfield白名单configuration
+                // logfield白名singleconfiguration
                 // iffornullarrayor未configuration，thenprint所havefield
                 // ifconfigurationfieldcolumn表，then只printfinger定field
                 // support嵌setfield，usepoint语法如 'args.messages'
-                // 注意：messages and tools fieldnotin白名单middle，notwillbeprint
+                // 注意：messages and tools fieldnotin白名singlemiddle，notwillbeprint
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
@@ -274,7 +274,7 @@ return [
                     'options.json.thinking',
 
                     // usequantitystatistics
-                    'usage',                       // 完整usageobject
+                    'usage',                       // completeusageobject
                     'usage.input_tokens',          // inputtokenquantity
                     'usage.output_tokens',         // outputtokenquantity
                     'usage.total_tokens',          // 总tokenquantity
@@ -319,7 +319,7 @@ return [
                     // - choices.0.delta (streamresponse增quantitycontent)
                     // - content (responsecontent)
                 ],
-                // whetherenablefield白名单filter，defaulttrue（enablefilter）
+                // whetherenablefield白名singlefilter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
                 // most大stringlength限制，超pass此lengthstringwillbe替换for [Long Text]，settingfor 0 表示not限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),

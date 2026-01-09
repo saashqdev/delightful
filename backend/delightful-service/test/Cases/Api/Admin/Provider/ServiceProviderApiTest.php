@@ -40,7 +40,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * testmodelcreateandmorenew完整process，includeconfigurationversionvalidate.
+     * testmodelcreateandmorenewcompleteprocess，includeconfigurationversionvalidate.
      */
     public function testSaveModelToServiceProviderCreate(): void
     {
@@ -84,7 +84,7 @@ class ServiceProviderApiTest extends BaseTest
                     'en_US' => 'Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这is一testmodel',
+                    'zh_CN' => '这isonetestmodel',
                     'en_US' => 'This is a test model',
                 ],
             ],
@@ -201,7 +201,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * testreturnDelightfulservice商.
+     * testreturnDelightfulservicequotient.
      */
     public function testGetOfficialProvider()
     {
@@ -219,12 +219,12 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * create官方service商.
+     * create官方servicequotient.
      */
     public function testCreateLLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方service商单yuantest',
+            'alias' => '官方servicequotientsingleyuantest',
             'config' => [
                 // 国际接入point
                 'url' => 'international_access_point',
@@ -237,7 +237,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方service商单yuantest',
+                    'zh_CN' => '官方servicequotientsingleyuantest',
                 ],
             ],
         ];
@@ -247,19 +247,19 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方service商单yuantest', $detail['alias']);
+        $this->assertEquals('官方servicequotientsingleyuantest', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('****', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);
     }
 
     /**
-     * create官方service商.
+     * create官方servicequotient.
      */
     public function testCreateVLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方service商单yuantest',
+            'alias' => '官方servicequotientsingleyuantest',
             'config' => [
                 // 国际接入point
                 'proxy_url' => 'international_access_point',
@@ -272,7 +272,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方service商单yuantest',
+                    'zh_CN' => '官方servicequotientsingleyuantest',
                 ],
             ],
         ];
@@ -282,7 +282,7 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方service商单yuantest', $detail['alias']);
+        $this->assertEquals('官方servicequotientsingleyuantest', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('sk-*****************************bab', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);
@@ -342,7 +342,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('cache_write_cost', $config, 'configshouldcontaincache_write_costfield');
         $this->assertArrayHasKey('cache_hit_cost', $config, 'configshouldcontaincache_hit_costfield');
 
-        // validatevaluewhethercorrect（allow浮point数误差）
+        // validatevaluewhethercorrect（allow浮point数误difference）
         $this->assertEqualsWithDelta(
             $expectedCosts['input_cost'],
             (float) $config['input_cost'],

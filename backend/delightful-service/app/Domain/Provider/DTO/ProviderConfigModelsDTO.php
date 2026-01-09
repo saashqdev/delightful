@@ -11,9 +11,9 @@ use App\Domain\Provider\Entity\ProviderModelEntity;
 use Hyperf\Codec\Json;
 
 /**
- * service_provider_config_id to应service商+modelcolumn表。
+ * service_provider_config_id to应servicequotient+modelcolumn表。
  *
- * 同oneservice商indifferentorganizationdownhavedifferent service_provider_config_id。
+ * 同oneservicequotientindifferentorganizationdownhavedifferent service_provider_config_id。
  * oneservice_provider_config_idto应多specificmodel。
  */
 class ProviderConfigModelsDTO extends ProviderConfigDTO

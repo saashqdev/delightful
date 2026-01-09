@@ -245,7 +245,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // ifis一link，那么needto url conduct限制
+            // ifisonelink，那么needto url conduct限制
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

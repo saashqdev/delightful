@@ -55,7 +55,7 @@ interface ModeGroupRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $groupEntities);
 
     /**
-     * according to多modeID批quantitygetminutegroupcolumn表.
+     * according to多modeIDbatchquantitygetminutegroupcolumn表.
      * @param int[]|string[] $modeIds
      * @return ModeGroupEntity[]
      */

@@ -22,7 +22,7 @@ use Hyperf\Codec\Json;
  * - work区相topath (workspace-relative): .asr_recordings/session_xxx or 录音总结_xxx
  * - projectworkdirectory (work directory): project_123/workspace
  * - organization码+APP_ID+bucket_md5front缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
- * - 完整path/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
+ * - completepath/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
  */
 class AsrAssembler
 {
@@ -33,7 +33,7 @@ class AsrAssembler
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
      * @param string $relativePath 相topath（如：.asr_recordings/task_123 or 录音总结_xxx）
-     * @param string $fullPrefix 完整front缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
+     * @param string $fullPrefix completefront缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
      * @param string $workDir workdirectory
      * @param int $rootDirectoryId rootdirectoryID
      * @param bool $isHidden whetherforhiddendirectory
@@ -65,11 +65,11 @@ class AsrAssembler
             $metadata['asr_display_directory'] = true;
         }
 
-        // build完整 file_key
+        // buildcomplete file_key
         $fileKey = WorkDirectoryUtil::getFullFileKey($fullPrefix, $workDir, $relativePath);
         $fileKey = rtrim($fileKey, '/') . '/';
 
-        // 确定file名：hiddendirectoryuse basename，displaydirectoryuse完整path
+        // 确定file名：hiddendirectoryuse basename，displaydirectoryusecompletepath
         $fileName = $isHidden ? basename($relativePath) : $relativePath;
 
         return new TaskFileEntity([
@@ -97,14 +97,14 @@ class AsrAssembler
     }
 
     /**
-     * build完整 file_key.
+     * buildcomplete file_key.
      *
      * convertclose系: file_key = fullPrefix + workDir + "/" + relativePath
      *
      * @param string $fullPrefix organization码+APP_ID+bucket_md5front缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir projectworkdirectory (如: project_123/workspace)
      * @param string $relativePath work区相topath (如: .asr_recordings/session_xxx)
-     * @return string 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
+     * @return string complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      */
     public static function buildFileKey(
         string $fullPrefix,
@@ -117,10 +117,10 @@ class AsrAssembler
     /**
      * from file_key extractwork区相topath.
      *
-     * will完整 file_key convertforwork区相topath，useat沙箱 API calland界surfaceshow
+     * willcomplete file_key convertforwork区相topath，useat沙箱 API calland界surfaceshow
      * convertclose系: relativePath = extractWorkspaceRelativePath(file_key)
      *
-     * @param string $fileKey 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
+     * @param string $fileKey complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      * @return string work区相topath (如: .asr_recordings/session_xxx)
      */
     public static function extractWorkspaceRelativePath(string $fileKey): string
@@ -134,7 +134,7 @@ class AsrAssembler
             // extract workspace/ backsurface部minute
             $relativePath = substr($normalizedPath, $workspacePos + 11); // 11 = strlen('/workspace/')
 
-            // if相topathnotfor空，return相topath
+            // if相topathnotforempty，return相topath
             if (! empty($relativePath)) {
                 return $relativePath;
             }

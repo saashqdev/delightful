@@ -116,7 +116,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * view单knowledge basedocumentdetail.
+     * viewsingleknowledge basedocumentdetail.
      */
     public function show(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): KnowledgeBaseDocumentEntity
     {

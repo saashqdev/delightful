@@ -105,7 +105,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-你is一意graph识别sectionpoint，useatanalyzeuser意graph，你will得to一shareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
+你isone意graph识别sectionpoint，useatanalyzeuser意graph，你will得tooneshareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
 resultneedin限定意graphrangemiddle。
 
 # 技能 - 意graph识别
@@ -133,14 +133,14 @@ will你responseformat化for JSON object，format如down：
 }    
 
 # process
-1. 你will得to一shareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
+1. 你will得tooneshareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
 2. 推理user意graph，will推理procedure放to JSON middle 推导procedure field，解释for什么will得out这些意graphand置信degree。
-3. if识别to意graph，请填写most佳匹配and匹配to意graph，whether识别for true，most佳意graph 一定is置信degreemost高，其middle 匹配to意graphhave fieldisaccording to 置信degree from大to小rowcolumn。
-4. ifincurrentrangenothave找to任何意graph，whether识别for false，请填写识别failreason，most佳匹配and匹配to意graphallshouldis空。
-5. 只willreturn JSON format，notwillagainreturn其他content，if一定needhavereturn，请放toremarkmiddle，return答content一定能be JSON toolparse。
+3. if识别to意graph，请填写most佳匹配and匹配to意graph，whether识别for true，most佳意graph one定is置信degreemost高，其middle 匹配to意graphhave fieldisaccording to 置信degree from大to小rowcolumn。
+4. ifincurrentrangenothave找to任何意graph，whether识别for false，请填写识别failreason，most佳匹配and匹配to意graphallshouldisempty。
+5. 只willreturn JSON format，notwillagainreturn其他content，ifone定needhavereturn，请放toremarkmiddle，return答contentone定能be JSON toolparse。
 
 # 限制
-- 意graphrangeformatis '意graph'：'意graphdescription'。其middle意graphdescriptioncanfor空。意graphand意graphdescription一定isuse '' package裹data。
+- 意graphrangeformatis '意graph'：'意graphdescription'。其middle意graphdescriptioncanforempty。意graphand意graphdescriptionone定isuse '' package裹data。
 - notcanreturn答其他issue，只能return答意graph识别issue。
 
 # needanalyze意graphrange如down

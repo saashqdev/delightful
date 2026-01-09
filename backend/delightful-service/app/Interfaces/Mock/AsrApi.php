@@ -130,7 +130,7 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟真实沙箱linefor：according to output_filename 重命名directory
+        // 模拟true实沙箱linefor：according to output_filename 重命名directory
         // extract原directorymiddletime戳部minute（format：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
@@ -159,7 +159,7 @@ class AsrApi
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // defaultfor null，table示笔记filefor空ornot存in
+                'note_file' => null, // defaultfor null，table示笔记fileforemptyornot存in
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,15 +169,15 @@ class AsrApi
             ],
         ];
 
-        // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟真实沙箱笔记filecontentcheck）
+        // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟true实沙箱笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // userequestmiddle提供 target_path，whilenotis硬encodingfile名
             // 这样cancorrectsupport国际化file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟真实沙箱linefor：onlywhen笔记filehavecontento clock才return详细info
-            // 这withinsimplifyprocess，default假设havecontent（真实沙箱willcheckfilecontentwhetherfor空）
+            // 模拟true实沙箱linefor：onlywhen笔记filehavecontento clock才return详细info
+            // 这withinsimplifyprocess，defaultfalse设havecontent（true实沙箱willcheckfilecontentwhetherforempty）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequestmiddle target_path

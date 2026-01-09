@@ -21,9 +21,9 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('delightful_department_id', 64)->comment('departmentid');
             $table->string('delightful_organization_code', 32)->comment('麦吉organizationencoding');
-            $table->string('third_department_id', 64)->comment('the三方departmentid');
-            $table->string('third_union_id')->comment('the三方平台userunion_id');
-            $table->string('third_platform_type', 32)->comment('the三方平台type dingTalk/lark/weCom/teamShare');
+            $table->string('third_department_id', 64)->comment('thethree方departmentid');
+            $table->string('third_union_id')->comment('thethree方平台userunion_id');
+            $table->string('third_platform_type', 32)->comment('thethree方平台type dingTalk/lark/weCom/teamShare');
             $table->tinyInteger('third_is_leader')->comment('whetherisdepartment领导 0-否 1-is')->default(0);
             $table->string('third_job_title', 64)->comment('in此department职位')->default('');
             $table->string('third_leader_user_id', 64)->comment('in此department直属领导 user_id')->default('');
@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->text('third_custom_attrs')->comment('customizefield。');
             $table->text('third_department_path')->comment('departmentpath。');
             $table->text('third_platform_department_users_extra')->comment('额outsideinfo');
-            $table->comment('userservicedepartmentandthe三方平台userrecordtable.useatandthe三方平台实o clockdatasync,activaterecordetc');
+            $table->comment('userservicedepartmentandthethree方平台userrecordtable.useatandthethree方平台实o clockdatasync,activaterecordetc');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['third_platform_type', 'third_department_id', 'delightful_organization_code'], 'org_platform_department_id');

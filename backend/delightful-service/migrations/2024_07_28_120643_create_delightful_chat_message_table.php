@@ -24,14 +24,14 @@ class CreateDelightfulChatMessageTable extends Migration
             // hairitem方所属organization
             $table->string('sender_id', 64)->comment('hairitem方id');
             $table->tinyInteger('sender_type')->comment('hairitem方usertype,1:user(aialsobe认forisuser)；2：application;3:document;4:多维table格');
-            $table->string('sender_organization_code', 64)->comment('hairitem方organizationencoding,maybefor空string')->default('');
+            $table->string('sender_organization_code', 64)->comment('hairitem方organizationencoding,maybeforemptystring')->default('');
             // receive方所属organization
             $table->string('receive_id', 64)->comment('receive方id，maybeispersoncategory、aior者application/document/多维table格etc');
             $table->tinyInteger('receive_type')->comment('receive方type,1:user(aialsobe认forisuser)；2：application;3:document;4:多维table格');
-            $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,maybefor空string')->default('');
+            $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,maybeforemptystring')->default('');
             // message相closeid
             $table->string('app_message_id', 64)->comment('customer端generatemessageid,useat防customer端重复');
-            $table->string('delightful_message_id', 64)->comment('service端generate唯一messageid,useatmessagewithdraw/edit');
+            $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
             # ## message结构
             // message优先level,byatsystemstableproperty管理
             $table->tinyInteger('priority')->default(0)->comment('message优先level,0~255,0most低,255most高');
@@ -42,7 +42,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->index(['receive_id', 'receive_type', 'receive_organization_code'], 'idx_receive_id_type');
             $table->unique(['delightful_message_id'], 'unq_delightful_message_id');
             $table->timestamps();
-            $table->comment('messagedetailtable,record一itemmessageroot本info');
+            $table->comment('messagedetailtable,recordoneitemmessageroot本info');
             $table->softDeletes();
         });
     }

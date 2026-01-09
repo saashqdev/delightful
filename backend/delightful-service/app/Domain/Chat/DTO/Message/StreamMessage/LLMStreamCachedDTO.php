@@ -17,14 +17,14 @@ class LLMStreamCachedDTO extends AbstractEntity
     // 避免频繁操asdatalibrary，ininside存middlecachereceivemessage receive_message_id
     protected string $receiveMessageId;
 
-    // 避免频繁操asdatalibrary，ininside存middlecache完整streammessagecontent
+    // 避免频繁操asdatalibrary，ininside存middlecachecompletestreammessagecontent
     protected ?string $reasoningContent;
 
     protected string $content;
 
     protected StreamMessageStatus $status;
 
-    // 避免频繁操asdatalibrary，recordmostback一timeupdatedatalibrarytime
+    // 避免频繁操asdatalibrary，recordmostbackonetimeupdatedatalibrarytime
     protected ?int $lastUpdateDatabaseTime;
 
     public function getLastUpdateDatabaseTime(): ?int

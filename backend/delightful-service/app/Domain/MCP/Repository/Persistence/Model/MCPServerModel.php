@@ -16,7 +16,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id 雪flowerID
  * @property string $organization_code organizationencoding
- * @property string $code 唯一encoding
+ * @property string $code 唯oneencoding
  * @property string $name MCPservicename
  * @property string $description MCPservicedescription
  * @property string $icon MCPservicegraph标

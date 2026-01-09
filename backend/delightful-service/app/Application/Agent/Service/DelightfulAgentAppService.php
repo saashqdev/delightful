@@ -354,7 +354,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // getassistantconversationmapping
         [$flowCodeToUserIdMap, $conversationMap] = $this->getAgentConversationMapping($agentEntities, $authorization);
 
-        // 批quantitygetavatarlink
+        // batchquantitygetavatarlink
         $avatarUrlMap = $this->batchGetAvatarUrls($agentEntities, $authorization);
 
         // convertforarrayformatandaddconversationID
@@ -475,11 +475,11 @@ class DelightfulAgentAppService extends AbstractAppService
         // publishassistant
         $result = $this->delightfulAgentVersionDomainService->releaseAgentVersion($delightfulAgentVersionEntity);
 
-        // ifpublishisperson，那么not能操asthe三方assistant
+        // ifpublishisperson，那么not能操asthethree方assistant
         if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             $thirdPlatformList = null;
         }
-        // syncthe三方assistant
+        // syncthethree方assistant
         $this->delightfulBotThirdPlatformChatDomainService->syncBotThirdPlatformList($agent->getId(), $thirdPlatformList);
 
         // 首timepublishaddfor好友
@@ -684,7 +684,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getById($agentVersionId);
 
-        // 任意一itemdifferentallneedmodify
+        // 任意oneitemdifferentallneedmodify
         if (
             $delightfulAgentEntity->getAgentAvatar() !== $delightfulAgentVersionEntity->getAgentAvatar()
             || $delightfulAgentEntity->getAgentDescription() !== $delightfulAgentVersionEntity->getAgentDescription()
@@ -705,7 +705,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return true;
         }
 
-        // 判断交互finger令,ifnot一致thenneedreturn true
+        // 判断交互finger令,ifnotone致thenneedreturn true
         $oldInstruct = $delightfulAgentVersionEntity->getInstructs();
         $newInstruct = $delightfulAgentEntity->getInstructs();
 
@@ -759,7 +759,7 @@ class DelightfulAgentAppService extends AbstractAppService
             } catch (Throwable $e) {
                 $errorMessage = $e->getMessage();
                 $trace = $e->getTraceAsString();
-                $this->logger->error("initializeassistantconversationfail，aiCode: {$aiCode}, name: {$agentName}\nerrorinfo: {$errorMessage}\n堆stack: {$trace} ");
+                $this->logger->error("initializeassistantconversationfail，aiCode: {$aiCode}, name: {$agentName}\nerrorinfo: {$errorMessage}\nheapstack: {$trace} ");
             }
         }
     }
@@ -871,7 +871,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * for新registerorganizationcreatepersoninitialize一Chat.
+     * for新registerorganizationcreatepersoninitializeoneChat.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -889,7 +889,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 准备基本configuration
         $config = [
             'agent_name' => '麦吉assistant',
-            'agent_description' => '我willreturn答你一切',
+            'agent_description' => '我willreturn答你one切',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
         ];
@@ -899,7 +899,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * for新registerorganizationcreatepersoninitialize一文生graphAgent.
+     * for新registerorganizationcreatepersoninitializeone文生graphAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -917,7 +917,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 准备基本configuration
         $config = [
             'agent_name' => '文生graph助hand',
-            'agent_description' => '一强大AItextgenerategraphlike助hand，canaccording to您descriptioncreate精美graphlike。',
+            'agent_description' => 'one强大AItextgenerategraphlike助hand，canaccording to您descriptioncreate精美graphlike。',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],
@@ -928,7 +928,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * for新registerorganizationcreatepersoninitialize一documentparseAgent.
+     * for新registerorganizationcreatepersoninitializeonedocumentparseAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -1060,7 +1060,7 @@ class DelightfulAgentAppService extends AbstractAppService
         if (empty($directDepartmentIds)) {
             $userDepartmentIds = [];
         } else {
-            // 批quantityget所have相closedepartmentinfo
+            // batchquantityget所have相closedepartmentinfo
             $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $directDepartmentIds);
             $departmentsMap = [];
             foreach ($departments as $department) {
@@ -1081,7 +1081,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 $allDepartmentIds[] = [$departmentId];
             }
             $allDepartmentIds = array_merge(...$allDepartmentIds);
-            // go重，ensure所havedepartmentID唯一
+            // go重，ensure所havedepartmentID唯one
             $userDepartmentIds = array_unique($allDepartmentIds);
         }
 
@@ -1156,7 +1156,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function enrichAgentAvatarAndFriendStatus(array &$agentVersions, DelightfulUserAuthorization $authorization): void
     {
-        // 批quantity收集needgetlinkfilepathandflow_code
+        // batchquantity收collectionneedgetlinkfilepathandflow_code
         $avatarPaths = [];
         $flowCodes = [];
         foreach ($agentVersions as $agent) {
@@ -1166,7 +1166,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $flowCodes[] = $agent['flow_code'];
         }
 
-        // 批quantitygetavatarlink，避免loopcallgetLink
+        // batchquantitygetavatarlink，避免loopcallgetLink
         $fileLinks = [];
         if (! empty($avatarPaths)) {
             $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), array_unique($avatarPaths));
@@ -1224,7 +1224,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return [];
         }
 
-        // 收集所haveneedhandleimagepath
+        // 收collection所haveneedhandleimagepath
         $imagePaths = [];
         foreach ($instructs as $instruct) {
             $hasValidItems = isset($instruct['items']) && is_array($instruct['items']);
@@ -1414,7 +1414,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $flowCodeToUserIdMap = array_merge($flowCodeToUserIdMap, $userOrgUserIdMap);
         }
 
-        // 5. 收集所haveassistantuserID
+        // 5. 收collection所haveassistantuserID
         $agentUserIds = array_values($flowCodeToUserIdMap);
 
         // 6. queryuserand这些assistantconversationID
@@ -1430,7 +1430,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * 批quantitygetassistantavatarURL.
+     * batchquantitygetassistantavatarURL.
      *
      * @param DelightfulAgentEntity[] $agentEntities assistant实bodyarray
      * @param DelightfulUserAuthorization $authorization userauthorizationobject
@@ -1443,7 +1443,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $avatarUrlMap = [];
 
-        // 批quantityget官方organizationavatarlink
+        // batchquantityget官方organizationavatarlink
         if (! empty($officialAgents) && OfficialOrganizationUtil::hasOfficialOrganization()) {
             $officialAvatars = array_filter(array_map(static fn ($agent) => $agent->getAgentAvatar(), $officialAgents));
             if (! empty($officialAvatars)) {
@@ -1458,7 +1458,7 @@ class DelightfulAgentAppService extends AbstractAppService
             }
         }
 
-        // 批quantitygetuserorganizationavatarlink
+        // batchquantitygetuserorganizationavatarlink
         if (! empty($userOrgAgents)) {
             $userOrgAvatars = array_filter(array_map(static fn ($agent) => $agent->getAgentAvatar(), $userOrgAgents));
             if (! empty($userOrgAvatars)) {

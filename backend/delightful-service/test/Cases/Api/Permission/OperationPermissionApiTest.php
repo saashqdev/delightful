@@ -47,7 +47,7 @@ class OperationPermissionApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('organization_codes', $data, 'data应containorganization_codesfield');
         $this->assertArrayHasKey('total', $data, 'data应containtotalfield');
         $this->assertIsArray($data['organization_codes'], 'organization_codesshouldisarray');
-        $this->assertIsInt($data['total'], 'totalshouldis整数');
+        $this->assertIsInt($data['total'], 'totalshouldisinteger');
         $this->assertEquals(count($data['organization_codes']), $data['total'], 'totalshouldequalorganization_codesquantity');
     }
 }

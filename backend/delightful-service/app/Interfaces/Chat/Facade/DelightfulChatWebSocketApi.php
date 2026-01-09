@@ -117,7 +117,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
             // call guard getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // will账number所have设备加入同一room
+            // will账number所have设备add入同oneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return ['type' => 'user', 'user' => [
                 'delightful_id' => $userAuthorization->getDelightfulId(),
@@ -235,7 +235,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // will账number所have设备加入同一room
+            // will账number所have设备add入同oneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -259,7 +259,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('intermediate')]
     #[VerifyStructure]
     /**
-     * not存入database实o clockmessage，useat一些temporarymessage场景。
+     * not存入database实o clockmessage，useatone些temporarymessage场景。
      * @throws Throwable
      */
     public function onIntermediateMessage(Socket $socket, array $params)
@@ -289,7 +289,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // will账number所have设备加入同一room
+            // will账number所have设备add入同oneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulIntermediateMessageAppService->dispatchClientIntermediateMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -344,10 +344,10 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     private function keepSubscribeAlive(): void
     {
-        // 只need一enter程能schedulepublishmessage,letsubscriberedislink保活即can.
-        // notlock放inmostoutsidelayer,isfor防止pod频繁重启o clock,nothave任何一enter程canpublishmessage
+        // 只needoneenter程能schedulepublishmessage,letsubscriberedislink保活即can.
+        // notlock放inmostoutsidelayer,isfor防止pod频繁重启o clock,nothave任何oneenter程canpublishmessage
         co(function () {
-            // each 5 second推一timemessage
+            // each 5 second推onetimemessage
             $this->timer->tick(
                 5,
                 function () {
@@ -357,14 +357,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                     SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'delightful-im:subscribe:keepalive', ControlMessageType::Ping->value);
 
                     $producer = ApplicationContext::getContainer()->get(Producer::class);
-                    // to所havequeue投一itemmessage,by保活link/queue
+                    // to所havequeue投oneitemmessage,by保活link/queue
                     $messagePriorities = MessagePriority::cases();
                     foreach ($messagePriorities as $priority) {
                         $seqCreatedEvent = new SeqCreatedEvent([ControlMessageType::Ping->value]);
                         $seqCreatedEvent->setPriority($priority);
-                        // messageminutehair. 一itemseqmaybewillgenerate多itemseq
+                        // messageminutehair. oneitemseqmaybewillgenerate多itemseq
                         $messageDispatch = new MessageDispatchPublisher($seqCreatedEvent);
-                        // messagepush. 一itemseq只willpushgive一user(多设备)
+                        // messagepush. oneitemseq只willpushgiveoneuser(多设备)
                         $messagePush = new MessagePushPublisher($seqCreatedEvent);
                         $producer->produce($messageDispatch);
                         $producer->produce($messagePush);

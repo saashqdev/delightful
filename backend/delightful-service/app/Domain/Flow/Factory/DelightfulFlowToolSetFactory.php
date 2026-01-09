@@ -35,7 +35,7 @@ class DelightfulFlowToolSetFactory
     }
 
     /**
-     * willarrayconvertfortool集实body.
+     * willarrayconvertfortoolcollection实body.
      */
     public static function arrayToEntity(array $toolSetData): DelightfulFlowToolSetEntity
     {

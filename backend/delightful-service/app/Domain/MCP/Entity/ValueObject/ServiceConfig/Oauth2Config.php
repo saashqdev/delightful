@@ -15,8 +15,8 @@ use App\Infrastructure\Util\SSRF\SSRFUtil;
 class Oauth2Config extends AbstractValueObject
 {
     /**
-     * Client ID - customer端ID，isapplicationinauthorizationservice器middle唯一identifier。
-     * authorizationservice器passcustomer端IDcome识别different三方application。
+     * Client ID - customer端ID，isapplicationinauthorizationservice器middle唯oneidentifier。
+     * authorizationservice器passcustomer端IDcome识别differentthree方application。
      *
      * createOAuthapplicationo clockwillminute配client_id，本exampleinput
      * 813924812101982004357116497xxxx.app.coze
@@ -52,7 +52,7 @@ class Oauth2Config extends AbstractValueObject
     /**
      * Authorization URL - getuseraccess_tokenURLground址。
      *
-     * userpassclient_urlauthorizationsuccessback，三方servicewillreturnusergettokencode，
+     * userpassclient_urlauthorizationsuccessback，three方servicewillreturnusergettokencode，
      * and转tocallbackground址。此o clock，service器提供方willpassto应datatoauthorization_urlhairuprequest，
      * getuseraccess_token。
      *

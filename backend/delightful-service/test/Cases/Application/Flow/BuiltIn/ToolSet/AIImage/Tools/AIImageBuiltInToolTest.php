@@ -92,7 +92,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'user_prompt' => '一朵flower',
+            'user_prompt' => 'one朵flower',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

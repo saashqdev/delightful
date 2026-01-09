@@ -16,13 +16,13 @@ use App\Infrastructure\Core\AbstractDTO;
 use Hyperf\Codec\Json;
 
 /**
- * service商downsurface单modeldetail dto.
+ * servicequotientdownsurfacesinglemodeldetail dto.
  */
 class ProviderModelDetailDTO extends AbstractDTO
 {
     protected string $id;
 
-    protected string $serviceProviderConfigId; // service商configurationID
+    protected string $serviceProviderConfigId; // servicequotientconfigurationID
 
     protected string $modelId = ''; // modeltrue实ID
 

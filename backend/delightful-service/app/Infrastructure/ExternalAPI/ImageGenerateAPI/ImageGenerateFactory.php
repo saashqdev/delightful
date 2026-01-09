@@ -378,7 +378,7 @@ class ImageGenerateFactory
             return [(string) $matches[1], (string) $matches[2]];
         }
 
-        // process乘numberformat：1024*1024
+        // processmultiplynumberformat：1024*1024
         if (preg_match('/^(\d+)\*(\d+)$/', $size, $matches)) {
             return [(string) $matches[1], (string) $matches[2]];
         }

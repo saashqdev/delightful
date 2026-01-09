@@ -87,11 +87,11 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         );
         $this->logger->info(sprintf('mindSearch aggregateSearch startaggregatesearch  searchKeyword：%s searchtype：%s', $searchKeyword, $dto->getSearchDeepLevel()->name));
         $antiRepeatKey = md5($conversationId . $topicId);
-        // 防重:if同一conversation同一话题down,2secondinsidehave重复message,not触hairprocess
+        // 防重:if同oneconversation同one话题down,2secondinsidehave重复message,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
-        // delightful-api 二期要求传入user id
+        // delightful-api two期要求传入user id
         $agentConversationEntity = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($conversationId);
         if (! $agentConversationEntity) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
@@ -113,13 +113,13 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             $rawHistoryMessages = $this->getDelightfulChatMessages($dto->getConversationId(), $dto->getTopicId());
             $dto->setDelightfulChatMessageHistory($rawHistoryMessages);
 
-            # 2.searchuserissue.这within一定willsplit一timeassociateissue
+            # 2.searchuserissue.这withinone定willsplitonetimeassociateissue
             $searchDetailItems = $this->searchUserQuestion($dto);
             # 3.according tooriginalissue + searchresult，按多维degree拆解associateissue.
             // 3.1 generateassociateissueandsendgivefront端
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 3.2 according toassociateissue，hairup简单search（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
+            // 3.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3.4 according tosearch深degree，决定whethercontinuesearchassociateissue子issue
@@ -128,7 +128,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
                 $this->deepSearch($dto, $associateQuestions, $noRepeatSearchContexts, $readPagesDetailChannel);
             } else {
-                // 3.4.b 简单search
+                // 3.4.b 简singlesearch
                 $readPagesDetailChannel = null;
                 $this->simpleSearch($dto, $associateQuestions, $noRepeatSearchContexts);
             }
@@ -162,7 +162,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * 麦吉互联网search简单版，适配process，仅support简单search.
+     * 麦吉互联网search简single版，适配process，仅support简singlesearch.
      * @throws Throwable
      * @throws RedisException
      */
@@ -172,7 +172,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(not知道哪comebug):if同一conversation同一话题down,2secondinsidehave重复message,not触hairprocess
+        // 防重(not知道哪comebug):if同oneconversation同one话题down,2secondinsidehave重复message,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return null;
         }
@@ -183,14 +183,14 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $dto->setAppMessageId((string) $this->idGenerator->generate());
 
         try {
-            // 1.searchuserissue.这within一定willsplit一timeassociateissue
+            // 1.searchuserissue.这withinone定willsplitonetimeassociateissue
             $searchDetailItems = $this->searchUserQuestion($dto);
 
             // 2.according tooriginalissue + searchresult，按多维degree拆解associateissue.
             // 2.1 generateassociateissue
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 2.2 according toassociateissue，hairup简单search（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
+            // 2.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3. according toeachassociateissuereply，generate总结.
@@ -330,7 +330,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * @return array searchDetailItem object二维arrayshapetype，这withinforcompatibleand方便，notconductobjectconvert
+     * @return array searchDetailItem objecttwo维arrayshapetype，这withinforcompatibleand方便，notconductobjectconvert
      */
     public function searchUserQuestion(DelightfulChatAggregateSearchReqDTO $dto): array
     {
@@ -414,7 +414,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // according toassociateissue，hairup简单search（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
+        // according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
         $searchKeywords = $this->getSearchKeywords($associateQuestions);
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
@@ -745,7 +745,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             ->setStreamOptions(
                 (new StreamOptions())->setStatus(StreamMessageStatus::Start)->setStream(true)
             );
-        # pushstreamstartfrontgenerate一 seq，markstreamstart，useatfront端渲染占位
+        # pushstreamstartfrontgenerateone seq，markstreamstart，useatfront端渲染占位
         $senderSeqEntity = $this->delightfulChatDomainService->createAndSendStreamStartSequence(
             (new CreateStreamSeqDTO())->setTopicId($dto->getTopicId())->setAppMessageId($dto->getAppMessageId()),
             $messageContent,
@@ -758,8 +758,8 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * 精读proceduremiddle，隔随机timepush一timeassociateissuesearch完毕givefront端。
-     * 完all精读完毕o clock，mostbackagain推一time
+     * 精读proceduremiddle，隔随机timepushonetimeassociateissuesearch完毕givefront端。
+     * 完all精读完毕o clock，mostbackagain推onetime
      */
     private function sendLLMResponseForAssociateQuestions(
         DelightfulChatAggregateSearchReqDTO $dto,
@@ -797,7 +797,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         foreach ($noRepeatSearchContexts as $context) {
             $requestId = CoContext::getRequestId();
             $parallel->add(function () use ($context, $detailReadMaxNum, $requestId, &$currentDetailReadCount, $readPagesDetailChannel, $perReadResponseNum, &$questionsNum) {
-                // 知乎读not一point
+                // 知乎读notonepoint
                 if (str_contains($context->getCachedPageUrl(), 'zhihu.com')) {
                     return;
                 }
@@ -892,7 +892,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $timeStart = microtime(true);
         $parallel = new Parallel(2);
         $parallel->add(function () use ($dto, $noRepeatSearchContexts, $associateQuestions) {
-            // 3.4.a.1 andline：according toassociateissueandissue简单search，generateassociateissue子issue.(associateissue子issue只useatfront端show，目frontnotwillaccording to子issueagaintimesearch+精读)
+            // 3.4.a.1 andline：according toassociateissueandissue简singlesearch，generateassociateissue子issue.(associateissue子issue只useatfront端show，目frontnotwillaccording to子issueagaintimesearch+精读)
             $this->generateAndSendAssociateSubQuestions($dto, $noRepeatSearchContexts, $associateQuestions);
         });
         $parallel->add(function () use (&$noRepeatSearchContexts, $readPagesDetailChannel, $associateQuestions) {

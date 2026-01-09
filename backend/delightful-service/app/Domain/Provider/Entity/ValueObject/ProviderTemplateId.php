@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * service商templateID枚举
+ * servicequotienttemplateID枚举
  * willProviderCodeandCategorygroup合mappingforfixed数value型string.
  */
 enum ProviderTemplateId: string
@@ -134,7 +134,7 @@ enum ProviderTemplateId: string
             ProviderCode::Volcengine => '火山engine',
             ProviderCode::OpenAI => 'OpenAI',
             ProviderCode::MicrosoftAzure => 'Microsoft Azure',
-            ProviderCode::Qwen => '通义千问',
+            ProviderCode::Qwen => '通义thousand问',
             ProviderCode::DeepSeek => 'DeepSeek',
             ProviderCode::Tencent => '腾讯云',
             ProviderCode::TTAPI => 'TTAPI',
@@ -143,7 +143,7 @@ enum ProviderTemplateId: string
             ProviderCode::Google => 'Google',
             ProviderCode::VolcengineArk => '火山engine-方舟',
             ProviderCode::Gemini => 'Google Gemini',
-            default => '未知service商',
+            default => '未知servicequotient',
         };
 
         $categoryName = $mapping['category']->label();

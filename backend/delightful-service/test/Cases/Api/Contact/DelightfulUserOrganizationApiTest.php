@@ -65,7 +65,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     }
 
     /**
-     * testset空organizationcodeerror情况.
+     * testsetemptyorganizationcodeerror情况.
      */
     public function testSetCurrentOrganizationCodeWithEmptyCodeViaHttp(): void
     {

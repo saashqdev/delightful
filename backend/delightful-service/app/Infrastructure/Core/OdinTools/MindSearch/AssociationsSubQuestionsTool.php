@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\OdinTools\MindSearch;
 
 /**
- * 批quantitygenerateassociateissue子issue，then批quantity互联网search.
+ * batchquantitygenerateassociateissue子issue，thenbatchquantity互联网search.
  */
 class AssociationsSubQuestionsTool
 {
     public static string $name = 'associationsSubQuestionsSearch';
 
-    public static string $description = 'willeachassociateissue拆minutefor多子issue，then批quantity互联网search';
+    public static string $description = 'willeachassociateissue拆minutefor多子issue，thenbatchquantity互联网search';
 
     protected static array $parameters = [
         'type' => 'object',

@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('type_relation_value', 64)->comment(
                 'tokentypeto应value.typefor0o clock,此valueforaccount_id;typefor1o clock,此valueforuser_id;typefor2o clock,此valuefororganizationencoding;typefor3o clock,此valueforapp_id;typefor4o clock,此valueforflow_id'
             );
-            $table->string('token', 256)->comment('tokenvalue,all局唯一');
+            $table->string('token', 256)->comment('tokenvalue,all局唯one');
             $table->timestamp('expired_at')->comment('expiretime');
             $table->unique(['token'], 'idx_token');
             $table->timestamps();

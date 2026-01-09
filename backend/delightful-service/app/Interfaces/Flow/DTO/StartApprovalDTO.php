@@ -12,7 +12,7 @@ class StartApprovalDTO extends AbstractFlowDTO
     // approvaltemplateencoding
     public string $templateCode = '';
 
-    // approvaltable单data
+    // approvaltablesingledata
     public array $formData = [];
 
     // approvalstreamdata

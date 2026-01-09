@@ -43,10 +43,10 @@ interface DelightfulChatConversationRepositoryInterface
      */
     public function batchGetConversations(array $userIds, string $receiveId, ConversationType $receiveType): array;
 
-    // 批quantity移exceptconversationwindow
+    // batchquantity移exceptconversationwindow
     public function batchRemoveConversations(array $userIds, string $receiveId, ConversationType $receiveType): int;
 
-    // 批quantityupdateconversationwindow
+    // batchquantityupdateconversationwindow
     public function batchUpdateConversations(array $conversationIds, array $updateData): int;
 
     public function getAllConversationList(): array;

@@ -19,7 +19,7 @@ use Throwable;
 /**
  * messagepush模piece.
  * according togenerateseqbyand它优先level,use长connectpushgiveuser.
- * eachseqmaybe要推giveuser1to几十customer端.
+ * eachseqmaybe要推giveuser1to几tencustomer端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 {
@@ -27,7 +27,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 
     /**
      * 1.本groundopenhairo clocknotstart,避免消费testenvironmentdata,导致testenvironmentuser收nottomessage
-     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请一devenvironment,隔离mq.
+     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请onedevenvironment,隔离mq.
      */
     public function isEnable(): bool
     {

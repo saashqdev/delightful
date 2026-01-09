@@ -143,9 +143,9 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $currentOrganizationCode = $dataIsolation->getCurrentOrganizationCode();
         $modelOrganizationCode = $model->getOrganizationCode();
 
-        // 2. 判断model所属organizationwhetherandcurrentorganization一致
+        // 2. 判断model所属organizationwhetherandcurrentorganizationone致
         if ($modelOrganizationCode !== $currentOrganizationCode) {
-            // organizationnot一致：判断model所属organizationwhetheris官方organization
+            // organizationnotone致：判断model所属organizationwhetheris官方organization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
                 // model属at官方organizationandcurrentorganizationnotis官方organization：走写o clockcopy逻辑
@@ -184,12 +184,12 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array
     {
-        // ifis官方service商，needconductdatamergeandstatus判断
+        // ifis官方servicequotient，needconductdatamergeandstatus判断
         if ($providerEntity->getProviderCode() === ProviderCode::Official && ! OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
-        // non官方service商，按原逻辑queryfinger定configurationdownmodel
+        // non官方servicequotient，按原逻辑queryfinger定configurationdownmodel
         if (! is_numeric($configId)) {
             return [];
         }
@@ -229,7 +229,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         }
 
         // cache未命middle，execute原逻辑
-        // 1. 先queryorganizationdownenableservice商configurationID
+        // 1. 先queryorganizationdownenableservicequotientconfigurationID
         $builder = ProviderConfigModel::query();
 
         if ($status !== null) {
@@ -325,7 +325,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
             ->orderBy('status', 'desc') // 优先sort：enablestatusinfront
-            ->orderBy('id'); // 其time按IDsort，保证result一致property
+            ->orderBy('id'); // 其time按IDsort，保证resultone致property
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);

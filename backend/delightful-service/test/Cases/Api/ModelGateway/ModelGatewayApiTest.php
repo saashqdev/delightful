@@ -50,7 +50,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // create一 Parallel 实例，setmost大andhair数for 10
+        // createone Parallel 实例，setmost大andhair数for 10
         $parallel = new Parallel(10);
 
         // definition多differentrequest场景
@@ -64,7 +64,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // addandhairtask
         $index = 0;
-        $count = 10; // enter一步decreasetestquantity，as long ashave一successthenline
+        $count = 10; // enterone步decreasetestquantity，as long ashaveonesuccessthenline
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
@@ -103,8 +103,8 @@ class ModelGatewayApiTest extends AbstractHttpTest
             }
         }
 
-        // ensureat leasthave一requestsuccess
-        $this->assertGreaterThan(0, $successCount, 'at leastshouldhave一requestsuccess');
+        // ensureat leasthaveonerequestsuccess
+        $this->assertGreaterThan(0, $successCount, 'at leastshouldhaveonerequestsuccess');
 
         // outputsuccessrate
         $successRate = ($successCount / $count) * 100;
@@ -162,7 +162,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // 构造toquantity嵌入requestparameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
-            'input' => '这is一useattesttext',
+            'input' => '这isoneuseattesttext',
             'business_params' => [
                 'organization_id' => '000',
                 'user_id' => '9527',
@@ -205,7 +205,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         return [
             [
                 'role' => 'system',
-                'content' => '你is一助hand',
+                'content' => '你isone助hand',
             ],
             [
                 'role' => 'user',

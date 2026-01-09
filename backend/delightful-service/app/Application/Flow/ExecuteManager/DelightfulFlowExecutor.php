@@ -171,7 +171,7 @@ class DelightfulFlowExecutor
 
     protected function begin(array $args): void
     {
-        // meanwhile只能have一processidinexecute
+        // meanwhile只能haveoneprocessidinexecute
         if (! $this->locker->mutexLock($this->getLockerKey(), $this->executorId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, "{$this->executorId} is running");
         }
@@ -207,7 +207,7 @@ class DelightfulFlowExecutor
     {
         $nodeDebugResult = $node->getNodeDebugResult();
         if (! $nodeDebugResult->isSuccess()) {
-            // as long ashave一sectionpointisfail，那么processthenisfail
+            // as long ashaveonesectionpointisfail，那么processthenisfail
             $this->success = false;
         }
         $this->logger->info('HandledNode', [
@@ -283,7 +283,7 @@ class DelightfulFlowExecutor
             $this->updateStatus(ExecuteLogStatus::Failed, $result);
         }
 
-        // willcurrentprocess产生 api executeresult传递giveup一layerdata
+        // willcurrentprocess产生 api executeresult传递giveuponelayerdata
         if ($parentExecutionData = ExecutionDataCollector::get($this->executionData->getUniqueParentId())) {
             foreach ($this->executionData->getReplyMessages() as $replyMessage) {
                 $parentExecutionData->addReplyMessage($replyMessage);
@@ -321,7 +321,7 @@ class DelightfulFlowExecutor
         if ($this->executionData->getStreamStatus() !== FlowStreamStatus::Processing) {
             return;
         }
-        // only主process才能end（the零layer）
+        // only主process才能end（thezerolayer）
         if ($this->executionData->getLevel() !== 0) {
             return;
         }
@@ -455,7 +455,7 @@ class DelightfulFlowExecutor
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // defaultis要调degreedown一level，ifnotneed调degree，inspecificexecutemiddlecansetfor[]
+                // defaultis要调degreedownonelevel，ifnotneed调degree，inspecificexecutemiddlecansetfor[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // add flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -511,7 +511,7 @@ class DelightfulFlowExecutor
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }
-        // onlythe一layerprocess才willconduct归档
+        // onlytheonelayerprocess才willconduct归档
         if (! $this->executionData->isTop() || $this->inLoop) {
             return;
         }
@@ -520,7 +520,7 @@ class DelightfulFlowExecutor
             Coroutine::create(function () use ($fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
 
-                // 利usefrom旋lockcome控制only一insave
+                // 利usefrom旋lockcome控制onlyoneinsave
                 if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->delightfulFlowExecuteLogEntity->getExecuteDataId(), 20)) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'archive file failed');
                 }

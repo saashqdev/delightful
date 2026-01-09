@@ -69,9 +69,9 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // ifis单yuantest,nothair短信,只verifyvariableparse/短信content&&短信signature多语type适配/国际区numbercorrectparse
+            // ifissingleyuantest,nothair短信,只verifyvariableparse/短信content&&短信signature多语type适配/国际区numbercorrectparse
             if (defined('IN_UNIT_TEST')) {
-                // 单yuantest,not真hair短信
+                // singleyuantest,nottruehair短信
                 return $sendResult->setResult($errCode, $msg);
             }
             $this->sendRequest();
@@ -80,7 +80,7 @@ class VolcengineSms extends VolcengineApi
             $msg = '短信sendfail';
             $this->logger->error('短信sendfail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
-        // willreturnresultand创蓝统一,避免bug
+        // willreturnresultand创蓝统one,避免bug
         return $sendResult->setResult($errCode, $msg);
     }
 }

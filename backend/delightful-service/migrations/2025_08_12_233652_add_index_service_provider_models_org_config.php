@@ -54,7 +54,7 @@ return new class extends Migration {
                 $table->index(['organization_code', 'status'], 'idx_org_status');
             }
 
-            // organization+service商ID联合索引（ifnot存in）
+            // organization+servicequotientID联合索引（ifnot存in）
             if (! Schema::hasIndex('service_provider_configs', 'idx_org_provider_id')) {
                 $table->index(['organization_code', 'service_provider_id'], 'idx_org_provider_id');
             }

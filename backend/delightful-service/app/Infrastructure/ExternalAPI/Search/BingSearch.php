@@ -100,7 +100,7 @@ class BingSearch
 
         while ($attempt < $maxAttempts) {
             try {
-                // ifisretry(the二time尝试)，disableSSLverify
+                // ifisretry(thetwotime尝试)，disableSSLverify
                 if ($attempt !== 0) {
                     $clientConfig['verify'] = false;
                     $this->logger->warning('Retrying request with SSL verification disabled', [

@@ -99,7 +99,7 @@ readonly class KnowledgeBaseDomainService
      */
     public function getByCodes(KnowledgeBaseDataIsolation $dataIsolation, array $codes): array
     {
-        // minute批query
+        // minutebatchquery
         $chunks = array_chunk($codes, 500);
         $entities = [];
         foreach ($chunks as $chunk) {

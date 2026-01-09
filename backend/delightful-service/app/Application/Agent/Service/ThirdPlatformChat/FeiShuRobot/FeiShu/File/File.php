@@ -54,7 +54,7 @@ class File implements ProviderInterface
             }
             throw new TokenInvalidException('Token invalid');
         }
-        // responseisone二enter制file，saveto本ground
+        // responseisonetwoenter制file，saveto本ground
         $localFile = tempnam(sys_get_temp_dir(), 'feishu_file_');
         // according to header middle content-type setting本groundfile名andextension名
         $contentType = $response->getHeader('Content-Type')[0] ?? '';

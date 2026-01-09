@@ -19,11 +19,11 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->comment('账numberid,冗余field')->default('');
+            $table->string('delightful_id', 64)->comment('账numberid,冗remainderfield')->default('');
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding')->default('');
             // user_id
-            $table->string('user_id', 64)->comment('userid,organizationdown唯一.此fieldalsowillrecord一sharetouser_id_relation')->default(0);
+            $table->string('user_id', 64)->comment('userid,organizationdown唯one.此fieldalsowillrecordonesharetouser_id_relation')->default(0);
             // user_type
             $table->tinyInteger('user_type')->comment('usertype,0:ai,1:personcategory')->default(0);
             $table->string('description', 1024)->comment('description(canuseataifrom我介绍)');
@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->string('nickname', 64)->comment('昵称')->default('');
             $table->text('i18n_name')->comment('国际化username');
             $table->string('avatar_url', 128)->comment('useravatarlink')->default('');
-            $table->string('extra', 1024)->comment('attach加property')->default('');
+            $table->string('extra', 1024)->comment('attachaddproperty')->default('');
             $table->string('user_manual', 64)->comment('userinstruction书(云document)')->default('');
             // 索引set
             $table->unique(['user_id'], 'unq_user_organization_id');

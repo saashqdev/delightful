@@ -45,7 +45,7 @@ class MiscClient extends Client
                 ],
             ];
 
-            // will单embeddingconvertforEmbeddingResponseexpectdata结构
+            // willsingleembeddingconvertforEmbeddingResponseexpectdata结构
             if (isset($content['embedding'])) {
                 $compatibleContent['data'][] = [
                     'object' => 'embedding',

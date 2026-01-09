@@ -159,7 +159,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 ]);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接return完整nativedata
+                    // 直接returncompletenativedata
                     return $result;
                 }
 
@@ -363,7 +363,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 unset($imageUrl);
             }
 
-            // handle单 cdnImage
+            // handlesingle cdnImage
             if (! empty($rawData['data']['cdnImage'])) {
                 $rawData['data']['cdnImage'] = $this->watermarkProcessor->addWatermarkToUrl($rawData['data']['cdnImage'], $imageGenerateRequest);
             }

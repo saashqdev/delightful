@@ -25,7 +25,7 @@ return new class extends Migration {
         Schema::create('delightful_modes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->json('name_i18n')->comment('模typename国际化');
-            $table->string('identifier', 50)->default('')->comment('模type标识，唯一');
+            $table->string('identifier', 50)->default('')->comment('模type标识，唯one');
             $table->string('icon', 255)->default('')->comment('模typegraph标');
             $table->string('color', 10)->default('')->comment('模typecolor');
             $table->bigInteger('sort')->default(0)->comment('sort');
@@ -40,7 +40,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
-            // add唯一索引
+            // add唯one索引
             $table->unique('identifier', 'idx_identifier');
         });
 

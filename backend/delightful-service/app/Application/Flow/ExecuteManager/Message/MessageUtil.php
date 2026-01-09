@@ -61,7 +61,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // todo 批quantityprocess
+                    // todo batchquantityprocess
                     $chatFile = self::report2ChatFile($attachment, $executionData);
                     $chatAttachment = new ChatAttachment($chatFile->toArray());
                     $chatAttachment->setFileUrl($attachment->getUrl());
@@ -96,7 +96,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // getfilename。if linkPaths only 1 ，andand linkDesc alsoisonly一，那么can直接use linkDesc asforfilename
+                    // getfilename。if linkPaths only 1 ，andand linkDesc alsoisonlyone，那么can直接use linkDesc asforfilename
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }

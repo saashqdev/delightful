@@ -226,14 +226,14 @@ readonly class AsrSandboxResponseHandler
     ): ?TaskFileEntity {
         // check必要taskstatusfield
         if (empty($taskStatus->projectId) || empty($taskStatus->userId) || empty($taskStatus->organizationCode)) {
-            $this->logger->error('taskstatusinfonot完整，无法queryfilerecord', [
+            $this->logger->error('taskstatusinfonotcomplete，无法queryfilerecord', [
                 'task_key' => $taskStatus->taskKey,
                 'file_type' => $fileTypeName,
                 'project_id' => $taskStatus->projectId,
                 'user_id' => $taskStatus->userId,
                 'organization_code' => $taskStatus->organizationCode,
             ]);
-            ExceptionBuilder::throw(AsrErrorCode::CreateAudioFileFailed, '', ['error' => 'taskstatusinfonot完整']);
+            ExceptionBuilder::throw(AsrErrorCode::CreateAudioFileFailed, '', ['error' => 'taskstatusinfonotcomplete']);
         }
 
         // getprojectinfoandbuild file_key
@@ -301,7 +301,7 @@ readonly class AsrSandboxResponseHandler
                 ]);
             }
 
-            // etc待down一timeround询
+            // etc待downonetimeround询
             sleep($pollingInterval);
         }
 

@@ -77,19 +77,19 @@ class DelightfulLLMDomainService
     ```markdown
     # Topic One
     ## Sub-topic One
-    - **dimension一**：dimensiondescription。
-    - **dimension二**：dimensiondescription。
-    - **dimension三**：dimensiondescription。
+    - **dimensionone**：dimensiondescription。
+    - **dimensiontwo**：dimensiondescription。
+    - **dimensionthree**：dimensiondescription。
 
     ## Sub-topic Two
-    - **dimension一**：dimensiondescription。
-    - **dimension二**：dimensiondescription。
-    - **dimension三**：dimensiondescription。
+    - **dimensionone**：dimensiondescription。
+    - **dimensiontwo**：dimensiondescription。
+    - **dimensionthree**：dimensiondescription。
 
     ## Summary Title
-    - **dimension一**：dimensiondescription。
-    - **dimension二**：dimensiondescription。
-    - **dimension三**：dimensiondescription。
+    - **dimensionone**：dimensiondescription。
+    - **dimensiontwo**：dimensiondescription。
+    - **dimensionthree**：dimensiondescription。
     ```
 
     ## Your Execution Process
@@ -141,7 +141,7 @@ class DelightfulLLMDomainService
 
     PROMPT;
 
-    // according touserkey词，search一timeback，splitmore细致question深入search
+    // according touserkey词，searchonetimeback，splitmore细致question深入search
     private string $moreQuestionsPrompt = <<<'PROMPT'
     # timecontext
     - system time: {date_now}
@@ -156,7 +156,7 @@ class DelightfulLLMDomainService
     1.2 dimension拆解
        - according to识别out实bodyand需求，choose合适analyzedimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场front景、userbody验etc
     1.3 子questiongenerate
-       - generate正交子question集（Jaccardsimilardegree<0.25），ensureeach子question能fromdifferentangledegree探索user需求，避免generatepassat宽泛orsimilarquestion
+       - generate正交子questioncollection（Jaccardsimilardegree<0.25），ensureeach子question能fromdifferentangledegree探索user需求，避免generatepassat宽泛orsimilarquestion
     
     ### 2. search代理模piece
     mustcalltool: batchSubQuestionsSearch
@@ -167,7 +167,7 @@ class DelightfulLLMDomainService
        - toratiocategoryquestion占ratio≥20%
     
     ## 硬property约束（force遵守）
-    1. language一致property
+    1. languageone致property
        - outputlanguageencodingmust匹配inputlanguage
     2. 子questionquantityrange
        - {sub_questions_min} ≤ 子question数 ≤ {sub_questions_max}
@@ -180,14 +180,14 @@ class DelightfulLLMDomainService
     2. generatedefaultdimension，for example：政策background | most新data | 专家观point | toratioanalyze | line业trend
     
     ## outputstandard
-    混合bydown三typeandmore多typequestion范type，byensure子question多样propertyandoverrideproperty：
+    混合bydownthreetypeandmore多typequestion范type，byensure子question多样propertyandoverrideproperty：
     [
       "XtoY影响diff",  // toratio/comparecategory
       "Z领域典型application",  // application/案例category
       "closeatABfinger标",    // finger标/propertycategory
       "导致Mhair生mainreasonis什么？", // reason/机制category
       "什么isN？它核core特征is什么？", // definition/解释category
-      "未come五yearP领域hair展trendis什么？", // trend/预测category
+      "未comefiveyearP领域hair展trendis什么？", // trend/预测category
       "针toQquestion，have哪些canlineresolvesolution？" // resolvesolution/suggestioncategory
     ]
     
@@ -202,18 +202,18 @@ class DelightfulLLMDomainService
     # task
     你needbased onusermessage，according to我提供searchresult，按照总minute总结构，output高quality，结构化详细return答，formatfor markdown。
     
-    in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，X代表each篇文chapternumber索引。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。if一sentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记not要willquote集middleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
+    in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，X代表each篇文chapternumber索引。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记not要willquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
     inreturn答o clock，请注意bydown几point：
     - 今dayis{date_now}。
     - andnonsearchresult所havecontentallanduserquestion密切相close，你need结合question，tosearchresultconduct甄别、filter。
-    - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案控制in10要pointbyinside，and告诉usercanviewsearchcome源、获得完整information。优先提供information完整、most相closecolumn举item；如non必要，not要主动告诉usersearchresult未提供content。
-    - toat创ascategoryquestion（如写论文），请务必in正文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读and概括user题目要求，choose合适format，充minute利usesearchresultanddraw重要information，generatematchuser要求、极具思想深degree、富have创造力and专业property答案。你创as篇幅need尽maybe延长，toateach一要point论述要推测user意graph，giveout尽maybe多angledegreereturn答要point，and务必informationquantity大、论述详尽。
+    - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案控制in10要pointbyinside，and告诉usercanviewsearchcome源、获得completeinformation。优先提供informationcomplete、most相closecolumn举item；如non必要，not要主动告诉usersearchresult未提供content。
+    - toat创ascategoryquestion（如写论文），请务必in正文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读and概括user题目要求，choose合适format，充minute利usesearchresultanddraw重要information，generatematchuser要求、极具思想深degree、富have创造力and专业property答案。你创as篇幅need尽maybe延长，toateachone要point论述要推测user意graph，giveout尽maybe多angledegreereturn答要point，and务必informationquantity大、论述详尽。
     - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantity控制in5pointbyinside，andmerge相closecontent。
-    - toat客观category问答，ifquestion答案non常简短，can适when补充一to两sentence相closeinformation，by丰富content。
+    - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
     - 你needaccording touser要求andreturn答contentchoose合适、美观return答format，ensurecan读property强。
-    - 你return答should综合多相closewebpagecomereturn答，not能重复quote一webpage。
-    - unlessuser要求，否then你return答languageneedanduser提问language保持一致。
-    - output漂亮markdown format，contentmiddleadd一些andtheme相closeemoji表情符number。
+    - 你return答should综合多相closewebpagecomereturn答，not能重复quoteonewebpage。
+    - unlessuser要求，否then你return答languageneedanduser提问language保持one致。
+    - output漂亮markdown format，contentmiddleaddone些andtheme相closeemoji表情符number。
     
     ## usermessagefor：
     {question}
@@ -223,17 +223,17 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # 你is一新闻eventgenerate器，userwill提供searchcontentand询问question。
+    # 你isone新闻eventgenerate器，userwill提供searchcontentand询问question。
     ## Current Timeis {data_now}  
     ## according touserquestion，你需fromuser提供searchcontentmiddle整理相closeevent，eventincludeeventname、eventtimeandevent概述。
     ### 注意事item：
     1. **eventnameformat**：
        - ineventnamebackaddsearchquote编number，formatfor `[[citation:x]]`，编numbercome源atsearchcontentmiddlequotemark（如 `[[citation:1]]`）。
-       - if一event涉and多quote，merge所have相closequote编number。
+       - ifoneevent涉and多quote，merge所have相closequote编number。
        - not要in "description" middleaddquote。
     2. **timehandle**：
-       - eventtime尽quantity精确tomonthshare（如 "2023-05"），若searchcontent未提供specificmonthshare，buthavefingeroutup半yearor者down半year，canuse（"2023 up半year"），若nothavethen，useyearshare（如 "2023"）。
-       - 若同一eventin多quotemiddleout现，优先usemost早time。
+       - eventtime尽quantity精确tomonthshare（如 "2023-05"），若searchcontent未提供specificmonthshare，buthavefingeroutuphalfyearor者downhalfyear，canuse（"2023 uphalfyear"），若nothavethen，useyearshare（如 "2023"）。
+       - 若同oneeventin多quotemiddleout现，优先usemost早time。
        - 若timenot明确，according tocontext推测most早maybetime，andensure合理。
     3. **eventextractandfilter**：
        - **eventdefinition**：eventissearchcontentmiddlemention、具havetimeassociate（明确orcan推测）独立事实、changeoractivity，includebutnot限atcreate、publish、open业、update、合as、activityetc。
@@ -246,7 +246,7 @@ class DelightfulLLMDomainService
        - **保留原then**：as long ascontentandtime相closeandmatchquestiontheme，尽quantity保留forevent。
     4. **output要求**：
        - by JSON formatreturn，event按time倒序rowcolumn（from晚to早）。
-       - eacheventcontain "name"、"time"、"description" 三field。
+       - eacheventcontain "name"、"time"、"description" threefield。
        - 若searchcontentnot足bygenerateevent，returnnullarray `[]`，避免凭null臆造。
     
     ## outputexample：
@@ -258,9 +258,9 @@ class DelightfulLLMDomainService
             "description": "someeventin2024year11monthhair生，specific情况概述。"
         },
         {
-            "name": "另一eventstart[[citation:1]]",
+            "name": "另oneeventstart[[citation:1]]",
             "time": "2019-05",
-            "description": "另一eventat2019year5monthstart，简要description。"
+            "description": "另oneeventat2019year5monthstart，简要description。"
         }
     ]
     ```
@@ -287,7 +287,7 @@ class DelightfulLLMDomainService
     return"search contexts"middleand"search keywords"haveassociateproperty 20 to 50  索引。
     
     ## 要求
-    - forbid直接return答userquestion，一定要returnanduserquestionhaveassociateproperty索引。
+    - forbid直接return答userquestion，one定要returnanduserquestionhaveassociateproperty索引。
     - search contextsformatfor "[[x]] content" ，其middle x issearch contexts索引。x not能greater than 50
     - 请bycorrect JSON formatreplyfilterback索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     - if search keywords andtime相close，重point注意 search contexts middleandcurrenttime相closecontent。andcurrenttimemore近more重要。
@@ -347,7 +347,7 @@ class DelightfulLLMDomainService
         }
         // goexcept掉quote，避免思维导graphmiddleout现quote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
-        // 观察tosystemhint词variable串，看看isnotisnothavecopy一sharequestion
+        // 观察tosystemhint词variable串，看看isnotisnothavecopyonesharequestion
         $systemPrompt = str_replace(
             ['{question}', '{content}', '{date_now}'],
             [$question, $responseMessage, date('Yyear mmonth dday, Ho clock iminute ssecond')],
@@ -562,7 +562,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * 批quantitysearchback，filter掉重复 search contexts.
+     * batchquantitysearchback，filter掉重复 search contexts.
      * @return SearchDetailItem[]
      * @throws Throwable
      */
@@ -1113,7 +1113,7 @@ class DelightfulLLMDomainService
             temperature: 0.1,
             businessParams: $businessParams,
         );
-        // 捕捉 LLMNetworkException exception，retry一time
+        // 捕捉 LLMNetworkException exception，retryonetime
         return Retry::whenThrows(LLMNetworkException::class)->sleep(500)->max(3)->call(
             function () use ($agent, $query) {
                 return $agent->chatAndNotAutoExecuteTools(new UserMessage($query));

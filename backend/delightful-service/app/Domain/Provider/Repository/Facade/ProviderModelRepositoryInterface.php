@@ -52,13 +52,13 @@ interface ProviderModelRepositoryInterface
     /**
      * getorganizationcanusemodellist（containorganizationfrom己modelandDelightfulmodel）.
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param null|Category $category modelcategory，for空o clockreturn所havecategorymodel
+     * @param null|Category $category modelcategory，foremptyo clockreturn所havecategorymodel
      * @return ProviderModelEntity[] 按sort降序sortmodellist，containorganizationmodelandDelightfulmodel（notgo重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 
     /**
-     * 批quantityaccording toIDgetmodel.
+     * batchquantityaccording toIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
      * @return ProviderModelEntity[] model实bodyarray，byIDfor键
@@ -68,7 +68,7 @@ interface ProviderModelRepositoryInterface
     public function getModelByIdWithoutOrgFilter(string $id): ?ProviderModelEntity;
 
     /**
-     * 批quantityaccording toModelIDgetmodel.
+     * batchquantityaccording toModelIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds model标识array
      * @return array<string, ProviderModelEntity[]> model实bodyarray，bymodel_idfor键，valueforto应modellist

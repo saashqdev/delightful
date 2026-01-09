@@ -89,7 +89,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你is一cansendmessage助hand
+你isonecansendmessage助hand
 
 
 ## process
@@ -105,8 +105,8 @@ user昵称is：currentuser昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭message',
-            'user_prompt' => '帮我send一itemmessage,contentis：你今day真好看',
+            // 'user_prompt' => '帮我createonescheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminder我做饭message',
+            'user_prompt' => '帮我sendoneitemmessage,contentis：你今daytrue好看',
         ]);
 
         $runner->execute($vertexResult, $executionData);
@@ -183,7 +183,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你is一cansendmessage助hand
+你isonecansendmessage助hand
 
 
 ## process
@@ -200,8 +200,8 @@ user昵称is：currentuser昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭message',
-            'user_prompt' => '帮我send一itemmessage,contentis：你今day真好看',
+            // 'user_prompt' => '帮我createonescheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminder我做饭message',
+            'user_prompt' => '帮我sendoneitemmessage,contentis：你今daytrue好看',
         ]);
 
         $runner->execute($vertexResult, $executionData);

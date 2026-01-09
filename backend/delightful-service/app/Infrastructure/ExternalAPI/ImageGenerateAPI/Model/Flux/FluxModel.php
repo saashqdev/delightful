@@ -106,7 +106,7 @@ class FluxModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('Flux OpenAIformat生graph：单requestfail', [
+                    $this->logger->error('Flux OpenAIformat生graph：singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -145,7 +145,7 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthave一张imagegeneratesuccess
+        // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($imageUrls)) {
             $this->logger->error('Flux文生graph：所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
@@ -243,7 +243,7 @@ class FluxModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接return完整nativedata
+                    // 直接returncompletenativedata
                     return $result;
                 }
 
@@ -346,7 +346,7 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthave一张imagegeneratesuccess
+        // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
             $this->logger->error('Flux文生graph：所haveimagegenerate均fail', ['errors' => $errors]);
@@ -377,7 +377,7 @@ class FluxModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledown一张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimage保持originalstatus
             }
         }
 
@@ -442,7 +442,7 @@ class FluxModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willberelease
+            // ensurelockone定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }

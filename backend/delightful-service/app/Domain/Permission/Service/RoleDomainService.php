@@ -43,7 +43,7 @@ readonly class RoleDomainService
         // queryrolecolumn表
         $result = $this->roleRepository->queries($organizationCode, $page, $filters);
 
-        // 批quantityqueryuserID，避免 N+1 query
+        // batchquantityqueryuserID，避免 N+1 query
         $roleIds = array_map(static fn (RoleEntity $r) => $r->getId(), $result['list']);
         $roleUsersMap = $this->roleRepository->getRoleUsersMap($organizationCode, $roleIds);
 
@@ -79,7 +79,7 @@ readonly class RoleDomainService
         }
 
         // 1. 校验permission键validproperty
-        // update permissionTag info：according topermission键extract二level模piecetag，useatfront端showcategory
+        // update permissionTag info：according topermission键extracttwolevel模piecetag，useatfront端showcategory
         $permissionTags = [];
         foreach ($savingRoleEntity->getPermissions() as $permissionKey) {
             // 校验permission键validproperty
@@ -92,7 +92,7 @@ readonly class RoleDomainService
                 continue;
             }
 
-            // parsepermission键，getresourceandextract其二level模piecetag
+            // parsepermission键，getresourceandextract其twolevel模piecetag
             try {
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
@@ -112,7 +112,7 @@ readonly class RoleDomainService
             $roleEntity = clone $savingRoleEntity;
             $roleEntity->prepareForCreation($dataIsolation->getCurrentUserId());
 
-            // checknameinorganizationdownwhether唯一
+            // checknameinorganizationdownwhether唯one
             if ($this->roleRepository->getByName($organizationCode, $savingRoleEntity->getName())) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_name_exists', ['name' => $savingRoleEntity->getName()]);
             }
@@ -249,7 +249,7 @@ readonly class RoleDomainService
      * 1. according tocurrentorganizationfindwhether已have同名role；
      * 2. 若not存in，thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS；
      * 3. 若存in，thenensure其contain ALL_PERMISSIONS；
-     * 4. willuser ID column表加入roleassociateusercolumn表；
+     * 4. willuser ID column表add入roleassociateusercolumn表；
      * 5. saverole。
      *
      * exceptionbycall方fromlinehandle，避免影响主process。
@@ -278,7 +278,7 @@ readonly class RoleDomainService
             $roleEntity->setPermissions($permissions);
         }
 
-        // 3. willusercolumn表加入roleusercolumn表
+        // 3. willusercolumn表add入roleusercolumn表
         $existingUserIds = $roleEntity->getUserIds();
         // mergeandgo重
         $mergedUserIds = array_unique(array_merge($existingUserIds, $userIds));

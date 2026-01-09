@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 interface SmsInterface
 {
     /**
-     * get短信templateid. andnot一定存intemplateid.
+     * get短信templateid. andnotone定存intemplateid.
      */
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
@@ -20,7 +20,7 @@ interface SmsInterface
     public function send(SmsStruct $smsStruct): SendResult;
 
     /**
-     * parse变quantity短信,return完整短信text.
+     * parse变quantity短信,returncomplete短信text.
      */
     public function getContent(SmsStruct $smsStruct): string;
 

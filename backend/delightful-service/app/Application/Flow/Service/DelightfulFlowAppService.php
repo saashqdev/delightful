@@ -66,7 +66,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 单sectionpointdebug.
+     * singlesectionpointdebug.
      */
     public function singleDebugNode(Authenticatable $authorization, Node $node, array $nodeContexts = [], array $triggerConfig = []): ?NodeDebugResult
     {
@@ -178,7 +178,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'type', 'tool_set_id', 'enabled', 'version_code', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
                 break;
             case Type::Tools:
-                // need具have该tool集读permission
+                // need具have该toolcollection读permission
                 if (empty($query->getToolSetId())) {
                     break;
                     //                    ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'tool_set_id']);
@@ -243,7 +243,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         $query->setType(Type::Tools->value);
-        // 一定isfinger定querytool codes
+        // one定isfinger定querytool codes
         if (empty($query->getCodes())) {
             return ['total' => 0, 'list' => []];
         }
@@ -255,7 +255,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $toolSetIds = array_keys($toolSetResources);
 
-        // againfilter一downenabletool集
+        // againfilteronedownenabletoolcollection
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
@@ -308,7 +308,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolSetQuery->setOrder(['updated_at' => 'desc']);
         $toolSetData = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
 
-        // increasesysteminside置tool集
+        // increasesysteminside置toolcollection
         $builtInTools = [];
         if ($withBuiltInTools) {
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
@@ -365,7 +365,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolSetData['list'][$index]->addTool($toolInfo);
         }
 
-        // filter掉nothave任何tooltool集
+        // filter掉nothave任何tooltoolcollection
         $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 

@@ -28,8 +28,8 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * service商modelsyncapplicationservice.
- * 负责fromoutside部APIpullmodelandsynctoOfficialservice商.
+ * servicequotientmodelsyncapplicationservice.
+ * 负责fromoutside部APIpullmodelandsynctoOfficialservicequotient.
  */
 class ProviderModelSyncAppService
 {
@@ -47,19 +47,19 @@ class ProviderModelSyncAppService
 
     /**
      * fromoutside部APIsyncmodel.
-     * whenservice商configurationcreateorupdateo clock，ifisOfficialservice商andis官方organization，thenfromoutside部APIpullmodel.
+     * whenservicequotientconfigurationcreateorupdateo clock，ifisOfficialservicequotientandis官方organization，thenfromoutside部APIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,
         string $language,
         string $organizationCode
     ): void {
-        // 1. checkwhetherforOfficialservice商
+        // 1. checkwhetherforOfficialservicequotient
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
         $provider = $this->providerConfigDomainService->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
 
         if (! $provider || $provider->getProviderCode() !== ProviderCode::Official) {
-            $this->logger->debug('notisOfficialservice商，skipsync', [
+            $this->logger->debug('notisOfficialservicequotient，skipsync', [
                 'config_id' => $providerConfigEntity->getId(),
                 'provider_code' => $provider?->getProviderCode()->value,
             ]);
@@ -76,7 +76,7 @@ class ProviderModelSyncAppService
             // 3. parseconfiguration
             $config = $providerConfigEntity->getConfig();
             if (! $config) {
-                $this->logger->warning('configurationfor空，skipsync', [
+                $this->logger->warning('configurationforempty，skipsync', [
                     'config_id' => $providerConfigEntity->getId(),
                 ]);
                 return;
@@ -85,7 +85,7 @@ class ProviderModelSyncAppService
             $url = $config->getUrl();
             $apiKey = $config->getApiKey();
             if (! $url || ! $apiKey) {
-                $this->logger->warning('configurationnot完整，缺少urlorapi_key', [
+                $this->logger->warning('configurationnotcomplete，缺少urlorapi_key', [
                     'config_id' => $providerConfigEntity->getId(),
                     'has_url' => ! empty($url),
                     'has_api_key' => ! empty($apiKey),
@@ -126,7 +126,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * according toservice商category确定要pullmodeltype.
+     * according toservicequotientcategory确定要pullmodeltype.
      */
     private function getModelTypesByCategory(Category $category): array
     {
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // ifis一link，那么needto url conduct限制
+        // ifisonelink，那么needto url conduct限制
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);

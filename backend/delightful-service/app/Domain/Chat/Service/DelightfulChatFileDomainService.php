@@ -63,7 +63,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             $messageEntities[$entity->getDelightfulMessageId()] = $entity;
         }
 
-        // give $fileDTOs 加up delightful_message_id
+        // give $fileDTOs addup delightful_message_id
         foreach ($fileDTOs as $fileDTO) {
             $messageId = $fileDTO->getMessageId();
             /* @var DelightfulChatFileEntity $fileDTO */

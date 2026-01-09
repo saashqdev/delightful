@@ -16,7 +16,7 @@ interface DelightfulDepartmentRepositoryInterface
 {
     public function getDepartmentById(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
-    // get父departmentdown一子department
+    // get父departmentdownone子department
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
     /**
@@ -30,12 +30,12 @@ interface DelightfulDepartmentRepositoryInterface
     public function getDepartmentsByIdsInDelightful(array $departmentIds, bool $keyById = false): array;
 
     /**
-     * 批quantitygetdepartmentdownnleveldepartment.
+     * batchquantitygetdepartmentdownnleveldepartment.
      */
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): DepartmentsPageResponseDTO;
 
     /**
-     * getsome一layerleveldepartment.
+     * getsomeonelayerleveldepartment.
      */
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO;
 
@@ -79,7 +79,7 @@ interface DelightfulDepartmentRepositoryInterface
     public function updateDepartmentsOptionByIds(array $departmentIds, ?DepartmentOption $departmentOption = null): int;
 
     /**
-     * according todepartmentID批quantitydeletedepartment（逻辑delete，set deleted_at field）。
+     * according todepartmentIDbatchquantitydeletedepartment（逻辑delete，set deleted_at field）。
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int;
 
@@ -89,7 +89,7 @@ interface DelightfulDepartmentRepositoryInterface
     public function getDepartmentRootId(string $organizationCode): ?string;
 
     /**
-     * 批quantityget多organizationrootdepartmentinfo.
+     * batchquantityget多organizationrootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
      * @return DelightfulDepartmentEntity[] rootdepartment实bodyarray
      */

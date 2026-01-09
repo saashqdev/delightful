@@ -12,7 +12,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  *
  * definition两type重sort模type：
  * - RERANKING_MODEL: use重sortmodelto检索resultconduct重sort
- * - WEIGHTED_SCORE: use加权minute数to检索resultconduct重sort
+ * - WEIGHTED_SCORE: useadd权minute数to检索resultconduct重sort
  */
 class RerankMode
 {
@@ -27,9 +27,9 @@ class RerankMode
     public const RERANKING_MODEL = 'reranking_model';
 
     /**
-     * 加权minute数.
+     * add权minute数.
      *
-     * usedifferent检索methodminute数加权计算finalminute数，to检索resultconduct重sort。
+     * usedifferent检索methodminute数add权计算finalminute数，to检索resultconduct重sort。
      * for example，cansettoquantity检索result权重for 0.7，keyword检索result权重for 0.3。
      * 该模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。

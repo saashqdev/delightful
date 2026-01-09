@@ -21,7 +21,7 @@ class CrontabToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return 'scheduletasktool集';
+        return 'scheduletasktoolcollection';
     }
 
     public function getDescription(): string

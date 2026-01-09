@@ -19,7 +19,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 账number收item箱序columnnumbertable,each账number所havemessagemust单调递增.
+ * 账number收item箱序columnnumbertable,each账number所havemessagemustsingle调递增.
  */
 final class DelightfulSeqEntity extends AbstractEntity
 {
@@ -355,7 +355,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function canTriggerFlow(): bool
     {
-        // ifischatmessage，or者is加好友/opensessionwindow控制message，then能触hair flow
+        // ifischatmessage，or者isadd好友/opensessionwindow控制message，then能触hair flow
         return $this->seqType instanceof ChatMessageType || in_array($this->seqType, [ControlMessageType::AddFriendSuccess, ControlMessageType::OpenConversation], true);
     }
 }

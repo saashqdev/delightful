@@ -62,7 +62,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     /**
      * getuser所indepartment.
-     * 一to多close系.
+     * oneto多close系.
      */
     public function getDepartmentIdsByUserIds(DataIsolation $dataIsolation, array $userIds, bool $withAllParentIds = false): array
     {
@@ -71,7 +71,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     /**
      * getuser所indepartment.
-     * 一to多close系.
+     * oneto多close系.
      */
     public function getDepartmentIdsByUserId(DataIsolation $dataIsolation, string $userId, bool $withAllParentIds = false): array
     {

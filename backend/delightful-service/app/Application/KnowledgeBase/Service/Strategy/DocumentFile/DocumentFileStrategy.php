@@ -99,7 +99,7 @@ class DocumentFileStrategy
         $pattern = '/(!\[.*\]\((.*?)\))/';
         $matches = [];
         preg_match_all($pattern, $content, $matches);
-        $fullMatches = $matches[1] ?? [];  // 完整markdownimage语法
+        $fullMatches = $matches[1] ?? [];  // completemarkdownimage语法
         $imageUrls = $matches[2] ?? [];  // imageURLorbase64
 
         foreach ($imageUrls as $index => $imageUrl) {
@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('nothaveand[' . get_class($documentFile) . ']匹配textparsestrategy！willreturn空value！');
+        $this->logger->warning('nothaveand[' . get_class($documentFile) . ']匹配textparsestrategy！willreturnemptyvalue！');
         return null;
     }
 }

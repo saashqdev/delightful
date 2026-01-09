@@ -86,7 +86,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             // from messageDTO middleget topicId
             $topicId = $messageDTO->getTopicId() ?? '';
 
-            // if topicId notfor空，verify话题whether属atcurrentuser
+            // if topicId notforempty，verify话题whether属atcurrentuser
             if (empty($topicId)) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
             }

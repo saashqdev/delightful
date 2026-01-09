@@ -26,7 +26,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采use一 seq push所havesearch相closecontent，front端notagain多 seq mergebecome一渲染.
+ * 采useone seq push所havesearch相closecontent，front端notagain多 seq mergebecomeone渲染.
  */
 class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {
@@ -42,7 +42,7 @@ class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search简单版，批quantitytouser多含义sameor者differentissueconduct互联网search。';
+        return '麦吉互联网search简single版，batchquantitytouser多含义sameor者differentissueconduct互联网search。';
     }
 
     public function getCallback(): ?Closure

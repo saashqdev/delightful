@@ -14,21 +14,21 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
 
 /**
- * organizationdown Delightful service商andmodel相closeinterface（non官方organization才have Delightful service商）.
+ * organizationdown Delightful servicequotientandmodel相closeinterface（non官方organization才have Delightful servicequotient）.
  */
 interface DelightfulProviderAndModelsInterface
 {
     /**
-     * getorganizationdown Delightful service商configuration（not containmodeldetail）.
+     * getorganizationdown Delightful servicequotientconfiguration（not containmodeldetail）.
      */
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO;
 
     /**
-     * according toorganizationencodingandcategory别get Delightful service商modellist.
+     * according toorganizationencodingandcategory别get Delightful servicequotientmodellist.
      *
      * @param string $organizationCode organizationencoding
-     * @param null|Category $category service商category别，for空o clockreturn所havecategorymodel
-     * @return array<ProviderModelEntity> Delightful service商model实bodyarray
+     * @param null|Category $category servicequotientcategory别，foremptyo clockreturn所havecategorymodel
+     * @return array<ProviderModelEntity> Delightful servicequotientmodel实bodyarray
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array;
 

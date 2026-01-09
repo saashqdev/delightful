@@ -57,7 +57,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * add单language转录result.
+     * addsinglelanguage转录result.
      */
     public function addTranscription(string $language, string $text): self
     {
@@ -166,7 +166,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * checkwhetherfor空（nothave任何转录result）.
+     * checkwhetherforempty（nothave任何转录result）.
      */
     public function isEmpty(): bool
     {

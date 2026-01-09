@@ -9,7 +9,7 @@ namespace App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request;
 
 class VolcengineModelRequest extends ImageGenerateRequest
 {
-    // inside置超minutefeature，startbackcanwillup述宽高均乘by2return，此parameteropenbackdelaywillhaveincrease
+    // inside置超minutefeature，startbackcanwillup述宽高均multiplyby2return，此parameteropenbackdelaywillhaveincrease
     // 如up述宽高均for512and512，此parametercloseoutgraph 512*512 ，此parameteropenoutgraph1024 * 1024
     private bool $useSr = false;
 

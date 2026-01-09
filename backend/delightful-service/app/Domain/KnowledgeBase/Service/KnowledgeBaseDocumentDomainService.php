@@ -82,7 +82,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * view单knowledge basedocumentdetail.
+     * viewsingleknowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): KnowledgeBaseDocumentEntity
     {
@@ -129,7 +129,7 @@ readonly class KnowledgeBaseDocumentDomainService
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触hair重建（这withincansendeventor者加入queue）
+            // async触hair重建（这withincansendeventor者add入queue）
             // TODO: 触hair重建toquantityevent
         }
     }
@@ -227,7 +227,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $lastId = null;
         /** @var array<KnowledgeBaseDocumentEntity> $res */
         $res = [];
-        // at mostallowget一万sharedocument
+        // at mostallowgetoneten thousandsharedocument
         while ($loopCount--) {
             $entities = $this->knowledgeBaseDocumentRepository->getByThirdFileId($dataIsolation, $thirdPlatformType, $thirdFileId, $knowledgeBaseCode, $lastId, $pageSize);
             if (empty($entities)) {
@@ -253,15 +253,15 @@ readonly class KnowledgeBaseDocumentDomainService
     private function prepareForCreation(KnowledgeBaseDocumentEntity $documentEntity): void
     {
         if (empty($documentEntity->getName())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentnamenot能for空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentnamenot能forempty');
         }
 
         if (empty($documentEntity->getKnowledgeBaseCode())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencodingnot能for空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencodingnot能forempty');
         }
 
         if (empty($documentEntity->getCreatedUid())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者not能for空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者not能forempty');
         }
 
         // setdefaultvalue

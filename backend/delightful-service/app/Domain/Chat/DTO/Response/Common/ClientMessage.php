@@ -18,10 +18,10 @@ use Throwable;
  */
 class ClientMessage extends AbstractEntity
 {
-    // service端generatemessage唯一id，all局唯一。useatwithdraw、editmessage。
+    // service端generatemessage唯oneid，all局唯one。useatwithdraw、editmessage。
     protected string $delightfulMessageId;
 
-    // customer端generate，needios/安卓/web三端共同确定一generate算法。useat告知customer端，delightful_message_idbycome
+    // customer端generate，needios/安卓/webthree端共同确定onegenerate算法。useat告知customer端，delightful_message_idbycome
     protected ?string $appMessageId;
 
     // 话题id
@@ -37,7 +37,7 @@ class ClientMessage extends AbstractEntity
     // messagesend者,from己or者他person
     protected string $senderId;
 
-    // messagesendtime，and delightful_message_id 一up，useatwithdraw、editmessageo clock唯一property校验。
+    // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯oneproperty校验。
     protected int $sendTime;
 
     // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：未读|已读|已view（non纯text复杂typemessage，userpoint击detail）  | withdraw
@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // 避免eachtype bug 导致user完all无法拉message，这within做一down兜bottom
+            // 避免eachtype bug 导致user完all无法拉message，这within做onedown兜bottom
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {

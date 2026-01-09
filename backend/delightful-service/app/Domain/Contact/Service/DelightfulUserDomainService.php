@@ -59,7 +59,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // ifis ai ,直接同意
             $friendStatus = FriendStatus::Agree;
         } else {
-            // ifispersoncategory，check他们whether处at同一organization
+            // ifispersoncategory，check他们whether处at同oneorganization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
         // will好友close系write friend 表.
@@ -137,7 +137,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     {
         // check uid and friendId whether存in
         [$popular, $latest] = $this->userRepository->searchByKeyword($keyword);
-        // 按most受欢迎andmost新加入each取front三
+        // 按most受欢迎andmost新add入each取frontthree
         return $this->getAgents($popular, $latest);
     }
 
@@ -162,7 +162,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批quantityaccording to aiCode（flowCode）+ organizationencodinggetassistant user_id.
+     * batchquantityaccording to aiCode（flowCode）+ organizationencodinggetassistant user_id.
      * @return array<string, string> return aiCode => userId mapping
      */
     public function getByAiCodes(DataIsolation $dataIsolation, array $aiCodes): array
@@ -171,13 +171,13 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 1. according to aiCodes 批quantityget account info
+        // 1. according to aiCodes batchquantityget account info
         $accounts = $this->accountRepository->getAccountInfoByAiCodes($aiCodes);
         if (empty($accounts)) {
             return [];
         }
 
-        // 2. 收集 delightful_ids
+        // 2. 收collection delightful_ids
         $delightfulIds = [];
         $aiCodeToDelightfulIdMap = [];
         foreach ($accounts as $account) {
@@ -185,7 +185,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             $aiCodeToDelightfulIdMap[$account->getAiCode()] = $account->getDelightfulId();
         }
 
-        // 3. according to delightful_ids 批quantitygetuserinfo
+        // 3. according to delightful_ids batchquantitygetuserinfo
         $users = $this->userRepository->getUserByDelightfulIds($delightfulIds);
         if (empty($users)) {
             return [];
@@ -260,7 +260,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account 表拿hand机number真名etcinfo
+        // from account 表拿hand机numbertrue名etcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
@@ -347,7 +347,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return $cachedResult;
         }
 
-        // 加lockhandle，防止andhairrequest
+        // addlockhandle，防止andhairrequest
         $owner = $this->acquireLock($lockKey);
 
         try {
@@ -401,7 +401,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds);
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account 表拿hand机number真名etcinfo
+        // from account 表拿hand机numbertrue名etcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }

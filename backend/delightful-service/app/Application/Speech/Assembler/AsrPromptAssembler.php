@@ -21,7 +21,7 @@ class AsrPromptAssembler
      * @param string $asrStreamContent voice识别content
      * @param null|NoteDTO $note 笔记content（optional）
      * @param string $language outputlanguage（如：zh_CN, en_US）
-     * @return string 完整hint词
+     * @return string completehint词
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
     {
@@ -39,10 +39,10 @@ class AsrPromptAssembler
         $textContent = implode("\n\n", $contentParts);
 
         $template = <<<'PROMPT'
-你is一专业录音contenttitlegenerate助hand。
+你isone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-usersubmit一segment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according to这些contentgenerate一简洁准确title。
+usersubmitonesegment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according to这些contentgenerateone简洁准确title。
 
 ## contentcome源instruction
 - <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclose键info
@@ -53,7 +53,7 @@ usersubmit一segment录音content，录音content经passvoice识别转fortext，
 ### 优先level原then（重要）
 1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
 2. **重视笔记title**：if笔记is Markdown formatandcontaintitle（# openheadline），优先采use笔记middletitlecontent
-3. **综合考虑**：meanwhile参考voice识别content，ensuretitle完整准确
+3. **综合考虑**：meanwhile参考voice识别content，ensuretitlecomplete准确
 4. **keywordextract**：from笔记andvoice识别contentmiddleextractmost核corekeyword
 
 ### format要求
@@ -86,17 +86,17 @@ PROMPT;
      *
      * @param string $userRequestMessage userinchat框sendrequestmessage
      * @param string $language outputlanguage（如：zh_CN, en_US）
-     * @return string 完整hint词
+     * @return string completehint词
      */
     public static function getTitlePromptForUploadedFile(
         string $userRequestMessage,
         string $language
     ): string {
         $template = <<<'PROMPT'
-你is一专业录音contenttitlegenerate助hand。
+你isone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-userupload一audiofiletosystemmiddle，andinchat框middlesend总结request。现inneed你according touserrequestmessage（其middlecontainfile名），for这time录音总结generate一简洁准确title。
+useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneed你according touserrequestmessage（其middlecontainfile名），for这time录音总结generateone简洁准确title。
 
 ## userinchat框request
 usersendoriginalmessage如down：

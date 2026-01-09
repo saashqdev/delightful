@@ -44,7 +44,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
         return GroupAssembler::getGroupEntity($groupInfo);
     }
 
-    // 批quantityquerygroupinformation
+    // batchquantityquerygroupinformation
 
     /**
      * @return DelightfulGroupEntity[]
@@ -106,7 +106,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
         $users = array_column($users, null, 'user_id');
         $time = date('Y-m-d H:i:s');
         $groupUsers = [];
-        // 批quantitygetuserinformation
+        // batchquantitygetuserinformation
         foreach ($userIds as $userId) {
             $user = $users[$userId] ?? null;
             if (empty($user)) {
@@ -129,7 +129,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
                 'organization_code' => $user['organization_code'],
             ];
         }
-        // 批quantitytogroupmiddleadduser
+        // batchquantitytogroupmiddleadduser
         ! empty($groupUsers) && $this->groupUserModel::query()->insert($groupUsers);
         return true;
     }

@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('delightful_long_term_memories', function (Blueprint $table) {
-            $table->string('id', 36)->primary()->comment('记忆唯一ID');
+            $table->string('id', 36)->primary()->comment('记忆唯oneID');
             $table->text('content')->comment('记忆content');
             $table->text('pending_content')->nullable()->comment('待变more记忆content，etc待user接受变more');
             $table->text('explanation')->nullable()->comment('记忆解释，instruction这item记忆for什么value得record');
@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重要property(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('accesscount');
             $table->unsignedInteger('reinforcement_count')->default(0)->comment('强化count');
-            $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰减因子(0-1)');
+            $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰subtract因子(0-1)');
             $table->json('tags')->nullable()->comment('taglist');
             $table->json('metadata')->nullable()->comment('yuandata');
             $table->string('org_id', 36)->comment('organizationID');

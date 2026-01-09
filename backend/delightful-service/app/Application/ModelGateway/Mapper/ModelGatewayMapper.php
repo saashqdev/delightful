@@ -80,7 +80,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use chat o clock，一定isuse该method.
+     * inside部use chat o clock，one定isuse该method.
      * willfrom动替代for本ground代理model.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
@@ -97,7 +97,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use embedding o clock，一定isuse该method.
+     * inside部use embedding o clock，one定isuse该method.
      * willfrom动替代for本ground代理model.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
@@ -116,7 +116,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该methodgetto一定is真实callmodel.
+     * 该methodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
      * @param string $model expectedis管理back台 model_id，passdegree阶segment接受传入 model_version
      */
@@ -131,7 +131,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该methodgetto一定is真实callmodel.
+     * 该methodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
      * @param string $model modelname expectedis管理back台 model_id，passdegree阶segment接受 model_version
      */
@@ -318,14 +318,14 @@ class ModelGatewayMapper extends ModelMapper
         }
         $providerConfigIds = array_unique($providerConfigIds);
 
-        // load service商configuration
+        // load servicequotientconfiguration
         $providerConfigs = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, $providerConfigIds);
         $providerIds = [];
         foreach ($providerConfigs as $providerConfig) {
             $providerIds[] = $providerConfig->getServiceProviderId();
         }
 
-        // get service商
+        // get servicequotient
         $providers = $this->providerManager->getProvidersByIds($providerDataIsolation, $providerIds);
 
         // group装data
@@ -397,14 +397,14 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservice商统一display别名，ifnothave别名thendisplay“customizeservice商”（need考虑多language）
+            // customizeservicequotient统onedisplay别名，ifnothave别名thendisplay“customizeservicequotient”（need考虑多language）
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // inside置service商统一display service商name，notusedisplay别名（need考虑多language）
+            // inside置servicequotient统onedisplay servicequotientname，notusedisplay别名（need考虑多language）
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // ifnotis官方organization，butismodelis官方organization，统一display Delightful
+        // ifnotis官方organization，butismodelis官方organization，统onedisplay Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -487,7 +487,7 @@ class ModelGatewayMapper extends ModelMapper
         // checkcurrentset餐whetherhave这modelusepermission - 目frontonly LLM modelhave这限制
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
-                $this->logger->info('modelnotincanuse名单', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
+                $this->logger->info('modelnotincanuse名single', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
                 return null;
             }
         }
@@ -495,19 +495,19 @@ class ModelGatewayMapper extends ModelMapper
         // getconfiguration
         $providerConfigEntity = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, [$providerModelEntity->getServiceProviderConfigId()])[$providerModelEntity->getServiceProviderConfigId()] ?? null;
         if (! $providerConfigEntity) {
-            $this->logger->info('service商configurationnot存in', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('servicequotientconfigurationnot存in', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerConfigEntity->getStatus()->isEnabled()) {
-            $this->logger->info('service商configurationbedisable', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('servicequotientconfigurationbedisable', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
 
-        // getservice商
+        // getservicequotient
         $providerEntity = $this->providerManager->getProvidersByIds($providerDataIsolation, [$providerConfigEntity->getServiceProviderId()])[$providerConfigEntity->getServiceProviderId()] ?? null;
 
         if (! $providerEntity) {
-            $this->logger->info('service商not存in', ['model' => $model, 'provider_id' => $providerConfigEntity->getServiceProviderId()]);
+            $this->logger->info('servicequotientnot存in', ['model' => $model, 'provider_id' => $providerConfigEntity->getServiceProviderId()]);
             return null;
         }
 

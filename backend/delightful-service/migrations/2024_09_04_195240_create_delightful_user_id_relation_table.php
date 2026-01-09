@@ -16,12 +16,12 @@ return new class extends Migration {
     {
         Schema::create('delightful_user_id_relation', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('userid,organizationdown唯一.其他open_id,union_idneedaccording touser_idgenerate')->default('');
+            $table->string('user_id', 64)->comment('userid,organizationdown唯one.其他open_id,union_idneedaccording touser_idgenerate')->default('');
             $table->string('id_type', 12)->comment('idtype:open_id/union_id')->default('');
             $table->string('id_value', 64)->comment('idtypeto应value')->default('');
             $table->string('relation_type', 12)->comment('idto应associatetype:applicationencoding/create该applicationorganizationencoding')->default('');
             $table->string('relation_value', 64)->comment('idto应associatetypevalue')->default('');
-            // 确定唯一value,防conflict
+            // 确定唯onevalue,防conflict
             $table->unique(['id_type', 'id_value', 'relation_type', 'relation_value'], 'unq_id_relation');
             // 便at按organization/applicationetcfind所haveassociateuser
             $table->index(['relation_type', 'relation_value'], 'idx_relation');

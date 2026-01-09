@@ -79,7 +79,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
      */
     public function validate(): bool
     {
-        // verifyrolenamenot能for空
+        // verifyrolenamenot能forempty
         if (empty(trim($this->name))) {
             return false;
         }
@@ -124,7 +124,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         $errors = [];
 
         if (empty(trim($this->name))) {
-            $errors[] = 'rolenamenot能for空';
+            $errors[] = 'rolenamenot能forempty';
         }
 
         if (strlen($this->name) > 255) {

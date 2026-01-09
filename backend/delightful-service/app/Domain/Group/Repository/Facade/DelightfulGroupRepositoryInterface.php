@@ -15,7 +15,7 @@ interface DelightfulGroupRepositoryInterface
     // creategroup
     public function createGroup(DelightfulGroupEntity $delightfulGroupDTO): DelightfulGroupEntity;
 
-    // 批quantityquerygroupinformation
+    // batchquantityquerygroupinformation
 
     /**
      * @return DelightfulGroupEntity[]

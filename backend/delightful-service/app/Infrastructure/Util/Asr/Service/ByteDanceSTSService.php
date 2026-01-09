@@ -201,7 +201,7 @@ class ByteDanceSTSService
         $accessToken = config('asr.volcengine.token');
 
         if (empty($appId) || empty($accessToken)) {
-            $this->logger->error('ASRconfigurationnot完整', [
+            $this->logger->error('ASRconfigurationnotcomplete', [
                 'app_id_exists' => ! empty($appId),
                 'access_token_exists' => ! empty($accessToken),
             ]);

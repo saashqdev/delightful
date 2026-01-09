@@ -103,7 +103,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * delete笔记file（笔记contentfor空o clockcleanup）.
+     * delete笔记file（笔记contentforemptyo clockcleanup）.
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -257,7 +257,7 @@ readonly class AsrPresetFileService
         string $workDir,
         string $logPrefix
     ): TaskFileEntity {
-        // 完整 file_key
+        // complete file_key
         $fileKey = AsrAssembler::buildFileKey($fullPrefix, $workDir, $relativePath);
 
         // yuandata

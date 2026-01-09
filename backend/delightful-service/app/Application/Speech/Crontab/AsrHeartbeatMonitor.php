@@ -27,11 +27,11 @@ use Throwable;
  * ASR 录音core跳monitorscheduletask.
  */
 #[Crontab(
-    rule: '* * * * *',                    // eachminute钟execute一time
+    rule: '* * * * *',                    // eachminute钟executeonetime
     name: 'AsrHeartbeatMonitor',
-    singleton: true,                      // 单例模type防止重复execute
+    singleton: true,                      // single例模type防止重复execute
     mutexExpires: 60,                     // 互斥lockexpiretime（second），to应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
-    onOneServer: true,                    // 仅in一台service器upexecute
+    onOneServer: true,                    // 仅inone台service器upexecute
     callback: 'execute',
     memo: 'ASR recording heartbeat monitoring task'
 )]
@@ -211,7 +211,7 @@ class AsrHeartbeatMonitor
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
         try {
-            // 幂etcpropertycheck：iftask已complete，skipprocess
+            // poweretcpropertycheck：iftask已complete，skipprocess
             if ($taskStatus->isSummaryCompleted()) {
                 $this->logger->info('task已complete，skipcore跳timeoutprocess', [
                     'task_key' => $taskStatus->taskKey,

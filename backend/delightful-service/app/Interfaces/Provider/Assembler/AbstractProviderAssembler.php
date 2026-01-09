@@ -16,7 +16,7 @@ use Hyperf\Contract\TranslatorInterface;
 abstract class AbstractProviderAssembler
 {
     /**
-     * 批quantityconvertarrayto实body.
+     * batchquantityconvertarrayto实body.
      * @template T of object
      * @param class-string<T> $entityClass 实bodycategory名
      * @param array $dataArray dataarray
@@ -36,7 +36,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * 批quantityconvert实bodytoarray.
+     * batchquantityconvert实bodytoarray.
      * @param array $entities 实bodyarray
      */
     protected static function batchToArrays(array $entities): array

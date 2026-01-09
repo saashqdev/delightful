@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * department一些optional操as.
+ * departmentone些optional操as.
  */
 enum DepartmentOption: int
 {

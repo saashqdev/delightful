@@ -108,7 +108,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $this->sendMessageForStreamApi($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
 
-        // Chat call，eachtimestreamallis一item新message
+        // Chat call，eachtimestreamallisoneitem新message
         if ($executionData->getExecutionType()->isImChat()) {
             $this->sendMessageForStreamIMChat($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
@@ -398,7 +398,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         foreach ($recipientsData as $recipient) {
             $userId = null;
             if (is_array($recipient)) {
-                // 引入一time
+                // 引入onetime
                 if (isset($recipient['type'])) {
                     switch ($recipient['type']) {
                         case 'department':
@@ -437,7 +437,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $userIds = array_merge($userIds, $this->getUserIdsByDepartmentIds($executionData, $departmentIds));
         }
 
-        // iffor空，兜bottomcurrentuser
+        // ifforempty，兜bottomcurrentuser
         if (empty($userIds)) {
             $userIds[] = $executionData->getOperator()->getUid();
         }

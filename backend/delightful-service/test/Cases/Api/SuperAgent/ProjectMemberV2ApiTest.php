@@ -152,7 +152,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test批quantity操aspermission控制.
+     * testbatchquantity操aspermission控制.
      */
     public function testBatchOperationsPermissionControl(): void
     {
@@ -163,14 +163,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
 
-        // 2. non管理者尝试批quantityupdatepermission - shouldfail
+        // 2. non管理者尝试batchquantityupdatepermission - shouldfail
         $this->switchUserTest2();
         $this->batchUpdateMemberPermissions($projectId, 51202);
 
-        // 3. non管理者尝试批quantitydeletemember - shouldfail
+        // 3. non管理者尝试batchquantitydeletemember - shouldfail
         $this->batchDeleteMembers($projectId, 51202);
 
-        // 4. 管理者canconduct批quantity操as
+        // 4. 管理者canconductbatchquantity操as
         $this->switchUserTest1();
         $this->batchUpdateMemberPermissions($projectId);
         $this->batchDeleteMembers($projectId);
@@ -436,7 +436,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 批quantityupdatememberpermission.
+     * batchquantityupdatememberpermission.
      */
     public function batchUpdateMemberPermissions(string $projectId, int $expectedCode = 1000): array
     {
@@ -469,7 +469,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 批quantitydeletemember.
+     * batchquantitydeletemember.
      */
     public function batchDeleteMembers(string $projectId, int $expectedCode = 1000): array
     {

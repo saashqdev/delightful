@@ -158,7 +158,7 @@ class DelightfulAgentDomainService
         return $this->agentRepository->isDefaultAssistantConversationExist($userId, $aiCode);
     }
 
-    // 商业code目frontalsodependency
+    // quotient业code目frontalsodependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
         // getdata隔离objectandgetcurrentorganizationorganizationcode
@@ -180,9 +180,9 @@ class DelightfulAgentDomainService
 
         $agents = DelightfulAgentVersionFactory::toArrays($agents);
 
-        // 收集助理avatarfile键
+        // 收collection助理avatarfile键
         $fileKeys = array_column($agents, 'agent_avatar');
-        // 移except空value
+        // 移exceptemptyvalue
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
 
         // 按organizationminutegroupfileKeys
@@ -194,7 +194,7 @@ class DelightfulAgentDomainService
             }
         }
 
-        // 按organization批quantitygetlink
+        // 按organizationbatchquantitygetlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->cloudFileRepository->getLinks($orgCode, $fileKeys);

@@ -38,8 +38,8 @@ readonly class AsrTitleGeneratorService
     /**
      * according todifferent场景generatetitle.
      *
-     * 场景一：have asr_stream_content（front端实o clock录音），直接usecontentgeneratetitle
-     * 场景二：have file_id（upload已havefile），buildhint词generatetitle
+     * 场景one：have asr_stream_content（front端实o clock录音），直接usecontentgeneratetitle
+     * 场景two：have file_id（upload已havefile），buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $asrStreamContent ASRstream识别content
@@ -58,7 +58,7 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // 场景一：have asr_stream_content（front端实o clock录音）
+            // 场景one：have asr_stream_content（front端实o clock录音）
             if (! empty($asrStreamContent)) {
                 $customPrompt = AsrPromptAssembler::getTitlePrompt($asrStreamContent, $note, $language);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
@@ -68,7 +68,7 @@ readonly class AsrTitleGeneratorService
                 return $this->sanitizeTitle($title);
             }
 
-            // 场景二：have file_id（upload已havefile）
+            // 场景two：have file_id（upload已havefile）
             if (! empty($fileId)) {
                 $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
                 if ($fileEntity === null) {
@@ -145,7 +145,7 @@ readonly class AsrTitleGeneratorService
                     );
                 }
 
-                // get完整录音总结hint词
+                // getcomplete录音总结hint词
                 $customPrompt = AsrPromptAssembler::getTitlePrompt(
                     $taskStatus->asrStreamContent,
                     $note,
@@ -261,7 +261,7 @@ readonly class AsrTitleGeneratorService
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // have笔记情况："请帮我 @yearwillsolutiondiscussion.webm 录音contentand @yearwill笔记.md content转化for一share超level产物"
+            // have笔记情况："请帮我 @yearwillsolutiondiscussion.webm 录音contentand @yearwill笔记.md content转化foroneshare超level产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofile情况："请帮我 @yearwillsolutiondiscussion.webm 录音content转化for一share超level产物"
+        // onlyaudiofile情况："请帮我 @yearwillsolutiondiscussion.webm 录音content转化foroneshare超level产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

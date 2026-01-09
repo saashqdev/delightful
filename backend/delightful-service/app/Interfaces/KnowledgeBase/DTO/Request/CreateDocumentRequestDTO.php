@@ -44,7 +44,7 @@ class CreateDocumentRequestDTO extends AbstractRequestDTO
             'name.required' => 'documentnamecannotfornull',
             'name.max' => 'documentnamelengthcannot超pass255character',
             'doc_type.required' => 'documenttypecannotfornull',
-            'doc_type.integer' => 'documenttypemustfor整数',
+            'doc_type.integer' => 'documenttypemustforinteger',
             'doc_type.min' => 'documenttypemustgreater thanequal0',
         ];
     }

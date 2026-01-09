@@ -128,7 +128,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
      */
     public function setModelIds(array $modelIds): void
     {
-        // 这method保留useattobackcompatible，butactualupneed完整modelinfo
+        // 这method保留useattobackcompatible，butactualupneedcompletemodelinfo
         // suggestionuse setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {

@@ -115,7 +115,7 @@ class QwenImageAPI
             ],
         ];
 
-        // addgraphliketocontentmiddle（只取the一张image）
+        // addgraphliketocontentmiddle（只取theone张image）
         if (isset($params['image_urls']) && ! empty($params['image_urls'])) {
             $body['input']['messages'][0]['content'][] = [
                 'image' => $params['image_urls'][0],

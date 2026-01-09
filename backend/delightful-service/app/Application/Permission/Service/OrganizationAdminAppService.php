@@ -167,7 +167,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
                 'job_title' => $departmentUser->getJobTitle(),
             ];
         } catch (Exception $e) {
-            // ifgetdepartmentinfofail，return空array
+            // ifgetdepartmentinfofail，returnemptyarray
             return [];
         }
     }

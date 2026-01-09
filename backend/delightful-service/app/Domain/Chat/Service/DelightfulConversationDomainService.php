@@ -171,7 +171,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 return [];
             }
             $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-            // generate控制message,pushgive收hair双hair
+            // generate控制message,pushgive收hairdoublehair
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($messageStruct->getConversationId());
             if ($receiveConversationEntity === null) {
                 // checkto方whether存inconversation,ifnot存in直接return
@@ -278,7 +278,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             ],
         ];
         $seqEntity = SeqAssembler::getSeqEntity($seqData);
-        // seq also加up topicId
+        // seq alsoaddup topicId
         $pushData = SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
         // 直接pushmessagegive收item方
         SocketIOUtil::sendIntermediate(SocketEventType::Intermediate, $receiveUserEntity->getDelightfulId(), $pushData);
@@ -296,7 +296,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
-        // give这些群member批quantitygeneratecreateconversationwindowmessage
+        // give这些群memberbatchquantitygeneratecreateconversationwindowmessage
         $conversationsCreateDTO = [];
         $conversationsUpdateIds = [];
         foreach ($users as $user) {
@@ -391,7 +391,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             if (in_array($conversationDTO->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
                 # createconversationwindow
                 $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
-                # 准备generate一conversationwindow
+                # 准备generateoneconversationwindow
                 $conversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
 
                 # 触hairconversationcreateevent

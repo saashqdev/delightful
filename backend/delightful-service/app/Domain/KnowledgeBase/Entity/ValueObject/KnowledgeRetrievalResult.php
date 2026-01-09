@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge base检索resultvalueobject.
  *
- * 统一table示fromdifferent检索method（语义检索、all文检索、graph检索etc）return知识slicesegment
+ * 统onetable示fromdifferent检索method（语义检索、all文检索、graph检索etc）return知识slicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
@@ -37,7 +37,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     public const string TYPE_HYBRID = 'hybrid';
 
     /**
-     * 唯一identifier.
+     * 唯oneidentifier.
      */
     private string $id = '';
 
@@ -66,7 +66,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     /**
      * fromknowledge baseslicesegment实bodycreate检索result.
      *
-     * @param string $id 唯一identifier
+     * @param string $id 唯oneidentifier
      * @param string $content content
      * @param string $businessId 业务ID
      * @param array $metadata yuandata
@@ -92,7 +92,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     /**
      * fromgraphdatacreate检索result.
      *
-     * @param string $id 唯一identifier
+     * @param string $id 唯oneidentifier
      * @param string $content content
      * @param string $businessId 业务ID
      * @param array $metadata yuandata
@@ -114,7 +114,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * create空检索result.
+     * createempty检索result.
      */
     public static function empty(): self
     {
@@ -122,7 +122,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * get唯一identifier.
+     * get唯oneidentifier.
      */
     public function getId(): string
     {
@@ -130,9 +130,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * set唯一identifier.
+     * set唯oneidentifier.
      *
-     * @param string $id 唯一identifier
+     * @param string $id 唯oneidentifier
      */
     public function setId(string $id): self
     {

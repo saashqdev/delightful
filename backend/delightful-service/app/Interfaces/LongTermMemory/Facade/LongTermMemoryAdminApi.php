@@ -302,7 +302,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
 
-        // 批quantityverify记忆whether属atcurrentuser
+        // batchquantityverify记忆whether属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             [$memoryId],
             $authorization->getOrganizationCode(),
@@ -327,7 +327,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批quantity强化记忆.
+     * batchquantity强化记忆.
      */
     public function reinforceMemories(RequestInterface $request): array
     {
@@ -340,7 +340,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批quantityverify所have记忆all属atcurrentuser
+        // batchquantityverify所have记忆all属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -365,7 +365,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批quantityprocess记忆suggestion（接受/reject）.
+     * batchquantityprocess记忆suggestion（接受/reject）.
      */
     public function batchProcessMemorySuggestions(RequestInterface $request): array
     {
@@ -381,7 +381,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批quantityverify所have记忆all属atcurrentuser
+        // batchquantityverify所have记忆all属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // 批quantity接受记忆suggestion：status 改for accept，enabled for true
+                // batchquantity接受记忆suggestion：status 改for accept，enabled for true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
@@ -453,7 +453,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批quantityupdate记忆enablestatus.
+     * batchquantityupdate记忆enablestatus.
      */
     public function batchUpdateMemoryStatus(RequestInterface $request): array
     {
@@ -581,7 +581,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // verifycontentandpending_content只能二选一
+        // verifycontentandpending_content只能two选one
         $hasContent = ! empty($validatedParams['content']);
         $hasPendingContent = ! empty($validatedParams['pending_content']);
 
@@ -652,7 +652,7 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO（lengthcheck已inparameterverify阶segmentcomplete，andat leasthave一fieldnotfor空）
+        // buildDTO（lengthcheck已inparameterverify阶segmentcomplete，andat leasthaveonefieldnotforempty）
         $status = null;
         $explanation = null;
 

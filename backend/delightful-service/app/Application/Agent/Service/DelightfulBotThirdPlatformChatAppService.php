@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => 'not好意思，meanwhile问我issuepersontoo多啦，havepoint忙notpasscome，你can一will儿againcome问我吗？感谢谅解！']);
+                        $message = new TextMessage(['content' => 'not好意思，meanwhile问我issuepersontoo多啦，havepoint忙notpasscome，你canonewill儿againcome问我吗？感谢谅解！']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });
@@ -215,7 +215,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (count($accounts) === 0) {
             ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
-        // callinterface，换取the三方user id
+        // callinterface，换取thethree方user id
         $parallel = new Parallel(2);
         $thirdPlatformChat = ThirdPlatformChatFactory::make($chatEntity);
         $requestId = CoContext::getRequestId();
@@ -228,7 +228,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         $thirdPlatformUserIds = [];
         $ownerThirdPlatformUserId = '';
         $result = $parallel->wait();
-        // 二位array转become一维
+        // two位array转becomeone维
         foreach ($result as $item) {
             if ($item['delightful_id'] == $userAuthorization->getDelightfulId()) {
                 $ownerThirdPlatformUserId = $item['third_user_id'];

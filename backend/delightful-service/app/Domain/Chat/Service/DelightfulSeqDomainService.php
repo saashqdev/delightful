@@ -104,7 +104,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             }
             $senderUserEntity = null; // （personcategory）send方 user_entity
             if ($seqEntity->getConversationId()) {
-                // 这withinconversationwindowis aifrom己，那么to方ispersoncategory（alsomaybeis另一 ai，if存in ai 互撩话）
+                // 这withinconversationwindowis aifrom己，那么to方ispersoncategory（alsomaybeis另one ai，if存in ai 互撩话）
                 $conversationEntity = $this->delightfulConversationRepository->getConversationById($seqEntity->getConversationId());
                 if ($conversationEntity === null) {
                     $this->logger->error('UserCallAgentEventError delightful_conversation_id:{delightful_conversation_id} conversation not found', ['delightful_conversation_id' => $seqEntity->getConversationId()]);
@@ -112,7 +112,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($conversationEntity->getReceiveId());
             } elseif ($seqEntity->getSeqType() === ControlMessageType::AddFriendSuccess) {
-                // 因for加好友nothaveconversationwindow，所byneedaccording tomessagesendid查outto方 user_entity
+                // 因foradd好友nothaveconversationwindow，所byneedaccording tomessagesendid查outto方 user_entity
                 /** @var AddFriendMessage $seqContent */
                 $seqContent = $seqEntity->getContent();
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($seqContent->getUserId());
@@ -173,8 +173,8 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 break;
             case ConversationType::User:
-                // todo 一定要做! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomer端returnack,然backupdateseqstatus
-                // todo 一定要做! 只推seq_id,publishsubscribe收toseq_idback,againgodatabase查seqdetail,again推givecustomer端
+                // todo one定要做! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomer端returnack,然backupdateseqstatus
+                // todo one定要做! 只推seq_id,publishsubscribe收toseq_idback,againgodatabase查seqdetail,again推givecustomer端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // notprint敏感info
                 $pushLogData = [
@@ -340,7 +340,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         // onlychatmessageand已读return执才触hairflow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
-            // getuser真名
+            // getusertrue名
             $senderAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
             // open协程，copy requestId
             $requestId = CoContext::getRequestId();
@@ -348,7 +348,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);
-            // callflowmaybevery耗o clock,not能letcustomer端一直etc待
+            // callflowmaybevery耗o clock,not能letcustomer端one直etc待
             Coroutine::create(function () use (
                 $agentAccountEntity,
                 $agentUserEntity,
@@ -382,7 +382,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                         'code' => $throwable->getCode(),
                         'trace' => $throwable->getTraceAsString(),
                     ]);
-                    // return一item国际化报错message
+                    // returnoneitem国际化报错message
                     event_dispatch(new UserCallAgentFailEvent($seqEntity));
                 }
             });

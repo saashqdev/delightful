@@ -80,7 +80,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlikeandreturnOpenAIformatresponse - V2一body化version.
+     * generategraphlikeandreturnOpenAIformatresponse - V2onebody化version.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -121,7 +121,7 @@ class VolcengineModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('Volcengine OpenAIformat生graph：单requestfail', [
+                    $this->logger->error('Volcengine OpenAIformat生graph：singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -644,7 +644,7 @@ class VolcengineModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willberelease
+            // ensurelockone定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }
@@ -755,7 +755,7 @@ class VolcengineModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledown一张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimage保持originalstatus
             }
         }
 

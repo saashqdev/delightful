@@ -39,7 +39,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
         $result = $this->getChatMessageResult($executionData);
 
-        // content or者 files meanwhilefor空
+        // content or者 files meanwhileforempty
         if ($result['message_content'] === '' && empty($executionData->getTriggerData()->getAttachments())) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.start.content_empty');
         }
@@ -131,7 +131,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 if ($property->getType()->isComplex()) {
                     $value = $appendConstValue[$key] ?? [];
                     if (is_string($value)) {
-                        // 尝试一time json_decode
+                        // 尝试onetime json_decode
                         $value = json_decode($value, true);
                     }
                     if (! is_array($value)) {

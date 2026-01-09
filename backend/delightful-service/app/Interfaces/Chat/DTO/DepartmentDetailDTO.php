@@ -44,7 +44,7 @@ class DepartmentDetailDTO extends AbstractDTO
     public ?int $employeeSum = null;
 
     /**
-     * databasemiddlenothave此field，偷懒写。批quantitywritedatabaseo clock，toArray() backneedhand动 unset 掉。
+     * databasemiddlenothave此field，偷懒写。batchquantitywritedatabaseo clock，toArray() backneedhand动 unset 掉。
      */
     public ?bool $hasChild = null;
 

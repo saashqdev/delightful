@@ -19,7 +19,7 @@ use InvalidArgumentException;
 class AdminModeGroupAppService extends AbstractModeAppService
 {
     /**
-     * according tomodeIDgetminutegroupcolumn表 (管理back台use，contain完整i18nfield).
+     * according tomodeIDgetminutegroupcolumn表 (管理back台use，containcompletei18nfield).
      */
     public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {

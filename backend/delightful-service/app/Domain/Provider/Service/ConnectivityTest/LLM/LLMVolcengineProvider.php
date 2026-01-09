@@ -19,7 +19,7 @@ use Hyperf\Codec\Json;
 use function Hyperf\Translation\__;
 
 /**
- * 火山service商.
+ * 火山servicequotient.
  */
 class LLMVolcengineProvider implements IProvider
 {

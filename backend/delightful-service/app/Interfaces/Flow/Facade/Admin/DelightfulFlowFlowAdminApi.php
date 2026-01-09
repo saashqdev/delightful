@@ -60,7 +60,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * sectionpoint单pointdebug.
+     * sectionpointsinglepointdebug.
      */
     public function singleDebugNode()
     {
@@ -133,7 +133,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * querycanusetool集.
+     * querycanusetoolcollection.
      */
     public function queryToolSets()
     {

@@ -123,7 +123,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
         }
 
         try {
-            // 3. graphlikegenerate（synchandle，Azure OpenAI API support n parameter一timepropertygenerate多张image）
+            // 3. graphlikegenerate（synchandle，Azure OpenAI API support n parameteronetimepropertygenerate多张image）
             if (! empty($imageGenerateRequest->getReferenceImages())) {
                 $editModel = new AzureOpenAIImageEditModel($this->configItem);
                 $editRequest = $this->convertToEditRequest($imageGenerateRequest);
@@ -309,7 +309,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledown一张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimage保持originalstatus
             }
         }
 
@@ -373,7 +373,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data
             }
 
-            // 只returnURLformat，and其他model保持一致
+            // 只returnURLformat，and其他model保持one致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

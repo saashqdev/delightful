@@ -59,7 +59,7 @@ class InstructionConfig extends AbstractEntity
     protected bool $sendDirectly = false;
 
     /**
-     * finger令groupitemtype，1 单option 2 switch 3 texttype 4 statustype.
+     * finger令groupitemtype，1 singleoption 2 switch 3 texttype 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 
@@ -128,7 +128,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setDisplayType($displayType): void
     {
-        // ensure display_type is整数type
+        // ensure display_type isintegertype
         $this->displayType = is_numeric($displayType) ? (int) $displayType : InstructionDisplayType::Normal->value;
     }
 
@@ -149,7 +149,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInsertLocation($insertLocation): void
     {
-        // ensure insert_location is整数type
+        // ensure insert_location isintegertype
         $this->insertLocation = is_numeric($insertLocation) ? (int) $insertLocation : InstructionInsertLocation::Cursor->value;
     }
 
@@ -160,7 +160,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInstructionType($instructionType): void
     {
-        // ensure instruction_type is整数type
+        // ensure instruction_type isintegertype
         $this->instructionType = is_numeric($instructionType) ? (int) $instructionType : InstructionType::Conversation->value;
     }
 
@@ -192,7 +192,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setType($type): void
     {
-        // ensure type is整数type
+        // ensure type isintegertype
         $this->type = is_numeric($type) ? (int) $type : InstructionComponentType::Radio->value;
     }
 
@@ -321,7 +321,7 @@ class InstructionConfig extends AbstractEntity
      * typeforswitcho clock，name 取is open/close，value 取 $instruction->getOn / $instruction->getOff
      * typeforsingle-selecto clock, name 取is displayname，value：$instructionValue
      * typeforstatusbuttono clock，name 取isstatustext，value: $instructionValue
-     * default name for空， value = $instructionValue
+     * default name forempty， value = $instructionValue
      *
      * @param string $instructionValue finger令value
      * @return array returncontain name and value array

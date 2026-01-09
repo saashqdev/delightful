@@ -32,11 +32,11 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
      */
     public const string QUESTION_DELIMITER = 'question_';
 
-    # searchlevel别：简单/search
+    # searchlevel别：简single/search
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issueassociateissue。supportassociateissueagain产生子issue，butiswillbe拍平become二维array。
+     * 子issueassociateissue。supportassociateissueagain产生子issue，butiswillbe拍平becometwo维array。
      * @var array<string,QuestionItem[]>
      * @example according touserinputissue，generateassociateissue。
      */
@@ -78,8 +78,8 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
 
     /**
      * get本timeneedstreampushfield。
-     * support一timepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 其middle * isfingerarraydown标。
-     * service端willcache所havestreamdata，andinstreamendo clock一timepropertypush，bydecrease丢package概rate，提升message完整property。
+     * supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 其middle * isfingerarraydown标。
+     * service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，提升messagecompleteproperty。
      * for example：
      * [
      *     'users.0.name' => 'delightful',
@@ -113,14 +113,14 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "小米集团旗downhave哪些品牌"
+        //                "question": "小米collection团旗downhave哪些品牌"
         //            }
         //        ],
         //        "question_1": [
         //            {
         //                "parent_question_id": "1",
         //                "question_id": "3",
-        //                "question": "百degreeis干嘛"
+        //                "question": "hundreddegreeis干嘛"
         //            }
         //        ]
         //    }
@@ -135,7 +135,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
                     $this->associateQuestions[$itemKey][] = $questionItem;
                 }
             } else {
-                // 单QuestionItem情况
+                // singleQuestionItem情况
                 $questionItem = $data instanceof QuestionItem ? $data : new QuestionItem($data);
                 $itemKey = self::QUESTION_DELIMITER . $questionItem->getParentQuestionId();
                 $this->associateQuestions[$itemKey][] = $questionItem;

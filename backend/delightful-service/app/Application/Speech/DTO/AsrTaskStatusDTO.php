@@ -29,7 +29,7 @@ class AsrTaskStatusDTO
     public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表backreturnID）
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名（andaudiofilein同一directory，fornull表示无笔记file）
+    public ?string $noteFileName = null; // notefile名（andaudiofilein同onedirectory，fornull表示无笔记file）
 
     public ?string $noteFileId = null; // notefileID（useatchatmessagemiddlefilequote）
 
@@ -203,7 +203,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check总结whether已complete（幂etcproperty判断）.
+     * check总结whether已complete（poweretcproperty判断）.
      * 判断standard：audiofile已merge（audioFileId 存in）and录音已stop.
      */
     public function isSummaryCompleted(): bool
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 判断service端总结whethertocustomer端加lock.
+     * 判断service端总结whethertocustomer端addlock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -222,7 +222,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * record一timeservice端总结尝试.
+     * recordonetimeservice端总结尝试.
      */
     public function markServerSummaryAttempt(): void
     {
@@ -231,7 +231,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * in一timeservice端总结endbackupdatestatus.
+     * inonetimeservice端总结endbackupdatestatus.
      */
     public function finishServerSummaryAttempt(bool $success): void
     {
@@ -244,7 +244,7 @@ class AsrTaskStatusDTO
     /**
      * extract相toat workspace 相topath
      * ifpathcontain workspace/，extract其back部minute
-     * 这样canfrom动修正 Redis middlestorage旧formatdata（完整path）.
+     * 这样canfrom动修正 Redis middlestorage旧formatdata（completepath）.
      *
      * @param null|string $path originalpath
      * @return null|string 相topath
@@ -282,7 +282,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelget整数value（support snake_case and camelCase）.
+     * fromarraymiddle按优先levelgetintegervalue（support snake_case and camelCase）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名column表（按优先levelsort）
@@ -327,7 +327,7 @@ class AsrTaskStatusDTO
                 return false;
             }
 
-            // 其他value按真value判断
+            // 其他value按truevalue判断
             return (bool) $value;
         }
 

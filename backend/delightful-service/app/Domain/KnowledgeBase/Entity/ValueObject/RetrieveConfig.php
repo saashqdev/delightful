@@ -59,7 +59,7 @@ class RetrieveConfig extends AbstractValueObject
      *
      * optionalvalue：
      * - reranking_model: use重sortmodel
-     * - weighted_score: use加权minute数
+     * - weighted_score: useadd权minute数
      *
      * @see RerankMode
      */

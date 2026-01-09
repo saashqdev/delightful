@@ -102,7 +102,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GoogleGemini OpenAIformat生graph：单requestfail', [
+                    $this->logger->error('GoogleGemini OpenAIformat生graph：singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -180,7 +180,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         try {
             // ifhave参考graphlike，thenexecutegraphlikeedit
             if (! empty($referImages)) {
-                // 取the一张参考graphlikeconductedit
+                // 取theone张参考graphlikeconductedit
                 $referImage = $referImages[0];
                 $result = $this->processImageEdit($referImage, $prompt);
             } else {
@@ -252,7 +252,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini APIeachtime只能generate一张graph，passandhaircallimplement多graphgenerate
+        // Google Gemini APIeachtime只能generateone张graph，passandhaircallimplement多graphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -401,7 +401,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data（but这usuallynotshouldhair生）
             }
 
-            // 只returnURLformat，and其他model保持一致
+            // 只returnURLformat，and其他model保持one致
             $currentData[] = [
                 'url' => $processedUrl,
             ];
@@ -422,7 +422,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willberelease
+            // ensurelockone定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }

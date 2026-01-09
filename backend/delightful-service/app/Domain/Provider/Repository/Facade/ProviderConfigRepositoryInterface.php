@@ -32,19 +32,19 @@ interface ProviderConfigRepositoryInterface
     public function delete(ProviderDataIsolation $dataIsolation, string $id): void;
 
     /**
-     * passconfigurationIDandorganizationencodinggetservice商configuration实body.
+     * passconfigurationIDandorganizationencodinggetservicequotientconfiguration实body.
      *
-     * @param string $serviceProviderConfigId service商configurationID
+     * @param string $serviceProviderConfigId servicequotientconfigurationID
      * @param string $organizationCode organizationencoding
-     * @return null|ProviderConfigEntity service商configuration实body
+     * @return null|ProviderConfigEntity servicequotientconfiguration实body
      */
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity;
 
     /**
-     * according toservice商IDfindconfiguration（按ID升序取first）.
+     * according toservicequotientIDfindconfiguration（按ID升序取first）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param int $serviceProviderId service商ID
+     * @param int $serviceProviderId servicequotientID
      * @return null|ProviderConfigEntity configuration实body
      */
     public function findFirstByServiceProviderId(ProviderDataIsolation $dataIsolation, int $serviceProviderId): ?ProviderConfigEntity;
@@ -66,10 +66,10 @@ interface ProviderConfigRepositoryInterface
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 
     /**
-     * getorganizationdown所haveenableservice商configuration.
+     * getorganizationdown所haveenableservicequotientconfiguration.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @return array<ProviderConfigEntity> service商configuration实bodyarray
+     * @return array<ProviderConfigEntity> servicequotientconfiguration实bodyarray
      */
     public function getAllByOrganization(ProviderDataIsolation $dataIsolation): array;
 }

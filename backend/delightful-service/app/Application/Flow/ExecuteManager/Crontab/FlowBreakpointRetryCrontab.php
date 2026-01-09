@@ -84,7 +84,7 @@ class FlowBreakpointRetryCrontab
             $flowEntity = $archive['delightful_flow'];
             /** @var ExecutionData $executionData */
             $executionData = $archive['execution_data'];
-            // reset一些record
+            // resetone些record
             $executionData->rewind();
 
             $executor = new DelightfulFlowExecutor($flowEntity, $executionData, lastDelightfulFlowExecuteLogEntity: $delightfulFlowExecuteLogEntity);

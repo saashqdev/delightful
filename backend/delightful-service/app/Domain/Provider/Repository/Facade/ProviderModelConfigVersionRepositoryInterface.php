@@ -13,8 +13,8 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 interface ProviderModelConfigVersionRepositoryInterface
 {
     /**
-     * savemodelconfigurationversion（containversionnumber递增andmarkcurrentversion完整逻辑）.
-     * usetransactionensuredata一致property.
+     * savemodelconfigurationversion（containversionnumber递增andmarkcurrentversioncomplete逻辑）.
+     * usetransactionensuredataone致property.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param ProviderModelConfigVersionEntity $entity configurationversion实body

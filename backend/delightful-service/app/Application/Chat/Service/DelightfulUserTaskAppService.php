@@ -83,7 +83,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
-        // compatibleflow middleconversation_id 跟chat middleconversation_id not一致issue
+        // compatibleflow middleconversation_id 跟chat middleconversation_id notone致issue
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
@@ -459,7 +459,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     // get node 运lineresult
     //     foreach ($delightfulFlow->getNodes() as $node) {
     //         if ($node->getNodeDebugResult()) {
-    //             // have一failthen判定forfail
+    //             // haveonefailthen判定forfail
     //             if (! $node->getNodeDebugResult()->isSuccess()) {
     //                 $result['success'] = false;
     //             }

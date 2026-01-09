@@ -149,7 +149,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 批quantitydeleterecord.
+     * batchquantitydeleterecord.
      */
     public function batchDelete(array $ids): bool
     {

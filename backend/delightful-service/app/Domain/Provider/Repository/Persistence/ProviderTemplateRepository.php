@@ -16,7 +16,7 @@ use App\Interfaces\Provider\Assembler\ProviderConfigIdAssembler;
 use DateTime;
 
 /**
- * service商templategenerate仓储
+ * servicequotienttemplategenerate仓储
  * supportfor所have ProviderCode generatetemplateconfiguration.
  */
 readonly class ProviderTemplateRepository
@@ -27,22 +27,22 @@ readonly class ProviderTemplateRepository
     }
 
     /**
-     * get所haveservice商templatecolumn表.
-     * @param Category $category service商category
-     * @return ProviderConfigDTO[] service商templatecolumn表
+     * get所haveservicequotienttemplatecolumn表.
+     * @param Category $category servicequotientcategory
+     * @return ProviderConfigDTO[] servicequotienttemplatecolumn表
      */
     public function getAllProviderTemplates(Category $category): array
     {
         $templates = [];
 
-        // getfinger定categorydown所haveenableservice商
+        // getfinger定categorydown所haveenableservicequotient
         $providers = $this->providerRepository->getByCategory($category);
 
         foreach ($providers as $provider) {
-            // foreachservice商createtemplateconfiguration
+            // foreachservicequotientcreatetemplateconfiguration
             $templateId = ProviderConfigIdAssembler::generateProviderTemplate($provider->getProviderCode(), $category);
 
-            // except delightful service商，defaultstatusallisclose
+            // except delightful servicequotient，defaultstatusallisclose
             $defaultStatus = $provider->getProviderCode() === ProviderCode::Official
                 ? Status::Enabled
                 : Status::Disabled;

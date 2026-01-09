@@ -18,10 +18,10 @@ use App\Infrastructure\Util\StringMaskUtil;
 use Hyperf\Codec\Json;
 
 /**
- * service_provider_config_id to应service商+modellist。
+ * service_provider_config_id to应servicequotient+modellist。
  *
- * 同一service商indifferentorganizationdownhavedifferent service_provider_config_id。
- * 一service_provider_config_idto应多specificmodel。
+ * 同oneservicequotientindifferentorganizationdownhavedifferent service_provider_config_id。
+ * oneservice_provider_config_idto应多specificmodel。
  */
 class ProviderConfigDTO extends AbstractDTO
 {
@@ -61,7 +61,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected bool $isModelsEnable = true;
 
     /**
-     * forinterfacecompatible，fixedreturn空array.
+     * forinterfacecompatible，fixedreturnemptyarray.
      */
     protected array $models = [];
 

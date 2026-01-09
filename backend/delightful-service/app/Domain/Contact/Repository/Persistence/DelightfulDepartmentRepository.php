@@ -101,13 +101,13 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * getsome一layerleveldepartment.
+     * getsomeonelayerleveldepartment.
      */
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO
     {
         $departments = $this->getSubDepartmentsByLevelCache($level, $organizationCode, $depth, $size, $offset);
         $delightfulDepartmentEntities = $this->getDepartmentsEntity($departments);
-        // down一level子departmenthavenotcan预测quantity，thereforeas long asreturnquantityandlimit一致，then认forhavedown一页
+        // downonelevel子departmenthavenotcan预测quantity，thereforeas long asreturnquantityandlimitone致，then认forhavedownone页
         $hasMore = count($delightfulDepartmentEntities) === $size;
         $pageToken = $hasMore ? (string) ($offset + $size) : '';
         return new DepartmentsPageResponseDTO([
@@ -185,7 +185,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     /**
      * getdepartment所have子departmentmembertotal.
-     * usefrom旋lock避免andhair，一timepropertyquery所havedepartmentdataandcacheto Redis.
+     * usefrom旋lock避免andhair，onetimepropertyquery所havedepartmentdataandcacheto Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
@@ -209,7 +209,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         }
 
         try {
-            // 一timepropertygetorganizationdown所havedepartmentdata
+            // onetimepropertygetorganizationdown所havedepartmentdata
             $allDepartments = $this->getAllDepartmentsForCalculation($organizationCode);
 
             // 计算eachdepartment员工totalandcacheto Redis
@@ -278,7 +278,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * according todepartmentID批quantitydeletedepartment（逻辑delete，set deleted_at field）。
+     * according todepartmentIDbatchquantitydeletedepartment（逻辑delete，set deleted_at field）。
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int
     {
@@ -302,7 +302,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 批quantityget多organizationrootdepartmentinfo.
+     * batchquantityget多organizationrootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
      * @return DelightfulDepartmentEntity[] rootdepartment实bodyarray
      */
@@ -408,7 +408,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 一timepropertygetorganizationdown所havedepartmentdata，useat员工数计算.
+     * onetimepropertygetorganizationdown所havedepartmentdata，useat员工数计算.
      */
     private function getAllDepartmentsForCalculation(string $organizationCode): array
     {
@@ -432,7 +432,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);
         }
 
-        // 2) frombottomtoup：按 level from大to小，子department累计value加to父department
+        // 2) frombottomtoup：按 level from大to小，子department累计valueaddto父department
         usort($allDepartments, static function (array $a, array $b): int {
             return (int) ($b['level'] ?? 0) <=> (int) ($a['level'] ?? 0);
         });
@@ -456,7 +456,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             $departmentSums[$parentId] += $childSum;
         }
 
-        // 批quantitywrite Redis cache
+        // batchquantitywrite Redis cache
         try {
             if (! empty($departmentSums)) {
                 // ensure所havevalueallisstringformat
@@ -465,7 +465,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                     $stringDepartmentSums[$deptId] = (string) $sum;
                 }
                 $this->redis->multi();
-                // use hmset 一timepropertyset多 hash field
+                // use hmset onetimepropertyset多 hash field
                 $this->redis->hmset($cacheKey, $stringDepartmentSums);
                 // setcacheexpiretime
                 $this->redis->expire($cacheKey, 60 * 5);
@@ -493,7 +493,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 直接计算单department员工total（notusecache）.
+     * 直接计算singledepartment员工total（notusecache）.
      */
     private function calculateSelfAndChildrenEmployeeSum(string $organizationCode, string $departmentId): int
     {

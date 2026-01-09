@@ -142,7 +142,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // applicationlayer已haveminute布typelock，这within无需again加lock，直接call
+        // applicationlayer已haveminute布typelock，这within无需againaddlock，直接call
         try {
             // handle总结task
             $result = $this->asrFileAppService->processSummaryWithChat($summaryRequest, $userAuthorization);
@@ -451,7 +451,7 @@ class AsrApi extends AbstractApi
             $asrStreamContent = mb_substr($asrStreamContent, 0, 10000);
         }
 
-        // ifhavefile_idandnothavetask_key，generate一
+        // ifhavefile_idandnothavetask_key，generateone
         if (! empty($fileId) && empty($taskKey)) {
             $taskKey = uniqid('', true);
         }
@@ -623,7 +623,7 @@ class AsrApi extends AbstractApi
         $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
 
         if ($taskStatus->isEmpty()) {
-            // the一timecall：create新taskstatus
+            // theonetimecall：create新taskstatus
             return $this->createNewTaskStatus($taskKey, $topicId, $projectId, $userId, $organizationCode, $generatedTitle);
         }
 
@@ -680,7 +680,7 @@ class AsrApi extends AbstractApi
         string $organizationCode,
         ?string $generatedTitle = null
     ): AsrTaskStatusDTO {
-        $this->logger->info('the一timecall getUploadToken，create新directory', [
+        $this->logger->info('theonetimecall getUploadToken，create新directory', [
             'task_key' => $taskKey,
             'project_id' => $projectId,
             'topic_id' => $topicId,

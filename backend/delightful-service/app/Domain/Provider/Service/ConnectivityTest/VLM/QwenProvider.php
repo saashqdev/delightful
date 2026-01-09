@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\__;
 
 /**
- * 通义千问service商.
+ * 通义thousand问servicequotient.
  */
 class QwenProvider implements IProvider
 {
@@ -44,7 +44,7 @@ class QwenProvider implements IProvider
 
         $body = [];
         // 文生graphconfiguration
-        $body['prompt'] = 'generate一只狗';
+        $body['prompt'] = 'generateone只狗';
         $body['size'] = '1328*1328'; // useqwen-imagesupportdefault1:1size
         $body['n'] = 1;
         $body['model'] = $modelVersion;

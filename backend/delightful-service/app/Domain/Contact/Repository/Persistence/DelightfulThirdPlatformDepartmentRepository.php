@@ -72,7 +72,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     }
 
     /**
-     * getsome一layerleveldepartment.
+     * getsomeonelayerleveldepartment.
      * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getSubDepartmentsByLevel(int $currentDepartmentLevel, string $organizationCode, int $depth, int $size, int $offset): array

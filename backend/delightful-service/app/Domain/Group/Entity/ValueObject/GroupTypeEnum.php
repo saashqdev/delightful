@@ -21,7 +21,7 @@ enum GroupTypeEnum: int
     // inside部project群
     case InternalProject = 4;
 
-    // inside部工单群
+    // inside部工single群
     case InternalWorkOrder = 5;
 
     // outside部群

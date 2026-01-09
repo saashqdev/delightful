@@ -33,7 +33,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 
     /**
      * 1.本groundopenhairo clocknotstart,避免消费testenvironmentdata,导致testenvironmentuser收nottomessage
-     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请一devenvironment,隔离mq.
+     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请onedevenvironment,隔离mq.
      */
     public function isEnable(): bool
     {

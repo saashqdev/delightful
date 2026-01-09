@@ -58,7 +58,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * build完整permission标识.
+     * buildcompletepermission标识.
      */
     public function buildPermission(string $resource, string $operation): string
     {
@@ -136,17 +136,17 @@ class DelightfulPermission implements DelightfulPermissionInterface
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
 
-        // 模piecelayerdefinitionfor二levelresource（即平台直接子resource）
+        // 模piecelayerdefinitionfortwolevelresource（即平台直接子resource）
         if ($enum->parent() === null) {
             // toplevelresource（平台本身）
             $moduleEnum = $enum;
         } else {
             $parent = $enum->parent();
             if ($parent->parent() === null) {
-                // currentresource已经is二levellayerlevel，直接asfor模piece
+                // currentresource已经istwolevellayerlevel，直接asfor模piece
                 $moduleEnum = $enum;
             } else {
-                // more深layerlevel，模piece取父level（二level）
+                // more深layerlevel，模piece取父level（twolevel）
                 $moduleEnum = $parent;
             }
         }
@@ -173,7 +173,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         $operations = $this->getOperations();
 
         foreach ($resources as $resource) {
-            // 仅handle三levelandbyupresource，filter平台and模piecelevel
+            // 仅handlethreelevelandbyupresource，filter平台and模piecelevel
             if (substr_count($resource, '.') < 2) {
                 continue;
             }
@@ -241,7 +241,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $accumKey .= '.' . $segment;
                 $isLastSegment = $index === array_key_last($segments);
 
-                // 取 label：the一segmentuse模piecemiddle文名，其余按rule
+                // 取 label：theonesegmentuse模piecemiddle文名，其remainder按rule
                 $label = match (true) {
                     $index === 0 => $this->getResourceModule($permission['resource']),                // 模piecelayer
                     $isLastSegment => $permission['resource_label'],      // resourcelayer

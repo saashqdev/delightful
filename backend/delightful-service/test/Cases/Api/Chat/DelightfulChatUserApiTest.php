@@ -39,7 +39,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     private static string $accessToken = '';
 
     /**
-     * test完整updateuserinfo - update所havefield.
+     * testcompleteupdateuserinfo - update所havefield.
      */
     public function testUpdateUserInfoWithAllFields(): void
     {
@@ -318,20 +318,20 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test部minutefieldupdatebackdata完整property.
+     * test部minutefieldupdatebackdatacompleteproperty.
      */
     public function testUpdateUserInfoDataIntegrity(): void
     {
         // 先logingettoken
         $this->performLogin();
 
-        // the一timeupdate：只updatenickname
+        // theonetimeupdate：只updatenickname
         $firstUpdateData = [
-            'nickname' => 'the一timemorenewnickname',
+            'nickname' => 'theonetimemorenewnickname',
         ];
 
         $firstResponse = $this->patch(self::UPDATE_USER_INFO_API, $firstUpdateData, $this->getTestHeaders());
-        $this->assertIsArray($firstResponse, 'the一timeupdateresponseshouldisarrayformat');
+        $this->assertIsArray($firstResponse, 'theonetimeupdateresponseshouldisarrayformat');
 
         // ifisauthenticationerror，skiptest
         if (isset($firstResponse['code']) && ($firstResponse['code'] === 2179 || $firstResponse['code'] === 3035)) {
@@ -339,27 +339,27 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $firstResponse, 'the一timeupdateresponse应containdatafield');
-        $this->assertEquals(1000, $firstResponse['code'], 'the一timeupdateshouldreturnsuccessresponse码');
+        $this->assertArrayHasKey('data', $firstResponse, 'theonetimeupdateresponse应containdatafield');
+        $this->assertEquals(1000, $firstResponse['code'], 'theonetimeupdateshouldreturnsuccessresponse码');
 
         $firstUserData = $firstResponse['data'];
         $originalAvatarUrl = $firstUserData['avatar_url'] ?? null;
 
-        // the二timeupdate：只updateavatar
+        // thetwotimeupdate：只updateavatar
         $secondUpdateData = [
             'avatar_url' => 'https://example.com/new-avatar-2.jpg',
         ];
 
         $secondResponse = $this->patch(self::UPDATE_USER_INFO_API, $secondUpdateData, $this->getTestHeaders());
-        $this->assertIsArray($secondResponse, 'the二timeupdateresponseshouldisarrayformat');
-        $this->assertArrayHasKey('data', $secondResponse, 'the二timeupdateresponse应containdatafield');
-        $this->assertEquals(1000, $secondResponse['code'], 'the二timeupdateshouldreturnsuccessresponse码');
+        $this->assertIsArray($secondResponse, 'thetwotimeupdateresponseshouldisarrayformat');
+        $this->assertArrayHasKey('data', $secondResponse, 'thetwotimeupdateresponse应containdatafield');
+        $this->assertEquals(1000, $secondResponse['code'], 'thetwotimeupdateshouldreturnsuccessresponse码');
 
         $secondUserData = $secondResponse['data'];
 
-        // validatedata完整property：nickname应保持the一timemorenewvalue
-        $this->assertEquals($firstUpdateData['nickname'], $secondUserData['nickname'], 'nickname应保持the一timemorenewvalue');
-        $this->assertEquals($secondUpdateData['avatar_url'], $secondUserData['avatar_url'], 'avatar应forthe二timemorenewvalue');
+        // validatedatacompleteproperty：nickname应保持theonetimemorenewvalue
+        $this->assertEquals($firstUpdateData['nickname'], $secondUserData['nickname'], 'nickname应保持theonetimemorenewvalue');
+        $this->assertEquals($secondUpdateData['avatar_url'], $secondUserData['avatar_url'], 'avatar应forthetwotimemorenewvalue');
     }
 
     /**
@@ -573,7 +573,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         // outputdebuginfo
         echo "\nloginsuccess，获得token: " . self::$accessToken . "\n";
-        echo "\n完整loginresponse: " . json_encode($loginResponse, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\ncompleteloginresponse: " . json_encode($loginResponse, JSON_UNESCAPED_UNICODE) . "\n";
 
         return self::$accessToken;
     }

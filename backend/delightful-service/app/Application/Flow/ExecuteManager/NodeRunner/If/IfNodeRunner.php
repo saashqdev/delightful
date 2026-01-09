@@ -45,7 +45,7 @@ class IfNodeRunner extends NodeRunner
             }
             $condition = $component->getCondition()->getResult($executionData->getExpressionFieldData());
             if ($condition) {
-                // 满足itemitemthenwill走
+                // full足itemitemthenwill走
                 $nextNodes = array_merge($nextNodes, $branch['next_nodes'] ?? []);
                 // 命middle if
                 $if = true;

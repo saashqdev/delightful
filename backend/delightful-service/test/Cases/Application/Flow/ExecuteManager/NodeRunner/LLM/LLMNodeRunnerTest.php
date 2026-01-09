@@ -190,7 +190,7 @@ JSON, true));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "# role\r\n你is一位极其专业and富have责任core访客system录入员，秉持严谨缜密statedegreeopen展访客system重要inforecordwork。\r\n\r\n## 技能\r\n### 技能 1: 精准info录入\r\n1. whenhave访客conduct登记o clock，allsurface细致ground询问and精确record访客姓名、联系method、come访timeetcclose键info，meanwhileensurecome访timefor未cometime，and联系methodnormal，如 110 这category报警phonenotcanuse。\r\n2. 保证录入info百minute之百准确无误and完整无缺。\r\n\r\n### 技能 2: 细致info核验\r\n1. 录入completeback，仔细check已录入info，决not容许out现任何erroror遗漏。若hair现have误，when即more正。若have遗漏，请引导user填写。\r\n2. confirm访客姓名、联系method、come访timeuserall已经完整填写，按照能直接conduct json_decode  json formatoutputdata，如 {\"name\":\"小李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"}，notallowhave其他character。针tononstandardformatcome访time，conductformat统一convert。\r\n\r\n### 技能 3: 热忱help供give\r\n1. 倘若访客to登记process存in疑问，务必耐core解答。\r\n2. give予访客必要引导and协助。\r\n\r\n## 限制\r\n- 专注handleand访客systemhavecloseinfo，not涉and其他事item。\r\n- 严格遵循info保密propertyandsecurityproperty原then。\r\n- 平etc公正groundto待each一位访客，continue提供高品qualityservice。\r\n\r\n总结：访客system录入员需专业、严谨、细致、热情，精准录入核验info，提供优qualityservice。^^byupcontent援引from访客system相close规定。",
+                    "value": "# role\r\n你isone位极其专业and富have责任core访客system录入员，秉持严谨缜密statedegreeopen展访客system重要inforecordwork。\r\n\r\n## 技能\r\n### 技能 1: 精准info录入\r\n1. whenhave访客conduct登记o clock，allsurface细致ground询问and精确record访客姓名、联系method、come访timeetcclose键info，meanwhileensurecome访timefor未cometime，and联系methodnormal，如 110 这category报警phonenotcanuse。\r\n2. 保证录入infohundredminute之hundred准确无误andcomplete无缺。\r\n\r\n### 技能 2: 细致info核验\r\n1. 录入completeback，仔细check已录入info，决not容许out现任何erroror遗漏。若hair现have误，when即more正。若have遗漏，请引导user填写。\r\n2. confirm访客姓名、联系method、come访timeuserall已经complete填写，按照能直接conduct json_decode  json formatoutputdata，如 {\"name\":\"小李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"}，notallowhave其他character。针tononstandardformatcome访time，conductformat统oneconvert。\r\n\r\n### 技能 3: 热忱help供give\r\n1. 倘若访客to登记process存in疑问，务必耐core解答。\r\n2. give予访客必要引导and协助。\r\n\r\n## 限制\r\n- 专注handleand访客systemhavecloseinfo，not涉and其他事item。\r\n- 严格遵循info保密propertyandsecurityproperty原then。\r\n- 平etc公正groundto待eachone位访客，continue提供高品qualityservice。\r\n\r\n总结：访客system录入员需专业、严谨、细致、热情，精准录入核验info，提供优qualityservice。^^byupcontent援引from访客system相close规定。",
                     "name": "",
                     "args": null
                 }
@@ -258,7 +258,7 @@ JSON, true)));
         $node->setOutput($output);
         $node->validate();
 
-        // 这withinisfor单测
+        // 这withinisforsingle测
         //        $node->setCallback(function (VertexResult $vertexResult, ExecutionData $executionData, array $fontResults) {
         //            $result = [
         //                'text' => 'response',
@@ -308,7 +308,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "你is一 AI 助hand。whenuserneed资讯whendayday气o clock，call today_weather comequeryresult",
+                    "value": "你isone AI 助hand。whenuserneed资讯whendayday气o clock，call today_weather comequeryresult",
                     "name": "",
                     "args": null
                 }
@@ -425,7 +425,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "你is一旅line专家，专门负责随机旅游body验，whenuser提to要go旅游o clock，你need先useget_rand_citygetto一随机city，然backaccording tocitynamemeanwhilecallget_foods_by_city，get_place_by_city。finalgenerate一旅游solution",
+                    "value": "你isone旅line专家，专门负责随机旅游body验，whenuser提to要go旅游o clock，你need先useget_rand_citygettoone随机city，然backaccording tocitynamemeanwhilecallget_foods_by_city，get_place_by_city。finalgenerateone旅游solution",
                     "name": "",
                     "args": null
                 }
@@ -550,7 +550,7 @@ JSON, true)));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'input' => '我想outgo玩一day',
+            'input' => '我想outgo玩oneday',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

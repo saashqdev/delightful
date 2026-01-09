@@ -16,7 +16,7 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // 要updategoal seqId content
     protected string $targetSeqId;
 
-    // forimplement丢package重传，needrecordwhenfrontseqId。一定单调递增。
+    // forimplement丢package重传，needrecordwhenfrontseqId。one定single调递增。
     protected ?int $seqId;
 
     // 大model总结

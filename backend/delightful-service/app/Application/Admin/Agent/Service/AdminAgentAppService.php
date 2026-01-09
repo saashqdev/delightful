@@ -114,7 +114,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $dataIsolation = DataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
         $userMap = $this->userDomainService->getByUserIds($dataIsolation, $agentCreators);
 
-        // 收集useravatarkey
+        // 收collectionuseravatarkey
         $avatars = array_filter(array_map(function ($user) {
             return $user->getAvatarUrl();
         }, $userMap), fn ($avatar) => ! empty($avatar));
@@ -215,7 +215,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // get所have Agent 相closesettype
         $agentSettingsTypes = AdminGlobalSettingsType::getAssistantGlobalSettingsType();
 
-        // 一timepropertyget所haveset
+        // onetimepropertyget所haveset
         $settings = $this->globalSettingsDomainService->getSettingsByTypes(
             $agentSettingsTypes,
             $dataIsolation
@@ -259,7 +259,7 @@ class AdminAgentAppService extends AbstractKernelAppService
                 ->setExtra(AbstractSettingExtra::fromDataByType($extra->toArray(), $setting->getType()));
         }, $settingsToUpdate);
 
-        // 一timepropertyupdate所haveset
+        // onetimepropertyupdate所haveset
         $updatedSettings = $this->globalSettingsDomainService->updateSettingsBatch($entities, $dataIsolation);
 
         // convertforDTOreturn

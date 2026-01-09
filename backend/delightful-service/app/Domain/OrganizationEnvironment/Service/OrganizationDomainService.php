@@ -110,7 +110,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * according toencodinglist批quantitygetorganization.
+     * according toencodinglistbatchquantitygetorganization.
      * @param string[] $delightfulOrganizationCodes
      * @return OrganizationEntity[]
      */

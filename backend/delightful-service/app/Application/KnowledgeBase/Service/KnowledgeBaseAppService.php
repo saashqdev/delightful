@@ -160,7 +160,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             [$authorization->getId()]
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
-        // in这一堆middlefindone
+        // in这oneheapmiddlefindone
         $query = new KnowledgeBaseQuery();
         $query->setCodes($resourceIds);
         $query->setBusinessId($businessId);

@@ -129,7 +129,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // 找to Admin 平台sectionpointconductenter一步校验
+        // 找to Admin 平台sectionpointconductenterone步校验
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;
@@ -173,7 +173,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
      */
     public function testEdgeCases()
     {
-        // test空string
+        // testemptystring
         $this->assertFalse($this->permissionEnum->isResource(''));
         $this->assertFalse($this->permissionEnum->isOperation(''));
         $this->assertFalse($this->permissionEnum->isValidPermission(''));

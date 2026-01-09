@@ -151,10 +151,10 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * getfinger定category别non官方service商 (Legacy).
+     * getfinger定category别non官方servicequotient (Legacy).
      *
-     * @param Category $category service商category别
-     * @return ProviderEntity[] non官方service商list
+     * @param Category $category servicequotientcategory别
+     * @return ProviderEntity[] non官方servicequotientlist
      */
     public function getNonOfficialByCategory(Category $category): array
     {
@@ -173,7 +173,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     {
         $builder = $this->createProviderQuery();
         $builder->where('category', $category->value);
-        // notrowexcept任何service商，include Official，因fortemplateneed所haveservice商
+        // notrowexcept任何servicequotient，include Official，因fortemplateneed所haveservicequotient
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         return ProviderAssembler::toEntities($result);

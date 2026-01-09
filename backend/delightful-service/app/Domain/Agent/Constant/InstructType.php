@@ -16,7 +16,7 @@ use function Hyperf\Translation\__;
 
 enum InstructType: int
 {
-    case SINGLE_CHOICE = 1;  // 单option
+    case SINGLE_CHOICE = 1;  // singleoption
     case SWITCH = 2;         // switch
     case TEXT = 3;          // texttype
     case STATUS = 4;        // statustype
@@ -226,7 +226,7 @@ enum InstructType: int
     }
 
     /**
-     * verify单optiontype.
+     * verifysingleoptiontype.
      */
     private function validateSingleChoice(array &$item): void
     {

@@ -18,7 +18,7 @@ class JsonStreamCachedDTO extends AbstractEntity
     protected string $receiveMessageId;
 
     /**
-     * 收hair双方 message_id different，but delightful_message_id same。
+     * 收hairdouble方 message_id different，but delightful_message_id same。
      */
     protected string $delightfulMessageId;
 
@@ -32,7 +32,7 @@ class JsonStreamCachedDTO extends AbstractEntity
      */
     protected array $content;
 
-    // 避免频繁操asdatalibrary，recordmostback一timeupdatedatalibrarytime
+    // 避免频繁操asdatalibrary，recordmostbackonetimeupdatedatalibrarytime
     protected ?int $lastUpdateDatabaseTime;
 
     public function getLastUpdateDatabaseTime(): ?int

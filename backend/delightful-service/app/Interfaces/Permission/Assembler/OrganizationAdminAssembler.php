@@ -14,7 +14,7 @@ use App\Interfaces\Permission\DTO\OrganizationAdminResponseDTO;
 class OrganizationAdminAssembler
 {
     /**
-     * will单organizationadministrator实bodyconvertforresponseDTO.
+     * willsingleorganizationadministrator实bodyconvertforresponseDTO.
      */
     public static function assembleSingle(OrganizationAdminEntity $entity): OrganizationAdminResponseDTO
     {

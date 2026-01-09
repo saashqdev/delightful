@@ -75,7 +75,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = PermissionDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
 
-        // 仅query目frontuser具havepermissiontool集
+        // 仅query目frontuser具havepermissiontoolcollection
         $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
             $permissionDataIsolation,
             ResourceType::ToolSet,

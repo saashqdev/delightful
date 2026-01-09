@@ -24,7 +24,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
         // initializeaudioconfiguration
         $this->audio = new SpeechAudioDTO($data['audio'] ?? []);
 
-        // initializeattach加configuration
+        // initializeattachaddconfiguration
         if (isset($data['additions'])) {
             $this->additions = $data['additions'];
         }
@@ -67,7 +67,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
     }
 
     /**
-     * generate完整火山enginerequestparameter（notcontainappfield，appfieldby基础设施layergroup装）.
+     * generatecomplete火山enginerequestparameter（notcontainappfield，appfieldby基础设施layergroup装）.
      */
     public function toVolcengineRequestData(): array
     {
@@ -76,7 +76,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
             'audio' => $this->audio->toArray(),
         ];
 
-        // addoptionalattach加configuration
+        // addoptionalattachaddconfiguration
         if ($this->additions) {
             $requestData['additions'] = $this->additions;
         }

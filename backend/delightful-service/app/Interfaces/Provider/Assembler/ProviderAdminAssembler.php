@@ -58,7 +58,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * 批quantityoriginalmodel实bodyconvertfor DTO.
+     * batchquantityoriginalmodel实bodyconvertfor DTO.
      *
      * @param array<ProviderOriginalModelEntity> $entities
      * @return array<ProviderOriginalModelDTO>

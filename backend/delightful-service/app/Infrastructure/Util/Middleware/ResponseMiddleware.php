@@ -82,7 +82,7 @@ class ResponseMiddleware implements MiddlewareInterface
                 if (in_array($path, $this->ignoreUris, true)) {
                     return;
                 }
-                // temporary加一down敏感filter
+                // temporaryaddonedown敏感filter
                 if (! str_contains($path, 'aes')) {
                     $this->logger->info('requesttraceinformation', $this->formatMessage($request, $response, $startTime, $endTime));
                 }

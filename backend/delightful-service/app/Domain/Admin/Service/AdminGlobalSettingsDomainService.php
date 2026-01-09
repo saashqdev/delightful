@@ -68,7 +68,7 @@ readonly class AdminGlobalSettingsDomainService
         });
 
         if (! empty($missingTypes)) {
-            // 批quantitycreatenot存insetting
+            // batchquantitycreatenot存insetting
             $missingEntities = array_map(function ($type) use ($dataIsolation) {
                 return (new AdminGlobalSettingsEntity())
                     ->setType($type)
@@ -76,7 +76,7 @@ readonly class AdminGlobalSettingsDomainService
                     ->setStatus(AdminGlobalSettingsStatus::DISABLED);
             }, $missingTypes);
 
-            // 批quantityupdatenot存insetting
+            // batchquantityupdatenot存insetting
             $newSettings = $this->globalSettingsRepository->updateSettingsBatch($missingEntities);
             $settings = array_merge($settings, $newSettings);
         }

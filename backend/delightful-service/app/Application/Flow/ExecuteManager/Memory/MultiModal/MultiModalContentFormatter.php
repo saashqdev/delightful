@@ -11,7 +11,7 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
  * 多模statecontentformat化tool
- * useat统一processdifferent场景down多模statecontentformat化.
+ * useat统oneprocessdifferent场景down多模statecontentformat化.
  */
 class MultiModalContentFormatter
 {
@@ -53,7 +53,7 @@ class MultiModalContentFormatter
 
     /**
      * format化imagecontenttotext
-     * support单张imageand多张image场景.
+     * supportsingle张imageand多张image场景.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse 视觉analyzeresult

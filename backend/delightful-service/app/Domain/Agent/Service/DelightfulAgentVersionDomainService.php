@@ -179,7 +179,7 @@ class DelightfulAgentVersionDomainService
     {
         // returnis语义化version，needinreturn基础up+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // ifversionnumberis整数format（如 1），will其convertfor语义化versionnumber（如 1.0.0）
+        // ifversionnumberisintegerformat（如 1），will其convertfor语义化versionnumber（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
@@ -187,7 +187,7 @@ class DelightfulAgentVersionDomainService
         // parseversionnumber，for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
-        // will PATCH 部minute加 1
+        // will PATCH 部minuteadd 1
         $patch = (int) $patch + 1;
 
         // if PATCH 达to 10，enter位to MINOR（canaccording to需求adjust此rule）
@@ -242,7 +242,7 @@ class DelightfulAgentVersionDomainService
      * based on游标paginationgetfinger定organization助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID，iffor空stringthenfrommost新start
+     * @param string $cursor 游标ID，ifforemptystringthenfrommost新start
      * @param int $pageSize each页quantity
      * @return array<DelightfulAgentVersionEntity>
      */

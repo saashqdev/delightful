@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * imagewatermarkhandle器
- * 统一handleeachtypeformatimagewatermarkadd.
+ * 统onehandleeachtypeformatimagewatermarkadd.
  */
 class ImageWatermarkProcessor
 {
@@ -48,11 +48,11 @@ class ImageWatermarkProcessor
         // decodingbase64image
         $imageData = $this->decodeBase64Image($base64Image);
 
-        // 双重检测ensureformat准确
+        // double重检测ensureformat准确
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
-        // use统一watermarkhandlemethod
+        // use统onewatermarkhandlemethod
         if ($imageGenerateRequest->isAddWatermark()) {
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
@@ -168,7 +168,7 @@ class ImageWatermarkProcessor
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
             // useTTF字body渲染，supportmiddle文
-            // TTF字bodysizeneedadjust，usuallyratioinside置字body小一些
+            // TTF字bodysizeneedadjust，usuallyratioinside置字body小one些
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
             // correct计算TTF字body基lineposition
@@ -210,7 +210,7 @@ class ImageWatermarkProcessor
      */
     private function createTransparentColor($image, float $opacity): int
     {
-        // create白color半透明watermark
+        // create白colorhalf透明watermark
         $alpha = (int) ((1 - $opacity) * 127);
         return imagecolorallocatealpha($image, 255, 255, 255, $alpha);
     }

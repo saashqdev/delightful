@@ -12,7 +12,7 @@ interface LockerInterface
     /**
      * get互斥lock
      * @param string $name lockname，finger定lockname
-     * @param string $owner lock所have者，finger定lock唯一标识，判断errorrelease
+     * @param string $owner lock所have者，finger定lock唯one标识，判断errorrelease
      * @param int $expire expiretime，second
      */
     public function mutexLock(string $name, string $owner, int $expire = 180): bool;
@@ -26,7 +26,7 @@ interface LockerInterface
     /**
      * releaselock
      * @param string $name lockname，finger定lockname
-     * @param string $owner lock所have者，finger定lock唯一标识，判断errorrelease
+     * @param string $owner lock所have者，finger定lock唯one标识，判断errorrelease
      */
     public function release(string $name, string $owner): bool;
 }

@@ -32,7 +32,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一encoding，仅increateo clockgenerate，useasgivefront端id.
+     * 唯oneencoding，仅increateo clockgenerate，useasgivefront端id.
      */
     protected string $code;
 
@@ -238,14 +238,14 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // if已经have一，那么iserrorprocess，out现多startsectionpoint
+                // if已经haveone，那么iserrorprocess，out现多startsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多endsectionpointo clock，暂o clock取first，should要做become只能have一endsectionpoint
+                // 多endsectionpointo clock，暂o clock取first，should要做become只能haveoneendsectionpoint
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
@@ -678,7 +678,7 @@ class DelightfulFlowEntity extends AbstractEntity
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
-            // todo 要唯一
+            // todo 要唯one
             // todo inside置tool名allowbeuse
         }
     }

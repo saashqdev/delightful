@@ -87,7 +87,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // ifhavedown游sectionpoint，那么between隔timethennot能for空
+                    // ifhavedown游sectionpoint，那么between隔timethennot能forempty
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
                         // second
                         $interval = $branch['config']['interval'] ?? 0;
@@ -109,7 +109,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::ParamCall:
                     $outputComponent = ComponentFactory::fastCreate($branch['output']['form'] ?? []);
-                    // parametercallcan无parameter触hair，for example触hair一event
+                    // parametercallcan无parameter触hair，for example触haironeevent
                     if ($outputComponent) {
                         $output = new NodeOutput();
                         $output->setForm($outputComponent);
@@ -433,7 +433,7 @@ JSON;
                 "real_name": {
                     "type": "string",
                     "key": "real_name",
-                    "title": "真实姓名",
+                    "title": "true实姓名",
                     "description": "",
                     "items": null,
                     "properties": null,

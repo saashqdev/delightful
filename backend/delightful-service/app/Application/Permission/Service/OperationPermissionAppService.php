@@ -134,7 +134,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getusertosome一categoryresourcemost高操aspermission.
+     * getusertosomeonecategoryresourcemost高操aspermission.
      */
     #[ArrayShape([
         // userId => [resourceId => Operation]

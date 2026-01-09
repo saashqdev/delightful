@@ -331,7 +331,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
-                    'zh_CN' => '您caninput研究报告themeandspecific需求，oruploadfile，超level麦吉willfor您conduct完整and详细报告撰写。 Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninput研究报告themeandspecific需求，oruploadfile，超level麦吉willfor您conductcompleteand详细报告撰写。 Enter send ; Shift + Enter 换line',
                 ]),
                 'identifier' => 'report',
                 'icon' => 'IconMicroscope',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您caninputwill议textcontent，oruploadwill议录音file，超level麦吉willfor您conduct完整will议总结。 Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninputwill议textcontent，oruploadwill议录音file，超level麦吉willfor您conductcompletewill议总结。 Enter send ; Shift + Enter 换line',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',

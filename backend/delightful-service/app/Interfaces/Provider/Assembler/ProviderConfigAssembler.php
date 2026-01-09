@@ -47,8 +47,8 @@ class ProviderConfigAssembler
     }
 
     /**
-     * willservice商configurationarrayconvertfor DTO list，contain完整 provider info.
-     * @param array $serviceProviderConfigs service商configurationarray
+     * willservicequotientconfigurationarrayconvertfor DTO list，containcomplete provider info.
+     * @param array $serviceProviderConfigs servicequotientconfigurationarray
      * @param array $providerMap provider ID to provider datamapping
      * @return ProviderConfigDTO[]
      */
@@ -65,8 +65,8 @@ class ProviderConfigAssembler
     }
 
     /**
-     * willservice商configurationconvertfor DTO，contain完整 provider info.
-     * @param array $serviceProviderConfig service商configurationdata
+     * willservicequotientconfigurationconvertfor DTO，containcomplete provider info.
+     * @param array $serviceProviderConfig servicequotientconfigurationdata
      * @param array $providerMap provider ID to provider datamapping
      */
     public static function toDTOWithProvider(array $serviceProviderConfig, array $providerMap): ProviderConfigDTO
@@ -140,7 +140,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 预processservice商configurationdata，extract共同逻辑.
+     * 预processservicequotientconfigurationdata，extract共同逻辑.
      * @return array [$preparedConfig, $decodeConfig]
      */
     private static function prepareServiceProviderConfig(array $serviceProviderConfig): array

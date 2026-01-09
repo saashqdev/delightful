@@ -212,7 +212,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 批quantitycheckuserwhetherfororganizationadministrator.
+     * batchquantitycheckuserwhetherfororganizationadministrator.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array
     {

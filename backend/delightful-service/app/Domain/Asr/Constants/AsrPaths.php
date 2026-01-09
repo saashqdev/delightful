@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR path常quantity
- * 统一管理 ASR 相closedirectoryandfilepath.
+ * 统one管理 ASR 相closedirectoryandfilepath.
  */
 class AsrPaths
 {

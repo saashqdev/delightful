@@ -91,7 +91,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * according toencodinglist批quantitygetorganization.
+     * according toencodinglistbatchquantitygetorganization.
      */
     public function getByCodes(array $codes): array
     {

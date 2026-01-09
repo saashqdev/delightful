@@ -108,7 +108,7 @@ class UserAssembler
                 $logger->warning("user[delightful_id: {$user['delightful_id']} ]not存in, skip！");
                 continue;
             }
-            // if存inhand机number，willhand机numbermiddlebetween四位替换for*
+            // if存inhand机number，willhand机numbermiddlebetweenfour位替换for*
             $phone = $account->getPhone();
             if (! empty($phone)) {
                 $phone = substr_replace($phone, '****', 3, 4);
@@ -135,11 +135,11 @@ class UserAssembler
     }
 
     /**
-     * 一usermaybe存inat多department.
+     * oneusermaybe存inat多department.
      * @param DelightfulDepartmentUserEntity[] $departmentUsers
      * @param UserDetailDTO[] $usersDetail
      * @param array<string, DelightfulDepartmentEntity[]> $departmentsInfo
-     * @param bool $withDepartmentFullPath whetherreturndepartment完整path
+     * @param bool $withDepartmentFullPath whetherreturndepartmentcompletepath
      * @return UserDepartmentDetailDTO[]
      */
     public static function getUserDepartmentDetailDTOList(
@@ -162,7 +162,7 @@ class UserAssembler
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
 
-            // step2.1: 收集departmentpathinfo
+            // step2.1: 收collectiondepartmentpathinfo
             $allPathNodes = [];
             $fullPathNodes = [];
 
@@ -173,7 +173,7 @@ class UserAssembler
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
-                        // 完整path模type: foreachdepartmentsave完整layerlevel结构
+                        // completepath模type: foreachdepartmentsavecompletelayerlevel结构
                         $pathNodes = array_map(
                             fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments

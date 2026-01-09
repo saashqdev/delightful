@@ -41,7 +41,7 @@ class Node extends AbstractValueObject
     protected array $params = [];
 
     /**
-     * down一sectionpoint id list.
+     * downonesectionpoint id list.
      */
     protected array $nextNodes = [];
 
@@ -58,7 +58,7 @@ class Node extends AbstractValueObject
 
     /**
      * sectionpointexecutecallbackfunction，ifhave该value，那么will直接execute该choose，whilenotispassNodeRunnercomeexecute.
-     * 这within暂o clock想toisfor单测方便.
+     * 这within暂o clock想toisforsingle测方便.
      */
     private ?Closure $callback = null;
 

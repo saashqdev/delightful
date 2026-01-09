@@ -86,7 +86,7 @@ readonly class AsrSandboxService
         // settinguserupdown文
         $this->sandboxGateway->setUserContext($userId, $organizationCode);
 
-        // get完整workdirectorypath
+        // getcompleteworkdirectorypath
         $projectEntity = $this->projectDomainService->getProject((int) $taskStatus->projectId, $userId);
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $projectEntity->getWorkDir());
@@ -216,7 +216,7 @@ readonly class AsrSandboxService
         // settinguserupdown文
         $this->sandboxGateway->setUserContext($taskStatus->userId, $organizationCode);
 
-        // get完整workdirectorypath
+        // getcompleteworkdirectorypath
         $projectEntity = $this->projectDomainService->getProject((int) $taskStatus->projectId, $taskStatus->userId);
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $projectEntity->getWorkDir());
@@ -373,7 +373,7 @@ readonly class AsrSandboxService
                 $lastLogTime = $currentTime;
             }
 
-            // timenot足，notagain sleep，直接conductmostback一time finishTask
+            // timenot足，notagain sleep，直接conductmostbackonetime finishTask
             if (($elapsedSeconds + $pollingInterval) >= $timeoutSeconds) {
                 break;
             }
@@ -391,7 +391,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // time即will耗尽，conductmostback一timecheck
+        // time即will耗尽，conductmostbackonetimecheck
         $statusString = $response->getStatus();
         $status = SandboxAsrStatusEnum::from($statusString);
         $result = $this->checkAndHandleResponseStatus(
@@ -525,7 +525,7 @@ readonly class AsrSandboxService
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // etc待down一timeround询
+                // etc待downonetimeround询
                 sleep(AsrConfig::POLLING_INTERVAL);
             }
         }
@@ -646,7 +646,7 @@ readonly class AsrSandboxService
 
     /**
      * initializework区.
-     * 复use AgentDomainService::initializeAgent method，ensureinitializeconfiguration一致.
+     * 复use AgentDomainService::initializeAgent method，ensureinitializeconfigurationone致.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $actualSandboxId actual沙箱ID
@@ -859,7 +859,7 @@ readonly class AsrSandboxService
             }
         }
 
-        // topic nothavecurrenttask，for ASR 场景create一新task
+        // topic nothavecurrenttask，for ASR 场景createone新task
         $this->logger->info('ASR taskassociate topic nothavecurrenttask，准备create新task', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,

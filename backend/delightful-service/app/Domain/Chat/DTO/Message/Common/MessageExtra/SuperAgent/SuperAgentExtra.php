@@ -194,7 +194,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * get单动stateparameter.
+     * getsingle动stateparameter.
      */
     public function getDynamicParam(string $key, mixed $default = null): mixed
     {
@@ -202,7 +202,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * setting单动stateparameter.
+     * settingsingle动stateparameter.
      */
     public function setDynamicParam(string $key, mixed $value): void
     {

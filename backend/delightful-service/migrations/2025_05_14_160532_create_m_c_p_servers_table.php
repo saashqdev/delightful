@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::create('delightful_mcp_servers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('organizationencoding');
-            $table->string('code', 80)->unique()->comment('唯一encoding');
+            $table->string('code', 80)->unique()->comment('唯oneencoding');
             $table->string('name', 64)->default('')->comment('MCPservicename');
             $table->string('description', 255)->default('')->comment('MCPservicedescription');
             $table->string('icon', 255)->default('')->comment('MCPservicegraph标');

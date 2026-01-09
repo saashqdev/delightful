@@ -184,7 +184,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * getdown一sectionpointlist.
+     * getdownonesectionpointlist.
      */
     public function getNextNodes(): array
     {
@@ -192,7 +192,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * setdown一sectionpointlist.
+     * setdownonesectionpointlist.
      */
     public function setNextNodes(?array $nextNodes): self
     {

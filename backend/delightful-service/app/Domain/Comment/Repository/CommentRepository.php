@@ -22,7 +22,7 @@ class CommentRepository
     }
 
     /**
-     * create一newcommentand维护相close索引andattachment。
+     * createonenewcommentand维护相close索引andattachment。
      *
      * @param CommentEntity $commentEntity comment实body
      * @return CommentEntity createbackcomment实body
@@ -120,7 +120,7 @@ class CommentRepository
     }
 
     /**
-     * according tocommentIDget单comment实body。
+     * according tocommentIDgetsinglecomment实body。
      *
      * @param RequestContext $requestContext requestupdown文
      * @param int $commentId commentID
@@ -157,7 +157,7 @@ class CommentRepository
     }
 
     /**
-     * 批quantitydeletefinger定commentand其所have子comment。
+     * batchquantitydeletefinger定commentand其所have子comment。
      *
      * @param RequestContext $requestContext requestupdown文
      * @param array $commentIds 要deletecommentIDarray
@@ -185,7 +185,7 @@ class CommentRepository
     }
 
     /**
-     * 批quantityrestore已deletecomment。
+     * batchquantityrestore已deletecomment。
      *
      * @param RequestContext $requestContext requestupdown文
      * @param array $commentIds 要restorecommentIDarray

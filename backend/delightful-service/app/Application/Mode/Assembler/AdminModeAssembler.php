@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实bodyconvertfor管理back台DTO (contain完整i18nfield).
+     * 实bodyconvertfor管理back台DTO (containcompletei18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {

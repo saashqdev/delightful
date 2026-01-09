@@ -126,7 +126,7 @@ class MessageAssembler
         // messagetypeandcontent抽象outcome
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗余record收hair双方usertype，目front只record收item方，need补充
+        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype，目front只record收item方，need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -155,7 +155,7 @@ class MessageAssembler
         // messagetypeandcontent抽象outcome
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗余record收hair双方usertype，目front只record收item方，need补充
+        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype，目front只record收item方，need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // ifisthe一itemmessage，even if超passlength限制also要contain
+            // ifistheoneitemmessage，even if超passlength限制also要contain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

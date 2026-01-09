@@ -38,7 +38,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putResponse = $this->put($this->url, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $putResponse['code']);
         $putData = $putResponse['data'];
-        $this->assertArrayEquals($payload, $putData, 'PUT returndatanot一致');
+        $this->assertArrayEquals($payload, $putData, 'PUT returndatanotone致');
 
         // againtime GET verifycacheand持久化
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());

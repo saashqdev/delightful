@@ -195,14 +195,14 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,这withinnot能加up JSON_UNESCAPED_UNICODE,加will导致bodyhavemiddle文o clocksignaturenotcorrect!
+        // !!! 注意,这withinnot能addup JSON_UNESCAPED_UNICODE,addwill导致bodyhavemiddle文o clocksignaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
-        // requesthead加upX-Date
+        // requestheadaddupX-Date
         $this->addHeader('X-Date', $result->getXDate());
         $auth = $result->getAuthorization();
-        // 加upsignature
+        // addupsignature
         $this->addHeader('Authorization', $auth);
     }
 
@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // region只supportmiddle国and新加坡,defaultmiddle国
+        // region只supportmiddle国and新add坡,defaultmiddle国
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

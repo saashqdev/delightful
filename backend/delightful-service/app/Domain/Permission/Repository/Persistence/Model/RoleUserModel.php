@@ -37,7 +37,7 @@ class RoleUserModel extends AbstractModel
     protected ?string $table = 'delightful_role_users';
 
     /**
-     * can批quantity赋valueproperty.
+     * canbatchquantity赋valueproperty.
      */
     protected array $fillable = [
         'id',

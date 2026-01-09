@@ -59,7 +59,7 @@ class AgentAppService extends AbstractAppService
             // merge
             $agentIds = array_unique(array_merge($orgAgentIds, $selfAgentIds));
 
-            // cacheresult（仅whennotfor空o clock）
+            // cacheresult（仅whennotforemptyo clock）
             if (! empty($agentIds)) {
                 $this->redis->setex($cacheKey, 180, Json::encode($agentIds)); // cache 3 minute钟
             }

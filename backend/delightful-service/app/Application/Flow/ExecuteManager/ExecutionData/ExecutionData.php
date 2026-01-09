@@ -84,7 +84,7 @@ class ExecutionData
     private array $attachmentRecords = [];
 
     /**
-     * 真实sessionID.
+     * true实sessionID.
      */
     private string $conversationId;
 
@@ -99,7 +99,7 @@ class ExecutionData
     private ?string $topicId = null;
 
     /**
-     * useas传递一些特殊parameter，预留.
+     * useas传递one些特殊parameter，预留.
      */
     private array $ext = [];
 
@@ -127,7 +127,7 @@ class ExecutionData
     private FlowStreamStatus $flowStreamStatus = FlowStreamStatus::Pending;
 
     /**
-     * send方冗余info.
+     * send方冗remainderinfo.
      * $userEntity. send方userinfo.
      * $seqEntity. send方sessionwindowinfo.
      * $messageEntity. send方messageinfo.

@@ -70,7 +70,7 @@ class SearchDetailItem extends AbstractObject
 
     public function setId(string $id): void
     {
-        // 应front端要求，改for唯一 id
+        // 应front端要求，改for唯one id
         $this->id = (string) IdGenerator::getSnowId();
     }
 

@@ -118,7 +118,7 @@ class MCPServerAppService extends AbstractMCPAppService
 
         $resources = [];
         if (is_null($office)) {
-            // 官方dataandorganizationinside，一andquery
+            // 官方dataandorganizationinside，oneandquery
             $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                 $dataIsolation,
                 ResourceType::MCPServer,
@@ -302,7 +302,7 @@ class MCPServerAppService extends AbstractMCPAppService
                 ];
             }, $toolsResult?->getTools() ?? []);
 
-            // eachtime检测success，all存down一timetoolcolumn表
+            // eachtime检测success，all存downonetimetoolcolumn表
             $this->mcpUserSettingDomainService->updateAdditionalConfig(
                 $dataIsolation,
                 $code,

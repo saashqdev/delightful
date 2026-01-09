@@ -16,7 +16,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 /**
  * Delightfuluserinfoapplicationservice.
  *
- * aggregateuser基本info、accountinfoanddepartmentinfo，提供完整userinfo。
+ * aggregateuser基本info、accountinfoanddepartmentinfo，提供completeuserinfo。
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {
@@ -29,11 +29,11 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * get完整userinfo.
+     * getcompleteuserinfo.
      *
      * @param string $userId userID
      * @param ContactDataIsolation $dataIsolation data隔离object
-     * @return array containuser完整infoarray
+     * @return array containusercompleteinfoarray
      */
     public function getUserInfo(string $userId, ContactDataIsolation $dataIsolation): array
     {
@@ -76,7 +76,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 批quantitygetuserinfo.
+     * batchquantitygetuserinfo.
      *
      * @param array $userIds userIDarray
      * @param ContactDataIsolation $dataIsolation data隔离object
@@ -163,10 +163,10 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * build空userinfo.
+     * buildemptyuserinfo.
      *
      * @param string $userId userID
-     * @return array 空userinfoarray
+     * @return array emptyuserinfoarray
      */
     private function getEmptyUserInfo(string $userId): array
     {

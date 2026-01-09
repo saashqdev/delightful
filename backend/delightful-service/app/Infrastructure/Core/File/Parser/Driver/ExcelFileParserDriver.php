@@ -131,23 +131,23 @@ class ExcelFileParserDriver implements ExcelFileParserDriverInterface
     }
 
     /**
-     * format化CSV单yuan格content，to特殊contentadd引number.
+     * format化CSVsingleyuan格content，to特殊contentadd引number.
      */
     private function formatCsvCell(string $value): string
     {
-        // if单yuan格contentfornull，直接returnnullstring
+        // ifsingleyuan格contentfornull，直接returnnullstring
         if ($value === '') {
             return '';
         }
 
-        // if单yuan格contentcontainbydown任意character，needuse引numberpackage围
+        // ifsingleyuan格contentcontainbydown任意character，needuse引numberpackage围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")
             || str_contains($value, "\r")
             || str_starts_with($value, ' ')
             || str_ends_with($value, ' ')) {
-            // 转义双引number
+            // 转义double引number
             $value = str_replace('"', '""', $value);
             return '"' . $value . '"';
         }

@@ -68,10 +68,10 @@ class EditAgentGlobalSettingsRequestDTO extends AbstractDTO
             '*.required' => 'Agentall局settingcannotfornull',
             '*.array' => 'Agentall局settingmustisarray',
             '*.type.required' => 'typecannotfornull',
-            '*.type.integer' => 'typemustfor整数',
+            '*.type.integer' => 'typemustforinteger',
             '*.type.in' => 'typevalueinvalid',
             '*.status.required' => 'statuscannotfornull',
-            '*.status.integer' => 'statusmustfor整数',
+            '*.status.integer' => 'statusmustforinteger',
             '*.status.in' => 'statusvalueinvalid',
             '*.extra.array' => '额outsideparametermustisarray',
         ];

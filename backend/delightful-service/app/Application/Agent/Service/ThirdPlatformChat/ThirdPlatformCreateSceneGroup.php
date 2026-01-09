@@ -42,7 +42,7 @@ class ThirdPlatformCreateSceneGroup
     // whetherstart群禁言：0（default）：not禁言，1：all员禁言
     private int $chatBannedType;
 
-    // group唯一标识
+    // group唯one标识
     private string $uuid;
 
     public function setTitle(string $title): void

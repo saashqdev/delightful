@@ -68,7 +68,7 @@ class DelightfulBotThirdPlatformChatModel extends Model
     }
 
     /**
-     * aes key加盐.
+     * aes keyadd盐.
      */
     private function _getAesKey(string $salt): string
     {

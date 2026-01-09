@@ -95,7 +95,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $sign;
         }
 
-        // 确定signature语type,needfrom userfinger定语type,userfinger定兜bottom语type,systemdefault兜bottom语type middle确定outcome一value
+        // 确定signature语type,needfrom userfinger定语type,userfinger定兜bottom语type,systemdefault兜bottom语type middle确定outcomeonevalue
         $signLanguage = null;
         // 语type兜bottom顺序
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
@@ -105,7 +105,7 @@ abstract class AbstractTemplate implements TemplateInterface
                 break;
             }
         }
-        // if $sign in $defaultLanguages not存invalue,thengive一typesupport语type
+        // if $sign in $defaultLanguages not存invalue,thengiveonetypesupport语type
         $firstLanguage = null;
         if (isset($this->signMap[$sign]) && is_array($this->signMap[$sign])) {
             $firstLanguage = array_key_first($this->signMap[$sign]);

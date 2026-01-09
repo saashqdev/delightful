@@ -21,10 +21,10 @@ class ClientSequence extends AbstractEntity
     // 序columnnumber归属账numberid
     protected string $delightfulId;
 
-    // 序columnnumber，一定not重复，一定growth，butisnot保证连续。
+    // 序columnnumber，one定not重复，one定growth，butisnot保证连续。
     protected string $seqId;
 
-    // usermessageid，userdown唯一。
+    // usermessageid，userdown唯one。
     protected string $messageId;
 
     // 本itemmessagefingertodelightful_message_id。 useatimplement已读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothave改变。

@@ -194,7 +194,7 @@ class ModeDomainService
         // save模type基本info
         $this->modeRepository->save($dataIsolation, $mode);
 
-        // 批quantitycreategroup副本
+        // batchquantitycreategroup副本
         $newGroupEntities = [];
         $maxSort = count($modeAggregate->getGroupAggregates());
         foreach ($modeAggregate->getGroupAggregates() as $index => $groupAggregate) {
@@ -218,12 +218,12 @@ class ModeDomainService
             $groupAggregate->setGroup($newGroup);
         }
 
-        // 批quantitysavegroup
+        // batchquantitysavegroup
         if (! empty($newGroupEntities)) {
             $this->groupRepository->batchSave($dataIsolation, $newGroupEntities);
         }
 
-        // 批quantitybuildgroup实bodyandclose系实body
+        // batchquantitybuildgroup实bodyandclose系实body
         $relationEntities = [];
 
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
@@ -238,7 +238,7 @@ class ModeDomainService
             }
         }
 
-        // 批quantitysaveclose系
+        // batchquantitysaveclose系
         if (! empty($relationEntities)) {
             $this->relationRepository->batchSave($dataIsolation, $relationEntities);
         }
@@ -248,7 +248,7 @@ class ModeDomainService
     }
 
     /**
-     * 批quantitybuild模typeaggregateroot（optimizeversion，避免N+1query）.
+     * batchquantitybuild模typeaggregateroot（optimizeversion，避免N+1query）.
      * @param ModeEntity[] $modes
      * @return ModeAggregate[]
      */
@@ -258,7 +258,7 @@ class ModeDomainService
             return [];
         }
 
-        // the一步：建立跟随close系mapping followMap[跟随者ID] = be跟随者ID
+        // theone步：建立跟随close系mapping followMap[跟随者ID] = be跟随者ID
         $followMap = [];
         $modeIds = [];
 
@@ -268,16 +268,16 @@ class ModeDomainService
             // ifis跟随模type，建立mappingclose系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
-                $modeIds[] = $mode->getFollowModeId(); // also要收集be跟随模typeID
+                $modeIds[] = $mode->getFollowModeId(); // also要收collectionbe跟随模typeID
             }
         }
         $modeIds = array_unique($modeIds);
 
-        // the二步：批quantityget所havegroupandclose系
+        // thetwo步：batchquantityget所havegroupandclose系
         $allGroups = $this->groupRepository->findByModeIds($dataIsolation, $modeIds);
         $allRelations = $this->relationRepository->findByModeIds($dataIsolation, $modeIds);
 
-        // the三步：按模typeIDgroupdata
+        // thethree步：按模typeIDgroupdata
         $groupsByModeId = [];
         foreach ($allGroups as $group) {
             $groupsByModeId[$group->getModeId()][] = $group;
@@ -288,7 +288,7 @@ class ModeDomainService
             $relationsByModeId[$relation->getModeId()][] = $relation;
         }
 
-        // the四步：buildaggregaterootarray
+        // thefour步：buildaggregaterootarray
         $aggregates = [];
         foreach ($modes as $mode) {
             $modeId = $mode->getId();
@@ -367,7 +367,7 @@ class ModeDomainService
 
     private function valid(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity)
     {
-        // validateidentifier唯一property
+        // validateidentifier唯oneproperty
         if (! $this->modeRepository->isIdentifierUnique($dataIsolation, $modeEntity->getIdentifier())) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IDENTIFIER_ALREADY_EXISTS);
         }

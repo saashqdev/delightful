@@ -65,7 +65,7 @@ interface OrganizationAdminRepositoryInterface
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array;
 
     /**
-     * 批quantitycheckuserwhetherfororganizationadministrator.
+     * batchquantitycheckuserwhetherfororganizationadministrator.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array;
 }

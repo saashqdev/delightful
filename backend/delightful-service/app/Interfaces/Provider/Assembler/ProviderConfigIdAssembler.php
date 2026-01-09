@@ -13,13 +13,13 @@ use App\Domain\Provider\Entity\ValueObject\ProviderTemplateId;
 use InvalidArgumentException;
 
 /**
- * service商templateIDprocesstoolcategory
- * useatgenerateandparseservice商templateID（usefixed数value型string）.
+ * servicequotienttemplateIDprocesstoolcategory
+ * useatgenerateandparseservicequotienttemplateID（usefixed数value型string）.
  */
 class ProviderConfigIdAssembler
 {
     /**
-     * according toProviderCodeandCategorygenerateservice商templateconfig_id.
+     * according toProviderCodeandCategorygenerateservicequotienttemplateconfig_id.
      */
     public static function generateProviderTemplate(ProviderCode $providerCode, Category $category): string
     {
@@ -32,7 +32,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * checkgive定configurationIDwhetherfor任何service商template.
+     * checkgive定configurationIDwhetherfor任何servicequotienttemplate.
      * support数value型stringformattemplateID.
      */
     public static function isAnyProviderTemplate(null|int|string $configId): bool

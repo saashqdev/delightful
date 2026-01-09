@@ -38,7 +38,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.relation_value_must_set')]
     case TokenRelationValueMustSet = 9005;
 
-    // tokennot唯一
+    // tokennot唯one
     #[ErrorMessage(message: 'token.not_unique')]
     case TokenNotUnique = 9006;
 

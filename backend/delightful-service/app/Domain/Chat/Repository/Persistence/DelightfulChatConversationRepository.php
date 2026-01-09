@@ -200,7 +200,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * 批quantity移exceptsessionwindow.
+     * batchquantity移exceptsessionwindow.
      */
     public function batchRemoveConversations(array $userIds, string $receiveId, ConversationType $receiveType): int
     {
@@ -216,7 +216,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             ]);
     }
 
-    // 批quantityupdatesessionwindow
+    // batchquantityupdatesessionwindow
     public function batchUpdateConversations(array $conversationIds, array $updateData): int
     {
         return $this->delightfulChatConversationModel::query()
@@ -250,7 +250,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * 批quantityupdatesessionwindow交互finger令.
+     * batchquantityupdatesessionwindow交互finger令.
      * @param array $updateData formatfor：[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
      */
     public function batchUpdateInstructs(array $updateData): void
@@ -327,7 +327,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             ->when($conversation->hasReceiveType(), function ($query) use ($conversation) {
                 $query->where('receive_type', $conversation->getReceiveType()->value);
             });
-        // receive_type +  receive_id 其实isall局唯一,can确定organizationencoding. butisifneedqueryo clockfinger定organization,alsois加up
+        // receive_type +  receive_id 其实isall局唯one,can确定organizationencoding. butisifneedqueryo clockfinger定organization,alsoisaddup
         if ($conversation->getUserOrganizationCode()) {
             $query->where('user_organization_code', $conversation->getUserOrganizationCode());
         }

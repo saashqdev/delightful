@@ -13,7 +13,7 @@ use Throwable;
  * SSRF防御toolcategory.
  *
  * useexample：
- * // 简单use，defaultconfiguration
+ * // 简singleuse，defaultconfiguration
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com');
  *
  * // customizeparameter
@@ -34,7 +34,7 @@ class SSRFUtil
      *
      * @param string $url needcheckURL
      * @param array $blackList blacklistIPor域名
-     * @param array $whiteList 白名单IPor域名
+     * @param array $whiteList 白名singleIPor域名
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whether替换forIPaccess
      * @param bool $allowRedirect whetherallow重定to
@@ -66,7 +66,7 @@ class SSRFUtil
      *
      * @param string $url needcheckURL
      * @param array $blackList blacklistIPor域名
-     * @param array $whiteList 白名单IPor域名
+     * @param array $whiteList 白名singleIPor域名
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whether替换forIPaccess
      * @param bool $allowRedirect whetherallow重定to

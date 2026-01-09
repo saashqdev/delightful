@@ -57,13 +57,13 @@ class RoleApi extends AbstractPermissionApi
         // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // 批quantitygetuserdetail（eachrole仅取front5userId）
+        // batchquantitygetuserdetail（eachrole仅取front5userId）
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 收集needqueryuserID
+        // 收collectionneedqueryuserID
         $roleUserIdsMap = [];
         $allNeedUserIds = [];
         foreach ($result['list'] as $index => $roleEntity) {
@@ -75,7 +75,7 @@ class RoleApi extends AbstractPermissionApi
         }
         $allNeedUserIds = array_values(array_unique($allNeedUserIds));
 
-        // 批quantityqueryuserinfo
+        // batchquantityqueryuserinfo
         $allUserInfo = [];
         if (! empty($allNeedUserIds)) {
             $allUserInfo = $this->userInfoAppService->getBatchUserInfo($allNeedUserIds, $contactIsolation);
@@ -185,7 +185,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
         if (! $requestDTO->hasUpdates()) {
-            throw new InvalidArgumentException('at leastneed提供一要updatefield');
+            throw new InvalidArgumentException('at leastneed提供one要updatefield');
         }
 
         // get现haverole
@@ -225,7 +225,7 @@ class RoleApi extends AbstractPermissionApi
         // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // return空arrayby触hair统一 ApiResponse 封装
+        // returnemptyarrayby触hair统one ApiResponse 封装
         return [];
     }
 }

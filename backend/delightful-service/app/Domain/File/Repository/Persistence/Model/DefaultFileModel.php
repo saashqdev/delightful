@@ -36,7 +36,7 @@ class DefaultFileModel extends Model
     protected ?string $table = 'default_files';
 
     /**
-     * can批quantity赋valueproperty.
+     * canbatchquantity赋valueproperty.
      */
     protected array $fillable = [
         'id',

@@ -123,7 +123,7 @@ class ProviderConfigEntity extends AbstractEntity
     }
 
     /**
-     * get本ground化service商name.
+     * get本ground化servicequotientname.
      */
     public function getLocalizedAlias(string $locale): string
     {
@@ -139,7 +139,7 @@ class ProviderConfigEntity extends AbstractEntity
         if (! empty($this->alias)) {
             return $this->alias;
         }
-        return $locale === 'zh_CN' ? 'customizeservice商' : 'Custom Provider';
+        return $locale === 'zh_CN' ? 'customizeservicequotient' : 'Custom Provider';
     }
 
     public function setAlias(null|int|string $alias): void

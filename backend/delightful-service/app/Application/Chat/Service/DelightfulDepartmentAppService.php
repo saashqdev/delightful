@@ -83,7 +83,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
             $offset = (int) $pageToken;
         }
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // departmentId for-1 table示getrootdepartmentdownthe一leveldepartment
+        // departmentId for-1 table示getrootdepartmentdowntheoneleveldepartment
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsByLevel($dataIsolation, 0, 1, $pageSize, $offset);
         } else {

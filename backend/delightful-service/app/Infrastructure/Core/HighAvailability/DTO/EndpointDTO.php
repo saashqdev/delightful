@@ -33,7 +33,7 @@ class EndpointDTO extends AbstractDTO
     protected string $type;
 
     /**
-     * 提供商.
+     * 提供quotient.
      */
     protected ?string $provider = null;
 
@@ -48,7 +48,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * resourceconsume id list. 一timerequestmaybewillconsume多resource。
+     * resourceconsume id list. onetimerequestmaybewillconsume多resource。
      * @var null|string[]
      */
     protected ?array $resources = null;
@@ -185,7 +185,7 @@ class EndpointDTO extends AbstractDTO
 
     /**
      * set接入pointwhetherenable.
-     * @param bool|int|string $enabled can传入布尔value、整数orstring
+     * @param bool|int|string $enabled can传入布尔value、integerorstring
      */
     public function setEnabled(bool|int|string $enabled): static
     {

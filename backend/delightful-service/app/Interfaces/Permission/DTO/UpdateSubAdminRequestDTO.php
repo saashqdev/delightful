@@ -154,7 +154,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
-                $errors[] = 'rolenamenot能for空';
+                $errors[] = 'rolenamenot能forempty';
             }
 
             if (strlen($this->name) > 255) {

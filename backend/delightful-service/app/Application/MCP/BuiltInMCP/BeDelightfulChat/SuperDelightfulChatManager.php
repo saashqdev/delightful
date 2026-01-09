@@ -81,7 +81,7 @@ class BeDelightfulChatManager
         // 1. query所havecanuse agent
         $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
-        // ifnothavecanuse agents，直接return空array
+        // ifnothavecanuse agents，直接returnemptyarray
         if (empty($agents)) {
             return [];
         }
@@ -89,7 +89,7 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. generate一share大modelcalltoolcan阅读description
+        // 2. generateoneshare大modelcalltoolcan阅读description
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理conductconversation
 
@@ -111,7 +111,7 @@ MARKDOWN;
                 $instructionDescription ? "\n  canusefinger令: {$instructionDescription}" : ''
             );
 
-            // 收集所havefinger令infouseatgenerate schema
+            // 收collection所havefinger令infouseatgenerate schema
             if ($instruction) {
                 $allInstructions[$agent->getId()] = $instruction;
             }
@@ -133,7 +133,7 @@ MARKDOWN;
             $instructionHelp = <<<'MARKDOWN'
 finger令parameter instruction（optional）：
 • format：[{"name": "finger令name", "value": "finger令value"}, ...]
-• single-selecttype：fromoptionalvaluemiddlechoose一，for example "yes", "no"
+• single-selecttype：fromoptionalvaluemiddlechooseone，for example "yes", "no"
 • switchtype：只能is "on" or "off"
 • ifnot提供finger令parameter，willusedefaultvalue
 
@@ -141,7 +141,7 @@ callexample：
 ```json
 {
   "agent_id": "123456",
-  "message": "你好，请帮我analyze一down...",
+  "message": "你好，请帮我analyzeonedown...",
   "conversation_id": "conv_001",
   "instruction": [
     {"name": "switch", "value": "on"},
@@ -267,7 +267,7 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useat控制AI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechoose一，switchtypefinger令只能is "on" or "off"。',
+            'description' => 'finger令parameterarray，useat控制AI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令只能is "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [

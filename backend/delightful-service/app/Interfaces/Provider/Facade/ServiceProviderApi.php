@@ -44,7 +44,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * notneed判断administratorpermission。
-     * according tocategorygetservice商list.
+     * according tocategorygetservicequotientlist.
      */
     public function getServiceProviders(RequestInterface $request)
     {
@@ -53,14 +53,14 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * notneed判断administratorpermission。
-     * according tocategorygetservice商list.
+     * according tocategorygetservicequotientlist.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
     {
         return $this->getProvidersByCategory($request);
     }
 
-    // getservice商andmodellist
+    // getservicequotientandmodellist
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getServiceProviderConfigModels(RequestInterface $request, ?string $serviceProviderConfigId = null)
     {
@@ -72,7 +72,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
-    // updateservice商
+    // updateservicequotient
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function updateServiceProviderConfig(RequestInterface $request)
     {
@@ -157,7 +157,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminOriginModelAppService->create($authenticatable, $modelId);
     }
 
-    // organizationaddservice商
+    // organizationaddservicequotient
     #[Deprecated]
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function addServiceProviderForOrganization(RequestInterface $request)
@@ -168,7 +168,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->adminProviderAppService->createProvider($authenticatable, $createProviderConfigRequest);
     }
 
-    // deleteservice商
+    // deleteservicequotient
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function deleteServiceProviderForOrganization(RequestInterface $request, ?string $serviceProviderConfigId = null)
     {
@@ -199,26 +199,26 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * get所havenon官方LLMservice商list
-     * 直接fromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservice商
-     * notdependencyatcurrentorganization，适useatneedaddservice商场景.
+     * get所havenon官方LLMservicequotientlist
+     * 直接fromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservicequotient
+     * notdependencyatcurrentorganization，适useatneedaddservicequotient场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // 直接get所haveLLMtypenon官方service商
+        // 直接get所haveLLMtypenon官方servicequotient
         return $this->adminProviderAppService->getAllNonOfficialProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
     /**
-     * get所havecanuseLLMservice商list（include官方service商）.
+     * get所havecanuseLLMservicequotientlist（include官方servicequotient）.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // get所haveLLMtypeservice商（includeOfficial）
+        // get所haveLLMtypeservicequotient（includeOfficial）
         return $this->adminProviderAppService->getAllAvailableLlmProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -243,9 +243,9 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * according tocategorygetservice商通use逻辑.
+     * according tocategorygetservicequotient通use逻辑.
      * @param RequestInterface $request requestobject
-     * @return array service商list
+     * @return array servicequotientlist
      */
     private function getProvidersByCategory(RequestInterface $request): array
     {

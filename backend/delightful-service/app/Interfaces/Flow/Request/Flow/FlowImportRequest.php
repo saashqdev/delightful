@@ -43,7 +43,7 @@ class FlowImportRequest extends FormRequest
             'import_data.main_flow.edges' => '主processside缘',
             'import_data.sub_flows' => '子process',
             'import_data.tool_flows' => 'toolprocess',
-            'import_data.tool_sets' => 'tool集',
+            'import_data.tool_sets' => 'toolcollection',
         ];
     }
 }

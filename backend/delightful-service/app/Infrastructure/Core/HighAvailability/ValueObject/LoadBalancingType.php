@@ -13,7 +13,7 @@ namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 enum LoadBalancingType: int
 {
     /**
-     * 随机strategy - 随机choose一canuseback端service
+     * 随机strategy - 随机chooseonecanuseback端service
      */
     case RANDOM = 1;
 
@@ -23,7 +23,7 @@ enum LoadBalancingType: int
     case ROUND_ROBIN = 2;
 
     /**
-     * 加权round询strategy - according to权重ratio例chooseback端service
+     * add权round询strategy - according to权重ratio例chooseback端service
      */
     case WEIGHTED_ROUND_ROBIN = 3;
 
@@ -42,7 +42,7 @@ enum LoadBalancingType: int
         return match ($this) {
             self::RANDOM => '随机',
             self::ROUND_ROBIN => 'round询',
-            self::WEIGHTED_ROUND_ROBIN => '加权round询',
+            self::WEIGHTED_ROUND_ROBIN => 'add权round询',
             self::HASH => 'hash',
         };
     }

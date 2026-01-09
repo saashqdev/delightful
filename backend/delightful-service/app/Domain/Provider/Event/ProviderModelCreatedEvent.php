@@ -10,7 +10,7 @@ namespace App\Domain\Provider\Event;
 use App\Domain\Provider\Entity\ProviderModelEntity;
 
 /**
- * service商modelcreateevent.
+ * servicequotientmodelcreateevent.
  */
 class ProviderModelCreatedEvent
 {

@@ -86,7 +86,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * pullusermost近一segmenttime收itemmessage.
+     * pullusermost近onesegmenttime收itemmessage.
      * @throws Throwable
      */
     public function pullRecentMessage(RequestInterface $request): array
@@ -237,7 +237,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setGroupName($params['group_name']);
         $delightfulGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
-        // person员anddepartmentnot能meanwhilefor空
+        // person员anddepartmentnot能meanwhileforempty
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -245,7 +245,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批quantity拉personenter群.
+     * batchquantity拉personenter群.
      */
     public function groupAddUsers(string $id, RequestInterface $request): array
     {
@@ -258,7 +258,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $delightfulGroupDTO = new DelightfulGroupEntity();
         $delightfulGroupDTO->setId($id);
-        // person员anddepartmentnot能meanwhilefor空
+        // person员anddepartmentnot能meanwhileforempty
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -308,7 +308,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批quantityget群info（name、公告etc）.
+     * batchquantityget群info（name、公告etc）.
      */
     public function getDelightfulGroupList(RequestInterface $request): array
     {
@@ -336,7 +336,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setId($id);
         $delightfulGroupDTO->setGroupName($params['group_name'] ?? null);
         $delightfulGroupDTO->setGroupAvatar($params['group_avatar'] ?? null);
-        // name and avatar not能meanwhilefor空
+        // name and avatar not能meanwhileforempty
         if (empty($delightfulGroupDTO->getGroupName()) && empty($delightfulGroupDTO->getGroupAvatar())) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR);
         }
@@ -494,7 +494,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * @param null|string $method havetimefieldnothave区minutedegree，need加upmethod名
+     * @param null|string $method havetimefieldnothave区minutedegree，needaddupmethod名
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {

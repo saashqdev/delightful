@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改这categoryname/property/命名空between，请modify WebUserGuard.php  cacheKey ，避免cache无法also原
+ * if改这categoryname/property/命名emptybetween，请modify WebUserGuard.php  cacheKey ，避免cache无法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
@@ -33,7 +33,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $id = '';
 
     /**
-     * userregisterbackgeneratedelightful_id,all局唯一
+     * userregisterbackgeneratedelightful_id,all局唯one
      */
     protected string $delightfulId = '';
 
@@ -72,13 +72,13 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     // currentuser所处environmentid
     protected int $delightfulEnvId = 0;
 
-    // the三方平台originalorganizationencoding
+    // thethree方平台originalorganizationencoding
     protected string $thirdPlatformOrganizationCode = '';
 
-    // the三方平台originaluser ID
+    // thethree方平台originaluser ID
     protected ?string $thirdPlatformUserId = '';
 
-    // the三方平台type
+    // thethree方平台type
     protected ?PlatformType $thirdPlatformType = null;
 
     public function __construct()
@@ -111,7 +111,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多environmentdown $authorization maybe重复，willhaveissue（概rate趋近无穷小）
+        // 多environmentdown $authorization maybe重复，willhaveissue（概rate趋近infinite小）
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();

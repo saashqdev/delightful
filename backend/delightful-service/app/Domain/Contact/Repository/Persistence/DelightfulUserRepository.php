@@ -47,7 +47,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         $this->logger = $loggerFactory->get('user');
     }
 
-    // returnmost受欢迎andmost新加入 agent list
+    // returnmost受欢迎andmost新add入 agent list
     public function getSquareAgentList(): array
     {
         // most受欢迎
@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // the二timequery：according to delightful_id query所have该账numberindifferentorganizationmiddleuserrecord
+        // thetwotimequery：according to delightful_id query所have该账numberindifferentorganizationmiddleuserrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)

@@ -29,7 +29,7 @@ interface DelightfulThirdPlatformDepartmentRepositoryInterface
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): array;
 
     /**
-     * getsome一layerleveldepartment.
+     * getsomeonelayerleveldepartment.
      * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getSubDepartmentsByLevel(int $currentDepartmentLevel, string $organizationCode, int $depth, int $size, int $offset): array;

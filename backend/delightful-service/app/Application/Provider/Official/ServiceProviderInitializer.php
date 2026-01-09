@@ -266,9 +266,9 @@ class ServiceProviderInitializer
             // Custom OpenAI - LLM
             [
                 'id' => '764067503220973568',
-                'name' => 'customizeservice商',
+                'name' => 'customizeservicequotient',
                 'provider_code' => 'OpenAI',
-                'description' => '请useinterfaceand OpenAI API sameshapetypeservice商',
+                'description' => '请useinterfaceand OpenAI API sameshapetypeservicequotient',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/defaultgraph标.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -280,11 +280,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Custom service provider',
-                        'zh_CN' => 'customizeservice商',
+                        'zh_CN' => 'customizeservicequotient',
                     ],
                     'description' => [
                         'en_US' => 'Use a service provider with the same form of interface as the OpenAI API',
-                        'zh_CN' => '请useinterfaceand OpenAI API sameshapetypeservice商',
+                        'zh_CN' => '请useinterfaceand OpenAI API sameshapetypeservicequotient',
                     ],
                 ]),
                 'remark' => 'support OpenAI API shapetype',
@@ -294,7 +294,7 @@ class ServiceProviderInitializer
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock is亚马逊 AWS 提供一itemservice，专注atfor企业提供先enter AI languagemodeland视觉model。其model家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
+                'description' => 'Amazon Bedrock is亚马逊 AWS 提供oneitemservice，专注atfor企业提供先enter AI languagemodeland视觉model。其model家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock is亚马逊 AWS 提供一itemservice，专注atfor企业提供先enter AI languagemodeland视觉model。其model家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
+                        'zh_CN' => 'Amazon Bedrock is亚马逊 AWS 提供oneitemservice，专注atfor企业提供先enter AI languagemodeland视觉model。其model家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
                     ],
                 ]),
                 'remark' => '',
@@ -358,7 +358,7 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Qwen',
-                        'zh_CN' => '阿within云百炼',
+                        'zh_CN' => '阿within云hundred炼',
                     ],
                     'description' => [
                         'en_US' => 'It provides a universal image generation model, supports multiple artistic styles, and is particularly skilled at complex text rendering, especially in both Chinese and English text rendering.',
@@ -372,7 +372,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920386',
                 'name' => 'Google Cloud',
                 'provider_code' => 'Google-Image',
-                'description' => '提供 Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel，具备role一致property高、精准graphlikeeditetc。',
+                'description' => '提供 Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel，具备roleone致property高、精准graphlikeeditetc。',
                 'icon' => $orgCode . '/713471849556451329/2c17c6393771ee3048ae34d6b380c5ec/Q-2terxwePTElOJ_ONtrw.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -388,7 +388,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Gemini 2.5 Flash Image (Nano Banana) image generation model is provided, featuring high character consistency and precise image editing, etc.',
-                        'zh_CN' => '提供 Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel，具备role一致property高、精准graphlikeeditetc。',
+                        'zh_CN' => '提供 Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel，具备roleone致property高、精准graphlikeeditetc。',
                     ],
                 ]),
                 'remark' => '',

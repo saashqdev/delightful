@@ -477,7 +477,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     {
         Db::beginTransaction();
         try {
-            # bydownischatmessage. 采取写扩散:ifis群,thenfor群membereachpersongenerateseq
+            # bydownischatmessage. adopt write diffusion:ifis群,thenfor群membereachpersongenerateseq
             // 1.getconversationinfo
             $senderConversationEntity = $this->delightfulChatDomainService->getConversationById($senderSeqEntity->getConversationId());
             if ($senderConversationEntity === null) {
@@ -606,7 +606,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         4. ignore早期already经endtopic,unlessit们andmostnewtopicclosely relatedclose
 
         ## strictrequire
-        1. titlelength:not超pass 15 character.Englishone字母算onecharacter,Chinese charactersone字算onecharacter,other语type采useanalogouscountsolution.
+        1. titlelength:not超pass 15 character.Englishone字母算onecharacter,Chinese charactersonecharacter countonecharacter,other语type采useanalogouscountsolution.
         2. content相close:titlemustdirectlyreflectconversation核coretheme
         3. languagestyle:usestatementproperty语sentence,avoidquestionsentence
         4. outputformat:onlyoutputtitlecontent,notwantaddanyexplain,标pointorothertext

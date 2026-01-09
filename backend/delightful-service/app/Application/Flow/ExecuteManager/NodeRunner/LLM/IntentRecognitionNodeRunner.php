@@ -128,13 +128,13 @@ willyouresponseformat化for JSON object,format如down:
             "置信degree": 0.1
         }
     ],
-    "推导procedure":"",
+    "deduceprocedure":"",
     "remark":""
 }    
 
 # process
 1. youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphand置信degree.
-2. inferenceuser意graph,willinferenceprocedure放to JSON middle 推导procedure field,explainforwhatwilloutthisthese意graphand置信degree.
+2. inferenceuser意graph,willinferenceprocedure放to JSON middle deduceprocedure field,explainforwhatwilloutthisthese意graphand置信degree.
 3. ifidentifyto意graph,请fill inmost佳matchandmatchto意graph,whetheridentifyfor true,most佳意graph one定is置信degreemosthigh,itsmiddle matchto意graphhave fieldisaccording to 置信degree frombigtosmallrowcolumn.
 4. ifincurrentrangenothave找toany意graph,whetheridentifyfor false,请fill inidentifyfailreason,most佳matchandmatchto意graphallshouldisempty.
 5. onlywillreturn JSON format,notwillagainreturnothercontent,ifone定needhavereturn,请放toremarkmiddle,return答contentone定canbe JSON toolparse.

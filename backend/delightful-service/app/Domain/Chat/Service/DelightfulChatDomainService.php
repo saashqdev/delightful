@@ -483,7 +483,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         try {
             Db::beginTransaction();
-            // get exceptsend者byoutside 所have群member. (因forsend者 seq already经另outsidegenerate,single独push)
+            // get exceptsend者byoutside 所have群member. (因forsend者 seq alreadyvia anotheroutsidegenerate,single独push)
             $groupUsers = $this->delightfulGroupRepository->getGroupUserList($groupId, '');
             $groupUsers = array_column($groupUsers, null, 'user_id');
             $senderUserId = $messageEntity->getSenderId();
@@ -612,7 +612,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             return [];
         }
         $userEntity = $this->getUserInfo($conversationEntity->getUserId());
-        // certainfrom己sendmessageroletype. onlywhenfrom己is ai o clock,from己sendmessage才is assistant.(两 ai 互相conversation暂notconsider)
+        // certainfrom己sendmessageroletype. onlywhenfrom己is ai o clock,from己sendmessage才is assistant.(两 ai mutualconversation暂notconsider)
         if ($userEntity->getUserType() === UserType::Ai) {
             $selfSendMessageRoleType = 'assistant';
             $otherSendMessageRoleType = 'user';
@@ -904,7 +904,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * createonestream seq andimmediatelypush,byatfrontclient renderingplaceholder.notice,streammessagenotcanusecomeupdatealready经pushcompletedmessage,avoid篡改originalcontent!
+     * createonestream seq andimmediatelypush,byatfrontclient renderingplaceholder.notice,streammessagenotcanusecomeupdatealready经pushcompletedmessage,avoidtamperoriginalcontent!
      * ifneedtoalready经hairoutmessageconductupdate,needuse editMessage method,editmessagewillrecordcompletemessagehistoryversion.
      */
     public function createAndSendStreamStartSequence(CreateStreamSeqDTO $createStreamSeqDTO, MessageInterface $messageStruct, DelightfulConversationEntity $senderConversationEntity): DelightfulSeqEntity

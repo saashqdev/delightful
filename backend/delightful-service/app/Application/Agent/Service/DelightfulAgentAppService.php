@@ -393,7 +393,7 @@ class DelightfulAgentAppService extends AbstractAppService
         ];
     }
 
-    // getapplication市场assistant
+    // getapplicationmarketassistant
     public function getAgentsFromMarketplacePage(int $page, int $pageSize): array
     {
         // 查outenableassistant

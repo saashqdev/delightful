@@ -21,7 +21,7 @@ return new class extends Migration {
             // according toupsurface建table语sentence,outbydowncode
             $table->bigIncrements('id')->comment('primary keyid,not啥use');
             $table->string('organization_code', 64)->comment('序columnnumberbelong toorganizationencoding.')->default('');
-            $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user;2:application;3:document;4:多维table格');
+            $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user;2:application;3:document;4:multi-dimensionaltable格');
             $table->string('object_id', 64)->comment('objectid. ifisusero clock,table示delightful_id');
             $table->string('seq_id', 64)->comment('message序columnnumber id,each账number所havemessagemustgradually增big');
             $table->string('seq_type', 32)->comment('messagebigtype:controlmessage,chatmessage.');

@@ -235,7 +235,7 @@ JSON, true)));
 
 1. prioritycomprehenduser意graph,始终useandusersamelanguagereturn答
 2. provideconcise明directlyreturn答,directlyfull足usermainissue
-3. againtoimagecontentconduct多维degreedetailedanalyze,includebutnot限at:
+3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnot限at:
    - 主bodycontentidentify:person物,物body,scenario,textetc
    - visualfeature:color,composition,光line,qualityetc
    - 语义info:activity,情绪,close系,background故事etc

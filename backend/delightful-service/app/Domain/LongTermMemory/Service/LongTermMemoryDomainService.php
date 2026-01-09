@@ -407,7 +407,7 @@ readonly class LongTermMemoryDomainService
         // mergememory,按minute数sort
         $memories = array_merge($generalMemories, $projectMemories);
 
-        // filter掉shouldbe淘汰memory
+        // filter掉shouldbeeliminatememory
         $validMemories = array_filter($memories, function ($memory) {
             return ! $this->shouldMemoryBeEvicted($memory);
         });
@@ -570,7 +570,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * judgememorywhethershouldbe淘汰.
+     * judgememorywhethershouldbeeliminate.
      */
     public function shouldMemoryBeEvicted(LongTermMemoryEntity $memory): bool
     {
@@ -672,10 +672,10 @@ readonly class LongTermMemoryDomainService
         // statusconvertmatrix
         return match ([$currentStatus, $hasPendingContent]) {
             // pending_contentfornullo clockstatusconvert
-            [MemoryStatus::PENDING_REVISION, false], [MemoryStatus::ACTIVE, false] => MemoryStatus::ACTIVE,        // revisioncomplete → 生效
+            [MemoryStatus::PENDING_REVISION, false], [MemoryStatus::ACTIVE, false] => MemoryStatus::ACTIVE,        // revisioncomplete → take effect
             [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待acceptstatusmaintainnot变
             // pending_contentnotfornullo clockstatusconvert
-            [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // 生效memoryhaverevision → 待revision
+            [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // take effectmemoryhaverevision → 待revision
             // defaultsituation(notshouldto达thiswithin)
             default => $currentStatus,
         };
@@ -715,7 +715,7 @@ readonly class LongTermMemoryDomainService
             $updatedContent = $superAgentMessage->toArray();
             $this->messageRepository->updateMessageContent($delightfulMessageId, $updatedContent);
         } catch (Throwable $e) {
-            // 静默handleupdatefail,notimpactmainprocess
+            // silenthandleupdatefail,notimpactmainprocess
             $this->logger->warning('Failed to update message with memory operation', [
                 'delightful_message_id' => $delightfulMessageId,
                 'action' => $action->value,

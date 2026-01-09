@@ -152,17 +152,17 @@ class DelightfulLLMDomainService
     handlestep:
     1.1 实bodyidentify
        - 显property命名实bodyextract,identify实bodybetweenclose系andproperty
-       - 推导user隐propertyrequirementand潜in意graph,especiallycloseimplicittime因素
+       - deduceuser隐propertyrequirementand潜in意graph,especiallycloseimplicittime因素
     1.2 dimensiondecompose
-       - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technology原理,市场front景,userbody验etc
+       - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technology原理,marketfront景,userbody验etc
     1.3 子questiongenerate
-       - generatejust交子questioncollection(Jaccardsimilardegree<0.25),ensureeach子questioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassat宽泛orsimilarquestion
+       - generatejustintersectionquestioncollection(Jaccardsimilardegree<0.25),ensureeach子questioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassat宽泛orsimilarquestion
     
     ### 2. searchproxy模piece
     mustcalltool: batchSubQuestionsSearch
     parameterstandard:
     2.1 key词rule
-       - generategreater thanequal 3 highqualitycanretrievekey词,include核core实body,keypropertyand相close概念
+       - generategreater thanequal 3 highqualitycanretrievekey词,include核core实body,keypropertyand相closeconcept
        - time限定符overriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
@@ -183,7 +183,7 @@ class DelightfulLLMDomainService
     混合bydownthreetypeandmore多typequestion范type,byensure子questiondiversepropertyandoverrideproperty:
     [
       "XtoYimpactdiff",  // toratio/comparecategory
-      "Zdomain典型application",  // application/casecategory
+      "Zdomaintypicalapplication",  // application/casecategory
       "closeatABfinger标",    // finger标/propertycategory
       "导致Mhair生mainreasoniswhat?", // reason/机制category
       "whatisN?it核corefeatureiswhat?", // definition/explaincategory
@@ -205,13 +205,13 @@ class DelightfulLLMDomainService
     inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.请in适whensituationdowninsentence子末tailquotecontext.请according toquote编number[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话源from多context,请columnout所have相closequote编number,for example[citation:3][citation:5],切记notwantwillquotecollectionmiddleinmostbackreturnquote编number,whileisinanswertoshould deployminutecolumnout.
     inreturn答o clock,请noticebydown几point:
     - 今dayis{date_now}.
-    - andnonsearchresult所havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconduct甄别,filter.
-    - toatcolumn举categoryquestion(如column举所have航班information),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcome源,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;如non必want,notwantactivetellusersearchresultnotprovidecontent.
-    - toat创ascategoryquestion(如写论文),请务必injust文segment落middlequoteto应reference编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,极具思想深degree,富havecreate力andprofessionalpropertyanswer.you创as篇幅need尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,论述详尽.
+    - andnonsearchresult所havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
+    - toatcolumn举categoryquestion(如column举所haveflightinformation),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcome源,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;如non必want,notwantactivetellusersearchresultnotprovidecontent.
+    - toat创ascategoryquestion(like writing paper),please be sureinjust文segment落middlequoteto应reference编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,极具思想深degree,富havecreate力andprofessionalpropertyanswer.you创as篇幅need尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,论述详尽.
     - ifreturn答verylong,请尽quantitystructure化,minutesegment落summary.ifneedminutepointas答,尽quantitycontrolin5pointbyinside,andmerge相closecontent.
-    - toat客观categoryQ&A,ifquestionanswernon常简short,can适whensupplementoneto两sentence相closeinformation,by丰富content.
+    - toat客观categoryQ&A,ifquestionanswernonoften simpleshort,can适whensupplementoneto两sentence相closeinformation,by丰富content.
     - youneedaccording touserrequireandreturn答contentchoosesuitable,beautifulreturn答format,ensurecan读propertystrong.
-    - youreturn答shouldcomprehensive多相closewebpagecomereturn答,notcanduplicatequoteonewebpage.
+    - youreturn答shouldcomprehensivemultiple aspectsclosewebpagecomereturn答,notcanduplicatequoteonewebpage.
     - unlessuserrequire,nothenyoureturn答languageneedanduserasklanguagemaintainone致.
     - output漂亮markdown format,contentmiddleaddonetheseandtheme相closeemojitable情符number.
     
@@ -234,20 +234,20 @@ class DelightfulLLMDomainService
     2. **timehandle**:
        - eventtime尽quantityprecisetomonthshare(如 "2023-05"),若searchcontentnotprovidespecificmonthshare,buthavefingeroutuphalfyearor者downhalfyear,canuse("2023 uphalfyear"),若nothavethen,useyearshare(如 "2023").
        - 若同oneeventin多quotemiddleout现,priorityusemost早time.
-       - 若timenotexplicit,according tocontextspeculatedmost早maybetime,andensure合理.
+       - 若timenotexplicit,according tocontextspeculatedmost早maybetime,andensurereasonable.
     3. **eventextractandfilter**:
        - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)独立事实,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
-       - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,聚焦specifichair生thing.
+       - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichair生thing.
        - **skipnoclosecontent**:
          - pure and quietstatedescription(如not变property,background介绍,notimechange).
-         - datastatisticsor财务information(如营收,利润).
+         - datastatisticsorfinanceinformation(like revenue,利润).
          - 主观comment,analyzeorspeculated(unlessandeventdirectly相close).
          - notimeassociateandandquestionnoclosedetail.
        - **retain原then**:as long ascontentandtime相closeandmatchquestiontheme,尽quantityretainforevent.
     4. **outputrequire**:
        - by JSON formatreturn,event按timereverse orderrowcolumn(from晚to早).
        - eacheventcontain "name","time","description" threefield.
-       - 若searchcontentnot足bygenerateevent,returnnullarray `[]`,avoid凭null臆造.
+       - 若searchcontentnot足bygenerateevent,returnnullarray `[]`,avoid凭nullfabricate.
     
     ## outputexample:
     ```json
@@ -686,7 +686,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * letbigmodel虚nulldecompose子question,to热梗/实o clockdecomposewillnotgood.
+     * letbigmodel虚nulldecompose子question,tohot meme/实o clockdecomposewillnotgood.
      * @return string[]
      */
     public function generateSearchKeywordsByUserInput(DelightfulChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array
@@ -1162,7 +1162,7 @@ class DelightfulLLMDomainService
                 str_replace(PHP_EOL, '', $llmResponse),
                 Json::encode($subQuestions)
             ));
-            // haveo clockwillreturn多维array,inthiswithinfilter
+            // haveo clockwillreturnmulti-dimensionalarray,inthiswithinfilter
             $returnQuestions = [];
             foreach ($subQuestions as $subQuestion) {
                 if (is_string($subQuestion)) {

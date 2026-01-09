@@ -178,7 +178,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentsByOrganizationPage($authenticatable, $page, $pageSize, $agentName);
     }
 
-    // getapplication市场助理
+    // getapplicationmarket助理
     public function getAgentsFromMarketplace(RequestInterface $request)
     {
         $this->getAuthorization();

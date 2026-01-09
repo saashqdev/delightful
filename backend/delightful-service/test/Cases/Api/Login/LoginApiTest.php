@@ -37,7 +37,7 @@ class LoginApiTest extends AbstractHttpTest
             'Content-Type' => 'application/json',
             'Accept' => '*/*',
             'Connection' => 'keep-alive',
-            'Cookie' => 'sl-session=UetTdUM44WeDs3Dd1UeJaQ==',
+            'cookie' => 'sl-session=UetTdUM44WeDs3Dd1UeJaQ==',
         ]);
         $expectData = [
             'code' => 1000,

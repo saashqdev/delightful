@@ -24,7 +24,7 @@ interface ModeGroupRelationRepositoryInterface
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * according to分组IDgetassociate关系.
+     * according to分groupIDgetassociate关系.
      * @return ModeGroupRelationEntity[]
      */
     public function findByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): array;
@@ -35,7 +35,7 @@ interface ModeGroupRelationRepositoryInterface
     public function save(ModeGroupRelationEntity $relationEntity): ModeGroupRelationEntity;
 
     /**
-     * according to分组IDdeleteassociate关系.
+     * according to分groupIDdeleteassociate关系.
      */
     public function deleteByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): bool;
 

@@ -178,7 +178,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'type', 'tool_set_id', 'enabled', 'version_code', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
                 break;
             case Type::Tools:
-                // need具有该工具集的读permission
+                // need具有该tool集的读permission
                 if (empty($query->getToolSetId())) {
                     break;
                     //                    ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'tool_set_id']);
@@ -234,7 +234,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * query工具.
+     * querytool.
      * @return array{total: int, list: array<DelightfulFlowEntity>}
      */
     public function queryTools(Authenticatable $authorization, DelightfulFLowQuery $query): array
@@ -243,7 +243,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         $query->setType(Type::Tools->value);
-        // 一定是指定query的工具 codes
+        // 一定是指定query的tool codes
         if (empty($query->getCodes())) {
             return ['total' => 0, 'list' => []];
         }
@@ -255,7 +255,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $toolSetIds = array_keys($toolSetResources);
 
-        // 再filter一下enable的工具集
+        // 再filter一下enable的tool集
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
@@ -269,7 +269,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $query->setEnabled(true);
         $data = $this->delightfulFlowDomainService->queries($dataIsolation, $query, $page);
 
-        // 增加系统内置工具
+        // 增加系统内置tool
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
             foreach ($builtInToolSet->getTools() as $builtInTool) {
                 if ($builtInTool->isShow() && in_array($builtInTool->getCode(), $query->getCodes())) {
@@ -308,13 +308,13 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolSetQuery->setOrder(['updated_at' => 'desc']);
         $toolSetData = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
 
-        // 增加系统内置工具集
+        // 增加系统内置tool集
         $builtInTools = [];
         if ($withBuiltInTools) {
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私有工具，need有高级图像convertURIpermission才能显示
+                    // 私有tool，need有高级图像convertURIpermission才能显示
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -344,13 +344,13 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolQuery->setOrder(['updated_at' => 'desc']);
         $toolResult = $this->delightfulFlowDomainService->queries($dataIsolation, $toolQuery, $page);
 
-        // 增加系统内置工具
+        // 增加系统内置tool
         /** @var BuiltInToolInterface $builtInTool */
         foreach ($builtInTools as $builtInTool) {
             $toolResult['list'][] = $builtInTool->generateToolFlow($dataIsolation->getCurrentOrganizationCode());
         }
 
-        // 挂载到工具上面
+        // 挂载到tool上面
         foreach ($toolResult['list'] as $tool) {
             $index = array_search($tool->getToolSetId(), $toolSetIds);
             if ($index === false) {
@@ -365,7 +365,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolSetData['list'][$index]->addTool($toolInfo);
         }
 
-        // filter掉没有任何工具的工具集
+        // filter掉没有任何tool的tool集
         $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 

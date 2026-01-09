@@ -11,7 +11,7 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
  * 水印configurationinterface
- * 用于在开源项目中定义水印configurationstandard，由企业项目implement具体逻辑.
+ * 用于在开源project中定义水印configurationstandard，由企业projectimplement具体逻辑.
  */
 interface WatermarkConfigInterface
 {

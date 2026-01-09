@@ -28,7 +28,7 @@ enum LoadBalancingType: int
     case WEIGHTED_ROUND_ROBIN = 3;
 
     /**
-     * 哈希策略 - according torequest的哈希value选择后端service
+     * hash策略 - according torequest的hashvalue选择后端service
      */
     case HASH = 4;
 
@@ -43,7 +43,7 @@ enum LoadBalancingType: int
             self::RANDOM => '随机',
             self::ROUND_ROBIN => '轮询',
             self::WEIGHTED_ROUND_ROBIN => '加权轮询',
-            self::HASH => '哈希',
+            self::HASH => 'hash',
         };
     }
 

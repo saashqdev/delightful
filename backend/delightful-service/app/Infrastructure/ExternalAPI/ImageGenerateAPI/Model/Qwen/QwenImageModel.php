@@ -530,7 +530,7 @@ class QwenImageModel extends AbstractImageGenerate
         array $qwenResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发安全
+        // useRedislockensure并发security
         $lockOwner = $this->lockResponse($response);
         try {
             // 从通义千问response中提取data

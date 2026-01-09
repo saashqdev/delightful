@@ -21,7 +21,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * associate的mcp服务code.
+     * associate的mcpservicecode.
      */
     protected string $mcpServerCode;
 

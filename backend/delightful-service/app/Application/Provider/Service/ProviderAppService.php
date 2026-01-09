@@ -53,7 +53,7 @@ class ProviderAppService
         // 批量getservice商configuration实体（用于get别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所有图标path按organizationencoding分组（includemodel图标和service商图标）
+        // 收集所有图标path按organizationencoding分group（includemodel图标和service商图标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];

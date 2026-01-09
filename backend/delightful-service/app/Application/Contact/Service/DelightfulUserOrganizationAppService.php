@@ -21,7 +21,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * userwhen前organizationapplication服务
+ * userwhen前organizationapplicationservice
  */
 class DelightfulUserOrganizationAppService
 {

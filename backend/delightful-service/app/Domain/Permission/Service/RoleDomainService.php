@@ -294,7 +294,7 @@ readonly class RoleDomainService
      * 逻辑：
      * 1. getcurrentorganization下名为 ORGANIZATION_ADMIN_ROLE_NAME 的role；
      * 2. 若不存在直接return；
-     * 3. call仓库移除user与该role的associate关系；
+     * 3. call仓library移除user与该role的associate关系；
      * 4. 如果role不再associate任何user，保持role本身不变（如有need，可考虑后续清理）。
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
@@ -309,7 +309,7 @@ readonly class RoleDomainService
 
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // use仓库移除user与role的associate
+        // use仓library移除user与role的associate
         $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), [$userId]);
     }
 }

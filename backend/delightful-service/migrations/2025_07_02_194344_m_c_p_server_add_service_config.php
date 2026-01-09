@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_mcp_servers', function (Blueprint $table) {
-            $table->json('service_config')->nullable()->comment('服务configuration')->after('enabled');
+            $table->json('service_config')->nullable()->comment('serviceconfiguration')->after('enabled');
         });
     }
 

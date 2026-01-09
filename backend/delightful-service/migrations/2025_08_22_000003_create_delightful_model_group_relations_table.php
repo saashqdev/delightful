@@ -21,7 +21,7 @@ return new class extends Migration {
         Schema::create('delightful_mode_group_relations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('mode_id')->unsigned()->default(0)->comment('modeID');
-            $table->bigInteger('group_id')->unsigned()->default(0)->comment('分组ID');
+            $table->bigInteger('group_id')->unsigned()->default(0)->comment('分groupID');
             $table->string('model_id')->default('')->comment('modelID');
             $table->bigInteger('provider_model_id')->unsigned()->default(0)->comment('modeltable主键 id');
             $table->integer('sort')->default(0)->comment('sort权重');

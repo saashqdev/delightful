@@ -10,7 +10,7 @@ namespace App\Domain\Provider\Event;
 use App\Domain\Provider\Entity\ProviderConfigEntity;
 
 /**
- * 服务商configurationcreateevent.
+ * service商configurationcreateevent.
  */
 class ProviderConfigCreatedEvent
 {

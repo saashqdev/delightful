@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('number', 32)->nullable()->comment('企业规模');
             $table->tinyInteger('status')->default(1)->comment('status 1:正常 2:disable');
             $table->string('creator_id', 64)->nullable()->comment('create人');
-            $table->tinyInteger('type')->default(0)->comment('organizationtype 0:团队organization 1:个人organization');
+            $table->tinyInteger('type')->default(0)->comment('organizationtype 0:teamorganization 1:个人organization');
             $table->timestamps();
             $table->softDeletes();
 

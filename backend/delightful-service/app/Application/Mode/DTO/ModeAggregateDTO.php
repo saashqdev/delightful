@@ -14,7 +14,7 @@ class ModeAggregateDTO extends AbstractDTO
     protected ModeDTO $mode;
 
     /**
-     * @var ModeGroupAggregateDTO[] 分组聚合根array
+     * @var ModeGroupAggregateDTO[] 分group聚合根array
      */
     protected array $groups = [];
 
@@ -47,7 +47,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加分组聚合根.
+     * 添加分group聚合根.
      */
     public function addGroupAggregate(ModeGroupAggregateDTO $groupAggregate): void
     {
@@ -55,7 +55,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * according to分组IDget分组聚合根.
+     * according to分groupIDget分group聚合根.
      */
     public function getGroupAggregateByGroupId(string $groupId): ?ModeGroupAggregateDTO
     {
@@ -68,7 +68,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 移除分组聚合根.
+     * 移除分group聚合根.
      */
     public function removeGroupAggregateByGroupId(string $groupId): void
     {
@@ -94,7 +94,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get分组quantity.
+     * get分groupquantity.
      */
     public function getGroupCount(): int
     {

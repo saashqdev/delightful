@@ -18,10 +18,10 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('organizationencoding');
             $table->string('code', 80)->unique()->comment('唯一encoding');
-            $table->string('name', 64)->default('')->comment('MCP服务name');
-            $table->string('description', 255)->default('')->comment('MCP服务description');
-            $table->string('icon', 255)->default('')->comment('MCP服务图标');
-            $table->string('type', 16)->default('sse')->comment('服务type: sse或stdio');
+            $table->string('name', 64)->default('')->comment('MCPservicename');
+            $table->string('description', 255)->default('')->comment('MCPservicedescription');
+            $table->string('icon', 255)->default('')->comment('MCPservice图标');
+            $table->string('type', 16)->default('sse')->comment('servicetype: sse或stdio');
             $table->boolean('enabled')->default(false)->comment('是否enable: 0-disable, 1-enable');
             $table->string('creator', 64)->default('')->comment('create者');
             $table->dateTime('created_at')->comment('creation time');

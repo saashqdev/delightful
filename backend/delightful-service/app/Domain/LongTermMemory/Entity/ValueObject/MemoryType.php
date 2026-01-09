@@ -13,7 +13,7 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
 enum MemoryType: string
 {
     case MANUAL_INPUT = 'manual_input';           // 手动input
-    case CONVERSATION_ANALYSIS = 'conversation_analysis';  // conversation分析
+    case CONVERSATION_ANALYSIS = 'conversation_analysis';  // conversationanalyze
     case USER_NOTE = 'user_note';                // user笔记
     case SYSTEM_KNOWLEDGE = 'system_knowledge';  // system知识
 
@@ -24,7 +24,7 @@ enum MemoryType: string
     {
         return match ($this) {
             self::MANUAL_INPUT => '手动input',
-            self::CONVERSATION_ANALYSIS => 'conversation分析',
+            self::CONVERSATION_ANALYSIS => 'conversationanalyze',
             self::USER_NOTE => 'user笔记',
             self::SYSTEM_KNOWLEDGE => 'system知识',
         };

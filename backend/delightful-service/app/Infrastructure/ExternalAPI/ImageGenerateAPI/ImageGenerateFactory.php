@@ -350,12 +350,12 @@ class ImageGenerateFactory
             $request->setResponseFormat($data['response_format']);
         }
 
-        // process组图featureparameter
+        // processgroup图featureparameter
         if (isset($data['sequential_image_generation'])) {
             $request->setSequentialImageGeneration($data['sequential_image_generation']);
         }
 
-        // process组图featureoptionparameter
+        // processgroup图featureoptionparameter
         if (isset($data['sequential_image_generation_options']) && is_array($data['sequential_image_generation_options'])) {
             $request->setSequentialImageGenerationOptions($data['sequential_image_generation_options']);
         }
@@ -373,7 +373,7 @@ class ImageGenerateFactory
     {
         $size = trim($size);
 
-        // process标准format：1024x1024
+        // processstandardformat：1024x1024
         if (preg_match('/^(\d+)[x×](\d+)$/i', $size, $matches)) {
             return [(string) $matches[1], (string) $matches[2]];
         }

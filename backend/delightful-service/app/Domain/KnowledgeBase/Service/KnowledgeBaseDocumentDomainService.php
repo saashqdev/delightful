@@ -25,7 +25,7 @@ use Delightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\DbConnection\Db;
 
 /**
- * knowledge base文档领域service
+ * knowledge basedocument领域service
  */
 readonly class KnowledgeBaseDocumentDomainService
 {
@@ -72,7 +72,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * queryknowledge base文档list.
+     * queryknowledge basedocumentlist.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
@@ -82,7 +82,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 查看单个knowledge base文档detail.
+     * 查看单个knowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): KnowledgeBaseDocumentEntity
     {
@@ -94,17 +94,17 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * deleteknowledge base文档.
+     * deleteknowledge basedocument.
      */
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity, string $documentCode): void
     {
         $documentEntity = null;
         Db::transaction(function () use ($dataIsolation, $documentCode, $knowledgeBaseEntity) {
             $knowledgeBaseCode = $knowledgeBaseEntity->getCode();
-            // 首先delete文档下的所有片段
+            // 首先deletedocument下的所有片段
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
-            // 然后delete文档本身
+            // 然后deletedocument本身
             $this->knowledgeBaseDocumentRepository->destroy($dataIsolation, $knowledgeBaseCode, $documentCode);
             // update字符数
             $deltaWordCount = -$documentEntity->getWordCount();
@@ -116,7 +116,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 重建knowledge base文档向量索引.
+     * 重建knowledge basedocument向量索引.
      */
     public function rebuild(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $force = false): void
     {
@@ -143,7 +143,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * @return array<string, int> array<knowledge basecode, 文档quantity>
+     * @return array<string, int> array<knowledge basecode, documentquantity>
      */
     public function getDocumentCountByKnowledgeBaseCodes(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
@@ -151,7 +151,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * @return array<string, KnowledgeBaseDocumentEntity> array<文档code, 文档名>
+     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, document名>
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $documentCodes): array
     {
@@ -165,16 +165,16 @@ readonly class KnowledgeBaseDocumentDomainService
 
     public function getOrCreateDefaultDocument(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity): KnowledgeBaseDocumentEntity
     {
-        // 尝试getdefault文档
+        // 尝试getdefaultdocument
         $defaultDocumentCode = $knowledgeBaseEntity->getDefaultDocumentCode();
         $documentEntity = $this->knowledgeBaseDocumentRepository->show($dataIsolation, $knowledgeBaseEntity->getCode(), $defaultDocumentCode);
         if ($documentEntity) {
             return $documentEntity;
         }
-        // 如果文档不存在，createnewdefault文档
+        // 如果document不存在，createnewdefaultdocument
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
-            ->setName('未命名文档.txt')
+            ->setName('未命名document.txt')
             ->setKnowledgeBaseCode($knowledgeBaseEntity->getCode())
             ->setCreatedUid($knowledgeBaseEntity->getCreator())
             ->setUpdatedUid($knowledgeBaseEntity->getCreator())
@@ -227,7 +227,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $lastId = null;
         /** @var array<KnowledgeBaseDocumentEntity> $res */
         $res = [];
-        // at mostallowget一万份文档
+        // at mostallowget一万份document
         while ($loopCount--) {
             $entities = $this->knowledgeBaseDocumentRepository->getByThirdFileId($dataIsolation, $thirdPlatformType, $thirdFileId, $knowledgeBaseCode, $lastId, $pageSize);
             if (empty($entities)) {
@@ -240,7 +240,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * delete文档下的所有片段.
+     * deletedocument下的所有片段.
      */
     private function destroyFragments(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -253,7 +253,7 @@ readonly class KnowledgeBaseDocumentDomainService
     private function prepareForCreation(KnowledgeBaseDocumentEntity $documentEntity): void
     {
         if (empty($documentEntity->getName())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '文档name不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentname不能为空');
         }
 
         if (empty($documentEntity->getKnowledgeBaseCode())) {
@@ -273,7 +273,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
         $documentEntity->setSyncStatus(0); // 0 table示未sync
-        // 以下property均从文档file中get
+        // 以下property均从documentfile中get
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());
         $documentEntity->setThirdPlatformType($documentFile?->getPlatformType());

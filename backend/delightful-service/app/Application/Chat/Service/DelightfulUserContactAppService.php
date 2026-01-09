@@ -198,7 +198,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             // getdepartmentdetail
             $departmentsInfo = $this->departmentChartDomainService->getDepartmentFullPathByIds($dataIsolation, $departmentIds);
 
-            // 组装user和departmentinfo
+            // group装user和departmentinfo
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 

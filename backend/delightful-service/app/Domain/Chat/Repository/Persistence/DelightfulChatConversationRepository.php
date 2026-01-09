@@ -341,7 +341,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         return $result;
     }
 
-    // 避免 redis cache序列化的object,占用太多内存
+    // 避免 redis cacheserialize的object,占用太多内存
     #[Cacheable(prefix: 'conversation', value: '_#{conversationId}', ttl: 10)]
     private function getConversationArrayById(string $conversationId): array
     {

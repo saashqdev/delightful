@@ -58,7 +58,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 拉取user的收件message.
+     * pulluser的收件message.
      * @throws Throwable
      */
     public function pullByPageToken(RequestInterface $request): array
@@ -86,7 +86,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 拉取user的最近一段time收件message.
+     * pulluser的最近一段time收件message.
      * @throws Throwable
      */
     public function pullRecentMessage(RequestInterface $request): array
@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （前端performance有issue的temporary方案）按session id 分组get几条最新message.
+     * （前端performance有issue的temporary方案）按session id 分groupget几条最新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {

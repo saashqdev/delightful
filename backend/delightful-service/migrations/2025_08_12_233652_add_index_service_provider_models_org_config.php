@@ -41,7 +41,7 @@ return new class extends Migration {
                 $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_config_id');
             }
 
-            // 添加new组合索引：organization_code, model_parent_id（如果不存在）
+            // 添加newgroup合索引：organization_code, model_parent_id（如果不存在）
             if (! Schema::hasIndex('service_provider_models', 'idx_org_model_parent')) {
                 $table->index(['organization_code', 'model_parent_id'], 'idx_org_model_parent');
             }
@@ -62,7 +62,7 @@ return new class extends Migration {
 
         // 添加 service_provider_original_models table的索引
         Schema::table('service_provider_original_models', function (Blueprint $table) {
-            // 核心组合索引（如果不存在）
+            // 核心group合索引（如果不存在）
             if (! Schema::hasIndex('service_provider_original_models', 'idx_org_type')) {
                 $table->index(['organization_code', 'type'], 'idx_org_type');
             }

@@ -266,7 +266,7 @@ class ByteDanceSTSService
 
             $data = Json::decode($cachedData);
 
-            // check是否已expire（额外的安全check）
+            // check是否已expire（额外的securitycheck）
             if (isset($data['expires_at']) && $data['expires_at'] <= time()) {
                 $this->redis->del($cacheKey);
                 return null;

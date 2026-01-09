@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\__;
 
 /**
- * 通义千问服务商.
+ * 通义千问service商.
  */
 class QwenProvider implements IProvider
 {

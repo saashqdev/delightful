@@ -11,7 +11,7 @@ use App\Domain\LongTermMemory\DTO\UpdateMemoryDTO;
 use App\Domain\LongTermMemory\Entity\LongTermMemoryEntity;
 
 /**
- * 长期记忆组装器.
+ * 长期记忆group装器.
  */
 class LongTermMemoryAssembler
 {

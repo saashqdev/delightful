@@ -46,7 +46,7 @@ class FileParser
             return $this->cache->get($cacheKey, '');
         }
         try {
-            // / 检测file安全性
+            // / 检测filesecurity性
             $safeUrl = SSRFUtil::getSafeUrl($fileUrl, replaceIp: false);
             $tempFile = tempnam(sys_get_temp_dir(), 'downloaded_');
 

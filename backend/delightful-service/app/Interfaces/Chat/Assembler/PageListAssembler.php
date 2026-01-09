@@ -16,7 +16,7 @@ class PageListAssembler
             // 不限制条数，所以没有下一页
             $hasMore = false;
         } elseif ($maxRecords !== null) {
-            // if知道总record数，则直接比较
+            // if知道总record数，则直接compare
             $hasMore = ($currentOffset + $currentLimit) < $maxRecords;
         } else {
             // if不知道总record数，when前result集不为null则有下一页

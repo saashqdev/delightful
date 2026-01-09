@@ -59,7 +59,7 @@ class InstructionConfig extends AbstractEntity
     protected bool $sendDirectly = false;
 
     /**
-     * 指令组件type，1 单option 2 开关 3 文本type 4 statustype.
+     * 指令group件type，1 单option 2 开关 3 文本type 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 
@@ -316,7 +316,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * according to指令组件typeget对应的name和value.
+     * according to指令group件typeget对应的name和value.
      *
      * type为开关时，name 取的是 开/关，value 取 $instruction->getOn / $instruction->getOff
      * type为单选时, name 取的是 显示name，value：$instructionValue

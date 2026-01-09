@@ -184,12 +184,12 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array
     {
-        // 如果是官方服务商，need进行datamerge和status判断
+        // 如果是官方service商，need进行datamerge和status判断
         if ($providerEntity->getProviderCode() === ProviderCode::Official && ! OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
-        // 非官方服务商，按原逻辑query指定configuration下的model
+        // 非官方service商，按原逻辑query指定configuration下的model
         if (! is_numeric($configId)) {
             return [];
         }
@@ -229,7 +229,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         }
 
         // cache未命中，execute原逻辑
-        // 1. 先queryorganization下enable的服务商configurationID
+        // 1. 先queryorganization下enable的service商configurationID
         $builder = ProviderConfigModel::query();
 
         if ($status !== null) {

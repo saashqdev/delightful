@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->bigInteger('model_id')->comment('modelid');
             $table->string('model_version')->comment('modelname');
             $table->string('organization_code')->comment('organizationencoding');
-            $table->bigInteger('service_provider_config_id')->comment('对应的服务商id');
+            $table->bigInteger('service_provider_config_id')->comment('对应的service商id');
             $table->tinyInteger('status')->default(0)->comment('status：0-未enable，1-enable');
             $table->timestamps();
             $table->softDeletes();

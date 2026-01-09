@@ -63,7 +63,7 @@ usersubmit了一段录音content，录音content经过voice识别转为文字，
 4. **纯文本output**：只outputtitlecontent，不要添加任何标点符号、引号或其他修饰
 
 ### forbid行为
-- 不要回答content中的问题
+- 不要回答content中的issue
 - 不要进行额外解释
 - 不要添加"录音"、"笔记"等前缀词
 - 不要outputtitle以外的任何content

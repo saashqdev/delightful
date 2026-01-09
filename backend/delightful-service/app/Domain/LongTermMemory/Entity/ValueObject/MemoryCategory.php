@@ -13,12 +13,12 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
 enum MemoryCategory: string
 {
     /**
-     * 项目记忆 - 与特定项目相关的记忆.
+     * project记忆 - 与特定project相关的记忆.
      */
     case PROJECT = 'project';
 
     /**
-     * 全局记忆 - 不特定于某个项目的记忆.
+     * 全局记忆 - 不特定于某个project的记忆.
      */
     case GENERAL = 'general';
 
@@ -28,13 +28,13 @@ enum MemoryCategory: string
     public function getDisplayName(): string
     {
         return match ($this) {
-            self::PROJECT => '项目记忆',
+            self::PROJECT => 'project记忆',
             self::GENERAL => '全局记忆',
         };
     }
 
     /**
-     * according to项目ID判断记忆category.
+     * according toprojectID判断记忆category.
      */
     public static function fromProjectId(?string $projectId): self
     {

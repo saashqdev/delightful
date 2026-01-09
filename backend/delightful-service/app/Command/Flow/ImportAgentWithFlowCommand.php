@@ -29,7 +29,7 @@ class ImportAgentWithFlowCommand extends HyperfCommand
         $this->container = $container;
         $this->exportImportService = $container->get(DelightfulFlowExportImportAppService::class);
         parent::__construct('agent:import');
-        $this->setDescription('从OSSimport助理（contain主process、工具、子process等）');
+        $this->setDescription('从OSSimport助理（contain主process、tool、子process等）');
         $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理datafile的URL');
         $this->addArgument('user_id', InputArgument::REQUIRED, 'userid');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organizationencoding');

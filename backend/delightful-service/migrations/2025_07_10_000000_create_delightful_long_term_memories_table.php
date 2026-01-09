@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->json('metadata')->nullable()->comment('元data');
             $table->string('org_id', 36)->comment('organizationID');
             $table->string('app_id', 36)->comment('applicationID');
-            $table->string('project_id', 36)->nullable()->default(null)->comment('项目ID');
+            $table->string('project_id', 36)->nullable()->default(null)->comment('projectID');
             $table->string('user_id', 36)->comment('userID');
             $table->timestamp('last_accessed_at')->nullable()->comment('最后accesstime');
             $table->timestamp('last_reinforced_at')->nullable()->comment('最后强化time');

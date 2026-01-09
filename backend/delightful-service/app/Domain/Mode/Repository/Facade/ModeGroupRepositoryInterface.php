@@ -13,39 +13,39 @@ use App\Domain\Mode\Entity\ModeGroupEntity;
 interface ModeGroupRepositoryInterface
 {
     /**
-     * according toIDget分组.
+     * according toIDget分group.
      */
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupEntity;
 
     /**
-     * according tomodeIDget分组列表.
+     * according tomodeIDget分group列表.
      * @return ModeGroupEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * save分组.
+     * save分group.
      */
     public function save(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity;
 
     /**
-     * update分组.
+     * update分group.
      */
     public function update(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity;
 
     /**
-     * getmode下enable的分组列表.
+     * getmode下enable的分group列表.
      * @return ModeGroupEntity[]
      */
     public function findEnabledByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * delete分组.
+     * delete分group.
      */
     public function delete(ModeDataIsolation $dataIsolation, int|string $id): bool;
 
     /**
-     * according tomodeIDdelete所有分组.
+     * according tomodeIDdelete所有分group.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 
@@ -55,7 +55,7 @@ interface ModeGroupRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $groupEntities);
 
     /**
-     * according to多个modeID批量get分组列表.
+     * according to多个modeID批量get分group列表.
      * @param int[]|string[] $modeIds
      * @return ModeGroupEntity[]
      */

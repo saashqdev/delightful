@@ -112,7 +112,7 @@ class ServiceProviderInitializer
                 'id' => '759109912413282304',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于安全、可靠和可持续的AIresolve方案,',
+                'description' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案,',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0, // Normal
                 'category' => 'llm',
@@ -128,7 +128,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于安全、可靠和可持续的AIresolve方案,',
+                        'zh_CN' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案,',
                     ],
                 ]),
                 'remark' => '',
@@ -136,9 +136,9 @@ class ServiceProviderInitializer
             // Volcengine - LLM
             [
                 'id' => '759110465734258688',
-                'name' => '火山引擎',
+                'name' => '火山engine',
                 'provider_code' => 'Volcengine',
-                'description' => '字节跳动旗下的云服务平台，有自主研发的豆package大model系列。涵盖豆package通用model Pro、lite，具备different文本handle和综合能力，还有role扮演、voice合成等多种model。',
+                'description' => '字节跳动旗下的云service平台，有自主研发的豆package大model系列。涵盖豆package通用model Pro、lite，具备different文本handle和综合能力，还有role扮演、voice合成等多种model。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -154,7 +154,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'A cloud service platform under ByteDance, with independently developed Doubao large model series. Includes Doubao general models Pro and lite with different text processing and comprehensive capabilities, as well as various models for role-playing, speech synthesis, etc.',
-                        'zh_CN' => '字节跳动旗下的云服务平台，有自主研发的豆package大model系列。涵盖豆package通用model Pro、lite，具备different文本handle和综合能力，还有role扮演、voice合成等多种model。',
+                        'zh_CN' => '字节跳动旗下的云service平台，有自主研发的豆package大model系列。涵盖豆package通用model Pro、lite，具备different文本handle和综合能力，还有role扮演、voice合成等多种model。',
                     ],
                 ]),
                 'remark' => '',
@@ -162,9 +162,9 @@ class ServiceProviderInitializer
             // Volcengine - VLM
             [
                 'id' => '759115881155366912',
-                'name' => '火山引擎',
+                'name' => '火山engine',
                 'provider_code' => 'Volcengine',
-                'description' => '提供多种智能绘图大model，生图style多样，安全性极高，可亠泛application干教育、娱乐、办公等场量。',
+                'description' => '提供多种智能绘图大model，生图style多样，security性极高，可亠泛application干教育、娱乐、办公等场量。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -176,11 +176,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Volcengine',
-                        'zh_CN' => '火山引擎',
+                        'zh_CN' => '火山engine',
                     ],
                     'description' => [
                         'en_US' => 'Provides a variety of intelligent drawing models, with diverse image generation styles, extremely high security, and can be widely applied to education, entertainment, office and other scenarios.',
-                        'zh_CN' => '提供多种智能绘图大model，生图style多样，安全性极高，可亠泛application干教育、娱乐、办公等场量。',
+                        'zh_CN' => '提供多种智能绘图大model，生图style多样，security性极高，可亠泛application干教育、娱乐、办公等场量。',
                     ],
                 ]),
                 'remark' => '',
@@ -242,7 +242,7 @@ class ServiceProviderInitializer
                 'id' => '759145734546132992',
                 'name' => 'TTAPI.io',
                 'provider_code' => 'TTAPI',
-                'description' => '整合多平台文生图、文生video能力，Midjourney API、DALL·E 3、Luma文生video、Flux API服务等等。',
+                'description' => '整合多平台文生图、文生video能力，Midjourney API、DALL·E 3、Luma文生video、Flux APIservice等等。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/TTAPI.io Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -258,7 +258,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Integrates multi-platform text-to-image, text-to-video capabilities, Midjourney API, DALL·E 3, Luma text-to-video, Flux API service, etc.',
-                        'zh_CN' => '整合多平台文生图、文生video能力，Midjourney API、DALL·E 3、Luma文生video、Flux API服务等等。',
+                        'zh_CN' => '整合多平台文生图、文生video能力，Midjourney API、DALL·E 3、Luma文生video、Flux APIservice等等。',
                     ],
                 ]),
                 'remark' => '',
@@ -266,9 +266,9 @@ class ServiceProviderInitializer
             // Custom OpenAI - LLM
             [
                 'id' => '764067503220973568',
-                'name' => 'customize服务商',
+                'name' => 'customizeservice商',
                 'provider_code' => 'OpenAI',
-                'description' => '请useinterface与 OpenAI API same形式的服务商',
+                'description' => '请useinterface与 OpenAI API same形式的service商',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/default图标.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -280,11 +280,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Custom service provider',
-                        'zh_CN' => 'customize服务商',
+                        'zh_CN' => 'customizeservice商',
                     ],
                     'description' => [
                         'en_US' => 'Use a service provider with the same form of interface as the OpenAI API',
-                        'zh_CN' => '请useinterface与 OpenAI API same形式的服务商',
+                        'zh_CN' => '请useinterface与 OpenAI API same形式的service商',
                     ],
                 ]),
                 'remark' => '支持 OpenAI API 形式',
@@ -294,7 +294,7 @@ class ServiceProviderInitializer
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
+                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项service，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
+                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项service，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
                     ],
                 ]),
                 'remark' => '',
@@ -320,7 +320,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920384',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => '提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于安全、可靠和可持续的AIresolve方案。',
+                'description' => '提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -336,7 +336,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure offers a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, and is committed to providing safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AImodel，includeGPT-3.5和最newGPT-4系列，支持多种datatype和复杂task，致力于安全、可靠和可持续的AIresolve方案。',
+                        'zh_CN' => 'Azure 提供多种先进的AImodel，includeGPT-3.5和最newGPT-4系列，支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案。',
                     ],
                 ]),
                 'remark' => '',
@@ -398,7 +398,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920387',
                 'name' => 'VolcengineArk',
                 'provider_code' => 'VolcengineArk',
-                'description' => '火山引擎方舟',
+                'description' => '火山engine方舟',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -410,7 +410,7 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'VolcengineArk',
-                        'zh_CN' => '火山引擎（方舟）',
+                        'zh_CN' => '火山engine（方舟）',
                     ],
                     'description' => [
                         'en_US' => '',

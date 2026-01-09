@@ -541,7 +541,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * V2version：组合submittask和轮询result，用于OpenAIformatgenerate.
+     * V2version：group合submittask和轮询result，用于OpenAIformatgenerate.
      */
     private function requestImageGenerationV2(VolcengineModelRequest $imageGenerateRequest, bool $isImageToImage): array
     {
@@ -553,12 +553,12 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * validate火山引擎APIresponsedataformat.
+     * validate火山engineAPIresponsedataformat.
      */
     private function validateVolcengineResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('火山引擎responsedataformaterror：缺少datafield');
+            throw new Exception('火山engineresponsedataformaterror：缺少datafield');
         }
 
         $data = $result['data'];
@@ -567,22 +567,22 @@ class VolcengineModel extends AbstractImageGenerate
                             || (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0]));
 
         if (! $hasValidImageData) {
-            throw new Exception('火山引擎responsedataformaterror：缺少imagedata');
+            throw new Exception('火山engineresponsedataformaterror：缺少imagedata');
         }
     }
 
     /**
-     * 将火山引擎imagedata添加到OpenAIresponseobject中.
+     * 将火山engineimagedata添加到OpenAIresponseobject中.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发安全
+        // useRedislockensure并发security
         $lockOwner = $this->lockResponse($response);
         try {
-            // 从火山引擎response中提取data
+            // 从火山engineresponse中提取data
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -722,7 +722,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山引擎originaldata添加水印.
+     * 为火山engineoriginaldata添加水印.
      */
     private function processVolcengineRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -751,7 +751,7 @@ class VolcengineModel extends AbstractImageGenerate
                 }
             } catch (Exception $e) {
                 // 水印handlefail时，recorderror但不影响imagereturn
-                $this->logger->error('火山引擎image水印handlefail', [
+                $this->logger->error('火山engineimage水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);

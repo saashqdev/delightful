@@ -15,12 +15,12 @@ use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Hyperf\Codec\Json;
 
 /**
- * ASR 组装器
- * 负责 ASR 相关的实体组装和pathconvert.
+ * ASR group装器
+ * 负责 ASR 相关的实体group装和pathconvert.
  *
  * pathformatinstruction：
  * - 工作区相对path (workspace-relative): .asr_recordings/session_xxx 或 录音总结_xxx
- * - 项目工作directory (work directory): project_123/workspace
+ * - project工作directory (work directory): project_123/workspace
  * - organization码+APP_ID+bucket_md5前缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
  * - 完整path/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
  */
@@ -31,7 +31,7 @@ class AsrAssembler
      *
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
-     * @param int $projectId 项目ID
+     * @param int $projectId projectID
      * @param string $relativePath 相对path（如：.asr_recordings/task_123 或 录音总结_xxx）
      * @param string $fullPrefix 完整前缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
      * @param string $workDir 工作directory
@@ -102,7 +102,7 @@ class AsrAssembler
      * convert关系: file_key = fullPrefix + workDir + "/" + relativePath
      *
      * @param string $fullPrefix organization码+APP_ID+bucket_md5前缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
-     * @param string $workDir 项目工作directory (如: project_123/workspace)
+     * @param string $workDir project工作directory (如: project_123/workspace)
      * @param string $relativePath 工作区相对path (如: .asr_recordings/session_xxx)
      * @return string 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      */
@@ -125,7 +125,7 @@ class AsrAssembler
      */
     public static function extractWorkspaceRelativePath(string $fileKey): string
     {
-        // 标准化path分隔符
+        // standard化path分隔符
         $normalizedPath = str_replace('\\', '/', trim($fileKey, '/'));
 
         // 查找 workspace/ 的position

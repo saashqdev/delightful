@@ -928,7 +928,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * 为新register的organizationcreate人initialize一个文档parseAgent.
+     * 为新register的organizationcreate人initialize一个documentparseAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -944,8 +944,8 @@ class DelightfulAgentAppService extends AbstractAppService
 
         // 准备基本configuration
         $config = [
-            'agent_name' => '文档parse助手',
-            'agent_description' => '文档parse助手',
+            'agent_name' => 'documentparse助手',
+            'agent_description' => 'documentparse助手',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $this->loadPresetConfig('document', ['modelName' => $modelName])['flow'],
         ];
@@ -1030,11 +1030,11 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * getenable的assistantversion列表.
-     * optimize：直接在领域服务层进行JOINquery，避免传入过多ID.
+     * optimize：直接在领域service层进行JOINquery，避免传入过多ID.
      */
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
-        // 直接call领域服务get该organization下enable的assistantversion，避免先get所有ID再query
+        // 直接call领域serviceget该organization下enable的assistantversion，避免先get所有ID再query
         return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
     }
 

@@ -10,7 +10,7 @@ namespace App\Domain\Provider\Service\ConnectivityTest;
 use App\Domain\Provider\DTO\Item\ProviderConfigItem;
 
 /**
- * 服务商interface.
+ * service商interface.
  */
 interface IProvider
 {

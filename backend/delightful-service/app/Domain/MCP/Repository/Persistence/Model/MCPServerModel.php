@@ -17,13 +17,13 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $id 雪花ID
  * @property string $organization_code organizationencoding
  * @property string $code 唯一encoding
- * @property string $name MCP服务name
- * @property string $description MCP服务description
- * @property string $icon MCP服务图标
- * @property string $type 服务type ('sse' 或 'stdio')
+ * @property string $name MCPservicename
+ * @property string $description MCPservicedescription
+ * @property string $icon MCPservice图标
+ * @property string $type servicetype ('sse' 或 'stdio')
  * @property bool $enabled 是否enable
- * @property string $external_sse_url 外部SSE服务URL
- * @property null|array $service_config 服务configuration
+ * @property string $external_sse_url 外部SSEserviceURL
+ * @property null|array $service_config serviceconfiguration
  * @property string $creator create者
  * @property DateTime $created_at creation time
  * @property string $modifier 修改者

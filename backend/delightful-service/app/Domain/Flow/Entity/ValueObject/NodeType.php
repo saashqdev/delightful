@@ -10,7 +10,7 @@ namespace App\Domain\Flow\Entity\ValueObject;
 /**
  * 节点type
  * 1 ~ 99 原子节点
- * 100 ~ 199 组合节点的硬encodingimplement.
+ * 100 ~ 199 group合节点的硬encodingimplement.
  */
 enum NodeType: int
 {
@@ -21,7 +21,7 @@ enum NodeType: int
     case Start = 1;
 
     /*
-     * LLM Chat 这里是history原因的组合节点
+     * LLM Chat 这里是history原因的group合节点
      * 大语言model optionalmodel、prompt、temperature
      */
     case LLM = 2;
@@ -155,7 +155,7 @@ enum NodeType: int
     case LLMCall = 25;
 
     /**
-     * 工具节点.
+     * tool节点.
      */
     case Tool = 26;
 

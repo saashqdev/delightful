@@ -16,7 +16,7 @@ use App\Interfaces\Provider\Assembler\ProviderConfigIdAssembler;
 use DateTime;
 
 /**
- * 服务商templategenerate仓储
+ * service商templategenerate仓储
  * 支持为所有 ProviderCode generatetemplateconfiguration.
  */
 readonly class ProviderTemplateRepository
@@ -27,22 +27,22 @@ readonly class ProviderTemplateRepository
     }
 
     /**
-     * get所有服务商的template列表.
-     * @param Category $category 服务商category
-     * @return ProviderConfigDTO[] 服务商template列表
+     * get所有service商的template列表.
+     * @param Category $category service商category
+     * @return ProviderConfigDTO[] service商template列表
      */
     public function getAllProviderTemplates(Category $category): array
     {
         $templates = [];
 
-        // get指定category下所有enable的服务商
+        // get指定category下所有enable的service商
         $providers = $this->providerRepository->getByCategory($category);
 
         foreach ($providers as $provider) {
-            // 为每个服务商createtemplateconfiguration
+            // 为每个service商createtemplateconfiguration
             $templateId = ProviderConfigIdAssembler::generateProviderTemplate($provider->getProviderCode(), $category);
 
-            // 除了 delightful 服务商，defaultstatus都是close
+            // 除了 delightful service商，defaultstatus都是close
             $defaultStatus = $provider->getProviderCode() === ProviderCode::Official
                 ? Status::Enabled
                 : Status::Disabled;

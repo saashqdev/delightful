@@ -43,7 +43,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * getorganization下的 Delightful 服务商configuration（not containmodeldetail）.
+     * getorganization下的 Delightful service商configuration（not containmodeldetail）.
      */
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO
     {
@@ -54,13 +54,13 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             return null;
         }
 
-        // 2. 先query ProviderCode::Official 的服务商 ID
+        // 2. 先query ProviderCode::Official 的service商 ID
         $delightfulProvider = $this->providerRepository->getOfficial($category);
         if (! $delightfulProvider) {
             return null;
         }
 
-        // 3. querycurrentorganization是否已有该服务商的configuration
+        // 3. querycurrentorganization是否已有该service商的configuration
         $configBuilder = $this->createConfigQuery()->where('organization_code', $organizationCode);
         $configBuilder->where('service_provider_id', $delightfulProvider->getId());
 
@@ -84,7 +84,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             return null;
         }
 
-        // according toCategorytypesetting对应的organizationDelightful服务商templateconfigurationID
+        // according toCategorytypesetting对应的organizationDelightfulservice商templateconfigurationID
         $templateId = ProviderConfigIdAssembler::generateProviderTemplate(ProviderCode::Official, $category);
 
         $templateData = [
@@ -111,11 +111,11 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * according toorganizationencoding和类别get Delightful 服务商enable中的model列表.
+     * according toorganizationencoding和类别get Delightful service商enable中的model列表.
      *
      * @param string $organizationCode organizationencoding
-     * @param null|Category $category 服务商类别，为null时return所有categorymodel
-     * @return array<ProviderModelEntity> Delightful 服务商model实体array
+     * @param null|Category $category service商类别，为null时return所有categorymodel
+     * @return array<ProviderModelEntity> Delightful service商model实体array
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array
     {
@@ -262,7 +262,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     /**
      * get官方organization下所有enable的model（containconfigurationfilter）.
      *
-     * @param null|Category $category 服务商类别，为null时return所有categorymodel
+     * @param null|Category $category service商类别，为null时return所有categorymodel
      * @return array<ProviderModelEntity> filter后的官方model列表
      */
     private function getOfficialEnabledModels(?Category $category = null): array
@@ -270,7 +270,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         // get官方organizationencoding
         $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-        // 1. 先query官方organization下enable的服务商configurationID
+        // 1. 先query官方organization下enable的service商configurationID
         $enabledConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $officialOrganizationCode)
             ->where('status', Status::Enabled->value)
@@ -366,7 +366,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());
-        $organizationModel->setIsOffice(true); // Delightful服务商下的model
+        $organizationModel->setIsOffice(true); // Delightfulservice商下的model
         $organizationModel->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $organizationModel->setId(IdGenerator::getSnowId());
         // 避免error复制 config

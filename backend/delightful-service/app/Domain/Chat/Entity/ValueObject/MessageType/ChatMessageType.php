@@ -42,12 +42,12 @@ enum ChatMessageType: string
     case Location = 'location';
 
     /**
-     * 比较 low 的push多次 seq，前端merge成一个渲染.
+     * compare low 的push多次 seq，前端merge成一个渲染.
      */
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
     /**
-     * 多次streamresponse后，finalmerge成一条message入库.
+     * 多次streamresponse后，finalmerge成一条message入library.
      */
     case AggregateAISearchCardV2 = 'aggregate_ai_search_card_v2';
 
@@ -70,7 +70,7 @@ enum ChatMessageType: string
 
     /**
      * 未知message。
-     * 由于version迭代，发版time差异等原因，可能产生未知type的message。
+     * 由于version迭代，发版timediff等原因，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 

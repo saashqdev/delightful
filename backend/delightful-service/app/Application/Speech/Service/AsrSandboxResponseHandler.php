@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR 沙箱responsehandle服务
+ * ASR 沙箱responsehandleservice
  * 负责handle沙箱 finish interface的response，updatefile和directoryrecord.
  */
 readonly class AsrSandboxResponseHandler
@@ -236,7 +236,7 @@ readonly class AsrSandboxResponseHandler
             ExceptionBuilder::throw(AsrErrorCode::CreateAudioFileFailed, '', ['error' => 'taskstatusinfo不完整']);
         }
 
-        // get项目info并build file_key
+        // getprojectinfo并build file_key
         $projectEntity = $this->projectDomainService->getProject(
             (int) $taskStatus->projectId,
             $taskStatus->userId

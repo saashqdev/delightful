@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('uid', 64);
             $table->text('key');
             $table->text('name');
-            $table->unsignedTinyInteger('origin_type')->comment('upload来source：0-无1-image组件2-file组件')->default(0);
+            $table->unsignedTinyInteger('origin_type')->comment('upload来source：0-无1-imagegroup件2-filegroup件')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->string('organization_code')->index()->comment('organizationcode');

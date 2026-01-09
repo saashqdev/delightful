@@ -658,7 +658,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * createtest文档并return文档data.
+     * createtestdocument并returndocumentdata.
      */
     protected function createDocument(array $overrideData = [], ?string $knowledgeBaseCode = null): array
     {
@@ -667,7 +667,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
             $knowledgeBaseCode = $knowledgeBase['code'];
         }
         $defaultData = [
-            'name' => 'test文档',
+            'name' => 'testdocument',
             'doc_type' => 1,
             'enabled' => true,
             'doc_metadata' => ['source' => 'test'],

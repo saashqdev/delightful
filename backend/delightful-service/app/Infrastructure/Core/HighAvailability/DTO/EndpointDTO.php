@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * 用于在业务process中同时save业务ID和高可用组件接入点databaseID.
+ * 用于在业务process中同时save业务ID和高可用group件接入点databaseID.
  */
 class EndpointDTO extends AbstractDTO
 {

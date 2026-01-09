@@ -29,7 +29,7 @@ class AdminModeGroupApi extends AbstractApi
     }
 
     /**
-     * according tomodeIDget分组列table.
+     * according tomodeIDget分group列table.
      */
     public function getGroupsByModeId(RequestInterface $request, string $modeId): array
     {
@@ -39,7 +39,7 @@ class AdminModeGroupApi extends AbstractApi
     }
 
     /**
-     * get分组detail.
+     * get分groupdetail.
      */
     public function getGroupDetail(RequestInterface $request, string $groupId): array
     {
@@ -55,7 +55,7 @@ class AdminModeGroupApi extends AbstractApi
     }
 
     /**
-     * create分组.
+     * create分group.
      */
     public function createGroup(CreateModeGroupRequest $request)
     {
@@ -66,7 +66,7 @@ class AdminModeGroupApi extends AbstractApi
     }
 
     /**
-     * update分组.
+     * update分group.
      */
     public function updateGroup(UpdateModeGroupRequest $request, string $groupId)
     {
@@ -77,7 +77,7 @@ class AdminModeGroupApi extends AbstractApi
     }
 
     /**
-     * delete分组.
+     * delete分group.
      */
     public function deleteGroup(RequestInterface $request, string $groupId): array
     {

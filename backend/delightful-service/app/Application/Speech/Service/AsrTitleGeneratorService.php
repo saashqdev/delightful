@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR titlegenerate服务
+ * ASR titlegenerateservice
  * 负责according todifferent场景generate录音总结title.
  */
 readonly class AsrTitleGeneratorService

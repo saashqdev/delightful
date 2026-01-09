@@ -105,7 +105,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest2();
         $this->addTeamMembers($projectId, 51202); // No permission error
 
-        // 3. 项目create者添加member - shouldsuccess
+        // 3. projectcreate者添加member - shouldsuccess
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 
@@ -259,7 +259,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     // ========== 辅助testmethod ==========
 
     /**
-     * 开启项目协作.
+     * 开启project协作.
      */
     public function enableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -284,7 +284,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * close项目协作.
+     * closeproject协作.
      */
     public function disableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -326,7 +326,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加团队member.
+     * 添加teammember.
      */
     public function addTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -363,7 +363,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加更多团队member（test管理者permission）.
+     * 添加更多teammember（test管理者permission）.
      */
     public function addMoreTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -633,7 +633,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 清理项目memberdata（直接databasedelete）.
+     * 清理projectmemberdata（直接databasedelete）.
      */
     private function cleanupProjectMembers(string $projectId): void
     {
@@ -654,9 +654,9 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $memberEntity->setStatus(MemberStatus::ACTIVE);
 
             $projectMemberDomainService->addInternalMembers([$memberEntity], $this->getOrganizationCode());
-            echo "清理项目memberdatacomplete: {$projectId}\n";
+            echo "清理projectmemberdatacomplete: {$projectId}\n";
         } catch (Exception $e) {
-            echo '清理项目memberdatafail: ' . $e->getMessage() . "\n";
+            echo '清理projectmemberdatafail: ' . $e->getMessage() . "\n";
         }
     }
 }

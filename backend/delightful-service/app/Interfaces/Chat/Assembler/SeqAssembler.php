@@ -281,7 +281,7 @@ class SeqAssembler
         $messageTopicId = (string) $seqEntity->getExtra()?->getTopicId();
         // generate客户端message结构
         $clientMessageData = [
-            // 服务端generate的message唯一id，全局唯一。用于withdraw、editmessage。
+            // service端generate的message唯一id，全局唯一。用于withdraw、editmessage。
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
             // 客户端generate，needios/安卓/web三端共同确定一个generate算法。用于告知客户端，delightful_message_id的由来
             'app_message_id' => $seqEntity->getAppMessageId(),
@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方的messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversation窗口。 客户端canaccording to此value确定message是否要reminder等。如果本地没有发现这个conversationid，主动向服务端queryconversation窗口detail
+            // message所属conversation窗口。 客户端canaccording to此value确定message是否要reminder等。如果本地没有发现这个conversationid，主动向service端queryconversation窗口detail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本条message所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

@@ -65,7 +65,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
             $childrenNodes[$title] = $branch['next_nodes'] ?? [];
         }
 
-        // at least是兜底分支
+        // at least是兜底branch
         $vertexResult->setChildrenIds($elseBranch['next_nodes'] ?? []);
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
@@ -105,7 +105,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-你是一个意图识别节点，用于分析user的意图，你将得到一份userinput的content，帮我分析出user的意图和置信度。
+你是一个意图识别节点，用于analyzeuser的意图，你将得到一份userinput的content，帮我analyze出user的意图和置信度。
 resultneed在限定的意图range中。
 
 # 技能 - 意图识别
@@ -133,17 +133,17 @@ resultneed在限定的意图range中。
 }    
 
 # process
-1. 你将得到一份userinput的content，帮我分析出user的意图和置信度。
+1. 你将得到一份userinput的content，帮我analyze出user的意图和置信度。
 2. 推理user的意图，将推理过程放到 JSON 中的 推导过程 field，解释为什么will得出这些意图和置信度。
 3. 如果识别到了意图，请填写最佳匹配和匹配到的意图，是否识别为 true，最佳意图 一定是置信度最高的，其中 匹配到的意图有 field是according to 置信度 从大到小排列。
 4. 如果在currentrange没有找到任何意图，是否识别为 false，请填写识别fail原因，最佳匹配和匹配到的意图都should是空的。
-5. 只willreturn JSON format，不will再return其他content，如果一定need有return，请放到remark中，回答的content一定能被 JSON 工具parse。
+5. 只willreturn JSON format，不will再return其他content，如果一定need有return，请放到remark中，回答的content一定能被 JSON toolparse。
 
 # 限制
 - 意图range的format是 '意图'：'意图description'。其中意图descriptioncan为空。意图和意图description一定是用 '' package裹的data。
 - 不can回答其他issue，只能回答意图识别的issue。
 
-# need分析的意图range如下
+# needanalyze的意图range如下
 {$content}
 MARKDOWN;
     }

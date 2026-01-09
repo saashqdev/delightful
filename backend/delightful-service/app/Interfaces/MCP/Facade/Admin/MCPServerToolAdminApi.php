@@ -20,7 +20,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     protected MCPServerToolAppService $mcpServerToolAppService;
 
     /**
-     * getMCP服务下的tool列table.
+     * getMCPservice下的tool列table.
      */
     public function queries(string $code)
     {
@@ -37,7 +37,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     }
 
     /**
-     * saveMCP服务tool.
+     * saveMCPservicetool.
      */
     public function save(string $code)
     {
@@ -52,7 +52,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     }
 
     /**
-     * getMCP服务tooldetail.
+     * getMCPservicetooldetail.
      */
     public function show(string $code, int $id)
     {
@@ -64,7 +64,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     }
 
     /**
-     * deleteMCP服务tool.
+     * deleteMCPservicetool.
      */
     public function destroy(string $code, int $id)
     {

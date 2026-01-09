@@ -21,14 +21,14 @@ return new class extends Migration {
             // associatefield
             $table->string('knowledge_base_code', 255)->comment('associateknowledge basecode')->index();
 
-            // 文档元data
-            $table->string('name', 255)->comment('文档name');
+            // document元data
+            $table->string('name', 255)->comment('documentname');
             $table->string('description', 255)->comment('description');
-            $table->string('code', 255)->comment('文档code');
+            $table->string('code', 255)->comment('documentcode');
             $table->unsignedInteger('version')->default(1)->comment('version');
             $table->boolean('enabled')->default(true)->comment('1 enable 0 disable');
-            $table->unsignedInteger('doc_type')->comment('文档type');
-            $table->json('doc_metadata')->nullable()->comment('文档元data');
+            $table->unsignedInteger('doc_type')->comment('documenttype');
+            $table->json('doc_metadata')->nullable()->comment('document元data');
             $table->tinyInteger('sync_status')->default(0)->comment('syncstatus');
             $table->tinyInteger('sync_times')->default(0)->comment('sync次数');
             $table->string('sync_status_message', 1000)->default('')->comment('syncstatusmessage');

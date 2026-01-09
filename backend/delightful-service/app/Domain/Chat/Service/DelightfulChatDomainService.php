@@ -83,7 +83,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      */
     public function pullMessage(DataIsolation $dataIsolation, array $params): array
     {
-        // checkuser本地 seq 和服务端 seq 的差异
+        // checkuser本地 seq 和service端 seq 的diff
         $seqID = (int) $params['max_seq_info']['user_local_seq_id'];
         // return最近的 N 条message
         return $this->delightfulSeqRepository->getAccountSeqListByDelightfulId($dataIsolation, $seqID, 50);
@@ -95,7 +95,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      */
     public function pullByPageToken(DataIsolation $dataIsolation, array $params, int $pageSize): array
     {
-        // checkuser本地 seq 和服务端 seq 的差异
+        // checkuser本地 seq 和service端 seq 的diff
         $seqID = (int) $params['page_token'];
         // return最近的 N 条message
         $clientSeqList = $this->delightfulSeqRepository->getAccountSeqListByDelightfulId($dataIsolation, $seqID, $pageSize);
@@ -109,7 +109,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * according to app_message_id 拉取message.
+     * according to app_message_id pullmessage.
      * @return ClientSequenceResponse[]
      */
     public function pullByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array
@@ -130,7 +130,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, MessagesQueryDTO $messagesQueryDTO): array
     {
-        // checkuser本地 seq 和服务端 seq 的差异
+        // checkuser本地 seq 和service端 seq 的diff
         $seqId = (int) $messagesQueryDTO->getPageToken();
         $pageSize = 200;
         // return最近的 N 条message
@@ -235,7 +235,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * notify收件方有新message(收件方可能是自己,或者是chatobject).
-     * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/服务器stress
+     * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/service器stress
      */
     public function pushChatSequence(SeqCreatedEvent $seqCreatedEvent): void
     {
@@ -620,7 +620,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             $selfSendMessageRoleType = 'user';
             $otherSendMessageRoleType = 'assistant';
         }
-        // 组装大model的messagerequest
+        // group装大model的messagerequest
         $messagesQueryDTO = new MessagesQueryDTO();
         $messagesQueryDTO->setConversationId($conversationId)->setLimit(200)->setTopicId($topicId);
         // get话题的最近 20 条conversationrecord
@@ -694,7 +694,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      * @todo 如果要对外提供stream api，need改为 redis cache，以支持断线重连。
      *
      *  支持一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
-     *  服务端willcache所有stream的data，并在streamend时一次性push，以减少丢package的概率，提升message完整性。
+     *  service端willcache所有stream的data，并在streamend时一次性push，以减少丢package的概率，提升message完整性。
      *  for example：
      *  [
      *      'users.0.name' => 'delightful',
@@ -734,7 +734,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 });
             } else {
                 # default就是正在stream中
-                // 如果距离上次落库超过 3 秒，本次updatedatabase
+                // 如果距离上次落library超过 3 秒，本次updatedatabase
                 $newJsonStreamCachedDTO = (new JsonStreamCachedDTO());
                 $lastUpdateDatabaseTime = $jsonStreamCachedData->getLastUpdateDatabaseTime() ?? 0;
                 if (time() - $lastUpdateDatabaseTime >= 3) {
@@ -749,7 +749,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 $this->updateCacheStreamData($cachedStreamMessageKey, $newJsonStreamCachedDTO);
 
                 if ($needUpdateDatabase) {
-                    // 省点事，减少datamerge，只把之前的data落库
+                    // 省点事，减少datamerge，只把之前的data落library
                     $this->updateDatabaseMessageContent($jsonStreamCachedData->getDelightfulMessageId(), $jsonStreamCachedData->getContent());
                 }
                 // 准备WebSocketpushdata并send
@@ -871,7 +871,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      */
     public function createDelightfulMessageByAppClient(DelightfulMessageEntity $messageDTO, DelightfulConversationEntity $senderConversationEntity): DelightfulMessageEntity
     {
-        // 由于databasedesign有问题，conversation表没有record user 的 type，因此这里needquery一遍发件方userinfo
+        // 由于databasedesign有issue，conversation表没有record user 的 type，因此这里needquery一遍发件方userinfo
         // todo conversation表shouldrecord user 的 type
         $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
         if ($senderUserEntity === null) {
@@ -915,7 +915,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             if (! $messageStruct instanceof StreamMessageInterface || $messageStruct->getStreamOptions() === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
-            // 由于databasedesign有问题，conversation表没有record user 的 type，因此这里needquery一遍发件方userinfo
+            // 由于databasedesign有issue，conversation表没有record user 的 type，因此这里needquery一遍发件方userinfo
             // todo conversation表shouldrecord user 的 type
             $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
             if ($senderUserEntity === null) {
@@ -977,7 +977,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             Db::rollBack();
             throw $exception;
         }
-        // 前端渲染need：如果是streamstart时，推一个普通 seq 给前端，用于渲染占位，但是 seq_id 并没有落库。
+        // 前端渲染need：如果是streamstart时，推一个普通 seq 给前端，用于渲染占位，但是 seq_id 并没有落library。
         SocketIOUtil::sendSequenceId($receiveSeqEntity);
         return $senderSeqEntity;
     }

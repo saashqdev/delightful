@@ -25,7 +25,7 @@ use function Hyperf\Support\retry;
 
 /**
  * message分发模块.
- * processdifferent优先级message的消费者,用于写收件方的seq.
+ * processdifferent优先级message的consumer,用于写收件方的seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {

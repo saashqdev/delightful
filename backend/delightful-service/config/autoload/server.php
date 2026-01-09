@@ -47,7 +47,7 @@ $servers = [
         ],
     ],
 ];
-// ！！！注意，开了scheduletask的 pod 就不start websocket 服务了，只start http 服务
+// ！！！注意，开了scheduletask的 pod 就不start websocket service了，只start http service
 $enableCrontab = (bool) env('CRONTAB_ENABLE', true);
 $enableCrontab && $servers = [$servers[0]];
 return [

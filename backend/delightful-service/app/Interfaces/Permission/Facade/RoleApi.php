@@ -81,7 +81,7 @@ class RoleApi extends AbstractPermissionApi
             $allUserInfo = $this->userInfoAppService->getBatchUserInfo($allNeedUserIds, $contactIsolation);
         }
 
-        // 重新组装listdata
+        // 重新group装listdata
         $list = [];
         foreach ($result['list'] as $index => $roleEntity) {
             $limitedIds = $roleUserIdsMap[$index] ?? [];

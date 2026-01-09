@@ -41,7 +41,7 @@ class MethodHandlerFactory
     /**
      * create指定method的process器实例.
      * 每次call都createnewprocess器实例，ensure短生命周期.
-     * 注意：call者need手动为return的process器set所需的Manager组件.
+     * 注意：call者need手动为return的process器set所需的Managergroup件.
      *
      * @return null|MethodHandlerInterface 如果找不到对应method的process器则returnnull
      */

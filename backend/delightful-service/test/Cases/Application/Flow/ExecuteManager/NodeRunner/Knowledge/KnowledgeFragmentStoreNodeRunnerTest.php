@@ -104,7 +104,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'content' => 'Q: 如何做到好的汇报？ A: can阅读 [述职思维导图v1.1.2](https://xxxxx.com/docx/605565507182194688) 或continue阅读下文； 即，我pass回答哪些问题can达成「说清楚我做了什么、做得怎么样」 问题清单 (青春版) 1. 在去年/上个季度，你主要负责或参与的项目，在各个阶段的原定的plan是怎样的？这些plan中你所负责的部分都按时complete了吗？finalactual落地的情况如何？ a. 如果项目complete的很好，这个好的result与你所做的哪些努力有关？ b. 如果项目complete的不好，存在的问题与你的反思是什么？你是如何改进的？改进的result如何？ 2. 过去一年里，你都为你的团队做了什么事情？付出了什么？这些事情和付出的result是如何？好在哪里？不好是什么原因？为什么？ 3. 过去一年里，你都为你自己都做了什么事情？付出了什么？这些事情和付出的result是如何？好在哪里？不好是什么原因？为什么？ 4. 明年上半年的plan是什么？',
+            'content' => 'Q: 如何做到好的汇报？ A: can阅读 [述职思维导图v1.1.2](https://xxxxx.com/docx/605565507182194688) 或continue阅读下文； 即，我pass回答哪些issuecan达成「说清楚我做了什么、做得怎么样」 issue清单 (青春版) 1. 在去年/上个季度，你主要负责或参与的project，在各个阶段的原定的plan是怎样的？这些plan中你所负责的部分都按时complete了吗？finalactual落地的情况如何？ a. 如果projectcomplete的很好，这个好的result与你所做的哪些努力有关？ b. 如果projectcomplete的不好，存在的issue与你的反思是什么？你是如何改进的？改进的result如何？ 2. 过去一年里，你都为你的team做了什么事情？付出了什么？这些事情和付出的result是如何？好在哪里？不好是什么原因？为什么？ 3. 过去一年里，你都为你自己都做了什么事情？付出了什么？这些事情和付出的result是如何？好在哪里？不好是什么原因？为什么？ 4. 明年上半年的plan是什么？',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);

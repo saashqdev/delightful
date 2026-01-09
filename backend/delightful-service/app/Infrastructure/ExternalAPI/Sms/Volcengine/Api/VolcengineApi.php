@@ -68,12 +68,12 @@ abstract class VolcengineApi
     protected string $secretKey = '';
 
     /**
-     * 短信signature. such as[灯塔引擎].
+     * 短信signature. such as[灯塔engine].
      */
     protected string $sign = '';
 
     /**
-     * 短信message组id.
+     * 短信messagegroupid.
      */
     protected string $messageGroupId = '';
 
@@ -208,7 +208,7 @@ abstract class VolcengineApi
 
     protected function setHeaders(): void
     {
-        // 研究发现,文档要求在request头中传AccessKey/SecretKey/ServiceName/Region,其实can不传. Authorization头中有传AccessKey
+        // 研究发现,document要求在request头中传AccessKey/SecretKey/ServiceName/Region,其实can不传. Authorization头中有传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],

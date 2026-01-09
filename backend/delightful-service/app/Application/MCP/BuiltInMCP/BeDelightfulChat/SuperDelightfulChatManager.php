@@ -89,7 +89,7 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. generate一份大modelcall工具可阅读的description
+        // 2. generate一份大modelcalltool可阅读的description
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理进行conversation
 
@@ -137,11 +137,11 @@ MARKDOWN;
 • 开关type：只能是 "on" 或 "off"
 • 如果不提供指令parameter，将usedefaultvalue
 
-call示例：
+callexample：
 ```json
 {
   "agent_id": "123456",
-  "message": "你好，请帮我分析一下...",
+  "message": "你好，请帮我analyze一下...",
   "conversation_id": "conv_001",
   "instruction": [
     {"name": "开关", "value": "on"},

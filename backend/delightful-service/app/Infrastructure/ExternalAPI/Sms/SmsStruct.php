@@ -41,7 +41,7 @@ class SmsStruct
 
     /**
      * 短信signature.
-     * @example 灯塔引擎
+     * @example 灯塔engine
      */
     public SignEnum $sign;
 

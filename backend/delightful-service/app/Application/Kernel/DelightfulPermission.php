@@ -164,7 +164,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * generate所有可能的permission组合.
+     * generate所有可能的permissiongroup合.
      */
     public function generateAllPermissions(): array
     {

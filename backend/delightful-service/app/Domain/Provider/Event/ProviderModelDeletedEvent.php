@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Event;
 
 /**
- * 服务商modeldeleteevent.
+ * service商modeldeleteevent.
  */
 class ProviderModelDeletedEvent
 {

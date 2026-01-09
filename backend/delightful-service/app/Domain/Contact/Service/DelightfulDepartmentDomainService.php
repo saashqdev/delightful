@@ -38,7 +38,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         $departmentIds = array_values(array_unique($departmentIds));
         // getorganization所有department
         $departments = $this->departmentRepository->getOrganizationDepartments($dataIsolation->getCurrentOrganizationCode(), keyById: true);
-        // 组装departmentinfo
+        // group装departmentinfo
         $res = [];
         foreach ($departmentIds as $departmentId) {
             $curDepartmentId = $departmentId;

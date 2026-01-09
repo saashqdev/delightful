@@ -36,7 +36,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * set工具管理器.
+     * settoolmanager.
      */
     public function setToolManager(MCPToolManager $toolManager): self
     {
@@ -45,19 +45,19 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * get工具管理器.
-     * @throws InternalErrorException 当工具管理器未set时throw
+     * gettoolmanager.
+     * @throws InternalErrorException 当toolmanager未set时throw
      */
     public function getToolManager(): MCPToolManager
     {
         if (! isset($this->toolManager)) {
-            throw new InternalErrorException('工具管理器(ToolManager)未set');
+            throw new InternalErrorException('toolmanager(ToolManager)未set');
         }
         return $this->toolManager;
     }
 
     /**
-     * set资源管理器.
+     * set资源manager.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self
     {
@@ -66,19 +66,19 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * get资源管理器.
-     * @throws InternalErrorException 当资源管理器未set时throw
+     * get资源manager.
+     * @throws InternalErrorException 当资源manager未set时throw
      */
     public function getResourceManager(): MCPResourceManager
     {
         if (! isset($this->resourceManager)) {
-            throw new InternalErrorException('资源管理器(ResourceManager)未set');
+            throw new InternalErrorException('资源manager(ResourceManager)未set');
         }
         return $this->resourceManager;
     }
 
     /**
-     * sethint管理器.
+     * sethintmanager.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self
     {
@@ -87,13 +87,13 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * gethint管理器.
-     * @throws InternalErrorException 当hint管理器未set时throw
+     * gethintmanager.
+     * @throws InternalErrorException 当hintmanager未set时throw
      */
     public function getPromptManager(): MCPPromptManager
     {
         if (! isset($this->promptManager)) {
-            throw new InternalErrorException('hint管理器(PromptManager)未set');
+            throw new InternalErrorException('hintmanager(PromptManager)未set');
         }
         return $this->promptManager;
     }

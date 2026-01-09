@@ -42,7 +42,7 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?string $creatorId = null;
 
-    protected int $type = 0; // organizationtype 0:团队organization 1:个人organization
+    protected int $type = 0; // organizationtype 0:teamorganization 1:个人organization
 
     protected ?DateTime $createdAt = null;
 

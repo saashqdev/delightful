@@ -12,17 +12,17 @@ use App\Infrastructure\Core\AbstractObject;
 class QuestionItem extends AbstractObject
 {
     /**
-     * @var null|string 由某个问题引申出的问题。if parentQuestionId 为null(0)，则表示该associate问题是由userinput的问题产生。
+     * @var null|string 由某个issue引申出的issue。if parentQuestionId 为null(0)，则表示该associateissue是由userinput的issue产生。
      */
     protected ?string $parentQuestionId = null;
 
     /**
-     * 问题 id.
+     * issue id.
      */
     protected string $questionId;
 
     /**
-     * 问题content.
+     * issuecontent.
      */
     protected string $question;
 

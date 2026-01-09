@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * 集合项目本身多套的 ModelGatewayMapper - final全部convert为 odin model parameterformat.
+ * 集合project本身多套的 ModelGatewayMapper - final全部convert为 odin model parameterformat.
  */
 class ModelGatewayMapper extends ModelMapper
 {
@@ -318,17 +318,17 @@ class ModelGatewayMapper extends ModelMapper
         }
         $providerConfigIds = array_unique($providerConfigIds);
 
-        // load 服务商configuration
+        // load service商configuration
         $providerConfigs = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, $providerConfigIds);
         $providerIds = [];
         foreach ($providerConfigs as $providerConfig) {
             $providerIds[] = $providerConfig->getServiceProviderId();
         }
 
-        // get 服务商
+        // get service商
         $providers = $this->providerManager->getProvidersByIds($providerDataIsolation, $providerIds);
 
-        // 组装data
+        // group装data
         foreach ($providerModels as $providerModel) {
             if (! $providerConfig = $providerConfigs[$providerModel->getServiceProviderConfigId()] ?? null) {
                 $modelLogs[$providerModel->getModelId()]['error'] = 'ProviderConfig not found';
@@ -397,10 +397,10 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customize服务商统一显示别名，如果没有别名则显示“customize服务商”（need考虑多语言）
+            // customizeservice商统一显示别名，如果没有别名则显示“customizeservice商”（need考虑多语言）
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // 内置服务商的统一显示 服务商name，不用显示别名（need考虑多语言）
+            // 内置service商的统一显示 service商name，不用显示别名（need考虑多语言）
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
@@ -495,19 +495,19 @@ class ModelGatewayMapper extends ModelMapper
         // getconfiguration
         $providerConfigEntity = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, [$providerModelEntity->getServiceProviderConfigId()])[$providerModelEntity->getServiceProviderConfigId()] ?? null;
         if (! $providerConfigEntity) {
-            $this->logger->info('服务商configuration不存在', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('service商configuration不存在', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerConfigEntity->getStatus()->isEnabled()) {
-            $this->logger->info('服务商configuration被disable', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('service商configuration被disable', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
 
-        // get服务商
+        // getservice商
         $providerEntity = $this->providerManager->getProvidersByIds($providerDataIsolation, [$providerConfigEntity->getServiceProviderId()])[$providerConfigEntity->getServiceProviderId()] ?? null;
 
         if (! $providerEntity) {
-            $this->logger->info('服务商不存在', ['model' => $model, 'provider_id' => $providerConfigEntity->getServiceProviderId()]);
+            $this->logger->info('service商不存在', ['model' => $model, 'provider_id' => $providerConfigEntity->getServiceProviderId()]);
             return null;
         }
 

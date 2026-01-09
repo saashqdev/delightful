@@ -83,7 +83,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             return $modelType;
         }
 
-        // 将可用model转为哈希table，implementO(1)time复杂度的查找
+        // 将可用model转为hashtable，implementO(1)time复杂度的查找
         $availableModels = array_flip($chatModelsName);
 
         // get系统default的降级链

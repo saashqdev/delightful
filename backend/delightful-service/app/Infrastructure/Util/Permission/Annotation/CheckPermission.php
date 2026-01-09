@@ -15,7 +15,7 @@ use Hyperf\Di\Annotation\AbstractAnnotation;
 /**
  * permission校验annotation，用于method或类上声明所需的permission。
  *
- * 示例：
+ * example：
  * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]
  */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::TARGET_METHOD)]
@@ -42,17 +42,17 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * 组合为完整permission键，如 "console.api.assistant.query".
+     * group合为完整permission键，如 "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
-        // 为了compatible旧逻辑，returnfirst组合键
+        // 为了compatible旧逻辑，returnfirstgroup合键
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }
 
     /**
-     * return所有permission键组合（resources x operations 的笛卡尔积）。
+     * return所有permission键group合（resources x operations 的笛卡尔积）。
      * 当声明了多个资源或多个操作时，permissionpass任意一个键即可。
      *
      * @return array<string>

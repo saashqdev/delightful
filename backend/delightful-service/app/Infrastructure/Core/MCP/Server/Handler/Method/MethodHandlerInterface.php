@@ -25,32 +25,32 @@ interface MethodHandlerInterface
     public function handle(MessageInterface $request): ?array;
 
     /**
-     * settingtool管理器.
+     * settingtoolmanager.
      */
     public function setToolManager(MCPToolManager $toolManager): self;
 
     /**
-     * gettool管理器.
+     * gettoolmanager.
      */
     public function getToolManager(): MCPToolManager;
 
     /**
-     * setting资源管理器.
+     * setting资源manager.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self;
 
     /**
-     * get资源管理器.
+     * get资源manager.
      */
     public function getResourceManager(): MCPResourceManager;
 
     /**
-     * settingprompt管理器.
+     * settingpromptmanager.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self;
 
     /**
-     * getprompt管理器.
+     * getpromptmanager.
      */
     public function getPromptManager(): MCPPromptManager;
 }

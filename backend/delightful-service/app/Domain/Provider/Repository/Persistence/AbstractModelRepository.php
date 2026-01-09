@@ -106,7 +106,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * override getAttributes method以correctprocess复杂field的序列化.
+     * override getAttributes method以correctprocess复杂field的serialize.
      */
     protected function getFieldAttributes(AbstractEntity $entity): array
     {

@@ -333,7 +333,7 @@ class DelightfulAgentApi extends AbstractApi
         return InstructType::getTypeOptions();
     }
 
-    // get交互指令组type
+    // get交互指令grouptype
     public function getInstructGroupTypeOptions()
     {
         return InstructGroupPosition::getTypeOptions();

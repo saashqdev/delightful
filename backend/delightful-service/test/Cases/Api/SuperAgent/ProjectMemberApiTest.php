@@ -17,7 +17,7 @@ use Mockery;
 
 /**
  * @internal
- * 项目member管理APItest
+ * projectmember管理APItest
  */
 class ProjectMemberApiTest extends AbstractApiTest
 {
@@ -31,7 +31,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     protected function setUp(): void
     {
-        // 清理项目memberdata，避免唯一键conflict
+        // 清理projectmemberdata，避免唯一键conflict
         $this->cleanupProjectMembers($this->projectId);
         parent::setUp();
     }
@@ -55,7 +55,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest2();
         $this->updateFileContent($fileId, 'test2', 51202);
 
-        // 添加团队协作
+        // 添加team协作
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -66,7 +66,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     public function testFile()
     {
-        // use现有的项目和fileID进行test
+        // use现有的project和fileID进行test
         $fileId = $this->fileId; // testfileID
         $projectId = $this->projectId;
 
@@ -87,13 +87,13 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test项目置顶permission控制.
+     * testproject置顶permission控制.
      */
     public function testProjectPinPermission(): void
     {
         $projectId = $this->projectId;
 
-        // 1. 先setting项目member，ensuretest2user有permission
+        // 1. 先settingprojectmember，ensuretest2user有permission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -105,13 +105,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 4. 清null项目member，使currentuser没有permission
+        // 4. 清nullprojectmember，使currentuser没有permission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
         // 5. 切换到没有permission的usertestpermission控制
         $this->switchUserTest2();
-        // test非项目member不能置顶 - shouldreturnpermissionerror
+        // test非projectmember不能置顶 - shouldreturnpermissionerror
         $this->pinProject($projectId, true, 51202); // 假设51202是permissionerror码
     }
 
@@ -127,11 +127,11 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($projectId);
         $this->switchUserTest2();
 
-        // 1. 重复置顶同一个项目 - should正常handle
+        // 1. 重复置顶同一个project - should正常handle
         $this->pinProject($projectId, true);
         $this->pinProject($projectId, true); // 重复置顶
 
-        // validate项目仍然是置顶status
+        // validateproject仍然是置顶status
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
@@ -139,13 +139,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->pinProject($projectId, false);
         $this->pinProject($projectId, false); // 重复cancel置顶
 
-        // validate项目不是置顶status
+        // validateproject不是置顶status
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
     }
 
     /**
-     * testupdate项目member - success场景.
+     * testupdateprojectmember - success场景.
      */
     public function testUpdateProjectMembersSuccess(): void
     {
@@ -190,7 +190,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->renameTopic($workspaceId, $projectId, $topicId);
         // share话题
         $this->createTopicShare($workspaceId, $projectId, $topicId);
-        // 项目file
+        // projectfile
         $this->attachments($workspaceId, $projectId, $topicId);
         // delete话题
         $this->deleteTopic($workspaceId, $projectId, $topicId);
@@ -208,9 +208,9 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 4. 添加nullmember
         $this->updateEmptyMembers($projectId);
 
-        // 5. 添加项目member
+        // 5. 添加projectmember
         $this->updateMembers($projectId);
-        // 6. 查看项目member
+        // 6. 查看projectmember
         $this->projectMember($projectId);
 
         $this->collaborationProjects('test', 0);
@@ -218,9 +218,9 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->switchUserTest2();
 
-        // 7. 查看项目member
+        // 7. 查看projectmember
         $this->projectMember($projectId);
-        // 8. 查看协作项目列表
+        // 8. 查看协作project列表
         $this->collaborationProjects();
         $this->collaborationProjects('test');
 
@@ -234,18 +234,18 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->createTopicShare($workspaceId, $projectId, $topicId);
         // sendmessage
         //        $this->sendMessage($workspaceId, $projectId, $topicId);
-        // 项目file
+        // projectfile
         $file = $this->attachments($workspaceId, $projectId, $topicId);
-        // 重命名项目file
+        // 重命名projectfile
         //        $this->renameAttachments((string) $file['file_id']);
 
         // delete话题
         $this->deleteTopic($workspaceId, $projectId, $topicId);
 
-        // 9. test项目置顶feature
+        // 9. testproject置顶feature
         $this->projectPinFeature($projectId);
 
-        // 10. test协作项目create者列表feature
+        // 10. test协作projectcreate者列表feature
         //        $this->collaborationProjectCreatorFeature();
 
         // 11. 清nullnullmember
@@ -661,37 +661,37 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test项目置顶feature - 完整processtest.
+     * testproject置顶feature - 完整processtest.
      */
     public function projectPinFeature(string $projectId): void
     {
-        // ensurecurrentuser是项目member
+        // ensurecurrentuser是projectmember
         $this->switchUserTest2();
 
-        // 1. test置顶项目
+        // 1. test置顶project
         $this->pinProject($projectId, true);
 
-        // 2. validate协作项目列表中项目被置顶
+        // 2. validate协作project列表中project被置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
         // 3. testcancel置顶
         $this->pinProject($projectId, false);
 
-        // 4. validate协作项目列表中项目不再置顶
+        // 4. validate协作project列表中project不再置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
-        // 5. 重新置顶项目以testsort
+        // 5. 重新置顶project以testsort
         $this->pinProject($projectId, true);
 
-        // 6. validate置顶项目排在前面
+        // 6. validate置顶project排在前面
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyPinnedProjectsAtTop($response);
     }
 
     /**
-     * 置顶或cancel置顶项目.
+     * 置顶或cancel置顶project.
      */
     public function pinProject(string $projectId, bool $isPinned, int $expectedCode = 1000): array
     {
@@ -714,7 +714,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协作项目列表并return完整响application于置顶validate.
+     * get协作project列表并return完整响application于置顶validate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {
@@ -731,7 +731,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         if (! empty($response['data']['list'])) {
             $project = $response['data']['list'][0];
-            $this->assertArrayHasKey('is_pinned', $project, '项目应containis_pinnedfield');
+            $this->assertArrayHasKey('is_pinned', $project, 'project应containis_pinnedfield');
             $this->assertIsBool($project['is_pinned'], 'is_pinnedshould是booleanvalue');
         }
 
@@ -739,7 +739,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validate项目的置顶status.
+     * validateproject的置顶status.
      */
     public function verifyProjectPinStatus(array $response, string $projectId, bool $expectedPinned): void
     {
@@ -753,16 +753,16 @@ class ProjectMemberApiTest extends AbstractApiTest
             }
         }
 
-        $this->assertNotNull($targetProject, "项目 {$projectId} should在协作项目列表中");
+        $this->assertNotNull($targetProject, "project {$projectId} should在协作project列表中");
         $this->assertEquals(
             $expectedPinned,
             $targetProject['is_pinned'],
-            "项目 {$projectId} 的置顶statusshould为 " . ($expectedPinned ? 'true' : 'false')
+            "project {$projectId} 的置顶statusshould为 " . ($expectedPinned ? 'true' : 'false')
         );
     }
 
     /**
-     * validate置顶项目排在列表前面.
+     * validate置顶project排在列表前面.
      */
     public function verifyPinnedProjectsAtTop(array $response): void
     {
@@ -771,7 +771,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         foreach ($projects as $project) {
             if ($project['is_pinned']) {
-                $this->assertFalse($pinnedProjectsEnded, '置顶项目should排在非置顶项目前面');
+                $this->assertFalse($pinnedProjectsEnded, '置顶projectshould排在非置顶project前面');
             } else {
                 $pinnedProjectsEnded = true;
             }
@@ -779,7 +779,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协作项目create者列表feature - 完整processtest.
+     * test协作projectcreate者列表feature - 完整processtest.
      */
     public function collaborationProjectCreatorFeature(): void
     {
@@ -789,26 +789,26 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->verifyCreatorListResponse($response);
 
         // 2. testpermission控制 - 清nullmember后无permission
-        $this->switchUserTest1(); // 切换到项目所有者
-        $this->updateEmptyMembers($this->projectId); // 清null项目member
+        $this->switchUserTest1(); // 切换到project所有者
+        $this->updateEmptyMembers($this->projectId); // 清nullprojectmember
 
         $this->switchUserTest2(); // 切换到无permissionuser
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restore项目memberstatus，以免影响后续test
+        // 3. restoreprojectmemberstatus，以免影响后续test
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
 
     /**
-     * test协作项目create者列表permission控制.
+     * test协作projectcreate者列表permission控制.
      */
     public function testCollaborationProjectCreatorsPermission(): void
     {
         $projectId = $this->projectId;
 
-        // 1. 先setting项目member，ensuretest2user有permission
+        // 1. 先settingprojectmember，ensuretest2user有permission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -817,7 +817,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 3. 清null项目member，使currentuser没有permission
+        // 3. 清nullprojectmember，使currentuser没有permission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
@@ -828,7 +828,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协作项目create者列表边界情况.
+     * test协作projectcreate者列表边界情况.
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
@@ -850,7 +850,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协作项目create者列表.
+     * get协作projectcreate者列表.
      */
     public function getCollaborationProjectCreators(int $expectedCode = 1000): array
     {
@@ -925,7 +925,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 清理项目memberdata（直接databasedelete）.
+     * 清理projectmemberdata（直接databasedelete）.
      */
     private function cleanupProjectMembers(string $projectId): void
     {
@@ -946,9 +946,9 @@ class ProjectMemberApiTest extends AbstractApiTest
             $memberEntity->setStatus(MemberStatus::ACTIVE);
 
             $projectMemberDomainService->addInternalMembers([$memberEntity], $this->getOrganizationCode());
-            echo "清理项目memberdatacomplete: {$projectId}\n";
+            echo "清理projectmemberdatacomplete: {$projectId}\n";
         } catch (Exception $e) {
-            echo '清理项目memberdatafail: ' . $e->getMessage() . "\n";
+            echo '清理projectmemberdatafail: ' . $e->getMessage() . "\n";
         }
     }
 }

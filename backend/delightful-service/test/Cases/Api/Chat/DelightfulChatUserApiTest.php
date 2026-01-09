@@ -512,7 +512,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         if ($postResponse !== null) {
             $this->assertIsArray($postResponse, 'POSTresponseshould是arrayformat');
             if (isset($postResponse['code'])) {
-                // 如果不是authentication问题，should是methoderror
+                // 如果不是authenticationissue，should是methoderror
                 if (! in_array($postResponse['code'], [2179, 3035])) {
                     $this->assertNotEquals(1000, $postResponse['code'], 'POSTmethod不shouldsuccess');
                 }
@@ -529,7 +529,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         if ($putResponse !== null) {
             $this->assertIsArray($putResponse, 'PUTresponseshould是arrayformat');
             if (isset($putResponse['code'])) {
-                // 如果不是authentication问题，should是methoderror
+                // 如果不是authenticationissue，should是methoderror
                 if (! in_array($putResponse['code'], [2179, 3035])) {
                     $this->assertNotEquals(1000, $putResponse['code'], 'PUTmethod不shouldsuccess');
                 }

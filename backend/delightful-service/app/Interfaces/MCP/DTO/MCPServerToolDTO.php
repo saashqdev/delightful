@@ -17,7 +17,7 @@ class MCPServerToolDTO extends AbstractDTO
     use StringIdDTOTrait;
 
     /**
-     * associate的MCP服务code.
+     * associate的MCPservicecode.
      */
     public string $mcpServerCode = '';
 

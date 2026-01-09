@@ -18,7 +18,7 @@ class Oauth2Config extends AbstractValueObject
      * Client ID - 客户端ID，是application在authorizationservice器中的唯一标识符。
      * authorizationservice器pass客户端ID来识别different的三方application。
      *
-     * createOAuthapplication时will分配client_id，本示例input
+     * createOAuthapplication时will分配client_id，本exampleinput
      * 813924812101982004357116497xxxx.app.coze
      */
     protected string $clientId = '';
@@ -27,7 +27,7 @@ class Oauth2Config extends AbstractValueObject
      * Client Secret - 客户端key，和客户端ID配合use，用于authapplication的身份。
      * ensure只有authorization的applicationcanrequestpermission。
      *
-     * createOAuthapplication时will分配client_secret，本示例input 8jmSATwI*********
+     * createOAuthapplication时will分配client_secret，本exampleinput 8jmSATwI*********
      */
     protected string $clientSecret = '';
 
@@ -35,9 +35,9 @@ class Oauth2Config extends AbstractValueObject
      * Client URL - service方的OAuthpageURL，用于拼接userloginauthorization页的URL。
      *
      * userlogin时，扣子will将user引导至"[client_url]?response_type=code&client_id=
-     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台的callback安全地址]"。
+     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台的callbacksecurity地址]"。
      *
-     * 参考service方的authorization文档getclient_url，本示例参考扣子开发指南文档，input
+     * 参考service方的authorizationdocumentgetclient_url，本example参考扣子开发guidedocument，input
      * https://www.coze.cn/api/permission/oauth2/authorize
      */
     protected string $clientUrl = '';
@@ -45,7 +45,7 @@ class Oauth2Config extends AbstractValueObject
     /**
      * Scope - allowapplication程序requestaccessuserdata的range。
      *
-     * 参考service方的authorization文档inputscope。
+     * 参考service方的authorizationdocumentinputscope。
      */
     protected string $scope = '';
 
@@ -56,7 +56,7 @@ class Oauth2Config extends AbstractValueObject
      * 并转至callback地址。此时，service器提供方willpass对应data向authorization_url发起request，
      * getuser的access_token。
      *
-     * 参考service方的authorization文档getauthorization_url，本示例参考扣子开发指南文档，input
+     * 参考service方的authorizationdocumentgetauthorization_url，本example参考扣子开发guidedocument，input
      * https://api.coze.cn/api/permission/oauth2/token
      */
     protected string $authorizationUrl = '';

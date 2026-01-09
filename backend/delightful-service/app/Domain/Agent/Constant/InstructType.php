@@ -137,17 +137,17 @@ enum InstructType: int
     }
 
     /**
-     * verify普通交互指令组.
+     * verify普通交互指令group.
      */
     public static function validateInstructs(array &$instructs): void
     {
         foreach ($instructs as &$group) {
-            // verify组type
+            // verifygrouptype
             if (! isset($group['position']) || ! isset($group['items'])) {
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.instruct_group_format_invalid');
             }
 
-            // verify组type是否valid
+            // verifygrouptype是否valid
             if (! is_numeric($group['position'])) {
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.instruct_group_type_must_be_numeric');
             }
@@ -172,7 +172,7 @@ enum InstructType: int
     }
 
     /**
-     * 安全verify指令，catchexception并returnresult.
+     * securityverify指令，catchexception并returnresult.
      * @return array{success: bool, message: null|string}
      */
     public static function safeValidateInstructs(array &$instructs): array
@@ -186,7 +186,7 @@ enum InstructType: int
     }
 
     /**
-     * verifystatustype组.
+     * verifystatustypegroup.
      */
     private function validateStatusGroup(array &$items): void
     {

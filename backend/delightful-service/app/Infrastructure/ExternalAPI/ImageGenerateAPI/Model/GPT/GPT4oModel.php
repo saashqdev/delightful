@@ -430,7 +430,7 @@ class GPT4oModel extends AbstractImageGenerate
         array $gpt4oResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发安全
+        // useRedislockensure并发security
         $lockOwner = $this->lockResponse($response);
         try {
             // 从GPT4o轮询result中提取imageURL

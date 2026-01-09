@@ -24,9 +24,9 @@ class ServiceProviderOpenApi extends AbstractApi
     protected AdminProviderAppService $adminProviderAppService;
 
     /**
-     * according tocategoryget服务商通用逻辑.
+     * according tocategorygetservice商通用逻辑.
      * @param RequestInterface $request requestobject
-     * @return array 服务商列table
+     * @return array service商列table
      */
     public function getProvidersByCategory(RequestInterface $request): array
     {

@@ -35,7 +35,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;
 
     /**
-     * according to app_message_id 拉取message.
+     * according to app_message_id pullmessage.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array;
@@ -62,7 +62,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * 分组getsession下最new几条message.
+     * 分groupgetsession下最new几条message.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 

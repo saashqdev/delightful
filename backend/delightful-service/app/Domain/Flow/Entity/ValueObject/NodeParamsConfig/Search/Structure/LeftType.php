@@ -17,7 +17,7 @@ enum LeftType: string
     case DepartmentName = 'department_name';
     case GroupName = 'group_name';
 
-    // 向量data库
+    // 向量datalibrary
     case VectorDatabaseId = 'vector_database_id';
     case VectorDatabaseName = 'vector_database_name';
 }

@@ -13,10 +13,10 @@ enum SignEnum: string
 
     public const array MAP = [
         self::DENG_TA->value => [
-            LanguageEnum::ZH_CN->value => '灯塔引擎',
+            LanguageEnum::ZH_CN->value => '灯塔engine',
         ],
-        '灯塔引擎' => [
-            LanguageEnum::ZH_CN->value => '灯塔引擎',
+        '灯塔engine' => [
+            LanguageEnum::ZH_CN->value => '灯塔engine',
         ],
     ];
 

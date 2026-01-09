@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 防抖工具类
+ * 防抖tool类
  * implement"execute最后一次request"防抖策略.
  */
 class SlidingWindowUtil
@@ -40,7 +40,7 @@ class SlidingWindowUtil
         float $delayVerificationSeconds = 0.5
     ): bool {
         $uniqueRequestId = uniqid('req_', true) . '_' . getmypid();
-        // 键的expiretime应greater thandelayverifytime，以作为安全保障
+        // 键的expiretime应greater thandelayverifytime，以作为security保障
         $totalExpirationSeconds = (int) ceil($delayVerificationSeconds) + 1;
         $latestRequestRedisKey = $debounceKey . ':last_req';
 

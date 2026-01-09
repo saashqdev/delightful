@@ -192,7 +192,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // 如果没有项目ID或话题ID，不触发
+        // 如果没有projectID或话题ID，不触发
         if (empty($taskStatus->projectId) || empty($taskStatus->topicId)) {
             return false;
         }

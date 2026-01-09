@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::create('delightful_mcp_server_tools', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('organizationencoding');
-            $table->string('mcp_server_code', 80)->comment('associate的 mcp 服务 code')->index();
+            $table->string('mcp_server_code', 80)->comment('associate的 mcp service code')->index();
             $table->string('name', 64)->default('')->comment('toolname');
             $table->string('description', 512)->default('')->comment('tooldescription');
             $table->tinyInteger('source')->default(0)->comment('tool来源');

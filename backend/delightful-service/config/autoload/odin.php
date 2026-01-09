@@ -314,7 +314,7 @@ return [
 
                     // 注意：以下field被排除，不will打印
                     // - args.messages (usermessagecontent)
-                    // - args.tools (工具定义)
+                    // - args.tools (tool定义)
                     // - choices.0.message (responsemessagecontent)
                     // - choices.0.delta (streamresponse增量content)
                     // - content (responsecontent)
@@ -330,7 +330,7 @@ return [
         // 全局model options，可被model本身的 options override
         'model_options' => [
             'error_mapping_rules' => [
-                // 示例：customizeerrormapping
+                // example：customizeerrormapping
                 // 'customizeerror关键词' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
             ],
         ],

@@ -20,12 +20,12 @@ return new class extends Migration {
 
         Schema::create('service_provider_models', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('service_provider_config_id')->index()->comment('服务商ID');
+            $table->unsignedBigInteger('service_provider_config_id')->index()->comment('service商ID');
             $table->string('name', 50)->comment('modelname');
-            $table->string('model_version', 50)->comment('model在服务商下的name');
+            $table->string('model_version', 50)->comment('model在service商下的name');
             $table->string('model_id', 50)->comment('modeltrue实ID');
             $table->string('category')->comment('modelcategory：llm/vlm');
-            $table->tinyInteger('model_type')->comment('具体type,用于分组用');
+            $table->tinyInteger('model_type')->comment('具体type,用于分group用');
             $table->json('config')->comment('model的configurationinformation');
             $table->string('description', 255)->nullable()->comment('modeldescription');
             $table->integer('sort')->default(0)->comment('sort');

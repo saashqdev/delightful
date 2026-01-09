@@ -406,7 +406,7 @@ class FluxModel extends AbstractImageGenerate
         array $fluxResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发安全
+        // useRedislockensure并发security
         $lockOwner = $this->lockResponse($response);
         try {
             // 从Fluxresponse中提取data

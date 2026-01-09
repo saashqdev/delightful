@@ -11,8 +11,8 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
  * default字体提供者implement
- * 开源项目中的defaultimplement，提供基础字体feature
- * 企业项目canpassdependency注入覆盖此implement来提供高级字体feature.
+ * 开源project中的defaultimplement，提供基础字体feature
+ * 企业projectcanpassdependency注入覆盖此implement来提供高级字体feature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {

@@ -246,7 +246,7 @@ readonly class KnowledgeBaseFragmentDomainService
     {
         // updatedatabase字数statistics
         $this->knowledgeBaseRepository->updateWordCount($dataIsolation, $entity->getKnowledgeCode(), $deltaWordCount);
-        // update文档字数statistics
+        // updatedocument字数statistics
         $this->knowledgeBaseDocumentRepository->updateWordCount($dataIsolation, $entity->getKnowledgeCode(), $entity->getDocumentCode(), $deltaWordCount);
     }
 }

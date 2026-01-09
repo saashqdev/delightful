@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * 服务商templateID枚举
- * 将ProviderCode和Category的组合mapping为固定的数value型string.
+ * service商templateID枚举
+ * 将ProviderCode和Category的group合mapping为固定的数value型string.
  */
 enum ProviderTemplateId: string
 {
@@ -131,7 +131,7 @@ enum ProviderTemplateId: string
         $mapping = $this->toProviderCodeAndCategory();
         $providerName = match ($mapping['providerCode']) {
             ProviderCode::Official => '官方',
-            ProviderCode::Volcengine => '火山引擎',
+            ProviderCode::Volcengine => '火山engine',
             ProviderCode::OpenAI => 'OpenAI',
             ProviderCode::MicrosoftAzure => 'Microsoft Azure',
             ProviderCode::Qwen => '通义千问',
@@ -141,9 +141,9 @@ enum ProviderTemplateId: string
             ProviderCode::MiracleVision => 'MiracleVision',
             ProviderCode::AWSBedrock => 'AWS Bedrock',
             ProviderCode::Google => 'Google',
-            ProviderCode::VolcengineArk => '火山引擎-方舟',
+            ProviderCode::VolcengineArk => '火山engine-方舟',
             ProviderCode::Gemini => 'Google Gemini',
-            default => '未知服务商',
+            default => '未知service商',
         };
 
         $categoryName = $mapping['category']->label();

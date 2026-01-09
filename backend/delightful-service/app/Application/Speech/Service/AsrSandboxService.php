@@ -43,7 +43,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * ASR 沙箱服务
+ * ASR 沙箱service
  * 负责沙箱taskstart、merge、轮询和filerecordcreate.
  */
 readonly class AsrSandboxService
@@ -561,7 +561,7 @@ readonly class AsrSandboxService
 
         $projectIdString = (string) $projectId;
         if ($projectIdString === '') {
-            ExceptionBuilder::throw(AsrErrorCode::SandboxTaskCreationFailed, '', ['message' => '项目ID为null，无法create沙箱']);
+            ExceptionBuilder::throw(AsrErrorCode::SandboxTaskCreationFailed, '', ['message' => 'projectID为null，无法create沙箱']);
         }
 
         // 尝试get工作区status
@@ -687,7 +687,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // get项目实体（用于get项目organizationencoding）
+        // getproject实体（用于getprojectorganizationencoding）
         $projectEntity = $this->projectDomainService->getProject((int) $taskStatus->projectId, $userId);
         $projectOrganizationCode = $projectEntity->getUserOrganizationCode();
 
@@ -710,7 +710,7 @@ readonly class AsrSandboxService
         );
 
         // 复用 initializeAgent method（will自动build message_subscription_config 和 delightful_service_host）
-        // 传入项目organizationencoding，用于getcorrect的 STS Token
+        // 传入projectorganizationencoding，用于getcorrect的 STS Token
         // ASR 场景setting skip_init_messages = true，让沙箱不sendchatmessage过来
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));
         $this->agentDomainService->initializeAgent($dataIsolation, $taskContext, null, $projectOrganizationCode, $initMetadata);

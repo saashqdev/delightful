@@ -41,7 +41,7 @@ readonly class AsrPresetFileService
      *
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
-     * @param int $projectId 项目ID
+     * @param int $projectId projectID
      * @param string $displayDir 显示directory相对path (如: 录音总结_xxx)
      * @param int $displayDirId 显示directoryID
      * @param string $hiddenDir 隐藏directory相对path (如: .asr_recordings/session_xxx)
@@ -59,7 +59,7 @@ readonly class AsrPresetFileService
         int $hiddenDirId,
         string $taskKey
     ): array {
-        // get项目info
+        // getprojectinfo
         $projectEntity = $this->projectDomainService->getProject($projectId, $userId);
         $workDir = $projectEntity->getWorkDir();
 
@@ -286,7 +286,7 @@ readonly class AsrPresetFileService
             'is_directory' => false,
             'sort' => 0,
             'parent_id' => $parentId,
-            'source' => 2, // 2-项目directory
+            'source' => 2, // 2-projectdirectory
             'metadata' => Json::encode($metadata),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),

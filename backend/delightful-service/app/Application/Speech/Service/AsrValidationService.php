@@ -24,7 +24,7 @@ use Throwable;
 
 /**
  * ASR verifyservice
- * 负责项目permission、话题归属、taskstatus等verify逻辑.
+ * 负责projectpermission、话题归属、taskstatus等verify逻辑.
  */
 readonly class AsrValidationService
 {
@@ -38,38 +38,38 @@ readonly class AsrValidationService
     }
 
     /**
-     * verify项目permission - ensure项目属于currentuser和organization.
+     * verifyprojectpermission - ensureproject属于currentuser和organization.
      *
-     * @param string $projectId 项目ID
+     * @param string $projectId projectID
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
-     * @return ProjectEntity 项目实体
+     * @return ProjectEntity project实体
      */
     public function validateProjectAccess(string $projectId, string $userId, string $organizationCode): ProjectEntity
     {
         try {
-            // get项目info
+            // getprojectinfo
             $projectEntity = $this->projectDomainService->getProjectNotUserId((int) $projectId);
             if ($projectEntity === null) {
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
             }
 
-            // 校验项目是否属于currentorganization
+            // 校验project是否属于currentorganization
             if ($projectEntity->getUserOrganizationCode() !== $organizationCode) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedOrganization);
             }
 
-            // 校验项目是否属于currentuser
+            // 校验project是否属于currentuser
             if ($projectEntity->getUserId() === $userId) {
                 return $projectEntity;
             }
 
-            // checkuser是否是项目member
+            // checkuser是否是projectmember
             if ($this->projectMemberDomainService->isProjectMemberByUser((int) $projectId, $userId)) {
                 return $projectEntity;
             }
 
-            // checkuser所在department是否有项目permission
+            // checkuser所在department是否有projectpermission
             $dataIsolation = DataIsolation::create($organizationCode, $userId);
             $departmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
 
@@ -135,7 +135,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(AsrErrorCode::UploadAudioFirst);
         }
 
-        // verifyuserID匹配（基本的安全check）
+        // verifyuserID匹配（基本的securitycheck）
         if ($taskStatus->userId !== $userId) {
             ExceptionBuilder::throw(AsrErrorCode::TaskNotBelongToUser);
         }
@@ -144,11 +144,11 @@ readonly class AsrValidationService
     }
 
     /**
-     * 从话题get项目ID（contain话题归属verify）.
+     * 从话题getprojectID（contain话题归属verify）.
      *
      * @param int $topicId 话题ID
      * @param string $userId userID
-     * @return string 项目ID
+     * @return string projectID
      */
     public function getProjectIdFromTopic(int $topicId, string $userId): string
     {

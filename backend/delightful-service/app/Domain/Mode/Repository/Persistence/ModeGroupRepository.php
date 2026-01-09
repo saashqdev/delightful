@@ -138,7 +138,7 @@ class ModeGroupRepository extends AbstractRepository implements ModeGroupReposit
     }
 
     /**
-     * according to多个modeID批量get分组列table.
+     * according to多个modeID批量get分group列table.
      * @param int[]|string[] $modeIds
      * @return ModeGroupEntity[]
      */

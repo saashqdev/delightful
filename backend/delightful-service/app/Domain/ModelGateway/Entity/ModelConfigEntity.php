@@ -20,7 +20,7 @@ class ModelConfigEntity extends AbstractEntity
     protected ?int $id = null;
 
     /**
-     * 服务商侧接入点 id.such as火山的：ep-xxxx.
+     * service商侧接入点 id.such as火山的：ep-xxxx.
      */
     protected string $model;
 

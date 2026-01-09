@@ -93,7 +93,7 @@ JSON, true));
 
 
 ## process
-1、call `agent_send_message_to_user` 工具sendmessage
+1、call `agent_send_message_to_user` toolsendmessage
 2、currenttime是:{$currentDateTime}
 -receiver_user_ids是：usi_3715ce50bc02d7e72ba7891649b7f1da
 
@@ -187,7 +187,7 @@ JSON, true));
 
 
 ## process
-1、call `agent_send_message` 工具sendmessage
+1、call `agent_send_message` toolsendmessage
 2、currenttime是:{$currentDateTime}
 -agent_id是：737330322528899073
 -group_id是：748917386027667456

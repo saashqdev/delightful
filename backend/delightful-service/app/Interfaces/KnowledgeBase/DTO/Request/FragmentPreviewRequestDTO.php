@@ -54,11 +54,11 @@ class FragmentPreviewRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'document_file.required' => '文档file不能为空',
-            'document_file.name.required' => '文档name不能为空',
-            'document_file.name.max' => '文档namelength不能超过255个字符',
-            'document_file.key.required' => '文档键不能为空',
-            'document_file.key.max' => '文档键length不能超过255个字符',
+            'document_file.required' => 'documentfile不能为空',
+            'document_file.name.required' => 'documentname不能为空',
+            'document_file.name.max' => 'documentnamelength不能超过255个字符',
+            'document_file.key.required' => 'document键不能为空',
+            'document_file.key.max' => 'document键length不能超过255个字符',
             'fragment_config.required' => '片段configuration不能为空',
             'fragment_config.mode.required' => '分段模式不能为空',
             'fragment_config.mode.integer' => '分段模式must是整数',

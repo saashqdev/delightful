@@ -105,7 +105,7 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量getfilelink（自动从path提取organizationencoding并分组process）.
+     * 批量getfilelink（自动从path提取organizationencoding并分groupprocess）.
      * @param string[] $filePaths containorganizationencoding的filepatharray，format：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type，default为Public
      * @return array<string,FileLink> filepath到FileLink的mapping
@@ -119,7 +119,7 @@ readonly class FileDomainService
             return [];
         }
 
-        // 按organizationcode分组filepath
+        // 按organizationcode分groupfilepath
         $pathsByOrg = [];
         foreach ($validPaths as $filePath) {
             $orgCode = explode('/', $filePath, 2)[0] ?? '';
@@ -160,7 +160,7 @@ readonly class FileDomainService
     /**
      * 开启 sts 模式.
      * gettemporary凭证给前端use.
-     * @todo 安全issue，dir 没有校验，没有organization隔离
+     * @todo securityissue，dir 没有校验，没有organization隔离
      */
     public function getStsTemporaryCredential(
         string $organizationCode,

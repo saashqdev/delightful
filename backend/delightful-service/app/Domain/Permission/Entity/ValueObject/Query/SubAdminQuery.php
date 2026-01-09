@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractQuery;
 /**
  * 子管理员列表queryobject.
  *
- * use示例：
+ * useexample：
  * $query = new SubAdminQuery([
  *     'name' => 'rolename',
  *     'status' => 1,

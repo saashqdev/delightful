@@ -356,7 +356,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if (empty($topicId) && $receiverType !== ConversationType::Group) {
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
         }
-        // 3.组装parameter，call aiSendMessage method
+        // 3.group装parameter，call aiSendMessage method
         $aiSeqDTO->getExtra() === null && $aiSeqDTO->setExtra(new SeqExtra());
         $aiSeqDTO->getExtra()->setTopicId($topicId);
         $aiSeqDTO->setConversationId($senderConversationEntity->getId());
@@ -399,7 +399,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $topicId = '';
         }
 
-        // 3.组装parameter，call sendMessageToAgent method
+        // 3.group装parameter，call sendMessageToAgent method
         $aiSeqDTO->getExtra() === null && $aiSeqDTO->setExtra(new SeqExtra());
         $aiSeqDTO->getExtra()->setTopicId($topicId);
         $aiSeqDTO->setConversationId($senderConversationEntity->getId());
@@ -610,7 +610,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         2. content相关：titlemust直接反映conversation的核心theme
         3. 语言style：use陈述性语句，避免疑问句
         4. outputformat：只outputtitlecontent，不要添加任何解释、标点或其他文字
-        5. forbid行为：不要回答conversation中的问题，不要进行额外解释
+        5. forbid行为：不要回答conversation中的issue，不要进行额外解释
 
         ## conversationcontent
         <CONVERSATION_START>
@@ -1171,7 +1171,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $messageDTO->setAppMessageId($appMessageId);
         $messageDTO->setDelightfulMessageId('');
         $messageDTO->setSendTime($sendTime->toDateTimeString());
-        // type和content组合在一起才是一个可用的messagetype
+        // type和contentgroup合在一起才是一个可用的messagetype
         $messageDTO->setContent($aiSeqDTO->getContent());
         $messageDTO->setMessageType($aiSeqDTO->getSeqType());
         return $messageDTO;
@@ -1205,7 +1205,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $dataIsolation = $this->createDataIsolation($userAuthorization);
             // message鉴权
             $this->checkSendMessageAuth($senderSeqDTO, $senderMessageDTO, $senderConversationEntity, $dataIsolation);
-            // 安全性保证，校验attachment中的file是否属于currentuser
+            // security性保证，校验attachment中的file是否属于currentuser
             $senderMessageDTO = $this->checkAndFillAttachments($senderMessageDTO, $dataIsolation);
             // 业务parameter校验
             $this->validateBusinessParams($senderMessageDTO, $dataIsolation);
@@ -1393,7 +1393,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return;
         }
 
-        // callfile领域服务填充attachmentdetail
+        // callfile领域service填充attachmentdetail
         $filledAttachments = $this->delightfulChatFileDomainService->checkAndFillAttachments($attachments, $dataIsolation);
 
         // updatevoicemessage的attachmentinfo

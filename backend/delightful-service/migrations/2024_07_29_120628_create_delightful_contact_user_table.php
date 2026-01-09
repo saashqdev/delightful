@@ -34,7 +34,7 @@ return new class extends Migration {
             $table->text('i18n_name')->comment('国际化username');
             $table->string('avatar_url', 128)->comment('useravatarlink')->default('');
             $table->string('extra', 1024)->comment('附加property')->default('');
-            $table->string('user_manual', 64)->comment('userinstruction书(云文档)')->default('');
+            $table->string('user_manual', 64)->comment('userinstruction书(云document)')->default('');
             // 索引set
             $table->unique(['user_id'], 'unq_user_organization_id');
             $table->unique(['delightful_id', 'organization_code'], 'unq_delightful_id_organization_code');

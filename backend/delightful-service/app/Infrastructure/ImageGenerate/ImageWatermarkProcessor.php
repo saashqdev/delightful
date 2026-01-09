@@ -226,7 +226,7 @@ class ImageWatermarkProcessor
             // useTTF字体计算actual文本边界框
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
-            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // 增加20%安全边距
+            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // 增加20%security边距
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝对valueensureheight为正
 
             // TTF字体的下降部分（descender）
@@ -237,7 +237,7 @@ class ImageWatermarkProcessor
             // 降级use估算method
             // 对于中文字符，每个字符width约equal字体size
             $chineseCharCount = mb_strlen($text, 'UTF-8');
-            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // 增加安全边距
+            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // 增加security边距
             $textHeight = $fontSize;
             $descender = (int) ($fontSize * 0.2); // 内置字体估算下降部分
             $ascender = (int) ($fontSize * 0.8); // 内置字体估算上升部分
@@ -339,7 +339,7 @@ class ImageWatermarkProcessor
                     }
                     break;
                 case 'gif':
-                    // GIF限制较多，建议升级为PNG
+                    // GIF限制较多，suggestion升级为PNG
                     $this->logger->info('Converting GIF to PNG for better quality');
                     imagepng($image, null, 0);
                     break;

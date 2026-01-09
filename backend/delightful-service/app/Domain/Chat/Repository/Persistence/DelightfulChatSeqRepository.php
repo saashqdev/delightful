@@ -119,7 +119,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * according to app_message_id 拉取message.
+     * according to app_message_id pullmessage.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array
@@ -194,7 +194,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * 分组getsession下最new几条message.
+     * 分groupgetsession下最new几条message.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -394,7 +394,7 @@ sql;
     // 为了移除脏data写的method
     public function getHasTrashMessageUsers(): array
     {
-        // 按 delightful_id 分组,找出有垃圾message的user
+        // 按 delightful_id 分group,找出有垃圾message的user
         $query = $this->delightfulSeq::query()
             ->select('object_id')
             ->groupBy('object_id')
@@ -541,7 +541,7 @@ sql;
         return SeqAssembler::sortSeqList($clientSequenceResponses, $order);
     }
 
-    // 避免 redis cache序列化的object,占用太多内存
+    // 避免 redis cacheserialize的object,占用太多内存
     private function getAccountIdByUserId(string $uid): ?DelightfulUserEntity
     {
         // according touid找到account_id

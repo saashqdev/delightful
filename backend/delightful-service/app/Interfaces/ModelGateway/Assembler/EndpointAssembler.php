@@ -16,11 +16,11 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\HighAvailability
 class EndpointAssembler
 {
     /**
-     * generate标准化的端点type标识.
+     * generatestandard化的端点type标识.
      *
      * @param HighAvailabilityAppType $appType 高可用applicationtype
      * @param string $modelId modelID
-     * @return string 标准化的端点type标识
+     * @return string standard化的端点type标识
      */
     public static function generateEndpointType(HighAvailabilityAppType $appType, string $modelId): string
     {

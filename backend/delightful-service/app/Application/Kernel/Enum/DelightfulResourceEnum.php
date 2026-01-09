@@ -27,7 +27,7 @@ enum DelightfulResourceEnum: string
 
     // ===== 二级：模块 =====
     case ADMIN_AI = 'admin.ai'; # 平台管理后台-AI管理
-    case ADMIN_SAFE = 'admin.safe'; # 安全管控
+    case ADMIN_SAFE = 'admin.safe'; # security管控
     case PLATFORM_AI = 'platform.ai'; # 平台管理后台-AI管理
     case PLATFORM_SETTING = 'platform.setting'; # 系统set
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
@@ -38,7 +38,7 @@ enum DelightfulResourceEnum: string
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘图管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模式管理管理
     case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AI管理-能力管理
-    case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # 安全管控-子管理员
+    case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子管理员
     case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台管理 - 系统set - 平台info
     case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台管理 - 系统info - 维护管理
     case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # 平台管理 - organization管理 - organizationlist
@@ -54,7 +54,7 @@ enum DelightfulResourceEnum: string
             self::ADMIN => 'permission.resource.admin',
             self::ADMIN_AI => 'permission.resource.admin_ai',
             self::ADMINPLUS_AI => 'permission.resource.admin_plus_ai',
-            self::ADMIN_SAFE => 'permission.resource.admin_safe', # 安全与permission
+            self::ADMIN_SAFE => 'permission.resource.admin_safe', # security与permission
             self::ADMIN_AI_MODEL => 'permission.resource.ai_model',
             self::ADMINPLUS_AI_MODEL => 'permission.resource.ai_model',
             self::ADMIN_AI_IMAGE => 'permission.resource.ai_image',

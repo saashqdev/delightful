@@ -29,7 +29,7 @@ use function Hyperf\Support\retry;
 
 /**
  * service商modelsyncapplicationservice.
- * 负责从外部API拉取model并sync到Officialservice商.
+ * 负责从外部APIpullmodel并sync到Officialservice商.
  */
 class ProviderModelSyncAppService
 {
@@ -47,7 +47,7 @@ class ProviderModelSyncAppService
 
     /**
      * 从外部APIsyncmodel.
-     * 当service商configurationcreate或update时，如果是Officialservice商且是官方organization，则从外部API拉取model.
+     * 当service商configurationcreate或update时，如果是Officialservice商且是官方organization，则从外部APIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,
@@ -96,7 +96,7 @@ class ProviderModelSyncAppService
             // 4. according tocategory确定typeparameter
             $types = $this->getModelTypesByCategory($provider->getCategory());
 
-            // 5. 从外部API拉取model
+            // 5. 从外部APIpullmodel
             $models = $this->fetchModelsFromApi($url, $apiKey, $types, $language);
 
             if (empty($models)) {
@@ -126,7 +126,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * according toservice商category确定要拉取的modeltype.
+     * according toservice商category确定要pull的modeltype.
      */
     private function getModelTypesByCategory(Category $category): array
     {
@@ -138,7 +138,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 从外部API拉取model.
+     * 从外部APIpullmodel.
      */
     private function fetchModelsFromApi(string $url, string $apiKey, array $types, string $language): array
     {
@@ -155,7 +155,7 @@ class ProviderModelSyncAppService
                 }, 500);
                 $allModels = array_merge($allModels, $models);
             } catch (Throwable $e) {
-                $this->logger->error("拉取{$type}typemodelfail", [
+                $this->logger->error("pull{$type}typemodelfail", [
                     'type' => $type,
                     'api_url' => $apiUrl,
                     'error' => $e->getMessage(),
@@ -200,7 +200,7 @@ class ProviderModelSyncAppService
             return [];
         }
 
-        $this->logger->info('success从API拉取model', [
+        $this->logger->info('success从APIpullmodel', [
             'api_url' => $apiUrl,
             'type' => $type,
             'model_count' => count($data['data']),

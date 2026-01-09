@@ -52,7 +52,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             $operation = $this->knowledgeBaseStrategy->getKnowledgeOperation($dataIsolation, $oldKnowledge->getCode());
             $operation->validate('w', $oldKnowledge->getCode());
 
-            // use原来的model和向量库
+            // use原来的model和向量library
             $delightfulFlowKnowledgeEntity->setModel($oldKnowledge->getModel());
             $delightfulFlowKnowledgeEntity->setVectorDB($oldKnowledge->getVectorDB());
         }

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 
 /**
- * 火山引擎voice识别status码枚举.
+ * 火山enginevoice识别status码枚举.
  */
 enum VolcengineStatusCode: string
 {

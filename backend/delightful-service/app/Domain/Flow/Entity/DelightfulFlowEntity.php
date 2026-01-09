@@ -679,7 +679,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
             // todo 要唯一
-            // todo 内置工具名allow被use
+            // todo 内置tool名allow被use
         }
     }
 

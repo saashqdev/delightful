@@ -42,8 +42,8 @@ class AsrTaskStatusDTO
 
     public ?string $presetTranscriptFilePath = null; // presetstream识别file相对path
 
-    // 项目和话题info
-    public ?string $projectId = null; // 项目ID
+    // project和话题info
+    public ?string $projectId = null; // projectID
 
     public ?string $topicId = null; // 话题ID
 
@@ -71,9 +71,9 @@ class AsrTaskStatusDTO
 
     public int $sandboxRetryCount = 0; // 沙箱startretry次数
 
-    public int $serverSummaryRetryCount = 0; // 服务端总结触发retry次数
+    public int $serverSummaryRetryCount = 0; // service端总结触发retry次数
 
-    public bool $serverSummaryLocked = false; // 服务端总结是否lock定客户端
+    public bool $serverSummaryLocked = false; // service端总结是否lock定客户端
 
     // ASR content和笔记（用于generatetitle）
     public ?string $asrStreamContent = null; // ASR stream识别content
@@ -98,7 +98,7 @@ class AsrTaskStatusDTO
         $this->noteFileName = self::getStringValue($data, ['note_file_name', 'noteFileName']);
         $this->noteFileId = self::getStringValue($data, ['note_file_id', 'noteFileId']);
 
-        // 项目和话题info
+        // project和话题info
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
@@ -204,7 +204,7 @@ class AsrTaskStatusDTO
 
     /**
      * check总结是否已complete（幂等性判断）.
-     * 判断标准：audiofile已merge（audioFileId 存在）且录音已stop.
+     * 判断standard：audiofile已merge（audioFileId 存在）且录音已stop.
      */
     public function isSummaryCompleted(): bool
     {
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 判断服务端总结是否对客户端加lock.
+     * 判断service端总结是否对客户端加lock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -222,7 +222,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * record一次服务端总结尝试.
+     * record一次service端总结尝试.
      */
     public function markServerSummaryAttempt(): void
     {
@@ -231,7 +231,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 在一次服务端总结end后updatestatus.
+     * 在一次service端总结end后updatestatus.
      */
     public function finishServerSummaryAttempt(bool $success): void
     {

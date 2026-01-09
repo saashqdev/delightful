@@ -32,12 +32,12 @@ interface MCPServerRepositoryInterface
     public function queries(MCPDataIsolation $dataIsolation, MCPServerQuery $query, Page $page): array;
 
     /**
-     * saveMCP服务
+     * saveMCPservice
      */
     public function save(MCPDataIsolation $dataIsolation, MCPServerEntity $entity): MCPServerEntity;
 
     /**
-     * deleteMCP服务
+     * deleteMCPservice
      */
     public function delete(MCPDataIsolation $dataIsolation, string $code): bool;
 }

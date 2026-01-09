@@ -13,7 +13,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * knowledge basedocument仓库interface.
+ * knowledge basedocument仓libraryinterface.
  */
 interface KnowledgeBaseDocumentRepositoryInterface
 {

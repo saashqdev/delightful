@@ -162,7 +162,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
                         // 写database,updatemessagesend方的已读列表。这是为了复用message收发通道，notify客户端有new已读回执。
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // updateoriginal chat_seq 的messagereceive人列表。 避免拉取historymessage时，对方已读的message还是显示未读。
+                        // updateoriginal chat_seq 的messagereceive人列表。 避免pullhistorymessage时，对方已读的message还是显示未读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);

@@ -20,7 +20,7 @@ enum Type: int
     // tool
     case Tools = 3;
 
-    // 组合节点，运行方式有点类似于子process
+    // group合节点，运行方式有点类似于子process
     case CombinedNode = 4;
 
     // 循环节点

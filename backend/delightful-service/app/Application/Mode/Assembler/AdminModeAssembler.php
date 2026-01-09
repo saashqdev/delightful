@@ -71,9 +71,9 @@ class AdminModeAssembler
     }
 
     /**
-     * 分组聚合根convert为DTO.
+     * 分group聚合根convert为DTO.
      *
-     * @param ModeGroupAggregate $groupAggregate 分组聚合根
+     * @param ModeGroupAggregate $groupAggregate 分group聚合根
      * @param array $providerModels optional的modelinfomapping [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
      */
     public static function groupAggregateToAdminDTO(ModeGroupAggregate $groupAggregate, array $providerModels = []): AdminModeGroupAggregateDTO
@@ -131,7 +131,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 分组实体arrayconvert为管理后台DTOarray.
+     * 分group实体arrayconvert为管理后台DTOarray.
      */
     public static function groupEntitiesToAdminDTOs(array $entities): array
     {

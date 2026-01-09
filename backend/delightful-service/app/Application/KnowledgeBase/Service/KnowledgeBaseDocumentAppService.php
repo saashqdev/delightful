@@ -23,7 +23,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
 {
     /**
-     * @return array<string, int> array<knowledge basecode, 文档quantity>
+     * @return array<string, int> array<knowledge basecode, documentquantity>
      */
     public function getDocumentCountByKnowledgeBaseCodes(Authenticatable $authorization, array $knowledgeBaseCodes): array
     {
@@ -31,7 +31,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * saveknowledge base文档.
+     * saveknowledge basedocument.
      */
     public function save(Authenticatable $authorization, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
@@ -41,7 +41,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $documentEntity->setUpdatedUid($dataIsolation->getCurrentUserId());
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $documentEntity->getKnowledgeBaseCode());
 
-        // 文档configurationinheritknowledge base(如果没有对应set)
+        // documentconfigurationinheritknowledge base(如果没有对应set)
         empty($knowledgeBaseEntity->getFragmentConfig()) && $documentEntity->setFragmentConfig($knowledgeBaseEntity->getFragmentConfig());
         empty($documentEntity->getRetrieveConfig()) && $documentEntity->setRetrieveConfig($knowledgeBaseEntity->getRetrieveConfig());
 
@@ -51,7 +51,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());
         $documentEntity->setVectorDb(VectorStoreDriver::default()->value);
         if (! $documentEntity->getCode()) {
-            // 新建文档
+            // 新建document
             if ($documentEntity->getDocumentFile()) {
                 $documentFile = $this->documentFileStrategy->preProcessDocumentFile($dataIsolation, $documentEntity->getDocumentFile());
                 $documentEntity->setDocumentFile($documentFile);
@@ -62,7 +62,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * queryknowledge base文档list.
+     * queryknowledge basedocumentlist.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
@@ -73,7 +73,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         // verifyknowledge base的permission
         $this->checkKnowledgeBaseOperation($dataIsolation, 'r', $query->getKnowledgeBaseCode(), $query->getCode());
 
-        // compatible旧data，新增default文档
+        // compatible旧data，新增defaultdocument
         $fragmentQuery = new KnowledgeBaseFragmentQuery();
         $fragmentQuery->setKnowledgeCode($query->getKnowledgeBaseCode());
         $fragmentQuery->setIsDefaultDocumentCode(true);
@@ -83,13 +83,13 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
             $this->knowledgeBaseStrategy->getOrCreateDefaultDocument($dataIsolation, $knowledgeBaseEntity);
         }
 
-        // call领域servicequery文档
+        // call领域servicequerydocument
         $entities = $this->knowledgeBaseDocumentDomainService->queries($dataIsolation, $query, $page);
         $documentCodeFinalSyncStatusMap = $this->knowledgeBaseFragmentDomainService->getFinalSyncStatusByDocumentCodes(
             $dataIsolation,
             array_map(fn ($entity) => $entity->getCode(), $entities['list'])
         );
-        // get文档syncstatus
+        // getdocumentsyncstatus
         foreach ($entities['list'] as $entity) {
             if (isset($documentCodeFinalSyncStatusMap[$entity->getCode()])) {
                 $entity->setSyncStatus($documentCodeFinalSyncStatusMap[$entity->getCode()]->value);
@@ -116,14 +116,14 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 查看单个knowledge base文档detail.
+     * 查看单个knowledge basedocumentdetail.
      */
     public function show(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): KnowledgeBaseDocumentEntity
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'r', $knowledgeBaseCode, $documentCode);
 
-        // get文档
+        // getdocument
         $entity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
         $documentCodeFinalSyncStatusMap = $this->knowledgeBaseFragmentDomainService->getFinalSyncStatusByDocumentCodes($dataIsolation, [$documentCode]);
         isset($documentCodeFinalSyncStatusMap[$documentCode]) && $entity->setSyncStatus($documentCodeFinalSyncStatusMap[$documentCode]->value);
@@ -131,7 +131,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * deleteknowledge base文档.
+     * deleteknowledge basedocument.
      */
     public function destroy(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -139,7 +139,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $this->checkKnowledgeBaseOperation($dataIsolation, 'del', $knowledgeBaseCode, $documentCode);
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
 
-        // call领域servicedelete文档
+        // call领域servicedeletedocument
         $this->knowledgeBaseDocumentDomainService->destroy($dataIsolation, $knowledgeBaseEntity, $documentCode);
     }
 
@@ -154,7 +154,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         // call领域service重新向量化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // 由于history文档没有 document_file field，不能被重新向量化
+        // 由于historydocument没有 document_file field，不能被重新向量化
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }

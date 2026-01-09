@@ -85,7 +85,7 @@ class KnowledgeSimilarityManager
         $filter->setLimit(1000);
         while ($max) {
             --$max;
-            // 从向量库中先getdata
+            // 从向量library中先getdata
             $points = $knowledgeBaseEntity->getVectorDBDriver()->queryPoints(
                 $knowledgeBaseEntity->getCollectionName(),
                 $filter->getLimit(),

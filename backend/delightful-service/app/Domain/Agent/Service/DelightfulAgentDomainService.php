@@ -185,7 +185,7 @@ class DelightfulAgentDomainService
         // 移除空value
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
 
-        // 按organization分组fileKeys
+        // 按organization分groupfileKeys
         $orgFileKeys = [];
         foreach ($validFileKeys as $fileKey) {
             $orgCode = explode('/', $fileKey, 2)[0] ?? '';

@@ -32,7 +32,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * 长期记忆领域服务
+ * 长期记忆领域service
  */
 readonly class LongTermMemoryDomainService
 {
@@ -95,7 +95,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 批量handle记忆建议（接受/拒绝）.
+     * 批量handle记忆suggestion（接受/拒绝）.
      */
     public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $delightfulMessageId = null): void
     {
@@ -123,7 +123,7 @@ readonly class LongTermMemoryDomainService
                 // 批量query记忆
                 $memories = $this->repository->findByIds($memoryIds);
 
-                // 批量接受记忆建议：将pending_content移动到content，settingstatus为已接受，enable记忆
+                // 批量接受记忆suggestion：将pending_content移动到content，settingstatus为已接受，enable记忆
                 foreach ($memories as $memory) {
                     // 如果有pending_content，则将其移动到content
                     if ($memory->getPendingContent() !== null) {
@@ -145,7 +145,7 @@ readonly class LongTermMemoryDomainService
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
             } elseif ($action === MemoryOperationAction::REJECT) {
-                // 批量拒绝记忆建议：according to记忆status决定delete还是清nullpending_content
+                // 批量拒绝记忆suggestion：according to记忆status决定delete还是清nullpending_content
                 $memories = $this->repository->findByIds($memoryIds);
 
                 $memoriesToDelete = [];
@@ -368,11 +368,11 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according to项目ID列表批量delete记忆.
+     * according toprojectID列表批量delete记忆.
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @param array $projectIds 项目ID列表
+     * @param array $projectIds projectID列表
      * @return int delete的recordquantity
      */
     public function deleteMemoriesByProjectIds(string $orgId, string $appId, string $userId, array $projectIds): int
@@ -381,7 +381,7 @@ readonly class LongTermMemoryDomainService
             return 0;
         }
 
-        // filternull的项目ID
+        // filternull的projectID
         $validProjectIds = array_filter($projectIds, static fn ($id) => ! empty($id));
         if (empty($validProjectIds)) {
             return 0;
@@ -396,11 +396,11 @@ readonly class LongTermMemoryDomainService
      */
     public function getEffectiveMemoriesForPrompt(string $orgId, string $appId, string $userId, ?string $projectId, int $maxLength = 4000): string
     {
-        // getuser全局记忆（没有项目ID的记忆）
+        // getuser全局记忆（没有projectID的记忆）
         $generalMemoryLimit = MemoryCategory::GENERAL->getEnabledLimit();
         $generalMemories = $this->repository->findEffectiveMemoriesByUser($orgId, $appId, $userId, '', $generalMemoryLimit);
 
-        // get项目相关记忆
+        // getproject相关记忆
         $projectMemoryLimit = MemoryCategory::PROJECT->getEnabledLimit();
         $projectMemories = $this->repository->findEffectiveMemoriesByUser($orgId, $appId, $userId, $projectId ?? '', $projectMemoryLimit);
 
@@ -608,7 +608,7 @@ readonly class LongTermMemoryDomainService
         // get要enable的记忆实体
         $memoriesToEnable = $this->repository->findByIds($memoryIds);
 
-        // getcurrent项目记忆和全局记忆的enablequantity
+        // getcurrentproject记忆和全局记忆的enablequantity
         $currentProjectCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::PROJECT);
         $currentGeneralCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::GENERAL);
 

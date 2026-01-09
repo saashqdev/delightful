@@ -10,7 +10,7 @@ namespace App\Application\Flow\ExecuteManager\Memory\MultiModal;
 use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
- * 多模态contentformat化工具
+ * 多模态contentformat化tool
  * 用于统一processdifferent场景下的多模态contentformat化.
  */
 class MultiModalContentFormatter
@@ -19,7 +19,7 @@ class MultiModalContentFormatter
      * 将所有attachmentformat化到文本中.
      *
      * @param string $originalContent original文本content
-     * @param string $visionResponse 视觉分析result
+     * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $attachments 所有attachmentarray
      * @return string format化后的文本content
      */
@@ -56,7 +56,7 @@ class MultiModalContentFormatter
      * 支持单张image和多张image场景.
      *
      * @param string $originalContent original文本content
-     * @param string $visionResponse 视觉分析result
+     * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $imageAttachments imageattachmentarray
      * @return string 添加了imageinfo的文本content
      */
@@ -75,7 +75,7 @@ class MultiModalContentFormatter
         if (! empty($content)) {
             $content .= "\n\n";
         }
-        $content .= "<image组 description=\"{$visionResponse}\">\n";
+        $content .= "<imagegroup description=\"{$visionResponse}\">\n";
         foreach ($imageAttachments as $attachment) {
             $url = $attachment->getUrl();
             $name = $attachment->getName();
@@ -83,7 +83,7 @@ class MultiModalContentFormatter
                 $content .= "  ![{$name}]({$url})\n";
             }
         }
-        $content .= '</image组>';
+        $content .= '</imagegroup>';
         return $content;
     }
 

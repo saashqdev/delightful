@@ -327,7 +327,7 @@ class ModeDomainService
         // buildgroupaggregate根array
         $groupAggregates = [];
         foreach ($groups as $group) {
-            // type安全check
+            // typesecuritycheck
             if (! $group instanceof ModeGroupEntity) {
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }

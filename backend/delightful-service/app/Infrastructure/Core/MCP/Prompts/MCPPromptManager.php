@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\MCP\Prompts;
 
 /**
- * MCPprompt管理器.
+ * MCPpromptmanager.
  * when前version为nullimplement，仅returnnull列表.
  */
 class MCPPromptManager

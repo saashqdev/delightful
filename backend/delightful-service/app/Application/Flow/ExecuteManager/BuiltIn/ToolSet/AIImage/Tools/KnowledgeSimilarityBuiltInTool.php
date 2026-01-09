@@ -41,7 +41,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'useuser问题和关键词，去检索knowledge base中的content，return与user问题相似度最高的content。';
+        return 'useuserissue和关键词，去检索knowledge base中的content，return与userissue相似度最高的content。';
     }
 
     public function getAppendSystemPrompt(array $customParams = []): string
@@ -61,20 +61,20 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 > knowledge basename：knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. 结合上下文提炼user的问题，generate多个关键词，at most不超过 5 个，多个关键词用英文逗号"," 隔开，用于usedifferent关键词从knowledge base中检索最相关的info；
-2. 结合上下文，分析user的问题，generate `names` parameter，用于指定与user问题可能有关的多个knowledge basename，按照相关性sort，相关性需结合上下文、knowledge basename和knowledge basedescription进行判断；
-3. use关键词和user问题，call `{$this->getName()}` 工具检索knowledge base中的content，关键词的parameter是 `keyword`，user问题的parameter是 `question`, 请ensureparameter都被correct填入，工具将return与user问题相似度最高的content片段；
+1. 结合上下文提炼user的issue，generate多个关键词，at most不超过 5 个，多个关键词用英文逗号"," 隔开，用于usedifferent关键词从knowledge base中检索最相关的info；
+2. 结合上下文，analyzeuser的issue，generate `names` parameter，用于指定与userissue可能有关的多个knowledge basename，按照相关性sort，相关性需结合上下文、knowledge basename和knowledge basedescription进行判断；
+3. use关键词和userissue，call `{$this->getName()}` tool检索knowledge base中的content，关键词的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameter都被correct填入，tool将return与userissue相似度最高的content片段；
 4. knowledge base检索出来的content里willcontain一些customize的 Delightful tag，你要善于use它们，有以下几种tag：
     - <DelightfulImage></DelightfulImage> 表示一个image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，每个tag都will在前端messagecard渲染出一张image；
     - <DelightfulVideo></DelightfulVideo> 表示一个video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，每个tag都will在前端messagecard渲染出一个video；
     - <DelightfulMention></DelightfulMention> 表示一个人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，每个tag都will在前端messagecard形成一个 @某某人 的effect；
 5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> 等有 Delightful tag的片段；
-6. 结合knowledge basereturn的content整理后尽可能丰富地回答user的问题。
-## 工具中关键的returnvalueinstruction
+6. 结合knowledge basereturn的content整理后尽可能丰富地回答user的issue。
+## tool中关键的returnvalueinstruction
 - fragments: 本次检索到的所有knowledge base片段
 - fragments.*.content: 片段content
 - fragments.*.metadata.url: current片段的原文link
-- graph.*.content: 来自知识图谱的data，能增强info，让你更好回答问题
+- graph.*.content: 来自知识图谱的data，能增强info，让你更好回答issue
 ## 限制
 - 回答的content中不allow出现不是Delightfultag的link。
 MARKDOWN;
@@ -184,8 +184,8 @@ MARKDOWN;
             "type": "string",
             "key": "question",
             "sort": 0,
-            "title": "user的original问题",
-            "description": "user的original问题",
+            "title": "user的originalissue",
+            "description": "user的originalissue",
             "required": null,
             "value": null,
             "encryption": false,

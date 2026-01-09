@@ -17,14 +17,14 @@ use RuntimeException;
 class Template extends AbstractTemplate
 {
     /**
-     * defaultmessage组ID.
+     * defaultmessagegroupID.
      */
     public const string DEFAULT_MESSAGE_GROUP_ID = '77a48cb1';
 
     /**
-     * message组支持的signaturelist.
+     * messagegroup支持的signaturelist.
      */
-    public static array $signToMessageGroup = ['灯塔引擎'];
+    public static array $signToMessageGroup = ['灯塔engine'];
 
     protected array $typeToIdMap = [
         LanguageEnum::ZH_CN->value => [
@@ -37,7 +37,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * 短messagetemplateId与message组的mapping.
+     * 短messagetemplateId与messagegroup的mapping.
      */
     protected array $templateToGroupIdMap = [
         self::DEFAULT_MESSAGE_GROUP_ID => [
@@ -49,12 +49,12 @@ class Template extends AbstractTemplate
      * 火山云短信的signature暂未支持国际化.
      */
     protected array $signMap = [
-        '灯塔引擎' => [
-            LanguageEnum::ZH_CN->value => '灯塔引擎',
+        '灯塔engine' => [
+            LanguageEnum::ZH_CN->value => '灯塔engine',
             //            Language::EN_US => 'Light Engine',
         ],
         SignEnum::DENG_TA->value => [
-            LanguageEnum::ZH_CN->value => '灯塔引擎',
+            LanguageEnum::ZH_CN->value => '灯塔engine',
             //            Language::EN_US => 'Light Engine',
         ],
     ];

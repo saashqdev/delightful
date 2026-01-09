@@ -76,7 +76,7 @@ class ImageGenerateNodeRunner extends NodeRunner
         $delightfulUserAuthorization->setId($flowDataIsolation->getCurrentUserId());
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, '', $modelId, $data);
 
-        // 这里可能是 url、base64，均record到processexecuteattachment中（此时will进行upload到云服务端）。uploadfailed的filewill直接skip
+        // 这里可能是 url、base64，均record到processexecuteattachment中（此时will进行upload到云service端）。uploadfailed的filewill直接skip
         $attachments = $this->recordFlowExecutionAttachments($executionData, $images, true);
         $vertexResult->addDebugLog('attachments', array_map(fn (AbstractAttachment $attachment) => $attachment->toArray(), $attachments));
         $result = [

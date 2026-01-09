@@ -154,12 +154,12 @@ class DelightfulLLMDomainService
        - 显性命名实体提取，识别实体间的关系与property
        - 推导user的隐性需求和潜在意图，特别关注隐含的时间因素
     1.2 dimension拆解
-       - according to识别出的实体和需求，选择合适的分析dimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场前景、user体验等
+       - according to识别出的实体和需求，选择合适的analyzedimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场前景、user体验等
     1.3 子questiongenerate
        - generate正交子question集（Jaccard相似度<0.25），ensure每个子question能从different角度探索user需求，避免generate过于宽泛或相似的question
     
     ### 2. search代理模块
-    mustcall工具: batchSubQuestionsSearch
+    mustcalltool: batchSubQuestionsSearch
     parameterstandard：
     2.1 key词规则
        - generategreater thanequal 3 个高quality的可检索key词，include核心实体、keyproperty和相关概念
@@ -176,19 +176,19 @@ class DelightfulLLMDomainService
     
     ## contextexceptionhandle
     当 {context} 为null时：
-    1. start备选generate策略，application5W1H框架（Who/What/When/Where/Why/How），并结合user的originalquestion进行填充
-    2. generatedefaultdimension，for example：政策背景 | 最新data | 专家观点 | 对比分析 | 行业趋势
+    1. start备选generate策略，application5W1Hframework（Who/What/When/Where/Why/How），并结合user的originalquestion进行填充
+    2. generatedefaultdimension，for example：政策背景 | 最新data | 专家观点 | 对比analyze | 行业趋势
     
     ## outputstandard
     混合以下三种及更多type的question范式，以ensure子question的多样性和override性：
     [
-      "X对Y的影响差异",  // 对比/比较类
+      "X对Y的影响diff",  // 对比/compare类
       "Z领域的典型application",  // application/案例类
       "关于A的B指标",    // 指标/property类
       "导致M发生的主要原因是什么？", // 原因/机制类
       "什么是N？它的核心特征是什么？", // 定义/解释类
       "未来五年P领域的发展趋势是什么？", // 趋势/预测类
-      "针对Qquestion，有哪些可行的resolve方案？" // resolve方案/建议类
+      "针对Qquestion，有哪些可行的resolve方案？" // resolve方案/suggestion类
     ]
     
     currentcontextsummary：
@@ -241,7 +241,7 @@ class DelightfulLLMDomainService
        - **skip无关content**：
          - 纯静态description（如不变的property、背景介绍，无时间变化）。
          - datastatistics或财务information（如营收、利润）。
-         - 主观comment、分析或推测（除非与event直接相关）。
+         - 主观comment、analyze或推测（除非与event直接相关）。
          - 无时间associate且与question无关的细节。
        - **保留原则**：只要content与时间相关且matchquestiontheme，尽量保留为event。
     4. **output要求**：
@@ -249,7 +249,7 @@ class DelightfulLLMDomainService
        - 每个eventcontain "name"、"time"、"description" 三个field。
        - 若searchcontent不足以generateevent，returnnullarray `[]`，避免凭null臆造。
     
-    ## output示例：
+    ## outputexample：
     ```json
     [
         {
@@ -478,7 +478,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * 非stream总结 - 新增method，适用于工具call.
+     * 非stream总结 - 新增method，适用于toolcall.
      * @throws Throwable
      */
     public function summarizeNonStreaming(AISearchCommonQueryVo $queryVo): string
@@ -544,7 +544,7 @@ class DelightfulLLMDomainService
                 }
             }
             if (empty($subquestions)) {
-                // 没有call工具，尝试从response中parse json
+                // 没有calltool，尝试从response中parse json
                 $subquestions = $this->getSubQuestionsFromLLMStringResponse($generateSearchKeywordsResponse, $userMessage);
             }
             return $subquestions;
@@ -926,7 +926,7 @@ class DelightfulLLMDomainService
             }
 
             if (empty($subQuestions)) {
-                // 没有call工具，尝试从response中parse json
+                // 没有calltool，尝试从response中parse json
                 $subQuestions = $this->getSubQuestionsFromLLMStringResponse($relatedQuestionsResponse, $userMessage);
                 // 大model认为不needgenerateassociatequestion，直接拿user的question
                 empty($subQuestions) && $subQuestions = [$queryVo->getUserMessage()];
@@ -976,7 +976,7 @@ class DelightfulLLMDomainService
 
     public function search(string $query, SearchEngineType $searchEngine, bool $getDetail = false, ?string $language = null): array
     {
-        // according to backend的value，确定use哪个search引擎
+        // according to backend的value，确定use哪个searchengine
         return Retry::whenThrows()->max(3)->sleep(500)->call(
             function () use ($searchEngine, $query, $language, $getDetail) {
                 return match ($searchEngine) {
@@ -1156,7 +1156,7 @@ class DelightfulLLMDomainService
             $subQuestions = $this->stripMarkdownCodeBlock($llmResponse, 'json');
             $subQuestions = Json::decode($subQuestions);
             $this->logger->info(sprintf(
-                'mindSearch getSubQuestionsFromLLMStringResponse 提问：%s 大modelresponse：%s, 分析后result：%s',
+                'mindSearch getSubQuestionsFromLLMStringResponse 提问：%s 大modelresponse：%s, analyze后result：%s',
                 $userMessage,
                 // 去掉换行符
                 str_replace(PHP_EOL, '', $llmResponse),

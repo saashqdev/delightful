@@ -14,10 +14,10 @@ enum UserSettingKey: string
     // 全局 mcp userconfiguration
     case BeDelightfulMCPServers = 'be_delightful_mcp_servers';
 
-    // 项目 mcp userconfiguration
+    // project mcp userconfiguration
     case BeDelightfulProjectMCPServers = 'BeDelightfulProjectMCPServers';
 
-    // 项目话题modelconfiguration
+    // project话题modelconfiguration
     case BeDelightfulProjectTopicModel = 'BeDelightfulProjectTopicModel';
 
     // userwhen前organization

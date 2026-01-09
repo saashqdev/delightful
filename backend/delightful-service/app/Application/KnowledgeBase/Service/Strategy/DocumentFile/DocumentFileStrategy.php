@@ -61,11 +61,11 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预process文档file，according to文档filetype，进行different的process.
+     * 预processdocumentfile，according todocumentfiletype，进行different的process.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
-        // 按类分组
+        // 按类分group
         $groupedFiles = [];
         foreach ($documentFiles as $file) {
             $class = get_class($file);
@@ -73,7 +73,7 @@ class DocumentFileStrategy
         }
 
         $result = [];
-        // 对每个分组分别process
+        // 对每个分group分别process
         foreach ($groupedFiles as $class => $files) {
             $driver = $this->getImplement($files[0]);
             if ($driver) {

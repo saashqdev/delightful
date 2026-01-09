@@ -27,7 +27,7 @@ enum ImageGenerateModelType: string
     // 目前美图ai超清的model_id
     case MiracleVisionHightModelId = 'miracleVision_mtlab';
 
-    // 官方服务商
+    // 官方service商
     case Official = 'Official';
 
     /**

@@ -153,7 +153,7 @@ enum SystemInstructType: int
         $toolbarGroupIndex = null;
         $toolbarGroup = null;
 
-        // 查找工具栏组和现有的系统指令
+        // 查找tool栏group和现有的系统指令
         foreach ($instructs as $index => $group) {
             if (isset($group['position']) && $group['position'] === InstructGroupPosition::TOOLBAR->value) {
                 $hasSystemGroup = true;
@@ -163,7 +163,7 @@ enum SystemInstructType: int
             }
         }
 
-        // 如果没有工具栏组，create一个new
+        // 如果没有tool栏group，create一个new
         if (! $hasSystemGroup) {
             $toolbarGroup = [
                 'id' => (string) IdGenerator::getSnowId(),
@@ -200,10 +200,10 @@ enum SystemInstructType: int
         // 按枚举定义顺序sort系统指令
         ksort($systemInstructs);
 
-        // 重新组合工具栏组的 items，系统指令在前
+        // 重新group合tool栏group的 items，系统指令在前
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
-        // update或添加工具栏组
+        // update或添加tool栏group
         if ($toolbarGroupIndex !== null) {
             $instructs[$toolbarGroupIndex] = $toolbarGroup;
         } else {

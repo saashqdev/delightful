@@ -31,7 +31,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
                 // if本身就已经是 id 了，那么直接return
                 $knowledgeCode = $vectorDatabaseId;
             } elseif (is_array($vectorDatabaseId)) {
-                // 这里采用了 names 的组件形式，那么结构是one多选
+                // 这里采用了 names 的group件形式，那么结构是one多选
                 // 只取第one的 id
                 $knowledgeCode = $vectorDatabaseId[0]['id'] ?? '';
             }

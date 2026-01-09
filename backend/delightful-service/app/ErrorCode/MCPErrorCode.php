@@ -24,7 +24,7 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.service.not_enabled')]
     case ServiceNotEnabled = 51511; // MCPservice未enable
 
-    // 工具associate相关error码
+    // toolassociate相关error码
     #[ErrorMessage(message: 'mcp.rel.not_found')]
     case RelNotFound = 51520; // associate资源不存在
 
@@ -35,7 +35,7 @@ enum MCPErrorCode: int
     case RelNotEnabled = 51522; // associate资源未enable
 
     #[ErrorMessage(message: 'mcp.tool.execute_failed')]
-    case ToolExecuteFailed = 51523; // 工具executefail
+    case ToolExecuteFailed = 51523; // toolexecutefail
 
     // OAuth2auth相关error码
     #[ErrorMessage(message: 'mcp.oauth2.authorization_url_generation_failed')]

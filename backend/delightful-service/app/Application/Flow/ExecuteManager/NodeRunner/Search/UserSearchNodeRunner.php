@@ -137,7 +137,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    // -------- 以下method十分粗暴，不建议学习 🔞🈲 --------  todo 等 es 或 flink cdc 之类的出来再optimize
+    // -------- 以下method十分粗暴，不suggestion学习 🔞🈲 --------  todo 等 es 或 flink cdc 之类的出来再optimize
 
     private function getUserIdsByUsername(Operator $operator, OperatorType $operatorType, mixed $username, ?array $filterUserIds = null): array
     {

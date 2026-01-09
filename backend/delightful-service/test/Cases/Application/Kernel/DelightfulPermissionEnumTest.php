@@ -105,7 +105,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         // test全局permission
         $this->assertTrue($this->permissionEnum->isValidPermission(DelightfulPermission::ALL_PERMISSIONS));
 
-        // testvalid的permission组合
+        // testvalid的permissiongroup合
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.query'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.manage'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.image_generation.query'));

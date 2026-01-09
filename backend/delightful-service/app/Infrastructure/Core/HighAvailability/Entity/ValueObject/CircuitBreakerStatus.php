@@ -15,7 +15,7 @@ use InvalidArgumentException;
 enum CircuitBreakerStatus: string
 {
     /**
-     * closestatus - 正常服务中.
+     * closestatus - 正常service中.
      */
     case CLOSED = 'closed';
 

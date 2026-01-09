@@ -12,7 +12,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
  */
 class AiAbilityConfig
 {
-    // 服务商code
+    // service商code
     private ?string $providerCode = null;
 
     // apikey

@@ -14,12 +14,12 @@ class ModeGroupAggregateDTO extends AbstractDTO
     protected ModeGroupDTO $group;
 
     /**
-     * @var ModeGroupModelDTO[] 该分组对应的model详细infoarray
+     * @var ModeGroupModelDTO[] 该分group对应的model详细infoarray
      */
     protected array $models = [];
 
     /**
-     * @var ModeGroupModelDTO[] 该分组对应的图像model详细infoarray（VLM）
+     * @var ModeGroupModelDTO[] 该分group对应的图像model详细infoarray（VLM）
      */
     protected array $imageModels = [];
 
@@ -129,7 +129,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     public function setModelIds(array $modelIds): void
     {
         // 这个method保留用于向后compatible，但actual上need完整的modelinfo
-        // 建议use setModels() method
+        // suggestionuse setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {
             $model = new ModeGroupModelDTO();

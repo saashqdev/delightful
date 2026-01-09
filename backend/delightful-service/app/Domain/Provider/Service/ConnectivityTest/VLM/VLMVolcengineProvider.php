@@ -18,7 +18,7 @@ use Hyperf\Codec\Json;
 use function Hyperf\Translation\__;
 
 /**
- * 火山服务商.
+ * 火山service商.
  */
 class VLMVolcengineProvider implements IProvider
 {
@@ -42,7 +42,7 @@ class VLMVolcengineProvider implements IProvider
         $body = [];
         // 文生图configuration
         $body['req_key'] = $modelVersion;
-        $body['model_version'] = 'general_v2.1_L'; // 先写死没问题的，目前的文生图支持这个value，图生图没这个value
+        $body['model_version'] = 'general_v2.1_L'; // 先写死没issue的，目前的文生图支持这个value，图生图没这个value
         $body['width'] = 512;
         $body['height'] = 512;
         $body['prompt'] = 'generate一只狗';

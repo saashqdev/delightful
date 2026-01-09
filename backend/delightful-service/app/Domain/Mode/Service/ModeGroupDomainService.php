@@ -25,7 +25,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * according toIDget分组.
+     * according toIDget分group.
      */
     public function getGroupById(ModeDataIsolation $dataIsolation, string $id): ?ModeGroupEntity
     {
@@ -33,7 +33,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * create分组.
+     * create分group.
      */
     public function createGroup(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity
     {
@@ -43,7 +43,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * update分组.
+     * update分group.
      */
     public function updateGroup(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity
     {
@@ -53,7 +53,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * according tomodeIDget分组列表.
+     * according tomodeIDget分group列表.
      */
     public function getGroupsByModeId(ModeDataIsolation $dataIsolation, string $modeId): array
     {
@@ -61,7 +61,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * delete分组.
+     * delete分group.
      */
     public function deleteGroup(ModeDataIsolation $dataIsolation, string $groupId): bool
     {
@@ -70,15 +70,15 @@ class ModeGroupDomainService
             ExceptionBuilder::throw(ModeErrorCode::GROUP_NOT_FOUND);
         }
 
-        // delete分组下的所有modelassociate
+        // delete分group下的所有modelassociate
         $this->relationRepository->deleteByGroupId($dataIsolation, $groupId);
 
-        // delete分组
+        // delete分group
         return $this->groupRepository->delete($dataIsolation, $groupId);
     }
 
     /**
-     * get分组下的modelassociate.
+     * get分group下的modelassociate.
      */
     public function getGroupModels(ModeDataIsolation $dataIsolation, string $groupId): array
     {

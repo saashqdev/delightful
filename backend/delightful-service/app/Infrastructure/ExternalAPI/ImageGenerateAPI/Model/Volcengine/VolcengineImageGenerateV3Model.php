@@ -381,12 +381,12 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * validate火山引擎V3 APIresponsedataformat.
+     * validate火山engineV3 APIresponsedataformat.
      */
     private function validateVolcengineV3Response(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('火山引擎V3responsedataformaterror：缺少datafield');
+            throw new Exception('火山engineV3responsedataformaterror：缺少datafield');
         }
 
         $data = $result['data'];
@@ -395,22 +395,22 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                             || (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0]));
 
         if (! $hasValidImageData) {
-            throw new Exception('火山引擎V3responsedataformaterror：缺少imagedata');
+            throw new Exception('火山engineV3responsedataformaterror：缺少imagedata');
         }
     }
 
     /**
-     * 将火山引擎V3imagedata添加到OpenAIresponseobject中.
+     * 将火山engineV3imagedata添加到OpenAIresponseobject中.
      */
     private function addImageDataToResponseV3(
         OpenAIFormatResponse $response,
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // uselockensure并发安全（虽然V3usesync，但保持一致性）
+        // uselockensure并发security（虽然V3usesync，但保持一致性）
         $lockOwner = $this->lockResponse($response);
         try {
-            // 从火山引擎V3response中提取data
+            // 从火山engineV3response中提取data
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -478,7 +478,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * 为火山引擎V3originaldata添加水印.
+     * 为火山engineV3originaldata添加水印.
      */
     private function processVolcengineV3RawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -507,7 +507,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                 }
             } catch (Exception $e) {
                 // 水印handlefail时，recorderror但不影响imagereturn
-                $this->logger->error('火山引擎V3image水印handlefail', [
+                $this->logger->error('火山engineV3image水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);

@@ -65,7 +65,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * getresponseobject的lock，用于并发安全地操作 OpenAIFormatResponse.
+     * getresponseobject的lock，用于并发security地操作 OpenAIFormatResponse.
      * useRedis自旋lockimplement排队等待.
      *
      * @return string returnlock的owner，用于释放lock

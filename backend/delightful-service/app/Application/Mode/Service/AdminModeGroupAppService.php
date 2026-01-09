@@ -19,7 +19,7 @@ use InvalidArgumentException;
 class AdminModeGroupAppService extends AbstractModeAppService
 {
     /**
-     * according tomodeIDget分组列表 (管理后台用，contain完整i18nfield).
+     * according tomodeIDget分group列表 (管理后台用，contain完整i18nfield).
      */
     public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {
@@ -28,14 +28,14 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         $groupDTOs = AdminModeAssembler::groupEntitiesToAdminDTOs($groups);
 
-        // process分组图标
+        // process分group图标
         $this->processGroupIcons($groupDTOs);
 
         return $groupDTOs;
     }
 
     /**
-     * get分组detail (管理后台用).
+     * get分groupdetail (管理后台用).
      */
     public function getGroupById(DelightfulUserAuthorization $authorization, string $groupId): ?array
     {
@@ -57,7 +57,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * create分组 (管理后台用).
+     * create分group (管理后台用).
      */
     public function createGroup(DelightfulUserAuthorization $authorization, CreateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -88,7 +88,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * update分组 (管理后台用).
+     * update分group (管理后台用).
      */
     public function updateGroup(DelightfulUserAuthorization $authorization, string $groupId, UpdateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -117,7 +117,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * delete分组.
+     * delete分group.
      */
     public function deleteGroup(DelightfulUserAuthorization $authorization, string $groupId): void
     {

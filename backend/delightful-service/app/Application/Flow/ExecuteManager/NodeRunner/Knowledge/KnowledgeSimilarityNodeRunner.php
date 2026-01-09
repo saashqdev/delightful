@@ -21,7 +21,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 #[FlowNodeDefine(
     type: NodeType::KnowledgeSimilarity->value,
     code: NodeType::KnowledgeSimilarity->name,
-    name: '向量data库 / 向量search',
+    name: '向量datalibrary / 向量search',
     paramsConfig: KnowledgeSimilarityNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,

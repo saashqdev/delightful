@@ -13,7 +13,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderTemplateId;
 use InvalidArgumentException;
 
 /**
- * service商templateIDprocess工具类
+ * service商templateIDprocesstool类
  * 用于generate和parseservice商templateID（use固定的数value型string）.
  */
 class ProviderConfigIdAssembler

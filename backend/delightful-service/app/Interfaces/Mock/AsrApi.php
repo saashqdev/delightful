@@ -177,7 +177,7 @@ class AsrApi
             $noteFilename = basename($noteFilePath);
 
             // 模拟真实沙箱行为：只有当笔记file有content时才return详细info
-            // 这里简化process，default假设有content（真实沙箱willcheckfilecontent是否为空）
+            // 这里simplifyprocess，default假设有content（真实沙箱willcheckfilecontent是否为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequest中的 target_path

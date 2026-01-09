@@ -40,7 +40,7 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search，批量对user的多个含义sameordifferent的问题进行互联网search。';
+        return '麦吉互联网search，批量对user的多个含义sameordifferent的issue进行互联网search。';
     }
 
     public function getCallback(): ?Closure
@@ -91,8 +91,8 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "questions": {
             "type": "array",
             "key": "questions",
-            "title": "user问题列表",
-            "description": "user问题列表",
+            "title": "userissue列表",
+            "description": "userissue列表",
             "required": null,
             "value": null,
             "encryption": false,

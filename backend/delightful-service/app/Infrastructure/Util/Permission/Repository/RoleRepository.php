@@ -17,7 +17,7 @@ use DateTime;
 use function Hyperf\Support\now;
 
 /**
- * role仓库implement.
+ * role仓libraryimplement.
  */
 class RoleRepository implements RoleRepositoryInterface
 {

@@ -70,7 +70,7 @@ class VisionTool extends AbstractBuiltInTool
             $node->setParams([
                 'model' => $model,
                 'system_prompt' => $this->createSystemPrompt(),
-                // 不再具有 user，直接采用自行组装的 messages
+                // 不再具有 user，直接采用自行group装的 messages
                 'messages' => $this->createMessages($executionData, $params),
                 'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value),
                 'model_config' => [
@@ -235,18 +235,18 @@ JSON, true)));
 
 1. 优先理解user的意图，始终use与usersame的语言回答
 2. 提供简洁明了的直接回答，直接满足user的主要issue
-3. 再对imagecontent进行多维度详细分析，include但不限于：
+3. 再对imagecontent进行多维度详细analyze，include但不限于：
    - 主体content识别：人物、物体、场景、文字等
    - 视觉特征：color、构图、光线、quality等
    - 语义info：活动、情绪、关系、背景故事等
    - 文字识别：如有文字，准确提取并理解含义
-   - 技术info：如有图table/data，分析其含义
+   - 技术info：如有图table/data，analyze其含义
    
-4. 分析format要求：
-   - 对于重要分析result，use结构化JSONformat呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
+4. analyzeformat要求：
+   - 对于重要analyzeresult，use结构化JSONformat呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
    - 对于不确定content，明确table明推测性质，for example："可能是..."
-   - 如imagequality较低，指出限制因素并尽力分析
-   - 对于多图分析，分别markimage序号进行parse，并总结其associate性
+   - 如imagequality较低，指出限制因素并尽力analyze
+   - 对于多图analyze，分别markimage序号进行parse，并总结其associate性
    
 5. 注意事项：
    - 避免对敏感content做主观评判

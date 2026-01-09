@@ -48,7 +48,7 @@ class MCPHandler implements MCPHandlerInterface
         $this->exceptionHandler = $this->container->get(MCPExceptionHandler::class);
         $this->methodHandlerFactory = new MethodHandlerFactory($this->container);
 
-        // initializedefault组件
+        // initializedefaultgroup件
         $this->authentication = new NoAuthentication();
         $this->rateLimiter = new NoRateLimiter();
         $this->toolManager = new MCPToolManager();
@@ -91,7 +91,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * get工具管理器实例.
+     * gettoolmanager实例.
      */
     public function getToolManager(): MCPToolManager
     {
@@ -99,7 +99,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * set工具管理器实例.
+     * settoolmanager实例.
      */
     public function setToolManager(MCPToolManager $toolManager): self
     {
@@ -108,7 +108,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * get资源管理器实例.
+     * get资源manager实例.
      */
     public function getResourceManager(): MCPResourceManager
     {
@@ -116,7 +116,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * set资源管理器实例.
+     * set资源manager实例.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self
     {
@@ -125,7 +125,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * gethint管理器实例.
+     * gethintmanager实例.
      */
     public function getPromptManager(): MCPPromptManager
     {
@@ -133,7 +133,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * sethint管理器实例.
+     * sethintmanager实例.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self
     {
@@ -157,7 +157,7 @@ class MCPHandler implements MCPHandlerInterface
 
             $result = null;
             if ($handler) {
-                // 为process器set所需的管理器组件
+                // 为process器set所需的managergroup件
                 $handler->setToolManager($this->toolManager)
                     ->setResourceManager($this->resourceManager)
                     ->setPromptManager($this->promptManager);

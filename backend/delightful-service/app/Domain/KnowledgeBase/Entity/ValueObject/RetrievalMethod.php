@@ -22,7 +22,7 @@ class RetrievalMethod
      * 语义检索.
      *
      * based on向量相似度的检索method。
-     * 将query文本convert为向量，然后在向量database中查找最相似的文档。
+     * 将query文本convert为向量，然后在向量database中查找最相似的document。
      * 适合理解语义关系、多语言理解、process模糊description。
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
@@ -31,7 +31,7 @@ class RetrievalMethod
      * 全文检索.
      *
      * based on关键词匹配的检索method。
-     * 索引文档中的所有单词，returncontainquery词的文本片段。
+     * 索引document中的所有单词，returncontainquery词的文本片段。
      * 适合精确匹配（如产品name、人名、ID）和低频词匹配。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';

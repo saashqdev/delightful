@@ -12,7 +12,7 @@ use App\Domain\Chat\DTO\Message\Trait\LLMMessageTrait;
 use App\Infrastructure\Core\AbstractObject;
 
 /**
- * @property string $questionId 问题 id
+ * @property string $questionId issue id
  * @property string $content 总结content
  * @property string $reasoningContent 思考process
  */
@@ -22,7 +22,7 @@ class SummaryItem extends AbstractObject
     use StreamMessageTrait;
 
     /**
-     * 问题 id.
+     * issue id.
      */
     protected string $questionId;
 

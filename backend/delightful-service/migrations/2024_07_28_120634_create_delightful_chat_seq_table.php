@@ -21,7 +21,7 @@ return new class extends Migration {
             // according to上面的建table语句，得出以下code
             $table->bigIncrements('id')->comment('primary keyid,没啥用');
             $table->string('organization_code', 64)->comment('序列号所属的organizationencoding.')->default('');
-            $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：application;3:文档;4:多维table格');
+            $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：application;3:document;4:多维table格');
             $table->string('object_id', 64)->comment('objectid. 如果是user时,table示delightful_id');
             $table->string('seq_id', 64)->comment('message序列号 id，每个账号的所有messagemust逐渐增大');
             $table->string('seq_type', 32)->comment('message大type:控制message,chatmessage。');

@@ -27,22 +27,22 @@ class MCPServerEntity extends AbstractEntity
     protected string $code;
 
     /**
-     * MCP服务name.
+     * MCPservicename.
      */
     protected string $name;
 
     /**
-     * MCP服务description.
+     * MCPservicedescription.
      */
     protected string $description = '';
 
     /**
-     * MCP服务图标.
+     * MCPservice图标.
      */
     protected string $icon = '';
 
     /**
-     * 服务type.
+     * servicetype.
      */
     protected ServiceType $type;
 

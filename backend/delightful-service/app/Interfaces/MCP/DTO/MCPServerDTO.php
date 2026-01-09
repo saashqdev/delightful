@@ -17,22 +17,22 @@ class MCPServerDTO extends AbstractDTO
     use StringIdDTOTrait;
 
     /**
-     * MCP服务name.
+     * MCPservicename.
      */
     public string $name = '';
 
     /**
-     * MCP服务description.
+     * MCPservicedescription.
      */
     public string $description = '';
 
     /**
-     * MCP服务icon.
+     * MCPserviceicon.
      */
     public string $icon = '';
 
     /**
-     * 服务type.
+     * servicetype.
      */
     public string $type = '';
 

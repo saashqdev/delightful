@@ -211,7 +211,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * getmodel（考虑服务商级联status）.
+     * getmodel（考虑service商级联status）.
      * @return ProviderModelEntity[]
      */
     protected function getModels(ModeAggregate $modeAggregate): array
@@ -233,7 +233,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 批量getmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
-        // 提取所有服务商ID
+        // 提取所有service商ID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -241,7 +241,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 批量get服务商status
+        // 批量getservice商status
         $providerStatuses = [];
         if (! empty($providerConfigIds)) {
             $providerConfigs = $this->providerConfigDomainService->getByIds($providerDataIsolation, array_unique($providerConfigIds));
@@ -263,7 +263,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * get详细的modelinfo（用于管理后台，考虑服务商级联status）.
+     * get详细的modelinfo（用于管理后台，考虑service商级联status）.
      * @return array<string, array{best: null|ProviderModelEntity, all: ProviderModelEntity[], status: ModelStatus}>
      */
     protected function getDetailedModels(ModeAggregate $modeAggregate): array
@@ -285,7 +285,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 单次queryget完整的modelinfo
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
-        // 提取所有服务商ID
+        // 提取所有service商ID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -293,7 +293,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 批量get服务商status
+        // 批量getservice商status
         $providerStatuses = [];
         if (! empty($providerConfigIds)) {
             $providerConfigs = $this->providerConfigDomainService->getByIds($providerDataIsolation, array_unique($providerConfigIds));
@@ -319,10 +319,10 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * 从model列表中选择最佳model（考虑服务商级联status）.
+     * 从model列表中选择最佳model（考虑service商级联status）.
      *
      * @param ProviderModelEntity[] $models model列表
-     * @param array<int, Status> $providerStatuses 服务商statusmapping
+     * @param array<int, Status> $providerStatuses service商statusmapping
      * @return null|ProviderModelEntity 选择的最佳model，如果没有可用model则returnnull
      */
     private function selectBestModel(array $models, array $providerStatuses = []): ?ProviderModelEntity
@@ -331,7 +331,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // 如果没有提供服务商status，use原有逻辑（向后compatible）
+        // 如果没有提供service商status，use原有逻辑（向后compatible）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
@@ -341,17 +341,17 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // 优先选择服务商enable且modelenable的model
+        // 优先选择service商enable且modelenable的model
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // 服务商disable，skip该model
+            // service商disable，skip该model
             if ($providerStatus === Status::Disabled) {
                 continue;
             }
 
-            // 服务商enable，checkmodelstatus
+            // service商enable，checkmodelstatus
             if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return $model;
             }
@@ -361,10 +361,10 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * according tomodel列表确定status（考虑服务商级联status）.
+     * according tomodel列表确定status（考虑service商级联status）.
      *
      * @param ProviderModelEntity[] $models model列表
-     * @param array<int, Status> $providerStatuses 服务商statusmapping
+     * @param array<int, Status> $providerStatuses service商statusmapping
      * @return ModelStatus status：Normal、Disabled、Deleted
      */
     private function determineStatus(array $models, array $providerStatuses = []): ModelStatus
@@ -373,7 +373,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Deleted;
         }
 
-        // 如果没有提供服务商status，use原有逻辑（向后compatible）
+        // 如果没有提供service商status，use原有逻辑（向后compatible）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus() === Status::Enabled) {
@@ -388,7 +388,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // 服务商enable且modelenable才算正常
+            // service商enable且modelenable才算正常
             if ($providerStatus === Status::Enabled && $model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return ModelStatus::Normal;
             }

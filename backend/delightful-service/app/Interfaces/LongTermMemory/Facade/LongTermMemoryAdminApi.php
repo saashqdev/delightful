@@ -185,7 +185,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $memory = $this->longTermMemoryAppService->getMemory($memoryId);
 
-        // get项目name
+        // getprojectname
         $projectName = null;
         if ($memory->getProjectId()) {
             $projectName = $this->longTermMemoryAppService->getProjectNameById($memory->getProjectId());
@@ -365,7 +365,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批量process记忆建议（接受/拒绝）.
+     * 批量process记忆suggestion（接受/拒绝）.
      */
     public function batchProcessMemorySuggestions(RequestInterface $request): array
     {
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // 批量接受记忆建议：status 改为 accept，enabled 为 true
+                // 批量接受记忆suggestion：status 改为 accept，enabled 为 true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [

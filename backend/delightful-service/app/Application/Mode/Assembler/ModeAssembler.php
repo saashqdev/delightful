@@ -31,7 +31,7 @@ class ModeAssembler
         $groupAggregatesDTOs = [];
         foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
             $groupDTO = self::groupAggregateToDTO($groupAggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
-            // 只有当分组下有model或图像model时才添加（前台filter空分组）
+            // 只有当分group下有model或图像model时才添加（前台filter空分group）
             if (! empty($groupDTO->getModels()) || ! empty($groupDTO->getImageModels())) {
                 $groupAggregatesDTOs[] = $groupDTO;
             }
@@ -111,7 +111,7 @@ class ModeAssembler
     }
 
     /**
-     * 将ModeAggregateconvert为扁平化的分组DTOarray.
+     * 将ModeAggregateconvert为扁平化的分groupDTOarray.
      * @param $providerModels ProviderModelEntity[]
      * @return ModeGroupDetailDTO[]
      */
@@ -149,7 +149,7 @@ class ModeAssembler
                 }
             }
 
-            // 只有当分组下有model时才添加（前台filter空分组）
+            // 只有当分group下有model时才添加（前台filter空分group）
             if (! empty($models)) {
                 $modeGroupDetailDTO->setModels($models);
                 $modeGroupDetailDTO->sortModels(); // 对modelsort
@@ -157,7 +157,7 @@ class ModeAssembler
             }
         }
 
-        // 对分组sort（降序，越大越前）
+        // 对分groupsort（降序，越大越前）
         usort($flatGroups, function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });

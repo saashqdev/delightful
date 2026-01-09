@@ -32,14 +32,14 @@ class DelightfulAccessToken
         if (! $application) {
             $application = new ApplicationEntity();
             $application->setCode(ModelGatewayOfficialApp::APP_CODE);
-            $application->setName('灯塔引擎');
-            $application->setDescription('灯塔引擎官方application');
+            $application->setName('灯塔engine');
+            $application->setDescription('灯塔engine官方application');
             $application->setOrganizationCode($llmDataIsolation->getCurrentOrganizationCode());
             $application->setCreator('system');
             $application = $applicationDomainService->save($llmDataIsolation, $application);
         }
 
-        // 这里的常量 AccessToken 不落库，仅存在于内存中，保证内部call时use一致
+        // 这里的常量 AccessToken 不落library，仅存在于内存中，保证内部call时use一致
         $accessToken = new AccessTokenEntity();
         $accessToken->setId(1);
         $accessToken->setName($application->getCode());

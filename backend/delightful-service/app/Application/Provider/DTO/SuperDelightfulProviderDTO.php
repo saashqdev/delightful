@@ -10,7 +10,7 @@ namespace App\Application\Provider\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * BeDelightful 服务商简化 DTO.
+ * BeDelightful service商simplify DTO.
  */
 class BeDelightfulProviderDTO extends AbstractDTO
 {

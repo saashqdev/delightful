@@ -13,7 +13,7 @@ namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 class AggregateAISearchCardResponseType
 {
     /**
-     *associate问题的searchresult，include子问题(search_keywords), 网页searchresult(search), 总词数(total_words), 匹配词数(match_count), 页数(page_count).
+     *associateissue的searchresult，include子issue(search_keywords), 网页searchresult(search), 总词数(total_words), 匹配词数(match_count), 页数(page_count).
      */
     public const int SEARCH = 0;
 
@@ -23,7 +23,7 @@ class AggregateAISearchCardResponseType
     // 思维导图
     public const int MIND_MAP = 2;
 
-    // associate问题
+    // associateissue
     public const int ASSOCIATE_QUESTIONS = 3;
 
     // event
@@ -47,7 +47,7 @@ class AggregateAISearchCardResponseType
             self::SEARCH => 'searchresult',
             self::LLM_RESPONSE => 'LLMresponse',
             self::MIND_MAP => '思维导图',
-            self::ASSOCIATE_QUESTIONS => 'associate问题',
+            self::ASSOCIATE_QUESTIONS => 'associateissue',
             self::EVENT => 'event',
             self::PING_PONG => 'ping_pong',
             self::TERMINATE => 'exception终止',

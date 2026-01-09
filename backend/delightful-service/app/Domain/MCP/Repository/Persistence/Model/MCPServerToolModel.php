@@ -14,7 +14,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id primary keyID
  * @property string $organization_code organizationencoding
- * @property string $mcp_server_code associate的mcp服务code
+ * @property string $mcp_server_code associate的mcpservicecode
  * @property string $name toolname
  * @property string $description tooldescription
  * @property int $source tool来源

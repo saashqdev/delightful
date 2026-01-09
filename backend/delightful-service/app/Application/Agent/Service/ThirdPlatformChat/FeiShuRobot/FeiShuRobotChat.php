@@ -116,7 +116,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     {
         $chatMessage = new ThirdPlatformChatMessage();
 
-        // handle服务器validaterequest
+        // handleservice器validaterequest
         if (isset($params['challenge'])) {
             return $this->handleChallengeCheck($params, $chatMessage);
         }
@@ -209,7 +209,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handle服务器validaterequest
+     * handleservice器validaterequest
      *
      * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
@@ -217,7 +217,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      */
     private function handleChallengeCheck(array $params, ThirdPlatformChatMessage $chatMessage): ThirdPlatformChatMessage
     {
-        $this->logger->info('handle飞书服务器validaterequest');
+        $this->logger->info('handle飞书service器validaterequest');
 
         $chatMessage->setEvent(ThirdPlatformChatEvent::CheckServer);
         $response = new Response(

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本file属于灯塔引擎版权所有，泄漏必究。
+ * 本file属于灯塔engine版权所有，泄漏必究。
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -59,8 +59,8 @@ class EasyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "questions": {
                 "type": "array",
                 "key": "questions",
-                "title": "user问题列表",
-                "description": "user问题列表",
+                "title": "userissue列表",
+                "description": "userissue列表",
                 "required": null,
                 "value": {
                     "type": "expression",

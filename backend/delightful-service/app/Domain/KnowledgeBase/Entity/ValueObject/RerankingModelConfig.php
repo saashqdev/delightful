@@ -69,7 +69,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * 批processsize.
      *
-     * 批量process文档的size，用于提高performance
+     * 批量processdocument的size，用于提高performance
      */
     private int $batchSize = 16;
 

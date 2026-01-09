@@ -75,7 +75,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * 从string安全create枚举.
+     * 从stringsecuritycreate枚举.
      */
     public static function fromString(string $status): ?self
     {

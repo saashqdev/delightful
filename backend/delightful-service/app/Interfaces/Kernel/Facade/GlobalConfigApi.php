@@ -56,7 +56,7 @@ class GlobalConfigApi
 
     private static function platformSettingsToResponse(array $settings): array
     {
-        // 将 logo_urls convert为前端示例结构
+        // 将 logo_urls convert为前端example结构
         $logo = [];
         foreach (($settings['logo_urls'] ?? []) as $locale => $url) {
             $logo[$locale] = $url;

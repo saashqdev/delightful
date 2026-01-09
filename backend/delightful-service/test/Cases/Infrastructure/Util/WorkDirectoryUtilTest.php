@@ -71,7 +71,7 @@ class WorkDirectoryUtilTest extends TestCase
 
             // Unicode characters (if supported)
             'проект' => 'Directory with Cyrillic characters',
-            '项目' => 'Directory with Chinese characters',
+            'project' => 'Directory with Chinese characters',
             'مشروع' => 'Directory with Arabic characters',
         ];
 

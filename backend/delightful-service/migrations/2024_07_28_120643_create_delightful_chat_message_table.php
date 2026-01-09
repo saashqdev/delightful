@@ -23,11 +23,11 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->bigIncrements('id');
             // 发件方所属organization
             $table->string('sender_id', 64)->comment('发件方的id');
-            $table->tinyInteger('sender_type')->comment('发件方usertype,1:user(ai也被认为是user)；2：application;3:文档;4:多维table格');
+            $table->tinyInteger('sender_type')->comment('发件方usertype,1:user(ai也被认为是user)；2：application;3:document;4:多维table格');
             $table->string('sender_organization_code', 64)->comment('发件方organizationencoding,可能为空string')->default('');
             // receive方所属organization
-            $table->string('receive_id', 64)->comment('receive方id，可能是人类、ai或者application/文档/多维table格等');
-            $table->tinyInteger('receive_type')->comment('receive方type,1:user(ai也被认为是user)；2：application;3:文档;4:多维table格');
+            $table->string('receive_id', 64)->comment('receive方id，可能是人类、ai或者application/document/多维table格等');
+            $table->tinyInteger('receive_type')->comment('receive方type,1:user(ai也被认为是user)；2：application;3:document;4:多维table格');
             $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,可能为空string')->default('');
             // message的相关id
             $table->string('app_message_id', 64)->comment('客户端generate的messageid,用于防客户端重复');

@@ -57,7 +57,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * according to服务商configurationIDget服务商详细info.
+     * according toservice商configurationIDgetservice商详细info.
      */
     public function getProviderModelsByConfigId(
         DelightfulUserAuthorization $authorization,
@@ -69,7 +69,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // pass领域层method一次性get服务商、configuration和modelinfo
+        // pass领域层method一次性getservice商、configuration和modelinfo
         $providerModels = $this->providerConfigDomainService->getProviderModelsByConfigId($dataIsolation, $configId);
         if ($providerModels === null) {
             return null;
@@ -92,7 +92,7 @@ readonly class AdminProviderAppService
 
         $providerConfigEntity = $this->providerConfigDomainService->updateProviderConfig($dataIsolation, $providerConfigEntity);
 
-        // 触发服务商configurationupdateevent
+        // 触发service商configurationupdateevent
         $this->eventDispatcher->dispatch(new ProviderConfigUpdatedEvent(
             $providerConfigEntity,
             $authorization->getOrganizationCode(),
@@ -114,7 +114,7 @@ readonly class AdminProviderAppService
 
         $providerConfigEntity = $this->providerConfigDomainService->createProviderConfig($dataIsolation, $providerConfigEntity);
 
-        // 触发服务商configurationcreateevent
+        // 触发service商configurationcreateevent
         $this->eventDispatcher->dispatch(new ProviderConfigCreatedEvent(
             $providerConfigEntity,
             $authorization->getOrganizationCode(),
@@ -131,7 +131,7 @@ readonly class AdminProviderAppService
         return $providerModelsDTO;
     }
 
-    // delete服务商
+    // deleteservice商
 
     /**
      * @throws Exception
@@ -258,9 +258,9 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * according toorganizationencoding和服务商categoryget活跃的服务商configuration.
+     * according toorganizationencoding和service商categoryget活跃的service商configuration.
      * @param string $organizationCode organizationencoding
-     * @param Category $category 服务商category
+     * @param Category $category service商category
      * @return ProviderConfigDTO[]
      */
     public function getOrganizationProvidersModelsByCategory(string $organizationCode, Category $category): array
@@ -290,7 +290,7 @@ readonly class AdminProviderAppService
             $dataIsolation,
             $modelPrimaryId
         );
-        // according to服务商type和modeltype进行连通性test
+        // according toservice商type和modeltype进行连通性test
         return match ($this->getConnectivityTestType($providerModelEntity->getCategory()->value, $providerModelEntity->getModelType()->value)) {
             NaturalLanguageProcessing::EMBEDDING => $this->embeddingConnectivityTest($modelPrimaryId, $authorization),
             NaturalLanguageProcessing::LLM => $this->llmConnectivityTest($modelPrimaryId, $authorization),
@@ -299,15 +299,15 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所有非官方服务商列表，不dependency于organization.
+     * get所有非官方service商列表，不dependency于organization.
      *
-     * @param Category $category 服务商category
+     * @param Category $category service商category
      * @param string $organizationCode organizationencoding
-     * @return ProviderConfigModelsDTO[] 非官方服务商列表
+     * @return ProviderConfigModelsDTO[] 非官方service商列表
      */
     public function getAllNonOfficialProviders(Category $category, string $organizationCode): array
     {
-        // get所有非官方服务商
+        // get所有非官方service商
         $serviceProviders = $this->adminProviderDomainService->getAllNonOfficialProviders($category);
 
         if (empty($serviceProviders)) {
@@ -321,15 +321,15 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所有可用的服务商列表（include官方服务商），不dependency于organization.
+     * get所有可用的service商列表（include官方service商），不dependency于organization.
      *
-     * @param Category $category 服务商category
+     * @param Category $category service商category
      * @param string $organizationCode organizationencoding
-     * @return ProviderConfigModelsDTO[] 所有可用服务商列表
+     * @return ProviderConfigModelsDTO[] 所有可用service商列表
      */
     public function getAllAvailableLlmProviders(Category $category, string $organizationCode): array
     {
-        // get所有服务商（includeOfficial）
+        // get所有service商（includeOfficial）
         $serviceProviders = $this->adminProviderDomainService->getAllAvailableProviders($category);
 
         if (empty($serviceProviders)) {
@@ -422,7 +422,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * initializeDelightful服务商configurationdata.
+     * initializeDelightfulservice商configurationdata.
      */
     public function initializeDelightfulProviderConfigs(): int
     {
@@ -655,9 +655,9 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handle服务提供商实体列表的图标.
+     * handleservice提供商实体列表的图标.
      *
-     * @param ProviderConfigModelsDTO[] $serviceProviders 服务提供商实体列表
+     * @param ProviderConfigModelsDTO[] $serviceProviders service提供商实体列表
      * @param string $organizationCode organizationencoding
      */
     private function processServiceProviderEntityListIcons(array $serviceProviders, string $organizationCode): void
@@ -683,9 +683,9 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handle服务商configuration图标.
+     * handleservice商configuration图标.
      *
-     * @param ProviderConfigDTO[] $providerConfigs 服务商configurationDTO列表
+     * @param ProviderConfigDTO[] $providerConfigs service商configurationDTO列表
      */
     private function processProviderConfigIcons(array $providerConfigs): void
     {
@@ -695,7 +695,7 @@ readonly class AdminProviderAppService
 
         $iconMappings = [];
 
-        // 收集服务商图标
+        // 收集service商图标
         foreach ($providerConfigs as $configDTO) {
             $this->collectProviderIcon($configDTO, $iconMappings);
         }
@@ -705,7 +705,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 收集服务商图标info.
+     * 收集service商图标info.
      */
     private function collectProviderIcon(ProviderConfigDTO|ProviderConfigModelsDTO $provider, array &$iconMappings): void
     {
@@ -746,7 +746,7 @@ readonly class AdminProviderAppService
                 /** @var string $icon */
                 $url = $fileLink ? $fileLink->getUrl() : '';
 
-                // setting服务商图标URL
+                // settingservice商图标URL
                 $providerMap = $mapping['providerMap'];
                 if (isset($providerMap[$icon])) {
                     $providers = $providerMap[$icon];

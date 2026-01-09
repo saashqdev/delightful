@@ -53,7 +53,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
     }
 
     /**
-     * 将实体序列化为array，containJSON序列化复杂field.
+     * 将实体serialize为array，containJSONserialize复杂field.
      */
     protected function serializeEntityToArray(ProviderModelEntity $entity): array
     {

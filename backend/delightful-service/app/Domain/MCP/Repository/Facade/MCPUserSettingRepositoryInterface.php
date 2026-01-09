@@ -23,7 +23,7 @@ interface MCPUserSettingRepositoryInterface
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 
     /**
-     * according touserID和MCP服务IDgetusersetting.
+     * according touserID和MCPserviceIDgetusersetting.
      */
     public function getByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): ?MCPUserSettingEntity;
 
@@ -35,7 +35,7 @@ interface MCPUserSettingRepositoryInterface
     public function getByUserId(MCPDataIsolation $dataIsolation, string $userId): array;
 
     /**
-     * according toMCP服务IDget所有usersetting.
+     * according toMCPserviceIDget所有usersetting.
      *
      * @return array<MCPUserSettingEntity>
      */
@@ -57,7 +57,7 @@ interface MCPUserSettingRepositoryInterface
     public function delete(MCPDataIsolation $dataIsolation, int $id): bool;
 
     /**
-     * deleteuser的指定MCP服务setting.
+     * deleteuser的指定MCPservicesetting.
      */
     public function deleteByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): bool;
 

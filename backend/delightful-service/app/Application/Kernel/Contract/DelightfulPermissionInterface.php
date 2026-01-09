@@ -34,7 +34,7 @@ interface DelightfulPermissionInterface
     public function parsePermission(string $permissionKey): array;
 
     /**
-     * generate所有可能的permission组合.
+     * generate所有可能的permissiongroup合.
      */
     public function generateAllPermissions(): array;
 

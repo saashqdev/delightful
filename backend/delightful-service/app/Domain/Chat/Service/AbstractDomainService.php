@@ -145,7 +145,7 @@ abstract class AbstractDomainService
 
     /**
      * notify收件方有新message(收件方可能是自己,或者是chatobject).
-     * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/服务器stress
+     * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/service器stress
      */
     public function pushControlSequence(DelightfulSeqEntity $seqEntity): SeqCreatedEvent
     {

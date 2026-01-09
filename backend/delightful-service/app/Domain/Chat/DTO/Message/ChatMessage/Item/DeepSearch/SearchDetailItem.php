@@ -13,7 +13,7 @@ use App\Infrastructure\Util\IdGenerator\IdGenerator;
 class SearchDetailItem extends AbstractObject
 {
     /**
-     * @var string 问题 id,one问题willwill有多个searchresult
+     * @var string issue id,oneissuewillwill有多个searchresult
      */
     protected string $questionId;
 

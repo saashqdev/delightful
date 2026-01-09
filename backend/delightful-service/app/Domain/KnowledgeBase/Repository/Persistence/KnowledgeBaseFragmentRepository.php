@@ -238,7 +238,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
             ->whereIn('document_code', $documentCodes)
             ->get();
 
-        // 按document_code分组
+        // 按document_code分group
         $groupedResults = [];
         foreach ($results as $result) {
             if (! isset($groupedResults[$result->document_code])) {

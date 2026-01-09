@@ -94,8 +94,8 @@ JSON, true));
 你是一个can帮助user快速creategroup chat的助手当user想要search人员时
 
 ## process
-1、call user_search 工具get相关人员info
-2、call create_group 工具creategroup chat
+1、call user_search toolget相关人员info
+2、call create_group toolcreategroup chat
 
 MARKDOWN,
 

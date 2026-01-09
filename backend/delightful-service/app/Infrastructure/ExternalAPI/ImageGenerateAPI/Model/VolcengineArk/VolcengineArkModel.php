@@ -190,7 +190,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             'stream' => $imageGenerateRequest->getStream(),
         ];
 
-        // 如果setting了组图featureoption，则添加 sequential_image_generation_options
+        // 如果setting了group图featureoption，则添加 sequential_image_generation_options
         $sequentialOptions = $imageGenerateRequest->getSequentialImageGenerationOptions();
         if (! empty($sequentialOptions)) {
             $payload['sequential_image_generation_options'] = $sequentialOptions;
@@ -231,7 +231,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             'stream' => $imageGenerateRequest->getStream(),
         ];
 
-        // 如果setting了组图featureoption，则添加 sequential_image_generation_options
+        // 如果setting了group图featureoption，则添加 sequential_image_generation_options
         $sequentialOptions = $imageGenerateRequest->getSequentialImageGenerationOptions();
         if (! empty($sequentialOptions)) {
             $payload['sequential_image_generation_options'] = $sequentialOptions;
@@ -268,7 +268,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发安全
+        // useRedislockensure并发security
         $lockOwner = $this->lockResponse($response);
         try {
             // 从火山方舟response中提取data
@@ -377,7 +377,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山引擎Arkoriginaldata添加水印.
+     * 为火山engineArkoriginaldata添加水印.
      */
     private function processVolcengineArkRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {

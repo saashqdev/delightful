@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_cache', function (Blueprint $table) {
             $table->id();
-            $table->string('cache_hash', 32)->unique()->comment('cache键MD5哈希value(cache_prefix+cache_key)');
+            $table->string('cache_hash', 32)->unique()->comment('cache键MD5hashvalue(cache_prefix+cache_key)');
             $table->string('cache_prefix')->comment('cache前缀');
             $table->string('cache_key')->comment('cache键名');
             $table->string('scope_tag', 10)->comment('作用域标识');
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('updated_uid', 64)->default('')->comment('update人');
             $table->timestamps();
 
-            // 索引 - useMD5哈希value作为主要query索引
+            // 索引 - useMD5hashvalue作为主要query索引
             $table->unique('cache_hash', 'uk_cache_hash');
             $table->index('expires_at', 'idx_expires_at');
             $table->index('organization_code', 'idx_organization_code');

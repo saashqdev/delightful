@@ -146,7 +146,7 @@ class ModeInitializer
                 'mode_id' => $defaultModeId,
                 'name_i18n' => json_encode([
                     'en_US' => 'Default Group-1',
-                    'zh_CN' => 'default分组-1',
+                    'zh_CN' => 'default分group-1',
                 ]),
                 'icon' => 'IconBrain',
                 'description' => '',
@@ -300,11 +300,11 @@ class ModeInitializer
                 'id' => '821139625302740993',
                 'name_i18n' => json_encode([
                     'en_US' => 'Analysis',
-                    'zh_CN' => 'data分析',
+                    'zh_CN' => 'dataanalyze',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Be Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您optional择data源或upload Excel file后，inputneed分析的需求，超级麦吉将为您进行全面的data分析。 Enter send ; Shift + Enter 换行',
+                    'zh_CN' => '您optional择data源或upload Excel file后，inputneedanalyze的需求，超级麦吉将为您进行全面的dataanalyze。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'data_analysis',
                 'icon' => 'IconChartBarPopular',

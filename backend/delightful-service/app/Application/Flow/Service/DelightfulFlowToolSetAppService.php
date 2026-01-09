@@ -91,7 +91,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         foreach ($data['list'] ?? [] as $item) {
             $filePaths[] = $item->getIcon();
             if ($item->getCode() === ConstValue::TOOL_SET_DEFAULT_CODE) {
-                // 未分组的直接分配管理员permission
+                // 未分group的直接分配管理员permission
                 $item->setUserOperation(Operation::Admin->value);
             } else {
                 $operation = $resources[$item->getCode()] ?? Operation::None;

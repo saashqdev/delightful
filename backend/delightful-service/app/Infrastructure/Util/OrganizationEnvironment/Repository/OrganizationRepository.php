@@ -18,7 +18,7 @@ use Hyperf\Database\Model\Builder;
 use function Hyperf\Support\now;
 
 /**
- * organization仓库implement.
+ * organization仓libraryimplement.
  */
 class OrganizationRepository implements OrganizationRepositoryInterface
 {

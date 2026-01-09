@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('userid。此session窗口属于该user。');
             $table->string('user_organization_code', 64)->comment('userorganizationencoding');
             // 收件人organizationencoding
-            $table->tinyInteger('receive_type')->comment('sessiontype。1：private chat，2：group chat，3：系统message，4：云文档，5：多维table格 6：话题 7：applicationmessage');
+            $table->tinyInteger('receive_type')->comment('sessiontype。1：private chat，2：group chat，3：系统message，4：云document，5：多维table格 6：话题 7：applicationmessage');
             $table->string('receive_id', '64')->comment('session另一方的id。different的conversation type，id含义different。');
             $table->string('receive_organization_code', 64)->comment('收件人organizationencoding');
             // 是否免打扰
@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
             $table->unique(['user_id', 'receive_id', 'receive_type', 'user_organization_code', 'receive_organization_code'], 'unq_user_conversation');
-            $table->comment('user的sessionlist。session可能是private chat、group chat、系统message、一个云文档或者多维table格等。');
+            $table->comment('user的sessionlist。session可能是private chat、group chat、系统message、一个云document或者多维table格等。');
         });
     }
 

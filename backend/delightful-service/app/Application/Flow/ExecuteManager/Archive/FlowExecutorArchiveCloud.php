@@ -17,7 +17,7 @@ class FlowExecutorArchiveCloud
     {
         $name = "{$key}.log";
 
-        // 直接check序列化后的datasize
+        // 直接checkserialize后的datasize
         $serializedData = serialize($data);
         $dataSize = strlen($serializedData);
         $maxSize = 100 * 1024 * 1024; // 100MB

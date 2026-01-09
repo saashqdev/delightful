@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\MCP\Resources;
 
 /**
- * MCP资源管理器.
+ * MCP资源manager.
  * when前version为nullimplement，仅returnnull列表.
  */
 class MCPResourceManager

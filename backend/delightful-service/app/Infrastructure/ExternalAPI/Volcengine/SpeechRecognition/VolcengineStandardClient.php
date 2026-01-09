@@ -448,7 +448,7 @@ class VolcengineStandardClient
     }
 
     /**
-     * verify火山引擎APIresponsestatus码
+     * verify火山engineAPIresponsestatus码
      * 只用于submittask时verify是否successsubmit（20000000）.
      *
      * @param array $responseHeaders response头array

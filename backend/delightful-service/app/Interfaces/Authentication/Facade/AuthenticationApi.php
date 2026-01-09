@@ -45,7 +45,7 @@ class AuthenticationApi
     }
 
     /**
-     * 前端自身业务用，get authorization 对应的私有化识别码
+     * 前端自身业务用，get authorization 对应的private识别码
      */
     public function authEnvironment(RequestInterface $request): array
     {

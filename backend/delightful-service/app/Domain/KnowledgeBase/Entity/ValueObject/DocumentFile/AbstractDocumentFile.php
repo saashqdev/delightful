@@ -80,7 +80,7 @@ abstract class AbstractDocumentFile extends AbstractValueObject implements Docum
     }
 
     /**
-     * initializedocument类型.
+     * initializedocumenttype.
      */
     abstract protected function initType(): DocumentFileType;
 }

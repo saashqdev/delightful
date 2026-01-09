@@ -12,7 +12,7 @@ use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
  * ASRtaskstatusDTO - 管理Redis Hash字段映射.
- * 这不是从 JSON 响应结构来的，而是用于管理taskstatus
+ * 这不是从 JSON response结构来的，而是用于管理taskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -25,7 +25,7 @@ class AsrTaskStatusDTO
     // 类似：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
     public ?string $filePath = null; // 工作区file路径
 
-    // fileID（数据库中的actualID）
+    // fileID（database中的actualID）
     public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表后return的ID）
 
     // note fileinfo
@@ -65,15 +65,15 @@ class AsrTaskStatusDTO
 
     public bool $sandboxTaskCreated = false; // 沙箱task是否已create
 
-    public bool $isPaused = false; // 是否处于暂停status（用于超时判断）
+    public bool $isPaused = false; // 是否处于暂停status（用于timeout判断）
 
     public ?string $sandboxId = null; // 沙箱ID
 
-    public int $sandboxRetryCount = 0; // 沙箱启动重试次数
+    public int $sandboxRetryCount = 0; // 沙箱启动retry次数
 
-    public int $serverSummaryRetryCount = 0; // 服务端总结触发重试次数
+    public int $serverSummaryRetryCount = 0; // 服务端总结触发retry次数
 
-    public bool $serverSummaryLocked = false; // 服务端总结是否锁定客户端
+    public bool $serverSummaryLocked = false; // 服务端总结是否lock定客户端
 
     // ASR 内容和笔记（用于generate标题）
     public ?string $asrStreamContent = null; // ASR stream识别内容
@@ -145,7 +145,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * convert为array（用于存储到Redis）.
+     * convert为array（用于storage到Redis）.
      *
      * @return array<string, null|bool|int|string>
      */
@@ -195,7 +195,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 更新status
+     * updatestatus
      */
     public function updateStatus(AsrTaskStatusEnum $status): void
     {
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 判断服务端总结是否对客户端加锁.
+     * 判断服务端总结是否对客户端加lock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -231,7 +231,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 在一次服务端总结end后更新status.
+     * 在一次服务端总结end后updatestatus.
      */
     public function finishServerSummaryAttempt(bool $success): void
     {
@@ -244,7 +244,7 @@ class AsrTaskStatusDTO
     /**
      * 提取相对于 workspace 的相对路径
      * 如果路径contain workspace/，提取其后的部分
-     * 这样can自动修正 Redis 中存储的旧格式数据（完整路径）.
+     * 这样can自动修正 Redis 中storage的旧format数据（完整路径）.
      *
      * @param null|string $path original路径
      * @return null|string 相对路径
@@ -265,7 +265,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级获取stringvalue（支持 snake_case 和 camelCase）.
+     * 从array中按优先级getstringvalue（支持 snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data 数据array
      * @param array<string> $keys 键名列表（按优先级sort）
@@ -282,7 +282,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级获取整数value（支持 snake_case 和 camelCase）.
+     * 从array中按优先级get整数value（支持 snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data 数据array
      * @param array<string> $keys 键名列表（按优先级sort）
@@ -299,7 +299,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级获取booleanvalue（支持多种格式：true/false、1/0、'1'/'0'）.
+     * 从array中按优先级getbooleanvalue（支持多种format：true/false、1/0、'1'/'0'）.
      *
      * @param array<string, mixed> $data 数据array
      * @param array<string> $keys 键名列表（按优先级sort）

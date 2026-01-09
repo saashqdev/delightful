@@ -34,7 +34,7 @@ class EndNodeRunner extends NodeRunner
             $result = $output->getKeyValue($executionData->getExpressionFieldData());
         }
 
-        // end节点后，不执行后续节点
+        // end节点后，不execute后续节点
         $vertexResult->setChildrenIds([]);
         $vertexResult->setResult($result);
         $executionData->saveNodeContext($this->node->getNodeId(), $result);

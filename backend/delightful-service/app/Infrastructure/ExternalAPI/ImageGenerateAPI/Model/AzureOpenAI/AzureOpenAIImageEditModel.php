@@ -41,7 +41,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof AzureOpenAIImageEditRequest) {
-            $this->logger->error('Azure OpenAI图像edit：请求typeerror', [
+            $this->logger->error('Azure OpenAI图像edit：requesttypeerror', [
                 'expected' => AzureOpenAIImageEditRequest::class,
                 'actual' => get_class($imageGenerateRequest),
             ]);
@@ -94,11 +94,11 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAI格式响应 - Azure OpenAI图像edit版本.
+     * generate图像并returnOpenAIformatresponse - Azure OpenAI图像editversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先create响应object
+        // 1. 预先createresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -107,8 +107,8 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof AzureOpenAIImageEditRequest) {
-            $this->logger->error('Azure OpenAI图像edit OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
-            return $response; // returnnull数据响应
+            $this->logger->error('Azure OpenAI图像edit OpenAIformat生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            return $response; // returnnull数据response
         }
 
         try {
@@ -116,18 +116,18 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $result = $this->generateImageRaw($imageGenerateRequest);
             $this->validateAzureOpenAIEditResponse($result);
 
-            // 4. convert响应格式
+            // 4. convertresponseformat
             $this->addImageDataToResponseAzureOpenAIEdit($response, $result, $imageGenerateRequest);
 
-            $this->logger->info('Azure OpenAI图像edit OpenAI格式生图：handlecomplete', [
+            $this->logger->info('Azure OpenAI图像edit OpenAIformat生图：handlecomplete', [
                 'successimage数' => count($response->getData()),
             ]);
         } catch (Exception $e) {
-            // settingerrorinfo到响应object
+            // settingerrorinfo到responseobject
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
-            $this->logger->error('Azure OpenAI图像edit OpenAI格式生图：handlefail', [
+            $this->logger->error('Azure OpenAI图像edit OpenAIformat生图：handlefail', [
                 'error_code' => $e->getCode(),
                 'error_message' => $e->getMessage(),
             ]);
@@ -186,7 +186,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.invalid_image_count');
         }
 
-        // validate图像URL格式
+        // validate图像URLformat
         foreach ($request->getReferenceImages() as $index => $imageUrl) {
             if (empty($imageUrl) || ! filter_var($imageUrl, FILTER_VALIDATE_URL)) {
                 $this->logger->error('Azure OpenAI图像edit：invalid的参考图像URL', [
@@ -211,14 +211,14 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     {
         try {
             if (! isset($result['data'])) {
-                $this->logger->error('Azure OpenAI图像edit：响应格式error - 缺少data字段', [
+                $this->logger->error('Azure OpenAI图像edit：responseformaterror - 缺少data字段', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, 'image_generate.response_format_error');
             }
 
             if (empty($result['data'])) {
-                $this->logger->error('Azure OpenAI图像edit：响应数据为null', [
+                $this->logger->error('Azure OpenAI图像edit：response数据为null', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, 'image_generate.no_image_generated');
@@ -241,13 +241,13 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.invalid_image_data');
             }
 
-            $this->logger->info('Azure OpenAI图像edit：successbuild响应', [
+            $this->logger->info('Azure OpenAI图像edit：successbuildresponse', [
                 'total_images' => count($images),
             ]);
 
             return new ImageGenerateResponse(ImageGenerateType::BASE_64, $images);
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAI图像edit：build响应fail', [
+            $this->logger->error('Azure OpenAI图像edit：buildresponsefail', [
                 'error' => $e->getMessage(),
                 'result' => $result,
             ]);
@@ -275,7 +275,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             }
 
             try {
-                // handlebase64格式的image
+                // handlebase64format的image
                 $item['b64_json'] = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
             } catch (Exception $e) {
                 // 水印handlefail时，记录error但不影响imagereturn
@@ -291,16 +291,16 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * validateAzure OpenAI图像editAPI响应数据格式.
+     * validateAzure OpenAI图像editAPIresponse数据format.
      */
     private function validateAzureOpenAIEditResponse(array $result): void
     {
         if (! isset($result['data'])) {
-            throw new Exception('Azure OpenAI图像edit响应数据格式error：缺少data字段');
+            throw new Exception('Azure OpenAI图像editresponse数据formaterror：缺少data字段');
         }
 
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Azure OpenAI图像edit响应数据格式error：data字段为null或不是array');
+            throw new Exception('Azure OpenAI图像editresponse数据formaterror：data字段为null或不是array');
         }
 
         $hasValidImage = false;
@@ -312,12 +312,12 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('Azure OpenAI图像edit响应数据格式error：缺少valid的图像数据');
+            throw new Exception('Azure OpenAI图像editresponse数据formaterror：缺少valid的图像数据');
         }
     }
 
     /**
-     * 将Azure OpenAI图像edit结果添加到OpenAI响应object中.
+     * 将Azure OpenAI图像edit结果添加到OpenAIresponseobject中.
      */
     private function addImageDataToResponseAzureOpenAIEdit(
         OpenAIFormatResponse $response,
@@ -347,7 +347,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 // 水印handlefail时useoriginalbase64数据
             }
 
-            // 只returnURL格式，与其他模型保持一致
+            // 只returnURLformat，与其他模型保持一致
             $currentData[] = [
                 'url' => $processedUrl,
             ];
@@ -356,7 +356,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $currentUsage->addGeneratedImages(1);
         }
 
-        // 如果Azure OpenAI响应containusageinfo，则use它
+        // 如果Azure OpenAIresponsecontainusageinfo，则use它
         if (! empty($azureResult['usage']) && is_array($azureResult['usage'])) {
             $usage = $azureResult['usage'];
             $currentUsage->promptTokens += $usage['input_tokens'] ?? 0;
@@ -364,7 +364,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $currentUsage->totalTokens += $usage['total_tokens'] ?? 0;
         }
 
-        // 更新响应object
+        // updateresponseobject
         $response->setData($currentData);
         $response->setUsage($currentUsage);
     }

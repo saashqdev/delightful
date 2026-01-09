@@ -16,7 +16,7 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * 用作触发器。窗口打开时、有新message时、定时;parametercall（仅子process可用）
+     * 用作触发器。窗口打开时、有新message时、schedule;parametercall（仅子process可用）
      */
     case Start = 1;
 
@@ -40,7 +40,7 @@ enum NodeType: int
 
     /*
      * Code
-     * 代码执行节点
+     * 代码execute节点
      */
     case Code = 5;
 
@@ -48,7 +48,7 @@ enum NodeType: int
      * Vector
      * 文本转向量
      * 数据匹配
-     * 向量数据存储
+     * 向量数据storage
      */
     //    case Vector = 6;
 
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * 数据加载。来源：向量database、file、网络
+     * 数据load。来源：向量database、file、网络
      */
     case Loader = 8;
 
@@ -73,7 +73,7 @@ enum NodeType: int
 
     /*
      * Http
-     * 接口请求
+     * 接口request
      */
     case Http = 10;
 
@@ -105,7 +105,7 @@ enum NodeType: int
     case TextEmbedding = 15;
 
     /*
-     * 向量存储 知识库片段
+     * 向量storage 知识库片段
      */
     case KnowledgeFragmentStore = 16;
 
@@ -125,7 +125,7 @@ enum NodeType: int
     case CacheGet = 19;
 
     /*
-     * 历史message存储
+     * 历史messagestorage
      */
     case HistoryMessageStore = 20;
 
@@ -190,7 +190,7 @@ enum NodeType: int
     case LoopStop = 32;
 
     /**
-     * Excel file加载器.
+     * Excel fileload器.
      */
     case ExcelLoader = 51;
 
@@ -200,7 +200,7 @@ enum NodeType: int
     case KnowledgeSearch = 52;
 
     /**
-     * 图像生成.
+     * 图像generate.
      */
     case ImageGenerate = 53;
 

@@ -21,7 +21,7 @@ class CreateDelightfulApiModelConfigTable extends Migration
             $table->string('model')->comment('模型');
             $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度');
             $table->unsignedDecimal('use_amount', 40, 6)->comment('use额度')->default(0);
-            $table->integer('rpm')->comment('限流');
+            $table->integer('rpm')->comment('限stream');
             $table->unsignedDecimal('exchange_rate')->comment('汇率');
             $table->unsignedDecimal('input_cost_per_1000', 40, 6)->comment('1000 token 輸入費用');
             $table->unsignedDecimal('output_cost_per_1000', 40, 6)->comment('1000 token 輸出費用');

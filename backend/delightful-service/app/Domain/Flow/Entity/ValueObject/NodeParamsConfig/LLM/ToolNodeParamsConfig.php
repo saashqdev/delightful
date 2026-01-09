@@ -73,7 +73,7 @@ class ToolNodeParamsConfig extends AbstractLLMNodeParamsConfig
 
         $this->async = (bool) ($params['async'] ?? false);
 
-        // 先加载default值
+        // 先loaddefault值
         $this->model = $this->createModelComponentByName($this->getDefaultModelString());
         $this->modelConfig = new ModelConfig();
         $this->userPrompt = ComponentFactory::generateTemplate(StructureType::Value);

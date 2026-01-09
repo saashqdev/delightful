@@ -109,7 +109,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setMessage($message);
         $chatMessage->setAttachments($attachments);
 
-        // 加载userextensioninfo
+        // loaduserextensioninfo
         $this->setUserExtInfo($chatMessage);
 
         return $chatMessage;
@@ -117,7 +117,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void
     {
-        // 目前仅发送文本出去
+        // 目前仅send文本出去
         if (! $message instanceof TextMessage) {
             return;
         }
@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
+                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了timeouterror。sendmessage此时跳过
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
+                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了timeouterror。sendmessage此时跳过
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -163,7 +163,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     /**
      * pass手机号get第三方userid.
      * @param string $mobile 手机号码
-     * @return string 第三方userid，return格式
+     * @return string 第三方userid，returnformat
      */
     public function getThirdPlatformUserIdByMobiles(string $mobile): string
     {

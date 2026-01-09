@@ -22,7 +22,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     private const string LIST_ORGANIZATIONS_API = '/api/v1/contact/accounts/me/organizations';
 
     /**
-     * testpassHTTP请求getcurrentorganization代码
+     * testpassHTTPrequestgetcurrentorganization代码
      */
     public function testGetCurrentOrganizationCodeViaHttp(): void
     {
@@ -30,17 +30,17 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         $response = $this->get(self::GET_CURRENT_ORGANIZATION_API, [], $headers);
 
-        // verify响应status
+        // verifyresponsestatus
         $this->assertEquals(1000, $response['code'] ?? -1);
 
-        // verify响应结构（according toactualAPIreturn结构调整）
+        // verifyresponse结构（according toactualAPIreturn结构调整）
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
         }
     }
 
     /**
-     * testpassHTTP请求setcurrentorganization代码
+     * testpassHTTPrequestsetcurrentorganization代码
      */
     public function testSetCurrentOrganizationCodeViaHttp(): void
     {
@@ -51,10 +51,10 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         $response = $this->put(self::SET_CURRENT_ORGANIZATION_API, $requestData, $headers);
 
-        // verify响应status
+        // verifyresponsestatus
         $this->assertEquals(1000, $response['code'] ?? -1);
 
-        // verify响应结构
+        // verifyresponse结构
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
             // verifyreturn的organization代码
@@ -76,7 +76,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         $response = $this->put(self::SET_CURRENT_ORGANIZATION_API, $requestData, $headers);
 
-        // verify响应status - shouldreturnerrorstatus码
+        // verifyresponsestatus - shouldreturnerrorstatus码
         $this->assertNotEquals(200, $response['code'] ?? 200);
     }
 

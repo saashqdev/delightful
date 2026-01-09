@@ -73,7 +73,7 @@ readonly class ApiKeyProviderDomainService
             ExceptionBuilder::throw(AuthenticationErrorCode::ValidateFailed, 'common.disabled', ['label' => $apiKeyProviderEntity->getCode()]);
         }
 
-        // publishverifysuccess事件
+        // publishverifysuccessevent
         AsyncEventUtil::dispatch(new ApiKeyValidatedEvent($apiKeyProviderEntity));
 
         return $apiKeyProviderEntity;

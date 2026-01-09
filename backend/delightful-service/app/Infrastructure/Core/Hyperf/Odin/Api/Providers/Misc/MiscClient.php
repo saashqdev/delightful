@@ -34,7 +34,7 @@ class MiscClient extends Client
             // 这里的 response 的 content 是 ['embedding' => '', 'count' => '']
             $content = json_decode($response->getBody()->getContents(), true);
 
-            // 转换响应格式以兼容EmbeddingResponse
+            // 转换responseformat以兼容EmbeddingResponse
             $compatibleContent = [
                 'object' => 'list',
                 'data' => [],
@@ -54,7 +54,7 @@ class MiscClient extends Client
                 ];
             }
 
-            // 重新create响应object
+            // 重新createresponseobject
             $responseBody = json_encode($compatibleContent);
             $response = $response->withBody(Utils::streamFor($responseBody));
 

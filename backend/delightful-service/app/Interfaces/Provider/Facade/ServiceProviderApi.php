@@ -68,7 +68,7 @@ class ServiceProviderApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $providerConfigAggregateDTO = $this->adminProviderAppService->getProviderModelsByConfigId($authenticatable, $serviceProviderConfigId);
-        // 将新格式数据转换为旧格式以保持向后兼容性
+        // 将新format数据转换为旧format以保持向后兼容性
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
@@ -244,7 +244,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * according tocategorygetservice商通用逻辑.
-     * @param RequestInterface $request 请求object
+     * @param RequestInterface $request requestobject
      * @return array service商list
      */
     private function getProvidersByCategory(RequestInterface $request): array
@@ -264,9 +264,9 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 将新格式数据转换为旧格式，保持向后兼容性.
+     * 将新format数据转换为旧format，保持向后兼容性.
      * @param ?ProviderConfigModelsDTO $aggregateDTO 聚合DTOobject
-     * @return array 旧格式数据
+     * @return array 旧format数据
      */
     private function convertToLegacyFormat(?ProviderConfigModelsDTO $aggregateDTO): array
     {
@@ -275,7 +275,7 @@ class ServiceProviderApi extends AbstractApi
         }
         $data = $aggregateDTO->toArray();
 
-        // 如果不是新格式结构，直接return
+        // 如果不是新format结构，直接return
         if (! isset($data['provider_config'])) {
             return $data;
         }

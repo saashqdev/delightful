@@ -22,7 +22,7 @@ class ConversationCreatedListener implements ListenerInterface
     }
 
     /**
-     * 处理conversationcreate事件.
+     * processconversationcreateevent.
      */
     public function process(object $event): void
     {

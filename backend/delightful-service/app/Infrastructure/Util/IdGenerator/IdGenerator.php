@@ -23,7 +23,7 @@ class IdGenerator
     }
 
     /**
-     * 生成固定length(32位)的string,尽力保证唯一性.
+     * generate固定length(32位)的string,尽力保证唯一性.
      */
     public static function getUniqueId32(): string
     {
@@ -32,7 +32,7 @@ class IdGenerator
     }
 
     /**
-     * 生成固定length的string,尽力保证唯一性.
+     * generate固定length的string,尽力保证唯一性.
      */
     public static function getUniqueIdSha256(): string
     {

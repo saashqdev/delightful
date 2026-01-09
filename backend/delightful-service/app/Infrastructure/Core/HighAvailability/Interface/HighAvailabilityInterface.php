@@ -40,19 +40,19 @@ interface HighAvailabilityInterface
      * 2. Shortest response time
      * 3. If lastSelectedEndpointId is provided, prioritize that endpoint (for conversation continuation)
      *
-     * @param EndpointRequestDTO $request 接入点请求parameter
+     * @param EndpointRequestDTO $request 接入点requestparameter
      * @return null|EndpointDTO Available endpoint, returns null if no available endpoint
      */
     public function getAvailableEndpoint(EndpointRequestDTO $request): ?EndpointDTO;
 
     /**
-     * 记录接入点的响应并自动处理success/failedstatus，以及用于后续的data分析。
+     * 记录接入点的response并自动processsuccess/failedstatus，以及用于后续的data分析。
      *
      * 该method将:
-     * 1. 记录请求统计data
-     * 2. according to请求success或failedstatus自动触发熔断器反馈
+     * 1. 记录request统计data
+     * 2. according torequestsuccess或failedstatus自动触发熔断器反馈
      *
-     * @param EndpointResponseDTO $response 接入点响应实体
+     * @param EndpointResponseDTO $response 接入点response实体
      */
     public function recordResponse(EndpointResponseDTO $response): bool;
 }

@@ -185,7 +185,7 @@ JSON, true));
 你是ai文生图助理
 
 ## process
-将userinput的prompt词，use`image_convert_high`tool生成高清image
+将userinput的prompt词，use`image_convert_high`toolgenerate高清image
 
 MARKDOWN,
 

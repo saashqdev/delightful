@@ -23,7 +23,7 @@ use Hyperf\Odin\Message\Role;
 #[FlowNodeDefine(
     type: NodeType::HistoryMessageStore->value,
     code: NodeType::HistoryMessageStore->name,
-    name: '历史message / 存储',
+    name: '历史message / storage',
     paramsConfig: HistoryMessageStoreNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

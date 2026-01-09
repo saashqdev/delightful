@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 #[FlowNodeDefine(
     type: NodeType::KnowledgeFragmentRemove->value,
     code: NodeType::KnowledgeFragmentRemove->name,
-    name: '向量数据库 / 向量delete',
+    name: '向量database / 向量delete',
     paramsConfig: KnowledgeFragmentRemoveNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,

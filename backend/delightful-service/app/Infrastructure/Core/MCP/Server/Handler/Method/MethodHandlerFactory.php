@@ -11,12 +11,12 @@ use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
 
 /**
- * MCPmethod处理器工厂.
+ * MCPmethodprocess器工厂.
  */
 class MethodHandlerFactory
 {
     /**
-     * method处理器映射，method名 => 处理器类名.
+     * methodprocess器映射，method名 => process器类名.
      *
      * @var array<string, class-string<MethodHandlerInterface>>
      */
@@ -39,11 +39,11 @@ class MethodHandlerFactory
     }
 
     /**
-     * create指定method的处理器实例.
-     * 每次call都createnew处理器实例，ensure短生命周期.
-     * 注意：call者need手动为return的处理器set所需的Manager组件.
+     * create指定method的process器实例.
+     * 每次call都createnewprocess器实例，ensure短生命周期.
+     * 注意：call者need手动为return的process器set所需的Manager组件.
      *
-     * @return null|MethodHandlerInterface 如果找不到对应method的处理器则returnnull
+     * @return null|MethodHandlerInterface 如果找不到对应method的process器则returnnull
      */
     public function createHandler(string $method): ?MethodHandlerInterface
     {
@@ -57,7 +57,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * check是否存在指定method的处理器.
+     * check是否存在指定method的process器.
      */
     public function hasHandler(string $method): bool
     {
@@ -75,10 +75,10 @@ class MethodHandlerFactory
     }
 
     /**
-     * 注册customizemethod处理器.
+     * 注册customizemethodprocess器.
      *
      * @param string $method method名
-     * @param class-string<MethodHandlerInterface> $handlerClass 处理器类名
+     * @param class-string<MethodHandlerInterface> $handlerClass process器类名
      */
     public function registerCustomHandler(string $method, string $handlerClass): void
     {

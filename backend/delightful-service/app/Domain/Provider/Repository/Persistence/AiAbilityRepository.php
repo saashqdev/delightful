@@ -88,7 +88,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
 
         if ($result) {
             $entity->setId($model->id);
-            // useID加密config并update
+            // useIDencryptconfig并update
             $encryptedConfig = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
             $model->config = $encryptedConfig;
             $model->save();
@@ -116,7 +116,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $model->sort_order = $entity->getSortOrder();
         $model->status = $entity->getStatus()->value;
 
-        // 加密config后再save
+        // encryptconfig后再save
         $model->config = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
 
         return $model->save();
@@ -131,7 +131,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             return false;
         }
 
-        // 如果needupdateconfig，先getrecordID进行加密
+        // 如果needupdateconfig，先getrecordID进行encrypt
         if (! empty($data['config'])) {
             $builder = $this->createBuilder($dataIsolation, AiAbilityModel::query());
             $model = $builder->where('code', $code->value)->first();
@@ -140,7 +140,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
                 return false;
             }
 
-            // 加密config
+            // encryptconfig
             $data['config'] = AiAbilityAssembler::encodeConfig($data['config'], (string) $model->id);
         }
 
@@ -187,7 +187,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $entity->setSortOrder($model->sort_order);
         $entity->setStatus($model->status);
 
-        // 解析config（兼容oldJSON格式和new加密格式）
+        // 解析config（兼容oldJSONformat和newencryptformat）
         $config = $model->config ?? '';
         if (empty($config)) {
             $config = [];
@@ -195,10 +195,10 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             // 尝试作为JSON解析
             $jsonDecoded = json_decode($config, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($jsonDecoded)) {
-                // JSON解析success，说明是旧数据（未加密）
+                // JSON解析success，说明是旧数据（未encrypt）
                 $config = $jsonDecoded;
             } else {
-                // JSON解析fail，说明是加密数据，进行解密
+                // JSON解析fail，说明是encrypt数据，进行decrypt
                 $config = AiAbilityAssembler::decodeConfig($config, (string) $model->id);
             }
         } else {

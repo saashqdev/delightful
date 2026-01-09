@@ -113,7 +113,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $entity = new ProviderModelEntity($data);
 
         if ($dto->getId()) {
-            // 准备更新数据，只contain有变化的字段
+            // 准备update数据，只contain有变化的字段
             $updateData = $this->serializeEntityToArray($entity);
             $updateData['updated_at'] = date('Y-m-d H:i:s');
             $success = ProviderModelModel::query()
@@ -123,14 +123,14 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             if ($success === 0) {
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
             }
-            // 先query数据库现有的实体
+            // 先querydatabase现有的实体
             return $this->getById($dataIsolation, $dto->getId());
         }
         return $this->create($dataIsolation, $entity);
     }
 
     /**
-     * 更新模型status（支持写时复制逻辑）.
+     * update模型status（支持写时复制逻辑）.
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
@@ -157,7 +157,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         } else {
             $organizationModelId = $id;
         }
-        // 3. 更新organization模型status
+        // 3. updateorganization模型status
         $this->updateStatusDirect($dataIsolation, $organizationModelId, $status);
     }
 
@@ -178,7 +178,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * pass service_provider_config_id 获取模型列表.
+     * pass service_provider_config_id get模型列表.
      * @param string $configId 可能是template id，such as ProviderConfigIdAssembler
      * @return ProviderModelEntity[]
      */
@@ -202,7 +202,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 获取organization可用模型列表（containorganization自己的模型和Delightful模型）.
+     * getorganization可用模型列表（containorganization自己的模型和Delightful模型）.
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param null|Category $category 模型category，为null时return所有category模型
      * @return ProviderModelEntity[] 按sort降序sort的模型列表，containorganization模型和Delightful模型（不去重）
@@ -214,7 +214,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         // generatecache键
         $cacheKey = sprintf('provider_models:available:%s:%s', $organizationCode, $category->value ?? 'all');
 
-        // 尝试从cache获取
+        // 尝试从cacheget
         $redis = di(Redis::class);
         $cachedData = $redis->get($cacheKey);
 
@@ -266,7 +266,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $organizationModels = ProviderModelAssembler::toEntities($organizationModelsResult);
         }
 
-        // 3. 获取Delightful模型（如果不是官方organization）
+        // 3. getDelightful模型（如果不是官方organization）
         $delightfulModels = [];
         if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             $delightfulModels = $this->delightfulProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
@@ -391,11 +391,11 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * according toquerycondition获取按模型typegroup的模型ID列表.
+     * according toqueryconditionget按模型typegroup的模型ID列表.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param ProviderModelQuery $query querycondition
-     * @return array<string, array<string>> 按模型typegroup的模型IDarray，格式: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> 按模型typegroup的模型IDarray，format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array
     {
@@ -444,7 +444,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 直接更新模型status.
+     * 直接update模型status.
      */
     private function updateStatusDirect(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {

@@ -125,7 +125,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
     }
 
     /**
-     * verify可见性configuration格式.
+     * verify可见性configurationformat.
      */
     private function validatesVisibilityConfig(): void
     {

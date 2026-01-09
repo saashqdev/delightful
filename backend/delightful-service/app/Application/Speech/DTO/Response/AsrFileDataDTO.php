@@ -44,7 +44,7 @@ readonly class AsrFileDataDTO
     }
 
     /**
-     * 转换为array格式，用于chatmessage.
+     * 转换为arrayformat，用于chatmessage.
      */
     public function toArray(): array
     {

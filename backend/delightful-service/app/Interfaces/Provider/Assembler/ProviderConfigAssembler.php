@@ -73,7 +73,7 @@ class ProviderConfigAssembler
     {
         [$preparedConfig, $decodeConfig] = self::prepareServiceProviderConfig($serviceProviderConfig);
         $preparedConfig['config'] = $decodeConfig;
-        // 无特殊声明不处理
+        // 无特殊声明不process
         $preparedConfig['decryptedConfig'] = null;
 
         $translator = di(TranslatorInterface::class);
@@ -131,7 +131,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 对configuration数据进行编码（JSON编码 + AES加密）.
+     * 对configuration数据进行编码（JSON编码 + AESencrypt）.
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -140,7 +140,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 预处理service商configuration数据，提取共同逻辑.
+     * 预processservice商configuration数据，提取共同逻辑.
      * @return array [$preparedConfig, $decodeConfig]
      */
     private static function prepareServiceProviderConfig(array $serviceProviderConfig): array

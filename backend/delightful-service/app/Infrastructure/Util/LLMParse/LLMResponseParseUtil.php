@@ -40,7 +40,7 @@ class LLMResponseParseUtil
             if (json_validate($matchString)) {
                 return $matchString;
             }
-            return null; // JSON 格式不correct
+            return null; // JSON format不correct
         }
         return $matchString;
     }

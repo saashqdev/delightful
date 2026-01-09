@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\OdinTools\MindSearch;
 
 /**
- * 批量生成关联问题的子问题，then批量互联网search.
+ * 批量generate关联问题的子问题，then批量互联网search.
  */
 class AssociationsSubQuestionsTool
 {

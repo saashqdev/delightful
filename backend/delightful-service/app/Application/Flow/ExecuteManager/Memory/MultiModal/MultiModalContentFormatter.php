@@ -10,18 +10,18 @@ namespace App\Application\Flow\ExecuteManager\Memory\MultiModal;
 use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
- * 多模态content格式化工具
- * 用于统一处理different场景下的多模态content格式化.
+ * 多模态contentformat化工具
+ * 用于统一processdifferent场景下的多模态contentformat化.
  */
 class MultiModalContentFormatter
 {
     /**
-     * 将所有attachment格式化到文本中.
+     * 将所有attachmentformat化到文本中.
      *
      * @param string $originalContent original文本content
      * @param string $visionResponse 视觉分析result
      * @param AttachmentInterface[] $attachments 所有attachmentarray
-     * @return string 格式化后的文本content
+     * @return string format化后的文本content
      */
     public static function formatAllAttachments(
         string $originalContent,
@@ -44,15 +44,15 @@ class MultiModalContentFormatter
             }
         }
 
-        // 处理非imageattachment
+        // process非imageattachment
         $content = self::formatNonImageAttachments($originalContent, $nonImageAttachments);
 
-        // 处理imageattachment
+        // processimageattachment
         return self::formatImageContent($content, $visionResponse, $imageAttachments);
     }
 
     /**
-     * 格式化imagecontent到文本
+     * format化imagecontent到文本
      * 支持单张image和多张image场景.
      *
      * @param string $originalContent original文本content
@@ -88,7 +88,7 @@ class MultiModalContentFormatter
     }
 
     /**
-     * 格式化非imageattachment到文本.
+     * format化非imageattachment到文本.
      *
      * @param string $originalContent original文本content
      * @param AttachmentInterface[] $nonImageAttachments 非imageattachmentarray

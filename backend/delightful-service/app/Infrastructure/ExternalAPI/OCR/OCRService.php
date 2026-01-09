@@ -100,7 +100,7 @@ readonly class OCRService
             }
         }
 
-        // call OCR service进行处理
+        // call OCR service进行process
         $result = $OCRClient->ocr($url);
 
         // updatecache数据

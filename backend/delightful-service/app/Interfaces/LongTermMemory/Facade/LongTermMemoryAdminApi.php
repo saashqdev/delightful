@@ -122,7 +122,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             return $ownershipValidation;
         }
 
-        // 3. 处理contentupdate并buildDTO
+        // 3. processcontentupdate并buildDTO
         $dto = $this->buildUpdateMemoryDTO(
             $validatedParams['content'] ?? null,
             $validatedParams['pending_content'] ?? null
@@ -246,7 +246,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             'status' => $status,
             'enabled' => $enabled,
             'pageToken' => $validatedParams['page_token'] ?? null,
-            'limit' => (int) $pageSize, // 传递original页面size，让应用service层处理pagination逻辑
+            'limit' => (int) $pageSize, // 传递original页面size，让应用service层processpagination逻辑
         ]);
         // 解析 pageToken
         $dto->parsePageToken();
@@ -365,7 +365,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批量处理记忆建议（接受/拒绝）.
+     * 批量process记忆建议（接受/拒绝）.
      */
     public function batchProcessMemorySuggestions(RequestInterface $request): array
     {
@@ -551,7 +551,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 校验请求parameter.
+     * 校验requestparameter.
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {
@@ -569,7 +569,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * verifyupdate记忆的请求parameter.
+     * verifyupdate记忆的requestparameter.
      */
     private function validateUpdateMemoryParams(RequestInterface $request): array
     {
@@ -648,7 +648,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 处理contentupdate并buildupdate记忆的DTO.
+     * processcontentupdate并buildupdate记忆的DTO.
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {

@@ -23,7 +23,7 @@ class AccountEntity extends AbstractEntity
     protected ?UserType $type = null;
 
     /**
-     * flow生成的ai code.
+     * flowgenerate的ai code.
      */
     protected ?string $aiCode = null;
 
@@ -53,7 +53,7 @@ class AccountEntity extends AbstractEntity
     protected int $delightfulEnvironmentId = 0;
 
     /**
-     * 密码（SHA256加密）.
+     * 密码（SHA256encrypt）.
      */
     protected string $password = '';
 

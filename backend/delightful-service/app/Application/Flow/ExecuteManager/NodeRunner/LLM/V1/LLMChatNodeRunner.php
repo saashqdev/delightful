@@ -42,10 +42,10 @@ use Hyperf\Odin\Tool\Definition\ToolDefinition;
 class LLMChatNodeRunner extends AbstractLLMNodeRunner
 {
     /**
-     * 执行LLMchat节点.
+     * executeLLMchat节点.
      *
-     * @param VertexResult $vertexResult 节点执行result
-     * @param ExecutionData $executionData 执行数据
+     * @param VertexResult $vertexResult 节点executeresult
+     * @param ExecutionData $executionData execute数据
      * @param array $frontResults 前置节点result
      */
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -84,10 +84,10 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
         }
 
-        // 加载记忆
+        // load记忆
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
-        // 只有自动记忆need处理以下多模态message
+        // 只有自动记忆needprocess以下多模态message
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
@@ -126,7 +126,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // 处理current的多模态message - 只有 content 的need立刻call去处理
+            // processcurrent的多模态message - 只有 content 的need立刻call去process
             /** @var null|UserMessage $contentMessage */
             if ($contentMessage?->hasImageMultiModal() && $paramsConfig->getModelConfig()->isVision()) {
                 $currentModel = $model->getModelName();
@@ -147,7 +147,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // 永远处理current节点的历史attachmentmessage
+            // 永远processcurrent节点的历史attachmentmessage
             $delightfulMessageIds = [];
             foreach ($memoryManager->getMessages() as $message) {
                 $delightfulMessageIds[] = $message->getIdentifier();
@@ -245,12 +245,12 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
     }
 
     /**
-     * 执行代理并get响应.
+     * execute代理并getresponse.
      *
      * @param Agent $agent 代理object
-     * @param VertexResult $vertexResult 节点执行result
-     * @param ExecutionData $executionData 执行数据
-     * @return array [推理文本, 响应文本]
+     * @param VertexResult $vertexResult 节点executeresult
+     * @param ExecutionData $executionData execute数据
+     * @return array [推理文本, response文本]
      */
     private function executeAgent(Agent $agent, VertexResult $vertexResult, ExecutionData $executionData): array
     {

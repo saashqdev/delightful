@@ -80,7 +80,7 @@ class PlatformSettingsApi
     }
 
     /**
-     * 简单 URL 与必填项校验（遵循需求：save URL；size/type校验在file服务与前端处理）。
+     * 简单 URL 与必填项校验（遵循需求：save URL；size/type校验在file服务与前端process）。
      */
     private function validateUrls(array $data): void
     {

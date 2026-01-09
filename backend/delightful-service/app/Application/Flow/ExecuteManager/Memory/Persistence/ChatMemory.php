@@ -56,12 +56,12 @@ class ChatMemory implements MemoryPersistenceInterface
 
     public function store(LLMMemoryMessage $LLMMemoryMessage): void
     {
-        // 只处理挂载
+        // 只process挂载
         if (empty($LLMMemoryMessage->getMountId())) {
             return;
         }
 
-        // 这里存储的是 历史message存储节点 挂载message
+        // 这里storage的是 历史messagestorage节点 挂载message
         $history = new DelightfulFlowMemoryHistoryEntity();
         $history->setType(MemoryType::Mount);
         $history->setConversationId($LLMMemoryMessage->getConversationId());
@@ -118,7 +118,7 @@ class ChatMemory implements MemoryPersistenceInterface
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
-            // 特殊处理, 当开启去重，且return的条数greater thanequal limit，则不再继续query
+            // 特殊process, 当开启去重，且return的条数greater thanequal limit，则不再继续query
             if (count($messageIds) >= $memoryQuery->getLimit()) {
                 break;
             }
@@ -140,7 +140,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * 添加挂载记忆，即在 Chat 时call了 历史message存储节点.
+     * 添加挂载记忆，即在 Chat 时call了 历史messagestorage节点.
      * @return array<LLMMemoryMessage>
      */
     private function mountMessages(array $moundIds, array $messageLists): array

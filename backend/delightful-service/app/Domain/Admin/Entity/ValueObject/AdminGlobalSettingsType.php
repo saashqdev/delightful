@@ -18,7 +18,7 @@ enum AdminGlobalSettingsType: int
     // 第third-partypublish管控
     case THIRD_PARTY_PUBLISH = 3;
 
-    // get助理全局setting类型
+    // get助理全局settingtype
     public static function getAssistantGlobalSettingsType(): array
     {
         return [

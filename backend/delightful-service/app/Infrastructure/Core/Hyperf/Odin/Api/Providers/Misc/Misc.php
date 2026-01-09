@@ -26,7 +26,7 @@ class Misc extends AbstractApi
     {
         // checkAPI Key，除非configuration为跳过verify
         if (empty($config->getApiKey()) && ! $config->shouldSkipApiKeyValidation()) {
-            throw new LLMInvalidApiKeyException('API密钥cannot为null', null, 'OpenAI');
+            throw new LLMInvalidApiKeyException('APIkeycannot为null', null, 'OpenAI');
         }
 
         if (empty($config->getBaseUrl())) {

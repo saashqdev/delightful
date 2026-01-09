@@ -10,7 +10,7 @@ namespace App\Domain\Authentication\Service;
 class PasswordService
 {
     /**
-     * 加密密码
+     * encrypt密码
      */
     public function hashPassword(string $plainPassword): string
     {

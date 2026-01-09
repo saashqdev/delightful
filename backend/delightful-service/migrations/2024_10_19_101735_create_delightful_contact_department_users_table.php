@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('organization_code', 32)->comment('麦吉的organization编码');
             $table->string('city', 64)->comment('工作城市')->default('');
             $table->string('country', 32)->comment('国家或地区 Code 缩写')->default('');
-            $table->string('join_time', 32)->comment('入职time。秒级time戳格式，table示从 1970 年 1 月 1 日开始所经过的秒数。')->default('');
+            $table->string('join_time', 32)->comment('入职time。秒级time戳format，table示从 1970 年 1 月 1 日开始所经过的秒数。')->default('');
             $table->string('employee_no', 32)->comment('工号')->default('');
             $table->tinyInteger('employee_type')->comment('员工type。1：正式员工2：实习生3：外包4：劳务 5：顾问');
             $table->string('orders', 256)->comment('usersortinfo。用于mark通讯录下organization架构的人员顺序，人员可能存在多个department中，且有different的sort')->nullable()->default('');

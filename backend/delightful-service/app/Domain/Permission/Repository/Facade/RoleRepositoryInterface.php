@@ -55,7 +55,7 @@ interface RoleRepositoryInterface
 
     /**
      * 批量get多个role的user列表。
-     * return格式为 [roleId => userId[]].
+     * returnformat为 [roleId => userId[]].
      *
      * @param string $organizationCode organization编码
      * @param int[] $roleIds role ID 列表

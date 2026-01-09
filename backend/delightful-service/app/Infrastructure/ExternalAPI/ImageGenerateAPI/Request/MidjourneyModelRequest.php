@@ -9,7 +9,7 @@ namespace App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request;
 
 class MidjourneyModelRequest extends ImageGenerateRequest
 {
-    // 生成的imagequantity(没有用，butmust要带)
+    // generate的imagequantity(没有用，butmust要带)
 
     // 比例
     private string $ratio = '1:1';

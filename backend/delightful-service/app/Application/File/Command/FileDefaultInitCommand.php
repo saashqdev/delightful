@@ -48,7 +48,7 @@ class FileDefaultInitCommand extends Command
         $this->fileDomainService = $this->container->get(FileDomainService::class);
         $this->defaultFileDomainService = $this->container->get(DefaultFileDomainService::class);
 
-        // 获取公有桶configuration
+        // get公有桶configuration
         $publicBucketConfig = config('cloudfile.storages.' . StorageBucketType::Public->value);
         $this->line('公有桶configuration：' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
 
@@ -85,7 +85,7 @@ class FileDefaultInitCommand extends Command
         $skippedFiles = 0;
         $organizationCode = CloudFileRepository::DEFAULT_ICON_ORGANIZATION_CODE;
 
-        // 获取所有模块目录
+        // get所有模块目录
         $moduleDirs = array_filter(glob($defaultModulesDir . '/*'), 'is_dir');
 
         if (empty($moduleDirs)) {
@@ -110,7 +110,7 @@ class FileDefaultInitCommand extends Command
 
                 $this->line("  - handle模块: {$moduleName} (业务type: {$businessType->value})");
 
-                // 获取该模块目录下的所有file
+                // get该模块目录下的所有file
                 $files = array_filter(glob($moduleDir . '/*'), 'is_file');
 
                 if (empty($files)) {
@@ -133,7 +133,7 @@ class FileDefaultInitCommand extends Command
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
-                        // use userId 字段存储业务标识来判断重复
+                        // use userId 字段storage业务标识来判断重复
                         if ($existingFile->getUserId() === $businessIdentifier) {
                             $isDuplicate = true;
                             break;
@@ -149,7 +149,7 @@ class FileDefaultInitCommand extends Command
                     $this->line("    - handlefile: {$fileName}");
 
                     try {
-                        // readfile内容并转为 base64 格式
+                        // readfile内容并转为 base64 format
                         $fileContent = file_get_contents($filePath);
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
@@ -162,16 +162,16 @@ class FileDefaultInitCommand extends Command
                             StorageBucketType::Public
                         );
 
-                        // 立即validatefile是否可获取（关键validate步骤）
+                        // 立即validatefile是否可get（关键validate步骤）
                         $actualKey = $uploadFile->getKey();
                         // 从 key 中提取organization编码，参考 ProviderAppService 的correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
-                            throw new Exception('fileuploadfail，无法获取访问链接');
+                            throw new Exception('fileuploadfail，无法get访问链接');
                         }
 
-                        // validatesuccess后才create数据库记录，useactual的upload key
+                        // validatesuccess后才createdatabase记录，useactual的upload key
                         $defaultFileEntity = new DefaultFileEntity();
                         $defaultFileEntity->setBusinessType($businessType->value);
                         $defaultFileEntity->setFileType(DefaultFileType::DEFAULT->value);

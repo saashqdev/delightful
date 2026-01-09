@@ -29,7 +29,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         return function (ExecutionData $executionData) {
             $params = $executionData->getTriggerData()->getParams();
             $senderUserId = $executionData->getAgentUserId();
-            // 助手发送message
+            // 助手sendmessage
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();
@@ -47,7 +47,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
                 receiverType: $receiverType
             );
             return [
-                'message' => '发送messagesuccess',
+                'message' => 'sendmessagesuccess',
             ];
         };
     }
@@ -64,7 +64,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '发送message给group';
+        return 'sendmessage给group';
     }
 
     public function getInput(): ?NodeInput
@@ -91,8 +91,8 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         "group_id": {
             "type": "string",
             "key": "group_id",
-            "title": "接收的群id",
-            "description": "接收的群id",
+            "title": "receive的群id",
+            "description": "receive的群id",
             "required": null,
             "value": null,
             "encryption": false,
@@ -155,7 +155,7 @@ JSON,
        "type": "string",
        "key": "deadline",
        "title": "截止日期",
-       "description": "截止日期，格式：YYYY-MM-DD",
+       "description": "截止日期，format：YYYY-MM-DD",
        "required": null,
        "value": null,
        "encryption": false,
@@ -166,8 +166,8 @@ JSON,
    "interval": {
        "type": "number",
        "key": "interval",
-       "title": "failed重试次数",
-       "description": "failed重试次数",
+       "title": "failedretry次数",
+       "description": "failedretry次数",
        "required": null,
        "value": null,
        "encryption": false,

@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractDTO;
 abstract class AbstractMention extends AbstractDTO implements MentionInterface
 {
     /**
-     * mention object固定类型.
+     * mention object固定type.
      */
     protected string $type = 'mention';
 

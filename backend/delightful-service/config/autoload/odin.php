@@ -237,13 +237,13 @@ return [
         ],
         'general_api_options' => [
             'timeout' => [
-                'connection' => 5.0,  // 连接超时（秒）
-                'write' => 10.0,      // write超时（秒）
-                'read' => 300.0,      // read超时（秒）
-                'total' => 350.0,     // 总体超时（秒）
-                'thinking' => 120.0,  // 思考超时（秒）
-                'stream_chunk' => 30.0, // stream块间超时（秒）
-                'stream_first' => 60.0, // 首个stream块超时（秒）
+                'connection' => 5.0,  // 连接timeout（秒）
+                'write' => 10.0,      // writetimeout（秒）
+                'read' => 300.0,      // readtimeout（秒）
+                'total' => 350.0,     // 总体timeout（秒）
+                'thinking' => 120.0,  // 思考timeout（秒）
+                'stream_chunk' => 30.0, // stream块间timeout（秒）
+                'stream_first' => 60.0, // 首个stream块timeout（秒）
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
@@ -253,13 +253,13 @@ return [
                 // 支持嵌套字段，use点语法如 'args.messages'
                 // 注意：messages 和 tools 字段不在白名单中，不will被打印
                 'whitelist_fields' => [
-                    // 基本请求info
-                    'request_id',                  // 请求ID
+                    // 基本requestinfo
+                    'request_id',                  // requestID
                     'model_id',                    // 模型ID
                     'model',                       // 模型名称
-                    'duration_ms',                 // 请求耗时
-                    'url',                         // 请求URL
-                    'status_code',                 // 响应status码
+                    'duration_ms',                 // request耗时
+                    'url',                         // requestURL
+                    'status_code',                 // responsestatus码
 
                     // options info
                     'options.headers',
@@ -279,7 +279,7 @@ return [
                     'usage.output_tokens',         // 输出tokenquantity
                     'usage.total_tokens',          // 总tokenquantity
 
-                    // 请求parameter（排除敏感内容）
+                    // requestparameter（排除敏感内容）
                     'args.temperature',            // 温度parameter
                     'args.max_tokens',             // 最大token限制
                     'args.max_completion_tokens',             // 最大token限制
@@ -287,7 +287,7 @@ return [
                     'args.top_k',                  // Top-kparameter
                     'args.frequency_penalty',      // 频率惩罚
                     'args.presence_penalty',       // 存在惩罚
-                    'args.stream',                 // stream响应标志
+                    'args.stream',                 // streamresponse标志
                     'args.stop',                   // 停止词
                     'args.seed',                   // 随机种子
 
@@ -296,7 +296,7 @@ return [
                     'token_estimate.input_tokens', // 估算输入tokens
                     'token_estimate.output_tokens', // 估算输出tokens
 
-                    // 响应内容（排除具体内容）
+                    // response内容（排除具体内容）
                     'choices.0.finish_reason',     // complete原因
                     'choices.0.index',             // 选择索引
 
@@ -307,17 +307,17 @@ return [
 
                     // 其他元数据
                     'created',                     // create时间戳
-                    'id',                         // 请求ID
+                    'id',                         // requestID
                     'object',                     // objecttype
                     'system_fingerprint',         // 系统指纹
-                    'performance_flag',            // performancemark（慢请求标识）
+                    'performance_flag',            // performancemark（慢request标识）
 
                     // 注意：以下字段被排除，不will打印
                     // - args.messages (usermessage内容)
                     // - args.tools (工具定义)
-                    // - choices.0.message (响应message内容)
-                    // - choices.0.delta (stream响应增量内容)
-                    // - content (响应内容)
+                    // - choices.0.message (responsemessage内容)
+                    // - choices.0.delta (streamresponse增量内容)
+                    // - content (response内容)
                 ],
                 // 是否启用字段白名单filter，defaulttrue（启用filter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),

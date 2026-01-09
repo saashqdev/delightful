@@ -9,10 +9,10 @@ namespace App\Domain\Chat\Entity\ValueObject\ImageConvertHigh;
 
 enum ImageConvertHighResponseType: int
 {
-    // 开始生成
+    // 开始generate
     case START_GENERATE = 1;
 
-    // 生成complete
+    // generatecomplete
     case GENERATED = 2;
 
     // exception终止
@@ -21,10 +21,10 @@ enum ImageConvertHighResponseType: int
     public static function getNameFromType(ImageConvertHighResponseType $type): string
     {
         return match ($type) {
-            self::START_GENERATE => '开始生成',
-            self::GENERATED => '生成complete',
+            self::START_GENERATE => '开始generate',
+            self::GENERATED => 'generatecomplete',
             self::TERMINATE => 'exception终止',
-            default => '未知类型',
+            default => '未知type',
         };
     }
 }

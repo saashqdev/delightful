@@ -95,7 +95,7 @@ class TriggerDataUserExtInfo
     }
 
     /**
-     * 加载 delightful 的userinfo.
+     * load delightful 的userinfo.
      */
     private function loadDelightfulUserDepartments(): void
     {

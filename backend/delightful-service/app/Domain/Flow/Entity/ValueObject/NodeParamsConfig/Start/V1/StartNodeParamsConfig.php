@@ -83,7 +83,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // 可同时选择多种方式触发，所以他的入参和出参放到这里来处理
+            // 可同时选择多种方式触发，所以他的入参和出参放到这里来process
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();

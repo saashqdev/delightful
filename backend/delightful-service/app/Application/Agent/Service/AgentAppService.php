@@ -36,7 +36,7 @@ class AgentAppService extends AbstractAppService
         $agentDataIsolation = $this->createAgentDataIsolation($authorization);
         $agentDataIsolation->setContainOfficialOrganization($containOfficialOrganization);
 
-        // 生成cache key
+        // generatecache key
         $cacheKey = sprintf('queriesAvailableAgents:user:%s:official:%s', $authorization->getId(), $containOfficialOrganization ? '1' : '0');
 
         // 尝试从cacheget agentIds

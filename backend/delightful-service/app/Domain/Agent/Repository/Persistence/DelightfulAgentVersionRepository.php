@@ -26,7 +26,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * get助理版本.
+     * get助理version.
      */
     public function getAgentById(string $id): DelightfulAgentVersionEntity
     {
@@ -82,7 +82,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimize版本：直接passJOINqueryget启用的助理版本，避免传入大量ID.
+     * optimizeversion：直接passJOINqueryget启用的助理version，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -108,7 +108,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimize版本：get启用助理的total.
+     * optimizeversion：get启用助理的total.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -186,8 +186,8 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     // according to助理idget最大的 version_number
     public function getAgentMaxVersion(string $agentId): string
     {
-        // query指定 agent_id 和 user_id 下的最大版本号,这里不能用 max 取 version，因为will出现 0.3 greater than 0.10的情况，但是actual是 0.10greater than 0.3
-        // 而版本号只能递增，因此用time倒序取first即可
+        // query指定 agent_id 和 user_id 下的最大version号,这里不能用 max 取 version，因为will出现 0.3 greater than 0.10的情况，但是actual是 0.10greater than 0.3
+        // 而version号只能递增，因此用time倒序取first即可
         $maxVersion = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')
@@ -203,7 +203,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function deleteByAgentId(string $agentId, string $organizationCode): void
     {
-        // query指定 agent_id 和 user_id 下的最大版本号
+        // query指定 agent_id 和 user_id 下的最大version号
         $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->where('organization_code', $organizationCode)
@@ -291,9 +291,9 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * based on游标paginationget指定organization的助理版本list.
+     * based on游标paginationget指定organization的助理versionlist.
      * @param string $organizationCode organization代码
-     * @param array $agentVersionIds 助理版本IDlist
+     * @param array $agentVersionIds 助理versionIDlist
      * @param string $cursor 游标ID，如果为空string则从最新开始
      * @param int $pageSize 每页quantity
      */
@@ -313,7 +313,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * according toidsget助理版本.
+     * according toidsget助理version.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids)

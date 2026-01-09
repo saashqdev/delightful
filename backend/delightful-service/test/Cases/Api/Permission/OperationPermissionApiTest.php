@@ -29,7 +29,7 @@ class OperationPermissionApiTest extends AbstractHttpTest
      */
     public function testGetUserOrganizationAdminListSuccess(): void
     {
-        // 发送GET请求到API接口
+        // sendGETrequest到API接口
         $response = $this->get(self::API, [], $this->getCommonHeaders());
 
         // 如果returnautherror，跳过test
@@ -38,9 +38,9 @@ class OperationPermissionApiTest extends AbstractHttpTest
             return;
         }
 
-        // assert响应结构
-        $this->assertIsArray($response, '响应should是array格式');
-        $this->assertArrayHasKey('data', $response, '响应应containdatafield');
+        // assertresponse结构
+        $this->assertIsArray($response, 'responseshould是arrayformat');
+        $this->assertArrayHasKey('data', $response, 'response应containdatafield');
 
         // verify数据结构
         $data = $response['data'];

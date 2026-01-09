@@ -72,7 +72,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         $referText = $this->getReferTextByContentForAIImage($referContent);
         // 如果是图生图，则尺寸保持和originalimage尺寸一致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
-            // setactual请求的尺寸和比例
+            // setactualrequest的尺寸和比例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
             $enumModel = ImageGenerateModelType::fromModel($reqDTO->getParams()->getModel(), false);
             $reqDTO->getParams()->setRatioForModel($radio, $enumModel);
@@ -106,7 +106,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $this->handleGenerateImage($requestContext, $reqDTO);
             }
         } catch (Throwable $e) {
-            // 发生exception时，发送终止message，并抛出exception
+            // 发生exception时，send终止message，并抛出exception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // stream响应，拿到客户端传来的 app_message_id ，作为响应时候的唯一标识
+        // streamresponse，拿到客户端传来的 app_message_id ，作为response时候的唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

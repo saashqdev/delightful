@@ -31,7 +31,7 @@ use Throwable;
 use function Hyperf\Translation\__;
 
 /**
- * 处理message流(seq)相关.
+ * processmessagestream(seq)相关.
  */
 class DelightfulTopicDomainService extends AbstractDomainService
 {
@@ -45,7 +45,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * 客户端主动操作后,分发此操作给接收方.
+     * 客户端主动操作后,分发此操作给receive方.
      * 注意此时的message结构(各种id等)都是发起方的value.
      * @throws Throwable
      */
@@ -120,7 +120,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     return null;
                 }
                 $senderSeqEntity = SeqAssembler::generateTopicChangeSeqEntity($senderSeqEntity, $receiveTopicEntity, $receiveUserEntity);
-                // 为收件方生成一个seq,告知收件方,话题有变动
+                // 为收件方generate一个seq,告知收件方,话题有变动
                 $receiveSeqEntity = $this->delightfulSeqRepository->createSequence($senderSeqEntity->toArray());
             }
             return $receiveSeqEntity ?? null;
@@ -192,7 +192,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 'name' => $topicEntity->getName(),
             ];
         }
-        // 回写进控制message中,便于客户端处理
+        // 回写进控制message中,便于客户端process
         $contentChange = MessageAssembler::getControlMessageStruct($messageDTO->getMessageType(), $seqContent);
         $messageDTO->setContent($contentChange);
         $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
@@ -204,7 +204,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
      */
     public function createReceiveTopic(string $topicId, string $senderConversationId = '', string $receiveConversationId = ''): ?DelightfulTopicEntity
     {
-        // 为message接收方create话题
+        // 为messagereceive方create话题
         if ($senderConversationId) {
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationId);
         }
@@ -238,7 +238,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * agent 发送message时get话题 id.
+     * agent sendmessage时get话题 id.
      * @param int $getType todo 0:default话题 1:最近的话题 2:智能确定话题，暂时只支持default话题 3 新增话题
      * @throws Throwable
      */
@@ -252,7 +252,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
             $conversationDTO->setReceiveId($senderConversationEntity->getUserId());
             # createsession窗口
             $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
-            # 准备生成一个session窗口
+            # 准备generate一个session窗口
             $receiverConversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
         }
         $senderTopicId = $this->checkDefaultTopicExist($senderConversationEntity);

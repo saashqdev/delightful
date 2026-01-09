@@ -26,12 +26,12 @@ readonly class ChatMessageAssembler
     }
 
     /**
-     * buildchat请求object用于总结task
+     * buildchatrequestobject用于总结task
      *
-     * @param ProcessSummaryTaskDTO $dto 处理总结taskDTO
+     * @param ProcessSummaryTaskDTO $dto process总结taskDTO
      * @param AsrFileDataDTO $audioFileData audiofile数据
      * @param null|AsrFileDataDTO $noteFileData 笔记file数据，可选
-     * @return ChatRequest chat请求object
+     * @return ChatRequest chatrequestobject
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
     {
@@ -41,7 +41,7 @@ readonly class ChatMessageAssembler
         // buildmessagecontent
         $messageContent = $this->buildMessageContent($dto->modelId, $audioFileData, $noteFileData);
 
-        // buildchat请求数据
+        // buildchatrequest数据
         $chatRequestData = [
             'context' => [
                 'language' => $translator->getLocale(),

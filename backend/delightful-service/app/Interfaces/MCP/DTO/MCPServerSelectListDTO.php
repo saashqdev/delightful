@@ -30,7 +30,7 @@ class MCPServerSelectListDTO extends AbstractDTO
     public string $icon = '';
 
     /**
-     * 服务类型.
+     * 服务type.
      */
     public string $type = '';
 

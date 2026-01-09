@@ -120,7 +120,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * get存储桶type.
+     * getstorage桶type.
      */
     public function getBucketType(): string
     {
@@ -128,7 +128,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * set存储桶type.
+     * setstorage桶type.
      */
     public function setBucketType(string $bucketType): self
     {
@@ -205,7 +205,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * get重试次数.
+     * getretry次数.
      */
     public function getRetryCount(): int
     {
@@ -213,7 +213,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * set重试次数.
+     * setretry次数.
      */
     public function setRetryCount(int $retryCount): self
     {
@@ -305,7 +305,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否can重试.
+     * check是否canretry.
      */
     public function canRetry(int $maxRetries = 3): bool
     {

@@ -22,7 +22,7 @@ use Throwable;
 #[FlowNodeDefine(
     type: NodeType::Http->value,
     code: NodeType::Http->name,
-    name: 'HTTP 请求',
+    name: 'HTTP request',
     paramsConfig: HttpNodeParamsConfig::class,
     version: 'v1',
     singleDebug: true,

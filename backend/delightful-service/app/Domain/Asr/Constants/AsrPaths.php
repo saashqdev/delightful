@@ -29,10 +29,10 @@ class AsrPaths
     public const STATES_DIR = '.asr_states';
 
     /**
-     * 生成隐藏目录相对路径.
+     * generate隐藏目录相对路径.
      *
      * @param string $taskKey task键
-     * @return string 格式：.asr_recordings/{task_key}
+     * @return string format：.asr_recordings/{task_key}
      */
     public static function getHiddenDirPath(string $taskKey): string
     {
@@ -42,7 +42,7 @@ class AsrPaths
     /**
      * getstatus目录相对路径.
      *
-     * @return string 格式：.asr_states
+     * @return string format：.asr_states
      */
     public static function getStatesDirPath(): string
     {
@@ -52,7 +52,7 @@ class AsrPaths
     /**
      * get录音目录相对路径（父目录）.
      *
-     * @return string 格式：.asr_recordings
+     * @return string format：.asr_recordings
      */
     public static function getRecordingsDirPath(): string
     {

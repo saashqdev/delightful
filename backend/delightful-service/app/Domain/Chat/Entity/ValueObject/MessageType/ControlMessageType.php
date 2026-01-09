@@ -101,7 +101,7 @@ enum ControlMessageType: string
 
     /**
      * 未知message。
-     * 由于版本迭代，发版time差异等原因，可能产生未知type的message。
+     * 由于version迭代，发版time差异等原因，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 

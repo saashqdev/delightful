@@ -79,7 +79,7 @@ readonly class AsrTitleGeneratorService
                     return null;
                 }
 
-                // 获取audiofile名称
+                // getaudiofile名称
                 $audioFileName = $fileEntity->getFileName();
 
                 // build笔记file名（如果有）
@@ -88,7 +88,7 @@ readonly class AsrTitleGeneratorService
                     $noteFileName = $note->generateFileName();
                 }
 
-                // builduser请求message（模拟userchatmessage）
+                // builduserrequestmessage（模拟userchatmessage）
                 $userRequestMessage = $this->buildUserRequestMessage($audioFileName, $noteFileName);
 
                 // use AsrPromptAssembler buildhint词
@@ -145,7 +145,7 @@ readonly class AsrTitleGeneratorService
                     );
                 }
 
-                // 获取完整的录音总结hint词
+                // get完整的录音总结hint词
                 $customPrompt = AsrPromptAssembler::getTitlePrompt(
                     $taskStatus->asrStreamContent,
                     $note,
@@ -226,7 +226,7 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // builduser请求message（模拟userchatmessage）
+            // builduserrequestmessage（模拟userchatmessage）
             $userRequestMessage = $this->buildUserRequestMessage($fileName, null);
 
             // use AsrPromptAssembler buildhint词
@@ -252,11 +252,11 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * builduser请求message（模拟userchatmessage，use国际化文本）.
+     * builduserrequestmessage（模拟userchatmessage，use国际化文本）.
      *
      * @param string $audioFileName audiofile名称
      * @param null|string $noteFileName 笔记file名称（可选）
-     * @return string 格式化后的user请求
+     * @return string format化后的userrequest
      */
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
@@ -282,7 +282,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 从userID获取userauthorizationobject.
+     * 从userIDgetuserauthorizationobject.
      *
      * @param string $userId userID
      * @return DelightfulUserAuthorization userauthorizationobject

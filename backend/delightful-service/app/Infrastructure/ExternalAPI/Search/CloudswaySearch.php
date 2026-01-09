@@ -76,7 +76,7 @@ class CloudswaySearch
             $queryParams['setLang'] = $setLang;
         }
 
-        // build请求头
+        // buildrequest头
         $headers = [
             'Authorization' => 'Bearer ' . $apiKey,
             'Pragma' => 'no-cache',  // 不usecache，保证实时性
@@ -89,12 +89,12 @@ class CloudswaySearch
         ]);
 
         try {
-            // 发送 GET 请求
+            // send GET request
             $response = $client->request('GET', $requestUrl, [
                 'query' => $queryParams,
             ]);
 
-            // get响应体
+            // getresponse体
             $body = $response->getBody()->getContents();
             $data = Json::decode($body);
         } catch (RequestException $e) {

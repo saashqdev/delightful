@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 图searchconfigurationvalueobject
  *
- * contain图search的相关configurationparameter，如 API 端点、authinfo、超时set等
+ * contain图search的相关configurationparameter，如 API 端点、authinfo、timeoutset等
  */
 class GraphSearchConfig extends AbstractValueObject
 {
@@ -46,23 +46,23 @@ class GraphSearchConfig extends AbstractValueObject
     private string $apiEndpoint = '';
 
     /**
-     * API 密钥.
+     * API key.
      *
-     * 访问图searchservice的 API 密钥
+     * 访问图searchservice的 API key
      */
     private string $apiKey = '';
 
     /**
-     * 超时time（秒）.
+     * timeouttime（秒）.
      *
-     * API 请求的超时time，单位为秒
+     * API request的timeouttime，单位为秒
      */
     private float $timeout = 5.0;
 
     /**
-     * 重试次数.
+     * retry次数.
      *
-     * API 请求fail时的重试次数
+     * API requestfail时的retry次数
      */
     private int $retryCount = 3;
 
@@ -162,7 +162,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get API 密钥.
+     * get API key.
      */
     public function getApiKey(): string
     {
@@ -170,7 +170,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set API 密钥.
+     * set API key.
      */
     public function setApiKey(string $apiKey): self
     {
@@ -179,7 +179,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get超时time.
+     * gettimeouttime.
      */
     public function getTimeout(): float
     {
@@ -187,7 +187,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set超时time.
+     * settimeouttime.
      */
     public function setTimeout(float $timeout): self
     {
@@ -199,7 +199,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get重试次数.
+     * getretry次数.
      */
     public function getRetryCount(): int
     {
@@ -207,7 +207,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set重试次数.
+     * setretry次数.
      */
     public function setRetryCount(int $retryCount): self
     {

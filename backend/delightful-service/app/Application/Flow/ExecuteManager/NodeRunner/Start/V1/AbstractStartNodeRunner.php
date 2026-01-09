@@ -90,7 +90,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // 如果没有上次，或者距离上次的time秒已经超过了，那么就need执行
+        // 如果没有上次，或者距离上次的time秒已经超过了，那么就needexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -163,7 +163,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // 定时入参，都由外部call，判断是哪个分支
+        // schedule入参，都由外部call，判断是哪个分支
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
             // 没有找到任何分支，直接运行
@@ -351,7 +351,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $container = ApplicationContext::getContainer();
             $messageRepository = $container->get(DelightfulMessageRepositoryInterface::class);
 
-            // 将 VoiceMessage 转换为array格式用于update
+            // 将 VoiceMessage 转换为arrayformat用于update
             $messageContent = $voiceMessage->toArray();
 
             $messageRepository->updateMessageContent($delightfulMessageId, $messageContent);
@@ -362,7 +362,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
-            // 静默处理updatefail，不影响主要process
+            // 静默processupdatefail，不影响主要process
             $this->logger->warning('Failed to update voice message content (V1)', [
                 'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),

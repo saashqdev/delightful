@@ -34,18 +34,18 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     private const string TEST_ORGANIZATION_CODE = 'test001';
 
     /**
-     * 存储登录后的token.
+     * storage登录后的token.
      */
     private static string $accessToken = '';
 
     /**
-     * test完整更新userinfo - 更新所有字段.
+     * test完整updateuserinfo - update所有字段.
      */
     public function testUpdateUserInfoWithAllFields(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $token = $this->performLogin();
-        echo "\nusetoken进行userinfo更新: " . $token . "\n";
+        echo "\nusetoken进行userinfoupdate: " . $token . "\n";
 
         $requestData = [
             'avatar_url' => 'https://example.com/avatar/new-avatar.jpg',
@@ -53,16 +53,16 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         ];
 
         $headers = $this->getTestHeaders();
-        echo "\n请求头info: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\nrequest头info: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $headers);
 
-        echo "\n响应结果: " . json_encode($response, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\nresponse结果: " . json_encode($response, JSON_UNESCAPED_UNICODE) . "\n";
 
-        // check响应是否为array
-        $this->assertIsArray($response, '响应should是array格式');
+        // checkresponse是否为array
+        $this->assertIsArray($response, 'responseshould是arrayformat');
 
-        // 如果响应containerrorinfo，输出详细info
+        // 如果responsecontainerrorinfo，输出详细info
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\n接口returnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
@@ -73,20 +73,20 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             }
         }
 
-        // validate响应结构 - check是否有data字段
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        // validateresponse结构 - check是否有data字段
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
 
         // validateuser数据结构 - check关键字段存在
-        $this->assertArrayHasKey('id', $userData, '响应应containid字段');
-        $this->assertArrayHasKey('avatar_url', $userData, '响应应containavatar_url字段');
-        $this->assertArrayHasKey('nickname', $userData, '响应应containnickname字段');
-        $this->assertArrayHasKey('organization_code', $userData, '响应应containorganization_code字段');
-        $this->assertArrayHasKey('user_id', $userData, '响应应containuser_id字段');
-        $this->assertArrayHasKey('created_at', $userData, '响应应containcreated_at字段');
-        $this->assertArrayHasKey('updated_at', $userData, '响应应containupdated_at字段');
+        $this->assertArrayHasKey('id', $userData, 'response应containid字段');
+        $this->assertArrayHasKey('avatar_url', $userData, 'response应containavatar_url字段');
+        $this->assertArrayHasKey('nickname', $userData, 'response应containnickname字段');
+        $this->assertArrayHasKey('organization_code', $userData, 'response应containorganization_code字段');
+        $this->assertArrayHasKey('user_id', $userData, 'response应containuser_id字段');
+        $this->assertArrayHasKey('created_at', $userData, 'response应containcreated_at字段');
+        $this->assertArrayHasKey('updated_at', $userData, 'response应containupdated_at字段');
 
         // validate关键字段不为null
         $this->assertNotEmpty($userData['id'], 'id字段不应为null');
@@ -96,16 +96,16 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $this->assertNotEmpty($userData['updated_at'], 'updated_at字段不应为null');
 
         // validate更new具体字段value
-        $this->assertEquals($requestData['avatar_url'], $userData['avatar_url'], 'avatarURL更新fail');
-        $this->assertEquals($requestData['nickname'], $userData['nickname'], 'nickname更新fail');
+        $this->assertEquals($requestData['avatar_url'], $userData['avatar_url'], 'avatarURLupdatefail');
+        $this->assertEquals($requestData['nickname'], $userData['nickname'], 'nicknameupdatefail');
     }
 
     /**
-     * test仅更新avatar.
+     * test仅updateavatar.
      */
     public function testUpdateUserInfoWithAvatarOnly(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
         $requestData = [
@@ -114,7 +114,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        $this->assertIsArray($response, '响应should是array格式');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
 
         // 如果是authenticationerror，跳过test
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -122,21 +122,21 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
-        $this->assertArrayHasKey('avatar_url', $userData, '响应应containavatar_url字段');
-        $this->assertEquals($requestData['avatar_url'], $userData['avatar_url'], 'avatarURLshould被correct更新');
-        $this->assertArrayHasKey('nickname', $userData, '响应应containnickname字段');
+        $this->assertArrayHasKey('avatar_url', $userData, 'response应containavatar_url字段');
+        $this->assertEquals($requestData['avatar_url'], $userData['avatar_url'], 'avatarURLshould被correctupdate');
+        $this->assertArrayHasKey('nickname', $userData, 'response应containnickname字段');
     }
 
     /**
-     * test仅更新nickname.
+     * test仅updatenickname.
      */
     public function testUpdateUserInfoWithNicknameOnly(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
         $requestData = [
@@ -145,7 +145,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        $this->assertIsArray($response, '响应should是array格式');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
 
         // 如果是authenticationerror，跳过test
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -153,20 +153,20 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
-        $this->assertArrayHasKey('nickname', $userData, '响应应containnickname字段');
-        $this->assertEquals($requestData['nickname'], $userData['nickname'], 'nicknameshould被correct更新');
+        $this->assertArrayHasKey('nickname', $userData, 'response应containnickname字段');
+        $this->assertEquals($requestData['nickname'], $userData['nickname'], 'nicknameshould被correctupdate');
     }
 
     /**
-     * testnullparameter更新 - 不传任何字段.
+     * testnullparameterupdate - 不传任何字段.
      */
     public function testUpdateUserInfoWithEmptyData(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
         $requestData = [];
@@ -174,7 +174,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
         // nullparameter下should正常returncurrentuserinfo，不报错
-        $this->assertIsArray($response, '响应should是array格式');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
 
         // 如果是authenticationerror，跳过test
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -182,17 +182,17 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
 
         // validate关键字段存在
-        $this->assertArrayHasKey('id', $userData, '响应应containid字段');
-        $this->assertArrayHasKey('organization_code', $userData, '响应应containorganization_code字段');
-        $this->assertArrayHasKey('user_id', $userData, '响应应containuser_id字段');
-        $this->assertArrayHasKey('created_at', $userData, '响应应containcreated_at字段');
-        $this->assertArrayHasKey('updated_at', $userData, '响应应containupdated_at字段');
+        $this->assertArrayHasKey('id', $userData, 'response应containid字段');
+        $this->assertArrayHasKey('organization_code', $userData, 'response应containorganization_code字段');
+        $this->assertArrayHasKey('user_id', $userData, 'response应containuser_id字段');
+        $this->assertArrayHasKey('created_at', $userData, 'response应containcreated_at字段');
+        $this->assertArrayHasKey('updated_at', $userData, 'response应containupdated_at字段');
 
         // validate关键字段不为null
         $this->assertNotEmpty($userData['id'], 'id字段不应为null');
@@ -207,7 +207,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
      */
     public function testUpdateUserInfoWithNullValues(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
         $requestData = [
@@ -218,7 +218,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
         // nullvalueshould被correcthandle，不导致error
-        $this->assertIsArray($response, '传入nullvalue时应正常return响应');
+        $this->assertIsArray($response, '传入nullvalue时应正常returnresponse');
 
         // 如果是authenticationerror，跳过test
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -226,11 +226,11 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
-        $this->assertArrayHasKey('id', $userData, '响应应containuserID');
+        $this->assertArrayHasKey('id', $userData, 'response应containuserID');
     }
 
     /**
@@ -238,7 +238,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
      */
     public function testUpdateUserInfoWithSpecialCharacters(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
         $requestData = [
@@ -247,7 +247,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        $this->assertIsArray($response, '响应should是array格式');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
 
         // 如果是authenticationerror，跳过test
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -255,8 +255,8 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
         $this->assertEquals($requestData['nickname'], $userData['nickname'], '应correcthandlecontainemoji的nickname');
@@ -267,7 +267,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
      */
     public function testUpdateUserInfoWithLongStrings(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
         $requestData = [
@@ -286,20 +286,20 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
-        $this->assertArrayHasKey('nickname', $userData, '响应应containnickname字段');
-        $this->assertArrayHasKey('avatar_url', $userData, '响应应containavatar_url字段');
+        $this->assertArrayHasKey('nickname', $userData, 'response应containnickname字段');
+        $this->assertArrayHasKey('avatar_url', $userData, 'response应containavatar_url字段');
     }
 
     /**
-     * testinvalid的avatarURL格式.
+     * testinvalid的avatarURLformat.
      */
     public function testUpdateUserInfoWithInvalidAvatarUrl(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
         $requestData = [
@@ -309,7 +309,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
         // according to业务逻辑，可能接受任何string作为avatar_url，或进行validate
-        $this->assertIsArray($response, 'invalidURL格式应被妥善handle');
+        $this->assertIsArray($response, 'invalidURLformat应被妥善handle');
 
         // 如果是authenticationerror，跳过test
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -318,20 +318,20 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test部分字段更新后的数据完整性.
+     * test部分字段update后的数据完整性.
      */
     public function testUpdateUserInfoDataIntegrity(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $this->performLogin();
 
-        // 第一次更新：只更新nickname
+        // 第一次update：只updatenickname
         $firstUpdateData = [
             'nickname' => '第一次更newnickname',
         ];
 
         $firstResponse = $this->patch(self::UPDATE_USER_INFO_API, $firstUpdateData, $this->getTestHeaders());
-        $this->assertIsArray($firstResponse, '第一次更新响应should是array格式');
+        $this->assertIsArray($firstResponse, '第一次updateresponseshould是arrayformat');
 
         // 如果是authenticationerror，跳过test
         if (isset($firstResponse['code']) && ($firstResponse['code'] === 2179 || $firstResponse['code'] === 3035)) {
@@ -339,21 +339,21 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $firstResponse, '第一次更新响应应containdata字段');
-        $this->assertEquals(1000, $firstResponse['code'], '第一次更新shouldreturnsuccess响应码');
+        $this->assertArrayHasKey('data', $firstResponse, '第一次updateresponse应containdata字段');
+        $this->assertEquals(1000, $firstResponse['code'], '第一次updateshouldreturnsuccessresponse码');
 
         $firstUserData = $firstResponse['data'];
         $originalAvatarUrl = $firstUserData['avatar_url'] ?? null;
 
-        // 第二次更新：只更新avatar
+        // 第二次update：只updateavatar
         $secondUpdateData = [
             'avatar_url' => 'https://example.com/new-avatar-2.jpg',
         ];
 
         $secondResponse = $this->patch(self::UPDATE_USER_INFO_API, $secondUpdateData, $this->getTestHeaders());
-        $this->assertIsArray($secondResponse, '第二次更新响应should是array格式');
-        $this->assertArrayHasKey('data', $secondResponse, '第二次更新响应应containdata字段');
-        $this->assertEquals(1000, $secondResponse['code'], '第二次更新shouldreturnsuccess响应码');
+        $this->assertIsArray($secondResponse, '第二次updateresponseshould是arrayformat');
+        $this->assertArrayHasKey('data', $secondResponse, '第二次updateresponse应containdata字段');
+        $this->assertEquals(1000, $secondResponse['code'], '第二次updateshouldreturnsuccessresponse码');
 
         $secondUserData = $secondResponse['data'];
 
@@ -371,37 +371,37 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             'nickname' => 'testnickname',
         ];
 
-        // 不containauthorization头的请求
+        // 不containauthorization头的request
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, [
             'Content-Type' => 'application/json',
         ]);
 
         // shouldreturnauthorizationerror
-        $this->assertIsArray($response, '响应should是array格式');
-        $this->assertArrayHasKey('code', $response, '未authorization请求应returnerror码');
-        $this->assertNotEquals(1000, $response['code'] ?? 1000, '未authorization请求不应returnsuccess码');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
+        $this->assertArrayHasKey('code', $response, '未authorizationrequest应returnerror码');
+        $this->assertNotEquals(1000, $response['code'] ?? 1000, '未authorizationrequest不应returnsuccess码');
     }
 
     /**
-     * test获取user更新permission - 正常情况.
+     * testgetuserupdatepermission - 正常情况.
      */
     public function testGetUserUpdatePermissionSuccess(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $token = $this->performLogin();
-        echo "\nusetoken获取user更新permission: " . $token . "\n";
+        echo "\nusetokengetuserupdatepermission: " . $token . "\n";
 
         $headers = $this->getTestHeaders();
-        echo "\n请求头info: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\nrequest头info: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
 
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
-        echo "\n响应结果: " . json_encode($response, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\nresponse结果: " . json_encode($response, JSON_UNESCAPED_UNICODE) . "\n";
 
-        // check响应是否为array
-        $this->assertIsArray($response, '响应should是array格式');
+        // checkresponse是否为array
+        $this->assertIsArray($response, 'responseshould是arrayformat');
 
-        // 如果响应containerrorinfo，输出详细info
+        // 如果responsecontainerrorinfo，输出详细info
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\n接口returnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
@@ -412,33 +412,33 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             }
         }
 
-        // validate响应结构
-        $this->assertArrayHasKey('data', $response, '响应应containdata字段');
-        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccess响应码');
+        // validateresponse结构
+        $this->assertArrayHasKey('data', $response, 'response应containdata字段');
+        $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $permissionData = $response['data'];
 
         // validatepermission数据结构
-        $this->assertArrayHasKey('permission', $permissionData, '响应应containpermission字段');
+        $this->assertArrayHasKey('permission', $permissionData, 'response应containpermission字段');
         $this->assertIsNotArray($permissionData['permission'], 'permission字段不should是array');
         $this->assertNotNull($permissionData['permission'], 'permission字段不should为null');
     }
 
     /**
-     * test获取user更新permission - 未authorization访问.
+     * testgetuserupdatepermission - 未authorization访问.
      */
     public function testGetUserUpdatePermissionWithoutAuthorization(): void
     {
-        // 不containauthorization头的请求
+        // 不containauthorization头的request
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
         ]);
 
         // shouldreturnauthorizationerror
-        $this->assertIsArray($response, '响应should是array格式');
-        $this->assertArrayHasKey('code', $response, '未authorization请求应returnerror码');
-        $this->assertNotEquals(1000, $response['code'] ?? 1000, '未authorization请求不应returnsuccess码');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
+        $this->assertArrayHasKey('code', $response, '未authorizationrequest应returnerror码');
+        $this->assertNotEquals(1000, $response['code'] ?? 1000, '未authorizationrequest不应returnsuccess码');
 
         // 常见的未authorizationerror码
         $unauthorizedCodes = [2179, 3035, 401, 403];
@@ -446,7 +446,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test获取user更新permission - invalidtoken.
+     * testgetuserupdatepermission - invalidtoken.
      */
     public function testGetUserUpdatePermissionWithInvalidToken(): void
     {
@@ -460,17 +460,17 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
         // shouldreturnauthorizationerror
-        $this->assertIsArray($response, '响应should是array格式');
-        $this->assertArrayHasKey('code', $response, 'invalidtoken请求应returnerror码');
-        $this->assertNotEquals(1000, $response['code'] ?? 1000, 'invalidtoken请求不应returnsuccess码');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
+        $this->assertArrayHasKey('code', $response, 'invalidtokenrequest应returnerror码');
+        $this->assertNotEquals(1000, $response['code'] ?? 1000, 'invalidtokenrequest不应returnsuccess码');
     }
 
     /**
-     * test获取user更新permission - 缺少organization-code.
+     * testgetuserupdatepermission - 缺少organization-code.
      */
     public function testGetUserUpdatePermissionWithoutOrganizationCode(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $token = $this->performLogin();
 
         $headers = [
@@ -483,25 +483,25 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
         // 可能returnerror或success，取决于业务逻辑
-        $this->assertIsArray($response, '响应should是array格式');
-        $this->assertArrayHasKey('code', $response, '响应应containcode字段');
+        $this->assertIsArray($response, 'responseshould是arrayformat');
+        $this->assertArrayHasKey('code', $response, 'response应containcode字段');
 
         // 如果success，validate数据结构
         if ($response['code'] === 1000) {
-            $this->assertArrayHasKey('data', $response, 'success响应应containdata字段');
+            $this->assertArrayHasKey('data', $response, 'successresponse应containdata字段');
             $permissionData = $response['data'];
-            $this->assertArrayHasKey('permission', $permissionData, '响应应containpermission字段');
+            $this->assertArrayHasKey('permission', $permissionData, 'response应containpermission字段');
             $this->assertIsNotArray($permissionData['permission'], 'permission字段不should是array');
             $this->assertNotNull($permissionData['permission'], 'permission字段不should为null');
         }
     }
 
     /**
-     * test获取user更新permission - HTTPmethodvalidate.
+     * testgetuserupdatepermission - HTTPmethodvalidate.
      */
     public function testGetUserUpdatePermissionHttpMethod(): void
     {
-        // 先登录获取token
+        // 先登录gettoken
         $token = $this->performLogin();
         $headers = $this->getTestHeaders();
 
@@ -510,7 +510,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         // shouldreturnmethod不allow的error
         if ($postResponse !== null) {
-            $this->assertIsArray($postResponse, 'POST响应should是array格式');
+            $this->assertIsArray($postResponse, 'POSTresponseshould是arrayformat');
             if (isset($postResponse['code'])) {
                 // 如果不是authentication问题，should是methoderror
                 if (! in_array($postResponse['code'], [2179, 3035])) {
@@ -527,7 +527,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         // shouldreturnmethod不allow的error
         if ($putResponse !== null) {
-            $this->assertIsArray($putResponse, 'PUT响应should是array格式');
+            $this->assertIsArray($putResponse, 'PUTresponseshould是arrayformat');
             if (isset($putResponse['code'])) {
                 // 如果不是authentication问题，should是methoderror
                 if (! in_array($putResponse['code'], [2179, 3035])) {
@@ -541,7 +541,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * execute登录并获取访问令牌.
+     * execute登录并get访问token.
      */
     private function performLogin(): string
     {
@@ -563,23 +563,23 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         ]);
 
         // validate登录是否success
-        $this->assertIsArray($loginResponse, '登录响应should是array格式');
+        $this->assertIsArray($loginResponse, '登录responseshould是arrayformat');
         $this->assertEquals(1000, $loginResponse['code'] ?? 0, '登录shouldsuccess');
-        $this->assertArrayHasKey('data', $loginResponse, '登录响应应containdata字段');
-        $this->assertArrayHasKey('access_token', $loginResponse['data'], '登录响应应containaccess_token');
+        $this->assertArrayHasKey('data', $loginResponse, '登录response应containdata字段');
+        $this->assertArrayHasKey('access_token', $loginResponse['data'], '登录response应containaccess_token');
 
         // cachetoken
         self::$accessToken = $loginResponse['data']['access_token'];
 
         // 输出debuginfo
         echo "\n登录success，获得token: " . self::$accessToken . "\n";
-        echo "\n完整登录响应: " . json_encode($loginResponse, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\n完整登录response: " . json_encode($loginResponse, JSON_UNESCAPED_UNICODE) . "\n";
 
         return self::$accessToken;
     }
 
     /**
-     * 获取test用的请求头.
+     * gettest用的request头.
      */
     private function getTestHeaders(): array
     {

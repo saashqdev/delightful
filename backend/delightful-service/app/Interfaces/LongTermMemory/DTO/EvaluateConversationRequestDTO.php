@@ -11,7 +11,7 @@ use App\Domain\Chat\Entity\ValueObject\LLMModelEnum;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 评估conversation内容请求DTO.
+ * 评估conversation内容requestDTO.
  */
 class EvaluateConversationRequestDTO extends AbstractDTO
 {

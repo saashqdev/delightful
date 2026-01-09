@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * image水印handle器
- * 统一handle各种格式image的水印添加.
+ * 统一handle各种formatimage的水印添加.
  */
 class ImageWatermarkProcessor
 {
@@ -38,17 +38,17 @@ class ImageWatermarkProcessor
     protected ImageEnhancementProcessorInterface $imageEnhancementProcessor;
 
     /**
-     * 为base64格式image添加水印.
+     * 为base64formatimage添加水印.
      */
     public function addWatermarkToBase64(string $base64Image, ImageGenerateRequest $imageGenerateRequest): string
     {
-        // 检测original格式
+        // 检测originalformat
         $originalFormat = $this->extractBase64Format($base64Image);
 
         // 解码base64image
         $imageData = $this->decodeBase64Image($base64Image);
 
-        // 双重检测ensure格式准确
+        // 双重检测ensureformat准确
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
@@ -70,8 +70,8 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 为URL格式image添加水印
-     * 可选择return格式：URL 或 base64.
+     * 为URLformatimage添加水印
+     * 可选择returnformat：URL 或 base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
     {
@@ -88,7 +88,7 @@ class ImageWatermarkProcessor
             $implicitWatermark
         );
 
-        // according toactual输出格式generatecorrect的base64前缀
+        // according toactual输出formatgeneratecorrect的base64前缀
         $outputPrefix = $this->generateBase64Prefix($imageData);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
@@ -109,7 +109,7 @@ class ImageWatermarkProcessor
 
     protected function addWaterMarkHandler(string $imageData, ImageGenerateRequest $imageGenerateRequest, ?string $format = null): string
     {
-        // 检测image格式，优先use传入的格式
+        // 检测imageformat，优先use传入的format
         $detectedFormat = $format ?? $this->detectImageFormat($imageData);
 
         $image = imagecreatefromstring($imageData);
@@ -120,7 +120,7 @@ class ImageWatermarkProcessor
         // 添加视觉水印
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
-        // use检测到的格式进行无损输出
+        // use检测到的format进行无损输出
         ob_start();
         $this->outputImage($watermarkedImage, $detectedFormat);
         $watermarkedData = ob_get_contents();
@@ -161,7 +161,7 @@ class ImageWatermarkProcessor
         $fontSize = $this->calculateFontSize($width, $height);
         $fontColor = $this->createTransparentColor($image, $config->getOpacity());
 
-        // 计算水印位置
+        // 计算水印position
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
         // 优先useTTF字体，特别是对于中文文本
@@ -171,20 +171,20 @@ class ImageWatermarkProcessor
             // TTF字体sizeneed调整，通常比内置字体小一些
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
-            // correct计算TTF字体的基线位置
+            // correct计算TTF字体的基线position
             if (function_exists('imagettfbbox')) {
-                // 直接use传入的Y坐标作为基线位置
+                // 直接use传入的Y坐标作为基线position
                 $ttfY = $y;
             } else {
-                // 如果无法获取边界框，直接use传入的Y坐标
+                // 如果无法get边界框，直接use传入的Y坐标
                 $ttfY = $y;
             }
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
             // 降级use内置字体（仅支持ASCII字符）
-            // 内置字体的Y坐标是文字顶部，need从基线位置convert
-            $builtinY = $y - (int) ($fontSize * 0.8); // 从基线位置convert为顶部位置
+            // 内置字体的Y坐标是文字顶部，need从基线positionconvert
+            $builtinY = $y - (int) ($fontSize * 0.8); // 从基线positionconvert为顶部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
             // 如果文本contain中文但没有TTF字体，记录warning
@@ -216,7 +216,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 计算水印位置.
+     * 计算水印position.
      */
     private function calculateWatermarkPosition(int $width, int $height, string $text, int $fontSize, int $position): array
     {
@@ -310,13 +310,13 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 输出image（无损版本）.
+     * 输出image（无损version）.
      * @param mixed $image
-     * @param string $format 目标格式 (png/jpeg/webp/gif)
+     * @param string $format 目标format (png/jpeg/webp/gif)
      */
     private function outputImage($image, string $format = 'auto'): void
     {
-        // 自动格式检测
+        // 自动format检测
         if ($format === 'auto') {
             if ($this->fontProvider->hasTransparency($image)) {
                 $format = 'png'; // 有透明度usePNG
@@ -366,7 +366,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 检测图像数据的格式.
+     * 检测图像数据的format.
      */
     private function detectImageFormat(string $imageData): string
     {
@@ -386,7 +386,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 从base64前缀提取图像格式.
+     * 从base64前缀提取图像format.
      */
     private function extractBase64Format(string $base64Image): string
     {
@@ -412,7 +412,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * according to格式generatebase64前缀.
+     * according toformatgeneratebase64前缀.
      */
     private function generateBase64Prefix(string $format): string
     {

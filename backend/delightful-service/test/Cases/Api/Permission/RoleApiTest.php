@@ -57,7 +57,7 @@ class RoleApiTest extends AbstractHttpTest
 
         $this->assertIsArray($response);
 
-        // checksuccess响应结构
+        // checksuccessresponse结构
         if (isset($response['code']) && $response['code'] === 1000) {
             $this->assertArrayHasKey('data', $response);
             $this->assertIsArray($response['data']);
@@ -92,7 +92,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code']);
 
-        // checksuccess响应结构
+        // checksuccessresponse结构
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
         $this->assertArrayHasKey('id', $response['data']);
@@ -103,7 +103,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // === testquery子管理员 ===
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // assert详情接口响应结构与数据
+        // assert详情接口response结构与数据
         $this->assertIsArray($detailResp);
         $this->assertEquals(1000, $detailResp['code'] ?? null);
 
@@ -120,7 +120,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals(
             $expectedDetailStructure,
             $detailResp['data'] ?? [],
-            '子管理员详情接口响应结构不符合expected',
+            '子管理员详情接口response结构不符合expected',
             false,
             false
         );
@@ -157,7 +157,7 @@ class RoleApiTest extends AbstractHttpTest
             $this->getCommonHeaders()
         );
 
-        // assert基础响应结构
+        // assert基础response结构
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code'] ?? null);
 

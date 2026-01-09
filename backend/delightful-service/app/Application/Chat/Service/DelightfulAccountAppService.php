@@ -67,7 +67,7 @@ class DelightfulAccountAppService extends AbstractAppService
 
         $spinLockKey = 'chat:aiRegister:lock:' . $aiCode;
         $spinLockKeyOwner = random_bytes(8);
-        // 自旋锁
+        // 自旋lock
         $this->locker->spinLock($spinLockKey, $spinLockKeyOwner, 3);
         try {
             $userDTO->setUserType(UserType::Ai);

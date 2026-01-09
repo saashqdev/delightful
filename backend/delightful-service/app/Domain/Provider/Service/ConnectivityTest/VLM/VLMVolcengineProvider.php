@@ -45,7 +45,7 @@ class VLMVolcengineProvider implements IProvider
         $body['model_version'] = 'general_v2.1_L'; // 先写死没问题的，目前的文生图支持这个值，图生图没这个值
         $body['width'] = 512;
         $body['height'] = 512;
-        $body['prompt'] = '生成一只狗';
+        $body['prompt'] = 'generate一只狗';
         try {
             $volcengineAPI->submitTask($body);
         } catch (Exception $e) {

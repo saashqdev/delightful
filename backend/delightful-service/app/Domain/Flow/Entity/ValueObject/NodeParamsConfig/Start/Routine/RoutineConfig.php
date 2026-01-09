@@ -17,7 +17,7 @@ class RoutineConfig
     private string $crontabRule = '';
 
     public function __construct(
-        // 定时type
+        // scheduletype
         private readonly RoutineType $type,
         // 具体日期
         private ?string $day = null,
@@ -29,12 +29,12 @@ class RoutineConfig
         private ?int $interval = null,
         // unit=week时为[1~7]，unit=month时为[1~31]
         private ?array $values = null,
-        // 结束日期，该日期后不生成数据
+        // 结束日期，该日期后不generate数据
         private readonly ?DateTime $deadline = null,
         // 话题configuration
         private readonly ?TopicConfig $topicConfig = null
     ) {
-        // saveconfiguration时不再强行检测，放到生成规则处检测
+        // saveconfiguration时不再强行检测，放到generate规则处检测
     }
 
     public function toConfigArray(): array
@@ -64,7 +64,7 @@ class RoutineConfig
             return $this->crontabRule;
         }
         if ($this->type === RoutineType::NoRepeat) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'currenttype无需生成定时规则');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'currenttype无需generateschedule规则');
         }
         $minute = $hour = $dayOfMonth = $month = $dayOfWeek = '*';
         if (! empty($this->time)) {
@@ -111,7 +111,7 @@ class RoutineConfig
         }
         $this->crontabRule = "{$minute} {$hour} {$dayOfMonth} {$month} {$dayOfWeek}";
         if (! CronExpression::isValidExpression($this->crontabRule)) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '生成定时规则fail');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'generateschedule规则fail');
         }
         return $this->crontabRule;
     }
@@ -204,7 +204,7 @@ class RoutineConfig
         // 不重复、每年、每月的时候，day table示日期
         if (in_array($this->type, [RoutineType::NoRepeat, RoutineType::AnnuallyRepeat])) {
             if (! is_string($this->day) || empty($this->day) || ! strtotime($this->day)) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 格式error');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 formaterror');
             }
         }
 

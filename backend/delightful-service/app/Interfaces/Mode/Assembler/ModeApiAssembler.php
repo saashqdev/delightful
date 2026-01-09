@@ -14,7 +14,7 @@ use App\Interfaces\Mode\DTO\Request\UpdateModeRequest;
 class ModeApiAssembler
 {
     /**
-     * create请求转换为详情DTO.
+     * createrequest转换为详情DTO.
      */
     public static function createRequestToModeDTO(CreateModeRequest $request): AdminModeDTO
     {
@@ -22,7 +22,7 @@ class ModeApiAssembler
     }
 
     /**
-     * update请求转换为详情DTO.
+     * updaterequest转换为详情DTO.
      */
     public static function updateRequestToModeDTO(UpdateModeRequest $request): AdminModeDTO
     {

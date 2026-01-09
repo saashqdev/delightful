@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * 事件type.
+ * eventtype.
  */
 enum SocketEventType: string
 {

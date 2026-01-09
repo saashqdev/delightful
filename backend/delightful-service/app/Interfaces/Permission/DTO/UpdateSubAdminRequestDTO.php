@@ -10,7 +10,7 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * update子管理员role请求DTO.
+ * update子管理员rolerequestDTO.
  */
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {

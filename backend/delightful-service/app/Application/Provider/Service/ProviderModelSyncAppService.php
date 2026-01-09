@@ -192,7 +192,7 @@ class ProviderModelSyncAppService
         $data = json_decode($body, true);
 
         if (! isset($data['data']) || ! is_array($data['data'])) {
-            $this->logger->warning('APIreturn格式error', [
+            $this->logger->warning('APIreturnformaterror', [
                 'api_url' => $apiUrl,
                 'type' => $type,
                 'response' => $body,
@@ -252,7 +252,7 @@ class ProviderModelSyncAppService
                     'model_id' => $modelId,
                     'error' => $e->getMessage(),
                 ]);
-                // 继续处理其他model
+                // 继续process其他model
             }
         }
 

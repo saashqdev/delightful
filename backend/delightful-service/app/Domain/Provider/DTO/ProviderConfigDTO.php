@@ -46,7 +46,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected ?ProviderConfigItem $config = null;
 
     /**
-     * 已解密的configuration，不进行数据脱敏处理.
+     * 已decrypt的configuration，不进行数据脱敏process.
      */
     protected ?ProviderConfigItem $decryptedConfig = null;
 
@@ -315,7 +315,7 @@ class ProviderConfigDTO extends AbstractDTO
             $config = new ProviderConfigItem($config);
         }
 
-        // 数据脱敏处理
+        // 数据脱敏process
         if ($config instanceof ProviderConfigItem) {
             $config->setAk(StringMaskUtil::mask($config->getAk()));
             $config->setApiKey(StringMaskUtil::mask($config->getApiKey()));
@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // 注意：已解密的configuration不进行数据脱敏处理
+        // 注意：已decrypt的configuration不进行数据脱敏process
     }
 
     public function getIsModelsEnable(): bool

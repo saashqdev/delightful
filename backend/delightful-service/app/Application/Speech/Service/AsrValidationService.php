@@ -80,7 +80,7 @@ readonly class AsrValidationService
             // 所有permissioncheck都fail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedUser);
         } catch (BusinessException $e) {
-            // 处理 ExceptionBuilder::throw 抛出的业务exception
+            // process ExceptionBuilder::throw 抛出的业务exception
             if ($e->getCode() === BeAgentErrorCode::PROJECT_NOT_FOUND->value) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
@@ -92,7 +92,7 @@ readonly class AsrValidationService
             // 其他业务exception转换为permissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            // 其他exception统一处理为permissionverifyfail
+            // 其他exception统一process为permissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         }
     }

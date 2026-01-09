@@ -25,7 +25,7 @@ class CreateDelightfulApiOrganizationConfigTable extends Migration
             $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
             $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();
             // rpm
-            $table->unsignedInteger('rpm')->comment('RPM限流')->default(5000);
+            $table->unsignedInteger('rpm')->comment('RPM限stream')->default(5000);
             $table->unique(['organization_code'], 'idx_organization');
         });
     }

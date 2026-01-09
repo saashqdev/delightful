@@ -38,7 +38,7 @@ class AgentAssembler
 
     public static function createChatModelAvailableList(Page $page, int $total, array $list, array $icons = []): PageDTO
     {
-        // 处理pagination
+        // processpagination
         $offset = ($page->getPage() - 1) * $page->getPageNum();
         $pagedList = array_slice($list, $offset, $page->getPageNum());
 

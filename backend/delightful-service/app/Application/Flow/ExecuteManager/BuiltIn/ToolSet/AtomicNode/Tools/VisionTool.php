@@ -242,8 +242,8 @@ JSON, true)));
    - 文字识别：如有文字，准确提取并理解含义
    - 技术info：如有图table/数据，分析其含义
    
-4. 分析格式要求：
-   - 对于重要分析result，use结构化JSON格式呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
+4. 分析format要求：
+   - 对于重要分析result，use结构化JSONformat呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
    - 对于不确定content，明确table明推测性质，for example："可能是..."
    - 如image质量较低，指出限制因素并尽力分析
    - 对于多图分析，分别markimage序号进行解析，并总结其关联性

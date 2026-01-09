@@ -164,7 +164,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             $createdUserMap[$user->getUserId()] = $user;
         }
 
-        // build助理版本映射
+        // build助理version映射
         $agentVersionMap = [];
         foreach ($agentVersions as $version) {
             $agentVersionMap[$version->getId()] = $version;
@@ -185,7 +185,7 @@ class AdminAgentAppService extends AbstractKernelAppService
                 $adminAgentDTO->setCreatedName($createdUser->getNickname());
             }
 
-            // set版本info
+            // setversioninfo
             $versionId = $agent->getAgentVersionId();
             if ($versionId && isset($agentVersionMap[$versionId])) {
                 $version = $agentVersionMap[$versionId];
@@ -221,7 +221,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             $dataIsolation
         );
 
-        // 处理所有set
+        // process所有set
         foreach ($settings as $setting) {
             $settingDTO = (new AgentGlobalSettingsDTO($setting->toArray()));
             ExtraDetailAppenderFactory::createStrategy($settingDTO->getExtra())->appendExtraDetail($settingDTO->getExtra(), $authorization);
@@ -281,7 +281,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // 提取启用机器人list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和机器人版本的机器人数据及其total
+        // get指定organization和机器人version的机器人数据及其total
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,
@@ -297,7 +297,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $avatars = array_column($agentVersions, 'agent_avatar');
         $fileLinks = $this->fileDomainService->getLinks($organizationCode, $avatars);
 
-        // 转换为AgentItemDTO格式
+        // 转换为AgentItemDTOformat
         /** @var array<AgentItemDTO> $result */
         $result = [];
         foreach ($agentVersions as $agent) {

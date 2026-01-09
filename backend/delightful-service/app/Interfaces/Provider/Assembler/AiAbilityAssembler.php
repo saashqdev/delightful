@@ -87,11 +87,11 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configuration数据进行解密.
+     * 对configuration数据进行decrypt.
      *
-     * @param string $config 加密的configurationstring
+     * @param string $config encrypt的configurationstring
      * @param string $salt 盐value(通常是recordID)
-     * @return array 解密后的configurationarray
+     * @return array decrypt后的configurationarray
      */
     public static function decodeConfig(string $config, string $salt): array
     {
@@ -103,11 +103,11 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configuration数据进行编码(JSON编码 + AES加密).
+     * 对configuration数据进行编码(JSON编码 + AESencrypt).
      *
      * @param array $config configurationarray
      * @param string $salt 盐value(通常是recordID)
-     * @return string 加密后的configurationstring
+     * @return string encrypt后的configurationstring
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -130,7 +130,7 @@ class AiAbilityAssembler
             if ($key === 'api_key' && is_string($value) && ! empty($value)) {
                 $result[$key] = self::maskApiKey($value);
             }
-            // 如果是array，递归处理
+            // 如果是array，递归process
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
@@ -170,10 +170,10 @@ class AiAbilityAssembler
     }
 
     /**
-     * 生成AES加密密钥(基础密钥 + 盐value).
+     * generateAESencryptkey(基础key + 盐value).
      *
      * @param string $salt 盐value
-     * @return string AES密钥
+     * @return string AESkey
      */
     private static function _getAesKey(string $salt): string
     {

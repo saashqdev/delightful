@@ -150,7 +150,7 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * 生成taskstatus的 Redis 键名.
+     * generatetaskstatus的 Redis 键名.
      *
      * @param string $taskKey task键
      * @param string $userId userID
@@ -158,14 +158,14 @@ readonly class AsrTaskRepository
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // 按统一规则生成string，然后 MD5 避免键名过长
+        // 按统一规则generatestring，然后 MD5 避免键名过长
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);
     }
 
     /**
-     * 生成心跳 Key.
+     * generate心跳 Key.
      *
      * @param string $taskKey task键
      * @param string $userId userID

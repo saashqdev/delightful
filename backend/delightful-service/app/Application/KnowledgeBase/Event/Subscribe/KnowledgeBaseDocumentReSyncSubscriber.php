@@ -51,10 +51,10 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         /** @var LoggerInterface $logger */
         $logger = di(LoggerInterface::class);
 
-        // get分布式锁
+        // get分布式lock
         $lockKey = "document_re_sync:{$documentEntity->getKnowledgeBaseCode()}:{$documentEntity->getCode()}";
-        if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5分钟超时
-            $logger->info('文档[' . $documentEntity->getCode() . ']正在被其他进程处理，跳过sync');
+        if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5分钟timeout
+            $logger->info('文档[' . $documentEntity->getCode() . ']正在被其他进程process，跳过sync');
             return;
         }
 
@@ -82,7 +82,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorAppService */
         $knowledgeBaseVectorAppService = di(KnowledgeBaseVectorAppService::class);
 
-        // 自增版本号(抢锁)
+        // 自增version号(抢lock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
         // 如果自增fail，说明已经重新向量化过了，提前结束
         if ($affectedRows === 0) {

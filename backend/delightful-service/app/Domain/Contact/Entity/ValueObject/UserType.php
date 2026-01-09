@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * delightful_user的类型.
+ * delightful_user的type.
  */
 enum UserType: int
 {
@@ -19,7 +19,7 @@ enum UserType: int
     case Human = 1;
 
     /**
-     * 将枚举类型转换:0转为ai,1转为 user.
+     * 将枚举type转换:0转为ai,1转为 user.
      */
     public static function getCaseFromName(string $typeName): ?self
     {

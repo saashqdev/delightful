@@ -32,7 +32,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一编码，仅在create时生成，用作给前端的id.
+     * 唯一编码，仅在create时generate，用作给前端的id.
      */
     protected string $code;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * process的回调function，如果有该value，那么将直接执行该选择，而不是passNodeRunner来执行.
+     * process的callbackfunction，如果有该value，那么将直接execute该选择，而不是passNodeRunner来execute.
      */
     private ?Closure $callback = null;
 
@@ -207,7 +207,7 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->modifier = $publisher;
         $this->updatedAt = new DateTime('now');
 
-        // publish时need按照开启来处理
+        // publish时need按照开启来process
         $enable = $this->enabled;
         $this->enabled = true;
         $this->nodeValidate(true);

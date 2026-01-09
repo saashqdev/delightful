@@ -25,7 +25,7 @@ class MCPExceptionHandler
     }
 
     /**
-     * 处理exception并转换为标准error响应.
+     * processexception并转换为标准errorresponse.
      */
     public function handle(Throwable $exception, int $id = 0, string $jsonrpc = '2.0'): ErrorResponse
     {

@@ -89,7 +89,7 @@ class DelightfulFlowExecutor
 
     public function execute(?TriggerType $appointTriggerType = null): array
     {
-        // 真正开始执行时，才will产生执行 id
+        // 真正开始execute时，才will产生execute id
         $this->createExecuteLog();
         $this->executorId = (string) $this->delightfulFlowExecuteLogEntity->getId();
 
@@ -148,7 +148,7 @@ class DelightfulFlowExecutor
             $this->addEdges();
             $this->checkCircularDependencies();
         } else {
-            // 具有 callback 的process不参与重试与async
+            // 具有 callback 的process不参与retry与async
             $this->async = false;
         }
         if ($this->executionData->getExecutionType()->isDebug()) {
@@ -171,7 +171,7 @@ class DelightfulFlowExecutor
 
     protected function begin(array $args): void
     {
-        // 同时只能有一个processid在执行
+        // 同时只能有一个processid在execute
         if (! $this->locker->mutexLock($this->getLockerKey(), $this->executorId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, "{$this->executorId} is running");
         }
@@ -189,7 +189,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // 循环时，不处理后面的数据
+            // 循环时，不process后面的数据
             return;
         }
 
@@ -227,7 +227,7 @@ class DelightfulFlowExecutor
         $this->archiveToCloud($vertexResult);
 
         if (! $nodeDebugResult->isSuccess()) {
-            // 如果是 API 请求，抛出errorinfo
+            // 如果是 API request，抛出errorinfo
             if ($this->executionData->getExecutionType()->isApi()) {
                 // 如果不是助理parametercall 才recorderrorinfo
                 if (! $this->executionData->getTriggerData()->isAssistantParamCall()) {
@@ -255,7 +255,7 @@ class DelightfulFlowExecutor
     {
         $result = [];
 
-        // 如果是asynccall的 API 或者 执行fail了
+        // 如果是asynccall的 API 或者 executefail了
         if ($this->executionData->getExecutionType()->isApi() || ! $this->success) {
             $result = match ($this->executionData->getTriggerType()) {
                 TriggerType::ChatMessage => [
@@ -283,7 +283,7 @@ class DelightfulFlowExecutor
             $this->updateStatus(ExecuteLogStatus::Failed, $result);
         }
 
-        // 将currentprocess产生的 api 执行result传递给上一层的数据
+        // 将currentprocess产生的 api executeresult传递给上一层的数据
         if ($parentExecutionData = ExecutionDataCollector::get($this->executionData->getUniqueParentId())) {
             foreach ($this->executionData->getReplyMessages() as $replyMessage) {
                 $parentExecutionData->addReplyMessage($replyMessage);
@@ -426,11 +426,11 @@ class DelightfulFlowExecutor
             if ($node->getParentId()) {
                 continue;
             }
-            // 运行前就先尝试进行所有节点的parameter检测，用于提前生成好 NodeParamsConfig
+            // 运行前就先尝试进行所有节点的parameter检测，用于提前generate好 NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // 有些是悬浮节点（即在process运行中不will被use节点)，兜底will在执行时再次进行parameterverify
+                // 有些是悬浮节点（即在process运行中不will被use节点)，兜底will在execute时再次进行parameterverify
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -455,7 +455,7 @@ class DelightfulFlowExecutor
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // default是要调度下一级的，如果不need调度，在具体的执行中canset为[]
+                // default是要调度下一级的，如果不need调度，在具体的execute中canset为[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // 添加 flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -520,7 +520,7 @@ class DelightfulFlowExecutor
             Coroutine::create(function () use ($fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
 
-                // 利用自旋锁来控制只有一个在save
+                // 利用自旋lock来控制只有一个在save
                 if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->delightfulFlowExecuteLogEntity->getExecuteDataId(), 20)) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'archive file failed');
                 }

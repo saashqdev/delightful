@@ -43,8 +43,8 @@ return new class extends Migration {
             $table->decimal('output_cost', 10, 4)->nullable()->comment('输出成本');
             $table->decimal('cache_hit_cost', 10, 4)->nullable()->comment('cache命中成本');
             $table->decimal('cache_write_cost', 10, 4)->nullable()->comment('cachewrite成本');
-            $table->integer('version')->default(1)->comment('版本号');
-            $table->boolean('is_current_version')->default(true)->comment('是否current版本：1-是，0-否');
+            $table->integer('version')->default(1)->comment('version号');
+            $table->boolean('is_current_version')->default(true)->comment('是否currentversion：1-是，0-否');
             $table->timestamps();
 
             $table->index(['service_provider_model_id', 'is_current_version'], 'idx_model_id_is_current');

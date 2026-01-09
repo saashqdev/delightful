@@ -47,7 +47,7 @@ class QuickInstructionNode extends AbstractCustomNode
                 $switchText = $switchStatus === SwitchStatus::ON ? $messageForStatusOn : $messageForStatusOff;
                 $value = '';
                 if (json_validate($templateContent)) {
-                    // 正常的格式
+                    // 正常的format
                     $templateContentParsed = Json::decode($templateContent);
                     foreach ($templateContentParsed as $item) {
                         switch (InstructionContentType::tryFrom($item['type'])) {
@@ -60,7 +60,7 @@ class QuickInstructionNode extends AbstractCustomNode
                         }
                     }
                 } else {
-                    // 兼容old格式
+                    // 兼容oldformat
                     $value .= $switchText . ' ';
                 }
 
@@ -69,7 +69,7 @@ class QuickInstructionNode extends AbstractCustomNode
                 return htmlspecialchars($nodeForArray['text'] ?? '', ENT_QUOTES, 'UTF-8');
             case InstructionType::SINGLE_CHOICE:
             default:
-                // 前端传的 value 是 id 因此need处理一下
+                // 前端传的 value 是 id 因此needprocess一下
                 $value = $nodeForArray['attrs']['value'] ?? '';
                 $instruction = $nodeForArray['attrs']['instruction'] ?? [];
                 $values = $instruction['values'] ?? [];

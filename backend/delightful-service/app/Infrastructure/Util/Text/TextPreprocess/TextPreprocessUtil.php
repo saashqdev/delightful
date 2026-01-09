@@ -14,12 +14,12 @@ use App\Infrastructure\Util\Text\TextPreprocess\Strategy\TextPreprocessStrategyI
 use App\Infrastructure\Util\Text\TextPreprocess\ValueObject\TextPreprocessRule;
 
 /**
- * 文本预处理tool.
+ * 文本预processtool.
  */
 class TextPreprocessUtil
 {
     /**
-     * according to文本预处理规则进行预处理.
+     * according to文本预process规则进行预process.
      * @param array<TextPreprocessRule> $rules
      */
     public static function preprocess(array $rules, string $text): string

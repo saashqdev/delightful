@@ -33,7 +33,7 @@ class VolcengineArkAPI
     }
 
     /**
-     * 生成图像 - 完全透传payload给API.
+     * generate图像 - 完全透传payload给API.
      */
     public function generateImage(array $payload): array
     {
@@ -41,7 +41,7 @@ class VolcengineArkAPI
     }
 
     /**
-     * 发送 HTTP 请求.
+     * send HTTP request.
      */
     protected function makeRequest(array $payload): array
     {
@@ -61,7 +61,7 @@ class VolcengineArkAPI
 
         if ($response->getStatusCode() !== 200) {
             $errorMessage = $result['error']['message'] ?? "HTTP error: {$response->getStatusCode()}";
-            throw new Exception("VolcengineArk API 请求fail: {$errorMessage}");
+            throw new Exception("VolcengineArk API requestfail: {$errorMessage}");
         }
 
         if (isset($result['error'])) {

@@ -21,7 +21,7 @@ use Hyperf\Context\ApplicationContext;
 #[FlowNodeDefine(
     type: NodeType::CacheGet->value,
     code: NodeType::CacheGet->name,
-    name: '持久化data库 / data加载',
+    name: '持久化data库 / dataload',
     paramsConfig: CacheGetNodeParamsConfig::class,
     version: 'v1',
     singleDebug: false,

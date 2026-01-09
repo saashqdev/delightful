@@ -50,7 +50,7 @@ return new class extends Migration {
         $logger->info('start清理 service_provider 相关表的软delete数据');
 
         try {
-            // use事务ensure数据一致性
+            // usetransactionensure数据一致性
             Db::transaction(function () use ($logger) {
                 $totalDeleted = 0;
 
@@ -99,9 +99,9 @@ return new class extends Migration {
         $logger->info('start清null官方organization的 Delightful 服务商configuration和模型');
 
         try {
-            // use事务ensure数据一致性
+            // usetransactionensure数据一致性
             Db::transaction(function () use ($logger) {
-                // 获取官方organization编码
+                // get官方organization编码
                 $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
                 $logger->info("官方organization编码: {$officialOrganizationCode}");
 
@@ -164,7 +164,7 @@ return new class extends Migration {
         $logger->info('start清洗 Official 服务商的 description 和 translate 字段');
 
         try {
-            // use事务ensure数据一致性
+            // usetransactionensure数据一致性
             Db::transaction(function () use ($logger) {
                 // queryneed清洗的 Official 服务商记录
                 $query = Db::table('service_provider')
@@ -189,7 +189,7 @@ return new class extends Migration {
                         $needUpdate = true;
                     }
 
-                    // 更新记录
+                    // update记录
                     if ($needUpdate) {
                         Db::table('service_provider')
                             ->where('id', $provider['id'])
@@ -216,14 +216,14 @@ return new class extends Migration {
         $logger->info('start清理 service_provider_models 表的冗余数据');
 
         try {
-            // 1. 获取官方organization编码
+            // 1. get官方organization编码
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
             $logger->info("官方organization编码: {$officialOrganizationCode}");
 
-            // 2. 单独事务：reset官方organization模型的 model_parent_id
+            // 2. 单独transaction：reset官方organization模型的 model_parent_id
             $this->resetOfficialModelsParentId($officialOrganizationCode, $logger);
 
-            // 3. 获取官方organization所有启用的模型（不need事务）
+            // 3. get官方organization所有启用的模型（不needtransaction）
             $officialEnabledModels = Db::table('service_provider_models')
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('status', Status::Enabled->value)
@@ -234,9 +234,9 @@ return new class extends Migration {
                 ->toArray();
 
             $officialModelIds = array_keys($officialEnabledModels);
-            $logger->info('获取官方organization启用模型quantity: ' . count($officialModelIds));
+            $logger->info('get官方organization启用模型quantity: ' . count($officialModelIds));
 
-            // 4. 获取所有非官方organization编码（不need事务）
+            // 4. get所有非官方organization编码（不needtransaction）
             $allOrganizationCodes = Db::table('service_provider_models')
                 ->where('organization_code', '!=', $officialOrganizationCode)
                 ->whereNull('deleted_at')
@@ -246,7 +246,7 @@ return new class extends Migration {
 
             $logger->info('need清理的organizationquantity: ' . count($allOrganizationCodes));
 
-            // 5. 按organizationhandle清理工作（小事务）
+            // 5. 按organizationhandle清理工作（小transaction）
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
         } catch (Throwable $e) {
             $logger->error('清理 service_provider_models 冗余数据过程中发生error: ' . $e->getMessage());
@@ -255,7 +255,7 @@ return new class extends Migration {
     }
 
     /**
-     * reset官方organization模型的 parent_id（单独事务）.
+     * reset官方organization模型的 parent_id（单独transaction）.
      */
     private function resetOfficialModelsParentId(string $officialOrganizationCode, LoggerInterface $logger): void
     {
@@ -269,7 +269,7 @@ return new class extends Migration {
     }
 
     /**
-     * 分批并发清理各个organization的数据（每个organization独立小事务）.
+     * 分批并发清理各个organization的数据（每个organization独立小transaction）.
      */
     private function cleanOrganizationsInBatches(array $organizationCodes, array $officialModelIds, array $officialEnabledModels, LoggerInterface $logger): void
     {
@@ -326,12 +326,12 @@ return new class extends Migration {
     }
 
     /**
-     * 清理单个organization的数据（单独事务）.
+     * 清理单个organization的数据（单独transaction）.
      */
     private function cleanSingleOrganization(string $organizationCode, array $officialModelIds, array $officialEnabledModels): array
     {
         return Db::transaction(function () use ($organizationCode, $officialModelIds, $officialEnabledModels) {
-            // 获取官方organization编码用于安全防护
+            // get官方organization编码用于安全防护
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
             // 防护check：ensure不handle官方organization
@@ -354,7 +354,7 @@ return new class extends Migration {
             $invalidConfigDeletedCount = $this->cleanModelsWithInvalidConfig($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDeletedCount;
 
-            // 3. deleteconfigurationinvalid的模型（configuration解密后为null或所有value都是null）
+            // 3. deleteconfigurationinvalid的模型（configurationdecrypt后为null或所有value都是null）
             $invalidConfigDataDeletedCount = $this->cleanModelsWithInvalidConfigData($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDataDeletedCount;
 
@@ -447,7 +447,7 @@ return new class extends Migration {
     }
 
     /**
-     * 清理configuration数据invalid的模型（configuration解密后为null或所有value都是null）.
+     * 清理configuration数据invalid的模型（configurationdecrypt后为null或所有value都是null）.
      */
     private function cleanModelsWithInvalidConfigData(string $organizationCode, string $officialOrganizationCode): int
     {
@@ -464,7 +464,7 @@ return new class extends Migration {
         // 2. 循环check每个configuration的valid性
         foreach ($configs as $config) {
             try {
-                // 解密configuration（useconfiguration ID 作为 salt）
+                // decryptconfiguration（useconfiguration ID 作为 salt）
                 $decodedConfig = ProviderConfigAssembler::decodeConfig($config['config'], (string) $config['id']);
 
                 // checkconfiguration是否valid
@@ -472,7 +472,7 @@ return new class extends Migration {
                     $invalidConfigIds[] = $config['id'];
                 }
             } catch (Throwable $e) {
-                // 如果解密fail，也认为是invalidconfiguration
+                // 如果decryptfail，也认为是invalidconfiguration
                 $invalidConfigIds[] = $config['id'];
             }
         }
@@ -490,7 +490,7 @@ return new class extends Migration {
     }
 
     /**
-     * check解密后的configuration数据是否invalid.
+     * checkdecrypt后的configuration数据是否invalid.
      * @param mixed $decodedConfig
      */
     private function isConfigDataInvalid($decodedConfig): bool
@@ -518,7 +518,7 @@ return new class extends Migration {
     }
 
     /**
-     * 获取log记录器.
+     * getlog记录器.
      */
     private function getLogger(): LoggerInterface
     {

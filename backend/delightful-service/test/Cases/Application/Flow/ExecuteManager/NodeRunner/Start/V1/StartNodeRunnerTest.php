@@ -171,7 +171,7 @@ JSON, true));
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
         $this->assertEquals(['node_2'], $vertexResult->getChildrenIds());
 
-        // 10s内，所以不will执行
+        // 10s内，所以不willexecute
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEmpty($vertexResult->getChildrenIds());
     }
@@ -393,7 +393,7 @@ JSON,
     public function testParamCallWithErrorJsonSchema()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('JSON Schema 格式error：[user_list] Array type must have items');
+        $this->expectExceptionMessage('JSON Schema formaterror：[user_list] Array type must have items');
 
         // create一个contain系统保留field的节点configuration，这should在validate阶段抛出exception
         $node = Node::generateTemplate(NodeType::Start, json_decode(

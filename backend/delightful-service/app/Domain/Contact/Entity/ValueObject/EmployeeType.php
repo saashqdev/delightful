@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * 员工类型.
+ * 员工type.
  */
 enum EmployeeType: int
 {

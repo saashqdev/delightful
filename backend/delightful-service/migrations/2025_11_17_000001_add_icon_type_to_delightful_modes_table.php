@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_modes', function (Blueprint $table) {
-            $table->tinyInteger('icon_type')->default(1)->comment('icon类型 1:icon 2:image')->after('icon');
+            $table->tinyInteger('icon_type')->default(1)->comment('icontype 1:icon 2:image')->after('icon');
             $table->string('icon_url', 512)->default('')->comment('iconimageURL')->after('icon_type');
         });
     }

@@ -105,9 +105,9 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量getfile链接（自动从路径提取organization编码并分组处理）.
-     * @param string[] $filePaths containorganization编码的file路径array，格式：orgCode/path/file.ext
-     * @param null|StorageBucketType $bucketType 存储桶type，default为Public
+     * 批量getfile链接（自动从路径提取organization编码并分组process）.
+     * @param string[] $filePaths containorganization编码的file路径array，format：orgCode/path/file.ext
+     * @param null|StorageBucketType $bucketType storage桶type，default为Public
      * @return array<string,FileLink> file路径到FileLink的映射
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
@@ -253,11 +253,11 @@ readonly class FileDomainService
     }
 
     /**
-     * 从云存储getfilelist.
+     * 从云storagegetfilelist.
      *
      * @param string $organizationCode organization编码
      * @param string $directoryPrefix 目录前缀
-     * @param StorageBucketType $bucketType 存储桶type
+     * @param StorageBucketType $bucketType storage桶type
      * @return CloudFileInfoDTO[] fileDTOobjectarray
      */
     public function getFilesFromCloudStorage(

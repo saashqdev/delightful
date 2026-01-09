@@ -31,7 +31,7 @@ class VolcengineSms extends VolcengineApi
     protected string $action = 'SendSms';
 
     /**
-     * 接口版本.
+     * 接口version.
      */
     protected string $version = '2020-01-01';
 
@@ -39,11 +39,11 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * 发送verify码,火山的verify码短信不支持传入指定的数字.
+     * sendverify码,火山的verify码短信不支持传入指定的数字.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
-        // 去掉手机号的特殊格式
+        // 去掉手机号的特殊format
         $phone = str_replace(['+00', '-'], '', $phone);
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
@@ -58,7 +58,7 @@ class VolcengineSms extends VolcengineApi
         $msg = 'success';
         try {
             $groupId = $this->template->getMessageGroupId($templateId);
-            // initialize,set公共的请求parameter
+            // initialize,set公共的requestparameter
             $this->init($groupId, $signStr, $templateId);
             // setverify码短信的特有body结构
             $body = [
@@ -77,8 +77,8 @@ class VolcengineSms extends VolcengineApi
             $this->sendRequest();
         } catch (Throwable$exception) {
             $errCode = -1;
-            $msg = '短信发送fail';
-            $this->logger->error('短信发送fail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
+            $msg = '短信sendfail';
+            $this->logger->error('短信sendfail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
         // 将returnresult与创蓝统一,避免bug
         return $sendResult->setResult($errCode, $msg);

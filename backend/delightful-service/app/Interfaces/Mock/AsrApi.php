@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * ASR task Mock service
- * 模拟沙箱中的audio合并和 ASR task处理.
+ * 模拟沙箱中的audio合并和 ASR taskprocess.
  */
 class AsrApi
 {
@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * complete ASR task（支持轮询）- V2 结构化版本
+     * complete ASR task（支持轮询）- V2 结构化version
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -131,7 +131,7 @@ class AsrApi
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
         // 模拟真实沙箱行为：according to output_filename 重命名目录
-        // 提取原目录中的time戳部分（格式：_YYYYMMDD_HHMMSS）
+        // 提取原目录中的time戳部分（format：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
@@ -144,7 +144,7 @@ class AsrApi
         $audioFileName = $outputFilename . '.webm';
         $audioPath = rtrim($renamedDir, '/') . '/' . $audioFileName;
 
-        // buildreturn数据 (V2 详细版本)
+        // buildreturn数据 (V2 详细version)
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
@@ -171,16 +171,16 @@ class AsrApi
 
         // 如果有笔记fileconfiguration且filesize > 0，添加到return中（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // use请求中提供的 target_path，而不是硬编码file名
+            // userequest中提供的 target_path，而不是硬编码file名
             // 这样cancorrect支持国际化的file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
             // 模拟真实沙箱行为：只有当笔记file有content时才return详细info
-            // 这里简化处理，default假设有content（真实沙箱willcheckfilecontent是否为空）
+            // 这里简化process，default假设有content（真实沙箱willcheckfilecontent是否为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
-                'path' => $noteFilePath, // use请求中的 target_path
+                'path' => $noteFilePath, // userequest中的 target_path
                 'size' => 256, // 模拟有content的filesize
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',

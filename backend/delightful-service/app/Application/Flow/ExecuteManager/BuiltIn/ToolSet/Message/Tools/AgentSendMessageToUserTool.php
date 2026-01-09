@@ -30,7 +30,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
             $params = $executionData->getTriggerData()->getParams();
             // $delightfulAgentAppService = di(DelightfulAgentAppService::class);
             $senderUserId = $executionData->getAgentUserId();
-            // 助手发送message
+            // 助手sendmessage
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();
@@ -50,7 +50,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
                 );
             }
             return [
-                'message' => '发送messagesuccess',
+                'message' => 'sendmessagesuccess',
             ];
         };
     }
@@ -67,7 +67,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '发送message给个人';
+        return 'sendmessage给个人';
     }
 
     public function getInput(): ?NodeInput
@@ -94,8 +94,8 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
         "receiver_user_ids": {
             "type": "array",
             "key": "receiver_user_ids",
-            "title": "接收人的userid",
-            "description": "接收人的userid",
+            "title": "receive人的userid",
+            "description": "receive人的userid",
             "required": null,
             "value": null,
             "encryption": false,
@@ -158,7 +158,7 @@ JSON,
        "type": "string",
        "key": "deadline",
        "title": "截止日期",
-       "description": "截止日期，格式：YYYY-MM-DD",
+       "description": "截止日期，format：YYYY-MM-DD",
        "required": null,
        "value": null,
        "encryption": false,
@@ -169,8 +169,8 @@ JSON,
    "interval": {
        "type": "number",
        "key": "interval",
-       "title": "failed重试次数",
-       "description": "failed重试次数",
+       "title": "failedretry次数",
+       "description": "failedretry次数",
        "required": null,
        "value": null,
        "encryption": false,

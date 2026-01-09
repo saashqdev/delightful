@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('name', 255)->comment('文档name');
             $table->string('description', 255)->comment('description');
             $table->string('code', 255)->comment('文档code');
-            $table->unsignedInteger('version')->default(1)->comment('版本');
+            $table->unsignedInteger('version')->default(1)->comment('version');
             $table->boolean('enabled')->default(true)->comment('1 启用 0 禁用');
             $table->unsignedInteger('doc_type')->comment('文档type');
             $table->json('doc_metadata')->nullable()->comment('文档元数据');

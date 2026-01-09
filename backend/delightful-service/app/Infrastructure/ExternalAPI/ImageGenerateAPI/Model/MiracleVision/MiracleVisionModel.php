@@ -54,7 +54,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function imageConvertHigh(ImageGenerateRequest $imageGenerateRequest): string
     {
-        $this->logger->info('美图超清转换：开始处理转换请求', [
+        $this->logger->info('美图超清转换：开始process转换request', [
             'request_type' => get_class($imageGenerateRequest),
         ]);
 
@@ -168,7 +168,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function handleTaskStatus(int $status, array $result, MiracleVisionModelResponse $response): MiracleVisionModelResponse
     {
-        $this->logger->info('美图超清转换：处理taskstatusinfo', ['status' => $status]);
+        $this->logger->info('美图超清转换：processtaskstatusinfo', ['status' => $status]);
 
         switch ($status) {
             case self::STATUS_SUCCESS:
@@ -178,14 +178,14 @@ class MiracleVisionModel extends AbstractImageGenerate
                 }
                 $response->setFinishStatus(true);
                 $response->setUrls($result['data']['result']['urls']);
-                $this->logger->info('美图超清转换：task处理success', [
+                $this->logger->info('美图超清转换：taskprocesssuccess', [
                     'urls_count' => count($result['data']['result']['urls']),
                 ]);
                 break;
             case self::STATUS_PROCESSING:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美图超清转换：task处理进行中', [
+                $this->logger->info('美图超清转换：taskprocess进行中', [
                     'progress' => $result['data']['progress'],
                 ]);
                 // no break
@@ -202,7 +202,7 @@ class MiracleVisionModel extends AbstractImageGenerate
                 $response->setFinishStatus(false);
                 $response->setError($result['message'] ?? '未知error');
                 $this->logger->error(
-                    $status === self::STATUS_NOT_FOUND ? '美图超清转换：task不存在' : '美图超清转换：task处理fail',
+                    $status === self::STATUS_NOT_FOUND ? '美图超清转换：task不存在' : '美图超清转换：taskprocessfail',
                     ['status' => $status, 'response' => $result]
                 );
         }
@@ -213,7 +213,7 @@ class MiracleVisionModel extends AbstractImageGenerate
     private function validateRequest(ImageGenerateRequest $request): void
     {
         if (! $request instanceof MiracleVisionModelRequest) {
-            $this->logger->error('美图超清转换：请求type不匹配', ['class' => get_class($request)]);
+            $this->logger->error('美图超清转换：requesttype不匹配', ['class' => get_class($request)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -244,10 +244,10 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateApiResponse(array $result): void
     {
-        $this->logger->info('美图API：开始verify响应数据', ['response' => $result]);
+        $this->logger->info('美图API：开始verifyresponse数据', ['response' => $result]);
 
         if (! isset($result['code'])) {
-            $this->logger->warning('美图API：响应格式exception', ['response' => $result]);
+            $this->logger->warning('美图API：responseformatexception', ['response' => $result]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -260,7 +260,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message'] ?? '');
         }
 
-        $this->logger->info('美图API：响应数据verifypass');
+        $this->logger->info('美图API：response数据verifypass');
     }
 
     // todo xhy 目前只能强制return 26 ，因为无法对image场景做匹配

@@ -73,7 +73,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
                 $knowledge->setSyncStatus(KnowledgeSyncStatus::Synced);
                 $changed = true;
             }
-            // 预处理documentFile
+            // 预processdocumentFile
             $processedDocumentFiles = $documentFileStrategy->preProcessDocumentFiles($dataIsolation, $event->documentFiles);
 
             // according tofiles批量createdocument

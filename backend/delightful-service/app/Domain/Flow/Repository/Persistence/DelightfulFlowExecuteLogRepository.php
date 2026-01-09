@@ -48,11 +48,11 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
         $builder = $builder
             ->whereIn('status', [ExecuteLogStatus::Running, ExecuteLogStatus::Pending])
-            // 只重试顶层
+            // 只retry顶层
             ->where('level', 0)
-            // 重试次数less than 3 次
+            // retry次数less than 3 次
             ->where('retry_count', '<', 1)
-            // 只get最近 2 小时内的data，超过 2 小时的data不再处理
+            // 只get最近 2 小时内的data，超过 2 小时的data不再process
             ->where('created_at', '>', date('Y-m-d H:i:s', time() - 7200))
             ->where('created_at', '<', date('Y-m-d H:i:s', time() - $timeout))
             ->forPage($page->getPage(), $page->getPageNum());

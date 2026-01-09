@@ -55,7 +55,7 @@ class AdminModeAppService extends AbstractModeAppService
         // 转换为DTO
         $modeAggregateDTO = AdminModeAssembler::aggregateToAdminDTO($modeAggregate, $providerModels);
 
-        // 处理icon
+        // processicon
         $this->processModeAggregateIcons($modeAggregateDTO);
 
         return $modeAggregateDTO;
@@ -72,7 +72,7 @@ class AdminModeAppService extends AbstractModeAppService
         // 转换为DTO
         $modeAggregateDTO = AdminModeAssembler::aggregateToAdminDTO($modeAggregate, $providerModels);
 
-        // 处理icon
+        // processicon
         $this->processModeAggregateIcons($modeAggregateDTO);
 
         return $modeAggregateDTO;
@@ -118,7 +118,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将update请求应用到现有实体（只updateallow修改的field）
+            // 将updaterequest应用到现有实体（只updateallow修改的field）
             AdminModeAssembler::applyUpdateRequestToEntity($request, $existingMode);
 
             $updatedMode = $this->modeDomainService->updateMode($dataIsolation, $existingMode);

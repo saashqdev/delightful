@@ -32,17 +32,17 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected int $relType = 0;
 
     /**
-     * API密钥名称.
+     * APIkey名称.
      */
     protected string $name = '';
 
     /**
-     * API密钥description.
+     * APIkeydescription.
      */
     protected string $description = '';
 
     /**
-     * 密钥.
+     * key.
      */
     protected string $secretKey = '';
 

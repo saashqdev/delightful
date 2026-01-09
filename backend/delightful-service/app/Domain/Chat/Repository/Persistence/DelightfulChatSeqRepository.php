@@ -148,8 +148,8 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪到 delightful_chat_topic_messages 处理
-     * session窗口滚动加载历史record.
+     * @todo 挪到 delightful_chat_topic_messages process
+     * session窗口滚动load历史record.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -159,8 +159,8 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪到 delightful_chat_topic_messages 处理
-     * session窗口滚动加载历史record.
+     * @todo 挪到 delightful_chat_topic_messages process
+     * session窗口滚动load历史record.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
@@ -210,7 +210,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         )
         SELECT * FROM RankedMessages WHERE row_num <= ? ORDER BY conversation_id, seq_id DESC
 sql;
-        // 生成pdo绑定
+        // generatepdo绑定
         $pdoBinds = implode(',', array_fill(0, count($conversationIds), '?'));
         $query = sprintf($rawSql, $pdoBinds);
         $seqList = Db::select($query, [...$conversationIds, $messagesQueryDTO->getLimit()]);
@@ -218,7 +218,7 @@ sql;
     }
 
     /**
-     * get收件方message的status变更流.
+     * get收件方message的status变更stream.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      * @return DelightfulSeqEntity[]
      */
@@ -232,7 +232,7 @@ sql;
     }
 
     /**
-     * get发件方message的status变更流.
+     * get发件方message的status变更stream.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      * @return DelightfulSeqEntity[]
      */
@@ -333,7 +333,7 @@ sql;
         return SeqAssembler::getSeqEntity($seqInfo);
     }
 
-    // todo 移到 delightful_chat_topic_messages 处理
+    // todo 移到 delightful_chat_topic_messages process
     public function getConversationSeqByType(string $delightfulId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity
     {
         $query = $this->delightfulSeq::query()
@@ -425,7 +425,7 @@ sql;
     }
 
     /**
-     * updatemessage接收人list.
+     * updatemessagereceive人list.
      */
     public function updateReceiveList(DelightfulSeqEntity $seqEntity): bool
     {
@@ -461,7 +461,7 @@ sql;
     }
 
     /**
-     * getmessage的status变更流.
+     * getmessage的status变更stream.
      * @return DelightfulSeqEntity[]
      */
     private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
@@ -507,7 +507,7 @@ sql;
         if (! empty($delightfulMessageIds)) {
             $messages = $this->delightfulMessageRepository->getMessages($delightfulMessageIds);
         }
-        // 将控制message/chatmessage一起放入user的message流中
+        // 将控制message/chatmessage一起放入user的messagestream中
         return SeqAssembler::getClientSeqStructs($seqInfos, $messages);
     }
 

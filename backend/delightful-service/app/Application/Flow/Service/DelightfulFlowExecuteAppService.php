@@ -114,7 +114,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
 
-        // 如果有节点执行fail，抛出exception
+        // 如果有节点executefail，抛出exception
         foreach ($delightfulFlow->getNodes() as $node) {
             $nodeDebugResult = $node->getNodeDebugResult();
             if ($nodeDebugResult && ! $nodeDebugResult->isSuccess()) {
@@ -381,11 +381,11 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
     }
 
     /**
-     * 定时task触发.
+     * scheduletask触发.
      */
     public static function routine(string $flowCode, string $branchId, array $routineConfig = []): void
     {
-        // 暂时只有系统级别的定时task
+        // 暂时只有系统级别的scheduletask
         $dataIsolation = FlowDataIsolation::create();
         $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
         if (! $delightfulFlow) {

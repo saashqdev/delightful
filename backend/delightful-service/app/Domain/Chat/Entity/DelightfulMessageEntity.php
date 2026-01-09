@@ -30,19 +30,19 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $senderId = '';
 
     /**
-     * 发送方type. user:user(ai也被认为是user)，group：group chat，system：系统message，cloud_document：云文档，multidimensional_table：多维table格 topic：话题 app：应用message.
+     * send方type. user:user(ai也被认为是user)，group：group chat，system：系统message，cloud_document：云文档，multidimensional_table：多维table格 topic：话题 app：应用message.
      */
     protected ConversationType $senderType;
 
     /**
-     * 发送者所属organization编码.
+     * send者所属organization编码.
      */
     protected string $senderOrganizationCode = '';
 
     protected string $receiveId = '';
 
     /**
-     * 接收objecttype. user:user(ai也被认为是user)，group：group chat，system：系统message，cloud_document：云文档，multidimensional_table：多维table格 topic：话题 app：应用message.
+     * receiveobjecttype. user:user(ai也被认为是user)，group：group chat，system：系统message，cloud_document：云文档，multidimensional_table：多维table格 topic：话题 app：应用message.
      * @see UserType
      */
     protected ConversationType $receiveType;

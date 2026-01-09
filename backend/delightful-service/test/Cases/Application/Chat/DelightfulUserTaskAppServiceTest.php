@@ -53,7 +53,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
     //     // {"branchId": "branch_83f180194d23", "flowCode": "DELIGHTFUL-FLOW-6784c05fc92ec0-09863904", "routineConfig": {"day": null, "time": "00:00", "type": "daily_repeat", "topic": {"name": null, "type": ""}, "value": {"unit": null, "values": null, "deadline": null, "interval": null}}}
     //     $flowCode = 'DELIGHTFUL-FLOW-6784c05fc92ec0-09863904';
     //     //  $branchId = 'branch_83f180194d23';
-    //     // 执行test
+    //     // executetest
     //      $service::callback($flowCode, $userTask, $userTaskValue);
 
     //     // verifyresult

@@ -88,7 +88,7 @@ class ModeAppService extends AbstractModeAppService
             );
             $upgradeRequiredModelIds = $this->organizationModelFilter->getUpgradeRequiredModelIds($authorization->getOrganizationCode());
         } else {
-            // 如果没有organizationfilter器，return所有model（开源版本行为）
+            // 如果没有organizationfilter器，return所有model（开源version行为）
             $providerModels = $allAggregateModels;
         }
 
@@ -99,7 +99,7 @@ class ModeAppService extends AbstractModeAppService
                 $allAggregateImageModels
             );
         } else {
-            // 如果没有organizationfilter器，return所有model（开源版本行为）
+            // 如果没有organizationfilter器，return所有model（开源version行为）
             $providerImageModels = $allAggregateImageModels;
         }
 
@@ -109,7 +109,7 @@ class ModeAppService extends AbstractModeAppService
             $modeAggregateDTOs[$aggregate->getMode()->getIdentifier()] = ModeAssembler::aggregateToDTO($aggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
         }
 
-        // 处理图标URL转换
+        // process图标URL转换
         foreach ($modeAggregateDTOs as $aggregateDTO) {
             $this->processModeAggregateIcons($aggregateDTO);
         }
@@ -167,14 +167,14 @@ class ModeAppService extends AbstractModeAppService
         $providerModels = $this->getModels($modeAggregate);
         $modeGroupDetailDTOS = ModeAssembler::aggregateToFlatGroupsDTO($modeAggregate, $providerModels);
 
-        // 处理图标路径转换为完整URL
+        // process图标路径转换为完整URL
         $this->processModeGroupDetailIcons($authorization, $modeGroupDetailDTOS);
 
         return $modeGroupDetailDTOS;
     }
 
     /**
-     * 批量getmodel和service商status（performanceoptimize版本）.
+     * 批量getmodel和service商status（performanceoptimizeversion）.
      * @param array $allModelIds 所有needquery的modelId
      * @return array<string, ProviderModelEntity> 已pass级联status筛选的可用model
      */

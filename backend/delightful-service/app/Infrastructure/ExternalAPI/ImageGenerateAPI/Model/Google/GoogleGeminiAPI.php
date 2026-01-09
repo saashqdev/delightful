@@ -96,11 +96,11 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像editsettingcorrect的生成configuration
+        // 为图像editsettingcorrect的generateconfiguration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：指定我们need图像响应
+            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：指定我们need图像response
             'topP' => 0.95,
         ];
 
@@ -150,11 +150,11 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像editsettingcorrect的生成configuration
+        // 为图像editsettingcorrect的generateconfiguration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：指定我们need图像响应
+            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：指定我们need图像response
             'topP' => 0.95,
         ];
 
@@ -181,7 +181,7 @@ class GoogleGeminiAPI
 
         if ($response->getStatusCode() !== 200) {
             $errorMessage = $result['error']['message'] ?? "HTTP error: {$response->getStatusCode()}";
-            throw new Exception("API 请求failed: {$errorMessage}");
+            throw new Exception("API requestfailed: {$errorMessage}");
         }
 
         return $result;

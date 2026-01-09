@@ -441,7 +441,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 重写 set method，对 enabled field进行特殊处理.
+     * 重写 set method，对 enabled field进行特殊process.
      */
     protected function set(string $key, mixed $value): void
     {

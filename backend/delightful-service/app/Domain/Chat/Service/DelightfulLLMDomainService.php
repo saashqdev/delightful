@@ -223,50 +223,50 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # 你是一个新闻事件generate器，userwill提供searchcontent并询问question。
+    # 你是一个新闻eventgenerate器，userwill提供searchcontent并询问question。
     ## Current Time是 {data_now}  
-    ## according touser的question，你需从user提供的searchcontent中整理相关事件，事件include事件名称、事件时间和事件概述。
+    ## according touser的question，你需从user提供的searchcontent中整理相关event，eventincludeevent名称、event时间和event概述。
     ### 注意事项：
-    1. **事件名称format**：
-       - 在事件名称后添加searchquote的编号，format为 `[[citation:x]]`，编号来源于searchcontent中的quotemark（如 `[[citation:1]]`）。
-       - 如果一个事件涉及多个quote，merge所有相关quote编号。
+    1. **event名称format**：
+       - 在event名称后添加searchquote的编号，format为 `[[citation:x]]`，编号来源于searchcontent中的quotemark（如 `[[citation:1]]`）。
+       - 如果一个event涉及多个quote，merge所有相关quote编号。
        - 不要在 "description" 中添加quote。
     2. **时间handle**：
-       - 事件时间尽量精确到月份（如 "2023-05"），若searchcontent未提供具体月份，但有指出上半年或者下半年，canuse（"2023 上半年"），若没有则，use年份（如 "2023"）。
-       - 若同一事件在多个quote中出现，优先use最早的时间。
+       - event时间尽量精确到月份（如 "2023-05"），若searchcontent未提供具体月份，但有指出上半年或者下半年，canuse（"2023 上半年"），若没有则，use年份（如 "2023"）。
+       - 若同一event在多个quote中出现，优先use最早的时间。
        - 若时间不明确，according tocontext推测最早可能的时间，并ensure合理。
-    3. **事件提取与筛选**：
-       - **事件定义**：事件是searchcontent中mention的、具有时间关联（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、更新、合作、活动等。
-       - according touserquestion，提取与之相关的事件，保持描述简洁，聚焦具体发生的事情。
+    3. **event提取与筛选**：
+       - **event定义**：event是searchcontent中mention的、具有时间关联（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、update、合作、活动等。
+       - according touserquestion，提取与之相关的event，保持描述简洁，聚焦具体发生的事情。
        - **跳过无关content**：
          - 纯静态描述（如不变的property、背景介绍，无时间变化）。
          - 数据statistics或财务information（如营收、利润）。
-         - 主观comment、分析或推测（除非与事件直接相关）。
+         - 主观comment、分析或推测（除非与event直接相关）。
          - 无时间关联且与question无关的细节。
-       - **保留原则**：只要content与时间相关且matchquestiontheme，尽量保留为事件。
+       - **保留原则**：只要content与时间相关且matchquestiontheme，尽量保留为event。
     4. **输出要求**：
-       - 以 JSON formatreturn，事件按时间倒序排列（从晚到早）。
-       - 每个事件contain "name"、"time"、"description" 三个字段。
-       - 若searchcontent不足以generate事件，returnnullarray `[]`，避免凭null臆造。
+       - 以 JSON formatreturn，event按时间倒序排列（从晚到早）。
+       - 每个eventcontain "name"、"time"、"description" 三个字段。
+       - 若searchcontent不足以generateevent，returnnullarray `[]`，避免凭null臆造。
     
     ## 输出示例：
     ```json
     [
         {
-            "name": "某事件发生[[citation:3]] [[citation:5]]",
+            "name": "某event发生[[citation:3]] [[citation:5]]",
             "time": "2024-11",
-            "description": "某事件在2024年11月发生，具体情况概述。"
+            "description": "某event在2024年11月发生，具体情况概述。"
         },
         {
-            "name": "另一事件start[[citation:1]]",
+            "name": "另一eventstart[[citation:1]]",
             "time": "2019-05",
-            "description": "另一事件于2019年5月start，简要描述。"
+            "description": "另一event于2019年5月start，简要描述。"
         }
     ]
     ```
     ## use说明
     - user需提供searchcontent（containquotemark如 [[citation:x]]）和具体question。
-    - according toquestion，从searchcontent中提取match事件定义的content，按要求generate输出。
+    - according toquestion，从searchcontent中提取matchevent定义的content，按要求generate输出。
     - 若question涉及current时间，based on {date_now} 进行推算。
     
     ## quote
@@ -403,7 +403,7 @@ class DelightfulLLMDomainService
             );
             $searchContextsCitations .= sprintf('[[citation:%d]] snippet:%s ' . "\n\n", $index, $context->getSnippet());
         }
-        // 超过最大value则直接截断，避免响应太久
+        // 超过最大value则直接截断，避免response太久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsCitations) > $maxLen) {
             $searchContextsCitations = mb_substr($searchContextsCitations, 0, $maxLen);
@@ -444,8 +444,8 @@ class DelightfulLLMDomainService
             }
             return $eventsItem;
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch generate事件时发生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
-            // 事件generate经常不是 json
+            $this->logger->error(sprintf('mindSearch generateevent时发生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            // eventgenerate经常不是 json
             return [];
         }
     }
@@ -472,7 +472,7 @@ class DelightfulLLMDomainService
                 $queryVo->getDelightfulApiBusinessParam(),
             );
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch parse响应时发生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch parseresponse时发生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
@@ -501,7 +501,7 @@ class DelightfulLLMDomainService
             );
             return (string) $response;
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch summarizeNonStreaming parse响应时发生error:%s,file:%s,line:%s trace:%s', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch summarizeNonStreaming parseresponse时发生error:%s,file:%s,line:%s trace:%s', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
@@ -544,7 +544,7 @@ class DelightfulLLMDomainService
                 }
             }
             if (empty($subquestions)) {
-                // 没有call工具，尝试从响应中parse json
+                // 没有call工具，尝试从response中parse json
                 $subquestions = $this->getSubQuestionsFromLLMStringResponse($generateSearchKeywordsResponse, $userMessage);
             }
             return $subquestions;
@@ -576,7 +576,7 @@ class DelightfulLLMDomainService
         $searchKeywords = $queryVo->getSearchKeywords();
         $searchKeywords[] = $userMessage;
         $searchKeywords = Json::encode($searchKeywords, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        // 获取系统hint词
+        // get系统hint词
         $searchContextsString = '';
         // 清洗search结果
         foreach ($searchContexts as $index => $context) {
@@ -616,7 +616,7 @@ class DelightfulLLMDomainService
                 }
             }
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch getSearchResults parse响应时发生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch getSearchResults parseresponse时发生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
         foreach ($noRepeatSearchContexts as $key => $context) {
@@ -704,7 +704,7 @@ class DelightfulLLMDomainService
             ->setOrganizationCode($dto->getOrganizationCode());
         $start = microtime(true);
         $subKeywords = Retry::whenThrows()->sleep(200)->max(3)->call(function () use ($queryVo, $delightfulChatMessageHistory) {
-            // 每次重试清null之前的context
+            // 每次retry清null之前的context
             $llmConversationId = (string) IdGenerator::getSnowId();
             $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($delightfulChatMessageHistory, $llmConversationId);
             $queryVo->setMessageHistory($llmHistoryMessage)->setConversationId($llmConversationId);
@@ -736,7 +736,7 @@ class DelightfulLLMDomainService
             $contexts = array_slice($data['webPages']['value'], 0, $referenceCount);
         } catch (Exception $e) {
             $errMsg = [
-                'error' => 'mindSearch getSearchResults searchWithBing 获取search结果时发生error',
+                'error' => 'mindSearch getSearchResults searchWithBing getsearch结果时发生error',
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
@@ -768,7 +768,7 @@ class DelightfulLLMDomainService
             $clearSearch[] = $format;
         }
         $this->logger->info(sprintf(
-            'mindSearch getSearchResults searchWithBing 获取search结果，end计时，耗时：%s 秒',
+            'mindSearch getSearchResults searchWithBing getsearch结果，end计时，耗时：%s 秒',
             number_format(TimeUtil::getMillisecondDiffFromNow($start) / 1000, 2)
         ));
         return [
@@ -891,7 +891,7 @@ class DelightfulLLMDomainService
         $conversationId = $queryVo->getConversationId();
         $model = $queryVo->getModel();
         $subQuestions = [];
-        // based onquery和context获取相关question
+        // based onquery和contextget相关question
         try {
             // use array_map 和 join 函数来模拟 Python 中的 join method
             $contextString = '';
@@ -918,7 +918,7 @@ class DelightfulLLMDomainService
                 conversationId: $conversationId,
                 businessParams: $queryVo->getDelightfulApiBusinessParam()
             );
-            // todo 从 function getLLMToolsCall() method中获取相关question
+            // todo 从 function getLLMToolsCall() method中get相关question
             foreach ($this->getLLMToolsCall($relatedQuestionsResponse) as $toolCall) {
                 if ($toolCall->getName() === SubQuestionsTool::$name) {
                     $subQuestions = $toolCall->getArguments()['subQuestions'];
@@ -926,7 +926,7 @@ class DelightfulLLMDomainService
             }
 
             if (empty($subQuestions)) {
-                // 没有call工具，尝试从响应中parse json
+                // 没有call工具，尝试从response中parse json
                 $subQuestions = $this->getSubQuestionsFromLLMStringResponse($relatedQuestionsResponse, $userMessage);
                 // 大模型认为不needgenerate关联question，直接拿user的question
                 empty($subQuestions) && $subQuestions = [$queryVo->getUserMessage()];
@@ -947,7 +947,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * 存储value到 KVStore。
+     * storagevalue到 KVStore。
      * @throws RedisException
      */
     public function put(string $key, mixed $value): void
@@ -956,7 +956,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * 从 KVStore 获取value。
+     * 从 KVStore getvalue。
      * @throws RedisException
      */
     public function get(string $key): mixed
@@ -1075,7 +1075,7 @@ class DelightfulLLMDomainService
             );
         }
 
-        // 超过最大value则直接截断，避免响应太久
+        // 超过最大value则直接截断，避免response太久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsDetail) > $maxLen) {
             $searchContextsDetail = mb_substr($searchContextsDetail, 0, $maxLen);
@@ -1113,7 +1113,7 @@ class DelightfulLLMDomainService
             temperature: 0.1,
             businessParams: $businessParams,
         );
-        // 捕捉 LLMNetworkException exception，重试一次
+        // 捕捉 LLMNetworkException exception，retry一次
         return Retry::whenThrows(LLMNetworkException::class)->sleep(500)->max(3)->call(
             function () use ($agent, $query) {
                 return $agent->chatAndNotAutoExecuteTools(new UserMessage($query));
@@ -1156,7 +1156,7 @@ class DelightfulLLMDomainService
             $subQuestions = $this->stripMarkdownCodeBlock($llmResponse, 'json');
             $subQuestions = Json::decode($subQuestions);
             $this->logger->info(sprintf(
-                'mindSearch getSubQuestionsFromLLMStringResponse 提问：%s 大模型响应：%s, 分析后结果：%s',
+                'mindSearch getSubQuestionsFromLLMStringResponse 提问：%s 大模型response：%s, 分析后结果：%s',
                 $userMessage,
                 // 去掉换行符
                 str_replace(PHP_EOL, '', $llmResponse),

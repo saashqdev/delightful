@@ -62,7 +62,7 @@ class DelightfulMessageTest extends BaseTest
     }
 
     /*
-    * test ai streammessage发送.
+    * test ai streammessagesend.
      * @throws Throwable
      */
     public function testAgentStreamSendMessage()
@@ -71,7 +71,7 @@ class DelightfulMessageTest extends BaseTest
         $aiUserId = 'usi_8e4bde5582491a6cabfe0d0ba8b7ae8e';
         $chatAppService = di(DelightfulChatMessageAppService::class);
         // 将多段streammessage，pass此 id 关联起来
-        // ai searchcardmessage的多段响应，已经将 app_message_id 作为关联 id，stream响应need另外的 id 来做关联
+        // ai searchcardmessage的多段response，已经将 app_message_id 作为关联 id，streamresponseneed另外的 id 来做关联
         $appMessageId = IdGenerator::getUniqueId32();
         $streamOptions = (new StreamOptions())->setStream(true)->setStreamAppMessageId($appMessageId)->setStatus(StreamMessageStatus::Start);
         $messageContent = new TextMessage();
@@ -89,7 +89,7 @@ class DelightfulMessageTest extends BaseTest
             $receiveSeqDTO->setContent($messageContent);
             $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
         }
-        // 发送结束
+        // send结束
         $streamOptions->setStatus(StreamMessageStatus::Completed);
         $messageContent->setContent('end');
         $messageContent->setStreamOptions($streamOptions);

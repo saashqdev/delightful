@@ -24,7 +24,7 @@ use DateTime;
 #[FlowNodeDefine(
     type: NodeType::KnowledgeFragmentStore->value,
     code: NodeType::KnowledgeFragmentStore->name,
-    name: '向量数据库 / 向量存储',
+    name: '向量database / 向量storage',
     paramsConfig: KnowledgeFragmentStoreNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,

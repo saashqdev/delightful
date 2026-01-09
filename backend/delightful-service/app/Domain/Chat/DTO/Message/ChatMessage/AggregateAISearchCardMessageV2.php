@@ -19,7 +19,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 聚合AIsearch的响应cardmessage.
+ * 聚合AIsearch的responsecardmessage.
  */
 class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface
 {
@@ -38,7 +38,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     /**
      * 子issue的关联issue。支持关联issue再产生子issue，但是will被拍平成二维array。
      * @var array<string,QuestionItem[]>
-     * @example according touser输入的issue，生成关联issue。
+     * @example according touser输入的issue，generate关联issue。
      */
     protected ?array $associateQuestions;
 
@@ -67,12 +67,12 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $events;
 
     /**
-     * @var string 思维导图。markdown 格式的string
+     * @var string 思维导图。markdown format的string
      */
     protected string $mindMap;
 
     /**
-     * @var string ppt。markdown 格式的string
+     * @var string ppt。markdown format的string
      */
     protected string $ppt;
 

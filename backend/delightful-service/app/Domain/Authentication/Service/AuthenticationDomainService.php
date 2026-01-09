@@ -55,7 +55,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * 生成账号令牌.
+     * generate账号token.
      *
      * 由于麦吉支持其他账号体系的接入，因此前端的process的是，先去某个账号体系登录，再由麦吉做登录校验。
      * 因此，即使use麦吉自己的账号体系，也need遵守这个process。

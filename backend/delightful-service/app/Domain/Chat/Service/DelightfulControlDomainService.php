@@ -78,20 +78,20 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # 这里加一下分布式行锁,防止并发修改messagereceive人列表,造成数据override.
+        # 这里加一下分布式行lock,防止并发修改messagereceive人列表,造成数据override.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
             if (! $this->redisLocker->spinLock($spinLockKey, $spinLockKeyOwner)) {
                 // 自旋fail
                 $this->logger->error(sprintf(
-                    'messageDispatch 获取messagereceive人列表的自旋锁超时 $spinLockKey:%s $delightfulSeqEntity:%s',
+                    'messageDispatch getmessagereceive人列表的自旋locktimeout $spinLockKey:%s $delightfulSeqEntity:%s',
                     $spinLockKey,
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
-            // 获取每条message的finalstatus,parse出来receive人列表,
+            // get每条message的finalstatus,parse出来receive人列表,
             $senderLatestSeq = $this->getSenderMessageLatestReadStatus($senderMessageId, $senderUserId);
             $receiveUserEntity = $this->delightfulUserRepository->getUserByAccountAndOrganization(
                 $receiveDelightfulSeqEntity->getObjectId(),
@@ -142,14 +142,14 @@ class DelightfulControlDomainService extends AbstractDomainService
                         unset($unreadList[$key]);
                         $unreadList = array_values($unreadList);
                     }
-                    // 更新已读列表
+                    // update已读列表
                     $seenList = $senderReceiveList->getSeenList();
                     $seenList[] = $receiveUserEntity->getUserId();
                     $senderReceiveList->setUnreadList($unreadList);
                     $senderReceiveList->setSeenList($seenList);
-                    // 为messagesend者generatenewseq,用于更新messagereceive人列表
+                    // 为messagesend者generatenewseq,用于updatemessagereceive人列表
                     $senderLatestSeq->setReceiveList($senderReceiveList);
-                    # 更新已读列表end
+                    # update已读列表end
 
                     $senderLatestSeq->setSeqType($controlMessageType);
                     $senderLatestSeq->setStatus($messageStatus);
@@ -160,16 +160,16 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写数据库,更新messagesend方的已读列表。这是为了复用message收发通道，notify客户端有new已读回执。
+                        // 写database,updatemessagesend方的已读列表。这是为了复用message收发通道，notify客户端有new已读回执。
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // 更新original chat_seq 的messagereceive人列表。 避免拉取历史message时，对方已读的message还是显示未读。
+                        // updateoriginal chat_seq 的messagereceive人列表。 避免拉取历史message时，对方已读的message还是显示未读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);
                             $this->delightfulSeqRepository->updateReceiveList($originalSeq);
                         } else {
                             $this->logger->error(sprintf(
-                                'messageDispatch 更新original chat_seq fail，未找到originalmessage $senderMessageId:%s',
+                                'messageDispatch updateoriginal chat_seq fail，未找到originalmessage $senderMessageId:%s',
                                 $senderMessageId
                             ));
                         }
@@ -183,7 +183,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     break;
             }
         } finally {
-            // 释放锁
+            // 释放lock
             $this->redisLocker->release($spinLockKey, $spinLockKeyOwner);
         }
     }
@@ -204,7 +204,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        # 这里加一下分布式行锁,防止并发.
+        # 这里加一下分布式行lock,防止并发.
         $revokeMessageId = $needChangeSeqEntity->getSeqId();
         $spinLockKey = 'chat:seq:lock:' . $revokeMessageId;
         try {
@@ -217,7 +217,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
-            // 更新originalmessage的status
+            // updateoriginalmessage的status
             $messageStatus = DelightfulMessageStatus::getMessageStatusByControlMessageType($controlMessageType);
             $this->delightfulSeqRepository->batchUpdateSeqStatus([$needChangeSeqEntity->getSeqId()], $messageStatus);
             // according to delightful_message_id 找到所有messagereceive者
@@ -225,7 +225,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             // 排除user自己,因为已经提前
             $this->batchPushControlSeqList($notifyAllReceiveSeqList);
         } finally {
-            // 释放锁
+            // 释放lock
             $this->redisLocker->release($spinLockKey, $revokeMessageId);
         }
     }
@@ -237,10 +237,10 @@ class DelightfulControlDomainService extends AbstractDomainService
     #[Transactional]
     public function batchCreateSeqByRevokeOrEditMessage(DelightfulSeqEntity $needChangeSeqEntity, ControlMessageType $controlMessageType): array
     {
-        // 获取所有收件方的seq
+        // get所有收件方的seq
         $receiveSeqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($needChangeSeqEntity->getDelightfulMessageId());
         $receiveSeqList = array_column($receiveSeqList, null, 'object_id');
-        // 去掉自己,因为need及时响应,已经单独generate了seq并push了
+        // 去掉自己,因为need及时response,已经单独generate了seq并push了
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
         $seqListCreateDTO = [];
         foreach ($receiveSeqList as $receiveSeq) {

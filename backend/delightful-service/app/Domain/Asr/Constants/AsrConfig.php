@@ -9,19 +9,19 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统一管理 ASR 相关的所有configurationconstant，include超时time、轮询间隔、重试次数等.
+ * 统一管理 ASR 相关的所有configurationconstant，includetimeouttime、轮询间隔、retry次数等.
  */
 class AsrConfig
 {
-    // ==================== 超时configuration ====================
+    // ==================== timeoutconfiguration ====================
 
     /**
-     * 总结task分布式锁 TTL（秒）.
+     * 总结task分布式lock TTL（秒）.
      */
     public const int SUMMARY_LOCK_TTL = 120;
 
     /**
-     * 心跳检测超时阈value（秒）.
+     * 心跳检测timeout阈value（秒）.
      */
     public const int HEARTBEAT_TIMEOUT = 600;
 
@@ -41,17 +41,17 @@ class AsrConfig
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 
     /**
-     * audiofilerecordquery超时（秒）.
+     * audiofilerecordquerytimeout（秒）.
      */
     public const int FILE_RECORD_QUERY_TIMEOUT = 120;
 
     /**
-     * 沙箱启动超时（秒）.
+     * 沙箱启动timeout（秒）.
      */
     public const int SANDBOX_STARTUP_TIMEOUT = 121;
 
     /**
-     * 工作区initialize超时（秒）.
+     * 工作区initializetimeout（秒）.
      */
     public const int WORKSPACE_INIT_TIMEOUT = 60;
 
@@ -62,15 +62,15 @@ class AsrConfig
      */
     public const int POLLING_INTERVAL = 2;
 
-    // ==================== 重试configuration ====================
+    // ==================== retryconfiguration ====================
 
     /**
-     * service端自动总结最大重试次数.
+     * service端自动总结最大retry次数.
      */
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 
     /**
-     * 沙箱启动最大重试次数.
+     * 沙箱启动最大retry次数.
      */
     public const int SANDBOX_STARTUP_MAX_RETRY = 3;
 
@@ -103,10 +103,10 @@ class AsrConfig
      */
     public const int REDIS_SCAN_MAX_COUNT = 2000;
 
-    // ==================== 定时taskconfiguration ====================
+    // ==================== scheduletaskconfiguration ====================
 
     /**
-     * 心跳monitor定时task互斥锁过期time（秒）.
+     * 心跳monitorscheduletask互斥lock过期time（秒）.
      */
     public const int HEARTBEAT_MONITOR_MUTEX_EXPIRES = 60;
 }

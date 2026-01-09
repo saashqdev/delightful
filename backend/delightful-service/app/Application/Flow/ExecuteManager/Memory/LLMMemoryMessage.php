@@ -165,7 +165,7 @@ class LLMMemoryMessage
         // settingmessagetype
         $customMessage->setMessageTypeString($content['type'] ?? '');
 
-        // 处理attachment
+        // processattachment
         if (isset($content['flow_attachments']) && is_array($content['flow_attachments'])) {
             $attachments = [];
             foreach ($content['flow_attachments'] as $attachment) {

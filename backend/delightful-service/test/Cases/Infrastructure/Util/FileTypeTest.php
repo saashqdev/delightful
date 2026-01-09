@@ -88,7 +88,7 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * test从HTTP头infogettype（need模拟HTTP响应）.
+     * test从HTTP头infogettype（need模拟HTTPresponse）.
      *
      * 注意：这个test可能needusefunction模拟，如果项目中没有configurationfunction模拟，
      * can将此testmark为跳过或use真实URL进行test

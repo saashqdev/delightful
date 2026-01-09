@@ -350,12 +350,12 @@ class ImageGenerateFactory
             $request->setResponseFormat($data['response_format']);
         }
 
-        // 处理组图功能parameter
+        // process组图功能parameter
         if (isset($data['sequential_image_generation'])) {
             $request->setSequentialImageGeneration($data['sequential_image_generation']);
         }
 
-        // 处理组图功能选项parameter
+        // process组图功能选项parameter
         if (isset($data['sequential_image_generation_options']) && is_array($data['sequential_image_generation_options'])) {
             $request->setSequentialImageGenerationOptions($data['sequential_image_generation_options']);
         }
@@ -364,8 +364,8 @@ class ImageGenerateFactory
     }
 
     /**
-     * 解析各种 size 格式为 [width, height] array.
-     * 支持格式：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
+     * 解析各种 size format为 [width, height] array.
+     * 支持format：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
      * @param string $size 尺寸string
      * @param null|string $modelKey model键名，如果指定则优先use该model的固定比例configuration
      */
@@ -373,23 +373,23 @@ class ImageGenerateFactory
     {
         $size = trim($size);
 
-        // 处理标准格式：1024x1024
+        // process标准format：1024x1024
         if (preg_match('/^(\d+)[x×](\d+)$/i', $size, $matches)) {
             return [(string) $matches[1], (string) $matches[2]];
         }
 
-        // 处理乘号格式：1024*1024
+        // process乘号format：1024*1024
         if (preg_match('/^(\d+)\*(\d+)$/', $size, $matches)) {
             return [(string) $matches[1], (string) $matches[2]];
         }
 
-        // 处理 k 格式：2k, 3k 等
+        // process k format：2k, 3k 等
         if (preg_match('/^(\d+)k$/i', $size, $matches)) {
             $resolution = (int) $matches[1] * 1024;
             return [(string) $resolution, (string) $resolution];
         }
 
-        // 处理比例格式：16:9, 1:1, 3:4 等
+        // process比例format：16:9, 1:1, 3:4 等
         if (preg_match('/^(\d+):(\d+)$/', $size, $matches)) {
             $width = (int) $matches[1];
             $height = (int) $matches[2];

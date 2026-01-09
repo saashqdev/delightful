@@ -104,7 +104,7 @@ class DelightfulChatAggregateSearchReqDTO
             $text = TiptapUtil::getTextContent($userMessage->getContent());
             $this->userMessage = $text;
         } else {
-            throw new Exception('不支持的message类型');
+            throw new Exception('不支持的messagetype');
         }
 
         return $this;

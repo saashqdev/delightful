@@ -13,29 +13,29 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 interface ProviderModelConfigVersionRepositoryInterface
 {
     /**
-     * savemodelconfiguration版本（contain版本号递增和markcurrent版本的完整逻辑）.
-     * use事务ensure数据一致性.
+     * savemodelconfigurationversion（containversion号递增和markcurrentversion的完整逻辑）.
+     * usetransactionensure数据一致性.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
-     * @param ProviderModelConfigVersionEntity $entity configuration版本实体
+     * @param ProviderModelConfigVersionEntity $entity configurationversion实体
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void;
 
     /**
-     * get指定model的最新版本ID.
+     * get指定model的最新versionID.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|int 最新版本的ID，如果不存在则returnnull
+     * @return null|int 最新version的ID，如果不存在则returnnull
      */
     public function getLatestVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int;
 
     /**
-     * get指定model的最新configuration版本实体.
+     * get指定model的最新configurationversion实体.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|ProviderModelConfigVersionEntity 最新版本的实体，如果不存在则returnnull
+     * @return null|ProviderModelConfigVersionEntity 最新version的实体，如果不存在则returnnull
      */
     public function getLatestVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity;
 }

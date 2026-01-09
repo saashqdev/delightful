@@ -9,24 +9,24 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR Redis Key 常量
- * 统一管理 ASR 相关的 Redis Key 格式.
+ * 统一管理 ASR 相关的 Redis Key format.
  */
 class AsrRedisKeys
 {
     /**
-     * taskstatus Hash Key 格式
+     * taskstatus Hash Key format
      * actualuse时will MD5(user_id:task_key).
      */
     public const TASK_HASH = 'asr:task:%s';
 
     /**
-     * 心跳 Key 格式
+     * 心跳 Key format
      * actualuse时will MD5(user_id:task_key).
      */
     public const HEARTBEAT = 'asr:heartbeat:%s';
 
     /**
-     * 总结task锁 Key 格式.
+     * 总结tasklock Key format.
      */
     public const SUMMARY_LOCK = 'asr:summary:task:%s';
 
@@ -41,7 +41,7 @@ class AsrRedisKeys
     public const HEARTBEAT_SCAN_PATTERN = 'asr:heartbeat:*';
 
     /**
-     * Mock 轮询计数 Key 格式（仅用于test）.
+     * Mock 轮询计数 Key format（仅用于test）.
      */
     public const MOCK_FINISH_COUNT = 'mock:asr:task:%s:finish_count';
 }

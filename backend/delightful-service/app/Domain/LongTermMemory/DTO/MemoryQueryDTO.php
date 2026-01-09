@@ -50,7 +50,7 @@ class MemoryQueryDTO extends AbstractDTO
     }
 
     /**
-     * setting记忆类型.
+     * setting记忆type.
      */
     public function setMemoryType(MemoryType|string $type): void
     {
@@ -75,7 +75,7 @@ class MemoryQueryDTO extends AbstractDTO
     }
 
     /**
-     * 生成 pageToken.
+     * generate pageToken.
      */
     public static function generatePageToken(int $offset): string
     {

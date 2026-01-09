@@ -60,7 +60,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function get(string $key): mixed
     {
-        // property一定要是小驼峰！不支持其他格式！
+        // property一定要是小驼峰！不支持其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
         // 判断property是否存在，避免call不存在的property时，死循环触发 __get method
         if (! property_exists($this, $humpKey)) {
@@ -76,7 +76,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function set(string $key, mixed $value): void
     {
-        // property一定要是小驼峰！不支持其他格式！
+        // property一定要是小驼峰！不支持其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
         // 判断property是否存在，避免call不存在的property时，死循环触发 __set method
         if (! property_exists($this, $humpKey)) {

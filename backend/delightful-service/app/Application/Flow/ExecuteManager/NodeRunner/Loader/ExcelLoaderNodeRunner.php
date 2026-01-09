@@ -75,7 +75,7 @@ class ExcelLoaderNodeRunner extends NodeRunner
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, sprintf('Download remote file failed: %s', $url));
             }
             $outputStream = fopen($tempFile, 'w');
-            // readinput流并write到output流
+            // readinputstream并write到outputstream
             while ($data = fread($inputStream, 1024)) {
                 fwrite($outputStream, $data);
             }

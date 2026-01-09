@@ -34,7 +34,7 @@ class DelightfulOrganizationEnvDomainService
 
     public function getOrCreateOrganizationsEnvironment(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvEntity): DelightfulOrganizationEnvEntity
     {
-        // 加自旋锁防并发
+        // 加自旋lock防并发
         $spinLockKey = sprintf('getOrCreateOrganizationsEnvironment:envId:%s', $delightfulEnvEntity->getId());
         $owner = random_bytes(8);
         $this->lock->spinLock($spinLockKey, $owner);

@@ -76,7 +76,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "生成image的比例",
+            "title": "generateimage的比例",
             "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,

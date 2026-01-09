@@ -140,7 +140,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         Db::beginTransaction();
         try {
             $controlMessageType = $groupUserChangeSeqEntity->getSeqType();
-            // 批量生成群成员变更message
+            // 批量generate群成员变更message
             /** @var GroupCreateMessage|GroupInfoUpdateMessage|GroupOwnerChangeMessage|GroupUserAddMessage|GroupUserRemoveMessage $content */
             $content = $groupUserChangeSeqEntity->getContent();
             $groupId = $content->getGroupId();
@@ -162,7 +162,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 // 这些user已经从群成员table中移除,但是他们还未收到被移除的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所有人都是被移除的.这里减少流量消耗.
+                    // 解散group chat,所有人都是被移除的.这里减少stream量消耗.
                     $content['user_ids'] = [];
                 }
             }
@@ -251,7 +251,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     private function getGroupUpdateReceiveUsers(string $groupId): array
     {
-        // 批量生成群成员变更message
+        // 批量generate群成员变更message
         $groupEntity = $this->delightfulGroupRepository->getGroupInfoById($groupId);
         if ($groupEntity === null || $groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             return [];
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // 不为操作者重复生成seq. 因为在投mq之前,已经为操作者生成了seq
+            // 不为操作者重复generateseq. 因为在投mq之前,已经为操作者generate了seq
             if ($userId === $operateUserId) {
                 continue;
             }
@@ -308,7 +308,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 'refer_message_id' => '',
                 'sender_message_id' => '',
                 'conversation_id' => $conversationId,
-                'status' => DelightfulMessageStatus::Read->value, // 发送方自己的message,default已读
+                'status' => DelightfulMessageStatus::Read->value, // send方自己的message,default已读
                 'created_at' => $time,
                 'updated_at' => $time,
                 'app_message_id' => '',

@@ -21,11 +21,11 @@ class CrontabToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return '定时tasktool集';
+        return 'scheduletasktool集';
     }
 
     public function getDescription(): string
     {
-        return '提供了user级别定时task相关的tool，includecreate每天、每周、每月等重复和不重复的定时task';
+        return '提供了user级别scheduletask相关的tool，includecreate每天、每周、每月等重复和不重复的scheduletask';
     }
 }

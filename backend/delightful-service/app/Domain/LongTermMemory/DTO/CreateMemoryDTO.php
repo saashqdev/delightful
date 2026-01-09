@@ -57,7 +57,7 @@ class CreateMemoryDTO extends AbstractDTO
     }
 
     /**
-     * setting记忆类型.
+     * setting记忆type.
      */
     public function setMemoryType(MemoryType|string $memoryType): void
     {

@@ -16,7 +16,7 @@ class AddThirdPlatformFieldsToKnowledgeBaseDocuments extends Migration
     public function up(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            $table->string('third_platform_type')->nullable()->comment('第third-party平台类型');
+            $table->string('third_platform_type')->nullable()->comment('第third-party平台type');
             $table->string('third_file_id')->nullable()->comment('第third-partyfileID');
             $table->index(['third_platform_type', 'third_file_id'], 'index_third_platform_type_id');
         });

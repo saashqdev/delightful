@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 只有当table存在时才执行索引操作
+        // 只有当table存在时才execute索引操作
         if (Schema::hasTable('delightful_chat_sequences')) {
             // check并create idx_object_type_id_refer_message_id 索引
             $this->createIndexIfNotExists(

@@ -16,7 +16,7 @@ use App\Domain\Chat\Entity\ValueObject\AIImage\AIImageGenerateParamsVO;
 use Exception;
 
 /**
- * AI文生图chat请求parameter.
+ * AI文生图chatrequestparameter.
  */
 class DelightfulChatAIImageReqDTO
 {
@@ -83,7 +83,7 @@ class DelightfulChatAIImageReqDTO
         if ($userMessage instanceof TextMessage) {
             $this->params->setUserPrompt($userMessage->getContent());
         } else {
-            throw new Exception('不支持的message类型');
+            throw new Exception('不支持的messagetype');
         }
         /* @phpstan-ignore-next-line */
         if ($userMessage instanceof ChatFileInterface) {

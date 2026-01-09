@@ -13,10 +13,10 @@ use function Hyperf\Translation\__;
  * Delightful 资源枚举.
  *
  * 1. use Backed Enum 将每个资源映射为唯一string key。
- * 2. passmethod提供 label / parent  等元info，方便后续生成permission树、做 i18n 等。
+ * 2. passmethod提供 label / parent  等元info，方便后续generatepermission树、做 i18n 等。
  * 3. 仅定义资源本身，不涉及操作type（如 query / edit）。
  *
- * 注意：如果你修改了这个file，请执行单元test PermissionApiTest.testGetPermissionTree.
+ * 注意：如果你修改了这个file，请execute单元test PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {

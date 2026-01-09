@@ -185,7 +185,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     /**
      * getdepartment的所有子department的成员total.
-     * use自旋锁避免并发，一次性query所有department数据并cache到 Redis.
+     * use自旋lock避免并发，一次性query所有department数据并cache到 Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
@@ -200,7 +200,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             return (int) $cachedData;
         }
 
-        // use自旋锁避免并发计算
+        // use自旋lock避免并发计算
         $lockKey = sprintf('department_calc_lock:%s', $organizationCode);
         $lockOwner = uniqid('dept_calc_', true);
 
@@ -459,7 +459,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         // 批量write Redis cache
         try {
             if (! empty($departmentSums)) {
-                // ensure所有value都是string格式
+                // ensure所有value都是stringformat
                 $stringDepartmentSums = [];
                 foreach ($departmentSums as $deptId => $sum) {
                     $stringDepartmentSums[$deptId] = (string) $sum;
@@ -471,7 +471,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 $this->redis->expire($cacheKey, 60 * 5);
                 $results = $this->redis->exec();
 
-                // check事务执行result
+                // checktransactionexecuteresult
                 if ($results === false) {
                     $this->logger->error('Redis transaction failed', [
                         'cache_key' => $cacheKey,

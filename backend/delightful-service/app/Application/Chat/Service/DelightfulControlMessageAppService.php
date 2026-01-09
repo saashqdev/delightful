@@ -38,7 +38,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * according to客户端发来的控制messagetype,分发到对应的处理模块.
+     * according to客户端发来的控制messagetype,分发到对应的process模块.
      * @throws Throwable
      */
     public function dispatchClientControlMessage(DelightfulMessageEntity $messageDTO, DelightfulUserAuthorization $userAuthorization): ?array
@@ -75,7 +75,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
 
     /**
      * 分发asyncmessagequeue中的seq.
-     * such asaccording to发件方的seq,为收件方生成seq,投递seq.
+     * such asaccording to发件方的seq,为收件方generateseq,投递seq.
      * @throws Throwable
      */
     public function dispatchMQControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
@@ -84,7 +84,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // 已读回执等场景,according to一条控制message,生成其他人的seq.
+                // 已读回执等场景,according to一条控制message,generate其他人的seq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
@@ -112,24 +112,24 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
 
     public function clientOperateInstructMessage(DelightfulMessageEntity $messageEntity, string $conversationId): ?array
     {
-        // 给自己的message流生成序列.
+        // 给自己的messagestreamgenerate序列.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
-        // async将生成的message流notifyuser的其他设备.
+        // async将generate的messagestreamnotifyuser的其他设备.
         $this->controlDomainService->pushControlSequence($seqEntity);
-        // 将message流return给current客户端! 但是还是willasyncpush给user的所有online客户端.
+        // 将messagestreamreturn给current客户端! 但是还是willasyncpush给user的所有online客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
     private function clientOperateTopicMessage(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
         $conversationId = $this->topicDomainService->clientOperateTopic($messageDTO, $dataIsolation);
-        // 给自己的message流生成序列.
+        // 给自己的messagestreamgenerate序列.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
-        // async将生成的message流notifyuser的其他设备.
+        // async将generate的messagestreamnotifyuser的其他设备.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
         // async分发控制message,对方操作了session的话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
-        // 将message流return给current客户端! 但是还是willasyncpush给user的所有online客户端.
+        // 将messagestreamreturn给current客户端! 但是还是willasyncpush给user的所有online客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 

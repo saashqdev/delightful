@@ -12,7 +12,7 @@ enum InstructionInsertLocation: int
     // message内容前方
     case Before = 1;
 
-    // message内容中光标位置
+    // message内容中光标position
     case Cursor = 2;
 
     // message内容后方

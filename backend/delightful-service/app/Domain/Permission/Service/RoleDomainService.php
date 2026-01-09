@@ -79,7 +79,7 @@ readonly class RoleDomainService
         }
 
         // 1. 校验permission键valid性
-        // 更新 permissionTag info：according topermission键提取二级模块tag，用于前端展示category
+        // update permissionTag info：according topermission键提取二级模块tag，用于前端展示category
         $permissionTags = [];
         foreach ($savingRoleEntity->getPermissions() as $permissionKey) {
             // 校验permission键valid性
@@ -92,7 +92,7 @@ readonly class RoleDomainService
                 continue;
             }
 
-            // parsepermission键，获取资源并提取其二级模块tag
+            // parsepermission键，get资源并提取其二级模块tag
             try {
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
@@ -152,7 +152,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取role详情.
+     * getrole详情.
      */
     public function show(PermissionDataIsolation $dataIsolation, int $id): RoleEntity
     {
@@ -169,13 +169,13 @@ readonly class RoleDomainService
     }
 
     /**
-     * according to名称获取role.
+     * according to名称getrole.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {
         $roleEntity = $this->roleRepository->getByName($dataIsolation->getCurrentOrganizationCode(), $name);
 
-        // 补充role关联的userIDinfo，避免call方获取不到 userIds
+        // 补充role关联的userIDinfo，避免call方get不到 userIds
         if ($roleEntity !== null) {
             $userIds = $this->roleRepository->getRoleUsers($dataIsolation->getCurrentOrganizationCode(), $roleEntity->getId());
             $roleEntity->setUserIds($userIds);
@@ -202,7 +202,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取userrole列表.
+     * getuserrole列表.
      */
     public function getUserRoles(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -210,7 +210,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取user所有permission.
+     * getuser所有permission.
      */
     public function getUserPermissions(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -232,7 +232,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取permission资源树结构.
+     * getpermission资源树结构.
      *
      * @param bool $isPlatformOrganization 是否平台organization
      */
@@ -256,10 +256,10 @@ readonly class RoleDomainService
      */
     public function addOrganizationAdmin(PermissionDataIsolation $dataIsolation, array $userIds): RoleEntity
     {
-        // 获取currentorganization编码
+        // getcurrentorganization编码
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 1. 尝试获取已存在的organization管理员role
+        // 1. 尝试get已存在的organization管理员role
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
@@ -292,14 +292,14 @@ readonly class RoleDomainService
      * 移除user的“organization管理员”role。
      *
      * 逻辑：
-     * 1. 获取currentorganization下名为 ORGANIZATION_ADMIN_ROLE_NAME 的role；
+     * 1. getcurrentorganization下名为 ORGANIZATION_ADMIN_ROLE_NAME 的role；
      * 2. 若不存在直接return；
      * 3. call仓库移除user与该role的关联关系；
      * 4. 如果role不再关联任何user，保持role本身不变（如有need，可考虑后续清理）。
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {
-        // 获取organization管理员role
+        // getorganization管理员role
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {

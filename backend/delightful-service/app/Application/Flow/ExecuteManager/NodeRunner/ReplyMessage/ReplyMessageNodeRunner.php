@@ -57,10 +57,10 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 如果具有 大model的stream响应体，那么直接开始
+        // 如果具有 大model的streamresponse体，那么直接开始
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
-            // 生成大model节点的响应给回去
+            // generate大model节点的response给回去
             $vertexResult->addDebugLog('llm_stream_response', $streamResponse->getLlmStreamResponse());
             $vertexResult->addDebugLog('llm_stream_reasoning_response', $streamResponse->getLlmStreamReasoningResponse());
             return;
@@ -306,7 +306,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setReferMessageId($flowSeqEntity->getMessageId());
         }
 
-        // 发送开始mark
+        // send开始mark
         $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($chatAppService, $appMessageId, $aiUserId, $receiveUserId) {
@@ -379,7 +379,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setContent($messageContent);
             $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
         } finally {
-            // 发送结束mark
+            // send结束mark
             $streamOptions->setStatus(StreamMessageStatus::Completed);
             $messageContent->setContent('end');
             $messageContent->setStreamOptions($streamOptions);

@@ -13,17 +13,17 @@ namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 enum VolcengineStatusCode: string
 {
     /**
-     * success - 响应bodycontain转录result.
+     * success - responsebodycontain转录result.
      */
     case SUCCESS = '20000000';
 
     /**
-     * 正在处理中 - 响应body为空.
+     * 正在process中 - responsebody为空.
      */
     case PROCESSING = '20000001';
 
     /**
-     * task在queue中 - 响应body为空.
+     * task在queue中 - responsebody为空.
      */
     case QUEUED = '20000002';
 
@@ -33,7 +33,7 @@ enum VolcengineStatusCode: string
     case SILENT_AUDIO = '20000003';
 
     /**
-     * 请求parameterinvalid.
+     * requestparameterinvalid.
      */
     case INVALID_PARAMS = '45000001';
 
@@ -43,7 +43,7 @@ enum VolcengineStatusCode: string
     case EMPTY_AUDIO = '45000002';
 
     /**
-     * audio格式不correct.
+     * audioformat不correct.
      */
     case INVALID_AUDIO_FORMAT = '45000151';
 
@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为处理中status（include处理中和排队中）.
+     * 判断是否为process中status（includeprocess中和排队中）.
      */
     public function isProcessing(): bool
     {
@@ -77,7 +77,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为可重试的failstatus
+     * 判断是否为可retry的failstatus
      */
     public function isRetryable(): bool
     {
@@ -99,12 +99,12 @@ enum VolcengineStatusCode: string
     {
         return match ($this) {
             self::SUCCESS => '识别success',
-            self::PROCESSING => '正在处理中',
+            self::PROCESSING => '正在process中',
             self::QUEUED => 'task在queue中',
             self::SILENT_AUDIO => '静音audio',
-            self::INVALID_PARAMS => '请求parameterinvalid',
+            self::INVALID_PARAMS => 'requestparameterinvalid',
             self::EMPTY_AUDIO => '空audio',
-            self::INVALID_AUDIO_FORMAT => 'audio格式不correct',
+            self::INVALID_AUDIO_FORMAT => 'audioformat不correct',
             self::SERVER_BUSY => 'service器繁忙',
         };
     }

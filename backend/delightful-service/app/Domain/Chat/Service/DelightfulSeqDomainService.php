@@ -37,7 +37,7 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * handlemessage流(seq)相关.
+ * handlemessagestream(seq)相关.
  */
 class DelightfulSeqDomainService extends AbstractDomainService
 {
@@ -48,11 +48,11 @@ class DelightfulSeqDomainService extends AbstractDomainService
     public function pushSeq(string $seqId): void
     {
         $seqEntity = null;
-        // 查seq,fail延迟后重试3次
+        // 查seq,faildelay后retry3次
         retry(3, function () use ($seqId, &$seqEntity) {
             $seqEntity = $this->delightfulSeqRepository->getSeqByMessageId($seqId);
             if ($seqEntity === null) {
-                // 可能是事务还未submit,mq已经消费,延迟重试
+                // 可能是transaction还未submit,mq已经消费,delayretry
                 ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
             }
         }, 100);
@@ -159,7 +159,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     # ai send已读回执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo can做 optimizeflow响应success率: sync等待flowexecute,细致判断,对于本seq_id,上次flow的响应是否超时,如果是,直接丢弃,不再发给flow
+                    // todo can做 optimizeflowresponsesuccess率: sync等待flowexecute,细致判断,对于本seq_id,上次flow的response是否timeout,如果是,直接丢弃,不再发给flow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [
@@ -173,8 +173,8 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 break;
             case ConversationType::User:
-                // todo 一定要做! publishsubscribe用rabbitmqimplement,不再用redis的pub/sub. 同时,push后need客户端returnack,然后更新seq的status
-                // todo 一定要做! 只推seq_id,publishsubscribe收到seq_id后,再去数据库查seq详情,再推给客户端
+                // todo 一定要做! publishsubscribe用rabbitmqimplement,不再用redis的pub/sub. 同时,push后need客户端returnack,然后updateseq的status
+                // todo 一定要做! 只推seq_id,publishsubscribe收到seq_id后,再去database查seq详情,再推给客户端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // 不打印敏感info
                 $pushLogData = [
@@ -334,13 +334,13 @@ class DelightfulSeqDomainService extends AbstractDomainService
         if (empty($agentAccountEntity->getAiCode())) {
             ExceptionBuilder::throw(ChatErrorCode::AI_NOT_FOUND);
         }
-        // 获取messageEntity
+        // getmessageEntity
         $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
 
         // 只有chatmessage和已读回执才触发flow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
-            // 获取user的真名
+            // getuser的真名
             $senderAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
             // 开协程了，复制 requestId
             $requestId = CoContext::getRequestId();
@@ -364,7 +364,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 di(TranslatorInterface::class)->setLocale($language);
                 $this->logger->info('Coroutine  create userCallFlow language: ' . di(TranslatorInterface::class)->getLocale());
                 try {
-                    // 触发事件
+                    // 触发event
                     event_dispatch(new UserCallAgentEvent(
                         $agentAccountEntity,
                         $agentUserEntity,

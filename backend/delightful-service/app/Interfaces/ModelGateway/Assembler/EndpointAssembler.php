@@ -16,7 +16,7 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\HighAvailability
 class EndpointAssembler
 {
     /**
-     * 生成标准化的端点type标识.
+     * generate标准化的端点type标识.
      *
      * @param HighAvailabilityAppType $appType 高可用应用type
      * @param string $modelId modelID
@@ -28,9 +28,9 @@ class EndpointAssembler
     }
 
     /**
-     * 从格式化的端点type标识中还原original的modelID.
+     * 从format化的端点type标识中还原original的modelID.
      *
-     * @param string $formattedModelId 可能contain格式化前缀的modelID
+     * @param string $formattedModelId 可能containformat化前缀的modelID
      * @return string original的modelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string
@@ -50,10 +50,10 @@ class EndpointAssembler
     }
 
     /**
-     * check给定的string是否为格式化的端点type标识.
+     * check给定的string是否为format化的端点type标识.
      *
      * @param string $modelId 待check的modelID
-     * @return bool 是否为格式化的端点type标识
+     * @return bool 是否为format化的端点type标识
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {

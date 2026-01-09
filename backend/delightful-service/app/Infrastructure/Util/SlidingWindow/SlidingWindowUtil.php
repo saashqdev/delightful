@@ -15,7 +15,7 @@ use Throwable;
 
 /**
  * 防抖工具类
- * implement"执行最后一次请求"防抖策略.
+ * implement"execute最后一次request"防抖策略.
  */
 class SlidingWindowUtil
 {
@@ -28,30 +28,30 @@ class SlidingWindowUtil
     }
 
     /**
-     * 防抖接口 - 执行最后一次请求策略
-     * 在指定time窗口内，只有最后一次请求will被执行.
+     * 防抖接口 - execute最后一次request策略
+     * 在指定time窗口内，只有最后一次requestwill被execute.
      *
      * @param string $debounceKey 防抖键
-     * @param float $delayVerificationSeconds 延迟verifytime（秒），也是actual的防抖窗口
-     * @return bool 是否should执行current请求
+     * @param float $delayVerificationSeconds delayverifytime（秒），也是actual的防抖窗口
+     * @return bool 是否shouldexecutecurrentrequest
      */
     public function shouldExecuteWithDebounce(
         string $debounceKey,
         float $delayVerificationSeconds = 0.5
     ): bool {
         $uniqueRequestId = uniqid('req_', true) . '_' . getmypid();
-        // 键的过期time应greater than延迟verifytime，以作为安全保障
+        // 键的过期time应greater thandelayverifytime，以作为安全保障
         $totalExpirationSeconds = (int) ceil($delayVerificationSeconds) + 1;
         $latestRequestRedisKey = $debounceKey . ':last_req';
 
         try {
-            // mark为最新请求
+            // mark为最新request
             $this->redis->set($latestRequestRedisKey, $uniqueRequestId, ['EX' => $totalExpirationSeconds]);
 
             // 等待verifytime
             Coroutine::sleep($delayVerificationSeconds);
 
-            // 原子化地verify并声明执行权
+            // 原子化地verify并声明execute权
             $script = <<<'LUA'
                 if redis.call('get', KEYS[1]) == ARGV[1] then
                     return redis.call('del', KEYS[1])
@@ -66,7 +66,7 @@ LUA;
                 'debounce_key' => $debounceKey,
                 'exception' => $exception,
             ]);
-            // 出现exception时defaultallow执行，避免关键业务被阻塞
+            // 出现exception时defaultallowexecute，避免关键业务被阻塞
             return true;
         }
     }

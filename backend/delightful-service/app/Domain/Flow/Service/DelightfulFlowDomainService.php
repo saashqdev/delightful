@@ -172,11 +172,11 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * create定时task.
+     * createscheduletask.
      */
     public function createRoutine(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow): void
     {
-        // get开始节点的定时configuration
+        // get开始节点的scheduleconfiguration
         /** @var null|StartNodeParamsConfig $startNodeParamsConfig */
         $startNodeParamsConfig = $delightfulFlow->getStartNode()?->getNodeParamsConfig();
         if (! $startNodeParamsConfig) {
@@ -193,14 +193,14 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // 先清理一下历史定时task和调度规则
+        // 先清理一下历史scheduletask和调度规则
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
             try {
                 $routineConfig->validate();
             } catch (Throwable $throwable) {
-                simple_logger('CreateRoutine')->notice('invalid的定时规则', [
+                simple_logger('CreateRoutine')->notice('invalid的schedule规则', [
                     'flowCode' => $delightfulFlow->getCode(),
                     'branchId' => $branchId,
                     'routineConfig' => $routineConfig->toConfigArray(),

@@ -59,7 +59,7 @@ class ProviderAppService
         $iconToProviderMap = [];
 
         foreach ($models as $model) {
-            // 处理model图标
+            // processmodel图标
             $modelIcon = $model->getIcon();
             if (empty($modelIcon)) {
                 continue;
@@ -74,7 +74,7 @@ class ProviderAppService
             }
             $iconToModelMap[$modelIcon][] = $model;
 
-            // 处理service商图标
+            // processservice商图标
             $configId = $model->getServiceProviderConfigId();
             if (! isset($providerEntities[$configId])) {
                 continue;

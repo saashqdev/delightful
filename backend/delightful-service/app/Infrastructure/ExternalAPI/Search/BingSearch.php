@@ -96,11 +96,11 @@ class BingSearch
         ];
 
         $attempt = 0;
-        $maxAttempts = 2; // original请求 + 1次重试
+        $maxAttempts = 2; // originalrequest + 1次retry
 
         while ($attempt < $maxAttempts) {
             try {
-                // 如果是重试(第二次尝试)，禁用SSLverify
+                // 如果是retry(第二次尝试)，禁用SSLverify
                 if ($attempt !== 0) {
                     $clientConfig['verify'] = false;
                     $this->logger->warning('Retrying request with SSL verification disabled', [
@@ -111,19 +111,19 @@ class BingSearch
 
                 $client = new Client($clientConfig);
 
-                // 发送 GET 请求
+                // send GET request
                 $response = $client->request('GET', '', [
                     'query' => $queryParams,
                 ]);
 
-                // get响应体content
+                // getresponse体content
                 $body = $response->getBody()->getContents();
 
                 // 如果need将 JSON 转换为array或object，canuse json_decode
-                // 请求success，return数据
+                // requestsuccess，return数据
                 return Json::decode($body);
             } catch (RequestException $e) {
-                // 如果有响应，说明是HTTPerror(4xx, 5xx等)，不重试
+                // 如果有response，说明是HTTPerror(4xx, 5xx等)，不retry
                 if ($e->hasResponse()) {
                     $statusCode = $e->getResponse()?->getStatusCode();
                     $reason = $e->getResponse()?->getReasonPhrase();
@@ -132,7 +132,7 @@ class BingSearch
                         'endpoint' => $requestUrl,
                         'statusCode' => $statusCode,
                     ]);
-                    break; // HTTPerror不重试，直接跳出循环
+                    break; // HTTPerror不retry，直接跳出循环
                 }
                 $this->logger->warning('Network error occurred', [
                     'endpoint' => $requestUrl,

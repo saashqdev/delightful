@@ -67,11 +67,11 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAI格式响应 - GPT4o版本.
+     * generate图像并returnOpenAIformatresponse - GPT4oversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先create响应object
+        // 1. 预先createresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -80,11 +80,11 @@ class GPT4oModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof GPT4oModelRequest) {
-            $this->logger->error('GPT4o OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
-            return $response; // returnnull数据响应
+            $this->logger->error('GPT4o OpenAIformat生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            return $response; // returnnull数据response
         }
 
-        // 3. 并发handle - 直接操作响应object
+        // 3. 并发handle - 直接操作responseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -99,16 +99,16 @@ class GPT4oModel extends AbstractImageGenerate
 
                     $this->validateGPT4oResponse($result);
 
-                    // success：settingimage数据到响应object
+                    // success：settingimage数据到responseobject
                     $this->addImageDataToResponseGPT4o($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfo到响应object（只settingfirsterror）
+                    // fail：settingerrorinfo到responseobject（只settingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GPT4o OpenAI格式生图：单个请求fail', [
+                    $this->logger->error('GPT4o OpenAIformat生图：单个requestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -119,8 +119,8 @@ class GPT4oModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. 记录final结果
-        $this->logger->info('GPT4o OpenAI格式生图：并发handlecomplete', [
-            '总请求数' => $count,
+        $this->logger->info('GPT4o OpenAIformat生图：并发handlecomplete', [
+            '总request数' => $count,
             'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
@@ -186,7 +186,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 请求generateimage并returntaskID.
+     * requestgenerateimage并returntaskID.
      */
     #[RateLimit(create: 20, consume: 1, capacity: 0, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_SUBMIT_KEY_PREFIX . ImageGenerateModelType::TTAPIGPT4o->value, waitTimeout: 60)]
     #[Retry(
@@ -198,7 +198,7 @@ class GPT4oModel extends AbstractImageGenerate
         $prompt = $imageGenerateRequest->getPrompt();
         $referImages = $imageGenerateRequest->getReferImages();
 
-        // 记录请求start
+        // 记录requeststart
         $this->logger->info('GPT4o文生图：start生图', [
             'prompt' => $prompt,
             'referImages' => $referImages,
@@ -208,7 +208,7 @@ class GPT4oModel extends AbstractImageGenerate
             $result = $this->api->submitGPT4oTask($prompt, $referImages);
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('GPT4o文生图：generate请求fail', ['message' => $result['message'] ?? '未知error']);
+                $this->logger->warning('GPT4o文生图：generaterequestfail', ['message' => $result['message'] ?? '未知error']);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
             }
 
@@ -271,11 +271,11 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        throw new Exception('task轮询超时');
+        throw new Exception('task轮询timeout');
     }
 
     /**
-     * 轮询task结果，return原生数据格式.
+     * 轮询task结果，return原生数据format.
      */
     #[Retry(
         maxAttempts: self::GENERATE_RETRY_COUNT,
@@ -317,7 +317,7 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        throw new Exception('task轮询超时');
+        throw new Exception('task轮询timeout');
     }
 
     /**
@@ -326,7 +326,7 @@ class GPT4oModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GPT4oModelRequest) {
-            $this->logger->error('GPT4o文生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('GPT4o文生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -362,10 +362,10 @@ class GPT4oModel extends AbstractImageGenerate
             });
         }
 
-        // 获取所有并行task的结果
+        // get所有并行task的结果
         $results = $parallel->wait();
 
-        // handle结果，保持原生格式
+        // handle结果，保持原生format
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
@@ -413,24 +413,24 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * validateGPT4o API轮询响应数据格式.
+     * validateGPT4o API轮询response数据format.
      */
     private function validateGPT4oResponse(array $result): void
     {
         if (empty($result['imageUrl'])) {
-            throw new Exception('GPT4o响应数据格式error：缺少imageUrl字段');
+            throw new Exception('GPT4oresponse数据formaterror：缺少imageUrl字段');
         }
     }
 
     /**
-     * 将GPT4oimage数据添加到OpenAI响应object中.
+     * 将GPT4oimage数据添加到OpenAIresponseobject中.
      */
     private function addImageDataToResponseGPT4o(
         OpenAIFormatResponse $response,
         array $gpt4oResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedis锁ensure并发安全
+        // useRedislockensure并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从GPT4o轮询结果中提取imageURL
@@ -462,11 +462,11 @@ class GPT4oModel extends AbstractImageGenerate
             // 累计usageinfo - GPT4o没有详细的tokenstatistics
             $currentUsage->addGeneratedImages(1);
 
-            // 更新响应object
+            // updateresponseobject
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensure锁一定will被释放
+            // ensurelock一定will被释放
             $this->unlockResponse($response, $lockOwner);
         }
     }

@@ -10,17 +10,17 @@ namespace App\Domain\Chat\DTO\PageResponseDTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * pagination响应DTO.
+ * paginationresponseDTO.
  */
 class PageResponseDTO extends AbstractDTO
 {
     /**
-     * 响应的paginationToken.
+     * response的paginationToken.
      */
     protected string $pageToken = '';
 
     /**
-     * 响应data响应，不限制array中的元素type.
+     * responsedataresponse，不限制array中的元素type.
      */
     protected array $items = [];
 

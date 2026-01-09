@@ -18,7 +18,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected string $id;
 
     /**
-     * 请求ID.
+     * requestID.
      */
     protected string $requestId;
 
@@ -28,27 +28,27 @@ class EndpointResponseDTO extends AbstractDTO
     protected string $endpointId;
 
     /**
-     * 请求parameterlength.
+     * requestparameterlength.
      */
     protected int $requestLength;
 
     /**
-     * 响应消耗的时间，单位：毫秒.
+     * response消耗的时间，单位：毫秒.
      */
     protected int $responseTime;
 
     /**
-     * 响应 http status码
+     * response http status码
      */
     protected int $httpStatusCode;
 
     /**
-     * 响应的业务status码
+     * response的业务status码
      */
     protected int $businessStatusCode;
 
     /**
-     * 是否请求success
+     * 是否requestsuccess
      */
     protected int $isSuccess = 0;
 

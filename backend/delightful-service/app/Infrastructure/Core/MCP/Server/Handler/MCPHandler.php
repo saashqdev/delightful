@@ -149,15 +149,15 @@ class MCPHandler implements MCPHandlerInterface
 
             $this->getAuthentication()->authenticate($request);
 
-            // get请求的methodname
+            // getrequest的methodname
             $method = $request->getMethod();
 
-            // create处理器实例（短生命周期）
+            // createprocess器实例（短生命周期）
             $handler = $this->methodHandlerFactory->createHandler($method);
 
             $result = null;
             if ($handler) {
-                // 为处理器set所需的管理器组件
+                // 为process器set所需的管理器组件
                 $handler->setToolManager($this->toolManager)
                     ->setResourceManager($this->resourceManager)
                     ->setPromptManager($this->promptManager);
@@ -193,7 +193,7 @@ class MCPHandler implements MCPHandlerInterface
             return $params['sessionId'];
         }
 
-        // 如果都没有，则use请求ID
+        // 如果都没有，则userequestID
         return (string) $request->getId();
     }
 }

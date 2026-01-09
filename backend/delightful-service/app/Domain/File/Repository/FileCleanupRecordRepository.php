@@ -83,7 +83,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * getneed重试的failrecord.
+     * getneedretry的failrecord.
      */
     public function getRetryRecords(int $maxRetries = 3, int $limit = 50): array
     {
@@ -119,7 +119,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 增加重试次数.
+     * 增加retry次数.
      */
     public function incrementRetry(int $id, ?string $errorMessage = null): bool
     {

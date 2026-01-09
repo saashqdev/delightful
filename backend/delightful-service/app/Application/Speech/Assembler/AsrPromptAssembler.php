@@ -25,7 +25,7 @@ class AsrPromptAssembler
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
     {
-        // build内容：use XML tag格式明确区分voice识别内容和笔记内容
+        // build内容：use XML tagformat明确区分voice识别内容和笔记内容
         $contentParts = [];
 
         // 如果有笔记，先添加笔记内容
@@ -52,11 +52,11 @@ usersubmit了一段录音内容，录音内容经过voice识别转为文字，us
 
 ### 优先级原则（重要）
 1. **笔记优先**：如果存在<笔记内容>，标题should侧重笔记内容
-2. **重视笔记标题**：如果笔记是 Markdown 格式且contain标题（# 开头的行），优先采用笔记中的标题内容
+2. **重视笔记标题**：如果笔记是 Markdown format且contain标题（# 开头的行），优先采用笔记中的标题内容
 3. **综合考虑**：同时参考voice识别内容，ensure标题完整准确
 4. **关键词提取**：从笔记和voice识别内容中提取最核心的关键词
 
-### 格式要求
+### format要求
 1. **length限制**：不超过 20 个字符（汉字按 1 个字符计算）
 2. **语言风格**：use陈述性语句，避免疑问句
 3. **简洁明确**：直接概括核心theme，不要添加修饰词
@@ -84,7 +84,7 @@ PROMPT;
     /**
      * generatefileupload场景的录音标题hint词（强调file名的重要性）.
      *
-     * @param string $userRequestMessage user在chat框send的请求message
+     * @param string $userRequestMessage user在chat框send的requestmessage
      * @param string $language 输出语言（如：zh_CN, en_US）
      * @return string 完整的hint词
      */
@@ -96,9 +96,9 @@ PROMPT;
 你是一个专业的录音内容标题generate助手。
 
 ## 背景说明
-userupload了一个audiofile到系统中，并在chat框中send了总结请求。现在need你according touser的请求message（其中containfile名），为这次录音总结generate一个简洁准确的标题。
+userupload了一个audiofile到系统中，并在chat框中send了总结request。现在need你according touser的requestmessage（其中containfile名），为这次录音总结generate一个简洁准确的标题。
 
-## user在chat框的请求
+## user在chat框的request
 usersend的originalmessage如下：
 ```
 {userRequestMessage}
@@ -113,7 +113,7 @@ usersend的originalmessage如下：
    - 如果file名是日期时间戳（如"20241112_143025.mp3"）或无意义字符（如"录音001.mp3"），则use通用描述
 3. **提取关键词**：从file名中提取最核心的关键词和theme
 
-### 格式要求
+### format要求
 1. **length限制**：不超过 20 个字符（汉字按 1 个字符计算）
 2. **语言风格**：use陈述性语句，避免疑问句
 3. **简洁明确**：直接概括核心theme，不要添加修饰词

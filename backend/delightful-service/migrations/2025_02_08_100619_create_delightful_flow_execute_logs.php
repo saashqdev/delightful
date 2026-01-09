@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::dropIfExists('delightful_flow_execute_logs');
         Schema::create('delightful_flow_execute_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('execute_data_id')->default('')->comment('执行dataID');
+            $table->string('execute_data_id')->default('')->comment('executedataID');
             $table->string('conversation_id')->default('')->comment('conversationID');
             $table->string('flow_code')->default('')->comment('process编码');
             $table->string('flow_version_code')->default('')->comment('version编码');

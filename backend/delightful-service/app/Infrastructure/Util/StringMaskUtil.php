@@ -10,7 +10,7 @@ namespace App\Infrastructure\Util;
 class StringMaskUtil
 {
     /**
-     * 对string进行脱敏处理
+     * 对string进行脱敏process
      * 保留前三位和后三位，中间用星号代替.
      */
     public static function mask(string $value): string

@@ -78,7 +78,7 @@ class AiAbilityAppService extends AbstractKernelAppService
      * updateAI能力.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
-     * @param UpdateAiAbilityRequest $request update请求
+     * @param UpdateAiAbilityRequest $request updaterequest
      * @return bool 是否updatesuccess
      */
     public function update(DelightfulUserAuthorization $authorization, UpdateAiAbilityRequest $request): bool
@@ -147,7 +147,7 @@ class AiAbilityAppService extends AbstractKernelAppService
                 // usedatabase中的originalvalue
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
-            // 如果是array，递归处理
+            // 如果是array，递归process
             elseif (is_array($value)) {
                 $dbValue = $dbConfig[$key] ?? [];
                 $result[$key] = is_array($dbValue)

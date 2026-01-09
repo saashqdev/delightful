@@ -18,9 +18,9 @@ abstract class AbstractOpenApi
 
     protected function getAccessToken(): string
     {
-        // 全面兼容 openai 的 api_key 格式
+        // 全面兼容 openai 的 api_key format
 
-        // 1. 按顺序尝试从请求头中get
+        // 1. 按顺序尝试从request头中get
         $headers = [
             'api-key',
             'llm-access-token',
@@ -49,7 +49,7 @@ abstract class AbstractOpenApi
             return $apiKey;
         }
 
-        // 5. 从请求体中get
+        // 5. 从request体中get
         $parsedBody = $this->request->getParsedBody();
         if (is_array($parsedBody) && isset($parsedBody['api_key'])) {
             return $parsedBody['api_key'];
@@ -59,7 +59,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * 从指定的请求头列表中按顺序get令牌.
+     * 从指定的request头列表中按顺序gettoken.
      */
     protected function getTokenFromHeaders(array $headerNames): string
     {

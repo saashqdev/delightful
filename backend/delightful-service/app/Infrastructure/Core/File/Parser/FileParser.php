@@ -33,7 +33,7 @@ class FileParser
      * 解析filecontent.
      *
      * @param string $fileUrl fileURL地址
-     * @param bool $textPreprocess 是否进行文本预处理
+     * @param bool $textPreprocess 是否进行文本预process
      * @return string 解析后的filecontent
      * @throws Exception 当file解析fail时
      */
@@ -72,7 +72,7 @@ class FileParser
             /** @var FileParserDriverInterface $driver */
             $driver = di($interface);
             $res = $driver->parse($tempFile, $fileUrl, $extension);
-            // 如果是csv、xlsx、xlsfile，need进行额外处理
+            // 如果是csv、xlsx、xlsfile，need进行额外process
             if ($textPreprocess && in_array($extension, ['csv', 'xlsx', 'xls'])) {
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }
@@ -90,7 +90,7 @@ class FileParser
     }
 
     /**
-     * downloadfile到temporary位置.
+     * downloadfile到temporaryposition.
      *
      * @param string $url fileURL地址
      * @param string $tempFile temporaryfile路径
@@ -125,7 +125,7 @@ class FileParser
         $localFile = fopen($tempFile, 'w');
 
         if (! $fileStream || ! $localFile) {
-            ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法打开file流');
+            ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法打开filestream');
         }
 
         // 如果filesize未知，need在download过程中控制size
@@ -143,8 +143,8 @@ class FileParser
     /**
      * streamdownload并控制filesize.
      *
-     * @param resource $fileStream 远程file流资源
-     * @param resource $localFile 本地file流资源
+     * @param resource $fileStream 远程filestream资源
+     * @param resource $localFile 本地filestream资源
      * @param int $maxSize filesize限制（字节）
      * @throws Exception 当filesize超限或writefail时
      */

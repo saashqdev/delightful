@@ -28,7 +28,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         $groupDTOs = AdminModeAssembler::groupEntitiesToAdminDTOs($groups);
 
-        // 处理分组图标
+        // process分组图标
         $this->processGroupIcons($groupDTOs);
 
         return $groupDTOs;
@@ -96,7 +96,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 从请求object直接转换为实体
+            // 从requestobject直接转换为实体
             $groupEntity = AdminModeAssembler::updateModeGroupRequestToEntity($request, $groupId);
 
             $updatedGroup = $this->groupDomainService->updateGroup($dataIsolation, $groupEntity);

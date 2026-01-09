@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\File\DTO;
 
 /**
- * 云存储fileinformationDTO.
+ * 云storagefileinformationDTO.
  */
 readonly class CloudFileInfoDTO
 {

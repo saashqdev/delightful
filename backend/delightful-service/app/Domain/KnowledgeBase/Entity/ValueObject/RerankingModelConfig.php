@@ -39,23 +39,23 @@ class RerankingModelConfig extends AbstractValueObject
     private string $apiEndpoint = '';
 
     /**
-     * API 密钥.
+     * API key.
      *
-     * 访问重sortservice的 API 密钥
+     * 访问重sortservice的 API key
      */
     private string $apiKey = '';
 
     /**
-     * 超时time（秒）.
+     * timeouttime（秒）.
      *
-     * API 请求的超时time，单位为秒
+     * API request的timeouttime，单位为秒
      */
     private float $timeout = 3.0;
 
     /**
-     * 重试次数.
+     * retry次数.
      *
-     * API 请求fail时的重试次数
+     * API requestfail时的retry次数
      */
     private int $retryCount = 2;
 
@@ -67,9 +67,9 @@ class RerankingModelConfig extends AbstractValueObject
     private int $topN = 3;
 
     /**
-     * 批处理size.
+     * 批processsize.
      *
-     * 批量处理文档的size，用于提高performance
+     * 批量process文档的size，用于提高performance
      */
     private int $batchSize = 16;
 
@@ -139,7 +139,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get API 密钥.
+     * get API key.
      */
     public function getApiKey(): string
     {
@@ -147,7 +147,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set API 密钥.
+     * set API key.
      */
     public function setApiKey(string $apiKey): self
     {
@@ -156,7 +156,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get超时time.
+     * gettimeouttime.
      */
     public function getTimeout(): float
     {
@@ -164,7 +164,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set超时time.
+     * settimeouttime.
      */
     public function setTimeout(float $timeout): self
     {
@@ -176,7 +176,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get重试次数.
+     * getretry次数.
      */
     public function getRetryCount(): int
     {
@@ -184,7 +184,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set重试次数.
+     * setretry次数.
      */
     public function setRetryCount(int $retryCount): self
     {
@@ -216,7 +216,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get批处理size.
+     * get批processsize.
      */
     public function getBatchSize(): int
     {
@@ -224,7 +224,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set批处理size.
+     * set批processsize.
      */
     public function setBatchSize(int $batchSize): self
     {

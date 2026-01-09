@@ -25,7 +25,7 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * 节点元数据，可用作给前端的定位，后端仅存储和展示，没有任何逻辑.
+     * 节点元数据，可用作给前端的定位，后端仅storage和展示，没有任何逻辑.
      */
     public array $meta = [];
 
@@ -133,7 +133,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点版本.
+     * get节点version.
      */
     public function getNodeVersion(): string
     {
@@ -141,7 +141,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点版本.
+     * set节点version.
      */
     public function setNodeVersion(?string $nodeVersion): self
     {

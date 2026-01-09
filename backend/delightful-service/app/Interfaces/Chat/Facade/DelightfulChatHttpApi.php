@@ -146,7 +146,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * session窗口滚动加载message.
+     * session窗口滚动loadmessage.
      */
     public function messageQueries(RequestInterface $request, string $conversationId): array
     {
@@ -509,7 +509,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 处理chat补全的共同逻辑.
+     * processchat补全的共同逻辑.
      */
     protected function handleChatCompletions(array $params, ?string $conversationId, ?string $topicId): array
     {
@@ -562,7 +562,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 生成cache键.
+     * generatecache键.
      */
     private function generateCacheKey(?string $conversationId, ?string $topicId, string $message, string $userId): string
     {
@@ -588,7 +588,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 处理补全content.
+     * process补全content.
      */
     private function processCompletionContent(string $completionContent): string
     {

@@ -59,7 +59,7 @@ class ExecutionData
     private array $nodeContext = [];
 
     /**
-     * 节点执行次数.
+     * 节点execute次数.
      */
     private array $executeNum = [];
 
@@ -78,7 +78,7 @@ class ExecutionData
     private array $variables = [];
 
     /**
-     * attachment。process执行时产生的所有filerecord.
+     * attachment。processexecute时产生的所有filerecord.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];
@@ -127,10 +127,10 @@ class ExecutionData
     private FlowStreamStatus $flowStreamStatus = FlowStreamStatus::Pending;
 
     /**
-     * 发送方的冗余info.
-     * $userEntity. 发送方的userinfo.
-     * $seqEntity. 发送方的session窗口info.
-     * $messageEntity. 发送方的messageinfo.
+     * send方的冗余info.
+     * $userEntity. send方的userinfo.
+     * $seqEntity. send方的session窗口info.
+     * $messageEntity. send方的messageinfo.
      */
     private array $senderEntities = [];
 

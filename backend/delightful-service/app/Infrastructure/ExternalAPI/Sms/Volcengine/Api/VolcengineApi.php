@@ -29,12 +29,12 @@ use function Hyperf\Config\config;
 abstract class VolcengineApi
 {
     /**
-     * 国内短信请求地址
+     * 国内短信request地址
      */
     private const CHINA_HOST = 'https://sms.volcengineapi.com';
 
     /**
-     * 国外短信请求地址
+     * 国外短信request地址
      */
     private const SINGAPORE_HOST = 'https://sms.byteplusapi.com';
 
@@ -54,12 +54,12 @@ abstract class VolcengineApi
     protected string $action;
 
     /**
-     * 接口版本.
+     * 接口version.
      */
     protected string $version;
 
     /**
-     * 请求地址
+     * request地址
      */
     protected string $host;
 
@@ -114,14 +114,14 @@ abstract class VolcengineApi
 
     /**
      * @throws GuzzleException
-     * @todo 接入message发送status回调
+     * @todo 接入messagesendstatuscallback
      */
     protected function sendRequest()
     {
-        // set请求的signature和X-Date请求头
+        // setrequest的signature和X-Daterequest头
         $this->setAuth();
         try {
-            // 请求头追加signature
+            // request头追加signature
             $options = [
                 RequestOptions::QUERY => $this->getQuery(),
                 RequestOptions::HEADERS => $this->getHeaders(),
@@ -132,7 +132,7 @@ abstract class VolcengineApi
             // 进行error码判断
             if (isset($responseBody['ResponseMetadata']['Error'])) {
                 $this->logger->error('sendSmsError ' . Json::encode($responseBody));
-                throw new RuntimeException('短信发送fail');
+                throw new RuntimeException('短信sendfail');
             }
             $this->logger->info(sprintf('volce sendRequest %s response %s', Json::encode($options), Json::encode($responseBody)));
             return $responseBody;
@@ -149,7 +149,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * 接受different的短信type发送
+     * 接受different的短信typesend
      */
     protected function init(string $messageGroupId, string $sign, string $templateId): void
     {
@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // 字节方的请求头的value是array,才能参与后续的signature
+        // 字节方的request头的value是array,才能参与后续的signature
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }
@@ -176,7 +176,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * setparameter的signature和公共请求头parameterX-Date.
+     * setparameter的signature和公共request头parameterX-Date.
      */
     protected function setAuth(): void
     {
@@ -199,7 +199,7 @@ abstract class VolcengineApi
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
-        // 请求头加上X-Date
+        // request头加上X-Date
         $this->addHeader('X-Date', $result->getXDate());
         $auth = $result->getAuthorization();
         // 加上signature
@@ -208,7 +208,7 @@ abstract class VolcengineApi
 
     protected function setHeaders(): void
     {
-        // 研究发现,文档要求在请求头中传AccessKey/SecretKey/ServiceName/Region,其实can不传. Authorization头中有传AccessKey
+        // 研究发现,文档要求在request头中传AccessKey/SecretKey/ServiceName/Region,其实can不传. Authorization头中有传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],

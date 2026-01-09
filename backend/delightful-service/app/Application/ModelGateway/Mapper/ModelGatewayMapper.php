@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * 集合项目本身多套的 ModelGatewayMapper - final全部convert为 odin model parameter格式.
+ * 集合项目本身多套的 ModelGatewayMapper - final全部convert为 odin model parameterformat.
  */
 class ModelGatewayMapper extends ModelMapper
 {
@@ -116,7 +116,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该method获取到的一定是真实call的模型.
+     * 该methodget到的一定是真实call的模型.
      * 仅 ModelGateway 领域use.
      * @param string $model expected是管理后台的 model_id，过度阶段接受传入 model_version
      */
@@ -131,7 +131,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该method获取到的一定是真实call的模型.
+     * 该methodget到的一定是真实call的模型.
      * 仅 ModelGateway 领域use.
      * @param string $model 模型名称 expected是管理后台的 model_id，过度阶段接受 model_version
      */
@@ -159,7 +159,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取currentorganization下的所有可用 chat 模型.
+     * getcurrentorganization下的所有可用 chat 模型.
      * @return OdinModel[]
      */
     public function getChatModels(BaseDataIsolation $dataIsolation): array
@@ -169,7 +169,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取currentorganization下的所有可用 embedding 模型.
+     * getcurrentorganization下的所有可用 embedding 模型.
      * @return OdinModel[]
      */
     public function getEmbeddingModels(BaseDataIsolation $dataIsolation): array
@@ -267,14 +267,14 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取currentorganization下指定type的所有可用模型.
+     * getcurrentorganization下指定type的所有可用模型.
      * @return OdinModel[]
      */
     private function getModelsByType(ModelGatewayDataIsolation $dataIsolation, ModelType $modelType): array
     {
         $list = [];
 
-        // 获取已持久化的configuration
+        // get已持久化的configuration
         $models = $this->getModels($modelType->isLLM() ? 'chat' : 'embedding');
         foreach ($models as $name => $model) {
             switch ($modelType) {
@@ -295,7 +295,7 @@ class ModelGatewayMapper extends ModelMapper
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
         }
 
-        // 获取current套餐下的可用模型
+        // getcurrent套餐下的可用模型
         $availableModelIds = $dataIsolation->getSubscriptionManager()->getAvailableModelIds($modelType);
 
         // needcontain官方organization的数据
@@ -325,7 +325,7 @@ class ModelGatewayMapper extends ModelMapper
             $providerIds[] = $providerConfig->getServiceProviderId();
         }
 
-        // 获取 服务商
+        // get 服务商
         $providers = $this->providerManager->getProvidersByIds($providerDataIsolation, $providerIds);
 
         // 组装数据
@@ -473,7 +473,7 @@ class ModelGatewayMapper extends ModelMapper
             $checkStatus = false;
         }
 
-        // 获取模型
+        // get模型
         $providerModelEntity = $this->providerManager->getAvailableByModelIdOrId($providerDataIsolation, $model, $checkStatus);
         if (! $providerModelEntity) {
             $this->logger->info('模型不存在', ['model' => $model]);
@@ -492,7 +492,7 @@ class ModelGatewayMapper extends ModelMapper
             }
         }
 
-        // 获取configuration
+        // getconfiguration
         $providerConfigEntity = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, [$providerModelEntity->getServiceProviderConfigId()])[$providerModelEntity->getServiceProviderConfigId()] ?? null;
         if (! $providerConfigEntity) {
             $this->logger->info('服务商configuration不存在', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
@@ -503,7 +503,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // 获取服务商
+        // get服务商
         $providerEntity = $this->providerManager->getProvidersByIds($providerDataIsolation, [$providerConfigEntity->getServiceProviderId()])[$providerConfigEntity->getServiceProviderId()] ?? null;
 
         if (! $providerEntity) {

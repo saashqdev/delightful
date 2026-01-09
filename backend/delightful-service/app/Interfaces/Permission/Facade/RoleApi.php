@@ -138,11 +138,11 @@ class RoleApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // create并verify请求DTO
+        // create并verifyrequestDTO
         $requestDTO = new CreateSubAdminRequestDTO($this->request->all());
         if (! $requestDTO->validate()) {
             $errors = $requestDTO->getValidationErrors();
-            throw new InvalidArgumentException('请求parameterverifyfail: ' . implode(', ', $errors));
+            throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
 
         // createrole实体
@@ -177,12 +177,12 @@ class RoleApi extends AbstractPermissionApi
         // getroleID
         $roleId = (int) $this->request->route('id');
 
-        // create并verify请求DTO
+        // create并verifyrequestDTO
         $requestDTO = new UpdateSubAdminRequestDTO($this->request->all());
 
         if (! $requestDTO->validate()) {
             $errors = $requestDTO->getValidationErrors();
-            throw new InvalidArgumentException('请求parameterverifyfail: ' . implode(', ', $errors));
+            throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
         if (! $requestDTO->hasUpdates()) {
             throw new InvalidArgumentException('at leastneed提供一个要update的field');

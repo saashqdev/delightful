@@ -43,7 +43,7 @@ class DelightfulChatFileAppService extends AbstractAppService
         $fileEntity->setFileName($fileData['filename'] ?? '');
         $fileEntity->setFileSize($fileData['file_size'] ?? 0);
 
-        // 处理filetype
+        // processfiletype
         $fileTypeValue = $fileData['file_type'] ?? FileType::File->value;
         $fileType = FileType::tryFrom($fileTypeValue) ?? FileType::File;
         $fileEntity->setFileType($fileType);

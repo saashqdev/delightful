@@ -25,7 +25,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verify响应结构
+        // verifyresponse结构
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
@@ -63,7 +63,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verify响应结构
+        // verifyresponse结构
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);

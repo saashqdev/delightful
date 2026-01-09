@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->string('third_leader_user_id', 64)->comment('在此department的直属领导的 user_id')->default('');
             $table->string('third_city', 64)->comment('工作城市')->default('');
             $table->string('third_country', 32)->comment('国家或地区 Code 缩写')->default('CN');
-            $table->string('third_join_time', 64)->comment('入职time。秒级time戳格式，table示从 1970 年 1 月 1 日开始所经过的秒数。');
+            $table->string('third_join_time', 64)->comment('入职time。秒级time戳format，table示从 1970 年 1 月 1 日开始所经过的秒数。');
             $table->string('third_employee_no', 32)->comment('工号')->default('');
             $table->tinyInteger('third_employee_type')->comment('员工type。1：正式员工2：实习生3：外包4：劳务 5：顾问')->default(1);
             $table->text('third_custom_attrs')->comment('customizefield。');

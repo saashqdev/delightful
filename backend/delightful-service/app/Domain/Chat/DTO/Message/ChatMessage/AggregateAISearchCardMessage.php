@@ -17,7 +17,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 聚合AIsearch的响应cardmessage.
+ * 聚合AIsearch的responsecardmessage.
  */
 class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface, LLMMessageInterface
 {
@@ -225,7 +225,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     }
 
     /**
-     * 只return大模型return的文本content， 且忽略invalid的content，如: "已经为您找到答案，请等待生成总结“.
+     * 只return大模型return的文本content， 且忽略invalid的content，如: "已经为您找到答案，请等待generate总结“.
      */
     public function getTextContent(): string
     {

@@ -100,7 +100,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $this->organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-        // 忽略执行
+        // 忽略execute
         if ($this->node->getNodeParamsConfig()->isSkipExecute()) {
             return;
         }
@@ -206,7 +206,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // 如果 $response 本身就是 JSON 格式的，那么直接return
+        // 如果 $response 本身就是 JSON format的，那么直接return
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];
@@ -223,7 +223,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     /**
      * todo 这里暂不implement重复upload的issue，均当做新fileupload
-     * recordprocess所产生的file，均will同时upload到云端，后续节点needuse时从执行process数据中优先匹配.
+     * recordprocess所产生的file，均will同时upload到云端，后续节点needuse时从executeprocess数据中优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */

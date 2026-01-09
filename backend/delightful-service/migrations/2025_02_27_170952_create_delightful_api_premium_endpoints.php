@@ -15,7 +15,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存在就不执行
+        // table存在就不execute
         if (Schema::hasTable('delightful_api_premium_endpoints')) {
             return;
         }
@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
                 ->comment('熔断status: closed=正常service中, open=熔断中, half_open=尝试restore中');
-            $table->string('resources', 255)->comment('资源的消耗 id list，一次请求可能消耗多种资源')->nullable();
+            $table->string('resources', 255)->comment('资源的消耗 id list，一次request可能消耗多种资源')->nullable();
             $table->datetimes();
             $table->unique(['enabled', 'type', 'provider', 'name'], 'unique_enabled_type_provider_name');
             $table->comment('API接入点table，关联了接入点的可消耗资源info');

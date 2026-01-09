@@ -23,7 +23,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     public const string ALL_PERMISSIONS = DelightfulAdminResourceEnum::ORGANIZATION_ADMIN->value;
 
     /**
-     * 获取所有操作type.
+     * get所有操作type.
      */
     public function getOperations(): array
     {
@@ -31,7 +31,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 获取所有资源.
+     * get所有资源.
      */
     public function getResources(): array
     {
@@ -39,7 +39,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 获取资源的国际化tag（由 DelightfulResourceEnum 提供）.
+     * get资源的国际化tag（由 DelightfulResourceEnum 提供）.
      */
     public function getResourceLabel(string $resource): string
     {
@@ -109,7 +109,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 获取操作的国际化tag.
+     * get操作的国际化tag.
      */
     public function getOperationLabel(string $operation): string
     {
@@ -127,7 +127,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 获取资源的模块.
+     * get资源的模块.
      */
     public function getResourceModule(string $resource): string
     {
@@ -193,10 +193,10 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 获取层级结构的permission树
+     * get层级结构的permission树
      * generate无限极permission树,规则：according topermission资源string（如 Admin.ai.model_management）逐段split，逐层构造树。
      *
-     * return格式：
+     * returnformat：
      * [
      *   [
      *     'label' => '管理后台',
@@ -273,7 +273,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             ];
         }
 
-        // 将关联array children 转为索引array，保持return格式
+        // 将关联array children 转为索引array，保持returnformat
         return array_values($this->normalizeTree($tree));
     }
 
@@ -390,7 +390,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 获取按资源的操作tag。
+     * get按资源的操作tag。
      */
     protected function getOperationLabelByResource(string $resource, string $operation): string
     {
@@ -430,7 +430,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * according to平台 key 获取显示名称，可按需extension.
+     * according to平台 key get显示名称，可按需extension.
      */
     private function getPlatformLabel(string $platformKey): string
     {

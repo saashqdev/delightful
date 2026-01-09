@@ -48,7 +48,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * 资源的消耗的 id list. 一次请求可能will消耗多个资源。
+     * 资源的消耗的 id list. 一次request可能will消耗多个资源。
      * @var null|string[]
      */
     protected ?array $resources = null;

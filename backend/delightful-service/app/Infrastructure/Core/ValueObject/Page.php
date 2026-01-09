@@ -28,7 +28,7 @@ class Page
     }
 
     /**
-     * according to页码及页数计算分片data起始位置.
+     * according to页码及页数计算分片data起始position.
      */
     public function getSliceStart(): int
     {
@@ -36,7 +36,7 @@ class Page
     }
 
     /**
-     * according to页码及页数计算分片data结束位置.
+     * according to页码及页数计算分片data结束position.
      */
     public function getSliceEnd(): int
     {

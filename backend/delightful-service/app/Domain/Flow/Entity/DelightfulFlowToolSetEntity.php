@@ -21,7 +21,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一编码，仅在create时生成，用作给前端的id.
+     * 唯一编码，仅在create时generate，用作给前端的id.
      */
     protected string $code;
 

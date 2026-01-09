@@ -23,7 +23,7 @@ enum TextPreprocessRule: int
         return match ($this) {
             self::REPLACE_WHITESPACE => '替换掉连续null格/换行符/制表符',
             self::REMOVE_URL_EMAIL => 'delete所有url和电子邮件地址',
-            self::FORMAT_EXCEL => '剔除标题行，将Excelcontent与标题行拼接成"标题:content"格式，剔除sheet行，行间换行调整为\n\n',
+            self::FORMAT_EXCEL => '剔除标题行，将Excelcontent与标题行拼接成"标题:content"format，剔除sheet行，行间换行调整为\n\n',
         };
     }
 

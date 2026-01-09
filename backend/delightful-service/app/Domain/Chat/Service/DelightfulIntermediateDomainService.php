@@ -25,7 +25,7 @@ use Throwable;
  */
 class DelightfulIntermediateDomainService extends AbstractDomainService
 {
-    // 超级麦吉的交互指令temporarymessage处理
+    // 超级麦吉的交互指令temporarymessageprocess
     /**
      * @throws Throwable
      */
@@ -35,7 +35,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
         DelightfulConversationEntity $userConversationEntity,
     ): void {
         try {
-            // 1. get发送者（currentuser）info
+            // 1. getsend者（currentuser）info
             $senderUserId = $dataIsolation->getCurrentUserId();
             if (empty($senderUserId)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
@@ -51,7 +51,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
 
-            // 2. get超级麦吉（接收者）info
+            // 2. get超级麦吉（receive者）info
             $agentUserId = $messageDTO->getReceiveId();
             $agentUserEntity = $this->delightfulUserRepository->getUserById($agentUserId);
             if (! $agentUserEntity) {
@@ -108,7 +108,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $messageEntity->setMessageType($messageDTO->getMessageType());
             $messageEntity->setSendTime($messageDTO->getSendTime());
 
-            // 6. create发送者额外info
+            // 6. createsend者额外info
             $senderExtraDTO = new SenderExtraDTO();
             // temporarymessage可能不need环境ID，usedefaultvalue
             $senderExtraDTO->setDelightfulEnvId(null);
@@ -124,7 +124,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 $senderExtraDTO
             ));
         } catch (Throwable $e) {
-            // recorderrorlog，但不阻断处理process
+            // recorderrorlog，但不阻断processprocess
             $this->logger?->error('HandleBeDelightfulInstructionMessage failed', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),

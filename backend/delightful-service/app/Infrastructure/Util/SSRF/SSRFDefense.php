@@ -45,7 +45,7 @@ class SSRFDefense
         $this->isValid($allowRedirect);
 
         $url = $this->url;
-        // 替换成 ip 访问，此时need在请求中添加 Host 才行
+        // 替换成 ip 访问，此时need在request中添加 Host 才行
         if ($this->options->isReplaceIp()) {
             $url = str_replace($this->host, $this->ip, $url);
         }
@@ -166,8 +166,8 @@ class SSRFDefense
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);                // 超时5秒
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // 连接超时3秒
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);                // timeout5秒
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // 连接timeout3秒
         curl_setopt($ch, CURLOPT_MAXREDIRS, 0);              // 不跟随重定向
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);      // verifySSL证书
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);         // verifySSL主机

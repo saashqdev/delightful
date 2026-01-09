@@ -18,7 +18,7 @@ enum AdminGlobalSettingsName: string
     // 第third-partypublish管控
     case THIRD_PARTY_PUBLISH = 'third_platform_publish';
 
-    // get助理全局setting类型
+    // get助理全局settingtype
     public static function getByType(AdminGlobalSettingsType $type): string
     {
         return match ($type) {

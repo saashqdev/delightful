@@ -66,7 +66,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 去重
         $iconPaths = array_unique($iconPaths);
 
-        // 批量获取icon的URL（自动按organization代码grouphandle）
+        // 批量geticon的URL（自动按organization代码grouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
         // 替换DTO中的icon路径为完整URL
@@ -118,7 +118,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 去重
         $iconPaths = array_unique($iconPaths);
 
-        // 批量获取icon的URL（自动按organization代码grouphandle）
+        // 批量geticon的URL（自动按organization代码grouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
         // 替换DTO中的icon路径为完整URL
@@ -148,7 +148,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取数据隔离object
+     * get数据隔离object
      */
     protected function getModeDataIsolation(DelightfulUserAuthorization $authorization): ModeDataIsolation
     {
@@ -189,7 +189,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 去重
         $iconPaths = array_unique($iconPaths);
 
-        // 批量获取icon的URL（自动按organization代码grouphandle）
+        // 批量geticon的URL（自动按organization代码grouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
         // 替换DTO中的icon路径为完整URL
@@ -211,12 +211,12 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取模型（考虑服务商级联status）.
+     * get模型（考虑服务商级联status）.
      * @return ProviderModelEntity[]
      */
     protected function getModels(ModeAggregate $modeAggregate): array
     {
-        // 获取所有模型ID (usemodel_id而不是provider_model_id)
+        // get所有模型ID (usemodel_id而不是provider_model_id)
         $allModelIds = [];
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
             foreach ($groupAggregate->getRelations() as $relation) {
@@ -230,7 +230,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
 
         $providerDataIsolation = new ProviderDataIsolation(OfficialOrganizationUtil::getOfficialOrganizationCode());
 
-        // 批量获取模型
+        // 批量get模型
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
         // 提取所有服务商ID
@@ -241,7 +241,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 批量获取服务商status
+        // 批量get服务商status
         $providerStatuses = [];
         if (! empty($providerConfigIds)) {
             $providerConfigs = $this->providerConfigDomainService->getByIds($providerDataIsolation, array_unique($providerConfigIds));
@@ -263,12 +263,12 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取详细的模型info（用于管理后台，考虑服务商级联status）.
+     * get详细的模型info（用于管理后台，考虑服务商级联status）.
      * @return array<string, array{best: null|ProviderModelEntity, all: ProviderModelEntity[], status: ModelStatus}>
      */
     protected function getDetailedModels(ModeAggregate $modeAggregate): array
     {
-        // 获取所有模型ID
+        // get所有模型ID
         $allModelIds = [];
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
             foreach ($groupAggregate->getRelations() as $relation) {
@@ -282,7 +282,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
 
         $providerDataIsolation = new ProviderDataIsolation(OfficialOrganizationUtil::getOfficialOrganizationCode());
 
-        // 单次query获取完整的模型info
+        // 单次queryget完整的模型info
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
         // 提取所有服务商ID
@@ -293,7 +293,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 批量获取服务商status
+        // 批量get服务商status
         $providerStatuses = [];
         if (! empty($providerConfigIds)) {
             $providerConfigs = $this->providerConfigDomainService->getByIds($providerDataIsolation, array_unique($providerConfigIds));

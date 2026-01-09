@@ -117,7 +117,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // 最大人数限制减去current人数
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
         $chatGroupUserNumLimit -= $groupUserCount;
-        // 获取本次need添加的群成员 (综合 指定的user_id + departmentid下的user)
+        // get本次need添加的群成员 (综合 指定的user_id + departmentid下的user)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
         // 判断哪些user已经在group chat中
@@ -207,7 +207,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     public function deleteGroup(DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
-        // 获取所有群成员
+        // get所有群成员
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList(
             $delightfulGroupDTO->getId(),
             '',
@@ -272,7 +272,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $groupEntity->setGroupName($delightfulGroupDTO->getGroupName());
         Db::beginTransaction();
         try {
-            // 更新群info
+            // update群info
             $groupEntity = $this->delightfulGroupDomainService->GroupUpdateInfo($delightfulGroupDTO, $dataIsolation);
             // generate群更new seq 并分发
             $seqContent = [
@@ -307,7 +307,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * 获取群的成员列表.
+     * get群的成员列表.
      */
     public function getGroupUserList(string $groupId, string $pageToken, DelightfulUserAuthorization $userAuthorization): array
     {
@@ -316,7 +316,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * 获取user的群列表.
+     * getuser的群列表.
      */
     public function getUserGroupList(string $pageToken, DelightfulUserAuthorization $userAuthorization, int $pageSize): GroupsPageResponseDTO
     {
@@ -395,7 +395,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * 获取本次need添加的群成员.
+     * get本次need添加的群成员.
      * @return DelightfulUserEntity[]
      */
     private function getGroupAddUsers(array $needAddGroupUserIds, DataIsolation $dataIsolation, array $inputDepartmentIds, int $chatGroupUserNumLimit): array
@@ -407,7 +407,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         // 目前只支持添加同organization的user
         $groupAddUsers = $this->delightfulUserDomainService->getUserByIds($needAddGroupUserIds, $dataIsolation, ['user_id', 'nickname']);
-        // 按department获取user
+        // 按departmentgetuser
         if (! empty($departmentIds)) {
             $departmentUsers = $this->delightfulDepartmentUserDomainService->getDepartmentUsersByDepartmentIds(
                 $departmentIds,
@@ -428,7 +428,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     private function getGroupName(DelightfulGroupEntity $delightfulGroupDTO, array $userIds, DataIsolation $dataIsolation): string
     {
-        // 如果group chat名称为null,获取群主 + 20 个群成员的nickname
+        // 如果group chat名称为null,get群主 + 20 个群成员的nickname
         if (empty($delightfulGroupDTO->getGroupName())) {
             $someUserIds = array_slice($userIds, 0, 20);
             $someUserIds[] = $dataIsolation->getCurrentUserId();
@@ -481,7 +481,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     private function noticeGroupChangeSeq(DelightfulSeqEntity $seqEntity): array
     {
-        // 协程notifyuser其他设备,放在事务外面
+        // 协程notifyuser其他设备,放在transaction外面
         co(function () use ($seqEntity) {
             $this->delightfulControlDomainService->pushControlSequence($seqEntity);
         });

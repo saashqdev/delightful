@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::create('delightful_flow_multi_modal_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('message_id', 64)->default('')->comment('messageID')->index();
-            $table->tinyInteger('type')->default(0)->comment('多模态类型。1 image');
+            $table->tinyInteger('type')->default(0)->comment('多模态type。1 image');
             $table->string('model', 128)->default('')->comment('识别所use的模型');
             $table->text('analysis_result')->comment('分析结果');
             $table->datetimes();

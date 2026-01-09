@@ -16,10 +16,10 @@ return new class extends Migration {
     {
         Schema::table('delightful_api_access_tokens', function (Blueprint $table) {
             $table->string('user_id')->default('')->comment('userid')->change();
-            $table->string('type', 20)->default('user')->comment('类型')->after('access_token');
+            $table->string('type', 20)->default('user')->comment('type')->after('access_token');
             $table->string('relation_id', 255)->default('')->comment('关联ID')->after('type');
             $table->string('description', 255)->default('')->comment('描述');
-            $table->integer('rpm')->default(0)->comment('限流');
+            $table->integer('rpm')->default(0)->comment('限stream');
         });
     }
 

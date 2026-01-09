@@ -71,7 +71,7 @@ class EnvManager
             'third_organization_code' => $baseDataIsolation->getThirdPlatformOrganizationCode(),
         ]);
 
-        // 同one协程内无需重复加载
+        // 同one协程内无需重复load
         Context::set('LastBaseDataIsolationInitEnv', $baseDataIsolation);
     }
 

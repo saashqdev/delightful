@@ -210,7 +210,7 @@ class CreateGroupTool extends AbstractBuiltInTool
             "type": "string",
             "key": "opening_speech",
             "title": "开场白",
-            "description": "已current助理的身份发送一次group chat的开场白。default不传该value，除非指定need发送开场白。",
+            "description": "已current助理的身份send一次group chat的开场白。default不传该value，除非指定needsend开场白。",
             "required": null,
             "value": null,
             "encryption": false,

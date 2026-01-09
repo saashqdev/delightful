@@ -28,7 +28,7 @@ enum LoadBalancingType: int
     case WEIGHTED_ROUND_ROBIN = 3;
 
     /**
-     * 哈希策略 - according to请求的哈希value选择后端service
+     * 哈希策略 - according torequest的哈希value选择后端service
      */
     case HASH = 4;
 

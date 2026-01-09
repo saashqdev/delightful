@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 class FluxAPI
 {
-    // 请求超时时间（秒）
+    // requesttimeout时间（秒）
     protected const REQUEST_TIMEOUT = 30;
 
     protected string $apiKey;
@@ -42,7 +42,7 @@ class FluxAPI
     }
 
     /**
-     * submitimage生成task
+     * submitimagegeneratetask
      */
     public function submitTask(string $prompt, string $size, string $mode = 'flux1-dev'): array
     {

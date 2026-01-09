@@ -59,7 +59,7 @@ class CommentRepository
     /**
      * update指定的commentcontent和attachment。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param CommentEntity $commentEntity 要update的comment实体
      */
     public function updateComment(
@@ -83,7 +83,7 @@ class CommentRepository
     /**
      * according to条件getcommentlist。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param GetCommentsWhereVo $whereVo query条件valueobject
      * @return array<CommentEntity> comment实体array
      */
@@ -106,7 +106,7 @@ class CommentRepository
     /**
      * according tocommentIDarrayget对应的commentlist。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param array $commentIds commentIDarray
      * @return array<CommentEntity> comment实体array
      */
@@ -122,7 +122,7 @@ class CommentRepository
     /**
      * according tocommentIDget单个comment实体。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param int $commentId commentID
      * @return ?CommentEntity comment实体，如果不存在则returnnull
      */
@@ -147,7 +147,7 @@ class CommentRepository
     /**
      * delete指定的comment。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param int $commentId commentID
      * @return array delete的commentIDarray
      */
@@ -159,7 +159,7 @@ class CommentRepository
     /**
      * 批量delete指定的comment及其所有子comment。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param array $commentIds 要delete的commentIDarray
      * @return array delete的commentIDarray
      */
@@ -187,7 +187,7 @@ class CommentRepository
     /**
      * 批量restore已delete的comment。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param array $commentIds 要restore的commentIDarray
      */
     public function batchRestore(
@@ -217,7 +217,7 @@ class CommentRepository
     /**
      * according toquery条件getcommentlist。
      *
-     * @param RequestContext $requestContext 请求上下文
+     * @param RequestContext $requestContext request上下文
      * @param GetCommentsWhereVo $commentsWhereVo query条件valueobject
      * @return array<CommentEntity> comment实体array
      */

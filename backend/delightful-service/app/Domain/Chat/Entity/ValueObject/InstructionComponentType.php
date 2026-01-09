@@ -15,9 +15,9 @@ enum InstructionComponentType: int
     // 开关
     case Switch = 2;
 
-    // 文本类型
+    // 文本type
     case Text = 3;
 
-    // status类型
+    // statustype
     case Status = 4;
 }

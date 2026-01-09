@@ -16,11 +16,11 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 class NoAuthentication implements AuthenticationInterface
 {
     /**
-     * verify请求的身份information.
-     * 在此implement中，始终allow所有请求pass.
+     * verifyrequest的身份information.
+     * 在此implement中，始终allow所有requestpass.
      */
     public function authenticate(MessageInterface $request): void
     {
-        // nullimplement，始终allow所有请求pass
+        // nullimplement，始终allow所有requestpass
     }
 }

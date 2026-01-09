@@ -27,10 +27,10 @@ class ClientSequence extends AbstractEntity
     // user的messageid，user下唯一。
     protected string $messageId;
 
-    // 本条message指向的delightful_message_id。 用于implement已读回执场景。存在quote关系时，send_msg_idfield不再return，因为发送方的messageid没有改变。
+    // 本条message指向的delightful_message_id。 用于implement已读回执场景。存在quote关系时，send_msg_idfield不再return，因为send方的messageid没有改变。
     protected ?string $referMessageId;
 
-    // 发送方的messageid
+    // send方的messageid
     protected ?string $senderMessageId;
 
     // message所属session窗口。 客户端canaccording to此value确定message是否要reminder等。如果本地没有发现这个sessionid，主动向service端querysession窗口详情

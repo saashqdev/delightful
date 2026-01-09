@@ -40,18 +40,18 @@ readonly class NoteDTO
     }
 
     /**
-     * 生成file名.
+     * generatefile名.
      *
-     * @param null|string $generatedTitle 生成的标题，if提供则use {title}-笔记.{ext} 格式
+     * @param null|string $generatedTitle generate的标题，if提供则use {title}-笔记.{ext} format
      */
     public function generateFileName(?string $generatedTitle = null): string
     {
         if (! empty($generatedTitle)) {
-            // use生成的标题格式：{title}-笔记.{ext}
+            // usegenerate的标题format：{title}-笔记.{ext}
             return sprintf('%s-%s.%s', $generatedTitle, trans('asr.file_names.note_suffix'), $this->getFileExtension());
         }
 
-        // 回退到default格式
+        // 回退到defaultformat
         return sprintf('%s.%s', trans('asr.file_names.note_prefix'), $this->getFileExtension());
     }
 

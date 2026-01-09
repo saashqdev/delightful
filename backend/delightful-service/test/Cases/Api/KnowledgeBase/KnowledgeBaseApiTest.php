@@ -599,7 +599,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
             'content' => 'This is a test fragment content for testing similarity query functionality',
         ], $document['code'], $code);
 
-        // 执行相似度query
+        // execute相似度query
         $query = 'test相似度query';
         $res = $this->post(
             sprintf('%s/%s/fragments/similarity', self::API, $code),

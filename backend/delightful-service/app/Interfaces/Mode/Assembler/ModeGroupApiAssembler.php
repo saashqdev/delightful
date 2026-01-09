@@ -14,7 +14,7 @@ use App\Interfaces\Mode\DTO\Request\UpdateModeGroupRequest;
 class ModeGroupApiAssembler
 {
     /**
-     * create请求转换为分组DTO.
+     * createrequest转换为分组DTO.
      */
     public static function createRequestToModeGroupDTO(CreateModeGroupRequest $request): ModeGroupDTO
     {
@@ -22,7 +22,7 @@ class ModeGroupApiAssembler
     }
 
     /**
-     * update请求转换为分组DTO.
+     * updaterequest转换为分组DTO.
      */
     public static function updateRequestToModeGroupDTO(UpdateModeGroupRequest $request): ModeGroupDTO
     {

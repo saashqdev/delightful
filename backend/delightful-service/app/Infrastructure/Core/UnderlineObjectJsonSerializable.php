@@ -43,7 +43,7 @@ abstract class UnderlineObjectJsonSerializable implements JsonSerializable, Arra
 
     public function toJsonString(): string
     {
-        // 避免调用 toArray method调用本method时，再调用 hyperf 的 Json::encode method造成死循环
+        // 避免call toArray methodcall本method时，再call hyperf 的 Json::encode method造成死循环
         try {
             $json = json_encode($this, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         } catch (Throwable $exception) {

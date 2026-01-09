@@ -57,7 +57,7 @@ readonly class ProviderManager
      * get可用的模型ID列table.
      *
      * @param ProviderDataIsolation $providerDataIsolation 数据隔离object
-     * @return array<string, array<string>> 按模型类型分组的模型IDarray，格式: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> 按模型type分组的模型IDarray，format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $providerDataIsolation): array
     {

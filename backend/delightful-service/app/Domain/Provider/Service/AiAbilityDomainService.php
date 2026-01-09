@@ -116,7 +116,7 @@ class AiAbilityDomainService
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 
-            // buildname和description（ensure是多语言格式）
+            // buildname和description（ensure是多语言format）
             $name = $abilityConfig['name'];
             if (is_string($name)) {
                 $name = [

@@ -61,7 +61,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // todo 批量处理
+                    // todo 批量process
                     $chatFile = self::report2ChatFile($attachment, $executionData);
                     $chatAttachment = new ChatAttachment($chatFile->toArray());
                     $chatAttachment->setFileUrl($attachment->getUrl());

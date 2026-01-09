@@ -49,7 +49,7 @@ readonly class KnowledgeBaseFragmentSyncSubscriber implements ListenerInterface
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorService */
         $knowledgeBaseVectorService = di(KnowledgeBaseVectorAppService::class);
 
-        // todo 做成queue限流
+        // todo 做成queue限stream
 
         try {
             $knowledgeBaseVectorService->checkCollectionExists($knowledge);

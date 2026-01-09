@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimize版本：直接get启用的助理版本，避免传入大量ID.
+     * optimizeversion：直接get启用的助理version，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimize版本：get启用助理的total.
+     * optimizeversion：get启用助理的total.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -72,7 +72,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * publish版本.
+     * publishversion.
      */
     public function releaseAgentVersion(DelightfulAgentVersionEntity $delightfulAgentVersionEntity): array
     {
@@ -123,7 +123,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * according toidsget助理版本.
+     * according toidsget助理version.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids): array
@@ -177,14 +177,14 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // return的是语义化版本，need在return的基础上+1
+        // return的是语义化version，need在return的基础上+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // 如果版本号是整数格式（如 1），将其转换为语义化版本号（如 1.0.0）
+        // 如果version号是整数format（如 1），将其转换为语义化version号（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
 
-        // 解析版本号，for example "0.0.1" => ['0', '0', '1']
+        // 解析version号，for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
         // 将 PATCH 部分加 1
@@ -203,12 +203,12 @@ class DelightfulAgentVersionDomainService
             $major = (int) $major + 1;
         }
 
-        // 拼接并returnnew版本号
+        // 拼接并returnnewversion号
         return "{$major}.{$minor}.{$patch}";
     }
 
     /**
-     * according to助理 id getdefault的版本.
+     * according to助理 id getdefault的version.
      */
     public function getDefaultVersions(array $agentIds): void
     {
@@ -239,9 +239,9 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * based on游标paginationget指定organization的助理版本list.
+     * based on游标paginationget指定organization的助理versionlist.
      * @param string $organizationCode organization代码
-     * @param array $agentVersionIds 助理版本IDlist
+     * @param array $agentVersionIds 助理versionIDlist
      * @param string $cursor 游标ID，如果为空string则从最新开始
      * @param int $pageSize 每页quantity
      * @return array<DelightfulAgentVersionEntity>
@@ -253,7 +253,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * verify新版本号是否legal.
+     * verify新version号是否legal.
      * @throws BusinessException
      */
     private function validateVersionNumber(string $newVersion, string $oldVersion): void

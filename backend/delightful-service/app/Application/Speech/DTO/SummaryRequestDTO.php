@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Application\Speech\DTO;
 
 /**
- * ASR总结请求DTO
- * save总结请求的所有必传和可选parameter.
+ * ASR总结requestDTO
+ * save总结request的所有必传和可选parameter.
  */
 readonly class SummaryRequestDTO
 {

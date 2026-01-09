@@ -18,7 +18,7 @@ use Hyperf\Codec\Json;
  * ASR 组装器
  * 负责 ASR 相关的实体组装和路径转换.
  *
- * 路径格式说明：
+ * 路径format说明：
  * - 工作区相对路径 (workspace-relative): .asr_recordings/session_xxx 或 录音总结_xxx
  * - 项目工作目录 (work directory): project_123/workspace
  * - organization码+APP_ID+bucket_md5前缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
@@ -128,7 +128,7 @@ class AsrAssembler
         // 标准化路径分隔符
         $normalizedPath = str_replace('\\', '/', trim($fileKey, '/'));
 
-        // 查找 workspace/ 的位置
+        // 查找 workspace/ 的position
         $workspacePos = strpos($normalizedPath, '/workspace/');
         if ($workspacePos !== false) {
             // 提取 workspace/ 后面的部分

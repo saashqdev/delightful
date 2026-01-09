@@ -48,17 +48,17 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const string CHAT_TYPE_GROUP = 'group';
 
     /**
-     * 飞书事件typeconstant.
+     * 飞书eventtypeconstant.
      */
     private const string EVENT_TYPE_MESSAGE_RECEIVE = 'im.message.receive_v1';
 
     /**
-     * 锁定前缀
+     * lock定前缀
      */
     private const string LOCK_PREFIX = 'feishu_message_';
 
     /**
-     * 锁定时间 (秒).
+     * lockschedule间 (秒).
      */
     private const int LOCK_TTL = 7200;
 
@@ -80,7 +80,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private LoggerInterface $logger;
 
     /**
-     * 锁定器.
+     * lock定器.
      */
     private LockerInterface $locker;
 
@@ -116,7 +116,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     {
         $chatMessage = new ThirdPlatformChatMessage();
 
-        // handle服务器validate请求
+        // handle服务器validaterequest
         if (isset($params['challenge'])) {
             return $this->handleChallengeCheck($params, $chatMessage);
         }
@@ -142,7 +142,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             return $this->handleMessageReceive($params, $chatMessage);
         }
 
-        $this->logger->info('未知的飞书事件type', ['event_type' => $eventType]);
+        $this->logger->info('未知的飞书eventtype', ['event_type' => $eventType]);
         return $chatMessage;
     }
 
@@ -168,7 +168,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         try {
             $content = $message->getContent();
-            // parse Markdown 内容，convert为飞书rich text格式
+            // parse Markdown 内容，convert为飞书rich textformat
             $postContent = $this->parseMarkdownToFeiShuPost($content);
             $data = [
                 'receive_id' => $thirdPlatformChatMessage->getOriginConversationId(),
@@ -209,15 +209,15 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handle服务器validate请求
+     * handle服务器validaterequest
      *
-     * @param array $params 请求parameter
+     * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
      * @return ThirdPlatformChatMessage handle后的messageobject
      */
     private function handleChallengeCheck(array $params, ThirdPlatformChatMessage $chatMessage): ThirdPlatformChatMessage
     {
-        $this->logger->info('handle飞书服务器validate请求');
+        $this->logger->info('handle飞书服务器validaterequest');
 
         $chatMessage->setEvent(ThirdPlatformChatEvent::CheckServer);
         $response = new Response(
@@ -231,15 +231,15 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * checkmessageID锁
+     * checkmessageIDlock
      *
      * @param string $messageId messageID
-     * @return bool 是否success锁定
+     * @return bool 是否successlock定
      */
     private function checkMessageIdLock(string $messageId): bool
     {
         if (empty($messageId)) {
-            $this->logger->warning('messageID为null，无法锁定');
+            $this->logger->warning('messageID为null，无法lock定');
             return false;
         }
 
@@ -250,7 +250,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * handlereceive到的message.
      *
-     * @param array $params 请求parameter
+     * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
      * @return ThirdPlatformChatMessage handle后的messageobject
      */
@@ -270,7 +270,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $result = $this->processMessageContent($messageType, $content, $chatMessage, $organizationCode, $messageId);
 
         if ($result === false) {
-            // 不支持的messagetype，已sendhint并setting事件为None
+            // 不支持的messagetype，已sendhint并settingevent为None
             return $chatMessage;
         }
 
@@ -282,7 +282,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'message_id' => $messageId,
         ]);
 
-        // 获取并settinguserextensioninfo
+        // get并settinguserextensioninfo
         try {
             $userExtInfo = $this->getUserExtInfo($params, $organizationCode);
             if ($userExtInfo !== null) {
@@ -290,7 +290,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 $chatMessage->setNickname($userExtInfo->getNickname());
             }
         } catch (Exception $e) {
-            $this->logger->warning('获取userextensioninfofail', [
+            $this->logger->warning('getuserextensioninfofail', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -300,9 +300,9 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 获取userextensioninfo.
+     * getuserextensioninfo.
      *
-     * @param array $params 请求parameter
+     * @param array $params requestparameter
      * @param string $organizationCode organization代码
      * @return null|TriggerDataUserExtInfo userextensioninfoobject
      */
@@ -311,7 +311,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         try {
             $openId = $params['event']['sender']['sender_id']['open_id'] ?? '';
             if (empty($openId)) {
-                $this->logger->warning('userOpenID为null，无法获取userinfo');
+                $this->logger->warning('userOpenID为null，无法getuserinfo');
                 return null;
             }
 
@@ -324,7 +324,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 }
             }
 
-            // 从飞书API获取userinfo
+            // 从飞书APIgetuserinfo
             $userInfo = $this->fetchUserInfoFromFeiShu($openId);
             if (empty($userInfo)) {
                 return null;
@@ -348,7 +348,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
             return $userExtInfo;
         } catch (Exception $e) {
-            $this->logger->error('获取userinfoexception', [
+            $this->logger->error('getuserinfoexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -357,7 +357,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 从飞书API获取userinfo.
+     * 从飞书APIgetuserinfo.
      *
      * @param string $openId userOpenID
      * @return array userinfo
@@ -365,17 +365,17 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private function fetchUserInfoFromFeiShu(string $openId): array
     {
         try {
-            // 获取user基本info
+            // getuser基本info
             $userInfo = $this->application->contact->user($openId);
 
             if (empty($userInfo) || ! isset($userInfo['user'])) {
-                $this->logger->warning('从飞书获取userinfofail', ['open_id' => $openId]);
+                $this->logger->warning('从飞书getuserinfofail', ['open_id' => $openId]);
                 return [];
             }
 
             return $userInfo['user'];
         } catch (Exception $e) {
-            $this->logger->error('call飞书API获取userinfofail', [
+            $this->logger->error('call飞书APIgetuserinfofail', [
                 'open_id' => $openId,
                 'error' => $e->getMessage(),
             ]);
@@ -410,7 +410,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * settingmessage基本info.
      *
-     * @param array $params 请求parameter
+     * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
      */
     private function setMessageBasicInfo(array $params, ThirdPlatformChatMessage $chatMessage): void
@@ -421,13 +421,13 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setRobotCode($params['header']['app_id'] ?? '');
         $chatMessage->setUserId($openId);
         $chatMessage->setOriginConversationId($chatId);
-        $chatMessage->setNickname($openId); // initialsetting为OpenID，后续willpassuserinfo更新
+        $chatMessage->setNickname($openId); // initialsetting为OpenID，后续willpassuserinfoupdate
     }
 
     /**
      * settingconversationID.
      *
-     * @param array $params 请求parameter
+     * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
      */
     private function setConversationId(array $params, ThirdPlatformChatMessage $chatMessage): void
@@ -520,7 +520,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 从飞书获取file.
+     * 从飞书getfile.
      *
      * @param string $messageId messageID
      * @param string $fileKey fileKey
@@ -540,7 +540,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         try {
             return $this->application->file->getIMFile($messageId, $fileKey, $type);
         } catch (Exception $e) {
-            $this->logger->error('获取飞书filefail', [
+            $this->logger->error('get飞书filefail', [
                 'message_id' => $messageId,
                 'file_key' => $fileKey,
                 'file_type' => $type,
@@ -732,11 +732,11 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parseMarkdown内容，convert为飞书rich text格式
+     * parseMarkdown内容，convert为飞书rich textformat
      * 只handleimage，其他内容全部usemd样式.
      *
      * @param string $markdown Markdown内容
-     * @return array 飞书rich text格式
+     * @return array 飞书rich textformat
      */
     private function parseMarkdownToFeiShuPost(string $markdown): array
     {
@@ -749,7 +749,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         // use正则表达式匹配Markdown中的image
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
-        // 如果没有image，直接returnmd格式
+        // 如果没有image，直接returnmdformat
         if (! preg_match_all($pattern, $markdown, $matches, PREG_OFFSET_CAPTURE)) {
             $postContent['content'][] = [
                 [
@@ -779,7 +779,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             // handleimage
             $this->processImageBlock($contentBlocks, $url, $fullMatch);
 
-            // 更新handle位置
+            // updatehandleposition
             $lastPosition = $position + strlen($fullMatch);
         }
 

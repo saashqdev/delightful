@@ -25,7 +25,7 @@ use function Hyperf\Support\retry;
 
 /**
  * message分发模块.
- * 处理different优先级message的消费者,用于写收件方的seq.
+ * processdifferent优先级message的消费者,用于写收件方的seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {
@@ -41,7 +41,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according tomessage优先级.将收件方的message生成序列号.
+     * according tomessage优先级.将收件方的messagegenerate序列号.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -51,7 +51,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             return Result::ACK;
         }
         $conversationId = $data['conversationId'] ?? null;
-        // 生成收件方的seq
+        // generate收件方的seq
         $this->logger->info(sprintf('messageDispatch 收到message data:%s', Json::encode($data)));
         $lock = di(LockerInterface::class);
         try {
@@ -71,15 +71,15 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
                 $userSeqEntity = null;
-                // 查seq,fail延迟后重试3次
+                // 查seq,faildelay后retry3次
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
-                        // 可能是事务还未submit,mq已经消费,延迟重试
+                        // 可能是transaction还未submit,mq已经消费,delayretry
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
                     }
                 }, 100);
-                // 发送方的seq
+                // send方的seq
                 if ($userSeqEntity === null) {
                     $this->logger->error('messageDispatch seq not found:{seq_id} ', ['seq_id' => $seqId]);
                     $this->setSeqCanNotRetry($seqRetryKey);
@@ -105,7 +105,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                     // chatmessage分发
                     $this->delightfulChatMessageAppService->asyncHandlerChatMessage($userSeqEntity);
                 }
-                // seq 处理success
+                // seq processsuccess
                 $this->setSeqCanNotRetry($seqRetryKey);
             }
         } catch (Throwable $exception) {
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessage质量保证模块,如果是service器stress大导致的fail,则放入延迟重试queue,并指数级延长重试time间隔
+            // todo callmessage质量保证模块,如果是service器stress大导致的fail,则放入delayretryqueue,并指数级延长retrytime间隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

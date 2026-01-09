@@ -44,7 +44,7 @@ class DepartmentDetailDTO extends AbstractDTO
     public ?int $employeeSum = null;
 
     /**
-     * 数据库中没有此field，偷懒写的。批量write数据库时，toArray() 后need手动 unset 掉。
+     * database中没有此field，偷懒写的。批量writedatabase时，toArray() 后need手动 unset 掉。
      */
     public ?bool $hasChild = null;
 

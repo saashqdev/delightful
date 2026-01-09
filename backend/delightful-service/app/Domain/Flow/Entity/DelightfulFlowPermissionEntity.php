@@ -22,7 +22,7 @@ class DelightfulFlowPermissionEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 资源类型.
+     * 资源type.
      */
     protected ResourceType $resourceType;
 
@@ -33,7 +33,7 @@ class DelightfulFlowPermissionEntity extends AbstractEntity
     protected string $resourceId;
 
     /**
-     * 目标类型.
+     * 目标type.
      */
     protected TargetType $targetType;
 

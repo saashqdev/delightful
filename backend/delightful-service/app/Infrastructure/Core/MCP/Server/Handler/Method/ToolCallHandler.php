@@ -11,12 +11,12 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * tool调用method处理器.
+ * toolcallmethodprocess器.
  */
 class ToolCallHandler extends AbstractMethodHandler
 {
     /**
-     * 处理tool调用请求.
+     * processtoolcallrequest.
      */
     public function handle(MessageInterface $request): ?array
     {

@@ -47,7 +47,7 @@ class VolceOCRClient implements OCRClientInterface
         ];
         $response = $client->CallAPI('OCRPdf', $options);
         $content = $response->getContents();
-        $this->logger->info('火山OCR响应: ' . $content);
+        $this->logger->info('火山OCRresponse: ' . $content);
         $result = Json::decode($content);
         $code = $result['code'] ?? 0; // 如果没有 'code'，则usedefault的error代码
         if ($code !== 10000) {
@@ -95,6 +95,6 @@ class VolceOCRClient implements OCRClientInterface
             return 'image';
         }
 
-        return null; // 既不是 PDF 也不是指定的image格式
+        return null; // 既不是 PDF 也不是指定的imageformat
     }
 }

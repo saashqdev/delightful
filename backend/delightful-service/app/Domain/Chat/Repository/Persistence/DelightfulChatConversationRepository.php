@@ -251,7 +251,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
 
     /**
      * 批量updatesession窗口的交互指令.
-     * @param array $updateData 格式为：[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
+     * @param array $updateData format为：[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
      */
     public function batchUpdateInstructs(array $updateData): void
     {

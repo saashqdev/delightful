@@ -47,7 +47,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.message.empty')]
     case MESSAGE_EMPTY = 4008;
 
-    // 限流
+    // 限stream
     #[ErrorMessage(message: 'api.rate_limit')]
     case RATE_LIMIT = 4009;
 
@@ -75,11 +75,11 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.user.use_access_token_limit')]
     case USER_USE_ACCESS_TOKEN_LIMIT = 4015;
 
-    // usercreateaccessToken频率限流
+    // usercreateaccessToken频率限stream
     #[ErrorMessage(message: 'api.user.create_access_token_rate_limit')]
     case USER_CREATE_ACCESS_TOKEN_RATE_LIMIT = 4016;
 
-    // 大模型响应failed
+    // 大模型responsefailed
     #[ErrorMessage(message: 'api.model.response_fail')]
     case MODEL_RESPONSE_FAIL = 4017;
 

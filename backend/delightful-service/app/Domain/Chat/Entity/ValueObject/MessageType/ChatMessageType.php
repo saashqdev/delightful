@@ -38,7 +38,7 @@ enum ChatMessageType: string
     // markdown
     case Markdown = 'markdown';
 
-    // 位置
+    // position
     case Location = 'location';
 
     /**
@@ -47,12 +47,12 @@ enum ChatMessageType: string
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
     /**
-     * 多次stream响应后，final合并成一条message入库.
+     * 多次streamresponse后，final合并成一条message入库.
      */
     case AggregateAISearchCardV2 = 'aggregate_ai_search_card_v2';
 
     /**
-     * stream响应.
+     * streamresponse.
      */
     case StreamAggregateAISearchCard = 'stream_aggregate_ai_search_card';
 
@@ -70,7 +70,7 @@ enum ChatMessageType: string
 
     /**
      * 未知message。
-     * 由于版本迭代，发版time差异等原因，可能产生未知type的message。
+     * 由于version迭代，发版time差异等原因，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 

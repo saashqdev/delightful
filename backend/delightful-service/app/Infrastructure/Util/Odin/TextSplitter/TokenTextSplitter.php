@@ -192,7 +192,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 处理分隔符，将分隔符拼接到每个分块的前面（除了first）.
+     * process分隔符，将分隔符拼接到每个分块的前面（除了first）.
      */
     private function preserveSeparator(array $chunks, string $separator): array
     {
@@ -228,7 +228,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 处理无分隔符的文本分割.
+     * process无分隔符的文本分割.
      */
     private function handleNoSeparatorSplits(array $splits, array $splitLengths): array
     {
@@ -305,7 +305,7 @@ class TokenTextSplitter extends TextSplitter
         }, $splits);
 
         if ($separator !== '') {
-            // 处理有分隔符的情况
+            // process有分隔符的情况
             $goodSplits = [];
             $goodSplitsLengths = [];
             $actualSeparator = $this->keepSeparator ? $separator : '';
@@ -371,7 +371,7 @@ class TokenTextSplitter extends TextSplitter
                 return $this->calculateTokenCount($text);
             }
 
-            // 生成上下文键
+            // generate上下文键
             $contextKey = 'token_count:' . md5($text);
 
             // 尝试从协程上下文get
@@ -383,7 +383,7 @@ class TokenTextSplitter extends TextSplitter
             // 计算 token quantity
             $count = $this->calculateTokenCount($text);
 
-            // 存储到协程上下文
+            // storage到协程上下文
             Context::set($contextKey, $count);
 
             return $count;

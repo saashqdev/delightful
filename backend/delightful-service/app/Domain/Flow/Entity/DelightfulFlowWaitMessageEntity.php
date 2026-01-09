@@ -31,8 +31,8 @@ class DelightfulFlowWaitMessageEntity extends AbstractEntity
     protected string $flowVersion;
 
     /**
-     * 超时时间戳.
-     * 0 代table永不超时.
+     * timeout时间戳.
+     * 0 代table永不timeout.
      */
     protected int $timeout = 0;
 

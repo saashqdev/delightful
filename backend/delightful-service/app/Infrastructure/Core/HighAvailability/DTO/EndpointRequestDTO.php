@@ -12,8 +12,8 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\LoadBalancingType;
 use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 
 /**
- * 接入点请求 DTO.
- * 用于封装 getAvailableEndpoint method的请求parameter.
+ * 接入点request DTO.
+ * 用于封装 getAvailableEndpoint method的requestparameter.
  */
 class EndpointRequestDTO extends AbstractDTO
 {

@@ -181,7 +181,7 @@ class SocketIO implements OnMessageInterface, OnOpenInterface, OnCloseInterface
                     $this->stdoutLogger->error("SocketIO packet type {$packet->type} not supported");
             }
         } catch (SocketException) {
-            // 不处理链接断开等 socket exception
+            // 不process链接断开等 socket exception
         }
     }
 

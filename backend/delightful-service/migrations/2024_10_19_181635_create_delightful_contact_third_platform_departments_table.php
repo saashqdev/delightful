@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('third_name', 64)->comment('第三方departmentname');
             $table->text('third_i18n_name')->comment('第三方国际化departmentname');
             $table->string('third_platform_type')->comment('第三方平台type dingTalk/lark/weCom/teamShare');
-            $table->text('third_platform_departments_extra')->comment('额外info.第三方departmentstatus,json格式,目前支持 is_deleted:是否delete');
+            $table->text('third_platform_departments_extra')->comment('额外info.第三方departmentstatus,jsonformat,目前支持 is_deleted:是否delete');
             $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据sync,激活record等');
             $table->timestamps();
             $table->softDeletes();

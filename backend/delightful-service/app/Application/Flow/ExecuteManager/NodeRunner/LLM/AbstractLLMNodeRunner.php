@@ -45,7 +45,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
         }
         $vertexResult->addDebugLog('model', $modelName);
 
-        // 加载 Agent plugin
+        // load Agent plugin
         $this->loadAgentPlugins($executionData->getDataIsolation(), $model, $LLMNodeParamsConfig, $systemPrompt);
 
         $vertexResult->addDebugLog('actual_system_prompt', $systemPrompt);
@@ -54,12 +54,12 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
 
         $systemPrompt = trim($systemPrompt);
         $systemPrompt = trim($systemPrompt, "\n");
-        // 加载systemprompt词
+        // loadsystemprompt词
         if ($systemPrompt !== '') {
             $memoryManager->addSystemMessage(new SystemMessage($systemPrompt));
         }
 
-        // 生成 function call 的 tools 格式
+        // generate function call 的 tools format
         $tools = $this->createTools($executionData, $LLMNodeParamsConfig->getOptionTools(), $LLMNodeParamsConfig->getTools());
         $vertexResult->addDebugLog('tools', ToolsExecutor::toolsToArray($tools));
 
@@ -81,7 +81,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
     protected function loadAgentPlugins(FlowDataIsolation $flowDataIsolation, ModelInterface $model, AbstractLLMNodeParamsConfig $LLMNodeParamsConfig, string &$systemPrompt): void
     {
         $mcpServerConfigs = [];
-        // 加载 Agent 的plugin。一般就是加载tool和追加systemprompt词，先做着两个的吧
+        // load Agent 的plugin。一般就是loadtool和追加systemprompt词，先做着两个的吧
         foreach ($LLMNodeParamsConfig->getAgentPlugins() as $agentPlugin) {
             $appendSystemPrompt = $agentPlugin->getAppendSystemPrompt();
             if ($appendSystemPrompt !== '') {

@@ -55,8 +55,8 @@ interface DelightfulChatSeqRepositoryInterface
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪到 delightful_chat_topic_messages 处理
-     * session窗口滚动加载历史record.
+     * @todo 挪到 delightful_chat_topic_messages process
+     * session窗口滚动load历史record.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
@@ -67,13 +67,13 @@ interface DelightfulChatSeqRepositoryInterface
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * get收件方message的status变更流.
+     * get收件方message的status变更stream.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array;
 
     /**
-     * get发件方message的status变更流.
+     * get发件方message的status变更stream.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array;
@@ -125,7 +125,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function updateSeqRelation(DelightfulSeqEntity $seqEntity): bool;
 
     /**
-     * updatemessage接收人list.
+     * updatemessagereceive人list.
      */
     public function updateReceiveList(DelightfulSeqEntity $seqEntity): bool;
 

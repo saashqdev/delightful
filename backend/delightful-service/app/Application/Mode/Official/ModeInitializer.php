@@ -277,7 +277,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Be Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可输入 PPT 的theme和具体要求，或uploadfile，超级麦吉将为您制作精美的 PPT。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '您可输入 PPT 的theme和具体要求，或uploadfile，超级麦吉将为您制作精美的 PPT。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'ppt',
                 'icon' => 'IconPresentation',
@@ -304,7 +304,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Be Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可选择数据源或upload Excel file后，输入need分析的需求，超级麦吉将为您进行全面的数据分析。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '您可选择数据源或upload Excel file后，输入need分析的需求，超级麦吉将为您进行全面的数据分析。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'data_analysis',
                 'icon' => 'IconChartBarPopular',
@@ -331,7 +331,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
-                    'zh_CN' => '您可输入研究报告的theme和具体需求，或uploadfile，超级麦吉将为您进行完整且详细的报告撰写。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '您可输入研究报告的theme和具体需求，或uploadfile，超级麦吉将为您进行完整且详细的报告撰写。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'report',
                 'icon' => 'IconMicroscope',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可输入will议的文字content，或uploadwill议录音file，超级麦吉将为您进行完整的will议总结。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '您可输入will议的文字content，或uploadwill议录音file，超级麦吉将为您进行完整的will议总结。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',
@@ -385,7 +385,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '请输入您的需求，或uploadfile，超级麦吉将为您resolveissue。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '请输入您的需求，或uploadfile，超级麦吉将为您resolveissue。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'general',
                 'icon' => 'IconBeDelightful',

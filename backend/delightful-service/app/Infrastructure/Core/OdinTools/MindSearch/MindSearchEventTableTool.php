@@ -11,7 +11,7 @@ class MindSearchEventTableTool
 {
     public static string $name = 'generateRelationEventsTable';
 
-    public static string $description = 'according touser提问和search结果，生成相关事件列表';
+    public static string $description = 'according touser提问和search结果，generate相关event列表';
 
     protected static array $parameters = [
         'type' => 'object',
@@ -23,25 +23,25 @@ class MindSearchEventTableTool
                     'properties' => [
                         'event_name' => [
                             'type' => 'string',
-                            'description' => '关联事件名',
+                            'description' => '关联event名',
                         ],
                         'event_time' => [
                             'type' => 'string',
-                            'description' => '关联事件发生时间',
+                            'description' => '关联event发生时间',
                         ],
                         'event_description' => [
                             'type' => 'string',
-                            'description' => '关联事件description',
+                            'description' => '关联eventdescription',
                         ],
                         'related_citations' => [
                             'type' => 'array',
                             'items' => ['type' => 'string'],
-                            'description' => '关联事件quote的search结果',
+                            'description' => '关联eventquote的search结果',
                         ],
                     ],
                     'required' => ['event_name', 'event_time', 'event_description', 'related_citations'],
                 ],
-                'description' => '相关事件列表',
+                'description' => '相关event列表',
             ],
         ],
         'additionalProperties' => false,

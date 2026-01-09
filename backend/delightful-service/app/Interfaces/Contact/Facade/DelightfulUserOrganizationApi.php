@@ -33,7 +33,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
      */
     public function getCurrentOrganizationCode(RequestInterface $request): array
     {
-        // 从请求头get authorization
+        // 从request头get authorization
         $authorization = (string) $request->header('authorization', '');
         if ($authorization === '') {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -50,7 +50,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
      */
     public function setCurrentOrganizationCode(RequestInterface $request): array
     {
-        // 从请求头get authorization
+        // 从request头get authorization
         $authorization = (string) $request->header('authorization', '');
         if ($authorization === '') {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -58,7 +58,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // 从请求体getorganization代码
+        // 从request体getorganization代码
         $organizationCode = (string) $request->input('delightful_organization_code', '');
         if (empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);

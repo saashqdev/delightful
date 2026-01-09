@@ -131,7 +131,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 1. test获取协作setting - defaultclosestatus
+        // 1. testget协作setting - defaultclosestatus
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
         $this->assertEquals(true, in_array($response['data']['default_join_permission'], ['viewer', 'editor']));
@@ -163,7 +163,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
 
-        // 2. 非管理者尝试批量更新permission - shouldfail
+        // 2. 非管理者尝试批量updatepermission - shouldfail
         $this->switchUserTest2();
         $this->batchUpdateMemberPermissions($projectId, 51202);
 
@@ -271,7 +271,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -296,14 +296,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
     }
 
     /**
-     * 获取协作setting.
+     * get协作setting.
      */
     public function getCollaborationSettings(string $projectId, int $expectedCode = 1000): array
     {
@@ -313,7 +313,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -351,7 +351,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -383,7 +383,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -402,7 +402,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -429,14 +429,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
     }
 
     /**
-     * 批量更新成员permission.
+     * 批量update成员permission.
      */
     public function batchUpdateMemberPermissions(string $projectId, int $expectedCode = 1000): array
     {
@@ -456,7 +456,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -488,7 +488,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不should为null');
+        $this->assertNotNull($response, 'response不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -501,7 +501,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 更新成员为管理者.
+     * update成员为管理者.
      */
     public function updateMemberToManager(string $projectId, string $userId): array
     {
@@ -592,7 +592,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * validatepermission已更新.
+     * validatepermission已update.
      */
     public function verifyPermissionsUpdated(string $projectId): void
     {
@@ -633,7 +633,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 清理项目成员数据（直接数据库delete）.
+     * 清理项目成员数据（直接databasedelete）.
      */
     private function cleanupProjectMembers(string $projectId): void
     {

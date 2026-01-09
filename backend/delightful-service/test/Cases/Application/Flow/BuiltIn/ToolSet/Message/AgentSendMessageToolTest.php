@@ -89,11 +89,11 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一个can发送message的助手
+你是一个cansendmessage的助手
 
 
 ## process
-1、call `agent_send_message_to_user` 工具发送message
+1、call `agent_send_message_to_user` 工具sendmessage
 2、currenttime是:{$currentDateTime}
 -receiver_user_ids是：usi_3715ce50bc02d7e72ba7891649b7f1da
 
@@ -105,8 +105,8 @@ user的昵称是：currentuser的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，从明天开始，每天早上9点执行，显示一条reminder我做饭的message',
-            'user_prompt' => '帮我发送一条message,content是：你今天真好看',
+            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，从明天开始，每天早上9点execute，显示一条reminder我做饭的message',
+            'user_prompt' => '帮我send一条message,content是：你今天真好看',
         ]);
 
         $runner->execute($vertexResult, $executionData);
@@ -183,11 +183,11 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一个can发送message的助手
+你是一个cansendmessage的助手
 
 
 ## process
-1、call `agent_send_message` 工具发送message
+1、call `agent_send_message` 工具sendmessage
 2、currenttime是:{$currentDateTime}
 -agent_id是：737330322528899073
 -group_id是：748917386027667456
@@ -200,8 +200,8 @@ user的昵称是：currentuser的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，从明天开始，每天早上9点执行，显示一条reminder我做饭的message',
-            'user_prompt' => '帮我发送一条message,content是：你今天真好看',
+            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，从明天开始，每天早上9点execute，显示一条reminder我做饭的message',
+            'user_prompt' => '帮我send一条message,content是：你今天真好看',
         ]);
 
         $runner->execute($vertexResult, $executionData);

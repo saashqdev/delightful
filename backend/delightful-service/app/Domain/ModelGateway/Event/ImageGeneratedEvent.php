@@ -37,12 +37,12 @@ class ImageGeneratedEvent extends AbstractEvent
     protected string $providerModelId = '';
 
     /**
-     * 访问令牌实体Id.
+     * 访问token实体Id.
      */
     protected ?int $accessTokenId = null;
 
     /**
-     * 访问令牌实体名称.
+     * 访问token实体名称.
      */
     protected ?string $accessTokenName = null;
 
@@ -53,12 +53,12 @@ class ImageGeneratedEvent extends AbstractEvent
     protected ?int $priceId = null;
 
     /**
-     * 调用时间.
+     * call时间.
      */
     protected ?string $callTime = null;
 
     /**
-     * 响应时间.
+     * response时间.
      */
     protected ?int $responseTime = null;
 

@@ -92,7 +92,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             // uploadfile（指定不自动create目录）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
-            // 生成可访问的链接
+            // generate可访问的链接
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
@@ -100,7 +100,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
                 return 0;
             }
 
-            $this->output->error('生成file链接fail');
+            $this->output->error('generatefile链接fail');
             return 1;
         } catch (Throwable $e) {
             $this->output->error("uploadfilefail: {$e->getMessage()}");

@@ -156,7 +156,7 @@ class DelightfulAgentApi extends AbstractApi
         return $agentsByUserIdPage;
     }
 
-    // getpublish版本的助理
+    // getpublishversion的助理
     public function getAgentVersionById(RequestInterface $request, ?string $agentVersionId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -187,7 +187,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentsFromMarketplacePage($page, $pageSize);
     }
 
-    // publish助理版本
+    // publish助理version
 
     /**
      * @throws Throwable
@@ -238,7 +238,7 @@ class DelightfulAgentApi extends AbstractApi
         return $result;
     }
 
-    // query助理的版本record
+    // query助理的versionrecord
     public function getReleaseAgentVersions(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -247,7 +247,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
     }
 
-    // get助理最新版本号
+    // get助理最新version号
     public function getAgentMaxVersion(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -315,7 +315,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->isUpdated($authenticatable, $agentId);
     }
 
-    // according to userId getpublish版本的助理详情
+    // according to userId getpublishversion的助理详情
     public function getDetailByUserId(RequestInterface $request, ?string $userId = null)
     {
         $this->getAuthorization();
@@ -378,7 +378,7 @@ class DelightfulAgentApi extends AbstractApi
         // get全量数据
         $data = $this->delightfulAgentAppService->getChatModeAvailableAgents($authenticatable, $query);
 
-        // 在 API 层进行pagination处理
+        // 在 API 层进行paginationprocess
         return AgentAssembler::createChatModelAvailableList($page, $data['total'], $data['list']);
     }
 }

@@ -248,7 +248,7 @@ class ToolsExecutor extends AbstractTool
         if (! $form) {
             return;
         }
-        // 暂时只处理 object 的data
+        // 暂时只process object 的data
         if (! $form->getType()->isObject()) {
             return;
         }

@@ -33,7 +33,7 @@ readonly class LoginAppService
     }
 
     /**
-     * checkuser登录info并颁发令牌.
+     * checkuser登录info并颁发token.
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {
@@ -43,10 +43,10 @@ readonly class LoginAppService
         // verifyuser在organization内是否存在
         $user = $this->verifyAndGetUserInOrganization($account, $request->getOrganizationCode());
 
-        // 生成令牌
+        // generatetoken
         $authorization = $this->authenticationDomainService->generateAccountToken($account->getDelightfulId());
 
-        // build响应
+        // buildresponse
         return $this->buildLoginResponse($authorization, $account, $user);
     }
 
@@ -119,13 +119,13 @@ readonly class LoginAppService
     }
 
     /**
-     * build登录响应.
+     * build登录response.
      */
     private function buildLoginResponse(string $authorization, AccountEntity $account, DelightfulUserEntity $user): CheckLoginResponse
     {
         $response = new CheckLoginResponse();
 
-        // 处理国家代码格式
+        // process国家代码format
         $stateCode = $this->formatStateCode($account->getStateCode() ?? '+86');
 
         // builduser数据
@@ -139,7 +139,7 @@ readonly class LoginAppService
             'state_code' => $stateCode,
         ];
 
-        // build响应数据
+        // buildresponse数据
         $responseData = [
             'access_token' => $authorization,
             'bind_phone' => ! empty($account->getPhone()),
@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 格式化国家代码，ensure以+开头.
+     * format化国家代码，ensure以+开头.
      */
     private function formatStateCode(string $stateCode): string
     {

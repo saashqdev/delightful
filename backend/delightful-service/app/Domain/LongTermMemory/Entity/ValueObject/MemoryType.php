@@ -31,7 +31,7 @@ enum MemoryType: string
     }
 
     /**
-     * 是否为user生成的记忆.
+     * 是否为usergenerate的记忆.
      */
     public function isUserGenerated(): bool
     {
@@ -42,7 +42,7 @@ enum MemoryType: string
     }
 
     /**
-     * 是否为system生成的记忆.
+     * 是否为systemgenerate的记忆.
      */
     public function isSystemGenerated(): bool
     {

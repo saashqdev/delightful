@@ -16,8 +16,8 @@ use App\Interfaces\Provider\Assembler\ProviderConfigIdAssembler;
 use DateTime;
 
 /**
- * 服务商template生成仓储
- * 支持为所有 ProviderCode 生成templateconfiguration.
+ * 服务商templategenerate仓储
+ * 支持为所有 ProviderCode generatetemplateconfiguration.
  */
 readonly class ProviderTemplateRepository
 {

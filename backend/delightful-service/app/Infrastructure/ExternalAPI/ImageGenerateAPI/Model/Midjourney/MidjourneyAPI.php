@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 class MidjourneyAPI
 {
-    // 请求超时时间（秒）
+    // requesttimeout时间（秒）
     protected const REQUEST_TIMEOUT = 30;
 
     protected string $apiKey;
@@ -42,7 +42,7 @@ class MidjourneyAPI
     }
 
     /**
-     * submitimage生成task
+     * submitimagegeneratetask
      */
     public function submitTask(string $prompt, string $mode = 'fast'): array
     {

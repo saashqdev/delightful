@@ -18,7 +18,7 @@ class DefaultFontProvider implements FontProviderInterface
 {
     /**
      * getTTF字体file路径.
-     * 开源版本不提供TTF字体file.
+     * 开源version不提供TTF字体file.
      */
     public function getFontPath(): ?string
     {
@@ -27,7 +27,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * 检测是否支持TTF字体渲染.
-     * 开源版本仅支持内置字体.
+     * 开源version仅支持内置字体.
      */
     public function supportsTTF(): bool
     {
@@ -36,7 +36,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * 检测文本是否contain中文字符.
-     * 开源版本视所有文本为非中文，use内置字体渲染.
+     * 开源version视所有文本为非中文，use内置字体渲染.
      */
     public function containsChinese(string $text): bool
     {

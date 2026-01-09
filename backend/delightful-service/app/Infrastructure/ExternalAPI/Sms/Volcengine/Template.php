@@ -71,7 +71,7 @@ class Template extends AbstractTemplate
 
     /**
      * according to传来的短信文本,解析variable. 只有variable的value,未匹配variable的key!
-     * needvariable解析的原因:火山短信只支持variable短信的发送,而业务方will出于创蓝短信的原因,will传来整个短信文本content,没有variable.
+     * needvariable解析的原因:火山短信只支持variable短信的send,而业务方will出于创蓝短信的原因,will传来整个短信文本content,没有variable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {

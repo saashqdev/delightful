@@ -40,7 +40,7 @@ class SeqAssembler
     }
 
     /**
-     * 将entityconvert为can直接write数据库的数据.
+     * 将entityconvert为can直接writedatabase的数据.
      */
     public static function getInsertDataByEntity(DelightfulSeqEntity $delightfulSeqEntity): array
     {
@@ -196,7 +196,7 @@ class SeqAssembler
         $seqData['refer_message_id'] = '';
         $seqData['created_at'] = $time;
         $seqData['updated_at'] = $time;
-        // 更新 content 中的conversation id 为receive方自己的
+        // update content 中的conversation id 为receive方自己的
         $seqData['content'] = Json::encode($topicEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $seqData['conversation_id'] = $topicEntity->getConversationId();
         $extra = new SeqExtra();
@@ -208,13 +208,13 @@ class SeqAssembler
     }
 
     /**
-     * according toarray获取message结构.
+     * according toarraygetmessage结构.
      */
     public static function getSeqStructByArray(string $messageTypeString, array $messageStructArray): MessageInterface
     {
         $messageTypeEnum = MessageAssembler::getMessageType($messageTypeString);
         if ($messageTypeEnum instanceof ChatMessageType) {
-            // chatmessage在seq表中不存储具体的message详情
+            // chatmessage在seq表中不storage具体的message详情
             return new EmptyMessage();
         }
         try {
@@ -263,12 +263,12 @@ class SeqAssembler
         }
         $messageTypeName = $messageType->getName();
         $messageStatus = $seqEntity->getStatus()?->getStatusName();
-        // 为了节约存储null间,控制message的具体内容存储在seqEntity中,chatmessage的具体内容存储在messageEntity中
+        // 为了节约storagenull间,控制message的具体内容storage在seqEntity中,chatmessage的具体内容storage在messageEntity中
         if ($messageType instanceof ControlMessageType) {
-            // 如果是控制message,message的具体内容从seqEntity中获取
+            // 如果是控制message,message的具体内容从seqEntity中get
             $messageData = $seqEntity->getContent()->toArray();
         } else {
-            // 如果是chatmessage,message的具体内容从messageEntity中获取
+            // 如果是chatmessage,message的具体内容从messageEntity中get
             $messageData = $messageEntity?->getContent()->toArray();
         }
         // chatstatistics未读人数
@@ -290,7 +290,7 @@ class SeqAssembler
             'topic_id' => $messageTopicId,
             // message的小类。控制message的小类：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,video等
             'type' => $messageTypeName,
-            // 回显未读人数,如果user点击了详情,再请求具体的message内容
+            // 回显未读人数,如果user点击了详情,再request具体的message内容
             'unread_count' => $unreadCount,
             // messagesend时间，与 delightful_message_id 一起，用于withdraw、editmessage时的唯一性校验。
             'send_time' => $carbon->getTimestamp(),

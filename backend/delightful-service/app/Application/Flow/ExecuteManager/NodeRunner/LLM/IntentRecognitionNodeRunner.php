@@ -70,13 +70,13 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // 如果意图识别开启了自动加载记忆，那么need剔除currentmessage
+        // 如果意图识别开启了自动load记忆，那么need剔除currentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
         }
 
-        // 加载记忆
+        // load记忆
         $messageHistory = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), ignoreMessageIds: $ignoreMessageIds);
 
         $agent = $this->createAgent($executionData, $vertexResult, $paramsConfig, $messageHistory, $systemPrompt);
@@ -109,7 +109,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 resultneed在限定的意图range中。
 
 # 技能 - 意图识别
-将你的响应格式化为 JSON object，格式如下：
+将你的responseformat化为 JSON object，format如下：
 {
     "是否识别": true,
     "识别fail原因": "",
@@ -137,10 +137,10 @@ resultneed在限定的意图range中。
 2. 推理user的意图，将推理过程放到 JSON 中的 推导过程 field，解释为什么will得出这些意图和置信度。
 3. 如果识别到了意图，请填写最佳匹配和匹配到的意图，是否识别为 true，最佳意图 一定是置信度最高的，其中 匹配到的意图有 field是according to 置信度 从大到小排列。
 4. 如果在currentrange没有找到任何意图，是否识别为 false，请填写识别fail原因，最佳匹配和匹配到的意图都should是空的。
-5. 只willreturn JSON 格式，不will再return其他content，如果一定need有return，请放到remark中，回答的content一定能被 JSON 工具解析。
+5. 只willreturn JSON format，不will再return其他content，如果一定need有return，请放到remark中，回答的content一定能被 JSON 工具解析。
 
 # 限制
-- 意图range的格式是 '意图'：'意图description'。其中意图descriptioncan为空。意图和意图description一定是用 '' 包裹的数据。
+- 意图range的format是 '意图'：'意图description'。其中意图descriptioncan为空。意图和意图description一定是用 '' 包裹的数据。
 - 不can回答其他issue，只能回答意图识别的issue。
 
 # need分析的意图range如下

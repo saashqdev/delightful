@@ -121,7 +121,7 @@ enum InstructType: int
             }
         }
 
-        // process指令不可configuration 发送指令检测
+        // process指令不可configuration send指令检测
         if ($instructionType == InstructCategory::FLOW && isset($item['send_directly']) && $item['send_directly']) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.send_directly_only_allow_flow_instruction');
         }
@@ -234,9 +234,9 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_select_cannot_be_empty');
         }
 
-        // verify是否直接发送指令
+        // verify是否直接send指令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // default不直接发送
+            $item['send_directly'] = false;  // default不直接send
         }
 
         if (! is_bool($item['send_directly'])) {
@@ -284,9 +284,9 @@ enum InstructType: int
      */
     private function validateText(array &$item): void
     {
-        // verify是否直接发送指令
+        // verify是否直接send指令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // default不直接发送
+            $item['send_directly'] = false;  // default不直接send
         }
 
         if (! is_bool($item['send_directly'])) {

@@ -39,7 +39,7 @@ class InstructionConfig extends AbstractEntity
     protected string $id = '';
 
     /**
-     * 指令插入位置，1 messagecontent前方，2 messagecontent中光标位置，3 messagecontent后方.
+     * 指令插入position，1 messagecontent前方，2 messagecontent中光标position，3 messagecontent后方.
      */
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
@@ -54,7 +54,7 @@ class InstructionConfig extends AbstractEntity
     protected string $name = '';
 
     /**
-     * 直接发送指令，user点击指令后将直接发送给助理.
+     * 直接send指令，user点击指令后将直接send给助理.
      */
     protected bool $sendDirectly = false;
 
@@ -209,7 +209,7 @@ class InstructionConfig extends AbstractEntity
      */
     public function setValues($values): void
     {
-        // 处理 null value
+        // process null value
         if ($values === null) {
             $this->values = [];
             return;
@@ -221,7 +221,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // 处理指令valuearray
+        // process指令valuearray
         if (empty($values)) {
             $this->values = [];
             return;

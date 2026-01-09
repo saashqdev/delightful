@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publish和生产can看做是一个环境，所以这里处理一下关联的环境 ids.
+     * 预publish和生产can看做是一个环境，所以这里process一下关联的环境 ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {
@@ -254,7 +254,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $relationEnvIds = [$delightfulEnvironmentEntity->getId()];
         } else {
             $relationEnvIds[] = $delightfulEnvironmentEntity->getId();
-            // 对环境ID进行去重处理
+            // 对环境ID进行去重process
             $relationEnvIds = array_unique($relationEnvIds);
         }
         return $relationEnvIds;

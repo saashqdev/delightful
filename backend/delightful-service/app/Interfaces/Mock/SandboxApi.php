@@ -149,7 +149,7 @@ class SandboxApi
      * initialize沙箱（简化版，用于 ASR 等无chatmessage场景）
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
-     * 请求体示例：
+     * request体示例：
      * {
      *   "message_id": "asr_init_sandbox_001_1234567890",
      *   "type": "init",
@@ -193,7 +193,7 @@ class SandboxApi
             ];
         }
 
-        // 模拟沙箱initializesuccess响应
+        // 模拟沙箱initializesuccessresponse
         return [
             'code' => 1000,
             'message' => '工作区initializesuccess',

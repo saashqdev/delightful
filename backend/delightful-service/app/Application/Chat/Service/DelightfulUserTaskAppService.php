@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // 如果是customize重复，那么直接create调度task,同时close定时生成调度task
+        // 如果是customize重复，那么直接create调度task,同时closeschedulegenerate调度task
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -238,7 +238,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_ALREADY_EXISTS);
         }
 
-        // 先清除待执行的task
+        // 先清除待execute的task
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // 如果是customize重复，那么直接create调度task,同时close定时生成调度task
+        // 如果是customize重复，那么直接create调度task,同时closeschedulegenerate调度task
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -339,7 +339,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         di(DelightfulChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
     }
 
-    // 后台task,不will模拟user发送message,  预留method，暂时没有用到
+    // 后台task,不will模拟usersendmessage,  预留method，暂时没有用到
     // public static function asyncCallback(string $flow_code, array $user_task)
     // {
     //     $triggerConfig = [

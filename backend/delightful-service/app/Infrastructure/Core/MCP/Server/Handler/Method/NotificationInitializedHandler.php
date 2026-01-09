@@ -10,12 +10,12 @@ namespace App\Infrastructure\Core\MCP\Server\Handler\Method;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * notifyinitializemethod处理器.
+ * notifyinitializemethodprocess器.
  */
 class NotificationInitializedHandler extends AbstractMethodHandler
 {
     /**
-     * 处理notifyinitialize请求.
+     * processnotifyinitializerequest.
      * 不needreturn数据.
      */
     public function handle(MessageInterface $request): ?array

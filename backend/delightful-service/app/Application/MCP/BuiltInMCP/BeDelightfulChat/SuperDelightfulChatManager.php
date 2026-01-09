@@ -89,7 +89,7 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. 生成一份大modelcall工具可阅读的description
+        // 2. generate一份大modelcall工具可阅读的description
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理进行conversation
 
@@ -111,7 +111,7 @@ MARKDOWN;
                 $instructionDescription ? "\n  可用指令: {$instructionDescription}" : ''
             );
 
-            // 收集所有指令info用于生成 schema
+            // 收集所有指令info用于generate schema
             if ($instruction) {
                 $allInstructions[$agent->getId()] = $instruction;
             }
@@ -132,7 +132,7 @@ MARKDOWN;
         if (! empty($allInstructions)) {
             $instructionHelp = <<<'MARKDOWN'
 指令parameter instruction（可选）：
-• 格式：[{"name": "指令name", "value": "指令value"}, ...]
+• format：[{"name": "指令name", "value": "指令value"}, ...]
 • 单选type：从可选value中选择一个，for example "yes", "no"
 • 开关type：只能是 "on" 或 "off"
 • 如果不提供指令parameter，将usedefaultvalue
@@ -159,7 +159,7 @@ MARKDOWN;
             return [];
         }
 
-        // 生成指令的 JSON Schema
+        // generate指令的 JSON Schema
         $instructionSchema = self::generateInstructionSchema($allInstructions);
 
         $registeredAgent = new RegisteredTool(
@@ -174,7 +174,7 @@ MARKDOWN;
                         ],
                         'message' => [
                             'type' => 'string',
-                            'description' => '发送给 AI 助理的messagecontent',
+                            'description' => 'send给 AI 助理的messagecontent',
                         ],
                         'conversation_id' => [
                             'type' => 'string',
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // 如果有具体的指令info，生成更详细的 schema
+        // 如果有具体的指令info，generate更详细的 schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

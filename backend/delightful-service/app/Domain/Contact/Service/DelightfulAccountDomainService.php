@@ -91,7 +91,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $userId = $this->idGenerator->generate();
         $time = date('Y-m-d H:i:s');
 
-        // useSHA256加密密码
+        // useSHA256encrypt密码
         $hashedPassword = $this->passwordService->hashPassword($password);
 
         $this->userRepository->insertUser([
@@ -119,7 +119,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $existsAccount = $this->accountRepository->getAccountInfoByDelightfulId($delightfulId);
         if ($existsAccount !== null) {
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
-            // 账号存在,且在该organization下已经生成了userinfo,直接return
+            // 账号存在,且在该organization下已经generate了userinfo,直接return
             if ($userEntity !== null) {
                 $userDTO->setUserId($userEntity->getUserId());
                 $userDTO->setNickname($userEntity->getNickname());
@@ -127,7 +127,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 return;
             }
         }
-        // 加锁防止并发
+        // 加lock防止并发
         $key = sprintf('addUserAndAccount:%s', $delightfulId);
         if (! $this->locker->mutexLock($key, $delightfulId, 5)) {
             ExceptionBuilder::throw(UserErrorCode::CREATE_USER_TOO_FREQUENTLY);
@@ -141,16 +141,16 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 账号存在,但是该organization下没有userinfo
                 $accountEntity = $existsAccount;
             }
-            // 将生成的账号info关联到userEntity
+            // 将generate的账号info关联到userEntity
             $userDTO->setDelightfulId($accountEntity->getDelightfulId());
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
             if ($userEntity && $userEntity->getUserId()) {
                 $userDTO->setUserId($userEntity->getUserId());
                 return;
             }
-            // 生成organization下userinfo
+            // generateorganization下userinfo
             if (empty($userDTO->getUserId())) {
-                // 确定user_id的生成规则
+                // 确定user_id的generate规则
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
                 // 1.47x(10**-29) 概率下,user_idwill重复,will被mysql唯一索引拦截,让user重新登录一次就行.
@@ -190,7 +190,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // update账号在该organization下的userinfo
                 $userEntity = $this->userRepository->getUserByAccountAndOrganization($accountEntity->getDelightfulId(), $dataIsolation->getCurrentOrganizationCode());
                 if ($userEntity === null) {
-                    # 账号存在,但是该organization下没有userinfo. 生成userinfo
+                    # 账号存在,但是该organization下没有userinfo. generateuserinfo
                     $userEntity = $this->createUser($userDTO, $dataIsolation);
                 } else {
                     // 账号和userinfo都存在,update一下userinfo
@@ -215,7 +215,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountDTO->setGender(GenderType::Unknown);
             $accountDTO->setPhone($accountDTO->getAiCode());
             $accountDTO->setType(UserType::Ai);
-            # 账号不存在(user肯定也不存在),生成账号和userinfo
+            # 账号不存在(user肯定也不存在),generate账号和userinfo
             $delightfulId = (string) IdGenerator::getSnowId();
             $accountDTO->setDelightfulId($delightfulId);
             $this->accountRepository->createAccount($accountDTO);
@@ -276,7 +276,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             return false;
         }
 
-        // useSHA256加密密码
+        // useSHA256encrypt密码
         $hashedPassword = $this->passwordService->hashPassword($plainPassword);
 
         // update密码
@@ -329,7 +329,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     private function checkSmsLimit(string $stateCode, string $phone): void
     {
-        // 短信发送频率控制
+        // 短信send频率控制
         $timeInterval = config('sms.time_interval') ?: 60;
         $lastSendTimeKey = $this->getSmsLastSendTimeKey($stateCode . $phone);
         $setSuccess = $this->redis->set($lastSendTimeKey, '1', ['nx', 'ex' => $timeInterval]);

@@ -47,7 +47,7 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     protected function getClient(): ClientInterface
     {
-        // 处理API基础URL，ensurecontaincorrect的version路径
+        // processAPI基础URL，ensurecontaincorrect的version路径
         $config = $this->config;
         $this->processApiBaseUrl($config);
 

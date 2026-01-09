@@ -255,7 +255,7 @@ class LLMAppService extends AbstractLLMAppService
         $this->logger->info('images', $images);
         $this->recordImageGenerateMessageLog($modelVersion, $authorization->getId(), $authorization->getOrganizationCode());
 
-        // publishimage生成event
+        // publishimagegenerateevent
         $imageGeneratedEvent = new ImageGeneratedEvent();
         $imageGeneratedEvent->setOrganizationCode($authorization->getOrganizationCode());
         $imageGeneratedEvent->setUserId($authorization->getId());
@@ -617,13 +617,13 @@ class LLMAppService extends AbstractLLMAppService
         $size = $textGenerateImageDTO->getSize();
         [$width, $height] = explode('x', $size);
 
-        // 计算string格式的比例，如 "1:1", "3:4"
+        // 计算stringformat的比例，如 "1:1", "3:4"
         $ratio = $this->calculateRatio((int) $width, (int) $height);
         $imageGenerateParamsVO->setRatio($ratio);
         $imageGenerateParamsVO->setWidth($width);
         $imageGenerateParamsVO->setHeight($height);
 
-        // 从service商configurationarray中取first进行处理
+        // 从service商configurationarray中取first进行process
         if (empty($serviceProviderConfigs)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
@@ -718,7 +718,7 @@ class LLMAppService extends AbstractLLMAppService
 
         [$width, $height] = explode('x', $size);
 
-        // 计算string格式的比例，如 "1:1", "3:4"
+        // 计算stringformat的比例，如 "1:1", "3:4"
         $imageGenerateRequest->setWidth($width);
         $imageGenerateRequest->setHeight($height);
 
@@ -1110,7 +1110,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * callimage生成model.
+     * callimagegeneratemodel.
      */
     protected function callImageModel(ModelGatewayDataIsolation $modelGatewayDataIsolation, ImageModel $imageModel, TextGenerateImageDTO $proxyModelRequest): OpenAIFormatResponse
     {
@@ -1130,7 +1130,7 @@ class LLMAppService extends AbstractLLMAppService
             $imageGenerateType = ImageGenerateModelType::fromModel($modelVersion, false);
         }
 
-        // buildimage生成parameter
+        // buildimagegenerateparameter
         $imageGenerateParamsVO = new AIImageGenerateParamsVO();
         $imageGenerateParamsVO->setModel($modelVersion);
         $imageGenerateParamsVO->setUserPrompt($proxyModelRequest->getPrompt());
@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // 直接透传original size parameter，让各service商according to自己的需求处理
+        // 直接透传original size parameter，让各service商according to自己的需求process
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1707,16 +1707,16 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * 统一触发image生成event.
+     * 统一触发imagegenerateevent.
      *
      * @param string $creator create者ID
      * @param string $organizationCode organization编码
-     * @param AbstractRequestDTO $requestDTO 请求DTO
+     * @param AbstractRequestDTO $requestDTO requestDTO
      * @param int $imageCount imagequantity
      * @param string $providerModelId service商modelID
      * @param string $callTime calltime
      * @param float $startTime 开始time（微秒）
-     * @param null|AccessTokenEntity $accessTokenEntity 访问令牌实体
+     * @param null|AccessTokenEntity $accessTokenEntity 访问token实体
      */
     private function dispatchImageGeneratedEvent(
         string $creator,
@@ -1728,13 +1728,13 @@ class LLMAppService extends AbstractLLMAppService
         float $startTime,
         ?AccessTokenEntity $accessTokenEntity = null
     ): void {
-        // 计算响应time（毫秒）
+        // 计算responsetime（毫秒）
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
         // 转换 providerModelId 为整数
         $serviceProviderModelsId = is_numeric($providerModelId) ? (int) $providerModelId : null;
 
-        // get价格configuration版本ID
+        // get价格configurationversionID
         $priceId = $this->getPriceIdByServiceProviderModelId($serviceProviderModelsId, $organizationCode);
 
         // build并publishevent
@@ -1753,7 +1753,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * getservice商model的价格configuration版本ID.
+     * getservice商model的价格configurationversionID.
      */
     private function getPriceIdByServiceProviderModelId(?int $serviceProviderModelsId, string $organizationCode): ?int
     {

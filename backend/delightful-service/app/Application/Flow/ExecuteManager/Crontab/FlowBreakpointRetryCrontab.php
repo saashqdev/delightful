@@ -19,7 +19,7 @@ use Hyperf\Coroutine\Parallel;
 use Hyperf\Crontab\Annotation\Crontab;
 use Psr\Container\ContainerInterface;
 
-#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: 'process断点重试定时task', enable: true)]
+#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: 'process断点retryscheduletask', enable: true)]
 class FlowBreakpointRetryCrontab
 {
     private DelightfulFlowExecuteLogDomainService $delightfulFlowExecuteLogDomainService;
@@ -76,7 +76,7 @@ class FlowBreakpointRetryCrontab
                 return;
             }
 
-            // 重试次数 +1
+            // retry次数 +1
             $this->delightfulFlowExecuteLogDomainService->incrementRetryCount($flowDataIsolation, $delightfulFlowExecuteLogEntity);
 
             $extParams = $delightfulFlowExecuteLogEntity->getExtParams();

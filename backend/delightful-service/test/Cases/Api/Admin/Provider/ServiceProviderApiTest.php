@@ -40,7 +40,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * test模型create和更new完整process，includeconfiguration版本validate.
+     * test模型create和更new完整process，includeconfigurationversionvalidate.
      */
     public function testSaveModelToServiceProviderCreate(): void
     {
@@ -51,7 +51,7 @@ class ServiceProviderApiTest extends BaseTest
         $createRequestData = [
             'model_type' => 3,
             'model_id' => 'test-model-' . time(),
-            'model_version' => 'test版本 v1.0',
+            'model_version' => 'testversion v1.0',
             'icon' => 'DELIGHTFUL/588417216353927169/default/default.png',
             'config' => [
                 'max_output_tokens' => 64000,
@@ -92,7 +92,7 @@ class ServiceProviderApiTest extends BaseTest
 
         $createResponse = $this->post($modelUri, $createRequestData, $this->getCommonHeaders());
 
-        // validatecreate响应
+        // validatecreateresponse
         $this->assertIsArray($createResponse);
         $this->assertArrayHasKey('code', $createResponse);
         $this->assertSame(1000, $createResponse['code'], 'create模型shouldsuccess');
@@ -107,7 +107,7 @@ class ServiceProviderApiTest extends BaseTest
         $detailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($detailResponse);
-        $this->assertSame(1000, $detailResponse['code'], '获取详情shouldsuccess');
+        $this->assertSame(1000, $detailResponse['code'], 'get详情shouldsuccess');
         $this->assertArrayHasKey('data', $detailResponse);
 
         // 查找create的模型
@@ -124,15 +124,15 @@ class ServiceProviderApiTest extends BaseTest
             'time_cost' => 50,
         ]);
 
-        // ========== 步骤3: validateconfiguration版本（version=1） ==========
+        // ========== 步骤3: validateconfigurationversion（version=1） ==========
         $this->verifyConfigVersion((int) $modelId, $createRequestData['config'], 1);
 
-        // ========== 步骤4: 更新模型 ==========
+        // ========== 步骤4: update模型 ==========
         $updateRequestData = [
             'id' => $modelId,
             'model_type' => 3,
             'model_id' => $createRequestData['model_id'],
-            'model_version' => '更新版本 v2.0',
+            'model_version' => 'updateversion v2.0',
             'icon' => 'DELIGHTFUL/588417216353927169/default/default.png',
             'config' => [
                 'max_output_tokens' => 128000,
@@ -159,11 +159,11 @@ class ServiceProviderApiTest extends BaseTest
             'service_provider_config_id' => $serviceProviderConfigId,
             'translate' => [
                 'name' => [
-                    'zh_CN' => '更新后的test模型',
+                    'zh_CN' => 'update后的test模型',
                     'en_US' => 'Updated Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这是更新后的test模型',
+                    'zh_CN' => '这是update后的test模型',
                     'en_US' => 'This is an updated test model',
                 ],
             ],
@@ -171,24 +171,24 @@ class ServiceProviderApiTest extends BaseTest
 
         $updateResponse = $this->post($modelUri, $updateRequestData, $this->getCommonHeaders());
 
-        // validate更新响应
+        // validateupdateresponse
         $this->assertIsArray($updateResponse);
-        $this->assertSame(1000, $updateResponse['code'], '更新模型shouldsuccess');
+        $this->assertSame(1000, $updateResponse['code'], 'update模型shouldsuccess');
         $this->assertArrayHasKey('data', $updateResponse);
-        $this->assertSame($modelId, $updateResponse['data']['id'], '更新后模型ID应保持不变');
+        $this->assertSame($modelId, $updateResponse['data']['id'], 'update后模型ID应保持不变');
 
-        // ========== 步骤5: 再次call详情接口validate更新后的4个成本字段 ==========
+        // ========== 步骤5: 再次call详情接口validateupdate后的4个成本字段 ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($updatedDetailResponse);
-        $this->assertSame(1000, $updatedDetailResponse['code'], '获取更新后详情shouldsuccess');
+        $this->assertSame(1000, $updatedDetailResponse['code'], 'getupdate后详情shouldsuccess');
 
-        // 查找更新后的模型
+        // 查找update后的模型
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
-        $this->assertNotNull($updatedModel, 'should能在详情中找到更新后的模型');
+        $this->assertNotNull($updatedModel, 'should能在详情中找到update后的模型');
 
-        // validate更新后的4个成本字段
-        $this->assertArrayHasKey('config', $updatedModel, '更新后的模型should有config字段');
+        // validateupdate后的4个成本字段
+        $this->assertArrayHasKey('config', $updatedModel, 'update后的模型should有config字段');
         $this->verifyConfigCostFields($updatedModel['config'], [
             'input_cost' => 0.003,
             'output_cost' => 0.006,
@@ -196,7 +196,7 @@ class ServiceProviderApiTest extends BaseTest
             'cache_hit_cost' => 0.0003,
         ]);
 
-        // ========== 步骤6: validate更新后的configuration版本（version=2） ==========
+        // ========== 步骤6: validateupdate后的configurationversion（version=2） ==========
         $this->verifyConfigVersion((int) $modelId, $updateRequestData['config'], 2);
     }
 
@@ -304,9 +304,9 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 在详情响应中查找指定ID的模型.
+     * 在详情response中查找指定ID的模型.
      *
-     * @param array $detailData 详情响应数据
+     * @param array $detailData 详情response数据
      * @param string $modelId 模型ID
      * @return null|array 找到的模型数据，未找到returnnull
      */
@@ -373,25 +373,25 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * validateconfiguration版本是否correct落库.
+     * validateconfigurationversion是否correct落库.
      *
      * @param int $modelId 模型ID
      * @param array $expectedConfig expect的configuration数据
-     * @param int $expectedVersion expect的版本号
+     * @param int $expectedVersion expect的version号
      */
     private function verifyConfigVersion(int $modelId, array $expectedConfig, int $expectedVersion): void
     {
-        // 获取 Domain Service
+        // get Domain Service
         $domainService = $this->getContainer()->get(ProviderModelDomainService::class);
 
         // 构造数据隔离object
         $organizationCode = env('TEST_ORGANIZATION_CODE');
         $dataIsolation = new ProviderDataIsolation($organizationCode, '', '');
 
-        // 获取最新configuration版本
+        // get最新configurationversion
         $versionEntity = $domainService->getLatestConfigVersionEntity($dataIsolation, $modelId);
 
-        $this->assertNotNull($versionEntity, 'configuration版本should存在');
+        $this->assertNotNull($versionEntity, 'configurationversionshould存在');
 
         // validate int type字段（stringshould被convert为 int）
         if (isset($expectedConfig['max_output_tokens'])) {
@@ -556,8 +556,8 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validate版本号和current版本mark
-        $this->assertSame($expectedVersion, $versionEntity->getVersion(), "版本号should是 {$expectedVersion}");
-        $this->assertTrue($versionEntity->isCurrentVersion(), 'should是current版本');
+        // validateversion号和currentversionmark
+        $this->assertSame($expectedVersion, $versionEntity->getVersion(), "version号should是 {$expectedVersion}");
+        $this->assertTrue($versionEntity->isCurrentVersion(), 'should是currentversion');
     }
 }

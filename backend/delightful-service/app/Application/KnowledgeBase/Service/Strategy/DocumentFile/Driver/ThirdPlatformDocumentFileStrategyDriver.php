@@ -23,7 +23,7 @@ class ThirdPlatformDocumentFileStrategyDriver implements ThirdPlatformDocumentFi
 
     public function parseDocType(KnowledgeBaseDataIsolation $dataIsolation, DocumentFileInterface $documentFile): int
     {
-        // 这里implement第third-partydocumentfile的文本格式解析逻辑
+        // 这里implement第third-partydocumentfile的文本format解析逻辑
         return DocType::UNKNOWN->value;
     }
 

@@ -23,7 +23,7 @@ class RetrievalMethod
      *
      * based on向量相似度的检索method。
      * 将query文本转换为向量，然后在向量database中查找最相似的文档。
-     * 适合理解语义关系、多语言理解、处理模糊description。
+     * 适合理解语义关系、多语言理解、process模糊description。
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 
@@ -40,7 +40,7 @@ class RetrievalMethod
      * 混合检索.
      *
      * 结合语义检索和全文检索的method。
-     * 同时执行全文检索和向量检索，然后pass重sort步骤选择最佳result。
+     * 同时execute全文检索和向量检索，然后pass重sort步骤选择最佳result。
      * 结合了两种检索技术的优势，弥补各自的不足。
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
@@ -49,7 +49,7 @@ class RetrievalMethod
      * 图检索.
      *
      * based on知识图谱的检索method。
-     * 利用实体间的关系进行检索，适合处理复杂的关联query。
+     * 利用实体间的关系进行检索，适合process复杂的关联query。
      * can发现隐含的关系和连接。
      */
     public const string GRAPH_SEARCH = 'graph_search';

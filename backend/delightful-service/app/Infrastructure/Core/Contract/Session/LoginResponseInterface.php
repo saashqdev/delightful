@@ -36,7 +36,7 @@ interface LoginResponseInterface
     public function setThirdPlatformType(null|PlatformType|string $thirdPlatformType): self;
 
     /**
-     * 转换为array格式.
+     * 转换为arrayformat.
      *
      * @return array<string, mixed> contain所有属性的array
      */

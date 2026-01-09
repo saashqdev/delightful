@@ -65,7 +65,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             $crontab = $delightfulUserTaskAppService->createTask($userTaskDTO, $userTaskValueDTO);
             return [
                 'crontab' => $crontab,
-                'message' => '定时taskcreatesuccess',
+                'message' => 'scheduletaskcreatesuccess',
             ];
         };
     }
@@ -82,7 +82,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'create一个newuser级别定时task';
+        return 'create一个newuser级别scheduletask';
     }
 
     public function getInput(): ?NodeInput
@@ -169,8 +169,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "day": {
             "type": "string",
             "key": "day",
-            "title": "执行日期",
-            "description": "执行日期，格式：YYYY-MM-DD",
+            "title": "execute日期",
+            "description": "execute日期，format：YYYY-MM-DD",
             "required": null,
             "value": null,
             "encryption": false,
@@ -181,8 +181,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "time": {
             "type": "string",
             "key": "time",
-            "title": "执行time",
-            "description": "执行time，格式：HH:mm",
+            "title": "executetime",
+            "description": "executetime，format：HH:mm",
             "required": null,
             "value": null,
             "encryption": false,
@@ -244,7 +244,7 @@ JSON,
        "type": "string",
        "key": "deadline",
        "title": "截止日期",
-       "description": "截止日期，格式：YYYY-MM-DD",
+       "description": "截止日期，format：YYYY-MM-DD",
        "required": null,
        "value": null,
        "encryption": false,
@@ -255,8 +255,8 @@ JSON,
    "interval": {
        "type": "number",
        "key": "interval",
-       "title": "fail重试次数",
-       "description": "fail重试次数",
+       "title": "failretry次数",
+       "description": "failretry次数",
        "required": null,
        "value": null,
        "encryption": false,

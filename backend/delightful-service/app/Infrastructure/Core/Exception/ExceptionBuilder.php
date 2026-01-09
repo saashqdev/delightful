@@ -120,7 +120,7 @@ class ExceptionBuilder
 
     private function getMessageTranslate(string $message = '', array $replace = [], ?string $locale = null): string
     {
-        // 处理占位符的国际化
+        // process占位符的国际化
         foreach ($replace as $key => $value) {
             if (is_string($value)) {
                 $replace[$key] = trans($value, [], $locale);

@@ -194,16 +194,16 @@ readonly class KnowledgeBaseFragmentDomainService
             default => ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed),
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
-        // 先进行预处理
-        // needfilterREPLACE_WHITESPACE规则，REPLACE_WHITESPACE规则在分段后进行处理
+        // 先进行预process
+        // needfilterREPLACE_WHITESPACE规则，REPLACE_WHITESPACE规则在分段后进行process
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
-        $this->logger->info('前置文本预处理开始。');
+        $this->logger->info('前置文本预process开始。');
         $content = TextPreprocessUtil::preprocess($filterPreprocessRule, $content);
-        $this->logger->info('前置文本预处理结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('前置文本预process结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // 再进行分段
-        // 处理转义的分隔符
+        // process转义的分隔符
         $start = microtime(true);
         $this->logger->info('文本分段开始。');
         $separator = stripcslashes($selectedFragmentConfig->getSegmentRule()->getSeparator());
@@ -217,15 +217,15 @@ readonly class KnowledgeBaseFragmentDomainService
         $fragments = $splitter->splitText($content);
         $this->logger->info('文本分段结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // need额外进行处理的规则
+        // need额外进行process的规则
         $start = microtime(true);
-        $this->logger->info('后置文本预处理开始。');
+        $this->logger->info('后置文本预process开始。');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {
             foreach ($fragments as &$fragment) {
                 $fragment = TextPreprocessUtil::preprocess([TextPreprocessRule::REPLACE_WHITESPACE], $fragment);
             }
         }
-        $this->logger->info('后置文本预处理结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('后置文本预process结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // filter掉空string
         return array_values(array_filter($fragments, function ($fragment) {

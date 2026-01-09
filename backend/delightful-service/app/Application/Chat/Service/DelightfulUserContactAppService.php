@@ -173,7 +173,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $queryType = $dto->getQueryType();
         $dataIsolation = $this->createDataIsolation($authorization);
 
-        // 获取currentuser拥有的organization列表
+        // getcurrentuser拥有的organization列表
         $userOrganizations = $this->userDomainService->getUserOrganizations($dataIsolation->getCurrentUserId());
 
         // 基本userinfoquery - 传入user拥有的organization列表
@@ -191,11 +191,11 @@ class DelightfulUserContactAppService extends AbstractAppService
             // querydepartmentinfo
             $withDepartmentFullPath = $queryType === UserQueryType::UserAndDepartmentFullPath;
 
-            // 获取user所属department
+            // getuser所属department
             $departmentUsers = $this->departmentUserDomainService->getDepartmentUsersByUserIds($userIds, $dataIsolation);
             $departmentIds = array_column($departmentUsers, 'department_id');
 
-            // 获取department详情
+            // getdepartment详情
             $departmentsInfo = $this->departmentChartDomainService->getDepartmentFullPathByIds($dataIsolation, $departmentIds);
 
             // 组装user和departmentinfo
@@ -225,7 +225,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         foreach ($departmentsInfo as $departmentInfo) {
             $departmentsInfoWithFullPath[$departmentInfo->getDepartmentId()] = [$departmentInfo];
         }
-        // 获取user的真名/nickname/手机号/avatar等info
+        // getuser的真名/nickname/手机号/avatar等info
         $userIds = array_values(array_unique(array_column($departmentUsers, 'user_id')));
         $usersDetail = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
@@ -256,7 +256,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // searchpositioncontainsearch词的人
         if ($queryDTO->isQueryByJobTitle()) {
             $departmentUsers = $this->departmentUserDomainService->searchDepartmentUsersByJobTitle($queryDTO->getQuery(), $dataIsolation);
-            // 获取user详细info
+            // getuser详细info
             $userIds = array_column($departmentUsers, 'user_id');
             $userEntities = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
             $usersForQueryJobTitle = array_map(static fn ($entity) => $entity->toArray(), $userEntities);
@@ -348,7 +348,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 是否allow更新userinfo.
+     * 是否allowupdateuserinfo.
      */
     public function getUserUpdatePermission(DelightfulUserAuthorization $userAuthorization): array
     {
@@ -357,7 +357,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 更新userinfo.
+     * updateuserinfo.
      */
     public function updateUserInfo(DelightfulUserAuthorization $userAuthorization, UserUpdateDTO $userUpdateDTO): DelightfulUserEntity
     {
@@ -380,7 +380,7 @@ class DelightfulUserContactAppService extends AbstractAppService
                 $aiCodes[] = $userDetailDTO->getAiCode();
             }
         }
-        // 获取 agentIds
+        // get agentIds
         $agents = $this->delightfulAgentDomainService->getByFlowCodes($aiCodes);
         $flowCodeMapAgentId = [];
         foreach ($agents as $agent) {
@@ -479,7 +479,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
         }
 
-        // 按organization批量获取链接
+        // 按organization批量get链接
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->fileDomainService->getLinks($orgCode, $fileKeys);

@@ -244,7 +244,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity
     {
-        // 处理 DB::select return的 stdClass object或array
+        // process DB::select return的 stdClass object或array
         $data = is_array($row) ? $row : (array) $row;
 
         $entity = new OrganizationAdminEntity();
@@ -257,7 +257,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
         $entity->setIsOrganizationCreator((bool) ($data['is_organization_creator'] ?? false));
         $entity->setRemarks($data['remarks'] ?? null);
 
-        // 处理日期field
+        // process日期field
         if (isset($data['granted_at']) && $data['granted_at']) {
             $entity->setGrantedAt(new DateTime($data['granted_at']));
         }

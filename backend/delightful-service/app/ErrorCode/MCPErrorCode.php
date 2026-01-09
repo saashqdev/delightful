@@ -29,32 +29,32 @@ enum MCPErrorCode: int
     case RelNotFound = 51520; // 关联资源不存在
 
     #[ErrorMessage(message: 'mcp.rel_version.not_found')]
-    case RelVersionNotFound = 51521; // 关联资源版本不存在
+    case RelVersionNotFound = 51521; // 关联资源version不存在
 
     #[ErrorMessage(message: 'mcp.rel.not_enabled')]
     case RelNotEnabled = 51522; // 关联资源未启用
 
     #[ErrorMessage(message: 'mcp.tool.execute_failed')]
-    case ToolExecuteFailed = 51523; // 工具执行fail
+    case ToolExecuteFailed = 51523; // 工具executefail
 
     // OAuth2auth相关error码
     #[ErrorMessage(message: 'mcp.oauth2.authorization_url_generation_failed')]
-    case OAuth2AuthorizationUrlGenerationFailed = 51530; // OAuth2authorizationURL生成fail
+    case OAuth2AuthorizationUrlGenerationFailed = 51530; // OAuth2authorizationURLgeneratefail
 
     #[ErrorMessage(message: 'mcp.oauth2.callback_handling_failed')]
-    case OAuth2CallbackHandlingFailed = 51531; // OAuth2回调处理fail
+    case OAuth2CallbackHandlingFailed = 51531; // OAuth2callbackprocessfail
 
     #[ErrorMessage(message: 'mcp.oauth2.token_refresh_failed')]
-    case OAuth2TokenRefreshFailed = 51532; // OAuth2令牌刷新fail
+    case OAuth2TokenRefreshFailed = 51532; // OAuth2tokenrefreshfail
 
     #[ErrorMessage(message: 'mcp.oauth2.invalid_response')]
-    case OAuth2InvalidResponse = 51533; // OAuth2提供商响应invalid
+    case OAuth2InvalidResponse = 51533; // OAuth2提供商responseinvalid
 
     #[ErrorMessage(message: 'mcp.oauth2.provider_error')]
     case OAuth2ProviderError = 51534; // OAuth2提供商returnerror
 
     #[ErrorMessage(message: 'mcp.oauth2.missing_access_token')]
-    case OAuth2MissingAccessToken = 51535; // OAuth2响应中缺少访问令牌
+    case OAuth2MissingAccessToken = 51535; // OAuth2response中缺少访问token
 
     // OAuth2绑定verify相关error码
     #[ErrorMessage(message: 'mcp.oauth2.binding.code_empty')]
@@ -73,14 +73,14 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.required_fields.empty')]
     case RequiredFieldsEmpty = 51551; // 必填field为空
 
-    // STDIO执行器相关error码
+    // STDIOexecute器相关error码
     #[ErrorMessage(message: 'mcp.executor.stdio.connection_failed')]
-    case ExecutorStdioConnectionFailed = 51560; // STDIO执行器连接fail
+    case ExecutorStdioConnectionFailed = 51560; // STDIOexecute器连接fail
 
     #[ErrorMessage(message: 'mcp.executor.stdio.access_denied')]
-    case ExecutorStdioAccessDenied = 51561; // STDIO执行器访问被拒绝
+    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器访问被拒绝
 
-    // HTTP执行器相关error码
+    // HTTPexecute器相关error码
     #[ErrorMessage(message: 'mcp.executor.http.connection_failed')]
-    case ExecutorHttpConnectionFailed = 51562; // HTTP执行器连接fail
+    case ExecutorHttpConnectionFailed = 51562; // HTTPexecute器连接fail
 }

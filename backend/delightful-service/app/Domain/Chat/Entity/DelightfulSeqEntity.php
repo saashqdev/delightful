@@ -58,7 +58,7 @@ final class DelightfulSeqEntity extends AbstractEntity
     protected ?DelightfulMessageStatus $status = null;
 
     /**
-     * message接收人list.
+     * messagereceive人list.
      */
     protected ?ReceiveList $receiveList = null;
 
@@ -73,7 +73,7 @@ final class DelightfulSeqEntity extends AbstractEntity
     public function __construct(?array $data = [])
     {
         if ($data) {
-            // 处理message的contenttype转换
+            // processmessage的contenttype转换
             if (! empty($data['content'])) {
                 if (is_string($data['content'])) {
                     $data['content'] = Json::decode($data['content']);
@@ -284,11 +284,11 @@ final class DelightfulSeqEntity extends AbstractEntity
             $this->receiveList = $receiveList;
             return $this;
         }
-        // 解析message接收人list.
+        // 解析messagereceive人list.
         if (is_string($receiveList) && $receiveList !== '') {
             $receiveList = Json::decode($receiveList);
         }
-        // 对于收件人来说,不needrecordmessage接收人list
+        // 对于收件人来说,不needrecordmessagereceive人list
         if (empty($receiveList)) {
             $receiveListObj = null;
         } elseif (is_array($receiveList)) {

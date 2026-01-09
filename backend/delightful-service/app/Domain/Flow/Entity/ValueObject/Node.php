@@ -31,7 +31,7 @@ class Node extends AbstractValueObject
     protected string $nodeVersion = '';
 
     /**
-     * 节点元数据，可用作给前端的定位，后端仅存储和展示，没有任何逻辑.
+     * 节点元数据，可用作给前端的定位，后端仅storage和展示，没有任何逻辑.
      */
     protected array $meta = [];
 
@@ -57,7 +57,7 @@ class Node extends AbstractValueObject
     protected ?NodeDebugResult $nodeDebugResult = null;
 
     /**
-     * 节点执行的回调function，如果有该value，那么将直接执行该选择，而不是passNodeRunner来执行.
+     * 节点execute的callbackfunction，如果有该value，那么将直接execute该选择，而不是passNodeRunner来execute.
      * 这里暂时想到的是为了单测方便.
      */
     private ?Closure $callback = null;

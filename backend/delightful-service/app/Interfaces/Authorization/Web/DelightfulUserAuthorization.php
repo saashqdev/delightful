@@ -33,7 +33,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $id = '';
 
     /**
-     * user注册后生成的delightful_id,全局唯一
+     * user注册后generate的delightful_id,全局唯一
      */
     protected string $delightfulId = '';
 
@@ -99,7 +99,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
         $beDelightfulAgentUserId = $key['beDelightfulAgentUserId'] ?? '';
         if ($beDelightfulAgentUserId) {
-            // 处理超级麦吉的 agent user
+            // process超级麦吉的 agent user
             $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');

@@ -85,7 +85,7 @@ interface ProviderModelRepositoryInterface
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param ProviderModelQuery $query query条件
-     * @return array<string, array<string>> 按modeltype分组的modelIDarray，格式: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> 按modeltype分组的modelIDarray，format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array;
 }

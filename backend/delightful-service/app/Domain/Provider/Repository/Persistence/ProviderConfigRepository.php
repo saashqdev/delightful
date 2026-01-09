@@ -124,20 +124,20 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             // create新记录 - 先generateID
             $this->initializeEntityForCreation($providerConfigEntity, $attributes);
         } else {
-            // 更新现有记录
+            // update现有记录
             $now = new DateTime();
             $providerConfigEntity->setUpdatedAt($now);
             $attributes['updated_at'] = $now->format('Y-m-d H:i:s');
 
-            // 更新操作时，移除不should被更new字段
+            // update操作时，移除不should被更new字段
             unset($attributes['id'], $attributes['created_at']);
         }
 
-        // 对configuration数据进行加密（如果存在且未加密）
+        // 对configuration数据进行encrypt（如果存在且未encrypt）
         if (! empty($attributes['config'])) {
             $configId = (string) $providerConfigEntity->getId();
 
-            // 如果 config 是string且是valid的 JSON 格式（未加密的configuration数据），则need加密
+            // 如果 config 是string且是valid的 JSON format（未encrypt的configuration数据），则needencrypt
             if (is_string($attributes['config']) && json_validate($attributes['config'])) {
                 $decodedConfig = Json::decode($attributes['config']);
                 $attributes['config'] = ProviderConfigAssembler::encodeConfig($decodedConfig, $configId);
@@ -148,7 +148,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             // create新记录
             ProviderConfigModel::query()->insert($attributes);
         } else {
-            // 更新现有记录
+            // update现有记录
             ProviderConfigModel::query()
                 ->where('id', $providerConfigEntity->getId())
                 ->update($attributes);
@@ -200,8 +200,8 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * according toorganization和服务商type获取服务商configuration列表.
-     * 新逻辑：以数据库中的actualconfiguration为准，对于数据库中没有的服务商type，usetemplate补充
+     * according toorganization和服务商typeget服务商configuration列表.
+     * 新逻辑：以database中的actualconfiguration为准，对于database中没有的服务商type，usetemplate补充
      * 支持多个same provider_code 的configuration（organization管理员手动添加的）
      * final结果handle时，官方organizationwillfilter掉Delightful服务商，普通organizationwill将Delightful服务商置顶.
      * @param string $organizationCode organization编码
@@ -210,16 +210,16 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
      */
     public function getOrganizationProviders(string $organizationCode, Category $category, ?Status $status = null): array
     {
-        // 1. 获取全量的服务商template列表
+        // 1. get全量的服务商template列表
         $templateProviders = $this->providerTemplateRepository->getAllProviderTemplates($category);
 
-        // 2. 获取organization下已configuration的服务商
+        // 2. getorganization下已configuration的服务商
         $organizationProviders = $this->getOrganizationProvidersFromDatabase($organizationCode, $category, $status);
 
-        // 3. 首先添加数据库中的所有actualconfiguration（保留多个same provider_code 的configuration）
+        // 3. 首先添加database中的所有actualconfiguration（保留多个same provider_code 的configuration）
         $result = $organizationProviders;
 
-        // 4. check哪些服务商type在数据库中没有configuration，为这些添加template
+        // 4. check哪些服务商type在database中没有configuration，为这些添加template
         $existingProviderCodes = [];
         foreach ($organizationProviders as $config) {
             if ($config->getProviderCode()) {
@@ -227,7 +227,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // 为数据库中不存在的服务商type添加templateconfiguration
+        // 为database中不存在的服务商type添加templateconfiguration
         foreach ($templateProviders as $template) {
             if (! $template->getProviderCode() || ! in_array($template->getProviderCode(), $existingProviderCodes, true)) {
                 $result[] = $template;
@@ -290,7 +290,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * passconfigurationID和organization编码获取服务商configuration实体.
+     * passconfigurationID和organization编码get服务商configuration实体.
      */
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity
     {
@@ -375,19 +375,19 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 从数据库获取organization下已configuration的服务商.
+     * 从databasegetorganization下已configuration的服务商.
      * @return ProviderConfigDTO[]
      */
     private function getOrganizationProvidersFromDatabase(string $organizationCode, Category $category, ?Status $status = null): array
     {
-        // according tocategory获取服务商ID列表
+        // according tocategoryget服务商ID列表
         $serviceProviderIds = $this->getServiceProviderIdsByCategory($category);
 
         if (empty($serviceProviderIds)) {
             return [];
         }
 
-        // according toorganization编码和服务商ID列表获取configuration
+        // according toorganization编码和服务商ID列表getconfiguration
         $providerConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $organizationCode)
             ->whereIn('service_provider_id', $serviceProviderIds)
@@ -443,7 +443,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * according tocategory获取服务商ID列表.
+     * according tocategoryget服务商ID列表.
      *
      * @param Category $category 服务商category
      * @return array 服务商IDarray

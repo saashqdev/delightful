@@ -113,7 +113,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 }
                 sleep(2);
             }
-            // 如果未complete，则报错超时
+            // 如果未complete，则报错timeout
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }
@@ -137,7 +137,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
         } catch (Throwable $e) {
-            // 发生exception时，发送终止message，并抛出exception
+            // 发生exception时，send终止message，并抛出exception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // stream响应，拿到客户端传来的 app_message_id ，作为响应时候的唯一标识
+        // streamresponse，拿到客户端传来的 app_message_id ，作为response时候的唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

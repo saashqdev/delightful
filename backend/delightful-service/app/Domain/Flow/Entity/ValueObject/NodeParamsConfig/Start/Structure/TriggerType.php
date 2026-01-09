@@ -21,10 +21,10 @@ enum TriggerType: int
     // 打开chat窗口
     case OpenChatWindow = 2;
 
-    // 定时
+    // schedule
     case Routine = 3;
 
-    // parameter调用
+    // parametercall
     case ParamCall = 4;
 
     // 循环体开始节点

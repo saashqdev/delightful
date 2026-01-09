@@ -358,7 +358,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 生成唯一文档编码
+     * generate唯一文档编码
      */
     protected function generateDocumentCode(): string
     {

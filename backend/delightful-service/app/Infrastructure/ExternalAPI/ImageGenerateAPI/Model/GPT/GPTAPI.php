@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 class GPTAPI
 {
-    // 请求超时时间（秒）
+    // requesttimeout时间（秒）
     protected const REQUEST_TIMEOUT = 300;
 
     protected string $apiKey;
@@ -59,7 +59,7 @@ class GPTAPI
     }
 
     /**
-     * submitGPT4oimage生成task
+     * submitGPT4oimagegeneratetask
      */
     public function submitGPT4oTask(string $prompt, array $referImages = [], ?string $hookUrl = null): array
     {

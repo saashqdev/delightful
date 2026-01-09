@@ -111,7 +111,7 @@ readonly class ProviderModelDomainService
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
-        // createconfiguration版本record
+        // createconfigurationversionrecord
         $this->saveConfigVersion($dataIsolation, $modelEntity);
 
         return new SaveProviderModelDTO($modelEntity->toArray());
@@ -174,7 +174,7 @@ readonly class ProviderModelDomainService
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param ProviderModelQuery $query query条件
-     * @return array<string, array<string>> 按modeltype分组的modelIDarray，格式: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> 按modeltype分组的modelIDarray，format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array
     {
@@ -182,11 +182,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * get指定model的最新configuration版本ID.
+     * get指定model的最新configurationversionID.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|int 最新版本的ID，如果不存在则returnnull
+     * @return null|int 最新version的ID，如果不存在则returnnull
      */
     public function getLatestConfigVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -194,11 +194,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * get指定model的最新configuration版本实体.
+     * get指定model的最新configurationversion实体.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|ProviderModelConfigVersionEntity 最新版本的实体，如果不存在则returnnull
+     * @return null|ProviderModelConfigVersionEntity 最新version的实体，如果不存在则returnnull
      */
     public function getLatestConfigVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {
@@ -206,16 +206,16 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * savemodelconfiguration版本.
+     * savemodelconfigurationversion.
      */
     private function saveConfigVersion(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): void
     {
-        // 如果configuration为空，不create版本record
+        // 如果configuration为空，不createversionrecord
         if ($modelEntity->getConfig() === null) {
             return;
         }
 
-        // 转换为configuration版本实体并save（事务、版本号递增、markcurrent版本都在 Repository 内complete）
+        // 转换为configurationversion实体并save（transaction、version号递增、markcurrentversion都在 Repository 内complete）
         $versionEntity = ProviderModelAssembler::toConfigVersionEntity($modelEntity);
         $this->providerModelConfigVersionRepository->saveVersionWithTransaction($dataIsolation, $versionEntity);
     }

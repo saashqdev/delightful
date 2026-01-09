@@ -20,10 +20,10 @@ use Exception;
 
 class MidjourneyModel extends AbstractImageGenerate
 {
-    // 最大重试次数
+    // 最大retry次数
     protected const MAX_RETRIES = 20;
 
-    // 重试间隔（秒）
+    // retry间隔（秒）
     protected const RETRY_INTERVAL = 10;
 
     protected MidjourneyAPI $api;
@@ -61,11 +61,11 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAI格式响应 - Midjourney版本.
+     * generate图像并returnOpenAIformatresponse - Midjourneyversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先create响应object
+        // 1. 预先createresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -74,8 +74,8 @@ class MidjourneyModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('Midjourney OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
-            return $response; // returnnull数据响应
+            $this->logger->error('Midjourney OpenAIformat生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            return $response; // returnnull数据response
         }
 
         // 3. synchandle（Midjourney采用轮询机制）
@@ -83,21 +83,21 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->generateImageRawInternal($imageGenerateRequest);
             $this->validateMidjourneyResponse($result);
 
-            // success：settingimage数据到响应object
+            // success：settingimage数据到responseobject
             $this->addImageDataToResponse($response, $result, $imageGenerateRequest);
         } catch (Exception $e) {
-            // fail：settingerrorinfo到响应object
+            // fail：settingerrorinfo到responseobject
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
-            $this->logger->error('Midjourney OpenAI格式生图：请求fail', [
+            $this->logger->error('Midjourney OpenAIformat生图：requestfail', [
                 'error_code' => $e->getCode(),
                 'error_message' => $e->getMessage(),
             ]);
         }
 
         // 4. 记录final结果
-        $this->logger->info('Midjourney OpenAI格式生图：handlecomplete', [
+        $this->logger->info('Midjourney OpenAIformat生图：handlecomplete', [
             'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
@@ -126,7 +126,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['cdnImage']]);
         }
 
-        $this->logger->error('MJ文生图：未获取到imageURL', [
+        $this->logger->error('MJ文生图：未get到imageURL', [
             'rawResult' => $rawResult,
         ]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
@@ -145,7 +145,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if (! isset($result['status'])) {
-                    $this->logger->error('MJ文生图：轮询响应格式error', [
+                    $this->logger->error('MJ文生图：轮询responseformaterror', [
                         'jobId' => $jobId,
                         'response' => $result,
                     ]);
@@ -184,7 +184,7 @@ class MidjourneyModel extends AbstractImageGenerate
             }
         }
 
-        $this->logger->error('MJ文生图：taskexecute超时', [
+        $this->logger->error('MJ文生图：taskexecutetimeout', [
             'jobId' => $jobId,
             'maxRetries' => self::MAX_RETRIES,
             'totalTime' => self::MAX_RETRIES * self::RETRY_INTERVAL,
@@ -198,7 +198,7 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->api->submitTask($prompt, $mode);
 
             if (! isset($result['status'])) {
-                $this->logger->error('MJ文生图：响应格式error', [
+                $this->logger->error('MJ文生图：responseformaterror', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
@@ -242,7 +242,7 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->api->checkPrompt($prompt);
 
             if (! isset($result['status'])) {
-                $this->logger->error('MJ文生图：Prompt校验响应格式error', [
+                $this->logger->error('MJ文生图：Prompt校验responseformaterror', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
@@ -257,7 +257,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
             $this->logger->info('MJ文生图：Prompt校验complete');
         } catch (Exception $e) {
-            $this->logger->error('MJ文生图：Prompt校验请求fail', [
+            $this->logger->error('MJ文生图：Prompt校验requestfail', [
                 'error' => $e->getMessage(),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::PROMPT_CHECK_FAILED);
@@ -285,7 +285,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 获取alertmessage前缀
+     * getalertmessage前缀
      */
     protected function getAlertPrefix(): string
     {
@@ -298,7 +298,7 @@ class MidjourneyModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('MJ文生图：invalid的请求type', [
+            $this->logger->error('MJ文生图：invalid的requesttype', [
                 'class' => get_class($imageGenerateRequest),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
@@ -315,7 +315,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
         $prompt .= ' --v 7.0';
 
-        // 记录请求start
+        // 记录requeststart
         $this->logger->info('MJ文生图：start生图', [
             'prompt' => $prompt,
             'ratio' => $imageGenerateRequest->getRatio(),
@@ -379,32 +379,32 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * validateMidjourney API响应数据格式（仅checkimages字段）.
+     * validateMidjourney APIresponse数据format（仅checkimages字段）.
      */
     private function validateMidjourneyResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Midjourney响应数据格式error：缺少data字段');
+            throw new Exception('Midjourneyresponse数据formaterror：缺少data字段');
         }
 
         if (empty($result['data']['images']) || ! is_array($result['data']['images'])) {
-            throw new Exception('Midjourney响应数据格式error：缺少images字段或images不是array');
+            throw new Exception('Midjourneyresponse数据formaterror：缺少images字段或images不是array');
         }
 
         if (count($result['data']['images']) === 0) {
-            throw new Exception('Midjourney响应数据格式error：imagesarray为null');
+            throw new Exception('Midjourneyresponse数据formaterror：imagesarray为null');
         }
     }
 
     /**
-     * 将Midjourneyimage数据添加到OpenAI响应object中（仅handleimages字段）.
+     * 将Midjourneyimage数据添加到OpenAIresponseobject中（仅handleimages字段）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $midjourneyResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 从Midjourney响应中提取data.images字段
+        // 从Midjourneyresponse中提取data.images字段
         if (empty($midjourneyResult['data']['images']) || ! is_array($midjourneyResult['data']['images'])) {
             return;
         }
@@ -437,7 +437,7 @@ class MidjourneyModel extends AbstractImageGenerate
         $imageCount = count($midjourneyResult['data']['images']);
         $currentUsage->addGeneratedImages($imageCount);
 
-        // 更新响应object
+        // updateresponseobject
         $response->setData($currentData);
         $response->setUsage($currentUsage);
     }

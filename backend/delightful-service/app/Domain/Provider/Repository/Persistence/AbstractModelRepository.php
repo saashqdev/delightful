@@ -106,14 +106,14 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 重写 getAttributes method以correct处理复杂field的序列化.
+     * 重写 getAttributes method以correctprocess复杂field的序列化.
      */
     protected function getFieldAttributes(AbstractEntity $entity): array
     {
         $attributes = [];
         $array = $entity->toArray();
         foreach ($array as $key => $value) {
-            // 对复杂field进行特殊处理
+            // 对复杂field进行特殊process
             if (in_array($key, ['config', 'translate'], true) && (is_array($value) || is_object($value))) {
                 $value = Json::encode($value);
             }

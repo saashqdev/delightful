@@ -104,7 +104,7 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
             }
         }
 
-        // 处理 instruction parameter
+        // process instruction parameter
         if (isset($params['instruction']) && is_array($params['instruction'])) {
             $apiChatDTO->setInstruction($params['instruction']);
         }

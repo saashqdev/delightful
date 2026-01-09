@@ -11,12 +11,12 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * promptgetmethod处理器.
+ * promptgetmethodprocess器.
  */
 class PromptGetHandler extends AbstractMethodHandler
 {
     /**
-     * 处理promptget请求.
+     * processpromptgetrequest.
      */
     public function handle(MessageInterface $request): ?array
     {

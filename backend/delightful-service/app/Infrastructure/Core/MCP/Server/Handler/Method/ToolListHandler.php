@@ -10,12 +10,12 @@ namespace App\Infrastructure\Core\MCP\Server\Handler\Method;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * tool列tablemethod处理器.
+ * tool列tablemethodprocess器.
  */
 class ToolListHandler extends AbstractMethodHandler
 {
     /**
-     * 处理tool列table请求.
+     * processtool列tablerequest.
      */
     public function handle(MessageInterface $request): ?array
     {

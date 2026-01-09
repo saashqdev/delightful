@@ -87,7 +87,7 @@ class QwenImageAPI
     }
 
     /**
-     * submit图像edittask - 同调用.
+     * submit图像edittask - 同call.
      */
     public function submitEditTask(array $params): array
     {
@@ -98,7 +98,7 @@ class QwenImageAPI
             'Content-Type' => 'application/json',
         ];
 
-        // build符合阿里云APIdocument的请求格式
+        // build符合阿里云APIdocument的requestformat
         $body = [
             'model' => $params['model'] ?? 'qwen-image-edit',
             'input' => [

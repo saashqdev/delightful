@@ -45,7 +45,7 @@ class SessionAppService implements SessionInterface
                 // 一次性批量get所有organization的根departmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
 
-                // 填充登录响应information
+                // 填充登录responseinformation
                 foreach ($loginResponses as $loginResponse) {
                     $orgCode = $loginResponse->getDelightfulOrganizationCode();
                     if (! empty($orgCode) && isset($rootDepartments[$orgCode])) {

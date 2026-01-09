@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::table('delightful_chat_message_versions', function (Blueprint $table) {
             // message_type field，if没有则添加
             if (! Schema::hasColumn('delightful_chat_message_versions', 'message_type')) {
-                $table->string('message_type', 64)->nullable()->comment('message类型');
+                $table->string('message_type', 64)->nullable()->comment('messagetype');
             }
         });
     }

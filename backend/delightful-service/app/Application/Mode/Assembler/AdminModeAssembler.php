@@ -204,7 +204,7 @@ class AdminModeAssembler
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {
-        // 只update请求中contain的allow修改的field
+        // 只updaterequest中contain的allow修改的field
         $existingEntity->setNameI18n($request->getNameI18n());
         $existingEntity->setPlaceholderI18n($request->getPlaceholderI18n());
         $existingEntity->setIdentifier($request->getIdentifier());

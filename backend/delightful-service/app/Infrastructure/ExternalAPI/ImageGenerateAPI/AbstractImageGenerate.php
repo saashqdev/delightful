@@ -18,9 +18,9 @@ use Hyperf\Redis\Redis;
 use Psr\Log\LoggerInterface;
 
 /**
- * image生成统一抽象类
- * integration水印处理和钉钉alert功能
- * 所有image生成Provider都should继承此类.
+ * imagegenerate统一抽象类
+ * integration水印process和钉钉alert功能
+ * 所有imagegenerateProvider都should继承此类.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
 {
@@ -37,8 +37,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 统一的image生成入口method
-     * 先call子类implement的originalimage生成，再统一添加水印.
+     * 统一的imagegenerate入口method
+     * 先call子类implement的originalimagegenerate，再统一添加水印.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -49,7 +49,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * implement接口要求的带水印original数据method
-     * 各子类mustaccording to自己的数据格式implement此method.
+     * 各子类mustaccording to自己的数据formatimplement此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -59,40 +59,40 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 子类implement的originalimage生成method
-     * 只负责call各自API生成image，不用关心水印处理.
+     * 子类implement的originalimagegeneratemethod
+     * 只负责call各自APIgenerateimage，不用关心水印process.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * get响应object的锁，用于并发安全地操作 OpenAIFormatResponse.
-     * useRedis自旋锁implement排队等待.
+     * getresponseobject的lock，用于并发安全地操作 OpenAIFormatResponse.
+     * useRedis自旋lockimplement排队等待.
      *
-     * @return string return锁的owner，用于释放锁
+     * @return string returnlock的owner，用于释放lock
      */
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
         $lockKey = 'img_response_' . spl_object_id($response);
         $owner = bin2hex(random_bytes(8)); // 16位随机string作为owner
 
-        // spinLockwill自动等待，直到getsuccess或超时（30秒）
+        // spinLockwill自动等待，直到getsuccess或timeout（30秒）
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
-            $this->logger->error('get图像响应Redis锁超时', [
+            $this->logger->error('get图像responseRedislocktimeout', [
                 'lock_key' => $lockKey,
                 'timeout' => 30,
             ]);
-            throw new Exception('get图像响应锁超时，请稍后重试');
+            throw new Exception('get图像responselocktimeout，请稍后retry');
         }
 
-        $this->logger->debug('Redis锁getsuccess', ['lock_key' => $lockKey, 'owner' => $owner]);
+        $this->logger->debug('Redislockgetsuccess', ['lock_key' => $lockKey, 'owner' => $owner]);
         return $owner;
     }
 
     /**
-     * 释放响应object的锁.
+     * 释放responseobject的lock.
      *
-     * @param OpenAIFormatResponse $response 响应object
-     * @param string $owner 锁的owner
+     * @param OpenAIFormatResponse $response responseobject
+     * @param string $owner lock的owner
      */
     protected function unlockResponse(OpenAIFormatResponse $response, string $owner): void
     {
@@ -101,26 +101,26 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redis锁释放fail，可能已被其他进程释放', [
+                $this->logger->warning('Redislock释放fail，可能已被其他进程释放', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);
             } else {
-                $this->logger->debug('Redis锁释放success', ['lock_key' => $lockKey, 'owner' => $owner]);
+                $this->logger->debug('Redislock释放success', ['lock_key' => $lockKey, 'owner' => $owner]);
             }
         } catch (Exception $e) {
-            $this->logger->error('Redis锁释放exception', [
+            $this->logger->error('Redislock释放exception', [
                 'lock_key' => $lockKey,
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // 锁释放fail不影响业务逻辑，但要recordlog
+            // lock释放fail不影响业务逻辑，但要recordlog
         }
     }
 
     /**
-     * 统一的水印处理逻辑
-     * 支持URL和base64两种格式的image水印处理.
+     * 统一的水印process逻辑
+     * 支持URL和base64两种format的image水印process.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -130,15 +130,15 @@ abstract class AbstractImageGenerate implements ImageGenerate
         foreach ($data as $index => $imageData) {
             try {
                 if ($response->getImageGenerateType()->isBase64()) {
-                    // 处理base64格式image
+                    // processbase64formatimage
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToBase64($imageData, $imageGenerateRequest);
                 } else {
-                    // 处理URL格式image
+                    // processURLformatimage
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToUrl($imageData, $imageGenerateRequest);
                 }
             } catch (Exception $e) {
-                // 水印处理fail时，recorderror但不影响imagereturn
-                $this->logger->error('image水印处理fail', [
+                // 水印processfail时，recorderror但不影响imagereturn
+                $this->logger->error('image水印processfail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                     'imageType' => $response->getImageGenerateType()->value,

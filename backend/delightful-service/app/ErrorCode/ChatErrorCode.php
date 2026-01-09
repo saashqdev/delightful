@@ -64,7 +64,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.data.write_failed')]
     case DATA_WRITE_FAILED = 3013;
 
-    // 请求上下文丢失
+    // request上下文丢失
         // Request context lost
     #[ErrorMessage('chat.context.lost')]
     case CONTEXT_LOST = 3014;
@@ -119,7 +119,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.user_already_in_group')]
     case USER_ALREADY_IN_GROUP = 3024;
 
-    // 请发送message后再use智能重命名功能
+    // 请sendmessage后再use智能重命名功能
         // Send a message before using smart rename
     #[ErrorMessage('chat.topic.send_message_and_rename_topic')]
     case SEND_MESSAGE_AND_RENAME_TOPIC = 3025;

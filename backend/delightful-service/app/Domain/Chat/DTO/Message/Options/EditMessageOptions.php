@@ -14,7 +14,7 @@ class EditMessageOptions extends AbstractEntity
     // 被edit的messageid，用于关联message的多个version
     protected string $delightfulMessageId;
 
-    // version numberid，发送方不用填写，服务端自动生成
+    // version numberid，send方不用填写，服务端自动generate
     protected ?string $messageVersionId;
 
     public function __construct(?array $data = [])

@@ -13,10 +13,10 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Response\OpenAIFormatRespons
 
 interface ImageGenerate
 {
-    // 重试次数
+    // retry次数
     public const GENERATE_RETRY_COUNT = 3;
 
-    // 重试时间
+    // retry时间
     public const GENERATE_RETRY_TIME = 1000;
 
     public const IMAGE_GENERATE_KEY_PREFIX = 'text2image:';
@@ -26,19 +26,19 @@ interface ImageGenerate
     public const IMAGE_GENERATE_POLL_KEY_PREFIX = 'poll:';
 
     /**
-     * 生成图像并return标准格式的响应.
+     * generate图像并return标准format的response.
      */
     public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * 生成图像并return第third-party原生格式的data.
+     * generate图像并return第third-party原生format的data.
      */
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array;
 
     public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
     /**
-     * 生成图像并returnOpenAI格式响应.
+     * generate图像并returnOpenAIformatresponse.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse;
 

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 
 /**
- * 响应顺序：5 3 0 1 以后随意.
+ * response顺序：5 3 0 1 以后随意.
  */
 class AggregateAISearchCardResponseType
 {
@@ -17,7 +17,7 @@ class AggregateAISearchCardResponseType
      */
     public const int SEARCH = 0;
 
-    // LLM 响应
+    // LLM response
     public const int LLM_RESPONSE = 1;
 
     // 思维导图
@@ -26,7 +26,7 @@ class AggregateAISearchCardResponseType
     // 关联问题
     public const int ASSOCIATE_QUESTIONS = 3;
 
-    // 事件
+    // event
     public const int EVENT = 4;
 
     // ping pong
@@ -45,10 +45,10 @@ class AggregateAISearchCardResponseType
     {
         $typeNames = [
             self::SEARCH => 'search结果',
-            self::LLM_RESPONSE => 'LLM响应',
+            self::LLM_RESPONSE => 'LLMresponse',
             self::MIND_MAP => '思维导图',
             self::ASSOCIATE_QUESTIONS => '关联问题',
-            self::EVENT => '事件',
+            self::EVENT => 'event',
             self::PING_PONG => 'ping_pong',
             self::TERMINATE => 'exception终止',
             self::PPT => 'PPT',

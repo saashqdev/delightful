@@ -193,7 +193,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 处理数据格式，以organization代码为键，根department实体为value
+        // process数据format，以organization代码为键，根department实体为value
         $result = [];
         foreach ($rootDepartments as $department) {
             $result[$department->getOrganizationCode()] = $department;

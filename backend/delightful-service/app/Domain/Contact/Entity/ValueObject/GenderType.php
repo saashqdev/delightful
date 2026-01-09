@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * gender的类型.
+ * gender的type.
  */
 enum GenderType: int
 {

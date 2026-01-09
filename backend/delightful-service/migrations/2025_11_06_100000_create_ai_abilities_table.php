@@ -22,8 +22,8 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('code', 50)->comment('能力唯一标识');
             $table->string('organization_code', 100)->default('')->comment('organization编码');
-            $table->json('name_i18n')->comment('能力名称（多语言JSON格式）');
-            $table->json('description_i18n')->comment('能力description（多语言JSON格式）');
+            $table->json('name_i18n')->comment('能力名称（多语言JSONformat）');
+            $table->json('description_i18n')->comment('能力description（多语言JSONformat）');
             $table->string('icon', 100)->nullable()->comment('图标标识');
             $table->integer('sort_order')->default(0)->comment('sort');
             $table->tinyInteger('status')->default(1)->comment('status：0-禁用，1-启用');

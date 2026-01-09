@@ -61,7 +61,7 @@ class StartInputTemplate
                 "type": "string",
                 "key": "chat_time",
                 "sort":  2,
-                "title": "发送时间",
+                "title": "send时间",
                 "description": "",
                 "items": null,
                 "properties": null,

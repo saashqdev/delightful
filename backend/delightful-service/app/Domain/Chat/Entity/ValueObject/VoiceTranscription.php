@@ -11,13 +11,13 @@ use App\Infrastructure\Core\AbstractValueObject;
 
 /**
  * voice转文字resultvalueobject
- * 支持多语言转录result存储.
+ * 支持多语言转录resultstorage.
  */
 class VoiceTranscription extends AbstractValueObject
 {
     /**
      * 多语言转录result
-     * 格式: ['zh_CN' => '转录文本', 'en_US' => 'Transcription text', ...].
+     * format: ['zh_CN' => '转录文本', 'en_US' => 'Transcription text', ...].
      * @var null|array<string, string>
      */
     private ?array $transcriptions;

@@ -16,9 +16,9 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface RateLimiterInterface
 {
     /**
-     * check客户端是否allow执行请求.
+     * check客户端是否allowexecuterequest.
      *
-     * @throws InvalidParamsException when请求超过速率限制时
+     * @throws InvalidParamsException whenrequest超过速率限制时
      */
     public function check(string $clientId, MessageInterface $request): void;
 

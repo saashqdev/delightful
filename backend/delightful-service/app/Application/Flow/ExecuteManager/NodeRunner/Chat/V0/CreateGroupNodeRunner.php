@@ -128,7 +128,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 
         if (! empty($assistantOpeningSpeech)) {
-            // 助手发送group chatmessage
+            // 助手sendgroup chatmessage
             $assistantMessage = new TextMessage(['content' => $assistantOpeningSpeech]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();

@@ -24,7 +24,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 从沙箱 API 响应create DTO.
+     * 从沙箱 API responsecreate DTO.
      */
     public static function fromSandboxResponse(array $response): self
     {

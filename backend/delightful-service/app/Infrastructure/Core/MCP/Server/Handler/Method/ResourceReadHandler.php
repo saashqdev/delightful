@@ -11,12 +11,12 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 资源readmethod处理器.
+ * 资源readmethodprocess器.
  */
 class ResourceReadHandler extends AbstractMethodHandler
 {
     /**
-     * get该处理器支持的method名称.
+     * get该process器支持的method名称.
      */
     public function getMethod(): string
     {
@@ -24,7 +24,7 @@ class ResourceReadHandler extends AbstractMethodHandler
     }
 
     /**
-     * 处理资源read请求.
+     * process资源readrequest.
      */
     public function handle(MessageInterface $request): ?array
     {

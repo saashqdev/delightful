@@ -52,7 +52,7 @@ class ModeAssembler
         $dto->setGroup(self::groupEntityToDTO($groupAggregate->getGroup()));
         $locale = di(TranslatorInterface::class)->getLocale();
 
-        // 处理 LLM model
+        // process LLM model
         $models = [];
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
@@ -72,7 +72,7 @@ class ModeAssembler
             }
         }
 
-        // 处理 VLM 图像model
+        // process VLM 图像model
         $imageModels = [];
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());

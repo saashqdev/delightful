@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface AuthenticationInterface
 {
     /**
-     * verify请求的身份info.
+     * verifyrequest的身份info.
      *
      * @throws InvalidParamsException whenverifyfail时抛出
      */

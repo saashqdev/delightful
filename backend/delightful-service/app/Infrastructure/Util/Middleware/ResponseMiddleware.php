@@ -31,7 +31,7 @@ class ResponseMiddleware implements MiddlewareInterface
         'api-key',
     ];
 
-    // 指定的 uri 不打印请求和响应详情
+    // 指定的 uri 不打印request和response详情
     private array $desensitizeUris = [
         '/conversation/chatCompletions',
         '/message',
@@ -58,8 +58,8 @@ class ResponseMiddleware implements MiddlewareInterface
     {
         $path = $request->getUri()->getPath();
         if (! in_array($path, $this->ignoreUris, true)) {
-            // 提前记录请求log、请求 url、请求头
-            $this->logger->info('请求跟踪开始', [
+            // 提前记录requestlog、request url、request头
+            $this->logger->info('request跟踪开始', [
                 'url' => $request->getRequestTarget(),
                 'method' => $request->getMethod(),
                 'headers' => $this->desensitizeRequestHeaders($request->getHeaders()),
@@ -76,7 +76,7 @@ class ResponseMiddleware implements MiddlewareInterface
             throw $throwable;
         } finally {
             $endTime = microtime(true);
-            // 避免阻塞响应
+            // 避免阻塞response
             defer(function () use ($request, $response, $startTime, $endTime) {
                 $path = $request->getUri()->getPath();
                 if (in_array($path, $this->ignoreUris, true)) {
@@ -84,7 +84,7 @@ class ResponseMiddleware implements MiddlewareInterface
                 }
                 // temporary加一下敏感filter
                 if (! str_contains($path, 'aes')) {
-                    $this->logger->info('请求跟踪information', $this->formatMessage($request, $response, $startTime, $endTime));
+                    $this->logger->info('request跟踪information', $this->formatMessage($request, $response, $startTime, $endTime));
                 }
             });
         }

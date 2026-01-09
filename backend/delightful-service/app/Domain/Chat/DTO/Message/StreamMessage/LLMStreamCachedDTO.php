@@ -11,10 +11,10 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class LLMStreamCachedDTO extends AbstractEntity
 {
-    // 避免频繁操作data库，在内存中cache发送message的 sender_message_id
+    // 避免频繁操作data库，在内存中cachesendmessage的 sender_message_id
     protected string $senderMessageId;
 
-    // 避免频繁操作data库，在内存中cache接收message的 receive_message_id
+    // 避免频繁操作data库，在内存中cachereceivemessage的 receive_message_id
     protected string $receiveMessageId;
 
     // 避免频繁操作data库，在内存中cache完整的streammessagecontent

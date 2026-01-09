@@ -225,7 +225,7 @@ class DelightfulFlowTriggerTestcaseEntity extends AbstractEntity
                 }
                 break;
             case TriggerType::ParamCall:
-                // parameter调用不校验了
+                // parametercall不校验了
                 break;
             default:
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.invalid', ['label' => 'flow.fields.trigger_type']);

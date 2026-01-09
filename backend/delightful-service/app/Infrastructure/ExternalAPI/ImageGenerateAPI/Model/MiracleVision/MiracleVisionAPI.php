@@ -58,7 +58,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * setting API 密钥.
+     * setting API key.
      */
     public function setSecret(string $secret): void
     {
@@ -115,7 +115,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * create带signature的请求
+     * create带signature的request
      */
     private function createSignedRequest(string $url, string $method, array $headers = [], string $body = ''): Request
     {
@@ -134,7 +134,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 发送请求并return响应.
+     * sendrequest并returnresponse.
      *
      * @throws GuzzleException
      * @throws Exception

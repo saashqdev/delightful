@@ -45,7 +45,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
         // should不will很多，直接取所有
         $waitMessages = $this->listByUnhandledConversationId($dataIsolation, $conversationId);
         foreach ($waitMessages as $waitMessage) {
-            // if超时
+            // iftimeout
             $isTimeout = false;
             if (! empty($waitMessage->getTimeout())) {
                 $isTimeout = $waitMessage->getTimeout() < time();

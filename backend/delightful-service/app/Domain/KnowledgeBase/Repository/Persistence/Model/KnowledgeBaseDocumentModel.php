@@ -19,7 +19,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $knowledge_base_code 知识库编码
  * @property string $name 文档name
  * @property string $code 文档编码
- * @property int $version 版本号
+ * @property int $version version号
  * @property bool $enabled 是否启用
  * @property int $doc_type 文档type
  * @property array $doc_metadata 文档元数据

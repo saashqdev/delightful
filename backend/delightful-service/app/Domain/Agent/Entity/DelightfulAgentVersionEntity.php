@@ -23,7 +23,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $flowCode;
 
     /**
-     * workflow版本号.
+     * workflowversion号.
      */
     protected string $flowVersion;
 
@@ -59,12 +59,12 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $robotDescription;
 
     /**
-     * 版本description.
+     * versiondescription.
      */
     protected ?string $versionDescription = '';
 
     /**
-     * 版本号.
+     * version号.
      */
     protected ?string $versionNumber = '';
 

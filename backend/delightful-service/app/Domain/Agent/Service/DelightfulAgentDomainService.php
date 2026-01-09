@@ -170,7 +170,7 @@ class DelightfulAgentDomainService
         // 提取启用助理list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和助理版本的助理数据及其total
+        // get指定organization和助理version的助理数据及其total
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 

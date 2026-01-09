@@ -15,7 +15,7 @@ class StartApprovalDTO extends AbstractFlowDTO
     // approvaltable单data
     public array $formData = [];
 
-    // approval流data
+    // approvalstreamdata
     public array $approvalData = [];
 
     // departmentID

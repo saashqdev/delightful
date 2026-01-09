@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Event\Seq;
 
 /**
- * group chatmessagecreate事件.
+ * group chatmessagecreateevent.
  */
 class ApiSeqCreatedEvent extends SeqCreatedEvent
 {

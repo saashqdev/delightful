@@ -43,7 +43,7 @@ class DelightfulFlowKnowledgeFactory
         $entity->setEmbeddingConfig($model->embedding_config);
         $entity->setSourceType($model->source_type);
 
-        // 处理检索configuration
+        // process检索configuration
         if (! empty($model->retrieve_config)) {
             // if是string（JSON string），先解码
             $config = json_decode($model->retrieve_config, true);
@@ -92,7 +92,7 @@ class DelightfulFlowKnowledgeFactory
             'source_type' => $entity->getSourceType(),
         ];
 
-        // 处理检索configuration
+        // process检索configuration
         if ($entity->getRetrieveConfig() !== null) {
             $attributes['retrieve_config'] = json_encode($entity->getRetrieveConfig()->toArray());
         }

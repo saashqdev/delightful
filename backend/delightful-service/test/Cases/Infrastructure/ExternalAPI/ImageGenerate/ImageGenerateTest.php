@@ -42,7 +42,7 @@ class ImageGenerateTest extends BaseTest
         }
         $header = $data[0];
         $imageData = $data[1];
-        // check头部是否符合Base64编码image的格式
+        // check头部是否符合Base64编码image的format
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
@@ -61,7 +61,7 @@ class ImageGenerateTest extends BaseTest
         // uploadfile（指定不自动create目录）
         $fileDomainService->uploadByCredential('DT001', $uploadFile);
 
-        // 生成可访问的链接
+        // generate可访问的链接
         $fileLink = $fileDomainService->getLink('DT001', $uploadFile->getKey(), StorageBucketType::Private);
         var_dump($fileLink);
     }
@@ -135,12 +135,12 @@ class ImageGenerateTest extends BaseTest
         // createGPT4omodel实例
         $gpt4oModel = new GPT4oModel();
 
-        // create请求实例
+        // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
         $gpt4oModelRequest->setPrompt('一只小金毛正在草原上欢快的奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
 
-        // 生成image
+        // generateimage
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
         // verifyresult
@@ -161,7 +161,7 @@ class ImageGenerateTest extends BaseTest
         // createGPT4omodel实例
         $gpt4oModel = new GPT4oModel();
 
-        // create请求实例
+        // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
         $gpt4oModelRequest->setPrompt('调整一群女巫手里捧着南瓜在膜拜一个人');
         $gpt4oModelRequest->setGenerateNum(1);
@@ -171,7 +171,7 @@ class ImageGenerateTest extends BaseTest
             'https://cdn.ttapi.io/gpt/2025-04-01/0a4f0c65-c678-4e4d-a26c-ee7c50398f3f.png',
         ]);
 
-        // 生成image
+        // generateimage
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
         // verifyresult
@@ -200,7 +200,7 @@ class ImageGenerateTest extends BaseTest
         //        // create通义千问model实例
         //        $qwenImageModel = new QwenImageModel($config);
         //
-        //        // create请求实例
+        //        // createrequest实例
         //        $qwenImageRequest = new QwenImageModelRequest();
         //        $qwenImageRequest->setPrompt('一只可爱的小猫咪在花园里玩耍，阳光明媚，色彩丰富，高质量摄影');
         //        $qwenImageRequest->setHeight('1328');
@@ -208,7 +208,7 @@ class ImageGenerateTest extends BaseTest
         //        $qwenImageRequest->setGenerateNum(1);
         //        $qwenImageRequest->setModel('qwen-image');
         //
-        //        // 生成image
+        //        // generateimage
         //        $result = $qwenImageModel->generateImage($qwenImageRequest);
         //
         //        // verifyresult

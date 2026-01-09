@@ -129,7 +129,7 @@ readonly class KnowledgeBaseDocumentDomainService
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触发重建（这里can发送event或者加入queue）
+            // async触发重建（这里cansendevent或者加入queue）
             // TODO: 触发重建向量event
         }
     }

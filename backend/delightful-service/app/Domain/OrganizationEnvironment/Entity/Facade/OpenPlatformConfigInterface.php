@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\OrganizationEnvironment\Entity\Facade;
 
 /**
- * 开放平台的所有configurationsave在数据库的onefield中.
+ * 开放平台的所有configurationsave在database的onefield中.
  */
 interface OpenPlatformConfigInterface
 {

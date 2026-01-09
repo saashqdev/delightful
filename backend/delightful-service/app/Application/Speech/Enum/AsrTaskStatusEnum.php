@@ -15,21 +15,21 @@ namespace App\Application\Speech\Enum;
  * 【use场景】
  * - taskstatus持久化（Redis/database）
  * - 业务process控制和幂等性判断
- * - 整体taskstatustrace（录音 → 合并 → 生成标题 → 发送message）
+ * - 整体taskstatustrace（录音 → 合并 → generate标题 → sendmessage）
  *
  * 【与其他枚举的区别】
  * - AsrRecordingStatusEnum: 前端录音实时status（录音交互层）
  * - AsrTaskStatusEnum: 内部task全processstatus（业务管理层）✓ current
  * - SandboxAsrStatusEnum: 沙箱合并taskstatus（基础设施层）
  *
- * 【status流转】created → processing → completed | failed
+ * 【statusstream转】created → processing → completed | failed
  */
 enum AsrTaskStatusEnum: string
 {
-    case CREATED = 'created';              // 已create：taskinitializecomplete，等待处理
-    case PROCESSING = 'processing';        // 处理中：正在执行录音、合并或总结
-    case COMPLETED = 'completed';          // 已complete：整个 ASR process全部complete（includemessage发送）
-    case FAILED = 'failed';                // fail：task执行fail
+    case CREATED = 'created';              // 已create：taskinitializecomplete，等待process
+    case PROCESSING = 'processing';        // process中：正在execute录音、合并或总结
+    case COMPLETED = 'completed';          // 已complete：整个 ASR process全部complete（includemessagesend）
+    case FAILED = 'failed';                // fail：taskexecutefail
 
     /**
      * getstatusdescription.
@@ -38,7 +38,7 @@ enum AsrTaskStatusEnum: string
     {
         return match ($this) {
             self::CREATED => '已create',
-            self::PROCESSING => '处理中',
+            self::PROCESSING => 'process中',
             self::COMPLETED => '已complete',
             self::FAILED => 'fail',
         };

@@ -11,12 +11,12 @@ use App\Infrastructure\Core\MCP\Capabilities;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * initializemethod处理器.
+ * initializemethodprocess器.
  */
 class InitializeHandler extends AbstractMethodHandler
 {
     /**
-     * 处理initialize请求.
+     * processinitializerequest.
      */
     public function handle(MessageInterface $request): ?array
     {

@@ -52,7 +52,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             $officialProxyRequest = $imageGenerateRequest;
             $data = $officialProxyRequest->toArray();
 
-            $this->logger->info('官方代理：发送image生成请求', [
+            $this->logger->info('官方代理：sendimagegeneraterequest', [
                 'url' => $fullUrl,
                 'data' => $data,
             ]);
@@ -68,23 +68,23 @@ class OfficialProxyModel extends AbstractImageGenerate
             $statusCode = $response->getStatusCode();
             $responseBody = $response->getBody()->getContents();
 
-            $this->logger->info('官方代理：收到响应', [
+            $this->logger->info('官方代理：收到response', [
                 'status_code' => $statusCode,
                 'response_length' => strlen($responseBody),
             ]);
 
             $responseData = Json::decode($responseBody);
 
-            $this->logger->info('官方代理：请求success', [
+            $this->logger->info('官方代理：requestsuccess', [
                 'url' => $this->url,
                 'data_count' => count($responseData['data'] ?? []),
             ]);
 
-            // build OpenAI 格式响应
+            // build OpenAI formatresponse
             return new OpenAIFormatResponse($responseData);
         } catch (GuzzleException $e) {
             $errorBody = '';
-            // 尝试get响应体
+            // 尝试getresponse体
             try {
                 if ($e instanceof RequestException && $e->hasResponse()) {
                     $errorBody = $e->getResponse()->getBody()->getContents();
@@ -94,14 +94,14 @@ class OfficialProxyModel extends AbstractImageGenerate
                 $errorBody = 'Failed to read response body: ' . $bodyException->getMessage();
             }
 
-            $this->logger->error('官方代理：请求failed', [
+            $this->logger->error('官方代理：requestfailed', [
                 'url' => $fullUrl,
                 'error' => $e->getMessage(),
                 'code' => $e->getCode(),
                 'response_body' => $errorBody,
             ]);
 
-            // returnerror响应
+            // returnerrorresponse
             return OpenAIFormatResponse::buildError(
                 code: is_array($errorBody) ? $errorBody['error']['code'] : 4001,
                 message: is_array($errorBody) ? $errorBody['error']['message'] : $errorBody,

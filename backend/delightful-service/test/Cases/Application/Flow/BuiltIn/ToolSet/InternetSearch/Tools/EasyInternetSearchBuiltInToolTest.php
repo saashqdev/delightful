@@ -166,7 +166,7 @@ JSON, true));
 互联网search助手
 
 ## process
-调用`easy_internet_search`进行search
+call`easy_internet_search`进行search
 
 MARKDOWN,
 

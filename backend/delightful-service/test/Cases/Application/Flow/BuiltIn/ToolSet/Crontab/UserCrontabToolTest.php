@@ -89,11 +89,11 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一个can帮助user快速createuser级别定时task的助手
+你是一个can帮助user快速createuser级别scheduletask的助手
 
 
 ## process
-1、call `create_user_crontab` 工具createuser级别定时task
+1、call `create_user_crontab` 工具createuser级别scheduletask
 2、currenttime是:{$currentDateTime}
 -topic_id是：750436587206451201
 -agent_id是：725682656757252096
@@ -108,8 +108,8 @@ user的昵称是：currentuser的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，从明天开始，每天早上9点执行，显示一条reminder我做饭的message',
-            'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，明天10点reminder我，显示一条reminder我做饭的message',
+            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，从明天开始，每天早上9点execute，显示一条reminder我做饭的message',
+            'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，明天10点reminder我，显示一条reminder我做饭的message',
         ]);
 
         $runner->execute($vertexResult, $executionData);

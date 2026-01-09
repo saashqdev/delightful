@@ -26,10 +26,10 @@ use Hyperf\Retry\Annotation\Retry;
 
 class QwenImageModel extends AbstractImageGenerate
 {
-    // 最大轮询重试次数
+    // 最大轮询retry次数
     private const MAX_RETRY_COUNT = 30;
 
-    // 轮询重试间隔（秒）
+    // 轮询retry间隔（秒）
     private const RETRY_INTERVAL = 2;
 
     private QwenImageAPI $api;
@@ -72,11 +72,11 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAI格式响应 - Qwen版本.
+     * generate图像并returnOpenAIformatresponse - Qwenversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先create响应object
+        // 1. 预先createresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -85,11 +85,11 @@ class QwenImageModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('Qwen OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
-            return $response; // returnnull数据响应
+            $this->logger->error('Qwen OpenAIformat生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            return $response; // returnnull数据response
         }
 
-        // 3. 并发handle - 直接操作响应object
+        // 3. 并发handle - 直接操作responseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -104,16 +104,16 @@ class QwenImageModel extends AbstractImageGenerate
 
                     $this->validateQwenResponse($result);
 
-                    // success：settingimage数据到响应object
+                    // success：settingimage数据到responseobject
                     $this->addImageDataToResponseQwen($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfo到响应object（只settingfirsterror）
+                    // fail：settingerrorinfo到responseobject（只settingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('Qwen OpenAI格式生图：单个请求fail', [
+                    $this->logger->error('Qwen OpenAIformat生图：单个requestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -124,8 +124,8 @@ class QwenImageModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. 记录final结果
-        $this->logger->info('Qwen OpenAI格式生图：并发handlecomplete', [
-            '总请求数' => $count,
+        $this->logger->info('Qwen OpenAIformat生图：并发handlecomplete', [
+            '总request数' => $count,
             'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
@@ -167,7 +167,7 @@ class QwenImageModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('通义千问文生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('通义千问文生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -192,9 +192,9 @@ class QwenImageModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $i, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // submittask（带重试）
+                    // submittask（带retry）
                     $taskId = $this->submitAsyncTask($imageGenerateRequest);
-                    // 轮询结果（带重试）
+                    // 轮询结果（带retry）
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
                     return [
@@ -217,12 +217,12 @@ class QwenImageModel extends AbstractImageGenerate
             });
         }
 
-        // 获取所有并行task的结果
+        // get所有并行task的结果
         $results = $parallel->wait();
         $rawResults = [];
         $errors = [];
 
-        // handle结果，保持原生格式
+        // handle结果，保持原生format
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
@@ -288,10 +288,10 @@ class QwenImageModel extends AbstractImageGenerate
 
             $response = $this->api->submitTask($params);
 
-            // check响应格式
+            // checkresponseformat
             if (! isset($response['output']['task_id'])) {
                 $errorMsg = $response['message'] ?? '未知error';
-                $this->logger->warning('通义千问文生图：响应中缺少taskID', ['response' => $response]);
+                $this->logger->warning('通义千问文生图：response中缺少taskID', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
 
@@ -325,9 +325,9 @@ class QwenImageModel extends AbstractImageGenerate
             try {
                 $response = $this->api->getTaskResult($taskId);
 
-                // check响应格式
+                // checkresponseformat
                 if (! isset($response['output'])) {
-                    $this->logger->warning('通义千问文生图：querytask响应格式error', ['response' => $response]);
+                    $this->logger->warning('通义千问文生图：querytaskresponseformaterror', ['response' => $response]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
                 }
 
@@ -373,7 +373,7 @@ class QwenImageModel extends AbstractImageGenerate
             }
         }
 
-        $this->logger->error('通义千问文生图：taskquery超时', ['taskId' => $taskId]);
+        $this->logger->error('通义千问文生图：taskquerytimeout', ['taskId' => $taskId]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT);
     }
 
@@ -434,7 +434,7 @@ class QwenImageModel extends AbstractImageGenerate
     {
         $dimensions = explode('x', $size);
         if (count($dimensions) !== 2) {
-            $this->logger->error('通义千问文生图：wan2.2-t2i-flash尺寸格式error', [
+            $this->logger->error('通义千问文生图：wan2.2-t2i-flash尺寸formaterror', [
                 'requested_size' => $size,
                 'model' => 'wan2.2-t2i-flash',
             ]);
@@ -503,37 +503,37 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * validate通义千问API响应数据格式.
+     * validate通义千问APIresponse数据format.
      */
     private function validateQwenResponse(array $result): void
     {
         if (empty($result['output']) || ! is_array($result['output'])) {
-            throw new Exception('通义千问响应数据格式error：缺少output字段');
+            throw new Exception('通义千问response数据formaterror：缺少output字段');
         }
 
         $output = $result['output'];
         if (empty($output['results']) || ! is_array($output['results'])) {
-            throw new Exception('通义千问响应数据格式error：缺少results字段');
+            throw new Exception('通义千问response数据formaterror：缺少results字段');
         }
 
         // checkfirst结果是否有URL
         if (empty($output['results'][0]['url'])) {
-            throw new Exception('通义千问响应数据格式error：缺少imageURL');
+            throw new Exception('通义千问response数据formaterror：缺少imageURL');
         }
     }
 
     /**
-     * 将通义千问image数据添加到OpenAI响应object中.
+     * 将通义千问image数据添加到OpenAIresponseobject中.
      */
     private function addImageDataToResponseQwen(
         OpenAIFormatResponse $response,
         array $qwenResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedis锁ensure并发安全
+        // useRedislockensure并发安全
         $lockOwner = $this->lockResponse($response);
         try {
-            // 从通义千问响应中提取数据
+            // 从通义千问response中提取数据
             if (empty($qwenResult['output']['results']) || ! is_array($qwenResult['output']['results'])) {
                 return;
             }
@@ -574,11 +574,11 @@ class QwenImageModel extends AbstractImageGenerate
                 $currentUsage->addGeneratedImages(1);
             }
 
-            // 更新响应object
+            // updateresponseobject
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensure锁一定will被释放
+            // ensurelock一定will被释放
             $this->unlockResponse($response, $lockOwner);
         }
     }

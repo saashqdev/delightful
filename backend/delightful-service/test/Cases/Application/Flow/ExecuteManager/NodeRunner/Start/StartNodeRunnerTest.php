@@ -137,7 +137,7 @@ JSON, true));
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
         $this->assertEquals(['node_2'], $vertexResult->getChildrenIds());
 
-        // 10s内，所以不will执行
+        // 10s内，所以不willexecute
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEmpty($vertexResult->getChildrenIds());
     }

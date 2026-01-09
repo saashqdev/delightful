@@ -16,11 +16,11 @@ return new class extends Migration {
     {
         Schema::table('delightful_flow_execute_logs', function (Blueprint $table) {
             $table->string('organization_code')->default('')->comment('organization代码');
-            $table->string('flow_type')->default('')->comment('process类型');
+            $table->string('flow_type')->default('')->comment('processtype');
             $table->string('parent_flow_code')->default('')->comment('父process代码');
             $table->string('operator_id')->default('')->comment('操作员ID');
             $table->integer('level')->default(0)->comment('级别');
-            $table->string('execution_type')->default('')->comment('执行类型');
+            $table->string('execution_type')->default('')->comment('executetype');
         });
     }
 

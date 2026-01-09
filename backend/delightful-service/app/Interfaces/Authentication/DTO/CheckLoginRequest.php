@@ -10,7 +10,7 @@ namespace App\Interfaces\Authentication\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 登录请求DTO.
+ * 登录requestDTO.
  */
 class CheckLoginRequest extends AbstractDTO
 {

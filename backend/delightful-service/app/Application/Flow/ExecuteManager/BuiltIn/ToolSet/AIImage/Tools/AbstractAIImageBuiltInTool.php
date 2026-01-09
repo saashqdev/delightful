@@ -49,7 +49,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "生成image的比例",
+            "title": "generateimage的比例",
             "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
@@ -206,7 +206,7 @@ JSON,
             ->setUserMessage($textMessage)
             ->setAttachments($executionData->getTriggerData()?->getAttachments())
             ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId());
-        // setactual请求的尺寸和比例
+        // setactualrequest的尺寸和比例
         $enumModel = ImageGenerateModelType::fromModel($model, false);
         $imageGenerateParamsVO = $reqDto->getParams();
         $imageGenerateParamsVO->setSourceId($this->getCode());
@@ -220,7 +220,7 @@ JSON,
 
     protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
-        // get助理的userinfo。生成的imageupload者是助理自己。
+        // get助理的userinfo。generate的imageupload者是助理自己。
         $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');

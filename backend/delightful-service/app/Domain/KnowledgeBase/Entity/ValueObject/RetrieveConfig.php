@@ -18,9 +18,9 @@ use InvalidArgumentException;
 class RetrieveConfig extends AbstractValueObject
 {
     /**
-     * currentconfiguration版本.
+     * currentconfigurationversion.
      *
-     * 用于configuration结构变更时的兼容性处理
+     * 用于configuration结构变更时的兼容性process
      */
     public const int CURRENT_VERSION = 1;
 
@@ -104,14 +104,14 @@ class RetrieveConfig extends AbstractValueObject
     ];
 
     /**
-     * configuration版本.
+     * configurationversion.
      *
-     * 用于configuration结构变更时的兼容性处理
+     * 用于configuration结构变更时的兼容性process
      */
     private int $version = self::CURRENT_VERSION;
 
     /**
-     * getconfiguration版本.
+     * getconfigurationversion.
      */
     public function getVersion(): int
     {
@@ -119,7 +119,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setconfiguration版本.
+     * setconfigurationversion.
      */
     public function setVersion(int $version): self
     {

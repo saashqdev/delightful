@@ -53,7 +53,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $model = OrganizationModel::create($data);
             $organizationEntity->setId($model->id);
         } else {
-            // usemodelupdate以便use casts 处理 JSON 与日期field
+            // usemodelupdate以便use casts process JSON 与日期field
             $model = OrganizationModel::query()
                 ->where('id', $organizationEntity->getId())
                 ->first();

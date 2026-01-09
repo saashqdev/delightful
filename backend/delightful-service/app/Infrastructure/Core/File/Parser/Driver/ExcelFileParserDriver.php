@@ -131,7 +131,7 @@ class ExcelFileParserDriver implements ExcelFileParserDriverInterface
     }
 
     /**
-     * 格式化CSV单元格content，对特殊content添加引号.
+     * format化CSV单元格content，对特殊content添加引号.
      */
     private function formatCsvCell(string $value): string
     {

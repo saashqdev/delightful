@@ -121,8 +121,8 @@ MARKDOWN;
 
         $usageInstructions = <<<'MARKDOWN'
 use说明：
-• 必须提供 agent_id 和 message parameter
-• conversation_id 用于保持conversation连续性，相同ID的message会共享上下文
+• must提供 agent_id 和 message parameter
+• conversation_id 用于保持conversation连续性，sameID的messagewill共享上下文
 
 MARKDOWN;
 
@@ -135,7 +135,7 @@ MARKDOWN;
 • 格式：[{"name": "指令name", "value": "指令value"}, ...]
 • 单选type：从可选value中选择一个，for example "yes", "no"
 • 开关type：只能是 "on" 或 "off"
-• 如果不提供指令parameter，将use默认value
+• 如果不提供指令parameter，将usedefaultvalue
 
 call示例：
 ```json
@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID，用于记忆功能，相同sessionID的message将具有共享的上下文',
+                            'description' => 'sessionID，用于记忆功能，samesessionID的message将具有共享的上下文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -252,7 +252,7 @@ MARKDOWN;
                 } elseif ($item['type'] === 2) {
                     // Switch
                     $defaultValue = $item['default_value'] ?? 'off';
-                    $descriptions[] = "{$baseDescription}[开关: on/off, 默认:{$defaultValue}]";
+                    $descriptions[] = "{$baseDescription}[开关: on/off, default:{$defaultValue}]";
                 }
             }
         }
@@ -267,13 +267,13 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => '指令parameterarray，用于控制AI助理的行为。每个object包含 name（指令name）和 value（指令value）field。单选type指令需要从可选value中选择一个，开关type指令只能是 "on" 或 "off"。',
+            'description' => '指令parameterarray，用于控制AI助理的行为。每个objectcontain name（指令name）和 value（指令value）field。单选type指令need从可选value中选择一个，开关type指令只能是 "on" 或 "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => '指令name，必须与AI助理定义的指令name完全匹配',
+                        'description' => '指令name，must与AI助理定义的指令name完全匹配',
                     ],
                     'value' => [
                         'type' => 'string',

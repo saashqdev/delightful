@@ -103,7 +103,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * getfile大小.
+     * getfilesize.
      */
     public function getFileSize(): int
     {
@@ -111,7 +111,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * setfile大小.
+     * setfilesize.
      */
     public function setFileSize(int $fileSize): self
     {
@@ -305,7 +305,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否可以重试.
+     * check是否can重试.
      */
     public function canRetry(int $maxRetries = 3): bool
     {

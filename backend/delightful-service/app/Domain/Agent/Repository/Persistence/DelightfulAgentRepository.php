@@ -33,7 +33,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
      */
     public function queries(DelightfulAgentQuery $query, Page $page): array
     {
-        // todo 这里至少需要organization隔离
+        // todo 这里at leastneedorganization隔离
         $builder = DelightfulAgentModel::query();
 
         if (! is_null($query->getIds())) {
@@ -259,7 +259,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     /**
      * 分批get助理list.
      * @param int $offset 偏移量
-     * @param int $limit 每批数量
+     * @param int $limit 每批quantity
      * @return array 助理list
      */
     public function getAgentsByBatch(int $offset, int $limit): array

@@ -131,7 +131,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             return false;
         }
 
-        // 如果需要updateconfig，先getrecordID进行加密
+        // 如果needupdateconfig，先getrecordID进行加密
         if (! empty($data['config'])) {
             $builder = $this->createBuilder($dataIsolation, AiAbilityModel::query());
             $model = $builder->where('code', $code->value)->first();
@@ -187,7 +187,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $entity->setSortOrder($model->sort_order);
         $entity->setStatus($model->status);
 
-        // 解析config（兼容旧的JSON格式和新的加密格式）
+        // 解析config（兼容oldJSON格式和new加密格式）
         $config = $model->config ?? '';
         if (empty($config)) {
             $config = [];

@@ -119,7 +119,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
             return [];
         }
         $sqlQuery = $this->accountModel::query();
-        // 判断 $query 是否全部是中文,or长度大于3
+        // 判断 $query 是否全部是中文,orlengthgreater than3
         if (preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $query) || strlen($query) > 3) {
             $sqlQuery->where('real_name', 'like', "%{$query}%");
         }

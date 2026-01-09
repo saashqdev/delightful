@@ -15,10 +15,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            // delete旧的唯一索引
+            // deleteold唯一索引
             $table->dropUnique('unique_code_version');
 
-            // 添加新的唯一索引
+            // 添加new唯一索引
             $table->unique(['knowledge_base_code', 'code', 'version'], 'unique_knowledge_base_code_code_version');
         });
     }
@@ -29,10 +29,10 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            // delete新的唯一索引
+            // deletenew唯一索引
             $table->dropUnique('unique_code_version');
 
-            // restore旧的唯一索引
+            // restoreold唯一索引
             $table->unique(['code', 'version'], 'unique_code_version');
         });
     }

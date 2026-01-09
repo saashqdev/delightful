@@ -24,7 +24,7 @@ class StringMaskUtil
             return str_repeat('*', $length);
         }
 
-        // 保留前三位和后三位，中间用原字符数量相同的星号代替
+        // 保留前三位和后三位，中间用原字符quantitysame的星号代替
         $prefix = mb_substr($value, 0, 3);
         $suffix = mb_substr($value, -3, 3);
         $middleLength = $length - 6; // 减去前三位和后三位

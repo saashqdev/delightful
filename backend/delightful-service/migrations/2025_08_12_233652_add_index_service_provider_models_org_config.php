@@ -16,17 +16,17 @@ return new class extends Migration {
     {
         // 添加 service_provider_models table的索引
         Schema::table('service_provider_models', function (Blueprint $table) {
-            // delete旧的 model_parent_id_status 索引（如果存在）
+            // deleteold model_parent_id_status 索引（如果存在）
             if (Schema::hasIndex('service_provider_models', 'service_provider_models_model_parent_id_status_index')) {
                 $table->dropIndex('service_provider_models_model_parent_id_status_index');
             }
 
-            // delete旧的 idx_organization_code_status_model_version 索引（如果存在）
+            // deleteold idx_organization_code_status_model_version 索引（如果存在）
             if (Schema::hasIndex('service_provider_models', 'idx_organization_code_status_model_version')) {
                 $table->dropIndex('idx_organization_code_status_model_version');
             }
 
-            // delete旧的 idx_model_id_status_organization_code 索引（如果存在）
+            // deleteold idx_model_id_status_organization_code 索引（如果存在）
             if (Schema::hasIndex('service_provider_models', 'idx_model_id_status_organization_code')) {
                 $table->dropIndex('idx_model_id_status_organization_code');
             }
@@ -41,7 +41,7 @@ return new class extends Migration {
                 $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_config_id');
             }
 
-            // 添加新的组合索引：organization_code, model_parent_id（如果不存在）
+            // 添加new组合索引：organization_code, model_parent_id（如果不存在）
             if (! Schema::hasIndex('service_provider_models', 'idx_org_model_parent')) {
                 $table->index(['organization_code', 'model_parent_id'], 'idx_org_model_parent');
             }

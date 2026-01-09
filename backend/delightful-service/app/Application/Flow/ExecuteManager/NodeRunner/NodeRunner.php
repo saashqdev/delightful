@@ -158,7 +158,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // 默认是要抛exception的
+            // default是要抛exception的
             if ($throw) {
                 throw $throwable;
             }
@@ -223,7 +223,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     /**
      * todo 这里暂不implement重复upload的issue，均当做新fileupload
-     * recordprocess所产生的file，均会同时upload到云端，后续节点需要use时从执行process数据中优先匹配.
+     * recordprocess所产生的file，均will同时upload到云端，后续节点needuse时从执行process数据中优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */
@@ -245,7 +245,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // 如果是一个链接，那么需要对 url 进行限制
+            // 如果是一个链接，那么need对 url 进行限制
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

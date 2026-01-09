@@ -72,7 +72,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         // exportprocess及助理info
         $exportData = $this->exportImportService->exportFlowWithAgent($dataIsolation, $flowCode, $agent);
 
-        // 将数据save为临时file
+        // 将数据save为temporaryfile
         $filename = "agent-export-{$agentId}-" . time() . '.json';
         $tempFile = tempnam(sys_get_temp_dir(), 'flow_export_');
         file_put_contents($tempFile, json_encode($exportData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
@@ -96,7 +96,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
-                // use这种方式点击链接是有效的链接
+                // use这种方式点击链接是valid的链接
                 return 0;
             }
 
@@ -106,7 +106,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             $this->output->error("uploadfilefail: {$e->getMessage()}");
             return 1;
         } finally {
-            // delete临时file
+            // deletetemporaryfile
             if (file_exists($tempFile)) {
                 unlink($tempFile);
             }

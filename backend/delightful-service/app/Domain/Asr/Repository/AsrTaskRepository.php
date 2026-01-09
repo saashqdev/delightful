@@ -32,7 +32,7 @@ readonly class AsrTaskRepository
      * savetaskstatus到 Redis.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus DTO
-     * @param int $ttl 过期time（秒），默认 7 天
+     * @param int $ttl 过期time（秒），default 7 天
      */
     public function save(AsrTaskStatusDTO $taskStatus, int $ttl = AsrConfig::TASK_STATUS_TTL): void
     {

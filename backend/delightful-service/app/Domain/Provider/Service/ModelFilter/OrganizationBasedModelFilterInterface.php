@@ -37,7 +37,7 @@ interface OrganizationBasedModelFilterInterface
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool;
 
     /**
-     * getorganization当前subscribe产品绑定的所有model标识符.
+     * getorganizationcurrentsubscribe产品绑定的所有model标识符.
      *
      * @param string $organizationCode organization编码
      * @return array model标识符array，for example: ['gpt-4o', 'claude-3', ...]
@@ -45,10 +45,10 @@ interface OrganizationBasedModelFilterInterface
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
     /**
-     * getorganization需要升级才能use的modelIDlist.
+     * getorganizationneed升级才能use的modelIDlist.
      *
      * @param string $organizationCode organization编码
-     * @return array 需要升级的modelIDarray，for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
+     * @return array need升级的modelIDarray，for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array;
 }

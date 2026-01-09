@@ -48,7 +48,7 @@ readonly class KnowledgeBaseFragmentDestroySubscriber implements ListenerInterfa
         try {
             $existFragments = $knowledgeBaseFragmentDomainService->getFragmentsByPointId($dataIsolation, $fragment->getKnowledgeCode(), $fragment->getPointId(), true);
             if (! empty($existFragments) && $existFragments[0]->getVersion() <= $fragment->getVersion()) {
-                // delete相同内容的点
+                // deletesame内容的点
                 $knowledge->getVectorDBDriver()->removePoints($knowledge->getCollectionName(), [$fragment->getPointId()]);
                 $knowledgeBaseFragmentDomainService->batchDestroyByPointIds($dataIsolation, $knowledge, [$fragment->getPointId()]);
             }

@@ -26,7 +26,7 @@ class DelightfulAccessToken
         $llmDataIsolation = new LLMDataIsolation('', 'system');
         $llmDataIsolation->setCurrentOrganizationCode($llmDataIsolation->getOfficialOrganizationCode());
 
-        // 检查应用是否已经create
+        // check应用是否已经create
         $applicationDomainService = di(ApplicationDomainService::class);
         $application = $applicationDomainService->getByCodeWithNull($llmDataIsolation, ModelGatewayOfficialApp::APP_CODE);
         if (! $application) {

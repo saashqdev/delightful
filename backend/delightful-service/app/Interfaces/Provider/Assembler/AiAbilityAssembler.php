@@ -39,7 +39,7 @@ class AiAbilityAssembler
      */
     public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityDetailDTO
     {
-        // get原始configuration
+        // getoriginalconfiguration
         $config = $entity->getConfig();
 
         // 递归脱敏所有 api_key field（支持任意嵌套结构）
@@ -146,9 +146,9 @@ class AiAbilityAssembler
     /**
      * 脱敏 API Key.
      *
-     * @param string $apiKey 原始 API Key
-     * @param int $prefixLength 保留前几位（默认3）
-     * @param int $suffixLength 保留后几位（默认3）
+     * @param string $apiKey original API Key
+     * @param int $prefixLength 保留前几位（default3）
+     * @param int $suffixLength 保留后几位（default3）
      * @return string 脱敏后的 API Key
      */
     private static function maskApiKey(string $apiKey, int $prefixLength = 4, int $suffixLength = 4): string

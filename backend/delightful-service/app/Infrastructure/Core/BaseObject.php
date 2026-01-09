@@ -66,7 +66,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
         if (! property_exists($this, $humpKey)) {
             return null;
         }
-        // php 的method不区分大小写
+        // php 的method不区分size写
         $methodName = 'get' . $humpKey;
         if (method_exists($this, $methodName)) {
             return $this->{$methodName}($humpKey);
@@ -82,7 +82,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
         if (! property_exists($this, $humpKey)) {
             return;
         }
-        // php 的method不区分大小写
+        // php 的method不区分size写
         $methodName = 'set' . $humpKey;
         if (method_exists($this, $methodName)) {
             $this->{$methodName}($value);

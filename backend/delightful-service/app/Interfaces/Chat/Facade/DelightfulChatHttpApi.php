@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （前端performance有issue的临时方案）按session id 分组get几条最新message.
+     * （前端performance有issue的temporary方案）按session id 分组get几条最新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {
@@ -494,7 +494,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * @param null|string $method 有时候field没有区分度，需要加上method名
+     * @param null|string $method 有时候field没有区分度，need加上method名
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {

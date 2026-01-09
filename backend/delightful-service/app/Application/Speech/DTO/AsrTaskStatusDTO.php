@@ -22,18 +22,18 @@ class AsrTaskStatusDTO
 
     public ?string $organizationCode = null; // organization编码（用于自动总结）
 
-    // 类似：project_821749697183776769/workspace/录音总结_20250910_174251/原始录音file.webm
+    // 类似：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
     public ?string $filePath = null; // 工作区file路径
 
-    // fileID（数据库中的实际ID）
-    public ?string $audioFileId = null; // audiofileID（写入delightful_super_agent_task_files表后return的ID）
+    // fileID（数据库中的actualID）
+    public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表后return的ID）
 
     // note fileinfo
     public ?string $noteFileName = null; // notefile名（与audiofile在同一目录，为null表示无笔记file）
 
     public ?string $noteFileId = null; // notefileID（用于chatmessage中的filequote）
 
-    // presetfileinfo（用于前端写入）
+    // presetfileinfo（用于前端write）
     public ?string $presetNoteFileId = null; // preset笔记fileID
 
     public ?string $presetTranscriptFileId = null; // presetstream识别fileID
@@ -187,7 +187,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 检查是否为null（不存在）.
+     * check是否为null（不存在）.
      */
     public function isEmpty(): bool
     {
@@ -203,7 +203,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 检查总结是否已complete（幂等性判断）.
+     * check总结是否已complete（幂等性判断）.
      * 判断标准：audiofile已merge（audioFileId 存在）且录音已停止.
      */
     public function isSummaryCompleted(): bool
@@ -244,9 +244,9 @@ class AsrTaskStatusDTO
     /**
      * 提取相对于 workspace 的相对路径
      * 如果路径contain workspace/，提取其后的部分
-     * 这样可以自动修正 Redis 中存储的旧格式数据（完整路径）.
+     * 这样can自动修正 Redis 中存储的旧格式数据（完整路径）.
      *
-     * @param null|string $path 原始路径
+     * @param null|string $path original路径
      * @return null|string 相对路径
      */
     private static function extractRelativePath(?string $path): ?string
@@ -269,7 +269,7 @@ class AsrTaskStatusDTO
      *
      * @param array<string, mixed> $data 数据array
      * @param array<string> $keys 键名列表（按优先级sort）
-     * @param null|string $default 默认value
+     * @param null|string $default defaultvalue
      */
     private static function getStringValue(array $data, array $keys, ?string $default = null): ?string
     {
@@ -286,7 +286,7 @@ class AsrTaskStatusDTO
      *
      * @param array<string, mixed> $data 数据array
      * @param array<string> $keys 键名列表（按优先级sort）
-     * @param null|int $default 默认value
+     * @param null|int $default defaultvalue
      */
     private static function getIntValue(array $data, array $keys, ?int $default = null): ?int
     {

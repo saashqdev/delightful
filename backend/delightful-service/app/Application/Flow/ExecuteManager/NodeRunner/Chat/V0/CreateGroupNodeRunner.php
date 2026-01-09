@@ -90,7 +90,7 @@ class CreateGroupNodeRunner extends NodeRunner
         if ($paramsConfig->isIncludeCurrentAssistant()) {
             if ($agentUserId = $executionData->getAgentUserId()) {
                 $groupMemberIds[] = $agentUserId;
-                // 只有 assistant 开启，才会有开场白
+                // 只有 assistant 开启，才will有开场白
                 $assistantOpeningSpeech = $paramsConfig->getAssistantOpeningSpeech()?->getValue()->getResult($executionData->getExpressionFieldData()) ?? '';
             }
         }
@@ -98,7 +98,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $vertexResult->addDebugLog('group_members', $groupMemberIds);
         $vertexResult->addDebugLog('assistant_opening_speech', $assistantOpeningSpeech);
 
-        // 只有 IM chat才会create
+        // 只有 IM chat才willcreate
         if (! $executionData->getExecutionType()->isImChat()) {
             $delightfulGroup = [
                 'group_id' => 'test_group_id',
@@ -123,7 +123,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $delightfulGroupDTO->setGroupType($groupType);
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
-        // 通过 conversationID get来源 和 助理 key，并creategroup chat
+        // pass conversationID get来源 和 助理 key，并creategroup chat
         $agentKey = $executionData->getTriggerData()->getAgentKey();
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 

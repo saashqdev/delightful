@@ -44,7 +44,7 @@ class DelightfulDepartmentEntity extends AbstractEntity
     protected ?int $employeeSum = null;
 
     /**
-     * 数据库中没有此field，偷懒写的。批量写入数据库时，toArray() 后need手动 unset 掉。
+     * 数据库中没有此field，偷懒写的。批量write数据库时，toArray() 后need手动 unset 掉。
      */
     protected ?bool $hasChild = null;
 

@@ -44,7 +44,7 @@ class FileAppService extends AbstractAppService
             $contentType,
             $sts
         );
-        // 如果是本地驱动，那么增加一个临时 key
+        // 如果是本地驱动，那么增加一个temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $this->cache->set(
@@ -197,7 +197,7 @@ class FileAppService extends AbstractAppService
             return false;
         }
 
-        // check是否为默认file
+        // check是否为defaultfile
         if ($fileEntity->getFileType() === DefaultFileType::DEFAULT->value) {
             return false;
         }
@@ -222,7 +222,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // 如果是本地驱动，那么增加一个临时 key
+        // 如果是本地驱动，那么增加一个temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -249,7 +249,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // 如果是本地驱动，那么增加一个临时 key
+        // 如果是本地驱动，那么增加一个temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];

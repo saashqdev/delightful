@@ -40,7 +40,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
      * settingqueue优先级parameter.
      */
     protected AMQPTable|array $arguments = [
-        'x-ha-policy' => ['S', 'all'], // 将queue镜像到所有节点,hyperf 默认configuration
+        'x-ha-policy' => ['S', 'all'], // 将queue镜像到所有节点,hyperf defaultconfiguration
     ];
 
     protected MessagePriority $priority;

@@ -71,7 +71,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // 手动checkcontent长度
+        // 手动checkcontentlength
         $contentLength = mb_strlen($validatedParams['content']);
         if ($contentLength > 5000) {
             ExceptionBuilder::throw(
@@ -112,7 +112,7 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     public function updateMemory(string $memoryId, RequestInterface $request): array
     {
-        // 1. parameter验证
+        // 1. parameterverify
         $validatedParams = $this->validateUpdateMemoryParams($request);
         $authorization = $this->getAuthorization();
 
@@ -246,7 +246,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             'status' => $status,
             'enabled' => $enabled,
             'pageToken' => $validatedParams['page_token'] ?? null,
-            'limit' => (int) $pageSize, // 传递原始页面大小，让应用service层处理pagination逻辑
+            'limit' => (int) $pageSize, // 传递original页面size，让应用service层处理pagination逻辑
         ]);
         // 解析 pageToken
         $dto->parsePageToken();
@@ -302,7 +302,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
 
-        // 批量验证记忆是否属于当前user
+        // 批量verify记忆是否属于currentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             [$memoryId],
             $authorization->getOrganizationCode(),
@@ -340,7 +340,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批量验证所有记忆都属于当前user
+        // 批量verify所有记忆都属于currentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -381,7 +381,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批量验证所有记忆都属于当前user
+        // 批量verify所有记忆都属于currentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -399,10 +399,10 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $action = $validatedParams['action'];
         $memoryIds = $validatedParams['memory_ids'];
-        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // 默认为管理后台
+        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // default为管理后台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
-        // 验证当 scenario 是 memory_card_quick 时，delightful_message_id 必须提供
+        // verify当 scenario 是 memory_card_quick 时，delightful_message_id must提供
         if ($scenarioString === 'memory_card_quick' && empty($validatedParams['delightful_message_id'])) {
             return [
                 'success' => false,
@@ -569,7 +569,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 验证update记忆的请求parameter.
+     * verifyupdate记忆的请求parameter.
      */
     private function validateUpdateMemoryParams(RequestInterface $request): array
     {
@@ -581,7 +581,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // 验证content和pending_content只能二选一
+        // verifycontent和pending_content只能二选一
         $hasContent = ! empty($validatedParams['content']);
         $hasPendingContent = ! empty($validatedParams['pending_content']);
 
@@ -599,7 +599,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             );
         }
 
-        // 手动checkcontent长度
+        // 手动checkcontentlength
         if (isset($validatedParams['content'])) {
             $contentLength = mb_strlen($validatedParams['content']);
             if ($contentLength > 5000) {
@@ -610,7 +610,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             }
         }
 
-        // 手动check pending_content 长度
+        // 手动check pending_content length
         if (isset($validatedParams['pending_content'])) {
             $contentLength = mb_strlen($validatedParams['pending_content']);
             if ($contentLength > 5000) {
@@ -625,7 +625,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 验证记忆所有权.
+     * verify记忆所有权.
      *
      * @param mixed $authorization
      * @return array{success: bool, message?: string}
@@ -652,7 +652,7 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO（长度check已在parameter验证阶段complete，且至少有一个field不为空）
+        // buildDTO（lengthcheck已在parameterverify阶段complete，且at least有一个field不为空）
         $status = null;
         $explanation = null;
 

@@ -22,7 +22,7 @@ return new class extends Migration {
 
         Schema::create('delightful_api_premium_endpoints', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type', 255)->comment('接入点type。user需要自己保证不与其他业务重复');
+            $table->string('type', 255)->comment('接入点type。userneed自己保证不与其他业务重复');
             $table->string('provider', 255)->comment('提供商')->nullable();
             $table->string('name', 255)->comment('接入点name');
             $table->text('config')->comment('让user自己存一些configurationinfo')->nullable();

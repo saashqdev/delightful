@@ -73,7 +73,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * null值检查助手method.
+     * null值check助手method.
      */
     protected static function isEmptyArray(?array $data): bool
     {

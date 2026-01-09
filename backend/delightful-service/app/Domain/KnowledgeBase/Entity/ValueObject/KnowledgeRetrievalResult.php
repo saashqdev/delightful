@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * 知识库检索resultvalueobject.
  *
- * 统一table示从不同检索method（语义检索、全文检索、图检索等）return的知识片段
+ * 统一table示从different检索method（语义检索、全文检索、图检索等）return的知识片段
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {

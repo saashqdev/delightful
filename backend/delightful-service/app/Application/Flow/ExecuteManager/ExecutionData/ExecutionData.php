@@ -89,7 +89,7 @@ class ExecutionData
     private string $conversationId;
 
     /**
-     * 原始sessionID.
+     * originalsessionID.
      */
     private string $originConversationId = '';
 
@@ -104,7 +104,7 @@ class ExecutionData
     private array $ext = [];
 
     /**
-     * 当前操作人.
+     * current操作人.
      */
     private Operator $operator;
 
@@ -143,7 +143,7 @@ class ExecutionData
     private ?DelightfulFlowEntity $delightfulFlowEntity = null;
 
     /**
-     * 当前 agent 的指令configurationlist.
+     * current agent 的指令configurationlist.
      * @var array<InstructionConfig>
      */
     private array $instructionConfigs = [];
@@ -566,7 +566,7 @@ class ExecutionData
     }
 
     /**
-     * get当前 agent 的 user_id.
+     * getcurrent agent 的 user_id.
      */
     public function getAgentUserId(): ?string
     {

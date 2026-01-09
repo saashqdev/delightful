@@ -21,7 +21,7 @@ class ClientMessage extends AbstractEntity
     // service端生成的message唯一id，全局唯一。用于withdraw、editmessage。
     protected string $delightfulMessageId;
 
-    // 客户端生成，需要ios/安卓/web三端共同确定一个生成算法。用于告知客户端，delightful_message_id的由来
+    // 客户端生成，needios/安卓/web三端共同确定一个生成算法。用于告知客户端，delightful_message_id的由来
     protected ?string $appMessageId;
 
     // 话题id

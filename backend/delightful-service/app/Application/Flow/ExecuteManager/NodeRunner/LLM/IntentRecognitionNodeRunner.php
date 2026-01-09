@@ -65,12 +65,12 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
             $childrenNodes[$title] = $branch['next_nodes'] ?? [];
         }
 
-        // 至少是兜底分支
+        // at least是兜底分支
         $vertexResult->setChildrenIds($elseBranch['next_nodes'] ?? []);
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // 如果意图识别开启了自动加载记忆，那么需要剔除当前message
+        // 如果意图识别开启了自动加载记忆，那么need剔除currentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
@@ -106,7 +106,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         return <<<MARKDOWN
 '# role
 你是一个意图识别节点，用于分析user的意图，你将得到一份user输入的content，帮我分析出user的意图和置信度。
-result需要在限定的意图范围中。
+resultneed在限定的意图range中。
 
 # 技能 - 意图识别
 将你的响应格式化为 JSON object，格式如下：
@@ -134,16 +134,16 @@ result需要在限定的意图范围中。
 
 # process
 1. 你将得到一份user输入的content，帮我分析出user的意图和置信度。
-2. 推理user的意图，将推理过程放到 JSON 中的 推导过程 field，解释为什么会得出这些意图和置信度。
+2. 推理user的意图，将推理过程放到 JSON 中的 推导过程 field，解释为什么will得出这些意图和置信度。
 3. 如果识别到了意图，请填写最佳匹配和匹配到的意图，是否识别为 true，最佳意图 一定是置信度最高的，其中 匹配到的意图有 field是according to 置信度 从大到小排列。
-4. 如果在当前范围没有找到任何意图，是否识别为 false，请填写识别fail原因，最佳匹配和匹配到的意图都应该是空的。
-5. 只会return JSON 格式，不会再return其他content，如果一定需要有return，请放到remark中，回答的content一定能被 JSON 工具解析。
+4. 如果在currentrange没有找到任何意图，是否识别为 false，请填写识别fail原因，最佳匹配和匹配到的意图都should是空的。
+5. 只willreturn JSON 格式，不will再return其他content，如果一定need有return，请放到remark中，回答的content一定能被 JSON 工具解析。
 
 # 限制
-- 意图范围的格式是 '意图'：'意图description'。其中意图description可以为空。意图和意图description一定是用 '' 包裹的数据。
-- 不可以回答其他issue，只能回答意图识别的issue。
+- 意图range的格式是 '意图'：'意图description'。其中意图descriptioncan为空。意图和意图description一定是用 '' 包裹的数据。
+- 不can回答其他issue，只能回答意图识别的issue。
 
-# 需要分析的意图范围如下
+# need分析的意图range如下
 {$content}
 MARKDOWN;
     }

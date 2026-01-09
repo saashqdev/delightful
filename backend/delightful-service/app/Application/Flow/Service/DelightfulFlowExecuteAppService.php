@@ -503,7 +503,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executionData->setTopicId($topicId);
         $executionData->setAgentId($delightfulFlowEntity->getAgentId());
         $executionData->setDebug((bool) ($triggerConfig['debug'] ?? false));
-        // 运行process图，检测是否可以运行
+        // 运行process图，检测是否can运行
         $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
         $executor->execute();
 
@@ -571,7 +571,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         switch ($delightfulFlow->getType()) {
             case Type::Main:
                 $agent = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlow->getCode());
-                // 仅允许create人可以在禁用status下call
+                // 仅allowcreate人can在禁用status下call
                 if ($agent->getCreatedUid() !== $dataIsolation->getCurrentUserId() && ! $agent->isAvailable()) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.agent_disabled');
                 }

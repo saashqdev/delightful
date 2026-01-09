@@ -222,7 +222,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateImageType(string $url): void
     {
-        $this->logger->info('美图超清转换：开始验证imagetype', ['url' => $url]);
+        $this->logger->info('美图超清转换：开始verifyimagetype', ['url' => $url]);
 
         $type = FileType::getType($url);
         if (empty($type)) {
@@ -239,12 +239,12 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::UNSUPPORTED_IMAGE_FORMAT);
         }
 
-        $this->logger->info('美图超清转换：imagetype验证通过', ['type' => $type]);
+        $this->logger->info('美图超清转换：imagetypeverifypass', ['type' => $type]);
     }
 
     private function validateApiResponse(array $result): void
     {
-        $this->logger->info('美图API：开始验证响应数据', ['response' => $result]);
+        $this->logger->info('美图API：开始verify响应数据', ['response' => $result]);
 
         if (! isset($result['code'])) {
             $this->logger->warning('美图API：响应格式exception', ['response' => $result]);
@@ -260,7 +260,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message'] ?? '');
         }
 
-        $this->logger->info('美图API：响应数据验证通过');
+        $this->logger->info('美图API：响应数据verifypass');
     }
 
     // todo xhy 目前只能强制return 26 ，因为无法对image场景做匹配

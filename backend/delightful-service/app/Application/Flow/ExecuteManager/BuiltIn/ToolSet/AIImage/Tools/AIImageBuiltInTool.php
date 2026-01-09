@@ -36,7 +36,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getCallback(): ?Closure
     {
-        // 可接受parameter指定任意 model，默认是火山。
+        // 可接受parameter指定任意 model，default是火山。
         return function (ExecutionData $executionData) {
             $args = $executionData->getTriggerData()?->getParams();
             $model = $args['model'] ?? ImageGenerateModelType::Volcengine->value;
@@ -65,7 +65,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
             "type": "string",
             "key": "model",
             "title": "所use的文生图模型",
-            "description": "可选：Volcengine,Midjourney,Flux1-Schnell,默认Volcengine,TTAPI-GPT4o",
+            "description": "可选：Volcengine,Midjourney,Flux1-Schnell,defaultVolcengine,TTAPI-GPT4o",
             "required": null,
             "value": null,
             "encryption": false,
@@ -77,7 +77,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
             "type": "string",
             "key": "radio",
             "title": "生成image的比例",
-            "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",默认\"1:1\"",
+            "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
             "encryption": false,
@@ -186,7 +186,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "number",
                         "key": "file_size",
                         "sort": 3,
-                        "title": "file大小",
+                        "title": "filesize",
                         "description": "",
                         "required": null,
                         "value": null,

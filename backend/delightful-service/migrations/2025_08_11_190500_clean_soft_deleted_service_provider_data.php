@@ -50,7 +50,7 @@ return new class extends Migration {
         $logger->info('start清理 service_provider 相关表的软delete数据');
 
         try {
-            // use事务确保数据一致性
+            // use事务ensure数据一致性
             Db::transaction(function () use ($logger) {
                 $totalDeleted = 0;
 
@@ -99,7 +99,7 @@ return new class extends Migration {
         $logger->info('start清null官方organization的 Delightful 服务商configuration和模型');
 
         try {
-            // use事务确保数据一致性
+            // use事务ensure数据一致性
             Db::transaction(function () use ($logger) {
                 // 获取官方organization编码
                 $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
@@ -118,7 +118,7 @@ return new class extends Migration {
                 $delightfulConfigIds = array_column($delightfulProviderConfigs, 'id');
 
                 if (! empty($delightfulConfigIds)) {
-                    $logger->info('找到 Delightful 服务商configuration数量: ' . count($delightfulConfigIds));
+                    $logger->info('找到 Delightful 服务商configurationquantity: ' . count($delightfulConfigIds));
 
                     // 2. delete官方organization中 Delightful 服务商下的模型
                     $deletedModelsCount = Db::table('service_provider_models')
@@ -136,7 +136,7 @@ return new class extends Migration {
                     $totalDeleted += $deletedConfigsCount;
                     $logger->info("delete官方organization Delightful 服务商configuration: {$deletedConfigsCount} 条");
                 } else {
-                    $logger->info('未找到需要清理的 Delightful 服务商configuration');
+                    $logger->info('未找到need清理的 Delightful 服务商configuration');
                 }
 
                 // 4. 额外清理：delete所有 is_office=1 的官方organization模型
@@ -164,9 +164,9 @@ return new class extends Migration {
         $logger->info('start清洗 Official 服务商的 description 和 translate 字段');
 
         try {
-            // use事务确保数据一致性
+            // use事务ensure数据一致性
             Db::transaction(function () use ($logger) {
-                // query需要清洗的 Official 服务商记录
+                // queryneed清洗的 Official 服务商记录
                 $query = Db::table('service_provider')
                     ->select(['id', 'description', 'translate'])
                     ->where('provider_code', 'Official');
@@ -223,7 +223,7 @@ return new class extends Migration {
             // 2. 单独事务：reset官方organization模型的 model_parent_id
             $this->resetOfficialModelsParentId($officialOrganizationCode, $logger);
 
-            // 3. 获取官方organization所有启用的模型（不需要事务）
+            // 3. 获取官方organization所有启用的模型（不need事务）
             $officialEnabledModels = Db::table('service_provider_models')
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('status', Status::Enabled->value)
@@ -234,9 +234,9 @@ return new class extends Migration {
                 ->toArray();
 
             $officialModelIds = array_keys($officialEnabledModels);
-            $logger->info('获取官方organization启用模型数量: ' . count($officialModelIds));
+            $logger->info('获取官方organization启用模型quantity: ' . count($officialModelIds));
 
-            // 4. 获取所有非官方organization编码（不需要事务）
+            // 4. 获取所有非官方organization编码（不need事务）
             $allOrganizationCodes = Db::table('service_provider_models')
                 ->where('organization_code', '!=', $officialOrganizationCode)
                 ->whereNull('deleted_at')
@@ -244,7 +244,7 @@ return new class extends Migration {
                 ->pluck('organization_code')
                 ->toArray();
 
-            $logger->info('需要清理的organization数量: ' . count($allOrganizationCodes));
+            $logger->info('need清理的organizationquantity: ' . count($allOrganizationCodes));
 
             // 5. 按organizationhandle清理工作（小事务）
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
@@ -276,11 +276,11 @@ return new class extends Migration {
         $totalDeleted = 0;
         $totalOrgs = count($organizationCodes);
 
-        // 将organization分批handle，每批最多 5 个organization并发
+        // 将organization分批handle，每批at most 5 个organization并发
         $chunks = array_chunk($organizationCodes, 5);
 
         foreach ($chunks as $chunkIndex => $chunk) {
-            $logger->info('starthandle第 ' . ($chunkIndex + 1) . ' 批organization，数量: ' . count($chunk));
+            $logger->info('starthandle第 ' . ($chunkIndex + 1) . ' 批organization，quantity: ' . count($chunk));
 
             $parallel = new Parallel(10);
 
@@ -334,7 +334,7 @@ return new class extends Migration {
             // 获取官方organization编码用于安全防护
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-            // 防护检查：确保不handle官方organization
+            // 防护check：ensure不handle官方organization
             if ($organizationCode === $officialOrganizationCode) {
                 return ['deleted_count' => 0];
             }
@@ -354,7 +354,7 @@ return new class extends Migration {
             $invalidConfigDeletedCount = $this->cleanModelsWithInvalidConfig($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDeletedCount;
 
-            // 3. deleteconfiguration无效的模型（configuration解密后为null或所有value都是null）
+            // 3. deleteconfigurationinvalid的模型（configuration解密后为null或所有value都是null）
             $invalidConfigDataDeletedCount = $this->cleanModelsWithInvalidConfigData($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDataDeletedCount;
 
@@ -372,7 +372,7 @@ return new class extends Migration {
             foreach ($modelsWithParent as $model) {
                 $parentId = $model['model_parent_id'];
 
-                // 检查 model_parent_id 是否在官方organization的模型 id 中
+                // check model_parent_id 是否在官方organization的模型 id 中
                 if (! in_array($parentId, $officialModelIds)) {
                     // model_parent_id 在官方organization找不到，markdelete
                     $deleteIds[] = $model['id'];
@@ -447,7 +447,7 @@ return new class extends Migration {
     }
 
     /**
-     * 清理configuration数据无效的模型（configuration解密后为null或所有value都是null）.
+     * 清理configuration数据invalid的模型（configuration解密后为null或所有value都是null）.
      */
     private function cleanModelsWithInvalidConfigData(string $organizationCode, string $officialOrganizationCode): int
     {
@@ -461,18 +461,18 @@ return new class extends Migration {
 
         $invalidConfigIds = [];
 
-        // 2. 循环检查每个configuration的有效性
+        // 2. 循环check每个configuration的valid性
         foreach ($configs as $config) {
             try {
                 // 解密configuration（useconfiguration ID 作为 salt）
                 $decodedConfig = ProviderConfigAssembler::decodeConfig($config['config'], (string) $config['id']);
 
-                // 检查configuration是否有效
+                // checkconfiguration是否valid
                 if ($this->isConfigDataInvalid($decodedConfig)) {
                     $invalidConfigIds[] = $config['id'];
                 }
             } catch (Throwable $e) {
-                // 如果解密fail，也认为是无效configuration
+                // 如果解密fail，也认为是invalidconfiguration
                 $invalidConfigIds[] = $config['id'];
             }
         }
@@ -481,7 +481,7 @@ return new class extends Migration {
             return 0;
         }
 
-        // 3. 批量deleteuse无效configuration的模型
+        // 3. 批量deleteuseinvalidconfiguration的模型
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // 双重防护
@@ -490,7 +490,7 @@ return new class extends Migration {
     }
 
     /**
-     * 检查解密后的configuration数据是否无效.
+     * check解密后的configuration数据是否invalid.
      * @param mixed $decodedConfig
      */
     private function isConfigDataInvalid($decodedConfig): bool
@@ -505,15 +505,15 @@ return new class extends Migration {
             return true;
         }
 
-        // 检查array中所有key的value是否都为null
+        // checkarray中所有key的value是否都为null
         foreach ($decodedConfig as $key => $value) {
-            // 如果有任何一个value不为null，则configuration有效
+            // 如果有任何一个value不为null，则configurationvalid
             if (! empty($value)) {
                 return false;
             }
         }
 
-        // 所有value都是null，configuration无效
+        // 所有value都是null，configurationinvalid
         return true;
     }
 

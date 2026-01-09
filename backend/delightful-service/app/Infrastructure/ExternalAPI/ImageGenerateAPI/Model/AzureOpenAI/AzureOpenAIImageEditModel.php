@@ -107,7 +107,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof AzureOpenAIImageEditRequest) {
-            $this->logger->error('Azure OpenAI图像edit OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Azure OpenAI图像edit OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnull数据响应
         }
 
@@ -179,7 +179,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         }
 
         if ($request->getN() < 1 || $request->getN() > 10) {
-            $this->logger->error('Azure OpenAI图像edit：generate数量超出范围', [
+            $this->logger->error('Azure OpenAI图像edit：generatequantity超出range', [
                 'requested' => $request->getN(),
                 'valid_range' => '1-10',
             ]);
@@ -189,7 +189,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         // validate图像URL格式
         foreach ($request->getReferenceImages() as $index => $imageUrl) {
             if (empty($imageUrl) || ! filter_var($imageUrl, FILTER_VALIDATE_URL)) {
-                $this->logger->error('Azure OpenAI图像edit：无效的参考图像URL', [
+                $this->logger->error('Azure OpenAI图像edit：invalid的参考图像URL', [
                     'index' => $index,
                     'url' => $imageUrl,
                 ]);
@@ -200,7 +200,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         // validatemask URL（如果提供）
         $maskUrl = $request->getMaskUrl();
         if (! empty($maskUrl) && ! filter_var($maskUrl, FILTER_VALIDATE_URL)) {
-            $this->logger->error('Azure OpenAI图像edit：无效的遮罩图像URL', [
+            $this->logger->error('Azure OpenAI图像edit：invalid的遮罩图像URL', [
                 'mask_url' => $maskUrl,
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.invalid_mask_url');
@@ -227,7 +227,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $images = [];
             foreach ($result['data'] as $index => $item) {
                 if (! isset($item['b64_json'])) {
-                    $this->logger->warning('Azure OpenAI图像edit：跳过无效的图像数据', [
+                    $this->logger->warning('Azure OpenAI图像edit：跳过invalid的图像数据', [
                         'index' => $index,
                         'item' => $item,
                     ]);
@@ -237,7 +237,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             }
 
             if (empty($images)) {
-                $this->logger->error('Azure OpenAI图像edit：所有图像数据无效');
+                $this->logger->error('Azure OpenAI图像edit：所有图像数据invalid');
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.invalid_image_data');
             }
 
@@ -261,7 +261,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Azure OpenAIedit模式原始数据添加水印.
+     * 为Azure OpenAIedit模式original数据添加水印.
      */
     private function processAzureOpenAIEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -283,7 +283,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandle下一张image，当前image保持原始status
+                // continuehandle下一张image，currentimage保持originalstatus
             }
         }
 
@@ -312,7 +312,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('Azure OpenAI图像edit响应数据格式error：缺少有效的图像数据');
+            throw new Exception('Azure OpenAI图像edit响应数据格式error：缺少valid的图像数据');
         }
     }
 
@@ -344,7 +344,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 $this->logger->error('Azure OpenAI图像edit添加image数据：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印handlefail时use原始base64数据
+                // 水印handlefail时useoriginalbase64数据
             }
 
             // 只returnURL格式，与其他模型保持一致

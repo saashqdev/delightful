@@ -59,7 +59,7 @@ readonly class AsrSandboxResponseHandler
             return;
         }
 
-        // 2. 检查并handle目录重命名（沙箱有bug，会重命名目录但是没有notifyfile变动，没有改数据库记录）
+        // 2. check并handle目录重命名（沙箱有bug，will重命名目录但是没有notifyfile变动，没有改数据库记录）
         $taskStatus->displayDirectory = $this->extractDirectoryPath($audioFile);
 
         // 3. 查找audiofile记录
@@ -67,7 +67,7 @@ readonly class AsrSandboxResponseHandler
 
         // 4. handle笔记file
         if ($noteFile !== null) {
-            // 通过 file_key 查找最新的笔记file ID（目录可能被重命名）
+            // pass file_key 查找最new笔记file ID（目录可能被重命名）
             $this->getNoteFileId($taskStatus, $noteFile);
         } else {
             // 笔记file为null或不存在，deletepreset的笔记file记录
@@ -95,13 +95,13 @@ readonly class AsrSandboxResponseHandler
             return '';
         }
 
-        // 从file路径提取实际的目录名
+        // 从file路径提取actual的目录名
         return dirname($filePath);
     }
 
     /**
      * according to响应的audiofile名/file路径，找到audiofile id，用于后续发chatmessage.
-     * use轮询机制等待沙箱syncfile到数据库（最多等待 30 秒）.
+     * use轮询机制等待沙箱syncfile到数据库（at most等待 30 秒）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $audioFile audiofileinfo
@@ -149,7 +149,7 @@ readonly class AsrSandboxResponseHandler
 
     /**
      * according to响应的笔记file路径，找到笔记file id.
-     * use轮询机制等待沙箱syncfile到数据库（最多等待 30 秒）.
+     * use轮询机制等待沙箱syncfile到数据库（at most等待 30 秒）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $noteFile 笔记fileinfo
@@ -209,7 +209,7 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * 通过file路径轮询queryfile记录（通用method）.
+     * passfile路径轮询queryfile记录（通用method）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $relativePath file相对路径
@@ -224,7 +224,7 @@ readonly class AsrSandboxResponseHandler
         string $fileTypeName,
         bool $throwOnTimeout = true
     ): ?TaskFileEntity {
-        // 检查必要的taskstatus字段
+        // check必要的taskstatus字段
         if (empty($taskStatus->projectId) || empty($taskStatus->userId) || empty($taskStatus->organizationCode)) {
             $this->logger->error('taskstatusinfo不完整，无法queryfile记录', [
                 'task_key' => $taskStatus->taskKey,
@@ -283,7 +283,7 @@ readonly class AsrSandboxResponseHandler
                 return $existingFile;
             }
 
-            // 检查是否超时
+            // check是否超时
             if ($elapsedSeconds >= $timeoutSeconds) {
                 break;
             }

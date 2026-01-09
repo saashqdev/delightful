@@ -48,7 +48,7 @@ class MCPPromptManager
     }
 
     /**
-     * 检查指定ID的prompt是否存在.
+     * check指定ID的prompt是否存在.
      */
     public function hasPrompt(string $id): bool
     {
@@ -56,7 +56,7 @@ class MCPPromptManager
     }
 
     /**
-     * 检查是否没有任何prompt.
+     * check是否没有任何prompt.
      */
     public function isEmpty(): bool
     {

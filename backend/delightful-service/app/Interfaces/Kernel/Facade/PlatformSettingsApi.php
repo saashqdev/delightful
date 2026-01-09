@@ -43,7 +43,7 @@ class PlatformSettingsApi
 
         $payload = $request->validated();
 
-        // 允许部分字段update：仅when传入非null时替换
+        // allow部分字段update：仅when传入非null时替换
         if (array_key_exists('logo_zh_url', $payload) && $payload['logo_zh_url'] !== null) {
             $data['logo_urls']['zh_CN'] = (string) $payload['logo_zh_url'];
         }
@@ -80,7 +80,7 @@ class PlatformSettingsApi
     }
 
     /**
-     * 简单 URL 与必填项校验（遵循需求：save URL；大小/type校验在file服务与前端处理）。
+     * 简单 URL 与必填项校验（遵循需求：save URL；size/type校验在file服务与前端处理）。
      */
     private function validateUrls(array $data): void
     {
@@ -89,7 +89,7 @@ class PlatformSettingsApi
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'platform_settings.validation_failed');
             }
         }
-        // 简单 https 检查
+        // 简单 https check
         $urls = [];
         $urls[] = $data['favicon_url'] ?? '';
         $urls[] = $data['logo_urls']['zh_CN'] ?? '';

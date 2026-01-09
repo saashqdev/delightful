@@ -22,7 +22,7 @@ readonly class NoteDTO
     }
 
     /**
-     * 验证filetype是否有效.
+     * verifyfiletype是否valid.
      */
     public function isValidFileType(): bool
     {
@@ -51,12 +51,12 @@ readonly class NoteDTO
             return sprintf('%s-%s.%s', $generatedTitle, trans('asr.file_names.note_suffix'), $this->getFileExtension());
         }
 
-        // 回退到默认格式
+        // 回退到default格式
         return sprintf('%s.%s', trans('asr.file_names.note_prefix'), $this->getFileExtension());
     }
 
     /**
-     * 检查是否有content.
+     * check是否有content.
      */
     public function hasContent(): bool
     {
@@ -66,7 +66,7 @@ readonly class NoteDTO
     /**
      * 从arraycreate实例.
      *
-     * @param array $data 包含content和file_type的array
+     * @param array $data containcontent和file_type的array
      */
     public static function fromArray(array $data): self
     {

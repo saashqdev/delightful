@@ -56,7 +56,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
     //     // 执行test
     //      $service::callback($flowCode, $userTask, $userTaskValue);
 
-    //     // 验证result
+    //     // verifyresult
     //     $this->assertTrue(true);
     // }
 

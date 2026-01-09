@@ -26,7 +26,7 @@ class AdminAgentApiTest extends BaseTest
         $this->assertSame(1000, $response['code']);
         $this->assertIsArray($response['data']);
 
-        // 验证return的data结构
+        // verifyreturn的data结构
         $data = $response['data'];
         $this->assertArrayHasKey('page_token', $data);
         $this->assertArrayHasKey('has_more', $data);

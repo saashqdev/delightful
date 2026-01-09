@@ -70,7 +70,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $models = $this->fetchModels($limit);
         $stats['total'] = $models->count();
 
-        $this->logger->info(sprintf('找到 %d 个service商model需要处理', $stats['total']));
+        $this->logger->info(sprintf('找到 %d 个service商modelneed处理', $stats['total']));
 
         foreach ($models as $model) {
             try {
@@ -117,7 +117,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * get已存在的版本数量.
+     * get已存在的版本quantity.
      */
     private function getExistingVersionCount(ProviderModelModel $model): int
     {
@@ -127,7 +127,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 判断是否应该跳过.
+     * 判断是否should跳过.
      */
     private function shouldSkip(int $existingVersionCount, bool $isForce): bool
     {
@@ -135,7 +135,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * update旧版本（如果需要）.
+     * update旧版本（如果need）.
      */
     private function updateOldVersionsIfNeeded(ProviderModelModel $model, int $existingVersionCount, bool $isForce): void
     {
@@ -197,7 +197,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * getfield默认value.
+     * getfielddefaultvalue.
      */
     private function getDefaultValue(string $field): mixed
     {
@@ -220,14 +220,14 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
         $this->logger->info('开始syncservice商modelconfiguration版本数据...');
-        $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不写入database）' : '正式执行'));
+        $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不writedatabase）' : '正式执行'));
 
         if ($isForce) {
             $this->logger->warning('强制模式已启用：将为所有modelcreate新版本');
         }
 
         if ($limit > 0) {
-            $this->logger->info(sprintf('限制处理数量: %d', $limit));
+            $this->logger->info(sprintf('限制处理quantity: %d', $limit));
         }
     }
 
@@ -241,7 +241,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
         $this->logger->info(sprintf('  已有版本: %d', $result['skipped']));
         $this->logger->info(sprintf('  新增版本: %d', $result['created']));
-        $this->logger->info(sprintf('  fail数量: %d', $result['failed']));
+        $this->logger->info(sprintf('  failquantity: %d', $result['failed']));
         $this->logger->info('=================================');
     }
 

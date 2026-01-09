@@ -76,7 +76,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $organizationAdmin = $this->organizationAdminAppService->grant($dataIsolation, $userId, $grantorUserId, $remarks);
 
-        // get包含userinformation的完整data
+        // getcontainuserinformation的完整data
         $organizationAdminData = $this->organizationAdminAppService->show($dataIsolation, $organizationAdmin->getId());
 
         return OrganizationAdminAssembler::assembleWithUserInfo($organizationAdminData)->toArray();
@@ -107,7 +107,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $newOwnerUserId = $this->request->input('user_id');
         if (empty($newOwnerUserId)) {
-            throw new InvalidArgumentException('新的organizationcreate人userIDcannot为null');
+            throw new InvalidArgumentException('neworganizationcreate人userIDcannot为null');
         }
 
         $this->organizationAdminAppService->transferOwnership(

@@ -42,7 +42,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $data = $this->delightfulContactIdMappingModel::query();
 
         // 保持原有的queryfield顺序
-        // according to环境ID数量选择合适的query方式
+        // according to环境IDquantity选择合适的query方式
         if (count($relationEnvIds) === 1) {
             $data->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -105,7 +105,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query();
 
         // 保持原有的queryfield顺序
-        // according to环境ID数量选择合适的query方式
+        // according to环境IDquantity选择合适的query方式
         if (count($relationEnvIds) === 1) {
             $query->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -180,7 +180,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $delightfulThirdPlatformIdMappingEntity->setCreatedAt($time);
             $delightfulThirdPlatformIdMappingEntity->setUpdatedAt($time);
             $thirdPlatformIdMappings[] = [
-                'id' => $id, // 暂时把primary key idset为与new_id相同的value，以后有需要可以拆分
+                'id' => $id, // 暂时把primary key idset为与new_idsame的value，以后有needcan拆分
                 'delightful_organization_code' => $delightfulThirdPlatformIdMappingEntity->getDelightfulOrganizationCode(),
                 'mapping_type' => $delightfulThirdPlatformIdMappingEntity->getMappingType(),
                 'third_platform_type' => $delightfulThirdPlatformIdMappingEntity->getThirdPlatformType(),
@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publish和生产可以看做是一个环境，所以这里处理一下关联的环境 ids.
+     * 预publish和生产can看做是一个环境，所以这里处理一下关联的环境 ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {

@@ -82,7 +82,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'create一个新的user级别定时task';
+        return 'create一个newuser级别定时task';
     }
 
     public function getInput(): ?NodeInput
@@ -110,7 +110,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             "type": "string",
             "key": "agent_id",
             "title": "助理ID",
-            "description": "助理ID, 如果为空，则use当前助理D",
+            "description": "助理ID, 如果为空，则usecurrent助理D",
             "required": null,
             "value": null,
             "encryption": false,
@@ -122,7 +122,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             "type": "string",
             "key": "topic_id",
             "title": "话题ID",
-            "description": "话题ID, 如果为空，则use当前话题ID",
+            "description": "话题ID, 如果为空，则usecurrent话题ID",
             "required": null,
             "value": null,
             "encryption": false,
@@ -134,7 +134,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             "type": "string",
             "key": "conversation_id",
             "title": "sessionID",
-            "description": "sessionID, 如果为空，则use当前sessionID",
+            "description": "sessionID, 如果为空，则usecurrentsessionID",
             "required": null,
             "value": null,
             "encryption": false,

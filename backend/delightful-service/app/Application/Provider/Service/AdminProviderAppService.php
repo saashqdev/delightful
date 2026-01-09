@@ -69,13 +69,13 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // 通过领域层method一次性获取服务商、configuration和模型info
+        // pass领域层method一次性获取服务商、configuration和模型info
         $providerModels = $this->providerConfigDomainService->getProviderModelsByConfigId($dataIsolation, $configId);
         if ($providerModels === null) {
             return null;
         }
 
-        // ProviderModelsDTO 已经contain所有需要的数据，统一handle provider 和 models 的 icon 并return
+        // ProviderModelsDTO 已经contain所有need的数据，统一handle provider 和 models 的 icon 并return
         $this->processProviderAndModelsIcons($providerModels);
         return $providerModels;
     }
@@ -251,7 +251,7 @@ readonly class AdminProviderAppService
         }
 
         $saveProviderModelData = $saveProviderModelDTO->toArray();
-        // icon传入是 url，return也需要是 url，但是save在数据库是 file_key
+        // icon传入是 url，return也need是 url，但是save在数据库是 file_key
         // 所以 SaveProviderModelDTO 的 setIcon 做了 url 到 file_key的convert
         $saveProviderModelData['icon'] = $this->getFileUrl($saveProviderModelDTO->getIcon());
         return $saveProviderModelData;
@@ -285,7 +285,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // 通过领域层method获取完整的模型详情info
+        // pass领域层method获取完整的模型详情info
         $providerModelEntity = $this->providerModelDomainService->getById(
             $dataIsolation,
             $modelPrimaryId

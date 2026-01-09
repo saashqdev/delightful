@@ -69,7 +69,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
             $seqInfo['content'] = Json::encode($seqInfo['content']);
             $seqInfo['receive_list'] = Json::encode($seqInfo['receive_list']);
             $seqInfo['extra'] = $this->getSeqExtra($seqInfo['extra'] ?? null);
-            // seq 的topic_id实际save在 topic_messages table中
+            // seq 的topic_idactualsave在 topic_messages table中
             unset($seqInfo['topic_id']);
             $insertData[] = $seqInfo;
         }
@@ -82,7 +82,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * return最大message的倒数 n 条序列.
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -102,7 +102,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * return $userLocalMaxSeqId 之后的 $limit 条message.
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -150,7 +150,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪到 delightful_chat_topic_messages 处理
      * session窗口滚动加载历史record.
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
     {
@@ -161,7 +161,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪到 delightful_chat_topic_messages 处理
      * session窗口滚动加载历史record.
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -179,7 +179,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         $limit = $messagesQueryDTO->getLimit();
         $query = $this->delightfulSeq::query()->whereIn('conversation_id', $conversationIds);
         if (! empty($pageToken)) {
-            // 当前session历史message中最小的 seq id. 会用来查比它还小的value
+            // currentsession历史message中最小的 seq id. will用来查比它还小的value
             $query->where('seq_id', $operator, $pageToken);
         }
         if ($timeStart !== null) {
@@ -194,7 +194,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * 分组getsession下最新的几条message.
+     * 分组getsession下最new几条message.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -219,7 +219,7 @@ sql;
 
     /**
      * get收件方message的status变更流.
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array
@@ -233,7 +233,7 @@ sql;
 
     /**
      * get发件方message的status变更流.
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array
@@ -258,7 +258,7 @@ sql;
     }
 
     /**
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getMessageReceiveList(string $messageId, string $delightfulId, ConversationType $userType): ?array
     {
@@ -529,7 +529,7 @@ sql;
     }
 
     /**
-     * 批量return客户端需要的Seq结构.
+     * 批量return客户端need的Seq结构.
      * @return ClientSequenceResponse[]
      */
     private function getMessagesBySeqList(array $seqList, Order $order = Order::Desc): array

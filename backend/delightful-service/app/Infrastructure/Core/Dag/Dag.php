@@ -17,12 +17,12 @@ use SplStack;
 class Dag implements Runner
 {
     /**
-     * 等待mode.（节点只允许运行一次）.
+     * 等待mode.（节点只allow运行一次）.
      */
     public const int WAITING_MODE = 1;
 
     /**
-     * 非等待mode.（节点允许运行多次）.
+     * 非等待mode.（节点allow运行多次）.
      */
     public const int NON_WAITING_MODE = 2;
 

@@ -30,7 +30,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('确保所有助理的开关指令都有 residency=true property')
+        $this->setDescription('ensure所有助理的开关指令都有 residency=true property')
             ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模式：提供JSON格式的test数据进行处理', '')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, '空运行模式：只check但不update到database');
     }
@@ -46,7 +46,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         if ($isDryRun) {
-            $this->output->writeln('<info>运行在空运行模式，将不会实际updatedatabase</info>');
+            $this->output->writeln('<info>运行在空运行模式，将不willactualupdatedatabase</info>');
         }
 
         $batchSize = 20;
@@ -64,7 +64,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             }
             foreach ($agents as $agent) {
                 ++$total;
-                // get当前指令
+                // getcurrent指令
                 $instructs = $agent['instructs'] ?? [];
                 if (empty($instructs)) {
                     continue;
@@ -83,7 +83,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$updated;
-                    $this->output->writeln(sprintf('已%s助理 [%s] 的开关指令', $isDryRun ? '检测到需要update' : 'update', $agent['id']));
+                    $this->output->writeln(sprintf('已%s助理 [%s] 的开关指令', $isDryRun ? '检测到needupdate' : 'update', $agent['id']));
                 }
             }
 
@@ -94,7 +94,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln(sprintf(
             '处理complete！共处理 %d 个助理，%s %d 个助理的开关指令',
             $total,
-            $isDryRun ? '发现需要update' : 'update了',
+            $isDryRun ? '发现needupdate' : 'update了',
             $updated
         ));
 
@@ -115,7 +115,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             foreach ($versions as $version) {
                 ++$versionTotal;
 
-                // get当前指令
+                // getcurrent指令
                 $instructs = $version['instructs'] ?? [];
                 if (empty($instructs)) {
                     continue;
@@ -132,7 +132,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('已%s助理版本 [%s] 的开关指令', $isDryRun ? '检测到需要update' : 'update', $version['id']));
+                    $this->output->writeln(sprintf('已%s助理版本 [%s] 的开关指令', $isDryRun ? '检测到needupdate' : 'update', $version['id']));
                 }
             }
 
@@ -143,7 +143,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln(sprintf(
             '处理complete！共处理 %d 个助理版本，%s %d 个助理版本的开关指令',
             $versionTotal,
-            $isDryRun ? '发现需要update' : 'update了',
+            $isDryRun ? '发现needupdate' : 'update了',
             $versionUpdated
         ));
     }
@@ -167,8 +167,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
 
         $this->output->writeln('test数据处理开始...');
 
-        // 显示原始指令
-        $this->output->writeln('<comment>原始指令:</comment>');
+        // 显示original指令
+        $this->output->writeln('<comment>original指令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         // check并修复开关指令的 residency property
@@ -187,7 +187,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     }
 
     /**
-     * 确保开关指令都有 residency=true property.
+     * ensure开关指令都有 residency=true property.
      * @param array &$instructs 指令array
      * @return bool 是否有修改
      */

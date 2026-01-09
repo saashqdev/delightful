@@ -33,7 +33,7 @@ class VoiceTranscription extends AbstractValueObject
     private ?int $transcribedAt;
 
     /**
-     * 主要语言代码（默认转录语言）.
+     * 主要语言代码（default转录语言）.
      */
     private ?string $primaryLanguage;
 
@@ -85,7 +85,7 @@ class VoiceTranscription extends AbstractValueObject
             return $this->transcriptions[$this->primaryLanguage];
         }
 
-        // 如果没有set主要语言，return第一个可用的转录result
+        // 如果没有set主要语言，returnfirst可用的转录result
         return ! empty($this->transcriptions) ? reset($this->transcriptions) : null;
     }
 

@@ -48,7 +48,7 @@ class MCPResourceManager
     }
 
     /**
-     * 检查指定ID的资源是否存在.
+     * check指定ID的资源是否存在.
      */
     public function hasResource(string $id): bool
     {
@@ -56,7 +56,7 @@ class MCPResourceManager
     }
 
     /**
-     * 检查是否没有任何资源.
+     * check是否没有任何资源.
      */
     public function isEmpty(): bool
     {

@@ -68,7 +68,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         //        $sendResult = new SendResult();
         //        $sendResult->setResult(0, $code);
         $key = $this->getSmsVerifyCodeKey($stateCode . $phone, $type);
-        // cache验证码,后续验证用
+        // cacheverify码,后续verify用
         $this->redis->setex($key, 10 * 60, $code);
         return $sendResult->toArray();
     }
@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 确定user_id的生成规则
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概率下,user_id会重复,会被mysql唯一索引拦截,让user重新登录一次就行.
+                // 1.47x(10**-29) 概率下,user_idwill重复,will被mysql唯一索引拦截,让user重新登录一次就行.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -220,7 +220,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountDTO->setDelightfulId($delightfulId);
             $this->accountRepository->createAccount($accountDTO);
             $userDTO->setDelightfulId($delightfulId);
-            // 为账号在当前organizationcreateuser
+            // 为账号在currentorganizationcreateuser
             $result = $this->createUser($userDTO, $dataIsolation);
             Db::commit();
             return $result;

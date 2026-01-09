@@ -36,7 +36,7 @@ class RichTextMessage extends AbstractAttachmentMessage implements TextContentIn
     public function getFileIds(): array
     {
         $attachmentIds = $this->getAttachmentIds();
-        // 检查rich text中是否有image
+        // checkrich text中是否有image
         $content = $this->getContent();
         $editor = new Editor([
             'extensions' => [

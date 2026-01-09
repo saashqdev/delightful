@@ -15,10 +15,10 @@ class FriendQueryDTO extends AbstractEntity
     // friend_type
     protected UserType $friendType = UserType::Ai;
 
-    // 指定user ids,检查是否是好友
+    // 指定user ids,check是否是好友
     protected array $userIds = [];
 
-    // 指定 ai codes,检查是否是好友
+    // 指定 ai codes,check是否是好友
     protected array $aiCodes = [];
 
     /**

@@ -57,12 +57,12 @@ interface DelightfulChatSeqRepositoryInterface
      * @return ClientSequenceResponse[]
      * @todo 挪到 delightful_chat_topic_messages 处理
      * session窗口滚动加载历史record.
-     * message_id= seqtable的primary keyid,因此不需要单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * 分组getsession下最新的几条message.
+     * 分组getsession下最new几条message.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 

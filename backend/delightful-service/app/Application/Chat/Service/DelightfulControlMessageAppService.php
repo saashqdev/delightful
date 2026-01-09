@@ -116,7 +116,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
         // async将生成的message流notifyuser的其他设备.
         $this->controlDomainService->pushControlSequence($seqEntity);
-        // 将message流return给当前客户端! 但是还是会asyncpush给user的所有online客户端.
+        // 将message流return给current客户端! 但是还是willasyncpush给user的所有online客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
@@ -129,14 +129,14 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
         // async分发控制message,对方操作了session的话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
-        // 将message流return给当前客户端! 但是还是会asyncpush给user的所有online客户端.
+        // 将message流return给current客户端! 但是还是willasyncpush给user的所有online客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
     private function handlerMQTopicControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
     {
         $receiveSeqEntity = $this->topicDomainService->dispatchMQTopicOperation($delightfulSeqEntity);
-        // asyncpush给收件方,有新的话题
+        // asyncpush给收件方,有new话题
         $receiveSeqEntity && $this->controlDomainService->pushControlSequence($receiveSeqEntity);
     }
 }

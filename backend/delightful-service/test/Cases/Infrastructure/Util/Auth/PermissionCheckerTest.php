@@ -30,7 +30,7 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
         ];
 
-        // 全局管理员应该有所有permission
+        // 全局管理员should有所有permission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000001',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -63,7 +63,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // 一个user可以有多个permission
+        // 一个usercan有多个permission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000004',
             SuperPermissionEnum::FLOW_ADMIN,

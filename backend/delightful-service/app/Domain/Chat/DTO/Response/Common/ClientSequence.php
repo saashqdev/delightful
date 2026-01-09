@@ -33,7 +33,7 @@ class ClientSequence extends AbstractEntity
     // 发送方的messageid
     protected ?string $senderMessageId;
 
-    // message所属session窗口。 客户端可以according to此value确定message是否要reminder等。如果本地没有发现这个sessionid，主动向service端querysession窗口详情
+    // message所属session窗口。 客户端canaccording to此value确定message是否要reminder等。如果本地没有发现这个sessionid，主动向service端querysession窗口详情
     protected ?string $conversationId;
 
     protected string $organizationCode;
@@ -57,7 +57,7 @@ class ClientSequence extends AbstractEntity
             'organization_code' => $this->getOrganizationCode(),
             'message' => $this->getMessage()->toArray($filterNull),
         ];
-        // edit_message_options field大多数时候不需要return
+        // edit_message_options field大多数时候不needreturn
         $editMessageOptions = $this->getEditMessageOptions();
         if (! empty($editMessageOptions)) {
             $data[MessageOptionsEnum::EDIT_MESSAGE_OPTIONS->value] = $editMessageOptions->toArray();

@@ -129,7 +129,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /*
-     * 是否允许updateuserinformation.
+     * 是否allowupdateuserinformation.
      */
     public function getUserUpdatePermission(): array
     {

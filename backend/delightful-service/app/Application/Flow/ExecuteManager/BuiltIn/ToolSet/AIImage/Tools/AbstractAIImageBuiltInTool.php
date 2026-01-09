@@ -50,7 +50,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
             "type": "string",
             "key": "radio",
             "title": "生成image的比例",
-            "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",默认\"1:1\"",
+            "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
             "encryption": false,
@@ -159,7 +159,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "number",
                         "key": "file_size",
                         "sort": 3,
-                        "title": "file大小",
+                        "title": "filesize",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -206,7 +206,7 @@ JSON,
             ->setUserMessage($textMessage)
             ->setAttachments($executionData->getTriggerData()?->getAttachments())
             ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId());
-        // set实际请求的尺寸和比例
+        // setactual请求的尺寸和比例
         $enumModel = ImageGenerateModelType::fromModel($model, false);
         $imageGenerateParamsVO = $reqDto->getParams();
         $imageGenerateParamsVO->setSourceId($this->getCode());

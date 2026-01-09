@@ -17,7 +17,7 @@ use Throwable;
 
 #[Aspect]
 /**
- * 1.为了不让user看到一些sql/代码exception,因此会在 config/api-response.php 的 error_exception configuration中,将意外的exception转换为统一的系统内部errorexception.
+ * 1.为了不让user看到一些sql/代码exception,因此will在 config/api-response.php 的 error_exception configuration中,将意外的exception转换为统一的系统内部errorexception.
  * 2.logrecordexceptioninfo,便于排查issue.
  */
 class ApiResponseExceptionLogAspect extends AbstractAspect

@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * 集合项目本身多套的 ModelGatewayMapper - 最终全部convert为 odin model parameter格式.
+ * 集合项目本身多套的 ModelGatewayMapper - final全部convert为 odin model parameter格式.
  */
 class ModelGatewayMapper extends ModelMapper
 {
@@ -81,7 +81,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * 内部use chat 时，一定是use该method.
-     * 会自动替代为本地代理模型.
+     * will自动替代为本地代理模型.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
@@ -98,7 +98,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * 内部use embedding 时，一定是use该method.
-     * 会自动替代为本地代理模型.
+     * will自动替代为本地代理模型.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
     {
@@ -118,7 +118,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * 该method获取到的一定是真实call的模型.
      * 仅 ModelGateway 领域use.
-     * @param string $model 预期是管理后台的 model_id，过度阶段接受传入 model_version
+     * @param string $model expected是管理后台的 model_id，过度阶段接受传入 model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -133,7 +133,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * 该method获取到的一定是真实call的模型.
      * 仅 ModelGateway 领域use.
-     * @param string $model 模型名称 预期是管理后台的 model_id，过度阶段接受 model_version
+     * @param string $model 模型名称 expected是管理后台的 model_id，过度阶段接受 model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {
@@ -159,7 +159,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取当前organization下的所有可用 chat 模型.
+     * 获取currentorganization下的所有可用 chat 模型.
      * @return OdinModel[]
      */
     public function getChatModels(BaseDataIsolation $dataIsolation): array
@@ -169,7 +169,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取当前organization下的所有可用 embedding 模型.
+     * 获取currentorganization下的所有可用 embedding 模型.
      * @return OdinModel[]
      */
     public function getEmbeddingModels(BaseDataIsolation $dataIsolation): array
@@ -267,7 +267,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取当前organization下指定type的所有可用模型.
+     * 获取currentorganization下指定type的所有可用模型.
      * @return OdinModel[]
      */
     private function getModelsByType(ModelGatewayDataIsolation $dataIsolation, ModelType $modelType): array
@@ -295,10 +295,10 @@ class ModelGatewayMapper extends ModelMapper
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
         }
 
-        // 获取当前套餐下的可用模型
+        // 获取current套餐下的可用模型
         $availableModelIds = $dataIsolation->getSubscriptionManager()->getAvailableModelIds($modelType);
 
-        // 需要contain官方organization的数据
+        // needcontain官方organization的数据
         $providerDataIsolation = ProviderDataIsolation::createByBaseDataIsolation($dataIsolation);
         $providerDataIsolation->setContainOfficialOrganization(true);
 
@@ -397,10 +397,10 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customize服务商统一显示别名，如果没有别名则显示“customize服务商”（需要考虑多语言）
+            // customize服务商统一显示别名，如果没有别名则显示“customize服务商”（need考虑多语言）
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // 内置服务商的统一显示 服务商名称，不用显示别名（需要考虑多语言）
+            // 内置服务商的统一显示 服务商名称，不用显示别名（need考虑多语言）
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
@@ -422,7 +422,7 @@ class ModelGatewayMapper extends ModelMapper
             $iconUrl = '';
         }
 
-        // according to模型typereturn不同的包装object
+        // according to模型typereturndifferent的包装object
         if ($providerModelEntity->getModelType()->isVLM()) {
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }
@@ -484,7 +484,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // 检查当前套餐是否有这个模型的usepermission - 目前只有 LLM 模型有这个限制
+        // checkcurrent套餐是否有这个模型的usepermission - 目前只有 LLM 模型有这个限制
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
                 $this->logger->info('模型不在可用名单', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);

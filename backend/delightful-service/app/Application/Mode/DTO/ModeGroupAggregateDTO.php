@@ -93,7 +93,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * check是否包含指定modelID.
+     * check是否contain指定modelID.
      */
     public function hasModelId(string $modelId): bool
     {
@@ -106,7 +106,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * getmodel数量.
+     * getmodelquantity.
      */
     public function getModelCount(): int
     {
@@ -128,7 +128,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
      */
     public function setModelIds(array $modelIds): void
     {
-        // 这个method保留用于向后兼容，但实际上需要完整的modelinfo
+        // 这个method保留用于向后兼容，但actual上need完整的modelinfo
         // 建议use setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {

@@ -20,11 +20,11 @@ class OrganizationAdminAssembler
     {
         $dto = new OrganizationAdminResponseDTO();
         $dto->setUserId($entity->getUserId());
-        $dto->setUserName(''); // 需要从userserviceget
-        $dto->setAvatar(''); // 需要从userserviceget
-        $dto->setDepartmentName(''); // 需要从departmentserviceget
-        $dto->setGrantorUserName(''); // 需要从userserviceget
-        $dto->setGrantorUserAvatar(''); // 需要从userserviceget
+        $dto->setUserName(''); // need从userserviceget
+        $dto->setAvatar(''); // need从userserviceget
+        $dto->setDepartmentName(''); // need从departmentserviceget
+        $dto->setGrantorUserName(''); // need从userserviceget
+        $dto->setGrantorUserAvatar(''); // need从userserviceget
         $dto->setOperationTime($entity->getGrantedAt()?->format('Y-m-d H:i:s') ?? '');
         $dto->setIsOrganizationCreator($entity->isOrganizationCreator());
 
@@ -51,7 +51,7 @@ class OrganizationAdminAssembler
     /**
      * 将带有userinfo的数据转换为响应DTO.
      *
-     * @param array $data 包含organization管理员实体和userinfo的array
+     * @param array $data containorganization管理员实体和userinfo的array
      */
     public static function assembleWithUserInfo(array $data): OrganizationAdminResponseDTO
     {
@@ -77,7 +77,7 @@ class OrganizationAdminAssembler
     /**
      * 将带有userinfo的数据list转换为响应DTO.
      *
-     * @param array $dataList 包含organization管理员实体和userinfo的arraylist
+     * @param array $dataList containorganization管理员实体和userinfo的arraylist
      */
     public static function assembleListWithUserInfo(array $dataList): OrganizationAdminListResponseDTO
     {

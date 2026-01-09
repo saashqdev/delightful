@@ -37,7 +37,7 @@ class AsrAssembler
      * @param string $workDir 工作目录
      * @param int $rootDirectoryId 根目录ID
      * @param bool $isHidden 是否为隐藏目录
-     * @param null|string $taskKey task键（仅隐藏目录需要）
+     * @param null|string $taskKey task键（仅隐藏目录need）
      */
     public static function createDirectoryEntity(
         string $userId,
@@ -148,7 +148,7 @@ class AsrAssembler
             }
         }
 
-        // 如果都没找到workspace标识，直接return原始路径（可能已经是相对路径）
+        // 如果都没找到workspace标识，直接returnoriginal路径（可能已经是相对路径）
         return $normalizedPath;
     }
 }

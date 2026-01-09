@@ -64,34 +64,34 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected DateTime $updatedAt;
 
     /**
-     * 业务维护的expect总数.
+     * 业务维护的expecttotal.
      */
     protected int $expectedNum = 0;
 
     /**
-     * 业务维护的已complete的数量.
+     * 业务维护的已complete的quantity.
      */
     protected int $completedNum = 0;
 
     /**
      * 检索configuration.
      *
-     * 包含检索策略、检索method、重sortconfiguration等parameter
+     * contain检索策略、检索method、重sortconfiguration等parameter
      */
     protected ?RetrieveConfig $retrieveConfig = null;
 
     /**
-     * 片段数量.
+     * 片段quantity.
      */
     protected int $fragmentCount = 0;
 
     /**
-     * 预期的片段数量.
+     * expected的片段quantity.
      */
     protected int $expectedCount = 0;
 
     /**
-     * 已complete的片段数量.
+     * 已complete的片段quantity.
      */
     protected int $completedCount = 0;
 
@@ -192,7 +192,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
             $this->createdAt = new DateTime();
         }
         if ($this->completedNum > $this->expectedNum) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已complete数量不能大于expect数量');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已completequantity不能greater thanexpectquantity');
         }
         $delightfulFlowKnowledgeEntity->setExpectedNum($this->expectedNum);
         $delightfulFlowKnowledgeEntity->setCompletedNum($this->completedNum);
@@ -475,7 +475,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
 
     public function setFragmentConfig(null|array|FragmentConfig $fragmentConfig): self
     {
-        // 默认configuration
+        // defaultconfiguration
         is_null($fragmentConfig) && $fragmentConfig = $this->getDefaultFragmentConfig();
         is_array($fragmentConfig) && $fragmentConfig = FragmentConfig::fromArray($fragmentConfig);
         $this->fragmentConfig = $fragmentConfig;
@@ -490,7 +490,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function setEmbeddingConfig(?array $embeddingConfig): self
     {
         isset($embeddingConfig['model_id']) && $this->model = $embeddingConfig['model_id'];
-        // 兼容旧configuration，initialize默认嵌入configuration
+        // 兼容旧configuration，initializedefault嵌入configuration
         is_null($embeddingConfig) && $embeddingConfig = ['model_id' => $this->model];
         $this->embeddingConfig = $embeddingConfig;
         return $this;
@@ -517,7 +517,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     /**
      * get或create检索configuration.
      *
-     * 如果检索configuration不存在，则create默认configuration
+     * 如果检索configuration不存在，则createdefaultconfiguration
      */
     public function getOrCreateRetrieveConfig(): RetrieveConfig
     {
@@ -530,7 +530,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public static function createCurrentTopicTemplate(string $organizationCode, string $creator): KnowledgeBaseEntity
     {
         $self = self::createTemplate($organizationCode, ConstValue::KNOWLEDGE_USER_CURRENT_TOPIC, $creator);
-        $self->setName('当前话题');
+        $self->setName('current话题');
         $self->setDescription("{$creator} 的话题");
         $self->setType(KnowledgeType::UserTopic->value);
         return $self;
@@ -539,7 +539,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public static function createConversationTemplate(string $organizationCode, string $creator): KnowledgeBaseEntity
     {
         $self = self::createTemplate($organizationCode, ConstValue::KNOWLEDGE_USER_CURRENT_CONVERSATION, $creator);
-        $self->setName('当前session');
+        $self->setName('currentsession');
         $self->setDescription("{$creator} 的session");
         $self->setType(KnowledgeType::UserConversation->value);
         return $self;

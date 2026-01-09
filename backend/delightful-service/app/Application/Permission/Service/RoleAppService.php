@@ -87,7 +87,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 检查user是否拥有指定permission.
+     * checkuser是否拥有指定permission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {

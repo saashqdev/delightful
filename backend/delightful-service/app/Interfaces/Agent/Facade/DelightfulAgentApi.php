@@ -131,7 +131,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->deleteAgentById($authorization, $agentId);
     }
 
-    // get当前user的助理
+    // getcurrentuser的助理
 
     /**
      * @deprecated
@@ -232,7 +232,7 @@ class DelightfulAgentApi extends AbstractApi
 
         if ($result['is_add_friend']) {
             $friendId = $userEntity->getUserId();
-            // 添加好友，助理默认同意好友
+            // 添加好友，助理default同意好友
             $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
         }
         return $result;
@@ -301,7 +301,7 @@ class DelightfulAgentApi extends AbstractApi
         $aiCode = $delightfulAgentVersionEntity->getFlowCode();
         $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $aiCode);
         $friendId = $userEntity->getUserId();
-        // 添加好友，助理默认同意好友
+        // 添加好友，助理default同意好友
         $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
 
         return $userEntity;

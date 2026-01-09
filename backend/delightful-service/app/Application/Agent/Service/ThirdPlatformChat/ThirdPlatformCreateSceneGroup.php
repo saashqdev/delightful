@@ -27,19 +27,19 @@ class ThirdPlatformCreateSceneGroup
     // 新成员是否可查看历史message
     private int $showHistoryType;
 
-    // 是否可searchgroup chat, 0（默认）：不可search 1 search
+    // 是否可searchgroup chat, 0（default）：不可search 1 search
     private int $searchable = 0;
 
-    // 入群是否需要验证：0（默认）：不验证 1：入群验证
+    // 入群是否needverify：0（default）：不verify 1：入群verify
     private int $validationType = 0;
 
-    // @all use范围： 0（默认）：所有人都可以@all
+    // @all userange： 0（default）：所有人都can@all
     private int $mentionAllAuthority = 0;
 
-    // 群管理type：0（默认）：所有人可管理，1：仅群主可管理
+    // 群管理type：0（default）：所有人可管理，1：仅群主可管理
     private int $managementType = 0;
 
-    // 是否开启群禁言：0（默认）：不禁言，1：全员禁言
+    // 是否开启群禁言：0（default）：不禁言，1：全员禁言
     private int $chatBannedType;
 
     // group唯一标识

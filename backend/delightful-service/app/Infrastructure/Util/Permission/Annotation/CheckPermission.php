@@ -46,14 +46,14 @@ class CheckPermission extends AbstractAnnotation
      */
     public function getPermissionKey(): string
     {
-        // 为了兼容旧逻辑，return第一个组合键
+        // 为了兼容旧逻辑，returnfirst组合键
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }
 
     /**
      * return所有permission键组合（resources x operations 的笛卡尔积）。
-     * 当声明了多个资源或多个操作时，permission通过任意一个键即可。
+     * 当声明了多个资源或多个操作时，permissionpass任意一个键即可。
      *
      * @return array<string>
      */

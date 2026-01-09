@@ -80,7 +80,7 @@ if (! function_exists('is_unit_test')) {
 if (! function_exists('camelize')) {
     /**
      * 下划线转驼峰.
-     * @param string $unCamelizeWords 需要转换的string
+     * @param string $unCamelizeWords need转换的string
      * @param string $separator 分隔符
      */
     function camelize(string $unCamelizeWords, string $separator = '_'): string
@@ -100,7 +100,7 @@ if (! function_exists('camelize')) {
 if (! function_exists('un_camelize')) {
     /**
      * 驼峰命名转下划线命名.
-     * @param string $camelCaps 需要转换的string
+     * @param string $camelCaps need转换的string
      * @param string $separator 分隔符
      */
     function un_camelize(string $camelCaps, string $separator = '_'): string
@@ -114,9 +114,9 @@ if (! function_exists('un_camelize')) {
 
 if (! function_exists('string_to_hump')) {
     /**
-     * 下划线转成驼峰命名,默认小驼峰.
+     * 下划线转成驼峰命名,default小驼峰.
      * @param string $string 要转换的string
-     * @param bool $firstUp 是否首字母大写,默认否
+     * @param bool $firstUp 是否首字母大写,default否
      */
     function string_to_hump(string $string, bool $firstUp = false): string
     {

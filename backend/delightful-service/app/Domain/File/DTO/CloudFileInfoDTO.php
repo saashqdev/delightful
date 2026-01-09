@@ -37,7 +37,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * getfile大小.
+     * getfilesize.
      */
     public function getSize(): ?int
     {

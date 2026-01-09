@@ -44,7 +44,7 @@ class InstructionConfig extends AbstractEntity
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
     /**
-     * 指令type, 取value 1 为process指令，取value 2 为conversation指令，默认为 conversation指令。
+     * 指令type, 取value 1 为process指令，取value 2 为conversation指令，default为 conversation指令。
      */
     protected int $instructionType = InstructionType::Conversation->value;
 
@@ -81,7 +81,7 @@ class InstructionConfig extends AbstractEntity
     protected string $off = '';
 
     /**
-     * 常驻指令，默认只读.
+     * 常驻指令，default只读.
      */
     protected bool $residency = true;
 
@@ -128,7 +128,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setDisplayType($displayType): void
     {
-        // 确保 display_type 是整数type
+        // ensure display_type 是整数type
         $this->displayType = is_numeric($displayType) ? (int) $displayType : InstructionDisplayType::Normal->value;
     }
 
@@ -149,7 +149,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInsertLocation($insertLocation): void
     {
-        // 确保 insert_location 是整数type
+        // ensure insert_location 是整数type
         $this->insertLocation = is_numeric($insertLocation) ? (int) $insertLocation : InstructionInsertLocation::Cursor->value;
     }
 
@@ -160,7 +160,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInstructionType($instructionType): void
     {
-        // 确保 instruction_type 是整数type
+        // ensure instruction_type 是整数type
         $this->instructionType = is_numeric($instructionType) ? (int) $instructionType : InstructionType::Conversation->value;
     }
 
@@ -181,7 +181,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setSendDirectly($sendDirectly): void
     {
-        // 确保 send_directly 是布尔type
+        // ensure send_directly 是布尔type
         $this->sendDirectly = filter_var($sendDirectly, FILTER_VALIDATE_BOOLEAN);
     }
 
@@ -192,7 +192,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setType($type): void
     {
-        // 确保 type 是整数type
+        // ensure type 是整数type
         $this->type = is_numeric($type) ? (int) $type : InstructionComponentType::Radio->value;
     }
 
@@ -205,7 +205,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * @param null|array $values 原始valuearray或 InstructionValue objectarray，或 null
+     * @param null|array $values originalvaluearray或 InstructionValue objectarray，或 null
      */
     public function setValues($values): void
     {
@@ -215,7 +215,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // 确保 $values 是array
+        // ensure $values 是array
         if (! is_array($values)) {
             $this->values = [];
             return;
@@ -227,7 +227,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // 如果第一个元素已经是 InstructionValue object，则直接use
+        // 如果first元素已经是 InstructionValue object，则直接use
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
@@ -321,10 +321,10 @@ class InstructionConfig extends AbstractEntity
      * type为开关时，name 取的是 开/关，value 取 $instruction->getOn / $instruction->getOff
      * type为单选时, name 取的是 显示name，value：$instructionValue
      * type为status按钮时，name 取的是status文本，value: $instructionValue
-     * 默认 name 为空， value = $instructionValue
+     * default name 为空， value = $instructionValue
      *
      * @param string $instructionValue 指令value
-     * @return array return包含 name 和 value 的array
+     * @return array returncontain name 和 value 的array
      */
     public function getNameAndValueByType(string $instructionValue): array
     {

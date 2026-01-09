@@ -25,7 +25,7 @@ use function Hyperf\Support\retry;
 
 /**
  * message分发模块.
- * 处理不同优先级message的消费者,用于写收件方的seq.
+ * 处理different优先级message的消费者,用于写收件方的seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {
@@ -86,7 +86,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 }
                 $this->setRequestId($userSeqEntity->getAppMessageId());
                 $this->logger->info(sprintf('messageDispatch 开始分发message seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
-                // 如果是控制message,check是否是需要分发的控制message
+                // 如果是控制message,check是否是need分发的控制message
                 if ($userSeqEntity->getSeqType() instanceof ControlMessageType) {
                     $this->delightfulControlMessageAppService->dispatchMQControlMessage($userSeqEntity);
                     $this->setSeqCanNotRetry($seqRetryKey);

@@ -112,7 +112,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::ParamCall:
                     $outputComponent = ComponentFactory::fastCreate($branch['output']['form'] ?? []);
-                    // parametercall可以无parameter触发，for example触发一个event
+                    // parametercallcan无parameter触发，for example触发一个event
                     if ($outputComponent) {
                         $output = new NodeOutput();
                         $output->setForm($outputComponent);
@@ -151,7 +151,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     $output = $this->getRoutineOutputTemplate();
                     break;
                 case TriggerType::LoopStart:
-                    // 循环开始节点，不需要configuration
+                    // 循环开始节点，不needconfiguration
                     break;
                 default:
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.start.unsupported_trigger_type', ['trigger_type' => $triggerType->name]);

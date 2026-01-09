@@ -89,7 +89,7 @@ readonly class LongTermMemoryDomainService
 
             $this->logger->info('Batch reinforced memories successfully', ['count' => count($memories)]);
         } finally {
-            // 确保释放锁
+            // ensure释放锁
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -103,7 +103,7 @@ readonly class LongTermMemoryDomainService
             return;
         }
 
-        // validate当 scenario 是 memory_card_quick 时，delightfulMessageId 必须提供
+        // validate当 scenario 是 memory_card_quick 时，delightfulMessageId must提供
         if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && empty($delightfulMessageId)) {
             throw new InvalidArgumentException('delightful_message_id is required when scenario is memory_card_quick');
         }
@@ -175,23 +175,23 @@ readonly class LongTermMemoryDomainService
                     }
                 }
 
-                // 批量delete需要delete的记忆
+                // 批量deleteneeddelete的记忆
                 if (! empty($memoriesToDelete) && ! $this->repository->deleteBatch($memoriesToDelete)) {
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::DELETION_FAILED);
                 }
 
-                // 批量更新需要清nullpending_content的记忆
+                // 批量更新need清nullpending_content的记忆
                 if (! empty($memoriesToUpdate) && ! $this->repository->updateBatch($memoriesToUpdate)) {
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
             }
 
-            // 如果是 memory_card_quick 场景，需要更新对应的message内容
+            // 如果是 memory_card_quick 场景，need更新对应的message内容
             if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && ! empty($delightfulMessageId)) {
                 $this->updateMessageWithMemoryOperation($delightfulMessageId, $action, $memoryIds);
             }
         } finally {
-            // 确保释放锁
+            // ensure释放锁
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -258,7 +258,7 @@ readonly class LongTermMemoryDomainService
         }
 
         try {
-            // validateuser记忆数量限制
+            // validateuser记忆quantity限制
             $count = $this->countByUser($dto->orgId, $dto->appId, $dto->userId);
             if ($count >= 40) {
                 throw new InvalidArgumentException(trans('long_term_memory.entity.user_memory_limit_exceeded'));
@@ -291,7 +291,7 @@ readonly class LongTermMemoryDomainService
 
             return $memory->getId();
         } finally {
-            // 确保释放锁
+            // ensure释放锁
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -317,7 +317,7 @@ readonly class LongTermMemoryDomainService
                 ExceptionBuilder::throw(LongTermMemoryErrorCode::MEMORY_NOT_FOUND);
             }
 
-            // 如果更新了pending_content，需要according to业务规则调整status
+            // 如果更新了pending_content，needaccording to业务规则调整status
             if ($dto->pendingContent !== null) {
                 $this->adjustMemoryStatusBasedOnPendingContent($memory, $dto->pendingContent);
             }
@@ -330,7 +330,7 @@ readonly class LongTermMemoryDomainService
 
             $this->logger->info('Memory updated successfully: {id}', ['id' => $memoryId]);
         } finally {
-            // 确保释放锁
+            // ensure释放锁
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -362,7 +362,7 @@ readonly class LongTermMemoryDomainService
 
             $this->logger->info('Memory deleted successfully: {id}', ['id' => $memoryId]);
         } finally {
-            // 确保释放锁
+            // ensure释放锁
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -373,7 +373,7 @@ readonly class LongTermMemoryDomainService
      * @param string $appId applicationID
      * @param string $userId userID
      * @param array $projectIds 项目ID列表
-     * @return int delete的记录数量
+     * @return int delete的记录quantity
      */
     public function deleteMemoriesByProjectIds(string $orgId, string $appId, string $userId, array $projectIds): int
     {
@@ -392,7 +392,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 获取user的有效记忆并buildhint词string.
+     * 获取user的valid记忆并buildhint词string.
      */
     public function getEffectiveMemoriesForPrompt(string $orgId, string $appId, string $userId, ?string $projectId, int $maxLength = 4000): string
     {
@@ -407,17 +407,17 @@ readonly class LongTermMemoryDomainService
         // merge记忆，按分数sort
         $memories = array_merge($generalMemories, $projectMemories);
 
-        // filter掉应该被淘汰的记忆
+        // filter掉should被淘汰的记忆
         $validMemories = array_filter($memories, function ($memory) {
             return ! $this->shouldMemoryBeEvicted($memory);
         });
 
-        // 按有效分数sort
+        // 按valid分数sort
         usort($validMemories, static function ($a, $b) {
             return $b->getEffectiveScore() <=> $a->getEffectiveScore();
         });
 
-        // 限制总长度
+        // 限制总length
         $selectedMemories = [];
         $totalLength = 0;
 
@@ -499,7 +499,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according toqueryconditionstatistics记忆数量.
+     * according toqueryconditionstatistics记忆quantity.
      */
     public function countMemories(MemoryQueryDTO $dto): int
     {
@@ -507,7 +507,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * statisticsuser记忆数量.
+     * statisticsuser记忆quantity.
      */
     public function countByUser(string $orgId, string $appId, string $userId): int
     {
@@ -515,7 +515,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 批量检查记忆是否属于user.
+     * 批量check记忆是否属于user.
      */
     public function filterMemoriesByUser(array $memoryIds, string $orgId, string $appId, string $userId): array
     {
@@ -529,7 +529,7 @@ readonly class LongTermMemoryDomainService
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @return int success更新的记录数量
+     * @return int success更new记录quantity
      */
     public function batchUpdateEnabled(array $memoryIds, bool $enabled, string $orgId, string $appId, string $userId): int
     {
@@ -550,13 +550,13 @@ readonly class LongTermMemoryDomainService
         }
 
         try {
-            // validate记忆ID的有效性和所属权
+            // validate记忆ID的valid性和所属权
             $validMemoryIds = $this->repository->filterMemoriesByUser($memoryIds, $orgId, $appId, $userId);
             if (empty($validMemoryIds)) {
                 return 0;
             }
 
-            // 如果是启用记忆，进行数量限制检查
+            // 如果是启用记忆，进行quantity限制check
             if ($enabled) {
                 $this->validateMemoryEnablementLimits($validMemoryIds, $orgId, $appId, $userId);
             }
@@ -564,22 +564,22 @@ readonly class LongTermMemoryDomainService
             // execute批量更新
             return $this->repository->batchUpdateEnabled($validMemoryIds, $enabled, $orgId, $appId, $userId);
         } finally {
-            // 确保释放锁
+            // ensure释放锁
             $this->locker->release($lockName, $lockOwner);
         }
     }
 
     /**
-     * 判断记忆是否应该被淘汰.
+     * 判断记忆是否should被淘汰.
      */
     public function shouldMemoryBeEvicted(LongTermMemoryEntity $memory): bool
     {
-        // 过期时间检查
+        // 过期时间check
         if ($memory->getExpiresAt() && $memory->getExpiresAt() < new DateTime()) {
             return true;
         }
 
-        // 有效分数过低
+        // valid分数过低
         if ($memory->getEffectiveScore() < 0.1) {
             return true;
         }
@@ -596,19 +596,19 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * validate记忆启用数量限制.
+     * validate记忆启用quantity限制.
      * @param array $memoryIds 要启用的记忆ID列表
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @throws BusinessException 当启用数量超过限制时抛出exception
+     * @throws BusinessException 当启用quantity超过限制时抛出exception
      */
     private function validateMemoryEnablementLimits(array $memoryIds, string $orgId, string $appId, string $userId): void
     {
         // 获取要启用的记忆实体
         $memoriesToEnable = $this->repository->findByIds($memoryIds);
 
-        // 获取当前项目记忆和全局记忆的启用数量
+        // 获取current项目记忆和全局记忆的启用quantity
         $currentProjectCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::PROJECT);
         $currentGeneralCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::GENERAL);
 
@@ -617,7 +617,7 @@ readonly class LongTermMemoryDomainService
             MemoryCategory::GENERAL->value => $currentGeneralCount,
         ];
 
-        // 计算启用后各类别的数量
+        // 计算启用后各类别的quantity
         $projectedCounts = $currentEnabledCounts;
 
         foreach ($memoriesToEnable as $memory) {
@@ -629,13 +629,13 @@ readonly class LongTermMemoryDomainService
                 $projectedCounts[$categoryKey] = 0;
             }
 
-            // 只有当前未启用的记忆才会增加count
+            // 只有current未启用的记忆才will增加count
             if (! $memory->isEnabled()) {
                 ++$projectedCounts[$categoryKey];
             }
         }
 
-        // 检查是否超过限制
+        // check是否超过限制
         foreach ($projectedCounts as $categoryKey => $projectedCount) {
             $category = MemoryCategory::from($categoryKey);
             $limit = $category->getEnabledLimit();
@@ -658,14 +658,14 @@ readonly class LongTermMemoryDomainService
         // 获取新status
         $newStatus = $this->determineNewMemoryStatus($currentStatus, $hasPendingContent);
 
-        // 只在status需要改变时才更新
+        // 只在statusneed改变时才更新
         if ($newStatus !== $currentStatus) {
             $memory->setStatus($newStatus);
         }
     }
 
     /**
-     * according to当前status和pending_content的存在确定新status.
+     * according tocurrentstatus和pending_content的存在确定新status.
      */
     private function determineNewMemoryStatus(MemoryStatus $currentStatus, bool $hasPendingContent): MemoryStatus
     {
@@ -676,7 +676,7 @@ readonly class LongTermMemoryDomainService
             [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待接受status保持不变
             // pending_content不为null时的statusconvert
             [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // 生效记忆有修订 → 待修订
-            // 默认情况（不应该到达这里）
+            // default情况（不should到达这里）
             default => $currentStatus,
         };
     }

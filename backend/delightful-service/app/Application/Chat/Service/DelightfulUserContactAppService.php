@@ -83,7 +83,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 检查是否已经是好友
+        // check是否已经是好友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendId)) {
             return true;
         }
@@ -107,7 +107,7 @@ class DelightfulUserContactAppService extends AbstractAppService
      */
     public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
     {
-        // 检查是否已经是好友
+        // check是否已经是好友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendUserEntity->getUserId())) {
             return true;
         }
@@ -173,7 +173,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $queryType = $dto->getQueryType();
         $dataIsolation = $this->createDataIsolation($authorization);
 
-        // 获取当前user拥有的organization列表
+        // 获取currentuser拥有的organization列表
         $userOrganizations = $this->userDomainService->getUserOrganizations($dataIsolation->getCurrentUserId());
 
         // 基本userinfoquery - 传入user拥有的organization列表
@@ -210,7 +210,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getUsersDetailByDepartmentId(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // 根department被抽象为 -1，所以这里需要convert
+        // 根department被抽象为 -1，所以这里needconvert
         if ($dto->getDepartmentId() === PlatformRootDepartmentId::Delightful) {
             $departmentId = $this->departmentChartDomainService->getDepartmentRootId($dataIsolation);
             $dto->setDepartmentId($departmentId);
@@ -234,7 +234,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // 通讯录和search相关接口，filter隐藏department和隐藏user。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
         // 由于 $usersPageResponseDTO 的 items 限制的parametertype，从代码规范的角度，再 new 一个通用的 PageResponseDTO， 按pagination的结构return
-        // 另外，由于filter逻辑的存在，可能本次return的 items 数量少于 $limit,但是又有下一页。
+        // 另外，由于filter逻辑的存在，可能本次return的 items quantity少于 $limit,但是又有下一页。
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
         $pageResponseDTO->setHasMore($usersPageResponseDTO->getHasMore());
@@ -336,7 +336,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getLoginCodeEnv(string $loginCode): DelightfulEnvironmentEntity
     {
         if (empty($loginCode)) {
-            // 如果没有传，那么默认取当前环境
+            // 如果没有传，那么default取current环境
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getCurrentDefaultDelightfulEnv();
         } else {
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getEnvironmentEntityByLoginCode($loginCode);
@@ -348,7 +348,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 是否允许更新userinfo.
+     * 是否allow更新userinfo.
      */
     public function getUserUpdatePermission(DelightfulUserAuthorization $userAuthorization): array
     {
@@ -429,7 +429,7 @@ class DelightfulUserContactAppService extends AbstractAppService
                 continue;
             }
             if ($userDepartmentDetail instanceof UserDetailDTO) {
-                // 不要检查user的departmentinfo
+                // 不要checkuser的departmentinfo
                 continue;
             }
             $userPathNodes = [];
@@ -462,7 +462,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     private function getUsersAvatarCoordinator(array $usersDetail, DataIsolation $dataIsolation): array
     {
         $fileKeys = array_column($usersDetail, 'avatar_url');
-        // 移除nullvalue/http或者 https开头的/长度小于 32的
+        // 移除nullvalue/http或者 https开头的/lengthless than 32的
         $validFileKeys = [];
         foreach ($fileKeys as $fileKey) {
             if (! empty($fileKey) && mb_strlen($fileKey) >= 32 && ! str_starts_with($fileKey, 'http')) {

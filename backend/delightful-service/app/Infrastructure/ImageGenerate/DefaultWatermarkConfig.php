@@ -11,17 +11,17 @@ use App\Domain\ImageGenerate\Contract\WatermarkConfigInterface;
 use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
- * 默认水印configurationimplement
- * 开源项目中的默认implement，不启用水印
- * 企业项目can通过继承或重新implement来提供具体的水印逻辑.
+ * default水印configurationimplement
+ * 开源项目中的defaultimplement，不启用水印
+ * 企业项目canpass继承或重新implement来提供具体的水印逻辑.
  */
 class DefaultWatermarkConfig implements WatermarkConfigInterface
 {
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig
     {
-        // 开源version默认不启用水印
+        // 开源versiondefault不启用水印
         return new WatermarkConfig(
-            logoTextContent: 'Delightful AI Generated', // 默认水印文字
+            logoTextContent: 'Delightful AI Generated', // default水印文字
             position: 3, // 右下角
             opacity: 0.3, // 30% 透明度,
         );

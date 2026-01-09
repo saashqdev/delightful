@@ -50,7 +50,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
             ->whereIn('status', [ExecuteLogStatus::Running, ExecuteLogStatus::Pending])
             // 只重试顶层
             ->where('level', 0)
-            // 重试次数小于 3 次
+            // 重试次数less than 3 次
             ->where('retry_count', '<', 1)
             // 只get最近 2 小时内的data，超过 2 小时的data不再处理
             ->where('created_at', '>', date('Y-m-d H:i:s', time() - 7200))

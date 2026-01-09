@@ -133,10 +133,10 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         // 应用filter条件
         $this->applyFilters($query, $filters);
 
-        // get总数
+        // gettotal
         $total = $query->count();
 
-        // sort：优先usefilter器中的sortfield，否则默认按createtime倒序
+        // sort：优先usefilter器中的sortfield，否则default按createtime倒序
         $orderBy = $filters['order_by'] ?? null;
         $orderDirection = strtolower((string) ($filters['order_direction'] ?? '')) === 'asc' ? 'asc' : 'desc';
         if (! empty($orderBy)) {

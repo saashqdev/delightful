@@ -49,12 +49,12 @@ enum AiAbilityCode: string
     {
         return match ($this) {
             self::Ocr => '本能力覆盖平台所有 OCR 应用场景，精准捕捉并提取 PDF、扫描件及各类image中的文字info。',
-            self::WebSearch => '本能力覆盖平台 AI 大model的互联网search场景，精准get并整合最新的新闻、事实和数据info。',
+            self::WebSearch => '本能力覆盖平台 AI 大model的互联网search场景，精准get并整合最new新闻、事实和数据info。',
             self::RealtimeSpeechRecognition => '本能力覆盖平台所有voice转文字的应用场景，实时listeneraudio流并逐步输出准确的文字content。',
             self::AudioFileRecognition => '本能力覆盖平台所有audiofile转文字的应用场景，精准识别说话人、audio文字等info。',
             self::AutoCompletion => '本能力覆盖平台所有输入content自动补全的应用场景，according to理解上下文为user自动补全content，由user选择是否采纳。',
             self::ContentSummary => '本能力覆盖平台所有content总结的应用场景，对长篇文档、报告或网页文章进行深度分析。',
-            self::VisualUnderstanding => '本能力覆盖平台所有需要让大model进行视觉理解的应用场景，精准理解各种图像中的content以及复杂关系。',
+            self::VisualUnderstanding => '本能力覆盖平台所有need让大model进行视觉理解的应用场景，精准理解各种图像中的content以及复杂关系。',
             self::SmartRename => '本能力覆盖平台所有支持 AI 重命名的应用场景，according to理解上下文为user自动进行content标题的命名。',
             self::AiOptimization => '本能力覆盖平台所有支持 AI optimizecontent的应用场景，according to理解上下文为user自动对content进行optimize。',
             default => 'Unknown',

@@ -42,7 +42,7 @@ enum CircuitBreakerStatus: string
     }
 
     /**
-     * 检查是否是有效的status值
+     * check是否是valid的status值
      */
     public static function isValid(string $status): bool
     {

@@ -27,7 +27,7 @@ interface DelightfulChatFileRepositoryInterface
     public function getChatFileByIds(array $fileIds, ?string $order = null, ?int $limit = null): array;
 
     /**
-     * 通过file_key查找file.
+     * passfile_key查找file.
      */
     public function getChatFileByFileKey(string $fileKey): ?DelightfulChatFileEntity;
 

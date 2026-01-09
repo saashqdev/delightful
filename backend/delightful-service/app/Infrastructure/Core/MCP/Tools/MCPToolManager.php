@@ -55,7 +55,7 @@ class MCPToolManager
     }
 
     /**
-     * 检查指定名称的tool是否存在.
+     * check指定名称的tool是否存在.
      */
     public function hasTool(string $name): bool
     {
@@ -63,7 +63,7 @@ class MCPToolManager
     }
 
     /**
-     * 检查是否没有任何tool.
+     * check是否没有任何tool.
      */
     public function isEmpty(): bool
     {

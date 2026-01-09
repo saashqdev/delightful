@@ -35,7 +35,7 @@ class VolcengineModel extends AbstractImageGenerate
     // 轮询重试间隔（秒）
     private const RETRY_INTERVAL = 2;
 
-    // 图生图数量限制
+    // 图生图quantity限制
     private const IMAGE_TO_IMAGE_IMAGE_COUNT = 1;
 
     private VolcengineAPI $api;
@@ -93,7 +93,7 @@ class VolcengineModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('Volcengine OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Volcengine OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnull数据响应
         }
 
@@ -115,7 +115,7 @@ class VolcengineModel extends AbstractImageGenerate
                     // success：settingimage数据到响应object
                     $this->addImageDataToResponse($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfo到响应object（只setting第一个error）
+                    // fail：settingerrorinfo到响应object（只settingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -131,7 +131,7 @@ class VolcengineModel extends AbstractImageGenerate
 
         $parallel->wait();
 
-        // 5. 记录最终结果
+        // 5. 记录final结果
         $this->logger->info('Volcengine OpenAI格式生图：并发handlecomplete', [
             '总请求数' => $count,
             'successimage数' => count($response->getData()),
@@ -154,7 +154,7 @@ class VolcengineModel extends AbstractImageGenerate
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('火山文生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('火山文生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -234,7 +234,7 @@ class VolcengineModel extends AbstractImageGenerate
                 }
             }
 
-            // 如果没有找到具体errormessage，use第一个errormessage
+            // 如果没有找到具体errormessage，usefirsterrormessage
             if (empty($finalErrorMsg) && ! empty($errors[0]['message'])) {
                 $finalErrorMsg = $errors[0]['message'];
             }
@@ -248,7 +248,7 @@ class VolcengineModel extends AbstractImageGenerate
         $rawResults = array_values($rawResults);
 
         $this->logger->info('火山文生图：generateend', [
-            'image数量' => $count,
+            'imagequantity' => $count,
         ]);
 
         // 从原生结果中提取imageURL
@@ -271,7 +271,7 @@ class VolcengineModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('火山文生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('火山文生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -323,7 +323,7 @@ class VolcengineModel extends AbstractImageGenerate
 
         $results = $parallel->wait();
 
-        // 检查结果
+        // check结果
         $rawResults = [];
         $errors = [];
         $finalErrorCode = ImageGenerateErrorCode::GENERAL_ERROR;
@@ -345,7 +345,7 @@ class VolcengineModel extends AbstractImageGenerate
             }
         }
 
-        // 检查是否有success的imagegenerate
+        // check是否有success的imagegenerate
         if (empty($rawResults)) {
             $this->logger->error('火山文生图：所有imagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
@@ -356,7 +356,7 @@ class VolcengineModel extends AbstractImageGenerate
         $rawResults = array_values($rawResults);
 
         $this->logger->info('火山文生图：generateend', [
-            'image数量' => count($rawResults),
+            'imagequantity' => count($rawResults),
         ]);
 
         return $rawResults;
@@ -562,7 +562,7 @@ class VolcengineModel extends AbstractImageGenerate
         }
 
         $data = $result['data'];
-        // 优先检查 image_urls，然后检查 binary_data_base64
+        // 优先check image_urls，然后check binary_data_base64
         $hasValidImageData = (! empty($data['image_urls']) && ! empty($data['image_urls'][0]))
                             || (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0]));
 
@@ -579,7 +579,7 @@ class VolcengineModel extends AbstractImageGenerate
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedis锁确保并发安全
+        // useRedis锁ensure并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从火山引擎响应中提取数据
@@ -591,7 +591,7 @@ class VolcengineModel extends AbstractImageGenerate
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // 优先handle URL 格式image，参考现有逻辑只取第一个image
+            // 优先handle URL 格式image，参考现有逻辑只取firstimage
             if (! empty($data['image_urls']) && ! empty($data['image_urls'][0])) {
                 $imageUrl = $data['image_urls'][0];
                 try {
@@ -605,13 +605,13 @@ class VolcengineModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefail时use原始URL
+                    // 水印handlefail时useoriginalURL
                     $currentData[] = [
                         'url' => $imageUrl,
                     ];
                 }
             } elseif (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0])) {
-                // 备选：handle base64 格式image，只取第一个image
+                // 备选：handle base64 格式image，只取firstimage
                 $base64Image = $data['binary_data_base64'][0];
                 try {
                     // handle水印
@@ -623,7 +623,7 @@ class VolcengineModel extends AbstractImageGenerate
                     $this->logger->error('Volcengine添加image数据：base64水印handlefail', [
                         'error' => $e->getMessage(),
                     ]);
-                    // 水印handlefail时use原始数据
+                    // 水印handlefail时useoriginal数据
                     $currentData[] = [
                         'b64_json' => $base64Image,
                     ];
@@ -636,7 +636,7 @@ class VolcengineModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $volcengineResult['usage']['output_tokens'] ?? 0;
                 $currentUsage->totalTokens += $volcengineResult['usage']['total_tokens'] ?? 0;
             } else {
-                // 如果没有usageinfo，默认增加1张image
+                // 如果没有usageinfo，default增加1张image
                 $currentUsage->addGeneratedImages(1);
             }
 
@@ -644,7 +644,7 @@ class VolcengineModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // 确保锁一定会被释放
+            // ensure锁一定will被释放
             $this->unlockResponse($response, $lockOwner);
         }
     }
@@ -674,7 +674,7 @@ class VolcengineModel extends AbstractImageGenerate
         $maxDimension = max($width, $height);
 
         if ($minDimension <= 0) {
-            $this->logger->warning('火山图生图：image尺寸无效，跳过长宽比例校验', ['width' => $width, 'height' => $height]);
+            $this->logger->warning('火山图生图：image尺寸invalid，跳过长宽比例校验', ['width' => $width, 'height' => $height]);
             return; // Skip validation and continue execution
         }
 
@@ -722,7 +722,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山引擎原始数据添加水印.
+     * 为火山引擎original数据添加水印.
      */
     private function processVolcengineRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -755,7 +755,7 @@ class VolcengineModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandle下一张image，当前image保持原始status
+                // continuehandle下一张image，currentimage保持originalstatus
             }
         }
 

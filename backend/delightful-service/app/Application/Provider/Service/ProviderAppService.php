@@ -184,7 +184,7 @@ class ProviderAppService
             return $configEntity->getAlias();
         }
 
-        // 3. 默认use国际化name
+        // 3. defaultuse国际化name
         return $providerEntity->getLocalizedName($locale);
     }
 

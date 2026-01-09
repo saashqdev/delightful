@@ -66,7 +66,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get默认的系统交互指令configuration.
+     * getdefault的系统交互指令configuration.
      */
     public static function getDefaultInstructs(): array
     {
@@ -131,19 +131,19 @@ enum SystemInstructType: int
     }
 
     /**
-     * 判断系统指令type是否需要contentfield.
+     * 判断系统指令type是否needcontentfield.
      */
     public static function requiresContent(int $type): bool
     {
-        // 目前所有系统指令都不需要content
-        // 如果未来有系统指令需要content，可以在这里添加判断
+        // 目前所有系统指令都不needcontent
+        // 如果未来有系统指令needcontent，can在这里添加判断
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };
     }
 
     /**
-     * 确保系统交互指令存在，如果缺少则补充.
+     * ensure系统交互指令存在，如果缺少则补充.
      * @return array return补充后的指令array
      */
     public static function ensureSystemInstructs(array $instructs): array
@@ -163,7 +163,7 @@ enum SystemInstructType: int
             }
         }
 
-        // 如果没有工具栏组，create一个新的
+        // 如果没有工具栏组，create一个new
         if (! $hasSystemGroup) {
             $toolbarGroup = [
                 'id' => (string) IdGenerator::getSnowId(),

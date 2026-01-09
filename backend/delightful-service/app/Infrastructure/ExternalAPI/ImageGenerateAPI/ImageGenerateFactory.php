@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney 不use宽高parameter，只需要 prompt 和 mode，但是 Request 类继承需要这些parameter
-        // 所以我们给默认value即可
+        // Midjourney 不use宽高parameter，只need prompt 和 mode，但是 Request 类继承need这些parameter
+        // 所以我们给defaultvalue即可
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney 不关心具体的宽高比例，但我们保留这个field以防将来需要
+        // Midjourney 不关心具体的宽高比例，但我们保留这个field以防将来need
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -421,7 +421,7 @@ class ImageGenerateFactory
      * get指定model的固定比例尺寸configuration.
      * @param null|string $modelKey model键名
      * @param string $ratioKey 比例键名，如 "1:1", "16:9"
-     * @return null|array 如果存在固定configurationreturn [width, height] array，否则return null table示需要use换算
+     * @return null|array 如果存在固定configurationreturn [width, height] array，否则return null table示needuse换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
@@ -435,7 +435,7 @@ class ImageGenerateFactory
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
 
-        // 如果不存在，return null table示需要use换算
+        // 如果不存在，return null table示needuse换算
         return null;
     }
 

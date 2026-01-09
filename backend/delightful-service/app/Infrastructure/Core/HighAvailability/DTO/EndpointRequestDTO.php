@@ -54,7 +54,7 @@ class EndpointRequestDTO extends AbstractDTO
     protected StatisticsLevel $statisticsLevel = StatisticsLevel::LEVEL_MINUTE;
 
     /**
-     * 统计time范围（分钟）.
+     * 统计timerange（分钟）.
      */
     protected int $timeRange = 30;
 
@@ -147,7 +147,7 @@ class EndpointRequestDTO extends AbstractDTO
 
     public function setTimeRange(int $timeRange): static
     {
-        $this->timeRange = max(1, $timeRange); // 确保time范围至少为1分钟
+        $this->timeRange = max(1, $timeRange); // ensuretimerangeat least为1分钟
         return $this;
     }
 

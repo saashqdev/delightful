@@ -33,7 +33,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      *
      * @param string $userId userID
      * @param ContactDataIsolation $dataIsolation 数据隔离object
-     * @return array 包含user完整info的array
+     * @return array containuser完整info的array
      */
     public function getUserInfo(string $userId, ContactDataIsolation $dataIsolation): array
     {

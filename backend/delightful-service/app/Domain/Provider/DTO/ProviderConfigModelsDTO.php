@@ -13,7 +13,7 @@ use Hyperf\Codec\Json;
 /**
  * service_provider_config_id 对应的服务商+模型列表。
  *
- * 同one服务商在不同的organization下有不同的 service_provider_config_id。
+ * 同one服务商在different的organization下有different的 service_provider_config_id。
  * oneservice_provider_config_id对应多个具体的模型。
  */
 class ProviderConfigModelsDTO extends ProviderConfigDTO

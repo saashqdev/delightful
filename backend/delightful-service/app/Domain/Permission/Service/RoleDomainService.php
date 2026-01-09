@@ -64,7 +64,7 @@ readonly class RoleDomainService
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
         $savingRoleEntity->setOrganizationCode($organizationCode);
 
-        // 校验传入的userID是否属于当前organization
+        // 校验传入的userID是否属于currentorganization
         $inputUserIds = $savingRoleEntity->getUserIds();
         if (! empty($inputUserIds)) {
             $validUsers = $this->userRepository->getByUserIds($organizationCode, $inputUserIds);
@@ -78,11 +78,11 @@ readonly class RoleDomainService
             }
         }
 
-        // 1. 校验permission键有效性
+        // 1. 校验permission键valid性
         // 更新 permissionTag info：according topermission键提取二级模块tag，用于前端展示category
         $permissionTags = [];
         foreach ($savingRoleEntity->getPermissions() as $permissionKey) {
-            // 校验permission键有效性
+            // 校验permission键valid性
             if (! $this->permission->isValidPermission($permissionKey)) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.invalid_permission_key', ['key' => $permissionKey]);
             }
@@ -99,11 +99,11 @@ readonly class RoleDomainService
                 $moduleLabel = $this->permission->getResourceModule($resource);
                 $permissionTags[$moduleLabel] = $moduleLabel; // use键value去重
             } catch (Throwable $e) {
-                // parsefail时忽略该permission的tag提取，校验已通过，不影响save
+                // parsefail时忽略该permission的tag提取，校验已pass，不影响save
             }
         }
 
-        // 将tag列表写入 RoleEntity
+        // 将tag列表write RoleEntity
         if (! empty($permissionTags)) {
             $savingRoleEntity->setPermissionTag(array_values($permissionTags));
         }
@@ -112,7 +112,7 @@ readonly class RoleDomainService
             $roleEntity = clone $savingRoleEntity;
             $roleEntity->prepareForCreation($dataIsolation->getCurrentUserId());
 
-            // 检查名称在organization下是否唯一
+            // check名称在organization下是否唯一
             if ($this->roleRepository->getByName($organizationCode, $savingRoleEntity->getName())) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_name_exists', ['name' => $savingRoleEntity->getName()]);
             }
@@ -122,7 +122,7 @@ readonly class RoleDomainService
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_not_found', ['id' => $savingRoleEntity->getId()]);
             }
 
-            // 检查名称修改后是否冲突
+            // check名称修改后是否冲突
             if ($roleEntity->getName() !== $savingRoleEntity->getName()) {
                 $existingRole = $this->roleRepository->getByName($organizationCode, $savingRoleEntity->getName());
                 if ($existingRole && $existingRole->getId() !== $savingRoleEntity->getId()) {
@@ -191,7 +191,7 @@ readonly class RoleDomainService
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 检查role是否还有user关联
+        // checkrole是否还有user关联
         $roleUsers = $this->roleRepository->getRoleUsers($organizationCode, $roleEntity->getId());
         if (! empty($roleUsers)) {
             // 先deleterole与user的关联关系
@@ -218,7 +218,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 检查user是否拥有指定permission.
+     * checkuser是否拥有指定permission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {
@@ -246,9 +246,9 @@ readonly class RoleDomainService
      * 为指定usercreate或维护“organization管理员”role（拥有全局permission）。
      *
      * 逻辑：
-     * 1. according to当前organization查找是否已有同名role；
-     * 2. 若不存在，则create新的role并赋予 DelightfulPermission::ALL_PERMISSIONS；
-     * 3. 若存在，则确保其contain ALL_PERMISSIONS；
+     * 1. according tocurrentorganization查找是否已有同名role；
+     * 2. 若不存在，则createnewrole并赋予 DelightfulPermission::ALL_PERMISSIONS；
+     * 3. 若存在，则ensure其contain ALL_PERMISSIONS；
      * 4. 将user ID 列表加入role关联user列表；
      * 5. saverole。
      *
@@ -256,7 +256,7 @@ readonly class RoleDomainService
      */
     public function addOrganizationAdmin(PermissionDataIsolation $dataIsolation, array $userIds): RoleEntity
     {
-        // 获取当前organization编码
+        // 获取currentorganization编码
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
         // 1. 尝试获取已存在的organization管理员role
@@ -271,7 +271,7 @@ readonly class RoleDomainService
             $roleEntity->setIsDisplay(0);
         }
 
-        // 2. 确保拥有全局permission ALL_PERMISSIONS
+        // 2. ensure拥有全局permission ALL_PERMISSIONS
         $permissions = $roleEntity->getPermissions();
         if (! in_array(DelightfulPermission::ALL_PERMISSIONS, $permissions, true)) {
             $permissions[] = DelightfulPermission::ALL_PERMISSIONS;
@@ -292,10 +292,10 @@ readonly class RoleDomainService
      * 移除user的“organization管理员”role。
      *
      * 逻辑：
-     * 1. 获取当前organization下名为 ORGANIZATION_ADMIN_ROLE_NAME 的role；
+     * 1. 获取currentorganization下名为 ORGANIZATION_ADMIN_ROLE_NAME 的role；
      * 2. 若不存在直接return；
      * 3. call仓库移除user与该role的关联关系；
-     * 4. 如果role不再关联任何user，保持role本身不变（如有需要，可考虑后续清理）。
+     * 4. 如果role不再关联任何user，保持role本身不变（如有need，可考虑后续清理）。
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {

@@ -146,7 +146,7 @@ class ModeInitializer
                 'mode_id' => $defaultModeId,
                 'name_i18n' => json_encode([
                     'en_US' => 'Default Group-1',
-                    'zh_CN' => '默认分组-1',
+                    'zh_CN' => 'default分组-1',
                 ]),
                 'icon' => 'IconBrain',
                 'description' => '',
@@ -208,7 +208,7 @@ class ModeInitializer
             'id' => '842103554687242240', // Hardcoded ID (preferred)
             'name_i18n' => json_encode([
                 'en_US' => 'Default Mode',
-                'zh_CN' => '默认模式',
+                'zh_CN' => 'default模式',
             ]),
             'placeholder_i18n' => json_encode([]),
             'identifier' => 'default',
@@ -304,7 +304,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Be Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可选择数据源或upload Excel file后，输入需要分析的需求，超级麦吉将为您进行全面的数据分析。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '您可选择数据源或upload Excel file后，输入need分析的需求，超级麦吉将为您进行全面的数据分析。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'data_analysis',
                 'icon' => 'IconChartBarPopular',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可输入会议的文字content，或upload会议录音file，超级麦吉将为您进行完整的会议总结。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '您可输入will议的文字content，或uploadwill议录音file，超级麦吉将为您进行完整的will议总结。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',

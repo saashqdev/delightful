@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => '不好意思，同时问我issue的人太多啦，有点忙不过来，你可以一会儿再来问我吗？感谢谅解！']);
+                        $message = new TextMessage(['content' => '不好意思，同时问我issue的人太多啦，有点忙不过来，你can一will儿再来问我吗？感谢谅解！']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });
@@ -203,7 +203,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (! $chatEntity || ! $chatEntity->isEnabled()) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.invalid', ['label' => $key]);
         }
-        // 通过 $groupMemberIds getuserinfo，可以userlist
+        // pass $groupMemberIds getuserinfo，canuserlist
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $users = $this->delightfulUserDomainService->getUserByIds($groupMemberIds, $dataIsolation, ['delightful_id', 'nickname']);
         if (count($users) === 0) {
@@ -279,7 +279,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         }
         $delightfulFlow->setAgentId((string) $bot->getId());
 
-        // use当前process的organization编码
+        // usecurrentprocess的organization编码
         $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
         return $delightfulFlow;
     }

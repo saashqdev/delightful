@@ -64,7 +64,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         $name = $delightfulTopicEntity->getName();
-        // 长度不能超过 50
+        // length不能超过 50
         if (mb_strlen($name) > 50) {
             ExceptionBuilder::throw(
                 ChatErrorCode::INPUT_PARAM_ERROR,
@@ -188,7 +188,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 按time范围getsession下某个话题的message.
+     * 按timerangegetsession下某个话题的message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -235,7 +235,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 通过topic_idget话题info（不需要conversation_id）.
+     * passtopic_idget话题info（不needconversation_id）.
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity
     {
@@ -279,7 +279,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId sessionID
      * @param string $topicId 话题ID
-     * @param int $maxSeqId 最大序列ID（包含该ID）
+     * @param int $maxSeqId 最大序列ID（contain该ID）
      * @return DelightfulTopicMessageEntity[] 话题message实体array
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array

@@ -88,14 +88,14 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
-        // 有些控制message,不仅控制自己的设备,还需要控制对方的设备
+        // 有些控制message,不仅控制自己的设备,还need控制对方的设备
         // 控制messagepush. todo:待optimize,mergepush已读的控制message
         if ($seqEntity->getObjectType() === ConversationType::User && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             SocketIOUtil::sendSequenceId($seqEntity);
         }
 
         if ($seqEntity->getObjectType() === ConversationType::Ai && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
-            // 如果是给AI的需要触发flowprocess的控制message，触发flowprocess
+            // 如果是给AI的need触发flowprocess的控制message，触发flowprocess
             $agentUserEntity = $seqUserEntity; // 此时的 seqUserEntity 是 AI
             $agentAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
             if ($agentAccountEntity === null) {
@@ -112,7 +112,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($conversationEntity->getReceiveId());
             } elseif ($seqEntity->getSeqType() === ControlMessageType::AddFriendSuccess) {
-                // 因为加好友没有conversation窗口，所以需要according tomessage的sendid查出对方的 user_entity
+                // 因为加好友没有conversation窗口，所以needaccording tomessage的sendid查出对方的 user_entity
                 /** @var AddFriendMessage $seqContent */
                 $seqContent = $seqEntity->getContent();
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($seqContent->getUserId());
@@ -129,9 +129,9 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushChatSeq(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity, DelightfulMessageEntity $messageEntity): void
     {
-        // 如果序列号归属于 ai,且发件人是 ai,不需要push
+        // 如果序列号归属于 ai,且发件人是 ai,不needpush
         if ($selfSeqEntity->getObjectType() === ConversationType::Ai && $messageEntity->getSenderType() === ConversationType::Ai) {
-            $this->logger->error(sprintf('UserCallAgentEventError seq:%s 序列号归属于 ai,且发件人是 ai,不需要push', Json::encode($selfSeqEntity->toArray())));
+            $this->logger->error(sprintf('UserCallAgentEventError seq:%s 序列号归属于 ai,且发件人是 ai,不needpush', Json::encode($selfSeqEntity->toArray())));
             return;
         }
         $receiveConversationType = $selfSeqEntity->getObjectType();
@@ -159,7 +159,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     # ai send已读回执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo 可以做 optimizeflow响应success率: sync等待flowexecute,细致判断,对于本seq_id,上次flow的响应是否超时,如果是,直接丢弃,不再发给flow
+                    // todo can做 optimizeflow响应success率: sync等待flowexecute,细致判断,对于本seq_id,上次flow的响应是否超时,如果是,直接丢弃,不再发给flow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [
@@ -173,7 +173,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 break;
             case ConversationType::User:
-                // todo 一定要做! publishsubscribe用rabbitmqimplement,不再用redis的pub/sub. 同时,push后需要客户端returnack,然后更新seq的status
+                // todo 一定要做! publishsubscribe用rabbitmqimplement,不再用redis的pub/sub. 同时,push后need客户端returnack,然后更新seq的status
                 // todo 一定要做! 只推seq_id,publishsubscribe收到seq_id后,再去数据库查seq详情,再推给客户端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // 不打印敏感info
@@ -309,7 +309,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         );
         $content = $ControlRequestData->getMessage()->getDelightfulMessage();
         $messageType = $ControlRequestData->getMessage()->getDelightfulMessage()->getMessageTypeEnum();
-        // 控制message的receive方,需要according to控制message的type再确定,因此不在此处handle
+        // 控制message的receive方,needaccording to控制message的type再确定,因此不在此处handle
         $time = date('Y-m-d H:i:s');
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($userAuth->getId());

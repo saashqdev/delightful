@@ -83,7 +83,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '列出user当前session产生的file';
+        return '列出usercurrentsession产生的file';
     }
 
     public function getInput(): ?NodeInput
@@ -106,8 +106,8 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "type": "number",
             "key": "limit",
             "sort": 0,
-            "title": "query数量",
-            "description": "query数量 默认 10",
+            "title": "queryquantity",
+            "description": "queryquantity default 10",
             "required": null,
             "value": null,
             "encryption": false,
@@ -120,7 +120,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "key": "sort",
             "sort": 1,
             "title": "sort",
-            "description": "sort规则。asc 升序;desc 降序。默认 desc",
+            "description": "sort规则。asc 升序;desc 降序。default desc",
             "required": null,
             "value": null,
             "encryption": false,
@@ -133,7 +133,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "key": "start_time",
             "sort": 2,
             "title": "开始time",
-            "description": "time范围search的开始time。格式示例：Y-m-d H:i:s",
+            "description": "timerangesearch的开始time。格式示例：Y-m-d H:i:s",
             "required": null,
             "value": null,
             "encryption": false,
@@ -146,7 +146,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "key": "end_time",
             "sort": 3,
             "title": "结束time",
-            "description": "time范围search的结束time。格式示例：Y-m-d H:i:s",
+            "description": "timerangesearch的结束time。格式示例：Y-m-d H:i:s",
             "required": null,
             "value": null,
             "encryption": false,
@@ -246,7 +246,7 @@ JSON,
                         "type": "number",
                         "key": "file_size",
                         "sort": 3,
-                        "title": "file大小",
+                        "title": "filesize",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -305,7 +305,7 @@ JSON,
             }
         }
 
-        // sort+数量
+        // sort+quantity
         $delightfulChatFileDomainService = di(DelightfulChatFileDomainService::class);
         return $delightfulChatFileDomainService->getFileEntitiesByFileIds($attachmentIds, $order, $limit);
     }

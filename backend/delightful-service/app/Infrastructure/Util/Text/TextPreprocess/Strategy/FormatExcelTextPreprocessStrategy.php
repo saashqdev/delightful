@@ -21,7 +21,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
 
     /**
      * 将content转换为CSV格式.
-     * @param string $content 原始content
+     * @param string $content originalcontent
      * @return string 转换后的CSV格式content
      */
     private function convertToCsv(string $content): string
@@ -32,7 +32,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
         $headers = [];
 
         foreach ($lines as $line) {
-            // check是否是新的sheet
+            // check是否是newsheet
             if (str_starts_with($line, '##')) {
                 $result[] = $line;
                 $headers = [];
@@ -62,7 +62,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 }
             }
 
-            // use原始行的分隔符
+            // useoriginal行的分隔符
             $originalSeparator = $this->detectSeparator($line);
             $result[] = implode($originalSeparator, $rowResult);
         }
@@ -86,7 +86,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // 如果没有找到分隔符，默认use逗号
+        // 如果没有找到分隔符，defaultuse逗号
         return ',';
     }
 
@@ -102,7 +102,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             return '';
         }
 
-        // 如果单元格content包含以下任意字符，需要用引号包围
+        // 如果单元格contentcontain以下任意字符，need用引号包围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

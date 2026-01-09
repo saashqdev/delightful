@@ -44,16 +44,16 @@ interface ProviderModelRepositoryInterface
     public function create(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): ProviderModelEntity;
 
     /**
-     * 通过 service_provider_config_id getmodellist.
+     * pass service_provider_config_id getmodellist.
      * @return ProviderModelEntity[]
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array;
 
     /**
-     * getorganization可用modellist（包含organization自己的model和Delightfulmodel）.
+     * getorganization可用modellist（containorganization自己的model和Delightfulmodel）.
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param null|Category $category modelcategory，为空时return所有categorymodel
-     * @return ProviderModelEntity[] 按sort降序sort的modellist，包含organizationmodel和Delightfulmodel（不去重）
+     * @return ProviderModelEntity[] 按sort降序sort的modellist，containorganizationmodel和Delightfulmodel（不去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 

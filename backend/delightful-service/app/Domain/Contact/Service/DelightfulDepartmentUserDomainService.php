@@ -48,7 +48,7 @@ readonly class DelightfulDepartmentUserDomainService
     }
 
     /**
-     * getdepartment和其所有子departmentuser数量.
+     * getdepartment和其所有子departmentuserquantity.
      */
     public function getDepartmentUsersByDepartmentIds(array $departmentIds, DataIsolation $dataIsolation, int $limit, array $fields = ['*']): array
     {

@@ -48,7 +48,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 0. 清理test数据 - 确保test2user不是项目成员
+        // 0. 清理test数据 - ensuretest2user不是项目成员
         $this->cleanupTestData($projectId);
 
         // 1. 项目所有者开启邀请链接
@@ -62,7 +62,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 3. setting密码保护
         $this->assertSetPasswordProtection($projectId, true);
 
-        // 4. 外部user通过Token获取邀请info
+        // 4. 外部userpassToken获取邀请info
         $this->switchUserTest2();
         $invitationInfo = $this->getInvitationByToken($this->invitationToken);
         $this->assertTrue($invitationInfo['data']['requires_password']);
@@ -75,11 +75,11 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $passwordInfo = $this->resetInvitationPassword($projectId);
         $this->invitationPassword = $passwordInfo['data']['password'];
 
-        // 7. 外部useruse正确密码加入项目
+        // 7. 外部userusecorrect密码加入项目
         $this->switchUserTest2();
         $this->joinProjectSuccess($this->invitationToken, $this->invitationPassword);
 
-        // 8. validateuser已成为项目成员（再次加入应该fail）
+        // 8. validateuser已成为项目成员（再次加入shouldfail）
         $this->joinProjectAlreadyMember($this->invitationToken, $this->invitationPassword);
 
         // 9. 项目所有者close邀请链接
@@ -98,11 +98,11 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 非项目成员尝试管理邀请链接（应该fail）
+        // 1. 非项目成员尝试管理邀请链接（shouldfail）
         $this->switchUserTest2();
         $this->getInvitationLink($projectId, 51202); // permission不足
 
-        // 2. 项目所有者可以管理邀请链接
+        // 2. 项目所有者can管理邀请链接
         $this->switchUserTest1();
         $this->getInvitationLink($projectId, 1000); // success
     }
@@ -140,7 +140,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -157,7 +157,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -174,7 +174,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -191,7 +191,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -208,7 +208,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -225,7 +225,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -236,7 +236,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * 通过Token获取邀请info.
+     * passToken获取邀请info.
      */
     public function getInvitationByToken(string $token, int $expectedCode = 1000): array
     {
@@ -246,7 +246,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -264,7 +264,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * 获取已禁用的邀请链接（应该fail）.
+     * 获取已禁用的邀请链接（shouldfail）.
      */
     public function getInvitationByTokenDisabled(string $token): void
     {
@@ -314,7 +314,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * 尝试重复加入项目（应该fail）.
+     * 尝试重复加入项目（shouldfail）.
      */
     public function joinProjectAlreadyMember(string $token, ?string $password = null): void
     {
@@ -335,14 +335,14 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     // =================== 边界conditiontest ===================
 
     /**
-     * test无效Token访问.
+     * testinvalidToken访问.
      */
     public function testInvalidTokenAccess(): void
     {
         $this->switchUserTest2();
         $invalidToken = 'invalid_token_123456789';
 
-        $response = $this->getInvitationByToken($invalidToken, 51217); // Token无效
+        $response = $this->getInvitationByToken($invalidToken, 51217); // Tokeninvalid
     }
 
     /**
@@ -353,15 +353,15 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $projectId = $this->projectId;
         $this->switchUserTest1();
 
-        // test无效permission级别
+        // testinvalidpermission级别
         $response = $this->client->put(
             self::BASE_URI . "/{$projectId}/invitation-links/permission",
             ['default_join_permission' => 'invalid_permission'],
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
-        $this->assertEquals(51215, $response['code']); // 无效permission级别
+        $this->assertNotNull($response, '响应不should为null');
+        $this->assertEquals(51215, $response['code']); // invalidpermission级别
     }
 
     /**
@@ -380,13 +380,13 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->toggleInvitationLink($projectId, false);
         $this->toggleInvitationLink($projectId, true);
 
-        // validate最终status
+        // validatefinalstatus
         $response = $this->getInvitationLink($projectId);
         $this->assertEquals(1000, $response['code']);
 
         // validate链接是启用status（兼容number和booleanvalue）
         $isEnabled = $response['data']['is_enabled'];
-        $this->assertTrue($isEnabled === true || $isEnabled === 1, '邀请链接应该是启用status');
+        $this->assertTrue($isEnabled === true || $isEnabled === 1, '邀请链接should是启用status');
     }
 
     /**
@@ -405,18 +405,18 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $password2 = $this->resetInvitationPassword($projectId);
         $password3 = $this->resetInvitationPassword($projectId);
 
-        // validate每次generate的密码都不同
+        // validate每次generate的密码都different
         $this->assertNotEquals($password1['data']['password'] ?? '', $password2['data']['password']);
         $this->assertNotEquals($password2['data']['password'], $password3['data']['password']);
 
-        // validate密码长度和格式
+        // validate密码length和格式
         $password = $password3['data']['password'];
-        $this->assertEquals(5, strlen($password)); // 密码长度应该是5位
+        $this->assertEquals(5, strlen($password)); // 密码lengthshould是5位
         $this->assertMatchesRegularExpression('/^\d{5}$/', $password); // 只contain5位number
     }
 
     /**
-     * test密码保护开关功能 - close后再开启密码不会更改.
+     * test密码保护开关功能 - close后再开启密码不will更改.
      */
     public function testPasswordTogglePreservation(): void
     {
@@ -441,7 +441,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $disableResponse = $this->setInvitationPassword($projectId, false);
         $this->assertEquals(1000, $disableResponse['code']);
 
-        // 4. validateclosestatus下访问链接不需要密码
+        // 4. validateclosestatus下访问链接不need密码
         $linkResponse = $this->getInvitationLink($projectId);
         $this->assertEquals(1000, $linkResponse['code']);
         $token = $linkResponse['data']['token'];
@@ -456,14 +456,14 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // 6. validate密码保持不变
         $restoredPassword = $enableResponse['data']['password'];
-        $this->assertEquals($originalPassword, $restoredPassword, '重新开启密码保护后，密码应该保持不变');
+        $this->assertEquals($originalPassword, $restoredPassword, '重新开启密码保护后，密码should保持不变');
 
-        // 7. validate开启status下访问链接需要密码
+        // 7. validate开启status下访问链接need密码
         $linkInfo = $this->getInvitationByToken($token);
         $this->assertEquals(1000, $linkInfo['code']);
         $this->assertTrue($linkInfo['data']['requires_password']);
 
-        // 8. validateuse原密码可以success加入项目
+        // 8. validateuse原密码cansuccess加入项目
         $this->switchUserTest2();
         $joinResult = $this->joinProjectSuccess($token, $originalPassword);
         $this->assertEquals(1000, $joinResult['code']);
@@ -481,18 +481,18 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 0. 清理test数据并reset邀请链接
         $this->cleanupTestData($projectId);
 
-        // 通过领域服务delete现有的邀请链接
+        // pass领域服务delete现有的邀请链接
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
 
         // 1. 开启邀请链接
         $this->toggleInvitationLink($projectId, true);
 
-        // 2. setting初始密码保护
+        // 2. settinginitial密码保护
         $initialPasswordResponse = $this->setInvitationPassword($projectId, true);
         $this->assertEquals(1000, $initialPasswordResponse['code']);
 
         $originalPassword = $initialPasswordResponse['data']['password'];
-        $this->assertEquals(5, strlen($originalPassword)); // validate密码长度为5位
+        $this->assertEquals(5, strlen($originalPassword)); // validate密码length为5位
         $this->assertMatchesRegularExpression('/^\d{5}$/', $originalPassword); // validate是5位number
 
         // 3. 修改密码为customize密码
@@ -506,16 +506,16 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $token = $linkResponse['data']['token'];
 
         $this->switchUserTest2();
-        // use原密码应该fail
+        // use原密码shouldfail
         $data = ['token' => $token, 'password' => $originalPassword];
         $response = $this->client->post(
             self::INVITATION_BASE_URI . '/join',
             $data,
             $this->getCommonHeaders()
         );
-        $this->assertEquals(51220, $response['code'], 'error密码应该return51220error码');
+        $this->assertEquals(51220, $response['code'], 'error密码shouldreturn51220error码');
 
-        // 5. validate新密码可以正常use
+        // 5. validate新密码can正常use
         $joinResult = $this->joinProjectSuccess($token, $customPassword);
         $this->assertEquals(1000, $joinResult['code']);
         $this->assertEquals('viewer', $joinResult['data']['user_role']);
@@ -523,7 +523,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 6. 清理test数据
         $this->cleanupTestData($projectId);
 
-        // 7. test无效密码格式（nullstring和超长密码）
+        // 7. testinvalid密码格式（nullstring和超长密码）
         $this->switchUserTest1();
         $this->toggleInvitationLink($projectId, true);
 
@@ -535,7 +535,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $response = $this->changeInvitationPassword($projectId, str_repeat('1', 19), 51220);
         $this->assertEquals(51220, $response['code']);
 
-        // 8. test有效的各种密码格式
+        // 8. testvalid的各种密码格式
         $validPasswords = ['123', '12345', 'abcde', '12a34', str_repeat('x', 18)];
         foreach ($validPasswords as $validPassword) {
             $response = $this->changeInvitationPassword($projectId, $validPassword, 1000);
@@ -551,7 +551,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 0. 确保切换到test1user并清理test数据
+        // 0. ensure切换到test1user并清理test数据
         $this->switchUserTest1();
         $this->cleanupTestData($projectId);
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value, '', true);
@@ -567,39 +567,39 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $invitationInfo = $this->getInvitationByToken($token);
 
-        // 检查基本响应结构
-        $this->assertEquals(1000, $invitationInfo['code'], '获取邀请info应该success');
-        $this->assertIsArray($invitationInfo['data'], '响应数据应该是array');
+        // check基本响应结构
+        $this->assertEquals(1000, $invitationInfo['code'], '获取邀请infoshouldsuccess');
+        $this->assertIsArray($invitationInfo['data'], '响应数据should是array');
 
-        // 检查新增字段是否存在
-        $this->assertArrayHasKey('has_joined', $invitationInfo['data'], '响应应该containhas_joined字段');
-        $this->assertArrayHasKey('creator_name', $invitationInfo['data'], '响应应该containcreator_name字段');
-        $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], '响应应该containcreator_avatar字段');
-        $this->assertArrayHasKey('creator_id', $invitationInfo['data'], '响应应该containcreator_id字段');
+        // check新增字段是否存在
+        $this->assertArrayHasKey('has_joined', $invitationInfo['data'], '响应shouldcontainhas_joined字段');
+        $this->assertArrayHasKey('creator_name', $invitationInfo['data'], '响应shouldcontaincreator_name字段');
+        $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], '响应shouldcontaincreator_avatar字段');
+        $this->assertArrayHasKey('creator_id', $invitationInfo['data'], '响应shouldcontaincreator_id字段');
 
-        // 检查字段value
-        $this->assertTrue($invitationInfo['data']['has_joined'], 'create者应该显示已加入项目');
-        $this->assertNotEmpty($invitationInfo['data']['creator_id'], 'creator_id不应该为null');
+        // check字段value
+        $this->assertTrue($invitationInfo['data']['has_joined'], 'create者should显示已加入项目');
+        $this->assertNotEmpty($invitationInfo['data']['creator_id'], 'creator_id不should为null');
 
         // validate字段type
-        $this->assertIsBool($invitationInfo['data']['has_joined'], 'has_joined应该是booleantype');
-        $this->assertIsString($invitationInfo['data']['creator_name'], 'creator_name应该是stringtype');
-        $this->assertIsString($invitationInfo['data']['creator_avatar'], 'creator_avatar应该是stringtype');
+        $this->assertIsBool($invitationInfo['data']['has_joined'], 'has_joinedshould是booleantype');
+        $this->assertIsString($invitationInfo['data']['creator_name'], 'creator_nameshould是stringtype');
+        $this->assertIsString($invitationInfo['data']['creator_avatar'], 'creator_avatarshould是stringtype');
 
         // 3. test未加入user访问邀请链接 - should show has_joined = false
         $this->switchUserTest2();
         $invitationInfo = $this->getInvitationByToken($token);
 
-        // 检查基本响应
-        $this->assertEquals(1000, $invitationInfo['code'], '未加入user获取邀请info应该success');
-        $this->assertArrayHasKey('has_joined', $invitationInfo['data'], '响应应该containhas_joined字段');
-        $this->assertFalse($invitationInfo['data']['has_joined'], '未加入user应该显示未加入项目');
+        // check基本响应
+        $this->assertEquals(1000, $invitationInfo['code'], '未加入user获取邀请infoshouldsuccess');
+        $this->assertArrayHasKey('has_joined', $invitationInfo['data'], '响应shouldcontainhas_joined字段');
+        $this->assertFalse($invitationInfo['data']['has_joined'], '未加入usershould显示未加入项目');
 
-        // validatecreate者info依然存在（不管谁访问，create者info都应该显示）
-        $this->assertArrayHasKey('creator_name', $invitationInfo['data'], '响应应该containcreator_name字段');
-        $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], '响应应该containcreator_avatar字段');
+        // validatecreate者info依然存在（不管谁访问，create者info都should显示）
+        $this->assertArrayHasKey('creator_name', $invitationInfo['data'], '响应shouldcontaincreator_name字段');
+        $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], '响应shouldcontaincreator_avatar字段');
 
-        // 4. test2user加入项目 - 需要提供密码
+        // 4. test2user加入项目 - need提供密码
         $password = $linkResponse['data']['password'] ?? null;
         $joinResult = $this->joinProjectSuccess($token, $password);
         $this->assertEquals(1000, $joinResult['code']);
@@ -607,9 +607,9 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 5. test已加入成员访问邀请链接 - should show has_joined = true
         $invitationInfo = $this->getInvitationByToken($token);
 
-        $this->assertEquals(1000, $invitationInfo['code'], '已加入成员获取邀请info应该success');
-        $this->assertArrayHasKey('has_joined', $invitationInfo['data'], '响应应该containhas_joined字段');
-        $this->assertTrue($invitationInfo['data']['has_joined'], '已加入成员应该显示已加入项目');
+        $this->assertEquals(1000, $invitationInfo['code'], '已加入成员获取邀请infoshouldsuccess');
+        $this->assertArrayHasKey('has_joined', $invitationInfo['data'], '响应shouldcontainhas_joined字段');
+        $this->assertTrue($invitationInfo['data']['has_joined'], '已加入成员should显示已加入项目');
 
         // 6. validate响应数据完整性
         $data = $invitationInfo['data'];
@@ -640,7 +640,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // validate链接是启用status（兼容number和booleanvalue）
         $isEnabled = $response['data']['is_enabled'];
-        $this->assertTrue($isEnabled === true || $isEnabled === 1, '邀请链接应该是启用status');
+        $this->assertTrue($isEnabled === true || $isEnabled === 1, '邀请链接should是启用status');
 
         $this->assertNotEmpty($response['data']['token']);
         $this->assertEquals('viewer', $response['data']['default_join_permission']);
@@ -657,7 +657,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // validate链接是禁用status（兼容number和booleanvalue）
         $isEnabled = $response['data']['is_enabled'];
-        $this->assertTrue($isEnabled === false || $isEnabled === 0, '邀请链接应该是禁用status');
+        $this->assertTrue($isEnabled === false || $isEnabled === 0, '邀请链接should是禁用status');
     }
 
     /**
@@ -687,7 +687,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, '响应不应该为null');
+        $this->assertNotNull($response, '响应不should为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -698,7 +698,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
      */
     private function cleanupTestData(string $projectId): void
     {
-        // 通过领域服务deletetest2user的项目成员关系（如果存在）
+        // pass领域服务deletetest2user的项目成员关系（如果存在）
         $this->getProjectMemberDomainService()->removeMemberByUser((int) $projectId, 'usi_e9d64db5b986d062a342793013f682e8');
     }
 

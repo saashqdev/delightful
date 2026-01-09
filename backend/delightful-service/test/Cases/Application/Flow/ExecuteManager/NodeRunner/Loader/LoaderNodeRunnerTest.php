@@ -110,7 +110,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
 
     public function testRunDoc()
     {
-        $this->markTestSkipped('会failed');
+        $this->markTestSkipped('willfailed');
         $node = $this->createNode();
         $runner = NodeRunnerFactory::make($node);
         $vertexResult = new VertexResult();

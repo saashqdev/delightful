@@ -50,11 +50,11 @@ enum InstructType: int
     }
 
     /**
-     * 验证指令value
+     * verify指令value
      */
     public function validate(array &$items): void
     {
-        // 其他type的验证
+        // 其他type的verify
         match ($this) {
             self::SINGLE_CHOICE => $this->validateSingleChoice($items),
             self::SWITCH => $this->validateSwitch($items),
@@ -64,7 +64,7 @@ enum InstructType: int
     }
 
     /**
-     * 判断指令type是否需要contentfield.
+     * 判断指令type是否needcontentfield.
      */
     public static function requiresContent(int $type, ?int $displayType = null, ?int $instructionType = null): bool
     {
@@ -80,13 +80,13 @@ enum InstructType: int
 
         // 普通指令的判断
         return match (self::fromType($type)) {
-            self::STATUS => false,  // statustype不需要content
-            self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // 其他type需要content
+            self::STATUS => false,  // statustype不needcontent
+            self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // 其他typeneedcontent
         };
     }
 
     /**
-     * 验证普通交互指令项.
+     * verify普通交互指令项.
      */
     public static function validateInstructItem(array &$item, array &$seenOuterNames): void
     {
@@ -113,7 +113,7 @@ enum InstructType: int
             }
         }
 
-        // 验证contentfield
+        // verifycontentfield
         $instructionType = isset($item['instruction_type']) ? (int) $item['instruction_type'] : 0;
         if (self::requiresContent((int) $item['type'], $item['display_type'] ?? null, $instructionType)) {
             if (! isset($item['content']) || preg_match('/^\s*$/', $item['content'])) {
@@ -130,30 +130,30 @@ enum InstructType: int
             $item['id'] = (string) IdGenerator::getSnowId();
         }
 
-        // 如果是普通指令，验证type
+        // 如果是普通指令，verifytype
         if (! isset($item['display_type'])) {
             self::fromType((int) $item['type'])->validate($item);
         }
     }
 
     /**
-     * 验证普通交互指令组.
+     * verify普通交互指令组.
      */
     public static function validateInstructs(array &$instructs): void
     {
         foreach ($instructs as &$group) {
-            // 验证组type
+            // verify组type
             if (! isset($group['position']) || ! isset($group['items'])) {
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.instruct_group_format_invalid');
             }
 
-            // 验证组type是否有效
+            // verify组type是否valid
             if (! is_numeric($group['position'])) {
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.instruct_group_type_must_be_numeric');
             }
             InstructGroupPosition::fromPosition((int) $group['position']);
 
-            // 验证指令数量
+            // verify指令quantity
             if (! is_array($group['items']) || (count($group['items']) - count(SystemInstructType::getTypeOptions())) > InstructGroupPosition::MAX_INSTRUCTS) {
                 ExceptionBuilder::throw(
                     AgentErrorCode::VALIDATE_FAILED,
@@ -172,7 +172,7 @@ enum InstructType: int
     }
 
     /**
-     * 安全验证指令，捕获exception并returnresult.
+     * 安全verify指令，捕获exception并returnresult.
      * @return array{success: bool, message: null|string}
      */
     public static function safeValidateInstructs(array &$instructs): array
@@ -186,7 +186,7 @@ enum InstructType: int
     }
 
     /**
-     * 验证statustype组.
+     * verifystatustype组.
      */
     private function validateStatusGroup(array &$items): void
     {
@@ -195,12 +195,12 @@ enum InstructType: int
         }
 
         $totalItems = count($items['values']);
-        // 验证status项最小数量
+        // verifystatus项最小quantity
         if ($totalItems < 2) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_items_min_count');
         }
 
-        // 验证默认value
+        // verifydefaultvalue
         if (! isset($items['default_value'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_default_value_required');
         }
@@ -213,20 +213,20 @@ enum InstructType: int
             );
         }
 
-        // 验证status项
+        // verifystatus项
         foreach ($items['values'] as &$item) {
-            // 确保每个status项都有ID
+            // ensure每个status项都有ID
             if (! isset($item['id'])) {
                 $item['id'] = (string) IdGenerator::getSnowId();
             }
 
-            // 验证每个status项
+            // verify每个status项
             $this->validateStatus($item);
         }
     }
 
     /**
-     * 验证单选项type.
+     * verify单选项type.
      */
     private function validateSingleChoice(array &$item): void
     {
@@ -234,9 +234,9 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_select_cannot_be_empty');
         }
 
-        // 验证是否直接发送指令
+        // verify是否直接发送指令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // 默认不直接发送
+            $item['send_directly'] = false;  // default不直接发送
         }
 
         if (! is_bool($item['send_directly'])) {
@@ -264,29 +264,29 @@ enum InstructType: int
     }
 
     /**
-     * 验证开关type.
+     * verify开关type.
      */
     private function validateSwitch(array &$item): void
     {
-        // 验证必须存在 on 和 off field
+        // verifymust存在 on 和 off field
         if (! array_key_exists('on', $item) || ! array_key_exists('off', $item)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_switch_fields_missing');
         }
 
-        // 验证默认value必须存在且必须 'on' 或 'off'
+        // verifydefaultvaluemust存在且must 'on' 或 'off'
         if (! isset($item['default_value']) || ! in_array($item['default_value'], ['on', 'off'], true)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_switch_default_value_invalid');
         }
     }
 
     /**
-     * 验证文本type.
+     * verify文本type.
      */
     private function validateText(array &$item): void
     {
-        // 验证是否直接发送指令
+        // verify是否直接发送指令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // 默认不直接发送
+            $item['send_directly'] = false;  // default不直接发送
         }
 
         if (! is_bool($item['send_directly'])) {
@@ -295,36 +295,36 @@ enum InstructType: int
     }
 
     /**
-     * 验证statustype.
+     * verifystatustype.
      */
     private function validateStatus(array &$item): void
     {
-        // 验证图标
+        // verify图标
         if (! isset($item['icon'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_required');
         }
 
-        // use StatusIcon 枚举验证图标value
+        // use StatusIcon 枚举verify图标value
         if (! StatusIcon::isValid($item['icon'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_invalid');
         }
 
-        // 验证status文本
+        // verifystatus文本
         if (! isset($item['status_text']) || empty($item['status_text'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_text_required');
         }
 
-        // 验证文本颜色
+        // verify文本颜色
         if (! isset($item['text_color'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_required');
         }
 
-        // use TextColor 枚举验证颜色value
+        // use TextColor 枚举verify颜色value
         if (! TextColor::isValid($item['text_color'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_invalid');
         }
 
-        // 验证指令value
+        // verify指令value
         if (! isset($item['value']) || empty($item['value'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_value_required');
         }

@@ -15,8 +15,8 @@ class StreamOptions extends AbstractEntity
 
     protected bool $stream;
 
-    // 用于标识streammessage的关联性。多段streammessage的 stream_app_message_id 相同
-    // ai searchcardmessage的多段响应，已经将 app_message_id 作为关联 id，stream响应需要另外的 id 来做关联
+    // 用于标识streammessage的关联性。多段streammessage的 stream_app_message_id same
+    // ai searchcardmessage的多段响应，已经将 app_message_id 作为关联 id，stream响应need另外的 id 来做关联
     protected string $streamAppMessageId;
 
     /**

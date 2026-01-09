@@ -20,8 +20,8 @@ class RerankMode
      * 重sortmodel.
      *
      * use专门的重sortmodel（如 BAAI/bge-reranker-large）对检索result进行重sort。
-     * 重sortmodel会according toquery和文档的相关性给出更准确的sort。
-     * 该模式通过configurationparameter `reranking_mode` fieldset，
+     * 重sortmodelwillaccording toquery和文档的相关性给出更准确的sort。
+     * 该模式passconfigurationparameter `reranking_mode` fieldset，
      * 从database中的 retrieve_config configurationget。
      */
     public const RERANKING_MODEL = 'reranking_model';
@@ -29,9 +29,9 @@ class RerankMode
     /**
      * 加权分数.
      *
-     * use不同检索method的分数加权计算最终分数，对检索result进行重sort。
-     * for example，可以set向量检索result的权重为 0.7，关键词检索result的权重为 0.3。
-     * 该模式通过configurationparameter `reranking_mode` fieldset，
+     * usedifferent检索method的分数加权计算final分数，对检索result进行重sort。
+     * for example，canset向量检索result的权重为 0.7，关键词检索result的权重为 0.3。
+     * 该模式passconfigurationparameter `reranking_mode` fieldset，
      * 从database中的 retrieve_config configurationget。
      */
     public const WEIGHTED_SCORE = 'weighted_score';
@@ -50,7 +50,7 @@ class RerankMode
     }
 
     /**
-     * check给定的重sort模式是否有效.
+     * check给定的重sort模式是否valid.
      */
     public static function isValid(string $mode): bool
     {

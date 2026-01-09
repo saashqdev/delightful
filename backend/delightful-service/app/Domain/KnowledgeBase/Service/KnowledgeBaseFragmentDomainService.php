@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // 如果有业务id，并且业务 ID 存在，也可以相当于update
+        // 如果有业务id，并且业务 ID 存在，也can相当于update
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseFragmentDomainService
             if (empty($knowledgeBaseFragmentEntity)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] 没有找到");
             }
-            // 如果没有变化，就不需要update了
+            // 如果没有变化，就不needupdate了
             if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
                 return $knowledgeBaseFragmentEntity;
             }
@@ -136,7 +136,7 @@ readonly class KnowledgeBaseFragmentDomainService
         Db::transaction(function () use ($dataIsolation, $knowledgeBaseFragmentEntity) {
             $oldKnowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $knowledgeBaseFragmentEntity->getId(), true);
             $this->knowledgeBaseFragmentRepository->destroy($dataIsolation, $knowledgeBaseFragmentEntity);
-            // 需要update字符数
+            // needupdate字符数
             $deltaWordCount = -$oldKnowledgeBaseFragmentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $oldKnowledgeBaseFragmentEntity, $deltaWordCount);
         });
@@ -195,7 +195,7 @@ readonly class KnowledgeBaseFragmentDomainService
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
         // 先进行预处理
-        // 需要filterREPLACE_WHITESPACE规则，REPLACE_WHITESPACE规则在分段后进行处理
+        // needfilterREPLACE_WHITESPACE规则，REPLACE_WHITESPACE规则在分段后进行处理
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
         $this->logger->info('前置文本预处理开始。');
@@ -217,7 +217,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $fragments = $splitter->splitText($content);
         $this->logger->info('文本分段结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // 需要额外进行处理的规则
+        // need额外进行处理的规则
         $start = microtime(true);
         $this->logger->info('后置文本预处理开始。');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {

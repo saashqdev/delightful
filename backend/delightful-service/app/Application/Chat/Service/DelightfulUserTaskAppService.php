@@ -339,7 +339,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         di(DelightfulChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
     }
 
-    // 后台task,不会模拟user发送message,  预留method，暂时没有用到
+    // 后台task,不will模拟user发送message,  预留method，暂时没有用到
     // public static function asyncCallback(string $flow_code, array $user_task)
     // {
     //     $triggerConfig = [
@@ -445,7 +445,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     );
     //     $executionData->setTopicId($topicId);
     //     $executionData->setDebug($triggerConfig['debug']);
-    //     // 运行process图，检测是否可以运行
+    //     // 运行process图，检测是否can运行
     //     $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
     //     $executor->execute();
 

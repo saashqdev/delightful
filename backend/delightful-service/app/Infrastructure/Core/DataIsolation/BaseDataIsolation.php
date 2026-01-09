@@ -42,12 +42,12 @@ class BaseDataIsolation implements DataIsolationInterface
     private string $thirdPlatformOrganizationCode;
 
     /**
-     * 是否包含官方organization.
+     * 是否contain官方organization.
      */
     private bool $containOfficialOrganization = false;
 
     /**
-     * 是否仅仅包含官方organization.
+     * 是否仅仅contain官方organization.
      */
     private bool $onlyOfficialOrganization = false;
 

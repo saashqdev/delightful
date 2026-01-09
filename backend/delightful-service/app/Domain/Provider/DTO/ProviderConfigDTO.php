@@ -20,7 +20,7 @@ use Hyperf\Codec\Json;
 /**
  * service_provider_config_id 对应的service商+modellist。
  *
- * 同一个service商在不同的organization下有不同的 service_provider_config_id。
+ * 同一个service商在different的organization下有different的 service_provider_config_id。
  * 一个service_provider_config_id对应多个具体的model。
  */
 class ProviderConfigDTO extends AbstractDTO

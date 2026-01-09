@@ -74,7 +74,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('Midjourney OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Midjourney OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnull数据响应
         }
 
@@ -96,7 +96,7 @@ class MidjourneyModel extends AbstractImageGenerate
             ]);
         }
 
-        // 4. 记录最终结果
+        // 4. 记录final结果
         $this->logger->info('Midjourney OpenAI格式生图：handlecomplete', [
             'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
@@ -233,7 +233,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 检查 Prompt 是否合法.
+     * check Prompt 是否legal.
      * @throws Exception
      */
     protected function checkPrompt(string $prompt): void
@@ -265,7 +265,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 检查account余额.
+     * checkaccount余额.
      * @return float 余额
      * @throws Exception
      */
@@ -275,12 +275,12 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('检查余额fail: ' . ($result['message'] ?? '未知error'));
+                throw new Exception('check余额fail: ' . ($result['message'] ?? '未知error'));
             }
 
             return (float) $result['data']['balance'];
         } catch (Exception $e) {
-            throw new Exception('检查余额fail: ' . $e->getMessage());
+            throw new Exception('check余额fail: ' . $e->getMessage());
         }
     }
 
@@ -298,7 +298,7 @@ class MidjourneyModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('MJ文生图：无效的请求type', [
+            $this->logger->error('MJ文生图：invalid的请求type', [
                 'class' => get_class($imageGenerateRequest),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
@@ -346,7 +346,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Midjourney原始数据添加水印.
+     * 为Midjourneyoriginal数据添加水印.
      */
     private function processMidjourneyRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -372,14 +372,14 @@ class MidjourneyModel extends AbstractImageGenerate
             $this->logger->error('Midjourneyimage水印handlefail', [
                 'error' => $e->getMessage(),
             ]);
-            // return原始数据
+            // returnoriginal数据
         }
 
         return $rawData;
     }
 
     /**
-     * validateMidjourney API响应数据格式（仅检查images字段）.
+     * validateMidjourney API响应数据格式（仅checkimages字段）.
      */
     private function validateMidjourneyResponse(array $result): void
     {
@@ -424,7 +424,7 @@ class MidjourneyModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefail时use原始URL
+                    // 水印handlefail时useoriginalURL
                 }
 
                 $currentData[] = [

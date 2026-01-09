@@ -93,7 +93,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
             $dataIsolation,
             $currentOwnerUserId,
             $newOwnerUserId,
-            $currentOwnerUserId // 操作者就是当前create者
+            $currentOwnerUserId // 操作者就是currentcreate者
         );
     }
 

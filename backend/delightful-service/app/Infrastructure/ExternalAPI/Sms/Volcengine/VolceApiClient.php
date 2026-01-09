@@ -31,7 +31,7 @@ class VolceApiClient extends AbstractSms
             $smsStruct->setTemplateId($templateId);
         }
         $variables = $this->parseVariables($smsStruct);
-        // VolcengineSms 需要每次短信重新 new
+        // VolcengineSms need每次短信重新 new
         return make(VolcengineSms::class)->request($smsStruct->phone, $variables, $smsStruct->sign, $smsStruct->templateId);
     }
 
@@ -54,7 +54,7 @@ class VolceApiClient extends AbstractSms
         $smsStruct->language = $this->getContentLanguage($smsStruct);
         // 火山短信只支持variable短信,according to完整的 $message 适配对应的 templatevariable
 
-        // $variables 可能为索引array ["商品A","供应商A",10],火山短信需要还原成关联array
+        // $variables 可能为索引array ["商品A","供应商A",10],火山短信need还原成关联array
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
             // 1.gettemplatecontent,确定variable的key
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';

@@ -24,7 +24,7 @@ class ImageGenerateRequest
 
     protected string $defaultNegativePrompt = '--no nsfw, nude, blurry, watermark, identifying mark, low resolution, mutated, lack of hierarchy';
 
-    // 对mj无效
+    // 对mjinvalid
     protected int $generateNum = 1;
 
     protected string $model;
@@ -35,7 +35,7 @@ class ImageGenerateRequest
     // 隐式水印
     protected ?ImplicitWatermark $implicitWatermark = null;
 
-    // 有效期
+    // valid期
     protected ?int $validityPeriod = null;
 
     // userID（用于PGPsignature）

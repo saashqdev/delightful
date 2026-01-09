@@ -48,7 +48,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      */
     protected function processGroupIcons(array $groups): void
     {
-        // 收集所有需要handle的icon路径
+        // 收集所有needhandle的icon路径
         $iconPaths = [];
 
         foreach ($groups as $group) {
@@ -58,7 +58,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 如果没有需要handle的icon，直接return
+        // 如果没有needhandle的icon，直接return
         if (empty($iconPaths)) {
             return;
         }
@@ -83,7 +83,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      */
     protected function processModeAggregateIcons(AdminModeAggregateDTO|ModeAggregate|ModeAggregateDTO $modeAggregateDTO): void
     {
-        // 收集所有需要handle的icon路径
+        // 收集所有needhandle的icon路径
         $iconPaths = [];
 
         // 收集group的icon路径
@@ -110,7 +110,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 如果没有需要handle的icon，直接return
+        // 如果没有needhandle的icon，直接return
         if (empty($iconPaths)) {
             return;
         }
@@ -162,7 +162,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      */
     protected function processModeGroupDetailIcons(DelightfulUserAuthorization $authorization, array $modeGroupDetails): void
     {
-        // 收集所有需要handle的icon路径
+        // 收集所有needhandle的icon路径
         $iconPaths = [];
 
         foreach ($modeGroupDetails as $groupDetail) {
@@ -181,7 +181,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 如果没有需要handle的icon，直接return
+        // 如果没有needhandle的icon，直接return
         if (empty($iconPaths)) {
             return;
         }
@@ -351,7 +351,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 continue;
             }
 
-            // 服务商启用，检查模型status
+            // 服务商启用，check模型status
             if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return $model;
             }

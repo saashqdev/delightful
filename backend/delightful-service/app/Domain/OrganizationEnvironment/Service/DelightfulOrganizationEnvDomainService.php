@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * 当前环境默认的 env configuration。 访问 saas 时允许前端不传环境 id，use默认的环境configuration。
+     * current环境default的 env configuration。 访问 saas 时allow前端不传环境 id，usedefault的环境configuration。
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {

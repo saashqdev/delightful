@@ -129,7 +129,7 @@ readonly class KnowledgeBaseDocumentDomainService
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触发重建（这里可以发送event或者加入queue）
+            // async触发重建（这里can发送event或者加入queue）
             // TODO: 触发重建向量event
         }
     }
@@ -143,7 +143,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * @return array<string, int> array<知识库code, 文档数量>
+     * @return array<string, int> array<知识库code, 文档quantity>
      */
     public function getDocumentCountByKnowledgeBaseCodes(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
@@ -165,13 +165,13 @@ readonly class KnowledgeBaseDocumentDomainService
 
     public function getOrCreateDefaultDocument(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity): KnowledgeBaseDocumentEntity
     {
-        // 尝试get默认文档
+        // 尝试getdefault文档
         $defaultDocumentCode = $knowledgeBaseEntity->getDefaultDocumentCode();
         $documentEntity = $this->knowledgeBaseDocumentRepository->show($dataIsolation, $knowledgeBaseEntity->getCode(), $defaultDocumentCode);
         if ($documentEntity) {
             return $documentEntity;
         }
-        // 如果文档不存在，create新的默认文档
+        // 如果文档不存在，createnewdefault文档
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
             ->setName('未命名文档.txt')
@@ -227,7 +227,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $lastId = null;
         /** @var array<KnowledgeBaseDocumentEntity> $res */
         $res = [];
-        // 最多允许get一万份文档
+        // at mostallowget一万份文档
         while ($loopCount--) {
             $entities = $this->knowledgeBaseDocumentRepository->getByThirdFileId($dataIsolation, $thirdPlatformType, $thirdFileId, $knowledgeBaseCode, $lastId, $pageSize);
             if (empty($entities)) {
@@ -264,7 +264,7 @@ readonly class KnowledgeBaseDocumentDomainService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者不能为空');
         }
 
-        // set默认value
+        // setdefaultvalue
         if (! $documentEntity->issetCreatedAt()) {
             $documentEntity->setCreatedAt(date('Y-m-d H:i:s'));
         }
@@ -284,7 +284,7 @@ readonly class KnowledgeBaseDocumentDomainService
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {
-        // 不允许修改的field保持原value
+        // 不allow修改的field保持原value
         $newDocument->setId($oldDocument->getId());
         $newDocument->setCode($oldDocument->getCode());
         $newDocument->setKnowledgeBaseCode($oldDocument->getKnowledgeBaseCode());

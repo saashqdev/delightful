@@ -11,14 +11,14 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * MCP身份验证接口.
+ * MCP身份verify接口.
  */
 interface AuthenticationInterface
 {
     /**
-     * 验证请求的身份info.
+     * verify请求的身份info.
      *
-     * @throws InvalidParamsException when验证fail时抛出
+     * @throws InvalidParamsException whenverifyfail时抛出
      */
     public function authenticate(MessageInterface $request): void;
 }

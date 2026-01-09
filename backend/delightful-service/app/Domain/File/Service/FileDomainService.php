@@ -54,7 +54,7 @@ readonly class FileDomainService
             return null;
         }
         if (is_url($filePath)) {
-            // 只需要路径
+            // 只need路径
             $filePath = ltrim(parse_url($filePath, PHP_URL_PATH), '/');
         }
         return $this->cloudFileRepository->getLinks($organizationCode, [$filePath], $bucketType, $downloadNames, $options)[$filePath] ?? null;
@@ -106,8 +106,8 @@ readonly class FileDomainService
 
     /**
      * 批量getfile链接（自动从路径提取organization编码并分组处理）.
-     * @param string[] $filePaths 包含organization编码的file路径array，格式：orgCode/path/file.ext
-     * @param null|StorageBucketType $bucketType 存储桶type，默认为Public
+     * @param string[] $filePaths containorganization编码的file路径array，格式：orgCode/path/file.ext
+     * @param null|StorageBucketType $bucketType 存储桶type，default为Public
      * @return array<string,FileLink> file路径到FileLink的映射
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
@@ -159,7 +159,7 @@ readonly class FileDomainService
 
     /**
      * 开启 sts 模式.
-     * get临时凭证给前端use.
+     * gettemporary凭证给前端use.
      * @todo 安全issue，dir 没有校验，没有organization隔离
      */
     public function getStsTemporaryCredential(
@@ -234,7 +234,7 @@ readonly class FileDomainService
     public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         $prefix = $this->getFullPrefix($organizationCode);
-        # 判断最后一个字符是否是 /,如果是，去掉
+        # 判断最next字符是否是 /,如果是，去掉
         if (substr($prefix, -1) === '/') {
             $prefix = substr($prefix, 0, -1);
         }
@@ -274,7 +274,7 @@ readonly class FileDomainService
 
         $files = [];
 
-        // 正确解析objectlist数据结构
+        // correct解析objectlist数据结构
         $objectsList = $objectsResponse['objects'] ?? $objectsResponse;
 
         foreach ($objectsList as $object) {

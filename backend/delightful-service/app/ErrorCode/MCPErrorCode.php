@@ -12,7 +12,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 enum MCPErrorCode: int
 {
     #[ErrorMessage(message: 'mcp.validate_failed')]
-    case ValidateFailed = 51500; // 验证fail
+    case ValidateFailed = 51500; // verifyfail
 
     #[ErrorMessage(message: 'mcp.not_found')]
     case NotFound = 51501; // 数据不存在
@@ -48,7 +48,7 @@ enum MCPErrorCode: int
     case OAuth2TokenRefreshFailed = 51532; // OAuth2令牌刷新fail
 
     #[ErrorMessage(message: 'mcp.oauth2.invalid_response')]
-    case OAuth2InvalidResponse = 51533; // OAuth2提供商响应无效
+    case OAuth2InvalidResponse = 51533; // OAuth2提供商响应invalid
 
     #[ErrorMessage(message: 'mcp.oauth2.provider_error')]
     case OAuth2ProviderError = 51534; // OAuth2提供商returnerror
@@ -56,7 +56,7 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.oauth2.missing_access_token')]
     case OAuth2MissingAccessToken = 51535; // OAuth2响应中缺少访问令牌
 
-    // OAuth2绑定验证相关error码
+    // OAuth2绑定verify相关error码
     #[ErrorMessage(message: 'mcp.oauth2.binding.code_empty')]
     case OAuth2BindingCodeEmpty = 51540; // OAuth2绑定authorization码为空
 
@@ -66,7 +66,7 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.oauth2.binding.mcp_server_code_empty')]
     case OAuth2BindingMcpServerCodeEmpty = 51542; // OAuth2绑定MCPservice代码为空
 
-    // 必填field验证相关error码
+    // 必填fieldverify相关error码
     #[ErrorMessage(message: 'mcp.required_fields.missing')]
     case RequiredFieldsMissing = 51550; // 必填field缺失
 

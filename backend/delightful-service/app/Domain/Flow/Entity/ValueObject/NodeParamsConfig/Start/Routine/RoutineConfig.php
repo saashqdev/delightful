@@ -64,7 +64,7 @@ class RoutineConfig
             return $this->crontabRule;
         }
         if ($this->type === RoutineType::NoRepeat) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '当前type无需生成定时规则');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'currenttype无需生成定时规则');
         }
         $minute = $hour = $dayOfMonth = $month = $dayOfWeek = '*';
         if (! empty($this->time)) {
@@ -143,7 +143,7 @@ class RoutineConfig
                 $this->interval = 1;
             }
             if ($this->interval < 1 || $this->interval > 30) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在1~30之间');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在1~30between');
             }
             // 只有是周或者月的时候，才能有 values
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month])) {
@@ -156,7 +156,7 @@ class RoutineConfig
                             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能是整数');
                         }
                         if ($value < 0 || $value > 6) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在0~6之间');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在0~6between');
                         }
                     }
                 }
@@ -166,7 +166,7 @@ class RoutineConfig
                             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能是整数');
                         }
                         if ($value < 1 || $value > 31) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在1~31之间');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在1~31between');
                         }
                     }
                 }
@@ -188,7 +188,7 @@ class RoutineConfig
         // 每周的时候，day table示周几 0-6  0是周一
         if ($this->type === RoutineType::WeeklyRepeat) {
             if (! is_numeric($this->day) || $this->day < 0 || $this->day > 6) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 只能在0~6之间');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 只能在0~6between');
             }
             $this->day = (string) ((int) $this->day);
         }
@@ -196,7 +196,7 @@ class RoutineConfig
         // 每月的时候，day table示第几天
         if ($this->type === RoutineType::MonthlyRepeat) {
             if (! is_numeric($this->day) || $this->day < 1 || $this->day > 31) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 只能在1~31之间');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 只能在1~31between');
             }
             $this->day = (string) ((int) $this->day);
         }
@@ -210,7 +210,7 @@ class RoutineConfig
 
         $dayTimestamp = strtotime($this->day ?? '');
         if ($dayTimestamp) {
-            // time只能是未来的，有bug， 当天也会认为是未来的
+            // time只能是未来的，有bug， 当天也will认为是未来的
             // if (! is_null($this->day) && $dayTimestamp < time()) {
             //
             //     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 不能是过去的');

@@ -74,7 +74,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
      */
     public function setInstructs(?array $instructs): void
     {
-        // 确保 instructs array中的每个元素都是 ChatInstruction object
+        // ensure instructs array中的每个元素都是 ChatInstruction object
         if ($instructs !== null) {
             foreach ($instructs as $key => $instruct) {
                 /* @phpstan-ignore-next-line */

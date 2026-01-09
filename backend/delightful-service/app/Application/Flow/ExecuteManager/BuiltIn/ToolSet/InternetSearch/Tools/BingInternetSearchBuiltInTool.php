@@ -91,8 +91,8 @@ class BingInternetSearchBuiltInTool extends AbstractBuiltInTool
         "result_count": {
             "type": "integer",
             "key": "result_count",
-            "title": "return结果数量",
-            "description": "return结果数量",
+            "title": "return结果quantity",
+            "description": "return结果quantity",
             "required": null,
             "value": null,
             "encryption": false,

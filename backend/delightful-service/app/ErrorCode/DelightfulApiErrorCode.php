@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * delightful api error码范围:4000, 4999.
+ * delightful api error码range:4000, 4999.
  */
 enum DelightfulApiErrorCode: int
 {
@@ -67,11 +67,11 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.create_error')]
     case TOKEN_CREATE_ERROR = 4013;
 
-    // usercreate的token数量超过限制
+    // usercreate的tokenquantity超过限制
     #[ErrorMessage(message: 'api.user.create_access_token_limit')]
     case USER_CREATE_ACCESS_TOKEN_LIMIT = 4014;
 
-    // useruse的token数量超过限制
+    // useruse的tokenquantity超过限制
     #[ErrorMessage(message: 'api.user.use_access_token_limit')]
     case USER_USE_ACCESS_TOKEN_LIMIT = 4015;
 
@@ -83,7 +83,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.model.response_fail')]
     case MODEL_RESPONSE_FAIL = 4017;
 
-    // 通用验证failed
+    // 通用verifyfailed
     #[ErrorMessage(message: 'api.validate_failed')]
     case ValidateFailed = 4018;
 

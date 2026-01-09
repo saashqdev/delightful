@@ -27,10 +27,10 @@ class LLMResponseParseUtil
     {
         $content = trim($content);
         $typePattern = sprintf('/```%s\s*([\s\S]*?)\s*```/i', $type);
-        // 匹配 ```json 或 ``` 之间的 JSON 数据
+        // 匹配 ```json 或 ``` between的 JSON 数据
         if (preg_match($typePattern, $content, $matches)) {
             $matchString = $matches[1];
-        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // 匹配 ``` 之间的内容
+        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // 匹配 ``` between的内容
             $matchString = $matches[1];
         } else {
             $matchString = ''; // 没有找到 JSON 数据
@@ -40,7 +40,7 @@ class LLMResponseParseUtil
             if (json_validate($matchString)) {
                 return $matchString;
             }
-            return null; // JSON 格式不正确
+            return null; // JSON 格式不correct
         }
         return $matchString;
     }

@@ -21,8 +21,8 @@ class CreateTaskScheduler extends Migration
             $table->bigIncrements('id');
             $table->string('external_id', 64)->comment('业务 id')->index();
             $table->string('name', 64)->comment('名称');
-            $table->dateTimeTz('expect_time')->comment('预期执行时间');
-            $table->dateTimeTz('actual_time')->nullable()->comment('实际执行时间');
+            $table->dateTimeTz('expect_time')->comment('expected执行时间');
+            $table->dateTimeTz('actual_time')->nullable()->comment('actual执行时间');
             $table->tinyInteger('type')->default(2)->comment('type');
             $table->integer('cost_time')->default(0)->comment('耗时 毫秒');
             $table->integer('retry_times')->default(0)->comment('剩余重试次数');

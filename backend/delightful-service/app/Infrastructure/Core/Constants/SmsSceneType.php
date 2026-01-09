@@ -55,7 +55,7 @@ class SmsSceneType
     public const ACCOUNT_LOGIN_BIND_THIRD_PLATFORM = 'account_login_bind_third_platform';
 
     /**
-     * 身份验证
+     * 身份verify
      */
     public const IDENTIFY_VERIFY = 'identity_verify';
 }

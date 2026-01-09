@@ -12,7 +12,7 @@ enum AddFriendType: int
     // 添加好友申请
     case APPLY = 1;
 
-    // 添加好友通过
+    // 添加好友pass
     case PASS = 2;
 
     // 添加好友拒绝

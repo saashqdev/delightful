@@ -49,7 +49,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $translated = $enum->label();
-        // 如果语言包缺失，return的仍然是原始 key，此时抛出exceptionreminder
+        // 如果语言包缺失，return的仍然是original key，此时抛出exceptionreminder
         if ($translated === $enum->translationKey()) {
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'Missing i18n for key: ' . $enum->translationKey());
         }
@@ -93,7 +93,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 检查是否为资源type.
+     * check是否为资源type.
      */
     public function isResource(string $value): bool
     {
@@ -101,7 +101,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 检查是否为操作type.
+     * check是否为操作type.
      */
     public function isOperation(string $value): bool
     {
@@ -143,7 +143,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         } else {
             $parent = $enum->parent();
             if ($parent->parent() === null) {
-                // 当前资源已经是二级层级，直接作为模块
+                // current资源已经是二级层级，直接作为模块
                 $moduleEnum = $enum;
             } else {
                 // 更深层级，模块取父级（二级）
@@ -215,7 +215,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             // 将资源路径按 '.' split
             $segments = explode('.', $permission['resource']);
             if (count($segments) < 2) {
-                // 至少应contain平台 + 资源两级，若不足则跳过
+                // at least应contain平台 + 资源两级，若不足则跳过
                 continue;
             }
 
@@ -248,7 +248,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                     default => ucfirst($segment),                        // 其他中间层
                 };
 
-                // 确保 children array存在并检查 segment
+                // ensure children array存在并check segment
                 if (! isset($current['children'])) {
                     $current['children'] = [];
                 }
@@ -278,7 +278,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 检查permission键是否有效.
+     * checkpermission键是否valid.
      */
     public function isValidPermission(string $permissionKey): bool
     {
@@ -290,10 +290,10 @@ class DelightfulPermission implements DelightfulPermissionInterface
         try {
             $parsed = $this->parsePermission($permissionKey);
 
-            // 检查资源是否存在
+            // check资源是否存在
             $resourceExists = in_array($parsed['resource'], $this->getResources());
 
-            // 检查操作是否存在（按资源）
+            // check操作是否存在（按资源）
             $operationExists = in_array($parsed['operation'], $this->getOperationsByResource($parsed['resource']), true);
 
             return $resourceExists && $operationExists;
@@ -308,7 +308,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      * 规则：
      *   1. 如直接命中permission键，return true；
      *   2. 如果拥有全局permission ALL_PERMISSIONS，return true；
-     *   3. 若未命中，则检查由该permission隐式contain的permission集合（for example *edit* 隐式contain *query*）。
+     *   3. 若未命中，则check由该permission隐式contain的permission集合（for example *edit* 隐式contain *query*）。
      *
      * @param string $permissionKey 目标permission键
      * @param string[] $userPermissions user已拥有的permission键集合
@@ -316,7 +316,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
     {
-        // 平台organization校验：非平台organization不允许访问 platform 平台资源
+        // 平台organization校验：非平台organization不allow访问 platform 平台资源
         $parsed = $this->parsePermission($permissionKey);
         $platformKey = explode('.', $parsed['resource'])[0];
         if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
@@ -334,7 +334,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $parsed = $this->parsePermission($permissionKey);
-        // 默认隐式：edit -> query（若两操作均存在）
+        // default隐式：edit -> query（若两操作均存在）
         $ops = $this->getOperationsByResource($parsed['resource']);
         if (in_array(DelightfulOperationEnum::EDIT->value, $ops, true) && in_array(DelightfulOperationEnum::QUERY->value, $ops, true)) {
             if ($parsed['operation'] === DelightfulOperationEnum::QUERY->value) {
@@ -360,7 +360,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         if (! enum_exists($opEnumClass)) {
             throw new InvalidArgumentException('Operation enum not found for resource: ' . $resource);
         }
-        // 仅支持 BackedEnum，因为后续需要读取 ->value
+        // 仅支持 BackedEnum，因为后续needread ->value
         if (! is_subclass_of($opEnumClass, BackedEnum::class)) {
             throw new InvalidArgumentException('Operation enum for resource must be BackedEnum: ' . $opEnumClass);
         }
@@ -372,7 +372,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * return资源绑定的 Operation Enum 类名，默认读取 `DelightfulResourceEnum::operationEnumClass()`。
+     * return资源绑定的 Operation Enum 类名，defaultread `DelightfulResourceEnum::operationEnumClass()`。
      * 企业版可override本method，将企业资源映射到customize的 Operation Enum。
      */
     protected function resolveOperationEnumClass(DelightfulResourceEnum $resourceEnum): string
@@ -382,7 +382,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * 对于非 DelightfulResourceEnum 定义的资源，子类可override该method以parse到相应的 Operation Enum。
-     * 开源默认抛错。
+     * 开源default抛错。
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string
     {

@@ -39,7 +39,7 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * 发送验证码,火山的验证码短信不支持传入指定的数字.
+     * 发送verify码,火山的verify码短信不支持传入指定的数字.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
@@ -60,7 +60,7 @@ class VolcengineSms extends VolcengineApi
             $groupId = $this->template->getMessageGroupId($templateId);
             // initialize,set公共的请求parameter
             $this->init($groupId, $signStr, $templateId);
-            // set验证码短信的特有body结构
+            // setverify码短信的特有body结构
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),
@@ -69,7 +69,7 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // 如果是单元test,不发短信,只验证variable解析/短信content&&短信signature多语种适配/国际区号正确解析
+            // 如果是单元test,不发短信,只verifyvariable解析/短信content&&短信signature多语种适配/国际区号correct解析
             if (defined('IN_UNIT_TEST')) {
                 // 单元test,不真的发短信
                 return $sendResult->setResult($errCode, $msg);

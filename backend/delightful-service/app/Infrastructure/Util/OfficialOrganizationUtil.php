@@ -30,7 +30,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * get包含官方organization在内的organization编码array.
+     * getcontain官方organization在内的organization编码array.
      * @param string $currentOrganizationCode when前organization编码
      * @return array 去重后的organization编码array
      */
@@ -41,7 +41,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * 检查官方organization编码是否已configuration.
+     * check官方organization编码是否已configuration.
      */
     public static function hasOfficialOrganization(): bool
     {

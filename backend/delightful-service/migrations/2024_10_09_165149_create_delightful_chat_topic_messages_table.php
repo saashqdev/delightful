@@ -18,10 +18,10 @@ return new class extends Migration {
             return;
         }
         // 话题的相关messagetable
-        // 话题包含的 message_id list. 不在seqtable加话题idfield,避免seq承载的功能太多,需要加太多索引
+        // 话题contain的 message_id list. 不在seqtable加话题idfield,避免seq承载的功能太多,need加太多索引
         Schema::create('delightful_chat_topic_messages', static function (Blueprint $table) {
             // messageid
-            $table->bigIncrements('seq_id')->comment('message的序列id.不在seqtable加话题idfield,避免seq承载的功能太多,需要加太多索引');
+            $table->bigIncrements('seq_id')->comment('message的序列id.不在seqtable加话题idfield,避免seq承载的功能太多,need加太多索引');
             // sessionid. 冗余field
             $table->string('conversation_id', 64)->comment('message所属sessionid');
             // organization编码. 冗余field

@@ -79,7 +79,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
         }
 
         $draft = $this->delightfulFlowDraftRepository->save($dataIsolation, $delightfulFlowDraftEntity);
-        // 仅保留最新的记录
+        // 仅保留最new记录
         $this->delightfulFlowDraftRepository->clearEarlyRecords($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode());
         return $draft;
     }

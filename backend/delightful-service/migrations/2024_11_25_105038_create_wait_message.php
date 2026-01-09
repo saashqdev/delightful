@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('organization编码');
             $table->string('conversation_id', 120)->comment('conversationID');
-            $table->string('origin_conversation_id', 80)->comment('原始conversationID');
+            $table->string('origin_conversation_id', 80)->comment('originalconversationID');
             $table->string('message_id', 80)->comment('messageID');
             $table->string('wait_node_id', 80)->comment('等待节点ID');
             $table->string('flow_code', 80)->comment('process编码');

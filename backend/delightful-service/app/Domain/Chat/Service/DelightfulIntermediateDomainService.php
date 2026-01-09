@@ -21,11 +21,11 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Throwable;
 
 /**
- * 临时message相关.
+ * temporarymessage相关.
  */
 class DelightfulIntermediateDomainService extends AbstractDomainService
 {
-    // 超级麦吉的交互指令临时message处理
+    // 超级麦吉的交互指令temporarymessage处理
     /**
      * @throws Throwable
      */
@@ -35,7 +35,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
         DelightfulConversationEntity $userConversationEntity,
     ): void {
         try {
-            // 1. get发送者（当前user）info
+            // 1. get发送者（currentuser）info
             $senderUserId = $dataIsolation->getCurrentUserId();
             if (empty($senderUserId)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
@@ -74,7 +74,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             $agentConversationId = $agentConversationEntity->getId();
 
-            // 4. create序列实体 (临时message不需要持久化序列)
+            // 4. create序列实体 (temporarymessage不need持久化序列)
             $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setAppMessageId($messageDTO->getAppMessageId());
             $seqEntity->setConversationId($agentConversationId);
@@ -86,7 +86,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             // 从 messageDTO 中get topicId
             $topicId = $messageDTO->getTopicId() ?? '';
 
-            // 如果 topicId 不为空，验证话题是否属于当前user
+            // 如果 topicId 不为空，verify话题是否属于currentuser
             if (empty($topicId)) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
             }
@@ -110,7 +110,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             // 6. create发送者额外info
             $senderExtraDTO = new SenderExtraDTO();
-            // 临时message可能不需要环境ID，use默认value
+            // temporarymessage可能不need环境ID，usedefaultvalue
             $senderExtraDTO->setDelightfulEnvId(null);
 
             // 7. 触发usercall超级麦吉event
@@ -135,7 +135,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
     }
 
     /**
-     * 验证话题是否属于当前user.
+     * verify话题是否属于currentuser.
      */
     private function validateTopicOwnership(string $topicId, string $conversationId, DataIsolation $dataIsolation): void
     {
@@ -150,7 +150,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // 验证话题所属的session是否属于当前user
+        // verify话题所属的session是否属于currentuser
         $this->checkAndGetSelfConversation($topicEntity->getConversationId(), $dataIsolation);
     }
 }

@@ -77,7 +77,7 @@ class MessageUtil
                 $message = new FilesMessage([]);
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 if (is_string($linkDesc) && $linkDesc !== '') {
-                    // 如果具有description，那么应该是rich text形式
+                    // 如果具有description，那么should是rich text形式
                     $message = new TextMessage([]);
                     $message->setContent($linkDesc);
                 }
@@ -96,7 +96,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // getfilename。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么可以直接use linkDesc 作为filename
+                    // getfilename。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么can直接use linkDesc 作为filename
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
@@ -126,7 +126,7 @@ class MessageUtil
                     return null;
                 }
                 $contentString = $content->getKeyValue($executionData->getExpressionFieldData());
-                // todo 实际上没implement，以下是伪代码
+                // todo actual上没implement，以下是伪代码
                 return new AggregateAISearchCardMessageV2([
                     'search' => $contentString['search'] ?? [],
                     'llm_response' => $contentString['llm_response'] ?? '',
@@ -142,7 +142,7 @@ class MessageUtil
      */
     private static function report2ChatFile(AbstractAttachment $attachment, ExecutionData $executionData): DelightfulChatFileEntity
     {
-        // 这里应该是相当于 agent upload了file
+        // 这里should是相当于 agent upload了file
         $dataIsolation = ContactDataIsolation::create(
             $executionData->getDataIsolation()->getCurrentOrganizationCode(),
             $executionData->getAgentUserId() ?: $executionData->getDataIsolation()->getCurrentUserId()

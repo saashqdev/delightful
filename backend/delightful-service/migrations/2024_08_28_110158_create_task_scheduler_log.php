@@ -22,8 +22,8 @@ class CreateTaskSchedulerLog extends Migration
             $table->bigInteger('task_id')->unsigned()->comment('taskID')->index();
             $table->string('external_id', 64)->comment('业务标识')->index();
             $table->string('name', 64)->comment('名称');
-            $table->dateTime('expect_time')->comment('预期执行时间');
-            $table->dateTime('actual_time')->nullable()->comment('实际执行时间');
+            $table->dateTime('expect_time')->comment('expected执行时间');
+            $table->dateTime('actual_time')->nullable()->comment('actual执行时间');
             $table->tinyInteger('type')->default(2)->comment('type');
             $table->integer('cost_time')->default(0)->comment('耗时');
             $table->tinyInteger('status')->default(0)->comment('status');

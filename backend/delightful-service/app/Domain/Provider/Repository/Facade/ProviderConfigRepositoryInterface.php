@@ -32,7 +32,7 @@ interface ProviderConfigRepositoryInterface
     public function delete(ProviderDataIsolation $dataIsolation, string $id): void;
 
     /**
-     * 通过configurationID和organization编码getservice商configuration实体.
+     * passconfigurationID和organization编码getservice商configuration实体.
      *
      * @param string $serviceProviderConfigId service商configurationID
      * @param string $organizationCode organization编码
@@ -41,7 +41,7 @@ interface ProviderConfigRepositoryInterface
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity;
 
     /**
-     * according toservice商ID查找configuration（按ID升序取第一个）.
+     * according toservice商ID查找configuration（按ID升序取first）.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param int $serviceProviderId service商ID

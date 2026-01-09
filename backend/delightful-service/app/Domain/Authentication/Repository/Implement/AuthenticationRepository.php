@@ -29,7 +29,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * 通过邮箱查找账号.
+     * pass邮箱查找账号.
      */
     public function findAccountByEmail(string $email): ?AccountEntity
     {
@@ -45,7 +45,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * 通过手机号查找账号.
+     * pass手机号查找账号.
      */
     public function findAccountByPhone(string $stateCode, string $phone): ?AccountEntity
     {
@@ -64,7 +64,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * 通过DelightfulID和organization编码查找user.
+     * passDelightfulID和organization编码查找user.
      */
     public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {

@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Db;
 
 class ProviderModelConfigVersionRepository extends AbstractProviderModelRepository implements ProviderModelConfigVersionRepositoryInterface
 {
-    // configuration版本table不需要organization隔离（通过 service_provider_model_id 关联已经隔离）
+    // configuration版本table不needorganization隔离（pass service_provider_model_id 关联已经隔离）
     protected bool $filterOrganizationCode = false;
 
     /**
@@ -35,7 +35,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
 
-            // 2. 将该model的所有旧版本mark为非当前版本
+            // 2. 将该model的所有旧版本mark为非current版本
             $updateBuilder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $updateBuilder
                 ->where('service_provider_model_id', $serviceProviderModelId)

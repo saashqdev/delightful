@@ -44,12 +44,12 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // Google Gemini 不需要AK
+        // Google Gemini 不needAK
     }
 
     public function setSK(string $sk)
     {
-        // Google Gemini 不需要SK
+        // Google Gemini 不needSK
     }
 
     public function setApiKey(string $apiKey)
@@ -77,7 +77,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('GoogleGemini OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('GoogleGemini OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnull数据响应
         }
 
@@ -96,7 +96,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                     // success：settingimage数据到响应object
                     $this->addImageDataToResponseGemini($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfo到响应object（只setting第一个error）
+                    // fail：settingerrorinfo到响应object（只settingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -112,7 +112,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         $parallel->wait();
 
-        // 4. 记录最终结果
+        // 4. 记录final结果
         $this->logger->info('GoogleGemini OpenAI格式生图：并发handlecomplete', [
             '总请求数' => $count,
             'successimage数' => count($response->getData()),
@@ -158,7 +158,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     protected function checkBalance(): float
     {
-        // Google Gemini API 目前没有余额query接口，return默认value
+        // Google Gemini API 目前没有余额query接口，returndefaultvalue
         return 999.0;
     }
 
@@ -248,11 +248,11 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('Google Gemini文生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Google Gemini文生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini API每次只能generate一张图，通过并发callimplement多图generate
+        // Google Gemini API每次只能generate一张图，pass并发callimplement多图generate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -381,7 +381,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         array $geminiResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedis锁确保并发安全
+        // useRedis锁ensure并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // use现有method提取图像数据
@@ -390,7 +390,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // 水印handle（会将base64convert为URL）
+            // 水印handle（will将base64convert为URL）
             $processedUrl = $imageBase64;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($imageBase64, $imageGenerateRequest);
@@ -398,7 +398,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $this->logger->error('GoogleGemini添加image数据：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印handlefail时use原始base64数据（但这通常不应该发生）
+                // 水印handlefail时useoriginalbase64数据（但这通常不should发生）
             }
 
             // 只returnURL格式，与其他模型保持一致
@@ -414,7 +414,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $usageMetadata['candidatesTokenCount'] ?? 0;
                 $currentUsage->totalTokens += $usageMetadata['totalTokenCount'] ?? 0;
             } else {
-                // 如果没有usageinfo，默认增加1张image
+                // 如果没有usageinfo，default增加1张image
                 $currentUsage->addGeneratedImages(1);
             }
 
@@ -422,7 +422,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // 确保锁一定会被释放
+            // ensure锁一定will被释放
             $this->unlockResponse($response, $lockOwner);
         }
     }

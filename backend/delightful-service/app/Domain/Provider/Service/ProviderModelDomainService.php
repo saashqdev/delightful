@@ -48,7 +48,7 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 通过ID或ModelIDquerymodel
+     * passID或ModelIDquerymodel
      * based on可用modellist进行匹配，同时匹配id和model_idfield.
      */
     public function getByIdOrModelId(ProviderDataIsolation $dataIsolation, string $id): ?ProviderModelEntity
@@ -56,7 +56,7 @@ readonly class ProviderModelDomainService
         // get所有category的可用model
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // 循环判断 id 等于 $id 或者 model_id 等于 $id
+        // 循环判断 id equal $id 或者 model_id equal $id
         foreach ($allModels as $model) {
             if ((string) $model->getId() === $id || $model->getModelId() === $id) {
                 return $model;
@@ -93,13 +93,13 @@ readonly class ProviderModelDomainService
         }
 
         if ($providerModelDTO->getId()) {
-            // updatemodel：验证model是否存在（getById会在不存在时抛出exception）
+            // updatemodel：verifymodel是否存在（getByIdwill在不存在时抛出exception）
             $this->providerModelRepository->getById($dataIsolation, $providerModelDTO->getId());
         } else {
-            // createmodel时默认启用
+            // createmodel时default启用
             $providerModelDTO->setStatus(Status::Enabled);
         }
-        // 验证 service_provider_config_id 是否存在
+        // verify service_provider_config_id 是否存在
         if ($providerModelDTO->getServiceProviderConfigId()) {
             $providerConfigEntity = $this->providerConfigRepository->getById($dataIsolation, (int) $providerModelDTO->getServiceProviderConfigId());
             if ($providerConfigEntity === null) {
@@ -215,7 +215,7 @@ readonly class ProviderModelDomainService
             return;
         }
 
-        // 转换为configuration版本实体并save（事务、版本号递增、mark当前版本都在 Repository 内complete）
+        // 转换为configuration版本实体并save（事务、版本号递增、markcurrent版本都在 Repository 内complete）
         $versionEntity = ProviderModelAssembler::toConfigVersionEntity($modelEntity);
         $this->providerModelConfigVersionRepository->saveVersionWithTransaction($dataIsolation, $versionEntity);
     }

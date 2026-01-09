@@ -11,14 +11,14 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
  * 多模态content格式化工具
- * 用于统一处理不同场景下的多模态content格式化.
+ * 用于统一处理different场景下的多模态content格式化.
  */
 class MultiModalContentFormatter
 {
     /**
      * 将所有attachment格式化到文本中.
      *
-     * @param string $originalContent 原始文本content
+     * @param string $originalContent original文本content
      * @param string $visionResponse 视觉分析result
      * @param AttachmentInterface[] $attachments 所有attachmentarray
      * @return string 格式化后的文本content
@@ -55,7 +55,7 @@ class MultiModalContentFormatter
      * 格式化imagecontent到文本
      * 支持单张image和多张image场景.
      *
-     * @param string $originalContent 原始文本content
+     * @param string $originalContent original文本content
      * @param string $visionResponse 视觉分析result
      * @param AttachmentInterface[] $imageAttachments imageattachmentarray
      * @return string 添加了imageinfo的文本content
@@ -65,7 +65,7 @@ class MultiModalContentFormatter
         string $visionResponse,
         array $imageAttachments
     ): string {
-        // 如果没有imageattachment，直接return原始content
+        // 如果没有imageattachment，直接returnoriginalcontent
         if (empty($imageAttachments)) {
             return $originalContent;
         }
@@ -90,7 +90,7 @@ class MultiModalContentFormatter
     /**
      * 格式化非imageattachment到文本.
      *
-     * @param string $originalContent 原始文本content
+     * @param string $originalContent original文本content
      * @param AttachmentInterface[] $nonImageAttachments 非imageattachmentarray
      * @return string 添加了非imageattachmentinfo的文本content
      */
@@ -98,7 +98,7 @@ class MultiModalContentFormatter
         string $originalContent,
         array $nonImageAttachments
     ): string {
-        // 如果没有attachment，直接return原始content
+        // 如果没有attachment，直接returnoriginalcontent
         if (empty($nonImageAttachments)) {
             return $originalContent;
         }

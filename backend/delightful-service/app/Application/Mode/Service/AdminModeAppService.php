@@ -23,12 +23,12 @@ use Hyperf\DbConnection\Db;
 class AdminModeAppService extends AbstractModeAppService
 {
     /**
-     * get模式list (管理后台用，包含完整i18nfield).
+     * get模式list (管理后台用，contain完整i18nfield).
      */
     public function getModes(DelightfulUserAuthorization $authorization, Page $page): array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
-        // 管理后台query：sort降序，不filter默认模式
+        // 管理后台query：sort降序，不filterdefault模式
         $query = new ModeQuery('desc', false);
         $result = $this->modeDomainService->getModes($dataIsolation, $query, $page);
 
@@ -39,7 +39,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * according toIDget模式聚合根（包含模式详情、分组、model关系）.
+     * according toIDget模式聚合根（contain模式详情、分组、model关系）.
      */
     public function getModeById(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {
@@ -118,7 +118,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将update请求应用到现有实体（只update允许修改的field）
+            // 将update请求应用到现有实体（只updateallow修改的field）
             AdminModeAssembler::applyUpdateRequestToEntity($request, $existingMode);
 
             $updatedMode = $this->modeDomainService->updateMode($dataIsolation, $existingMode);
@@ -151,7 +151,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * get默认模式.
+     * getdefault模式.
      */
     public function getDefaultMode(DelightfulUserAuthorization $authorization): ?AdminModeAggregateDTO
     {

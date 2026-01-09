@@ -149,7 +149,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * 接受不同的短信type发送
+     * 接受different的短信type发送
      */
     protected function init(string $messageGroupId, string $sign, string $templateId): void
     {
@@ -195,7 +195,7 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,这里不能加上 JSON_UNESCAPED_UNICODE,加了会导致body有中文时signature不正确!
+        // !!! 注意,这里不能加上 JSON_UNESCAPED_UNICODE,加了will导致body有中文时signature不correct!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
@@ -208,7 +208,7 @@ abstract class VolcengineApi
 
     protected function setHeaders(): void
     {
-        // 研究发现,文档要求在请求头中传AccessKey/SecretKey/ServiceName/Region,其实可以不传. Authorization头中有传AccessKey
+        // 研究发现,文档要求在请求头中传AccessKey/SecretKey/ServiceName/Region,其实can不传. Authorization头中有传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],
@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // region只支持中国和新加坡,默认中国
+        // region只支持中国和新加坡,default中国
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

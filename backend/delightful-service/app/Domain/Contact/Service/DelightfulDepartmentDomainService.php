@@ -109,7 +109,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         foreach ($departments as $department) {
             $hasChild = isset($childDepartments[$department->getDepartmentId()]);
             $department->setHasChild($hasChild);
-            // 移除不需要的field
+            // 移除不need的field
             $departmentsHasChild[] = $department;
         }
         return $departmentsHasChild;
@@ -163,7 +163,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根department被抽象为 -1，所以这里需要转换为实际的根department id.
+     * 根department被抽象为 -1，所以这里need转换为actual的根department id.
      */
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {

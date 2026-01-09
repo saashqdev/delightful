@@ -37,10 +37,10 @@ readonly class LoginAppService
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {
-        // 验证accountinfo并getaccount
+        // verifyaccountinfo并getaccount
         $account = $this->verifyAndGetAccount($request);
 
-        // 验证user在organization内是否存在
+        // verifyuser在organization内是否存在
         $user = $this->verifyAndGetUserInOrganization($account, $request->getOrganizationCode());
 
         // 生成令牌
@@ -51,7 +51,7 @@ readonly class LoginAppService
     }
 
     /**
-     * according to登录type验证accountinfo并returnaccount实体.
+     * according to登录typeverifyaccountinfo并returnaccount实体.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -62,7 +62,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 验证手机号登录.
+     * verify手机号登录.
      */
     private function verifyPhoneAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -75,7 +75,7 @@ readonly class LoginAppService
             ExceptionBuilder::throw(AuthenticationErrorCode::AccountNotFound);
         }
 
-        // 验证密码
+        // verify密码
         if (! $this->passwordService->verifyPassword($request->getPassword(), $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
         }
@@ -83,7 +83,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 验证邮箱登录.
+     * verify邮箱登录.
      */
     private function verifyEmailAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -93,7 +93,7 @@ readonly class LoginAppService
             ExceptionBuilder::throw(AuthenticationErrorCode::AccountNotFound);
         }
 
-        // 验证密码
+        // verify密码
         // useSHA256校验密码
         if (! $this->passwordService->verifyPassword($request->getPassword(), $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
@@ -102,7 +102,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 验证user在organization内是否存在.
+     * verifyuser在organization内是否存在.
      */
     private function verifyAndGetUserInOrganization(AccountEntity $account, string $organizationCode): DelightfulUserEntity
     {
@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 格式化国家代码，确保以+开头.
+     * 格式化国家代码，ensure以+开头.
      */
     private function formatStateCode(string $stateCode): string
     {

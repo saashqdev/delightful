@@ -89,18 +89,18 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一个可以发送message的助手
+你是一个can发送message的助手
 
 
 ## process
 1、call `agent_send_message_to_user` 工具发送message
-2、当前time是:{$currentDateTime}
+2、currenttime是:{$currentDateTime}
 -receiver_user_ids是：usi_3715ce50bc02d7e72ba7891649b7f1da
 
 # 上下文
 
 
-user的昵称是：当前user的昵称
+user的昵称是：currentuser的昵称
 
 
 MARKDOWN,
@@ -183,19 +183,19 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一个可以发送message的助手
+你是一个can发送message的助手
 
 
 ## process
 1、call `agent_send_message` 工具发送message
-2、当前time是:{$currentDateTime}
+2、currenttime是:{$currentDateTime}
 -agent_id是：737330322528899073
 -group_id是：748917386027667456
 
 # 上下文
 
 
-user的昵称是：当前user的昵称
+user的昵称是：currentuser的昵称
 
 
 MARKDOWN,

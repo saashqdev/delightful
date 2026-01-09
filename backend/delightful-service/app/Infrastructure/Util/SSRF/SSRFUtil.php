@@ -13,7 +13,7 @@ use Throwable;
  * SSRF防御工具类.
  *
  * use示例：
- * // 简单use，默认configuration
+ * // 简单use，defaultconfiguration
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com');
  *
  * // customizeparameter
@@ -32,12 +32,12 @@ class SSRFUtil
     /**
      * getSSRF防御安全链接.
      *
-     * @param string $url 需要check的URL
+     * @param string $url needcheck的URL
      * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
-     * @param array $allowProtocols 允许的协议
+     * @param array $allowProtocols allow的协议
      * @param bool $replaceIp 是否替换为IP访问
-     * @param bool $allowRedirect 是否允许重定向
+     * @param bool $allowRedirect 是否allow重定向
      * @return string 安全的URL
      * @throws Exception\SSRFException 当URL不安全时抛出exception
      */
@@ -64,12 +64,12 @@ class SSRFUtil
     /**
      * checkURL是否安全（不抛exception，return布尔value）.
      *
-     * @param string $url 需要check的URL
+     * @param string $url needcheck的URL
      * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
-     * @param array $allowProtocols 允许的协议
+     * @param array $allowProtocols allow的协议
      * @param bool $replaceIp 是否替换为IP访问
-     * @param bool $allowRedirect 是否允许重定向
+     * @param bool $allowRedirect 是否allow重定向
      * @return bool 是否安全
      */
     public static function isSafeUrl(

@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface RateLimiterInterface
 {
     /**
-     * 检查客户端是否允许执行请求.
+     * check客户端是否allow执行请求.
      *
      * @throws InvalidParamsException when请求超过速率限制时
      */
@@ -25,7 +25,7 @@ interface RateLimiterInterface
     /**
      * getwhen前的限制configuration.
      *
-     * @return array<string, bool|int> 包含限制configuration的array
+     * @return array<string, bool|int> contain限制configuration的array
      */
     public function getLimits(): array;
 }

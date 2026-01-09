@@ -49,7 +49,7 @@ class SeqExtra extends AbstractEntity
         return $this;
     }
 
-    // seqExtra 有些字段是不允许复制的
+    // seqExtra 有些字段是不allow复制的
     public function getExtraCanCopyData(): array
     {
         return [

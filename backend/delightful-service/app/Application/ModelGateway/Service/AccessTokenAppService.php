@@ -52,7 +52,7 @@ class AccessTokenAppService extends AbstractLLMAppService
             $savingAccessTokenEntity->setRelationId($dataIsolation->getCurrentUserId());
         }
         if ($savingAccessTokenEntity->getType()->isApplication()) {
-            // 验证application id 正确性
+            // verifyapplication id correct性
             $this->applicationDomainService->show($dataIsolation, (int) $savingAccessTokenEntity->getRelationId());
         }
         if (! $savingAccessTokenEntity->shouldCreate()) {

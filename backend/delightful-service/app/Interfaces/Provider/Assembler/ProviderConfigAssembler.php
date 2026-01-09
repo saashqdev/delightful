@@ -47,7 +47,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将service商configurationarray转换为 DTO list，包含完整的 provider info.
+     * 将service商configurationarray转换为 DTO list，contain完整的 provider info.
      * @param array $serviceProviderConfigs service商configurationarray
      * @param array $providerMap provider ID 到 provider 数据的映射
      * @return ProviderConfigDTO[]
@@ -65,7 +65,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将service商configuration转换为 DTO，包含完整的 provider info.
+     * 将service商configuration转换为 DTO，contain完整的 provider info.
      * @param array $serviceProviderConfig service商configuration数据
      * @param array $providerMap provider ID 到 provider 数据的映射
      */
@@ -150,7 +150,7 @@ class ProviderConfigAssembler
             $decodeConfig = self::decodeConfig($serviceProviderConfig['config'], (string) $serviceProviderConfig['id']);
         }
 
-        // set默认的translate
+        // setdefault的translate
         if (empty($serviceProviderConfig['translate'])) {
             $serviceProviderConfig['translate'] = [];
         }

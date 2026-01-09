@@ -26,13 +26,13 @@ class DelightfulChatFileAppService extends AbstractAppService
     }
 
     /**
-     * 通过file_keysave或updatefile
+     * passfile_keysave或updatefile
      * 如果file已存在则update，不存在则create.
      *
      * @param string $fileKey filekey
      * @param DataIsolation $dataIsolation 数据隔离object
      * @param array $fileData file数据
-     * @return array return包含fileinfo的array
+     * @return array returncontainfileinfo的array
      */
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array
     {
@@ -77,7 +77,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      */
     public function getFileInfo(string $fileId): ?array
     {
-        // 通过IDgetfile实体
+        // passIDgetfile实体
         $fileEntities = $this->delightfulChatFileDomainService->getFileEntitiesByFileIds([$fileId], null, null, true);
         if (empty($fileEntities)) {
             return null;

@@ -89,7 +89,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * getfile大小.
+     * getfilesize.
      */
     public function getFileSize(): int
     {
@@ -97,7 +97,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * setfile大小.
+     * setfilesize.
      */
     public function setFileSize(int $fileSize): self
     {

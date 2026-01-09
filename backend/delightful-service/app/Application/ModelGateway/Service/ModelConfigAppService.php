@@ -59,14 +59,14 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * getmodel的降级链，合并user传入的降级链与系统默认的降级链.
+     * getmodel的降级链，合并user传入的降级链与系统default的降级链.
      *
      * @param string $orgCode organization编码
      * @param string $userId userID
      * @param string $modelType 指定的modeltype
      * @param string[] $modelFallbackChain user传入的降级链
      *
-     * @return string 最终的modeltype
+     * @return string final的modeltype
      */
     public function getChatModelTypeByFallbackChain(string $orgCode, string $userId, string $modelType = '', array $modelFallbackChain = []): string
     {
@@ -86,10 +86,10 @@ class ModelConfigAppService extends AbstractLLMAppService
         // 将可用model转为哈希table，implementO(1)time复杂度的查找
         $availableModels = array_flip($chatModelsName);
 
-        // get系统默认的降级链
+        // get系统default的降级链
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
-        // 合并user传入的降级链与系统默认的降级链
+        // 合并user传入的降级链与系统default的降级链
         // user传入的降级链优先级更高
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
@@ -100,7 +100,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             }
         }
 
-        // 后备方案：如果没有匹配任何优先model，use第一个可用model
+        // 后备方案：如果没有匹配任何优先model，usefirst可用model
         return $chatModelsName[0] ?? '';
     }
 }

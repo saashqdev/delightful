@@ -38,7 +38,7 @@ readonly class OCRService
         $ocrClient = $this->clientFactory->getClient($type);
         try {
             $result = retry(1, function () use ($ocrClient, $url) {
-                // 如果还有其他service商，这里可以故障转移
+                // 如果还有其他service商，这里can故障转移
                 return $this->get($url, $ocrClient);
             }, 1000);
         } catch (Throwable $throwable) {
@@ -94,7 +94,7 @@ readonly class OCRService
                 $isCacheValid = $cachedData['Content-Length'] === $contentLength;
             }
 
-            // 如果cache数据有效，直接returncachecontent
+            // 如果cache数据valid，直接returncachecontent
             if ($isCacheValid) {
                 return $cachedData['content'];
             }

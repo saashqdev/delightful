@@ -51,11 +51,11 @@ class DelightfulFlowKnowledgeFactory
             if (is_array($config)) {
                 $entity->setRetrieveConfig(RetrieveConfig::fromArray($config));
             } else {
-                // ifconfiguration无效，setting默认configuration
+                // ifconfigurationinvalid，settingdefaultconfiguration
                 $entity->setRetrieveConfig(RetrieveConfig::createDefault());
             }
         } else {
-            // ifconfiguration为null，setting默认configuration
+            // ifconfiguration为null，settingdefaultconfiguration
             $entity->setRetrieveConfig(RetrieveConfig::createDefault());
         }
 

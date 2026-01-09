@@ -93,7 +93,7 @@ class AsrHeartbeatMonitor
      */
     private function checkHeartbeatTimeout(string $key): bool
     {
-        // 读取心跳time戳
+        // read心跳time戳
         $last = (int) $this->redis->get($key);
         // 超时阈value：90 秒
         if (($last > 0) && (time() - $last) <= AsrConfig::HEARTBEAT_TIMEOUT) {
@@ -116,7 +116,7 @@ class AsrHeartbeatMonitor
             $this->logger->info('检测到心跳超时', ['key' => $key]);
 
             // 由于 key 是 MD5 hash，我们无法直接反向get task_key 和 user_id
-            // 需要从 Redis 中扫描所有 asr:task:* 来查找匹配的task
+            // need从 Redis 中扫描所有 asr:task:* 来查找匹配的task
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
             $this->logger->error('处理心跳超时fail', [
@@ -147,14 +147,14 @@ class AsrHeartbeatMonitor
 
                 $taskStatus = AsrTaskStatusDTO::fromArray($taskData);
 
-                // check是否匹配当前心跳 key
+                // check是否匹配current心跳 key
                 $expectedHeartbeatKey = sprintf(
                     AsrRedisKeys::HEARTBEAT,
                     md5($taskStatus->userId . ':' . $taskStatus->taskKey)
                 );
 
                 if ($expectedHeartbeatKey === $heartbeatKey) {
-                    // 找到匹配的task，check是否需要触发自动总结
+                    // 找到匹配的task，check是否need触发自动总结
                     if ($this->shouldTriggerAutoSummary($taskStatus)) {
                         $this->triggerAutoSummary($taskStatus);
                     }
@@ -170,7 +170,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 判断是否应该触发自动总结.
+     * 判断是否should触发自动总结.
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {
@@ -237,7 +237,7 @@ class AsrHeartbeatMonitor
             $userAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
             $organizationCode = $taskStatus->organizationCode ?? $userAuthorization->getOrganizationCode();
 
-            // 直接call自动总结method（会在method内部updatestatus）
+            // 直接call自动总结method（will在method内部updatestatus）
             $this->asrFileAppService->autoTriggerSummary($taskStatus, $taskStatus->userId, $organizationCode);
 
             $this->logger->info('心跳超时自动总结已触发', [

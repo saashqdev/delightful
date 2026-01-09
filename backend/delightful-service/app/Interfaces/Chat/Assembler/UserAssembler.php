@@ -180,7 +180,7 @@ class UserAssembler
                         );
                         $fullPathNodes[$userDepartmentId] = $pathNodes;
                     } else {
-                        // 简略模式: 只取每个department的最后一个节点
+                        // 简略模式: 只取每个department的最next节点
                         $departmentInfo = end($departments);
                         $pathNode = self::assemblePathNodeByDepartmentInfo($departmentInfo);
                         $allPathNodes[] = $pathNode;
@@ -188,7 +188,7 @@ class UserAssembler
                 }
             }
 
-            // 步骤2.2: use默认department关系作为基础info
+            // 步骤2.2: usedefaultdepartment关系作为基础info
             $defaultDepartmentUser = $userDepartmentRelations[0] ?? [];
 
             // 步骤2.3: update或createuserdepartment详情object
@@ -202,7 +202,7 @@ class UserAssembler
                     $userDepartmentDetailDTO->setPathNodes($allPathNodes);
                 }
             } else {
-                // create新的userdepartment详情
+                // createnewuserdepartment详情
                 $userDepartmentDetail = [
                     'employee_type' => $defaultDepartmentUser['employee_type'] ?? EmployeeType::Unknown->value,
                     'employee_no' => $defaultDepartmentUser['employee_no'] ?? '',

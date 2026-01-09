@@ -43,7 +43,7 @@ class ServiceProviderApi extends AbstractApi
     protected ProviderAppService $providerAppService;
 
     /**
-     * 不需要判断管理员permission。
+     * 不need判断管理员permission。
      * according tocategorygetservice商list.
      */
     public function getServiceProviders(RequestInterface $request)
@@ -52,7 +52,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 不需要判断管理员permission。
+     * 不need判断管理员permission。
      * according tocategorygetservice商list.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
@@ -93,7 +93,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->updateModelStatus($authenticatable, $modelId, $status);
     }
 
-    // get当前organization是否是官方organization
+    // getcurrentorganization是否是官方organization
     public function isCurrentOrganizationOfficial(): array
     {
         $organizationCode = $this->getAuthorization()->getOrganizationCode();
@@ -140,7 +140,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->deleteModel($authenticatable, $modelId);
     }
 
-    // get原始modelid
+    // getoriginalmodelid
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function listOriginalModels()
     {
@@ -148,7 +148,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->adminOriginModelAppService->list($authenticatable);
     }
 
-    // 增加原始modelid
+    // 增加originalmodelid
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function addOriginalModel(RequestInterface $request)
     {
@@ -201,7 +201,7 @@ class ServiceProviderApi extends AbstractApi
     /**
      * get所有非官方LLMservice商list
      * 直接从database中querycategory为llm且provider_type不为OFFICIAL的service商
-     * 不依赖于当前organization，适用于需要添加service商的场景.
+     * 不依赖于currentorganization，适用于need添加service商的场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()

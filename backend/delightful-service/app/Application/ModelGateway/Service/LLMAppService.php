@@ -623,7 +623,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setWidth($width);
         $imageGenerateParamsVO->setHeight($height);
 
-        // 从service商configurationarray中取第一个进行处理
+        // 从service商configurationarray中取first进行处理
         if (empty($serviceProviderConfigs)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
@@ -708,7 +708,7 @@ class LLMAppService extends AbstractLLMAppService
         $data['organization_code'] = $organizationCode;
         $imageGenerateRequest = ImageGenerateFactory::createRequestType($imageGenerateType, $data);
         $implicitWatermark = new ImplicitWatermark();
-        $imageGenerateRequest->setGenerateNum(1); // 图生图默认只能 1
+        $imageGenerateRequest->setGenerateNum(1); // 图生图default只能 1
         $implicitWatermark->setOrganizationCode($organizationCode)
             ->setUserId($creator)
             ->setTopicId($imageEditDTO->getTopicId());
@@ -731,7 +731,7 @@ class LLMAppService extends AbstractLLMAppService
                 $imageGenerateRequest->setModel($serviceProviderConfig->getModelVersion());
                 $generateImageRaw = $imageGenerateService->generateImageRawWithWatermark($imageGenerateRequest);
                 if (! empty($generateImageRaw)) {
-                    // 统一触发event（图生图默认 1 张）
+                    // 统一触发event（图生图default 1 张）
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // 直接透传原始 size parameter，让各service商according to自己的需求处理
+        // 直接透传original size parameter，让各service商according to自己的需求处理
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1167,7 +1167,7 @@ class LLMAppService extends AbstractLLMAppService
             // recordlog
             $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
 
-            // 计算计费数量
+            // 计算计费quantity
             $n = $proxyModelRequest->getN();
             // 除了 mj和 图生图 是 1 次之外，其他都按张数算
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
@@ -1567,7 +1567,7 @@ class LLMAppService extends AbstractLLMAppService
 
     private function createAwsAutoCacheConfig(ProxyModelRequestInterface $proxyModelRequest, string $modelName): array
     {
-        // 只有包含 anthropic.claude 的model
+        // 只有contain anthropic.claude 的model
         if (! str_contains($modelName, 'anthropic.claude')) {
             return [];
         }
@@ -1712,7 +1712,7 @@ class LLMAppService extends AbstractLLMAppService
      * @param string $creator create者ID
      * @param string $organizationCode organization编码
      * @param AbstractRequestDTO $requestDTO 请求DTO
-     * @param int $imageCount image数量
+     * @param int $imageCount imagequantity
      * @param string $providerModelId service商modelID
      * @param string $callTime calltime
      * @param float $startTime 开始time（微秒）

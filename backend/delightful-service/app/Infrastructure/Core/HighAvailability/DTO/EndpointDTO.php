@@ -17,7 +17,7 @@ class EndpointDTO extends AbstractDTO
 {
     /**
      * getEndpointList 接口return的 id。
-     * 不同的业务含义不同。对于model网关来说，这里的 id 是 service_provider_models table的 id。
+     * different的业务含义different。对于model网关来说，这里的 id 是 service_provider_models table的 id。
      * 前端可能不支持 bigint，所以这里用 string.
      */
     protected ?string $businessId = null;
@@ -48,7 +48,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * 资源的消耗的 id list. 一次请求可能会消耗多个资源。
+     * 资源的消耗的 id list. 一次请求可能will消耗多个资源。
      * @var null|string[]
      */
     protected ?array $resources = null;

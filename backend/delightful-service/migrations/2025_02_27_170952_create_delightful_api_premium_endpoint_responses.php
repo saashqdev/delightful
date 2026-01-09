@@ -25,8 +25,8 @@ return new class extends Migration {
             $table->string('request_id', 128)->nullable()->default(null)->comment('请求id');
             // endpoint_id
             $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入点id');
-            // 请求parameter长度
-            $table->integer('request_length')->nullable()->default(null)->comment('请求parameter长度');
+            // 请求parameterlength
+            $table->integer('request_length')->nullable()->default(null)->comment('请求parameterlength');
             // 响应消耗的time，单位：毫秒
             $table->integer('response_time')->nullable()->default(null)->comment('响应消耗的time，单位：毫秒');
             // 响应 http status码
@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->text('exception_message')->comment('exceptioninfo')->nullable();
             $table->datetimes();
             $table->index(['request_id'], 'request_id_index');
-            // 为 endpoint_id 和 created_at 添加联合索引，用于按time范围query特定端点的响应
+            // 为 endpoint_id 和 created_at 添加联合索引，用于按timerangequery特定端点的响应
             $table->index(['endpoint_id', 'created_at'], 'endpoint_id_created_at_index');
             $table->comment('接入点响应recordtable');
         });

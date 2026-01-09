@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            $table->json('visibility_config')->nullable()->comment('可见性configuration，包含可见范围类型和可见成员/department列table');
+            $table->json('visibility_config')->nullable()->comment('可见性configuration，contain可见range类型和可见成员/department列table');
         });
     }
 

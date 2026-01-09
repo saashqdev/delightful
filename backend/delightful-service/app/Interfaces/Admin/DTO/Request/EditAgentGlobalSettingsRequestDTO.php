@@ -66,14 +66,14 @@ class EditAgentGlobalSettingsRequestDTO extends AbstractDTO
     {
         return [
             '*.required' => 'Agent全局settingcannot为null',
-            '*.array' => 'Agent全局setting必须是array',
+            '*.array' => 'Agent全局settingmust是array',
             '*.type.required' => 'typecannot为null',
-            '*.type.integer' => 'type必须为整数',
-            '*.type.in' => 'type值无效',
+            '*.type.integer' => 'typemust为整数',
+            '*.type.in' => 'type值invalid',
             '*.status.required' => 'statuscannot为null',
-            '*.status.integer' => 'status必须为整数',
-            '*.status.in' => 'status值无效',
-            '*.extra.array' => '额外parameter必须是array',
+            '*.status.integer' => 'statusmust为整数',
+            '*.status.in' => 'status值invalid',
+            '*.extra.array' => '额外parametermust是array',
         ];
     }
 

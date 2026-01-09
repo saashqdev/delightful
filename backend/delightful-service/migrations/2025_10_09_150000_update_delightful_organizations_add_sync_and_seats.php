@@ -19,9 +19,9 @@ return new class extends Migration {
         }
 
         Schema::table('delightful_organizations', function (Blueprint $table) {
-            // 席位数量
+            // 席位quantity
             if (! Schema::hasColumn('delightful_organizations', 'seats')) {
-                $table->unsignedInteger('seats')->default(0)->comment('席位数量')->after('number');
+                $table->unsignedInteger('seats')->default(0)->comment('席位quantity')->after('number');
             }
 
             // 同相关字段

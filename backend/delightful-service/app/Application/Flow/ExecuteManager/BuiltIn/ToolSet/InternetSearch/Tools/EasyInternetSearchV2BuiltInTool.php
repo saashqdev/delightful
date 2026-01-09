@@ -42,7 +42,7 @@ class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search简单版，批量对user的多个含义相同或者不同的issue进行互联网search。';
+        return '麦吉互联网search简单版，批量对user的多个含义same或者different的issue进行互联网search。';
     }
 
     public function getCallback(): ?Closure

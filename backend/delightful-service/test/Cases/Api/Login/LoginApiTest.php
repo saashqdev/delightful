@@ -87,7 +87,7 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * test有效的 token 验证
+     * testvalid的 token verify
      * @depends testPhonePasswordLogin
      */
     public function testValidTokenVerification(string $authorization): void
@@ -113,7 +113,7 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * test无效的 token 验证
+     * testinvalid的 token verify
      */
     public function testInvalidTokenVerification(): void
     {
@@ -126,7 +126,7 @@ class LoginApiTest extends AbstractHttpTest
 
         $expectData = [
             'code' => 3103,
-            'message' => 'authorization 不合法',
+            'message' => 'authorization 不legal',
             'data' => null,
         ];
 

@@ -67,7 +67,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo 统计好友数量
+        // todo 统计好友quantity
         return [$popular, $latest];
     }
 
@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // 第二次query：according to delightful_id query所有该账号在不同organization中的userrecord
+        // 第二次query：according to delightful_id query所有该账号在differentorganization中的userrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)
@@ -270,7 +270,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo 统计好友数量
+        // todo 统计好友quantity
         return [$popular, $latest];
     }
 
@@ -499,7 +499,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 投递initialize默认助手sessionevent到MQ.
+     * 投递initializedefault助手sessionevent到MQ.
      */
     private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {

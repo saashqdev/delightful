@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * 范围:9000, 10000.
+ * range:9000, 10000.
  */
 enum TokenErrorCode: int
 {
@@ -22,7 +22,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.expired')]
     case TokenExpired = 9001;
 
-    // tokentype不正确
+    // tokentype不correct
     #[ErrorMessage(message: 'token.type_error')]
     case TokenTypeError = 9002;
 
@@ -30,7 +30,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.relation_not_found')]
     case TokenRelationNotFound = 9003;
 
-    // token必须settingone有效期
+    // tokenmustsettingonevalid期
     #[ErrorMessage(message: 'token.expired_at_must_set')]
     case TokenExpiredAtMustSet = 9004;
 

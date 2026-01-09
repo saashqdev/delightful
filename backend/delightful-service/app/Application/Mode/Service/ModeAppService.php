@@ -48,7 +48,7 @@ class ModeAppService extends AbstractModeAppService
 
         // ===== performanceoptimize：批量预query =====
 
-        // 步骤1：预收集所有需要的modelId
+        // 步骤1：预收集所有need的modelId
         $allModelIds = [];
         foreach ($modeAggregates as $aggregate) {
             foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
@@ -63,21 +63,21 @@ class ModeAppService extends AbstractModeAppService
 
         // 步骤3：organizationmodelfilter
 
-        // 首先收集所有需要filter的model（LLM）
+        // 首先收集所有needfilter的model（LLM）
         $allAggregateModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateModels = $this->getModelsForAggregate($aggregate, $allProviderModelsWithStatus);
             $allAggregateModels = array_merge($allAggregateModels, $aggregateModels);
         }
 
-        // 收集所有需要filter的图像model（VLM）
+        // 收集所有needfilter的图像model（VLM）
         $allAggregateImageModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateImageModels = $this->getImageModelsForAggregate($aggregate, $allProviderModelsWithStatus);
             $allAggregateImageModels = array_merge($allAggregateImageModels, $aggregateImageModels);
         }
 
-        // 需要升级套餐
+        // need升级套餐
         $upgradeRequiredModelIds = [];
 
         // useorganizationfilter器进行filter（LLM）
@@ -118,7 +118,7 @@ class ModeAppService extends AbstractModeAppService
         foreach ($allAgents as $agent) {
             $modeAggregateDTO = $modeAggregateDTOs[$agent->getCode()] ?? null;
             if (! $modeAggregateDTO) {
-                // use默认的
+                // usedefault的
                 $modeAggregateDTO = $modeAggregateDTOs['default'] ?? null;
             }
             if (! $modeAggregateDTO) {
@@ -175,8 +175,8 @@ class ModeAppService extends AbstractModeAppService
 
     /**
      * 批量getmodel和service商status（performanceoptimize版本）.
-     * @param array $allModelIds 所有需要query的modelId
-     * @return array<string, ProviderModelEntity> 已通过级联status筛选的可用model
+     * @param array $allModelIds 所有needquery的modelId
+     * @return array<string, ProviderModelEntity> 已pass级联status筛选的可用model
      */
     private function getModelsBatch(array $allModelIds): array
     {

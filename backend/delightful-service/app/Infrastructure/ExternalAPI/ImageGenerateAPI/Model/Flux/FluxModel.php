@@ -78,7 +78,7 @@ class FluxModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof FluxModelRequest) {
-            $this->logger->error('Flux OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Flux OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnull数据响应
         }
 
@@ -100,7 +100,7 @@ class FluxModel extends AbstractImageGenerate
                     // success：settingimage数据到响应object
                     $this->addImageDataToResponseFlux($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfo到响应object（只setting第一个error）
+                    // fail：settingerrorinfo到响应object（只settingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -116,7 +116,7 @@ class FluxModel extends AbstractImageGenerate
 
         $parallel->wait();
 
-        // 4. 记录最终结果
+        // 4. 记录final结果
         $this->logger->info('Flux OpenAI格式生图：并发handlecomplete', [
             '总请求数' => $count,
             'successimage数' => count($response->getData()),
@@ -145,7 +145,7 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // 检查是否至少有一张imagegeneratesuccess
+        // check是否at least有一张imagegeneratesuccess
         if (empty($imageUrls)) {
             $this->logger->error('Flux文生图：所有imagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
@@ -265,7 +265,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 检查account余额.
+     * checkaccount余额.
      * @return float 余额
      * @throws Exception
      */
@@ -275,12 +275,12 @@ class FluxModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('检查余额fail: ' . ($result['message'] ?? '未知error'));
+                throw new Exception('check余额fail: ' . ($result['message'] ?? '未知error'));
             }
 
             return (float) $result['data']['balance'];
         } catch (Exception $e) {
-            throw new Exception('检查余额fail: ' . $e->getMessage());
+            throw new Exception('check余额fail: ' . $e->getMessage());
         }
     }
 
@@ -298,7 +298,7 @@ class FluxModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof FluxModelRequest) {
-            $this->logger->error('Flux文生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Flux文生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -346,7 +346,7 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // 检查是否至少有一张imagegeneratesuccess
+        // check是否at least有一张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
             $this->logger->error('Flux文生图：所有imagegenerate均fail', ['errors' => $errors]);
@@ -359,7 +359,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Flux原始数据添加水印.
+     * 为Fluxoriginal数据添加水印.
      */
     private function processFluxRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -377,7 +377,7 @@ class FluxModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandle下一张image，当前image保持原始status
+                // continuehandle下一张image，currentimage保持originalstatus
             }
         }
 
@@ -406,7 +406,7 @@ class FluxModel extends AbstractImageGenerate
         array $fluxResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedis锁确保并发安全
+        // useRedis锁ensure并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从Flux响应中提取数据
@@ -428,7 +428,7 @@ class FluxModel extends AbstractImageGenerate
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
-                // 水印handlefail时use原始URL
+                // 水印handlefail时useoriginalURL
             }
 
             $currentData[] = [
@@ -442,7 +442,7 @@ class FluxModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // 确保锁一定会被释放
+            // ensure锁一定will被释放
             $this->unlockResponse($response, $lockOwner);
         }
     }

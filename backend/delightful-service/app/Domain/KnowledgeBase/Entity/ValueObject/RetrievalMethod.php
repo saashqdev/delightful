@@ -31,7 +31,7 @@ class RetrievalMethod
      * 全文检索.
      *
      * based on关键词匹配的检索method。
-     * 索引文档中的所有单词，return包含query词的文本片段。
+     * 索引文档中的所有单词，returncontainquery词的文本片段。
      * 适合精确匹配（如产品name、人名、ID）和低频词匹配。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
@@ -40,7 +40,7 @@ class RetrievalMethod
      * 混合检索.
      *
      * 结合语义检索和全文检索的method。
-     * 同时执行全文检索和向量检索，然后通过重sort步骤选择最佳result。
+     * 同时执行全文检索和向量检索，然后pass重sort步骤选择最佳result。
      * 结合了两种检索技术的优势，弥补各自的不足。
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
@@ -50,7 +50,7 @@ class RetrievalMethod
      *
      * based on知识图谱的检索method。
      * 利用实体间的关系进行检索，适合处理复杂的关联query。
-     * 可以发现隐含的关系和连接。
+     * can发现隐含的关系和连接。
      */
     public const string GRAPH_SEARCH = 'graph_search';
 
@@ -70,7 +70,7 @@ class RetrievalMethod
     }
 
     /**
-     * check给定的检索method是否有效.
+     * check给定的检索method是否valid.
      */
     public static function isValid(string $method): bool
     {

@@ -87,7 +87,7 @@ class RoleRepository implements RoleRepositoryInterface
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array
     {
         $query = $this->roleQuery($organizationCode);
-        // 默认只query需要展示的role
+        // default只queryneed展示的role
         $query->where('is_display', 1);
 
         // 应用filter条件
@@ -100,7 +100,7 @@ class RoleRepository implements RoleRepositoryInterface
             }
         }
 
-        // get总数
+        // gettotal
         $total = $query->count();
 
         // paginationquery
@@ -138,13 +138,13 @@ class RoleRepository implements RoleRepositoryInterface
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void
     {
-        // get当前已分配的userlist
+        // getcurrent已分配的userlist
         $existingUserIds = $this->roleUserQuery($organizationCode)
             ->where('role_id', $roleId)
             ->pluck('user_id')
             ->toArray();
 
-        // 计算需要添加和移除的user
+        // 计算need添加和移除的user
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
@@ -156,7 +156,7 @@ class RoleRepository implements RoleRepositoryInterface
                 ->delete();
         }
 
-        // 插入新的关系
+        // 插入new关系
         $data = [];
         foreach ($toAdd as $userId) {
             $data[] = [
@@ -217,7 +217,7 @@ class RoleRepository implements RoleRepositoryInterface
             $map[$rid][] = $row['user_id'];
         }
 
-        // 确保所有 roleIds 都有 key
+        // ensure所有 roleIds 都有 key
         foreach ($roleIds as $rid) {
             $map[$rid] = $map[$rid] ?? [];
         }

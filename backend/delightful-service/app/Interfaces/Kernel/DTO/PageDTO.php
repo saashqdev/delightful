@@ -26,7 +26,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * get总数.
+     * gettotal.
      */
     public function getTotal(): int
     {
@@ -51,7 +51,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * setting总数.
+     * settingtotal.
      */
     public function setTotal(int $total): self
     {

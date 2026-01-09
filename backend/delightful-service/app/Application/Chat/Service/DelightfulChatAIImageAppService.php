@@ -70,9 +70,9 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // 如果是图生图，则尺寸保持和原始image尺寸一致
+        // 如果是图生图，则尺寸保持和originalimage尺寸一致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
-            // set实际请求的尺寸和比例
+            // setactual请求的尺寸和比例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
             $enumModel = ImageGenerateModelType::fromModel($reqDTO->getParams()->getModel(), false);
             $reqDTO->getParams()->setRatioForModel($radio, $enumModel);

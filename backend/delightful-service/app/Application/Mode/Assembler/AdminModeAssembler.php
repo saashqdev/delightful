@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实体转换为管理后台DTO (包含完整的i18nfield).
+     * 实体转换为管理后台DTO (contain完整的i18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {
@@ -108,7 +108,7 @@ class AdminModeAssembler
                 // 保持向后兼容，set providerModelId 为查找到的model的ID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // 后台管理需要显示所有status，include无可用model的情况
+                // 后台管理need显示所有status，include无可用model的情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -204,7 +204,7 @@ class AdminModeAssembler
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {
-        // 只update请求中包含的允许修改的field
+        // 只update请求中contain的allow修改的field
         $existingEntity->setNameI18n($request->getNameI18n());
         $existingEntity->setPlaceholderI18n($request->getPlaceholderI18n());
         $existingEntity->setIdentifier($request->getIdentifier());

@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * error码范围:3000, 3999.
+ * error码range:3000, 3999.
  */
 /**
  * Error code range: 3000-3999.
@@ -59,7 +59,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.user.receive_not_found')]
     case RECEIVER_NOT_FOUND = 3012;
 
-    // 数据写入fail
+    // 数据writefail
         // Data write failed
     #[ErrorMessage('chat.data.write_failed')]
     case DATA_WRITE_FAILED = 3013;
@@ -134,7 +134,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.update_error')]
     case GROUP_UPDATE_ERROR = 3027;
 
-    // 没有user可以从group chat中移除
+    // 没有usercan从group chat中移除
         // No users can be removed from the group
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
@@ -242,7 +242,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.user.not_create_account')]
     case USER_NOT_CREATE_ACCOUNT = 3102;
 
-    // authorization 不合法
+    // authorization 不legal
         // Authorization is invalid
     #[ErrorMessage('chat.authorization.invalid')]
     case AUTHORIZATION_INVALID = 3103;

@@ -47,10 +47,10 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
 
-        // 默认是create
+        // default是create
         $operation = Operation::Owner;
         if (! $savingDelightfulFLowToolSetEntity->shouldCreate()) {
-            // 修改need检查permission
+            // 修改needcheckpermission
             $operation = $this->operationPermissionAppService->getOperationByResourceAndUser(
                 $permissionDataIsolation,
                 ResourceType::ToolSet,

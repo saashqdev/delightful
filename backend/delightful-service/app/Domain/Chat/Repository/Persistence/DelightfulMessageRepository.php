@@ -73,7 +73,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
         $this->delightfulMessage::query()->where('delightful_message_id', $messageEntity->getDelightfulMessageId())->update(
             [
                 'current_version_id' => $delightfulMessageVersionEntity->getVersionId(),
-                // editmessage允许修改messagetype
+                // editmessageallow修改messagetype
                 'message_type' => $messageEntity->getMessageType()->value,
                 'content' => Json::encode($messageEntity->getContent()->toArray()),
             ]

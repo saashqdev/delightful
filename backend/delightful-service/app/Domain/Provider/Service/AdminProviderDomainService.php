@@ -85,11 +85,11 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
         if (! empty($configData['config'])) {
             if ($decryptConfig) {
-                // 当需要解密时，setting已解密的configuration（不脱敏)
-                // 需要 new 两次ProviderConfigItemobject，因为 setConfig method会操作原始object进行脱敏
+                // 当need解密时，setting已解密的configuration（不脱敏)
+                // need new 两次ProviderConfigItemobject，因为 setConfig methodwill操作originalobject进行脱敏
                 $mergedData['decryptedConfig'] = new ProviderConfigItem($configData['config']);
             }
-            // config 字段的 set method会脱敏
+            // config 字段的 set methodwill脱敏
             $mergedData['config'] = new ProviderConfigItem($configData['config']);
         }
 
@@ -117,7 +117,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
      */
     public function vlmConnectivityTest(string $serviceProviderConfigId, string $modelVersion, string $organizationCode): ConnectResponse
     {
-        // vml 需要解密configuration
+        // vml need解密configuration
         $serviceProviderConfigDTO = $this->getServiceProviderConfigDetail($serviceProviderConfigId, $organizationCode, true);
         $serviceProviderConfig = $serviceProviderConfigDTO->getDecryptedConfig();
         if (! $serviceProviderConfig) {
@@ -148,7 +148,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         string $organizationCode,
         bool $throw = true,
     ): ?ProviderConfigEntity {
-        // 1. 如果提供了 modelId，走新的逻辑
+        // 1. 如果提供了 modelId，走new逻辑
         if (! empty($modelId)) {
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
@@ -191,7 +191,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return null;
         }
 
-        // 2. 检查模型status
+        // 2. check模型status
         if ($serviceProviderModelEntity->getStatus() === Status::Disabled) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotActive);
         }
@@ -384,7 +384,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // 如果没有找到任何有效configuration，returnnullarray
+        // 如果没有找到任何validconfiguration，returnnullarray
         return $result;
     }
 
@@ -521,7 +521,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotActive);
         }
 
-        // 1. 收集所有需要query的 serviceProviderConfigId
+        // 1. 收集所有needquery的 serviceProviderConfigId
         $configIds = [];
         foreach ($activeModels as $model) {
             $configIds[] = $model->getServiceProviderConfigId();
@@ -531,7 +531,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 2. 批量query所有configuration
         $configMap = $this->providerConfigRepository->getByIdsWithoutOrganizationFilter($configIds);
 
-        // 3. 收集所有需要query的 serviceProviderId
+        // 3. 收集所有needquery的 serviceProviderId
         $providerIds = [];
         foreach ($configMap as $config) {
             $providerIds[] = $config->getServiceProviderId();
@@ -547,13 +547,13 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         foreach ($activeModels as $model) {
             $configId = $model->getServiceProviderConfigId();
 
-            // 检查configuration是否存在
+            // checkconfiguration是否存在
             if (! isset($configMap[$configId])) {
                 continue;
             }
             $serviceProviderConfigEntity = $configMap[$configId];
             $serviceProviderConfigEntity->getConfig()->setModelVersion($model->getModelVersion());
-            // 检查服务商是否存在
+            // check服务商是否存在
             $serviceProviderId = $serviceProviderConfigEntity->getServiceProviderId();
             if (! isset($providerMap[$serviceProviderId])) {
                 continue;
@@ -563,7 +563,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             // 获取服务商type
             $providerType = $serviceProviderEntity->getProviderType();
 
-            // 对于非官方服务商，检查其是否激活
+            // 对于非官方服务商，check其是否激活
             if ($providerType !== ProviderType::Official) {
                 // 如果是非官方服务商但未激活，则跳过
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {

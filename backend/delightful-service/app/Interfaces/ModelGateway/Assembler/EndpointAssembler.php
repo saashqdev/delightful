@@ -28,10 +28,10 @@ class EndpointAssembler
     }
 
     /**
-     * 从格式化的端点type标识中还原原始的modelID.
+     * 从格式化的端点type标识中还原original的modelID.
      *
-     * @param string $formattedModelId 可能包含格式化前缀的modelID
-     * @return string 原始的modelID
+     * @param string $formattedModelId 可能contain格式化前缀的modelID
+     * @return string original的modelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string
     {
@@ -39,13 +39,13 @@ class EndpointAssembler
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
-            // 如果匹配到前缀，则移除前缀return原始 modelId
+            // 如果匹配到前缀，则移除前缀returnoriginal modelId
             if (str_starts_with($formattedModelId, $prefix)) {
                 return substr($formattedModelId, strlen($prefix));
             }
         }
 
-        // 如果没有匹配到任何前缀，则直接return原始value
+        // 如果没有匹配到任何前缀，则直接returnoriginalvalue
         return $formattedModelId;
     }
 

@@ -268,7 +268,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
                 return $fileEntity->getExternalUrl();
             }
 
-            // 通过CloudFile RepositorygetURL
+            // passCloudFile RepositorygetURL
             if (! empty($fileEntity->getFileKey()) && ! empty($fileEntity->getOrganizationCode())) {
                 $fileLinks = $cloudFileRepository->getLinks(
                     $fileEntity->getOrganizationCode(),

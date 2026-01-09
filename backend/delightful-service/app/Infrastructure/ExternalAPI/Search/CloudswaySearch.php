@@ -36,7 +36,7 @@ class CloudswaySearch
      * @param string $requestUrl 完整的 endpoint URL (from config)
      * @param string $apiKey api key for authorization (from config)
      * @param string $mkt Market code (not used by Cloudsway but kept for interface consistency)
-     * @param int $count 结果数量 (10/20/30/40/50)
+     * @param int $count 结果quantity (10/20/30/40/50)
      * @param int $offset pagination偏移量
      * @param string $freshness 时间filter (Day/Week/Month)
      * @param string $setLang 语言代码 (如 en-US)

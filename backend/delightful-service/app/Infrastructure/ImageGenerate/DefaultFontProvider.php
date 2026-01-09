@@ -10,9 +10,9 @@ namespace App\Infrastructure\ImageGenerate;
 use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
- * 默认字体提供者implement
- * 开源项目中的默认implement，提供基础字体功能
- * 企业项目可以通过依赖注入覆盖此implement来提供高级字体功能.
+ * default字体提供者implement
+ * 开源项目中的defaultimplement，提供基础字体功能
+ * 企业项目canpass依赖注入覆盖此implement来提供高级字体功能.
  */
 class DefaultFontProvider implements FontProviderInterface
 {
@@ -35,7 +35,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测文本是否包含中文字符.
+     * 检测文本是否contain中文字符.
      * 开源版本视所有文本为非中文，use内置字体渲染.
      */
     public function containsChinese(string $text): bool
@@ -44,7 +44,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测图像是否包含透明通道.
+     * 检测图像是否contain透明通道.
      * 提供基础的透明度检测功能.
      * @param mixed $image
      */

@@ -54,7 +54,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
         if (! preg_match('/^\d{1,2}+\.\d{1,2}+\.\d{1,2}+$/', $this->versionNumber)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.format_error_example_1_0_0');
         }
-        // 额外校验：确保 versionNumber 不是 0.0.0
+        // 额外校验：ensure versionNumber 不是 0.0.0
         if ($this->versionNumber === '0.0.0') {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.publish_version_cannot_be_0_0_0_format');
         }
@@ -125,7 +125,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
     }
 
     /**
-     * 验证可见性configuration格式.
+     * verify可见性configuration格式.
      */
     private function validatesVisibilityConfig(): void
     {
@@ -136,7 +136,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
         }
 
         $visibilityType = VisibilityType::tryFrom($visibilityConfig->getVisibilityType());
-        // 验证visibility_type字段
+        // verifyvisibility_type字段
         if (! $visibilityType) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.invalid_visibility_type');
         }

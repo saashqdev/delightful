@@ -42,7 +42,7 @@ readonly class ProviderTemplateRepository
             // 为每个服务商createtemplateconfiguration
             $templateId = ProviderConfigIdAssembler::generateProviderTemplate($provider->getProviderCode(), $category);
 
-            // 除了 delightful 服务商，默认status都是close
+            // 除了 delightful 服务商，defaultstatus都是close
             $defaultStatus = $provider->getProviderCode() === ProviderCode::Official
                 ? Status::Enabled
                 : Status::Disabled;

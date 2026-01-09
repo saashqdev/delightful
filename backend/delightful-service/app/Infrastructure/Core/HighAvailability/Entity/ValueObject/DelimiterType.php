@@ -30,7 +30,7 @@ enum DelimiterType: string
     }
 
     /**
-     * 检查是否是有效的分隔符type.
+     * check是否是valid的分隔符type.
      */
     public static function isValid(string $type): bool
     {
@@ -44,7 +44,7 @@ enum DelimiterType: string
     {
         return match ($type) {
             self::HIGH_AVAILABILITY->value => self::HIGH_AVAILABILITY,
-            default => throw new InvalidArgumentException("无效的分隔符type: {$type}"),
+            default => throw new InvalidArgumentException("invalid的分隔符type: {$type}"),
         };
     }
 }

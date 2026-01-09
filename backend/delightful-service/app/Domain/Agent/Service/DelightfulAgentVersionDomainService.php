@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimize版本：get启用助理的总数.
+     * optimize版本：get启用助理的total.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // 如果旧status已经是企业或者市场，则不允许回退
+        // 如果旧status已经是企业或者市场，则不allow回退
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -177,7 +177,7 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // return的是语义化版本，需要在return的基础上+1
+        // return的是语义化版本，need在return的基础上+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
         // 如果版本号是整数格式（如 1），将其转换为语义化版本号（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
@@ -190,25 +190,25 @@ class DelightfulAgentVersionDomainService
         // 将 PATCH 部分加 1
         $patch = (int) $patch + 1;
 
-        // 如果 PATCH 达到 10，进位到 MINOR（可以according to需求调整此规则）
+        // 如果 PATCH 达到 10，进位到 MINOR（canaccording to需求调整此规则）
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // 如果 MINOR 达到 10，进位到 MAJOR（可以according to需求调整此规则）
+        // 如果 MINOR 达到 10，进位到 MAJOR（canaccording to需求调整此规则）
         if ($minor > 99) {
             // 不resetminor，而是直接增大major，避免不必要的reset
             $minor = 0;
             $major = (int) $major + 1;
         }
 
-        // 拼接并return新的版本号
+        // 拼接并returnnew版本号
         return "{$major}.{$minor}.{$patch}";
     }
 
     /**
-     * according to助理 id get默认的版本.
+     * according to助理 id getdefault的版本.
      */
     public function getDefaultVersions(array $agentIds): void
     {
@@ -243,7 +243,7 @@ class DelightfulAgentVersionDomainService
      * @param string $organizationCode organization代码
      * @param array $agentVersionIds 助理版本IDlist
      * @param string $cursor 游标ID，如果为空string则从最新开始
-     * @param int $pageSize 每页数量
+     * @param int $pageSize 每页quantity
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array
@@ -253,7 +253,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 验证新版本号是否合法.
+     * verify新版本号是否legal.
      * @throws BusinessException
      */
     private function validateVersionNumber(string $newVersion, string $oldVersion): void
@@ -267,7 +267,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 验证publish范围是否合法.
+     * verifypublishrange是否legal.
      */
     private function validateReleaseScope(int $newScope, int $oldScope): void
     {
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // check是否试图从更高级别的publish范围回退到更低级别
+        // check是否试图从更高级别的publishrange回退到更低级别
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

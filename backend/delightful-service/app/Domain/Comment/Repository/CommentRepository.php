@@ -22,7 +22,7 @@ class CommentRepository
     }
 
     /**
-     * create一个新的comment并维护相关的索引和attachment。
+     * create一个newcomment并维护相关的索引和attachment。
      *
      * @param CommentEntity $commentEntity comment实体
      * @return CommentEntity create后的comment实体

@@ -259,7 +259,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('intermediate')]
     #[VerifyStructure]
     /**
-     * 不存入database的实时message，用于一些临时message场景。
+     * 不存入database的实时message，用于一些temporarymessage场景。
      * @throws Throwable
      */
     public function onIntermediateMessage(Socket $socket, array $params)
@@ -333,7 +333,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
 
     private function relationAppMsgIdAndRequestId(?string $appMsgId): void
     {
-        // 直接用 appMsgId 作为 requestId会导致很多无效 log，难以trace。
+        // 直接用 appMsgId 作为 requestIdwill导致很多invalid log，难以trace。
         $requestId = empty($appMsgId) ? (string) IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId($requestId);
         $this->logger->info('relationAppMsgIdAndRequestId requestId:' . $requestId . ' appMsgId: ' . $appMsgId);
@@ -344,8 +344,8 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     private function keepSubscribeAlive(): void
     {
-        // 只需要一个进程能定时publishmessage,让subscribe的redis链接保活即可.
-        // 不把锁放在最外层,是为了防止pod频繁重启时,没有任何一个进程能够publishmessage
+        // 只need一个进程能定时publishmessage,让subscribe的redis链接保活即可.
+        // 不把锁放在最外层,是为了防止pod频繁重启时,没有任何一个进程canpublishmessage
         co(function () {
             // 每 5 秒推一次message
             $this->timer->tick(
@@ -362,9 +362,9 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                     foreach ($messagePriorities as $priority) {
                         $seqCreatedEvent = new SeqCreatedEvent([ControlMessageType::Ping->value]);
                         $seqCreatedEvent->setPriority($priority);
-                        // message分发. 一条seq可能会生成多条seq
+                        // message分发. 一条seq可能will生成多条seq
                         $messageDispatch = new MessageDispatchPublisher($seqCreatedEvent);
-                        // messagepush. 一条seq只会push给一个user(的多个设备)
+                        // messagepush. 一条seq只willpush给一个user(的多个设备)
                         $messagePush = new MessagePushPublisher($seqCreatedEvent);
                         $producer->produce($messageDispatch);
                         $producer->produce($messagePush);

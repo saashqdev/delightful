@@ -126,7 +126,7 @@ class MessageAssembler
         // message的type和content抽象出来
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontable应该冗余的record收发双方的usertype，目前只record了收件方的，需要补充
+        // TODO sessiontableshould冗余的record收发双方的usertype，目前只record了收件方的，need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -155,7 +155,7 @@ class MessageAssembler
         // message的type和content抽象出来
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontable应该冗余的record收发双方的usertype，目前只record了收件方的，需要补充
+        // TODO sessiontableshould冗余的record收发双方的usertype，目前只record了收件方的，need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -227,7 +227,7 @@ class MessageAssembler
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
-        // 其实可以直接use protobuf 生成的 php object,但是暂时没有time全量替换,以后再说.
+        // 其实can直接use protobuf 生成的 php object,但是暂时没有time全量替换,以后再说.
         return match ($messageTypeEnum) {
             # 控制message
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),
@@ -257,7 +257,7 @@ class MessageAssembler
     }
 
     /**
-     * get临时message的结构.
+     * gettemporarymessage的结构.
      */
     public static function getIntermediateMessageStruct(IntermediateMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
@@ -294,7 +294,7 @@ class MessageAssembler
                 continue;
             }
 
-            // 如果不是当前user的message，且content超过500字符，则截断
+            // 如果不是currentuser的message，且content超过500字符，则截断
             if (! empty($currentUserNickname) && $role !== $currentUserNickname && mb_strlen($content, 'UTF-8') > 500) {
                 $content = mb_substr($content, 0, 500, 'UTF-8') . '...';
             }
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // 如果是第一条message，即使超过长度限制也要包含
+            // 如果是第一条message，即使超过length限制也要contain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

@@ -153,7 +153,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     {
         // 如果传入了明确的statusvalue，则直接set
         if ($enable !== null) {
-            // 如果当前status与要set的status相同，则无需操作
+            // 如果currentstatus与要set的statussame，则无需操作
             if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }
@@ -163,7 +163,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             $delightfulFlow->prepareForChangeEnable();
         }
 
-        // 如果启用status为true，需要进行验证
+        // 如果启用status为true，need进行verify
         if ($delightfulFlow->isEnabled() && empty($delightfulFlow->getNodes())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
         }
@@ -200,7 +200,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             try {
                 $routineConfig->validate();
             } catch (Throwable $throwable) {
-                simple_logger('CreateRoutine')->notice('无效的定时规则', [
+                simple_logger('CreateRoutine')->notice('invalid的定时规则', [
                     'flowCode' => $delightfulFlow->getCode(),
                     'branchId' => $branchId,
                     'routineConfig' => $routineConfig->toConfigArray(),

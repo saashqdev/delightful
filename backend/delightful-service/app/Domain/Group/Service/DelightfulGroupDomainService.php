@@ -53,7 +53,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     // 减少群成员
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
-        // todo 如果是群主离开,需要转移群主
+        // todo 如果是群主离开,need转移群主
         return $this->delightfulGroupRepository->removeUsersFromGroup($delightfulGroupEntity, $userIds);
     }
 
@@ -157,7 +157,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 }
             }
             $content = $content->toArray();
-            // 通过 protobuf message结构,createdelightful chat的object,为弃用 protobuf 做准备
+            // pass protobuf message结构,createdelightful chat的object,为弃用 protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
                 // 这些user已经从群成员table中移除,但是他们还未收到被移除的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
@@ -241,7 +241,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $seqContent['conversation_id'] ?? '',
-            'status' => DelightfulMessageStatus::Read->value, // 控制message不需要已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制message不need已读回执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => '',
@@ -308,7 +308,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 'refer_message_id' => '',
                 'sender_message_id' => '',
                 'conversation_id' => $conversationId,
-                'status' => DelightfulMessageStatus::Read->value, // 发送方自己的message,默认已读
+                'status' => DelightfulMessageStatus::Read->value, // 发送方自己的message,default已读
                 'created_at' => $time,
                 'updated_at' => $time,
                 'app_message_id' => '',

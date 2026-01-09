@@ -86,8 +86,8 @@ class ChatMemory implements MemoryPersistenceInterface
         $seqLimit = $memoryQuery->getLimit();
 
         // todo 后续在query侧optimize
-        // 当为 ai_card 的message，相同message有 20 条，需要去重，但是在query的时候，是不知道有重复的
-        // 在这里先放量query，最多query 200 条，然后再进行重。
+        // 当为 ai_card 的message，samemessage有 20 条，need去重，但是在query的时候，是不知道有重复的
+        // 在这里先放量query，at mostquery 200 条，然后再进行重。
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;
 
         $messagesQueryDTO = (new MessagesQueryDTO());
@@ -118,7 +118,7 @@ class ChatMemory implements MemoryPersistenceInterface
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
-            // 特殊处理, 当开启去重，且return的条数大于等于 limit，则不再继续query
+            // 特殊处理, 当开启去重，且return的条数greater thanequal limit，则不再继续query
             if (count($messageIds) >= $memoryQuery->getLimit()) {
                 break;
             }
@@ -127,7 +127,7 @@ class ChatMemory implements MemoryPersistenceInterface
         if (! empty($messageIds)) {
             $imMessages = $this->delightfulChatDomainService->getMessageEntitiesByMaicMessageIds($messageIds, $memoryQuery->getRangMessageTypes());
             foreach ($imMessages as $imMessage) {
-                // 这里是为了sort正确 according to seq 的顺序进行排
+                // 这里是为了sortcorrect according to seq 的顺序进行排
                 $index = array_search($imMessage->getDelightfulMessageId(), $messageIds);
                 if ($index !== false) {
                     $messageLists[$index] = $imMessage;

@@ -52,9 +52,9 @@ class ByteDanceSTSService
      * according touserDelightful IDgetJWT Token（带cache）.
      *
      * @param string $delightfulId userDelightful ID
-     * @param int $duration 有效期（秒），默认7200秒
-     * @param bool $refresh 是否强制刷新token，默认false
-     * @return array 包含JWT Token和相关info的array
+     * @param int $duration valid期（秒），default7200秒
+     * @param bool $refresh 是否强制刷新token，defaultfalse
+     * @return array containJWT Token和相关info的array
      * @throws Exception
      */
     public function getJwtTokenForUser(string $delightfulId, int $duration = 7200, bool $refresh = false): array
@@ -69,7 +69,7 @@ class ByteDanceSTSService
             $cachedData = $this->getCachedJwtToken($cacheKey);
 
             if ($cachedData !== null) {
-                // 计算剩余有效time
+                // 计算剩余validtime
                 $remainingDuration = $cachedData['expires_at'] - time();
                 $cachedData['duration'] = max(0, $remainingDuration);
 
@@ -82,7 +82,7 @@ class ByteDanceSTSService
             }
         }
 
-        // cache中没有或已过期，或者强制刷新，get新的JWT Token
+        // cache中没有或已过期，或者强制刷新，getnewJWT Token
         $appId = config('asr.volcengine.app_id');
         $accessToken = config('asr.volcengine.token');
 
@@ -106,7 +106,7 @@ class ByteDanceSTSService
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
-        $this->logger->info('生成并cache新的JWT Token', [
+        $this->logger->info('生成并cachenewJWT Token', [
             'delightful_id' => $delightfulId,
             'duration' => $duration,
             'cache_expiry' => $cacheExpiry,
@@ -121,7 +121,7 @@ class ByteDanceSTSService
      *
      * @param string $appId 应用ID
      * @param string $accessToken 访问令牌
-     * @param int $duration 有效期（秒），默认7200秒
+     * @param int $duration valid期（秒），default7200秒
      * @return string JWT token
      * @throws Exception
      */
@@ -191,7 +191,7 @@ class ByteDanceSTSService
     /**
      * use环境variableconfigurationgetJWT token.
      *
-     * @param int $duration 有效期（秒），默认7200秒
+     * @param int $duration valid期（秒），default7200秒
      * @return string JWT token
      * @throws Exception
      */

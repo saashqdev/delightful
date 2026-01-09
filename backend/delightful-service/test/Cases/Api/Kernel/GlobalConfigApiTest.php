@@ -25,7 +25,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals([
             'is_maintenance' => false,
             'maintenance_description' => '',
-        ], $data, '默认全局configuration结构不符', false, true);
+        ], $data, 'default全局configuration结构不符', false, true);
     }
 
     public function testUpdateGlobalConfig(): void
@@ -40,11 +40,11 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putData = $putResponse['data'];
         $this->assertArrayEquals($payload, $putData, 'PUT return数据不一致');
 
-        // 再次 GET 验证cache及持久化
+        // 再次 GET verifycache及持久化
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
-        $this->assertArrayEquals($payload, $getData, 'GET return数据与预期不符');
+        $this->assertArrayEquals($payload, $getData, 'GET return数据与expected不符');
     }
 
     public function testGetGlobalConfigWithPlatformSettings(): void
@@ -61,24 +61,24 @@ class GlobalConfigApiTest extends AbstractHttpTest
             ],
         ];
 
-        // 通过平台set接口set
+        // pass平台set接口set
         $this->put('/api/v1/platform/setting', $platformPayload, $this->getCommonHeaders());
 
-        // get全局configuration，应该包含平台set
+        // get全局configuration，shouldcontain平台set
         $response = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // 验证包含维护模式configuration
+        // verifycontain维护模式configuration
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);
 
-        // 验证包含平台set
+        // verifycontain平台set
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
 
-        // 验证平台set的value
+        // verify平台set的value
         if (isset($data['logo']['zh_CN']['url'])) {
             $this->assertSame('https://example.com/logo_zh.png', $data['logo']['zh_CN']['url']);
         }
@@ -97,16 +97,16 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // 验证基本结构
+        // verify基本结构
         $this->assertIsArray($data);
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);
 
-        // 验证type
+        // verifytype
         $this->assertIsBool($data['is_maintenance']);
         $this->assertIsString($data['maintenance_description']);
 
-        // 如果有平台set，验证其结构
+        // 如果有平台set，verify其结构
         if (isset($data['logo'])) {
             $this->assertIsArray($data['logo']);
         }

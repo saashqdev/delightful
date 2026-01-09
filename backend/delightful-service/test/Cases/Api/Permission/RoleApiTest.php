@@ -120,7 +120,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals(
             $expectedDetailStructure,
             $detailResp['data'] ?? [],
-            '子管理员详情接口响应结构不符合预期',
+            '子管理员详情接口响应结构不符合expected',
             false,
             false
         );
@@ -140,7 +140,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // 再次query应当returnrole不存在或空
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // 预期这里会returnerror码，具体according to业务而定，只要非1000即可
+        // expected这里willreturnerror码，具体according to业务而定，只要非1000即可
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);
         // === testdelete子管理员END ===
     }

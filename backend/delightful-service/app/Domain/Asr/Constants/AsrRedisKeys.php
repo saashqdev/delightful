@@ -15,13 +15,13 @@ class AsrRedisKeys
 {
     /**
      * taskstatus Hash Key 格式
-     * 实际use时会 MD5(user_id:task_key).
+     * actualuse时will MD5(user_id:task_key).
      */
     public const TASK_HASH = 'asr:task:%s';
 
     /**
      * 心跳 Key 格式
-     * 实际use时会 MD5(user_id:task_key).
+     * actualuse时will MD5(user_id:task_key).
      */
     public const HEARTBEAT = 'asr:heartbeat:%s';
 

@@ -48,7 +48,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
             $coroutine = Coroutine::getCurrent();
             $alertCount = ($alertCountMap[$coroutine] ??= 0) + 1;
             $alertCountMap[$coroutine] = $alertCount;
-            // when单个协程运行超过 $millSeconds 时，会触发看门狗，打印协程调用栈
+            // when单个协程运行超过 $millSeconds 时，will触发看门狗，打印协程调用栈
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(
@@ -58,7 +58,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
                     $trace
                 ));
             }
-            // 让出时间片，让其他协程有机会执行
+            // 让出时间片，让其他协程有机will执行
             $millSeconds = 10 * 1000; // 10 毫秒
             usleep($millSeconds * $alertCount);
         });

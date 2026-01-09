@@ -77,7 +77,7 @@ class QwenImageEditModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof QwenImageEditRequest) {
-            $this->logger->error('QwenEdit OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('QwenEdit OpenAI格式生图：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnull数据响应
         }
 
@@ -99,7 +99,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             ]);
         }
 
-        // 4. 记录最终结果
+        // 4. 记录final结果
         $this->logger->info('QwenEdit OpenAI格式生图：handlecomplete', [
             'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
@@ -119,7 +119,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生结果中提取imageURL - 适配新的响应格式 output.choices
+        // 从原生结果中提取imageURL - 适配new响应格式 output.choices
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $output = $result['output'];
@@ -129,7 +129,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         foreach ($choice['message']['content'] as $content) {
                             if (isset($content['image']) && ! empty($content['image'])) {
                                 $imageUrls[$index] = $content['image'];
-                                break 2; // 只取第一个imageURL
+                                break 2; // 只取firstimageURL
                             }
                         }
                     }
@@ -146,7 +146,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof QwenImageEditRequest) {
-            $this->logger->error('通义千问图像edit：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('通义千问图像edit：invalid的请求type', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -182,7 +182,7 @@ class QwenImageEditModel extends AbstractImageGenerate
      */
     private function validateEditRequest(QwenImageEditRequest $request): void
     {
-        // 检查是否有输入图像
+        // check是否有输入图像
         if (empty($request->getImageUrls())) {
             $this->logger->error('通义千问图像edit：缺少输入图像');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.reference_images_required');
@@ -205,14 +205,14 @@ class QwenImageEditModel extends AbstractImageGenerate
 
             $response = $this->api->submitEditTask($params);
 
-            // 检查响应格式 - 适配新的sync响应格式
+            // check响应格式 - 适配newsync响应格式
             if (! isset($response['output']['choices'])) {
                 $errorMsg = $response['message'] ?? '未知error';
                 $this->logger->warning('通义千问图像edit：响应格式error', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
 
-            // 检查是否有图像数据
+            // check是否有图像数据
             $choices = $response['output']['choices'];
             if (empty($choices)) {
                 $this->logger->error('通义千问图像edit：响应中缺少图像数据', ['response' => $response]);
@@ -235,7 +235,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 为通义千问edit模式原始数据添加水印 - 适配新的choices格式.
+     * 为通义千问edit模式original数据添加水印 - 适配newchoices格式.
      */
     private function processQwenEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -265,7 +265,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                             'contentIndex' => $contentIndex,
                             'error' => $e->getMessage(),
                         ]);
-                        // continuehandle下一张image，当前image保持原始status
+                        // continuehandle下一张image，currentimage保持originalstatus
                     }
                 }
             }
@@ -335,7 +335,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $content['image'],
                     ]);
-                    // 水印handlefail时use原始URL
+                    // 水印handlefail时useoriginalURL
                 }
 
                 $currentData[] = [

@@ -37,7 +37,7 @@ enum MemoryStatus: string
     }
 
     /**
-     * 检查status是否有效.
+     * checkstatus是否valid.
      */
     public static function isValid(string $status): bool
     {

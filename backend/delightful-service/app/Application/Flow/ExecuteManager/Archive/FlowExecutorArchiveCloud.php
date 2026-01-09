@@ -17,7 +17,7 @@ class FlowExecutorArchiveCloud
     {
         $name = "{$key}.log";
 
-        // 直接检查序列化后的data大小
+        // 直接check序列化后的datasize
         $serializedData = serialize($data);
         $dataSize = strlen($serializedData);
         $maxSize = 100 * 1024 * 1024; // 100MB
@@ -31,7 +31,7 @@ class FlowExecutorArchiveCloud
         $tmpFile = "{$tmpDir}/{$name}." . uniqid();
 
         try {
-            // data大小符合要求，save到临时file
+            // datasize符合要求，save到temporaryfile
             file_put_contents($tmpFile, $serializedData);
 
             $uploadFile = new UploadFile($tmpFile, dir: 'DelightfulFlowExecutorArchive', name: $name, rename: false);

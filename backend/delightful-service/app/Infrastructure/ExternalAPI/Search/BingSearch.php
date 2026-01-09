@@ -59,7 +59,7 @@ class BingSearch
         if (empty($requestUrl)) {
             $requestUrl = trim(config('search.drivers.bing.endpoint'));
         }
-        // 确保 endpoint 以 /search 结尾
+        // ensure endpoint 以 /search 结尾
         if (! str_ends_with($requestUrl, '/search')) {
             $requestUrl = rtrim($requestUrl, '/') . '/search';
         }
@@ -96,11 +96,11 @@ class BingSearch
         ];
 
         $attempt = 0;
-        $maxAttempts = 2; // 原始请求 + 1次重试
+        $maxAttempts = 2; // original请求 + 1次重试
 
         while ($attempt < $maxAttempts) {
             try {
-                // 如果是重试(第二次尝试)，禁用SSL验证
+                // 如果是重试(第二次尝试)，禁用SSLverify
                 if ($attempt !== 0) {
                     $clientConfig['verify'] = false;
                     $this->logger->warning('Retrying request with SSL verification disabled', [
@@ -119,7 +119,7 @@ class BingSearch
                 // get响应体content
                 $body = $response->getBody()->getContents();
 
-                // 如果需要将 JSON 转换为array或object，可以use json_decode
+                // 如果need将 JSON 转换为array或object，canuse json_decode
                 // 请求success，return数据
                 return Json::decode($body);
             } catch (RequestException $e) {

@@ -24,18 +24,18 @@ use Throwable;
 class DelightfulControlDomainService extends AbstractDomainService
 {
     /**
-     * return收件方多条message最终的阅读status
+     * return收件方多条messagefinal的阅读status
      */
     public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?DelightfulSeqEntity
     {
         $senderSeqList = $this->delightfulSeqRepository->getSenderMessagesStatusChange($senderMessageId, $senderUserId);
-        // 对于receive方来说,一个 sender_message_id 由于status变化,可能会有多条记录,此处需要最后的status
+        // 对于receive方来说,一个 sender_message_id 由于status变化,可能will有多条记录,此处need最后的status
         $userMessagesReadStatus = $this->getMessageLatestStatus([$senderMessageId], $senderSeqList);
         return $userMessagesReadStatus[$senderMessageId] ?? null;
     }
 
     /**
-     * handle mq 中分发的message已读/已查看message. 这些message需要操作messagesend者的seq.
+     * handle mq 中分发的message已读/已查看message. 这些messageneed操作messagesend者的seq.
      */
     public function handlerMQReceiptSeq(DelightfulSeqEntity $receiveDelightfulSeqEntity): void
     {
@@ -51,7 +51,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        // 通过回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
+        // pass回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
@@ -91,7 +91,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
-            // 获取每条message的最终status,parse出来receive人列表,
+            // 获取每条message的finalstatus,parse出来receive人列表,
             $senderLatestSeq = $this->getSenderMessageLatestReadStatus($senderMessageId, $senderUserId);
             $receiveUserEntity = $this->delightfulUserRepository->getUserByAccountAndOrganization(
                 $receiveDelightfulSeqEntity->getObjectId(),
@@ -147,7 +147,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seenList[] = $receiveUserEntity->getUserId();
                     $senderReceiveList->setUnreadList($unreadList);
                     $senderReceiveList->setSeenList($seenList);
-                    // 为messagesend者generate新的seq,用于更新messagereceive人列表
+                    // 为messagesend者generatenewseq,用于更新messagereceive人列表
                     $senderLatestSeq->setReceiveList($senderReceiveList);
                     # 更新已读列表end
 
@@ -156,20 +156,20 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $senderSeqData = $senderLatestSeq->toArray();
                     $senderSeqData['content'] = ['refer_message_ids' => [$senderMessageId]];
                     $senderSeenSeqEntity = SeqAssembler::generateStatusChangeSeqEntity($senderSeqData, $senderMessageId);
-                    // 由于存在批量写入的情况,这里只generateentity,不callcreatemethod
+                    // 由于存在批量write的情况,这里只generateentity,不callcreatemethod
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写数据库,更新messagesend方的已读列表。这是为了复用message收发通道，notify客户端有新的已读回执。
+                        // 写数据库,更新messagesend方的已读列表。这是为了复用message收发通道，notify客户端有new已读回执。
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // 更新原始 chat_seq 的messagereceive人列表。 避免拉取历史message时，对方已读的message还是显示未读。
+                        // 更新original chat_seq 的messagereceive人列表。 避免拉取历史message时，对方已读的message还是显示未读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);
                             $this->delightfulSeqRepository->updateReceiveList($originalSeq);
                         } else {
                             $this->logger->error(sprintf(
-                                'messageDispatch 更新原始 chat_seq fail，未找到原始message $senderMessageId:%s',
+                                'messageDispatch 更新original chat_seq fail，未找到originalmessage $senderMessageId:%s',
                                 $senderMessageId
                             ));
                         }
@@ -195,7 +195,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // 通过回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
+        // pass回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(
@@ -217,7 +217,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
-            // 更新原始message的status
+            // 更新originalmessage的status
             $messageStatus = DelightfulMessageStatus::getMessageStatusByControlMessageType($controlMessageType);
             $this->delightfulSeqRepository->batchUpdateSeqStatus([$needChangeSeqEntity->getSeqId()], $messageStatus);
             // according to delightful_message_id 找到所有messagereceive者
@@ -240,7 +240,7 @@ class DelightfulControlDomainService extends AbstractDomainService
         // 获取所有收件方的seq
         $receiveSeqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($needChangeSeqEntity->getDelightfulMessageId());
         $receiveSeqList = array_column($receiveSeqList, null, 'object_id');
-        // 去掉自己,因为需要及时响应,已经单独generate了seq并push了
+        // 去掉自己,因为need及时响应,已经单独generate了seq并push了
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
         $seqListCreateDTO = [];
         foreach ($receiveSeqList as $receiveSeq) {

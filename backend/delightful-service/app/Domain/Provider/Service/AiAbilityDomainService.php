@@ -103,7 +103,7 @@ class AiAbilityDomainService
      * initializeAI能力数据.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离info
-     * @return int initialize的数量
+     * @return int initialize的quantity
      */
     public function initializeAbilities(ProviderDataIsolation $dataIsolation): int
     {
@@ -116,7 +116,7 @@ class AiAbilityDomainService
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 
-            // buildname和description（确保是多语言格式）
+            // buildname和description（ensure是多语言格式）
             $name = $abilityConfig['name'];
             if (is_string($name)) {
                 $name = [

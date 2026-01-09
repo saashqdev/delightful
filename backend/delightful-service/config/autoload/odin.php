@@ -205,16 +205,16 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// load默认模型configuration（优先级最低）
+// loaddefault模型configuration（优先级最低）
 $models = [];
 
-// load默认模型configuration
+// loaddefault模型configuration
 foreach ($envModelConfigs as $modelKey => $config) {
     processModelConfig($config, $modelKey);
     $models[$modelKey] = $config;
 }
 
-// load odin_models.json configuration（优先级更高，会override默认configuration）
+// load odin_models.json configuration（优先级更高，willoverridedefaultconfiguration）
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {
@@ -238,8 +238,8 @@ return [
         'general_api_options' => [
             'timeout' => [
                 'connection' => 5.0,  // 连接超时（秒）
-                'write' => 10.0,      // 写入超时（秒）
-                'read' => 300.0,      // 读取超时（秒）
+                'write' => 10.0,      // write超时（秒）
+                'read' => 300.0,      // read超时（秒）
                 'total' => 350.0,     // 总体超时（秒）
                 'thinking' => 120.0,  // 思考超时（秒）
                 'stream_chunk' => 30.0, // stream块间超时（秒）
@@ -251,7 +251,7 @@ return [
                 // 如果为nullarray或未configuration，则打印所有字段
                 // 如果configuration了字段列表，则只打印指定的字段
                 // 支持嵌套字段，use点语法如 'args.messages'
-                // 注意：messages 和 tools 字段不在白名单中，不会被打印
+                // 注意：messages 和 tools 字段不在白名单中，不will被打印
                 'whitelist_fields' => [
                     // 基本请求info
                     'request_id',                  // 请求ID
@@ -275,9 +275,9 @@ return [
 
                     // use量statistics
                     'usage',                       // 完整的usageobject
-                    'usage.input_tokens',          // 输入token数量
-                    'usage.output_tokens',         // 输出token数量
-                    'usage.total_tokens',          // 总token数量
+                    'usage.input_tokens',          // 输入tokenquantity
+                    'usage.output_tokens',         // 输出tokenquantity
+                    'usage.total_tokens',          // 总tokenquantity
 
                     // 请求parameter（排除敏感内容）
                     'args.temperature',            // 温度parameter
@@ -312,16 +312,16 @@ return [
                     'system_fingerprint',         // 系统指纹
                     'performance_flag',            // performancemark（慢请求标识）
 
-                    // 注意：以下字段被排除，不会打印
+                    // 注意：以下字段被排除，不will打印
                     // - args.messages (usermessage内容)
                     // - args.tools (工具定义)
                     // - choices.0.message (响应message内容)
                     // - choices.0.delta (stream响应增量内容)
                     // - content (响应内容)
                 ],
-                // 是否启用字段白名单filter，默认true（启用filter）
+                // 是否启用字段白名单filter，defaulttrue（启用filter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // 最大string长度限制，超过此长度的string将被替换为 [Long Text]，setting为 0 表示不限制
+                // 最大stringlength限制，超过此length的string将被替换为 [Long Text]，setting为 0 表示不限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,

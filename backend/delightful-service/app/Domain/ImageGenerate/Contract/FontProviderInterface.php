@@ -28,18 +28,18 @@ interface FontProviderInterface
     public function supportsTTF(): bool;
 
     /**
-     * 检测文本是否包含中文字符.
+     * 检测文本是否contain中文字符.
      *
      * @param string $text 要检测的文本
-     * @return bool truetable示包含中文字符，falsetable示不包含
+     * @return bool truetable示contain中文字符，falsetable示不contain
      */
     public function containsChinese(string $text): bool;
 
     /**
-     * 检测图像是否包含透明通道.
+     * 检测图像是否contain透明通道.
      *
      * @param mixed $image GD图像资源
-     * @return bool truetable示包含透明度，falsetable示不包含
+     * @return bool truetable示contain透明度，falsetable示不contain
      */
     public function hasTransparency($image): bool;
 }

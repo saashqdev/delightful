@@ -19,7 +19,7 @@ namespace App\Application\Speech\Enum;
  * 【与其他枚举的区别】
  * - AsrRecordingStatusEnum: 前端录音实时status（录音交互层）
  * - AsrTaskStatusEnum: 内部task全processstatus（业务管理层）
- * - SandboxAsrStatusEnum: 沙箱合并taskstatus（基础设施层）✓ 当前
+ * - SandboxAsrStatusEnum: 沙箱合并taskstatus（基础设施层）✓ current
  *
  * 【status流转】waiting → running → finalizing → completed/finished | error
  */
@@ -27,7 +27,7 @@ enum SandboxAsrStatusEnum: string
 {
     case WAITING = 'waiting';           // 等待中：task已submit，等待沙箱处理
     case RUNNING = 'running';           // 运行中：沙箱正在处理audio分片
-    case FINALIZING = 'finalizing';     // 正在执行最终合并：沙箱正在合并audio并处理笔记file
+    case FINALIZING = 'finalizing';     // 正在执行final合并：沙箱正在合并audio并处理笔记file
     case COMPLETED = 'completed';       // taskcomplete（V2 新格式）：audio合并和file处理全部complete
     case FINISHED = 'finished';         // taskcomplete（向后兼容旧格式）：保留用于兼容旧版本沙箱
     case ERROR = 'error';               // error：沙箱处理fail
@@ -48,7 +48,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * 是否为completestatus（包含新旧两种格式）.
+     * 是否为completestatus（contain新旧两种格式）.
      */
     public function isCompleted(): bool
     {
@@ -64,7 +64,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * 是否为中间status（需要继续轮询）.
+     * 是否为中间status（need继续轮询）.
      */
     public function isInProgress(): bool
     {

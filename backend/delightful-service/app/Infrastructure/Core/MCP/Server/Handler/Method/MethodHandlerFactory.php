@@ -40,8 +40,8 @@ class MethodHandlerFactory
 
     /**
      * create指定method的处理器实例.
-     * 每次call都create新的处理器实例，确保短生命周期.
-     * 注意：call者需要手动为return的处理器set所需的Manager组件.
+     * 每次call都createnew处理器实例，ensure短生命周期.
+     * 注意：call者need手动为return的处理器set所需的Manager组件.
      *
      * @return null|MethodHandlerInterface 如果找不到对应method的处理器则returnnull
      */

@@ -81,7 +81,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
             $agentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
-            // 只有publish的助理才会有permission管控
+            // 只有publish的助理才will有permission管控
             $resourceAccessDTO = $this->getAgentResource($authorization, $agentId);
             $adminAgentDetail->setResourceAccess($resourceAccessDTO);
         } else {
@@ -244,7 +244,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentSettingsTypes = array_map(fn ($type) => $type->value, AdminGlobalSettingsType::getAssistantGlobalSettingsType());
         $agentSettingsTypes = array_flip($agentSettingsTypes);
 
-        // filter出需要update的set
+        // filter出needupdate的set
         $settingsToUpdate = array_filter($settings, function ($setting) use ($agentSettingsTypes) {
             return isset($agentSettingsTypes[$setting->getType()->value]);
         });
@@ -268,7 +268,7 @@ class AdminAgentAppService extends AbstractKernelAppService
 
     public function getPublishedAgents(Authenticatable $authorization, string $pageToken, int $pageSize, AgentFilterType $type): GetPublishedAgentsResponseDTO
     {
-        // get数据隔离object并get当前organization的organization代码
+        // get数据隔离object并getcurrentorganization的organization代码
         /** @var DelightfulUserAuthorization $authorization */
         $organizationCode = $authorization->getOrganizationCode();
 
@@ -281,7 +281,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // 提取启用机器人list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和机器人版本的机器人数据及其总数
+        // get指定organization和机器人版本的机器人数据及其total
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,
@@ -362,13 +362,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         }
 
         $selectedDefaultFriendRootIds = array_flip($this->getSelectedDefaultFriendRootIds($authorization));
-        // 如果type为SELECTED_DEFAULT_FRIEND，则只return选中的默认好友
+        // 如果type为SELECTED_DEFAULT_FRIEND，则只return选中的default好友
         if ($type === AgentFilterType::SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {
                 return isset($selectedDefaultFriendRootIds[$agent->getId()]);
             });
         }
-        // 如果type为NOT_SELECTED_DEFAULT_FRIEND，则只return未选中的默认好友
+        // 如果type为NOT_SELECTED_DEFAULT_FRIEND，则只return未选中的default好友
         /* @phpstan-ignore-next-line */
         if ($type === AgentFilterType::NOT_SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {

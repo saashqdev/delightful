@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // 如果包含官方organization，按照传入的ID顺序重新sortresult，保持官方organization助理在前
+        // 如果contain官方organization，按照传入的ID顺序重新sortresult，保持官方organization助理在前
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -100,7 +100,7 @@ class AgentAppService extends AbstractAppService
         $contactDataIsolation = $this->createContactDataIsolationByBase($agentDataIsolation);
         $userDepartmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($contactDataIsolation, $agentDataIsolation->getCurrentUserId(), true);
 
-        // 如果需要包含官方organization，则将官方organization的助理排在最前面
+        // 如果needcontain官方organization，则将官方organization的助理排在最前面
         if ($containOfficialOrganization) {
             $officialAgents = [];
             $nonOfficialAgents = [];

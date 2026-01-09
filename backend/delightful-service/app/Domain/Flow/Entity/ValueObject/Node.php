@@ -57,7 +57,7 @@ class Node extends AbstractValueObject
     protected ?NodeDebugResult $nodeDebugResult = null;
 
     /**
-     * 节点执行的回调function，如果有该value，那么将直接执行该选择，而不是通过NodeRunner来执行.
+     * 节点执行的回调function，如果有该value，那么将直接执行该选择，而不是passNodeRunner来执行.
      * 这里暂时想到的是为了单测方便.
      */
     private ?Closure $callback = null;

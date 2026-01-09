@@ -13,28 +13,28 @@ use InvalidArgumentException;
 /**
  * 图searchconfigurationvalueobject
  *
- * 包含图search的相关configurationparameter，如 API 端点、authinfo、超时set等
+ * contain图search的相关configurationparameter，如 API 端点、authinfo、超时set等
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
      * 关系权重.
      *
-     * 图search中关系的权重，用于计算最终相似度分数
+     * 图search中关系的权重，用于计算final相似度分数
      */
     private float $relationWeight = 0.5;
 
     /**
      * 最大search深度.
      *
-     * 图search的最大深度，即从起始节点开始，最多search几跳关系
+     * 图search的最大深度，即从起始节点开始，at mostsearch几跳关系
      */
     private int $maxDepth = 2;
 
     /**
-     * 是否包含property.
+     * 是否containproperty.
      *
-     * 是否在searchresult中包含节点和关系的property
+     * 是否在searchresult中contain节点和关系的property
      */
     private bool $includeProperties = true;
 
@@ -83,7 +83,7 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * result限制.
      *
-     * return的最大result数量
+     * return的最大resultquantity
      */
     private int $limit = 10;
 
@@ -128,7 +128,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 是否包含property.
+     * 是否containproperty.
      */
     public function isIncludeProperties(): bool
     {
@@ -136,7 +136,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set是否包含property.
+     * set是否containproperty.
      */
     public function setIncludeProperties(bool $includeProperties): self
     {
@@ -273,7 +273,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * create默认configuration.
+     * createdefaultconfiguration.
      */
     public static function createDefault(): self
     {

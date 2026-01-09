@@ -137,7 +137,7 @@ class AsrApi
             $timestamp = '_' . $matches[1];
         }
 
-        // build新的目录名：智能标题 + time戳
+        // buildnew目录名：智能标题 + time戳
         $renamedDir = $outputFilename . $timestamp;
 
         // buildaudiofileinfo
@@ -159,7 +159,7 @@ class AsrApi
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // 默认为 null，table示笔记file为空或不存在
+                'note_file' => null, // default为 null，table示笔记file为空或不存在
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,19 +169,19 @@ class AsrApi
             ],
         ];
 
-        // 如果有笔记fileconfiguration且file大小 > 0，添加到return中（模拟真实沙箱的笔记filecontentcheck）
+        // 如果有笔记fileconfiguration且filesize > 0，添加到return中（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // use请求中提供的 target_path，而不是硬编码file名
-            // 这样可以正确支持国际化的file名
+            // 这样cancorrect支持国际化的file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
             // 模拟真实沙箱行为：只有当笔记file有content时才return详细info
-            // 这里简化处理，默认假设有content（真实沙箱会checkfilecontent是否为空）
+            // 这里简化处理，default假设有content（真实沙箱willcheckfilecontent是否为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // use请求中的 target_path
-                'size' => 256, // 模拟有content的file大小
+                'size' => 256, // 模拟有content的filesize
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',
                 'source_path' => $noteFileConfig['source_path'] ?? '',

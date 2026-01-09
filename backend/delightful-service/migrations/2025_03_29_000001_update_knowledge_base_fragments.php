@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         // 修改表结构，添加新字段
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // 检查是否已存在字段，避免重复添加
+            // check是否已存在字段，避免重复添加
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
                 $table->string('document_code', 255)->default('')->comment('关联documentcode')->index();
             }

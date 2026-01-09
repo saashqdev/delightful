@@ -48,7 +48,7 @@ class MCPHandler implements MCPHandlerInterface
         $this->exceptionHandler = $this->container->get(MCPExceptionHandler::class);
         $this->methodHandlerFactory = new MethodHandlerFactory($this->container);
 
-        // initialize默认组件
+        // initializedefault组件
         $this->authentication = new NoAuthentication();
         $this->rateLimiter = new NoRateLimiter();
         $this->toolManager = new MCPToolManager();

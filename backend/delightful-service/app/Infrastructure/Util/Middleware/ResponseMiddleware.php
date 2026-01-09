@@ -82,7 +82,7 @@ class ResponseMiddleware implements MiddlewareInterface
                 if (in_array($path, $this->ignoreUris, true)) {
                     return;
                 }
-                // 临时加一下敏感filter
+                // temporary加一下敏感filter
                 if (! str_contains($path, 'aes')) {
                     $this->logger->info('请求跟踪information', $this->formatMessage($request, $response, $startTime, $endTime));
                 }
@@ -122,7 +122,7 @@ class ResponseMiddleware implements MiddlewareInterface
             'parsed_body' => $parsedBody,
         ];
         $responseBody = $errorResponse ?? $response;
-        // 大于 5K 的data不记录
+        // greater than 5K 的data不记录
         if (strlen($responseBody) > 5 * 1024) {
             $responseBody = 'ResponseBodyIsTooLarge';
         }

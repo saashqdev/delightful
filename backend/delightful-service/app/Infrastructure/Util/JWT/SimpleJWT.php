@@ -41,7 +41,7 @@ class SimpleJWT
     }
 
     /**
-     * 验证token.
+     * verifytoken.
      */
     public function authenticate(string $authorization = ''): array
     {

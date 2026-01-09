@@ -35,7 +35,7 @@ readonly class ChatMessageAssembler
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
     {
-        // 在协程环境中，use di() get translator 实例以确保协程上下文正确
+        // 在协程环境中，use di() get translator 实例以ensure协程上下文correct
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
@@ -70,7 +70,7 @@ readonly class ChatMessageAssembler
      */
     public function buildMessageContent(string $modelId, AsrFileDataDTO $fileData, ?AsrFileDataDTO $noteData = null): array
     {
-        // 在协程环境中，use di() get translator 实例以确保协程上下文正确
+        // 在协程环境中，use di() get translator 实例以ensure协程上下文correct
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent

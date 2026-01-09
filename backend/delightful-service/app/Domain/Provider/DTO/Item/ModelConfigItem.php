@@ -339,7 +339,7 @@ class ModelConfigItem extends AbstractDTO
     }
 
     /**
-     * 验证并setting价格/成本（统一处理逻辑）.
+     * verify并setting价格/成本（统一处理逻辑）.
      */
     private function validateAndSetPricing(null|float|string $value): ?string
     {

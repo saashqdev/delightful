@@ -16,7 +16,7 @@ class InstructDisplayType
     public const SYSTEM = 2;    // system
 
     /**
-     * 验证显示类型是否有效.
+     * verify显示类型是否valid.
      */
     public static function isValid(int $type): bool
     {

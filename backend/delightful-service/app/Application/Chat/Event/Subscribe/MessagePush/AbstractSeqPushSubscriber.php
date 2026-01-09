@@ -35,7 +35,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according to序列号优先级.实时notify收件方. 这可能需要publishsubscribe.
+     * according to序列号优先级.实时notify收件方. 这可能needpublishsubscribe.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseq尝试push的次数,用于后续判断是否需要重试
+                // recordseq尝试push的次数,用于后续判断是否need重试
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // 未报错,不再重推
                 $this->setSeqCanNotRetry($seqRetryKey);

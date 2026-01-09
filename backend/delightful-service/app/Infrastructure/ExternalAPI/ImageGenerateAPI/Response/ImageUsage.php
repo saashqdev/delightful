@@ -12,10 +12,10 @@ use Hyperf\Odin\Api\Response\Usage;
 class ImageUsage extends Usage
 {
     /**
-     * @param int $promptTokens prompt词的令牌数量
-     * @param int $completionTokens completecontent的令牌数量
-     * @param int $totalTokens use的总令牌数量
-     * @param int $generatedImages 生成的image数量
+     * @param int $promptTokens prompt词的令牌quantity
+     * @param int $completionTokens completecontent的令牌quantity
+     * @param int $totalTokens use的总令牌quantity
+     * @param int $generatedImages 生成的imagequantity
      * @param array $completionTokensDetails complete令牌的详细information
      * @param array $promptTokensDetails prompt令牌的详细information
      */

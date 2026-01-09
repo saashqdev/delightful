@@ -40,7 +40,7 @@ class FileDefaultInitCommand extends Command
     public function configure(): void
     {
         parent::configure();
-        $this->setDescription('initialize默认file');
+        $this->setDescription('initializedefaultfile');
     }
 
     public function handle(): void
@@ -52,9 +52,9 @@ class FileDefaultInitCommand extends Command
         $publicBucketConfig = config('cloudfile.storages.' . StorageBucketType::Public->value);
         $this->line('公有桶configuration：' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
 
-        // 如果是 local 驱动，不需要initialize
+        // 如果是 local 驱动，不needinitialize
         if ($publicBucketConfig['adapter'] === 'local') {
-            $this->info('本地驱动，不需要initialize');
+            $this->info('本地驱动，不needinitialize');
             return;
         }
 
@@ -71,13 +71,13 @@ class FileDefaultInitCommand extends Command
     {
         $this->line('startinitializefile...');
 
-        // 基础file目录 - use新的路径结构
+        // 基础file目录 - usenew路径结构
         $baseFileDir = BASE_PATH . '/storage/files';
         $defaultModulesDir = $baseFileDir . '/DELIGHTFUL/open/default';
 
-        // 检查默认模块目录是否存在
+        // checkdefault模块目录是否存在
         if (! is_dir($defaultModulesDir)) {
-            $this->error('默认模块目录不存在: ' . $defaultModulesDir);
+            $this->error('default模块目录不存在: ' . $defaultModulesDir);
             return;
         }
 
@@ -126,10 +126,10 @@ class FileDefaultInitCommand extends Command
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generate业务唯一标识（用于重复检查）
+                    // generate业务唯一标识（用于重复check）
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
-                    // 正确的重复检查：query相同业务type下是否有相同的业务标识
+                    // correct的重复check：querysame业务type下是否有same的业务标识
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
@@ -149,7 +149,7 @@ class FileDefaultInitCommand extends Command
                     $this->line("    - handlefile: {$fileName}");
 
                     try {
-                        // 读取file内容并转为 base64 格式
+                        // readfile内容并转为 base64 格式
                         $fileContent = file_get_contents($filePath);
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
@@ -164,14 +164,14 @@ class FileDefaultInitCommand extends Command
 
                         // 立即validatefile是否可获取（关键validate步骤）
                         $actualKey = $uploadFile->getKey();
-                        // 从 key 中提取organization编码，参考 ProviderAppService 的正确做法
+                        // 从 key 中提取organization编码，参考 ProviderAppService 的correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
                             throw new Exception('fileuploadfail，无法获取访问链接');
                         }
 
-                        // validatesuccess后才create数据库记录，use实际的upload key
+                        // validatesuccess后才create数据库记录，useactual的upload key
                         $defaultFileEntity = new DefaultFileEntity();
                         $defaultFileEntity->setBusinessType($businessType->value);
                         $defaultFileEntity->setFileType(DefaultFileType::DEFAULT->value);
@@ -198,7 +198,7 @@ class FileDefaultInitCommand extends Command
             }
         }
 
-        // 同时handle原始的默认图标file（如果需要的话）
+        // 同时handleoriginal的default图标file（如果need的话）
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
         $this->info("fileinitializecomplete，共handle {$totalFiles} 个file，跳过 {$skippedFiles} 个已存在的file");
@@ -213,7 +213,7 @@ class FileDefaultInitCommand extends Command
         try {
             return DefaultFileBusinessType::from($moduleName);
         } catch (ValueError) {
-            // 如果直接映射fail，尝试通过名称匹配
+            // 如果直接映射fail，尝试pass名称匹配
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,
@@ -224,11 +224,11 @@ class FileDefaultInitCommand extends Command
     }
 
     /**
-     * handle默认图标file.
+     * handledefault图标file.
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // 如果有需要单独handle的默认图标，可以在这里implement
-        // for examplehandle Midjourney 等默认图标
+        // 如果有need单独handle的default图标，can在这里implement
+        // for examplehandle Midjourney 等default图标
     }
 }

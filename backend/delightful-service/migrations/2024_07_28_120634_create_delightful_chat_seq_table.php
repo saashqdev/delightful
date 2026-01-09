@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('organization_code', 64)->comment('序列号所属的organization编码.')->default('');
             $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：应用;3:文档;4:多维table格');
             $table->string('object_id', 64)->comment('objectid. 如果是user时,table示delightful_id');
-            $table->string('seq_id', 64)->comment('message序列号 id，每个账号的所有message必须逐渐增大');
+            $table->string('seq_id', 64)->comment('message序列号 id，每个账号的所有messagemust逐渐增大');
             $table->string('seq_type', 32)->comment('message大type:控制message,chatmessage。');
             $table->text('content')->comment('序列号详情. 一些不可见的控制message,只在seqtable存在详情. 以及写时复制一份messagetablecontent到seqtable用.');
             $table->string('delightful_message_id', 64)->comment('service端生成的唯一messageid,用于messagewithdraw/edit');
@@ -43,11 +43,11 @@ return new class extends Migration {
             # 以下是索引set
             // delightful_message_id 索引
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
-            // 因为经常需要按 seq_id sort，所以增加联合索引
+            // 因为经常need按 seq_id sort，所以增加联合索引
             // 以下索引create移动到单独的迁移file中
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('账号收件箱的序列号table,每个账号的所有message必须单调递增');
+            $table->comment('账号收件箱的序列号table,每个账号的所有messagemust单调递增');
         });
     }
 

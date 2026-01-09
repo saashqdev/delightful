@@ -50,7 +50,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * 原始模型实体转换为 DTO.
+     * original模型实体转换为 DTO.
      */
     public static function originalModelEntityToDTO(ProviderOriginalModelEntity $entity): ProviderOriginalModelDTO
     {
@@ -58,7 +58,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * 批量原始模型实体转换为 DTO.
+     * 批量original模型实体转换为 DTO.
      *
      * @param array<ProviderOriginalModelEntity> $entities
      * @return array<ProviderOriginalModelDTO>

@@ -86,7 +86,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 通过 delightfulId + key getusersetting（跨organization）.
+     * pass delightfulId + key getusersetting（跨organization）.
      */
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity
     {
@@ -100,11 +100,11 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 通过 delightfulId saveusersetting（跨organization），若已存在相同 key 则update。
+     * pass delightfulId saveusersetting（跨organization），若已存在same key 则update。
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        // 写入 delightfulId
+        // write delightfulId
         $delightfulUserSettingEntity->setDelightfulId($delightfulId);
 
         // 查找现有记录

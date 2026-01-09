@@ -79,7 +79,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
 
     public function checkSendMessageAuth(DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
     {
-        // 检查conversation id所属organization，与when前传入organization编码的一致性
+        // checkconversation id所属organization，与when前传入organization编码的一致性
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }

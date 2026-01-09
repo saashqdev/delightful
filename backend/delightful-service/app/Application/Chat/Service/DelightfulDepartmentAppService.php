@@ -46,7 +46,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         }
     }
 
-    // querydepartment详情,需要return是否有子department
+    // querydepartment详情,needreturn是否有子department
     public function getDepartmentById(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): ?DelightfulDepartmentEntity
     {
         // 对于前端来说, -1 table示根departmentinfo.
@@ -91,7 +91,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsById($dataIsolation, $departmentId, $pageSize, $offset);
         }
         $departments = $departmentsPageResponseDTO->getItems();
-        // setdepartment以及所有子department的人员数量.
+        // setdepartment以及所有子department的人员quantity.
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
@@ -136,11 +136,11 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * setdepartment以及所有子department的人员数量.
+     * setdepartment以及所有子department的人员quantity.
      */
     protected function setChildrenEmployeeSum(DepartmentQueryDTO $queryDTO, DelightfulDepartmentEntity $departmentEntity): void
     {
-        // department以及所有子department的人员数量
+        // department以及所有子department的人员quantity
         if ($queryDTO->getSumType() === DepartmentSumType::All) {
             $employeeSum = $this->delightfulDepartmentDomainService->getDepartmentChildrenEmployeeSum($departmentEntity);
             $departmentEntity->setEmployeeSum($employeeSum);

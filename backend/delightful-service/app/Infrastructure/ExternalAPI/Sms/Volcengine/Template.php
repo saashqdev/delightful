@@ -17,7 +17,7 @@ use RuntimeException;
 class Template extends AbstractTemplate
 {
     /**
-     * 默认message组ID.
+     * defaultmessage组ID.
      */
     public const string DEFAULT_MESSAGE_GROUP_ID = '77a48cb1';
 
@@ -33,7 +33,7 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的验证码是：${verification_code}，有效期 ${timeout} 分钟。请在页面中输入验证码complete验证。如非本人操作，请忽略。',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的verify码是：${verification_code}，valid期 ${timeout} 分钟。请在页面中输入verify码completeverify。如非本人操作，请忽略。',
     ];
 
     /**
@@ -71,11 +71,11 @@ class Template extends AbstractTemplate
 
     /**
      * according to传来的短信文本,解析variable. 只有variable的value,未匹配variable的key!
-     * 需要variable解析的原因:火山短信只支持variable短信的发送,而业务方会出于创蓝短信的原因,会传来整个短信文本content,没有variable.
+     * needvariable解析的原因:火山短信只支持variable短信的发送,而业务方will出于创蓝短信的原因,will传来整个短信文本content,没有variable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找到指定的templatevariable正则解析规则. 如果没传模版id,循环正则匹配会降低匹配速度和准确度
+        // 找到指定的templatevariable正则解析规则. 如果没传模版id,循环正则匹配will降低匹配速度和准确度
         if ($templateId) {
             // 判断template是否存在
             if (! isset($this->idContents[$templateId])) {

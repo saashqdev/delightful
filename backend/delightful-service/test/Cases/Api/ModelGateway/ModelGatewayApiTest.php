@@ -17,7 +17,7 @@ use Throwable;
 class ModelGatewayApiTest extends AbstractHttpTest
 {
     /**
-     * 默认testmodel.
+     * defaulttestmodel.
      */
     private const DEFAULT_MODEL = 'deepseek-v3';
 
@@ -53,7 +53,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // create一个 Parallel 实例，set最大并发数为 10
         $parallel = new Parallel(10);
 
-        // 定义多个不同的请求场景
+        // 定义多个different的请求场景
         $scenario = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',
@@ -64,13 +64,13 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // 添加并发task
         $index = 0;
-        $count = 10; // 进一步减少test数量，只要有一个success就行
+        $count = 10; // 进一步减少testquantity，只要有一个success就行
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
                     // 发送HTTP请求
                     $response = $this->json('/v1/chat/completions', $scenario, $this->getTestHeaders());
-                    // assertresult包含预期的content
+                    // assertresultcontainexpected的content
                     $this->assertArrayValueTypesEquals($expectedResponse, $response);
 
                     return [
@@ -103,8 +103,8 @@ class ModelGatewayApiTest extends AbstractHttpTest
             }
         }
 
-        // 确保至少有一个请求success
-        $this->assertGreaterThan(0, $successCount, '至少应该有一个请求success');
+        // ensureat least有一个请求success
+        $this->assertGreaterThan(0, $successCount, 'at leastshould有一个请求success');
 
         // 输出success率
         $successRate = ($successCount / $count) * 100;
@@ -128,7 +128,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // 发送POST请求
         $response = $this->json('/v1/chat/completions', $requestData, $this->getTestHeaders());
-        // 验证整个响应结构
+        // verify整个响应结构
         $expectedResponse = [
             'id' => '',
             'object' => 'chat.completion',
@@ -151,7 +151,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'prompt_tokens_details' => [],
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及type验证fail');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及typeverifyfail');
     }
 
     /**
@@ -173,7 +173,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // 发送POST请求
         $response = $this->json('/v1/embeddings', $requestData, $this->getTestHeaders());
 
-        // 验证响应结构
+        // verify响应结构
         $expectedResponse = [
             'object' => 'list',
             'data' => [
@@ -194,7 +194,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'total_tokens' => 0,
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及type验证fail');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及typeverifyfail');
     }
 
     /**

@@ -33,7 +33,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
 
-        // 为每个test生成唯一的userID，避免test之间的数据冲突
+        // 为每个test生成唯一的userID，避免testbetween的数据冲突
         $this->testUserIds = [
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),
@@ -54,13 +54,13 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithNoAdminsReturnsEmptyArray(): void
     {
-        // 确保没有organization管理员数据
+        // ensure没有organization管理员数据
         $this->cleanUpTestData();
 
         // callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // 验证result
+        // verifyresult
         $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
@@ -78,7 +78,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // 验证result
+        // verifyresult
         $this->assertIsArray($result);
         $this->assertCount(1, $result);
         $this->assertInstanceOf(OrganizationAdminEntity::class, $result[0]);
@@ -105,17 +105,17 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // 验证result
+        // verifyresult
         $this->assertIsArray($result);
         $this->assertCount(3, $result);
 
-        // 验证每个return的实体
+        // verify每个return的实体
         $userIds = array_map(fn ($entity) => $entity->getUserId(), $result);
         foreach ($this->testUserIds as $testUserId) {
             $this->assertContains($testUserId, $userIds);
         }
 
-        // 验证所有实体都是正确的type和organization代码
+        // verify所有实体都是correct的type和organization代码
         foreach ($result as $entity) {
             $this->assertInstanceOf(OrganizationAdminEntity::class, $entity);
             $this->assertEquals($this->testOrganizationCode, $entity->getOrganizationCode());
@@ -145,7 +145,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethodgettestorganization的管理员
         $testOrgResult = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // 验证只returntestorganization的管理员
+        // verify只returntestorganization的管理员
         $this->assertIsArray($testOrgResult);
         $this->assertCount(1, $testOrgResult);
         $this->assertEquals($this->testUserIds[0], $testOrgResult[0]->getUserId());
@@ -154,7 +154,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethodget另一个organization的管理员
         $anotherOrgResult = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->anotherOrganizationCode));
 
-        // 验证只return另一个organization的管理员
+        // verify只return另一个organization的管理员
         $this->assertIsArray($anotherOrgResult);
         $this->assertCount(1, $anotherOrgResult);
         $this->assertEquals($this->testUserIds[1], $anotherOrgResult[0]->getUserId());
@@ -173,7 +173,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // use空的organization代码callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation(''));
 
-        // 验证result为空
+        // verifyresult为空
         $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
@@ -190,7 +190,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // use不存在的organization代码callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation('non_existent_org_code'));
 
-        // 验证result为空
+        // verifyresult为空
         $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
@@ -208,7 +208,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // 验证return的实体包含所有必要field
+        // verifyreturn的实体contain所有必要field
         $this->assertCount(1, $result);
         $entity = $result[0];
 
@@ -260,7 +260,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             true
         );
 
-        // 通过servicemethodcheck是否为organizationcreate者
+        // passservicemethodcheck是否为organizationcreate者
         $this->assertTrue($this->organizationAdminDomainService->isOrganizationCreator(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0]

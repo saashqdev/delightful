@@ -36,7 +36,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issue的关联issue。支持关联issue再产生子issue，但是会被拍平成二维array。
+     * 子issue的关联issue。支持关联issue再产生子issue，但是will被拍平成二维array。
      * @var array<string,QuestionItem[]>
      * @example according touser输入的issue，生成关联issue。
      */
@@ -50,7 +50,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $searchWebPages;
 
     /**
-     * 由于多次子issuesearch时，会出现多个重复的searchresult，所以需要 ai 去重后，再丢给大model总结。
+     * 由于多次子issuesearch时，will出现多个重复的searchresult，所以need ai 去重后，再丢给大model总结。
      *
      * @var SearchDetailItem[]
      */
@@ -77,9 +77,9 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected string $ppt;
 
     /**
-     * get本次需要streampush的field。
+     * get本次needstreampush的field。
      * 支持一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
-     * service端会cache所有stream的数据，并在stream结束时一次性push，以减少丢包的概率，提升message完整性。
+     * service端willcache所有stream的数据，并在stream结束时一次性push，以减少丢包的概率，提升message完整性。
      * for example：
      * [
      *     'users.0.name' => 'delightful',

@@ -48,7 +48,7 @@ enum TextColor: string
     }
 
     /**
-     * 验证颜色值是否有效.
+     * verify颜色值是否valid.
      */
     public static function isValid(string $color): bool
     {

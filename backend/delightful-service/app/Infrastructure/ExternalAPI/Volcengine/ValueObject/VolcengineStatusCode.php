@@ -13,7 +13,7 @@ namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 enum VolcengineStatusCode: string
 {
     /**
-     * success - 响应body包含转录result.
+     * success - 响应bodycontain转录result.
      */
     case SUCCESS = '20000000';
 
@@ -33,7 +33,7 @@ enum VolcengineStatusCode: string
     case SILENT_AUDIO = '20000003';
 
     /**
-     * 请求parameter无效.
+     * 请求parameterinvalid.
      */
     case INVALID_PARAMS = '45000001';
 
@@ -43,7 +43,7 @@ enum VolcengineStatusCode: string
     case EMPTY_AUDIO = '45000002';
 
     /**
-     * audio格式不正确.
+     * audio格式不correct.
      */
     case INVALID_AUDIO_FORMAT = '45000151';
 
@@ -85,7 +85,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否需要重新submittask
+     * 判断是否need重新submittask
      */
     public function needsResubmit(): bool
     {
@@ -102,9 +102,9 @@ enum VolcengineStatusCode: string
             self::PROCESSING => '正在处理中',
             self::QUEUED => 'task在queue中',
             self::SILENT_AUDIO => '静音audio',
-            self::INVALID_PARAMS => '请求parameter无效',
+            self::INVALID_PARAMS => '请求parameterinvalid',
             self::EMPTY_AUDIO => '空audio',
-            self::INVALID_AUDIO_FORMAT => 'audio格式不正确',
+            self::INVALID_AUDIO_FORMAT => 'audio格式不correct',
             self::SERVER_BUSY => 'service器繁忙',
         };
     }

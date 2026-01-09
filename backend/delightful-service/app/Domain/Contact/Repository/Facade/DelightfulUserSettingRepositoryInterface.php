@@ -18,7 +18,7 @@ interface DelightfulUserSettingRepositoryInterface
 
     public function get(DataIsolation $dataIsolation, string $key): ?DelightfulUserSettingEntity;
 
-    // 通过 delightfulId 维度存取
+    // pass delightfulId 维度存取
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity;
 
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity;

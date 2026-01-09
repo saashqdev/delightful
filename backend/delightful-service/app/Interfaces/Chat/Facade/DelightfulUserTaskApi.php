@@ -69,7 +69,7 @@ class DelightfulUserTaskApi extends AbstractApi
             $userTaskValueDTO->setValues($values);
             $userTaskValueDTO->setMonth($month);
 
-            // iftype 等于customize重复，那么need判断time 是否存在值
+            // iftype equalcustomize重复，那么need判断time 是否存在值
             if ($userTaskDTO->getType() === TaskType::CustomRepeat->value) {
                 if (empty($userTaskDTO->getTime())) {
                     ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'time is  required for custom repeat');
@@ -120,7 +120,7 @@ class DelightfulUserTaskApi extends AbstractApi
             $userTaskDTO->setConversationId($params['conversation_id']);
             $userTaskDTO->setTopicId($params['topic_id']);
 
-            // iftype 等于customize重复，那么need判断time 是否存在值, If condition is always false.
+            // iftype equalcustomize重复，那么need判断time 是否存在值, If condition is always false.
             if ($userTaskDTO->getType() === TaskType::CustomRepeat->value) {
                 if (empty($userTaskDTO->getTime())) {
                     ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'time is  required for custom repeat');

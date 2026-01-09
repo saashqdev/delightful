@@ -10,11 +10,11 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * 范围:8000, 8999.
+ * range:8000, 8999.
  */
 enum UserTaskErrorCode: int
 {
-    // parameter不合法 不合法
+    // parameter不legal 不legal
     #[ErrorMessage('task.invalid')]
     case PARAMETER_INVALID = 8001;
 

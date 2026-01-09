@@ -40,7 +40,7 @@ class Permission implements PermissionInterface
      */
     public function getOrganizationAdminList(string $delightfulId): array
     {
-        // 通过 delightfulID get手机号码
+        // pass delightfulID get手机号码
         $accountEntity = $this->delightfulAccountDomainService->getAccountInfoByDelightfulId($delightfulId);
         if ($accountEntity === null) {
             return [];

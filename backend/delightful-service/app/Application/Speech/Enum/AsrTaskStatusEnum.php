@@ -19,7 +19,7 @@ namespace App\Application\Speech\Enum;
  *
  * 【与其他枚举的区别】
  * - AsrRecordingStatusEnum: 前端录音实时status（录音交互层）
- * - AsrTaskStatusEnum: 内部task全processstatus（业务管理层）✓ 当前
+ * - AsrTaskStatusEnum: 内部task全processstatus（业务管理层）✓ current
  * - SandboxAsrStatusEnum: 沙箱合并taskstatus（基础设施层）
  *
  * 【status流转】created → processing → completed | failed

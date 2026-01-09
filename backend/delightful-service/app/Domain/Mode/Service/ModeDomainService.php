@@ -54,7 +54,7 @@ class ModeDomainService
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // use当前模式的基本info + 被跟随模式的groupconfiguration
+                // usecurrent模式的基本info + 被跟随模式的groupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -94,7 +94,7 @@ class ModeDomainService
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // use当前模式的基本info + 被跟随模式的groupconfiguration
+                // usecurrent模式的基本info + 被跟随模式的groupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -104,7 +104,7 @@ class ModeDomainService
     }
 
     /**
-     * 获取默认模式.
+     * 获取default模式.
      */
     public function getDefaultMode(ModeDataIsolation $dataIsolation): ?ModeAggregate
     {
@@ -157,7 +157,7 @@ class ModeDomainService
         }
         $mode = $modeAggregate->getMode();
 
-        // 默认模式不能被禁用
+        // default模式不能被禁用
         if ($mode->isDefaultMode() && ! $status) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IN_USE_CANNOT_DELETE);
         }
@@ -293,7 +293,7 @@ class ModeDomainService
         foreach ($modes as $mode) {
             $modeId = $mode->getId();
 
-            // 查找最终源模式ID（递归查找跟随链）
+            // 查找final源模式ID（递归查找跟随链）
             $ultimateSourceId = $this->findUltimateSourceId($modeId, $followMap);
 
             $groups = $groupsByModeId[$ultimateSourceId] ?? [];
@@ -327,7 +327,7 @@ class ModeDomainService
         // buildgroupaggregate根array
         $groupAggregates = [];
         foreach ($groups as $group) {
-            // type安全检查
+            // type安全check
             if (! $group instanceof ModeGroupEntity) {
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }
@@ -343,7 +343,7 @@ class ModeDomainService
     }
 
     /**
-     * 检查是否存在循环跟随.
+     * check是否存在循环跟随.
      */
     private function hasCircularFollow(ModeDataIsolation $dataIsolation, int|string $modeId, int|string $followModeId, array $visited = []): bool
     {
@@ -374,11 +374,11 @@ class ModeDomainService
     }
 
     /**
-     * according to跟随关系映射递归查找最终源模式ID.
-     * @param int $modeId 当前模式ID
+     * according to跟随关系映射递归查找final源模式ID.
+     * @param int $modeId current模式ID
      * @param array $followMap 跟随关系映射 [跟随者ID => 被跟随者ID]
      * @param array $visited 防止循环跟随
-     * @return int 最终源模式ID
+     * @return int final源模式ID
      */
     private function findUltimateSourceId(int $modeId, array $followMap, array $visited = []): int
     {
@@ -387,14 +387,14 @@ class ModeDomainService
             return $modeId;
         }
 
-        // 如果该模式没有跟随关系，说明它就是最终源
+        // 如果该模式没有跟随关系，说明它就是final源
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }
 
         $visited[] = $modeId;
 
-        // 递归查找跟随目标的最终源
+        // 递归查找跟随目标的final源
         return $this->findUltimateSourceId($followMap[$modeId], $followMap, $visited);
     }
 }

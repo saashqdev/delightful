@@ -13,12 +13,12 @@ use InvalidArgumentException;
 /**
  * 知识库检索configurationvalueobject
  *
- * 包含检索策略、检索method、重sortconfiguration等parameter
+ * contain检索策略、检索method、重sortconfiguration等parameter
  */
 class RetrieveConfig extends AbstractValueObject
 {
     /**
-     * 当前configuration版本.
+     * currentconfiguration版本.
      *
      * 用于configuration结构变更时的兼容性处理
      */
@@ -38,14 +38,14 @@ class RetrieveConfig extends AbstractValueObject
     protected string $searchMethod = RetrievalMethod::SEMANTIC_SEARCH;
 
     /**
-     * return的最大result数量.
+     * return的最大resultquantity.
      */
     protected int $topK = 3;
 
     /**
      * 分数阈value
      *
-     * 只return相似度分数大于该阈value的result
+     * 只return相似度分数greater than该阈value的result
      */
     protected float $scoreThreshold = 0.5;
 
@@ -73,7 +73,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 权重configuration.
      *
-     * 包含向量检索和关键词检索的权重configuration
+     * contain向量检索和关键词检索的权重configuration
      */
     protected array $weights = [
         'vector_setting' => [
@@ -96,7 +96,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 重sortmodelconfiguration.
      *
-     * 包含重sortmodel的相关configurationparameter
+     * contain重sortmodel的相关configurationparameter
      */
     protected array $rerankingModel = [
         'reranking_model_name' => '',
@@ -148,7 +148,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * getreturn的最大result数量.
+     * getreturn的最大resultquantity.
      */
     public function getTopK(): int
     {
@@ -156,7 +156,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setreturn的最大result数量.
+     * setreturn的最大resultquantity.
      */
     public function setTopK(int $topK): self
     {
@@ -254,7 +254,7 @@ class RetrieveConfig extends AbstractValueObject
      */
     public function setWeights(array $weights): self
     {
-        // 验证权重configuration
+        // verify权重configuration
         if (! isset($weights['vector_setting']) || ! isset($weights['keyword_setting']) || ! isset($weights['graph_setting'])) {
             throw new InvalidArgumentException('Weights must contain vector_setting, keyword_setting and graph_setting');
         }
@@ -264,7 +264,7 @@ class RetrieveConfig extends AbstractValueObject
             throw new InvalidArgumentException('Vector setting must contain vector_weight and keyword setting must contain keyword_weight');
         }
 
-        // 验证 graph_setting 必须包含必要的field
+        // verify graph_setting mustcontain必要的field
         if (! isset($weights['graph_setting']['relation_weight'])
             || ! isset($weights['graph_setting']['max_depth'])
             || ! isset($weights['graph_setting']['include_properties'])) {
@@ -296,13 +296,13 @@ class RetrieveConfig extends AbstractValueObject
      */
     public function setRerankingModel(array $rerankingModel): self
     {
-        // 合并默认configuration
+        // 合并defaultconfiguration
         $this->rerankingModel = array_merge($this->rerankingModel, $rerankingModel);
         return $this;
     }
 
     /**
-     * create默认configuration.
+     * createdefaultconfiguration.
      */
     public static function createDefault(): self
     {

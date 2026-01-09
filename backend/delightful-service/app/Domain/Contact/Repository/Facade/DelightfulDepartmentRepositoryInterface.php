@@ -64,7 +64,7 @@ interface DelightfulDepartmentRepositoryInterface
     public function addDepartmentDocument(string $departmentId, string $documentId): void;
 
     /**
-     * getdepartment的所有子department的成员总数.
+     * getdepartment的所有子department的成员total.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int;
 

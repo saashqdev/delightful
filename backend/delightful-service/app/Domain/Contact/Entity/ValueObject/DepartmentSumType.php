@@ -12,9 +12,9 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum DepartmentSumType: int
 {
-    // 1：returndepartment直属user总数，
+    // 1：returndepartment直属usertotal，
     case DirectEmployee = 1;
 
-    // 2：return本department + 所有子departmentuser总数
+    // 2：return本department + 所有子departmentusertotal
     case All = 2;
 }

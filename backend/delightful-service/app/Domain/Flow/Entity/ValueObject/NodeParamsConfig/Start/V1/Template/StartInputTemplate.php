@@ -174,7 +174,7 @@ class StartInputTemplate
                         "size": {
                             "type": "number",
                             "key": "size",
-                            "title": "file大小",
+                            "title": "filesize",
                             "description": "",
                             "required": null,
                             "value": null,

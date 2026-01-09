@@ -94,7 +94,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get分组数量.
+     * get分组quantity.
      */
     public function getGroupCount(): int
     {
@@ -102,7 +102,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get总模型数量.
+     * get总模型quantity.
      */
     public function getTotalModelCount(): int
     {

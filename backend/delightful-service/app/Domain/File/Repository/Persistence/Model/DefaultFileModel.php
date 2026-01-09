@@ -17,7 +17,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $business_type 模块type，file属于哪个模块
  * @property int $file_type filetype：0:官方添加，1:organization添加
  * @property string $key filekey
- * @property int $file_size file大小
+ * @property int $file_size filesize
  * @property string $organization organization编码
  * @property string $file_extension file后缀
  * @property string $user_id upload者ID

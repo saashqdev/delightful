@@ -20,7 +20,7 @@ class RetrieveStrategy
      * 单一检索.
      *
      * 从单个知识库中检索info。
-     * 该策略通过configurationparameter `retrieve_strategy` fieldset，
+     * 该策略passconfigurationparameter `retrieve_strategy` fieldset，
      * 从database中的 retrieve_config configurationget。
      */
     public const SINGLE = 'single';
@@ -29,9 +29,9 @@ class RetrieveStrategy
      * 多重检索.
      *
      * 同时从多个知识库中检索info，然后对result进行重新sort。
-     * 该策略通过configurationparameter `retrieve_strategy` fieldset，
+     * 该策略passconfigurationparameter `retrieve_strategy` fieldset，
      * 从database中的 retrieve_config configurationget。
-     * 它支持不同的重sort策略，如use重sortmodel或加权分数。
+     * 它支持different的重sort策略，如use重sortmodel或加权分数。
      */
     public const MULTIPLE = 'multiple';
 
@@ -49,7 +49,7 @@ class RetrieveStrategy
     }
 
     /**
-     * check给定的策略是否有效.
+     * check给定的策略是否valid.
      */
     public static function isValid(string $strategy): bool
     {

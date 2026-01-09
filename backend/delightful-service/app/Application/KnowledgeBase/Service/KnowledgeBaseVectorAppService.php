@@ -22,7 +22,7 @@ use Throwable;
 class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
 {
     /**
-     * 检查知识库的向量集合是否存在.
+     * check知识库的向量集合是否存在.
      *
      * @throws BusinessException
      */
@@ -94,7 +94,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
         $content = $this->documentFileStrategy->parseContent($dataIsolation, $documentFile, $knowledgeBaseEntity->getCode());
         $this->logger->info('解析filecomplete，正在file分段，file名：' . $documentFile->getName());
         $splitText = $this->knowledgeBaseFragmentDomainService->processFragmentsByContent($dataIsolation, $content, $documentEntity->getFragmentConfig());
-        $this->logger->info('file分段complete，file名：' . $documentFile->getName() . '，分段数量:' . count($splitText));
+        $this->logger->info('file分段complete，file名：' . $documentFile->getName() . '，分段quantity:' . count($splitText));
 
         foreach ($splitText as $text) {
             $fragmentEntity = (new KnowledgeBaseFragmentEntity())

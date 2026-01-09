@@ -144,7 +144,7 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // validate第一个块contain主标题和第一段内容
+        // validatefirst块contain主标题和第一段内容
         $this->assertStringContainsString('# 主标题', $chunks[0]);
         $this->assertStringContainsString('这是第一段内容', $chunks[0]);
 
@@ -197,7 +197,7 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // validate第一个块contain主标题和第一段内容
+        // validatefirst块contain主标题和第一段内容
         $this->assertStringContainsString('** 主标题 **', $chunks[0]);
         $this->assertStringContainsString('这是第一段内容', $chunks[0]);
 
@@ -291,7 +291,7 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(2, $chunks);
 
-        // validate中文内容被正确handle
+        // validate中文内容被correcthandle
         $this->assertStringContainsString('中文test', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文路径/image.png</DelightfulCompressibleContent>', $chunks[0]);
         $this->assertStringContainsString('continuetest', $chunks[1]);

@@ -134,7 +134,7 @@ class OrganizationAdminDomainService
             $this->logger->warning('找不到organization代码', ['organizationCode' => $orgCode]);
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
-        // 个人organization不允许授予organization管理员
+        // 个人organization不allow授予organization管理员
         if ($organization->getType() === 1) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.personal_organization_cannot_grant_admin');
         }
@@ -143,7 +143,7 @@ class OrganizationAdminDomainService
         if ($this->isOrganizationAdmin($dataIsolation, $userId)) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.user_already_organization_admin', ['userId' => $userId]);
         }
-        // checkuser是否有效
+        // checkuser是否valid
         $user = $this->userRepository->getUserById($userId);
         if (! $user) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST, 'user.not_exist', ['userId' => $userId]);
@@ -225,7 +225,7 @@ class OrganizationAdminDomainService
      */
     public function transferOrganizationCreator(DataIsolation $dataIsolation, string $currentCreatorUserId, string $newCreatorUserId, string $operatorUserId): void
     {
-        // check当前create人是否存在且确实是create人
+        // checkcurrentcreate人是否存在且确实是create人
         $currentCreator = $this->getByUserId($dataIsolation, $currentCreatorUserId);
         if (! $currentCreator || ! $currentCreator->isOrganizationCreator()) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.current_user_not_organization_creator', ['userId' => $currentCreatorUserId]);
@@ -238,7 +238,7 @@ class OrganizationAdminDomainService
             $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转让organizationcreate人身份时自动授予管理员permission');
         }
 
-        // cancel当前create人的create人身份
+        // cancelcurrentcreate人的create人身份
         $currentCreator->unmarkAsOrganizationCreator();
         $currentCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $currentCreator);

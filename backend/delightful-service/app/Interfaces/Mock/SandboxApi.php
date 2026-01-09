@@ -100,7 +100,7 @@ class SandboxApi
         ]);
 
         // 模拟工作区就绪status
-        // 注意：status 必须return整数type，对应 WorkspaceStatus constant
+        // 注意：status mustreturn整数type，对应 WorkspaceStatus constant
         return [
             'code' => 1000,
             'message' => 'success',
@@ -176,7 +176,7 @@ class SandboxApi
             'metadata' => $metadata,
         ]);
 
-        // 验证必传parameter
+        // verify必传parameter
         if (empty($type) || $type !== 'init') {
             return [
                 'code' => 4000,

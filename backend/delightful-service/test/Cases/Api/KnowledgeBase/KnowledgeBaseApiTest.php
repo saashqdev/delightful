@@ -610,7 +610,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
         $this->assertIsArray($res['data']);
 
-        // 验证returnresult的结构
+        // verifyreturnresult的结构
         if (! empty($res['data'])) {
             $result = $res['data']['list'][0];
             $this->assertArrayHasKey('id', $result);
@@ -621,7 +621,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
             $this->assertArrayHasKey('doc_type', $result);
             $this->assertArrayHasKey('knowledge_base_code', $result);
 
-            // 验证return的content包含query关键词
+            // verifyreturn的contentcontainquery关键词
             $this->assertStringContainsString('test', $result['content']);
         }
     }
@@ -694,8 +694,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
      */
     protected function clearTestKnowledgeBaseData()
     {
-        // according to实际情况implement清理逻辑
-        // 可以直接calldatabase操作deletetest数据
+        // according toactual情况implement清理逻辑
+        // can直接calldatabase操作deletetest数据
         // 或者call相应的servicemethod
     }
 

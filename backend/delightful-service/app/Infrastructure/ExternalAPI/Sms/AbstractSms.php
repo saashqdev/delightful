@@ -84,7 +84,7 @@ abstract class AbstractSms implements SmsInterface
 
     /**
      * 将variable的value与variable名关联,还原短信content.
-     * @param array $variables 短信的variable部分,可能是 valuearray,也可能是 key=>valuearray,需要按$templateContent的content,统一还原成key=>valuearray
+     * @param array $variables 短信的variable部分,可能是 valuearray,也可能是 key=>valuearray,need按$templateContent的content,统一还原成key=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {

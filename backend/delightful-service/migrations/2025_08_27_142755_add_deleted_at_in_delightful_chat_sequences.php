@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_chat_sequences', function (Blueprint $table) {
-            // 检查deleted_at字段是否存在，if不存在则添加软delete字段
+            // checkdeleted_at字段是否存在，if不存在则添加软delete字段
             if (! Schema::hasColumn('delightful_chat_sequences', 'deleted_at')) {
                 $table->softDeletes()->comment('软deletion time');
             }

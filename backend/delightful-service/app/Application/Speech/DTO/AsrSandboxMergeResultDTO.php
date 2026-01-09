@@ -41,7 +41,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 检查合并是否complete.
+     * check合并是否complete.
      */
     public function isFinished(): bool
     {
@@ -49,7 +49,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 检查合并是否failed.
+     * check合并是否failed.
      */
     public function isError(): bool
     {

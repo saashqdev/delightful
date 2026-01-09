@@ -41,9 +41,9 @@ class DocumentQueryRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'page.min' => '页码必须大于等于1',
-            'page_size.min' => '每页数量必须大于等于1',
-            'page_size.max' => '每页数量cannot超过100',
+            'page.min' => '页码mustgreater thanequal1',
+            'page_size.min' => '每页quantitymustgreater thanequal1',
+            'page_size.max' => '每页quantitycannot超过100',
         ];
     }
 

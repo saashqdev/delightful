@@ -10,7 +10,7 @@ namespace App\Application\Provider\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * BeDelightful 模型简化 DTO，只包含必要field.
+ * BeDelightful 模型简化 DTO，只contain必要field.
  */
 class BeDelightfulModelDTO extends AbstractDTO
 {

@@ -161,7 +161,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 通过手机号get第三方userid.
+     * pass手机号get第三方userid.
      * @param string $mobile 手机号码
      * @return string 第三方userid，return格式
      */

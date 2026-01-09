@@ -73,10 +73,10 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // 如果是资源类的数据，那么需要提前upload了
+        // 如果是资源类的数据，那么need提前upload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由于里面会进行重命名，所以这里直接get对应的name传入进去
+        // 由于里面will进行重命名，所以这里直接get对应的name传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
@@ -437,12 +437,12 @@ class ReplyMessageNodeRunner extends NodeRunner
             $userIds = array_merge($userIds, $this->getUserIdsByDepartmentIds($executionData, $departmentIds));
         }
 
-        // 如果为空，兜底当前user
+        // 如果为空，兜底currentuser
         if (empty($userIds)) {
             $userIds[] = $executionData->getOperator()->getUid();
         }
 
-        // filter不合法的user
+        // filter不legal的user
         $userIds = array_values(array_unique($userIds));
 
         return Db::table('delightful_contact_users')

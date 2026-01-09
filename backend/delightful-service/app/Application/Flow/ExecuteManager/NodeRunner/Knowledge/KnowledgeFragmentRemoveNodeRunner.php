@@ -47,7 +47,7 @@ class KnowledgeFragmentRemoveNodeRunner extends AbstractKnowledgeNodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.knowledge_fragment_store.business_id_empty');
         }
 
-        // metadata or business_id 必须有one不为null
+        // metadata or business_id must有one不为null
         if (empty($metadataFilter) && empty($businessId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.knowledge_fragment_remove.metadata_business_id_empty');
         }

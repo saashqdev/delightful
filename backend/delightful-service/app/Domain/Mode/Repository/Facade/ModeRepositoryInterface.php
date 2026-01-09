@@ -25,7 +25,7 @@ interface ModeRepositoryInterface
     public function findByIdentifier(ModeDataIsolation $dataIsolation, string $identifier): ?ModeEntity;
 
     /**
-     * get默认mode.
+     * getdefaultmode.
      */
     public function findDefaultMode(ModeDataIsolation $dataIsolation): ?ModeEntity;
 
@@ -45,7 +45,7 @@ interface ModeRepositoryInterface
     public function delete(ModeDataIsolation $dataIsolation, string $id): bool;
 
     /**
-     * 检查标识符是否唯一
+     * check标识符是否唯一
      */
     public function isIdentifierUnique(ModeDataIsolation $dataIsolation, string $identifier, ?string $excludeId = null): bool;
 

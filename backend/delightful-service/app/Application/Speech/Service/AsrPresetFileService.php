@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * 负责createpreset笔记和stream识别file，供前端写入content.
+ * 负责createpreset笔记和stream识别file，供前端writecontent.
  */
 readonly class AsrPresetFileService
 {
@@ -179,7 +179,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ use CoContext 和 di() get正确的语言和翻译
+        // ⚠️ use CoContext 和 di() getcorrect的语言和翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -216,7 +216,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ use CoContext 和 di() get正确的语言和翻译
+        // ⚠️ use CoContext 和 di() getcorrect的语言和翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -279,7 +279,7 @@ readonly class AsrPresetFileService
             'file_name' => $fileName,
             'file_extension' => 'md',
             'file_key' => $fileKey,
-            'file_size' => 0, // 初始为0，前端写入后会update
+            'file_size' => 0, // initial为0，前端write后willupdate
             'external_url' => '',
             'storage_type' => 'workspace',
             'is_hidden' => $isHidden,

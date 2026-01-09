@@ -29,7 +29,7 @@ class ImportAgentWithFlowCommand extends HyperfCommand
         $this->container = $container;
         $this->exportImportService = $container->get(DelightfulFlowExportImportAppService::class);
         parent::__construct('agent:import');
-        $this->setDescription('从OSSimport助理（包含主process、工具、子process等）');
+        $this->setDescription('从OSSimport助理（contain主process、工具、子process等）');
         $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理数据file的URL');
         $this->addArgument('user_id', InputArgument::REQUIRED, 'userid');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organization编码');
@@ -48,7 +48,7 @@ class ImportAgentWithFlowCommand extends HyperfCommand
             // 解析JSONcontent
             $importData = json_decode($content, true);
             if (! $importData || ! is_array($importData)) {
-                $this->output->error('file中的JSON数据无效');
+                $this->output->error('file中的JSON数据invalid');
                 return 1;
             }
 

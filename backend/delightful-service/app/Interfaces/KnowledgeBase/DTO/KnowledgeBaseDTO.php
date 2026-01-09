@@ -39,29 +39,29 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public string $organizationCode;
 
     /**
-     * 片段数量.
+     * 片段quantity.
      */
     public int $fragmentCount = 0;
 
     /**
-     * 预期的片段数量.
+     * expected的片段quantity.
      */
     public int $expectedCount = 0;
 
     /**
-     * 已complete的片段数量.
+     * 已complete的片段quantity.
      */
     public int $completedCount = 0;
 
     public int $userOperation = 0;
 
     /**
-     * 业务维护的期望总数.
+     * 业务维护的expecttotal.
      */
     public int $expectedNum = 0;
 
     /**
-     * 业务维护的已complete的数量.
+     * 业务维护的已complete的quantity.
      */
     public int $completedNum = 0;
 

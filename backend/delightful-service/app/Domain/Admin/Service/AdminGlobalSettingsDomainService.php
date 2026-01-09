@@ -28,7 +28,7 @@ readonly class AdminGlobalSettingsDomainService
         );
 
         if ($settings === null) {
-            // create默认setting
+            // createdefaultsetting
             $settings = $this->globalSettingsRepository->updateSettings(
                 (new AdminGlobalSettingsEntity())
                     ->setType($type)

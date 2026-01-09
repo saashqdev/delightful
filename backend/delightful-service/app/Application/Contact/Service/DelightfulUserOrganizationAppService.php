@@ -81,7 +81,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * get账号下可用organization列表（仅包含enabled statusorganization）。
+     * get账号下可用organization列表（仅containenabled statusorganization）。
      *
      * @throws Throwable
      */

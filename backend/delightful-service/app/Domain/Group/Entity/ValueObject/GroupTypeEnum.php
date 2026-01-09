@@ -15,7 +15,7 @@ enum GroupTypeEnum: int
     // 内部培训群
     case InternalTraining = 2;
 
-    // 内部会议群
+    // 内部will议群
     case InternalMeeting = 3;
 
     // 内部项目群

@@ -45,7 +45,7 @@ class QwenProvider implements IProvider
         $body = [];
         // 文生图configuration
         $body['prompt'] = '生成一只狗';
-        $body['size'] = '1328*1328'; // useqwen-image支持的默认1:1尺寸
+        $body['size'] = '1328*1328'; // useqwen-image支持的default1:1尺寸
         $body['n'] = 1;
         $body['model'] = $modelVersion;
         $body['watermark'] = false;
@@ -54,7 +54,7 @@ class QwenProvider implements IProvider
         try {
             $response = $qwenAPI->submitTask($body);
 
-            // 检查响应格式
+            // check响应格式
             if (! isset($response['output']['task_id'])) {
                 $connectResponse->setStatus(false);
                 $connectResponse->setMessage($response['message'] ?? '响应格式error');

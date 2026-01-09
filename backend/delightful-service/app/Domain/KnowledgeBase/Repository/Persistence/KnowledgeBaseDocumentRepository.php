@@ -137,11 +137,11 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * @return array<string, int> array<知识库code, 文档数量>
+     * @return array<string, int> array<知识库code, 文档quantity>
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // 分组聚合query，get每个知识库的文档数量
+        // 分组聚合query，get每个知识库的文档quantity
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')

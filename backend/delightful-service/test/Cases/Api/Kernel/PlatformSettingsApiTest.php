@@ -25,7 +25,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // 验证响应结构
+        // verify响应结构
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
@@ -63,28 +63,28 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // 验证响应结构
+        // verify响应结构
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
 
-        // 验证 logo
+        // verify logo
         $this->assertArrayHasKey('zh_CN', $data['logo']);
         $this->assertArrayHasKey('en_US', $data['logo']);
         $this->assertSame('https://example.com/logo_zh.png', $data['logo']['zh_CN']['url']);
         $this->assertSame('https://example.com/logo_en.png', $data['logo']['en_US']['url']);
 
-        // 验证 favicon
+        // verify favicon
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
 
-        // 验证其他field
+        // verify其他field
         $this->assertSame('en_US', $data['default_language']);
         $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n 不匹配');
         $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n 不匹配');
         $this->assertArrayEquals($payload['keywords_i18n'], $data['keywords_i18n'], 'keywords_i18n 不匹配');
         $this->assertArrayEquals($payload['description_i18n'], $data['description_i18n'], 'description_i18n 不匹配');
 
-        // 再次 GET 验证持久化
+        // 再次 GET verify持久化
         $getResponse = $this->get($this->getUrl, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
@@ -103,7 +103,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
             'favicon_url' => 'https://example.com/initial_favicon.ico',
             'default_language' => 'zh_CN',
             'name_i18n' => [
-                'zh_CN' => '初始平台',
+                'zh_CN' => 'initial平台',
                 'en_US' => 'Initial Platform',
             ],
         ];
@@ -117,11 +117,11 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // 验证中文 logo 已update
+        // verify中文 logo 已update
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
-        // 验证英文 logo 保持不变
+        // verify英文 logo 保持不变
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);
-        // 验证 favicon 保持不变
+        // verify favicon 保持不变
         $this->assertSame('https://example.com/initial_favicon.ico', $data['favicon']['url']);
     }
 
@@ -129,11 +129,11 @@ class PlatformSettingsApiTest extends AbstractHttpTest
     {
         $payload = [
             'favicon_url' => 'https://example.com/favicon.ico',
-            'default_language' => 'invalid_locale', // 无效的语言
+            'default_language' => 'invalid_locale', // invalid的语言
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
-        // 应该return验证failerror
+        // shouldreturnverifyfailerror
         $this->assertNotSame(1000, $response['code']);
     }
 
@@ -145,7 +145,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
-        // 应该return验证failerror
+        // shouldreturnverifyfailerror
         $this->assertNotSame(1000, $response['code']);
     }
 
@@ -157,7 +157,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 尝试clear favicon (传入空string不会update，所以不应该fail)
+        // 尝试clear favicon (传入空string不willupdate，所以不shouldfail)
         $payload = [
             'favicon_url' => '', // 空string
             'default_language' => 'zh_CN',
@@ -165,7 +165,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon 应该保持原value（因为空string不会update）
+        // favicon should保持原value（因为空string不willupdate）
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }

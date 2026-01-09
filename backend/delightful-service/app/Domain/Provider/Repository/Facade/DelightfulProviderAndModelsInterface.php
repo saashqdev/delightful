@@ -19,7 +19,7 @@ use App\Domain\Provider\Entity\ValueObject\Status;
 interface DelightfulProviderAndModelsInterface
 {
     /**
-     * getorganization下的 Delightful service商configuration（不含model详情）.
+     * getorganization下的 Delightful service商configuration（not containmodel详情）.
      */
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO;
 

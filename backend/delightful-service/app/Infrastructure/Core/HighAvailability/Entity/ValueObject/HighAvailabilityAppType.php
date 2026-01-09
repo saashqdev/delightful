@@ -30,7 +30,7 @@ enum HighAvailabilityAppType: string
     }
 
     /**
-     * 检查是否是有效的应用type.
+     * check是否是valid的应用type.
      */
     public static function isValid(string $type): bool
     {
@@ -44,7 +44,7 @@ enum HighAvailabilityAppType: string
     {
         return match ($type) {
             self::MODEL_GATEWAY->value => self::MODEL_GATEWAY,
-            default => throw new InvalidArgumentException("无效的高可用应用type: {$type}"),
+            default => throw new InvalidArgumentException("invalid的高可用应用type: {$type}"),
         };
     }
 

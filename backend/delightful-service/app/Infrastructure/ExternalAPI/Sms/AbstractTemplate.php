@@ -95,7 +95,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $sign;
         }
 
-        // 确定signature的语种,需要从 user指定语种,user指定兜底语种,系统默认的兜底语种 中确定出来一个value
+        // 确定signature的语种,need从 user指定语种,user指定兜底语种,系统default的兜底语种 中确定出来一个value
         $signLanguage = null;
         // 语种兜底的顺序
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * 当传入的signaturetype不存在时,get短信的默认signaturetype.
+     * 当传入的signaturetype不存在时,get短信的defaultsignaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

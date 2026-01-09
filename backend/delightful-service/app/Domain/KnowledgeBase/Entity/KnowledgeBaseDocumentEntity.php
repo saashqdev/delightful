@@ -239,7 +239,7 @@ class KnowledgeBaseDocumentEntity extends AbstractKnowledgeBaseEntity
 
     public function setFragmentConfig(null|array|FragmentConfig $fragmentConfig): self
     {
-        // 默认configuration
+        // defaultconfiguration
         empty($fragmentConfig) && $fragmentConfig = $this->getDefaultFragmentConfig();
         is_array($fragmentConfig) && $fragmentConfig = FragmentConfig::fromArray($fragmentConfig);
         $this->fragmentConfig = $fragmentConfig;

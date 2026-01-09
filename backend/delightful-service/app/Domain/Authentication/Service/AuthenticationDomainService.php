@@ -28,7 +28,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * 验证账号凭证
+     * verify账号凭证
      */
     public function verifyAccountCredentials(string $email, string $password): ?AccountEntity
     {
@@ -38,7 +38,7 @@ readonly class AuthenticationDomainService
             return null;
         }
 
-        // 验证密码
+        // verify密码
         if (! $this->passwordService->verifyPassword($password, $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
         }
@@ -62,13 +62,13 @@ readonly class AuthenticationDomainService
      */
     public function generateAccountToken(string $delightfulId): string
     {
-        // 写入 token 表
+        // write token 表
         $authorization = IdGenerator::getUniqueIdSha256();
         $delightfulTokenEntity = new DelightfulTokenEntity();
         $delightfulTokenEntity->setType(DelightfulTokenType::Account);
         $delightfulTokenEntity->setTypeRelationValue($delightfulId);
         $delightfulTokenEntity->setToken($authorization);
-        // 默认 30 天
+        // default 30 天
         $carbon = Carbon::now()->addDays(30);
         $delightfulTokenEntity->setExpiredAt($carbon->toDateTimeString());
         $this->delightfulTokenRepository->createToken($delightfulTokenEntity);

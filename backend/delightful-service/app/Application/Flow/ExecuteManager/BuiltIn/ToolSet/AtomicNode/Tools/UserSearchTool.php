@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'usersearch。不允许search全部人员，一定是具有指定filtervalue';
+        return 'usersearch。不allowsearch全部人员，一定是具有指定filtervalue';
     }
 
     public function getCallback(): ?Closure
@@ -93,7 +93,7 @@ class UserSearchTool extends AbstractBuiltInTool
             "type": "string",
             "key": "filter_type",
             "title": "filtertype",
-            "description": "filtertype。支持的filtertype有：all、any。分别代table 所有条件、任意条件。默认是 all",
+            "description": "filtertype。支持的filtertype有：all、any。分别代table 所有条件、任意条件。default是 all",
             "required": null,
             "value": null,
             "encryption": false,
@@ -138,7 +138,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "operator",
                         "title": "filter符",
-                        "description": "filter符。可选枚举有：equals、no_equals、contains、no_contains。分别代table 等于、不等于、包含、不包含",
+                        "description": "filter符。可选枚举有：equals、no_equals、contains、no_contains。分别代table equal、不equal、contain、不contain",
                         "required": null,
                         "value": null,
                         "encryption": false,

@@ -38,7 +38,7 @@ interface LoginResponseInterface
     /**
      * 转换为array格式.
      *
-     * @return array<string, mixed> 包含所有属性的array
+     * @return array<string, mixed> contain所有属性的array
      */
     public function toArray(): array;
 }

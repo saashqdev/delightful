@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('color', 10)->default('')->comment('模式颜色');
             $table->bigInteger('sort')->default(0)->comment('sort');
             $table->text('description')->comment('模式description');
-            $table->tinyInteger('is_default')->default(0)->comment('是否默认模式 0:否 1:是');
+            $table->tinyInteger('is_default')->default(0)->comment('是否default模式 0:否 1:是');
             $table->tinyInteger('status')->default(1)->comment('status 0:禁用 1:启用');
             $table->tinyInteger('distribution_type')->default(1)->comment('分配方式 1:customizeconfiguration 2:跟随其他模式');
             $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随的模式ID，0table示不跟随');
@@ -44,19 +44,19 @@ return new class extends Migration {
             $table->unique('identifier', 'idx_identifier');
         });
 
-        // 插入默认模式数据
+        // 插入default模式数据
         $this->insertDefaultModeData();
     }
 
     /**
-     * 插入默认模式数据.
+     * 插入default模式数据.
      */
     private function insertDefaultModeData(): void
     {
         $defaultModeData = [
             'id' => IdGenerator::getSnowId(),
             'name_i18n' => json_encode([
-                'zh_CN' => '默认模式',
+                'zh_CN' => 'default模式',
                 'en_US' => 'Default Mode',
             ]),
             'identifier' => 'default',

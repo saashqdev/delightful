@@ -48,7 +48,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * get限制数量.
+     * get限制quantity.
      */
     public function getLimit(): int
     {
@@ -56,7 +56,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * setting限制数量.
+     * setting限制quantity.
      */
     public function setLimit(int $limit): void
     {

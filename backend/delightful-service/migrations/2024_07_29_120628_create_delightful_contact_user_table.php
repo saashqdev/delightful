@@ -23,7 +23,7 @@ return new class extends Migration {
             // organization编码
             $table->string('organization_code', 64)->comment('organization编码')->default('');
             // user_id
-            $table->string('user_id', 64)->comment('userid,organization下唯一.此field还会record一份到user_id_relation')->default(0);
+            $table->string('user_id', 64)->comment('userid,organization下唯一.此field还willrecord一份到user_id_relation')->default(0);
             // user_type
             $table->tinyInteger('user_type')->comment('usertype,0:ai,1:人类')->default(0);
             $table->string('description', 1024)->comment('description(可用于ai的自我介绍)');

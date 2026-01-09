@@ -17,7 +17,7 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * user当前organization管理API.
+ * usercurrentorganization管理API.
  */
 #[ApiResponse('low_code')]
 class DelightfulUserOrganizationApi extends AbstractApi
@@ -29,7 +29,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
     protected DelightfulUserDomainService $userDomainService;
 
     /**
-     * getuser当前organization代码
+     * getusercurrentorganization代码
      */
     public function getCurrentOrganizationCode(RequestInterface $request): array
     {
@@ -41,12 +41,12 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // get当前user的organization代码
+        // getcurrentuser的organization代码
         return $this->userOrganizationAppService->getCurrentOrganizationCode($delightfulId);
     }
 
     /**
-     * setuser当前organization代码
+     * setusercurrentorganization代码
      */
     public function setCurrentOrganizationCode(RequestInterface $request): array
     {
@@ -64,7 +64,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // setuser当前organization代码
+        // setusercurrentorganization代码
         return $this->userOrganizationAppService->setCurrentOrganizationCode($delightfulId, $organizationCode);
     }
 
@@ -87,7 +87,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        // 同一账号下 delightful_id 全局唯一，这里取第一个即可
+        // 同一账号下 delightful_id 全局唯一，这里取first即可
         return $userDetails[0]->getDelightfulId();
     }
 }

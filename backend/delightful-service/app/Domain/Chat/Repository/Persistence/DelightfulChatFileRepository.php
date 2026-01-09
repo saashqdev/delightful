@@ -87,7 +87,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
     }
 
     /**
-     * 通过file_key查找file.
+     * passfile_key查找file.
      */
     public function getChatFileByFileKey(string $fileKey): ?DelightfulChatFileEntity
     {
@@ -121,7 +121,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
 
     public function updateFileById(string $fileId, DelightfulChatFileEntity $entity)
     {
-        // fileupdate需谨慎，暂时只允许updatefile_name
+        // fileupdate需谨慎，暂时只allowupdatefile_name
         $model = new DelightfulChatFileModel();
         $updateData = [];
         if ($entity->getFileKey()) {

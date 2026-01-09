@@ -34,9 +34,9 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         $userPrompt = (string) $paramsConfig->getUserPrompt()->getValue()->getResult($executionData->getExpressionFieldData());
         $vertexResult->addDebugLog('user_prompt', $userPrompt);
 
-        // system 中是否包含 content
+        // system 中是否contain content
         $systemHasContent = $this->contentIsInSystemPrompt($executionData);
-        // user 中是否包含 content
+        // user 中是否contain content
         $userHasContent = $this->contentIsInUserPrompt($executionData);
         if ($frontResults['force_user_has_content'] ?? false) {
             $userHasContent = true;
@@ -77,7 +77,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $memoryManager->addMessage($contentMessage);
                 }
             } else {
-                // createone新的，在后续use
+                // createonenew，在后续use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
             }

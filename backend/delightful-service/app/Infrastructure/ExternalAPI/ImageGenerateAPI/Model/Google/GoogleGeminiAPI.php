@@ -96,7 +96,7 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像editsetting正确的生成configuration
+        // 为图像editsettingcorrect的生成configuration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
@@ -150,7 +150,7 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像editsetting正确的生成configuration
+        // 为图像editsettingcorrect的生成configuration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,

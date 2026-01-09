@@ -156,31 +156,31 @@ class DelightfulLLMDomainService
     1.2 dimension拆解
        - according to识别出的实体和需求，选择合适的分析dimension，for example：政策解读、数据validate、案例研究、影响评估、技术原理、市场前景、user体验等
     1.3 子questiongenerate
-       - generate正交子question集（Jaccard相似度<0.25），确保每个子question能从不同角度探索user需求，避免generate过于宽泛或相似的question
+       - generate正交子question集（Jaccard相似度<0.25），ensure每个子question能从different角度探索user需求，避免generate过于宽泛或相似的question
     
     ### 2. search代理模块
-    必须call工具: batchSubQuestionsSearch
+    mustcall工具: batchSubQuestionsSearch
     parameter规范：
     2.1 key词规则
-       - generate大于等于 3 个高质量的可检索key词，include核心实体、keyproperty和相关概念
+       - generategreater thanequal 3 个高质量的可检索key词，include核心实体、keyproperty和相关概念
        - 时间限定符override率≥30%
        - 对比类question占比≥20%
     
     ## 硬性约束（强制遵守）
     1. 语言一致性
-       - 输出语言编码必须匹配输入语言
-    2. 子question数量范围
+       - 输出语言编码must匹配输入语言
+    2. 子questionquantityrange
        - {sub_questions_min} ≤ 子question数 ≤ {sub_questions_max}
     3. 输出format
-       - 仅允许JSONarrayformat，禁止自然语言回答
+       - 仅allowJSONarrayformat，forbid自然语言回答
     
     ## contextexceptionhandle
     当 {context} 为null时：
-    1. 启动备选generate策略，application5W1H框架（Who/What/When/Where/Why/How），并结合user的原始question进行填充
-    2. generate默认dimension，for example：政策背景 | 最新数据 | 专家观点 | 对比分析 | 行业趋势
+    1. 启动备选generate策略，application5W1H框架（Who/What/When/Where/Why/How），并结合user的originalquestion进行填充
+    2. generatedefaultdimension，for example：政策背景 | 最新数据 | 专家观点 | 对比分析 | 行业趋势
     
     ## 输出规范
-    混合以下三种及更多type的question范式，以确保子question的多样性和override性：
+    混合以下三种及更多type的question范式，以ensure子question的多样性和override性：
     [
       "X对Y的影响差异",  // 对比/比较类
       "Z领域的典型application",  // application/案例类
@@ -191,28 +191,28 @@ class DelightfulLLMDomainService
       "针对Qquestion，有哪些可行的resolve方案？" // resolve方案/建议类
     ]
     
-    当前context摘要：
+    currentcontext摘要：
     {context}
     
-    // 最终输出（严格JSONarray）：
+    // final输出（严格JSONarray）：
     ```json
     PROMPT;
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    你需要based onuser的message，according to我提供的search结果，按照总分总的结构，输出高质量，结构化的详细回答，format为 markdown。
+    你needbased onuser的message，according to我提供的search结果，按照总分总的结构，输出高质量，结构化的详细回答，format为 markdown。
     
     在我给你的search结果中，每个结果都是[webpage X begin]...[webpage X end]format的，X代表每篇文章的number索引。请在适当的情况下在句子末尾quotecontext。请按照quote编号[citation:X]的format在答案中对应部分quotecontext。如果一句话源自多个context，请列出所有相关的quote编号，for example[citation:3][citation:5]，切记不要将quote集中在最后returnquote编号，而是在答案对应部分列出。
     在回答时，请注意以下几点：
     - 今天是{date_now}。
-    - 并非search结果的所有content都与user的question密切相关，你需要结合question，对search结果进行甄别、筛选。
-    - 对于列举类的question（如列举所有航班information），尽量将答案控制在10个要点以内，并告诉user可以查看search来源、获得完整information。优先提供information完整、最相关的列举项；如非必要，不要主动告诉usersearch结果未提供的content。
-    - 对于创作类的question（如写论文），请务必在正文的段落中quote对应的参考编号，for example[citation:3][citation:5]，不能只在文章末尾quote。你需要解读并概括user的题目要求，选择合适的format，充分利用search结果并抽取重要information，generatematchuser要求、极具思想深度、富有创造力与专业性的答案。你的创作篇幅需要尽可能延长，对于每一个要点的论述要推测user的意图，给出尽可能多角度的回答要点，且务必information量大、论述详尽。
-    - 如果回答很长，请尽量结构化、分段落总结。如果需要分点作答，尽量控制在5个点以内，并merge相关的content。
-    - 对于客观类的问答，如果question的答案非常简短，可以适当补充一到两句相关information，以丰富content。
-    - 你需要according touser要求和回答content选择合适、美观的回答format，确保可读性强。
-    - 你的回答应该综合多个相关网页来回答，不能重复quote一个网页。
-    - 除非user要求，否则你回答的语言需要和user提问的语言保持一致。
+    - 并非search结果的所有content都与user的question密切相关，你need结合question，对search结果进行甄别、筛选。
+    - 对于列举类的question（如列举所有航班information），尽量将答案控制在10个要点以内，并告诉usercan查看search来源、获得完整information。优先提供information完整、最相关的列举项；如非必要，不要主动告诉usersearch结果未提供的content。
+    - 对于创作类的question（如写论文），请务必在正文的段落中quote对应的参考编号，for example[citation:3][citation:5]，不能只在文章末尾quote。你need解读并概括user的题目要求，选择合适的format，充分利用search结果并抽取重要information，generatematchuser要求、极具思想深度、富有创造力与专业性的答案。你的创作篇幅need尽可能延长，对于每一个要点的论述要推测user的意图，给出尽可能多角度的回答要点，且务必information量大、论述详尽。
+    - 如果回答很长，请尽量结构化、分段落总结。如果need分点作答，尽量控制在5个点以内，并merge相关的content。
+    - 对于客观类的问答，如果question的答案非常简短，can适当补充一到两句相关information，以丰富content。
+    - 你needaccording touser要求和回答content选择合适、美观的回答format，ensure可读性强。
+    - 你的回答should综合多个相关网页来回答，不能重复quote一个网页。
+    - 除非user要求，否则你回答的语言need和user提问的语言保持一致。
     - 输出漂亮的markdown format，content中添加一些与theme相关的emoji表情符号。
     
     ## usermessage为：
@@ -223,7 +223,7 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # 你是一个新闻事件generate器，user会提供searchcontent并询问question。
+    # 你是一个新闻事件generate器，userwill提供searchcontent并询问question。
     ## Current Time是 {data_now}  
     ## according touser的question，你需从user提供的searchcontent中整理相关事件，事件include事件名称、事件时间和事件概述。
     ### 注意事项：
@@ -232,9 +232,9 @@ class DelightfulLLMDomainService
        - 如果一个事件涉及多个quote，merge所有相关quote编号。
        - 不要在 "description" 中添加quote。
     2. **时间handle**：
-       - 事件时间尽量精确到月份（如 "2023-05"），若searchcontent未提供具体月份，但有指出上半年或者下半年，可以use（"2023 上半年"），若没有则，use年份（如 "2023"）。
+       - 事件时间尽量精确到月份（如 "2023-05"），若searchcontent未提供具体月份，但有指出上半年或者下半年，canuse（"2023 上半年"），若没有则，use年份（如 "2023"）。
        - 若同一事件在多个quote中出现，优先use最早的时间。
-       - 若时间不明确，according tocontext推测最早可能的时间，并确保合理。
+       - 若时间不明确，according tocontext推测最早可能的时间，并ensure合理。
     3. **事件提取与筛选**：
        - **事件定义**：事件是searchcontent中mention的、具有时间关联（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、更新、合作、活动等。
        - according touserquestion，提取与之相关的事件，保持描述简洁，聚焦具体发生的事情。
@@ -267,7 +267,7 @@ class DelightfulLLMDomainService
     ## use说明
     - user需提供searchcontent（containquotemark如 [[citation:x]]）和具体question。
     - according toquestion，从searchcontent中提取match事件定义的content，按要求generate输出。
-    - 若question涉及当前时间，based on {date_now} 进行推算。
+    - 若question涉及current时间，based on {date_now} 进行推算。
     
     ## quote
     {citations}
@@ -287,10 +287,10 @@ class DelightfulLLMDomainService
     return"search contexts"中与"search keywords"有关联性的 20 至 50 个 索引。
     
     ## 要求
-    - 禁止直接回答user的question，一定要return与userquestion有关联性的索引。
-    - search contexts的format为 "[[x]] content" ，其中 x 是search contexts的索引。x 不能大于 50
-    - 请以正确的 JSON formatreply筛选后的索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
-    - 如果 search keywords 与时间相关，重点注意 search contexts 中与当前时间相关的content。与当前时间越近越重要。
+    - forbid直接回答user的question，一定要return与userquestion有关联性的索引。
+    - search contexts的format为 "[[x]] content" ，其中 x 是search contexts的索引。x 不能greater than 50
+    - 请以correct的 JSON formatreply筛选后的索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    - 如果 search keywords 与时间相关，重点注意 search contexts 中与current时间相关的content。与current时间越近越重要。
 
     
     ## search keywords
@@ -358,7 +358,7 @@ class DelightfulLLMDomainService
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
         // 访问 llm
         try {
-            // according to总结 + user原始question已经能generate思维导图了，不需要再传入历史message
+            // according to总结 + useroriginalquestion已经能generate思维导图了，不need再传入历史message
             $mindMapMessage = $this->llmChat(
                 $systemPrompt,
                 $responseMessage,
@@ -580,7 +580,7 @@ class DelightfulLLMDomainService
         $searchContextsString = '';
         // 清洗search结果
         foreach ($searchContexts as $index => $context) {
-            // 可以传入网页详情，以便更好的筛选
+            // can传入网页详情，以便更好的筛选
             $searchContextsString .= '[[' . $index . ']] ' . $context->getSnippet() . "\n\n";
         }
         $systemPrompt = str_replace(
@@ -686,7 +686,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * 让大模型虚null拆解子question，对热梗/实时拆解的会不好。
+     * 让大模型虚null拆解子question，对热梗/实时拆解的will不好。
      * @return string[]
      */
     public function generateSearchKeywordsByUserInput(DelightfulChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array
@@ -712,7 +712,7 @@ class DelightfulLLMDomainService
         });
         $costTime = TimeUtil::getMillisecondDiffFromNow($start);
         $this->logger->info(sprintf(
-            'getSearchResults according touser原始question，generatesearch词，end计时，耗时：：%s 秒',
+            'getSearchResults according touseroriginalquestion，generatesearch词，end计时，耗时：：%s 秒',
             number_format($costTime / 1000, 2)
         ));
         // 大模型没有拆孙question是时，直接用子questionsearch
@@ -848,7 +848,7 @@ class DelightfulLLMDomainService
 
     public function searchWithGoogle(string $query): array
     {
-        // 以后可以从userconfiguration中读取这些value
+        // 以后can从userconfiguration中read这些value
         $subscriptionKey = config('search.drivers.google.api_key');
         $cx = config('search.drivers.google.cx');
         $data = make(GoogleSearch::class)->search($query, $subscriptionKey, $cx);
@@ -880,7 +880,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * according to原始question + search结果，按指定个数的dimension拆解question.
+     * according tooriginalquestion + search结果，按指定count的dimension拆解question.
      * @throws Throwable
      */
     public function getRelatedQuestions(AISearchCommonQueryVo $queryVo, int $subQuestionsMin, int $subQuestionsMax): ?array
@@ -928,7 +928,7 @@ class DelightfulLLMDomainService
             if (empty($subQuestions)) {
                 // 没有call工具，尝试从响应中parse json
                 $subQuestions = $this->getSubQuestionsFromLLMStringResponse($relatedQuestionsResponse, $userMessage);
-                // 大模型认为不需要generate关联question，直接拿user的question
+                // 大模型认为不needgenerate关联question，直接拿user的question
                 empty($subQuestions) && $subQuestions = [$queryVo->getUserMessage()];
             }
 
@@ -993,17 +993,17 @@ class DelightfulLLMDomainService
     {
         $content = trim($content);
         $typePattern = sprintf('/```%s\s*([\s\S]*?)\s*```/i', $type);
-        // 匹配 ```json 或 ``` 之间的 JSON 数据
+        // 匹配 ```json 或 ``` between的 JSON 数据
         if (preg_match($typePattern, $content, $matches)) {
             $matchString = $matches[1];
-        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // 匹配 ``` 之间的content
+        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // 匹配 ``` between的content
             $matchString = $matches[1];
         } else {
             $matchString = ''; // 没有找到 JSON 数据
         }
         $matchString = ! empty($matchString) ? trim($matchString) : trim($content);
         if ($type === 'json' && json_validate($matchString) === false) {
-            return '{}'; // JSON format不正确
+            return '{}'; // JSON format不correct
         }
         return $matchString;
     }
@@ -1162,7 +1162,7 @@ class DelightfulLLMDomainService
                 str_replace(PHP_EOL, '', $llmResponse),
                 Json::encode($subQuestions)
             ));
-            // 有时会return多维array，在这里filter
+            // 有时willreturn多维array，在这里filter
             $returnQuestions = [];
             foreach ($subQuestions as $subQuestion) {
                 if (is_string($subQuestion)) {

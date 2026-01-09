@@ -23,7 +23,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
 {
     /**
-     * @return array<string, int> array<知识库code, 文档数量>
+     * @return array<string, int> array<知识库code, 文档quantity>
      */
     public function getDocumentCountByKnowledgeBaseCodes(Authenticatable $authorization, array $knowledgeBaseCodes): array
     {
@@ -47,7 +47,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
 
         // 嵌入configuration不可edit
         $documentEntity->setEmbeddingConfig($knowledgeBaseEntity->getEmbeddingConfig());
-        // set默认的嵌入model和向量database
+        // setdefault的嵌入model和向量database
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());
         $documentEntity->setVectorDb(VectorStoreDriver::default()->value);
         if (! $documentEntity->getCode()) {
@@ -70,10 +70,10 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
 
-        // 验证知识库的permission
+        // verify知识库的permission
         $this->checkKnowledgeBaseOperation($dataIsolation, 'r', $query->getKnowledgeBaseCode(), $query->getCode());
 
-        // 兼容旧数据，新增默认文档
+        // 兼容旧数据，新增default文档
         $fragmentQuery = new KnowledgeBaseFragmentQuery();
         $fragmentQuery->setKnowledgeCode($query->getKnowledgeBaseCode());
         $fragmentQuery->setIsDefaultDocumentCode(true);

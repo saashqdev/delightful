@@ -426,7 +426,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data key cannot以 ' . self::PAYLOAD_PREFIX . ' 开头');
             }
             if (! is_string($key)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 key 必须是string');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 key must是string');
             }
             if (! is_string($value) && ! is_numeric($value)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 value 只能是 stringornumber');

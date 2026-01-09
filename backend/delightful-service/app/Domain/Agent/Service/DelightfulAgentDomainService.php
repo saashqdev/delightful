@@ -161,7 +161,7 @@ class DelightfulAgentDomainService
     // 商业代码目前还依赖
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
-        // get数据隔离object并get当前organization的organization代码
+        // get数据隔离object并getcurrentorganization的organization代码
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
         // get启用的助理list
@@ -170,7 +170,7 @@ class DelightfulAgentDomainService
         // 提取启用助理list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和助理版本的助理数据及其总数
+        // get指定organization和助理版本的助理数据及其total
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 
@@ -230,7 +230,7 @@ class DelightfulAgentDomainService
             // 校验普通交互指令
             InstructType::validateInstructs($instructs);
 
-            // 确保系统交互指令存在，如果缺少则补充
+            // ensure系统交互指令存在，如果缺少则补充
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save

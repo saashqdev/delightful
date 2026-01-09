@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * 包含重sortmodel的相关configurationparameter，如modelname、提供商、API 端点等
+ * contain重sortmodel的相关configurationparameter，如modelname、提供商、API 端点等
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -60,16 +60,16 @@ class RerankingModelConfig extends AbstractValueObject
     private int $retryCount = 2;
 
     /**
-     * return的最大result数量.
+     * return的最大resultquantity.
      *
-     * 重sort后return的最大result数量
+     * 重sort后return的最大resultquantity
      */
     private int $topN = 3;
 
     /**
-     * 批处理大小.
+     * 批处理size.
      *
-     * 批量处理文档的大小，用于提高performance
+     * 批量处理文档的size，用于提高performance
      */
     private int $batchSize = 16;
 
@@ -196,7 +196,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * getreturn的最大result数量.
+     * getreturn的最大resultquantity.
      */
     public function getTopN(): int
     {
@@ -204,7 +204,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * setreturn的最大result数量.
+     * setreturn的最大resultquantity.
      */
     public function setTopN(int $topN): self
     {
@@ -216,7 +216,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get批处理大小.
+     * get批处理size.
      */
     public function getBatchSize(): int
     {
@@ -224,7 +224,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set批处理大小.
+     * set批处理size.
      */
     public function setBatchSize(int $batchSize): self
     {
@@ -273,7 +273,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * create默认configuration.
+     * createdefaultconfiguration.
      */
     public static function createDefault(): self
     {

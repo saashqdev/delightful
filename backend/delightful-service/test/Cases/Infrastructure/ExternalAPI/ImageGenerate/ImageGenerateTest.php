@@ -46,7 +46,7 @@ class ImageGenerateTest extends BaseTest
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
-        // checkBase64编码是否有效
+        // checkBase64编码是否valid
         $decodedData = base64_decode($imageData);
         return $decodedData !== false;
     }
@@ -71,7 +71,7 @@ class ImageGenerateTest extends BaseTest
     {
         //        $this->markTestSkipped();
 
-        // test需要跳过
+        // testneed跳过
         $url = 'https://p9-aiop-sign.byteimg.com/tos-cn-i-vuqhorh59i/2025012317440606999C578B9234E9F5A4-0~tplv-vuqhorh59i-image.image?rk3s=7f9e702d&x-expires=1737711846&x-signature=5bkTf2E2xzRQVsDhrZZYghlJsUw%3D';
         $MiracleVisionModelRequest = new MiracleVisionModelRequest($url);
         $MiracleVisionModel = new MiracleVisionModel();
@@ -143,7 +143,7 @@ class ImageGenerateTest extends BaseTest
         // 生成image
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
-        // 验证result
+        // verifyresult
         $this->assertNotEmpty($result);
         $this->assertEquals(ImageGenerateType::URL, $result->getImageGenerateType());
         $urls = $result->getData();
@@ -174,7 +174,7 @@ class ImageGenerateTest extends BaseTest
         // 生成image
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
-        // 验证result
+        // verifyresult
         $this->assertNotEmpty($result);
         $this->assertEquals(ImageGenerateType::URL, $result->getImageGenerateType());
         $urls = $result->getData();
@@ -211,7 +211,7 @@ class ImageGenerateTest extends BaseTest
         //        // 生成image
         //        $result = $qwenImageModel->generateImage($qwenImageRequest);
         //
-        //        // 验证result
+        //        // verifyresult
         //        $this->assertNotEmpty($result);
         //        $this->assertEquals(ImageGenerateType::URL, $result->getImageGenerateType());
         //        $urls = $result->getData();

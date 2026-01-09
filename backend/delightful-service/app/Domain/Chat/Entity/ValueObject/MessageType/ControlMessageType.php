@@ -115,8 +115,8 @@ enum ControlMessageType: string
      */
     public static function getMessageStatusChangeType(): array
     {
-        // 不包含editmessage的status变更!
-        // editmessage不会改变message的status,只会改变message的content.
+        // 不containeditmessage的status变更!
+        // editmessage不will改变message的status,只will改变message的content.
         return [
             self::RevokeMessage,
             self::ReadMessage,

@@ -82,7 +82,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     /**
      * according to origin_id 批量软delete第third-party平台映射记录。
      *
-     * @param string[] $originIds 第third-party平台的原始ID列表
+     * @param string[] $originIds 第third-party平台的originalID列表
      */
     public function deleteThirdPlatformIdsMapping(
         array $originIds,

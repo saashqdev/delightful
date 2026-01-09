@@ -39,7 +39,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function updateWordCount(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, int $deltaWordCount): void;
 
     /**
-     * @return array array<知识库code, document数量>
+     * @return array array<知识库code, documentquantity>
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array;
 
@@ -56,7 +56,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query, Page $page): array;
 
     /**
-     * 通过第third-partyfileidquery知识库document列表.
+     * pass第third-partyfileidquery知识库document列表.
      *
      * @return array<KnowledgeBaseDocumentEntity>
      */

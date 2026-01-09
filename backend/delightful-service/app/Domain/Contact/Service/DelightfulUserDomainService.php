@@ -41,7 +41,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     public function addFriend(DataIsolation $dataIsolation, string $friendId): bool
     {
-        // 检查 uid 和 friendId 是否存在
+        // check uid 和 friendId 是否存在
         $uid = $dataIsolation->getCurrentUserId();
         $usersInfo = $this->userRepository->getUserByIdsAndOrganizations([$uid, $friendId]);
         $usersInfo = array_column($usersInfo, null, 'user_id');
@@ -59,10 +59,10 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // 如果是 ai ,直接同意
             $friendStatus = FriendStatus::Agree;
         } else {
-            // 如果是人类，检查他们是否处于同一organization
+            // 如果是人类，check他们是否处于同一organization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
-        // 将好友关系写入 friend 表.
+        // 将好友关系write friend 表.
         $this->friendRepository->insertFriend([
             'id' => IdGenerator::getSnowId(),
             'user_id' => $uid,
@@ -78,7 +78,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 检查当前user是否在当前organization内,并且账号是已激活status
+     * checkcurrentuser是否在currentorganization内,并且账号是已激活status
      */
     public function assertUserInOrganization(string $userId, string $currentOrganizationCode): void
     {
@@ -135,7 +135,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     public function searchFriend(string $keyword): array
     {
-        // 检查 uid 和 friendId 是否存在
+        // check uid 和 friendId 是否存在
         [$popular, $latest] = $this->userRepository->searchByKeyword($keyword);
         // 按最受欢迎和最新加入各取前三
         return $this->getAgents($popular, $latest);
@@ -194,13 +194,13 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // 4. filterorganization编码并build delightfulId => userId 映射
         $delightfulIdToUserIdMap = [];
         foreach ($users as $user) {
-            // 只保留当前organization的user
+            // 只保留currentorganization的user
             if ($user->getOrganizationCode() === $dataIsolation->getCurrentOrganizationCode()) {
                 $delightfulIdToUserIdMap[$user->getDelightfulId()] = $user->getUserId();
             }
         }
 
-        // 5. build最终的 aiCode => userId 映射
+        // 5. buildfinal的 aiCode => userId 映射
         $result = [];
         foreach ($aiCodeToDelightfulIdMap as $aiCode => $delightfulId) {
             if (isset($delightfulIdToUserIdMap[$delightfulId])) {
@@ -224,7 +224,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     /**
      * according touserID和userorganization列表queryuser详情，according touserorganization决定filter策略.
      * @param array $userIds userIDarray
-     * @param array $userOrganizations 当前user拥有的organization编码array
+     * @param array $userOrganizations currentuser拥有的organization编码array
      * @return array<UserDetailDTO>
      */
     public function getUserDetailByUserIdsWithOrgCodes(array $userIds, array $userOrganizations): array
@@ -238,7 +238,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // 从 user表拿基本info，支持多organizationquery
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, $orgCodes);
 
-        // 检查当前user是否拥有官方organization
+        // checkcurrentuser是否拥有官方organization
         $hasOfficialOrganization = in_array($officialOrganizationCode, $userOrganizations, true);
 
         // according touser是否拥有官方organization来决定filter策略
@@ -427,7 +427,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return null;
         }
 
-        // 通过 delightful_id 获取账号info
+        // pass delightful_id 获取账号info
         $account = $this->accountRepository->getAccountInfoByDelightfulId($user->getDelightfulId());
         if ($account === null) {
             return null;
@@ -530,7 +530,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 检查两个user是否是好友关系.
+     * check两个user是否是好友关系.
      */
     public function isFriend(string $userId, string $friendId): bool
     {
@@ -587,7 +587,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     protected function cacheLoginCheckResult(string $cacheKey, array $result): void
     {
-        // 为了兼容cache，需要将DTOobjectconvert为array存储
+        // 为了兼容cache，need将DTOobjectconvert为array存储
         $cacheDTOArray = array_map(static function ($dto) {
             return $dto->toArray();
         }, $result);

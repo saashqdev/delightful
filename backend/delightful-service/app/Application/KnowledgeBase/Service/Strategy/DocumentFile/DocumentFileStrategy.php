@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预处理文档file，according to文档filetype，进行不同的处理.
+     * 预处理文档file，according to文档filetype，进行different的处理.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -125,7 +125,7 @@ class DocumentFileStrategy
                         }
                     }
 
-                    // save临时file
+                    // savetemporaryfile
                     $tempFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid();
                     file_put_contents($tempFile, $imageContent);
 
@@ -135,7 +135,7 @@ class DocumentFileStrategy
                     finfo_close($finfo);
                     $extension = $this->getExtensionFromMimeType($mimeType);
 
-                    // 重命名临时file
+                    // 重命名temporaryfile
                     $imageName = uniqid() . '.' . $extension;
                     $imagePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $imageName;
                     rename($tempFile, $imagePath);
@@ -159,7 +159,7 @@ class DocumentFileStrategy
                     'url' => $imageUrl,
                 ]);
             } finally {
-                // delete临时file
+                // deletetemporaryfile
                 if (isset($imagePath) && file_exists($imagePath)) {
                     unlink($imagePath);
                 }

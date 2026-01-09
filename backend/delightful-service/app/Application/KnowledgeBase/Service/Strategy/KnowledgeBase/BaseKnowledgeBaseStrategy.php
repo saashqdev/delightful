@@ -64,7 +64,7 @@ class BaseKnowledgeBaseStrategy extends AbstractKernelAppService implements Know
     }
 
     /**
-     * get或create默认知识库data源type.
+     * get或createdefault知识库data源type.
      *
      * @param KnowledgeBaseEntity $knowledgeBaseEntity 知识库实体
      *

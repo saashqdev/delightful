@@ -13,7 +13,7 @@ class SecurityException extends MCPException
 {
     /**
      * JSON-RPCerror码.
-     * usecustomizeerror码范围: -32000 到 -32099.
+     * usecustomizeerror码range: -32000 到 -32099.
      */
     protected int $rpcCode = -32050;
 

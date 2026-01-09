@@ -27,8 +27,8 @@ return new class extends Migration {
             $table->string('organization_code', 64)->comment('organization编码');
             // filekey
             $table->string('file_key', 256)->comment('filekey');
-            // file大小
-            $table->unsignedBigInteger('file_size')->comment('file大小');
+            // filesize
+            $table->unsignedBigInteger('file_size')->comment('filesize');
             // messageid索引
             $table->index('delightful_message_id', 'idx_delightful_message_id');
             $table->timestamps();

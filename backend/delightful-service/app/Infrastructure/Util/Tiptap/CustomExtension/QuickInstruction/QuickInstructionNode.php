@@ -60,7 +60,7 @@ class QuickInstructionNode extends AbstractCustomNode
                         }
                     }
                 } else {
-                    // 兼容旧的格式
+                    // 兼容old格式
                     $value .= $switchText . ' ';
                 }
 

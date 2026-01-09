@@ -23,8 +23,8 @@ use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Throwable;
 
 /**
- * ASR 验证service
- * 负责项目permission、话题归属、taskstatus等验证逻辑.
+ * ASR verifyservice
+ * 负责项目permission、话题归属、taskstatus等verify逻辑.
  */
 readonly class AsrValidationService
 {
@@ -38,7 +38,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * 验证项目permission - 确保项目属于当前user和organization.
+     * verify项目permission - ensure项目属于currentuser和organization.
      *
      * @param string $projectId 项目ID
      * @param string $userId userID
@@ -54,12 +54,12 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
             }
 
-            // 校验项目是否属于当前organization
+            // 校验项目是否属于currentorganization
             if ($projectEntity->getUserOrganizationCode() !== $organizationCode) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedOrganization);
             }
 
-            // 校验项目是否属于当前user
+            // 校验项目是否属于currentuser
             if ($projectEntity->getUserId() === $userId) {
                 return $projectEntity;
             }
@@ -89,16 +89,16 @@ readonly class AsrValidationService
                 throw $e;
             }
 
-            // 其他业务exception转换为permission验证fail
+            // 其他业务exception转换为permissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            // 其他exception统一处理为permission验证fail
+            // 其他exception统一处理为permissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         }
     }
 
     /**
-     * 验证话题归属.
+     * verify话题归属.
      *
      * @param int $topicId 话题ID
      * @param string $userId userID
@@ -112,7 +112,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // 验证话题属于当前user
+        // verify话题属于currentuser
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
@@ -121,7 +121,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * 验证并gettaskstatus.
+     * verify并gettaskstatus.
      *
      * @param string $taskKey task键
      * @param string $userId userID
@@ -135,7 +135,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(AsrErrorCode::UploadAudioFirst);
         }
 
-        // 验证userID匹配（基本的安全check）
+        // verifyuserID匹配（基本的安全check）
         if ($taskStatus->userId !== $userId) {
             ExceptionBuilder::throw(AsrErrorCode::TaskNotBelongToUser);
         }
@@ -144,7 +144,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * 从话题get项目ID（包含话题归属验证）.
+     * 从话题get项目ID（contain话题归属verify）.
      *
      * @param int $topicId 话题ID
      * @param string $userId userID

@@ -48,7 +48,7 @@ enum LoadBalancingType: int
     }
 
     /**
-     * check当前负载均衡type是否支持权重.
+     * checkcurrent负载均衡type是否支持权重.
      *
      * @return bool 是否支持权重
      */

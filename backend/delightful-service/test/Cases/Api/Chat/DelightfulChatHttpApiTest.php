@@ -31,7 +31,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
                 ],
                 [
                     'role' => 'assistant',
-                    'content' => '你好，有什么可以帮助你的吗？',
+                    'content' => '你好，有什么can帮助你的吗？',
                 ],
             ],
         ];
@@ -43,10 +43,10 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'Content-Type' => 'application/json',
         ];
 
-        // 发送POST请求到正确的接口路径
+        // 发送POST请求到correct的接口路径
         $response = $this->json('/api/v2/delightful/conversation/chatCompletions', $requestData, $headers);
 
-        // 验证响应码
+        // verify响应码
         $this->assertEquals(1000, $response['code'] ?? 0, '响应码应为1000');
         $this->assertEquals('ok', $response['message'] ?? '', '响应message应为ok');
 
@@ -70,15 +70,15 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             ],
         ];
 
-        // useassertArrayValueTypesEquals验证响应结构
-        $this->assertArrayValueTypesEquals($expectedStructure, $response, '响应结构不符合预期');
+        // useassertArrayValueTypesEqualsverify响应结构
+        $this->assertArrayValueTypesEquals($expectedStructure, $response, '响应结构不符合expected');
 
-        // 额外验证role是否是assistant（这个是精确value验证）
+        // 额外verifyrole是否是assistant（这个是精确valueverify）
         $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'role应为assistant');
     }
 
     /**
-     * testsession窗口中的chat补全功能 - parameter验证fail.
+     * testsession窗口中的chat补全功能 - parameterverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
@@ -95,22 +95,22 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'Content-Type' => 'application/json',
         ];
 
-        // 发送POST请求到正确的接口路径
+        // 发送POST请求到correct的接口路径
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
         // 定义expect的error响应结构
         $expectedErrorStructure = [
-            'code' => 0, // 预期不是1000的code，但具体数value可能不确定，所以这里只是占位
-            'message' => '', // 只验证存在messagefield，具体content可能不确定
+            'code' => 0, // expected不是1000的code，但具体数value可能不确定，所以这里只是占位
+            'message' => '', // 只verify存在messagefield，具体content可能不确定
         ];
 
-        // 验证响应应该是parameter验证error
+        // verify响应should是parameterverifyerror
         $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必要parameter时，响应码不应为1000');
-        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'error响应结构不符合预期');
+        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'error响应结构不符合expected');
     }
 
     /**
-     * testsession窗口中的chat补全功能 - authorization验证fail.
+     * testsession窗口中的chat补全功能 - authorizationverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidAuth(): void
     {
@@ -120,23 +120,23 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'message' => '你好，testmessage',
         ];
 
-        // set无效的请求头
+        // setinvalid的请求头
         $headers = [
             'Authorization' => 'invalid_token',
             'Content-Type' => 'application/json',
         ];
 
-        // 发送POST请求到正确的接口路径
+        // 发送POST请求到correct的接口路径
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
         // 定义expect的error响应结构
         $expectedErrorStructure = [
-            'code' => 0, // 预期不是1000的code，具体数value可能不确定
-            'message' => '', // 只验证存在messagefield，具体content可能不确定
+            'code' => 0, // expected不是1000的code，具体数value可能不确定
+            'message' => '', // 只verify存在messagefield，具体content可能不确定
         ];
 
-        // 验证响应应该是authorizationerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, '无效authorization时，响应码不应为1000');
-        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerror响应结构不符合预期');
+        // verify响应should是authorizationerror
+        $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorization时，响应码不应为1000');
+        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerror响应结构不符合expected');
     }
 }

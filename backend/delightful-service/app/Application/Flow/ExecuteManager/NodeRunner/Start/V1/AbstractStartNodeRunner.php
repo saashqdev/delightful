@@ -90,7 +90,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // 如果没有上次，或者距离上次的time秒已经超过了，那么就需要执行
+        // 如果没有上次，或者距离上次的time秒已经超过了，那么就need执行
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -260,7 +260,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $executionData->setInstructionConfigs($instructs);
         }
 
-        // get当前message体的指令value
+        // getcurrentmessage体的指令value
         $messageChatInstructions = $messageEntity->getChatInstructions();
         $messageChatInstructionIdMaps = [];
         $messageChatInstructionNameMaps = [];
@@ -274,23 +274,23 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $instructions = [];
-        // 只放当前 agent configuration的process指令
+        // 只放current agent configuration的process指令
         foreach ($executionData->getInstructionConfigs() as $instructionConfig) {
             if (! $instructionConfig->isFlowInstructionType()) {
                 continue;
             }
 
-            // 通过 id 查找
+            // pass id 查找
             $messageChatInstruction = $messageChatInstructionIdMaps[$instructionConfig->getId()] ?? null;
             if (! $messageChatInstruction) {
-                // 通过 name 查找
+                // pass name 查找
                 $messageChatInstruction = $messageChatInstructionNameMaps[$instructionConfig->getName()] ?? null;
             }
 
             if ($messageChatInstruction) {
                 $value = $messageChatInstruction->getValue();
             } else {
-                // 如果message体中没有指令value，use默认value
+                // 如果message体中没有指令value，usedefaultvalue
                 $value = $instructionConfig->getDefaultValue();
             }
             $instructions[$instructionConfig->getId()] = $instructionConfig->getNameAndValueByType($value);

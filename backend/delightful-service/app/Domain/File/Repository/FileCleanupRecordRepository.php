@@ -83,7 +83,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * get需要重试的failrecord.
+     * getneed重试的failrecord.
      */
     public function getRetryRecords(int $maxRetries = 3, int $limit = 50): array
     {
@@ -159,7 +159,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * cancel清理(如果file需要保留).
+     * cancel清理(如果fileneed保留).
      */
     public function cancelCleanup(string $fileKey, string $organizationCode): bool
     {
@@ -196,7 +196,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 清理旧的successrecord.
+     * 清理oldsuccessrecord.
      */
     public function cleanupOldRecords(int $daysToKeep = 7): int
     {

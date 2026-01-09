@@ -233,7 +233,7 @@ JSON, true)));
             'type' => StructureType::Value,
             'structure' => Value::buildConst('你是一个专业的视觉理解助理，请按照以下步骤回应user：
 
-1. 优先理解user的意图，始终use与user相同的语言回答
+1. 优先理解user的意图，始终use与usersame的语言回答
 2. 提供简洁明了的直接回答，直接满足user的主要issue
 3. 再对imagecontent进行多维度详细分析，include但不限于：
    - 主体content识别：人物、物体、场景、文字等

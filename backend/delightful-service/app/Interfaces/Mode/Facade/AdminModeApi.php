@@ -94,7 +94,7 @@ class AdminModeApi extends AbstractApi
     }
 
     /**
-     * get默认mode.
+     * getdefaultmode.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getDefaultMode()

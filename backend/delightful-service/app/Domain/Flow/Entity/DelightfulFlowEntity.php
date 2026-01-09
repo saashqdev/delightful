@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * 仅前端需要，process编排放到 node 节点configuration的 next_nodes 中.
+     * 仅前端need，process编排放到 node 节点configuration的 next_nodes 中.
      */
     protected array $edges;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * process的回调function，如果有该value，那么将直接执行该选择，而不是通过NodeRunner来执行.
+     * process的回调function，如果有该value，那么将直接执行该选择，而不是passNodeRunner来执行.
      */
     private ?Closure $callback = null;
 
@@ -128,7 +128,7 @@ class DelightfulFlowEntity extends AbstractEntity
         // 试运行是要按照开启时计算
         $this->enabled = true;
 
-        // process试运行其实只需要 nodes
+        // process试运行其实只need nodes
         if (empty($this->nodes)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.nodes']);
         }
@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // 如果是要开启，需要检测是否有 nodes configuration
+            // 如果是要开启，need检测是否有 nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -207,7 +207,7 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->modifier = $publisher;
         $this->updatedAt = new DateTime('now');
 
-        // publish时需要按照开启来处理
+        // publish时need按照开启来处理
         $enable = $this->enabled;
         $this->enabled = true;
         $this->nodeValidate(true);
@@ -245,14 +245,14 @@ class DelightfulFlowEntity extends AbstractEntity
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多个结束节点时，暂时取第一个，应该要做成只能有一个结束节点
+                // 多个结束节点时，暂时取first，should要做成只能有一个结束节点
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
             }
         }
 
-        // 已经是publishstatus的才需要检测
+        // 已经是publishstatus的才need检测
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // result优先，如果已经存在，则不需要了
+                // result优先，如果已经存在，则不need了
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }
@@ -674,12 +674,12 @@ class DelightfulFlowEntity extends AbstractEntity
         }
 
         if ($this->type === Type::Tools) {
-            // name只能包含 字母、数字、下划线
+            // name只能contain 字母、数字、下划线
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
             // todo 要唯一
-            // todo 内置工具名允许被use
+            // todo 内置工具名allow被use
         }
     }
 

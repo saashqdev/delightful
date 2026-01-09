@@ -27,14 +27,14 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
 
-            // 定义本次的 范围 id，如果是 null 代table还未进行限制
+            // 定义本次的 range id，如果是 null 代table还未进行限制
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // 如果是所有条件满足，那么已经存在的 id 集合就是本次的范围
+                // 如果是所有条件满足，那么已经存在的 id 集合就是本次的range
                 $rangeIds = $allIds;
             }
 
-            // 如果范围 id 被定义成了空array，代table已经没有符合条件的数据了，直接跳出循环
+            // 如果range id 被定义成了空array，代table已经没有符合条件的数据了，直接跳出循环
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }

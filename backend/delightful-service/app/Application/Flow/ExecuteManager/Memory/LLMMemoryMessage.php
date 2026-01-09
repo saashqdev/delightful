@@ -45,12 +45,12 @@ class LLMMemoryMessage
     private array $attachments = [];
 
     /**
-     * @var string 原始message分析结果(多模态分析)
+     * @var string originalmessage分析结果(多模态分析)
      */
     private string $analysisResult = '';
 
     /**
-     * @var array 原始messagecontent
+     * @var array originalmessagecontent
      */
     private array $originalContent = [];
 
@@ -176,7 +176,7 @@ class LLMMemoryMessage
             $customMessage->setAttachments($attachments);
         }
 
-        // 验证是否是有效的
+        // verify是否是valid的
         if (! $customMessage->isValid()) {
             return null;
         }

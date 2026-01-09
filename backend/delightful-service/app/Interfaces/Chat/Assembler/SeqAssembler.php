@@ -40,7 +40,7 @@ class SeqAssembler
     }
 
     /**
-     * 将entityconvert为可以直接写入数据库的数据.
+     * 将entityconvert为can直接write数据库的数据.
      */
     public static function getInsertDataByEntity(DelightfulSeqEntity $delightfulSeqEntity): array
     {
@@ -51,7 +51,7 @@ class SeqAssembler
     }
 
     /**
-     * 批量return客户端需要的Seq结构,对结果集强制重新降序排列.
+     * 批量return客户端need的Seq结构,对结果集强制重新降序排列.
      * @return ClientSequenceResponse[]
      */
     public static function getClientSeqStructs(array $seqInfos, array $messageInfos): array
@@ -81,7 +81,7 @@ class SeqAssembler
         string $seqId,
         ?array $thisTimeStreamMessages = null
     ): ?ClientJsonStreamSequenceResponse {
-        // todo 为了兼容旧版streammessage，需要将 content/reasoning_content/status/llm_response 字段放到最外层。
+        // todo 为了兼容旧版streammessage，need将 content/reasoning_content/status/llm_response 字段放到最外层。
         // todo 等前端上线后，就移除 content/reasoning_content/status/llm_response 的多余push
         $response = (new ClientJsonStreamSequenceResponse())->setTargetSeqId($seqId);
         $content = $thisTimeStreamMessages['content'] ?? null;
@@ -90,7 +90,7 @@ class SeqAssembler
         // 强行delete $streamOptions 中的stream_app_message_id/stream字段
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
-        // 0 会被当做 false handle，所以这里要判断是否为 null 或者 ''
+        // 0 will被当做 false handle，所以这里要判断是否为 null 或者 ''
         if ($content !== null && $content !== '') {
             $response->setContent($content);
         }
@@ -98,7 +98,7 @@ class SeqAssembler
             $response->setLlmResponse($llmResponse);
         }
         if ($reasoningContent !== null && $reasoningContent !== '') {
-            // 以前的process有 reasoning_content 时也会push content 为nullstring的数据
+            // 以前的process有 reasoning_content 时也willpush content 为nullstring的数据
             $response->setReasoningContent($reasoningContent);
         }
         if (isset($streamOptions['status'])) {
@@ -111,7 +111,7 @@ class SeqAssembler
     }
 
     /**
-     * generate客户端需要的Seq结构.
+     * generate客户端need的Seq结构.
      */
     public static function getClientSeqStruct(
         DelightfulSeqEntity $seqEntity,
@@ -136,7 +136,7 @@ class SeqAssembler
             $referMessageId = $originSeqEntity->getReferMessageId();
         }
         $statusChangeSeqEntity = clone $originSeqEntity;
-        // message的receive方不需要记录收件人列表,清null该字段info
+        // message的receive方不need记录收件人列表,清null该字段info
         $statusChangeSeqEntity->setReceiveList(null);
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
@@ -166,7 +166,7 @@ class SeqAssembler
         $seqData['id'] = $messageId;
         $seqData['message_id'] = $messageId;
         $seqData['seq_id'] = $messageId;
-        // generate一个新的message_id,并refer到原来的message_id
+        // generate一个newmessage_id,并refer到原来的message_id
         $seqData['refer_message_id'] = $referMessageId;
         $seqData['created_at'] = $time;
         $seqData['updated_at'] = $time;
@@ -192,7 +192,7 @@ class SeqAssembler
         }
         $seqData['message_id'] = $messageId;
         $seqData['seq_id'] = $messageId;
-        // generate一个新的message_id,并refer到原来的message_id
+        // generate一个newmessage_id,并refer到原来的message_id
         $seqData['refer_message_id'] = '';
         $seqData['created_at'] = $time;
         $seqData['updated_at'] = $time;
@@ -283,7 +283,7 @@ class SeqAssembler
         $clientMessageData = [
             // 服务端generate的message唯一id，全局唯一。用于withdraw、editmessage。
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // 客户端generate，需要ios/安卓/web三端共同确定一个generate算法。用于告知客户端，delightful_message_id的由来
+            // 客户端generate，needios/安卓/web三端共同确定一个generate算法。用于告知客户端，delightful_message_id的由来
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方的messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversation窗口。 客户端可以according to此value确定message是否要reminder等。如果本地没有发现这个conversationid，主动向服务端queryconversation窗口详情
+            // message所属conversation窗口。 客户端canaccording to此value确定message是否要reminder等。如果本地没有发现这个conversationid，主动向服务端queryconversation窗口详情
             'conversation_id' => $seqEntity->getConversationId(),
             // 本条message所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

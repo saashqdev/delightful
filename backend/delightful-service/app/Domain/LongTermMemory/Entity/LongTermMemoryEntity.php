@@ -74,7 +74,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     {
         parent::__construct($data);
 
-        // 默认valueset
+        // defaultvalueset
         if (! isset($this->memoryType)) {
             $this->memoryType = MemoryType::MANUAL_INPUT;
         }
@@ -386,12 +386,12 @@ final class LongTermMemoryEntity extends AbstractEntity
         ++$this->reinforcementCount;
         $this->lastReinforcedAt = new DateTime();
 
-        // 强化会提升重要性，但有上限
+        // 强化will提升重要性，但有上限
         $this->importance = min(1.0, $this->importance + 0.1);
     }
 
     /**
-     * 计算当前记忆的有效分数（考虑衰减）.
+     * 计算current记忆的valid分数（考虑衰减）.
      */
     public function getEffectiveScore(): float
     {
@@ -465,7 +465,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
         $daysSinceLastAccess = (new DateTime())->diff($this->lastAccessedAt)->days;
 
-        // according to访问time计算衰减，最多衰减到 0.5
+        // according to访问time计算衰减，at most衰减到 0.5
         return max(0.5, 1.0 - ($daysSinceLastAccess * 0.01));
     }
 

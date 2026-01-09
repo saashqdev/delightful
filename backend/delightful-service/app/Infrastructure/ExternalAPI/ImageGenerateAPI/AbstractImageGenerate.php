@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 /**
  * image生成统一抽象类
  * integration水印处理和钉钉alert功能
- * 所有image生成Provider都应该继承此类.
+ * 所有image生成Provider都should继承此类.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
 {
@@ -38,7 +38,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统一的image生成入口method
-     * 先call子类implement的原始image生成，再统一添加水印.
+     * 先call子类implement的originalimage生成，再统一添加水印.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -48,8 +48,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * implement接口要求的带水印原始数据method
-     * 各子类必须according to自己的数据格式implement此method.
+     * implement接口要求的带水印original数据method
+     * 各子类mustaccording to自己的数据格式implement此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -59,7 +59,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 子类implement的原始image生成method
+     * 子类implement的originalimage生成method
      * 只负责call各自API生成image，不用关心水印处理.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
@@ -75,7 +75,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         $lockKey = 'img_response_' . spl_object_id($response);
         $owner = bin2hex(random_bytes(8)); // 16位随机string作为owner
 
-        // spinLock会自动等待，直到getsuccess或超时（30秒）
+        // spinLockwill自动等待，直到getsuccess或超时（30秒）
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
             $this->logger->error('get图像响应Redis锁超时', [
                 'lock_key' => $lockKey,
@@ -143,7 +143,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                     'error' => $e->getMessage(),
                     'imageType' => $response->getImageGenerateType()->value,
                 ]);
-                // return原始image
+                // returnoriginalimage
                 $processedData[$index] = $imageData;
             }
         }

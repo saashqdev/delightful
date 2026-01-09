@@ -86,7 +86,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * 验证mode是否存在.
+     * verifymode是否存在.
      */
     private function validateModeExists(ModeDataIsolation $dataIsolation, int $modeId): void
     {

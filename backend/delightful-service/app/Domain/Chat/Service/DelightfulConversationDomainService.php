@@ -68,7 +68,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // 需要同时修改type和content,才能把message内容变更为打开conversation窗口
+            // need同时修改type和content,才能把message内容变更为打开conversation窗口
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
@@ -91,7 +91,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * 打开conversation窗口.
-     * 控制message,只在seq表写入数据,不在message表写.
+     * 控制message,只在seq表write数据,不在message表写.
      * @throws Throwable
      */
     public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -142,7 +142,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 // asyncpushmessage给自己的其他设备
                 $this->pushControlSequence($seqEntity);
             });
-            // 将message流return给当前客户端! 但是还是会asyncpush给user的所有online客户端.
+            // 将message流return给current客户端! 但是还是willasyncpush给user的所有online客户端.
             $result = SeqAssembler::getClientSeqStruct($seqEntity, $messageDTO)->toArray();
             Db::commit();
         } catch (Throwable $e) {
@@ -153,7 +153,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 正在输入中的status只需要push给对方,不需要推给自己的设备.
+     * 正在输入中的status只needpush给对方,不need推给自己的设备.
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
@@ -174,7 +174,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // generate控制message,push给收发双发
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($messageStruct->getConversationId());
             if ($receiveConversationEntity === null) {
-                // 检查对方是否存在conversation,如果不存在直接return
+                // check对方是否存在conversation,如果不存在直接return
                 return [];
             }
             // 替换conversationid为receive方自己的
@@ -269,7 +269,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content->toArray(),
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // 控制message不需要已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制message不need已读回执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),

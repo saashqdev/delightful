@@ -64,7 +64,7 @@ class AgentGlobalSettingsApiTest extends BaseTest
         $this->assertSame(1000, $response['code']);
         $this->assertIsArray($response['data']);
 
-        // 验证return的data结构
+        // verifyreturn的data结构
         foreach ($response['data'] as $setting) {
             $this->assertArrayHasKey('type', $setting);
             $this->assertArrayHasKey('status', $setting);
@@ -80,7 +80,7 @@ class AgentGlobalSettingsApiTest extends BaseTest
         $this->assertSame(1000, $response['code']);
         $this->assertIsArray($response['data']);
 
-        // 验证return的data结构
+        // verifyreturn的data结构
         foreach ($response['data'] as $key => $setting) {
             $name = AdminGlobalSettingsName::tryFrom($key);
             self::assertInstanceOf(AdminGlobalSettingsName::class, $name);

@@ -150,7 +150,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
             return $existing;
         }
 
-        // create新的organization管理员
+        // createneworganization管理员
         $entity = new OrganizationAdminEntity();
         $entity->setUserId($userId);
         $entity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());

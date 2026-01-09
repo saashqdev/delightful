@@ -47,7 +47,7 @@ enum ChatMessageType: string
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
     /**
-     * 多次stream响应后，最终合并成一条message入库.
+     * 多次stream响应后，final合并成一条message入库.
      */
     case AggregateAISearchCardV2 = 'aggregate_ai_search_card_v2';
 

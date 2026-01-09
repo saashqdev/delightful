@@ -63,7 +63,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const int LOCK_TTL = 7200;
 
     /**
-     * image默认尺寸.
+     * imagedefault尺寸.
      */
     private const int DEFAULT_IMAGE_WIDTH = 300;
 
@@ -90,7 +90,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * 构造函数.
      *
      * @param array $options 飞书configuration选项
-     * @throws Exception 如果configuration无效
+     * @throws Exception 如果configurationinvalid
      */
     public function __construct(array $options)
     {
@@ -121,9 +121,9 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             return $this->handleChallengeCheck($params, $chatMessage);
         }
 
-        // 检查messageparameter是否有效
+        // checkmessageparameter是否valid
         if (empty($params['event']) || empty($params['header'])) {
-            $this->logger->warning('飞书messageparameter无效', ['params' => $params]);
+            $this->logger->warning('飞书messageparameterinvalid', ['params' => $params]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
             return $chatMessage;
         }
@@ -231,7 +231,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 检查messageID锁
+     * checkmessageID锁
      *
      * @param string $messageId messageID
      * @return bool 是否success锁定
@@ -386,7 +386,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * parsemessage内容JSON.
      *
-     * @param string $content 原始message内容
+     * @param string $content originalmessage内容
      * @return array parse后的内容array
      */
     private function decodeMessageContent(string $content): array
@@ -421,7 +421,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setRobotCode($params['header']['app_id'] ?? '');
         $chatMessage->setUserId($openId);
         $chatMessage->setOriginConversationId($chatId);
-        $chatMessage->setNickname($openId); // 初始setting为OpenID，后续会通过userinfo更新
+        $chatMessage->setNickname($openId); // initialsetting为OpenID，后续willpassuserinfo更新
     }
 
     /**
@@ -783,7 +783,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $lastPosition = $position + strlen($fullMatch);
         }
 
-        // 添加最后一个image后的文本（如果有）
+        // 添加最nextimage后的文本（如果有）
         $this->addTextBlockIfNotEmpty(
             $contentBlocks,
             substr($markdown, $lastPosition)

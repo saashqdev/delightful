@@ -26,7 +26,7 @@ class AsrConfig
     public const int HEARTBEAT_TIMEOUT = 600;
 
     /**
-     * taskstatus默认 TTL（秒）- 7天.
+     * taskstatusdefault TTL（秒）- 7天.
      */
     public const int TASK_STATUS_TTL = 604800;
 
@@ -94,12 +94,12 @@ class AsrConfig
     // ==================== Redis configuration ====================
 
     /**
-     * Redis 扫描批次大小.
+     * Redis 扫描批次size.
      */
     public const int REDIS_SCAN_BATCH_SIZE = 200;
 
     /**
-     * Redis 扫描最大数量.
+     * Redis 扫描最大quantity.
      */
     public const int REDIS_SCAN_MAX_COUNT = 2000;
 

@@ -11,7 +11,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 
 /**
  * @internal
- * user当前organization管理APItest
+ * usercurrentorganization管理APItest
  */
 class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 {
@@ -22,7 +22,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     private const string LIST_ORGANIZATIONS_API = '/api/v1/contact/accounts/me/organizations';
 
     /**
-     * test通过HTTP请求get当前organization代码
+     * testpassHTTP请求getcurrentorganization代码
      */
     public function testGetCurrentOrganizationCodeViaHttp(): void
     {
@@ -30,17 +30,17 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         $response = $this->get(self::GET_CURRENT_ORGANIZATION_API, [], $headers);
 
-        // 验证响应status
+        // verify响应status
         $this->assertEquals(1000, $response['code'] ?? -1);
 
-        // 验证响应结构（according to实际APIreturn结构调整）
+        // verify响应结构（according toactualAPIreturn结构调整）
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
         }
     }
 
     /**
-     * test通过HTTP请求set当前organization代码
+     * testpassHTTP请求setcurrentorganization代码
      */
     public function testSetCurrentOrganizationCodeViaHttp(): void
     {
@@ -51,13 +51,13 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         $response = $this->put(self::SET_CURRENT_ORGANIZATION_API, $requestData, $headers);
 
-        // 验证响应status
+        // verify响应status
         $this->assertEquals(1000, $response['code'] ?? -1);
 
-        // 验证响应结构
+        // verify响应结构
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
-            // 验证return的organization代码
+            // verifyreturn的organization代码
             if (isset($response['data']['delightful_organization_code'])) {
                 $this->assertEquals($requestData['delightful_organization_code'], $response['data']['delightful_organization_code']);
             }
@@ -76,7 +76,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         $response = $this->put(self::SET_CURRENT_ORGANIZATION_API, $requestData, $headers);
 
-        // 验证响应status - 应该returnerrorstatus码
+        // verify响应status - shouldreturnerrorstatus码
         $this->assertNotEquals(200, $response['code'] ?? 200);
     }
 

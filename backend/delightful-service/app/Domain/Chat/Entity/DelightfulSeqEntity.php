@@ -19,7 +19,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 账号收件箱的序列号table,每个账号的所有message必须单调递增.
+ * 账号收件箱的序列号table,每个账号的所有messagemust单调递增.
  */
 final class DelightfulSeqEntity extends AbstractEntity
 {
@@ -288,7 +288,7 @@ final class DelightfulSeqEntity extends AbstractEntity
         if (is_string($receiveList) && $receiveList !== '') {
             $receiveList = Json::decode($receiveList);
         }
-        // 对于收件人来说,不需要recordmessage接收人list
+        // 对于收件人来说,不needrecordmessage接收人list
         if (empty($receiveList)) {
             $receiveListObj = null;
         } elseif (is_array($receiveList)) {

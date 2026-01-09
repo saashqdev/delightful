@@ -167,7 +167,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "number",
                         "key": "file_size",
                         "sort": 3,
-                        "title": "file大小",
+                        "title": "filesize",
                         "description": "",
                         "required": null,
                         "value": null,

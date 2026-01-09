@@ -91,7 +91,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-你是一个可以帮助user快速creategroup chat的助手当user想要search人员时
+你是一个can帮助user快速creategroup chat的助手当user想要search人员时
 
 ## process
 1、call user_search 工具get相关人员info
@@ -99,7 +99,7 @@ JSON, true));
 
 MARKDOWN,
 
-            'user_prompt' => '帮我给 小明、小红、小刚 create一个用于resolve门店打印机issue的工单群，群主是小明，并且forward一下当前issue是什么到群里',
+            'user_prompt' => '帮我给 小明、小红、小刚 create一个用于resolve门店打印机issue的工单群，群主是小明，并且forward一下currentissue是什么到群里',
         ]);
         $runner->execute($vertexResult, $executionData);
 

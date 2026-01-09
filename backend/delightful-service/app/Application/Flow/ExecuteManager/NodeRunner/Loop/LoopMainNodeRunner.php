@@ -98,7 +98,7 @@ class LoopMainNodeRunner extends NodeRunner
                 if (! $conditionComponent?->isCondition()) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.component.format_error', ['label' => 'condition']);
                 }
-                // 初始条件
+                // initial条件
                 $condition = $conditionComponent->getCondition()->getResult($executionData->getExpressionFieldData()) ?? [];
 
                 $maxLoopCountComponent = ComponentFactory::fastCreate($params['max_loop_count'] ?? []);
@@ -148,7 +148,7 @@ class LoopMainNodeRunner extends NodeRunner
         if (empty($childNodes)) {
             return null;
         }
-        // 去除父 id property，不然会被filter
+        // 去除父 id property，不然will被filter
         foreach ($childNodes as $node) {
             $meta = $node->getMeta();
             $meta['parent_id'] = '';
@@ -165,7 +165,7 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复用当前的执行数据，循环体内可访问和修改
+            // 复用current的执行数据，循环体内可访问和修改
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);

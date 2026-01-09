@@ -110,7 +110,7 @@ enum StatusIcon: string
     }
 
     /**
-     * 验证图标值是否有效.
+     * verify图标值是否valid.
      */
     public static function isValid(string $icon): bool
     {

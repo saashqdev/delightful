@@ -104,7 +104,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             }
             $senderUserEntity = null; // (personcategory)sendside user_entity
             if ($seqEntity->getConversationId()) {
-                // thiswithinconversationwindowis aifromself,thatwhattosideispersoncategory(alsomaybeisanotherone ai,ifexistsin ai 互撩话)
+                // thiswithinconversationwindowis aifromself,thatwhattosideispersoncategory(alsomaybeisanotherone ai,ifexistsin ai mutual teasing)
                 $conversationEntity = $this->delightfulConversationRepository->getConversationById($seqEntity->getConversationId());
                 if ($conversationEntity === null) {
                     $this->logger->error('UserCallAgentEventError delightful_conversation_id:{delightful_conversation_id} conversation not found', ['delightful_conversation_id' => $seqEntity->getConversationId()]);

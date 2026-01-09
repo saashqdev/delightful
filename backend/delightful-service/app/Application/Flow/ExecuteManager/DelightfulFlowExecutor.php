@@ -148,7 +148,7 @@ class DelightfulFlowExecutor
             $this->addEdges();
             $this->checkCircularDependencies();
         } else {
-            // withhave callback processnot参andretryandasync
+            // withhave callback processnotparticipateandretryandasync
             $this->async = false;
         }
         if ($this->executionData->getExecutionType()->isDebug()) {

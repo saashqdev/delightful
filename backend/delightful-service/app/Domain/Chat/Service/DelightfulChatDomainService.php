@@ -287,7 +287,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $minSeqListByReferMessageId = $this->getMinSeqListByReferMessageId($senderSeqEntity);
         $receiverReferMessageId = $minSeqListByReferMessageId[$receiveUserEntity->getDelightfulId()] ?? '';
         $seqId = (string) IdGenerator::getSnowId();
-        // section约storagenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
+        // sectioncontractstoragenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
         $content = $this->getSeqContent($messageEntity);
         $receiveAccountId = $this->getAccountId($messageEntity->getReceiveId());
         // according tosendside extra,generatereceivesidetoshould extra
@@ -326,7 +326,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         $time = date('Y-m-d H:i:s');
         $conversationId = $conversationEntity === null ? '' : $conversationEntity->getId();
-        // section约storagenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
+        // sectioncontractstoragenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
         $content = $this->getSeqContent($messageEntity);
         $receiveList = new ReceiveList();
         if ($conversationEntity) {
@@ -563,7 +563,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $time = date('Y-m-d H:i:s');
         $content = $this->getSeqContent($messageEntity);
         $seqId = (string) IdGenerator::getSnowId();
-        // section约storagenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
+        // sectioncontractstoragenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
         // according tosendside extra,generatereceivesidetoshould extra
         $extra = $this->handlerReceiveExtra($receiveSeqDTO, $receiveUserConversationEntity);
         $seqData = [

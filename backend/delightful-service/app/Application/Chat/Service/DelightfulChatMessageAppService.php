@@ -603,7 +603,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. priorityclosenoteconversationmiddlemostbackdiscussiontheme(mostnewtopic)
         2. bymostnearconversationcontentformainreferencebasis
         3. ifmostbackthemediscussionmorefor充minute,thenbythisasfortitlecorecore
-        4. ignoreearlyalreadyalreadyendtopic,unlessit们andmostnewtopicclosely relatedclose
+        4. ignoreearlyalreadyalreadyendtopic,unlessitusandmostnewtopicclosely relatedclose
 
         ## strictrequire
         1. titlelength:notexceedspass 15 character.Englishoneletter算onecharacter,Chinese charactersonecharacter countonecharacter,otherlanguagetypecollectuseanalogouscountsolution.
@@ -1051,7 +1051,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     private function syncHandlerSingleChatMessage(DelightfulSeqEntity $senderSeqEntity, DelightfulMessageEntity $senderMessageEntity): DelightfulSeqEntity
     {
         $delightfulSeqStatus = DelightfulMessageStatus::Unread;
-        # assistantmaybe参andprivate chat/group chatetcscenario,readmemoryo clock,needreadfromselfconversationwindowdownmessage.
+        # assistantmaybeparticipateandprivate chat/group chatetcscenario,readmemoryo clock,needreadfromselfconversationwindowdownmessage.
         $receiveSeqEntity = $this->delightfulChatDomainService->generateReceiveSequenceByChatMessage($senderSeqEntity, $senderMessageEntity, $delightfulSeqStatus);
         // avoid seq tablecarrytoomultiplefeature,addtoomultipleindex,thereforewilltopicmessagesingleuniquewriteto topic_messages tablemiddle
         $this->delightfulChatDomainService->createTopicMessage($receiveSeqEntity);

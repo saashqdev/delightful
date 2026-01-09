@@ -235,7 +235,7 @@ class ImageWatermarkProcessor
             $totalTextHeight = $descender + $ascender;
         } else {
             // decreaseleveluseestimatemethod
-            // toatmiddletextcharacter,eachcharacterwidth约equalfieldbodysize
+            // toatmiddletextcharacter,eachcharacterwidthcontractequalfieldbodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecuritysidedistance
             $textHeight = $fontSize;

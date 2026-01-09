@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // fieldsectionsiderequestheadvalueisarray,onlycan参andbackcontinuesignature
+        // fieldsectionsiderequestheadvalueisarray,onlycanparticipateandbackcontinuesignature
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }

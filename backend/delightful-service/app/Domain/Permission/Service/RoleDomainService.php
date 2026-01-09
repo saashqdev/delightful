@@ -87,7 +87,7 @@ readonly class RoleDomainService
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.invalid_permission_key', ['key' => $permissionKey]);
             }
 
-            // skipalllocalpermissionconstant,noneed参andtagextract
+            // skipalllocalpermissionconstant,noneedparticipateandtagextract
             if ($permissionKey === DelightfulPermission::ALL_PERMISSIONS) {
                 continue;
             }

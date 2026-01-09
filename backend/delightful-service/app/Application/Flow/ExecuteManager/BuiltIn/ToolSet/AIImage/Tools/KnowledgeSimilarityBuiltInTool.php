@@ -64,7 +64,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 1. combineupdowntext extractionuserissue,generatemultiplekeyword,at mostnotexceedspass 5 ,multiplekeyworduseEnglishteasenumber"," separatoropen,useatusedifferentkeywordfromknowledge basemiddleretrievemostrelatedcloseinfo;
 2. combineupdowntext,analyzeuserissue,generate `names` parameter,useatfingersetanduserissuemaybehaveclosemultipleknowledge basename,according torelatedclosepropertysort,relatedclosepropertyneedcombineupdowntext,knowledge basenameandknowledge basedescriptionconductjudge;
 3. usekeywordanduserissue,call `{$this->getName()}` toolretrieveknowledge basemiddlecontent,keywordparameteris `keyword`,userissueparameteris `question`, pleaseensureparameterallbecorrectfill in,toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment;
-4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwantgoodatuseit们,havebydownseveraltypetag:
+4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwantgoodatuseitus,havebydownseveraltypetag:
     - <DelightfulImage></DelightfulImage> indicateoneimage,like <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfrontclientmessagecardrenderoutonesheetimage;
     - <DelightfulVideo></DelightfulVideo> indicateonevideo,like <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfrontclientmessagecardrenderoutonevideo;
     - <DelightfulMention></DelightfulMention> indicateonepersonmemberinfo,like <DelightfulMention>cp_xxxxxxx</DelightfulMention>,eachtagallwillinfrontclientmessagecardshapebecomeone @somesomeperson effect;

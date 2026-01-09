@@ -134,7 +134,7 @@ abstract class AbstractDomainService
 
     public function getSeqContent(DelightfulMessageEntity $messageEntity): array
     {
-        // section约storagenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
+        // sectioncontractstoragenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
         if ($messageEntity->getMessageType() instanceof ControlMessageType) {
             $content = $messageEntity->getContent()->toArray();
         } else {
@@ -210,7 +210,7 @@ abstract class AbstractDomainService
     public function generateSenderSequenceByControlMessage(DelightfulMessageEntity $messageDTO, string $conversationId = ''): DelightfulSeqEntity
     {
         $time = date('Y-m-d H:i:s');
-        // section约storagenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
+        // sectioncontractstoragenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $senderAccountId = $this->getAccountId($messageDTO->getSenderId());
@@ -248,7 +248,7 @@ abstract class AbstractDomainService
         if ($receiveUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // section约storagenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
+        // sectioncontractstoragenullbetween,chatmessageinseqtablenotexistsspecificcontent,onlyexistsmessageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $receiverAccountId = $receiveUserEntity->getDelightfulId();

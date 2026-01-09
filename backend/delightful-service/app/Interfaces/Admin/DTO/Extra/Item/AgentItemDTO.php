@@ -19,7 +19,7 @@ class AgentItemDTO extends AbstractDTO
 
     public function __construct(null|array|string $data = null)
     {
-        // compatiblefrontclient transmission参
+        // compatiblefrontclient transmissionparticipate
         is_string($data) && $data = ['agent_id' => $data];
         parent::__construct($data);
     }

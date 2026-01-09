@@ -263,7 +263,7 @@ class SeqAssembler
         }
         $messageTypeName = $messageType->getName();
         $messageStatus = $seqEntity->getStatus()?->getStatusName();
-        // forsection约storagenullbetween,controlmessagespecificcontentstorageinseqEntitymiddle,chatmessagespecificcontentstorageinmessageEntitymiddle
+        // forsectioncontractstoragenullbetween,controlmessagespecificcontentstorageinseqEntitymiddle,chatmessagespecificcontentstorageinmessageEntitymiddle
         if ($messageType instanceof ControlMessageType) {
             // ifiscontrolmessage,messagespecificcontentfromseqEntitymiddleget
             $messageData = $seqEntity->getContent()->toArray();

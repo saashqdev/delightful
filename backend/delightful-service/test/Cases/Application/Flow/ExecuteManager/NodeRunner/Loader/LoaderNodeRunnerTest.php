@@ -39,7 +39,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
 
     public function testRunPdf()
     {
-        $this->markTestSkipped('call付费');
+        $this->markTestSkipped('callpaid');
         $node = $this->createNode();
         $runner = NodeRunnerFactory::make($node);
         $vertexResult = new VertexResult();

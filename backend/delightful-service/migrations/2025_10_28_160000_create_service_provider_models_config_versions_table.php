@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->decimal('time_pricing', 10, 4)->nullable()->comment('time定价');
             $table->decimal('input_pricing', 10, 4)->nullable()->comment('input定价');
             $table->decimal('output_pricing', 10, 4)->nullable()->comment('output定价');
-            $table->string('billing_currency', 10)->nullable()->comment('计费货币');
+            $table->string('billing_currency', 10)->nullable()->comment('计费currency');
             $table->boolean('support_function')->default(false)->comment('whethersupportfunctioncall');
             $table->decimal('cache_hit_pricing', 10, 4)->nullable()->comment('cache命middle定价');
             $table->integer('max_output_tokens')->nullable()->comment('mostbigoutputtoken数');

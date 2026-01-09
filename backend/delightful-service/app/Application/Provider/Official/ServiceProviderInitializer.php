@@ -86,7 +86,7 @@ class ServiceProviderInitializer
                 'id' => '759103339540475904',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => 'by Delightful pass官方deploy API comeimplement AI modelcall,can直接购买pointsuse海quantitybigmodel.',
+                'description' => 'by Delightful pass官方deploy API comeimplement AI modelcall,can直接purchasepointsuse海quantitybigmodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'llm',
@@ -102,7 +102,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'The AI model invocation is achieved through the API officially deployed by Delightful, and you can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful pass官方deploy API comeimplement AI modelcall,can直接购买pointsuse海quantitybigmodel.',
+                        'zh_CN' => 'by Delightful pass官方deploy API comeimplement AI modelcall,can直接purchasepointsuse海quantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -216,7 +216,7 @@ class ServiceProviderInitializer
                 'id' => '759144726407426049',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => 'by Delightful pass官方deploy API comeimplement多type热门文生graph,graph生graphetcmodelcall,can直接购买pointsuse海quantitybigmodel.',
+                'description' => 'by Delightful pass官方deploy API comeimplement多type热门文生graph,graph生graphetcmodelcall,can直接purchasepointsuse海quantitybigmodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'vlm',
@@ -232,7 +232,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Delightful implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful pass官方deploy API comeimplement多type热门文生graph,graph生graphetcmodelcall,can直接购买pointsuse海quantitybigmodel.',
+                        'zh_CN' => 'by Delightful pass官方deploy API comeimplement多type热门文生graph,graph生graphetcmodelcall,can直接purchasepointsuse海quantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',

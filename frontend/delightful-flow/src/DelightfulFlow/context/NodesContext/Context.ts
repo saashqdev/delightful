@@ -1,19 +1,19 @@
-import { MagicFlow } from "@/MagicFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React from "react"
 
-// 状态部分
+// State part
 export type NodesStateCtx = {
-    // 节点数据
-    nodes: MagicFlow.Node[]
+    // Node data
+    nodes: DelightfulFlow.Node[]
 }
 
 export const NodesStateContext = React.createContext<NodesStateCtx>({
     nodes: [],
 })
 
-// 动作部分
+// Action part
 export type NodesActionCtx = {
-    setNodes: React.Dispatch<React.SetStateAction<MagicFlow.Node[]>>
+    setNodes: React.Dispatch<React.SetStateAction<DelightfulFlow.Node[]>>
     onNodesChange: (changes: any) => void
 }
 
@@ -22,12 +22,12 @@ export const NodesActionContext = React.createContext<NodesActionCtx>({
     onNodesChange: () => {},
 })
 
-// 为了向后兼容而保留的完整Context
+// Complete Context preserved for backward compatibility
 export type NodesCtx = React.PropsWithChildren<NodesStateCtx & NodesActionCtx>
 
 export const NodesContext = React.createContext<NodesCtx>({
-    // 节点数据
-    nodes: [] as MagicFlow.Node[],
+    // Node data
+    nodes: [] as DelightfulFlow.Node[],
     setNodes: () => {},
     onNodesChange: () => {},
 }) 

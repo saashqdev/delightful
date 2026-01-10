@@ -41,7 +41,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * getMagicplatformuserIDmappingclosesystem.
+     * getDelightfulplatformuserIDmappingclosesystem.
      *
      * @param string[] $delightfulIds
      */

@@ -127,7 +127,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getMagicplatformuserIDmappingclosesystem.
+     * getDelightfulplatformuserIDmappingclosesystem.
      *
      * @param string[] $delightfulIds
      * @return DelightfulThirdPlatformIdMappingEntity[]

@@ -99,7 +99,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
         $beDelightfulAgentUserId = $key['beDelightfulAgentUserId'] ?? '';
         if ($beDelightfulAgentUserId) {
-            // processexceedslevelMagic agent user
+            // processexceedslevelDelightful agent user
             $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
@@ -120,7 +120,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }
-        // ifisMagicfromselfdownhair Token,thenbyfromselfvalidation
+        // ifisDelightfulfromselfdownhair Token,thenbyfromselfvalidation
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
         /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */

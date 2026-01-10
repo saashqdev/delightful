@@ -40,7 +40,7 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'MagicInternetsearch,batchquantitytousermultipleimplicationsameordifferentissueconductinternetsearch.';
+        return 'DelightfulInternetsearch,batchquantitytousermultipleimplicationsameordifferentissueconductinternetsearch.';
     }
 
     public function getCallback(): ?Closure

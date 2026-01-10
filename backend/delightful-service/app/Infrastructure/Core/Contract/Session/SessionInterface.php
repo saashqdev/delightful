@@ -12,9 +12,9 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface SessionInterface
 {
     /**
-     * Magictootherserviceclienthairuploginvalidation.ifwant to replyusealreadyhaveuserbodysystem,needimplementtheinterface.
+     * Delightfultootherserviceclienthairuploginvalidation.ifwant to replyusealreadyhaveuserbodysystem,needimplementtheinterface.
      *
-     * implementprocess:frontclienttononMagicfromcreate accountnumberbodysystemconductloginrequest,thenagainrequestMagicloginvalidationinterface.
+     * implementprocess:frontclienttononDelightfulfromcreate accountnumberbodysystemconductloginrequest,thenagainrequestDelightfulloginvalidationinterface.
      *
      * @param LoginCheckInterface $loginCheck loginvalidationdata
      * @param DelightfulEnvironmentEntity $delightfulEnvironmentEntity wantloginenvironment

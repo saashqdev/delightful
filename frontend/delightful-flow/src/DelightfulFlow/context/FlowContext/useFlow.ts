@@ -17,70 +17,70 @@ import {
 	FlowEdgesActionsType
 } from "./Context"
 
-// 原有hook保持不变，为了向后兼容
+// Keep original hook unchanged for backward compatibility
 export const useFlow = () => useContext(FlowContext)
 
-// 新增专用hook，让组件可以只订阅它们需要的数据
+// Add specialized hooks to let components subscribe only to the data they need
 export const useFlowData = () => useContext(FlowDataContext)
 
-// 获取所有Flow Edges相关的状态和动作
+// Get all Flow Edges related state and actions
 export const useFlowEdges = () => useContext(FlowEdgesContext)
 
-// 获取Flow Edges状态
+// Get Flow Edges state
 export const useFlowEdgesState = (): FlowEdgesStateType => {
 	return useContext(FlowEdgesStateContext)
 }
 
-// 获取Flow Edges动作
+// Get Flow Edges actions
 export const useFlowEdgesActions = (): FlowEdgesActionsType => {
 	return useContext(FlowEdgesActionsContext)
 }
 
-// 仅获取edges数据
+// Get only edges data
 export const useEdges = () => {
 	return useContext(FlowEdgesStateContext).edges
 }
 
-// 仅获取selectedEdgeId
+// Get only selectedEdgeId
 export const useSelectedEdgeId = () => {
 	const { selectedEdgeId } = useContext(FlowEdgesStateContext)
 	const { setSelectedEdgeId } = useContext(FlowEdgesActionsContext)
 	return { selectedEdgeId, setSelectedEdgeId }
 }
 
-// 仅获取onEdgesChange方法
+// Get only onEdgesChange method
 export const useOnEdgesChange = () => {
 	return useContext(FlowEdgesActionsContext).onEdgesChange
 }
 
-// 仅获取onConnect方法
+// Get only onConnect method
 export const useOnConnect = () => {
 	return useContext(FlowEdgesActionsContext).onConnect
 }
 
-// 获取所有Flow Nodes相关的状态和动作
+// Get all Flow Nodes related state and actions
 export const useFlowNodes = () => {
 	return useContext(FlowNodesContext)
 }
 
 export const useFlowUI = () => useContext(FlowUIContext)
 
-// 获取节点配置
+// Get node configuration
 export const useNodeConfig = () => {
 	const { nodeConfig } = useContext(NodeConfigContext)
 	return { nodeConfig }
 }
 
-// 获取节点配置操作方法
+// Get node configuration operation methods
 export const useNodeConfigActions = () => useContext(NodeConfigActionsContext)
 
-// 获取单个节点配置，优化渲染性能
+// Get single node configuration, optimize rendering performance
 export const useSingleNodeConfig = (nodeId: string) => {
 	const { nodeConfig } = useContext(NodeConfigContext)
 	return nodeConfig[nodeId]
 }
 
-// 创建特定数据选择器，可以进一步减少不必要的渲染
+// Create specific data selector to further reduce unnecessary rendering
 export function createFlowSelector<T>(selector: (context: any) => T) {
 	return function useFlowSelector() {
 		const context = useContext(FlowContext)
@@ -88,7 +88,7 @@ export function createFlowSelector<T>(selector: (context: any) => T) {
 	}
 }
 
-// 创建节点配置选择器，只有当特定节点配置改变时才会重新渲染
+// Create node configuration selector, re-renders only when specific node configuration changes
 export function createNodeConfigSelector(nodeId: string) {
 	return () => {
 		const { nodeConfig } = useNodeConfig()
@@ -96,22 +96,22 @@ export function createNodeConfigSelector(nodeId: string) {
 	}
 }
 
-// 仅获取选中节点ID
+// Get only selected node ID
 export const useSelectedNodeId = () => {
 	return useContext(FlowNodesStateContext).selectedNodeId
 }
 
-// 仅获取triggerNode
+// Get only triggerNode
 export const useTriggerNode = () => {
 	return useContext(FlowNodesStateContext).triggerNode
 }
 
-// 仅获取添加节点的方法
+// Get only add node method
 export const useAddNode = () => {
 	return useContext(FlowNodesActionsContext).addNode
 }
 
-// 仅获取删除节点的方法  
+// Get only delete nodes method  
 export const useDeleteNodes = () => {
 	return useContext(FlowNodesActionsContext).deleteNodes
 }

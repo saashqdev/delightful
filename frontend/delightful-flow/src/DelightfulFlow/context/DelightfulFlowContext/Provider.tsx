@@ -1,13 +1,13 @@
 /**
- * 业务组件传入相关的自定义props
+ * Custom props passed from business components
  */
-import { flowStore } from "@/MagicFlow/store"
-import { getRegisterNodeTypes } from "@/MagicFlow/utils"
+import { flowStore } from "@/DelightfulFlow/store"
+import { getRegisterNodeTypes } from "@/DelightfulFlow/utils"
 import { useNodeMap } from "@/common/context/NodeMap/useResize"
 import React, { useEffect } from "react"
-import { MagicFlowContext } from "./Context"
+import { DelightfulFlowContext } from "./Context"
 
-export const MagicFlowProvider = ({ children }: React.PropsWithChildren<{}>) => {
+export const DelightfulFlowProvider = ({ children }: React.PropsWithChildren<{}>) => {
 	const { updateDisplayMaterialType, updateNodeVersionSchema } = flowStore.getState()
 
 	const { nodeMap } = useNodeMap()
@@ -21,5 +21,5 @@ export const MagicFlowProvider = ({ children }: React.PropsWithChildren<{}>) => 
 		updateNodeVersionSchema(nodeMap)
 	}, [nodeMap])
 
-	return <MagicFlowContext.Provider value={flowStore}>{children}</MagicFlowContext.Provider>
+	return <DelightfulFlowContext.Provider value={flowStore}>{children}</DelightfulFlowContext.Provider>
 }

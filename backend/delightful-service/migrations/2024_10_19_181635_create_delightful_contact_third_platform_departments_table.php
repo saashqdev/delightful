@@ -19,8 +19,8 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_third_platform_departments', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_department_id', 64)->comment('Magicdepartmentid');
-            $table->string('delightful_organization_code', 64)->comment('Magicorganizationencoding');
+            $table->string('delightful_department_id', 64)->comment('Delightfuldepartmentid');
+            $table->string('delightful_organization_code', 64)->comment('Delightfulorganizationencoding');
             $table->string('third_leader_user_id', 64)->comment('departmentsupervisoruser ID')->nullable()->default('');
             $table->string('third_department_id', 64)->comment('thethreesidedepartmentid');
             $table->string('third_parent_department_id', 64)->comment('thethreeparentsidedepartmentdepartment ID')->nullable();

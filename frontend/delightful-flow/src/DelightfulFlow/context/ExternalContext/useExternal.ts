@@ -7,40 +7,40 @@ import {
 } from "./Context"
 
 /**
- * 获取完整的External上下文（向后兼容）
+ * Get complete External context (backward compatible)
  */
 export const useExternal = () => {
 	return React.useContext(ExternalContext)
 }
 
 /**
- * 只获取UI相关的上下文，当UI更新时才会触发重新渲染
- * 适用于只依赖UI部分的组件，如Header、Toolbar等
+ * Get only UI-related context, triggers re-render only when UI updates
+ * Suitable for components that only depend on UI parts, such as Header, Toolbar, etc.
  */
 export const useExternalUI = () => {
 	return React.useContext(ExternalUIContext)
 }
 
 /**
- * 只获取配置相关的上下文，当配置更新时才会触发重新渲染
- * 适用于依赖配置项的组件，如Node、Edge等
+ * Get only config-related context, triggers re-render only when config updates
+ * Suitable for components that depend on configuration, such as Node, Edge, etc.
  */
 export const useExternalConfig = () => {
 	return React.useContext(ExternalConfigContext)
 }
 
 /**
- * 只获取引用相关的上下文，引用几乎不会更新
- * 适用于需要访问外部引用的组件
+ * Get only reference-related context, references almost never update
+ * Suitable for components that need to access external references
  */
 export const useExternalRef = () => {
 	return React.useContext(ExternalRefContext)
 }
 
 /**
- * 选择性地获取External上下文的某些字段
- * @param selector 选择器函数，从上下文中选择需要的字段
- * @returns 选择的字段
+ * Selectively get certain fields from External context
+ * @param selector Selector function to select needed fields from context
+ * @returns Selected fields
  */
 export function useExternalSelector<Selected>(
 	selector: (state: React.ContextType<typeof ExternalContext>) => Selected

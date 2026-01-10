@@ -173,7 +173,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * MagicInternetsearchsimplesingleversion,adaptprocess,onlysupportsimplesinglesearch.
+     * DelightfulInternetsearchsimplesingleversion,adaptprocess,onlysupportsimplesinglesearch.
      * @throws Throwable
      * @throws RedisException
      */

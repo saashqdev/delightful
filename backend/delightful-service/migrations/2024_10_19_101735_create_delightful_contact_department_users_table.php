@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->tinyInteger('is_leader')->comment('whetherisdepartmentleader 0-no 1-is')->default(0);
             $table->string('job_title', 64)->comment('inthisdepartmentposition')->default('');
             $table->string('leader_user_id', 64)->comment('inthisdepartmentdirect supervisor user_id')->nullable()->default('');
-            $table->string('organization_code', 32)->comment('Magicorganizationencoding');
+            $table->string('organization_code', 32)->comment('Delightfulorganizationencoding');
             $table->string('city', 64)->comment('workcity')->default('');
             $table->string('country', 32)->comment('countryorgroundregion Code abbreviation')->default('');
             $table->string('join_time', 32)->comment('onboardtime.secondleveltimestampformat,tableshowfrom 1970 year 1 month 1 daystartpassed throughpasssecondcount.')->default('');
@@ -36,7 +36,7 @@ return new class extends Migration {
             $table->string('orders', 256)->comment('usersortinfo.useatmarkaddress bookdownorganizationarchitecturepersonmemberorder,personmembermaybeexistsinmultipledepartmentmiddle,andhavedifferentsort')->nullable()->default('');
             $table->text('custom_attrs')->comment('customizefield.');
             $table->tinyInteger('is_frozen')->comment('whetherforpausestatususer.')->default(0);
-            $table->comment('Magicdepartmentdownuserinfotable');
+            $table->comment('Delightfuldepartmentdownuserinfotable');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'delightful_id'], 'org_delightful_id');

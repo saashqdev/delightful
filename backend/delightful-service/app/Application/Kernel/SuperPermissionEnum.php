@@ -30,18 +30,18 @@ enum SuperPermissionEnum: string
     // privilegehairmessage
     case PRIVILEGE_SEND_MESSAGE = 'privilege_send_message';
 
-    // Magicmultipleenvironmentmanage
+    // Delightfulmultipleenvironmentmanage
     case DELIGHTFUL_ENV_MANAGEMENT = 'delightful_env_management';
 
     // servicequotientadministrator
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
 
-    // exceedslevelMagicinvitationuseuser
+    // exceedslevelDelightfulinvitationuseuser
     case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
-    // exceedslevelMagickanbanmanagepersonmember
+    // exceedslevelDelightfulkanbanmanagepersonmember
     case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
-    // exceedslevelMagickanbanoperationpersonmember
+    // exceedslevelDelightfulkanbanoperationpersonmember
     case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'be_delightful_board_operator';
 }

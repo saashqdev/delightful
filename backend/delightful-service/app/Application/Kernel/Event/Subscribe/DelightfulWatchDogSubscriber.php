@@ -42,7 +42,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         $quantum = 10 * 1000 * 1000; // unit:millisecondssecond
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
         // watchdogfindsameblockingplace
-        $logger->info('Magicwatchdog,start!');
+        $logger->info('Delightfulwatchdog,start!');
         $alertCountMap = new WeakMap();
         Watchdog::run($quantum * 5, 0, static function () use (&$alertCountMap, $logger) {
             $coroutine = Coroutine::getCurrent();
@@ -52,7 +52,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(
-                    'Magicwatchdog hairshowblocking coroutine id:%s,samecoroutineblockingcount:%s trace :%s ',
+                    'Delightfulwatchdog hairshowblocking coroutine id:%s,samecoroutineblockingcount:%s trace :%s ',
                     $coroutine->getId(),
                     $alertCount,
                     $trace

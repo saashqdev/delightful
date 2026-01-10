@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
  */
 class ImageWatermarkProcessor
 {
-    public const WATERMARK_TEXT = 'Magic AI generate';
+    public const WATERMARK_TEXT = 'Delightful AI generate';
 
     #[Inject]
     protected LoggerInterface $logger;

@@ -19,13 +19,13 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_departments', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('department_id', 64)->comment('Magicdepartmentid');
+            $table->string('department_id', 64)->comment('Delightfuldepartmentid');
             $table->string('parent_department_id', 64)->comment('parentdepartmentdepartment ID')->nullable();
             $table->string('name', 64)->comment('departmentname');
             $table->text('i18n_name')->comment('internationalizationdepartmentname');
             $table->string('order', 64)->comment('departmentsort,immediatelydepartmentinitssameleveldepartmentshoworder.getvaluemoresmallsortmorerelyfront.')->nullable()->default('');
             $table->string('leader_user_id', 64)->comment('departmentsupervisoruser ID')->nullable()->default('');
-            $table->string('organization_code', 64)->comment('Magicorganizationencoding');
+            $table->string('organization_code', 64)->comment('Delightfulorganizationencoding');
             $table->text('status')->comment('departmentstatus,jsonformat,itemfrontsupport is_deleted:whetherdelete');
             $table->string('document_id', 64)->comment('departmentinstructionbook(clouddocumentid)');
             // level

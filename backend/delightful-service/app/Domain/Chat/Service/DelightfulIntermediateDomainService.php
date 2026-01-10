@@ -25,7 +25,7 @@ use Throwable;
  */
 class DelightfulIntermediateDomainService extends AbstractDomainService
 {
-    // exceedslevelMagicinteractionfingercommandtemporarymessageprocess
+    // exceedslevelDelightfulinteractionfingercommandtemporarymessageprocess
     /**
      * @throws Throwable
      */
@@ -51,7 +51,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
 
-            // 2. getexceedslevelMagic(receiveperson)info
+            // 2. getexceedslevelDelightful(receiveperson)info
             $agentUserId = $messageDTO->getReceiveId();
             $agentUserEntity = $this->delightfulUserRepository->getUserById($agentUserId);
             if (! $agentUserEntity) {
@@ -113,7 +113,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             // temporarymessagemaybenotneedenvironmentID,usedefaultvalue
             $senderExtraDTO->setDelightfulEnvId(null);
 
-            // 7. touchhairusercallexceedslevelMagicevent
+            // 7. touchhairusercallexceedslevelDelightfulevent
             event_dispatch(new UserCallAgentEvent(
                 $agentAccountEntity,
                 $agentUserEntity,

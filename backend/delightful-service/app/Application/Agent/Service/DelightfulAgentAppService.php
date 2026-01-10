@@ -888,7 +888,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $loadPresetConfig = $this->loadPresetConfig('chat', ['modelName' => $modelName]);
         // preparebasicconfiguration
         $config = [
-            'agent_name' => 'Magicassistant',
+            'agent_name' => 'Delightfulassistant',
             'agent_description' => 'Iwillreturnansweryouoneall',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],

@@ -1,13 +1,13 @@
-import { NodeGroup } from "@/MagicFlow/register/node"
-import { MagicFlow } from "@/MagicFlow/types/flow"
+import { NodeGroup } from "@/DelightfulFlow/register/node"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React, { useMemo } from "react"
 
-// 物料分组
+// Material grouping
 export type MaterialGroup = Partial<Omit<NodeGroup, "nodeTypes" | "children">> & {
-	detail: Pick<MagicFlow.Node, "input" | "output" | "id" | "custom_system_input"> // 具体的节点配置
-	name: string // 节点名称
-	description: string // 节点描述
-	avatar: string // 头像链接
+	detail: Pick<DelightfulFlow.Node, "input" | "output" | "id" | "custom_system_input"> // Specific node configuration
+	name: string // Node name
+	description: string // Node description
+	avatar: string // Avatar URL
 	isGroupNode: boolean
 	children: MaterialGroup[]
 	id: string
@@ -26,12 +26,12 @@ export type MaterialSourceCtx = React.PropsWithChildren<{
 		getNextPageFn: () => Promise<void>
 	}
 	subFlow?: {
-		list: MagicFlow.Flow
+		list: DelightfulFlow.Flow
 		searchListFn: (keyword: string) => Promise<void>
 		getNextPageFn: () => Promise<void>
 	}
 	agent?: {
-		list: Partial<MagicFlow.Flow>
+		list: Partial<DelightfulFlow.Flow>
 		searchListFn: (type: AgentType, keyword: string) => Promise<void>
 		getNextPageFn: () => Promise<void>
 	}

@@ -1,25 +1,25 @@
-import { MagicFlow } from "@/MagicFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React from "react"
 import { Edge } from "reactflow"
 import { EventEmitter } from "ahooks/lib/useEventEmitter"
-import { BatchProcessingOptions } from "@/MagicFlow/hooks/useNodeBatchProcessing"
+import { BatchProcessingOptions } from "@/DelightfulFlow/hooks/useNodeBatchProcessing"
 
-// 拆分为多个专用的Context类型
-// 流程数据相关
+// Split into multiple specialized Context types
+// Flow data related
 export type FlowDataCtx = {
-    flow: MagicFlow.Flow | null
+    flow: DelightfulFlow.Flow | null
     description: string
     debuggerMode: boolean
     updateFlow: (this: any, flowConfig: any) => void
 }
 
-// 边相关状态
+// Edge-related state
 export type FlowEdgesStateType = {
     edges: Edge[]
     selectedEdgeId: string | null
 }
 
-// 边相关动作
+// Edge-related actions
 export type FlowEdgesActionsType = {
     onEdgesChange: (this: any, changes: any) => void
     onConnect: (this: any, connection: any) => void
@@ -30,16 +30,16 @@ export type FlowEdgesActionsType = {
     deleteEdges: (edgesToDelete: Edge[]) => void
 }
 
-// 边相关
+// Edge-related
 export type FlowEdgesCtx = FlowEdgesStateType & FlowEdgesActionsType
 
-// 边相关状态Context
+// Edge-related state Context
 export const FlowEdgesStateContext = React.createContext<FlowEdgesStateType>({
     edges: [] as Edge[],
     selectedEdgeId: null,
 })
 
-// 边相关动作Context
+// Edge-related actions Context
 export const FlowEdgesActionsContext = React.createContext<FlowEdgesActionsType>({
     onEdgesChange: () => {},
     onConnect: () => {},
@@ -50,9 +50,9 @@ export const FlowEdgesActionsContext = React.createContext<FlowEdgesActionsType>
     deleteEdges: () => {},
 })
 
-// 新增NodeConfigContext，用于管理节点配置数据
+// Add NodeConfigContext for managing node configuration data
 export type NodeConfigCtx = {
-	// 节点配置
+	// Node configuration
 	nodeConfig: Record<string, any>
 }
 
@@ -60,13 +60,13 @@ export const NodeConfigContext = React.createContext({
 	nodeConfig: {},
 } as NodeConfigCtx)
 
-// 新增NodeConfigActionsContext存放所有操作方法
+// Add NodeConfigActionsContext to store all operation methods
 export type NodeConfigActionsCtx = {
-	// 设置节点配置
+	// Set node configuration
 	setNodeConfig: React.Dispatch<React.SetStateAction<Record<string, any>>>
-	// 更新节点配置
-	updateNodeConfig: (node: MagicFlow.Node, originalNode?: MagicFlow.Node) => void
-	// 通知节点变化
+	// Update node configuration
+	updateNodeConfig: (node: DelightfulFlow.Node, originalNode?: DelightfulFlow.Node) => void
+	// Notify node change
 	notifyNodeChange: (nodeId?: string) => void
 }
 
@@ -76,14 +76,14 @@ export const NodeConfigActionsContext = React.createContext({
 	notifyNodeChange: () => {},
 } as NodeConfigActionsCtx)
 
-// 将FlowNodesCtx拆分为状态和动作两部分
+// Split FlowNodesCtx into state and actions parts
 export type FlowNodesStateType = {
   selectedNodeId: string
   triggerNode: any | null
 }
 
 export type FlowNodesActionsType = {
-    addNode: (node: MagicFlow.Node | MagicFlow.Node[], meta?: any) => void
+    addNode: (node: DelightfulFlow.Node | DelightfulFlow.Node[], meta?: any) => void
     deleteNodes: (nodeIds: string[]) => void
     updateNodesPosition: (nodeId: string[], position: Record<string,{ x: number; y: number }>) => void
     setSelectedNodeId: (id: string) => void
@@ -93,13 +93,13 @@ export type FlowNodesActionsType = {
 
 export type FlowNodesCtx = FlowNodesStateType & FlowNodesActionsType
 
-// 状态Context
+// State Context
 export const FlowNodesStateContext = React.createContext<FlowNodesStateType>({
   selectedNodeId: "",
   triggerNode: null,
 })
 
-// 动作Context
+// Actions Context
 export const FlowNodesActionsContext = React.createContext<FlowNodesActionsType>({
   addNode: () => {},
   deleteNodes: () => {},
@@ -109,7 +109,7 @@ export const FlowNodesActionsContext = React.createContext<FlowNodesActionsType>
   processNodesBatch: () => () => {},
 })
 
-// 保留原有Context以向后兼容
+// Preserve original Context for backward compatibility
 export const FlowNodesContext = React.createContext({
   addNode: () => {},
   deleteNodes: () => {},
@@ -121,15 +121,15 @@ export const FlowNodesContext = React.createContext({
   processNodesBatch: () => () => {},
 } as FlowNodesCtx)
 
-// UI状态相关
+// UI state related
 export type FlowUICtx = {
     flowInstance: React.MutableRefObject<any>
     showMaterialPanel: boolean
     setShowMaterialPanel: React.Dispatch<React.SetStateAction<boolean>>
-    flowDesignListener: EventEmitter<MagicFlow.FlowEventListener>
+    flowDesignListener: EventEmitter<DelightfulFlow.FlowEventListener>
 }
 
-// 原始完整的Context类型
+// Original complete Context type
 export type FlowCtx = React.PropsWithChildren<
     FlowDataCtx &
         FlowEdgesCtx &
@@ -139,7 +139,7 @@ export type FlowCtx = React.PropsWithChildren<
         NodeConfigActionsCtx
 >  
 
-// 创建分离的Context
+// Create separated Contexts
 export const FlowDataContext = React.createContext<FlowDataCtx>({
     flow: null,
     description: "",
@@ -147,7 +147,7 @@ export const FlowDataContext = React.createContext<FlowDataCtx>({
     updateFlow: () => {},
 })
 
-// 保留原有FlowEdgesContext以向后兼容
+// Preserve original FlowEdgesContext for backward compatibility
 export const FlowEdgesContext = React.createContext<FlowEdgesCtx>({
     edges: [] as Edge[],
     onEdgesChange: () => {},
@@ -170,5 +170,5 @@ export const FlowUIContext = React.createContext<FlowUICtx>({
     } as any,
 })
 
-// 为了兼容性保留原始的FlowContext
+// Preserve original FlowContext for compatibility
 export const FlowContext = React.createContext({} as FlowCtx)

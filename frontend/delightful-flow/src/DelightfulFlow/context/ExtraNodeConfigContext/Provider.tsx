@@ -1,5 +1,5 @@
 /**
- * 业务组件传入相关的自定义props
+ * Custom props passed from business components
  */
 import React, { useMemo } from "react"
 import { ExtraNodeConfigContext, ExtraNodeConfigCtx } from "./Context"

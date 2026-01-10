@@ -1,17 +1,17 @@
 /**
- * 给业务节点使用的，用于向节点内注入当前测试的节点、测试的状态以及测试结果，有基础节点进行显示
+ * Used by business nodes to inject the current testing node, testing state, and testing results, displayed by base nodes
  */
 import React, { useMemo } from "react"
 import { NodeTestingContext, NodeTestingCtx } from "./Context"
 
 export const NodeTestingProvider = ({
-	// 当前正在调试的节点id列表（用于显示loading）
+	// List of node IDs currently being debugged (for displaying loading)
 	nowTestingNodeIds,
-	// 当前调试的节点id
+	// Current debugging node ID
 	testingNodeIds,
-	// 节点id -> 节点调试日志
+	// Node ID -> Node debugging log
 	testingResultMap,
-	// 是否进行节点自动定位
+	// Whether to perform automatic node positioning
 	position,
 	children,
 }: NodeTestingCtx) => {

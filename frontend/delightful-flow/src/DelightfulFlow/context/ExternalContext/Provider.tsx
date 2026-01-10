@@ -1,5 +1,5 @@
 /**
- * 业务组件传入相关的自定义props
+ * Custom props passed from business components
  */
 import React, { useMemo } from "react"
 import {
@@ -23,7 +23,7 @@ export const ExternalProvider = ({
 	omitNodeKeys,
 	children,
 }: ExternalCtx) => {
-	// UI相关属性，可能频繁变化
+	// UI-related properties, may change frequently
 	const uiValue = useMemo(() => {
 		return {
 			header,
@@ -32,7 +32,7 @@ export const ExternalProvider = ({
 		}
 	}, [header, nodeToolbar, materialHeader])
 
-	// 配置相关属性，不太可能频繁变化
+	// Config-related properties, unlikely to change frequently
 	const configValue = useMemo(() => {
 		return {
 			paramsName,
@@ -51,14 +51,14 @@ export const ExternalProvider = ({
 		omitNodeKeys,
 	])
 
-	// 引用相关属性，几乎不会变化
+	// Reference-related properties, almost never change
 	const refValue = useMemo(() => {
 		return {
 			flowInteractionRef,
 		}
 	}, [flowInteractionRef])
 
-	// 完整的Context值（向后兼容）
+	// Complete Context value (backward compatible)
 	const fullValue = useMemo(() => {
 		return {
 			...uiValue,

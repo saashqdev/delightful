@@ -1,4 +1,4 @@
-import { TestingResultRow } from "@/MagicFlow/nodes/common/NodeTestingHeader/useTesting"
+import { TestingResultRow } from "@/DelightfulFlow/nodes/common/NodeTestingHeader/useTesting"
 import React from "react"
 
 export type NodeTestConfig = {
@@ -12,7 +12,7 @@ export type NodeTestConfig = {
 	output?: Record<string, any>
 	children_ids?: string[]
 	loop_debug_results?: NodeTestConfig[]
-	// debug日志
+	// Debug log
 	debug_log?: Record<string, any>
 }
 

@@ -91,7 +91,7 @@ class BeDelightfulChatManager
 
         // 2. generateonesharebigmodelcalltoolcanreaddescription
         $description = <<<'MARKDOWN'
-callMagic AI assistantconductconversation
+callDelightful AI assistantconductconversation
 
 canuse AI assistantlist:
 

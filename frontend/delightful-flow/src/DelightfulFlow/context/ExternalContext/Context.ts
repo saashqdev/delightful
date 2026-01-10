@@ -1,11 +1,11 @@
 /**
- * 业务组件传入相关的自定义props
+ * Custom props passed from business components
  */
 import React from "react"
-import { MagicFlow } from "@/MagicFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 
-// 将大Context拆分为多个小Context
-// 1. UI部分Context - 最频繁变化的部分
+// Split large Context into multiple smaller Contexts
+// 1. UI Context - most frequently changing part
 export type ExternalUICtx = {
     header?: {
         buttons?: React.ReactElement
@@ -25,9 +25,9 @@ export type ExternalUICtx = {
     }
 }
 
-// 2. 配置Context - 不常变化的部分
+// 2. Config Context - infrequently changing part
 export type ExternalConfigCtx = {
-    paramsName?: MagicFlow.ParamsName
+    paramsName?: DelightfulFlow.ParamsName
     onlyRenderVisibleElements?: boolean
     layoutOnMount?: boolean
     allowDebug?: boolean
@@ -35,17 +35,17 @@ export type ExternalConfigCtx = {
     omitNodeKeys?: string[]
 }
 
-// 3. 引用/回调Context - 引用类型，很少变化
+// 3. Ref/Callback Context - reference types, rarely change
 export type ExternalRefCtx = {
     flowInteractionRef?: React.MutableRefObject<any>
 }
 
-// 向后兼容的完整Context
+// Complete Context for backward compatibility
 export type ExternalCtx = React.PropsWithChildren<
     ExternalUICtx & ExternalConfigCtx & ExternalRefCtx
 >
 
-// 创建各个独立Context
+// Create individual Contexts
 export const ExternalUIContext = React.createContext<ExternalUICtx>({
     header: undefined,
     materialHeader: undefined,
@@ -65,7 +65,7 @@ export const ExternalRefContext = React.createContext<ExternalRefCtx>({
     flowInteractionRef: undefined,
 })
 
-// 保留原始Context以保持向后兼容性
+// Preserve original Context to maintain backward compatibility
 export const ExternalContext = React.createContext<ExternalCtx>({
     header: {},
     nodeToolbar: { list: [] },

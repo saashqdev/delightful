@@ -1,13 +1,13 @@
 import React from "react"
-import { MagicFlowContext } from "./Context"
+import { DelightfulFlowContext } from "./Context"
 import { useStore as useZustandStore } from 'zustand';
-import { BaseNodeType } from "@/MagicFlow/register/node";
+import { BaseNodeType } from "@/DelightfulFlow/register/node";
 
-export const useMagicFlow = () => {
-	const store = React.useContext(MagicFlowContext)
+export const useDelightfulFlow = () => {
+	const store = React.useContext(DelightfulFlowContext)
 
     if (!store) {
-        throw new Error('useMagicFlow must be used within a MagicFlowProvider');
+        throw new Error('useDelightfulFlow must be used within a DelightfulFlowProvider');
     }
 
     const displayMaterialTypes = useZustandStore(store, state => state.displayMaterialTypes) as BaseNodeType[];

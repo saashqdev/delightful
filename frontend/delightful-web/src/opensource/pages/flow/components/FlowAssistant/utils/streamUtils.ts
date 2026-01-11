@@ -282,7 +282,7 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 	const stillHasCommandStart = updatedContent.includes("<!-- COMMAND_START -->")
 	console.log("command start tag still exists after replacement:", stillHasCommandStart)
 
-	// 如果没有完整标记但有开始标记，try to process incomplete command
+	//  info try to process incomplete command
 	if (stillHasCommandStart) {
 		console.log("try to process incomplete command")
 		// find command start position

@@ -40,7 +40,7 @@ export default function useLLMParameters() {
 			// {
 			// 	label: "Top P",
 			// 	key: "top_p",
-			// 	tooltips: "Control diversity through nucleus sampling：0.5indicates half of all possible weighted options are considered。",
+			// 	tooltips: "Control diversity through nucleus sampling info 0.5indicates half of all possible weighted options are considered info ",
 			// 	open: false,
 			// 	defaultValue: 1,
 			// 	extra: {

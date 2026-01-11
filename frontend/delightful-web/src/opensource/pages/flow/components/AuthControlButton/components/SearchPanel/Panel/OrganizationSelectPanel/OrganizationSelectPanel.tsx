@@ -82,7 +82,7 @@ export default function OrganizationSelectPanel() {
 					const newItems = value
 						.map((item) => {
 							if (item.dataType === StructureItemType.Department) {
-								// Process部门
+								// Process info 
 								return {
 									target_id: item.id,
 									// @ts-ignore
@@ -97,7 +97,7 @@ export default function OrganizationSelectPanel() {
 								}
 							}
 							if (item.dataType === StructureItemType.User) {
-								// Process用户
+								// Process info 
 								const userItem = item as UserSelectItem
 								return {
 									target_id: item.user_id,
@@ -116,7 +116,7 @@ export default function OrganizationSelectPanel() {
 							// if there are other types, can process here
 							return null
 						})
-						.filter(Boolean) // 过滤掉可能的 null 值
+						.filter(Boolean) //  info  null  info 
 
 					return [...filteredAuthList, ...newItems]
 				})

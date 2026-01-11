@@ -17,8 +17,8 @@ interface UseTestFunctionsProps {
 }
 
 /**
- * 测试功能钩子
- * 提供测试流式响应和命令Process的功能
+ * testing hook
+ * provides testing for streaming responses and command processing
  */
 export default function useTestFunctions({
 	setMessages,
@@ -29,104 +29,104 @@ export default function useTestFunctions({
 	setStreamResponse,
 	setIsProcessing,
 }: UseTestFunctionsProps) {
-	// 追踪当前测试会话ID，确保不会有重叠的测试
+	// track current test session ID to avoid overlapping tests
 	const currentTestSessionRef = useRef<string | null>(null)
-	// 追踪正在Process命令的状态
+	// track whether commands are being processed
 	const processingRef = useRef<boolean>(false)
 
 	/**
-	 * 强制清理所有测试状态
+	 * force cleanup of all test states
 	 */
 	const forceCleanupState = useMemoizedFn(() => {
-		// 立即重置所有状态
+		// reset all states immediately
 		setProcessingMessageId(null)
 		setIsCommandProcessing(false)
 		setCommandQueue([])
 		currentTestSessionRef.current = null
 		processingRef.current = false
-		console.log("测试状态已重置")
+		console.log("test state reset")
 	})
 
 	/**
-	 * 创建模拟真实SSE流的ReadableStream，采用更可靠的数据传输方式
-	 * @param sseLines SSE事件行数组
-	 * @param delayBetweenLines 行之间的延迟(毫秒)
-	 * @returns 模拟的SSE流
+	 * create a mock real SSE ReadableStream with more reliable data transfer
+	 * @param sseLines SSE event line array
+	 * @param delayBetweenLines delay between lines (ms)
+	 * @returns mock SSE stream
 	 */
 	const createMockSSEStream = useMemoizedFn(
 		(sseLines: string[], delayBetweenLines: number): ReadableStream<Uint8Array> => {
-			// 确保最小延迟，避免Process不及时
+			// ensure minimum delay to avoid late processing
 			const safeDelay = Math.max(150, delayBetweenLines)
 			console.log(`Using safe delay: ${safeDelay}ms`)
 
 			let lineIndex = 0
 			const encoder = new TextEncoder()
 
-			// 使用更可靠的队列方式Process数据
+			// process data with a more reliable queue
 			return new ReadableStream({
 				start(controller) {
-					// 加入结束检测计数器
+					// add an end-detection counter
 					let processingTimeoutId: NodeJS.Timeout | null = null
 
-					// 定义发送下一行的函数
+					// define a function to send the next line
 					const sendNextLine = () => {
-						// 清除之前的超时
+						// clear previous timeout
 						if (processingTimeoutId) {
 							clearTimeout(processingTimeoutId)
 							processingTimeoutId = null
 						}
 
 						if (lineIndex >= sseLines.length) {
-							// 所有行已发送完毕，关闭流
+							// all lines sent, close stream
 							console.log(`All SSE stream lines sent (${sseLines.length} lines)`)
 
-							// 发送结束标记并关闭流
+							// send end marker and close stream
 							setTimeout(() => {
 								controller.enqueue(encoder.encode("data:[DONE]\n"))
 								controller.close()
-								console.log("SSE流已关闭")
+								console.log("SSE stream closed")
 							}, safeDelay)
 							return
 						}
 
-						// Get当前行并准备下一行
+						// get current line and prepare the next
 						const line = sseLines[lineIndex]
 						lineIndex += 1
 
 						try {
-							// 确保每行都有换行符，对于SSE事件Process至关重要
+						 * clean up exposed test methods
 							const lineWithNewline = line.endsWith("\n") ? line : `${line}\n`
 							const encodedLine = encoder.encode(lineWithNewline)
 
-							// 入队并记录日志
+							// enqueue and log
 							controller.enqueue(encodedLine)
 							console.log(
-								`已发送第${lineIndex}/${sseLines.length}行: ${line.slice(0, 50)}${
-									line.length > 50 ? "..." : ""
+								`sent ${lineIndex}/${sseLines.length} lines: ${line.slice(0, 50)}${
+						// expose test methods on mount; clean up on unmount
 								}`,
 							)
 
-							// 安排发送下一行，并Set超时保护
+							// schedule next line and set timeout protection
 							processingTimeoutId = setTimeout(() => {
 								sendNextLine()
 							}, safeDelay)
 						} catch (error) {
-							console.error(`发送SSE行时出错:`, error)
-							// 出错时也尝试继续发送下一行
+							console.error(`error sending SSE line:`, error)
+							// on error still try sending next line
 							processingTimeoutId = setTimeout(() => {
 								sendNextLine()
-							}, safeDelay * 2) // 出错时使用更长的延迟
+							}, safeDelay * 2) // use longer delay on error
 						}
 					}
 
-					// 开始发送第一行
-					console.log(`开始发送SSE流, 共${sseLines.length}行, 延迟: ${safeDelay}ms`)
+					// start sending first line
+					console.log(`Start sending SSE stream, total${sseLines.length} lines, delay: ${safeDelay}ms`)
 					sendNextLine()
 				},
 
 				cancel() {
-					console.log("模拟SSE流被Cancel")
-					// 防止进一步发送
+					console.log("mock SSE stream cancelled")
+					// prevent further sending
 					lineIndex = sseLines.length
 				},
 			})
@@ -134,72 +134,72 @@ export default function useTestFunctions({
 	)
 
 	/**
-	 * 测试使用真实SSE事件流格式
-	 * @param sseLines SSE事件行数组，每行格式为 data:{...}
-	 * @param delayBetweenLines 行之间的延迟时间(毫秒)
+	 * test using real SSE event stream format
+	 * @param sseLines SSE event line array，each line formatted as data:{...}
+	 * @param delayBetweenLines delay between lines (ms)
 	 */
 	const testWithStreamEvents = useMemoizedFn(
 		(sseLines: string[], delayBetweenLines: number = 200) => {
-			// 如果已经有测试在进行中，先强制清理
+			// if a test is already running, force cleanup first
 			if (processingRef.current || currentTestSessionRef.current) {
-				console.warn("检测到有未完成的测试，先执行强制清理")
+				console.warn("detected unfinished test, performing force cleanup")
 				forceCleanupState()
 			}
 
-			// 生成新的测试会话ID
+			// generate a new test session ID
 			const testSessionId = `test-${Date.now()}`
 			currentTestSessionRef.current = testSessionId
 			processingRef.current = true
 
-			// 创建一个新的AI消息ID
+			// create a new AI message ID
 			const assistantMessageId = `msg-${Date.now()}`
 
-			// 添加一个空的AI消息，注意状态设为loading
+			// add an empty AI message with status set to loading
 			const newAssistantMessage: Message = {
 				id: assistantMessageId,
 				role: "assistant",
 				content: "",
-				status: "loading", // 初始状态为loading
+				status: "loading", // initial status is loading
 			}
 
-			console.log(`开始新的SSE流测试会话: ${testSessionId}, 消息ID: ${assistantMessageId}`)
+			console.log(`start new SSE stream test session: ${testSessionId}, message ID: ${assistantMessageId}`)
 
-			// 重置状态并添加消息
-			setCommandQueue([]) // 清空命令队列
+			// reset state and add message
+			setCommandQueue([]) // clear the command queue
 			setProcessingMessageId(assistantMessageId)
 			setMessages((prev) => [...prev, newAssistantMessage])
 			setIsProcessing(true)
 
-			// 创建模拟的SSE流
+			// create mock SSE stream
 			const mockStream = createMockSSEStream(sseLines, delayBetweenLines)
 
-			// 手动监听流Process进度，确保消息状态正确更新
+			// manually monitor stream processing progress to ensure message status updates
 			const checkStreamProgress = () => {
-				// 每秒检查一次流Process状态
+				// check stream processing status every second
 				const checkInterval = setInterval(() => {
-					// 如果会话ID不匹配或未Process中，Cancel检查
+					// if session ID mismatches or not processing, cancel the check
 					if (currentTestSessionRef.current !== testSessionId || !processingRef.current) {
 						clearInterval(checkInterval)
 						return
 					}
 
-					// 获Cancel息最新状态
+					// get latest message state
 					let messageHasContent = false
 
 					setMessages((prevMessages) => {
-						// 查找当前消息
+						// find the current message
 						const currentMessage = prevMessages.find(
 							(msg) => msg.id === assistantMessageId,
 						)
 
-						// 检查消息Whether已有内容但仍处于loading状态
+						// check whether the message has content but is still loading
 						if (
 							currentMessage &&
 							currentMessage.status === "loading" &&
 							currentMessage.content
 						) {
 							messageHasContent = true
-							// 更新状态为done
+							// update status to done
 							return prevMessages.map((msg) =>
 								msg.id === assistantMessageId ? { ...msg, status: "done" } : msg,
 							)
@@ -207,28 +207,28 @@ export default function useTestFunctions({
 						return prevMessages
 					})
 
-					// 如果消息有内容但仍是loading状态，确保Process完成时消息状态正确
+					// if message has content but is still loading, ensure status correct when processing completes
 					if (messageHasContent) {
-						console.log(`检测到消息有内容但状态未更新，修正状态: ${assistantMessageId}`)
+						console.log(`detected content but status not updated, fixing status: ${assistantMessageId}`)
 					}
 				}, 1000)
 
-				// 60秒后强制清理，防止检查器无限运行
+				// force cleanup after 60 seconds to avoid infinite checker
 				setTimeout(() => {
 					clearInterval(checkInterval)
 
-					// 如果仍在Process中，强制更新消息状态并结束Process
+					// if still processing, force update message status and end processing
 					if (currentTestSessionRef.current === testSessionId && processingRef.current) {
-						console.warn(`流Process超时，强制完成: ${testSessionId}`)
+						console.warn(`stream processing timeout, forcing completion: ${testSessionId}`)
 
-						// 更新消息状态为done
+						// update message status to done
 						setMessages((prevMessages) =>
 							prevMessages.map((msg) =>
 								msg.id === assistantMessageId ? { ...msg, status: "done" } : msg,
 							),
 						)
 
-						// 清理Process状态
+						// clean processing state
 						setProcessingMessageId(null)
 						setIsProcessing(false)
 						processingRef.current = false
@@ -238,130 +238,132 @@ export default function useTestFunctions({
 				}, 60000)
 			}
 
-			// 启动进度检查
+			// start progress check
 			checkStreamProgress()
+										forceCleanupState, // expose force cleanup for manual reset
+										testWithStreamEvents, // expose SSE stream test (array version)
 
-			// Set响应流，让StreamProcessor组件Process
+			// set response stream for StreamProcessor to process
 			setStreamResponse(mockStream)
 		},
 	)
 
 	/**
-	 * 以最原始方式从SSE格式数据中提取内容，完全保留所有特殊字符
-	 * @param sseContent SSE格式的完整内容
-	 * @returns 提取的原始内容，如果失败则返回null
+	 * extract content from SSE data in raw form, preserving special characters
+	 * @param sseContent complete SSE-formatted content
+	 * @returns extracted raw content, or null on failure
 	 */
 	const extractContentFromSSE = (sseContent: string): string | null => {
 		try {
-			// 按行分割SSE内容
+			// split SSE content by line
 			const lines = sseContent.split("\n").filter((line) => line.trim().length > 0)
 			if (lines.length === 0) return null
 
-			// 收集每行的字符内容
+			// collect character content for each line
 			const contentFragments: string[] = []
 
-			// 使用forEach代替for循环，避免linter错误
+			// use forEach instead of for loop to avoid linter errors
 			lines.forEach((line) => {
-				// 确保是data:开头
-				if (!line.startsWith("data:")) return // 使用return代替continue
+				// ensure it starts with data:
+				if (!line.startsWith("data:")) return // use return instead of continue
 
 				try {
-					// 提取data:后的JSON string
+					// extract JSON string after data:
 					const jsonStr = line.substring(5)
-					// 尝试解析JSON
+					// try parsing JSON
 					const data = JSON.parse(jsonStr)
 
-					// 尝试多种路径提取内容
+					// try multiple paths to extract content
 					if (data.message?.content !== undefined) {
-						// 常见结构：{"message":{"content":"某内容"}}
+						// common structure: {"message":{"content":"..."}}
 						contentFragments.push(data.message.content)
 					} else if (data.content !== undefined) {
-						// 简单结构：{"content":"某内容"}
+						// simple structure: {"content":"..."}
 						contentFragments.push(data.content)
 					} else if (typeof data === "string") {
-						// 纯字符串结构
+						// pure string structure
 						contentFragments.push(data)
 					}
 				} catch (e) {
-					// JSON解析失败，记录日志但继续Process其他行
-					console.warn(`无法解析SSE行JSON数据: ${line.substring(0, 50)}...`)
+					// JSON parsing failed; log and continue other lines
+					console.warn(`unable to parse SSE line JSON data: ${line.substring(0, 50)}...`)
 
-					// 尝试使用正则表达式直接提取content内容
+					// try using regex to extract content directly
 					const contentMatch = /"content":"([^"]*)"/g.exec(line)
 					if (contentMatch && contentMatch[1]) {
-						// 需要Process转义的双引号和其他特殊字符
+						// need to handle escaped quotes and special characters
 						try {
-							// 使用JSON.parse解码转义字符
+							// decode escaped characters using JSON.parse
 							const decodedContent = JSON.parse(`"${contentMatch[1]}"`)
 							contentFragments.push(decodedContent)
 						} catch (decodeError) {
-							// 解码失败，直接使用原始匹配内容
+							// decoding failed; use raw matched content
 							contentFragments.push(contentMatch[1])
 						}
 					}
 				}
 			})
 
-			// 如果提取到内容，拼接并返回
+			// if content extracted, join and return
 			if (contentFragments.length > 0) {
 				const result = contentFragments.join("")
-				// 检查特殊字符Whether存在
+				// check whether special characters exist
 				const hasSpecialChars = /[:"\\\n\r\t]/.test(result)
 				if (hasSpecialChars) {
-					console.log("提取内容Contains特殊字符，确保正确Process")
+					console.log("extracted content contains special characters; ensure correct handling")
 				}
 				return result
 			}
 
-			// 没有找到内容
+			// no content found
 			return null
 		} catch (e) {
-			console.error("从SSE提取内容失败:", e)
+			console.error("failed to extract content from SSE:", e)
 			return null
 		}
 	}
 
 	/**
-	 * 直接从原始SSE事件数组中提取纯文本内容，不使用JSON解析
-	 * 这个方法专门Process一个字符一个事件的极端情况
-	 * @param sseEvents SSE事件数组，每个事件格式为data:{"message":{"content":"字符"}}
-	 * @returns 提取的纯文本内容
+	 * extract plain text directly from raw SSE event array without JSON parsing
+	 * this method handles the extreme case of one character per event
+	 * @param sseEvents SSE event array; each event formatted as data:{"message":{"content":"char"}}
+	 * @returns extracted plain text content
 	 */
 	const extractTextFromSSEEvents = (sseEvents: string[]): string => {
 		const fragments: string[] = []
 
-		// 记录特殊字符匹配情况
+		// log special character matches
 		let specialCharCount = 0
 
-		// 使用forEach避免linter错误
+		// use forEach to avoid linter errors
 		sseEvents.forEach((event) => {
-			if (!event.startsWith("data:")) return // 使用return代替continue
+			if (!event.startsWith("data:")) return // use return instead of continue
 
-			// 使用直接字符串匹配，避免JSON解析错误
+			// use direct string matching to avoid JSON parse errors
 			const contentRegex = /"content":"((?:\\"|[^"])*)"/
 			const match = contentRegex.exec(event)
 
 			if (match && match[1] !== undefined) {
 				try {
-					// Get引号内的内容并Process转义
+					// get the content inside quotes and handle escapes
 					const rawContent = match[1]
-					// 使用JSON.parseProcess转义字符
+					// use JSON.parse to handle escaped characters
 					const content = JSON.parse(`"${rawContent}"`)
 
-					// 检查特殊字符
+					// check special characters
 					if (/[:"\\\n\r\t]/.test(content)) {
-						specialCharCount += 1 // 避免使用++
+						specialCharCount += 1 // avoid using ++
 					}
 
 					fragments.push(content)
 				} catch (e) {
-					// 解析失败时，直接使用原始匹配内容
+					// on parse failure, use raw matched content
 					fragments.push(match[1])
 				}
 			}
 		})
 
-		// 记录特殊字符情况
+		// log special character situation
 		if (specialCharCount > 0) {
 			console.log(`Extracted ${specialCharCount} fragments with special characters from SSE events`)
 		}
@@ -378,53 +380,53 @@ export default function useTestFunctions({
 	 */
 	const testWithRawContent = useMemoizedFn(
 		(fullContent: string, delayBetweenChunks: number = 200, chunkSize: number = 10) => {
-			// 检查参数合法性
+			// validate parameters
 			if (!fullContent) {
 				console.warn("Content is empty, cannot test")
 				return
 			}
 
-			// 如果已经有测试在进行中，先强制清理
+			// if a test is already running, force cleanup first
 			if (processingRef.current || currentTestSessionRef.current) {
-				console.warn("检测到有未完成的测试，先执行强制清理")
+				console.warn("detected unfinished test, performing force cleanup")
 				forceCleanupState()
 			}
 
-			// 生成新的测试会话ID
+			// generate a new test session ID
 			const testSessionId = `test-${Date.now()}`
 			currentTestSessionRef.current = testSessionId
 			processingRef.current = true
 
-			// 创建一个新的AI消息ID
+			// create a new AI message ID
 			const assistantMessageId = `msg-${Date.now()}`
 
-			// 添加一个空的AI消息，注意状态设为loading
+			// add an empty AI message with status set to loading
 			const newAssistantMessage: Message = {
 				id: assistantMessageId,
 				role: "assistant",
 				content: "",
-				status: "loading", // 初始状态为loading
+				status: "loading", // initial status is loading
 			}
 
-			console.log(`开始新的原始内容测试会话: ${testSessionId}, 消息ID: ${assistantMessageId}`)
-			console.log(`原始内容长度: ${fullContent.length}字符`)
+			console.log(`start new raw content test session: ${testSessionId}, message ID: ${assistantMessageId}`)
+			console.log(`raw content length: ${fullContent.length} characters`)
 
-			// 重置状态并添加消息
-			setCommandQueue([]) // 清空命令队列
+			// reset state and add message
+			setCommandQueue([]) // clear the command queue
 			setProcessingMessageId(assistantMessageId)
 			setMessages((prev) => [...prev, newAssistantMessage])
 			setIsProcessing(true)
 
-			// 检查内容WhetherContains特殊字符
+			// check whether content contains special characters
 			const hasSpecialChars = /[\r\n\t":{}[\]\\]/.test(fullContent)
 
-			// 记录特殊字符
+			// log special characters
 			if (hasSpecialChars) {
-				console.log("检测到内容Contains特殊字符，使用更小的块大小和精确编码")
-				// 简单记录特殊字符存在
-				console.log("发现特殊字符，将使用更严格的Process方式")
+				console.log("detected special characters; use smaller chunk size with precise encoding")
+				// simple log that special characters exist
+				console.log("found special characters; using stricter processing")
 
-				// 打印含有特殊字符的一小段样本
+				// print a short sample containing special characters
 				let sampleWithSpecialChars = ""
 				for (
 					let i = 0;
@@ -436,7 +438,7 @@ export default function useTestFunctions({
 						const end = Math.min(fullContent.length, i + 10)
 						sampleWithSpecialChars = fullContent.substring(start, end)
 						console.log(
-							`特殊字符样本位置: ${i}, 上下文: "${sampleWithSpecialChars.replace(
+							`special character sample at position ${i}, context: "${sampleWithSpecialChars.replace(
 								/\n/g,
 								"\\n",
 							)}"`,
@@ -446,63 +448,65 @@ export default function useTestFunctions({
 				}
 			}
 
-			// 将完整内容分割成小块，每个块都成为一个SSE事件
+			// split the full content into chunks; each chunk becomes an SSE event
 			const chunks: string[] = []
 
-			// 使用更小的块大小Process特殊字符，确保编码正确
+			// use smaller chunk size for special characters to ensure correct encoding
 			const safeChunkSize = hasSpecialChars ? Math.min(chunkSize, 3) : chunkSize
 			console.log(
-				`使用块大小: ${safeChunkSize} (${
-					hasSpecialChars ? "检测到特殊字符" : "无特殊字符"
+				`using chunk size: ${safeChunkSize} (${
+					hasSpecialChars ? "special characters detected" : "no special characters"
 				})`,
 			)
 
-			// 记录原始内容和JSON编码后的内容，帮助调试
+			// log raw content and JSON-encoded content for debugging
 			console.log(
-				`原始内容样例: "${fullContent.substring(0, 50)}${
+				`raw content sample: "${fullContent.substring(0, 50)}${
 					fullContent.length > 50 ? "..." : ""
 				}"`,
 			)
 			const jsonEncoded = JSON.stringify(fullContent.substring(0, 50))
-			console.log(`JSON编码后: ${jsonEncoded}`)
+			console.log(`after JSON encoding: ${jsonEncoded}`)
 
-			// 测试解码Whether正确
+			// verify JSON decode is correct
 			const testDecoded = JSON.parse(jsonEncoded)
-			console.log(`解码测试: "${testDecoded}"`)
+			console.log(`decode test: "${testDecoded}"`)
 			if (testDecoded !== fullContent.substring(0, 50)) {
-				console.warn("警告: JSON编码/解码测试不匹配!")
+				console.warn("warning: JSON encode/decode test mismatch!")
 			}
 
-			// 分块Process内容
+			// chunk content for processing
 			for (let i = 0; i < fullContent.length; i += safeChunkSize) {
 				const chunk = fullContent.substring(
 					i,
 					Math.min(i + safeChunkSize, fullContent.length),
 				)
 
-				// 记录特殊字符
+				// log special characters
 				const hasSpecialInChunk = /[\r\n\t":{}[\]\\]/.test(chunk)
 				if (hasSpecialInChunk) {
-					// 转换为字符编码，便于调试
+					// convert to char codes for debugging
 					const charCodes = Array.from(chunk)
 						.map((c) => `${c}(${c.charCodeAt(0)})`)
 						.join(" ")
-					console.log(`块 ${Math.floor(i / safeChunkSize)} Contains特殊字符: ${charCodes}`)
+					console.log(
+						`chunk ${Math.floor(i / safeChunkSize)} contains special characters: ${charCodes}`,
+					)
 				}
 
-				// 使用最严格的JSON string编码
+				// use strict JSON string encoding
 				const escapedContent = JSON.stringify(chunk)
 
-				// 确保JSON格式完全正确
+				// ensure JSON format is correct
 				try {
-					// 验证转义后的内容Whether可以被解析回来
+					// verify escaped content can be parsed back
 					const testParse = JSON.parse(escapedContent)
 					if (testParse !== chunk) {
-						console.warn(`警告: JSON编码/解码不匹配!`)
-						console.log(`期望: "${chunk}"`)
-						console.log(`实际: "${testParse}"`)
+						console.warn(`warning: JSON encode/decode mismatch!`)
+						console.log(`expected: "${chunk}"`)
+						console.log(`actual: "${testParse}"`)
 
-						// 记录详细的字符编码，帮助诊断问题
+						// log detailed character codes for diagnosis
 						const originalChars = Array.from(chunk).map(
 							(c) => `${c}(${c.charCodeAt(0)})`,
 						)
@@ -510,76 +514,78 @@ export default function useTestFunctions({
 							// @ts-ignore
 							(c) => `${c}(${c.charCodeAt(0)})`,
 						)
-						console.log(`原始字符编码: ${originalChars.join(" ")}`)
-						console.log(`解析后字符编码: ${parsedChars.join(" ")}`)
+						console.log(`original char codes: ${originalChars.join(" ")}`)
+						console.log(`parsed char codes: ${parsedChars.join(" ")}`)
 					}
 				} catch (e) {
-					console.error(`JSON验证失败: ${e}`)
+					console.error(`JSON validation failed: ${e}`)
 				}
 
-				// 直接从转义后的内容构建SSE事件，确保完全保留原始内容
+				// build SSE events directly from escaped content to preserve original text
 				const sseEvent = `data:{"id":"${testSessionId}","event":"message","conversation_id":"test","message":{"role":"assistant","content":${escapedContent}}}`
 				chunks.push(sseEvent)
 
-				// 记录SSE事件样例
+				// log SSE event sample
 				if (i === 0) {
-					console.log(`SSE事件样例: ${sseEvent}`)
+					console.log(`SSE event sample: ${sseEvent}`)
 				}
 			}
 
-			console.log(`将${fullContent.length}字符的内容分割成${chunks.length}个事件块`)
+			console.log(
+				`split content of ${fullContent.length} characters into ${chunks.length} event chunks`,
+			)
 
-			// 使用SSE流测试方法Process这些事件
+			// use SSE stream testing to process these events
 			testWithStreamEvents(chunks, delayBetweenChunks)
 		},
 	)
 
 	/**
-	 * 使用完整响应文本测试StreamProcessor组件功能
-	 * @param completeResponse 完整的响应文本
+	 * test StreamProcessor with complete response text
+	 * @param completeResponse complete response text
 	 */
 	const testWithCompleteResponse = useMemoizedFn((completeResponse: string) => {
-		// 如果已经有测试在进行中，先强制清理
+		// if a test is already running, force cleanup first
 		if (processingRef.current || currentTestSessionRef.current) {
-			console.warn("检测到有未完成的测试，先执行强制清理")
+			console.warn("detected unfinished test, performing force cleanup")
 			forceCleanupState()
 		}
 
-		// 生成新的测试会话ID
+		// generate a new test session ID
 		const testSessionId = `test-${Date.now()}`
 		currentTestSessionRef.current = testSessionId
 		processingRef.current = true
 
-		// 创建一个新的AI消息ID
+		// create a new AI message ID
 		const assistantMessageId = `msg-${Date.now()}`
 
-		// 添加一个空的AI消息，注意状态设为loading
+		// add an empty AI message with status set to loading
 		const newAssistantMessage: Message = {
 			id: assistantMessageId,
 			role: "assistant",
 			content: "",
-			status: "loading", // 初始状态为loading
+			status: "loading", // initial status is loading
 		}
 
-		console.log(`开始新测试会话: ${testSessionId}, 消息ID: ${assistantMessageId}`)
+		console.log(`start new test session: ${testSessionId}, message ID: ${assistantMessageId}`)
 
-		// 重置状态并添加消息
-		setCommandQueue([]) // 清空命令队列
+		// reset state and add message
+		setCommandQueue([]) // clear the command queue
 		setProcessingMessageId(assistantMessageId)
 		setMessages((prev) => [...prev, newAssistantMessage])
 
-		// 使用StreamProcessor的静态方法Process完整响应
+		// use StreamProcessor static method to process full response
 		StreamProcessor.testWithCompleteResponse(
 			completeResponse,
-			// 文本更新回调
+			// text update callback
 			(text) => {
-				// 检查Whether是当前测试会话
+				// check whether it is the current test session
 				if (currentTestSessionRef.current !== testSessionId) {
-					console.warn("忽略过时的测试会话回调")
+					console.warn("ignore outdated test session callback")
 					return
 				}
 
-				// 更新消息内容并将状态改为done
+				// update message content and set status to done
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === assistantMessageId
@@ -588,99 +594,99 @@ export default function useTestFunctions({
 					),
 				)
 			},
-			// 命令接收回调
+			// command receive callback
 			(commands) => {
-				// 检查Whether是当前测试会话
+				// check whether it is the current test session
 				if (currentTestSessionRef.current !== testSessionId) {
-					console.warn("忽略过时的测试会话命令")
+					console.warn("ignore outdated test session command")
 					return
 				}
 
 				if (commands.length > 0) {
-					console.log(`收到命令: ${commands.length}个, 会话: ${testSessionId}`)
+					console.log(`commands received: ${commands.length}, session: ${testSessionId}`)
 
-					// Set命令队列，使用函数式更新避免闭包陷阱
+					// set command queue with functional update to avoid stale closures
 					setCommandQueue(commands)
 
-					// 标记命令Process开始
+					// mark command processing start
 					setIsCommandProcessing(true)
 
-					// 如果有命令，更新消息内容指示正在Process命令
+					// if commands exist, update message content indicating processing commands
 					setMessages((prev) =>
 						prev.map((msg) =>
 							msg.id === assistantMessageId
 								? {
 										...msg,
-										content: msg.content || "我正在Process命令...",
+										content: msg.content || "Processing commands...",
 										status: "done",
 								  }
 								: msg,
 						),
 					)
 				} else {
-					console.log(`没有命令需要Process, 会话: ${testSessionId}`)
+					console.log(`no commands need processing, session: ${testSessionId}`)
 
-					// 没有命令，确保消息状态为done
+					// no commands; ensure message status is done
 					setMessages((prev) =>
 						prev.map((msg) =>
 							msg.id === assistantMessageId ? { ...msg, status: "done" } : msg,
 						),
 					)
 
-					// 完成Process
+					// complete processing
 					setProcessingMessageId(null)
 					processingRef.current = false
 					currentTestSessionRef.current = null
 				}
 			},
-			// 完成回调
+			// completion callback
 			() => {
-				console.log(`测试会话内容Process完成: ${testSessionId}`)
+				console.log(`test session content processing complete: ${testSessionId}`)
 
-				// Get最新的命令队列状态进行检查
+				// get latest command queue state for verification
 				const currentCommands = commandQueue
 				const hasCommands = currentCommands && currentCommands.length > 0
 
-				// 如果没有命令，清理Process状态
+				// if no commands, clean processing state
 				if (!hasCommands) {
 					setProcessingMessageId(null)
 					setIsCommandProcessing(false)
 					processingRef.current = false
 					currentTestSessionRef.current = null
-					console.log(`测试会话已完成: ${testSessionId}`)
+					console.log(`test session completed: ${testSessionId}`)
 				}
-				// 注意：如果有命令，不要在这里清除processingMessageId
-				// 让CommandProcessor完成后再清除
+				// note: if commands exist, do not clear processingMessageId here
+				// clear after CommandProcessor completes
 			},
 		)
 	})
 
 	/**
-	 * 创建模拟SSE流
-	 * @param content 完整的响应文本
-	 * @returns 模拟的ReadableStream
+	 * create a mock SSE stream
+	 * @param content complete response text
+	 * @returns mock ReadableStream
 	 */
 	const createMockStream = useMemoizedFn((content: string): ReadableStream<Uint8Array> => {
 		return StreamProcessor.createMockStream(content)
 	})
 
 	/**
-	 * 测试使用完整的SSE事件字符串
-	 * 接收单个Contains多行SSE数据的字符串，自动分割Process
-	 * @param sseContent 完整的SSE事件字符串，Contains多行data:格式数据
-	 * @param delayBetweenLines 行之间的延迟时间(毫秒)
+	 * test using full SSE event string
+	 * accept a single string containing multiple lines of SSE data; automatically split and process
+	 * @param sseContent complete SSE event string containing multiple data: lines
+	 * @param delayBetweenLines delay between lines (ms)
 	 */
 	const testWithFullSSEContent = useMemoizedFn(
 		(sseContent: string, delayBetweenLines: number = 200) => {
-			// 如果内容为空，直接返回
+			// if content is empty, return directly
 			if (!sseContent) {
-				console.warn("SSE内容为空，无法测试")
+				console.warn("SSE content is empty; cannot test")
 				return
 			}
 
 			console.log("Start processing SSE content, length:", sseContent.length)
 
-			// 检查Whether是SSE格式
+			// check whether it is SSE format
 			const isSSEFormat = sseContent.trim().startsWith("data:")
 
 			if (isSSEFormat) {
@@ -694,11 +700,11 @@ export default function useTestFunctions({
 				const events = sseContent.split("\n").filter((line) => line.trim().length > 0)
 				const contentFromEvents = extractTextFromSSEEvents(events)
 
-				// 比较两种方法的结果，选择Contains特殊字符更多的那个
+				// compare both methods and choose the one preserving more special characters
 				let finalContent: string
 
 				if (contentFromText && contentFromEvents) {
-					// 检查哪个Contains更多的特殊字符
+					// check which result preserves more special characters
 					const specialCharsInText = (contentFromText.match(/[:"\\\n\r\t]/g) || []).length
 					const specialCharsInEvents = (contentFromEvents.match(/[:"\\\n\r\t]/g) || [])
 						.length
@@ -711,51 +717,51 @@ export default function useTestFunctions({
 						finalContent = contentFromText
 					}
 				} else {
-					// 使用非空的那个结果
+					// use whichever result is non-empty
 					finalContent = contentFromText || contentFromEvents || sseContent
 				}
 
-				console.log(`提取到原始内容，长度: ${finalContent.length}字符`)
+				console.log(`extracted raw content, length: ${finalContent.length} characters`)
 
-				// 直接使用testWithRawContentProcess提取出的内容，确保特殊字符被正确保留
-				testWithRawContent(finalContent, delayBetweenLines, 3) // 使用小块大小确保特殊字符Process正确
+				// use content extracted by testWithRawContentProcess to preserve special characters
+				testWithRawContent(finalContent, delayBetweenLines, 3) // use small chunk size to ensure special characters handled correctly
 			} else {
-				// 不是SSE格式，作为原始内容Process
-				console.log("内容不是SSE格式，作为原始内容Process")
+				// not SSE format; process as raw content
+				console.log("content is not SSE format; process as raw content")
 				testWithRawContent(sseContent, delayBetweenLines)
 			}
 		},
 	)
 
 	/**
-	 * 将测试方法暴露到window对象，方便控制台调用
+	 * expose test methods on window for console usage
 	 */
 	const exposeTestFunctions = useMemoizedFn(() => {
 		// @ts-ignore
 		window.testFlowAssistant = {
 			testWithCompleteResponse,
 			createMockStream,
-			forceCleanupState, // 暴露强制清理方法，方便手动重置
-			testWithStreamEvents, // 暴露SSE流测试方法(数组版本)
-			testWithFullSSEContent, // 暴露SSE流测试方法(字符串版本)
-			testWithRawContent, // 添加：测试纯文本内容，保留所有特殊字符
+			forceCleanupState, // expose force cleanup for manual reset
+			testWithStreamEvents, // expose SSE stream test (array version)
+			testWithFullSSEContent, // expose SSE stream test (string version)
+			testWithRawContent, // test raw text content while preserving special characters
 		}
 	})
 
 	/**
-	 * 清理暴露的测试方法
+	 * clean up exposed test methods
 	 */
 	const cleanupTestFunctions = useMemoizedFn(() => {
 		// @ts-ignore
 		delete window.testFlowAssistant
 	})
 
-	// 组件挂载时暴露测试方法，卸载时清理
+	// expose test methods on mount; clean up on unmount
 	useEffect(() => {
 		exposeTestFunctions()
 		return () => {
 			cleanupTestFunctions()
-			forceCleanupState() // 组件卸载时确保清理
+			forceCleanupState() // ensure cleanup when component unmounts
 		}
 	}, [exposeTestFunctions, cleanupTestFunctions, forceCleanupState])
 

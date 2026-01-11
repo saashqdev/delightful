@@ -22,9 +22,7 @@ import { useSendAgentMessage } from "./hooks/useSendAgentMessage"
 import { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { FlowApi } from "@/apis"
 
-// MD5生成函数
 function generateMD5(input: string): string {
-	// 简化版的MD5实现，实际项目中应使用crypto库或md5库
 	let hash = 0
 	for (let i = 0; i < input.length; i += 1) {
 		// eslint-disable-next-line no-bitwise
@@ -33,12 +31,10 @@ function generateMD5(input: string): string {
 		hash |= 0
 	}
 
-	// 转为16进制字符串并截取12位
 	const hashHex = Math.abs(hash).toString(16).padStart(12, "0")
 	return hashHex.substring(0, 12)
 }
 
-// 生成会话ID
 function generateConversationId(flowId: string): string {
 	const randomStr = Math.random().toString(36).substring(2, 10)
 	const baseString = `${flowId || "temp-flow"}-${randomStr}`
@@ -47,7 +43,6 @@ function generateConversationId(flowId: string): string {
 
 const { TextArea } = Input
 
-// 修改消息接口定义，重用MessageProps
 export interface Message extends MessageProps {}
 
 interface FlowAssistantProps {
@@ -65,24 +60,18 @@ interface AgentCallParams {
 	stream?: boolean
 }
 
-// 流Process中的纯解析函数
 const parseSSELine = (line: string): { text: string; commands: any[] } => {
-	// 跳过结束标记
 	if (line === "data:[DONE]") {
 		return { text: "", commands: [] }
 	}
 
-	// 检查Whether是SSE格式数据行
 	if (line.startsWith("data:") && line.length > 5) {
 		try {
-			// 提取JSON string
 			const jsonStr = line.substring(5).trim()
 			const data = JSON.parse(jsonStr)
 
-			// 提取可能的文本内容
 			let extractedText = ""
 
-			// 从各种位置尝试提取内容
 			if (data.message && typeof data.message.content === "string") {
 				extractedText = data.message.content
 			} else if (data.type === "message" && typeof data.content === "string") {
@@ -91,7 +80,6 @@ const parseSSELine = (line: string): { text: string; commands: any[] } => {
 				extractedText = data.content
 			}
 
-			// 检查json中WhetherContains命令
 			const commands = []
 			if (data.type === "flow_commands" && Array.isArray(data.commands)) {
 				commands.push(...data.commands)
@@ -99,15 +87,13 @@ const parseSSELine = (line: string): { text: string; commands: any[] } => {
 
 			return { text: extractedText, commands }
 		} catch (error) {
-			console.error("解析SSE行失败:", error)
+			console.error("Failed to parse SSE line:", error)
 		}
 	}
 
-	// 默认返回空结果
 	return { text: "", commands: [] }
 }
 
-// 默认尺寸常量
 const DEFAULT_WIDTH = 420
 const DEFAULT_HEIGHT = 600
 const MIN_WIDTH = 420
@@ -115,16 +101,13 @@ const MIN_HEIGHT = 350
 const MAX_WIDTH = 800
 const MAX_HEIGHT = 900
 
-// 添加: 默认位置常量
 const DEFAULT_POSITION = { x: undefined as number | undefined, y: "20%" as string | number }
 
-// 添加: localStorage存储键名
 const STORAGE_KEY = {
 	POSITION: "flow_assistant_position",
 	SIZE: "flow_assistant_size",
 }
 
-// 添加: 从localStorage读取位置信息
 const getSavedPosition = (): typeof DEFAULT_POSITION => {
 	try {
 		const saved = localStorage.getItem(STORAGE_KEY.POSITION)
@@ -132,12 +115,11 @@ const getSavedPosition = (): typeof DEFAULT_POSITION => {
 			return JSON.parse(saved)
 		}
 	} catch (e) {
-		console.error("读取保存的位置信息失败:", e)
+		console.error("Error:", e)
 	}
 	return DEFAULT_POSITION
 }
 
-// 添加: 从localStorage读取尺寸信息
 const getSavedSize = (): { width: number; height: number } => {
 	try {
 		const saved = localStorage.getItem(STORAGE_KEY.SIZE)
@@ -145,7 +127,7 @@ const getSavedSize = (): { width: number; height: number } => {
 			return JSON.parse(saved)
 		}
 	} catch (e) {
-		console.error("读取保存的尺寸信息失败:", e)
+		console.error("Error:", e)
 	}
 	return { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT }
 }
@@ -174,45 +156,30 @@ export default function FlowAssistant({
 	const [processingMessageId, setProcessingMessageId] = useState<string | null>(null)
 	const [commandQueue, setCommandQueue] = useState<any[]>([])
 	const [isCommandProcessing, setIsCommandProcessing] = useState(false)
-	// 添加用户滚动交互状态
 	const [userScrolling, setUserScrolling] = useState(false)
 	const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-	// 新增：强制滚动标记
 	const [forceScroll, setForceScroll] = useState(false)
-	// 新增：最后一次检测到的消息数量
-	const lastMessageCountRef = useRef(1) // 初始有一条欢迎消息
-	// 修改：读取保存的尺寸信息
+	const lastMessageCountRef = useRef(1)
 	const [size, setSize] = useState(getSavedSize())
-	// 修改：读取保存的位置信息
 	const [position, setPosition] = useState(getSavedPosition())
-	// 新增：拖拽状态
 	const [isDragging, setIsDragging] = useState(false)
-	// 新增：拖拽起始位置
 	const dragStartRef = useRef({ x: 0, y: 0 })
-	// 修改：位置引用也使用保存的位置
 	const positionRef = useRef(getSavedPosition())
-	// 新增：命令收集状态
 	const [isCollectingCommand, setIsCollectingCommand] = useState(false)
 
-	// 使用新的消息发送钩子
 	const { sendAgentMessage } = useSendAgentMessage()
 
-	// 使用流程Operation钩子
 	const flowOperations = useFlowOperations({
 		flowInteractionRef,
 		saveDraft,
 		flowService: FlowApi,
 	})
 
-	// 创建Get流程数据的函数
 	const getFlowData = useMemoizedFn(() => {
-		// Get当前流程数据
 		const currentFlow = flowInteractionRef?.current?.getFlow()
-		// 将流程数据转换为YAML格式
 		return currentFlow ? FlowConverter.jsonToYamlString(currentFlow) : ""
 	})
 
-	// 使用确认Operation钩子，传入新的内部发送消息实现
 	const { handleConfirmOperationCommand, handleConfirmOperation, handleCancelOperation } =
 		useConfirmOperations({
 			flowId: flow?.id || "",
@@ -220,14 +187,11 @@ export default function FlowAssistant({
 			setMessages,
 			setForceScroll,
 			sendMessage: async (content: string) => {
-				if (isProcessing) return // 如果正在Process其他消息，不发送
+				if (isProcessing) return
 
-				// 添加用户消息和助手消息，这部分由useConfirmOperations管理
-				// SetProcess状态
 				setIsProcessing(true)
 
 				try {
-					// 初始化一个空内容消息，用于显示Assistant的回复
 					const assistantMessageId = Date.now().toString()
 					const loadingAssistantMessage: Message = {
 						id: assistantMessageId,
@@ -236,24 +200,21 @@ export default function FlowAssistant({
 						status: "loading",
 					}
 
-					// 添加助手消息
 					setMessages((prev) => [...prev, loadingAssistantMessage])
 					setProcessingMessageId(assistantMessageId)
 
-					// 使用封装的发送消息函数
 					const result = await sendAgentMessage(content, {
 						conversationId: conversationId || "temp-conversation",
-						includeFlowData: false, // 确认Operation不需要流程数据
+						includeFlowData: false,
 					})
 
 					if (result.isError) {
-						// 更新助手消息显示错误
 						setMessages((prev) =>
 							prev.map((msg) =>
 								msg.id === assistantMessageId
 									? {
 											...msg,
-											content: result.errorMessage || "未知错误",
+											content: result.errorMessage || "Unknown error",
 											status: "error",
 									  }
 									: msg,
@@ -263,17 +224,15 @@ export default function FlowAssistant({
 						return
 					}
 
-					// Set流Process响应
 					if (result.stream) {
 						setStreamResponse(result.stream)
 					} else {
-						// 非流式响应Process
 						setMessages((prev) =>
 							prev.map((msg) =>
 								msg.id === assistantMessageId
 									? {
 											...msg,
-											content: result.contentStr || "服务器未返回内容",
+											content: result.contentStr || "No content",
 											status: "done",
 									  }
 									: msg,
@@ -285,7 +244,6 @@ export default function FlowAssistant({
 					console.error("Error processing instruction:", error)
 					const errorMessage = error instanceof Error ? error.message : String(error)
 
-					// 更新助手消息为错误状态
 					setMessages((prev) =>
 						prev.map((msg) =>
 							msg.id === processingMessageId
@@ -306,7 +264,6 @@ export default function FlowAssistant({
 			},
 		})
 
-	// 使用测试功能钩子
 	useTestFunctions({
 		setMessages,
 		setProcessingMessageId,
@@ -317,19 +274,15 @@ export default function FlowAssistant({
 		setIsProcessing,
 	})
 
-	// 初始化会话ID，仅在组件首次挂载时生成
 	useEffect(() => {
 		if (!conversationId) {
 			setConversationId(generateConversationId(flow?.id || ""))
 		}
 	}, [flow?.id, conversationId])
 
-	// 滚动到最新消息
 	const scrollToBottom = useMemoizedFn(() => {
-		// 当强制滚动或用户没有手动滚动时自动滚动
 		if (forceScroll || !userScrolling) {
 			messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-			// 重置强制滚动标记
 			if (forceScroll) {
 				setForceScroll(false)
 			}
@@ -337,54 +290,42 @@ export default function FlowAssistant({
 	})
 
 	useEffect(() => {
-		// 检测Whether有新消息添加
 		if (messages.length > lastMessageCountRef.current) {
-			// 新消息添加时，Set强制滚动标记
 			setForceScroll(true)
 			lastMessageCountRef.current = messages.length
 		}
 		scrollToBottom()
 	}, [messages, scrollToBottom])
 
-	// Process消息列表滚动事件
 	const handleMessagesScroll = useMemoizedFn((e: React.UIEvent<HTMLDivElement>) => {
 		const element = e.currentTarget
 
-		// 清除之前的定时器
 		if (scrollTimeoutRef.current) {
 			clearTimeout(scrollTimeoutRef.current)
 		}
 
-		// 检测用户滚动
-		// 如果滚动位置不在底部，标记为用户正在滚动
-		const isAtBottom = element.scrollHeight - element.scrollTop <= element.clientHeight + 100 // 增加容差值
+		const isAtBottom = element.scrollHeight - element.scrollTop <= element.clientHeight + 100
 
-		// 只有当不在底部时才Set用户滚动状态
 		if (!isAtBottom) {
 			setUserScrolling(true)
 
-			// Set定时器，5秒后检查Whether应该重置滚动状态
 			scrollTimeoutRef.current = setTimeout(() => {
-				// 重新检查当前Whether在底部附近
 				const currentElement = messagesEndRef.current?.parentElement
 				if (currentElement) {
 					const currentIsAtBottom =
 						currentElement.scrollHeight - currentElement.scrollTop <=
 						currentElement.clientHeight + 100
 
-					// 只有当滚动位置接近底部时才重置状态
 					if (currentIsAtBottom) {
 						setUserScrolling(false)
 					}
 				}
-			}, 5000) // 延长至5秒
+			}, 5000)
 		} else if (userScrolling && isAtBottom) {
-			// 如果用户主动滚动到底部，立即重置滚动状态
 			setUserScrolling(false)
 		}
 	})
 
-	// 清理滚动定时器
 	useEffect(() => {
 		return () => {
 			if (scrollTimeoutRef.current) {
@@ -393,25 +334,22 @@ export default function FlowAssistant({
 		}
 	}, [])
 
-	// 添加: 保存位置信息到localStorage
 	const savePosition = useMemoizedFn((pos: typeof position) => {
 		try {
 			localStorage.setItem(STORAGE_KEY.POSITION, JSON.stringify(pos))
 		} catch (e) {
-			console.error("保存位置信息失败:", e)
+			console.error("Error:", e)
 		}
 	})
 
-	// 添加: 保存尺寸信息到localStorage
 	const saveSize = useMemoizedFn((newSize: typeof size) => {
 		try {
 			localStorage.setItem(STORAGE_KEY.SIZE, JSON.stringify(newSize))
 		} catch (e) {
-			console.error("保存尺寸信息失败:", e)
+			console.error("Error:", e)
 		}
 	})
 
-	// Process命令状态更新
 	const handleCommandUpdate = useMemoizedFn((messageId: string, commandStatus: any[]) => {
 		setMessages((prev) =>
 			prev.map((msg) =>
@@ -431,17 +369,14 @@ export default function FlowAssistant({
 		)
 	})
 
-	// Process命令执行完成
 	const handleCommandComplete = useMemoizedFn(() => {
 		setIsCommandProcessing(false)
 		setCommandQueue([])
 	})
 
-	// Process文本更新回调 - 不触发强制滚动
 	const handleTextUpdate = useMemoizedFn((text: string) => {
 		if (!processingMessageId) return
 
-		// 添加调试日志
 		console.log(
 			`handleTextUpdate: processingMessageId=${processingMessageId}, text length=${text.length}`,
 		)
@@ -451,35 +386,29 @@ export default function FlowAssistant({
 				msg.id === processingMessageId ? { ...msg, content: text, status: "loading" } : msg,
 			),
 		)
-		// 不SetforceScroll，避免内容更新时强制滚动
 	})
 
-	// 修改: Process尺寸变化 - 添加保存尺寸功能
 	const handleResizeStop = useMemoizedFn((e, direction, ref, d) => {
 		const newSize = {
 			width: size.width + d.width,
 			height: size.height + d.height,
 		}
 		setSize(newSize)
-		// 保存新尺寸
 		saveSize(newSize)
 	})
 
-	// 新增：Process拖拽开始
 	const handleDragStart = useMemoizedFn((e: React.MouseEvent) => {
 		e.preventDefault()
 		setIsDragging(true)
 		dragStartRef.current = { x: e.clientX, y: e.clientY }
 	})
 
-	// 修改：Process拖拽移动 - 添加保存位置功能
 	const handleDragMove = useMemoizedFn((e: MouseEvent) => {
 		if (!isDragging) return
 
 		const deltaX = e.clientX - dragStartRef.current.x
 		const deltaY = e.clientY - dragStartRef.current.y
 
-		// Get当前位置
 		const currentX =
 			typeof positionRef.current.x === "number"
 				? positionRef.current.x
@@ -489,32 +418,25 @@ export default function FlowAssistant({
 				? positionRef.current.y
 				: window.innerHeight * 0.2
 
-		// 计算新位置
 		const newX = currentX + deltaX
 		const newY = currentY + deltaY
 
-		// 确保不超出视口边界
 		const boundedX = Math.max(0, Math.min(window.innerWidth - size.width, newX))
 		const boundedY = Math.max(0, Math.min(window.innerHeight - 100, newY))
 
-		// 更新位置
 		const newPosition = { x: boundedX, y: boundedY }
 		positionRef.current = newPosition
 		setPosition(newPosition)
 
-		// 保存新位置
 		savePosition(newPosition)
 
-		// 更新拖拽起始位置
 		dragStartRef.current = { x: e.clientX, y: e.clientY }
 	})
 
-	// 新增：Process拖拽结束
 	const handleDragEnd = useMemoizedFn(() => {
 		setIsDragging(false)
 	})
 
-	// 新增：注册全局鼠标事件监听
 	useEffect(() => {
 		if (isDragging) {
 			document.addEventListener("mousemove", handleDragMove)
@@ -527,11 +449,9 @@ export default function FlowAssistant({
 		}
 	}, [isDragging, handleDragMove, handleDragEnd])
 
-	// 新增：Process命令Process状态变化
 	const handleCommandProcessingStatusChange = useMemoizedFn((processStatus: boolean) => {
 		setIsCollectingCommand(processStatus)
 
-		// 如果有正在Process的消息，更新该消息的状态
 		if (processingMessageId) {
 			setMessages((prev) =>
 				prev.map((msg) =>
@@ -539,9 +459,8 @@ export default function FlowAssistant({
 						? {
 								...msg,
 								isCollectingCommand: processStatus,
-								// 如果开始收集命令，显示Loading状态提示
 								content: processStatus
-									? `${msg.content}\n\n正在收集指令数据...`
+								? `${msg.content}\n\n[processing commands...]`
 									: msg.content,
 						  }
 						: msg,
@@ -550,22 +469,19 @@ export default function FlowAssistant({
 		}
 	})
 
-	// Process命令接收回调
 	const handleCommandsReceived = useMemoizedFn((commands: any[]) => {
 		if (!processingMessageId || commands.length === 0) return
 
-		console.log("收到命令:", commands)
+		console.log("commands:", commands)
 
-		// 检查Whether有确认Operation命令
 		for (const command of commands) {
 			if (command.type === "confirmOperation") {
 				console.log("found confirmation operation command:", command)
 				handleConfirmOperationCommand(command, processingMessageId)
-				return // 如果找到确认Operation命令，不添加到普通命令队列
+				return
 			}
 		}
 
-		// 将命令添加到队列
 		setCommandQueue((prev) => {
 			// Filter out duplicate commands (based on type and other key properties)
 				(newCmd) =>
@@ -581,7 +497,6 @@ export default function FlowAssistant({
 		})
 	})
 
-	// Process流Process错误
 	const handleStreamError = useMemoizedFn((errorMessage: string) => {
 		if (!processingMessageId) return
 		setIsProcessing(false)
@@ -594,26 +509,21 @@ export default function FlowAssistant({
 		)
 	})
 
-	// Process流Process完成
 	const handleStreamComplete = useMemoizedFn(() => {
 		console.log(`handleStreamComplete called, processingMessageId=${processingMessageId}`)
 		setIsProcessing(false)
 		setStreamResponse(null)
 
-		// 确保当前Process的消息状态被正确更新为done
 		if (processingMessageId) {
 			setMessages((prev) =>
 				prev.map((msg) => {
-					// 检查Whether是当前正在Process的消息
 					if (msg.id === processingMessageId) {
 						console.log(
 							`Updating message ${msg.id} status to done, current status: ${msg.status}, content: ${msg.content}`,
 						)
-						// 保留确认Operation属性，只更新状态
 						return {
 							...msg,
 							status: "done",
-							// 如果消息中Contains确认Operation，确保它被保留
 							confirmOperation: msg.confirmOperation || undefined,
 						}
 					}
@@ -625,16 +535,13 @@ export default function FlowAssistant({
 		setProcessingMessageId(null)
 	})
 
-	// 添加：Process重试失败消息
 	const handleRetry = useMemoizedFn(async (messageId: string) => {
-		// 找到对应的错误消息
 		const errorMessage = messages.find(
 			(msg) => msg.id === messageId && msg.status === "error" && msg.role === "assistant",
 		)
 
 		if (!errorMessage) return
 
-		// 找到错误消息之前的最近用户消息
 		const errorIndex = messages.findIndex((msg) => msg.id === messageId)
 		if (errorIndex <= 0) return
 
@@ -650,16 +557,13 @@ export default function FlowAssistant({
 
 		const userMessage = messages[userMessageIndex]
 
-		// 如果当前正在Process其他消息，先不进行重试
 		if (isProcessing) {
 			antdMessage.info(t("flowAssistant.waitForProcessing", { ns: "flow" }))
 			return
 		}
 
-		// 移除错误消息
 		setMessages((prev) => prev.filter((msg) => msg.id !== messageId))
 
-		// 创建新的助手消息
 		const newAssistantMessageId = Date.now().toString()
 		const loadingAssistantMessage: Message = {
 			id: newAssistantMessageId,
@@ -668,27 +572,24 @@ export default function FlowAssistant({
 			status: "loading",
 		}
 
-		// 添加新的助手消息
 		setMessages((prev) => [...prev, loadingAssistantMessage])
 		setForceScroll(true)
 		setProcessingMessageId(newAssistantMessageId)
 		setIsProcessing(true)
 
 		try {
-			// 使用封装的发送消息函数，重新发送原始用户消息
 			const result = await sendAgentMessage(userMessage.content, {
 				conversationId: conversationId || "temp-conversation",
-				includeFlowData: false, // 重试时不需要再次发送流程数据
+				includeFlowData: false,
 			})
 
 			if (result.isError) {
-				// 更新助手消息显示错误
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === newAssistantMessageId
 							? {
 									...msg,
-									content: result.errorMessage || "未知错误",
+									content: result.errorMessage || "Unknown error",
 									status: "error",
 							  }
 							: msg,
@@ -698,17 +599,15 @@ export default function FlowAssistant({
 				return
 			}
 
-			// Set流Process响应
 			if (result.stream) {
 				setStreamResponse(result.stream)
 			} else {
-				// 非流式响应Process
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === newAssistantMessageId
 							? {
 									...msg,
-									content: result.contentStr || "服务器未返回内容",
+									content: result.contentStr || "No content",
 									status: "done",
 							  }
 							: msg,
@@ -720,7 +619,6 @@ export default function FlowAssistant({
 			console.error("Error retrying message:", error)
 			const errorMessage = error instanceof Error ? error.message : String(error)
 
-			// 更新助手消息为错误状态
 			setMessages((prev) =>
 				prev.map((msg) =>
 					msg.id === newAssistantMessageId
@@ -740,24 +638,20 @@ export default function FlowAssistant({
 		}
 	})
 
-	// 新增：Process中断流连接的方法
 	const handleAbortStream = useMemoizedFn(() => {
-		// 如果有正在Process的流，中断它
 		if (streamResponse) {
-			console.log("主动中断SSE流连接")
+			console.log("Abort SSE stream")
 
-			// 重置相关状态
 			setStreamResponse(null)
 			setIsProcessing(false)
 
-			// 如果有正在Process的消息，更新其状态为中断
 			if (processingMessageId) {
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === processingMessageId
 							? {
 									...msg,
-									content: msg.content + "\n\n[用户中断了响应]",
+									content: msg.content + "\n\n[stopped]",
 									status: "done",
 							  }
 							: msg,
@@ -766,29 +660,25 @@ export default function FlowAssistant({
 				setProcessingMessageId(null)
 			}
 
-			// 显示中断提示
 			antdMessage.info(
-				t("flowAssistant.messageStopped", { ns: "flow", defaultValue: "已停止响应" }),
+				t("flowAssistant.messageStopped", { ns: "flow", defaultValue: "Message stopped" }),
 			)
 		}
 	})
 
-	// 发送消息到AI助手 - 使用新的封装函数
 	const sendMessage = useMemoizedFn(async () => {
 		if (!inputValue.trim() || isProcessing) return
 
-		// 重置任何之前的状态
 		setCommandQueue([])
 
 		const userMessage = inputValue.trim()
 		setInputValue("")
 
-		// 添加用户消息和助手消息
 		const newUserMessage: Message = {
 			id: Date.now().toString(),
 			role: "user",
 			content: userMessage,
-			status: "done", // 明确Set用户消息状态
+			status: "done",
 		}
 
 		const assistantMessageId = (Date.now() + 1).toString()
@@ -796,33 +686,29 @@ export default function FlowAssistant({
 			id: assistantMessageId,
 			role: "assistant",
 			content: "",
-			status: "loading", // 确保助手消息初始状态为loading
+			status: "loading",
 		}
 
-		// 添加消息并Set强制滚动标记
 		setMessages((prev) => [...prev, newUserMessage, loadingAssistantMessage])
-		setForceScroll(true) // 显式Set强制滚动
-		lastMessageCountRef.current = messages.length + 2 // 更新消息计数
+		setForceScroll(true)
+		lastMessageCountRef.current = messages.length + 2
 
 		setIsProcessing(true)
 
 		try {
-			// 使用封装的发送消息函数
 			const result = await sendAgentMessage(userMessage, {
 				conversationId: conversationId || "temp-conversation",
-				includeFlowData: true, // 仅在第一次发送时Contains流程数据
+				includeFlowData: true,
 				getFetchFlowData: getFlowData,
 			})
 
-			// Process错误情况
 			if (result.isError) {
-				// 更新助手消息显示错误
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === assistantMessageId
 							? {
 									...msg,
-									content: result.errorMessage || "未知错误",
+									content: result.errorMessage || "Unknown error",
 									status: "error",
 							  }
 							: msg,
@@ -832,18 +718,16 @@ export default function FlowAssistant({
 				return
 			}
 
-			// Set流Process参数
 			if (result.stream) {
 				setStreamResponse(result.stream)
 				setProcessingMessageId(assistantMessageId)
 			} else if (result.contentStr) {
-				// 非流式响应的Process逻辑
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === assistantMessageId
 							? {
 									...msg,
-									content: result.contentStr || "服务器未返回内容",
+									content: result.contentStr || "No content",
 									status: "done",
 							  }
 							: msg,
@@ -855,7 +739,6 @@ export default function FlowAssistant({
 			console.error("Error processing instruction:", error)
 			const errorMessage = error instanceof Error ? error.message : String(error)
 
-			// 更新助手消息为错误状态
 			setMessages((prev) =>
 				prev.map((msg) =>
 					msg.id === assistantMessageId
@@ -875,7 +758,6 @@ export default function FlowAssistant({
 		}
 	})
 
-	// 渲染聊天UI部分
 	return (
 		<Resizable
 			className={styles.flowAssistant}
@@ -928,7 +810,7 @@ export default function FlowAssistant({
 				bottomLeft: styles.resizeCornerHandle,
 			}}
 		>
-			{/* StreamProcessor 组件放置在这里 */}
+			{/* StreamProcessor renders streaming responses */}
 
 			<StreamProcessor
 				responseBody={streamResponse}
@@ -941,7 +823,7 @@ export default function FlowAssistant({
 				onCommandProcessingStatusChange={handleCommandProcessingStatusChange}
 			/>
 
-			{/* CommandProcessor 组件放置在这里 */}
+			{/* CommandProcessor executes flow commands */}
 
 			<CommandProcessor
 				commands={commandQueue}

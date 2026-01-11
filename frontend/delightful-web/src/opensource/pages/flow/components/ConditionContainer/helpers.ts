@@ -70,7 +70,7 @@ export const filterSupportColumnType = (supportFieldTypes = []) => {
 	return supportFieldTypes.filter((fieldType) => !notSupportType.includes(fieldType))
 }
 
-// Get单向/双向关联的目标类型
+// Gettarget type of unidirectional/bidirectional association
 function getRelationTargetType({
 	sheetId,
 	columnId,
@@ -120,12 +120,12 @@ function getActualTypeByPresentType(columnType: Schema, presentType: Schema) {
 	return Schema.NUMBER
 }
 
-// Get列类型 包括公式、查找引用、单双向关联的目标类型
+// Getcolumn type including formula, lookup reference, unidirectional/bidirectional association target type
 export function getTargetType({
 	sheetId,
 	columnId,
 	dataTemplate,
-	path = [], // 加入路径，用于检测Whether产生循环引用
+	path = [], // add path to detect whether circular reference is created
 }: {
 	sheetId: string
 	columnId: string
@@ -160,7 +160,7 @@ export function getTargetType({
 				// 	columnId,
 				// 	dataTemplate
 				// }).type,
-				// TODO 计算公式实际类型
+				// TODO calculate formula actual type
 				type: Schema.TEXT,
 				column,
 				error: LOOKUP_ERROR.NONE,
@@ -191,7 +191,7 @@ export function getTargetType({
 			error: LOOKUP_ERROR.CIRCLE,
 		}
 	}
-	path.push(columnId) // 加入路径，用于检测Whether产生循环引用
+	path.push(columnId) // add path to detect whether circular reference is created
 
 	const result = getTargetType({
 		sheetId: targetSheetId,
@@ -293,8 +293,8 @@ export const getColumnTargetType = (
 ) => {
 	const columns = dataTemplate[sheetId]?.content?.columns || {}
 
-	// 这里如果是行ID的那个列，这一列不是真实存在的是定义了一个特殊的列ID
-	// 只要是这个列ID 直接就是行ID{i18n.t("TYPE")}
+	// if this is the row ID column, this column does not really exist but a special column ID is defined
+	// as long as it is this column ID, it is directly row ID{i18n.t("TYPE")}
 	if (columnId === ROW_ID_COLUMN_ID) return Schema.ROW_ID
 	let columnType = columns?.[columnId]?.columnType
 
@@ -310,7 +310,7 @@ export const getColumnTargetType = (
 
 /**
  *
- * @param {Object} dataTemplate 文件数据模板
+ * @param {Object} dataTemplate file data template
  * @param {String} sheetId 子表id
  * @param {Array} notSupportType 不支持的列类型
  * @returns {

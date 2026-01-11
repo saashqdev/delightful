@@ -1,5 +1,5 @@
 /**
- * 代码块相关的状态和方法
+ * Code Block related states and methods
  */
 
 import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"

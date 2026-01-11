@@ -43,7 +43,7 @@ export default function Code() {
 			...cloneTemplateParams,
 			...currentNodeParams,
 		}
-		// 回显给表单换成boolean
+		// Convert to boolean for form echo display
 		// @ts-ignore
 		mergeParams.mode = mergeParams.mode === CodeMode.Normal
 		return {
@@ -58,7 +58,7 @@ export default function Code() {
 		Object.entries(changeValues).forEach(([changeKey, changeValue]) => {
 			if (changeKey === "input" || changeKey === "output") {
 				set(currentNode, [changeKey, "form"], changeValue)
-				// 将boolean转化成实际值
+			// Convert boolean to actual value
 			} else if (changeKey === "mode") {
 				set(
 					currentNode,
@@ -97,7 +97,7 @@ export default function Code() {
 	const [isEditorFocused, setIsEditorFocused] = useState(false)
 	const editorRef = useRef()
 
-	// 编辑器挂载时设置焦点事件监听
+	// Set focus event listener when editor is mounted
 	const handleEditorMount = (editor: any) => {
 		editorRef.current = editor
 
@@ -105,7 +105,7 @@ export default function Code() {
 		editor.onDidBlurEditorWidget(() => setIsEditorFocused(false))
 	}
 
-	// 覆盖层点击时聚焦编辑器
+	// Focus editor when overlay is clicked
 	const handleOverlayClick = () => {
 		// @ts-ignore
 		editorRef.current?.focus?.()
@@ -139,7 +139,7 @@ export default function Code() {
 					{(!currentNode?.params?.mode ||
 						currentNode?.params?.mode === CodeMode.Normal) && (
 						<>
-							{/* 透明覆盖层，未聚焦时拦截事件 */}
+							{/* Transparent overlay layer that intercepts events when unfocused */}
 							{!isEditorFocused && (
 								<div
 									style={{
@@ -152,7 +152,7 @@ export default function Code() {
 										cursor: "grab",
 									}}
 									onClick={handleOverlayClick}
-									onMouseDown={(e) => e.stopPropagation()} // 防止节点拖动
+									onMouseDown={(e) => e.stopPropagation()} // Prevent node dragging
 								/>
 							)}
 							<Form.Item name="code">
@@ -165,7 +165,7 @@ export default function Code() {
 									className="nodrag"
 									onMount={handleEditorMount}
 									options={{
-										// 根据焦点状态调整编辑器交互
+										// Adjust editor interaction based on focus state
 										readOnly: !isEditorFocused,
 										contextmenu: isEditorFocused,
 									}}

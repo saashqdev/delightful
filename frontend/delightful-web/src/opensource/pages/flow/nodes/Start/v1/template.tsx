@@ -1,4 +1,4 @@
-export const v1Template = {
+﻿export const v1Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-677d3b00a34c56-01323640",
 	debug: false,
 	name: "Start",
@@ -517,7 +517,7 @@ export const v1Template = {
 												type: "object",
 												key: "departments",
 												sort: 0,
-												title: "部门",
+												title: "Department",
 												description: "desc",
 												required: ["id", "name", "path"],
 												value: null,
@@ -897,7 +897,7 @@ export const v1Template = {
 												type: "object",
 												key: "departments",
 												sort: 0,
-												title: "部门",
+												title: "Department",
 												description: "desc",
 												required: ["id", "name", "path"],
 												value: null,
@@ -1101,7 +1101,7 @@ export const v1Template = {
 												type: "object",
 												key: "departments",
 												sort: 0,
-												title: "部门",
+												title: "Department",
 												description: "desc",
 												required: ["id", "name", "path"],
 												value: null,

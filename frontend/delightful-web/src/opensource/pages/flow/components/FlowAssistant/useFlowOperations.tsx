@@ -23,7 +23,7 @@ export default function useFlowOperations({
 	// Used to store executed commandId
 	const executedCommandsRef = useRef<Set<string>>(new Set())
 
-	// 定位到节点
+	// Locate to node
 	const goToNode = useMemoizedFn((nodeId: string) => {
 		setTimeout(() => {
 			if (!flowInteractionRef.current) return
@@ -37,7 +37,7 @@ export default function useFlowOperations({
 		}, 200)
 	})
 
-	// 添加节点
+	// Add node
 	const addNode = useMemoizedFn(async (nodeType: string, nodeId: string, updateList: any[]) => {
 		if (!flowInteractionRef.current) return false
 		const nodeTemplate = await FlowApi.getNodeTemplate(nodeType)
@@ -54,24 +54,24 @@ export default function useFlowOperations({
 			flowInteractionRef.current.addNode(nodeTemplate)
 
 			setTimeout(() => {
-				// 有节点，自动定位到被连线的节点
+				// Has nodes, automatically locate to connected node
 				goToNode(nodeTemplate.node_id)
 			}, 200)
-			console.log("节点已添加:", nodeTemplate)
+			console.log("Node added:", nodeTemplate)
 			return true
 		} catch (error) {
-			console.error("添加节点失败:", error)
+			console.error("Add node失败:", error)
 			antdMessage.error(t("flowAssistant.addNodeError", { ns: "flow" }))
 			return false
 		}
 	})
 
-	// 更新节点
+	// Update node
 	const updateNode = useMemoizedFn((nodeId: string, updateList: any) => {
 		if (!flowInteractionRef.current) return false
 
 		try {
-			// 更新节点配置
+			// Update node配置
 			const { nodeConfig } = flowInteractionRef.current || {}
 			const currentNode = nodeConfig[nodeId]
 
@@ -84,31 +84,31 @@ export default function useFlowOperations({
 				flowInteractionRef.current.updateNodeConfig({ ...currentNode })
 			}
 
-			console.log("节点已更新:", nodeId, currentNode)
+			console.log("Node updated:", nodeId, currentNode)
 			return true
 		} catch (error) {
-			console.error("更新节点失败:", error)
+			console.error("Update node失败:", error)
 			antdMessage.error(t("flowAssistant.updateNodeError", { ns: "flow" }))
 			return false
 		}
 	})
 
-	// 删除节点
+	// Delete node
 	const deleteNode = useMemoizedFn((nodeId: string) => {
 		if (!flowInteractionRef.current) return false
 
 		try {
 			flowInteractionRef.current.deleteNodes([nodeId])
-			console.log("节点已删除:", nodeId)
+			console.log("Node deleted:", nodeId)
 			return true
 		} catch (error) {
-			console.error("删除节点失败:", error)
+			console.error("Delete node失败:", error)
 			antdMessage.error(t("flowAssistant.deleteNodeError", { ns: "flow" }))
 			return false
 		}
 	})
 
-	// 连接节点
+	// Connect nodes
 	const connectNodes = useMemoizedFn(
 		(sourceNodeId: string, targetNodeId: string, sourceHandleId: string) => {
 			if (!flowInteractionRef.current) return false
@@ -120,22 +120,22 @@ export default function useFlowOperations({
 					sourceHandle: sourceHandleId,
 				})
 				goToNode(targetNodeId)
-				console.log("节点已连接:", sourceNodeId, "->", targetNodeId)
+				console.log("Nodes connected:", sourceNodeId, "->", targetNodeId)
 				return true
 			} catch (error) {
-				console.error("连接节点失败:", error)
+				console.error("Connect nodes失败:", error)
 				antdMessage.error(t("flowAssistant.connectNodesError", { ns: "flow" }))
 				return false
 			}
 		},
 	)
 
-	// 断开节点连接
+	// Disconnect nodes
 	const disconnectNodes = useMemoizedFn((sourceNodeId: string, targetNodeId: string) => {
 		if (!flowInteractionRef.current) return false
 
 		try {
-			// Get当前源节点的下一个节点列表
+			// Getnext node list of the current source node
 			const currentFlow = flowInteractionRef.current.getFlow()
 			const sourceNode = currentFlow.nodes?.find(
 				(node: DelightfulFlow.Node) => node.id === sourceNodeId,
@@ -144,12 +144,12 @@ export default function useFlowOperations({
 				(id: string) => id !== targetNodeId,
 			)
 
-			// 更新连接
+			// Update connection
 			flowInteractionRef.current.updateNextNodeIdsByDeleteEdge(sourceNodeId, nextNodeIds)
-			console.log("节点连接已断开:", sourceNodeId, "->", targetNodeId)
+			console.log("Node connection disconnected:", sourceNodeId, "->", targetNodeId)
 			return true
 		} catch (error) {
-			console.error("断开节点连接失败:", error)
+			console.error("Disconnect nodes失败:", error)
 			antdMessage.error(t("flowAssistant.disconnectNodesError", { ns: "flow" }))
 			return false
 		}

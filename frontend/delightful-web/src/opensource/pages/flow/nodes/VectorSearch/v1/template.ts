@@ -1,4 +1,4 @@
-export const v1Template = {
+﻿export const v1Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-676d75ed2a27c6-24690200",
 	debug: false,
 	name: "Vector Database / Query",
@@ -165,3 +165,8 @@ export const v1Template = {
 	},
 	system_output: null,
 }
+
+
+
+
+

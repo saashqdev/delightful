@@ -1,4 +1,4 @@
-import type { Sheet } from "@/types/sheet"
+﻿import type { Sheet } from "@/types/sheet"
 import type { Condition } from "../types"
 
 export type ConditionItemProps = {
@@ -12,3 +12,8 @@ export type ConditionItemProps = {
 	dataTemplate: Record<string, Sheet.Detail>
 	isSupportRowId: boolean
 }
+
+
+
+
+

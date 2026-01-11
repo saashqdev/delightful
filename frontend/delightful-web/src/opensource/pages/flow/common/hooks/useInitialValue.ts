@@ -1,4 +1,4 @@
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+﻿import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemo } from "react"
 import { getNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
 import { get } from "lodash-es"
@@ -30,3 +30,8 @@ export default function useInitialValue({ nodeType }: InitialValueProps) {
 		initialValues,
 	}
 }
+
+
+
+
+

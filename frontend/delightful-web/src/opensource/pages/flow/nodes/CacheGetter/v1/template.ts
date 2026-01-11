@@ -1,4 +1,4 @@
-export const v1Template = {
+﻿export const v1Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-67739d5e267530-42312057",
 	debug: false,
 	name: "Persistent Database / Data Load",
@@ -58,3 +58,8 @@ export const v1Template = {
 	},
 	system_output: null,
 }
+
+
+
+
+

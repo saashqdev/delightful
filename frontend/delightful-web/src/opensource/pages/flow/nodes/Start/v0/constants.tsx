@@ -1,4 +1,4 @@
-export enum TriggerType {
+﻿export enum TriggerType {
 	// When a new message is sent
 	Message = 1,
 	// When chat window opens
@@ -24,3 +24,8 @@ export const TriggerTypeOptions = [
 		value: TriggerType.NewChat,
 	},
 ]
+
+
+
+
+

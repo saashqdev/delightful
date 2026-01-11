@@ -1,4 +1,4 @@
-import VectorDeleteV0 from "./v0"
+﻿import VectorDeleteV0 from "./v0"
 import VectorDeleteHeaderRightV0 from "./v0/components/VectorDeleteHeaderRight"
 import { v0Template } from "./v0/template"
 export const VectorDeleteComponentVersionMap = {
@@ -8,3 +8,8 @@ export const VectorDeleteComponentVersionMap = {
 		template: v0Template,
 	},
 }
+
+
+
+
+

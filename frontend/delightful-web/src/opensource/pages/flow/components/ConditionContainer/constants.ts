@@ -35,8 +35,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -47,7 +47,7 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		title: i18next.t("common.number", { ns: "flow" }),
 		id: Schema.NUMBER,
 		extraInfo: {
-			showNumberFormat: true, // Whether展示数字选项框的格式
+			showNumberFormat: true, // Whether display number option box format
 		},
 		conditions: [
 			{ id: Operators.EQUAL, label: "=" },
@@ -69,8 +69,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -86,8 +86,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -139,8 +139,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -234,8 +234,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -248,8 +248,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -305,8 +305,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -319,8 +319,8 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		conditions: [
 			{ id: Operators.EQUAL, label: i18next.t("common.equals", { ns: "flow" }) },
 			{ id: Operators.NOT_EQUAL, label: i18next.t("common.notEquals", { ns: "flow" }) },
-			// { id: Operators.CONTAIN, label: "包含" },
-			// { id: Operators.NOT_CONTAIN, label: "不包含" },
+			// { id: Operators.CONTAIN, label: "Contains" },
+			// { id: Operators.NOT_CONTAIN, label: "不Contains" },
 			{ id: Operators.EMPTY, label: i18next.t("common.empty", { ns: "flow" }) },
 			{ id: Operators.NOT_EMPTY, label: i18next.t("common.notEmpty", { ns: "flow" }) },
 		],
@@ -344,5 +344,10 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		valueOptions: [],
 	},
 }
+
+
+
+
+
 
 

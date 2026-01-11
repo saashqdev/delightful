@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Mode-related data
  */
 
@@ -31,3 +31,8 @@ export default function useToolsMode() {
 		modeOptions,
 	}
 }
+
+
+
+
+

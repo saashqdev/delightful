@@ -308,7 +308,7 @@ export default function useTestFunctions({
 				// 检查特殊字符Whether存在
 				const hasSpecialChars = /[:"\\\n\r\t]/.test(result)
 				if (hasSpecialChars) {
-					console.log("提取内容包含特殊字符，确保正确Process")
+					console.log("提取内容Contains特殊字符，确保正确Process")
 				}
 				return result
 			}
@@ -415,12 +415,12 @@ export default function useTestFunctions({
 			setMessages((prev) => [...prev, newAssistantMessage])
 			setIsProcessing(true)
 
-			// 检查内容Whether包含特殊字符
+			// 检查内容WhetherContains特殊字符
 			const hasSpecialChars = /[\r\n\t":{}[\]\\]/.test(fullContent)
 
 			// 记录特殊字符
 			if (hasSpecialChars) {
-				console.log("检测到内容包含特殊字符，使用更小的块大小和精确编码")
+				console.log("检测到内容Contains特殊字符，使用更小的块大小和精确编码")
 				// 简单记录特殊字符存在
 				console.log("发现特殊字符，将使用更严格的Process方式")
 
@@ -487,7 +487,7 @@ export default function useTestFunctions({
 					const charCodes = Array.from(chunk)
 						.map((c) => `${c}(${c.charCodeAt(0)})`)
 						.join(" ")
-					console.log(`块 ${Math.floor(i / safeChunkSize)} 包含特殊字符: ${charCodes}`)
+					console.log(`块 ${Math.floor(i / safeChunkSize)} Contains特殊字符: ${charCodes}`)
 				}
 
 				// 使用最严格的JSON字符串编码
@@ -666,8 +666,8 @@ export default function useTestFunctions({
 
 	/**
 	 * 测试使用完整的SSE事件字符串
-	 * 接收单个包含多行SSE数据的字符串，自动分割Process
-	 * @param sseContent 完整的SSE事件字符串，包含多行data:格式数据
+	 * 接收单个Contains多行SSE数据的字符串，自动分割Process
+	 * @param sseContent 完整的SSE事件字符串，Contains多行data:格式数据
 	 * @param delayBetweenLines 行之间的延迟时间(毫秒)
 	 */
 	const testWithFullSSEContent = useMemoizedFn(
@@ -694,11 +694,11 @@ export default function useTestFunctions({
 				const events = sseContent.split("\n").filter((line) => line.trim().length > 0)
 				const contentFromEvents = extractTextFromSSEEvents(events)
 
-				// 比较两种方法的结果，选择包含特殊字符更多的那个
+				// 比较两种方法的结果，选择Contains特殊字符更多的那个
 				let finalContent: string
 
 				if (contentFromText && contentFromEvents) {
-					// 检查哪个包含更多的特殊字符
+					// 检查哪个Contains更多的特殊字符
 					const specialCharsInText = (contentFromText.match(/[:"\\\n\r\t]/g) || []).length
 					const specialCharsInEvents = (contentFromEvents.match(/[:"\\\n\r\t]/g) || [])
 						.length
@@ -768,4 +768,9 @@ export default function useTestFunctions({
 		testWithRawContent,
 	}
 }
+
+
+
+
+
 

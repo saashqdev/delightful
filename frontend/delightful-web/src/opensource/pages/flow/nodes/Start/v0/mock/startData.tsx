@@ -1,4 +1,4 @@
-export const startData = {
+﻿export const startData = {
 	node_id: "DELIGHTFUL-FLOW-NODE-662ef85bbf58a1-16520272",
 	name: "Start node",
 	description: "When the following events are triggered, the workflow will start executing from this module",
@@ -157,3 +157,8 @@ export const startData = {
 }
 
 export default {}
+
+
+
+
+

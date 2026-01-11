@@ -1,4 +1,4 @@
-import type { WidgetValue } from "../../common/Output"
+﻿import type { WidgetValue } from "../../common/Output"
 
 /**
  * Selected tool data structure
@@ -11,3 +11,8 @@ export type ToolSelectedItem = {
 	name?: string
 	description?: string
 }
+
+
+
+
+

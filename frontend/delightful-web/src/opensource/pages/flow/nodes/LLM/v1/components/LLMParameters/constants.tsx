@@ -1,4 +1,4 @@
-// LLM adjuster
+﻿// LLM adjuster
 export enum LLMAdjust {
 	// Creativity
 	Creativity = 1,
@@ -74,3 +74,8 @@ export const LLMAdjustMap = {
 		// },
 	},
 }
+
+
+
+
+

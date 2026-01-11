@@ -1,4 +1,4 @@
-import CommonHeaderRight from "../../common/CommonHeaderRight"
+﻿import CommonHeaderRight from "../../common/CommonHeaderRight"
 import CacheGetterV0 from "./v0/CacheGetter"
 import { v0Template } from "./v0/template"
 import CacheGetterV1 from "./v1/CacheGetter"
@@ -16,3 +16,8 @@ export const CacheGetterComponentVersionMap = {
 		template: v1Template,
 	},
 }
+
+
+
+
+

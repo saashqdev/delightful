@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Switch for enabling super-resolution
  */
 
@@ -23,3 +23,8 @@ export default function SRSwitch({ value, onChange }: SRSwitchProps) {
 		</Flex>
 	)
 }
+
+
+
+
+

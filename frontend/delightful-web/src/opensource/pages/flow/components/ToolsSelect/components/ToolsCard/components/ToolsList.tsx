@@ -1,4 +1,4 @@
-import { memo } from "react"
+﻿import { memo } from "react"
 import { ToolSelectedItem } from "../../../types"
 import ToolAddableCard from "./ToolAddableCard/ToolAddableCard"
 
@@ -28,3 +28,8 @@ function ToolsList({ tools, cardOpen, toolSet, selectedTools }: ToolsListProps) 
 }
 
 export default memo(ToolsList)
+
+
+
+
+

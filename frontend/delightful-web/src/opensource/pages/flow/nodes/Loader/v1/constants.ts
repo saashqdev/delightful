@@ -1,4 +1,4 @@
-export enum LoaderType {
+﻿export enum LoaderType {
 	File = "file",
 }
 
@@ -8,3 +8,8 @@ export const loaderOptions = [
 		value: LoaderType.File,
 	},
 ]
+
+
+
+
+

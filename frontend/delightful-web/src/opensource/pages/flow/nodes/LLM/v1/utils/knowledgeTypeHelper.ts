@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Checks whether changeValues only includes knowledge_config.knowledge_list[index].knowledge_type
  * Used to detect if only the knowledge base type changed
  * @param changeValues Form change values
@@ -52,3 +52,8 @@ export function isOnlyKnowledgeTypeChange(changeValues: any): [boolean, number?]
 
 	return [false]
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-// Tools adjuster
+﻿// Tools adjuster
 export enum ToolsAdjust {
 	// Creativity
 	Creativity = 1,
@@ -74,3 +74,8 @@ export const ToolsAdjustMap = {
 		// },
 	},
 }
+
+
+
+
+

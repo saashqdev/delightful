@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid"
+﻿import { nanoid } from "nanoid"
 
 // Get default intention
 export const getDefaultIntention = () => {
@@ -45,3 +45,8 @@ export const getDefaultIntention = () => {
 }
 
 export default {}
+
+
+
+
+

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Compare the size of two version numbers
  * @param version1 Version number 1, e.g. "v0", "v1", "v2"
  * @param version2 Version number 2, e.g. "v0", "v1", "v2"
@@ -21,3 +21,8 @@ export function compareNodeVersion(version1: string, version2: string): number {
 	}
 	return 0
 }
+
+
+
+
+

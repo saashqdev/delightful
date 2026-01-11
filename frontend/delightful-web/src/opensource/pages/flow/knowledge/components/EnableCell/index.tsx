@@ -1,4 +1,4 @@
-import type { Knowledge } from "@/types/knowledge"
+﻿import type { Knowledge } from "@/types/knowledge"
 import { useMemoizedFn } from "ahooks"
 import { Switch } from "antd"
 import { KnowledgeApi } from "@/apis"
@@ -30,3 +30,8 @@ export default function EnableCell({
 
 	return <Switch checked={enabled} onChange={updateEnableStatus} disabled={disabled} />
 }
+
+
+
+
+

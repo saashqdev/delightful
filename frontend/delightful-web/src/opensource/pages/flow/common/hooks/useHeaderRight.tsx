@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Stores common methods and state for single-step debugging of each node
  */
 
@@ -388,3 +388,8 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 		HeaderRight,
 	}
 }
+
+
+
+
+

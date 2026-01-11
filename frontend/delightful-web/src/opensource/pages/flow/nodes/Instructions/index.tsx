@@ -1,4 +1,4 @@
-import InstructionsV0 from "./v0"
+﻿import InstructionsV0 from "./v0"
 import { v0Template } from "./v0/template"
 
 export const InstructionsComponentVersionMap = {
@@ -8,3 +8,8 @@ export const InstructionsComponentVersionMap = {
 		template: v0Template,
 	},
 }
+
+
+
+
+

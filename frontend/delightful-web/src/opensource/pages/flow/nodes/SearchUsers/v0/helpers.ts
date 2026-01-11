@@ -1,4 +1,4 @@
-import { FilterTargetTypes, operator2Label, operatorMap } from "./constants"
+﻿import { FilterTargetTypes, operator2Label, operatorMap } from "./constants"
 
 // Get default filter
 export const getDefaultFilter = () => {
@@ -35,3 +35,8 @@ export const getFilterOption = (left: FilterTargetTypes) => {
 		}) || []
 	)
 }
+
+
+
+
+

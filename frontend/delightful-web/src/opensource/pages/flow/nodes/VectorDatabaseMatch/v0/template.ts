@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-674eb122a16cc4-83940271",
 	debug: false,
 	name: "KnowledgeSearch",
@@ -87,3 +87,8 @@ export const v0Template = {
 	},
 	system_output: null,
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-import { memo } from "react"
+﻿import { memo } from "react"
 import type { FormInstance } from "antd"
 import { Button, Flex, Form, Input, Select, Switch } from "antd"
 import { useTranslation } from "react-i18next"
@@ -152,3 +152,8 @@ const FromItem = memo(({ name, form, disabled, remove }: FormItemProps) => {
 	)
 })
 export default FromItem
+
+
+
+
+

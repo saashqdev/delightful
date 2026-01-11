@@ -1,4 +1,4 @@
-import CommonHeaderRight from "../../common/CommonHeaderRight"
+﻿import CommonHeaderRight from "../../common/CommonHeaderRight"
 import VectorDatabaseMatchV0 from "./v0/VectorDatabaseMatch"
 import { v0Template } from "./v0/template"
 export const VectorDatabaseMatchComponentVersionMap = {
@@ -8,3 +8,8 @@ export const VectorDatabaseMatchComponentVersionMap = {
 		template: v0Template,
 	},
 }
+
+
+
+
+

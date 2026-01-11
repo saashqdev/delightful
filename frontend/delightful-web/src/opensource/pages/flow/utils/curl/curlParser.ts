@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+﻿/* eslint-disable no-console */
 /* eslint-disable no-lonely-if */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-destructuring */
@@ -251,3 +251,8 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 	console.log("Parsed curl result:", JSON.stringify(result, null, 2))
 	return result
 }
+
+
+
+
+

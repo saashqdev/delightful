@@ -27,7 +27,7 @@ export default function OrganizationSelectPanel() {
 	}, [authList, uId])
 
 	useEffect(() => {
-		// 从 authList 中提取已选择的部门和用户，并转换为对应的 OrganizationSelectItem 类型
+		// Extract selected departments and users from authList, and convert to corresponding OrganizationSelectItem type
 		const selectedItems = authList
 			.filter(
 				(auth) =>
@@ -139,5 +139,10 @@ export default function OrganizationSelectPanel() {
 		/>
 	)
 }
+
+
+
+
+
 
 

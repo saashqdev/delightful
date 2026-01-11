@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+﻿import type { ReactNode } from "react"
 import { customNodeType } from "../constants"
 import { BranchComponentVersionMap } from "./Branch"
 import { CacheGetterComponentVersionMap } from "./CacheGetter"
@@ -75,3 +75,8 @@ export const nodeComponentVersionMap: Record<
 	[customNodeType.MessageMemory]: ReplyComponentVersionMap,
 	[customNodeType.Instructions]: InstructionsComponentVersionMap,
 }
+
+
+
+
+

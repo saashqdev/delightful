@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+﻿/* eslint-disable @typescript-eslint/naming-convention */
 
 export enum customNodeType {
 	// Start
@@ -94,3 +94,8 @@ export const OmitNodeKeys = [
 	"zIndex",
 	"type",
 ]
+
+
+
+
+

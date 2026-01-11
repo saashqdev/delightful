@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6649c0573a3686-33859327",
 	name: "Code Execution",
 	description: "",
@@ -120,3 +120,8 @@ export const v0Template = {
 		},
 	},
 }
+
+
+
+
+

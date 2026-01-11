@@ -1,4 +1,4 @@
-export const v1Template = {
+﻿export const v1Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-67cfd534c86796-80270007",
 	debug: false,
 	name: "Image Generation",
@@ -179,3 +179,8 @@ export const v1Template = {
 	},
 	system_output: null,
 }
+
+
+
+
+

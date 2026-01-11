@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6788da4d9c3177-24302881",
 	debug: false,
 	name: "Variable Save",
@@ -34,3 +34,8 @@ export const v0Template = {
 	output: null,
 	system_output: null,
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-import type { FlowDraft } from "@/types/flow"
+﻿import type { FlowDraft } from "@/types/flow"
 import { IconEdit, IconTrashX } from "@tabler/icons-react"
 import { Flex, Popconfirm, Tooltip } from "antd"
 import EmptyIcon from "@/assets/logos/empty.svg"
@@ -104,3 +104,8 @@ export default function DraftCardItem({
 		</div>
 	)
 }
+
+
+
+
+

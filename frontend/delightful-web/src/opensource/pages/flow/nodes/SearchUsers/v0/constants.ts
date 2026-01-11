@@ -1,4 +1,4 @@
-import i18next from "i18next"
+﻿import i18next from "i18next"
 
 export enum FilterTargetTypes {
 	Username = "username",
@@ -68,3 +68,8 @@ export const operator2Label: Record<string, string> = {
 	empty: i18next.t("common.empty", { ns: "flow" }),
 	not_empty: i18next.t("common.notEmpty", { ns: "flow" }),
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-import { contactStore } from "@/opensource/stores/contact"
+﻿import { contactStore } from "@/opensource/stores/contact"
 import { useMemo } from "react"
 import delightfulIconLogo from "@/assets/logos/delightful-icon.svg"
 import { getUserName } from "@/utils/modules/chat"
@@ -44,3 +44,8 @@ export default function useConversations() {
 		conversationList,
 	}
 }
+
+
+
+
+

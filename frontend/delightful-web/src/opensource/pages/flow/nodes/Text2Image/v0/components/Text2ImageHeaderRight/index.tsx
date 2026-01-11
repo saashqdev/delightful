@@ -1,4 +1,4 @@
-import useHeaderRight from "@/opensource/pages/flow/common/hooks/useHeaderRight"
+﻿import useHeaderRight from "@/opensource/pages/flow/common/hooks/useHeaderRight"
 import { useMemo } from "react"
 
 export default function Text2ImageHeaderRightV0() {
@@ -40,3 +40,8 @@ export default function Text2ImageHeaderRightV0() {
 
 	return HeaderRight
 }
+
+
+
+
+

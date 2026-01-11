@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Type Converter
  */
 
@@ -39,3 +39,8 @@ export default function useMode() {
 		setMode: set,
 	}
 }
+
+
+
+
+

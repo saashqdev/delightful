@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react"
+﻿import { memo, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { Flex, Form, Radio } from "antd"
 import { useStyles } from "../../styles"
@@ -20,3 +20,8 @@ export const InsertLocation = memo(function InsertLocation() {
 		</Flex>
 	)
 })
+
+
+
+
+

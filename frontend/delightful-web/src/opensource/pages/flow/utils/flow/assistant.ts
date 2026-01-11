@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Flow assistant utility functions
  * Provides functionality for handling flow assistant features
  */
@@ -122,3 +122,7 @@ export const getTypingEffect = (
 
   return { displayContent, isComplete, newLength };
 }; 
+
+
+
+

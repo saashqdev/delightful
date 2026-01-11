@@ -1,4 +1,4 @@
-import { TFunction } from "i18next";
+﻿import { TFunction } from "i18next";
 
 /** Knowledge data type */
 export enum KnowledgeType {
@@ -65,3 +65,8 @@ export const getLLMRoleConstantOptions = () => {
 		},
 	]
 }
+
+
+
+
+

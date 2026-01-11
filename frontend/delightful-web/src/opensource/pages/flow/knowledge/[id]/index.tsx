@@ -1,4 +1,4 @@
-import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+﻿import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { RoutePath } from "@/const/routes"
 import { useKnowledgeStore } from "@/opensource/stores/knowledge"
 import { IconSearch } from "@tabler/icons-react"

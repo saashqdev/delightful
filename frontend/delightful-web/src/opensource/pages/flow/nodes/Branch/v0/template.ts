@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-66c444c8ca1934-29144044",
 	name: "Condition Judgment",
 	description: "",
@@ -30,3 +30,8 @@ export const v0Template = {
 	input: null,
 	output: null,
 }
+
+
+
+
+

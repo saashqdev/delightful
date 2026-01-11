@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Check if current is Flow or Agent
  */
 
@@ -19,3 +19,8 @@ export default function useCheckType() {
 		isAgent,
 	}
 }
+
+
+
+
+

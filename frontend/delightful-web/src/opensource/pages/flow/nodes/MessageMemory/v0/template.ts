@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-66a1b6003116b2-51012040",
 	name: "Message History Storage",
 	description: "",
@@ -63,3 +63,8 @@ export const v0Template = {
 	input: null,
 	output: null,
 }
+
+
+
+
+

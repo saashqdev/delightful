@@ -1,4 +1,4 @@
-import type { FlowDraft } from "@/types/flow"
+﻿import type { FlowDraft } from "@/types/flow"
 import { Flex, Tooltip } from "antd"
 import EmptyIcon from "@/assets/logos/empty.svg"
 import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
@@ -61,3 +61,8 @@ export default function PublishCardItem({ version, flow, onSwitchDraft }: Publis
 		</div>
 	)
 }
+
+
+
+
+

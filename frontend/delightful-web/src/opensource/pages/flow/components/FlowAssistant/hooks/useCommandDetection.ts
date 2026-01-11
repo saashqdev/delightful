@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+﻿import { useCallback } from "react"
 
 interface UseCommandDetectionResult {
 	detectCommands: (content: string) => {
@@ -118,3 +118,8 @@ export function useCommandDetection(): UseCommandDetectionResult {
 }
 
 export default useCommandDetection
+
+
+
+
+

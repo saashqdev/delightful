@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+﻿import { useTranslation } from "react-i18next"
 import { Flex, Form, Image, Select, Tooltip } from "antd"
 import { useAsyncEffect, useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useForm } from "antd/es/form/Form"
@@ -261,3 +261,8 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 }
 
 export default BindOpenApiAccount
+
+
+
+
+

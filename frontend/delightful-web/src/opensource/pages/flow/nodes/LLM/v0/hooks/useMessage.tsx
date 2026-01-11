@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Message loading state, components, and behaviors
  */
 
@@ -24,3 +24,8 @@ export default function useMessage() {
 		MessageLoadSwitch,
 	}
 }
+
+
+
+
+

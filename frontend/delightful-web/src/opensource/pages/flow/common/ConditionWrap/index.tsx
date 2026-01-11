@@ -1,4 +1,4 @@
-/** Condition component with an additional rendering layer
+﻿/** Condition component with an additional rendering layer
  * {
         "id": "component-66399f15d691c",
         "version": "1",
@@ -44,3 +44,8 @@ export default function DelightfulConditionWrap({ ...props }: DelightfulConditio
 
 	return MemoComponent
 }
+
+
+
+
+

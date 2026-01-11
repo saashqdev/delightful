@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-673edf2100afc7-50651959",
 	debug: false,
 	name: "Wait for New Message",
@@ -293,4 +293,9 @@ export const v0Template = {
 	},
 	system_output: null,
 }
+
+
+
+
+
 

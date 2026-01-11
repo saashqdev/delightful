@@ -1,4 +1,4 @@
-import CommonHeaderRight from "../../common/CommonHeaderRight"
+﻿import CommonHeaderRight from "../../common/CommonHeaderRight"
 import LoopV0 from "./v0"
 import { v0Template } from "./v0/template"
 export const LoopComponentVersionMap = {
@@ -8,3 +8,8 @@ export const LoopComponentVersionMap = {
 		template: v0Template,
 	},
 }
+
+
+
+
+

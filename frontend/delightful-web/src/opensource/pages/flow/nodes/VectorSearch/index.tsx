@@ -1,4 +1,4 @@
-import VectorSearchV0 from "./v0"
+﻿import VectorSearchV0 from "./v0"
 import VectorSearchHeaderRightV0 from "./v0/components/VectorSearchHeaderRight"
 import VectorSearchV1 from "./v1"
 import VectorSearchHeaderRightV1 from "./v1/components/VectorSearchHeaderRight"
@@ -17,3 +17,8 @@ export const VectorSearchComponentVersionMap = {
 		template: v1Template,
 	},
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-import { IconWindowMaximize } from "@tabler/icons-react"
+﻿import { IconWindowMaximize } from "@tabler/icons-react"
 import { Flex, Tooltip } from "antd"
 import iconStyles from "@/opensource/pages/flow/nodes/VectorSearch/v0/components/KnowledgeSelect/KnowledgeSelect.module.less"
 import knowledgeStyles from "@/opensource/pages/flow/nodes/KnowledgeSearch/v0/components/TeamshareKnowledgeSelect/TeamshareKnowledgeSelect.module.less"
@@ -29,3 +29,8 @@ export default function RenderLabel({ item }: RenderLabelProps) {
 		</Flex>
 	)
 }
+
+
+
+
+

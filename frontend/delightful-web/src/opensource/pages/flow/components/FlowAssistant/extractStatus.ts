@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Extract status information and replace status markers
  * @param content Original content
  * @returns Processed content
@@ -48,3 +48,8 @@ export const extractStatus = (content: string): string => {
 }
 
 export default extractStatus
+
+
+
+
+

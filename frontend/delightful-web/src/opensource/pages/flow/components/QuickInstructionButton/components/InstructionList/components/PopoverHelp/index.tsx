@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react"
+﻿import { memo, useMemo } from "react"
 import { Flex, Popover } from "antd"
 import { useTranslation } from "react-i18next"
 import { IconHelp, IconPlus } from "@tabler/icons-react"
@@ -70,3 +70,8 @@ export const PopoverHelp = memo(({ id, title, addInstruction }: PopoverHelpProps
 		</Flex>
 	)
 })
+
+
+
+
+

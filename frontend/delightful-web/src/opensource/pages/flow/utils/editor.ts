@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Code editor related helper methods
  */
 import { loader } from "@monaco-editor/react"
@@ -14,3 +14,8 @@ export default function registerEditor() {
 
 	loader.init()
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-import CommonHeaderRight from "../../common/CommonHeaderRight"
+﻿import CommonHeaderRight from "../../common/CommonHeaderRight"
 import WaitForReplyV0 from "./v0/WaitForReply"
 import WaitForReplyV1 from "./v1/WaitForReply"
 import { v0Template } from "./v0/template"
@@ -16,3 +16,8 @@ export const WaitForReplyComponentVersionMap = {
 		template: v1Template,
 	},
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-import i18next from "i18next"
+﻿import i18next from "i18next"
 
 export const v1Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-676d7642c07861-90242876",
@@ -184,3 +184,8 @@ export const v1Template = {
 	},
 	system_output: null,
 }
+
+
+
+
+

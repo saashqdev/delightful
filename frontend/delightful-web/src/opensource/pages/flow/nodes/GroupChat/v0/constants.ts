@@ -1,4 +1,4 @@
-import { GroupConversationType } from "@/types/chat/conversation"
+﻿import { GroupConversationType } from "@/types/chat/conversation"
 import i18next from "i18next"
 
 export const groupTypeOptions = [
@@ -27,3 +27,8 @@ export const groupTypeOptions = [
 		value: GroupConversationType.External,
 	},
 ]
+
+
+
+
+

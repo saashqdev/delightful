@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Agent rights related
  */
 import { useMemo } from "react"
@@ -32,3 +32,8 @@ export default function useRights({ flow, agent }: RightProps) {
 		isReleasedToMarket,
 	}
 }
+
+
+
+
+

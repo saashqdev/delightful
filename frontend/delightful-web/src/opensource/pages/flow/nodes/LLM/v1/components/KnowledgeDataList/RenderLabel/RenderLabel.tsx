@@ -1,4 +1,4 @@
-import { IconWindowMaximize } from "@tabler/icons-react"
+﻿import { IconWindowMaximize } from "@tabler/icons-react"
 import { Flex, Tooltip } from "antd"
 import styles from "../../KnowledgeDatabaseSelect/TeamshareKnowledgeSelect.module.less"
 
@@ -28,3 +28,8 @@ export default function RenderLabel({ item }: RenderLabelProps) {
 		</Flex>
 	)
 }
+
+
+
+
+

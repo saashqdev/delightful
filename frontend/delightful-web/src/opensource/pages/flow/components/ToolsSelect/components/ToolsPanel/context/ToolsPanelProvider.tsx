@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react"
+﻿import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import type { ToolSelectedItem } from "../../../types"
 
@@ -30,3 +30,8 @@ export const ToolsPanelProvider = ({
 export const useToolsPanel = () => {
 	return React.useContext(ToolsPanelContext)
 }
+
+
+
+
+

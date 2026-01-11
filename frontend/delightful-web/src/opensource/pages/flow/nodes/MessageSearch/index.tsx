@@ -1,4 +1,4 @@
-import CommonHeaderRight from "../../common/CommonHeaderRight"
+﻿import CommonHeaderRight from "../../common/CommonHeaderRight"
 import MessageSearchV0 from "./v0"
 import { v0Template } from "./v0/template"
 
@@ -9,3 +9,8 @@ export const MessageSearchComponentVersionMap = {
 		template: v0Template,
 	},
 }
+
+
+
+
+

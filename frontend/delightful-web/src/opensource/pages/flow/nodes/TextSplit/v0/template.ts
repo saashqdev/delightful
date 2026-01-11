@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6735bdc8d72e40-41197531",
 	debug: false,
 	name: "Text Split",
@@ -76,3 +76,8 @@ export const v0Template = {
 	},
 	system_output: null,
 }
+
+
+
+
+

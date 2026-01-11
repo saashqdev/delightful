@@ -1,4 +1,4 @@
-import type { WidgetValue } from "@delightful/delightful-flow/dist/DelightfulFlow/examples/BaseFlow/common/Output"
+﻿import type { WidgetValue } from "@delightful/delightful-flow/dist/DelightfulFlow/examples/BaseFlow/common/Output"
 import SourceHandle from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/Handle/Source"
 import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
@@ -83,3 +83,8 @@ export default function Common({
 		</div>
 	)
 }
+
+
+
+
+

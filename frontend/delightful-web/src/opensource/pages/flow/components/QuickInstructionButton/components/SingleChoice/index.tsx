@@ -1,4 +1,4 @@
-import { Flex, Form, Input } from "antd"
+﻿import { Flex, Form, Input } from "antd"
 import { useTranslation } from "react-i18next"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconCircleMinus, IconPlus } from "@tabler/icons-react"
@@ -159,3 +159,8 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 })
 
 export default SingleChoice
+
+
+
+
+

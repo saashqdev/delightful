@@ -1,4 +1,4 @@
-export const v1Template = {
+﻿export const v1Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-676d736eca7d69-15945310",
 	debug: false,
 	name: "HTTP Request",
@@ -169,3 +169,8 @@ export const v1Template = {
 		},
 	},
 }
+
+
+
+
+

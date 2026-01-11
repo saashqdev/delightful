@@ -91,7 +91,7 @@ const parseSSELine = (line: string): { text: string; commands: any[] } => {
 				extractedText = data.content
 			}
 
-			// 检查json中Whether包含命令
+			// 检查json中WhetherContains命令
 			const commands = []
 			if (data.type === "flow_commands" && Array.isArray(data.commands)) {
 				commands.push(...data.commands)
@@ -613,7 +613,7 @@ export default function FlowAssistant({
 						return {
 							...msg,
 							status: "done",
-							// 如果消息中包含确认Operation，确保它被保留
+							// 如果消息中Contains确认Operation，确保它被保留
 							confirmOperation: msg.confirmOperation || undefined,
 						}
 					}
@@ -810,7 +810,7 @@ export default function FlowAssistant({
 			// 使用封装的发送消息函数
 			const result = await sendAgentMessage(userMessage, {
 				conversationId: conversationId || "temp-conversation",
-				includeFlowData: true, // 仅在第一次发送时包含流程数据
+				includeFlowData: true, // 仅在第一次发送时Contains流程数据
 				getFetchFlowData: getFlowData,
 			})
 
@@ -1028,4 +1028,9 @@ export default function FlowAssistant({
 		</Resizable>
 	)
 }
+
+
+
+
+
 

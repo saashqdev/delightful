@@ -1,4 +1,4 @@
-import { IconWindowMaximize } from "@tabler/icons-react"
+﻿import { IconWindowMaximize } from "@tabler/icons-react"
 import { Flex } from "antd"
 import iconStyles from "@/opensource/pages/flow/nodes/VectorSearch/v0/components/KnowledgeSelect/KnowledgeSelect.module.less"
 import type { ReactNode } from "react"
@@ -35,3 +35,8 @@ export default function RenderLabelCommon({ name, url, danger = false }: RenderL
 		</Flex>
 	)
 }
+
+
+
+
+

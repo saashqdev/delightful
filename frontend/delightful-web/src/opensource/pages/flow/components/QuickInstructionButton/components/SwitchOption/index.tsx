@@ -1,4 +1,4 @@
-import { Flex, Form, Input, Switch } from "antd"
+﻿import { Flex, Form, Input, Switch } from "antd"
 import { useTranslation } from "react-i18next"
 import { memo } from "react"
 import { useStyles } from "../../styles"
@@ -61,3 +61,8 @@ const SwitchOption = memo(() => {
 })
 
 export default SwitchOption
+
+
+
+
+

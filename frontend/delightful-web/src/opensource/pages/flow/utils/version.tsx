@@ -1,4 +1,4 @@
-import type { NodeSchema, NodeWidget } from "@delightful/delightful-flow/dist/DelightfulFlow"
+﻿import type { NodeSchema, NodeWidget } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import {
 	IconArrowLeftFromArc,
 	IconArrowBounce,
@@ -555,3 +555,8 @@ export const generateNodeVersionSchema = (
 
 	return result as Record<customNodeType, Record<Version, NodeWidget>>
 }
+
+
+
+
+

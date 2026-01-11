@@ -35,14 +35,14 @@ interface ArgsSettingsProps {
 		body: string[]
 		headers: string[]
 	}
-	/** 参数配置激活的tab栏 */
+	/** Active tab bar for parameter configuration */
 	activeKey?: string
 	pathEventEmitter?: EventEmitter<string[]>
-	/** 保存最新settings函数 */
+	/** Function to save latest settings */
 	update: () => void
-	/** 数据源 */
+	/** Data source */
 	expressionSource: ExpressionSource
-	/** Whether有path组件 */
+	/** Whether path component exists */
 	hasPath?: boolean
 }
 
@@ -60,7 +60,7 @@ export default function ArgsSettings({
 	const [currentTab, setCurrentTab] = useState(activeKey)
 	const { selectedNodeId } = useFlowNodes()
 
-	// 以父组件的为准
+	// Parent component value takes precedence
 	useEffect(() => {
 		setCurrentTab(activeKey)
 	}, [activeKey])
@@ -122,7 +122,7 @@ export default function ArgsSettings({
 		pathEventEmitter.useSubscription((pathFieldNames) => {
 			// console.log("path -> ", pathFieldNames)
 			if (pathEditorRef.current && typeof pathEditorRef.current === "object") {
-				// 需要检查这些方法Whether存在
+				// Need to check whether these methods exist
 				if (typeof pathEditorRef.current.deleteRootChildFieldsNotIn === "function") {
 					pathEditorRef.current.deleteRootChildFieldsNotIn(pathFieldNames)
 				}
@@ -276,7 +276,7 @@ export default function ArgsSettings({
 	})
 
 	useUpdateEffect(() => {
-		// 节点失去焦点时保存一次，可以进一步判断Whether上一个selectedNode是当前HTTP节点id
+		// Save once when node loses focus, can further determine whether the previous selectedNode is the current HTTP node id
 		if (!selectedNodeId) {
 			update()
 		}
@@ -331,4 +331,9 @@ export default function ArgsSettings({
 		</div>
 	)
 }
+
+
+
+
+
 

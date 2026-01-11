@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+﻿import { useTranslation } from "react-i18next"
 import { Form, Input, message } from "antd"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useBoolean, useMemoizedFn } from "ahooks"
@@ -150,3 +150,8 @@ function UpdateKnowledge({ knowledge, updateKnowledge, initKnowledgeList }: Upda
 }
 
 export default UpdateKnowledge
+
+
+
+
+

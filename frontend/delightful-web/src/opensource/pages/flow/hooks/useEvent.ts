@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Browser event controls
  */
 
@@ -15,3 +15,8 @@ export default function useEvent() {
 		}
 	}, []) // Empty dependency array ensures this only executes on component mount and unmount
 }
+
+
+
+
+

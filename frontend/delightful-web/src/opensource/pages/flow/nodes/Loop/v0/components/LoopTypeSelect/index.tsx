@@ -1,4 +1,4 @@
-import { Icon123, IconBrackets, IconEqual } from "@tabler/icons-react"
+﻿import { Icon123, IconBrackets, IconEqual } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import i18next from "i18next"
 import styles from "./index.module.less"
@@ -57,3 +57,8 @@ export default function LoopTypeSelect({ value, onChange }: LoopTypeSelectProps)
 		</div>
 	)
 }
+
+
+
+
+

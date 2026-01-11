@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import { Spin } from "antd"
 import { IconCheck, IconX } from "@tabler/icons-react"
 import { useStyles } from "../styles"
@@ -60,3 +60,8 @@ const CommandStatusDisplay: React.FC<CommandStatusDisplayProps> = ({ commandStat
 }
 
 export default CommandStatusDisplay
+
+
+
+
+

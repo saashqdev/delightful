@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react"
+﻿import { memo, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import type { RadioChangeEvent } from "antd"
 import { Flex, Form, Radio } from "antd"
@@ -55,3 +55,8 @@ export const InstructionMode = memo(({ instructionModeChange }: InstructionModeP
 		</Flex>
 	)
 })
+
+
+
+
+

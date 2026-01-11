@@ -1,4 +1,4 @@
-import { Flex } from "antd"
+﻿import { Flex } from "antd"
 import { cx } from "antd-style"
 import useToolsMode from "./hooks/useToolsMode"
 import styles from "./ModeSelect.module.less"
@@ -40,3 +40,8 @@ export default function ModeSelect({ value, onChange }: ModeSelectProps) {
 		</Flex>
 	)
 }
+
+
+
+
+

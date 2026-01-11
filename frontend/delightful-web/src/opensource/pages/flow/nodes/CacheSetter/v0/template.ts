@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6727162126f933-69547132",
 	debug: false,
 	name: "Data Setter",
@@ -64,3 +64,8 @@ export const v0Template = {
 	output: null,
 	system_output: null,
 }
+
+
+
+
+

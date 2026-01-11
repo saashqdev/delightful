@@ -1,4 +1,4 @@
-// Default API parameter configuration
+﻿// Default API parameter configuration
 export const DefaultApiSettings = {
 	method: "GET",
 	domain: "",
@@ -75,3 +75,8 @@ export const DefaultApiSettings = {
 }
 
 export default {}
+
+
+
+
+

@@ -1,4 +1,4 @@
-import { memo } from "react"
+﻿import { memo } from "react"
 import { useTranslation } from "react-i18next"
 import { Flex, Form } from "antd"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
@@ -64,3 +64,8 @@ export const InstructionContent = memo(
 		)
 	},
 )
+
+
+
+
+

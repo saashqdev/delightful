@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-674ebc40700b12-43894022",
 	debug: false,
 	name: "Knowledge Segment Delete",
@@ -51,3 +51,8 @@ export const v0Template = {
 	output: null,
 	system_output: null,
 }
+
+
+
+
+

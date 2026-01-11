@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-67653d93d2bd61-28133626",
 	debug: false,
 	name: "Create Group Chat",
@@ -46,3 +46,8 @@ export const v0Template = {
 	output: null,
 	system_output: null,
 }
+
+
+
+
+

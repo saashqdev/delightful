@@ -1,4 +1,4 @@
-import { Flow } from "@/types/flow"
+﻿import { Flow } from "@/types/flow"
 import useStyles from "./style"
 import { useTranslation } from "react-i18next"
 import { useMemo } from "react"
@@ -35,3 +35,8 @@ export default function MCPDesc({ item }: { item: Flow.Mcp.Detail }) {
 		</>
 	)
 }
+
+
+
+
+

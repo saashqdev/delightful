@@ -1,4 +1,4 @@
-import IntentionRecognitionV0 from "./v0"
+﻿import IntentionRecognitionV0 from "./v0"
 import IntentionRecognitionHeaderRightV0 from "./v0/components/IntentionRecognitionHeaderRight"
 import { v0Template } from "./v0/template"
 
@@ -9,3 +9,8 @@ export const IntentionRecognitionComponentVersionMap = {
 		template: v0Template,
 	},
 }
+
+
+
+
+

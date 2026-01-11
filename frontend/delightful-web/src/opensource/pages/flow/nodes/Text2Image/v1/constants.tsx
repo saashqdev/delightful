@@ -1,4 +1,4 @@
-import { generateSnowFlake } from "@/opensource/pages/flow/utils/helpers"
+﻿import { generateSnowFlake } from "@/opensource/pages/flow/utils/helpers"
 
 export enum ImageModel {
 	// MJ model
@@ -178,3 +178,8 @@ export const getDefaultSize = (value: string) => {
 		},
 	}
 }
+
+
+
+
+

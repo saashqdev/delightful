@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+﻿import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 
 export default function useToolsParameters() {
@@ -15,3 +15,8 @@ export default function useToolsParameters() {
 
 	return { asyncCall }
 }
+
+
+
+
+

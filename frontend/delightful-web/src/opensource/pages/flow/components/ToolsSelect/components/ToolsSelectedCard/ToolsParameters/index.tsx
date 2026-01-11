@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tools parameter configurator
  */
 import type { FormListFieldData } from "antd"
@@ -57,3 +57,8 @@ export default function ToolsParameters({ field }: ToolsParametersProps) {
 		</div>
 	)
 }
+
+
+
+
+

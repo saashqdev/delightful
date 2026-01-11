@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom"
+﻿import { Outlet } from "react-router-dom"
 import { createStyles } from "antd-style"
 
 import { Flex } from "antd"
@@ -112,3 +112,8 @@ export default function FlowLayout({ children }: FlowLayoutProps) {
 		</Flex>
 	)
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-/** Find strings wrapped in {} */
+﻿/** Find strings wrapped in {} */
 export function findBracedStrings(inputString: string) {
 	const regex = /\{([^}]+)\}/g
 	const matches = []
@@ -13,3 +13,8 @@ export function findBracedStrings(inputString: string) {
 }
 
 export default {}
+
+
+
+
+

@@ -1,4 +1,4 @@
-import type { CycleTypeMap, Units } from "./constants"
+﻿import type { CycleTypeMap, Units } from "./constants"
 
 export type TimeTriggerParams = {
 	type: CycleTypeMap
@@ -13,3 +13,8 @@ export type TimeTriggerParams = {
 	}
 }
 export default {}
+
+
+
+
+

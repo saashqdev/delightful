@@ -1,4 +1,4 @@
-import { isNaN } from "lodash-es"
+﻿import { isNaN } from "lodash-es"
 
 /**
  * Compares two time strings and determines if the first time is earlier than the second.
@@ -19,3 +19,8 @@ export function compareTimes(time1: string, time2: string): boolean {
 	// Return true if date1 is earlier than date2, false otherwise
 	return date1 < date2
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-import i18next from "i18next"
+﻿import i18next from "i18next"
 
 export enum FilterTargetTypes {
 	VectorDatabaseId = "vector_database_id",
@@ -28,3 +28,8 @@ export const operator2Label: Record<string, string> = {
 	contains: i18next.t("common.contains", { ns: "flow" }),
 	no_contains: i18next.t("common.notContains", { ns: "flow" }),
 }
+
+
+
+
+

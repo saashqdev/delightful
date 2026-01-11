@@ -1,4 +1,4 @@
-import { useFlowStore } from "@/opensource/stores/flow"
+﻿import { useFlowStore } from "@/opensource/stores/flow"
 import { useMemoizedFn } from "ahooks"
 import { cloneDeep, castArray, set } from "lodash-es"
 import { ComponentTypes } from "@/types/flow"
@@ -68,3 +68,8 @@ export default function useOldKnowledgeHandle() {
 		handleOldKnowledge,
 	}
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-674eb95296a950-98353554",
 	debug: false,
 	name: "Knowledge Base Fragment Storage",
@@ -61,3 +61,8 @@ export const v0Template = {
 	output: null,
 	system_output: null,
 }
+
+
+
+
+

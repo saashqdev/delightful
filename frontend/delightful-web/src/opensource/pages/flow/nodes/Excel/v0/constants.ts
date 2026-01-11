@@ -1,4 +1,4 @@
-import i18next from "i18next"
+﻿import i18next from "i18next"
 
 export enum LoaderType {
 	File = "file",
@@ -10,3 +10,8 @@ export const loaderOptions = [
 		value: LoaderType.File,
 	},
 ]
+
+
+
+
+

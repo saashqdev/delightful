@@ -1,4 +1,4 @@
-import type { QuickInstruction } from "@/types/bot"
+﻿import type { QuickInstruction } from "@/types/bot"
 import { DisplayType } from "@/types/bot"
 import {
 	IconWand,
@@ -127,3 +127,8 @@ export const INSERT_OPTIONS = (t: TFunction) => [
 	{ value: InsertLocationMap.Cursor, label: t("explore.form.insertCursor") },
 	{ value: InsertLocationMap.Behind, label: t("explore.form.insertBehind") },
 ]
+
+
+
+
+

@@ -1,4 +1,4 @@
-import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
+﻿import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 import type { Knowledge } from "@/types/knowledge"
 
 import { IconTrash } from "@tabler/icons-react"

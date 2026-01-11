@@ -1,4 +1,4 @@
-import { memo } from "react"
+﻿import { memo } from "react"
 import { useTranslation } from "react-i18next"
 import { Flex, Form, Switch } from "antd"
 import { useStyles } from "../../styles"
@@ -26,3 +26,8 @@ export const SendCommand = memo(
 		)
 	},
 )
+
+
+
+
+

@@ -96,7 +96,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 当不在收集命令状态时，process command flag
+		// when not in command collection state, process command flag
 		if (hasCommands) {
 			displayContent = processCommandMarkers(displayContent, false)
 		}
@@ -120,7 +120,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 如果消息有内容但仍在加载中，不显示loading状态，只显示内容
+		// if message has content but still loading, do not show loading state, only show content
 		if (displayContent && status === "loading") {
 			return (
 				<div className={styles.messageContentWrapper}>
@@ -130,7 +130,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 如果有命令状态，使用CommandStatusDisplay组件显示
+		// if command status exists, use CommandStatusDisplay component to display
 		if (commandStatus && commandStatus.length > 0) {
 			return (
 				<>
@@ -140,7 +140,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 正常消息内容或空内容
+		// normal message content or empty content
 		return (
 			<div className={styles.messageContentWrapper}>
 				{displayContent ? <DelightfulMarkdown content={displayContent} /> : null}
@@ -149,7 +149,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		)
 	}
 
-	// 根据消息角色使用不同的布局和样式
+	// use different layout and styles based on message role
 	if (role === "user") {
 		return (
 			<div className={styles.userMessageItem}>
@@ -161,7 +161,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		)
 	}
 
-	// 助理消息
+	// assistant message
 	return (
 		<div className={styles.assistantMessageItem}>
 			<div className={styles.assistantMessageRow}>
@@ -180,7 +180,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 						icon={<ReloadOutlined />}
 						className={styles.retryButton}
 						onClick={() => onRetry?.(id)}
-						title="重试"
+						title="retry"
 					/>
 				)}
 			</div>

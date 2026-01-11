@@ -266,7 +266,7 @@ export default function useTestFunctions({
 				if (!line.startsWith("data:")) return // 使用return代替continue
 
 				try {
-					// 提取data:后的JSON字符串
+					// 提取data:后的JSON string
 					const jsonStr = line.substring(5)
 					// 尝试解析JSON
 					const data = JSON.parse(jsonStr)
@@ -490,7 +490,7 @@ export default function useTestFunctions({
 					console.log(`块 ${Math.floor(i / safeChunkSize)} Contains特殊字符: ${charCodes}`)
 				}
 
-				// 使用最严格的JSON字符串编码
+				// 使用最严格的JSON string编码
 				const escapedContent = JSON.stringify(chunk)
 
 				// 确保JSON格式完全正确

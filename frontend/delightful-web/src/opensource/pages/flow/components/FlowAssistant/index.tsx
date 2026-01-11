@@ -75,7 +75,7 @@ const parseSSELine = (line: string): { text: string; commands: any[] } => {
 	// 检查Whether是SSE格式数据行
 	if (line.startsWith("data:") && line.length > 5) {
 		try {
-			// 提取JSON字符串
+			// 提取JSON string
 			const jsonStr = line.substring(5).trim()
 			const data = JSON.parse(jsonStr)
 
@@ -559,7 +559,7 @@ export default function FlowAssistant({
 		// 检查Whether有确认Operation命令
 		for (const command of commands) {
 			if (command.type === "confirmOperation") {
-				console.log("发现确认Operation命令:", command)
+				console.log("found confirmation operation command:", command)
 				handleConfirmOperationCommand(command, processingMessageId)
 				return // 如果找到确认Operation命令，不添加到普通命令队列
 			}

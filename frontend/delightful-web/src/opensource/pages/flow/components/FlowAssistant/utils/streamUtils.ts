@@ -1,9 +1,9 @@
 ﻿/**
- * 流Process相关的工具函数
+ * Stream processing related utility functions
  */
 
 /**
- * 提取SSE数据行中的内容
+ * Extract content from SSE data line
  * 格式如: data:{"id":"xyz","event":"message","message":{"role":"assistant","content":"内容"}}
  */
 export const extractContent = (

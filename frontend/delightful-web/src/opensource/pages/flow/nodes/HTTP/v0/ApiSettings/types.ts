@@ -1,7 +1,7 @@
 ﻿import type { HTTP } from "@/types/flow"
 import type { ExpressionSource } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 
-/** 参数配置的tab栏类型 */
+/** Parameter configuration tab bar type */
 export enum ArgsTabType {
 	Query = "1",
 	Body = "2",
@@ -16,9 +16,9 @@ export interface ApiSettingsProps {
 }
 
 export interface ApiSettingsInstance {
-	// Get接口组件内部的值
+	// Get the internal value of the API component
 	getValue: () => HTTP.Api
-	// Set接口组件内部的值
+	// Set the internal value of the API component
 	setValue(changePath: string[], val: any, activeKey?: ArgsTabType): void
 }
 

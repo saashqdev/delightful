@@ -41,7 +41,7 @@ export default function useKnowledgeDatabases() {
 		total: 0,
 	})
 
-	// Get已启用的用户自建知识库选项，支持分页
+	// Get enabled user-created knowledge base options with pagination support
 	const getUserDatabaseOptions = useMemoizedFn(async (page = 1, pageSize = 10) => {
 		const response = await KnowledgeApi.getKnowledgeList({
 			type: knowledgeType.UserKnowledgeDatabase,
@@ -57,21 +57,21 @@ export default function useKnowledgeDatabases() {
 	// User-created knowledge base (vector database)
 	const [userDatabaseOptions, setUserDatabaseOptions] = useState<any[]>([])
 
-	// 监听滚动加载更多
+	// Listen for scroll to load more
 	const userDatabasePopupScroll = useMemoizedFn((e: any) => {
-		// Get滚动容器
+		// Get scroll container
 		const target = e.target
 
 		// Detect if scrolled to bottom (with tolerance)
 		const isBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 20
 
-		// 如果滚动到底部且有更多数据可加载且当前不在加载中
+		// If scrolled to bottom and has more data to load and not currently loading
 		if (isBottom && userDbPagination.hasMore && !userDbPagination.loading) {
 			loadMoreUserDatabases()
 		}
 	})
 
-	// 加载更多用户自建知识库
+	// Load more用户自建知识库
 	const loadMoreUserDatabases = useMemoizedFn(async () => {
 		// Set加载状态
 		setUserDbPagination((prev) => ({
@@ -175,4 +175,5 @@ export default function useKnowledgeDatabases() {
 		userDatabasePopupScroll,
 	}
 }
+
 

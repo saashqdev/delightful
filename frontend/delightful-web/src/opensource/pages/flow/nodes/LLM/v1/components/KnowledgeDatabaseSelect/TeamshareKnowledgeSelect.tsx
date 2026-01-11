@@ -72,7 +72,7 @@ export default function TeamshareKnowledgeSelectV1({
 		await KnowledgeApi.createTeamshareKnowledgeVector({
 			knowledge_id: businessId,
 		})
-		// 需要等待创建完，在开启进度监听
+		// Need to wait for creation to complete before opening progress listening
 		initInterval()
 	})
 
@@ -164,7 +164,7 @@ export default function TeamshareKnowledgeSelectV1({
 				const response = await KnowledgeApi.getTeamshareKnowledgeProgress({
 					knowledge_codes: [selected?.knowledge_code ?? ""],
 				})
-				// 下一次渲染再调用，避免请求数据是旧的
+				// Call in next render to avoid using stale request data
 				setTimeout(() => {
 					initInterval()
 				}, 0)

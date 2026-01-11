@@ -48,7 +48,7 @@ export default function useProgress({ knowledgeListName }: UseProgressProps) {
 			})
 			if (progressListResult.list.length > 0) {
 				setProgressList(progressListResult.list)
-				// 如果没有正在进行中的progress，则停止
+				// If no progress is in progress, stop
 				if (checkIsAllProgressDone(progressListResult.list)) {
 					clearProgressInterval()
 				}
@@ -58,7 +58,7 @@ export default function useProgress({ knowledgeListName }: UseProgressProps) {
 
 	const initInterval = useMemoizedFn(() => {
 		searchProgress()
-		// Set3秒的定时器
+		// Set 3 second timer
 		intervalId.current = setInterval(searchProgress, 3000)
 		return intervalId.current
 	})

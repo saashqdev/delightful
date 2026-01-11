@@ -1,7 +1,7 @@
-import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/DelightfulFlow/types/flow"
 import type { FlowDraft, LLMModalOption, UseableToolSet, Flow } from "@/types/flow"
 import type { Knowledge } from "@/types/knowledge"
-import type { DataSourceOption } from "@delightful/delightful-flow/common/BaseUI/DropdownRenderer/Reference"
+import type { DataSourceOption } from "@bedelightful/delightful-flow/common/BaseUI/DropdownRenderer/Reference"
 import type { useFlowStore } from "."
 
 export interface FlowState {

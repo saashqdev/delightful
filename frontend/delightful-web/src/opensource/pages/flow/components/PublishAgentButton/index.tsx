@@ -4,7 +4,7 @@ import type { Bot } from "@/types/bot"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import PublishAgent from "@/opensource/pages/explore/components/PublishAgent"
 import type { MutableRefObject } from "react"
-import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
+import type { DelightfulFlowInstance } from "@bedelightful/delightful-flow/dist/DelightfulFlow"
 
 type PublishAgentButtonProps = {
 	agent: Bot.Detail

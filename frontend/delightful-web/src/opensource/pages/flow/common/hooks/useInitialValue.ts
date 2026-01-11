@@ -1,6 +1,6 @@
-﻿import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+﻿import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemo } from "react"
-import { getNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import { getNodeVersion } from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils"
 import { get } from "lodash-es"
 import type { customNodeType } from "../../constants"
 import { nodeComponentVersionMap } from "../../nodes"

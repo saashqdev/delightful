@@ -11,7 +11,7 @@
 	registerNodeGroups,
 	registerLoopStartConfig,
 	registerMaterialNodeTypeMap,
-} from "@delightful/delightful-flow/dist/DelightfulFlow/register/node"
+} from "@bedelightful/delightful-flow/dist/DelightfulFlow/register/node"
 import {
 	IconAlignBoxLeftMiddle,
 	IconDatabase,
@@ -21,7 +21,7 @@ import {
 	IconVocabulary,
 } from "@tabler/icons-react"
 import i18next from "i18next"
-import { TabObject } from "@delightful/delightful-flow/dist/DelightfulFlow/components/FlowMaterialPanel/constants"
+import { TabObject } from "@bedelightful/delightful-flow/dist/DelightfulFlow/components/FlowMaterialPanel/constants"
 import { customNodeType } from "../constants"
 import { generateNodeVersionSchema } from "./version"
 import { BaseFlowProps } from ".."

@@ -1,6 +1,6 @@
 import { genRequestUrl } from "@/utils/http"
 import { RequestUrl } from "../constant"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type {
 	ApiKey,
 	ApiKeyRequestParams,
@@ -21,7 +21,7 @@ import type {
 import { FlowType } from "@/types/flow"
 import type { File, Sheet } from "@/types/sheet"
 import type { Knowledge } from "@/types/knowledge"
-import type { MethodOption } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { MethodOption } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import type { HttpClient } from "../core/HttpClient"
 
 export const generateFlowApi = (fetch: HttpClient) => ({

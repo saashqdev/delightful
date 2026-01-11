@@ -1,8 +1,8 @@
 ﻿import { Form } from "antd"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
-import type { InputExpressionProps } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
-import type { WidgetExpressionValue } from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
-import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import { ExpressionMode } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
+import type { InputExpressionProps } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { WidgetExpressionValue } from "@bedelightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import DelightfulExpressionWrap from "@bedelightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
 import { cx } from "antd-style"
 import styles from "./index.module.less"
 

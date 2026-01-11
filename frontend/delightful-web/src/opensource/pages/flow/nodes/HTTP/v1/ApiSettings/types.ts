@@ -1,5 +1,5 @@
 ﻿import type { HTTP } from "@/types/flow"
-import type { ExpressionSource } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { ExpressionSource } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 
 /** Parameter configuration tab type */
 export enum ArgsTabType {

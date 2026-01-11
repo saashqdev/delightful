@@ -4,7 +4,7 @@ import type {
 	InsertLocationMap,
 	StatusIconKey,
 } from "@/opensource/pages/flow/components/QuickInstructionButton/const"
-import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/DelightfulFlow/types/flow"
 
 export interface WithPage<ListType> {
 	page: number

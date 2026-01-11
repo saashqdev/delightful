@@ -7,7 +7,7 @@ import DelightfulEllipseWithTooltip from "@/opensource/components/base/Delightfu
 import { IconCircleCheckFilled, IconCopy, IconPointFilled } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import { env } from "@/utils/env"
-import { copyToClipboard } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import { copyToClipboard } from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
 import { ThirdPartyPlatformType } from "@/types/bot"

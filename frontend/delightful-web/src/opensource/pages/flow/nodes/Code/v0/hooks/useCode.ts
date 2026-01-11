@@ -2,7 +2,7 @@
  * Code Block related states and methods
  */
 
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn } from "ahooks"
 import { cloneDeep, set } from "lodash-es"
 import type { FormInstance } from "antd"

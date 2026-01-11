@@ -4,7 +4,7 @@
  * Provides functionality for handling Flow operations
  */
 
-import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
+import type { DelightfulFlowInstance } from "@bedelightful/delightful-flow/dist/DelightfulFlow"
 
 /**
  * Add node

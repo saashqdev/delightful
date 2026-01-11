@@ -2,7 +2,7 @@ import { genRequestUrl } from "@/utils/http"
 import { RequestUrl } from "../constant"
 import type { GlobalSearch } from "@/types/search"
 import type { WithPage } from "@/types/flow"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type { HttpClient } from "../core/HttpClient"
 
 export const generateSearchApi = (fetch: HttpClient) => ({

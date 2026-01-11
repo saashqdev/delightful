@@ -6,7 +6,7 @@ import AddOrUpdateAgent from "@/opensource/pages/explore/components/AddOrUpdateA
 import type { Bot } from "@/types/bot"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useMemo } from "react"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 
 type EditAgentModalProps = {
 	agent: Bot.Detail

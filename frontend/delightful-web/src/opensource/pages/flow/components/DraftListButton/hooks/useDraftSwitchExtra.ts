@@ -4,7 +4,7 @@
 
 import { getCurrentDateTimeString } from "@/opensource/pages/flow/utils/helpers"
 import type { FlowDraft } from "@/types/flow"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemoizedFn } from "ahooks"
 import { FlowApi } from "@/apis"
 

@@ -1,6 +1,6 @@
 ﻿import { cx } from "antd-style"
 import { IconSelector } from "@tabler/icons-react"
-import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@bedelightful/delightful-flow/dist/common/BaseUI/Select"
 import { Form } from "antd"
 import styles from "./index.module.less"
 import { LanguageOptions } from "./constants"

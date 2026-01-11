@@ -1,16 +1,16 @@
-﻿import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
+﻿import DropdownCard from "@bedelightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { useState } from "react"
 import type { HTTP } from "@/types/flow"
 import { useUpdateEffect } from "ahooks"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import {
 	useFlow,
 	useNodeConfigActions,
-} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+} from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import { omit, cloneDeep, set } from "lodash-es"
-import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
-import DelightfulJsonSchemaEditor from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
-import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import { ShowColumns } from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import DelightfulJsonSchemaEditor from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
+import type Schema from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { useTranslation } from "react-i18next"
 import usePrevious from "../../../common/hooks/usePrevious"
 import ApiSettings from "./ApiSettings"

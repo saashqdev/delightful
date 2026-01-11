@@ -3,8 +3,8 @@
  */
 
 import { useMemoizedFn } from "ahooks"
-import type { EXPRESSION_VALUE } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
-import { LabelTypeMap } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { EXPRESSION_VALUE } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import { LabelTypeMap } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import AuthManagerModal from "@/opensource/pages/flow/components/AuthControlButton/AuthManagerModal/AuthManagerModal"
 import type { DepartmentExtraData } from "@/opensource/pages/flow/components/AuthControlButton/AuthManagerModal/types"
 import { ManagerModalType } from "@/opensource/pages/flow/components/AuthControlButton/AuthManagerModal/types"

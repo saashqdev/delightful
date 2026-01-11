@@ -1,6 +1,6 @@
 ﻿import type { FormInstance } from "antd"
-import { useFlowData } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useFlowData } from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useUpdateEffect } from "ahooks"
 
 type UseCurrentNodeUpdateProps = {

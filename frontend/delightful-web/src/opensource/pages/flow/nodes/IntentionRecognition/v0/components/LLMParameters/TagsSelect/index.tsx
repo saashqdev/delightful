@@ -1,5 +1,5 @@
 ﻿import type { SelectProps } from "antd/lib/select"
-import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@bedelightful/delightful-flow/dist/common/BaseUI/Select"
 import type React from "react"
 import { useState } from "react"
 

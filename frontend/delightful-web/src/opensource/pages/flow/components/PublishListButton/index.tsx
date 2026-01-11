@@ -1,7 +1,7 @@
 ﻿import { Drawer, message, Modal, Timeline } from "antd"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useFlowStore } from "@/opensource/stores/flow"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { IconArchive } from "@tabler/icons-react"
 import EmptyIcon from "@/assets/logos/empty.svg"
 import { cx } from "antd-style"

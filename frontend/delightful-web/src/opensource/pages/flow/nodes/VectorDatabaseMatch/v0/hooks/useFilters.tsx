@@ -3,7 +3,7 @@
  */
 
 import { Flex, Form } from "antd"
-import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@bedelightful/delightful-flow/dist/common/BaseUI/Select"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "../VectorDatabaseMatch.module.less"

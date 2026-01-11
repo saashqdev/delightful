@@ -1,4 +1,4 @@
-import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/DelightfulFlow/types/flow"
 import type {
 	ApiKeyRequestParams,
 	FlowDraft,

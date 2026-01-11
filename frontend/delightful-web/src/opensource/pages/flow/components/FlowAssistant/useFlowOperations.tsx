@@ -2,10 +2,10 @@
 import { message as antdMessage } from "antd"
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
-import { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { set } from "lodash-es"
 import { FlowApi } from "@/apis"
-import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import { getLatestNodeVersion } from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils"
 
 interface UseFlowOperationsProps {
 	flowInteractionRef: React.MutableRefObject<any>

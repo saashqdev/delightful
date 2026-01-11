@@ -1,10 +1,10 @@
 import type { WidgetValue } from "@/opensource/pages/flow/common/Output"
 import type { LLMLabelTagType } from "@/opensource/pages/flow/nodes/LLM/v0/components/LLMSelect/LLMLabel"
 import type { TriggerType } from "@/opensource/pages/flow/nodes/Start/v0/constants"
-import type { Expression } from "@delightful/delightful-flow/DelightfulConditionEdit/types/expression"
-import type { NodeTestingCtx } from "@delightful/delightful-flow/DelightfulFlow/context/NodeTesingContext/Context"
-import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
-import type Schema from "@delightful/delightful-flow/DelightfulJsonSchemaEditor/types/Schema"
+import type { Expression } from "@bedelightful/delightful-flow/DelightfulConditionEdit/types/expression"
+import type { NodeTestingCtx } from "@bedelightful/delightful-flow/DelightfulFlow/context/NodeTesingContext/Context"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/DelightfulFlow/types/flow"
+import type Schema from "@bedelightful/delightful-flow/DelightfulJsonSchemaEditor/types/Schema"
 import type { Dayjs } from "dayjs"
 
 /** Flow type */

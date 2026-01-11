@@ -1,4 +1,4 @@
-﻿import type { WidgetValue } from "@delightful/delightful-flow/dist/DelightfulFlow/examples/BaseFlow/common/Output"
+﻿import type { WidgetValue } from "@bedelightful/delightful-flow/dist/DelightfulFlow/examples/BaseFlow/common/Output"
 
 export enum BranchType {
 	If = "if",

@@ -3,7 +3,7 @@
  */
 import { useFlowStore } from "@/opensource/stores/flow"
 import type { Bot } from "@/types/bot"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemoizedFn, useMount, useUpdateEffect } from "ahooks"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"

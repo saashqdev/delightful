@@ -1,4 +1,4 @@
-﻿import { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
+﻿import { DelightfulFlowInstance } from "@bedelightful/delightful-flow/dist/DelightfulFlow"
 import React, { createContext, useContext, MutableRefObject, useMemo } from "react"
 
 interface FlowInstanceContextProps {

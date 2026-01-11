@@ -3,7 +3,7 @@ import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { replaceRouteParams } from "@/utils/route"
 import { Form, Tooltip } from "antd"
-import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import DelightfulExpressionWrap from "@bedelightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
 import { IconWindowMaximize } from "@tabler/icons-react"
 import { useMemo } from "react"
 import {

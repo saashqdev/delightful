@@ -2,10 +2,10 @@
 import { useMemoizedFn } from "ahooks"
 import { cloneDeep, castArray, set } from "lodash-es"
 import { ComponentTypes } from "@/types/flow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { defaultExpressionValue } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { defaultExpressionValue } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import type { Knowledge } from "@/types/knowledge"
-import { LabelTypeMap } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import { LabelTypeMap } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { genDefaultComponent, generateSnowFlake } from "@/opensource/pages/flow/utils/helpers"
 import { useTranslation } from "react-i18next"
 

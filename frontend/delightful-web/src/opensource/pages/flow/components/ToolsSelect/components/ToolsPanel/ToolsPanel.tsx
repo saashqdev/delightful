@@ -1,7 +1,7 @@
 ﻿import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { Avatar, Checkbox, Flex, Select, Spin } from "antd"
 import { IconChevronDown } from "@tabler/icons-react"
-import SearchInput from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/SearchInput"
+import SearchInput from "@bedelightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/SearchInput"
 import ToolsEmptyImage from "@/assets/logos/empty-tools.svg"
 import { useTranslation } from "react-i18next"
 import type { ToolSelectedItem } from "../../types"

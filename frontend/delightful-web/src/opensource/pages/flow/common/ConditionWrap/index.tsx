@@ -7,8 +7,8 @@
     }
  */
 
-import DelightfulConditionEdit from "@delightful/delightful-flow/dist/DelightfulConditionEdit"
-import type { Expression } from "@delightful/delightful-flow/dist/DelightfulConditionEdit/types/expression"
+import DelightfulConditionEdit from "@bedelightful/delightful-flow/dist/DelightfulConditionEdit"
+import type { Expression } from "@bedelightful/delightful-flow/dist/DelightfulConditionEdit/types/expression"
 import { useMemoizedFn } from "ahooks"
 import { useMemo } from "react"
 

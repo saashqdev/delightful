@@ -1,4 +1,4 @@
-﻿import type { NodeSchema, NodeWidget } from "@delightful/delightful-flow/dist/DelightfulFlow"
+﻿import type { NodeSchema, NodeWidget } from "@bedelightful/delightful-flow/dist/DelightfulFlow"
 import {
 	IconArrowLeftFromArc,
 	IconArrowBounce,

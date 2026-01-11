@@ -1,9 +1,9 @@
-﻿import { copyToClipboard } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+﻿import { copyToClipboard } from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils"
 import {
 	SchemaValueSplitor,
 	getFormTypeToTitle,
-} from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
-import Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+} from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import Schema from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { Tooltip, message } from "antd"
 import { IconCaretDownFilled, IconCaretRightFilled } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"

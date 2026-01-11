@@ -1,6 +1,6 @@
-﻿import { getNodeVersion, schemaToDataSource } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
-import type { NodeVersionMap } from "@delightful/delightful-flow/dist/common/context/NodeMap/Context"
+﻿import { getNodeVersion, schemaToDataSource } from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { NodeVersionMap } from "@bedelightful/delightful-flow/dist/common/context/NodeMap/Context"
 import { customNodeType } from "../../constants"
 
 /** Generate data source for special referenceable items within loop body */

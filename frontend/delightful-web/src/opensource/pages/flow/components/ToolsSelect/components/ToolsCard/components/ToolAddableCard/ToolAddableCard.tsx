@@ -4,7 +4,7 @@ import { ComponentTypes, FlowRouteType, type UseableToolSet } from "@/types/flow
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconHelp, IconPlus, IconWindowMaximize } from "@tabler/icons-react"
 import DefaultToolIcon from "@/assets/logos/tool-avatar.png"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { replaceRouteParams } from "@/utils/route"
 import { RoutePath } from "@/const/routes"
 import { genDefaultComponent } from "@/opensource/pages/flow/utils/helpers"

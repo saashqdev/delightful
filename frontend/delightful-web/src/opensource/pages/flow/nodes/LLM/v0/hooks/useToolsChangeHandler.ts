@@ -1,6 +1,6 @@
 ﻿import type { ToolSelectedItem } from "@/opensource/pages/flow/components/ToolsSelect/types"
-import { useFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn } from "ahooks"
 import { set, map, merge } from "lodash-es"
 

@@ -2,7 +2,7 @@
 import { isEmpty, set, cloneDeep } from "lodash-es"
 import { forwardRef, useImperativeHandle, useMemo, useState } from "react"
 import { nanoid } from "nanoid"
-import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import type Schema from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import type { Widget } from "@/types/flow"
 import ArgsSettings from "./ArgsSettings"
 import PostAddrSettings from "./PostAddrSettings"

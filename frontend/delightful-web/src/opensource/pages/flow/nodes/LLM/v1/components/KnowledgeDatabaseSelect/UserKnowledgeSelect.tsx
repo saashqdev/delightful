@@ -2,7 +2,7 @@
 import type { Knowledge } from "@/types/knowledge"
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
-import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@bedelightful/delightful-flow/dist/common/BaseUI/Select"
 
 interface UserKnowledgeSelectProps {
 	value?: Knowledge.KnowledgeDatabaseItem

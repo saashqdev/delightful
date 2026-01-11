@@ -9,10 +9,10 @@ import { useEffect, useMemo, useState } from "react"
 import type { FormInstance } from "antd"
 import { Form } from "antd"
 import { getComponent } from "@/opensource/pages/flow/utils/helpers"
-import type { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { FormItemType } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { FlowType } from "@/types/flow"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
-import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlowInstance } from "@bedelightful/delightful-flow/dist/DelightfulFlow"
 import { transformSchemaToDynamicFormItem } from "../helpers"
 
 export type DynamicFormItem = {

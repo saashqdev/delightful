@@ -1,7 +1,7 @@
 ﻿import type { FlowDraft } from "@/types/flow"
 import { Flex, Tooltip } from "antd"
 import EmptyIcon from "@/assets/logos/empty.svg"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemo } from "react"
 import { cx } from "antd-style"
 import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"

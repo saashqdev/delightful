@@ -1,7 +1,7 @@
 ﻿import type { User } from "@/types/user"
 import dayjs from "dayjs"
 import { nanoid } from "nanoid"
-import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import type Schema from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
 import { TriggerType } from "../../nodes/Start/v0/constants"
 import type { DynamicFormItem } from "./hooks/useArguments"

@@ -1,5 +1,5 @@
-﻿import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
-import type { MaterialGroup } from "@delightful/delightful-flow/dist/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
+﻿import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { MaterialGroup } from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import { useEffect, useMemo, useState } from "react"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { cloneDeep } from "lodash-es"

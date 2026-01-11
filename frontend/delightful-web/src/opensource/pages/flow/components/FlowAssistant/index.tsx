@@ -19,7 +19,7 @@ import useFlowOperations from "./useFlowOperations"
 import useTestFunctions from "./useTestFunctions"
 import { useConfirmOperations } from "./hooks/useConfirmOperations"
 import { useSendAgentMessage } from "./hooks/useSendAgentMessage"
-import { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { FlowApi } from "@/apis"
 
 function generateMD5(input: string): string {

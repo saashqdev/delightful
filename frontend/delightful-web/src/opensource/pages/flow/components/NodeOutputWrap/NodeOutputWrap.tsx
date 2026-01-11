@@ -1,5 +1,5 @@
-﻿import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+﻿import DropdownCard from "@bedelightful/delightful-flow/dist/common/BaseUI/DropdownCard"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import JSONSchemaRenderer from "@/opensource/pages/flow/components/JSONSchemaRenderer"
 import { cx } from "antd-style"
 import { useTranslation } from "react-i18next"

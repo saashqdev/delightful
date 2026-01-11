@@ -7,8 +7,8 @@
 import yaml from "js-yaml"
 import { v4 as uuidv4 } from "uuid"
 import { customNodeType } from "../constants"
-import { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
-import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import { getLatestNodeVersion } from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils"
 
 interface Position {
 	x: number

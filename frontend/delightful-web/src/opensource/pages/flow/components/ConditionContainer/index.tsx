@@ -3,7 +3,7 @@ import { cloneDeep } from "lodash-es"
 import { useMemoizedFn, useMount, useUpdateEffect } from "ahooks"
 import { Form } from "antd"
 import { useTranslation } from "react-i18next"
-import TSIcon from "@delightful/delightful-flow/dist/common/BaseUI/TSIcon"
+import TSIcon from "@bedelightful/delightful-flow/dist/common/BaseUI/TSIcon"
 
 import type { ConditionContainerProps } from "./types"
 import "./index.less"

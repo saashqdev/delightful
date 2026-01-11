@@ -1,7 +1,7 @@
 ﻿import KeyManagerButton from "@/opensource/pages/flow/components/KeyManager/KeyManagerButton"
 import { Button, Flex } from "antd"
 import { useBoolean } from "ahooks"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { createStyles, cx } from "antd-style"
 import type { Knowledge } from "@/types/knowledge"
 

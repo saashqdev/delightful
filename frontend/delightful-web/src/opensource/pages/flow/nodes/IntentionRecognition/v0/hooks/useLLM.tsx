@@ -1,7 +1,7 @@
 ﻿import type { FormInstance } from "antd"
 import { useMemoizedFn, useMount } from "ahooks"
 import { useMemo, useState } from "react"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import useSWRImmutable from "swr/immutable"
 import { RequestUrl } from "@/opensource/apis/constant"
 import { cloneDeep } from "lodash-es"

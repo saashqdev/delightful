@@ -2,7 +2,7 @@
  * Agent rights related
  */
 import { useMemo } from "react"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type { Bot } from "@/types/bot"
 import { ScopeType } from "@/types/bot"
 import { hasAdminRight, hasEditRight } from "../components/AuthControlButton/types"

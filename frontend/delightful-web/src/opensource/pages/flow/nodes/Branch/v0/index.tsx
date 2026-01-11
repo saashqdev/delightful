@@ -1,14 +1,14 @@
 ﻿import React, { useEffect, useMemo, useState } from "react"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
-import type { Expression } from "@delightful/delightful-flow/dist/DelightfulConditionEdit/types/expression"
+import type { Expression } from "@bedelightful/delightful-flow/dist/DelightfulConditionEdit/types/expression"
 import { nanoid } from "nanoid"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import type { ConditionInstance } from "@delightful/delightful-flow/dist/DelightfulConditionEdit/index"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import type { ConditionInstance } from "@bedelightful/delightful-flow/dist/DelightfulConditionEdit/index"
 import { set } from "lodash-es"
 import {
 	useFlowEdgesActions,
 	useNodeConfigActions,
-} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+} from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import styles from "./index.module.less"
 import BranchItem from "./components/BranchItem"

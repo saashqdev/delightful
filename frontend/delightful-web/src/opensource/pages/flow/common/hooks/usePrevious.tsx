@@ -7,24 +7,24 @@ import {
 	useFlowData,
 	useFlowEdges,
 	useNodeConfig,
-} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import type { NodeSchema } from "@delightful/delightful-flow/dist/DelightfulFlow/register/node"
-import { nodeManager } from "@delightful/delightful-flow/dist/DelightfulFlow/register/node"
+} from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import type { NodeSchema } from "@bedelightful/delightful-flow/dist/DelightfulFlow/register/node"
+import { nodeManager } from "@bedelightful/delightful-flow/dist/DelightfulFlow/register/node"
 import {
 	schemaToDataSource,
 	judgeIsVariableNode,
 	getNodeVersion,
-} from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
-import { getAllPredecessors } from "@delightful/delightful-flow/dist/DelightfulFlow/utils/reactflowUtils"
-import type { DataSourceOption } from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Reference"
+} from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils"
+import { getAllPredecessors } from "@bedelightful/delightful-flow/dist/DelightfulFlow/utils/reactflowUtils"
+import type { DataSourceOption } from "@bedelightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Reference"
 import { useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
-import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
-import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
-import { useNodeMap } from "@delightful/delightful-flow/dist/common/context/NodeMap/useResize"
+import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type Schema from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import { useNodeMap } from "@bedelightful/delightful-flow/dist/common/context/NodeMap/useResize"
 import { useFlowStore } from "@/opensource/stores/flow"
-import { DefaultNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/constants"
+import { DefaultNodeVersion } from "@bedelightful/delightful-flow/dist/DelightfulFlow/constants"
 import { useBotStore } from "@/opensource/stores/bot"
 import { InstructionType } from "@/types/bot"
 import { useTranslation } from "react-i18next"

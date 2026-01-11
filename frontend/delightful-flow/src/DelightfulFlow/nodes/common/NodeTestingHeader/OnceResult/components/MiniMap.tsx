@@ -5,7 +5,7 @@ import styles from "../../index.module.less"
 import { TestingResultRow } from "../../useTesting"
 import { isComplexValue } from "../utils"
 
-// 小地图导航组件
+// Mini-map navigation component
 export const MiniMap = ({
 	contentRef,
 	inputList,
@@ -22,20 +22,20 @@ export const MiniMap = ({
 	testingResult?: NodeTestConfig
 }) => {
 	const [scrollPosition, setScrollPosition] = useState(0)
-	const [visibleRatio, setVisibleRatio] = useState(0.3) // 可视区域占整体内容的比例
+	const [visibleRatio, setVisibleRatio] = useState(0.3) // Ratio of visible area to total content
 	const [isDragging, setIsDragging] = useState(false)
 	const [isHovered, setIsHovered] = useState(false)
 	const [itemPositions, setItemPositions] = useState<{ [key: string]: number }>({})
 	const miniMapRef = useRef<HTMLDivElement>(null)
 
-	// 计算每个项目在滚动容器中的相对位置
+	// Calculate relative position of each item in scroll container
 	useEffect(() => {
 		const content = contentRef.current
 		if (!content) return
 
-		// 等待内容渲染完成
+		// Wait for content rendering to complete
 		setTimeout(() => {
-			// 获取滚动容器中每个项的位置信息
+			// Get position information for each item in scroll container
 			const items = content.querySelectorAll("[data-item-key]")
 			const contentHeight = content.scrollHeight
 			const positions: { [key: string]: number } = {}
@@ -43,7 +43,7 @@ export const MiniMap = ({
 			items.forEach((item) => {
 				const key = item.getAttribute("data-item-key")
 				if (key) {
-					// 计算项目顶部相对于容器总高度的百分比位置
+				// Calculate item top position as percentage of total container height
 					const rect = item.getBoundingClientRect()
 					const contentRect = content.getBoundingClientRect()
 					const offsetTop = rect.top - contentRect.top + content.scrollTop
@@ -55,7 +55,7 @@ export const MiniMap = ({
 		}, 50)
 	}, [contentRef, inputList, outputList, debugLogs])
 
-	// 监听滚动事件，更新小地图上的指示器位置
+	// Listen to scroll event, update indicator position on mini-map
 	useEffect(() => {
 		const content = contentRef.current
 		if (!content) return
@@ -63,14 +63,14 @@ export const MiniMap = ({
 		const handleScroll = () => {
 			const { scrollTop, scrollHeight, clientHeight } = content
 			const ratio = clientHeight / scrollHeight
-			// 修正：使用精确的百分比位置，而不是依赖滚动条位置
+			// Fix: Use precise percentage position instead of relying on scrollbar position
 			const position = scrollTop / scrollHeight
 
 			setScrollPosition(position)
 			setVisibleRatio(ratio)
 		}
 
-		// 初始计算
+		// Initial calculation
 		handleScroll()
 
 		content.addEventListener("scroll", handleScroll)
@@ -79,16 +79,16 @@ export const MiniMap = ({
 		}
 	}, [contentRef])
 
-	// 处理小地图上的点击和拖动
+	// Handle clicks and drags on mini-map
 	const handleMiniMapInteraction = (e: React.MouseEvent | React.TouchEvent) => {
 		const miniMap = miniMapRef.current
 		const content = contentRef.current
 		if (!miniMap || !content) return
 
-		// 获取鼠标/触摸在小地图上的位置
+		// Get mouse/touch position on mini-map
 		let clientY = 0
 		if ("clientY" in e) {
-			clientY = e.clientY // 鼠标事件
+			clientY = e.clientY // Mouse event
 		} else {
 			clientY = e.touches[0].clientY // 触摸事件
 		}
@@ -96,11 +96,11 @@ export const MiniMap = ({
 		const { top, height } = miniMap.getBoundingClientRect()
 		const relativePosition = (clientY - top) / height
 
-		// 修正：直接设置到内容的对应百分比位置
+		// Fix: Directly set to corresponding percentage position in content
 		content.scrollTop = relativePosition * content.scrollHeight
 	}
 
-	// 跳转到指定键的位置
+	// Jump to specified key position
 	const jumpToKey = (key: string) => {
 		const content = contentRef.current
 		if (!content || !itemPositions[key]) return
@@ -114,7 +114,7 @@ export const MiniMap = ({
 		setIsDragging(true)
 		handleMiniMapInteraction(e)
 
-		// 防止文本选择
+		// Prevent text selection
 		e.preventDefault()
 	}
 
@@ -128,7 +128,7 @@ export const MiniMap = ({
 		setIsDragging(false)
 	}
 
-	// 在组件挂载时添加全局事件监听
+	// Add global event listeners on component mount
 	useEffect(() => {
 		if (isDragging) {
 			document.addEventListener("mousemove", handleMouseMove as any)
@@ -141,12 +141,12 @@ export const MiniMap = ({
 		}
 	}, [isDragging])
 
-	// 渲染数据项，突出显示复杂结构
+	// Render data items, highlight complex structures
 	const renderItems = (items: TestingResultRow[], isError: boolean = false, section: string) => {
 		return items?.map?.((item, index) => {
 			const isComplex = isComplexValue(item.value)
 			const itemKey = `${section}-${item.key}-${index}`
-			// 计算相对位置
+			// Calculate relative position
 			const position = itemPositions[itemKey] || 0
 
 			return (
@@ -185,14 +185,14 @@ export const MiniMap = ({
 		})
 	}
 
-	// 创建内容的缩略预览元素
+	// Create content thumbnail preview elements
 	const renderMiniContent = () => {
-		// 计算每个部分的项目数量
+		// Calculate item count for each section
 		const inputCount = inputList?.length || 0
 		const outputCount = outputList?.length || 0
 		const debugCount = debugLogs?.length || 0
 
-		// 计算每个部分应占的高度比例
+		// Calculate height ratio for each section
 		const totalItems = inputCount + outputCount + debugCount
 		const inputRatio = totalItems > 0 ? inputCount / totalItems : 0
 		const outputRatio = totalItems > 0 ? outputCount / totalItems : 0
@@ -200,19 +200,19 @@ export const MiniMap = ({
 
 		return (
 			<div className={styles.miniMapContent}>
-				{/* 输入部分的缩略图，不显示标题 */}
+				{/* Input section thumbnail, no title displayed */}
 				<div className={styles.miniSection} style={{ height: `${inputRatio * 100}%` }}>
 					<div className={styles.miniItems}>{renderItems(inputList, false, "input")}</div>
 				</div>
 
-				{/* 输出部分的缩略图，不显示标题 */}
+				{/* Output section thumbnail, no title displayed */}
 				<div className={styles.miniSection} style={{ height: `${outputRatio * 100}%` }}>
 					<div className={styles.miniItems}>
 						{renderItems(outputList, !testingResult?.success, "output")}
 					</div>
 				</div>
 
-				{/* 调试日志部分的缩略图，不显示标题 */}
+				{/* Debug log section thumbnail, no title displayed */}
 				{allowDebug && debugLogs && debugLogs.length > 0 && (
 					<div className={styles.miniSection} style={{ height: `${debugRatio * 100}%` }}>
 						<div className={styles.miniItems}>
@@ -235,10 +235,10 @@ export const MiniMap = ({
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
-			{/* 显示内容缩略图 */}
+			{/* Show content thumbnail */}
 			{renderMiniContent()}
 
-			{/* 指示可视区域的指示器 */}
+			{/* Indicator for visible area */}
 			<div
 				className={styles.miniMapIndicator}
 				style={{

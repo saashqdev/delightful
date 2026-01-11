@@ -1,5 +1,5 @@
 ﻿/**
- * delightful-flow节点业务组件
+ * delightful-flow node business component
  */
 import DelightfulFlow, { DelightfulFlowInstance } from "@/DelightfulFlow"
 import { ExtraNodeConfigProvider } from "@/DelightfulFlow/context/ExtraNodeConfigContext/Provider"
@@ -25,24 +25,20 @@ import useToolbar from "./toolbar"
 import { installAllNodes } from "./utils"
 import { generateNodeVersionSchema } from "./utils/version"
 import delightfulFlowEnJson from "@/common/locales/en_US/delightfulFlow.json"
-import delightfulFlowZhJson from "@/common/locales/zh_CN/delightfulFlow.json"
 
 // const { init, instance } = createI18nNext("en_US")
 // init().catch(console.error)
 
-// 确保只初始化一次i18next
+// Ensure i18next is initialized only once
 if (!i18next.isInitialized) {
 	i18next
 		.init({
-			lng: "zh", // 默认语言
+			lng: "zh", // Default language
 			fallbackLng: "en",
 			debug: true,
 			resources: {
 				en: {
 					delightfulFlow: delightfulFlowEnJson,
-				},
-				zh: {
-					delightfulFlow: delightfulFlowZhJson,
 				},
 			},
 			interpolation: {
@@ -57,7 +53,7 @@ if (!i18next.isInitialized) {
 		})
 }
 
-// // 导出i18next实例，让下游组件可以导入使用
+// // Export i18next instance for downstream components to import and use
 // export { i18next }
 
 installAllNodes()
@@ -72,12 +68,12 @@ export default function BaseFlow() {
 
 	const consoleFlow = useMemoizedFn(() => {
 		const flow = flowInstance?.current?.getFlow()
-		console.log("内部流程", flow)
+		console.log("Internal flow", flow)
 	})
 
 	const handleNodeConfigChange = useMemoizedFn(
 		debounce(() => {
-			console.log("节点变更")
+			console.log("Node changed")
 		}, 500),
 	)
 
@@ -93,10 +89,10 @@ export default function BaseFlow() {
 		return (
 			<>
 				<Button loading={false} onClick={consoleFlow}>
-					试运行
+					Trial Run
 				</Button>
 				<Button type="primary" loading={false}>
-					发布
+					Publish
 				</Button>
 				<Button
 					ghost

@@ -4,7 +4,7 @@ import { nodeSchemaMap } from "../constants"
 export const installAllNodes = () => {
 	// registerNotMaterialNodeTypes([customNodeType.Start])
 	/**
-	 * 注册所有节点schema
+	 * Register all node schemas
 	 */
 	// @ts-ignore
 	installNodes(nodeSchemaMap)

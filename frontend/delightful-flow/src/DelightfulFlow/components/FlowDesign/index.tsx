@@ -14,13 +14,13 @@ import useNodeClick from "./hooks/useNodeClick"
 import useTargetToErrorNode from "./hooks/useTargetToErrorNode"
 import { useNodes } from "@/DelightfulFlow/context/NodesContext/useNodes"
 import useFlowCommand from "./hooks/useFlowCommands"
-// 导入新的叶子组件
+// Import new leaf components
 import FlowControls from "./components/sections/FlowControls"
 import FlowSelectionPanel from "./components/sections/FlowSelectionPanel"
 import FlowMiniMap from "./components/sections/FlowMiniMap"
 import ReactFlowComponent from "./components/sections/ReactFlowComponent"
 
-// 为了避免子组件变化导致ReactFlowComponent重新渲染，创建一个稳定的子组件
+// Create a stable child component to avoid ReactFlowComponent re-rendering due to child changes
 const StableFlowChildren = memo(
 	({ showMinMap, controlItemGroups }: { showMinMap: boolean; controlItemGroups: any }) => {
 		return (
@@ -33,14 +33,14 @@ const StableFlowChildren = memo(
 	},
 )
 
-// 使用memo将FlowDesign组件包装起来，避免不必要的渲染
+// Use memo to wrap FlowDesign component to avoid unnecessary re-rendering
 const FlowDesign = memo(function FlowDesign() {
-	// 使用更细粒度的hook替代全量useFlow，减少不必要的重渲染
+	// Use more granular hooks instead of full useFlow to reduce unnecessary re-rendering
 	const { onEdgesChange, onConnect, edges } = useFlowEdges()
 	const { flowInstance } = useFlowUI()
 	const { nodes, onNodesChange } = useNodes()
 
-	// 分辨率小于15% | 全量渲染时，关闭params渲染
+	// When resolution < 15% | full rendering, disable params rendering
 	const [showParamsComp, setShowParamsComp] = useState(true)
 
 	const { onNodeClick, onPanelClick } = useNodeClick()
@@ -99,10 +99,10 @@ const FlowDesign = memo(function FlowDesign() {
 		setShowParamsComp,
 	})
 
-	/** 外部传的参数优先级最高 */
+	/** External params have highest priority */
 	const { onlyRenderVisibleElements: externalOnlyRenderVisibleElements } = useExternalConfig()
 
-	/** 运行错误时，定位到错误节点 */
+	/** Locate to error node when run fails */
 	useTargetToErrorNode()
 
 	useFlowCommand({
@@ -119,7 +119,7 @@ const FlowDesign = memo(function FlowDesign() {
 		onAddItem,
 	})
 
-	// 使用useMemo优化复杂的计算或对象创建
+	// Use useMemo to optimize complex calculations or object creation
 	const visibleElements = useMemo(
 		() => externalOnlyRenderVisibleElements || onlyRenderVisibleElements,
 		[externalOnlyRenderVisibleElements, onlyRenderVisibleElements],

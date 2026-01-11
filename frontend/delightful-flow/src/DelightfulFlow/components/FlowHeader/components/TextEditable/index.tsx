@@ -21,25 +21,25 @@ export default function TextEditable({ title, onChange }: TextEditableProps) {
 	const { t } = useTranslation()
 	const [isEdit, setIsEdit] = useState(false)
 
-	// 实际title以已经设置得为准，没设置则显示Default title
+	// Actual title is based on what's already set, default title displayed if not set
 	const [currentTitle, setCurrentTitle] = useState(title)
 
-	/** Input框的值，默认等于当前的实际标题 */
+	/** Input box value, defaults to current actual title */
 	const [inputTitle, setInputTitle] = useState(currentTitle || "")
 
 	const { header } = useExternal()
 
 	const handleKeyDown = useMemoizedFn((e) => {
-		/** 处理回车事件 */
+		/** Handle enter key event */
 		if ([KEY_CODE_MAP.ENTER].includes(e.keyCode)) {
-			// console.log("确认", e.target.value)
+			// console.log("confirm", e.target.value)
 			setCurrentTitle(e.target.value)
 			setIsEdit(false)
 			if (onChange) onChange(e.target.value)
 		}
 	})
 
-	/** 处理输入框的Blur事件 */
+	/** Handle input blur event */
 	const onInputBlur = useMemoizedFn((e) => {
 		setCurrentTitle(e.target.value)
 		setIsEdit(false)

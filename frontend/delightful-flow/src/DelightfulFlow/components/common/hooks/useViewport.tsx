@@ -13,12 +13,12 @@ export default function useViewport() {
 
 	const { windowSize } = useResize()
 
-	// 更新当前viewport 指向目标节点中心
+	// Update current viewport to point to target node center
 	const updateViewPortToTargetNode = useMemoizedFn((currentNode) => {
 		const materialPanelWidth = showMaterialPanel ? MaterialPanelWidth : 0
 
 		const cloneCurrentNode = _.cloneDeep(currentNode)
-		// 处理在循环体内新增节点时，position=循环体内position+循环体的position
+		// Handle when adding node inside loop body, position = loop body internal position + loop body position
 		if (cloneCurrentNode?.meta?.parent_id) {
 			const parentLoopBodyNode = nodeConfig?.[cloneCurrentNode?.meta?.parent_id]
 			if (parentLoopBodyNode) {
@@ -37,7 +37,7 @@ export default function useViewport() {
 			windowSize,
 		)
 
-		// 定位到校验失败的节点
+		// Position to validation failed node
 		setViewport(
 			{
 				x:

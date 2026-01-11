@@ -17,7 +17,7 @@ export default function useFlowPopup() {
 	const { t } = useTranslation()
 	const defaultGroupList = Object.entries(getExecuteNodeGroupList())
 
-	// 节点分组列表
+	// Node group list
 	const [nodeGroupList, setNodeGroupList] = useState(defaultGroupList)
 	const [keyword, setKeyword] = useState("")
 	const [debounceKeyword, setDebounceKeyword] = useState(keyword)
@@ -32,7 +32,7 @@ export default function useFlowPopup() {
 		},
 	)
 
-	// 当前渲染的节点列表元素
+	// Currently rendered node list elements
 	const NodeList = useMemo(() => {
 		if (nodeGroupList.length === 0) {
 			return (

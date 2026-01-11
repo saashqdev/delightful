@@ -17,7 +17,7 @@ export type WidgetValue = {
 	title?: string
 }
 
-export default function Output({ value, title = "输出" }: WidgetValue) {
+export default function Output({ value, title = "Output" }: WidgetValue) {
 	return (
 		<div className={styles.output}>
 			<DropdownCard title={title}>

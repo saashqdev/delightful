@@ -16,7 +16,7 @@ export default function NodeOutputWrap({ children, className }: NodeOutputWrapPr
 		<div className={clsx(styles.nodeWrap, className)}>
 			{children}
 			<div className={styles.output}>
-				<DropdownCard title="输出" height="auto">
+				<DropdownCard title="Output" height="auto">
 					{/* @ts-ignore */}
 					<JSONSchemaRenderer form={currentNode?.output?.form?.structure} />
 				</DropdownCard>

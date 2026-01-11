@@ -12,11 +12,11 @@ export enum customNodeType {
 export const nodeSchemaMap = {
 	[customNodeType.Start]: {
 		schema: {
-			label: "开始节点",
+			label: "Start Node",
 			icon: <IconArrowLeftFromArc color="#fff" stroke={2} size={18} />,
 			color: "#315CEC",
 			id: customNodeType.Start,
-			desc: "当以下事件被触发时，流程将会从这个模块开始执行",
+			desc: "When the following events are triggered, the flow will start executing from this module",
 			handle: {
 				withSourceHandle: false,
 				withTargetHandle: false,

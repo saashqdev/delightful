@@ -8,7 +8,7 @@ import { useCurrentNode } from "../context/CurrentNode/useCurrentNode"
 import { generateDebugLogList, transformToList } from "./helpers"
 import styles from "./index.module.less"
 
-/** 日志面板的单行数据 */
+/** Log panel single row data */
 export type TestingResultRow = {
 	key: string
 	value: string
@@ -66,7 +66,7 @@ export default function useTesting() {
 	}, [currentNodeTestingResult?.input])
 
 	const outputList = useMemo(() => {
-		// 如果失败，则直接取error_message
+		// If failed, directly take error_message
 		return transformToList(currentNodeTestingResult!, "output")
 	}, [currentNodeTestingResult])
 
@@ -78,7 +78,7 @@ export default function useTesting() {
 		return testingNodeIds.includes(currentNode?.node_id!)
 	}, [currentNode, testingNodeIds])
 
-	/** 当前日志是否是数组类型 */
+	/** Whether current log is array type */
 	const { isArrayTestResult, arrayTestResult } = useMemo(() => {
 		const length = currentNodeTestingResult?.loop_debug_results?.length || 0
 		return {

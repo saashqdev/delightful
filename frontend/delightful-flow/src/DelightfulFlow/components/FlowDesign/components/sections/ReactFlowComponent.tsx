@@ -4,7 +4,7 @@ import { ConnectionLine } from "@/DelightfulFlow/edges/ConnectionLine"
 import { Interactions } from "../InteractionSelect"
 import { HelperLines, useHelperLines } from "@/DelightfulFlow/components/HelperLines"
 
-// 阈值：节点靠近多少时显示对齐线
+// Threshold: how close nodes need to be to show alignment lines
 const SNAP_THRESHOLD = 5
 
 interface ReactFlowComponentProps {
@@ -32,7 +32,7 @@ interface ReactFlowComponentProps {
 	interaction: string
 	flowInstance: any
 	onlyRenderVisibleElements: boolean
-	/** 是否启用辅助线功能 */
+	/** Whether to enable helper lines feature */
 	helperLinesEnabled?: boolean
 	children: React.ReactNode
 }
@@ -65,10 +65,10 @@ const ReactFlowComponent = memo(
 		helperLinesEnabled = false,
 		children,
 	}: ReactFlowComponentProps) => {
-		// 获取viewport信息（缩放、平移等）
+		// Get viewport information (zoom, pan, etc.)
 		const { x, y, zoom } = useViewport()
 
-		// 使用辅助线hook
+		// Use helper lines hook
 		const {
 			horizontalLines,
 			verticalLines,
@@ -81,15 +81,15 @@ const ReactFlowComponent = memo(
 			onNodeDragStart,
 			onNodeDrag,
 			onNodeDragStop,
-			onNodesChange, // 添加onNodesChange参数
-			enabled: helperLinesEnabled, // 添加enabled参数
+			onNodesChange, // Add onNodesChange parameter
+			enabled: helperLinesEnabled, // Add enabled parameter
 			options: {
-				// 配置参数
-				threshold: 5, // 对齐阈值
-				color: "#315cec", // 辅助线颜色
-				lineWidth: 1, // 辅助线宽度
-				zIndex: 9999, // 辅助线z-index
-				enableSnap: true, // 启用节点吸附
+				// Configuration parameters
+				threshold: 5, // Alignment threshold
+				color: "#315cec", // Helper line color
+				lineWidth: 1, // Helper line width
+				zIndex: 9999, // Helper line z-index
+				enableSnap: true, // Enable node snapping
 			},
 		})
 
@@ -130,7 +130,7 @@ const ReactFlowComponent = memo(
 					selectionKeyCode={null}
 					onSelectionChange={onSelectionChange}
 					onSelectionEnd={onSelectionEnd}
-					// 选中部分就算选中
+				// Partial selection counts as selected
 					selectionMode={SelectionMode.Partial}
 				>
 					{children}

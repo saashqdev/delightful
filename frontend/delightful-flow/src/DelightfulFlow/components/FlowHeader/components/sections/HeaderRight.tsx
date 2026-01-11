@@ -26,14 +26,14 @@ const HeaderRight = memo(({
             className={clsx(styles.btn, `${prefix}btn`)}
             loading={isSaveBtnLoading}
           >
-            试运行
+            Trial Run
           </Button>
           <Button
             type="primary"
             className={clsx(styles.btn, `${prefix}btn`)}
             loading={isPublishBtnLoading}
           >
-            发布
+            Publish
           </Button>
           <Button
             type="default"

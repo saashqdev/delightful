@@ -1,9 +1,9 @@
 ﻿import ReactFlowBasicTest from "./ReactFlowBasicTest"
 import PerformanceTest from "./PerformanceTest"
 
-// 导出所有测试组件
+// Export all test components
 export { ReactFlowBasicTest, PerformanceTest }
 
-// 默认导出基础测试组件
+// Default export basic test component
 export default ReactFlowBasicTest
 

@@ -18,7 +18,7 @@ export default function useFlowHeader() {
 	const { flow, description, debuggerMode } = useFlowData()
 	const { getNodes, getEdges } = useReactFlow()
 
-	// 返回事件
+	// Return event
 	const back = useMemoizedFn(() => {})
 
 	const generateSubmitData = useMemoizedFn(async (enabled: boolean, isTip = true) => {
@@ -60,7 +60,7 @@ export default function useFlowHeader() {
 	const submit = useMemoizedFn(async (status) => {
 		const nodes = getNodes()
 		const edges = getEdges()
-		/** 校验是否有节点，没有在主流程内 */
+		/** Validate if there are nodes not in the main flow */
 		const existOutOfFlowNode = checkHasNodeOutOfFlow(nodes as DelightfulFlow.Node[], edges)
 		if (debuggerMode) {
 			const sortedNodes = sortByEdges(Object.values(nodeConfig), edges)
@@ -100,7 +100,7 @@ export default function useFlowHeader() {
 		}
 	}, [t])
 
-	// 当前tag列表
+	// Current tag list
 	const tagList = useMemo(() => {
 		const result = [
 			{

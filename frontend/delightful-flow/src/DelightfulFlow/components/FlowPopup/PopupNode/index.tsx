@@ -58,7 +58,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 		},
 	)
 
-	// 更新分支节点的next_nodes
+	// Update branch node's next_nodes
 	const updateBranchNodeNextNodes = useMemoizedFn((nodeId: string, target: string) => {
 		const branchNode = nodeConfig[nodeId]
 		const oldBranches = branchNode?.[paramsName.params]?.branches || []
@@ -69,7 +69,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 			next_nodes: [target],
 		})
 
-		// 更新nextNodes
+		// Update nextNodes
 		branchNode[paramsName.params].branches = oldBranches
 		branchNode.next_nodes.push(target)
 	})
@@ -103,7 +103,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 			await onAddItem({ uniqueNodeId: nodeId, ...event }, node, extraConfig)
 		}
 
-		/* 额外处理，新增边和删除边 */
+		/* Extra handling, add and delete edges */
 
 		/**
 		 * 如果在边新增节点
@@ -112,14 +112,14 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 		const sourceNode = nodeConfig[source!]
 		const extraEdgeConfig = getExtraEdgeConfigBySourceNode(sourceNode)
 		if (target && source) {
-			// 新节点的分支端点id（如果有的话）
+			// New node's branch endpoint id (if any)
 			const defaultBranchId = _.get(
 				node,
 				[paramsName.params, "branches", 0, "branch_id"],
 				sourceHandle,
 			)
 			const newEdges = [
-				// 入边
+				// Incoming edge
 				{
 					id: generateSnowFlake(),
 					source,
@@ -129,7 +129,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 					...extraEdgeConfig,
 				},
 
-				// 出边
+				// Outgoing edge
 				{
 					id: generateSnowFlake(),
 					source: nodeId,
@@ -148,7 +148,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 			edges.splice(delEdgeIndex, 1, ...newEdges)
 			setEdges([...edges])
 
-			// 特殊处理分支
+			// Special handling for branch
 			if (nodeManager.branchNodeIds.includes(`${node.id}`)) {
 				updateBranchNodeNextNodes(nodeId, target)
 			}

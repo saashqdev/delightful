@@ -15,7 +15,7 @@ interface FlowPopupProps {
 	target?: string | null
 	edgeId?: string | null
 	sourceHandle?: string
-	nodeId?: string // 切换Node type时需要传
+	nodeId?: string // Need to pass when switching Node type
 }
 
 export const MaterialPanelWidth = 330

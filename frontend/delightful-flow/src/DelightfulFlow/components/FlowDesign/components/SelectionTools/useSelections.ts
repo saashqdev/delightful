@@ -1,5 +1,5 @@
 ﻿/**
- * 框选相关的状态
+ * Selection box related state
  */
 import { DelightfulFlow } from '@/DelightfulFlow/types/flow'
 import { copyToClipboard } from '@/DelightfulFlow/utils'
@@ -19,13 +19,13 @@ export default function useSelections({ flowInstance }:UseSelectionsProps) {
 
     const { t } = useTranslation()
 
-	// 是否显示框选工具
+	// Whether to show selection tools
 	const [showSelectionTools, setShowSelectionTools] = useState(false)
 
-	// 被框选节点
+	// Selected nodes
 	const [selectionNodes, setSelectionNodes] = useState([] as DelightfulFlow.Node[])
 
-	// 被框选的边
+	// Selected edges
 	const [selectionEdges, setSelectionEdges] = useState([] as Edge[])
 
 	useUpdateEffect(() => {
@@ -37,7 +37,7 @@ export default function useSelections({ flowInstance }:UseSelectionsProps) {
 		top: "0"
 	})
 
-	/** 选区变更事件 */
+	/** Selection change event */
 	const onSelectionChange = useMemoizedFn(({ nodes, edges }: any) => {
 		// console.log(nodes, edges)
 		setSelectionNodes(nodes)
@@ -45,7 +45,7 @@ export default function useSelections({ flowInstance }:UseSelectionsProps) {
 	})
 
 	
-	/** 选区截止事件 */
+	/** Selection end event */
 	const onSelectionEnd = useMemoizedFn(() => {
 		const center = calculateMidpoint(selectionNodes)
 		setSelectionCenter({
@@ -78,7 +78,7 @@ export default function useSelections({ flowInstance }:UseSelectionsProps) {
 
 		message.success(i18next.t("common.copySuccess", { ns: "delightfulFlow" }))   
 
-		/** 清除当前选框 */
+		/** Clear current selection */
 		store.unselectNodesAndEdges()
 	})
 

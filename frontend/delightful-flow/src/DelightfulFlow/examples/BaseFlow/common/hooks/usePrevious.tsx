@@ -1,5 +1,5 @@
 ﻿/**
- * 各节点通用hooks，用于计算前置节点可引用的数据源
+ * Common hooks for all nodes, used to calculate data sources that can be referenced by preceding nodes
  */
 
 import { mockMethodsSource } from "@/DelightfulExpressionWidget/components/dataSource"
@@ -32,7 +32,7 @@ export default function usePrevious() {
 			currentNode: DelightfulFlow.Node,
 			pointerVariables?: Schema,
 		) => {
-			// 暂定有指定变量schema的情况下为全局变量
+			// Temporarily set as global variable when there is a specified variable schema
 			const isGlobalVariable = !!pointerVariables
 
 			const cloneOptions = _.cloneDeep(currentOptions)
@@ -63,21 +63,21 @@ export default function usePrevious() {
 				isGlobalVariable,
 			)
 
-			/** 如果不存在变量选项了，则新增一个 */
+			/** If variable option doesn't exist, create a new one */
 			if (!variableOption) {
 				variableOption = {
 					...option,
-					title: "变量",
+					title: "Variable",
 				}
-				// 推到第一个
+				// Push to first position
 				cloneOptions.unshift(variableOption)
 			} else {
-				/** 针对相同变量名去重后的结果 */
+				/** Deduplicated result for same variable names */
 				const uniqOptions = _.uniqBy(
 					[...(variableOption.children || []), ...(option.children || [])],
 					"key",
 				)
-				/** 否则往变量选项新增值 */
+				/** Otherwise add values to variable option */
 				_.set(variableOption, ["children"], uniqOptions)
 			}
 
@@ -85,14 +85,14 @@ export default function usePrevious() {
 		},
 	)
 
-	// 将多个数据源项合并同类项，因为都属于同个节点
+	// Merge multiple data source items into one, as they all belong to the same node
 	const mergeOptionsIntoOne = useMemoizedFn((options: DataSourceOption[]): DataSourceOption => {
 		return options.reduce((mergeResult, currentOption) => {
 			const newChildren = [
 				...(mergeResult.children || []),
 				...(currentOption.children || []),
 			] as DataSourceOption[]
-			// 根据节点id和key进行去重后的结果
+				// Deduplicated result based on node id and key
 			const uniqueChildren = _.uniqBy(newChildren, (obj) => `${obj.nodeId}_${obj.key}`)
 			mergeResult = {
 				...mergeResult,
@@ -112,9 +112,9 @@ export default function usePrevious() {
 			let output = [cur?.output?.form]
 			const systemOutput = cur?.system_output?.form?.structure
 			// console.log("cur", cur)
-			// 如果是分支节点，则需要从branches拿output
+			// If it's a branch node, need to get output from branches
 			if (nodeManager.branchNodeIds.includes(`${cur.node_type}`)) {
-				// getAllPredecessors计算了outputBranchIds，也就是A->B，A的分支id列表
+				// getAllPredecessors calculated outputBranchIds, i.e., A->B, A's branch id list
 				output = cur?.params?.outputBranchIds?.map((branchId: string) => {
 					return cur?.params?.branches?.find(
 						(branch: any) => branch.branch_id === branchId,
@@ -126,19 +126,19 @@ export default function usePrevious() {
 
 			if (output.length === 0 || !currentNodeSchema) return acc
 
-			// TODO A多个端点连线到B，需要通过分支进行分类
+			// TODO A has multiple endpoints connecting to B, need to categorize by branch
 			if (output.length > 1) {
 			}
-			// A -> B只有一个端点的情况，不需要区分分支
+			// A -> B has only one endpoint, no need to distinguish branches
 			else {
 				const schema = output[0]?.structure
 				const options = []
-				/** 特殊处理变量类型节点，不再进行转换，而是统一归类到「变量下」 */
+				/** Special handling for variable type nodes, no longer convert, but categorize under 'Variable' */
 				const isVariableNode = judgeIsVariableNode(currentNodeSchema.id)
 
 				if (!schema && !isVariableNode) return acc
 
-				// 增加系统级输出
+				// Add system-level output
 				if (systemOutput) {
 					options.push(
 						schemaToDataSource(
@@ -167,7 +167,7 @@ export default function usePrevious() {
 							schema!,
 						),
 					)
-					// 将多个A的分支输出合并后的结果
+					// Merged result of multiple A branch outputs
 					const resultOption = mergeOptionsIntoOne(options)
 					acc = acc.concat(resultOption)
 				}
@@ -176,7 +176,7 @@ export default function usePrevious() {
 			return [...acc]
 		}, [] as DataSourceOption[])
 
-		// 如果存在全局变量，则需要重新更新数据源
+		// If global variable exists, need to re-update data source
 		if (flow?.global_variable) {
 			const variableSchema = _.get(
 				nodeManager,

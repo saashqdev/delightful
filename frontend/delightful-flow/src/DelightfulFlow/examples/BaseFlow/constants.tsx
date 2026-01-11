@@ -4,47 +4,47 @@ import { IconArrowLeftFromArc, IconTimeline } from "@tabler/icons-react"
 import React from "react"
 
 export enum customNodeType {
-	// 开始
+	// Start
 	Start = "1",
-	// 大模型
+	// LLM
 	LLM = "2",
-	// 消息回复
+	// Reply Message
 	ReplyMessage = "3",
-	// 选择器
+	// Selector
 	If = "4",
-	// 代码
+	// Code
 	Code = "5",
-	// 向量
+	// Vector
 	Vector = "6",
-	// 神奇表格
+	// Magic Table
 	Table = "7",
-	// 加载器
+	// Loader
 	Loader = "8",
-	// 变量
+	// Variable
 	Variable = "9",
-	// HTTP请求
+	// HTTP Request
 	HTTP = "10",
-	// 子流程
+	// Sub-process
 	Sub = "11",
-	// 结束
+	// End
 	End = "12",
-	// 知识检索
+	// Knowledge Retrieval
 	Knowledge = "13",
-	// 意图识别
+	// Intent Recognition
 	IntentionRecognition = "14",
-	// 工具
+	// Tools
 	Tools = "15",
-	// 变量保存
+	// Variable Save
 	VariableSave = "21",
-	// 循环
+	// Loop
 	Loop = "30",
-	// 循环体
+	// Loop Body
 	LoopBody = "31",
-	// 循环终止
+	// Loop End
 	LoopEnd = "32",
-	// 人员检索
+	// Search Users
 	SearchUsers = "28",
-	// 委托节点
+	// Agent Node
 	Agent = "29",
 }
 
@@ -52,7 +52,7 @@ export const templateMap = {
 	[customNodeType.Start]: {
 		v0: {
 			node_id: "DELIGHTFUL-FLOW-NODE-663c385e5a83f4-29733783",
-			name: "开始",
+			name: "Start",
 			description: "",
 			node_type: 1,
 			meta: [],
@@ -73,7 +73,7 @@ export const templateMap = {
 									type: "object",
 									key: "root",
 									sort: 0,
-									title: "root节点",
+								title: "root node",
 									description: "",
 									required: ["nickname", "chat_time", "message_type", "content"],
 									value: null,
@@ -83,7 +83,7 @@ export const templateMap = {
 											type: "string",
 											key: "nickname",
 											sort: 0,
-											title: " 用户昵称",
+										title: "User Nickname",
 											description: "",
 											required: null,
 											value: null,
@@ -94,7 +94,7 @@ export const templateMap = {
 											type: "string",
 											key: "chat_time",
 											sort: 1,
-											title: "发送时间",
+										title: "Send Time",
 											description: "",
 											required: null,
 											value: null,
@@ -105,7 +105,7 @@ export const templateMap = {
 											type: "string",
 											key: "message_type",
 											sort: 2,
-											title: "消息类型",
+										title: "Message Type",
 											description: "",
 											required: null,
 											value: null,
@@ -116,7 +116,7 @@ export const templateMap = {
 											type: "string",
 											key: "content",
 											sort: 3,
-											title: "消息类容",
+										title: "Message Content",
 											description: "",
 											required: null,
 											value: null,

@@ -38,10 +38,10 @@ function CustomEdgeComponent({
 	const [popupOpen, setPopupOpen] = React.useState(false)
 	const [isHovered, setIsHovered] = React.useState(false)
 
-	// 获取边的样式和路径
+	// Get edge style and path
 	const allowAddOnLine = data?.allowAddOnLine
 
-	// 使用useMemo缓存计算的边路径
+	// Use useMemo to cache calculated edge path
 	const edgePath = useMemo(() => {
 		const [path] = getBezierPath({
 			sourceX: sourceX + 5,
@@ -54,7 +54,7 @@ function CustomEdgeComponent({
 		return path
 	}, [sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition])
 
-	// 添加图标的位置
+	// Position for adding icon
 	const iconPosition = useMemo(
 		() => ({
 			x: (sourceX + targetX) / 2 - 12,
@@ -63,14 +63,14 @@ function CustomEdgeComponent({
 		[sourceX, targetX, sourceY, targetY],
 	)
 
-	// 当边从选中状态变为非选中状态时，关闭弹窗
+	// Close popup when edge changes from selected to unselected
 	useUpdateEffect(() => {
 		if (!isSelected) {
 			setPopupOpen(false)
 		}
 	}, [isSelected])
 
-	// 优化事件处理函数
+	// Optimize event handler functions
 	const handleMouseEnter = useCallback(() => {
 		setIsHovered(true)
 	}, [])
@@ -95,7 +95,7 @@ function CustomEdgeComponent({
 				style={{ ...style }}
 			/>
 
-			{/* 交互区域 - 更宽的透明路径用于更好的点击/悬停体验 */}
+			{/* Interaction area - wider transparent path for better click/hover experience */}
 			<path
 				style={{ ...style, stroke: "transparent", strokeWidth: 48 }}
 				d={edgePath}

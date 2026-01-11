@@ -9,7 +9,7 @@ import { TestingResultRow } from "../../useTesting"
 import { formatValue, isComplexValue } from "../utils"
 import { MiniMap } from "./MiniMap"
 
-// 全屏模态窗口组件
+// Fullscreen modal component
 export const FullscreenModal = ({
 	visible,
 	onClose,
@@ -49,20 +49,20 @@ export const FullscreenModal = ({
 		}
 	}, [visible])
 
-	// 复制功能
+	// Copy functionality
 	const handleCopy = (value: any, key: "input" | "output" | "debug") => {
 		if (value) {
 			const textToCopy =
 				typeof value === "object" ? JSON.stringify(value, null, 2) : value.toString()
 			navigator.clipboard.writeText(textToCopy)
 
-			// 设置对应的复制状态为成功
+			// Set corresponding copy state to success
 			setCopyStates((prev) => ({
 				...prev,
 				[key]: true,
 			}))
 
-			// 2秒后恢复状态
+			// Reset state after 2 seconds
 			setTimeout(() => {
 				setCopyStates((prev) => ({
 					...prev,
@@ -81,14 +81,14 @@ export const FullscreenModal = ({
 					<h3>
 						{i18next.t("flow.testDetail", {
 							ns: "delightfulFlow",
-							defaultValue: "测试详情",
+							defaultValue: "Test Details",
 						})}
 					</h3>
 					<button onClick={onClose}>×</button>
 				</div>
 				<div className={styles.fullscreenContentWrapper}>
 					<div className={styles.fullscreenModalBody} ref={contentRef}>
-						{/* 输入部分 */}
+						{/* Input section */}
 						<div className={styles.fullscreenSection}>
 							<div className={styles.fullscreenSectionHeader}>
 								<h4>{i18next.t("common.input", { ns: "delightfulFlow" })}</h4>
@@ -134,7 +134,7 @@ export const FullscreenModal = ({
 							</div>
 						</div>
 
-						{/* 输出部分 */}
+						{/* Output section */}
 						<div className={styles.fullscreenSection}>
 							<div className={styles.fullscreenSectionHeader}>
 								<h4>{i18next.t("common.output", { ns: "delightfulFlow" })}</h4>
@@ -182,7 +182,7 @@ export const FullscreenModal = ({
 							</div>
 						</div>
 
-						{/* 调试日志部分 */}
+						{/* Debug log section */}
 						{allowDebug && debugLogs && debugLogs.length > 0 && (
 							<div className={styles.fullscreenSection}>
 								<div className={styles.fullscreenSectionHeader}>
@@ -237,7 +237,7 @@ export const FullscreenModal = ({
 						)}
 					</div>
 
-					{/* 添加小地图导航 */}
+					{/* Add mini-map navigation */}
 					<MiniMap
 						contentRef={contentRef}
 						inputList={inputList}

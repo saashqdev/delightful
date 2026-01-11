@@ -26,27 +26,27 @@ export default function OnceResult({
 	const { t } = useTranslation()
 	const { allowDebug } = useExternalConfig()
 
-	// 添加全屏模态窗口状态
+	// Add fullscreen modal state
 	const [fullscreenModalVisible, setFullscreenModalVisible] = React.useState(false)
 
-	// 用于跟踪复制状态
+	// Track copy states
 	const [copyStates, setCopyStates] = useState({
 		input: false,
 		output: false,
 		debug: false,
 	})
 
-	// 打开全屏模态窗口的函数
+	// Function to open fullscreen modal
 	const openFullscreenModal = () => {
 		setFullscreenModalVisible(true)
 	}
 
-	// 关闭全屏模态窗口
+	// Close fullscreen modal
 	const closeFullscreenModal = () => {
 		setFullscreenModalVisible(false)
 	}
 
-	// 复制功能
+	// Copy functionality
 	const handleCopy = (value: any, key: "input" | "output" | "debug") => {
 		if (value) {
 			const textToCopy =
@@ -88,7 +88,7 @@ export default function OnceResult({
 								<IconCheck size={12} color="#52c41a" className={styles.checkIcon} />
 							)}
 						</div>
-						{/* 全屏查看按钮放在复制按钮旁边 */}
+						{/* Fullscreen view button placed next to copy button */}
 						<button
 							className={styles.fullscreenButton}
 							onClick={openFullscreenModal}
@@ -104,7 +104,7 @@ export default function OnceResult({
 							<IconMaximize size={12} />
 							{i18next.t("flow.fullscreen", {
 								ns: "delightfulFlow",
-								defaultValue: "全屏查看",
+							defaultValue: "Fullscreen View",
 							})}
 						</button>
 					</div>

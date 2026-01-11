@@ -6,7 +6,7 @@ import CanvasRenderer from "./CanvasRenderer"
 import ComparisonTest from "./ComparisonTest"
 
 /**
- * 测试路由组件 - 提供各个测试页面的导航
+ * Test route component - provides navigation for various test pages
  */
 const TestRoute: React.FC = () => {
 	return (
@@ -21,19 +21,19 @@ const TestRoute: React.FC = () => {
 						background: "#f5f5f5",
 					}}
 				>
-					<h2 style={{ margin: "0 0 15px 0" }}>ReactFlow性能测试</h2>
+					<h2 style={{ margin: "0 0 15px 0" }}>ReactFlow Performance Test</h2>
 					<div style={{ display: "flex", gap: "20px" }}>
 						<Link to="/" style={linkStyle}>
-							首页
+							Home
 						</Link>
 						<Link to="/react-flow" style={linkStyle}>
-							ReactFlow测试
+							ReactFlow Test
 						</Link>
 						<Link to="/canvas" style={linkStyle}>
-							Canvas测试
+							Canvas Test
 						</Link>
 						<Link to="/comparison" style={linkStyle}>
-							性能对比
+							Performance Comparison
 						</Link>
 					</div>
 				</nav>
@@ -51,7 +51,7 @@ const TestRoute: React.FC = () => {
 	)
 }
 
-// 首页组件
+// Home page component
 const HomePage: React.FC = () => {
 	return (
 		<div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
@@ -108,7 +108,7 @@ const HomePage: React.FC = () => {
 	)
 }
 
-// 测试卡片组件
+// Test card component
 const TestCard: React.FC<{
 	title: string
 	description: string
@@ -138,13 +138,13 @@ const TestCard: React.FC<{
 					fontWeight: "bold",
 				}}
 			>
-				开始测试
+				Start Test
 			</Link>
 		</div>
 	)
 }
 
-// 链接样式
+// Link style
 const linkStyle = {
 	color: "#4a90e2",
 	textDecoration: "none",

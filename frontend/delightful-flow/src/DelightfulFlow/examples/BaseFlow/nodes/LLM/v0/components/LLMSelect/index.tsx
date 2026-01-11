@@ -63,7 +63,7 @@ export default function LLMSelect({
 				dropdownRenderProps
 					? dropdownRenderProps
 					: {
-							placeholder: "搜索模型",
+							placeholder: "search模型",
 					  }
 			}
 			suffixIcon={

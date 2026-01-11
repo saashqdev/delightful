@@ -7,7 +7,7 @@ export default function useLLMParameters() {
 				label: "温度",
 				key: "temperature",
 				tooltips:
-					"温度控制随机性。较低的温度会导致较少的随机完成。随着温度接近零，模型将变得确定性和重复性。较高的温度会导致更多的随机完成。",
+					"温度控制随机性。较低的温度会导致较少的随机complete。随着温度接近零，模型将变得确定性和重复性。较高的温度会导致更多的随机complete。",
 				open: true,
 				defaultValue: 0.7,
 				extra: {
@@ -20,7 +20,7 @@ export default function useLLMParameters() {
 			{
 				label: "Top P",
 				key: "top_p",
-				tooltips: "通过核心采样控制多样性：0.5表示考虑了一半的所有可能性加权选项。",
+				tooltips: "通过核心采样控制多样性：0.5表示考虑了一半的所有可能性加权option。",
 				open: false,
 				defaultValue: 1,
 				extra: {
@@ -59,7 +59,7 @@ export default function useLLMParameters() {
 			{
 				label: "最大标记",
 				key: "max_tags",
-				tooltips: "指定生成结果长度的上限。如果生成结果截断，可以调大该参数。",
+				tooltips: "指定生成结果长度的上限。如果生成结果截断，可以调大该parameter。",
 				open: false,
 				defaultValue: 512,
 				extra: {

@@ -23,7 +23,7 @@ export const FlowInteractionProvider = ({
 	selectionEdges,
 	children,
 }: FlowInteractionCtx) => {
-	// 将状态和动作分开缓存，减少不必要的重新渲染
+	// 将status和动作分开缓存，减少不必要的重新渲染
 	const stateValue = useMemo<FlowInteractionStateType>(() => {
 		return {
 			isDragging,

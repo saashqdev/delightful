@@ -16,7 +16,7 @@ interface InstructionItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * 选择器指令
+ * selector指令
  */
 const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps) => {
 	const { styles } = useStyles()
@@ -33,11 +33,11 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 		updateRemoteInstructionConfig,
 	} = ConversationBotDataService
 
-	// 需要检测一下常驻功能是否关闭了，是的话得清除历史配置值
+	// 需要检测一下常驻功能是否关闭了，是的话得清除历史configuration值
 	useNonResidencyConfigCleanup(id, innerConfigValue, residency, updateRemoteInstructionConfig)
 
 	/**
-	 * 目标选项
+	 * 目标option
 	 */
 	const targetValue = useMemo(() => {
 		if (!residency && instruction.instruction_type !== InstructionMode.Flow) return undefined
@@ -49,7 +49,7 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 	}, [residency, instruction.instruction_type, instruction.values, configValue])
 
 	/**
-	 * 选项配置
+	 * optionconfiguration
 	 */
 	const menuItems = useMemo(() => {
 		return (
@@ -65,7 +65,7 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 	}, [instruction])
 
 	/**
-	 * 选中的选项
+	 * 选中的option
 	 */
 	const selectedKeys = useMemo(() => {
 		if (!targetValue) return []
@@ -73,10 +73,10 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 	}, [targetValue])
 
 	/**
-	 * 点击选项
+	 * 点击option
 	 */
 	const handleClick = useMemoizedFn((v) => {
-		// 如果是常驻或者流程指令
+		// 如果是常驻或者flow指令
 		if (
 			(instruction.residency || instruction.instruction_type === InstructionMode.Flow) &&
 			selectedKeys[0] === v.key
@@ -89,7 +89,7 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 	})
 
 	/**
-	 * 只有一个选项时，可以直接点击选项
+	 * 只有一个option时，可以直接点击option
 	 */
 	if (menuItems.length === 1) {
 		return (

@@ -21,7 +21,7 @@ const enum ReadyState {
 }
 
 export default function useRecordingSummary({ conversationId }: UseRecordingSummaryProps) {
-	// useChatStore 已废弃，需重新实现
+	// useChatStore 已废弃，需重新implement
 	// const { isRecording, updateIsRecording } = useChatStore((s) => s)
 	const { online } = useNetwork()
 	const uId = userStore.user.userInfo?.user_id

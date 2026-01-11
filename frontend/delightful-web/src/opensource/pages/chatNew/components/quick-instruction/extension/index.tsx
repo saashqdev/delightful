@@ -103,7 +103,7 @@ export const QuickInstructionNodeDisabledExtension = QuickInstructionNodeExtensi
 	disabled: true,
 })
 
-/** 聊天列表中渲染 */
+/** 聊天list中渲染 */
 export const QuickInstructionNodeChatSubSiderExtension = QuickInstructionNodeExtension.configure({
 	disabled: true,
 	inSubSider: true,

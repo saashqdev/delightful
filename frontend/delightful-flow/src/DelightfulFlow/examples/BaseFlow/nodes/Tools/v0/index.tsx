@@ -58,7 +58,7 @@ export default function ToolsV0() {
 				layout="vertical"
 				onValuesChange={onValuesChange}
 			>
-				<Form.Item name="tool_id" className={styles.select} label="选择工具">
+				<Form.Item name="tool_id" className={styles.select} label="选择tool">
 					<DelightfulSelect options={toolOptions} style={{ width: "100%" }} showSearch />
 				</Form.Item>
 			</Form>

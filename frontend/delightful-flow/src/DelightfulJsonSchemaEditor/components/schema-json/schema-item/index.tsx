@@ -300,7 +300,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 						[...parentSchemaKeys],
 						null,
 					)
-					/** 将不存在当前需要导出的properties字段的required字段过滤掉 */
+					/** 将不存在当前需要export的properties字段的required字段过滤掉 */
 					_.set(
 						parentExportSchema,
 						["required"],

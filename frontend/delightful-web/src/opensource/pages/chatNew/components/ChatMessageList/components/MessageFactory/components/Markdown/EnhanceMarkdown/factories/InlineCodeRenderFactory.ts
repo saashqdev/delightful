@@ -11,8 +11,8 @@ class InlineCodeRenderFactory extends BaseRenderFactory<InlineCodeRenderProps> {
 	}
 
 	/**
-	 * 获取默认组件
-	 * @returns 默认组件
+	 * get默认component
+	 * @returns 默认component
 	 */
 	public getFallbackComponent(): LazyExoticComponent<ComponentType<InlineCodeRenderProps>> {
 		return Fallback

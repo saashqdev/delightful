@@ -11,7 +11,7 @@ interface LazySubGroupProps {
 }
 
 /**
- * 懒加载SubGroup组件，只有当组件进入视口时才渲染内容
+ * 懒loadSubGroupcomponent，只有当component进入视口时才渲染内容
  */
 function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySubGroupProps) {
     const [isVisible, setIsVisible] = useState(false);
@@ -21,23 +21,23 @@ function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySub
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                // 当组件进入视口时
+                // 当component进入视口时
                 if (entry.isIntersecting) {
                     setIsVisible(true);
                     
-                    // 标记为已加载，避免重复渲染
+                    // 标记为已load，避免重复渲染
                     if (!isLoaded) {
                         setIsLoaded(true);
                     }
                     
-                    // 组件已加载后可以解除观察
+                    // component已load后可以解除观察
                     if (ref.current) {
                         observer.unobserve(ref.current);
                     }
                 }
             },
             {
-                rootMargin: '100px', // 提前100px开始加载
+                rootMargin: '100px', // 提前100pxstartload
                 threshold: 0.1 // 10%可见时触发
             }
         );
@@ -67,7 +67,7 @@ function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySub
                 />
             ) : (
                 <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    加载中...
+                    load中...
                 </div>
             )}
         </div>

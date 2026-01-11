@@ -36,7 +36,7 @@ const StatusAction = observer(({ instruction, ...rest }: InstructionItemProps) =
 		}
 	}, [configValue, instruction.id, instruction.values, statusId])
 
-	// 当前状态配置
+	// 当前statusconfiguration
 	const nextValue = useMemo(() => {
 		const currentIndex = instruction?.values?.findIndex((i) => i.id === statusId)
 

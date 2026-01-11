@@ -136,7 +136,7 @@ const DelightfulAiImages = observer(({ type, content, messageId }: DelightfulAiI
 
 	useEffect(() => {
 		if (isToHDError && previewFileInfo?.fileId === (content as HDImageContent).origin_file_id) {
-			message.error(content?.error_message || "生成失败")
+			message.error(content?.error_message || "生成failed")
 			MessageFilePreviewService.setPreviewInfo({
 				...previewFileInfo,
 				useHDImage: false,

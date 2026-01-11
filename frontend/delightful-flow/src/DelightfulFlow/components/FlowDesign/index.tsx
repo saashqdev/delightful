@@ -234,7 +234,7 @@ const FlowDesign = memo(function FlowDesign() {
 	return (
 		<div className={styles.flowDesign} ref={reactFlowWrapper}>
 			<FlowInteractionProvider {...interactionProviderProps}>
-				{/* 将FlowSelectionPanel移出ReactFlowComponent，成为兄弟组件 */}
+				{/* 将FlowSelectionPanel移出ReactFlowComponent，成为兄弟component */}
 				<FlowSelectionPanel {...selectionPanelProps} />
 				<ReactFlowComponent {...reactFlowProps}>{stableChildren}</ReactFlowComponent>
 			</FlowInteractionProvider>

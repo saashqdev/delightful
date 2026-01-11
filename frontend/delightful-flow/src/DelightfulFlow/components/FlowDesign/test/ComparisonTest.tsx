@@ -5,13 +5,13 @@ import CanvasRenderer from "./CanvasRenderer"
 import { Node, Edge } from "reactflow"
 
 /**
- * 对比测试组件 - 同时展示ReactFlow和Canvas渲染的性能差异
+ * 对比testcomponent - 同时展示ReactFlow和Canvas渲染的performance差异
  */
 const ComparisonTest: React.FC = () => {
 	const [nodeCount, setNodeCount] = useState(20)
 	const [renderMode, setRenderMode] = useState<"react-flow" | "canvas" | "both">("both")
 
-	// 生成测试节点
+	// 生成testnode
 	const nodes: Node[] = useMemo(
 		() =>
 			Array.from({ length: nodeCount }, (_, i) => ({
@@ -23,12 +23,12 @@ const ComparisonTest: React.FC = () => {
 		[nodeCount],
 	)
 
-	// 生成测试边
+	// 生成test边
 	const edges: Edge[] = useMemo(() => {
 		const result: Edge[] = []
 		for (let i = 0; i < nodeCount - 1; i++) {
 			if (i % 10 < 9) {
-				// 连接同一行的节点
+				// 连接同一行的node
 				result.push({
 					id: `edge-${i}-${i + 1}`,
 					source: `node-${i}`,
@@ -37,7 +37,7 @@ const ComparisonTest: React.FC = () => {
 				})
 			}
 			if (i + 10 < nodeCount) {
-				// 连接上下行的节点
+				// 连接上下行的node
 				result.push({
 					id: `edge-${i}-${i + 10}`,
 					source: `node-${i}`,
@@ -49,12 +49,12 @@ const ComparisonTest: React.FC = () => {
 		return result
 	}, [nodeCount])
 
-	// 增加节点数量
+	// 增加node数量
 	const addNodes = useCallback(() => {
 		setNodeCount((prev) => prev + 10)
 	}, [])
 
-	// 减少节点数量
+	// 减少node数量
 	const removeNodes = useCallback(() => {
 		setNodeCount((prev) => Math.max(10, prev - 10))
 	}, [])
@@ -72,12 +72,12 @@ const ComparisonTest: React.FC = () => {
 				}}
 			>
 				<div>
-					<strong>当前节点数: </strong> {nodeCount}
+					<strong>当前node数: </strong> {nodeCount}
 					<div style={{ marginTop: "8px" }}>
 						<button onClick={addNodes} style={{ marginRight: "5px" }}>
-							增加10个节点
+							增加10个node
 						</button>
-						<button onClick={removeNodes}>减少10个节点</button>
+						<button onClick={removeNodes}>减少10个node</button>
 					</div>
 				</div>
 
@@ -112,13 +112,13 @@ const ComparisonTest: React.FC = () => {
 				</div>
 
 				<div>
-					<strong>性能测试说明:</strong>
+					<strong>performancetestdescription:</strong>
 					<div style={{ marginTop: "8px", fontSize: "12px" }}>
 						1. 平移和缩放时观察FPS变化
 						<br />
-						2. 增加节点数量直到性能下降
+						2. 增加node数量直到performance下降
 						<br />
-						3. 对比两种渲染模式的性能差异
+						3. 对比两种渲染模式的performance差异
 					</div>
 				</div>
 			</div>

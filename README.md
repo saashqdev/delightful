@@ -1,6 +1,6 @@
 <div align="left">
   <a href="./README.md"><img alt="README in English" src="https://img.shields.io/badge/English-d9d9d9"></a>
-  <a href="./README_CN.md"><img alt="Simplified Chinese README" src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
+  <a href="./README_CN.md"><img alt="Simplified Chinese README" src="https://img.shields.io/badge/Simplified Chinese-d9d9d9"></a>
 </div>
 
 ![Delightful Open Source Product Matrix](https://public-cdn.bedelightful.ai/static/img/be-delightful-publish-header-en.png?v=20250819)

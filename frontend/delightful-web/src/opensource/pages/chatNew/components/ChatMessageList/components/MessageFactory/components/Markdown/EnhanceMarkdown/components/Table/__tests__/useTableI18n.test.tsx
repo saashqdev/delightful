@@ -8,7 +8,7 @@ vi.mock("react-i18next", () => ({
 		t: (key: string) => {
 			const translations: Record<string, string> = {
 				"markdownTable.showMore": "显示更多",
-				"markdownTable.rowDetails": "行详细信息",
+				"markdownTable.rowDetails": "行详细information",
 				"markdownTable.clickToExpand": "点击展开完整内容",
 				"markdownTable.showAllColumns": "显示所有列",
 				"markdownTable.hideAllColumns": "隐藏",
@@ -24,7 +24,7 @@ describe("useTableI18n", () => {
 		const { result } = renderHook(() => useTableI18n())
 
 		expect(result.current.showMore).toBe("显示更多")
-		expect(result.current.rowDetails).toBe("行详细信息")
+		expect(result.current.rowDetails).toBe("行详细information")
 		expect(result.current.clickToExpand).toBe("点击展开完整内容")
 		expect(result.current.showAllColumns).toBe("显示所有列")
 		expect(result.current.hideAllColumns).toBe("隐藏")

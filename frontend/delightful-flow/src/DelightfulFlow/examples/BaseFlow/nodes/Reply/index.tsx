@@ -79,11 +79,11 @@ export default function Reply() {
 				onValuesChange={onValuesChange}
 				initialValues={initialValues}
 			>
-				<Form.Item name="type" label="消息卡片类型">
+				<Form.Item name="type" label="message卡片class型">
 					<TsSelect
 						options={messageTypeOptions}
 						dropdownRenderProps={{
-							placeholder: "搜索卡片类型",
+							placeholder: "search卡片class型",
 							component: BaseDropdownRenderer,
 						}}
 						className={styles.messageTypeSelect}
@@ -93,9 +93,9 @@ export default function Reply() {
 				{formValues.type === MessageType.Text && (
 					<DelightfulExpression
 						name="content"
-						label="消息内容"
+						label="message内容"
 						mode={ExpressionMode.TextArea}
-						placeholder="纯文本的消息内容，支持使用“$+空格”添加变量"
+						placeholder="纯文本的message内容，支持使用“$+空格”添加变量"
 						dataSource={expressionDataSource}
 					/>
 				)}

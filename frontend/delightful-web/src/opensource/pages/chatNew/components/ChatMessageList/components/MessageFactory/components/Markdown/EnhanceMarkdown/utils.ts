@@ -1,20 +1,20 @@
-// 递归找到DOM下真正的最后一个可见的文本节点所在元素
+// 递归找到DOM下真正的最后一个可见的文本node所在元素
 export function findLastElement(element: HTMLElement): HTMLElement {
-	// 如果元素不存在或不可见，返回父元素
+	// 如果元素不存在或不可见，return父元素
 	if (!element || element.offsetParent === null) {
 		return (element.parentNode as HTMLElement) || element
 	}
 
-	// 对子节点进行倒序遍历，确保从最后一个开始查找
+	// 对子node进行倒序遍历，确保从最后一个start查找
 	for (let i = element.childNodes.length - 1; i >= 0; i -= 1) {
 		const node = element.childNodes[i]
 
-		// 如果是文本节点且有内容，返回父元素
+		// 如果是文本node且有内容，return父元素
 		if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
 			return element
 		}
 
-		// 如果是元素节点且可见
+		// 如果是元素node且可见
 		if (node.nodeType === Node.ELEMENT_NODE) {
 			const childElement = node as HTMLElement
 			// 忽略不可见元素
@@ -26,7 +26,7 @@ export function findLastElement(element: HTMLElement): HTMLElement {
 		}
 	}
 
-	// 当前元素没有找到合适的文本节点，返回自身
+	// 当前元素没有找到合适的文本node，return自身
 	return element
 }
 
@@ -49,7 +49,7 @@ export function manageCursor(cursorClassName: string): {
 
 		// 确保元素存在后再添加光标
 		if (element) {
-			// 创建光标元素
+			// create光标元素
 			const cursorSpan = document.createElement("span")
 			cursorSpan.className = cursorClassName
 

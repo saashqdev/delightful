@@ -14,7 +14,7 @@ const MemberSelect = ({
 	// 是否显示人员/部门切换器
 	showMemberType = false,
 
-	// 成员类型,
+	// 成员class型,
 	searchType,
 	setSearchType,
 

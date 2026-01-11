@@ -1,5 +1,5 @@
 ﻿/**
- * 用户偏好设置相关状态和行为管理
+ * user偏好settings相关status和行为管理
  */
 import { localStorageKeyMap } from "@/DelightfulFlow/constants"
 import { useMemoizedFn, useMount } from "ahooks"
@@ -29,18 +29,18 @@ export default function useInteraction() {
 		setInteraction(getInteractionMode())
 	})
 
-	// 监听外部事件以关闭下拉菜单
+	// listener外部event以关闭下拉菜单
 	useEffect(() => {
-		// 清理函数数组
+		// cleanupfunctionarray
 		const cleanupFunctions = []
 
-		// 使用事件总线注册和清理事件
+		// 使用event总线注册和cleanupevent
 		const cleanup = flowEventBus.on(FLOW_EVENTS.NODE_SELECTED, () => {
 			setOpenInteractionSelect(false)
 		})
 		cleanupFunctions.push(cleanup)
 
-		// 返回清理函数
+		// returncleanupfunction
 		return () => {
 			cleanupFunctions.forEach((cleanup) => cleanup())
 		}

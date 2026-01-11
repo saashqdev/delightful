@@ -90,7 +90,7 @@ export const MiniMap = ({
 		if ("clientY" in e) {
 			clientY = e.clientY // Mouse event
 		} else {
-			clientY = e.touches[0].clientY // 触摸事件
+			clientY = e.touches[0].clientY // 触摸event
 		}
 
 		const { top, height } = miniMap.getBoundingClientRect()
@@ -168,7 +168,7 @@ export const MiniMap = ({
 						jumpToKey(itemKey)
 					}}
 				>
-					{/* 显示所有键名，不仅仅是复杂结构的 */}
+					{/* 显示所有键名，不仅仅是complex结构的 */}
 					<span
 						className={clsx(styles.miniItemKey, {
 							[styles.miniItemKeyComplex]: isComplex,

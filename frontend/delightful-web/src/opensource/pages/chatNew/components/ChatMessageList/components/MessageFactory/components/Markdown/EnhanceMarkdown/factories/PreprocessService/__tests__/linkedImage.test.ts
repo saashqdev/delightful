@@ -57,7 +57,7 @@ describe("PreprocessService - Linked Image", () => {
 
 	it("should handle complex scenarios with text and linked images", () => {
 		const markdown = `
-这里有一个链接图片：[![测试图片](https://via.placeholder.com/100x50)](https://www.example.com)
+这里有一个链接图片：[![test图片](https://via.placeholder.com/100x50)](https://www.example.com)
 
 还有普通文本和[普通链接](https://www.test.com)
 		`.trim()
@@ -66,7 +66,7 @@ describe("PreprocessService - Linked Image", () => {
 		const content = result.join(" ")
 
 		expect(content).toContain(
-			'<a href="https://www.example.com"><img src="https://via.placeholder.com/100x50" alt="测试图片" /></a>',
+			'<a href="https://www.example.com"><img src="https://via.placeholder.com/100x50" alt="test图片" /></a>',
 		)
 		expect(content).toContain("[普通链接](https://www.test.com)")
 	})

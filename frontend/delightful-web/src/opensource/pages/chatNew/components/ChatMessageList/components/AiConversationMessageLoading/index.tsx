@@ -55,7 +55,7 @@ const AiConversationMessageLoading = observer(
 				/>
 				<Flex vertical className={cx(styles.message)} gap={4}>
 					<Flex className={styles.messageTop} gap={12}>
-						{/* 用户名称 */}
+						{/* user名称 */}
 						<span className={styles.name}>{getUserName(userInfo)}</span>
 					</Flex>
 					<Flex

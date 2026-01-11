@@ -5,9 +5,9 @@ import styles from "../index.module.less"
 import NodeGroup from "./NodeGroup"
 import VirtualNodeList from "./VirtualNodeList"
 
-// 定义一个阈值，当节点数量超过这个阈值时启用虚拟滚动
+// 定义一个阈值，当node数量超过这个阈值时启用虚拟滚动
 const VIRTUAL_SCROLL_THRESHOLD = 30
-const NODE_ITEM_HEIGHT = 40 // 估计的每个节点项的高度，需要根据实际UI调整
+const NODE_ITEM_HEIGHT = 40 // 估计的每个node项的高度，需要根据实际UI调整
 
 interface NodeGroupsProps {
 	filterNodeGroups: any[]
@@ -31,14 +31,14 @@ const NodeGroups = memo(
 		}, [renderedNodeList.length])
 
 		if (filterNodeGroups?.length === 0) {
-			// 如果节点数量超过阈值，使用虚拟滚动
+			// 如果node数量超过阈值，使用虚拟滚动
 			if (shouldUseVirtualScroll) {
 				return <VirtualNodeList items={renderedNodeList} itemHeight={NODE_ITEM_HEIGHT} />
 			}
 			return <>{renderedNodeList}</>
 		}
 
-		// 渲染节点组
+		// 渲染node组
 		const groupElements = filterNodeGroups.map((nodeGroup, i) => (
 			<NodeGroup
 				key={`group-${i}`}
@@ -54,7 +54,7 @@ const NodeGroups = memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 深度比较可能不高效，这里仅比较引用，实际使用时可能需要自定义更合适的比较函数
+		// 深度比较可能不高效，这里仅比较引用，实际使用时可能需要自定义更合适的比较function
 		return (
 			prevProps.filterNodeGroups === nextProps.filterNodeGroups &&
 			prevProps.renderedNodeList === nextProps.renderedNodeList &&

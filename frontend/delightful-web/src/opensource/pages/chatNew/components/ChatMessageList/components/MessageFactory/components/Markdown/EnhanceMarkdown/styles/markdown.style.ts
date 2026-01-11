@@ -260,13 +260,13 @@ export const useStyles = createStyles(
 				}
 			`,
 			list: css`
-				/* 任务列表项不应用通用li样式 */
+				/* tasklist项不应用通用li样式 */
 				li:not(.task-list-item) {
 					//margin-block: calc(var(--${prefixCls}-markdown-margin-multiple) * 0.33em);
 					line-height: 1.5;
 				}
 
-				/* 对于任务列表项，确保不显示黑点 */
+				/* 对于tasklist项，确保不显示黑点 */
 				li.task-list-item {
 					line-height: 1.5;
 					list-style: none !important;
@@ -356,7 +356,7 @@ export const useStyles = createStyles(
 					}
 				}
 
-				/* 确保任务列表容器绝对不显示黑点 */
+				/* 确保tasklist容器绝对不显示黑点 */
 				ul.task-list-container,
 				ul.task-list-nested {
 					li {
@@ -518,12 +518,12 @@ export const useStyles = createStyles(
 								"Segoe UI Symbol", Arial, sans-serif;
 						}
 
-						/* 超长单词处理 */
+						/* 超长单词handle */
 						&:has(.long-text) {
 							max-width: 300px;
 						}
 
-						/* 长文本处理 */
+						/* 长文本handle */
 						.long-text {
 							display: block;
 							width: 100%;
@@ -561,7 +561,7 @@ export const useStyles = createStyles(
 					padding: 4px 10px;
 				}
 
-				/* 移除对KaTeX内部元素的强制display样式，让KaTeX自行处理布局 */
+				/* 移除对KaTeX内部元素的强制display样式，让KaTeX自行handle布局 */
 			`,
 			footnotes: css`
 				/* 脚注引用样式 */

@@ -1,5 +1,5 @@
 ﻿/**
- * 流程tab的数据
+ * flowtab的数据
  */
 
 import { nodeManager } from "@/DelightfulFlow/register/node"

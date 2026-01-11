@@ -8,22 +8,22 @@ interface dataview {
 }
 
 /**
- * 数据合并压缩
- * 根据输入和输出的采样率压缩数据，
+ * 数据合并compress
+ * 根据输入和输出的采样率compress数据，
  * 比如输入的采样率是48k的，我们需要的是（输出）的是16k的，由于48k与16k是3倍关系，
  * 所以输入数据中每隔3取1位
  *
  * @param {float32array} data       [-1, 1]的pcm数据
  * @param {number} inputSampleRate  输入采样率
  * @param {number} outputSampleRate 输出采样率
- * @returns  {float32array}         压缩处理后的二进制数据
+ * @returns  {float32array}         compresshandle后的二进制数据
  */
 export function compress(
 	data: { left: any; right: any },
 	inputSampleRate: number,
 	outputSampleRate: number,
 ) {
-	// 压缩，根据采样率进行压缩
+	// compress，根据采样率进行compress
 	const rate = inputSampleRate / outputSampleRate
 	const compression = Math.max(rate, 1)
 	const lData = data.left
@@ -33,7 +33,7 @@ export function compress(
 	let index = 0
 	let j = 0
 
-	// 循环间隔 compression 位取一位数据
+	// loop间隔 compression 位取一位数据
 	while (index < length) {
 		// 取整是因为存在比例compression不是整数的情况
 		const temp = Math.floor(j)
@@ -43,9 +43,9 @@ export function compress(
 
 		if (rData.length) {
 			/*
-			 * 双声道处理
+			 * 双声道handle
 			 * e.inputBuffer.getChannelData(0)得到了左声道4096个样本数据，1是右声道的数据，
-			 * 此处需要组和成LRLRLR这种格式，才能正常播放，所以要处理下
+			 * 此处需要组和成LRLRLR这种format，才能正常播放，所以要handle下
 			 */
 			result[index] = rData[temp]
 			index += 1
@@ -53,15 +53,15 @@ export function compress(
 
 		j += compression
 	}
-	// 返回压缩后的一维数据
+	// returncompress后的一维数据
 	return result
 }
 
 /**
- * 在data中的offset位置开始写入str字符串
+ * 在data中的offset位置start写入strstring
  * @param {TypedArrays} data    二进制数据
  * @param {Number}      offset  偏移量
- * @param {String}      str     字符串
+ * @param {String}      str     string
  */
 function writeString(data: DataView, offset: number, str: string): void {
 	for (let i = 0; i < str.length; i += 1) {
@@ -70,7 +70,7 @@ function writeString(data: DataView, offset: number, str: string): void {
 }
 
 /**
- * 转换到我们需要的对应格式的编码
+ * 转换到我们需要的对应format的encoding
  *
  * @param {float32array} bytes      pcm二进制数据
  * @param {number}  sampleBits      采样位数
@@ -107,7 +107,7 @@ export function encodePCM(bytes: string | any[], sampleBits: number, littleEdian
 }
 
 /**
- * 编码wav，一般wav格式是在pcm文件前增加44个字节的文件头，
+ * encodingwav，一般wavformat是在pcmfile前增加44个字节的file头，
  * 所以，此处只需要在pcm数据前增加下就行了。
  *
  * @param {DataView} bytes           pcm二进制数据
@@ -133,22 +133,22 @@ export function encodeWAV(
 	const channelCount = numChannels // 声道
 	let offset = 0
 
-	// 资源交换文件标识符
+	// 资源交换file标识符
 	writeString(data, offset, "RIFF")
 	offset += 4
-	// 下个地址开始到文件尾总字节数,即文件大小-8
+	// 下个地址start到file尾总字节数,即file大小-8
 	data.setUint32(offset, 36 + bytes.byteLength, littleEdian)
 	offset += 4
-	// WAV文件标志
+	// WAVfile标志
 	writeString(data, offset, "WAVE")
 	offset += 4
-	// 波形格式标志
+	// 波形format标志
 	writeString(data, offset, "fmt ")
 	offset += 4
 	// 过滤字节,一般为 0x10 = 16
 	data.setUint32(offset, 16, littleEdian)
 	offset += 4
-	// 格式类别 (PCM形式采样数据)
+	// formatclass别 (PCM形式采样数据)
 	data.setUint16(offset, 1, littleEdian)
 	offset += 2
 	// 声道数

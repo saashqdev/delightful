@@ -1,5 +1,5 @@
 ﻿/**
- * 处理节点布局相关
+ * handlenode布局相关
  */
 import { fitViewRatio } from "@/DelightfulFlow/constants"
 import { useExternalConfig } from "@/DelightfulFlow/context/ExternalContext/useExternal"
@@ -43,7 +43,7 @@ import styles from "../index.module.less"
 
 export const controlDuration = 200
 
-// 定义粘贴时第一个节点的左侧偏移量
+// 定义粘贴时第一个node的左侧偏移量
 const PASTE_LEFT_OFFSET = 200
 
 interface FlowLayoutProps {
@@ -74,10 +74,10 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 	// 是否锁定视图
 	const [isLock, setIsLock] = useState(false)
 
-	// 边类型是否是贝塞尔曲线
+	// 边class型是否是贝塞尔曲线
 	const [isBezier, setIsBezier] = useState(true)
 
-	// 是否可以布局优化
+	// 是否可以布局optimization
 	const [canLayout, setCanLayout, resetCanLayout] = useResetState(true)
 
 	const store = useStoreApi()
@@ -103,7 +103,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 	})
 
 	const onLayout = useMemoizedFn((direction = "LR", duration = controlDuration) => {
-		// 节点位置没发生任何变更，不需要布局
+		// node位置没发生任何变更，不需要布局
 		if (!canLayout) return nodes
 
 		// if is undo
@@ -144,7 +144,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 			return layoutNodes
 		}
 
-		// 布局完成后进行一次视图自适应，避免布局后节点离开用户视线
+		// 布局complete后进行一次视图自适应，避免布局后node离开user视线
 		// setTimeout(() => {
 		// 	fitView({ includeHiddenNodes: true, duration })
 		// 	setCurrentZoom(getZoom())
@@ -211,10 +211,10 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 		setEdges([...newEdges])
 	})
 
-	// 在hooks的状态部分添加辅助线控制状态
+	// 在hooks的status部分添加辅助线控制status
 	const [helperLinesEnabled, setHelperLinesEnabled] = useState(false)
 
-	// 操作栏列表
+	// operation栏list
 	const controlItemGroups = useMemo(() => {
 		return [
 			[
@@ -460,13 +460,13 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 				} else {
 					setIsMountLayout(true)
 				}
-				/** 判断是否需要初始化时自动布局 */
+				/** 判断是否需要initialize时自动布局 */
 				if (layoutOnMount) {
 					const layoutNodes = onLayout("LR", 0)
 					resetLastLayoutData()
 					node = layoutNodes?.[0]
 				}
-				/** 设置画布中心为第一个节点中心 */
+				/** settings画布中心为第一个node中心 */
 				setViewport({
 					x: 100,
 					// @ts-ignore
@@ -477,10 +477,10 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 		}
 	}, [nodes, edges, isMountLayout, setViewport, windowSize, layoutOnMount])
 
-	// 使用useEffect和低级事件监听替代所有快捷键
+	// 使用useEffect和低级eventlistener替代所有快捷键
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
-			// 检查元素是否在可编辑区域内，如果是则不处理快捷键
+			// check元素是否在可编辑区域内，如果是则不handle快捷键
 			const activeElement = document.activeElement
 			if (
 				activeElement?.tagName === "INPUT" ||
@@ -511,7 +511,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						onZoomIn()
 						break
 
-					// 优化布局: Cmd/Ctrl + P
+					// optimization布局: Cmd/Ctrl + P
 					case "p":
 						e.preventDefault()
 						e.stopPropagation()
@@ -560,8 +560,8 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 			}
 		}
 
-		// 将事件监听器添加到document而不是特定元素，确保无论焦点在哪里都能捕获到
-		// 使用capture: true确保在事件传播链的最早阶段捕获
+		// 将eventlistener器添加到document而不是特定元素，确保无论焦点在哪里都能捕获到
+		// 使用capture: true确保在event传播链的最早阶段捕获
 		document.addEventListener("keydown", handleKeyDown, { capture: true })
 
 		return () => {
@@ -579,10 +579,10 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 		showMinMap,
 	])
 
-	// 在useKeyboardShortcuts或相关的键盘快捷键处理部分添加辅助线快捷键支持
+	// 在useKeyboardShortcuts或相关的键盘快捷键handle部分添加辅助线快捷键支持
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			// 避免在输入框中触发快捷键
+			// 避免在input field中触发快捷键
 			if (
 				document.activeElement?.tagName === "INPUT" ||
 				document.activeElement?.tagName === "TEXTAREA"
@@ -596,7 +596,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 				setHelperLinesEnabled(!helperLinesEnabled)
 			}
 
-			// 其他快捷键处理...
+			// 其他快捷键handle...
 		}
 
 		document.addEventListener("keydown", handleKeyDown)
@@ -606,7 +606,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 	}, [helperLinesEnabled, setHelperLinesEnabled])
 
 	const handlePaste = useMemoizedFn((e: any) => {
-		// 获取活动元素，检查是否在输入框或可编辑区域
+		// get活动元素，check是否在input field或可编辑区域
 		const activeElement = document.activeElement
 		if (
 			activeElement?.tagName === "INPUT" ||
@@ -623,7 +623,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 			document.querySelector(".react-flow")
 		if (!reactFlowEl) return
 
-		// 检查点击位置是否在ReactFlow区域内
+		// check点击位置是否在ReactFlow区域内
 		const rect = reactFlowEl.getBoundingClientRect()
 		if (
 			e.clientX &&
@@ -635,14 +635,14 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 			return
 		}
 
-		// 获取当前视图信息
+		// get当前视图information
 		const { x: viewX, y: viewY, zoom } = getViewport()
 
-		// 计算视图中心在流程图中的坐标
+		// 计算视图中心在flow图中的坐标
 		const viewCenterX = (rect.width / 2 - viewX) / zoom
 		const viewCenterY = (rect.height / 2 - viewY) / zoom
 
-		// 计算视图左侧在流程图中的坐标
+		// 计算视图左侧在flow图中的坐标
 		const viewLeftX = (0 - viewX) / zoom
 
 		navigator.clipboard.readText().then((text) => {
@@ -658,10 +658,10 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						paramsName,
 					)
 
-					// 如果节点数组为空，则不处理
+					// 如果nodearray为空，则不handle
 					if (pasteNodes.length === 0) return
 
-					// 提取原始节点组的第一个节点位置作为参考
+					// 提取原始node组的第一个node位置作为参考
 					const firstNodeOriginalPos = {
 						x: pasteNodes[0].position.x,
 						y: pasteNodes[0].position.y,
@@ -672,18 +672,18 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						delete node.data.icon
 						node.selected = false
 
-						// 计算相对于第一个节点的偏移
+						// 计算相对于第一个node的偏移
 						const deltaX = node.position.x - firstNodeOriginalPos.x
 						const deltaY = node.position.y - firstNodeOriginalPos.y
 
-						// 获取第一个节点的宽高
+						// get第一个node的宽高
 						const firstNodeWidth = pasteNodes[0].width || 0
 						const firstNodeHeight = pasteNodes[0].height || 0
 
-						// 设置新位置：
-						// 水平方向：基于当前视图左侧加上固定偏移量
-						// 垂直方向：视图中心减去节点高度的一半，使其垂直居中
-						// 注意：对所有节点都应用相同的偏移量，以保持它们之间的相对位置
+						// settings新位置：
+						// 水平方向：based on当前视图左侧加上固定偏移量
+						// 垂直方向：视图中心减去node高度的一半，使其垂直居中
+						// note：对所有node都应用相同的偏移量，以保持它们之间的相对位置
 						node.meta = {
 							position: {
 								x: viewLeftX + PASTE_LEFT_OFFSET + deltaX,
@@ -691,7 +691,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 							},
 						}
 
-						/** 处理节点渲染字段 */
+						/** handlenode渲染字段 */
 						handleRenderProps(node, i, paramsName)
 
 						cacheConfig[node.id] = node
@@ -701,7 +701,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						...nodeConfig,
 						...cacheConfig,
 					})
-					// 只有节点为空才进入渐进式加载策略
+					// 只有node为空才进入渐进式load策略
 					if (nodes.length === 0) {
 						processNodesBatch([...nodes, ...cacheNodes], (nodes) => {
 							setNodes(nodes)
@@ -714,13 +714,13 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 					notifyNodeChange?.()
 				}
 			} catch (e) {
-				console.log("不符合格式要求", e)
+				console.log("不符合format要求", e)
 			}
 		})
 	})
 
 	useEffect(() => {
-		// 在document级别监听paste事件，确保能捕获所有粘贴操作
+		// 在document级别listenerpasteevent，确保能捕获所有粘贴operation
 		document.addEventListener("paste", handlePaste, { capture: true })
 
 		return () => {

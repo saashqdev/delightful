@@ -4,7 +4,7 @@ class CustomComponentService {
 	components: MarkdownToJSX.Overrides = {}
 
 	/**
-	 * 注册组件
+	 * 注册component
 	 * @param name
 	 * @param componentConfig
 	 */
@@ -13,7 +13,7 @@ class CustomComponentService {
 	}
 
 	/**
-	 * 获取所有组件
+	 * get所有component
 	 * @returns
 	 */
 	getAllComponents() {
@@ -21,7 +21,7 @@ class CustomComponentService {
 	}
 
 	/**
-	 * 注销组件
+	 * 注销component
 	 * @param name
 	 */
 	unregisterComponent(name: string) {

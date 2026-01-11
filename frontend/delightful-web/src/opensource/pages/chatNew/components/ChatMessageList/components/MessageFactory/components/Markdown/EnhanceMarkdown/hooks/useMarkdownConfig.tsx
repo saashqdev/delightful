@@ -18,13 +18,13 @@ import CustomComponentService from "../factories/CustomComponentService"
 import ImageWrapper from "@/opensource/pages/chatNew/components/AiImageStartPage/components/ImageWrapper"
 
 /**
- * 构建 markdown-to-jsx 组件所需的配置
+ * 构建 markdown-to-jsx component所需的configuration
  */
 export const useMarkdownConfig = (props: MarkdownProps) => {
 	// 解构需要的props
 	const { allowHtml = true, enableLatex = true, components: componentsInProps } = props
 
-	// 基础组件配置
+	// 基础componentconfiguration
 	const baseOverrides = useMemo(() => {
 		return {
 			a: {
@@ -59,7 +59,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 						),
 				  }
 				: undefined,
-			// 添加LaTeX组件支持
+			// 添加LaTeXcomponent支持
 			DelightfulLatexInline: {
 				component: (props: any) => {
 					if (!enableLatex) return <span>{`$${props.math}$`}</span>
@@ -90,24 +90,24 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 					return <KaTeX math={decodedMath} inline={false} />
 				},
 			},
-			// 添加处理删除线的标签
+			// 添加handledelete线的label
 			span: {
 				component: (props: any) => {
-					// 处理删除线 (GFM)
+					// handledelete线 (GFM)
 					if (props.className === "strikethrough") {
 						return <del>{props.children}</del>
 					}
 					return <span {...props} />
 				},
 			},
-			// 处理任务列表 (GFM)
+			// handletasklist (GFM)
 			li: {
 				component: (props: any) => {
-					// 新的多级任务列表已经在预处理阶段生成了正确的HTML结构
+					// 新的多级tasklist已经在预handle阶段生成了正确的HTML结构
 					// 这里只需要保持原有的行为，让HTML直接渲染
 					if (props.className === "task-list-item") {
-						// 对于新的任务列表，直接返回li，不再添加额外的复选框
-						// 因为复选框已经在预处理阶段的HTML中生成了
+						// 对于新的tasklist，直接returnli，不再添加额外的复选框
+						// 因为复选框已经在预handle阶段的HTML中生成了
 						return <li {...props} />
 					}
 					return <li {...props} />
@@ -126,11 +126,11 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 		}
 	}, [props, enableLatex])
 
-	// 合并自定义组件配置
+	// 合并自定义componentconfiguration
 	const customOverrides = useMemo(() => {
 		if (!componentsInProps) return {}
 
-		// 将 react-markdown 格式的 components 转换为 markdown-to-jsx 格式的 overrides
+		// 将 react-markdown format的 components 转换为 markdown-to-jsx format的 overrides
 		const converted: Record<string, { component: any; props: Record<string, never> }> = {}
 		Object.entries(componentsInProps).forEach(([tag, Component]) => {
 			if (Component) {
@@ -153,7 +153,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 		} as MarkdownToJSX.Overrides
 	}, [baseOverrides, customOverrides])
 
-	// 自定义的 markdown-to-jsx 预处理函数
+	// 自定义的 markdown-to-jsx 预handlefunction
 	const preprocess = useMemoizedFn((markdown: string) => {
 		if (!markdown) return []
 
@@ -162,13 +162,13 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 		})
 	})
 
-	// 配置 markdown-to-jsx options
+	// configuration markdown-to-jsx options
 	const options = useMemo<MarkdownToJSX.Options>(() => {
 		return {
 			overrides,
 			forceWrapper: true,
 			disableParsingRawHTML: !allowHtml,
-			// 使用更新的API方式配置预处理函数
+			// 使用update的API方式configuration预handlefunction
 			renderRule: (next: () => any, node: any) => {
 				if (node.type === RuleType.codeInline) {
 					const InlineCodeComponent = InlineCodeRenderFactory.getComponent(node.className)

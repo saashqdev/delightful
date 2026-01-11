@@ -36,7 +36,7 @@ export default function SubFlowV0() {
 						displayColumns={[ShowColumns.Key, ShowColumns.Value, ShowColumns.Type]}
 						columnNames={{
 							[ShowColumns.Key]: "变量名",
-							[ShowColumns.Type]: "变量类型",
+							[ShowColumns.Type]: "变量class型",
 							[ShowColumns.Value]: "变量值",
 							[ShowColumns.Label]: "显示名称",
 							[ShowColumns.Description]: "变量描述",

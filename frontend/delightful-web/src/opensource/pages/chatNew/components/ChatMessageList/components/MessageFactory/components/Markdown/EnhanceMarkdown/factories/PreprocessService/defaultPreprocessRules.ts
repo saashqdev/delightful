@@ -1,12 +1,12 @@
 import { PreprocessRule } from "./types"
 import { parseTable } from "./utils"
 
-// 匹配 LaTeX 块级公式的正则表达式 - 将移动到条件处理中
+// 匹配 LaTeX 块级公式的正则表达式 - 将移动到条件handle中
 export const BLOCK_MATH_REGEX = /\$\$([\s\S]*?)\$\$/g
 // 改进的 LaTeX 内联公式正则表达式 - 更精确地匹配数学公式
-// 匹配包含数学符号、LaTeX命令或数学运算符的内容
+// 匹配包含数学符号、LaTeXcommand或数学运算符的内容
 export const INLINE_MATH_REGEX = /\$([^$\n]*(?:[\\+\-*/=^_{}<>]|\\[a-zA-Z]+|[α-ωΑ-Ω])[^$\n]*)\$/g
-// 引用格式正则表达式
+// 引用format正则表达式
 
 export const CITATION_REGEX_1 = /\[\[citation:(\d+)\]\]/g
 export const CITATION_REGEX_2 = /\[\[citation(\d+)\]\]/g
@@ -16,21 +16,21 @@ export const CITATION_REGEX_4 = /\[citation(\d+)\]/g
 
 export const STRIKETHROUGH_REGEX = /~~(.+?)~~/g
 export const TASK_LIST_REGEX = /^(\s*)-\s+\[(x| )\]\s+(.+)$/gm
-// GFM 表格正则表达式 - 修复版本，能正确匹配markdown表格
+// GFM table正则表达式 - fixversion，能正确匹配markdowntable
 // 第一组：表头行，第二组：分隔符行（主要包含横线），第三组：数据行
 export const TABLE_REGEX =
 	/^\s*(\|[^\n]*\|)\s*\n\s*(\|[\s\-:|\s]*\|)\s*\n((?:\s*\|[^\n]*\|\s*(?:\n|$))*)/gm
-// 链接图片正则表达式 - 匹配 [![alt](img_url)](link_url) 格式
+// 链接图片正则表达式 - 匹配 [![alt](img_url)](link_url) format
 export const LINKED_IMAGE_REGEX = /\[!\[([^\]]*)\]\(([^)]+)\)\]\(([^)]+)\)/g
-// GFM 分割线正则表达式 - 匹配 ---, ***, ___ 格式
+// GFM 分割线正则表达式 - 匹配 ---, ***, ___ format
 export const HORIZONTAL_RULE_REGEX = /^(?:---+|\*\*\*+|___+)$/gm
-// 脚注引用正则表达式 - 匹配 [^1] 格式
+// 脚注引用正则表达式 - 匹配 [^1] format
 export const FOOTNOTE_REF_REGEX = /\[\^([^\]]+)\]/g
-// 脚注定义正则表达式 - 匹配 [^1]: 内容 格式
+// 脚注定义正则表达式 - 匹配 [^1]: 内容 format
 export const FOOTNOTE_DEF_REGEX = /^\[\^([^\]]+)\]:\s*(.+?)(?=\n\n|\n$|$)/gms
-// 缩写定义正则表达式 - 匹配 *[HTML]: HyperText Markup Language 格式
+// 缩写定义正则表达式 - 匹配 *[HTML]: HyperText Markup Language format
 export const ABBREVIATION_DEF_REGEX = /^\*\[([^\]]+)\]:\s*(.+)$/gm
-// 多级任务列表正则表达式 - 支持嵌套的任务列表
+// 多级tasklist正则表达式 - 支持嵌套的tasklist
 export const NESTED_TASK_LIST_REGEX = /^(\s*)-\s+\[(x| )\]\s+(.+)$/gm
 
 // 上标和下标正则表达式
@@ -44,7 +44,7 @@ export const REFERENCE_LINK_DEF_REGEX = /^\s*\[([^\]]+)\]:\s*([^\s]+)(?:\s+"([^"
 export const REFERENCE_LINK_USE_REGEX = /\[([^\]]+)\](?:\[([^\]]*)\])?/g
 
 export const defaultPreprocessRules: PreprocessRule[] = [
-	// 移除块级公式处理 - 将在条件处理中添加
+	// 移除块级公式handle - 将在条件handle中添加
 	{
 		regex: CITATION_REGEX_1,
 		replace: (_, index) => `<DelightfulCitation index="${index}" />`,

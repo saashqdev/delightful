@@ -13,7 +13,7 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 	protected splitters = new Map<string, RegExp>()
 
 	/**
-	 * 组件缓存
+	 * component缓存
 	 */
 	protected componentCache = new Map<
 		string,
@@ -21,20 +21,20 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 	>()
 
 	/**
-	 * 组件
+	 * component
 	 */
 	protected components = new Map<string, RenderComponent<BlockRenderProps>>()
 
 	/**
-	 * 构造函数
+	 * 构造function
 	 */
 	constructor() {
 		super()
 	}
 
 	/**
-	 * 获取默认组件
-	 * @returns 默认组件
+	 * get默认component
+	 * @returns 默认component
 	 */
 	public getFallbackComponent(): LazyExoticComponent<ComponentType<BlockRenderProps>> {
 		return Fallback
@@ -56,16 +56,16 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 		// 遍历每个定义的匹配器
 		for (const [lang, regex] of this.splitters) {
 			let match
-			// 重置正则表达式的lastIndex
+			// reset正则表达式的lastIndex
 			regex.lastIndex = 0
 
-			// 对当前类型进行匹配
+			// 对当前class型进行匹配
 			while ((match = regex.exec(content)) !== null) {
 				const fullMatch = match[0] // 完整匹配（包括```标记）
 				const content = match[1]?.trim() // 移除标记的内容
 				const position = match.index // 代码块在原文中的位置
 
-				// 保存提取结果
+				// save提取结果
 				extractedBlocks[position] = {
 					lang,
 					content,

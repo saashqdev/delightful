@@ -14,7 +14,7 @@ import useStreamCursor from "./hooks/useStreamCursor"
 /**
  * EnhanceMarkdown - 增强的Markdown渲染器
  * 支持流式渲染、代码高亮、数学公式等功能
- * 基于 markdown-to-jsx 实现
+ * based on markdown-to-jsx implement
  */
 const EnhanceMarkdown = memo(
 	function EnhanceMarkdown(props: MarkdownProps) {
@@ -64,7 +64,7 @@ const EnhanceMarkdown = memo(
 			),
 		)
 
-		// 使用Markdown配置hook
+		// 使用Markdownconfigurationhook
 		const { options, preprocess } = useMarkdownConfig(
 			useMemo(
 				() => ({
@@ -76,7 +76,7 @@ const EnhanceMarkdown = memo(
 			),
 		)
 
-		// 使用类名处理hook
+		// 使用class名handlehook
 		const combinedClassName = useClassName({
 			mdStyles,
 			className: className || "",

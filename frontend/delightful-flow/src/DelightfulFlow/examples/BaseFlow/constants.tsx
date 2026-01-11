@@ -137,7 +137,7 @@ export const templateMap = {
 									type: "object",
 									key: "root",
 									sort: 0,
-									title: "root节点",
+									title: "rootnode",
 									description: "",
 									required: ["nickname", "chat_time", "message_type", "content"],
 									value: null,
@@ -147,7 +147,7 @@ export const templateMap = {
 											type: "string",
 											key: "nickname",
 											sort: 0,
-											title: " 用户昵称",
+											title: " user昵称",
 											description: "",
 											required: null,
 											value: null,
@@ -158,7 +158,7 @@ export const templateMap = {
 											type: "string",
 											key: "chat_time",
 											sort: 1,
-											title: "发送时间",
+											title: "发送time",
 											description: "",
 											required: null,
 											value: null,
@@ -169,7 +169,7 @@ export const templateMap = {
 											type: "string",
 											key: "message_type",
 											sort: 2,
-											title: "消息类型",
+											title: "messageclass型",
 											description: "",
 											required: null,
 											value: null,
@@ -180,7 +180,7 @@ export const templateMap = {
 											type: "string",
 											key: "content",
 											sort: 3,
-											title: "消息类容",
+											title: "messageclass容",
 											description: "",
 											required: null,
 											value: null,
@@ -207,7 +207,7 @@ export const templateMap = {
 									type: "object",
 									key: "root",
 									sort: 0,
-									title: "root节点",
+									title: "rootnode",
 									description: "",
 									required: ["nickname", "open_time"],
 									value: null,
@@ -217,7 +217,7 @@ export const templateMap = {
 											type: "string",
 											key: "nickname",
 											sort: 0,
-											title: " 用户昵称",
+											title: " user昵称",
 											description: "",
 											required: null,
 											value: null,
@@ -228,7 +228,7 @@ export const templateMap = {
 											type: "string",
 											key: "open_time",
 											sort: 1,
-											title: "打开时间",
+											title: "打开time",
 											description: "",
 											required: null,
 											value: null,
@@ -249,7 +249,7 @@ export const templateMap = {
 									type: "object",
 									key: "root",
 									sort: 0,
-									title: "root节点",
+									title: "rootnode",
 									description: "",
 									required: ["nickname", "open_time"],
 									value: null,
@@ -259,7 +259,7 @@ export const templateMap = {
 											type: "string",
 											key: "nickname",
 											sort: 0,
-											title: " 用户昵称",
+											title: " user昵称",
 											description: "",
 											required: null,
 											value: null,
@@ -270,7 +270,7 @@ export const templateMap = {
 											type: "string",
 											key: "open_time",
 											sort: 1,
-											title: "打开时间",
+											title: "打开time",
 											description: "",
 											required: null,
 											value: null,
@@ -326,7 +326,7 @@ export const templateMap = {
 	[customNodeType.Sub]: {
 		v0: {
 			node_id: "DELIGHTFUL-FLOW-NODE-6649da5637d546-69160385",
-			name: "子流程",
+			name: "subprocess",
 			description: "",
 			node_type: 11,
 			meta: [],
@@ -411,7 +411,7 @@ export const templateMap = {
 
 		v1: {
 			node_id: "DELIGHTFUL-FLOW-NODE-6649da5637d546-69160385",
-			name: "子流程版本2",
+			name: "subprocessversion2",
 			description: "",
 			node_type: 11,
 			meta: [],
@@ -498,35 +498,35 @@ export const templateMap = {
 	[customNodeType.Loop]: {
 		v0: {
 			node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-26322039",
-			name: "循环",
+			name: "loop",
 			description: "",
 			node_type: 22,
 			meta: [],
 			params: {
-				type: "array", // 计数类型：count 循环数组：array 条件循环：condition,
+				type: "array", // 计数class型：count looparray：array 条件loop：condition,
 				condition: {
-					// 条件循环时启用, 用于给定一个终止循环条件
+					// 条件loop时启用, 用于给定一个终止loop条件
 					id: "component-66da72180d2e1",
 					version: "1",
 					type: "condition",
 					structure: undefined,
 				},
 				count: {
-					// 计数循环时启用
+					// 计数loop时启用
 					id: "component-66da73d27fea0",
 					version: "1",
 					type: "value",
 					structure: null,
 				},
 				array: {
-					// 遍历循环数组时启用
+					// 遍历looparray时启用
 					id: "component-66da73d27fea0",
 					version: "1",
 					type: "value",
 					structure: null,
 				},
 				max_loop_count: {
-					// 最大遍历次数限制，条件循环时启用，可以允许为空
+					// 最大遍历次数限制，条件loop时启用，可以允许为空
 					id: "component-66da73d27fea0",
 					version: "1",
 					type: "value",
@@ -541,7 +541,7 @@ export const templateMap = {
 	[customNodeType.LoopEnd]: {
 		v0: {
 			node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-2632203d",
-			name: "循环终止",
+			name: "loop终止",
 			description: "",
 			node_type: 24,
 			meta: [],
@@ -554,7 +554,7 @@ export const templateMap = {
 	[customNodeType.LoopBody]: {
 		v0: {
 			node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-2632203f",
-			name: "循环体",
+			name: "loop体",
 			description: "",
 			node_type: 23,
 			meta: [],
@@ -567,7 +567,7 @@ export const templateMap = {
 	[customNodeType.VariableSave]: {
 		v0: {
 			node_id: "DELIGHTFUL-FLOW-NODE-66a2a8453cfd12-52796719",
-			name: "变量设置",
+			name: "变量settings",
 			description: "",
 			node_type: 21,
 			meta: [],
@@ -581,7 +581,7 @@ export const templateMap = {
 							type: "object",
 							key: "root",
 							sort: 0,
-							title: "root节点",
+							title: "rootnode",
 							description: null,
 							required: ["variable_name", "variable_type"],
 							value: null,
@@ -602,7 +602,7 @@ export const templateMap = {
 									type: "string",
 									key: "variable_type",
 									sort: 1,
-									title: "变量类型",
+									title: "变量class型",
 									description: "",
 									required: null,
 									value: null,
@@ -679,7 +679,7 @@ export const templateMap = {
 						type: "array",
 						key: "root",
 						sort: 0,
-						title: "历史消息",
+						title: "historical message",
 						description: "",
 						required: null,
 						value: null,
@@ -689,7 +689,7 @@ export const templateMap = {
 							type: "object",
 							key: "messages",
 							sort: 0,
-							title: "历史消息",
+							title: "historical message",
 							description: "",
 							required: ["role", "content"],
 							value: null,
@@ -701,7 +701,7 @@ export const templateMap = {
 									type: "string",
 									key: "role",
 									sort: 0,
-									title: "角色",
+									title: "role",
 									description: "",
 									required: null,
 									value: null,
@@ -741,7 +741,7 @@ export const templateMap = {
 						type: "object",
 						key: "root",
 						sort: 0,
-						title: "root节点",
+						title: "rootnode",
 						description: "",
 						required: ["text", "use_tools"],
 						value: null,
@@ -753,7 +753,7 @@ export const templateMap = {
 								type: "array",
 								key: "use_tools",
 								sort: 0,
-								title: "使用到的工具",
+								title: "使用到的tool",
 								description: "",
 								required: null,
 								value: null,
@@ -763,7 +763,7 @@ export const templateMap = {
 									type: "object",
 									key: "",
 									sort: 0,
-									title: "工具详情",
+									title: "tool详情",
 									description: "",
 									required: [],
 									value: null,
@@ -775,7 +775,7 @@ export const templateMap = {
 											type: "string",
 											key: "tool_name",
 											sort: 0,
-											title: "工具名称",
+											title: "tool名称",
 											description: "",
 											required: null,
 											value: null,
@@ -788,7 +788,7 @@ export const templateMap = {
 											type: "boolean",
 											key: "success",
 											sort: 1,
-											title: "是否成功",
+											title: "是否success",
 											description: "",
 											required: null,
 											value: null,
@@ -801,7 +801,7 @@ export const templateMap = {
 											type: "string",
 											key: "error_message",
 											sort: 2,
-											title: "错误信息",
+											title: "errorinformation",
 											description: "",
 											required: null,
 											value: null,
@@ -814,7 +814,7 @@ export const templateMap = {
 											type: "object",
 											key: "arguments",
 											sort: 3,
-											title: "工具参数",
+											title: "toolparameter",
 											description: "",
 											required: [],
 											value: null,
@@ -877,7 +877,7 @@ export const templateMap = {
 		v0: {
 			node_id: "DELIGHTFUL-FLOW-NODE-674c4f70bc3966-92064256",
 			debug: false,
-			name: "工具",
+			name: "tool",
 			description: "",
 			node_type: 26,
 			meta: [],
@@ -941,11 +941,11 @@ function addVersionKeyToNodes(nodes: Record<string, any>): Record<string, any> {
 export const nodeSchemaMap = {
 	[customNodeType.Start]: {
 		schema: {
-			label: "开始节点",
+			label: "startnode",
 			icon: <IconArrowLeftFromArc color="#fff" stroke={2} size={18} />,
 			color: "#315CEC",
 			id: customNodeType.Start,
-			desc: "当以下事件被触发时，流程将会从这个模块开始执行",
+			desc: "当以下event被触发时，flow将会从这个modulestart执行",
 			handle: {
 				withSourceHandle: false,
 				withTargetHandle: false,
@@ -964,11 +964,11 @@ export const nodeSchemaMap = {
 
 	[customNodeType.Sub]: {
 		schema: {
-			label: "子流程",
+			label: "subprocess",
 			icon: <IconTimeline color="#fff" stroke={1} size={18} />,
 			color: "#9DC900",
 			id: customNodeType.Sub,
-			desc: "可以将部分功能模块分配给子流程来进行编排，从而避免主流程过于庞大",
+			desc: "可以将部分功能module分配给subprocess来进行编排，从而避免主flow过于庞大",
 			handle: {
 				withSourceHandle: true,
 				withTargetHandle: true,

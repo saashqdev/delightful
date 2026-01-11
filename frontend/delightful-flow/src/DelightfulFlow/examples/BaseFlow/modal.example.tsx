@@ -1,5 +1,5 @@
 ﻿/**
- * delightful-flow节点业务组件
+ * delightful-flownode业务component
  */
 import { DelightfulFlowInstance } from "@/DelightfulFlow"
 import DelightfulFlowModal from "@/DelightfulFlow/modal/DelightfulFlowModal"
@@ -24,7 +24,7 @@ export default function BaseFlow({ open, onClose }: FlowProps) {
 
 	const consoleFlow = useMemoizedFn(() => {
 		const flow = flowInstance?.current?.getFlow()
-		console.log("内部流程", flow)
+		console.log("内部flow", flow)
 	})
 
 	const Buttons = useMemo(() => {
@@ -34,7 +34,7 @@ export default function BaseFlow({ open, onClose }: FlowProps) {
 					试运行
 				</Button>
 				<Button type="primary" loading={false}>
-					发布
+					release
 				</Button>
 				<Button
 					// @ts-ignore

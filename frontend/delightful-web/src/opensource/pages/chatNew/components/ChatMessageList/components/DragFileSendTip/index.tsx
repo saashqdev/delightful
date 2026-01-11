@@ -12,7 +12,7 @@ import { genFileData } from "../../../MessageEditor/components/InputFiles/utils"
 import { useStyles } from "./styles"
 
 /**
- * 拖拽文件发送提示
+ * 拖拽file发送tip
  */
 const DragFileSendTipComponent = ({ children }: PropsWithChildren) => {
 	const { t } = useTranslation("interface")
@@ -113,9 +113,9 @@ const DragFileSendTipComponent = ({ children }: PropsWithChildren) => {
 				<DelightfulIcon component={IconFileUpload} size={48} color="currentColor" />
 				<span className={styles.dragEnteredMainTip}>{t("chat.input.dragFile.tip")}</span>
 				<span className={styles.dragEnteredTip}>
-					单次发送最多 50 个文件
+					单次发送最多 50 个file
 					<br />
-					支持类型：pdf, txt, csv, docx, doc, xlsx, xls, pptx, ppt, md, mobi, epub
+					支持class型：pdf, txt, csv, docx, doc, xlsx, xls, pptx, ppt, md, mobi, epub
 				</span>
 				{loading && (
 					<DelightfulIcon

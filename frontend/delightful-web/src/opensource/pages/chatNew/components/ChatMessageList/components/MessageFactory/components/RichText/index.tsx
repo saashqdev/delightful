@@ -29,19 +29,19 @@ const RichText = memo(
 		const handleClickOn = useMemoizedFn((view, pos, node, nodePos, event, direct) => {
 			if (node.type.name === "image" || node.type.name === "delightful-emoji") {
 				event.preventDefault()
-				// 注释掉：解决点击图片后，图片无法触发点击事件
+				// 注释掉：解决点击图片后，图片无法触发点击event
 				// event.stopPropagation()
 				return false
 			}
 			return true
 		})
 
-		// 初始化渲染器
+		// initialize渲染器
 		useEffect(() => {
 			async function init() {
 				initializingRef.current = true
 				try {
-					// 处理图片数据
+					// handle图片数据
 					await transformJSONContent(
 						content,
 						(c) => c.type === "image",
@@ -60,7 +60,7 @@ const RichText = memo(
 						},
 					)
 
-					// 处理快捷指令
+					// handle快捷指令
 					transformJSONContent(
 						content,
 						(c) => c.type === "quick-instruction",
@@ -72,7 +72,7 @@ const RichText = memo(
 						},
 					)
 
-					// 处理图片
+					// handle图片
 					editorViewRef.current = new EditorView(containerRef.current, {
 						state: EditorState.create({
 							doc: Node.fromJSON(finalSchema, content),
@@ -85,7 +85,7 @@ const RichText = memo(
 							mousedown: (_, event) => {
 								if (event.target instanceof HTMLImageElement) {
 									event.preventDefault()
-									// 注释掉：解决点击图片后，图片无法触发点击事件
+									// 注释掉：解决点击图片后，图片无法触发点击event
 									// event.stopPropagation()
 									return true
 								}
@@ -94,7 +94,7 @@ const RichText = memo(
 							click: (_, event) => {
 								if (event.target instanceof HTMLImageElement) {
 									event.preventDefault()
-									// 注释掉：解决点击图片后，图片无法触发点击事件
+									// 注释掉：解决点击图片后，图片无法触发点击event
 									// event.stopPropagation()
 									return true
 								}
@@ -121,12 +121,12 @@ const RichText = memo(
 			}
 		}, [content, finalSchema, handleClickOn, hiddenDetail, messageId])
 
-		// // 内容更新处理
+		// // 内容updatehandle
 		// useEffect(() => {
 		// 	if (!editorViewRef.current || !content) return
 		// 	console.log("content update 2=====> ", content)
 		// 	try {
-		// 		// 创建新的 EditorState 而不是尝试部分更新，避免类型不匹配问题
+		// 		// create新的 EditorState 而不是尝试部分update，避免class型不匹配问题
 		// 		const newState = EditorState.create({
 		// 			doc: Node.fromJSON(finalSchema, content),
 		// 			schema: finalSchema,

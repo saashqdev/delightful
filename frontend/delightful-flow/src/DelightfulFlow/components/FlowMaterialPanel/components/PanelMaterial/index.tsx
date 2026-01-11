@@ -13,27 +13,27 @@ export interface PanelMaterialProps {
 	MaterialItemFn: (props: Record<string, any>) => JSX.Element | null
 }
 
-// 使用React.memo包装PanelMaterial组件，避免不必要的重新渲染
+// 使用React.memo包装PanelMaterialcomponent，避免不必要的重新渲染
 const PanelMaterial = React.memo(
 	function PanelMaterial({ keyword, MaterialItemFn }: PanelMaterialProps) {
 		const { nodeList, filterNodeGroups, getGroupNodeList } = useMaterial({ keyword })
 		const containerRef = useRef<HTMLDivElement>(null)
 
-		// 使用useCallback优化renderMaterialItem函数，避免不必要的重新创建
+		// 使用useCallbackoptimizationrenderMaterialItemfunction，避免不必要的重新create
 		const renderMaterialItem = useCallback(
 			(n: any, extraProps: Record<string, any> = {}) => {
-				// 使用解构赋值获取schema中的属性
+				// 使用解构赋值getschema中的property
 				const { key, headerRight, ...restSchema } = n.schema
-				// 创建一个固定的key，避免每次渲染生成新的字符串
+				// create一个固定的key，避免每次渲染生成新的string
 				const itemKey = key || `item-${restSchema?.id}`
 
-				// 直接返回MaterialItemFn组件，传递必要的props
+				// 直接returnMaterialItemFncomponent，传递必要的props
 				return <MaterialItemFn {...restSchema} {...extraProps} key={itemKey} />
 			},
 			[MaterialItemFn],
 		)
 
-		// 使用useMemo优化节点列表渲染，只在nodeList或MaterialItemFn变化时重新计算
+		// 使用useMemooptimizationnodelist渲染，只在nodeList或MaterialItemFn变化时重新计算
 		const renderedNodeList = useMemo(() => {
 			return nodeList.map((n, i) => {
 				const { key, headerRight, ...restSchema } = n.schema

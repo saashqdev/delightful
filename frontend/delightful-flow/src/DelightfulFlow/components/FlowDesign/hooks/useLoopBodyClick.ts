@@ -17,10 +17,10 @@ export default function useLoopBodyClick() {
 
 	const resetEdgesLevels = useMemoizedFn((node: DelightfulFlow.Node) => {
 		
-		// // 点击的是普通节点
+		// // 点击的是普通node
 		// const relationNodeIds = [node.id]
 
-		// // 如果点击的是循环体内的节点, 则循环体内的边都应该是最高层级
+		// // 如果点击的是loop体内的node, 则loop体内的边都应该是最高层级
 
 
 		// const relationEdgesIds = edges.filter(

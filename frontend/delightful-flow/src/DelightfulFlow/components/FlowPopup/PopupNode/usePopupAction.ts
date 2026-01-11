@@ -83,8 +83,8 @@ export default function usePopupAction({ targetNodeId }: UsePopupActionProps) {
 		} else if(judgeLoopNode(sourceNodeType) && !judgeLoopNode(targetNodeType)) {
 			// If switching from a loop node back to a regular node, remove the loop body and related nodes/edges
 			const { nodeIds, edgeIds } = searchLoopRelationNodesAndEdges(node, nodes, edges)
-			console.log("循环内相关的边", edgeIds)
-			console.log("循环内相关的节点", nodeIds)
+			console.log("loop内相关的边", edgeIds)
+			console.log("loop内相关的node", nodeIds)
 			// Remove loop body nodes from nodeConfig
 			nodeIds.forEach(nId => {
 				delete nodeConfig[nId]

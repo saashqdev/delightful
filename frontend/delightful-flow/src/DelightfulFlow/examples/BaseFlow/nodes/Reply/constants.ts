@@ -1,7 +1,7 @@
 ﻿
 
 /**
- * 消息类型枚举
+ * messageclass型枚举
  */
 export enum MessageType {
     // 文本

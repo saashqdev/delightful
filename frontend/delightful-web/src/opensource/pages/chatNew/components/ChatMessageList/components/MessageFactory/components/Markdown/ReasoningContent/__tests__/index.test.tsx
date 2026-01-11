@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import { describe, it, expect, vi, beforeEach } from "vitest"
 import ReasoningContent from "../index"
 
-// 模拟依赖组件
+// 模拟依赖component
 vi.mock("@/opensource/components/base/DelightfulIcon", () => ({
 	default: ({
 		component: Icon,
@@ -54,7 +54,7 @@ vi.mock("../useStyles", () => ({
 	}),
 }))
 
-describe("ReasoningContent 组件", () => {
+describe("ReasoningContent component", () => {
 	const content = "这是推理内容"
 
 	beforeEach(() => {
@@ -67,10 +67,10 @@ describe("ReasoningContent 组件", () => {
 		expect(container.firstChild).toBeNull()
 	})
 
-	it("初始状态应该是折叠的", () => {
+	it("初始status应该是折叠的", () => {
 		render(<ReasoningContent content={content} />)
 
-		// 检查 wrapper 元素
+		// check wrapper 元素
 		const titleElement = screen.getByText("思考过程")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
@@ -80,7 +80,7 @@ describe("ReasoningContent 组件", () => {
 			expect(wrapper.className).toContain("buttonWrapper-mock-class")
 		}
 
-		// 应该有折叠按钮
+		// 应该有折叠button
 		expect(parentDiv).not.toBeNull()
 		if (parentDiv) {
 			expect(parentDiv.className).toContain("collapseTitle-mock-class")
@@ -90,13 +90,13 @@ describe("ReasoningContent 组件", () => {
 		expect(screen.queryByTestId("mock-delightful-markdown")).not.toBeInTheDocument()
 	})
 
-	it("当 isStreaming=true 时，初始状态应该是展开的", () => {
+	it("当 isStreaming=true 时，初始status应该是展开的", () => {
 		render(<ReasoningContent content={content} isStreaming />)
 
-		// 展开状态应该显示内容
+		// 展开status应该显示内容
 		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
-		// 按钮应该存在于展开状态
+		// button应该存在于展开status
 		const titleElement = screen.getByText("思考过程")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
@@ -107,14 +107,14 @@ describe("ReasoningContent 组件", () => {
 		}
 	})
 
-	it("点击折叠状态的按钮应该展开内容", () => {
+	it("点击折叠status的button应该展开内容", () => {
 		render(<ReasoningContent content={content} />)
 
-		// 初始状态是折叠的
+		// 初始status是折叠的
 		const collapseTitle = screen.getByText("思考过程").closest("div")
 		expect(collapseTitle).toBeInTheDocument()
 
-		// 点击按钮
+		// 点击button
 		if (collapseTitle) {
 			fireEvent.click(collapseTitle)
 		}
@@ -124,19 +124,19 @@ describe("ReasoningContent 组件", () => {
 		expect(screen.getByTestId("mock-delightful-markdown").textContent).toBe(content)
 	})
 
-	it("点击展开状态的按钮应该折叠内容", () => {
+	it("点击展开status的button应该折叠内容", () => {
 		render(<ReasoningContent content={content} isStreaming />)
 
-		// 初始状态是展开的
+		// 初始status是展开的
 		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
-		// 点击按钮
+		// 点击button
 		const collapseTitle = screen.getByText("思考过程").closest("div")
 		if (collapseTitle) {
 			fireEvent.click(collapseTitle)
 		}
 
-		// 组件应该进入折叠状态
+		// component应该进入折叠status
 		const titleElement = screen.getByText("思考过程")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
@@ -150,16 +150,16 @@ describe("ReasoningContent 组件", () => {
 		expect(screen.queryByTestId("mock-delightful-markdown")).not.toBeInTheDocument()
 	})
 
-	it("当 streaming 停止时，应该自动切换到折叠状态", () => {
+	it("当 streaming 停止时，应该自动切换到折叠status", () => {
 		const { rerender } = render(<ReasoningContent content={content} isStreaming />)
 
-		// 初始是展开状态
+		// 初始是展开status
 		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
 		// 重新渲染，streaming 设为 false
 		rerender(<ReasoningContent content={content} isStreaming={false} />)
 
-		// 应该切换到折叠状态
+		// 应该切换到折叠status
 		const titleElement = screen.getByText("思考过程")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement

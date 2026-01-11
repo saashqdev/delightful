@@ -52,11 +52,11 @@ const InstructionAction = ({ instruction, systemButtons, ...rest }: InstructionI
 }
 
 /**
- * 指令选择器
+ * 指令selector
  */
 const InstructionActions = observer(({ position, systemButtons }: InstructionSelectorProps) => {
 	const { styles } = useStyles({ position })
-	/** 指令列表 */
+	/** 指令list */
 	const instructions = ConversationBotDataService.getQuickInstructionsByPosition(position)
 
 	if (!instructions || !instructions.items?.length) {

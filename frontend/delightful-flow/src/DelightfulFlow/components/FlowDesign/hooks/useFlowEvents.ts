@@ -1,5 +1,5 @@
 ﻿/**
- * 处理流程的鼠标事件
+ * handleflow的鼠标event
  */
 
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
@@ -19,21 +19,21 @@ import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
 
 type UseFlowEventProps = {
-    // 重置上一次布局数据
+    // reset上一次布局数据
     resetLastLayoutData: () => void
-    // 重置是否可以布局
+    // reset是否可以布局
     resetCanLayout: () => void
 	// 当前缩放尺度
 	currentZoom: number
-	// 是否显示组件参数配置变更函数
+	// 是否显示componentparameterconfiguration变更function
 	setShowParamsComp: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-/** 新增节点的位置 */
+/** 新增node的位置 */
 export enum AddPosition {
-	// 在边新增节点
+	// 在边新增node
 	Edge = 'edge',
-	// 在节点新增节点
+	// 在node新增node
 	Node = 'node',
 	// 在画布添加
 	Canvas = 'canvas'
@@ -81,7 +81,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 	/** 是否懒渲染 */
 	const [ onlyRenderVisibleElements, setOnlyRenderVisibleElements ] = useState(true)
 
-	/** 将流程视图定位到position */
+	/** 将flow视图定位到position */
 	const { updateViewPortToTargetNode } = useViewport()
 
 	useUpdateEffect(() => {
@@ -123,13 +123,13 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 				if (errorNodeIds.length > 0) {
 					const locationId = errorNodeIds[0]
 
-					// 校验失败的节点
+					// 校验failed的node
 					const errorNode = nodes.find(n => n.node_id === locationId)
 					const errorNodeRef = nodeConfig[locationId]
 
 					updateViewPortToTargetNode(errorNode)
 
-					// 需要对校验失败的节点进行二次校验，因为懒渲染导致上一次的校验结果失效了
+					// 需要对校验failed的node进行二次校验，因为懒渲染导致上一次的校验结果失效了
 					setTimeout(() => {
 						errorNodeRef?.validate?.()
 					}, controlDuration)
@@ -140,7 +140,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		}
 	})
 
-	// 节点拖拽结束
+	// node拖拽end
 	const onNodeDragStop = useMemoizedFn((event: any, node: Node, dragNodes: Node[]) => {
 		setIsDragging(false)
 		const nodeIds = dragNodes.map((n) => n.id)
@@ -154,10 +154,10 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		}
 	})
 
-	// 节点拖拽事件
-	// areaNodes，只会罗列出当前分组的节点
+	// node拖拽event
+	// areaNodes，只会罗列出当前分组的node
 	const onNodeDrag: NodeDragHandler = useMemoizedFn((event, node, areaNodes) => {
-		// 如果在分组内，则获取分组所有节点的boundary，设置父节点的大小
+		// 如果在分组内，则get分组所有node的boundary，settings父node的大小
 		// if(node.parentId) {
 		// 	const childNodes = nodes.filter(n => n.parentId === node.parentId)
 		// 	const restNodes = childNodes.filter(n => n.id !== node.id)
@@ -169,11 +169,11 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		// 	if(parentNode) {
 
 				
-		// 		// 复制父节点并更新尺寸和位置
+		// 		// 复制父node并update尺寸和位置
 		// 		const newParentNode = {
 		// 			...parentNode,
-		// 			position: { ...parentNode.position }, // 确保 position 是一个新对象
-		// 			style: { ...parentNode.style }, // 确保 style 是一个新对象
+		// 			position: { ...parentNode.position }, // 确保 position 是一个新object
+		// 			style: { ...parentNode.style }, // 确保 style 是一个新object
 		// 		};
 
 		// 		const rawParentX = newParentNode.position.x
@@ -238,7 +238,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 
 		newNodes.push(newNode)
 
-		// 如果新增的是循环，则需要多新增一个循环体和一条边
+		// 如果新增的是loop，则需要多新增一个loop体和一条边
 		if (judgeLoopNode(newNode[paramsName.nodeType])) {
 			const { newNodes: bodyNodes, newEdges: bodyEdges } = generateLoopBody(
 				newNode,
@@ -264,7 +264,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		const jsonString = event.dataTransfer.getData("node-data")
 
 		try {
-			// 检查输入是否为空或未定义
+			// check输入是否为空或未定义
 			if (jsonString) {
 				let dragData = JSON.parse(jsonString);
 				onAddItem(event, dragData)
@@ -273,7 +273,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 			}
 		} catch (error) {
 			console.error("Failed to parse JSON:", error);
-			// 这里你可以选择返回一个默认值或采取其他错误处理措施
+			// 这里你可以选择return一个默认值或采取其他error handling措施
 		}
 
 
@@ -292,7 +292,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		// states.unselectNodesAndEdges()
 	})
 
-	// backspace删除事件
+	// backspacedeleteevent
 	const onNodesDelete = useMemoizedFn((_nodes: (Node & Partial<DelightfulFlow.Node>)[]) => {
 		const deleteIds = _nodes.reduce((acc, n) => {
 			// @ts-ignore

@@ -2,7 +2,7 @@
 import { useMemo, useRef } from "react"
 import { observer } from "mobx-react-lite"
 
-// 类型导入
+// class型import
 import type {
 	AggregateAISearchCardContentV2,
 	AggregateAISearchCardSearch,
@@ -15,7 +15,7 @@ import {
 } from "@/types/chat/conversation_message"
 import { StreamStatus } from "@/types/request"
 
-// UI 组件库
+// UI component库
 import { ConfigProvider, Flex, Timeline } from "antd"
 import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
 import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
@@ -23,7 +23,7 @@ import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 // 图标
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"
 
-// 工具函数/Hooks
+// toolfunction/Hooks
 import { useBoolean, useMemoizedFn, useSize, useUpdateEffect } from "ahooks"
 import { camelCase, isEmpty, keyBy } from "lodash-es"
 import { resolveToString } from "@bedelightful/es6-template-strings"
@@ -37,7 +37,7 @@ import useStyles from "./styles"
 // 常量
 import { TimeLineDotStatus } from "./const"
 
-// 本地组件
+// 本地component
 import TimeLineDot from "./components/TimeLineDot"
 import EventTable from "./components/EventTable"
 import SearchKeywords from "./components/SearchKeywords"
@@ -78,7 +78,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 	/** 总结内容 */
 	const llmResponse = content?.summary?.content
 
-	/** 是否搜索结束 */
+	/** 是否searchend */
 	const isSearchingFinish = useMemo(() => {
 		if (content?.stream_options?.status === StreamStatus.End) return true
 
@@ -130,7 +130,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 	const allPages = content?.no_repeat_search_details
 	const finish = content?.stream_options?.status === StreamStatus.End
 
-	/** 问题搜索区域标题 */
+	/** 问题search区域标题 */
 	const titleContent = useMemo(() => {
 		if (content?.status === AggregateAISearchCardV2Status.isSearching) {
 			return (
@@ -180,7 +180,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 	const collapseItems = useMemo(() => {
 		const datas = []
 
-		// 如果有事件，则显示事件
+		// 如果有event，则显示event
 		if (content?.events && content?.events.length > 0) {
 			datas.push({
 				key: AggregateAISearchCardDataType.Event,
@@ -196,7 +196,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 
 		const allSearch = content?.no_repeat_search_details ?? []
 
-		// 如果搜索结果不为空，并且搜索结束，则显示搜索结果
+		// 如果search结果不为空，并且searchend，则显示search结果
 		if (allSearch.length > 0 && content?.stream_options?.status === StreamStatus.End) {
 			datas.push({
 				key: AggregateAISearchCardDataType.Search,
@@ -232,14 +232,14 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 		t,
 	])
 
-	// 如果搜索结束，则折叠
+	// 如果searchend，则折叠
 	useUpdateEffect(() => {
 		if (isSearchingFinish) {
 			setFalse()
 		}
 	}, [isSearchingFinish])
 
-	// 如果是深度搜索，且搜索未结束，则展开
+	// 如果是深度search，且search未end，则展开
 	useUpdateEffect(() => {
 		if (
 			content?.search_deep_level === 2 &&
@@ -434,7 +434,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 								: "transparent",
 						}}
 					>
-						{/* 顶部问题搜索区域 */}
+						{/* 顶部问题search区域 */}
 						<DelightfulCollapse
 							className={styles.questionCollapse}
 							style={
@@ -482,7 +482,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 							/>
 						) : null}
 					</div>
-					{/* 思维导图、事件、搜索来源 */}
+					{/* 思维导图、event、search来源 */}
 					<DelightfulCollapse className={styles.collapse} items={collapseItems} />
 				</Flex>
 			</ConfigProvider>

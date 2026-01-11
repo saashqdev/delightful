@@ -44,7 +44,7 @@ const SwitchAction = observer(({ instruction, ...rest }: InstructionItemProps) =
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [configValue, instruction?.default_value])
 
-	// 需要检测一下常驻功能是否关闭了，是的话得清除历史配置值
+	// 需要检测一下常驻功能是否关闭了，是的话得清除历史configuration值
 	useNonResidencyConfigCleanup(
 		instruction?.id,
 		innerConfigValue,

@@ -16,7 +16,7 @@ type SubGroupProps = {
 	materialFn: (n: NodeWidget, extraProps: Record<string, any>) => ReactNode
 }
 
-// 单独提取渲染项组件，并使用memo优化它
+// 单独提取渲染项component，并使用memooptimization它
 const SubGroupItem = React.memo(
 	({
 		node,
@@ -30,7 +30,7 @@ const SubGroupItem = React.memo(
 		return <>{renderItem(node, index)}</>
 	},
 	(prevProps, nextProps) => {
-		// 只比较关键属性，避免不必要的渲染
+		// 只比较关键property，避免不必要的渲染
 		return (
 			prevProps.node.schema.id === nextProps.node.schema.id &&
 			prevProps.index === nextProps.index
@@ -46,10 +46,10 @@ function SubGroup({ subGroup, getGroupNodeList, materialFn }: SubGroupProps) {
 		showIcon: true,
 	})
 
-	// 追踪子面板的展开状态
+	// 追踪子面板的展开status
 	const [activeKey, setActiveKey] = useState<string | undefined>(undefined)
 	const [isRendered, setIsRendered] = useState(false)
-	// 缓存节点列表，避免每次展开都重新获取
+	// 缓存nodelist，避免每次展开都重新get
 	const [cachedNodeList, setCachedNodeList] = useState<NodeWidget[]>([])
 
 	const SubGroupHeader = useMemo(() => {
@@ -70,7 +70,7 @@ function SubGroup({ subGroup, getGroupNodeList, materialFn }: SubGroupProps) {
 		)
 	}, [AvatarComponent, subGroup.groupName, subGroup.desc])
 
-	// 优化：使用useCallback包装renderItem以避免不必要的重新创建
+	// optimization：使用useCallback包装renderItem以避免不必要的重新create
 	const renderItem = useCallback(
 		(n: NodeWidget, i: number) => {
 			return materialFn(n, {
@@ -82,7 +82,7 @@ function SubGroup({ subGroup, getGroupNodeList, materialFn }: SubGroupProps) {
 		[materialFn],
 	)
 
-	// 处理折叠面板变更
+	// handle折叠面板变更
 	const handleCollapseChange = useCallback(
 		(key: string | string[]) => {
 			const isActive =
@@ -92,7 +92,7 @@ function SubGroup({ subGroup, getGroupNodeList, materialFn }: SubGroupProps) {
 					: key === subGroup.groupName)
 			setActiveKey(isActive ? subGroup.groupName : undefined)
 
-			// 如果是首次展开，则标记为已渲染并加载节点数据
+			// 如果是首次展开，则标记为已渲染并loadnode数据
 			if (isActive && !isRendered) {
 				setIsRendered(true)
 				const nodeTypes = (subGroup as NodeGroup)?.nodeTypes || []
@@ -102,7 +102,7 @@ function SubGroup({ subGroup, getGroupNodeList, materialFn }: SubGroupProps) {
 		[subGroup.groupName, isRendered, getGroupNodeList, subGroup],
 	)
 
-	// 渲染子项列表，只有在面板展开且已加载数据时才渲染
+	// 渲染子项list，只有在面板展开且已load数据时才渲染
 	const renderedItems = useMemo(() => {
 		if (!isRendered || cachedNodeList.length === 0) {
 			return null
@@ -133,9 +133,9 @@ function SubGroup({ subGroup, getGroupNodeList, materialFn }: SubGroupProps) {
 	)
 }
 
-// 使用React.memo包装组件并添加自定义比较函数
+// 使用React.memo包装component并添加自定义比较function
 export default React.memo(SubGroup, (prevProps, nextProps) => {
-	// 只比较关键属性，减少不必要的重新渲染
+	// 只比较关键property，减少不必要的重新渲染
 	return (
 		prevProps.subGroup.groupName === nextProps.subGroup.groupName &&
 		prevProps.materialFn === nextProps.materialFn &&

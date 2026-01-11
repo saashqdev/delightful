@@ -11,7 +11,7 @@ interface CursorManagerProps {
 }
 
 /**
- * 处理流式渲染时的光标管理
+ * handle流式渲染时的光标管理
  */
 export const useCursorManager = (props: CursorManagerProps) => {
 	const { content, isStreaming, classNameRef, cursorClassName } = props
@@ -20,21 +20,21 @@ export const useCursorManager = (props: CursorManagerProps) => {
 	const contentRef = useRef<string | undefined>("")
 	const finalCleanupRef = useRef<boolean>(false)
 
-	// 初始化光标管理器（全局单例）
+	// initialize光标管理器（全局单例）
 	useEffect(() => {
 		if (!globalCursorManager.instance) {
 			globalCursorManager.instance = manageCursor(cursorClassName)
 		}
 	}, [cursorClassName])
 
-	// 内容变化或流式状态变化时处理光标
+	// 内容变化或流式status变化时handle光标
 	useLayoutEffect(() => {
-		// 只在内容真正变化时添加光标，避免不必要的DOM操作
+		// 只在内容真正变化时添加光标，避免不必要的DOMoperation
 		if (!isStreaming || !content || content === contentRef.current) return
 
 		contentRef.current = content
 
-		// 使用缓存获取父节点，避免重复查询
+		// 使用缓存get父node，避免重复query
 		const parentSelector = `.${classNameRef.current}`
 		const parent =
 			domCache.getNode(parentSelector) ||
@@ -42,29 +42,29 @@ export const useCursorManager = (props: CursorManagerProps) => {
 
 		if (!parent) return
 
-		// 更新缓存
+		// update缓存
 		if (!domCache.nodes.has(parentSelector)) {
 			domCache.nodes.set(parentSelector, parent)
 		}
 
-		// 流式渲染时，每次内容更新都需要重新定位光标
+		// 流式渲染时，每次内容update都需要重新定位光标
 		if (isStreaming) {
-			// 标记需要进行最终清理
+			// 标记需要进行最终cleanup
 			finalCleanupRef.current = true
 
 			// 首先清除现有光标
 			globalCursorManager.instance?.clearAllCursors()
 
-			// 获取最后一个子元素节点
+			// get最后一个子元素node
 			const lastChild = parent.lastElementChild
 
 			if (!lastChild) return
 
 			let targetElement = lastChild as HTMLElement
 
-			// 使用requestAnimationFrame优化DOM操作，确保在浏览器空闲时进行
+			// 使用requestAnimationFrameoptimizationDOMoperation，确保在浏览器空闲时进行
 			requestAnimationFrame(() => {
-				// 根据不同标签类型处理
+				// 根据不同labelclass型handle
 				if (targetElement.tagName === "PRE") {
 					// 代码块
 					const codeElement = targetElement.querySelector("code")
@@ -72,13 +72,13 @@ export const useCursorManager = (props: CursorManagerProps) => {
 						targetElement = findLastElement(codeElement)
 					}
 				} else if (targetElement.tagName === "OL" || targetElement.tagName === "UL") {
-					// 列表
+					// list
 					const lastLi = targetElement.lastElementChild as HTMLElement
 					if (lastLi) {
 						targetElement = findLastElement(lastLi)
 					}
 				} else if (targetElement.tagName === "TABLE") {
-					// 表格
+					// table
 					const lastCell = targetElement.querySelector(
 						"tr:last-child td:last-child, tr:last-child th:last-child",
 					) as HTMLElement
@@ -86,7 +86,7 @@ export const useCursorManager = (props: CursorManagerProps) => {
 						targetElement = findLastElement(lastCell)
 					}
 				} else if (targetElement.className === "table-container") {
-					// 处理表格容器
+					// handletable容器
 					const table = targetElement.querySelector("table")
 					if (table) {
 						const lastCell = table.querySelector(
@@ -113,13 +113,13 @@ export const useCursorManager = (props: CursorManagerProps) => {
 		}
 	}, [content, isStreaming, classNameRef])
 
-	// 监听流式渲染状态变化
+	// listener流式渲染status变化
 	useEffect(() => {
-		// 记录先前的流式状态
+		// 记录先前的流式status
 		const wasStreaming = previousStreamingRef.current
 		previousStreamingRef.current = isStreaming
 
-		// 流式渲染结束时，清除所有光标并重置标记
+		// 流式渲染end时，清除所有光标并reset标记
 		if (wasStreaming && !isStreaming) {
 			setTimeout(() => {
 				globalCursorManager.instance?.clearAllCursors()
@@ -129,13 +129,13 @@ export const useCursorManager = (props: CursorManagerProps) => {
 		}
 	}, [isStreaming])
 
-	// 增加一个额外的useEffect，确保在所有内容完成后检查是否需要清理光标
+	// 增加一个额外的useEffect，确保在所有内容complete后check是否需要cleanup光标
 	useEffect(() => {
-		// 当内容不再变化且已经添加过光标，并且流式渲染已结束时，执行最终清理
+		// 当内容不再变化且已经添加过光标，并且流式渲染已end时，执行最终cleanup
 		if (finalCleanupRef.current && !isStreaming) {
-			// 使用requestAnimationFrame替代固定时间延迟，确保在下一帧渲染时进行清理
+			// 使用requestAnimationFrame替代固定time延迟，确保在下一帧渲染时进行cleanup
 			const cleanupFrame = requestAnimationFrame(() => {
-				// 检查内容是否还是最新的，避免潜在的竞态条件
+				// check内容是否还是最新的，避免潜在的竞态条件
 				if (content === contentRef.current) {
 					globalCursorManager.instance?.clearAllCursors()
 					cursorAddedRef.current = false
@@ -146,15 +146,15 @@ export const useCursorManager = (props: CursorManagerProps) => {
 			return () => cancelAnimationFrame(cleanupFrame)
 		}
 
-		// 添加一个空的返回函数，确保所有条件分支都有返回值
+		// 添加一个空的returnfunction，确保所有条件分支都有return value
 		return () => {}
 	}, [content, isStreaming])
 
-	// 组件卸载时清理资源
+	// component卸载时cleanup资源
 	useEffect(() => {
 		return () => {
 			if (contentRef.current) {
-				// 清理光标和DOM缓存
+				// cleanup光标和DOM缓存
 				globalCursorManager.instance?.clearAllCursors()
 				domCache.clearCache()
 			}

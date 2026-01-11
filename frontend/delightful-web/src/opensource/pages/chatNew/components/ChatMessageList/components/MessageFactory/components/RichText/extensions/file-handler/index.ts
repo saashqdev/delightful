@@ -15,7 +15,7 @@ const FileHandlePlugin = (options: FileHandlePluginOptions) => {
 	const { key, editor, onPaste, onDrop, onValidationError, allowedMimeTypes, maxFileSize } =
 		options
 
-	// 用于跟踪是否已处理粘贴事件
+	// 用于跟踪是否已handle粘贴event
 	let isPasteHandled = false
 
 	return new Plugin({
@@ -54,13 +54,13 @@ const FileHandlePlugin = (options: FileHandlePluginOptions) => {
 				return true
 			},
 			handlePaste(_, event) {
-				// 如果已经处理过这个粘贴事件，则跳过
+				// 如果已经handle过这个粘贴event，则跳过
 				if (isPasteHandled) {
 					isPasteHandled = false
 					return false
 				}
 
-				// 如果没有文件，不处理
+				// 如果没有file，不handle
 				if (!event.clipboardData?.files.length) {
 					return false
 				}
@@ -83,7 +83,7 @@ const FileHandlePlugin = (options: FileHandlePluginOptions) => {
 				}
 
 				if (validFiles.length > 0 && onPaste) {
-					// 标记为已处理
+					// 标记为已handle
 					isPasteHandled = true
 					onPaste(editor, validFiles, html)
 				}

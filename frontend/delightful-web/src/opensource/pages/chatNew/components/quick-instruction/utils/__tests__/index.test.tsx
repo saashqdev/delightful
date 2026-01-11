@@ -4,7 +4,7 @@ import { replaceExistQuickInstruction, transformQuickInstruction } from "../inde
 import { ExtensionName } from "../../extension/constants"
 
 describe("replaceQuickInstruction", () => {
-	it("应该替换顶层的快捷指令节点", () => {
+	it("应该替换顶层的快捷指令node", () => {
 		const content = {
 			type: ExtensionName,
 			attrs: { old: "value" },
@@ -17,7 +17,7 @@ describe("replaceQuickInstruction", () => {
 		expect(result?.attrs).toEqual({ new: "value" })
 	})
 
-	it("应该替换数组中的快捷指令节点", () => {
+	it("应该替换array中的快捷指令node", () => {
 		const content = [
 			{
 				type: ExtensionName,
@@ -37,7 +37,7 @@ describe("replaceQuickInstruction", () => {
 		expect(result?.[1]).toEqual({ type: "paragraph", content: "text" })
 	})
 
-	it("应该替换嵌套对象中的快捷指令节点", () => {
+	it("应该替换嵌套object中的快捷指令node", () => {
 		const content = {
 			type: "doc",
 			content: [
@@ -55,7 +55,7 @@ describe("replaceQuickInstruction", () => {
 		expect(result?.content?.[0].attrs).toEqual({ new: "value" })
 	})
 
-	it("应该处理复杂的嵌套结构", () => {
+	it("应该handlecomplex的嵌套结构", () => {
 		const content = {
 			type: "doc",
 			content: [
@@ -85,7 +85,7 @@ describe("replaceQuickInstruction", () => {
 })
 
 describe("replaceExistQuickInstruction", () => {
-	it("应该替换顶层的匹配快捷指令并返回 true", () => {
+	it("应该替换顶层的匹配快捷指令并return true", () => {
 		const content = {
 			type: ExtensionName,
 			attrs: {
@@ -107,7 +107,7 @@ describe("replaceExistQuickInstruction", () => {
 		})
 	})
 
-	it("应该在数组中替换匹配的快捷指令并返回 true", () => {
+	it("应该在array中替换匹配的快捷指令并return true", () => {
 		const content = [
 			{
 				type: ExtensionName,
@@ -139,7 +139,7 @@ describe("replaceExistQuickInstruction", () => {
 		})
 	})
 
-	it("应该在嵌套结构中替换所有匹配的快捷指令并返回 true", () => {
+	it("应该在嵌套结构中替换所有匹配的快捷指令并return true", () => {
 		const content = {
 			type: "doc",
 			content: [
@@ -182,7 +182,7 @@ describe("replaceExistQuickInstruction", () => {
 		})
 	})
 
-	it("当没有匹配的指令时应该返回 false", () => {
+	it("当没有匹配的指令时应该return false", () => {
 		const content = {
 			type: ExtensionName,
 			attrs: {

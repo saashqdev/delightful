@@ -23,7 +23,7 @@ function MessageSeenStatus({ unreadCount, messageId }: MessageStatusProps) {
 	const { styles, cx } = useStyles()
 	const { currentConversation } = ConversationStore
 
-	// 自己发送的消息，发送失败，不显示
+	// 自己发送的message，发送failed，不显示
 	if (
 		MessageStore.sendStatusMap.get(messageId) &&
 		MessageStore.sendStatusMap.get(messageId) !== SendStatus.Success
@@ -35,7 +35,7 @@ function MessageSeenStatus({ unreadCount, messageId }: MessageStatusProps) {
 		case MessageReceiveType.Ai:
 		case MessageReceiveType.User:
 			switch (true) {
-				// 优先判断消息状态
+				// 优先判断messagestatus
 				case unreadCount > 0:
 					return <StatusContent icon={IconEye} text={t("chat.unread")} />
 				case unreadCount === 0:

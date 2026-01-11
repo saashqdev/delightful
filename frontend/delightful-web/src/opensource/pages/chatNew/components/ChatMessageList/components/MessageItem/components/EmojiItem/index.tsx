@@ -16,9 +16,9 @@ interface EmojiContent {
 }
 
 /**
- * 解析表情消息内容
- * @param content 消息内容
- * @returns 表情代码数组
+ * 解析表情message内容
+ * @param content message内容
+ * @returns 表情代码array
  */
 const parseContent = (content: string): any => {
 	try {

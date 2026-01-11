@@ -20,7 +20,7 @@ export function flatStringifyFunArg(arg: InputExpressionValue) {
 	if (!arg) return
 	let output = ""
 	const argValueKey = `${arg.type}_value`
-	// 取到对应类型的value
+	// 取到对应class型的value
 	const argValue = (arg[argValueKey as keyof InputExpressionValue] || []) as EXPRESSION_VALUE[]
 	// console.log("argValue", argValue)
 	argValue.forEach((item) => {
@@ -51,7 +51,7 @@ interface LabelFuncProps {
 }
 
 export function LabelFunc({ config, disabled, selected, deleteFn }: LabelFuncProps) {
-	/** 参数项配置弹窗 */
+	/** parameter项configuration弹窗 */
 	const { onPopoverModalClick } = useArgsModalContext()
 
 	const { datasetProps } = useDatasetProps({ config })

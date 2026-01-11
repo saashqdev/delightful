@@ -45,7 +45,7 @@ function ImageCompareSlider(props: ImageCompareSliderProps) {
 		e.stopPropagation()
 	})
 
-	// 捕捉鼠标在外部松开的事件
+	// 捕捉鼠标在外部松开的event
 	useEffect(() => {
 		if (!isDragging) return
 		const handleGlobalPointerUp = () => {

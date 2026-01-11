@@ -58,7 +58,7 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 
 	it("should handle complex table with various content types", () => {
 		const markdown = `
-| 类型 | 值 | 备注 |
+| class型 | 值 | 备注 |
 |------|----|----- |
 | 价格 | $100.50 | 含税 |
 | 公式 | 这不是公式：$x + y$ | 只是文本 |
@@ -87,7 +87,7 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 
 	it("should handle empty table cells and edge cases", () => {
 		const markdown = `
-| 产品 | 价格 | 状态 |
+| 产品 | 价格 | status |
 |------|------|------|
 | A    | $0   | 有效 |
 | B    |      | 无价格 |

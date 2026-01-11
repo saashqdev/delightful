@@ -6,7 +6,7 @@ import { ChatDomId } from "../../constants"
 import { useStyles } from "../../styles"
 
 /**
- * 空状态组件
+ * 空statuscomponent
  * 当没有当前会话时显示的缺省页面
  */
 function EmptyState() {

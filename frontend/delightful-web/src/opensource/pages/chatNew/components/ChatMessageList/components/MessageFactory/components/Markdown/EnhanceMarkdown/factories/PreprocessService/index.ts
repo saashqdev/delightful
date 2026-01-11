@@ -19,7 +19,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 获取所有规则
+	 * get所有规则
 	 * @returns
 	 */
 	getAllRules() {
@@ -44,7 +44,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 获取内联 LaTeX 规则
+	 * get内联 LaTeX 规则
 	 * @returns
 	 */
 	getInlineLatexRule(): PreprocessRule {
@@ -56,7 +56,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 获取块级 LaTeX 规则
+	 * get块级 LaTeX 规则
 	 * @returns
 	 */
 	getBlockLatexRule(): PreprocessRule {
@@ -68,7 +68,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 编码LaTeX内容为HTML属性安全格式
+	 * encodingLaTeX内容为HTMLproperty安全format
 	 * @param content
 	 * @returns
 	 */
@@ -82,14 +82,14 @@ class PreprocessService {
 	}
 
 	/**
-	 * 检查位置是否在引用块内
+	 * check位置是否在引用块内
 	 * @param markdown
 	 * @param start
 	 * @param end
 	 * @returns
 	 */
 	private isInsideBlockquote(markdown: string, start: number, end: number): boolean {
-		// 获取从内容开始到当前位置的文本
+		// get从内容start到当前位置的文本
 		const beforeText = markdown.substring(0, start)
 		const lines = beforeText.split("\n")
 
@@ -97,12 +97,12 @@ class PreprocessService {
 		let inBlockquote = false
 		for (let i = lines.length - 1; i >= 0; i--) {
 			const line = lines[i]
-			// 如果遇到引用标记开始的行
+			// 如果遇到引用标记start的行
 			if (line.trim().startsWith(">")) {
 				inBlockquote = true
 				break
 			}
-			// 如果遇到非空行且不是引用行，则说明不在引用内
+			// 如果遇到非空行且不是引用行，则description不在引用内
 			if (line.trim() && !line.trim().startsWith(">")) {
 				break
 			}
@@ -110,12 +110,12 @@ class PreprocessService {
 
 		if (!inBlockquote) return false
 
-		// 检查从开始到结束位置是否都在引用内
+		// check从start到end位置是否都在引用内
 		const textToCheck = markdown.substring(start, end)
 		const allLines = markdown.substring(0, end).split("\n")
 		const startLineIndex = beforeText.split("\n").length - 1
 
-		// 检查涉及的所有行是否都在引用块内
+		// check涉及的所有行是否都在引用块内
 		for (let i = startLineIndex; i < allLines.length; i++) {
 			const line = allLines[i]
 			if (line.trim() && !line.trim().startsWith(">") && !line.includes("```")) {
@@ -160,7 +160,7 @@ class PreprocessService {
 			const blockStart = match.index
 			const blockEnd = match.index + match[0].length
 
-			// 检查代码块是否在引用内，如果在引用内则不分割
+			// check代码块是否在引用内，如果在引用内则不分割
 			if (!this.isInsideBlockquote(markdown, blockStart, blockEnd)) {
 				specialBlocks.push({
 					start: blockStart,
@@ -171,7 +171,7 @@ class PreprocessService {
 			}
 		}
 
-		// 重置正则表达式的 lastIndex
+		// reset正则表达式的 lastIndex
 		codeBlockRegex.lastIndex = 0
 
 		// 收集所有图片，但排除在代码块内的图片
@@ -179,13 +179,13 @@ class PreprocessService {
 			const imageStart = match.index
 			const imageEnd = match.index + match[0].length
 
-			// 检查图片是否在任何代码块内
+			// check图片是否在任何代码块内
 			const isInsideCodeBlock = specialBlocks.some(
 				(block) =>
 					block.type === "code" && imageStart >= block.start && imageEnd <= block.end,
 			)
 
-			// 检查图片是否在引用内
+			// check图片是否在引用内
 			const isInsideQuote = this.isInsideBlockquote(markdown, imageStart, imageEnd)
 
 			// 只有不在代码块内且不在引用内的图片才会被添加
@@ -199,7 +199,7 @@ class PreprocessService {
 			}
 		}
 
-		// 重置正则表达式的 lastIndex
+		// reset正则表达式的 lastIndex
 		imgRegex.lastIndex = 0
 
 		// 按位置排序
@@ -226,7 +226,7 @@ class PreprocessService {
 			blocks.push(remainingText.trim())
 		}
 
-		// 如果没有匹配到任何特殊块，则返回原始内容
+		// 如果没有匹配到任何特殊块，则return原始内容
 		if (blocks.length === 0 && markdown.trim()) {
 			blocks.push(markdown.trim())
 		}
@@ -235,7 +235,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 处理缩写定义和替换
+	 * handle缩写定义和替换
 	 * @param markdown
 	 * @returns
 	 */
@@ -249,10 +249,10 @@ class PreprocessService {
 			abbreviations.set(abbr, definition)
 		}
 
-		// 移除缩写定义行，同时清理多余的空行
+		// 移除缩写定义行，同时cleanup多余的空行
 		let processedMarkdown = markdown.replace(ABBREVIATION_DEF_REGEX, "")
 
-		// 清理连续的空行，将多个连续的空行合并为最多两个空行
+		// cleanup连续的空行，将多个连续的空行合并为最多两个空行
 		processedMarkdown = processedMarkdown.replace(/\n{3,}/g, "\n\n")
 
 		// 第二阶段：替换文本中的缩写
@@ -272,7 +272,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 处理参考链接定义和替换
+	 * handle参考链接定义和替换
 	 * @param markdown
 	 * @returns
 	 */
@@ -291,7 +291,7 @@ class PreprocessService {
 		let processedMarkdown = markdown.replace(REFERENCE_LINK_DEF_REGEX, "")
 
 		// 第二阶段：替换文本中的参考链接使用
-		// 匹配 [text][id] 或 [text] 格式
+		// 匹配 [text][id] 或 [text] format
 		const REFERENCE_LINK_USE_REGEX = /\[([^\]]+)\](?:\[([^\]]*)\])?/g
 
 		processedMarkdown = processedMarkdown.replace(
@@ -315,15 +315,15 @@ class PreprocessService {
 	}
 
 	/**
-	 * 修复段落开头的HTML标签问题
-	 * 当行开头（或换行后紧跟）出现内联HTML标签时，添加零宽度空格确保段落完整性
-	 * 注意：不处理块级元素如 DelightfulLatexBlock, div, hr 等
+	 * fix段落开头的HTMLlabel问题
+	 * 当行开头（或换行后紧跟）出现内联HTMLlabel时，添加零宽度空格确保段落完整性
+	 * note：不handle块级元素如 DelightfulLatexBlock, div, hr 等
 	 * @param markdown
 	 * @returns
 	 */
 	private fixParagraphInlineHtmlTags(markdown: string): string {
-		// 覆盖常见的内联HTML标签：abbr, sup, span, a, kbd, cite, q, s, u, mark, small, strong, em, sub
-		// 以及Delightful开头的内联组件标签（但排除块级组件）
+		// 覆盖常见的内联HTMLlabel：abbr, sup, span, a, kbd, cite, q, s, u, mark, small, strong, em, sub
+		// 以及Delightful开头的内联componentlabel（但排除块级component）
 		return markdown.replace(
 			/(\n|^)(\s*)(<(?:abbr|sup|span|a|kbd|cite|q|s|u|mark|small|strong|em|sub|DelightfulLatexInline|DelightfulCitation)\b[^>]*>)/g,
 			"$1$2\u200B$3",
@@ -331,7 +331,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 保护代码块内容，避免被预处理规则影响
+	 * 保护代码块内容，避免被预handle规则影响
 	 * @param markdown
 	 * @returns { processedMarkdown: string, codeBlockMap: Map<string, string> }
 	 */
@@ -372,7 +372,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 预处理 markdown
+	 * 预handle markdown
 	 * @param markdown
 	 * @returns
 	 */
@@ -381,23 +381,23 @@ class PreprocessService {
 		const { processedMarkdown: protectedMarkdown, codeBlockMap } =
 			this.protectCodeBlocks(markdown)
 
-		// 处理缩写
+		// handle缩写
 		let processedMarkdown = this.processAbbreviations(protectedMarkdown)
 
-		// 处理参考链接
+		// handle参考链接
 		processedMarkdown = this.processReferenceLinks(processedMarkdown)
 
-		// 处理多级任务列表（在其他规则之前）
+		// handle多级tasklist（在其他规则之前）
 		processedMarkdown = this.processNestedTaskLists(processedMarkdown)
 
 		const rules = this.getAllRules()
 
-		// 移除原有的单一任务列表处理规则，因为我们已经用新方法处理了
+		// 移除原有的单一tasklisthandle规则，因为我们已经用新methodhandle了
 		const filteredRules = rules.filter(
 			(rule) => rule.regex.toString() !== TASK_LIST_REGEX.toString(),
 		)
 
-		// 在表格处理之前，先保护表格中的美元符号（如果启用 LaTeX）
+		// 在tablehandle之前，先保护table中的美元符号（如果启用 LaTeX）
 		let tableProtectionMap = new Map<string, string>()
 		if (options?.enableLatex) {
 			const { markdown: protectedTableMarkdown, protectionMap } =
@@ -407,7 +407,7 @@ class PreprocessService {
 		}
 
 		if (options?.enableLatex) {
-			// 块级公式必须在行内公式之前处理
+			// 块级公式必须在行内公式之前handle
 			filteredRules.unshift(this.getBlockLatexRule())
 			filteredRules.push(this.getInlineLatexRule())
 		}
@@ -416,12 +416,12 @@ class PreprocessService {
 			processedMarkdown = processedMarkdown.replace(rule.regex, rule.replace)
 		}
 
-		// 恢复表格中的美元符号（如果之前保护过）
+		// 恢复table中的美元符号（如果之前保护过）
 		if (tableProtectionMap.size > 0) {
 			processedMarkdown = this.restoreTableDollarSigns(processedMarkdown, tableProtectionMap)
 		}
 
-		// 最后修复所有可能的段落开头HTML标签问题
+		// 最后fix所有可能的段落开头HTMLlabel问题
 		processedMarkdown = this.fixParagraphInlineHtmlTags(processedMarkdown)
 
 		// 恢复代码块内容
@@ -432,7 +432,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 处理多级任务列表，生成正确的嵌套HTML结构
+	 * handle多级tasklist，生成正确的嵌套HTML结构
 	 * @param markdown
 	 * @returns
 	 */
@@ -447,7 +447,7 @@ class PreprocessService {
 			level: number
 		}> = []
 
-		// 收集所有任务列表行
+		// 收集所有tasklist行
 		lines.forEach((line, index) => {
 			const match = line.match(/^(\s*)-\s+\[(x| )\]\s+(.+)$/)
 			if (match) {
@@ -481,17 +481,17 @@ class PreprocessService {
 				}
 
 				if (task.level > startLevel) {
-					// 跳过更高级别的任务，它们会在递归中处理
+					// 跳过更高级别的task，它们会在递归中handle
 					i++
 					continue
 				}
 
-				// 当前级别的任务
+				// 当前级别的task
 				const checkbox = `<input type="checkbox" ${
 					task.checked === "x" ? "checked" : ""
 				} readonly />`
 
-				// 查找子任务
+				// 查找子task
 				const childTasks: typeof taskLines = []
 				let j = i + 1
 				while (j < tasks.length && tasks[j].level > task.level) {
@@ -499,10 +499,10 @@ class PreprocessService {
 					j++
 				}
 
-				// 构建任务HTML结构
+				// 构建taskHTML结构
 				let taskHTML = `<li class="task-list-item">${checkbox}`
 
-				// 如果有子任务，将文本内容包装在span中，并添加子任务列表
+				// 如果有子task，将文本内容包装在span中，并添加子tasklist
 				if (childTasks.length > 0) {
 					taskHTML += `<span>${task.content}</span>`
 					const childHTML = buildNestedHTML(childTasks, task.level + 1)
@@ -510,14 +510,14 @@ class PreprocessService {
 						taskHTML += `<ul class="task-list-nested">${childHTML}</ul>`
 					}
 				} else {
-					// 没有子任务时，直接添加文本内容
+					// 没有子task时，直接添加文本内容
 					taskHTML += task.content
 				}
 
 				taskHTML += "</li>"
 				result.push(taskHTML)
 
-				// 跳过已处理的子任务
+				// 跳过已handle的子task
 				i = j
 			}
 
@@ -527,11 +527,11 @@ class PreprocessService {
 		// 生成完整的HTML
 		const nestedHTML = `<ul class="task-list-container">${buildNestedHTML(taskLines)}</ul>`
 
-		// 替换原始的任务列表
+		// 替换原始的tasklist
 		const processedMarkdown = markdown
 		const taskLineIndices = taskLines.map((t) => t.originalIndex).sort((a, b) => b - a)
 
-		// 找到连续的任务列表块并替换
+		// 找到连续的tasklist块并替换
 		const taskBlocks: Array<{ start: number; end: number }> = []
 		let currentBlock: { start: number; end: number } | null = null
 
@@ -573,7 +573,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 保护表格中的美元符号，避免被 LaTeX 处理器误解析
+	 * 保护table中的美元符号，避免被 LaTeX handle器误解析
 	 * @param markdown
 	 * @returns
 	 */
@@ -584,7 +584,7 @@ class PreprocessService {
 		const protectionMap = new Map<string, string>()
 		let protectedMarkdown = markdown
 
-		// 找到所有表格块
+		// 找到所有table块
 		const tableMatches = markdown.matchAll(
 			/^\s*(\|[^\n]*\|)\s*\n\s*(\|[\s\-:|\s]*\|)\s*\n((?:\s*\|[^\n]*\|\s*(?:\n|$))*)/gm,
 		)
@@ -593,7 +593,7 @@ class PreprocessService {
 			const fullTable = match[0]
 			let protectedTable = fullTable
 
-			// 在这个表格中保护所有美元符号
+			// 在这个table中保护所有美元符号
 			const dollarMatches = fullTable.matchAll(/\$/g)
 			let offset = 0
 
@@ -614,7 +614,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 恢复表格中被保护的美元符号
+	 * 恢复table中被保护的美元符号
 	 * @param markdown
 	 * @param protectionMap
 	 * @returns

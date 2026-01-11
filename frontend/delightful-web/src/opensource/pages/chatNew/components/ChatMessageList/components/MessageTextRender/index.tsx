@@ -80,7 +80,7 @@ const MessageTextRender = observer(
 
 		if (!message || !isConversationMessage(message)) return null
 
-		// 如果消息被撤回，则显示撤回提示
+		// 如果message被撤回，则显示撤回tip
 		if (!skipRevoked && message.revoked)
 			return <span className={cx(styles.content, className)}>{t("chat.messageRevoked")}</span>
 

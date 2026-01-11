@@ -1,4 +1,4 @@
-﻿/** 当日志运行错误时，定位到错误的节点 */
+﻿/** 当日志运行error时，定位到error的node */
 import { useNodeTesting } from '@/DelightfulFlow/context/NodeTesingContext/useNodeTesting'
 import React from 'react'
 import useViewport from '../../common/hooks/useViewport'
@@ -20,14 +20,14 @@ export default function useTargetToErrorNode() {
 			.map(([nodeId]) => nodeId)
 		
 		// console.log("errorNodeId", errorNodeId, testingResultMap)
-		// 存在错误，则定位到错误的节点id
+		// 存在error，则定位到error的nodeid
 		if (errorNodeId) {
 			const errorNode = nodes.find((n) => n.node_id === errorNodeId)
 			// console.log("errorNode", errorNode)
 			if (!errorNode?.width) return
 			updateViewPortToTargetNode(errorNode)
 		}
-		// 全都成功，则定位到最后一个节点
+		// 全都success，则定位到最后一个node
 		else{
 			const testNodeIds = Object.keys(testingResultMap)
 			const [lastSuccessNodeId] = Object.entries(testingResultMap).filter(([, testConfig]) => {

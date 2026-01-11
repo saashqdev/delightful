@@ -17,7 +17,7 @@ const TagsSelect = ({ ...props }: TagsSelect) => {
 		if (e.key === "Tab") {
 			e.preventDefault() // 阻止默认的 tab 键行为
 
-			// 检查是否已经存在相同的值
+			// check是否已经存在相同的值
 			if (!props?.value?.includes(inputValue.trim()) && inputValue.trim() !== "") {
 				props?.onChange([...props?.value, inputValue.trim()])
 				setInputValue("")

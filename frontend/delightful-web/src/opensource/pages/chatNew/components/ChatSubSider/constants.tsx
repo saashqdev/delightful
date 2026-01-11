@@ -1,6 +1,6 @@
 export const enum SegmentedKey {
 	/**
-	 * 消息
+	 * message
 	 */
 	Message = "message",
 	/**

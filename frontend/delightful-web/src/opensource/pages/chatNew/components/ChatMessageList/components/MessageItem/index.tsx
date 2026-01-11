@@ -52,7 +52,7 @@ const Avatar = observer(function Avatar({
 	const { styles } = useStyles({ fontSize: 16, isMultipleCheckedMode: false })
 	const userInfo = useInfoStore.get(uid)
 
-	// 使用 useMemo 缓存 info 对象，避免每次渲染都创建新对象
+	// 使用 useMemo 缓存 info object，避免每次渲染都create新object
 	const info = useMemo(() => {
 		if (avatar) {
 			return { name, avatar_url: getAvatarUrl(avatar) }
@@ -108,12 +108,12 @@ const MessageItem = memo(function MessageItem({
 	// 使用 useMemo 缓存头像大小
 	const avatarSize = useMemo(() => calculateRelativeSize(40, fontSize), [fontSize])
 
-	// 如果消息被撤回，显示撤回提示
+	// 如果message被撤回，显示撤回tip
 	if (revoked) {
 		return <RevokeTip key={message_id} senderUid={sender_id} />
 	}
 
-	// 使用 useMemo 缓存头像组件
+	// 使用 useMemo 缓存头像component
 	const avatarComponent = <Avatar name={name} avatar={avatar} size={avatarSize} uid={sender_id} />
 
 	return (
@@ -128,10 +128,10 @@ const MessageItem = memo(function MessageItem({
 			style={{ ...containerStyle, justifyContent: is_self ? "flex-end" : "flex-start" }}
 			data-message-id={message_id}
 		>
-			{/* 头像 - 非本人消息显示在左侧 */}
+			{/* 头像 - 非本人message显示在左侧 */}
 			{!is_self && avatarComponent}
 
-			{/* 消息内容和状态 */}
+			{/* message内容和status */}
 			<Flex
 				vertical
 				gap={4}
@@ -153,7 +153,7 @@ const MessageItem = memo(function MessageItem({
 				)}
 			</Flex>
 
-			{/* 头像 - 本人消息显示在右侧 */}
+			{/* 头像 - 本人message显示在右侧 */}
 			{is_self && avatarComponent}
 		</div>
 	)

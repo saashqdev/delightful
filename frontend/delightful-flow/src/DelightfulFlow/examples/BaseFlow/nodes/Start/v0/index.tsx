@@ -153,14 +153,14 @@ export default function StartV0() {
 									className={clsx(styles.icon, styles.chatWindowsIcon)}
 								/>
 							}
-							title="聊天窗口打开时"
+							title="聊天window打开时"
 							// @ts-ignore
 							template={chatTemplate}
 							branchId={newChatBranchId}
 							className="start-list-item"
 						>
 							<div className={styles.chatWindowsParams}>
-								<div className={styles.title}>距离上一次打开时间间隔多久才生效</div>
+								<div className={styles.title}>距离上一次打开time间隔多久才生效</div>
 								<div className={styles.inputWrap}>
 									<Form.Item
 										name={`${TriggerType.NewChat}${Splitor}interval`}
@@ -168,7 +168,7 @@ export default function StartV0() {
 										normalize={(value) => Number(value)}
 									>
 										<TsInput
-											placeholder="时间"
+											placeholder="time"
 											type="number"
 											className="nodrag"
 										/>
@@ -197,7 +197,7 @@ export default function StartV0() {
 									className={clsx(styles.icon, styles.messageIcon)}
 								/>
 							}
-							title="接收新消息时"
+							title="接收新message时"
 							// @ts-ignore
 							template={messageTemplate}
 							branchId={newMessageBranchId}
@@ -214,7 +214,7 @@ export default function StartV0() {
 								className={clsx(styles.icon, styles.timeTriggerIcon)}
 							/>
 						}
-						title="循环起始"
+						title="loop起始"
 						branchId={loopStartBranchId}
 						// @ts-ignore
 						template={loopStartTemplate}

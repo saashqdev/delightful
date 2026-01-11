@@ -77,7 +77,7 @@ export default function NewGroupNotice({ onClose: onCloseInProps }: ExtraSection
 				/>
 				<Flex justify="end" align="center" gap={10} className={styles.footer}>
 					<DelightfulButton size="large" type="default" onClick={onClose}>
-						取消
+						cancel
 					</DelightfulButton>
 					<DelightfulButton size="large" type="primary" onClick={onClose}>
 						下一步

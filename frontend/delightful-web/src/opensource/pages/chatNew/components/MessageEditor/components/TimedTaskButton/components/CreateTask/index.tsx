@@ -177,7 +177,7 @@ const CreateTask = observer(({ conversationId, currentTask, reBack }: CreateTask
 				ConversationTaskService.createTask(newValues, callback)
 			}
 		} catch (error) {
-			console.error("表单验证失败:", error)
+			console.error("表单validatefailed:", error)
 		}
 	}
 

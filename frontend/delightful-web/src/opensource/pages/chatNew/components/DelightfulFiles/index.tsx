@@ -48,8 +48,8 @@ const DelightfulFiles = observer(({ data, messageId, display = true }: Delightfu
 	)
 
 	/**
-	 * 下载文件
-	 * @param fileId 文件ID
+	 * downloadfile
+	 * @param fileId fileID
 	 */
 	const onDownload = useMemoizedFn((fileId: string) => {
 		const fileUrl = fileUrls?.[fileId]?.url
@@ -60,8 +60,8 @@ const DelightfulFiles = observer(({ data, messageId, display = true }: Delightfu
 	})
 
 	/**
-	 * 预览文件
-	 * @param fileInfo 文件信息
+	 * 预览file
+	 * @param fileInfo fileinformation
 	 */
 	const onPreview = useMemoizedFn((fileInfo: ConversationMessageAttachment) => {
 		console.log("fileInfo =======> ", fileInfo)
@@ -96,7 +96,7 @@ const DelightfulFiles = observer(({ data, messageId, display = true }: Delightfu
 		)
 	}
 
-	// 当文件是图片类型时, 显示单个图片
+	// 当file是图片class型时, 显示单个图片
 	if (IMAGE_EXTENSIONS.includes(dataFirst.file_extension?.toLocaleLowerCase() ?? "")) {
 		return (
 			<ImageWrapper
@@ -109,7 +109,7 @@ const DelightfulFiles = observer(({ data, messageId, display = true }: Delightfu
 		)
 	}
 
-	// 在录音纪要的情况下，只需要记录文件数据，不需要显示文件UI，默认显示
+	// 在录音纪要的情况下，只需要记录file数据，不需要显示fileUI，默认显示
 	if (!display) return null
 	const loading = isLoading || isUnReceived
 

@@ -1,307 +1,307 @@
-# BeDelightful 类详细文档
+# BeDelightful class详细documentation
 
-BeDelightful是项目的核心代理(Agent)类，整合了智能代理的关键功能。它负责处理用户查询、调用大语言模型、执行工具、管理状态、以及协调各种资源。本文档详细解析BeDelightful类的设计、实现与工作流程。
+BeDelightful是项目的核心agent(Agent)class，整合了智能agent的关键功能。它负责handleuserquery、调用大语言模型、执行tool、管理status、以及协调各种资源。本documentation详细解析BeDelightfulclass的设计、implement与workflow程。
 
-## 核心功能概述
+## core features概述
 
-BeDelightful实现了一个完整的AI代理系统，其主要功能包括：
+BeDelightfulimplement了一个完整的AIagent系统，其主要功能包括：
 
 1. 与大语言模型(LLM)的交互
-2. 工具调用管理与执行
+2. tool调用管理与执行
 3. 聊天历史记录管理
-4. 事件系统与回调处理
-5. 动态提示词处理
-6. 代理状态管理
+4. event系统与回调handle
+5. 动态tip词handle
+6. agentstatus管理
 7. 资源生命周期管理
 
-## 关键组件
+## 关键component
 
-BeDelightful类与多个组件紧密协作：
+BeDelightfulclass与多个component紧密协作：
 
 - **LLMAdapter**：负责与大语言模型(如GPT-4等)的交互
-- **ToolExecutor**：执行各种工具调用
-- **PromptProcessor**：处理系统提示词
-- **AgentContext**：维护代理的运行上下文
-- **ToolCollection**：管理可用工具集合
+- **ToolExecutor**：执行各种tool调用
+- **PromptProcessor**：handle系统tip词
+- **AgentContext**：维护agent的运行上下文
+- **ToolCollection**：管理可用tool集合
 
-## 工作流程
+## workflow程
 
-BeDelightful的主要工作流程分为以下几个步骤：
+BeDelightful的主要workflow程分为以下几个步骤：
 
-1. **初始化**：加载配置、初始化组件
-2. **接收用户查询**：处理用户输入
-3. **循环执行**：不断向LLM发送请求，解析响应中的工具调用并执行
-4. **任务完成**：当检测到任务完成或达到最大迭代次数时结束
+1. **initialize**：loadconfiguration、initializecomponent
+2. **接收userquery**：handleuser输入
+3. **loop执行**：不断向LLM发送请求，解析响应中的tool调用并执行
+4. **taskcomplete**：当检测到taskcomplete或达到最大迭代次数时end
 
-### 详细执行流程
+### 详细执行flow
 
 ```
-用户查询 -> 初始化环境 -> 设置状态为RUNNING 
--> 循环{
-   检查是否需要替换聊天历史 
+userquery -> initializeenvironment -> settingsstatus为RUNNING 
+-> loop{
+   check是否需要替换聊天历史 
    -> 向LLM发送请求 
-   -> 解析LLM响应中的工具调用 
-   -> 执行工具调用 
-   -> 处理工具结果 
-   -> 检查是否任务完成
+   -> 解析LLM响应中的tool调用 
+   -> 执行tool调用 
+   -> handletool结果 
+   -> check是否taskcomplete
 }
--> 清理资源 -> 返回结果
+-> cleanup资源 -> return结果
 ```
 
-## 核心方法详解
+## 核心method详解
 
-### 初始化与配置方法
+### initialize与configurationmethod
 
 #### `__init__`
-- **用途**：初始化BeDelightful实例
-- **实现要点**：
-  - 初始化状态、工具执行器、LLM适配器
-  - 设置动态提示词标志
-  - 初始化token计数器
-  - 初始化各种回调
-  - 建立工作目录
-  - 从agent_context同步配置
-  - 注册完成任务回调
+- **用途**：initializeBeDelightful实例
+- **implement要点**：
+  - initializestatus、tool执行器、LLM适配器
+  - settings动态tip词标志
+  - initializetoken计数器
+  - initialize各种回调
+  - 建立工作directory
+  - 从agent_context同步configuration
+  - 注册completetask回调
 
 #### `set_context`
-- **用途**：设置代理上下文
-- **联动方法**：`_initialize_history_manager_from_context`、`_update_file_tools_base_dir`
-- **实现要点**：
-  - 接收AgentContext对象
-  - 同步模型设置、流模式设置和动态提示词设置
-  - 初始化历史管理器
+- **用途**：settingsagent上下文
+- **联动method**：`_initialize_history_manager_from_context`、`_update_file_tools_base_dir`
+- **implement要点**：
+  - 接收AgentContextobject
+  - 同步模型settings、流模式settings和动态tip词settings
+  - initialize历史管理器
 
 #### `set_agent`
-- **用途**：设置要使用的agent和对应的提示词
-- **联动方法**：`_setup_agent_and_model`
-- **实现要点**：
-  - 设置代理名称
-  - 更新聊天历史管理器的agent名称
-  - 使用agent文件中指定的模型
+- **用途**：settings要使用的agent和对应的tip词
+- **联动method**：`_setup_agent_and_model`
+- **implement要点**：
+  - settingsagent名称
+  - update聊天历史管理器的agent名称
+  - 使用agentfile中指定的模型
 
 #### `set_llm_model`
-- **用途**：设置LLM模型
-- **实现要点**：
-  - 尝试设置LLM适配器的默认模型
-  - 更新当前模型名称
+- **用途**：settingsLLM模型
+- **implement要点**：
+  - 尝试settingsLLM适配器的默认模型
+  - update当前模型名称
 
-### 工具管理方法
+### tool管理method
 
 #### `load_tools_by_config`
-- **用途**：根据工具配置加载指定的工具
-- **联动方法**：`_initialize_available_tools`、`register_tool`
-- **实现要点**：
-  - 清空当前工具集合
-  - 检查工具名称有效性
-  - 加载指定的工具并注册
-  - 更新工具执行器的工具集合
+- **用途**：根据toolconfigurationload指定的tool
+- **联动method**：`_initialize_available_tools`、`register_tool`
+- **implement要点**：
+  - 清空当前tool集合
+  - checktool名称有效性
+  - load指定的tool并注册
+  - updatetool执行器的tool集合
 
 #### `_initialize_available_tools`
-- **用途**：初始化可用工具实例列表
-- **实现要点**：
-  - 从工具注册表获取所有可用工具实例
-  - 更新所有可用工具实例列表
-  - 为工作区边界受限的工具设置基础目录
+- **用途**：initialize可用tool实例list
+- **implement要点**：
+  - 从tool注册表get所有可用tool实例
+  - update所有可用tool实例list
+  - 为工作区边界受限的toolsettings基础directory
 
 #### `register_tool`
-- **用途**：注册一个工具
-- **实现要点**：
-  - 添加工具到工具集合
-  - 处理需要特殊资源管理的工具
-  - 设置工具的agent引用
-  - 更新工具执行器的工具集合
+- **用途**：注册一个tool
+- **implement要点**：
+  - 添加tool到tool集合
+  - handle需要特殊资源管理的tool
+  - settingstool的agent引用
+  - updatetool执行器的tool集合
 
-### 执行流程方法
+### 执行flowmethod
 
 #### `run`
-- **用途**：运行BeDelightful代理，处理用户查询
-- **联动方法**：`run_async`
-- **实现要点**：
-  - 创建事件循环
-  - 调用异步运行方法
-  - 处理键盘中断
+- **用途**：运行BeDelightfulagent，handleuserquery
+- **联动method**：`run_async`
+- **implement要点**：
+  - createeventloop
+  - 调用异步运行method
+  - handle键盘中断
 
 #### `run_async`
-- **用途**：异步运行代理
-- **联动方法**：`_initialize_agent_environment`、`_get_next_function_call_response`、`_parse_tool_calls`、`_execute_tool_calls`、`_process_tool_results`、`_cleanup_resources`
-- **实现要点**：
-  - 初始化代理环境和聊天历史
-  - 设置状态为运行中
-  - 进入主循环：
-    - 获取工具描述
-    - 检查模型是否支持工具调用
-    - 获取LLM响应
-    - 解析工具调用
-    - 执行工具调用
-    - 处理工具结果
-    - 检查是否任务完成
-  - 处理最终结果
-  - 清理资源
+- **用途**：异步运行agent
+- **联动method**：`_initialize_agent_environment`、`_get_next_function_call_response`、`_parse_tool_calls`、`_execute_tool_calls`、`_process_tool_results`、`_cleanup_resources`
+- **implement要点**：
+  - initializeagentenvironment和聊天历史
+  - settingsstatus为运行中
+  - 进入主loop：
+    - gettool描述
+    - check模型是否支持tool调用
+    - getLLM响应
+    - 解析tool调用
+    - 执行tool调用
+    - handletool结果
+    - check是否taskcomplete
+  - handle最终结果
+  - cleanup资源
 
 #### `_initialize_agent_environment`
-- **用途**：初始化代理环境和聊天历史
-- **联动方法**：`set_context`、`_initialize_history_manager_from_context`、`_setup_agent_and_model`、`_update_file_tools_base_dir`
-- **实现要点**：
-  - 设置上下文
-  - 初始化历史管理器
-  - 设置代理和模型
-  - 检查模型是否支持工具调用
-  - 更新工作目录
-  - 设置系统提示词
-  - 加载聊天历史
-  - 检查是否需要压缩聊天历史
+- **用途**：initializeagentenvironment和聊天历史
+- **联动method**：`set_context`、`_initialize_history_manager_from_context`、`_setup_agent_and_model`、`_update_file_tools_base_dir`
+- **implement要点**：
+  - settings上下文
+  - initialize历史管理器
+  - settingsagent和模型
+  - check模型是否支持tool调用
+  - update工作directory
+  - settings系统tip词
+  - load聊天历史
+  - check是否需要compress聊天历史
 
 #### `_get_next_function_call_response`
-- **用途**：从LLM获取包含函数调用的下一个响应
-- **联动方法**：`_create_api_error_response`
-- **实现要点**：
-  - 触发请求LLM前的事件
-  - 从LLM适配器获取响应
-  - 触发请求LLM后的事件
-  - 检查响应
+- **用途**：从LLMget包含function调用的下一个响应
+- **联动method**：`_create_api_error_response`
+- **implement要点**：
+  - 触发请求LLM前的event
+  - 从LLM适配器get响应
+  - 触发请求LLM后的event
+  - check响应
 
-### 工具执行方法
+### tool执行method
 
 #### `_execute_tool_calls`
-- **用途**：执行工具调用
-- **联动方法**：无直接关联，但与工具执行器交互
-- **实现要点**：
-  - 遍历工具调用列表
-  - 获取工具名称和参数
-  - 触发工具调用前事件
-  - 执行工具
-  - 触发工具调用后事件
+- **用途**：执行tool调用
+- **联动method**：无直接关联，但与tool执行器交互
+- **implement要点**：
+  - 遍历tool调用list
+  - gettool名称和parameter
+  - 触发tool调用前event
+  - 执行tool
+  - 触发tool调用后event
 
 #### `_process_tool_results`
-- **用途**：处理工具执行结果，并将结果添加到聊天历史中
-- **联动方法**：`_save_chat_history`
-- **实现要点**：
-  - 将工具执行结果添加到聊天历史
-  - 处理特殊的系统指令（如FINISH_TASK）
-  - 检查是否是ask_user工具且包含ASK_USER系统指令
-  - 保存聊天历史
+- **用途**：handletool执行结果，并将结果添加到聊天历史中
+- **联动method**：`_save_chat_history`
+- **implement要点**：
+  - 将tool执行结果添加到聊天历史
+  - handle特殊的系统指令（如FINISH_TASK）
+  - check是否是ask_usertool且包含ASK_USER系统指令
+  - save聊天历史
 
-### 消息与历史管理方法
+### message与历史管理method
 
 #### `_save_chat_history`
-- **用途**：保存聊天历史到文件
-- **实现要点**：
-  - 检查历史管理器是否初始化
-  - 调用历史管理器的保存方法
-  - 记录保存结果
+- **用途**：save聊天历史到file
+- **implement要点**：
+  - check历史管理器是否initialize
+  - 调用历史管理器的savemethod
+  - 记录save结果
 
 #### `_load_chat_history`
-- **用途**：从文件加载聊天历史
-- **实现要点**：
-  - 检查历史管理器是否初始化
-  - 调用历史管理器的加载方法
-  - 记录加载到的历史记录数量
+- **用途**：从fileload聊天历史
+- **implement要点**：
+  - check历史管理器是否initialize
+  - 调用历史管理器的loadmethod
+  - 记录load到的历史记录数量
 
 #### `_parse_tool_calls`
-- **用途**：从模型响应中解析工具调用
-- **实现要点**：
-  - 解析OpenAI响应中的工具调用
-  - 返回工具调用列表
+- **用途**：从模型响应中解析tool调用
+- **implement要点**：
+  - 解析OpenAI响应中的tool调用
+  - returntool调用list
 
 #### `_parse_tool_content`
-- **用途**：解析工具调用内容，转换为工具调用对象
-- **实现要点**：
-  - 尝试多种模式匹配工具调用
-  - 处理直接调用格式
-  - 处理JSON格式
-  - 处理python风格的调用
+- **用途**：解析tool调用内容，转换为tool调用object
+- **implement要点**：
+  - 尝试多种模式匹配tool调用
+  - handle直接调用format
+  - handleJSONformat
+  - handlepython风格的调用
 
-### 资源管理与清理方法
+### 资源管理与cleanupmethod
 
 #### `_cleanup_resources`
-- **用途**：清理所有活跃资源
-- **实现要点**：
+- **用途**：cleanup所有活跃资源
+- **implement要点**：
   - 遍历active_resources字典
-  - 对每个资源调用cleanup方法
-  - 记录清理过程
+  - 对每个资源调用cleanupmethod
+  - 记录cleanup过程
 
 #### `_on_finish_task`
-- **用途**：完成任务工具成功执行时的回调函数
-- **实现要点**：
-  - 设置代理状态为已完成
+- **用途**：completetasktoolsuccess执行时的回调function
+- **implement要点**：
+  - settingsagentstatus为已complete
   - 输出日志
 
-### 处理特殊情况的方法
+### handle特殊情况的method
 
 #### `_handle_non_tool_model_response`
-- **用途**：处理不支持工具调用的模型的响应
-- **联动方法**：`_save_chat_history`、`_trigger_assistant_message`、`_on_finish_task`
-- **实现要点**：
+- **用途**：handle不支持tool调用的模型的响应
+- **联动method**：`_save_chat_history`、`_trigger_assistant_message`、`_on_finish_task`
+- **implement要点**：
   - 记录助手回复
-  - 保存聊天历史
-  - 触发助手消息事件
-  - 调用完成任务回调
+  - save聊天历史
+  - 触发助手messageevent
+  - 调用completetask回调
 
 #### `_handle_potential_loop`
-- **用途**：处理潜在的死循环情况
-- **联动方法**：`_save_chat_history`
-- **实现要点**：
-  - 记录警告日志
-  - 更新聊天历史
+- **用途**：handle潜在的死loop情况
+- **联动method**：`_save_chat_history`
+- **implement要点**：
+  - 记录warning日志
+  - update聊天历史
   - 确定最终回复
-  - 设置状态为已完成
+  - settingsstatus为已complete
 
-## 状态管理
+## status管理
 
-BeDelightful使用AgentState枚举来管理代理状态：
+BeDelightful使用AgentState枚举来管理agentstatus：
 
-- **IDLE**: 空闲状态
+- **IDLE**: 空闲status
 - **RUNNING**: 运行中
-- **FINISHED**: 已完成
-- **ERROR**: 错误状态
-- **INIT**: 初始化状态
+- **FINISHED**: 已complete
+- **ERROR**: errorstatus
+- **INIT**: initializestatus
 
-状态转换关系：
+status转换关系：
 ```
 INIT -> IDLE -> RUNNING -> [FINISHED | ERROR]
 ```
 
-## 事件系统
+## event系统
 
-BeDelightful实现了一个事件系统，允许在关键点触发事件：
+BeDelightfulimplement了一个event系统，允许在关键点触发event：
 
 - **BEFORE_LLM_REQUEST**: LLM请求发送前
 - **AFTER_LLM_REQUEST**: LLM响应接收后
-- **BEFORE_TOOL_CALL**: 工具调用执行前
-- **AFTER_TOOL_CALL**: 工具调用执行后
+- **BEFORE_TOOL_CALL**: tool调用执行前
+- **AFTER_TOOL_CALL**: tool调用执行后
 
 ## 集成与扩展点
 
 BeDelightful提供了多个扩展点：
 
-1. **工具系统**：通过实现BaseTool接口可以轻松添加新工具
+1. **tool系统**：通过implementBaseTool接口可以轻松添加新tool
 2. **模型适配**：通过LLMAdapter可以支持不同的大语言模型
-3. **事件回调**：通过事件系统可以在关键点添加自定义逻辑
-4. **提示词处理**：可以通过动态提示词系统自定义代理行为
+3. **event回调**：通过event系统可以在关键点添加自定义逻辑
+4. **tip词handle**：可以通过动态tip词系统自定义agent行为
 
-## 实际应用流程示例
+## 实际应用flow示例
 
-以下是一个典型的执行流程示例：
+以下是一个典型的执行flow示例：
 
-1. 用户发送查询："查找关于气候变化的最新研究"
-2. BeDelightful初始化环境，设置状态为RUNNING
-3. 发送请求给LLM，获取包含工具调用的响应
-4. LLM建议使用"bing_search"工具搜索最新研究
-5. BeDelightful执行"bing_search"工具
-6. 将搜索结果添加到聊天历史
-7. 继续向LLM发送请求，包含搜索结果
-8. LLM可能建议使用"browser_use"工具访问特定网页
-9. BeDelightful执行"browser_use"工具
-10. 循环继续，直到LLM调用"finish_task"工具或达到最大迭代次数
-11. BeDelightful清理资源，返回最终结果
+1. user发送query："查找关于气候变化的最新研究"
+2. BeDelightfulinitializeenvironment，settingsstatus为RUNNING
+3. 发送请求给LLM，get包含tool调用的响应
+4. LLM建议使用"bing_search"toolsearch最新研究
+5. BeDelightful执行"bing_search"tool
+6. 将search结果添加到聊天历史
+7. continue向LLM发送请求，包含search结果
+8. LLM可能建议使用"browser_use"tool访问特定网页
+9. BeDelightful执行"browser_use"tool
+10. loopcontinue，直到LLM调用"finish_task"tool或达到最大迭代次数
+11. BeDelightfulcleanup资源，return最终结果
 
-## 最佳实践与注意事项
+## best practices与note事项
 
-1. **资源管理**：确保所有需要清理的资源都正确注册到active_resources
-2. **错误处理**：所有工具执行应当捕获并处理异常，避免中断整个代理流程
-3. **状态跟踪**：通过状态系统正确跟踪代理生命周期
-4. **模型兼容性**：不同模型对工具调用的支持程度不同，需要适当处理
+1. **资源管理**：确保所有需要cleanup的资源都正确注册到active_resources
+2. **error handling**：所有tool执行应当捕获并handleexception，避免中断整个agentflow
+3. **status跟踪**：通过status系统正确跟踪agent生命周期
+4. **模型兼容性**：不同模型对tool调用的支持程度不同，需要适当handle
 
 ## 总结
 
-BeDelightful类是项目的核心组件，它通过协调多个子系统实现了一个功能完整的AI代理。其设计考虑了可扩展性、健壮性和性能，能够处理复杂的用户查询并执行多步骤任务。 
+BeDelightfulclass是项目的核心component，它通过协调多个子系统implement了一个功能完整的AIagent。其设计考虑了可扩展性、健壮性和performance，能够handlecomplex的userquery并执行多步骤task。 

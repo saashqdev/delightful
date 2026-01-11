@@ -22,7 +22,7 @@ describe("PreprocessService - LaTeX", () => {
 		})
 
 		it("should handle complex inline formulas", () => {
-			const markdown = "复杂公式：$\\frac{a}{b} + \\sqrt{c^2 + d^2}$"
+			const markdown = "complex公式：$\\frac{a}{b} + \\sqrt{c^2 + d^2}$"
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
 			const content = result.join(" ")
 

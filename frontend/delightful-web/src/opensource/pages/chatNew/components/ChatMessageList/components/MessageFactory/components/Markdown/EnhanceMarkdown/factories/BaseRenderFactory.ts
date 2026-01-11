@@ -3,12 +3,12 @@ import { LazyExoticComponent, ComponentType, lazy } from "react"
 
 class BaseRenderFactory<Props> {
 	/**
-	 * 代码组件
+	 * 代码component
 	 */
 	protected components = new Map<string, RenderComponent<Props>>()
 
 	/**
-	 * 组件缓存
+	 * component缓存
 	 */
 	protected componentCache = new Map<string, LazyExoticComponent<ComponentType<Props>>>()
 
@@ -19,42 +19,42 @@ class BaseRenderFactory<Props> {
 	}
 
 	/**
-	 * 获取默认组件
-	 * @returns 默认组件
+	 * get默认component
+	 * @returns 默认component
 	 */
 	public getFallbackComponent(): LazyExoticComponent<ComponentType<Props>> {
 		return lazy(() => Promise.resolve({ default: () => null }))
 	}
 
 	/**
-	 * 注册组件
+	 * 注册component
 	 * @param lang 语言
-	 * @param componentConfig 组件配置
+	 * @param componentConfig componentconfiguration
 	 */
 	registerComponent(lang: string, componentConfig: RenderComponent<Props>) {
 		this.components.set(lang, componentConfig)
 	}
 
 	/**
-	 * 获取组件
-	 * @param type 组件类型
-	 * @returns 组件
+	 * getcomponent
+	 * @param type componentclass型
+	 * @returns component
 	 */
 	getComponent(type: string): LazyExoticComponent<ComponentType<Props>> {
-		// 加载并返回组件
+		// load并returncomponent
 		const codeComponent = this.components.get(type)
 
-		// 检查缓存
+		// check缓存
 		if (codeComponent && this.componentCache.has(codeComponent.componentType)) {
 			return this.componentCache.get(codeComponent.componentType)!
 		}
 
-		// 没有加载器
+		// 没有load器
 		if (!codeComponent?.loader) {
 			return this.getFallbackComponent()
 		}
 
-		// 创建 lazy 组件
+		// create lazy component
 		const LazyComponent = lazy(() =>
 			codeComponent.loader().then((module) => ({
 				default: module.default as ComponentType<Props>,
@@ -66,7 +66,7 @@ class BaseRenderFactory<Props> {
 
 	/**
 	 * 清除缓存
-	 * @param usedTypes 使用过的类型
+	 * @param usedTypes 使用过的class型
 	 */
 	cleanCache(usedTypes: string[]) {
 		Array.from(this.componentCache.keys()).forEach((type) => {

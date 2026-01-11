@@ -101,7 +101,7 @@ function KaTeX({ math, inline = false }: KaTeXProps) {
 			},
 		})
 
-		// 检查是否渲染出错
+		// check是否渲染出错
 		if (html.includes("katex-error")) {
 			return (
 				<span className={styles.errorFallback}>{inline ? `$${math}$` : `$$${math}$$`}</span>

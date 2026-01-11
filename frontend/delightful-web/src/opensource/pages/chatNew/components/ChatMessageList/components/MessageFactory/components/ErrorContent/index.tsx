@@ -36,16 +36,16 @@ function ErrorContent({ onReport, onRetry, className, ...props }: ErrorContentPr
 			{...props}
 		>
 			<div className={styles.invalidText}>
-				未知的错误原因导致无法正常渲染内容，请联系 Delightful 开发团队。
+				未知的error原因导致无法正常渲染内容，请联系 Delightful 开发团队。
 			</div>
 			{onReport && (
 				<DelightfulButton type="link" onClick={onReport}>
-					上报异常错误
+					上报exceptionerror
 				</DelightfulButton>
 			)}
 			{onRetry && (
 				<DelightfulButton type="link" onClick={onRetry}>
-					重试
+					retry
 				</DelightfulButton>
 			)}
 		</Flex>

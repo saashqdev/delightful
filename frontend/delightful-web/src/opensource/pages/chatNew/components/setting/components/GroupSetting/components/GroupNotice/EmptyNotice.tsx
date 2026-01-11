@@ -28,7 +28,7 @@ export default memo(function EmptyNotice() {
 	const { styles } = useStyles()
 
 	const addNewNotice = useMemoizedFn(() => {
-		// FIXME: 需要重新实现
+		// FIXME: 需要重新implement
 		// extraSectionController?.pushSection({
 		// 	key: ExtraSectionKey.NewGroupNotice,
 		// 	title: t("chat.groupNotice.postNewNotice"),

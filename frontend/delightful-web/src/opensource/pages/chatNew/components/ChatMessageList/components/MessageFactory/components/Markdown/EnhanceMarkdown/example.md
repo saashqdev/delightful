@@ -84,7 +84,7 @@ F --> B
 
 ---
 
-以下是一段Markdown格式的LaTeX数学公式：
+以下是一段Markdownformat的LaTeX数学公式：
 
 我是一个行内公式：$E=mc^2$
 
@@ -108,7 +108,7 @@ $$
 b_n = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} f(x) \\sin(nx) \\, dx \\quad \\text{for} \\quad n \\geq 1
 $$
 
-我是一个带有分式、测试长度超长的泰勒公式：
+我是一个带有分式、test长度超长的泰勒公式：
 
 $$
 \\begin{equation}
@@ -124,7 +124,7 @@ $$
 
 ---
 
-我是一个嵌套测试：
+我是一个嵌套test：
 
 ```
 $1

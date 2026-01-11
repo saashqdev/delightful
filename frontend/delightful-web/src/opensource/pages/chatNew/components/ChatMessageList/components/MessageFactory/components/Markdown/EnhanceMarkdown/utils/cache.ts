@@ -1,5 +1,5 @@
 /**
- * DOM节点缓存，减少重复查询操作
+ * DOMnode缓存，减少重复queryoperation
  */
 export const domCache = {
 	nodes: new Map<string, HTMLElement>(),

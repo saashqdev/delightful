@@ -1,5 +1,5 @@
 /**
- * 中间内容相关状态和行为
+ * 中间内容相关status和行为
  */
 
 import type { RecordSummaryConversationMessage } from "@/types/chat/conversation_message"

@@ -20,7 +20,7 @@ import { generateNodeVersionSchema } from "./version"
 
 export const installAllNodes = () => {
 	/**
-	 * 注册分支节点，为了走分支相关的路径，next_nodes会加在branches里面
+	 * 注册分支node，为了走分支相关的path，next_nodes会加在branches里面
 	 */
 	registerBranchNodes([
 		customNodeType.Start,
@@ -29,8 +29,8 @@ export const installAllNodes = () => {
 	])
 
 	/**
-	 * 注册可饮用类型节点，计算上文节点可引用数据源时，会以此为依据：
-	 *  不在此列的，不做为可以引用类型的节点
+	 * 注册可饮用class型node，计算上文node可引用数据源时，会以此为依据：
+	 *  不在此列的，不做为可以引用class型的node
 	 */
 	registerCanReferenceNodeTypes([
 		customNodeType.Start,
@@ -54,24 +54,24 @@ export const installAllNodes = () => {
 	/** 指定引用大语言模型时，不再是node_id.value  而是LLM.value */
 	registerVariableNodeTypes([customNodeType.VariableSave])
 
-	/** 指定开始节点时，空白画布默认会新增一个开始节点 */
+	/** 指定startnode时，空白画布默认会新增一个startnode */
 	registerStartNodeType(customNodeType.Start)
 
-	/** 指定循环节点，会默认携带一个循环体 */
+	/** 指定loopnode，会默认携带一个loop体 */
 	registerLoopNodeType(customNodeType.Loop)
 
-	/** 指定循环体类型 */
+	/** 指定loop体class型 */
 	registerLoopBodyType(customNodeType.LoopBody)
 
-	/** 指定循环起始Node type */
+	/** 指定loop起始Node type */
 	registerLoopStartType(customNodeType.Start)
 
-	/** 注册循环起始节点配置 */
+	/** 注册loop起始nodeconfiguration */
 	registerLoopStartConfig({
 		height: 128,
 	})
 
-	/** 注册节点分组信息 */
+	/** 注册node分组information */
 	registerNodeGroups([
 		{
 			groupName: "基础",
@@ -88,7 +88,7 @@ export const installAllNodes = () => {
 		},
 
 		{
-			groupName: "数据处理",
+			groupName: "数据handle",
 			desc: "",
 			nodeTypes: [
 				customNodeType.Vector,
@@ -99,7 +99,7 @@ export const installAllNodes = () => {
 			],
 			children: [
 				{
-					groupName: "多维表格",
+					groupName: "多维table",
 					desc: "",
 					color: "#32C436",
 					icon: <IconArrowLeftFromArc color="#fff" stroke={2} size={18} />,
@@ -116,7 +116,7 @@ export const installAllNodes = () => {
 	})
 
 	/**
-	 * 注册所有节点schema
+	 * 注册所有nodeschema
 	 */
 	// @ts-ignore
 	installNodes(generateNodeVersionSchema())

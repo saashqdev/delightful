@@ -9,7 +9,7 @@ describe("PreprocessService", () => {
 	let service: any
 
 	beforeEach(() => {
-		// 每次测试前重新创建实例
+		// 每次test前重新create实例
 		service = new (PreprocessService.constructor as any)()
 	})
 
@@ -106,12 +106,12 @@ describe("PreprocessService", () => {
 	})
 
 	describe("splitBlockCode", () => {
-		it("应该返回空数组当没有内容时", () => {
+		it("应该return空array当没有内容时", () => {
 			const result = PreprocessService.splitBlockCode("")
 			expect(result).toEqual([])
 		})
 
-		it("应该返回原文本当没有代码块时", () => {
+		it("应该return原文本当没有代码块时", () => {
 			const markdown = "这是一段普通文本\n这是第二行"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown.trim()])
@@ -147,25 +147,25 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理没有语言标记的代码块", () => {
+		it("应该正确handle没有语言标记的代码块", () => {
 			const markdown = "```\ncode without language\n```"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown])
 		})
 
-		it("应该正确处理不完整的代码块标记", () => {
+		it("应该正确handle不完整的代码块标记", () => {
 			const markdown = "这是一个不完整的代码块 ``` const a = 1;"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown.trim()])
 		})
 
-		it("应该正确处理包含三个反引号但不是代码块的文本", () => {
+		it("应该正确handle包含三个反引号但不是代码块的文本", () => {
 			const markdown = "这里有三个反引号 ``` 但不是代码块"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown.trim()])
 		})
 
-		it("应该正确处理包含oss-file类型的代码块", () => {
+		it("应该正确handle包含oss-fileclass型的代码块", () => {
 			const markdown =
 				'这里是文本\n\n```oss-file\n{\n    "source": "api"\n}\n```\n\n这里是后面的文本'
 			const result = PreprocessService.splitBlockCode(markdown)
@@ -176,7 +176,7 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理包含多个oss-file类型的代码块", () => {
+		it("应该正确handle包含多个oss-fileclass型的代码块", () => {
 			const markdown =
 				'文本1\n\n```oss-file\n{\n    "source": "api1"\n}\n```\n\n文本2\n\n```oss-file\n{\n    "source": "api2"\n}\n```\n\n文本3'
 			const result = PreprocessService.splitBlockCode(markdown)
@@ -189,14 +189,14 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理包含大量JSON嵌套的oss-file代码块", () => {
+		it("应该正确handle包含大量JSON嵌套的oss-file代码块", () => {
 			const markdown =
 				'```oss-file\n{\n    "source": "api",\n    "request_body": {\n        "file": {\n            "name": "image.png",\n            "uid": "DT001/123/abc.png"\n        }\n    }\n}\n```'
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown])
 		})
 
-		// 新增图片处理测试
+		// 新增图片handletest
 		it("应该正确分割单个图片", () => {
 			const markdown = "![alt text](https://example.com/image.png)"
 			const result = PreprocessService.splitBlockCode(markdown)
@@ -226,7 +226,7 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理代码块和图片混合的情况", () => {
+		it("应该正确handle代码块和图片混合的情况", () => {
 			const markdown = "文本\n\n![image](url)\n\n```js\ncode\n```\n\n![image2](url2)\n\n文本"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([
@@ -238,13 +238,13 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理图片在代码块内的情况", () => {
+		it("应该正确handle图片在代码块内的情况", () => {
 			const markdown = "```markdown\n![image](url)\n```"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown])
 		})
 
-		it("应该正确处理复杂的图片语法", () => {
+		it("应该正确handlecomplex的图片语法", () => {
 			const markdown =
 				'文本\n\n![Complex Image Title](https://example.com/path/to/image.png "Image Title")\n\n文本'
 			const result = PreprocessService.splitBlockCode(markdown)
@@ -255,33 +255,33 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理空的图片alt文本", () => {
+		it("应该正确handle空的图片alt文本", () => {
 			const markdown = "文本\n\n![](https://example.com/image.png)\n\n文本"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual(["文本", "![](https://example.com/image.png)", "文本"])
 		})
 
-		it("应该正确处理重叠的代码块和图片", () => {
+		it("应该正确handle重叠的代码块和图片", () => {
 			const markdown = "![image](url)```js\ncode\n```![image2](url2)"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual(["![image](url)", "```js\ncode\n```", "![image2](url2)"])
 		})
 
-		it("应该正确处理只有空白字符的内容", () => {
+		it("应该正确handle只有空白字符的内容", () => {
 			const result = PreprocessService.splitBlockCode("   \n   \t   ")
 			expect(result).toEqual([])
 		})
 
-		// 额外的边界情况测试
-		it("应该正确处理嵌套的代码块标记", () => {
+		// 额外的边界情况test
+		it("应该正确handle嵌套的代码块标记", () => {
 			const markdown = "```js\n```nested\ncode\n```\n```"
 			const result = PreprocessService.splitBlockCode(markdown)
-			// 这个测试展示了正则表达式处理嵌套代码块的实际行为
-			// 第一个 ``` 会匹配到第一个结束的 ```，剩余的部分会被当作普通文本
+			// 这个test展示了正则表达式handle嵌套代码块的实际行为
+			// 第一个 ``` 会匹配到第一个end的 ```，剩余的部分会被当作普通文本
 			expect(result).toEqual(["```js\n```", "nested\ncode", "```\n```"])
 		})
 
-		it("应该正确处理图片URL中包含特殊字符", () => {
+		it("应该正确handle图片URL中包含特殊字符", () => {
 			const markdown =
 				"文本\n\n![image](https://example.com/image?param=value&other=123#section)\n\n文本"
 			const result = PreprocessService.splitBlockCode(markdown)
@@ -292,13 +292,13 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理图片alt文本中包含特殊字符", () => {
+		it("应该正确handle图片alt文本中包含特殊字符", () => {
 			const markdown = '文本\n\n![Image with "quotes" and symbols!@#$%](url)\n\n文本'
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual(["文本", '![Image with "quotes" and symbols!@#$%](url)', "文本"])
 		})
 
-		it("应该正确处理多行代码块后紧跟图片", () => {
+		it("应该正确handle多行代码块后紧跟图片", () => {
 			const markdown = "```js\nfunction test() {\n  return 'hello';\n}\n```\n![image](url)"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([
@@ -307,25 +307,25 @@ describe("PreprocessService", () => {
 			])
 		})
 
-		it("应该正确处理图片后紧跟代码块", () => {
+		it("应该正确handle图片后紧跟代码块", () => {
 			const markdown = "![image](url)\n```js\nconsole.log('test');\n```"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual(["![image](url)", "```js\nconsole.log('test');\n```"])
 		})
 
-		it("应该正确处理代码块内包含图片语法的字符串", () => {
+		it("应该正确handle代码块内包含图片语法的string", () => {
 			const markdown = '```js\nconst markdown = "![image](url)";\nconsole.log(markdown);\n```'
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown])
 		})
 
-		it("应该正确处理多个连续的图片", () => {
+		it("应该正确handle多个连续的图片", () => {
 			const markdown = "![image1](url1)![image2](url2)![image3](url3)"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual(["![image1](url1)", "![image2](url2)", "![image3](url3)"])
 		})
 
-		it("应该正确处理非标准的代码块语言标识符", () => {
+		it("应该正确handle非标准的代码块语言标识符", () => {
 			const markdown = "```c++\n#include <iostream>\nint main() { return 0; }\n```"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown])
@@ -487,50 +487,50 @@ describe("PreprocessService", () => {
 		})
 
 		it("should process complex markdown with tables, citations, and latex", () => {
-			const markdown = `# 测试文档
+			const markdown = `# testdocumentation
 
-这是一个包含多种元素的文档：
+这是一个包含多种元素的documentation：
 
-## 表格示例
+## table示例
 | 名称 | 公式 | 引用 |
 | --- | :---: | ---: |
 | 牛顿第二定律 | $F = ma$ | [[citation:1]] |
 | 能量守恒 | $E = mc^2$ | [[citation:2]] |
 
-## 任务列表
-- [x] 完成表格功能
-- [ ] 添加更多测试
-- [x] ~~优化性能~~
+## tasklist
+- [x] completetable功能
+- [ ] 添加更多test
+- [x] ~~optimizationperformance~~
 
-引用信息：[[citation:3]]`
+引用information：[[citation:3]]`
 
 			const result = service.preprocess(markdown, { enableLatex: true })
 			const joinedResult = result.join("")
 
-			// 验证表格处理
+			// validatetablehandle
 			expect(joinedResult).toContain("<table>")
 			expect(joinedResult).toContain("牛顿第二定律")
 
-			// 验证LaTeX处理
+			// validateLaTeXhandle
 			expect(joinedResult).toContain('<DelightfulLatexInline math="F = ma" />')
 			expect(joinedResult).toContain('<DelightfulLatexInline math="E = mc^2" />')
 
-			// 验证引用处理
+			// validate引用handle
 			expect(joinedResult).toContain('<DelightfulCitation index="1" />')
 			expect(joinedResult).toContain('<DelightfulCitation index="2" />')
 			expect(joinedResult).toContain('<DelightfulCitation index="3" />')
 
-			// 验证任务列表
+			// validatetasklist
 			expect(joinedResult).toContain('<input type="checkbox" checked readonly')
 			expect(joinedResult).toContain('<input type="checkbox"  readonly')
 
-			// 验证删除线
-			expect(joinedResult).toContain('<span class="strikethrough">优化性能</span>')
+			// validatedelete线
+			expect(joinedResult).toContain('<span class="strikethrough">optimizationperformance</span>')
 		})
 	})
 
 	describe("parseTable", () => {
-		it("TABLE_REGEX 应该正确匹配 markdown 表格", () => {
+		it("TABLE_REGEX 应该正确匹配 markdown table", () => {
 			const tableMarkdown = `| 姓名 | 年龄 | 城市 |
 | --- | --- | --- |
 | 张三 | 25 | 北京 |
@@ -545,7 +545,7 @@ describe("PreprocessService", () => {
 			expect(match[3]).toBe("| 张三 | 25 | 北京 |\n| 李四 | 30 | 上海 |") // 数据行
 		})
 
-		it("应该解析基本的表格", () => {
+		it("应该解析基本的table", () => {
 			const header = "| 姓名 | 年龄 | 城市 |"
 			const separator = "| --- | --- | --- |"
 			const rows = "| 张三 | 25 | 北京 |\n| 李四 | 30 | 上海 |"
@@ -562,7 +562,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain("30")
 		})
 
-		it("应该正确处理左对齐", () => {
+		it("应该正确handle左对齐", () => {
 			const header = "| 列1 | 列2 |"
 			const separator = "| --- | --- |"
 			const rows = "| 数据1 | 数据2 |"
@@ -572,7 +572,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain('style="text-align:left"')
 		})
 
-		it("应该正确处理右对齐", () => {
+		it("应该正确handle右对齐", () => {
 			const header = "| 列1 | 列2 |"
 			const separator = "| ---: | ---: |"
 			const rows = "| 数据1 | 数据2 |"
@@ -582,7 +582,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain('style="text-align:right"')
 		})
 
-		it("应该正确处理居中对齐", () => {
+		it("应该正确handle居中对齐", () => {
 			const header = "| 列1 | 列2 |"
 			const separator = "| :---: | :---: |"
 			const rows = "| 数据1 | 数据2 |"
@@ -592,7 +592,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain('style="text-align:center"')
 		})
 
-		it("应该正确处理混合对齐方式", () => {
+		it("应该正确handle混合对齐方式", () => {
 			const header = "| 左对齐 | 居中 | 右对齐 |"
 			const separator = "| --- | :---: | ---: |"
 			const rows = "| left | center | right |"
@@ -604,7 +604,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain('style="text-align:right"')
 		})
 
-		it("应该处理没有前后竖线的表格", () => {
+		it("应该handle没有前后竖线的table", () => {
 			const header = "姓名 | 年龄"
 			const separator = "--- | ---"
 			const rows = "张三 | 25"
@@ -617,7 +617,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain("25")
 		})
 
-		it("应该处理单行表格", () => {
+		it("应该handle单行table", () => {
 			const header = "| 标题 |"
 			const separator = "| --- |"
 			const rows = "| 内容 |"
@@ -630,7 +630,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain("内容")
 		})
 
-		it("应该处理多行数据", () => {
+		it("应该handle多行数据", () => {
 			const header = "| 编号 | 名称 |"
 			const separator = "| --- | --- |"
 			const rows = "| 1 | 项目A |\n| 2 | 项目B |\n| 3 | 项目C |"
@@ -645,7 +645,7 @@ describe("PreprocessService", () => {
 			expect(matches?.length).toBe(4) // 1个表头行 + 3个数据行
 		})
 
-		it("应该正确处理空单元格", () => {
+		it("应该正确handle空单元格", () => {
 			const header = "| 列1 | 列2 | 列3 |"
 			const separator = "| --- | --- | --- |"
 			const rows = "| 数据 |  | 更多数据 |"
@@ -654,11 +654,11 @@ describe("PreprocessService", () => {
 
 			expect(result).toContain("数据")
 			expect(result).toContain("更多数据")
-			// 检查是否有空的td标签
+			// check是否有空的tdlabel
 			expect(result).toContain("<td")
 		})
 
-		it("应该处理包含特殊字符的表格", () => {
+		it("应该handle包含特殊字符的table", () => {
 			const header = "| 名称 | 描述 |"
 			const separator = "| --- | --- |"
 			const rows = "| Test & Demo | <script>alert('xss')</script> |"
@@ -669,7 +669,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain("<script>alert('xss')</script>")
 		})
 
-		it("应该处理不规则的表格（列数不匹配）", () => {
+		it("应该handle不规则的table（列数不匹配）", () => {
 			const header = "| 列1 | 列2 | 列3 |"
 			const separator = "| --- | --- | --- |"
 			const rows = "| 数据1 | 数据2 |\n| A | B | C | D |" // 第一行少一列，第二行多一列
@@ -699,7 +699,7 @@ describe("PreprocessService", () => {
 			expect(result).toContain("</tbody>")
 		})
 
-		it("应该处理包含空格和制表符的表格", () => {
+		it("应该handle包含空格和制表符的table", () => {
 			const header = "|   姓名   |  年龄  |"
 			const separator = "|   ---   | ---  |"
 			const rows = "|  张三  |   25   |"
@@ -710,24 +710,24 @@ describe("PreprocessService", () => {
 			expect(result).toContain("年龄")
 			expect(result).toContain("张三")
 			expect(result).toContain("25")
-			// 验证空格被正确trim了
+			// validate空格被正确trim了
 			expect(result).not.toContain("   姓名   ")
 		})
 
-		it("应该处理Unicode字符", () => {
+		it("应该handleUnicode字符", () => {
 			const header = "| 🎯 目标 | 📊 数据 |"
 			const separator = "| --- | --- |"
-			const rows = "| 测试 | 100% |"
+			const rows = "| test | 100% |"
 
 			const result = parseTable(header, separator, rows)
 
 			expect(result).toContain("🎯 目标")
 			expect(result).toContain("📊 数据")
-			expect(result).toContain("测试")
+			expect(result).toContain("test")
 			expect(result).toContain("100%")
 		})
 
-		it("应该处理分隔符中没有对齐指示符的情况", () => {
+		it("应该handle分隔符中没有对齐指示符的情况", () => {
 			const header = "| 列1 | 列2 |"
 			const separator = "| | |" // 空分隔符
 			const rows = "| 数据1 | 数据2 |"
@@ -745,7 +745,7 @@ describe("PreprocessService", () => {
 		it("should not split code blocks inside blockquotes", () => {
 			const markdown = `> ### 引用中的标题
 > 
-> 引用中可以包含标题和其他格式。
+> 引用中可以包含标题和其他format。
 > 
 > \`\`\`javascript
 > // 引用中的代码
@@ -779,7 +779,7 @@ console.log('Outside quote');
 		})
 
 		it("should handle mixed blockquotes and regular content", () => {
-			const markdown = `> 引用开始
+			const markdown = `> 引用start
 > 
 > \`\`\`javascript
 > const inQuote = true;
@@ -795,7 +795,7 @@ const outsideQuote = true;
 
 			// 应该被分割为3个块：引用（包含代码）、外部代码块、文本
 			expect(result).toHaveLength(3)
-			expect(result[0]).toContain("引用开始")
+			expect(result[0]).toContain("引用start")
 			expect(result[0]).toContain("inQuote")
 			expect(result[1]).toContain("outsideQuote")
 			expect(result[2]).toContain("更多文本")
@@ -830,7 +830,7 @@ const outsideQuote = true;
 			const codeStart = markdown.indexOf("```javascript")
 			const codeEnd = markdown.lastIndexOf("```") + 3
 
-			// 使用私有方法进行测试（通过类型断言）
+			// 使用私有method进行test（通过class型断言）
 			const service = PreprocessService as any
 			const result = service.isInsideBlockquote(markdown, codeStart, codeEnd)
 
@@ -847,7 +847,7 @@ console.log('test');
 			const codeStart = markdown.indexOf("```javascript")
 			const codeEnd = markdown.lastIndexOf("```") + 3
 
-			// 使用私有方法进行测试
+			// 使用私有method进行test
 			const service = PreprocessService as any
 			const result = service.isInsideBlockquote(markdown, codeStart, codeEnd)
 

@@ -3,7 +3,7 @@ import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React from "react"
 import { Edge, Node } from "reactflow"
 
-// 将FlowInteractionCtx拆分为状态和动作两部分
+// 将FlowInteractionCtx拆分为status和动作两部分
 export type FlowInteractionStateType = {
 	isDragging: boolean
 	showParamsComp: boolean
@@ -30,7 +30,7 @@ export type FlowInteractionCtx = React.PropsWithChildren<
 	FlowInteractionStateType & FlowInteractionActionsType
 >
 
-// 状态Context
+// statusContext
 export const FlowInteractionStateContext = React.createContext<FlowInteractionStateType>({
 	isDragging: false,
 	showParamsComp: true,
@@ -52,19 +52,19 @@ export const FlowInteractionActionsContext = React.createContext<FlowInteraction
 
 // 保持原有Context向后兼容
 export const FlowInteractionContext = React.createContext({
-	// 是否处于拖拽状态
+	// 是否处于拖拽status
 	isDragging: false,
 
-	// 重置布局
+	// reset布局
 	resetLastLayoutData: () => {},
 
-	// 新增节点
+	// 新增node
 	onAddItem: (() => {}) as any,
 
-	// 布局优化
+	// 布局optimization
 	layout: () => [],
 
-	// 是否显示组件的参数配置
+	// 是否显示component的parameterconfiguration
 	showParamsComp: true,
 
 	/** 是否显示多选的选框的toolbar */

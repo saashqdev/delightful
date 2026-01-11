@@ -20,7 +20,7 @@ export default {
             items: {
                 type: "object",
                 value: null,
-                title: "对象",
+                title: "object",
                 description: "",
                 properties: {
                     key: {
@@ -97,7 +97,7 @@ export default {
             type: "object",
             key: "string_key",
             sort: 0,
-            title: "数据类型为string",
+            title: "数据class型为string",
             description: "desc",
             items: null,
             properties: {
@@ -109,7 +109,7 @@ export default {
                     items: {
                         type: "object",
                         value: null,
-                        title: "对象",
+                        title: "object",
                         description: "",
                         properties: {
                             key: {

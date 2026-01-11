@@ -18,7 +18,7 @@ interface MessageProps {
 }
 
 class MessageFactory {
-	// 组件缓存，优先读取缓存
+	// component缓存，优先读取缓存
 	private static componentCache = new Map<
 		string,
 		React.LazyExoticComponent<React.ComponentType<MessageProps>>
@@ -30,7 +30,7 @@ class MessageFactory {
 		return React.lazy(() => import("./components/Fallback"))
 	}
 
-	// 获取文件组件
+	// getfilecomponent
 	static getFileComponent(): React.LazyExoticComponent<React.ComponentType<MessageProps>> {
 		return this.getComponent(ConversationMessageType.Files)
 	}
@@ -90,7 +90,7 @@ class MessageFactory {
 		}
 	}
 
-	// 解析文件信息
+	// 解析fileinformation
 	static parseFiles(
 		type: string,
 		message: ConversationMessage | ConversationMessageSend["message"],
@@ -113,24 +113,24 @@ class MessageFactory {
 		}
 	}
 
-	// 获取组件
+	// getcomponent
 	static getComponent(
 		type: string,
 	): React.LazyExoticComponent<React.ComponentType<MessageProps>> {
-		// 加载并返回组件
+		// load并returncomponent
 		const messageComponent = MessageComponents[type]
 
-		// 检查缓存
+		// check缓存
 		if (messageComponent && this.componentCache.has(messageComponent.componentType)) {
 			return this.componentCache.get(messageComponent.componentType)!
 		}
 
-		// 没有加载器
+		// 没有load器
 		if (!messageComponent?.loader) {
 			return this.getFallbackComponent()
 		}
 
-		// 创建 lazy 组件
+		// create lazy component
 		const LazyComponent = React.lazy(() =>
 			messageComponent.loader().then((module) => ({
 				default: module.default as React.ComponentType<MessageProps>,

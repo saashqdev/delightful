@@ -9,8 +9,8 @@ interface CanvasRendererProps {
 }
 
 /**
- * 使用纯Canvas渲染流程图的组件
- * 用于对比ReactFlow DOM渲染与Canvas渲染的性能差异
+ * 使用纯Canvas渲染flow图的component
+ * 用于对比ReactFlow DOM渲染与Canvas渲染的performance差异
  */
 const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 	nodes,
@@ -25,7 +25,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 	const [localViewport, setLocalViewport] = useState(viewport)
 	const [fps, setFps] = useState(0)
 
-	// 性能监测相关
+	// performance监测相关
 	const fpsCountRef = useRef(0)
 	const lastTimeRef = useRef(performance.now())
 	const animationFrameRef = useRef<number | null>(null)
@@ -46,7 +46,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		return () => window.removeEventListener("resize", updateSize)
 	}, [])
 
-	// 计算节点坐标
+	// 计算node坐标
 	const transformedNodes = useMemo(() => {
 		return nodes.map((node) => {
 			const x = node.position.x * localViewport.zoom + localViewport.x
@@ -136,19 +136,19 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 				ctx.stroke()
 			})
 
-			// 绘制节点
+			// 绘制node
 			transformedNodes.forEach((node) => {
 				ctx.fillStyle = "#ffffff"
 				ctx.strokeStyle = "#1a192b"
 				ctx.lineWidth = 1
 
-				// 绘制节点矩形
+				// 绘制node矩形
 				ctx.beginPath()
 				ctx.rect(node.position.x, node.position.y, node.width, node.height)
 				ctx.fill()
 				ctx.stroke()
 
-				// 绘制节点文本
+				// 绘制node文本
 				ctx.fillStyle = "#222222"
 				ctx.font = `${12 * localViewport.zoom}px Arial`
 				ctx.textAlign = "center"
@@ -198,7 +198,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		}
 	}
 
-	// 鼠标事件处理
+	// 鼠标eventhandle
 	const handleMouseDown = (e: React.MouseEvent) => {
 		setIsDragging(true)
 		setDragStart({ x: e.clientX, y: e.clientY })
@@ -274,10 +274,10 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 				}}
 			>
 				<div>
-					<strong>Canvas渲染 FPS:</strong> {fps} {fps < 30 ? "(低性能)" : ""}
+					<strong>Canvas渲染 FPS:</strong> {fps} {fps < 30 ? "(低performance)" : ""}
 				</div>
 				<div>
-					<strong>节点数量:</strong> {nodes.length}
+					<strong>node数量:</strong> {nodes.length}
 				</div>
 				<div>
 					<strong>边数量:</strong> {edges.length}

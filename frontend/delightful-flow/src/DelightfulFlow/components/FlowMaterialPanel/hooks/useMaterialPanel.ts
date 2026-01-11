@@ -6,7 +6,7 @@ export default function useMaterialPanel() {
 	const { showMaterialPanel, setShowMaterialPanel } = useFlowUI()
 	const [isEditing, setIsEditing] = useState(false)
 
-	// 使用useMemo缓存样式对象，避免每次渲染创建新对象
+	// 使用useMemo缓存样式object，避免每次渲染create新object
 	const stickyButtonStyle = useMemo(() => {
 		return {
 			top: "91px",

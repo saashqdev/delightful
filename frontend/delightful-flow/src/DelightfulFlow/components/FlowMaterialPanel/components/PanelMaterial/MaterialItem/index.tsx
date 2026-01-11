@@ -21,11 +21,11 @@ function MaterialItemComponent({
 	avatar,
 	...item
 }: MaterialItemProps) {
-	// 使用自定义钩子处理添加节点和拖拽逻辑
+	// 使用自定义钩子handle添加node和拖拽逻辑
 	const { onAddItem } = useAddItem({ item })
 	const { onDragStart } = useDragNode({ item })
 
-	// 提取需要传递给子组件的属性
+	// 提取需要传递给子component的property
 	const avatarProps = useMemo(
 		() => ({
 			showIcon,
@@ -68,9 +68,9 @@ function MaterialItemComponent({
 	)
 }
 
-// 使用React.memo包装组件，添加自定义比较函数只比较关键属性
+// 使用React.memo包装component，添加自定义比较function只比较关键property
 const MaterialItem = memo(MaterialItemComponent, (prevProps, nextProps) => {
-	// 只有当关键属性发生变化时才重新渲染
+	// 只有当关键property发生变化时才重新渲染
 	return (
 		prevProps.id === nextProps.id &&
 		prevProps.label === nextProps.label &&

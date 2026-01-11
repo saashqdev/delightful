@@ -12,7 +12,7 @@ import { getRichMessagePasteText } from "../../ChatSubSider/utils"
 function selectElementText(el: Node) {
 	// @ts-ignore
 	if (document.selection) {
-		// IE8 以下处理
+		// IE8 以下handle
 		// @ts-ignore
 		const oRange = document.body.createTextRange()
 		oRange.moveToElementText(el)
@@ -46,7 +46,7 @@ function copySelection(el: HTMLElement) {
 	return copySuccess
 }
 /**
- * 根据消息类型复制消息内容
+ * 根据messageclass型复制message内容
  * @param messageId
  * @returns
  */

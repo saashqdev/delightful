@@ -12,7 +12,7 @@ interface MindMapProps {
 }
 
 /**
- * 检查内容是否包含一级标题及以上
+ * check内容是否包含一级标题及以上
  * @param content 内容
  * @returns 是否包含一级标题及以上
  */

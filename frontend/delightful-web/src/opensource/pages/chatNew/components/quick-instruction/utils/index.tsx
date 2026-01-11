@@ -3,9 +3,9 @@ import { isArray, isObject } from "lodash-es"
 import { ExtensionName } from "../extension/constants"
 
 /**
- * 替换快捷指令节点
+ * 替换快捷指令node
  * @param content - 内容
- * @param quickInstructionNodeAttrs - 快捷指令节点
+ * @param quickInstructionNodeAttrs - 快捷指令node
  * @returns 替换后的内容
  */
 export function transformQuickInstruction(
@@ -40,7 +40,7 @@ export function replaceExistQuickInstruction(
 ): boolean {
 	let found = false
 
-	// 处理数组类型
+	// handlearrayclass型
 	if (Array.isArray(content)) {
 		content.forEach((item) => {
 			if (replaceExistQuickInstruction(item, compareFn, newValue)) {
@@ -50,13 +50,13 @@ export function replaceExistQuickInstruction(
 		return found
 	}
 
-	// 处理对象类型
+	// handleobjectclass型
 	if (content?.type === ExtensionName && content.attrs && compareFn(content.attrs)) {
 		content.attrs.value = newValue
 		found = true
 	}
 
-	// 递归处理子节点
+	// 递归handle子node
 	if (content?.content && Array.isArray(content.content)) {
 		content.content.forEach?.((child: JSONContent) => {
 			if (replaceExistQuickInstruction(child, compareFn, newValue)) {

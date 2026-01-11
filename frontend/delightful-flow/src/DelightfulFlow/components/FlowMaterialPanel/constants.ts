@@ -5,10 +5,10 @@ export enum TabObject {
 	// 可拖拽的物料面板
 	Material = "0",
 
-	// 可用的已发布的自动化流程
+	// 可用的已release的自动化flow
 	Flow = "1",
     
-	// 工具
+	// tool
 	Tools = "2",
 
     // 助理

@@ -7,12 +7,12 @@ import {
 	FlowInteractionActionsType
 } from "./Context"
 
-// 获取状态的hook
+// getstatus的hook
 export const useFlowInteractionState = (): FlowInteractionStateType => {
 	return React.useContext(FlowInteractionStateContext)
 }
 
-// 获取动作的hook
+// get动作的hook
 export const useFlowInteractionActions = (): FlowInteractionActionsType => {
 	return React.useContext(FlowInteractionActionsContext)
 }

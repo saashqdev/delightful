@@ -36,8 +36,8 @@ export default function Loop() {
 	return (
 		<div className={styles.loop}>
 			<div className={styles.loopBody}>
-				<span>循环体</span>
-				<Tooltip title="用于编排循环逻辑">
+				<span>loop体</span>
+				<Tooltip title="用于编排loop逻辑">
 					<IconInfoCircle stroke={1} width={16} height={16} />
 				</Tooltip>
 				<CustomHandle
@@ -49,7 +49,7 @@ export default function Loop() {
 				/>
 			</div>
 			<div className={styles.loopNext}>
-				<span>循环结束后执行下一步</span>
+				<span>loopend后执行下一步</span>
 				<CustomHandle
 					type="source"
 					isConnectable

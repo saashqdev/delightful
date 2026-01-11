@@ -1,24 +1,24 @@
-# EnhanceMarkdown 组件安全测试套件
+# EnhanceMarkdown component安全test套件
 
 ## 概述
 
-本测试套件专门为 `EnhanceMarkdown` 组件设计，用于防范各种 XSS（跨站脚本）攻击。该组件处理用户输入的 Markdown 内容，存在潜在的安全风险，因此需要全面的安全测试来确保渲染安全性。
+本test套件专门为 `EnhanceMarkdown` component设计，用于防范各种 XSS（跨站脚本）攻击。该componenthandleuser输入的 Markdown 内容，存在潜在的安全风险，因此需要全面的安全test来确保渲染安全性。
 
 ## 安全风险分析
 
 ### 主要风险点
 
-1. **HTML 注入**：组件支持 `allowHtml` 属性，可能渲染恶意 HTML
-2. **Script 执行**：恶意脚本标签可能被执行
-3. **事件处理器**：HTML 事件属性可能被利用
+1. **HTML 注入**：component支持 `allowHtml` property，可能渲染恶意 HTML
+2. **Script 执行**：恶意脚本label可能被执行
+3. **eventhandle器**：HTML eventproperty可能被利用
 4. **JavaScript 协议**：`javascript:` 协议的 URL 可能被执行
 5. **LaTeX 注入**：LaTeX 功能可能存在注入风险
-6. **自定义组件**：自定义组件配置可能被恶意利用
-7. **流式渲染**：流式内容更新过程中的安全风险
+6. **自定义component**：自定义componentconfiguration可能被恶意利用
+7. **流式渲染**：流式内容update过程中的安全风险
 
-## 测试用例分类
+## test用例分class
 
-### 1. Script Tag XSS Prevention (脚本标签 XSS 防护)
+### 1. Script Tag XSS Prevention (脚本label XSS 防护)
 
 ```typescript
 // 基础脚本注入
@@ -27,23 +27,23 @@
 // 代码块中的脚本
 '```html\n<script>window.xssAttack2 = true;</script>\n```'
 
-// 带属性的脚本标签
+// 带property的脚本label
 '<script type="text/javascript" src="malicious.js">window.xssAttack3 = true;</script>'
 ```
 
-### 2. Event Handler XSS Prevention (事件处理器 XSS 防护)
+### 2. Event Handler XSS Prevention (eventhandle器 XSS 防护)
 
 ```typescript
-// 点击事件
+// 点击event
 '<div onclick="window.xssClick = true;">Click me</div>'
 
-// 加载事件
+// loadevent
 '<img src="invalid.jpg" onload="window.xssLoad = true;" alt="test" />'
 
-// 错误事件
+// errorevent
 '<img src="invalid.jpg" onerror="window.xssError = true;" alt="test" />'
 
-// 其他事件处理器
+// 其他eventhandle器
 ['onmouseover', 'onmouseout', 'onfocus', 'onblur', 'onkeypress', 'onsubmit']
 ```
 
@@ -60,16 +60,16 @@
 '<a href="data:text/html,<script>window.xssDataUrl = true;</script>">Click</a>'
 ```
 
-### 4. HTML Entity Encoding XSS Prevention (HTML 实体编码 XSS 防护)
+### 4. HTML Entity Encoding XSS Prevention (HTML 实体encoding XSS 防护)
 
 ```typescript
-// HTML 实体编码的脚本标签
+// HTML 实体encoding的脚本label
 '&lt;script&gt;window.xssEntityScript = true;&lt;/script&gt;'
 
-// 十六进制编码
+// 十六进制encoding
 '&#x3C;script&#x3E;window.xssHex = true;&#x3C;/script&#x3E;'
 
-// 十进制编码
+// 十进制encoding
 '&#60;script&#62;window.xssDecimal = true;&#60;/script&#62;'
 ```
 
@@ -83,13 +83,13 @@
 '<div style="background-image: url(javascript:window.xssCssJs = true);">Test</div>'
 ```
 
-### 6. Advanced Attack Vectors (高级攻击向量)
+### 6. Advanced Attack Vectors (高级攻击vector)
 
 ```typescript
-// Unicode 脚本标签
+// Unicode 脚本label
 '<\u0073cript>window.xssUnicode = true;</\u0073cript>'
 
-// 嵌套脚本标签
+// 嵌套脚本label
 '<scr<script>ipt>window.xssNested = true;</scr</script>ipt>'
 
 // 大小写混合
@@ -125,7 +125,7 @@
 '<scr\tipt>window.xssTab = true;</scr\tipt>'
 ```
 
-### 9. Markdown-specific Attack Vectors (Markdown 特定攻击向量)
+### 9. Markdown-specific Attack Vectors (Markdown 特定攻击vector)
 
 ```typescript
 // 恶意引用链接
@@ -145,15 +145,15 @@
 // LaTeX 中的链接
 '$\\href{javascript:window.xssLatex=true}{Click}$'
 
-// LaTeX 命令注入
+// LaTeX command注入
 '$$\\begin{document}\\href{javascript:window.xssLatexCmd=true}{text}\\end{document}$$'
 ```
 
-## 安全配置测试
+## 安全configurationtest
 
-### allowHtml=false 安全测试
+### allowHtml=false 安全test
 
-确保当 `allowHtml` 设置为 `false` 时，HTML 内容被正确转义：
+确保当 `allowHtml` settings为 `false` 时，HTML 内容被正确转义：
 
 ```typescript
 {
@@ -162,9 +162,9 @@
 }
 ```
 
-### 流式渲染安全测试
+### 流式渲染安全test
 
-确保在流式渲染过程中的内容更新不会引入安全风险：
+确保在流式渲染过程中的内容update不会引入安全风险：
 
 ```typescript
 {
@@ -173,9 +173,9 @@
 }
 ```
 
-### 自定义组件安全测试
+### 自定义component安全test
 
-测试自定义组件配置不会被恶意利用：
+test自定义componentconfiguration不会被恶意利用：
 
 ```typescript
 {
@@ -185,7 +185,7 @@
 }
 ```
 
-## 性能和资源安全测试
+## performance和资源安全test
 
 ### 内存耗尽防护
 
@@ -210,86 +210,86 @@ for (let i = 0; i < 50; i++) {
 }
 ```
 
-## 错误处理安全测试
+## error handling安全test
 
-### 敏感信息泄露防护
+### 敏感information泄露防护
 
-确保错误处理过程中不会泄露敏感信息：
+确保error handling过程中不会泄露敏感information：
 
 ```typescript
 const problematicContent = '<script>throw new Error("XSS attempt: " + document.cookie);</script>'
 ```
 
-### 无效 Unicode 序列处理
+### 无效 Unicode 序列handle
 
 ```typescript
 const invalidUnicode = '\uD800<script>window.xssInvalidUnicode = true;</script>\uDFFF'
 ```
 
-## CSP (Content Security Policy) 合规性测试
+## CSP (Content Security Policy) 合规性test
 
-### 内联样式检查
+### 内联样式check
 
-确保组件不会创建违反 CSP 的内联样式：
+确保component不会create违反 CSP 的内联样式：
 
 ```typescript
 const contentWithInlineStyles = '<div style="background: red; color: blue;">Test</div>'
 ```
 
-### 动态脚本元素检查
+### 动态脚本元素check
 
-确保组件不会创建动态脚本元素：
+确保component不会create动态脚本元素：
 
 ```typescript
 const maliciousContent = '<script>window.xssCSP = true;</script>'
-// 验证页面中不存在包含恶意代码的脚本元素
+// validate页面中不存在包含恶意代码的脚本元素
 ```
 
-## 测试执行指南
+## test执行guide
 
-### 运行测试
+### 运行test
 
 ```bash
-# 运行基础安全测试
+# 运行基础安全test
 npm test -- __tests__/security.test.tsx
 
-# 运行高级安全测试
+# 运行高级安全test
 npm test -- __tests__/advanced-security.test.tsx
 
-# 运行配置安全测试
+# 运行configuration安全test
 npm test -- __tests__/security-config.test.tsx
 ```
 
-### 测试覆盖率
+### testcoverage
 
-建议这些安全测试应该覆盖以下场景：
+建议这些安全test应该覆盖以下场景：
 
-1. **正常流程**：确保正常的 Markdown 内容能够正确渲染
+1. **正常flow**：确保正常的 Markdown 内容能够正确渲染
 2. **边界情况**：空内容、null/undefined 内容
-3. **恶意输入**：各种 XSS 攻击向量
-4. **配置组合**：不同的属性配置组合
-5. **性能极限**：大量数据和深度嵌套
-6. **错误处理**：异常情况的安全处理
+3. **恶意输入**：各种 XSS 攻击vector
+4. **configuration组合**：不同的propertyconfiguration组合
+5. **performance极限**：大量数据和深度嵌套
+6. **error handling**：exception情况的安全handle
 
 ## 安全建议
 
 ### 开发建议
 
 1. **默认安全**：默认情况下应该禁用 HTML 渲染
-2. **输入验证**：对所有用户输入进行严格验证
-3. **输出编码**：确保所有输出都经过适当的编码
+2. **输入validate**：对所有user输入进行严格validate
+3. **输出encoding**：确保所有输出都经过适当的encoding
 4. **CSP 策略**：实施严格的内容安全策略
-5. **定期审计**：定期进行安全审计和测试
+5. **定期审计**：定期进行安全审计和test
 
 ### 生产部署建议
 
-1. **监控告警**：设置安全事件监控和告警
+1. **监控告警**：settings安全event监控和告警
 2. **日志记录**：记录所有可疑的输入和渲染尝试
-3. **版本更新**：及时更新依赖库以修复安全漏洞
-4. **权限控制**：实施适当的用户权限控制
+3. **versionupdate**：及时update依赖库以fix安全漏洞
+4. **permission控制**：实施适当的userpermission控制
 
 ## 结论
 
-这个安全测试套件提供了全面的 XSS 攻击防护测试，涵盖了从基础的脚本注入到高级的多语言攻击向量。通过这些测试，可以确保 `EnhanceMarkdown` 组件在各种攻击场景下都能保持安全性。
+这个安全test套件提供了全面的 XSS 攻击防护test，涵盖了从基础的脚本注入到高级的多语言攻击vector。通过这些test，可以确保 `EnhanceMarkdown` component在各种攻击场景下都能保持安全性。
 
-定期运行这些测试，并根据新发现的攻击向量及时更新测试用例，是维护组件安全性的重要措施。 
+定期运行这些test，并根据新发现的攻击vector及时updatetest用例，是维护component安全性的重要措施。 

@@ -10,18 +10,18 @@ import { Timeout } from "ahooks/lib/useRequest/src/types"
 
 /**
  *
- * @param {Function} itemClick 点击单个选择调用事件
- * @param {Ref} parent 父级Ref主要用来获取输入框的高度，然后将下拉弹层向下移
+ * @param {Function} itemClick 点击单个选择调用event
+ * @param {Ref} parent 父级Ref主要用来getinput field的高度，然后将下拉弹层向下移
  * @param {Array} values 值
- * @param {Array} options 下拉选项
+ * @param {Array} options 下拉option
  * @param {Boolean || Function} filterOption 是否允许过滤
- * @param {Function} onSearch 搜索函数
- * @param {Component} footer 组件
- * @param {Object} extraOptions // 选择上一步的配置
+ * @param {Function} onSearch searchfunction
+ * @param {Component} footer component
+ * @param {Object} extraOptions // 选择上一步的configuration
  * {
  *		showExtra, //是否显示选择上一步
  * 		step, // 当前是第几步
- * 		fieldTypes // 支持的字段类型
+ * 		fieldTypes // 支持的字段class型
  * }
  */
 
@@ -61,7 +61,7 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 			const filterOptions = copyOptions.filter((item) => item.label.indexOf(value) > -1)
 			setDisplayOptions(filterOptions)
 
-			// TODO 当不存在多选项需要支持新增用户输入的项
+			// TODO 当不存在多option需要支持新增user输入的项
 			// if (filterOptions.length) {
 			// 	const existEqualOption = filterOptions.some(item => item.label === value)
 			// 	setShowAddOptionBtn(!existEqualOption && !!value)
@@ -115,7 +115,7 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 							/>
 						)
 					})}
-					{!displayOptions.length && <li className="empty">暂无搜索结果</li>}
+					{!displayOptions.length && <li className="empty">暂无search结果</li>}
 				</div>
 			</ul>
 		</div>

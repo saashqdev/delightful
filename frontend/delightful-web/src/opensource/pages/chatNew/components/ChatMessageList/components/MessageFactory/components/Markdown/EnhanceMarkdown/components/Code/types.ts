@@ -1,11 +1,11 @@
 import React from "react"
 
 /**
- * 代码渲染组件的props
+ * 代码渲染component的props
  */
 export interface CodeRenderProps {
 	/**
-	 * 代码类型
+	 * 代码class型
 	 */
 	language?: string
 	/**
@@ -23,11 +23,11 @@ export interface CodeRenderProps {
 }
 
 /**
- * 行内代码渲染组件的props
+ * 行内代码渲染component的props
  */
 export interface InlineCodeRenderProps<D extends object = object> {
 	/**
-	 * 代码类型
+	 * 代码class型
 	 */
 	language?: string
 	/**
@@ -49,7 +49,7 @@ export interface InlineCodeRenderProps<D extends object = object> {
 }
 
 /**
- * 代码渲染组件
+ * 代码渲染component
  */
 export interface RenderComponent<Props> {
 	componentType: string

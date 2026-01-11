@@ -9,19 +9,19 @@
 
 export const filterTargetOptions = [
 	{
-		label: "用户姓名",
+		label: "user姓名",
 		value: FilterTargetTypes.Username,
 	},
 	{
-		label: "用户工号",
+		label: "user工号",
 		value: FilterTargetTypes.WorkNumber,
 	},
 	{
-		label: "用户岗位",
+		label: "user岗位",
 		value: FilterTargetTypes.Position,
 	},
 	{
-		label: "用户手机号",
+		label: "user手机号",
 		value: FilterTargetTypes.Phone,
 	},
 	{

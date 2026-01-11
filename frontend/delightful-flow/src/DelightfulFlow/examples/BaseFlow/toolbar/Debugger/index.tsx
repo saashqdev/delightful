@@ -10,7 +10,7 @@ export default function DebuggerToolbar() {
 	const { currentNode } = useCurrentNode()
 
 	const toolbarFunc = useMemoizedFn(() => {
-		console.log("调试", nodeConfig, currentNode)
+		console.log("debug", nodeConfig, currentNode)
 	})
 
 	return <IconBug stroke={1} onClick={toolbarFunc} />

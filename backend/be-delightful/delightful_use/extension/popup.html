@@ -17,19 +17,19 @@
         <input type="checkbox" id="extract-cookies" checked>
         <label for="extract-cookies">Cookies (包含 HttpOnly)</label>
       </div>
-      <button id="extract-btn" class="btn">提取数据并下载</button>
+      <button id="extract-btn" class="btn">提取数据并download</button>
     </div>
 
-    <h2>数据导入</h2>
+    <h2>数据import</h2>
     <div class="section">
       <div class="note">
-        <strong>注意：</strong> 导入操作会覆盖当前网站上同名的localStorage项和Cookie。
-        Cookie的domain, path等属性将根据导入文件中的值尝试设置，但可能受浏览器限制。
+        <strong>note：</strong> importoperation会覆盖当前网站上同名的localStorage项和Cookie。
+        Cookie的domain, path等property将根据importfile中的值尝试settings，但可能受浏览器限制。
       </div>
-      <textarea id="import-area" placeholder="将 storage_state.json 格式的数据粘贴到此处..."></textarea>
-      <label for="import-file" class="btn file-label">或选择文件导入</label>
+      <textarea id="import-area" placeholder="将 storage_state.json format的数据粘贴到此处..."></textarea>
+      <label for="import-file" class="btn file-label">或选择fileimport</label>
       <input type="file" id="import-file" accept=".json" style="display: none;">
-      <button id="import-btn" class="btn">导入数据</button>
+      <button id="import-btn" class="btn">import数据</button>
     </div>
 
     <div id="status-area"></div>

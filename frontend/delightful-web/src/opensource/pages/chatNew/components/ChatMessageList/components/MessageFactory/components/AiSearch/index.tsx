@@ -73,7 +73,7 @@ const DelightfulAggregateAISearchCard = observer(
 		/** 总结内容 */
 		const llmResponse = content?.llm_response
 
-		/** 是否搜索结束 */
+		/** 是否searchend */
 		const isSearchingFinish = useMemo(() => {
 			if (content?.finish) return true
 
@@ -113,7 +113,7 @@ const DelightfulAggregateAISearchCard = observer(
 
 		const [collapsed, { setFalse, setTrue }] = useBoolean(!(content?.finish || isSimpleSearch))
 
-		/** 是否在深度搜索中 */
+		/** 是否在深度search中 */
 		const isSearching = useMemo(() => {
 			if (content?.finish) return false
 
@@ -156,7 +156,7 @@ const DelightfulAggregateAISearchCard = observer(
 			[content?.search],
 		)
 
-		/** 问题搜索区域标题 */
+		/** 问题search区域标题 */
 		const titleContent = useMemo(() => {
 			if (isSearching)
 				return (
@@ -199,7 +199,7 @@ const DelightfulAggregateAISearchCard = observer(
 
 			const datas = []
 
-			// 如果有事件，则显示事件
+			// 如果有event，则显示event
 			if (content.event && content.event.length > 0) {
 				datas.push({
 					key: AggregateAISearchCardDataType.Event,
@@ -215,7 +215,7 @@ const DelightfulAggregateAISearchCard = observer(
 
 			const allSearch = content.search?.["0"]
 
-			// 如果搜索结果不为空，并且搜索结束，则显示搜索结果
+			// 如果search结果不为空，并且searchend，则显示search结果
 			if (allSearch?.length > 0 && content.event && content.mind_map && content.finish) {
 				datas.push({
 					key: AggregateAISearchCardDataType.Search,
@@ -412,7 +412,7 @@ const DelightfulAggregateAISearchCard = observer(
 				<ConfigProvider theme={configProviderTheme}>
 					<Flex vertical className={styles.container}>
 						<Flex vertical className={styles.timelineContainer}>
-							{/* 顶部问题搜索区域 */}
+							{/* 顶部问题search区域 */}
 							<DelightfulCollapse
 								className={styles.questionCollapse}
 								style={{
@@ -449,7 +449,7 @@ const DelightfulAggregateAISearchCard = observer(
 								/>
 							) : null}
 						</div>
-						{/* 思维导图、事件、搜索来源 */}
+						{/* 思维导图、event、search来源 */}
 						<DelightfulCollapse className={styles.collapse} items={collapseItems} />
 					</Flex>
 				</ConfigProvider>

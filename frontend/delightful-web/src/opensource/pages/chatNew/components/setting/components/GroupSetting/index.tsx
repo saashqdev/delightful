@@ -91,7 +91,7 @@ const GroupSetting = observer(() => {
 	] = useBoolean(false)
 
 	/**
-	 * 更新群组名称
+	 * update群组名称
 	 * @param groupName 群组名称
 	 */
 	const onUpdateGroupName = useMemoizedFn((groupName: string) => {
@@ -107,8 +107,8 @@ const GroupSetting = observer(() => {
 	})
 
 	/**
-	 * 点击群组信息列表项
-	 * @param {DelightfulListItemData} item 列表项数据
+	 * 点击群组informationlist项
+	 * @param {DelightfulListItemData} item list项数据
 	 */
 	const onGroupInfoListItemClick = useMemoizedFn(({ id }: DelightfulListItemData) => {
 		if (!conversation) return
@@ -117,7 +117,7 @@ const GroupSetting = observer(() => {
 				openUpdateGroupNameModal()
 				break
 			case GroupSettingListItemId.GroupNotice:
-				// FIXME: 需要重新实现
+				// FIXME: 需要重新implement
 
 				// extraSectionController?.pushSection(
 				// 	{
@@ -299,10 +299,10 @@ const GroupSetting = observer(() => {
 		})
 	})
 
-	// 计算网格属性
+	// 计算网格property
 	const ITEMS_PER_ROW = 5
 	const itemsData = useMemo(() => {
-		// 若是管理员，添加操作按钮
+		// 若是管理员，添加operationbutton
 		if (isAdmin) {
 			return [...members, { id: "add-member" }, { id: "remove-member" }]
 		}
@@ -313,7 +313,7 @@ const GroupSetting = observer(() => {
 	// 计算行数
 	const totalRows = Math.ceil(itemsData.length / ITEMS_PER_ROW)
 
-	// 虚拟列表渲染函数
+	// 虚拟list渲染function
 	const renderMemberRow = (index: number) => {
 		const startIdx = index * ITEMS_PER_ROW
 		const rowItems = itemsData.slice(startIdx, startIdx + ITEMS_PER_ROW)
@@ -321,7 +321,7 @@ const GroupSetting = observer(() => {
 		return (
 			<Row key={index} gutter={[16, 8]} align="middle" justify="start">
 				{rowItems.map((item) => {
-					// 添加成员按钮
+					// 添加成员button
 					if (item.id === "add-member") {
 						return (
 							<Col key="add-member" className={styles.member}>
@@ -340,7 +340,7 @@ const GroupSetting = observer(() => {
 						)
 					}
 
-					// 移除成员按钮
+					// 移除成员button
 					if (item.id === "remove-member") {
 						return (
 							<Col key="remove-member" className={styles.member}>
@@ -403,7 +403,7 @@ const GroupSetting = observer(() => {
 						// 当行数较少时直接渲染，避免不必要的虚拟化
 						Array.from({ length: totalRows }).map((_, index) => renderMemberRow(index))
 					) : (
-						// 否则使用虚拟列表
+						// 否则使用虚拟list
 						<Virtuoso
 							style={{
 								height: 210,

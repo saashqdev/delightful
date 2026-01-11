@@ -1,4 +1,4 @@
-// 处理表格的辅助函数
+// handletable的辅助function
 
 export const parseTable = (header: string, separator: string, rows: string) => {
 	// 解析表头
@@ -31,7 +31,7 @@ export const parseTable = (header: string, separator: string, rows: string) => {
 				.map((cell) => cell.trim()),
 		)
 
-	// 构建HTML表格
+	// 构建HTMLtable
 	let tableHtml = "<table><thead><tr>"
 
 	// 添加表头

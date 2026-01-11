@@ -33,7 +33,7 @@ const QuickInstructionSelectorNodeRender = (props: NodeViewProps) => {
 		setSelectedValue(value)
 	}, [value])
 
-	/** 点击事件, 阻止事件冒泡 */
+	/** 点击event, 阻止event冒泡 */
 	const handleClick = useMemoizedFn((e: MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation()
 	})

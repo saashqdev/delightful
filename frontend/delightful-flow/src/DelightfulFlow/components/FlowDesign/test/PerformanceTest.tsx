@@ -15,16 +15,16 @@ import ReactFlow, {
 import "reactflow/dist/style.css"
 
 /**
- * 性能测试组件 - 测试ReactFlow的性能表现
+ * performancetestcomponent - testReactFlow的performance表现
  */
 const PerformanceTest: React.FC = () => {
-	// 性能指标状态
+	// performance指标status
 	const [renderTime, setRenderTime] = useState<number>(0)
 	const [fps, setFps] = useState<number>(0)
 	const [memoryUsage, setMemoryUsage] = useState<number | null>(null)
 	const [nodeCount, setNodeCount] = useState<number>(0)
 
-	// 生成大量节点的函数
+	// 生成大量node的function
 	const generateNodes = useCallback((count: number): Node[] => {
 		const nodes: Node[] = []
 		const gridSize = Math.ceil(Math.sqrt(count))
@@ -36,7 +36,7 @@ const PerformanceTest: React.FC = () => {
 
 			nodes.push({
 				id: `node-${i}`,
-				data: { label: `节点 ${i}` },
+				data: { label: `node ${i}` },
 				position: { x: col * spacing, y: row * spacing },
 				style: {
 					background: "#fff",
@@ -52,13 +52,13 @@ const PerformanceTest: React.FC = () => {
 		return nodes
 	}, [])
 
-	// 生成节点之间的连接
+	// 生成node之间的连接
 	const generateEdges = useCallback((nodeCount: number, edgesPerNode: number = 2): Edge[] => {
 		const edges: Edge[] = []
 
 		for (let i = 0; i < nodeCount; i++) {
 			for (let j = 0; j < edgesPerNode; j++) {
-				// 连接到随机目标节点，避免自循环
+				// 连接到随机目标node，避免自loop
 				let target
 				do {
 					target = Math.floor(Math.random() * nodeCount)
@@ -115,7 +115,7 @@ const PerformanceTest: React.FC = () => {
 		}
 	}, [])
 
-	// 测量渲染时间的函数
+	// 测量渲染time的function
 	const measureRenderTime = useCallback(
 		(count: number) => {
 			const startTime = performance.now()
@@ -127,7 +127,7 @@ const PerformanceTest: React.FC = () => {
 			setEdges(newEdges)
 			setNodeCount(count)
 
-			// 等待下一帧渲染完成后测量时间
+			// 等待下一帧渲染complete后测量time
 			requestAnimationFrame(() => {
 				const endTime = performance.now()
 				setRenderTime(endTime - startTime)
@@ -136,7 +136,7 @@ const PerformanceTest: React.FC = () => {
 		[generateNodes, generateEdges, setNodes, setEdges],
 	)
 
-	// 创建测试按钮
+	// createtestbutton
 	const testButtons = useMemo(() => {
 		return [10, 50, 100, 500, 1000, 2000].map((count) => (
 			<button
@@ -144,7 +144,7 @@ const PerformanceTest: React.FC = () => {
 				onClick={() => measureRenderTime(count)}
 				style={{ margin: "0 5px" }}
 			>
-				{count}个节点
+				{count}个node
 			</button>
 		))
 	}, [measureRenderTime])
@@ -168,12 +168,12 @@ const PerformanceTest: React.FC = () => {
 					position="top-left"
 					style={{ background: "white", padding: "10px", borderRadius: "5px" }}
 				>
-					<h3>ReactFlow 性能测试</h3>
+					<h3>ReactFlow performancetest</h3>
 					<div>
-						<strong>节点数量:</strong> {nodeCount}
+						<strong>node数量:</strong> {nodeCount}
 					</div>
 					<div>
-						<strong>渲染时间:</strong> {renderTime.toFixed(2)} ms
+						<strong>渲染time:</strong> {renderTime.toFixed(2)} ms
 					</div>
 					<div>
 						<strong>FPS:</strong> {fps}

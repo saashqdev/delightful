@@ -56,7 +56,7 @@ const CurrentTopic = observer(({ className }: CurrentTopicProps) => {
 
 	// store fn
 
-	/** 返回聊天模式 */
+	/** return聊天模式 */
 	const backChatMode = useMemoizedFn(() => {
 		if (!currentTopic) return
 		chatTopicService.setCurrentConversationTopic(undefined)

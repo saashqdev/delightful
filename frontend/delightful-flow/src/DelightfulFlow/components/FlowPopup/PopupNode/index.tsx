@@ -106,7 +106,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 		/* Extra handling, add and delete edges */
 
 		/**
-		 * 如果在边新增节点
+		 * 如果在边新增node
 		 */
 
 		const sourceNode = nodeConfig[source!]
@@ -180,7 +180,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 				updateBranchNodeNextNodes(source, nodeId)
 			}
 
-			// 更新后的边
+			// update后的边
 			const updatedEdges = edges.concat(newEdges)
 			setEdges(updatedEdges)
 			updateNextNodesByAddEdges({ newEdges })

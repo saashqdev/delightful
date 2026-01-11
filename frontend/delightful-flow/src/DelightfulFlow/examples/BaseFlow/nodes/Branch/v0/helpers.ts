@@ -7,7 +7,7 @@ export enum BranchType {
 	Else = "else",
 }
 
-// If节点的单条分直播hi
+// Ifnode的单条分直播hi
 export interface IfBranch {
 	branch_id: string
 	next_nodes: string[]
@@ -28,7 +28,7 @@ export type Branch = {
 	branch_type?: BranchType
 }
 
-// 用于处理旧数据用，之前的分支有可能没有branch_type，在这里加入默认值
+// 用于handle旧数据用，之前的分支有可能没有branch_type，在这里加入默认值
 export default function addBranchTypeIfWithout(branches: Branch[]) {
 	return branches?.map((branch, branchIndex) => {
 		if (!branch?.branch_type) {

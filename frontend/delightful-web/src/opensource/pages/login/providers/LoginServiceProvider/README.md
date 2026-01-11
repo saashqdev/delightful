@@ -1,15 +1,15 @@
 # LoginServiceProvider
 
-## 组件介绍
+## component介绍
 
-LoginServiceProvider 是一个 React Context Provider 组件，用于管理登录服务的状态和逻辑。它主要负责处理不同部署环境（公有云和私有云）下的登录流程，并提供相关的上下文数据和方法给子组件使用。
+LoginServiceProvider 是一个 React Context Provider component，用于管理登录服务的status和逻辑。它主要负责handle不同部署environment（公有云和私有云）下的登录flow，并提供相关的上下文数据和method给子component使用。
 
 ## 主要功能
 
--   管理登录部署环境（公有云/私有云）
--   提供登录服务实例（LoginService）给子组件
--   管理集群代码（clusterCode）状态
--   提供环境切换能力
+-   管理登录部署environment（公有云/私有云）
+-   提供登录服务实例（LoginService）给子component
+-   管理集群代码（clusterCode）status
+-   提供environment切换能力
 
 ## 数据结构
 
@@ -17,13 +17,13 @@ LoginServiceProvider 是一个 React Context Provider 组件，用于管理登�
 interface LoginServiceStore {
 	// 登录服务实例
 	service: LoginService
-	// 当前部署环境类型（公有云/私有云）
+	// 当前部署environmentclass型（公有云/私有云）
 	deployment: LoginDeployment
-	// 设置部署环境
+	// settings部署environment
 	setDeployment: (deployment: LoginDeployment) => void
 	// 集群代码（私有部署时使用）
 	clusterCode: string | null
-	// 设置集群代码
+	// settings集群代码
 	setDeployCode: (clusterCode: string) => void
 }
 ```
@@ -36,29 +36,29 @@ interface LoginServiceStore {
 import { LoginServiceProvider } from "./LoginServiceProvider"
 import { LoginService } from "@/services/user/LoginService"
 
-// 创建登录服务实例
+// create登录服务实例
 const loginService = new LoginService(apis, serviceContainer)
 
 function App() {
 	return (
 		<LoginServiceProvider service={loginService}>
-			{/* 子组件可以通过 useLoginServiceContext 获取上下文 */}
+			{/* 子component可以通过 useLoginServiceContext get上下文 */}
 			<YourLoginComponent />
 		</LoginServiceProvider>
 	)
 }
 ```
 
-### 使用 HOC 包装组件
+### 使用 HOC 包装component
 
 ```tsx
 import { withLoginService } from "./withLoginService"
 import { LoginService } from "@/services/user/LoginService"
 
-// 创建登录服务实例
+// create登录服务实例
 const loginService = new LoginService(apis, serviceContainer)
 
-// 使用 HOC 包装组件
+// 使用 HOC 包装component
 const WrappedComponent = withLoginService(YourComponent, loginService)
 
 function App() {
@@ -66,7 +66,7 @@ function App() {
 }
 ```
 
-### 在子组件中使用上下文
+### 在子component中使用上下文
 
 ```tsx
 import { useLoginServiceContext } from "./useLoginServiceContext"
@@ -77,7 +77,7 @@ function LoginComponent() {
 		useLoginServiceContext()
 
 	const handleLogin = async () => {
-		// 使用 service 进行登录操作
+		// 使用 service 进行登录operation
 		// ...
 	}
 
@@ -87,7 +87,7 @@ function LoginComponent() {
 
 	return (
 		<div>
-			{/* 根据部署环境渲染不同的登录界面 */}
+			{/* 根据部署environment渲染不同的登录interface */}
 			{deployment === LoginDeployment.PublicDeploymentLogin ? (
 				<PublicLoginForm onLogin={handleLogin} />
 			) : (
@@ -104,8 +104,8 @@ function LoginComponent() {
 }
 ```
 
-## 注意事项
+## note事项
 
--   LoginServiceProvider 应当放置在需要访问登录服务的组件树的顶部
--   切换部署环境时会自动处理 clusterCode 的清除和恢复
+-   LoginServiceProvider 应当放置在需要访问登录服务的component树的顶部
+-   切换部署environment时会自动handle clusterCode 的清除和恢复
 -   在私有部署模式下，会从缓存中恢复上次使用的 clusterCode

@@ -27,7 +27,7 @@ const ReasoningContent = ({
 	const contentRef = useRef<HTMLDivElement>(null)
 	const [contentVisible, setContentVisible] = useState(false)
 
-	// 设置内容高度变量
+	// settings内容高度变量
 	useEffect(() => {
 		if (!isCollapse && contentRef.current) {
 			const height = contentRef.current.scrollHeight
@@ -58,7 +58,7 @@ const ReasoningContent = ({
 
 	if (!content) return null
 
-	// 折叠状态：只渲染按钮
+	// 折叠status：只渲染button
 	if (isCollapse) {
 		return (
 			<div className={cx(styles.buttonWrapper, className)}>
@@ -84,7 +84,7 @@ const ReasoningContent = ({
 		)
 	}
 
-	// 展开状态：渲染按钮和内容
+	// 展开status：渲染button和内容
 	return (
 		<div className={cx(styles.expandedWrapper, className)}>
 			<Flex

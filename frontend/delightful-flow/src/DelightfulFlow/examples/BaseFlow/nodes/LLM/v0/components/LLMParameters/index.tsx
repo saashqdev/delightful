@@ -1,5 +1,5 @@
 ﻿/**
- * LLM参数配置器
+ * LLMparameterconfiguration器
  */
 import BaseDropdownRenderer from "@/common/BaseUI/DropdownRenderer/Base"
 import DelightfulInput from "@/common/BaseUI/Input"
@@ -40,7 +40,7 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 	const { parameterList } = useLLMParameters()
 	// console.log(LLMValue)
 
-	// 处理单个项变更事件
+	// handle单个项变更event
 	const onParamChanged = useMemoizedFn((key: string | string[], newValue: any) => {
 		_.set(LLMValue, key, newValue)
 		onChange({
@@ -88,7 +88,7 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 							size={18}
 							className={styles.icon}
 						/>
-						<span>加载预设</span>
+						<span>load预设</span>
 					</div>
 				),
 				value: LLMAdjust.default,
@@ -122,13 +122,13 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 				</div>
 				<div className={styles.body}>
 					<div className={styles.preSettings}>
-						<span className={styles.h1Title}>参数</span>
+						<span className={styles.h1Title}>parameter</span>
 						<TsSelect
 							value={LLMAdjust.default}
 							options={addJustOptions}
 							onChange={(value: LLMAdjust) => setAdjustValue(value)}
 							dropdownRenderProps={{
-								placeholder: "搜索卡片类型",
+								placeholder: "search卡片class型",
 								component: BaseDropdownRenderer,
 								showSearch: false,
 							}}
@@ -197,8 +197,8 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 
 					<div className={styles.parameters}>
 						<div className={styles.left}>
-							<span className={styles.title}>回复格式</span>
-							<Tooltip title="指定模型必须输出的格式。">
+							<span className={styles.title}>回复format</span>
+							<Tooltip title="指定模型必须输出的format。">
 								<IconHelp size={16} color="#1C1D2399" className={styles.icon} />
 							</Tooltip>
 							<Switch
@@ -236,7 +236,7 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 					<div className={styles.parameters}>
 						<div className={styles.left}>
 							<span className={styles.title}>停止序列</span>
-							<Tooltip title="最多四个序列，API 将停止生成更多的 token。返回的文本将不包含停止序列。">
+							<Tooltip title="最多四个序列，API 将停止生成更多的 token。return的文本将不包含停止序列。">
 								<IconHelp size={16} color="#1C1D2399" className={styles.icon} />
 							</Tooltip>
 							<Switch
@@ -271,7 +271,7 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 			dropdownRenderProps={{
 				component: LLMPanel,
 			}}
-			placeholder="请配置LLM参数"
+			placeholder="请configurationLLMparameter"
 			showLLMSuffixIcon
 		/>
 	)

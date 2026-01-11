@@ -7,7 +7,7 @@ export enum LLMAdjust {
 	// 精准
 	Precise = 3,
 
-	// 加载预设
+	// load预设
 	default = 4,
 }
 

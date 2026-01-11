@@ -12,7 +12,7 @@ import ConversationBotDataService from "@/opensource/services/chat/conversation/
 import { interfaceStore } from "@/opensource/stores/interface"
 import { useStyles } from "../../styles"
 
-// 懒加载组件
+// 懒loadcomponent
 const TopicExtraSection = lazy(() => import("../topic/ExtraSection"))
 const SettingExtraSection = lazy(() => import("../setting"))
 
@@ -22,8 +22,8 @@ interface MainContentProps {
 }
 
 /**
- * 聊天主内容区域组件
- * 包含头部、消息列表、输入框以及额外的侧边栏
+ * 聊天主内容区域component
+ * 包含头部、messagelist、input field以及额外的侧边栏
  */
 const MainContent = observer(function MainContent({ onInputResize, style }: MainContentProps) {
 	const { styles } = useStyles()

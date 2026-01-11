@@ -42,10 +42,10 @@ describe("RowDetailDrawer", () => {
 		2: "第三列数据",
 		名称: "第一列数据",
 		描述: "第二列数据",
-		状态: "第三列数据",
+		status: "第三列数据",
 	}
 
-	const mockHeaders = ["名称", "描述", "状态"]
+	const mockHeaders = ["名称", "描述", "status"]
 
 	it("should render drawer when visible is true", () => {
 		render(
@@ -105,7 +105,7 @@ describe("RowDetailDrawer", () => {
 		const labels = screen.getAllByTestId("form-label")
 		expect(labels[0].textContent).toBe("名称")
 		expect(labels[1].textContent).toBe("描述")
-		expect(labels[2].textContent).toBe("状态")
+		expect(labels[2].textContent).toBe("status")
 
 		const contents = screen.getAllByTestId("form-content")
 		expect(contents[0].textContent).toBe("第一列数据")
@@ -124,7 +124,7 @@ describe("RowDetailDrawer", () => {
 				visible={true}
 				onClose={vi.fn()}
 				rowData={incompleteRowData}
-				headers={["名称", "描述", "状态"]}
+				headers={["名称", "描述", "status"]}
 			/>,
 		)
 

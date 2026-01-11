@@ -1,7 +1,7 @@
 import { createStyles } from "antd-style"
 import streamLoadingIcon from "@/assets/resources/stream-loading-2.png"
 
-// 定义光标类名常量
+// 定义光标class名常量
 export const CURSOR_CLASS_NAME = "markdown-stream-cursor"
 export const CURSOR_CONTAINER_CLASS_NAME = "markdown-stream-cursor-container"
 

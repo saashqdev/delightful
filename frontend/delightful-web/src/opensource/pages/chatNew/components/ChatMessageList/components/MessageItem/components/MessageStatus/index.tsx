@@ -12,7 +12,7 @@ interface MessageStatusProps {
 	unread_count?: number
 }
 
-// 将 StatusContainer 组件抽离并使用 memo
+// 将 StatusContainer component抽离并使用 memo
 const StatusContainer = memo(function StatusContainer({ children }: { children: React.ReactNode }) {
 	const { styles } = useStyles()
 	return (
@@ -22,7 +22,7 @@ const StatusContainer = memo(function StatusContainer({ children }: { children: 
 	)
 })
 
-// 将 StatusContent 组件抽离并使用 memo
+// 将 StatusContent component抽离并使用 memo
 const StatusContent = memo(
 	function StatusContent({
 		message_id,
@@ -63,7 +63,7 @@ const MessageStatus = ({ message_id, unread_count = 0 }: MessageStatusProps) => 
 	)
 }
 
-// 使用 memo 包装 observer，并添加比较函数
+// 使用 memo 包装 observer，并添加比较function
 export default memo(
 	observer(MessageStatus),
 	(prevProps, nextProps) =>

@@ -7,11 +7,11 @@ import { nodeComponentVersionMap } from "../nodes"
 
 const commonSchemaConfigMap: Record<string, NodeSchema> = {
 	[customNodeType.Start]: {
-		label: "开始节点",
+		label: "startnode",
 		icon: <IconArrowLeftFromArc color="#fff" stroke={2} size={18} />,
 		color: "#315CEC",
 		id: customNodeType.Start,
-		desc: "当以下事件被触发时，流程将会从这个模块开始执行",
+		desc: "当以下event被触发时，flow将会从这个modulestart执行",
 		handle: {
 			withSourceHandle: false,
 			withTargetHandle: false,
@@ -25,11 +25,11 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		},
 	},
 	[customNodeType.Sub]: {
-		label: "子流程",
+		label: "subprocess",
 		icon: <IconTimeline color="#fff" stroke={1} size={18} />,
 		color: "#9DC900",
 		id: customNodeType.Sub,
-		desc: "可以将部分功能模块分配给子流程来进行编排，从而避免主流程过于庞大",
+		desc: "可以将部分功能module分配给subprocess来进行编排，从而避免主flow过于庞大",
 		handle: {
 			withSourceHandle: true,
 			withTargetHandle: true,
@@ -39,7 +39,7 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		},
 	},
 	[customNodeType.VariableSave]: {
-		label: "变量保存",
+		label: "variable saving",
 		icon: <IconVariable color="#fff" stroke={1} size={18} />,
 		color: "#FFC900",
 		id: customNodeType.VariableSave,
@@ -57,7 +57,7 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		icon: <IconBrain color="#fff" stroke={1} size={18} />,
 		color: "#00A8FF",
 		id: customNodeType.LLM,
-		desc: "调用大语言模型，使用变量和提示词生成回复",
+		desc: "调用大语言模型，使用变量和tip词生成回复",
 		handle: {
 			withSourceHandle: true,
 			withTargetHandle: true,
@@ -67,11 +67,11 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		},
 	},
 	[customNodeType.Tools]: {
-		label: "工具",
+		label: "tool",
 		icon: <IconTimeline color="#fff" stroke={1} size={18} />,
 		color: "#555761",
 		id: customNodeType.Tools,
-		desc: "工具",
+		desc: "tool",
 		handle: {
 			withSourceHandle: true,
 			withTargetHandle: true,
@@ -82,11 +82,11 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 	},
 
 	[customNodeType.Loop]: {
-		label: "循环",
+		label: "loop",
 		icon: <IconRepeat color="#fff" stroke={1} size={18} />,
 		color: "#A61CCB",
 		id: customNodeType.Loop,
-		desc: "循环",
+		desc: "loop",
 		handle: {
 			withSourceHandle: false,
 			withTargetHandle: true,
@@ -96,11 +96,11 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		},
 	},
 	[customNodeType.LoopEnd]: {
-		label: "循环结束",
+		label: "loopend",
 		icon: <IconRepeatOff color="#fff" stroke={1} size={18} />,
 		color: "#7885ff",
 		id: customNodeType.LoopEnd,
-		desc: "循环结束",
+		desc: "loopend",
 		handle: {
 			withSourceHandle: false,
 			withTargetHandle: true,
@@ -112,11 +112,11 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 	},
 
 	[customNodeType.LoopBody]: {
-		label: "循环体",
+		label: "loop体",
 		icon: <IconRepeatOff color="#fff" stroke={1} size={18} />,
 		color: "#7885ff",
 		id: customNodeType.LoopBody,
-		desc: "循环体",
+		desc: "loop体",
 		handle: {
 			withSourceHandle: false,
 			withTargetHandle: true,
@@ -128,7 +128,7 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 	},
 
 	[customNodeType.If]: {
-		label: "选择器",
+		label: "selector",
 		icon: <IconArrowsSplit2 color="#fff" stroke={1} size={18} />,
 		color: "#FFA400",
 		id: customNodeType.If,
@@ -151,14 +151,14 @@ export const generateNodeVersionSchema = () => {
 			return {
 				[nodeType]: Object.entries(versionMap).reduce(
 					(versionTemplate, [version, nodeSchema]) => {
-						/** 需要进行版本化的配置 */
+						/** 需要进行version化的configuration */
                         // @ts-ignore
 						const versionConfig = _.pick(nodeSchema as NodeSchema, [
 							"input",
 							"output",
 							"params",
 						])
-						/** 拿到具体版本的组件 */
+						/** 拿到具体version的component */
 						const versionComp = _.get(nodeComponentVersionMap, [nodeType, version])
 						versionTemplate[version] = {
 							schema: {

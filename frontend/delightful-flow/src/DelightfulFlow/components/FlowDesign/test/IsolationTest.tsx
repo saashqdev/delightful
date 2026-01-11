@@ -16,7 +16,7 @@ import ReactFlow, {
 } from "reactflow"
 import "reactflow/dist/style.css"
 
-// 自定义简单节点，用于隔离测试
+// 自定义简单node，用于隔离test
 const SimpleNode = ({ data }: NodeProps) => {
 	return (
 		<div
@@ -37,7 +37,7 @@ const SimpleNode = ({ data }: NodeProps) => {
 	)
 }
 
-// 自定义复杂节点，用于测试更复杂组件的性能影响
+// 自定义complexnode，用于test更complexcomponent的performance影响
 const ComplexNode = ({ data }: NodeProps) => {
 	return (
 		<div
@@ -85,10 +85,10 @@ const nodeTypes: NodeTypes = {
 }
 
 /**
- * ReactFlow隔离测试组件 - 用于诊断性能问题
+ * ReactFlow隔离testcomponent - 用于诊断performance问题
  */
 const IsolationTest: React.FC = () => {
-	// 性能指标状态
+	// performance指标status
 	const [renderTime, setRenderTime] = useState<number>(0)
 	const [fps, setFps] = useState<number>(0)
 	const [memoryUsage, setMemoryUsage] = useState<string>("未测量")
@@ -97,7 +97,7 @@ const IsolationTest: React.FC = () => {
 	const [nodeType, setNodeType] = useState<"simple" | "complex">("simple")
 	const [currentTest, setCurrentTest] = useState<string>("")
 
-	// 流程图状态
+	// flow图status
 	const [nodes, setNodes, onNodesChange] = useNodesState([])
 	const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
@@ -113,7 +113,7 @@ const IsolationTest: React.FC = () => {
 		[setEdges],
 	)
 
-	// 生成指定数量的节点
+	// 生成指定数量的node
 	const generateNodes = useCallback((count: number, type: "simple" | "complex"): Node[] => {
 		const gridSize = Math.ceil(Math.sqrt(count))
 		const spacing = 200
@@ -126,7 +126,7 @@ const IsolationTest: React.FC = () => {
 				id: `node-${i}`,
 				type: type,
 				data: {
-					label: `节点 ${i}`,
+					label: `node ${i}`,
 					id: `ID-${i}`,
 					inputs: Math.floor(Math.random() * 3) + 1,
 					outputs: Math.floor(Math.random() * 3) + 1,
@@ -147,7 +147,7 @@ const IsolationTest: React.FC = () => {
 		const maxPossibleEdges = nodeCount * (nodeCount - 1)
 		const actualEdgeCount = Math.min(edgeCount, maxPossibleEdges)
 
-		// 创建一个简单的树结构，确保所有节点都有连接
+		// create一个简单的树结构，确保所有node都有连接
 		for (let i = 1; i < nodeCount; i++) {
 			const parentId = Math.floor((i - 1) / 2)
 			edges.push({
@@ -171,7 +171,7 @@ const IsolationTest: React.FC = () => {
 					target = Math.floor(Math.random() * nodeCount)
 				}
 
-				// 检查这条边是否已经存在
+				// check这条边是否已经存在
 				const edgeExists = edges.some(
 					(edge) => edge.source === `node-${source}` && edge.target === `node-${target}`,
 				)
@@ -225,16 +225,16 @@ const IsolationTest: React.FC = () => {
 		}
 	}, [])
 
-	// 开始/停止性能监控
+	// start/停止performance监控
 	useEffect(() => {
-		// 开始监控FPS
+		// start监控FPS
 		animationFrameIdRef.current = requestAnimationFrame(monitorFPS)
 
 		// 定期测量内存
 		const memoryInterval = setInterval(measureMemory, 1000)
 
 		return () => {
-			// 清理
+			// cleanup
 			if (animationFrameIdRef.current !== null) {
 				cancelAnimationFrame(animationFrameIdRef.current)
 			}
@@ -242,14 +242,14 @@ const IsolationTest: React.FC = () => {
 		}
 	}, [monitorFPS, measureMemory])
 
-	// 加载测试数据
+	// loadtest数据
 	const loadTestData = useCallback(
 		(count: number) => {
-			setCurrentTest(`加载 ${count} 个${nodeType === "simple" ? "简单" : "复杂"}节点测试`)
+			setCurrentTest(`load ${count} 个${nodeType === "simple" ? "简单" : "complex"}nodetest`)
 			const start = performance.now()
 
-			// 生成节点和边
-			const edgeCount = count * 2 // 边的数量是节点的2倍
+			// 生成node和边
+			const edgeCount = count * 2 // 边的数量是node的2倍
 			const newNodes = generateNodes(count, nodeType)
 			const newEdges = generateEdges(count, edgeCount)
 
@@ -258,7 +258,7 @@ const IsolationTest: React.FC = () => {
 			setNodeCount(count)
 			setEdgeCount(edgeCount)
 
-			// 使用setTimeout来确保渲染已完成
+			// 使用setTimeout来确保渲染已complete
 			setTimeout(() => {
 				const end = performance.now()
 				setRenderTime(end - start)
@@ -267,7 +267,7 @@ const IsolationTest: React.FC = () => {
 		[generateNodes, generateEdges, setNodes, setEdges, nodeType],
 	)
 
-	// 清除测试数据
+	// 清除test数据
 	const clearTestData = useCallback(() => {
 		setNodes([])
 		setEdges([])
@@ -282,15 +282,15 @@ const IsolationTest: React.FC = () => {
 		setNodeType((prev) => (prev === "simple" ? "complex" : "simple"))
 	}, [])
 
-	// 性能测试按钮列表
+	// performancetestbuttonlist
 	const testButtons = useMemo(
 		() => [
-			{ count: 10, label: "10 节点" },
-			{ count: 50, label: "50 节点" },
-			{ count: 100, label: "100 节点" },
-			{ count: 500, label: "500 节点" },
-			{ count: 1000, label: "1000 节点" },
-			{ count: 2000, label: "2000 节点" },
+			{ count: 10, label: "10 node" },
+			{ count: 50, label: "50 node" },
+			{ count: 100, label: "100 node" },
+			{ count: 500, label: "500 node" },
+			{ count: 1000, label: "1000 node" },
+			{ count: 2000, label: "2000 node" },
 		],
 		[],
 	)
@@ -319,24 +319,24 @@ const IsolationTest: React.FC = () => {
 						boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
 					}}
 				>
-					<h3 style={{ marginTop: 0 }}>ReactFlow 隔离测试</h3>
+					<h3 style={{ marginTop: 0 }}>ReactFlow 隔离test</h3>
 
 					<div style={{ marginBottom: "15px" }}>
 						<div>
-							<strong>当前测试:</strong> {currentTest || "无"}
+							<strong>当前test:</strong> {currentTest || "无"}
 						</div>
 						<div>
 							<strong>Node type:</strong>{" "}
-							{nodeType === "simple" ? "简单节点" : "复杂节点"}
+							{nodeType === "simple" ? "简单node" : "complexnode"}
 						</div>
 						<div>
-							<strong>节点数量:</strong> {nodeCount}
+							<strong>node数量:</strong> {nodeCount}
 						</div>
 						<div>
 							<strong>边数量:</strong> {edgeCount}
 						</div>
 						<div>
-							<strong>渲染时间:</strong> {renderTime.toFixed(2)} ms
+							<strong>渲染time:</strong> {renderTime.toFixed(2)} ms
 						</div>
 						<div>
 							<strong>FPS:</strong> {fps}
@@ -377,7 +377,7 @@ const IsolationTest: React.FC = () => {
 									flex: 1,
 								}}
 							>
-								切换为{nodeType === "simple" ? "复杂" : "简单"}节点
+								切换为{nodeType === "simple" ? "complex" : "简单"}node
 							</button>
 
 							<button
@@ -391,7 +391,7 @@ const IsolationTest: React.FC = () => {
 									flex: 1,
 								}}
 							>
-								清除测试
+								清除test
 							</button>
 						</div>
 					</div>

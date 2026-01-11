@@ -16,7 +16,7 @@ const InviteMemberTip = memo(({ content, className, onClick }: InviteMemberTipPr
 	const { styles, cx } = useTipStyles()
 	const { t } = useTranslation("interface")
 
-	// 获取用户信息
+	// getuserinformation
 	useEffect(() => {
 		if (content && content?.group_users_add.user_ids) {
 			userInfoService.fetchUserInfos(content.group_users_add.user_ids, 2)

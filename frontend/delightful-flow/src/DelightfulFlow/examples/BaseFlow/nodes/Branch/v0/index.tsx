@@ -25,7 +25,7 @@ export default function Branch() {
 		addBranchTypeIfWithout(currentNode?.params?.branches!),
 	)
 
-	// 创建一个存储所有元素 ref 的数组
+	// create一个存储所有元素 ref 的array
 	const conditionRefsMap = useMemo(() => {
 		return branchList.map((branch) => {
 			return {
@@ -72,10 +72,10 @@ export default function Branch() {
 			(edge) => edge.source === currentNode.node_id && edge.sourceHandle === branchId,
 		)
 
-		// 2. 使用deleteEdges方法同时删除边和更新nextNodes
+		// 2. 使用deleteEdgesmethod同时delete边和updatenextNodes
 		deleteEdges(edgesToRemove)
 
-		// 3. 更新分支列表
+		// 3. update分支list
 		branchList.splice(branchIndex, 1)
 		setBranchList([...branchList])
 	})

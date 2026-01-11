@@ -198,7 +198,7 @@ const ChatMessageList = observer(() => {
 		}, 0)
 	})
 
-	// 加载更多历史消息
+	// load更多historical message
 	const loadMoreHistoryMessages = useMemoizedFn(async () => {
 		if (state.isLoadingMore || !MessageStore.hasMoreHistoryMessage) return
 
@@ -206,13 +206,13 @@ const ChatMessageList = observer(() => {
 			state.setIsLoadingMore(true)
 			canScroll = false
 
-			// 请求历史消息
+			// 请求historical message
 			await MessageService.getHistoryMessages(
 				conversationStore.currentConversation?.id ?? "",
 				conversationStore.currentConversation?.current_topic_id ?? "",
 			)
 		} catch (error) {
-			// 发生错误时恢复样式
+			// 发生error时恢复样式
 			if (chatListRef.current) {
 				chatListRef.current.style.transform = ""
 				chatListRef.current.style.position = ""
@@ -222,10 +222,10 @@ const ChatMessageList = observer(() => {
 		}
 	})
 
-	// 检查滚动位置并处理
+	// check滚动位置并handle
 	const checkScrollPosition = useMemoizedFn(() => {
 		if (!wrapperRef.current || !initialRenderRef.current || isScrolling) return
-		// 初始化状态不处理
+		// initializestatus不handle
 		if (lastScrollTop === 0) {
 			lastScrollTop = wrapperRef.current.scrollTop
 			return
@@ -240,7 +240,7 @@ const ChatMessageList = observer(() => {
 		const isScrollUp = lastScrollTop - scrollTop > 0
 		lastScrollTop = scrollTop
 		if (isScrollUp && !state.isLoadingMore) {
-			// 加载更多，判断第四条消息是否进入视图
+			// load更多，判断第四条message是否进入视图
 			const messageId = MessageStore.messages[3]?.message_id
 
 			if (isMessageInView(messageId, wrapperRef.current) || scrollTop < 150) {
@@ -249,7 +249,7 @@ const ChatMessageList = observer(() => {
 		}
 	})
 
-	// 检查是否需要加载更多消息来填充视图
+	// check是否需要load更多message来填充视图
 	const checkMessagesFillViewport = useMemoizedFn(async () => {
 		if (
 			!wrapperRef.current ||
@@ -263,15 +263,15 @@ const ChatMessageList = observer(() => {
 		const wrapperHeight = wrapperRef.current.clientHeight
 		const listHeight = chatListRef.current.clientHeight
 
-		// 如果内容高度小于容器高度，并且我们有足够的消息可以加载
-		// 加载更多历史消息直到填满视图或没有更多消息
+		// 如果内容高度小于容器高度，并且我们有足够的message可以load
+		// load更多historical message直到填满视图或没有更多message
 		if (listHeight < wrapperHeight && MessageStore.messages.length > 0) {
-			console.log("容器未填满，尝试加载更多历史消息", listHeight, wrapperHeight)
+			console.log("容器未填满，尝试load更多historical message", listHeight, wrapperHeight)
 
 			try {
 				await loadMoreHistoryMessages()
 
-				// 递归检查，直到填满或没有更多消息
+				// 递归check，直到填满或没有更多message
 				if (checkMessagesFillViewportTimerRef.current) {
 					clearTimeout(checkMessagesFillViewportTimerRef.current)
 				}
@@ -280,19 +280,19 @@ const ChatMessageList = observer(() => {
 					checkMessagesFillViewport()
 				}, 300)
 			} catch (error) {
-				console.error("加载更多消息失败", error)
+				console.error("load更多messagefailed", error)
 			}
 		}
 	})
 
-	// 处理容器大小变化
+	// handle容器大小变化
 	const handleResize = useMemoizedFn(() => {
 		if (!chatListRef.current || isScrolling) return
 
 		const { messages } = MessageStore
 		if (!messages.length) return
 
-		// 如果最后一条消息为空，证明是初始化状态，滚动到底部
+		// 如果最后一条message为空，证明是initializestatus，滚动到底部
 		if (!lastMessageId) {
 			lastMessageId = messages[messages.length - 1]?.message_id
 			scrollToBottom(true)
@@ -300,9 +300,9 @@ const ChatMessageList = observer(() => {
 			return
 		}
 
-		// 有新消息，并且不是当前消息，尝试滚动到底部
+		// 有新message，并且不是当前message，尝试滚动到底部
 		const lastMessage = messages[messages.length - 1]
-		// 如果是我发送的新消息，滚动到底部，或者是在底部
+		// 如果是我发送的新message，滚动到底部，或者是在底部
 		if (
 			(lastMessage.is_self && lastMessage?.message_id !== lastMessageId) ||
 			state.isAtBottom
@@ -313,7 +313,7 @@ const ChatMessageList = observer(() => {
 			return
 		}
 
-		// 更新 lastMessageId
+		// update lastMessageId
 		lastMessageId = lastMessage?.message_id
 
 		// 其他情况，滚回底部
@@ -324,7 +324,7 @@ const ChatMessageList = observer(() => {
 			})
 		}
 
-		// 数据变更，并且滚动条停留在顶部，加载多一页
+		// 数据变更，并且滚动条停留在顶部，load多一页
 		if (
 			wrapperRef.current &&
 			wrapperRef.current.scrollTop === 0 &&
@@ -340,7 +340,7 @@ const ChatMessageList = observer(() => {
 	})
 
 	const handleContainerScroll = throttle(() => {
-		// 列表大小变化时，不处理
+		// list大小变化时，不handle
 		if (isContentChanging.current) return
 
 		checkScrollPosition()
@@ -352,7 +352,7 @@ const ChatMessageList = observer(() => {
 			wrapperRef.current.removeEventListener("scroll", handleContainerScroll)
 		}
 
-		// 立即设置切换状态，防止消息串台
+		// 立即settings切换status，防止message串台
 		state.setIsConversationSwitching(true)
 		state.reset()
 		lastMessageId = ""
@@ -365,7 +365,7 @@ const ChatMessageList = observer(() => {
 			scrollToBottom(true)
 		}, 0)
 
-		// 减少延迟时间，快速恢复正常状态
+		// 减少延迟time，快速恢复正常status
 		setTimeout(() => {
 			if (wrapperRef.current) {
 				wrapperRef.current.addEventListener("scroll", handleContainerScroll)
@@ -373,7 +373,7 @@ const ChatMessageList = observer(() => {
 			initialRenderRef.current = true
 			state.setIsConversationSwitching(false)
 
-			// 会话切换后，检查消息是否填满视图
+			// 会话切换后，checkmessage是否填满视图
 			if (checkMessagesFillViewportTimerRef.current) {
 				clearTimeout(checkMessagesFillViewportTimerRef.current)
 			}
@@ -382,27 +382,27 @@ const ChatMessageList = observer(() => {
 	}, [MessageStore.conversationId, MessageStore.topicId])
 
 	useLayoutEffect(() => {
-		// 创建 ResizeObserver 实例，监听消息列表高度变化
+		// create ResizeObserver 实例，listenermessagelist高度变化
 		resizeObserverRef.current = new ResizeObserver(
 			debounce((entries) => {
 				const chatList = entries[0]
 				if (!chatList) return
-				// 列表大小变化
+				// list大小变化
 				isContentChanging.current = true
 				handleResize()
-				// 重置
+				// reset
 				setTimeout(() => {
 					isContentChanging.current = false
 				}, 0)
 			}, 100),
 		)
 
-		// 开始观察
+		// start观察
 		if (chatListRef.current) {
 			resizeObserverRef.current.observe(chatListRef.current)
 		}
 
-		// 消息聚焦
+		// message聚焦
 		const focusDisposer = autorun(() => {
 			if (MessageStore.focusMessageId) {
 				scrollToMessage(MessageStore.focusMessageId, "center")
@@ -437,7 +437,7 @@ const ChatMessageList = observer(() => {
 
 	const handleContainerClick = useCallback((e: React.MouseEvent) => {
 		const target = e.target as HTMLElement
-		// 从点击元素开始向上查找，直到找到带有 data-message-id 的元素
+		// 从点击元素start向上查找，直到找到带有 data-message-id 的元素
 		const messageElement = target.closest("[data-message-id]")
 		const messageId = messageElement?.getAttribute("data-message-id")
 
@@ -448,7 +448,7 @@ const ChatMessageList = observer(() => {
 				try {
 					const fileInfoObj = safeBtoaToJson(fileInfo)
 					if (fileInfoObj) {
-						// 如果是同一张图片，先重置状态
+						// 如果是同一张图片，先resetstatus
 						MessageImagePreview.setPreviewInfo({
 							...fileInfoObj,
 							messageId,
@@ -456,7 +456,7 @@ const ChatMessageList = observer(() => {
 						})
 					}
 				} catch (error) {
-					console.error("解析文件信息失败", error)
+					console.error("解析fileinformationfailed", error)
 				}
 			}
 		}
@@ -474,7 +474,7 @@ const ChatMessageList = observer(() => {
 		e.preventDefault()
 		const target = e.target as HTMLElement
 		if (target.closest(`.${DomClassName.MESSAGE_ITEM}`)) {
-			// 从点击元素开始向上查找，直到找到带有 data-message-id 的元素
+			// 从点击元素start向上查找，直到找到带有 data-message-id 的元素
 			const messageElement = target.closest("[data-message-id]")
 			const messageId = messageElement?.getAttribute("data-message-id")
 			MessageDropdownService.setMenu(messageId ?? "", e.target)
@@ -508,7 +508,7 @@ const ChatMessageList = observer(() => {
 						willChange: "transform",
 					}}
 				>
-					{/* 会话切换时显示加载状态，防止消息串台 */}
+					{/* 会话切换时显示loadstatus，防止message串台 */}
 					{state.isConversationSwitching ? (
 						<div className={styles.conversationSwitching}>
 							<div>
@@ -518,14 +518,14 @@ const ChatMessageList = observer(() => {
 					) : (
 						MessageStore.messages
 							.filter((message) => {
-								// 过滤消息，确保只显示当前会话的消息
+								// 过滤message，确保只显示当前会话的message
 								return (
 									message.conversation_id === MessageStore.conversationId &&
 									message.message.topic_id === MessageStore.topicId
 								)
 							})
 							.map((message) => {
-								// 使用复合key防止不同会话间的组件复用
+								// 使用复合key防止不同会话间的component复用
 								const messageKey = `${MessageStore.conversationId}-${MessageStore.topicId}-${message.message_id}`
 								return (
 									<div

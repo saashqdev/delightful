@@ -55,18 +55,18 @@ const TestRoute: React.FC = () => {
 const HomePage: React.FC = () => {
 	return (
 		<div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
-			<h1>ReactFlow 性能测试工具</h1>
+			<h1>ReactFlow performancetesttool</h1>
 
 			<div style={{ marginTop: "20px" }}>
-				<h2>测试目的</h2>
+				<h2>test目的</h2>
 				<p>
-					本工具旨在帮助开发者诊断和比较ReactFlow在不同渲染模式下的性能差异。
-					通过对比DOM渲染和Canvas渲染的性能，可以针对性地优化大型流程图的渲染效率。
+					本tool旨在帮助开发者诊断和比较ReactFlow在不同渲染模式下的performance差异。
+					通过对比DOM渲染和Canvas渲染的performance，可以针对性地optimization大型flow图的渲染效率。
 				</p>
 			</div>
 
 			<div style={{ marginTop: "20px" }}>
-				<h2>可用测试</h2>
+				<h2>可用test</h2>
 				<div
 					style={{
 						display: "flex",
@@ -76,32 +76,32 @@ const HomePage: React.FC = () => {
 					}}
 				>
 					<TestCard
-						title="ReactFlow DOM渲染测试"
-						description="测试原生ReactFlow的DOM渲染性能，支持动态调整节点数量和监控FPS。"
+						title="ReactFlow DOM渲染test"
+						description="test原生ReactFlow的DOM渲染performance，支持动态调整node数量和监控FPS。"
 						link="/react-flow"
 					/>
 
 					<TestCard
-						title="Canvas渲染测试"
-						description="使用Canvas实现的流程图渲染，避免大量DOM节点创建，优化平移和缩放性能。"
+						title="Canvas渲染test"
+						description="使用Canvasimplement的flow图渲染，避免大量DOMnodecreate，optimization平移和缩放performance。"
 						link="/canvas"
 					/>
 
 					<TestCard
-						title="性能对比测试"
-						description="并排展示ReactFlow和Canvas两种渲染方式，直观对比性能差异。"
+						title="performance对比test"
+						description="并排展示ReactFlow和Canvas两种渲染方式，直观对比performance差异。"
 						link="/comparison"
 					/>
 				</div>
 			</div>
 
 			<div style={{ marginTop: "30px" }}>
-				<h2>测试建议</h2>
+				<h2>test建议</h2>
 				<ul>
-					<li>从少量节点开始测试，逐步增加节点数量直到性能明显下降</li>
-					<li>测试中频繁进行平移和缩放操作，观察FPS变化</li>
-					<li>比较两种渲染方式在处理大量节点时的性能差异</li>
-					<li>尝试识别性能瓶颈出现的临界点（节点数量阈值）</li>
+					<li>从少量nodestarttest，逐步增加node数量直到performance明显下降</li>
+					<li>test中频繁进行平移和缩放operation，观察FPS变化</li>
+					<li>比较两种渲染方式在handle大量node时的performance差异</li>
+					<li>尝试识别performance瓶颈出现的临界点（node数量阈值）</li>
 				</ul>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 ﻿/**
- * 表达式组件的自定义渲染属性
+ * 表达式component的自定义渲染property
  */
 
 import { Department } from "@/DelightfulExpressionWidget/components/nodes/LabelDepartmentNames/LabelDepartmentNames"

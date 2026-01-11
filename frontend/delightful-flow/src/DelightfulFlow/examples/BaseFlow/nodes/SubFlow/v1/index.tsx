@@ -52,7 +52,7 @@ export default function SubFlowV1() {
 		updateNodeConfig({ ...currentNode })
 	})
 
-	/** input更新时同步到节点 */
+	/** inputupdate时同步到node */
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		_.set(currentNode, ["input", "form", "structure"], input)
@@ -78,7 +78,7 @@ export default function SubFlowV1() {
 			onValuesChange={onValuesChange}
 			initialValues={initialValues}
 		>
-			<Form.Item name="sub_flow_id" className={styles.select} label="选择子流程">
+			<Form.Item name="sub_flow_id" className={styles.select} label="选择subprocess">
 				<DelightfulSelect
 					options={subFlowOptions}
 					style={{ width: "100%" }}
@@ -97,7 +97,7 @@ export default function SubFlowV1() {
 						displayColumns={[ShowColumns.Key, ShowColumns.Value, ShowColumns.Type]}
 						columnNames={{
 							[ShowColumns.Key]: "变量名",
-							[ShowColumns.Type]: "变量类型",
+							[ShowColumns.Type]: "变量class型",
 							[ShowColumns.Value]: "变量值",
 							[ShowColumns.Label]: "显示名称",
 							[ShowColumns.Description]: "变量描述",

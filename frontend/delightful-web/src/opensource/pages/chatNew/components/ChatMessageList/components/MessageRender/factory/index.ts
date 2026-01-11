@@ -26,7 +26,7 @@ interface MessageProps {
 }
 
 class MessageRenderFactory {
-	// 组件缓存，优先读取缓存
+	// component缓存，优先读取缓存
 	private static componentCache = new Map<
 		string,
 		React.LazyExoticComponent<React.ComponentType<MessageProps>>
@@ -52,24 +52,24 @@ class MessageRenderFactory {
 		return { ...componentConfig.getProps(message) }
 	}
 
-	// 获取组件
+	// getcomponent
 	static getComponent(
 		type: string,
 	): React.LazyExoticComponent<React.ComponentType<MessageProps>> {
-		// 加载并返回组件
+		// load并returncomponent
 		const messageComponent = ComponentConfig[type]
 
-		// 检查缓存
+		// check缓存
 		if (messageComponent && this.componentCache.has(messageComponent.componentType)) {
 			return this.componentCache.get(messageComponent.componentType)!
 		}
 
-		// 没有加载器
+		// 没有load器
 		if (!messageComponent?.loader) {
 			return this.getFallbackComponent()
 		}
 
-		// 创建 lazy 组件
+		// create lazy component
 		const LazyComponent = React.lazy(() =>
 			messageComponent.loader().then((module) => ({
 				default: module.default as React.ComponentType<MessageProps>,

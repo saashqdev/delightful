@@ -1,5 +1,5 @@
 ﻿/**
- * 人员检索条件相关状态和行为&组件
+ * personnel retrieval条件相关status和行为&component
  */
 
 import DelightfulSelect from "@/common/BaseUI/Select"

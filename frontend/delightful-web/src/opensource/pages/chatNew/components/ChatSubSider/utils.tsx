@@ -22,16 +22,16 @@ import { QuickInstructionNodeChatSubSiderExtension } from "../quick-instruction/
 import { extractSourcePlaceholders } from "../ChatMessageList/components/MessageFactory/components/AiSearch/utils"
 
 /**
- * 获取最后一条消息
- * @param messages 有序消息列表
- * @param targetIndex 目标消息索引
+ * get最后一条message
+ * @param messages 有序messagelist
+ * @param targetIndex 目标message索引
  * @returns
  */
 export function getLastMessage(
 	messages: ConversationMessage[] | undefined,
 	targetIndex?: number,
 ): ConversationMessage | undefined {
-	// 如果没有消息，或者要查找的消息不存在，返回 undefined
+	// 如果没有message，或者要查找的message不存在，return undefined
 	if (!messages || !messages.length || (isNumber(targetIndex) && targetIndex < 0))
 		return undefined
 
@@ -39,7 +39,7 @@ export function getLastMessage(
 	const lastMessage = messages[index]
 	if (!lastMessage) return undefined
 	// if (lastMessage.message.type === MessageType.Empty) {
-	// 	// 如果还是空消息，返回上一个消息的内容
+	// 	// 如果还是空message，return上一个message的内容
 	// 	return getLastMessage(messages, index - 1)
 	// }
 
@@ -82,7 +82,7 @@ export const generateRichText = memoize(
 )
 
 /**
- * 获取富文本消息 HTML 内容
+ * get富文本message HTML 内容
  * @param content
  * @returns
  */
@@ -93,8 +93,8 @@ export function getRichTextHtml(content?: string) {
 
 // 缓存 emoji 正则表达式
 const createDelightfulEmojiRegex = memoize(() => {
-	// 创建匹配所有魔法表情的正则表达式
-	// 例如: 匹配 [smile], [laugh] 等格式
+	// create匹配所有魔法表情的正则表达式
+	// 例如: 匹配 [smile], [laugh] 等format
 	return new RegExp(
 		Array.from(emojiFilePathCache.keys())
 			.map((item) => `\\[${item}\\]`)
@@ -108,30 +108,30 @@ export const delightfulEmojiRegex = createDelightfulEmojiRegex()
 
 /**
  * 递归查找并替换表情符号
- * @param content 需要处理的文本内容
+ * @param content 需要handle的文本内容
  */
 const findAndReplaceDelightfulEmoji = (content?: string) => {
 	if (!content) return content
 
 	const splitArray = extractSourcePlaceholders(content, delightfulEmojiRegex)
 	return splitArray.map((item) => {
-		// 检查是否是表情符号格式
+		// check是否是表情符号format
 		if (item.match(delightfulEmojiRegex)) {
 			// 提取表情符号代码 (去掉前后的方括号)
 			const code = item.slice(1, -1)
-			// 如果是有效的表情符号代码，返回对应的组件
+			// 如果是有效的表情符号代码，return对应的component
 			if (emojiFilePathCache.has(code)) {
 				return <DelightfulEmoji key={code} code={code} width={16} />
 			}
 			return item
 		}
-		// 不是表情符号则原样返回
+		// 不是表情符号则原样return
 		return item
 	})
 }
 
 /**
- * 获取富文本消息 粘贴文本
+ * get富文本message 粘贴文本
  * @param content
  * @returns
  */
@@ -158,9 +158,9 @@ export const getRichMessagePasteText = (content?: string) => {
 }
 
 /**
- * 获取消息文本内容
- * @param message 消息
- * @returns 消息文本内容
+ * getmessage文本内容
+ * @param message message
+ * @returns message文本内容
  */
 export function getMessageText(
 	message: SeqResponse<CMessage> | ConversationMessageSend | undefined,

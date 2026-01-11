@@ -2,10 +2,10 @@
 import { useState } from "react"
 import { observer } from "mobx-react-lite"
 
-// 类型导入
+// class型import
 import type { DrawerProps } from "antd"
 
-// UI 组件库
+// UI component库
 import { Checkbox, Drawer, Flex } from "antd"
 import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
@@ -15,7 +15,7 @@ import AutoTooltipText from "@/opensource/components/other/AutoTooltipText"
 // 图标
 import { IconChevronLeft } from "@tabler/icons-react"
 
-// 工具函数/Hooks
+// toolfunction/Hooks
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
 import useGroupInfo from "@/opensource/hooks/chat/useGroupInfo"

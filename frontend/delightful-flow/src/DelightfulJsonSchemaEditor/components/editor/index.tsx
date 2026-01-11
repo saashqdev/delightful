@@ -202,7 +202,7 @@ const Editor = observer(
 			})
 		}
 
-		// 修改备注信息
+		// 修改备注information
 		const handleChangeValue = (e: any, key: string[], value: string | InputExpressionValue) => {
 			let changeValue: InputExpressionValue | string | boolean | { mock: string } = value
 			if (key[0] === "mock" && value) {
@@ -231,7 +231,7 @@ const Editor = observer(
 
 		/**
 		 * 展示弹窗modal
-		 * prefix: 节点前缀信息
+		 * prefix: node前缀information
 		 * name: 弹窗的名称 ['description', 'mock']
 		 * value: 输入值
 		 * type: 如果当前字段是object || array showEdit 不可用
@@ -261,14 +261,14 @@ const Editor = observer(
 			})
 		}
 
-		// 修改备注/mock参数信息
+		// 修改备注/mockparameterinformation
 		const changeDesc = (value: string, name: string) => {
 			setStateVal((prevState) => {
 				return { ...prevState, [name]: value }
 			})
 		}
 
-		// 高级设置
+		// 高级settings
 		const handleAdvOk = () => {
 			if (stateVal.itemKey.length === 0) {
 				schemaMobx.changeSchema(stateVal.curItemCustomValue)
@@ -295,7 +295,7 @@ const Editor = observer(
 					...prevState,
 					advVisible: true,
 					itemKey: key,
-					curItemCustomValue: value, // 当前节点的数据信息
+					curItemCustomValue: value, // 当前node的数据information
 				}
 			})
 		}
@@ -343,7 +343,7 @@ const Editor = observer(
 			onBlur(JSON.parse(JSON.stringify(schemaMobx.schema)))
 		}
 
-		//  增加子节点
+		//  增加子node
 		const handleAddField = useMemoizedFn(() => {
 			schemaMobx.addChildField({
 				keys: ["properties"],
@@ -371,7 +371,7 @@ const Editor = observer(
 				// 尝试解析JSON内容
 				const jsonContent = JSON.parse(content)
 
-				// 判断是否为Schema格式或普通JSON
+				// 判断是否为Schemaformat或普通JSON
 				const schema = isSchemaFormat(jsonContent)
 					? jsonContent
 					: convertJsonToSchema(jsonContent)
@@ -409,7 +409,7 @@ const Editor = observer(
 
 				return true
 			} catch (err) {
-				console.log("导入错误", err)
+				console.log("importerror", err)
 
 				return false
 			}

@@ -16,7 +16,7 @@ import ReactFlow, {
 } from "reactflow"
 import "reactflow/dist/style.css"
 
-// 自定义节点
+// 自定义node
 const CustomNode = ({ data }: { data: { label: string } }) => {
 	return (
 		<div
@@ -40,34 +40,34 @@ const nodeTypes: NodeTypes = {
 }
 
 /**
- * ReactFlow基础功能测试组件
- * 用于测试ReactFlow的基本交互和功能
+ * ReactFlow基础功能testcomponent
+ * 用于testReactFlow的基本交互和功能
  */
 const ReactFlowBasicTest: React.FC = () => {
-	// 初始节点
+	// 初始node
 	const initialNodes = [
 		{
 			id: "1",
 			type: "custom",
-			data: { label: "节点 1" },
+			data: { label: "node 1" },
 			position: { x: 250, y: 5 },
 		},
 		{
 			id: "2",
 			type: "custom",
-			data: { label: "节点 2" },
+			data: { label: "node 2" },
 			position: { x: 100, y: 100 },
 		},
 		{
 			id: "3",
 			type: "custom",
-			data: { label: "节点 3" },
+			data: { label: "node 3" },
 			position: { x: 400, y: 100 },
 		},
 		{
 			id: "4",
 			type: "custom",
-			data: { label: "节点 4" },
+			data: { label: "node 4" },
 			position: { x: 400, y: 200 },
 		},
 	]
@@ -78,7 +78,7 @@ const ReactFlowBasicTest: React.FC = () => {
 		{ id: "e1-3", source: "1", target: "3" },
 	]
 
-	// 状态管理
+	// status管理
 	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
 	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 	const [selectedNode, setSelectedNode] = useState<string | null>(null)
@@ -91,18 +91,18 @@ const ReactFlowBasicTest: React.FC = () => {
 		[setEdges],
 	)
 
-	// 节点点击回调
+	// node点击回调
 	const onNodeClick = useCallback((event: React.MouseEvent, node: any) => {
 		setSelectedNode(node.id)
-		console.log("选中节点:", node)
+		console.log("选中node:", node)
 	}, [])
 
-	// 添加新节点
+	// 添加新node
 	const addNode = useCallback(() => {
 		const newNode = {
 			id: `${nodes.length + 1}`,
 			type: "custom",
-			data: { label: `节点 ${nodes.length + 1}` },
+			data: { label: `node ${nodes.length + 1}` },
 			position: {
 				x: Math.random() * 300 + 50,
 				y: Math.random() * 300 + 50,
@@ -142,17 +142,17 @@ const ReactFlowBasicTest: React.FC = () => {
 						}}
 					>
 						<div>
-							<h3 style={{ marginTop: 0 }}>ReactFlow 基本测试</h3>
+							<h3 style={{ marginTop: 0 }}>ReactFlow 基本test</h3>
 
 							<div style={{ marginBottom: "10px" }}>
 								<button onClick={addNode} style={{ marginRight: "10px" }}>
-									添加节点
+									添加node
 								</button>
 								<button
 									onClick={() => setNodeDragEnabled(!nodeDragEnabled)}
 									style={{ marginRight: "10px" }}
 								>
-									{nodeDragEnabled ? "禁用" : "启用"}节点拖拽
+									{nodeDragEnabled ? "禁用" : "启用"}node拖拽
 								</button>
 								<button onClick={() => setSnapToGrid(!snapToGrid)}>
 									{snapToGrid ? "关闭" : "启用"}网格吸附
@@ -161,7 +161,7 @@ const ReactFlowBasicTest: React.FC = () => {
 
 							{selectedNode && (
 								<div>
-									<strong>已选中节点:</strong> {selectedNode}
+									<strong>已选中node:</strong> {selectedNode}
 								</div>
 							)}
 						</div>

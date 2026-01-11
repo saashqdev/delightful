@@ -26,7 +26,7 @@ export default function LLMV0() {
 	const onValuesChange = useMemoizedFn((changeValues) => {
 		if (!currentNode) return
 
-		// 特殊处理llm字段
+		// 特殊handlellm字段
 		if (changeValues.llm) {
 			const { model, ...rest } = changeValues.llm
 			_.set(currentNode, ["params", "model"], model)
@@ -66,14 +66,14 @@ export default function LLMV0() {
 				<div className={styles.inputHeader}>输入</div>
 				<div className={styles.inputBody}>
 					<DropdownCard
-						title="提示词"
+						title="tip词"
 						headerClassWrapper={styles.promptWrapper}
 						height="auto"
 					>
 						<DelightfulExpression
 							label="System"
 							name="system_prompt"
-							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，提示词内容会被固定在上下文的开头，支持使用“@”添加变量"
+							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，tip词内容会被固定在上下文的开头，支持使用“@”添加变量"
 							dataSource={expressionDataSource}
 							showExpand
 						/>
@@ -81,7 +81,7 @@ export default function LLMV0() {
 						<DelightfulExpression
 							label="User"
 							name="user_prompt"
-							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，提示词内容会被固定在上下文的开头，支持使用“@”添加变量"
+							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，tip词内容会被固定在上下文的开头，支持使用“@”添加变量"
 							className={styles.LLMInput}
 							dataSource={expressionDataSource}
 						/>

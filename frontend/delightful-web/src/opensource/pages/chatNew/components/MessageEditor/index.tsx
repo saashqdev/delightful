@@ -69,7 +69,7 @@ export interface SendData {
 const MAX_UPLOAD_COUNT = 20
 
 export interface DelightfulInputProps extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue"> {
-	/** 底层编辑器 Tiptap 配置 */
+	/** 底层编辑器 Tiptap configuration */
 	tiptapProps?: UseEditorOptions
 	/** 是否可见 */
 	visible?: boolean
@@ -83,7 +83,7 @@ export interface DelightfulInputProps extends Omit<HTMLAttributes<HTMLDivElement
 	clearAfterSend?: boolean
 	/** 占位符 */
 	placeholder?: string
-	/** 输入框样式 */
+	/** input field样式 */
 	inputMainClassName?: string
 }
 
@@ -118,7 +118,7 @@ const MessageEditor = observer(function MessageEditor({
 
 	// 编辑器是否准备好
 	const [editorReady, setEditorReady] = useState(false)
-	// 防止重复设置内容
+	// 防止重复settings内容
 	const settingContent = useRef(false)
 
 	const {
@@ -128,7 +128,7 @@ const MessageEditor = observer(function MessageEditor({
 		clearSessionInstructConfig,
 	} = ConversationBotDataService
 
-	// 监听在引导页监听到的文本
+	// listener在引导页listener到的文本
 	useEffect(() => {
 		const disposer = autorun(() => {
 			if (ConversationStore.selectText && editorReady && !settingContent.current) {
@@ -151,16 +151,16 @@ const MessageEditor = observer(function MessageEditor({
 		}
 	})
 
-	/** ============================== 引用消息 =============================== */
+	/** ============================== 引用message =============================== */
 	const referMessageId = ReplyStore.replyMessageId
 	const handleReferMessageClick = useMemoizedFn(() => {
 		if (referMessageId) {
-			// FIXME: 滚动到引用消息
+			// FIXME: 滚动到引用message
 			MessageStore.setFocusMessageId(referMessageId)
 		}
 	})
 
-	// 选择引用消息后, 自动聚焦到输入框
+	// 选择引用message后, 自动聚焦到input field
 	useEffect(() => {
 		return autorun(() => {
 			if (ReplyStore.replyMessageId) {
@@ -169,7 +169,7 @@ const MessageEditor = observer(function MessageEditor({
 		})
 	}, [])
 
-	/** ============================== 文件上传 =============================== */
+	/** ============================== fileupload =============================== */
 	const [files, setFilesRaw] = useState<FileData[]>([])
 	const setFiles = useMemoizedFn((l: FileData[] | ((prev: FileData[]) => FileData[])) => {
 		const list = typeof l === "function" ? l(files) : l
@@ -224,7 +224,7 @@ const MessageEditor = observer(function MessageEditor({
 		},
 	})
 
-	/** ========================== 发送消息 ========================== */
+	/** ========================== 发送message ========================== */
 	const sending = useRef(false)
 	const { run: onSend } = useThrottleFn(
 		useMemoizedFn(
@@ -237,7 +237,7 @@ const MessageEditor = observer(function MessageEditor({
 					if (sending.current) return
 					sending.current = true
 
-					// 先上传文件
+					// 先uploadfile
 					const { fullfilled, rejected } = await upload(files)
 					if (rejected.length > 0) {
 						message.error(t("file.uploadFail", { ns: "message" }))
@@ -245,7 +245,7 @@ const MessageEditor = observer(function MessageEditor({
 						return
 					}
 
-					// 上报文件
+					// 上报file
 					const reportRes =
 						fullfilled.length > 0
 							? await FileApi.reportFileUploads(
@@ -258,7 +258,7 @@ const MessageEditor = observer(function MessageEditor({
 							  )
 							: []
 
-					// 找到所有的图片,进行上传
+					// 找到所有的图片,进行upload
 					const jsonContentImageTransformed = await transformJSONContent(
 						jsonValue,
 						(c) => c.type === Image.name,
@@ -308,7 +308,7 @@ const MessageEditor = observer(function MessageEditor({
 						JSON.stringify(jsonContentImageTransformed),
 					)
 
-					// 发送消息
+					// 发送message
 					EditorService.send({
 						jsonValue: jsonContentImageTransformed,
 						normalValue,
@@ -336,7 +336,7 @@ const MessageEditor = observer(function MessageEditor({
 
 						MessageReplyService.reset()
 						setFiles([])
-						// 清空内部状态
+						// 清空内部status
 						setValue(undefined)
 					}
 				} catch (error) {
@@ -366,7 +366,7 @@ const MessageEditor = observer(function MessageEditor({
 			.run()
 	})
 
-	/** ========================== 上传文件相关 ========================== */
+	/** ========================== uploadfile相关 ========================== */
 	const onFileChange = useMemoizedFn(async (fileList: FileList | File[]) => {
 		const imageFiles: File[] = []
 		const otherFiles: File[] = []
@@ -380,7 +380,7 @@ const MessageEditor = observer(function MessageEditor({
 			}
 		}
 
-		// 处理图片,插入到输入框
+		// handle图片,插入到input field
 		if (imageFiles.length > 0) {
 			const pos = editorRef.current?.editor?.state.selection.$from.pos ?? 0
 			await Promise.all(
@@ -402,7 +402,7 @@ const MessageEditor = observer(function MessageEditor({
 			editorRef.current?.editor?.commands.focus(pos + imageFiles.length)
 		}
 
-		// 处理其他文件
+		// handle其他file
 		if (otherFiles.length > 0) {
 			setFiles((l) => [...l, ...otherFiles.map(genFileData)])
 		}
@@ -484,7 +484,7 @@ const MessageEditor = observer(function MessageEditor({
 		[conversationId, standardStyles.button],
 	)
 
-	/** ========================== 按钮组 ========================== */
+	/** ========================== button组 ========================== */
 	const buttons = useMemo(() => {
 		if (isAiConversation) {
 			return (
@@ -561,11 +561,11 @@ const MessageEditor = observer(function MessageEditor({
 		{ wait: 1000 },
 	)
 
-	/** 切换会话或者话题时, 保存和读取草稿 */
+	/** 切换会话或者话题时, save和读取草稿 */
 	useEffect(() => {
 		if (conversationId && editorReady && !settingContent.current) {
 			settingContent.current = true
-			// 保存草稿
+			// save草稿
 			if (
 				EditorStore.lastConversationId !== conversationId ||
 				EditorStore.lastTopicId !== topicId
@@ -584,7 +584,7 @@ const MessageEditor = observer(function MessageEditor({
 				const draft = EditorDraftStore.getDraft(conversationId, topicId ?? "")
 				editorRef.current?.editor?.commands.setContent(draft?.content ?? "", true)
 				console.log("draft", toJS(draft))
-				// 设置内部状态
+				// settings内部status
 				setValue(draft?.content)
 				setFiles(draft?.files ?? [])
 				const text = editorRef.current?.editor?.getText()
@@ -592,7 +592,7 @@ const MessageEditor = observer(function MessageEditor({
 			} else {
 				editorRef.current?.editor?.chain().clearContent().run()
 				setIsEmpty(true)
-				// 重置内部状态
+				// reset内部status
 				setValue(undefined)
 				setFiles([])
 			}
@@ -613,7 +613,7 @@ const MessageEditor = observer(function MessageEditor({
 	}, [isEmpty])
 
 	const openAiCompletion = useAppearanceStore((state) => state.aiCompletion)
-	/** ========================== 编辑器配置 ========================== */
+	/** ========================== 编辑器configuration ========================== */
 	const editorProps = useMemo<UseEditorOptions>(() => {
 		const extensions = [
 			/** 快捷指令 */
@@ -639,17 +639,17 @@ const MessageEditor = observer(function MessageEditor({
 				if (settingContent.current) return
 
 				try {
-					// 获取编辑器JSON
+					// get编辑器JSON
 					const json = e?.getJSON()
 					const text = e?.getText() ?? ""
 
-					// 确保json有效才更新状态
+					// 确保json有效才updatestatus
 					if (json && typeof json === "object" && "type" in json) {
-						// 更新内部状态
+						// update内部status
 						setValue?.(json)
 						// 写入草稿
 						writeCurrentDraft()
-						// 设置空状态
+						// settings空status
 						setIsEmpty(!text)
 					}
 				} catch (error) {
@@ -657,13 +657,13 @@ const MessageEditor = observer(function MessageEditor({
 				}
 			},
 			onTransaction: () => {
-				// 处理输入事件，不触发重渲染
+				// handle输入event，不触发重渲染
 			},
 			onCreate: () => {
 				setEditorReady(true)
 			},
 			extensions,
-			enableContentCheck: false, // 关闭内置内容检查，我们自己处理
+			enableContentCheck: false, // 关闭内置内容check，我们自己handle
 			...omit(tiptapProps, ["extensions", "onContentError"]),
 		}
 	}, [tiptapProps, openAiCompletion, isValidContent, value, setValue, writeCurrentDraft])
@@ -696,7 +696,7 @@ const MessageEditor = observer(function MessageEditor({
 		}
 	})
 
-	/** ========================== 发送按钮 ========================== */
+	/** ========================== 发送button ========================== */
 	const sendDisabled = (isEmpty && !files.length) || uploading
 
 	const handleSend = useMemoizedFn(async () => {
@@ -709,8 +709,8 @@ const MessageEditor = observer(function MessageEditor({
 				// 超长文本
 				return new Promise((resolve) => {
 					DelightfulModal.confirm({
-						title: "提示",
-						content: "发送的内存超长，是否转为文档发送到当前会话？",
+						title: "tip",
+						content: "发送的内存超长，是否转为documentation发送到当前会话？",
 						okText: "确定",
 						onOk: async () => {
 							await onSend?.(json, onlyText, true)

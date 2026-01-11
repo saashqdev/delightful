@@ -131,7 +131,7 @@ const DelightfulAiImages = observer(({ type, data }: DelightfulAiImagesProps) =>
 
 	useEffect(() => {
 		if (isToHDError && previewInfo?.fileId === (data as HDImageContent).origin_file_id) {
-			message.error(data?.error_message || "生成失败")
+			message.error(data?.error_message || "生成failed")
 			MessageFilePreviewService.setPreviewInfo({ ...previewInfo, useHDImage: false })
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -34,7 +34,7 @@ class ValueDisplayTest extends BaseTestCase
                     "avatar": "",
                     "position": "Management trainee",
                     "user_groups": [],
-                    "email": "team@dtyq.cn",
+                    "email": "team@delightful.cn",
                     "job_number": "",
                     "departments": [
                         {

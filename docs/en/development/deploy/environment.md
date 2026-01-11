@@ -37,7 +37,7 @@ DELIGHTFUL_EDITION=COMMUNITY
 
 ```
 # Git Repository URL (Default using GitHub)
-GIT_REPO_URL=git@github.com:dtyq
+GIT_REPO_URL=git@github.com:delightful
 ```
 
 ### 2. Database Configuration

@@ -34,7 +34,7 @@ class ConfigProvider
             'publish' => [
                 [
                     'id' => 'config',
-                    'description' => 'The config for dtyq/flow-expr-engine.',
+                    'description' => 'The config for delightful/flow-expr-engine.',
                     'source' => __DIR__ . '/publish/flow_expr_engine.php',
                     'destination' => BASE_PATH . '/config/autoload/flow_expr_engine.php',
                 ],

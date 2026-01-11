@@ -12,7 +12,7 @@ DelightfulSegmented is an enhanced segmented controller component based on Ant D
 ## Installation
 
 ```bash
-# Included in @dtyq/delightful-ui, no need to install separately
+# Included in @delightful/delightful-ui, no need to install separately
 ```
 
 ## Basic Usage

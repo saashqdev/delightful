@@ -65,11 +65,11 @@ class DelightfulLLMDomainServiceStub extends DelightfulLLMDomainService
             [
                 'id' => 'https://api.bing.microsoft.com/api/v7/#WebPages.3',
                 'name' => 'Lighthouse Engine - Empowering Digital Transformation of Chain Operation Industry',
-                'url' => 'https://www.dtyq.com/',
+                'url' => 'https://www.delightful.com/',
                 'datePublished' => '2024-10-16 15:10:43',
                 'datePublishedDisplayText' => '2024-10-16 15:10:43',
                 'isFamilyFriendly' => true,
-                'displayUrl' => 'https://www.dtyq.com',
+                'displayUrl' => 'https://www.delightful.com',
                 'snippet' => 'Guangdong Lighthouse Engine Technology Co., Ltd. is a provider of digital intelligence solutions focused on the chain operation industry. • One-stop Solution: We provide comprehensive core technology application services, including technology R&D, system implementation, intelligent operations and maintenance, intelligent decision-making, and big data analysis, providing complete solutions for customers chain business. • Comprehensive intelligent ...',
                 'dateLastCrawled' => '2024-10-16 15:10:43',
                 'cachedPageUrl' => 'http://cncc.bingj.com/cache.aspx?q=%E7%81%AF%E5%A1%94%E5%BC%95%E6%93%8E&d=5053270008094152&mkt=zh-CN&setlang=zh-CN&w=XY93sySUQ8L59i0phxcRUA1JeOZwlyft',

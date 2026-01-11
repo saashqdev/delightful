@@ -196,8 +196,8 @@ class Theme:
     BG_DARK = RGBColor(33, 37, 41)       # Dark background #212529
     
     # Font settings
-    TITLE_FONT = '微软雅黑'  # Title font
-    BODY_FONT = '微软雅黑'   # Body font
+    TITLE_FONT = 'Microsoft YaHei'  # Title font
+    BODY_FONT = 'Microsoft YaHei'   # Body font
 
 # Generate PPT filename
 def generate_ppt_filename(title="Presentation", base_dir="."):

@@ -52,7 +52,7 @@ Or in the config configuration, add the driver parameter, which is the Filesyste
 ## Installation
 
 ```shell
-$ composer require dtyq/cloudfile -vvv
+$ composer require delightful/cloudfile -vvv
 ```
 
 ## Configuration
@@ -232,7 +232,7 @@ $list = $filesystem->getMetas([
 
 ### Publish Configuration File
 ```shell
-$ php bin/hyperf.php vendor:publish dtyq/cloudfile
+$ php bin/hyperf.php vendor:publish delightful/cloudfile
 ```
 
 ### Usage

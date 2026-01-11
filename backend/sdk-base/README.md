@@ -4,7 +4,7 @@
 ## Installing
 
 ```shell
-$ composer require dtyq/sdk-base -vvv
+$ composer require delightful/sdk-base -vvv
 ```
 
 ## Usage

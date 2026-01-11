@@ -49,26 +49,26 @@ python-pptx>=0.6.21
 python-docx>=1.0.0
 markitdown>=0.1.0
 
-# 文件监控
+# File monitoring
 watchdog>=3.0.0
 
-# 系统与环境
+# System and environment
 psutil>=7.0.0
 
-# 代码质量与开发工具
+# Code quality and development tools
 ruff==0.11.2
 
-# 存储与云服务
+# Storage and cloud services
 redis==5.2.1
 tos==2.8.1
 oss2==2.19.1
 
-# 其他工具
+# Other tools
 pillow~=10.4.0
 yfinance==0.2.55
 
-# 语法检查工具
+# Syntax checking tools
 pylint==3.3.6
 tinycss2==1.4.0
-pyright==1.1.398  # TypeScript 语法检查的附加支持
+pyright==1.1.398  # Additional support for TypeScript syntax checking
 PyExecJS>=1.5.1

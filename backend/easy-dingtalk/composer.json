@@ -1,5 +1,5 @@
 {
-    "name": "dtyq/easy-dingtalk",
+    "name": "delightful/easy-dingtalk",
     "description": "Package description here.",
     "license": "Apache License 2.0",
     "authors": [
@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=8.1",
-        "dtyq/sdk-base": "~0.1",
+        "delightful/sdk-base": "~0.1",
         "guzzlehttp/guzzle": "^6.0|^7.0",
         "ext-openssl": "*",
         "ext-json": "*"

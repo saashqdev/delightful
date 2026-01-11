@@ -20,7 +20,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  SERVICE_IMAGE: dtyq/be-delightful-python-base-image
+  SERVICE_IMAGE: delightful/be-delightful-python-base-image
   BASE_IMAGE: mcr.microsoft.com/playwright:v1.49.1-noble
 
 jobs:

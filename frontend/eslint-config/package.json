@@ -1,5 +1,5 @@
 {
-	"name": "@dtyq/eslint-config",
+	"name": "@delightful/eslint-config",
 	"version": "0.0.10",
 	"description": "ESLint config package with all dependencies built in",
 	"keywords": [

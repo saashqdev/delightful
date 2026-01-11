@@ -24,11 +24,11 @@ if [[ $# -eq 0 ]]; then
     REPOS=$(ls $BASEPATH)
 fi
 
-# remote github git@github.com:dtyq/be-delightful-module.git
-# split "backend/be-delightful-module" "git@github.com:dtyq/be-delightful-module.git"
+# remote github git@github.com:delightful/be-delightful-module.git
+# split "backend/be-delightful-module" "git@github.com:delightful/be-delightful-module.git"
 
 for REPO in $REPOS ; do
-    remote $REPO git@github.com:dtyq/$REPO.git
+    remote $REPO git@github.com:delightful/$REPO.git
 
     split "backend/$REPO" $REPO
 done

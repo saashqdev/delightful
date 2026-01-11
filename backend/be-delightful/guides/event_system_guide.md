@@ -1,56 +1,56 @@
-# BeDelightful 事件系统架构指南
+# BeDelightful Event System Architecture Guide
 
-## 概述
+## Overview
 
-BeDelightful 事件系统是一个基于发布-订阅模式的事件驱动架构，用于在 Agent 运行过程中实现各种组件间的解耦和通信。事件系统分为两层：
+The BeDelightful event system is an event-driven architecture based on the publish-subscribe pattern, designed to achieve decoupling and communication between various components during Agent execution. The event system consists of two layers:
 
-1. **基础层 (agentlang)**: 提供核心事件类型定义和事件分发机制
-2. **应用层 (app)**: 提供具体业务事件的实现和监听器服务
+1. **Foundation Layer (agentlang)**: Provides core event type definitions and event dispatching mechanisms
+2. **Application Layer (app)**: Provides specific business event implementations and listener services
 
-该事件系统使 BeDelightful 能够实现高度可扩展的模块化设计，监听器可以对 Agent 生命周期中的各种事件做出响应，如文件操作、任务完成、大模型交互等。
+This event system enables BeDelightful to implement a highly scalable modular design, where listeners can respond to various events in the Agent lifecycle, such as file operations, task completion, LLM interactions, etc.
 
-## 1. 事件系统基础架构 (agentlang)
+## 1. Event System Foundation Architecture (agentlang)
 
-### 1.1 核心事件类型 (EventType)
+### 1.1 Core Event Types (EventType)
 
-`agentlang/event/event.py` 定义了系统支持的所有事件类型：
+`agentlang/event/event.py` defines all event types supported by the system:
 
 ```python
 class EventType(str, Enum):
-    """事件类型枚举"""
-    # Agent 生命周期事件
-    BEFORE_INIT = "before_init"            # 初始化前事件
-    AFTER_INIT = "after_init"              # 初始化后事件
-    AGENT_SUSPENDED = "agent_suspended"    # agent终止事件
-    MAIN_AGENT_FINISHED = "main_agent_finished"  # 主 agent 运行完成事件
+    """Event type enumeration"""
+    # Agent lifecycle events
+    BEFORE_INIT = "before_init"            # Before initialization event
+    AFTER_INIT = "after_init"              # After initialization event
+    AGENT_SUSPENDED = "agent_suspended"    # Agent termination event
+    MAIN_AGENT_FINISHED = "main_agent_finished"  # Main agent execution completed event
     
-    # 安全检查事件
-    BEFORE_SAFETY_CHECK = "before_safety_check"  # 安全检查前事件
-    AFTER_SAFETY_CHECK = "after_safety_check"    # 安全检查后事件
+    # Safety check events
+    BEFORE_SAFETY_CHECK = "before_safety_check"  # Before safety check event
+    AFTER_SAFETY_CHECK = "after_safety_check"    # After safety check event
     
-    # 用户交互事件
-    AFTER_CLIENT_CHAT = "after_client_chat"      # 客户端聊天后事件
+    # User interaction events
+    AFTER_CLIENT_CHAT = "after_client_chat"      # After client chat event
     
-    # 大模型交互事件
-    BEFORE_LLM_REQUEST = "before_llm_request"    # 请求大模型前事件
-    AFTER_LLM_REQUEST = "after_llm_request"      # 请求大模型后事件
+    # LLM interaction events
+    BEFORE_LLM_REQUEST = "before_llm_request"    # Before LLM request event
+    AFTER_LLM_REQUEST = "after_llm_request"      # After LLM request event
     
-    # 工具调用事件
-    BEFORE_TOOL_CALL = "before_tool_call"        # 工具调用前事件
-    AFTER_TOOL_CALL = "after_tool_call"          # 工具调用后事件
+    # Tool invocation events
+    BEFORE_TOOL_CALL = "before_tool_call"        # Before tool call event
+    AFTER_TOOL_CALL = "after_tool_call"          # After tool call event
     
-    # 文件操作事件
-    FILE_CREATED = "file_created"                # 文件创建事件
-    FILE_UPDATED = "file_updated"                # 文件更新事件
-    FILE_DELETED = "file_deleted"                # 文件删除事件
+    # File operation events
+    FILE_CREATED = "file_created"                # File creation event
+    FILE_UPDATED = "file_updated"                # File update event
+    FILE_DELETED = "file_deleted"                # File deletion event
     
-    # 错误处理事件
-    ERROR = "error"                              # 错误事件
+    # Error handling events
+    ERROR = "error"                              # Error event
 ```
 
-### 1.2 事件基类 (Event)
+### 1.2 Event Base Class (Event)
 
-事件基类定义了事件的基本结构：
+The event base class defines the basic structure of events:
 
 ```python
 class Event(Generic[T]):
@@ -67,9 +67,9 @@ class Event(Generic[T]):
         return self._data
 ```
 
-### 1.3 可停止事件 (StoppableEvent)
+### 1.3 Stoppable Event (StoppableEvent)
 
-某些事件可以中断传播流程：
+Some events can interrupt the propagation flow:
 
 ```python
 class StoppableEvent(Event[T]):
@@ -84,12 +84,12 @@ class StoppableEvent(Event[T]):
         return self._propagation_stopped
 ```
 
-### 1.4 事件分发器 (EventDispatcher)
+### 1.4 Event Dispatcher (EventDispatcher)
 
-`EventDispatcher` 负责事件的注册和分发：
+`EventDispatcher` is responsible for event registration and dispatching:
 
 ```python
-# 在 agentlang/event/dispatcher.py 中
+# In agentlang/event/dispatcher.py
 class EventDispatcher:
     def __init__(self):
         self._listeners = defaultdict(list)
@@ -112,23 +112,23 @@ class EventDispatcher:
         return event
 ```
 
-## 2. 应用层事件系统 (app)
+## 2. Application Layer Event System (app)
 
-### 2.1 事件数据结构
+### 2.1 Event Data Structures
 
-应用层在 `app/core/entity/event/event.py` 中定义了具体的事件数据结构：
+The application layer defines specific event data structures in `app/core/entity/event/event.py`:
 
 ```python
-# 以下是一些关键事件数据结构示例：
+# Examples of key event data structures:
 class BeforeLlmRequestEventData(BaseEventData):
-    """请求大模型前的事件数据结构"""
+    """Event data structure before LLM request"""
     model_name: str
     chat_history: List[Dict[str, Any]]
     tools: Optional[List[Dict[str, Any]]] = None
     tool_context: ToolContext
 
 class AfterLlmResponseEventData(BaseEventData):
-    """请求大模型后的事件数据结构"""
+    """Event data structure after LLM request"""
     model_name: str
     request_time: float
     success: bool
@@ -138,9 +138,9 @@ class AfterLlmResponseEventData(BaseEventData):
     show_in_ui: bool = True
 ```
 
-### 2.2 监听器服务基类
+### 2.2 Base Listener Service
 
-所有监听器服务继承自 `BaseListenerService`，提供通用的事件注册逻辑：
+All listener services inherit from `BaseListenerService`, providing common event registration logic:
 
 ```python
 class BaseListenerService:
@@ -156,13 +156,13 @@ class BaseListenerService:
             BaseListenerService.register_event_listener(agent_context, event_type, listener)
 ```
 
-### 2.3 监听器注册机制
+### 2.3 Listener Registration Mechanism
 
-在 `AgentDispatcher` 的 `setup` 方法中统一注册各类监听器：
+All listeners are uniformly registered in the `setup` method of `AgentDispatcher`:
 
 ```python
 async def setup(self):
-    """设置Agent上下文和注册监听器"""
+    """Setup Agent context and register listeners"""
     self.agent_context = self.agent_service.create_agent_context(
         stream_mode=False,
         task_id="",
@@ -171,7 +171,7 @@ async def setup(self):
         sandbox_id=str(config.get("sandbox.id"))
     )
 
-    # 注册各种监听器
+    # Register various listeners
     FileStorageListenerService.register_standard_listeners(self.agent_context)
     TodoListenerService.register_standard_listeners(self.agent_context)
     FinishTaskListenerService.register_standard_listeners(self.agent_context)
@@ -181,15 +181,15 @@ async def setup(self):
     CostLimitListenerService.register_standard_listeners(self.agent_context)
 ```
 
-### 2.4 具体监听器服务实现
+### 2.4 Specific Listener Service Implementation
 
-每个监听器服务实现对应的功能，以 `FileStorageListenerService` 为例：
+Each listener service implements corresponding functionality. Using `FileStorageListenerService` as an example:
 
 ```python
 class FileStorageListenerService:
     @staticmethod
     def register_standard_listeners(agent_context: AgentContext) -> None:
-        # 创建事件类型到处理函数的映射
+        # Create mapping from event types to handler functions
         event_listeners = {
             EventType.FILE_CREATED: FileStorageListenerService._handle_file_event,
             EventType.FILE_UPDATED: FileStorageListenerService._handle_file_event,
@@ -197,59 +197,59 @@ class FileStorageListenerService:
             EventType.MAIN_AGENT_FINISHED: FileStorageListenerService._handle_main_agent_finished
         }
 
-        # 使用基类方法批量注册监听器
+        # Use base class method to batch register listeners
         BaseListenerService.register_listeners(agent_context, event_listeners)
         
     @staticmethod
     async def _handle_file_event(event: Event[FileEventData]) -> None:
-        # 处理文件创建和更新事件的实现...
+        # Implementation for handling file creation and update events...
 ```
 
-## 3. Agent Context 中的事件支持
+## 3. Event Support in Agent Context
 
-`AgentContext` 类提供了事件机制的核心功能：
+The `AgentContext` class provides core event mechanism functionality:
 
 ```python
 class AgentContext(BaseContext, AgentContextInterface):
     def add_event_listener(self, event_type: EventType, listener: Callable[[Event[Any]], None]) -> None:
-        """添加事件监听器"""
+        """Add event listener"""
         self.agent_common_context._event_dispatcher.add_listener(event_type, listener)
         
     async def dispatch_event(self, event_type: EventType, data: BaseEventData) -> Event[Any]:
-        """分发事件"""
+        """Dispatch event"""
         return await self.agent_common_context._event_dispatcher.dispatch(event_type, data)
         
     async def dispatch_stoppable_event(self, event_type: EventType, data: BaseEventData) -> StoppableEvent[Any]:
-        """分发可停止事件"""
+        """Dispatch stoppable event"""
         return await self.agent_common_context._event_dispatcher.dispatch_stoppable(event_type, data)
 ```
 
-## 4. 主要监听器服务功能概述
+## 4. Main Listener Service Functionality Overview
 
-BeDelightful 包含多种监听器服务，每种服务负责处理特定类型的事件：
+BeDelightful includes various listener services, each responsible for handling specific types of events:
 
-| 监听器服务 | 主要功能 |
-|------------|----------|
-| FileStorageListenerService | 处理文件事件，将文件上传到存储服务 |
-| TodoListenerService | 处理待办事项的添加、更新和删除 |
-| FinishTaskListenerService | 处理任务完成事件，执行后续清理工作 |
-| StreamListenerService | 处理流式输出事件，将消息推送到客户端 |
-| RagListenerService | 处理检索增强生成相关事件 |
-| FileListenerService | 处理文件系统变化监控 |
-| CostLimitListenerService | 监控和限制 API 调用成本 |
+| Listener Service | Main Functionality |
+|------------------|-------------------|
+| FileStorageListenerService | Handles file events, uploads files to storage service |
+| TodoListenerService | Handles todo item addition, updates, and deletion |
+| FinishTaskListenerService | Handles task completion events, performs subsequent cleanup |
+| StreamListenerService | Handles streaming output events, pushes messages to clients |
+| RagListenerService | Handles retrieval-augmented generation related events |
+| FileListenerService | Handles file system change monitoring |
+| CostLimitListenerService | Monitors and limits API call costs |
 
-## 5. 扩展事件系统
+## 5. Extending the Event System
 
-如需添加新的事件处理，建议按照以下步骤：
+To add new event handling, follow these recommended steps:
 
-1. 若需要新的事件类型，在 `agentlang/event/event.py` 中的 `EventType` 枚举中添加
-2. 在 `app/core/entity/event/event.py` 中定义相应的事件数据结构
-3. 创建新的监听器服务类，继承或参考 `BaseListenerService`
-4. 实现事件处理方法
-5. 在 `AgentDispatcher.setup()` 中注册新的监听器服务
+1. If you need a new event type, add it to the `EventType` enumeration in `agentlang/event/event.py`
+2. Define the corresponding event data structure in `app/core/entity/event/event.py`
+3. Create a new listener service class, inheriting from or referencing `BaseListenerService`
+4. Implement event handler methods
+5. Register the new listener service in `AgentDispatcher.setup()`
 
-## 结论
+## Conclusion
 
-BeDelightful 的事件系统提供了一种灵活且可扩展的方式来处理系统中的各种状态变化和交互。通过事件驱动架构，各个组件能够在不紧密耦合的情况下进行通信，使系统更加模块化和可维护。
+BeDelightful's event system provides a flexible and extensible way to handle various state changes and interactions in the system. Through event-driven architecture, various components can communicate without tight coupling, making the system more modular and maintainable.
 
-事件系统的分层设计（agentlang 提供基础，app 提供业务实现）也体现了关注点分离的良好架构实践，使系统更易于理解和扩展。 
+The layered design of the event system (agentlang provides the foundation, app provides business implementation) also reflects good architectural practices of separation of concerns, making the system easier to understand and extend.

@@ -1,5 +1,5 @@
 {
-    "name": "dtyq/rule-engine-core",
+    "name": "delightful/rule-engine-core",
     "type": "library",
     "license": "Apache License 2.0",
     "keywords": [
@@ -21,7 +21,7 @@
         "php": ">=8.0",
         "hyperf/di": "*",
         "hyperf/framework": "*",
-        "dtyq/sandbox": "~0.1",
+        "delightful/sandbox": "~0.1",
         "twig/twig": "^3.4"
     },
     "require-dev": {

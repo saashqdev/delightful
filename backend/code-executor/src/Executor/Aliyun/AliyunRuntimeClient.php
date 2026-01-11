@@ -38,7 +38,7 @@ use function Delightful\CodeExecutor\Utils\parseExecutionResult;
 
 class AliyunRuntimeClient
 {
-    private const MANAGED_BY = 'dtyq/code-executor';
+    private const MANAGED_BY = 'delightful/code-executor';
 
     private const DEFAULT_CONFIG = [
         'function' => [

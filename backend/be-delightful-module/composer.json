@@ -1,5 +1,5 @@
 {
-    "name": "dtyq/be-delightful-module",
+    "name": "delightful/be-delightful-module",
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -13,7 +13,7 @@
     },
     "authors": [
         {
-            "name": "dtyq",
+            "name": "delightful",
             "email": "team@delightful.ai"
         }
     ],
@@ -40,7 +40,7 @@
         "hyperf/websocket-client": "^3.1",
         "hyperf/websocket-server": "~3.1.0",
         "overtrue/chinese-calendar": "^1.0",
-        "dtyq/api-response": "~0.1",
+        "delightful/api-response": "~0.1",
         "96qbhy/hyperf-auth": "^3.1"
     },
     "require-dev": {

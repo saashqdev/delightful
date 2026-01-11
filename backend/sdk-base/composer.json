@@ -1,5 +1,5 @@
 {
-    "name": "dtyq/sdk-base",
+    "name": "delightful/sdk-base",
     "description": "As the base package for SDK, providing universal component capabilities",
     "license": "Apache License 2.0",
     "authors": [

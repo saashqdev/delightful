@@ -1,174 +1,185 @@
 # Be Delightful Module
 
-## 简介
+## Introduction
 
-Be Delightful Module 是一个基于 Hyperf 框架的扩展包，专为 delightful-service 设计的增强扩展模块。该模块采用领域驱动设计（DDD）架构，为应用程序提供了清晰的分层结构和丰富的功能组件。
+Be Delightful Module is an extension package based on the Hyperf framework, designed as an enhanced extension module specifically for delightful-service. This module adopts Domain-Driven Design (DDD) architecture, providing a clear layered structure and rich functional components for applications.
 
-Be Delightful Module 需要结合 delightful-service 一起使用，其核心功能是通过接管 delightful-service 的消息事件，建立用户与超级麦吉智能体之间的信息传递通道。这种设计使得用户可以无缝地与智能体进行交互，从而获得更加智能化的服务体验。
+Be Delightful Module needs to be used together with delightful-service. Its core function is to establish an information transmission channel between users and the Super Maggie AI agent by taking over delightful-service message events. This design allows users to interact seamlessly with the agent, thereby obtaining a more intelligent service experience.
 
-作为一个桥接模块，Be Delightful Module 不仅处理消息的传递，还负责转换数据格式、协调事件流程，以及提供必要的上下文信息，确保智能体能够准确理解用户意图并给出恰当的响应。
+As a bridging module, Be Delightful Module not only handles message delivery but also converts data formats, coordinates event processes, and provides necessary context information to ensure the agent can accurately understand user intent and provide appropriate responses.
 
-## 功能特性
+## Features
 
-- 基于 Hyperf 3.1 构建，完美适配现有 delightful-service 架构
-- 遵循领域驱动设计（DDD）架构，代码组织清晰，易于维护
-- 提供资源共享功能，支持跨模块资源访问
-- 作为消息通道，连接用户与超级麦吉智能体
-- 支持事件监听与处理，实时响应用户请求
-- 提供工作区管理，支持多话题、多任务处理
-- 实现文件管理系统，支持智能体对文件的操作
-- 符合 PSR 规范的代码组织，确保代码质量
+- Built on Hyperf 3.1, perfectly adapted to existing delightful-service architecture
+- Follows Domain-Driven Design (DDD) architecture with clear code organization and easy maintenance
+- Provides resource sharing functionality, supporting cross-module resource access
+- Serves as message channel connecting users with Super Maggie AI agent
+- Supports event listening and processing, real-time response to user requests
+- Provides workspace management, supporting multi-topic and multi-task processing
+- Implements file management system, supporting agent file operations
+- PSR-compliant code organization ensuring code quality
 
-## 系统架构
+## System Architecture
 
-Be Delightful Module 作为 delightful-service 的扩展，在整个系统中扮演以下角色：
+As an extension of delightful-service, Be Delightful Module plays the following role in the overall system:
 
 ```
-用户请求 → delightful-service → Be Delightful Module → 超级麦吉智能体
+User Request → delightful-service → Be Delightful Module → Super Maggie AI Agent
                  ↑                 |
                  └─────────────────┘
-              响应返回
+              Response Return
 ```
 
-该模块通过以下方式与 delightful-service 集成：
+The module integrates with delightful-service through the following methods:
 
-1. 监听 delightful-service 的消息事件
-2. 处理和转换消息格式
-3. 传递消息至超级麦吉智能体
-4. 接收并处理智能体的响应
-5. 将处理结果返回给 delightful-service
+1. Listen to message events from delightful-service
+2. Process and transform message formats
+3. Forward messages to Super Maggie AI agent
+4. Receive and process agent responses
+5. Return processing results to delightful-service
 
-## 安装
+## Installation
 
-通过 Composer 安装：
+Install via Composer:
 
 ```bash
-composer require dtyq/be-delightful-module
+composer require delightful/be-delightful-module
 ```
 
-## 基本使用
+## Basic Usage
 
-### 配置
+### Configuration
 
-模块提供了 `ConfigProvider` 用于注册相关服务和功能。在 Hyperf 应用的 `config/autoload` 目录下配置：
+The module provides a `ConfigProvider` for registering related services and features. Configure in the `config/autoload` directory of your Hyperf application:
 
 ```php
 <?php
 
 return [
-    // 加载 ConfigProvider
+    // Load ConfigProvider
     \Delightful\BeDelightful\ConfigProvider::class,
 ];
 ```
 
-### 与 delightful-service 集成
+### Integration with delightful-service
 
-要将 Be Delightful Module 与 delightful-service 集成，需要在 delightful-service 中依赖进行接管：
+To integrate Be Delightful Module with delightful-service, you need to take over dependencies in delightful-service:
 
 ```php
 [
     'dependencies_priority' => [
-        // 助理执行事件
+        // Agent execution event
         AgentExecuteInterface::class => BeAgentMessageSubscriberV2::class,
         BeAgentMessageInterface::class => BeAgentMessage::class,
     ]
 ]
 ```
 
-### 领域层使用
+### Domain Layer Usage
 
-模块基于 DDD 架构设计，包含以下几个主要层次：
+The module is designed based on DDD architecture and contains the following main layers:
 
-- Domain（领域层）：包含业务逻辑和实体，如消息处理、工作区管理等核心功能
-- Application（应用层）：协调领域对象完成复杂的业务场景，如消息传递流程
-- Infrastructure（基础设施层）：提供技术支持，包括数据存储、外部服务调用等
-- Interfaces（接口层）：处理外部请求和响应，提供API接口
+- Domain Layer: Contains business logic and entities, such as core functions like message processing and workspace management
+- Application Layer: Coordinates domain objects to complete complex business scenarios, such as message delivery processes
+- Infrastructure Layer: Provides technical support, including data storage, external service calls, etc.
+- Interfaces Layer: Handles external requests and responses, provides API interfaces
 
-## 开发
+## Development
 
-### 目录结构
+### Directory Structure
 
 ```
 src/
-├── Application/      # 应用层，处理业务流程
-│   ├── Share/        # 资源共享服务
-│   └── BeAgent/   # 超级智能体服务
-├── Domain/           # 领域层，包含核心业务逻辑
-│   ├── Share/        # 资源共享领域模型
-│   └── BeAgent/   # 超级智能体领域模型
-├── Infrastructure/   # 基础设施层，提供技术实现
-│   ├── ExternalAPI/  # 外部API调用
-│   └── Utils/        # 工具类
-├── Interfaces/       # 接口层，处理外部交互
-│   ├── Share/        # 资源共享接口
-│   └── BeAgent/   # 超级智能体接口
-├── Listener/         # 事件监听器
-└── ConfigProvider.php # 配置提供者
+├── Application/      # Application layer, handles business processes
+│   ├── Share/        # Resource sharing services
+│   └── BeAgent/   # Super agent services
+├── Domain/           # Domain layer, contains core business logic
+│   ├── Share/        # Resource sharing domain models
+│   └── BeAgent/   # Super agent domain models
+├── Infrastructure/   # Infrastructure layer, provides technical implementation
+│   ├── ExternalAPI/  # External API calls
+│   └── Utils/        # Utility classes
+├── Interfaces/       # Interfaces layer, handles external interactions
+│   ├── Share/        # Resource sharing interfaces
+│   └── BeAgent/   # Super agent interfaces
+├── Listener/         # Event listeners
+└── ConfigProvider.php # Configuration provider
 ```
 
-### 命令
+### Commands
 
-该扩展包提供了一系列有用的命令：
+This extension package provides a series of useful commands:
 
 ```bash
-# 代码风格修复
+# Code style fixes
 composer fix
 
-# 代码静态分析
+# Static code analysis
 composer analyse
 
-# 执行测试
+# Run tests
 composer test
 
-# 启动 Hyperf 服务
+# Start Hyperf service
 composer start
 ```
 
-## 消息流程
+## Message Flow
 
-Be Delightful Module 处理消息的基本流程如下：
+The basic flow for Be Delightful Module to process messages is as follows:
 
-1. 用户在 delightful-service 发送消息
-2. delightful-service 触发消息事件
-3. Be Delightful Module 监听到事件，提取消息内容
-4. 消息被转换为超级麦吉智能体可理解的格式
-5. 消息发送给超级麦吉智能体
-6. 智能体处理消息并生成响应
-7. Be Delightful Module 接收响应并转换格式
-8. 响应通过事件传递回 delightful-service
-9. 用户收到智能体的回应
+1. User sends message in delightful-service
+2. delightful-service triggers message event
+3. Be Delightful Module listens to the event and extracts message content
+4. Message is converted to a format understandable by Super Maggie AI agent
+5. Message is sent to Super Maggie AI agent
+6. Agent processes the message and generates a response
+7. Be Delightful Module receives the response and converts the format
+8. Response is passed back to delightful-service through events
+9. User receives the agent's response
 
-## 测试
+## Testing
 
-执行测试：
+Run tests:
 
 ```bash
 composer test
 ```
 
-## 贡献指南
+## Contributing Guidelines
 
-1. Fork 该仓库
-2. 创建特性分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建一个 Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Create a Pull Request
 
-## 相关资源
+## Related Resources
 
-- [Hyperf 官方文档](https://hyperf.wiki)
-- [PSR 标准](https://www.php-fig.org/psr/)
-- [领域驱动设计参考](https://www.domainlanguage.com/ddd/)
-- [Delightful Service 文档](https://docs.dtyq.com/delightful-service/)
+- [Hyperf Official Documentation](https://hyperf.wiki)
+- [PSR Standards](https://www.php-fig.org/psr/)
+- [Domain-Driven Design Reference](https://www.domainlanguage.com/ddd/)
+- [Delightful Service Documentation](https://docs.delightful.com/delightful-service/)
 
-## 作者
+## Authors
 
-- **dtyq team** - [team@delightful.ai](mailto:team@delightful.ai)
+- **delightful team** - [team@delightful.ai](mailto:team@delightful.ai)
 
-## 许可证
+## License
 
-该项目采用私有许可证 - 详情请参阅团队内部文档。
+This project uses a private license - see internal team documentation for details.
 
-## 项目状态
+## Project Status
 
-该模块正在积极开发中，作为 delightful-service 的增强组件，持续提供智能交互能力的升级。我们欢迎团队成员提供反馈和建议，共同完善这一关键模块。
+This module is under active development as an enhancement component of delightful-service, continuously providing upgrades to intelligent interaction capabilities. We welcome feedback and suggestions from team members to jointly improve this critical module.
+
+
+
+
+
+
+
+
+
+
+

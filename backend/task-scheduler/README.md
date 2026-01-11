@@ -1,9 +1,9 @@
-# dtyq/task-scheduler
+# delightful/task-scheduler
 
 ## Installation
 ```
-composer require dtyq/task-scheduler
-php bin/hyperf.php vendor:publish dtyq/task-scheduler
+composer require delightful/task-scheduler
+php bin/hyperf.php vendor:publish delightful/task-scheduler
 ```
 
 ## Usage

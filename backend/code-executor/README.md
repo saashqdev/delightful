@@ -15,7 +15,7 @@ An isolated environment system supporting multi-language code execution. It can 
 Install via Composer:
 
 ```bash
-composer require dtyq/code-executor
+composer require delightful/code-executor
 ```
 
 ## Quick Start
@@ -75,7 +75,7 @@ echo "Return result: " . json_encode($result->getResult(), JSON_UNESCAPED_UNICOD
 Publish configuration file:
 
 ```bash
-php bin/hyperf.php vendor:publish dtyq/code-executor
+php bin/hyperf.php vendor:publish delightful/code-executor
 ```
 
 Add environment variables to `.env` file:
@@ -168,7 +168,7 @@ php examples/aliyun_executor_example.php
 1. Using Alibaba Cloud Function Compute service requires a valid Alibaba Cloud account and correct configuration
 2. Code execution may incur costs, please pay attention to resource usage control
 3. It is recommended to verify in a test environment before using in production
-4. The `runner` directory contains the source code of the `dtyq/code-runner-bwrap` project, which serves as the runtime environment in Alibaba Cloud Function Compute service. Since this component has not been officially open-sourced yet, it is currently embedded directly in this project to ensure functional completeness. After the component is officially open-sourced, only the `runner/bootstrap` file needs to be retained, and the rest can be introduced through dependencies
+4. The `runner` directory contains the source code of the `delightful/code-runner-bwrap` project, which serves as the runtime environment in Alibaba Cloud Function Compute service. Since this component has not been officially open-sourced yet, it is currently embedded directly in this project to ensure functional completeness. After the component is officially open-sourced, only the `runner/bootstrap` file needs to be retained, and the rest can be introduced through dependencies
 
 ## License
 

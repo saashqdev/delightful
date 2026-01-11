@@ -33,7 +33,7 @@ set -x  # Re-enable command echo
 # Use the env variable for Git repo URL, default to GitHub
 if [ -z "${GIT_REPO_URL}" ]; then
     # Use default value if env var is not set
-    GIT_REPO_URL="git@github.com:dtyq"
+    GIT_REPO_URL="git@github.com:delightful"
 fi
 REMOTE_URL="${GIT_REPO_URL}/delightful-web.git"
 

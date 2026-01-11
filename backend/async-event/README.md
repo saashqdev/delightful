@@ -6,11 +6,11 @@
 ## Installation
 - Install
 ```
-composer require dtyq/async-event
+composer require delightful/async-event
 ```
 - Publish configuration
 ```
-php bin/hyperf.php vendor:publish dtyq/async-event
+php bin/hyperf.php vendor:publish delightful/async-event
 ```
 - Run database migration
 ```

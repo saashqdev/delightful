@@ -6,7 +6,7 @@
 ## Installation
 
 ```shell
-$ composer require dtyq/flow-expr-engine -vvv
+$ composer require delightful/flow-expr-engine -vvv
 ```
 
 ## Usage

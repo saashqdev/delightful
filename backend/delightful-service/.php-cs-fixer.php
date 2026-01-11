@@ -100,6 +100,6 @@ return (new Config())
             ->exclude('vendor')
             ->in(__DIR__)
             # cs-fix enterprise package while excluding the package vendor directory
-            ->append(Finder::create()->in(__DIR__.'/vendor/dtyq/be-delightful-module')->exclude('vendor'))
+            ->append(Finder::create()->in(__DIR__.'/vendor/delightful/be-delightful-module')->exclude('vendor'))
     )
     ->setUsingCache(false);

@@ -1,5 +1,5 @@
 # Use Playwright base image
-FROM ghcr.io/dtyq/be-delightful-python-base-image:latest
+FROM ghcr.io/delightful/be-delightful-python-base-image:latest
 
 # Set working directory
 WORKDIR /app

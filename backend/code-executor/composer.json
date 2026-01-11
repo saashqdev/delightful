@@ -1,5 +1,5 @@
 {
-  "name": "dtyq/code-executor",
+  "name": "delightful/code-executor",
   "description": "A multi-language code execution system",
   "type": "library",
   "license": "Apache License 2.0",

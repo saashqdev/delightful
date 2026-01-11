@@ -13,16 +13,16 @@
       <img alt="Static Badge" src="https://img.shields.io/badge/Official Website-301AD2">
     </a>
     <a href="https://github.com/saashqdev/delightful/delightful/releases">
-      <img src="https://poser.pugx.org/dtyq/delightful/v/stable" alt="Stable Version">
+      <img src="https://poser.pugx.org/delightful/delightful/v/stable" alt="Stable Version">
     </a>
     <a href="https://github.com/saashqdev/delightful/delightful/graphs/commit-activity" target="_blank">
-      <img alt="Commits last month" src="https://img.shields.io/github/commit-activity/m/dtyq/delightful?labelColor=%20%2332b583&color=%20%2312b76a">
+      <img alt="Commits last month" src="https://img.shields.io/github/commit-activity/m/delightful/delightful?labelColor=%20%2332b583&color=%20%2312b76a">
     </a>
     <a href="https://github.com/saashqdev/delightful/delightful/" target="_blank">
-      <img alt="Issues closed" src="https://img.shields.io/github/issues-search?query=repo%3Adtyq%2Fdelightful%20is%3Aclosed&label=issues%20closed&labelColor=%20%237d89b0&color=%20%235d6b98">
+      <img alt="Issues closed" src="https://img.shields.io/github/issues-search?query=repo%3Adelightful%2Fdelightful%20is%3Aclosed&label=issues%20closed&labelColor=%20%237d89b0&color=%20%235d6b98">
     </a>
     <a href="https://github.com/saashqdev/delightful/delightful/discussions/" target="_blank">
-      <img alt="Discussion posts" src="https://img.shields.io/github/discussions/dtyq/delightful?labelColor=%20%239b8afb&color=%20%237a5af8">
+      <img alt="Discussion posts" src="https://img.shields.io/github/discussions/delightful/delightful?labelColor=%20%239b8afb&color=%20%237a5af8">
     </a>
     <a href="https://www.bedelightful.ai" target="_blank">
       <img alt="Static Badge" src="https://img.shields.io/badge/Build with Delightful 🔮-301AD2">
@@ -198,4 +198,4 @@ This repository follows the [Delightful Open Source License](LICENSE), which is 
 
 Thanks to all developers who have contributed to Delightful!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dtyq/delightful&type=Date)](https://star-history.com/#dtyq/delightful&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=delightful/delightful&type=Date)](https://star-history.com/#delightful/delightful&Date)

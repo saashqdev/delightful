@@ -1,8 +1,8 @@
 # Easy DingTalk
 
 <p align="center">
-  <a href="https://packagist.org/packages/dtyq/easy-dingtalk"><img src="https://img.shields.io/packagist/v/dtyq/easy-dingtalk.svg" alt="Latest Stable Version"></a>
-  <a href="https://packagist.org/packages/dtyq/easy-dingtalk"><img src="https://img.shields.io/packagist/dt/dtyq/easy-dingtalk.svg" alt="Total Downloads"></a>
+  <a href="https://packagist.org/packages/delightful/easy-dingtalk"><img src="https://img.shields.io/packagist/v/delightful/easy-dingtalk.svg" alt="Latest Stable Version"></a>
+  <a href="https://packagist.org/packages/delightful/easy-dingtalk"><img src="https://img.shields.io/packagist/dt/delightful/easy-dingtalk.svg" alt="Total Downloads"></a>
   <a href="https://github.com/lihq1403/easy-dingtalk/actions"><img src="https://github.com/lihq1403/easy-dingtalk/workflows/CI/badge.svg" alt="Build Status"></a>
 </p>
 
@@ -20,7 +20,7 @@ Easy DingTalk is an easy-to-use SDK for the DingTalk Open Platform, supporting P
 ## Installation
 
 ```bash
-composer require dtyq/easy-dingtalk -vvv
+composer require delightful/easy-dingtalk -vvv
 ```
 
 ## Quick Start

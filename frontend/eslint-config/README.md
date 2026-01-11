@@ -1,4 +1,4 @@
-# @dtyq/eslint-config
+# @delightful/eslint-config
 
 Foolproof ESLint config package with all dependencies bundled—no extra ESLint or plugin installs needed.
 
@@ -16,7 +16,7 @@ Foolproof ESLint config package with all dependencies bundled—no extra ESLint 
 ```json
 {
   "devDependencies": {
-    "@dtyq/eslint-config": "workspace:*"
+    "@delightful/eslint-config": "workspace:*"
   }
 }
 ```
@@ -29,7 +29,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
 // Use the preset directly, one line
-const typescriptPreset = require('@dtyq/eslint-config/typescript-preset');
+const typescriptPreset = require('@delightful/eslint-config/typescript-preset');
 
 export default [
   { ...typescriptPreset },
@@ -48,8 +48,8 @@ export default [
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
-const baseConfig = require('@dtyq/eslint-config/base');
-const typescriptConfig = require('@dtyq/eslint-config/typescript');
+const baseConfig = require('@delightful/eslint-config/base');
+const typescriptConfig = require('@delightful/eslint-config/typescript');
 
 export default [
   { ...baseConfig },
@@ -66,7 +66,7 @@ export default [
 
 ```javascript
 // CommonJS project
-const baseConfig = require('@dtyq/eslint-config/base');
+const baseConfig = require('@delightful/eslint-config/base');
 
 module.exports = {
   ...baseConfig,
@@ -86,12 +86,12 @@ module.exports = {
 
 ## Available configs
 
-- `@dtyq/eslint-config` - Default config
-- `@dtyq/eslint-config/base` - Base rules
-- `@dtyq/eslint-config/typescript` - TypeScript rules
-- `@dtyq/eslint-config/typescript-preset` - TypeScript preset (includes base + TS rules; recommended)
-- `@dtyq/eslint-config/react` - React rules
-- `@dtyq/eslint-config/vue` - Vue 3.x rules
-- `@dtyq/eslint-config/vue2` - Vue 2.x rules
-- `@dtyq/eslint-config/prettier` - Prettier integration
-- `@dtyq/eslint-config/jsconfig` - jsconfig.json support
+- `@delightful/eslint-config` - Default config
+- `@delightful/eslint-config/base` - Base rules
+- `@delightful/eslint-config/typescript` - TypeScript rules
+- `@delightful/eslint-config/typescript-preset` - TypeScript preset (includes base + TS rules; recommended)
+- `@delightful/eslint-config/react` - React rules
+- `@delightful/eslint-config/vue` - Vue 3.x rules
+- `@delightful/eslint-config/vue2` - Vue 2.x rules
+- `@delightful/eslint-config/prettier` - Prettier integration
+- `@delightful/eslint-config/jsconfig` - jsconfig.json support

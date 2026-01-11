@@ -111,7 +111,7 @@ importers:
         specifier: ^4.5.2
         version: 4.5.7(@types/react@17.0.90)(immer@10.2.0)(react@17.0.2)
     devDependencies:
-      '@dtyq/eslint-config':
+      '@delightful/eslint-config':
         specifier: ~0.0.10
         version: 0.0.11(@types/node@25.0.3)(eslint@8.57.1)(typescript@5.4.2)
       '@types/dagre':
@@ -576,7 +576,7 @@ packages:
     peerDependencies:
       react: '>=16.0.0'
 
-  '@dtyq/eslint-config@0.0.11':
+  '@delightful/eslint-config@0.0.11':
     resolution: {integrity: sha512-GK6Ky9ToFfsGaMvSe7TZNTlSd7cveb1Y4AeKFnVbh3lT3ur+3gXWKXm20cJine6hEQFW8rqxq5TAX8wBsYPTvw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -9636,7 +9636,7 @@ snapshots:
       classnames: 2.5.1
       react: 17.0.2
 
-  '@dtyq/eslint-config@0.0.11(@types/node@25.0.3)(eslint@8.57.1)(typescript@5.4.2)':
+  '@delightful/eslint-config@0.0.11(@types/node@25.0.3)(eslint@8.57.1)(typescript@5.4.2)':
     dependencies:
       '@commitlint/cli': 19.8.1(@types/node@25.0.3)(typescript@5.4.2)
       '@commitlint/config-conventional': 19.8.1

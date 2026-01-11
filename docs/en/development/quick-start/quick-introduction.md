@@ -3,8 +3,8 @@
 <div align="center">
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-<!-- [![Docker Pulls](https://img.shields.io/docker/pulls/dtyq/delightful.svg)](https://hub.docker.com/r/dtyq/delightful)
-[![GitHub stars](https://img.shields.io/github/stars/dtyq/delightful.svg?style=social&label=Star)](https://github.com/saashqdev/delightful/delightful) -->
+<!-- [![Docker Pulls](https://img.shields.io/docker/pulls/delightful/delightful.svg)](https://hub.docker.com/r/delightful/delightful)
+[![GitHub stars](https://img.shields.io/github/stars/delightful/delightful.svg?style=social&label=Star)](https://github.com/saashqdev/delightful/delightful) -->
 
 </div>
 
@@ -34,7 +34,7 @@ Delightful is a powerful enterprise-grade AI application innovation engine desig
 #### 2.1 Clone the Project
 
 ```bash
-git clone git@github.com:dtyq/delightful.git
+git clone git@github.com:delightful/delightful.git
 cd delightful
 ```
 
@@ -359,6 +359,6 @@ Thanks to all developers who have contributed to Delightful!
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dtyq/delightful&type=Date)](https://star-history.com/#dtyq/delightful&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=delightful/delightful&type=Date)](https://star-history.com/#delightful/delightful&Date)
 
 </div>

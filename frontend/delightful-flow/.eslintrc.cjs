@@ -1,9 +1,9 @@
 ﻿module.exports = {
 	extends: [
-		"@dtyq/eslint-config",
-		"@dtyq/eslint-config/typescript",
-		"@dtyq/eslint-config/react",
-		"@dtyq/eslint-config/prettier",
+		"@delightful/eslint-config",
+		"@delightful/eslint-config/typescript",
+		"@delightful/eslint-config/react",
+		"@delightful/eslint-config/prettier",
 	],
 }
 

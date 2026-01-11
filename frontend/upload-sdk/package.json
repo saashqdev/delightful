@@ -1,5 +1,5 @@
 ﻿{
-	"name": "@dtyq/upload-sdk",
+	"name": "@delightful/upload-sdk",
 	"version": "0.0.6",
 	"description": "",
 	"keywords": [],
@@ -58,7 +58,7 @@
 	},
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.18.2",
-		"@dtyq/eslint-config": "~0.0.4",
+		"@delightful/eslint-config": "~0.0.4",
 		"@semantic-release/changelog": "^6.0.1",
 		"@semantic-release/commit-analyzer": "^9.0.2",
 		"@semantic-release/git": "^10.0.1",

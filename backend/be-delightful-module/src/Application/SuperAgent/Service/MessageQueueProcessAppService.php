@@ -270,7 +270,7 @@ class MessageQueueProcessAppService extends AbstractAppService
             // Get agent user_id
             $dataIsolation = new DataIsolation();
             $dataIsolation->setCurrentOrganizationCode($message->getOrganizationCode());
-            $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_DELIGHTFUL_CODE);
+            $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE);
 
             if (empty($aiUserEntity)) {
                 $this->logger->error('Agent user not found, skip processing', ['topic_id' => $message->getTopicId()]);

@@ -40,8 +40,8 @@ enum SuperPermissionEnum: string
     case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
     // exceedslevelDelightfulkanbanmanagepersonmember
-    case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
+    case BE_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
     // exceedslevelDelightfulkanbanoperationpersonmember
-    case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'be_delightful_board_operator';
+    case BE_DELIGHTFUL_BOARD_OPERATOR = 'be_delightful_board_operator';
 }

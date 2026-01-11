@@ -83,7 +83,7 @@ services:
 
   # Be Delightful service
   be-delightful:
-    image: ghcr.io/dtyq/be-delightful:${SUPER_DELIGHTFUL_TAG-latest}
+    image: ghcr.io/dtyq/be-delightful:${BE_DELIGHTFUL_TAG-latest}
     container_name: be-delightful
     #restart: always
     profiles:
@@ -125,7 +125,7 @@ services:
     profiles:
       - sandbox-gateway
     environment:
-      SUPER_DELIGHTFUL_CONFIG_FILE_PATH: ${SUPER_DELIGHTFUL_CONFIG_FILE_PATH:-${PWD}/config/config.yaml}
+      BE_DELIGHTFUL_CONFIG_FILE_PATH: ${BE_DELIGHTFUL_CONFIG_FILE_PATH:-${PWD}/config/config.yaml}
     depends_on:
       qdrant:
         condition: service_started

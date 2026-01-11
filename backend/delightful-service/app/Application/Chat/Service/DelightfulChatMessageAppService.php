@@ -155,7 +155,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $result = $this->delightfulConversationDomainService->getConversations($dataIsolation, $queryDTO);
-        $filterAccountEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, 'SUPER_DELIGHTFUL');
+        $filterAccountEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, 'BE_DELIGHTFUL');
         if (! empty($filterAccountEntity) && count($result->getItems()) > 0) {
             $filterItems = [];
             foreach ($result->getItems() as $item) {

@@ -279,7 +279,7 @@ class UserMessageToAgentAppService extends AbstractAppService
      */
     private function getAgentUserEntity(DataIsolation $dataIsolation): mixed
     {
-        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_DELIGHTFUL_CODE);
+        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE);
 
         if (empty($aiUserEntity)) {
             $this->logger->error('Agent user not found, skip processing', [

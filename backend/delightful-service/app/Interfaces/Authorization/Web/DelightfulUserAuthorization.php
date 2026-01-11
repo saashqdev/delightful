@@ -237,7 +237,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
     public function getApplicationCode(): string
     {
-        return $this->applicationCode ?: AppCodeEnum::SUPER_DELIGHTFUL->value;
+        return $this->applicationCode ?: AppCodeEnum::BE_DELIGHTFUL->value;
     }
 
     public function setApplicationCode(string $applicationCode): DelightfulUserAuthorization

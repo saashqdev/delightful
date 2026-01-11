@@ -30,8 +30,8 @@ return [
         ],
     ],
     'message' => [
-        'process_mode' => \Hyperf\Support\env('SUPER_DELIGHTFUL_MESSAGE_PROCESS_MODE', 'direct'), // direct OR queue
-        'enable_compensate' => \Hyperf\Support\env('SUPER_DELIGHTFUL_MESSAGE_ENABLE_COMPENSATE', false),
+        'process_mode' => \Hyperf\Support\env('BE_DELIGHTFUL_MESSAGE_PROCESS_MODE', 'direct'), // direct OR queue
+        'enable_compensate' => \Hyperf\Support\env('BE_DELIGHTFUL_MESSAGE_ENABLE_COMPENSATE', false),
     ],
     'user_message_queue' => [
         'enabled' => \Hyperf\Support\env('USER_MESSAGE_QUEUE_ENABLED', true),

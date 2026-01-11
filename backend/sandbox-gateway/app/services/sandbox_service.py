@@ -313,7 +313,7 @@ class SandboxService:
 
                 # Create and start container
                 # Mount config file, check if /app/config/config.yaml exists
-                config_file_path = os.environ.get("SUPER_DELIGHTFUL_CONFIG_FILE_PATH")
+                config_file_path = os.environ.get("BE_DELIGHTFUL_CONFIG_FILE_PATH")
                 if config_file_path:
                     volumes = {
                         config_file_path: {
@@ -323,7 +323,7 @@ class SandboxService:
                     }
                     logger.info(f"Using config file: {config_file_path}")
                 else:
-                    logger.warning(f"SUPER_DELIGHTFUL_CONFIG_FILE_PATH config file does not exist: {config_file_path}")
+                    logger.warning(f"BE_DELIGHTFUL_CONFIG_FILE_PATH config file does not exist: {config_file_path}")
                     volumes = {}
 
                 # Mount config file

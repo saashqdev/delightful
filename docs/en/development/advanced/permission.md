@@ -45,10 +45,10 @@ enum SuperPermissionEnum: string
     case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
     // Be Delightful Board Administrator
-    case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
+    case BE_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
     // Be Delightful Board Operator
-    case SUPER_DELIGHTFUL_ BOARD_OPERATOR = 'be_delightful_board_operator';
+    case BE_DELIGHTFUL_ BOARD_OPERATOR = 'be_delightful_board_operator';
 }
 ```
 

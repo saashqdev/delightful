@@ -93,22 +93,22 @@ class ChatAppService extends AbstractAppService
      */
     private function getOrCreateBeDelightfulUser(DataIsolation $dataIsolation): object
     {
-        $this->logger->info(sprintf('Attempting to get AI user with code: %s for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
-        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_DELIGHTFUL_CODE);
+        $this->logger->info(sprintf('Attempting to get AI user with code: %s for organization: %s', AgentConstant::BE_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
+        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE);
 
         if (empty($aiUserEntity)) {
-            $this->logger->info(sprintf('AI user with code %s not found, attempting to initialize account for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
+            $this->logger->info(sprintf('AI user with code %s not found, attempting to initialize account for organization: %s', AgentConstant::BE_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
             // Manually perform initialization if AI user is not found
             $this->accountAppService->initAccount($dataIsolation->getCurrentOrganizationCode());
             // Query again
-            $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_DELIGHTFUL_CODE);
+            $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE);
             if (empty($aiUserEntity)) {
-                $this->logger->error(sprintf('AI user with code %s still not found after attempting initialization for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
+                $this->logger->error(sprintf('AI user with code %s still not found after attempting initialization for organization: %s', AgentConstant::BE_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
                 ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.be_delightful_user_not_found');
             }
-            $this->logger->info(sprintf('AI user with code %s found after initialization for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
+            $this->logger->info(sprintf('AI user with code %s found after initialization for organization: %s', AgentConstant::BE_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
         } else {
-            $this->logger->info(sprintf('AI user with code %s found for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
+            $this->logger->info(sprintf('AI user with code %s found for organization: %s', AgentConstant::BE_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
         }
 
         return $aiUserEntity;

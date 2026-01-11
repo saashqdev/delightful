@@ -10,7 +10,7 @@ namespace App\Domain\ImageGenerate\ValueObject;
 enum ImageGenerateSourceEnum: string
 {
     // exceedslevelMage
-    case SUPER_DELIGHTFUL = 'be_delightful';
+    case BE_DELIGHTFUL = 'be_delightful';
 
     // agent
     case AGENT = 'agent';

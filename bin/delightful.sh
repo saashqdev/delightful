@@ -80,13 +80,13 @@ if [ -f "bin/delightful.lock" ]; then
     SKIP_LANGUAGE_SELECTION=true
     SKIP_INSTALLATION=true
 
-    # If be-delightful config exists, set DELIGHTFUL_USE_SUPER_DELIGHTFUL automatically
+    # If be-delightful config exists, set DELIGHTFUL_USE_BE_DELIGHTFUL automatically
     if [ -f "bin/use_be_delightful" ]; then
         # Use fixed profile parameters instead of reading from a file
-        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile delightful-gateway --profile sandbox-gateway"
+        export DELIGHTFUL_USE_BE_DELIGHTFUL=" --profile delightful-gateway --profile sandbox-gateway"
         bilingual "Be Delightful configuration detected, Be Delightful related services will be started automatically" "Be Delightful configuration detected, Be Delightful related services will be started automatically"
     else
-        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
+        export DELIGHTFUL_USE_BE_DELIGHTFUL=""
     fi
 else
     SKIP_LANGUAGE_SELECTION=false
@@ -149,9 +149,9 @@ if [ "$SKIP_INSTALLATION" = "true" ]; then
 
     # Set default values for required variables
     if [ -f ".env_be_delightful" ]; then
-        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
+        export DELIGHTFUL_USE_BE_DELIGHTFUL=""
     else
-        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
+        export DELIGHTFUL_USE_BE_DELIGHTFUL=""
     fi
 fi
 
@@ -264,9 +264,9 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
         bilingual "Do you want to install Be Delightful service?" "Do you want to install Be Delightful service?"
         bilingual "1. Yes, install Be Delightful service" "1. Yes, install Be Delightful service"
         bilingual "2. No, don't install Be Delightful service" "2. No, don't install Be Delightful service"
-        read -p "$(bilingual "Please enter option number [1/2]: " "Please enter option number [1/2]: ")" SUPER_DELIGHTFUL_OPTION
+        read -p "$(bilingual "Please enter option number [1/2]: " "Please enter option number [1/2]: ")" BE_DELIGHTFUL_OPTION
 
-        if [ "$SUPER_DELIGHTFUL_OPTION" = "1" ]; then
+        if [ "$BE_DELIGHTFUL_OPTION" = "1" ]; then
             bilingual "You have chosen to install Be Delightful service." "You have chosen to install Be Delightful service."
 
             # Check if .env_be_delightful exists
@@ -288,14 +288,14 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
             fi
 
             # Add profiles for be-delightful, delightful-gateway and sandbox-gateway
-            export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile delightful-gateway --profile sandbox-gateway"
+            export DELIGHTFUL_USE_BE_DELIGHTFUL=" --profile delightful-gateway --profile sandbox-gateway"
             # Record the be-delightful configuration for automatic loading next start
-            echo "$DELIGHTFUL_USE_SUPER_DELIGHTFUL" > bin/use_be_delightful
+            echo "$DELIGHTFUL_USE_BE_DELIGHTFUL" > bin/use_be_delightful
             bilingual "Be Delightful, Delightful Gateway and Sandbox Gateway services will be started." "Be Delightful, Delightful Gateway and Sandbox Gateway services will be started."
             bilingual "Your choice has been recorded, Be Delightful related services will be loaded automatically next time." "Your choice has been recorded, Be Delightful related services will be loaded automatically next time."
         else
             bilingual "You have chosen not to install Be Delightful service." "You have chosen not to install Be Delightful service."
-            export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
+            export DELIGHTFUL_USE_BE_DELIGHTFUL=""
             # Remove any previous be-delightful configuration file if present
             if [ -f "bin/use_be_delightful" ]; then
                 rm bin/use_be_delightful
@@ -660,13 +660,13 @@ restart_services() {
 # Show services status
 show_status() {
     bilingual "Services status:" "Services status:"
-    docker compose $DELIGHTFUL_USE_SUPER_DELIGHTFUL ps
+    docker compose $DELIGHTFUL_USE_BE_DELIGHTFUL ps
 }
 
 # Show services logs
 show_logs() {
     bilingual "Showing services logs:" "Showing services logs:"
-    docker compose $DELIGHTFUL_USE_SUPER_DELIGHTFUL logs -f
+    docker compose $DELIGHTFUL_USE_BE_DELIGHTFUL logs -f
 }
 
 # Start only Be Delightful service

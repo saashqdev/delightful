@@ -1,4 +1,4 @@
-import { Radio } from "antd"
+﻿import { Radio } from "antd"
 import { useCreation, useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useEffect, useMemo, useState, useRef } from "react"
 import type { Widget } from "@/types/flow"
@@ -42,7 +42,7 @@ interface ArgsSettingsProps {
 	update: () => void
 	/** 数据源 */
 	expressionSource: ExpressionSource
-	/** 是否有path组件 */
+	/** Whether有path组件 */
 	hasPath?: boolean
 }
 
@@ -122,7 +122,7 @@ export default function ArgsSettings({
 		pathEventEmitter.useSubscription((pathFieldNames) => {
 			// console.log("path -> ", pathFieldNames)
 			if (pathEditorRef.current && typeof pathEditorRef.current === "object") {
-				// 需要检查这些方法是否存在
+				// 需要检查这些方法Whether存在
 				if (typeof pathEditorRef.current.deleteRootChildFieldsNotIn === "function") {
 					pathEditorRef.current.deleteRootChildFieldsNotIn(pathFieldNames)
 				}
@@ -276,7 +276,7 @@ export default function ArgsSettings({
 	})
 
 	useUpdateEffect(() => {
-		// 节点失去焦点时保存一次，可以进一步判断是否上一个selectedNode是当前HTTP节点id
+		// 节点失去焦点时保存一次，可以进一步判断Whether上一个selectedNode是当前HTTP节点id
 		if (!selectedNodeId) {
 			update()
 		}
@@ -331,3 +331,4 @@ export default function ArgsSettings({
 		</div>
 	)
 }
+

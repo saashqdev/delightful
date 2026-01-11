@@ -1,4 +1,4 @@
-import type React from "react"
+﻿import type React from "react"
 import { Avatar, Spin, Button, Space } from "antd"
 import { ReloadOutlined } from "@ant-design/icons"
 import { useStyles } from "./styles"
@@ -43,7 +43,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 	const { styles, cx } = useStyles()
 	const { detectCommands, processCommandMarkers } = useCommandDetection()
 
-	// 渲染确认操作按钮
+	// 渲染确认Operation按钮
 	const renderConfirmButtons = () => {
 		if (!confirmOperation) return null
 
@@ -64,7 +64,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 
 	// 渲染消息内容
 	const renderContent = (): React.ReactNode => {
-		// 处理内容中的命令标记，确保不显示JSON
+		// Process内容中的命令标记，确保不显示JSON
 		let displayContent = content || ""
 
 		// 检测命令标记
@@ -84,7 +84,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 				)
 			}
 
-			// 处理命令标记
+			// Process命令标记
 			displayContent = processCommandMarkers(displayContent, true)
 
 			// 有内容时显示自定义动画
@@ -96,7 +96,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 当不在收集命令状态时，处理命令标记
+		// 当不在收集命令状态时，Process命令标记
 		if (hasCommands) {
 			displayContent = processCommandMarkers(displayContent, false)
 		}
@@ -111,7 +111,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 错误状态处理 - 显示错误消息和重试按钮
+		// 错误状态Process - 显示错误消息和重试按钮
 		if (status === "error") {
 			return (
 				<div className={styles.messageContentWrapper}>
@@ -189,3 +189,4 @@ function MessageItem(props: MessageProps): React.ReactElement {
 }
 
 export default MessageItem
+

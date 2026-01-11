@@ -1,4 +1,4 @@
-import { Schema, type Sheet } from "@/types/sheet"
+﻿import { Schema, type Sheet } from "@/types/sheet"
 import { get } from "lodash-es"
 import i18next from "i18next"
 import { AutomateFlowFieldGroup, getDefaultConstValue, ROW_ID_COLUMN_ID } from "./constants"
@@ -70,7 +70,7 @@ export const filterSupportColumnType = (supportFieldTypes = []) => {
 	return supportFieldTypes.filter((fieldType) => !notSupportType.includes(fieldType))
 }
 
-// 获取单向/双向关联的目标类型
+// Get单向/双向关联的目标类型
 function getRelationTargetType({
 	sheetId,
 	columnId,
@@ -120,12 +120,12 @@ function getActualTypeByPresentType(columnType: Schema, presentType: Schema) {
 	return Schema.NUMBER
 }
 
-// 获取列类型 包括公式、查找引用、单双向关联的目标类型
+// Get列类型 包括公式、查找引用、单双向关联的目标类型
 export function getTargetType({
 	sheetId,
 	columnId,
 	dataTemplate,
-	path = [], // 加入路径，用于检测是否产生循环引用
+	path = [], // 加入路径，用于检测Whether产生循环引用
 }: {
 	sheetId: string
 	columnId: string
@@ -191,7 +191,7 @@ export function getTargetType({
 			error: LOOKUP_ERROR.CIRCLE,
 		}
 	}
-	path.push(columnId) // 加入路径，用于检测是否产生循环引用
+	path.push(columnId) // 加入路径，用于检测Whether产生循环引用
 
 	const result = getTargetType({
 		sheetId: targetSheetId,
@@ -351,3 +351,5 @@ export const addCondition = (
 	}
 	return condition
 }
+
+

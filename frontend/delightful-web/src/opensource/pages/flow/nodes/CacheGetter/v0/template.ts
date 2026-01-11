@@ -1,7 +1,7 @@
-export const v0Template = {
+﻿export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-672715fe77de17-86777968",
 	debug: false,
-	name: "数据获取",
+	name: "数据Get",
 	description: "",
 	node_type: 19,
 	meta: [],
@@ -64,3 +64,4 @@ export const v0Template = {
 	},
 	system_output: null,
 }
+

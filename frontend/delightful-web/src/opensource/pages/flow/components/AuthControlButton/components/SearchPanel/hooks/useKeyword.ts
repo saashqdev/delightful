@@ -1,5 +1,5 @@
-/**
- * 搜索关键词相关数据状态
+﻿/**
+ * Search关键词相关数据状态
  */
 import { useState } from "react"
 
@@ -11,3 +11,4 @@ export default function useKeyword() {
 		setKeyword,
 	}
 }
+

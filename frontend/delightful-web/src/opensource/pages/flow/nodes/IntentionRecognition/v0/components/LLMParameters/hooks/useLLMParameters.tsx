@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+﻿import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 
 export default function useLLMParameters() {
@@ -28,7 +28,7 @@ export default function useLLMParameters() {
 			// 	label: "温度",
 			// 	key: "temperature",
 			// 	tooltips:
-			// 		"温度控制随机性。较低的温度会导致较少的随机完成。随着温度接近零，模型将变得确定性和重复性。较高的温度会导致更多的随机完成。",
+			// 		"温度控制随机性。较低的温度会导致较少的随机完成。随着温度接近零，模型将变得Confirm性和重复性。较高的温度会导致更多的随机完成。",
 			// 	open: true,
 			// 	defaultValue: 0.7,
 			// 	extra: {
@@ -94,3 +94,4 @@ export default function useLLMParameters() {
 		autoMemory,
 	}
 }
+

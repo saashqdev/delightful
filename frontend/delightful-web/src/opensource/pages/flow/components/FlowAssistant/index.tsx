@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+﻿/* eslint-disable prettier/prettier */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-syntax */
@@ -65,14 +65,14 @@ interface AgentCallParams {
 	stream?: boolean
 }
 
-// 流处理中的纯解析函数
+// 流Process中的纯解析函数
 const parseSSELine = (line: string): { text: string; commands: any[] } => {
 	// 跳过结束标记
 	if (line === "data:[DONE]") {
 		return { text: "", commands: [] }
 	}
 
-	// 检查是否是SSE格式数据行
+	// 检查Whether是SSE格式数据行
 	if (line.startsWith("data:") && line.length > 5) {
 		try {
 			// 提取JSON字符串
@@ -91,7 +91,7 @@ const parseSSELine = (line: string): { text: string; commands: any[] } => {
 				extractedText = data.content
 			}
 
-			// 检查json中是否包含命令
+			// 检查json中Whether包含命令
 			const commands = []
 			if (data.type === "flow_commands" && Array.isArray(data.commands)) {
 				commands.push(...data.commands)
@@ -197,22 +197,22 @@ export default function FlowAssistant({
 	// 使用新的消息发送钩子
 	const { sendAgentMessage } = useSendAgentMessage()
 
-	// 使用流程操作钩子
+	// 使用流程Operation钩子
 	const flowOperations = useFlowOperations({
 		flowInteractionRef,
 		saveDraft,
 		flowService: FlowApi,
 	})
 
-	// 创建获取流程数据的函数
+	// 创建Get流程数据的函数
 	const getFlowData = useMemoizedFn(() => {
-		// 获取当前流程数据
+		// Get当前流程数据
 		const currentFlow = flowInteractionRef?.current?.getFlow()
 		// 将流程数据转换为YAML格式
 		return currentFlow ? FlowConverter.jsonToYamlString(currentFlow) : ""
 	})
 
-	// 使用确认操作钩子，传入新的内部发送消息实现
+	// 使用确认Operation钩子，传入新的内部发送消息实现
 	const { handleConfirmOperationCommand, handleConfirmOperation, handleCancelOperation } =
 		useConfirmOperations({
 			flowId: flow?.id || "",
@@ -220,10 +220,10 @@ export default function FlowAssistant({
 			setMessages,
 			setForceScroll,
 			sendMessage: async (content: string) => {
-				if (isProcessing) return // 如果正在处理其他消息，不发送
+				if (isProcessing) return // 如果正在Process其他消息，不发送
 
 				// 添加用户消息和助手消息，这部分由useConfirmOperations管理
-				// 设置处理状态
+				// SetProcess状态
 				setIsProcessing(true)
 
 				try {
@@ -243,7 +243,7 @@ export default function FlowAssistant({
 					// 使用封装的发送消息函数
 					const result = await sendAgentMessage(content, {
 						conversationId: conversationId || "temp-conversation",
-						includeFlowData: false, // 确认操作不需要流程数据
+						includeFlowData: false, // 确认Operation不需要流程数据
 					})
 
 					if (result.isError) {
@@ -263,11 +263,11 @@ export default function FlowAssistant({
 						return
 					}
 
-					// 设置流处理响应
+					// Set流Process响应
 					if (result.stream) {
 						setStreamResponse(result.stream)
 					} else {
-						// 非流式响应处理
+						// 非流式响应Process
 						setMessages((prev) =>
 							prev.map((msg) =>
 								msg.id === assistantMessageId
@@ -337,16 +337,16 @@ export default function FlowAssistant({
 	})
 
 	useEffect(() => {
-		// 检测是否有新消息添加
+		// 检测Whether有新消息添加
 		if (messages.length > lastMessageCountRef.current) {
-			// 新消息添加时，设置强制滚动标记
+			// 新消息添加时，Set强制滚动标记
 			setForceScroll(true)
 			lastMessageCountRef.current = messages.length
 		}
 		scrollToBottom()
 	}, [messages, scrollToBottom])
 
-	// 处理消息列表滚动事件
+	// Process消息列表滚动事件
 	const handleMessagesScroll = useMemoizedFn((e: React.UIEvent<HTMLDivElement>) => {
 		const element = e.currentTarget
 
@@ -359,13 +359,13 @@ export default function FlowAssistant({
 		// 如果滚动位置不在底部，标记为用户正在滚动
 		const isAtBottom = element.scrollHeight - element.scrollTop <= element.clientHeight + 100 // 增加容差值
 
-		// 只有当不在底部时才设置用户滚动状态
+		// 只有当不在底部时才Set用户滚动状态
 		if (!isAtBottom) {
 			setUserScrolling(true)
 
-			// 设置定时器，5秒后检查是否应该重置滚动状态
+			// Set定时器，5秒后检查Whether应该重置滚动状态
 			scrollTimeoutRef.current = setTimeout(() => {
-				// 重新检查当前是否在底部附近
+				// 重新检查当前Whether在底部附近
 				const currentElement = messagesEndRef.current?.parentElement
 				if (currentElement) {
 					const currentIsAtBottom =
@@ -411,7 +411,7 @@ export default function FlowAssistant({
 		}
 	})
 
-	// 处理命令状态更新
+	// Process命令状态更新
 	const handleCommandUpdate = useMemoizedFn((messageId: string, commandStatus: any[]) => {
 		setMessages((prev) =>
 			prev.map((msg) =>
@@ -431,13 +431,13 @@ export default function FlowAssistant({
 		)
 	})
 
-	// 处理命令执行完成
+	// Process命令执行完成
 	const handleCommandComplete = useMemoizedFn(() => {
 		setIsCommandProcessing(false)
 		setCommandQueue([])
 	})
 
-	// 处理文本更新回调 - 不触发强制滚动
+	// Process文本更新回调 - 不触发强制滚动
 	const handleTextUpdate = useMemoizedFn((text: string) => {
 		if (!processingMessageId) return
 
@@ -451,10 +451,10 @@ export default function FlowAssistant({
 				msg.id === processingMessageId ? { ...msg, content: text, status: "loading" } : msg,
 			),
 		)
-		// 不设置forceScroll，避免内容更新时强制滚动
+		// 不SetforceScroll，避免内容更新时强制滚动
 	})
 
-	// 修改: 处理尺寸变化 - 添加保存尺寸功能
+	// 修改: Process尺寸变化 - 添加保存尺寸功能
 	const handleResizeStop = useMemoizedFn((e, direction, ref, d) => {
 		const newSize = {
 			width: size.width + d.width,
@@ -465,21 +465,21 @@ export default function FlowAssistant({
 		saveSize(newSize)
 	})
 
-	// 新增：处理拖拽开始
+	// 新增：Process拖拽开始
 	const handleDragStart = useMemoizedFn((e: React.MouseEvent) => {
 		e.preventDefault()
 		setIsDragging(true)
 		dragStartRef.current = { x: e.clientX, y: e.clientY }
 	})
 
-	// 修改：处理拖拽移动 - 添加保存位置功能
+	// 修改：Process拖拽移动 - 添加保存位置功能
 	const handleDragMove = useMemoizedFn((e: MouseEvent) => {
 		if (!isDragging) return
 
 		const deltaX = e.clientX - dragStartRef.current.x
 		const deltaY = e.clientY - dragStartRef.current.y
 
-		// 获取当前位置
+		// Get当前位置
 		const currentX =
 			typeof positionRef.current.x === "number"
 				? positionRef.current.x
@@ -509,7 +509,7 @@ export default function FlowAssistant({
 		dragStartRef.current = { x: e.clientX, y: e.clientY }
 	})
 
-	// 新增：处理拖拽结束
+	// 新增：Process拖拽结束
 	const handleDragEnd = useMemoizedFn(() => {
 		setIsDragging(false)
 	})
@@ -527,11 +527,11 @@ export default function FlowAssistant({
 		}
 	}, [isDragging, handleDragMove, handleDragEnd])
 
-	// 新增：处理命令处理状态变化
+	// 新增：Process命令Process状态变化
 	const handleCommandProcessingStatusChange = useMemoizedFn((processStatus: boolean) => {
 		setIsCollectingCommand(processStatus)
 
-		// 如果有正在处理的消息，更新该消息的状态
+		// 如果有正在Process的消息，更新该消息的状态
 		if (processingMessageId) {
 			setMessages((prev) =>
 				prev.map((msg) =>
@@ -550,18 +550,18 @@ export default function FlowAssistant({
 		}
 	})
 
-	// 处理命令接收回调
+	// Process命令接收回调
 	const handleCommandsReceived = useMemoizedFn((commands: any[]) => {
 		if (!processingMessageId || commands.length === 0) return
 
 		console.log("收到命令:", commands)
 
-		// 检查是否有确认操作命令
+		// 检查Whether有确认Operation命令
 		for (const command of commands) {
 			if (command.type === "confirmOperation") {
-				console.log("发现确认操作命令:", command)
+				console.log("发现确认Operation命令:", command)
 				handleConfirmOperationCommand(command, processingMessageId)
-				return // 如果找到确认操作命令，不添加到普通命令队列
+				return // 如果找到确认Operation命令，不添加到普通命令队列
 			}
 		}
 
@@ -581,7 +581,7 @@ export default function FlowAssistant({
 		})
 	})
 
-	// 处理流处理错误
+	// Process流Process错误
 	const handleStreamError = useMemoizedFn((errorMessage: string) => {
 		if (!processingMessageId) return
 		setIsProcessing(false)
@@ -594,26 +594,26 @@ export default function FlowAssistant({
 		)
 	})
 
-	// 处理流处理完成
+	// Process流Process完成
 	const handleStreamComplete = useMemoizedFn(() => {
 		console.log(`handleStreamComplete called, processingMessageId=${processingMessageId}`)
 		setIsProcessing(false)
 		setStreamResponse(null)
 
-		// 确保当前处理的消息状态被正确更新为done
+		// 确保当前Process的消息状态被正确更新为done
 		if (processingMessageId) {
 			setMessages((prev) =>
 				prev.map((msg) => {
-					// 检查是否是当前正在处理的消息
+					// 检查Whether是当前正在Process的消息
 					if (msg.id === processingMessageId) {
 						console.log(
 							`Updating message ${msg.id} status to done, current status: ${msg.status}, content: ${msg.content}`,
 						)
-						// 保留确认操作属性，只更新状态
+						// 保留确认Operation属性，只更新状态
 						return {
 							...msg,
 							status: "done",
-							// 如果消息中包含确认操作，确保它被保留
+							// 如果消息中包含确认Operation，确保它被保留
 							confirmOperation: msg.confirmOperation || undefined,
 						}
 					}
@@ -625,7 +625,7 @@ export default function FlowAssistant({
 		setProcessingMessageId(null)
 	})
 
-	// 添加：处理重试失败消息
+	// 添加：Process重试失败消息
 	const handleRetry = useMemoizedFn(async (messageId: string) => {
 		// 找到对应的错误消息
 		const errorMessage = messages.find(
@@ -650,7 +650,7 @@ export default function FlowAssistant({
 
 		const userMessage = messages[userMessageIndex]
 
-		// 如果当前正在处理其他消息，先不进行重试
+		// 如果当前正在Process其他消息，先不进行重试
 		if (isProcessing) {
 			antdMessage.info(t("flowAssistant.waitForProcessing", { ns: "flow" }))
 			return
@@ -698,11 +698,11 @@ export default function FlowAssistant({
 				return
 			}
 
-			// 设置流处理响应
+			// Set流Process响应
 			if (result.stream) {
 				setStreamResponse(result.stream)
 			} else {
-				// 非流式响应处理
+				// 非流式响应Process
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === newAssistantMessageId
@@ -740,9 +740,9 @@ export default function FlowAssistant({
 		}
 	})
 
-	// 新增：处理中断流连接的方法
+	// 新增：Process中断流连接的方法
 	const handleAbortStream = useMemoizedFn(() => {
-		// 如果有正在处理的流，中断它
+		// 如果有正在Process的流，中断它
 		if (streamResponse) {
 			console.log("主动中断SSE流连接")
 
@@ -750,7 +750,7 @@ export default function FlowAssistant({
 			setStreamResponse(null)
 			setIsProcessing(false)
 
-			// 如果有正在处理的消息，更新其状态为中断
+			// 如果有正在Process的消息，更新其状态为中断
 			if (processingMessageId) {
 				setMessages((prev) =>
 					prev.map((msg) =>
@@ -788,7 +788,7 @@ export default function FlowAssistant({
 			id: Date.now().toString(),
 			role: "user",
 			content: userMessage,
-			status: "done", // 明确设置用户消息状态
+			status: "done", // 明确Set用户消息状态
 		}
 
 		const assistantMessageId = (Date.now() + 1).toString()
@@ -799,9 +799,9 @@ export default function FlowAssistant({
 			status: "loading", // 确保助手消息初始状态为loading
 		}
 
-		// 添加消息并设置强制滚动标记
+		// 添加消息并Set强制滚动标记
 		setMessages((prev) => [...prev, newUserMessage, loadingAssistantMessage])
-		setForceScroll(true) // 显式设置强制滚动
+		setForceScroll(true) // 显式Set强制滚动
 		lastMessageCountRef.current = messages.length + 2 // 更新消息计数
 
 		setIsProcessing(true)
@@ -814,7 +814,7 @@ export default function FlowAssistant({
 				getFetchFlowData: getFlowData,
 			})
 
-			// 处理错误情况
+			// Process错误情况
 			if (result.isError) {
 				// 更新助手消息显示错误
 				setMessages((prev) =>
@@ -832,12 +832,12 @@ export default function FlowAssistant({
 				return
 			}
 
-			// 设置流处理参数
+			// Set流Process参数
 			if (result.stream) {
 				setStreamResponse(result.stream)
 				setProcessingMessageId(assistantMessageId)
 			} else if (result.contentStr) {
-				// 非流式响应的处理逻辑
+				// 非流式响应的Process逻辑
 				setMessages((prev) =>
 					prev.map((msg) =>
 						msg.id === assistantMessageId
@@ -1028,3 +1028,4 @@ export default function FlowAssistant({
 		</Resizable>
 	)
 }
+

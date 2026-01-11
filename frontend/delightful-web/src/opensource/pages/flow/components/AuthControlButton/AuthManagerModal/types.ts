@@ -1,4 +1,4 @@
-import type { DepartmentSelectItem } from "@/opensource/components/business/MemberDepartmentSelectPanel/types"
+﻿import type { DepartmentSelectItem } from "@/opensource/components/business/MemberDepartmentSelectPanel/types"
 import type { ResourceTypes } from "../types"
 
 export enum ManagerModalType {

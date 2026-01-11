@@ -1,4 +1,4 @@
-import { Schema } from "@/types/sheet"
+﻿import { Schema } from "@/types/sheet"
 import { cloneDeep } from "lodash-es"
 import { defaultExpressionValue } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import { VALUE_TYPE } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
@@ -47,7 +47,7 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		title: i18next.t("common.number", { ns: "flow" }),
 		id: Schema.NUMBER,
 		extraInfo: {
-			showNumberFormat: true, // 是否展示数字选项框的格式
+			showNumberFormat: true, // Whether展示数字选项框的格式
 		},
 		conditions: [
 			{ id: Operators.EQUAL, label: "=" },
@@ -344,3 +344,5 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		valueOptions: [],
 	},
 }
+
+

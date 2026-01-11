@@ -1,4 +1,4 @@
-import { Flex, Button, Select } from "antd"
+﻿import { Flex, Button, Select } from "antd"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import DelightfulLogo from "@/opensource/components/DelightfulLogo"
@@ -33,12 +33,12 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 
 	const { styles: departmentStyles } = useDepartmentStyles()
 
-	// 获取当前用户的权限
+	// Get当前用户的权限
 	const currentUserAuth = useMemo(() => {
 		return authList.find((auth) => auth.target_id === uId)?.operation
 	}, [authList, uId])
 
-	// 判断是否可以编辑某个成员的权限
+	// 判断Whether可以编辑某个成员的权限
 	const canEditAuth = useMemoizedFn((auth: AuthMember) => {
 		return canEditMemberAuth(auth, uId!, currentUserAuth, originalAuthList)
 	})
@@ -153,3 +153,4 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 		</Flex>
 	)
 }
+

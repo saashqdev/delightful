@@ -1,4 +1,4 @@
-import { useRef } from "react"
+﻿import { useRef } from "react"
 import { message as antdMessage } from "antd"
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
@@ -135,7 +135,7 @@ export default function useFlowOperations({
 		if (!flowInteractionRef.current) return false
 
 		try {
-			// 获取当前源节点的下一个节点列表
+			// Get当前源节点的下一个节点列表
 			const currentFlow = flowInteractionRef.current.getFlow()
 			const sourceNode = currentFlow.nodes?.find(
 				(node: DelightfulFlow.Node) => node.id === sourceNodeId,
@@ -181,19 +181,19 @@ export default function useFlowOperations({
 		}
 	})
 
-	// 执行流程操作命令
+	// 执行流程Operation命令
 	const executeOperations = useMemoizedFn(async (operations: any[], flowId: string) => {
 		if (!flowInteractionRef.current) return []
 
 		const results = []
-		// 避免在循环中使用await，顺序处理所有操作
+		// 避免在循环中使用await，顺序Process所有Operation
 		for (let i = 0; i < operations.length; i += 1) {
 			const operation = operations[i]
 
-			// 检查是否有commandId，并且是否已执行过
+			// 检查Whether有commandId，并且Whether已执行过
 			if (operation.commandId && executedCommandsRef.current.has(operation.commandId)) {
 				console.log(
-					`操作已执行过，跳过: commandId=${operation.commandId}, type=${operation.type}`,
+					`Operation已执行过，跳过: commandId=${operation.commandId}, type=${operation.type}`,
 				)
 				results.push({
 					type: operation.type,
@@ -227,7 +227,7 @@ export default function useFlowOperations({
 						result = disconnectNodes(operation.sourceNodeId, operation.targetNodeId)
 						break
 					case "saveDraft":
-						// 只在saveDraft和publishFlow中使用await，这是必要的异步操作
+						// 只在saveDraft和publishFlow中使用await，这是必要的异步Operation
 						// eslint-disable-next-line no-await-in-loop
 						result = await saveDraft()
 						break
@@ -281,3 +281,4 @@ export default function useFlowOperations({
 		commandExecutionRef,
 	}
 }
+

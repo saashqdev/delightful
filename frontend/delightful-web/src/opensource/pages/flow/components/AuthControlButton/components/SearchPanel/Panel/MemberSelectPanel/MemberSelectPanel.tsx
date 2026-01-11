@@ -1,4 +1,4 @@
-import { Checkbox, Flex } from "antd"
+﻿import { Checkbox, Flex } from "antd"
 import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import DelightfulLogo from "@/opensource/components/DelightfulLogo"
 import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
@@ -32,12 +32,12 @@ function MemberSelectPanelComponent() {
 		return authList.find((auth) => auth.operation === OperationTypes.Owner)
 	}, [authList])
 
-	// 获取当前用户的权限
+	// Get当前用户的权限
 	const currentUserAuth = useMemo(() => {
 		return authList.find((auth) => auth.target_id === currentUserId)?.operation
 	}, [authList, currentUserId])
 
-	// 判断是否禁用选择框
+	// 判断Whether禁用选择框
 	const isDisabledMember = useMemo(() => {
 		return (member: AuthMember) => {
 			return isDisabled(member, currentUserId!, currentUserAuth, originalAuthList, creator)
@@ -57,7 +57,7 @@ function MemberSelectPanelComponent() {
 		})
 	}, [selectableMembers, authIds])
 
-	// 处理全选操作
+	// Process全选Operation
 	const handleCheckAll = (checked: boolean) => {
 		if (checked) {
 			// 添加所有可选择的成员
@@ -112,3 +112,4 @@ function MemberSelectPanelComponent() {
 const MemberSelectPanel = observer(MemberSelectPanelComponent)
 
 export default MemberSelectPanel
+

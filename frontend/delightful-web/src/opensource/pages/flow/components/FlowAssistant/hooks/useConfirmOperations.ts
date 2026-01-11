@@ -1,4 +1,4 @@
-import { useMemoizedFn } from "ahooks"
+﻿import { useMemoizedFn } from "ahooks"
 import type { Message } from ".."
 
 /**
@@ -51,9 +51,9 @@ export function useConfirmOperations({
 		}
 	})
 
-	// 处理确认操作 - 发送确认消息
+	// Process确认Operation - 发送确认消息
 	const handleConfirmOperation = useMemoizedFn(async (operationType: string, data?: any) => {
-		// 移除所有消息的确认操作按钮
+		// 移除所有消息的确认Operation按钮
 		setMessages((prev) =>
 			prev.map((msg) => ({
 				...msg,
@@ -61,15 +61,15 @@ export function useConfirmOperations({
 			})),
 		)
 
-		// 如果没有提供发送消息的函数，则使用直接执行操作的模式
+		// 如果没有提供发送消息的函数，则使用直接执行Operation的模式
 		if (!sendMessage) {
 			try {
-				// 创建一个新的助手消息，显示确认处理中
+				// 创建一个新的助手消息，显示确认Process中
 				const assistantMessageId = Date.now().toString()
 				const confirmMessage: Message = {
 					id: assistantMessageId,
 					role: "assistant",
-					content: `正在执行${operationType}操作...`,
+					content: `正在执行${operationType}Operation...`,
 					status: "loading",
 				}
 
@@ -77,7 +77,7 @@ export function useConfirmOperations({
 				setMessages((prev) => [...prev, confirmMessage])
 				setForceScroll(true)
 
-				// 执行操作逻辑
+				// 执行Operation逻辑
 				if (operationType === "confirmOperation" && data?.commands) {
 					await executeOperations(data.commands, flowId || "")
 				}
@@ -88,14 +88,14 @@ export function useConfirmOperations({
 						msg.id === assistantMessageId
 							? {
 									...msg,
-									content: "操作已成功执行",
+									content: "Operation已成功执行",
 									status: "done",
 							  }
 							: msg,
 					),
 				)
 			} catch (error) {
-				console.error("确认操作执行失败:", error)
+				console.error("确认Operation执行失败:", error)
 				const errorMessage = error instanceof Error ? error.message : String(error)
 
 				// 添加错误消息
@@ -105,7 +105,7 @@ export function useConfirmOperations({
 					{
 						id: errorMessageId,
 						role: "assistant",
-						content: `操作执行失败: ${errorMessage}`,
+						content: `Operation执行失败: ${errorMessage}`,
 						status: "error",
 					},
 				])
@@ -114,7 +114,7 @@ export function useConfirmOperations({
 			return
 		}
 
-		// 构建确认操作的消息格式
+		// 构建确认Operation的消息格式
 		let confirmContent = `确认执行`
 
 		// 如果有命令信息，添加命令详情
@@ -131,9 +131,9 @@ export function useConfirmOperations({
 		}
 	})
 
-	// 处理取消操作 - 发送取消消息
+	// ProcessCancelOperation - 发送Cancel消息
 	const handleCancelOperation = useMemoizedFn((operationType: string) => {
-		// 移除所有消息的确认操作按钮
+		// 移除所有消息的确认Operation按钮
 		setMessages((prev) =>
 			prev.map((msg) => ({
 				...msg,
@@ -141,33 +141,33 @@ export function useConfirmOperations({
 			})),
 		)
 
-		// 如果没有提供发送消息的函数，则使用直接显示取消消息的模式
+		// 如果没有提供发送消息的函数，则使用直接显示Cancel消息的模式
 		if (!sendMessage) {
-			// 创建一个新的助手消息，显示操作已取消
+			// 创建一个新的助手消息，显示Operation已Cancel
 			const assistantMessageId = Date.now().toString()
 			const cancelMessage: Message = {
 				id: assistantMessageId,
 				role: "assistant",
-				content: `已取消${operationType}操作`,
+				content: `已Cancel${operationType}Operation`,
 				status: "done",
 			}
 
-			// 添加取消消息
+			// 添加Cancel消息
 			setMessages((prev) => [...prev, cancelMessage])
 			setForceScroll(true)
 			return
 		}
 
-		// 构建取消操作的消息
-		const cancelContent = `取消${operationType}操作`
+		// 构建CancelOperation的消息
+		const cancelContent = `Cancel${operationType}Operation`
 
-		// 直接发送取消消息到服务端，让sendMessage函数负责创建和添加用户消息
+		// 直接发送Cancel消息到服务端，让sendMessage函数负责创建和添加用户消息
 		try {
 			sendMessage(cancelContent).catch((error) => {
-				console.error("发送取消消息失败:", error)
+				console.error("发送Cancel消息失败:", error)
 			})
 		} catch (error) {
-			console.error("发送取消消息失败:", error)
+			console.error("发送Cancel消息失败:", error)
 		}
 	})
 
@@ -179,3 +179,4 @@ export function useConfirmOperations({
 }
 
 export default useConfirmOperations
+

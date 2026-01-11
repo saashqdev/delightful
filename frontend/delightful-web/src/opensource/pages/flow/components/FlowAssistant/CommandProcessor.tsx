@@ -1,4 +1,4 @@
-import type React from "react"
+﻿import type React from "react"
 import { useEffect, useState, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
@@ -83,7 +83,7 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 				},
 			])
 
-			// 命令处理完成
+			// 命令Process完成
 			isProcessingRef.current = false
 
 			// Execute the next command (use a short delay to ensure UI updates)
@@ -109,7 +109,7 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 			// 从队列中移除失败的命令
 			setPendingCommands((prev) => prev.slice(1))
 
-			// 命令处理完成
+			// 命令Process完成
 			isProcessingRef.current = false
 
 			// 继续执行下一个命令
@@ -133,3 +133,4 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 }
 
 export default CommandProcessor
+

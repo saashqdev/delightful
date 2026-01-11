@@ -1,4 +1,4 @@
-import type { Dispatch, PropsWithChildren, SetStateAction } from "react"
+﻿import type { Dispatch, PropsWithChildren, SetStateAction } from "react"
 import { createContext, useContext, useMemo } from "react"
 import type { AuthMember } from "../../types"
 import type { ManagerModalType } from "../types"

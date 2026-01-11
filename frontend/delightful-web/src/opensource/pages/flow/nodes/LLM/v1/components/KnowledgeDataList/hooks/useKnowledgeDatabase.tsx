@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Large language model knowledge base data source hooks
  */
 
@@ -41,7 +41,7 @@ export default function useKnowledgeDatabases() {
 		total: 0,
 	})
 
-	// 获取已启用的用户自建知识库选项，支持分页
+	// Get已启用的用户自建知识库选项，支持分页
 	const getUserDatabaseOptions = useMemoizedFn(async (page = 1, pageSize = 10) => {
 		const response = await KnowledgeApi.getKnowledgeList({
 			type: knowledgeType.UserKnowledgeDatabase,
@@ -59,7 +59,7 @@ export default function useKnowledgeDatabases() {
 
 	// 监听滚动加载更多
 	const userDatabasePopupScroll = useMemoizedFn((e: any) => {
-		// 获取滚动容器
+		// Get滚动容器
 		const target = e.target
 
 		// Detect if scrolled to bottom (with tolerance)
@@ -73,7 +73,7 @@ export default function useKnowledgeDatabases() {
 
 	// 加载更多用户自建知识库
 	const loadMoreUserDatabases = useMemoizedFn(async () => {
-		// 设置加载状态
+		// Set加载状态
 		setUserDbPagination((prev) => ({
 			...prev,
 			loading: true,
@@ -146,7 +146,7 @@ export default function useKnowledgeDatabases() {
 					}
 				})
 
-				// 设置选项和分页状态
+				// Set选项和分页状态
 				setUserDatabaseOptions(formattedOptions)
 				setUserDbPagination({
 					page: 1,
@@ -175,3 +175,4 @@ export default function useKnowledgeDatabases() {
 		userDatabasePopupScroll,
 	}
 }
+

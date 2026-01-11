@@ -1,4 +1,4 @@
-import type { HTTP } from "@/types/flow"
+﻿import type { HTTP } from "@/types/flow"
 import type { ExpressionSource } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 
 /** 参数配置的tab栏类型 */
@@ -16,10 +16,11 @@ export interface ApiSettingsProps {
 }
 
 export interface ApiSettingsInstance {
-	// 获取接口组件内部的值
+	// Get接口组件内部的值
 	getValue: () => HTTP.Api
-	// 设置接口组件内部的值
+	// Set接口组件内部的值
 	setValue(changePath: string[], val: any, activeKey?: ArgsTabType): void
 }
 
 export default {}
+

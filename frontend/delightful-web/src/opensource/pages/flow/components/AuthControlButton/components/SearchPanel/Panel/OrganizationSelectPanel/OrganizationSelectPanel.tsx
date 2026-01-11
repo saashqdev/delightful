@@ -1,4 +1,4 @@
-// 组织架构选择相关状态管理
+﻿// 组织架构选择相关状态管理
 import { useEffect, useMemo, useState } from "react"
 import OrganizationPanel from "@/opensource/components/business/OrganizationPanel"
 import type {
@@ -21,7 +21,7 @@ export default function OrganizationSelectPanel() {
 
 	const [organizationChecked, setOrganizationChecked] = useState<OrganizationSelectItem[]>([])
 
-	// 获取当前用户的权限
+	// Get当前用户的权限
 	const currentUserAuth = useMemo(() => {
 		return authList.find((auth) => auth.target_id === uId)?.operation
 	}, [authList, uId])
@@ -82,7 +82,7 @@ export default function OrganizationSelectPanel() {
 					const newItems = value
 						.map((item) => {
 							if (item.dataType === StructureItemType.Department) {
-								// 处理部门
+								// Process部门
 								return {
 									target_id: item.id,
 									// @ts-ignore
@@ -97,7 +97,7 @@ export default function OrganizationSelectPanel() {
 								}
 							}
 							if (item.dataType === StructureItemType.User) {
-								// 处理用户
+								// Process用户
 								const userItem = item as UserSelectItem
 								return {
 									target_id: item.user_id,
@@ -113,7 +113,7 @@ export default function OrganizationSelectPanel() {
 									},
 								}
 							}
-							// 如果有其他类型，可以在这里处理
+							// 如果有其他类型，可以在这里Process
 							return null
 						})
 						.filter(Boolean) // 过滤掉可能的 null 值
@@ -139,3 +139,4 @@ export default function OrganizationSelectPanel() {
 		/>
 	)
 }
+

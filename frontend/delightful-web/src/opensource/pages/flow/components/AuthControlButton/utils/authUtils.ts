@@ -1,4 +1,4 @@
-import type { AuthMember } from "../types"
+﻿import type { AuthMember } from "../types"
 import { OperationTypes } from "../types"
 
 /**

@@ -1,4 +1,4 @@
-import type { Knowledge } from "@/types/knowledge"
+﻿import type { Knowledge } from "@/types/knowledge"
 import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn } from "ahooks"
 import React, { useEffect, useMemo, useRef } from "react"
@@ -58,7 +58,7 @@ export default function useProgress({ knowledgeListName }: UseProgressProps) {
 
 	const initInterval = useMemoizedFn(() => {
 		searchProgress()
-		// 设置3秒的定时器
+		// Set3秒的定时器
 		intervalId.current = setInterval(searchProgress, 3000)
 		return intervalId.current
 	})
@@ -78,3 +78,4 @@ export default function useProgress({ knowledgeListName }: UseProgressProps) {
 		setProgressList,
 	}
 }
+

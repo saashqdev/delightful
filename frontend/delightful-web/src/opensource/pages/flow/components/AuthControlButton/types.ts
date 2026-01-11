@@ -1,4 +1,4 @@
-// Permission resource types
+﻿// Permission resource types
 export enum ResourceTypes {
 	Agent = 1,
 	Flow = 2,

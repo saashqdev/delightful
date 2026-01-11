@@ -1,5 +1,5 @@
-/**
- * 流处理相关的工具函数
+﻿/**
+ * 流Process相关的工具函数
  */
 
 /**
@@ -16,7 +16,7 @@ export const extractContent = (
 		const jsonStr = line.substring(5).trim()
 		const data = JSON.parse(jsonStr)
 
-		// 检查是否是错误消息
+		// 检查Whether是错误消息
 		if (data.event === "error" && data.error_information) {
 			return {
 				content: "",
@@ -36,8 +36,8 @@ export const extractContent = (
 			content = data.content
 		}
 
-		// 关键改动：不要对内容进行任何处理，原样保留
-		// 特别是不要对引号和特殊字符做处理，以免破坏JSON结构
+		// 关键改动：不要对内容进行任何Process，原样保留
+		// 特别是不要对引号和特殊字符做Process，以免破坏JSON结构
 		// 因为内容可能是分块传输的JSON片段
 
 		return { content, isError: false, errorInfo: "" }
@@ -48,7 +48,7 @@ export const extractContent = (
 }
 
 /**
- * 标准化JSON字符串，处理多行格式化的JSON
+ * 标准化JSON字符串，Process多行格式化的JSON
  * @param json 原始JSON字符串
  * @returns 标准化后的JSON字符串
  */
@@ -57,7 +57,7 @@ export const normalizeJson = (json: string): string => {
 	if (!json.includes("\n")) return json
 
 	try {
-		// 尝试解析并重新序列化，会自动处理格式问题
+		// 尝试解析并重新序列化，会自动Process格式问题
 		const parsed = JSON.parse(json)
 		return JSON.stringify(parsed)
 	} catch (e) {
@@ -94,7 +94,7 @@ export const fixJsonPropertyNames = (json: string): string => {
 }
 
 /**
- * 验证JSON字符串中的大括号是否平衡
+ * 验证JSON字符串中的大括号Whether平衡
  * @param json JSON字符串
  * @returns 0表示平衡，正数表示右括号多，负数表示左括号多
  */
@@ -106,7 +106,7 @@ export const validateJsonBrackets = (json: string): number => {
 	for (let i = 0; i < json.length; i += 1) {
 		const char = json[i]
 
-		// 处理字符串中的引号和转义
+		// Process字符串中的引号和转义
 		if (char === '"' && !escapeNext) {
 			inString = !inString
 		} else if (char === "\\" && !escapeNext) {
@@ -228,11 +228,11 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 	// 添加调试日志查看原始内容
 	console.log("原始内容:", content)
 
-	// 处理完整的命令标记情况 - 更新正则表达式以支持多行内容
+	// Process完整的命令标记情况 - 更新正则表达式以支持多行内容
 	const commandRegex = /<!-- COMMAND_START -->([\s\S]*?)<!-- COMMAND_END -->/g
 	let commandMatch
 
-	// 检查是否有命令标记
+	// 检查Whether有命令标记
 	const hasCommandStart = content.includes("<!-- COMMAND_START -->")
 	const hasCommandEnd = content.includes("<!-- COMMAND_END -->")
 
@@ -252,19 +252,19 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 				console.log("成功解析命令:", command)
 			} catch (parseError) {
 				console.error("所有解析尝试都失败:", parseError)
-				// 跳过此命令继续处理下一个
+				// 跳过此命令继续Process下一个
 				// eslint-disable-next-line no-continue
 				continue
 			}
 
-			// 检查是否是确认操作命令
+			// 检查Whether是确认Operation命令
 			if (command.type === "confirmOperation") {
-				console.log("发现确认操作命令:", command)
+				console.log("发现确认Operation命令:", command)
 				// 替换文本为确认提示而不是"指令数据收集中"
-				const confirmMessage = command.message || "请确认是否执行此操作？"
+				const confirmMessage = command.message || "请确认Whether执行此Operation？"
 				updatedContent = updatedContent.replace(fullMatch, `${confirmMessage}`)
 
-				// 特别标记确认操作命令
+				// 特别标记确认Operation命令
 				command.isConfirmationCommand = true
 			} else {
 				// 其他命令类型使用普通替换
@@ -274,17 +274,17 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 			commands.push(command)
 			console.log("替换后内容:", updatedContent)
 		} catch (error) {
-			console.error("处理命令失败:", error, "原始命令:", commandMatch[1])
+			console.error("Process命令失败:", error, "原始命令:", commandMatch[1])
 		}
 	}
 
-	// 检查替换后是否还有命令标记
+	// 检查替换后Whether还有命令标记
 	const stillHasCommandStart = updatedContent.includes("<!-- COMMAND_START -->")
 	console.log("替换后仍有命令开始标记:", stillHasCommandStart)
 
-	// 如果没有完整标记但有开始标记，尝试处理不完整的命令
+	// 如果没有完整标记但有开始标记，尝试Process不完整的命令
 	if (stillHasCommandStart) {
-		console.log("尝试处理不完整的命令")
+		console.log("尝试Process不完整的命令")
 		// 找到命令开始位置
 		const startIndex = updatedContent.indexOf("<!-- COMMAND_START -->")
 		// 查找下一个可能的边界(STATUS_START或文本结束)
@@ -294,7 +294,7 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 		// 提取命令部分并替换
 		const commandPart = updatedContent.substring(startIndex, endIndex)
 		updatedContent = updatedContent.replace(commandPart, "指令数据收集中")
-		console.log("处理不完整命令后的内容:", updatedContent)
+		console.log("Process不完整命令后的内容:", updatedContent)
 	}
 
 	return { updatedContent, commands }
@@ -320,3 +320,4 @@ export const extractStatusInline = (content: string): string => {
 
 	return updatedContent
 }
+

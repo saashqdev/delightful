@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+﻿import { useEffect, useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
 import { get } from "lodash-es"
 import TSIcon from "@delightful/delightful-flow/dist/common/BaseUI/TSIcon"
@@ -101,7 +101,7 @@ const ConditionItem = ({
 
 	const { expressionDataSource } = usePrevious()
 
-	// 这是每一项不用Form.Item的原因是因为这三项之间属于联级关系，用Form.Item不好处理数据
+	// 这是每一项不用Form.Item的原因是因为这三项之间属于联级关系，用Form.Item不好Process数据
 	return (
 		<div className="delightful-condition-item">
 			{isShowColumnOption && (
@@ -168,3 +168,4 @@ const ConditionItem = ({
 }
 
 export default ConditionItem
+

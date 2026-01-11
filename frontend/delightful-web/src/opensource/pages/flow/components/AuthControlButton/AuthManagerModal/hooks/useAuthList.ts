@@ -1,4 +1,4 @@
-import { useMemoizedFn } from "ahooks"
+﻿import { useMemoizedFn } from "ahooks"
 import { useState } from "react"
 import { AuthApi } from "@/apis"
 import { unionBy } from "lodash-es"
@@ -12,18 +12,18 @@ type AuthListProps = {
 }
 
 export default function useAuthList({ extraConfig, type }: AuthListProps) {
-	// 当前已授权的列表
+	// Current authorized list
 	const [authList, setAuthList] = useState([] as AuthMember[])
 	// Original authorized list (used for comparison)
 	const [originalAuthList, setOriginalAuthList] = useState<AuthMember[]>(authList || [])
 
-	// 新增授权成员
+	// Add authorized member
 	const addAuthMembers = useMemoizedFn((members: AuthMember[]) => {
-		// 取并集，避免重复新增
+		// Take union to avoid duplicate additions
 		setAuthList((prevAuthList) => unionBy(prevAuthList, members, "target_id"))
 	})
 
-	// 删除授权成员
+	// Delete authorized member
 	const deleteAuthMembers = useMemoizedFn((members: AuthMember[]) => {
 		const delMemberIds = members
 			.filter((member) => member.operation !== OperationTypes.Owner)
@@ -31,7 +31,7 @@ export default function useAuthList({ extraConfig, type }: AuthListProps) {
 		setAuthList(authList.filter((auth) => !delMemberIds.includes(auth.target_id)))
 	})
 
-	// 更新授权成员权限信息
+	// Update authorized member permission information
 	const updateAuthMember = useMemoizedFn((member: AuthMember) => {
 		setAuthList((prevAuthList) => {
 			const newAuthList = prevAuthList.map((auth) => {
@@ -82,3 +82,4 @@ export default function useAuthList({ extraConfig, type }: AuthListProps) {
 		setOriginalAuthList,
 	}
 }
+

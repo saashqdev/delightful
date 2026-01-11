@@ -1,4 +1,4 @@
-import { Radio } from "antd"
+﻿import { Radio } from "antd"
 import { useCreation, useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { Widget } from "@/types/flow"
@@ -271,7 +271,7 @@ export default function ArgsSettings({
 	})
 
 	useUpdateEffect(() => {
-		// 节点失去焦点时保存一次，可以进一步判断是否上一个selectedNode是当前HTTP节点id
+		// 节点失去焦点时保存一次，可以进一步判断Whether上一个selectedNode是当前HTTP节点id
 		if (!selectedNodeId) {
 			update()
 		}
@@ -326,3 +326,4 @@ export default function ArgsSettings({
 		</div>
 	)
 }
+

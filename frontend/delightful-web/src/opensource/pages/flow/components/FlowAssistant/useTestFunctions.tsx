@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import { useRef, useEffect } from "react"
 import { useMemoizedFn } from "ahooks"
 import type { MessageProps } from "./MessageItem"
@@ -18,7 +18,7 @@ interface UseTestFunctionsProps {
 
 /**
  * 测试功能钩子
- * 提供测试流式响应和命令处理的功能
+ * 提供测试流式响应和命令Process的功能
  */
 export default function useTestFunctions({
 	setMessages,
@@ -31,7 +31,7 @@ export default function useTestFunctions({
 }: UseTestFunctionsProps) {
 	// 追踪当前测试会话ID，确保不会有重叠的测试
 	const currentTestSessionRef = useRef<string | null>(null)
-	// 追踪正在处理命令的状态
+	// 追踪正在Process命令的状态
 	const processingRef = useRef<boolean>(false)
 
 	/**
@@ -55,14 +55,14 @@ export default function useTestFunctions({
 	 */
 	const createMockSSEStream = useMemoizedFn(
 		(sseLines: string[], delayBetweenLines: number): ReadableStream<Uint8Array> => {
-			// 确保最小延迟，避免处理不及时
+			// 确保最小延迟，避免Process不及时
 			const safeDelay = Math.max(150, delayBetweenLines)
 			console.log(`Using safe delay: ${safeDelay}ms`)
 
 			let lineIndex = 0
 			const encoder = new TextEncoder()
 
-			// 使用更可靠的队列方式处理数据
+			// 使用更可靠的队列方式Process数据
 			return new ReadableStream({
 				start(controller) {
 					// 加入结束检测计数器
@@ -89,12 +89,12 @@ export default function useTestFunctions({
 							return
 						}
 
-						// 获取当前行并准备下一行
+						// Get当前行并准备下一行
 						const line = sseLines[lineIndex]
 						lineIndex += 1
 
 						try {
-							// 确保每行都有换行符，对于SSE事件处理至关重要
+							// 确保每行都有换行符，对于SSE事件Process至关重要
 							const lineWithNewline = line.endsWith("\n") ? line : `${line}\n`
 							const encodedLine = encoder.encode(lineWithNewline)
 
@@ -106,7 +106,7 @@ export default function useTestFunctions({
 								}`,
 							)
 
-							// 安排发送下一行，并设置超时保护
+							// 安排发送下一行，并Set超时保护
 							processingTimeoutId = setTimeout(() => {
 								sendNextLine()
 							}, safeDelay)
@@ -125,7 +125,7 @@ export default function useTestFunctions({
 				},
 
 				cancel() {
-					console.log("模拟SSE流被取消")
+					console.log("模拟SSE流被Cancel")
 					// 防止进一步发送
 					lineIndex = sseLines.length
 				},
@@ -173,17 +173,17 @@ export default function useTestFunctions({
 			// 创建模拟的SSE流
 			const mockStream = createMockSSEStream(sseLines, delayBetweenLines)
 
-			// 手动监听流处理进度，确保消息状态正确更新
+			// 手动监听流Process进度，确保消息状态正确更新
 			const checkStreamProgress = () => {
-				// 每秒检查一次流处理状态
+				// 每秒检查一次流Process状态
 				const checkInterval = setInterval(() => {
-					// 如果会话ID不匹配或未处理中，取消检查
+					// 如果会话ID不匹配或未Process中，Cancel检查
 					if (currentTestSessionRef.current !== testSessionId || !processingRef.current) {
 						clearInterval(checkInterval)
 						return
 					}
 
-					// 获取消息最新状态
+					// 获Cancel息最新状态
 					let messageHasContent = false
 
 					setMessages((prevMessages) => {
@@ -192,7 +192,7 @@ export default function useTestFunctions({
 							(msg) => msg.id === assistantMessageId,
 						)
 
-						// 检查消息是否已有内容但仍处于loading状态
+						// 检查消息Whether已有内容但仍处于loading状态
 						if (
 							currentMessage &&
 							currentMessage.status === "loading" &&
@@ -207,7 +207,7 @@ export default function useTestFunctions({
 						return prevMessages
 					})
 
-					// 如果消息有内容但仍是loading状态，确保处理完成时消息状态正确
+					// 如果消息有内容但仍是loading状态，确保Process完成时消息状态正确
 					if (messageHasContent) {
 						console.log(`检测到消息有内容但状态未更新，修正状态: ${assistantMessageId}`)
 					}
@@ -217,9 +217,9 @@ export default function useTestFunctions({
 				setTimeout(() => {
 					clearInterval(checkInterval)
 
-					// 如果仍在处理中，强制更新消息状态并结束处理
+					// 如果仍在Process中，强制更新消息状态并结束Process
 					if (currentTestSessionRef.current === testSessionId && processingRef.current) {
-						console.warn(`流处理超时，强制完成: ${testSessionId}`)
+						console.warn(`流Process超时，强制完成: ${testSessionId}`)
 
 						// 更新消息状态为done
 						setMessages((prevMessages) =>
@@ -228,7 +228,7 @@ export default function useTestFunctions({
 							),
 						)
 
-						// 清理处理状态
+						// 清理Process状态
 						setProcessingMessageId(null)
 						setIsProcessing(false)
 						processingRef.current = false
@@ -241,7 +241,7 @@ export default function useTestFunctions({
 			// 启动进度检查
 			checkStreamProgress()
 
-			// 设置响应流，让StreamProcessor组件处理
+			// Set响应流，让StreamProcessor组件Process
 			setStreamResponse(mockStream)
 		},
 	)
@@ -283,13 +283,13 @@ export default function useTestFunctions({
 						contentFragments.push(data)
 					}
 				} catch (e) {
-					// JSON解析失败，记录日志但继续处理其他行
+					// JSON解析失败，记录日志但继续Process其他行
 					console.warn(`无法解析SSE行JSON数据: ${line.substring(0, 50)}...`)
 
 					// 尝试使用正则表达式直接提取content内容
 					const contentMatch = /"content":"([^"]*)"/g.exec(line)
 					if (contentMatch && contentMatch[1]) {
-						// 需要处理转义的双引号和其他特殊字符
+						// 需要Process转义的双引号和其他特殊字符
 						try {
 							// 使用JSON.parse解码转义字符
 							const decodedContent = JSON.parse(`"${contentMatch[1]}"`)
@@ -305,10 +305,10 @@ export default function useTestFunctions({
 			// 如果提取到内容，拼接并返回
 			if (contentFragments.length > 0) {
 				const result = contentFragments.join("")
-				// 检查特殊字符是否存在
+				// 检查特殊字符Whether存在
 				const hasSpecialChars = /[:"\\\n\r\t]/.test(result)
 				if (hasSpecialChars) {
-					console.log("提取内容包含特殊字符，确保正确处理")
+					console.log("提取内容包含特殊字符，确保正确Process")
 				}
 				return result
 			}
@@ -323,7 +323,7 @@ export default function useTestFunctions({
 
 	/**
 	 * 直接从原始SSE事件数组中提取纯文本内容，不使用JSON解析
-	 * 这个方法专门处理一个字符一个事件的极端情况
+	 * 这个方法专门Process一个字符一个事件的极端情况
 	 * @param sseEvents SSE事件数组，每个事件格式为data:{"message":{"content":"字符"}}
 	 * @returns 提取的纯文本内容
 	 */
@@ -343,9 +343,9 @@ export default function useTestFunctions({
 
 			if (match && match[1] !== undefined) {
 				try {
-					// 获取引号内的内容并处理转义
+					// Get引号内的内容并Process转义
 					const rawContent = match[1]
-					// 使用JSON.parse处理转义字符
+					// 使用JSON.parseProcess转义字符
 					const content = JSON.parse(`"${rawContent}"`)
 
 					// 检查特殊字符
@@ -415,14 +415,14 @@ export default function useTestFunctions({
 			setMessages((prev) => [...prev, newAssistantMessage])
 			setIsProcessing(true)
 
-			// 检查内容是否包含特殊字符
+			// 检查内容Whether包含特殊字符
 			const hasSpecialChars = /[\r\n\t":{}[\]\\]/.test(fullContent)
 
 			// 记录特殊字符
 			if (hasSpecialChars) {
 				console.log("检测到内容包含特殊字符，使用更小的块大小和精确编码")
 				// 简单记录特殊字符存在
-				console.log("发现特殊字符，将使用更严格的处理方式")
+				console.log("发现特殊字符，将使用更严格的Process方式")
 
 				// 打印含有特殊字符的一小段样本
 				let sampleWithSpecialChars = ""
@@ -449,7 +449,7 @@ export default function useTestFunctions({
 			// 将完整内容分割成小块，每个块都成为一个SSE事件
 			const chunks: string[] = []
 
-			// 使用更小的块大小处理特殊字符，确保编码正确
+			// 使用更小的块大小Process特殊字符，确保编码正确
 			const safeChunkSize = hasSpecialChars ? Math.min(chunkSize, 3) : chunkSize
 			console.log(
 				`使用块大小: ${safeChunkSize} (${
@@ -466,14 +466,14 @@ export default function useTestFunctions({
 			const jsonEncoded = JSON.stringify(fullContent.substring(0, 50))
 			console.log(`JSON编码后: ${jsonEncoded}`)
 
-			// 测试解码是否正确
+			// 测试解码Whether正确
 			const testDecoded = JSON.parse(jsonEncoded)
 			console.log(`解码测试: "${testDecoded}"`)
 			if (testDecoded !== fullContent.substring(0, 50)) {
 				console.warn("警告: JSON编码/解码测试不匹配!")
 			}
 
-			// 分块处理内容
+			// 分块Process内容
 			for (let i = 0; i < fullContent.length; i += safeChunkSize) {
 				const chunk = fullContent.substring(
 					i,
@@ -495,7 +495,7 @@ export default function useTestFunctions({
 
 				// 确保JSON格式完全正确
 				try {
-					// 验证转义后的内容是否可以被解析回来
+					// 验证转义后的内容Whether可以被解析回来
 					const testParse = JSON.parse(escapedContent)
 					if (testParse !== chunk) {
 						console.warn(`警告: JSON编码/解码不匹配!`)
@@ -529,7 +529,7 @@ export default function useTestFunctions({
 
 			console.log(`将${fullContent.length}字符的内容分割成${chunks.length}个事件块`)
 
-			// 使用SSE流测试方法处理这些事件
+			// 使用SSE流测试方法Process这些事件
 			testWithStreamEvents(chunks, delayBetweenChunks)
 		},
 	)
@@ -568,12 +568,12 @@ export default function useTestFunctions({
 		setProcessingMessageId(assistantMessageId)
 		setMessages((prev) => [...prev, newAssistantMessage])
 
-		// 使用StreamProcessor的静态方法处理完整响应
+		// 使用StreamProcessor的静态方法Process完整响应
 		StreamProcessor.testWithCompleteResponse(
 			completeResponse,
 			// 文本更新回调
 			(text) => {
-				// 检查是否是当前测试会话
+				// 检查Whether是当前测试会话
 				if (currentTestSessionRef.current !== testSessionId) {
 					console.warn("忽略过时的测试会话回调")
 					return
@@ -590,7 +590,7 @@ export default function useTestFunctions({
 			},
 			// 命令接收回调
 			(commands) => {
-				// 检查是否是当前测试会话
+				// 检查Whether是当前测试会话
 				if (currentTestSessionRef.current !== testSessionId) {
 					console.warn("忽略过时的测试会话命令")
 					return
@@ -599,26 +599,26 @@ export default function useTestFunctions({
 				if (commands.length > 0) {
 					console.log(`收到命令: ${commands.length}个, 会话: ${testSessionId}`)
 
-					// 设置命令队列，使用函数式更新避免闭包陷阱
+					// Set命令队列，使用函数式更新避免闭包陷阱
 					setCommandQueue(commands)
 
-					// 标记命令处理开始
+					// 标记命令Process开始
 					setIsCommandProcessing(true)
 
-					// 如果有命令，更新消息内容指示正在处理命令
+					// 如果有命令，更新消息内容指示正在Process命令
 					setMessages((prev) =>
 						prev.map((msg) =>
 							msg.id === assistantMessageId
 								? {
 										...msg,
-										content: msg.content || "我正在处理命令...",
+										content: msg.content || "我正在Process命令...",
 										status: "done",
 								  }
 								: msg,
 						),
 					)
 				} else {
-					console.log(`没有命令需要处理, 会话: ${testSessionId}`)
+					console.log(`没有命令需要Process, 会话: ${testSessionId}`)
 
 					// 没有命令，确保消息状态为done
 					setMessages((prev) =>
@@ -627,7 +627,7 @@ export default function useTestFunctions({
 						),
 					)
 
-					// 完成处理
+					// 完成Process
 					setProcessingMessageId(null)
 					processingRef.current = false
 					currentTestSessionRef.current = null
@@ -635,13 +635,13 @@ export default function useTestFunctions({
 			},
 			// 完成回调
 			() => {
-				console.log(`测试会话内容处理完成: ${testSessionId}`)
+				console.log(`测试会话内容Process完成: ${testSessionId}`)
 
-				// 获取最新的命令队列状态进行检查
+				// Get最新的命令队列状态进行检查
 				const currentCommands = commandQueue
 				const hasCommands = currentCommands && currentCommands.length > 0
 
-				// 如果没有命令，清理处理状态
+				// 如果没有命令，清理Process状态
 				if (!hasCommands) {
 					setProcessingMessageId(null)
 					setIsCommandProcessing(false)
@@ -666,7 +666,7 @@ export default function useTestFunctions({
 
 	/**
 	 * 测试使用完整的SSE事件字符串
-	 * 接收单个包含多行SSE数据的字符串，自动分割处理
+	 * 接收单个包含多行SSE数据的字符串，自动分割Process
 	 * @param sseContent 完整的SSE事件字符串，包含多行data:格式数据
 	 * @param delayBetweenLines 行之间的延迟时间(毫秒)
 	 */
@@ -680,7 +680,7 @@ export default function useTestFunctions({
 
 			console.log("Start processing SSE content, length:", sseContent.length)
 
-			// 检查是否是SSE格式
+			// 检查Whether是SSE格式
 			const isSSEFormat = sseContent.trim().startsWith("data:")
 
 			if (isSSEFormat) {
@@ -717,11 +717,11 @@ export default function useTestFunctions({
 
 				console.log(`提取到原始内容，长度: ${finalContent.length}字符`)
 
-				// 直接使用testWithRawContent处理提取出的内容，确保特殊字符被正确保留
-				testWithRawContent(finalContent, delayBetweenLines, 3) // 使用小块大小确保特殊字符处理正确
+				// 直接使用testWithRawContentProcess提取出的内容，确保特殊字符被正确保留
+				testWithRawContent(finalContent, delayBetweenLines, 3) // 使用小块大小确保特殊字符Process正确
 			} else {
-				// 不是SSE格式，作为原始内容处理
-				console.log("内容不是SSE格式，作为原始内容处理")
+				// 不是SSE格式，作为原始内容Process
+				console.log("内容不是SSE格式，作为原始内容Process")
 				testWithRawContent(sseContent, delayBetweenLines)
 			}
 		},
@@ -768,3 +768,4 @@ export default function useTestFunctions({
 		testWithRawContent,
 	}
 }
+

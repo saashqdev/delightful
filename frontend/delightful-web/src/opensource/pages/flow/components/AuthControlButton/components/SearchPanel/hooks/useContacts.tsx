@@ -1,4 +1,4 @@
-import type Conversation from "@/opensource/models/chat/conversation"
+﻿import type Conversation from "@/opensource/models/chat/conversation"
 import delightfulIconLogo from "@/assets/logos/delightful-icon.svg"
 import dayjs from "dayjs"
 import { sort } from "radash"

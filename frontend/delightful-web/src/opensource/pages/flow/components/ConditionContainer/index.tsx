@@ -1,4 +1,4 @@
-import { useState } from "react"
+﻿import { useState } from "react"
 import { cloneDeep } from "lodash-es"
 import { useMemoizedFn, useMount, useUpdateEffect } from "ahooks"
 import { Form } from "antd"
@@ -15,7 +15,7 @@ const ConditionContainer = ({
 	onChange,
 	addButtonText,
 	isEnableDel = false,
-	isSupportRowId = true, // 过滤条件是否支持默认行ID
+	isSupportRowId = true, // 过滤ConditionWhether支持默认行ID
 	columns,
 	sheetId,
 	dataTemplate,
@@ -98,3 +98,4 @@ const ConditionContainer = ({
 }
 
 export default ConditionContainer
+

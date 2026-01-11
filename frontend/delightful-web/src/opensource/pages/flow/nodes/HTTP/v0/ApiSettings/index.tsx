@@ -1,4 +1,4 @@
-import { useEventEmitter, useMemoizedFn } from "ahooks"
+﻿import { useEventEmitter, useMemoizedFn } from "ahooks"
 import { isEmpty, set, cloneDeep } from "lodash-es"
 import { forwardRef, useImperativeHandle, useMemo, useState } from "react"
 import { nanoid } from "nanoid"
@@ -62,7 +62,7 @@ const ApiSettings = forwardRef<ApiSettingsInstance, ApiSettingsProps>((component
 		const formKeys = ["params_query", "params_path", "headers", "body"]
 		const lastKey = changePath[changePath.length - 1]
 		const traceKeys = ["structure", ...changePath]
-		// 如果不是body类型，则是form组件，需要将值设置到structure
+		// 如果不是body类型，则是form组件，需要将值Set到structure
 		if (formKeys.includes(lastKey)) {
 			traceKeys.push("structure")
 		}
@@ -131,3 +131,4 @@ const ApiSettings = forwardRef<ApiSettingsInstance, ApiSettingsProps>((component
 })
 
 export default ApiSettings
+

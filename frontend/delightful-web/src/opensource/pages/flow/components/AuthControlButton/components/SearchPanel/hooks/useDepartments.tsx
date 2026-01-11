@@ -1,4 +1,4 @@
-﻿// 组织架构选择相关状态管理
+﻿// Organization structure selection related state management
 
 import { useMemo, useState } from "react"
 import OrganizationPanel from "@/opensource/components/business/OrganizationPanel"
@@ -37,3 +37,4 @@ export default function useDepartments() {
 		setOrganizationChecked,
 	}
 }
+

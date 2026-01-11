@@ -33,12 +33,12 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 
 	const { styles: departmentStyles } = useDepartmentStyles()
 
-	// Get当前用户的权限
+	// Get current user permission
 	const currentUserAuth = useMemo(() => {
 		return authList.find((auth) => auth.target_id === uId)?.operation
 	}, [authList, uId])
 
-	// 判断Whether可以编辑某个成员的权限
+	// Determine whether to edit a members permission
 	const canEditAuth = useMemoizedFn((auth: AuthMember) => {
 		return canEditMemberAuth(auth, uId!, currentUserAuth, originalAuthList)
 	})
@@ -153,4 +153,5 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 		</Flex>
 	)
 }
+
 

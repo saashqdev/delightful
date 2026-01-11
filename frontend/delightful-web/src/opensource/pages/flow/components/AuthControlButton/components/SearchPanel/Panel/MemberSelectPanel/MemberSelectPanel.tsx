@@ -32,12 +32,12 @@ function MemberSelectPanelComponent() {
 		return authList.find((auth) => auth.operation === OperationTypes.Owner)
 	}, [authList])
 
-	// Get当前用户的权限
+	// Get current user permission
 	const currentUserAuth = useMemo(() => {
 		return authList.find((auth) => auth.target_id === currentUserId)?.operation
 	}, [authList, currentUserId])
 
-	// 判断Whether禁用选择框
+	// Determine whether to disable selection box
 	const isDisabledMember = useMemo(() => {
 		return (member: AuthMember) => {
 			return isDisabled(member, currentUserId!, currentUserAuth, originalAuthList, creator)
@@ -49,7 +49,7 @@ function MemberSelectPanelComponent() {
 		return members.filter((member) => !isDisabledMember(member))
 	}, [members, isDisabledMember])
 
-	// 修改全选逻辑，只考虑可选择的成员
+	// Modify select all logic, only consider selectable members
 	const isCheckAll = useMemo(() => {
 		if (selectableMembers.length === 0) return false
 		return selectableMembers.every((member) => {
@@ -57,13 +57,13 @@ function MemberSelectPanelComponent() {
 		})
 	}, [selectableMembers, authIds])
 
-	// Process全选Operation
+	// Process select all operation
 	const handleCheckAll = (checked: boolean) => {
 		if (checked) {
-			// 添加所有可选择的成员
+			// Add all selectable members
 			addAuthMembers(selectableMembers)
 		} else {
-			// 删除所有可选择的成员
+			// Delete all selectable members
 			deleteAuthMembers(selectableMembers)
 		}
 	}
@@ -112,4 +112,5 @@ function MemberSelectPanelComponent() {
 const MemberSelectPanel = observer(MemberSelectPanelComponent)
 
 export default MemberSelectPanel
+
 

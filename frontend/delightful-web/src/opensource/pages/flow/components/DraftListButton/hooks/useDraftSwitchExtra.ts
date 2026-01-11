@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Extra operations for switching drafts
  */
 
@@ -20,7 +20,7 @@ export default function useDraftSwitchExtra({ flow, initDraftList }: UseDraftSwi
 
 		// const isRollback = compareTimes(newDraftUpdatedAt, oldFlowUpdatedAt)
 
-		// // 只有回滚才需要新增
+		// // Only rollback requires new addition
 		// if(!isRollback) return
 
 		const requestParams = {
@@ -44,3 +44,4 @@ export default function useDraftSwitchExtra({ flow, initDraftList }: UseDraftSwi
 		saveDraft,
 	}
 }
+

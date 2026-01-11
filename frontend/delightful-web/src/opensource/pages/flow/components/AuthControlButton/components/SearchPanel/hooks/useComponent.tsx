@@ -1,5 +1,5 @@
 ﻿/**
- * 主要根据不同的tab，返回不同的组件选择面板
+ * Mainly return different component selection panels based on different tabs
  */
 
 import { useMemo } from "react"
@@ -24,3 +24,4 @@ export default function useComponent({ tab }: UseComponentProps) {
 		LeftPanel,
 	}
 }
+

@@ -1,4 +1,4 @@
-﻿// 组织架构选择相关状态管理
+﻿// Organization structure selection related state management
 import { useEffect, useMemo, useState } from "react"
 import OrganizationPanel from "@/opensource/components/business/OrganizationPanel"
 import type {
@@ -21,7 +21,7 @@ export default function OrganizationSelectPanel() {
 
 	const [organizationChecked, setOrganizationChecked] = useState<OrganizationSelectItem[]>([])
 
-	// Get当前用户的权限
+	// Get current user permission
 	const currentUserAuth = useMemo(() => {
 		return authList.find((auth) => auth.target_id === uId)?.operation
 	}, [authList, uId])
@@ -139,4 +139,5 @@ export default function OrganizationSelectPanel() {
 		/>
 	)
 }
+
 

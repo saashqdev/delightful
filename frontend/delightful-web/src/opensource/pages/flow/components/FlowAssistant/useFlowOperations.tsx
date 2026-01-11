@@ -60,7 +60,7 @@ export default function useFlowOperations({
 			console.log("Node added:", nodeTemplate)
 			return true
 		} catch (error) {
-			console.error("Add node失败:", error)
+			console.error("Add node failed:", error)
 			antdMessage.error(t("flowAssistant.addNodeError", { ns: "flow" }))
 			return false
 		}
@@ -71,7 +71,7 @@ export default function useFlowOperations({
 		if (!flowInteractionRef.current) return false
 
 		try {
-			// Update node配置
+			// Update node config
 			const { nodeConfig } = flowInteractionRef.current || {}
 			const currentNode = nodeConfig[nodeId]
 
@@ -87,7 +87,7 @@ export default function useFlowOperations({
 			console.log("Node updated:", nodeId, currentNode)
 			return true
 		} catch (error) {
-			console.error("Update node失败:", error)
+			console.error("Update node failed:", error)
 			antdMessage.error(t("flowAssistant.updateNodeError", { ns: "flow" }))
 			return false
 		}
@@ -102,7 +102,7 @@ export default function useFlowOperations({
 			console.log("Node deleted:", nodeId)
 			return true
 		} catch (error) {
-			console.error("Delete node失败:", error)
+			console.error("Delete node failed:", error)
 			antdMessage.error(t("flowAssistant.deleteNodeError", { ns: "flow" }))
 			return false
 		}
@@ -123,7 +123,7 @@ export default function useFlowOperations({
 				console.log("Nodes connected:", sourceNodeId, "->", targetNodeId)
 				return true
 			} catch (error) {
-				console.error("Connect nodes失败:", error)
+				console.error("Connect nodes failed:", error)
 				antdMessage.error(t("flowAssistant.connectNodesError", { ns: "flow" }))
 				return false
 			}
@@ -135,7 +135,7 @@ export default function useFlowOperations({
 		if (!flowInteractionRef.current) return false
 
 		try {
-			// Getnext node list of the current source node
+			// Get next node list of the current source node
 			const currentFlow = flowInteractionRef.current.getFlow()
 			const sourceNode = currentFlow.nodes?.find(
 				(node: DelightfulFlow.Node) => node.id === sourceNodeId,
@@ -149,13 +149,13 @@ export default function useFlowOperations({
 			console.log("Node connection disconnected:", sourceNodeId, "->", targetNodeId)
 			return true
 		} catch (error) {
-			console.error("Disconnect nodes失败:", error)
+			console.error("Disconnect nodes failed:", error)
 			antdMessage.error(t("flowAssistant.disconnectNodesError", { ns: "flow" }))
 			return false
 		}
 	})
 
-	// 发布流程
+	// Publish flow
 	const publishFlow = useMemoizedFn(async (publishData: any, flowId: string) => {
 		if (!flowInteractionRef.current) return false
 
@@ -181,19 +181,19 @@ export default function useFlowOperations({
 		}
 	})
 
-	// 执行流程Operation命令
+	// Execute flow operation commands
 	const executeOperations = useMemoizedFn(async (operations: any[], flowId: string) => {
 		if (!flowInteractionRef.current) return []
 
 		const results = []
-		// 避免在循环中使用await，顺序Process所有Operation
+		// Avoid using await inside the loop; process operations sequentially
 		for (let i = 0; i < operations.length; i += 1) {
 			const operation = operations[i]
 
-			// 检查Whether有commandId，并且Whether已执行过
+			// Check whether there is a commandId and whether it has already been executed
 			if (operation.commandId && executedCommandsRef.current.has(operation.commandId)) {
 				console.log(
-					`Operation已执行过，跳过: commandId=${operation.commandId}, type=${operation.type}`,
+					`Operation already executed, skipping: commandId=${operation.commandId}, type=${operation.type}`,
 				)
 				results.push({
 					type: operation.type,
@@ -227,7 +227,7 @@ export default function useFlowOperations({
 						result = disconnectNodes(operation.sourceNodeId, operation.targetNodeId)
 						break
 					case "saveDraft":
-						// 只在saveDraft和publishFlow中使用await，这是必要的异步Operation
+						// Use await only in saveDraft and publishFlow; these are necessary async operations
 						// eslint-disable-next-line no-await-in-loop
 						result = await saveDraft()
 						break
@@ -240,7 +240,7 @@ export default function useFlowOperations({
 						result = false
 				}
 
-				// 如果执行成功且有commandId，则记录到已执行集合中
+				// If executed successfully and has commandId, record to executed set
 				if (result && operation.commandId) {
 					executedCommandsRef.current.add(operation.commandId)
 				}
@@ -263,10 +263,10 @@ export default function useFlowOperations({
 		return results
 	})
 
-	// 重置已执行的命令记录
+	// Reset executed command records
 	const resetExecutedCommands = useMemoizedFn(() => {
 		executedCommandsRef.current.clear()
-		console.log("已重置命令执行记录")
+		console.log("Executed command records reset")
 	})
 
 	return {

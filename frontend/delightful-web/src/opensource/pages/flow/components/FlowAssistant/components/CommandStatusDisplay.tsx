@@ -16,8 +16,8 @@ interface CommandStatusDisplayProps {
 }
 
 /**
- * 命令状态显示组件
- * 用于展示命令执行的状态和相关信息
+ * command status display component
+ * display command execution status and related information
  */
 const CommandStatusDisplay: React.FC<CommandStatusDisplayProps> = ({ commandStatus, content }) => {
 	const { styles, cx } = useStyles()

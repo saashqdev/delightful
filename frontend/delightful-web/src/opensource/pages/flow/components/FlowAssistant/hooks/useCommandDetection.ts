@@ -52,12 +52,12 @@ export function useCommandDetection(): UseCommandDetectionResult {
 				processedContent = processedContent.substring(0, commandStartIndex)
 			}
 		} else if (processedContent.includes("<!-- COMMAND_START -->")) {
-			// 不在收集命令阶段，但内容中有命令标记，则替换为指令数据收集中
+			// not in command collection phase, but if there is a command flag in the content, replace it with instruction data collecting
 			while (processedContent.includes("<!-- COMMAND_START -->")) {
 				const startIndex = processedContent.indexOf("<!-- COMMAND_START -->")
 				let endIndex
 
-				// 查找结束标记或下一个状态标记
+				// find end flag or next status flag
 				const endTagIndex = processedContent.indexOf("<!-- COMMAND_END -->", startIndex)
 				const statusIndex = processedContent.indexOf("<!-- STATUS_START -->", startIndex)
 				const nextCommandIndex = processedContent.indexOf(
@@ -66,22 +66,22 @@ export function useCommandDetection(): UseCommandDetectionResult {
 				)
 
 				if (endTagIndex > -1) {
-					// 找到结束标记
+					// found end flag
 					endIndex = endTagIndex + "<!-- COMMAND_END -->".length
 				} else if (
 					statusIndex > -1 &&
 					(nextCommandIndex === -1 || statusIndex < nextCommandIndex)
 				) {
-					// 找到状态标记
+					// found status flag
 					endIndex = statusIndex
 				} else if (nextCommandIndex > -1) {
-					// 找到下一个命令标记
+					// found next command flag
 					endIndex = nextCommandIndex
 				} else {
-					// 都没找到，尝试查找JSON结构
+					// none found, try to find JSON structure
 					const jsonStartIndex = processedContent.indexOf("{", startIndex)
 					if (jsonStartIndex > -1) {
-						// 查找匹配的最后一个}
+						// find the last matching }
 						let bracketCount = 1
 						let i = jsonStartIndex + 1
 						for (; i < processedContent.length; i += 1) {
@@ -93,7 +93,7 @@ export function useCommandDetection(): UseCommandDetectionResult {
 						}
 						endIndex = i + 1
 					} else {
-						// 没找到JSON，使用命令标记后的所有内容
+						// no JSON found, use all content after command flag
 						endIndex = processedContent.length
 					}
 				}

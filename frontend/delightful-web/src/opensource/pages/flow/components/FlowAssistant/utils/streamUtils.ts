@@ -94,9 +94,9 @@ export const fixJsonPropertyNames = (json: string): string => {
 }
 
 /**
- * 验证JSON字符串中的大括号Whether平衡
+ * 验证JSON字符串中的大括号WhetherBalanced
  * @param json JSON字符串
- * @returns 0表示平衡，正数表示右括号多，负数表示左括号多
+ * @returns 0表示Balanced，正数表示右括号多，负数表示左括号多
  */
 export const validateJsonBrackets = (json: string): number => {
 	let balance = 0
@@ -124,7 +124,7 @@ export const validateJsonBrackets = (json: string): number => {
 		}
 	}
 
-	return balance * -1 // 返回值为0表示平衡，负数表示缺少右括号，正数表示多出右括号
+	return balance * -1 // 返回值为0表示Balanced，负数表示缺少右括号，正数表示多出右括号
 }
 
 /**
@@ -176,10 +176,10 @@ export const tryParseAndFixJSON = (jsonStr: string): any => {
 		console.log("标准化后JSON解析失败，继续尝试修复:", normalizeError)
 	}
 
-	// 检查并修复括号平衡
+	// 检查并修复括号Balanced
 	const balance = validateJsonBrackets(attemptStr)
 	if (balance !== 0) {
-		console.log(`检测到JSON括号不平衡，差值: ${balance}`)
+		console.log(`检测到JSON括号不Balanced，差值: ${balance}`)
 		if (balance > 0) {
 			attemptStr = removeExtraBrackets(attemptStr, balance)
 		} else if (balance < 0) {
@@ -320,4 +320,5 @@ export const extractStatusInline = (content: string): string => {
 
 	return updatedContent
 }
+
 

@@ -71,23 +71,23 @@ export default function useKnowledgeDatabases() {
 		}
 	})
 
-	// Load more用户自建知识库
+	// Load more user-created knowledge bases
 	const loadMoreUserDatabases = useMemoizedFn(async () => {
-		// Set加载状态
+		// Set loading state
 		setUserDbPagination((prev) => ({
 			...prev,
 			loading: true,
 		}))
 
 		try {
-			// 加载下一页数据
+			// Load next page data
 			const nextPage = userDbPagination.page + 1
 			const { list, total } = await getUserDatabaseOptions(
 				nextPage,
 				userDbPagination.pageSize,
 			)
 
-			// 格式化选项并追加到现有列表
+			// Format options and append to existing list
 			const formattedOptions = list.map((item: Knowledge.KnowledgeItem) => {
 				return {
 					business_id: "",
@@ -98,10 +98,10 @@ export default function useKnowledgeDatabases() {
 				}
 			})
 
-			// 合并数据
+			// Merge data
 			setUserDatabaseOptions((prev) => [...prev, ...formattedOptions])
 
-			// 更新分页状态
+			// Update pagination state
 			setUserDbPagination({
 				page: nextPage,
 				pageSize: userDbPagination.pageSize,
@@ -118,10 +118,10 @@ export default function useKnowledgeDatabases() {
 		}
 	})
 
-	// 初次加载用户自建知识库数据
+	// Initial load of user-created knowledge base data
 	useEffect(() => {
 		const loadInitialUserDatabaseOptions = async () => {
-			// 重置分页参数
+			// Reset pagination parameters
 			setUserDbPagination({
 				page: 1,
 				pageSize: 10,
@@ -130,11 +130,11 @@ export default function useKnowledgeDatabases() {
 				total: 0,
 			})
 
-			// 清空现有选项
+			// Clear existing options
 			setUserDatabaseOptions([])
 
 			try {
-				// 加载第一页数据
+				// Load first page data
 				const { list, total } = await getUserDatabaseOptions(1, 10)
 				const formattedOptions = list.map((item: Knowledge.KnowledgeItem) => {
 					return {
@@ -146,7 +146,7 @@ export default function useKnowledgeDatabases() {
 					}
 				})
 
-				// Set选项和分页状态
+				// Set options and pagination state
 				setUserDatabaseOptions(formattedOptions)
 				setUserDbPagination({
 					page: 1,
@@ -175,5 +175,6 @@ export default function useKnowledgeDatabases() {
 		userDatabasePopupScroll,
 	}
 }
+
 
 

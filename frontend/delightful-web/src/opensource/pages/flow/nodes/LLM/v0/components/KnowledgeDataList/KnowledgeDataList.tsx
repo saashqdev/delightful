@@ -1,4 +1,4 @@
-import { Flex, Form, Tooltip, Flex as AntdFlex } from "antd"
+﻿import { Flex, Form, Tooltip, Flex as AntdFlex } from "antd"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { IconCircleMinus, IconHelp } from "@tabler/icons-react"
 import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
@@ -45,7 +45,7 @@ export default function KnowledgeDataListV1({
 			<DropdownCard
 				title={t("common.knowledgeData", { ns: "flow" })}
 				height="auto"
-				// 移除suffixIcon，不再在headerRight显示添加按钮
+				// Remove suffixIcon, no longer show add button in headerRight
 			>
 				{/* Add button, using the same style as addToolBtn in ToolSelect.tsx */}
 				<div className={styles.knowledgeDataWrap}>
@@ -173,3 +173,4 @@ export default function KnowledgeDataListV1({
 		</div>
 	)
 }
+

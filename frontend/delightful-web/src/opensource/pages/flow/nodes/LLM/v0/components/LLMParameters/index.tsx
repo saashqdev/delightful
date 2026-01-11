@@ -1,4 +1,4 @@
-/**
+﻿/**
  * LLM parameter configurator
  */
 import { Form, Switch, Tooltip } from "antd"
@@ -116,7 +116,7 @@ export default function LLMParametersV0() {
 	// 			label: (
 	// 				<div className={styles.label}>
 	// 					<IconBulb color="#FF7D00" stroke={1} className={styles.icon} />
-	// 					<span>创意</span>
+	// 					<span>Creative</span>
 	// 				</div>
 	// 			),
 	// 			value: LLMAdjust.Creativity,
@@ -125,7 +125,7 @@ export default function LLMParametersV0() {
 	// 			label: (
 	// 				<div className={styles.label}>
 	// 					<IconScale color="#315CEC" stroke={1} className={styles.icon} />
-	// 					<span>平衡</span>
+	// 					<span>Balanced</span>
 	// 				</div>
 	// 			),
 	// 			value: LLMAdjust.Balanced,
@@ -135,7 +135,7 @@ export default function LLMParametersV0() {
 	// 			label: (
 	// 				<div className={styles.label}>
 	// 					<IconTargetArrow color="#32C436" stroke={1} className={styles.icon} />
-	// 					<span>精准</span>
+	// 					<span>Precise</span>
 	// 				</div>
 	// 			),
 	// 			value: LLMAdjust.Precise,
@@ -150,7 +150,7 @@ export default function LLMParametersV0() {
 	// 						size={18}
 	// 						className={styles.icon}
 	// 					/>
-	// 					<span>加载预设</span>
+	// 					<span>Load Preset</span>
 	// 				</div>
 	// 			),
 	// 			value: LLMAdjust.default,
@@ -393,3 +393,4 @@ export default function LLMParametersV0() {
 		</Form.Item>
 	)
 }
+

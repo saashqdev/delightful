@@ -1,4 +1,4 @@
-import { Flex, Form, Tooltip, Flex as AntdFlex } from "antd"
+﻿import { Flex, Form, Tooltip, Flex as AntdFlex } from "antd"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { IconCircleMinus, IconHelp } from "@tabler/icons-react"
 import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
@@ -55,7 +55,7 @@ export default function KnowledgeDataListV1({
 		return getKnowledgeTypeOptions(t, isCommercial)
 	}, [t, isCommercial])
 
-	// 根据knowledge_type渲染右侧组件
+	// Render right component based on knowledge_type
 	const renderRightComponent = (knowledgeTypeValue: number, subField: any) => {
 		switch (knowledgeTypeValue) {
 			case knowledgeType.UserKnowledgeDatabase:
@@ -229,3 +229,4 @@ export default function KnowledgeDataListV1({
 		</div>
 	)
 }
+

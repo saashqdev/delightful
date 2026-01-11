@@ -2,9 +2,9 @@
 import type { ResourceTypes } from "../types"
 
 export enum ManagerModalType {
-	// 权限管理
+	// Permission management
 	Auth = "auth",
-	// 部门选择
+	// Department selection
 	Department = "department",
 }
 

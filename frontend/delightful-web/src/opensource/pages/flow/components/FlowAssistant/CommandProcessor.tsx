@@ -52,7 +52,7 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 		commandExecutionRef.current = true
 		const command = pendingCommands[0]
 
-		// 更新命令执行状态
+		// Update command execution status
 		onCommandUpdate(messageId, [
 			{
 				type: command.type,
@@ -65,13 +65,13 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 		])
 
 		try {
-			// 执行命令
+			// Execute command
 			await executeOperations([command], flowId)
 
-			// 从队列中移除已执行的命令
+			// Remove executed command from queue
 			setPendingCommands((prev) => prev.slice(1))
 
-			// 更新命令完成状态
+			// Update command completion status
 			onCommandUpdate(messageId, [
 				{
 					type: command.type,
@@ -83,7 +83,7 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 				},
 			])
 
-			// 命令Process完成
+			// Command process completed
 			isProcessingRef.current = false
 
 			// Execute the next command (use a short delay to ensure UI updates)
@@ -93,7 +93,7 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 		} catch (error) {
 			console.error(`Error executing command: ${command.type}`, error)
 
-			// 更新命令错误状态
+			// Update command error status
 			const errorMessage = error instanceof Error ? error.message : String(error)
 			onCommandUpdate(messageId, [
 				{
@@ -106,20 +106,20 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 				},
 			])
 
-			// 从队列中移除失败的命令
+			// Remove failed command from queue
 			setPendingCommands((prev) => prev.slice(1))
 
-			// 命令Process完成
+			// Command process completed
 			isProcessingRef.current = false
 
-			// 继续执行下一个命令
+			// Continue executing next command
 			setTimeout(() => {
 				executeNextCommand()
 			}, 100)
 		}
 	})
 
-	// 当有命令但没有正在执行的命令时，启动执行
+	// When there is a command but no executing command, start execution
 	useEffect(() => {
 		const shouldStartExecution =
 			pendingCommands.length > 0 && !commandExecutionRef.current && !isProcessingRef.current
@@ -129,7 +129,7 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 		}
 	}, [pendingCommands, executeNextCommand, commandExecutionRef])
 
-	return null // 这是一个逻辑组件，不渲染UI
+	return null // This is a logical component, does not render UI
 }
 
 export default CommandProcessor

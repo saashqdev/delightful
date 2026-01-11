@@ -10,7 +10,7 @@ import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/Delightfu
 interface UseFlowOperationsProps {
 	flowInteractionRef: React.MutableRefObject<any>
 	saveDraft: () => Promise<void>
-	flowService: any // 可以根据实际类型调整
+	flowService: any // Can be adjusted according to actual type
 }
 
 export default function useFlowOperations({
@@ -20,7 +20,7 @@ export default function useFlowOperations({
 }: UseFlowOperationsProps) {
 	const { t } = useTranslation()
 	const commandExecutionRef = useRef<boolean>(false)
-	// 用于存储已执行过的commandId
+	// Used to store executed commandId
 	const executedCommandsRef = useRef<Set<string>>(new Set())
 
 	// 定位到节点

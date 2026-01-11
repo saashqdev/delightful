@@ -25,10 +25,10 @@ export default function useLLMParameters() {
 	const parameterList = useMemo(() => {
 		return [
 			// {
-			// 	label: "温度",
+			// 	label: "Temperature",
 			// 	key: "temperature",
 			// 	tooltips:
-			// 		"温度控制随机性。较低的温度会导致较少的随机完成。随着温度接近零，模型将变得Confirm性和重复性。较高的温度会导致更多的随机完成。",
+			// 		"Temperature控制随机性。较低的Temperature会导致较少的随机完成。随着Temperature接近零，Model becomesConfirmand repeatability。较高的Temperature会导致更多的随机完成。",
 			// 	open: true,
 			// 	defaultValue: 0.7,
 			// 	extra: {
@@ -40,7 +40,7 @@ export default function useLLMParameters() {
 			// {
 			// 	label: "Top P",
 			// 	key: "top_p",
-			// 	tooltips: "通过核心采样控制多样性：0.5表示考虑了一半的所有可能性加权选项。",
+			// 	tooltips: "Control diversity through nucleus sampling：0.5indicates half of all possible weighted options are considered。",
 			// 	open: false,
 			// 	defaultValue: 1,
 			// 	extra: {
@@ -50,7 +50,7 @@ export default function useLLMParameters() {
 			// 	},
 			// },
 			// {
-			// 	label: "存在惩罚",
+			// 	label: "Presence penalty",
 			// 	key: "exist_penalty",
 			// 	tooltips: "对文本中已有的标记的对数概率施加惩罚。",
 			// 	open: false,
@@ -94,4 +94,5 @@ export default function useLLMParameters() {
 		autoMemory,
 	}
 }
+
 

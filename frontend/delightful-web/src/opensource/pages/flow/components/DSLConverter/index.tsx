@@ -9,7 +9,7 @@ const { TextArea } = Input
 const { Text, Title } = Typography
 const { TabPane } = Tabs
 
-// 使用antd-style创建样式
+// Create styles using antd-style
 const useStyles = createStyles(({ css }) => ({
 	dslConverter: css`
 		padding: 20px;
@@ -53,8 +53,8 @@ const useStyles = createStyles(({ css }) => ({
 }))
 
 /**
- * DSL转换器组件
- * 提供DSL和JSON之间互相转换的UI界面
+ * DSL Converter Component
+ * Provides a UI interface for converting between DSL and JSON formats
  */
 const DSLConverter: React.FC = () => {
 	const { styles } = useStyles()
@@ -64,7 +64,7 @@ const DSLConverter: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
 	const [activeTab, setActiveTab] = useState<string>("converter")
 
-	// 文件上传处理
+	// File upload handler
 	const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
 		if (!file) return
@@ -77,10 +77,10 @@ const DSLConverter: React.FC = () => {
 		reader.readAsText(file)
 	}
 
-	// 下载结果
+	// Download result
 	const handleDownload = () => {
 		if (!resultText) {
-			message.warning("没有可下载的内容")
+			message.warning("No content available to download")
 			return
 		}
 
@@ -94,10 +94,10 @@ const DSLConverter: React.FC = () => {
 		document.body.removeChild(element)
 	}
 
-	// 执行转换
+	// Execute conversion
 	const handleConvert = () => {
 		if (!sourceText) {
-			message.warning("请输入需要转换的内容")
+			message.warning("Please input content to convert")
 			return
 		}
 
@@ -118,19 +118,19 @@ const DSLConverter: React.FC = () => {
 
 			if (result) {
 				setResultText(result)
-				message.success("转换成功")
+				message.success("Conversion successful")
 			} else {
-				message.error("转换失败")
+				message.error("Conversion failed")
 			}
 		} catch (error) {
-			console.error("转换错误:", error)
-			message.error(`转换失败: ${error instanceof Error ? error.message : String(error)}`)
+			console.error("Conversion error:", error)
+			message.error(`Conversion failed: ${error instanceof Error ? error.message : String(error)}`)
 		} finally {
 			setLoading(false)
 		}
 	}
 
-	// 清空内容
+	// Clear content
 	const handleClear = () => {
 		setSourceText("")
 		setResultText("")
@@ -139,18 +139,18 @@ const DSLConverter: React.FC = () => {
 	return (
 		<div className={styles.dslConverter}>
 			<Tabs activeKey={activeTab} onChange={setActiveTab}>
-				<TabPane tab="DSL转换器" key="converter">
+				<TabPane tab="DSL Converter" key="converter">
 					<Card>
-						<Title level={4}>DSL和JSON格式互转</Title>
-						<Text>将YAML工作流DSL格式和Flow JSON格式互相转换</Text>
+						<Title level={4}>DSL and JSON Format Conversion</Title>
+						<Text>Convert between YAML workflow DSL format and Flow JSON format</Text>
 
 						<div className={styles.conversionTypeSelector}>
 							<Select
 								value={conversionType}
 								onChange={setConversionType}
 								options={[
-									{ value: "dsl2json", label: "DSL转JSON" },
-									{ value: "json2dsl", label: "JSON转DSL" },
+								{ value: "dsl2json", label: "DSL to JSON" },
+								{ value: "json2dsl", label: "JSON to DSL" },
 								]}
 								style={{ width: 200 }}
 							/>
@@ -158,14 +158,14 @@ const DSLConverter: React.FC = () => {
 
 						<div className={styles.converterContainer}>
 							<div className={styles.sourceContainer}>
-								<Card title="源文件" bordered={false}>
+								<Card title="Source File" bordered={false}>
 									<TextArea
 										value={sourceText}
 										onChange={(e) => setSourceText(e.target.value)}
 										placeholder={
 											conversionType === "dsl2json"
-												? "请输入YAML格式的DSL"
-												: "请输入JSON格式的Flow"
+											? "Please enter YAML format DSL"
+											: "Please enter JSON format Flow"
 										}
 										rows={20}
 									/>
@@ -187,9 +187,9 @@ const DSLConverter: React.FC = () => {
 													document.getElementById("file-upload")?.click()
 												}
 											>
-												上传文件
+												Upload File
 											</Button>
-											<Button onClick={handleClear}>清空</Button>
+											<Button onClick={handleClear}>Clear</Button>
 										</Space>
 									</div>
 								</Card>
@@ -202,12 +202,12 @@ const DSLConverter: React.FC = () => {
 									onClick={handleConvert}
 									loading={loading}
 								>
-									转换
+									Convert
 								</Button>
 							</div>
 
 							<div className={styles.resultContainer}>
-								<Card title="转换结果" bordered={false}>
+								<Card title="Conversion Result" bordered={false}>
 									<Spin spinning={loading}>
 										<TextArea value={resultText} readOnly rows={20} />
 									</Spin>
@@ -217,7 +217,7 @@ const DSLConverter: React.FC = () => {
 											onClick={handleDownload}
 											disabled={!resultText}
 										>
-											下载
+											Download
 										</Button>
 									</div>
 								</Card>
@@ -226,35 +226,35 @@ const DSLConverter: React.FC = () => {
 					</Card>
 				</TabPane>
 
-				<TabPane tab="帮助文档" key="help">
+				<TabPane tab="Help Documentation" key="help">
 					<Card>
-						<Title level={4}>DSL转换器使用说明</Title>
-						<Title level={5}>DSL转JSON</Title>
+						<Title level={4}>DSL Converter Usage Guide</Title>
+						<Title level={5}>DSL to JSON</Title>
 						<Text>
-							将YAML格式的工作流DSL(YAML格式)转换为Flow格式的JSON。
+							Convert YAML format workflow DSL (YAML format) to Flow format JSON.
 							<ul>
-								<li>在源文件区域粘贴YAML格式的DSL内容，或者上传YAML文件</li>
-								<li>点击&quot;转换&quot;按钮执行转换</li>
-								<li>转换完成后，可以下载结果或复制结果</li>
+								<li>Paste YAML format DSL content in the source file area, or upload a YAML file</li>
+								<li>Click the &quot;Convert&quot; button to execute the conversion</li>
+								<li>After conversion is complete, you can download the result or copy the result</li>
 							</ul>
 						</Text>
 
-						<Title level={5}>JSON转DSL</Title>
+						<Title level={5}>JSON to DSL</Title>
 						<Text>
-							将Flow格式的JSON转换为YAML格式的工作流DSL(YAML格式)。
+							Convert Flow format JSON to YAML format workflow DSL (YAML format).
 							<ul>
-								<li>在源文件区域粘贴JSON格式的Flow内容，或者上传JSON文件</li>
-								<li>点击&quot;转换&quot;按钮执行转换</li>
-								<li>转换完成后，可以下载结果或复制结果</li>
+								<li>Paste JSON format Flow content in the source file area, or upload a JSON file</li>
+								<li>Click the &quot;Convert&quot; button to execute the conversion</li>
+								<li>After conversion is complete, you can download the result or copy the result</li>
 							</ul>
 						</Text>
 
-						<Title level={5}>注意事项</Title>
+						<Title level={5}>Precautions</Title>
 						<Text>
 							<ul>
-								<li>转换过程中可能会丢失一些特定于某种格式的信息</li>
-								<li>不是所有的节点类型都能完美转换，可能需要手动调整</li>
-								<li>如果转换失败，请检查源文件格式是否正确</li>
+								<li>Some information specific to a certain format may be lost during the conversion process</li>
+								<li>Not all node types can be converted perfectly, manual adjustment may be needed</li>
+								<li>If the conversion fails, please check if the source file format is correct</li>
 							</ul>
 						</Text>
 					</Card>

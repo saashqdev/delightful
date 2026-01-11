@@ -46,7 +46,7 @@ export default function McpToolSelect({
 								onAddTool={async (tool) => {
 									addFn(tool)
 
-									// 更新inputOutput的map
+									// Update inputOutput map
 									const response = await FlowApi.getAvailableTools([tool.tool_id])
 									if (response.list.length > 0) {
 										const targetTool = response.list[0]

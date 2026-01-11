@@ -1,5 +1,5 @@
 /**
- * 是否开启超分的Switch
+ * Switch for enabling super-resolution
  */
 
 import { Flex, Switch } from "antd"

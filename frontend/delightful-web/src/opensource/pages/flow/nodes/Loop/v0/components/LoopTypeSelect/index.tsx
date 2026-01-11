@@ -5,11 +5,11 @@ import styles from "./index.module.less"
 
 // eslint-disable-next-line react-refresh/only-export-components
 export enum LoopTypes {
-	// 计数
+	// Count
 	Count = "count",
-	// 循环数组
+	// Loop array
 	Array = "array",
-	// 设置终止条件
+	// Set termination condition
 	Condition = "condition",
 }
 

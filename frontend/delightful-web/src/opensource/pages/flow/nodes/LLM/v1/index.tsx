@@ -53,17 +53,17 @@ export default function LLMV1() {
 		} else if (changeValues.option_tools) {
 			handleToolsChanged(changeValues)
 		} else if (changeValues.knowledge_config) {
-			// 检查是否仅变更了knowledge_type
+			// Check if only knowledge_type changed
 			const [isOnlyTypeChange, typeChangeIndex] = isOnlyKnowledgeTypeChange(changeValues)
 			if (isOnlyTypeChange && typeChangeIndex !== undefined) {
-				// 只有knowledge_type变化，重置对应的knowledge_code
-				// 延迟执行以避免与当前更新冲突
+				// Only knowledge_type changed; reset the corresponding knowledge_code
+				// Delay execution to avoid conflicts with current updates
 				form.setFieldValue(
 					["knowledge_config", "knowledge_list", typeChangeIndex, "knowledge_code"],
 					"",
 				)
 			}
-			// 继续执行原有的知识库变更处理
+			// Continue with the original knowledge change handling
 			knowledgeValueChangeHandler()
 		} else {
 			Object.entries(changeValues).forEach(([changeKey, changeValue]) => {

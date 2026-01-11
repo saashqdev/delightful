@@ -1,7 +1,7 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-67653d93d2bd61-28133626",
 	debug: false,
-	name: "创建群聊",
+	name: "Create Group Chat",
 	description: "",
 	node_type: 54,
 	node_version: "latest",

@@ -19,7 +19,7 @@ export default function UserKnowledgeSelect({
 }: UserKnowledgeSelectProps) {
 	const { t } = useTranslation("flow")
 
-	// 用户自建知识库（向量知识库）选择变化
+	// Handle changes for user-created knowledge base (vector database)
 	const handleChange = useMemoizedFn((knowledge_code: string) => {
 		const targetOption = options.find((item) => item.knowledge_code === knowledge_code)
 		if (targetOption) {

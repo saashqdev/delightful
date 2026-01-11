@@ -24,7 +24,7 @@ export default function GroupItem({ field, fieldKey, type }: GroupItemProps) {
 				_properties = field?.items?.properties
 			}
 		}
-		// 如果折叠，则置空
+		// If collapsed, set to empty
 		if (!isDisplay) {
 			_properties = {}
 		}

@@ -1,26 +1,26 @@
 export enum TriggerType {
-	// 发送新消息时
+	// When a new message is sent
 	Message = 1,
-	// 聊天窗口打开时
+	// When chat window opens
 	NewChat = 2,
-	// 定时触发
+	// Time trigger
 	TimeTrigger = 3,
-	// 参数调用
+	// Parameter invocation
 	Arguments = 4,
-	// 循环起始
+	// Loop start
 	LoopStart = 5,
-	// 添加为好友时
+	// When added as friend
 	NewFriends = 7,
 }
 
-// 触发类型选项
+// Trigger type options
 export const TriggerTypeOptions = [
 	{
-		label: "发送新消息时",
+		label: "When a new message is sent",
 		value: TriggerType.Message,
 	},
 	{
-		label: "聊天窗口打开时",
+		label: "When chat window opens",
 		value: TriggerType.NewChat,
 	},
 ]

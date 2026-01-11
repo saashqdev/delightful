@@ -1,5 +1,5 @@
 /**
- * 表达式组件的自定义渲染属性
+ * Custom render properties for expression components
  */
 
 import { useMemoizedFn } from "ahooks"

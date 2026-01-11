@@ -1,25 +1,25 @@
 import { generateSnowFlake } from "@/opensource/pages/flow/utils/helpers"
 
 export enum ImageModel {
-	// MJ 模型
+	// MJ model
 	Midjourney = "midjourney",
-	// MJ Fast 模型
+	// MJ Fast model
 	MidjourneyFast = "midjourney-fast",
-	// MJ Relax 模型
+	// MJ Relax model
 	MidjourneyRelax = "midjourney-relax",
-	// MJ Turbo 模型
+	// MJ Turbo model
 	MidjourneyTurbo = "midjourney-turbo",
-	// Flux1 Dev模型
+	// Flux1 Dev model
 	Flux1Dev = "flux1-dev",
-	// Flux1 Schnell 模型
+	// Flux1 Schnell model
 	Flux1Schnell = "flux1-schnell",
-	// Flux1 Pro 模型
+	// Flux1 Pro model
 	Flux1Pro = "flux1-pro",
-	// 火山
+	// Volcengine
 	Volcengine = "volcengine",
 }
 
-// mj模式下的可选项
+// Options for MJ mode
 export const mjRatioOptions = [
 	{
 		label: "1:1",
@@ -52,7 +52,7 @@ export const mjRatioOptions = [
 	},
 ]
 
-// 火山模式下的可选项
+// Options for Volcengine mode
 export const voRatioOptions = [
 	{
 		label: "1:1",
@@ -92,9 +92,9 @@ export const voRatioOptions = [
 	},
 
 	{
-		label: "自定义",
+		label: "Custom",
 		id: "custom",
-		suffixText: "宽高最大512",
+		suffixText: "Max width/height 512",
 	},
 ]
 
@@ -149,7 +149,7 @@ export const getDefaultSelfDefineRatio = () => {
 					names_value: [
 						{
 							id: "custom",
-							name: "自定义",
+							name: "Custom",
 						},
 					],
 					value: "",

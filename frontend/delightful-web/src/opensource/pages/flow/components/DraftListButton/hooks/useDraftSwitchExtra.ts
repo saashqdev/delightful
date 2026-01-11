@@ -1,5 +1,5 @@
 /**
- * 切换草稿的额外操作
+ * Extra operations for switching drafts
  */
 
 import { getCurrentDateTimeString } from "@/opensource/pages/flow/utils/helpers"
@@ -24,7 +24,7 @@ export default function useDraftSwitchExtra({ flow, initDraftList }: UseDraftSwi
 		// if(!isRollback) return
 
 		const requestParams = {
-			name: `${flow?.name}_草稿${getCurrentDateTimeString()}`,
+			name: `${flow?.name}_Draft_${getCurrentDateTimeString()}`,
 			description: "",
 			delightful_flow: {
 				...draftDetail.delightful_flow,

@@ -1,6 +1,6 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-2632203f",
-	name: "循环体",
+	name: "Loop Body",
 	description: "",
 	node_type: 23,
 	meta: [],

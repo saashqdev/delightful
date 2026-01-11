@@ -30,7 +30,7 @@ export default function FragmentMenu({
 }: FragmentMenuProps) {
 	const { t } = useTranslation()
 
-	/** 删除片段 */
+	/** Delete fragment */
 	const deleteItem = useMemoizedFn(() => {
 		Modal.confirm({
 			centered: true,
@@ -46,7 +46,7 @@ export default function FragmentMenu({
 		})
 	})
 
-	/** 编辑片段 */
+	/** Edit fragment */
 	const editItem = useMemoizedFn(() => {
 		updateFragmentById(fragment.id)
 	})

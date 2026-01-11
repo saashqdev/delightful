@@ -11,8 +11,8 @@ describe.skip("Test yaml2json module", () => {
 			const yamlDSL = {
 				flow: {
 					id: "test-flow-id",
-					name: "测试流程",
-					description: "测试描述",
+					name: "Test Flow",
+					description: "Test Description",
 					version: "1.0.0",
 					type: "workflow",
 					icon: "test-icon",
@@ -75,7 +75,7 @@ describe.skip("Test yaml2json module", () => {
 					{
 						id: "node-1",
 						type: "start",
-						name: "开始节点",
+						name: "Start Node",
 						position: { x: 100, y: 100 },
 						params: {},
 						version: "v1",
@@ -84,7 +84,7 @@ describe.skip("Test yaml2json module", () => {
 					{
 						id: "node-2",
 						type: "llm",
-						name: "LLM节点",
+						name: "LLM Node",
 						position: { x: 200, y: 100 },
 						params: {
 							model: "gpt-4",
@@ -220,8 +220,8 @@ describe.skip("Test yaml2json module", () => {
 			const yamlString = `
 flow:
   id: test-flow-id
-  name: 测试流程
-  description: 测试描述
+  name: Test Flow
+  description: Test Description
   version: 1.0.0
   type: workflow
   icon: test-icon
@@ -256,8 +256,8 @@ edges: []
 			const yamlString = `
 flow:
   id: test-flow-id
-  name: 测试流程
-  description: 测试描述
+  name: Test Flow
+  description: Test Description
   version: 1.0.0
   type: workflow
 variables: []
@@ -280,10 +280,10 @@ edges: []
 		})
 	})
 
-	// 测试JSON->YAML->JSON循环转换
-	describe("转换循环测试", () => {
-		it("应能在JSON->YAML->JSON转换中保持数据完整性", () => {
-			// 创建测试数据
+	// Test JSON->YAML->JSON round-trip conversion
+	describe("Round-trip conversion tests", () => {
+		it("Should preserve data integrity in JSON->YAML->JSON conversion", () => {
+			// Create test data
 			const originalJson = {
 				id: "test-flow-id",
 				name: "Test flow",
@@ -305,7 +305,7 @@ edges: []
 						node_id: "node-1",
 						node_type: "1",
 						node_version: "v1",
-						name: "开始节点",
+					name: "Start Node",
 						position: { x: 100, y: 100 },
 						params: {},
 						meta: {},
@@ -319,7 +319,7 @@ edges: []
 						node_id: "node-2",
 						node_type: "2",
 						node_version: "v1",
-						name: "LLM节点",
+					name: "LLM Node",
 						position: { x: 200, y: 100 },
 						params: { model: "gpt-4" },
 						meta: {},
@@ -368,7 +368,7 @@ edges: []
 			expect(convertedJson.edges[0].source).toBe(originalJson.edges[0].source)
 			expect(convertedJson.edges[0].target).toBe(originalJson.edges[0].target)
 
-			// 检查全局变量
+			// Check global variable
 			expect(convertedJson.global_variable).toBeDefined()
 			expect(convertedJson.global_variable.variables[0].name).toBe(
 				originalJson.global_variable.variables[0].name,
@@ -400,7 +400,7 @@ edges: []
 			// YAML -> JSON
 			const convertedJson = yamlString2json(yamlString)
 
-			// 检查基本信息
+			// Check basic information
 			expect(convertedJson.id).toBe(smallJson.id)
 			expect(convertedJson.name).toBe(smallJson.name)
 			expect(convertedJson.description).toBe(smallJson.description)
@@ -423,12 +423,12 @@ edges: []
 			expect(convertedLLM.params.user_prompt).toBe(originalLLM.params.user_prompt)
 			expect(convertedLLM.params.system_prompt).toBe(originalLLM.params.system_prompt)
 
-			// 检查边
+			// Check edges
 			expect(convertedJson.edges.length).toBe(smallJson.edges.length)
 			expect(convertedJson.edges[0].source).toBe(smallJson.edges[0].source)
 			expect(convertedJson.edges[0].target).toBe(smallJson.edges[0].target)
 
-			// 检查全局变量
+			// Check global variable
 			if (smallJson.global_variable && convertedJson.global_variable) {
 				expect(convertedJson.global_variable.variables[0].name).toBe(
 					smallJson.global_variable.variables[0].name,

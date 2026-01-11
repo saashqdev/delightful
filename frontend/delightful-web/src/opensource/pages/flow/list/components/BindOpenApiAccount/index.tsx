@@ -83,7 +83,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 			try {
 				const ids = res.bindAccountIds
 				await FlowApi.bindOpenApiAccount(flowId, ids)
-				// 更新流程列表
+				// Update flow list
 				mutate(RequestUrl.getFlowList)
 				mutate(RequestUrl.getOpenApiAccountList)
 				onClose()

@@ -189,10 +189,10 @@ function AddOrUpdateFlow({
 				}
 
 				if (isUpdate) {
-					// 更新当前卡片及列表数据
+					// Update current card and list data
 					updateFlowOrTool(data, !!(isTools && groupId), !!(groupId && tool?.code))
 				} else {
-					// 列表新增数据
+					// Add new data to list
 					addNewFlow(data)
 				}
 				handleCancel()

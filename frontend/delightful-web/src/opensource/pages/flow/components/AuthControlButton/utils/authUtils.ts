@@ -2,13 +2,13 @@ import type { AuthMember } from "../types"
 import { OperationTypes } from "../types"
 
 /**
- * 判断当前用户是否可以编辑某个成员的权限
- * @param auth 要判断的成员
- * @param currentUserId 当前用户ID
- * @param currentUserAuth 当前用户权限
- * @param authList 当前权限列表
- * @param originalAuthList 原始权限列表
- * @returns 是否可以编辑
+ * Determine if the current user can edit a member's permissions
+ * @param auth Member to check
+ * @param currentUserId Current user ID
+ * @param currentUserAuth Current user's permission
+ * @param authList Current permission list
+ * @param originalAuthList Original permission list
+ * @returns Whether editing is allowed
  */
 export const canEditMemberAuth = (
 	auth: AuthMember,
@@ -16,48 +16,48 @@ export const canEditMemberAuth = (
 	currentUserAuth: OperationTypes | undefined,
 	originalAuthList: AuthMember[],
 ): boolean => {
-	// 当前用户不能编辑自己
+	// Current user cannot edit themselves
 	if (auth.target_id === currentUserId) {
 		return false
 	}
 
-	// 创建者可以编辑除自己以外的所有人
+	// Owner can edit everyone except themselves
 	if (currentUserAuth === OperationTypes.Owner) {
 		return auth.operation !== OperationTypes.Owner
 	}
 
-	// 管理员的特殊处理
+	// Special handling for admins
 	if (currentUserAuth === OperationTypes.Admin) {
-		// 不能编辑创建者
+		// Cannot edit owner
 		if (auth.operation === OperationTypes.Owner) {
 			return false
 		}
 
-		// 查找原始权限
+		// Find original permission
 		const originalAuth = originalAuthList.find((item) => item.target_id === auth.target_id)
 
-		// 如果原始权限是管理员，则不能编辑
+		// If original permission is admin, cannot edit
 		if (originalAuth?.operation === OperationTypes.Admin) {
 			return false
 		}
 
-		// 其他情况可以编辑
+		// Other cases can be edited
 		return auth.target_id !== currentUserId
 	}
 
-	// 其他权限不能编辑任何人
+	// Other permissions cannot edit anyone
 	return false
 }
 
 /**
- * 判断是否禁用选择框
- * @param member 要判断的成员
- * @param currentUserId 当前用户ID
- * @param currentUserAuth 当前用户权限
- * @param authList 当前权限列表
- * @param originalAuthList 原始权限列表
- * @param creator 创建者信息
- * @returns 是否禁用
+ * Determine whether to disable the select box
+ * @param member Member to check
+ * @param currentUserId Current user ID
+ * @param currentUserAuth Current user's permission
+ * @param authList Current permission list
+ * @param originalAuthList Original permission list
+ * @param creator Creator info
+ * @returns Whether to disable
  */
 export const isDisabled = (
 	member: AuthMember,
@@ -66,46 +66,46 @@ export const isDisabled = (
 	originalAuthList: AuthMember[],
 	creator: AuthMember | undefined,
 ): boolean => {
-	// 当前用户永远禁用
+	// Current user is always disabled
 	if (member.target_id === currentUserId) {
 		return true
 	}
 
-	// 创建者永远禁用
+	// Creator is always disabled
 	if (member.target_id === creator?.target_id) {
 		return true
 	}
 
-	// 当前用户是管理员时的特殊处理
+	// Special handling when current user is admin
 	if (currentUserAuth === OperationTypes.Admin) {
-		// 查找原始权限
+		// Find original permission
 		const originalAuth = originalAuthList.find((item) => item.target_id === member.target_id)
 
-		// 如果原始权限是创建者，则禁用
+		// If original permission is owner, disable
 		if (originalAuth?.operation === OperationTypes.Owner) {
 			return true
 		}
 
-		// 如果原始权限是管理员，则禁用
+		// If original permission is admin, disable
 		if (originalAuth?.operation === OperationTypes.Admin) {
 			return true
 		}
 
-		// 其他情况不禁用，允许管理员添加/修改普通用户的权限
+		// Other cases are not disabled, allow admin to add/modify regular users' permissions
 		return false
 	}
 
-	// 当前用户是创建者时，可以管理除自己以外的所有人
+	// When current user is creator, can manage everyone except themselves
 	return false
 }
 
 /**
- * 获取禁用的成员ID列表（用于组织架构面板）
- * @param authList 当前权限列表
- * @param originalAuthList 原始权限列表
- * @param currentUserId 当前用户ID
- * @param currentUserAuth 当前用户权限
- * @returns 禁用的成员ID列表
+ * Get disabled member ID list (for organization panel)
+ * @param authList Current permission list
+ * @param originalAuthList Original permission list
+ * @param currentUserId Current user ID
+ * @param currentUserAuth Current user's permission
+ * @returns List of disabled member IDs
  */
 export const getDisabledMemberIds = (
 	originalAuthList: AuthMember[],
@@ -114,26 +114,26 @@ export const getDisabledMemberIds = (
 ): { id: string; dataType: string }[] => {
 	return originalAuthList
 		.filter((item) => {
-			// 创建者不能被禁用
+			// Creator cannot be disabled
 			if (item.operation === OperationTypes.Owner) {
 				return true
 			}
 
-			// 如果当前用户是创建者，只有自己不能被禁用
+			// If current user is creator, only themselves cannot be disabled
 			if (currentUserAuth === OperationTypes.Owner) {
 				return item.target_id === currentUserId
 			}
 
-			// 如果当前用户是管理员，则创建者、原始管理员和自己都不能被禁用
+			// If current user is admin, creator, original admins and themselves cannot be disabled
 			if (currentUserAuth === OperationTypes.Admin) {
 				return item.operation === OperationTypes.Admin || item.target_id === currentUserId
 			}
 
-			// 其他情况，所有管理员和创建者都不能被禁用
+			// Other cases, all admins and creators cannot be disabled
 			return item.operation === OperationTypes.Admin
 		})
 		.map((item) => ({
 			id: item.target_id,
-			dataType: "user", // 这里可能需要根据实际情况调整
+			dataType: "user", // This may need adjustment based on actual situation
 		}))
 }

@@ -23,11 +23,11 @@ import {
 import CustomRepeat from "./components/CustomRepeat"
 import type { TimeTriggerParams } from "./types"
 
-// 扩展 dayjs 插件
+// Extend dayjs plugin
 dayjs.extend(weekday)
 dayjs.extend(localeData)
 
-// 定义分支的接口
+// Define branch interface
 interface Branch {
 	branch_id: string
 	config?: Partial<TimeTriggerParams>
@@ -66,7 +66,7 @@ const DayOption = ({ value, type, options, onChange }: DateOptionsProps) => {
 }
 
 type TimeTriggeredProps = {
-	// 分支id
+	// Branch id
 	branchId: string
 }
 
@@ -167,15 +167,15 @@ const TimeTrigger = ({ branchId }: TimeTriggeredProps) => {
 	})
 
 	const getTransformBranch = useMemoizedFn((sourceBranch) => {
-		// 检查time值是否有效
+		// Check if time value is valid
 		const timeValue = sourceBranch?.config?.time
 		let parsedTime
 
 		if (timeValue && typeof timeValue === "string" && /^\d{2}:\d{2}$/.test(timeValue)) {
-			// 如果是有效的HH:mm格式
+			// If valid HH:mm format
 			parsedTime = dayjs(`2000-01-01 ${timeValue}`)
 		} else {
-			// 默认时间
+			// Default time
 			parsedTime = dayjs().startOf("day")
 		}
 

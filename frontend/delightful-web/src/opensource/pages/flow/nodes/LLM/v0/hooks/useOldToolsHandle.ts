@@ -8,11 +8,11 @@ import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/
 import { genDefaultComponent } from "@/opensource/pages/flow/utils/helpers"
 
 /**
- * 针对旧工具的处理
+ * Handling logic for legacy tools
  */
 export default function useOldToolsHandleV0() {
 	const { currentNode } = useCurrentNode()
-	// 获取所有可用的工具集
+	// Get all available toolsets
 	const { useableToolSets } = useFlowStore()
 
 	const findTargetToolSetByToolId = useMemoizedFn((toolId: string) => {
@@ -21,13 +21,13 @@ export default function useOldToolsHandleV0() {
 		}) as UseableToolSet.Item
 	})
 
-	// 兼容旧数据处理方法
+	// Compatibility handling for legacy data
 	const handleOldTools = useMemoizedFn(
 		(params: Record<string, any>, oldKey = "tools", newKey = "option_tools") => {
 			const cloneParams = cloneDeep(params)
 			const oldTools = cloneParams?.[oldKey] || []
 			const newTools = cloneParams[newKey] || []
-			// 如果新工具列表为空，且旧工具列表不为空，则取旧工具列表的值作为新工具列表的值
+			// If new tool list is empty and old list is not, use old list values as the new list
 			if (newTools?.length === 0 && oldTools?.length > 0) {
 				cloneParams[newKey] = cloneParams?.[oldKey]?.map(
 					(tool: string | ToolSelectedItem) => {

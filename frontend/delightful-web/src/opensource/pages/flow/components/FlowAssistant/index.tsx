@@ -567,8 +567,7 @@ export default function FlowAssistant({
 
 		// 将命令添加到队列
 		setCommandQueue((prev) => {
-			// 过滤掉重复的命令（基于类型和其他关键属性）
-			const newCommands = commands.filter(
+			// Filter out duplicate commands (based on type and other key properties)
 				(newCmd) =>
 					!prev.some(
 						(existing) =>

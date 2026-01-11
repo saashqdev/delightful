@@ -1,6 +1,6 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-66a1b6003116b2-51012040",
-	name: "历史消息存储",
+	name: "Message History Storage",
 	description: "",
 	node_type: 20,
 	meta: [],

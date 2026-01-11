@@ -45,7 +45,7 @@ export default function HTTPNodeV1() {
 		currentNode?.output?.form?.structure,
 	)
 
-	// 上游同步下游
+	// Sync downstream from upstream
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		if (!currentNode?.system_output) {
@@ -61,7 +61,7 @@ export default function HTTPNodeV1() {
 		if (currentNode?.output?.form?.structure) setOutput(currentNode?.output?.form?.structure)
 	}, [currentNode])
 
-	// 下游同步上游
+	// Sync upstream from downstream
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		// @ts-ignore

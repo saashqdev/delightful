@@ -14,7 +14,7 @@ type AuthListProps = {
 export default function useAuthList({ extraConfig, type }: AuthListProps) {
 	// 当前已授权的列表
 	const [authList, setAuthList] = useState([] as AuthMember[])
-	// 原始的授权列表（用来做比对）
+	// Original authorized list (used for comparison)
 	const [originalAuthList, setOriginalAuthList] = useState<AuthMember[]>(authList || [])
 
 	// 新增授权成员

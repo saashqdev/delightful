@@ -7,21 +7,21 @@ import { generateSnowFlake } from "@/opensource/pages/flow/utils/helpers"
 import styles from "./Text2Image.module.less"
 
 export enum ImageModel {
-	// MJ 模型
+	// MJ model
 	Midjourney = "Midjourney",
-	// MJ Fast 模型
+	// MJ Fast model
 	MidjourneyFast = "Midjourney-Fast",
-	// MJ Relax 模型
+	// MJ Relax model
 	MidjourneyRelax = "Midjourney-Relax",
-	// MJ Turbo 模型
+	// MJ Turbo model
 	MidjourneyTurbo = "Midjourney-Turbo",
-	// Flux1 Dev模型
+	// Flux1 Dev model
 	Flux1Dev = "Flux1-Dev",
-	// Flux1 Schnell 模型
+	// Flux1 Schnell model
 	Flux1Schnell = "Flux1-Schnell",
-	// Flux1 Pro 模型
+	// Flux1 Pro model
 	Flux1Pro = "Flux1-Pro",
-	// 火山
+	// Volcengine
 	Volcengine = "Volcengine",
 }
 
@@ -92,7 +92,7 @@ export const ImageModelOptions = [
 	},
 ]
 
-// mj模式下的可选项
+// Options for MJ mode
 export const mjRatioOptions = [
 	{
 		label: "1:1",
@@ -125,7 +125,7 @@ export const mjRatioOptions = [
 	},
 ]
 
-// 火山模式下的可选项
+// Options for Volcengine mode
 export const voRatioOptions = [
 	{
 		label: "1:1",

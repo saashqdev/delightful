@@ -1,35 +1,35 @@
-# 聊天界面面板尺寸算法优化
+# Chat Interface Panel Size Algorithm Optimization
 
-## 概述
+## Overview
 
-本次优化重构了聊天界面的面板尺寸计算逻辑，提高了代码的可维护性、可读性和测试性。
+This optimization refactored the panel size calculation logic for the chat interface, improving code maintainability, readability, and testability.
 
-## 优化前的问题
+## Problems Before Optimization
 
-### 1. 逻辑复杂度高
-- 多个条件分支散布在不同的地方
-- 复杂的嵌套逻辑难以理解
-- 状态更新逻辑混乱
+### 1. High Logical Complexity
+- Multiple conditional branches scattered across different locations
+- Complex nested logic that's difficult to understand
+- Chaotic state update logic
 
-### 2. 重复计算
-- 相同的计算逻辑在多个地方重复
-- 缺乏复用性
+### 2. Repeated Calculations
+- Same calculation logic repeated in multiple places
+- Lack of reusability
 
-### 3. 魔法数字
-- 硬编码的数字（600, 400, 0.6, 0.4等）
-- 缺乏语义化的常量定义
+### 3. Magic Numbers
+- Hardcoded numbers (600, 400, 0.6, 0.4, etc.)
+- Lack of semantic constant definitions
 
-### 4. 可读性差
-- 变量命名不够清晰
-- 缺乏注释和文档
+### 4. Poor Readability
+- Variable naming not clear enough
+- Lack of comments and documentation
 
-### 5. 难以测试
-- 逻辑分散，单元测试困难
-- 缺乏边界条件的验证
+### 5. Difficult to Test
+- Scattered logic, difficult to unit test
+- Lack of boundary condition verification
 
-## 优化内容
+## Optimization Content
 
-### 1. 提取常量
+### 1. Extract Constants
 ```typescript
 const LAYOUT_CONSTANTS = {
 	MAIN_MIN_WIDTH_WITH_TOPIC: 600,
@@ -49,67 +49,67 @@ const enum PanelIndex {
 }
 ```
 
-### 3. 函数式工具集
-创建了 `calculatePanelSizes` 工具集，包含以下纯函数：
+### 3. Functional Utility Set
+Created the `calculatePanelSizes` utility set containing the following pure functions:
 
-- `getMainMinWidth()` - 计算主面板最小宽度
-- `getTwoPanelSizes()` - 计算两面板布局
-- `getThreePanelSizes()` - 计算三面板布局
-- `getFilePreviewOpenSizes()` - 计算文件预览打开时的默认布局
-- `handleSiderResize()` - 处理侧边栏调整时的尺寸重计算
+- `getMainMinWidth()` - Calculate minimum width of main panel
+- `getTwoPanelSizes()` - Calculate two-panel layout
+- `getThreePanelSizes()` - Calculate three-panel layout
+- `getFilePreviewOpenSizes()` - Calculate default layout when file preview is opened
+- `handleSiderResize()` - Handle size recalculation when sidebar is resized
 
-### 4. 简化状态管理
-- 将复杂的状态更新逻辑封装到纯函数中
-- 减少useEffect中的重复逻辑
-- 提高状态更新的可预测性
+### 4. Simplified State Management
+- Encapsulate complex state update logic into pure functions
+- Reduce redundant logic in useEffect
+- Improve predictability of state updates
 
-## 优化优势
+## Optimization Advantages
 
-### 1. 可维护性提升
-- **单一职责原则**：每个函数只负责一种计算逻辑
-- **函数式编程**：纯函数，无副作用，易于测试和推理
-- **常量化**：所有魔法数字都有语义化的常量名
+### 1. Improved Maintainability
+- **Single Responsibility Principle**: Each function is responsible for only one type of calculation logic
+- **Functional Programming**: Pure functions with no side effects, easy to test and reason about
+- **Constantization**: All magic numbers have semantic constant names
 
-### 2. 可读性提升
-- **清晰的函数命名**：函数名直接表达其功能
-- **逻辑分离**：不同的计算场景分别处理
-- **注释完善**：每个函数都有清晰的注释
+### 2. Improved Readability
+- **Clear Function Naming**: Function names directly express their functionality
+- **Logic Separation**: Different calculation scenarios handled separately
+- **Complete Comments**: Each function has clear comments
 
-### 3. 性能优化
-- **减少重复计算**：通过函数复用避免重复逻辑
-- **早期返回**：在不必要的情况下提前返回
-- **内存优化**：使用const枚举减少运行时开销
+### 3. Performance Optimization
+- **Reduced Redundant Calculations**: Avoid redundant logic through function reuse
+- **Early Returns**: Return early when unnecessary
+- **Memory Optimization**: Use const enums to reduce runtime overhead
 
-### 4. 测试覆盖率
-- **100%测试覆盖**：16个测试用例覆盖所有场景
-- **边界条件测试**：包含极端情况的测试
-- **集成测试**：验证完整的用户操作流程
+### 4. Test Coverage
+- **100% Test Coverage**: 16 test cases covering all scenarios
+- **Boundary Condition Testing**: Includes extreme case tests
+- **Integration Testing**: Verifies complete user operation workflows
 
-## 测试用例
+## Test Cases
 
-### 基础功能测试
-- ✅ 主面板最小宽度计算
-- ✅ 两面板尺寸计算
-- ✅ 三面板尺寸计算
-- ✅ 文件预览打开时的默认布局
+### Basic Functionality Tests
+- ✅ Main panel minimum width calculation
+- ✅ Two-panel size calculation
+- ✅ Three-panel size calculation
+- ✅ Default layout when file preview opens
 
-### 边界条件测试
-- ✅ 空间不足时的最小宽度保证
-- ✅ 极小总宽度的处理
-- ✅ 无效输入的处理
+### Boundary Condition Tests
+- ✅ Minimum width guarantee when space is insufficient
+- ✅ Handling of extremely small total width
+- ✅ Handling of invalid inputs
 
-### 集成场景测试
-- ✅ 完整的用户操作流程
-- ✅ 话题开关时的布局一致性
+### Integration Scenario Tests
+- ✅ Complete user operation workflow
+- ✅ Layout consistency when topic is toggled
 
-## 使用方法
+## Usage
 
-### 1. 计算主面板最小宽度
+### 1. Calculate Main Panel Minimum Width
 ```typescript
 const minWidth = calculatePanelSizes.getMainMinWidth(conversationStore.topicOpen)
 ```
 
-### 2. 初始化两面板布局
+### 2. Initialize Two-Panel Layout
 ```typescript
 const sizes = calculatePanelSizes.getTwoPanelSizes(
 	totalWidth.current, 
@@ -117,7 +117,7 @@ const sizes = calculatePanelSizes.getTwoPanelSizes(
 )
 ```
 
-### 3. 处理侧边栏调整
+### 3. Handle Sidebar Resize
 ```typescript
 setSizes((prevSizes) => 
 	calculatePanelSizes.handleSiderResize(
@@ -129,7 +129,7 @@ setSizes((prevSizes) =>
 )
 ```
 
-### 4. 处理文件预览打开
+### 4. Handle File Preview Opening
 ```typescript
 const threePanelSizes = calculatePanelSizes.getFilePreviewOpenSizes(
 	totalWidth.current,
@@ -137,33 +137,33 @@ const threePanelSizes = calculatePanelSizes.getFilePreviewOpenSizes(
 )
 ```
 
-## 扩展性
+## Extensibility
 
-### 添加新的布局模式
-1. 在 `LAYOUT_CONSTANTS` 中添加相关常量
-2. 在 `calculatePanelSizes` 中添加新的计算函数
-3. 编写对应的测试用例
+### Adding New Layout Modes
+1. Add related constants in `LAYOUT_CONSTANTS`
+2. Add new calculation functions in `calculatePanelSizes`
+3. Write corresponding test cases
 
-### 修改布局参数
-只需修改 `LAYOUT_CONSTANTS` 中的常量值即可，无需修改业务逻辑。
+### Modifying Layout Parameters
+Simply modify the constant values in `LAYOUT_CONSTANTS` without changing business logic.
 
-## 性能对比
+## Performance Comparison
 
-| 指标 | 优化前 | 优化后 | 改进 |
-|------|--------|--------|------|
-| 代码行数 | 38行 | 86行工具函数 + 22行业务逻辑 | 逻辑更清晰 |
-| 圈复杂度 | 高 | 低 | 每个函数职责单一 |
-| 测试覆盖率 | 0% | 100% | 完整的测试保护 |
-| 可维护性 | 困难 | 容易 | 纯函数易于理解和修改 |
-| Bug风险 | 高 | 低 | 充分的测试验证 |
+| Metric | Before Optimization | After Optimization | Improvement |
+|--------|---------------------|-------------------|-------------|
+| Lines of Code | 38 lines | 86 lines utility functions + 22 lines business logic | Clearer logic |
+| Cyclomatic Complexity | High | Low | Each function has single responsibility |
+| Test Coverage | 0% | 100% | Complete test protection |
+| Maintainability | Difficult | Easy | Pure functions easy to understand and modify |
+| Bug Risk | High | Low | Sufficient test verification |
 
-## 总结
+## Summary
 
-通过这次优化，我们将复杂的面板尺寸计算逻辑重构为可测试、可维护的纯函数集合。这不仅提高了代码质量，也为未来的功能扩展奠定了良好的基础。
+Through this optimization, we refactored the complex panel size calculation logic into a testable, maintainable set of pure functions. This not only improved code quality but also laid a solid foundation for future feature expansion.
 
-关键改进点：
-- ✅ 函数式编程，提高代码可预测性
-- ✅ 常量化魔法数字，提高可维护性  
-- ✅ 完整的测试覆盖，保证代码质量
-- ✅ 清晰的文档，降低维护成本
-- ✅ 良好的扩展性，支持未来需求变化 
+Key improvements:
+- ✅ Functional programming, improving code predictability
+- ✅ Constantizing magic numbers, improving maintainability
+- ✅ Complete test coverage, ensuring code quality
+- ✅ Clear documentation, reducing maintenance costs
+- ✅ Good extensibility, supporting future requirement changes 

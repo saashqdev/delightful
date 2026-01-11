@@ -3,6 +3,10 @@ export const v0Template = {
 		node_id: "DELIGHTFUL-FLOW-NODE-67453b2dd006a9-53329840",
 		debug: false,
 		name: "委托 AI 助理",
+		name: "Delegate AI Assistant",
+		// Delegate AI Assistant
+		// Release scope: 0 Personal, 1 Enterprise, 2 Marketplace
+		// Keeps behavior unchanged
 		description: "",
 		node_type: 50,
 		meta: [],
@@ -12,7 +16,7 @@ export const v0Template = {
 				robot_avatar: "",
 				robot_name: "",
 				robot_description: "",
-				release_scope: 0, // 0个人、1企业、2市场
+				release_scope: 0, // 0 Personal, 1 Enterprise, 2 Marketplace
 				updated_at: "",
 				created_at: "",
 			},

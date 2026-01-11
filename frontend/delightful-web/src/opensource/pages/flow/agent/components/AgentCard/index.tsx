@@ -107,7 +107,7 @@ function Card({ card, dropdownItems, onCardClick }: AgentCardProps) {
 						icon={<IconAlertCircleFilled size={12} color={colorScales.orange[5]} />}
 						className={cx(styles.tag, styles.orange)}
 					>
-						未发布至企业内部
+						Unpublished to Internal
 					</Tag>
 				)
 			case EntrepriseStatus.release:
@@ -116,11 +116,11 @@ function Card({ card, dropdownItems, onCardClick }: AgentCardProps) {
 						icon={<IconCircleCheckFilled size={12} />}
 						className={cx(styles.tag, styles.green)}
 					>
-						发布至企业内部
+						Published to Internal
 					</Tag>
 				)
 			default:
-				// return <Tag icon={<IconClockFilled size={12} color={token.delightfulColorUsages.primary.default} />} className={cx(styles.tag, styles.blue)}>企业内部审批中</Tag>
+				// return <Tag icon={<IconClockFilled size={12} color={token.delightfulColorUsages.primary.default} />} className={cx(styles.tag, styles.blue)}>Internal approval in progress</Tag>
 				break
 		}
 		return null

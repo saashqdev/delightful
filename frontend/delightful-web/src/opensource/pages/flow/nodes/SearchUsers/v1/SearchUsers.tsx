@@ -42,10 +42,10 @@ export default function SearchUsersV1() {
 	const onValuesChange = useMemoizedFn((changedValues, allValues) => {
 		if (!currentNode) return
 
-		// 使用深拷贝避免引用问题
+		// Use deep copy to avoid reference issues
 		const updatedParams = cloneDeep(allValues)
 
-		// 将节点参数更新为表单的最新值
+		// Update node parameters with latest form values
 		set(currentNode, ["params"], {
 			...currentNode.params,
 			...updatedParams,

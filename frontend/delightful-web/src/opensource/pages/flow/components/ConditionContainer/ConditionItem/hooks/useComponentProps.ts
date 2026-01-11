@@ -28,12 +28,12 @@ export default function useComponentProps({
 }: UseComponentProps) {
 	const [notSupportedFilterColumns] = useState(() => getNotSupportedFilterColumns())
 
-	// 当前使用的列类型，因为公式、查找引用最后是取它们值或者引用的类型
+	// Current column target type; formula and lookup ultimately use value or referenced type
 	const displayType = useMemo(() => {
 		return getColumnTargetType(sheetId, condition?.column_id, dataTemplate)
 	}, [condition?.column_id, dataTemplate, sheetId])
 
-	// 左侧的字段可选列表
+	// Left-side selectable field list
 	const leftColumnOptions = useMemo(() => {
 		const columnsOption = Object.keys(columns)
 			.filter((columnId) => {
@@ -48,7 +48,7 @@ export default function useComponentProps({
 			columnsOption.push({
 				columnId: ROW_ID_COLUMN_ID,
 				id: ROW_ID_COLUMN_ID,
-				label: "行记录ID",
+				label: "Row Record ID",
 				columnType: Schema.ROW_ID,
 				columnProps: {},
 			})
@@ -56,16 +56,16 @@ export default function useComponentProps({
 		return columnsOption
 	}, [columns, isSupportRowId, notSupportedFilterColumns])
 
-	/** 中间的条件可选列表 */
+	/** Center selectable condition list */
 	const centerConditionOptions = useMemo(() => {
 		const compareOption = AutomateFlowFieldGroup[displayType as Schema]?.conditions || []
 		return compareOption
 	}, [displayType])
 
-	/** 右侧表达式组件的动态属性 */
+	/** Dynamic props for right-side expression component */
 	const rightExpressionProps = useMemo(() => {
 		const column = columns[condition?.column_id] || {}
-		// 列原类型
+		// Original column type
 		const columnType = getColumnType(columns, condition?.column_id)
 		const valueOptions = getValueOptions({
 			columns,

@@ -1,7 +1,7 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6727162126f933-69547132",
 	debug: false,
-	name: "数据设置",
+	name: "Data Setter",
 	description: "",
 	node_type: 18,
 	meta: [],

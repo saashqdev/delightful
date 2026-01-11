@@ -1,5 +1,5 @@
 /**
- * 大模型知识库数据源hooks
+ * Large language model knowledge base data source hooks
  */
 
 import type { Knowledge } from "@/types/knowledge"
@@ -17,7 +17,7 @@ export default function useKnowledgeDatabases() {
 
 	const { currentNode } = useCurrentNode()
 
-	// 天书知识库
+	// Tiangshu knowledge base
 	const teamshareDatabaseOptions = useMemo(() => {
 		return useableTeamshareDatabase.map((item) => {
 			const hasSelected = currentNode?.params?.knowledge_config?.knowledge_list?.find?.(
@@ -32,7 +32,7 @@ export default function useKnowledgeDatabases() {
 		})
 	}, [currentNode, useableTeamshareDatabase])
 
-	// 用户自建知识库分页参数
+	// User-created knowledge base pagination parameters
 	const [userDbPagination, setUserDbPagination] = useState({
 		page: 1,
 		pageSize: 10,
@@ -54,7 +54,7 @@ export default function useKnowledgeDatabases() {
 		return { list, total }
 	})
 
-	// 用户自建知识库（向量知识库）
+	// User-created knowledge base (vector database)
 	const [userDatabaseOptions, setUserDatabaseOptions] = useState<any[]>([])
 
 	// 监听滚动加载更多
@@ -62,7 +62,7 @@ export default function useKnowledgeDatabases() {
 		// 获取滚动容器
 		const target = e.target
 
-		// 检测是否滚动到底部（考虑误差范围）
+		// Detect if scrolled to bottom (with tolerance)
 		const isBottom = target.scrollTop + target.clientHeight >= target.scrollHeight - 20
 
 		// 如果滚动到底部且有更多数据可加载且当前不在加载中

@@ -104,10 +104,10 @@ export default function PublishListButton({ isAgent, flow }: PublishListButtonPr
 	}, [styles.topDesc, styles.topTitle, t])
 
 	const groupPublishList = useMemo(() => {
-		// Step 1: 将 created_at 分解成 created_date 和 created_time 字段
+		// Step 1: Decompose created_at into created_date and created_time fields
 		const processedVersions = publishList.map((version) => {
 			const [created_date, created_time_full] = version.created_at.split(" ")
-			const created_time = created_time_full.slice(0, 5) // 获取 HH:mm 部分
+			const created_time = created_time_full.slice(0, 5) // Get HH:mm part
 			return {
 				...version,
 				created_date,
@@ -115,7 +115,7 @@ export default function PublishListButton({ isAgent, flow }: PublishListButtonPr
 			}
 		})
 
-		// Step 2: 根据 created_date 进行分组
+		// Step 2: Group by created_date
 		const groupedVersions = processedVersions.reduce((groups, version) => {
 			if (!groups[version.created_date]) {
 				groups[version.created_date] = []
@@ -125,10 +125,10 @@ export default function PublishListButton({ isAgent, flow }: PublishListButtonPr
 			return groups
 		}, {} as Record<string, FlowDraft.ListItem[]>)
 
-		// Step 3: 将分组结果转换为二维数组并根据 created_date 倒序排序
+		// Step 3: Convert grouped results to 2D array and sort by created_date in descending order
 		const sortedGroupedVersions = Object.keys(groupedVersions)
 			// @ts-ignore
-			.sort((a, b) => new Date(b) - new Date(a)) // 倒序排序
+			.sort((a, b) => new Date(b) - new Date(a)) // Descending sort
 			.map((date) => groupedVersions[date])
 
 		return sortedGroupedVersions

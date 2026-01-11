@@ -49,7 +49,7 @@ export default function DraftCardItem({
 					<Tooltip title={draft.name}>
 						<span className={styles.draftName}>
 							{draft.name}
-							{isActiveDraft ? `（${t("common.currentDraft", { ns: "flow" })}）` : ""}
+							{isActiveDraft ? `(${t("common.currentDraft", { ns: "flow" })})` : ""}
 						</span>
 					</Tooltip>
 				</Flex>
@@ -91,7 +91,7 @@ export default function DraftCardItem({
 						shape="circle"
 						src={draft?.modifier_info?.avatar || EmptyIcon}
 					/>
-					<span className={styles.name}>{draft?.modifier_info?.name || "未知用户"}</span>
+					<span className={styles.name}>{draft?.modifier_info?.name || "Unknown user"}</span>
 				</Flex>
 				<Flex>
 					<span>

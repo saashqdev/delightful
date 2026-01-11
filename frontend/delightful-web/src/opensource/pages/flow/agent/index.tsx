@@ -225,7 +225,7 @@ function AgentPage() {
 			<Flex align="center" justify="space-between" className={styles.top}>
 				<div className={styles.leftTitle}>{`${t("common.agent", {
 					ns: "flow",
-				})}（${total}）`}</div>
+				})}(${total})`}</div>
 				<Flex align="center" gap={6}>
 					<Select defaultValue="all" className={styles.select} options={selectOptions} />
 					<Input

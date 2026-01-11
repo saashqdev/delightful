@@ -32,7 +32,7 @@ export default function KnowledgeDataListV1({
 
 	const { limit, score } = usePanelConfig()
 
-	// 获取Form.List字段的值来判断是否有数据
+	// Get Form.List field values to determine if there is data
 	const knowledgeList = Form.useWatch(knowledgeListName) || []
 	const hasKnowledgeData = Array.isArray(knowledgeList) && knowledgeList.length > 0
 
@@ -47,7 +47,7 @@ export default function KnowledgeDataListV1({
 				height="auto"
 				// 移除suffixIcon，不再在headerRight显示添加按钮
 			>
-				{/* 添加按钮，使用与ToolSelect.tsx的addToolBtn相同的样式 */}
+				{/* Add button, using the same style as addToolBtn in ToolSelect.tsx */}
 				<div className={styles.knowledgeDataWrap}>
 					<Form.Item>
 						<Form.List name={knowledgeListName}>
@@ -114,7 +114,7 @@ export default function KnowledgeDataListV1({
 					</AntdFlex>
 				</div>
 
-				{/* 仅在有知识数据时显示配置项 */}
+			{/* Show config items only when there is knowledge data */}
 				{hasKnowledgeData && (
 					<>
 						<div className={styles.parameters}>

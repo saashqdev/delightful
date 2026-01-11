@@ -42,7 +42,7 @@ export default function HTTPNodeV0() {
 		currentNode?.output?.form?.structure,
 	)
 
-	// 上游同步下游
+	// Sync downstream from upstream
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		if (!currentNode?.system_output) {
@@ -58,7 +58,7 @@ export default function HTTPNodeV0() {
 		if (currentNode?.output?.form?.structure) setOutput(currentNode?.output?.form?.structure)
 	}, [currentNode])
 
-	// 下游同步上游
+	// Sync upstream from downstream
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		const currentNodeConfig = nodeConfig[currentNode?.node_id]

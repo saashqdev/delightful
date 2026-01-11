@@ -34,7 +34,7 @@ export default function Text2ImageV1() {
 	const { ratioRenderConfig, getRatioValue, hasRatio, hasSize, hasSr, tooltip, getSelectModel } =
 		useRatio()
 
-	// 将API返回的模型数据转换为Select组件需要的格式
+	// Convert API model data to Select component format
 	const dynamicModelOptions = useMemo(() => {
 		if (!visionModels || visionModels.length === 0) {
 			return []

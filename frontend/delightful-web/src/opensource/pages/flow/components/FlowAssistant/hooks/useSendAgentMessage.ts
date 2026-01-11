@@ -18,35 +18,35 @@ interface SendMessageResult {
 }
 
 /**
- * 封装发送消息到Agent的核心逻辑
+ * Encapsulate core logic for sending messages to Agent
  */
 export const useSendAgentMessage = () => {
 	const language = useGlobalLanguage(false)
 	/**
-	 * 发送消息到Agent并获取响应
+	 * Send message to Agent and get response
 	 */
 	const sendAgentMessage = useMemoizedFn(
 		async (content: string, options: SendMessageOptions): Promise<SendMessageResult> => {
-			// 默认结果
+			// Default result
 			const defaultResult: SendMessageResult = {
 				stream: null,
 				isError: false,
 			}
 
 			try {
-				// 构建发送给助手的消息
-				let message = `指令: ${content}`
+				// Build message to send to assistant
+				let message = `Instruction: ${content}`
 
-				// 仅在需要时包含流程数据
-				if (options.includeFlowData && options.getFetchFlowData) {
-					const flowYaml = options.getFetchFlowData()
-					message += `\n流程数据:\n${flowYaml}`
+			// Include flow data only when needed
+			if (options.includeFlowData && options.getFetchFlowData) {
+				const flowYaml = options.getFetchFlowData()
+				message += `\nFlow Data:\n${flowYaml}`
 				}
 
-				// 直接使用fetch API发送请求
+// Use fetch API directly to send request
 				const apiUrl = `${env("DELIGHTFUL_SERVICE_BASE_URL")}/api/v2/delightful/flows/built-chat`
 
-				// 针对 delightful API请求需要将组织 Code 换成 delightful 生态中的组织 Code，而非 teamshare 的组织 Code
+// For delightful API requests, the organization Code needs to be replaced with the organization Code in the delightful ecosystem, not the teamshare organization Code
 				const delightfulOrganizationCode = userStore.user.organizationCode
 
 				const headers = {
@@ -56,9 +56,9 @@ export const useSendAgentMessage = () => {
 					language,
 				}
 
-				console.log("发送Agent请求 headers:", headers)
+				console.log("Send Agent request headers:", headers)
 
-				// 发送请求
+				// Send request
 				const response = await fetch(apiUrl, {
 					method: "POST",
 					headers,
@@ -70,29 +70,29 @@ export const useSendAgentMessage = () => {
 					}),
 				})
 
-				// 记录响应信息
-				console.log("Agent响应对象:", response)
-				console.log("Agent响应状态:", response.status, response.statusText)
+				// Log response information
+				console.log("Agent response object:", response)
+				console.log("Agent response status:", response.status, response.statusText)
 
-				// 检查响应状态
-				if (!response.ok) {
-					console.error(`请求错误: ${response.status} ${response.statusText}`)
+// Check response status
+			if (!response.ok) {
+				console.error(`Request error: ${response.status} ${response.statusText}`)
 
-					// 尝试从响应中提取错误信息
-					let errorMessage = `服务器返回错误: ${response.status} ${response.statusText}`
+// Try to extract error message from response
+				let errorMessage = `Server returned error: ${response.status} ${response.statusText}`
 
 					if (response.body) {
 						try {
-							// 尝试读取错误信息
+							// Try to read error message
 							const reader = response.body.getReader()
 							const decoder = new TextDecoder("utf-8")
 							const { value } = await reader.read()
 
 							if (value) {
-								// 解码数据
+// Decode data
 								const errorContent = decoder.decode(value)
 
-								// 如果有错误内容，尝试解析它
+									// If there is error content, try to parse it
 								if (errorContent.trim()) {
 									try {
 										const errorData = JSON.parse(errorContent)
@@ -100,13 +100,13 @@ export const useSendAgentMessage = () => {
 											errorMessage = errorData.message
 										}
 									} catch (e) {
-										// 如果不是JSON格式，使用原始错误内容
+											// If not JSON format, use raw error content
 										errorMessage = errorContent
 									}
 								}
 							}
 						} catch (e) {
-							console.error("读取错误响应体失败:", e)
+							console.error("Failed to read error response body:", e)
 						}
 					}
 
@@ -114,42 +114,42 @@ export const useSendAgentMessage = () => {
 					return { ...defaultResult, isError: true, errorMessage }
 				}
 
-				// 检查是否是流式响应
+				// Check if it's a streaming response
 				if (
 					response.body &&
 					response.headers.get("content-type")?.includes("text/event-stream")
 				) {
-					// 返回流式响应
+					// Return streaming response
 					return {
 						...defaultResult,
 						stream: response.body,
 					}
 				} else {
-					// 处理非流式响应，这种情况较少见
-					console.log("收到非流式响应:", response)
+					// Handle non-streaming response, this is less common
+					console.log("Received non-streaming response:", response)
 					try {
 						const responseData = await response.json()
-						console.log("响应数据:", responseData)
+						console.log("Response data:", responseData)
 
-						// 从响应中提取内容
+						// Extract content from response
 						if (responseData.messages && responseData.messages.length > 0) {
 							const contentStr = responseData.messages[0].message.content
 							return { ...defaultResult, contentStr }
 						} else {
-							const errorMessage = "未收到有效响应"
+							const errorMessage = "Did not receive valid response"
 							return { ...defaultResult, isError: true, errorMessage }
 						}
 					} catch (e) {
-						// 如果无法解析响应为JSON
-						console.error("解析响应失败:", e)
-						const errorMessage = "无法解析服务器响应"
+						// If unable to parse response as JSON
+						console.error("Failed to parse response:", e)
+						const errorMessage = "Unable to parse server response"
 						return { ...defaultResult, isError: true, errorMessage }
 					}
 				}
 			} catch (error) {
-				console.error("发送消息处理失败:", error)
-				const errorMessage = error instanceof Error ? error.message : String(error)
-				antdMessage.error(`发送消息失败: ${errorMessage}`)
+			console.error("Failed to send message:", error)
+			const errorMessage = error instanceof Error ? error.message : String(error)
+			antdMessage.error(`Failed to send message: ${errorMessage}`)
 				return { ...defaultResult, isError: true, errorMessage }
 			}
 		},

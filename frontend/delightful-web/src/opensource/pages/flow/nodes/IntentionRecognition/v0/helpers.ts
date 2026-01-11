@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid"
 
-// 获取默认意图
+// Get default intention
 export const getDefaultIntention = () => {
 	return {
 		branch_type: "if",

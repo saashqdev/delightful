@@ -29,7 +29,7 @@ export default function Branch() {
 		) as Record<string, any>[],
 	)
 
-	// 创建一个存储所有元素 ref 的数组
+	// Create an array to store all element refs
 	const conditionRefsMap = useMemo(() => {
 		return branchList.map((branch) => {
 			return {
@@ -77,15 +77,15 @@ export default function Branch() {
 		const branchId = branchToDelete.branch_id
 		const edges = flowInstance.current?.getEdges() || []
 
-		// 1. 找到所有从该分支出发的边
+		// 1. Find all edges from this branch
 		const edgesToRemove = edges.filter(
 			(edge) => edge.source === currentNode.node_id && edge.sourceHandle === branchId,
 		)
 
-		// 2. 使用deleteEdges方法同时删除边和更新nextNodes
+		// 2. Use deleteEdges method to delete edges and update nextNodes simultaneously
 		deleteEdges(edgesToRemove)
 
-		// 3. 更新分支列表
+		// 3. Update branch list
 		currentNode?.params?.branches?.splice(branchIndex, 1)
 		setBranchList([...(currentNode?.params?.branches || [])])
 		notifyNodeChange?.()

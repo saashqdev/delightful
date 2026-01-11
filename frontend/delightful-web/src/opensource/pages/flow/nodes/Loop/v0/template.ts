@@ -1,34 +1,34 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-26322039",
-	name: "循环",
+	name: "Loop",
 	description: "",
 	node_type: 22,
 	meta: [],
 	params: {
-		type: "array", // 计数类型：count 循环数组：array 条件循环：condition,
+		type: "array", // Count type: count, Array loop: array, Conditional loop: condition,
 		condition: {
-			// 条件循环时启用, 用于给定一个终止循环条件
+			// Enabled for conditional loops, used to provide a loop termination condition
 			id: "component-66da72180d2e1",
 			version: "1",
 			type: "condition",
 			structure: undefined,
 		},
 		count: {
-			// 计数循环时启用
+			// Enabled for count loops
 			id: "component-66da73d27fea0",
 			version: "1",
 			type: "value",
 			structure: null,
 		},
 		array: {
-			// 遍历循环数组时启用
+			// Enabled for traversing loop arrays
 			id: "component-66da73d27fea0",
 			version: "1",
 			type: "value",
 			structure: null,
 		},
 		max_loop_count: {
-			// 最大遍历次数限制，条件循环时启用，可以允许为空
+			// Maximum traversal count limit, enabled for conditional loops, can be empty
 			id: "component-66da73d27fea0",
 			version: "1",
 			type: "value",

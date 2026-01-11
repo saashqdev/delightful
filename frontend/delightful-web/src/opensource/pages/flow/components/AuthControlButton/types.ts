@@ -1,4 +1,4 @@
-// 权限归属什么资源
+// Permission resource types
 export enum ResourceTypes {
 	Agent = 1,
 	Flow = 2,
@@ -7,14 +7,14 @@ export enum ResourceTypes {
 	Mcp = 5,
 }
 
-// 权限成员类型
+// Permission member types
 export enum TargetTypes {
 	User = 1,
 	Department = 2,
 	Group = 3,
 }
 
-// 实际的权限枚举
+// Actual permission enum
 export enum OperationTypes {
 	None = 0,
 	Owner = 1,

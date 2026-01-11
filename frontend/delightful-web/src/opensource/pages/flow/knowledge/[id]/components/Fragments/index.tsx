@@ -104,7 +104,7 @@ export default function Fragments({
 		ref?.current?.showModal()
 	})
 
-	/** 删除片段 */
+	/** Delete fragment */
 	const deleteItem = useMemoizedFn((fragment) => {
 		Modal.confirm({
 			centered: true,

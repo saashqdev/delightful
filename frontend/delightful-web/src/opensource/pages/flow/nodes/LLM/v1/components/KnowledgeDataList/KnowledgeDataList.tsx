@@ -24,7 +24,7 @@ type KnowledgeDataListProps = {
 	scoreName?: string[]
 }
 
-// 知识数据列表组件
+// Knowledge data list component
 export default function KnowledgeDataListV1({
 	handleAdd,
 	limitName = ["limit"],
@@ -47,7 +47,7 @@ export default function KnowledgeDataListV1({
 
 	const isCommercial = useMemo(() => !!extraData, [extraData])
 
-	// 获取Form.List字段的值来判断是否有数据
+	// Get Form.List field value to determine if data exists
 	const knowledgeList = Form.useWatch(knowledgeListName, form) || []
 	const hasKnowledgeData = Array.isArray(knowledgeList) && knowledgeList.length > 0
 
@@ -59,7 +59,7 @@ export default function KnowledgeDataListV1({
 	const renderRightComponent = (knowledgeTypeValue: number, subField: any) => {
 		switch (knowledgeTypeValue) {
 			case knowledgeType.UserKnowledgeDatabase:
-				// 用户自建知识库
+				// User-created knowledge base
 				return (
 					<Form.Item noStyle name={[subField.name]}>
 						<UserKnowledgeSelect
@@ -69,7 +69,7 @@ export default function KnowledgeDataListV1({
 					</Form.Item>
 				)
 			case knowledgeType.TeamshareKnowledgeDatabase:
-				// 天书知识库
+				// Tiangshu knowledge base
 				return (
 					<Form.Item noStyle name={[subField.name]}>
 						{isCommercial ? (
@@ -94,9 +94,9 @@ export default function KnowledgeDataListV1({
 			<DropdownCard
 				title={t("common.knowledgeData", { ns: "flow" })}
 				height="auto"
-				// 移除suffixIcon，不再在headerRight显示添加按钮
+				// Remove suffixIcon; no longer show add button in headerRight
 			>
-				{/* 添加按钮，使用与ToolSelect.tsx的addToolBtn相同的样式 */}
+				{/* Add button, using the same style as addToolBtn in ToolSelect.tsx */}
 				<div className={styles.knowledgeDataWrap}>
 					<Form.Item>
 						<Form.List name={knowledgeListName}>
@@ -104,7 +104,7 @@ export default function KnowledgeDataListV1({
 								return (
 									<div className={styles.knowledgeList}>
 										{subFields.map((subField, i) => {
-											// 从已经获取的knowledgeList中安全地读取当前项的knowledge_type
+											// Safely read knowledge_type of current item from fetched knowledgeList
 											const currentKnowledgeType =
 												knowledgeList[i]?.knowledge_type
 
@@ -170,7 +170,7 @@ export default function KnowledgeDataListV1({
 					</AntdFlex>
 				</div>
 
-				{/* 仅在有知识数据时显示配置项 */}
+				{/* Only show config items when there is knowledge data */}
 				{hasKnowledgeData && (
 					<>
 						<div className={styles.parameters}>

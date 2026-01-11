@@ -4,7 +4,7 @@ export type TimeTriggerParams = {
 	type: CycleTypeMap
 	day: string // 1~31
 	time: string
-	// 自定义重复时设置
+	// Settings for custom repeat
 	value: {
 		interval: number
 		unit: Units

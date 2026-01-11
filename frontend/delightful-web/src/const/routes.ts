@@ -6,35 +6,35 @@ export const enum RoutePath {
 	Invite = "/login/invite",
 	NotFound = "*",
 	/**
-	 * @description 云盘
+	 * @description Cloud Drive
 	 */
-	/** 常用云盘 */
+	/** Frequently Used Cloud Drive */
 	DriveRecent = "/drive/recent",
-	/** 个人云盘 */
+	/** Personal Cloud Drive */
 	DriveMe = "/drive/me",
-	/** 企业云盘 */
+	/** Enterprise Cloud Drive */
 	DriveShared = "/drive/shared",
-	/** 我创建的 */
+	/** Created by Me */
 	DriveCreated = "/drive/mine",
-	/** 回收站 */
+	/** Recycle Bin */
 	DriveTrash = "/drive/trash",
-	/** 文件夹 */
+	/** Folder */
 	DriveFolder = "/drive/folder/:folderId/:spaceType",
-	/** 文档 */
+	/** Document */
 	BiTable = "/base",
-	/** 知识库 */
+	/** Knowledge Base */
 	Knowledge = "/knowledge",
-	/** 知识库 - 首页展示 */
+	/** Knowledge Base - Home Display */
 	KnowledgeWiki = "/wiki",
-	/** 审批 */
+	/** Approval */
 	Approval = "/approval",
-	/** 任务 */
+	/** Tasks */
 	Tasks = "/tasks",
-	/** 收藏 */
+	/** Favorites */
 	Favorites = "/favorites",
-	/** 设置 */
+	/** Settings */
 	Settings = "/settings",
-	/** 通讯录 */
+	/** Contacts */
 	Contacts = "/contacts",
 	ContactsOrganization = "/contacts/organization",
 	ContactsAiAssistant = "/contacts/ai-assistant",
@@ -53,7 +53,7 @@ export const enum RoutePath {
 	FlowKnowledgeDetail = "/flow/knowledge/detail/:id",
 	FlowDetail = "/flow/:type/detail/:id",
 	Calendar = "/calendar",
-	/** 超级麦吉 */
+	/** Super Delightful */
 	BeDelightful = "/be-delightful/workspace",
 	BeDelightfulWorkspace = "/be-delightful/workspace",
 	BeDelightfulShare = "/share/:shareId",

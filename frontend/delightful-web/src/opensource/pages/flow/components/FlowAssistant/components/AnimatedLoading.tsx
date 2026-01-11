@@ -1,6 +1,6 @@
 import { css, keyframes } from "@emotion/css"
 
-// 定义动画关键帧
+// Define animation keyframes
 const dotAnimation = keyframes`
   0% { 
     opacity: 0.3;
@@ -16,7 +16,7 @@ const dotAnimation = keyframes`
   }
 `
 
-// 动画Loading样式
+// Animated loading styles
 const animatedLoadingStyles = {
 	container: css`
 		margin-top: 12px;
@@ -85,7 +85,7 @@ const animatedLoadingStyles = {
 	`,
 }
 
-// 常规加载容器样式
+// Regular loading container styles
 export const loadingContainerStyle = css`
 	padding: 10px 0;
 	display: flex;
@@ -94,20 +94,20 @@ export const loadingContainerStyle = css`
 `
 
 /**
- * 自定义动画Loading组件
- * 用于显示"正在收集指令数据"的动画效果
+ * Custom animated loading component
+ * Shows animation for "Collecting command data"
  */
 const AnimatedLoading = () => {
 	return (
 		<div className={animatedLoadingStyles.container}>
-			<span className={animatedLoadingStyles.dot}>正</span>
-			<span className={animatedLoadingStyles.dot2}>在</span>
-			<span className={animatedLoadingStyles.dot3}>收</span>
-			<span className={animatedLoadingStyles.dot4}>集</span>
-			<span className={animatedLoadingStyles.dot5}>指</span>
-			<span className={animatedLoadingStyles.dot6}>令</span>
-			<span className={animatedLoadingStyles.dot7}>数</span>
-			<span className={animatedLoadingStyles.dot8}>据</span>
+			<span className={animatedLoadingStyles.dot}>C</span>
+			<span className={animatedLoadingStyles.dot2}>o</span>
+			<span className={animatedLoadingStyles.dot3}>l</span>
+			<span className={animatedLoadingStyles.dot4}>l</span>
+			<span className={animatedLoadingStyles.dot5}>e</span>
+			<span className={animatedLoadingStyles.dot6}>c</span>
+			<span className={animatedLoadingStyles.dot7}>t</span>
+			<span className={animatedLoadingStyles.dot8}>.</span>
 		</div>
 	)
 }

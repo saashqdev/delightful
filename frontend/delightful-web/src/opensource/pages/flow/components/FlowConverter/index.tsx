@@ -15,8 +15,8 @@ const { Text, Title } = Typography
 const { TabPane } = Tabs
 
 /**
- * Flow转换器组件
- * 提供YAML和JSON之间互相转换的UI界面
+ * Flow Converter Component
+ * Provides UI for converting between YAML and JSON formats
  */
 const FlowConverter: React.FC = () => {
 	const [sourceText, setSourceText] = useState<string>("")
@@ -25,7 +25,7 @@ const FlowConverter: React.FC = () => {
 	const [loading, setLoading] = useState<boolean>(false)
 	const [activeTab, setActiveTab] = useState<string>("converter")
 
-	// 文件上传处理
+	// Handle file upload
 	const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
 		if (!file) return
@@ -38,10 +38,10 @@ const FlowConverter: React.FC = () => {
 		reader.readAsText(file)
 	}
 
-	// 下载结果
+	// Download result
 	const handleDownload = () => {
 		if (!resultText) {
-			message.warning("没有可下载的内容")
+			message.warning("No content to download")
 			return
 		}
 
@@ -55,10 +55,10 @@ const FlowConverter: React.FC = () => {
 		document.body.removeChild(element)
 	}
 
-	// 执行转换
+	// Execute conversion
 	const handleConvert = () => {
 		if (!sourceText) {
-			message.warning("请输入需要转换的内容")
+			message.warning("Please enter content to convert")
 			return
 		}
 
@@ -79,19 +79,19 @@ const FlowConverter: React.FC = () => {
 
 			if (result) {
 				setResultText(result)
-				message.success("转换成功")
+				message.success("Conversion successful")
 			} else {
-				message.error("转换失败")
+				message.error("Conversion failed")
 			}
 		} catch (error) {
-			console.error("转换错误:", error)
-			message.error(`转换失败: ${error.message}`)
+			console.error("Conversion error:", error)
+			message.error(`Conversion failed: ${error.message}`)
 		} finally {
 			setLoading(false)
 		}
 	}
 
-	// 清空内容
+	// Clear content
 	const handleClear = () => {
 		setSourceText("")
 		setResultText("")
@@ -100,18 +100,18 @@ const FlowConverter: React.FC = () => {
 	return (
 		<div className={styles.flowConverter}>
 			<Tabs activeKey={activeTab} onChange={setActiveTab}>
-				<TabPane tab="Flow转换器" key="converter">
+				<TabPane tab="Flow Converter" key="converter">
 					<Card>
-						<Title level={4}>Flow YAML和JSON格式互转</Title>
-						<Text>将Flow工作流YAML格式和JSON格式互相转换</Text>
+						<Title level={4}>Flow YAML and JSON Converter</Title>
+						<Text>Convert Flow workflows between YAML and JSON formats</Text>
 
 						<div className={styles.conversionTypeSelector}>
 							<Select
 								value={conversionType}
 								onChange={setConversionType}
 								options={[
-									{ value: "yaml2json", label: "YAML转JSON" },
-									{ value: "json2yaml", label: "JSON转YAML" },
+									{ value: "yaml2json", label: "YAML to JSON" },
+									{ value: "json2yaml", label: "JSON to YAML" },
 								]}
 								style={{ width: 200 }}
 							/>
@@ -119,14 +119,14 @@ const FlowConverter: React.FC = () => {
 
 						<div className={styles.converterContainer}>
 							<div className={styles.sourceContainer}>
-								<Card title="源文件" bordered={false}>
+								<Card title="Source File" bordered={false}>
 									<TextArea
 										value={sourceText}
 										onChange={(e) => setSourceText(e.target.value)}
 										placeholder={
 											conversionType === "yaml2json"
-												? "请输入YAML格式的Flow"
-												: "请输入JSON格式的Flow"
+											? "Please enter YAML formatted Flow"
+											: "Please enter JSON formatted Flow"
 										}
 										rows={20}
 									/>
@@ -148,9 +148,9 @@ const FlowConverter: React.FC = () => {
 													document.getElementById("file-upload")?.click()
 												}
 											>
-												上传文件
+												Upload File
 											</Button>
-											<Button onClick={handleClear}>清空</Button>
+											<Button onClick={handleClear}>Clear</Button>
 										</Space>
 									</div>
 								</Card>
@@ -163,12 +163,12 @@ const FlowConverter: React.FC = () => {
 									onClick={handleConvert}
 									loading={loading}
 								>
-									转换
+									Convert
 								</Button>
 							</div>
 
 							<div className={styles.resultContainer}>
-								<Card title="转换结果" bordered={false}>
+								<Card title="Conversion Result" bordered={false}>
 									<Spin spinning={loading}>
 										<TextArea value={resultText} readOnly rows={20} />
 									</Spin>
@@ -178,7 +178,7 @@ const FlowConverter: React.FC = () => {
 											onClick={handleDownload}
 											disabled={!resultText}
 										>
-											下载
+											Download
 										</Button>
 									</div>
 								</Card>
@@ -187,30 +187,30 @@ const FlowConverter: React.FC = () => {
 					</Card>
 				</TabPane>
 
-				<TabPane tab="帮助文档" key="help">
+				<TabPane tab="Help" key="help">
 					<Card>
-						<Title level={4}>Flow转换器使用说明</Title>
-						<Title level={5}>YAML转JSON</Title>
+						<Title level={4}>Flow Converter Usage</Title>
+						<Title level={5}>YAML to JSON</Title>
 						<Text>
-							将Flow格式的工作流YAML转换为JSON格式。
+							Convert Flow workflows from YAML format to JSON format.
 							<ul>
-								<li>在源文件区域粘贴YAML格式的内容，或者上传YAML文件</li>
-								<li>点击&quot;转换&quot;按钮执行转换</li>
-								<li>转换完成后，可以下载结果或复制结果</li>
+								<li>Paste YAML content in the source file area, or upload a YAML file</li>
+								<li>Click the &quot;Convert&quot; button to execute the conversion</li>
+								<li>After conversion, download or copy the result</li>
 							</ul>
 						</Text>
 
-						<Title level={5}>JSON转YAML</Title>
+						<Title level={5}>JSON to YAML</Title>
 						<Text>
-							将Flow JSON格式转换为YAML格式。
+							Convert Flow JSON format to YAML format.
 							<ul>
-								<li>在源文件区域粘贴JSON格式的内容，或者上传JSON文件</li>
-								<li>点击&quot;转换&quot;按钮执行转换</li>
-								<li>转换完成后，可以下载结果或复制结果</li>
+								<li>Paste JSON content in the source file area, or upload a JSON file</li>
+								<li>Click the &quot;Convert&quot; button to execute the conversion</li>
+								<li>After conversion, download or copy the result</li>
 							</ul>
 						</Text>
 
-						<Title level={5}>YAML格式说明</Title>
+						<Title level={5}>YAML Format Description</Title>
 						<Text>
 							<pre
 								style={{
@@ -219,27 +219,27 @@ const FlowConverter: React.FC = () => {
 									borderRadius: "5px",
 								}}
 							>
-								{`# Flow YAML格式示例
+								{`# Flow YAML Format Example
 flow:
-  name: "流程名称"
-  description: "流程描述"
+  name: "Flow Name"
+  description: "Flow Description"
   version: "1.0.0"
   type: "workflow"
 
 variables:
-  - name: "变量名"
+  - name: "variable_name"
     type: "string"
-    default: "默认值"
+    default: "default_value"
 
 nodes:
   - id: "node-123"
     type: "start"
-    name: "开始节点"
+    name: "Start Node"
     position:
       x: 100
       y: 100
     params:
-      # 节点参数...
+      # Node parameters...
 
 edges:
   - id: "edge-123"

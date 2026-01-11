@@ -2,14 +2,14 @@ import { IconFile, IconPhoto, IconTextSize } from "@tabler/icons-react"
 import type { TFunction } from "i18next"
 
 /**
- * 消息类型枚举
+ * Message type enum
  */
 export enum MessageType {
-	// 文本
+	// Text
 	Text = "text",
-	// 图片
+	// Image
 	Image = "img",
-	// 文件
+	// File
 	File = "file",
 }
 

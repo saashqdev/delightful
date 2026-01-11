@@ -1,7 +1,7 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-66f3e2032672a3-11827064",
 	debug: false,
-	name: "接口请求",
+	name: "API Request",
 	description: "",
 	node_type: 10,
 	meta: [],
@@ -129,7 +129,7 @@ export const v0Template = {
 						type: "string",
 						key: "response_body",
 						sort: 0,
-						title: "原文输出",
+							title: "Raw Output",
 						description: "",
 						required: null,
 						value: null,

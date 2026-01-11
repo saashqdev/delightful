@@ -91,7 +91,7 @@ export default function KeyManagerButton({
 		{},
 	)
 
-	// 暂时只在Mcp处理v1版本的Api key新接口，其余接口后端还没处理
+	// Temporarily, only MCP handles the new API key interface for v1 version, other interfaces are not yet handled by the backend
 	const isMcp = useMemo(() => {
 		return type === Flow.ApiKeyType.Mcp
 	}, [type])
@@ -129,9 +129,9 @@ export default function KeyManagerButton({
 							...detail,
 						}
 					}
-					return apiKey // 不符合条件的 apiKey 保持不变
+					return apiKey // apiKey that does not meet the condition remains unchanged
 				})
-				return updatedList // 返回更新后的列表
+				return updatedList // Return the updated list
 			})
 		},
 	)
@@ -199,7 +199,7 @@ export default function KeyManagerButton({
 --header 'api-key: ${key.secret_key}' \\
 --header 'Content-Type: application/json' \\
 --data-raw '{
-    "message": "你是谁",
+    "message": "Who are you",
     "conversation_id": ""
 }'`
 		} else {
@@ -443,7 +443,7 @@ export default function KeyManagerButton({
 			onCancel={onClose}
 			width={900}
 			modalRender={(modal) => (
-				<div onClick={(e) => e.stopPropagation()}>{modal}</div> // 阻止最外层的事件冒泡
+				<div onClick={(e) => e.stopPropagation()}>{modal}</div> // Prevent event bubbling from the outermost layer
 			)}
 		>
 			{apiKeyList.length !== 0 && (

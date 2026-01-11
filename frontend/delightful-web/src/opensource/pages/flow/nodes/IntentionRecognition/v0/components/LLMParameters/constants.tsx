@@ -1,17 +1,17 @@
-// LLM 调节器
+// LLM adjuster
 export enum LLMAdjust {
-	// 创意
+	// Creative
 	Creativity = 1,
-	// 平衡
+	// Balanced
 	Balanced = 2,
-	// 精准
+	// Precise
 	Precise = 3,
 
-	// 加载预设
+	// Load preset
 	default = 4,
 }
 
-// LLM 调节器值映射
+// LLM adjuster value mapping
 export const LLMAdjustMap = {
 	[LLMAdjust.Creativity]: {
 		max_record: 10,

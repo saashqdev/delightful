@@ -1,5 +1,5 @@
 /**
- * 知识数据相关状态及行为
+ * Knowledge data related state and behavior
  */
 
 import type { Knowledge } from "@/types/knowledge"
@@ -12,7 +12,7 @@ import { useCommercial } from "@/opensource/pages/flow/context/CommercialContext
 
 type UseKnowledgeProps = {
 	form: FormInstance<any>
-	onValuesChange: (values: any) => void // 值变化时触发的回调函数
+	onValuesChange: (values: any) => void // Callback triggered when values change
 }
 export default function useKnowledge({ form, onValuesChange }: UseKnowledgeProps) {
 	const { currentNode } = useCurrentNode()
@@ -33,7 +33,7 @@ export default function useKnowledge({ form, onValuesChange }: UseKnowledgeProps
 	})
 
 	const handleAdd = useMemoizedFn(() => {
-		const newKnowledge = getDefaultKnowledge(!!extraData) // 获取默认的知识项
+		const newKnowledge = getDefaultKnowledge(!!extraData) // Get default knowledge item
 		const currentKnowledgeConfig = form.getFieldValue("knowledge_config")
 		const newKnowledgeConfig = {
 			knowledge_config: {
@@ -42,7 +42,7 @@ export default function useKnowledge({ form, onValuesChange }: UseKnowledgeProps
 			},
 		}
 		form.setFieldsValue(newKnowledgeConfig)
-		// 手动触发 onValuesChange
+		// Manually trigger onValuesChange
 		onValuesChange(newKnowledgeConfig)
 	})
 

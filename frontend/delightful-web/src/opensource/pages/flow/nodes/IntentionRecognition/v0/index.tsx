@@ -38,7 +38,7 @@ export default function IntentionRecognitionV0() {
 		if (!currentNode) return
 
 		Object.entries(changeValues).forEach(([changeKey, changeValue]) => {
-			// 特殊处理llm字段
+			// Special handling for llm field
 			if (changeKey === "llm") {
 				const { model, ...rest } = changeValue as any
 				set(currentNode, ["params", "model"], model)
@@ -55,7 +55,7 @@ export default function IntentionRecognitionV0() {
 				return
 			}
 			if (changeKey === "branches") {
-				// 合并更新后的 branches
+				// Merge updated branches
 				set(currentNode, ["params", "branches"], allValues?.branches)
 				return
 			}

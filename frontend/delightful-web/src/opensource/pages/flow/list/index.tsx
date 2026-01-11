@@ -112,7 +112,7 @@ function FlowListPage() {
 		<Flex className={styles.container}>
 			<Flex vertical flex={1}>
 				<Flex align="center" justify="space-between" className={styles.top}>
-					<div className={styles.leftTitle}>{`${title}（${total}）`}</div>
+					<div className={styles.leftTitle}>{`${title}(${total})`}</div>
 					<Flex align="center" gap={6}>
 						{flowType === FlowRouteType.VectorKnowledge && (
 							<Select

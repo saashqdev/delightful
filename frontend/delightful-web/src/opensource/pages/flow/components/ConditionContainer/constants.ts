@@ -7,9 +7,9 @@ import { Operators, Time, type AutomateFlowField } from "./types"
 import { generateSnowFlake } from "../../utils/helpers"
 
 /**
- * 行ID列的 列ID
- * 这个是给流程用的，自动化流程筛选条件默认可选行ID字段，尽管没有这一列也可以选
- * 所以需要定义一个固定的列ID，便于逻辑处理以及回显
+ * Column ID of Row ID Column
+ * This is for workflows. In automation workflow filtering conditions, the Row ID field is selectable by default, even if this column doesn't exist.
+ * So we need to define a fixed column ID for logic processing and echoing.
  */
 export const ROW_ID_COLUMN_ID = "ROW_ID_COLUMN_ID"
 

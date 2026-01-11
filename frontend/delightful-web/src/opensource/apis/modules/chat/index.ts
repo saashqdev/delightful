@@ -471,7 +471,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 隐藏会话
+	 * Hide conversation
 	 */
 	hideConversation(conversation_id: string) {
 		return socket.apiSend(
@@ -555,7 +555,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取会话消息
+	 * Get conversation messages
 	 * @param conversationId
 	 * @param data
 	 */
@@ -607,7 +607,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取用户任务列表
+	 * Get user task list
 	 * @param data
 	 * @returns
 	 */
@@ -616,7 +616,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 获取用户任务
+	 * Get user task
 	 * @param id
 	 * @returns
 	 */
@@ -625,7 +625,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 更新用户任务
+	 * Update user task
 	 * @param id
 	 * @param data
 	 * @returns
@@ -638,7 +638,7 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	},
 
 	/**
-	 * 删除用户任务
+	 * Delete user task
 	 * @param id
 	 * @returns
 	 */

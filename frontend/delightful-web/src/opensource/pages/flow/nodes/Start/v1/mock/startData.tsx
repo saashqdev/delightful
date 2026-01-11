@@ -102,7 +102,7 @@ export const startData = {
 									type: "string",
 									key: "nickname",
 									sort: 0,
-									title: " 用户昵称",
+								title: " User Nickname",
 									description: "",
 									required: null,
 									value: null,

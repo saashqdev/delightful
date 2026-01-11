@@ -1,10 +1,10 @@
 import { TFunction } from "i18next";
 
-/** 知识数据类型 */
+/** Knowledge data type */
 export enum KnowledgeType {
-	/** 知识库 */
+	/** Knowledge Base */
 	KnowledgeDatabase = 2,
-	/** 云文档 */
+	/** Cloud Document */
 	Document = 3,
 }
 
@@ -34,7 +34,7 @@ export const getKnowledgeTypeOptions = (t: TFunction, isCommercial: boolean) => 
 export const getLLMRoleConstantOptions = () => {
 	return [
 		{
-			title: "常量",
+			title: "Constant",
 			key: "",
 			nodeId: "Wrapper",
 			nodeType: "21",

@@ -141,7 +141,7 @@ export default function StartV1() {
 						set(oldBranch, ["output"], cloneOutput)
 					}
 					if (newConfig?.custom_system_output) {
-						// 处理不存在custom_system_output的情况
+						// Handle case where custom_system_output doesn't exist
 						if (!cloneCustomSystemOutput.form) {
 							cloneCustomSystemOutput.form = {
 								id: `components-${nanoid(8)}`,
@@ -251,7 +251,7 @@ export default function StartV1() {
 		return resultBranches
 	}, [currentNode])
 
-	/** 新增定时触发分支 */
+	/** Add timed trigger branch */
 	const onAddTimeTriggerBranch = useMemoizedFn(() => {
 		if (!currentNode) return
 		const newTimeTriggerBranch = getDefaultTimeTriggerBranches()

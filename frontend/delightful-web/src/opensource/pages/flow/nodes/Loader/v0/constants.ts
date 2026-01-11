@@ -4,7 +4,7 @@ export enum LoaderType {
 
 export const loaderOptions = [
 	{
-		label: "文件",
+		label: "File",
 		value: LoaderType.File,
 	},
 ]

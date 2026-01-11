@@ -22,7 +22,7 @@ type CommonProps = React.PropsWithChildren<{
 	outputWrapClassName?: string
 	showHandle?: boolean
 	defaultExpand?: boolean
-	// 以下是 Flow 独有属性
+	// Below are Flow-specific properties
 }>
 
 export default function Common({

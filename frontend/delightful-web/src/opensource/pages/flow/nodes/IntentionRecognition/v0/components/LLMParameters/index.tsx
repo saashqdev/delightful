@@ -1,5 +1,5 @@
 /**
- * LLM参数配置器
+ * LLM Parameter Configurator
  */
 import { Form, Switch, Tooltip } from "antd"
 import { IconHelp } from "@tabler/icons-react"
@@ -34,7 +34,7 @@ export default function LLMParameters({
 	const { t } = useTranslation()
 	const { autoMemory, maxRecord } = useLLMParameters()
 
-	// 处理单个项变更事件
+	// Handle individual item change event
 	const onParamChanged = useMemoizedFn((key: string | string[], newValue: any) => {
 		set(LLMValue, key, newValue)
 		const model = formValues?.llm?.model

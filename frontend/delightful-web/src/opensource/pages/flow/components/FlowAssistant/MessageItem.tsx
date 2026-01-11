@@ -54,9 +54,9 @@ function MessageItem(props: MessageProps): React.ReactElement {
 						type="primary"
 						onClick={() => onConfirm?.(confirmOperation.type, confirmOperation.data)}
 					>
-						确认
+						Confirm
 					</Button>
-					<Button onClick={() => onCancel?.(confirmOperation.type)}>取消</Button>
+					<Button onClick={() => onCancel?.(confirmOperation.type)}>Cancel</Button>
 				</Space>
 			</div>
 		)

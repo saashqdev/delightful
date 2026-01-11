@@ -44,7 +44,7 @@ function MemberSelectPanelComponent() {
 		}
 	}, [originalAuthList, creator, currentUserId, currentUserAuth])
 
-	// 可选择的成员列表（过滤掉没有权限处理的成员）
+	// Selectable members list (filter out members without permission to operate)
 	const selectableMembers = useMemo(() => {
 		return members.filter((member) => !isDisabledMember(member))
 	}, [members, isDisabledMember])

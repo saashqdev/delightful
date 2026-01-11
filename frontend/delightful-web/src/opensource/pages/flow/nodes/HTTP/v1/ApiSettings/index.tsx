@@ -12,7 +12,7 @@ const ApiSettings = forwardRef<ApiSettingsInstance, ApiSettingsProps>((component
 	const { apiSettings, setApiSettings, ...props } = componentProps
 	const [activeKey, setActiveKey] = useState(ArgsTabType.Query)
 
-	/** uri与path组件联动的事件订阅器 */
+	/** Event emitter for uri and path component linkage */
 	const pathEventEmitter = useEventEmitter<string[]>()
 
 	const getConfig = useMemoizedFn((config: any) => {
@@ -58,11 +58,11 @@ const ApiSettings = forwardRef<ApiSettingsInstance, ApiSettingsProps>((component
 
 	const onSettingsChange = useMemoizedFn((changePath: string[], val: any) => {
 		if (!apiSettings) return
-		// 是form组件的key列表
+		// Keys of form subcomponents
 		const formKeys = ["params_query", "params_path", "headers", "body"]
 		const lastKey = changePath[changePath.length - 1]
 		const traceKeys = ["structure", ...changePath]
-		// 如果不是body类型，则是form组件，需要将值设置到structure
+		// If not body type, it's a form component; assign value to 'structure'
 		if (formKeys.includes(lastKey)) {
 			traceKeys.push("structure")
 		}
@@ -70,7 +70,7 @@ const ApiSettings = forwardRef<ApiSettingsInstance, ApiSettingsProps>((component
 		setApiSettings?.({ ...apiSettings })
 	})
 
-	/** 更新函数，给子组件使用，有时候切换tab需要数据最新数据 */
+	/** Update function for child components; used to refresh data on tab switch */
 	const update = useMemoizedFn(() => {
 		if (!apiSettings || !setApiSettings) return
 		setApiSettings({ ...apiSettings })

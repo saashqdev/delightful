@@ -1,5 +1,5 @@
 /**
- * LLM参数配置器
+ * LLM parameter configurator
  */
 import { Form, Switch, Tooltip, Select } from "antd"
 import { IconHelp } from "@tabler/icons-react"
@@ -133,7 +133,7 @@ export default function LLMParametersV1() {
 
 	const { models: options } = useFlowStore()
 
-	// 筛选出支持视觉功能的模型
+		// Filter out models that support vision capabilities
 	const visionModels = useMemo(() => {
 		return options.filter((model) => model.vision === true)
 	}, [options])
@@ -259,7 +259,7 @@ export default function LLMParametersV1() {
 	})
 
 	return (
-		<Form.Item name={["model"]} className={styles.formItem} label="模型">
+		<Form.Item name={["model"]} className={styles.formItem} label="Model">
 			<LLMSelect
 				className={styles.LLMParameters}
 				options={options}

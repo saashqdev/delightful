@@ -1,4 +1,4 @@
 import { OperationTypes } from "./types"
 
-// 默认权限
+// Default permission
 export const defaultOperation = OperationTypes.Edit

@@ -13,7 +13,7 @@ interface CommandProcessorProps {
 	onComplete: () => void
 }
 
-// 使用function组件声明方式替代React.FC泛型
+// Use function component declaration instead of React.FC generic
 function CommandProcessor(props: CommandProcessorProps): React.ReactElement | null {
 	const {
 		commands,
@@ -29,14 +29,14 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 	const [pendingCommands, setPendingCommands] = useState<any[]>([])
 	const isProcessingRef = useRef<boolean>(false)
 
-	// 初始化命令队列
+	// Initialize command queue
 	useEffect(() => {
 		if (commands.length > 0) {
 			setPendingCommands((prev) => [...prev, ...commands])
 		}
 	}, [commands])
 
-	// 执行下一个命令
+	// Execute next command
 	const executeNextCommand = useMemoizedFn(async () => {
 		if (pendingCommands.length === 0) {
 			commandExecutionRef.current = false
@@ -86,12 +86,12 @@ function CommandProcessor(props: CommandProcessorProps): React.ReactElement | nu
 			// 命令处理完成
 			isProcessingRef.current = false
 
-			// 执行下一个命令（使用短延迟确保UI更新）
+			// Execute the next command (use a short delay to ensure UI updates)
 			setTimeout(() => {
 				executeNextCommand()
 			}, 100)
 		} catch (error) {
-			console.error(`执行命令出错: ${command.type}`, error)
+			console.error(`Error executing command: ${command.type}`, error)
 
 			// 更新命令错误状态
 			const errorMessage = error instanceof Error ? error.message : String(error)

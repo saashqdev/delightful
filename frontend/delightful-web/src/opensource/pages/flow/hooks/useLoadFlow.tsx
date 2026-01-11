@@ -43,7 +43,7 @@ export default function useLoadFlow({ loadLatestDraft, isAgent, agent, flowId }:
 											user_operation: agent.botEntity.user_operation,
 											icon: agent.botEntity.robot_avatar,
 											name: agent.botEntity.robot_name,
-											// AI 助理，永远显示已启用
+										// AI assistant, always show as enabled
 											enabled: true,
 										}
 									: {},

@@ -81,7 +81,7 @@ function PostAddrSettings({ value, onChange, paths, pathEventEmitter }: PostAddr
 				{/* <Input
 					style={{ width: 200, marginLeft: "6px" }}
 					defaultValue={value.domain}
-					placeholder="请输入域名"
+					placeholder="Please enter domain"
 				/> */}
 				<div style={{ flex: 1, marginLeft: "4px" }}>
 					<DelightfulInput

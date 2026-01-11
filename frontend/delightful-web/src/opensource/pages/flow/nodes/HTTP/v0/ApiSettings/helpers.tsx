@@ -1,4 +1,4 @@
-/** 查找被{}包裹的字符串 */
+/** Find strings wrapped in {} */
 export function findBracedStrings(inputString: string) {
 	const regex = /\{([^}]+)\}/g
 	const matches = []

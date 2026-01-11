@@ -26,13 +26,13 @@ import { StatusIcons } from "../../../../const"
 interface DragItemProps {
 	id: string
 	type: InstructionGroupType
-	// 数据
+	// Data
 	item: QuickInstruction
-	// 是否排序
+	// Is sortable
 	isSortable: boolean
-	// 是否隐藏背景色
+	// Hide background color
 	isHidden?: boolean
-	// 是否是占位符
+	// Is placeholder
 	isPlaceholder?: boolean
 	selectInstruction?: (type: InstructionGroupType, item: CommonQuickInstruction) => void
 	deleteInstruction?: (type: InstructionGroupType, data: CommonQuickInstruction) => void
@@ -58,7 +58,7 @@ export const DragItem = ({
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
 		id,
 		data: { item },
-		// 禁用拖拽
+		// Disable dragging
 		disabled: !isSortable,
 	})
 

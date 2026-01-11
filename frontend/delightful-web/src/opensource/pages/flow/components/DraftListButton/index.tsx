@@ -83,7 +83,7 @@ export default function DraftListButton({
 			<div className={styles.title}>
 				<div className={styles.topTitle}>{`${t("common.draftBox", {
 					ns: "flow",
-				})}（${draftList.length}）`}</div>
+				})}(${draftList.length})`}</div>
 				{draftList.length > 0 && (
 					<div className={styles.topDesc}>{t("common.draftBoxDesc", { ns: "flow" })}</div>
 				)}

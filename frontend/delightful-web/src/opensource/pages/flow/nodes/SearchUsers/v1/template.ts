@@ -34,7 +34,7 @@ export const v1Template = {
 						type: "array",
 						key: "users",
 						sort: 0,
-						title: "用户数据",
+						title: "User Data",
 						description: "desc",
 						required: null,
 						value: null,
@@ -44,7 +44,7 @@ export const v1Template = {
 							type: "object",
 							key: "users",
 							sort: 0,
-							title: "用户数据",
+							title: "User Data",
 							description: "desc",
 							required: [
 								"user_id",

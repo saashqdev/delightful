@@ -1,5 +1,5 @@
 /**
- * 消息加载相关状态、组件、行为
+ * Message loading state, components, and behaviors
  */
 
 import { Form } from "antd"

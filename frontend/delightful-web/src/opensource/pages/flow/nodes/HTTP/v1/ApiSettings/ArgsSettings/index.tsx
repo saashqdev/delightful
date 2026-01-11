@@ -35,14 +35,14 @@ interface ArgsSettingsProps {
 		body: string[]
 		headers: string[]
 	}
-	/** 参数配置激活的tab栏 */
+	/** Active tab for parameter configuration */
 	activeKey?: string
 	pathEventEmitter?: EventEmitter<string[]>
-	/** 保存最新settings函数 */
+	/** Save latest settings function */
 	update: () => void
-	/** 数据源 */
+	/** Data source */
 	expressionSource: ExpressionSource
-	/** 是否有path组件 */
+	/** Whether there is a path component */
 	hasPath?: boolean
 }
 

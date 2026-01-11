@@ -159,9 +159,9 @@ export default function SubFlowV0() {
 						return props.label
 					}}
 					showSearch
-					// 搜索key
+					// Search key
 					optionFilterProp="realLabel"
-					// 排序
+					// Sort
 					filterSort={(optionA, optionB) => {
 						return (optionA?.realLabel ?? "")
 							.toLowerCase()

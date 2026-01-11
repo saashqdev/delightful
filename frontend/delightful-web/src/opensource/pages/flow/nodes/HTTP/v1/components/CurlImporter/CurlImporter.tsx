@@ -28,7 +28,7 @@ const CurlImporter: React.FC<CurlImporterProps> = ({ visible, onCancel, onImport
 			onImport(curlCommand)
 			setCurlCommand("")
 		} catch (error) {
-			console.error("解析 curl 命令失败", error)
+			console.error("Failed to parse curl command", error)
 			message.error(t("http.curlImport.parseError", { ns: "flow" }))
 		}
 	}

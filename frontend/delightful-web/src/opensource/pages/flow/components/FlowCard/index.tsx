@@ -83,7 +83,7 @@ function Card({
 			case FlowRouteType.Sub:
 				quote = (data as Flow).quote ?? 0
 				break
-			// TODO 知识库的引用关系
+			// TODO Knowledge base reference relationships
 			default:
 				break
 		}

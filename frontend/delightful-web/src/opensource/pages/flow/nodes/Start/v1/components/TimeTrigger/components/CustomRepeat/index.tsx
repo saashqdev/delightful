@@ -11,7 +11,7 @@ import type { TimeTriggerParams } from "../../types"
 import { UNIT_OPTIONS, Units, WEEK_MAP } from "../../constants"
 import styles from "./index.module.less"
 
-// 扩展 dayjs 插件
+// Extend dayjs plugin
 dayjs.extend(weekday)
 dayjs.extend(localeData)
 

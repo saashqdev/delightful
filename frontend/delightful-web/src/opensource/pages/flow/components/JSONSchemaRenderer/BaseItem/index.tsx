@@ -15,11 +15,11 @@ import { configStore } from "@/opensource/models/config"
 
 type BaseItemProps = {
 	field: Schema
-	// 菜单显示的key
+	// Menu display key
 	displayKey: string
-	// dropdown图标点击事件
+	// Dropdown icon click event
 	onExpand?: () => void
-	// 是否展开
+	// Whether to expand
 	isDisplay?: boolean
 }
 

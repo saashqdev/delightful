@@ -6,34 +6,34 @@ import { message } from "antd"
 import type { ResponseData } from "../../core/HttpClient"
 import { LoginValueKey } from "@/opensource/pages/login/constants"
 
-/** HTTP 状态码枚举（RFC 7231、RFC 7233、RFC 7540） */
+/** HTTP status code enumeration (RFC 7231, RFC 7233, RFC 7540) */
 const enum HttpStatusCode {
-	/** 200 OK - 请求成功 */
+	/** 200 OK - Request successful */
 	Ok = 200,
-	/** 302 Found - 资源临时重定向 */
+	/** 302 Found - Resource temporarily redirected */
 	Found = 302,
-	/** 400 Bad Request - 请求语法错误 */
+	/** 400 Bad Request - Request syntax error */
 	BadRequest = 400,
-	/** 401 Unauthorized - 未认证 */
+	/** 401 Unauthorized - Not authenticated */
 	Unauthorized = 401,
-	/** 403 Forbidden - 无权限访问 */
+	/** 403 Forbidden - No permission to access */
 	Forbidden = 403,
-	/** 404 Not Found - 资源不存在 */
+	/** 404 Not Found - Resource does not exist */
 	NotFound = 404,
-	/** 500 Internal Server Error - 服务器内部错误 */
+	/** 500 Internal Server Error - Server internal error */
 	InternalServerError = 500,
 }
 
 const enum BusinessResponseCode {
-	/** 响应成功 */
+	/** Response successful */
 	Success = 1000,
-	/** 组织无效 */
+	/** Invalid organization */
 	InvalidOrganization = 40101,
 }
 
 /**
- * 生成登录重定向 URL
- * @returns 登录重定向 URL
+ * Generate login redirect URL
+ * @returns Login redirect URL
  */
 export const genLoginRedirectUrl = () => {
 	const redirectUrl = new URL(RoutePath.Login, window.location.origin)
@@ -42,7 +42,7 @@ export const genLoginRedirectUrl = () => {
 			LoginValueKey.REDIRECT_URL,
 		)
 
-		// 获取当前页面地址
+		// Get current page address
 		redirectUrl.searchParams.set(
 			LoginValueKey.REDIRECT_URL,
 			redirectTarget ?? window.location.href,
@@ -51,7 +51,7 @@ export const genLoginRedirectUrl = () => {
 	return redirectUrl.toString()
 }
 
-/** 登录无效 */
+/** Login invalid */
 export function generateUnauthorizedResInterceptor(service: Container) {
 	return async function unauthorized(response: ResponseData) {
 		const { enableAuthorizationVerification = true } = response.options
@@ -69,7 +69,7 @@ export function generateUnauthorizedResInterceptor(service: Container) {
 	}
 }
 
-/** 组织无效 */
+/** Invalid organization */
 export function generateInvalidOrgResInterceptor(service: Container) {
 	return async function invalidOr(response: ResponseData) {
 		const jsonResponse = response.data
@@ -83,7 +83,7 @@ export function generateInvalidOrgResInterceptor(service: Container) {
 	}
 }
 
-/** 成功响应 */
+/** Successful response */
 export function generateSuccessResInterceptor() {
 	return async function success(response: ResponseData) {
 		const jsonResponse = response.data
@@ -94,7 +94,7 @@ export function generateSuccessResInterceptor() {
 			throw jsonResponse
 		}
 
-		// 解包数据
+		// Unwrap data
 		if (response.options?.unwrapData) {
 			return jsonResponse.data
 		}

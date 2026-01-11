@@ -1,5 +1,5 @@
 /**
- * LLM参数配置器
+ * LLM parameter configurator
  */
 import { Form, Switch, Tooltip } from "antd"
 import { IconHelp } from "@tabler/icons-react"
@@ -183,13 +183,13 @@ export default function LLMParametersV0() {
 				</div>
 				<div className={styles.body}>
 					{/* <div className={styles.preSettings}>
-						<span className={styles.h1Title}>参数</span>
+						<span className={styles.h1Title}>Parameters</span>
 						<DelightfulSelect
 							value={LLMAdjust.default}
 							options={addJustOptions}
 							onChange={(value: LLMAdjust) => setAdjustValue(value)}
 							dropdownRenderProps={{
-								placeholder: "搜索卡片类型",
+								placeholder: "Search card type",
 								component: BaseDropdownRenderer,
 								showSearch: false,
 							}}
@@ -314,8 +314,8 @@ export default function LLMParametersV0() {
 
 					{/* <div className={styles.parameters}>
 						<div className={styles.left}>
-							<span className={styles.title}>回复格式</span>
-							<Tooltip title="指定模型必须输出的格式。">
+							<span className={styles.title}>Response Format</span>
+							<Tooltip title="Specify the format the model must output.">
 								<IconHelp size={16} color="#1C1D2399" className={styles.icon} />
 							</Tooltip>
 							<Switch
@@ -341,7 +341,7 @@ export default function LLMParametersV0() {
 								onChange={(value: string) =>
 									onParamChanged(["ask_type", "value"], value)
 								}
-								placeholder="请选择"
+								placeholder="Please select"
 								dropdownRenderProps={{
 									showSearch: false,
 									component: BaseDropdownRenderer,
@@ -352,8 +352,8 @@ export default function LLMParametersV0() {
 
 					<div className={styles.parameters}>
 						<div className={styles.left}>
-							<span className={styles.title}>停止序列</span>
-							<Tooltip title="最多四个序列，API 将停止生成更多的 token。返回的文本将不包含停止序列。">
+							<span className={styles.title}>Stop Sequences</span>
+							<Tooltip title="Up to four sequences; the API stops generating more tokens. Returned text will not include stop sequences.">
 								<IconHelp size={16} color="#1C1D2399" className={styles.icon} />
 							</Tooltip>
 							<Switch
@@ -371,7 +371,7 @@ export default function LLMParametersV0() {
 								onChange={(value) =>
 									onParamChanged(["stop_sequence", "value"], value)
 								}
-								placeholder="输入序列并按 Tab 键"
+								placeholder="Enter sequence and press Tab"
 							/>
 						</div>
 					</div> */}
@@ -381,7 +381,7 @@ export default function LLMParametersV0() {
 	})
 
 	return (
-		<Form.Item name={["model"]} className={styles.formItem} label="模型">
+		<Form.Item name={["model"]} className={styles.formItem} label="Model">
 			<LLMSelect
 				className={styles.LLMParameters}
 				options={options}

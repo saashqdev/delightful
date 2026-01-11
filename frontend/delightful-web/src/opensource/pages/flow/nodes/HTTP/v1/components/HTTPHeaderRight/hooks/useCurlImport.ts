@@ -10,7 +10,7 @@ import {
 } from "@/opensource/pages/flow/utils/curl/curlToApiStructure"
 import { useTranslation } from "react-i18next"
 
-// 创建默认的空结构
+// Create default empty structure
 function createEmptyStructure() {
 	return {
 		type: "object",
@@ -52,10 +52,10 @@ export default function useCurlImport() {
 				const parsedCurl = parseCurlCommand(curlCommand)
 				console.log("Parsed curl result:", parsedCurl)
 
-				// 获取当前节点的API配置
+// Get current node API configuration
 				const currentApi = currentNode?.params?.api || {}
 
-				// 创建更新后的API结构 - 完全覆盖式更新
+			// Create updated API structure - complete overwrite update
 				const updatedApi = {
 					...currentApi,
 					structure: {
@@ -66,7 +66,7 @@ export default function useCurlImport() {
 						url: parsedCurl.url,
 						request: {
 							...currentApi.structure?.request,
-							// 查询参数 - 始终使用新的解析结果
+							// Query parameters - always use new parsing results
 							params_query: {
 								id:
 									currentApi.structure?.request?.params_query?.id ||
@@ -78,7 +78,7 @@ export default function useCurlImport() {
 										? objectToFormStructure(parsedCurl.queryParams)
 										: createEmptyStructure(),
 							},
-							// 路径参数 - 始终使用新的解析结果
+							// Path parameters - always use new parsing results
 							params_path: {
 								id:
 									currentApi.structure?.request?.params_path?.id ||
@@ -111,9 +111,9 @@ export default function useCurlImport() {
 										  }
 										: createEmptyStructure(),
 							},
-							// 请求体类型 - 始终使用新的解析结果
+							// Request body type - always use new parsing results
 							body_type: parsedCurl.bodyType || "none",
-							// 请求体 - 始终使用新的解析结果
+							// Request body - always use new parsing results
 							body: {
 								id:
 									currentApi.structure?.request?.body?.id ||
@@ -126,7 +126,7 @@ export default function useCurlImport() {
 										? objectToFormStructure(parsedCurl.body)
 										: createEmptyStructure(),
 							},
-							// 请求头 - 始终使用新的解析结果
+							// Request headers - always use new parsing results
 							headers: {
 								id:
 									currentApi.structure?.request?.headers?.id ||
@@ -142,7 +142,7 @@ export default function useCurlImport() {
 					},
 				}
 
-				// 更新节点配置
+				// Update node configuration
 				if (currentNode?.id) {
 					updateNodeConfig({
 						...currentNode,
@@ -158,7 +158,7 @@ export default function useCurlImport() {
 					message.error(t("http.curlImport.nodeNotExist", { ns: "flow" }))
 				}
 			} catch (error) {
-				console.error("解析 curl 命令失败", error)
+				console.error("Failed to parse curl command", error)
 				message.error(t("http.curlImport.parseError", { ns: "flow" }))
 			}
 		},

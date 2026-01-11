@@ -36,7 +36,7 @@ function PostAddrSettings({ value, onChange, paths, pathEventEmitter }: PostAddr
 			const addrString = val
 			const pathFieldNames = findBracedStrings(addrString)
 			// console.log("pathFieldNames: ", pathFieldNames)
-			// 通知path组件更新
+			// Notify path component to update
 			pathEventEmitter.emit(pathFieldNames)
 		}
 		onChange(changePath, val)
@@ -81,7 +81,7 @@ function PostAddrSettings({ value, onChange, paths, pathEventEmitter }: PostAddr
 				{/* <Input
 					style={{ width: 200, marginLeft: "6px" }}
 					defaultValue={value.domain}
-					placeholder="请输入域名"
+					placeholder="Please enter domain"
 				/> */}
 				<div style={{ flex: 1, marginLeft: "4px" }}>
 					<DelightfulInput

@@ -1,6 +1,6 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6649c0573a3686-33859327",
-	name: "代码执行",
+	name: "Code Execution",
 	description: "",
 	node_type: 5,
 	meta: [],

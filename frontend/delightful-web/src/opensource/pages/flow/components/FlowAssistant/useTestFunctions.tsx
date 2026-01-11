@@ -57,7 +57,7 @@ export default function useTestFunctions({
 		(sseLines: string[], delayBetweenLines: number): ReadableStream<Uint8Array> => {
 			// 确保最小延迟，避免处理不及时
 			const safeDelay = Math.max(150, delayBetweenLines)
-			console.log(`使用安全延迟: ${safeDelay}ms`)
+			console.log(`Using safe delay: ${safeDelay}ms`)
 
 			let lineIndex = 0
 			const encoder = new TextEncoder()
@@ -78,7 +78,7 @@ export default function useTestFunctions({
 
 						if (lineIndex >= sseLines.length) {
 							// 所有行已发送完毕，关闭流
-							console.log(`SSE流全部行发送完成 (${sseLines.length}行)`)
+							console.log(`All SSE stream lines sent (${sseLines.length} lines)`)
 
 							// 发送结束标记并关闭流
 							setTimeout(() => {
@@ -363,24 +363,24 @@ export default function useTestFunctions({
 
 		// 记录特殊字符情况
 		if (specialCharCount > 0) {
-			console.log(`从SSE事件中提取了${specialCharCount}个包含特殊字符的片段`)
+			console.log(`Extracted ${specialCharCount} fragments with special characters from SSE events`)
 		}
 
 		return fragments.join("")
 	}
 
 	/**
-	 * 测试使用原始字符串内容（非SSE格式，直接是内容本身）
-	 * 处理较大文本块，自动分割成小块，确保特殊字符（换行符、冒号等）被保留
-	 * @param fullContent 完整的响应内容（不是SSE格式，而是纯内容）
-	 * @param delayBetweenChunks 文本块之间的延迟时间(毫秒)
-	 * @param chunkSize 每个文本块的大小(字符数)
+	 * Test using raw string content (non-SSE format, content itself)
+	 * Handle large text blocks by splitting into chunks, ensuring special characters (newline, colon, etc.) are preserved
+	 * @param fullContent Full response content (not SSE format; raw content)
+	 * @param delayBetweenChunks Delay between chunks (milliseconds)
+	 * @param chunkSize Size of each chunk (character count)
 	 */
 	const testWithRawContent = useMemoizedFn(
 		(fullContent: string, delayBetweenChunks: number = 200, chunkSize: number = 10) => {
 			// 检查参数合法性
 			if (!fullContent) {
-				console.warn("内容为空，无法测试")
+				console.warn("Content is empty, cannot test")
 				return
 			}
 
@@ -678,19 +678,19 @@ export default function useTestFunctions({
 				return
 			}
 
-			console.log("开始处理SSE内容，长度:", sseContent.length)
+			console.log("Start processing SSE content, length:", sseContent.length)
 
 			// 检查是否是SSE格式
 			const isSSEFormat = sseContent.trim().startsWith("data:")
 
 			if (isSSEFormat) {
-				// 1. 尝试提取原始内容
-				console.log("检测到SSE格式数据，尝试两种方法提取内容")
+				// 1. Try extracting raw content
+				console.log("Detected SSE formatted data, trying two extraction methods")
 
-				// 方法1: 按行处理整个文本
+				// Method 1: Process entire text line-by-line
 				const contentFromText = extractContentFromSSE(sseContent)
 
-				// 方法2: 将数据拆分为事件数组处理（适用于逐字符发送）
+				// Method 2: Split into event array (suitable for per-character sending)
 				const events = sseContent.split("\n").filter((line) => line.trim().length > 0)
 				const contentFromEvents = extractTextFromSSEEvents(events)
 
@@ -704,10 +704,10 @@ export default function useTestFunctions({
 						.length
 
 					if (specialCharsInEvents > specialCharsInText) {
-						console.log("使用事件数组提取方法，它保留了更多特殊字符")
+						console.log("Using event-array extraction; it preserves more special characters")
 						finalContent = contentFromEvents
 					} else {
-						console.log("使用文本提取方法，它保留了更多特殊字符")
+						console.log("Using text extraction method; it preserves more special characters")
 						finalContent = contentFromText
 					}
 				} else {

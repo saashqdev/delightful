@@ -62,7 +62,7 @@ function UpdateKnowledge({ knowledge, updateKnowledge, initKnowledgeList }: Upda
 					enabled: knowledge?.enabled || false,
 				})
 				message.success(`${title} ${t("common.success", { ns: "flow" })}`)
-				// 更新流程列表
+				// Update flow list
 				mutate(RequestUrl.getKnowledgeList)
 				form.resetFields()
 				setFalse()

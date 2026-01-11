@@ -356,11 +356,11 @@ const getCommonSchemaConfigMap: () => Record<string, NodeSchema> = () => ({
 		},
 	},
 	// [customNodeType.LLMCall]: {
-	// 	label: "大模型调用",
+	// 	label: "LLM Call",
 	// 	icon: <IconBrain color="#fff" stroke={1} size={18} />,
 	// 	color: "#00A8FF",
 	// 	id: customNodeType.LLMCall,
-	// 	desc: "与 AI 聊天 节点的区别：1.手动加载记忆 2.模型选择支持引用之前节点输出",
+	// 	desc: "Differences from AI Chat node: 1. Manually load memory 2. Model selection supports referencing previous node output",
 	// 	handle: {
 	// 		withSourceHandle: true,
 	// 		withTargetHandle: true,

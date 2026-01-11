@@ -42,28 +42,28 @@ export const extractContent = (
 
 		return { content, isError: false, errorInfo: "" }
 	} catch (error) {
-		console.error("failed to parse SSE data line:", error, "原始行:", line)
+		console.error("failed to parse SSE data line:", error, "raw line:", line)
 		return { content: "", isError: false, errorInfo: "" }
 	}
 }
 
 /**
  * normalize JSON string, process multiline formatted JSON
- * @param json 原始JSON string
+ * @param json raw JSON string
  * @returns normalized JSON string
  */
 export const normalizeJson = (json: string): string => {
-	// 如果输入就是单行，直接返回
+	// if input is single line, return directly
 	if (!json.includes("\n")) return json
 
 	try {
-		// 尝试解析并重新序列化，会自动Process格式问题
+		// try parsing and reserializing to automatically process format issues
 		const parsed = JSON.parse(json)
 		return JSON.stringify(parsed)
 	} catch (e) {
 		console.log("JSON parsing failed, trying manual normalization:", e)
 
-		// 手动清理格式
+		// manually clean up format
 		const normalized = json
 			// remove comments
 			.replace(/\/\/.*$/gm, "")
@@ -264,7 +264,7 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 				const confirmMessage = command.message || "please confirm if you want to execute this operation?"
 				updatedContent = updatedContent.replace(fullMatch, `${confirmMessage}`)
 
-				// 特别标记确认Operation命令
+				// specially mark confirmation operation command
 				command.isConfirmationCommand = true
 			} else {
 				// other command types use normal replacement
@@ -293,7 +293,7 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 
 		// extract command part and replace
 		const commandPart = updatedContent.substring(startIndex, endIndex)
-		updatedContent = updatedContent.replace(commandPart, "指令数据收集中")
+		updatedContent = updatedContent.replace(commandPart, "collecting command data")
 		console.log("content after processing incomplete command:", updatedContent)
 	}
 

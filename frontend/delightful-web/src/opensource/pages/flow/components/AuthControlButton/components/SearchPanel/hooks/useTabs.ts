@@ -46,12 +46,12 @@ export default function useTabs() {
 				onClick: () => changeTab(AuthSearchTypes.Organization),
 			},
 			// {
-			// 	label: "按Group chat",
+			// 	label: "group chat",
 			// 	value: AuthSearchTypes.Group,
 			// 	onClick: () => changeTab(AuthSearchTypes.Group),
 			// },
 			// {
-			// 	label: "按Partners",
+			// 	label: "partners",
 			// 	value: AuthSearchTypes.Partner,
 			// 	onClick: () => changeTab(AuthSearchTypes.Partner),
 			// },

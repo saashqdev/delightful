@@ -98,12 +98,12 @@ export function useCommandDetection(): UseCommandDetectionResult {
 					}
 				}
 
-				// 替换命令部分为指令数据收集中
+				// replace command part with collecting command data
 				if (endIndex > startIndex) {
 					processedContent = `${processedContent.substring(
 						0,
 						startIndex,
-					)}指令数据收集中${processedContent.substring(endIndex)}`
+					)}collecting command data${processedContent.substring(endIndex)}`
 				}
 			}
 		}

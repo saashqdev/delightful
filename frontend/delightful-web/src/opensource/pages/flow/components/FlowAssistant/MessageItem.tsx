@@ -70,12 +70,12 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		// detect command flag
 		const { hasCommands, commandCount } = detectCommands(displayContent)
 		if (hasCommands) {
-			console.log("MessageItemdiscover command flag:", id, "命令数量:", commandCount)
+			console.log("MessageItemdiscover command flag:", id, "number of commands:", commandCount)
 		}
 
 		// display custom loading animation at instruction collection stage
 		if (isCollectingCommand) {
-			// 如果没有内容，显示普通的Spin组件
+			// if no content, display normal Spin component
 			if (!displayContent) {
 				return (
 					<div className={loadingContainerStyle}>
@@ -84,10 +84,10 @@ function MessageItem(props: MessageProps): React.ReactElement {
 				)
 			}
 
-			// Process命令标记
+			// process command flag
 			displayContent = processCommandMarkers(displayContent, true)
 
-			// 有内容时显示自定义动画
+			// display custom animation when there is content
 			return (
 				<>
 					<DelightfulMarkdown content={displayContent} />
@@ -96,12 +96,12 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 当不在收集命令状态时，Process命令标记
+		// 当不在收集命令状态时，process command flag
 		if (hasCommands) {
 			displayContent = processCommandMarkers(displayContent, false)
 		}
 
-		// 如果消息为空，才显示普通loading状态
+		// only display normal loading state if message is empty
 		if (!displayContent && status === "loading") {
 			console.log(`Message ${id} rendering empty loading state`)
 			return (
@@ -111,7 +111,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			)
 		}
 
-		// 错误状态Process - 显示错误消息和重试按钮
+		// error state processing - display error message and retry button
 		if (status === "error") {
 			return (
 				<div className={styles.messageContentWrapper}>

@@ -101,7 +101,7 @@ const ConditionItem = ({
 
 	const { expressionDataSource } = usePrevious()
 
-	// 这是每一项不用Form.Item的原因是因为这三项之间属于联级关系，用Form.Item不好Process数据
+	// This is why Form.Item is not used for each item because these three items have a cascading relationship, and it is not good to process data with Form.Item
 	return (
 		<div className="delightful-condition-item">
 			{isShowColumnOption && (
@@ -133,7 +133,7 @@ const ConditionItem = ({
 							})}
 						</DelightfulSelect>
 					</div>
-					{/* {(!isExistColumn || isShowColumnChangeTip) && <div>字段不存在或字段已变更</div>} */}
+					{/* {(!isExistColumn || isShowColumnChangeTip) && <div>field does not exist or field has changed</div>} */}
 				</div>
 			)}
 			<DelightfulSelect

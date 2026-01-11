@@ -311,8 +311,8 @@ export const getColumnTargetType = (
 /**
  *
  * @param {Object} dataTemplate file data template
- * @param {String} sheetId 子表id
- * @param {Array} notSupportType 不支持的列类型
+ * @param {String} sheetId sub-table id
+ * @param {Array} notSupportType unsupported column type
  * @returns {
  * 	columnId,
  * 	operator,

@@ -15,7 +15,7 @@ const ConditionContainer = ({
 	onChange,
 	addButtonText,
 	isEnableDel = false,
-	isSupportRowId = true, // 过滤ConditionWhether支持默认行ID
+	isSupportRowId = true, // filter Condition whether supports default row ID
 	columns,
 	sheetId,
 	dataTemplate,

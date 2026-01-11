@@ -60,7 +60,7 @@ export default function ArgsSettings({
 	const [currentTab, setCurrentTab] = useState(activeKey)
 	const { selectedNodeId } = useFlowNodes()
 
-	// 以父组件的为准
+	// Parent component value takes precedence
 	useEffect(() => {
 		setCurrentTab(activeKey)
 	}, [activeKey])
@@ -271,7 +271,7 @@ export default function ArgsSettings({
 	})
 
 	useUpdateEffect(() => {
-		// 节点失去焦点时保存一次，可以进一步判断Whether上一个selectedNode是当前HTTP节点id
+		// Save once when node loses focus, can further determine whether the previous selectedNode is the current HTTP node id
 		if (!selectedNodeId) {
 			update()
 		}

@@ -2,7 +2,6 @@ export const v0Template = {
 	v0: {
 		node_id: "DELIGHTFUL-FLOW-NODE-67453b2dd006a9-53329840",
 		debug: false,
-		name: "委托 AI 助理",
 		name: "Delegate AI Assistant",
 		// Delegate AI Assistant
 		// Release scope: 0 Personal, 1 Enterprise, 2 Marketplace

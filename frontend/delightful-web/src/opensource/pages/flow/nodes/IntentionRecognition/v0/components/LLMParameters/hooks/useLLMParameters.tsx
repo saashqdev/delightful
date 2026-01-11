@@ -74,9 +74,9 @@ export default function useLLMParameters() {
 			// 	},
 			// },
 			// {
-			// 	label: "最大标记",
+			// 	label: "Max Tokens",
 			// 	key: "max_tags",
-			// 	tooltips: "指定生成结果长度的上限。如果生成结果截断，可以调大该参数。",
+			// 	tooltips: "Specifies the upper limit of the generated result length. If the generated result is truncated, you can increase this parameter.",
 			// 	open: false,
 			// 	defaultValue: 512,
 			// 	extra: {

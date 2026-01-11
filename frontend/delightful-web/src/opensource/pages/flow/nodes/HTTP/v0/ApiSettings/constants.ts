@@ -1,4 +1,4 @@
-// 默认的接口参数配置
+// Default API parameter configuration
 export const DefaultApiSettings = {
 	method: "GET",
 	domain: "",

@@ -21,7 +21,7 @@ export default function useOldToolsHandleV0() {
 		}) as UseableToolSet.Item
 	})
 
-	// 兼容旧数据处理方法
+	// Compatibility handling method for legacy data
 	const handleOldTools = useMemoizedFn(
 		(params: Record<string, any>, oldKey = "tools", newKey = "option_tools") => {
 			const cloneParams = cloneDeep(params)

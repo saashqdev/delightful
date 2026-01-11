@@ -2,7 +2,7 @@ import { useMemoizedFn } from "ahooks"
 import type { Message } from ".."
 
 /**
- * 确认操作的钩子，用于管理确认操作相关的状态和方法
+ * Hook for confirming operations, managing confirmation operation related states and methods
  */
 interface UseConfirmOperationsProps {
 	flowId: string
@@ -25,12 +25,12 @@ export function useConfirmOperations({
 	setForceScroll,
 	sendMessage,
 }: UseConfirmOperationsProps): UseConfirmOperationsResult {
-	// 处理从流式响应提取确认操作命令
+	// Process extraction of confirmation operation command from streaming response
 	const handleConfirmOperationCommand = useMemoizedFn((command: any, messageId: string) => {
 		if (command && command.type === "confirmOperation" && messageId) {
-			console.log("处理确认操作命令:", command, "messageId:", messageId)
+			console.log("Processing confirmation operation command:", command, "messageId:", messageId)
 
-			// 从消息中提取确认操作需要的数据
+			// Extract data required for confirmation operation from message
 			setMessages((prev) =>
 				prev.map((msg) =>
 					msg.id === messageId
@@ -38,7 +38,7 @@ export function useConfirmOperations({
 								...msg,
 								confirmOperation: {
 									type: "confirmOperation",
-									message: command.message || "请确认是否执行此操作？",
+									message: command.message || "Please confirm if you want to execute this operation?",
 									data: command.data || {},
 								},
 						  }
@@ -46,7 +46,7 @@ export function useConfirmOperations({
 				),
 			)
 
-			// 强制滚动确保用户能看到确认按钮
+			// Force scroll to ensure user can see confirmation button
 			setForceScroll(true)
 		}
 	})

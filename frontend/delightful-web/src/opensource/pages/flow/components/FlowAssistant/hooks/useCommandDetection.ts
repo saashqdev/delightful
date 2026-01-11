@@ -10,19 +10,19 @@ interface UseCommandDetectionResult {
 }
 
 /**
- * 自定义Hook，用于检测和处理消息内容中的命令标记
+ * Custom hook for detecting and handling command markers in message content
  */
 export function useCommandDetection(): UseCommandDetectionResult {
 	/**
-	 * 检测消息内容中的命令标记
-	 * @param content 消息内容
-	 * @returns 处理后的内容、是否包含命令、命令数量
+	 * Detect command markers in message content
+	 * @param content Message content
+	 * @returns Processed content, whether commands exist, command count
 	 */
 	const detectCommands = useCallback((content: string) => {
 		const updatedContent = content || ""
 		let hasCommands = false
 
-		// 找出所有命令标记
+		// Find all command markers
 		const commandStartRegex = /<!-- COMMAND_START -->/g
 		const commandMatches = [...updatedContent.matchAll(commandStartRegex)]
 		const commandCount = commandMatches.length
@@ -37,16 +37,16 @@ export function useCommandDetection(): UseCommandDetectionResult {
 	}, [])
 
 	/**
-	 * 处理命令标记，根据收集状态决定如何显示内容
-	 * @param content 原始内容
-	 * @param isCollectingCommand 是否正在收集命令
-	 * @returns 处理后的内容
+	 * Process command markers and decide how to display content based on collection state
+	 * @param content Original content
+	 * @param isCollectingCommand Whether currently collecting commands
+	 * @returns Processed content
 	 */
 	const processCommandMarkers = useCallback((content: string, isCollectingCommand: boolean) => {
 		let processedContent = content || ""
 
 		if (isCollectingCommand) {
-			// 收集命令阶段，只显示命令标记之前的内容
+			// During command collection phase, only show content before command markers
 			const commandStartIndex = processedContent.indexOf("<!-- COMMAND_START -->")
 			if (commandStartIndex >= 0) {
 				processedContent = processedContent.substring(0, commandStartIndex)

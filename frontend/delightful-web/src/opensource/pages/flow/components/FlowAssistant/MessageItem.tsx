@@ -43,7 +43,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 	const { styles, cx } = useStyles()
 	const { detectCommands, processCommandMarkers } = useCommandDetection()
 
-	// 渲染确认Operation按钮
+	// render confirm action button
 	const renderConfirmButtons = () => {
 		if (!confirmOperation) return null
 
@@ -62,18 +62,18 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		)
 	}
 
-	// 渲染消息内容
+	// render message content
 	const renderContent = (): React.ReactNode => {
-		// Process内容中的命令标记，确保不显示JSON
+		// process command flag in content, ensure JSON is not displayed
 		let displayContent = content || ""
 
-		// 检测命令标记
+		// detect command flag
 		const { hasCommands, commandCount } = detectCommands(displayContent)
 		if (hasCommands) {
-			console.log("MessageItem发现命令标记:", id, "命令数量:", commandCount)
+			console.log("MessageItemdiscover command flag:", id, "命令数量:", commandCount)
 		}
 
-		// 指令收集阶段显示自定义动画Loading
+		// display custom loading animation at instruction collection stage
 		if (isCollectingCommand) {
 			// 如果没有内容，显示普通的Spin组件
 			if (!displayContent) {

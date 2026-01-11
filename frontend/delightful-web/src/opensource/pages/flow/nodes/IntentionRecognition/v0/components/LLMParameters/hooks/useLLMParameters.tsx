@@ -28,7 +28,7 @@ export default function useLLMParameters() {
 			// 	label: "Temperature",
 			// 	key: "temperature",
 			// 	tooltips:
-			// 		"Temperature控制随机性。较低的Temperature会导致较少的随机完成。随着Temperature接近零，Model becomesConfirmand repeatability。较高的Temperature会导致更多的随机完成。",
+			// 		"Temperature controls randomness. Lower temperature leads to less random completion. As temperature approaches zero, model becomes more deterministic and repetitive. Higher temperature leads to more random completion.",
 			// 	open: true,
 			// 	defaultValue: 0.7,
 			// 	extra: {
@@ -52,7 +52,7 @@ export default function useLLMParameters() {
 			// {
 			// 	label: "Presence penalty",
 			// 	key: "exist_penalty",
-			// 	tooltips: "对文本中已有的标记的对数概率施加惩罚。",
+			// 	tooltips: "Apply penalty to the log probability of already existing tokens in the text.",
 			// 	open: false,
 			// 	defaultValue: 0,
 			// 	extra: {
@@ -62,9 +62,9 @@ export default function useLLMParameters() {
 			// 	},
 			// },
 			// {
-			// 	label: "频率惩罚",
+			// 	label: "Frequency penalty",
 			// 	key: "frequency_penalty",
-			// 	tooltips: "对文本中出现的标记的对数概率施加惩罚。",
+			// 	tooltips: "Apply penalty to the log probability of tokens appearing in the text.",
 			// 	open: false,
 			// 	defaultValue: 0,
 			// 	extra: {

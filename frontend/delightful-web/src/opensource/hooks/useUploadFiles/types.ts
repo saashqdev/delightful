@@ -1,4 +1,4 @@
-import type { UploadCallBack } from "@delightful/upload-sdk"
+import type { UploadCallBack } from "@bedelightful/upload-sdk"
 
 export interface UploadResponse {
 	key: string

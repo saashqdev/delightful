@@ -18,7 +18,7 @@ This package provides a template string parsing engine that supports ES6-style s
 ## Usage
 
 ```typescript
-import { resolveToString, resolveToArray } from "@delightful/es6-template-strings";
+import { resolveToString, resolveToArray } from "@bedelightful/es6-template-strings";
 
 // Basic usage
 console.log(resolveToString("hello ${name}", { name: "world" }));

@@ -10,7 +10,7 @@ import weekday from "dayjs/plugin/weekday"
 import localeData from "dayjs/plugin/localeData"
 import DelightfulSelect from "@bedelightful/delightful-flow/dist/common/BaseUI/Select"
 import { useTranslation } from "react-i18next"
-import { resolveToString } from "@delightful/es6-template-strings"
+import { resolveToString } from "@bedelightful/es6-template-strings"
 import styles from "./index.module.less"
 import {
 	CycleTypeMap,

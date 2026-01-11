@@ -1,5 +1,5 @@
 import { splitNumber } from "@/utils/number"
-import { resolveToString } from "@delightful/es6-template-strings"
+import { resolveToString } from "@bedelightful/es6-template-strings"
 
 import { Flex } from "antd"
 import { memo, useMemo } from "react"

@@ -5,7 +5,7 @@ import { useMemo, useState } from "react"
 import { Flex, Skeleton } from "antd"
 import { useMemoizedFn } from "ahooks"
 import { useTranslation } from "react-i18next"
-import { resolveToString } from "@delightful/es6-template-strings"
+import { resolveToString } from "@bedelightful/es6-template-strings"
 import { IconCloudDownload, IconEye } from "@tabler/icons-react"
 
 import FileIcon from "@/opensource/components/business/FileIcon"

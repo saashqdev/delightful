@@ -8,7 +8,7 @@ import { IconCircleCheck, IconCircleX, IconHelp, IconPlus } from "@tabler/icons-
 import { useMemoizedFn } from "ahooks"
 import { cx } from "antd-style"
 import { useTranslation } from "react-i18next"
-import { resolveToString } from "@delightful/es6-template-strings"
+import { resolveToString } from "@bedelightful/es6-template-strings"
 import styles from "./TeamshareKnowledgeSelect.module.less"
 import RenderLabel from "../KnowledgeDataList/RenderLabel/RenderLabel"
 import { KnowledgeStatus } from "../../constants"

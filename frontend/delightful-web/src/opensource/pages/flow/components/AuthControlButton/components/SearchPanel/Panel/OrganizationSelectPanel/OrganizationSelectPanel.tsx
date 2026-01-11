@@ -36,7 +36,7 @@ export default function OrganizationSelectPanel() {
 			)
 			.map((auth) => {
 				if (auth.target_type === TargetTypes.Department) {
-					// 转换为 DepartmentSelectItem
+					// convert to DepartmentSelectItem
 					return {
 						id: auth.target_id,
 						name: auth.target_info?.name || "",
@@ -44,7 +44,7 @@ export default function OrganizationSelectPanel() {
 						operation: auth.operation,
 					}
 				}
-				// 转换为 UserSelectItem
+				// convert to UserSelectItem
 				return {
 					id: auth.target_id,
 					user_id: auth.target_id,
@@ -61,7 +61,7 @@ export default function OrganizationSelectPanel() {
 	}, [authList])
 
 	/**
-	 * 组织架构面板选中状态
+	 * organization structure panel selection state
 	 */
 	const organizationPanelCheckboxOptions = useMemo(
 		() => ({
@@ -70,7 +70,7 @@ export default function OrganizationSelectPanel() {
 				setOrganizationChecked(value)
 				// @ts-ignore
 				setAuthList((prevAuthList) => {
-					// 过滤掉原有的部门和用户
+					// filter out existing departments and users
 					const filteredAuthList = prevAuthList.filter((auth) => {
 						return (
 							auth.target_type !== TargetTypes.Department &&
@@ -78,7 +78,7 @@ export default function OrganizationSelectPanel() {
 						)
 					})
 
-					// 添加新选择的部门和用户
+					// add newly selected departments and users
 					const newItems = value
 						.map((item) => {
 							if (item.dataType === StructureItemType.Department) {
@@ -109,11 +109,11 @@ export default function OrganizationSelectPanel() {
 										name: item.nickname || item.real_name,
 										description: userItem.description || "",
 										icon: userItem.avatar_url || "",
-										// 可以添加用户特有的信息
+										// can add user-specific information
 									},
 								}
 							}
-							// 如果有其他类型，可以在这里Process
+							// if there are other types, can process here
 							return null
 						})
 						.filter(Boolean) // 过滤掉可能的 null 值

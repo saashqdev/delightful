@@ -11,7 +11,7 @@ export default function useDepartments() {
 	const [organizationChecked, setOrganizationChecked] = useState<OrganizationSelectItem[]>([])
 
 	/**
-	 * 组织架构面板选中状态
+	 * organization structure panel selection state
 	 */
 	const organizationPanelCheckboxOptions = useMemo(
 		() => ({

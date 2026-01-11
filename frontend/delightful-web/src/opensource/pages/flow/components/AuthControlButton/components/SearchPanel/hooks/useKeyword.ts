@@ -1,5 +1,5 @@
 ﻿/**
- * Search关键词相关数据状态
+ * Searchkeyword related data state
  */
 import { useState } from "react"
 

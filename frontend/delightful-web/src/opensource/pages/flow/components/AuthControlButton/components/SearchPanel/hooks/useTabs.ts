@@ -5,13 +5,13 @@ import { useAuthControl } from "../../../AuthManagerModal/context/AuthControlCon
 import { ManagerModalType } from "../../../AuthManagerModal/types"
 
 export enum AuthSearchTypes {
-	// 最近联系
+	// Recent contacts
 	Member = 1,
-	// 组织架构
+	// Organization structure
 	Organization = 2,
-	// 群聊
+	// Group chat
 	Group = 3,
-	// 合作伙伴
+	// Partners
 	Partner = 4,
 }
 
@@ -32,7 +32,7 @@ export default function useTabs() {
 		setTab(e.target.value)
 	})
 
-	// 当前tab列表
+	// Current tab list
 	const tabList = useMemo(() => {
 		return [
 			{
@@ -46,12 +46,12 @@ export default function useTabs() {
 				onClick: () => changeTab(AuthSearchTypes.Organization),
 			},
 			// {
-			// 	label: "按群聊",
+			// 	label: "按Group chat",
 			// 	value: AuthSearchTypes.Group,
 			// 	onClick: () => changeTab(AuthSearchTypes.Group),
 			// },
 			// {
-			// 	label: "按合作伙伴",
+			// 	label: "按Partners",
 			// 	value: AuthSearchTypes.Partner,
 			// 	onClick: () => changeTab(AuthSearchTypes.Partner),
 			// },

@@ -47,7 +47,7 @@ export default function useMembers({ tab, keyword }: UseMemberProps) {
 							},
 						}
 					})
-					// 将已有权限合并进来，避免删掉创建者的权限
+					// merge existing permissions, avoid deleting creator permissions
 					authMembers = authMembers.map((member) => {
 						const owner = authList?.find(
 							(auth) => auth.operation === OperationTypes.Owner,

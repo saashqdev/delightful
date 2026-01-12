@@ -11,7 +11,7 @@ interface LazySubGroupProps {
 }
 
 /**
- * 懒loadSubGroupcomponent，onlywhencomponent进入视口time才renderinside容
+ * Lazy load SubGroup component, only render inside when component enters viewport
  */
 function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySubGroupProps) {
     const [isVisible, setIsVisible] = useState(false);
@@ -21,24 +21,24 @@ function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySub
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                //  Whencomponent进入视口time
+                //  When component enters viewport
                 if (entry.isIntersecting) {
                     setIsVisible(true);
                     
-                    //  标记foralreadyload，避免re复render
+                    //  Mark as already loaded, avoid re-rendering
                     if (!isLoaded) {
                         setIsLoaded(true);
                     }
                     
-                    //  componentalreadyloadbackcan解除观察
+                    //  component already loaded, can unobserve
                     if (ref.current) {
                         observer.unobserve(ref.current);
                     }
                 }
             },
             {
-                rootMargin: '100px', //  提front100pxstartload
-                threshold: 0.1 //  10%visibletimetrigger
+                rootMargin: '100px', //  start loading 100px ahead
+                threshold: 0.1 //  10% visible threshold
             }
         );
 
@@ -53,7 +53,7 @@ function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySub
         };
     }, [isLoaded]);
 
-    //  RenderCHSitem占位符oractualinside容
+    //  Render item placeholder or actual content
     return (
         <div ref={ref} style={{ minHeight: '50px' }}>
             {(isVisible || isLoaded) ? (

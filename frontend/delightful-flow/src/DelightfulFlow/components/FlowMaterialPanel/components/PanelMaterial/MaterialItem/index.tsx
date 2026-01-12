@@ -21,11 +21,11 @@ function MaterialItemComponent({
 	avatar,
 	...item
 }: MaterialItemProps) {
-	//  usecustom钩子handleaddnode and draglogic
+	//  use custom hooks to handle add node and drag logic
 	const { onAddItem } = useAddItem({ item })
 	const { onDragStart } = useDragNode({ item })
 
-	//  提取need传递给子componentof property
+	//  extract properties that need to be passed to child components
 	const avatarProps = useMemo(
 		() => ({
 			showIcon,
@@ -68,9 +68,9 @@ function MaterialItemComponent({
 	)
 }
 
-//  useReact.memowrapcomponent，addcustomcomparefunctiononly compare keyproperty
+//  use React.memo to wrap component, add custom compare function to only compare key properties
 const MaterialItem = memo(MaterialItemComponent, (prevProps, nextProps) => {
-	//  onlywhen关键propertyre-render only when changednewrender
+	//  only re-render when key properties changed
 	return (
 		prevProps.id === nextProps.id &&
 		prevProps.label === nextProps.label &&

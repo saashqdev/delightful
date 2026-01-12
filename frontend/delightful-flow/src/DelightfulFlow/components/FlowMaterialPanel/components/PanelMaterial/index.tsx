@@ -19,21 +19,21 @@ const PanelMaterial = React.memo(
 		const { nodeList, filterNodeGroups, getGroupNodeList } = useMaterial({ keyword })
 		const containerRef = useRef<HTMLDivElement>(null)
 
-		//  useuseCallbackoptimizationrenderMaterialItemfunction，避免不必要ofrenewcreate
+		//  use useCallback to optimize rendering Material Item function, avoid unnecessary new creation
 		const renderMaterialItem = useCallback(
 			(n: any, extraProps: Record<string, any> = {}) => {
-				//  use解构赋valuegetschemainof property
+				//  use destructuring to get schema in property
 				const { key, headerRight, ...restSchema } = n.schema
-				//  createCHSitem固定ofkey，avoid each timerendergeneratenewstring
+				//  create item fixed key, avoid generating new string every render
 				const itemKey = key || `item-${restSchema?.id}`
 
-				//  直接returnMaterialItemFncomponent，传递必要ofprops
+				//  directly return MaterialItemFn component, pass necessary props
 				return <MaterialItemFn {...restSchema} {...extraProps} key={itemKey} />
 			},
 			[MaterialItemFn],
 		)
 
-		//  useuseMemooptimizationnodelistrender，只atnodeListorMaterialItemFn变化timerenewcalculate
+		//  use useMemo to optimize node list rendering, only recalculate when nodeList or MaterialItemFn changes
 		const renderedNodeList = useMemo(() => {
 			return nodeList.map((n, i) => {
 				const { key, headerRight, ...restSchema } = n.schema
@@ -59,7 +59,7 @@ const PanelMaterial = React.memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// onlykeywordre-render only when changednewrender
+		// only re-render when keyword changes
 		return (
 			prevProps.keyword === nextProps.keyword &&
 			prevProps.MaterialItemFn === nextProps.MaterialItemFn

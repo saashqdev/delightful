@@ -1,55 +1,55 @@
 /**
- * 中Englishbetween添add空格的VitePressplugin
- * atrendertime自动at中Englishbetween添add空格，不modify原始mdfile
+ * VitePress plugin to add spaces between Chinese and English
+ * automatically add spaces between Chinese and English at render time, without modifying original md files
  */
 
-// matchChinese字符的正则expression
+// regex to match Chinese characters
 const chineseRegex = /[\u4e00-\u9fa5]/
-// matchEnglish字母的正则expression
+// regex to match English letters
 const englishRegex = /[a-zA-Z0-9]/
 
 /**
- * at中Englishbetween添add空格
- * @param text needhandle的文本
- * @returns handleback的文本
+ * add spaces between Chinese and English
+ * @param text text that needs to be handled
+ * @returns handled text
  */
 function addSpaceBetweenChineseAndEnglish(text: string): string {
   if (!text) return text
   
-  // noChineseorEnglish，直接return
+  // no Chinese or English, directly return
   if (!chineseRegex.test(text) || !englishRegex.test(text)) return text
   
-  // atChinese和Englishbetween添add空格
+  // add spaces between Chinese and English
   return text
-    // atChineseback面add空格(ifback面isEnglish)
+    // add space after Chinese (if the back is English)
     .replace(/([\u4e00-\u9fa5])([a-zA-Z0-9])/g, '$1 $2')
-    // atEnglishback面add空格(ifback面isChinese)
+    // add space after English (if the back is Chinese)
     .replace(/([a-zA-Z0-9])([\u4e00-\u9fa5])/g, '$1 $2')
 }
 
 /**
- * createVitePress markdown-itplugin
+ * create VitePress markdown-it plugin
  */
 export function chineseSpacingPlugin(md: any) {
-  // save原始的render器
+  // save original renderer
   const originalRender = md.renderer.rules.text
   
-  // heavy写text标记的rendermethod
+  // overwrite text tag render method
   md.renderer.rules.text = (tokens: any[], idx: number, options: any, env: any, self: any) => {
-    // getwhen前文本content
+    // get current text content
     const content = tokens[idx].content
     
-    // handle文本，添add空格
+    // handle text, add spaces
     const processed = addSpaceBetweenChineseAndEnglish(content)
     
-    // replace原始content
+    // replace original content
     tokens[idx].content = processed
     
-    // invoke原始render器completerender
+    // invoke original renderer to complete rendering
     return originalRender(tokens, idx, options, env, self)
   }
   
-  // handle内联label中的文本
+  // handle text in inline labels
   const originalInlineRender = md.renderer.rules.inline
   if (originalInlineRender) {
     md.renderer.rules.inline = (tokens: any[], idx: number, options: any, env: any, self: any) => {
@@ -69,29 +69,29 @@ export function chineseSpacingPlugin(md: any) {
 }
 
 /**
- * VitePressplugin入口
+ * VitePress plugin entry point
  */
 export default function chineseSpacing() {
   return {
     name: 'vitepress-plugin-chinese-spacing',
-    enforce: 'pre' as const, // 明确指定for 'pre' type
+    enforce: 'pre' as const, // explicitly specify as 'pre' type
     
-    // extensionVitePressconfiguration
+    // extend VitePress configuration
     config(config: any) {
-      // createmarkdownconfigurationifnot exist
+      // create markdown configuration if not exist
       if (!config.markdown) {
         config.markdown = {}
       }
       
-      // 确保config.markdown.configisone个function
+      // ensure config.markdown.config is a function
       const originalMarkdownConfig = config.markdown.config || (() => {})
       
-      // extensionmarkdownconfiguration
+      // extend markdown configuration
       config.markdown.config = (md: any) => {
-        // application原始configuration
+        // apply original configuration
         originalMarkdownConfig(md)
         
-        // 添add我们的plugin
+        // add our plugin
         md.use(chineseSpacingPlugin)
       }
     }

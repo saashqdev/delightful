@@ -2,11 +2,11 @@
 import { useFlowUI } from "@/DelightfulFlow/context/FlowContext/useFlow"
 
 export default function useMaterialPanel() {
-	//  use专用ofhook替代all量useFlow，decrease不必要ofrerender
+	//  use dedicated hook instead of using useFlow in all places, decrease unnecessary rerenders
 	const { showMaterialPanel, setShowMaterialPanel } = useFlowUI()
 	const [isEditing, setIsEditing] = useState(false)
 
-	//  useuseMemocache样式object，avoid each timerendercreatenewobject
+	//  use useMemo to cache style object, avoid creating new object on each render
 	const stickyButtonStyle = useMemo(() => {
 		return {
 			top: "91px",

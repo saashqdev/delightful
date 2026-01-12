@@ -11,24 +11,24 @@ type MaterialProps = {
 }
 
 export default function useMaterial ({ keyword }: MaterialProps) {
-    //  cachenodeListof结果，avoid each timerendertime都createnew引用
+    //  cache nodeList result, avoid creating new reference every render time
     const nodeList = getExecuteNodeList()
 
     const { flow } = useFlowData()
 
-	//  动态ofnodelist
+	//  dynamic node list
 	const dynamicNodeList = useMemo(() => {
 		return nodeList.filter(n => n.schema.label.includes(keyword))
 	}, [keyword, nodeList])
 
-	// getdividegroupnodelist
+	// get divided group node list
 	const getGroupNodeList = useMemoizedFn((nodeTypes: BaseNodeType[]) => {
 		return dynamicNodeList.filter(n => {
 			return nodeTypes.includes(n.schema.id)
 		})
 	})
 
-	//  Filter出hasnodedataofdividegrouplist，并往里边塞nodeofschema
+	//  Filter out divided group list with node data, and put node schema inside
 	const filterNodeGroups = useMemo(() => {
 		const allNodeGroups = getNodeGroups()
 		return allNodeGroups.map(nodeGroup => {

@@ -165,7 +165,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 		}
 		if (source) {
 			const newEdges = [
-				// 出边
+				// outgoing edge
 				{
 					id: generateSnowFlake(),
 					source,

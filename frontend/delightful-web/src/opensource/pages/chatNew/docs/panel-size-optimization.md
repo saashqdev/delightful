@@ -40,7 +40,7 @@ const LAYOUT_CONSTANTS = {
 } as const
 ```
 
-### 2. 枚举化面板索引
+### 2. Enumerate Panel Index
 ```typescript
 const enum PanelIndex {
 	Sider = 0,

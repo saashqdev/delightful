@@ -22,7 +22,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
   const { paramsName } = useExternalConfig()
 
   const onAddItem = useMemoizedFn(() => {
-    //  Whenaddloop体oftime候，actualaddof元素yesmanyitemof
+    //  When adding loop body, actual added elements are many items
     const newNodes = []
     const newEdges = [] as Edge[]
     // whetherat divisiongroupinsideaddnode
@@ -44,7 +44,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
     const newNode = generateNewNode(currentNodeSchema, paramsName, id, position)
 
     if (isAddInGroup) {
-      //  forhandlewhenat divisiongroupbodynewincreasenodeback，continuenewincreasenodeshould还yesat divisiongroupinside
+      //  for handling when adding node inside group body, continue adding nodes should still be inside the group
       const parentId = isLoopBody ? selectedNodeId || undefined : selectedNode?.parentId
       newNode.parentId = parentId
       newNode.expandParent = true
@@ -60,7 +60,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
 
     newNodes.push(newNode)
     const edges = reactflow?.getEdges?.() || []
-    //  Ifnewincreaseofyesloop，thenneedmanynewincreaseCHSitemloop体 and CHS条边
+    //  If newly added is loop, then need to add multiple items for loop body and edges
     if (judgeLoopNode(newNode[paramsName.nodeType])) {
       const { newNodes: bodyNodes, newEdges: bodyEdges } = generateLoopBody(
         newNode,

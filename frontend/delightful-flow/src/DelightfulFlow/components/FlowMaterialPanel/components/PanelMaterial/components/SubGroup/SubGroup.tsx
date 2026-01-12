@@ -16,7 +16,7 @@ type SubGroupProps = {
 	materialFn: (n: NodeWidget, extraProps: Record<string, any>) => ReactNode
 }
 
-// extract render items separatelycomponent，and usememooptimizationit
+// extract render items as separate component, and use memo to optimize it
 const SubGroupItem = React.memo(
 	({
 		node,
@@ -30,7 +30,7 @@ const SubGroupItem = React.memo(
 		return <>{renderItem(node, index)}</>
 	},
 	(prevProps, nextProps) => {
-		// only compare keyproperty，avoid unnecessary rendering
+		// only compare key properties, avoid unnecessary rendering
 		return (
 			prevProps.node.schema.id === nextProps.node.schema.id &&
 			prevProps.index === nextProps.index
@@ -102,7 +102,7 @@ function SubGroup({ subGroup, getGroupNodeList, materialFn }: SubGroupProps) {
 		[subGroup.groupName, isRendered, getGroupNodeList, subGroup],
 	)
 
-	// Render子项list，only when panel expanded andloadrender only when data
+	// Render sub-items list, only render when panel is expanded and data is loaded
 	const renderedItems = useMemo(() => {
 		if (!isRendered || cachedNodeList.length === 0) {
 			return null

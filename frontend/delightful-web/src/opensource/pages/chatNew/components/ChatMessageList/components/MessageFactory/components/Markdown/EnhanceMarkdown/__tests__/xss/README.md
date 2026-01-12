@@ -1,101 +1,101 @@
-# EnhanceMarkdown component安alltest套件
+# EnhanceMarkdown component security test suite
 
 ## overview
 
-本test套件专门for `EnhanceMarkdown` componentdesign，用in防范各种 XSS（跨站script）攻击。该componenthandleuserinput的 Markdown content，exist潜at的安all风险，thusneedcomprehensive的安alltest来确保render安all性。
+This test suite is specifically for `EnhanceMarkdown` component design, used to prevent various XSS (cross-site script) attacks. This component handles user input Markdown content, which exists potential security risks, thus need comprehensive security test to ensure render security.
 
-## 安all风险analyze
+## Security risk analysis
 
-### main风险点
+### main risk points
 
-1. **HTML 注入**：componentsupport `allowHtml` property，mightrender恶意 HTML
-2. **Script execute**：恶意scriptlabelmight被execute
-3. **eventhandle器**：HTML eventpropertymight被利用
-4. **JavaScript 协议**：`javascript:` 协议的 URL might被execute
-5. **LaTeX 注入**：LaTeX functionalitymightexist注入风险
-6. **customcomponent**：customcomponentconfigurationmight被恶意利用
-7. **流式render**：流式contentupdate过程中的安all风险
+1. **HTML injection**: component support `allowHtml` property, might render malicious HTML
+2. **Script execute**: malicious script label might be executed
+3. **event handler**: HTML event property might be exploited
+4. **JavaScript protocol**: `javascript:` protocol URL might be executed
+5. **LaTeX injection**: LaTeX functionality might exist injection risk
+6. **custom component**: custom component configuration might be maliciously exploited
+7. **streaming render**: streaming content update process security risk
 
-## testuse case分class
+## test use case classification
 
-### 1. Script Tag XSS Prevention (scriptlabel XSS 防护)
+### 1. Script Tag XSS Prevention (script label XSS prevention)
 
 ```typescript
-// basicscript注入
+// basic script injection
 '<script>window.xssAttack = true;</script>Hello World'
 
-// 代码块中的script
+// code block with script
 '```html\n<script>window.xssAttack2 = true;</script>\n```'
 
-// 带property的scriptlabel
+// script label with property
 '<script type="text/javascript" src="malicious.js">window.xssAttack3 = true;</script>'
 ```
 
-### 2. Event Handler XSS Prevention (eventhandle器 XSS 防护)
+### 2. Event Handler XSS Prevention (event handler XSS prevention)
 
 ```typescript
-// 点击event
+// click event
 '<div onclick="window.xssClick = true;">Click me</div>'
 
-// loadevent
+// load event
 '<img src="invalid.jpg" onload="window.xssLoad = true;" alt="test" />'
 
-// errorevent
+// error event
 '<img src="invalid.jpg" onerror="window.xssError = true;" alt="test" />'
 
-// 其他eventhandle器
+// other event handlers
 ['onmouseover', 'onmouseout', 'onfocus', 'onblur', 'onkeypress', 'onsubmit']
 ```
 
-### 3. JavaScript Protocol XSS Prevention (JavaScript 协议 XSS 防护)
+### 3. JavaScript Protocol XSS Prevention (JavaScript protocol XSS prevention)
 
 ```typescript
-// link中的 JavaScript 协议
+// JavaScript protocol in link
 '[Click me](javascript:window.xssJsProtocol = true;)'
 
-// 图片中的 JavaScript 协议
+// JavaScript protocol in image
 '<img src="javascript:window.xssJsImg = true;" alt="test" />'
 
-// Data URL 中的 JavaScript
+// JavaScript in Data URL
 '<a href="data:text/html,<script>window.xssDataUrl = true;</script>">Click</a>'
 ```
 
-### 4. HTML Entity Encoding XSS Prevention (HTML 实体encoding XSS 防护)
+### 4. HTML Entity Encoding XSS Prevention (HTML entity encoding XSS prevention)
 
 ```typescript
-// HTML 实体encoding的scriptlabel
+// HTML entity encoding of script label
 '&lt;script&gt;window.xssEntityScript = true;&lt;/script&gt;'
 
-// ten六进制encoding
+// hexadecimal encoding
 '&#x3C;script&#x3E;window.xssHex = true;&#x3C;/script&#x3E;'
 
-// ten进制encoding
+// decimal encoding
 '&#60;script&#62;window.xssDecimal = true;&#60;/script&#62;'
 ```
 
-### 5. CSS Injection XSS Prevention (CSS 注入 XSS 防护)
+### 5. CSS Injection XSS Prevention (CSS injection XSS prevention)
 
 ```typescript
 // CSS expression
 '<div style="background: expression(window.xssCss = true);">Test</div>'
 
-// CSS 中的 JavaScript URL
+// JavaScript URL in CSS
 '<div style="background-image: url(javascript:window.xssCssJs = true);">Test</div>'
 ```
 
-### 6. Advanced Attack Vectors (advanced攻击vector)
+### 6. Advanced Attack Vectors (advanced attack vector)
 
 ```typescript
-// Unicode scriptlabel
+// Unicode script label
 '<\u0073cript>window.xssUnicode = true;</\u0073cript>'
 
-// 嵌套scriptlabel
+// nested script label
 '<scr<script>ipt>window.xssNested = true;</scr</script>ipt>'
 
-// case混合
+// case mixing
 '<ScRiPt>window.xssCase = true;</ScRiPt>'
 
-// SVG 中的script
+// script in SVG
 '<svg><script>window.xssSvg = true;</script></svg>'
 
 // 零wide字符绕过

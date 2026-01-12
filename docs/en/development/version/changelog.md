@@ -3,7 +3,7 @@
 ## Recent Updates
 1. **Added Language Switching to README** (e3d2732)
    - Added language switching links in both README.md and README_CN.md files
-   - Added navigation in the format of `**[English](README.md) | [Chinese简体](README_CN.md)**`
+   - Added navigation in the format of `**[English](README.md) | [Simplified Chinese](README_CN.md)**`
    - Improved multilingual user experience, making it easier to switch between different language versions
 
 2. **Merged Upstream Changes** (5808dd9, 307d2be, a6138cb)

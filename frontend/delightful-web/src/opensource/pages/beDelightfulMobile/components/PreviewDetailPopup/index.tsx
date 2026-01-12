@@ -71,7 +71,7 @@ function PreviewDetailPopup(props: PreviewDetailPopupProps, ref: Ref<PreviewDeta
 			style={{ zIndex: 1001 }}
 		>
 			<div className={styles.header}>
-				<div className={styles.title}>预览</div>
+				<div className={styles.title}>Preview</div>
 				<div className={styles.close}>
 					<MobileButton
 						borderDisabled={visible}

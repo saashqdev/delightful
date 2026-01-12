@@ -2,11 +2,11 @@ import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(
 	({ css }, { count, ratio }: { count: number; ratio: string }) => {
-		// 至少为 1
+		// At least 1
 		const subCount = Math.max(count - 1, 1) 
 
 		const calculateAspectRatio = (useHeight = false) => {
-			if (!ratio) return 1 // 默认正方形
+			if (!ratio) return 1 // Default square
 			const [w, h] = ratio.split(":").map(Number)
 			return useHeight ? w / h : h / w
 		}
@@ -18,7 +18,7 @@ export const useStyles = createStyles(
 			1: 480,
 		}
 
-		// 使用高度计算的图片比例，默认其他比例使用宽度计算
+		// Image ratios using height calculation, other ratios use width calculation by default
 		const useHeightRatio = ["2:3", "9:16"]
 		const isHeightBased = useHeightRatio.includes(ratio)
 

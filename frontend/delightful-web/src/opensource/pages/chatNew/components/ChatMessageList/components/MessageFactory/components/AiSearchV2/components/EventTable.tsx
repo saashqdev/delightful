@@ -46,7 +46,7 @@ const EventTable = memo(({ events = [] }: { events?: AggregateAISearchCardEvent[
 	const { t } = useTranslation("interface")
 	const { styles } = useStyles()
 
-	/** eventtable列 */
+	/** Event table columns */
 	const eventTableColumns = useMemo(() => {
 		return [
 			{

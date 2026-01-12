@@ -52,7 +52,7 @@ const ChatFilePreviewPanel = observer(function ChatFilePreviewPanel() {
 		}
 	}, [fileInfo?.download_name, fileInfo?.url])
 
-	// 全屏切换逻辑
+	// Toggle fullscreen logic
 	const toggleFullscreen = () => {
 		setIsFullscreen(!isFullscreen)
 	}

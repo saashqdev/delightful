@@ -4,7 +4,7 @@ import { replaceExistQuickInstruction, transformQuickInstruction } from "../inde
 import { ExtensionName } from "../../extension/constants"
 
 describe("replaceQuickInstruction", () => {
-	it("应该替换顶层的快捷指令node", () => {
+	it("should replace quick instruction node at top level", () => {
 		const content = {
 			type: ExtensionName,
 			attrs: { old: "value" },
@@ -17,7 +17,7 @@ describe("replaceQuickInstruction", () => {
 		expect(result?.attrs).toEqual({ new: "value" })
 	})
 
-	it("应该替换array中的快捷指令node", () => {
+	it("should replace quick instruction node in array", () => {
 		const content = [
 			{
 				type: ExtensionName,
@@ -37,7 +37,7 @@ describe("replaceQuickInstruction", () => {
 		expect(result?.[1]).toEqual({ type: "paragraph", content: "text" })
 	})
 
-	it("应该替换嵌套object中的快捷指令node", () => {
+	it("should replace quick instruction node in nested object", () => {
 		const content = {
 			type: "doc",
 			content: [
@@ -55,7 +55,7 @@ describe("replaceQuickInstruction", () => {
 		expect(result?.content?.[0].attrs).toEqual({ new: "value" })
 	})
 
-	it("应该handlecomplex的嵌套结构", () => {
+	it("should handle complex nested structure", () => {
 		const content = {
 			type: "doc",
 			content: [
@@ -85,7 +85,7 @@ describe("replaceQuickInstruction", () => {
 })
 
 describe("replaceExistQuickInstruction", () => {
-	it("应该替换顶层的匹配快捷指令并return true", () => {
+	it("should replace matched quick instruction at top level and return true", () => {
 		const content = {
 			type: ExtensionName,
 			attrs: {
@@ -107,7 +107,7 @@ describe("replaceExistQuickInstruction", () => {
 		})
 	})
 
-	it("应该在array中替换匹配的快捷指令并return true", () => {
+	it("should replace matched quick instruction in array and return true", () => {
 		const content = [
 			{
 				type: ExtensionName,
@@ -139,7 +139,7 @@ describe("replaceExistQuickInstruction", () => {
 		})
 	})
 
-	it("应该在嵌套结构中替换所有匹配的快捷指令并return true", () => {
+	it("should replace all matched quick instructions in nested structure and return true", () => {
 		const content = {
 			type: "doc",
 			content: [
@@ -182,7 +182,7 @@ describe("replaceExistQuickInstruction", () => {
 		})
 	})
 
-	it("当没有匹配的指令时应该return false", () => {
+	it("should return false when no matching instruction found", () => {
 		const content = {
 			type: ExtensionName,
 			attrs: {
@@ -201,7 +201,7 @@ describe("replaceExistQuickInstruction", () => {
 		expect(content.attrs?.value).toBe("oldValue")
 	})
 
-	it("应该只替换指定名称的快捷指令", () => {
+	it("should only replace specified quick instruction by name", () => {
 		const content = [
 			{
 				type: ExtensionName,

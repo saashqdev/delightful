@@ -260,13 +260,13 @@ export const useStyles = createStyles(
 				}
 			`,
 			list: css`
-				/* tasklist项不应用通用li样式 */
+				/* Task list items should not apply general li styles */
 				li:not(.task-list-item) {
 					//margin-block: calc(var(--${prefixCls}-markdown-margin-multiple) * 0.33em);
 					line-height: 1.5;
 				}
 
-				/* 对于tasklist项，确保不显示黑点 */
+				/* For task list items, ensure no bullets are shown */
 				li.task-list-item {
 					line-height: 1.5;
 					list-style: none !important;
@@ -356,7 +356,7 @@ export const useStyles = createStyles(
 					}
 				}
 
-				/* 确保tasklist容器绝对不显示黑点 */
+				/* Ensure task list containers absolutely show no bullets */
 				ul.task-list-container,
 				ul.task-list-nested {
 					li {
@@ -498,7 +498,7 @@ export const useStyles = createStyles(
 						position: relative;
 						font-family: ${token.fontFamily}, "Segoe UI Symbol", Arial, sans-serif;
 
-						/* 对齐样式 */
+						/* Alignment styles */
 						&[style*="text-align: center"] {
 							text-align: center;
 						}
@@ -511,19 +511,19 @@ export const useStyles = createStyles(
 							text-align: left;
 						}
 
-						/* 确保特殊符号正常显示 */
+						/* Ensure special symbols display normally */
 						&[style*="white-space: pre-wrap"] {
 							white-space: pre-wrap;
 							font-family: ${token.fontFamilyCode}, ${token.fontFamily},
 								"Segoe UI Symbol", Arial, sans-serif;
 						}
 
-						/* 超长单词handle */
+						/* Long word handling */
 						&:has(.long-text) {
 							max-width: 300px;
 						}
 
-						/* 长文本handle */
+						/* Long text handling */
 						.long-text {
 							display: block;
 							width: 100%;
@@ -561,10 +561,10 @@ export const useStyles = createStyles(
 					padding: 4px 10px;
 				}
 
-				/* 移除对KaTeX内部元素的强制display样式，让KaTeX自行handle布局 */
+				/* Remove forced display styles for KaTeX internal elements, let KaTeX handle layout itself */
 			`,
 			footnotes: css`
-				/* 脚注引用样式 */
+				/* Footnote reference styles */
 				.footnote-ref {
 					font-size: 0.75em;
 
@@ -580,7 +580,7 @@ export const useStyles = createStyles(
 					}
 				}
 
-				/* 脚注定义样式 */
+				/* Footnote definition styles */
 				.footnote {
 					font-size: 0.875em;
 					margin-top: 1em;
@@ -606,7 +606,7 @@ export const useStyles = createStyles(
 				}
 			`,
 			abbreviations: css`
-				/* 缩写样式 */
+				/* Abbreviation styles */
 				abbr {
 					text-decoration: underline dotted;
 					cursor: help;

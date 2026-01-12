@@ -12,7 +12,7 @@ import ConversationBotDataService from "@/opensource/services/chat/conversation/
 import { interfaceStore } from "@/opensource/stores/interface"
 import { useStyles } from "../../styles"
 
-// 懒loadcomponent
+// lazy load components
 const TopicExtraSection = lazy(() => import("../topic/ExtraSection"))
 const SettingExtraSection = lazy(() => import("../setting"))
 
@@ -22,14 +22,14 @@ interface MainContentProps {
 }
 
 /**
- * 聊天主内容区域component
- * 包含头部、messagelist、input field以及额外的侧边栏
+ * Chat main content area component
+ * Includes header, message list, input field and extra sidebar
  */
 const MainContent = observer(function MainContent({ onInputResize, style }: MainContentProps) {
 	const { styles } = useStyles()
 	const showExtra = conversationStore.topicOpen
 
-	// 如果开启了startPage，则显示startPage
+	// if start page is enabled, display start page
 	if (ConversationBotDataService.startPage && interfaceStore.isShowStartPage) {
 		return <AiImageStartPage />
 	}

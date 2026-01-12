@@ -20,44 +20,44 @@ export const recordingSummarizedMessage = {
 			text: "",
 			title: "Multi-person meeting about Delightful project",
 			ai_result:
-				"本次 Delightful 企业 AI 项目需求对齐会议，全面梳理了项目规划。Delightful 旨在构建企业级 AI 应用，助力企业智能化升级。产品负责人阐述了项目核心需求，包括开发智能数据分析module，以深度挖掘企业运营数据；构建精准的客户预测模型，提升销售效率；打造智能办公自动化flow，optimization企业内部协作。开发团队明确技术方向，如采用先进的 AI 算法确保数据handle精准度与效率。test团队将依据即将给出的详细documentation规划test策略，着重检测 AI 功能准确性与稳定性。设计团队聚焦打造简洁直观、符合企业使用场景的interface。市场团队提出贴合企业需求的推广方案，且各方需求均已纳入开发考量，后续将每周跟进项目进度，力促项目稳步推进，为企业提供强大的 AI 驱动助力。",
+			"This Delightful enterprise AI project requirements alignment meeting comprehensively organized the project plan. Delightful aims to build enterprise-level AI applications to assist enterprises in intelligent transformation. The product manager explained the core project requirements, including developing an intelligent data analysis module to deeply mine enterprise operational data; building an accurate customer prediction model to improve sales efficiency; creating an intelligent office automation flow to optimize internal enterprise collaboration. The development team clarified the technical direction, such as adopting advanced AI algorithms to ensure data handling accuracy and efficiency. The testing team will plan testing strategies based on the detailed documentation to be provided, focusing on detecting AI functionality accuracy and stability. The design team focuses on creating a simple, intuitive interface that fits enterprise usage scenarios. The marketing team proposed a promotion plan that aligns with enterprise needs, and all requirements have been incorporated into development considerations. We will follow up on project progress weekly to steadily advance the project and provide powerful AI-driven support for enterprises.",
 			duration: "00:20:23",
 			recording_url: "https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.wav",
 			origin_content: [
 				{
 					speaker: "user1",
 					duration: "00:00:03",
-					text: "早，各位。今天晨会快速过下 Delightful 项目进度。开发这边进展如何？",
+					text: "Morning, everyone. Let's quickly go over the Delightful project progress in today's standup. How's development going?",
 				},
 				{
 					speaker: "user2",
 					duration: "00:00:07",
-					text: "目前core featuresmodule已complete 80%，但在与新接口对接时遇到些技术难题，正在全力攻克，预计今天下班能解决，整体开发进度会稍延迟一天。",
+					text: "The core features module is currently 80% complete, but we've encountered some technical difficulties when connecting with the new interface. We're working hard to solve them and expect to resolve them by end of day today. Overall development progress will be delayed by one day.",
 				},
 				{
 					speaker: "user1",
 					duration: "00:00:09",
-					text: "好，抓紧解决。周组长，test准备得咋样？",
+					text: "Okay, solve it as soon as possible. Team Lead Zhou, how's the testing preparation going?",
 				},
 				{
 					speaker: "user3",
 					duration: "00:00:01",
-					text: "test用例编写complete 90%，等开发complete新接口对接就可全面开展test工作，人员已就绪。",
+					text: "Test case writing is 90% complete. Once development completes the new interface integration, we can fully launch the testing work. Personnel are ready.",
 				},
 				{
 					speaker: "user1",
 					duration: "00:00:15",
-					text: "设计方面呢？",
+					text: "What about design?",
 				},
 				{
 					speaker: "user4",
 					duration: "00:00:17",
-					text: "所有interface设计已complete，只等开发部分complete后，做最后的微调与optimization。",
+					text: "All interface designs are complete. We're just waiting for the development part to finish, then we'll do final fine-tuning and optimization.",
 				},
 				{
 					speaker: "user1",
 					duration: "00:00:20",
-					text: "行，大家都清楚各自task与进度情况了。虽然开发有点小延迟，但大家要紧密协作，尽量追回time，确保项目按时交付。有问题随时沟通，散会。",
+					text: "Alright, everyone is clear about their tasks and progress. Although there's a small delay in development, everyone needs to collaborate closely and try to catch up to ensure the project is delivered on time. Communicate anytime if there are issues. Meeting adjourned.",
 				},
 			],
 		},
@@ -83,7 +83,7 @@ export const recordingStartMessage = {
 		status: "read",
 		recording_summary: {
 			status: 1,
-			text: "本次 Delightful 企业 AI 项目需求对齐会议，全面梳理了项目规划。Delightful 旨在构建企业级 AI 应用，助力企业智能化升级。产品负责人阐述了项目核心需求，包括开发智能数据分析module，以深度挖掘企业运营数据；构建精准的客户预测模型，提升销售效率；打造智能办公自动化flow，optimization企业内部协作。开发团队明确技术方向，如采用先进的 AI 算法确保数据handle精准度与效率。test团队将依据即将给出的详细documentation规划test策略，着重检测 AI 功能准确性与稳定性。设计团队聚焦打造简洁直观、符合企业使用场景的interface。市场团队提出贴合企业需求的推广方案，且各方需求均已纳入开发考量，后续将每周跟进项目进度，力促项目稳步推进，为企业提供强大的 AI 驱动助力",
+			text: "This Delightful enterprise AI project requirements alignment meeting comprehensively organized the project plan. Delightful aims to build enterprise-level AI applications to assist enterprises in intelligent transformation. The product manager explained the core project requirements, including developing an intelligent data analysis module to deeply mine enterprise operational data; building an accurate customer prediction model to improve sales efficiency; creating an intelligent office automation flow to optimize internal enterprise collaboration. The development team clarified the technical direction, such as adopting advanced AI algorithms to ensure data handling accuracy and efficiency. The testing team will plan testing strategies based on the detailed documentation to be provided, focusing on detecting AI functionality accuracy and stability. The design team focuses on creating a simple, intuitive interface that fits enterprise usage scenarios. The marketing team proposed a promotion plan that aligns with enterprise needs, and all requirements have been incorporated into development considerations. We will follow up on project progress weekly to steadily advance the project and provide powerful AI-driven support for enterprises.",
 			title: "",
 			ai_result: "",
 			duration: "",

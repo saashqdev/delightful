@@ -56,7 +56,7 @@ const EnhanceMarkdown = memo(
 
 		useStreamCursor(isStreaming || typing, typedContent ?? "", markdownRef)
 
-		// 使用样式hooks
+		// Use styles hook
 		const { styles: mdStyles } = useMarkdownStyles(
 			useMemo(
 				() => ({ fontSize: hiddenDetail ? 12 : fontSize, isSelf, hiddenDetail }),
@@ -64,7 +64,7 @@ const EnhanceMarkdown = memo(
 			),
 		)
 
-		// 使用Markdownconfigurationhook
+		// Use Markdown configuration hook
 		const { options, preprocess } = useMarkdownConfig(
 			useMemo(
 				() => ({
@@ -76,7 +76,7 @@ const EnhanceMarkdown = memo(
 			),
 		)
 
-		// 使用class名handlehook
+		// Use class name handler hook
 		const combinedClassName = useClassName({
 			mdStyles,
 			className: className || "",
@@ -88,7 +88,7 @@ const EnhanceMarkdown = memo(
 			[isStreaming, typing, typedContent, content, preprocess],
 		)
 
-		// 如果没有内容则不渲染
+		// If no content, don't render
 		if (blocks.length === 0) return null
 
 		return (
@@ -107,7 +107,7 @@ const EnhanceMarkdown = memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 完善 memo 比较逻辑，考虑更多可能影响渲染的 props
+		// Enhance memo comparison logic, consider more props that may affect rendering
 		return (
 			prevProps.content === nextProps.content &&
 			prevProps.hiddenDetail === nextProps.hiddenDetail &&

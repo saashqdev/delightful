@@ -37,7 +37,7 @@ interface MessageItemProps {
 	revoked?: boolean
 }
 
-// 头像独立，避免重复渲染
+// Extract avatar to avoid repeated renders
 const Avatar = observer(function Avatar({
 	name,
 	avatar,
@@ -52,7 +52,7 @@ const Avatar = observer(function Avatar({
 	const { styles } = useStyles({ fontSize: 16, isMultipleCheckedMode: false })
 	const userInfo = useInfoStore.get(uid)
 
-	// 使用 useMemo 缓存 info object，避免每次渲染都create新object
+	// Use useMemo to cache info object, avoid creating new object on every render
 	const info = useMemo(() => {
 		if (avatar) {
 			return { name, avatar_url: getAvatarUrl(avatar) }
@@ -97,7 +97,7 @@ const MessageItem = memo(function MessageItem({
 	const isBlockMessage = message.type === ConversationMessageType.RecordingSummary
 	const { styles } = useStyles({ fontSize: 16, isMultipleCheckedMode: false })
 
-	// 使用 useMemo 缓存样式计算
+	// Use useMemo to cache style calculation
 	const containerStyle = useMemo(
 		() => ({
 			marginTop: `${calculateRelativeSize(12, fontSize)}px`,
@@ -105,15 +105,15 @@ const MessageItem = memo(function MessageItem({
 		[fontSize],
 	)
 
-	// 使用 useMemo 缓存头像大小
+	// Use useMemo to cache avatar size
 	const avatarSize = useMemo(() => calculateRelativeSize(40, fontSize), [fontSize])
 
-	// 如果message被撤回，显示撤回tip
+	// If message is revoked, show revoked tip
 	if (revoked) {
 		return <RevokeTip key={message_id} senderUid={sender_id} />
 	}
 
-	// 使用 useMemo 缓存头像component
+	// Use useMemo to cache avatar component
 	const avatarComponent = <Avatar name={name} avatar={avatar} size={avatarSize} uid={sender_id} />
 
 	return (
@@ -128,10 +128,10 @@ const MessageItem = memo(function MessageItem({
 			style={{ ...containerStyle, justifyContent: is_self ? "flex-end" : "flex-start" }}
 			data-message-id={message_id}
 		>
-			{/* 头像 - 非本人message显示在左侧 */}
+			{/* Avatar - non-self message displayed on left */}
 			{!is_self && avatarComponent}
 
-			{/* message内容和status */}
+			{/* Message content and status */}
 			<Flex
 				vertical
 				gap={4}
@@ -153,7 +153,7 @@ const MessageItem = memo(function MessageItem({
 				)}
 			</Flex>
 
-			{/* 头像 - 本人message显示在右侧 */}
+			{/* Avatar - self message displayed on right */}
 			{is_self && avatarComponent}
 		</div>
 	)

@@ -6,7 +6,7 @@ import { isArray, isObject } from "lodash-es"
 import { richTextNode } from "./schemaConfig"
 
 /**
- * 递归遍历所有node，get所有node的class型
+ * Recursively traverse all nodes to get all node types
  * @param data
  * @param typeArray
  * @param depth
@@ -34,11 +34,11 @@ export function transformAllNodes(
 }
 
 /**
- * 替换node内容
- * @param content - 内容
- * @param matcher - 匹配器
- * @param updateContent - update内容
- * @returns 替换后的内容
+ * Replace node content
+ * @param content - Content
+ * @param matcher - Matcher
+ * @param updateContent - Update content
+ * @returns Replaced content
  */
 export async function transformJSONContent(
 	content: JSONContent | JSONContent[] | undefined,
@@ -274,15 +274,15 @@ export const filterFiles = <T extends FileInput>(
 }
 
 /**
- * 检测是否是纯文本
- * @param content 内容
- * @returns 是否是纯文本
+ * Detect if content is plain text
+ * @param content Content
+ * @returns Whether it is plain text
  */
 export const isOnlyText = (content?: JSONContent) => {
 	if (!content) return true
 
 	const typeArray = transformAllNodes(content)
-	// 如果包含 emoji 或 mention，则认为不是纯文本
-	// TODO: 代码逻辑需要optimization
+	// If contains emoji or mention, not considered pure text
+	// TODO: Code logic needs optimization
 	return richTextNode.every((type) => !typeArray.has(type))
 }

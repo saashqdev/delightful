@@ -11,7 +11,7 @@ interface CursorManagerProps {
 }
 
 /**
- * handle流式渲染时的光标管理
+ * Handle cursor management during streaming rendering
  */
 export const useCursorManager = (props: CursorManagerProps) => {
 	const { content, isStreaming, classNameRef, cursorClassName } = props
@@ -20,21 +20,21 @@ export const useCursorManager = (props: CursorManagerProps) => {
 	const contentRef = useRef<string | undefined>("")
 	const finalCleanupRef = useRef<boolean>(false)
 
-	// initialize光标管理器（全局单例）
+	// Initialize cursor manager (global singleton)
 	useEffect(() => {
 		if (!globalCursorManager.instance) {
 			globalCursorManager.instance = manageCursor(cursorClassName)
 		}
 	}, [cursorClassName])
 
-	// 内容变化或流式status变化时handle光标
+	// Handle cursor when content changes or streaming status changes
 	useLayoutEffect(() => {
-		// 只在内容真正变化时添加光标，避免不必要的DOMoperation
+		// Only add cursor when content really changes, avoid unnecessary DOM operations
 		if (!isStreaming || !content || content === contentRef.current) return
 
 		contentRef.current = content
 
-		// 使用缓存get父node，避免重复query
+		// Use cache to get parent node, avoid repeated queries
 		const parentSelector = `.${classNameRef.current}`
 		const parent =
 			domCache.getNode(parentSelector) ||
@@ -42,20 +42,20 @@ export const useCursorManager = (props: CursorManagerProps) => {
 
 		if (!parent) return
 
-		// update缓存
+		// Update cache
 		if (!domCache.nodes.has(parentSelector)) {
 			domCache.nodes.set(parentSelector, parent)
 		}
 
-		// 流式渲染时，每次内容update都需要重新定位光标
+		// During streaming rendering, reposition cursor each time content updates
 		if (isStreaming) {
-			// 标记需要进行最终cleanup
+			// Mark that final cleanup is needed
 			finalCleanupRef.current = true
 
-			// 首先清除现有光标
+			// First clear existing cursors
 			globalCursorManager.instance?.clearAllCursors()
 
-			// get最后一个子元素node
+			// Get last child element node
 			const lastChild = parent.lastElementChild
 
 			if (!lastChild) return
@@ -86,7 +86,7 @@ export const useCursorManager = (props: CursorManagerProps) => {
 						targetElement = findLastElement(lastCell)
 					}
 				} else if (targetElement.className === "table-container") {
-					// handletable容器
+					// Handle table container
 					const table = targetElement.querySelector("table")
 					if (table) {
 						const lastCell = table.querySelector(
@@ -97,14 +97,14 @@ export const useCursorManager = (props: CursorManagerProps) => {
 						}
 					}
 				} else if (targetElement.tagName === "BLOCKQUOTE") {
-					// 引用块
+					// Blockquote
 					targetElement = findLastElement(targetElement)
 				} else {
-					// 其他元素（div, span, p等）
+					// Other elements (div, span, p, etc.)
 					targetElement = findLastElement(targetElement)
 				}
 
-				// 添加光标
+				// Add cursor
 				if (targetElement) {
 					globalCursorManager.instance?.addCursorToElement(targetElement)
 					cursorAddedRef.current = true
@@ -113,13 +113,13 @@ export const useCursorManager = (props: CursorManagerProps) => {
 		}
 	}, [content, isStreaming, classNameRef])
 
-	// listener流式渲染status变化
+	// Listen for streaming status changes
 	useEffect(() => {
-		// 记录先前的流式status
+		// Record previous streaming status
 		const wasStreaming = previousStreamingRef.current
 		previousStreamingRef.current = isStreaming
 
-		// 流式渲染end时，清除所有光标并reset标记
+		// When streaming ends, clear all cursors and reset flags
 		if (wasStreaming && !isStreaming) {
 			setTimeout(() => {
 				globalCursorManager.instance?.clearAllCursors()
@@ -129,13 +129,13 @@ export const useCursorManager = (props: CursorManagerProps) => {
 		}
 	}, [isStreaming])
 
-	// 增加一个额外的useEffect，确保在所有内容complete后check是否需要cleanup光标
+	// Add extra useEffect to ensure checking if cursor cleanup is needed after all content is complete
 	useEffect(() => {
-		// 当内容不再变化且已经添加过光标，并且流式渲染已end时，执行最终cleanup
+		// When content no longer changes and cursor already added, and streaming has ended, perform final cleanup
 		if (finalCleanupRef.current && !isStreaming) {
-			// 使用requestAnimationFrame替代固定time延迟，确保在下一帧渲染时进行cleanup
+			// Use requestAnimationFrame instead of fixed time delay, ensure cleanup happens on next frame render
 			const cleanupFrame = requestAnimationFrame(() => {
-				// check内容是否还是最新的，避免潜在的竞态条件
+				// Check if content is still the latest, avoid potential race conditions
 				if (content === contentRef.current) {
 					globalCursorManager.instance?.clearAllCursors()
 					cursorAddedRef.current = false
@@ -146,15 +146,15 @@ export const useCursorManager = (props: CursorManagerProps) => {
 			return () => cancelAnimationFrame(cleanupFrame)
 		}
 
-		// 添加一个空的returnfunction，确保所有条件分支都有return value
+		// Add empty return function to ensure all condition branches have return value
 		return () => {}
 	}, [content, isStreaming])
 
-	// component卸载时cleanup资源
+	// Cleanup resources when component unmounts
 	useEffect(() => {
 		return () => {
 			if (contentRef.current) {
-				// cleanup光标和DOM缓存
+				// Cleanup cursors and DOM cache
 				globalCursorManager.instance?.clearAllCursors()
 				domCache.clearCache()
 			}

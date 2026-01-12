@@ -26,7 +26,7 @@ const enum MessageGroupKey {
 }
 
 /**
- * 聊天侧边栏
+ * Chat sidebar
  */
 const ChatSubSider = observer(() => {
 	const { t } = useTranslation("interface")

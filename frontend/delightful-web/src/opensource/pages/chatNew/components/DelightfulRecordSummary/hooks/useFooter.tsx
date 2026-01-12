@@ -17,7 +17,7 @@ import { recorder } from "../helpers/record"
 import { useFontSize } from "@/opensource/providers/AppearanceProvider/hooks"
 import { userStore } from "@/opensource/models/user"
 /**
- * message卡片尾部button的相关status和行为
+ * Related status and behavior of message card footer buttons
  */
 type UseFooterProps = {
 	status?: RecordSummaryStatus
@@ -80,7 +80,7 @@ export default function useFooter({
 	const onFooterBtnClick = useMemoizedFn(() => {
 		switch (status) {
 			case RecordSummaryStatus.Doing:
-				// 发送end录音纪要message
+				// send end recording summary message
 				sendEndRecordingSummary()
 				break
 			default:
@@ -108,7 +108,7 @@ export default function useFooter({
 
 		const datas = []
 
-		// 如果有event，则显示event
+		// if there are events, display events
 		if (messageContent.origin_content && messageContent.origin_content.length > 0) {
 			datas.push({
 				key: "origin_content",
@@ -130,7 +130,7 @@ export default function useFooter({
 		) : null
 	}, [collapseItems, styles.collapse, status])
 
-	// 初次挂载时（页面refresh时），如何当前messagestatus是发送中，且识别结果不为空时（避免是初次新增一条Doingmessage），则手动终止
+	// on initial mount (when page refreshes), if current message status is sending and recognition result is not empty (to avoid being a newly added Doing message), manually terminate
 	useMount(() => {
 		if (status === RecordSummaryStatus.Doing && messageContent?.full_text) {
 			sendEndRecordingSummary()

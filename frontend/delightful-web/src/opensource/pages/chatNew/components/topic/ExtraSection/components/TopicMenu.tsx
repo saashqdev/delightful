@@ -19,7 +19,7 @@ const enum TopicMenuKey {
 	DELETE_TOPIC = "delete-topic",
 }
 
-/** 话题名称最大字数限制，数值由后端定 */
+/** Topic name maximum character limit, value defined by backend */
 const MAX_NAME_LENGTH = 50
 
 const TopicMenu = memo(function TopicMenu({ children, topic, ...props }: TopicMenuProps) {

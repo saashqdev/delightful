@@ -44,7 +44,7 @@ const ReGenerate = memo(({ messageId }: RevokeTipProps) => {
 
 		const uid = userStore.user.userInfo?.user_id
 
-		// get当前message之前的文本message的索引
+		// Get the index of the text message before current message
 		const lastTextMessage = findLast(
 			messages,
 			(msg) => {

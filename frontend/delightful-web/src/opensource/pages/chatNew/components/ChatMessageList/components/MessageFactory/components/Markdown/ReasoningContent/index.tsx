@@ -8,9 +8,9 @@ import { useStyles } from "./useStyles"
 import EnhanceMarkdown from "../EnhanceMarkdown"
 
 /**
- * 推理内容
- * @param content 推理内容
- * @returns 推理内容
+ * Reasoning content
+ * @param content Reasoning content
+ * @returns Reasoning content
  */
 const ReasoningContent = ({
 	content,
@@ -27,13 +27,13 @@ const ReasoningContent = ({
 	const contentRef = useRef<HTMLDivElement>(null)
 	const [contentVisible, setContentVisible] = useState(false)
 
-	// settings内容高度变量
+	// Set content height variable
 	useEffect(() => {
 		if (!isCollapse && contentRef.current) {
 			const height = contentRef.current.scrollHeight
 			contentRef.current.style.setProperty("--content-max-height", `${height}px`)
 
-			// 使用 double requestAnimationFrame 代替固定延迟
+			// Use double requestAnimationFrame instead of fixed delay
 			let raf2: number
 			const raf1 = requestAnimationFrame(() => {
 				raf2 = requestAnimationFrame(() => {
@@ -58,7 +58,7 @@ const ReasoningContent = ({
 
 	if (!content) return null
 
-	// 折叠status：只渲染button
+	// Collapsed state: only render button
 	if (isCollapse) {
 		return (
 			<div className={cx(styles.buttonWrapper, className)}>
@@ -84,7 +84,7 @@ const ReasoningContent = ({
 		)
 	}
 
-	// 展开status：渲染button和内容
+	// Expanded state: render button and content
 	return (
 		<div className={cx(styles.expandedWrapper, className)}>
 			<Flex

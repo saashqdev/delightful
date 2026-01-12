@@ -33,12 +33,12 @@ const QuickInstructionSelectorNodeRender = (props: NodeViewProps) => {
 		setSelectedValue(value)
 	}, [value])
 
-	/** 点击event, 阻止event冒泡 */
+	/** Click event, prevent event bubbling */
 	const handleClick = useMemoizedFn((e: MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation()
 	})
 
-	/** 选择值 */
+	/** Select value */
 	const handleChange = useMemoizedFn((v: string) => {
 		setSelectedValue(v)
 		editor?.commands.updateAttributes(ExtensionName, { value })

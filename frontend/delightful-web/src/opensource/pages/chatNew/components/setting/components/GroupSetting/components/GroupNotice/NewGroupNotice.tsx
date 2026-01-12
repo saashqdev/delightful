@@ -80,7 +80,7 @@ export default function NewGroupNotice({ onClose: onCloseInProps }: ExtraSection
 						cancel
 					</DelightfulButton>
 					<DelightfulButton size="large" type="primary" onClick={onClose}>
-						下一步
+						Next
 					</DelightfulButton>
 				</Flex>
 			</Flex>

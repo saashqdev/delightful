@@ -22,16 +22,16 @@ import { QuickInstructionNodeChatSubSiderExtension } from "../quick-instruction/
 import { extractSourcePlaceholders } from "../ChatMessageList/components/MessageFactory/components/AiSearch/utils"
 
 /**
- * get最后一条message
- * @param messages 有序messagelist
- * @param targetIndex 目标message索引
+ * Get the last message
+ * @param messages Ordered message list
+ * @param targetIndex Target message index
  * @returns
  */
 export function getLastMessage(
 	messages: ConversationMessage[] | undefined,
 	targetIndex?: number,
 ): ConversationMessage | undefined {
-	// 如果没有message，或者要查找的message不存在，return undefined
+	// if no message, or the message to find doesn't exist, return undefined
 	if (!messages || !messages.length || (isNumber(targetIndex) && targetIndex < 0))
 		return undefined
 
@@ -39,7 +39,7 @@ export function getLastMessage(
 	const lastMessage = messages[index]
 	if (!lastMessage) return undefined
 	// if (lastMessage.message.type === MessageType.Empty) {
-	// 	// 如果还是空message，return上一个message的内容
+	// 	// if still empty message, return previous message content
 	// 	return getLastMessage(messages, index - 1)
 	// }
 
@@ -82,7 +82,7 @@ export const generateRichText = memoize(
 )
 
 /**
- * get富文本message HTML 内容
+ * Get rich text message HTML content
  * @param content
  * @returns
  */
@@ -91,10 +91,10 @@ export function getRichTextHtml(content?: string) {
 	return generateRichText(content, "html")
 }
 
-// 缓存 emoji 正则表达式
+// Cache emoji regular expression
 const createDelightfulEmojiRegex = memoize(() => {
-	// create匹配所有魔法表情的正则表达式
-	// 例如: 匹配 [smile], [laugh] 等format
+	// Create regex to match all magic emojis
+	// Example: match [smile], [laugh] etc. format
 	return new RegExp(
 		Array.from(emojiFilePathCache.keys())
 			.map((item) => `\\[${item}\\]`)
@@ -103,35 +103,35 @@ const createDelightfulEmojiRegex = memoize(() => {
 	)
 })
 
-// 使用缓存的正则表达式
+// Use cached regular expression
 export const delightfulEmojiRegex = createDelightfulEmojiRegex()
 
 /**
- * 递归查找并替换表情符号
- * @param content 需要handle的文本内容
+ * Recursively find and replace emoji symbols
+ * @param content Text content to process
  */
 const findAndReplaceDelightfulEmoji = (content?: string) => {
 	if (!content) return content
 
 	const splitArray = extractSourcePlaceholders(content, delightfulEmojiRegex)
 	return splitArray.map((item) => {
-		// check是否是表情符号format
+		// check if it's emoji format
 		if (item.match(delightfulEmojiRegex)) {
-			// 提取表情符号代码 (去掉前后的方括号)
+			// Extract emoji code (remove surrounding brackets)
 			const code = item.slice(1, -1)
-			// 如果是有效的表情符号代码，return对应的component
+			// If it's a valid emoji code, return corresponding component
 			if (emojiFilePathCache.has(code)) {
 				return <DelightfulEmoji key={code} code={code} width={16} />
 			}
 			return item
 		}
-		// 不是表情符号则原样return
+		// Not an emoji, return as-is
 		return item
 	})
 }
 
 /**
- * get富文本message 粘贴文本
+ * Get rich text message paste text
  * @param content
  * @returns
  */
@@ -158,9 +158,9 @@ export const getRichMessagePasteText = (content?: string) => {
 }
 
 /**
- * getmessage文本内容
+ * Get message text content
  * @param message message
- * @returns message文本内容
+ * @returns message text content
  */
 export function getMessageText(
 	message: SeqResponse<CMessage> | ConversationMessageSend | undefined,

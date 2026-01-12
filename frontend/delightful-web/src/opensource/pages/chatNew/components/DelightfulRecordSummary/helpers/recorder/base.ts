@@ -7,12 +7,12 @@ declare let Math: any
 declare let navigator: any
 declare let Promise: any
 
-// 构造functionparameterformat
+// Constructor function parameter format
 interface recorderConfig {
-	sampleBits?: number // 采样位数
-	sampleRate?: number // 采样率
-	numChannels?: number // 声道数
-	compiling?: boolean // 是否边录边播
+	sampleBits?: number // sample bit depth
+	sampleRate?: number // sample rate
+	numChannels?: number // number of channels
+	compiling?: boolean // whether to record and playback simultaneously
 }
 
 export default class BaseRecorder {
@@ -24,76 +24,76 @@ export default class BaseRecorder {
 
 	private audioInput: any
 
-	protected inputSampleRate: number // 输入采样率
+	protected inputSampleRate: number // input sample rate
 
-	protected inputSampleBits: number = 16 // 输入采样位数
+	protected inputSampleBits: number = 16 // input sample bit depth
 
-	protected outputSampleRate!: number // 输出采样率
+	protected outputSampleRate!: number // output sample rate
 
-	protected oututSampleBits!: number // 输出采样位数
+	protected oututSampleBits!: number // output sample bit depth
 
-	private source: any // 音频输入
+	private source: any // audio input
 
 	private recorder: any
 
-	private stream: any // 流
+	private stream: any // stream
 
-	protected littleEdian: boolean // 是否是小端字节序
+	protected littleEdian: boolean // whether little-endian byte order
 
-	protected fileSize: number = 0 // 录音大小，byte为单位
+	protected fileSize: number = 0 // recording size in bytes
 
-	protected duration: number = 0 // 录音时长
+	protected duration: number = 0 // recording duration
 
-	private needRecord: boolean = true // 由于safari问题，导致使用该方案代替disconnect/connect方案
+	private needRecord: boolean = true // due to Safari issues, this approach is used instead of disconnect/connect
 
-	public size: number = 0 // 录音file总长度
+	public size: number = 0 // total length of recording file
 
-	public lBuffer: Array<Float32Array> = [] // pcm音频数据搜集器(左声道)
+	public lBuffer: Array<Float32Array> = [] // PCM audio data collector (left channel)
 
-	public rBuffer: Array<Float32Array> = [] // pcm音频数据搜集器(右声道)
+	public rBuffer: Array<Float32Array> = [] // PCM audio data collector (right channel)
 
-	public cacheBuffer: Array<Float32Array> = [] // pcm缓存数据
+	public cacheBuffer: Array<Float32Array> = [] // PCM cache data
 
-	// 正在录音time，parameter是已经录了多少time了
+	// recording time, parameter is the duration that has been recorded
 	public onprocess!: (duration: number) => void
 
-	// onprocess 替代function，保持原来的 onprocess 向下兼容
+	// alternative function for onprocess, keeps original onprocess for backward compatibility
 	public onprogress!: (payload: { duration: number; fileSize: number; vol: number }) => void
 
-	public onplay!: () => void // 音频播放回调
+	public onplay!: () => void // audio playback callback
 
-	public onpauseplay!: () => void // 音频pause回调
+	public onpauseplay!: () => void // audio pause callback
 
-	public onresumeplay!: () => void // 音频恢复播放回调
+	public onresumeplay!: () => void // audio resume playback callback
 
-	public onstopplay!: () => void // 音频停止播放回调
+	public onstopplay!: () => void // audio stop playback callback
 
-	public onplayend!: () => void // 音频正常播放end
+	public onplayend!: () => void // audio normal playback end
 
-	public lastSliceIndex?: number // 上一次切割的坐标，默认为起始坐标
+	public lastSliceIndex?: number // last slice position, defaults to start position
 
 	/**
-	 * @param {Object} options 包含以下三个parameter：
-	 * sampleBits，采样位数，一般8,16，默认16
-	 * sampleRate，采样率，一般 11025、16000、22050、24000、44100、48000，默认为浏览器自带的采样率
-	 * numChannels，声道，1或2
+	 * @param {Object} options contains the following three parameters:
+	 * sampleBits, sample bit depth, typically 8 or 16, default is 16
+	 * sampleRate, sample rate, typically 11025, 16000, 22050, 24000, 44100, 48000, defaults to browser's native sample rate
+	 * numChannels, channels, 1 or 2
 	 */
 	constructor(options: recorderConfig = {}) {
-		// 临时audioContext，为了get输入采样率的
+		// temporary audioContext to get input sample rate
 		const context = new (window.AudioContext || window.webkitAudioContext)()
 
-		this.inputSampleRate = context.sampleRate // get当前输入的采样率
+		this.inputSampleRate = context.sampleRate // get current input sample rate
 
-		// settings输出configuration
+		// set output configuration
 		this.setNewOption(options)
 
-		// 判断端字节序
+		// determine byte order
 		this.littleEdian = (function () {
 			const buffer = new ArrayBuffer(2)
 			new DataView(buffer).setInt16(0, 256, true)
 			return new Int16Array(buffer)[0] === 256
 		})()
-		// 兼容 getUserMedia
+		// getUserMedia compatibility
 		BaseRecorder.initUserMedia()
 	}
 
@@ -106,42 +106,42 @@ export default class BaseRecorder {
 
 	protected setNewOption(options: recorderConfig = {}) {
 		this.config = {
-			// 采样数位 8, 16
+			// sample bit depth: 8, 16
 			sampleBits: ~[8, 16].indexOf(options.sampleBits!) ? options.sampleBits : 16,
-			// 采样率
+			// sample rate
 			sampleRate: ~[8000, 11025, 16000, 22050, 24000, 44100, 48000].indexOf(
 				options.sampleRate!,
 			)
 				? options.sampleRate
 				: this.inputSampleRate,
-			// 声道数，1或2
+			// number of channels: 1 or 2
 			numChannels: ~[1, 2].indexOf(options.numChannels!) ? options.numChannels : 1,
-			// 是否需要边录边转，默认关闭，后期使用web worker
-			// compiling: !!options.compiling || false,   // 先移除
+			// whether real-time encoding is needed, disabled by default, to be handled with web worker in future
+			// compiling: !!options.compiling || false,   // removed for now
 		}
-		// settings采样的parameter
-		this.outputSampleRate = this.config.sampleRate! // 输出采样率
-		this.oututSampleBits = this.config.sampleBits! // 输出采样数位 8, 16
+		// configure sampling parameters
+		this.outputSampleRate = this.config.sampleRate! // output sample rate
+		this.oututSampleBits = this.config.sampleBits! // output sample bit depth: 8, 16
 	}
 
 	handleMediaError(err: any) {
 		if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
-			message.warning("未找到麦克风设备")
+			message.warning("No microphone device found")
 		} else if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
-			message.warning("请您打开浏览器麦克风permission再进行录音")
+			message.warning("Please enable microphone permission in your browser to record audio")
 		} else {
-			message.warning("暂不能使用录音功能,请check设备")
+			message.warning("Recording feature is temporarily unavailable, please check your device")
 		}
 	}
 
 	/**
-	 * start录音
+	 * Start recording
 	 *
 	 * @memberof Recorder
 	 */
 	async startRecord() {
 		if (this.context) {
-			// 关闭先前的录音实例，因为前次的实例会缓存少量前次的录音数据
+			// close previous recording instance because it may cache a small amount of previous audio data
 			this.destroyRecord()
 		}
 		// initialize
@@ -155,7 +155,7 @@ export default class BaseRecorder {
 			navigator.msGetUserMedia
 		if ((!navigator.mediaDevices?.getUserMedia && !navigator.getUserMedia) || !this.context) {
 			// message.warning(`${i18next.t("chat.recording_summary.title")}`)
-			message.warning("当前浏览器无录音permission，请更换浏览器")
+			message.warning("Current browser does not have recording permission, please use a different browser")
 			return
 		}
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -180,21 +180,21 @@ export default class BaseRecorder {
 			}
 		}
 
-		// audioInput表示音频源node
-		// stream是通过navigator.getUserMediaget的外部（如麦克风）stream音频输出，对于这就是输入
+		// audioInput represents audio source node
+		// stream is the external (e.g., microphone) audio output obtained via navigator.getUserMedia, which serves as input for us
 		this.audioInput = this.context.createMediaStreamSource(stream)
 		this.stream = stream
 
-		// audioInput 为声音源，连接到handlenode recorder
+		// audioInput is the audio source, connected to the recorder processing node
 		this.audioInput.connect(this.analyser)
 		this.analyser.connect(this.recorder)
 		// this.audioInput.connect(this.recorder);
-		// handlenode recorder 连接到扬声器
+		// recorder processing node connected to speakers
 		this.recorder.connect(this.context.destination)
 	}
 
 	/**
-	 * pause录音
+	 * Pause recording
 	 *
 	 * @memberof Recorder
 	 */
@@ -203,7 +203,7 @@ export default class BaseRecorder {
 	}
 
 	/**
-	 * continue录音
+	 * Resume recording
 	 *
 	 * @memberof Recorder
 	 */
@@ -212,7 +212,7 @@ export default class BaseRecorder {
 	}
 
 	/**
-	 * 停止录音
+	 * Stop recording
 	 *
 	 */
 	stopRecord(): void {
@@ -224,12 +224,12 @@ export default class BaseRecorder {
 	}
 
 	/**
-	 * 销毁录音object
+	 * Destroy recording instance
 	 *
 	 */
 	destroyRecord(): Promise<{}> {
 		this.clearRecordStatus()
-		// end流
+		// end stream
 		this.stopStream()
 
 		return this.closeAudioContext()
@@ -237,20 +237,20 @@ export default class BaseRecorder {
 
 	getAnalyseData() {
 		const dataArray = new Uint8Array(this.analyser.frequencyBinCount)
-		// 将数据拷贝到dataArray中。
+		// copy data to dataArray
 		this.analyser.getByteTimeDomainData(dataArray)
 
 		return dataArray
 	}
 
-	// get录音数据
+	// get recording data
 	getData() {
 		const data: any = this.flat()
 
 		return data
 	}
 
-	// get切割后的录音数据
+	// get sliced recording data
 	getOnceData() {
 		const data: any = this.flatOnce()
 
@@ -258,7 +258,7 @@ export default class BaseRecorder {
 	}
 
 	/**
-	 * 清除status
+	 * Clear recording status
 	 *
 	 */
 	private clearRecordStatus() {
@@ -272,20 +272,20 @@ export default class BaseRecorder {
 
 	private flat() {
 		let lData = null,
-			rData = new Float32Array(0) // 右声道默认为0
+			rData = new Float32Array(0) // right channel defaults to 0
 
-		// create存放数据的容器
+		// create container for storing data
 		if (1 === this.config.numChannels) {
 			lData = new Float32Array(this.size)
 		} else {
 			lData = new Float32Array(this.size / 2)
 			rData = new Float32Array(this.size / 2)
 		}
-		// 合并
-		let offset = 0 // 偏移量计算
+		// merge
+		let offset = 0 // offset calculation
 
-		// 将二维数据，转成一维数据
-		// 左声道
+		// convert 2D data to 1D data
+		// left channel
 		for (let i = 0; i < this.lBuffer.length; i++) {
 			lData.set(this.lBuffer[i], offset)
 			this.cacheBuffer.push(this.lBuffer[i])
@@ -294,7 +294,7 @@ export default class BaseRecorder {
 		console.log("flat", this.cacheBuffer.length, this.lBuffer.length)
 
 		offset = 0
-		// 右声道
+		// right channel
 		for (let i = 0; i < this.rBuffer.length; i++) {
 			rData.set(this.rBuffer[i], offset)
 			offset += this.rBuffer[i].length
@@ -307,24 +307,24 @@ export default class BaseRecorder {
 	}
 
 	/**
-	 * 将二维array转一维
+	 * Convert 2D array to 1D
 	 *
 	 * @private
-	 * @returns  {float32array}     音频pcm二进制数据
+	 * @returns  {float32array}     audio PCM binary data
 	 * @memberof Recorder
 	 */
 	private flatOnce() {
 		let lData = null
-		let rData = new Float32Array(0) // 右声道默认为0
+		let rData = new Float32Array(0) // right channel defaults to 0
 
-		const start = this.lastSliceIndex || 0 // 上次切割位置
-		const end = this.lBuffer.length // 当前缓冲区末尾
+		const start = this.lastSliceIndex || 0 // last slice position
+		const end = this.lBuffer.length // end of current buffer
 
-		console.log("切割索引：", start, end)
+		console.log("slice index:", start, end)
 
-		// create存放数据的容器
+		// create container for storing data
 		const totalLength = this.lBuffer.slice(start, end).reduce((sum, segment) => {
-			console.log("单个片段的长度：", segment.length)
+			console.log("single segment length:", segment.length)
 			return sum + segment.length
 		}, 0)
 		if (this.config.numChannels === 1) {
@@ -334,10 +334,10 @@ export default class BaseRecorder {
 			rData = new Float32Array(totalLength / 2)
 		}
 
-		let offset = 0 // 偏移量计算
+		let offset = 0 // offset calculation
 
-		// 将二维数据，转成一维数据
-		// 左声道
+		// convert 2D data to 1D data
+		// left channel
 		for (let i = start; i < end; i++) {
 			lData.set(this.lBuffer[i], offset)
 			this.cacheBuffer.push(this.lBuffer[i])
@@ -345,16 +345,16 @@ export default class BaseRecorder {
 		}
 		console.log("flat", this.cacheBuffer.length, this.lBuffer.length)
 
-		// 右声道
+		// right channel
 		if (this.config.numChannels === 2) {
-			offset = 0 // reset偏移量
+			offset = 0 // reset offset
 			for (let i = start; i < end; i++) {
 				rData.set(this.rBuffer[i], offset)
 				offset += this.rBuffer[i].length
 			}
 		}
 
-		// update上一次的切割坐标
+		// update last slice position
 		this.lastSliceIndex = end
 
 		return {
@@ -364,19 +364,19 @@ export default class BaseRecorder {
 	}
 
 	/**
-	 * initialize录音实例
+	 * Initialize recording instance
 	 */
 	private initRecorder(): void {
-		// 清空数据
+		// clear data
 		this.clearRecordStatus()
 
 		this.context = new (window.AudioContext || window.webkitAudioContext)()
 
-		this.analyser = this.context.createAnalyser() // 录音分析node
-		this.analyser.fftSize = 2048 // 表示存储频域的大小
+		this.analyser = this.context.createAnalyser() // recording analysis node
+		this.analyser.fftSize = 2048 // represents frequency domain storage size
 
-		// 第一个parameter表示收集采样的大小，采集完这么多后会触发 onaudioprocess 接口一次，该值一般为1024,2048,4096等，一般就settings为4096
-		// 第二，三个parameter分别是输入的声道数和输出的声道数，保持一致即可。
+		// first parameter indicates the sampling collection size; onaudioprocess will be triggered once after this amount is collected, typically 1024, 2048, 4096, etc., generally set to 4096
+		// second and third parameters are input and output channel count respectively; keep them consistent
 		const createScript = this.context.createScriptProcessor || this.context.createJavaScriptNode
 		this.recorder = createScript.apply(this.context, [
 			4096,
@@ -384,23 +384,23 @@ export default class BaseRecorder {
 			this.config.numChannels,
 		])
 
-		// 音频采集
+		// audio collection
 		this.recorder.onaudioprocess = (e: any) => {
 			if (!this.needRecord) {
 				return
 			}
-			// 左声道数据
-			// getChannelDatareturnFloat32Arrayclass型的pcm数据
+			// left channel data
+			// getChannelData returns Float32Array type PCM data
 			const lData = e.inputBuffer.getChannelData(0)
 			let rData = null
-			let vol = 0 // 音量百分比
+			let vol = 0 // volume percentage
 
 			this.lBuffer.push(new Float32Array(lData))
 			// console.log("this.lBuffer.length",this.lBuffer.length);
 
 			this.size += lData.length
 
-			// 判断是否有右声道数据
+			// check if right channel data exists
 			if (this.config.numChannels === 2) {
 				rData = e.inputBuffer.getChannelData(1)
 				this.rBuffer.push(new Float32Array(rData))
@@ -408,41 +408,39 @@ export default class BaseRecorder {
 				this.size += rData.length
 			}
 
-			// 边录边转handle 暂时不支持
+			// real-time encoding during recording is temporarily not supported
 			// if (this.config.compiling) {
 			//     let pcm = this.transformIntoPCM(lData, rData);
 
 			//     this.tempPCM.push(pcm);
-			//     // 计算录音大小
+			//     // calculate recording size
 			//     this.fileSize = pcm.byteLength * this.tempPCM.length;
 			// } else {
-			// 计算录音大小
+			// calculate recording size
 			this.fileSize =
 				Math.floor(this.size / Math.max(this.inputSampleRate / this.outputSampleRate, 1)) *
 				(this.oututSampleBits / 8)
 			// }
-			// 为何此处计算大小需要分开计算。原因是先录后转时，是将所有数据一起handle，边录边转是单个 4096 handle，
-			// 有小数位的偏差。
+			// why separate calculation here: during record-then-encode, all data is processed together,
+			// but during record-and-encode, only 4096 samples are processed, causing fractional bit differences
 
-			// 计算音量百分比
+			// calculate volume percentage
 			vol = Math.max.apply(Math, lData) * 100
-			// 统计录音时长
+			// record duration statistics
 			this.duration += 4096 / this.inputSampleRate
-			// 录音时长回调
+			// duration callback
 			this.onprocess && this.onprocess(this.duration)
-			// 录音时长及响度回调
+			// duration and volume callback
 			this.onprogress &&
 				this.onprogress({
 					duration: this.duration,
 					fileSize: this.fileSize,
 					vol,
-					// data: this.tempPCM,     // 当前所有的pcm数据，调用者控制增量
-				})
-		}
+				// data: this.tempPCM,     // all current PCM data, caller controls increment
 	}
 
 	/**
-	 * 终止流（这可以让浏览器上正在录音的标志消失掉）
+	 * Stop stream (this removes the recording indicator from the browser)
 	 * @private
 	 * @memberof Recorder
 	 */
@@ -454,8 +452,8 @@ export default class BaseRecorder {
 	}
 
 	/**
-	 * close兼容方案
-	 * 如firefox 30 等低version浏览器没有 closemethod
+	 * close compatibility solution
+	 * older browsers like Firefox 30 may not have close method
 	 */
 	private closeAudioContext() {
 		if (this.context && this.context.close && this.context.state !== "closed") {
@@ -466,7 +464,7 @@ export default class BaseRecorder {
 		})
 	}
 
-	// getUserMedia version兼容
+	// getUserMedia version compatibility
 	static initUserMedia() {
 		if (navigator.mediaDevices === undefined) {
 			navigator.mediaDevices = {}
@@ -480,7 +478,7 @@ export default class BaseRecorder {
 					navigator.mozGetUserMedia
 
 				if (!getUserMedia) {
-					return Promise.reject(new Error("浏览器不支持 getUserMedia !"))
+					return Promise.reject(new Error("Browser does not support getUserMedia!"))
 				}
 
 				return new Promise(function (resolve: any, reject: any) {

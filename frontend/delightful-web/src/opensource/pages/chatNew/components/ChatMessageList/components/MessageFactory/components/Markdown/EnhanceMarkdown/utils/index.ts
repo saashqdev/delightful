@@ -1,5 +1,5 @@
 export { domCache } from "./cache"
 export { globalCursorManager } from "./cursor"
 
-// 重新export原util.ts中的功能
+// Re-export functionality from original utils.ts
 export { findLastElement, manageCursor } from "../utils"

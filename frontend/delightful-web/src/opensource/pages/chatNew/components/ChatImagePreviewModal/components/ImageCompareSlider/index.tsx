@@ -23,7 +23,7 @@ function ImageCompareSlider(props: ImageCompareSliderProps) {
 	const { styles, cx } = useStyles()
 
 	const containerRef = useRef<HTMLDivElement>(null)
-	const [sliderPosition, setSliderPosition] = useState(50) // 默认滑块在中间
+	const [sliderPosition, setSliderPosition] = useState(50) // Default slider in middle
 	const [isDragging, setIsDragging] = useState(false)
 
 	const handlePointerDown = useMemoizedFn((e) => {
@@ -40,12 +40,12 @@ function ImageCompareSlider(props: ImageCompareSliderProps) {
 		if (!containerRef.current || !isDragging) return
 		const rect = containerRef.current.getBoundingClientRect()
 		const offsetX = clientX - rect.left
-		const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100)) // 限制范围 0-100%
+		const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100)) // Limit range 0-100%
 		setSliderPosition(percentage)
 		e.stopPropagation()
 	})
 
-	// 捕捉鼠标在外部松开的event
+	// Capture mouse release event outside
 	useEffect(() => {
 		if (!isDragging) return
 		const handleGlobalPointerUp = () => {
@@ -60,7 +60,7 @@ function ImageCompareSlider(props: ImageCompareSliderProps) {
 		}
 	}, [isDragging])
 
-	// 原图
+	// Original image
 	const oldImg = useMemo(
 		() => (
 			<div
@@ -93,7 +93,7 @@ function ImageCompareSlider(props: ImageCompareSliderProps) {
 		],
 	)
 
-	// 高清图
+	// HD image
 	const hdImg = useMemo(
 		() => (
 			<div className={styles.imageWrapper}>
@@ -106,7 +106,7 @@ function ImageCompareSlider(props: ImageCompareSliderProps) {
 		[styles.imageWrapper, styles.image, styles.text, styles.textRight, url, fileId, cx, t],
 	)
 
-	// 滑块
+	// Slider
 	const slider = useMemo(
 		() => (
 			<div

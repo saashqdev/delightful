@@ -24,7 +24,7 @@ import { observer } from "mobx-react-lite"
 interface DelightfulFileProps {
 	data?: ConversationMessageAttachment[]
 	messageId: string
-	display?: boolean // 是否显示
+	display?: boolean // Whether to display
 }
 
 const DelightfulFiles = observer(({ data, messageId, display = true }: DelightfulFileProps) => {
@@ -60,8 +60,8 @@ const DelightfulFiles = observer(({ data, messageId, display = true }: Delightfu
 	})
 
 	/**
-	 * 预览file
-	 * @param fileInfo fileinformation
+	 * Preview file
+	 * @param fileInfo file information
 	 */
 	const onPreview = useMemoizedFn((fileInfo: ConversationMessageAttachment) => {
 		console.log("fileInfo =======> ", fileInfo)
@@ -96,7 +96,7 @@ const DelightfulFiles = observer(({ data, messageId, display = true }: Delightfu
 		)
 	}
 
-	// 当file是图片class型时, 显示单个图片
+	// When file is image type, display single image
 	if (IMAGE_EXTENSIONS.includes(dataFirst.file_extension?.toLocaleLowerCase() ?? "")) {
 		return (
 			<ImageWrapper
@@ -109,7 +109,7 @@ const DelightfulFiles = observer(({ data, messageId, display = true }: Delightfu
 		)
 	}
 
-	// 在录音纪要的情况下，只需要记录file数据，不需要显示fileUI，默认显示
+	// In recording summary case, only need to record file data, no need to display file UI, display by default
 	if (!display) return null
 	const loading = isLoading || isUnReceived
 

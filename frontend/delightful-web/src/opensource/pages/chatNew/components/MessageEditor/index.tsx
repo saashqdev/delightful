@@ -69,21 +69,21 @@ export interface SendData {
 const MAX_UPLOAD_COUNT = 20
 
 export interface DelightfulInputProps extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue"> {
-	/** 底层编辑器 Tiptap configuration */
+	/** Underlying editor Tiptap configuration */
 	tiptapProps?: UseEditorOptions
-	/** 是否可见 */
+	/** Whether visible */
 	visible?: boolean
-	/** 是否禁用 */
+	/** Whether disabled */
 	disabled?: boolean
-	/** 主题 */
+	/** Theme */
 	theme?: IMStyle
-	/** 回车发送 */
+	/** Send on Enter */
 	sendWhenEnter?: boolean
-	/** 发送后是否清空 */
+	/** Whether to clear after sending */
 	clearAfterSend?: boolean
-	/** 占位符 */
+	/** Placeholder */
 	placeholder?: string
-	/** input field样式 */
+	/** Input field style */
 	inputMainClassName?: string
 }
 
@@ -116,9 +116,9 @@ const MessageEditor = observer(function MessageEditor({
 
 	const { value, setValue, isValidContent } = EditorStore
 
-	// 编辑器是否准备好
+	// Whether editor is ready
 	const [editorReady, setEditorReady] = useState(false)
-	// 防止重复settings内容
+	// Prevent duplicate setting content
 	const settingContent = useRef(false)
 
 	const {
@@ -128,7 +128,7 @@ const MessageEditor = observer(function MessageEditor({
 		clearSessionInstructConfig,
 	} = ConversationBotDataService
 
-	// listener在引导页listener到的文本
+	// Listen for text from the guide page
 	useEffect(() => {
 		const disposer = autorun(() => {
 			if (ConversationStore.selectText && editorReady && !settingContent.current) {
@@ -151,16 +151,16 @@ const MessageEditor = observer(function MessageEditor({
 		}
 	})
 
-	/** ============================== 引用message =============================== */
+	/** ============================== Reference message =============================== */
 	const referMessageId = ReplyStore.replyMessageId
 	const handleReferMessageClick = useMemoizedFn(() => {
 		if (referMessageId) {
-			// FIXME: 滚动到引用message
+			// FIXME: Scroll to reference message
 			MessageStore.setFocusMessageId(referMessageId)
 		}
 	})
 
-	// 选择引用message后, 自动聚焦到input field
+	// Auto focus to input field after selecting reference message
 	useEffect(() => {
 		return autorun(() => {
 			if (ReplyStore.replyMessageId) {
@@ -177,7 +177,7 @@ const MessageEditor = observer(function MessageEditor({
 		if (list.length > MAX_UPLOAD_COUNT) {
 			message.error(t("file.uploadLimit", { count: MAX_UPLOAD_COUNT }))
 		}
-		// 写入草稿
+		// Write draft
 		writeCurrentDraft()
 	})
 	const { upload, uploading } = useUpload<FileData>({
@@ -224,7 +224,7 @@ const MessageEditor = observer(function MessageEditor({
 		},
 	})
 
-	/** ========================== 发送message ========================== */
+	/** ========================== Send message ========================== */
 	const sending = useRef(false)
 	const { run: onSend } = useThrottleFn(
 		useMemoizedFn(
@@ -237,7 +237,7 @@ const MessageEditor = observer(function MessageEditor({
 					if (sending.current) return
 					sending.current = true
 
-					// 先uploadfile
+					// Upload files first
 					const { fullfilled, rejected } = await upload(files)
 					if (rejected.length > 0) {
 						message.error(t("file.uploadFail", { ns: "message" }))
@@ -245,7 +245,7 @@ const MessageEditor = observer(function MessageEditor({
 						return
 					}
 
-					// 上报file
+					// Report files
 					const reportRes =
 						fullfilled.length > 0
 							? await FileApi.reportFileUploads(
@@ -258,7 +258,7 @@ const MessageEditor = observer(function MessageEditor({
 							  )
 							: []
 
-					// 找到所有的图片,进行upload
+					// Find all images and upload
 					const jsonContentImageTransformed = await transformJSONContent(
 						jsonValue,
 						(c) => c.type === Image.name,
@@ -308,7 +308,7 @@ const MessageEditor = observer(function MessageEditor({
 						JSON.stringify(jsonContentImageTransformed),
 					)
 
-					// 发送message
+					// Send message
 					EditorService.send({
 						jsonValue: jsonContentImageTransformed,
 						normalValue,
@@ -336,7 +336,7 @@ const MessageEditor = observer(function MessageEditor({
 
 						MessageReplyService.reset()
 						setFiles([])
-						// 清空内部status
+						// Clear internal state
 						setValue(undefined)
 					}
 				} catch (error) {
@@ -354,7 +354,7 @@ const MessageEditor = observer(function MessageEditor({
 		onSend,
 	})
 
-	/** ========================== 添加表情 ========================== */
+	/** ========================== Add emoji ========================== */
 	const onAddEmoji = useMemoizedFn((emoji: EmojiInfo) => {
 		editorRef.current?.editor
 			?.chain()
@@ -366,7 +366,7 @@ const MessageEditor = observer(function MessageEditor({
 			.run()
 	})
 
-	/** ========================== uploadfile相关 ========================== */
+	/** ========================== File upload related ========================== */
 	const onFileChange = useMemoizedFn(async (fileList: FileList | File[]) => {
 		const imageFiles: File[] = []
 		const otherFiles: File[] = []
@@ -380,7 +380,7 @@ const MessageEditor = observer(function MessageEditor({
 			}
 		}
 
-		// handle图片,插入到input field
+		// Handle images, insert to input field
 		if (imageFiles.length > 0) {
 			const pos = editorRef.current?.editor?.state.selection.$from.pos ?? 0
 			await Promise.all(
@@ -402,7 +402,7 @@ const MessageEditor = observer(function MessageEditor({
 			editorRef.current?.editor?.commands.focus(pos + imageFiles.length)
 		}
 
-		// handle其他file
+		// Handle other files
 		if (otherFiles.length > 0) {
 			setFiles((l) => [...l, ...otherFiles.map(genFileData)])
 		}
@@ -484,7 +484,7 @@ const MessageEditor = observer(function MessageEditor({
 		[conversationId, standardStyles.button],
 	)
 
-	/** ========================== button组 ========================== */
+	/** ========================== Button group ========================== */
 	const buttons = useMemo(() => {
 		if (isAiConversation) {
 			return (
@@ -547,7 +547,7 @@ const MessageEditor = observer(function MessageEditor({
 		handleReferMessageClick,
 	])
 
-	/** ========================== 草稿 ========================== */
+	/** ========================== Draft ========================== */
 
 	const { run: writeCurrentDraft } = useDebounceFn(
 		() => {
@@ -561,11 +561,11 @@ const MessageEditor = observer(function MessageEditor({
 		{ wait: 1000 },
 	)
 
-	/** 切换会话或者话题时, save和读取草稿 */
+	/** Save and load draft when switching conversation or topic */
 	useEffect(() => {
 		if (conversationId && editorReady && !settingContent.current) {
 			settingContent.current = true
-			// save草稿
+			// Save draft
 			if (
 				EditorStore.lastConversationId !== conversationId ||
 				EditorStore.lastTopicId !== topicId
@@ -579,12 +579,12 @@ const MessageEditor = observer(function MessageEditor({
 					},
 				)
 			}
-			// 读取草稿
+			// Load draft
 			if (EditorDraftStore.hasDraft(conversationId, topicId ?? "")) {
 				const draft = EditorDraftStore.getDraft(conversationId, topicId ?? "")
 				editorRef.current?.editor?.commands.setContent(draft?.content ?? "", true)
 				console.log("draft", toJS(draft))
-				// settings内部status
+				// Set internal state
 				setValue(draft?.content)
 				setFiles(draft?.files ?? [])
 				const text = editorRef.current?.editor?.getText()
@@ -592,7 +592,7 @@ const MessageEditor = observer(function MessageEditor({
 			} else {
 				editorRef.current?.editor?.chain().clearContent().run()
 				setIsEmpty(true)
-				// reset内部status
+				// Reset internal state
 				setValue(undefined)
 				setFiles([])
 			}
@@ -602,7 +602,7 @@ const MessageEditor = observer(function MessageEditor({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [conversationId, topicId, setIsEmpty, editorReady])
 
-	/** ========================== AI 自动补全 ========================== */
+	/** ========================== AI auto-completion ========================== */
 	if (editorRef.current) {
 		AiCompletionService.setInstance(editorRef.current)
 	}
@@ -613,12 +613,12 @@ const MessageEditor = observer(function MessageEditor({
 	}, [isEmpty])
 
 	const openAiCompletion = useAppearanceStore((state) => state.aiCompletion)
-	/** ========================== 编辑器configuration ========================== */
+	/** ========================== Editor configuration ========================== */
 	const editorProps = useMemo<UseEditorOptions>(() => {
 		const extensions = [
-			/** 快捷指令 */
+			/** Quick instruction */
 			QuickInstructionExtension,
-			/** 其他扩展 */
+			/** Other extensions */
 			...(tiptapProps?.extensions ?? []),
 		]
 
@@ -626,7 +626,7 @@ const MessageEditor = observer(function MessageEditor({
 			extensions.unshift(AiCompletionService.getExtension())
 		}
 
-		// Tiptap的默认空内容结构（doc with paragraph）
+		// Tiptap default empty content structure (doc with paragraph)
 		const emptyTiptapContent = {
 			type: "doc",
 			content: [{ type: "paragraph" }],
@@ -639,17 +639,17 @@ const MessageEditor = observer(function MessageEditor({
 				if (settingContent.current) return
 
 				try {
-					// get编辑器JSON
+					// Get editor JSON
 					const json = e?.getJSON()
 					const text = e?.getText() ?? ""
 
-					// 确保json有效才updatestatus
+					// Only update state if JSON is valid
 					if (json && typeof json === "object" && "type" in json) {
-						// update内部status
+						// Update internal state
 						setValue?.(json)
-						// 写入草稿
+						// Write draft
 						writeCurrentDraft()
-						// settings空status
+						// Set empty state
 						setIsEmpty(!text)
 					}
 				} catch (error) {
@@ -657,13 +657,13 @@ const MessageEditor = observer(function MessageEditor({
 				}
 			},
 			onTransaction: () => {
-				// handle输入event，不触发重渲染
+				// Handle input event without triggering re-render
 			},
 			onCreate: () => {
 				setEditorReady(true)
 			},
 			extensions,
-			enableContentCheck: false, // 关闭内置内容check，我们自己handle
+			enableContentCheck: false, // Disable built-in content check, we handle it ourselves
 			...omit(tiptapProps, ["extensions", "onContentError"]),
 		}
 	}, [tiptapProps, openAiCompletion, isValidContent, value, setValue, writeCurrentDraft])
@@ -671,7 +671,7 @@ const MessageEditor = observer(function MessageEditor({
 	const getEditorJSON = useMemoizedFn(() => {
 		try {
 			const editorJson = editorRef.current?.editor?.getJSON()
-			// 确保json有效
+			// Ensure JSON is valid
 			if (!editorJson || typeof editorJson !== "object" || !("type" in editorJson)) {
 				return {
 					json: {
@@ -696,7 +696,7 @@ const MessageEditor = observer(function MessageEditor({
 		}
 	})
 
-	/** ========================== 发送button ========================== */
+	/** ========================== Send button ========================== */
 	const sendDisabled = (isEmpty && !files.length) || uploading
 
 	const handleSend = useMemoizedFn(async () => {
@@ -706,12 +706,12 @@ const MessageEditor = observer(function MessageEditor({
 			const normalValue = generateRichText(JSON.stringify(json))
 
 			if (MessageService.isTextSizeOverLimit(JSON.stringify(normalValue))) {
-				// 超长文本
+				// Text too long
 				return new Promise((resolve) => {
 					DelightfulModal.confirm({
-						title: "tip",
-						content: "发送的内存超长，是否转为documentation发送到当前会话？",
-						okText: "确定",
+						title: "Tip",
+						content: "The message is too long. Would you like to convert it to a document and send to the current conversation?",
+						okText: "Confirm",
 						onOk: async () => {
 							await onSend?.(json, onlyText, true)
 							resolve(true)
@@ -727,7 +727,7 @@ const MessageEditor = observer(function MessageEditor({
 		}
 	})
 
-	/** ========================== 回车发送 ========================== */
+	/** ========================== Send on Enter ========================== */
 	useKeyPress(
 		"Enter",
 		() => {

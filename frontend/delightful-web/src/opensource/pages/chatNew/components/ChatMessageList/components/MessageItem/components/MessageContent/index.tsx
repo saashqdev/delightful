@@ -118,9 +118,9 @@ const MessageContent = observer(
 				align={is_self ? "flex-end" : "flex-start"}
 				className={styles.contentWrapper}
 			>
-				{/* 发送time和user名 */}
+				{/* Send time and username */}
 				<MessageHeader isSelf={is_self} name={name} sendTime={message.send_time} />
-				{/* message气泡 */}
+			{/* Message bubble */}
 				<Flex gap={4} className={is_self ? styles.selfMessage : styles.otherMessage}>
 					<div
 						className={cx(

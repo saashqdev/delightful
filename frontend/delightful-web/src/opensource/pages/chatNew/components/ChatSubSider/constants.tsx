@@ -4,11 +4,11 @@ export const enum SegmentedKey {
 	 */
 	Message = "message",
 	/**
-	 * 提到我
+	 * Mention me
 	 */
 	AtMe = "atMe",
 	/**
-	 * AI机器人
+	 * AI bots
 	 */
 	AiBots = "AiBots",
 }

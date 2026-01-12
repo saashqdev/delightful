@@ -21,7 +21,7 @@ const enum ReadyState {
 }
 
 export default function useRecordingSummary({ conversationId }: UseRecordingSummaryProps) {
-	// useChatStore 已废弃，需重新implement
+	// useChatStore is deprecated, need to reimplement
 	// const { isRecording, updateIsRecording } = useChatStore((s) => s)
 	const { online } = useNetwork()
 	const uId = userStore.user.userInfo?.user_id
@@ -36,7 +36,7 @@ export default function useRecordingSummary({ conversationId }: UseRecordingSumm
 			return
 		}
 		// if (!isRecording) {
-		// FIXME: 需要使用 ChatWebSocket 的实例
+		// FIXME: Need to use ChatWebSocket instance
 		// @ts-ignore
 		const socket = ChatWebSocket.getWebSocket()
 		// @ts-ignore

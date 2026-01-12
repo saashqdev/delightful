@@ -247,7 +247,7 @@ export default {
 
 				const dataFileInfo = safeJsonToBtoa({
 					url: node.attrs.src,
-					ext: { ext: "jpg", mime: "image/jpeg" }, // 默认认为是 jpg, 并不需要具体知道是什么class型的, 暂时不影响判断
+					ext: { ext: "jpg", mime: "image/jpeg" }, // Default to jpg, no need to know exact type, doesn't affect judgment for now
 					fileId: node.attrs.file_id,
 					index: node.attrs.index,
 					standalone: node.attrs.standalone,

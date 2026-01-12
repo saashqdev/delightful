@@ -5,33 +5,33 @@ import Player from "./player"
 import BaseRecorder from "./base"
 import { download, downloadWAV } from "./download"
 
-// 构造functionparameterformat
+// Constructor function parameter format
 interface RecorderConfig {
-	sampleBits?: number // 采样位数
-	sampleRate?: number // 采样率
-	numChannels?: number // 声道数
-	compiling?: boolean // 是否边录边播
+	sampleBits?: number // sample bit depth
+	sampleRate?: number // sample rate
+	numChannels?: number // number of channels
+	compiling?: boolean // whether to record and playback simultaneously
 }
 
 class Recorder extends BaseRecorder {
-	private isrecording: boolean = false // 是否正在录音
+	private isrecording: boolean = false // whether currently recording
 
-	private ispause: boolean = false // 是否是pause
+	private ispause: boolean = false // whether paused
 
-	private isplaying: boolean = false // 是否正在播放
+	private isplaying: boolean = false // whether currently playing
 
 	/**
-	 * @param {Object} options 包含以下三个parameter：
-	 * sampleBits，采样位数，一般8,16，默认16
-	 * sampleRate，采样率，一般 11025、16000、22050、24000、44100、48000，默认为浏览器自带的采样率
-	 * numChannels，声道，1或2
+	 * @param {Object} options contains the following three parameters:
+	 * sampleBits, sample bit depth, typically 8 or 16, default is 16
+	 * sampleRate, sample rate, typically 11025, 16000, 22050, 24000, 44100, 48000, defaults to browser's native sample rate
+	 * numChannels, channels, 1 or 2
 	 */
 	constructor(options: RecorderConfig = {}) {
 		super(options)
 	}
 
 	/**
-	 * 重新修改configuration
+	 * Re-configure settings
 	 *
 	 * @param {RecorderConfig} [options={}]
 	 * @memberof Recorder
@@ -45,7 +45,7 @@ class Recorder extends BaseRecorder {
 	 */
 	async start() {
 		if (this.isrecording) {
-			// 正在录音，则不允许
+			// already recording, not allowed
 			return
 		}
 
@@ -60,13 +60,13 @@ class Recorder extends BaseRecorder {
 	pause(): void {
 		if (this.isrecording && !this.ispause) {
 			this.ispause = true
-			// 当前不pause的时候才可以pause
+			// can only pause when currently not paused
 			this.pauseRecord()
 		}
 	}
 
 	/**
-	 * continue录音
+	 * Resume recording
 	 */
 	resume(): void {
 		if (this.isrecording && this.ispause) {
@@ -76,7 +76,7 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * 停止录音
+	 * Stop recording
 	 *
 	 * @memberof Recorder
 	 */
@@ -89,38 +89,38 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * 播放录音
+	 * Play recording
 	 */
 	play(): void {
 		this.stop()
-		// 关闭前一次音频播放
+		// close previous audio playback
 		this.isplaying = true
 
 		if (this.onplay) this.onplay()
-		Player.addPlayEnd(this.onplayend) // 注册播放complete后的回调event
+		Player.addPlayEnd(this.onplayend) // register callback event after playback completes
 
 		const dataV = this.getWAV()
 
 		if (dataV.byteLength > 44) {
-			Player.play(dataV.buffer) // 播放
+			Player.play(dataV.buffer) // play
 		}
 	}
 
 	/**
-	 * get已经播放了多长time
+	 * Get how long has been played
 	 */
 	getPlayTime(): number {
 		return Player.getPlayTime()
 	}
 
 	/**
-	 * pause播放录音
+	 * Pause playing recording
 	 *
 	 * @memberof Recorder
 	 */
 	pausePlay(): void {
 		if (this.isrecording || !this.isplaying) {
-			// 正在录音或没有播放，pause无效
+			// currently recording or not playing, pause is invalid
 			return
 		}
 
@@ -130,13 +130,13 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * 恢复播放录音
+	 * Resume playing recording
 	 *
 	 * @memberof Recorder
 	 */
 	resumePlay(): void {
 		if (this.isrecording || this.isplaying) {
-			// 正在录音或已经播放或没start播放，恢复无效
+			// currently recording or already playing or not started, resume is invalid
 			return
 		}
 
@@ -146,13 +146,13 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * 停止播放
+	 * Stop playback
 	 *
 	 * @memberof Recorder
 	 */
 	stopPlay(): void {
 		if (this.isrecording) {
-			// 正在录音，停止录音播放无效
+			// currently recording, stop playback is invalid
 			return
 		}
 
@@ -168,7 +168,7 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * get当前已经录音的PCM音频数据
+	 * Get current recorded PCM audio data
 	 *
 	 * @returns[DataView]
 	 * @memberof Recorder
@@ -178,7 +178,7 @@ class Recorder extends BaseRecorder {
 	// }
 
 	/**
-	 * get余下的新数据，不包括 getNextData 前一次get的数据
+	 * Get remaining new data, excluding previous data obtained by getNextData
 	 *
 	 * @returns [DataView]
 	 * @memberof Recorder
@@ -193,8 +193,8 @@ class Recorder extends BaseRecorder {
 	// }
 
 	/**
-	 * get当前录音的波形数据，
-	 * 调取频率由外部控制。
+	 * Get current recording waveform data,
+	 * call frequency controlled externally.
 	 *
 	 * @memberof Recorder
 	 */
@@ -203,28 +203,28 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * get录音播放时的波形数据，
+	 * Get waveform data during recording playback,
 	 *
 	 * @memberof Recorder
 	 */
 	getPlayAnalyseData(): any {
-		// 现在录音和播放不允许同时进行，所有复用的录音的analysernode。
+		// recording and playback are not allowed simultaneously, so the recording's analyser node is reused.
 		return Player.getAnalyseData()
 	}
 
 	getPCM(): any {
-		// getpcm数据
+		// get PCM data
 		let data: any = this.getData()
-		// 根据输入输出比例 compress或扩展
+		// compress or expand based on input/output ratio
 		data = compress(data, this.inputSampleRate, this.outputSampleRate)
-		// 按采样位数重新encoding
+		// re-encode according to sample bit depth
 		return encodePCM(data, this.oututSampleBits, this.littleEdian)
 	}
 
 	/**
-	 * getPCMformat的blob数据
+	 * Get PCM format blob data
 	 *
-	 * @returns { blob }  PCMformat的blob数据
+	 * @returns { blob }  PCM format blob data
 	 * @memberof Recorder
 	 */
 	getPCMBlob(): any {
@@ -232,15 +232,15 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * getWAVencoding的二进制数据(dataview)
+	 * Get WAV encoded binary data (dataview)
 	 *
-	 * @returns {dataview}  WAVencoding的二进制数据
+	 * @returns {dataview}  WAV encoded binary data
 	 * @memberof Recorder
 	 */
 	getWAV(): any {
 		const pcmTemp = this.getPCM()
 
-		// PCM增加44字节的头就是WAVformat了
+		// PCM with 44-byte header becomes WAV format
 		return encodeWAV(
 			pcmTemp,
 			this.inputSampleRate,
@@ -252,9 +252,9 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * getWAV音频的blob数据
+	 * Get WAV audio blob data
 	 *
-	 * @returns { blob }    wavformatblob数据
+	 * @returns { blob }    WAV format blob data
 	 * @memberof Recorder
 	 */
 	getWAVBlob(): any {
@@ -263,11 +263,11 @@ class Recorder extends BaseRecorder {
 	}
 
 	getWavBlobByData(data: any): any {
-		// 根据输入输出比例 compress或扩展
+		// compress or expand based on input/output ratio
 		data = compress(data, this.inputSampleRate, this.outputSampleRate)
-		// 按采样位数重新encoding
+		// re-encode according to sample bit depth
 		const pcmTemp = encodePCM(data, this.oututSampleBits, this.littleEdian)
-		// PCM增加44字节的头就是WAVformat了
+		// PCM with 44-byte header becomes WAV format
 		const WAV = encodeWAV(
 			pcmTemp,
 			this.inputSampleRate,
@@ -281,7 +281,7 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * get单次WAV音频的blob数据
+	 * Get single WAV audio blob data
 	 */
 	getOnceWAVBlob(): any {
 		const data = this.getOnceData()
@@ -289,7 +289,7 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * get左和右声道的数据
+	 * Get left and right channel data
 	 *
 	 * @returns [DataView]
 	 */
@@ -300,10 +300,10 @@ class Recorder extends BaseRecorder {
 		const res = { left: null, right: null } as { left: DataView | null; right: DataView | null }
 
 		if (this.config.numChannels === 2) {
-			// 双通道,劈开
+			// dual channel, split
 			const lD = new DataView(new ArrayBuffer(length / 2))
 			const rD = new DataView(new ArrayBuffer(length / 2))
-			// 双声道，需要拆分下数据
+			// dual channel, need to split data
 
 			if (this.config.sampleBits === 16) {
 				for (let i = 0; i < length / 2; i += 2) {
@@ -320,7 +320,7 @@ class Recorder extends BaseRecorder {
 			res.left = lD
 			res.right = rD
 		} else {
-			// 单通道
+			// single channel
 			res.left = all
 		}
 
@@ -328,23 +328,23 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * download录音的wav数据
+	 * Download recording WAV data
 	 *
-	 * @param {string} [name='recorder']    重命名的名字
+	 * @param {string} [name='recorder']    renamed filename
 	 * @memberof Recorder
 	 */
 	downloadWAV(name: string = "recorder"): void {
-		// console.log("对比长度：",this.cacheBuffer.length, this.lBuffer.length)
+		// console.log("Compare lengths:",this.cacheBuffer.length, this.lBuffer.length)
 		const wavBlob = this.getWAVBlob()
 
 		downloadWAV(wavBlob, name)
 	}
 
 	/**
-	 * download缓存的wav数据（debug数据是否正常传输）
+	 * Download cached WAV data (debug whether data transmission is normal)
 	 */
 	downloadCacheWAV(name = "once-recorder"): void {
-		// console.log("对比长度：",this.cacheBuffer.length, this.lBuffer.length)
+		// console.log("Compare lengths:",this.cacheBuffer.length, this.lBuffer.length)
 		const totalLength = this.cacheBuffer.reduce((total, segment) => total + segment.length, 0)
 		const lData = new Float32Array(totalLength)
 		const rData = new Float32Array(0)
@@ -362,7 +362,7 @@ class Recorder extends BaseRecorder {
 	}
 
 	/**
-	 * 通用的download接口
+	 * Generic download interface
 	 */
 	download(blob: Blob[], name: string, type: string): void {
 		download(blob, name, type)

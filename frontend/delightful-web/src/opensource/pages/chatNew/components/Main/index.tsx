@@ -72,12 +72,12 @@ const useStyles = createStyles(({ isDarkMode, css, token }, { imStyle }: { imSty
 const data = [
 	{
 		icon: "🎯",
-		content: "总结会议重点后将会议中的事项create成task及通知相关负责人",
+		content: "Summarize meeting key points, create tasks from meeting items and notify relevant people",
 		key: "message",
 	},
 	{
 		icon: "📊",
-		content: "使用环比、同比分析最近一个月的销售额，并给出optimization建议",
+		content: "Analyze last month's sales using month-over-month and year-over-year comparison, and provide optimization suggestions",
 		key: "addressBook",
 	},
 ]

@@ -89,7 +89,7 @@ function KaTeX({ math, inline = false }: KaTeXProps) {
 			strict: false,
 			trust: false,
 			output: "html",
-			fleqn: false, // 不左对齐公式
+			fleqn: false, // Don't left-align formulas
 			macros: {
 				"\\RR": "\\mathbb{R}",
 				"\\NN": "\\mathbb{N}",
@@ -101,7 +101,7 @@ function KaTeX({ math, inline = false }: KaTeXProps) {
 			},
 		})
 
-		// check是否渲染出错
+		// Check if rendering errored
 		if (html.includes("katex-error")) {
 			return (
 				<span className={styles.errorFallback}>{inline ? `$${math}$` : `$$${math}$$`}</span>

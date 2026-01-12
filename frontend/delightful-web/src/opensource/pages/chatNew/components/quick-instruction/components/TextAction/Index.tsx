@@ -9,7 +9,7 @@ interface InstructionItemProps {
 }
 
 /**
- * 文本指令
+ * Text instruction
  */
 const TextAction = observer(({ instruction, ...rest }: InstructionItemProps) => {
 	const { handleTextQuickInstructionClick } = ConversationBotDataService

@@ -70,7 +70,7 @@ const DelightfulEmojiNodeExtension = Node.create<Options>({
 		return ReactNodeViewRenderer(DelightfulEmojiNodeRender)
 	},
 	renderText({ node }) {
-		// FIXME: get当前语言对应的表情名称 failed
+		// FIXME: Failed to get emoji name for current language
 		return `[${emojiLocaleCache.get(node.attrs.code)?.[node.attrs.locale] || node.attrs.code}]`
 	},
 })

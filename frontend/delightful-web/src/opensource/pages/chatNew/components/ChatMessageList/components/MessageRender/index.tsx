@@ -6,27 +6,27 @@ import { observer } from "mobx-react-lite"
 const MessageRender = observer(function MessageRender(props: { message: any }) {
 	const { message } = props
 
-	// handlecomponentclass型
+	// Handle component type
 	let componentType = message.type
 
-	// 不是控制classmessage，默认为defaultclass型
+	// If not control type message, default to default type
 	if (!ControlMessageApplyService.isControlMessage(message)) {
 		componentType = "default"
 	}
 
-	// 如果是撤回的
+	// If revoked
 	if (message.revoked) {
 		componentType = "RevokeTip"
 	}
 
-	// getcomponent
+	// Get component
 	const MessageComponent = MessageRenderFactory.getComponent(componentType)
 
 	if (!MessageComponent) {
 		return null
 	}
 
-	// 生成componentprops
+	// Generate component props
 	const componentProps = MessageRenderFactory.generateProps(componentType, message)
 
 	return (

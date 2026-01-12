@@ -36,7 +36,7 @@ function HeaderRaw({ conversation, className }: HeaderProps) {
 		[conversationUser],
 	)
 
-	// 使用 useState 和 useEffect 替代 useContactStore
+	// Use useState and useEffect to replace useContactStore
 	const [departments, setDepartments] = useState<any[]>([])
 
 	useDeepCompareEffect(() => {

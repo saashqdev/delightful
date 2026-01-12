@@ -3,10 +3,10 @@ import { isArray, isObject } from "lodash-es"
 import { ExtensionName } from "../extension/constants"
 
 /**
- * 替换快捷指令node
- * @param content - 内容
- * @param quickInstructionNodeAttrs - 快捷指令node
- * @returns 替换后的内容
+ * Replace quick instruction node
+ * @param content - Content
+ * @param quickInstructionNodeAttrs - Quick instruction node
+ * @returns Replaced content
  */
 export function transformQuickInstruction(
 	content: JSONContent | JSONContent[] | undefined,
@@ -27,11 +27,11 @@ export function transformQuickInstruction(
 }
 
 /**
- * 替换已存在的快捷指令
- * @param content - 内容
- * @param quickInstructionName - 快捷指令名称
- * @param quickInstructionValue - 快捷指令值
- * @returns 替换后的内容
+ * Replace existing quick instruction
+ * @param content - Content
+ * @param quickInstructionName - Quick instruction name
+ * @param quickInstructionValue - Quick instruction value
+ * @returns Replaced content
  */
 export function replaceExistQuickInstruction(
 	content: JSONContent | JSONContent[] | undefined,
@@ -40,7 +40,7 @@ export function replaceExistQuickInstruction(
 ): boolean {
 	let found = false
 
-	// handlearrayclass型
+	// Handle array type
 	if (Array.isArray(content)) {
 		content.forEach((item) => {
 			if (replaceExistQuickInstruction(item, compareFn, newValue)) {
@@ -50,13 +50,13 @@ export function replaceExistQuickInstruction(
 		return found
 	}
 
-	// handleobjectclass型
+	// Handle object type
 	if (content?.type === ExtensionName && content.attrs && compareFn(content.attrs)) {
 		content.attrs.value = newValue
 		found = true
 	}
 
-	// 递归handle子node
+	// Recursively handle child nodes
 	if (content?.content && Array.isArray(content.content)) {
 		content.content.forEach?.((child: JSONContent) => {
 			if (replaceExistQuickInstruction(child, compareFn, newValue)) {

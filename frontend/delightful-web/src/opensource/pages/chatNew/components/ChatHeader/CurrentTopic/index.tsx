@@ -44,8 +44,8 @@ const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 interface CurrentTopicProps extends HTMLAttributes<HTMLDivElement> {}
 
 /**
- * 当前话题
- * PS: 只存在于单聊/群聊中, AI 聊天不显示
+ * Current topic
+ * PS: Only exists in direct/group chats, not displayed in AI chats
  */
 const CurrentTopic = observer(({ className }: CurrentTopicProps) => {
 	const { t } = useTranslation("interface")
@@ -56,16 +56,16 @@ const CurrentTopic = observer(({ className }: CurrentTopicProps) => {
 
 	// store fn
 
-	/** return聊天模式 */
+	/** Return to chat mode */
 	const backChatMode = useMemoizedFn(() => {
 		if (!currentTopic) return
 		chatTopicService.setCurrentConversationTopic(undefined)
 	})
 
-	/** 切换话题 */
+	/** Switch topic */
 	const switchTopic = useMemoizedFn(() => {
 		if (!currentTopic || !conversation?.id) return
-		// FIXME: 切换话题
+		// FIXME: Switch topic
 		conversationService.switchTopic(conversation?.id, currentTopic?.id)
 	})
 

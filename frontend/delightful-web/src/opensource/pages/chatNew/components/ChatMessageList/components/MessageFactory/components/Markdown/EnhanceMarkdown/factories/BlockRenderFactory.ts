@@ -5,7 +5,7 @@ import BaseRenderFactory from "./BaseRenderFactory"
 
 const Fallback = lazy(() => import("../components/Block/components/Fallback"))
 
-// 内容分块渲染工厂
+// Content block rendering factory
 class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 	/**
 	 * 切割规则（正则）
@@ -53,19 +53,19 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 	private extractBlocks(content: string) {
 		const extractedBlocks = []
 
-		// 遍历每个定义的匹配器
+		// Iterate through each defined matcher
 		for (const [lang, regex] of this.splitters) {
 			let match
-			// reset正则表达式的lastIndex
+			// Reset regex lastIndex
 			regex.lastIndex = 0
 
-			// 对当前class型进行匹配
+			// Match current type
 			while ((match = regex.exec(content)) !== null) {
-				const fullMatch = match[0] // 完整匹配（包括```标记）
-				const content = match[1]?.trim() // 移除标记的内容
-				const position = match.index // 代码块在原文中的位置
+				const fullMatch = match[0] // Full match (including ``` markers)
+				const content = match[1]?.trim() // Content with markers removed
+				const position = match.index // Code block position in original text
 
-				// save提取结果
+				// Save extraction result
 				extractedBlocks[position] = {
 					lang,
 					content,
@@ -89,12 +89,12 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 		}
 
 		const extractedBlocks = this.extractBlocks(content)
-		// 分块
+		// Partition into blocks
 		const blocks: Block[] = []
 		let lastIndex = 0
 
 		extractedBlocks.forEach((value) => {
-			// 在文本的最前面
+			// At the very front of text
 			if (value.position === 0) {
 				blocks.push({
 					component: this.getComponent(value.lang),
@@ -116,7 +116,7 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 			}
 		})
 
-		// 最后一块
+		// Last block
 		if (lastIndex < content.length) {
 			blocks.push(content.substring(lastIndex))
 		}

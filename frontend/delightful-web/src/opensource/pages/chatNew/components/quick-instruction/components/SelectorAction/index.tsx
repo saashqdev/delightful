@@ -16,7 +16,7 @@ interface InstructionItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /**
- * selector指令
+ * Selector instruction
  */
 const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps) => {
 	const { styles } = useStyles()
@@ -33,11 +33,11 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 		updateRemoteInstructionConfig,
 	} = ConversationBotDataService
 
-	// 需要检测一下常驻功能是否关闭了，是的话得清除历史configuration值
+	// Check if residency feature is disabled, if so clear historical configuration values
 	useNonResidencyConfigCleanup(id, innerConfigValue, residency, updateRemoteInstructionConfig)
 
 	/**
-	 * 目标option
+	 * Target option
 	 */
 	const targetValue = useMemo(() => {
 		if (!residency && instruction.instruction_type !== InstructionMode.Flow) return undefined
@@ -65,7 +65,7 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 	}, [instruction])
 
 	/**
-	 * 选中的option
+	 * Selected option
 	 */
 	const selectedKeys = useMemo(() => {
 		if (!targetValue) return []
@@ -73,10 +73,10 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 	}, [targetValue])
 
 	/**
-	 * 点击option
+	 * Click option
 	 */
 	const handleClick = useMemoizedFn((v) => {
-		// 如果是常驻或者flow指令
+		// If residency or flow instruction
 		if (
 			(instruction.residency || instruction.instruction_type === InstructionMode.Flow) &&
 			selectedKeys[0] === v.key
@@ -89,7 +89,7 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 	})
 
 	/**
-	 * 只有一个option时，可以直接点击option
+	 * When there's only one option, can click directly
 	 */
 	if (menuItems.length === 1) {
 		return (

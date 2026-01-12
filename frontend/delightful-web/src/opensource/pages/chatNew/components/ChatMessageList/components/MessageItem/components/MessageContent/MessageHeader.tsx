@@ -11,7 +11,7 @@ interface MessageHeaderProps {
 }
 
 /**
- * message头
+ * Message header
  */
 const MessageHeader = memo(function MessageHeader({ sendTime, isSelf, name }: MessageHeaderProps) {
 	const { fontSize } = useFontSize()

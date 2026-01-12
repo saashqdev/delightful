@@ -70,10 +70,10 @@ const DelightfulAggregateAISearchCard = observer(
 
 		const size = useSize(summaryRef)
 
-		/** 总结内容 */
-		const llmResponse = content?.llm_response
+		/** Summary content */
+		const llmResponse = content?.summary?.content
 
-		/** 是否searchend */
+		/** Whether search ended */
 		const isSearchingFinish = useMemo(() => {
 			if (content?.finish) return true
 

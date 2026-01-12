@@ -9,7 +9,7 @@ interface InstructionExplanationProps extends PopoverProps {
 }
 
 /**
- * 快捷指令description
+ * Quick instruction description
  */
 const InstructionExplanation = memo(({ data, children, ...rest }: InstructionExplanationProps) => {
 	const { styles } = useStyles()

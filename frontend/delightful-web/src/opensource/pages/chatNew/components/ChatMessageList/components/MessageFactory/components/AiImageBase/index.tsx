@@ -96,7 +96,7 @@ const DelightfulAiImages = observer(({ type, content, messageId }: DelightfulAiI
 				sendMessage({
 					type: ConversationMessageType.Text,
 					text: {
-						content: "转超清",
+						content: "Convert to HD",
 						attachments: [{ file_id }],
 					},
 				})
@@ -136,7 +136,7 @@ const DelightfulAiImages = observer(({ type, content, messageId }: DelightfulAiI
 
 	useEffect(() => {
 		if (isToHDError && previewFileInfo?.fileId === (content as HDImageContent).origin_file_id) {
-			message.error(content?.error_message || "生成failed")
+			message.error(content?.error_message || "Generation failed")
 			MessageFilePreviewService.setPreviewInfo({
 				...previewFileInfo,
 				useHDImage: false,

@@ -93,17 +93,17 @@ const QuickInstructionNodeExtension = Node.create<Options>({
 	},
 })
 
-/** 模板模式 */
+/** Template mode */
 export const QuickInstructionNodeTemplateExtension = QuickInstructionNodeExtension.configure({
 	templateMode: true,
 })
 
-/** 禁用模式 */
+/** Disabled mode */
 export const QuickInstructionNodeDisabledExtension = QuickInstructionNodeExtension.configure({
 	disabled: true,
 })
 
-/** 聊天list中渲染 */
+/** Render in chat list */
 export const QuickInstructionNodeChatSubSiderExtension = QuickInstructionNodeExtension.configure({
 	disabled: true,
 	inSubSider: true,

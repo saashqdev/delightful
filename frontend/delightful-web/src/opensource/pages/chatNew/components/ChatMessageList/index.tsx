@@ -66,27 +66,27 @@ const ChatMessageList = observer(() => {
 			state.adjustPosition()
 		},
 		adjustPosition: () => {
-			// 调整位置, 防止超出屏幕
+			// Adjust position to prevent overflow off screen
 			if (typeof window !== "undefined") {
 				const windowWidth = window.innerWidth - state.marginSize * 2
 				const windowHeight = window.innerHeight - state.marginSize * 2
 
-				// 确保卡片右边界不超出屏幕
+				// Ensure card right boundary doesn't exceed screen
 				if (state.dropdownPosition.x + state.size.width + state.marginSize > windowWidth) {
 					state.dropdownPosition.x = windowWidth - state.size.width - state.marginSize
 				}
 
-				// 确保卡片不超出左边界
+				// Ensure card does not exceed left boundary
 				if (state.dropdownPosition.x < 0) {
 					state.dropdownPosition.x = state.marginSize
 				}
 
-				// 确保卡片底部不超出屏幕
+				// Ensure card bottom does not exceed screen
 				if (state.dropdownPosition.y + state.size.height > windowHeight) {
 					state.dropdownPosition.y = windowHeight - state.size.height - state.marginSize
 				}
 
-				// 确保卡片不超出顶部边界
+				// Ensure card does not exceed top boundary
 				if (state.dropdownPosition.y < 0) {
 					state.dropdownPosition.y = state.marginSize
 				}
@@ -181,7 +181,7 @@ const ChatMessageList = observer(() => {
 	)
 
 	const scrollToBottom = useMemoizedFn((force?: boolean) => {
-		// 不允许滚动
+		// Don't allow scrolling
 		if (!canScroll && !force) {
 			return
 		}
@@ -198,7 +198,7 @@ const ChatMessageList = observer(() => {
 		}, 0)
 	})
 
-	// load更多historical message
+	// Load more history messages
 	const loadMoreHistoryMessages = useMemoizedFn(async () => {
 		if (state.isLoadingMore || !MessageStore.hasMoreHistoryMessage) return
 
@@ -206,13 +206,13 @@ const ChatMessageList = observer(() => {
 			state.setIsLoadingMore(true)
 			canScroll = false
 
-			// 请求historical message
+			// Request history messages
 			await MessageService.getHistoryMessages(
 				conversationStore.currentConversation?.id ?? "",
 				conversationStore.currentConversation?.current_topic_id ?? "",
 			)
 		} catch (error) {
-			// 发生error时恢复样式
+			// Restore styles when error occurs
 			if (chatListRef.current) {
 				chatListRef.current.style.transform = ""
 				chatListRef.current.style.position = ""
@@ -222,10 +222,10 @@ const ChatMessageList = observer(() => {
 		}
 	})
 
-	// check滚动位置并handle
+	// Check scroll position and handle
 	const checkScrollPosition = useMemoizedFn(() => {
 		if (!wrapperRef.current || !initialRenderRef.current || isScrolling) return
-		// initializestatus不handle
+		// Don't handle in initial state
 		if (lastScrollTop === 0) {
 			lastScrollTop = wrapperRef.current.scrollTop
 			return
@@ -240,7 +240,7 @@ const ChatMessageList = observer(() => {
 		const isScrollUp = lastScrollTop - scrollTop > 0
 		lastScrollTop = scrollTop
 		if (isScrollUp && !state.isLoadingMore) {
-			// load更多，判断第四条message是否进入视图
+			// Load more, check if the fourth message enters the view
 			const messageId = MessageStore.messages[3]?.message_id
 
 			if (isMessageInView(messageId, wrapperRef.current) || scrollTop < 150) {
@@ -249,7 +249,7 @@ const ChatMessageList = observer(() => {
 		}
 	})
 
-	// check是否需要load更多message来填充视图
+	// Check if need to load more messages to fill viewport
 	const checkMessagesFillViewport = useMemoizedFn(async () => {
 		if (
 			!wrapperRef.current ||
@@ -263,15 +263,15 @@ const ChatMessageList = observer(() => {
 		const wrapperHeight = wrapperRef.current.clientHeight
 		const listHeight = chatListRef.current.clientHeight
 
-		// 如果内容高度小于容器高度，并且我们有足够的message可以load
-		// load更多historical message直到填满视图或没有更多message
+		// If content height is less than container height, and we have enough messages to load
+		// Load more history messages until fill the viewport or no more messages
 		if (listHeight < wrapperHeight && MessageStore.messages.length > 0) {
-			console.log("容器未填满，尝试load更多historical message", listHeight, wrapperHeight)
+			console.log("Container not filled, trying to load more history messages", listHeight, wrapperHeight)
 
 			try {
 				await loadMoreHistoryMessages()
 
-				// 递归check，直到填满或没有更多message
+				// Recursively check until filled or no more messages
 				if (checkMessagesFillViewportTimerRef.current) {
 					clearTimeout(checkMessagesFillViewportTimerRef.current)
 				}
@@ -280,19 +280,19 @@ const ChatMessageList = observer(() => {
 					checkMessagesFillViewport()
 				}, 300)
 			} catch (error) {
-				console.error("load更多messagefailed", error)
+				console.error("Load more messages failed", error)
 			}
 		}
 	})
 
-	// handle容器大小变化
+	// Handle container size change
 	const handleResize = useMemoizedFn(() => {
 		if (!chatListRef.current || isScrolling) return
 
 		const { messages } = MessageStore
 		if (!messages.length) return
 
-		// 如果最后一条message为空，证明是initializestatus，滚动到底部
+		// If last message is empty, it's initial state, scroll to bottom
 		if (!lastMessageId) {
 			lastMessageId = messages[messages.length - 1]?.message_id
 			scrollToBottom(true)
@@ -300,9 +300,9 @@ const ChatMessageList = observer(() => {
 			return
 		}
 
-		// 有新message，并且不是当前message，尝试滚动到底部
+		// Has new message, and not current message, try to scroll to bottom
 		const lastMessage = messages[messages.length - 1]
-		// 如果是我发送的新message，滚动到底部，或者是在底部
+		// If it's a new message I sent, scroll to bottom, or is at bottom
 		if (
 			(lastMessage.is_self && lastMessage?.message_id !== lastMessageId) ||
 			state.isAtBottom
@@ -316,7 +316,7 @@ const ChatMessageList = observer(() => {
 		// update lastMessageId
 		lastMessageId = lastMessage?.message_id
 
-		// 其他情况，滚回底部
+		// Other cases, scroll back to bottom
 		if (canScroll && wrapperRef.current) {
 			return wrapperRef.current.scrollTo({
 				top: chatListRef.current.clientHeight,
@@ -324,7 +324,7 @@ const ChatMessageList = observer(() => {
 			})
 		}
 
-		// 数据变更，并且滚动条停留在顶部，load多一页
+		// Data changed and scroll at top, load one more page
 		if (
 			wrapperRef.current &&
 			wrapperRef.current.scrollTop === 0 &&
@@ -340,19 +340,19 @@ const ChatMessageList = observer(() => {
 	})
 
 	const handleContainerScroll = throttle(() => {
-		// list大小变化时，不handle
+		// When list size changes, don't handle
 		if (isContentChanging.current) return
 
 		checkScrollPosition()
 	}, 50)
 
-	// 切换会话或者话题
+	// Switch conversation or topic
 	useEffect(() => {
 		if (wrapperRef.current) {
 			wrapperRef.current.removeEventListener("scroll", handleContainerScroll)
 		}
 
-		// 立即settings切换status，防止message串台
+		// Immediately set switching state to prevent message crossover
 		state.setIsConversationSwitching(true)
 		state.reset()
 		lastMessageId = ""
@@ -360,12 +360,12 @@ const ChatMessageList = observer(() => {
 		lastScrollTop = 0
 		initialRenderRef.current = false
 
-		// 立即滚动到底部，不延迟
+		// Immediately scroll to bottom, no delay
 		setTimeout(() => {
 			scrollToBottom(true)
 		}, 0)
 
-		// 减少延迟time，快速恢复正常status
+		// Reduce delay time, quickly restore normal state
 		setTimeout(() => {
 			if (wrapperRef.current) {
 				wrapperRef.current.addEventListener("scroll", handleContainerScroll)
@@ -373,36 +373,36 @@ const ChatMessageList = observer(() => {
 			initialRenderRef.current = true
 			state.setIsConversationSwitching(false)
 
-			// 会话切换后，checkmessage是否填满视图
+			// After conversation switch, check if messages fill viewport
 			if (checkMessagesFillViewportTimerRef.current) {
 				clearTimeout(checkMessagesFillViewportTimerRef.current)
 			}
 			checkMessagesFillViewport()
-		}, 100) // 减少延迟从1000ms到100ms
+		}, 100) // Reduce delay from 1000ms to 100ms
 	}, [MessageStore.conversationId, MessageStore.topicId])
 
 	useLayoutEffect(() => {
-		// create ResizeObserver 实例，listenermessagelist高度变化
+		// Create ResizeObserver instance to listen for message list height changes
 		resizeObserverRef.current = new ResizeObserver(
 			debounce((entries) => {
 				const chatList = entries[0]
 				if (!chatList) return
-				// list大小变化
+				// List size change
 				isContentChanging.current = true
 				handleResize()
-				// reset
+				// Reset
 				setTimeout(() => {
 					isContentChanging.current = false
 				}, 0)
 			}, 100),
 		)
 
-		// start观察
+		// Start observation
 		if (chatListRef.current) {
 			resizeObserverRef.current.observe(chatListRef.current)
 		}
 
-		// message聚焦
+		// Message focus
 		const focusDisposer = autorun(() => {
 			if (MessageStore.focusMessageId) {
 				scrollToMessage(MessageStore.focusMessageId, "center")
@@ -437,18 +437,18 @@ const ChatMessageList = observer(() => {
 
 	const handleContainerClick = useCallback((e: React.MouseEvent) => {
 		const target = e.target as HTMLElement
-		// 从点击元素start向上查找，直到找到带有 data-message-id 的元素
+		// Starting from clicked element, search upward until finding element with data-message-id
 		const messageElement = target.closest("[data-message-id]")
 		const messageId = messageElement?.getAttribute("data-message-id")
 
-		// 如果是图片点击，并且不是表情
+		// If image click, and not emoji
 		if (target.tagName === "IMG" && target.classList.contains("delightful-image")) {
 			const fileInfo = target.getAttribute("data-file-info")
 			if (fileInfo) {
 				try {
 					const fileInfoObj = safeBtoaToJson(fileInfo)
 					if (fileInfoObj) {
-						// 如果是同一张图片，先resetstatus
+						// If same image, reset state first
 						MessageImagePreview.setPreviewInfo({
 							...fileInfoObj,
 							messageId,
@@ -456,7 +456,7 @@ const ChatMessageList = observer(() => {
 						})
 					}
 				} catch (error) {
-					console.error("解析fileinformationfailed", error)
+					console.error("Parse file information failed", error)
 				}
 			}
 		}
@@ -508,7 +508,7 @@ const ChatMessageList = observer(() => {
 						willChange: "transform",
 					}}
 				>
-					{/* 会话切换时显示loadstatus，防止message串台 */}
+					{/* Display loading state when conversation switching to prevent message crossover */}
 					{state.isConversationSwitching ? (
 						<div className={styles.conversationSwitching}>
 							<div>
@@ -518,14 +518,14 @@ const ChatMessageList = observer(() => {
 					) : (
 						MessageStore.messages
 							.filter((message) => {
-								// 过滤message，确保只显示当前会话的message
+								// Filter messages, ensure only current conversation messages are displayed
 								return (
 									message.conversation_id === MessageStore.conversationId &&
 									message.message.topic_id === MessageStore.topicId
 								)
 							})
 							.map((message) => {
-								// 使用复合key防止不同会话间的component复用
+								// Use composite key to prevent component reuse between different conversations
 								const messageKey = `${MessageStore.conversationId}-${MessageStore.topicId}-${message.message_id}`
 								return (
 									<div

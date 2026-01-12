@@ -12,7 +12,7 @@ import { getRichMessagePasteText } from "../../ChatSubSider/utils"
 function selectElementText(el: Node) {
 	// @ts-ignore
 	if (document.selection) {
-		// IE8 以下handle
+		// Handle IE8 and below
 		// @ts-ignore
 		const oRange = document.body.createTextRange()
 		oRange.moveToElementText(el)
@@ -30,7 +30,7 @@ function copySelection(el: HTMLElement) {
 	selectElementText(el)
 	let copySuccess // var to check whether execCommand successfully executed
 	try {
-		// 复制选区
+		// Copy selection
 		window.navigator.clipboard.write([
 			new ClipboardItem({
 				"text/html": new Blob([el.innerHTML], { type: "text/html" }),
@@ -46,7 +46,7 @@ function copySelection(el: HTMLElement) {
 	return copySuccess
 }
 /**
- * 根据messageclass型复制message内容
+ * Copy message content based on message type
  * @param messageId
  * @returns
  */

@@ -13,7 +13,7 @@ interface InstructionItemProps {
 }
 
 /**
- * 开关指令
+ * Switch instruction
  */
 const SwitchAction = observer(({ instruction, ...rest }: InstructionItemProps) => {
 	const [open, { setTrue, setFalse }] = useBoolean(instruction?.default_value === "on")
@@ -44,7 +44,7 @@ const SwitchAction = observer(({ instruction, ...rest }: InstructionItemProps) =
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [configValue, instruction?.default_value])
 
-	// 需要检测一下常驻功能是否关闭了，是的话得清除历史configuration值
+	// Check if residency feature is disabled, if so clear historical configuration values
 	useNonResidencyConfigCleanup(
 		instruction?.id,
 		innerConfigValue,

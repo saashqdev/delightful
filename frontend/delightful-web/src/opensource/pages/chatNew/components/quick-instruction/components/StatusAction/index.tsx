@@ -36,7 +36,7 @@ const StatusAction = observer(({ instruction, ...rest }: InstructionItemProps) =
 		}
 	}, [configValue, instruction.id, instruction.values, statusId])
 
-	// 当前statusconfiguration
+	// Current status configuration
 	const nextValue = useMemo(() => {
 		const currentIndex = instruction?.values?.findIndex((i) => i.id === statusId)
 
@@ -44,7 +44,7 @@ const StatusAction = observer(({ instruction, ...rest }: InstructionItemProps) =
 			return undefined
 		}
 
-		// 取下一个
+		// Get next one
 		const i = (currentIndex + 1) % instruction.values.length
 		return instruction?.values?.[i]
 	}, [instruction?.values, statusId])

@@ -10,13 +10,13 @@ interface AudioPlayerProps {
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
 	const { fontSize } = useFontSize()
 	const { styles } = useStyle({ fontSize })
-	const audioRef = useRef<HTMLAudioElement | null>(null) // 引用音频object
-	const [isPlaying, setIsPlaying] = useState(false) // 播放status
-	const [currentTime, setCurrentTime] = useState(0) // 当前播放time
-	const [duration, setDuration] = useState(0) // 音频总时长
+	const audioRef = useRef<HTMLAudioElement | null>(null) // Reference to audio element
+	const [isPlaying, setIsPlaying] = useState(false) // Playback status
+	const [currentTime, setCurrentTime] = useState(0) // Current playback time
+	const [duration, setDuration] = useState(0) // Total audio duration
 
 	useEffect(() => {
-		const audio = new Audio(audioUrl) // create一个音频object
+		const audio = new Audio(audioUrl) // Create an audio element
 		audioRef.current = audio
 
 		const handleLoadedMetadata = () => {
@@ -28,17 +28,17 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
 		}
 
 		const handleEnded = () => {
-			setIsPlaying(false) // 音频播放完毕后resetstatus
+			setIsPlaying(false) // Reset status after audio finishes playing
 			setCurrentTime(0)
 		}
 
-		// 绑定音频event
+		// Bind audio events
 		audio.addEventListener("loadedmetadata", handleLoadedMetadata)
 		audio.addEventListener("timeupdate", handleTimeUpdate)
 		audio.addEventListener("ended", handleEnded)
 
 		return () => {
-			// cleanupevent绑定
+			// Cleanup event bindings
 			audio.removeEventListener("loadedmetadata", handleLoadedMetadata)
 			audio.removeEventListener("timeupdate", handleTimeUpdate)
 			audio.removeEventListener("ended", handleEnded)
@@ -46,7 +46,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
 		}
 	}, [audioUrl])
 
-	// 播放或pause音频
+	// Play or pause audio
 	const togglePlay = () => {
 		const audio = audioRef.current
 		if (!audio) return
@@ -59,7 +59,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
 		setIsPlaying(!isPlaying)
 	}
 
-	// format化time（秒 -> hh:mm:ss）
+	// Format time (seconds -> hh:mm:ss)
 	const formatTime = (time: number) => {
 		const hours = Math.floor(time / 3600)
 		const minutes = Math.floor((time % 3600) / 60)
@@ -71,7 +71,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
 
 	return (
 		<div className={styles.audioPlayer}>
-			{/* SVG 播放/pausebutton */}
+			{/* SVG play/pause button */}
 			{isPlaying ? (
 				<svg
 					width="30"
@@ -104,7 +104,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl }) => {
 				</svg>
 			)}
 
-			{/* 显示播放time */}
+			{/* Display playback time */}
 			<span className={styles.duration}>
 				{!!currentTime || isPlaying ? formatTime(currentTime) : formatTime(duration)}
 			</span>

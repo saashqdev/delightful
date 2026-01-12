@@ -59,13 +59,13 @@ const MessageTextRender = observer(
 			),
 		)
 
-		// 文生图应用url
+		// Text-to-image app URL
 		const referImgUrl = useMemo(
 			() => (referFileId ? urls?.[referFileId]?.url : ""),
 			[referFileId, urls],
 		)
 
-		// 文生图应用文本
+		// Text-to-image app text
 		const referImgText = useMemo(() => {
 			if (referText) return referText
 			switch (message?.type) {
@@ -80,7 +80,7 @@ const MessageTextRender = observer(
 
 		if (!message || !isConversationMessage(message)) return null
 
-		// 如果message被撤回，则显示撤回tip
+		// If message is revoked, show revoked tip
 		if (!skipRevoked && message.revoked)
 			return <span className={cx(styles.content, className)}>{t("chat.messageRevoked")}</span>
 

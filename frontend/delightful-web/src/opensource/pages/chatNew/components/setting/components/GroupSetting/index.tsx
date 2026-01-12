@@ -91,8 +91,8 @@ const GroupSetting = observer(() => {
 	] = useBoolean(false)
 
 	/**
-	 * update群组名称
-	 * @param groupName 群组名称
+	 * Update group name
+	 * @param groupName group name
 	 */
 	const onUpdateGroupName = useMemoizedFn((groupName: string) => {
 		console.log("onUpdateGroupName", conversation)
@@ -107,8 +107,8 @@ const GroupSetting = observer(() => {
 	})
 
 	/**
-	 * 点击群组informationlist项
-	 * @param {DelightfulListItemData} item list项数据
+	 * Click group information list item
+	 * @param {DelightfulListItemData} item list item data
 	 */
 	const onGroupInfoListItemClick = useMemoizedFn(({ id }: DelightfulListItemData) => {
 		if (!conversation) return
@@ -117,7 +117,7 @@ const GroupSetting = observer(() => {
 				openUpdateGroupNameModal()
 				break
 			case GroupSettingListItemId.GroupNotice:
-				// FIXME: 需要重新implement
+				// FIXME: Need to reimplement
 
 				// extraSectionController?.pushSection(
 				// 	{
@@ -232,13 +232,13 @@ const GroupSetting = observer(() => {
 			})
 	})
 
-	// 添加成员
+	// Add member
 	const [
 		addGroupMemberModalOpen,
 		{ setTrue: openAddGroupMemberModal, setFalse: closeAddGroupMemberModal },
 	] = useBoolean(false)
 
-	// 移除成员
+	// Remove member
 	const [
 		removeGroupMemberModalOpen,
 		{ setTrue: openRemoveGroupMemberModal, setFalse: closeRemoveGroupMemberModal },
@@ -247,7 +247,7 @@ const GroupSetting = observer(() => {
 	const extraUserIds = useMemo(() => members.map((item) => item.user_id), [members])
 
 	/**
-	 * 退出群聊
+	 * Leave group chat
 	 */
 	const handleLeaveGroup = useMemoizedFn(() => {
 		if (!conversation) return
@@ -262,7 +262,7 @@ const GroupSetting = observer(() => {
 			return
 		}
 
-		// 二次确认
+		// Secondary confirmation
 		DelightfulModal.confirm({
 			centered: true,
 			title: t("common.tip", { ns: "interface" }),
@@ -279,7 +279,7 @@ const GroupSetting = observer(() => {
 	})
 
 	/**
-	 * 解散群聊
+	 * Disband group chat
 	 */
 	const handleRemoveGroup = useMemoizedFn(() => {
 		if (!conversation) return
@@ -299,10 +299,10 @@ const GroupSetting = observer(() => {
 		})
 	})
 
-	// 计算网格property
+	// Calculate grid properties
 	const ITEMS_PER_ROW = 5
 	const itemsData = useMemo(() => {
-		// 若是管理员，添加operationbutton
+		// If admin, add operation buttons
 		if (isAdmin) {
 			return [...members, { id: "add-member" }, { id: "remove-member" }]
 		}
@@ -310,10 +310,10 @@ const GroupSetting = observer(() => {
 		return members
 	}, [members, isAdmin])
 
-	// 计算行数
+	// Calculate row count
 	const totalRows = Math.ceil(itemsData.length / ITEMS_PER_ROW)
 
-	// 虚拟list渲染function
+	// Virtual list render function
 	const renderMemberRow = (index: number) => {
 		const startIdx = index * ITEMS_PER_ROW
 		const rowItems = itemsData.slice(startIdx, startIdx + ITEMS_PER_ROW)
@@ -321,7 +321,7 @@ const GroupSetting = observer(() => {
 		return (
 			<Row key={index} gutter={[16, 8]} align="middle" justify="start">
 				{rowItems.map((item) => {
-					// 添加成员button
+					// Add member button
 					if (item.id === "add-member") {
 						return (
 							<Col key="add-member" className={styles.member}>
@@ -340,7 +340,7 @@ const GroupSetting = observer(() => {
 						)
 					}
 
-					// 移除成员button
+					// Remove member button
 					if (item.id === "remove-member") {
 						return (
 							<Col key="remove-member" className={styles.member}>
@@ -359,7 +359,7 @@ const GroupSetting = observer(() => {
 						)
 					}
 
-					// 普通成员头像
+					// Regular member avatar
 					return (
 						<Col
 							key={(item as GroupConversationMember).user_id}
@@ -400,10 +400,10 @@ const GroupSetting = observer(() => {
 					style={{ width: "100%", height: totalRows > 4 ? 210 : "auto" }}
 				>
 					{totalRows <= 4 ? (
-						// 当行数较少时直接渲染，避免不必要的虚拟化
+						// Render directly when there are few rows to avoid unnecessary virtualization
 						Array.from({ length: totalRows }).map((_, index) => renderMemberRow(index))
 					) : (
-						// 否则使用虚拟list
+						// Otherwise use virtual list
 						<Virtuoso
 							style={{
 								height: 210,

@@ -28,7 +28,7 @@ interface MessageAttachmentsProps {
 }
 
 /**
- * message附件list
+ * Message attachments list
  * @param param0
  * @returns
  */

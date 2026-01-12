@@ -29,7 +29,7 @@ export function getTimelineItemStatus(
 dayjs.extend(duration)
 
 /**
- * format化分钟数
+ * Format minutes
  */
 export function formatMinutes(minutes: number) {
 	const dur = dayjs.duration(minutes, "minutes")
@@ -46,10 +46,10 @@ export function formatMinutes(minutes: number) {
 }
 
 /**
- * 提取源文本中的占位符
- * @param source 源文本
- * @param regex 正则表达式
- * @returns 占位符array
+ * Extract placeholders from source text
+ * @param source Source text
+ * @param regex Regular expression
+ * @returns Placeholder array
  */
 export function extractSourcePlaceholders(source: string, regex: RegExp): string[] {
 	if (!source) return []

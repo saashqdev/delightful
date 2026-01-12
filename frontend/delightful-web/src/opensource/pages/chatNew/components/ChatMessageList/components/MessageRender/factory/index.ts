@@ -26,7 +26,7 @@ interface MessageProps {
 }
 
 class MessageRenderFactory {
-	// component缓存，优先读取缓存
+	// Component cache, read from cache first
 	private static componentCache = new Map<
 		string,
 		React.LazyExoticComponent<React.ComponentType<MessageProps>>
@@ -38,7 +38,7 @@ class MessageRenderFactory {
 		return React.lazy(() => import("../../Fallback"))
 	}
 
-	// 生成props
+	// Generate props
 	static generateProps(type: string, message: any) {
 		const componentConfig = ComponentConfig[type]
 		if (!componentConfig) {
@@ -56,15 +56,15 @@ class MessageRenderFactory {
 	static getComponent(
 		type: string,
 	): React.LazyExoticComponent<React.ComponentType<MessageProps>> {
-		// load并returncomponent
+		// Load and return component
 		const messageComponent = ComponentConfig[type]
 
-		// check缓存
+		// Check cache
 		if (messageComponent && this.componentCache.has(messageComponent.componentType)) {
 			return this.componentCache.get(messageComponent.componentType)!
 		}
 
-		// 没有load器
+		// No loader
 		if (!messageComponent?.loader) {
 			return this.getFallbackComponent()
 		}
@@ -79,7 +79,7 @@ class MessageRenderFactory {
 		return LazyComponent
 	}
 
-	// 清除缓存
+	// Clean cache
 	static cleanCache(usedTypes: string[]) {
 		Array.from(this.componentCache.keys()).forEach((type) => {
 			if (!usedTypes.includes(type)) {

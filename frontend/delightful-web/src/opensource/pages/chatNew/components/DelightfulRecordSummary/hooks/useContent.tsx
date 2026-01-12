@@ -1,5 +1,5 @@
 /**
- * 中间内容相关status和行为
+ * Middle content related status and behavior
  */
 
 import type { RecordSummaryConversationMessage } from "@/types/chat/conversation_message"

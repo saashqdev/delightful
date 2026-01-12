@@ -19,33 +19,28 @@ class PreprocessService {
 	}
 
 	/**
-	 * get所有规则
-	 * @returns
+	 * Get all registered rules
 	 */
 	getAllRules() {
 		return Array.from(this.rules.values())
 	}
 
 	/**
-	 * 注册规则
-	 * @param key
-	 * @param rule
+	 * Register a rule
 	 */
 	registerRule(key: RegExp, rule: PreprocessRule) {
 		this.rules.set(key.toString(), rule)
 	}
 
 	/**
-	 * 注销规则
-	 * @param key
+	 * Unregister a rule
 	 */
 	unregisterRule(key: RegExp) {
 		this.rules.delete(key.toString())
 	}
 
 	/**
-	 * get内联 LaTeX 规则
-	 * @returns
+	 * Get the inline LaTeX rule
 	 */
 	getInlineLatexRule(): PreprocessRule {
 		return {
@@ -56,8 +51,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * get块级 LaTeX 规则
-	 * @returns
+	 * Get the block-level LaTeX rule
 	 */
 	getBlockLatexRule(): PreprocessRule {
 		return {
@@ -68,9 +62,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * encodingLaTeX内容为HTMLproperty安全format
-	 * @param content
-	 * @returns
+	 * Encode LaTeX content so it is safe for HTML attributes
 	 */
 	private encodeForAttribute(content: string): string {
 		return content
@@ -82,27 +74,23 @@ class PreprocessService {
 	}
 
 	/**
-	 * check位置是否在引用块内
-	 * @param markdown
-	 * @param start
-	 * @param end
-	 * @returns
+	 * Determine whether a range is inside a blockquote
 	 */
 	private isInsideBlockquote(markdown: string, start: number, end: number): boolean {
-		// get从内容start到当前位置的文本
+		// Text from the beginning to the current position
 		const beforeText = markdown.substring(0, start)
 		const lines = beforeText.split("\n")
 
-		// 从当前位置往前查找，看是否在引用块内
+		// Walk backwards to see if we are inside a quote block
 		let inBlockquote = false
 		for (let i = lines.length - 1; i >= 0; i--) {
 			const line = lines[i]
-			// 如果遇到引用标记start的行
+			// If we meet a line that starts the quote
 			if (line.trim().startsWith(">")) {
 				inBlockquote = true
 				break
 			}
-			// 如果遇到非空行且不是引用行，则description不在引用内
+			// If a non-empty, non-quote line is found, we are outside the quote
 			if (line.trim() && !line.trim().startsWith(">")) {
 				break
 			}
@@ -110,16 +98,16 @@ class PreprocessService {
 
 		if (!inBlockquote) return false
 
-		// check从start到end位置是否都在引用内
+		// Check whether the entire range stays within the quote
 		const textToCheck = markdown.substring(start, end)
 		const allLines = markdown.substring(0, end).split("\n")
 		const startLineIndex = beforeText.split("\n").length - 1
 
-		// check涉及的所有行是否都在引用块内
+		// Ensure every involved line is still inside the quote
 		for (let i = startLineIndex; i < allLines.length; i++) {
 			const line = allLines[i]
 			if (line.trim() && !line.trim().startsWith(">") && !line.includes("```")) {
-				// 如果有非引用行且不是代码块边界，则不在完整的引用块内
+				// A non-quote line outside code fence means we left the quote
 				return false
 			}
 		}
@@ -128,9 +116,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 分割 Markdown 块级代码块和图片
-	 * @param markdown
-	 * @returns
+	 * Split Markdown into block code sections and images
 	 */
 	splitBlockCode(markdown: string): string[] {
 		const blocks: string[] = []
@@ -138,13 +124,13 @@ class PreprocessService {
 			return blocks
 		}
 
-		// 匹配 ```任何语言标识(包括带连字符的)\n...``` 形式的代码块
+		// Match ```lang\n...``` style code fences (language may include hyphens)
 		const codeBlockRegex = /```([a-zA-Z0-9_-]*)\s*\n([\s\S]*?)```/g
 
-		// 匹配 ![.*?]\(.*?\) 形式的图片
+		// Match images in the form ![...](...)
 		const imgRegex = /!\[.*?\]\((.*?)\)/g
 
-		// 收集所有需要分割的特殊块（代码块和图片）
+		// Collect all special blocks to split (code blocks and images)
 		const specialBlocks: Array<{
 			start: number
 			end: number
@@ -152,7 +138,7 @@ class PreprocessService {
 			type: "code" | "image"
 		}> = []
 
-		// 收集所有代码块
+		// Collect all code blocks
 		let match
 		while ((match = codeBlockRegex.exec(markdown)) !== null) {
 			const language = match[1]
@@ -160,7 +146,7 @@ class PreprocessService {
 			const blockStart = match.index
 			const blockEnd = match.index + match[0].length
 
-			// check代码块是否在引用内，如果在引用内则不分割
+			// Skip if the code block is inside a quote
 			if (!this.isInsideBlockquote(markdown, blockStart, blockEnd)) {
 				specialBlocks.push({
 					start: blockStart,
@@ -171,24 +157,24 @@ class PreprocessService {
 			}
 		}
 
-		// reset正则表达式的 lastIndex
+		// Reset lastIndex for reuse
 		codeBlockRegex.lastIndex = 0
 
-		// 收集所有图片，但排除在代码块内的图片
+		// Collect all images, excluding those inside code blocks
 		while ((match = imgRegex.exec(markdown)) !== null) {
 			const imageStart = match.index
 			const imageEnd = match.index + match[0].length
 
-			// check图片是否在任何代码块内
+			// Skip images inside code blocks
 			const isInsideCodeBlock = specialBlocks.some(
 				(block) =>
 					block.type === "code" && imageStart >= block.start && imageEnd <= block.end,
 			)
 
-			// check图片是否在引用内
+			// Skip images inside quotes
 			const isInsideQuote = this.isInsideBlockquote(markdown, imageStart, imageEnd)
 
-			// 只有不在代码块内且不在引用内的图片才会被添加
+			// Only add images that are outside code blocks and quotes
 			if (!isInsideCodeBlock && !isInsideQuote) {
 				specialBlocks.push({
 					start: imageStart,
@@ -199,34 +185,34 @@ class PreprocessService {
 			}
 		}
 
-		// reset正则表达式的 lastIndex
+		// Reset lastIndex for reuse
 		imgRegex.lastIndex = 0
 
-		// 按位置排序
+		// Sort by position
 		specialBlocks.sort((a, b) => a.start - b.start)
 
-		// 分割文本
+		// Split the text using special blocks as separators
 		let lastIndex = 0
 		for (const block of specialBlocks) {
-			// 添加特殊块之前的内容
+			// Add content before the block
 			const beforeContent = markdown.substring(lastIndex, block.start)
 			if (beforeContent.trim()) {
 				blocks.push(beforeContent.trim())
 			}
 
-			// 添加特殊块（代码块或图片）
+			// Add the special block (code or image)
 			blocks.push(block.content)
 
 			lastIndex = block.end
 		}
 
-		// 添加最后一个特殊块后的内容
+		// Add trailing content
 		const remainingText = markdown.substring(lastIndex)
 		if (remainingText.trim()) {
 			blocks.push(remainingText.trim())
 		}
 
-		// 如果没有匹配到任何特殊块，则return原始内容
+		// If no special blocks were found, return the original text
 		if (blocks.length === 0 && markdown.trim()) {
 			blocks.push(markdown.trim())
 		}
@@ -235,12 +221,10 @@ class PreprocessService {
 	}
 
 	/**
-	 * handle缩写定义和替换
-	 * @param markdown
-	 * @returns
+	 * Handle abbreviation definitions and replacements
 	 */
 	processAbbreviations(markdown: string): string {
-		// 第一阶段：收集所有缩写定义
+		// Phase 1: collect all abbreviation definitions
 		const abbreviations = new Map<string, string>()
 		const matches = markdown.matchAll(ABBREVIATION_DEF_REGEX)
 
@@ -249,15 +233,15 @@ class PreprocessService {
 			abbreviations.set(abbr, definition)
 		}
 
-		// 移除缩写定义行，同时cleanup多余的空行
+		// Remove definition lines and compress blank lines
 		let processedMarkdown = markdown.replace(ABBREVIATION_DEF_REGEX, "")
 
-		// cleanup连续的空行，将多个连续的空行合并为最多两个空行
+		// Collapse long sequences of blank lines
 		processedMarkdown = processedMarkdown.replace(/\n{3,}/g, "\n\n")
 
-		// 第二阶段：替换文本中的缩写
+		// Phase 2: replace abbreviations in text
 		for (const [abbr, definition] of abbreviations) {
-			// 匹配完整单词的缩写，避免部分匹配
+			// Match full-word abbreviations to avoid partial matches
 			const abbrRegex = new RegExp(
 				`\\b${abbr.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
 				"g",
@@ -272,12 +256,10 @@ class PreprocessService {
 	}
 
 	/**
-	 * handle参考链接定义和替换
-	 * @param markdown
-	 * @returns
+	 * Handle reference link definitions and replacements
 	 */
 	processReferenceLinks(markdown: string): string {
-		// 第一阶段：收集所有参考链接定义
+		// Phase 1: collect reference link definitions
 		const referenceLinks = new Map<string, { url: string; title?: string }>()
 		const REFERENCE_LINK_DEF_REGEX = /^\s*\[([^\]]+)\]:\s*([^\s]+)(?:\s+"([^"]*)")?\s*$/gm
 		const matches = markdown.matchAll(REFERENCE_LINK_DEF_REGEX)
@@ -287,17 +269,16 @@ class PreprocessService {
 			referenceLinks.set(id.toLowerCase(), { url, title })
 		}
 
-		// 移除参考链接定义行
+		// Remove definition lines
 		let processedMarkdown = markdown.replace(REFERENCE_LINK_DEF_REGEX, "")
 
-		// 第二阶段：替换文本中的参考链接使用
-		// 匹配 [text][id] 或 [text] format
+		// Phase 2: replace reference link usages `[text][id]` or `[text]`
 		const REFERENCE_LINK_USE_REGEX = /\[([^\]]+)\](?:\[([^\]]*)\])?/g
 
 		processedMarkdown = processedMarkdown.replace(
 			REFERENCE_LINK_USE_REGEX,
 			(match, text, id) => {
-				// 如果没有指定id，使用text作为id
+				// Use text as id if none provided
 				const linkId = (id !== undefined ? id : text).toLowerCase()
 				const linkInfo = referenceLinks.get(linkId)
 
@@ -306,7 +287,7 @@ class PreprocessService {
 					return `<a href="${linkInfo.url}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`
 				}
 
-				// 如果找不到对应的链接定义，保持原样
+				// Leave untouched if no definition is found
 				return match
 			},
 		)
@@ -315,15 +296,11 @@ class PreprocessService {
 	}
 
 	/**
-	 * fix段落开头的HTMLlabel问题
-	 * 当行开头（或换行后紧跟）出现内联HTMLlabel时，添加零宽度空格确保段落完整性
-	 * note：不handle块级元素如 DelightfulLatexBlock, div, hr 等
-	 * @param markdown
-	 * @returns
+	 * Fix inline HTML tags at paragraph starts by inserting a zero-width space
+	 * Note: does not handle block-level elements like DelightfulLatexBlock, div, hr, etc.
 	 */
 	private fixParagraphInlineHtmlTags(markdown: string): string {
-		// 覆盖常见的内联HTMLlabel：abbr, sup, span, a, kbd, cite, q, s, u, mark, small, strong, em, sub
-		// 以及Delightful开头的内联componentlabel（但排除块级component）
+		// Covers common inline HTML tags and Delightful inline components (excluding block ones)
 		return markdown.replace(
 			/(\n|^)(\s*)(<(?:abbr|sup|span|a|kbd|cite|q|s|u|mark|small|strong|em|sub|DelightfulLatexInline|DelightfulCitation)\b[^>]*>)/g,
 			"$1$2\u200B$3",
@@ -331,9 +308,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 保护代码块内容，避免被预handle规则影响
-	 * @param markdown
-	 * @returns { processedMarkdown: string, codeBlockMap: Map<string, string> }
+	 * Protect code blocks from being altered by preprocessing rules
 	 */
 	private protectCodeBlocks(markdown: string): {
 		processedMarkdown: string
@@ -342,7 +317,7 @@ class PreprocessService {
 		const codeBlockMap = new Map<string, string>()
 		let counter = 0
 
-		// 匹配所有代码块（包括语言标识符）
+		// Match all code fences (with optional language)
 		const codeBlockRegex = /```[\s\S]*?```/g
 
 		const processedMarkdown = markdown.replace(codeBlockRegex, (match) => {
@@ -356,10 +331,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 恢复被保护的代码块内容
-	 * @param markdown
-	 * @param codeBlockMap
-	 * @returns
+	 * Restore protected code blocks
 	 */
 	private restoreCodeBlocks(markdown: string, codeBlockMap: Map<string, string>): string {
 		let result = markdown
@@ -372,9 +344,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 预handle markdown
-	 * @param markdown
-	 * @returns
+	 * Preprocess markdown text
 	 */
 	preprocess(markdown: string, options?: { enableLatex?: boolean }): string[] {
 		// 首先保护代码块内容
@@ -397,7 +367,7 @@ class PreprocessService {
 			(rule) => rule.regex.toString() !== TASK_LIST_REGEX.toString(),
 		)
 
-		// 在tablehandle之前，先保护table中的美元符号（如果启用 LaTeX）
+		// Protect dollar signs inside tables before LaTeX handling (if enabled)
 		let tableProtectionMap = new Map<string, string>()
 		if (options?.enableLatex) {
 			const { markdown: protectedTableMarkdown, protectionMap } =
@@ -407,7 +377,7 @@ class PreprocessService {
 		}
 
 		if (options?.enableLatex) {
-			// 块级公式必须在行内公式之前handle
+			// Block math must be processed before inline math
 			filteredRules.unshift(this.getBlockLatexRule())
 			filteredRules.push(this.getInlineLatexRule())
 		}
@@ -416,25 +386,23 @@ class PreprocessService {
 			processedMarkdown = processedMarkdown.replace(rule.regex, rule.replace)
 		}
 
-		// 恢复table中的美元符号（如果之前保护过）
+		// Restore table dollar signs if they were protected
 		if (tableProtectionMap.size > 0) {
 			processedMarkdown = this.restoreTableDollarSigns(processedMarkdown, tableProtectionMap)
 		}
 
-		// 最后fix所有可能的段落开头HTMLlabel问题
+		// Finally fix inline HTML at paragraph starts
 		processedMarkdown = this.fixParagraphInlineHtmlTags(processedMarkdown)
 
-		// 恢复代码块内容
+		// Restore code blocks
 		const finalMarkdown = this.restoreCodeBlocks(processedMarkdown, codeBlockMap)
 
-		// 分割 Markdown 块级代码块
+		// Split markdown into block code segments
 		return this.splitBlockCode(finalMarkdown)
 	}
 
 	/**
-	 * handle多级tasklist，生成正确的嵌套HTML结构
-	 * @param markdown
-	 * @returns
+	 * Handle nested task lists and generate proper HTML structure
 	 */
 	processNestedTaskLists(markdown: string): string {
 		const lines = markdown.split("\n")
@@ -447,7 +415,7 @@ class PreprocessService {
 			level: number
 		}> = []
 
-		// 收集所有tasklist行
+		// Collect all task list lines
 		lines.forEach((line, index) => {
 			const match = line.match(/^(\s*)-\s+\[(x| )\]\s+(.+)$/)
 			if (match) {
@@ -468,7 +436,7 @@ class PreprocessService {
 			return markdown
 		}
 
-		// 构建嵌套HTML结构
+		// Build nested HTML structure
 		const buildNestedHTML = (tasks: typeof taskLines, startLevel: number = 0): string => {
 			const result: string[] = []
 			let i = 0
@@ -481,17 +449,17 @@ class PreprocessService {
 				}
 
 				if (task.level > startLevel) {
-					// 跳过更高级别的task，它们会在递归中handle
+					// Higher-level tasks are handled in recursion
 					i++
 					continue
 				}
 
-				// 当前级别的task
+				// Current level task
 				const checkbox = `<input type="checkbox" ${
 					task.checked === "x" ? "checked" : ""
 				} readonly />`
 
-				// 查找子task
+				// Find subtasks
 				const childTasks: typeof taskLines = []
 				let j = i + 1
 				while (j < tasks.length && tasks[j].level > task.level) {
@@ -499,10 +467,10 @@ class PreprocessService {
 					j++
 				}
 
-				// 构建taskHTML结构
+				// Build HTML for the task
 				let taskHTML = `<li class="task-list-item">${checkbox}`
 
-				// 如果有子task，将文本内容包装在span中，并添加子tasklist
+				// If subtasks exist, wrap text in a span and append nested list
 				if (childTasks.length > 0) {
 					taskHTML += `<span>${task.content}</span>`
 					const childHTML = buildNestedHTML(childTasks, task.level + 1)
@@ -510,28 +478,28 @@ class PreprocessService {
 						taskHTML += `<ul class="task-list-nested">${childHTML}</ul>`
 					}
 				} else {
-					// 没有子task时，直接添加文本内容
+					// No subtasks; add content directly
 					taskHTML += task.content
 				}
 
 				taskHTML += "</li>"
 				result.push(taskHTML)
 
-				// 跳过已handle的子task
+				// Skip processed subtasks
 				i = j
 			}
 
 			return result.join("")
 		}
 
-		// 生成完整的HTML
+		// Generate final HTML
 		const nestedHTML = `<ul class="task-list-container">${buildNestedHTML(taskLines)}</ul>`
 
-		// 替换原始的tasklist
+		// Replace original task lists
 		const processedMarkdown = markdown
 		const taskLineIndices = taskLines.map((t) => t.originalIndex).sort((a, b) => b - a)
 
-		// 找到连续的tasklist块并替换
+		// Identify consecutive task list blocks and replace them
 		const taskBlocks: Array<{ start: number; end: number }> = []
 		let currentBlock: { start: number; end: number } | null = null
 
@@ -556,7 +524,7 @@ class PreprocessService {
 			taskBlocks.push(currentBlock)
 		}
 
-		// 按倒序替换，避免索引问题
+		// Replace in reverse order to avoid index issues
 		taskBlocks.reverse().forEach((block) => {
 			const blockTasks = taskLines.filter(
 				(t) => t.originalIndex >= block.start && t.originalIndex <= block.end,
@@ -573,9 +541,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 保护table中的美元符号，避免被 LaTeX handle器误解析
-	 * @param markdown
-	 * @returns
+	 * Protect dollar signs inside tables to avoid LaTeX mis-parsing
 	 */
 	private protectTableDollarSigns(markdown: string): {
 		markdown: string
@@ -584,7 +550,7 @@ class PreprocessService {
 		const protectionMap = new Map<string, string>()
 		let protectedMarkdown = markdown
 
-		// 找到所有table块
+		// Find all table blocks
 		const tableMatches = markdown.matchAll(
 			/^\s*(\|[^\n]*\|)\s*\n\s*(\|[\s\-:|\s]*\|)\s*\n((?:\s*\|[^\n]*\|\s*(?:\n|$))*)/gm,
 		)
@@ -593,7 +559,7 @@ class PreprocessService {
 			const fullTable = match[0]
 			let protectedTable = fullTable
 
-			// 在这个table中保护所有美元符号
+			// Replace all dollar signs with placeholders
 			const dollarMatches = fullTable.matchAll(/\$/g)
 			let offset = 0
 
@@ -614,10 +580,7 @@ class PreprocessService {
 	}
 
 	/**
-	 * 恢复table中被保护的美元符号
-	 * @param markdown
-	 * @param protectionMap
-	 * @returns
+	 * Restore protected dollar signs inside tables
 	 */
 	private restoreTableDollarSigns(markdown: string, protectionMap: Map<string, string>): string {
 		let restoredMarkdown = markdown

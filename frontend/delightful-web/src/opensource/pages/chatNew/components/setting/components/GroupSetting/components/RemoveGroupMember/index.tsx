@@ -1,18 +1,18 @@
-// React 相关
+// React related
 import { useState } from "react"
 import { observer } from "mobx-react-lite"
 
-// class型import
+// Type imports
 import type { DrawerProps } from "antd"
 
-// UI component库
+// UI component library
 import { Checkbox, Drawer, Flex } from "antd"
 import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import AutoTooltipText from "@/opensource/components/other/AutoTooltipText"
 
-// 图标
+// Icons
 import { IconChevronLeft } from "@tabler/icons-react"
 
 // toolfunction/Hooks
@@ -21,10 +21,10 @@ import { useMemoizedFn } from "ahooks"
 import useGroupInfo from "@/opensource/hooks/chat/useGroupInfo"
 import { getUserJobTitle, getUserName } from "@/utils/modules/chat"
 
-// 样式
+// Styles
 import { useStyles } from "./style"
 
-// 服务与存储
+// Services and stores
 import groupInfoStore from "@/opensource/stores/groupInfo"
 import userInfoStore from "@/opensource/stores/userInfo"
 import { ChatApi } from "@/apis"

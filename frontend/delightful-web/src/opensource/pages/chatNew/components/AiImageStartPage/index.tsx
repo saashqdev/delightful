@@ -18,7 +18,7 @@ export interface Image {
 }
 
 /**
- * 文生图启动页
+ * Text-to-image start page
  */
 const AiImageStartPage = memo(() => {
 	const { styles } = useStyles()

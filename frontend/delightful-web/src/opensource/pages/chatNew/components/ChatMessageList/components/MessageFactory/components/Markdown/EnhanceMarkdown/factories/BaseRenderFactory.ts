@@ -41,15 +41,15 @@ class BaseRenderFactory<Props> {
 	 * @returns component
 	 */
 	getComponent(type: string): LazyExoticComponent<ComponentType<Props>> {
-		// load并returncomponent
+		// Load and return component
 		const codeComponent = this.components.get(type)
 
-		// check缓存
+		// Check cache
 		if (codeComponent && this.componentCache.has(codeComponent.componentType)) {
 			return this.componentCache.get(codeComponent.componentType)!
 		}
 
-		// 没有load器
+		// No loader
 		if (!codeComponent?.loader) {
 			return this.getFallbackComponent()
 		}

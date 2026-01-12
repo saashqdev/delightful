@@ -36,16 +36,16 @@ function ErrorContent({ onReport, onRetry, className, ...props }: ErrorContentPr
 			{...props}
 		>
 			<div className={styles.invalidText}>
-				未知的error原因导致无法正常渲染内容，请联系 Delightful 开发团队。
+				Unknown error occurred, unable to render content properly. Please contact the Delightful development team.
 			</div>
 			{onReport && (
 				<DelightfulButton type="link" onClick={onReport}>
-					上报exceptionerror
+					Report error
 				</DelightfulButton>
 			)}
 			{onRetry && (
 				<DelightfulButton type="link" onClick={onRetry}>
-					retry
+					Retry
 				</DelightfulButton>
 			)}
 		</Flex>

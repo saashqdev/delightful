@@ -18,7 +18,7 @@ interface MessageProps {
 }
 
 class MessageFactory {
-	// component缓存，优先读取缓存
+	// Component cache, read from cache first
 	private static componentCache = new Map<
 		string,
 		React.LazyExoticComponent<React.ComponentType<MessageProps>>
@@ -35,7 +35,7 @@ class MessageFactory {
 		return this.getComponent(ConversationMessageType.Files)
 	}
 
-	// 解析内容
+	// Parse content
 	static parseContent(
 		type: string,
 		message: ConversationMessage | ConversationMessageSend["message"],
@@ -51,7 +51,7 @@ class MessageFactory {
 		}
 	}
 
-	// 解析推理内容
+	// Parse reasoning content
 	static parseReasoningContent(type: ConversationMessageType, message: ConversationMessage) {
 		const messageComponent = MessageComponents[type]
 		if (!messageComponent?.reasoningContentParser) {
@@ -64,7 +64,7 @@ class MessageFactory {
 		}
 	}
 
-	// 解析是否推理流式
+	// Parse whether reasoning streaming
 	static parseIsReasoningStreaming(type: ConversationMessageType, message: ConversationMessage) {
 		const messageComponent = MessageComponents[type]
 		if (!messageComponent?.isReasoningStreamingParser) {
@@ -77,7 +77,7 @@ class MessageFactory {
 		}
 	}
 
-	// 解析是否流式
+	// Parse whether streaming
 	static parseIsStreaming(type: ConversationMessageType, message: ConversationMessage) {
 		const messageComponent = MessageComponents[type]
 		if (!messageComponent?.isStreamingParser) {
@@ -90,7 +90,7 @@ class MessageFactory {
 		}
 	}
 
-	// 解析fileinformation
+	// Parse file information
 	static parseFiles(
 		type: string,
 		message: ConversationMessage | ConversationMessageSend["message"],
@@ -117,15 +117,15 @@ class MessageFactory {
 	static getComponent(
 		type: string,
 	): React.LazyExoticComponent<React.ComponentType<MessageProps>> {
-		// load并returncomponent
+		// Load and return component
 		const messageComponent = MessageComponents[type]
 
-		// check缓存
+		// Check cache
 		if (messageComponent && this.componentCache.has(messageComponent.componentType)) {
 			return this.componentCache.get(messageComponent.componentType)!
 		}
 
-		// 没有load器
+		// No loader
 		if (!messageComponent?.loader) {
 			return this.getFallbackComponent()
 		}
@@ -140,7 +140,7 @@ class MessageFactory {
 		return LazyComponent
 	}
 
-	// 清除缓存
+	// Clean cache
 	static cleanCache(usedTypes: string[]) {
 		Array.from(this.componentCache.keys()).forEach((type) => {
 			if (!usedTypes.includes(type)) {

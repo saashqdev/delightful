@@ -19,7 +19,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => ({
 	`,
 }))
 
-// icon独立，避免重复渲染
+// Extract icon to avoid repeated renders
 const StatusIcon = memo(function StatusIcon({
 	icon: Icon,
 	className,
@@ -30,7 +30,7 @@ const StatusIcon = memo(function StatusIcon({
 	return <DelightfulIcon component={Icon} size={16} className={className} />
 })
 
-// 文本独立，避免重复渲染
+// Extract text to avoid repeated renders
 const StatusText = memo(function StatusText({
 	text,
 	className,
@@ -47,7 +47,7 @@ interface StatusContentProps extends HTMLAttributes<HTMLDivElement> {
 	messageId?: string
 }
 
-// 内容独立，避免重复渲染
+// Extract content to avoid repeated renders
 const StatusContent = memo(function StatusContent({
 	icon: Icon,
 	text,

@@ -132,17 +132,17 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 `[Click here][malicious]
 [malicious]: javascript:window.xssReference = true;`
 
-// 代码块中的 HTML
+// codeblockin的 HTML
 '```html\n<script>window.xssCodeBlock = true;</script>\n```'
 
-// 内联代码中的script
+// 内联codein的script
 'This is `<script>window.xssInlineCode = true;</script>` inline code'
 ```
 
 ### 10. LaTeX Injection Security (LaTeX 注入安all)
 
 ```typescript
-// LaTeX 中的link
+// LaTeX in的link
 '$\\href{javascript:window.xssLatex=true}{Click}$'
 
 // LaTeX command注入
@@ -162,9 +162,9 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 }
 ```
 
-### 流式render安alltest
+### streamingrender安alltest
 
-确保at流式render过程中的contentupdate不会引入安all风险：
+确保atstreamingrender过程in的contentupdate不会引入安all风险：
 
 ```typescript
 {
@@ -185,12 +185,12 @@ testcustomcomponentconfiguration不会被恶意利用：
 }
 ```
 
-## performance和resource安alltest
+## performanceandresource安alltest
 
 ### memory耗尽防护
 
 ```typescript
-// 超largecontent
+// extra largecontent
 const largeContent = '<script>window.xssLarge = true;</script>'.repeat(10000)
 
 // depth嵌套
@@ -200,10 +200,10 @@ for (let i = 0; i < 100; i++) {
 }
 ```
 
-### 递归结构防护
+### 递归structure防护
 
 ```typescript
-// 递归 Markdown 结构
+// 递归 Markdown structure
 let recursiveMarkdown = '<script>window.xssRecursive = true;</script>'
 for (let i = 0; i < 50; i++) {
   recursiveMarkdown = `> ${recursiveMarkdown}`
@@ -214,7 +214,7 @@ for (let i = 0; i < 50; i++) {
 
 ### sensitiveinformation泄露防护
 
-确保error handling过程中不会泄露sensitiveinformation：
+确保error handling过程in不会泄露sensitiveinformation：
 
 ```typescript
 const problematicContent = '<script>throw new Error("XSS attempt: " + document.cookie);</script>'
@@ -236,13 +236,13 @@ const invalidUnicode = '\uD800<script>window.xssInvalidUnicode = true;</script>\
 const contentWithInlineStyles = '<div style="background: red; color: blue;">Test</div>'
 ```
 
-### 动态script元素check
+### dynamicscript元素check
 
-确保component不会create动态script元素：
+确保component不会createdynamicscript元素：
 
 ```typescript
 const maliciousContent = '<script>window.xssCSP = true;</script>'
-// validatepage中not existinclude恶意代码的script元素
+// validatepageinnot existinclude恶意code的script元素
 ```
 
 ## testexecuteguide
@@ -262,34 +262,34 @@ npm test -- __tests__/security-config.test.tsx
 
 ### testcoverage
 
-suggestion这些安alltestshould覆盖by下scenario：
+recommendations这些安alltestshouldoverrideby下scenario：
 
 1. **normalflow**：确保normal的 Markdown content能够correctrender
-2. **边界情况**：nullcontent、null/undefined content
+2. **边界情况**：emptycontent、empty/undefined content
 3. **恶意input**：各种 XSS 攻击vector
 4. **configurationgroup合**：different的propertyconfigurationgroup合
-5. **performance极限**：large amountdata和depth嵌套
+5. **performance极限**：large number ofdataanddepth嵌套
 6. **error handling**：exception情况的安allhandle
 
-## 安allsuggestion
+## 安allrecommendations
 
-### 开发suggestion
+### 开发recommendations
 
 1. **default安all**：default情况下shoulddisable HTML render
 2. **inputvalidate**：对alluserinput进行严格validate
 3. **outputencoding**：确保alloutput都经过适when的encoding
 4. **CSP 策略**：实施严格的content安all策略
-5. **定期审计**：定期进行安all审计和test
+5. **定期审计**：定期进行安all审计andtest
 
-### 生产deploysuggestion
+### 生产deployrecommendations
 
-1. **monitor告警**：settings安alleventmonitor和告警
-2. **log记录**：记录all可疑的input和rendertry
+1. **monitor告警**：settings安alleventmonitorand告警
+2. **log记录**：记录all可疑的inputandrendertry
 3. **versionupdate**：及timeupdatedependency库byfix安all漏洞
 4. **permissioncontrol**：实施适when的userpermissioncontrol
 
-## 结论
+## conclusion
 
 这个安alltest套件提供了comprehensive的 XSS 攻击防护test，涵盖了frombasic的script注入toadvanced的many语言攻击vector。through这些test，can确保 `EnhanceMarkdown` componentat各种攻击scenario下都能keep安all性。
 
-定期run这些test，并根据新发现的攻击vector及timeupdatetestuse case，ismaintaincomponent安all性的heavy要措施。 
+定期run这些test，并based on新发现的攻击vector及timeupdatetestuse case，ismaintaincomponent安all性的heavy要措施。 

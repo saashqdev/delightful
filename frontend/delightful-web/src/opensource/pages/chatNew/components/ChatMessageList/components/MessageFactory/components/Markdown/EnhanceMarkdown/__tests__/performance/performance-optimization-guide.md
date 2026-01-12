@@ -1,30 +1,30 @@
 # EnhanceMarkdown 1MB largefileperformanceoptimizationguide
 
-> based onactualtest结果的performanceoptimization策略（testtime：2024年）
+> Based on actual test results performance optimization strategy (test date: 2024)
 
-## 🎯 test结果summary
+## 🎯 Test Result Summary
 
-### 基准performance指标
+### Baseline Performance Metrics
 - **1MB documentationrender**: 136.98ms ✅ 
 - **2MB documentationrender**: 155.84ms ✅
-- **预handle效率**: 0.61ms/9,230块 ✅
-- **流式render**: 20.20ms/块平均 ✅
+- **preprocess效率**: 0.61ms/9,230block ✅
+- **streamingrender**: 20.20ms/block平均 ✅
 - **吞吐量**: 9.25-13.14 KB/ms
 - **memory稳定性**: 无显著泄漏 ✅
 
-### performance等级评估
+### performance等level评估
 - **✅ 优秀** (< 200ms): 1MB documentation
 - **✅ 良好** (200-500ms): 2MB+ documentation  
-- **⚠️ 需optimization** (500ms+): 预期未发生
+- **⚠️ 需optimization** (500ms+): expected未发生
 
 ## 📈 optimization策略路线图
 
 ### Phase 1: 立即optimization（已validatehas效）
 
-#### 1.1 预handlecacheoptimization
+#### 1.1 preprocesscacheoptimization
 ```typescript
-// when前performance: 0.61ms/9,230块
-// optimization目标: decrease 50% 预handletime
+// Currentperformance: 0.61ms/9,230block
+// Optimization goal: Reduce 50% preprocessing time
 
 const preprocessCache = new Map<string, ProcessedBlocks>()
 
@@ -40,23 +40,23 @@ const optimizedPreprocess = useMemo(() => {
 }, [content])
 ```
 
-#### 1.2 分块renderoptimization
+#### 1.2 Chunked Rendering Optimization
 ```typescript
-// when前: 50KB 块size，36ms 最largerendertime
-// optimization: 动态块size，目标 < 25ms/块
+// Current: 50KB chunk size, 36ms maximum render time
+// Optimization: Dynamic chunk size, target < 25ms/block
 
-const OPTIMAL_CHUNK_SIZE = 30000 // 30KB based ontest结果
+const OPTIMAL_CHUNK_SIZE = 30000 // 30KB based on test results
 const dynamicChunkSize = useMemo(() => {
   return content.length > 1024 * 1024 ? OPTIMAL_CHUNK_SIZE : 50000
 }, [content.length])
 ```
 
-### Phase 2: 中期optimization（预期收益）
+### Phase 2: Mid-term Optimization (Expected Benefits)
 
-#### 2.1 virtual化scrolling
+#### 2.1 Virtualized Scrolling
 ```typescript
-// 适用scenario: documentation > 1MB
-// 预期收益: decrease 60% 初始rendertime
+// Applicable scenario: documents > 1MB
+// Expected benefit: Reduce 60% initial render time
 
 import { FixedSizeList as List } from 'react-window'
 
@@ -80,28 +80,28 @@ const VirtualizedMarkdown: React.FC<Props> = ({ blocks }) => {
 }
 ```
 
-#### 2.2 渐进式load
+#### 2.2 Progressive Loading
 ```typescript
-// based ontest: 21 块流式render平均 20ms/块
-// optimization: 智能优先级load
+// Based on test: 21 blocks streaming render average 20ms/block
+// Optimization: Intelligent priority loading
 
 const useProgressiveLoad = (blocks: string[], viewportHeight: number) => {
   const [visibleBlocks, setVisibleBlocks] = useState<Set<number>>(new Set())
   
-  // 根据test结果optimizationload策略
+  // Optimize loading strategy based on test results
   const loadNextBatch = useCallback(() => {
-    const batchSize = Math.ceil(viewportHeight / 100) // 根据视窗动态adjustment
-    // implement智能批次load...
+    const batchSize = Math.ceil(viewportHeight / 100) // Dynamically adjust based on viewport
+    // Implement intelligent batch loading...
   }, [viewportHeight])
 }
 ```
 
-### Phase 3: advancedoptimization（long期规划）
+### Phase 3: Advanced Optimization (Long-term Planning)
 
-#### 3.1 Web Worker 预handle
+#### 3.1 Web Worker Preprocessing
 ```typescript
-// 适用scenario: documentation > 2MB
-// based ontest: 2MB 预handletime 1.03ms，可parallel化
+// Applicable scenario: documents > 2MB
+// Based on test: 2MB preprocessing time 1.03ms, can be parallelized
 
 const preprocessWorker = new Worker('/markdown-preprocessor.worker.js')
 
@@ -115,16 +115,16 @@ const useWorkerPreprocess = (content: string) => {
         setProcessedContent(e.data.processed)
       }
     } else {
-      // smalldocumentation直接handle（testshow < 1ms）
+      // smalldocumentationprocess directly（test shows < 1ms）
       setProcessedContent(preprocess(content))
     }
   }, [content])
 }
 ```
 
-#### 3.2 智能cache策略
+#### 3.2 智能cache strategy
 ```typescript
-// based ontest结果的cache策略
+// based ontest results的cache strategy
 const CacheStrategy = {
   // smalldocumentation (< 500KB): memorycache
   MEMORY_CACHE_LIMIT: 512 * 1024,
@@ -132,17 +132,17 @@ const CacheStrategy = {
   // largedocumentation (500KB - 2MB): LRU cache
   LRU_CACHE_SIZE: 10,
   
-  // 超largedocumentation (> 2MB): IndexedDB cache
+  // extra largedocumentation (> 2MB): IndexedDB cache
   PERSISTENT_CACHE_THRESHOLD: 2 * 1024 * 1024
 }
 ```
 
-## 🔍 performancemonitor指标
+## 🔍 performancemonitoring metrics
 
-### 关键performance指标 (KPI)
+### Key Performance Indicators (KPI)
 ```typescript
 interface PerformanceMetrics {
-  // based ontest结果设定的目标value
+  // based ontest results设定的targetvalue
   renderTime: {
     target: number    // 1MB: < 200ms, 2MB: < 400ms
     current: number
@@ -156,20 +156,20 @@ interface PerformanceMetrics {
   }
   
   memoryUsage: {
-    peak: number      // test中未发现memory问题
+    peak: number      // testin未发现memoryissues
     average: number
     leakDetection: boolean
   }
   
   streamingPerformance: {
-    avgChunkTime: number  // 目标 < 25ms
-    maxChunkTime: number  // 目标 < 40ms
-    consistency: number   // 块间performanceone致性
+    avgChunkTime: number  // target < 25ms
+    maxChunkTime: number  // target < 40ms
+    consistency: number   // block间performanceone致性
   }
 }
 ```
 
-### 实timemonitorimplement
+### real-timemonitorimplement
 ```typescript
 const usePerformanceMonitoring = () => {
   const [metrics, setMetrics] = useState<PerformanceMetrics>()
@@ -194,7 +194,7 @@ const usePerformanceMonitoring = () => {
   }, [])
 }
 
-// based ontest结果的期望timecalculation
+// based ontest results的期望timecalculations
 const getExpectedTime = (contentSize: number): number => {
   if (contentSize < 512 * 1024) return 60   // 500KB: ~55ms
   if (contentSize < 1024 * 1024) return 140 // 1MB: ~137ms  
@@ -203,40 +203,40 @@ const getExpectedTime = (contentSize: number): number => {
 }
 ```
 
-## 🚀 实施suggestion
+## 🚀 实施recommendations
 
-### 立即实施 (本周)
-1. **enable预handlecache** - 预期提升 30% heavy复renderperformance
-2. **adjustment块size至 30KB** - based ontestdataoptimization流式render
-3. **添addperformancemonitor** - 持续追踪关键指标
+### immediate implementation (本周)
+1. **enablepreprocesscache** - expectedimprovement 30% heavy复renderperformance
+2. **adjustblocksize至 30KB** - based ontestdataoptimizationstreamingrender
+3. **addperformancemonitor** - continuous tracking关键指标
 
-### short期实施 (本月)  
-1. **virtual化scrolling** - 2MB+ documentation首屏render提升 60%
-2. **渐进式load** - 改善user体验，decrease感知延迟
-3. **memoryoptimization** - whiletest中表现良好，但为更largedocumentation做ready
+### short-term implementation (本月)  
+1. **virtualizedscrolling** - 2MB+ documentation首屏renderimprovement 60%
+2. **progressiveload** - improve user experience，decreaseperceived latency
+3. **memoryoptimization** - althoughtestinperforms well，但prepare for larger documents
 
-### long期规划 (季度)
-1. **Web Worker 集成** - 5MB+ documentationhandle能力
-2. **持久化cache** - decreaseheavy复largedocumentationloadtime
-3. **performanceanalyzetool** - 自动识别performance瓶颈
+### long-term planning (quarterly)
+1. **Web Worker integration** - 5MB+ documentationhandling capability
+2. **persistentcache** - reduce repeated large document load time
+3. **performanceanalysis tool** - automatically identifyperformance bottlenecks
 
-## 📊 预期收益
+## 📊 expected benefits
 
-based onwhen前test结果和optimization策略，预期performance提升：
+based onCurrenttest resultsandoptimization策略，expectedperformanceimprovement：
 
-- **1MB documentation**: 137ms → 90ms (35% 提升)
-- **2MB documentation**: 156ms → 120ms (23% 提升) 
-- **5MB documentation**: 预计 400ms (when前未test)
-- **流式render**: 20ms/块 → 15ms/块 (25% 提升)
-- **memory效率**: keepwhen前优秀horizontal
-- **user体验**: 显著改善，特别yeslargedocumentationscenario
+- **1MB documentation**: 137ms → 90ms (35% improvement)
+- **2MB documentation**: 156ms → 120ms (23% improvement) 
+- **5MB documentation**: 预计 400ms (Current未test)
+- **streamingrender**: 20ms/block → 15ms/block (25% improvement)
+- **memory效率**: keepCurrent优秀horizontal
+- **user体验**: 显著improve，特别yeslargedocumentationscenario
 
-## 🎯 结论
+## 🎯 conclusion
 
-when前 EnhanceMarkdown componentathandle 1MB largefiletime表现出色，远超预期。mainoptimization方向应聚焦in：
+Current EnhanceMarkdown componentwhen handling 1MB largefiletime表现出色，far exceedsexpected。mainoptimizationdirection should focus on：
 
-1. **keepwhen前优秀performance** - throughcache和monitor
-2. **extension更largedocumentationsupport** - virtual化和 Worker  
-3. **改善user体验** - 渐进式load和流式optimization
+1. **keepCurrent优秀performance** - throughcacheandmonitor
+2. **extend to largerdocumentationsupport** - virtualizedand Worker  
+3. **improve user experience** - progressiveloadandstreamingoptimization
 
-componentalready具备了handlelarge型documentation的良好basic，optimizationworkshouldyes渐进式的improvement而notheavy构。 
+componentalready具备了handlelarge型documentation的good foundation，optimization work should beprogressive的improvement而notheavy构。 

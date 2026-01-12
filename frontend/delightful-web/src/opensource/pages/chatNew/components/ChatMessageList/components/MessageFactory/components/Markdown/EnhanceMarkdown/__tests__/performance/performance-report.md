@@ -1,46 +1,46 @@
 # EnhanceMarkdown componentperformanceanalyzereport
 
-## 📊 performanceanalyze概要
+## 📊 performanceanalysis overview
 
-based on对 `EnhanceMarkdown` component的深入analyze，本report识别了影响renderperformance的关键因素并提供了针对性的optimizationsuggestion。
+based on `EnhanceMarkdown` component的in-depth analysis，this report identifiesaffectingrenderperformance的key factorsand providestargetedoptimizationrecommendations。
 
 ## 🔍 componentarchitectureanalyze
 
-### corecomponent结构
+### corecomponentstructure
 ```
 EnhanceMarkdown
-├── useFontSize (fontsize hook)
-├── useTyping (流式render hook)
-├── useUpdateEffect (副作用manage)
-├── useStreamCursor (流式光标)
-├── useMarkdownStyles (样式handle)
+├── useFontSize (font size hook)
+├── useTyping (streamingrender hook)
+├── useUpdateEffect (side effectmanagement)
+├── useStreamCursor (streamingcursor)
+├── useMarkdownStyles (style handling)
 ├── useMarkdownConfig (Markdown configuration)
-├── useClassName (class名handle)
-└── PreprocessService (预handleservice)
+├── useClassName (class name handling)
+└── PreprocessService (preprocessservice)
 ```
 
-## ⚡ performance瓶颈analyze
+## ⚡ performance bottlenecksanalyze
 
-### 1. PreprocessService 预handle阶段 (🔴 high影响)
+### 1. PreprocessService preprocessphase (🔴 highaffecting)
 
-**问题analyze:**
-- complex的正则expressionoperation，特别isforlarge文本块
-- many次stringreplace和拆分operation
-- LaTeX formulahandleneedlarge amount正则match
-- tasklisthandle涉及complex的嵌套logic
+**issuesanalyze:**
+- complex正则expressionoperations，especially forlarge文本block
+- multiplestringreplaceand拆分operations
+- LaTeX formulahandling requireslarge number of正则matches
+- tasklisthandleinvolvescomplexnested logic
 
-**耗timeanalyze:**
+**time-consuminganalyze:**
 ```typescript
-// main耗timeoperation
+// maintime-consumingoperations
 splitBlockCode() // ~5-15ms (largedocumentation)
 processNestedTaskLists() // ~3-8ms
 LaTeXhandle // ~2-5ms
-引用块检测 // ~1-3ms
+引用block检测 // ~1-3ms
 ```
 
-**optimizationsuggestion:**
+**optimizationrecommendations:**
 ```typescript
-// 1. 使用cache避免heavy复handle
+// 1. usagecacheavoidrepeated processing
 const preprocessCache = new Map<string, string[]>()
 
 const cachedPreprocess = useMemo(() => {
@@ -50,50 +50,50 @@ const cachedPreprocess = useMemo(() => {
       return preprocessCache.get(cacheKey)!
     }
     
-    const result = PreprocessService.preprocess(content, options)
+    const result = PreprocessService.preprocess(content, optionss)
     preprocessCache.set(cacheKey, result)
     return result
   }
-}, [options])
+}, [optionss])
 
 // 2. optimization正则expressionperformance
 const optimizedRegex = {
-  // 使用更high效的正则expression
+  // usage更efficient正则expression
   codeBlock: /```([a-zA-Z0-9_-]*)\s*\n([\s\S]*?)```/g,
-  inlineMath: /\$([^$\n]+)\$/g, // 简化的数学formulamatch
+  inlineMath: /\$([^$\n]+)\$/g, // simplifiedmathematicalformulamatches
   blockMath: /\$\$\s*\n([\s\S]*?)\n\s*\$\$/g
 }
 
-// 3. 分块handlelargedocumentation
+// 3. chunkinghandlelargedocumentation
 function processLargeContent(content: string, chunkSize = 5000) {
   if (content.length <= chunkSize) {
     return PreprocessService.preprocess(content)
   }
   
-  // 按段落分块handle
+  // by paragraphchunkinghandle
   const chunks = content.split('\n\n')
   return chunks.map(chunk => PreprocessService.preprocess(chunk)).flat()
 }
 ```
 
-### 2. useMarkdownConfig Hook (🟡 中等影响)
+### 2. useMarkdownConfig Hook (🟡 in等affecting)
 
-**问题analyze:**
-- large amount的 `useMemo` dependencymight导致过度heavy新calculation
-- component覆盖configurationcreatecomplex
-- every time props 变化都会heavy新buildconfiguration
+**issuesanalyze:**
+- large number of的 `useMemo` dependencymight causeexcessiveheavy新calculations
+- componentoverrideconfiguration creates complexity
+- every time props changes willheavy新build configuration
 
-**optimizationsuggestion:**
+**optimizationrecommendations:**
 ```typescript
-// 1. 稳定化componentconfiguration
+// 1. stabilizecomponentconfiguration
 const stableBaseOverrides = useMemo(() => {
-  // 将不变的componentconfiguration提取tocomponentoutside
+  // extract unchangingcomponentconfigurationto outside component
   return {
     a: { component: a },
     blockquote: { component: Blockquote },
-    // ... 其他不变的configuration
+    // ... other unchangingconfiguration
   }
-}, []) // nulldependencyarray
+}, []) // emptydependencyarray
 
 // 2. optimization LaTeX componentrender
 const MemoizedLatexInline = memo(({ math }: { math: string }) => {
@@ -110,7 +110,7 @@ const MemoizedLatexInline = memo(({ math }: { math: string }) => {
 })
 
 // 3. decreaseconfigurationheavy建频率
-const options = useMemo<MarkdownToJSX.Options>(() => {
+const optionss = useMemo<MarkdownToJSX.Options>(() => {
   return {
     overrides,
     forceWrapper: true,
@@ -119,16 +119,16 @@ const options = useMemo<MarkdownToJSX.Options>(() => {
 }, [overrides, allowHtml]) // decreasedependency项
 ```
 
-### 3. useTyping 流式render (🟡 中等影响)
+### 3. useTyping streamingrender (🟡 in等affecting)
 
-**问题analyze:**
-- 频繁的statusupdate导致many次heavy新render
-- 动画效果might影响performance
-- string拼接operation较many
+**issuesanalyze:**
+- 频繁的status updatescausemultipleheavy新render
+- animation effectsmightaffectingperformance
+- stringconcatenationoperationsrelativelymany
 
-**optimizationsuggestion:**
+**optimizationrecommendations:**
 ```typescript
-// 1. 使用 requestIdleCallback optimizationupdate频率
+// 1. usage requestIdleCallback optimizationupdate frequency
 const optimizedTyping = useCallback((text: string) => {
   const updateChunks = []
   for (let i = 0; i < text.length; i += 10) {
@@ -140,7 +140,7 @@ const optimizedTyping = useCallback((text: string) => {
     
     setContent(prev => prev + updateChunks[index])
     
-    // 使用 requestIdleCallback 避免blocking主线程
+    // usage requestIdleCallback avoidblocking main thread
     requestIdleCallback(() => {
       processChunk(index + 1)
     })
@@ -149,19 +149,19 @@ const optimizedTyping = useCallback((text: string) => {
   processChunk(0)
 }, [])
 
-// 2. 批量updatedecreaseheavyrender
+// 2. batchupdatedecreaseheavyrender
 const batchedTyping = useCallback((text: string) => {
-  // 使用 unstable_batchedUpdates 批量update
+  // usage unstable_batchedUpdates batchupdate
   unstable_batchedUpdates(() => {
     setContent(text)
     setTyping(false)
   })
 }, [])
 
-// 3. virtual化long文本
+// 3. virtualizedlong文本
 const VirtualizedMarkdown = memo(({ content }: { content: string }) => {
   const chunks = useMemo(() => {
-    // 将long文本分块，只rendervisiblepart
+    // 将long文本chunking，onlyrendervisiblepart
     return content.split('\n\n').map((chunk, index) => ({
       id: index,
       content: chunk
@@ -177,22 +177,22 @@ const VirtualizedMarkdown = memo(({ content }: { content: string }) => {
 })
 ```
 
-### 4. Markdown-to-JSX render (🔴 high影响)
+### 4. Markdown-to-JSX render (🔴 highaffecting)
 
-**问题analyze:**
-- large amount DOM nodecreate
-- complex的语法high亮handle
-- table和listrender较slow
+**issuesanalyze:**
+- large number of DOM nodecreate
+- complexsyntaxhighlightinghandle
+- tableandlistrenderrelativelyslow
 
-**optimizationsuggestion:**
+**optimizationrecommendations:**
 ```typescript
-// 1. 使用 React.memo 和精确dependency
+// 1. usage React.memo andprecisedependency
 const OptimizedMarkdown = memo(Markdown, (prevProps, nextProps) => {
   return prevProps.children === nextProps.children &&
          prevProps.className === nextProps.className
 })
 
-// 2. 代码块懒load
+// 2. codeblocklazy loading
 const LazyCodeBlock = lazy(() => import('./CodeBlock'))
 
 const CodeBlockWithSuspense = ({ children, ...props }: any) => (
@@ -215,24 +215,24 @@ const VirtualizedList = ({ items }: { items: any[] }) => {
 }
 ```
 
-## 📈 预期performance提升
+## 📈 expectedperformanceimprovement
 
-### optimizationfrontback对比 (估算value)
+### optimizationfrontbackcomparison (estimated values)
 
-| testscenario | optimizationfront | optimizationback | 提升比例 |
+| testscenario | optimizationfront | optimizationback | improvementratio |
 |---------|--------|--------|----------|
-| 简单文本 | 15ms | 8ms | 47% |
-| 代码块 | 35ms | 20ms | 43% |
+| simple text | 15ms | 8ms | 47% |
+| codeblock | 35ms | 20ms | 43% |
 | largedocumentation | 150ms | 80ms | 47% |
-| 流式update | 25ms | 12ms | 52% |
+| streamingupdate | 25ms | 12ms | 52% |
 | LaTeX formula | 40ms | 22ms | 45% |
 
-## 🛠️ 具体optimization实施方案
+## 🛠️ specificoptimizationimplementation plan
 
-### Phase 1: 预handleoptimization (立即实施)
+### Phase 1: preprocessoptimization (immediate implementation)
 
 ```typescript
-// 1. 添add预handlecache
+// 1. addpreprocesscache
 const PreprocessCache = new Map<string, string[]>()
 
 // 2. optimization正则expression
@@ -242,7 +242,7 @@ const OPTIMIZED_REGEXES = {
   blockMath: /\$\$\n([\s\S]+?)\n\$\$/g
 }
 
-// 3. 分块handle
+// 3. chunkinghandle
 function processInChunks(content: string) {
   const CHUNK_SIZE = 5000
   if (content.length <= CHUNK_SIZE) {
@@ -264,10 +264,10 @@ function processInChunks(content: string) {
 }
 ```
 
-### Phase 2: component级optimization (中期实施)
+### Phase 2: componentleveloptimization (mid-term实施)
 
 ```typescript
-// 1. component记忆化
+// 1. componentmemoization
 const MemoizedEnhanceMarkdown = memo(EnhanceMarkdown, (prev, next) => {
   return prev.content === next.content &&
          prev.isStreaming === next.isStreaming &&
@@ -277,11 +277,11 @@ const MemoizedEnhanceMarkdown = memo(EnhanceMarkdown, (prev, next) => {
 // 2. Hook optimization
 const useOptimizedMarkdownConfig = (props: MarkdownProps) => {
   const stableOptions = useMemo(() => ({
-    // 稳定的configurationoption
+    // stableconfigurationoptions
   }), [])
   
   const dynamicOptions = useMemo(() => ({
-    // 动态configurationoption
+    // dynamicconfigurationoptions
   }), [props.allowHtml, props.enableLatex])
   
   return useMemo(() => ({
@@ -290,7 +290,7 @@ const useOptimizedMarkdownConfig = (props: MarkdownProps) => {
   }), [stableOptions, dynamicOptions])
 }
 
-// 3. 批量update
+// 3. batchupdate
 const useBatchedUpdates = (callback: Function) => {
   return useCallback((...args: any[]) => {
     unstable_batchedUpdates(() => callback(...args))
@@ -301,7 +301,7 @@ const useBatchedUpdates = (callback: Function) => {
 ### Phase 3: advancedoptimization (long期实施)
 
 ```typescript
-// 1. Web Workers handlecomplexdocumentation
+// 1. Web Workers handle complex documents
 const preprocessWorker = new Worker('/preprocess-worker.js')
 
 const useWorkerPreprocess = (content: string) => {
@@ -319,18 +319,18 @@ const useWorkerPreprocess = (content: string) => {
   return result
 }
 
-// 2. 增量update
+// 2. incrementalupdate
 const useIncrementalRendering = (content: string) => {
   const [renderedContent, setRenderedContent] = useState('')
   const timeoutRef = useRef<NodeJS.Timeout>()
   
   useEffect(() => {
-    // 清除before的定time器
+    // clear previous timers
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
     }
     
-    // 增量render
+    // incrementalrender
     const renderIncrementally = (index: number = 0) => {
       const CHUNK_SIZE = 1000
       const chunk = content.slice(index, index + CHUNK_SIZE)
@@ -339,7 +339,7 @@ const useIncrementalRendering = (content: string) => {
         setRenderedContent(prev => prev + chunk)
         timeoutRef.current = setTimeout(() => {
           renderIncrementally(index + CHUNK_SIZE)
-        }, 16) // 约60fps
+        }, 16) // approximately60fps
       }
     }
     
@@ -358,7 +358,7 @@ const useIncrementalRendering = (content: string) => {
 
 ## 🎯 performancemonitor
 
-### 添addperformancemonitor代码
+### addperformancemonitorcode
 
 ```typescript
 // performance-monitor.ts
@@ -373,9 +373,9 @@ export class MarkdownPerformanceMonitor {
       existing.push(duration)
       this.metrics.set(name, existing)
       
-      // sendtoanalyze平台
-      if (duration > 50) { // 超过50ms的operation
-        console.warn(`Slow operation detected: ${name} took ${duration}ms`)
+      // send to analytics platform
+      if (duration > 50) { // exceeding 50msoperations
+        console.warn(`Slow operations detected: ${name} took ${duration}ms`)
       }
     }
   }
@@ -394,7 +394,7 @@ export class MarkdownPerformanceMonitor {
   }
 }
 
-// atcomponent中使用
+// atcomponentinusage
 const EnhanceMarkdown = memo((props: MarkdownProps) => {
   const endMeasure = MarkdownPerformanceMonitor.startMeasure('EnhanceMarkdown-render')
   
@@ -408,11 +408,11 @@ const EnhanceMarkdown = memo((props: MarkdownProps) => {
 
 ## 📝 summary
 
-through实施上述optimization方案，预期canimplement：
+throughimplementing aboveoptimizationapproach，expectedcan achieve：
 
-1. **renderperformance提升 40-50%**
-2. **memory使用decrease 30%**
-3. **流式render更流畅**
-4. **largedocumentationhandle能力enhancement**
+1. **renderperformanceimprovement 40-50%**
+2. **memoryusagedecrease 30%**
+3. **streamingrendersmoother**
+4. **largedocumentationhandling capabilityenhancement**
 
-suggestion按照三个阶段逐步实施optimization，并throughperformancemonitorvalidateoptimization效果。heavy点关注预handle阶段和component记忆化的optimization，这两个方面能带来最显著的performance提升。 
+recommendationsaccording tothree phasesgradually implementoptimization，and throughperformancemonitorvalidateoptimizationeffectiveness。heavy点关注preprocessphaseandcomponentmemoization的optimization，these two aspectscan bringmost significantperformanceimprovement。 

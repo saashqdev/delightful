@@ -10,8 +10,8 @@ class CodeRenderFactory extends BaseRenderFactory<CodeRenderProps> {
 	}
 
 	/**
-	 * get默认component
-	 * @returns 默认component
+	 * Get default component
+	 * @returns Default component
 	 */
 	public getFallbackComponent(): LazyExoticComponent<ComponentType<CodeRenderProps>> {
 		return Fallback

@@ -8,12 +8,12 @@ const Fallback = lazy(() => import("../components/Block/components/Fallback"))
 // Content block rendering factory
 class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 	/**
-	 * 切割规则（正则）
+	 * Splitting rules (regex)
 	 */
 	protected splitters = new Map<string, RegExp>()
 
 	/**
-	 * component缓存
+	 * Component cache
 	 */
 	protected componentCache = new Map<
 		string,
@@ -21,34 +21,34 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 	>()
 
 	/**
-	 * component
+	 * Components
 	 */
 	protected components = new Map<string, RenderComponent<BlockRenderProps>>()
 
 	/**
-	 * 构造function
+	 * Constructor function
 	 */
 	constructor() {
 		super()
 	}
 
 	/**
-	 * get默认component
-	 * @returns 默认component
+	 * Get default component
+	 * @returns Default component
 	 */
 	public getFallbackComponent(): LazyExoticComponent<ComponentType<BlockRenderProps>> {
 		return Fallback
 	}
 
 	/**
-	 * 注册block识别器
+	 * Register block recognizer
 	 */
 	registerSplitters(lang: string, blockRecognizer: RegExp) {
 		this.splitters.set(lang, blockRecognizer)
 	}
 
 	/**
-	 * 提取符合规则的block
+	 * Extract blocks matching rules
 	 */
 	private extractBlocks(content: string) {
 		const extractedBlocks = []
@@ -79,7 +79,7 @@ class BlockRenderFactory extends BaseRenderFactory<BlockRenderProps> {
 	}
 
 	/**
-	 * 生成切割后的block
+	 * Generate split blocks
 	 */
 	public getBlocks(content: string | undefined) {
 		if (!content) return []

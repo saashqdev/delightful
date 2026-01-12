@@ -9,26 +9,26 @@ function useStreamCursor(
 ) {
 	const { styles: streamStyles } = useStreamStyles()
 
-	// 流式光标效果
+	// Streaming cursor effect
 	useUpdateEffect(() => {
-		// 只有在流式渲染模式下才添加光标
+		// Only add cursor in streaming rendering mode
 		if (!isStreaming) return
 
 		const markdowns = markdownRef.current?.querySelectorAll(".markdown-content")
 
-		// 添加标记，防止死loop
+		// Add flag to prevent infinite loop
 		let isAddingCursor = false
 
-		// 清除所有现有光标
+		// Clear all existing cursors
 		const clearCursors = () => {
 			if (!markdownRef.current) return
 			const existingCursors = markdownRef.current.querySelectorAll(`.${streamStyles.cursor}`)
 			existingCursors.forEach((cursor) => cursor.remove())
 		}
 
-		// 添加光标到最后一个内容块
+		// Add cursor to last content block
 		const addCursor = (lastBlock?: Element | null) => {
-			// 防止重复调用造成死loop
+			// Prevent repeated calls causing infinite loop
 			if (isAddingCursor || !markdownRef.current) return
 
 			try {
@@ -40,9 +40,9 @@ function useStreamCursor(
 					lastBlock = lastBlock?.parentElement
 				}
 
-				// 找到最后一个文本块
+				// Find last text block
 				if (lastBlock) {
-					// 找到最后一个文本node
+					// Find last text node
 					const findLastTextNode = (element: Element): Element => {
 						const children = element?.childNodes ?? []
 						if (children.length === 0) return element.parentElement as Element
@@ -64,7 +64,7 @@ function useStreamCursor(
 					let lastElement = findLastTextNode(lastBlock)
 
 					if (lastElement) {
-						// 以下元素不打印光标
+					// Following elements do not print cursor
 						if (
 							lastElement.tagName === "CODE" ||
 							lastElement.tagName === "TH" ||
@@ -90,22 +90,22 @@ function useStreamCursor(
 					}
 				}
 			} finally {
-				// 确保始终reset标记
+				// Ensure always reset flag
 				setTimeout(() => {
 					isAddingCursor = false
 				}, 0)
 			}
 		}
 
-		// configuration MutationObserver
+		// Configure MutationObserver
 		const observer = new MutationObserver((mutations) => {
 			let lastBlock = markdownRef.current?.lastElementChild
-			// 过滤掉光标引起的变化
+			// Filter out changes caused by cursor
 			const realContentChanges = mutations.some((mutation) => {
-				// 遍历添加的node，判断是否只有光标元素
+				// Iterate through added nodes to determine if only cursor elements
 				if (mutation.type === "childList") {
 					for (const node of Array.from(mutation.addedNodes)) {
-						// 如果添加的不是光标元素，description有实际内容变化
+						// If added node is not cursor element, means actual content change
 						if (node.nodeType === Node.ELEMENT_NODE) {
 							const elem = node as Element
 							if (!elem.getAttribute || elem.getAttribute("data-cursor") !== "true") {
@@ -113,7 +113,7 @@ function useStreamCursor(
 								return true
 							}
 						} else if (node.nodeType === Node.TEXT_NODE) {
-							// 文本node变化也是内容变化
+							// Text node change is also content change
 							lastBlock = node as Element
 							return true
 						}
@@ -122,17 +122,17 @@ function useStreamCursor(
 				return false
 			})
 
-			// 只有实际内容发生变化时才添加光标
+			// Only add cursor when actual content changes
 			if (realContentChanges && !isAddingCursor) {
 				addCursor(lastBlock)
 			}
 		})
 
 		if (markdowns && markdowns.length > 0) {
-			// 初始添加光标
+			// Initial cursor addition
 			addCursor()
 			markdowns.forEach((markdown) => {
-				// 只观察子node变化，不观察property和文字内容变化
+				// Only observe child node changes, not attributes and text content changes
 				observer.observe(markdown, {
 					characterData: true,
 					childList: true,

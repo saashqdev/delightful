@@ -87,31 +87,31 @@ const getTextAlignment = (text: string | React.ReactNode): string => {
 
 	// Left alignment markers
 	if (
-		cleanText.startsWith(":左对齐<<") ||
+		cleanText.startsWith(":left<<") ||
 		cleanText.startsWith("<<") ||
-		cleanText === ":左对齐" ||
-		cleanText === ":对齐<<"
+		cleanText === ":left" ||
+		cleanText === ":align<<"
 	) {
 		return "left"
 	}
 
 	// Center alignment markers
 	if (
-		cleanText.startsWith(">>居中<<") ||
+		cleanText.startsWith(">>center<<") ||
 		(cleanText.startsWith(">>") && cleanText.endsWith("<<")) ||
 		cleanText === ">>" ||
-		cleanText === ">>居中<<"
+		cleanText === ">>center<<"
 	) {
 		return "center"
 	}
 
 	// Right alignment markers
 	if (
-		cleanText.startsWith(">>右对齐:") ||
+		cleanText.startsWith(">>right:") ||
 		cleanText.endsWith(">>") ||
 		cleanText.includes("%") ||
-		cleanText.includes("：") ||
-		cleanText === ">>右对齐:"
+		cleanText.includes(":") ||
+		cleanText === ">>right:"
 	) {
 		return "right"
 	}

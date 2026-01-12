@@ -4,29 +4,29 @@ import PreprocessService from "../index"
 describe("PreprocessService - Linked Image", () => {
 	it("should correctly parse linked images", () => {
 		const markdown =
-			"[![链接图片](https://via.placeholder.com/100x50)](https://www.example.com)"
+			"[![linked image](https://via.placeholder.com/100x50)](https://www.example.com)"
 		const result = PreprocessService.preprocess(markdown, { enableLatex: false })
 
 		// Should process the linked image syntax
 		const expectedHtml =
-			'<a href="https://www.example.com"><img src="https://via.placeholder.com/100x50" alt="链接图片" /></a>'
+			'<a href="https://www.example.com"><img src="https://via.placeholder.com/100x50" alt="linked image" /></a>'
 		expect(result[0]).toContain(expectedHtml)
 	})
 
 	it("should handle multiple linked images", () => {
 		const markdown = `
-[![图片1](https://via.placeholder.com/100x50)](https://www.example1.com)
-[![图片2](https://via.placeholder.com/200x100)](https://www.example2.com)
+[![image1](https://via.placeholder.com/100x50)](https://www.example1.com)
+[![image2](https://via.placeholder.com/200x100)](https://www.example2.com)
 		`.trim()
 
 		const result = PreprocessService.preprocess(markdown, { enableLatex: false })
 		const content = result.join(" ")
 
 		expect(content).toContain(
-			'<a href="https://www.example1.com"><img src="https://via.placeholder.com/100x50" alt="图片1" /></a>',
+			'<a href="https://www.example1.com"><img src="https://via.placeholder.com/100x50" alt="image1" /></a>',
 		)
 		expect(content).toContain(
-			'<a href="https://www.example2.com"><img src="https://via.placeholder.com/200x100" alt="图片2" /></a>',
+			'<a href="https://www.example2.com"><img src="https://via.placeholder.com/200x100" alt="image2" /></a>',
 		)
 	})
 
@@ -57,17 +57,17 @@ describe("PreprocessService - Linked Image", () => {
 
 	it("should handle complex scenarios with text and linked images", () => {
 		const markdown = `
-这里有一个链接图片：[![test图片](https://via.placeholder.com/100x50)](https://www.example.com)
+Here is a linked image: [![test image](https://via.placeholder.com/100x50)](https://www.example.com)
 
-还有普通文本和[普通链接](https://www.test.com)
+And some regular text with [regular link](https://www.test.com)
 		`.trim()
 
 		const result = PreprocessService.preprocess(markdown, { enableLatex: false })
 		const content = result.join(" ")
 
 		expect(content).toContain(
-			'<a href="https://www.example.com"><img src="https://via.placeholder.com/100x50" alt="test图片" /></a>',
+			'<a href="https://www.example.com"><img src="https://via.placeholder.com/100x50" alt="test image" /></a>',
 		)
-		expect(content).toContain("[普通链接](https://www.test.com)")
+		expect(content).toContain("[regular link](https://www.test.com)")
 	})
 })

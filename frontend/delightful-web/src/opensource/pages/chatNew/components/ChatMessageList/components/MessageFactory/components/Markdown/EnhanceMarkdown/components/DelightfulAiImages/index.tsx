@@ -91,7 +91,7 @@ const DelightfulAiImages = observer(({ type, data }: DelightfulAiImagesProps) =>
 				sendMessage({
 					type: ConversationMessageType.Text,
 					text: {
-						content: "转超清",
+						content: "Convert to HD",
 						attachments: [{ file_id }],
 					},
 				})
@@ -131,7 +131,7 @@ const DelightfulAiImages = observer(({ type, data }: DelightfulAiImagesProps) =>
 
 	useEffect(() => {
 		if (isToHDError && previewInfo?.fileId === (data as HDImageContent).origin_file_id) {
-			message.error(data?.error_message || "生成failed")
+			message.error(data?.error_message || "Generation failed")
 			MessageFilePreviewService.setPreviewInfo({ ...previewInfo, useHDImage: false })
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

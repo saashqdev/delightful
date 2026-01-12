@@ -3,7 +3,7 @@ import { CodeRenderProps } from "../types"
 import { CodeLanguage } from "../const"
 
 /**
- * 代码渲染component
+ * Code rendering component
  */
 export interface CodeRenderComponent {
 	componentType: CodeLanguage

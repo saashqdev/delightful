@@ -178,7 +178,7 @@ describe("Table Module Integration Tests", () => {
 
 	it("TableCell long text functionality should work properly", () => {
 		const longText =
-			"这是一个非常长的文本内容，超过了50个字符的阈值，应该被包装在长文本component中进行handle，点击可以展开，这样就能确保超过50个字符了"
+			"This is a very long text content that exceeds the 50 character threshold and should be wrapped in a long text component for handling, click to expand, this ensures it exceeds 50 characters"
 
 		render(
 			<table>
@@ -241,7 +241,7 @@ describe("Table Module Integration Tests", () => {
 			"Second Column": "Second Column",
 		}
 
-		const headers = ["名称", "描述"]
+		const headers = ["Name", "Description"]
 
 		render(
 			<RowDetailDrawer

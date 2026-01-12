@@ -474,7 +474,7 @@ const ChatMessageList = observer(() => {
 		e.preventDefault()
 		const target = e.target as HTMLElement
 		if (target.closest(`.${DomClassName.MESSAGE_ITEM}`)) {
-			// 从点击元素start向上查找，直到找到带有 data-message-id 的元素
+			// Search upward from clicked element until finding element with data-message-id attribute
 			const messageElement = target.closest("[data-message-id]")
 			const messageId = messageElement?.getAttribute("data-message-id")
 			MessageDropdownService.setMenu(messageId ?? "", e.target)

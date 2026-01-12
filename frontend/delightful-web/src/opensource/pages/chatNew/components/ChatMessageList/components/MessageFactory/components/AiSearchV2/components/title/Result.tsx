@@ -21,17 +21,17 @@ const Result = memo(({ deepLevel = 1, searchWebPages, pageLength = 0 }: ResultPr
 	const { styles } = useStyles()
 	const { t } = useTranslation("interface")
 
-	/** 累加总字数 */
+	/** Accumulate total word count */
 	const allWordCount = useMemo(() => {
 		return searchWebPages?.reduce((acc, item) => acc + (item.total_words ?? 0), 0) ?? 0
 	}, [searchWebPages])
 
-	/** 累加检索到的页面总数 */
+	/** Accumulate total retrieved pages */
 	const allMatchCount = useMemo(() => {
 		return searchWebPages?.reduce((acc, item) => acc + (item.match_count ?? 0), 0) ?? 0
 	}, [searchWebPages])
 
-	/** 累加阅读的页面总数 */
+	/** Accumulate total read pages */
 	const allPageCount = useMemo(() => {
 		return searchWebPages?.reduce((acc, item) => acc + (item.page_count ?? 0), 0) ?? 0
 	}, [searchWebPages])

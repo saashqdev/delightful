@@ -103,13 +103,13 @@ The API works, but RAPID is not an API.
 		})
 
 		it("should not introduce unwanted line breaks when removing abbreviation definitions", () => {
-			const markdown = `## 缩写
+			const markdown = `## Abbreviations
 
 *[HTML]: HyperText Markup Language
 *[CSS]: Cascading Style Sheets
 *[JS]: JavaScript
 
-HTML 和 CSS 是前端开发的基础，JS 用于添加交互性。`
+HTML and CSS are the foundation of frontend development, JS is used to add interactivity.`
 
 			const result = PreprocessService.preprocess(markdown, { enableLatex: false })
 			const content = result.join(" ")
@@ -119,7 +119,7 @@ HTML 和 CSS 是前端开发的基础，JS 用于添加交互性。`
 
 			// Should correctly convert abbreviations without line breaks between them
 			expect(content).toContain(
-				'<abbr title="HyperText Markup Language">HTML</abbr> 和 <abbr title="Cascading Style Sheets">CSS</abbr>',
+				'<abbr title="HyperText Markup Language">HTML</abbr> and <abbr title="Cascading Style Sheets">CSS</abbr>',
 			)
 
 			// Should remove abbreviation definitions
@@ -170,7 +170,7 @@ HTML 和 CSS 是前端开发的基础，JS 用于添加交互性。`
 			expect(content).toContain('<input type="checkbox"  readonly')
 			expect(content).toContain("Checked task</li>")
 			expect(content).toContain("Unchecked task</li>")
-			// Note: 我们的正则目前不支持大写X，这是一个已知限制
+			// Note: Our regex currently doesn't support uppercase X, this is a known limitation
 			expect(content).toContain("- [X] Also checked (uppercase X)")
 		})
 	})

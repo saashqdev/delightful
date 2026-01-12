@@ -1,7 +1,7 @@
 export const enum CodeLanguage {
-	/** Mermaid 图表 */
+	/** Mermaid chart */
 	Mermaid = "mermaid",
-	/** 引用 */
+	/** Citation */
 	Citation = "citation",
 	/** Markdown */
 	Markdown = "markdown",

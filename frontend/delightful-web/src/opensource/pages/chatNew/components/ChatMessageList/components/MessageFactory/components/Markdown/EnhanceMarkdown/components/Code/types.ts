@@ -1,55 +1,55 @@
 import React from "react"
 
 /**
- * 代码渲染component的props
+ * Props for code rendering component
  */
 export interface CodeRenderProps {
 	/**
-	 * 代码class型
+	 * Code type
 	 */
 	language?: string
 	/**
-	 * 代码数据
+	 * Code data
 	 */
 	data?: string
 	/**
-	 * 是否正在流式
+	 * Whether streaming is in progress
 	 */
 	isStreaming?: boolean
 	/**
-	 * 代码的className
+	 * Code className
 	 */
 	className?: string
 }
 
 /**
- * 行内代码渲染component的props
+ * Props for inline code rendering component
  */
 export interface InlineCodeRenderProps<D extends object = object> {
 	/**
-	 * 代码class型
+	 * Code type
 	 */
 	language?: string
 	/**
-	 * 代码数据
+	 * Code data
 	 */
 	data?: string
 	/**
-	 * 解析后的数据
+	 * Parsed data
 	 */
 	parsedData?: D
 	/**
-	 * 行内代码的className
+	 * Inline code className
 	 */
 	className?: string
 	/**
-	 * 是否正在流式
+	 * Whether streaming is in progress
 	 */
 	isStreaming?: boolean
 }
 
 /**
- * 代码渲染component
+ * Code rendering component
  */
 export interface RenderComponent<Props> {
 	componentType: string

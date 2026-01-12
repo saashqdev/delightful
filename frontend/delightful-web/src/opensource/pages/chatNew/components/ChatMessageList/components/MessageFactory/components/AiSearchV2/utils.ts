@@ -61,16 +61,16 @@ export function extractSourcePlaceholders(source: string, regex: RegExp): string
 	let lastIndex = 0
 
 	matches.forEach((match) => {
-		// 如果匹配项之前有文本，添加该文本
+		// If text exists before match, add that text
 		if (match.index! > lastIndex) {
 			result.push(source.slice(lastIndex, match.index))
 		}
-		// 添加匹配项
+		// Add match item
 		result.push(match[0])
 		lastIndex = match.index! + match[0].length
 	})
 
-	// 如果最后还有剩余文本，添加到结果中
+	// If remaining text at end, add to result
 	if (lastIndex < source.length) {
 		result.push(source.slice(lastIndex))
 	}

@@ -37,12 +37,12 @@ vi.mock("../styles", () => ({
 
 describe("RowDetailDrawer", () => {
 	const mockRowData = {
-		0: "第一列数据",
-		1: "第二列数据",
-		2: "第三列数据",
-		名称: "第一列数据",
-		描述: "第二列数据",
-		status: "第三列数据",
+		0: "First column data",
+		1: "Second column data",
+		2: "Third column data",
+		名称: "First column data",
+		描述: "Second column data",
+		status: "Third column data",
 	}
 
 	const mockHeaders = ["名称", "描述", "status"]
@@ -54,13 +54,13 @@ describe("RowDetailDrawer", () => {
 				onClose={vi.fn()}
 				rowData={mockRowData}
 				headers={mockHeaders}
-				title="行详情"
+				title="Row Details"
 			/>,
 		)
 
 		expect(screen.getByTestId("drawer")).toBeDefined()
 		expect(screen.getByTestId("drawer-title")).toBeDefined()
-		expect(screen.getByTestId("drawer-title").textContent).toBe("行详情")
+		expect(screen.getByTestId("drawer-title").textContent).toBe("Row Details")
 	})
 
 	it("should not render drawer when visible is false", () => {
@@ -108,15 +108,15 @@ describe("RowDetailDrawer", () => {
 		expect(labels[2].textContent).toBe("status")
 
 		const contents = screen.getAllByTestId("form-content")
-		expect(contents[0].textContent).toBe("第一列数据")
-		expect(contents[1].textContent).toBe("第二列数据")
-		expect(contents[2].textContent).toBe("第三列数据")
+		expect(contents[0].textContent).toBe("First column data")
+		expect(contents[1].textContent).toBe("Second column data")
+		expect(contents[2].textContent).toBe("Third column data")
 	})
 
 	it("should handle missing data", () => {
 		const incompleteRowData = {
-			0: "第一列数据",
-			名称: "第一列数据",
+			0: "First column data",
+			名称: "First column data",
 		}
 
 		render(
@@ -129,7 +129,7 @@ describe("RowDetailDrawer", () => {
 		)
 
 		const contents = screen.getAllByTestId("form-content")
-		expect(contents[0].textContent).toBe("第一列数据")
+		expect(contents[0].textContent).toBe("First column data")
 		expect(contents[1].textContent).toBe("") // Missing data displays as empty
 		expect(contents[2].textContent).toBe("") // Missing data displays as empty
 	})
@@ -163,8 +163,8 @@ describe("RowDetailDrawer", () => {
 
 	it("should handle React nodes as values", () => {
 		const rowDataWithJSX = {
-			0: <span>JSX内容</span>,
-			名称: <span>JSX内容</span>,
+			0: <span>JSX Content</span>,
+			名称: <span>JSX Content</span>,
 		}
 
 		render(
@@ -176,13 +176,13 @@ describe("RowDetailDrawer", () => {
 			/>,
 		)
 
-		expect(screen.getByText("JSX内容")).toBeDefined()
+		expect(screen.getByText("JSX Content")).toBeDefined()
 	})
 
 	it("should prioritize index keys for data retrieval", () => {
 		const conflictRowData = {
-			0: "索引数据",
-			名称: "名称数据",
+			0: "Index data",
+			名称: "Name data",
 		}
 
 		render(
@@ -195,6 +195,6 @@ describe("RowDetailDrawer", () => {
 		)
 
 		const content = screen.getByTestId("form-content")
-		expect(content.textContent).toBe("索引数据") // Should prioritize index 0 value
+		expect(content.textContent).toBe("Index data") // Should prioritize index 0 value
 	})
 })

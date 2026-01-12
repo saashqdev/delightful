@@ -347,22 +347,22 @@ class PreprocessService {
 	 * Preprocess markdown text
 	 */
 	preprocess(markdown: string, options?: { enableLatex?: boolean }): string[] {
-		// 首先保护代码块内容
+		// First protect code block content
 		const { processedMarkdown: protectedMarkdown, codeBlockMap } =
 			this.protectCodeBlocks(markdown)
 
-		// handle缩写
+		// Handle abbreviations
 		let processedMarkdown = this.processAbbreviations(protectedMarkdown)
 
-		// handle参考链接
+		// Handle reference links
 		processedMarkdown = this.processReferenceLinks(processedMarkdown)
 
-		// handle多级tasklist（在其他规则之前）
+		// Handle nested task lists (before other rules)
 		processedMarkdown = this.processNestedTaskLists(processedMarkdown)
 
 		const rules = this.getAllRules()
 
-		// 移除原有的单一tasklisthandle规则，因为我们已经用新methodhandle了
+		// Remove original single task list handling rule, as we've handled it with new method
 		const filteredRules = rules.filter(
 			(rule) => rule.regex.toString() !== TASK_LIST_REGEX.toString(),
 		)

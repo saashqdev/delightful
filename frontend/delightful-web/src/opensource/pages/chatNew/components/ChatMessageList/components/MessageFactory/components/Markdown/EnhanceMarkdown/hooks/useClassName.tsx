@@ -13,7 +13,7 @@ export const useClassName = (props: {
 
 	// Use memoized class name combination to reduce unnecessary recalculation
 	return useMemo(() => {
-		// 在function内部getclassNameRef.current
+		// Get classNameRef.current inside function
 		const refClassName = classNameRef.current
 		return cx(
 			mdStyles.root,
@@ -53,6 +53,6 @@ export const useClassName = (props: {
 		mdStyles.video,
 		mdStyles.math,
 		className,
-		classNameRef, // 使用引用本身作为依赖
+		classNameRef, // Use reference itself as dependency
 	])
 }

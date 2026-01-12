@@ -1,14 +1,14 @@
-// handletable的辅助function
+// Helper function for handling tables
 
 export const parseTable = (header: string, separator: string, rows: string) => {
-	// 解析表头
+	// Parse table header
 	const headerCells = header
 		.trim()
 		.replace(/^\||\|$/g, "")
 		.split("|")
 		.map((cell) => cell.trim())
 
-	// 解析分隔行，以确定对齐方式
+	// Parse separator row to determine alignment
 	const alignments = separator
 		.trim()
 		.replace(/^\||\|$/g, "")
@@ -20,7 +20,7 @@ export const parseTable = (header: string, separator: string, rows: string) => {
 			return "left"
 		})
 
-	// 解析数据行
+	// Parse data rows
 	const dataRows = rows
 		.trim()
 		.split("\n")
@@ -31,10 +31,10 @@ export const parseTable = (header: string, separator: string, rows: string) => {
 				.map((cell) => cell.trim()),
 		)
 
-	// 构建HTMLtable
+	// Build HTML table
 	let tableHtml = "<table><thead><tr>"
 
-	// 添加表头
+	// Add table header
 	headerCells.forEach((cell, i) => {
 		const align = alignments[i] || "left"
 		tableHtml += `<th style="text-align:${align}">${cell}</th>`
@@ -42,7 +42,7 @@ export const parseTable = (header: string, separator: string, rows: string) => {
 
 	tableHtml += "</tr></thead><tbody>"
 
-	// 添加数据行
+	// Add data rows
 	dataRows.forEach((row) => {
 		tableHtml += "<tr>"
 		row.forEach((cell, i) => {

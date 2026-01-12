@@ -12,7 +12,7 @@ const DelightfulInlineCode = memo(function DelightfulInlineCode(props: Delightfu
 	const { hiddenDetail } = useMessageRenderContext()
 	const { data: propsValue, className } = props
 
-	// handle边界情况
+	// Handle boundary cases
 	if (!propsValue) {
 		return null
 	}

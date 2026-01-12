@@ -1,6 +1,6 @@
 export const enum DelightfulFunctionLinkType {
 	/**
-	 * 发送message
+	 * Send message
 	 */
 	SendMessage = "sendMessage",
 }

@@ -12,12 +12,12 @@ interface MindMapProps {
 }
 
 /**
- * check内容是否包含一级标题及以上
- * @param content 内容
- * @returns 是否包含一级标题及以上
+ * Check if content contains heading level 1 or above
+ * @param content Content to check
+ * @returns Whether content contains heading level 1 or above
  */
 const checkMarkmapContent = (content: string) => {
-	// 只有包含一级标题及以上才认为true，使用正则匹配
+	// Only return true if contains heading level 1 or above, using regex match
 	return /^(#+)\s/.test(content)
 }
 

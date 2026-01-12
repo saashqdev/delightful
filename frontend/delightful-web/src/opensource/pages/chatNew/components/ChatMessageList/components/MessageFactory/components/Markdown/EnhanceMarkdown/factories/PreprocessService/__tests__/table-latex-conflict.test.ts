@@ -4,11 +4,11 @@ import PreprocessService from "../index"
 describe("PreprocessService - Table and LaTeX Conflict", () => {
 	it("should not interfere with table cells containing dollar signs", () => {
 		const markdown = `
-| 产品   | 价格 | 库存 |
-|--------|------|------|
-| 产品 A | $15  | 100  |
-| 产品 B | $25  | 50   |
-| 产品 C | $35  | 20   |
+| Product | Price | Stock |
+|---------|-------|-------|
+| Product A | $15  | 100  |
+| Product B | $25  | 50   |
+| Product C | $35  | 20   |
 		`.trim()
 
 		const result = PreprocessService.preprocess(markdown, { enableLatex: true })
@@ -16,9 +16,9 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 
 		// Should generate table HTML
 		expect(content).toContain("<table>")
-		expect(content).toContain('<th style="text-align:left">产品</th>')
-		expect(content).toContain('<th style="text-align:left">价格</th>')
-		expect(content).toContain('<th style="text-align:left">库存</th>')
+		expect(content).toContain('<th style="text-align:left">Product</th>')
+		expect(content).toContain('<th style="text-align:left">Price</th>')
+		expect(content).toContain('<th style="text-align:left">Stock</th>')
 
 		// Should display dollar signs correctly in table cells
 		expect(content).toContain("$15")
@@ -36,11 +36,11 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 
 	it("should still process actual LaTeX formulas outside of tables", () => {
 		const markdown = `
-| 产品   | 价格 | 库存 |
-|--------|------|------|
-| 产品 A | $15  | 100  |
+| Product | Price | Stock |
+|---------|-------|-------|
+| Product A | $15  | 100  |
 
-这是一个数学公式：$E = mc^2$
+This is a math formula: $E = mc^2$
 		`.trim()
 
 		const result = PreprocessService.preprocess(markdown, { enableLatex: true })
@@ -58,13 +58,13 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 
 	it("should handle complex table with various content types", () => {
 		const markdown = `
-| class型 | 值 | 备注 |
-|------|----|----- |
-| 价格 | $100.50 | 含税 |
-| 公式 | 这不是公式：$x + y$ | 只是文本 |
-| 数量 | 50 | 个 |
+| Type | Value | Note |
+|------|-------|----- |
+| Price | $100.50 | Tax included |
+| Formula | This is not a formula: $x + y$ | Just text |
+| Quantity | 50 | Units |
 
-实际的数学公式：$\\sum_{i=1}^{n} x_i = total$
+Actual math formula: $\\sum_{i=1}^{n} x_i = total$
 		`.trim()
 
 		const result = PreprocessService.preprocess(markdown, { enableLatex: true })
@@ -72,7 +72,7 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 
 		// Table content should display dollar signs correctly
 		expect(content).toContain("$100.50")
-		expect(content).toContain("这不是公式：$x + y$")
+		expect(content).toContain("This is not a formula: $x + y$")
 
 		// Real LaTeX outside table should work (note: single backslash in output)
 		expect(content).toContain('<DelightfulLatexInline math="\\sum_{i=1}^{n} x_i = total" />')
@@ -87,11 +87,11 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 
 	it("should handle empty table cells and edge cases", () => {
 		const markdown = `
-| 产品 | 价格 | status |
-|------|------|------|
-| A    | $0   | 有效 |
-| B    |      | 无价格 |
-| C    | $$$  | 多个美元符号 |
+| Product | Price | Status |
+|---------|-------|--------|
+| A    | $0   | Valid |
+| B    |      | No price |
+| C    | $$$  | Multiple dollar signs |
 		`.trim()
 
 		const result = PreprocessService.preprocess(markdown, { enableLatex: true })

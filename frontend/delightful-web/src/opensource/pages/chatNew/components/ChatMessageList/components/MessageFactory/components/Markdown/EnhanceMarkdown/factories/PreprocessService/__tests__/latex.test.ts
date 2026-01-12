@@ -4,7 +4,7 @@ import PreprocessService from "../index"
 describe("PreprocessService - LaTeX", () => {
 	describe("Inline Math", () => {
 		it("should correctly process inline math formulas", () => {
-			const markdown = "这是一个行内公式：$E = mc^2$ 和另一个 $a + b = c$"
+			const markdown = "This is an inline formula: $E = mc^2$ and another $a + b = c$"
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
 			const content = result.join(" ")
 
@@ -13,7 +13,7 @@ describe("PreprocessService - LaTeX", () => {
 		})
 
 		it("should not process inline math when LaTeX is disabled", () => {
-			const markdown = "这是一个公式：$E = mc^2$"
+			const markdown = "This is a formula: $E = mc^2$"
 			const result = PreprocessService.preprocess(markdown, { enableLatex: false })
 			const content = result.join(" ")
 
@@ -22,7 +22,7 @@ describe("PreprocessService - LaTeX", () => {
 		})
 
 		it("should handle complex inline formulas", () => {
-			const markdown = "complex公式：$\\frac{a}{b} + \\sqrt{c^2 + d^2}$"
+			const markdown = "complex formula: $\\frac{a}{b} + \\sqrt{c^2 + d^2}$"
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
 			const content = result.join(" ")
 
@@ -35,7 +35,7 @@ describe("PreprocessService - LaTeX", () => {
 	describe("Block Math", () => {
 		it("should correctly process block math formulas", () => {
 			const markdown = `
-这是块级公式：
+This is a block formula:
 
 $$
 \\frac{d}{dx}\\left( \\int_{0}^{x} f(u)\\,du\\right)=f(x)
@@ -84,17 +84,17 @@ $$
 	describe("Mixed Math Content", () => {
 		it("should correctly handle both inline and block math together", () => {
 			const markdown = `
-# 数学公式
+# Math Formulas
 
-行内公式：$E = mc^2$
+Inline formula: $E = mc^2$
 
-块级公式：
+Block formula:
 
 $$
 \\frac{d}{dx}\\left( \\int_{0}^{x} f(u)\\,du\\right)=f(x)
 $$
 
-另一个行内公式：$a + b = c$
+Another inline formula: $a + b = c$
 			`.trim()
 
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
@@ -110,13 +110,13 @@ $$
 
 		it("should not confuse block math delimiters with inline math", () => {
 			const markdown = `
-行内公式 $x = 1$ 和块级公式：
+Inline formula $x = 1$ and block formula:
 
 $$
 y = x^2 + 2x + 1
 $$
 
-还有另一个行内公式 $z = \\sqrt{x}$
+And another inline formula $z = \\sqrt{x}$
 			`.trim()
 
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
@@ -135,7 +135,7 @@ $$
 
 	describe("Edge Cases", () => {
 		it("should handle empty formulas", () => {
-			const markdown = "空公式：$$ $$ 和行内带数学符号的公式：$x = $"
+			const markdown = "Empty formula: $$ $$ and inline formula with math symbol: $x = $"
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
 			const content = result.join(" ")
 

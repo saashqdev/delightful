@@ -12,8 +12,8 @@ import { useUpdateEffect } from "ahooks"
 import useStreamCursor from "./hooks/useStreamCursor"
 
 /**
- * EnhanceMarkdown - 增强的Markdown渲染器
- * 支持流式渲染、代码高亮、数学公式等功能
+ * EnhanceMarkdown - Enhanced Markdown renderer
+ * Supports streaming rendering, code highlighting, mathematical formulas and other features
  * based on markdown-to-jsx implement
  */
 const EnhanceMarkdown = memo(

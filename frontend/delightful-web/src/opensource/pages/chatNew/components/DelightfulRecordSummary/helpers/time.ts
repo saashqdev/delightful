@@ -47,7 +47,7 @@ const languages: Record<LanguageCode, Language> = {
 // Define function to convert date, accepts Chinese date and target language code, returns date in corresponding language format
 export function getTranslatedDate(chineseDate: string, language: LanguageCode = "en"): string {
 	// Extract month and day from date string
-	const match = chineseDate.match(/(\d{1,2})月(\d{1,2})日/)
+	const match = chineseDate.match(/(\d{1,2})-(\d{1,2})/)
 
 	if (match) {
 		const month = parseInt(match[1], 10) // Get month

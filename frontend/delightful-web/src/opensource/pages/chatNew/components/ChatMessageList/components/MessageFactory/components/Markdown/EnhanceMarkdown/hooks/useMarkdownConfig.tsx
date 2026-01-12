@@ -18,13 +18,13 @@ import CustomComponentService from "../factories/CustomComponentService"
 import ImageWrapper from "@/opensource/pages/chatNew/components/AiImageStartPage/components/ImageWrapper"
 
 /**
- * 构建 markdown-to-jsx component所需的configuration
+ * Build configuration required for markdown-to-jsx component
  */
 export const useMarkdownConfig = (props: MarkdownProps) => {
-	// 解构需要的props
+	// Destructure needed props
 	const { allowHtml = true, enableLatex = true, components: componentsInProps } = props
 
-	// 基础componentconfiguration
+	// Base component configuration
 	const baseOverrides = useMemo(() => {
 		return {
 			a: {
@@ -51,7 +51,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 			video: {
 				component: Video,
 			},
-			// 添加 LaTeX 支持
+			// Add LaTeX support
 			math: enableLatex
 				? {
 						component: (mathProps: { children: string }) => (
@@ -59,12 +59,12 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 						),
 				  }
 				: undefined,
-			// 添加LaTeXcomponent支持
+			// Add LaTeX component support
 			DelightfulLatexInline: {
 				component: (props: any) => {
 					if (!enableLatex) return <span>{`$${props.math}$`}</span>
 
-					// 解码HTML实体
+					// Decode HTML entities
 					const decodedMath = props.math
 						.replace(/&amp;/g, "&")
 						.replace(/&quot;/g, '"')
@@ -79,7 +79,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 				component: (props: any) => {
 					if (!enableLatex) return <div>{`$$${props.math}$$`}</div>
 
-					// 解码HTML实体
+					// Decode HTML entities
 					const decodedMath = props.math
 						.replace(/&amp;/g, "&")
 						.replace(/&quot;/g, '"')
@@ -90,24 +90,24 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 					return <KaTeX math={decodedMath} inline={false} />
 				},
 			},
-			// 添加handledelete线的label
+			// Add handling for strikethrough tags
 			span: {
 				component: (props: any) => {
-					// handledelete线 (GFM)
+					// Handle strikethrough (GFM)
 					if (props.className === "strikethrough") {
 						return <del>{props.children}</del>
 					}
 					return <span {...props} />
 				},
 			},
-			// handletasklist (GFM)
+			// Handle task list (GFM)
 			li: {
 				component: (props: any) => {
-					// 新的多级tasklist已经在预handle阶段生成了正确的HTML结构
-					// 这里只需要保持原有的行为，让HTML直接渲染
+					// New multi-level task list already generated correct HTML structure in preprocessing phase
+					// Here we just maintain original behavior, let HTML render directly
 					if (props.className === "task-list-item") {
-						// 对于新的tasklist，直接returnli，不再添加额外的复选框
-						// 因为复选框已经在预handle阶段的HTML中生成了
+						// For new task list, return li directly without adding extra checkbox
+						// Because checkbox already generated in HTML during preprocessing phase
 						return <li {...props} />
 					}
 					return <li {...props} />
@@ -116,7 +116,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 			DelightfulCitation: {
 				component: DelightfulCitation,
 			},
-			// 添加上标和下标支持
+			// Add superscript and subscript support
 			sup: {
 				component: (props: any) => <sup {...props} />,
 			},
@@ -126,11 +126,11 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 		}
 	}, [props, enableLatex])
 
-	// 合并自定义componentconfiguration
+	// Merge custom component configuration
 	const customOverrides = useMemo(() => {
 		if (!componentsInProps) return {}
 
-		// 将 react-markdown format的 components 转换为 markdown-to-jsx format的 overrides
+		// Convert react-markdown format components to markdown-to-jsx format overrides
 		const converted: Record<string, { component: any; props: Record<string, never> }> = {}
 		Object.entries(componentsInProps).forEach(([tag, Component]) => {
 			if (Component) {
@@ -144,7 +144,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 		return converted
 	}, [componentsInProps])
 
-	// 合并所有 overrides
+	// Merge all overrides
 	const overrides = useMemo(() => {
 		return {
 			...baseOverrides,
@@ -153,7 +153,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 		} as MarkdownToJSX.Overrides
 	}, [baseOverrides, customOverrides])
 
-	// 自定义的 markdown-to-jsx 预handlefunction
+	// Custom markdown-to-jsx preprocessing function
 	const preprocess = useMemoizedFn((markdown: string) => {
 		if (!markdown) return []
 
@@ -162,13 +162,13 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 		})
 	})
 
-	// configuration markdown-to-jsx options
+	// Configure markdown-to-jsx options
 	const options = useMemo<MarkdownToJSX.Options>(() => {
 		return {
 			overrides,
 			forceWrapper: true,
 			disableParsingRawHTML: !allowHtml,
-			// 使用update的API方式configuration预handlefunction
+			// Use updated API to configure preprocessing function
 			renderRule: (next: () => any, node: any) => {
 				if (node.type === RuleType.codeInline) {
 					const InlineCodeComponent = InlineCodeRenderFactory.getComponent(node.className)

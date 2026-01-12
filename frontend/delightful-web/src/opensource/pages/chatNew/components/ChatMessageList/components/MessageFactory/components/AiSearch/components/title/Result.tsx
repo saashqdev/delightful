@@ -20,7 +20,7 @@ const Result = memo(({ deepLevel = 1, associateQuestions, pageLength = 0 }: Resu
 	const { styles } = useStyles()
 	const { t } = useTranslation("interface")
 
-	/** 累加总字数 */
+	/** Accumulate total word count */
 	const allWordCount = useMemo(() => {
 		return Object.values(associateQuestions ?? {}).reduce(
 			(acc, item) => acc + (item.total_words ?? 0),
@@ -28,7 +28,7 @@ const Result = memo(({ deepLevel = 1, associateQuestions, pageLength = 0 }: Resu
 		)
 	}, [associateQuestions])
 
-	/** 累加检索到的页面总数 */
+	/** Accumulate total retrieved pages */
 	const allMatchCount = useMemo(() => {
 		return Object.values(associateQuestions ?? {}).reduce(
 			(acc, item) => acc + (item.match_count ?? 0),
@@ -36,7 +36,7 @@ const Result = memo(({ deepLevel = 1, associateQuestions, pageLength = 0 }: Resu
 		)
 	}, [associateQuestions])
 
-	/** 累加阅读的页面总数 */
+	/** Accumulate total read pages */
 	const allPageCount = useMemo(() => {
 		return Object.values(associateQuestions ?? {}).reduce(
 			(acc, item) => acc + (item.page_count ?? 0),

@@ -81,7 +81,7 @@ describe("TableCell", () => {
 
 	it("should automatically set text alignment based on content", () => {
 		// Test left alignment (default)
-		const { unmount: unmount1 } = render(<TableCell>普通文本</TableCell>)
+		const { unmount: unmount1 } = render(<TableCell>Normal text</TableCell>)
 		let cell = screen.getByRole("cell")
 		expect(cell.style.textAlign).toBe("left")
 		unmount1()

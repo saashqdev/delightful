@@ -7,12 +7,12 @@ vi.mock("react-i18next", () => ({
 	useTranslation: vi.fn(() => ({
 		t: (key: string) => {
 			const translations: Record<string, string> = {
-				"markdownTable.showMore": "显示更多",
-				"markdownTable.rowDetails": "行详细information",
-				"markdownTable.clickToExpand": "点击展开完整内容",
-				"markdownTable.showAllColumns": "显示所有列",
-				"markdownTable.hideAllColumns": "隐藏",
-				"markdownTable.defaultColumn": "列",
+				"markdownTable.showMore": "Show More",
+				"markdownTable.rowDetails": "Row Details",
+				"markdownTable.clickToExpand": "Click to Expand Full Content",
+				"markdownTable.showAllColumns": "Show All Columns",
+				"markdownTable.hideAllColumns": "Hide",
+				"markdownTable.defaultColumn": "Column",
 			}
 			return translations[key] || key
 		},
@@ -23,12 +23,12 @@ describe("useTableI18n", () => {
 	it("should return correct translation text", () => {
 		const { result } = renderHook(() => useTableI18n())
 
-		expect(result.current.showMore).toBe("显示更多")
-		expect(result.current.rowDetails).toBe("行详细information")
-		expect(result.current.clickToExpand).toBe("点击展开完整内容")
-		expect(result.current.showAllColumns).toBe("显示所有列")
-		expect(result.current.hideAllColumns).toBe("隐藏")
-		expect(result.current.defaultColumn).toBe("列")
+		expect(result.current.showMore).toBe("Show More")
+		expect(result.current.rowDetails).toBe("Row Details")
+		expect(result.current.clickToExpand).toBe("Click to Expand Full Content")
+		expect(result.current.showAllColumns).toBe("Show All Columns")
+		expect(result.current.hideAllColumns).toBe("Hide")
+		expect(result.current.defaultColumn).toBe("Column")
 	})
 
 	it("should contain all required translation keys", () => {

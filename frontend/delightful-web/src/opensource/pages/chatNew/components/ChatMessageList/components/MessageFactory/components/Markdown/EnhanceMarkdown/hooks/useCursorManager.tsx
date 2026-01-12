@@ -62,11 +62,11 @@ export const useCursorManager = (props: CursorManagerProps) => {
 
 			let targetElement = lastChild as HTMLElement
 
-			// 使用requestAnimationFrameoptimizationDOMoperation，确保在浏览器空闲时进行
-			requestAnimationFrame(() => {
-				// 根据不同labelclass型handle
-				if (targetElement.tagName === "PRE") {
-					// 代码块
+		// Use requestAnimationFrame to optimize DOM operations, ensuring they occur during browser idle time
+		requestAnimationFrame(() => {
+			// Handle different tag types
+			if (targetElement.tagName === "PRE") {
+				// Code block
 					const codeElement = targetElement.querySelector("code")
 					if (codeElement) {
 						targetElement = findLastElement(codeElement)

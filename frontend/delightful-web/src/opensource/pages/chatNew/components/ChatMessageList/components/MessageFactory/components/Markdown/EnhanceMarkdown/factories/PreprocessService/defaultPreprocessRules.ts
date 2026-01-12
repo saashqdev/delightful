@@ -1,50 +1,50 @@
 import { PreprocessRule } from "./types"
 import { parseTable } from "./utils"
 
-// 匹配 LaTeX 块级公式的正则表达式 - 将移动到条件handle中
+// Match LaTeX block formula regex - will move to conditional handling
 export const BLOCK_MATH_REGEX = /\$\$([\s\S]*?)\$\$/g
-// 改进的 LaTeX 内联公式正则表达式 - 更精确地匹配数学公式
-// 匹配包含数学符号、LaTeXcommand或数学运算符的内容
+// Improved LaTeX inline formula regex - more precisely match mathematical formulas
+// Match content containing math symbols, LaTeX commands, or math operators
 export const INLINE_MATH_REGEX = /\$([^$\n]*(?:[\\+\-*/=^_{}<>]|\\[a-zA-Z]+|[α-ωΑ-Ω])[^$\n]*)\$/g
-// 引用format正则表达式
+// Citation format regex
 
 export const CITATION_REGEX_1 = /\[\[citation:(\d+)\]\]/g
 export const CITATION_REGEX_2 = /\[\[citation(\d+)\]\]/g
 export const CITATION_REGEX_3 = /\[citation:(\d+)\]/g
 export const CITATION_REGEX_4 = /\[citation(\d+)\]/g
-// GFM 相关正则
+// GFM related regex
 
 export const STRIKETHROUGH_REGEX = /~~(.+?)~~/g
 export const TASK_LIST_REGEX = /^(\s*)-\s+\[(x| )\]\s+(.+)$/gm
-// GFM table正则表达式 - fixversion，能正确匹配markdowntable
-// 第一组：表头行，第二组：分隔符行（主要包含横线），第三组：数据行
+// GFM table regex - fixed version that correctly matches markdown tables
+// First group: header row, second group: separator row (mainly contains dashes), third group: data rows
 export const TABLE_REGEX =
-	/^\s*(\|[^\n]*\|)\s*\n\s*(\|[\s\-:|\s]*\|)\s*\n((?:\s*\|[^\n]*\|\s*(?:\n|$))*)/gm
-// 链接图片正则表达式 - 匹配 [![alt](img_url)](link_url) format
+	/^\s*(\|[^\n]*\|)\s*\n\s*(\|[\s\-:|\s]*\|)\s*\n((?:\s*\|[^\n]*\|\s*(?:\n|$))*)/ gm
+// Linked image regex - match [![alt](img_url)](link_url) format
 export const LINKED_IMAGE_REGEX = /\[!\[([^\]]*)\]\(([^)]+)\)\]\(([^)]+)\)/g
-// GFM 分割线正则表达式 - 匹配 ---, ***, ___ format
+// GFM horizontal rule regex - match ---, ***, ___ format
 export const HORIZONTAL_RULE_REGEX = /^(?:---+|\*\*\*+|___+)$/gm
-// 脚注引用正则表达式 - 匹配 [^1] format
+// Footnote reference regex - match [^1] format
 export const FOOTNOTE_REF_REGEX = /\[\^([^\]]+)\]/g
-// 脚注定义正则表达式 - 匹配 [^1]: 内容 format
+// Footnote definition regex - match [^1]: content format
 export const FOOTNOTE_DEF_REGEX = /^\[\^([^\]]+)\]:\s*(.+?)(?=\n\n|\n$|$)/gms
-// 缩写定义正则表达式 - 匹配 *[HTML]: HyperText Markup Language format
+// Abbreviation definition regex - match *[HTML]: HyperText Markup Language format
 export const ABBREVIATION_DEF_REGEX = /^\*\[([^\]]+)\]:\s*(.+)$/gm
-// 多级tasklist正则表达式 - 支持嵌套的tasklist
+// Multi-level task list regex - supports nested task lists
 export const NESTED_TASK_LIST_REGEX = /^(\s*)-\s+\[(x| )\]\s+(.+)$/gm
 
-// 上标和下标正则表达式
+// Superscript and subscript regex
 export const SUPERSCRIPT_REGEX = /\^([^^\s]+)\^/g
 export const SUBSCRIPT_REGEX = /~([^~\s]+)~/g
 
-// Reference links support - 参考链接支持
-// 匹配参考链接定义: [1]: https://example.com "title"
+// Reference links support
+// Match reference link definition: [1]: https://example.com "title"
 export const REFERENCE_LINK_DEF_REGEX = /^\s*\[([^\]]+)\]:\s*([^\s]+)(?:\s+"([^"]*)")?\s*$/gm
-// 匹配参考链接使用: [text][1] or [text]
+// Match reference link usage: [text][1] or [text]
 export const REFERENCE_LINK_USE_REGEX = /\[([^\]]+)\](?:\[([^\]]*)\])?/g
 
 export const defaultPreprocessRules: PreprocessRule[] = [
-	// 移除块级公式handle - 将在条件handle中添加
+	// Remove block formula handling - will add in conditional handling
 	{
 		regex: CITATION_REGEX_1,
 		replace: (_, index) => `<DelightfulCitation index="${index}" />`,
@@ -77,8 +77,8 @@ export const defaultPreprocessRules: PreprocessRule[] = [
 	{
 		regex: TASK_LIST_REGEX,
 		replace: (_, indent, checked, content) => {
-			const level = Math.floor(indent.length / 2) // 每2个空格为一级
-			const marginLeft = level * 20 // 每级缩进20px
+			const level = Math.floor(indent.length / 2) // Every 2 spaces is one level
+			const marginLeft = level * 20 // 20px indentation per level
 			return `<li class="task-list-item" data-checked="${checked}" style="margin-left: ${marginLeft}px;">${content}</li>`
 		},
 	},
@@ -94,7 +94,7 @@ export const defaultPreprocessRules: PreprocessRule[] = [
 	},
 	{
 		regex: ABBREVIATION_DEF_REGEX,
-		replace: () => "", // 缩写定义不显示，只用于后续替换
+		replace: () => "", // Abbreviation definitions are not displayed, only used for subsequent replacement
 	},
 	{
 		regex: TABLE_REGEX,

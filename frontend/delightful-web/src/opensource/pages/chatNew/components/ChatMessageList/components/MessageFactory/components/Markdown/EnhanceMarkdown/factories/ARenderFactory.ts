@@ -3,9 +3,9 @@ import { AnchorHTMLAttributes, ComponentType, lazy } from "react"
 
 class ARenderFactory extends BaseRenderFactory<AnchorHTMLAttributes<HTMLAnchorElement>> {
 	/**
-	 * get匹配的component
-	 * @param props componentproperty
-	 * @returns 匹配的component
+	 * Get matched component
+	 * @param props Component properties
+	 * @returns Matched component
 	 */
 	getMatchComponent(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
 		for (const [, value] of this.components.entries()) {

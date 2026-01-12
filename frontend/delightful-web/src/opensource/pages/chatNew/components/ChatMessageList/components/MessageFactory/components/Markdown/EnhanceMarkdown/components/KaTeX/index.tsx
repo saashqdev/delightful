@@ -13,7 +13,7 @@ const useStyles = createStyles(({ token, css }) => ({
 		display: inline;
 		max-width: 100%;
 
-		/* 完全不干预KaTeX的内部样式和定位 */
+		/* No interference with KaTeX internal styles and positioning */
 	`,
 	blockKatex: css`
 		display: block;
@@ -25,35 +25,35 @@ const useStyles = createStyles(({ token, css }) => ({
 		border-radius: ${token.borderRadius}px;
 		transition: all 0.2s ease;
 
-		/* 移动端响应式 */
+		/* Mobile responsive */
 		@media (max-width: 768px) {
 			margin: 16px 0;
 			padding: 12px 4px;
 		}
 
-		/* 保持KaTeX原生的display样式 */
+		/* Preserve KaTeX native display style */
 		.katex-display {
 			margin: 0;
-			/* 不使用flex，保持KaTeX原生布局 */
+			/* Don't use flex, preserve KaTeX native layout */
 		}
 
 		.katex {
 			font-size: 1.1em;
 
-			/* 移动端字体大小调整 */
+			/* Mobile font size adjustment */
 			@media (max-width: 768px) {
 				font-size: 1em;
 			}
 		}
 
-		/* 鼠标悬停效果 */
+		/* Mouse hover effect */
 		&:hover {
 			background-color: ${token.colorFillAlter};
 			box-shadow: 0 2px 4px ${token.colorBorderSecondary};
 			transform: translateY(-1px);
 		}
 
-		/* 深色主题支持 */
+		/* Dark theme support */
 		@media (prefers-color-scheme: dark) {
 			&:hover {
 				background-color: ${token.colorFillQuaternary};

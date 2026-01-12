@@ -3,12 +3,12 @@ import { LazyExoticComponent, ComponentType, lazy } from "react"
 
 class BaseRenderFactory<Props> {
 	/**
-	 * 代码component
+	 * Code components
 	 */
 	protected components = new Map<string, RenderComponent<Props>>()
 
 	/**
-	 * component缓存
+	 * Component cache
 	 */
 	protected componentCache = new Map<string, LazyExoticComponent<ComponentType<Props>>>()
 
@@ -19,26 +19,26 @@ class BaseRenderFactory<Props> {
 	}
 
 	/**
-	 * get默认component
-	 * @returns 默认component
+	 * Get default component
+	 * @returns Default component
 	 */
 	public getFallbackComponent(): LazyExoticComponent<ComponentType<Props>> {
 		return lazy(() => Promise.resolve({ default: () => null }))
 	}
 
 	/**
-	 * 注册component
-	 * @param lang 语言
-	 * @param componentConfig componentconfiguration
+	 * Register component
+	 * @param lang Language
+	 * @param componentConfig Component configuration
 	 */
 	registerComponent(lang: string, componentConfig: RenderComponent<Props>) {
 		this.components.set(lang, componentConfig)
 	}
 
 	/**
-	 * getcomponent
-	 * @param type componentclass型
-	 * @returns component
+	 * Get component
+	 * @param type Component type
+	 * @returns Component
 	 */
 	getComponent(type: string): LazyExoticComponent<ComponentType<Props>> {
 		// Load and return component
@@ -65,8 +65,8 @@ class BaseRenderFactory<Props> {
 	}
 
 	/**
-	 * 清除缓存
-	 * @param usedTypes 使用过的class型
+	 * Clean cache
+	 * @param usedTypes Used types
 	 */
 	cleanCache(usedTypes: string[]) {
 		Array.from(this.componentCache.keys()).forEach((type) => {

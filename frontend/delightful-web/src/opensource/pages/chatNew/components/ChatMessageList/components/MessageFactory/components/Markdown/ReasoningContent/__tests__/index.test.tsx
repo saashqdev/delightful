@@ -34,7 +34,7 @@ vi.mock("@tabler/icons-react", () => ({
 vi.mock("react-i18next", () => ({
 	useTranslation: () => ({
 		t: (key: string) => {
-			if (key === "chat.message.thought_process") return "思考过程"
+			if (key === "chat.message.thought_process") return "Thought Process"
 			return key
 		},
 	}),
@@ -55,7 +55,7 @@ vi.mock("../useStyles", () => ({
 }))
 
 describe("ReasoningContent component", () => {
-	const content = "这是推理内容"
+	const content = "This is reasoning content"
 
 	beforeEach(() => {
 		vi.resetAllMocks()
@@ -71,7 +71,7 @@ describe("ReasoningContent component", () => {
 		render(<ReasoningContent content={content} />)
 
 		// Check wrapper element
-		const titleElement = screen.getByText("思考过程")
+		const titleElement = screen.getByText("Thought Process")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
 
@@ -97,7 +97,7 @@ describe("ReasoningContent component", () => {
 		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
 		// Button should exist in expanded state
-		const titleElement = screen.getByText("思考过程")
+		const titleElement = screen.getByText("Thought Process")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
 
@@ -111,7 +111,7 @@ describe("ReasoningContent component", () => {
 		render(<ReasoningContent content={content} />)
 
 		// Initial state is collapsed
-		const collapseTitle = screen.getByText("思考过程").closest("div")
+		const collapseTitle = screen.getByText("Thought Process").closest("div")
 		expect(collapseTitle).toBeInTheDocument()
 
 		// Click button
@@ -131,13 +131,13 @@ describe("ReasoningContent component", () => {
 		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
 		// Click button
-		const collapseTitle = screen.getByText("思考过程").closest("div")
+		const collapseTitle = screen.getByText("Thought Process").closest("div")
 		if (collapseTitle) {
 			fireEvent.click(collapseTitle)
 		}
 
 		// Component should enter collapsed state
-		const titleElement = screen.getByText("思考过程")
+		const titleElement = screen.getByText("Thought Process")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
 
@@ -160,7 +160,7 @@ describe("ReasoningContent component", () => {
 		rerender(<ReasoningContent content={content} isStreaming={false} />)
 
 		// Should switch to collapsed state
-		const titleElement = screen.getByText("思考过程")
+		const titleElement = screen.getByText("Thought Process")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
 
@@ -170,10 +170,10 @@ describe("ReasoningContent component", () => {
 		}
 	})
 
-	it("应该正确应用传入的 className", () => {
+	it("should correctly apply passed className", () => {
 		render(<ReasoningContent content={content} className="custom-class" />)
 
-		const titleElement = screen.getByText("思考过程")
+		const titleElement = screen.getByText("Thought Process")
 		const parentDiv = titleElement.closest("div")
 		const wrapper = parentDiv?.parentElement
 

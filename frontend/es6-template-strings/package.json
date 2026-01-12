@@ -1,5 +1,5 @@
 {
-	"name": "@delightful/es6-template-strings",
+	"name": "@bedelightful/es6-template-strings",
 	"version": "0.0.4",
 	"description": "Template string engine",
 	"keywords": [],
@@ -39,7 +39,7 @@
 		"esniff": "~1.1.0"
 	},
 	"devDependencies": {
-		"@delightful/eslint-config": "~0.0.10",
+		"@bedelightful/eslint-config": "~0.0.10",
 		"@jest/globals": "^29.7.0",
 		"@swc/core": "~1.11.11",
 		"@types/jest": "~29.5.12",

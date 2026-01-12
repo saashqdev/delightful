@@ -4,10 +4,10 @@ Unified upload toolkit supporting Aliyun OSS, Volcengine TOS, and Huawei OBS, wi
 
 ## Quick Start
 
-1) Install @delightful/upload-sdk
+1) Install @bedelightful/upload-sdk
 
 ```bash
-npm install @delightful/upload-sdk
+npm install @bedelightful/upload-sdk
 ```
 
 2) Upload a file with upload-sdk (basic example):

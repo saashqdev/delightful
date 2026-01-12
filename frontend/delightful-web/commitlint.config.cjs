@@ -1,4 +1,4 @@
-const config = require("@delightful/eslint-config/commitlint/emoji")
+const config = require("@bedelightful/eslint-config/commitlint/emoji")
 
 module.exports = {
 	...config,

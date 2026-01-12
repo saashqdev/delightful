@@ -1,9 +1,9 @@
-# @delightful/es6-template-strings
+# @bedelightful/es6-template-strings
 
 ES6 Template Strings Parser Engine
 
 [![license][license-badge]][license-link]
-![NPM Version](https://img.shields.io/npm/v/@delightful/es6-template-strings)
+![NPM Version](https://img.shields.io/npm/v/@bedelightful/es6-template-strings)
 [![codecov][codecov-badge]][codecov-link]
 
 [license-badge]: https://img.shields.io/badge/license-apache2-blue.svg

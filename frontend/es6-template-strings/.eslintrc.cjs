@@ -1,7 +1,7 @@
 module.exports = {
 	extends: [
-		"@delightful/eslint-config",
-		"@delightful/eslint-config/typescript",
-		"@delightful/eslint-config/prettier",
+		"@bedelightful/eslint-config",
+		"@bedelightful/eslint-config/typescript",
+		"@bedelightful/eslint-config/prettier",
 	],
 }

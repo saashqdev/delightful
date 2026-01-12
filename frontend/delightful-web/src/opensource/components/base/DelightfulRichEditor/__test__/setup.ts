@@ -1,8 +1,8 @@
 import { vi } from "vitest"
 import React from "react"
 
-// Mock @delightful/upload-sdk
-vi.mock("@delightful/upload-sdk", () => ({
+// Mock @bedelightful/upload-sdk
+vi.mock("@bedelightful/upload-sdk", () => ({
 	default: {
 		MultipartUploader: {
 			create: vi.fn().mockResolvedValue({

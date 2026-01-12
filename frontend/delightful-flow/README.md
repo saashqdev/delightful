@@ -23,7 +23,7 @@ Delightful Flow Foundation Package is an out-of-the-box flow library extracted f
 
 ```bash
 # Install dependency
-npm install @delightful/delightful-flow
+npm install @bedelightful/delightful-flow
 ```
 
 ## 📚 Usage Guide
@@ -106,7 +106,7 @@ Delightful Flow Foundation Package is an out-of-the-box flow foundation library 
 
 ```bash
 # Install dependencies
-npm install @delightful/delightful-flow
+npm install @bedelightful/delightful-flow
 ```
 
 ## 📚 Usage Guide

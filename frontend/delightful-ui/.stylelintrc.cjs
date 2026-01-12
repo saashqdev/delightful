@@ -1,3 +1,3 @@
 module.exports = {
-	extends: ["@delightful/eslint-config/stylelint"],
+	extends: ["@bedelightful/eslint-config/stylelint"],
 }

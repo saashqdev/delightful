@@ -28,7 +28,7 @@
 		"paths": {
 			"@/*": ["./src/*"],
             // Enable when developing delightful-flow synchronously
-            // "@delightful/delightful-flow/*": ["../delightful-flow/*"]
+            // "@bedelightful/delightful-flow/*": ["../delightful-flow/*"]
 		}
 	},
 	"include": ["src/**/*", "types/**/*"],

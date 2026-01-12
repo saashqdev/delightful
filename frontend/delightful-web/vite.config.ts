@@ -75,7 +75,7 @@ export default defineConfig({
 		alias: [
 			// // Enable when developing delightful-flow in sync
 			// {
-			// 	find: "@delightful/delightful-flow",
+			// 	find: "@bedelightful/delightful-flow",
 			//     replacement: join(__dirname, "../delightful-flow"),
 			// },
 		],

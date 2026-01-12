@@ -19,7 +19,7 @@ export function createI18nNext(defaultLang?: string) {
 			resourcesToBackend(async (lng: string, namespace: string) => {
 				if (namespace === "delightfulFlow") {
 					return import(
-						`../../../node_modules/@delightful/delightful-flow/dist/common/locales/${normalizeLocale(
+						`../../../node_modules/@bedelightful/delightful-flow/dist/common/locales/${normalizeLocale(
 							lng,
 						)}/${namespace}.json`
 					)

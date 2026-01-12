@@ -4,7 +4,7 @@ import React from "react"
 import { performance } from "perf_hooks"
 
 // Mock all problematic dependencies first
-vi.mock("@delightful/es6-template-strings", () => ({
+vi.mock("@bedelightful/es6-template-strings", () => ({
 	resolveToString: vi.fn((template, params) => template),
 }))
 

@@ -62,7 +62,7 @@ const baseMockEditor = vi.hoisted(() => ({
 }))
 
 // Mock problematic dependencies
-vi.mock("@delightful/upload-sdk", () => ({
+vi.mock("@bedelightful/upload-sdk", () => ({
 	default: {
 		MultipartUploader: {
 			create: vi.fn().mockResolvedValue({

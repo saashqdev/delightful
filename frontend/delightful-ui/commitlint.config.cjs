@@ -1,3 +1,3 @@
 module.exports = {
-	extends: ["@delightful/eslint-config/commitlint/emoji"],
+	extends: ["@bedelightful/eslint-config/commitlint/emoji"],
 }

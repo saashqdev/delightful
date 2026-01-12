@@ -36,7 +36,7 @@ importers:
       '@babel/eslint-parser':
         specifier: ^7.18.2
         version: 7.28.4(@babel/core@7.28.4)(eslint@8.57.1)
-      '@delightful/eslint-config':
+      '@bedelightful/eslint-config':
         specifier: ~0.0.4
         version: 0.0.11(@types/node@20.19.21)(eslint@8.57.1)(typescript@5.9.3)
       '@semantic-release/changelog':
@@ -984,7 +984,7 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^6.0.13
 
-  '@delightful/eslint-config@0.0.11':
+  '@bedelightful/eslint-config@0.0.11':
     resolution: {integrity: sha512-GK6Ky9ToFfsGaMvSe7TZNTlSd7cveb1Y4AeKFnVbh3lT3ur+3gXWKXm20cJine6hEQFW8rqxq5TAX8wBsYPTvw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -8608,7 +8608,7 @@ snapshots:
     dependencies:
       postcss-selector-parser: 6.1.2
 
-  '@delightful/eslint-config@0.0.11(@types/node@20.19.21)(eslint@8.57.1)(typescript@5.9.3)':
+  '@bedelightful/eslint-config@0.0.11(@types/node@20.19.21)(eslint@8.57.1)(typescript@5.9.3)':
     dependencies:
       '@commitlint/cli': 19.8.1(@types/node@20.19.21)(typescript@5.9.3)
       '@commitlint/config-conventional': 19.8.1

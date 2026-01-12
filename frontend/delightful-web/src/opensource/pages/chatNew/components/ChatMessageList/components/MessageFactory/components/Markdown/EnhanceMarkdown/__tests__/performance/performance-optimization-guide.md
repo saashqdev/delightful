@@ -7,19 +7,19 @@
 ### Baseline Performance Metrics
 - **1MB documentationrender**: 136.98ms ✅ 
 - **2MB documentationrender**: 155.84ms ✅
-- **preprocess效率**: 0.61ms/9,230block ✅
-- **streamingrender**: 20.20ms/block平均 ✅
-- **吞吐量**: 9.25-13.14 KB/ms
-- **memory稳定性**: 无显著泄漏 ✅
+- **Preprocessing efficiency**: 0.61ms/9,230 blocks ✅
+- **Streaming render**: 20.20ms/block average ✅
+- **Throughput**: 9.25-13.14 KB/ms
+- **Memory stability**: No significant leaks ✅
 
-### performance等level评估
-- **✅ 优秀** (< 200ms): 1MB documentation
-- **✅ 良好** (200-500ms): 2MB+ documentation  
-- **⚠️ 需optimization** (500ms+): expected未发生
+### Performance Level Assessment
+- **✅ Excellent** (< 200ms): 1MB documentation
+- **✅ Good** (200-500ms): 2MB+ documentation  
+- **⚠️ Needs Optimization** (500ms+): Not occurred as expected
 
-## 📈 optimization策略路线图
+## 📈 Optimization Strategy Roadmap
 
-### Phase 1: 立即optimization（已validatehas效）
+### Phase 1: Immediate Optimization (Validated Effective)
 
 #### 1.1 preprocesscacheoptimization
 ```typescript
@@ -122,9 +122,9 @@ const useWorkerPreprocess = (content: string) => {
 }
 ```
 
-#### 3.2 智能cache strategy
+#### 3.2 Intelligent Cache Strategy
 ```typescript
-// based ontest results的cache strategy
+// Cache strategy based on test results
 const CacheStrategy = {
   // smalldocumentation (< 500KB): memorycache
   MEMORY_CACHE_LIMIT: 512 * 1024,
@@ -142,11 +142,11 @@ const CacheStrategy = {
 ### Key Performance Indicators (KPI)
 ```typescript
 interface PerformanceMetrics {
-  // based ontest results设定的targetvalue
+  // Target values set based on test results
   renderTime: {
     target: number    // 1MB: < 200ms, 2MB: < 400ms
     current: number
-    threshold: number // 超过thresholdtriggeroptimization
+    threshold: number // Trigger optimization when exceeding threshold
   }
   
   throughput: {
@@ -156,15 +156,15 @@ interface PerformanceMetrics {
   }
   
   memoryUsage: {
-    peak: number      // testin未发现memoryissues
+    peak: number      // No memory issues found in testing
     average: number
     leakDetection: boolean
   }
   
   streamingPerformance: {
-    avgChunkTime: number  // target < 25ms
-    maxChunkTime: number  // target < 40ms
-    consistency: number   // block间performanceone致性
+    avgChunkTime: number  // Target < 25ms
+    maxChunkTime: number  // Target < 40ms
+    consistency: number   // Performance consistency between blocks
   }
 }
 ```
@@ -182,7 +182,7 @@ const usePerformanceMonitoring = () => {
       const duration = performance.now() - start
       const throughput = contentSize / duration
       
-      // based ontest基准进行评估
+      // Evaluate based on test baseline
       const evaluation = {
         renderTime: duration,
         throughput,
@@ -194,49 +194,49 @@ const usePerformanceMonitoring = () => {
   }, [])
 }
 
-// based ontest results的期望timecalculations
+// Expected time calculation based on test results
 const getExpectedTime = (contentSize: number): number => {
   if (contentSize < 512 * 1024) return 60   // 500KB: ~55ms
   if (contentSize < 1024 * 1024) return 140 // 1MB: ~137ms  
   if (contentSize < 2 * 1024 * 1024) return 280 // 2MB: ~156ms
-  return contentSize / 1024 / 1024 * 140 // 线性推算
+  return contentSize / 1024 / 1024 * 140 // Linear extrapolation
 }
 ```
 
-## 🚀 实施recommendations
+## 🚀 Implementation Recommendations
 
-### immediate implementation (本周)
-1. **enablepreprocesscache** - expectedimprovement 30% heavy复renderperformance
-2. **adjustblocksize至 30KB** - based ontestdataoptimizationstreamingrender
-3. **addperformancemonitor** - continuous tracking关键指标
+### Immediate Implementation (This Week)
+1. **Enable preprocess cache** - Expected to improve repeated heavy render performance by 30%
+2. **Adjust block size to 30KB** - Optimize streaming render based on test data
+3. **Add performance monitor** - Continuously track key metrics
 
-### short-term implementation (本月)  
-1. **virtualizedscrolling** - 2MB+ documentation首屏renderimprovement 60%
-2. **progressiveload** - improve user experience，decreaseperceived latency
-3. **memoryoptimization** - althoughtestinperforms well，但prepare for larger documents
+### Short-term Implementation (This Month)  
+1. **Virtualized scrolling** - Improve first screen render by 60% for 2MB+ documents
+2. **Progressive load** - Improve user experience, decrease perceived latency
+3. **Memory optimization** - Although test performance is good, prepare for larger documents
 
 ### long-term planning (quarterly)
 1. **Web Worker integration** - 5MB+ documentationhandling capability
 2. **persistentcache** - reduce repeated large document load time
 3. **performanceanalysis tool** - automatically identifyperformance bottlenecks
 
-## 📊 expected benefits
+## 📋 Expected Benefits
 
-based onCurrenttest resultsandoptimization策略，expectedperformanceimprovement：
+Based on current test results and optimization strategies, expected performance improvements:
 
 - **1MB documentation**: 137ms → 90ms (35% improvement)
 - **2MB documentation**: 156ms → 120ms (23% improvement) 
-- **5MB documentation**: 预计 400ms (Current未test)
-- **streamingrender**: 20ms/block → 15ms/block (25% improvement)
-- **memory效率**: keepCurrent优秀horizontal
-- **user体验**: 显著improve，特别yeslargedocumentationscenario
+- **5MB documentation**: Expected 400ms (not yet tested)
+- **Streaming render**: 20ms/block → 15ms/block (25% improvement)
+- **Memory efficiency**: Maintain current excellent level
+- **User experience**: Significantly improved, especially for large document scenarios
 
 ## 🎯 conclusion
 
-Current EnhanceMarkdown componentwhen handling 1MB largefiletime表现出色，far exceedsexpected。mainoptimizationdirection should focus on：
+The current EnhanceMarkdown component performs excellently when handling 1MB large files, far exceeding expectations. The main optimization direction should focus on:
 
-1. **keepCurrent优秀performance** - throughcacheandmonitor
-2. **extend to largerdocumentationsupport** - virtualizedand Worker  
-3. **improve user experience** - progressiveloadandstreamingoptimization
+1. **Maintain current excellent performance** - Through caching and monitoring
+2. **Extend to larger document support** - Virtualized and Worker  
+3. **Improve user experience** - Progressive load and streaming optimization
 
-componentalready具备了handlelarge型documentation的good foundation，optimization work should beprogressive的improvement而notheavy构。 
+The component already has a good foundation for handling large documents, and optimization work should be progressive improvement rather than heavy restructuring. 

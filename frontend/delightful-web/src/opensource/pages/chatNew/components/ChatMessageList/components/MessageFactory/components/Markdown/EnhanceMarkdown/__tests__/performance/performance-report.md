@@ -2,7 +2,7 @@
 
 ## 📊 performanceanalysis overview
 
-based on `EnhanceMarkdown` component的in-depth analysis，this report identifiesaffectingrenderperformance的key factorsand providestargetedoptimizationrecommendations。
+Based on in-depth analysis of the `EnhanceMarkdown` component, this report identifies key factors affecting render performance and provides targeted optimization recommendations.
 
 ## 🔍 componentarchitectureanalyze
 
@@ -24,9 +24,9 @@ EnhanceMarkdown
 ### 1. PreprocessService preprocessphase (🔴 highaffecting)
 
 **issuesanalyze:**
-- complex正则expressionoperations，especially forlarge文本block
-- multiplestringreplaceand拆分operations
-- LaTeX formulahandling requireslarge number of正则matches
+- Complex regex operations, especially for large text blocks
+- Multiple string replace and split operations
+- LaTeX formula handling requires large number of regex matches
 - tasklisthandleinvolvescomplexnested logic
 
 **time-consuminganalyze:**
@@ -35,7 +35,7 @@ EnhanceMarkdown
 splitBlockCode() // ~5-15ms (largedocumentation)
 processNestedTaskLists() // ~3-8ms
 LaTeXhandle // ~2-5ms
-引用block检测 // ~1-3ms
+Quote block detection // ~1-3ms
 ```
 
 **optimizationrecommendations:**
@@ -56,9 +56,9 @@ const cachedPreprocess = useMemo(() => {
   }
 }, [optionss])
 
-// 2. optimization正则expressionperformance
+// 2. Optimize regex expression performance
 const optimizedRegex = {
-  // usage更efficient正则expression
+  // Use more efficient regex expression
   codeBlock: /```([a-zA-Z0-9_-]*)\s*\n([\s\S]*?)```/g,
   inlineMath: /\$([^$\n]+)\$/g, // simplifiedmathematicalformulamatches
   blockMath: /\$\$\s*\n([\s\S]*?)\n\s*\$\$/g
@@ -76,12 +76,12 @@ function processLargeContent(content: string, chunkSize = 5000) {
 }
 ```
 
-### 2. useMarkdownConfig Hook (🟡 in等affecting)
+### 2. useMarkdownConfig Hook (🟡 Moderate Impact)
 
-**issuesanalyze:**
-- large number of的 `useMemo` dependencymight causeexcessiveheavy新calculations
+**Issue Analysis:**
+- Large number of `useMemo` dependencies might cause excessive recalculations
 - componentoverrideconfiguration creates complexity
-- every time props changes willheavy新build configuration
+- Every time props change will rebuild configuration
 
 **optimizationrecommendations:**
 ```typescript
@@ -109,20 +109,20 @@ const MemoizedLatexInline = memo(({ math }: { math: string }) => {
   return <KaTeX math={decodedMath} inline={true} />
 })
 
-// 3. decreaseconfigurationheavy建频率
-const optionss = useMemo<MarkdownToJSX.Options>(() => {
+// 3. Reduce configuration rebuild frequency
+const options = useMemo<MarkdownToJSX.Options>(() => {
   return {
     overrides,
     forceWrapper: true,
     disableParsingRawHTML: !allowHtml
   }
-}, [overrides, allowHtml]) // decreasedependency项
+}, [overrides, allowHtml]) // Reduce dependency items
 ```
 
-### 3. useTyping streamingrender (🟡 in等affecting)
+### 3. useTyping Streaming Render (🟡 Moderate Impact)
 
-**issuesanalyze:**
-- 频繁的status updatescausemultipleheavy新render
+**Issue Analysis:**
+- Frequent status updates cause multiple re-renders
 - animation effectsmightaffectingperformance
 - stringconcatenationoperationsrelativelymany
 
@@ -158,10 +158,10 @@ const batchedTyping = useCallback((text: string) => {
   })
 }, [])
 
-// 3. virtualizedlong文本
+// 3. Virtualize long text
 const VirtualizedMarkdown = memo(({ content }: { content: string }) => {
   const chunks = useMemo(() => {
-    // 将long文本chunking，onlyrendervisiblepart
+    // Chunk long text, only render visible part
     return content.split('\n\n').map((chunk, index) => ({
       id: index,
       content: chunk
@@ -235,7 +235,7 @@ const VirtualizedList = ({ items }: { items: any[] }) => {
 // 1. addpreprocesscache
 const PreprocessCache = new Map<string, string[]>()
 
-// 2. optimization正则expression
+// 2. Optimize regex expression
 const OPTIMIZED_REGEXES = {
   codeBlock: /```(\w*)\n([\s\S]*?)```/g,
   inlineMath: /\$([^$\n]+)\$/g,
@@ -264,7 +264,7 @@ function processInChunks(content: string) {
 }
 ```
 
-### Phase 2: componentleveloptimization (mid-term实施)
+### Phase 2: Component Level Optimization (Mid-term Implementation)
 
 ```typescript
 // 1. componentmemoization
@@ -290,7 +290,7 @@ const useOptimizedMarkdownConfig = (props: MarkdownProps) => {
   }), [stableOptions, dynamicOptions])
 }
 
-// 3. batchupdate
+// 3. Batch updates
 const useBatchedUpdates = (callback: Function) => {
   return useCallback((...args: any[]) => {
     unstable_batchedUpdates(() => callback(...args))
@@ -298,7 +298,7 @@ const useBatchedUpdates = (callback: Function) => {
 }
 ```
 
-### Phase 3: advancedoptimization (long期实施)
+### Phase 3: Advanced Optimization (Long-term Implementation)
 
 ```typescript
 // 1. Web Workers handle complex documents
@@ -415,4 +415,4 @@ throughimplementing aboveoptimizationapproach，expectedcan achieve：
 3. **streamingrendersmoother**
 4. **largedocumentationhandling capabilityenhancement**
 
-recommendationsaccording tothree phasesgradually implementoptimization，and throughperformancemonitorvalidateoptimizationeffectiveness。heavy点关注preprocessphaseandcomponentmemoization的optimization，these two aspectscan bringmost significantperformanceimprovement。 
+Recommendations: gradually implement optimization according to three phases, and validate optimization effectiveness through performance monitoring. Focus on preprocessing phase and component memoization optimization - these two aspects can bring the most significant performance improvements. 

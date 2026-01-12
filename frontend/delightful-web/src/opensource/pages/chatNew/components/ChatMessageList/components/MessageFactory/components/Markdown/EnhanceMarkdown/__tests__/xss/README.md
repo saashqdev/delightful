@@ -98,62 +98,62 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 // script in SVG
 '<svg><script>window.xssSvg = true;</script></svg>'
 
-// 零wide字符绕过
+// Zero-width character bypass
 '<scr\u200Bipt>window.xssZeroWidth = true;</scr\u200Bipt>'
 ```
 
-### 7. Polyglot XSS Attacks (many语言 XSS 攻击)
+### 7. Polyglot XSS Attacks (Polyglot XSS Attacks)
 
 ```typescript
-// many语言载荷
+// Polyglot payload
 'javascript:/*--></title></style></textarea></script></xmp><svg/onload=\'window.xssPolyglot=true\'>'
 
-// top下文破坏
+// Context breaking
 '"></script><script>window.xssContextBreak = true;</script>'
 ```
 
-### 8. Filter Evasion Techniques (filter器绕过technology)
+### 8. Filter Evasion Techniques (Filter Evasion Techniques)
 
 ```typescript
-// comment绕过
+// Comment bypass
 '<scr<!---->ipt>window.xssComment = true;</scr<!---->ipt>'
 
-// 换行绕过
+// Newline bypass
 '<scr\nipt>window.xssNewline = true;</scr\nipt>'
 
-// 制表符绕过
+// Tab character bypass
 '<scr\tipt>window.xssTab = true;</scr\tipt>'
 ```
 
-### 9. Markdown-specific Attack Vectors (Markdown 特定攻击vector)
+### 9. Markdown-specific Attack Vectors (Markdown-specific Attack Vectors)
 
 ```typescript
-// 恶意引用link
+// Malicious reference link
 `[Click here][malicious]
 [malicious]: javascript:window.xssReference = true;`
 
-// codeblockin的 HTML
+// HTML in code block
 '```html\n<script>window.xssCodeBlock = true;</script>\n```'
 
-// 内联codein的script
+// Script in inline code
 'This is `<script>window.xssInlineCode = true;</script>` inline code'
 ```
 
-### 10. LaTeX Injection Security (LaTeX 注入安all)
+### 10. LaTeX Injection Security (LaTeX Injection Security)
 
 ```typescript
-// LaTeX in的link
+// LaTeX link
 '$\\href{javascript:window.xssLatex=true}{Click}$'
 
-// LaTeX command注入
+// LaTeX command injection
 '$$\\begin{document}\\href{javascript:window.xssLatexCmd=true}{text}\\end{document}$$'
 ```
 
-## 安allconfigurationtest
+## Security Configuration Tests
 
-### allowHtml=false 安alltest
+### allowHtml=false Security Test
 
-确保when `allowHtml` settingsfor `false` time，HTML content被correct转义：
+Ensure that when `allowHtml` is set to `false`, HTML content is correctly escaped:
 
 ```typescript
 {
@@ -162,9 +162,9 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 }
 ```
 
-### streamingrender安alltest
+### Streaming Render Security Test
 
-确保atstreamingrender过程in的contentupdate不会引入安all风险：
+Ensure that content updates during the streaming render process do not introduce security risks:
 
 ```typescript
 {
@@ -173,9 +173,9 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 }
 ```
 
-### customcomponent安alltest
+### Custom Component Security Test
 
-testcustomcomponentconfiguration不会被恶意利用：
+Test that custom component configuration cannot be maliciously exploited:
 
 ```typescript
 {
@@ -185,36 +185,36 @@ testcustomcomponentconfiguration不会被恶意利用：
 }
 ```
 
-## performanceandresource安alltest
+## Performance and Resource Security Tests
 
-### memory耗尽防护
+### Memory Exhaustion Protection
 
 ```typescript
-// extra largecontent
+// Extra large content
 const largeContent = '<script>window.xssLarge = true;</script>'.repeat(10000)
 
-// depth嵌套
+// Deep nesting
 let nestedContent = '<script>window.xssNested = true;</script>'
 for (let i = 0; i < 100; i++) {
   nestedContent = `<div>${nestedContent}</div>`
 }
 ```
 
-### 递归structure防护
+### Recursive Structure Protection
 
 ```typescript
-// 递归 Markdown structure
+// Recursive Markdown structure
 let recursiveMarkdown = '<script>window.xssRecursive = true;</script>'
 for (let i = 0; i < 50; i++) {
   recursiveMarkdown = `> ${recursiveMarkdown}`
 }
 ```
 
-## error handling安alltest
+## Error Handling Security Tests
 
-### sensitiveinformation泄露防护
+### Sensitive Information Leak Protection
 
-确保error handling过程in不会泄露sensitiveinformation：
+Ensure that sensitive information is not leaked during error handling:
 
 ```typescript
 const problematicContent = '<script>throw new Error("XSS attempt: " + document.cookie);</script>'
@@ -226,70 +226,70 @@ const problematicContent = '<script>throw new Error("XSS attempt: " + document.c
 const invalidUnicode = '\uD800<script>window.xssInvalidUnicode = true;</script>\uDFFF'
 ```
 
-## CSP (Content Security Policy) 合规性test
+## CSP (Content Security Policy) Compliance Tests
 
-### 内联样式check
+### Inline Style Check
 
-确保component不会create违反 CSP 的内联样式：
+Ensure that the component does not create inline styles that violate CSP:
 
 ```typescript
 const contentWithInlineStyles = '<div style="background: red; color: blue;">Test</div>'
 ```
 
-### dynamicscript元素check
+### Dynamic Script Element Check
 
-确保component不会createdynamicscript元素：
+Ensure that the component does not create dynamic script elements:
 
 ```typescript
 const maliciousContent = '<script>window.xssCSP = true;</script>'
-// validatepageinnot existinclude恶意code的script元素
+// Validate that the page does not contain script elements with malicious code
 ```
 
-## testexecuteguide
+## Test Execution Guide
 
-### runtest
+### Run Tests
 
 ```bash
-# runbasic安alltest
+# Run basic security tests
 npm test -- __tests__/security.test.tsx
 
-# runadvanced安alltest
+# Run advanced security tests
 npm test -- __tests__/advanced-security.test.tsx
 
-# runconfiguration安alltest
+# Run configuration security tests
 npm test -- __tests__/security-config.test.tsx
 ```
 
-### testcoverage
+### Test Coverage
 
-recommendations这些安alltestshouldoverrideby下scenario：
+Recommend these security tests should cover the following scenarios:
 
-1. **normalflow**：确保normal的 Markdown content能够correctrender
-2. **边界情况**：emptycontent、empty/undefined content
-3. **恶意input**：各种 XSS 攻击vector
-4. **configurationgroup合**：different的propertyconfigurationgroup合
-5. **performance极限**：large number ofdataanddepth嵌套
-6. **error handling**：exception情况的安allhandle
+1. **Normal flow**: Ensure normal Markdown content can be correctly rendered
+2. **Edge cases**: Empty content, null/undefined content
+3. **Malicious input**: Various XSS attack vectors
+4. **Configuration combinations**: Different property configuration combinations
+5. **Performance limits**: Large amounts of data and deep nesting
+6. **Error handling**: Secure handling of exception situations
 
-## 安allrecommendations
+## Security Recommendations
 
-### 开发recommendations
+### Development Recommendations
 
-1. **default安all**：default情况下shoulddisable HTML render
-2. **inputvalidate**：对alluserinput进行严格validate
-3. **outputencoding**：确保alloutput都经过适when的encoding
-4. **CSP 策略**：实施严格的content安all策略
-5. **定期审计**：定期进行安all审计andtest
+1. **Default security**: Should disable HTML rendering by default
+2. **Input validation**: Strictly validate all user input
+3. **Output encoding**: Ensure all output goes through appropriate encoding
+4. **CSP policy**: Implement strict Content Security Policy
+5. **Regular audits**: Conduct regular security audits and tests
 
-### 生产deployrecommendations
+### Production Deployment Recommendations
 
-1. **monitor告警**：settings安alleventmonitorand告警
-2. **log记录**：记录all可疑的inputandrendertry
-3. **versionupdate**：及timeupdatedependency库byfix安all漏洞
-4. **permissioncontrol**：实施适when的userpermissioncontrol
+1. **Monitoring alerts**: Set up security event monitoring and alerts
+2. **Log recording**: Record all suspicious input and render attempts
+3. **Version updates**: Timely update dependency libraries to fix security vulnerabilities
+4. **Permission control**: Implement appropriate user permission control
 
-## conclusion
+## Conclusion
 
-这个安alltest套件提供了comprehensive的 XSS 攻击防护test，涵盖了frombasic的script注入toadvanced的many语言攻击vector。through这些test，can确保 `EnhanceMarkdown` componentat各种攻击scenario下都能keep安all性。
+This security test suite provides comprehensive XSS attack protection tests, covering from basic script injection to advanced polyglot attack vectors. Through these tests, we can ensure the `EnhanceMarkdown` component maintains security under various attack scenarios.
 
-定期run这些test，并based on新发现的攻击vector及timeupdatetestuse case，ismaintaincomponent安all性的heavy要措施。 
+Regularly running these tests and updating test cases based on newly discovered attack vectors are important measures to maintain component security. 

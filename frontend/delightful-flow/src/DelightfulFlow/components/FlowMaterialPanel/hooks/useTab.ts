@@ -28,7 +28,7 @@ export default function useTab () {
 	})
 
 
-	//  When前tablist
+	//  Whenfronttablist
 	const tabList = useMemo(() => {
 		return [
 			{
@@ -55,7 +55,7 @@ export default function useTab () {
 	}, [ changeTab ])
 
 	// [[FC_1, show_1], [FC_2, show_2]]
-	//  这样子returnofdirectoryof是avoid each time点击tab都renewrender，throughdisplay控制whether显示
+	//  这样子returnofdirectoryofisavoid each time点击tab都renewrender，throughdisplaycontrolwhethershow
 	const tabContents = useMemo(() => {
 		return Object.entries(TabContentMap)
 			.map(([ curTab, Comp ]) => ([ Comp, tab === curTab ]))

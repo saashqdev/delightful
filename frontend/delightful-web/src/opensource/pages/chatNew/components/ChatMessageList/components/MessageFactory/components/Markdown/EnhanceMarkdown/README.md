@@ -1,56 +1,56 @@
-# DelightfulMarkdown 魔法 Markdown 渲染component
+# DelightfulMarkdown 魔法 Markdown rendercomponent
 
-`DelightfulMarkdown` 是一个功能强大的 Markdown 渲染component，based on react-markdown，支持代码高亮、LaTeX 公式、HTML 内容等多种扩展功能。
+`DelightfulMarkdown` yes一个functionalitystronglarge的 Markdown rendercomponent，based on react-markdown，support代码high亮、LaTeX formula、HTML content等many种extensionfunctionality。
 
 ## property
 
-| property名             | class型    | 默认值 | description                             |
+| property名             | class型    | defaultvalue | description                             |
 | ------------------ | ------- | ------ | -------------------------------- |
-| content            | string  | -      | 要渲染的 Markdown 内容           |
-| allowHtml          | boolean | true   | 是否允许渲染 HTML 内容           |
-| enableLatex        | boolean | true   | 是否启用 LaTeX 公式支持          |
-| isSelf             | boolean | false  | 是否为自己发送的内容（影响样式） |
-| hiddenDetail       | boolean | false  | 是否隐藏详细内容                 |
-| isStreaming        | boolean | false  | 是否为流式渲染模式               |
-| ...MarkdownOptions | -       | -      | 支持所有 react-markdown 的option   |
+| content            | string  | -      | 要render的 Markdown content           |
+| allowHtml          | boolean | true   | yesnoallowrender HTML content           |
+| enableLatex        | boolean | true   | yesnoenable LaTeX formulasupport          |
+| isSelf             | boolean | false  | yesno为自己send的content（影响样式） |
+| hiddenDetail       | boolean | false  | yesnohidedetailedcontent                 |
+| isStreaming        | boolean | false  | yesno为流式renderpattern               |
+| ...MarkdownOptions | -       | -      | supportall react-markdown 的option   |
 
-## 基础用法
+## basic用法
 
 ```tsx
 import { DelightfulMarkdown } from '@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown';
 
-// 基础用法
-<DelightfulMarkdown content="# 标题\n这是一段普通文本" />
+// basic用法
+<DelightfulMarkdown content="# title\n这yes一段普通文本" />
 
-// 启用 LaTeX 公式
+// enable LaTeX formula
 <DelightfulMarkdown
-  content="爱因斯坦质能方程：$E=mc^2$"
+  content="爱因斯坦质能equation：$E=mc^2$"
   enableLatex
 />
 
-// 允许 HTML 内容
+// allow HTML content
 <DelightfulMarkdown
-  content="这是一个<span style='color:red'>红色</span>文本"
+  content="这yes一个<span style='color:red'>红色</span>文本"
   allowHtml
 />
 
-// 流式渲染（适用于打字机效果）
+// 流式render（适用in打字机效果）
 <DelightfulMarkdown
-  content="正在生成的内容..."
+  content="isgenerate的content..."
   isStreaming
 />
 
-// 自定义component
+// customcomponent
 <DelightfulMarkdown
-  content="# 自定义标题"
+  content="# customtitle"
   components={{
     h1: ({ node, ...props }) => <h1 style={{ color: 'blue' }} {...props} />
   }}
 />
 
-// 使用自定义插件
+// 使用customplugin
 <DelightfulMarkdown
-  content="内容"
+  content="content"
   remarkPlugins={[myCustomPlugin]}
   rehypePlugins={[myCustomRehypePlugin]}
 />
@@ -58,28 +58,28 @@ import { DelightfulMarkdown } from '@/opensource/pages/chatNew/components/ChatMe
 
 ## 特点
 
-1. **丰富的format支持**：支持标准 Markdown 语法，包括标题、list、table、代码块等
-2. **代码高亮**：内置代码语法高亮功能
-3. **LaTeX 公式**：支持数学公式渲染
-4. **HTML 内容**：可以安全地渲染 HTML 内容
-5. **流式渲染**：支持流式内容的平滑渲染
-6. **自定义component**：可以自定义各种 Markdown 元素的渲染方式
-7. **插件系统**：支持 remark 和 rehype 插件扩展功能
+1. **丰富的formatsupport**：supportstandard Markdown 语法，package括title、list、table、代码块等
+2. **代码high亮**：内置代码语法high亮functionality
+3. **LaTeX formula**：support数学formularender
+4. **HTML content**：can安all地render HTML content
+5. **流式render**：support流式content的smoothrender
+6. **customcomponent**：cancustom各种 Markdown 元素的render方式
+7. **pluginsystem**：support remark 和 rehype pluginextensionfunctionality
 
 ## 内置component
 
-DelightfulMarkdown 内置了多个optimization的component用于渲染特定的 Markdown 元素：
+DelightfulMarkdown 内置了multipleoptimization的component用inrender特定的 Markdown 元素：
 
--   `A`：optimization的链接component，支持外部链接安全打开
--   `Code`：代码块和行内代码component，支持语法高亮
--   `Pre`：代码块容器component，支持复制代码功能
--   `Sup`：上标component
+-   `A`：optimization的linkcomponent，supportoutsidelink安allopen
+-   `Code`：代码块和行内代码component，support语法high亮
+-   `Pre`：代码块容器component，supportcopy代码functionality
+-   `Sup`：top标component
 
-## 何时使用
+## 何time使用
 
--   需要渲染 Markdown format内容时
--   需要在应用中展示富文本内容时
--   需要支持代码高亮和数学公式时
--   需要流式渲染内容（如聊天机器人回复）时
+-   needrender Markdown formatcontenttime
+-   needatapplication中展示富文本contenttime
+-   needsupport代码high亮和数学formulatime
+-   need流式rendercontent（如聊天机器人回复）time
 
-DelightfulMarkdown component让你的 Markdown 内容展示更加美观和功能丰富，适合在各种需要富文本展示的场景下使用。
+DelightfulMarkdown component让你的 Markdown content展示更add美观和functionality丰富，适合at各种need富文本展示的scenario下使用。

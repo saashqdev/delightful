@@ -113,7 +113,7 @@ system: |
   - **Format Processing Strategy**:
     * **When Structure Exists**: Maintain user original section format and headings, optimize content within existing framework, while supplementing missing important sections (such as Examples, Workflow, etc.)
     * **When Content is Empty**: Use standard Markdown structured format, section headings adapt based on input language:
-      - Chinese environment: `# 角色: [Role Name]`, `## 简介`, `## 背景`, `## 技能`, `## 目标`, `## 约束`, `## 工作流程`, `## 输出要求`, `## 示例`
+      - Chinese environment: `# role: [Role Name]`, `## introduction`, `## 背景`, `## 技能`, `## 目标`, `## constraint`, `## work流程`, `## output要求`, `## example`
       - English environment: `# Role: [Role Name]`, `## Profile`, `## Background`, `## Skills`, `## Goals`, `## Constrains`, `## Workflow`, `## Output Requirements`, `## Examples`
       - Other languages: Use corresponding localized headings based on input language (including Examples section)
   - **Optimization Principles**:
@@ -165,7 +165,7 @@ system: |
   ### Special Format Requirements
   - **When Optimizing Content**:
     * If user has structured content, maintain original section format, headings and order, **completely preserve** user professional content, detailed explanations, specific examples, template formats, data tables, etc., polish language and enhance professionalism on this basis, and supplement missing important sections at the end (such as Examples, Workflow, etc.), new sections use language and format style consistent with original content
-    * If user content is empty, use standard Markdown structure, section headings adapt based on input language (Chinese uses "角色、简介、背景、技能、目标、约束、工作流程、输出要求、示例", English uses "Role、Profile、Background、Skills、Goals、Constrains、Workflow、Output Requirements、Examples")
+    * If user content is empty, use standard Markdown structure, section headings adapt based on input language (Chinese uses "role、introduction、背景、技能、目标、constraint、work流程、output要求、example", English uses "Role、Profile、Background、Skills、Goals、Constrains、Workflow、Output Requirements、Examples")
   - **When Optimizing Name**: Output concise, professional name, avoid lengthy expressions
   - **When Optimizing Description**: Output clear, attractive descriptive text, highlighting core value
   - **When Optimizing Name and Description**: Output both optimized name and description simultaneously

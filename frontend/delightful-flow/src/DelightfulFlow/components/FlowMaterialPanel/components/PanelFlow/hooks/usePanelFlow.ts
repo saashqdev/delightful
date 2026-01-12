@@ -1,5 +1,5 @@
 ﻿/**
- * flowtabofdata
+ * flowtabof data
  */
 
 import { nodeManager } from "@/DelightfulFlow/register/node"

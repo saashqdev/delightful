@@ -22,7 +22,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
   const { paramsName } = useExternalConfig()
 
   const onAddItem = useMemoizedFn(() => {
-    //  Whenaddloop体of时候，实际addof元素是多itemof
+    //  Whenaddloop体oftime候，actualaddof元素yesmanyitemof
     const newNodes = []
     const newEdges = [] as Edge[]
     // whetherat divisiongroupinsideaddnode
@@ -44,7 +44,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
     const newNode = generateNewNode(currentNodeSchema, paramsName, id, position)
 
     if (isAddInGroup) {
-      //  forhandlewhenat divisiongroupbodynewincreasenode后，continuenewincreasenode应该还是at divisiongroupinside
+      //  forhandlewhenat divisiongroupbodynewincreasenodeback，continuenewincreasenodeshould还yesat divisiongroupinside
       const parentId = isLoopBody ? selectedNodeId || undefined : selectedNode?.parentId
       newNode.parentId = parentId
       newNode.expandParent = true
@@ -60,7 +60,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
 
     newNodes.push(newNode)
     const edges = reactflow?.getEdges?.() || []
-    //  Ifnewincreaseof是loop，then需要多newincreaseCHSitemloop体 and CHS条边
+    //  Ifnewincreaseofyesloop，thenneedmanynewincreaseCHSitemloop体 and CHS条边
     if (judgeLoopNode(newNode[paramsName.nodeType])) {
       const { newNodes: bodyNodes, newEdges: bodyEdges } = generateLoopBody(
         newNode,

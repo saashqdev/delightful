@@ -22,7 +22,7 @@ const PanelMaterial = React.memo(
 		//  useuseCallbackoptimizationrenderMaterialItemfunction，避免不必要ofrenewcreate
 		const renderMaterialItem = useCallback(
 			(n: any, extraProps: Record<string, any> = {}) => {
-				//  use解构赋valuegetschemainofproperty
+				//  use解构赋valuegetschemainof property
 				const { key, headerRight, ...restSchema } = n.schema
 				//  createCHSitem固定ofkey，avoid each timerendergeneratenewstring
 				const itemKey = key || `item-${restSchema?.id}`
@@ -33,7 +33,7 @@ const PanelMaterial = React.memo(
 			[MaterialItemFn],
 		)
 
-		//  useuseMemooptimizationnodelistrender，只在nodeList或MaterialItemFn变化时renewcalculate
+		//  useuseMemooptimizationnodelistrender，只atnodeListorMaterialItemFn变化timerenewcalculate
 		const renderedNodeList = useMemo(() => {
 			return nodeList.map((n, i) => {
 				const { key, headerRight, ...restSchema } = n.schema

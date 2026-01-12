@@ -1,8 +1,12 @@
 {
-	"compilerOptions": {
-		"composite": true,
-		"module": "ESNext",
-		"moduleResolution": "node"
-	},
-	"include": ["tsup.config.ts", ".eslintrc.cjs", ".prettierrc.cjs"]
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "node"
+  },
+  "include": [
+    "tsup.config.ts",
+    ".eslintrc.cjs",
+    ".prettierrc.cjs"
+  ]
 }

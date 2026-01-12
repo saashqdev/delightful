@@ -1,9 +1,9 @@
 {
-	"interface": {
-		"home": {},
-		"login": {}
-	},
-	"userSetting": {
-		"addMember": "Add to"
-	}
+  "interface": {
+    "home": {},
+    "login": {}
+  },
+  "userSetting": {
+    "addMember": "Add to"
+  }
 }

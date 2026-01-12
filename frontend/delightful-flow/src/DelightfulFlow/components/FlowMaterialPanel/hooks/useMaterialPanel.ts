@@ -2,7 +2,7 @@
 import { useFlowUI } from "@/DelightfulFlow/context/FlowContext/useFlow"
 
 export default function useMaterialPanel() {
-	//  use专用ofhook替代全量useFlow，减少不必要ofrerender
+	//  use专用ofhook替代all量useFlow，decrease不必要ofrerender
 	const { showMaterialPanel, setShowMaterialPanel } = useFlowUI()
 	const [isEditing, setIsEditing] = useState(false)
 

@@ -2,28 +2,28 @@
 
 ## component介绍
 
-LoginServiceProvider 是一个 React Context Provider component，用于管理登录服务的status和逻辑。它主要负责handle不同部署environment（公有云和私有云）下的登录flow，并提供相关的上下文数据和method给子component使用。
+LoginServiceProvider isone个 React Context Provider component，用inmanageloginservice的status和logic。它main负责handledifferentdeployenvironment（公have云和private云）下的loginflow，并提供related的上下文data和method给子component使用。
 
-## 主要功能
+## mainfunctionality
 
--   管理登录部署environment（公有云/私有云）
--   提供登录服务实例（LoginService）给子component
--   管理集群代码（clusterCode）status
+-   managelogindeployenvironment（公have云/private云）
+-   提供loginserviceinstance（LoginService）给子component
+-   managecluster代码（clusterCode）status
 -   提供environment切换能力
 
-## 数据结构
+## data结构
 
 ```typescript
 interface LoginServiceStore {
-	// 登录服务实例
+	// loginserviceinstance
 	service: LoginService
-	// 当前部署environmentclass型（公有云/私有云）
+	// when前deployenvironmentclass型（公have云/private云）
 	deployment: LoginDeployment
-	// settings部署environment
+	// settingsdeployenvironment
 	setDeployment: (deployment: LoginDeployment) => void
-	// 集群代码（私有部署时使用）
+	// cluster代码（privatedeploytime使用）
 	clusterCode: string | null
-	// settings集群代码
+	// settingscluster代码
 	setDeployCode: (clusterCode: string) => void
 }
 ```
@@ -36,29 +36,29 @@ interface LoginServiceStore {
 import { LoginServiceProvider } from "./LoginServiceProvider"
 import { LoginService } from "@/services/user/LoginService"
 
-// create登录服务实例
+// createloginserviceinstance
 const loginService = new LoginService(apis, serviceContainer)
 
 function App() {
 	return (
 		<LoginServiceProvider service={loginService}>
-			{/* 子component可以通过 useLoginServiceContext get上下文 */}
+			{/* 子componentcanthrough useLoginServiceContext get上下文 */}
 			<YourLoginComponent />
 		</LoginServiceProvider>
 	)
 }
 ```
 
-### 使用 HOC 包装component
+### 使用 HOC package装component
 
 ```tsx
 import { withLoginService } from "./withLoginService"
 import { LoginService } from "@/services/user/LoginService"
 
-// create登录服务实例
+// createloginserviceinstance
 const loginService = new LoginService(apis, serviceContainer)
 
-// 使用 HOC 包装component
+// 使用 HOC package装component
 const WrappedComponent = withLoginService(YourComponent, loginService)
 
 function App() {
@@ -66,7 +66,7 @@ function App() {
 }
 ```
 
-### 在子component中使用上下文
+### at子component中使用上下文
 
 ```tsx
 import { useLoginServiceContext } from "./useLoginServiceContext"
@@ -77,7 +77,7 @@ function LoginComponent() {
 		useLoginServiceContext()
 
 	const handleLogin = async () => {
-		// 使用 service 进行登录operation
+		// 使用 service 进行loginoperation
 		// ...
 	}
 
@@ -87,7 +87,7 @@ function LoginComponent() {
 
 	return (
 		<div>
-			{/* 根据部署environment渲染不同的登录interface */}
+			{/* 根据deployenvironmentrenderdifferent的logininterface */}
 			{deployment === LoginDeployment.PublicDeploymentLogin ? (
 				<PublicLoginForm onLogin={handleLogin} />
 			) : (
@@ -98,7 +98,7 @@ function LoginComponent() {
 				/>
 			)}
 
-			<button onClick={switchToPrivateDeployment}>切换到私有部署登录</button>
+			<button onClick={switchToPrivateDeployment}>切换toprivatedeploylogin</button>
 		</div>
 	)
 }
@@ -106,6 +106,6 @@ function LoginComponent() {
 
 ## note事项
 
--   LoginServiceProvider 应当放置在需要访问登录服务的component树的顶部
--   切换部署environment时会自动handle clusterCode 的清除和恢复
--   在私有部署模式下，会从缓存中恢复上次使用的 clusterCode
+-   LoginServiceProvider 应when放置atneed访问loginservice的component树的top
+-   切换deployenvironmenttime会自动handle clusterCode 的清除和resume
+-   atprivatedeploypattern下，会fromcache中resume上次使用的 clusterCode

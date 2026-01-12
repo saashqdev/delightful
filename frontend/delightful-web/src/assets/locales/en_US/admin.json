@@ -1,21 +1,21 @@
 {
-	"title": "Delightful Admin Dashboard",
-	"nav": {
-		"enterprise": "Enterprise Management",
-		"ai": "AI Management",
-		"function": "Function Management",
-		"application": "Application Management",
-		"iam": "IAM Configuration",
-		"security": "Security Control",
-		"cost": "Cost Center",
-		"aiSubMenu": {
-			"functionConfig": "Function Configuration",
-			"modelManagement": "Large Model Management",
-			"intelligentDrawing": "Intelligent Drawing Management",
-			"intelligentInteraction": "Intelligent Interaction",
-			"agentManage": "Agent Management",
-			"dataStatistics": "Data Statistics"
-		},
-		"collapseNav": "Collapse Navigation"
-	}
+  "title": "Delightful Admin Dashboard",
+  "nav": {
+    "enterprise": "Enterprise Management",
+    "ai": "AI Management",
+    "function": "Function Management",
+    "application": "Application Management",
+    "iam": "IAM Configuration",
+    "security": "Security Control",
+    "cost": "Cost Center",
+    "aiSubMenu": {
+      "functionConfig": "Function Configuration",
+      "modelManagement": "Large Model Management",
+      "intelligentDrawing": "Intelligent Drawing Management",
+      "intelligentInteraction": "Intelligent Interaction",
+      "agentManage": "Agent Management",
+      "dataStatistics": "Data Statistics"
+    },
+    "collapseNav": "Collapse Navigation"
+  }
 }

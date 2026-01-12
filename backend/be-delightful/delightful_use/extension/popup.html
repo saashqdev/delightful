@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>浏览器数据传输</title>
+  <title>浏览器data传输</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
-    <h2>数据提取</h2>
+    <h2>data提取</h2>
     <div class="section">
       <div class="checkbox-row">
         <input type="checkbox" id="extract-localStorage" checked>
@@ -15,21 +15,21 @@
       </div>
       <div class="checkbox-row">
         <input type="checkbox" id="extract-cookies" checked>
-        <label for="extract-cookies">Cookies (包含 HttpOnly)</label>
+        <label for="extract-cookies">Cookies (include HttpOnly)</label>
       </div>
-      <button id="extract-btn" class="btn">提取数据并download</button>
+      <button id="extract-btn" class="btn">提取data并download</button>
     </div>
 
-    <h2>数据import</h2>
+    <h2>dataimport</h2>
     <div class="section">
       <div class="note">
-        <strong>note：</strong> importoperation会覆盖当前网站上同名的localStorage项和Cookie。
-        Cookie的domain, path等property将根据importfile中的值尝试settings，但可能受浏览器限制。
+        <strong>note：</strong> importoperation会覆盖when前网站上同名的localStorage项和Cookie。
+        Cookie的domain, path等property将根据importfile中的valuetrysettings，但might受浏览器limit。
       </div>
-      <textarea id="import-area" placeholder="将 storage_state.json format的数据粘贴到此处..."></textarea>
-      <label for="import-file" class="btn file-label">或选择fileimport</label>
+      <textarea id="import-area" placeholder="将 storage_state.json format的datapasteto此处..."></textarea>
+      <label for="import-file" class="btn file-label">orselectfileimport</label>
       <input type="file" id="import-file" accept=".json" style="display: none;">
-      <button id="import-btn" class="btn">import数据</button>
+      <button id="import-btn" class="btn">importdata</button>
     </div>
 
     <div id="status-area"></div>

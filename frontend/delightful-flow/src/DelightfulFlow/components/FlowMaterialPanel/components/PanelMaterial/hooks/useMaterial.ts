@@ -11,7 +11,7 @@ type MaterialProps = {
 }
 
 export default function useMaterial ({ keyword }: MaterialProps) {
-    //  cachenodeListof结果，avoid each timerender时都createnew引用
+    //  cachenodeListof结果，avoid each timerendertime都createnew引用
     const nodeList = getExecuteNodeList()
 
     const { flow } = useFlowData()
@@ -28,7 +28,7 @@ export default function useMaterial ({ keyword }: MaterialProps) {
 		})
 	})
 
-	//  Filter出有nodedataofdividegrouplist，并往里边塞nodeofschema
+	//  Filter出hasnodedataofdividegrouplist，并往里边塞nodeofschema
 	const filterNodeGroups = useMemo(() => {
 		const allNodeGroups = getNodeGroups()
 		return allNodeGroups.map(nodeGroup => {

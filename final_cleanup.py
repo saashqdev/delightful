@@ -10,14 +10,14 @@ final_translations = {
     "itemunique": "unique",
     "ofparameter": "of parameter",
     "prefixfor": "prefix for",
-    "for空": "for empty",
+    "fornull": "for empty",
     "thenreturnof": "then return of",
     "more_entropybof": "more_entropy of",
-    "thenreturnofstring": "then return string",
+    "thenreturnof string": "then return string",
     "settingsfor": "set to",
-    "会在returnof": "will add to return",
-    "结尾increase加": "end; add",
-    "加额外of": "add extra",
+    "会atreturnof": "will add to return",
+    "结尾increaseadd": "end; add",
+    "add额外of": "add extra",
     "（use": "(use",
     "group合": "generator",
     "发生器）": "generator)",
@@ -26,8 +26,8 @@ final_translations = {
     "unique性": "uniqueness",
     
     # From other files
-    "在分": "in division",
-    "避免每次": "avoid each",
+    "at分": "in division",
+    "避免every time": "avoid each",
     "rerender": "re-render",
     "onlyCompare": "only compare",
     "onlyWhen": "only when",
@@ -45,8 +45,8 @@ final_translations = {
     
     # Simple replacements
     "无": "none",
-    "有": "has",
-    "一": "a",
+    "has": "has",
+    "one": "a",
 }
 
 def translate_file(filepath):
@@ -76,7 +76,7 @@ def translate_file(filepath):
 
 def main():
     """Main function"""
-    base_dir = "c:\\Users\\kubew\\magic\\frontend\\delightful-flow\\src\\DelightfulFlow"
+    base_dir = "c:\\Users\\kubew\\magic"
     
     count = 0
     for pattern in ['**/*.ts', '**/*.tsx']:

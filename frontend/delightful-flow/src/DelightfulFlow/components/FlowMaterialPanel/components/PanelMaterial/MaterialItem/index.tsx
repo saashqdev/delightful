@@ -21,11 +21,11 @@ function MaterialItemComponent({
 	avatar,
 	...item
 }: MaterialItemProps) {
-	//  usecustom钩子handleaddnode and drag逻辑
+	//  usecustom钩子handleaddnode and draglogic
 	const { onAddItem } = useAddItem({ item })
 	const { onDragStart } = useDragNode({ item })
 
-	//  提取需要传递给子componentofproperty
+	//  提取need传递给子componentof property
 	const avatarProps = useMemo(
 		() => ({
 			showIcon,
@@ -68,7 +68,7 @@ function MaterialItemComponent({
 	)
 }
 
-//  useReact.memowrapcomponent，addcustom比较functiononly compare keyproperty
+//  useReact.memowrapcomponent，addcustomcomparefunctiononly compare keyproperty
 const MaterialItem = memo(MaterialItemComponent, (prevProps, nextProps) => {
 	//  onlywhen关键propertyre-render only when changednewrender
 	return (

@@ -1,46 +1,46 @@
-# EnhanceMarkdown componentperformance分析报告
+# EnhanceMarkdown componentperformanceanalyzereport
 
-## 📊 performance分析概要
+## 📊 performanceanalyze概要
 
-based on对 `EnhanceMarkdown` component的深入分析，本报告识别了影响渲染performance的关键因素并提供了针对性的optimization建议。
+based on对 `EnhanceMarkdown` component的深入analyze，本report识别了影响renderperformance的关键因素并提供了针对性的optimizationsuggestion。
 
-## 🔍 component架构分析
+## 🔍 componentarchitectureanalyze
 
-### 核心component结构
+### corecomponent结构
 ```
 EnhanceMarkdown
-├── useFontSize (字体大小 hook)
-├── useTyping (流式渲染 hook)
-├── useUpdateEffect (副作用管理)
+├── useFontSize (fontsize hook)
+├── useTyping (流式render hook)
+├── useUpdateEffect (副作用manage)
 ├── useStreamCursor (流式光标)
 ├── useMarkdownStyles (样式handle)
 ├── useMarkdownConfig (Markdown configuration)
 ├── useClassName (class名handle)
-└── PreprocessService (预handle服务)
+└── PreprocessService (预handleservice)
 ```
 
-## ⚡ performance瓶颈分析
+## ⚡ performance瓶颈analyze
 
-### 1. PreprocessService 预handle阶段 (🔴 高影响)
+### 1. PreprocessService 预handle阶段 (🔴 high影响)
 
-**问题分析:**
-- complex的正则表达式operation，特别是对于大文本块
-- 多次string替换和拆分operation
-- LaTeX 公式handle需要大量正则匹配
-- tasklisthandle涉及complex的嵌套逻辑
+**问题analyze:**
+- complex的正则expressionoperation，特别isforlarge文本块
+- many次stringreplace和拆分operation
+- LaTeX formulahandleneedlarge amount正则match
+- tasklisthandle涉及complex的嵌套logic
 
-**耗时分析:**
+**耗timeanalyze:**
 ```typescript
-// 主要耗时operation
-splitBlockCode() // ~5-15ms (大documentation)
+// main耗timeoperation
+splitBlockCode() // ~5-15ms (largedocumentation)
 processNestedTaskLists() // ~3-8ms
 LaTeXhandle // ~2-5ms
 引用块检测 // ~1-3ms
 ```
 
-**optimization建议:**
+**optimizationsuggestion:**
 ```typescript
-// 1. 使用缓存避免重复handle
+// 1. 使用cache避免heavy复handle
 const preprocessCache = new Map<string, string[]>()
 
 const cachedPreprocess = useMemo(() => {
@@ -56,15 +56,15 @@ const cachedPreprocess = useMemo(() => {
   }
 }, [options])
 
-// 2. optimization正则表达式performance
+// 2. optimization正则expressionperformance
 const optimizedRegex = {
-  // 使用更高效的正则表达式
+  // 使用更high效的正则expression
   codeBlock: /```([a-zA-Z0-9_-]*)\s*\n([\s\S]*?)```/g,
-  inlineMath: /\$([^$\n]+)\$/g, // 简化的数学公式匹配
+  inlineMath: /\$([^$\n]+)\$/g, // 简化的数学formulamatch
   blockMath: /\$\$\s*\n([\s\S]*?)\n\s*\$\$/g
 }
 
-// 3. 分块handle大documentation
+// 3. 分块handlelargedocumentation
 function processLargeContent(content: string, chunkSize = 5000) {
   if (content.length <= chunkSize) {
     return PreprocessService.preprocess(content)
@@ -78,24 +78,24 @@ function processLargeContent(content: string, chunkSize = 5000) {
 
 ### 2. useMarkdownConfig Hook (🟡 中等影响)
 
-**问题分析:**
-- 大量的 `useMemo` 依赖可能导致过度重新计算
+**问题analyze:**
+- large amount的 `useMemo` dependencymight导致过度heavy新calculation
 - component覆盖configurationcreatecomplex
-- 每次 props 变化都会重新构建configuration
+- every time props 变化都会heavy新buildconfiguration
 
-**optimization建议:**
+**optimizationsuggestion:**
 ```typescript
 // 1. 稳定化componentconfiguration
 const stableBaseOverrides = useMemo(() => {
-  // 将不变的componentconfiguration提取到component外部
+  // 将不变的componentconfiguration提取tocomponentoutside
   return {
     a: { component: a },
     blockquote: { component: Blockquote },
     // ... 其他不变的configuration
   }
-}, []) // 空依赖array
+}, []) // nulldependencyarray
 
-// 2. optimization LaTeX component渲染
+// 2. optimization LaTeX componentrender
 const MemoizedLatexInline = memo(({ math }: { math: string }) => {
   const decodedMath = useMemo(() => 
     math.replace(/&amp;/g, "&")
@@ -109,24 +109,24 @@ const MemoizedLatexInline = memo(({ math }: { math: string }) => {
   return <KaTeX math={decodedMath} inline={true} />
 })
 
-// 3. 减少configuration重建频率
+// 3. decreaseconfigurationheavy建频率
 const options = useMemo<MarkdownToJSX.Options>(() => {
   return {
     overrides,
     forceWrapper: true,
     disableParsingRawHTML: !allowHtml
   }
-}, [overrides, allowHtml]) // 减少依赖项
+}, [overrides, allowHtml]) // decreasedependency项
 ```
 
-### 3. useTyping 流式渲染 (🟡 中等影响)
+### 3. useTyping 流式render (🟡 中等影响)
 
-**问题分析:**
-- 频繁的statusupdate导致多次重新渲染
-- 动画效果可能影响performance
-- string拼接operation较多
+**问题analyze:**
+- 频繁的statusupdate导致many次heavy新render
+- 动画效果might影响performance
+- string拼接operation较many
 
-**optimization建议:**
+**optimizationsuggestion:**
 ```typescript
 // 1. 使用 requestIdleCallback optimizationupdate频率
 const optimizedTyping = useCallback((text: string) => {
@@ -140,7 +140,7 @@ const optimizedTyping = useCallback((text: string) => {
     
     setContent(prev => prev + updateChunks[index])
     
-    // 使用 requestIdleCallback 避免阻塞主线程
+    // 使用 requestIdleCallback 避免blocking主线程
     requestIdleCallback(() => {
       processChunk(index + 1)
     })
@@ -149,7 +149,7 @@ const optimizedTyping = useCallback((text: string) => {
   processChunk(0)
 }, [])
 
-// 2. 批量update减少重渲染
+// 2. 批量updatedecreaseheavyrender
 const batchedTyping = useCallback((text: string) => {
   // 使用 unstable_batchedUpdates 批量update
   unstable_batchedUpdates(() => {
@@ -158,10 +158,10 @@ const batchedTyping = useCallback((text: string) => {
   })
 }, [])
 
-// 3. 虚拟化长文本
+// 3. virtual化long文本
 const VirtualizedMarkdown = memo(({ content }: { content: string }) => {
   const chunks = useMemo(() => {
-    // 将长文本分块，只渲染可见部分
+    // 将long文本分块，只rendervisiblepart
     return content.split('\n\n').map((chunk, index) => ({
       id: index,
       content: chunk
@@ -177,16 +177,16 @@ const VirtualizedMarkdown = memo(({ content }: { content: string }) => {
 })
 ```
 
-### 4. Markdown-to-JSX 渲染 (🔴 高影响)
+### 4. Markdown-to-JSX render (🔴 high影响)
 
-**问题分析:**
-- 大量 DOM nodecreate
-- complex的语法高亮handle
-- table和list渲染较慢
+**问题analyze:**
+- large amount DOM nodecreate
+- complex的语法high亮handle
+- table和listrender较slow
 
-**optimization建议:**
+**optimizationsuggestion:**
 ```typescript
-// 1. 使用 React.memo 和精确依赖
+// 1. 使用 React.memo 和精确dependency
 const OptimizedMarkdown = memo(Markdown, (prevProps, nextProps) => {
   return prevProps.children === nextProps.children &&
          prevProps.className === nextProps.className
@@ -201,7 +201,7 @@ const CodeBlockWithSuspense = ({ children, ...props }: any) => (
   </Suspense>
 )
 
-// 3. 虚拟滚动大list
+// 3. virtual scrollinglargelist
 const VirtualizedList = ({ items }: { items: any[] }) => {
   const [visibleRange, setVisibleRange] = useState({ start: 0, end: 50 })
   
@@ -217,25 +217,25 @@ const VirtualizedList = ({ items }: { items: any[] }) => {
 
 ## 📈 预期performance提升
 
-### optimization前后对比 (估算值)
+### optimizationfrontback对比 (估算value)
 
-| test场景 | optimization前 | optimization后 | 提升比例 |
+| testscenario | optimizationfront | optimizationback | 提升比例 |
 |---------|--------|--------|----------|
 | 简单文本 | 15ms | 8ms | 47% |
 | 代码块 | 35ms | 20ms | 43% |
-| 大documentation | 150ms | 80ms | 47% |
+| largedocumentation | 150ms | 80ms | 47% |
 | 流式update | 25ms | 12ms | 52% |
-| LaTeX 公式 | 40ms | 22ms | 45% |
+| LaTeX formula | 40ms | 22ms | 45% |
 
 ## 🛠️ 具体optimization实施方案
 
 ### Phase 1: 预handleoptimization (立即实施)
 
 ```typescript
-// 1. 添加预handle缓存
+// 1. 添add预handlecache
 const PreprocessCache = new Map<string, string[]>()
 
-// 2. optimization正则表达式
+// 2. optimization正则expression
 const OPTIMIZED_REGEXES = {
   codeBlock: /```(\w*)\n([\s\S]*?)```/g,
   inlineMath: /\$([^$\n]+)\$/g,
@@ -298,7 +298,7 @@ const useBatchedUpdates = (callback: Function) => {
 }
 ```
 
-### Phase 3: 高级optimization (长期实施)
+### Phase 3: advancedoptimization (long期实施)
 
 ```typescript
 // 1. Web Workers handlecomplexdocumentation
@@ -325,12 +325,12 @@ const useIncrementalRendering = (content: string) => {
   const timeoutRef = useRef<NodeJS.Timeout>()
   
   useEffect(() => {
-    // 清除之前的定时器
+    // 清除before的定time器
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
     }
     
-    // 增量渲染
+    // 增量render
     const renderIncrementally = (index: number = 0) => {
       const CHUNK_SIZE = 1000
       const chunk = content.slice(index, index + CHUNK_SIZE)
@@ -356,9 +356,9 @@ const useIncrementalRendering = (content: string) => {
 }
 ```
 
-## 🎯 performance监控
+## 🎯 performancemonitor
 
-### 添加performance监控代码
+### 添addperformancemonitor代码
 
 ```typescript
 // performance-monitor.ts
@@ -373,7 +373,7 @@ export class MarkdownPerformanceMonitor {
       existing.push(duration)
       this.metrics.set(name, existing)
       
-      // 发送到分析平台
+      // sendtoanalyze平台
       if (duration > 50) { // 超过50ms的operation
         console.warn(`Slow operation detected: ${name} took ${duration}ms`)
       }
@@ -394,7 +394,7 @@ export class MarkdownPerformanceMonitor {
   }
 }
 
-// 在component中使用
+// atcomponent中使用
 const EnhanceMarkdown = memo((props: MarkdownProps) => {
   const endMeasure = MarkdownPerformanceMonitor.startMeasure('EnhanceMarkdown-render')
   
@@ -402,17 +402,17 @@ const EnhanceMarkdown = memo((props: MarkdownProps) => {
     return endMeasure
   })
   
-  // ... component逻辑
+  // ... componentlogic
 })
 ```
 
-## 📝 总结
+## 📝 summary
 
-通过实施上述optimization方案，预期可以implement：
+through实施上述optimization方案，预期canimplement：
 
-1. **渲染performance提升 40-50%**
-2. **内存使用减少 30%**
-3. **流式渲染更流畅**
-4. **大documentationhandle能力增强**
+1. **renderperformance提升 40-50%**
+2. **memory使用decrease 30%**
+3. **流式render更流畅**
+4. **largedocumentationhandle能力enhancement**
 
-建议按照三个阶段逐步实施optimization，并通过performance监控validateoptimization效果。重点关注预handle阶段和component记忆化的optimization，这两个方面能带来最显著的performance提升。 
+suggestion按照三个阶段逐步实施optimization，并throughperformancemonitorvalidateoptimization效果。heavy点关注预handle阶段和component记忆化的optimization，这两个方面能带来最显著的performance提升。 

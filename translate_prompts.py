@@ -7,6 +7,20 @@ import re
 
 # Translation dictionary for common terms
 translations = {
+    # Longer phrases first (for proper matching)
+    '油墨粘稠': 'thick ink',
+    '天道演变': 'evolution of heaven',
+    '万物苍凉': 'all things desolate',
+    '真人写真': 'realistic photo',
+    '超详细': 'ultra detailed',
+    '冷tones': 'cold tones',
+    '暖tones': 'warm tones',
+    '过渡natural': 'natural transition',
+    '南瓜灯': 'pumpkin lantern',
+    '装扮女人': 'costumed woman',
+    '手里holding': 'holding in hand',
+    '该design': 'this design',
+    '结合': 'combined',
     '线': 'lines',
     '插图': 'illustration',
     '游戏': 'game',

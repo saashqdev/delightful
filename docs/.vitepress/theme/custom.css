@@ -21,7 +21,7 @@
     margin: -6px -10px;
 }
 
-/* 子菜单项的高亮样式 */
+/* Submenu item highlight style */
 .VPSidebarItem.level-1.is-active>.item>.link {
     border-left: 2px solid var(--vp-c-brand-1);
     padding-left: 8px;

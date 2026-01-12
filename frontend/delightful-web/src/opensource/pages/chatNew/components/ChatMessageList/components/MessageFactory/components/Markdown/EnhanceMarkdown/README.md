@@ -1,54 +1,54 @@
-# DelightfulMarkdown 魔法 Markdown rendercomponent
+# DelightfulMarkdown - Magic Markdown Render Component
 
-`DelightfulMarkdown` yes一个functionalitystronglarge的 Markdown rendercomponent，based on react-markdown，support代码high亮、LaTeX formula、HTML content等many种extensionfunctionality。
+`DelightfulMarkdown` is a powerful Markdown rendering component based on react-markdown, supporting code highlighting, LaTeX formulas, HTML content, and many other extended features.
 
-## property
+## Properties
 
-| property名             | class型    | defaultvalue | description                             |
+| Property Name      | Type    | Default Value | Description                             |
 | ------------------ | ------- | ------ | -------------------------------- |
-| content            | string  | -      | 要render的 Markdown content           |
-| allowHtml          | boolean | true   | yesnoallowrender HTML content           |
-| enableLatex        | boolean | true   | yesnoenable LaTeX formulasupport          |
-| isSelf             | boolean | false  | yesno为自己send的content（影响样式） |
-| hiddenDetail       | boolean | false  | yesnohidedetailedcontent                 |
-| isStreaming        | boolean | false  | yesno为流式renderpattern               |
-| ...MarkdownOptions | -       | -      | supportall react-markdown 的option   |
+| content            | string  | -      | Markdown content to render           |
+| allowHtml          | boolean | true   | Whether to allow rendering HTML content           |
+| enableLatex        | boolean | true   | Whether to enable LaTeX formula support          |
+| isSelf             | boolean | false  | Whether it's content sent by self (affects styling) |
+| hiddenDetail       | boolean | false  | Whether to hide detailed content                 |
+| isStreaming        | boolean | false  | Whether it's streaming render mode               |
+| ...MarkdownOptions | -       | -      | Support all react-markdown options   |
 
-## basic用法
+## Basic Usage
 
 ```tsx
 import { DelightfulMarkdown } from '@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown';
 
-// basic用法
-<DelightfulMarkdown content="# title\n这yes一段普通文本" />
+// Basic usage
+<DelightfulMarkdown content="# Title\nThis is plain text" />
 
-// enable LaTeX formula
+// Enable LaTeX formulas
 <DelightfulMarkdown
-  content="爱因斯坦质能equation：$E=mc^2$"
+  content="Einstein's mass-energy equation: $E=mc^2$"
   enableLatex
 />
 
-// allow HTML content
+// Allow HTML content
 <DelightfulMarkdown
-  content="这yes一个<span style='color:red'>红色</span>文本"
+  content="This is a <span style='color:red'>red</span> text"
   allowHtml
 />
 
-// 流式render（适用in打字机效果）
+// Streaming render (suitable for typewriter effect)
 <DelightfulMarkdown
-  content="isgenerate的content..."
+  content="Content being generated..."
   isStreaming
 />
 
-// customcomponent
+// Custom components
 <DelightfulMarkdown
-  content="# customtitle"
+  content="# Custom Title"
   components={{
     h1: ({ node, ...props }) => <h1 style={{ color: 'blue' }} {...props} />
   }}
 />
 
-// 使用customplugin
+// Using custom plugins
 <DelightfulMarkdown
   content="content"
   remarkPlugins={[myCustomPlugin]}
@@ -56,30 +56,30 @@ import { DelightfulMarkdown } from '@/opensource/pages/chatNew/components/ChatMe
 />
 ```
 
-## 特点
+## Features
 
-1. **丰富的formatsupport**：supportstandard Markdown 语法，package括title、list、table、代码块等
-2. **代码high亮**：内置代码语法high亮functionality
-3. **LaTeX formula**：support数学formularender
-4. **HTML content**：can安all地render HTML content
-5. **流式render**：support流式content的smoothrender
-6. **customcomponent**：cancustom各种 Markdown 元素的render方式
-7. **pluginsystem**：support remark 和 rehype pluginextensionfunctionality
+1. **Rich Format Support**: Supports standard Markdown syntax, including headings, lists, tables, code blocks, etc.
+2. **Code Highlighting**: Built-in code syntax highlighting functionality
+3. **LaTeX Formulas**: Supports mathematical formula rendering
+4. **HTML Content**: Can safely render HTML content
+5. **Streaming Render**: Supports smooth rendering of streaming content
+6. **Custom Components**: Can customize rendering methods for various Markdown elements
+7. **Plugin System**: Supports remark and rehype plugin extensions
 
-## 内置component
+## Built-in Components
 
-DelightfulMarkdown 内置了multipleoptimization的component用inrender特定的 Markdown 元素：
+DelightfulMarkdown has built-in optimized components for rendering specific Markdown elements:
 
--   `A`：optimization的linkcomponent，supportoutsidelink安allopen
--   `Code`：代码块和行内代码component，support语法high亮
--   `Pre`：代码块容器component，supportcopy代码functionality
--   `Sup`：top标component
+-   `A`: Optimized link component, supports safe opening of external links
+-   `Code`: Code block and inline code component, supports syntax highlighting
+-   `Pre`: Code block container component, supports code copying functionality
+-   `Sup`: Superscript component
 
-## 何time使用
+## When to Use
 
--   needrender Markdown formatcontenttime
--   needatapplication中展示富文本contenttime
--   needsupport代码high亮和数学formulatime
--   need流式rendercontent（如聊天机器人回复）time
+-   When you need to render Markdown formatted content
+-   When you need to display rich text content in your application
+-   When you need to support code highlighting and mathematical formulas
+-   When you need to render streaming content (such as chatbot replies)
 
-DelightfulMarkdown component让你的 Markdown content展示更add美观和functionality丰富，适合at各种need富文本展示的scenario下使用。
+The DelightfulMarkdown component makes your Markdown content display more beautiful and feature-rich, suitable for use in various scenarios that require rich text display.

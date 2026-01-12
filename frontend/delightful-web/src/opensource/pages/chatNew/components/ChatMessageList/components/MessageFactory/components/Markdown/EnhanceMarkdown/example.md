@@ -84,17 +84,17 @@ F --> B
 
 ---
 
-by下yes一段Markdownformat的LaTeX数学formula：
+Below is a Markdown formatted LaTeX mathematical formula:
 
-我yes一个行内formula：$E=mc^2$
+I am an inline formula: $E=mc^2$
 
-我yes一个独立的傅里叶formula：
+I am an independent Fourier formula:
 
 $$
 f(x) = a_0 + \\sum_{n=1}^{\\infty} \\left( a_n \\cos(nx) + b_n \\sin(nx) \\right)
 $$
 
-其中，带have积分符号的项：
+Where, the term with integral symbol:
 
 $$
 a_0 = \\frac{1}{2\\pi} \\int_{-\\pi}^{\\pi} f(x) \\, dx
@@ -108,7 +108,7 @@ $$
 b_n = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} f(x) \\sin(nx) \\, dx \\quad \\text{for} \\quad n \\geq 1
 $$
 
-我yes一个带have分式、testlong度超long的泰勒formula：
+I am a Taylor formula with fractions and super long test length:
 
 $$
 \\begin{equation}
@@ -116,7 +116,7 @@ f(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\frac{f'''(a)}{3!}(x
 \\end{equation}
 $$
 
-我yes一个带have上下标的formula：
+I am a formula with superscripts and subscripts:
 
 $$
 x^{2} + y^{2} = r^{2}
@@ -124,7 +124,7 @@ $$
 
 ---
 
-我yes一个嵌套test：
+I am a nesting test:
 
 ```
 $1
@@ -174,7 +174,7 @@ export function foo() {
 export function foo() {
 	// [!code word:Hello]
 	const msg = "Hello World"
-	console.log(msg) // 打印 Hello World
+	console.log(msg) // print Hello World
 }
 ```
 

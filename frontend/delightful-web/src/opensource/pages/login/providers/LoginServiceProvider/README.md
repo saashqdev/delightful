@@ -1,64 +1,64 @@
 # LoginServiceProvider
 
-## component介绍
+## Component Introduction
 
-LoginServiceProvider isone个 React Context Provider component，用inmanageloginservice的status和logic。它main负责handledifferentdeployenvironment（公have云和private云）下的loginflow，并提供related的上下文data和method给子component使用。
+LoginServiceProvider is a React Context Provider component used to manage login service state and logic. It mainly handles login flows under different deployment environments (public cloud and private cloud) and provides related context data and methods for child components to use.
 
-## mainfunctionality
+## Main Features
 
--   managelogindeployenvironment（公have云/private云）
--   提供loginserviceinstance（LoginService）给子component
--   managecluster代码（clusterCode）status
--   提供environment切换能力
+-   Manage login deployment environment (public cloud/private cloud)
+-   Provide login service instance (LoginService) to child components
+-   Manage cluster code (clusterCode) state
+-   Provide environment switching capability
 
-## data结构
+## Data Structure
 
 ```typescript
 interface LoginServiceStore {
-	// loginserviceinstance
+	// Login service instance
 	service: LoginService
-	// when前deployenvironmentclass型（公have云/private云）
+	// Current deployment environment type (public cloud/private cloud)
 	deployment: LoginDeployment
-	// settingsdeployenvironment
+	// Set deployment environment
 	setDeployment: (deployment: LoginDeployment) => void
-	// cluster代码（privatedeploytime使用）
+	// Cluster code (used for private deployment)
 	clusterCode: string | null
-	// settingscluster代码
+	// Set cluster code
 	setDeployCode: (clusterCode: string) => void
 }
 ```
 
-## 使用方式
+## Usage
 
-### 基本使用
+### Basic Usage
 
 ```tsx
 import { LoginServiceProvider } from "./LoginServiceProvider"
 import { LoginService } from "@/services/user/LoginService"
 
-// createloginserviceinstance
+// Create login service instance
 const loginService = new LoginService(apis, serviceContainer)
 
 function App() {
 	return (
 		<LoginServiceProvider service={loginService}>
-			{/* 子componentcanthrough useLoginServiceContext get上下文 */}
+			{/* Child components can get context through useLoginServiceContext */}
 			<YourLoginComponent />
 		</LoginServiceProvider>
 	)
 }
 ```
 
-### 使用 HOC package装component
+### Using HOC to Wrap Component
 
 ```tsx
 import { withLoginService } from "./withLoginService"
 import { LoginService } from "@/services/user/LoginService"
 
-// createloginserviceinstance
+// Create login service instance
 const loginService = new LoginService(apis, serviceContainer)
 
-// 使用 HOC package装component
+// Use HOC to wrap component
 const WrappedComponent = withLoginService(YourComponent, loginService)
 
 function App() {
@@ -66,7 +66,7 @@ function App() {
 }
 ```
 
-### at子component中使用上下文
+### Using Context in Child Components
 
 ```tsx
 import { useLoginServiceContext } from "./useLoginServiceContext"
@@ -77,7 +77,7 @@ function LoginComponent() {
 		useLoginServiceContext()
 
 	const handleLogin = async () => {
-		// 使用 service 进行loginoperation
+		// Use service to perform login operation
 		// ...
 	}
 
@@ -87,7 +87,7 @@ function LoginComponent() {
 
 	return (
 		<div>
-			{/* 根据deployenvironmentrenderdifferent的logininterface */}
+			{/* Render different login interfaces based on deployment environment */}
 			{deployment === LoginDeployment.PublicDeploymentLogin ? (
 				<PublicLoginForm onLogin={handleLogin} />
 			) : (
@@ -98,14 +98,14 @@ function LoginComponent() {
 				/>
 			)}
 
-			<button onClick={switchToPrivateDeployment}>切换toprivatedeploylogin</button>
+			<button onClick={switchToPrivateDeployment}>Switch to private deploy login</button>
 		</div>
 	)
 }
 ```
 
-## note事项
+## Notes
 
--   LoginServiceProvider 应when放置atneed访问loginservice的component树的top
--   切换deployenvironmenttime会自动handle clusterCode 的清除和resume
--   atprivatedeploypattern下，会fromcache中resume上次使用的 clusterCode
+-   LoginServiceProvider should be placed at the top of the component tree that needs to access login service
+-   Switching deployment environment will automatically handle clusterCode clearing and restoration
+-   In private deploy mode, it will restore the last used clusterCode from cache

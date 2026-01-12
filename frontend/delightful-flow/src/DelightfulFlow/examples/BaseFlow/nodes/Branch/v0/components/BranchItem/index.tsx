@@ -63,9 +63,9 @@ export default function BranchItem({
 
 	const BranchParams = useMemo(() => {
 		return isLast ? (
-			<div className={styles.elseItem}>否则</div>
+			<div className={styles.elseItem}>Else</div>
 		) : (
-			<DropdownCard title="如果" height="auto" suffixIcon={SuffixIcon}>
+			<DropdownCard title="If" height="auto" suffixIcon={SuffixIcon}>
 				<div className={styles.branchItem}>
 					<DelightfulConditionEdit
 						value={value?.parameters?.structure}

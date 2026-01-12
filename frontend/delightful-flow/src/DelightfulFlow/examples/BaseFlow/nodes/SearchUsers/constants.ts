@@ -9,27 +9,27 @@
 
 export const filterTargetOptions = [
 	{
-		label: "user姓名",
+		label: "User Name",
 		value: FilterTargetTypes.Username,
 	},
 	{
-		label: "user工号",
+		label: "Work Number",
 		value: FilterTargetTypes.WorkNumber,
 	},
 	{
-		label: "user岗位",
+		label: "Position",
 		value: FilterTargetTypes.Position,
 	},
 	{
-		label: "user手机号",
+		label: "Phone Number",
 		value: FilterTargetTypes.Phone,
 	},
 	{
-		label: "部门名称",
+		label: "Department Name",
 		value: FilterTargetTypes.DepartmentName,
 	},
 	{
-		label: "群聊名称",
+		label: "Group Name",
 		value: FilterTargetTypes.GroupName,
 	},
 ]
@@ -57,13 +57,13 @@ export const operatorMap = {
 	[FilterTargetTypes.GroupName]: ["equals", "no_equals", "contains", "no_contains"],
 }
 
-// 值映射
+// Value mapping
 export const operator2Label: Record<string, string> = {
-	equals: "等于",
-	no_equals: "不等于",
-	contains: "包含",
-	no_contains: "不包含",
-	empty: "为空",
-	not_empty: "不为空",
+	equals: "Equals",
+	no_equals: "Not Equal",
+	contains: "Contains",
+	no_contains: "Does Not Contain",
+	empty: "Is Empty",
+	not_empty: "Is Not Empty",
 }
 

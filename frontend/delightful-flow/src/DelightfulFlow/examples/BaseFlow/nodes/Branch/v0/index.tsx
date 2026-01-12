@@ -25,7 +25,7 @@ export default function Branch() {
 		addBranchTypeIfWithout(currentNode?.params?.branches!),
 	)
 
-	// create一个存储所有元素 ref 的array
+	// Create an array to store all element refs
 	const conditionRefsMap = useMemo(() => {
 		return branchList.map((branch) => {
 			return {
@@ -67,15 +67,15 @@ export default function Branch() {
 		const branchToDelete = branchList[branchIndex]
 		const branchId = branchToDelete.branch_id
 
-		// 1. 找到所有从该分支出发的边
+		// 1. Find all edges starting from this branch
 		const edgesToRemove = edges.filter(
 			(edge) => edge.source === currentNode.node_id && edge.sourceHandle === branchId,
 		)
 
-		// 2. 使用deleteEdgesmethod同时delete边和updatenextNodes
+		// 2. Use deleteEdges method to delete edges and update nextNodes simultaneously
 		deleteEdges(edgesToRemove)
 
-		// 3. update分支list
+		// 3. Update branch list
 		branchList.splice(branchIndex, 1)
 		setBranchList([...branchList])
 	})

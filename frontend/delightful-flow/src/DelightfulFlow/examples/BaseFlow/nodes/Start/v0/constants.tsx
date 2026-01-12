@@ -1,13 +1,13 @@
 ﻿export enum TriggerType {
-	// 发送新message时
+	// When sending a new message
 	Message = 1,
-	// 聊天window打开时
+	// When chat window opens
 	NewChat = 2,
-	// 定时触发
+	// Scheduled trigger
 	TimeTrigger = 3,
-	// parameter调用
+	// Parameter invocation
 	Arguments = 4,
-	// loop起始
+	// Loop start
 	LoopStart = 5,
 }
 

@@ -92,9 +92,9 @@ export default function useFlowHeader() {
 
 	const FlowStatusLabelMap = useMemo(() => {
 		return {
-			// [FlowStatus.UnSave]: "未release",
-			// [FlowStatus.Draft]: "已save",
-			// [FlowStatus.Enable]: "已release",
+			//  [FlowStatus.UnSave]: "未release",
+			// [FlowStatus.Draft]: "alreadysave",
+			// [FlowStatus.Enable]: "alreadyrelease",
 			true: i18next.t("flow.enabled", { ns: "delightfulFlow" }),
 			false: i18next.t("flow.baned", { ns: "delightfulFlow" }),
 		}

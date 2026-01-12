@@ -18,17 +18,17 @@ const VirtualNodeList = memo(({
   const [visibleRange, setVisibleRange] = useState({ start: 0, end: 20 })
   const [containerHeight, setContainerHeight] = useState(0)
 
-  // 计算总高度
+  //  Calculate总高度
   const totalHeight = items.length * itemHeight
 
-  // listener滚动event，计算可见范围
+  //  listener滚动event，calculate可见范围
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return
 
       const { scrollTop, clientHeight } = containerRef.current
       
-      // 计算start和end索引
+      //  Calculatestart and end索引
       const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan)
       const endIndex = Math.min(
         items.length - 1,
@@ -38,7 +38,7 @@ const VirtualNodeList = memo(({
       setVisibleRange({ start: startIndex, end: endIndex })
     }
 
-    // settings容器高度
+    //  settings容器高度
     const updateHeight = () => {
       if (containerRef.current) {
         setContainerHeight(containerRef.current.clientHeight)
@@ -50,10 +50,10 @@ const VirtualNodeList = memo(({
       container.addEventListener('scroll', handleScroll)
       updateHeight()
       
-      // 初始计算
+      // initialcalculate
       handleScroll()
 
-      // listener容器大小变化
+      //  listener容器大小变化
       window.addEventListener('resize', updateHeight)
     }
 
@@ -65,7 +65,7 @@ const VirtualNodeList = memo(({
     }
   }, [items.length, itemHeight, overscan])
 
-  // 只渲染可见范围内的元素
+  //  只render可见范围insideof元素
   const visibleItems = items.slice(visibleRange.start, visibleRange.end + 1)
 
   return (

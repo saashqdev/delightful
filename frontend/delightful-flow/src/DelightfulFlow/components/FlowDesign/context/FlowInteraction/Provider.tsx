@@ -23,7 +23,7 @@ export const FlowInteractionProvider = ({
 	selectionEdges,
 	children,
 }: FlowInteractionCtx) => {
-	// 将status和动作分开缓存，减少不必要的重新渲染
+	// Separate state and actions caching to reduce unnecessary re-renders
 	const stateValue = useMemo<FlowInteractionStateType>(() => {
 		return {
 			isDragging,
@@ -42,7 +42,7 @@ export const FlowInteractionProvider = ({
 		selectionEdges,
 	])
 
-	// actions很少变化，单独缓存
+	// Actions rarely change, cache separately
 	const actionsValue = useMemo<FlowInteractionActionsType>(() => {
 		return {
 			resetLastLayoutData,
@@ -61,7 +61,7 @@ export const FlowInteractionProvider = ({
 		reactFlowWrapper,
 	])
 
-	// 为了向后兼容，仍然提供完整的Context
+	// For backward compatibility, still provide complete Context
 	const value = useMemo(() => {
 		return {
 			...stateValue,

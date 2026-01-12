@@ -16,7 +16,7 @@ import ReactFlow, {
 } from "reactflow"
 import "reactflow/dist/style.css"
 
-// 自定义node
+// customnode
 const CustomNode = ({ data }: { data: { label: string } }) => {
 	return (
 		<div
@@ -34,17 +34,17 @@ const CustomNode = ({ data }: { data: { label: string } }) => {
 	)
 }
 
-// Node type定义
+// Node typedefine
 const nodeTypes: NodeTypes = {
 	custom: CustomNode,
 }
 
 /**
- * ReactFlow基础功能testcomponent
- * 用于testReactFlow的基本交互和功能
+ * ReactFlowbasic functionalitytestcomponent
+ * fortestReactFlowbasic interaction and functionality
  */
 const ReactFlowBasicTest: React.FC = () => {
-	// 初始node
+	// initialnode
 	const initialNodes = [
 		{
 			id: "1",
@@ -72,32 +72,32 @@ const ReactFlowBasicTest: React.FC = () => {
 		},
 	]
 
-	// 初始边
+	// initial edges
 	const initialEdges = [
 		{ id: "e1-2", source: "1", target: "2", animated: true },
 		{ id: "e1-3", source: "1", target: "3" },
 	]
 
-	// status管理
+	// statusmanage
 	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
 	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 	const [selectedNode, setSelectedNode] = useState<string | null>(null)
 	const [nodeDragEnabled, setNodeDragEnabled] = useState<boolean>(true)
 	const [snapToGrid, setSnapToGrid] = useState<boolean>(false)
 
-	// 连接边的回调
+	// edge connection callback
 	const onConnect = useCallback(
 		(params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
 		[setEdges],
 	)
 
-	// node点击回调
+	// nodeclick callback
 	const onNodeClick = useCallback((event: React.MouseEvent, node: any) => {
 		setSelectedNode(node.id)
-		console.log("选中node:", node)
+		console.log("selectnode:", node)
 	}, [])
 
-	// 添加新node
+	// Addnewnode
 	const addNode = useCallback(() => {
 		const newNode = {
 			id: `${nodes.length + 1}`,
@@ -131,7 +131,7 @@ const ReactFlowBasicTest: React.FC = () => {
 					<MiniMap />
 					<Background variant={snapToGrid ? "dots" : "lines"} />
 
-					{/* 控制面板 */}
+					{/* control panel */}
 					<Panel
 						position="top-left"
 						style={{
@@ -142,26 +142,26 @@ const ReactFlowBasicTest: React.FC = () => {
 						}}
 					>
 						<div>
-							<h3 style={{ marginTop: 0 }}>ReactFlow 基本test</h3>
+							<h3 style={{ marginTop: 0 }}>ReactFlow basictest</h3>
 
 							<div style={{ marginBottom: "10px" }}>
 								<button onClick={addNode} style={{ marginRight: "10px" }}>
-									添加node
+									addnode
 								</button>
 								<button
 									onClick={() => setNodeDragEnabled(!nodeDragEnabled)}
 									style={{ marginRight: "10px" }}
 								>
-									{nodeDragEnabled ? "禁用" : "启用"}node拖拽
+									{nodeDragEnabled ? "disable" : "enable"}nodedrag
 								</button>
 								<button onClick={() => setSnapToGrid(!snapToGrid)}>
-									{snapToGrid ? "关闭" : "启用"}网格吸附
+									{snapToGrid ? "close" : "enable"}grid snap
 								</button>
 							</div>
 
 							{selectedNode && (
 								<div>
-									<strong>已选中node:</strong> {selectedNode}
+									<strong>selectednode:</strong> {selectedNode}
 								</div>
 							)}
 						</div>

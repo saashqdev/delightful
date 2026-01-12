@@ -39,13 +39,13 @@ export default function TopRow(props: TopRowProps) {
 	const { exportFields } = useExportFields()
 	const { t } = useTranslation()
 
-	// 修改数据class型
+	// Modify data type
 	const handleChangeType = useMemoizedFn((key: string, value: string) => {
 		schemaMobx.changeType({ keys: [key], value })
 		exportFields.changeType({ keys: [key], value })
 	})
 
-	// 修改值
+	// Modify value
 	const handleChangeValue = useMemoizedFn(
 		(key: string[], value: string | InputExpressionValue) => {
 			const changeValue: InputExpressionValue | string | boolean | { mock: string } = value
@@ -62,7 +62,7 @@ export default function TopRow(props: TopRowProps) {
 		type: schemaMobx.schema.type,
 	})
 
-	// 增加子node
+	// Add child node
 	const handleAddChildField = useMemoizedFn((key: string) => {
 		schemaMobx.addChildField({ keys: [key] })
 		exportFields.addChildField({ keys: [key] })

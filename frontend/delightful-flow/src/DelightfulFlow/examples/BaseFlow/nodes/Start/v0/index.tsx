@@ -153,14 +153,14 @@ export default function StartV0() {
 									className={clsx(styles.icon, styles.chatWindowsIcon)}
 								/>
 							}
-							title="聊天window打开时"
+							title="When chat window opens"
 							// @ts-ignore
 							template={chatTemplate}
 							branchId={newChatBranchId}
 							className="start-list-item"
 						>
 							<div className={styles.chatWindowsParams}>
-								<div className={styles.title}>距离上一次打开time间隔多久才生效</div>
+							<div className={styles.title}>Time interval from last open to take effect</div>
 								<div className={styles.inputWrap}>
 									<Form.Item
 										name={`${TriggerType.NewChat}${Splitor}interval`}
@@ -179,9 +179,9 @@ export default function StartV0() {
 									>
 										<TsSelect
 											options={[
-												{ label: "小时", value: "hours" },
-												{ label: "分钟", value: "minutes" },
-												{ label: "秒", value: "seconds" },
+											{ label: "Hours", value: "hours" },
+											{ label: "Minutes", value: "minutes" },
+											{ label: "Seconds", value: "seconds" },
 											]}
 											defaultValue="minutes"
 											className={styles.select}
@@ -197,7 +197,7 @@ export default function StartV0() {
 									className={clsx(styles.icon, styles.messageIcon)}
 								/>
 							}
-							title="接收新message时"
+							title="When Receiving New Message"
 							// @ts-ignore
 							template={messageTemplate}
 							branchId={newMessageBranchId}
@@ -214,7 +214,7 @@ export default function StartV0() {
 								className={clsx(styles.icon, styles.timeTriggerIcon)}
 							/>
 						}
-						title="loop起始"
+						title="Loop Start"
 						branchId={loopStartBranchId}
 						// @ts-ignore
 						template={loopStartTemplate}

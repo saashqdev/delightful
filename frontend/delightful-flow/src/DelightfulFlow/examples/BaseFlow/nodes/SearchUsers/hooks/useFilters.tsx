@@ -1,5 +1,5 @@
 ﻿/**
- * personnel retrieval条件相关status和行为&component
+ * Personnel retrieval filter-related state and behavior & components
  */
 
 import DelightfulSelect from "@/common/BaseUI/Select"
@@ -16,22 +16,22 @@ export default function useFilters() {
 	const FilterTypeSelector = useMemo(() => {
 		return (
 			<Flex className={styles.filterTypeWrap} align="center" gap={4}>
-				<span className={styles.text}>符合</span>
+				<span className={styles.text}>Match</span>
 				<Form.Item name="filter_type">
 					<DelightfulSelect
 						options={[
 							{
-								label: "所有",
+								label: "All",
 								value: FilterTypes.All,
 							},
 							{
-								label: "任一",
+								label: "Any",
 								value: FilterTypes.Any,
 							},
 						]}
 					/>
 				</Form.Item>
-				<span className={styles.text}>条件</span>
+				<span className={styles.text}>Conditions</span>
 			</Flex>
 		)
 	}, [])

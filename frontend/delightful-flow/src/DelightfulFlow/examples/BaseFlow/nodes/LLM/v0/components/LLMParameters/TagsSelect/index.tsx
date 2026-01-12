@@ -15,9 +15,9 @@ const TagsSelect = ({ ...props }: TagsSelect) => {
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === "Tab") {
-			e.preventDefault() // 阻止默认的 tab 键行为
+			e.preventDefault() // Prevent default tab key behavior
 
-			// check是否已经存在相同的值
+			// Check if the same value already exists
 			if (!props?.value?.includes(inputValue.trim()) && inputValue.trim() !== "") {
 				props?.onChange([...props?.value, inputValue.trim()])
 				setInputValue("")

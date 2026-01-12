@@ -11,7 +11,7 @@ interface LazySubGroupProps {
 }
 
 /**
- * 懒loadSubGroupcomponent，只有当component进入视口时才渲染内容
+ * 懒loadSubGroupcomponent，onlywhencomponent进入视口时才renderinside容
  */
 function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySubGroupProps) {
     const [isVisible, setIsVisible] = useState(false);
@@ -21,24 +21,24 @@ function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySub
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                // 当component进入视口时
+                //  Whencomponent进入视口时
                 if (entry.isIntersecting) {
                     setIsVisible(true);
                     
-                    // 标记为已load，避免重复渲染
+                    //  标记foralreadyload，避免re复render
                     if (!isLoaded) {
                         setIsLoaded(true);
                     }
                     
-                    // component已load后可以解除观察
+                    //  componentalreadyload后可以解除观察
                     if (ref.current) {
                         observer.unobserve(ref.current);
                     }
                 }
             },
             {
-                rootMargin: '100px', // 提前100pxstartload
-                threshold: 0.1 // 10%可见时触发
+                rootMargin: '100px', //  提前100pxstartload
+                threshold: 0.1 //  10%可见时触发
             }
         );
 
@@ -53,7 +53,7 @@ function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySub
         };
     }, [isLoaded]);
 
-    // 渲染一个占位符或实际内容
+    //  RenderCHSitem占位符或实际inside容
     return (
         <div ref={ref} style={{ minHeight: '50px' }}>
             {(isVisible || isLoaded) ? (
@@ -67,7 +67,7 @@ function LazySubGroup({ subGroup, getGroupNodeList, materialFn, index }: LazySub
                 />
             ) : (
                 <div style={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    load中...
+                    loadin...
                 </div>
             )}
         </div>

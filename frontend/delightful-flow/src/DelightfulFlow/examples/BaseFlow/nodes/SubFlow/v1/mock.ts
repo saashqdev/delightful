@@ -10,79 +10,79 @@
                 "desc": "",
                 "children": [
                     {
-                        "label": "getISO 8601format的date（仅date部分）",
+                        "label": "Get ISO 8601 formatted date (date part only)",
                         "value": "get_iso8601_date",
-                        "desc": "getISO 8601format的date（仅date部分）;如：2021-01-01",
+                        "desc": "Get ISO 8601 formatted date (date part only); e.g.: 2021-01-01",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的time戳。默认当前time"
+                                "desc": "Timestamp to calculate. Defaults to current time"
                             }
                         ]
                     },
                     {
-                        "label": "getISO 8601format的date和time",
+                        "label": "Get ISO 8601 formatted date and time",
                         "value": "get_iso8601_date_time",
-                        "desc": "getISO 8601format的date和time;如：2021-01-01T00:00:00",
+                        "desc": "Get ISO 8601 formatted date and time; e.g.: 2021-01-01T00:00:00",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的time戳。默认当前time"
+                                "desc": "Timestamp to calculate. Defaults to current time"
                             }
                         ]
                     },
                     {
-                        "label": "get带时区偏移的ISO 8601format的date和time",
+                        "label": "Get ISO 8601 formatted date and time with timezone offset",
                         "value": "get_iso8601_date_time_with_offset",
-                        "desc": "get带时区偏移的ISO 8601format的date和time;如：2021-01-01T00:00:00+08:00",
+                        "desc": "Get ISO 8601 formatted date and time with timezone offset; e.g.: 2021-01-01T00:00:00+08:00",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的time戳。默认当前time"
+                                "desc": "Timestamp to calculate. Defaults to current time"
                             }
                         ]
                     },
                     {
-                        "label": "getRFC 1123format的date和time",
+                        "label": "Get RFC 1123 formatted date and time",
                         "value": "get_rfc1123_date_time",
-                        "desc": "getRFC 1123format的date和time;如：Sat, 21 Oct 2021 07:28:00 GMT",
+                        "desc": "Get RFC 1123 formatted date and time; e.g.: Sat, 21 Oct 2021 07:28:00 GMT",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的time戳。默认当前time"
+                                "desc": "Timestamp to calculate. Defaults to current time"
                             }
                         ]
                     }
                 ]
             },
             {
-                "label": "内置function",
+                "label": "Built-in Functions",
                 "value": "78162069390d96b9230a2f222f902b54",
                 "desc": "",
                 "children": [
                     {
-                        "label": "计算string的 MD5 散列值",
+                        "label": "Calculate MD5 hash of string",
                         "value": "md5",
-                        "desc": "计算string的 MD5 散列值",
+                        "desc": "Calculate MD5 hash of string",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "string",
                                 "type": "string",
-                                "desc": "要计算的string。"
+                                "desc": "String to calculate."
                             },
                             {
                                 "name": "binary",
                                 "type": "boolean",
-                                "desc": "如果可选的 binary 被settings为 true，那么 md5 摘要将以 16 字符长度的原始二进制formatreturn。"
+                                "desc": "If optional binary is set to true, then the md5 digest is returned as a raw 16-character binary format."
                             }
                         ]
                     },
@@ -128,20 +128,20 @@
                         ]
                     },
                     {
-                        "label": "确定string是否包含指定子串",
+                        "label": "Determine if string contains specified substring",
                         "value": "str_contains",
-                        "desc": "执行大小写区分的check，表明 needle 是否包含在 haystack 中。",
+                        "desc": "Performs a case-sensitive check indicating whether needle is contained in haystack.",
                         "return_type": "boolean",
                         "arg": [
                             {
                                 "name": "haystack",
                                 "type": "string",
-                                "desc": "在其中search的string。"
+                                "desc": "The string to search in."
                             },
                             {
                                 "name": "needle",
                                 "type": "string",
-                                "desc": "要在 haystack 中search的子串。"
+                                "desc": "The substring to search for in haystack."
                             }
                         ]
                     },
@@ -153,19 +153,19 @@
                         "arg": []
                     },
                     {
-                        "label": "生成一个唯一 ID",
+                        "label": "Generate a unique ID",
                         "value": "uniqid",
-                        "desc": "生成一个唯一 ID",
+                        "desc": "Generate a unique ID",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "prefix",
-                                "desc": "有用的parameter。例如：如果在多台主机上可能在同一微秒生成唯一ID。\\n prefix为空，则return的string长度为 13。more_entropy 为 true，则return的string长度为 23。",
+                                "desc": "Useful parameter. For example: If generating unique IDs on multiple hosts at the same microsecond.\\n If prefix is empty, the returned string length is 13. If more_entropy is true, the returned string length is 23.",
                                 "type": "string"
                             },
                             {
                                 "name": "more_entropy",
-                                "desc": "如果settings为 true，uniqid() 会在return的string结尾增加额外的熵（使用线性同余组合发生器）。 使得唯一ID更具唯一性。",
+                                "desc": "If set to true, uniqid() will add extra entropy at the end of the returned string (using linear congruential generator). This makes the unique ID more unique.",
                                 "type": "bool"
                             }
                         ]

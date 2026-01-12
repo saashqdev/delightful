@@ -22,10 +22,10 @@ const PanelHeader: React.FC<PanelHeaderProps> = memo(
 			return <>{materialHeader}</>
 		}
 
-		// handleRadio.Group的onChangeevent
+		// Handle Radio.Group onChange event
 		const handleChange = (e: RadioChangeEvent) => {
 			const value = e.target.value
-			// 找到对应的tabItem并触发其onClick
+			// Find corresponding tabItem and trigger its onClick
 			const tabItem = tabList.find((item) => item.value === value)
 			tabItem?.onClick()
 		}

@@ -63,7 +63,7 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 			const filterOptions = copyOptions.filter((item) => item.label.indexOf(value) > -1)
 			setDisplayOptions(filterOptions)
 
-			// TODO 当不存在多option需要支持新增user输入的项
+			// TODO When no options exist, support adding user input items
 			// if (filterOptions.length) {
 			// 	const existEqualOption = filterOptions.some(item => item.label === value)
 			// 	setShowAddOptionBtn(!existEqualOption && !!value)

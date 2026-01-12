@@ -1,5 +1,5 @@
 ﻿/**
- * JSON Schema 模拟数据
+ * JSON Schema mock data
  */
 
 export default {
@@ -97,7 +97,7 @@ export default {
             type: "object",
             key: "string_key",
             sort: 0,
-            title: "数据class型为string",
+            title: "Data type is string",
             description: "desc",
             items: null,
             properties: {

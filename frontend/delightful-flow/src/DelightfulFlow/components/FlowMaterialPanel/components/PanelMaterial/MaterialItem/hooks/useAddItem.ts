@@ -22,10 +22,10 @@ const useAddItem = ({ item }: UseAddItemProps) => {
   const { paramsName } = useExternalConfig()
 
   const onAddItem = useMemoizedFn(() => {
-    // 当添加loop体的时候，实际添加的元素是多个的
+    //  Whenaddloop体of时候，实际addof元素是多itemof
     const newNodes = []
     const newEdges = [] as Edge[]
-    // 是否在分组内添加node
+    // whetherat divisiongroupinsideaddnode
     let isAddInGroup = false
     const selectedNode = nodeConfig?.[selectedNodeId!]
     const isLoopBody = judgeIsLoopBody(selectedNode?.[paramsName.nodeType])
@@ -44,7 +44,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
     const newNode = generateNewNode(currentNodeSchema, paramsName, id, position)
 
     if (isAddInGroup) {
-      // 用于handle当在分组body新增node后，continue新增node应该还是在分组内
+      //  forhandlewhenat divisiongroupbodynewincreasenode后，continuenewincreasenode应该还是at divisiongroupinside
       const parentId = isLoopBody ? selectedNodeId || undefined : selectedNode?.parentId
       newNode.parentId = parentId
       newNode.expandParent = true
@@ -60,7 +60,7 @@ const useAddItem = ({ item }: UseAddItemProps) => {
 
     newNodes.push(newNode)
     const edges = reactflow?.getEdges?.() || []
-    // 如果新增的是loop，则需要多新增一个loop体和一条边
+    //  Ifnewincreaseof是loop，then需要多newincreaseCHSitemloop体 and CHS条边
     if (judgeLoopNode(newNode[paramsName.nodeType])) {
       const { newNodes: bodyNodes, newEdges: bodyEdges } = generateLoopBody(
         newNode,

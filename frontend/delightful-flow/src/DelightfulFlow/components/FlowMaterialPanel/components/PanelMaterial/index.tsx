@@ -7,33 +7,33 @@ import NodeGroups from "./components/NodeGroups"
 
 export interface PanelMaterialProps {
 	keyword: string
-	// 是否从端点出来的菜单栏
+	// Whether from endpoint menu
 	isHoverMenu?: boolean
-	// 由上层传入的Item项
+	// Item passed from upper layer
 	MaterialItemFn: (props: Record<string, any>) => JSX.Element | null
 }
 
-// 使用React.memo包装PanelMaterialcomponent，避免不必要的重新渲染
+// Use React.memo to wrap PanelMaterial component, avoiding unnecessary re-renders
 const PanelMaterial = React.memo(
 	function PanelMaterial({ keyword, MaterialItemFn }: PanelMaterialProps) {
 		const { nodeList, filterNodeGroups, getGroupNodeList } = useMaterial({ keyword })
 		const containerRef = useRef<HTMLDivElement>(null)
 
-		// 使用useCallbackoptimizationrenderMaterialItemfunction，避免不必要的重新create
+		//  useuseCallbackoptimizationrenderMaterialItemfunction，避免不必要ofrenewcreate
 		const renderMaterialItem = useCallback(
 			(n: any, extraProps: Record<string, any> = {}) => {
-				// 使用解构赋值getschema中的property
+				//  use解构赋valuegetschemainofproperty
 				const { key, headerRight, ...restSchema } = n.schema
-				// create一个固定的key，避免每次渲染生成新的string
+				//  createCHSitem固定ofkey，avoid each timerendergeneratenewstring
 				const itemKey = key || `item-${restSchema?.id}`
 
-				// 直接returnMaterialItemFncomponent，传递必要的props
+				//  直接returnMaterialItemFncomponent，传递必要ofprops
 				return <MaterialItemFn {...restSchema} {...extraProps} key={itemKey} />
 			},
 			[MaterialItemFn],
 		)
 
-		// 使用useMemooptimizationnodelist渲染，只在nodeList或MaterialItemFn变化时重新计算
+		//  useuseMemooptimizationnodelistrender，只在nodeList或MaterialItemFn变化时renewcalculate
 		const renderedNodeList = useMemo(() => {
 			return nodeList.map((n, i) => {
 				const { key, headerRight, ...restSchema } = n.schema
@@ -59,7 +59,7 @@ const PanelMaterial = React.memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 只有keyword发生变化时才重新渲染
+		// onlykeywordre-render only when changednewrender
 		return (
 			prevProps.keyword === nextProps.keyword &&
 			prevProps.MaterialItemFn === nextProps.MaterialItemFn

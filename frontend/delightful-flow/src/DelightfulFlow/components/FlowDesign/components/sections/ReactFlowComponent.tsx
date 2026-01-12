@@ -134,7 +134,7 @@ const ReactFlowComponent = memo(
 					selectionMode={SelectionMode.Partial}
 				>
 					{children}
-					{/* 渲染辅助线 */}
+					{/* Render helper lines */}
 					{hasHelperLines && (
 						<HelperLines
 							horizontalLines={horizontalLines}

@@ -13,11 +13,11 @@ type IconImportProps = {
 }
 
 export enum ImportType {
-	/** 替换式 */
+	/** Replace type */
 	Replace = 1,
-	/** 插入式 */
+	/** Insert type */
 	Insert = 2,
-	/** 追加式 */
+	/** Append type */
 	Push = 3,
 }
 

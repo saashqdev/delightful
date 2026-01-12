@@ -11,14 +11,14 @@ const MemberSelect = ({
 	size,
 	isMultiple = true,
 
-	// 是否显示人员/部门切换器
+	// Whether to show department/member switcher
 	showMemberType = false,
 
-	// 成员class型,
+	// Member type,
 	searchType,
 	setSearchType,
 
-	// 是否只能选择自己
+	// Whether only self can be selected
 	onlyMyself = false,
 
 	onSearch,
@@ -35,7 +35,7 @@ const MemberSelect = ({
 			if (!val) return setOptions([])
 			let results = [] as Member[]
 
-			// 只能选自己，则不走异步逻辑
+			// Only self can be selected, skip async logic
 			if (onlyMyself) return
 			try {
 				const isDepartment = searchType === MemberType.Department

@@ -4,7 +4,7 @@ export default function useToolbar() {
 	return [
 		{
 			icon: DebuggerToolbar,
-			tooltip: "单点debug",
+			tooltip: "Single point debug",
 		},
 	]
 }

@@ -9,8 +9,8 @@ interface CanvasRendererProps {
 }
 
 /**
- * 使用纯Canvas渲染flow图的component
- * 用于对比ReactFlow DOM渲染与Canvas渲染的performance差异
+ * Use pure Canvas to render flow diagram component
+ * Used to compare performance differences between ReactFlow DOM rendering and Canvas rendering
  */
 const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 	nodes,
@@ -25,12 +25,12 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 	const [localViewport, setLocalViewport] = useState(viewport)
 	const [fps, setFps] = useState(0)
 
-	// performance监测相关
+	// performance monitoring related
 	const fpsCountRef = useRef(0)
 	const lastTimeRef = useRef(performance.now())
 	const animationFrameRef = useRef<number | null>(null)
 
-	// 调整画布大小
+	// Adjust canvas size
 	useEffect(() => {
 		if (!containerRef.current) return
 
@@ -46,7 +46,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		return () => window.removeEventListener("resize", updateSize)
 	}, [])
 
-	// 计算node坐标
+	// Calculate node coordinates
 	const transformedNodes = useMemo(() => {
 		return nodes.map((node) => {
 			const x = node.position.x * localViewport.zoom + localViewport.x
@@ -60,7 +60,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		})
 	}, [nodes, localViewport])
 
-	// 计算边坐标
+	// Calculate edge coordinates
 	const transformedEdges = useMemo(() => {
 		return edges
 			.map((edge) => {
@@ -96,7 +96,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 			.filter(Boolean)
 	}, [edges, nodes, localViewport])
 
-	// 渲染Canvas
+	// Render Canvas
 	useEffect(() => {
 		const canvas = canvasRef.current
 		if (!canvas) return
@@ -104,7 +104,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		const ctx = canvas.getContext("2d")
 		if (!ctx) return
 
-		// 计算FPS
+		// CalculateFPS
 		const measureFps = () => {
 			fpsCountRef.current++
 			const now = performance.now()
@@ -114,13 +114,13 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 				lastTimeRef.current = now
 			}
 
-			// 清除画布
+			// Clear canvas
 			ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-			// 绘制网格背景
+			// Draw grid background
 			drawGrid(ctx, localViewport)
 
-			// 绘制边
+			// Draw edges
 			ctx.strokeStyle = "#b1b1b7"
 			ctx.lineWidth = 1.5
 
@@ -130,25 +130,25 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 				ctx.beginPath()
 				ctx.moveTo(edge.source.x, edge.source.y)
 
-				// 简单的直线
+				// Simple straight line
 				ctx.lineTo(edge.target.x, edge.target.y)
 
 				ctx.stroke()
 			})
 
-			// 绘制node
+			// drawnode
 			transformedNodes.forEach((node) => {
 				ctx.fillStyle = "#ffffff"
 				ctx.strokeStyle = "#1a192b"
 				ctx.lineWidth = 1
 
-				// 绘制node矩形
+				// Draw node rectangle
 				ctx.beginPath()
 				ctx.rect(node.position.x, node.position.y, node.width, node.height)
 				ctx.fill()
 				ctx.stroke()
 
-				// 绘制node文本
+				// Draw node text
 				ctx.fillStyle = "#222222"
 				ctx.font = `${12 * localViewport.zoom}px Arial`
 				ctx.textAlign = "center"
@@ -172,7 +172,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		}
 	}, [transformedNodes, transformedEdges, size, localViewport])
 
-	// 绘制网格
+	// Draw grid
 	const drawGrid = (ctx: CanvasRenderingContext2D, viewport: typeof localViewport) => {
 		const gridSize = 20 * viewport.zoom
 		const offsetX = viewport.x % gridSize
@@ -181,7 +181,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		ctx.strokeStyle = "#f0f0f0"
 		ctx.lineWidth = 1
 
-		// 绘制竖线
+		// draw vertical line
 		for (let x = offsetX; x < size.width; x += gridSize) {
 			ctx.beginPath()
 			ctx.moveTo(x, 0)
@@ -189,7 +189,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 			ctx.stroke()
 		}
 
-		// 绘制横线
+		// Draw horizontal lines
 		for (let y = offsetY; y < size.height; y += gridSize) {
 			ctx.beginPath()
 			ctx.moveTo(0, y)
@@ -198,7 +198,7 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		}
 	}
 
-	// 鼠标eventhandle
+	// Mouse event handler
 	const handleMouseDown = (e: React.MouseEvent) => {
 		setIsDragging(true)
 		setDragStart({ x: e.clientX, y: e.clientY })
@@ -223,25 +223,25 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 		setIsDragging(false)
 	}
 
-	// 滚轮缩放
+	// Scroll wheel zoom
 	const handleWheel = (e: React.WheelEvent) => {
 		e.preventDefault()
 
 		const delta = e.deltaY < 0 ? 0.1 : -0.1
 		const newZoom = Math.max(0.1, Math.min(2, localViewport.zoom + delta))
 
-		// 计算鼠标位置相对于画布的坐标
+		// Calculatemouse position relative to canvas
 		const rect = canvasRef.current?.getBoundingClientRect()
 		if (!rect) return
 
 		const mouseX = e.clientX - rect.left
 		const mouseY = e.clientY - rect.top
 
-		// 计算鼠标位置在原始坐标系中的位置
+		// Calculatemouse position in original coordinate system
 		const x = (mouseX - localViewport.x) / localViewport.zoom
 		const y = (mouseY - localViewport.y) / localViewport.zoom
 
-		// 计算新的viewport位置
+		// Calculatenewviewportposition
 		const newX = mouseX - x * newZoom
 		const newY = mouseY - y * newZoom
 
@@ -274,16 +274,16 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 				}}
 			>
 				<div>
-					<strong>Canvas渲染 FPS:</strong> {fps} {fps < 30 ? "(低performance)" : ""}
+					<strong>Canvas Rendering FPS:</strong> {fps} {fps < 30 ? "(low performance)" : ""}
 				</div>
 				<div>
-					<strong>node数量:</strong> {nodes.length}
+					<strong>Node Count:</strong> {nodes.length}
 				</div>
 				<div>
-					<strong>边数量:</strong> {edges.length}
+					<strong>Edge Count:</strong> {edges.length}
 				</div>
 				<div>
-					<strong>缩放:</strong> {Math.round(localViewport.zoom * 100)}%
+					<strong>Zoom:</strong> {Math.round(localViewport.zoom * 100)}%
 				</div>
 			</div>
 

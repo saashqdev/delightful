@@ -51,7 +51,7 @@ export default function useLLM({ form }: UseLLM) {
 				tags: [
 					{
 						type: LLMLabelTagType.Text,
-						value: "微软Azure",
+						value: "Microsoft Azure",
 					},
 					{
 						type: LLMLabelTagType.Icon,

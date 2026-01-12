@@ -5,9 +5,9 @@ import styles from "../index.module.less"
 import NodeGroup from "./NodeGroup"
 import VirtualNodeList from "./VirtualNodeList"
 
-// 定义一个阈值，当node数量超过这个阈值时启用虚拟滚动
+// define a threshold，whennodeenable virtual scroll when count exceeds threshold
 const VIRTUAL_SCROLL_THRESHOLD = 30
-const NODE_ITEM_HEIGHT = 40 // 估计的每个node项的高度，需要根据实际UI调整
+const NODE_ITEM_HEIGHT = 40 // estimated pernodeitem height，need based on actualUIadjust
 
 interface NodeGroupsProps {
 	filterNodeGroups: any[]
@@ -25,20 +25,20 @@ const NodeGroups = memo(
 		renderMaterialItem,
 		MaterialItemFn,
 	}: NodeGroupsProps) => {
-		// 判断是否需要使用虚拟滚动
+		// Determinewhether virtual scroll needed
 		const shouldUseVirtualScroll = useMemo(() => {
 			return renderedNodeList.length > VIRTUAL_SCROLL_THRESHOLD
 		}, [renderedNodeList.length])
 
 		if (filterNodeGroups?.length === 0) {
-			// 如果node数量超过阈值，使用虚拟滚动
+			// Ifnodecount exceeds threshold，use virtual scroll
 			if (shouldUseVirtualScroll) {
 				return <VirtualNodeList items={renderedNodeList} itemHeight={NODE_ITEM_HEIGHT} />
 			}
 			return <>{renderedNodeList}</>
 		}
 
-		// 渲染node组
+		// Rendernodegroup
 		const groupElements = filterNodeGroups.map((nodeGroup, i) => (
 			<NodeGroup
 				key={`group-${i}`}
@@ -54,7 +54,7 @@ const NodeGroups = memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 深度比较可能不高效，这里仅比较引用，实际使用时可能需要自定义更合适的比较function
+		// deep comparison may not be efficient，only compare reference here，may need custom comparison in actual usefunction
 		return (
 			prevProps.filterNodeGroups === nextProps.filterNodeGroups &&
 			prevProps.renderedNodeList === nextProps.renderedNodeList &&

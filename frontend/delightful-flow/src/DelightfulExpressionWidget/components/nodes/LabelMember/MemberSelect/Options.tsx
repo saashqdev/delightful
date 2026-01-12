@@ -13,18 +13,18 @@ import { Timeout } from "ahooks/lib/useRequest/src/types"
 
 /**
  *
- * @param {Function} itemClick 点击单个选择调用event
- * @param {Ref} parent 父级Ref主要用来getinput field的高度，然后将下拉弹层向下移
- * @param {Array} values 值
- * @param {Array} options 下拉option
- * @param {Boolean || Function} filterOption 是否允许过滤
- * @param {Function} onSearch searchfunction
- * @param {Component} footer component
- * @param {Object} extraOptions // 选择上一步的configuration
+ * @param {Function} itemClick Click single selection event callback
+ * @param {Ref} parent Parent Ref mainly used to get input field height, then move dropdown layer down
+ * @param {Array} values Values
+ * @param {Array} options Dropdown options
+ * @param {Boolean || Function} filterOption Whether filtering is allowed
+ * @param {Function} onSearch Search function
+ * @param {Component} footer Component
+ * @param {Object} extraOptions // Previous step selection configuration
  * {
- *		showExtra, //是否显示选择上一步
- * 		step, // 当前是第几步
- * 		fieldTypes // 支持的字段class型
+ *\t\tshowExtra, //Whether to show previous step selection
+ * \t\tstep, // Current step number
+ * \t\tfieldTypes // Supported field types
  * }
  */
 

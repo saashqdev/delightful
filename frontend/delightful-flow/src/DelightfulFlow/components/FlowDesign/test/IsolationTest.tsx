@@ -16,7 +16,7 @@ import ReactFlow, {
 } from "reactflow"
 import "reactflow/dist/style.css"
 
-// 自定义简单node，用于隔离test
+// Custom simple node for isolation testing
 const SimpleNode = ({ data }: NodeProps) => {
 	return (
 		<div
@@ -37,7 +37,7 @@ const SimpleNode = ({ data }: NodeProps) => {
 	)
 }
 
-// 自定义complexnode，用于test更complexcomponent的performance影响
+// Custom complex node for testing performance impact of more complex components
 const ComplexNode = ({ data }: NodeProps) => {
 	return (
 		<div
@@ -61,7 +61,7 @@ const ComplexNode = ({ data }: NodeProps) => {
 						borderRadius: "3px",
 					}}
 				>
-					输入: {data.inputs || 0}
+					Input: {data.inputs || 0}
 				</div>
 				<div
 					style={{
@@ -71,49 +71,49 @@ const ComplexNode = ({ data }: NodeProps) => {
 						borderRadius: "3px",
 					}}
 				>
-					输出: {data.outputs || 0}
+					Output: {data.outputs || 0}
 				</div>
 			</div>
 		</div>
 	)
 }
 
-// 注册Node type
+// Register node types
 const nodeTypes: NodeTypes = {
 	simple: SimpleNode,
 	complex: ComplexNode,
 }
 
 /**
- * ReactFlow隔离testcomponent - 用于诊断performance问题
+ * ReactFlow isolation test component - for diagnosing performance issues
  */
 const IsolationTest: React.FC = () => {
-	// performance指标status
+	// Performance metric state
 	const [renderTime, setRenderTime] = useState<number>(0)
 	const [fps, setFps] = useState<number>(0)
-	const [memoryUsage, setMemoryUsage] = useState<string>("未测量")
+	const [memoryUsage, setMemoryUsage] = useState<string>("Not measured")
 	const [nodeCount, setNodeCount] = useState<number>(0)
 	const [edgeCount, setEdgeCount] = useState<number>(0)
 	const [nodeType, setNodeType] = useState<"simple" | "complex">("simple")
 	const [currentTest, setCurrentTest] = useState<string>("")
 
-	// flow图status
+	// flowgraphstatus
 	const [nodes, setNodes, onNodesChange] = useNodesState([])
 	const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
-	// FPS测量
+	// FPS measurement
 	const fpsRef = useRef<number>(0)
 	const frameCountRef = useRef<number>(0)
 	const lastTimeRef = useRef<number>(performance.now())
 	const animationFrameIdRef = useRef<number | null>(null)
 
-	// 连接边的回调
+	// Callback for connecting edges
 	const onConnect = useCallback(
 		(params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
 		[setEdges],
 	)
 
-	// 生成指定数量的node
+	// Generate specified number of nodes
 	const generateNodes = useCallback((count: number, type: "simple" | "complex"): Node[] => {
 		const gridSize = Math.ceil(Math.sqrt(count))
 		const spacing = 200
@@ -139,15 +139,15 @@ const IsolationTest: React.FC = () => {
 		})
 	}, [])
 
-	// 生成指定数量的边
+	// Generate specified number of edges
 	const generateEdges = useCallback((nodeCount: number, edgeCount: number): Edge[] => {
 		const edges: Edge[] = []
 
-		// 确保边数不超过可能的最大连接数
+		// Ensureedge count not exceeding max possible connections
 		const maxPossibleEdges = nodeCount * (nodeCount - 1)
 		const actualEdgeCount = Math.min(edgeCount, maxPossibleEdges)
 
-		// create一个简单的树结构，确保所有node都有连接
+		// createa simple tree structure，ensure allnodeall connected
 		for (let i = 1; i < nodeCount; i++) {
 			const parentId = Math.floor((i - 1) / 2)
 			edges.push({
@@ -158,7 +158,7 @@ const IsolationTest: React.FC = () => {
 			})
 		}
 
-		// 添加额外的随机边，直到达到指定数量
+		// Addextra random edges，until reaching specified count
 		if (edges.length < actualEdgeCount) {
 			const remainingEdges = actualEdgeCount - edges.length
 
@@ -166,12 +166,12 @@ const IsolationTest: React.FC = () => {
 				const source = Math.floor(Math.random() * nodeCount)
 				let target = Math.floor(Math.random() * nodeCount)
 
-				// 确保不是自环
+				// Ensurenot a self loop
 				while (target === source) {
 					target = Math.floor(Math.random() * nodeCount)
 				}
 
-				// check这条边是否已经存在
+				// Check if this edge already exists
 				const edgeExists = edges.some(
 					(edge) => edge.source === `node-${source}` && edge.target === `node-${target}`,
 				)
@@ -190,7 +190,7 @@ const IsolationTest: React.FC = () => {
 		return edges
 	}, [])
 
-	// 监测FPS
+	// measureFPS
 	const monitorFPS = useCallback(() => {
 		frameCountRef.current += 1
 		const now = performance.now()
@@ -206,7 +206,7 @@ const IsolationTest: React.FC = () => {
 		animationFrameIdRef.current = requestAnimationFrame(monitorFPS)
 	}, [])
 
-	// 测量内存使用情况
+	// Measure memory usage
 	const measureMemory = useCallback(async () => {
 		if ("memory" in performance) {
 			try {
@@ -217,20 +217,20 @@ const IsolationTest: React.FC = () => {
 					setMemoryUsage(`${formattedMemory} MB`)
 				}
 			} catch (error) {
-				console.error("无法测量内存使用情况:", error)
-				setMemoryUsage("浏览器不支持")
+				console.error("Unable to measure memory usage:", error)
+				setMemoryUsage("Browser not supported")
 			}
 		} else {
-			setMemoryUsage("浏览器不支持")
+			setMemoryUsage("browser not supported")
 		}
 	}, [])
 
-	// start/停止performance监控
+	// start/stopperformancemonitor
 	useEffect(() => {
-		// start监控FPS
+		// startmonitorFPS
 		animationFrameIdRef.current = requestAnimationFrame(monitorFPS)
 
-		// 定期测量内存
+		// measure memory periodically
 		const memoryInterval = setInterval(measureMemory, 1000)
 
 		return () => {
@@ -242,14 +242,14 @@ const IsolationTest: React.FC = () => {
 		}
 	}, [monitorFPS, measureMemory])
 
-	// loadtest数据
+	// loadtestdata
 	const loadTestData = useCallback(
 		(count: number) => {
-			setCurrentTest(`load ${count} 个${nodeType === "simple" ? "简单" : "complex"}nodetest`)
+			setCurrentTest(`load ${count} item${nodeType === "simple" ? "simple" : "complex"}nodetest`)
 			const start = performance.now()
 
-			// 生成node和边
-			const edgeCount = count * 2 // 边的数量是node的2倍
+			// Generatenodeand edges
+			const edgeCount = count * 2 // edge count isnodeof2times
 			const newNodes = generateNodes(count, nodeType)
 			const newEdges = generateEdges(count, edgeCount)
 
@@ -258,7 +258,7 @@ const IsolationTest: React.FC = () => {
 			setNodeCount(count)
 			setEdgeCount(edgeCount)
 
-			// 使用setTimeout来确保渲染已complete
+			// usesetTimeoutto ensure renderedcomplete
 			setTimeout(() => {
 				const end = performance.now()
 				setRenderTime(end - start)
@@ -267,7 +267,7 @@ const IsolationTest: React.FC = () => {
 		[generateNodes, generateEdges, setNodes, setEdges, nodeType],
 	)
 
-	// 清除test数据
+	// cleartestdata
 	const clearTestData = useCallback(() => {
 		setNodes([])
 		setEdges([])
@@ -277,12 +277,12 @@ const IsolationTest: React.FC = () => {
 		setCurrentTest("")
 	}, [setNodes, setEdges])
 
-	// 切换Node type
+	// toggleNode type
 	const toggleNodeType = useCallback(() => {
 		setNodeType((prev) => (prev === "simple" ? "complex" : "simple"))
 	}, [])
 
-	// performancetestbuttonlist
+	// Performance test button list
 	const testButtons = useMemo(
 		() => [
 			{ count: 10, label: "10 node" },
@@ -319,30 +319,30 @@ const IsolationTest: React.FC = () => {
 						boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
 					}}
 				>
-					<h3 style={{ marginTop: 0 }}>ReactFlow 隔离test</h3>
+					<h3 style={{ marginTop: 0 }}>ReactFlow isolationtest</h3>
 
 					<div style={{ marginBottom: "15px" }}>
 						<div>
-							<strong>当前test:</strong> {currentTest || "无"}
+							<strong>currenttest:</strong> {currentTest || "none"}
 						</div>
 						<div>
 							<strong>Node type:</strong>{" "}
-							{nodeType === "simple" ? "简单node" : "complexnode"}
+							{nodeType === "simple" ? "simplenode" : "complexnode"}
 						</div>
 						<div>
-							<strong>node数量:</strong> {nodeCount}
+							<strong>nodecount:</strong> {nodeCount}
 						</div>
 						<div>
-							<strong>边数量:</strong> {edgeCount}
+							<strong>edge count:</strong> {edgeCount}
 						</div>
 						<div>
-							<strong>渲染time:</strong> {renderTime.toFixed(2)} ms
+							<strong>rendertime:</strong> {renderTime.toFixed(2)} ms
 						</div>
 						<div>
 							<strong>FPS:</strong> {fps}
 						</div>
 						<div>
-							<strong>内存使用:</strong> {memoryUsage}
+							<strong>memory usage:</strong> {memoryUsage}
 						</div>
 					</div>
 
@@ -377,7 +377,7 @@ const IsolationTest: React.FC = () => {
 									flex: 1,
 								}}
 							>
-								切换为{nodeType === "simple" ? "complex" : "简单"}node
+								switch to{nodeType === "simple" ? "complex" : "simple"}node
 							</button>
 
 							<button
@@ -391,7 +391,7 @@ const IsolationTest: React.FC = () => {
 									flex: 1,
 								}}
 							>
-								清除test
+								cleartest
 							</button>
 						</div>
 					</div>

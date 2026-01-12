@@ -5,13 +5,13 @@ import CanvasRenderer from "./CanvasRenderer"
 import { Node, Edge } from "reactflow"
 
 /**
- * 对比testcomponent - 同时展示ReactFlow和Canvas渲染的performance差异
+ * Comparison test component - displays performance differences between ReactFlow and Canvas rendering simultaneously
  */
 const ComparisonTest: React.FC = () => {
 	const [nodeCount, setNodeCount] = useState(20)
 	const [renderMode, setRenderMode] = useState<"react-flow" | "canvas" | "both">("both")
 
-	// 生成testnode
+	// Generate test nodes
 	const nodes: Node[] = useMemo(
 		() =>
 			Array.from({ length: nodeCount }, (_, i) => ({
@@ -23,12 +23,12 @@ const ComparisonTest: React.FC = () => {
 		[nodeCount],
 	)
 
-	// 生成test边
+	// Generate test edges
 	const edges: Edge[] = useMemo(() => {
 		const result: Edge[] = []
 		for (let i = 0; i < nodeCount - 1; i++) {
 			if (i % 10 < 9) {
-				// 连接同一行的node
+				// Connect nodes in the same row
 				result.push({
 					id: `edge-${i}-${i + 1}`,
 					source: `node-${i}`,
@@ -37,7 +37,7 @@ const ComparisonTest: React.FC = () => {
 				})
 			}
 			if (i + 10 < nodeCount) {
-				// 连接上下行的node
+				// Connect nodes in adjacent rows
 				result.push({
 					id: `edge-${i}-${i + 10}`,
 					source: `node-${i}`,
@@ -49,19 +49,19 @@ const ComparisonTest: React.FC = () => {
 		return result
 	}, [nodeCount])
 
-	// 增加node数量
+	// Increase node count
 	const addNodes = useCallback(() => {
 		setNodeCount((prev) => prev + 10)
 	}, [])
 
-	// 减少node数量
+	// Decrease node count
 	const removeNodes = useCallback(() => {
 		setNodeCount((prev) => Math.max(10, prev - 10))
 	}, [])
 
 	return (
 		<div style={{ width: "100%", height: "100vh", display: "flex", flexDirection: "column" }}>
-			{/* 控制面板 */}
+			{/* Control panel */}
 			<div
 				style={{
 					padding: "10px",
@@ -72,17 +72,17 @@ const ComparisonTest: React.FC = () => {
 				}}
 			>
 				<div>
-					<strong>当前node数: </strong> {nodeCount}
+					<strong>Current node count: </strong> {nodeCount}
 					<div style={{ marginTop: "8px" }}>
 						<button onClick={addNodes} style={{ marginRight: "5px" }}>
-							增加10个node
+							Add 10 nodes
 						</button>
-						<button onClick={removeNodes}>减少10个node</button>
+						<button onClick={removeNodes}>Remove 10 nodes</button>
 					</div>
 				</div>
 
 				<div>
-					<strong>渲染模式: </strong>
+					<strong>Rendering mode: </strong>
 					<div style={{ marginTop: "8px" }}>
 						<label style={{ marginRight: "10px" }}>
 							<input
@@ -90,7 +90,7 @@ const ComparisonTest: React.FC = () => {
 								checked={renderMode === "both"}
 								onChange={() => setRenderMode("both")}
 							/>
-							对比模式
+							Comparison mode
 						</label>
 						<label style={{ marginRight: "10px" }}>
 							<input
@@ -98,7 +98,7 @@ const ComparisonTest: React.FC = () => {
 								checked={renderMode === "react-flow"}
 								onChange={() => setRenderMode("react-flow")}
 							/>
-							仅ReactFlow
+							ReactFlow only
 						</label>
 						<label>
 							<input
@@ -106,24 +106,24 @@ const ComparisonTest: React.FC = () => {
 								checked={renderMode === "canvas"}
 								onChange={() => setRenderMode("canvas")}
 							/>
-							仅Canvas
+							Canvas only
 						</label>
 					</div>
 				</div>
 
 				<div>
-					<strong>performancetestdescription:</strong>
+					<strong>Performance test instructions:</strong>
 					<div style={{ marginTop: "8px", fontSize: "12px" }}>
-						1. 平移和缩放时观察FPS变化
+						1. Observe FPS changes during panning and zooming
 						<br />
-						2. 增加node数量直到performance下降
+						2. Increase node count until performance degrades
 						<br />
-						3. 对比两种渲染模式的performance差异
+						3. Compare performance differences between the two rendering modes
 					</div>
 				</div>
 			</div>
 
-			{/* 渲染区域 */}
+			{/* Rendering area */}
 			<div
 				style={{
 					flex: 1,
@@ -152,7 +152,7 @@ const ComparisonTest: React.FC = () => {
 									zIndex: 5,
 								}}
 							>
-								<strong>ReactFlow DOM渲染</strong>
+								<strong>ReactFlow DOM rendering</strong>
 							</div>
 						)}
 						<PerformanceTest />
@@ -180,7 +180,7 @@ const ComparisonTest: React.FC = () => {
 									zIndex: 5,
 								}}
 							>
-								<strong>Canvas渲染</strong>
+								<strong>Canvas rendering</strong>
 							</div>
 						)}
 						<CanvasRenderer nodes={nodes} edges={edges} />

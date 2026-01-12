@@ -1,6 +1,6 @@
 ﻿import { FilterTargetTypes, operator2Label, operatorMap } from "./constants"
 
-// get默认的筛option
+// Get default filter options
 export const getDefaultFilter = () => {
 	return {
 		left: FilterTargetTypes.Username,

@@ -4,10 +4,10 @@ export default function useLLMParameters() {
 	const parameterList = useMemo(() => {
 		return [
 			{
-				label: "温度",
+				label: "Temperature",
 				key: "temperature",
 				tooltips:
-					"温度控制随机性。较低的温度会导致较少的随机complete。随着温度接近零，模型将变得确定性和重复性。较高的温度会导致更多的随机complete。",
+					"Temperature controls randomness. Lower temperature leads to less random completions. As temperature approaches zero, the model becomes deterministic and repetitive. Higher temperature leads to more random completions.",
 				open: true,
 				defaultValue: 0.7,
 				extra: {
@@ -20,7 +20,7 @@ export default function useLLMParameters() {
 			{
 				label: "Top P",
 				key: "top_p",
-				tooltips: "通过核心采样控制多样性：0.5表示考虑了一半的所有可能性加权option。",
+				tooltips: "Control diversity via nucleus sampling: 0.5 means half of all likelihood-weighted options are considered.",
 				open: false,
 				defaultValue: 1,
 				extra: {
@@ -31,9 +31,9 @@ export default function useLLMParameters() {
 			},
 
 			{
-				label: "存在惩罚",
+				label: "Presence Penalty",
 				key: "exist_penalty",
-				tooltips: "对文本中已有的标记的对数概率施加惩罚。",
+				tooltips: "Applies a penalty to the log-probability of tokens already present in the text.",
 				open: false,
 				defaultValue: 0,
 				extra: {
@@ -44,9 +44,9 @@ export default function useLLMParameters() {
 			},
 
 			{
-				label: "频率惩罚",
+				label: "Frequency Penalty",
 				key: "frequency_penalty",
-				tooltips: "对文本中出现的标记的对数概率施加惩罚。",
+				tooltips: "Applies a penalty to the log-probability of tokens based on their frequency in the text.",
 				open: false,
 				defaultValue: 0,
 				extra: {
@@ -57,9 +57,9 @@ export default function useLLMParameters() {
 			},
 
 			{
-				label: "最大标记",
+				label: "Max Tokens",
 				key: "max_tags",
-				tooltips: "指定生成结果长度的上限。如果生成结果截断，可以调大该parameter。",
+				tooltips: "Specifies the upper limit for the length of generated results. If the result is truncated, increase this parameter.",
 				open: false,
 				defaultValue: 512,
 				extra: {

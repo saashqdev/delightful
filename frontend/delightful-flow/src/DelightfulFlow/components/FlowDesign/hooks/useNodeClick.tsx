@@ -19,9 +19,9 @@ export default function useNodeClick() {
 		setSelectedNodeId(node.id)
 		flowEventBus.emit(FLOW_EVENTS.NODE_SELECTED, node.id)
 
-		// handle点击loop体的逻辑
+		// Handle click on loop body logic
 		if (judgeIsLoopBody(node[paramsName.nodeType])) {
-			// 需要手动提升loop体内边的层级
+			// Need to manually elevate edge levels within loop body
 			elevateBodyEdgesLevel(node)
 		} else {
 			resetEdgesLevels(node)

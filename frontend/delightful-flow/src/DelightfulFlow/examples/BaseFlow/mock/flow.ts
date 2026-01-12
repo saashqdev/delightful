@@ -1,7 +1,7 @@
 ﻿export default {
     "id": "DELIGHTFUL-FLOW-677663f1ca9088-26607117",
     "icon": "",
-    "name": "test等待node",
+    "name": "test wait node",
     "type": 1,
     "edges": [],
     "nodes": [],
@@ -10,7 +10,7 @@
     "modifier": "usi_eb3a4884d3dda84e9a8d8644e9365c2c",
     "created_at": "2025-01-02 18:01:21",
     "updated_at": "2025-01-02 18:01:21",
-    "description": "test等待node",
+    "description": "test wait node",
     "tool_set_id": "not_grouped",
     "creator_info": null,
     "version_code": "",

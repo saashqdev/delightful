@@ -29,20 +29,20 @@ export default function Reply() {
 				label: (
 					<div className={styles.label}>
 						<IconTextSize color="#000000" stroke={1} className={styles.icon} />
-						<span>文本</span>
+						<span>Text</span>
 					</div>
 				),
-				realLabel: "文本",
+				realLabel: "Text",
 				value: MessageType.Text,
 			},
 			{
 				label: (
 					<div className={styles.label}>
 						<IconPhoto color="#3A57D1" stroke={1} className={styles.icon} />
-						<span>图片</span>
+						<span>Image</span>
 					</div>
 				),
-				realLabel: "图片",
+				realLabel: "Image",
 				value: MessageType.Image,
 			},
 		]
@@ -79,23 +79,23 @@ export default function Reply() {
 				onValuesChange={onValuesChange}
 				initialValues={initialValues}
 			>
-				<Form.Item name="type" label="message卡片class型">
+				<Form.Item name="type" label="Message Card Type">
 					<TsSelect
 						options={messageTypeOptions}
 						dropdownRenderProps={{
-							placeholder: "search卡片class型",
+							placeholder: "Search card type",
 							component: BaseDropdownRenderer,
 						}}
 						className={styles.messageTypeSelect}
-						placeholder="请选择"
+						placeholder="Please select"
 					/>
 				</Form.Item>
 				{formValues.type === MessageType.Text && (
 					<DelightfulExpression
 						name="content"
-						label="message内容"
+						label="Message Content"
 						mode={ExpressionMode.TextArea}
-						placeholder="纯文本的message内容，支持使用“$+空格”添加变量"
+						placeholder="Plain text message content, use '$ + space' to add variables"
 						dataSource={expressionDataSource}
 					/>
 				)}
@@ -103,17 +103,17 @@ export default function Reply() {
 					<>
 						<DelightfulExpression
 							name="link"
-							label="图片链接"
+							label="Image Link"
 							mode={ExpressionMode.TextArea}
-							placeholder="输入图片链接，支持使用“$+空格”添加变量"
+							placeholder="Enter image link, use '$ + space' to add variables"
 							minHeight="100%"
 							dataSource={expressionDataSource}
 						/>
 						<DelightfulExpression
 							name="link_desc"
-							label="描述文本"
+							label="Description Text"
 							mode={ExpressionMode.TextArea}
-							placeholder="输入描述文本，支持使用“$+空格”添加变量"
+							placeholder="Enter description text, use '$ + space' to add variables"
 							minHeight="100%"
 							dataSource={expressionDataSource}
 						/>

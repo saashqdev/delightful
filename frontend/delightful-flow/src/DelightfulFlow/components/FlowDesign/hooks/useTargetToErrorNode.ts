@@ -1,4 +1,4 @@
-﻿/** 当日志运行error时，定位到error的node */
+﻿/** When logs run into error, locate to the error node */
 import { useNodeTesting } from '@/DelightfulFlow/context/NodeTesingContext/useNodeTesting'
 import React from 'react'
 import useViewport from '../../common/hooks/useViewport'
@@ -20,14 +20,14 @@ export default function useTargetToErrorNode() {
 			.map(([nodeId]) => nodeId)
 		
 		// console.log("errorNodeId", errorNodeId, testingResultMap)
-		// 存在error，则定位到error的nodeid
+		// If error exists, locate to error node id
 		if (errorNodeId) {
 			const errorNode = nodes.find((n) => n.node_id === errorNodeId)
 			// console.log("errorNode", errorNode)
 			if (!errorNode?.width) return
 			updateViewPortToTargetNode(errorNode)
 		}
-		// 全都success，则定位到最后一个node
+		// All success, then locate to last node
 		else{
 			const testNodeIds = Object.keys(testingResultMap)
 			const [lastSuccessNodeId] = Object.entries(testingResultMap).filter(([, testConfig]) => {

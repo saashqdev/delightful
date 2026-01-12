@@ -26,7 +26,7 @@ export default function LLMV0() {
 	const onValuesChange = useMemoizedFn((changeValues) => {
 		if (!currentNode) return
 
-		// 特殊handlellm字段
+		// Special handling for llm field
 		if (changeValues.llm) {
 			const { model, ...rest } = changeValues.llm
 			_.set(currentNode, ["params", "model"], model)
@@ -55,7 +55,7 @@ export default function LLMV0() {
 				onValuesChange={onValuesChange}
 				initialValues={initialValues}
 			>
-				<Form.Item name="llm" label="模型" className={styles.formItem}>
+				<Form.Item name="llm" label="Model" className={styles.formItem}>
 					<LLMParameters
 						LLMValue={LLMValue}
 						onChange={onLLMValueChange}
@@ -63,17 +63,17 @@ export default function LLMV0() {
 					/>
 					{/* <LLMSelect value={inputValue} onChange={onChange} options={LLMOptions} /> */}
 				</Form.Item>
-				<div className={styles.inputHeader}>输入</div>
+				<div className={styles.inputHeader}>Input</div>
 				<div className={styles.inputBody}>
 					<DropdownCard
-						title="tip词"
+						title="Prompt"
 						headerClassWrapper={styles.promptWrapper}
 						height="auto"
 					>
 						<DelightfulExpression
 							label="System"
 							name="system_prompt"
-							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，tip词内容会被固定在上下文的开头，支持使用“@”添加变量"
+							placeholder="Fixed guiding words for large models. Adjust content to guide chat direction. Prompt content is fixed at the beginning of context. Use '@' to add variables"
 							dataSource={expressionDataSource}
 							showExpand
 						/>
@@ -81,7 +81,7 @@ export default function LLMV0() {
 						<DelightfulExpression
 							label="User"
 							name="user_prompt"
-							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，tip词内容会被固定在上下文的开头，支持使用“@”添加变量"
+							placeholder="Fixed guiding words for large models. Adjust content to guide chat direction. Prompt content is fixed at the beginning of context. Use '@' to add variables"
 							className={styles.LLMInput}
 							dataSource={expressionDataSource}
 						/>

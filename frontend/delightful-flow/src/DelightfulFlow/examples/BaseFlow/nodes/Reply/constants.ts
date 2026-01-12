@@ -1,11 +1,11 @@
 ﻿
 
 /**
- * messageclass型枚举
+ * Message type enumeration
  */
 export enum MessageType {
-    // 文本
+    // Text
     Text = 'text',
-    // 图片
+    // Image
     Image = 'img'
 }

@@ -8,9 +8,9 @@ import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
 
 export enum Interactions {
-	/** 鼠标友好模式 */
+	/** Mouse-friendly mode */
 	Mouse = "mouse",
-	/** 触控板友好模式 */
+	/** Touchpad-friendly mode */
 	TouchPad = "touch-pad",
 }
 

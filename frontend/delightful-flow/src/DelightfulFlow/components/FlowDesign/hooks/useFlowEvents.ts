@@ -1,5 +1,5 @@
 ﻿/**
- * handleflow的鼠标event
+ * Handle flow mouse events
  */
 
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
@@ -19,23 +19,23 @@ import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
 
 type UseFlowEventProps = {
-    // reset上一次布局数据
+    // Reset last layout data
     resetLastLayoutData: () => void
-    // reset是否可以布局
+    // Reset whether can layout
     resetCanLayout: () => void
-	// 当前缩放尺度
+	// Current zoom scale
 	currentZoom: number
-	// 是否显示componentparameterconfiguration变更function
+	// Whether to show component parameter configuration change function
 	setShowParamsComp: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-/** 新增node的位置 */
+/** Position for adding node */
 export enum AddPosition {
-	// 在边新增node
+	// Add node on edge
 	Edge = 'edge',
-	// 在node新增node
+	// Add node on node
 	Node = 'node',
-	// 在画布添加
+	// Add on canvas
 	Canvas = 'canvas'
 }
 
@@ -78,10 +78,10 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 	const reactflowRef = useRef(null)
 	const { screenToFlowPosition } = useReactFlow()
 
-	/** 是否懒渲染 */
+	/** Whether lazy rendering */
 	const [ onlyRenderVisibleElements, setOnlyRenderVisibleElements ] = useState(true)
 
-	/** 将flow视图定位到position */
+	/** Position flow view to target position */
 	const { updateViewPortToTargetNode } = useViewport()
 
 	useUpdateEffect(() => {
@@ -89,7 +89,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 	}, [ currentZoom, onlyRenderVisibleElements ])
 
 
-	// 是否正在拖拽
+	// Whether dragging
 	const [ isDragging, setIsDragging ] = useState(false)
 
 	const { paramsName } = useExternalConfig()
@@ -123,13 +123,13 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 				if (errorNodeIds.length > 0) {
 					const locationId = errorNodeIds[0]
 
-					// 校验failed的node
-					const errorNode = nodes.find(n => n.node_id === locationId)
-					const errorNodeRef = nodeConfig[locationId]
+				// Validation failed node
+				const errorNode = nodes.find(n => n.node_id === locationId)
+				const errorNodeRef = nodeConfig[locationId]
 
-					updateViewPortToTargetNode(errorNode)
+				updateViewPortToTargetNode(errorNode)
 
-					// 需要对校验failed的node进行二次校验，因为懒渲染导致上一次的校验结果失效了
+				// Need to re-validate the failed node because lazy rendering invalidated the previous validation result
 					setTimeout(() => {
 						errorNodeRef?.validate?.()
 					}, controlDuration)
@@ -140,7 +140,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		}
 	})
 
-	// node拖拽end
+	// Node drag end
 	const onNodeDragStop = useMemoizedFn((event: any, node: Node, dragNodes: Node[]) => {
 		setIsDragging(false)
 		const nodeIds = dragNodes.map((n) => n.id)
@@ -154,10 +154,10 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		}
 	})
 
-	// node拖拽event
-	// areaNodes，只会罗列出当前分组的node
+	// Node drag event
+	// areaNodes only lists nodes in the current group
 	const onNodeDrag: NodeDragHandler = useMemoizedFn((event, node, areaNodes) => {
-		// 如果在分组内，则get分组所有node的boundary，settings父node的大小
+		// If within a group, get boundary of all nodes in the group and set parent node size
 		// if(node.parentId) {
 		// 	const childNodes = nodes.filter(n => n.parentId === node.parentId)
 		// 	const restNodes = childNodes.filter(n => n.id !== node.id)
@@ -169,23 +169,23 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		// 	if(parentNode) {
 
 				
-		// 		// 复制父node并update尺寸和位置
-		// 		const newParentNode = {
+				// Copy parent node and update dimensions and position
+				const newParentNode = {
 		// 			...parentNode,
-		// 			position: { ...parentNode.position }, // 确保 position 是一个新object
-		// 			style: { ...parentNode.style }, // 确保 style 是一个新object
+					position: { ...parentNode.position }, // Ensure position is a new object
+					style: { ...parentNode.style }, // Ensure style is a new object
 		// 		};
 
 		// 		const rawParentX = newParentNode.position.x
 		// 		const rawParentY = newParentNode.position.y
-		// 		// 超过左边界时
+		// When exceeding left boundary
 		// 		if(childBounds.x < newParentNode.position.x + MIN_DISTANCE) {
-		// 			console.log("超过左边界")
+		console.log("Exceeds left boundary")
 		// 			newParentNode.position.x =  childBounds.x - MIN_DISTANCE
 		// 		}
-		// 		// 超过右边界时
+		// When exceeding right boundary
 		// 		else if((childBounds.x + childBounds.width) > (newParentNode.position.x + newParentNode.width! - MIN_DISTANCE)) {
-		// 			console.log("超过右边界 ",childBounds.width)
+		console.log("Exceeds right boundary ",childBounds.width)
 		// 			newParentNode.position.x = childBounds.x - MIN_DISTANCE
 					
 		// 			// const parentOffsetX = Math.abs(newParentNode.position.x - rawParentX )
@@ -193,15 +193,15 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		// 			// 	n.position.x = n.position.x - parentOffsetX
 		// 			// })
 		// 		}
-		// 		// 超过上边界时，38px为留白的区域
+		// When exceeding top boundary, 38px is blank area
 		// 		else if(childBounds.y < newParentNode.position.y + MIN_DISTANCE + TOP_GAP) {
-		// 			console.log("超过上边界")
+		console.log("Exceeds top boundary")
 		// 			newParentNode.position.y =  childBounds.y - MIN_DISTANCE - TOP_GAP
 					
 		// 		}
-		// 		// 超过下边界时
+		// When exceeding bottom boundary
 		// 		else if((childBounds.y + childBounds.height) > (newParentNode.position.y + newParentNode.height! - MIN_DISTANCE)) {
-		// 			console.log("超过下边界")
+		console.log("Exceeds bottom boundary")
 		// 			newParentNode.position.y = childBounds.y - MIN_DISTANCE - TOP_GAP
 		// 		}
 
@@ -220,7 +220,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
         if(!reactFlowWrapper.current) return
 		const newNodes = []
 		const newEdges = []
-		// TODO 通过 node schema 渲染
+		// TODO Render via node schema
 		const nodeModel = {
 			remark: ""
 		}
@@ -238,7 +238,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 
 		newNodes.push(newNode)
 
-		// 如果新增的是loop，则需要多新增一个loop体和一条边
+		// If adding a loop, need to add a loop body and an edge
 		if (judgeLoopNode(newNode[paramsName.nodeType])) {
 			const { newNodes: bodyNodes, newEdges: bodyEdges } = generateLoopBody(
 				newNode,
@@ -255,7 +255,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		resetCanLayout()
 	})
 
-	// 拖拽物料释放
+	// Drag and drop material release
 	const onDrop = useMemoizedFn(async (event) => {
 		console.log("states", states, event)
 
@@ -264,7 +264,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		const jsonString = event.dataTransfer.getData("node-data")
 
 		try {
-			// check输入是否为空或未定义
+			// Check if input is empty or undefined
 			if (jsonString) {
 				let dragData = JSON.parse(jsonString);
 				onAddItem(event, dragData)
@@ -273,7 +273,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 			}
 		} catch (error) {
 			console.error("Failed to parse JSON:", error);
-			// 这里你可以选择return一个默认值或采取其他error handling措施
+			// Here you can choose to return a default value or take other error handling measures
 		}
 
 

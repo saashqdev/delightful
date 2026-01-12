@@ -52,7 +52,7 @@ export default function Common({
 			</div>
 			{children && <div className={styles.body}>{children}</div>}
 			{showOutput && (
-				<DropdownCard title="输出">
+				<DropdownCard title="Output">
 					{/* @ts-ignore */}
 					<JSONSchemaRenderer form={template?.output?.form?.structure} />
 				</DropdownCard>

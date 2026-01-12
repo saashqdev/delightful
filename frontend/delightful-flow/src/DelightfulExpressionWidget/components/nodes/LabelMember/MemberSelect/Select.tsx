@@ -23,7 +23,7 @@ export type MemberSelectProps = {
 	isMultiple?: boolean
 	filterOption?: boolean | ((keyword: string, options: Member[]) => Member[])
 	onSearch: Function
-	showMemberType?: boolean // 是否显示部门/成员切换器
+	showMemberType?: boolean // Whether to show department/member switcher
 	searchType?: MemberType
 	setSearchType?: Function
 }

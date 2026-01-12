@@ -20,7 +20,7 @@ import { generateNodeVersionSchema } from "./version"
 
 export const installAllNodes = () => {
 	/**
-	 * 注册分支node，为了走分支相关的path，next_nodes会加在branches里面
+	 * Register branch nodes. To follow branch-related paths, next_nodes will be added to branches
 	 */
 	registerBranchNodes([
 		customNodeType.Start,
@@ -29,8 +29,8 @@ export const installAllNodes = () => {
 	])
 
 	/**
-	 * 注册可饮用class型node，计算上文node可引用数据源时，会以此为依据：
-	 *  不在此列的，不做为可以引用class型的node
+	 * Register referenceable class-type nodes. When calculating which nodes can be referenced as data sources:
+	 *  Nodes not in this list will not be considered as referenceable class-type nodes
 	 */
 	registerCanReferenceNodeTypes([
 		customNodeType.Start,
@@ -38,7 +38,7 @@ export const installAllNodes = () => {
 		customNodeType.LLM,
 		customNodeType.Variable,
 		customNodeType.Loader,
-		// TODO Vertor可以引用什么
+		// TODO What can Vector reference
 		customNodeType.Vector,
 		customNodeType.HTTP,
 		customNodeType.Sub,
@@ -46,35 +46,35 @@ export const installAllNodes = () => {
 		customNodeType.Tools,
 	])
 
-	/** 指定引用大语言模型时，不再是node_id.value  而是LLM.value */
+	/** When referencing large language models, it's no longer node_id.value but LLM.value */
 	registerNodeType2ReferenceKey({
 		[customNodeType.VariableSave]: "variables",
 	})
 
-	/** 指定引用大语言模型时，不再是node_id.value  而是LLM.value */
+	/** When referencing large language models, it's no longer node_id.value but LLM.value */
 	registerVariableNodeTypes([customNodeType.VariableSave])
 
-	/** 指定startnode时，空白画布默认会新增一个startnode */
+	/** When specifying start node, a blank canvas will add a start node by default */
 	registerStartNodeType(customNodeType.Start)
 
-	/** 指定loopnode，会默认携带一个loop体 */
+	/** When specifying loop node, it will carry a loop body by default */
 	registerLoopNodeType(customNodeType.Loop)
 
-	/** 指定loop体class型 */
+	/** Specify loop body class type */
 	registerLoopBodyType(customNodeType.LoopBody)
 
-	/** 指定loop起始Node type */
+	/** Specify loop start Node type */
 	registerLoopStartType(customNodeType.Start)
 
-	/** 注册loop起始nodeconfiguration */
+	/** Register loop start node configuration */
 	registerLoopStartConfig({
 		height: 128,
 	})
 
-	/** 注册node分组information */
+	/** Register node grouping information */
 	registerNodeGroups([
 		{
-			groupName: "基础",
+			groupName: "Basic",
 			desc: "",
 			nodeTypes: [
 				customNodeType.Start,
@@ -88,7 +88,7 @@ export const installAllNodes = () => {
 		},
 
 		{
-			groupName: "数据handle",
+			groupName: "Data Processing",
 			desc: "",
 			nodeTypes: [
 				customNodeType.Vector,
@@ -99,7 +99,7 @@ export const installAllNodes = () => {
 			],
 			children: [
 				{
-					groupName: "多维table",
+					groupName: "Multi-dimensional Table",
 					desc: "",
 					color: "#32C436",
 					icon: <IconArrowLeftFromArc color="#fff" stroke={2} size={18} />,
@@ -116,7 +116,7 @@ export const installAllNodes = () => {
 	})
 
 	/**
-	 * 注册所有nodeschema
+	 * Register all node schemas
 	 */
 	// @ts-ignore
 	installNodes(generateNodeVersionSchema())

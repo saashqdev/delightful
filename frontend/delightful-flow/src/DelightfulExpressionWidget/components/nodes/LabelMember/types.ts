@@ -1,6 +1,6 @@
 ﻿
 
-// 成员class型
+// Member type
 export type Member = {
 	id: string
 	name: string

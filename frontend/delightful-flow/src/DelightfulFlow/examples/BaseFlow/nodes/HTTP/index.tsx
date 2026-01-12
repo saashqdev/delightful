@@ -20,13 +20,13 @@ export default function HTTPNode() {
 		currentNode?.output?.form?.structure,
 	)
 
-	// 上游同步下游
+	// Sync from upstream to downstream
 	useEffect(() => {
 		if (!currentNode) return
 		if (currentNode?.output?.form?.structure) setOutput(currentNode?.output?.form?.structure)
 	}, [currentNode])
 
-	// 下游同步上游
+	// Sync from downstream to upstream
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		const currentNodeConfig = nodeConfig[currentNode?.node_id]
@@ -38,7 +38,7 @@ export default function HTTPNode() {
 
 	return (
 		<div className={styles.http}>
-			<DropdownCard title="输出" height="auto" headerClassWrapper={styles.output}>
+			<DropdownCard title="Output" height="auto" headerClassWrapper={styles.output}>
 				<DelightfulJsonSchemaEditor
 					data={output}
 					onChange={setOutput}

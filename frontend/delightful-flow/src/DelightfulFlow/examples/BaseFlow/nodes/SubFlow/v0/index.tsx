@@ -18,7 +18,7 @@ export default function SubFlowV0() {
 
 	const { expressionDataSource } = usePrevious()
 
-	/** 上游同步下游 */
+	/** Synchronize upstream to downstream */
 	useMount(() => {
 		const serverInput = _.get(currentNode, ["input", "form", "structure"])
 		setInput(serverInput)
@@ -27,7 +27,7 @@ export default function SubFlowV0() {
 	return (
 		<Form form={form} className={styles.subFlow} layout="vertical">
 			<div className={styles.input}>
-				<DropdownCard title="输入" height="auto">
+					<DropdownCard title="Input" height="auto">
 					<DelightfulJsonSchemaEditor
 						data={input}
 						onChange={setInput}
@@ -35,20 +35,20 @@ export default function SubFlowV0() {
 						expressionSource={expressionDataSource}
 						displayColumns={[ShowColumns.Key, ShowColumns.Value, ShowColumns.Type]}
 						columnNames={{
-							[ShowColumns.Key]: "变量名",
-							[ShowColumns.Type]: "变量class型",
-							[ShowColumns.Value]: "变量值",
-							[ShowColumns.Label]: "显示名称",
-							[ShowColumns.Description]: "变量描述",
-							[ShowColumns.Encryption]: "是否加密",
-							[ShowColumns.Required]: "必填",
+							[ShowColumns.Key]: "Variable Name",
+							[ShowColumns.Type]: "Variable Type",
+							[ShowColumns.Value]: "Variable Value",
+							[ShowColumns.Label]: "Display Name",
+							[ShowColumns.Description]: "Variable Description",
+							[ShowColumns.Encryption]: "Encrypted",
+							[ShowColumns.Required]: "Required",
 						}}
 					/>
 				</DropdownCard>
 			</div>
 
 			<div className={styles.output}>
-				<DropdownCard title="输出" height="auto">
+				<DropdownCard title="Output" height="auto">
 					{/* @ts-ignore */}
 					<JSONSchemaRenderer form={currentNode?.output?.form?.structure} />
 				</DropdownCard>

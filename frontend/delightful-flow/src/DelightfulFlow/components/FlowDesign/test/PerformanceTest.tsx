@@ -15,16 +15,16 @@ import ReactFlow, {
 import "reactflow/dist/style.css"
 
 /**
- * performancetestcomponent - testReactFlow的performance表现
+ * Performance test component - test ReactFlow performance
  */
 const PerformanceTest: React.FC = () => {
-	// performance指标status
+	// performance metrics state
 	const [renderTime, setRenderTime] = useState<number>(0)
 	const [fps, setFps] = useState<number>(0)
 	const [memoryUsage, setMemoryUsage] = useState<number | null>(null)
 	const [nodeCount, setNodeCount] = useState<number>(0)
 
-	// 生成大量node的function
+	// Generate large number of nodes
 	const generateNodes = useCallback((count: number): Node[] => {
 		const nodes: Node[] = []
 		const gridSize = Math.ceil(Math.sqrt(count))
@@ -52,13 +52,13 @@ const PerformanceTest: React.FC = () => {
 		return nodes
 	}, [])
 
-	// 生成node之间的连接
+	// Generate connections between nodes
 	const generateEdges = useCallback((nodeCount: number, edgesPerNode: number = 2): Edge[] => {
 		const edges: Edge[] = []
 
 		for (let i = 0; i < nodeCount; i++) {
 			for (let j = 0; j < edgesPerNode; j++) {
-				// 连接到随机目标node，避免自loop
+				// Connect to random target node, avoid self-loop
 				let target
 				do {
 					target = Math.floor(Math.random() * nodeCount)
@@ -79,13 +79,13 @@ const PerformanceTest: React.FC = () => {
 	const [nodes, setNodes, onNodesChange] = useNodesState([])
 	const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
-	// 添加边的回调
+	// Callback for adding edges
 	const onConnect = useCallback(
 		(params: Edge | Connection) => setEdges((eds) => addEdge(params, eds)),
 		[setEdges],
 	)
 
-	// 监控FPS
+	// Monitor FPS
 	useEffect(() => {
 		let frameCount = 0
 		let lastTime = performance.now()
@@ -99,7 +99,7 @@ const PerformanceTest: React.FC = () => {
 				frameCount = 0
 				lastTime = currentTime
 
-				// 如果浏览器支持，收集内存使用情况
+				// Collect memory usage if browser supports it
 				if (window.performance && (performance as any).memory) {
 					setMemoryUsage((performance as any).memory.usedJSHeapSize / (1024 * 1024))
 				}
@@ -115,7 +115,7 @@ const PerformanceTest: React.FC = () => {
 		}
 	}, [])
 
-	// 测量渲染time的function
+	// Function to measure rendering time
 	const measureRenderTime = useCallback(
 		(count: number) => {
 			const startTime = performance.now()
@@ -127,7 +127,7 @@ const PerformanceTest: React.FC = () => {
 			setEdges(newEdges)
 			setNodeCount(count)
 
-			// 等待下一帧渲染complete后测量time
+			// Wait for next frame render to complete before measuring time
 			requestAnimationFrame(() => {
 				const endTime = performance.now()
 				setRenderTime(endTime - startTime)
@@ -136,7 +136,7 @@ const PerformanceTest: React.FC = () => {
 		[generateNodes, generateEdges, setNodes, setEdges],
 	)
 
-	// createtestbutton
+	// Create test button
 	const testButtons = useMemo(() => {
 		return [10, 50, 100, 500, 1000, 2000].map((count) => (
 			<button
@@ -144,7 +144,7 @@ const PerformanceTest: React.FC = () => {
 				onClick={() => measureRenderTime(count)}
 				style={{ margin: "0 5px" }}
 			>
-				{count}个node
+				{count} nodes
 			</button>
 		))
 	}, [measureRenderTime])
@@ -168,24 +168,24 @@ const PerformanceTest: React.FC = () => {
 					position="top-left"
 					style={{ background: "white", padding: "10px", borderRadius: "5px" }}
 				>
-					<h3>ReactFlow performancetest</h3>
+					<h3>ReactFlow Performance Test</h3>
 					<div>
-						<strong>node数量:</strong> {nodeCount}
+						<strong>Node Count:</strong> {nodeCount}
 					</div>
 					<div>
-						<strong>渲染time:</strong> {renderTime.toFixed(2)} ms
+						<strong>Render Time:</strong> {renderTime.toFixed(2)} ms
 					</div>
 					<div>
 						<strong>FPS:</strong> {fps}
 					</div>
 					{memoryUsage !== null && (
 						<div>
-							<strong>内存使用:</strong> {memoryUsage.toFixed(2)} MB
+							<strong>Memory Usage:</strong> {memoryUsage.toFixed(2)} MB
 						</div>
 					)}
 					<div style={{ marginTop: "10px" }}>{testButtons}</div>
 					<div style={{ marginTop: "10px" }}>
-						<button onClick={() => setNodes([])}>清空</button>
+						<button onClick={() => setNodes([])}>clear</button>
 					</div>
 				</Panel>
 			</ReactFlow>

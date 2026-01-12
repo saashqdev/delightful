@@ -202,7 +202,7 @@ const Editor = observer(
 			})
 		}
 
-		// 修改备注information
+		// Modify remark information
 		const handleChangeValue = (e: any, key: string[], value: string | InputExpressionValue) => {
 			let changeValue: InputExpressionValue | string | boolean | { mock: string } = value
 			if (key[0] === "mock" && value) {
@@ -211,7 +211,7 @@ const Editor = observer(
 			schemaMobx.changeValue({ keys: key, value: changeValue })
 		}
 
-		// 备注/mock弹窗 点击ok 时
+		// When clicking ok in remark/mock popup
 		const handleEditOk = (name: string) => {
 			setStateVal((prevState) => {
 				return { ...prevState, editVisible: false }
@@ -230,11 +230,11 @@ const Editor = observer(
 		}
 
 		/**
-		 * 展示弹窗modal
-		 * prefix: node前缀information
-		 * name: 弹窗的名称 ['description', 'mock']
-		 * value: 输入值
-		 * type: 如果当前字段是object || array showEdit 不可用
+		 * Show modal popup
+		 * prefix: node prefix information
+		 * name: popup name ['description', 'mock']
+		 * value: input value
+		 * type: if current field is object || array showEdit is disabled
 		 */
 		const showEdit = (
 			prefix: string[],
@@ -261,14 +261,14 @@ const Editor = observer(
 			})
 		}
 
-		// 修改备注/mockparameterinformation
+		// Modify remark/mock parameter information
 		const changeDesc = (value: string, name: string) => {
 			setStateVal((prevState) => {
 				return { ...prevState, [name]: value }
 			})
 		}
 
-		// 高级settings
+		// Advanced settings
 		const handleAdvOk = () => {
 			if (stateVal.itemKey.length === 0) {
 				schemaMobx.changeSchema(stateVal.curItemCustomValue)
@@ -295,7 +295,7 @@ const Editor = observer(
 					...prevState,
 					advVisible: true,
 					itemKey: key,
-					curItemCustomValue: value, // 当前node的数据information
+					curItemCustomValue: value, // Current node data information
 				}
 			})
 		}
@@ -315,7 +315,7 @@ const Editor = observer(
 			},
 		]
 
-		//  修改弹窗中的json-schema 值
+		//  Modify json-schema value in popup
 		const changeCustomValue = (newValue: Schema) => {
 			setStateVal((prevState) => {
 				return { ...prevState, curItemCustomValue: newValue }
@@ -343,7 +343,7 @@ const Editor = observer(
 			onBlur(JSON.parse(JSON.stringify(schemaMobx.schema)))
 		}
 
-		//  增加子node
+		//  Add child node
 		const handleAddField = useMemoizedFn(() => {
 			schemaMobx.addChildField({
 				keys: ["properties"],
@@ -368,10 +368,10 @@ const Editor = observer(
 			try {
 				const { content, fieldKeys = [] } = importForm
 
-				// 尝试解析JSON内容
+				// Try to parse JSON content
 				const jsonContent = JSON.parse(content)
 
-				// 判断是否为Schemaformat或普通JSON
+				// Determine if it's Schema format or plain JSON
 				const schema = isSchemaFormat(jsonContent)
 					? jsonContent
 					: convertJsonToSchema(jsonContent)
@@ -435,7 +435,7 @@ const Editor = observer(
 					)}
 					{debuggerMode && (
 						<Button type="primary" onClick={showSchema} style={{ marginLeft: "10px" }}>
-							显示结果
+							Show Result
 						</Button>
 					)}
 					<Modal

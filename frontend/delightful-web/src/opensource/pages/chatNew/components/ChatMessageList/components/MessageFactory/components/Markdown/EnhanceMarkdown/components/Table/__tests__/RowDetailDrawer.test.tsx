@@ -40,12 +40,12 @@ describe("RowDetailDrawer", () => {
 		0: "First column data",
 		1: "Second column data",
 		2: "Third column data",
-		名称: "First column data",
-		描述: "Second column data",
+		name: "First column data",
+		description: "Second column data",
 		status: "Third column data",
 	}
 
-	const mockHeaders = ["名称", "描述", "status"]
+	const mockHeaders = ["name", "description", "status"]
 
 	it("should render drawer when visible is true", () => {
 		render(
@@ -103,8 +103,8 @@ describe("RowDetailDrawer", () => {
 		expect(formItems).toHaveLength(3)
 
 		const labels = screen.getAllByTestId("form-label")
-		expect(labels[0].textContent).toBe("名称")
-		expect(labels[1].textContent).toBe("描述")
+		expect(labels[0].textContent).toBe("name")
+		expect(labels[1].textContent).toBe("description")
 		expect(labels[2].textContent).toBe("status")
 
 		const contents = screen.getAllByTestId("form-content")
@@ -116,7 +116,7 @@ describe("RowDetailDrawer", () => {
 	it("should handle missing data", () => {
 		const incompleteRowData = {
 			0: "First column data",
-			名称: "First column data",
+			name: "First column data",
 		}
 
 		render(
@@ -124,7 +124,7 @@ describe("RowDetailDrawer", () => {
 				visible={true}
 				onClose={vi.fn()}
 				rowData={incompleteRowData}
-				headers={["名称", "描述", "status"]}
+				headers={["name", "description", "status"]}
 			/>,
 		)
 
@@ -164,7 +164,7 @@ describe("RowDetailDrawer", () => {
 	it("should handle React nodes as values", () => {
 		const rowDataWithJSX = {
 			0: <span>JSX Content</span>,
-			名称: <span>JSX Content</span>,
+			name: <span>JSX Content</span>,
 		}
 
 		render(
@@ -172,7 +172,7 @@ describe("RowDetailDrawer", () => {
 				visible={true}
 				onClose={vi.fn()}
 				rowData={rowDataWithJSX}
-				headers={["名称"]}
+				headers={["name"]}
 			/>,
 		)
 
@@ -182,7 +182,7 @@ describe("RowDetailDrawer", () => {
 	it("should prioritize index keys for data retrieval", () => {
 		const conflictRowData = {
 			0: "Index data",
-			名称: "Name data",
+			name: "Name data",
 		}
 
 		render(
@@ -190,7 +190,7 @@ describe("RowDetailDrawer", () => {
 				visible={true}
 				onClose={vi.fn()}
 				rowData={conflictRowData}
-				headers={["名称"]}
+				headers={["name"]}
 			/>,
 		)
 

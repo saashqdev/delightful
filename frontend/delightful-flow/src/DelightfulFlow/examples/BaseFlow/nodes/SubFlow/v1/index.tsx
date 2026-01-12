@@ -33,7 +33,7 @@ export default function SubFlowV1() {
 		})
 	}, [])
 
-	/** 上游同步下游 */
+	/** Sync from upstream to downstream */
 	useMount(() => {
 		const serverInput = _.get(currentNode, ["input", "form", "structure"])
 		setInput(serverInput)
@@ -52,7 +52,7 @@ export default function SubFlowV1() {
 		updateNodeConfig({ ...currentNode })
 	})
 
-	/** inputupdate时同步到node */
+	/** Sync to node when input updates */
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		_.set(currentNode, ["input", "form", "structure"], input)
@@ -78,7 +78,7 @@ export default function SubFlowV1() {
 			onValuesChange={onValuesChange}
 			initialValues={initialValues}
 		>
-			<Form.Item name="sub_flow_id" className={styles.select} label="选择subprocess">
+			<Form.Item name="sub_flow_id" className={styles.select} label="Select subprocess">
 				<DelightfulSelect
 					options={subFlowOptions}
 					style={{ width: "100%" }}
@@ -88,7 +88,7 @@ export default function SubFlowV1() {
 				/>
 			</Form.Item>
 			<div className={styles.input}>
-				<DropdownCard title="输入" height="auto">
+				<DropdownCard title="Input" height="auto">
 					<DelightfulJsonSchemaEditor
 						data={input}
 						onChange={setInput}
@@ -96,20 +96,20 @@ export default function SubFlowV1() {
 						expressionSource={expressionDataSource}
 						displayColumns={[ShowColumns.Key, ShowColumns.Value, ShowColumns.Type]}
 						columnNames={{
-							[ShowColumns.Key]: "变量名",
-							[ShowColumns.Type]: "变量class型",
-							[ShowColumns.Value]: "变量值",
-							[ShowColumns.Label]: "显示名称",
-							[ShowColumns.Description]: "变量描述",
-							[ShowColumns.Encryption]: "是否加密",
-							[ShowColumns.Required]: "必填",
+							[ShowColumns.Key]: "Variable Name",
+							[ShowColumns.Type]: "Variable Type",
+							[ShowColumns.Value]: "Variable Value",
+							[ShowColumns.Label]: "Display Name",
+							[ShowColumns.Description]: "Variable Description",
+							[ShowColumns.Encryption]: "Encrypted",
+							[ShowColumns.Required]: "Required",
 						}}
 					/>
 				</DropdownCard>
 			</div>
 
 			<div className={styles.output}>
-				<DropdownCard title="输出" height="auto">
+				<DropdownCard title="Output" height="auto">
 					{/* @ts-ignore */}
 					<JSONSchemaRenderer form={currentNode?.output?.form?.structure} />
 				</DropdownCard>

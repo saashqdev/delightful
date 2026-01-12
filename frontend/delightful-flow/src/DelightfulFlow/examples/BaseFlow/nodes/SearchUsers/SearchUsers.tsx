@@ -45,7 +45,7 @@ export default function SearchUsers() {
 	return (
 		<NodeOutputWrap className={styles.searchUsers}>
 			<Form form={form} initialValues={initialValues} onValuesChange={onValuesChange}>
-				<DropdownCard title="检索条件" height="auto" suffixIcon={FilterTypeSelector}>
+				<DropdownCard title="Search Criteria" height="auto" suffixIcon={FilterTypeSelector}>
 					<Form.Item>
 						<Form.List name={["filters"]}>
 							{(subFields, subOpt) => {
@@ -92,7 +92,7 @@ export default function SearchUsers() {
 															className={styles.right}
 														>
 															<DelightfulExpressionWrap
-																placeholder="使用@添加变量"
+																placeholder="Use @ to add variables"
 																dataSource={expressionDataSource}
 																mode={ExpressionMode.Common}
 																// @ts-ignore
@@ -123,7 +123,7 @@ export default function SearchUsers() {
 											className={styles.addBtn}
 										>
 											<IconPlus width={20} color="#1C1D23CC" />
-											<span>添加条件</span>
+										<span>Add Condition</span>
 										</span>
 									</div>
 								)

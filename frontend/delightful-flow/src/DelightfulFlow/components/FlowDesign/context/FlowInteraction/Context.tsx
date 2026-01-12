@@ -3,7 +3,7 @@ import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React from "react"
 import { Edge, Node } from "reactflow"
 
-// 将FlowInteractionCtx拆分为status和动作两部分
+// Split FlowInteractionCtx into state and actions parts
 export type FlowInteractionStateType = {
 	isDragging: boolean
 	showParamsComp: boolean
@@ -30,7 +30,7 @@ export type FlowInteractionCtx = React.PropsWithChildren<
 	FlowInteractionStateType & FlowInteractionActionsType
 >
 
-// statusContext
+// State context
 export const FlowInteractionStateContext = React.createContext<FlowInteractionStateType>({
 	isDragging: false,
 	showParamsComp: true,
@@ -40,7 +40,7 @@ export const FlowInteractionStateContext = React.createContext<FlowInteractionSt
 	selectionEdges: [],
 })
 
-// 动作Context
+// Actions context
 export const FlowInteractionActionsContext = React.createContext<FlowInteractionActionsType>({
 	resetLastLayoutData: () => {},
 	onAddItem: (() => Promise.resolve()) as any,
@@ -50,24 +50,24 @@ export const FlowInteractionActionsContext = React.createContext<FlowInteraction
 	reactFlowWrapper: undefined,
 })
 
-// 保持原有Context向后兼容
+// Maintain original Context for backward compatibility
 export const FlowInteractionContext = React.createContext({
-	// 是否处于拖拽status
+	// Whether in dragging state
 	isDragging: false,
 
-	// reset布局
+	// Reset layout
 	resetLastLayoutData: () => {},
 
-	// 新增node
+	// Add new node
 	onAddItem: (() => {}) as any,
 
-	// 布局optimization
+	// Layout optimization
 	layout: () => [],
 
-	// 是否显示component的parameterconfiguration
+	// Whether to show component parameter configuration
 	showParamsComp: true,
 
-	/** 是否显示多选的选框的toolbar */
+	/** Whether to show toolbar for multi-selection */
 	showSelectionTools: false,
 	setShowSelectionTools: () => {},
 

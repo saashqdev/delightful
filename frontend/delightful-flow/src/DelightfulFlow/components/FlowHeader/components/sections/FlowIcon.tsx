@@ -12,8 +12,8 @@ interface FlowIconProps {
 
 const FlowIcon = memo(({ showImage, icon, defaultImage }: FlowIconProps) => {
   const handleImageError = useMemoizedFn((event) => {
-    event.target.onerror = null // 防止死loop
-    event.target.src = defaultImage // 替换为默认图片
+    event.target.onerror = null // prevent deadloop
+    event.target.src = defaultImage // replace with default image
   })
 
   if (!showImage || !icon) return null

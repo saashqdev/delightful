@@ -2,11 +2,11 @@
 import { useFlowUI } from "@/DelightfulFlow/context/FlowContext/useFlow"
 
 export default function useMaterialPanel() {
-	// 使用专用的hook替代全量useFlow，减少不必要的重渲染
+	//  use专用ofhook替代全量useFlow，减少不必要ofrerender
 	const { showMaterialPanel, setShowMaterialPanel } = useFlowUI()
 	const [isEditing, setIsEditing] = useState(false)
 
-	// 使用useMemo缓存样式object，避免每次渲染create新object
+	//  useuseMemocache样式object，avoid each timerendercreatenewobject
 	const stickyButtonStyle = useMemo(() => {
 		return {
 			top: "91px",

@@ -12,13 +12,13 @@ export default function ToolsOptionWrapper({ tool, children }: ToolsOptionWrappe
 	const PopContent = useMemo(() => {
 		return (
 			<Form className={styles.popContent} layout="vertical">
-				<Form.Item label="tool描述">
+				<Form.Item label="Tool Description">
 					<span className={styles.toolDesc}>{tool?.description}</span>
 				</Form.Item>
-				<Form.Item label="tool入参">
+				<Form.Item label="Tool Input Parameters">
 					<JSONSchemaRenderer form={tool?.input?.form?.structure} />
 				</Form.Item>
-				<Form.Item label="tool出参">
+				<Form.Item label="Tool Output Parameters">
 					<JSONSchemaRenderer form={tool?.output?.form?.structure} />
 				</Form.Item>
 			</Form>

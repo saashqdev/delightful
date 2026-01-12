@@ -1,17 +1,17 @@
 ﻿import i18next from "i18next";
 
-// 当前面板 tab枚举
+// Current panel tab enumeration
 export enum TabObject {
-	// 可拖拽的物料面板
+	// Draggable material panel
 	Material = "0",
 
-	// 可用的已release的自动化flow
+	// Available released automation flows
 	Flow = "1",
     
 	// tool
 	Tools = "2",
 
-    // 助理
+    // Assistant
     Agent = "3",
 }
 

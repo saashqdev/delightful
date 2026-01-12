@@ -28,7 +28,7 @@ export default function useTab () {
 	})
 
 
-	// 当前tablist
+	//  When前tablist
 	const tabList = useMemo(() => {
 		return [
 			{
@@ -55,7 +55,7 @@ export default function useTab () {
 	}, [ changeTab ])
 
 	// [[FC_1, show_1], [FC_2, show_2]]
-	// 这样子return的目的是避免每次点击tab都重新渲染，通过display控制是否显示
+	//  这样子returnofdirectoryof是avoid each time点击tab都renewrender，throughdisplay控制whether显示
 	const tabContents = useMemo(() => {
 		return Object.entries(TabContentMap)
 			.map(([ curTab, Comp ]) => ([ Comp, tab === curTab ]))

@@ -11,24 +11,24 @@ type MaterialProps = {
 }
 
 export default function useMaterial ({ keyword }: MaterialProps) {
-    // 缓存nodeList的结果，避免每次渲染时都create新的引用
+    //  cachenodeListof结果，avoid each timerender时都createnew引用
     const nodeList = getExecuteNodeList()
 
     const { flow } = useFlowData()
 
-	// 动态的nodelist
+	//  动态ofnodelist
 	const dynamicNodeList = useMemo(() => {
 		return nodeList.filter(n => n.schema.label.includes(keyword))
 	}, [keyword, nodeList])
 
-	// get分组nodelist
+	// getdividegroupnodelist
 	const getGroupNodeList = useMemoizedFn((nodeTypes: BaseNodeType[]) => {
 		return dynamicNodeList.filter(n => {
 			return nodeTypes.includes(n.schema.id)
 		})
 	})
 
-	// 过滤出有node数据的分组list，并往里边塞node的schema
+	//  Filter出有nodedataofdividegrouplist，并往里边塞nodeofschema
 	const filterNodeGroups = useMemo(() => {
 		const allNodeGroups = getNodeGroups()
 		return allNodeGroups.map(nodeGroup => {

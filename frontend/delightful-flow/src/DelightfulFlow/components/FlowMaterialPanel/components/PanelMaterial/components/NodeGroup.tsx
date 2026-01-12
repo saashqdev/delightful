@@ -63,7 +63,7 @@ const NodeGroup = memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 对比nodeGroup是否发生了变化
+		// comparenodeGroupwhether changed
 		return (
 			prevProps.nodeGroup === nextProps.nodeGroup &&
 			prevProps.renderMaterialItem === nextProps.renderMaterialItem &&

@@ -286,21 +286,21 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 				} else {
 					/** For properties, update required with the current properties set */
 
-					// 当前已经存在的properties字段
+					// Currently existing properties fields
 					const existSchemaKeys = [...Object.keys(curFieldSchema || {})]
 					if (keys.length > 0 && type === "add") {
 						existSchemaKeys.push(keys[0])
 					}
 
 					const parentSchemaKeys = [...beforeKeys].slice(0, -1)
-					/** 以实际表单的为参考 */
+					/** Use actual form as reference */
 					const parentRealSchema = _.get(mobxContext.schema, [...parentSchemaKeys], null)
 					const parentExportSchema = _.get(
 						exportFields.schema,
 						[...parentSchemaKeys],
 						null,
 					)
-					/** 将不存在当前需要export的properties字段的required字段过滤掉 */
+					/** Filter out required fields that don't exist in current exported properties fields */
 					_.set(
 						parentExportSchema,
 						["required"],
@@ -327,7 +327,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 
 	const { disableEncryption, encryptionTooltips } = useEncryption({ value })
 
-	// render代码
+	// Render code
 	if (!canRender) {
 		return null
 	}

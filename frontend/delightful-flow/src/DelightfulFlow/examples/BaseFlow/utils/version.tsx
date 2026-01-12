@@ -11,7 +11,7 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		icon: <IconArrowLeftFromArc color="#fff" stroke={2} size={18} />,
 		color: "#315CEC",
 		id: customNodeType.Start,
-		desc: "当以下event被触发时，flow将会从这个modulestart执行",
+		desc: "When the following event is triggered, the flow will start executing from this module",
 		handle: {
 			withSourceHandle: false,
 			withTargetHandle: false,
@@ -29,7 +29,7 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		icon: <IconTimeline color="#fff" stroke={1} size={18} />,
 		color: "#9DC900",
 		id: customNodeType.Sub,
-		desc: "可以将部分功能module分配给subprocess来进行编排，从而避免主flow过于庞大",
+		desc: "Can assign partial functionality modules to subprocesses for orchestration, avoiding main flow from becoming too large",
 		handle: {
 			withSourceHandle: true,
 			withTargetHandle: true,
@@ -43,7 +43,7 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		icon: <IconVariable color="#fff" stroke={1} size={18} />,
 		color: "#FFC900",
 		id: customNodeType.VariableSave,
-		desc: "新增变量，并对变量进行赋值",
+		desc: "Add new variables and assign values to them",
 		handle: {
 			withSourceHandle: true,
 			withTargetHandle: true,
@@ -53,11 +53,11 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 		},
 	},
 	[customNodeType.LLM]: {
-		label: "AI 聊天",
+		label: "AI Chat",
 		icon: <IconBrain color="#fff" stroke={1} size={18} />,
 		color: "#00A8FF",
 		id: customNodeType.LLM,
-		desc: "调用大语言模型，使用变量和tip词生成回复",
+		desc: "Call large language model, use variables and prompts to generate responses",
 		handle: {
 			withSourceHandle: true,
 			withTargetHandle: true,
@@ -112,11 +112,11 @@ const commonSchemaConfigMap: Record<string, NodeSchema> = {
 	},
 
 	[customNodeType.LoopBody]: {
-		label: "loop体",
+		label: "Loop Body",
 		icon: <IconRepeatOff color="#fff" stroke={1} size={18} />,
 		color: "#7885ff",
 		id: customNodeType.LoopBody,
-		desc: "loop体",
+		desc: "Loop body",
 		handle: {
 			withSourceHandle: false,
 			withTargetHandle: true,
@@ -151,14 +151,14 @@ export const generateNodeVersionSchema = () => {
 			return {
 				[nodeType]: Object.entries(versionMap).reduce(
 					(versionTemplate, [version, nodeSchema]) => {
-						/** 需要进行version化的configuration */
+						/** Configuration that needs to be versioned */
                         // @ts-ignore
 						const versionConfig = _.pick(nodeSchema as NodeSchema, [
 							"input",
 							"output",
 							"params",
 						])
-						/** 拿到具体version的component */
+						/** Get the component for specific version */
 						const versionComp = _.get(nodeComponentVersionMap, [nodeType, version])
 						versionTemplate[version] = {
 							schema: {

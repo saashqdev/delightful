@@ -125,7 +125,7 @@ const FlowDesign = memo(function FlowDesign() {
 		[externalOnlyRenderVisibleElements, onlyRenderVisibleElements],
 	)
 
-	// 使用useMemo包装FlowInteractionProvider的props
+	// Wrap FlowInteractionProvider props with useMemo
 	const interactionProviderProps = useMemo(
 		() => ({
 			isDragging,
@@ -157,7 +157,7 @@ const FlowDesign = memo(function FlowDesign() {
 		],
 	)
 
-	// 使用useMemo包装ReactFlowComponent的props
+	// Wrap ReactFlowComponent props with useMemo
 	const reactFlowProps = useMemo(
 		() => ({
 			nodeTypes: nodeModels,
@@ -213,7 +213,7 @@ const FlowDesign = memo(function FlowDesign() {
 		],
 	)
 
-	// 使用useMemo包装FlowSelectionPanel的props
+	// Wrap FlowSelectionPanel props with useMemo
 	const selectionPanelProps = useMemo(
 		() => ({
 			showSelectionTools,
@@ -225,7 +225,7 @@ const FlowDesign = memo(function FlowDesign() {
 		[showSelectionTools, setShowSelectionTools, selectionNodes, selectionEdges, onCopy],
 	)
 
-	// 稳定ReactFlowComponent的children引用
+	// Stabilize ReactFlowComponent children reference
 	const stableChildren = useMemo(
 		() => <StableFlowChildren showMinMap={showMinMap} controlItemGroups={controlItemGroups} />,
 		[showMinMap, controlItemGroups],
@@ -234,7 +234,7 @@ const FlowDesign = memo(function FlowDesign() {
 	return (
 		<div className={styles.flowDesign} ref={reactFlowWrapper}>
 			<FlowInteractionProvider {...interactionProviderProps}>
-				{/* 将FlowSelectionPanel移出ReactFlowComponent，成为兄弟component */}
+				{/* Move FlowSelectionPanel out of ReactFlowComponent to be sibling component */}
 				<FlowSelectionPanel {...selectionPanelProps} />
 				<ReactFlowComponent {...reactFlowProps}>{stableChildren}</ReactFlowComponent>
 			</FlowInteractionProvider>

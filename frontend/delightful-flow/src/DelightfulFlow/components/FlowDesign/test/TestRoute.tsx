@@ -55,18 +55,18 @@ const TestRoute: React.FC = () => {
 const HomePage: React.FC = () => {
 	return (
 		<div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
-			<h1>ReactFlow performancetesttool</h1>
+			<h1>ReactFlow Performance Test Tool</h1>
 
 			<div style={{ marginTop: "20px" }}>
-				<h2>test目的</h2>
+				<h2>Test Directory</h2>
 				<p>
-					本tool旨在帮助开发者诊断和比较ReactFlow在不同渲染模式下的performance差异。
-					通过对比DOM渲染和Canvas渲染的performance，可以针对性地optimization大型flow图的渲染效率。
+					This tool is intended to help developers diagnose and compare ReactFlow in different rendering modes and performance differences.
+					Through comparing DOM rendering and Canvas rendering performance, we can target optimization for large-scale flow graphs to improve rendering efficiency.
 				</p>
 			</div>
 
 			<div style={{ marginTop: "20px" }}>
-				<h2>可用test</h2>
+				<h2>Available Tests</h2>
 				<div
 					style={{
 						display: "flex",
@@ -76,32 +76,32 @@ const HomePage: React.FC = () => {
 					}}
 				>
 					<TestCard
-						title="ReactFlow DOM渲染test"
-						description="test原生ReactFlow的DOM渲染performance，支持动态调整node数量和监控FPS。"
+					title="ReactFlow DOM Render Test"
+					description="Test native ReactFlow DOM rendering performance; supports dynamic adjustment of node count and monitor FPS."
 						link="/react-flow"
 					/>
 
 					<TestCard
-						title="Canvas渲染test"
-						description="使用Canvasimplement的flow图渲染，避免大量DOMnodecreate，optimization平移和缩放performance。"
+					title="Canvas Render Test"
+					description="Use Canvas implementation for flow graph rendering to avoid creating large amounts of DOM nodes; optimizes panning and zooming performance."
 						link="/canvas"
 					/>
 
 					<TestCard
-						title="performance对比test"
-						description="并排展示ReactFlow和Canvas两种渲染方式，直观对比performance差异。"
+					title="Performance Comparison Test"
+					description="Show ReactFlow and Canvas rendering methods side by side to intuitively compare performance differences."
 						link="/comparison"
 					/>
 				</div>
 			</div>
 
 			<div style={{ marginTop: "30px" }}>
-				<h2>test建议</h2>
+				<h2>Test Recommendations</h2>
 				<ul>
-					<li>从少量nodestarttest，逐步增加node数量直到performance明显下降</li>
-					<li>test中频繁进行平移和缩放operation，观察FPS变化</li>
-					<li>比较两种渲染方式在handle大量node时的performance差异</li>
-					<li>尝试识别performance瓶颈出现的临界点（node数量阈值）</li>
+					<li>Start with a small number of nodes, gradually increase node count until performance noticeably decreases</li>
+					<li>Test with frequent panning and zooming operations; observe FPS changes</li>
+					<li>Compare the two rendering methods in handling large amounts of nodes and performance differences</li>
+					<li>Try to identify critical points where performance bottlenecks appear (node count threshold)</li>
 				</ul>
 			</div>
 		</div>

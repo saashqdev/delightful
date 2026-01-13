@@ -578,7 +578,6 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
                 bilingual "Keeping default settings." "Keeping default settings."
             fi
         fi
-    fi
 }
 
 # Only run these if not skipped

@@ -9,7 +9,7 @@ TAG=${2}
 CHECK=${!#}
 
 
-export WEB_IMAGE="delightful/delightful-web"
+export WEB_IMAGE="saashqdev/delightful-web"
 export REGISTRY="ghcr.io"
 
 # Get the absolute path to the script directory

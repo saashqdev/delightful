@@ -20,7 +20,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: delightful/sandbox-gateway
+  IMAGE: saashqdev/sandbox-gateway
   BASE_IMAGE:  mcr.microsoft.com/playwright:v1.49.1-noble
 
 jobs:

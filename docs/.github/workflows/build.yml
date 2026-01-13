@@ -20,7 +20,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  WEB_IMAGE: delightful/delightful-docs
+  WEB_IMAGE: saashqdev/delightful-docs
 
 jobs:
   build:

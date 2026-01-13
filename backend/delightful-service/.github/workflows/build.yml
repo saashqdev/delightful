@@ -20,9 +20,9 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  SERVICE_IMAGE: delightful/delightful-service
-  WEB_IMAGE: delightful/delightful-web
-  BASE_IMAGE: delightful/php-dockerfile:8.4-alpine-3.22-swow-1.6.1-jsonpath-parle-xlswriter
+  SERVICE_IMAGE: saashqdev/delightful-service
+  WEB_IMAGE: saashqdev/delightful-web
+  BASE_IMAGE: saashqdev/php-dockerfile:8.4-alpine-3.22-swow-1.6.1-jsonpath-parle-xlswriter
 
 jobs:
   build:

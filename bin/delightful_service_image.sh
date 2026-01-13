@@ -9,12 +9,12 @@ TASK=${1}
 TAG=${2}
 CHECK=${!#}
 #export TAG="v1.0.2"
-# export WEB_IMAGE="delightful_dev/delightful-web"
-# export SERVICE_IMAGE="delightful_dev/delightful-service"
+# export WEB_IMAGE="saashqdev/delightful-web"
+# export SERVICE_IMAGE="saashqdev/delightful-service"
 # export REGISTRY="registry.cn-beijing.aliyuncs.com"
 
-export WEB_IMAGE="delightful/delightful-web"
-export SERVICE_IMAGE="delightful/delightful-service"
+export WEB_IMAGE="saashqdev/delightful-web"
+export SERVICE_IMAGE="saashqdev/delightful-service"
 export REGISTRY="ghcr.io"
 
 # Get the absolute path to the script directory

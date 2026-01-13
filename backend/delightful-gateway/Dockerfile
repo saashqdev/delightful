@@ -1,7 +1,7 @@
 FROM public.ecr.aws/docker/library/golang:1.24-alpine AS builder
 
 # Set Go module proxy
-ENV GOPROXY=https://goproxy.cn,direct
+ENV GOPROXY=https://goproxy.io,direct
 
 WORKDIR /app
 

@@ -414,10 +414,10 @@ detect_public_ip() {
                     # Insert the domain at the top of the Caddyfile
                     if [ "$(uname -s)" == "Darwin" ]; then
                         # macOS version
-                        sed -i '' "s|^# File service\n:80 {|# File service\n$DOMAIN_ADDRESS:80 {|" bin/caddy/Caddyfile
+                        sed -i '' "s|^:80 {|$DOMAIN_ADDRESS:80 {|" bin/caddy/Caddyfile
                     else
                         # Linux version
-                        sed -i "s|^# File service\n:80 {|# File service\n$DOMAIN_ADDRESS:80 {|" bin/caddy/Caddyfile
+                        sed -i "s|^:80 {|$DOMAIN_ADDRESS:80 {|" bin/caddy/Caddyfile
                     fi
                     bilingual "Updated Caddyfile configuration with domain: $DOMAIN_ADDRESS" "Updated Caddyfile configuration with domain: $DOMAIN_ADDRESS"
                 else
@@ -509,10 +509,10 @@ detect_public_ip() {
                     # Insert the public IP at the top of the Caddyfile
                     if [ "$(uname -s)" == "Darwin" ]; then
                         # macOS version
-                        sed -i '' "s|^# File service\n:80 {|# File service\n$PUBLIC_IP:80 {|" bin/caddy/Caddyfile
+                        sed -i '' "s|^:80 {|$PUBLIC_IP:80 {|" bin/caddy/Caddyfile
                     else
                         # Linux version
-                        sed -i "s|^# File service\n:80 {|# File service\n$PUBLIC_IP:80 {|" bin/caddy/Caddyfile
+                        sed -i "s|^:80 {|$PUBLIC_IP:80 {|" bin/caddy/Caddyfile
                     fi
                     bilingual "Updated Caddyfile configuration with public IP: $PUBLIC_IP" "Updated Caddyfile configuration with public IP: $PUBLIC_IP"
                 else
@@ -563,10 +563,10 @@ detect_public_ip() {
                         # Insert the manually entered IP at the top of the Caddyfile
                         if [ "$(uname -s)" == "Darwin" ]; then
                             # macOS version
-                            sed -i '' "s|^# File service\n:80 {|# File service\n$MANUAL_IP_ADDRESS:80 {|" bin/caddy/Caddyfile
+                            sed -i '' "s|^:80 {|$MANUAL_IP_ADDRESS:80 {|" bin/caddy/Caddyfile
                         else
                             # Linux version
-                            sed -i "s|^# File service\n:80 {|# File service\n$MANUAL_IP_ADDRESS:80 {|" bin/caddy/Caddyfile
+                            sed -i "s|^:80 {|$MANUAL_IP_ADDRESS:80 {|" bin/caddy/Caddyfile
                         fi
                         bilingual "Updated Caddyfile configuration with manually entered IP: $MANUAL_IP_ADDRESS" "Updated Caddyfile configuration with manually entered IP: $MANUAL_IP_ADDRESS"
                     else

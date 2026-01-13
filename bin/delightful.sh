@@ -412,12 +412,14 @@ detect_public_ip() {
                 # Check whether Caddyfile exists
                 if [ -f "bin/caddy/Caddyfile" ]; then
                     # Insert the domain at the top of the Caddyfile
+                    # Escape special characters for sed
+                    ESCAPED_DOMAIN=$(echo "$DOMAIN_ADDRESS" | sed 's/[&\/]/\\&/g')
                     if [ "$(uname -s)" == "Darwin" ]; then
                         # macOS version
-                        sed -i '' "s|^:80 {|$DOMAIN_ADDRESS:80 {|" bin/caddy/Caddyfile
+                        sed -i '' "s|^:80 {|${ESCAPED_DOMAIN}:80 {|" bin/caddy/Caddyfile
                     else
                         # Linux version
-                        sed -i "s|^:80 {|$DOMAIN_ADDRESS:80 {|" bin/caddy/Caddyfile
+                        sed -i "s|^:80 {|${ESCAPED_DOMAIN}:80 {|" bin/caddy/Caddyfile
                     fi
                     bilingual "Updated Caddyfile configuration with domain: $DOMAIN_ADDRESS" "Updated Caddyfile configuration with domain: $DOMAIN_ADDRESS"
                 else
@@ -507,12 +509,14 @@ detect_public_ip() {
                 # Check whether Caddyfile exists
                 if [ -f "bin/caddy/Caddyfile" ]; then
                     # Insert the public IP at the top of the Caddyfile
+                    # Escape special characters for sed
+                    ESCAPED_IP=$(echo "$PUBLIC_IP" | sed 's/[&\/]/\\&/g')
                     if [ "$(uname -s)" == "Darwin" ]; then
                         # macOS version
-                        sed -i '' "s|^:80 {|$PUBLIC_IP:80 {|" bin/caddy/Caddyfile
+                        sed -i '' "s|^:80 {|${ESCAPED_IP}:80 {|" bin/caddy/Caddyfile
                     else
                         # Linux version
-                        sed -i "s|^:80 {|$PUBLIC_IP:80 {|" bin/caddy/Caddyfile
+                        sed -i "s|^:80 {|${ESCAPED_IP}:80 {|" bin/caddy/Caddyfile
                     fi
                     bilingual "Updated Caddyfile configuration with public IP: $PUBLIC_IP" "Updated Caddyfile configuration with public IP: $PUBLIC_IP"
                 else
@@ -561,12 +565,14 @@ detect_public_ip() {
                     # Check whether Caddyfile exists
                     if [ -f "bin/caddy/Caddyfile" ]; then
                         # Insert the manually entered IP at the top of the Caddyfile
+                        # Escape special characters for sed
+                        ESCAPED_MANUAL_IP=$(echo "$MANUAL_IP_ADDRESS" | sed 's/[&\/]/\\&/g')
                         if [ "$(uname -s)" == "Darwin" ]; then
                             # macOS version
-                            sed -i '' "s|^:80 {|$MANUAL_IP_ADDRESS:80 {|" bin/caddy/Caddyfile
+                            sed -i '' "s|^:80 {|${ESCAPED_MANUAL_IP}:80 {|" bin/caddy/Caddyfile
                         else
                             # Linux version
-                            sed -i "s|^:80 {|$MANUAL_IP_ADDRESS:80 {|" bin/caddy/Caddyfile
+                            sed -i "s|^:80 {|${ESCAPED_MANUAL_IP}:80 {|" bin/caddy/Caddyfile
                         fi
                         bilingual "Updated Caddyfile configuration with manually entered IP: $MANUAL_IP_ADDRESS" "Updated Caddyfile configuration with manually entered IP: $MANUAL_IP_ADDRESS"
                     else

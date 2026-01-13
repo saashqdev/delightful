@@ -228,16 +228,16 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
             exit 1
             ;;
     esac
-                    bilingual "Updated Caddyfile configuration with public IP: $PUBLIC_IP" "Updated Caddyfile configuration with public IP: $PUBLIC_IP"
+
     # Do not set PLATFORM if using macOS arm64
-                    bilingual "Caddyfile not found, skipping update" "Caddyfile not found, skipping update"
+    if [ "$(uname -s)" == "Darwin" ] && [ "$ARCH" == "arm64" ]; then
         export PLATFORM=""
-                bilingual "Keeping default settings." "Keeping default settings."
+    fi
 
     bilingual "Detected architecture: $ARCH, using platform: $PLATFORM" "Detected architecture: $ARCH, using platform: $PLATFORM"
-            bilingual "Failed to detect public IP." "Failed to detect public IP."
-            bilingual "Do you want to manually enter an IP address?" "Do you want to manually enter an IP address?"
-            read -p "$(bilingual "Please enter [y/n]: " "Please enter [y/n]: ")" MANUAL_IP
+
+    # Create .env file if it doesn't exist
+    if [ ! -f ".env" ]; then
         cp .env.example .env
     fi
 
@@ -581,7 +581,9 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
     fi
 }
 
-detect_public_ip
+# Only run these if not skipped
+if [ "$SKIP_INSTALLATION" = "false" ]; then
+    detect_public_ip
 
     # Ask if Be Delightful service should be installed
     ask_be_delightful

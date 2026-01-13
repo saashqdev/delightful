@@ -14,11 +14,9 @@ return [
         'ocr' => [
             'code' => 'ocr',
             'name' => [
-                'zh_CN' => 'OCR Recognition',
                 'en_US' => 'OCR Recognition',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all OCR application scenarios on the platform, accurately capturing and extracting text information from PDFs, scanned documents, and various images.',
                 'en_US' => 'This capability covers all OCR application scenarios on the platform, accurately capturing and extracting text information from PDFs, scanned documents, and various images.',
             ],
             'icon' => 'ocr-icon',
@@ -35,11 +33,11 @@ return [
         'web_search' => [
             'code' => 'web_search',
             'name' => [
-                'zh_CN' => 'Web Search',
+                'en_US' => 'Web Search',
                 'en_US' => 'Web Search',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers web search scenarios for AI models on the platform, accurately obtaining and integrating the latest news, facts and data information.',
+                'en_US' => 'This capability covers web search scenarios for AI models on the platform, accurately obtaining and integrating the latest news, facts and data information.',
                 'en_US' => 'This capability covers web search scenarios for AI models on the platform, accurately obtaining and integrating the latest news, facts and data information.',
             ],
             'icon' => 'web-search-icon',
@@ -56,11 +54,11 @@ return [
         'realtime_speech_recognition' => [
             'code' => 'realtime_speech_recognition',
             'name' => [
-                'zh_CN' => 'Realtime Speech Recognition',
+                'en_US' => 'Realtime Speech Recognition',
                 'en_US' => 'Realtime Speech Recognition',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all speech-to-text application scenarios on the platform, monitoring audio streams in real-time and gradually outputting accurate text content.',
+                'en_US' => 'This capability covers all speech-to-text application scenarios on the platform, monitoring audio streams in real-time and gradually outputting accurate text content.',
                 'en_US' => 'This capability covers all speech-to-text application scenarios on the platform, monitoring audio streams in real-time and gradually outputting accurate text content.',
             ],
             'icon' => 'realtime-speech-icon',
@@ -77,11 +75,11 @@ return [
         'audio_file_recognition' => [
             'code' => 'audio_file_recognition',
             'name' => [
-                'zh_CN' => 'Audio File Recognition',
+                'en_US' => 'Audio File Recognition',
                 'en_US' => 'Audio File Recognition',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all audio file-to-text application scenarios on the platform, accurately identifying speakers, audio text and other information.',
+                'en_US' => 'This capability covers all audio file-to-text application scenarios on the platform, accurately identifying speakers, audio text and other information.',
                 'en_US' => 'This capability covers all audio file-to-text application scenarios on the platform, accurately identifying speakers, audio text and other information.',
             ],
             'icon' => 'audio-file-icon',
@@ -98,11 +96,11 @@ return [
         'auto_completion' => [
             'code' => 'auto_completion',
             'name' => [
-                'zh_CN' => 'Auto Completion',
+                'en_US' => 'Auto Completion',
                 'en_US' => 'Auto Completion',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all input auto-completion scenarios on the platform, automatically completing content for users based on context understanding, allowing users to choose whether to accept.',
+                'en_US' => 'This capability covers all input auto-completion scenarios on the platform, automatically completing content for users based on context understanding, allowing users to choose whether to accept.',
                 'en_US' => 'This capability covers all input auto-completion scenarios on the platform, automatically completing content for users based on context understanding, allowing users to choose whether to accept.',
             ],
             'icon' => 'auto-completion-icon',
@@ -117,11 +115,11 @@ return [
         'content_summary' => [
             'code' => 'content_summary',
             'name' => [
-                'zh_CN' => 'Content Summary',
+                'en_US' => 'Content Summary',
                 'en_US' => 'Content Summary',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all content summarization scenarios on the platform, performing in-depth analysis of long documents, reports or web articles.',
+                'en_US' => 'This capability covers all content summarization scenarios on the platform, performing in-depth analysis of long documents, reports or web articles.',
                 'en_US' => 'This capability covers all content summarization scenarios on the platform, performing in-depth analysis of long documents, reports or web articles.',
             ],
             'icon' => 'content-summary-icon',
@@ -136,11 +134,11 @@ return [
         'visual_understanding' => [
             'code' => 'visual_understanding',
             'name' => [
-                'zh_CN' => 'Visual Understanding',
+                'en_US' => 'Visual Understanding',
                 'en_US' => 'Visual Understanding',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all application scenarios that require AI models to perform visual understanding on the platform, accurately understanding content and complex relationships in various images.',
+                'en_US' => 'This capability covers all application scenarios that require AI models to perform visual understanding on the platform, accurately understanding content and complex relationships in various images.',
                 'en_US' => 'This capability covers all application scenarios that require AI models to perform visual understanding on the platform, accurately understanding content and complex relationships in various images.',
             ],
             'icon' => 'visual-understanding-icon',
@@ -155,11 +153,11 @@ return [
         'smart_rename' => [
             'code' => 'smart_rename',
             'name' => [
-                'zh_CN' => 'Smart Rename',
+                'en_US' => 'Smart Rename',
                 'en_US' => 'Smart Rename',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all AI renaming scenarios on the platform, automatically naming content titles for users based on context understanding.',
+                'en_US' => 'This capability covers all AI renaming scenarios on the platform, automatically naming content titles for users based on context understanding.',
                 'en_US' => 'This capability covers all AI renaming scenarios on the platform, automatically naming content titles for users based on context understanding.',
             ],
             'icon' => 'smart-rename-icon',
@@ -174,11 +172,11 @@ return [
         'ai_optimization' => [
             'code' => 'ai_optimization',
             'name' => [
-                'zh_CN' => 'AI Optimization',
+                'en_US' => 'AI Optimization',
                 'en_US' => 'AI Optimization',
             ],
             'description' => [
-                'zh_CN' => 'This capability covers all AI content optimization scenarios on the platform, automatically optimizing content for users based on context understanding.',
+                'en_US' => 'This capability covers all AI content optimization scenarios on the platform, automatically optimizing content for users based on context understanding.',
                 'en_US' => 'This capability covers all AI content optimization scenarios on the platform, automatically optimizing content for users based on context understanding.',
             ],
             'icon' => 'ai-optimization-icon',

@@ -56,7 +56,7 @@ class AliyunRuntimeClient
                 'acs:fc:cn-shenzhen:official:layers/PHP81-Debian10/versions/1',
             ],
             'environment_variables' => [
-                'TZ' => 'Asia/Shanghai',
+                'TZ' => 'America/Toronto',
                 'PATH' => '/opt/php8.1/bin:/opt/php8.1/sbin:/usr/local/bin/apache-maven/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/ruby/bin:/opt/bin:/code:/code/bin',
                 'LD_LIBRARY_PATH' => '/code:/code/lib:/usr/local/lib:/opt/lib:/opt/php8.1/lib:/opt/php8.0/lib:/opt/php7.2/lib',
             ],

@@ -54,9 +54,9 @@ class GlobalConfigApiTest extends AbstractHttpTest
             'logo_zh_url' => 'https://example.com/logo_zh.png',
             'logo_en_url' => 'https://example.com/logo_en.png',
             'favicon_url' => 'https://example.com/favicon.ico',
-            'default_language' => 'zh_CN',
+            'default_language' => 'en_US',
             'name_i18n' => [
-                'zh_CN' => 'testplatform',
+                'en_US' => 'testplatform',
                 'en_US' => 'Test Platform',
             ],
         ];
@@ -79,8 +79,8 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('default_language', $data);
 
         // verifyplatformsetvalue
-        if (isset($data['logo']['zh_CN']['url'])) {
-            $this->assertSame('https://example.com/logo_zh.png', $data['logo']['zh_CN']['url']);
+        if (isset($data['logo']['en_US']['url'])) {
+            $this->assertSame('https://example.com/logo_zh.png', $data['logo']['en_US']['url']);
         }
         if (isset($data['logo']['en_US']['url'])) {
             $this->assertSame('https://example.com/logo_en.png', $data['logo']['en_US']['url']);
@@ -88,7 +88,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         if (isset($data['favicon']['url'])) {
             $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
         }
-        $this->assertSame('zh_CN', $data['default_language']);
+        $this->assertSame('en_US', $data['default_language']);
     }
 
     public function testGetGlobalConfigResponseStructure(): void

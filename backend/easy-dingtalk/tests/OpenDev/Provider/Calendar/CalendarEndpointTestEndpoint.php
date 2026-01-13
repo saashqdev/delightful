@@ -24,8 +24,8 @@ class CalendarEndpointTestEndpoint extends OpenDevEndpointBaseTestCase
         $param = new CreateEventParameter($openDev->accessTokenEndpoint->get());
         $param->setUserId('xxx');
         $param->setSummary('Test Calendar Event');
-        $param->setStart(new DateTime('2024-09-02 10:00:00', new DateTimeZone('Asia/Shanghai')));
-        $param->setEnd(new DateTime('2024-09-02 11:00:00', new DateTimeZone('Asia/Shanghai')));
+        $param->setStart(new DateTime('2024-09-02 10:00:00', new DateTimeZone('America/Toronto')));
+        $param->setEnd(new DateTime('2024-09-02 11:00:00', new DateTimeZone('America/Toronto')));
         $param->setIsAllDay(false);
         $result = $openDev->calendarEndpoint->createEvent($param);
         $this->assertIsString($result->getId());

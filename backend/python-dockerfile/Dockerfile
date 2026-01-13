@@ -7,7 +7,7 @@ WORKDIR /app
 # Set Python environment
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV TZ=Asia/Shanghai
+ENV TZ=America/Toronto
 
 # Replace with China mirror source
 # RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \

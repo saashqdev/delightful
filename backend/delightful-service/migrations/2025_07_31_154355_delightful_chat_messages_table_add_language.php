@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_chat_messages', function (Blueprint $table) {
-            $table->string('language')->default('zh_CN')->after('content');
+            $table->string('language')->default('en_US')->after('content');
         });
     }
 

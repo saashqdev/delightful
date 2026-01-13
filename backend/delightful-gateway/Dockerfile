@@ -34,10 +34,10 @@ COPY --from=builder /app/api-gateway /app/
 # Create config directory
 RUN mkdir -p /app/config
 
-# Set timezone to Asia/Shanghai
+# Set timezone to America/Toronto
 RUN apk add --no-cache tzdata && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone && \
+    cp /usr/share/zoneinfo/America/Toronto /etc/localtime && \
+    echo "America/Toronto" > /etc/timezone && \
     apk del tzdata
 
 # Environment variables

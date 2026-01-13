@@ -332,7 +332,7 @@ export namespace Knowledge {
 		translate: {
 			name: {
 				en_US: string
-				zh_CN: string
+				en_US: string
 			}
 		}
 		visible_organizations: string[]

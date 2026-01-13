@@ -130,8 +130,8 @@ class ProviderConfigEntity extends AbstractEntity
         if (! empty($this->translate['alias'][$locale] ?? '')) {
             return $this->translate['alias'][$locale];
         }
-        if (! empty($this->translate['alias']['zh_CN'] ?? '')) {
-            return $this->translate['alias']['zh_CN'];
+        if (! empty($this->translate['alias']['en_US'] ?? '')) {
+            return $this->translate['alias']['en_US'];
         }
         if (! empty($this->translate['alias']['en_US'] ?? '')) {
             return $this->translate['alias']['en_US'];
@@ -139,7 +139,7 @@ class ProviderConfigEntity extends AbstractEntity
         if (! empty($this->alias)) {
             return $this->alias;
         }
-        return $locale === 'zh_CN' ? 'customizeservicequotient' : 'Custom Provider';
+        return $locale === 'en_US' ? 'customizeservicequotient' : 'Custom Provider';
     }
 
     public function setAlias(null|int|string $alias): void

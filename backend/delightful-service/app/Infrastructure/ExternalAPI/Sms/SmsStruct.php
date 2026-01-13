@@ -51,7 +51,7 @@ class SmsStruct
     public ?string $language = null;
 
     /**
-     * shortmessagedefaultlanguagetype,supportbusinesssidecustomize. notpassgivedefaultvaluezh_CN.
+     * shortmessagedefaultlanguagetype,supportbusinesssidecustomize. notpassgivedefaultvalueen_US.
      */
     public ?string $defaultLanguage = null;
 

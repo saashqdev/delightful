@@ -22,7 +22,7 @@ class UpdateModeGroupRequest extends FormRequest
     {
         return [
             'name_i18n' => 'required|array',
-            'name_i18n.zh_CN' => 'required|string|max:100',
+            'name_i18n.en_US' => 'required|string|max:100',
             'name_i18n.en_US' => 'required|string|max:100',
             'icon' => 'nullable|string|max:255',
             'color' => 'nullable|string|max:20',
@@ -37,8 +37,8 @@ class UpdateModeGroupRequest extends FormRequest
         return [
             'name_i18n.required' => __('mode.name_i18n_required'),
             'name_i18n.array' => __('mode.name_i18n_array'),
-            'name_i18n.zh_CN.required' => __('mode.group_name_zh_cn_required'),
-            'name_i18n.zh_CN.max' => __('mode.group_name_zh_cn_max'),
+            'name_i18n.en_US.required' => __('mode.group_name_zh_cn_required'),
+            'name_i18n.en_US.max' => __('mode.group_name_zh_cn_max'),
             'name_i18n.en_US.required' => __('mode.group_name_en_us_required'),
             'name_i18n.en_US.max' => __('mode.group_name_en_us_max'),
             'icon.max' => __('mode.icon_max'),
@@ -59,7 +59,7 @@ class UpdateModeGroupRequest extends FormRequest
     {
         // forcompatibleproperty,returnmiddletextname
         $nameI18n = $this->getNameI18n();
-        return $nameI18n['zh_CN'] ?? '';
+        return $nameI18n['en_US'] ?? '';
     }
 
     public function getIcon(): ?string

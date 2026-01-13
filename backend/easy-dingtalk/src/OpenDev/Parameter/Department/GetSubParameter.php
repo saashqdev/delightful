@@ -13,7 +13,7 @@ class GetSubParameter extends AbstractParameter
 {
     private int $deptId = 1;
 
-    private string $language = 'zh_CN';
+    private string $language = 'en_US';
 
     public function setDeptId(int $deptId): void
     {

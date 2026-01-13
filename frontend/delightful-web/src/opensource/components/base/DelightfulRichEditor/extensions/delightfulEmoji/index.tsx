@@ -33,7 +33,7 @@ const DelightfulEmojiNodeExtension = Node.create<Options>({
 				default: 20,
 			},
 			locale: {
-				default: "zh_CN",
+				default: "en_US",
 			},
 		}
 	},

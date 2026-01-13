@@ -35,7 +35,7 @@ class DelightfulChatAggregateSearchReqDTO
 
     public SearchEngineType $searchEngine = SearchEngineType::Bing;
 
-    public string $language = 'zh_CN';
+    public string $language = 'en_US';
 
     public ?string $requestId = null;
 

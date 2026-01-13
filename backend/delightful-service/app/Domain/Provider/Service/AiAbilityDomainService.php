@@ -120,7 +120,7 @@ class AiAbilityDomainService
             $name = $abilityConfig['name'];
             if (is_string($name)) {
                 $name = [
-                    'zh_CN' => $name,
+                    'en_US' => $name,
                     'en_US' => $name,
                 ];
             }
@@ -128,7 +128,7 @@ class AiAbilityDomainService
             $description = $abilityConfig['description'];
             if (is_string($description)) {
                 $description = [
-                    'zh_CN' => $description,
+                    'en_US' => $description,
                     'en_US' => $description,
                 ];
             }

@@ -56,7 +56,7 @@ readonly class AsrTitleGeneratorService
         string $taskKey
     ): ?string {
         try {
-            $language = $this->translator->getLocale() ?: 'zh_CN';
+            $language = $this->translator->getLocale() ?: 'en_US';
 
             // scenarioone:have asr_stream_content(frontclient implementationo clockrecording)
             if (! empty($asrStreamContent)) {
@@ -125,7 +125,7 @@ readonly class AsrTitleGeneratorService
     {
         try {
             // useupreporto clocksavelanguagetype,ifnothavethenusecurrentlanguagetype
-            $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
+            $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'en_US';
 
             $this->logger->info('uselanguagetypegeneratetitle', [
                 'task_key' => $taskStatus->taskKey,
@@ -224,7 +224,7 @@ readonly class AsrTitleGeneratorService
         string $taskKey
     ): ?string {
         try {
-            $language = $this->translator->getLocale() ?: 'zh_CN';
+            $language = $this->translator->getLocale() ?: 'en_US';
 
             // builduserrequestmessage(mockuserchatmessage)
             $userRequestMessage = $this->buildUserRequestMessage($fileName, null);

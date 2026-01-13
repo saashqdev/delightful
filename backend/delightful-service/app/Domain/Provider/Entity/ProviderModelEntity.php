@@ -522,8 +522,8 @@ class ProviderModelEntity extends AbstractEntity
         if (! empty($this->translate['name'][$locale] ?? '')) {
             return $this->translate['name'][$locale];
         }
-        if (! empty($this->translate['name']['zh_CN'] ?? '')) {
-            return $this->translate['name']['zh_CN'];
+        if (! empty($this->translate['name']['en_US'] ?? '')) {
+            return $this->translate['name']['en_US'];
         }
         if (! empty($this->translate['name']['en_US'] ?? '')) {
             return $this->translate['name']['en_US'];
@@ -539,8 +539,8 @@ class ProviderModelEntity extends AbstractEntity
         if (! empty($this->translate['description'][$locale] ?? '')) {
             return $this->translate['description'][$locale];
         }
-        if (! empty($this->translate['description']['zh_CN'] ?? '')) {
-            return $this->translate['description']['zh_CN'];
+        if (! empty($this->translate['description']['en_US'] ?? '')) {
+            return $this->translate['description']['en_US'];
         }
         if (! empty($this->translate['description']['en_US'] ?? '')) {
             return $this->translate['description']['en_US'];

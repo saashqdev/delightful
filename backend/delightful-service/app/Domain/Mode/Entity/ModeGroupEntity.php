@@ -69,7 +69,7 @@ class ModeGroupEntity extends AbstractEntity
 
     public function getZHName(): string
     {
-        return $this->nameI18n['zh_CN'] ?? '';
+        return $this->nameI18n['en_US'] ?? '';
     }
 
     public function getENName(): string

@@ -82,7 +82,7 @@ class AsrTaskStatusDTO
 
     public ?string $noteFileType = null; // notefiletype(md,txt,json)
 
-    public ?string $language = null; // languagetype(zh_CN,en_USetc),useatgeneratetitleo clockuse
+    public ?string $language = null; // languagetype(en_US,en_USetc),useatgeneratetitleo clockuse
 
     public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle(useat summary duplicateuse)
 

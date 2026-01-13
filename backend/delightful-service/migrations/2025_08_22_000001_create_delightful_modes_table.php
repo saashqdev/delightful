@@ -56,7 +56,7 @@ return new class extends Migration {
         $defaultModeData = [
             'id' => IdGenerator::getSnowId(),
             'name_i18n' => json_encode([
-                'zh_CN' => 'defaultmodetype',
+                'en_US' => 'defaultmodetype',
                 'en_US' => 'Default Mode',
             ]),
             'identifier' => 'default',

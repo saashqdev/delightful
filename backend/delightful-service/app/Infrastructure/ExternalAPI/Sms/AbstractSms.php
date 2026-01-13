@@ -49,7 +49,7 @@ abstract class AbstractSms implements SmsInterface
 
     /**
      *  toat $smsStruct , if language intemplatemiddlenotexistsin,thenuse default_language conductdetect
-     *  if default_language alsonothavetoshouldtemplate,thenby type intemplatemiddlematchexistsinlanguagetype,ifexistsinmultipletype,byzh_CNpriority.
+     *  if default_language alsonothavetoshouldtemplate,thenby type intemplatemiddlematchexistsinlanguagetype,ifexistsinmultipletype,byen_USpriority.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string
     {

@@ -3,7 +3,7 @@ export const languageHelper = {
 	/**
 	 * @description I18n code conversion: other standards => delightful standard (zzZZ/zz-ZZ unified to zz_ZZ, case-insensitive length)
 	 * @param {string} lang
-	 * @return zh_CN
+	 * @return en_US
 	 */
 	transform: (lang: string): string => {
 		return lang.replace(/([a-z]{2})([-]?)([A-Z]{2})/g, "$1_$3")

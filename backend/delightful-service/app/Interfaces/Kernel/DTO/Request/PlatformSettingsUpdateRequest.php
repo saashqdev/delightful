@@ -26,7 +26,7 @@ class PlatformSettingsUpdateRequest extends FormRequest
             'logo_en_url' => 'sometimes|nullable|string|min:1|regex:/^https:\/\/.+$/',
             'favicon_url' => 'sometimes|nullable|string|min:1|regex:/^https:\/\/.+$/',
             'minimal_logo_url' => 'sometimes|nullable|string|min:1|regex:/^https:\/\/.+$/',
-            'default_language' => 'sometimes|string|in:zh_CN,en_US',
+            'default_language' => 'sometimes|string|in:en_US,en_US',
             'name_i18n' => 'sometimes|array',
             'name_i18n.*' => 'nullable|string|max:255',
             'title_i18n' => 'sometimes|array',

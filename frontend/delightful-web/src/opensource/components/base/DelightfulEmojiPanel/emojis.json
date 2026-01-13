@@ -4,7 +4,7 @@
     "emojis":  [
                    {
                        "names":  {
-                                     "zh_CN":  "Smile",
+                                     "en_US":  "Smile",
                                      "en_US":  "Smile",
                                      "ms_MY":  "Senyuman",
                                      "vi_VN":  "Nụ cười",
@@ -17,7 +17,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Lovely",
+                                     "en_US":  "Lovely",
                                      "en_US":  "Lovely",
                                      "ms_MY":  "Comel",
                                      "vi_VN":  "Dễ thương",
@@ -30,7 +30,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Simper",
+                                     "en_US":  "Simper",
                                      "en_US":  "Simper",
                                      "ms_MY":  "Ketawa bodoh",
                                      "vi_VN":  "Cười ngớ ngẩn",
@@ -43,7 +43,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Be in a daze",
+                                     "en_US":  "Be in a daze",
                                      "en_US":  "Be in a daze",
                                      "ms_MY":  "Terpaku",
                                      "vi_VN":  "Ngây ngẩn",
@@ -56,7 +56,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Proud",
+                                     "en_US":  "Proud",
                                      "en_US":  "Proud",
                                      "ms_MY":  "Bangga",
                                      "vi_VN":  "Tự hào",
@@ -69,7 +69,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Cry loudly",
+                                     "en_US":  "Cry loudly",
                                      "en_US":  "Cry loudly",
                                      "ms_MY":  "Menangis teresak-esak",
                                      "vi_VN":  "Khóc lớn",
@@ -82,7 +82,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Upside down",
+                                     "en_US":  "Upside down",
                                      "en_US":  "Upside down",
                                      "ms_MY":  "Terbalik",
                                      "vi_VN":  "Ngược lại",
@@ -95,7 +95,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Shut up",
+                                     "en_US":  "Shut up",
                                      "en_US":  "Shut up",
                                      "ms_MY":  "Diam",
                                      "vi_VN":  "Im lặng",
@@ -108,7 +108,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Sleep",
+                                     "en_US":  "Sleep",
                                      "en_US":  "Sleep",
                                      "ms_MY":  "Tidur",
                                      "vi_VN":  "Ngủ",
@@ -121,7 +121,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Dizziness",
+                                     "en_US":  "Dizziness",
                                      "en_US":  "Dizziness",
                                      "ms_MY":  "Pening",
                                      "vi_VN":  "Chóng mặt",
@@ -134,7 +134,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Warm face",
+                                     "en_US":  "Warm face",
                                      "en_US":  "Warm face",
                                      "ms_MY":  "Muka panas",
                                      "vi_VN":  "Mặt nóng",
@@ -147,7 +147,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "OK",
+                                     "en_US":  "OK",
                                      "en_US":  "OK",
                                      "ms_MY":  "Baik",
                                      "vi_VN":  "Được",
@@ -187,7 +187,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Like",
+                                     "en_US":  "Like",
                                      "en_US":  "Like",
                                      "ms_MY":  "Suka",
                                      "vi_VN":  "Thích",
@@ -227,7 +227,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Victory",
+                                     "en_US":  "Victory",
                                      "en_US":  "Victory",
                                      "ms_MY":  "Kemenangan",
                                      "vi_VN":  "Thắng lợi",
@@ -267,7 +267,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Wave",
+                                     "en_US":  "Wave",
                                      "en_US":  "Wave",
                                      "ms_MY":  "Melambai",
                                      "vi_VN":  "Vẫy tay",
@@ -307,7 +307,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Make a heart gesture",
+                                     "en_US":  "Make a heart gesture",
                                      "en_US":  "Make a heart gesture",
                                      "ms_MY":  "Buat gerakan hati",
                                      "vi_VN":  "Làm cử chỉ hình tim",
@@ -347,7 +347,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Applaud",
+                                     "en_US":  "Applaud",
                                      "en_US":  "Applaud",
                                      "ms_MY":  "Tepuk tangan",
                                      "vi_VN":  "Vỗ tay",
@@ -387,7 +387,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Have a good grasp of",
+                                     "en_US":  "Have a good grasp of",
                                      "en_US":  "Have a good grasp of",
                                      "ms_MY":  "Memiliki pegangan yang baik",
                                      "vi_VN":  "Nắm bắt tốt",
@@ -427,7 +427,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Upward",
+                                     "en_US":  "Upward",
                                      "en_US":  "Upward",
                                      "ms_MY":  "Ke atas",
                                      "vi_VN":  "Lên trên",
@@ -467,7 +467,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Downward",
+                                     "en_US":  "Downward",
                                      "en_US":  "Downward",
                                      "ms_MY":  "Ke bawah",
                                      "vi_VN":  "Xuống dưới",
@@ -507,7 +507,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "To the left",
+                                     "en_US":  "To the left",
                                      "en_US":  "To the left",
                                      "ms_MY":  "Ke kiri",
                                      "vi_VN":  "Sang trái",
@@ -547,7 +547,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "To the right",
+                                     "en_US":  "To the right",
                                      "en_US":  "To the right",
                                      "ms_MY":  "Ke kanan",
                                      "vi_VN":  "Sang phải",
@@ -587,7 +587,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Strong",
+                                     "en_US":  "Strong",
                                      "en_US":  "Strong",
                                      "ms_MY":  "Kuat",
                                      "vi_VN":  "Mạnh mẽ",
@@ -627,7 +627,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Prevent",
+                                     "en_US":  "Prevent",
                                      "en_US":  "Prevent",
                                      "ms_MY":  "Mencegah",
                                      "vi_VN":  "Ngăn cản",
@@ -667,7 +667,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Smiling face",
+                                     "en_US":  "Smiling face",
                                      "en_US":  "Smiling face",
                                      "ms_MY":  "Wajah tersenyum",
                                      "vi_VN":  "Mặt cười",
@@ -680,7 +680,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Relieved",
+                                     "en_US":  "Relieved",
                                      "en_US":  "Relieved",
                                      "ms_MY":  "Tenang kembali",
                                      "vi_VN":  "Thoải mái",
@@ -693,7 +693,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Big eyes",
+                                     "en_US":  "Big eyes",
                                      "en_US":  "Big eyes",
                                      "ms_MY":  "Mata besar",
                                      "vi_VN":  "Mắt to",
@@ -706,7 +706,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Grinning with mouth open",
+                                     "en_US":  "Grinning with mouth open",
                                      "en_US":  "Grinning with mouth open",
                                      "ms_MY":  "Tersenyum lebar dengan mulut terbuka",
                                      "vi_VN":  "Cười toe toét",
@@ -719,7 +719,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Smiling with squinted eyes",
+                                     "en_US":  "Smiling with squinted eyes",
                                      "en_US":  "Smiling with squinted eyes",
                                      "ms_MY":  "Tersenyum dengan mata sipit",
                                      "vi_VN":  "Cười híp mắt",
@@ -732,7 +732,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Brilliant",
+                                     "en_US":  "Brilliant",
                                      "en_US":  "Brilliant",
                                      "ms_MY":  "Cemerlang",
                                      "vi_VN":  "Rạng rỡ",
@@ -745,7 +745,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Funny face",
+                                     "en_US":  "Funny face",
                                      "en_US":  "Funny face",
                                      "ms_MY":  "Wajah lucu",
                                      "vi_VN":  "Mặt xấu",
@@ -758,7 +758,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Surprised",
+                                     "en_US":  "Surprised",
                                      "en_US":  "Surprised",
                                      "ms_MY":  "Terkejut",
                                      "vi_VN":  "Ngạc nhiên",
@@ -771,7 +771,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Hug",
+                                     "en_US":  "Hug",
                                      "en_US":  "Hug",
                                      "ms_MY":  "Peluk",
                                      "vi_VN":  "Ôm",
@@ -784,7 +784,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Cover mouth",
+                                     "en_US":  "Cover mouth",
                                      "en_US":  "Cover mouth",
                                      "ms_MY":  "Tutup mulut",
                                      "vi_VN":  "Che miệng",
@@ -797,7 +797,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Kiss",
+                                     "en_US":  "Kiss",
                                      "en_US":  "Kiss",
                                      "ms_MY":  "Cium",
                                      "vi_VN":  "Hôn",
@@ -810,7 +810,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Kiss once",
+                                     "en_US":  "Kiss once",
                                      "en_US":  "Kiss once",
                                      "ms_MY":  "Cium sekali",
                                      "vi_VN":  "Hôn một cái",
@@ -823,7 +823,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Wicked smile",
+                                     "en_US":  "Wicked smile",
                                      "en_US":  "Wicked smile",
                                      "ms_MY":  "Senyum jahat",
                                      "vi_VN":  "Cười xấu xa",
@@ -836,7 +836,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Party",
+                                     "en_US":  "Party",
                                      "en_US":  "Party",
                                      "ms_MY":  "Pesta",
                                      "vi_VN":  "Tiệc tùng",
@@ -849,7 +849,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Delicious",
+                                     "en_US":  "Delicious",
                                      "en_US":  "Delicious",
                                      "ms_MY":  "Sedap",
                                      "vi_VN":  "Ngon ngon",
@@ -862,7 +862,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Stick out tongue",
+                                     "en_US":  "Stick out tongue",
                                      "en_US":  "Stick out tongue",
                                      "ms_MY":  "Julurkan lidah",
                                      "vi_VN":  "Lè lưỡi",
@@ -875,7 +875,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Stretch out tongue",
+                                     "en_US":  "Stretch out tongue",
                                      "en_US":  "Stretch out tongue",
                                      "ms_MY":  "Merentangkan lidah",
                                      "vi_VN":  "Duỗi lưỡi ra",
@@ -888,7 +888,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Wink right",
+                                     "en_US":  "Wink right",
                                      "en_US":  "Wink right",
                                      "ms_MY":  "Kedip mata kanan",
                                      "vi_VN":  "Nháy mắt phải",
@@ -901,7 +901,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Wink left",
+                                     "en_US":  "Wink left",
                                      "en_US":  "Wink left",
                                      "ms_MY":  "Kedip mata kiri",
                                      "vi_VN":  "Nháy mắt trái",
@@ -914,7 +914,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Wacky",
+                                     "en_US":  "Wacky",
                                      "en_US":  "Wacky",
                                      "ms_MY":  "Pelik",
                                      "vi_VN":  "Kỳ quặc",
@@ -927,7 +927,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Love",
+                                     "en_US":  "Love",
                                      "en_US":  "Love",
                                      "ms_MY":  "Cinta",
                                      "vi_VN":  "Tim",
@@ -940,7 +940,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Blow a kiss",
+                                     "en_US":  "Blow a kiss",
                                      "en_US":  "Blow a kiss",
                                      "ms_MY":  "Buat ciuman angin",
                                      "vi_VN":  "Gửi nụ hôn bay",
@@ -953,7 +953,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Fans",
+                                     "en_US":  "Fans",
                                      "en_US":  "Fans",
                                      "ms_MY":  "Peminat",
                                      "vi_VN":  "Người hâm mộ",
@@ -966,7 +966,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Infatuated",
+                                     "en_US":  "Infatuated",
                                      "en_US":  "Infatuated",
                                      "ms_MY":  "Terpesona",
                                      "vi_VN":  "Si mê",
@@ -979,7 +979,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Bookworm",
+                                     "en_US":  "Bookworm",
                                      "en_US":  "Bookworm",
                                      "ms_MY":  "Penggemar buku",
                                      "vi_VN":  "Người mê sách",
@@ -992,7 +992,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Disguise",
+                                     "en_US":  "Disguise",
                                      "en_US":  "Disguise",
                                      "ms_MY":  "Penyamaran",
                                      "vi_VN":  "Giả trang",
@@ -1005,7 +1005,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Single lens",
+                                     "en_US":  "Single lens",
                                      "en_US":  "Single lens",
                                      "ms_MY":  "Kanta tunggal",
                                      "vi_VN":  "Kính đơn",
@@ -1018,7 +1018,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Drool",
+                                     "en_US":  "Drool",
                                      "en_US":  "Drool",
                                      "ms_MY":  "Berair liur",
                                      "vi_VN":  "Chảy nước miếng",
@@ -1031,7 +1031,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Giggle foolishly",
+                                     "en_US":  "Giggle foolishly",
                                      "en_US":  "Giggle foolishly",
                                      "ms_MY":  "Ketawa bodoh",
                                      "vi_VN":  "Cười ngớ ngẩn",
@@ -1044,7 +1044,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Sweat",
+                                     "en_US":  "Sweat",
                                      "en_US":  "Sweat",
                                      "ms_MY":  "Berpeluh",
                                      "vi_VN":  "Đổ mồ hôi",
@@ -1057,7 +1057,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Release sadness",
+                                     "en_US":  "Release sadness",
                                      "en_US":  "Release sadness",
                                      "ms_MY":  "Lepaskan kesedihan",
                                      "vi_VN":  "Giải tỏa nỗi buồn",
@@ -1070,7 +1070,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Cry",
+                                     "en_US":  "Cry",
                                      "en_US":  "Cry",
                                      "ms_MY":  "Menangis",
                                      "vi_VN":  "Khóc",
@@ -1083,7 +1083,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Laughing with tears",
+                                     "en_US":  "Laughing with tears",
                                      "en_US":  "Laughing with tears",
                                      "ms_MY":  "Ketawa sambil menangis",
                                      "vi_VN":  "Cười ra nước mắt",
@@ -1096,7 +1096,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Laughing and crying",
+                                     "en_US":  "Laughing and crying",
                                      "en_US":  "Laughing and crying",
                                      "ms_MY":  "Ketawa dan menangis",
                                      "vi_VN":  "Cười và khóc",
@@ -1109,7 +1109,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Wild laughter",
+                                     "en_US":  "Wild laughter",
                                      "en_US":  "Wild laughter",
                                      "ms_MY":  "Ketawa berdekah-dekah",
                                      "vi_VN":  "Cười cuồng nộ",
@@ -1122,7 +1122,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Suppress tears",
+                                     "en_US":  "Suppress tears",
                                      "en_US":  "Suppress tears",
                                      "ms_MY":  "Tahan air mata",
                                      "vi_VN":  "Kìm nén nước mắt",
@@ -1135,7 +1135,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Bored",
+                                     "en_US":  "Bored",
                                      "en_US":  "Bored",
                                      "ms_MY":  "Bosan",
                                      "vi_VN":  "Chán",
@@ -1148,7 +1148,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Twisted mouth",
+                                     "en_US":  "Twisted mouth",
                                      "en_US":  "Twisted mouth",
                                      "ms_MY":  "Mulut bengkok",
                                      "vi_VN":  "Miệng méo",
@@ -1161,7 +1161,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Dotted line face",
+                                     "en_US":  "Dotted line face",
                                      "en_US":  "Dotted line face",
                                      "ms_MY":  "Wajah garis putus-putus",
                                      "vi_VN":  "Mặt đường kẻ chấm",
@@ -1174,7 +1174,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Neutral",
+                                     "en_US":  "Neutral",
                                      "en_US":  "Neutral",
                                      "ms_MY":  "Tidak berpihak",
                                      "vi_VN":  "Trung lập",
@@ -1187,7 +1187,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Dull",
+                                     "en_US":  "Dull",
                                      "en_US":  "Dull",
                                      "ms_MY":  "Tidak menarik",
                                      "vi_VN":  "Vô vị",
@@ -1200,7 +1200,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Roll one\u0027s eyes",
+                                     "en_US":  "Roll one\u0027s eyes",
                                      "en_US":  "Roll one\u0027s eyes",
                                      "ms_MY":  "Membaling mata",
                                      "vi_VN":  "Lườm",
@@ -1213,7 +1213,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Blush",
+                                     "en_US":  "Blush",
                                      "en_US":  "Blush",
                                      "ms_MY":  "Merah muka",
                                      "vi_VN":  "Mặt đỏ",
@@ -1226,7 +1226,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Disappointed",
+                                     "en_US":  "Disappointed",
                                      "en_US":  "Disappointed",
                                      "ms_MY":  "Kecewa",
                                      "vi_VN":  "Thất vọng",
@@ -1239,7 +1239,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Meditate",
+                                     "en_US":  "Meditate",
                                      "en_US":  "Meditate",
                                      "ms_MY":  "Merenung",
                                      "vi_VN":  "Trầm tư",
@@ -1252,7 +1252,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Persist",
+                                     "en_US":  "Persist",
                                      "en_US":  "Persist",
                                      "ms_MY":  "Bertekun",
                                      "vi_VN":  "Kiên trì",
@@ -1265,7 +1265,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Confused",
+                                     "en_US":  "Confused",
                                      "en_US":  "Confused",
                                      "ms_MY":  "Bingung",
                                      "vi_VN":  "Bối rối",
@@ -1278,7 +1278,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Dizzy",
+                                     "en_US":  "Dizzy",
                                      "en_US":  "Dizzy",
                                      "ms_MY":  "Pening",
                                      "vi_VN":  "Choáng váng",
@@ -1291,7 +1291,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Confused and dazed",
+                                     "en_US":  "Confused and dazed",
                                      "en_US":  "Confused and dazed",
                                      "ms_MY":  "Bingung dan mengantuk",
                                      "vi_VN":  "Lơ mơ, ngơ ngác",
@@ -1304,7 +1304,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Tired",
+                                     "en_US":  "Tired",
                                      "en_US":  "Tired",
                                      "ms_MY":  "Letih",
                                      "vi_VN":  "Mệt mỏi",
@@ -1317,7 +1317,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Sleepy",
+                                     "en_US":  "Sleepy",
                                      "en_US":  "Sleepy",
                                      "ms_MY":  "Mengantuk",
                                      "vi_VN":  "Buồn ngủ",
@@ -1330,7 +1330,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Sad",
+                                     "en_US":  "Sad",
                                      "en_US":  "Sad",
                                      "ms_MY":  "Sedih",
                                      "vi_VN":  "Buồn",
@@ -1343,7 +1343,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Worried",
+                                     "en_US":  "Worried",
                                      "en_US":  "Worried",
                                      "ms_MY":  "Bimbang",
                                      "vi_VN":  "Lo lắng",
@@ -1356,7 +1356,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Frown",
+                                     "en_US":  "Frown",
                                      "en_US":  "Frown",
                                      "ms_MY":  "Mengerutkan kening",
                                      "vi_VN":  "Nhíu mày",
@@ -1369,7 +1369,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Raise an eyebrow",
+                                     "en_US":  "Raise an eyebrow",
                                      "en_US":  "Raise an eyebrow",
                                      "ms_MY":  "Angkat kening",
                                      "vi_VN":  "Nghiêng mày",
@@ -1382,7 +1382,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Surprised and worried",
+                                     "en_US":  "Surprised and worried",
                                      "en_US":  "Surprised and worried",
                                      "ms_MY":  "Terkejut dan bimbang",
                                      "vi_VN":  "Bất ngờ và lo lắng",
@@ -1395,7 +1395,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Be silent",
+                                     "en_US":  "Be silent",
                                      "en_US":  "Be silent",
                                      "ms_MY":  "Diam",
                                      "vi_VN":  "Im lặng",
@@ -1408,7 +1408,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Open mouth",
+                                     "en_US":  "Open mouth",
                                      "en_US":  "Open mouth",
                                      "ms_MY":  "Buka mulut",
                                      "vi_VN":  "Mở miệng",
@@ -1421,7 +1421,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Painful",
+                                     "en_US":  "Painful",
                                      "en_US":  "Painful",
                                      "ms_MY":  "Sakit",
                                      "vi_VN":  "Đau đớn",
@@ -1434,7 +1434,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Afraid",
+                                     "en_US":  "Afraid",
                                      "en_US":  "Afraid",
                                      "ms_MY":  "Takut",
                                      "vi_VN":  "Sợ hãi",
@@ -1447,7 +1447,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Tremble with fear",
+                                     "en_US":  "Tremble with fear",
                                      "en_US":  "Tremble with fear",
                                      "ms_MY":  "Bergetar kerana takut",
                                      "vi_VN":  "Run sợ hãi",
@@ -1460,7 +1460,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Bandage",
+                                     "en_US":  "Bandage",
                                      "en_US":  "Bandage",
                                      "ms_MY":  "Pemebalut",
                                      "vi_VN":  "Buồn ngủ",
@@ -1473,7 +1473,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Confused and lost",
+                                     "en_US":  "Confused and lost",
                                      "en_US":  "Confused and lost",
                                      "ms_MY":  "Bingung dan hilang arah",
                                      "vi_VN":  "Bối rối và mất phương hướng",
@@ -1486,7 +1486,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Alarmed and terrified",
+                                     "en_US":  "Alarmed and terrified",
                                      "en_US":  "Alarmed and terrified",
                                      "ms_MY":  "Terkejut dan ketakutan",
                                      "vi_VN":  "Kinh hoàng và hoảng sợ",
@@ -1499,7 +1499,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Angry",
+                                     "en_US":  "Angry",
                                      "en_US":  "Angry",
                                      "ms_MY":  "marah",
                                      "vi_VN":  "Tức giận",
@@ -1512,7 +1512,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Angrily blast",
+                                     "en_US":  "Angrily blast",
                                      "en_US":  "Angrily blast",
                                      "ms_MY":  "Marah-marah meledak",
                                      "vi_VN":  "Tức giận phun trào",
@@ -1525,7 +1525,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Furious",
+                                     "en_US":  "Furious",
                                      "en_US":  "Furious",
                                      "ms_MY":  "Marah besar",
                                      "vi_VN":  "Tức giận dữ dội",
@@ -1538,7 +1538,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Mute",
+                                     "en_US":  "Mute",
                                      "en_US":  "Mute",
                                      "ms_MY":  "Bisukan",
                                      "vi_VN":  "Cấm nói",
@@ -1551,7 +1551,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Explode",
+                                     "en_US":  "Explode",
                                      "en_US":  "Explode",
                                      "ms_MY":  "Meletup",
                                      "vi_VN":  "Nổ tung",
@@ -1564,7 +1564,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Exhale",
+                                     "en_US":  "Exhale",
                                      "en_US":  "Exhale",
                                      "ms_MY":  "Hempas nafas keluar",
                                      "vi_VN":  "Thở ra",
@@ -1577,7 +1577,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Sneeze",
+                                     "en_US":  "Sneeze",
                                      "en_US":  "Sneeze",
                                      "ms_MY":  "Bersin",
                                      "vi_VN":  "Hắt hơi",
@@ -1590,7 +1590,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Mask",
+                                     "en_US":  "Mask",
                                      "en_US":  "Mask",
                                      "ms_MY":  "Topeng muka",
                                      "vi_VN":  "Khẩu trang",
@@ -1603,7 +1603,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Take temperature",
+                                     "en_US":  "Take temperature",
                                      "en_US":  "Take temperature",
                                      "ms_MY":  "Mengambil suhu",
                                      "vi_VN":  "đo nhiệt độ",
@@ -1616,7 +1616,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Cold expression",
+                                     "en_US":  "Cold expression",
                                      "en_US":  "Cold expression",
                                      "ms_MY":  "Ekspresi sejuk",
                                      "vi_VN":  "Biểu hiện lạnh lùng",
@@ -1629,7 +1629,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Vomit",
+                                     "en_US":  "Vomit",
                                      "en_US":  "Vomit",
                                      "ms_MY":  "Muntah",
                                      "vi_VN":  "Nôn mửa",
@@ -1642,7 +1642,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Nauseous",
+                                     "en_US":  "Nauseous",
                                      "en_US":  "Nauseous",
                                      "ms_MY":  "Mual",
                                      "vi_VN":  "Buồn nôn",
@@ -1655,7 +1655,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Think",
+                                     "en_US":  "Think",
                                      "en_US":  "Think",
                                      "ms_MY":  "Berfikir",
                                      "vi_VN":  "Suy nghĩ",
@@ -1668,7 +1668,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Yyawn",
+                                     "en_US":  "Yyawn",
                                      "en_US":  "Yyawn",
                                      "ms_MY":  "Menguap",
                                      "vi_VN":  "Hắt hơi ngáp",
@@ -1681,7 +1681,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Booing",
+                                     "en_US":  "Booing",
                                      "en_US":  "Booing",
                                      "ms_MY":  "Bunyi sorakan tidak setuju",
                                      "vi_VN":  "Tiếng huýt",
@@ -1694,7 +1694,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Cover in surprise",
+                                     "en_US":  "Cover in surprise",
                                      "en_US":  "Cover in surprise",
                                      "ms_MY":  "Tutup dengan terkejut",
                                      "vi_VN":  "Che tay trong kinh ngạc",
@@ -1707,7 +1707,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Peek",
+                                     "en_US":  "Peek",
                                      "en_US":  "Peek",
                                      "ms_MY":  "Mengintai",
                                      "vi_VN":  "Nhìn trộm",
@@ -1720,7 +1720,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Sleepy expression",
+                                     "en_US":  "Sleepy expression",
                                      "en_US":  "Sleepy expression",
                                      "ms_MY":  "Ekspresi mengantuk",
                                      "vi_VN":  "Biểu hiện buồn ngủ",
@@ -1733,7 +1733,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Mouthless",
+                                     "en_US":  "Mouthless",
                                      "en_US":  "Mouthless",
                                      "ms_MY":  "Tanpa mulut",
                                      "vi_VN":  "Không có miệng",
@@ -1746,7 +1746,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Kiss",
+                                     "en_US":  "Kiss",
                                      "en_US":  "Kiss",
                                      "ms_MY":  "Cium",
                                      "vi_VN":  "Hôn",
@@ -1759,7 +1759,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Lie",
+                                     "en_US":  "Lie",
                                      "en_US":  "Lie",
                                      "ms_MY":  "Membohong",
                                      "vi_VN":  "Nói dối",
@@ -1772,7 +1772,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Money-mad",
+                                     "en_US":  "Money-mad",
                                      "en_US":  "Money-mad",
                                      "ms_MY":  "Obsessed with money",
                                      "vi_VN":  "Tham tiền",
@@ -1785,7 +1785,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Salute",
+                                     "en_US":  "Salute",
                                      "en_US":  "Salute",
                                      "ms_MY":  "Tabik hormat",
                                      "vi_VN":  "Chào kính",
@@ -1798,7 +1798,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Cloud",
+                                     "en_US":  "Cloud",
                                      "en_US":  "Cloud",
                                      "ms_MY":  "Awan computing",
                                      "vi_VN":  "Mây cao",
@@ -1811,7 +1811,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Demon",
+                                     "en_US":  "Demon",
                                      "en_US":  "Demon",
                                      "ms_MY":  "Syaitan",
                                      "vi_VN":  "Ác quỷ",
@@ -1824,7 +1824,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "",
+                                     "en_US":  "",
                                      "en_US":  "",
                                      "ms_MY":  "",
                                      "vi_VN":  "",
@@ -1837,7 +1837,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Kiss mark",
+                                     "en_US":  "Kiss mark",
                                      "en_US":  "Kiss mark",
                                      "ms_MY":  "Tanda ciuman",
                                      "vi_VN":  "Dấu hôn",
@@ -1850,7 +1850,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Bite lip",
+                                     "en_US":  "Bite lip",
                                      "en_US":  "Bite lip",
                                      "ms_MY":  "Gigit bibir",
                                      "vi_VN":  "Cắn môi",
@@ -1863,7 +1863,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Red heart",
+                                     "en_US":  "Red heart",
                                      "en_US":  "Red heart",
                                      "ms_MY":  "Hati merah",
                                      "vi_VN":  "Trái tim đỏ",
@@ -1876,7 +1876,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Burn",
+                                     "en_US":  "Burn",
                                      "en_US":  "Burn",
                                      "ms_MY":  "Bakar",
                                      "vi_VN":  "Cháy",
@@ -1889,7 +1889,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Heartbroken",
+                                     "en_US":  "Heartbroken",
                                      "en_US":  "Heartbroken",
                                      "ms_MY":  "Hati hancur",
                                      "vi_VN":  "Tổn thương tâm hồn",
@@ -1902,7 +1902,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Heartbroken",
+                                     "en_US":  "Heartbroken",
                                      "en_US":  "Heartbroken",
                                      "ms_MY":  "Hati hancur",
                                      "vi_VN":  "Tấm lòng tan vỡ",
@@ -1915,7 +1915,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Full marks",
+                                     "en_US":  "Full marks",
                                      "en_US":  "Full marks",
                                      "ms_MY":  "Markah penuh",
                                      "vi_VN":  "Điểm tuyệt đối",
@@ -1928,7 +1928,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Love letter",
+                                     "en_US":  "Love letter",
                                      "en_US":  "Love letter",
                                      "ms_MY":  "Surat cinta",
                                      "vi_VN":  "Thư tình",
@@ -1941,7 +1941,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Bomb",
+                                     "en_US":  "Bomb",
                                      "en_US":  "Bomb",
                                      "ms_MY":  "Bomba",
                                      "vi_VN":  "Quả bom",
@@ -1954,7 +1954,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Excrement",
+                                     "en_US":  "Excrement",
                                      "en_US":  "Excrement",
                                      "ms_MY":  "Taik",
                                      "vi_VN":  "Phân",
@@ -1967,7 +1967,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Ghost",
+                                     "en_US":  "Ghost",
                                      "en_US":  "Ghost",
                                      "ms_MY":  "Hantu",
                                      "vi_VN":  "Ma",
@@ -1980,7 +1980,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Cake",
+                                     "en_US":  "Cake",
                                      "en_US":  "Cake",
                                      "ms_MY":  "Kek",
                                      "vi_VN":  "Bánh ngọt",
@@ -1993,7 +1993,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Aircraft",
+                                     "en_US":  "Aircraft",
                                      "en_US":  "Aircraft",
                                      "ms_MY":  "Pesawat",
                                      "vi_VN":  "Máy bay",
@@ -2006,7 +2006,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "High-speed rail",
+                                     "en_US":  "High-speed rail",
                                      "en_US":  "High-speed rail",
                                      "ms_MY":  "Kereta api berkelajuan tinggi",
                                      "vi_VN":  "Tàu cao tốc",
@@ -2019,7 +2019,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Beer",
+                                     "en_US":  "Beer",
                                      "en_US":  "Beer",
                                      "ms_MY":  "Bir",
                                      "vi_VN":  "Bia",
@@ -2032,7 +2032,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Clink glasses",
+                                     "en_US":  "Clink glasses",
                                      "en_US":  "Clink glasses",
                                      "ms_MY":  "Bersuap gelas",
                                      "vi_VN":  "Chạm cốc",
@@ -2045,7 +2045,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Milk tea",
+                                     "en_US":  "Milk tea",
                                      "en_US":  "Milk tea",
                                      "ms_MY":  "Teh susu",
                                      "vi_VN":  "Trà sữa",
@@ -2058,7 +2058,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Straw cup",
+                                     "en_US":  "Straw cup",
                                      "en_US":  "Straw cup",
                                      "ms_MY":  "Cawan penyedut",
                                      "vi_VN":  "Cốc có ống hút",
@@ -2071,7 +2071,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Hot beverage",
+                                     "en_US":  "Hot beverage",
                                      "en_US":  "Hot beverage",
                                      "ms_MY":  "Minuman panas",
                                      "vi_VN":  "Thức uống nóng",
@@ -2084,7 +2084,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Flame",
+                                     "en_US":  "Flame",
                                      "en_US":  "Flame",
                                      "ms_MY":  "Api",
                                      "vi_VN":  "Lửa",
@@ -2097,7 +2097,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Delightful wand",
+                                     "en_US":  "Delightful wand",
                                      "en_US":  "Delightful wand",
                                      "ms_MY":  "Tongkat ajaib",
                                      "vi_VN":  "Cây đũa thần",
@@ -2110,7 +2110,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Salute cannon",
+                                     "en_US":  "Salute cannon",
                                      "en_US":  "Salute cannon",
                                      "ms_MY":  "Meriam hormat",
                                      "vi_VN":  "Pháo lễ",
@@ -2123,7 +2123,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Red envelope",
+                                     "en_US":  "Red envelope",
                                      "en_US":  "Red envelope",
                                      "ms_MY":  "Kotak merah",
                                      "vi_VN":  "Phong bì đỏ",
@@ -2136,7 +2136,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Rose",
+                                     "en_US":  "Rose",
                                      "en_US":  "Rose",
                                      "ms_MY":  "Mawar",
                                      "vi_VN":  "Hoa hồng",
@@ -2149,7 +2149,7 @@
                    },
                    {
                        "names":  {
-                                     "zh_CN":  "Withered flower",
+                                     "en_US":  "Withered flower",
                                      "en_US":  "Withered flower",
                                      "ms_MY":  "Bunga layu",
                                      "vi_VN":  "Hoa tàn",

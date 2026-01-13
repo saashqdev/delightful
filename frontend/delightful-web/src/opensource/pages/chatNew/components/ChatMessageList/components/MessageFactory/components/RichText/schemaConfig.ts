@@ -170,7 +170,7 @@ export default {
 				ns: { default: "emojis/" },
 				suffix: { default: ".png" },
 				size: { default: 20 },
-				locale: { default: "zh_CN" },
+				locale: { default: "en_US" },
 			},
 			parseDOM: [
 				{

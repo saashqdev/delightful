@@ -587,7 +587,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     /**
      * usebigmodeltotextconductsummary.
      */
-    public function summarizeText(DelightfulUserAuthorization $authorization, string $textContent, string $language = 'zh_CN'): string
+    public function summarizeText(DelightfulUserAuthorization $authorization, string $textContent, string $language = 'en_US'): string
     {
         if (empty($textContent)) {
             return '';

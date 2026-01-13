@@ -38,10 +38,10 @@ class CreateModeRequest extends FormRequest
     {
         return [
             'name_i18n' => 'required|array',
-            'name_i18n.zh_CN' => 'required|string|max:100',
+            'name_i18n.en_US' => 'required|string|max:100',
             'name_i18n.en_US' => 'required|string|max:100',
             'placeholder_i18n' => 'nullable|array',
-            'placeholder_i18n.zh_CN' => 'nullable|string|max:500',
+            'placeholder_i18n.en_US' => 'nullable|string|max:500',
             'placeholder_i18n.en_US' => 'nullable|string|max:500',
             'identifier' => 'required|string|max:50',
             'icon' => 'nullable|string|max:255',
@@ -57,12 +57,12 @@ class CreateModeRequest extends FormRequest
         return [
             'name_i18n.required' => __('mode.name_i18n_required'),
             'name_i18n.array' => __('mode.name_i18n_array'),
-            'name_i18n.zh_CN.required' => __('mode.name_zh_cn_required'),
-            'name_i18n.zh_CN.max' => __('mode.name_zh_cn_max'),
+            'name_i18n.en_US.required' => __('mode.name_zh_cn_required'),
+            'name_i18n.en_US.max' => __('mode.name_zh_cn_max'),
             'name_i18n.en_US.required' => __('mode.name_en_us_required'),
             'name_i18n.en_US.max' => __('mode.name_en_us_max'),
             'placeholder_i18n.array' => __('mode.placeholder_i18n_array'),
-            'placeholder_i18n.zh_CN.max' => __('mode.placeholder_zh_cn_max'),
+            'placeholder_i18n.en_US.max' => __('mode.placeholder_zh_cn_max'),
             'placeholder_i18n.en_US.max' => __('mode.placeholder_en_us_max'),
             'identifier.required' => __('mode.identifier_required'),
             'identifier.max' => __('mode.identifier_max'),

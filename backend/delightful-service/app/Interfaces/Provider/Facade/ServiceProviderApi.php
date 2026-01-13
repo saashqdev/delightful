@@ -282,7 +282,7 @@ class ServiceProviderApi extends AbstractApi
 
         // will provider_config contentenhancetorootlevelother,andadd alias and models
         return array_merge($data['provider_config'], [
-            'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
+            'alias' => $data['provider_config']['translate']['alias']['en_US'] ?? '',
             'models' => $data['models'] ?? [],
         ]);
     }

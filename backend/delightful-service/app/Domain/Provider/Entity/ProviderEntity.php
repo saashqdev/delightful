@@ -262,8 +262,8 @@ class ProviderEntity extends AbstractEntity
         if (! empty($this->translate['name'][$locale] ?? '')) {
             return $this->translate['name'][$locale];
         }
-        if (! empty($this->translate['name']['zh_CN'] ?? '')) {
-            return $this->translate['name']['zh_CN'];
+        if (! empty($this->translate['name']['en_US'] ?? '')) {
+            return $this->translate['name']['en_US'];
         }
         if (! empty($this->translate['name']['en_US'] ?? '')) {
             return $this->translate['name']['en_US'];

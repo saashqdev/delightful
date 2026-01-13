@@ -49,7 +49,7 @@ class CoContext
 
     public static function getLanguage(): string
     {
-        return Context::get('language', 'zh_CN') ?: 'zh_CN';
+        return Context::get('language', 'en_US') ?: 'en_US';
     }
 
     /**

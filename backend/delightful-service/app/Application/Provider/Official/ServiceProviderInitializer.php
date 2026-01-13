@@ -98,11 +98,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Delightful',
-                        'zh_CN' => 'Delightful',
+                        'en_US' => 'Delightful',
                     ],
                     'description' => [
                         'en_US' => 'The AI model invocation is achieved through the API officially deployed by Delightful, and you can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
+                        'en_US' => 'by Delightful passofficialdeploy API comeimplement AI modelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -124,11 +124,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Microsoft Azure',
-                        'zh_CN' => 'Microsoft Azure',
+                        'en_US' => 'Microsoft Azure',
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution,',
+                        'en_US' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution,',
                     ],
                 ]),
                 'remark' => '',
@@ -150,11 +150,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'ByteDance',
-                        'zh_CN' => 'fieldsectionByteDance',
+                        'en_US' => 'fieldsectionByteDance',
                     ],
                     'description' => [
                         'en_US' => 'A cloud service platform under ByteDance, with independently developed Doubao large model series. Includes Doubao general models Pro and lite with different text processing and comprehensive capabilities, as well as various models for role-playing, speech synthesis, etc.',
-                        'zh_CN' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhairbeanpackagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
+                        'en_US' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhairbeanpackagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -176,11 +176,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Volcengine',
-                        'zh_CN' => 'Volcanoengine',
+                        'en_US' => 'Volcanoengine',
                     ],
                     'description' => [
                         'en_US' => 'Provides a variety of intelligent drawing models, with diverse image generation styles, extremely high security, and can be widely applied to education, entertainment, office and other scenarios.',
-                        'zh_CN' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securitypropertyextremehigh,canwidespreadapplicationeducation,entertainment,officeetcfieldquantity.',
+                        'en_US' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securitypropertyextremehigh,canwidespreadapplicationeducation,entertainment,officeetcfieldquantity.',
                     ],
                 ]),
                 'remark' => '',
@@ -202,11 +202,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'MiracleVision',
-                        'zh_CN' => 'aestheticgraphimagination',
+                        'en_US' => 'aestheticgraphimagination',
                     ],
                     'description' => [
                         'en_US' => 'Focused on facial technology, body technology, image recognition, image processing, image generation and other core areas',
-                        'zh_CN' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetccorecoredomain',
+                        'en_US' => 'focusatpersonface technology,personbodytechnology,graphlikeidentify,graphlikehandle,graphlikegenerateetccorecoredomain',
                     ],
                 ]),
                 'remark' => '',
@@ -228,11 +228,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Delightful',
-                        'zh_CN' => 'Delightful',
+                        'en_US' => 'Delightful',
                     ],
                     'description' => [
                         'en_US' => 'Delightful implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => 'by Delightful passofficialdeploy API comeimplementmultipletypepopular text generationgraph,graphgenerategraphetcmodelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
+                        'en_US' => 'by Delightful passofficialdeploy API comeimplementmultipletypepopular text generationgraph,graphgenerategraphetcmodelcall,candirectlypurchasepointsuseseaquantitybigmodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -254,11 +254,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'TTAPI.io',
-                        'zh_CN' => 'TTAPI.io',
+                        'en_US' => 'TTAPI.io',
                     ],
                     'description' => [
                         'en_US' => 'Integrates multi-platform text-to-image, text-to-video capabilities, Midjourney API, DALL·E 3, Luma text-to-video, Flux API service, etc.',
-                        'zh_CN' => 'integrate multipleplatformtext generationgraph,text generationvideocancapability,Midjourney API,DALL·E 3,Lumatext generationvideo,Flux APIserviceetcetc.',
+                        'en_US' => 'integrate multipleplatformtext generationgraph,text generationvideocancapability,Midjourney API,DALL·E 3,Lumatext generationvideo,Flux APIserviceetcetc.',
                     ],
                 ]),
                 'remark' => '',
@@ -280,11 +280,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Custom service provider',
-                        'zh_CN' => 'customizeservicequotient',
+                        'en_US' => 'customizeservicequotient',
                     ],
                     'description' => [
                         'en_US' => 'Use a service provider with the same form of interface as the OpenAI API',
-                        'zh_CN' => 'pleaseuseinterfaceand OpenAI API sameshapetypeservicequotient',
+                        'en_US' => 'pleaseuseinterfaceand OpenAI API sameshapetypeservicequotient',
                     ],
                 ]),
                 'remark' => 'support OpenAI API shapetype',
@@ -306,11 +306,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Amazon Bedrock',
-                        'zh_CN' => 'Amazon Bedrock',
+                        'en_US' => 'Amazon Bedrock',
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovidefirstenter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude systemcolumn,Meta  Llama 3.1 systemcolumnetc,coverfromlightquantityleveltohighperformancemultipletypechoose,supporttextgenerate,conversation,graphlikehandleetcmultipletypetask,fituseatdifferentscaleandrequiremententerpriseapplication.',
+                        'en_US' => 'Amazon Bedrock isAmazon AWS provideoneitemservice,focusatforenterpriseprovidefirstenter AI languagemodelandvisualmodel.itsmodelfamilyinclude Anthropic  Claude systemcolumn,Meta  Llama 3.1 systemcolumnetc,coverfromlightquantityleveltohighperformancemultipletypechoose,supporttextgenerate,conversation,graphlikehandleetcmultipletypetask,fituseatdifferentscaleandrequiremententerpriseapplication.',
                     ],
                 ]),
                 'remark' => '',
@@ -332,11 +332,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Microsoft Azure',
-                        'zh_CN' => 'Microsoft Azure',
+                        'en_US' => 'Microsoft Azure',
                     ],
                     'description' => [
                         'en_US' => 'Azure offers a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, and is committed to providing safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution.',
+                        'en_US' => 'Azure providemultipletypefirstenterAImodel,includeGPT-3.5andmostnewGPT-4systemcolumn,supportmultipletypedatatypeandcomplextask,dedicateatsecurity,canrelyandcancontinueAIresolvesolution.',
                     ],
                 ]),
                 'remark' => '',
@@ -358,11 +358,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Qwen',
-                        'zh_CN' => 'prefixwithincloudhundredrefine',
+                        'en_US' => 'prefixwithincloudhundredrefine',
                     ],
                     'description' => [
                         'en_US' => 'It provides a universal image generation model, supports multiple artistic styles, and is particularly skilled at complex text rendering, especially in both Chinese and English text rendering.',
-                        'zh_CN' => 'providecommonusegraphlikegeneratemodel,supportmultipletypeartstyle,particularlyexcellongcomplextextrender,especiallyismiddleEnglishtextrender.',
+                        'en_US' => 'providecommonusegraphlikegeneratemodel,supportmultipletypeartstyle,particularlyexcellongcomplextextrender,especiallyismiddleEnglishtextrender.',
                     ],
                 ]),
                 'remark' => '',
@@ -384,11 +384,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Google Cloud',
-                        'zh_CN' => 'Google Cloud',
+                        'en_US' => 'Google Cloud',
                     ],
                     'description' => [
                         'en_US' => 'Gemini 2.5 Flash Image (Nano Banana) image generation model is provided, featuring high character consistency and precise image editing, etc.',
-                        'zh_CN' => 'provide Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel,haveroleonetopropertyhigh,precisegraphlikeeditetc.',
+                        'en_US' => 'provide Gemini 2.5 Flash Image (Nano Banana) graphlikegeneratemodel,haveroleonetopropertyhigh,precisegraphlikeeditetc.',
                     ],
                 ]),
                 'remark' => '',
@@ -410,11 +410,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'VolcengineArk',
-                        'zh_CN' => 'Volcanoengine(Ark)',
+                        'en_US' => 'Volcanoengine(Ark)',
                     ],
                     'description' => [
                         'en_US' => '',
-                        'zh_CN' => '',
+                        'en_US' => '',
                     ],
                 ]),
                 'remark' => '',

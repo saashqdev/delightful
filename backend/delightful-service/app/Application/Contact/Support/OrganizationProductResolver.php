@@ -93,7 +93,7 @@ class OrganizationProductResolver
         }
 
         if (! is_string($preferred) || $preferred === '') {
-            $preferred = $nameI18n['zh_CN'] ?? null;
+            $preferred = $nameI18n['en_US'] ?? null;
         }
 
         if (! is_string($preferred) || $preferred === '') {

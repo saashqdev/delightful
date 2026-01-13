@@ -162,7 +162,7 @@ function App() {
   
   return (
     <div>
-      <Button onClick={() => switchLanguage("zh_CN")}>Chinese</Button>
+      <Button onClick={() => switchLanguage("en_US")}>Chinese</Button>
       <Button onClick={() => switchLanguage("en_US")}>English</Button>
       <DelightfulPdfRender file={file} />
     </div>

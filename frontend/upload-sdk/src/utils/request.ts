@@ -275,7 +275,7 @@ export function request<T>(uploadRequestConfig: UploadRequestConfig): Promise<T>
 		req.open(method.toUpperCase(), handledUrl, true)
 
 		// Set request headers
-		req.setRequestHeader("language", "zh_CN")
+		req.setRequestHeader("language", "en_US")
 
 		if (headers && Object.keys(headers).length > 0) {
 			const handledHeaders = formatHeaders(headers)

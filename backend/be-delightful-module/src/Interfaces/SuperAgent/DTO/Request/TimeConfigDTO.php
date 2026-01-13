@@ -306,11 +306,11 @@ class TimeConfigDTO extends AbstractRequestDTO
             $scheduledTime = Carbon::createFromFormat(
                 'Y-m-d H:i',
                 $this->day . ' ' . $this->time,
-                'Asia/Shanghai'
+                'America/Toronto'
             );
 
             // Get current time
-            $now = Carbon::now('Asia/Shanghai');
+            $now = Carbon::now('America/Toronto');
 
             // Check if scheduled time is in the past (highest priority)
             if ($scheduledTime->lte($now)) {

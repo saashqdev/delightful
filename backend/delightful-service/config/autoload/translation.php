@@ -6,7 +6,7 @@ declare(strict_types=1);
  */
 return [
     // defaultlanguage
-    'locale' => 'zh_CN',
+    'locale' => 'en_US',
     // backlanguage,whendefaultlanguagelanguagetextnothaveprovideo clock,thenwillusebacklanguagetoshouldlanguagetext
     'fallback_locale' => 'en_US',
     // languagefilestorefileclip

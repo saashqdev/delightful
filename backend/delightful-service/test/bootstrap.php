@@ -9,7 +9,7 @@ use Hyperf\Di\ClassLoader;
 use Hyperf\Di\ScanHandler\ProcScanHandler;
 
 error_reporting(E_ALL ^ E_DEPRECATED);
-date_default_timezone_set('Asia/Shanghai');
+date_default_timezone_set('America/Toronto');
 
 ! defined('BASE_PATH') && define('BASE_PATH', dirname(__DIR__, 1));
 ! defined('SWOOLE_HOOK_FLAGS') && define('SWOOLE_HOOK_FLAGS', 0);

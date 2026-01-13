@@ -95,8 +95,8 @@ class AiAbilityEntity extends AbstractEntity
      */
     public function getLocalizedName(?string $locale = null): string
     {
-        $locale = $locale ?? config('translation.locale', 'zh_CN');
-        return $this->name[$locale] ?? $this->name['zh_CN'] ?? $this->name['en_US'] ?? '';
+        $locale = $locale ?? config('translation.locale', 'en_US');
+        return $this->name[$locale] ?? $this->name['en_US'] ?? $this->name['en_US'] ?? '';
     }
 
     public function getDescription(): array
@@ -120,8 +120,8 @@ class AiAbilityEntity extends AbstractEntity
      */
     public function getLocalizedDescription(?string $locale = null): string
     {
-        $locale = $locale ?? config('translation.locale', 'zh_CN');
-        return $this->description[$locale] ?? $this->description['zh_CN'] ?? $this->description['en_US'] ?? '';
+        $locale = $locale ?? config('translation.locale', 'en_US');
+        return $this->description[$locale] ?? $this->description['en_US'] ?? $this->description['en_US'] ?? '';
     }
 
     public function getIcon(): string

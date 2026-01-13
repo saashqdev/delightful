@@ -20,7 +20,7 @@ class DelightfulChatImageConvertHighReqDTO
 
     public string $appMessageId;
 
-    public string $language = 'zh_CN';
+    public string $language = 'en_US';
 
     public ?string $requestId = null;
 

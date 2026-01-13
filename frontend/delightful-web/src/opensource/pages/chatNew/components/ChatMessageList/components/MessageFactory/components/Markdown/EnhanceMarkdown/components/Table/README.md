@@ -93,5 +93,5 @@ Add the following translations in `src/assets/locales/{locale}/interface.json`:
 ```
 
 Supported languages:
-- 🇨🇳 Chinese (`zh_CN`)
+- 🇨🇳 Chinese (`en_US`)
 - 🇺🇸 English (`en_US`) 

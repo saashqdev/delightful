@@ -73,7 +73,7 @@ class GlobalConfigApi
             'logo' => $logo,
             'favicon' => $favicon,
             'minimal_logo' => $minimalLogo,
-            'default_language' => (string) ($settings['default_language'] ?? 'zh_CN'),
+            'default_language' => (string) ($settings['default_language'] ?? 'en_US'),
         ];
         foreach (['name_i18n', 'title_i18n', 'keywords_i18n', 'description_i18n'] as $key) {
             if (isset($settings[$key])) {

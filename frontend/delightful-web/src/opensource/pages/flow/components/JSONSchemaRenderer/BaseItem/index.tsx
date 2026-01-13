@@ -50,7 +50,7 @@ export default function BaseItem({ displayKey, field, onExpand, isDisplay }: Bas
 
 	const internationalTitle = useMemo(() => {
 		const lang = getCurrentLang(configStore.i18n.language)
-		if (lang === "zh_CN") {
+		if (lang === "en_US") {
 			return field.title
 		}
 		return displayKey

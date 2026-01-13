@@ -23,7 +23,7 @@ class AiAbilityAssembler
     /**
      * AIcancapabilityEntityconvertforListDTO.
      */
-    public static function entityToListDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityListDTO
+    public static function entityToListDTO(AiAbilityEntity $entity, string $locale = 'en_US'): AiAbilityListDTO
     {
         return new AiAbilityListDTO(
             id: (string) ($entity->getId()),
@@ -37,7 +37,7 @@ class AiAbilityAssembler
     /**
      * AIcancapabilityEntityconvertforDetailDTO.
      */
-    public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityDetailDTO
+    public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'en_US'): AiAbilityDetailDTO
     {
         // getoriginalconfiguration
         $config = $entity->getConfig();
@@ -63,7 +63,7 @@ class AiAbilityAssembler
      * @param array<AiAbilityEntity> $entities
      * @return array<AiAbilityListDTO>
      */
-    public static function entitiesToListDTOs(array $entities, string $locale = 'zh_CN'): array
+    public static function entitiesToListDTOs(array $entities, string $locale = 'en_US'): array
     {
         $dtos = [];
         foreach ($entities as $entity) {

@@ -28,7 +28,7 @@ export const useAppearanceStore = create<AppearanceState>()(
 		immer<AppearanceState>(() => ({
 			theme: "light",
 			imStyle: IMStyle.Standard,
-			timezone: "Asia/Shanghai",
+			timezone: "America/Toronto",
 			aiCompletion: true,
 			chatFontSize: DEFAULT_FONT_SIZE_BASE,
 			shortcutKey: {

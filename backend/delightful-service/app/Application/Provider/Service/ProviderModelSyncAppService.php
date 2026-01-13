@@ -180,7 +180,7 @@ class ProviderModelSyncAppService
             'headers' => [
                 'Authorization' => 'Bearer ' . $apiKey,
                 'Content-Type' => 'application/json',
-                'language' => $language ?: 'zh_CN',
+                'language' => $language ?: 'en_US',
             ],
             'query' => [
                 'with_info' => 1,

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react"
 import { ConfigProvider, Layout, Menu, Segmented } from "antd"
-import zhCN from "antd/locale/zh_CN"
+import zhCN from "antd/locale/en_US"
 import { COMPONENTS } from "./config"
 import ThemeProvider from "../components/ThemeProvider"
 

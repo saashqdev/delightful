@@ -17,7 +17,7 @@ class VoiceTranscription extends AbstractValueObject
 {
     /**
      * multiplelanguagetranscriptionresult
-     * format: ['zh_CN' => 'transcriptiontext', 'en_US' => 'Transcription text', ...].
+     * format: ['en_US' => 'transcriptiontext', 'en_US' => 'Transcription text', ...].
      * @var null|array<string, string>
      */
     private ?array $transcriptions;

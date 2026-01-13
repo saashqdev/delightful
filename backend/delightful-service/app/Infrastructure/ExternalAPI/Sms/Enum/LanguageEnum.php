@@ -12,7 +12,7 @@ enum LanguageEnum: string
     /**
      * simplemiddle.
      */
-    case ZH_CN = 'zh_CN';
+    case ZH_CN = 'en_US';
 
     /**
      * aesthetictypeEnglish.

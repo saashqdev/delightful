@@ -42,19 +42,19 @@ class PlatformSettingsApiTest extends AbstractHttpTest
             'favicon_url' => 'https://example.com/favicon.ico',
             'default_language' => 'en_US',
             'name_i18n' => [
-                'zh_CN' => 'testplatform',
+                'en_US' => 'testplatform',
                 'en_US' => 'Test Platform',
             ],
             'title_i18n' => [
-                'zh_CN' => 'testplatformtitle',
+                'en_US' => 'testplatformtitle',
                 'en_US' => 'Test Platform Title',
             ],
             'keywords_i18n' => [
-                'zh_CN' => 'AI,test',
+                'en_US' => 'AI,test',
                 'en_US' => 'AI,Test',
             ],
             'description_i18n' => [
-                'zh_CN' => 'thisisonetestplatform',
+                'en_US' => 'thisisonetestplatform',
                 'en_US' => 'This is a test platform',
             ],
         ];
@@ -69,9 +69,9 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('default_language', $data);
 
         // verify logo
-        $this->assertArrayHasKey('zh_CN', $data['logo']);
         $this->assertArrayHasKey('en_US', $data['logo']);
-        $this->assertSame('https://example.com/logo_zh.png', $data['logo']['zh_CN']['url']);
+        $this->assertArrayHasKey('en_US', $data['logo']);
+        $this->assertSame('https://example.com/logo_zh.png', $data['logo']['en_US']['url']);
         $this->assertSame('https://example.com/logo_en.png', $data['logo']['en_US']['url']);
 
         // verify favicon
@@ -88,7 +88,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $getResponse = $this->get($this->getUrl, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
-        $this->assertSame('https://example.com/logo_zh.png', $getData['logo']['zh_CN']['url']);
+        $this->assertSame('https://example.com/logo_zh.png', $getData['logo']['en_US']['url']);
         $this->assertSame('https://example.com/logo_en.png', $getData['logo']['en_US']['url']);
         $this->assertSame('https://example.com/favicon.ico', $getData['favicon']['url']);
         $this->assertSame('en_US', $getData['default_language']);
@@ -101,9 +101,9 @@ class PlatformSettingsApiTest extends AbstractHttpTest
             'logo_zh_url' => 'https://example.com/initial_logo_zh.png',
             'logo_en_url' => 'https://example.com/initial_logo_en.png',
             'favicon_url' => 'https://example.com/initial_favicon.ico',
-            'default_language' => 'zh_CN',
+            'default_language' => 'en_US',
             'name_i18n' => [
-                'zh_CN' => 'initialplatform',
+                'en_US' => 'initialplatform',
                 'en_US' => 'Initial Platform',
             ],
         ];
@@ -118,7 +118,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $data = $response['data'];
 
         // verifymiddletext logo alreadyupdate
-        $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
+        $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['en_US']['url']);
         // verifyEnglish logo maintainnotchange
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);
         // verify favicon maintainnotchange
@@ -160,7 +160,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         // tryclear favicon (pass inemptystringnotwillupdate, bynotshouldfail)
         $payload = [
             'favicon_url' => '', // emptystring
-            'default_language' => 'zh_CN',
+            'default_language' => 'en_US',
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
@@ -175,11 +175,11 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $payload = [
             'favicon_url' => 'https://example.com/favicon.ico',
             'name_i18n' => [
-                'zh_CN' => 'Iplatform',
+                'en_US' => 'Iplatform',
                 'en_US' => 'My Platform',
             ],
             'title_i18n' => [
-                'zh_CN' => 'websitetitle',
+                'en_US' => 'websitetitle',
                 'en_US' => 'Website Title',
             ],
         ];
@@ -207,9 +207,9 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $data = $response['data'];
 
         $this->assertArrayHasKey('logo', $data);
-        $this->assertArrayHasKey('zh_CN', $data['logo']);
         $this->assertArrayHasKey('en_US', $data['logo']);
-        $this->assertSame('https://example.com/logo_zh_new.png', $data['logo']['zh_CN']['url']);
+        $this->assertArrayHasKey('en_US', $data['logo']);
+        $this->assertSame('https://example.com/logo_zh_new.png', $data['logo']['en_US']['url']);
         $this->assertSame('https://example.com/logo_en_new.png', $data['logo']['en_US']['url']);
     }
 }

@@ -80,11 +80,11 @@ class ServiceProviderApiTest extends BaseTest
             'service_provider_config_id' => $serviceProviderConfigId,
             'translate' => [
                 'name' => [
-                    'zh_CN' => 'testmodel',
+                    'en_US' => 'testmodel',
                     'en_US' => 'Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => 'thisisonetestmodel',
+                    'en_US' => 'thisisonetestmodel',
                     'en_US' => 'This is a test model',
                 ],
             ],
@@ -159,11 +159,11 @@ class ServiceProviderApiTest extends BaseTest
             'service_provider_config_id' => $serviceProviderConfigId,
             'translate' => [
                 'name' => [
-                    'zh_CN' => 'updatebacktestmodel',
+                    'en_US' => 'updatebacktestmodel',
                     'en_US' => 'Updated Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => 'thisisupdatebacktestmodel',
+                    'en_US' => 'thisisupdatebacktestmodel',
                     'en_US' => 'This is an updated test model',
                 ],
             ],
@@ -237,7 +237,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => 'officialservicequotientsingleyuantest',
+                    'en_US' => 'officialservicequotientsingleyuantest',
                 ],
             ],
         ];
@@ -272,7 +272,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => 'officialservicequotientsingleyuantest',
+                    'en_US' => 'officialservicequotientsingleyuantest',
                 ],
             ],
         ];
@@ -294,7 +294,7 @@ class ServiceProviderApiTest extends BaseTest
     public function testCreateAndDeleteModel()
     {
         $providerId = '843847394915074048';
-        $model = Json::decode('{"model_type":3,"model_id":"test-dabai-test","model_version":"test","icon":"DELIGHTFUL/588417216353927169/default/default.png","name":"test","description":"test","config":{"max_output_tokens":64000,"max_tokens":128000,"temperature_type":1,"temperature":null,"billing_currency":"CNY","input_pricing":"1","output_pricing":"1","cache_write_pricing":"1","cache_hit_pricing":"1","input_cost":"1","output_cost":"1","cache_write_cost":"1","cache_hit_cost":"1","vector_size":2048,"support_function":false,"support_multi_modal":false,"support_deep_think":false,"creativity":0.7},"category":"llm","service_provider_config_id":"' . $providerId . '","translate":{"name":{"zh_CN":"test","en_US":"test"},"description":{"zh_CN":"test","en_US":"test"}}}');
+        $model = Json::decode('{"model_type":3,"model_id":"test-dabai-test","model_version":"test","icon":"DELIGHTFUL/588417216353927169/default/default.png","name":"test","description":"test","config":{"max_output_tokens":64000,"max_tokens":128000,"temperature_type":1,"temperature":null,"billing_currency":"CNY","input_pricing":"1","output_pricing":"1","cache_write_pricing":"1","cache_hit_pricing":"1","input_cost":"1","output_cost":"1","cache_write_cost":"1","cache_hit_cost":"1","vector_size":2048,"support_function":false,"support_multi_modal":false,"support_deep_think":false,"creativity":0.7},"category":"llm","service_provider_config_id":"' . $providerId . '","translate":{"name":{"en_US":"test","en_US":"test"},"description":{"en_US":"test","en_US":"test"}}}');
         $response = $this->post('/org/admin/service-providers/save-model', $model, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
 

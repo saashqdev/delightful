@@ -309,7 +309,7 @@ class DelightfulBrowserConfig:
             options["geolocation"] = self.geolocation
 
         # Add timezone setting (default to Shanghai, China)
-        options["timezone_id"] = self.timezone_id or "Asia/Shanghai"
+        options["timezone_id"] = self.timezone_id or "America/Toronto"
 
         # Add language setting (default to Chinese)
         locale = self.language.split(',')[0] if self.language else "zh-CN"
@@ -386,7 +386,7 @@ class DelightfulBrowserConfig:
             # Shanghai, China coordinates
             geolocation={"latitude": 31.230416, "longitude": 121.473701},
             geolocation_spoofing=True,
-            timezone_id="Asia/Shanghai",
+            timezone_id="America/Toronto",
             # Cookie configuration
             storage_state_file=str(PathManager.get_browser_storage_state_file()),
             permissions=["geolocation", "notifications"]

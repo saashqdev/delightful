@@ -171,8 +171,8 @@ class ProviderConfigAssembler
         if (! empty($translations[$locale] ?? '')) {
             return $translations[$locale];
         }
-        if (! empty($translations['zh_CN'] ?? '')) {
-            return $translations['zh_CN'];
+        if (! empty($translations['en_US'] ?? '')) {
+            return $translations['en_US'];
         }
         if (! empty($translations['en_US'] ?? '')) {
             return $translations['en_US'];

@@ -45,7 +45,7 @@ class PlatformSettingsApi
 
         // allowdepartmentminutefieldupdate:onlywhenpass innonnullo clockreplace
         if (array_key_exists('logo_zh_url', $payload) && $payload['logo_zh_url'] !== null) {
-            $data['logo_urls']['zh_CN'] = (string) $payload['logo_zh_url'];
+            $data['logo_urls']['en_US'] = (string) $payload['logo_zh_url'];
         }
         if (array_key_exists('logo_en_url', $payload) && $payload['logo_en_url'] !== null) {
             $data['logo_urls']['en_US'] = (string) $payload['logo_en_url'];
@@ -92,7 +92,7 @@ class PlatformSettingsApi
         // simplesingle https check
         $urls = [];
         $urls[] = $data['favicon_url'] ?? '';
-        $urls[] = $data['logo_urls']['zh_CN'] ?? '';
+        $urls[] = $data['logo_urls']['en_US'] ?? '';
         $urls[] = $data['logo_urls']['en_US'] ?? '';
         $urls[] = $data['minimal_logo_url'] ?? '';
         foreach ($urls as $u) {
@@ -120,7 +120,7 @@ class PlatformSettingsApi
             'logo' => $logo,
             'favicon' => $favicon,
             'minimal_logo' => $minimalLogo,
-            'default_language' => (string) ($settings['default_language'] ?? 'zh_CN'),
+            'default_language' => (string) ($settings['default_language'] ?? 'en_US'),
         ];
         foreach (['name_i18n', 'title_i18n', 'keywords_i18n', 'description_i18n'] as $key) {
             if (isset($settings[$key])) {

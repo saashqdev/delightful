@@ -75,7 +75,7 @@ class ModeEntity extends AbstractEntity
 
     public function getZHName(): string
     {
-        return $this->nameI18n['zh_CN'] ?? '';
+        return $this->nameI18n['en_US'] ?? '';
     }
 
     public function getENName(): string
@@ -101,7 +101,7 @@ class ModeEntity extends AbstractEntity
 
     public function getZHPlaceholder(): string
     {
-        return $this->placeholderI18n['zh_CN'] ?? '';
+        return $this->placeholderI18n['en_US'] ?? '';
     }
 
     public function getENPlaceholder(): string

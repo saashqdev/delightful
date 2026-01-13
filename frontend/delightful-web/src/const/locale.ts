@@ -1,8 +1,8 @@
-export const DEFAULT_LOCALE = "zh_CN"
+export const DEFAULT_LOCALE = "en_US"
 
 export const enum SupportLocales {
 	auto = "auto",
-	zhCN = "zh_CN",
+	zhCN = "en_US",
 	enUS = "en_US",
 }
 

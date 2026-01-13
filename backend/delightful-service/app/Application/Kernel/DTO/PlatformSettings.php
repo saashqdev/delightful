@@ -9,7 +9,7 @@ namespace App\Application\Kernel\DTO;
 
 class PlatformSettings
 {
-    private string $defaultLanguage = 'zh_CN';
+    private string $defaultLanguage = 'en_US';
 
     private string $faviconUrl = '';
 
@@ -39,7 +39,7 @@ class PlatformSettings
 
     public function setDefaultLanguage(string $defaultLanguage): void
     {
-        $this->defaultLanguage = $defaultLanguage ?: 'zh_CN';
+        $this->defaultLanguage = $defaultLanguage ?: 'en_US';
     }
 
     public function getFaviconUrl(): string
@@ -159,7 +159,7 @@ class PlatformSettings
     public static function fromArray(array $data): self
     {
         $i = new self();
-        $i->setDefaultLanguage((string) ($data['default_language'] ?? 'zh_CN'));
+        $i->setDefaultLanguage((string) ($data['default_language'] ?? 'en_US'));
         $i->setFaviconUrl((string) ($data['favicon_url'] ?? ''));
         $i->setLogoUrls((array) ($data['logo_urls'] ?? []));
         $i->setMinimalLogoUrl((string) ($data['minimal_logo_url'] ?? ''));

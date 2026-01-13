@@ -34,7 +34,7 @@ const parseContent = (content: string): any => {
 							src: `${node.attrs.ns}${node.attrs.code}${node.attrs.suffix}`,
 							key: `${node.attrs.code}${index}`,
 							text:
-								emojiLocaleCache.get(node.attrs.code)?.zh_CN ||
+								emojiLocaleCache.get(node.attrs.code)?.en_US ||
 								`[${node.attrs.code}]`,
 						})
 					})

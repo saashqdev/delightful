@@ -92,7 +92,7 @@ class ConversationContinuationTest extends HttpTestCase
                         'type' => 'function',
                         'function' => [
                             'name' => 'get_current_time',
-                            'arguments' => '{"timezone": "Asia/Shanghai"}',
+                            'arguments' => '{"timezone": "America/Toronto"}',
                         ],
                     ],
                 ],
@@ -541,7 +541,7 @@ class ConversationContinuationTest extends HttpTestCase
                         'type' => 'function',
                         'function' => [
                             'name' => 'get_current_time',
-                            'arguments' => '{"timezone": "Asia/Shanghai"}',
+                            'arguments' => '{"timezone": "America/Toronto"}',
                         ],
                     ],
                 ],

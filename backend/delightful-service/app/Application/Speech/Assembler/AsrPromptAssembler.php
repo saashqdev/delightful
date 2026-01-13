@@ -20,7 +20,7 @@ class AsrPromptAssembler
      *
      * @param string $asrStreamContent voiceidentifycontent
      * @param null|NoteDTO $note notecontent(optional)
-     * @param string $language outputlanguage(like:zh_CN, en_US)
+     * @param string $language outputlanguage(like:en_US, en_US)
      * @return string completehintword
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
@@ -85,7 +85,7 @@ PROMPT;
      * generatefileuploadscenariorecordingtitlehintword(emphasizefilenamereloadwantproperty).
      *
      * @param string $userRequestMessage userinchatframesendrequestmessage
-     * @param string $language outputlanguage(like:zh_CN, en_US)
+     * @param string $language outputlanguage(like:en_US, en_US)
      * @return string completehintword
      */
     public static function getTitlePromptForUploadedFile(

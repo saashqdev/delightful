@@ -15,9 +15,9 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 				{
 					code: "+86",
 					name: "China",
-					locale: "zh_CN",
+					locale: "en_US",
 					translations: {
-						zh_CN: "China",
+						en_US: "China",
 						en_US: "China",
 					},
 				},
@@ -26,7 +26,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Malaysia",
 					locale: "ms_MY",
 					translations: {
-						zh_CN: "Malaysia",
+						en_US: "Malaysia",
 						en_US: "Malaysia",
 					},
 				},
@@ -35,7 +35,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Vietnam",
 					locale: "vi_VN",
 					translations: {
-						zh_CN: "Vietnam",
+						en_US: "Vietnam",
 						en_US: "Vietnam",
 					},
 				},
@@ -44,7 +44,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Thailand",
 					locale: "th_TH",
 					translations: {
-						zh_CN: "Thailand",
+						en_US: "Thailand",
 						en_US: "Thailand",
 					},
 				},
@@ -53,7 +53,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Philippines",
 					locale: "fil_PH",
 					translations: {
-						zh_CN: "Philippines",
+						en_US: "Philippines",
 						en_US: "Philippines",
 					},
 				},
@@ -62,7 +62,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Singapore",
 					locale: "en_SG",
 					translations: {
-						zh_CN: "Singapore",
+						en_US: "Singapore",
 						en_US: "Singapore",
 					},
 				},
@@ -70,9 +70,9 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 			languages: [
 				{
 					name: "Simplified Chinese",
-					locale: "zh_CN",
+					locale: "en_US",
 					translations: {
-						zh_CN: "Simplified Chinese",
+						en_US: "Simplified Chinese",
 						en_US: "Simplified Chinese",
 					},
 				},
@@ -80,7 +80,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "English",
 					locale: "en_US",
 					translations: {
-						zh_CN: "English",
+						en_US: "English",
 						en_US: "English",
 					},
 				},

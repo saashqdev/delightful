@@ -258,9 +258,10 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
             sed -i "s/^PLATFORM=.*/PLATFORM=/" .env
         fi
     fi
+fi
 
-    # Ask if Be Delightful service should be installed
-    ask_be_delightful() {
+# Ask if Be Delightful service should be installed
+ask_be_delightful() {
         bilingual "Do you want to install Be Delightful service?" "Do you want to install Be Delightful service?"
         bilingual "1. Yes, install Be Delightful service" "1. Yes, install Be Delightful service"
         bilingual "2. No, don't install Be Delightful service" "2. No, don't install Be Delightful service"
@@ -301,10 +302,10 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
                 rm bin/use_be_delightful
             fi
         fi
-    }
+}
 
-    # Detect public IP and update environment variables
-    detect_public_ip() {
+# Detect public IP and update environment variables
+detect_public_ip() {
         # Ask user about deployment method
         bilingual "Please select your deployment method:" "Please select your deployment method:"
         bilingual "1. Local deployment" "1. Local deployment"

@@ -332,7 +332,7 @@ class LLMAppService extends AbstractLLMAppService
      * @param string $query Search query
      * @param int $count Number of results (1-50)
      * @param int $offset Pagination offset (0-1000)
-     * @param string $mkt Market code (e.g., zh-CN, en-US)
+     * @param string $mkt Market code (e.g., en-US, en-US)
      * @param string $setLang UI language code
      * @param string $safeSearch Safe search level (Strict, Moderate, Off)
      * @param string $freshness Time filter (Day, Week, Month)
@@ -343,7 +343,7 @@ class LLMAppService extends AbstractLLMAppService
         string $query,
         int $count = 10,
         int $offset = 0,
-        string $mkt = 'zh-CN',
+        string $mkt = 'en-US',
         string $setLang = '',
         string $safeSearch = '',
         string $freshness = ''

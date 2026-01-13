@@ -109,7 +109,7 @@ class DelightfulBrowserConfig:
     extra_headers: Dict[str, str] = field(default_factory=lambda: DEFAULT_HEADERS.copy())
 
     # Browser language setting
-    language: str = "zh-CN,zh;q=0.9,en;q=0.8"
+    language: str = "en-US,zh;q=0.9,en;q=0.8"
 
     # Whether to enable geolocation spoofing
     geolocation_spoofing: bool = False
@@ -312,7 +312,7 @@ class DelightfulBrowserConfig:
         options["timezone_id"] = self.timezone_id or "America/Toronto"
 
         # Add language setting (default to Chinese)
-        locale = self.language.split(',')[0] if self.language else "zh-CN"
+        locale = self.language.split(',')[0] if self.language else "en-US"
         options["locale"] = locale
 
         # Load storage state (including cookies and localStorage)

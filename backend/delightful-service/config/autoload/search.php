@@ -41,7 +41,7 @@ return [
             'class_name' => BingSearchAdapter::class,
             'endpoint' => env('BING_SEARCH_ENDPOINT', 'https://api.bing.microsoft.com/v7.0/search'),
             'api_key' => env('BING_SEARCH_API_KEY', ''),
-            'mkt' => env('BING_SEARCH_MKT', 'zh-CN'),
+            'mkt' => env('BING_SEARCH_MKT', 'en-US'),
         ],
         SearchEngineType::DuckDuckGo->value => [
             'class_name' => DuckDuckGoSearchAdapter::class,

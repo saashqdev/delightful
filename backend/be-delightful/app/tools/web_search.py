@@ -32,8 +32,8 @@ class WebSearchParams(BaseToolParams):
         description="Number of results per query (default: 10, max: 20)"
     )
     language: str = Field(
-        "zh-CN",
-        description="Search language (default: zh-CN)"
+        "en-US",
+        description="Search language (default: en-US)"
     )
     region: str = Field(
         "CN",

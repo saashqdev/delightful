@@ -7,7 +7,7 @@ export const normalizeLocale = (locale?: string) => {
 
 	switch (locale) {
 		case "zh":
-		case "zh-CN":
+		case "en-US":
 		case "zh-Hans":
 			return SupportLocales.zhCN
 		case "en":

@@ -23,7 +23,7 @@ class JinaSearch
      *
      * @param string $query Search query
      * @param null|string $apiKey Jina API key (optional)
-     * @param string $mkt Market code (e.g., zh-CN, en-US) - mapped to X-Locale header
+     * @param string $mkt Market code (e.g., en-US, en-US) - mapped to X-Locale header
      * @param int $count Number of results (applied via manual slicing, limited by API response)
      * @param int $offset Pagination offset (WARNING: only works within single API response)
      * @param string $safeSearch Safe search level - not directly supported by Jina

@@ -28,7 +28,7 @@ class HTMLReader
                     'Content-Type' => 'application/x-www-form-urlencoded',
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                     'Accept-Encoding' => 'gzip, deflate',
-                    'Accept-Language' => 'zh-CN,en-US;q=0.7,en;q=0.3',
+                    'Accept-Language' => 'en-US,en-US;q=0.7,en;q=0.3',
                     'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
                 ],
                 'timeout' => 5,

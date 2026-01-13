@@ -382,7 +382,7 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 		id: workbookId,
 		name: fileName || "Workbook",
 		appVersion: "0.5.0",
-		locale: "zh-CN",
+		locale: "en-US",
 		styles: {},
 		sheetOrder: [sheetId],
 		sheets: {

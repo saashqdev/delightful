@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 class BingSearchMarketCode
 {
-    public const string ZH_CN = 'zh-CN';
+    public const string ZH_CN = 'en-US';
 
     public const string EN_US = 'en-US';
 

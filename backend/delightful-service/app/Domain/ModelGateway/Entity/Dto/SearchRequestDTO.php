@@ -30,9 +30,9 @@ class SearchRequestDTO extends AbstractRequestDTO
     private int $offset = 0;
 
     /**
-     * Market code (e.g., zh-CN, en-US).
+     * Market code (e.g., en-US, en-US).
      */
-    private string $mkt = 'zh-CN';
+    private string $mkt = 'en-US';
 
     /**
      * UI language code.
@@ -57,7 +57,7 @@ class SearchRequestDTO extends AbstractRequestDTO
         $this->query = (string) ($data['q'] ?? $data['query'] ?? '');
         $this->count = (int) ($data['count'] ?? 10);
         $this->offset = (int) ($data['offset'] ?? 0);
-        $this->mkt = (string) ($data['mkt'] ?? 'zh-CN');
+        $this->mkt = (string) ($data['mkt'] ?? 'en-US');
 
         // Support both 'setLang' and 'set_lang'
         $this->setLang = (string) ($data['setLang'] ?? $data['set_lang'] ?? '');
@@ -74,7 +74,7 @@ class SearchRequestDTO extends AbstractRequestDTO
         $searchRequestDTO->setQuery((string) ($data['q'] ?? $data['query'] ?? ''));
         $searchRequestDTO->setCount((int) ($data['count'] ?? 10));
         $searchRequestDTO->setOffset((int) ($data['offset'] ?? 0));
-        $searchRequestDTO->setMkt((string) ($data['mkt'] ?? 'zh-CN'));
+        $searchRequestDTO->setMkt((string) ($data['mkt'] ?? 'en-US'));
         $searchRequestDTO->setSetLang((string) ($data['setLang'] ?? $data['set_lang'] ?? ''));
         $searchRequestDTO->setSafeSearch((string) ($data['safeSearch'] ?? $data['safe_search'] ?? ''));
         $searchRequestDTO->setFreshness((string) ($data['freshness'] ?? ''));

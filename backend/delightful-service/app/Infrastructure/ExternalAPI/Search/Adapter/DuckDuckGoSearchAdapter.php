@@ -38,7 +38,7 @@ class DuckDuckGoSearchAdapter implements SearchEngineAdapterInterface
     ): SearchResponseDTO {
         // Adapter's job: Map unified parameters to DuckDuckGo-specific format
 
-        // Map market code to DuckDuckGo region (e.g., zh-CN -> cn-zh)
+        // Map market code to DuckDuckGo region (e.g., en-US -> cn-zh)
         $region = $this->mapMktToRegion($mkt);
 
         // Map freshness to DuckDuckGo time parameter (Day -> d, Week -> w, Month -> m)
@@ -103,7 +103,7 @@ class DuckDuckGoSearchAdapter implements SearchEngineAdapterInterface
      * Map market code (mkt) to DuckDuckGo region code.
      *
      * DuckDuckGo uses reversed format: language-COUNTRY → country-language
-     * Examples: zh-CN -> cn-zh, en-US -> us-en
+     * Examples: en-US -> cn-zh, en-US -> us-en
      */
     private function mapMktToRegion(string $mkt): string
     {
@@ -111,7 +111,7 @@ class DuckDuckGoSearchAdapter implements SearchEngineAdapterInterface
             return $this->providerConfig['region'] ?? 'wt-wt'; // worldwide
         }
 
-        // Simple mapping: zh-CN -> cn-zh
+        // Simple mapping: en-US -> cn-zh
         $parts = explode('-', $mkt);
         if (count($parts) === 2) {
             return strtolower($parts[1]) . '-' . strtolower($parts[0]);

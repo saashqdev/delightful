@@ -19,7 +19,7 @@ interface SearchEngineAdapterInterface
      * Execute search with unified parameters and return unified response format.
      *
      * @param string $query Search query keywords
-     * @param string $mkt Market code (e.g., zh-CN, en-US)
+     * @param string $mkt Market code (e.g., en-US, en-US)
      * @param int $count Number of results (1-50)
      * @param int $offset Pagination offset (0-1000)
      * @param string $safeSearch Safe search level (Strict/Moderate/Off)

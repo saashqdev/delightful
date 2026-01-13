@@ -121,7 +121,7 @@ class InitialAccountAndUserSeeder extends Seeder
                         'user_type' => 1, // human user
                         'status' => 1, // active
                         'nickname' => $name . ($orgIndex + 1),
-                        'i18n_name' => json_encode(['zh-CN' => $name . ($orgIndex + 1), 'en-US' => ($index === 0 ? 'Admin' : 'User') . ($orgIndex + 1)]),
+                        'i18n_name' => json_encode(['en-US' => $name . ($orgIndex + 1), 'en-US' => ($index === 0 ? 'Admin' : 'User') . ($orgIndex + 1)]),
                         'avatar_url' => '',
                         'description' => 'User account for ' . $name,
                         'created_at' => date('Y-m-d H:i:s'),

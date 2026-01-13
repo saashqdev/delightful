@@ -137,7 +137,7 @@ class organizationstructureseeder extends Seeder
                 'parent_department_id' => $currentParentDepartmentId,
                 'name' => $dept['name'],
                 'i18n_name' => json_encode([
-                    'zh-CN' => $dept['name'],
+                    'en-US' => $dept['name'],
                     'en-US' => $this->translateDepartmentName($dept['name']),
                 ]),
                 'order' => '0',

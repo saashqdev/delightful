@@ -150,7 +150,7 @@ class OpenAIProxyApi extends AbstractOpenApi
      * - query: Search keywords (required)
      * - count: Number of results (optional, default: 10, max: 50)
      * - offset: Pagination offset (optional, default: 0, max: 1000)
-     * - mkt: Market code (optional, default: zh-CN)
+     * - mkt: Market code (optional, default: en-US)
      * - set_lang: UI language (optional)
      * - safe_search: Safe search level (optional, Strict/Moderate/Off)
      * - freshness: Time filter (optional, Day/Week/Month)
@@ -167,7 +167,7 @@ class OpenAIProxyApi extends AbstractOpenApi
         $query = (string) ($request->input('q') ?: $request->input('query', ''));
         $count = (int) $request->input('count', 10);
         $offset = (int) $request->input('offset', 0);
-        $mkt = (string) $request->input('mkt', 'zh-CN');
+        $mkt = (string) $request->input('mkt', 'en-US');
         // Support 'setLang' (Bing native) or 'set_lang' (our style)
         $setLang = (string) ($request->input('setLang') ?: $request->input('set_lang', ''));
         // Support 'safeSearch' (Bing native) or 'safe_search' (our style)
@@ -200,7 +200,7 @@ class OpenAIProxyApi extends AbstractOpenApi
      * - engine: Search engine (optional, bing|google|tavily|duckduckgo|jina, default: from config)
      * - count: Number of results (optional, default: 10, max: 50)
      * - offset: Pagination offset (optional, default: 0, max: 1000)
-     * - mkt: Market code (optional, default: zh-CN)
+     * - mkt: Market code (optional, default: en-US)
      * - set_lang or setLang: UI language (optional)
      * - safe_search or safeSearch: Safe search level (optional, Strict/Moderate/Off)
      * - freshness: Time filter (optional, Day/Week/Month)

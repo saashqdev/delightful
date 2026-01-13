@@ -33,7 +33,7 @@ class BingSearch
      *
      * @param string $query Search query
      * @param string $subscriptionKey Bing API subscription key
-     * @param string $mkt Market code (e.g., zh-CN, en-US)
+     * @param string $mkt Market code (e.g., en-US, en-US)
      * @param int $count Number of results (1-50)
      * @param int $offset Pagination offset (0-1000)
      * @param string $safeSearch Safe search level (Strict, Moderate, Off)

@@ -143,8 +143,8 @@ class BrowserManager:
         # Inject anti-fingerprinting script
         try:
             # Pull language setting from context_config
-            language_setting = context_config.language or "zh-CN"
-            # Extract primary language, e.g., "zh-CN" from "zh-CN,zh;q=0.9,en;q=0.8"
+            language_setting = context_config.language or "en-US"
+            # Extract primary language, e.g., "en-US" from "en-US,zh;q=0.9,en;q=0.8"
             primary_language = language_setting.split(',')[0]
             # Build language array with primary language first
             languages_array = f"['{primary_language}'"

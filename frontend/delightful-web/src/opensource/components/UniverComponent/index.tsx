@@ -19,11 +19,11 @@ import { FUniver } from "@univerjs/core/facade"
 // Import CSS styles
 // import "@univerjs/presets/lib/styles/preset-slides-core.css"
 
-import DesignZhCN from "@univerjs/design/locale/zh-CN"
-import UIZhCN from "@univerjs/ui/locale/zh-CN"
-import SheetsZhCN from "@univerjs/sheets/locale/zh-CN"
-import SheetsUIZhCN from "@univerjs/sheets-ui/locale/zh-CN"
-import DocsUIZhCN from "@univerjs/docs-ui/locale/zh-CN"
+import DesignZhCN from "@univerjs/design/locale/en-US"
+import UIZhCN from "@univerjs/ui/locale/en-US"
+import SheetsZhCN from "@univerjs/sheets/locale/en-US"
+import SheetsUIZhCN from "@univerjs/sheets-ui/locale/en-US"
+import DocsUIZhCN from "@univerjs/docs-ui/locale/en-US"
 
 // Tool function imports
 import { transformData } from "./utils"
@@ -114,7 +114,7 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 						SheetsZhCN,
 						SheetsUIZhCN,
 						DocsUIZhCN,
-						overrideLocales["zh-CN"],
+						overrideLocales["en-US"],
 					),
 				},
 				theme: defaultTheme,

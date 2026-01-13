@@ -21,7 +21,7 @@ class DuckDuckGoSearch
      * This means offset pagination beyond the first page won't work as expected.
      *
      * @param string $query Search query
-     * @param string $mkt Market code (e.g., zh-CN, en-US) - mapped to region
+     * @param string $mkt Market code (e.g., en-US, en-US) - mapped to region
      * @param int $count Number of results (applied via manual slicing, limited by API response)
      * @param int $offset Pagination offset (WARNING: only works within single API response)
      * @param string $safeSearch Safe search level - DuckDuckGo always uses safe search
@@ -51,7 +51,7 @@ class DuckDuckGoSearch
         if ($region !== null) {
             $form_params['kl'] = $region;
         } elseif (! empty($mkt)) {
-            // Map mkt to DuckDuckGo region (e.g., zh-CN -> cn-zh)
+            // Map mkt to DuckDuckGo region (e.g., en-US -> cn-zh)
             $form_params['kl'] = $this->mapMktToRegion($mkt);
         }
 
@@ -122,7 +122,7 @@ class DuckDuckGoSearch
 
     /**
      * Map market code (mkt) to DuckDuckGo region code.
-     * Examples: zh-CN -> cn-zh, en-US -> us-en.
+     * Examples: en-US -> cn-zh, en-US -> us-en.
      */
     private function mapMktToRegion(string $mkt): string
     {
@@ -130,7 +130,7 @@ class DuckDuckGoSearch
             return 'wt-wt'; // worldwide
         }
 
-        // Simple mapping: zh-CN -> cn-zh
+        // Simple mapping: en-US -> cn-zh
         $parts = explode('-', $mkt);
         if (count($parts) === 2) {
             return strtolower($parts[1]) . '-' . strtolower($parts[0]);

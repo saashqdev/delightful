@@ -34,7 +34,7 @@ class GoogleSearch
      * @param string $query Search query
      * @param string $subscriptionKey Google API key
      * @param string $cx Custom Search Engine ID
-     * @param string $mkt Market code (e.g., zh-CN, en-US) - mapped to lr and gl parameters
+     * @param string $mkt Market code (e.g., en-US, en-US) - mapped to lr and gl parameters
      * @param int $count Number of results (1-10, Google API limitation)
      * @param int $offset Pagination offset (start parameter)
      * @param string $safeSearch Safe search level (off, medium, high)

@@ -3,7 +3,7 @@
 services:
   # API service
   delightful-service:
-    image: ghcr.io/delightful/delightful-service:${DELIGHTFUL_SERVICE_TAG-latest}
+    image: ghcr.io/saashqdev/delightful/delightful-service:${DELIGHTFUL_SERVICE_TAG-latest}
     platform: ${PLATFORM}
     container_name: delightful-service
     #restart: always
@@ -33,7 +33,7 @@ services:
       - delightful-sandbox-network
 
   delightful-service-daemon:
-    image: ghcr.io/delightful/delightful-service:${DELIGHTFUL_SERVICE_TAG-latest}
+    image: ghcr.io/saashqdev/delightful/delightful-service:${DELIGHTFUL_SERVICE_TAG-latest}
     platform: ${PLATFORM}
     container_name: delightful-service-daemon
     #restart: always
@@ -65,7 +65,7 @@ services:
 
   # Web application
   delightful-web:
-    image: ghcr.io/delightful/delightful-web:${DELIGHTFUL_WEB_TAG-latest}
+    image: ghcr.io/saashqdev/delightful/delightful-web:${DELIGHTFUL_WEB_TAG-latest}
     container_name: delightful-web
     #restart: always
     environment:
@@ -83,7 +83,7 @@ services:
 
   # Be Delightful service
   be-delightful:
-    image: ghcr.io/delightful/be-delightful:${BE_DELIGHTFUL_TAG-latest}
+    image: ghcr.io/saashqdev/delightful/be-delightful:${BE_DELIGHTFUL_TAG-latest}
     container_name: be-delightful
     #restart: always
     profiles:
@@ -100,7 +100,7 @@ services:
 
   # Delightful gateway service
   delightful-gateway:
-    image: ghcr.io/delightful/delightful-gateway:${DELIGHTFUL_GATEWAY_TAG-latest}
+    image: ghcr.io/saashqdev/delightful/delightful-gateway:${DELIGHTFUL_GATEWAY_TAG-latest}
     container_name: delightful-gateway
     #restart: always
     profiles:
@@ -119,7 +119,7 @@ services:
 
   # Sandbox gateway service
   sandbox-gateway:
-    image: ghcr.io/delightful/sandbox-gateway:${SANDBOX_GATEWAY_TAG-latest}
+    image: ghcr.io/saashqdev/delightful/sandbox-gateway:${SANDBOX_GATEWAY_TAG-latest}
     container_name: sandbox-gateway
     #restart: always
     profiles:

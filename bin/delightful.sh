@@ -245,17 +245,17 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
     if [ -n "$PLATFORM" ]; then
         if [ "$(uname -s)" == "Darwin" ]; then
             # macOS version
-            sed -i '' "s/^PLATFORM=.*/PLATFORM=$PLATFORM/" .env
+            sed -i '' "s|^PLATFORM=.*|PLATFORM=$PLATFORM|" .env
         else
             # Linux version
-            sed -i "s/^PLATFORM=.*/PLATFORM=$PLATFORM/" .env
+            sed -i "s|^PLATFORM=.*|PLATFORM=$PLATFORM|" .env
         fi
     else
         # If PLATFORM is empty, set it to an empty string
         if [ "$(uname -s)" == "Darwin" ]; then
-            sed -i '' "s/^PLATFORM=.*/PLATFORM=/" .env
+            sed -i '' "s|^PLATFORM=.*|PLATFORM=|" .env
         else
-            sed -i "s/^PLATFORM=.*/PLATFORM=/" .env
+            sed -i "s|^PLATFORM=.*|PLATFORM=|" .env
         fi
     fi
 fi

@@ -578,9 +578,10 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
                 bilingual "Keeping default settings." "Keeping default settings."
             fi
         fi
-    }
+    fi
+}
 
-    detect_public_ip
+detect_public_ip
 
     # Ask if Be Delightful service should be installed
     ask_be_delightful

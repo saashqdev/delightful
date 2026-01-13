@@ -1,0 +1,167 @@
+Total: 3117
+Unique: 959
+
+Top 100 most frequent:
+乎: 47
+叹: 13
+棚: 13
+欧: 13
+洁: 13
+朋: 13
+户: 12
+氛: 12
+伞: 12
+雄: 12
+宛: 12
+凡: 12
+甜: 12
+咖: 12
+啡: 12
+衫: 12
+俗: 12
+奔: 12
+隐: 12
+犀: 12
+撞: 11
+抖: 11
+镂: 11
+域: 11
+薰: 11
+莫: 11
+凰: 11
+奖: 11
+宋: 11
+黎: 11
+恤: 11
+胆: 11
+鳞: 11
+籍: 10
+媒: 10
+框: 10
+颈: 10
+摩: 10
+烯: 10
+膨: 10
+胀: 10
+殿: 10
+柯: 10
+跃: 10
+皙: 10
+吧: 10
+骏: 10
+渡: 9
+烛: 9
+插: 9
+梯: 9
+埃: 9
+莓: 9
+凌: 9
+醒: 9
+馆: 9
+苔: 9
+洗: 9
+奈: 9
+睡: 9
+厅: 9
+梭: 9
+菇: 9
+齿: 9
+篷: 9
+怒: 9
+堆: 9
+猪: 9
+萨: 9
+缝: 9
+凶: 9
+眸: 9
+婚: 9
+港: 9
+脂: 8
+脖: 8
+净: 8
+郎: 8
+璀: 8
+璨: 8
+激: 8
+剖: 8
+挑: 8
+豆: 8
+咒: 8
+症: 8
+苹: 8
+泥: 8
+洛: 8
+葱: 8
+旦: 8
+娜: 8
+霸: 8
+朗: 8
+脏: 8
+碰: 8
+瀑: 8
+媚: 8
+桑: 8
+耸: 8
+
+
+Sample prompts with Chinese:
+
+Count: 1
+surrealC4Dstyle，trees脂material，plushfeeling，cuteholybirthfestivalposter，designfeeling，arrowamountillustration，illustration，minimalismstyle，holybirthtreesandserpentcombined，elegantclearnew，cute，abundant negative space，artcomposition，simplebackgroundcolor，titlewriteelegant“holybirthfasthappy”whitelininglinescharacter，bottomwrite“2025”master work，atmospheric
+
+Count: 1
+numberartillustration，wallpaper，powderredandwhitematchmatch，shallowpinkandshallowblue，shallowricecolorandshallowpurple，virtualshadow，close-up，agiantblurryhazytransparentdreamycardthroughQadorablerabbitchildshadowchild，virtualshadow，nobone，edgeedgeblurry，highthisblurry，dreamyadjustcolordisksoftfocalpoints，dynamic blurry，abstractpictureshape，whitebackground，softthrough渡，minimalist style，hazy，lostillusion
+
+Count: 4
+afullbodydirtystainincountryinyearmalepeoplework跪atgroundonpainbitter挣fasten，doublehandand脖childbebindironchain，usepowerliftgiantrockstone3Dcharactermother“LIFE”，likea kind of枷lock。hyperrealisticstyle,photographywritetrue,ultracleardetails,portrait photography,wholebodydarklight，sceneimpactpowerstrongintense，sense of space，pressforcefeelingstrongintense，dimdarklamplight，light and shadowusingenhancementmysteriouscharmpower，ultra high resolution，32K UHD，mostgoodqualityamount，masterpiece
+
+Count: 6
+netyi-benefithope滕this坦，minimalistillustration，arootgiantbluebook籍敞open，likeapathglowingdoor户，alocatedfemaleoldteacherhugarootbookstationatdoormouth，book页shopunfoldopenbecomeculturecharacterocean，blueskyin，elephantconquerknowknow、hopehopeandfromby，arrowamountillustrationstyle，flat designdesign，specialindustrycolorcolorsdividelevel，ultrahigh quality8K，detailsminimalistclean
+
+Count: 3
+贺carddesign，minimalism，flatarrowamountpicture，aburnburnwax烛，beltfireflameshapestate，gildedgoldpaperbackground，贺cardonwriteon“Happy Teacher's Day”
+
+Count: 1
+wallpaper，powderredandwhitematchmatch，shallowpinkandshallowblue，shallowricecolorandshallowpurple，blurryhazytranslucentdreamycardthroughQadorablerabbitchildshadowchild，dreamyadjustcolordisksoftfocalpoints，dynamic blurry，abstractpictureshape，whitebackground，softthrough渡，minimalist style，hazy，lostillusion
+
+Count: 1
+inautumnfestivalposterbackground，subjectleanunder，middlenegative space，inautumnmooncake，sky坛，lampcage，auspiciouscloud，jade rabbit，osmanthus，Chinese stylestyle，warm tones，commerceindustryposter，photography，workroomlamplight，warmatmosphere，simplebackground，delicatetexture，goldenradiance，exquisitedetails
+
+Count: 3
+sealfacedesign，characterphotography，vintage style，poster design，movemovecomparecompeteposter，movie poster，alocatedincountrymalefielddiametermovemovemember，redshortsleevemovemovesetoutfitdecoration，healthymagnificent勇fierce，side view，look uphead，呐喊，close-up，artexaminebeautycomposition，redbackground，blackgoldtones，cyrilnetorchidstylemovestateandactionscenario，realistictrueeffectfruitpicture，dragoncore，movestatecanamountflowinsidehighstudyschool，uhdimage，ultra HD，HDR，masterpiece，notcanthinkdiscussscene，ultra high resolution
+
+Count: 1
+close-up，黏soilstyle，3Drendering，rabbitchildatosmanthustreesunder，cuterabbitchild，yellowlargemoon，ithugaturn oversugarmooncake，greengrassgroundonallyesosmanthuspetals，Chinese styleaesthetics，orangecolorwhiteshallowbrowncolorshallowgreentones，solid color，texture，colorcolorsbrightsoft，contentsimple，largewritemeaning
+
+Count: 2
+blackboardbackground，scenebelowoldteacherbeltleadstudylifestationata艘navigatewalkatblueseawaterinancientboatarmorboardon。blackboardwriteawalkglowingculturecharacter “Teachers Day”。darkscenario，oldteacheremitgolden yellowradiance，feltstyle，wool felt，high contrastdegree，ultraessencefine，pure净background，simplestyle
+
+Count: 1
+Key Art, Sci-fi, Hood, Luis Nieves Sr, Makoto Kano, Metrid. artproductstation趋power、spicyalkaneturntransform、rightedgecinematicshinebright、surrealism、spicyalkaneturntransform、8K、fieldbetweendepth、3D
+
+Count: 4
+flatdesign，incountrytraditionalrefinedlargegascarvingmoldandbeautystylelowfullandblack and whitematchcombinehighfullandredgreenpaintcrowblend，incountrywritemeaningmatchcombinepaintcrowimpactfeeling，showing遵guardtraditional，andrequirementcreatenewopposite叛。shapebecomea kind ofnewalonespecialartshapestyleandexaminebeauty，paintcrowhaveprosperous琐andminimalistsparsedensechange，makescenemorehavesense of layering，wear插asomeink washlandscapepointsembellish，leadpeopleenterwinpaintcrowtitlepattern。
+
+Count: 6
+a bottle of茉莉blackdragontea饮materialbottlechild，wrapoutfitdecorationsurroundinghavetwoonlycardthroughrabbitchildatplay耍，createoutbygolden yellowcolorformaintonesillustrationstyle。backgroundyesChinese paintingstyleflourishopenflowers，circlemoon，auspiciouscloud，finecauseillustrationdescribedrawncuterabbitchildsatarisedegreethroughtimelight。thisyes《Y2constitutionlaw》atsocietyintersect媒bodyondeclaretransmitposter。shouldpicture稿yesmakeuse Adobe Illustrator etcarrowamountpictureshapesoftitemcreate
+
+Count: 1
+fragrantwateradvertisingposter，refinedpinkglassbottle，designfeelingbottlebody，fragrantwateratdivideredsmallislandon，powderredseaflat，water ripples，powderredmoon。asimulatepeoplewearpinkgiftclotheswhitecatsquint，catsquintstationstandrelyatfragrantwaterbottleon，sprayfragrantwater，catsquintbottlebodysize10：7.minimalistscene，dreamyatmosphere，pink梯degreegradient，transparent
+
+Count: 2
+amanageredtooth膏squeezeoutwhitecatsquintstatetooth膏attoothbrushheadon
+
+Count: 2
+high resolution，largeteacherartwork，apieceshallowblueseabeach，seawind吹拂micromicroshattercrackwhiteshellshell。shellshelloncarve“Dream”goldlightflashflash，newsharpphotographyteacher，sceneflatbalance，panoramapattern，visual impact，havedreamyfeeling。Klein blue，
+
+Count: 2
+blueskyunderagrainverylargelargetreesdividefortwohalf，lefthalfedgeyesallyes枯treesbranch，righthalfedgelongoutfullfullnew芽，stillhaveaverysmallverysmallyellowflower，dreamymeaningboundary，hopehope，lifelifepower
+
+Count: 2
+becomeall，southcapital，onseawillnaturebuildbuildcutstickpainted，aworrylushpaintedhorseplaygroupmakeupasiacontinentman，redroundlargenosechild，manhandinsideholdatinysmallfewfemale，steel琴键，collage art，minimalistscene，scenegatherfocalinman，LOVEoutfitdecorationdecoration，layerlevelfeeling，sense of layering，oil paintingtexture，gigglehaelements
+
+Count: 4
+produceproductposter，realsceneryshooting，macro photography。agiantlargemooncake，beautybeautifulflowerpattern，atstoneheadcarvingcarveislandon，seaface，moonmoon，minimalism。havehanddrawnflatwind，simplepenpainted，nowrepresentoutfitdecorationdress up，Chang'e，jade rabbitproduct尝mooncake，flatoftenunder午teatable。Chang'eandrabbitchildhanddrawnworkforoutfitdecorationdecorationand烘traygas氛。
+
+Count: 1
+by Roger Deakins，depth of field，largefaceaccumulatenegative space，culturecharacteratpaperonchangebecomeextremesmallabuildbuildandextremesmallpeople，flowsand，close-uplens，minimalistcomposition，photography，close-uplens，minimalism，ultrahighqualityamount，extremepaperqualitydetails，papermaterial，衍shootdividelevel，ultraessencefine，lightfallattablefaceon

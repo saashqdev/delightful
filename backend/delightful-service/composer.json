@@ -33,7 +33,7 @@
     "bedelightful/php-mcp": "0.1.*",
     "bedelightful/rule-engine-core": "~0.1",
     "bedelightful/sdk-base": "~0.1",
-    "bedelightful/be-delightful-module": "^v0.0",
+    "bedelightful/be-delightful-module": "^v0.1",
     "bedelightful/task-scheduler": "~0.1",
     "bedelightful/tiptap": "~0.1",
     "facile-it/php-openid-client": "^0.3.5",

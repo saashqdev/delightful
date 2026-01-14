@@ -1,5 +1,5 @@
 {
-  "name": "delightful/cloudfile",
+  "name": "bedelightful/cloudfile",
   "description": "Package description here.",
   "license": "Apache-2.0",
   "authors": [
@@ -11,7 +11,7 @@
   "require": {
     "php": ">=8.1",
     "league/flysystem": "^2.0",
-    "delightful/sdk-base": "~0.1",
+    "bedelightful/sdk-base": "~0.1",
     "guzzlehttp/guzzle": "^6.3|^7.0",
     "ext-json": "*",
     "ext-fileinfo": "*",
@@ -43,12 +43,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Delightful\\CloudFile\\": "src"
+      "BeDelightful\\CloudFile\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Delightful\\CloudFile\\Tests\\": "tests"
+      "BeDelightful\\CloudFile\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -64,7 +64,7 @@
   ],
   "extra": {
     "hyperf": {
-      "config": "Delightful\\CloudFile\\Hyperf\\ConfigProvider"
+      "config": "BeDelightful\\CloudFile\\Hyperf\\ConfigProvider"
     },
     "branch-alias": {
       "dev-master": "0.1-dev"

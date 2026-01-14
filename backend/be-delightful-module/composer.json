@@ -1,20 +1,20 @@
 {
-  "name": "delightful/be-delightful-module",
+  "name": "bedelightful/be-delightful-module",
   "type": "project",
   "autoload": {
     "psr-4": {
-      "Delightful\\BeDelightful\\": "src/"
+      "BeDelightful\\BeDelightful\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Delightful\\BeDelightful\\Tests\\": "tests/"
+      "BeDelightful\\BeDelightful\\Tests\\": "tests/"
     }
   },
   "authors": [
     {
-      "name": "delightful",
-      "email": "team@delightful.ai"
+      "name": "BeDelightful",
+      "email": "team@bedelightful.ai"
     }
   ],
   "require": {
@@ -40,7 +40,7 @@
     "hyperf/websocket-client": "^3.1",
     "hyperf/websocket-server": "~3.1.0",
     "overtrue/chinese-calendar": "^1.0",
-    "delightful/api-response": "~0.1",
+    "bedelightful/api-response": "~0.1",
     "96qbhy/hyperf-auth": "^3.1"
   },
   "require-dev": {

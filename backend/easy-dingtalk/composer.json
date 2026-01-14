@@ -1,5 +1,5 @@
 {
-  "name": "delightful/easy-dingtalk",
+  "name": "bedelightful/easy-dingtalk",
   "description": "Package description here.",
   "license": "Apache License 2.0",
   "authors": [
@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=8.1",
-    "delightful/sdk-base": "~0.1",
+    "bedelightful/sdk-base": "~0.1",
     "guzzlehttp/guzzle": "^6.0|^7.0",
     "ext-openssl": "*",
     "ext-json": "*"
@@ -29,7 +29,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Delightful\\EasyDingTalk\\": "src"
+      "BeDelightful\\EasyDingTalk\\": "src"
     },
     "files": [
       "src/Kernel/Utils/Functions.php"
@@ -37,7 +37,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Delightful\\EasyDingTalk\\Test\\": "tests/"
+      "BeDelightful\\EasyDingTalk\\Test\\": "tests/"
     }
   },
   "repositories": [

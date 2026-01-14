@@ -1,5 +1,5 @@
 {
-  "name": "delightful/sandbox",
+  "name": "bedelightful/sandbox",
   "description": "A PHP library that can be used to run PHP code in a sandboxed environment",
   "keywords": [
     "php",

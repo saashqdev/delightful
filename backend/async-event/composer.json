@@ -1,5 +1,5 @@
 {
-  "name": "delightful/async-event",
+  "name": "bedelightful/async-event",
   "type": "library",
   "license": "Apache License 2.0",
   "keywords": [
@@ -9,7 +9,7 @@
   "description": "",
   "autoload": {
     "psr-4": {
-      "Delightful\\AsyncEvent\\": "src/"
+      "BeDelightful\\AsyncEvent\\": "src/"
     }
   },
   "autoload-dev": {
@@ -53,7 +53,7 @@
   },
   "extra": {
     "hyperf": {
-      "config": "Delightful\\AsyncEvent\\ConfigProvider"
+      "config": "BeDelightful\\AsyncEvent\\ConfigProvider"
     },
     "branch-alias": {
       "dev-master": "0.1-dev"

@@ -1,5 +1,5 @@
 {
-  "name": "delightful/task-scheduler",
+  "name": "bedelightful/task-scheduler",
   "type": "library",
   "license": "Apache License 2.0",
   "keywords": [
@@ -9,12 +9,12 @@
   "description": "",
   "autoload": {
     "psr-4": {
-      "Delightful\\TaskScheduler\\": "src/"
+      "BeDelightful\\TaskScheduler\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Delightful\\TaskScheduler\\Test\\": "tests"
+      "BeDelightful\\TaskScheduler\\Test\\": "tests"
     }
   },
   "require": {

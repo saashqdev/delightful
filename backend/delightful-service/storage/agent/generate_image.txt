@@ -702,7 +702,7 @@
                      },
                      {
                        "type": "input",
-                       "value": " ，let's play a game of text-to-magic! Just tell me the image in your mind, and text-to-image can turn your text description into beautiful pictures like magic. Whatever you want to see - Landscape、characters, abstract paintings，统统不在话下，让你的创意瞬间“活”起来！For example: A store named KKV，with bright yellow container design and neatly arranged merchandise inside.",
+                       "value": ", let's play a game of text-to-magic! Just tell me the image in your mind, and text-to-image can turn your text description into beautiful pictures like magic. Whatever you want to see - landscape, characters, abstract paintings, all are easily achievable, and your creativity will come to life in an instant! For example: A store named KKV, with bright yellow container design and neatly arranged merchandise inside.",
                        "name": "",
                        "args": null
                      }

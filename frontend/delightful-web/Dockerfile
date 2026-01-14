@@ -5,7 +5,7 @@ ARG NODE_IMAGE=${IMAGE_SOURCE}node:18-alpine
 # =================================================
 
 # build
-FROM ${NODE_IMAGE} as builder
+FROM ${NODE_IMAGE} AS builder
 
 WORKDIR /app
 

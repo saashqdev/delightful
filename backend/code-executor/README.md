@@ -75,7 +75,7 @@ echo "Return result: " . json_encode($result->getResult(), JSON_UNESCAPED_UNICOD
 Publish configuration file:
 
 ```bash
-php bin/hyperf.php vendor:publish delightful/code-executor
+php bin/hyperf.php vendor:publish bedelightful/code-executor
 ```
 
 Add environment variables to `.env` file:

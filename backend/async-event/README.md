@@ -10,7 +10,7 @@ composer require bedelightful/async-event
 ```
 - Publish configuration
 ```
-php bin/hyperf.php vendor:publish delightful/async-event
+php bin/hyperf.php vendor:publish bedelightful/async-event
 ```
 - Run database migration
 ```

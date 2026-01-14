@@ -3,7 +3,7 @@
 ## Installation
 ```
 composer require bedelightful/task-scheduler
-php bin/hyperf.php vendor:publish delightful/task-scheduler
+php bin/hyperf.php vendor:publish bedelightful/task-scheduler
 ```
 
 ## Usage

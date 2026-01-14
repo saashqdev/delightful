@@ -232,7 +232,7 @@ $list = $filesystem->getMetas([
 
 ### Publish Configuration File
 ```shell
-$ php bin/hyperf.php vendor:publish delightful/cloudfile
+$ php bin/hyperf.php vendor:publish bedelightful/cloudfile
 ```
 
 ### Usage

@@ -25,7 +25,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessage;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessageType;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\AsyncEvent\AsyncEventUtil;
+use BeDelightful\AsyncEvent\AsyncEventUtil;
 
 class MessageUtil
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * This file is part of Delightful.
  */
-use Delightful\CodeRunnerBwrap\Server;
+use BeDelightful\CodeRunnerBwrap\Server;
 use Hyperf\Codec\Json;
 
 use function Delightful\CodeRunnerBwrap\env;

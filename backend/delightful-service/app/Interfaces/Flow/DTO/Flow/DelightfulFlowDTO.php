@@ -10,7 +10,7 @@ namespace App\Interfaces\Flow\DTO\Flow;
 use App\Interfaces\Flow\Assembler\Node\DelightfulFlowNodeAssembler;
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 use App\Interfaces\Flow\DTO\Node\NodeDTO;
-use Delightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\Component;
 
 class DelightfulFlowDTO extends AbstractFlowDTO
 {

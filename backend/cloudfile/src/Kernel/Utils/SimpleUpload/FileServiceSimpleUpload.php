@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Utils\SimpleUpload;
 
-use Delightful\CloudFile\Kernel\AdapterName;
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
-use Delightful\CloudFile\Kernel\Struct\AppendUploadFile;
-use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
-use Delightful\CloudFile\Kernel\Utils\SimpleUpload;
+use BeDelightful\CloudFile\Kernel\AdapterName;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\Struct\AppendUploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\ChunkUploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Kernel\Utils\SimpleUpload;
 
 class FileServiceSimpleUpload extends SimpleUpload
 {

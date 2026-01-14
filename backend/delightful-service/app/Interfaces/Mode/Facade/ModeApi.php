@@ -9,7 +9,7 @@ namespace App\Interfaces\Mode\Facade;
 
 use App\Application\Mode\Service\ModeAppService;
 use App\Infrastructure\Core\AbstractApi;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

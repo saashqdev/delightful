@@ -10,7 +10,7 @@ namespace App\Application\Authentication\Event\Subscribe;
 use App\Domain\Authentication\Entity\ValueObject\AuthenticationDataIsolation;
 use App\Domain\Authentication\Event\ApiKeyValidatedEvent;
 use App\Domain\Authentication\Service\ApiKeyProviderDomainService;
-use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use BeDelightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Psr\Container\ContainerInterface;

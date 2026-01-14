@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Delightful\ApiResponse\Response\LowCodeResponse;
-use Delightful\ApiResponse\Response\StandardResponse;
+use BeDelightful\ApiResponse\Response\LowCodeResponse;
+use BeDelightful\ApiResponse\Response\StandardResponse;
 
 return [
     'default' => [

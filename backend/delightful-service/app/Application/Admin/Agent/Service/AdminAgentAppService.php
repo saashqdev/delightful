@@ -41,7 +41,7 @@ use App\Interfaces\Admin\DTO\Response\GetPublishedAgentsResponseDTO;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Permission\Assembler\OperationPermissionAssembler;
 use App\Interfaces\Permission\DTO\ResourceAccessDTO;
-use Delightful\CloudFile\Kernel\Struct\FileLink;
+use BeDelightful\CloudFile\Kernel\Struct\FileLink;
 use Qbhy\HyperfAuth\Authenticatable;
 
 use function Hyperf\Collection\last;

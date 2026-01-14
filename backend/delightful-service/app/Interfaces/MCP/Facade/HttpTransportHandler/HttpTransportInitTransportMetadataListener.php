@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Interfaces\MCP\Facade\HttpTransportHandler;
 
 use App\Application\MCP\Service\MCPServerStreamableAppService;
-use Delightful\PhpMcp\Server\Transports\Http\Event\HttpTransportAuthenticatedEvent;
-use Delightful\PhpMcp\Shared\Exceptions\AuthenticationError;
+use BeDelightful\PhpMcp\Server\Transports\Http\Event\HttpTransportAuthenticatedEvent;
+use BeDelightful\PhpMcp\Shared\Exceptions\AuthenticationError;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Psr\Container\ContainerInterface;

@@ -16,7 +16,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 use App\Infrastructure\Util\Permission\Annotation\CheckPermission;
 use App\Interfaces\Kernel\DTO\Request\PlatformSettingsUpdateRequest;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 
 #[ApiResponse('low_code')]
 class PlatformSettingsApi

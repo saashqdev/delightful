@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Tests\FileService;
 
-use Delightful\CloudFile\Kernel\Struct\ChunkDownloadConfig;
-use Delightful\CloudFile\Kernel\Struct\ChunkUploadConfig;
-use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
-use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
-use Delightful\CloudFile\Tests\CloudFileBaseTest;
+use BeDelightful\CloudFile\Kernel\Struct\ChunkDownloadConfig;
+use BeDelightful\CloudFile\Kernel\Struct\ChunkUploadConfig;
+use BeDelightful\CloudFile\Kernel\Struct\ChunkUploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use BeDelightful\CloudFile\Tests\CloudFileBaseTest;
 use Exception;
 
 /**

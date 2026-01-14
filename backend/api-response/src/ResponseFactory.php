@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\ApiResponse;
 
-use Delightful\ApiResponse\Exception\ApiResponseException;
-use Delightful\ApiResponse\Response\ResponseInterface;
-use Delightful\ApiResponse\Response\StandardResponse;
+use BeDelightful\ApiResponse\Exception\ApiResponseException;
+use BeDelightful\ApiResponse\Response\ResponseInterface;
+use BeDelightful\ApiResponse\Response\StandardResponse;
 
 class ResponseFactory
 {

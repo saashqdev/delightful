@@ -16,7 +16,7 @@ use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\ComponentFactory;
 
 #[FlowNodeDefine(
     type: NodeType::VariableArrayShift->value,

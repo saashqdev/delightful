@@ -7,24 +7,24 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\User;
 
-use Delightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
-use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
-use Delightful\EasyDingTalk\OpenDev\Api\User\AdminListApi;
-use Delightful\EasyDingTalk\OpenDev\Api\User\UserInfoByCodeApi;
-use Delightful\EasyDingTalk\OpenDev\Api\User\UserInfoByMobileApi;
-use Delightful\EasyDingTalk\OpenDev\Api\User\UserInfoByUserIdApi;
-use Delightful\EasyDingTalk\OpenDev\Api\User\UserListApi;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Parameter\User\GetListAdminByParameter;
-use Delightful\EasyDingTalk\OpenDev\Parameter\User\GetListByDeptIdParameter;
-use Delightful\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByCodeParameter;
-use Delightful\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByMobileParameter;
-use Delightful\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByUserIdParameter;
-use Delightful\EasyDingTalk\OpenDev\Result\User\AdminResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserByCodeResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserByMobileResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserListResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserResult;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use BeDelightful\EasyDingTalk\OpenDev\Api\User\AdminListApi;
+use BeDelightful\EasyDingTalk\OpenDev\Api\User\UserInfoByCodeApi;
+use BeDelightful\EasyDingTalk\OpenDev\Api\User\UserInfoByMobileApi;
+use BeDelightful\EasyDingTalk\OpenDev\Api\User\UserInfoByUserIdApi;
+use BeDelightful\EasyDingTalk\OpenDev\Api\User\UserListApi;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\User\GetListAdminByParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\User\GetListByDeptIdParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByCodeParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByMobileParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByUserIdParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\AdminResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserByCodeResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserByMobileResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserListResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserResult;
 use GuzzleHttp\RequestOptions;
 
 class UserEndpoint extends OpenDevEndpoint

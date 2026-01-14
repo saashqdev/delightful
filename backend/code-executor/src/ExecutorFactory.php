@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor;
 
-use Delightful\CodeExecutor\Contract\ExecutorInterface;
+use BeDelightful\CodeExecutor\Contract\ExecutorInterface;
 use Hyperf\Contract\ConfigInterface;
 
 use function Hyperf\Support\make;

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Event\Publish;
 
-use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectForkEvent;
+use BeDelightful\BeDelightful\Domain\BeAgent\Event\ProjectForkEvent;
 use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 use PhpAmqpLib\Message\AMQPMessage;

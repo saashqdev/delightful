@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Tests\Unit\Enums;
 
-use Delightful\CodeExecutor\Enums\StatusCode;
+use BeDelightful\CodeExecutor\Enums\StatusCode;
 use PHPUnit\Framework\TestCase;
 
 /**

@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Utils\SimpleUpload;
 
-use Delightful\CloudFile\Kernel\Exceptions\ChunkUploadException;
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
-use Delightful\CloudFile\Kernel\Struct\AppendUploadFile;
-use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
-use Delightful\CloudFile\Kernel\Utils\CurlHelper;
-use Delightful\CloudFile\Kernel\Utils\MimeTypes;
-use Delightful\CloudFile\Kernel\Utils\SimpleUpload;
+use BeDelightful\CloudFile\Kernel\Exceptions\ChunkUploadException;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\Struct\AppendUploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\ChunkUploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Kernel\Utils\CurlHelper;
+use BeDelightful\CloudFile\Kernel\Utils\MimeTypes;
+use BeDelightful\CloudFile\Kernel\Utils\SimpleUpload;
 use OSS\Core\OssException;
 use OSS\Credentials\StaticCredentialsProvider;
 use OSS\OssClient;

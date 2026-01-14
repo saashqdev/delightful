@@ -15,9 +15,9 @@ use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Collector\ExecuteManager\AgentPluginCollector;
 use App\Infrastructure\Core\Contract\Flow\AgentPluginInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\FlowExprEngine\Component;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 
 abstract class AbstractLLMNodeParamsConfig extends NodeParamsConfig
 {

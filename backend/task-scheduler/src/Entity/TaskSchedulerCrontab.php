@@ -9,8 +9,8 @@ namespace Delightful\TaskScheduler\Entity;
 
 use Cron\CronExpression;
 use DateTime;
-use Delightful\TaskScheduler\Exception\TaskSchedulerParamsSchedulerException;
-use Delightful\TaskScheduler\Util\Functions;
+use BeDelightful\TaskScheduler\Exception\TaskSchedulerParamsSchedulerException;
+use BeDelightful\TaskScheduler\Util\Functions;
 
 class TaskSchedulerCrontab
 {

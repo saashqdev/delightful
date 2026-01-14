@@ -4,20 +4,20 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Delightful\BeDelightful\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\AccountApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\FileApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\FileEditingApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\FileKeyCleanupApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\MessageApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectInvitationLinkApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectMemberApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\SandboxApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\BeAgentMemoryApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\TaskApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\TopicApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\WorkspaceApi;
+use BeDelightful\BeDelightful\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\AccountApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\FileApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\FileEditingApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\FileKeyCleanupApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\MessageApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectInvitationLinkApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectMemberApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\SandboxApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\BeAgentMemoryApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\TaskApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\TopicApi;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\WorkspaceApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup(

@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\SdkBase;
 
-use Delightful\SdkBase\Kernel\Component\Client\ClientRequest;
-use Delightful\SdkBase\Kernel\Component\Config\Config;
-use Delightful\SdkBase\Kernel\Component\Exception\ExceptionBuilder;
-use Delightful\SdkBase\Kernel\Component\Logger\LoggerProxy;
+use BeDelightful\SdkBase\Kernel\Component\Client\ClientRequest;
+use BeDelightful\SdkBase\Kernel\Component\Config\Config;
+use BeDelightful\SdkBase\Kernel\Component\Exception\ExceptionBuilder;
+use BeDelightful\SdkBase\Kernel\Component\Logger\LoggerProxy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Log\LoggerInterface;

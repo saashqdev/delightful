@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Kernel\Assembler;
 
-use Delightful\CloudFile\Kernel\Struct\FileLink;
+use BeDelightful\CloudFile\Kernel\Struct\FileLink;
 
 class FileAssembler
 {

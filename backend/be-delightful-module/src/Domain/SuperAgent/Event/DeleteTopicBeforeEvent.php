@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 /**
  * Delete topic before event - triggered before topic deletion to handle sandbox termination.

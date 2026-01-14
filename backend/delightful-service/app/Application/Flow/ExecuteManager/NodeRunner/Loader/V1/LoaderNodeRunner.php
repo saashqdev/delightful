@@ -18,7 +18,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\File\Parser\FileParser;
 use App\Infrastructure\Util\FileType;
 use App\Infrastructure\Util\SSRF\Exception\SSRFException;
-use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
 
 #[FlowNodeDefine(
     type: NodeType::Loader->value,

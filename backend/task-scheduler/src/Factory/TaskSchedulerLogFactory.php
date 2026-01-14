@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\TaskScheduler\Factory;
 
-use Delightful\TaskScheduler\Entity\TaskScheduler;
-use Delightful\TaskScheduler\Entity\TaskSchedulerLog;
+use BeDelightful\TaskScheduler\Entity\TaskScheduler;
+use BeDelightful\TaskScheduler\Entity\TaskSchedulerLog;
 
 class TaskSchedulerLogFactory
 {

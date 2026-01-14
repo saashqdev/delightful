@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Kernel\Contracts\ApiManager;
 
-use Delightful\SdkBase\Kernel\Constant\RequestMethod;
+use BeDelightful\SdkBase\Kernel\Constant\RequestMethod;
 
 interface ApiInterface
 {

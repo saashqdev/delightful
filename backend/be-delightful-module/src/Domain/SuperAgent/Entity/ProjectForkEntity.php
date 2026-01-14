@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ForkStatus;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ForkStatus;
 
 /**
  * Project Fork Entity.

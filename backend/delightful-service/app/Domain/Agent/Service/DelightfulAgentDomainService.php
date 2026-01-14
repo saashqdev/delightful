@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Interfaces\Admin\DTO\Request\QueryPageAgentDTO;
-use Delightful\AsyncEvent\AsyncEventUtil;
+use BeDelightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\DbConnection\Db;
 
 /**

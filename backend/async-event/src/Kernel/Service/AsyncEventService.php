@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent\Kernel\Service;
 
-use Delightful\AsyncEvent\Kernel\Constants\Status;
-use Delightful\AsyncEvent\Kernel\Persistence\AsyncEventRepository;
-use Delightful\AsyncEvent\Kernel\Persistence\Model\AsyncEventModel;
+use BeDelightful\AsyncEvent\Kernel\Constants\Status;
+use BeDelightful\AsyncEvent\Kernel\Persistence\AsyncEventRepository;
+use BeDelightful\AsyncEvent\Kernel\Persistence\Model\AsyncEventModel;
 use Hyperf\Snowflake\IdGeneratorInterface;
 
 class AsyncEventService

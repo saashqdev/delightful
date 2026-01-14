@@ -14,7 +14,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure\LeftTyp
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure\OperatorType;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\ComponentFactory;
 
 abstract class AbstractSearchNodeParamsConfig extends NodeParamsConfig
 {

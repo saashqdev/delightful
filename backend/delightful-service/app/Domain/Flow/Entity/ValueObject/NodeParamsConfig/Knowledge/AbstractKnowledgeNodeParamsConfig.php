@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Knowledge;
 
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfig;
-use Delightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\Component;
 
 abstract class AbstractKnowledgeNodeParamsConfig extends NodeParamsConfig
 {

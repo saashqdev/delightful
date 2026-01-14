@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use Delightful\BeDelightful\Domain\BeAgent\Constant\TopicDuplicateConstant;
+use BeDelightful\BeDelightful\Domain\BeAgent\Constant\TopicDuplicateConstant;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\Redis;

@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Utils;
 
-use Delightful\CodeExecutor\Enums\StatusCode;
-use Delightful\CodeExecutor\Exception\ExecuteException;
-use Delightful\CodeExecutor\Exception\ExecuteFailedException;
-use Delightful\CodeExecutor\Exception\ExecuteTimeoutException;
-use Delightful\CodeExecutor\Exception\InvalidArgumentException;
-use Delightful\CodeExecutor\ExecutionResult;
+use BeDelightful\CodeExecutor\Enums\StatusCode;
+use BeDelightful\CodeExecutor\Exception\ExecuteException;
+use BeDelightful\CodeExecutor\Exception\ExecuteFailedException;
+use BeDelightful\CodeExecutor\Exception\ExecuteTimeoutException;
+use BeDelightful\CodeExecutor\Exception\InvalidArgumentException;
+use BeDelightful\CodeExecutor\ExecutionResult;
 use Hyperf\Codec\Json;
 
 /**

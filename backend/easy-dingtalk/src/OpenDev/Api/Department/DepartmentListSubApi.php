@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Api\Department;
 
-use Delightful\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
-use Delightful\SdkBase\Kernel\Constant\RequestMethod;
+use BeDelightful\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
+use BeDelightful\SdkBase\Kernel\Constant\RequestMethod;
 
 /**
  * Get department list.

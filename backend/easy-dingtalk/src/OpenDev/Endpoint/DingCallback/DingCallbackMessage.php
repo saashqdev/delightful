@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\DingCallback;
 
-use Delightful\EasyDingTalk\OpenDev\Endpoint\DingCallback\BizData\BizData;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\DingCallback\BizData\BizData;
 
 class DingCallbackMessage
 {

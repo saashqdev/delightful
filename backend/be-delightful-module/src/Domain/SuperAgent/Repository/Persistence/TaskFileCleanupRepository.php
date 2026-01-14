@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
-use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
-use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TaskFileModel;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Model\TaskFileModel;
 use Hyperf\DbConnection\Db;
 
 class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface

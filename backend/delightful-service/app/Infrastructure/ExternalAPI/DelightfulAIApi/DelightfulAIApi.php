@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ExternalAPI\DelightfulAIApi;
 
-use Delightful\SdkBase\SdkBase;
-use Delightful\SdkBase\SdkBaseContext;
+use BeDelightful\SdkBase\SdkBase;
+use BeDelightful\SdkBase\SdkBaseContext;
 use RuntimeException;
 
 /**

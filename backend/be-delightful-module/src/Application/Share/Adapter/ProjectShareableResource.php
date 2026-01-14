@@ -9,10 +9,10 @@ namespace Delightful\BeDelightful\Application\Share\Adapter;
 
 use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
-use Delightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
-use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
-use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use BeDelightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
+use BeDelightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use BeDelightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

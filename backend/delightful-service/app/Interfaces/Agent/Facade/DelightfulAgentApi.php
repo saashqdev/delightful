@@ -33,7 +33,7 @@ use App\Interfaces\Agent\DTO\DelightfulBotThirdPlatformChatDTO;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Flow\Assembler\Flow\DelightfulFlowAssembler;
 use App\Interfaces\Flow\DTO\Flow\DelightfulFlowDTO;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;

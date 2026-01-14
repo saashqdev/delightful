@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Tests;
 
-use Delightful\CloudFile\CloudFile;
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
-use Delightful\CloudFile\Kernel\FilesystemProxy;
-use Delightful\SdkBase\SdkBase;
+use BeDelightful\CloudFile\CloudFile;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\FilesystemProxy;
+use BeDelightful\SdkBase\SdkBase;
 use Exception;
 use PHPUnit\Framework\TestCase;
 

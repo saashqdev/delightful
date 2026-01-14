@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Executor\Aliyun;
 
-use Delightful\CodeExecutor\AbstractExecutor;
-use Delightful\CodeExecutor\Exception\ExecuteException;
-use Delightful\CodeExecutor\Exception\InvalidArgumentException;
-use Delightful\CodeExecutor\ExecutionRequest;
-use Delightful\CodeExecutor\ExecutionResult;
-use Delightful\CodeExecutor\Executor\Aliyun\Exception\CreateFunctionException;
-use Delightful\CodeExecutor\Executor\Aliyun\Exception\GetFunctionException;
-use Delightful\CodeExecutor\Executor\Aliyun\Exception\UpdateFunctionException;
+use BeDelightful\CodeExecutor\AbstractExecutor;
+use BeDelightful\CodeExecutor\Exception\ExecuteException;
+use BeDelightful\CodeExecutor\Exception\InvalidArgumentException;
+use BeDelightful\CodeExecutor\ExecutionRequest;
+use BeDelightful\CodeExecutor\ExecutionResult;
+use BeDelightful\CodeExecutor\Executor\Aliyun\Exception\CreateFunctionException;
+use BeDelightful\CodeExecutor\Executor\Aliyun\Exception\GetFunctionException;
+use BeDelightful\CodeExecutor\Executor\Aliyun\Exception\UpdateFunctionException;
 
 class AliyunExecutor extends AbstractExecutor
 {

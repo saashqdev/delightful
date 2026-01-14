@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\BeDelightful\Application\BeAgent\DTO\CleanupFileKeysRequestDTO;
-use Delightful\BeDelightful\Application\BeAgent\Service\FileKeyCleanupAppService;
+use BeDelightful\BeDelightful\Application\BeAgent\DTO\CleanupFileKeysRequestDTO;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\FileKeyCleanupAppService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

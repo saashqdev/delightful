@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Expression;
 
-use Delightful\FlowExprEngine\Builder\ExpressionBuilder;
-use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
-use Delightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
-use Delightful\FlowExprEngine\Structure\Structure;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\Builder\ExpressionBuilder;
+use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
+use BeDelightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
+use BeDelightful\FlowExprEngine\Structure\Structure;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 use JsonSerializable;
 
 class Value extends Structure implements JsonSerializable

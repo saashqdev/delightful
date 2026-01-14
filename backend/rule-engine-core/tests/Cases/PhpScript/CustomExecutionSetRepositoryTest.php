@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\PhpScript;
 
-use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableFunction;
-use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
-use Delightful\RuleEngineCore\PhpScript\Repository\DefaultRuleExecutionSetRepository;
-use Delightful\RuleEngineCore\PhpScript\RuleServiceProvider;
-use Delightful\RuleEngineCore\PhpScript\RuleType;
-use Delightful\RuleEngineCore\Standards\Admin\InputType;
-use Delightful\RuleEngineCore\Standards\RuleServiceProviderManager;
-use Delightful\RuleEngineCore\Standards\RuleSessionType;
+use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableFunction;
+use BeDelightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use BeDelightful\RuleEngineCore\PhpScript\Repository\DefaultRuleExecutionSetRepository;
+use BeDelightful\RuleEngineCore\PhpScript\RuleServiceProvider;
+use BeDelightful\RuleEngineCore\PhpScript\RuleType;
+use BeDelightful\RuleEngineCore\Standards\Admin\InputType;
+use BeDelightful\RuleEngineCore\Standards\RuleServiceProviderManager;
+use BeDelightful\RuleEngineCore\Standards\RuleSessionType;
 use Hyperf\Context\ApplicationContext;
 use HyperfTest\Cases\AbstractTestCase;
 use HyperfTest\Mock\Repository\CustomExecutionSetRepository;

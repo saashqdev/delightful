@@ -7,8 +7,8 @@ declare(strict_types=1);
 use App\ErrorCode\GenericErrorCode;
 use App\ErrorCode\HttpErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
-use Delightful\ApiResponse\Response\LowCodeResponse;
-use Delightful\ApiResponse\Response\StandardResponse;
+use BeDelightful\ApiResponse\Response\LowCodeResponse;
+use BeDelightful\ApiResponse\Response\StandardResponse;
 use Hyperf\Validation\ValidationException;
 use Qbhy\HyperfAuth\Exception\UnauthorizedException;
 

@@ -42,7 +42,7 @@ use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 use DateTime;
-use Delightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\ComponentFactory;
 use Qbhy\HyperfAuth\Authenticatable;
 
 class DelightfulFlowExecuteAppService extends AbstractFlowAppService

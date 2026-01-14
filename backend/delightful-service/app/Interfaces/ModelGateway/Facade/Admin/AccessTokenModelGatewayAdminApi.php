@@ -11,7 +11,7 @@ use App\Application\ModelGateway\Service\AccessTokenAppService;
 use App\Domain\ModelGateway\Entity\ValueObject\Query\AccessTokenQuery;
 use App\Interfaces\ModelGateway\Assembler\AccessTokenAssembler;
 use App\Interfaces\ModelGateway\DTO\AccessTokenDTO;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

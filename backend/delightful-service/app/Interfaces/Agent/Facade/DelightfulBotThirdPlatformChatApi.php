@@ -11,7 +11,7 @@ use App\Application\Agent\Service\DelightfulBotThirdPlatformChatAppService;
 use App\Domain\Agent\Entity\ValueObject\Query\DelightfulBotThirdPlatformChatQuery;
 use App\Interfaces\Agent\Assembler\DelightfulBotThirdPlatformChatAssembler;
 use App\Interfaces\Agent\DTO\DelightfulBotThirdPlatformChatDTO;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

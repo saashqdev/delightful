@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Api;
 
-use Delightful\FlowExprEngine\Structure\Api\ApiRequestBodyType;
-use Delightful\FlowExprEngine\Structure\Api\ApiRequestOptions;
-use Delightful\FlowExprEngine\Structure\Api\ApiSend;
-use Delightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRFOptions;
-use Delightful\FlowExprEngine\Test\BaseTestCase;
+use BeDelightful\FlowExprEngine\Structure\Api\ApiRequestBodyType;
+use BeDelightful\FlowExprEngine\Structure\Api\ApiRequestOptions;
+use BeDelightful\FlowExprEngine\Structure\Api\ApiSend;
+use BeDelightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRFOptions;
+use BeDelightful\FlowExprEngine\Test\BaseTestCase;
 use Error;
 
 /**

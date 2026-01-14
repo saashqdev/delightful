@@ -13,9 +13,9 @@ use App\ErrorCode\FlowErrorCode;
 use App\ErrorCode\ImageGenerateErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
-use Delightful\FlowExprEngine\Component;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 use Hyperf\Codec\Json;
 
 class ImageGenerateNodeParamsConfig extends NodeParamsConfig

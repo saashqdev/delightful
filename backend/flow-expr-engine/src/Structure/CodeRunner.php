@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure;
 
-use Delightful\FlowExprEngine\ComponentContext;
-use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
-use Delightful\FlowExprEngine\Kernel\RuleEngine\RuleEngineClientInterface;
-use Delightful\FlowExprEngine\Kernel\Utils\Functions;
-use Delightful\FlowExprEngine\Structure\Condition\Condition;
-use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use BeDelightful\FlowExprEngine\ComponentContext;
+use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
+use BeDelightful\FlowExprEngine\Kernel\RuleEngine\RuleEngineClientInterface;
+use BeDelightful\FlowExprEngine\Kernel\Utils\Functions;
+use BeDelightful\FlowExprEngine\Structure\Condition\Condition;
+use BeDelightful\FlowExprEngine\Structure\Expression\Expression;
 use Throwable;
 
 class CodeRunner

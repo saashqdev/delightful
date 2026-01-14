@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Domain\File\Service;
 
 use App\Domain\File\Service\FileDomainService;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
 use HyperfTest\Cases\BaseTest;
 
 /**

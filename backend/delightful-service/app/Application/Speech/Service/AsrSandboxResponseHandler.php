@@ -13,9 +13,9 @@ use App\Domain\Asr\Constants\AsrConfig;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
 use Psr\Log\LoggerInterface;
 use Throwable;
 

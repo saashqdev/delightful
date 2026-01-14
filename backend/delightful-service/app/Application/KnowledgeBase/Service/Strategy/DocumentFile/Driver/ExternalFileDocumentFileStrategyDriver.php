@@ -16,7 +16,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
 use App\Infrastructure\Core\File\Parser\FileParser;
 use App\Infrastructure\Util\FileType;
 use App\Infrastructure\Util\SSRF\Exception\SSRFException;
-use Delightful\CloudFile\Kernel\Struct\FileLink;
+use BeDelightful\CloudFile\Kernel\Struct\FileLink;
 
 class ExternalFileDocumentFileStrategyDriver implements ExternalFileDocumentFileStrategyInterface
 {

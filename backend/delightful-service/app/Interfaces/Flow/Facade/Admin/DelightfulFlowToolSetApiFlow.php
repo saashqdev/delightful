@@ -11,7 +11,7 @@ use App\Application\Flow\Service\DelightfulFlowToolSetAppService;
 use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
 use App\Interfaces\Flow\Assembler\ToolSet\DelightfulFlowToolSetAssembler;
 use App\Interfaces\Flow\DTO\ToolSet\DelightfulFlowToolSetDTO;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

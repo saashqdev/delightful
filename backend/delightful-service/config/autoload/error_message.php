@@ -24,7 +24,7 @@ use App\ErrorCode\TokenErrorCode;
 use App\ErrorCode\UserErrorCode;
 use App\ErrorCode\UserTaskErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
-use Delightful\BeDelightful\ErrorCode\BeDelightfulErrorCode;
+use BeDelightful\BeDelightful\ErrorCode\BeDelightfulErrorCode;
 
 return [
     'exception_class' => BusinessException::class,

@@ -9,7 +9,7 @@ namespace App\Application\Flow\ExecuteManager\Attachment;
 
 use App\Domain\File\Service\FileDomainService;
 use App\Infrastructure\Util\FileType;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
 
 /**
  * thisgroundfile.

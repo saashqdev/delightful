@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure;
 
-use Delightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\Component;
 
 readonly class Filter
 {

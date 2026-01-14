@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Oauth2;
 
-use Delightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
 
 class AccessTokenEndpoint extends OpenDevEndpoint
 {

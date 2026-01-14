@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Condition;
 
-use Delightful\FlowExprEngine\Component;
-use Delightful\FlowExprEngine\Structure\Expression\Value;
+use BeDelightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\Structure\Expression\Value;
 
 class ConditionItem
 {

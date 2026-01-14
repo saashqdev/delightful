@@ -25,10 +25,10 @@ composer require delightful/code-executor
 ```php
 <?php
 
-use Delightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
-use Delightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
-use Delightful\CodeExecutor\ExecutionRequest;
-use Delightful\CodeExecutor\Language;
+use BeDelightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
+use BeDelightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
+use BeDelightful\CodeExecutor\ExecutionRequest;
+use BeDelightful\CodeExecutor\Language;
 
 // Alibaba Cloud configuration
 $config = [

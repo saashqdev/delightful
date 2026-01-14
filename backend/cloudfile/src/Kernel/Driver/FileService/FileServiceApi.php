@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Driver\FileService;
 
-use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
-use Delightful\SdkBase\Kernel\Constant\RequestMethod;
-use Delightful\SdkBase\SdkBase;
+use BeDelightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use BeDelightful\SdkBase\Kernel\Constant\RequestMethod;
+use BeDelightful\SdkBase\SdkBase;
 use GuzzleHttp\RequestOptions;
 
 class FileServiceApi

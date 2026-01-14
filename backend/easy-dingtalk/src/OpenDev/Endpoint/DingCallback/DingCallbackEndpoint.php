@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\DingCallback;
 
-use Delightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
 
 /**
  * @see https://github.com/open-dingtalk/DingTalk-Callback-Crypto/blob/main/DingCallbackCrypto.php

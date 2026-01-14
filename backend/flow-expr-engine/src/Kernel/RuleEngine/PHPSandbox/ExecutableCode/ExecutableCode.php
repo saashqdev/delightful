@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode;
 
-use Delightful\FlowExprEngine\ComponentContext;
-use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\AbstractMethod;
+use BeDelightful\FlowExprEngine\ComponentContext;
+use BeDelightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\AbstractMethod;
 use ReflectionFunction;
 use ReflectionNamedType;
 use ReflectionUnionType;

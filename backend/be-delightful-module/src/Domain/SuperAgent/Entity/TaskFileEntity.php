@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
 
 class TaskFileEntity extends AbstractEntity
 {

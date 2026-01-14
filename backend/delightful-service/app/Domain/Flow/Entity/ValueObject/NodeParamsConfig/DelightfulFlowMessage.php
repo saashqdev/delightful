@@ -9,7 +9,7 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig;
 
 use App\Application\Flow\ExecuteManager\Attachment\AbstractAttachment;
 use App\Domain\Chat\DTO\Message\MessageInterface;
-use Delightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\Component;
 
 class DelightfulFlowMessage
 {

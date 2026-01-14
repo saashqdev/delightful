@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\BeAgentTool;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageType;
+use BeDelightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\BeAgentTool;
+use BeDelightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageType;
 
 /**
  * Message Builder Service - Focused on building various message formats.

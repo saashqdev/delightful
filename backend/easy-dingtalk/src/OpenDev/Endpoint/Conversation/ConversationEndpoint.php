@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Conversation;
 
-use Delightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
-use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
-use Delightful\EasyDingTalk\OpenDev\Api\Conversation\CreateGroupApi;
-use Delightful\EasyDingTalk\OpenDev\Api\Conversation\CreateSceneGroupApi;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Parameter\Conversation\CreateGroupParameter;
-use Delightful\EasyDingTalk\OpenDev\Parameter\Conversation\CreateSceneGroupParameter;
-use Delightful\EasyDingTalk\OpenDev\Result\Conversation\CreateGroupResult;
-use Delightful\EasyDingTalk\OpenDev\Result\Conversation\CreateSceneGroupResult;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use BeDelightful\EasyDingTalk\OpenDev\Api\Conversation\CreateGroupApi;
+use BeDelightful\EasyDingTalk\OpenDev\Api\Conversation\CreateSceneGroupApi;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\Conversation\CreateGroupParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\Conversation\CreateSceneGroupParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Result\Conversation\CreateGroupResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\Conversation\CreateSceneGroupResult;
 use GuzzleHttp\RequestOptions;
 
 class ConversationEndpoint extends OpenDevEndpoint

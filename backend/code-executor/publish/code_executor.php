@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * This file is part of Delightful.
  */
-use Delightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
+use BeDelightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
 
 use function Hyperf\Support\env;
 

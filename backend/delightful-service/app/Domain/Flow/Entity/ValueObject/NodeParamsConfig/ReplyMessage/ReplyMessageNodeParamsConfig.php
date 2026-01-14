@@ -9,9 +9,9 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\ReplyMessage;
 
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessageType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfig;
-use Delightful\FlowExprEngine\Component;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 
 class ReplyMessageNodeParamsConfig extends NodeParamsConfig
 {

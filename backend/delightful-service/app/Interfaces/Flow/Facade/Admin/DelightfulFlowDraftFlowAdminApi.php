@@ -12,7 +12,7 @@ use App\Domain\Flow\Entity\DelightfulFlowDraftEntity;
 use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowDraftQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Flow\Assembler\FlowDraft\DelightfulFlowDraftAssembler;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Parameter\Department;
 
-use Delightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
 
 class GetSubParameter extends AbstractParameter
 {

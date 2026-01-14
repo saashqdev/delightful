@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace Delightful\TaskScheduler\Repository\Persistence;
 
 use DateTime;
-use Delightful\TaskScheduler\Entity\Query\Page;
-use Delightful\TaskScheduler\Entity\Query\TaskSchedulerQuery;
-use Delightful\TaskScheduler\Entity\TaskScheduler;
-use Delightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
-use Delightful\TaskScheduler\Factory\TaskSchedulerFactory;
-use Delightful\TaskScheduler\Repository\Persistence\Model\TaskSchedulerModel;
+use BeDelightful\TaskScheduler\Entity\Query\Page;
+use BeDelightful\TaskScheduler\Entity\Query\TaskSchedulerQuery;
+use BeDelightful\TaskScheduler\Entity\TaskScheduler;
+use BeDelightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
+use BeDelightful\TaskScheduler\Factory\TaskSchedulerFactory;
+use BeDelightful\TaskScheduler\Repository\Persistence\Model\TaskSchedulerModel;
 
 class TaskSchedulerRepository extends AbstractRepository
 {

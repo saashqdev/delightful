@@ -17,9 +17,9 @@ use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 use Closure;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\Expression\Value;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\Expression\Value;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 
 #[BuiltInToolDefine]
 class TextSplitterTool extends AbstractBuiltInTool

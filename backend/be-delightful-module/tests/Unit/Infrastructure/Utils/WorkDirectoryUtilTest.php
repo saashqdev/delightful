@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Tests\Unit\Infrastructure\Utils;
 
-use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
+use BeDelightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use PHPUnit\Framework\TestCase;
 
 /**

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile;
 
 use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\Interfaces\ExternalDocumentFileInterface;
-use Delightful\CloudFile\Kernel\Struct\FileLink;
+use BeDelightful\CloudFile\Kernel\Struct\FileLink;
 
 class ExternalDocumentFile extends AbstractDocumentFile implements ExternalDocumentFileInterface
 {

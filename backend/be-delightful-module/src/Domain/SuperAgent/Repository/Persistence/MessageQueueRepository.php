@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageQueueStatus;
-use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface;
-use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\MessageQueueModel;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageQueueStatus;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Model\MessageQueueModel;
 use Hyperf\DbConnection\Db;
 
 class MessageQueueRepository implements MessageQueueRepositoryInterface

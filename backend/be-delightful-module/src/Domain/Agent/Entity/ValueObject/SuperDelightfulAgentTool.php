@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
 
 use App\Infrastructure\Core\AbstractValueObject;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\ErrorCode\BeDelightfulErrorCode;
+use BeDelightful\BeDelightful\ErrorCode\BeDelightfulErrorCode;
 
 class BeDelightfulAgentTool extends AbstractValueObject
 {

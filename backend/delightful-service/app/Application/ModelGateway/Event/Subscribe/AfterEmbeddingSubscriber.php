@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Application\ModelGateway\Event\Subscribe;
 
 use App\Application\ModelGateway\Event\ModelUsageEvent;
-use Delightful\AsyncEvent\AsyncEventUtil;
-use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use BeDelightful\AsyncEvent\AsyncEventUtil;
+use BeDelightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Odin\Api\Response\Usage;

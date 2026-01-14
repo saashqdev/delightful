@@ -16,7 +16,7 @@ use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
 use App\ErrorCode\PermissionErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use Delightful\CloudFile\Kernel\Struct\FileLink;
+use BeDelightful\CloudFile\Kernel\Struct\FileLink;
 use Hyperf\DbConnection\Annotation\Transactional;
 use Qbhy\HyperfAuth\Authenticatable;
 

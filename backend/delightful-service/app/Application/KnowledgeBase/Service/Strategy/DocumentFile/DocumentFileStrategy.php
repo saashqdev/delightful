@@ -15,7 +15,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\Interfaces\Document
 use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\Interfaces\ExternalDocumentFileInterface;
 use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\Interfaces\ThirdPlatformDocumentFileInterface;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;

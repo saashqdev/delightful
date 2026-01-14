@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Utils;
 
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
 
 class CurlHelper
 {

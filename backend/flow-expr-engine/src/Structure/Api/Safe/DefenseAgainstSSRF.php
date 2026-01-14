@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Api\Safe;
 
-use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
 
 class DefenseAgainstSSRF
 {

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\Share\Adapter;
 
-use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
-use Delightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
+use BeDelightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
+use BeDelightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

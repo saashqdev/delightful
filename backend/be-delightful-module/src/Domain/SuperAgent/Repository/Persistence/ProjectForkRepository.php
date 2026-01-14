@@ -9,9 +9,9 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
-use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectForkRepositoryInterface;
-use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectForkModel;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectForkRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectForkModel;
 use RuntimeException;
 
 /**

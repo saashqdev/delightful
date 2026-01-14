@@ -12,7 +12,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeSyncStatus;
 use App\Domain\KnowledgeBase\Event\KnowledgeBaseFragmentRemovedEvent;
 use App\Domain\KnowledgeBase\Service\KnowledgeBaseDomainService;
 use App\Domain\KnowledgeBase\Service\KnowledgeBaseFragmentDomainService;
-use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use BeDelightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Psr\Container\ContainerInterface;

@@ -9,7 +9,7 @@ namespace App\Application\Flow\ExecuteManager\Archive;
 
 use App\Domain\File\Service\FileDomainService;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
 
 class FlowExecutorArchiveCloud
 {

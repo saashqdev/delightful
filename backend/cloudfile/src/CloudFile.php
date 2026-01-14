@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile;
 
-use Delightful\CloudFile\Kernel\AdapterName;
-use Delightful\CloudFile\Kernel\Driver\FileService\FileServiceApi;
-use Delightful\CloudFile\Kernel\Driver\Local\LocalDriver;
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
-use Delightful\CloudFile\Kernel\FilesystemProxy;
-use Delightful\SdkBase\SdkBase;
+use BeDelightful\CloudFile\Kernel\AdapterName;
+use BeDelightful\CloudFile\Kernel\Driver\FileService\FileServiceApi;
+use BeDelightful\CloudFile\Kernel\Driver\Local\LocalDriver;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\FilesystemProxy;
+use BeDelightful\SdkBase\SdkBase;
 use League\Flysystem\FilesystemAdapter;
 use Xxtime\Flysystem\Aliyun\OssAdapter;
 

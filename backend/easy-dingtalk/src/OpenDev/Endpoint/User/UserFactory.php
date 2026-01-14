@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\User;
 
-use Delightful\EasyDingTalk\OpenDev\Result\User\AdminResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserByCodeResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserByMobileResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserListResult;
-use Delightful\EasyDingTalk\OpenDev\Result\User\UserResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\AdminResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserByCodeResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserByMobileResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserListResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\User\UserResult;
 
 class UserFactory
 {

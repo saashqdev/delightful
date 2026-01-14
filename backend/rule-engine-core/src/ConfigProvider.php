@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore;
 
-use Delightful\RuleEngineCore\PhpScript\PlaceholderProvider;
-use Delightful\RuleEngineCore\PhpScript\PlaceholderProviderInterface;
-use Delightful\RuleEngineCore\PhpScript\Repository\DefaultExecutableCodeRepository;
-use Delightful\RuleEngineCore\PhpScript\Repository\DefaultRuleExecutionSetRepository;
-use Delightful\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
-use Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
+use BeDelightful\RuleEngineCore\PhpScript\PlaceholderProvider;
+use BeDelightful\RuleEngineCore\PhpScript\PlaceholderProviderInterface;
+use BeDelightful\RuleEngineCore\PhpScript\Repository\DefaultExecutableCodeRepository;
+use BeDelightful\RuleEngineCore\PhpScript\Repository\DefaultRuleExecutionSetRepository;
+use BeDelightful\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
+use BeDelightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
 
 class ConfigProvider
 {

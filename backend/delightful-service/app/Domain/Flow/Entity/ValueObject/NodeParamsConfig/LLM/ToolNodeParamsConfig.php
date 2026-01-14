@@ -12,9 +12,9 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\Structure\ModelConfi
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\Structure\ToolNodeMode;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\Expression\Value;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\Expression\Value;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 
 class ToolNodeParamsConfig extends AbstractLLMNodeParamsConfig
 {

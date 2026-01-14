@@ -20,9 +20,9 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Closure;
 use DateTime;
-use Delightful\FlowExprEngine\Component;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\Component;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 use Throwable;
 
 class DelightfulFlowEntity extends AbstractEntity

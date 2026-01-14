@@ -10,7 +10,7 @@ namespace App\Interfaces\MCP\Facade\Admin;
 use App\Application\MCP\Service\MCPOAuth2BindingAppService;
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 /**

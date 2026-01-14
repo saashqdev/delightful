@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Delightful\BeDelightful\Interfaces\Agent\Facade\Admin\BeDelightfulAgentAdminApi;
+use BeDelightful\BeDelightful\Interfaces\Agent\Facade\Admin\BeDelightfulAgentAdminApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/be-delightful', function () {

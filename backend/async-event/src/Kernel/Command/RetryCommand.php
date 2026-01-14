@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent\Kernel\Command;
 
-use Delightful\AsyncEvent\Kernel\AsyncEventRetry;
-use Delightful\AsyncEvent\Kernel\Crontab\RetryCrontab;
+use BeDelightful\AsyncEvent\Kernel\AsyncEventRetry;
+use BeDelightful\AsyncEvent\Kernel\Crontab\RetryCrontab;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Symfony\Component\Console\Input\InputArgument;

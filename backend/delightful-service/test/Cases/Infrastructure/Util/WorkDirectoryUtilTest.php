@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Infrastructure\Util;
 
-use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
+use BeDelightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use PHPUnit\Framework\TestCase;
 
 /**

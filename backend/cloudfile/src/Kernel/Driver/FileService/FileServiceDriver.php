@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Driver\FileService;
 
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
 use League\Flysystem\Config;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\FilesystemAdapter;

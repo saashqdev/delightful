@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Command\BeAgent;
 
-use Delightful\BeDelightful\Domain\BeAgent\Service\FileKeyCleanupDomainService;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\FileKeyCleanupDomainService;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Hyperf\Logger\LoggerFactory;

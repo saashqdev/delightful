@@ -18,7 +18,7 @@ use App\Interfaces\Flow\Assembler\Knowledge\DelightfulFlowKnowledgeAssembler;
 use App\Interfaces\Flow\Assembler\Node\DelightfulFlowNodeAssembler;
 use App\Interfaces\Flow\Assembler\ToolSet\DelightfulFlowToolSetAssembler;
 use App\Interfaces\MCP\Assembler\MCPServerAssembler;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

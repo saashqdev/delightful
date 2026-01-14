@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Parameter\ChatBot;
 
-use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
-use Delightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
 
 class SendOneOnOneChatMessagesParameter extends AbstractParameter
 {

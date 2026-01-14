@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor;
 
-use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
-use Delightful\RuleEngineCore\Standards\Exception\InvalidRuleSessionException;
-use Delightful\RuleEngineCore\Standards\RuleServiceProviderManager;
-use Delightful\RuleEngineCore\Standards\StatelessRuleSessionInterface;
+use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
+use BeDelightful\RuleEngineCore\Standards\Exception\InvalidRuleSessionException;
+use BeDelightful\RuleEngineCore\Standards\RuleServiceProviderManager;
+use BeDelightful\RuleEngineCore\Standards\StatelessRuleSessionInterface;
 
 class PHPExecutor
 {

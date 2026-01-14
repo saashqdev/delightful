@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript;
 
-use Delightful\RuleEngineCore\PhpScript\Extension\PlaceholderExtension;
+use BeDelightful\RuleEngineCore\PhpScript\Extension\PlaceholderExtension;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 

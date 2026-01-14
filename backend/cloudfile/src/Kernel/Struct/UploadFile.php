@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Struct;
 
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
-use Delightful\CloudFile\Kernel\Utils\EasyFileTools;
-use Delightful\CloudFile\Kernel\Utils\MimeTypes;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\Utils\EasyFileTools;
+use BeDelightful\CloudFile\Kernel\Utils\MimeTypes;
 
 class UploadFile
 {

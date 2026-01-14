@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Result\ChatBot;
 
-use Delightful\EasyDingTalk\OpenDev\Result\AbstractResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\AbstractResult;
 
 class SendGroupMessageResult extends AbstractResult
 {

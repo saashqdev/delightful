@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Application\BeAgent\Assembler;
 
 use DateTime;
-use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\TimeConfigDTO;
-use Delightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
-use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
-use Delightful\TaskScheduler\Service\TaskConfigDomainService;
+use BeDelightful\BeDelightful\Interfaces\BeAgent\DTO\Request\TimeConfigDTO;
+use BeDelightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
+use BeDelightful\TaskScheduler\Entity\ValueObject\TaskType;
+use BeDelightful\TaskScheduler\Service\TaskConfigDomainService;
 use InvalidArgumentException;
 
 /**

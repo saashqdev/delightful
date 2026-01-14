@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Condition;
 
-use Delightful\FlowExprEngine\Structure\CodeRunner;
-use Delightful\FlowExprEngine\Structure\Structure;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\Structure\CodeRunner;
+use BeDelightful\FlowExprEngine\Structure\Structure;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 
 class Condition extends Structure
 {

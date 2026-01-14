@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Repository;
 
-use Delightful\RuleEngineCore\Standards\Admin\Properties;
-use Delightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
+use BeDelightful\RuleEngineCore\Standards\Admin\Properties;
+use BeDelightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
 
 abstract class RuleExecutionSetRepositoryDecorator implements RuleExecutionSetRepositoryInterface
 {

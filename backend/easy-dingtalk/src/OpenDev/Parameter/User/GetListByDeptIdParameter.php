@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Parameter\User;
 
-use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
-use Delightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
 
 class GetListByDeptIdParameter extends AbstractParameter
 {

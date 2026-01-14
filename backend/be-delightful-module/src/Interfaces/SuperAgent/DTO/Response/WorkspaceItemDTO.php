@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceEntity;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceEntity;
 
 class WorkspaceItemDTO extends AbstractDTO
 {

@@ -16,7 +16,7 @@ use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 use App\Infrastructure\Core\Embeddings\EmbeddingGenerator\EmbeddingGeneratorInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\ComponentFactory;
 use Hyperf\Context\ApplicationContext;
 
 #[FlowNodeDefine(

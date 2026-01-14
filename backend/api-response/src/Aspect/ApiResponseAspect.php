@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\ApiResponse\Aspect;
 
-use Delightful\ApiResponse\Annotation\ApiResponse;
-use Delightful\ApiResponse\Exception\ApiResponseException;
-use Delightful\ApiResponse\ResponseFactory;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Exception\ApiResponseException;
+use BeDelightful\ApiResponse\ResponseFactory;
 use Exception;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Di\Annotation\Aspect;

@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Tests\TOS;
 
-use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
-use Delightful\CloudFile\Tests\CloudFileBaseTest;
+use BeDelightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Tests\CloudFileBaseTest;
 
 /**
  * @internal

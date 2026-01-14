@@ -14,7 +14,7 @@ use App\Domain\ImageGenerate\Contract\ImageEnhancementProcessorInterface;
 use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\ImageGenerateRequest;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
 use Exception;
 use Hyperf\Codec\Json;
 use Hyperf\Di\Annotation\Inject;

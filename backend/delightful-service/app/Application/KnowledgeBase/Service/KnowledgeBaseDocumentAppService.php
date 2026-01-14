@@ -17,7 +17,7 @@ use App\ErrorCode\PermissionErrorCode;
 use App\Infrastructure\Core\Embeddings\VectorStores\VectorStoreDriver;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use Delightful\AsyncEvent\AsyncEventUtil;
+use BeDelightful\AsyncEvent\AsyncEventUtil;
 use Qbhy\HyperfAuth\Authenticatable;
 
 class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService

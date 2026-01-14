@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Api;
 
-use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
-use Delightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRF;
-use Delightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRFOptions;
-use Delightful\FlowExprEngine\Test\BaseTestCase;
+use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
+use BeDelightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRF;
+use BeDelightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRFOptions;
+use BeDelightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

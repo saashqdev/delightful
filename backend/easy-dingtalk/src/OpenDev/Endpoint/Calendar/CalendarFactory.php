@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Calendar;
 
-use Delightful\EasyDingTalk\OpenDev\Result\Calendar\CreateEventResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\Calendar\CreateEventResult;
 
 class CalendarFactory
 {

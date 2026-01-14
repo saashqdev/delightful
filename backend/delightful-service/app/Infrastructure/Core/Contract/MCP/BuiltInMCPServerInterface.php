@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\Contract\MCP;
 
-use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
+use BeDelightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
 
 interface BuiltInMCPServerInterface
 {

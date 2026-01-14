@@ -28,7 +28,7 @@ composer require delightful/easy-dingtalk -vvv
 ### Basic Usage
 
 ```php
-use Delightful\EasyDingTalk\OpenDevFactory;
+use BeDelightful\EasyDingTalk\OpenDevFactory;
 
 $factory = new OpenDevFactory([
     'app_key' => 'your_app_key',

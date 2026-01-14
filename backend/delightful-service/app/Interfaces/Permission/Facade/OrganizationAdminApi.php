@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Traits\DataIsolationTrait;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\Permission\Annotation\CheckPermission;
 use App\Interfaces\Permission\Assembler\OrganizationAdminAssembler;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use InvalidArgumentException;
 

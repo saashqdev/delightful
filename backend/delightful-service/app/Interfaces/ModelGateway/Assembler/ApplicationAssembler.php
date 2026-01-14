@@ -14,7 +14,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
 use App\Interfaces\Kernel\Assembler\OperatorAssembler;
 use App\Interfaces\ModelGateway\DTO\ApplicationDTO;
-use Delightful\CloudFile\Kernel\Struct\FileLink;
+use BeDelightful\CloudFile\Kernel\Struct\FileLink;
 
 class ApplicationAssembler
 {

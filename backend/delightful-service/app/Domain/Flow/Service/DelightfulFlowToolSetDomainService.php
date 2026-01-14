@@ -16,7 +16,7 @@ use App\Domain\Flow\Repository\Facade\DelightfulFlowToolSetRepositoryInterface;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use Delightful\AsyncEvent\AsyncEventUtil;
+use BeDelightful\AsyncEvent\AsyncEventUtil;
 
 class DelightfulFlowToolSetDomainService extends AbstractDomainService
 {

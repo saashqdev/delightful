@@ -13,8 +13,8 @@ use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
 use Closure;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 
 #[BuiltInToolDefine]
 class AIImageBuiltInTool extends AbstractAIImageBuiltInTool

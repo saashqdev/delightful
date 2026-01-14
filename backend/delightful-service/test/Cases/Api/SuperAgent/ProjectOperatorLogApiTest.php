@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Api\BeAgent;
 
-use Delightful\BeDelightful\Domain\BeAgent\Constants\OperationAction;
-use Delightful\BeDelightful\Domain\BeAgent\Constants\ResourceType;
-use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectOperationLogDomainService;
+use BeDelightful\BeDelightful\Domain\BeAgent\Constants\OperationAction;
+use BeDelightful\BeDelightful\Domain\BeAgent\Constants\ResourceType;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectOperationLogDomainService;
 
 /**
  * @internal

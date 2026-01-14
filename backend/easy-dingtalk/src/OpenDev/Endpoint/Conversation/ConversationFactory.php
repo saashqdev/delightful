@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Conversation;
 
-use Delightful\EasyDingTalk\OpenDev\Result\Conversation\CreateGroupResult;
-use Delightful\EasyDingTalk\OpenDev\Result\Conversation\CreateSceneGroupResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\Conversation\CreateGroupResult;
+use BeDelightful\EasyDingTalk\OpenDev\Result\Conversation\CreateSceneGroupResult;
 
 class ConversationFactory
 {

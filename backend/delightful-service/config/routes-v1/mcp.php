@@ -9,7 +9,7 @@ use App\Interfaces\MCP\Facade\Admin\MCPServerAdminApi;
 use App\Interfaces\MCP\Facade\Admin\MCPServerToolAdminApi;
 use App\Interfaces\MCP\Facade\Admin\MCPBeDelightfulProjectSettingAdminApi;
 use App\Interfaces\MCP\Facade\Admin\MCPUserSettingAdminApi;
-use Delightful\PhpMcp\Server\Framework\Hyperf\HyperfMcpServer;
+use BeDelightful\PhpMcp\Server\Framework\Hyperf\HyperfMcpServer;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/mcp', function () {

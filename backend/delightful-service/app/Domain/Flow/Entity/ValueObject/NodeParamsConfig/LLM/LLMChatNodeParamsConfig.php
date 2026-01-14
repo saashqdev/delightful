@@ -13,8 +13,8 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\Structure\OptionTool
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Collector\ExecuteManager\AgentPluginCollector;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\FlowExprEngine\ComponentFactory;
-use Delightful\FlowExprEngine\Structure\StructureType;
+use BeDelightful\FlowExprEngine\ComponentFactory;
+use BeDelightful\FlowExprEngine\Structure\StructureType;
 use Hyperf\Codec\Json;
 
 class LLMChatNodeParamsConfig extends AbstractLLMNodeParamsConfig

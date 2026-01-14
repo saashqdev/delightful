@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Utils;
 
-use Delightful\CloudFile\Kernel\Exceptions\ChunkUploadException;
-use Delightful\CloudFile\Kernel\Struct\AppendUploadFile;
-use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
-use Delightful\CloudFile\Kernel\Struct\UploadFile;
-use Delightful\SdkBase\SdkBase;
+use BeDelightful\CloudFile\Kernel\Exceptions\ChunkUploadException;
+use BeDelightful\CloudFile\Kernel\Struct\AppendUploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\ChunkUploadFile;
+use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
+use BeDelightful\SdkBase\SdkBase;
 
 abstract class SimpleUpload
 {

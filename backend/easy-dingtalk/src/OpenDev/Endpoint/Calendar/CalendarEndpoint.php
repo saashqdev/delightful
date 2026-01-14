@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Calendar;
 
-use Delightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
-use Delightful\EasyDingTalk\OpenDev\Api\Calendar\CreateEventApi;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Parameter\Calendar\CreateEventParameter;
-use Delightful\EasyDingTalk\OpenDev\Result\Calendar\CreateEventResult;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
+use BeDelightful\EasyDingTalk\OpenDev\Api\Calendar\CreateEventApi;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Parameter\Calendar\CreateEventParameter;
+use BeDelightful\EasyDingTalk\OpenDev\Result\Calendar\CreateEventResult;
 use GuzzleHttp\RequestOptions;
 
 class CalendarEndpoint extends OpenDevEndpoint

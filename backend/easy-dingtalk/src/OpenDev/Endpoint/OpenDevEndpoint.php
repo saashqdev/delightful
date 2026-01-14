@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint;
 
-use Delightful\EasyDingTalk\Kernel\Contracts\Endpoint\Endpoint;
-use Delightful\EasyDingTalk\Kernel\Contracts\Endpoint\EndpointType;
-use Delightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
-use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidConfigException;
-use Delightful\EasyDingTalk\OpenDev\Api\Oauth2\AccessTokenApi;
-use Delightful\EasyDingTalk\OpenDev\Api\Oauth2\CorpAccessTokenApi;
-use Delightful\EasyDingTalk\OpenDev\Config\OpenDevEndpointConfig;
+use BeDelightful\EasyDingTalk\Kernel\Contracts\Endpoint\Endpoint;
+use BeDelightful\EasyDingTalk\Kernel\Contracts\Endpoint\EndpointType;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\InvalidConfigException;
+use BeDelightful\EasyDingTalk\OpenDev\Api\Oauth2\AccessTokenApi;
+use BeDelightful\EasyDingTalk\OpenDev\Api\Oauth2\CorpAccessTokenApi;
+use BeDelightful\EasyDingTalk\OpenDev\Config\OpenDevEndpointConfig;
 use GuzzleHttp\RequestOptions;
 
 abstract class OpenDevEndpoint extends Endpoint

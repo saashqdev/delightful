@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\Oauth2;
 
-use Delightful\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
+use BeDelightful\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
 
 /**
  * @internal

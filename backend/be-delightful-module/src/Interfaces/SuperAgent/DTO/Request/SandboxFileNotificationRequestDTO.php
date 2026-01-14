@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 
 use App\Infrastructure\Core\AbstractRequestDTO;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
 
 /**
  * Sandbox file notification request DTO.

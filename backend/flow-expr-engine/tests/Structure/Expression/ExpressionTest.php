@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Expression;
 
-use Delightful\FlowExprEngine\Builder\ExpressionBuilder;
-use Delightful\FlowExprEngine\Structure\Expression\Expression;
-use Delightful\FlowExprEngine\Test\BaseTestCase;
+use BeDelightful\FlowExprEngine\Builder\ExpressionBuilder;
+use BeDelightful\FlowExprEngine\Structure\Expression\Expression;
+use BeDelightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

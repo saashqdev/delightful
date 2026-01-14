@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use Delightful\BeDelightful\Application\BeAgent\DTO\CleanupFileKeysRequestDTO;
-use Delightful\BeDelightful\Domain\BeAgent\Service\FileKeyCleanupDomainService;
+use BeDelightful\BeDelightful\Application\BeAgent\DTO\CleanupFileKeysRequestDTO;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\FileKeyCleanupDomainService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;

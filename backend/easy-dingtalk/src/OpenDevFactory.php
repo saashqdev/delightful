@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk;
 
-use Delightful\EasyDingTalk\Kernel\Contracts\Factory\FactoryAbstract;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\Calendar\CalendarEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\ChatBot\ChatBotEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\Conversation\ConversationEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\Department\DepartmentEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\DingCallback\DingCallbackEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\Oauth2\AccessTokenEndpoint;
-use Delightful\EasyDingTalk\OpenDev\Endpoint\User\UserEndpoint;
+use BeDelightful\EasyDingTalk\Kernel\Contracts\Factory\FactoryAbstract;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\Calendar\CalendarEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\ChatBot\ChatBotEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\Conversation\ConversationEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\Department\DepartmentEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\DingCallback\DingCallbackEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\Oauth2\AccessTokenEndpoint;
+use BeDelightful\EasyDingTalk\OpenDev\Endpoint\User\UserEndpoint;
 
 /**
  * @property AccessTokenEndpoint $accessTokenEndpoint

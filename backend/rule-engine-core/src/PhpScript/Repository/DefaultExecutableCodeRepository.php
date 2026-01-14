@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Repository;
 
-use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableCodeInterface;
-use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableType;
-use Delightful\RuleEngineCore\Standards\Admin\Properties;
+use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableCodeInterface;
+use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableType;
+use BeDelightful\RuleEngineCore\Standards\Admin\Properties;
 
 class DefaultExecutableCodeRepository implements ExecutableCodeRepositoryInterface
 {

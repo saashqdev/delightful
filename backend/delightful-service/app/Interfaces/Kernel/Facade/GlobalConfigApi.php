@@ -10,7 +10,7 @@ namespace App\Interfaces\Kernel\Facade;
 use App\Application\Kernel\DTO\GlobalConfig;
 use App\Application\Kernel\Service\DelightfulSettingAppService;
 use App\Application\Kernel\Service\PlatformSettingsAppService;
-use Delightful\ApiResponse\Annotation\ApiResponse;
+use BeDelightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 

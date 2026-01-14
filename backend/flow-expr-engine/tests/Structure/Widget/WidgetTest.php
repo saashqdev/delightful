@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Widget;
 
-use Delightful\FlowExprEngine\Builder\WidgetBuilder;
-use Delightful\FlowExprEngine\Structure\Widget\ShowOptions;
-use Delightful\FlowExprEngine\Structure\Widget\Widget;
-use Delightful\FlowExprEngine\Test\BaseTestCase;
+use BeDelightful\FlowExprEngine\Builder\WidgetBuilder;
+use BeDelightful\FlowExprEngine\Structure\Widget\ShowOptions;
+use BeDelightful\FlowExprEngine\Structure\Widget\Widget;
+use BeDelightful\FlowExprEngine\Test\BaseTestCase;
 use Throwable;
 
 /**

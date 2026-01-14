@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Delightful\BeDelightful\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
-use Delightful\BeDelightful\Interfaces\Share\Facade\ShareApi;
+use BeDelightful\BeDelightful\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
+use BeDelightful\BeDelightful\Interfaces\Share\Facade\ShareApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup(

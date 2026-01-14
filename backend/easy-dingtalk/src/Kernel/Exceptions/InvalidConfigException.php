@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Kernel\Exceptions;
 
-use Delightful\EasyDingTalk\Kernel\Constants\ErrorCode;
+use BeDelightful\EasyDingTalk\Kernel\Constants\ErrorCode;
 use Throwable;
 
 class InvalidConfigException extends EasyDingTalkException

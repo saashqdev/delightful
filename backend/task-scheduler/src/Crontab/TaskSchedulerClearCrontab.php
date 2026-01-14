@@ -9,10 +9,10 @@ namespace Delightful\TaskScheduler\Crontab;
 
 use DateInterval;
 use DateTime;
-use Delightful\TaskScheduler\Entity\Query\Page;
-use Delightful\TaskScheduler\Entity\Query\TaskSchedulerQuery;
-use Delightful\TaskScheduler\Entity\TaskScheduler;
-use Delightful\TaskScheduler\Service\TaskSchedulerDomainService;
+use BeDelightful\TaskScheduler\Entity\Query\Page;
+use BeDelightful\TaskScheduler\Entity\Query\TaskSchedulerQuery;
+use BeDelightful\TaskScheduler\Entity\TaskScheduler;
+use BeDelightful\TaskScheduler\Service\TaskSchedulerDomainService;
 use Hyperf\Crontab\Annotation\Crontab;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

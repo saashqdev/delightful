@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Kernel\RuleEngine;
 
-use Delightful\FlowExprEngine\Structure\Condition\Condition;
-use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use BeDelightful\FlowExprEngine\Structure\Condition\Condition;
+use BeDelightful\FlowExprEngine\Structure\Expression\Expression;
 
 interface RuleEngineClientInterface
 {

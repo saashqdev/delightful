@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
-use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueProcessAppService;
-use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskCallbackEvent;
+use BeDelightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\MessageQueueProcessAppService;
+use BeDelightful\BeDelightful\Domain\BeAgent\Event\RunTaskCallbackEvent;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;

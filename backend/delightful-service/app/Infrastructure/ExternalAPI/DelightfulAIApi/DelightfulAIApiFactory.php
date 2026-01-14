@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\DelightfulAIApi;
 
 use App\Infrastructure\ExternalAPI\DelightfulAIApi\Kernel\DelightfulAIApiException;
-use Delightful\SdkBase\SdkBase;
+use BeDelightful\SdkBase\SdkBase;
 use Hyperf\Contract\ConfigInterface;
 use Psr\Container\ContainerInterface;
 

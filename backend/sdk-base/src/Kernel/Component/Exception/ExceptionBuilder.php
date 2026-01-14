@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SdkBase\Kernel\Component\Exception;
 
-use Delightful\SdkBase\SdkBase;
+use BeDelightful\SdkBase\SdkBase;
 use Exception;
 use RuntimeException;
 use Throwable;

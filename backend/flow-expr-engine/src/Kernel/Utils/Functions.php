@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Kernel\Utils;
 
-use Delightful\FlowExprEngine\ComponentContext;
+use BeDelightful\FlowExprEngine\ComponentContext;
 
 class Functions
 {

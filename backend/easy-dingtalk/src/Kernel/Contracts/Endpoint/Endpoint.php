@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Kernel\Contracts\Endpoint;
 
-use Delightful\EasyDingTalk\Kernel\Constants\ErrorCode;
-use Delightful\EasyDingTalk\Kernel\Contracts\ApiManager\ApiInterface;
-use Delightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
-use Delightful\SdkBase\SdkBase;
+use BeDelightful\EasyDingTalk\Kernel\Constants\ErrorCode;
+use BeDelightful\EasyDingTalk\Kernel\Contracts\ApiManager\ApiInterface;
+use BeDelightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
+use BeDelightful\SdkBase\SdkBase;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 

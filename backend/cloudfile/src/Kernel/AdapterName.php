@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel;
 
-use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use BeDelightful\CloudFile\Kernel\Exceptions\CloudFileException;
 
 class AdapterName
 {

@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Tests\Unit;
 
-use Delightful\CodeExecutor\AbstractExecutor;
-use Delightful\CodeExecutor\ExecutionRequest;
-use Delightful\CodeExecutor\ExecutionResult;
-use Delightful\CodeExecutor\Language;
+use BeDelightful\CodeExecutor\AbstractExecutor;
+use BeDelightful\CodeExecutor\ExecutionRequest;
+use BeDelightful\CodeExecutor\ExecutionResult;
+use BeDelightful\CodeExecutor\Language;
 use PHPUnit\Framework\TestCase;
 
 /**

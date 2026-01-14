@@ -14,9 +14,9 @@ use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\TempAuth\TempAuthInterface;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use Delightful\PhpMcp\Shared\Auth\AuthenticatorInterface;
-use Delightful\PhpMcp\Shared\Exceptions\AuthenticationError;
-use Delightful\PhpMcp\Types\Auth\AuthInfo;
+use BeDelightful\PhpMcp\Shared\Auth\AuthenticatorInterface;
+use BeDelightful\PhpMcp\Shared\Exceptions\AuthenticationError;
+use BeDelightful\PhpMcp\Types\Auth\AuthInfo;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\Authenticatable;
 

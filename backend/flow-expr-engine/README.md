@@ -6,7 +6,7 @@
 ## Installation
 
 ```shell
-$ composer require delightful/flow-expr-engine -vvv
+$ composer require bedelightful/flow-expr-engine -vvv
 ```
 
 ## Usage

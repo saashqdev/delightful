@@ -15,7 +15,7 @@ An isolated environment system supporting multi-language code execution. It can 
 Install via Composer:
 
 ```bash
-composer require delightful/code-executor
+composer require bedelightful/code-executor
 ```
 
 ## Quick Start

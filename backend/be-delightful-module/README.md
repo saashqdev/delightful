@@ -43,7 +43,7 @@ The module integrates with delightful-service through the following methods:
 Install via Composer:
 
 ```bash
-composer require delightful/be-delightful-module
+composer require bedelightful/be-delightful-module
 ```
 
 ## Basic Usage
@@ -57,7 +57,7 @@ The module provides a `ConfigProvider` for registering related services and feat
 
 return [
     // Load ConfigProvider
-    \Delightful\BeDelightful\ConfigProvider::class,
+    \BeDelightful\BeDelightful\ConfigProvider::class,
 ];
 ```
 

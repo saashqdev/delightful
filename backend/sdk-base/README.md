@@ -4,12 +4,12 @@
 ## Installing
 
 ```shell
-$ composer require delightful/sdk-base -vvv
+$ composer require bedelightful/sdk-base -vvv
 ```
 
 ## Usage
 
-See \Delightful\SdkBase\Tests\SdkBaseTest
+See \BeDelightful\SdkBase\Tests\SdkBaseTest
 
 
 ## License

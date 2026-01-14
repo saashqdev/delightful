@@ -20,7 +20,7 @@ Easy DingTalk is an easy-to-use SDK for the DingTalk Open Platform, supporting P
 ## Installation
 
 ```bash
-composer require delightful/easy-dingtalk -vvv
+composer require bedelightful/easy-dingtalk -vvv
 ```
 
 ## Quick Start

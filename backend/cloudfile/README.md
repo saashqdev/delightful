@@ -52,7 +52,7 @@ Or in the config configuration, add the driver parameter, which is the Filesyste
 ## Installation
 
 ```shell
-$ composer require delightful/cloudfile -vvv
+$ composer require bedelightful/cloudfile -vvv
 ```
 
 ## Configuration

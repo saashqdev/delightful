@@ -2,13 +2,13 @@
 
 ## Installation
 ```
-composer require delightful/task-scheduler
+composer require bedelightful/task-scheduler
 php bin/hyperf.php vendor:publish delightful/task-scheduler
 ```
 
 ## Usage
 ```
-\Delightful\TaskScheduler\Service\TaskSchedulerDomainService
+\BeDelightful\TaskScheduler\Service\TaskSchedulerDomainService
 ```
 
 ## Notes

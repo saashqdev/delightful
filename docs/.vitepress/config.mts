@@ -2,15 +2,15 @@ import { defineConfig } from 'vitepress'
 import en from './locales/en'
 import zh from './locales/zh'
 
-// 中英文之间添加空格的函数
+// Function to add spaces between Chinese and English characters
 function addSpaceBetweenChineseAndEnglish(text: string): string {
   if (!text) return text
   
-  // 在中文和英文之间添加空格
+  // Add spaces between Chinese and English characters
   return text
-    // 在中文后面加空格(如果后面是英文)
+    // Add space after Chinese if followed by English
     .replace(/([\u4e00-\u9fa5])([a-zA-Z0-9])/g, '$1 $2')
-    // 在英文后面加空格(如果后面是中文)
+    // Add space after English if followed by Chinese
     .replace(/([a-zA-Z0-9])([\u4e00-\u9fa5])/g, '$1 $2')
 }
 

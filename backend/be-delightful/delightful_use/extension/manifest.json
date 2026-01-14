@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "浏览器data传输utility",
+  "name": "Browser Data Transfer Utility",
   "version": "1.0",
-  "description": "提取和importwhen前网站的 Cookies (package括 HttpOnly) 和 LocalStorage data。",
+  "description": "Extract and import Cookies (including HttpOnly) and LocalStorage data from the current website.",
   "permissions": [
     "cookies",
     "activeTab",

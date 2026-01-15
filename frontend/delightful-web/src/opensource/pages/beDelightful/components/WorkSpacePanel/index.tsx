@@ -11,7 +11,7 @@ import { IconChevronDown, IconChevronRight, IconDots, IconPlus } from "@tabler/i
 import type { InputRef, MenuProps } from "antd"
 import { Button, Dropdown, Input, message, Modal, Tooltip, Typography } from "antd"
 import { cx } from "antd-style"
-import type { ChangeEvent, KeyboardEvent, MouseEvent, ReactNode } from "react"
+import type { ChangeEvent, KeyboardEvent, MouseEvent } from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import type { FileItem, Thread, Workspace } from "../../pages/Workspace/types"
 import AttachmentList from "../AttachmentList"
@@ -317,7 +317,7 @@ const WorkspacePanel = ({
 								icon={
 									<DelightfulIcon
 										size={18}
-										component={isCollapsed ? IconChevronRight : IconChevronDown}
+										component={(isCollapsed ? IconChevronRight : IconChevronDown) as any}
 										stroke={2}
 									/>
 								}
@@ -350,13 +350,14 @@ const WorkspacePanel = ({
 									>
 										<DelightfulIcon
 											size={18}
-											component={IconPlus}
+										component={IconPlus as any}
 											stroke={2}
 											className={styles.newTopicButtonIcon}
 										/>
-									<span>New Topic</span>
-										<div className={styles.listContainer}>
-											{filteredThreads.map((thread) => {
+										<span>New Topic</span>
+									</div>
+									<div className={styles.listContainer}>
+										{filteredThreads.map((thread) => {
 												return (
 													<div
 														key={thread.id}
@@ -426,7 +427,7 @@ const WorkspacePanel = ({
 																>
 																	<DelightfulIcon
 																		size={18}
-																		component={IconDots}
+																	component={IconDots as any}
 																		stroke={2}
 																		className={
 																			styles.threadItemMoreButtonIcon
@@ -439,15 +440,14 @@ const WorkspacePanel = ({
 												)
 											})}
 										</div>
-									)}
-									{filteredThreads.length === 0 && threadSearchText && (
-										<div className={styles.emptyText}>No related topics found</div>
-									)}
-								</>
-							)}
-						</div>
-					)}
-				</div>
+										{filteredThreads.length === 0 && threadSearchText && (
+											<div className={styles.emptyText}>No related topics found</div>
+										)}
+									</>
+								)}
+							</div>
+						)}
+					</div>
 
 				{/* Topic files area */}
 				<AttachmentList

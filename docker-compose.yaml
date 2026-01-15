@@ -294,5 +294,4 @@ services:
 
 networks:
   delightful-sandbox-network:
-    external: true
     driver: bridge

@@ -176,10 +176,12 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 					break
 
 				default:
-				throw new Error(`Unsupported file type: ${fileType}`)
+					throw new Error(`Unsupported file type: ${fileType}`)
+			}
+
 			univerAPIRef.current = univerAPI
 
-		// Create document instance of corresponding type
+			// Create document instance of corresponding type
 			if (fileType === "sheet") {
 				univerAPI.createWorkbook(univerData)
 
@@ -200,16 +202,16 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 				// univerAPI.createPresentation(univerData)
 			}
 
-		// After instance creation, set initial readonly state
-		setLoading(false)
+			// After instance creation, set initial readonly state
+			setLoading(false)
 
-		// Set global flag indicating Univer library has loaded
+			// Set global flag indicating Univer library has loaded
 			if (typeof window !== "undefined") {
 				;(window as any).__UNIVER_LIBRARIES_LOADED__ = true
 			}
 		} catch (err: any) {
-		console.error("Failed to initialize Univer component:", err)
-		setError(err.message || "Failed to load file")
+			console.error("Failed to initialize Univer component:", err)
+			setError(err.message || "Failed to load file")
 			setLoading(false)
 		}
 	}, [data])

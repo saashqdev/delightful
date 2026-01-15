@@ -120,24 +120,26 @@ function StreamProcessor(props: StreamProcessorProps): React.ReactElement | null
 					onCommandProcessingStatusChange(true)
 				}
 			console.log("Detected command start marker")
-					onCommandProcessingStatusChange(false)
-				}
-			console.log("Detected command end marker")
-				// During command collection phase, find the position of the last start marker
-				const startPos = text.lastIndexOf(COMMAND_START)
-				if (startPos >= 0) {
-					// Only return content before the start marker
-					return text.substring(0, startPos)
-				}
+		}
+
+		// Process command end marker
+		if (hasEndMarker && isCollectingCommandRef.current) {
+			isCollectingCommandRef.current = false
+			if (onCommandProcessingStatusChange) {
+				onCommandProcessingStatusChange(false)
 			}
+			console.log("Detected command end marker")
+		}
 
-			return text
-		},
-		[detectPartialMarker, onCommandProcessingStatusChange],
-	)
+		// During command collection phase, find the position of the last start marker
+		if (isCollectingCommandRef.current) {
+			const startPos = text.lastIndexOf(COMMAND_START)
+			if (startPos >= 0) {
+				// Only return content before the start marker
+				return text.substring(0, startPos)
+			}
+		}
 
-	// Check and process commands in buffer
-	const processCommandBuffer = useCallback(() => {
 		// Loop through and process all possible commands
 		const buffer = commandBufferRef.current
 		let commandsProcessed = false
@@ -168,23 +170,22 @@ function StreamProcessor(props: StreamProcessorProps): React.ReactElement | null
 				}
 			} catch (error) {
 				console.error("Failed to parse command JSON:", error, "Command content:", match[1])
-			processingCommandsRef.current = true
-			try {
-				// Save commands to the record of processed commands
-				commands.forEach((cmd) => {
-					processedCommandsRef.current.add(JSON.stringify(cmd))
-				})
-				onCommandsReceived(commands)
-			} catch (error) {
-				console.error("Error processing commands:", error)
-		return commandsProcessed
-	}, [onCommandsReceived, onCommandProcessingStatusChange])
+		}
+	}
 
-	// Process complete content and extract commands
-	const processCompleteContent = useCallback(() => {
-		// Print current complete content
-		console.log("Starting to process complete content, length:", completeContentRef.current.length)
-		console.log("completeContentRef.current excerpt:", completeContentRef.current.substring(0, 100))
+	// Process found commands
+	if (commands.length > 0) {
+		processingCommandsRef.current = true
+		try {
+			// Save commands to the record of processed commands
+			commands.forEach((cmd) => {
+				processedCommandsRef.current.add(JSON.stringify(cmd))
+			})
+			onCommandsReceived(commands)
+		} catch (error) {
+			console.error("Error processing commands:", error)
+		}
+	}
 
 		// Check if it contains command markers
 		const hasCommandStart = completeContentRef.current.includes("<!-- COMMAND_START -->")
@@ -488,26 +489,42 @@ function StreamProcessor(props: StreamProcessorProps): React.ReactElement | null
 						// 10. Log stream processing completion time and duration
 							const streamEndTime = Date.now()
 							console.log(
-							`Stream processing complete: ${currentResponseBodyId}, ` +
-								`duration: ${(streamEndTime - streamStartTime) / 1000} seconds`,
-								console.error("Model error:", extractedData.errorInfo)
-							// Pass error information to parent component
-								onError(
-									`${extractedData.errorInfo} Please click the retry button or refresh the page to try again.`,
-								)
-								// Mark stream processing as complete
-								setIsProcessing(false)
-								streamProcessingRef.current = false
-							// Set error flag to true
-								errorDetectedRef.current = true
-							} else if (extractedData.content) {
-								addNewContent(extractedData.content)
-							}
-						})
+								`Stream processing complete: ${currentResponseBodyId}, ` +
+									`duration: ${(streamEndTime - streamStartTime) / 1000} seconds`,
+							)
 
-					// Recursively process next chunk
+							// Mark stream processing as complete
+							setIsProcessing(false)
+							streamProcessingRef.current = false
+							return
+						}
+
+						// Process stream data
+						const { value } = result
+						const chunk = decoder.decode(value, { stream: true })
+
+						// Extract data from chunk
+						const extractedData = extractDataFromChunk(chunk)
+
+						// Check for errors
+						if (extractedData.errorInfo) {
+							console.error("Model error:", extractedData.errorInfo)
+							// Pass error information to parent component
+							onError(
+								`${extractedData.errorInfo} Please click the retry button or refresh the page to try again.`,
+							)
+							// Mark stream processing as complete
+							setIsProcessing(false)
+							streamProcessingRef.current = false
+							// Set error flag to true
+							errorDetectedRef.current = true
+						} else if (extractedData.content) {
+							addNewContent(extractedData.content)
+						}
+
+						// Recursively process next chunk
 						if (!isAborted && !errorDetectedRef.current) {
-						// Use setTimeout to avoid blocking main thread
+							// Use setTimeout to avoid blocking main thread
 							setTimeout(() => {
 								processNextChunk()
 							}, 0)

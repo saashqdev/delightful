@@ -1,5 +1,4 @@
-﻿/* eslint-disable class-methods-use-this */
-import conversationStore from "@/opensource/stores/chatNew/conversation"
+﻿import conversationStore from "@/opensource/stores/chatNew/conversation"
 import ConversationDbServices from "@/opensource/services/chat/conversation/ConversationDbService"
 import MessageStore from "@/opensource/stores/chatNew/message"
 import { toJS } from "mobx"

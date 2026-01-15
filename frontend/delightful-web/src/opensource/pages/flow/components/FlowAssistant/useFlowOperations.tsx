@@ -228,11 +228,10 @@ export default function useFlowOperations({
 						break
 					case "saveDraft":
 						// Use await only in saveDraft and publishFlow; these are necessary async operations
-						// eslint-disable-next-line no-await-in-loop
+
 						result = await saveDraft()
 						break
 					case "publishFlow":
-						// eslint-disable-next-line no-await-in-loop
 						result = await publishFlow(operation.publishData, flowId)
 						break
 					default:

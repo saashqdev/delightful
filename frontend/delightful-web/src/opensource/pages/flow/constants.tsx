@@ -1,6 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/naming-convention */
-
-export enum customNodeType {
+﻿export enum customNodeType {
 	// Start
 	Start = "1",
 	// Large Language Model

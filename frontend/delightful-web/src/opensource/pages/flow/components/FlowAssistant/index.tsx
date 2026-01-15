@@ -1,8 +1,4 @@
-﻿/* eslint-disable prettier/prettier */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-console */
-/* eslint-disable no-restricted-syntax */
-import type React from "react"
+﻿import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { Input, Button, Card, List, message as antdMessage } from "antd"
 import { useTranslation } from "react-i18next"
@@ -25,9 +21,8 @@ import { FlowApi } from "@/apis"
 function generateMD5(input: string): string {
 	let hash = 0
 	for (let i = 0; i < input.length; i += 1) {
-		// eslint-disable-next-line no-bitwise
 		hash = (hash << 5) - hash + input.charCodeAt(i)
-		// eslint-disable-next-line no-bitwise
+
 		hash |= 0
 	}
 

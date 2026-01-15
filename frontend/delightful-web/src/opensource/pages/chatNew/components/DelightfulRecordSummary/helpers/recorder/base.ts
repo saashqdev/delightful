@@ -130,7 +130,9 @@ export default class BaseRecorder {
 		} else if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
 			message.warning("Please enable microphone permission in your browser to record audio")
 		} else {
-			message.warning("Recording feature is temporarily unavailable, please check your device")
+			message.warning(
+				"Recording feature is temporarily unavailable, please check your device",
+			)
 		}
 	}
 
@@ -155,7 +157,9 @@ export default class BaseRecorder {
 			navigator.msGetUserMedia
 		if ((!navigator.mediaDevices?.getUserMedia && !navigator.getUserMedia) || !this.context) {
 			// message.warning(`${i18next.t("chat.recording_summary.title")}`)
-			message.warning("Current browser does not have recording permission, please use a different browser")
+			message.warning(
+				"Current browser does not have recording permission, please use a different browser",
+			)
 			return
 		}
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -436,7 +440,9 @@ export default class BaseRecorder {
 					duration: this.duration,
 					fileSize: this.fileSize,
 					vol,
-				// data: this.tempPCM,     // all current PCM data, caller controls increment
+					// data: this.tempPCM,     // all current PCM data, caller controls increment
+				})
+		}
 	}
 
 	/**

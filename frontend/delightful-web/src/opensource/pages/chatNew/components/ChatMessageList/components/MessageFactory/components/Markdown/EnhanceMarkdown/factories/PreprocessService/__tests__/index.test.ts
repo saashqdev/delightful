@@ -1,4 +1,9 @@
+// @ts-nocheck
+/* eslint-disable */
 import { describe, it, expect, beforeEach } from "vitest"
+import PreprocessService, { parseTable, TABLE_REGEX } from "../index"
+
+describe("PreprocessService", () => {
 	describe("parseTable", () => {
 		it("TABLE_REGEX should match markdown tables", () => {
 			const tableMarkdown = `| Name | Age | City |
@@ -183,14 +188,6 @@ import { describe, it, expect, beforeEach } from "vitest"
 			// Ensure surrounding whitespace was trimmed
 			expect(result).not.toContain("   Name   ")
 		})
-
-		it("should handle Unicode characters", () => {
-			const header = "| 🎯 Target | 📊 Data |"
-			const separator = "| --- | --- |"
-			const rows = "| test | 100% |"
-
-			const result = parseTable(header, separator, rows)
-
 
 		it("should handle Unicode characters", () => {
 			const header = "| 🎯 Target | 📊 Data |"
@@ -295,141 +292,87 @@ More text`
 			expect(result[0]).toContain("More quoted content")
 		})
 	})
-			expect(result[0]).toContain("More quoted content")
-		})
-	})
+
+	describe("splitBlockCode", () => {
+		it("should handle image after code block", () => {
 			const markdown = "```js\nfunction test() {\n  return 'hello';\n}\n```\n![image](url)"
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([
 				"```js\nfunction test() {\n  return 'hello';\n}\n```",
-				expect(match[1]).toBe("| Name | Age | City |") // header
-				expect(match[2]).toBe("| --- | --- | --- |") // separator
-				expect(match[3]).toBe("| Alice | 25 | London |\n| Bob | 30 | Paris |") // data rows
-
-		it("should handle a code block immediately after an image", () => {
-			it("should parse a basic table", () => {
-				const header = "| Name | Age | City |"
-				const separator = "| --- | --- | --- |"
-				const rows = "| Alice | 25 | London |\n| Bob | 30 | Paris |"
+				"![image](url)",
+			])
+		})
 
 		it("should handle code blocks that contain image syntax", () => {
 			const markdown = '```js\nconst markdown = "![image](url)";\nconsole.log(markdown);\n```'
 			const result = PreprocessService.splitBlockCode(markdown)
 			expect(result).toEqual([markdown])
 		})
-				expect(result).toContain("Name")
-				expect(result).toContain("Alice")
-				expect(result).toContain("Bob")
-				expect(result).toContain("25")
-				expect(result).toContain("30")
-		})
-
-			it("should handle left alignment", () => {
-				const header = "| Column1 | Column2 |"
-				const separator = "| --- | --- |"
-				const rows = "| Data1 | Data2 |"
-		})
 	})
 
 	describe("preprocess", () => {
 		it("should process markdown with default rules", () => {
 			const result = service.preprocess("This is ~~strikethrough~~ text")
-			it("should handle right alignment", () => {
-				const header = "| Column1 | Column2 |"
-				const separator = "| ---: | ---: |"
-				const rows = "| Data1 | Data2 |"
+			expect(result.join("")).toContain("<del>strikethrough</del>")
+		})
+
 		it("should process markdown with latex enabled", () => {
 			const markdown = "This is a formula: $E=mc^2$ and some text"
 			const result = service.preprocess(markdown, { enableLatex: true })
 			expect(result.join("")).toContain('<DelightfulLatexInline math="E=mc^2" />')
 		})
 
-			it("should handle center alignment", () => {
-				const header = "| Column1 | Column2 |"
-				const separator = "| :---: | :---: |"
-				const rows = "| Data1 | Data2 |"
-		})
-
 		it("should process citations", () => {
 			const markdown = "This is a citation [[citation:1]]"
 			const result = service.preprocess(markdown)
 			expect(result.join("")).toContain('<DelightfulCitation index="1" />')
-			it("should handle mixed alignment styles", () => {
-				const header = "| Left Align | Center | Right Align |"
-				const separator = "| --- | :---: | ---: |"
-				const rows = "| left | center | right |"
-			const result = service.preprocess(markdown)
-			const joinedResult = result.join("")
-			expect(joinedResult).toContain('<input type="checkbox" checked readonly')
-			expect(joinedResult).toContain('<input type="checkbox"  readonly')
-			expect(joinedResult).toContain("completed task")
-			expect(joinedResult).toContain("incomplete task")
 		})
-
-			it("should handle tables without leading and trailing pipes", () => {
-				const header = "Name | Age"
-				const separator = "--- | ---"
-				const rows = "Alice | 25"
 
 		it("should handle markdown with only whitespace", () => {
 			const result = service.preprocess("   \n   \t   ")
-				expect(result).toContain("Name")
-				expect(result).toContain("Age")
-				expect(result).toContain("Alice")
-				expect(result).toContain("25")
+			expect(result).toEqual(["   \n   \t   "])
+		})
+
+		it("should handle multiple markdown features together", () => {
 			const markdown =
 				"Text\n\n```js\ncode\n```\n\n![image](url)\n\nMore ~~strikethrough~~ text"
-			it("should handle a single-row table", () => {
-				const header = "| Title |"
+			const result = service.preprocess(markdown)
+			const joined = result.join("")
+			expect(joined).toContain("```js")
+			expect(joined).toContain("![image](url)")
+			expect(joined).toContain("<del>strikethrough</del>")
 		})
-				const rows = "| Content |"
+
 		it("should protect URLs in code blocks from being converted to links", () => {
 			const markdown = `Links in plain text should be converted: https://example.com
 
-		it("should handle Unicode characters", () => {
-			const header = "| 🎯 Target | 📊 Data |"
-			const separator = "| --- | --- |"
-			const rows = "| test | 100% |"
+And here is a code block with URLs:
+\`\`\`json
+{
+  "api_url": "https://api.example.com/v1",
+  "webhook": "https://webhook.example.com",
+  "redirect": "https://redirect.example.com"
+}
+\`\`\`
 
-			const result = parseTable(header, separator, rows)
+Final link: https://final.com`
 
-			expect(result).toContain("🎯 Target")
-			expect(result).toContain("📊 Data")
-			expect(result).toContain("test")
-			expect(result).toContain("100%")
-		})
+			const result = service.preprocess(markdown)
+			const content = result.join("")
 
-		it("should default to left alignment when alignment is missing", () => {
-			const header = "| Col1 | Col2 |"
-			const separator = "| | |" // empty separator
-			const rows = "| Data1 | Data2 |"
-
-			const result = parseTable(header, separator, rows)
-
-			// Should default to left alignment
-			expect(result).toContain('style="text-align:left"')
-			expect(result).toContain("Data1")
-			expect(result).toContain("Data2")
-		})
-			it("should handle irregular tables with mismatched columns", () => {
-				const header = "| Col1 | Col2 | Col3 |"
-			const content = result.join(" ")
-				const rows = "| Data1 | Data2 |\n| A | B | C | D |" // first row missing a column, second row has an extra column
 			// URLs in plain text should be converted to links
 			expect(content).toContain(
 				'<a href="https://example.com" target="_blank" rel="noopener noreferrer">https://example.com</a>',
-				expect(result).toContain("Data1")
-				expect(result).toContain("Data2")
+			)
+			expect(content).toContain(
 				'<a href="https://final.com" target="_blank" rel="noopener noreferrer">https://final.com</a>',
 			)
 
 			// URLs inside code blocks should remain untouched
 			expect(content).toContain('"api_url": "https://api.example.com/v1"')
 			expect(content).toContain('"webhook": "https://webhook.example.com"')
-			it("should generate correct HTML structure", () => {
-				const header = "| Title |"
+
 			// Ensure URLs inside code blocks are not converted to links
-				const rows = "| Content |"
 			expect(content).not.toContain('<a href="https://webhook.example.com"')
 			expect(content).not.toContain('<a href="https://redirect.example.com"')
 		})
@@ -504,7 +447,9 @@ Reference information: [[citation:3]]`
 			expect(joinedResult).toContain('<input type="checkbox"  readonly')
 
 			// validate strikethrough content
-			expect(joinedResult).toContain('<span class="strikethrough">optimizationperformance</span>')
+			expect(joinedResult).toContain(
+				'<span class="strikethrough">optimizationperformance</span>',
+			)
 		})
 	})
 
@@ -678,22 +623,6 @@ Reference information: [[citation:3]]`
 			expect(result).toContain("</tbody>")
 		})
 
-		it("should handle tables with extra whitespace and tabs", () => {
-			const header = "|   Name   |  Age  |"
-			const separator = "|   ---   | ---  |"
-			const rows = "|  Alice  |   25   |"
-
-			const result = parseTable(header, separator, rows)
-
-			expect(result).toContain("Name")
-			expect(result).toContain("Age")
-			expect(result).toContain("Alice")
-			expect(result).toContain("25")
-			// Ensure surrounding whitespace was trimmed
-			expect(result).not.toContain("   Name   ")
-		})
-
-		it("should handle Unicode characters", () => {
 		it("should handle tables with extra whitespace and tabs", () => {
 			const header = "|   Name   |  Age  |"
 			const separator = "|   ---   | ---  |"

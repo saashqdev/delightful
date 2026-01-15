@@ -6,7 +6,6 @@ import { platformKey } from "@/utils/storage"
 class MessageSeqIdService {
 	seqIdMap: Record<string, string | Record<string, string>> = {}
 
-	// eslint-disable-next-line class-methods-use-this
 	get delightfulId() {
 		return userStore.user.userInfo?.delightful_id
 	}

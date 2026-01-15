@@ -134,7 +134,6 @@ export class DatabaseManager {
 		return this.globalDatabase
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	private async initDatabase(
 		dbName: string,
 		version: number,

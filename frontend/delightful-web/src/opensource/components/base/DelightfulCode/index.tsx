@@ -99,7 +99,6 @@ const DelightfulCode = memo((props: DelightfulCodeProps) => {
 			) : (
 				<div
 					className={styles.inner}
-					// eslint-disable-next-line react/no-danger
 					dangerouslySetInnerHTML={{
 						__html: data as string,
 					}}

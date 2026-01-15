@@ -1,5 +1,4 @@
-﻿/* eslint-disable react/no-array-index-key */
-import { useMemoizedFn } from "ahooks"
+﻿import { useMemoizedFn } from "ahooks"
 import React, { useMemo, useRef } from "react"
 import BaseItem from "./BaseItem"
 import GroupItem from "./GroupItem"

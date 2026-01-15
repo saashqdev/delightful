@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react"
 import { describe, it, expect, vi } from "vitest"
 import "@testing-library/jest-dom"
-import DelightfulSegmented from "../index"
+import DelightfulSegmented from "@/opensource/components/base/DelightfulSegmented"
 import type { ReactNode } from "react"
 
 // Mock antd Segmented component
@@ -38,7 +38,9 @@ vi.mock("antd", () => {
 							<div
 								key={index}
 								data-testid={`segmented-item-${index}`}
-								className={`segmented-item ${isSelected ? "segmented-item-selected" : ""}`}
+								className={`segmented-item ${
+									isSelected ? "segmented-item-selected" : ""
+								}`}
 								onClick={() => handleChange(optionValue)}
 							>
 								{optionLabel}
@@ -78,11 +80,11 @@ describe("DelightfulSegmented component", () => {
 	it("should support complex option format", () => {
 		render(
 			<DelightfulSegmented
-				options=[
+				options={[
 					{ label: "Option One", value: "option1" },
 					{ label: "Option Two", value: "option2" },
 					{ label: "Option Three", value: "option3" },
-				]
+				]}
 				defaultValue="option1"
 			/>,
 		)
@@ -120,7 +122,9 @@ describe("DelightfulSegmented component", () => {
 	})
 
 	it("should support custom className", () => {
-		render(<DelightfulSegmented options={["Option One", "Option Two"]} className="custom-class" />)
+		render(
+			<DelightfulSegmented options={["Option One", "Option Two"]} className="custom-class" />,
+		)
 
 		const segmentedElement = screen.getByTestId("antd-segmented")
 		expect(segmentedElement.className).toContain("mock-segmented-styles")

@@ -1,8 +1,4 @@
-﻿/* eslint-disable no-console */
-/* eslint-disable no-lonely-if */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable prefer-destructuring */
-/**
+﻿/**
  * curl parsing related functions
  */
 

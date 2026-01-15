@@ -128,7 +128,6 @@ export default memo(function WorkspaceChat(props: WorkspaceChatProps) {
 				element.removeEventListener("scroll", handleScroll)
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isProgrammaticScroll, nodesPanelRef])
 	return (
 		<div className={styles.container}>

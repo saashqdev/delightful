@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 interface dataview {
 	byteLength: number
 	buffer: {

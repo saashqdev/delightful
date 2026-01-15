@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/naming-convention */
 /**
  * Download audio recording file
  * @private

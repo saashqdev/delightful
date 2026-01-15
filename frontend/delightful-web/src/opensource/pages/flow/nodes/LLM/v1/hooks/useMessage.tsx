@@ -2,8 +2,7 @@
  * Message loading state, components, and behaviors
  */
 
-import { Form } from "antd"
-import { Flex, Switch } from "antd"
+import { Form, Flex, Switch } from "antd"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 

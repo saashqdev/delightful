@@ -111,7 +111,7 @@ export const validateJsonBrackets = (json: string): number => {
 			inString = !inString
 		} else if (char === "\\" && !escapeNext) {
 			escapeNext = true
-			// eslint-disable-next-line no-continue
+
 			continue
 		}
 
@@ -238,7 +238,6 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 
 	console.log("command tag check:", { hasCommandStart, hasCommandEnd })
 
-	// eslint-disable-next-line no-cond-assign
 	while ((commandMatch = commandRegex.exec(content))) {
 		try {
 			const fullMatch = commandMatch[0] // complete match, including tags
@@ -253,7 +252,7 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 			} catch (parseError) {
 				console.error("all parsing attempts failed:", parseError)
 				// skip this command and process next one
-				// eslint-disable-next-line no-continue
+
 				continue
 			}
 
@@ -309,7 +308,6 @@ export const extractStatusInline = (content: string): string => {
 	const statusRegex = /<!-- STATUS_START -->([\s\S]*?)<!-- STATUS_END -->/g
 	let statusMatch
 
-	// eslint-disable-next-line no-cond-assign
 	while ((statusMatch = statusRegex.exec(content))) {
 		// remove status part from displayed content
 		updatedContent = updatedContent.replace(statusMatch[0], statusMatch[1].trim())

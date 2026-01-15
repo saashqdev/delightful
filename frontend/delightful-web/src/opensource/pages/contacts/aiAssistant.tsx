@@ -77,7 +77,7 @@ const AiAssistant = observer(function AiAssistant() {
 				user,
 			}
 		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+
 		[],
 	)
 

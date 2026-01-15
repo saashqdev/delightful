@@ -1,5 +1,4 @@
-﻿/* eslint-disable class-methods-use-this */
-import { platformKey } from "@/utils/storage"
+﻿import { platformKey } from "@/utils/storage"
 import Dexie from "dexie"
 import { ChatDb } from "./types"
 

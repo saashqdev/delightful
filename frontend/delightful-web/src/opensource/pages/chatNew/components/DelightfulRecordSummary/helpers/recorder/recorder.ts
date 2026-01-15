@@ -1,5 +1,3 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { compress, encodePCM, encodeWAV } from "./transform"
 import Player from "./player"
 import BaseRecorder from "./base"

@@ -185,7 +185,6 @@ export const isUrl = (
 	try {
 		const url = new URL(text)
 		const blockedProtocols = [
-			// eslint-disable-next-line no-script-url
 			"javascript:",
 			"file:",
 			"vbscript:",

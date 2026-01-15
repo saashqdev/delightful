@@ -61,7 +61,6 @@ const DelightfulMermaidShared = memo(function DelightfulMermaidShared() {
 		return () => {
 			eventBus.off(BridgeEventType.GetMermaidImage, callback)
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	if (!mermaidData) return null

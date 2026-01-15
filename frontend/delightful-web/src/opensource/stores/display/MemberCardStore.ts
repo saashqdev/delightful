@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { DomClassName } from "@/const/dom"
 import userInfoStore from "@/opensource/stores/userInfo"
 import type { StructureUserItem } from "@/types/organization"

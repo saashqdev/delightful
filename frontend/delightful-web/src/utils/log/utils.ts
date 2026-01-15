@@ -20,7 +20,7 @@ export function transformer(logs: any): any {
 			return logs.map((item) => transformer(item))
 		}
 		const newObj: { [key: string]: any } = {}
-		// eslint-disable-next-line no-restricted-syntax
+
 		for (const [key, value] of Object.entries(logs)) {
 			if (
 				["authorization", "token", "access_token"].includes(key) &&

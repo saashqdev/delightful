@@ -137,7 +137,6 @@ const CustomRepeat = ({ value, onChange }: CustomRepeatProps) => {
 									className={cx({
 										[styles.checked]: displayValue?.values?.includes(index),
 									})}
-									// eslint-disable-next-line react/no-array-index-key
 									key={`${unit}_${index}`}
 								>
 									{WEEK_MAP[`${index}`]}
@@ -157,7 +156,6 @@ const CustomRepeat = ({ value, onChange }: CustomRepeatProps) => {
 									className={cx({
 										[styles.checked]: displayValue?.values?.includes(val),
 									})}
-									// eslint-disable-next-line react/no-array-index-key
 									key={`${unit}_${index}`}
 								>
 									{val}

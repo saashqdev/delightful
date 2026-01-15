@@ -46,7 +46,7 @@ const ChatProvider = observer(function ChatProvider({ children }: ChatServicePro
 					switch (payload.type) {
 						case SeqRecordType.seq:
 							const seqId = payload?.seq?.seq_id
-							// eslint-disable-next-line no-console
+
 							console.log(
 								"%c Received message from server:",
 								"background-color: green; color: white;",

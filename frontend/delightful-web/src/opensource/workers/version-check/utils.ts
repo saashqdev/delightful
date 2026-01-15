@@ -17,7 +17,6 @@ export function generateUUID() {
  */
 export const getETag = async () => {
 	try {
-		// eslint-disable-next-line no-restricted-globals
 		const response = await fetch(self.location.origin, {
 			method: "HEAD",
 			cache: "no-cache",
@@ -36,7 +35,6 @@ export const getETag = async () => {
 
 export const getLatestAppVersion = async () => {
 	try {
-		// eslint-disable-next-line no-restricted-globals
 		const response = await fetch(`${self.location.origin}/config.js`, {
 			method: "GET",
 			cache: "no-cache",

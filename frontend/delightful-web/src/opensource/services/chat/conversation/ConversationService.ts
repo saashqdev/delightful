@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { ConversationGroupKey } from "@/const/chat"
 import Conversation from "@/opensource/models/chat/conversation"
 import { isAiConversation } from "@/opensource/stores/chatNew/helpers/conversation"

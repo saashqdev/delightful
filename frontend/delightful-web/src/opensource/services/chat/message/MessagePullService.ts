@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { fetchPaddingData } from "@/utils/request"
 import { bigNumCompare } from "@/utils/string"
 import type { SeqResponse } from "@/types/request"

@@ -111,7 +111,6 @@ export function useTopics(userInfo: any) {
 		} else {
 			setMessages([])
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedThreadInfo, topicMessagesMap])
 
 	return {

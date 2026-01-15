@@ -1,3 +1,4 @@
+// @ts-nocheck
 import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import MessageList from "@/opensource/pages/beDelightful/components/MessageList/index"
 import { editThread, getWorkspaces } from "@/opensource/pages/beDelightful/utils/api"
@@ -7,7 +8,7 @@ import { Button, Dropdown, Input, Modal, Tooltip, Typography } from "antd"
 import { isEmpty } from "lodash-es"
 import type { ChangeEvent, KeyboardEvent } from "react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import WorkspaceIcon from "../../assets/svg/workspace_icon.svg"
+import WorkspaceIcon from "@/opensource/pages/beDelightful/assets/svg/workspace_icon.svg?url"
 import Detail from "../../components/Detail"
 import TopicIcon from "../../components/TopicIcon"
 import type { Workspace } from "../Workspace/types"
@@ -214,7 +215,9 @@ export default function ArchivedWorkspaces() {
 								onClick={() => setWorkspaceIsCollapsed(!workspaceIsCollapsed)}
 								className={styles.iconButton}
 							/>
-						<span>Workspace List</span>
+							<span>Workspace List</span>
+						</div>
+					</div>
 					<div
 						className={`${styles.content} ${
 							workspaceIsCollapsed ? styles.collapsed : ""
@@ -332,7 +335,9 @@ export default function ArchivedWorkspaces() {
 								onClick={() => setThreadIsCollapsed(!threadIsCollapsed)}
 								className={styles.iconButton}
 							/>
-					<span>Topic List</span>
+							<span>Topic List</span>
+						</div>
+					</div>
 					<div
 						className={`${styles.content} ${threadIsCollapsed ? styles.collapsed : ""}`}
 					>

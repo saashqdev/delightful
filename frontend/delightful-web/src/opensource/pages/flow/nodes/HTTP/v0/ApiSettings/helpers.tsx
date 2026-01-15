@@ -4,7 +4,6 @@ export function findBracedStrings(inputString: string) {
 	const matches = []
 	let match
 
-	// eslint-disable-next-line no-cond-assign
 	while ((match = regex.exec(inputString)) !== null) {
 		matches.push(match[1])
 	}

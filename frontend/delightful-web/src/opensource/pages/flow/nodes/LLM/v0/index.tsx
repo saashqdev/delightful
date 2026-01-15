@@ -50,7 +50,6 @@ export default function LLMV0() {
 		} else if (changeValues.option_tools) {
 			handleToolsChanged(changeValues)
 		} else if (changeValues.knowledge_config) {
-			// eslint-disable-next-line @typescript-eslint/no-use-before-define
 			knowledgeValueChangeHandler()
 		} else {
 			Object.entries(changeValues).forEach(([changeKey, changeValue]) => {

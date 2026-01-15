@@ -71,7 +71,6 @@ const useVersion = () => {
 					if (!currentVersion) {
 						versionRef.current = latestVersion
 					} else if (currentVersion === latestVersion) {
-						// eslint-disable-next-line no-console
 						console.log("Latest version", latestVersion)
 					} else if (
 						isBreakingVersion(currentVersion, latestVersion) &&

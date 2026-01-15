@@ -51,27 +51,29 @@ export default ({ searchKeywords }: UseDataProps) => {
 
 				// Workspace names
 				const workspaces = [
-				{ id: "ws1", name: "Delightful Project" },
-				{ id: "ws2", name: "Team Project" },
-				{ id: "ws3", name: "Personal Project" },
-				{ id: "ws4", name: "R&D Center" },
+					{ id: "ws1", name: "Delightful Project" },
+					{ id: "ws2", name: "Team Project" },
+					{ id: "ws3", name: "Personal Project" },
+					{ id: "ws4", name: "R&D Center" },
 				]
 
-			// Topic names
-			const topics = [
-				{ id: "1", name: "Topic 1" },
-				{ id: "2", name: "Topic 2" },
-				{ id: "3", name: "Topic 3" },
-				{ id: "4", name: "Topic 4" },
-				{ id: "5", name: "Topic 5" },
-				{ id: "6", name: "Topic 6" },
-				{ id: "7", name: "Topic 7" },
-				{ id: "8", name: "Topic 8" },
-				{ id: "9", name: "Topic 9" },
-				{ id: "10", name: "Topic 10" },
+				// Topic names
+				const topics = [
+					{ id: "1", name: "Topic 1" },
+					{ id: "2", name: "Topic 2" },
+					{ id: "3", name: "Topic 3" },
+					{ id: "4", name: "Topic 4" },
+					{ id: "5", name: "Topic 5" },
+					{ id: "6", name: "Topic 6" },
+					{ id: "7", name: "Topic 7" },
+					{ id: "8", name: "Topic 8" },
+					{ id: "9", name: "Topic 9" },
+					{ id: "10", name: "Topic 10" },
 				]
 
-			// Generate 60 mock data items
+				// Generate 60 mock data items
+				const mockFiles: DataItem[] = []
+				for (let i = 0; i < 60; i++) {
 					const fileType = fileTypes[Math.floor(Math.random() * fileTypes.length)]
 					const baseName = fileBaseNames[Math.floor(Math.random() * fileBaseNames.length)]
 					const workspace = workspaces[Math.floor(Math.random() * workspaces.length)]
@@ -103,12 +105,11 @@ export default ({ searchKeywords }: UseDataProps) => {
 				setLoading(false)
 			}, 500)
 		} catch (error) {
-		message.error("Failed to get marked file list")
+			message.error("Failed to get marked file list")
 			console.error("Failed to fetch starred files:", error)
 			setLoading(false)
 		}
 	}
-
 	useEffect(() => {
 		fetchData()
 	}, [])

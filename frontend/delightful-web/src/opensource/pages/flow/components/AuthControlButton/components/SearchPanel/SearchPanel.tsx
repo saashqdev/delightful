@@ -44,7 +44,6 @@ export default function SearchPanel() {
 										[styles.active]: tab === tabItem.value,
 									})}
 									onClick={tabItem.onClick}
-									// eslint-disable-next-line react/no-array-index-key
 									key={i}
 									value={tabItem.value}
 								>

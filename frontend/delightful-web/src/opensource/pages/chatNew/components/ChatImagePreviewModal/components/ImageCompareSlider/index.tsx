@@ -54,7 +54,6 @@ function ImageCompareSlider(props: ImageCompareSliderProps) {
 
 		window.addEventListener("pointerup", handleGlobalPointerUp)
 
-		// eslint-disable-next-line consistent-return
 		return () => {
 			window.removeEventListener("pointerup", handleGlobalPointerUp)
 		}

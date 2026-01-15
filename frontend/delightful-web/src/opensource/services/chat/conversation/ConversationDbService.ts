@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import chatDb from "@/opensource/database/chat"
 import Conversation from "@/opensource/models/chat/conversation"
 import { ConversationObject } from "@/opensource/models/chat/conversation/types"

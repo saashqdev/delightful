@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import OrganizationDotsStore from "@/opensource/stores/chatNew/dots/OrganizationDotsStore"
 import OrganizationDotsDbService from "./OrganizationDotsDbService"
 import { bigNumCompare } from "@/utils/string"

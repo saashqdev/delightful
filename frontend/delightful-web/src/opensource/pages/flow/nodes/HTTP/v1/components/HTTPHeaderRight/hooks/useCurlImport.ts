@@ -1,5 +1,4 @@
-﻿/* eslint-disable no-console */
-import { useState, useCallback } from "react"
+﻿import { useState, useCallback } from "react"
 import { useFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import { message } from "antd"
 import { useCurrentNode } from "@bedelightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"

@@ -3,7 +3,6 @@ const table: number[] = []
 for (let i = 0; i < 256; i += 1) {
 	let c = i
 	for (let j = 0; j < 8; j += 1) {
-		// eslint-disable-next-line no-bitwise
 		c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1
 	}
 	table[i] = c
@@ -12,7 +11,6 @@ for (let i = 0; i < 256; i += 1) {
 function crc32(str: string) {
 	let crc = 0
 	for (let i = 0; i < str.length; i += 1) {
-		// eslint-disable-next-line no-bitwise
 		crc = ((crc >>> 8) ^ table[(crc ^ str.charCodeAt(i)) & 0xff]) & 0xffffffff
 	}
 	return crc
@@ -20,11 +18,11 @@ function crc32(str: string) {
 
 export function textToColors(text: string) {
 	const hash = crc32(text)
-	// eslint-disable-next-line no-bitwise
+
 	const r = (hash >> 16) & 0xff
-	// eslint-disable-next-line no-bitwise
+
 	const g = (hash >> 8) & 0xff
-	// eslint-disable-next-line no-bitwise
+
 	const b = hash & 0xff
 
 	// Define an array to store generated similar color values

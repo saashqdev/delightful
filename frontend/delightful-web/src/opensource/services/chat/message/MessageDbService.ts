@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import type { Collection, Table, UpdateSpec } from "dexie"
 import { Dexie } from "dexie"
 import type { SeqResponse } from "@/types/request"

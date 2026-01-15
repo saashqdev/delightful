@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import MessageImagePreviewStore from "@/opensource/stores/chatNew/messagePreview/ImagePreviewStore"
 import ConversationStore from "@/opensource/stores/chatNew/conversation"
 import { isFunction } from "lodash-es"

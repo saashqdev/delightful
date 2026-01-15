@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import chatDb from "@/opensource/database/chat"
 import EditorDraftStore, { EditorDraft } from "@/opensource/stores/chatNew/editorDraft"
 import Logger from "@/utils/log/Logger"

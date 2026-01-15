@@ -37,7 +37,7 @@ export const onconnect = function onconnect(e: { ports: any[] }) {
 	// Store port
 	portList.push(port)
 	// Listen for incoming messages
-	// eslint-disable-next-line @typescript-eslint/no-shadow
+
 	port.onmessage = async function onmessage(e: any) {
 		// Retrieve data
 		const data = e.data || {}

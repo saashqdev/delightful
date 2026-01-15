@@ -1,5 +1,4 @@
-﻿/* eslint-disable no-nested-ternary */
-// src/utils/curlToApiStructure.ts
+﻿// src/utils/curlToApiStructure.ts
 import { generateSnowFlake } from "../helpers"
 import { parseCurlCommand } from "./curlParser"
 

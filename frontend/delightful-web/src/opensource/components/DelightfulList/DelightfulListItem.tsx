@@ -60,7 +60,6 @@ const ItemAvatar = memo(
 
 // Title component handles title rendering separately
 const ItemTitle = memo(
-	// eslint-disable-next-line react/prop-types
 	<D extends DelightfulListItemType>({
 		title,
 		isHover,

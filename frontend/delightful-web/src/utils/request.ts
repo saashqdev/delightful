@@ -19,7 +19,6 @@ export async function fetchPaddingData<I>(
 	let hasMore = true
 
 	while (hasMore) {
-		// eslint-disable-next-line no-await-in-loop
 		const response = await fetch({ page_token })
 
 		const { items, has_more, page_token: nextPageToken } = response

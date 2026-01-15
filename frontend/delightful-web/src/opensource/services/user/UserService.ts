@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import type { StructureUserItem } from "@/types/organization"
 import type { User } from "@/types/user"
 import { keyBy } from "lodash-es"

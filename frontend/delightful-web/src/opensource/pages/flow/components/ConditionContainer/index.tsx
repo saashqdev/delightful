@@ -36,7 +36,6 @@ const ConditionContainer = ({
 		}
 	})
 
-	// eslint-disable-next-line no-underscore-dangle
 	const handleValueChange = useMemoizedFn((_changedValues, allValues) => {
 		if (!form) return
 		const formData = cloneDeep(allValues.conditions)

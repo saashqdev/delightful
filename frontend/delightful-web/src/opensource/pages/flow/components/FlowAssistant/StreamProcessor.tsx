@@ -151,7 +151,7 @@ function StreamProcessor(props: StreamProcessorProps): React.ReactElement | null
 			const commands: any[] = []
 
 			// Find all complete commands
-			// eslint-disable-next-line no-cond-assign
+
 			while ((match = commandRegex.exec(buffer)) !== null) {
 				try {
 					const commandJson = match[1].trim()
@@ -604,7 +604,7 @@ function StreamProcessor(props: StreamProcessorProps): React.ReactElement | null
 		})
 
 		// Cleanup function
-		// eslint-disable-next-line consistent-return
+
 		return () => {
 			console.log(`useEffect cleanup function executed (stream ID: ${currentResponseBodyId})`)
 			isAborted = true

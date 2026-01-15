@@ -55,7 +55,6 @@ const WaterfallList = memo(({ data, onImageClick, ...rest }: WaterfallListProps)
 			setPausedFalse()
 		}, 200)
 
-		// eslint-disable-next-line consistent-return
 		return () => clearTimeout(timer)
 	}, [data])
 
@@ -105,7 +104,6 @@ const WaterfallList = memo(({ data, onImageClick, ...rest }: WaterfallListProps)
 			}
 		}
 
-		// eslint-disable-next-line consistent-return
 		return () => {
 			items.forEach((item) => observer.unobserve(item))
 			// observer.disconnect();

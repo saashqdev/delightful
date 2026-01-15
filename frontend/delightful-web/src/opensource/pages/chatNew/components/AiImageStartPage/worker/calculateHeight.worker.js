@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-globals
 const that = self
 that.onmessage = (e) => {
 	const { id, naturalWidth, naturalHeight, itemWidth } = e.data

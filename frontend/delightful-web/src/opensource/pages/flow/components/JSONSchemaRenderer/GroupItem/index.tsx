@@ -1,5 +1,4 @@
-﻿/* eslint-disable react/no-array-index-key */
-import { FormItemType } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+﻿import { FormItemType } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import Schema from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import React, { useMemo, useState } from "react"
 import BaseItem from "../BaseItem"

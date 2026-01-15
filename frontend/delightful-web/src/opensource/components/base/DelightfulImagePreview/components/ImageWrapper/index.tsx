@@ -182,7 +182,6 @@ const ImageWrapper = observer((props: ImageWrapperProps) => {
 				>
 					<div
 						className={styles.image}
-						// eslint-disable-next-line react/no-danger
 						dangerouslySetInnerHTML={{ __html: fileInfo?.url }}
 					/>
 				</button>

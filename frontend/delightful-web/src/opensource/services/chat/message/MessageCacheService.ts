@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import type { FullMessage } from "@/types/chat/message"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import topicStore from "@/opensource/stores/chatNew/topic"

@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import { isAiConversation } from "@/opensource/stores/chatNew/helpers/conversation"
 import type { CreateTopicMessage, DeleteTopicMessage, UpdateTopicMessage } from "@/types/chat/topic"
 import type { SeqResponse } from "@/types/request"

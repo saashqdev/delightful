@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import type { FullMessage, MessagePage } from "@/types/chat/message"
 
 interface ConversationMessages {

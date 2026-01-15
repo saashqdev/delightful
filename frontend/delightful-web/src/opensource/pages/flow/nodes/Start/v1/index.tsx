@@ -117,7 +117,7 @@ export default function StartV1() {
 
 			const node = currentNode
 
-			// eslint-disable-next-line no-restricted-syntax, prefer-const
+			// eslint-disable-next-line prefer-const
 			for (let [triggerType, newConfig] of Object.entries(triggerTypeToConfig)) {
 				// @ts-ignore
 				triggerType = Number(triggerType)
@@ -125,7 +125,7 @@ export default function StartV1() {
 					// @ts-ignore
 					trigger_type: triggerType as number,
 				})
-				// eslint-disable-next-line no-continue
+
 				if (branchIndex === -1) continue
 				const oldBranch = node?.params?.branches?.[branchIndex]
 				if (!oldBranch) return

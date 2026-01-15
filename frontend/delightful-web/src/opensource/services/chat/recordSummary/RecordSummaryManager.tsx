@@ -13,7 +13,6 @@ type MessageQueueItem = {
 class RecordSummaryManager {
 	messageQueue: MessageQueueItem[] = []
 
-	// eslint-disable-next-line class-methods-use-this
 	get isRecordingKey() {
 		return `${userStore.user.userInfo?.delightful_id || "default"}_isRecording`
 	}

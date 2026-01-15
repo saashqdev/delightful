@@ -124,7 +124,7 @@ class MessageApplyService {
 				break
 			default:
 				// Check custom handlers for a match
-				for (const handler of this.customHandlers.values()) {
+				for (const handler of Array.from(this.customHandlers.values())) {
 					if (handler.isMatch(message)) {
 						handler.apply(message, { ...options, isFromOtherTab: true })
 						return

@@ -74,7 +74,6 @@ const DelightfulMarpit = ({ content, className }: DelightfulMarpitProps) => {
 			ref={deckDivRef}
 			className={cx(styles.container, className, "reveal")}
 			title="marpit"
-			// eslint-disable-next-line react/no-danger
 			dangerouslySetInnerHTML={{
 				__html: html,
 			}}

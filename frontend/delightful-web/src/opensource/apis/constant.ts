@@ -1,5 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
-
 export const enum RequestUrl {
 	/** User */
 	/** Get user account list */

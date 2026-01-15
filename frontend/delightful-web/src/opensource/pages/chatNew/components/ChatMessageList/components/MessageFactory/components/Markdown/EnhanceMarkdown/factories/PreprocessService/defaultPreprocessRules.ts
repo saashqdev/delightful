@@ -19,7 +19,7 @@ export const TASK_LIST_REGEX = /^(\s*)-\s+\[(x| )\]\s+(.+)$/gm
 // GFM table regex - fixed version that correctly matches markdown tables
 // First group: header row, second group: separator row (mainly contains dashes), third group: data rows
 export const TABLE_REGEX =
-	/^\s*(\|[^\n]*\|)\s*\n\s*(\|[\s\-:|\s]*\|)\s*\n((?:\s*\|[^\n]*\|\s*(?:\n|$))*)/ gm
+	/^\s*(\|[^\n]*\|)\s*\n\s*(\|[\s\-:|\s]*\|)\s*\n((?:\s*\|[^\n]*\|\s*(?:\n|$))*)/gm
 // Linked image regex - match [![alt](img_url)](link_url) format
 export const LINKED_IMAGE_REGEX = /\[!\[([^\]]*)\]\(([^)]+)\)\]\(([^)]+)\)/g
 // GFM horizontal rule regex - match ---, ***, ___ format
@@ -27,7 +27,7 @@ export const HORIZONTAL_RULE_REGEX = /^(?:---+|\*\*\*+|___+)$/gm
 // Footnote reference regex - match [^1] format
 export const FOOTNOTE_REF_REGEX = /\[\^([^\]]+)\]/g
 // Footnote definition regex - match [^1]: content format
-export const FOOTNOTE_DEF_REGEX = /^\[\^([^\]]+)\]:\s*(.+?)(?=\n\n|\n$|$)/gms
+export const FOOTNOTE_DEF_REGEX = /^\[\^([^\]]+)\]:\s*(.+?)(?=\n\n|\n$|$)/gm
 // Abbreviation definition regex - match *[HTML]: HyperText Markup Language format
 export const ABBREVIATION_DEF_REGEX = /^\*\[([^\]]+)\]:\s*(.+)$/gm
 // Multi-level task list regex - supports nested task lists

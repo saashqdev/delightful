@@ -29,7 +29,6 @@ export default function useHeader({ message, messageContent }: UseHeaderProps) {
 	}, [messageContent?.attachments])
 
 	const messageTimeStr = useMemo(() => {
-		// eslint-disable-next-line no-unsafe-optional-chaining
 		return getDefaultSummaryTimeStr(message?.send_time! * 1000)
 	}, [getDefaultSummaryTimeStr, message?.send_time])
 

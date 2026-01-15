@@ -62,7 +62,6 @@ class GroupInfoSerivce {
 		})
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	fetchGroupMembers(groupId: string) {
 		return fetchPaddingData((params) =>
 			ChatApi.getGroupConversationMembers({

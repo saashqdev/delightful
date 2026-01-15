@@ -215,7 +215,6 @@ export const shadowFlow = (flow: DelightfulFlow.Flow) => {
 	const cloneFlow = cloneDeep(flow)
 
 	const allCodeNode = Object.values(cloneFlow.nodes).filter(
-		// eslint-disable-next-line eqeqeq
 		(n) => n.node_type == customNodeType.Code,
 	)
 
@@ -234,7 +233,6 @@ export const unShadowFlow = (flow: DelightfulFlow.Flow) => {
 	const cloneFlow = cloneDeep(flow)
 
 	const allCodeNode = Object.values(cloneFlow.nodes).filter(
-		// eslint-disable-next-line eqeqeq
 		(n) => n.node_type == customNodeType.Code,
 	)
 

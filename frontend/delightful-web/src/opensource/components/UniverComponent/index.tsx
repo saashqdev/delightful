@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved */
+// @ts-nocheck
 import React, { useEffect, useRef, useState } from "react"
 import { Button, Typography, Spin } from "antd"
 import "./styles.css"

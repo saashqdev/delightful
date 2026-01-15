@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import MessageCacheStore from "@/opensource/stores/chatNew/messageCache"
 import MessageStore from "@/opensource/stores/chatNew/message"
 import { isAppMessageId, genAppMessageId } from "@/utils/random"

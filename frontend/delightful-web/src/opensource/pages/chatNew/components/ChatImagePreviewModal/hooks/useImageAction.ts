@@ -93,7 +93,6 @@ const useImageAction = (info?: ImagePreviewInfo) => {
 			updatePercent()
 		}
 
-		// eslint-disable-next-line consistent-return
 		return clearTimer
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [info, loading, setLoadingFalse, updatePercent])

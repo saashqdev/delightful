@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import type { ThemeMode } from "antd-style"
 import type { Common } from "@/types/common"
 import type * as apis from "@/opensource/apis"

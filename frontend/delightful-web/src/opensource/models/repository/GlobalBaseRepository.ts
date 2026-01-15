@@ -6,7 +6,6 @@ import { AbstractBaseRepository } from "./AbstractBaseRepository"
  * @description Global repository base class
  */
 export class GlobalBaseRepository<T> extends AbstractBaseRepository<T> {
-	// eslint-disable-next-line class-methods-use-this
 	protected async getDB(): Promise<Dexie> {
 		return DatabaseManager.getInstance().getGlobalDatabase()
 	}

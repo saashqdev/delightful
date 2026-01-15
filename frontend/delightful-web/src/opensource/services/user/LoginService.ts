@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import type { LoginFormValuesMap, LoginStepResult } from "@/opensource/pages/login/types"
 import { Login } from "@/types/login"
 import type { User } from "@/types/user"

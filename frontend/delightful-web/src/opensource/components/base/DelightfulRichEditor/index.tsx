@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import type { Content, Editor, UseEditorOptions, EditorEvents } from "@tiptap/react"
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"

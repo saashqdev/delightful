@@ -19,7 +19,7 @@ const isDev = process.env.NODE_ENV === "development"
 
 export default defineConfig({
 	build: {
-		target: "es2015",
+		target: "es2020",
 		rollupOptions: {
 			input: {
 				main: resolve(__dirname, "index.html"),

@@ -104,6 +104,9 @@ export class UserService {
 		// 	// Step 2: Get environment configuration
 		// 	const config = await loginService.envSyncStep(deployCode)
 		// 	console.warn("withPrivateDeploy Step 2: Get deployConfig", config)
+		// }
+	}
+
 	/**
 	 * @description Remove current user token
 	 */

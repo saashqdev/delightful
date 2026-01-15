@@ -20,7 +20,7 @@ RUN mkdir -p /root/.config/matplotlib
 # Copy font check script
 COPY deploy/ /app/deploy/
 
-# Check matplotlib font (if font is not WenQuanYi, build will fail)
+# Check matplotlib font (if font is not DejaVu, build will fail)
 RUN python /app/deploy/configure_font.py
 RUN python /app/deploy/check_font.py
 

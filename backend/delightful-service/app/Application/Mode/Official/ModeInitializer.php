@@ -330,7 +330,7 @@ class ModeInitializer
                     'en_US' => 'research reportmodetype',
                 ]),
                 'placeholder_i18n' => json_encode([
-                    'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
+                    'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Mega Marge will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
                     'en_US' => 'youcaninputresearchreportthemeandspecificrequirement,oruploadfile,exceedslevelDelightfulwillforyouconductcompleteanddetailedreportwrite. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'report',

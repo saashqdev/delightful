@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
 def check_matplotlib_font():
-    """Check if matplotlib is currently using WenQuanYi font. If not, exit the image build"""
+    """Check if matplotlib is currently using DejaVu font. If not, exit the image build"""
 
     # Create test text to confirm current font in use
     fig, ax = plt.subplots()
@@ -22,12 +22,12 @@ def check_matplotlib_font():
 
     print(f"Current font used by matplotlib: {font_name}")
 
-    # Check if it is WenQuanYi font
-    if "wqy" in font_name.lower() or "wenquanyi" in font_name.lower():
-        print("✓ The font currently in use is WenQuanYi, which meets requirements")
+    # Check if it is DejaVu font
+    if "dejavu" in font_name.lower():
+        print("✓ The font currently in use is DejaVu, which meets requirements")
         return True
     else:
-        print("✗ The font currently in use is not WenQuanYi, exiting image build")
+        print("✗ The font currently in use is not DejaVu, exiting image build")
         sys.exit(1)  # Non-zero exit code will cause Docker build to fail
 
 if __name__ == "__main__":

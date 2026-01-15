@@ -4,7 +4,7 @@
 
 Be Delightful Module is an extension package based on the Hyperf framework, designed as an enhanced extension module specifically for delightful-service. This module adopts Domain-Driven Design (DDD) architecture, providing a clear layered structure and rich functional components for applications.
 
-Be Delightful Module needs to be used together with delightful-service. Its core function is to establish an information transmission channel between users and the Super Maggie AI agent by taking over delightful-service message events. This design allows users to interact seamlessly with the agent, thereby obtaining a more intelligent service experience.
+Be Delightful Module needs to be used together with delightful-service. Its core function is to establish an information transmission channel between users and the Mega Marge AI agent by taking over delightful-service message events. This design allows users to interact seamlessly with the agent, thereby obtaining a more intelligent service experience.
 
 As a bridging module, Be Delightful Module not only handles message delivery but also converts data formats, coordinates event processes, and provides necessary context information to ensure the agent can accurately understand user intent and provide appropriate responses.
 
@@ -13,7 +13,7 @@ As a bridging module, Be Delightful Module not only handles message delivery but
 - Built on Hyperf 3.1, perfectly adapted to existing delightful-service architecture
 - Follows Domain-Driven Design (DDD) architecture with clear code organization and easy maintenance
 - Provides resource sharing functionality, supporting cross-module resource access
-- Serves as message channel connecting users with Super Maggie AI agent
+- Serves as message channel connecting users with Mega Marge AI agent
 - Supports event listening and processing, real-time response to user requests
 - Provides workspace management, supporting multi-topic and multi-task processing
 - Implements file management system, supporting agent file operations
@@ -24,7 +24,7 @@ As a bridging module, Be Delightful Module not only handles message delivery but
 As an extension of delightful-service, Be Delightful Module plays the following role in the overall system:
 
 ```
-User Request → delightful-service → Be Delightful Module → Super Maggie AI Agent
+User Request → delightful-service → Be Delightful Module → Mega Marge AI Agent
                  ↑                 |
                  └─────────────────┘
               Response Return
@@ -34,7 +34,7 @@ The module integrates with delightful-service through the following methods:
 
 1. Listen to message events from delightful-service
 2. Process and transform message formats
-3. Forward messages to Super Maggie AI agent
+3. Forward messages to Mega Marge AI agent
 4. Receive and process agent responses
 5. Return processing results to delightful-service
 
@@ -131,8 +131,8 @@ The basic flow for Be Delightful Module to process messages is as follows:
 1. User sends message in delightful-service
 2. delightful-service triggers message event
 3. Be Delightful Module listens to the event and extracts message content
-4. Message is converted to a format understandable by Super Maggie AI agent
-5. Message is sent to Super Maggie AI agent
+4. Message is converted to a format understandable by Mega Marge AI agent
+5. Message is sent to Mega Marge AI agent
 6. Agent processes the message and generates a response
 7. Be Delightful Module receives the response and converts the format
 8. Response is passed back to delightful-service through events

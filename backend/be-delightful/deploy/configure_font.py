@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
 def create_font_config():
-    """Create system default font configuration file, set WenQuanYi as preferred font"""
+    """Create system default font configuration file, set DejaVu as preferred font"""
 
     font_config = """<?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -15,19 +15,19 @@ def create_font_config():
   <alias>
     <family>sans-serif</family>
     <prefer>
-      <family>WenQuanYi Zen Hei</family>
+      <family>DejaVu Sans</family>
     </prefer>
   </alias>
   <alias>
     <family>serif</family>
     <prefer>
-      <family>WenQuanYi Zen Hei</family>
+      <family>DejaVu Serif</family>
     </prefer>
   </alias>
   <alias>
     <family>monospace</family>
     <prefer>
-      <family>WenQuanYi Zen Hei Mono</family>
+      <family>DejaVu Sans Mono</family>
     </prefer>
   </alias>
 </fontconfig>
@@ -70,7 +70,7 @@ def configure_matplotlib():
     # Configuration content
     config_content = """backend: Agg
 font.family: sans-serif
-font.sans-serif: WenQuanYi Zen Hei, DejaVu Sans, Arial, sans-serif
+font.sans-serif: DejaVu Sans, Arial, sans-serif
 axes.unicode_minus: False
 """
 
@@ -86,7 +86,7 @@ axes.unicode_minus: False
     return True
 
 def check_matplotlib_font():
-    """Check if matplotlib is currently using WenQuanYi font, if not exit image build"""
+    """Check if matplotlib is currently using DejaVu font, if not exit image build"""
 
     # Create a test text to confirm the current font in use
     fig, ax = plt.subplots()
@@ -101,12 +101,12 @@ def check_matplotlib_font():
 
     print(f"Font currently used by matplotlib: {font_name}")
 
-    # Check if it is WenQuanYi font
-    if "wqy" in font_name.lower() or "wenquanyi" in font_name.lower():
-        print("✓ Current font in use is WenQuanYi, meets requirements")
+    # Check if it is DejaVu font
+    if "dejavu" in font_name.lower():
+        print("✓ Current font in use is DejaVu, meets requirements")
         return True
     else:
-        print("✗ Current font in use is not WenQuanYi, exiting image build")
+        print("✗ Current font in use is not DejaVu, exiting image build")
         sys.exit(1)  # Non-zero exit code will cause Docker build to fail
 
 if __name__ == "__main__":

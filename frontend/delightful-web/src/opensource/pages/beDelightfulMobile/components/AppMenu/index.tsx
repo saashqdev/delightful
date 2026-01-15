@@ -13,7 +13,7 @@ export default function AppMenu() {
 			<div className={styles.title}>About</div>
 			<div>
 				<div className={cx(styles.item)} onClick={handleOpenAbout} role="button">
-					<IconInfoCircle className={styles.icon} /> <span>Super Maggie</span>
+					<IconInfoCircle className={styles.icon} /> <span>Mega Marge</span>
 				</div>
 				{/* <div className={styles.item}>
 					<IconShare /> <span>Share Topic</span>

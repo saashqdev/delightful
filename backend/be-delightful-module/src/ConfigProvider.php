@@ -6,4 +6,187 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful, Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful; use App\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessageInterface; use App\Domain\Chat\Event\Agent\AgentExecuteInterface; use BeDelightful\BeDelightful\Application\Share\Adapter\TopicShareableResource; use BeDelightful\BeDelightful\Application\Share\Factory\ShareableResourceFactory; use BeDelightful\BeDelightful\Application\Share\Service\ResourceShareAppService; use BeDelightful\BeDelightful\Application\BeAgent\Event\Subscribe\ProjectOperatorLogSubscriber; use BeDelightful\BeDelightful\Application\BeAgent\Event\Subscribe\BeAgentMessageSubscriberV2; use BeDelightful\BeDelightful\Application\BeAgent\Service\AgentAppService; use BeDelightful\BeDelightful\Application\BeAgent\Service\FileProcessAppService; use BeDelightful\BeDelightful\Application\BeAgent\Service\HandleAgentMessageAppService; use BeDelightful\BeDelightful\Application\BeAgent\Service\MessageQueueAppService; use BeDelightful\BeDelightful\Application\BeAgent\Service\MessageScheduleAppService; use BeDelightful\BeDelightful\Domain\Agent\Repository\Facade\BeDelightfulAgentRepositoryInterface; use BeDelightful\BeDelightful\Domain\Agent\Repository\Persistence\BeDelightfulAgentRepository; use BeDelightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage; use BeDelightful\BeDelightful\Domain\Share\Repository\Facade\ResourceShareRepositoryInterface; use BeDelightful\BeDelightful\Domain\Share\Repository\Persistence\ResourceShareRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleLogRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectForkRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectOperationLogRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileVersionRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskMessageRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TokenUsageRecordRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceVersionRepositoryInterface; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageQueueRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageScheduleLogRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageScheduleRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectForkRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectMemberRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectMemberSettingRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectOperationLogRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileCleanupRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileVersionRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskMessageRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TokenUsageRecordRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TopicRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\WorkspaceRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\WorkspaceVersionRepository; use BeDelightful\BeDelightful\Domain\BeAgent\Service\MessageScheduleDomainService; use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectOperationLogDomainService; use BeDelightful\BeDelightful\Domain\BeAgent\Service\TaskFileVersionDomainService; use BeDelightful\BeDelightful\ErrorCode\ShareErrorCode; use BeDelightful\BeDelightful\ErrorCode\BeAgentErrorCode; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\SandboxInterface; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine\SandboxService; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\SandboxAgentInterface; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\SandboxAgentService; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\AsrRecorderInterface; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\AsrRecorderService; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\FileConverterInterface; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\FileConverterService; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\SandboxGatewayInterface; use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\SandboxGatewayService; use BeDelightful\BeDelightful\Listener\AddRouteListener; use BeDelightful\BeDelightful\Listener\I18nLoadListener; use RecursiveDirectoryIterator; use RecursiveIteratorIterator; class ConfigProvider { public function __invoke(): array { define('BE_DELIGHTFUL_MODULE_PATH', BASE_PATH . '/vendor/delightful/be-delightful-module'); $publishConfigs = []; // Traverse publish/route all files in folder $routeDir = __DIR__ . '/../publish/route/'; if (is_dir($routeDir)) { $iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator($routeDir, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST ); foreach ($iterator as $file) { if ($file->isFile()) { $relativePath = $file->getSubPath() . '/' . $file->getFilename(); $publishConfigs[] = [ 'id' => 'route_' . str_replace('/', '_', $relativePath), 'description' => 'Route file: ' . $relativePath, 'source' => $file->getPathname(), 'destination' => BASE_PATH . '/config/' . $relativePath, ]; } } } return [ 'dependencies_priority' => [ // Assistant execution event AgentExecuteInterface::class => BeAgentMessageSubscriberV2::class, BeAgentMessageInterface::class => BeAgentMessage::class, ], 'dependencies' => [ // addInterface to implementation class mapping TaskFileRepositoryInterface::class => TaskFileRepository::class, TaskFileCleanupRepositoryInterface::class => TaskFileCleanupRepository::class, TaskFileVersionRepositoryInterface::class => TaskFileVersionRepository::class, TopicRepositoryInterface::class => TopicRepository::class, TaskRepositoryInterface::class => TaskRepository::class, WorkspaceRepositoryInterface::class => WorkspaceRepository::class, TaskMessageRepositoryInterface::class => TaskMessageRepository::class, ProjectRepositoryInterface::class => ProjectRepository::class, ProjectOperationLogRepositoryInterface::class => ProjectOperationLogRepository::class, ProjectOperationLogDomainService::class => ProjectOperationLogDomainService::class, SandboxInterface::class => SandboxService::class, ProjectMemberRepositoryInterface::class => ProjectMemberRepository::class, ProjectMemberSettingRepositoryInterface::class => ProjectMemberSettingRepository::class, // addSandboxOS related service dependency injection SandboxGatewayInterface::class => SandboxGatewayService::class, SandboxAgentInterface::class => SandboxAgentService::class, FileConverterInterface::class => FileConverterService::class, AsrRecorderInterface::class => AsrRecorderService::class, AgentAppService::class => AgentAppService::class, // addFileProcessAppService dependency injection FileProcessAppService::class => FileProcessAppService::class, // addHandleAgentMessageAppService dependency injection HandleAgentMessageAppService::class => HandleAgentMessageAppService::class, // addMessageQueueAppService dependency injection MessageQueueAppService::class => MessageQueueAppService::class, // addMessageScheduleAppService dependency injection MessageScheduleAppService::class => MessageScheduleAppService::class, // addshare related services ShareableResourceFactory::class => ShareableResourceFactory::class, TopicShareableResource::class => TopicShareableResource::class, ResourceShareRepositoryInterface::class => ResourceShareRepository::class, ResourceShareAppService::class => ResourceShareAppService::class, TokenUsageRecordRepositoryInterface::class => TokenUsageRecordRepository::class, WorkspaceVersionRepositoryInterface::class => WorkspaceVersionRepository::class, ProjectForkRepositoryInterface::class => ProjectForkRepository::class, MessageQueueRepositoryInterface::class => MessageQueueRepository::class, MessageScheduleLogRepositoryInterface::class => MessageScheduleLogRepository::class, MessageScheduleRepositoryInterface::class => MessageScheduleRepository::class, // agent management BeDelightfulAgentRepositoryInterface::class => BeDelightfulAgentRepository::class, TaskFileVersionDomainService::class => TaskFileVersionDomainService::class, MessageScheduleDomainService::class => MessageScheduleDomainService::class, ], 'listeners' => [ AddRouteListener::class, I18nLoadListener::class, ProjectOperatorLogSubscriber::class, ], 'error_message' => [ 'error_code_mapper' => [ BeAgentErrorCode::class => [51000, 51299], ShareErrorCode::class => [51300, 51400], ], ], 'commands' => [], 'annotations' => [ 'scan' => [ 'paths' => [ __DIR__, ], ], ], 'publish' => $publishConfigs, ]; } public function getRoutes(): array { return [ 'routes' => [ 'path' => __DIR__ . '/../publish/route', ], ]; } } 
+namespace Delightful\BeDelightful;
+
+use App\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessageInterface;
+use App\Domain\Chat\Event\Agent\AgentExecuteInterface;
+use BeDelightful\BeDelightful\Application\BeAgent\Event\Subscribe\BeAgentMessageSubscriberV2;
+use BeDelightful\BeDelightful\Application\BeAgent\Event\Subscribe\ProjectOperatorLogSubscriber;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\FileProcessAppService;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\HandleAgentMessageAppService;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\MessageQueueAppService;
+use BeDelightful\BeDelightful\Application\BeAgent\Service\MessageScheduleAppService;
+use BeDelightful\BeDelightful\Application\Share\Adapter\TopicShareableResource;
+use BeDelightful\BeDelightful\Application\Share\Factory\ShareableResourceFactory;
+use BeDelightful\BeDelightful\Application\Share\Service\ResourceShareAppService;
+use BeDelightful\BeDelightful\Domain\Agent\Repository\Facade\BeDelightfulAgentRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\Agent\Repository\Persistence\BeDelightfulAgentRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectForkRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileVersionRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskMessageRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageQueueRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageScheduleLogRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageScheduleRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectForkRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectMemberRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectMemberSettingRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectOperationLogRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileCleanupRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileVersionRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskMessageRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TokenUsageRecordRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TopicRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\WorkspaceRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Persistence\WorkspaceVersionRepository;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\MessageScheduleDomainService;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectOperationLogDomainService;
+use BeDelightful\BeDelightful\Domain\BeAgent\Service\TaskFileVersionDomainService;
+use BeDelightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage;
+use BeDelightful\BeDelightful\Domain\Share\Repository\Facade\ResourceShareRepositoryInterface;
+use BeDelightful\BeDelightful\Domain\Share\Repository\Persistence\ResourceShareRepository;
+use BeDelightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use BeDelightful\BeDelightful\ErrorCode\ShareErrorCode;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\SandboxInterface;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine\SandboxService;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\SandboxAgentInterface;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\SandboxAgentService;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\AsrRecorderInterface;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\AsrRecorderService;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\FileConverterInterface;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\FileConverterService;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\SandboxGatewayInterface;
+use BeDelightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\SandboxGatewayService;
+use BeDelightful\BeDelightful\Listener\AddRouteListener;
+use BeDelightful\BeDelightful\Listener\I18nLoadListener;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+
+class ConfigProvider
+{
+    public function __invoke(): array
+    {
+        define('BE_DELIGHTFUL_MODULE_PATH', BASE_PATH . '/vendor/delightful/be-delightful-module');
+        $publishConfigs = [];
+
+        // Traverse publish/route all files in folder
+        $routeDir = __DIR__ . '/../publish/route/';
+        if (is_dir($routeDir)) {
+            $iterator = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($routeDir, RecursiveDirectoryIterator::SKIP_DOTS),
+                RecursiveIteratorIterator::SELF_FIRST
+            );
+
+            foreach ($iterator as $file) {
+                if ($file->isFile()) {
+                    $relativePath = $file->getSubPath() . '/' . $file->getFilename();
+                    $publishConfigs[] = [
+                        'id' => 'route_' . str_replace('/', '_', $relativePath),
+                        'description' => 'Route file: ' . $relativePath,
+                        'source' => $file->getPathname(),
+                        'destination' => BASE_PATH . '/config/' . $relativePath,
+                    ];
+                }
+            }
+        }
+
+        return [
+            'dependencies_priority' => [
+                // Assistant execution event
+                AgentExecuteInterface::class => BeAgentMessageSubscriberV2::class,
+                BeAgentMessageInterface::class => BeAgentMessage::class,
+            ],
+            'dependencies' => [
+                // addInterface to implementation class mapping
+                TaskFileRepositoryInterface::class => TaskFileRepository::class,
+                TaskFileCleanupRepositoryInterface::class => TaskFileCleanupRepository::class,
+                TaskFileVersionRepositoryInterface::class => TaskFileVersionRepository::class,
+                TopicRepositoryInterface::class => TopicRepository::class,
+                TaskRepositoryInterface::class => TaskRepository::class,
+                WorkspaceRepositoryInterface::class => WorkspaceRepository::class,
+                TaskMessageRepositoryInterface::class => TaskMessageRepository::class,
+                ProjectRepositoryInterface::class => ProjectRepository::class,
+                ProjectOperationLogRepositoryInterface::class => ProjectOperationLogRepository::class,
+                ProjectOperationLogDomainService::class => ProjectOperationLogDomainService::class,
+                SandboxInterface::class => SandboxService::class,
+                ProjectMemberRepositoryInterface::class => ProjectMemberRepository::class,
+                ProjectMemberSettingRepositoryInterface::class => ProjectMemberSettingRepository::class,
+                // addSandboxOS related service dependency injection
+                SandboxGatewayInterface::class => SandboxGatewayService::class,
+                SandboxAgentInterface::class => SandboxAgentService::class,
+                FileConverterInterface::class => FileConverterService::class,
+                AsrRecorderInterface::class => AsrRecorderService::class,
+                AgentAppService::class => AgentAppService::class,
+                // addFileProcessAppService dependency injection
+                FileProcessAppService::class => FileProcessAppService::class,
+                // addHandleAgentMessageAppService dependency injection
+                HandleAgentMessageAppService::class => HandleAgentMessageAppService::class,
+                // addMessageQueueAppService dependency injection
+                MessageQueueAppService::class => MessageQueueAppService::class,
+                // addMessageScheduleAppService dependency injection
+                MessageScheduleAppService::class => MessageScheduleAppService::class,
+                // addshare related services
+                ShareableResourceFactory::class => ShareableResourceFactory::class,
+                TopicShareableResource::class => TopicShareableResource::class,
+                ResourceShareRepositoryInterface::class => ResourceShareRepository::class,
+                ResourceShareAppService::class => ResourceShareAppService::class,
+                TokenUsageRecordRepositoryInterface::class => TokenUsageRecordRepository::class,
+                WorkspaceVersionRepositoryInterface::class => WorkspaceVersionRepository::class,
+                ProjectForkRepositoryInterface::class => ProjectForkRepository::class,
+                MessageQueueRepositoryInterface::class => MessageQueueRepository::class,
+                MessageScheduleLogRepositoryInterface::class => MessageScheduleLogRepository::class,
+                MessageScheduleRepositoryInterface::class => MessageScheduleRepository::class,
+                // agent management
+                BeDelightfulAgentRepositoryInterface::class => BeDelightfulAgentRepository::class,
+                TaskFileVersionDomainService::class => TaskFileVersionDomainService::class,
+                MessageScheduleDomainService::class => MessageScheduleDomainService::class,
+            ],
+            'listeners' => [
+                AddRouteListener::class,
+                I18nLoadListener::class,
+                ProjectOperatorLogSubscriber::class,
+            ],
+            'error_message' => [
+                'error_code_mapper' => [
+                    BeAgentErrorCode::class => [51000, 51299],
+                    ShareErrorCode::class => [51300, 51400],
+                ],
+            ],
+            'commands' => [],
+            'annotations' => [
+                'scan' => [
+                    'paths' => [
+                        __DIR__,
+                    ],
+                ],
+            ],
+            'publish' => $publishConfigs,
+        ];
+    }
+
+    public function getRoutes(): array
+    {
+        return [
+            'routes' => [
+                'path' => __DIR__ . '/../publish/route',
+            ],
+        ];
+    }
+} 

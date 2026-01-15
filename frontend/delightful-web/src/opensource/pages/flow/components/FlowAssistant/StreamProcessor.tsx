@@ -187,17 +187,26 @@ function StreamProcessor(props: StreamProcessorProps): React.ReactElement | null
 		}
 	}
 
-		// Check if it contains command markers
-		const hasCommandStart = completeContentRef.current.includes("<!-- COMMAND_START -->")
-		const hasCommandEnd = completeContentRef.current.includes("<!-- COMMAND_END -->")
-		console.log("Complete content command marker check:", { hasCommandStart, hasCommandEnd })
+	return commandsProcessed
+}, [onCommandsReceived, onCommandProcessingStatusChange])
 
-		// Extract commands and status, and clean content
-		const { updatedContent: contentWithoutCommands, commands } = extractCommands(
-			completeContentRef.current,
-		)
+// Process complete content and extract commands
+const processCompleteContent = useCallback(() => {
+	// Print current complete content
+	console.log("Starting to process complete content, length:", completeContentRef.current.length)
+	console.log("completeContentRef.current excerpt:", completeContentRef.current.substring(0, 100))
 
-		console.log("Content after processing commands:", contentWithoutCommands.substring(0, 100))
+	// Check if it contains command markers
+	const hasCommandStart = completeContentRef.current.includes("<!-- COMMAND_START -->")
+	const hasCommandEnd = completeContentRef.current.includes("<!-- COMMAND_END -->")
+	console.log("Complete content command marker check:", { hasCommandStart, hasCommandEnd })
+
+	// Extract commands and status, and clean content
+	const { updatedContent: contentWithoutCommands, commands } = extractCommands(
+		completeContentRef.current,
+	)
+
+	console.log("Content after processing commands:", contentWithoutCommands.substring(0, 100))
 
 		// Filter out commands that have already been processed
 		const newCommands = commands.filter((cmd) => {

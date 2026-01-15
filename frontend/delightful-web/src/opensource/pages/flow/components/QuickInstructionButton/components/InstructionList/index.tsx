@@ -79,16 +79,17 @@ const InstructionList = memo(
 			setIsDrag(false)
 		}
 
-	// Start dragging
-			setIsDrag(true)
-		}
+		// Start dragging
+	const handleDragStart = (event: DragStartEvent) => {
+		setIsDrag(true)
+	}
 
-		// During drag
-		const handleDragOver = (event: DragOverEvent) => {
-			const { over } = event
-			if (!over) return
+	// During drag
+	const handleDragOver = (event: DragOverEvent) => {
+		const { over } = event
+		if (!over) return
 
-			setIsCrossContainer(true)
+		setIsCrossContainer(true)
 		// Target item ID or target container ID
 		const overId = over.id as IdType
 
@@ -110,28 +111,29 @@ const InstructionList = memo(
 		// Hovering over an item, set placeholder to item's id
 
 		// Target container
+		const overContainer = findContainer(overId)
 
-			if (!activeContainer || !overContainer) return
+		if (!activeContainer || !overContainer) return
 
 		// Check if drag crosses containers
 		if (overContainer !== activeContainer) {
 			// If target container is toolbar, check if target item is a system instruction, if yes cannot move, otherwise can move
-				if (overContainer === InstructionGroupType.TOOL) {
-					const overItem = over.data.current?.item
+			if (overContainer === InstructionGroupType.TOOL) {
+				const overItem = over.data.current?.item
 
-					if (overItem && isSystemItem(overItem)) return
-					setPlaceholderId(overId)
-				} else if (placeholderId !== overId) {
-					setPlaceholderId(overId)
-				}
-			} else {
-				// Dragging within the same container does not set placeholder
-				setPlaceholderId(null)
+				if (overItem && isSystemItem(overItem)) return
+				setPlaceholderId(overId)
+			} else if (placeholderId !== overId) {
+				setPlaceholderId(overId)
 			}
+		} else {
+			// Dragging within the same container does not set placeholder
+			setPlaceholderId(null)
 		}
+	}
 
-		// Drag end
-		const handleDragEnd = (event: any) => {
+	// Drag end
+	const handleDragEnd = (event: any) => {
 			const { active, over } = event
 			if (!over) {
 				setPlaceholderId(null)

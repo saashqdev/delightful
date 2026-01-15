@@ -94,16 +94,14 @@ export default function useTestFunctions({
 						lineIndex += 1
 
 						try {
-						 * clean up exposed test methods
-							const lineWithNewline = line.endsWith("\n") ? line : `${line}\n`
-							const encodedLine = encoder.encode(lineWithNewline)
+						// Process the current line
+						const lineWithNewline = line.endsWith("\n") ? line : `${line}\n`
+						const encodedLine = encoder.encode(lineWithNewline)
 
-							// enqueue and log
-							controller.enqueue(encodedLine)
-							console.log(
-								`sent ${lineIndex}/${sseLines.length} lines: ${line.slice(0, 50)}${
-						// expose test methods on mount; clean up on unmount
-								}`,
+						// enqueue and log
+						controller.enqueue(encodedLine)
+						console.log(
+							`sent ${lineIndex}/${sseLines.length} lines: ${line.slice(0, 50)}${line.length > 50 ? "..." : ""}`,
 							)
 
 							// schedule next line and set timeout protection

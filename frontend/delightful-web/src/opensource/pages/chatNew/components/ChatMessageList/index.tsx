@@ -266,7 +266,11 @@ const ChatMessageList = observer(() => {
 		// If content height is less than container height, and we have enough messages to load
 		// Load more history messages until fill the viewport or no more messages
 		if (listHeight < wrapperHeight && MessageStore.messages.length > 0) {
-			console.log("Container not filled, trying to load more history messages", listHeight, wrapperHeight)
+			console.log(
+				"Container not filled, trying to load more history messages",
+				listHeight,
+				wrapperHeight,
+			)
 
 			try {
 				await loadMoreHistoryMessages()

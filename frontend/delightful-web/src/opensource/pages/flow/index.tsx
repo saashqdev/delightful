@@ -3,7 +3,10 @@
  */
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
-import type { DelightfulFlowInstance, NodeSchema } from "@bedelightful/delightful-flow/dist/DelightfulFlow"
+import type {
+	DelightfulFlowInstance,
+	NodeSchema,
+} from "@bedelightful/delightful-flow/dist/DelightfulFlow"
 import DelightfulFlowComponent from "@bedelightful/delightful-flow/dist/DelightfulFlow"
 import { MaterialSourceProvider } from "@bedelightful/delightful-flow/dist/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import { NodeMapProvider } from "@bedelightful/delightful-flow/dist/common/context/NodeMap/Provider"
@@ -297,7 +300,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 							flow={currentFlow}
 							flowInstance={flowInstance}
 						/>
-					{/* Add AI assistant button */}
+						{/* Add AI assistant button */}
 
 						{/* {isEditRight && isCommercial && (
 							<DelightfulButton
@@ -455,7 +458,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 											/>
 										</div>
 
-									{/* Add FlowAssistant component */}
+										{/* Add FlowAssistant component */}
 										{isCommercial && showFlowAssistant && isEditRight && (
 											<FlowAssistant
 												flowInteractionRef={flowInteractionRef}
@@ -491,8 +494,3 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 		</FlowInstanceProvider>
 	)
 }
-
-
-
-
-

@@ -3,17 +3,19 @@ import type { Common } from "@/types/common"
 
 export class ClusterRepository extends GlobalBaseRepository<Common.PrivateConfig> {
 	static readonly tableName = "cluster"
-	
+
 	static readonly version = 1
-	
+
 	constructor() {
 		super(ClusterRepository.tableName)
 	}
-	
+
 	public async setClustersConfig(clustersConfig: Array<Common.PrivateConfig>): Promise<void> {
-		clustersConfig.map(config => this.put({...config, deployCode: config?.deployCode ?? ""}))
+		clustersConfig.map((config) =>
+			this.put({ ...config, deployCode: config?.deployCode ?? "" }),
+		)
 	}
-	
+
 	/**
 	 * @description Save cluster configuration
 	 */

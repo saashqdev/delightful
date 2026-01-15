@@ -218,7 +218,9 @@ describe("Table Module Integration Tests", () => {
 
 		expect(screen.getByTestId("show-more").textContent).toBe("Show More")
 		expect(screen.getByTestId("row-details").textContent).toBe("Row Details")
-		expect(screen.getByTestId("click-to-expand").textContent).toBe("Click to expand full content")
+		expect(screen.getByTestId("click-to-expand").textContent).toBe(
+			"Click to expand full content",
+		)
 		expect(screen.getByTestId("show-all-columns").textContent).toBe("Show All Columns")
 	})
 
@@ -288,7 +290,9 @@ describe("Table Module Integration Tests", () => {
 						<TableCell>Zhang San</TableCell>
 						<TableCell>28</TableCell>
 						<TableCell>
-							This is a very long position description information, containing many detailed description content, used to test the long text processing function, so that it can ensure more than 50 characters
+							This is a very long position description information, containing many
+							detailed description content, used to test the long text processing
+							function, so that it can ensure more than 50 characters
 						</TableCell>
 						<TableCell>Technology Department</TableCell>
 						<TableCell>zhangsan@example.com</TableCell>

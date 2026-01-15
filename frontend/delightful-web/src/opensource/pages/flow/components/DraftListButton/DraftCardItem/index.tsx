@@ -91,7 +91,9 @@ export default function DraftCardItem({
 						shape="circle"
 						src={draft?.modifier_info?.avatar || EmptyIcon}
 					/>
-					<span className={styles.name}>{draft?.modifier_info?.name || "Unknown user"}</span>
+					<span className={styles.name}>
+						{draft?.modifier_info?.name || "Unknown user"}
+					</span>
 				</Flex>
 				<Flex>
 					<span>
@@ -104,8 +106,3 @@ export default function DraftCardItem({
 		</div>
 	)
 }
-
-
-
-
-

@@ -4,20 +4,18 @@ export const useStyles = createStyles(({ css, token }) => ({
 	buttonWrapper: css`
 		position: relative;
 		width: fit-content;
-    margin-bottom: 4px;
+		margin-bottom: 4px;
 	`,
 	expandedWrapper: css`
 		position: relative;
 		width: 100%;
-    margin-bottom: 4px;
+		margin-bottom: 4px;
 	`,
 	contentContainer: css`
 		max-height: 0;
 		opacity: 0;
 		overflow: hidden;
-		transition:
-			max-height 0.3s ease-in-out,
-			opacity 0.3s ease-in-out;
+		transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
 		&.visible {
 			opacity: 1;

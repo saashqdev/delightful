@@ -12,13 +12,21 @@ export function useAccount() {
 	 * @param {string} delightfulId Unique ID in delightful ecosystem
 	 */
 	const accountSwitch = useMemoizedFn(
-		async (unionId: string, delightful_user_id: string, delightful_organization_code: string) => {
+		async (
+			unionId: string,
+			delightful_user_id: string,
+			delightful_organization_code: string,
+		) => {
 			const { accounts } = userStore.account
 			const account = accounts.find((o) => o.delightful_id === unionId)
 			if (account) {
 				setClusterCode(account?.deployCode)
 			}
-			await userService.switchAccount(unionId, delightful_user_id, delightful_organization_code)
+			await userService.switchAccount(
+				unionId,
+				delightful_user_id,
+				delightful_organization_code,
+			)
 			/** Broadcast switch account */
 			BroadcastChannelSender.switchAccount({
 				delightfulId: unionId,

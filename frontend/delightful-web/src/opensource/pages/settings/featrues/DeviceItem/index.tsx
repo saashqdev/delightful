@@ -51,7 +51,9 @@ function DeviceItem({ name, system, time, isCurrent = false }: DeviceItemProps) 
 				</div>
 			}
 			title={name ?? t("setting.unknownDevice")}
-			description={`${t("setting.system")}：${system ?? t("common.unknown")} | ${t("setting.loginTime")}：${time ?? t("common.unknown")}`}
+			description={`${t("setting.system")}：${system ?? t("common.unknown")} | ${t(
+				"setting.loginTime",
+			)}：${time ?? t("common.unknown")}`}
 			extra={
 				isCurrent ? (
 					t("setting.currentDevices")

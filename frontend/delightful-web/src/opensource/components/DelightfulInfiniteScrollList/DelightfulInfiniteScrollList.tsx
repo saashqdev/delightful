@@ -10,7 +10,10 @@ import DelightfulListItem from "../DelightfulList/DelightfulListItem"
 import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 import type { DelightfulInfiniteScrollListProps } from "./types"
 
-function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListItemType = DelightfulListItemType>({
+function DelightfulInfiniteScrollListComponent<
+	D,
+	ItemR extends DelightfulListItemType = DelightfulListItemType,
+>({
 	data,
 	trigger,
 	itemsTransform,
@@ -184,51 +187,53 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 	})
 
 	// Custom list item component (memoized)
-	const CustomListItem = memo(({ data: itemData, ...restProps }: DelightfulListItemProps<ItemR>) => {
-		// Without checkbox options, render a plain list item
-		if (!checkboxOptions) {
-			return <DelightfulListItem<ItemR> data={itemData} {...restProps} />
-		}
-
-		// Status flags
-		const checked = isItemChecked(itemData.id)
-		const disabled = isItemDisabled(itemData.id)
-
-		// Handle checkbox click
-		const handleCheckboxClick = (e: React.MouseEvent) => {
-			e.stopPropagation()
-			if (disabled) return
-
-			// Toggle selection
-			handleItemCheck(itemData, !checked)
-		}
-
-		// Handle list item click
-		const handleItemClick = () => {
-			// If disabled, only fire click handler, do not toggle selection
-			if (disabled) {
-				onItemClick?.(itemData)
-				return
+	const CustomListItem = memo(
+		({ data: itemData, ...restProps }: DelightfulListItemProps<ItemR>) => {
+			// Without checkbox options, render a plain list item
+			if (!checkboxOptions) {
+				return <DelightfulListItem<ItemR> data={itemData} {...restProps} />
 			}
 
-			// Toggle selection
-			handleItemCheck(itemData, !checked)
+			// Status flags
+			const checked = isItemChecked(itemData.id)
+			const disabled = isItemDisabled(itemData.id)
 
-			// Fire click handler
-			onItemClick?.(itemData)
-		}
+			// Handle checkbox click
+			const handleCheckboxClick = (e: React.MouseEvent) => {
+				e.stopPropagation()
+				if (disabled) return
 
-		return (
-			<Flex gap={10} align="center" onClick={handleItemClick}>
-				<div onClick={handleCheckboxClick}>
-					<Checkbox checked={checked} disabled={disabled} />
-				</div>
-				<div style={{ flex: 1 }}>
-					<DelightfulListItem<ItemR> data={itemData} {...restProps} />
-				</div>
-			</Flex>
-		)
-	})
+				// Toggle selection
+				handleItemCheck(itemData, !checked)
+			}
+
+			// Handle list item click
+			const handleItemClick = () => {
+				// If disabled, only fire click handler, do not toggle selection
+				if (disabled) {
+					onItemClick?.(itemData)
+					return
+				}
+
+				// Toggle selection
+				handleItemCheck(itemData, !checked)
+
+				// Fire click handler
+				onItemClick?.(itemData)
+			}
+
+			return (
+				<Flex gap={10} align="center" onClick={handleItemClick}>
+					<div onClick={handleCheckboxClick}>
+						<Checkbox checked={checked} disabled={disabled} />
+					</div>
+					<div style={{ flex: 1 }}>
+						<DelightfulListItem<ItemR> data={itemData} {...restProps} />
+					</div>
+				</Flex>
+			)
+		},
+	)
 
 	// Preserve display name for clearer debugging
 	CustomListItem.displayName = "CustomListItem"
@@ -289,7 +294,7 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 	)
 }
 
-	// Memoize component to avoid unnecessary re-renders
+// Memoize component to avoid unnecessary re-renders
 const DelightfulInfiniteScrollList = memo(DelightfulInfiniteScrollListComponent) as <
 	D,
 	ItemR extends DelightfulListItemType = DelightfulListItemType,

@@ -83,7 +83,7 @@ const FileHandlePlugin = (options: FileHandlePluginOptions) => {
 				}
 
 				if (validFiles.length > 0 && onPaste) {
-				// Mark as handled
+					// Mark as handled
 					isPasteHandled = true
 					onPaste(editor, validFiles, html)
 				}

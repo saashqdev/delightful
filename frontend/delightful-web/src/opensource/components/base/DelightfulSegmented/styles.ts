@@ -15,8 +15,7 @@ const useStyles = createStyles(
 				.${prefixCls}-segmented-item-selected {
 					font-weight: 600;
 					color: ${token.delightfulColorScales.brand[5]};
-					box-shadow:
-						0px 4px 14px 0px rgba(0, 0, 0, 0.1),
+					box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1),
 						0px 0px 1px 0px rgba(0, 0, 0, 0.3);
 				}
 

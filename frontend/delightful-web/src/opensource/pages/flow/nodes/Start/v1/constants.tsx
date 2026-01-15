@@ -26,8 +26,3 @@ export const TriggerTypeOptions = [
 ]
 
 export default {}
-
-
-
-
-

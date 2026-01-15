@@ -18,7 +18,6 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					locale: "en_US",
 					translations: {
 						en_US: "China",
-						en_US: "China",
 					},
 				},
 				{
@@ -26,7 +25,6 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Malaysia",
 					locale: "ms_MY",
 					translations: {
-						en_US: "Malaysia",
 						en_US: "Malaysia",
 					},
 				},
@@ -36,7 +34,6 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					locale: "vi_VN",
 					translations: {
 						en_US: "Vietnam",
-						en_US: "Vietnam",
 					},
 				},
 				{
@@ -44,7 +41,6 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Thailand",
 					locale: "th_TH",
 					translations: {
-						en_US: "Thailand",
 						en_US: "Thailand",
 					},
 				},
@@ -54,7 +50,6 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					locale: "fil_PH",
 					translations: {
 						en_US: "Philippines",
-						en_US: "Philippines",
 					},
 				},
 				{
@@ -62,7 +57,6 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					name: "Singapore",
 					locale: "en_SG",
 					translations: {
-						en_US: "Singapore",
 						en_US: "Singapore",
 					},
 				},
@@ -73,14 +67,12 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					locale: "en_US",
 					translations: {
 						en_US: "Simplified Chinese",
-						en_US: "Simplified Chinese",
 					},
 				},
 				{
 					name: "English",
 					locale: "en_US",
 					translations: {
-						en_US: "English",
 						en_US: "English",
 					},
 				},

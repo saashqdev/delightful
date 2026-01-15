@@ -43,7 +43,11 @@ function OAuthModal({
 
 	const footer = useMemoizedFn(() => (
 		<Flex align="center" style={{ width: "100%" }} gap={10}>
-			<DelightfulButton onClick={onCancel} type="text" className={cx(styles.button, styles.flex1)}>
+			<DelightfulButton
+				onClick={onCancel}
+				type="text"
+				className={cx(styles.button, styles.flex1)}
+			>
 				{t("button.reject")}
 			</DelightfulButton>
 			<DelightfulButton onClick={onConfirm} type="primary" className={styles.flex1}>

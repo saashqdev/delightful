@@ -40,7 +40,10 @@ export const useStyles = createStyles(({ css, prefixCls }, { size }: { size: num
 	}
 })
 
-export function useDelightfulSpinProps(section: boolean = true, size?: "small" | "default" | "large") {
+export function useDelightfulSpinProps(
+	section: boolean = true,
+	size?: "small" | "default" | "large",
+) {
 	const { styles } = useStyles({ size: sizeMap[size ?? "default"] })
 
 	return useMemo(

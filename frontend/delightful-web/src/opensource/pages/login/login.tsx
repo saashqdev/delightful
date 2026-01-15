@@ -52,7 +52,9 @@ function LoginPage() {
 
 			setLoading(true)
 			values.device = await getDeviceInfo(i18n)
-			const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(clusterCode as string)
+			const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(
+				clusterCode as string,
+			)
 			const userSyncStep = loginService.accountSyncStep(clusterCode as string)
 			return (
 				Promise.resolve()
@@ -68,7 +70,7 @@ function LoginPage() {
 					})
 					.then(delightfulOrgSyncStep)
 					.then(async (userInfo) => {
-					// Environment synchronization
+						// Environment synchronization
 						await loginService.syncClusterConfig()
 						return Promise.resolve(userInfo)
 					})
@@ -83,7 +85,7 @@ function LoginPage() {
 					.catch((error) => {
 						console.error("error", error?.message)
 						if (error.code === 3102) {
-						// User has not created an account, redirect to invitation page
+							// User has not created an account, redirect to invitation page
 							navigate(RoutePath.Invite, { replace: true })
 						}
 					})

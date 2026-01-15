@@ -20,7 +20,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 		`,
 		close: css`
 			cursor: pointer;
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 		`,
 		top: css`
 			width: 100%;
@@ -28,7 +30,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 		`,
 		title: {
 			overflow: "hidden",
-			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
+			color: isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1],
 			textOverflow: "ellipsis",
 			fontSize: 16,
 			fontWeight: 600,
@@ -42,7 +46,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 			width: "100%",
 			flex: 1,
 			overflow: "hidden",
-			color: isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2],
+			color: isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[2],
 			textOverflow: "ellipsis",
 			fontSize: 12,
 			fontWeight: 400,
@@ -62,12 +68,16 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 			padding-top: 10px;
 			font-size: 14px;
 			font-weight: 600;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[3]
+				: token.delightfulColorUsages.text[1]};
 		`,
 		emptyTips: css`
 			font-size: 14px;
 			font-weight: 400;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[2]};
 		`,
 		drawerContainer: css`
 			width: 100%;
@@ -79,8 +89,3 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 })
 
 export default useStyles
-
-
-
-
-

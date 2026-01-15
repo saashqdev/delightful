@@ -175,11 +175,3 @@ export default function useKnowledgeDatabases() {
 		userDatabasePopupScroll,
 	}
 }
-
-
-
-
-
-
-
-

@@ -9,8 +9,3 @@ export const MessageSearchComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

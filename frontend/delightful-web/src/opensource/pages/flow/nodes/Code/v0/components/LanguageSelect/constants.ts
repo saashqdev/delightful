@@ -13,8 +13,3 @@ export const LanguageOptions = [
 		value: "python",
 	},
 ]
-
-
-
-
-

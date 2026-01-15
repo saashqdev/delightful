@@ -91,7 +91,11 @@ const CurrentTopic = observer(({ className }: CurrentTopicProps) => {
 					className={styles.button}
 					type="link"
 					icon={
-						<DelightfulIcon color="currentColor" component={IconArrowsExchange} size={20} />
+						<DelightfulIcon
+							color="currentColor"
+							component={IconArrowsExchange}
+							size={20}
+						/>
 					}
 					onClick={switchTopic}
 				>

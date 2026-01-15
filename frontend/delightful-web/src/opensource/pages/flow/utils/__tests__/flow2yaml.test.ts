@@ -48,9 +48,9 @@ describe.skip("Test flow2yaml module", () => {
 					{
 						id: "node-1",
 						node_id: "node-1",
-					node_type: "1", // Start node
-					node_version: "v1",
-					name: "Start Node",
+						node_type: "1", // Start node
+						node_version: "v1",
+						name: "Start Node",
 						position: { x: 100, y: 100 },
 						params: {},
 						meta: {},
@@ -62,9 +62,9 @@ describe.skip("Test flow2yaml module", () => {
 					{
 						id: "node-2",
 						node_id: "node-2",
-					node_type: "2", // LLM node
-					node_version: "v1",
-					name: "LLM Node",
+						node_type: "2", // LLM node
+						node_version: "v1",
+						name: "LLM Node",
 						position: { x: 200, y: 100 },
 						params: {},
 						meta: {},
@@ -274,12 +274,7 @@ describe.skip("Test flow2yaml module", () => {
 
 			// Check variable information
 			expect(yamlString.includes("variables:")).toBe(true)
-		expect(yamlString.includes("  - name: Test Variable")).toBe(true)
+			expect(yamlString.includes("  - name: Test Variable")).toBe(true)
 		})
 	})
 })
-
-
-
-
-

@@ -125,8 +125,11 @@ export class DatabaseManager {
 		this.globalDatabase = await this.initDatabase(dbName, 1, [
 			{ name: "config", schema: "&key, value" },
 			{ name: "user", schema: "&key, value" },
-			{ name: "account", schema: "&delightful_id, deployCode, delightful_user_id, organizationCode" },
-			{ name: "cluster", schema: "&deployCode, name"}
+			{
+				name: "account",
+				schema: "&delightful_id, deployCode, delightful_user_id, organizationCode",
+			},
+			{ name: "cluster", schema: "&deployCode, name" },
 		])
 		return this.globalDatabase
 	}

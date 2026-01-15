@@ -6,8 +6,3 @@ export const defaultCodeMap: Record<string, string> = {
 	[Languages.Python]:
 		"# Example: Convert the string-type input to an array-type output\n# Tutorials: https://www.w3schools.com/python/\n\noutput = input.split(',')\n\nreturn {'output': output}",
 }
-
-
-
-
-

@@ -11,7 +11,9 @@ import { FullMessage, ApplyMessageOptions } from "@/types/chat/message"
 import type { CMessage } from "@/types/chat"
 import { User } from "@/types/user"
 
-const delightfulBroadcastChannel = new DelightfulBroadcastChannel("delightful-chat-broadcast-channel")
+const delightfulBroadcastChannel = new DelightfulBroadcastChannel(
+	"delightful-chat-broadcast-channel",
+)
 
 export const BroadcastChannelSender = {
 	addSendMessage: (renderMessage: FullMessage, message: ConversationMessageSend) => {

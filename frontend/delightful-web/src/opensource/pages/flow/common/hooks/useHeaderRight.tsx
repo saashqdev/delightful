@@ -8,7 +8,10 @@ import type {
 	EXPRESSION_VALUE,
 	InputExpressionValue,
 } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
-import { FormItemType, LabelTypeMap } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import {
+	FormItemType,
+	LabelTypeMap,
+} from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { Form, Input } from "antd"
 import { useForm } from "antd/lib/form/Form"
@@ -174,18 +177,18 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 				const list = Object.values(obj) as object[]
 				allReferenceFields = generateListOrObjectFields(currentRule, list)
 			} else if (currentRule.type === "expression") {
-			// Get current node's expression component value
-			const expressionValue = get(currentNode, currentRule.path) as InputExpressionValue
-			// Get reference blocks in a certain expression value of current node
-			allReferenceFields = getAllExpressionLabelFields(expressionValue)
-		} else {
-			// Get schema
-			const schema = get(currentNode, currentRule.path) as Schema
-			// Get reference blocks in a certain expression value of current node
+				// Get current node's expression component value
+				const expressionValue = get(currentNode, currentRule.path) as InputExpressionValue
+				// Get reference blocks in a certain expression value of current node
+				allReferenceFields = getAllExpressionLabelFields(expressionValue)
+			} else {
+				// Get schema
+				const schema = get(currentNode, currentRule.path) as Schema
+				// Get reference blocks in a certain expression value of current node
 				allReferenceFields = searchExpressionFields(schema?.properties || {})
 			}
 
-		// Iterate reference blocks, generate schema fields and set to corresponding schema
+			// Iterate reference blocks, generate schema fields and set to corresponding schema
 			allReferenceFields.forEach((referenceField) => {
 				const dataSourceOption = getDataSourceOption(referenceField)
 				if (!dataSourceOption) return
@@ -350,10 +353,10 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 						)}
 
 						{debuggerMode && (
-						<Form.Item name="debug_data" label="Debug">
-							<Input.TextArea
-								className={styles.debug}
-								placeholder="If you referenced start node.username and AI chat node.text, and start node id is xxx, AI chat node id is yyy, then please input:
+							<Form.Item name="debug_data" label="Debug">
+								<Input.TextArea
+									className={styles.debug}
+									placeholder="If you referenced start node.username and AI chat node.text, and start node id is xxx, AI chat node id is yyy, then please input:
 {
 	xxx: {
 		username: 'custom content'
@@ -388,8 +391,3 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 		HeaderRight,
 	}
 }
-
-
-
-
-

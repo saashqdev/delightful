@@ -21,9 +21,7 @@ export default () => css`
 		width: 15em;
 		white-space: nowrap;
 		border-right: 2px solid transparent;
-		animation:
-			typing 3.5s steps(15, end),
-			blink-caret 0.75s step-end infinite;
+		animation: typing 3.5s steps(15, end), blink-caret 0.75s step-end infinite;
 		overflow: hidden;
 	}
 

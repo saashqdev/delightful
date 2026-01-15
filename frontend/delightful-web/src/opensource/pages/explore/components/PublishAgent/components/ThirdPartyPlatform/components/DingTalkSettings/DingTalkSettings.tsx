@@ -68,7 +68,11 @@ export default function DingTalkSettings({ open, onClose, subOpt }: DingTalkSett
 	})
 
 	const dingTalkAddr = useMemo(() => {
-		return `${env("DELIGHTFUL_GATEWAY_ADDRESS")}/delightful-service/bot/third-platform/chat?key=${platformData.key}&platform=${ThirdPartyPlatformType.DingTalk}`
+		return `${env(
+			"DELIGHTFUL_GATEWAY_ADDRESS",
+		)}/delightful-service/bot/third-platform/chat?key=${platformData.key}&platform=${
+			ThirdPartyPlatformType.DingTalk
+		}`
 	}, [platformData])
 
 	const onCopy = useMemoizedFn((str: string) => {

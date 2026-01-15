@@ -33,7 +33,9 @@ function ScaleLoader({
 			margin: cssValue(margin),
 			borderRadius: cssValue(radius),
 			display: "inline-block",
-			animation: `${scale} ${1 / speedMultiplier}s ${i * 0.1}s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)`,
+			animation: `${scale} ${1 / speedMultiplier}s ${
+				i * 0.1
+			}s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08)`,
 			animationFillMode: "both",
 		}
 	}

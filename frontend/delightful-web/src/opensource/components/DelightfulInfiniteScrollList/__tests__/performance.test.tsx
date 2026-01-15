@@ -25,7 +25,11 @@ vi.mock("react-infinite-scroll-component", () => {
 vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick }: any) => (
-			<div data-testid="delightful-list-item" className={active ? "active" : ""} onClick={onClick}>
+			<div
+				data-testid="delightful-list-item"
+				className={active ? "active" : ""}
+				onClick={onClick}
+			>
 				{avatar && <div data-testid="avatar">{avatar}</div>}
 				<div data-testid="title">{typeof title === "string" ? title : "title object"}</div>
 				{desc && <div data-testid="desc">{desc}</div>}
@@ -215,7 +219,9 @@ describe("DelightfulInfiniteScrollList performance", () => {
 			const ratio = current.time / previous.time
 
 			console.log(
-				`When data grows from ${previous.size} to ${current.size}, render time ratio: ${ratio.toFixed(2)}`,
+				`When data grows from ${previous.size} to ${
+					current.size
+				}, render time ratio: ${ratio.toFixed(2)}`,
 			)
 
 			// Render time should not exceed 5x the data growth (heuristic threshold)
@@ -363,7 +369,9 @@ describe("DelightfulInfiniteScrollList performance", () => {
 		})
 
 		console.log(
-			`Initial render (${dataSize} items, ${initialCheckedCount} preselected): ${totalRenderTime.toFixed(2)}ms`,
+			`Initial render (${dataSize} items, ${initialCheckedCount} preselected): ${totalRenderTime.toFixed(
+				2,
+			)}ms`,
 		)
 		expect(totalRenderTime).toBeLessThan(500) // Initial render should be under 500ms
 

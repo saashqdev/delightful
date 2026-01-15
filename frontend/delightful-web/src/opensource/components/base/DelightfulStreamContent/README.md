@@ -4,9 +4,9 @@ DelightfulStreamContent is a component for presenting streaming content. It simu
 
 ## Properties
 
-| Property | Type                              | Default | Description                                 |
-| -------- | --------------------------------- | ------- | ------------------------------------------- |
-| content  | string                            | -       | The text content to stream                  |
+| Property | Type                              | Default | Description                                  |
+| -------- | --------------------------------- | ------- | -------------------------------------------- |
+| content  | string                            | -       | The text content to stream                   |
 | children | (text: string) => React.ReactNode | -       | Optional render function to customize output |
 
 ## Basic Usage

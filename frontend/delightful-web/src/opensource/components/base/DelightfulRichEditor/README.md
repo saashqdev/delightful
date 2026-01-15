@@ -4,16 +4,16 @@
 
 ## Props
 
-| Property          | Type                             | Default | Description                                         |
-| ----------------- | -------------------------------- | ------- | --------------------------------------------------- |
-| showToolBar       | boolean                          | true    | Whether to show the toolbar                         |
-| placeholder       | string                           | -       | Placeholder text for the editor                     |
-| content           | Content                          | -       | Initial editor content                               |
-| editorProps       | UseEditorOptions                 | -       | TipTap editor configuration options                 |
-| onEnter           | (editor: Editor) => void         | -       | Callback when the Enter key is pressed              |
-| enterBreak        | boolean                          | false   | Whether to remove the Enter key’s default line break |
-| contentProps      | HTMLAttributes<HTMLDivElement> | -       | HTML attributes for the editor content area         |
-| ...HTMLAttributes | -                                | -       | Supports all HTML div element attributes            |
+| Property          | Type                           | Default | Description                                          |
+| ----------------- | ------------------------------ | ------- | ---------------------------------------------------- |
+| showToolBar       | boolean                        | true    | Whether to show the toolbar                          |
+| placeholder       | string                         | -       | Placeholder text for the editor                      |
+| content           | Content                        | -       | Initial editor content                               |
+| editorProps       | UseEditorOptions               | -       | TipTap editor configuration options                  |
+| onEnter           | (editor: Editor) => void       | -       | Callback when the Enter key is pressed               |
+| enterBreak        | boolean                        | false   | Whether to remove the Enter key’s default line break |
+| contentProps      | HTMLAttributes<HTMLDivElement> | -       | HTML attributes for the editor content area          |
+| ...HTMLAttributes | -                              | -       | Supports all HTML div element attributes             |
 
 ## Basic Usage
 
@@ -89,10 +89,10 @@ const getContent = () => {
 
 ## When To Use
 
-- When your app needs rich text editing functionality
-- When users should be able to format text and insert images/media
-- When emoji and mentions are required for social interactions
-- When you need a feature-rich yet clean editor UI
-- When you need to customize editor behavior for specific interactions
+-   When your app needs rich text editing functionality
+-   When users should be able to format text and insert images/media
+-   When emoji and mentions are required for social interactions
+-   When you need a feature-rich yet clean editor UI
+-   When you need to customize editor behavior for specific interactions
 
 The DelightfulRichEditor component brings professional rich text editing capabilities to your application, suitable for comment systems, content creation, email editing, and many other scenarios.

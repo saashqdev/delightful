@@ -45,7 +45,7 @@ const useNavigateConversationByAgentIdInSearchQuery = () => {
 					if (res?.id) {
 						ConversationService.switchConversation(res)
 						window.sessionStorage.removeItem(UserIdKey)
-					// Navigate to Chat page
+						// Navigate to Chat page
 						navigate(RoutePath.Chat)
 					}
 				})

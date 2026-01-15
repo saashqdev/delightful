@@ -4,13 +4,13 @@
 
 ## Properties
 
-| Property       | Type                                      | Default  | Description                                       |
-| -------------- | ----------------------------------------- | -------- | ------------------------------------------------- |
+| Property       | Type                                      | Default  | Description                                      |
+| -------------- | ----------------------------------------- | -------- | ------------------------------------------------ |
 | badgeProps     | BadgeProps                                | -        | Badge properties for displaying badges on avatar |
-| size           | number \| 'large' \| 'small' \| 'default' | 40       | Size of the avatar                                |
-| shape          | 'circle' \| 'square'                      | 'square' | Shape of the avatar, default is square            |
-| src            | string                                    | -        | URL of the avatar image                           |
-| ...AvatarProps | -                                         | -        | Supports all Ant Design Avatar properties         |
+| size           | number \| 'large' \| 'small' \| 'default' | 40       | Size of the avatar                               |
+| shape          | 'circle' \| 'square'                      | 'square' | Shape of the avatar, default is square           |
+| src            | string                                    | -        | URL of the avatar image                          |
+| ...AvatarProps | -                                         | -        | Supports all Ant Design Avatar properties        |
 
 ## Basic Usage
 

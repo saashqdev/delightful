@@ -101,8 +101,3 @@ const ToolAddableCardPopover = forwardRef<ToolAddableCardPopoverRef, ToolAddable
 )
 
 export default ToolAddableCardPopover
-
-
-
-
-

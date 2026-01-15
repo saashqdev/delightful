@@ -54,7 +54,9 @@ export default memo(function DeployedWebsites() {
 	return (
 		<div className={commonStyles.pageContainer}>
 			<div className={commonStyles.title}>Created websites</div>
-			<div className={commonStyles.description}>Manage the websites generated through Be Delightful</div>
+			<div className={commonStyles.description}>
+				Manage the websites generated through Be Delightful
+			</div>
 			<div className={commonStyles.formHeader}>
 				<Input
 					placeholder="Search websites"

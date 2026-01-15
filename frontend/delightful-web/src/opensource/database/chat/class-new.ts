@@ -3,7 +3,8 @@ import { platformKey } from "@/utils/storage"
 import Dexie from "dexie"
 import { ChatDb } from "./types"
 
-export const ChatDbSchemaStorageKey = (delightfulId: string) => platformKey(`chat-db-schema/${delightfulId}`)
+export const ChatDbSchemaStorageKey = (delightfulId: string) =>
+	platformKey(`chat-db-schema/${delightfulId}`)
 
 /**
  * Chat database
@@ -148,7 +149,10 @@ class ChatDatabase {
 	 * Cache the local database schema for recovery when reopened
 	 * @param schema
 	 */
-	setLocalDbSchema(schema: { version: number; schema: Record<string, string> }, delightfulId: string) {
+	setLocalDbSchema(
+		schema: { version: number; schema: Record<string, string> },
+		delightfulId: string,
+	) {
 		localStorage.setItem(this.getLocalSchemaKey(delightfulId), JSON.stringify(schema))
 	}
 

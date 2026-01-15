@@ -21,8 +21,3 @@ const useStyles = createStyles(() => ({
 }))
 
 export default useStyles
-
-
-
-
-

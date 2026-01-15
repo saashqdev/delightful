@@ -4,11 +4,11 @@ DelightfulRadioFavor is a custom-styled radio button component designed for favo
 
 ## Properties
 
-| Property      | Type                               | Default | Description                                      |
-| ------------- | ---------------------------------- | ------- | ------------------------------------------------ |
-| options       | { label: string; value: string }[] | []      | List of options; each has a label and a value    |
-| onChange      | (value: string) => void            | -       | Callback when the selected option changes        |
-| selectedValue | string                             | -       | Currently selected value                         |
+| Property      | Type                               | Default | Description                                        |
+| ------------- | ---------------------------------- | ------- | -------------------------------------------------- |
+| options       | { label: string; value: string }[] | []      | List of options; each has a label and a value      |
+| onChange      | (value: string) => void            | -       | Callback when the selected option changes          |
+| selectedValue | string                             | -       | Currently selected value                           |
 | value         | string                             | -       | Currently selected value (same as `selectedValue`) |
 
 ## Basic Usage

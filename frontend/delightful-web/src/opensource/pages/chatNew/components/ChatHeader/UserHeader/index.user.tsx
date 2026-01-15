@@ -97,7 +97,9 @@ function HeaderRaw({ conversation, className }: HeaderProps) {
 						})}
 						tip={t("chat.setting")}
 						type="text"
-						icon={<DelightfulIcon size={20} color="currentColor" component={IconDots} />}
+						icon={
+							<DelightfulIcon size={20} color="currentColor" component={IconDots} />
+						}
 						onClick={onSettingClick}
 					/>
 				</Flex>

@@ -76,8 +76,3 @@ export type ConditionContainerProps = {
 	sheetId: string
 	dataTemplate: Record<string, Sheet.Detail>
 }
-
-
-
-
-

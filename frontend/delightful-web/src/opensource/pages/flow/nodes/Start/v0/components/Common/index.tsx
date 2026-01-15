@@ -83,8 +83,3 @@ export default function Common({
 		</div>
 	)
 }
-
-
-
-
-

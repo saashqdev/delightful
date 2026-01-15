@@ -150,7 +150,10 @@ export default memo(function SharedTopics() {
 					}}
 				/>
 				<Dropdown menu={{ items: dropdownItems }} disabled={selectedRowKeys.length === 0}>
-					<DelightfulButton className={styles.batchOperationButton} onClick={handleRemove}>
+					<DelightfulButton
+						className={styles.batchOperationButton}
+						onClick={handleRemove}
+					>
 						<span>Batch Actions</span>
 						<DelightfulIcon component={IconChevronDown} size={20} stroke={2} />
 					</DelightfulButton>

@@ -18,58 +18,60 @@ const useStyles = createStyles(({ css }) => {
 	}
 })
 
-const DelightfulMindMap = memo(({ data, className, readonly = true, ...props }: DelightfulMindMapProps) => {
-	const { styles, cx } = useStyles()
-	const ref = useRef<HTMLDivElement>(null)
-	const mindmapRef = useRef<MindMap | null>(null)
+const DelightfulMindMap = memo(
+	({ data, className, readonly = true, ...props }: DelightfulMindMapProps) => {
+		const { styles, cx } = useStyles()
+		const ref = useRef<HTMLDivElement>(null)
+		const mindmapRef = useRef<MindMap | null>(null)
 
-	useEffect(() => {
-		if (ref.current && data) {
-			try {
-				mindmapRef.current = new MindMap({
-					el: ref.current,
-					data,
-					readonly,
-					initRootNodePosition: ["5%", "center"],
-					isLimitMindMapInCanvas: true,
-					mousewheelAction: "zoom",
-					mousewheelMoveStep: 10,
-					mouseScaleCenterUseMousePosition: false,
-					fit: true,
-				} as any)
+		useEffect(() => {
+			if (ref.current && data) {
+				try {
+					mindmapRef.current = new MindMap({
+						el: ref.current,
+						data,
+						readonly,
+						initRootNodePosition: ["5%", "center"],
+						isLimitMindMapInCanvas: true,
+						mousewheelAction: "zoom",
+						mousewheelMoveStep: 10,
+						mouseScaleCenterUseMousePosition: false,
+						fit: true,
+					} as any)
 
-				mindmapRef.current.setThemeConfig({
-					lineWidth: 2,
-					lineStyle: "curve",
-				})
-			} catch (error) {
-				console.error(error)
+					mindmapRef.current.setThemeConfig({
+						lineWidth: 2,
+						lineStyle: "curve",
+					})
+				} catch (error) {
+					console.error(error)
+				}
 			}
-		}
 
-		return () => {
-			if (mindmapRef.current) {
-				mindmapRef.current?.destroy()
-				mindmapRef.current = null
+			return () => {
+				if (mindmapRef.current) {
+					mindmapRef.current?.destroy()
+					mindmapRef.current = null
+				}
 			}
-		}
-	}, [data, readonly])
+		}, [data, readonly])
 
-	useEffect(() => {
-		const dom = ref.current
-		const callback = () => {
-			mindmapRef.current?.resize()
-		}
-		dom?.addEventListener("resize", callback)
+		useEffect(() => {
+			const dom = ref.current
+			const callback = () => {
+				mindmapRef.current?.resize()
+			}
+			dom?.addEventListener("resize", callback)
 
-		return () => {
-			dom?.removeEventListener("resize", callback)
-		}
-	}, [])
+			return () => {
+				dom?.removeEventListener("resize", callback)
+			}
+		}, [])
 
-	if (!data) return null
+		if (!data) return null
 
-	return <div ref={ref} className={cx(styles.mindmap, className)} {...props} />
-})
+		return <div ref={ref} className={cx(styles.mindmap, className)} {...props} />
+	},
+)
 
 export default DelightfulMindMap

@@ -9,7 +9,9 @@ export const useStyles = createStyles(
 				max-width: 80%;
 				width: fit-content;
 				border-radius: 12px;
-				background: ${isDarkMode ? token.colorBgContainer : token.delightfulColorUsages.white};
+				background: ${isDarkMode
+					? token.colorBgContainer
+					: token.delightfulColorUsages.white};
 			`,
 			summary: css`
 				width: 100%;

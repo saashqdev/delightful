@@ -236,7 +236,7 @@ export default function Share() {
 						})
 							.then((newData: any) => {
 								setData(newData)
-							// Remove password parameter from URL
+								// Remove password parameter from URL
 								removePasswordFromUrl()
 								return newData
 							})
@@ -312,7 +312,11 @@ export default function Share() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<img src={DelightfulIcon} alt="" className={isMobile ? "" : styles.delightfulIcon} />
+				<img
+					src={DelightfulIcon}
+					alt=""
+					className={isMobile ? "" : styles.delightfulIcon}
+				/>
 				{isMobile ? (
 					<div className={styles.menuIconContainer}>
 						<IconMenu2
@@ -349,7 +353,10 @@ export default function Share() {
 					/>
 				)}
 				{error && !loading && (
-					<ErrorDisplay errorMessage="No permission to view playback" onRetry={handleRetry} />
+					<ErrorDisplay
+						errorMessage="No permission to view playback"
+						onRetry={handleRetry}
+					/>
 				)}
 				{!isEmpty(data) && !error && (
 					<ShareContent

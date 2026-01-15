@@ -1,6 +1,6 @@
 ﻿import { createStyles } from "antd-style"
 
- const useStyles = createStyles(({ css, prefixCls }) => {
+const useStyles = createStyles(({ css, prefixCls }) => {
 	return {
 		popover: css`
 			.${prefixCls}-popover-inner {
@@ -22,9 +22,4 @@
 	}
 })
 
-
 export default useStyles
-
-
-
-

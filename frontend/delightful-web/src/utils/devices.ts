@@ -41,7 +41,9 @@ export async function getDeviceInfo(i18n: i18n) {
 	let deviceInfo = [
 		device.vendor,
 		device.model,
-		`${currentPlatform ? platformMapping[currentPlatform as keyof typeof platformMapping] : ""}`,
+		`${
+			currentPlatform ? platformMapping[currentPlatform as keyof typeof platformMapping] : ""
+		}`,
 	]
 		.filter((attr) => !!attr)
 		.join(" ")

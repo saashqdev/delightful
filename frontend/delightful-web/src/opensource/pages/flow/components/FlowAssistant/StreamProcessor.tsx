@@ -119,94 +119,107 @@ function StreamProcessor(props: StreamProcessorProps): React.ReactElement | null
 				if (onCommandProcessingStatusChange) {
 					onCommandProcessingStatusChange(true)
 				}
-			console.log("Detected command start marker")
-		}
-
-		// Process command end marker
-		if (hasEndMarker && isCollectingCommandRef.current) {
-			isCollectingCommandRef.current = false
-			if (onCommandProcessingStatusChange) {
-				onCommandProcessingStatusChange(false)
+				console.log("Detected command start marker")
 			}
-			console.log("Detected command end marker")
-		}
 
-		// During command collection phase, find the position of the last start marker
-		if (isCollectingCommandRef.current) {
-			const startPos = text.lastIndexOf(COMMAND_START)
-			if (startPos >= 0) {
-				// Only return content before the start marker
-				return text.substring(0, startPos)
-			}
-		}
-
-		// Loop through and process all possible commands
-		const buffer = commandBufferRef.current
-		let commandsProcessed = false
-
-		// Use regex to find all complete commands
-		const commandRegex = /<!-- COMMAND_START -->\s*([\s\S]*?)\s*<!-- COMMAND_END -->/g
-		let match = null
-		let lastIndex = 0
-		const commands: any[] = []
-
-		// Find all complete commands
-		// eslint-disable-next-line no-cond-assign
-		while ((match = commandRegex.exec(buffer)) !== null) {
-			try {
-				const commandJson = match[1].trim()
-				console.log("Attempting to parse command:", commandJson)
-				const command = JSON.parse(commandJson)
-				commands.push(command)
-				lastIndex = match.index + match[0].length
-				commandsProcessed = true
-
-				// If previously collecting commands, and now found complete command, notify end of collection
-				if (isCollectingCommandRef.current) {
-					isCollectingCommandRef.current = false
-					if (onCommandProcessingStatusChange) {
-						onCommandProcessingStatusChange(false)
-					}
+			// Process command end marker
+			if (hasEndMarker && isCollectingCommandRef.current) {
+				isCollectingCommandRef.current = false
+				if (onCommandProcessingStatusChange) {
+					onCommandProcessingStatusChange(false)
 				}
-			} catch (error) {
-				console.error("Failed to parse command JSON:", error, "Command content:", match[1])
-		}
-	}
+				console.log("Detected command end marker")
+			}
 
-	// Process found commands
-	if (commands.length > 0) {
-		processingCommandsRef.current = true
-		try {
-			// Save commands to the record of processed commands
-			commands.forEach((cmd) => {
-				processedCommandsRef.current.add(JSON.stringify(cmd))
-			})
-			onCommandsReceived(commands)
-		} catch (error) {
-			console.error("Error processing commands:", error)
-		}
-	}
+			// During command collection phase, find the position of the last start marker
+			if (isCollectingCommandRef.current) {
+				const startPos = text.lastIndexOf(COMMAND_START)
+				if (startPos >= 0) {
+					// Only return content before the start marker
+					return text.substring(0, startPos)
+				}
+			}
 
-	return commandsProcessed
-}, [onCommandsReceived, onCommandProcessingStatusChange])
+			// Loop through and process all possible commands
+			const buffer = commandBufferRef.current
+			let commandsProcessed = false
 
-// Process complete content and extract commands
-const processCompleteContent = useCallback(() => {
-	// Print current complete content
-	console.log("Starting to process complete content, length:", completeContentRef.current.length)
-	console.log("completeContentRef.current excerpt:", completeContentRef.current.substring(0, 100))
+			// Use regex to find all complete commands
+			const commandRegex = /<!-- COMMAND_START -->\s*([\s\S]*?)\s*<!-- COMMAND_END -->/g
+			let match = null
+			let lastIndex = 0
+			const commands: any[] = []
 
-	// Check if it contains command markers
-	const hasCommandStart = completeContentRef.current.includes("<!-- COMMAND_START -->")
-	const hasCommandEnd = completeContentRef.current.includes("<!-- COMMAND_END -->")
-	console.log("Complete content command marker check:", { hasCommandStart, hasCommandEnd })
+			// Find all complete commands
+			// eslint-disable-next-line no-cond-assign
+			while ((match = commandRegex.exec(buffer)) !== null) {
+				try {
+					const commandJson = match[1].trim()
+					console.log("Attempting to parse command:", commandJson)
+					const command = JSON.parse(commandJson)
+					commands.push(command)
+					lastIndex = match.index + match[0].length
+					commandsProcessed = true
 
-	// Extract commands and status, and clean content
-	const { updatedContent: contentWithoutCommands, commands } = extractCommands(
-		completeContentRef.current,
+					// If previously collecting commands, and now found complete command, notify end of collection
+					if (isCollectingCommandRef.current) {
+						isCollectingCommandRef.current = false
+						if (onCommandProcessingStatusChange) {
+							onCommandProcessingStatusChange(false)
+						}
+					}
+				} catch (error) {
+					console.error(
+						"Failed to parse command JSON:",
+						error,
+						"Command content:",
+						match[1],
+					)
+				}
+			}
+
+			// Process found commands
+			if (commands.length > 0) {
+				processingCommandsRef.current = true
+				try {
+					// Save commands to the record of processed commands
+					commands.forEach((cmd) => {
+						processedCommandsRef.current.add(JSON.stringify(cmd))
+					})
+					onCommandsReceived(commands)
+				} catch (error) {
+					console.error("Error processing commands:", error)
+				}
+			}
+
+			return commandsProcessed
+		},
+		[onCommandsReceived, onCommandProcessingStatusChange],
 	)
 
-	console.log("Content after processing commands:", contentWithoutCommands.substring(0, 100))
+	// Process complete content and extract commands
+	const processCompleteContent = useCallback(() => {
+		// Print current complete content
+		console.log(
+			"Starting to process complete content, length:",
+			completeContentRef.current.length,
+		)
+		console.log(
+			"completeContentRef.current excerpt:",
+			completeContentRef.current.substring(0, 100),
+		)
+
+		// Check if it contains command markers
+		const hasCommandStart = completeContentRef.current.includes("<!-- COMMAND_START -->")
+		const hasCommandEnd = completeContentRef.current.includes("<!-- COMMAND_END -->")
+		console.log("Complete content command marker check:", { hasCommandStart, hasCommandEnd })
+
+		// Extract commands and status, and clean content
+		const { updatedContent: contentWithoutCommands, commands } = extractCommands(
+			completeContentRef.current,
+		)
+
+		console.log("Content after processing commands:", contentWithoutCommands.substring(0, 100))
 
 		// Filter out commands that have already been processed
 		const newCommands = commands.filter((cmd) => {
@@ -445,7 +458,11 @@ const processCompleteContent = useCallback(() => {
 					}
 				} catch (lockCheckError) {
 					console.error("Error when checking stream lock status:", lockCheckError)
-					onError(`${t("flowAssistant.error", { ns: "flow" })}: Unable to check stream status`)
+					onError(
+						`${t("flowAssistant.error", {
+							ns: "flow",
+						})}: Unable to check stream status`,
+					)
 					setIsProcessing(false)
 					streamProcessingRef.current = false
 					return
@@ -459,12 +476,17 @@ const processCompleteContent = useCallback(() => {
 					// 7. Log detailed error information when creating reader
 					const errorMessage =
 						readerError instanceof Error ? readerError.message : String(readerError)
-					console.error(`Failed to create reader (stream ID: ${currentResponseBodyId}):`, errorMessage)
+					console.error(
+						`Failed to create reader (stream ID: ${currentResponseBodyId}):`,
+						errorMessage,
+					)
 
 					// 8. If it's a stream lock error, provide more specific error information
 					if (errorMessage.includes("locked to a reader")) {
 						onError(
-							`${t("flowAssistant.error", { ns: "flow" })}: Stream is already locked, unable to read response`,
+							`${t("flowAssistant.error", {
+								ns: "flow",
+							})}: Stream is already locked, unable to read response`,
 						)
 					} else {
 						onError(`${t("flowAssistant.error", { ns: "flow" })}: ${errorMessage}`)
@@ -483,19 +505,19 @@ const processCompleteContent = useCallback(() => {
 						const result = await readerRef.current.read()
 
 						if (result.done) {
-						// Ensure all content is displayed
+							// Ensure all content is displayed
 							if (newContentBufferRef.current.length > 0) {
-							// Display the last content immediately in full, not character by character
+								// Display the last content immediately in full, not character by character
 								displayContentRef.current += newContentBufferRef.current
 								newContentBufferRef.current = ""
 								onTextUpdate(displayContentRef.current)
 
-							// Final command buffer processing
-							// Added: Process possible commands in complete content
+								// Final command buffer processing
+								// Added: Process possible commands in complete content
 								processCompleteContent()
 							}
 
-						// 10. Log stream processing completion time and duration
+							// 10. Log stream processing completion time and duration
 							const streamEndTime = Date.now()
 							console.log(
 								`Stream processing complete: ${currentResponseBodyId}, ` +
@@ -543,7 +565,7 @@ const processCompleteContent = useCallback(() => {
 							const errorMessage =
 								error instanceof Error ? error.message : String(error)
 							console.error(
-							`Failed to process data chunk (stream ID: ${currentResponseBodyId}):`,
+								`Failed to process data chunk (stream ID: ${currentResponseBodyId}):`,
 								errorMessage,
 							)
 							setIsProcessing(false)
@@ -561,7 +583,10 @@ const processCompleteContent = useCallback(() => {
 			} catch (error) {
 				if (!isAborted) {
 					const errorMessage = error instanceof Error ? error.message : String(error)
-					console.error(`Failed to process stream data (stream ID: ${currentResponseBodyId}):`, errorMessage)
+					console.error(
+						`Failed to process stream data (stream ID: ${currentResponseBodyId}):`,
+						errorMessage,
+					)
 					onError(`${t("flowAssistant.error", { ns: "flow" })}: ${errorMessage}`)
 					setIsProcessing(false)
 					streamProcessingRef.current = false
@@ -572,7 +597,10 @@ const processCompleteContent = useCallback(() => {
 
 		// Start stream processing
 		processStream().catch((error) => {
-			console.error(`Failed to start stream processing (stream ID: ${currentResponseBodyId}):`, error)
+			console.error(
+				`Failed to start stream processing (stream ID: ${currentResponseBodyId}):`,
+				error,
+			)
 		})
 
 		// Cleanup function
@@ -691,8 +719,3 @@ StreamProcessor.createMockStream = (completeResponse: string): ReadableStream<Ui
 }
 
 export default StreamProcessor
-
-
-
-
-

@@ -40,7 +40,11 @@ const App = () => {
 	}
 
 	return (
-		<DelightfulSegmented options={["Daily", "Weekly", "Monthly"]} value={value} onChange={handleChange} />
+		<DelightfulSegmented
+			options={["Daily", "Weekly", "Monthly"]}
+			value={value}
+			onChange={handleChange}
+		/>
 	)
 }
 ```
@@ -96,7 +100,12 @@ const App = () => {
 import { DelightfulSegmented } from "@delightful/delightful-ui"
 
 const App = () => {
-	return <DelightfulSegmented options={["Option One", "Option Two", "Option Three"]} circle={false} />
+	return (
+		<DelightfulSegmented
+			options={["Option One", "Option Two", "Option Three"]}
+			circle={false}
+		/>
+	)
 }
 ```
 
@@ -106,7 +115,12 @@ const App = () => {
 import { DelightfulSegmented } from "@delightful/delightful-ui"
 
 const App = () => {
-	return <DelightfulSegmented options={["Option One", "Option Two", "Option Three"]} disabled={true} />
+	return (
+		<DelightfulSegmented
+			options={["Option One", "Option Two", "Option Three"]}
+			disabled={true}
+		/>
+	)
 }
 ```
 
@@ -120,15 +134,15 @@ The DelightfulSegmented component inherits all properties from Ant Design Segmen
 
 Inherited key props include:
 
-| Prop Name    | Type                                                                                                               | Default  | Description                     |
-| ------------ | ------------------------------------------------------------------------------------------------------------------ | -------- | -------------------------------- |
-| options      | string[] \| number[] \| Array<{ label: ReactNode; value: string \| number; icon?: ReactNode; disabled?: boolean }> | []       | Configure each segmented item   |
-| defaultValue | string \| number                                                                                                   | -        | Default selected value          |
-| value        | string \| number                                                                                                   | -        | Current selected value          |
-| onChange     | (value: string \| number) => void                                                                                  | -        | Callback when option changes    |
-| disabled     | boolean                                                                                                            | false    | Whether disabled                |
-| block        | boolean                                                                                                            | false    | Stretch to parent width         |
-| size         | 'large' \| 'middle' \| 'small'                                                                                     | 'middle' | Control size                    |
+| Prop Name    | Type                                                                                                               | Default  | Description                   |
+| ------------ | ------------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------- |
+| options      | string[] \| number[] \| Array<{ label: ReactNode; value: string \| number; icon?: ReactNode; disabled?: boolean }> | []       | Configure each segmented item |
+| defaultValue | string \| number                                                                                                   | -        | Default selected value        |
+| value        | string \| number                                                                                                   | -        | Current selected value        |
+| onChange     | (value: string \| number) => void                                                                                  | -        | Callback when option changes  |
+| disabled     | boolean                                                                                                            | false    | Whether disabled              |
+| block        | boolean                                                                                                            | false    | Stretch to parent width       |
+| size         | 'large' \| 'middle' \| 'small'                                                                                     | 'middle' | Control size                  |
 
 For more props, see the [Ant Design Segmented documentation](https://ant.design/components/segmented/).
 

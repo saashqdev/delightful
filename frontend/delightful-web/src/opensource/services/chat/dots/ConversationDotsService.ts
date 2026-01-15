@@ -3,7 +3,6 @@ import conversationStore from "@/opensource/stores/chatNew/conversation"
 import ConversationDbServices from "@/opensource/services/chat/conversation/ConversationDbService"
 import MessageStore from "@/opensource/stores/chatNew/message"
 import { toJS } from "mobx"
-import { count } from "console"
 
 /**
  * Conversation red-dot service.
@@ -36,19 +35,15 @@ class ConversationDotsService {
 
 				setTimeout(() => {
 					const count = conversationStore.getConversationDots(conversationId)
-					console.log(
-						"ConversationDotsService addUnreadDots",
-						// Update DB
-						topicId,
-						dots,
-						count,
-					)
+					const topicUnreadDotsMap =
+						conversationStore.getAllTopicUnreadDots(conversationId)
+					console.log("ConversationDotsService addUnreadDots", topicId, dots, count)
 
 					// Update database
 					ConversationDbServices.updateUnreadDots(
 						conversationId,
-								console.log("ConversationDotsService addUnreadDots updateUnreadDots success")
-						),
+						count,
+						Object.fromEntries(topicUnreadDotsMap.entries()),
 					)
 						.then(() => {
 							console.log(
@@ -75,10 +70,10 @@ class ConversationDotsService {
 							Object.fromEntries(topicUnreadDots.entries()),
 						)
 					}
-		 * Decrease topic unread counts.
-		 * @param conversationId Conversation ID
-		 * @param topicId Topic ID
-		 * @param dots Amount to decrease
+				})
+			}
+		}
+	}
 
 	/**
 	 * Reduce topic unread count

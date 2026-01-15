@@ -55,7 +55,9 @@ export default createStyles(({ prefixCls, css, isDarkMode, token }) => ({
 	`,
 	groupAvatarTip: css`
 		font-size: 12px;
-		color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
+		color: ${isDarkMode
+			? token.delightfulColorScales.grey[5]
+			: token.delightfulColorUsages.text[3]};
 	`,
 	divider: css`
 		--${prefixCls}-color-split: ${token.colorBorder};

@@ -9,8 +9,3 @@ export const AgentComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

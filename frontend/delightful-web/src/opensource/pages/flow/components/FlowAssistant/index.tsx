@@ -460,7 +460,7 @@ export default function FlowAssistant({
 								...msg,
 								isCollectingCommand: processStatus,
 								content: processStatus
-								? `${msg.content}\n\n[processing commands...]`
+									? `${msg.content}\n\n[processing commands...]`
 									: msg.content,
 						  }
 						: msg,
@@ -484,104 +484,104 @@ export default function FlowAssistant({
 
 		setCommandQueue((prev) => {
 			// Filter out duplicate commands (based on type and other key properties)
-		const newCommands = commands.filter(
-			(newCmd) =>
-				!prev.some(
-					(existing) =>
-						existing.type === newCmd.type &&
-						JSON.stringify(existing) === JSON.stringify(newCmd),
-				),
+			const newCommands = commands.filter(
+				(newCmd) =>
+					!prev.some(
+						(existing) =>
+							existing.type === newCmd.type &&
+							JSON.stringify(existing) === JSON.stringify(newCmd),
+					),
+			)
+
+			if (newCommands.length === 0) return prev
+			return [...prev, ...newCommands]
+		})
+	})
+
+	const handleStreamError = useMemoizedFn((errorMessage: string) => {
+		if (!processingMessageId) return
+		setIsProcessing(false)
+		setMessages((prev) =>
+			prev.map((msg) =>
+				msg.id === processingMessageId
+					? { ...msg, content: errorMessage, status: "error" }
+					: msg,
+			),
+		)
+	})
+
+	const handleStreamComplete = useMemoizedFn(() => {
+		console.log(`handleStreamComplete called, processingMessageId=${processingMessageId}`)
+		setIsProcessing(false)
+		setStreamResponse(null)
+
+		if (processingMessageId) {
+			setMessages((prev) =>
+				prev.map((msg) => {
+					if (msg.id === processingMessageId) {
+						console.log(
+							`Updating message ${msg.id} status to done, current status: ${msg.status}, content: ${msg.content}`,
+						)
+						return {
+							...msg,
+							status: "done",
+							confirmOperation: msg.confirmOperation || undefined,
+						}
+					}
+					return msg
+				}),
+			)
+		}
+
+		setProcessingMessageId(null)
+	})
+
+	const handleRetry = useMemoizedFn(async (messageId: string) => {
+		const errorMessage = messages.find(
+			(msg) => msg.id === messageId && msg.status === "error" && msg.role === "assistant",
 		)
 
-		if (newCommands.length === 0) return prev
-		return [...prev, ...newCommands]
-	})
-})
+		if (!errorMessage) return
 
-const handleStreamError = useMemoizedFn((errorMessage: string) => {
-	if (!processingMessageId) return
-	setIsProcessing(false)
-	setMessages((prev) =>
-		prev.map((msg) =>
-			msg.id === processingMessageId
-				? { ...msg, content: errorMessage, status: "error" }
-				: msg,
-		),
-	)
-})
+		const errorIndex = messages.findIndex((msg) => msg.id === messageId)
+		if (errorIndex <= 0) return
 
-const handleStreamComplete = useMemoizedFn(() => {
-	console.log(`handleStreamComplete called, processingMessageId=${processingMessageId}`)
-	setIsProcessing(false)
-	setStreamResponse(null)
-
-	if (processingMessageId) {
-		setMessages((prev) =>
-			prev.map((msg) => {
-				if (msg.id === processingMessageId) {
-					console.log(
-						`Updating message ${msg.id} status to done, current status: ${msg.status}, content: ${msg.content}`,
-					)
-					return {
-						...msg,
-						status: "done",
-						confirmOperation: msg.confirmOperation || undefined,
-					}
+		let userMessageIndex = errorIndex - 1
+		while (userMessageIndex >= 0) {
+			if (messages[userMessageIndex].role === "user") {
+				break
 			}
-			return msg
-		}),
-	)
-}
-
-setProcessingMessageId(null)
-})
-
-const handleRetry = useMemoizedFn(async (messageId: string) => {
-	const errorMessage = messages.find(
-		(msg) => msg.id === messageId && msg.status === "error" && msg.role === "assistant",
-	)
-
-	if (!errorMessage) return
-
-	const errorIndex = messages.findIndex((msg) => msg.id === messageId)
-	if (errorIndex <= 0) return
-
-	let userMessageIndex = errorIndex - 1
-	while (userMessageIndex >= 0) {
-		if (messages[userMessageIndex].role === "user") {
-			break
+			userMessageIndex--
 		}
-		userMessageIndex--
-	}
 
-	if (userMessageIndex < 0) return
+		if (userMessageIndex < 0) return
 
-	const userMessage = messages[userMessageIndex]
+		const userMessage = messages[userMessageIndex]
 
-	if (isProcessing) {
-		antdMessage.info(t("flowAssistant.waitForProcessing", { ns: "flow" }))
-		return
-	}
+		if (isProcessing) {
+			antdMessage.info(t("flowAssistant.waitForProcessing", { ns: "flow" }))
+			return
+		}
 
-	setMessages((prev) => prev.filter((msg) => msg.id !== messageId))
+		setMessages((prev) => prev.filter((msg) => msg.id !== messageId))
 
-	const newAssistantMessageId = Date.now().toString()
-	const loadingAssistantMessage: Message = {
-		id: newAssistantMessageId,
-		role: "assistant",
-		content: "",
-		status: "loading",
-	}
+		const newAssistantMessageId = Date.now().toString()
+		const loadingAssistantMessage: Message = {
+			id: newAssistantMessageId,
+			role: "assistant",
+			content: "",
+			status: "loading",
+		}
 
-	setMessages((prev) => [...prev, loadingAssistantMessage])
-	setForceScroll(true)
-	setProcessingMessageId(newAssistantMessageId)
-	setIsProcessing(true)
+		setMessages((prev) => [...prev, loadingAssistantMessage])
+		setForceScroll(true)
+		setProcessingMessageId(newAssistantMessageId)
+		setIsProcessing(true)
 
-	try {
-		const result = await sendAgentMessage(userMessage.content, {
-			conversationId: conversationId || "temp-conversation",
-			includeFlowData: false,
+		try {
+			const result = await sendAgentMessage(userMessage.content, {
+				conversationId: conversationId || "temp-conversation",
+				includeFlowData: false,
 			})
 
 			if (result.isError) {
@@ -911,9 +911,3 @@ const handleRetry = useMemoizedFn(async (messageId: string) => {
 		</Resizable>
 	)
 }
-
-
-
-
-
-

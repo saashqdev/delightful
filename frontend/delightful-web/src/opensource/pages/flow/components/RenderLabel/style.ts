@@ -9,8 +9,3 @@ const useStyles = createStyles(({ css }) => {
 })
 
 export default useStyles
-
-
-
-
-

@@ -9,8 +9,3 @@ export const VectorComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

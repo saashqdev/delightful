@@ -75,11 +75,7 @@ const EmojiSelect = memo(
 					onMouseLeave={handleMouseLeave}
 					style={{ height: 48 }}
 				>
-					<DelightfulEmoji
-						ns={ns}
-						code={config.code}
-						className={emojiClassName}
-					/>
+					<DelightfulEmoji ns={ns} code={config.code} className={emojiClassName} />
 				</div>
 			</Tooltip>
 		)

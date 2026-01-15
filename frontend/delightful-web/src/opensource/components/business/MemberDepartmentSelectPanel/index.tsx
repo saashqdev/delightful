@@ -35,7 +35,8 @@ type CheckboxOptions = {
  * Supports selecting members, departments, groups, and partners
  */
 const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProps) => {
-	const { title, onOk, onCancel, disabledValues, filterResult, withoutGroup, ...modalProps } = props
+	const { title, onOk, onCancel, disabledValues, filterResult, withoutGroup, ...modalProps } =
+		props
 
 	const { styles } = useStyles()
 	const { t } = useTranslation("interface")
@@ -73,22 +74,21 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 		return groupBy(selected, (item) => item.dataType)
 	}, [selected])
 
-	const segmentOptions = useMemo(
-		() => {
-			const options = [
-				// {
-				// 	label: t("memberDepartmentSelectPanel.recentContacts"),
-				// 	value: PanelKey.Recent,
-				// },
-				{
-					label: t("memberDepartmentSelectPanel.byOrganization"),
-					value: PanelKey.ByOrganization,
-				},
-				
-				// {
-				// 	label: t("memberDepartmentSelectPanel.byPartner"),
-				// 	value: PanelKey.ByPartner,
-				// },
+	const segmentOptions = useMemo(() => {
+		const options = [
+			// {
+			// 	label: t("memberDepartmentSelectPanel.recentContacts"),
+			// 	value: PanelKey.Recent,
+			// },
+			{
+				label: t("memberDepartmentSelectPanel.byOrganization"),
+				value: PanelKey.ByOrganization,
+			},
+
+			// {
+			// 	label: t("memberDepartmentSelectPanel.byPartner"),
+			// 	value: PanelKey.ByPartner,
+			// },
 		]
 		// if (!withoutGroup) {
 		// 	options.push({

@@ -59,7 +59,9 @@ export const useStyles = createStyles(({ css, isDarkMode, cx, prefixCls, token }
 	`
 
 	const extra = cx(css`
-		color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[1]};
+		color: ${isDarkMode
+			? token.delightfulColorScales.grey[4]
+			: token.delightfulColorUsages.text[1]};
 		cursor: pointer;
 		display: none;
 		flex-shrink: 0;

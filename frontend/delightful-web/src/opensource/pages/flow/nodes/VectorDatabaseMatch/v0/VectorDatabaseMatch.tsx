@@ -152,8 +152,3 @@ export default function VectorDatabaseMatchV0() {
 		</NodeOutputWrap>
 	)
 }
-
-
-
-
-

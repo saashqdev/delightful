@@ -4,33 +4,33 @@ PDF preview component built on `react-pdf`, supporting both File objects and URL
 
 ## Features
 
-- ✅ Supports local files (File objects) and remote URLs
-- ✅ Full toolbar: paging, zoom, rotate, download, fullscreen, etc.
-- ✅ Keyboard shortcuts
-- ✅ Responsive design
-- ✅ Error handling and loading states
-- ✅ TypeScript support
-- ✅ Custom styling (based on antd-style)
-- ✅ Internationalization (Chinese/English)
+-   ✅ Supports local files (File objects) and remote URLs
+-   ✅ Full toolbar: paging, zoom, rotate, download, fullscreen, etc.
+-   ✅ Keyboard shortcuts
+-   ✅ Responsive design
+-   ✅ Error handling and loading states
+-   ✅ TypeScript support
+-   ✅ Custom styling (based on antd-style)
+-   ✅ Internationalization (Chinese/English)
 
 ## Basic Usage
 
 ```tsx
-import DelightfulPdfRender from './components/base/DelightfulPdfRender'
+import DelightfulPdfRender from "./components/base/DelightfulPdfRender"
 
 function App() {
-  const [file, setFile] = useState<File | string | null>(null)
-  
-  return (
-    <DelightfulPdfRender
-      file={file}
-      height={600}
-      showToolbar
-      enableKeyboard
-      onLoadSuccess={(pdf) => console.log('Loaded successfully', pdf)}
-      onLoadError={(error) => console.error('Load failed', error)}
-    />
-  )
+	const [file, setFile] = useState<File | string | null>(null)
+
+	return (
+		<DelightfulPdfRender
+			file={file}
+			height={600}
+			showToolbar
+			enableKeyboard
+			onLoadSuccess={(pdf) => console.log("Loaded successfully", pdf)}
+			onLoadError={(error) => console.error("Load failed", error)}
+		/>
+	)
 }
 ```
 
@@ -38,54 +38,56 @@ function App() {
 
 ### Props
 
-| Prop          | Description                                             | Type                    | Default  |
-| ------------- | ------------------------------------------------------- | ----------------------- | -------- |
-| file          | PDF source; can be a File object or URL string         | `File \| string \| null` | -        |
-| showToolbar   | Whether to display the toolbar                         | `boolean`               | `true`   |
-| initialScale  | Initial zoom scale                                     | `number`                | `1.0`    |
-| minScale      | Minimum zoom scale                                     | `number`                | `0.5`    |
-| maxScale      | Maximum zoom scale                                     | `number`                | `3.0`    |
-| scaleStep     | Zoom step                                              | `number`                | `0.1`    |
-| height        | Container height                                       | `string \| number`      | `600`    |
-| width         | Container width                                        | `string \| number`      | `'100%'` |
-| enableKeyboard| Enable keyboard shortcuts                              | `boolean`               | `true`   |
-| onLoadError   | Callback on load failure                               | `(error: Error) => void`| -        |
-| onLoadSuccess | Callback on successful load                            | `(pdf: any) => void`    | -        |
+| Prop           | Description                                    | Type                     | Default  |
+| -------------- | ---------------------------------------------- | ------------------------ | -------- |
+| file           | PDF source; can be a File object or URL string | `File \| string \| null` | -        |
+| showToolbar    | Whether to display the toolbar                 | `boolean`                | `true`   |
+| initialScale   | Initial zoom scale                             | `number`                 | `1.0`    |
+| minScale       | Minimum zoom scale                             | `number`                 | `0.5`    |
+| maxScale       | Maximum zoom scale                             | `number`                 | `3.0`    |
+| scaleStep      | Zoom step                                      | `number`                 | `0.1`    |
+| height         | Container height                               | `string \| number`       | `600`    |
+| width          | Container width                                | `string \| number`       | `'100%'` |
+| enableKeyboard | Enable keyboard shortcuts                      | `boolean`                | `true`   |
+| onLoadError    | Callback on load failure                       | `(error: Error) => void` | -        |
+| onLoadSuccess  | Callback on successful load                    | `(pdf: any) => void`     | -        |
 
 ## Keyboard Shortcuts
 
-| Shortcut   | Action             |
-| ---------- | ------------------ |
-| `←` / `→`  | Previous / Next    |
-| `+` / `-`  | Zoom in / out      |
-| `Ctrl+0`   | Reset zoom         |
-| `F11`      | Toggle fullscreen  |
+| Shortcut  | Action            |
+| --------- | ----------------- |
+| `←` / `→` | Previous / Next   |
+| `+` / `-` | Zoom in / out     |
+| `Ctrl+0`  | Reset zoom        |
+| `F11`     | Toggle fullscreen |
 
 ## Toolbar
 
-- **Paging controls**: Previous, Next, jump via page number input
-- **Zoom controls**: Zoom in, zoom out, set zoom percentage
-- **Rotate**: Rotate 90° clockwise/counterclockwise
-- **Document actions**: Reload, download PDF
-- **Display**: Fullscreen preview
+-   **Paging controls**: Previous, Next, jump via page number input
+-   **Zoom controls**: Zoom in, zoom out, set zoom percentage
+-   **Rotate**: Rotate 90° clockwise/counterclockwise
+-   **Document actions**: Reload, download PDF
+-   **Display**: Fullscreen preview
 
 ## File Sources
 
 ### Local File
+
 ```tsx
 const handleFileUpload = (file: File) => {
-  setFile(file)
+	setFile(file)
 }
 
 // In an Upload component
-<Upload beforeUpload={handleFileUpload}>
-  <Button>Upload PDF</Button>
+;<Upload beforeUpload={handleFileUpload}>
+	<Button>Upload PDF</Button>
 </Upload>
 ```
 
 ### Remote URL
+
 ```tsx
-const pdfUrl = 'https://example.com/document.pdf'
+const pdfUrl = "https://example.com/document.pdf"
 setFile(pdfUrl)
 ```
 
@@ -95,19 +97,19 @@ The component uses `antd-style` for styling; customize via CSS-in-JS:
 
 ```tsx
 const useCustomStyles = createStyles(({ token }) => ({
-  customContainer: {
-    border: `2px solid ${token.colorPrimary}`,
-    borderRadius: '12px',
-  }
+	customContainer: {
+		border: `2px solid ${token.colorPrimary}`,
+		borderRadius: "12px",
+	},
 }))
 ```
 
 ## Requirements
 
-- React 18+
-- antd 5+
-- react-pdf 9+
-- antd-style 3+
+-   React 18+
+-   antd 5+
+-   react-pdf 9+
+-   antd-style 3+
 
 ## Notes
 
@@ -122,12 +124,12 @@ The component provides comprehensive error handling:
 
 ```tsx
 <DelightfulPdfRender
-  file={file}
-  onLoadError={(error) => {
-    console.error('PDF load failed:', error)
-    // Show a user-friendly error message
-    message.error('Failed to load PDF. Check file format or network.')
-  }}
+	file={file}
+	onLoadError={(error) => {
+		console.error("PDF load failed:", error)
+		// Show a user-friendly error message
+		message.error("Failed to load PDF. Check file format or network.")
+	}}
 />
 ```
 
@@ -146,7 +148,7 @@ ns: ["translation", "common", "interface", "message", "flow", "delightfulFlow", 
 
 ### Language Files
 
-- English: `src/assets/locales/en_US/component.json`
+-   English: `src/assets/locales/en_US/component.json`
 
 ### Switch Language
 
@@ -154,19 +156,19 @@ ns: ["translation", "common", "interface", "message", "flow", "delightfulFlow", 
 import { useTranslation } from "react-i18next"
 
 function App() {
-  const { i18n } = useTranslation()
-  
-  const switchLanguage = (lang: string) => {
-    i18n.changeLanguage(lang)
-  }
-  
-  return (
-    <div>
-      <Button onClick={() => switchLanguage("en_US")}>Chinese</Button>
-      <Button onClick={() => switchLanguage("en_US")}>English</Button>
-      <DelightfulPdfRender file={file} />
-    </div>
-  )
+	const { i18n } = useTranslation()
+
+	const switchLanguage = (lang: string) => {
+		i18n.changeLanguage(lang)
+	}
+
+	return (
+		<div>
+			<Button onClick={() => switchLanguage("en_US")}>Chinese</Button>
+			<Button onClick={() => switchLanguage("en_US")}>English</Button>
+			<DelightfulPdfRender file={file} />
+		</div>
+	)
 }
 ```
 
@@ -174,8 +176,8 @@ function App() {
 
 All UI text supports i18n, including:
 
-- Toolbar button tooltips
-- Page navigation info
-- Error and status messages
-- Dropdown options
-- Placeholder text
+-   Toolbar button tooltips
+-   Page navigation info
+-   Error and status messages
+-   Dropdown options
+-   Placeholder text

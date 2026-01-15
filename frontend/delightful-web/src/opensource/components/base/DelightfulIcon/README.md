@@ -4,12 +4,12 @@
 
 ## Props
 
-| Prop         | Type                                                                    | Default | Description                          |
-| ------------ | ----------------------------------------------------------------------- | ------- | ------------------------------------ |
-| component    | ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>> | -       | Tabler icon component to render      |
-| active       | boolean                                                                 | false   | Whether in active state              |
-| animation    | boolean                                                                 | false   | Whether to enable animation          |
-| ...IconProps | -                                                                       | -       | Supports all Tabler Icons props      |
+| Prop         | Type                                                                    | Default | Description                     |
+| ------------ | ----------------------------------------------------------------------- | ------- | ------------------------------- |
+| component    | ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>> | -       | Tabler icon component to render |
+| active       | boolean                                                                 | false   | Whether in active state         |
+| animation    | boolean                                                                 | false   | Whether to enable animation     |
+| ...IconProps | -                                                                       | -       | Supports all Tabler Icons props |
 
 ## Basic Usage
 

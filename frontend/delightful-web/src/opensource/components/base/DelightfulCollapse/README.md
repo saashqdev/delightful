@@ -4,8 +4,8 @@
 
 ## Props
 
-| Prop             | Type | Default | Description                         |
-| ---------------- | ---- | ------- | ----------------------------------- |
+| Prop             | Type | Default | Description                            |
+| ---------------- | ---- | ------- | -------------------------------------- |
 | ...CollapseProps | -    | -       | Supports all Ant Design Collapse props |
 
 ## Basic Usage
@@ -69,9 +69,9 @@ const { Panel } = Collapse;
 
 ## When to Use
 
-- Group complex content for easier presentation
-- Save page space by collapsing content
-- Create accordion effects (only one panel open at a time)
-- Categorize information and allow users to view on demand
+-   Group complex content for easier presentation
+-   Save page space by collapsing content
+-   Create accordion effects (only one panel open at a time)
+-   Categorize information and allow users to view on demand
 
 The `DelightfulCollapse` component makes your collapse panels more elegant and user-friendly while retaining all features of Ant Design's Collapse.

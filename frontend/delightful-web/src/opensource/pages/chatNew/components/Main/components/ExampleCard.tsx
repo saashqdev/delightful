@@ -9,7 +9,9 @@ const useExampleMessageStyles = createStyles(({ isDarkMode, token }) => {
 			borderRadius: 100,
 			border: `1px solid ${token.colorBorder}`,
 			background: isDarkMode ? token.delightfulColorScales.grey[7] : token.colorWhite,
-			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
+			color: isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1],
 			fontSize: 14,
 			fontWeight: 400,
 			lineHeight: "20px",

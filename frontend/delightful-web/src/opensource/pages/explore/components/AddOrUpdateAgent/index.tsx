@@ -174,7 +174,11 @@ function AddOrUpdateAgent({ agent, open, close, submit }: AddOrUpdateAgentProps)
 				<Form.Item name="robot_avatar" className={styles.formItem}>
 					<Flex vertical align="center" gap={10} className={styles.uploadAvatarBox}>
 						{imageUrl ? (
-							<DelightfulAvatar size={100} src={imageUrl} style={{ borderRadius: 20 }} />
+							<DelightfulAvatar
+								size={100}
+								src={imageUrl}
+								style={{ borderRadius: 20 }}
+							/>
 						) : (
 							<img
 								src={defaultAgentAvatar}

@@ -9,8 +9,3 @@ export const BranchComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

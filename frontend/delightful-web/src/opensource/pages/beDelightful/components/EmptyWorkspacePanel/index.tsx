@@ -50,9 +50,15 @@ export default function EmptyWorkspacePanel(props: EmptyWorkspacePanelProps) {
 
 	return (
 		<div className={styles.emptyWorkspacePanelContainer}>
-			<img src={delightfulBetaImage} alt="delightful" className={styles.delightfulBetaImage} />
+			<img
+				src={delightfulBetaImage}
+				alt="delightful"
+				className={styles.delightfulBetaImage}
+			/>
 			<div className={styles.emptyWorkspacePanelTitle}>👋 Hey, my friend</div>
-			<div className={styles.emptyWorkspacePanelSubTitle}>How can Delightful help you today?</div>
+			<div className={styles.emptyWorkspacePanelSubTitle}>
+				How can Delightful help you today?
+			</div>
 			<div className={styles.emptyWorkspacePanelCaseTitle}>“✨ 100× productivity cases”</div>
 			<img src={arrowBottomImage} alt="arrow-bottom" className={styles.arrowBottomImage} />
 			<div className={styles.emptyWorkspacePanelCaseTypeList}>

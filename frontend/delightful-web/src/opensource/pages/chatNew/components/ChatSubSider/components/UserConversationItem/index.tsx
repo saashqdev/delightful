@@ -67,7 +67,7 @@ const UserConversationItem = observer(({ conversationId, onClick }: UserConversa
 				<div style={{ flexShrink: 0 }}>
 					<ConversationBadge count={conversation.unread_dots}>{Avatar}</ConversationBadge>
 				</div>
-			{/* Content */}
+				{/* Content */}
 				<Flex vertical flex={1} justify="space-between" className={styles.mainWrapper}>
 					<Flex align="center" justify="space-between" className={styles.top}>
 						<span className={styles.title}>{getUserName(userInfo)}</span>
@@ -77,13 +77,15 @@ const UserConversationItem = observer(({ conversationId, onClick }: UserConversa
 					</Flex>
 					<LastMessageRender message={lastMessage} className={styles.content} />
 				</Flex>
-			{/* More */}
+				{/* More */}
 				<div className={styles.extra} onClick={(e) => e.stopPropagation()}>
 					<DelightfulButton
 						type="text"
 						className={styles.moreButton}
 						onClick={toggle}
-						icon={<DelightfulIcon color="currentColor" component={IconDots} size={18} />}
+						icon={
+							<DelightfulIcon color="currentColor" component={IconDots} size={18} />
+						}
 					/>
 				</div>
 			</Flex>

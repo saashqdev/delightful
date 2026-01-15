@@ -82,8 +82,3 @@ export default function KnowledgeSelect({
 		</Form.Item>
 	)
 }
-
-
-
-
-

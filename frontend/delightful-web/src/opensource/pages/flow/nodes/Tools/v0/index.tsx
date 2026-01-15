@@ -196,7 +196,7 @@ export default function ToolsV0() {
 						showSearch
 						// Search key
 						optionFilterProp="realLabel"
-					// Sort
+						// Sort
 						filterSort={(optionA, optionB) => {
 							return (optionA?.realLabel ?? "")
 								.toLowerCase()
@@ -308,8 +308,3 @@ export default function ToolsV0() {
 		</NodeOutputWrap>
 	)
 }
-
-
-
-
-

@@ -236,8 +236,8 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 							style={{ resize: "none" }}
 							placeholder={
 								showLoading
-								? "You can continue talking to me to adjust the task in real time"
-								: "Give Delightful a task..."
+									? "You can continue talking to me to adjust the task in real time"
+									: "Give Delightful a task..."
 							}
 							onCompositionStart={() => setComposition(true)}
 							onCompositionEnd={() => setComposition(false)}
@@ -251,7 +251,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 									{isEmptyStatus ? (
 										<>
 											<Tooltip
-											title="AI autonomously plans and executes tasks step by step"
+												title="AI autonomously plans and executes tasks step by step"
 												placement="top"
 											>
 												<div
@@ -282,7 +282,10 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 													)}
 													onClick={() => setInputMode("chat")}
 												>
-													<DelightfulIcon component={IconSchool} size={16} />
+													<DelightfulIcon
+														component={IconSchool}
+														size={16}
+													/>
 													{"Professional"}
 												</div>
 											</Tooltip>
@@ -301,7 +304,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 														alt=""
 														className={styles.taskIcon}
 													/>
-														Task
+													Task
 												</div>
 											)}
 											{topicModeInfo === "chat" && (
@@ -311,7 +314,10 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 														styles.modeToggleButtonActive,
 													)}
 												>
-													<DelightfulIcon component={IconSchool} size={16} />
+													<DelightfulIcon
+														component={IconSchool}
+														size={16}
+													/>
 													{"Professional"}
 												</div>
 											)}
@@ -323,7 +329,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 								<div className={styles.modeToggle}>
 									{topicModeInfo === "plan" && (
 										<Tooltip
-										title="AI autonomously plans and executes tasks step by step"
+											title="AI autonomously plans and executes tasks step by step"
 											placement="top"
 										>
 											<div
@@ -343,7 +349,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 									)}
 									{topicModeInfo === "chat" && (
 										<Tooltip
-										title="AI executes step by step, collaborating with humans through multi-turn dialogue"
+											title="AI executes step by step, collaborating with humans through multi-turn dialogue"
 											placement="top"
 										>
 											<div
@@ -366,7 +372,9 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 									<Button
 										className={styles.toolBarButton}
 										onClick={trigger}
-										icon={<DelightfulIcon component={IconFileUpload} size={20} />}
+										icon={
+											<DelightfulIcon component={IconFileUpload} size={20} />
+										}
 										type="text"
 									>
 										File

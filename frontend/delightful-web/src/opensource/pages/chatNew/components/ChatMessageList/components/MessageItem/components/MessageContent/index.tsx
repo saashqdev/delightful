@@ -120,7 +120,7 @@ const MessageContent = observer(
 			>
 				{/* Send time and username */}
 				<MessageHeader isSelf={is_self} name={name} sendTime={message.send_time} />
-			{/* Message bubble */}
+				{/* Message bubble */}
 				<Flex gap={4} className={is_self ? styles.selfMessage : styles.otherMessage}>
 					<div
 						className={cx(

@@ -572,7 +572,12 @@ class MessageService {
 
 		if (currentConversation?.id === conversationId) {
 			MessageStore.addSendMessage(renderMessage)
-			console.log("Sending message to current conversation", conversationId, "message ID", sendId)
+			console.log(
+				"Sending message to current conversation",
+				conversationId,
+				"message ID",
+				sendId,
+			)
 		} else {
 			console.log(
 				"Sending message to non-current conversation",
@@ -753,7 +758,7 @@ class MessageService {
 		// TODO: Detect message type automatically
 		const { normalValue, onlyTextContent, jsonValue, files } = data
 		if (onlyTextContent) {
-				if (!normalValue) {
+			if (!normalValue) {
 				// If only files present, send files only
 				if (files.length > 0) {
 					console.log("Sending file message", files)
@@ -858,7 +863,13 @@ class MessageService {
 					return
 				}
 
-				console.log("Sending rich text message", normalValue, onlyTextContent, jsonValue, files)
+				console.log(
+					"Sending rich text message",
+					normalValue,
+					onlyTextContent,
+					jsonValue,
+					files,
+				)
 				this.formatAndSendMessage(
 					conversationId,
 					{
@@ -894,7 +905,12 @@ class MessageService {
 				...this.pendingMessages.get(messageId),
 				status,
 			} as ConversationMessageSend)
-			console.log("Update message status", messageId, status, this.pendingMessages.get(messageId))
+			console.log(
+				"Update message status",
+				messageId,
+				status,
+				this.pendingMessages.get(messageId),
+			)
 		}
 
 		if (updateDb) {

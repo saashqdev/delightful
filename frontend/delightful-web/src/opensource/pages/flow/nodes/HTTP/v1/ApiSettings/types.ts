@@ -23,8 +23,3 @@ export interface ApiSettingsInstance {
 }
 
 export default {}
-
-
-
-
-

@@ -33,9 +33,7 @@ const useStyles = createStyles(({ css, prefixCls, token }) => ({
 		background: rgba(0, 0, 0, 0.7);
 		padding: 10px;
 		z-index: 10;
-		box-shadow:
-			0 4px 14px 0 rgba(0, 0, 0, 0.1),
-			0 0 1px 0 rgba(0, 0, 0, 0.3);
+		box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1), 0 0 1px 0 rgba(0, 0, 0, 0.3);
 	`,
 	toolButton: css`
     padding: 4px;

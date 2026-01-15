@@ -40,8 +40,3 @@ export default function Text2ImageHeaderRightV1() {
 
 	return HeaderRight
 }
-
-
-
-
-

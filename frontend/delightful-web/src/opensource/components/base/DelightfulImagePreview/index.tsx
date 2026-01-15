@@ -128,7 +128,11 @@ const DelightfulImagePreview = memo((props: Props) => {
 						onClick={onPrev}
 						disabled={prevDisabled}
 					>
-						<DelightfulIcon color="currentColor" component={IconChevronLeft} size={24} />
+						<DelightfulIcon
+							color="currentColor"
+							component={IconChevronLeft}
+							size={24}
+						/>
 					</DelightfulButton>
 				)}
 				{onNext && (
@@ -138,12 +142,20 @@ const DelightfulImagePreview = memo((props: Props) => {
 						onClick={onNext}
 						disabled={nextDisabled}
 					>
-						<DelightfulIcon color="currentColor" component={IconChevronRight} size={24} />
+						<DelightfulIcon
+							color="currentColor"
+							component={IconChevronRight}
+							size={24}
+						/>
 					</DelightfulButton>
 				)}
 				{(onPrev || onNext) && <div className={styles.divider} />}
 				<Flex gap={8} align="center">
-					<DelightfulButton type="link" className={styles.toolButton} onClick={subTenPercent}>
+					<DelightfulButton
+						type="link"
+						className={styles.toolButton}
+						onClick={subTenPercent}
+					>
 						<DelightfulIcon color="currentColor" component={IconZoomOut} size={24} />
 					</DelightfulButton>
 					<Slider
@@ -159,17 +171,29 @@ const DelightfulImagePreview = memo((props: Props) => {
 						onChange={setScale}
 					/>
 					<span className={styles.sliderText}>{Math.round(scale * 100)}%</span>
-					<DelightfulButton type="link" className={styles.toolButton} onClick={addTenPercent}>
+					<DelightfulButton
+						type="link"
+						className={styles.toolButton}
+						onClick={addTenPercent}
+					>
 						<DelightfulIcon color="currentColor" component={IconZoomIn} size={24} />
 					</DelightfulButton>
 				</Flex>
 				{/* 1:1 */}
 				<DelightfulButton type="link" className={styles.toolButton} onClick={resetImage}>
-					<DelightfulIcon color="currentColor" component={IconRelationOneToOne} size={24} />
+					<DelightfulIcon
+						color="currentColor"
+						component={IconRelationOneToOne}
+						size={24}
+					/>
 				</DelightfulButton>
-			{/* Rotate */}
+				{/* Rotate */}
 				<DelightfulButton type="link" className={styles.toolButton} onClick={rotateImage}>
-					<DelightfulIcon color="currentColor" component={IconRotateRectangle} size={24} />
+					<DelightfulIcon
+						color="currentColor"
+						component={IconRotateRectangle}
+						size={24}
+					/>
 				</DelightfulButton>
 				{hasCompare && (
 					<>

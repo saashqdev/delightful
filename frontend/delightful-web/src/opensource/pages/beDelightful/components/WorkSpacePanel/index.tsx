@@ -106,7 +106,7 @@ const WorkspacePanel = ({
 					)
 
 					onWorkspacesChange(updatedWorkspaces)
-				// Auto-select the first topic only when deleting the currently selected topic
+					// Auto-select the first topic only when deleting the currently selected topic
 					if (threadId === selectedThreadInfo?.id && onSelectThread) {
 						const updatedWorkspace = updatedWorkspaces.find(
 							(ws) => ws.id === workspaceId,
@@ -114,7 +114,7 @@ const WorkspacePanel = ({
 						if (updatedWorkspace && updatedWorkspace.topics.length > 0) {
 							onSelectThread(updatedWorkspace.topics[0])
 						} else if (updatedWorkspace && updatedWorkspace.topics.length === 0) {
-						// Set selected topic to null when workspace has no remaining topics
+							// Set selected topic to null when workspace has no remaining topics
 							onSelectThread(null as any)
 						}
 					}
@@ -158,9 +158,9 @@ const WorkspacePanel = ({
 						if (setSelectedThreadInfo && newTopic) {
 							setSelectedThreadInfo(newTopic)
 						}
-					console.log("Get topics list result:", topicsRes)
+						console.log("Get topics list result:", topicsRes)
 
-					// First update the workspace's topic list
+						// First update the workspace's topic list
 						const updatedWorkspaces = workspaces.map((ws) =>
 							ws.id === workspaceId
 								? {
@@ -317,7 +317,11 @@ const WorkspacePanel = ({
 								icon={
 									<DelightfulIcon
 										size={18}
-										component={(isCollapsed ? IconChevronRight : IconChevronDown) as any}
+										component={
+											(isCollapsed
+												? IconChevronRight
+												: IconChevronDown) as any
+										}
 										stroke={2}
 									/>
 								}
@@ -335,7 +339,7 @@ const WorkspacePanel = ({
 								<>
 									<div className={styles.searchContainer}>
 										<Input
-										placeholder="Search topics"
+											placeholder="Search topics"
 											value={threadSearchText}
 											onChange={(e) => setThreadSearchText(e.target.value)}
 											className={styles.searchInput}
@@ -350,7 +354,7 @@ const WorkspacePanel = ({
 									>
 										<DelightfulIcon
 											size={18}
-										component={IconPlus as any}
+											component={IconPlus as any}
 											stroke={2}
 											className={styles.newTopicButtonIcon}
 										/>
@@ -358,96 +362,94 @@ const WorkspacePanel = ({
 									</div>
 									<div className={styles.listContainer}>
 										{filteredThreads.map((thread) => {
-												return (
-													<div
-														key={thread.id}
-														className={
-															thread.id === selectedThreadInfo?.id
-																? styles.threadItemSelected
-																: styles.threadItem
-														}
-														onClick={() =>
-															handleSelectThreadInternal(thread)
-														}
-													>
-														<div className={styles.threadTitle}>
-															<TopicIcon
-																status={thread.task_status}
-																className={styles.threadTitleImage}
+											return (
+												<div
+													key={thread.id}
+													className={
+														thread.id === selectedThreadInfo?.id
+															? styles.threadItemSelected
+															: styles.threadItem
+													}
+													onClick={() =>
+														handleSelectThreadInternal(thread)
+													}
+												>
+													<div className={styles.threadTitle}>
+														<TopicIcon
+															status={thread.task_status}
+															className={styles.threadTitleImage}
+														/>
+														{editingThreadId === thread.id &&
+														editingWorkspaceParentId ===
+															selectedWorkspace.id ? (
+															<Input
+																ref={inputRef}
+																className={styles.inlineInput}
+																value={editingName || ""}
+																onChange={handleInputChange}
+																onBlur={handleInputBlur}
+																onKeyDown={handleInputKeyDown}
+																autoFocus
 															/>
-															{editingThreadId === thread.id &&
-															editingWorkspaceParentId ===
-																selectedWorkspace.id ? (
-																<Input
-																	ref={inputRef}
-																	className={styles.inlineInput}
-																	value={editingName || ""}
-																	onChange={handleInputChange}
-																	onBlur={handleInputBlur}
-																	onKeyDown={handleInputKeyDown}
-																	autoFocus
-																/>
-															) : (
-																<Tooltip
-																	title={thread.topic_name}
-																	placement="right"
-																>
-																	<Text
-																		className={styles.ellipsis}
-																	>
-																		{thread.topic_name}
-																	</Text>
-																</Tooltip>
-															)}
-														</div>
-
-														{!(
-															editingThreadId === thread.id &&
-															editingWorkspaceParentId ===
-																selectedWorkspace.id
-														) && (
-															<Dropdown
-																menu={{
-																	items: getThreadMenu(
-																		selectedWorkspace.id,
-																		thread,
-																	),
-																}}
-																trigger={["click"]}
+														) : (
+															<Tooltip
+																title={thread.topic_name}
+																placement="right"
 															>
-																<Button
-																	className={
-																		styles.threadItemMoreButton
-																	}
-																	type="text"
-																	size="small"
-																	onClick={(e) =>
-																		e.stopPropagation()
-																	}
-																>
-																	<DelightfulIcon
-																		size={18}
-																	component={IconDots as any}
-																		stroke={2}
-																		className={
-																			styles.threadItemMoreButtonIcon
-																		}
-																	/>
-																</Button>
-															</Dropdown>
+																<Text className={styles.ellipsis}>
+																	{thread.topic_name}
+																</Text>
+															</Tooltip>
 														)}
 													</div>
-												)
-											})}
+
+													{!(
+														editingThreadId === thread.id &&
+														editingWorkspaceParentId ===
+															selectedWorkspace.id
+													) && (
+														<Dropdown
+															menu={{
+																items: getThreadMenu(
+																	selectedWorkspace.id,
+																	thread,
+																),
+															}}
+															trigger={["click"]}
+														>
+															<Button
+																className={
+																	styles.threadItemMoreButton
+																}
+																type="text"
+																size="small"
+																onClick={(e) => e.stopPropagation()}
+															>
+																<DelightfulIcon
+																	size={18}
+																	component={IconDots as any}
+																	stroke={2}
+																	className={
+																		styles.threadItemMoreButtonIcon
+																	}
+																/>
+															</Button>
+														</Dropdown>
+													)}
+												</div>
+											)
+										})}
+									</div>
+									{filteredThreads.length === 0 && threadSearchText && (
+										<div className={styles.emptyText}>
+											No related topics found
 										</div>
-										{filteredThreads.length === 0 && threadSearchText && (
-											<div className={styles.emptyText}>No related topics found</div>
-										)}
-									</>
-								)}
-							</div>
-						)}
-					</div>
+									)}
+								</>
+							)}
+						</div>
+					)}
+				</div>
 
 				{/* Topic files area */}
 				<AttachmentList

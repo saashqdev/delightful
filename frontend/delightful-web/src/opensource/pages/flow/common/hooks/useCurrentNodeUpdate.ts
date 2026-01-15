@@ -19,8 +19,3 @@ export default function useCurrentNodeUpdate({ form }: UseCurrentNodeUpdateProps
 		})
 	}, [flow, currentNode])
 }
-
-
-
-
-

@@ -1,7 +1,7 @@
-import { createStyles } from "antd-style";
+import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => ({
-  header: css`
+	header: css`
 		--${prefixCls}-padding: 12px;
 		--${prefixCls}-padding-lg: 12px;
 		.${prefixCls}-drawer-header-title {
@@ -12,16 +12,16 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
       margin-right: 0;
     }
 	`,
-  icon: css`
+	icon: css`
 		background-color: ${token.delightfulColorScales.green[5]};
 		color: white;
 		border-radius: 4px;
 		padding: 4px;
 	`,
-  mask: css`
+	mask: css`
 		--${prefixCls}-color-bg-mask: transparent;
 	`,
-  body: css`
+	body: css`
 		background-color: ${isDarkMode ? "#141414" : token.colorWhite};
 		--${prefixCls}-padding-lg: 12px;
 		display: flex;
@@ -29,25 +29,25 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		justify-content: space-between;
     gap: 12px;
 	`,
-  memberList: css`
+	memberList: css`
 		overflow-y: auto;
 	`,
-  memberItem: css`
+	memberItem: css`
 		width: 100%;
 		padding: 12px;
 		&:not(&:last-of-type) {
 			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		}
 	`,
-  jobTitle: css`
+	jobTitle: css`
 		color: ${token.delightfulColorUsages.text[3]};
 		font-size: 12px;
 		line-height: 16px;
 	`,
-  removeButton: css`
+	removeButton: css`
 		border-radius: 8px;
 		border: none;
 		--${prefixCls}-color-bg-container: ${token.delightfulColorUsages.fill[0]};
 	`,
-  removeCheckedButton: css``,
-}));
+	removeCheckedButton: css``,
+}))

@@ -75,5 +75,8 @@ export const encodeSocketIoMessage = (
 	// 	payload,
 	// )
 
-	return `${engineioPackType}${socketioPacketType}${namespace}${ackId}${JSON.stringify([type, payload])}`
+	return `${engineioPackType}${socketioPacketType}${namespace}${ackId}${JSON.stringify([
+		type,
+		payload,
+	])}`
 }

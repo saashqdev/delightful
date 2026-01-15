@@ -8,8 +8,3 @@ export const loaderOptions = [
 		value: LoaderType.File,
 	},
 ]
-
-
-
-
-

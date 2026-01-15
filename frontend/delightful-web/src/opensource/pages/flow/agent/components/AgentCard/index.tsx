@@ -21,7 +21,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			font-weight: 400;
 			padding: 12px;
 			border-radius: 8px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[2]};
 			border: 1px solid ${token.colorBorder};
 			position: relative;
 			cursor: pointer;
@@ -56,14 +58,18 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			background-color: ${isDarkMode
 				? token.delightfulColorUsages.fill[2]
 				: token.delightfulColorUsages.fill[0]};
-			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.text[3]
+				: token.delightfulColorUsages.text[2]};
 			border: none;
 		`,
 		blue: css`
 			background-color: ${isDarkMode
 				? token.delightfulColorScales.brand[8]
 				: token.delightfulColorScales.brand[0]};
-			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.text[3]
+				: token.delightfulColorUsages.text[2]};
 			border: none;
 		`,
 	}
@@ -182,8 +188,3 @@ const AgentCard = memo(function AgentCard(props: AgentCardProps) {
 })
 
 export default AgentCard
-
-
-
-
-

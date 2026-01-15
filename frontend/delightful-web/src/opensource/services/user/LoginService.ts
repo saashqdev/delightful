@@ -108,14 +108,18 @@ export class LoginService {
 					organizations,
 					teamshareOrganizationCode,
 				} = params
-				
+
 				const delightfulOrgs = Object.values(delightfulOrganizationMap)
-				
+
 				const orgCode =
-					teamshareOrganizationCode ?? delightfulOrgs?.[0]?.third_platform_organization_code
-				
-				const delightfulOrg = keyBy(Object.values(delightfulOrganizationMap), "third_platform_organization_code")
-				
+					teamshareOrganizationCode ??
+					delightfulOrgs?.[0]?.third_platform_organization_code
+
+				const delightfulOrg = keyBy(
+					Object.values(delightfulOrganizationMap),
+					"third_platform_organization_code",
+				)
+
 				if (orgCode) {
 					const userInfo = await this.service
 						.get<UserService>("userService")
@@ -217,8 +221,12 @@ export class LoginService {
 
 	/** Teamshare ecosystem organization synchronization */
 	organizationSyncStep = async (params: LoginStepResult) => {
-		const { organizationCode, teamshareOrganizationCode, organizations, delightfulOrganizationMap } =
-			params
+		const {
+			organizationCode,
+			teamshareOrganizationCode,
+			organizations,
+			delightfulOrganizationMap,
+		} = params
 
 		this.service.get<UserService>("userService").setOrganization({
 			organizationCode,

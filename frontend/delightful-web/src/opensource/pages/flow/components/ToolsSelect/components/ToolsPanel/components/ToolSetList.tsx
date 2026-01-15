@@ -21,8 +21,3 @@ function ToolSetList({ filteredUseableToolSets, selectedTools }: ToolSetListProp
 }
 
 export default memo(ToolSetList)
-
-
-
-
-

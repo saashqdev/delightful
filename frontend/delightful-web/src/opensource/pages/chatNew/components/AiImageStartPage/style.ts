@@ -43,7 +43,9 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 	`,
 	desc: css`
 		font-size: 12px;
-		color: ${isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[2]};
+		color: ${isDarkMode
+			? token.delightfulColorUsages.text[2]
+			: token.delightfulColorUsages.text[2]};
 	`,
 	button: css`
 		height: 30px;

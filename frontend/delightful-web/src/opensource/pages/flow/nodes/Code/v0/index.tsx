@@ -58,7 +58,7 @@ export default function Code() {
 		Object.entries(changeValues).forEach(([changeKey, changeValue]) => {
 			if (changeKey === "input" || changeKey === "output") {
 				set(currentNode, [changeKey, "form"], changeValue)
-			// Convert boolean to actual value
+				// Convert boolean to actual value
 			} else if (changeKey === "mode") {
 				set(
 					currentNode,
@@ -200,8 +200,3 @@ export default function Code() {
 		</Form>
 	)
 }
-
-
-
-
-

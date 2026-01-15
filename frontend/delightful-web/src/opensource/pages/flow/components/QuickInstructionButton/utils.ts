@@ -21,8 +21,3 @@ export const combindContent = (content: string | undefined) => {
 export const pickContent = (content: JSONContent) => {
 	return content.content?.[0]?.content
 }
-
-
-
-
-

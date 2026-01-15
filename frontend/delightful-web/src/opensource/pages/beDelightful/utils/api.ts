@@ -265,16 +265,19 @@ export const getUsage = async ({
 			sandbox_id,
 			topic_status,
 		})
-		const response = await delightfulClient.post("/api/v1/be-agent/admin/statistics/user-usage", {
-			page,
-			page_size,
-			organization_code,
-			user_name,
-			topic_name,
-			topic_id,
-			sandbox_id,
-			topic_status,
-		})
+		const response = await delightfulClient.post(
+			"/api/v1/be-agent/admin/statistics/user-usage",
+			{
+				page,
+				page_size,
+				organization_code,
+				user_name,
+				topic_name,
+				topic_id,
+				sandbox_id,
+				topic_status,
+			},
+		)
 		// Ensure the returned data includes pagination info
 		return response
 	} catch (error) {

@@ -48,8 +48,3 @@ export const extractStatus = (content: string): string => {
 }
 
 export default extractStatus
-
-
-
-
-

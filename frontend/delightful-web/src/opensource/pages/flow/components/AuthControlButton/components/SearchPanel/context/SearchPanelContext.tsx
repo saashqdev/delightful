@@ -28,8 +28,3 @@ export const SearchPanelProvider = ({
 export const useSearchPanel = () => {
 	return useContext(SearchPanelContext)
 }
-
-
-
-
-

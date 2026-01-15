@@ -1,71 +1,72 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>HTML Messenger</title>
-  <script>
-    // Define event handler function for reuse
-    function setupMessageListener() {
-      window.addEventListener("message", handleMessage);
-    }
+	<head>
+		<meta charset="UTF-8" />
+		<title>HTML Messenger</title>
+		<script>
+			// Define event handler function for reuse
+			function setupMessageListener() {
+				window.addEventListener("message", handleMessage)
+			}
 
-    function handleMessage(event) {
-      try {
-        if (event.data && event.data.type === "setContent") {
-          // Write received content using document.write
-          document.open();
-          document.write(event.data.content);
-          document.close();
-          
-          // Rebind the message listener
-          setupMessageListener();
-          
-          // Notify parent window that content has loaded
-          window.parent.postMessage({ type: "contentLoaded" }, "*");
-        }
-      } catch (error) {
-        console.error("Error processing message:", error);
-      }
-    }
+			function handleMessage(event) {
+				try {
+					if (event.data && event.data.type === "setContent") {
+						// Write received content using document.write
+						document.open()
+						document.write(event.data.content)
+						document.close()
 
-    // Global error handling
-    window.onerror = function(message, source, lineno, colno, error) {
-      console.error("HTML Messenger error:", message);
-      // Prevent browser default error handling (may include alert)
-      return true;
-    };
+						// Rebind the message listener
+						setupMessageListener()
 
-    // Initial setup for message listener
-    setupMessageListener();
-    
-    // Notify parent window after page load
-    window.addEventListener("DOMContentLoaded", function() {
-      try {
-        // Notify parent window that iframe is ready to receive content
-        window.parent.postMessage({ type: "iframeReady" }, "*");
-      } catch (error) {
-        console.error("Error sending iframeReady message:", error);
-      }
-    });
-  </script>
-  <style>
-    html,body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .loading {
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-  <div class="loading">
-    <div>Loading...</div>
-  </div>
-</body>
-</html> 
+						// Notify parent window that content has loaded
+						window.parent.postMessage({ type: "contentLoaded" }, "*")
+					}
+				} catch (error) {
+					console.error("Error processing message:", error)
+				}
+			}
+
+			// Global error handling
+			window.onerror = function (message, source, lineno, colno, error) {
+				console.error("HTML Messenger error:", message)
+				// Prevent browser default error handling (may include alert)
+				return true
+			}
+
+			// Initial setup for message listener
+			setupMessageListener()
+
+			// Notify parent window after page load
+			window.addEventListener("DOMContentLoaded", function () {
+				try {
+					// Notify parent window that iframe is ready to receive content
+					window.parent.postMessage({ type: "iframeReady" }, "*")
+				} catch (error) {
+					console.error("Error sending iframeReady message:", error)
+				}
+			})
+		</script>
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.loading {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="loading">
+			<div>Loading...</div>
+		</div>
+	</body>
+</html>

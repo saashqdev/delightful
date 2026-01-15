@@ -114,7 +114,7 @@ export default function KnowledgeDataListV1({
 					</AntdFlex>
 				</div>
 
-			{/* Show config items only when there is knowledge data */}
+				{/* Show config items only when there is knowledge data */}
 				{hasKnowledgeData && (
 					<>
 						<div className={styles.parameters}>
@@ -173,9 +173,3 @@ export default function KnowledgeDataListV1({
 		</div>
 	)
 }
-
-
-
-
-
-

@@ -97,7 +97,9 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 			text-underline-offset: 3px;
 		`,
 		autoRegisterTip: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[3]};
 			font-weight: 400;
 			line-height: 20px;
 		`,
@@ -106,7 +108,9 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 				padding: 0;
 			}
 
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 		`,
 		footer: css`
 			margin-top: 24px;

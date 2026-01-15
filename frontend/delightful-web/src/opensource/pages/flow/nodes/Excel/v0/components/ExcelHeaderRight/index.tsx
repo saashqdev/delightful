@@ -15,8 +15,3 @@ export default function ExcelHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

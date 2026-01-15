@@ -57,7 +57,7 @@ function RawAutoTooltipText({
 							tooltip: {
 								title: children,
 							},
-						}
+					  }
 					: false
 			}
 			{...props}

@@ -25,8 +25,3 @@ export default function NodeOutputWrap({ children, className }: NodeOutputWrapPr
 		</div>
 	)
 }
-
-
-
-
-

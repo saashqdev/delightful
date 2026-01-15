@@ -33,7 +33,9 @@ const UploadButton = ({
 				type="text"
 				onClick={onUpload}
 				icon={
-					icon || <DelightfulIcon color="currentColor" size={20} component={IconFileUpload} />
+					icon || (
+						<DelightfulIcon color="currentColor" size={20} component={IconFileUpload} />
+					)
 				}
 				{...props}
 			>

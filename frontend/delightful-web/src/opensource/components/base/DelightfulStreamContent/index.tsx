@@ -8,14 +8,16 @@ interface DelightfulStreamContentProps extends Omit<HTMLAttributes<HTMLDivElemen
 	children?: (content: string) => ReactNode
 }
 
-const DelightfulStreamContent = memo(({ content, children, ...props }: DelightfulStreamContentProps) => {
-	const { content: typingContent, add } = useTyping(content)
+const DelightfulStreamContent = memo(
+	({ content, children, ...props }: DelightfulStreamContentProps) => {
+		const { content: typingContent, add } = useTyping(content)
 
-	useUpdateEffect(() => {
-		add(content)
-	}, [content, add])
+		useUpdateEffect(() => {
+			add(content)
+		}, [content, add])
 
-	return <div {...props}>{children ? children(typingContent) : typingContent}</div>
-})
+		return <div {...props}>{children ? children(typingContent) : typingContent}</div>
+	},
+)
 
 export default DelightfulStreamContent

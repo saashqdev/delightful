@@ -19,8 +19,3 @@ export default function VectorSearchHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

@@ -229,9 +229,3 @@ export default function KnowledgeDataListV1({
 		</div>
 	)
 }
-
-
-
-
-
-

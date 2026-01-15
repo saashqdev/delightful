@@ -6,10 +6,14 @@ import { memo, HTMLAttributes } from "react"
 
 const useStyles = createStyles(({ css, isDarkMode, token }) => ({
 	icon: {
-		color: isDarkMode ? token.delightfulColorScales.grey[6] : token.delightfulColorUsages.text[3],
+		color: isDarkMode
+			? token.delightfulColorScales.grey[6]
+			: token.delightfulColorUsages.text[3],
 	},
 	text: css`
-		color: ${isDarkMode ? token.delightfulColorScales.grey[6] : token.delightfulColorUsages.text[3]};
+		color: ${isDarkMode
+			? token.delightfulColorScales.grey[6]
+			: token.delightfulColorUsages.text[3]};
 		text-align: justify;
 		font-size: 12px;
 		font-style: normal;

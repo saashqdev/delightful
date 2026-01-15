@@ -9,8 +9,3 @@ export const ToolsComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

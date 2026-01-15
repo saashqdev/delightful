@@ -75,8 +75,3 @@ export const nodeComponentVersionMap: Record<
 	[customNodeType.MessageMemory]: ReplyComponentVersionMap,
 	[customNodeType.Instructions]: InstructionsComponentVersionMap,
 }
-
-
-
-
-

@@ -1,8 +1,8 @@
 export interface BannerData {
-  title: string
-  link: string
-  desc: string
-  img: string
+	title: string
+	link: string
+	desc: string
+	img: string
 }
 export interface BannerProps {
 	data: BannerData[]

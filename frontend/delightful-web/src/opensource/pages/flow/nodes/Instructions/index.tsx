@@ -8,8 +8,3 @@ export const InstructionsComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

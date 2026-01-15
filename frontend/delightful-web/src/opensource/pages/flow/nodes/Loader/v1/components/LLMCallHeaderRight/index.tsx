@@ -15,8 +15,3 @@ export default function LLMCallHeaderRightV1() {
 
 	return HeaderRight
 }
-
-
-
-
-

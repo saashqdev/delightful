@@ -43,8 +43,3 @@ const TagsSelect = ({ ...props }: TagsSelectProps) => {
 }
 
 export default TagsSelect
-
-
-
-
-

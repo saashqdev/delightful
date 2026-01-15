@@ -86,7 +86,10 @@ const deleteNode = async (operation: any, flowInstance: DelightfulFlowInstance):
  * @param operation Operation object
  * @param flowInstance Flow instance
  */
-const connectNodes = async (operation: any, flowInstance: DelightfulFlowInstance): Promise<void> => {
+const connectNodes = async (
+	operation: any,
+	flowInstance: DelightfulFlowInstance,
+): Promise<void> => {
 	const { sourceId, targetId, sourceHandle, targetHandle } = operation
 
 	if (!sourceId || !targetId) {
@@ -107,7 +110,10 @@ const connectNodes = async (operation: any, flowInstance: DelightfulFlowInstance
  * @param operation Operation object
  * @param flowInstance Flow instance
  */
-const disconnectNodes = async (operation: any, flowInstance: DelightfulFlowInstance): Promise<void> => {
+const disconnectNodes = async (
+	operation: any,
+	flowInstance: DelightfulFlowInstance,
+): Promise<void> => {
 	const { sourceId, targetId } = operation
 
 	if (!sourceId || !targetId) {
@@ -214,8 +220,3 @@ export const executeOperations = async (
 
 	return success
 }
-
-
-
-
-

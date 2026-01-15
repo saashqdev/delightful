@@ -35,7 +35,7 @@ export default memo(function Search(props: SearchProps) {
 	return (
 		<div className={styles.searchContainer}>
 			{/* <BrowserHeader /> */}
-				<div className={styles.searchHeader}>
+			<div className={styles.searchHeader}>
 				<Input
 					value={keyword}
 					readOnly

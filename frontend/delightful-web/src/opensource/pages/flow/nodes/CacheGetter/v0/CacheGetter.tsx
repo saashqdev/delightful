@@ -108,8 +108,3 @@ export default function CacheGetterV0() {
 		</div>
 	)
 }
-
-
-
-
-

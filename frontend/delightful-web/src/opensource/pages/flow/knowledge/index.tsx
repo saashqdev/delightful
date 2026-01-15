@@ -28,7 +28,9 @@ const useKnowledgeLayoutStyles = createStyles(({ css, isDarkMode, token }) => {
 			position: relative;
 		`,
 		title: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 			line-height: 24px;
@@ -203,8 +205,3 @@ export default function FlowKnowledge() {
 		</Flex>
 	)
 }
-
-
-
-
-

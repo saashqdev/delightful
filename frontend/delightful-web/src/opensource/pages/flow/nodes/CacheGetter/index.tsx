@@ -16,8 +16,3 @@ export const CacheGetterComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

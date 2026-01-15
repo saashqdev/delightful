@@ -88,7 +88,11 @@ export default function EnterpriseWeChatSettings({
 
 	const wechatAddr = useMemo(() => {
 		if (!platformData.key) return ""
-		return `${env("DELIGHTFUL_GATEWAY_ADDRESS")}/delightful-service/bot/third-platform/chat?key=${platformData.key}&platform=${ThirdPartyPlatformType.EnterpriseWeChat}`
+		return `${env(
+			"DELIGHTFUL_GATEWAY_ADDRESS",
+		)}/delightful-service/bot/third-platform/chat?key=${platformData.key}&platform=${
+			ThirdPartyPlatformType.EnterpriseWeChat
+		}`
 	}, [platformData])
 
 	useUpdateEffect(() => {

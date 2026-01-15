@@ -48,7 +48,9 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 		const accountIndex = accounts.findIndex((account) => account.access_token === access_token)
 		// Priority: get external deployCode first, then use deployCode from account system as fallback
 		const tempToken = clusterCode || accounts?.[accountIndex]?.deployCode
-		const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(tempToken as string)
+		const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(
+			tempToken as string,
+		)
 		const userSyncStep = loginService.accountSyncStep(tempToken as string)
 		return (
 			Promise.resolve()

@@ -20,7 +20,7 @@ export const DingTalkLoginStrategy: ThirdPartyLoginStrategy = {
 			throw new Error(`Private deployment configuration exception`)
 		}
 		const { corpId, appKey } =
-		clusterConfig?.[deployCode]?.loginConfig?.[Login.LoginType.DingTalkScanCode] || {}
+			clusterConfig?.[deployCode]?.loginConfig?.[Login.LoginType.DingTalkScanCode] || {}
 		if (!corpId || !appKey) {
 			throw new Error(`DingTalk environment configuration exception - ${deployCode}`)
 		}
@@ -29,7 +29,9 @@ export const DingTalkLoginStrategy: ThirdPartyLoginStrategy = {
 			/** Prioritize determining whether the API usage version of DingTalk JSSDK is too low */
 			const dd = await getDingTalkApi()
 			if (compareVersions(dd.version ?? "", "7.0.45") < 0) {
-				reject(new Error("DingTalk version is too low, please upgrade to the latest version"))
+				reject(
+					new Error("DingTalk version is too low, please upgrade to the latest version"),
+				)
 			}
 			try {
 				const response = await dd.requestAuthCode({

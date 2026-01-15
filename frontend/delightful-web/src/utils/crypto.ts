@@ -4,10 +4,10 @@ import sha256 from "crypto-js/sha256"
 import md5 from "crypto-js/sha256"
 
 export default {
-	SHA256encryption (content: string) {
+	SHA256encryption(content: string) {
 		return sha256(content).toString()
 	},
-	MD5encryption (content: string) {
+	MD5encryption(content: string) {
 		return md5(content).toString()
-	}
+	},
 }

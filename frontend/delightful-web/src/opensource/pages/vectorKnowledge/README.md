@@ -26,41 +26,47 @@ vectorKnowledge/
 ## Main Features
 
 ### Knowledge Base Management
-- Create knowledge base
-- View knowledge base details
-- Modify knowledge base settings
-- Configure knowledge base parameters
+
+-   Create knowledge base
+-   View knowledge base details
+-   Modify knowledge base settings
+-   Configure knowledge base parameters
 
 ### Document Management
-- Upload documents (supports multiple file formats)
-- View document list
-- Delete documents (supports batch operations)
-- Search documents
-- Update document information
+
+-   Upload documents (supports multiple file formats)
+-   View document list
+-   Delete documents (supports batch operations)
+-   Search documents
+-   Update document information
 
 ### Document Processing
-- Document vectorization processing
-- Document status tracking:
-  - Pending: waiting to be processed
-  - Success: successfully processed and available
-  - Failed: processing failed
-  - Processing: currently being processed
-  - Deleted: successfully deleted
-  - DeleteFailed: failed to delete
-  - Rebuilding: being rebuilt
+
+-   Document vectorization processing
+-   Document status tracking:
+    -   Pending: waiting to be processed
+    -   Success: successfully processed and available
+    -   Failed: processing failed
+    -   Processing: currently being processed
+    -   Deleted: successfully deleted
+    -   DeleteFailed: failed to delete
+    -   Rebuilding: being rebuilt
 
 ## Supported File Types
+
 Supports various document formats, including:
-- Text files (TXT)
-- Markdown files (MD)
-- PDF files (PDF)
-- Spreadsheet files (XLS, XLSX, CSV)
-- Document files (DOCX)
-- XML files
+
+-   Text files (TXT)
+-   Markdown files (MD)
+-   PDF files (PDF)
+-   Spreadsheet files (XLS, XLSX, CSV)
+-   Document files (DOCX)
+-   XML files
 
 ## Technology Stack
-- React
-- TypeScript
-- Ant Design component library
-- Tabler Icons React for icon components
-- RESTful API interaction 
+
+-   React
+-   TypeScript
+-   Ant Design component library
+-   Tabler Icons React for icon components
+-   RESTful API interaction

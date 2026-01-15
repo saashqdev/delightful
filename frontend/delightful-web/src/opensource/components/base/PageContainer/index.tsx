@@ -24,7 +24,11 @@ const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 			borderRadius: "0 !important",
 			position: "sticky",
 			top: 0,
-			color: `${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.text[1]} !important`,
+			color: `${
+				isDarkMode
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorUsages.text[1]
+			} !important`,
 			zIndex: 10,
 			backdropFilter: "blur(12px)",
 			background: isDarkMode

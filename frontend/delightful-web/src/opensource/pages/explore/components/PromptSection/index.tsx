@@ -25,16 +25,22 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		header: css`
 			padding: 12px 12px 0 0 !important;
 			border-bottom: 0 !important;
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 18px !important;
 		`,
 		title: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 		`,
 		desc: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[2]};
 			font-size: 14px;
 			font-weight: 400;
 		`,
@@ -112,7 +118,9 @@ function PropmtSection({
 			tabList={tabs}
 		>
 			<DelightfulSpin section spinning={loading} className={styles.spin}>
-				{cards.length === 0 && !loading ? <DelightfulEmpty className={styles.empty} /> : null}
+				{cards.length === 0 && !loading ? (
+					<DelightfulEmpty className={styles.empty} />
+				) : null}
 				<Row gutter={[colSpan, 14]} className={styles.body} align="middle">
 					{cards.map((item) => {
 						const key = item.id

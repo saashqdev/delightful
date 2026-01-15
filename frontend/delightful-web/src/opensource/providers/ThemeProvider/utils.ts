@@ -1,14 +1,6 @@
 import type { ThemeAppearance } from "antd-style"
-import {
-	colorScales,
-	colorUsages,
-	darkColorScales,
-	darkColorUsages,
-} from "./colors"
-import type {
-	ColorScales,
-	ColorUsages
-} from "./types"
+import { colorScales, colorUsages, darkColorScales, darkColorUsages } from "./colors"
+import type { ColorScales, ColorUsages } from "./types"
 
 export const genPalettesConfigs = (
 	themeAppearance: ThemeAppearance,

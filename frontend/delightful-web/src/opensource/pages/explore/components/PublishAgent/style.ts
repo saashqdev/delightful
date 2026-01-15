@@ -79,7 +79,11 @@ export const useStyles = createStyles(
 			border-radius: 3px;
 			padding: 2px 8px;
 			font-size: 12px;
-			background-color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorScales.grey[2]};
+			background-color: ${
+				isDarkMode
+					? token.delightfulColorScales.grey[2]
+					: token.delightfulColorScales.grey[2]
+			};
 			color: ${isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorUsages.white};
 			}
 		`,

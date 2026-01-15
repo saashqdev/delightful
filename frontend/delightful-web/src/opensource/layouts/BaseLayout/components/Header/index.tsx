@@ -38,7 +38,9 @@ const Header = observer(function Header({ className }: { className?: string }) {
 					<DelightfulButton
 						danger
 						style={{ border: "none" }}
-						icon={<DelightfulIcon color="currentColor" component={IconReload} size={18} />}
+						icon={
+							<DelightfulIcon color="currentColor" component={IconReload} size={18} />
+						}
 						onClick={() => window.location.reload()}
 					>
 						{t("networkTip.websocketReloadTip")}

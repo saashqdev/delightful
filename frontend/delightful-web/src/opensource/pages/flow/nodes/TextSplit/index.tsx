@@ -8,8 +8,3 @@ export const TextSplitComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

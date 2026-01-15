@@ -17,8 +17,3 @@ export const Text2ImageComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

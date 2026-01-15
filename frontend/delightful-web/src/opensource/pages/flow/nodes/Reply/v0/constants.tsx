@@ -49,8 +49,3 @@ export const getMessageTypeOptions = (styles: CSSModuleClasses, t: TFunction) =>
 }
 
 export default {}
-
-
-
-
-

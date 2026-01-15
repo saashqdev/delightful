@@ -4,9 +4,9 @@
 
 ## Properties
 
-| Property      | Type | Default | Description                          |
-| ------------- | ---- | ------- | ------------------------------------ |
-| ...ModalProps | -    | -       | Supports all Ant Design Modal props  |
+| Property      | Type | Default | Description                         |
+| ------------- | ---- | ------- | ----------------------------------- |
+| ...ModalProps | -    | -       | Supports all Ant Design Modal props |
 
 ## Static Methods
 

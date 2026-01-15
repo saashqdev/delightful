@@ -50,7 +50,12 @@ function FlowSubSider() {
 						id: RoutePath.AgentList,
 						title: t("common.agent", { ns: "flow" }),
 						avatar: {
-							src: <DelightfulIcon component={IconDelightfulBots} color="currentColor" />,
+							src: (
+								<DelightfulIcon
+									component={IconDelightfulBots}
+									color="currentColor"
+								/>
+							),
 							style: { background: "#315CEC", padding: 6 },
 						},
 						extra: <DelightfulIcon component={IconChevronRight} />,
@@ -61,7 +66,9 @@ function FlowSubSider() {
 						}),
 						title: t("common.flow", { ns: "flow" }),
 						avatar: {
-							src: <DelightfulIcon component={IconRouteSquare} color="currentColor" />,
+							src: (
+								<DelightfulIcon component={IconRouteSquare} color="currentColor" />
+							),
 							style: { background: "#FF7D00", padding: 6 },
 						},
 						extra: <DelightfulIcon component={IconChevronRight} />,
@@ -110,8 +117,3 @@ function FlowSubSider() {
 }
 
 export default FlowSubSider
-
-
-
-
-

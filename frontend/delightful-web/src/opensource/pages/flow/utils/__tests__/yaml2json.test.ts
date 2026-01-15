@@ -305,7 +305,7 @@ edges: []
 						node_id: "node-1",
 						node_type: "1",
 						node_version: "v1",
-					name: "Start Node",
+						name: "Start Node",
 						position: { x: 100, y: 100 },
 						params: {},
 						meta: {},
@@ -319,7 +319,7 @@ edges: []
 						node_id: "node-2",
 						node_type: "2",
 						node_version: "v1",
-					name: "LLM Node",
+						name: "LLM Node",
 						position: { x: 200, y: 100 },
 						params: { model: "gpt-4" },
 						meta: {},
@@ -440,8 +440,3 @@ edges: []
 		})
 	})
 })
-
-
-
-
-

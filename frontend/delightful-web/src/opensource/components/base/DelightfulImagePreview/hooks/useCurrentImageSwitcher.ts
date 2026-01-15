@@ -1,7 +1,6 @@
 import { useMemoizedFn } from "ahooks"
 
 const useCurrentImageSwitcher = () => {
-
 	// const [prevImage, setPrevImage] = useState<PreviewFileInfo>()
 	// const [nextImage, setNextImage] = useState<PreviewFileInfo>()
 
@@ -25,8 +24,8 @@ const useCurrentImageSwitcher = () => {
 	// 		let prevMessageIdIndex = messagesIds.findIndex((id) => id === currentMessageId)
 
 	// 		while (prevMessageIdIndex > 0) {
-  //       const prevMessage = getMessage(messagesIds[prevMessageIdIndex - 1])
-  //       if (!prevMessage) return undefined
+	//       const prevMessage = getMessage(messagesIds[prevMessageIdIndex - 1])
+	//       if (!prevMessage) return undefined
 	// 			// eslint-disable-next-line no-await-in-loop
 	// 			const images = await getConversationMessageImages(prevMessage?.message_id, prevMessage?.message)
 	// 			if (images.length > 0) {
@@ -93,13 +92,13 @@ const useCurrentImageSwitcher = () => {
 
 	const toPrev = useMemoizedFn(() => {
 		// if (prevImage) {
-			// MessageFilePreviewService.setPreviewInfo(prevImage)
+		// MessageFilePreviewService.setPreviewInfo(prevImage)
 		// }
 	})
 
 	const toNext = useMemoizedFn(() => {
 		// if (nextImage) {
-			// MessageFilePreviewService.setPreviewInfo(nextImage)
+		// MessageFilePreviewService.setPreviewInfo(nextImage)
 		// }
 	})
 

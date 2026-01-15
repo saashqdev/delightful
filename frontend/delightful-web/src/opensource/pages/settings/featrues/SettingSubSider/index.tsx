@@ -36,7 +36,9 @@ const useStyles = createStyles(({ isDarkMode, prefixCls, token }) => {
 			},
 		},
 		collapseLabel: {
-			color: isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[2],
+			color: isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[2],
 			fontSize: 14,
 			fontWeight: 400,
 			lineHeight: "20px",

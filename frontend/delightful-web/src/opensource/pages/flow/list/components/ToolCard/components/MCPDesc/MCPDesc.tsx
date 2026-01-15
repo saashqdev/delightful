@@ -35,8 +35,3 @@ export default function MCPDesc({ item }: { item: Flow.Mcp.Detail }) {
 		</>
 	)
 }
-
-
-
-
-

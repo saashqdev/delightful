@@ -136,7 +136,7 @@ export default function StartV0() {
 						set(oldBranch, ["output"], cloneOutput)
 					}
 					if (newConfig?.custom_system_output) {
-					// Handle case where custom_system_output doesn't exist
+						// Handle case where custom_system_output doesn't exist
 						if (!cloneCustomSystemOutput.form) {
 							cloneCustomSystemOutput.form = {
 								id: `components-${nanoid(8)}`,
@@ -518,8 +518,3 @@ export default function StartV0() {
 		</div>
 	)
 }
-
-
-
-
-

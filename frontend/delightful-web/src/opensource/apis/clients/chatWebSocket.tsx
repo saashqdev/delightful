@@ -314,10 +314,10 @@ export class ChatWebSocket extends EventBus {
 			userService.clearLastLogin()
 
 			if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-			logger.log("Maximum reconnection attempts reached")
-			interfaceStore.setShowReloadButton(true)
-			interfaceStore.setIsConnecting(false)
-			reject(new Error("Maximum reconnection attempts reached"))
+				logger.log("Maximum reconnection attempts reached")
+				interfaceStore.setShowReloadButton(true)
+				interfaceStore.setIsConnecting(false)
+				reject(new Error("Maximum reconnection attempts reached"))
 				return
 			}
 
@@ -330,7 +330,11 @@ export class ChatWebSocket extends EventBus {
 
 			// Set new reconnection timer
 			this.reconnectTimer = setTimeout(() => {
-				logger.log(`Attempting to reconnect (${that.reconnectAttempts + 1}/${that.maxReconnectAttempts})`)
+				logger.log(
+					`Attempting to reconnect (${that.reconnectAttempts + 1}/${
+						that.maxReconnectAttempts
+					})`,
+				)
 				that.reconnectAttempts += 1
 				resolve(that.connect(true)) // Execute actual connection operation
 			}, this.reconnectInterval)
@@ -434,7 +438,9 @@ export class ChatWebSocket extends EventBus {
 		if (!this.isConnected) {
 			await Promise.race([
 				this.connect(),
-				new Promise((reject) => setTimeout(() => reject("websocket connection timeout"), 3000)),
+				new Promise((reject) =>
+					setTimeout(() => reject("websocket connection timeout"), 3000),
+				),
 			])
 		}
 

@@ -23,8 +23,3 @@ export default function ToolsHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

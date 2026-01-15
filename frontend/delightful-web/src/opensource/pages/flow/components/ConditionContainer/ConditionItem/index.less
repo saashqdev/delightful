@@ -1,5 +1,4 @@
 ﻿.delightful-condition-item {
-
 	display: flex;
 	flex: 1 1;
 	align-items: flex-start;
@@ -17,7 +16,7 @@
 		margin-right: 10px;
 		flex: 0 0 120px;
 
-		&>div {
+		& > div {
 			max-width: 120px;
 		}
 
@@ -25,7 +24,7 @@
 			border-color: #d9d9d9 !important;
 		}
 
-		&>p {
+		& > p {
 			bottom: -30px;
 		}
 
@@ -34,7 +33,10 @@
 			align-items: center;
 		}
 
-		.delightful-select-status-error.delightful-select:not(.delightful-select-disabled):not(.delightful-select-customize-input) .delightful-select-selector {
+		.delightful-select-status-error.delightful-select:not(.delightful-select-disabled):not(
+				.delightful-select-customize-input
+			)
+			.delightful-select-selector {
 			border-color: #d9d9d9 !important;
 		}
 	}
@@ -48,7 +50,7 @@
 		align-self: center;
 	}
 
-	&>.value-option {
+	& > .value-option {
 		width: 180px;
 		flex: 1;
 
@@ -70,16 +72,17 @@
 		}
 	}
 
-	.delightful-select-status-error.delightful-select:not(.delightful-select-disabled):not(.delightful-select-customize-input) .delightful-select-selector {
+	.delightful-select-status-error.delightful-select:not(.delightful-select-disabled):not(
+			.delightful-select-customize-input
+		)
+		.delightful-select-selector {
 		border-color: #d9d9d9 !important;
 	}
 
-	.delightful-input-status-error:not(.delightful-input-disabled):not(.delightful-input-borderless).delightful-input {
+	.delightful-input-status-error:not(.delightful-input-disabled):not(
+			.delightful-input-borderless
+		).delightful-input {
 		border-color: #ff4d4f !important;
 		box-shadow: none !important;
 	}
 }
-
-
-
-

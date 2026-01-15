@@ -53,7 +53,13 @@ function OperateMenu({
 					(Icon || (
 						<DelightfulButton
 							type="text"
-							icon={<DelightfulIcon color="currentColor" component={IconDots} size={18} />}
+							icon={
+								<DelightfulIcon
+									color="currentColor"
+									component={IconDots}
+									size={18}
+								/>
+							}
 						/>
 					))}
 				{children}
@@ -63,8 +69,3 @@ function OperateMenu({
 }
 
 export default OperateMenu
-
-
-
-
-

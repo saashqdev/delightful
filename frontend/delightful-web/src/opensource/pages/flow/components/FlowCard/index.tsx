@@ -31,7 +31,9 @@ type FlowCardProps = {
 	lineCount: number
 	flowType?: FlowRouteType
 	dropdownItems: React.ReactNode
-	onCardClick: (flow: DelightfulFlow.Flow | Knowledge.KnowledgeItem | FlowScope.Mcp.Detail) => void
+	onCardClick: (
+		flow: DelightfulFlow.Flow | Knowledge.KnowledgeItem | FlowScope.Mcp.Detail,
+	) => void
 	updateEnable: (flow: Flow | Knowledge.KnowledgeItem | FlowScope.Mcp.Detail) => void
 }
 
@@ -189,8 +191,3 @@ const FlowCard = memo((props: FlowCardProps) => {
 FlowCard.displayName = "FlowCard"
 
 export default FlowCard
-
-
-
-
-

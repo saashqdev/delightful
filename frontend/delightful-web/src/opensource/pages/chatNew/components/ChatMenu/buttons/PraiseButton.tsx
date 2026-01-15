@@ -18,7 +18,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			color: token.delightfulColorScales.amber[5],
 		},
 		count: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[3]};
 
 			font-size: 12px;
 			font-weight: 400;

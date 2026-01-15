@@ -28,7 +28,12 @@ export function useConfirmOperations({
 	// Process extraction of confirmation operation command from streaming response
 	const handleConfirmOperationCommand = useMemoizedFn((command: any, messageId: string) => {
 		if (command && command.type === "confirmOperation" && messageId) {
-			console.log("Processing confirmation operation command:", command, "messageId:", messageId)
+			console.log(
+				"Processing confirmation operation command:",
+				command,
+				"messageId:",
+				messageId,
+			)
 
 			// Extract data required for confirmation operation from message
 			setMessages((prev) =>
@@ -38,7 +43,9 @@ export function useConfirmOperations({
 								...msg,
 								confirmOperation: {
 									type: "confirmOperation",
-									message: command.message || "Please confirm if you want to execute this operation?",
+									message:
+										command.message ||
+										"Please confirm if you want to execute this operation?",
 									data: command.data || {},
 								},
 						  }
@@ -179,9 +186,3 @@ export function useConfirmOperations({
 }
 
 export default useConfirmOperations
-
-
-
-
-
-

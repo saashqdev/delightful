@@ -15,8 +15,3 @@ export default function CodeHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

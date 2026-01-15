@@ -78,9 +78,3 @@ export default function useProgress({ knowledgeListName }: UseProgressProps) {
 		setProgressList,
 	}
 }
-
-
-
-
-
-

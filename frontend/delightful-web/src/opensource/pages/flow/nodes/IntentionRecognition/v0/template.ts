@@ -97,8 +97,3 @@ export const v0Template = {
 	},
 	output: null,
 }
-
-
-
-
-

@@ -145,7 +145,9 @@ describe("DelightfulListItem component", () => {
 		// useHover returns true to ensure function runs
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(true)
 
-		const avatarFn = vi.fn().mockReturnValue(<div data-testid="custom-avatar">Custom avatar</div>)
+		const avatarFn = vi
+			.fn()
+			.mockReturnValue(<div data-testid="custom-avatar">Custom avatar</div>)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
@@ -165,7 +167,9 @@ describe("DelightfulListItem component", () => {
 		// useHover returns true to ensure function runs
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(true)
 
-		const titleFn = vi.fn().mockReturnValue(<span data-testid="custom-title">Custom title</span>)
+		const titleFn = vi
+			.fn()
+			.mockReturnValue(<span data-testid="custom-title">Custom title</span>)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
@@ -211,7 +215,10 @@ describe("DelightfulListItem component", () => {
 
 		// Hovered state
 		rerender(
-			<MockHoverSection isHover content={<div data-testid="hover-content">Hover content</div>} />,
+			<MockHoverSection
+				isHover
+				content={<div data-testid="hover-content">Hover content</div>}
+			/>,
 		)
 
 		// Hover content visible

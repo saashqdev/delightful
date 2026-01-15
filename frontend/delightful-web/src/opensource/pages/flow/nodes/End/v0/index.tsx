@@ -81,8 +81,3 @@ export default function End() {
 		</div>
 	)
 }
-
-
-
-
-

@@ -68,8 +68,3 @@ const CurlImporter: React.FC<CurlImporterProps> = ({ visible, onCancel, onImport
 }
 
 export default CurlImporter
-
-
-
-
-

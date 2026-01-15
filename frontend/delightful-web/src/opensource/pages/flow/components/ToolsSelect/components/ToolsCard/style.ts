@@ -27,7 +27,8 @@ const useStyles = createStyles(
 				color: ${isDarkMode
 					? token.delightfulColorScales.grey[2]
 					: token.delightfulColorUsages.text[2]};
-				border: 1px solid ${isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder};
+				border: 1px solid
+					${isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder};
 				position: relative;
 				cursor: pointer;
 			`,
@@ -80,8 +81,3 @@ const useStyles = createStyles(
 )
 
 export default useStyles
-
-
-
-
-

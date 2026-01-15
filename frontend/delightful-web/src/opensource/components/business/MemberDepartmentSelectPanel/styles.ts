@@ -34,9 +34,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		margin-bottom: 10px;
 	`,
 	fadeWrapper: css`
-		transition:
-			opacity 0.3s ease,
-			max-height 0.3s ease;
+		transition: opacity 0.3s ease, max-height 0.3s ease;
 		overflow: hidden;
 	`,
 }))

@@ -99,7 +99,9 @@ export default createStyles(({ css, isDarkMode, prefixCls, token }) => ({
 	`,
 	viewAllMembersButton: css`
 		margin-top: 8px;
-		color: ${isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[1]};
+		color: ${isDarkMode
+			? token.delightfulColorUsages.text[2]
+			: token.delightfulColorUsages.text[1]};
 	`,
 	groupNameContent: css`
 		overflow: hidden;

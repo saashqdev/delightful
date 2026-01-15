@@ -4,12 +4,12 @@
 
 ## Props
 
-| Prop           | Type                            | Default  | Description                        |
-| -------------- | ------------------------------- | -------- | ---------------------------------- |
+| Prop           | Type                            | Default  | Description                            |
+| -------------- | ------------------------------- | -------- | -------------------------------------- |
 | justify        | CSSProperties["justifyContent"] | "center" | Horizontal alignment of button content |
-| theme          | boolean                         | true     | Whether to apply theme styles      |
-| tip            | ReactNode                       | -        | Tooltip content on hover           |
-| ...ButtonProps | -                               | -        | Supports all Ant Design Button props |
+| theme          | boolean                         | true     | Whether to apply theme styles          |
+| tip            | ReactNode                       | -        | Tooltip content on hover               |
+| ...ButtonProps | -                               | -        | Supports all Ant Design Button props   |
 
 ## Basic Usage
 

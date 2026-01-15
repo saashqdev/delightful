@@ -53,8 +53,3 @@ export default function useToolsPanel({ open }: UseToolPanelProps) {
 		setKeyword,
 	}
 }
-
-
-
-
-

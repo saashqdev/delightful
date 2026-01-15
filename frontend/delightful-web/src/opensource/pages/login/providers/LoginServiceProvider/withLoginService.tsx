@@ -9,8 +9,8 @@ export function withLoginService<P extends object = {}>(
 ): (props: P) => ReactElement {
 	return (props: P) => {
 		return (
-			<LoginServiceProvider service={ service }>
-				<WrapperComponent { ...props } />
+			<LoginServiceProvider service={service}>
+				<WrapperComponent {...props} />
 			</LoginServiceProvider>
 		)
 	}

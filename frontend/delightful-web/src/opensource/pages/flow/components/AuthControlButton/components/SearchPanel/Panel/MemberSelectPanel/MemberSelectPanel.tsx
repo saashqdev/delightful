@@ -112,10 +112,3 @@ function MemberSelectPanelComponent() {
 const MemberSelectPanel = observer(MemberSelectPanelComponent)
 
 export default MemberSelectPanel
-
-
-
-
-
-
-

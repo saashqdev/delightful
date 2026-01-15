@@ -26,9 +26,9 @@ export default function PlatformInfo({ data, name }: PlatformInfoProps) {
 			<div className={styles.platformImage}>
 				<ImageComp size={24} />
 			</div>
-			<span
-				className={styles.platformTitle}
-			>{`${thirdPartyAppMap?.[data.type]?.title}(${data?.identification})`}</span>
+			<span className={styles.platformTitle}>{`${thirdPartyAppMap?.[data.type]?.title}(${
+				data?.identification
+			})`}</span>
 			<span className={styles.platformDesc}>{thirdPartyAppMap?.[data.type]?.desc}</span>
 		</Flex>
 	)

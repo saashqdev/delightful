@@ -61,7 +61,7 @@ export function useSegmentPreview(
 										? [TextPreprocessingRules.RemoveUrls]
 										: []),
 								],
-// Remove boolean properties
+								// Remove boolean properties
 								replace_spaces: undefined,
 								remove_urls: undefined,
 						  }

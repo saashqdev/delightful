@@ -28,8 +28,3 @@ export default function HTTPHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

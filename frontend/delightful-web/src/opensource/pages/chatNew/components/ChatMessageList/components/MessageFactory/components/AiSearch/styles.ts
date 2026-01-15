@@ -19,7 +19,9 @@ const useStyles = createStyles(
 
 		return {
 			container: css`
-				background: ${isDarkMode ? token.delightfulColorUsages.bg[1] : token.colorBgContainer};
+				background: ${isDarkMode
+					? token.delightfulColorUsages.bg[1]
+					: token.colorBgContainer};
 				border-radius: 8px;
 				overflow: hidden;
 				max-width: 800px;

@@ -195,8 +195,3 @@ export default function Text2ImageV0() {
 		</NodeOutputWrap>
 	)
 }
-
-
-
-
-

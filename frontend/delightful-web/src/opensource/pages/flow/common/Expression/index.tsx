@@ -66,8 +66,3 @@ export default function DelightfulExpression({
 		</div>
 	)
 }
-
-
-
-
-

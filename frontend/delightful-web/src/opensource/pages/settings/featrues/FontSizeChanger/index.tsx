@@ -11,31 +11,31 @@ const useStyles = createStyles(() => {
 })
 
 function FontSizeChanger() {
-	const {styles} = useStyles()
-	
-	const {fontSize} = useFontSize()
-	
+	const { styles } = useStyles()
+
+	const { fontSize } = useFontSize()
+
 	const onChange = (newValue: number | null) => {
 		changeChatFontSize(newValue ?? 14)
 	}
-	
+
 	return (
-		<Flex className={ styles.container } gap={ 16 }>
+		<Flex className={styles.container} gap={16}>
 			<Slider
-				style={ {flex: 1} }
-				min={ 12 }
-				step={ 2 }
-				max={ 24 }
-				onChange={ onChange }
-				value={ typeof fontSize === "number" ? fontSize : 0 }
+				style={{ flex: 1 }}
+				min={12}
+				step={2}
+				max={24}
+				onChange={onChange}
+				value={typeof fontSize === "number" ? fontSize : 0}
 			/>
 			<InputNumber
-				min={ 12 }
-				max={ 24 }
-				step={ 2 }
-				style={ {width: 40} }
-				value={ fontSize }
-				onChange={ onChange }
+				min={12}
+				max={24}
+				step={2}
+				style={{ width: 40 }}
+				value={fontSize}
+				onChange={onChange}
 			/>
 		</Flex>
 	)

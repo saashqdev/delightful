@@ -12,15 +12,15 @@ const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => {
 			font-size: 16px;
 			height: 50px;
 			width: 100%;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[3]};
 			background: transparent;
 
 			.${prefixCls}-select-selector {
 				border-radius: 50px;
 				padding: 0 18px;
-				box-shadow:
-					0px 4px 14px 0px rgba(0, 0, 0, 0.1),
-					0px 0px 1px 0px rgba(0, 0, 0, 0.3);
+				box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.3);
 				.${prefixCls}-select-selection-search-input {
 					padding-left: 36px !important;
 				}

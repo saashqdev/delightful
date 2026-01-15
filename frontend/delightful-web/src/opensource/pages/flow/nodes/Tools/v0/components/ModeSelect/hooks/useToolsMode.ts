@@ -31,8 +31,3 @@ export default function useToolsMode() {
 		modeOptions,
 	}
 }
-
-
-
-
-

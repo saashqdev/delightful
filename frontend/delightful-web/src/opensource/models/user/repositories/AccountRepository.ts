@@ -7,6 +7,6 @@ export class AccountRepository extends GlobalBaseRepository<User.UserAccount> {
 	constructor() {
 		super(AccountRepository.tableName)
 	}
-	
+
 	// Query or remove a single account
 }

@@ -52,10 +52,10 @@ export default function useCurlImport() {
 				const parsedCurl = parseCurlCommand(curlCommand)
 				console.log("Parsed curl result:", parsedCurl)
 
-// Get current node API configuration
+				// Get current node API configuration
 				const currentApi = currentNode?.params?.api || {}
 
-			// Create updated API structure - complete overwrite update
+				// Create updated API structure - complete overwrite update
 				const updatedApi = {
 					...currentApi,
 					structure: {
@@ -172,8 +172,3 @@ export default function useCurlImport() {
 		onImport,
 	}
 }
-
-
-
-
-

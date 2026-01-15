@@ -87,8 +87,3 @@ export const ToolTipButton = memo(({ initialValues, type, onFinish }: TooltipBtn
 		</Popover>
 	)
 })
-
-
-
-
-

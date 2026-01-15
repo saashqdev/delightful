@@ -87,7 +87,11 @@ const IconSelectPopover = memo(({ name, formIcon, onChangeIcon }: IconSelectPopo
 					type="text"
 					className={cx(styles.iconButton, styles.iconOuterButton)}
 					icon={
-						<DelightfulIcon color="currentColor" size={16} component={StatusIcons[icon]} />
+						<DelightfulIcon
+							color="currentColor"
+							size={16}
+							component={StatusIcons[icon]}
+						/>
 					}
 				/>
 			</Popover>
@@ -96,8 +100,3 @@ const IconSelectPopover = memo(({ name, formIcon, onChangeIcon }: IconSelectPopo
 })
 
 export default IconSelectPopover
-
-
-
-
-

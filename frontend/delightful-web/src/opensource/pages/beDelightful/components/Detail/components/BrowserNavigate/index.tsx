@@ -18,7 +18,12 @@ export default memo(function Browser(props: BrowserProps) {
 	return (
 		<div className={cx(styles.header, className)} style={style}>
 			<div className={styles.url}>
-				<DelightfulIcon className={styles.icon} component={IconWorld} stroke={2} size={20} />
+				<DelightfulIcon
+					className={styles.icon}
+					component={IconWorld}
+					stroke={2}
+					size={20}
+				/>
 				<div className={styles.text} title={url}>
 					{url}
 				</div>

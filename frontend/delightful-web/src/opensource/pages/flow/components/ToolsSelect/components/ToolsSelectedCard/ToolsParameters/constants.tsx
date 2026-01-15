@@ -74,8 +74,3 @@ export const ToolsAdjustMap = {
 		// },
 	},
 }
-
-
-
-
-

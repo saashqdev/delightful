@@ -75,7 +75,9 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 				if (info?.delightful_id) {
 					await accountLogout(info?.delightful_id)
 					/** Broadcast delete account */
-					BroadcastChannelSender.deleteAccount(info?.delightful_id, { navigateToLogin: false })
+					BroadcastChannelSender.deleteAccount(info?.delightful_id, {
+						navigateToLogin: false,
+					})
 				}
 			} else {
 				await accountLogout()

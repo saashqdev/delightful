@@ -38,14 +38,15 @@ export default function DelightfulConditionWrap({ ...props }: DelightfulConditio
 
 	// Avoid re-rendering caused by Form.Item onChange each time
 	const MemoComponent = useMemo(() => {
-		return <DelightfulConditionEdit {...props} value={props?.value?.structure} onChange={onChange} />
+		return (
+			<DelightfulConditionEdit
+				{...props}
+				value={props?.value?.structure}
+				onChange={onChange}
+			/>
+		)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	return MemoComponent
 }
-
-
-
-
-

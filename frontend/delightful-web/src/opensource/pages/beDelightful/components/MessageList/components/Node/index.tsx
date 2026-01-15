@@ -81,7 +81,9 @@ const Node = ({ node, prevNode, onSelectDetail, isSelected, isShare }: NodeProps
 			{node?.status === "error" && (
 				<div className={styles.errorTextContainer}>
 					<Text
-						data={isEmpty(node?.content) ? { content: "Task error, terminated." } : node}
+						data={
+							isEmpty(node?.content) ? { content: "Task error, terminated." } : node
+						}
 						isUser={isUser}
 						hideHeader
 					/>
@@ -90,7 +92,10 @@ const Node = ({ node, prevNode, onSelectDetail, isSelected, isShare }: NodeProps
 			{node?.status === "finished" && (
 				<div className={styles.finishedTextContainer}>
 					<Text
-						data={{ content: "Task completed. Ready to receive new requests or modifications." }}
+						data={{
+							content:
+								"Task completed. Ready to receive new requests or modifications.",
+						}}
 						isUser={isUser}
 						hideHeader
 						isFinished

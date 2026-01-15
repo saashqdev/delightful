@@ -105,8 +105,3 @@ export default function HTTPNodeV1() {
 		</div>
 	)
 }
-
-
-
-
-

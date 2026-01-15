@@ -28,8 +28,3 @@ function ToolsList({ tools, cardOpen, toolSet, selectedTools }: ToolsListProps) 
 }
 
 export default memo(ToolsList)
-
-
-
-
-

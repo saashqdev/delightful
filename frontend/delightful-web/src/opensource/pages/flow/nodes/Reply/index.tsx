@@ -8,8 +8,3 @@ export const ReplyComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

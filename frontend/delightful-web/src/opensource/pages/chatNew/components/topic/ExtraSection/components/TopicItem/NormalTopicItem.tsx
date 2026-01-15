@@ -12,7 +12,7 @@ import TopicMenu from "../TopicMenu"
 import { useTopicItemStyles } from "./useTopicItemStyles"
 
 interface NormalTopicItemProps extends ConversationTopic {
-  isActive?: boolean
+	isActive?: boolean
 }
 
 const NormalTopicItemComponent = observer((props: NormalTopicItemProps) => {
@@ -35,9 +35,14 @@ const NormalTopicItemComponent = observer((props: NormalTopicItemProps) => {
 				onClick={onClick}
 				gap={4}
 			>
-        <Badge count={ConversationStore.currentConversation?.topic_unread_dots.get(topic.id) ?? 0} style={{flex: 0}}>
-          <DelightfulIcon component={IconMessageTopic} size={24} />
-        </Badge>
+				<Badge
+					count={
+						ConversationStore.currentConversation?.topic_unread_dots.get(topic.id) ?? 0
+					}
+					style={{ flex: 0 }}
+				>
+					<DelightfulIcon component={IconMessageTopic} size={24} />
+				</Badge>
 				<span className={styles.topicTitle}>{topic.name || t("chat.topic.newTopic")}</span>
 				<div className={styles.menu} onClick={(e) => e.stopPropagation()}>
 					<DelightfulIcon component={IconDots} size={20} onClick={toggle} />

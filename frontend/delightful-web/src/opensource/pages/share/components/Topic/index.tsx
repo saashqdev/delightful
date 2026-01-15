@@ -311,7 +311,9 @@ export default function Topic({
 							: ""
 					} ${!hasStarted ? styles.messageContainerNotStarted : ""}`}
 				>
-					<div className={styles.messageListHeader}>{resource_name || "Default Topic"}</div>
+					<div className={styles.messageListHeader}>
+						{resource_name || "Default Topic"}
+					</div>
 					<div className={styles.messageListContainer} ref={messageContainerRef}>
 						<MessageList
 							messageList={messageList}
@@ -332,11 +334,13 @@ export default function Topic({
 					<div className={styles.footerContent}>
 						<div className={styles.footerLeft}>
 							<img src={FooterIcon} alt="" className={styles.footerIcon} />
-						<span>Super Magi {taskIsEnd ? "Task completed" : "Executing task..."}</span>
+							<span>
+								Super Magi {taskIsEnd ? "Task completed" : "Executing task..."}
+							</span>
 						</div>
 						{!isBottom ? (
 							<Button type="primary" onClick={handleShowResult}>
-							Show results directly
+								Show results directly
 							</Button>
 						) : null}
 					</div>
@@ -351,18 +355,22 @@ export default function Topic({
 						</div>
 					</div>
 					<div className={styles.watingTitleWrapper}>
-					<div className={styles.watingTitle}>You are viewing task 「{resource_name}」</div>
-				</div>
-				<div className={styles.waitingTextWrapper}>
-					<div className={styles.waitingText}>Playback will start automatically in {countdown} seconds</div>
-				</div>
-				<Button
-					type="primary"
-					onClick={startShowingMessages}
-					className={styles.waitingButton}
-				>
-					View now
-				</Button>
+						<div className={styles.watingTitle}>
+							You are viewing task 「{resource_name}」
+						</div>
+					</div>
+					<div className={styles.waitingTextWrapper}>
+						<div className={styles.waitingText}>
+							Playback will start automatically in {countdown} seconds
+						</div>
+					</div>
+					<Button
+						type="primary"
+						onClick={startShowingMessages}
+						className={styles.waitingButton}
+					>
+						View now
+					</Button>
 				</div>
 			)}
 			<Popup

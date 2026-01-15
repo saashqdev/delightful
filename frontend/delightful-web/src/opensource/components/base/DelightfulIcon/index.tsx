@@ -12,7 +12,10 @@ export interface DelightfulIconProps extends Props {
 	animation?: boolean
 }
 
-const DelightfulIcon = memo(function DelightfulIcon({ component: Comp, ...props }: DelightfulIconProps) {
+const DelightfulIcon = memo(function DelightfulIcon({
+	component: Comp,
+	...props
+}: DelightfulIconProps) {
 	const { isDarkMode } = useThemeMode()
 
 	if (!Comp) {

@@ -61,8 +61,3 @@ export default function PublishCardItem({ version, flow, onSwitchDraft }: Publis
 		</div>
 	)
 }
-
-
-
-
-

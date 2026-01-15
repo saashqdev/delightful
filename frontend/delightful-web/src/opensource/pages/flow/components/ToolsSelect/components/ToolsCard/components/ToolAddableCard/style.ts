@@ -83,8 +83,12 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			justifyContent: "center",
 			border: "none",
 			borderRadius: 3,
-			background: isDarkMode ? token.delightfulColorScales.grey[5] : "rgba(240, 177, 20, 0.15)",
-			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.amber[8],
+			background: isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: "rgba(240, 177, 20, 0.15)",
+			color: isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorScales.amber[8],
 			fontSize: 12,
 			fontWeight: 400,
 			lineHeight: "16px",
@@ -112,8 +116,3 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 })
 
 export default useStyles
-
-
-
-
-

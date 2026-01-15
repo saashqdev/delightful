@@ -58,7 +58,9 @@ export const useModernStyles = createStyles(
 				gap: 4px;
 			`,
 			placeholder: css`
-				color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text};
+				color: ${isDarkMode
+					? token.delightfulColorScales.grey[4]
+					: token.delightfulColorUsages.text};
 				position: absolute;
 				top: 22px;
 				left: 18px;

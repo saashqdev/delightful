@@ -161,8 +161,8 @@ function AgentPage() {
 					if (!currentData) return currentData
 					const updatedData = currentData?.map((page) => ({
 						...page,
-							list: page?.list.filter((item) => item.id !== bot.id),
-						}))
+						list: page?.list.filter((item) => item.id !== bot.id),
+					}))
 					updatedData[0].total -= 1 // Update total
 					return updatedData
 				}, false)
@@ -194,7 +194,9 @@ function AgentPage() {
 				{hasEditRight(bot.user_operation) && (
 					<DelightfulButton
 						justify="flex-start"
-						icon={<DelightfulIcon component={IconEdit} size={20} color="currentColor" />}
+						icon={
+							<DelightfulIcon component={IconEdit} size={20} color="currentColor" />
+						}
 						size="large"
 						type="text"
 						block
@@ -206,7 +208,9 @@ function AgentPage() {
 				{hasAdminRight(bot.user_operation) && (
 					<DelightfulButton
 						justify="flex-start"
-						icon={<DelightfulIcon component={IconTrash} size={20} color="currentColor" />}
+						icon={
+							<DelightfulIcon component={IconTrash} size={20} color="currentColor" />
+						}
 						size="large"
 						type="text"
 						block
@@ -314,8 +318,3 @@ function AgentPage() {
 }
 
 export default AgentPage
-
-
-
-
-

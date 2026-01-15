@@ -10,11 +10,10 @@
  */
 export function drawGroupAvatar(
 	urls: string[],
-  options: { size: number; gap: number; borderRadius: number; col: 2 | 3 },
-  c?: HTMLCanvasElement
+	options: { size: number; gap: number; borderRadius: number; col: 2 | 3 },
+	c?: HTMLCanvasElement,
 ) {
 	const { size = 340, gap = 10, col = 3 } = options
-
 
 	const canvas = c || document.createElement("canvas")
 	canvas.width = size * col + gap * (col - 1)
@@ -26,38 +25,35 @@ export function drawGroupAvatar(
 	// Create a Promise array to handle all image loads
 	const loadImages = urls.slice(0, col * col + 1).map((url, index) => {
 		return new Promise<void>((resolve) => {
-      const image = new Image()
-      image.crossOrigin="anonymous"
-			
-      image.onload = () => {
+			const image = new Image()
+			image.crossOrigin = "anonymous"
 
+			image.onload = () => {
 				// Save current drawing state
-        ctx.save()
-        
-        				
+				ctx.save()
+
 				const x = (index % col) * (size + gap)
 				const y = Math.floor(index / col) * (size + gap)
 
 				// // Top-left corner radius
 				// ctx.beginPath()
 				// ctx.arc(x + borderRadius, y + borderRadius, borderRadius, 0, Math.PI / 2)
-        // ctx.clip()
-        
-			// // Top-right corner radius
-        // ctx.beginPath()
-        // ctx.arc(x + size - borderRadius, y + borderRadius, borderRadius, Math.PI / 2, Math.PI)
-        // ctx.clip()
+				// ctx.clip()
 
-			// // Bottom-left corner radius
-        // ctx.beginPath()
-        // ctx.arc(x + borderRadius, y + size - borderRadius, borderRadius, Math.PI, Math.PI * 3 / 2)
-        // ctx.clip()
+				// // Top-right corner radius
+				// ctx.beginPath()
+				// ctx.arc(x + size - borderRadius, y + borderRadius, borderRadius, Math.PI / 2, Math.PI)
+				// ctx.clip()
 
-			// // Bottom-right corner radius
-        // ctx.beginPath()
-        // ctx.arc(x + size - borderRadius, y + size - borderRadius, borderRadius, 0, Math.PI / 2)
-        // ctx.clip()
+				// // Bottom-left corner radius
+				// ctx.beginPath()
+				// ctx.arc(x + borderRadius, y + size - borderRadius, borderRadius, Math.PI, Math.PI * 3 / 2)
+				// ctx.clip()
 
+				// // Bottom-right corner radius
+				// ctx.beginPath()
+				// ctx.arc(x + size - borderRadius, y + size - borderRadius, borderRadius, 0, Math.PI / 2)
+				// ctx.clip()
 
 				// Calculate image scaling and position to preserve aspect ratio
 				let drawWidth = size
@@ -77,7 +73,7 @@ export function drawGroupAvatar(
 				}
 
 				// Draw the image
-        ctx.drawImage(image, x + offsetX, y + offsetY, drawWidth, drawHeight)
+				ctx.drawImage(image, x + offsetX, y + offsetY, drawWidth, drawHeight)
 
 				// Restore drawing state
 				ctx.restore()

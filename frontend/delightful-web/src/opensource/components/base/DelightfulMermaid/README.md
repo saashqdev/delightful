@@ -4,9 +4,9 @@
 
 ## Props
 
-| Prop   | Type   | Default | Description                  |
-| ------ | ------ | ------- | ---------------------------- |
-| data   | string | -       | Diagram definition in Mermaid syntax |
+| Prop | Type   | Default | Description                          |
+| ---- | ------ | ------- | ------------------------------------ |
+| data | string | -       | Diagram definition in Mermaid syntax |
 
 ## Basic Usage
 
@@ -80,10 +80,10 @@ import { DelightfulMermaid } from '@/components/base/DelightfulMermaid';
 
 ## When to Use
 
-- Visualize flows, relationships, or sequences
-- Embed flowcharts, sequence diagrams, and Gantt charts in documentation
-- Convert textual descriptions into intuitive graphical representations
-- Display complex diagrams in Markdown content
-- Create interactive diagram presentations
+-   Visualize flows, relationships, or sequences
+-   Embed flowcharts, sequence diagrams, and Gantt charts in documentation
+-   Convert textual descriptions into intuitive graphical representations
+-   Display complex diagrams in Markdown content
+-   Create interactive diagram presentations
 
 The `DelightfulMermaid` component makes visualizations like flow and relationship diagrams intuitive and professional, suitable for any chart visualization scenario.

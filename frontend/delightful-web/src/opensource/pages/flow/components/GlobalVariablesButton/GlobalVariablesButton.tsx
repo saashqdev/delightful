@@ -146,8 +146,3 @@ export default function GlobalVariablesButton({
 		</>
 	)
 }
-
-
-
-
-

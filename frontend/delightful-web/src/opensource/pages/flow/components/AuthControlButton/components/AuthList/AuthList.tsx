@@ -153,10 +153,3 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 		</Flex>
 	)
 }
-
-
-
-
-
-
-

@@ -523,8 +523,3 @@ export default function StartV1() {
 		</div>
 	)
 }
-
-
-
-
-

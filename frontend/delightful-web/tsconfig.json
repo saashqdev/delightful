@@ -26,9 +26,9 @@
 
 		/* alias */
 		"paths": {
-			"@/*": ["./src/*"],
-            // Enable when developing delightful-flow synchronously
-            // "@bedelightful/delightful-flow/*": ["../delightful-flow/*"]
+			"@/*": ["./src/*"]
+			// Enable when developing delightful-flow synchronously
+			// "@bedelightful/delightful-flow/*": ["../delightful-flow/*"]
 		}
 	},
 	"include": ["src/**/*", "types/**/*"],

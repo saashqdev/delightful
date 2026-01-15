@@ -118,8 +118,3 @@ export function useCommandDetection(): UseCommandDetectionResult {
 }
 
 export default useCommandDetection
-
-
-
-
-

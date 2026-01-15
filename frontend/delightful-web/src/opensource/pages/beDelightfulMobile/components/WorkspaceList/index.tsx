@@ -89,7 +89,7 @@ export default memo(function WorkspaceList(props: WorkspaceListProps) {
 										}}
 									>
 										<DelightfulIcon size={18} component={IconPlus} stroke={2} />
-									<span>New Topic</span>
+										<span>New Topic</span>
 									</MobileButton>
 									{/* <MobileButton borderDisabled className={styles.settingsButton}>
 										<DelightfulIcon size={18} component={IconSettings} stroke={2} />
@@ -116,7 +116,9 @@ export default memo(function WorkspaceList(props: WorkspaceListProps) {
 													{topicItem.topic_name}
 												</div>
 												{topicActive && (
-												<div className={styles.current}>Current Location</div>
+													<div className={styles.current}>
+														Current Location
+													</div>
 												)}
 											</div>
 										)

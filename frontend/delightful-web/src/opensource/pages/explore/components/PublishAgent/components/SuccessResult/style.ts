@@ -18,11 +18,15 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => {
 		`,
 		successText: css`
 			font-size: 12px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[3]};
 		`,
 		successTitle: css`
 			font-size: 14px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[1]
+				: token.delightfulColorUsages.text[1]};
 		`,
 	}
 })

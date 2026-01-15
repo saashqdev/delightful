@@ -36,7 +36,8 @@ function ErrorContent({ onReport, onRetry, className, ...props }: ErrorContentPr
 			{...props}
 		>
 			<div className={styles.invalidText}>
-				Unknown error occurred, unable to render content properly. Please contact the Delightful development team.
+				Unknown error occurred, unable to render content properly. Please contact the
+				Delightful development team.
 			</div>
 			{onReport && (
 				<DelightfulButton type="link" onClick={onReport}>

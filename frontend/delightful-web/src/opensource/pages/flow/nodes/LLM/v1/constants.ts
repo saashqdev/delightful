@@ -4,8 +4,3 @@
 	Vectored = 2,
 	VectorFail = 3,
 }
-
-
-
-
-

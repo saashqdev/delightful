@@ -152,8 +152,3 @@ const FromItem = memo(({ name, form, disabled, remove }: FormItemProps) => {
 	)
 })
 export default FromItem
-
-
-
-
-

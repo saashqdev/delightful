@@ -9,7 +9,9 @@ export const useVectorKnowledgeDetailStyles = createStyles(
 			leftContainer: css`
 				min-width: 250px;
 				border-right: 1px solid
-					${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
+					${isDarkMode
+						? token.delightfulColorScales.grey[8]
+						: token.delightfulColorUsages.border};
 			`,
 			rightContainer: css`
 				flex: 1;

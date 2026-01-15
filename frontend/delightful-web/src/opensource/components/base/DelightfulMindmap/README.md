@@ -58,12 +58,12 @@ The mind map data structure follows this format:
 
 ```typescript
 interface MindMapNode {
-  id: string // Unique node identifier
-  topic: string // Node display text
-  children?: MindMapNode[] // Child nodes
-  style?: object // Optional node style
-  expanded?: boolean // Whether child nodes are expanded
-  // Other optional properties...
+	id: string // Unique node identifier
+	topic: string // Node display text
+	children?: MindMapNode[] // Child nodes
+	style?: object // Optional node style
+	expanded?: boolean // Whether child nodes are expanded
+	// Other optional properties...
 }
 ```
 

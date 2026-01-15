@@ -110,7 +110,12 @@ export default function usePrevious() {
 
 	// Dynamically generate data sources
 	const generateDynamicSource = useMemoizedFn(
-		(outputs: Schema[], currentNodeSchema: NodeSchema, cur: DelightfulFlow.Node, suffix: string) => {
+		(
+			outputs: Schema[],
+			currentNodeSchema: NodeSchema,
+			cur: DelightfulFlow.Node,
+			suffix: string,
+		) => {
 			return outputs.map((output) => {
 				return schemaToDataSource(
 					{
@@ -475,8 +480,3 @@ export default function usePrevious() {
 		expressionDataSource,
 	}
 }
-
-
-
-
-

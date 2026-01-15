@@ -9,8 +9,3 @@ export const LoopBodyComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

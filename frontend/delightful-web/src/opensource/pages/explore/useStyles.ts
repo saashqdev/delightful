@@ -13,7 +13,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			::-webkit-scrollbar {
 				display: none;
 			}
-			background: ${isDarkMode ? token.delightfulColorUsages.black : token.delightfulColorUsages.white};
+			background: ${isDarkMode
+				? token.delightfulColorUsages.black
+				: token.delightfulColorUsages.white};
 		`,
 		inner: {
 			minWidth: 588,
@@ -24,7 +26,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			padding: "20px 0",
 		},
 		title: {
-			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
+			color: isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1],
 			fontSize: 26,
 			fontWeight: 400,
 			flexShrink: 0,

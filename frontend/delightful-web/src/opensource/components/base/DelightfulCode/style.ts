@@ -9,7 +9,9 @@ export const useStyles = createStyles(({ isDarkMode, prefixCls, token }) => {
 		top: 6px;
 		border: 1px solid ${token.delightfulColorUsages.border};
 		border-radius: 6px;
-		background: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.white};
+		background: ${isDarkMode
+			? token.delightfulColorScales.grey[3]
+			: token.delightfulColorUsages.white};
 
 		&:hover {
 			background: ${isDarkMode

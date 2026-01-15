@@ -12,7 +12,7 @@ import type { NewToken } from "../../../../types/theme"
 
 function ThemeProvider({ children }: PropsWithChildren) {
 	const { theme, prefersColorScheme, setTheme } = useTheme()
-	
+
 	useLayoutEffect(() => {
 		const unSubscribe = delightful?.theme?.subscribe?.((themeConfig) => {
 			setTheme?.(themeConfig)
@@ -21,13 +21,13 @@ function ThemeProvider({ children }: PropsWithChildren) {
 			unSubscribe?.()
 		}
 	}, [setTheme])
-	
+
 	useMount(() => {
 		if (theme !== "light") {
 			setTheme("light")
 		}
 	})
-	
+
 	const themeConfig = useMemoizedFn((appearance: ThemeAppearance) => {
 		const config = genPalettesConfigs(appearance)
 		return {
@@ -35,7 +35,11 @@ function ThemeProvider({ children }: PropsWithChildren) {
 				prefix: CLASSNAME_PREFIX,
 			},
 			token: {
-				...genTokenMap(config.delightfulColorScales, config.delightfulColorUsages, appearance),
+				...genTokenMap(
+					config.delightfulColorScales,
+					config.delightfulColorUsages,
+					appearance,
+				),
 				titleBarHeight: 44,
 				delightfulColorScales: config.delightfulColorScales,
 				delightfulColorUsages: config.delightfulColorUsages,
@@ -47,7 +51,7 @@ function ThemeProvider({ children }: PropsWithChildren) {
 			),
 		}
 	})
-	
+
 	return (
 		<AntdThemeProvider<NewToken>
 			prefixCls={CLASSNAME_PREFIX}

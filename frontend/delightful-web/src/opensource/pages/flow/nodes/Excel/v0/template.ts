@@ -287,8 +287,3 @@ export const v0Template = {
 	},
 	system_output: null,
 }
-
-
-
-
-

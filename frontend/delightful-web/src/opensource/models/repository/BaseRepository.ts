@@ -6,10 +6,7 @@ import { AbstractBaseRepository } from "./AbstractBaseRepository"
  * @description User-related repository base class
  */
 export class BaseRepository<T> extends AbstractBaseRepository<T> {
-	constructor(
-		protected userId: string,
-		tableName: string,
-	) {
+	constructor(protected userId: string, tableName: string) {
 		super(tableName)
 	}
 

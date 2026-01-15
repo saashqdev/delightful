@@ -8,8 +8,3 @@ export const VectorDeleteComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

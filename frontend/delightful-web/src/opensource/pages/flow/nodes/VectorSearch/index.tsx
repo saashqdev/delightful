@@ -17,8 +17,3 @@ export const VectorSearchComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

@@ -16,8 +16,3 @@ export const SearchUsersComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

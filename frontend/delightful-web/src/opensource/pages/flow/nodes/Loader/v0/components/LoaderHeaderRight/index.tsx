@@ -15,8 +15,3 @@ export default function LoaderHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

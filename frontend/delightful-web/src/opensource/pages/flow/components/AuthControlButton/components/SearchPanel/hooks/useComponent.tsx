@@ -24,9 +24,3 @@ export default function useComponent({ tab }: UseComponentProps) {
 		LeftPanel,
 	}
 }
-
-
-
-
-
-

@@ -195,7 +195,13 @@ describe("DelightfulListItem performance", () => {
 		const renderSpy = vi.fn()
 
 		// Wrapper to track render counts
-		const TestWrapper = ({ item, active }: { item: DelightfulListItemData; active?: boolean }) => {
+		const TestWrapper = ({
+			item,
+			active,
+		}: {
+			item: DelightfulListItemData
+			active?: boolean
+		}) => {
 			renderSpy()
 			return <DelightfulListItem data={item} active={active} />
 		}

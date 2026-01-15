@@ -52,7 +52,11 @@ function DeleteDangerModal({
 			<DelightfulButton onClick={onCancel} type="text" className={styles.button}>
 				{t("button.cancel")}
 			</DelightfulButton>
-			<DelightfulButton disabled={disable} onClick={onConfirm} className={styles.dangerButton}>
+			<DelightfulButton
+				disabled={disable}
+				onClick={onConfirm}
+				className={styles.dangerButton}
+			>
 				{t("deleteConfirm")}
 			</DelightfulButton>
 		</Flex>

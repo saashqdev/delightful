@@ -65,8 +65,3 @@ export default function McpToolSelect({
 		</Form.Item>
 	)
 }
-
-
-
-
-

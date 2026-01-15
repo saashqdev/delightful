@@ -62,7 +62,9 @@ export interface FlowStoreState {
 	) => SWRResponse<TestResult>
 	useGetOpenApiAccountList: (flowId: string) => SWRResponse<WithPage<PlatformItem[]>>
 	useGetOpenPlatformAccountsOfMine: () => SWRResponse<WithPage<PlatformItem[]>>
-	useFlowToolList: (params: FlowTool.GetToolListParams) => SWRResponse<WithPage<DelightfulFlow.Flow[]>>
+	useFlowToolList: (
+		params: FlowTool.GetToolListParams,
+	) => SWRResponse<WithPage<DelightfulFlow.Flow[]>>
 	isGlobalVariableChanged: boolean
 	updateIsGlobalVariableChanged: (value: boolean) => void
 }

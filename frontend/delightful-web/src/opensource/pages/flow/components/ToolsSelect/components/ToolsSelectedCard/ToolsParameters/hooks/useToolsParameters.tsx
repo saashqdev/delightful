@@ -15,8 +15,3 @@ export default function useToolsParameters() {
 
 	return { asyncCall }
 }
-
-
-
-
-

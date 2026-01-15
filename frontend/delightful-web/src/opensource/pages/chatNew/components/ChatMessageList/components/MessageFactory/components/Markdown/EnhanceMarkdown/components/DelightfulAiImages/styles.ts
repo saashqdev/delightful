@@ -3,7 +3,7 @@ import { createStyles } from "antd-style"
 export const useStyles = createStyles(
 	({ css }, { count, ratio }: { count: number; ratio: string }) => {
 		// At least 1
-		const subCount = Math.max(count - 1, 1) 
+		const subCount = Math.max(count - 1, 1)
 
 		const calculateAspectRatio = (useHeight = false) => {
 			if (!ratio) return 1 // Default square
@@ -25,24 +25,23 @@ export const useStyles = createStyles(
 		const maxWidth = maxWidthMap[count] || 150
 
 		const grid_base_col = css`
-			grid-template-columns: repeat(${count}, 
-			${isHeightBased ? 
-				`minmax(
-					calc(50px * ${calculateAspectRatio(isHeightBased)}),
-					calc(${maxWidth}px * ${calculateAspectRatio(isHeightBased)})
-				)` : 
-				`minmax(50px, ${maxWidth}px)`}
-			
-			);
-			grid-template-rows: repeat(
-				${subCount},
-				${isHeightBased ? 
-					`minmax(50px, ${maxWidth}px)`:
-					`minmax(
+			grid-template-columns: repeat(
+				${count},
+				${isHeightBased
+					? `minmax(
 					calc(50px * ${calculateAspectRatio(isHeightBased)}),
 					calc(${maxWidth}px * ${calculateAspectRatio(isHeightBased)})
 				)`
-				}
+					: `minmax(50px, ${maxWidth}px)`}
+			);
+			grid-template-rows: repeat(
+				${subCount},
+				${isHeightBased
+					? `minmax(50px, ${maxWidth}px)`
+					: `minmax(
+					calc(50px * ${calculateAspectRatio(isHeightBased)}),
+					calc(${maxWidth}px * ${calculateAspectRatio(isHeightBased)})
+				)`}
 			);
 		`
 		const grid_16_9_col = css`

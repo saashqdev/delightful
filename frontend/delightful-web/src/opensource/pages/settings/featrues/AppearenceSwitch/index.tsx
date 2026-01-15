@@ -13,7 +13,9 @@ import autoImg from "./assets/appearence-auto.svg"
 
 const useStyles = createStyles(({ token, css, cx, isDarkMode }) => {
 	const text = cx(css`
-		color: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.text[1]};
+		color: ${isDarkMode
+			? token.delightfulColorScales.grey[3]
+			: token.delightfulColorUsages.text[1]};
 	`)
 
 	const image = cx(css`
@@ -27,7 +29,9 @@ const useStyles = createStyles(({ token, css, cx, isDarkMode }) => {
 		item: {
 			cursor: "pointer",
 			[`&[data-active="true"] .${text}`]: {
-				color: isDarkMode ? token.delightfulColorUsages.primaryLight.active : token.colorPrimary,
+				color: isDarkMode
+					? token.delightfulColorUsages.primaryLight.active
+					: token.colorPrimary,
 			},
 			[`&[data-active="true"] .${image}`]: {
 				borderColor: token.colorPrimary,

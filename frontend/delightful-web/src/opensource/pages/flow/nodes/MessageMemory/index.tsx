@@ -9,8 +9,3 @@ export const MessageMemoryComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

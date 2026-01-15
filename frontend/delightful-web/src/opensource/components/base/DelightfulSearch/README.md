@@ -4,9 +4,9 @@
 
 ## Properties
 
-| Property      | Type | Default | Description                          |
-| ------------- | ---- | ------- | ------------------------------------ |
-| ...InputProps | -    | -       | Supports all Ant Design Input props  |
+| Property      | Type | Default | Description                         |
+| ------------- | ---- | ------- | ----------------------------------- |
+| ...InputProps | -    | -       | Supports all Ant Design Input props |
 
 ## Basic Usage
 

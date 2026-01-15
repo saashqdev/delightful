@@ -4,13 +4,13 @@
 
 ## Properties
 
-| Property  | Type                 | Default | Description                                                |
-| --------- | -------------------- | ------- | ---------------------------------------------------------- |
-| appMeta   | AppMeta              | -       | Micro-app metadata, including name, entry URL, etc.        |
-| onLoad    | () => void           | -       | Callback function when application loads successfully      |
-| onError   | (error: any) => void | -       | Callback function when application fails to load           |
+| Property  | Type                 | Default | Description                                                    |
+| --------- | -------------------- | ------- | -------------------------------------------------------------- |
+| appMeta   | AppMeta              | -       | Micro-app metadata, including name, entry URL, etc.            |
+| onLoad    | () => void           | -       | Callback function when application loads successfully          |
+| onError   | (error: any) => void | -       | Callback function when application fails to load               |
 | fallback  | ReactNode            | -       | Content to display while loading, default is loading animation |
-| errorView | ReactNode            | -       | Content to display when loading fails                      |
+| errorView | ReactNode            | -       | Content to display when loading fails                          |
 
 ## Basic Usage
 

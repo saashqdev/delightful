@@ -49,7 +49,11 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 	dangerButton: css`
 		border-radius: 8px;
 		color: ${token.delightfulColorUsages.white};
-		background: ${isDarkMode ? token.delightfulColorUsages.danger.default : token.delightfulColorUsages.danger.default};
+		background: ${
+			isDarkMode
+				? token.delightfulColorUsages.danger.default
+				: token.delightfulColorUsages.danger.default
+		};
 		&:hover {
 			--${prefixCls}-button-default-hover-bg: ${token.delightfulColorUsages.danger.hover};
 			--${prefixCls}-button-default-active-bg: ${token.delightfulColorUsages.danger.active};

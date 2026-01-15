@@ -57,8 +57,3 @@ export default function ToolsParameters({ field }: ToolsParametersProps) {
 		</div>
 	)
 }
-
-
-
-
-

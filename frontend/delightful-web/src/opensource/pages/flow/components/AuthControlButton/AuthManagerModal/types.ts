@@ -27,8 +27,3 @@ export interface WithExtraConfigProps<T extends ExtraData> {
 	extraConfig: T
 	closeModal: () => void
 }
-
-
-
-
-

@@ -28,7 +28,9 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 
 	const { groupInfo } = useGroupInfo(conversation.receive_id)
 
-	const organization = userStore.user.getOrganizationByDelightful(groupInfo?.organization_code ?? "")
+	const organization = userStore.user.getOrganizationByDelightful(
+		groupInfo?.organization_code ?? "",
+	)
 
 	const { settingOpen } = conversationStore
 
@@ -45,7 +47,9 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 				className={cx(styles.header, className)}
 			>
 				<Flex gap={8} align="center" flex={1}>
-					<DelightfulAvatar src={groupInfo?.group_avatar}>{groupInfo?.group_name}</DelightfulAvatar>
+					<DelightfulAvatar src={groupInfo?.group_avatar}>
+						{groupInfo?.group_name}
+					</DelightfulAvatar>
 					<Flex vertical flex={1}>
 						<span className={styles.headerTitle}>{groupInfo?.group_name}</span>
 						<span className={styles.headerTopic}>
@@ -77,7 +81,9 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 						})}
 						tip={t("chat.setting")}
 						type="text"
-						icon={<DelightfulIcon size={20} color="currentColor" component={IconDots} />}
+						icon={
+							<DelightfulIcon size={20} color="currentColor" component={IconDots} />
+						}
 						onClick={onSettingClick}
 					/>
 				</Flex>

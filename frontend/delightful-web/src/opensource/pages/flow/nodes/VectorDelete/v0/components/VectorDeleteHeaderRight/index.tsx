@@ -19,8 +19,3 @@ export default function VectorDeleteHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

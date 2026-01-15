@@ -61,7 +61,13 @@ const ItemAvatar = memo(
 // Title component handles title rendering separately
 const ItemTitle = memo(
 	// eslint-disable-next-line react/prop-types
-	<D extends DelightfulListItemType>({ title, isHover }: { title: D["title"]; isHover: boolean }) => {
+	<D extends DelightfulListItemType>({
+		title,
+		isHover,
+	}: {
+		title: D["title"]
+		isHover: boolean
+	}) => {
 		const renderedTitle = useMemo(() => {
 			if (typeof title === "function") return title(isHover)
 			return title

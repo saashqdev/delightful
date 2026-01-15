@@ -30,7 +30,13 @@ function TimedTaskButton({
 		>
 			<DelightfulButton
 				type="text"
-				icon={<DelightfulIcon color="currentColor" size={iconSize} component={IconClockPlay} />}
+				icon={
+					<DelightfulIcon
+						color="currentColor"
+						size={iconSize}
+						component={IconClockPlay}
+					/>
+				}
 				className={className}
 				onClick={() => {
 					ConversationTaskService.getTaskList()

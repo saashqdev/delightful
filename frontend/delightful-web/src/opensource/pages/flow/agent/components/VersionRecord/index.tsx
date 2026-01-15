@@ -124,7 +124,10 @@ function PublishAgent({ agentId, open, close }: VersionProps) {
 						</Flex>
 					)}
 					{versionList.length !== 0 && (
-						<DelightfulTable<Bot.BotVersion> columns={columns} dataSource={versionList} />
+						<DelightfulTable<Bot.BotVersion>
+							columns={columns}
+							dataSource={versionList}
+						/>
 					)}
 				</div>
 			</DelightfulSpin>
@@ -133,8 +136,3 @@ function PublishAgent({ agentId, open, close }: VersionProps) {
 }
 
 export default PublishAgent
-
-
-
-
-

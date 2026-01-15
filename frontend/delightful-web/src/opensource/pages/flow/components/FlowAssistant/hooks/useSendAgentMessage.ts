@@ -37,16 +37,18 @@ export const useSendAgentMessage = () => {
 				// Build message to send to assistant
 				let message = `Instruction: ${content}`
 
-			// Include flow data only when needed
-			if (options.includeFlowData && options.getFetchFlowData) {
-				const flowYaml = options.getFetchFlowData()
-				message += `\nFlow Data:\n${flowYaml}`
+				// Include flow data only when needed
+				if (options.includeFlowData && options.getFetchFlowData) {
+					const flowYaml = options.getFetchFlowData()
+					message += `\nFlow Data:\n${flowYaml}`
 				}
 
-// Use fetch API directly to send request
-				const apiUrl = `${env("DELIGHTFUL_SERVICE_BASE_URL")}/api/v2/delightful/flows/built-chat`
+				// Use fetch API directly to send request
+				const apiUrl = `${env(
+					"DELIGHTFUL_SERVICE_BASE_URL",
+				)}/api/v2/delightful/flows/built-chat`
 
-// For delightful API requests, the organization Code needs to be replaced with the organization Code in the delightful ecosystem, not the teamshare organization Code
+				// For delightful API requests, the organization Code needs to be replaced with the organization Code in the delightful ecosystem, not the teamshare organization Code
 				const delightfulOrganizationCode = userStore.user.organizationCode
 
 				const headers = {
@@ -74,12 +76,12 @@ export const useSendAgentMessage = () => {
 				console.log("Agent response object:", response)
 				console.log("Agent response status:", response.status, response.statusText)
 
-// Check response status
-			if (!response.ok) {
-				console.error(`Request error: ${response.status} ${response.statusText}`)
+				// Check response status
+				if (!response.ok) {
+					console.error(`Request error: ${response.status} ${response.statusText}`)
 
-// Try to extract error message from response
-				let errorMessage = `Server returned error: ${response.status} ${response.statusText}`
+					// Try to extract error message from response
+					let errorMessage = `Server returned error: ${response.status} ${response.statusText}`
 
 					if (response.body) {
 						try {
@@ -89,10 +91,10 @@ export const useSendAgentMessage = () => {
 							const { value } = await reader.read()
 
 							if (value) {
-// Decode data
+								// Decode data
 								const errorContent = decoder.decode(value)
 
-									// If there is error content, try to parse it
+								// If there is error content, try to parse it
 								if (errorContent.trim()) {
 									try {
 										const errorData = JSON.parse(errorContent)
@@ -100,7 +102,7 @@ export const useSendAgentMessage = () => {
 											errorMessage = errorData.message
 										}
 									} catch (e) {
-											// If not JSON format, use raw error content
+										// If not JSON format, use raw error content
 										errorMessage = errorContent
 									}
 								}
@@ -147,9 +149,9 @@ export const useSendAgentMessage = () => {
 					}
 				}
 			} catch (error) {
-			console.error("Failed to send message:", error)
-			const errorMessage = error instanceof Error ? error.message : String(error)
-			antdMessage.error(`Failed to send message: ${errorMessage}`)
+				console.error("Failed to send message:", error)
+				const errorMessage = error instanceof Error ? error.message : String(error)
+				antdMessage.error(`Failed to send message: ${errorMessage}`)
 				return { ...defaultResult, isError: true, errorMessage }
 			}
 		},
@@ -161,8 +163,3 @@ export const useSendAgentMessage = () => {
 }
 
 export default useSendAgentMessage
-
-
-
-
-

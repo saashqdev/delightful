@@ -1,4 +1,4 @@
-﻿import { TFunction } from "i18next";
+﻿import { TFunction } from "i18next"
 
 /** Knowledge data type */
 export enum KnowledgeType {
@@ -8,9 +8,7 @@ export enum KnowledgeType {
 	Document = 3,
 }
 
-
 export const getDefaultKnowledge = (isCommercial: boolean) => {
-
 	return {
 		knowledge_code: "",
 		knowledge_type: isCommercial ? KnowledgeType.KnowledgeDatabase : "",
@@ -20,16 +18,16 @@ export const getDefaultKnowledge = (isCommercial: boolean) => {
 	}
 }
 
-
-
 export const getKnowledgeTypeOptions = (t: TFunction, isCommercial: boolean) => [
-	...(isCommercial ? [{
-		label: t("common.knowledgeDatabase", { ns: "flow" }),
-		value: KnowledgeType.KnowledgeDatabase,
-	}] : [])
+	...(isCommercial
+		? [
+				{
+					label: t("common.knowledgeDatabase", { ns: "flow" }),
+					value: KnowledgeType.KnowledgeDatabase,
+				},
+		  ]
+		: []),
 ]
-
-
 
 export const getLLMRoleConstantOptions = () => {
 	return [
@@ -65,8 +63,3 @@ export const getLLMRoleConstantOptions = () => {
 		},
 	]
 }
-
-
-
-
-

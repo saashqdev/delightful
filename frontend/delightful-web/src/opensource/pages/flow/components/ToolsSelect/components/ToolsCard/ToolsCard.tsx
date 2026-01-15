@@ -62,8 +62,3 @@ function ToolsCard({ toolSet, selectedTools }: ToolsCardProps) {
 }
 
 export default memo(ToolsCard)
-
-
-
-
-

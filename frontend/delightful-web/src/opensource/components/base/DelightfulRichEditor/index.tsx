@@ -41,34 +41,34 @@ const CustomHistory = Extension.create({
 	addProseMirrorPlugins() {
 		return [
 			history({
-					// Increase history depth
+				// Increase history depth
 				depth: 100,
-					// Increase delay for new transaction groups to ensure smoother history
-					// Increased from 300ms to 500ms to better merge consecutive operations
+				// Increase delay for new transaction groups to ensure smoother history
+				// Increased from 300ms to 500ms to better merge consecutive operations
 				newGroupDelay: 500,
 			}),
 		]
 	},
 
-		// Add keyboard shortcuts for undo/redo
+	// Add keyboard shortcuts for undo/redo
 	addKeyboardShortcuts() {
 		return {
-				// Undo - Ctrl+Z/Cmd+Z
+			// Undo - Ctrl+Z/Cmd+Z
 			"Mod-z": ({ editor }) => {
 				if (editor.can().undo()) {
-						// Use enhanced undo command
+					// Use enhanced undo command
 					editor.commands.first(({ commands }) => [
-							// First try normal undo
+						// First try normal undo
 						() => commands.undo(),
-							// Check editor state after undo
+						// Check editor state after undo
 						() => {
-								// Get current document state
+							// Get current document state
 							const { isEmpty } = editor
 							const content = editor.getJSON()
 
-								// If editor is empty or has a single node after undo, it may be an intermediate state
+							// If editor is empty or has a single node after undo, it may be an intermediate state
 							if (isEmpty || (content.content && content.content.length <= 1)) {
-									// Try undoing again (if possible) to skip intermediate states
+								// Try undoing again (if possible) to skip intermediate states
 								setTimeout(() => {
 									if (editor.can().undo()) {
 										commands.undo()
@@ -82,22 +82,22 @@ const CustomHistory = Extension.create({
 				}
 				return false
 			},
-				// Redo - Ctrl+Y/Cmd+Shift+Z
+			// Redo - Ctrl+Y/Cmd+Shift+Z
 			"Mod-y": ({ editor }) => {
 				if (editor.can().redo()) {
-						// Use enhanced redo command
+					// Use enhanced redo command
 					editor.commands.first(({ commands }) => [
-							// First try normal redo
+						// First try normal redo
 						() => commands.redo(),
-							// Check editor state after redo
+						// Check editor state after redo
 						() => {
-								// Get current document state
+							// Get current document state
 							const { isEmpty } = editor
 							const content = editor.getJSON()
 
-								// If editor is empty or has a single node after redo, it may be an intermediate state
+							// If editor is empty or has a single node after redo, it may be an intermediate state
 							if (isEmpty || (content.content && content.content.length <= 1)) {
-									// Try redoing again (if possible) to skip intermediate states
+								// Try redoing again (if possible) to skip intermediate states
 								setTimeout(() => {
 									if (editor.can().redo()) {
 										commands.redo()
@@ -111,22 +111,22 @@ const CustomHistory = Extension.create({
 				}
 				return false
 			},
-				// Redo - Ctrl+Shift+Z/Cmd+Shift+Z (macOS style)
+			// Redo - Ctrl+Shift+Z/Cmd+Shift+Z (macOS style)
 			"Mod-Shift-z": ({ editor }) => {
 				if (editor.can().redo()) {
-						// Use enhanced redo command
+					// Use enhanced redo command
 					editor.commands.first(({ commands }) => [
-							// First try normal redo
+						// First try normal redo
 						() => commands.redo(),
-							// Check editor state after redo
+						// Check editor state after redo
 						() => {
-								// Get current document state
+							// Get current document state
 							const { isEmpty } = editor
 							const content = editor.getJSON()
 
-								// If editor is empty or has a single node after redo, it may be an intermediate state
+							// If editor is empty or has a single node after redo, it may be an intermediate state
 							if (isEmpty || (content.content && content.content.length <= 1)) {
-									// Try redoing again (if possible) to skip intermediate states
+								// Try redoing again (if possible) to skip intermediate states
 								setTimeout(() => {
 									if (editor.can().redo()) {
 										commands.redo()
@@ -143,28 +143,28 @@ const CustomHistory = Extension.create({
 		}
 	},
 
-		// Add undo and redo commands
+	// Add undo and redo commands
 	addCommands() {
 		return {
 			undo:
 				() =>
 				({ state, dispatch }) => {
-						// Use top-level imported undo command
+					// Use top-level imported undo command
 					return undo(state, dispatch)
 				},
 			redo:
 				() =>
 				({ state, dispatch }) => {
-						// Use top-level imported redo command
+					// Use top-level imported redo command
 					return redo(state, dispatch)
 				},
 		}
 	},
 
-		// Handle text input transactions, ensuring they are properly added to the history stack
+	// Handle text input transactions, ensuring they are properly added to the history stack
 	addOptions() {
 		return {
-				newGroupDelay: 500, // Increase delay to match the configuration above
+			newGroupDelay: 500, // Increase delay to match the configuration above
 		}
 	},
 })

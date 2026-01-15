@@ -4,11 +4,11 @@
 
 ## Props
 
-| Prop              | Type   | Default | Description                                              |
-| ----------------- | ------ | ------- | -------------------------------------------------------- |
-| text              | string | -       | Text content to display                                  |
+| Prop              | Type   | Default | Description                                                          |
+| ----------------- | ------ | ------- | -------------------------------------------------------------------- |
+| text              | string | -       | Text content to display                                              |
 | maxWidth          | string | -       | Maximum width; overflow replaced with ellipsis, e.g., "200px", "50%" |
-| ...HTMLAttributes | -      | -       | Supports all HTML `div` element attributes               |
+| ...HTMLAttributes | -      | -       | Supports all HTML `div` element attributes                           |
 
 ## Basic Usage
 

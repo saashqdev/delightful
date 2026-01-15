@@ -1,7 +1,8 @@
 ﻿export const startData = {
 	node_id: "DELIGHTFUL-FLOW-NODE-662ef85bbf58a1-16520272",
 	name: "Start node",
-	description: "When the following events are triggered, the workflow will start executing from this module",
+	description:
+		"When the following events are triggered, the workflow will start executing from this module",
 	node_type: 1,
 	meta: [],
 	params: {
@@ -20,7 +21,7 @@
 							type: "object",
 							key: "root",
 							sort: 0,
-						title: "root node",
+							title: "root node",
 							description: "",
 							required: ["nickname", "chat_time", "message_type", "content"],
 							value: null,
@@ -30,7 +31,7 @@
 									type: "string",
 									key: "nickname",
 									sort: 0,
-								title: " User nickname",
+									title: " User nickname",
 									description: "",
 									required: null,
 									value: null,
@@ -92,7 +93,7 @@
 							type: "object",
 							key: "root",
 							sort: 0,
-						title: "root node",
+							title: "root node",
 							description: "",
 							required: ["nickname", "open_time"],
 							value: null,
@@ -102,7 +103,7 @@
 									type: "string",
 									key: "nickname",
 									sort: 0,
-								title: " User Nickname",
+									title: " User Nickname",
 									description: "",
 									required: null,
 									value: null,
@@ -157,8 +158,3 @@
 }
 
 export default {}
-
-
-
-
-

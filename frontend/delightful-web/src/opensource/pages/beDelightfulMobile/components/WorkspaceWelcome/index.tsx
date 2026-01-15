@@ -24,12 +24,12 @@ export default memo(function WorkspaceWelcome(props: WorkspaceWelcomeProps) {
 			<div className={styles.containerTop}>
 				<div className={styles.hello}>
 					<img src={delightfulBetaSVG} alt="delightful" className={styles.image} />
-				<div className={styles.title}>👋 Hi, my friend</div>
-				<div className={styles.subTitle}>How can Delightful help you?</div>
+					<div className={styles.title}>👋 Hi, my friend</div>
+					<div className={styles.subTitle}>How can Delightful help you?</div>
 				</div>
 				<img src={arrowDownSVG} alt="arrow-down" className={styles.arrowDown} />
 				<div className={styles.caseWrapper}>
-				<div className={styles.caseTitle}>「✨ 100x Productivity Cases」</div>
+					<div className={styles.caseTitle}>「✨ 100x Productivity Cases」</div>
 					<WorkspaceCase className={styles.case} />
 				</div>
 			</div>

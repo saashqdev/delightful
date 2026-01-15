@@ -30,8 +30,3 @@ export const ToolsPanelProvider = ({
 export const useToolsPanel = () => {
 	return React.useContext(ToolsPanelContext)
 }
-
-
-
-
-

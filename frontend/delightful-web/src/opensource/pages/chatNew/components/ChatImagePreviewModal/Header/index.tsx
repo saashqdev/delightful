@@ -86,7 +86,11 @@ function Header(props: ChatImagePreviewHeader) {
 				</Flex>
 			</Flex>
 			<Flex gap={10}>
-				<DelightfulButton type="text" className={styles.headerButton} onClick={onHighDefinition}>
+				<DelightfulButton
+					type="text"
+					className={styles.headerButton}
+					onClick={onHighDefinition}
+				>
 					<Flex vertical align="center" justify="center">
 						<DelightfulIcon color="currentColor" component={IconBadgeHd} size={20} />
 						<span>{t("chat.imagePreview.highDefinitionImage")}</span>

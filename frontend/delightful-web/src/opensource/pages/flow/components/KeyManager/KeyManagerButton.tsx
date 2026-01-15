@@ -348,7 +348,11 @@ export default function KeyManagerButton({
 										align="center"
 										justify="center"
 									>
-										<DelightfulIcon component={IconTrash} size={18} stroke={1} />
+										<DelightfulIcon
+											component={IconTrash}
+											size={18}
+											stroke={1}
+										/>
 									</Flex>
 								</Popconfirm>
 							</Tooltip>
@@ -365,7 +369,11 @@ export default function KeyManagerButton({
 										align="center"
 										justify="center"
 									>
-										<DelightfulIcon component={IconRefresh} stroke={1} size={18} />
+										<DelightfulIcon
+											component={IconRefresh}
+											stroke={1}
+											size={18}
+										/>
 									</Flex>
 								</Popconfirm>
 							</Tooltip>
@@ -477,8 +485,3 @@ export default function KeyManagerButton({
 		</DelightfulModal>
 	)
 }
-
-
-
-
-

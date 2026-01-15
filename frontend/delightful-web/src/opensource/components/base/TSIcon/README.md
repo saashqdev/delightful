@@ -4,8 +4,8 @@
 
 ## Props
 
-| Prop   | Type   | Default | Description                                                                 |
-| ------ | ------ | ------- | --------------------------------------------------------------------------- |
+| Prop   | Type   | Default | Description                                                                |
+| ------ | ------ | ------- | -------------------------------------------------------------------------- |
 | type   | string | -       | Icon type (required). Names start with `ts-`, e.g., `ts-folder`, `ts-file` |
 | size   | string | "24"    | Icon size                                                                  |
 | color  | string | -       | Icon color                                                                 |

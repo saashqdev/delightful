@@ -16,8 +16,3 @@ export const StartComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

@@ -203,7 +203,9 @@ class ChatTopicService {
 					logger.log(`[applyDeleteTopicMessage] Switch to new topic: ${target.id}`)
 					conversationService.switchTopic(message.conversation_id, target.id)
 				} else {
-					logger.log(`[applyDeleteTopicMessage] No other topics to switch to, clear current topic ID`)
+					logger.log(
+						`[applyDeleteTopicMessage] No other topics to switch to, clear current topic ID`,
+					)
 					conversationService.switchTopic(message.conversation_id, undefined)
 				}
 			}
@@ -223,14 +225,18 @@ class ChatTopicService {
 				conversationStore.currentConversation?.last_receive_message?.topic_id
 			) {
 				const topicsList = TopicCacheServices.getTopicCache(message.conversation_id) || []
-				logger.log(`[applyDeleteTopicMessage] Topic list length in cache: ${topicsList.length}`)
+				logger.log(
+					`[applyDeleteTopicMessage] Topic list length in cache: ${topicsList.length}`,
+				)
 				if (topicsList.length) {
 					const index = topicsList.findIndex((topic) => topic.id === deletedTopicId)
 					const target = topicsList[(index + topicsList.length - 1) % topicsList.length]
 					logger.log(`[applyDeleteTopicMessage] Switch to new topic: ${target.id}`)
 					conversationService.switchTopic(message.conversation_id, target.id)
 				} else {
-					logger.log(`[applyDeleteTopicMessage] No other topics in cache to switch to, clear current topic ID`)
+					logger.log(
+						`[applyDeleteTopicMessage] No other topics in cache to switch to, clear current topic ID`,
+					)
 					conversationService.switchTopic(message.conversation_id, undefined)
 				}
 			}
@@ -291,7 +297,9 @@ class ChatTopicService {
 					}
 				}
 
-				logger.log(`[fetchTopicList] Fetch topic list successful, topic count=${topics.length}`)
+				logger.log(
+					`[fetchTopicList] Fetch topic list successful, topic count=${topics.length}`,
+				)
 				return topics
 			})
 			.finally(() => {
@@ -369,7 +377,9 @@ class ChatTopicService {
 		)
 
 		if (!conversationId) {
-			logger.warn("[setCurrentConversationTopic] Conversation ID does not exist, cannot set topic")
+			logger.warn(
+				"[setCurrentConversationTopic] Conversation ID does not exist, cannot set topic",
+			)
 			return
 		}
 

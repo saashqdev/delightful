@@ -251,8 +251,3 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 	console.log("Parsed curl result:", JSON.stringify(result, null, 2))
 	return result
 }
-
-
-
-
-

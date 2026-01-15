@@ -6,8 +6,7 @@ import { useAppearanceStore } from "./context"
 export const changeChatFontSize = (size: number) =>
 	useAppearanceStore.setState({ chatFontSize: size })
 
-
-export function useFontSize(){
+export function useFontSize() {
 	const fontSize = useAppearanceStore((state) => state.chatFontSize) ?? DEFAULT_FONT_SIZE_BASE
 	const buttonSize = useMemo<SizeType>(() => {
 		if (fontSize <= 12) {
@@ -18,6 +17,6 @@ export function useFontSize(){
 		}
 		return "large"
 	}, [fontSize])
-	
+
 	return { fontSize, buttonSize }
 }

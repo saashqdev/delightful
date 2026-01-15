@@ -38,7 +38,13 @@ function EmojiButton({
 		>
 			<DelightfulButton
 				type="text"
-				icon={<DelightfulIcon color="currentColor" size={iconSize} component={IconMoodHappy} />}
+				icon={
+					<DelightfulIcon
+						color="currentColor"
+						size={iconSize}
+						component={IconMoodHappy}
+					/>
+				}
 				className={className}
 				{...props}
 			>

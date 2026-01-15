@@ -119,8 +119,3 @@ export default function SaveDraftButton({
 		</>
 	)
 }
-
-
-
-
-

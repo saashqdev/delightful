@@ -143,11 +143,13 @@ function ContactsSubSider() {
 	const [collapseKey, setCollapseKey] = useState<string>(pathname)
 
 	const { setCurrentDepartmentPath } = useContactPageDataContext()
-	const handleOrganizationItemClick = useMemoizedFn(({ id, pathNodes }: DelightfulListItemData) => {
-		setCollapseKey(id)
-		setCurrentDepartmentPath(pathNodes)
-		navigate(RoutePath.ContactsOrganization)
-	})
+	const handleOrganizationItemClick = useMemoizedFn(
+		({ id, pathNodes }: DelightfulListItemData) => {
+			setCollapseKey(id)
+			setCurrentDepartmentPath(pathNodes)
+			navigate(RoutePath.ContactsOrganization)
+		},
+	)
 
 	const handleItemClick = useMemoizedFn(({ route }: DelightfulListItemData) => {
 		navigate(route)
@@ -170,7 +172,12 @@ function ContactsSubSider() {
 							route: RoutePath.ContactsAiAssistant,
 							title: t("contacts.subSider.aiAssistant"),
 							avatar: {
-								src: <DelightfulIcon color="currentColor" component={IconDelightfulBots} />,
+								src: (
+									<DelightfulIcon
+										color="currentColor"
+										component={IconDelightfulBots}
+									/>
+								),
 								style: {
 									background: delightfulColorScales.brand[5],
 									padding: 8,

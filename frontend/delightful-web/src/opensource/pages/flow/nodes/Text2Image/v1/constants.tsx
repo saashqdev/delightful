@@ -178,8 +178,3 @@ export const getDefaultSize = (value: string) => {
 		},
 	}
 }
-
-
-
-
-

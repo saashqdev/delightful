@@ -100,7 +100,7 @@ export class UserService {
 		// 	const deployCode = await this.service.get<LoginService>("loginService").deployCodeSyncStep()
 		// 	setClusterCode(deployCode)
 		// 	console.warn("withPrivateDeploy Step 1: Sync current account deployCode", deployCode)
-		// 
+		//
 		// 	// Step 2: Get environment configuration
 		// 	const config = await loginService.envSyncStep(deployCode)
 		// 	console.warn("withPrivateDeploy Step 2: Get deployConfig", config)
@@ -156,8 +156,12 @@ export class UserService {
 	 * @description Organization sync
 	 */
 	setOrganization(params: OrganizationResponse) {
-		const { organizationCode, teamshareOrganizationCode, organizations, delightfulOrganizationMap } =
-			params
+		const {
+			organizationCode,
+			teamshareOrganizationCode,
+			organizations,
+			delightfulOrganizationMap,
+		} = params
 		// Persistent data sync
 		const user = new UserRepository()
 		user.setOrganizations(delightfulOrganizationMap ?? {})

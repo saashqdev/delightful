@@ -4,10 +4,10 @@
 
 ## Properties
 
-| Property     | Type    | Default | Description                           |
-| ------------ | ------- | ------- | ------------------------------------- |
-| section      | boolean | false   | Whether to use segmented loading      |
-| ...SpinProps | -       | -       | Supports all Ant Design Spin props    |
+| Property     | Type    | Default | Description                        |
+| ------------ | ------- | ------- | ---------------------------------- |
+| section      | boolean | false   | Whether to use segmented loading   |
+| ...SpinProps | -       | -       | Supports all Ant Design Spin props |
 
 ## Basic Usage
 

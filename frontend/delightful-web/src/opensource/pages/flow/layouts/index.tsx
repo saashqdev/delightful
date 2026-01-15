@@ -26,7 +26,9 @@ const useFlowLayoutStyles = createStyles(({ css, isDarkMode, token }) => {
 				? token.delightfulColorScales.grey[9]
 				: token.delightfulColorUsages.white};
 			border-bottom: 1px solid
-				${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
+				${isDarkMode
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorUsages.border};
 		`,
 		navItem: css`
 			cursor: pointer;
@@ -35,10 +37,14 @@ const useFlowLayoutStyles = createStyles(({ css, isDarkMode, token }) => {
 			display: flex;
 			align-items: center;
 			gap: 4px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[9] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[9]
+				: token.delightfulColorUsages.text[1]};
 		`,
 		noSelected: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[1]
+				: token.delightfulColorUsages.text[1]};
 		`,
 		selected: css`
 			color: currentColor;
@@ -71,7 +77,9 @@ const useFlowLayoutStyles = createStyles(({ css, isDarkMode, token }) => {
 			border-bottom: 1px solid ${token.colorBorder};
 			font-size: 18px;
 			font-weight: 600;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[9] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[9]
+				: token.delightfulColorUsages.text[1]};
 			background: ${isDarkMode ? "transparent" : token.delightfulColorUsages.white};
 			height: 50px;
 		`,
@@ -112,8 +120,3 @@ export default function FlowLayout({ children }: FlowLayoutProps) {
 		</Flex>
 	)
 }
-
-
-
-
-

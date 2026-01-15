@@ -18,7 +18,7 @@ export default memo(function DetailEmpty(props: DetailEmptyProps) {
 	return (
 		<div className={styles.detailEmptyContainer}>
 			<div className={styles.icon}>{src && <DotLottieReact src={src} loop autoplay />}</div>
-				<div className={styles.title}>{title || "Super Maggie"}</div>
+			<div className={styles.title}>{title || "Super Maggie"}</div>
 			{!!text && (
 				<div className={styles.text}>
 					<Markdown>{text}</Markdown>

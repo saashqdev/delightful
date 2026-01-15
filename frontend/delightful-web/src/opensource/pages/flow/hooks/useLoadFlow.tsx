@@ -43,9 +43,9 @@ export default function useLoadFlow({ loadLatestDraft, isAgent, agent, flowId }:
 											user_operation: agent.botEntity.user_operation,
 											icon: agent.botEntity.robot_avatar,
 											name: agent.botEntity.robot_name,
-										// AI assistant, always show as enabled
+											// AI assistant, always show as enabled
 											enabled: true,
-										}
+									  }
 									: {},
 							)
 						}}
@@ -110,8 +110,3 @@ export default function useLoadFlow({ loadLatestDraft, isAgent, agent, flowId }:
 		loadConfirmUI,
 	}
 }
-
-
-
-
-

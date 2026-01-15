@@ -123,8 +123,3 @@ export default function WaitForReplyV1() {
 		</Form>
 	)
 }
-
-
-
-
-

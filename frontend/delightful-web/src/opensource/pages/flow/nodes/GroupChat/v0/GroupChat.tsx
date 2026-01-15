@@ -128,8 +128,3 @@ export default function GroupChatV0() {
 		</Form>
 	)
 }
-
-
-
-
-

@@ -113,8 +113,3 @@ const AnimatedLoading = () => {
 }
 
 export default AnimatedLoading
-
-
-
-
-

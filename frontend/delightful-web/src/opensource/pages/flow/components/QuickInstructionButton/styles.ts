@@ -108,7 +108,9 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		optionText: css`
 			flex: 1;
 			font-size: 12px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[2]};
 		`,
 		optionShortText: css`
 			flex: 0 1 8%;
@@ -116,7 +118,9 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		labelText: css`
 			font-size: 12px;
 			font-weight: 400;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[3]
+				: token.delightfulColorUsages.text[1]};
 			align-self: center;
 		`,
 		required: css`
@@ -215,7 +219,9 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		`,
 		btn: css`
 			font-weight: 400;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[1]
+				: token.delightfulColorUsages.text[1]};
 			border-radius: 8px;
 			border-color: #1c1d2314;
 			font-weight: 400;
@@ -252,8 +258,7 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 				&::before {
 					width: 18px;
 					height: 18px;
-					box-shadow:
-						0px 0px 1px 0px rgba(0, 0, 0, 0.3),
+					box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3),
 						0px 4px 6px 0px rgba(0, 0, 0, 0.1);
 					border: 1px solid ${token.delightfulColorUsages.border};
 				}
@@ -264,8 +269,3 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		`,
 	}
 })
-
-
-
-
-

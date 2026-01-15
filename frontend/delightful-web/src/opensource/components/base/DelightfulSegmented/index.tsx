@@ -7,7 +7,11 @@ export interface DelightfulSegmentedProps<K> extends SegmentedProps<K> {
 	circle?: boolean
 }
 
-function DelightfulSegmented<K>({ className, circle = true, ...props }: DelightfulSegmentedProps<K>) {
+function DelightfulSegmented<K>({
+	className,
+	circle = true,
+	...props
+}: DelightfulSegmentedProps<K>) {
 	const { styles } = useStyles({ circle })
 	return <AntdSegmented className={cx(styles.segmented, className)} {...props} />
 }

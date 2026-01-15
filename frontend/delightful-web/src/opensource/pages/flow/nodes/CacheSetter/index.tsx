@@ -9,8 +9,3 @@ export const CacheSetterComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

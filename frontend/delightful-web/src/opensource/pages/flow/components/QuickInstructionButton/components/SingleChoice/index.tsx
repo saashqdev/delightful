@@ -35,9 +35,9 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 							<span className={cx(styles.labelText, styles.required)}>
 								{`${t("explore.form.option")} 1`}
 							</span>
-						{/* Manually render the first field */}
-						<Form.Item
-							name={[0, "name"]} // First field corresponds to first element in array
+							{/* Manually render the first field */}
+							<Form.Item
+								name={[0, "name"]} // First field corresponds to first element in array
 								style={{ flex: 1 }}
 								rules={[
 									{
@@ -85,9 +85,9 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 								onClick={() => remove(0)}
 							/>
 						</Flex>
-					{/* Dynamically render remaining fields */}
-					{fields
-						.filter((field) => field.name !== 0) // Filter out the first field
+						{/* Dynamically render remaining fields */}
+						{fields
+							.filter((field) => field.name !== 0) // Filter out the first field
 							.map((field, index) => (
 								<Flex gap={6} align="center" key={field.key}>
 									<span className={cx(styles.labelText, styles.required)}>
@@ -159,8 +159,3 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 })
 
 export default SingleChoice
-
-
-
-
-

@@ -242,7 +242,11 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 						const key = `item-${index}`
 						return (
 							<Fragment key={key}>
-								<DelightfulIcon component={IconChevronRight} key={arrowKey} size={18} />
+								<DelightfulIcon
+									component={IconChevronRight}
+									key={arrowKey}
+									size={18}
+								/>
 								<span
 									key={key}
 									className={styles.breadcrumbItem}

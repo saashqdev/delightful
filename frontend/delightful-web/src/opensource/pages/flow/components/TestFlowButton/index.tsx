@@ -196,7 +196,9 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 							required
 							className="form-item"
 						>
-							<DelightfulInput placeholder={t("common.pleaseInput", { ns: "flow" })} />
+							<DelightfulInput
+								placeholder={t("common.pleaseInput", { ns: "flow" })}
+							/>
 						</Form.Item>
 					)}
 					{!isArgumentsFlow && (
@@ -306,8 +308,3 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 }
 
 export default TestFlowButton
-
-
-
-
-

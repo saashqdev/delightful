@@ -35,7 +35,9 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			font-size: 14px;
 			font-weight: 600;
 			line-height: 20px;
-			color: ${isDarkMode ? token.delightfulColorUsages.text[0] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.text[0]
+				: token.delightfulColorUsages.text[1]};
 			text-overflow: ellipsis;
 			-webkit-line-clamp: 1;
 			-webkit-box-orient: vertical;
@@ -70,7 +72,9 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			border-radius: 8px;
 			padding: 8px;
 			border: 1px solid ${token.delightfulColorUsages.border};
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[3]};
 			background-color: ${isDarkMode
 				? token.delightfulColorScales.grey[0]
 				: token.delightfulColorUsages.white};
@@ -99,8 +103,3 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 	}
 })
-
-
-
-
-

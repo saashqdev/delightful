@@ -172,7 +172,9 @@ function MainWorkspaceContent() {
 		(id: string) => {
 			Modal.confirm({
 				title: "Confirm Delete",
-				content: `Are you sure you want to delete workspace "${workspaces.find((ws) => ws.id === id)?.name}"?`,
+				content: `Are you sure you want to delete workspace "${
+					workspaces.find((ws) => ws.id === id)?.name
+				}"?`,
 				onOk: () => handleDeleteWorkspace(id),
 			})
 		},
@@ -253,7 +255,7 @@ function MainWorkspaceContent() {
 					// Get existing messages and new messages
 					const existingMessages = pre?.[chat_topic_id] || []
 
-				// Sort messages by send_timestamp
+					// Sort messages by send_timestamp
 					const sortMessagesByTimestamp = (msgArray: any[]) => {
 						// First filter out duplicate seq_id
 						const uniqueMessages = Array.from(

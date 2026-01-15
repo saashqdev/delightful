@@ -1,64 +1,66 @@
 ﻿import { createStyles } from "antd-style"
 
 const useStyles = createStyles(({ css, isDarkMode, token }) => {
-  return {
-    cardWrapper: css`
+	return {
+		cardWrapper: css`
 			font-size: 12px;
 			line-height: 16px;
 			font-weight: 400;
 			padding: 12px;
 			border-radius: 8px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[2]};
-			border: 1px solid ${isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[2]};
+			border: 1px solid
+				${isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder};
 			position: relative;
 			cursor: pointer;
 		`,
-    checked: css`
+		checked: css`
 			border-width: 2px;
 			border-color: ${token.delightfulColorScales.brand[5]};
 		`,
-    moreOperations: css`
+		moreOperations: css`
 			position: absolute;
 			right: 12px;
 			top: 12px;
 			z-index: 10;
 			cursor: pointer;
 		`,
-    tag: css`
+		tag: css`
 			margin-right: 0;
 			display: flex;
 			align-items: center;
 			gap: 2px;
 		`,
-    green: css`
+		green: css`
 			background-color: ${isDarkMode
-        ? token.delightfulColorScales.green[0]
-        : token.delightfulColorScales.green[0]};
+				? token.delightfulColorScales.green[0]
+				: token.delightfulColorScales.green[0]};
 			color: ${isDarkMode
-        ? token.delightfulColorScales.green[5]
-        : token.delightfulColorScales.green[5]};
+				? token.delightfulColorScales.green[5]
+				: token.delightfulColorScales.green[5]};
 			border: none;
 		`,
-    orange: css`
+		orange: css`
 			background-color: ${isDarkMode
-        ? token.delightfulColorUsages.fill[2]
-        : token.delightfulColorUsages.fill[0]};
-			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
+				? token.delightfulColorUsages.fill[2]
+				: token.delightfulColorUsages.fill[0]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.text[3]
+				: token.delightfulColorUsages.text[2]};
 			border: none;
 		`,
-    blue: css`
+		blue: css`
 			background-color: ${isDarkMode
-        ? token.delightfulColorScales.brand[8]
-        : token.delightfulColorScales.brand[0]};
-			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
+				? token.delightfulColorScales.brand[8]
+				: token.delightfulColorScales.brand[0]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.text[3]
+				: token.delightfulColorUsages.text[2]};
 			border: none;
 		`,
-  }
+	}
 })
 
 export default useStyles
-
-
-
-
-

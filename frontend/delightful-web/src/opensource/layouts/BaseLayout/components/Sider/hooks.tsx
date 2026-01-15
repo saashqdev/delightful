@@ -43,9 +43,7 @@ export function useSideMenu() {
 				key: RoutePath.Chat,
 			},
 			{
-				icon: (
-					<img src={BeDelightfulIcon} alt="" className={styles.navIcon} />
-				),
+				icon: <img src={BeDelightfulIcon} alt="" className={styles.navIcon} />,
 				hidden: false,
 				label: t("sider.beDelightful"),
 				key: RoutePath.BeDelightful,

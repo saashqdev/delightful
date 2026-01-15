@@ -64,7 +64,7 @@ function useStreamCursor(
 					let lastElement = findLastTextNode(lastBlock)
 
 					if (lastElement) {
-					// Following elements do not print cursor
+						// Following elements do not print cursor
 						if (
 							lastElement.tagName === "CODE" ||
 							lastElement.tagName === "TH" ||

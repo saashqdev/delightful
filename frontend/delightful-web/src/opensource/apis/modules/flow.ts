@@ -58,7 +58,10 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	 * Add or update flow basic information
 	 */
 	addOrUpdateFlowBaseInfo(flow: Partial<DelightfulFlow.Flow> & { type?: FlowType }) {
-		return fetch.post<DelightfulFlow.Flow>(genRequestUrl(RequestUrl.addOrUpdateFlowBaseInfo), flow)
+		return fetch.post<DelightfulFlow.Flow>(
+			genRequestUrl(RequestUrl.addOrUpdateFlowBaseInfo),
+			flow,
+		)
 	},
 
 	/**
@@ -369,9 +372,12 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	 * Get available tools
 	 */
 	getAvailableTools(toolIds: string[]) {
-		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.getAvailableTools), {
-			codes: toolIds,
-		})
+		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(
+			genRequestUrl(RequestUrl.getAvailableTools),
+			{
+				codes: toolIds,
+			},
+		)
 	},
 
 	/**
@@ -419,7 +425,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 		return fetch.post<DelightfulFlow.Node>(genRequestUrl(RequestUrl.getNodeTemplate), {
 			params: {},
 			node_type: nodeType,
-            node_version: "latest"
+			node_version: "latest",
 		})
 	},
 

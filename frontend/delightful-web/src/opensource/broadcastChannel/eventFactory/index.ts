@@ -254,7 +254,11 @@ let switchAccountModal: ReturnType<typeof DelightfulModal.confirm> | null = null
 // Switch account
 eventFactory.on(
 	EVENTS.SWITCH_ACCOUNT,
-	(data: { delightfulId: string; delightfulUserId: string; delightfulOrganizationCode: string }) => {
+	(data: {
+		delightfulId: string
+		delightfulUserId: string
+		delightfulOrganizationCode: string
+	}) => {
 		const currentUserInfo = userStore.user.userInfo
 
 		if (currentUserInfo && currentUserInfo.delightful_id !== data.delightfulId) {
@@ -306,9 +310,12 @@ eventFactory.on(EVENTS.DO_ADD_ACCOUNT, (data) => {
 })
 
 // Delete account
-eventFactory.on(EVENTS.DELETE_ACCOUNT, (data: { delightfulId?: string; navigateToLogin?: boolean }) => {
-	UserDispatchService.deleteAccount(data)
-})
+eventFactory.on(
+	EVENTS.DELETE_ACCOUNT,
+	(data: { delightfulId?: string; navigateToLogin?: boolean }) => {
+		UserDispatchService.deleteAccount(data)
+	},
+)
 
 // Execute delete account
 eventFactory.on(EVENTS.DO_DELETE_ACCOUNT, (data) => {

@@ -24,8 +24,3 @@ export const TriggerTypeOptions = [
 		value: TriggerType.NewChat,
 	},
 ]
-
-
-
-
-

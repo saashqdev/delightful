@@ -74,7 +74,8 @@ export default memo(function ShareModel(props: ShareModalProps) {
 		if (newType === ShareType.OnlySelf) {
 			DelightfulModal.confirm({
 				title: "Notice",
-				content: "After disabling topic sharing, all existing shared replay links will become invalid immediately",
+				content:
+					"After disabling topic sharing, all existing shared replay links will become invalid immediately",
 				onOk: (e) => {
 					console.log("onOk", e)
 					e?.()

@@ -4,11 +4,11 @@
 
 ## Props
 
-| Prop             | Type      | Default | Description                              |
-| ---------------- | --------- | ------- | ---------------------------------------- |
+| Prop             | Type      | Default | Description                                  |
+| ---------------- | --------- | ------- | -------------------------------------------- |
 | menu             | MenuProps | -       | Menu configuration defining content/behavior |
-| overlayClassName | string    | -       | Custom class name for the dropdown       |
-| ...DropDownProps | -         | -       | Supports all Ant Design Dropdown props   |
+| overlayClassName | string    | -       | Custom class name for the dropdown           |
+| ...DropDownProps | -         | -       | Supports all Ant Design Dropdown props       |
 
 ## Basic Usage
 

@@ -129,7 +129,7 @@
 						type: "string",
 						key: "response_body",
 						sort: 0,
-							title: "Raw Output",
+						title: "Raw Output",
 						description: "",
 						required: null,
 						value: null,
@@ -141,8 +141,3 @@
 		},
 	},
 }
-
-
-
-
-

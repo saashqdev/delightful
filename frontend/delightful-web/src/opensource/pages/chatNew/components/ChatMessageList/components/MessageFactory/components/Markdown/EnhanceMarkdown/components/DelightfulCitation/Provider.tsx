@@ -19,7 +19,11 @@ const DelightfulCitationProvider = ({
 		}
 	}, [sources])
 
-	return <DelightfulCitationContext.Provider value={value}>{children}</DelightfulCitationContext.Provider>
+	return (
+		<DelightfulCitationContext.Provider value={value}>
+			{children}
+		</DelightfulCitationContext.Provider>
+	)
 }
 
 export default DelightfulCitationProvider

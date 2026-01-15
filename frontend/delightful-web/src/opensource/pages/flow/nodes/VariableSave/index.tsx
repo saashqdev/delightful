@@ -9,8 +9,3 @@ export const VariableSaveComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

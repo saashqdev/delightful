@@ -57,8 +57,3 @@ export default function LoopTypeSelect({ value, onChange }: LoopTypeSelectProps)
 		</div>
 	)
 }
-
-
-
-
-

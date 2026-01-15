@@ -60,8 +60,3 @@ const CommandStatusDisplay: React.FC<CommandStatusDisplayProps> = ({ commandStat
 }
 
 export default CommandStatusDisplay
-
-
-
-
-

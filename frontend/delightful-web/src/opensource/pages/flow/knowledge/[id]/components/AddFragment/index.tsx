@@ -43,7 +43,11 @@ const useAddFragmentStyles = createStyles(({ css, isDarkMode, token }) => {
 					: "0px 4px 14px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.3);"
 			}
 			&:hover {
-				background: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorScales.grey[0]};
+				background: ${
+					isDarkMode
+						? token.delightfulColorScales.grey[3]
+						: token.delightfulColorScales.grey[0]
+				};
 			}
 		`,
 
@@ -70,7 +74,11 @@ const useAddFragmentStyles = createStyles(({ css, isDarkMode, token }) => {
 						: "0px 4px 14px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.3);"
 				}
 				&:hover {
-					background: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorScales.grey[0]};
+					background: ${
+						isDarkMode
+							? token.delightfulColorScales.grey[3]
+							: token.delightfulColorScales.grey[0]
+					};
 				}
 			}
 

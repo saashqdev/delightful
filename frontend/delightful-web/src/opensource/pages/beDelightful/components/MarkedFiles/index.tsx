@@ -160,9 +160,7 @@ export default memo(function MarkedFiles() {
 	return (
 		<div className={commonStyles.pageContainer}>
 			<div className={commonStyles.title}>Marked Files</div>
-			<div className={commonStyles.description}>
-				View and manage all marked files here.
-			</div>
+			<div className={commonStyles.description}>View and manage all marked files here.</div>
 			<div className={commonStyles.formHeader}>
 				<Input
 					placeholder="Search files"
@@ -173,7 +171,10 @@ export default memo(function MarkedFiles() {
 					}}
 				/>
 				<Dropdown menu={{ items: dropdownItems }} disabled={selectedRowKeys.length === 0}>
-					<DelightfulButton className={styles.batchOperationButton} onClick={handleRemove}>
+					<DelightfulButton
+						className={styles.batchOperationButton}
+						onClick={handleRemove}
+					>
 						<span>Batch actions</span>
 						<DelightfulIcon component={IconChevronDown} size={20} stroke={2} />
 					</DelightfulButton>

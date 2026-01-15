@@ -123,25 +123,25 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 					pageSize,
 				})
 				if (res) {
-						// Only update existing documents in documentList
-						if (documentList.length > 0 && res.page !== pageInfo.page) {
-							// Create document code mapping for quick lookup
+					// Only update existing documents in documentList
+					if (documentList.length > 0 && res.page !== pageInfo.page) {
+						// Create document code mapping for quick lookup
 						const documentListMap = new Map(
 							documentList.map((item) => [item.code, item]),
 						)
 
-							// Use mapping to update documents
+						// Use mapping to update documents
 						const updatedDocumentList = [...documentList]
 						let hasUpdates = false
 
 						res.list.forEach((newItem: Knowledge.EmbedDocumentDetail) => {
 							if (documentListMap.has(newItem.code)) {
-									// Find current document's index in array
-									const index = updatedDocumentList.findIndex(
-										(item) => item.code === newItem.code,
-									)
-									if (index !== -1) {
-										// Update document
+								// Find current document's index in array
+								const index = updatedDocumentList.findIndex(
+									(item) => item.code === newItem.code,
+								)
+								if (index !== -1) {
+									// Update document
 									updatedDocumentList[index] = newItem
 									hasUpdates = true
 								}
@@ -319,12 +319,12 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 					searchText,
 					pageInfo.page,
 					pageInfo.pageSize,
-				false,
-			)
-		}, 5000)
-	}
+					false,
+				)
+			}, 5000)
+		}
 
-	// Clear timeout when component unmounts
+		// Clear timeout when component unmounts
 	}, [documentList])
 
 	// Table column definitions

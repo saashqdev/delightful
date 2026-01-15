@@ -168,7 +168,9 @@ const useChatMessageStyles = createStyles(
 			`,
 			delightfulTheme: css`
 				color: ${token.delightfulColorUsages.text[1]};
-				background: ${isDarkMode ? token.delightfulColorUsages.primaryLight.default : "#E6F0FF"};
+				background: ${isDarkMode
+					? token.delightfulColorUsages.primaryLight.default
+					: "#E6F0FF"};
 				// background: linear-gradient(99deg, #4768d4 0%, #6c8eff 0.01%, #ca58ff 100%);
 			`,
 			status: css`

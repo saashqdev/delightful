@@ -38,7 +38,9 @@ export const useStyles = createStyles(({ css, isDarkMode, token, prefixCls }) =>
 			overflow: hidden;
 
 			&:hover {
-				color: ${isDarkMode ? token.delightfulColorScales.brand[6] : token.colorPrimaryHover};
+				color: ${isDarkMode
+					? token.delightfulColorScales.brand[6]
+					: token.colorPrimaryHover};
 			}
 
 			&:last-child {

@@ -69,8 +69,12 @@ export class UserStore {
 	 * @return {User.UserOrganization | undefined}
 	 */
 	getOrganization = (): User.UserOrganization | null => {
-		const { organizations, organizationCode, delightfulOrganizationMap, teamshareOrganizationCode } =
-			this
+		const {
+			organizations,
+			organizationCode,
+			delightfulOrganizationMap,
+			teamshareOrganizationCode,
+		} = this
 		// Build organization map
 		const orgMap = keyBy(organizations, "organization_code")
 		let org = null
@@ -78,7 +82,8 @@ export class UserStore {
 		if (organizationCode) {
 			org =
 				orgMap?.[
-					delightfulOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
+					delightfulOrganizationMap?.[organizationCode]
+						?.third_platform_organization_code ?? ""
 				]
 		}
 		if (!org && teamshareOrganizationCode) {

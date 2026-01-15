@@ -14,7 +14,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			background-color: ${isDarkMode
 				? token.delightfulColorUsages.fill[2]
 				: token.delightfulColorUsages.fill[0]};
-			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.text[3]
+				: token.delightfulColorUsages.text[2]};
 		`,
 		green: css`
 			background-color: ${isDarkMode
@@ -61,8 +63,3 @@ export default function FlowTag({ text, icon, color }: FlowTagProps) {
 		</Tag>
 	)
 }
-
-
-
-
-

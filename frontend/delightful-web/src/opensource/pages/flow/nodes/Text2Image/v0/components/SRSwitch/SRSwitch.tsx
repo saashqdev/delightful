@@ -23,8 +23,3 @@ export default function SRSwitch({ value, onChange }: SRSwitchProps) {
 		</Flex>
 	)
 }
-
-
-
-
-

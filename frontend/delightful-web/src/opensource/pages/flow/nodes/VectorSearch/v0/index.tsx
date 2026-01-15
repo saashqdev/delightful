@@ -124,8 +124,3 @@ export default function VectorSearchV0() {
 		</div>
 	)
 }
-
-
-
-
-

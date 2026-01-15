@@ -4,11 +4,11 @@
 
 ## Properties
 
-| Property      | Type                                                   | Default               | Description                               |
-| ------------- | ------------------------------------------------------ | --------------------- | ----------------------------------------- |
-| loading       | boolean \| SpinProps                                   | false                 | Table loading state                        |
-| scroll        | { x?: number \| string \| true; y?: number \| string } | { x: 'max-content' }  | Table scroll configuration                 |
-| ...TableProps | -                                                      | -                     | Supports all Ant Design Table properties   |
+| Property      | Type                                                   | Default              | Description                              |
+| ------------- | ------------------------------------------------------ | -------------------- | ---------------------------------------- |
+| loading       | boolean \| SpinProps                                   | false                | Table loading state                      |
+| scroll        | { x?: number \| string \| true; y?: number \| string } | { x: 'max-content' } | Table scroll configuration               |
+| ...TableProps | -                                                      | -                    | Supports all Ant Design Table properties |
 
 ## Basic Usage
 

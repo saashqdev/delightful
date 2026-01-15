@@ -49,8 +49,3 @@ export const getMessageTypeOptions = (styles: any, t: TFunction) => {
 }
 
 export default {}
-
-
-
-
-

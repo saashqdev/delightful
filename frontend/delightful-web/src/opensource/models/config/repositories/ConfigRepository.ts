@@ -44,7 +44,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 			value: theme,
 		})
 	}
-	
+
 	/**
 	 * @description Get locale configuration
 	 */
@@ -52,7 +52,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 		const config = await this.get(ConfigType.I18n)
 		return config?.value as string
 	}
-	
+
 	/**
 	 * @description Save internationalization language identifier configuration
 	 */
@@ -64,7 +64,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 			value: locale,
 		})
 	}
-	
+
 	/**
 	 * @description Get cluster configuration
 	 */
@@ -72,7 +72,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 		const config = await this.get(ConfigType.Cluster)
 		return config?.value as string
 	}
-	
+
 	/**
 	 * @description Save cluster configuration
 	 */

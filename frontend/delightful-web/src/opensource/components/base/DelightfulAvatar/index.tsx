@@ -35,11 +35,12 @@ const DelightfulAvatar = forwardRef<HTMLSpanElement, DelightfulAvatarProps>(
 				typeof src === "string" && src
 					? src
 					: getTextAvatar(
-						typeof children === "string" ? children : "Unknown",					style?.backgroundColor,
-					style?.color,
-				),
-		)
-	}, [children, src, style?.backgroundColor, style?.color])
+							typeof children === "string" ? children : "Unknown",
+							style?.backgroundColor,
+							style?.color,
+					  ),
+			)
+		}, [children, src, style?.backgroundColor, style?.color])
 		const mergedStyle = useMemo(
 			() => ({
 				flex: "none",

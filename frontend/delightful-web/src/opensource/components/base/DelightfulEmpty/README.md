@@ -4,8 +4,8 @@
 
 ## Props
 
-| Prop          | Type | Default | Description                     |
-| ------------- | ---- | ------- | ------------------------------- |
+| Prop          | Type | Default | Description                         |
+| ------------- | ---- | ------- | ----------------------------------- |
 | ...EmptyProps | -    | -       | Supports all Ant Design Empty props |
 
 ## Basic Usage

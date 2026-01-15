@@ -33,8 +33,3 @@ export default function ToolsOptionWrapper({ tool, children }: ToolsOptionWrappe
 		</Popover>
 	)
 }
-
-
-
-
-

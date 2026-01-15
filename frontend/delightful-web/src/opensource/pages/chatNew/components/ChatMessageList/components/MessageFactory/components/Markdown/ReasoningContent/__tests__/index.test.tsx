@@ -18,13 +18,16 @@ vi.mock("@/opensource/components/base/DelightfulIcon", () => ({
 	),
 }))
 
-vi.mock("@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown", () => ({
-	default: ({ content, ...props }: { content: string; [key: string]: any }) => (
-		<div data-testid="mock-delightful-markdown" {...props}>
-			{content}
-		</div>
-	),
-}))
+vi.mock(
+	"@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown",
+	() => ({
+		default: ({ content, ...props }: { content: string; [key: string]: any }) => (
+			<div data-testid="mock-delightful-markdown" {...props}>
+				{content}
+			</div>
+		),
+	}),
+)
 
 vi.mock("@tabler/icons-react", () => ({
 	IconBrain: () => <div data-testid="mock-icon-brain" />,

@@ -4,8 +4,8 @@ DelightfulMarpit is a slide rendering component based on Marpit and Reveal.js, u
 
 ## Properties
 
-| Property | Type   | Default | Description                    |
-| -------- | ------ | ------- | ------------------------------ |
+| Property | Type   | Default | Description                      |
+| -------- | ------ | ------- | -------------------------------- |
 | content  | string | -       | Slide content in Markdown format |
 
 ## Basic Usage

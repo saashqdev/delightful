@@ -16,8 +16,3 @@ export const flowTypeToApiKeyType: Record<FlowRouteType, Flow.ApiKeyType> = {
 	[FlowRouteType.VectorKnowledge]: Flow.ApiKeyType.Flow,
 	[FlowRouteType.Mcp]: Flow.ApiKeyType.Mcp,
 }
-
-
-
-
-

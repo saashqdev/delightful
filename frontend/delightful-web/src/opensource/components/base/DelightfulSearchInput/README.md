@@ -4,9 +4,9 @@
 
 ## Properties
 
-| Property       | Type | Default | Description                                 |
-| -------------- | ---- | ------- | ------------------------------------------- |
-| ...SearchProps | -    | -       | Supports all Ant Design Input.Search props  |
+| Property       | Type | Default | Description                                |
+| -------------- | ---- | ------- | ------------------------------------------ |
+| ...SearchProps | -    | -       | Supports all Ant Design Input.Search props |
 
 ## Basic Usage
 

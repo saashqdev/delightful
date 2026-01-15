@@ -30,7 +30,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		extra: {},
 		name: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[8]
+				: token.delightfulColorUsages.text[1]};
 			text-overflow: ellipsis;
 
 			font-size: 14px;
@@ -39,7 +41,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 		title: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[2]};
 			text-overflow: ellipsis;
 
 			font-size: 12px;

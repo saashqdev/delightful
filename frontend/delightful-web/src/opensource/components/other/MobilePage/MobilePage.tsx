@@ -47,8 +47,12 @@ function MobilePage() {
 					<Text size={size} />
 					<Name size={size} />
 				</div>
-				<div className={styles.desc}>Next-generation enterprise-grade AI application innovation engine</div>
-				<div className={styles.tip}>Effortlessly build and operate native AI large-model applications</div>
+				<div className={styles.desc}>
+					Next-generation enterprise-grade AI application innovation engine
+				</div>
+				<div className={styles.tip}>
+					Effortlessly build and operate native AI large-model applications
+				</div>
 				<div className={styles.menu}>
 					<div className={styles.item}>
 						<MacIcon />
@@ -60,17 +64,23 @@ function MobilePage() {
 					<div className={cx(styles.item, styles.itemDisabled)}>
 						<WinIcon />
 						<span>Windows Client</span>
-						<span className={cx(styles.button, styles.buttonDisabled)}>Coming soon</span>
+						<span className={cx(styles.button, styles.buttonDisabled)}>
+							Coming soon
+						</span>
 					</div>
 					<div className={cx(styles.item, styles.itemDisabled)}>
 						<IOSIcon />
 						<span>iPhone Client</span>
-						<span className={cx(styles.button, styles.buttonDisabled)}>Coming soon</span>
+						<span className={cx(styles.button, styles.buttonDisabled)}>
+							Coming soon
+						</span>
 					</div>
 					<div className={cx(styles.item, styles.itemDisabled)}>
 						<AndroidIcon />
 						<span>Android Client</span>
-						<span className={cx(styles.button, styles.buttonDisabled)}>Coming soon</span>
+						<span className={cx(styles.button, styles.buttonDisabled)}>
+							Coming soon
+						</span>
 					</div>
 				</div>
 				<div className={styles.footer}>

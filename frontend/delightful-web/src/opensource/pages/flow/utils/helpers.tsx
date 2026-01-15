@@ -3,7 +3,10 @@ import type { DataSourceOption } from "@bedelightful/delightful-flow/dist/common
 import { Common } from "@bedelightful/delightful-flow/dist/DelightfulConditionEdit/types/common"
 import DelightfulInput from "@bedelightful/delightful-flow/dist/common/BaseUI/Input"
 import type { EXPRESSION_VALUE } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
-import { FormItemType, LabelTypeMap } from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import {
+	FormItemType,
+	LabelTypeMap,
+} from "@bedelightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import type { DelightfulFlow } from "@bedelightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type JSONSchema from "@bedelightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { flowStore } from "@bedelightful/delightful-flow/dist/DelightfulFlow/store/index"
@@ -406,8 +409,3 @@ export const getPlaceholder = (
 			return ""
 	}
 }
-
-
-
-
-

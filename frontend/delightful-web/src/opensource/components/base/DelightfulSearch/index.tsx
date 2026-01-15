@@ -23,11 +23,11 @@ const DelightfulSearch = memo(
 				onCompositionStart={() => setIsComposing(true)}
 				onCompositionEnd={(e: CompositionEvent<HTMLInputElement>) => {
 					setIsComposing(false)
-				// Trigger onChange when IME ends
-				onChange?.(e as unknown as ChangeEvent<HTMLInputElement>)
-			}}
-			onChange={(e) => {
-				// Only trigger when not in IME editing state
+					// Trigger onChange when IME ends
+					onChange?.(e as unknown as ChangeEvent<HTMLInputElement>)
+				}}
+				onChange={(e) => {
+					// Only trigger when not in IME editing state
 					setRawValue(e.target.value)
 					if (!isComposing) {
 						onChange?.(e)

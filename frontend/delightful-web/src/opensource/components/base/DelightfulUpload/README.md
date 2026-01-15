@@ -9,8 +9,8 @@
 | multiple     | boolean                   | false   | Whether multiple file uploads are supported |
 | onFileChange | (files: FileList) => void | -       | Callback after files are selected           |
 | children     | ReactNode                 | -       | Content for a custom upload button or area  |
-| accept       | string                    | -       | Accepted file types, e.g., "image/*"        |
-| disabled     | boolean                   | false   | Whether upload is disabled                   |
+| accept       | string                    | -       | Accepted file types, e.g., "image/\*"       |
+| disabled     | boolean                   | false   | Whether upload is disabled                  |
 
 ## Basic Usage
 

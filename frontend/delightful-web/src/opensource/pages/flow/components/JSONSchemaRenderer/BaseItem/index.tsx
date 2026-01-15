@@ -79,8 +79,3 @@ export default function BaseItem({ displayKey, field, onExpand, isDisplay }: Bas
 		</Tooltip>
 	)
 }
-
-
-
-
-

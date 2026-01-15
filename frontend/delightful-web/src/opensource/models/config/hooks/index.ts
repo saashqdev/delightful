@@ -12,14 +12,14 @@ import { configStore } from "../stores"
  */
 export function useGlobalLanguage<T>(includeAuto: T = true as T) {
 	const [language, setLanguage] = useState(configStore.i18n.language)
-	
+
 	useEffect(() => {
 		return reaction(
 			() => configStore.i18n.language,
 			(newLanguage) => setLanguage(newLanguage),
 		)
 	}, [])
-	
+
 	if (includeAuto) return language
 	return language === "auto" ? normalizeLocale(window.navigator.language) : language
 }
@@ -29,12 +29,12 @@ export function useGlobalLanguage<T>(includeAuto: T = true as T) {
  * @param includeAuto Whether to include auto
  */
 export function useSupportLanguageOptions(includeAuto = true) {
-	const {t} = useTranslation("interface")
+	const { t } = useTranslation("interface")
 	const [state, setState] = useState({
 		language: configStore.i18n.language,
 		languages: configStore.i18n.languages,
 	})
-	
+
 	useEffect(() => {
 		return reaction(
 			() => ({
@@ -44,7 +44,7 @@ export function useSupportLanguageOptions(includeAuto = true) {
 			(newState) => setState(newState),
 		)
 	}, [])
-	
+
 	return useMemo(() => {
 		return state.languages.reduce<
 			Array<{ label: string; value: string; translations?: Record<string, string> }>
@@ -57,7 +57,7 @@ export function useSupportLanguageOptions(includeAuto = true) {
 				})
 				return array
 			},
-			includeAuto ? [{label: t("setting.languages.auto"), value: "auto"}] : [],
+			includeAuto ? [{ label: t("setting.languages.auto"), value: "auto" }] : [],
 		)
 	}, [includeAuto, state.language, state.languages, t])
 }
@@ -77,58 +77,58 @@ export function setGlobalLanguage(lang: string) {
 export function useClusterConfig() {
 	const [clusterConfig, setClusterConfig] = useState(configStore.cluster.cluster)
 	const [clustersConfig, setClustersConfig] = useState(configStore.cluster.clusterConfig)
-	
+
 	useEffect(() => {
 		const disposer = reaction(
 			() => configStore.cluster.cluster,
 			(config) => setClusterConfig(config),
-			{fireImmediately: true}
+			{ fireImmediately: true },
 		)
-		
+
 		return () => disposer()
 	}, [])
-	
+
 	useEffect(() => {
 		const disposer = reaction(
 			() => configStore.cluster.clusterConfig,
 			(config) => setClustersConfig(config),
 		)
-		
+
 		return () => disposer()
 	}, [])
-	
-	return {clusterConfig, clustersConfig}
+
+	return { clusterConfig, clustersConfig }
 }
 
 export function useTheme() {
 	const [themeConfig, setThemeConfig] = useState(configStore.theme.theme)
-	
+
 	useEffect(() => {
 		return reaction(
 			() => configStore.theme.theme,
 			(theme) => setThemeConfig(theme),
 		)
 	}, [])
-	
+
 	const prefersColorScheme = useMemo(() => {
 		if (themeConfig === "auto") {
 			return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 		}
 		return themeConfig
 	}, [themeConfig])
-	
-	return {theme: themeConfig, setTheme: configService.setThemeConfig, prefersColorScheme}
+
+	return { theme: themeConfig, setTheme: configService.setThemeConfig, prefersColorScheme }
 }
 
 export function useAreaCodes() {
 	const [areaCodes, setAreaCodes] = useState(configStore.i18n.areaCodes)
-	
+
 	useEffect(() => {
 		return reaction(
 			() => configStore.i18n.areaCodes,
 			(config) => setAreaCodes(config),
 		)
 	}, [])
-	
-	return {areaCodes}
+
+	return { areaCodes }
 }

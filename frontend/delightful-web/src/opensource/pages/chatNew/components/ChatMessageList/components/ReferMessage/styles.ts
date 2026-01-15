@@ -5,7 +5,9 @@ export const useStyles = createStyles(
 		const selfBorderColor = isDarkMode
 			? token.delightfulColorUsages.fill[1]
 			: token.delightfulColorUsages.white
-		const otherBorderColor = isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder
+		const otherBorderColor = isDarkMode
+			? token.delightfulColorScales.grey[4]
+			: token.colorBorder
 
 		return {
 			container: {

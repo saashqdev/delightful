@@ -125,8 +125,8 @@ const FlowConverter: React.FC = () => {
 										onChange={(e) => setSourceText(e.target.value)}
 										placeholder={
 											conversionType === "yaml2json"
-											? "Please enter YAML formatted Flow"
-											: "Please enter JSON formatted Flow"
+												? "Please enter YAML formatted Flow"
+												: "Please enter JSON formatted Flow"
 										}
 										rows={20}
 									/>
@@ -194,8 +194,13 @@ const FlowConverter: React.FC = () => {
 						<Text>
 							Convert Flow workflows from YAML format to JSON format.
 							<ul>
-								<li>Paste YAML content in the source file area, or upload a YAML file</li>
-								<li>Click the &quot;Convert&quot; button to execute the conversion</li>
+								<li>
+									Paste YAML content in the source file area, or upload a YAML
+									file
+								</li>
+								<li>
+									Click the &quot;Convert&quot; button to execute the conversion
+								</li>
 								<li>After conversion, download or copy the result</li>
 							</ul>
 						</Text>
@@ -204,8 +209,13 @@ const FlowConverter: React.FC = () => {
 						<Text>
 							Convert Flow JSON format to YAML format.
 							<ul>
-								<li>Paste JSON content in the source file area, or upload a JSON file</li>
-								<li>Click the &quot;Convert&quot; button to execute the conversion</li>
+								<li>
+									Paste JSON content in the source file area, or upload a JSON
+									file
+								</li>
+								<li>
+									Click the &quot;Convert&quot; button to execute the conversion
+								</li>
 								<li>After conversion, download or copy the result</li>
 							</ul>
 						</Text>
@@ -256,8 +266,3 @@ edges:
 }
 
 export default FlowConverter
-
-
-
-
-

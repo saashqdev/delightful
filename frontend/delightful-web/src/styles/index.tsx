@@ -7,8 +7,8 @@ import antdOverride from "./antdOverride"
 
 const prefixCls = CLASSNAME_PREFIX
 
-export const GlobalStyle = createGlobalStyle(({theme}) => [
+export const GlobalStyle = createGlobalStyle(({ theme }) => [
 	font(),
 	animation(),
-	antdOverride({prefixCls, token: theme}),
+	antdOverride({ prefixCls, token: theme }),
 ])

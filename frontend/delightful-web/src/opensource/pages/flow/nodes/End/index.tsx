@@ -9,8 +9,3 @@ export const EndComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

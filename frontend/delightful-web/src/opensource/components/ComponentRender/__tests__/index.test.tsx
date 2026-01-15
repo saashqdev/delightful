@@ -47,7 +47,12 @@ describe("ComponentRender", () => {
 		// Register this test component
 		ComponentFactory.registerComponent("TestComponent" as any, TestComponent as any)
 
-		render(<ComponentRender componentName={"TestComponent" as any} testProp="Test property value" />)
+		render(
+			<ComponentRender
+				componentName={"TestComponent" as any}
+				testProp="Test property value"
+			/>,
+		)
 
 		// Verify that props are passed correctly
 		const component = await screen.findByTestId("test-component")

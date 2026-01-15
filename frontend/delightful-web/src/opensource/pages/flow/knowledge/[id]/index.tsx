@@ -25,7 +25,9 @@ const useKnowledgeDetailStyles = createStyles(({ css, isDarkMode, token }) => {
 			flex: 1;
 		`,
 		breadcrumb: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[3]
+				: token.delightfulColorUsages.text[2]};
 			font-size: 14px;
 			font-weight: 400;
 			line-height: 20px;
@@ -48,7 +50,9 @@ const useKnowledgeDetailStyles = createStyles(({ css, isDarkMode, token }) => {
 		header: css`
 			padding: 0 20px 12px 20px;
 			border-bottom: 1px solid
-				${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
+				${isDarkMode
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorUsages.border};
 			height: 60px;
 
 			.icon-edit {
@@ -63,7 +67,9 @@ const useKnowledgeDetailStyles = createStyles(({ css, isDarkMode, token }) => {
 			}
 		`,
 		title: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[1]};
 			font-size: 20px;
 			font-weight: 600;
 		`,
@@ -74,7 +80,9 @@ const useKnowledgeDetailStyles = createStyles(({ css, isDarkMode, token }) => {
 			background: ${isDarkMode
 				? token.delightfulColorScales.grey[8]
 				: token.delightfulColorScales.grey[0]};
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[1]};
 		`,
 
 		searchInput: css`

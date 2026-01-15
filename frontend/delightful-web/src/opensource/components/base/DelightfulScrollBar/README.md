@@ -4,11 +4,11 @@
 
 ## Properties
 
-| Property            | Type                    | Default | Description                               |
-| ------------------- | ----------------------- | ------- | ----------------------------------------- |
-| children            | ReactNode \| RenderFunc | -       | Child elements or a render function       |
-| scrollableNodeProps | object                  | {}      | Props for the scrollable node             |
-| ...SimpleBarOptions | -                       | -       | Supports all `simplebar-core` options     |
+| Property            | Type                    | Default | Description                                |
+| ------------------- | ----------------------- | ------- | ------------------------------------------ |
+| children            | ReactNode \| RenderFunc | -       | Child elements or a render function        |
+| scrollableNodeProps | object                  | {}      | Props for the scrollable node              |
+| ...SimpleBarOptions | -                       | -       | Supports all `simplebar-core` options      |
 | ...HTMLAttributes   | -                       | -       | Supports all HTML `div` element attributes |
 
 ## Basic Usage

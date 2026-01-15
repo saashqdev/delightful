@@ -2,8 +2,3 @@
 
 // Default permission
 export const defaultOperation = OperationTypes.Edit
-
-
-
-
-

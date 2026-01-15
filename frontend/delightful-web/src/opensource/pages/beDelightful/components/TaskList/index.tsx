@@ -169,7 +169,7 @@ function TaskList({ taskData, className, style, mode }: TaskListProps) {
 					onClick={toggleExpanded}
 				>
 					<div className={cx(styles.headerLeft, !expanded && styles.headerLeftCollapsed)}>
-					{expanded && <div className={styles.title}>Task List</div>}
+						{expanded && <div className={styles.title}>Task List</div>}
 					</div>
 					{mode === "view" ? null : (
 						<div className={styles.headerRight}>

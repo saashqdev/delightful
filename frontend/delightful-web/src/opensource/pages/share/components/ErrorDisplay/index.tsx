@@ -20,7 +20,9 @@ export default function ErrorDisplay({
 					<img src={ShareIcon} alt="" />
 				</div>
 				<div className={styles.message}>{errorMessage}</div>
-				<span className={styles.description}>Sorry, you don't have permission to view this playback or it has been deleted</span>
+				<span className={styles.description}>
+					Sorry, you don't have permission to view this playback or it has been deleted
+				</span>
 				{onRetry && (
 					<Button
 						type="primary"

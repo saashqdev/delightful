@@ -41,4 +41,4 @@ export default (getParentDom: () => HTMLDivElement | null) =>
 				},
 			}
 		},
-	}) as Omit<SuggestionOptions<MentionSelectItem>, "editor">
+	} as Omit<SuggestionOptions<MentionSelectItem>, "editor">)

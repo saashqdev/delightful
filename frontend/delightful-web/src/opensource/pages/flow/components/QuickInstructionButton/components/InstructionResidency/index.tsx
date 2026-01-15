@@ -28,8 +28,3 @@ export const InstructionResidency = memo(
 		)
 	},
 )
-
-
-
-
-

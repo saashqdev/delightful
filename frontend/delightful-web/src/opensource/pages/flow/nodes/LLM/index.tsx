@@ -17,8 +17,3 @@ export const LLMComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

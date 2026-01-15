@@ -24,7 +24,9 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		--${prefixCls}-color-bg-mask: transparent;
 	`,
 	body: css`
-		background-color: ${isDarkMode ? token.delightfulColorUsages.bg[2] : token.delightfulColorScales.white};
+		background-color: ${
+			isDarkMode ? token.delightfulColorUsages.bg[2] : token.delightfulColorScales.white
+		};
 		--${prefixCls}-padding-lg: 12px;
 	`,
 }))

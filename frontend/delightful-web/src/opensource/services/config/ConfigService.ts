@@ -7,13 +7,12 @@ import { ClusterRepository } from "@/opensource/models/config/repositories/Clust
 import { configStore } from "@/opensource/models/config/stores"
 
 export class ConfigService {
-	
 	private readonly commonApi: typeof apis.CommonApi
-	
+
 	constructor(dependencies: typeof apis) {
 		this.commonApi = dependencies.CommonApi
 	}
-	
+
 	/**
 	 * @description Initialize (persistent data/memory state)
 	 */

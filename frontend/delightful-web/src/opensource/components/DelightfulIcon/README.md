@@ -4,12 +4,12 @@
 
 ## Props
 
-| Name         | Type                                                                    | Default | Description                          |
-| ------------ | ----------------------------------------------------------------------- | ------- | ------------------------------------ |
-| component    | ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>> | -       | The Tabler icon component to render  |
+| Name         | Type                                                                    | Default | Description                             |
+| ------------ | ----------------------------------------------------------------------- | ------- | --------------------------------------- |
+| component    | ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>> | -       | The Tabler icon component to render     |
 | active       | boolean                                                                 | false   | Whether the icon is in the active state |
-| animation    | boolean                                                                 | false   | Whether to enable icon animation      |
-| ...IconProps | -                                                                       | -       | Supports all Tabler Icons props       |
+| animation    | boolean                                                                 | false   | Whether to enable icon animation        |
+| ...IconProps | -                                                                       | -       | Supports all Tabler Icons props         |
 
 ## Basic Usage
 
@@ -45,9 +45,9 @@ import { IconHome, IconStar, IconSettings } from '@tabler/icons-react'
 
 ## When to Use
 
-- Use Tabler icons in the app
-- Need icons that react to theme changes
-- Want centralized control over icon styling
-- Need interactive states such as active/selected
+-   Use Tabler icons in the app
+-   Need icons that react to theme changes
+-   Want centralized control over icon styling
+-   Need interactive states such as active/selected
 
 DelightfulIcon makes icons simple and consistent while adapting to your application's theme settings.

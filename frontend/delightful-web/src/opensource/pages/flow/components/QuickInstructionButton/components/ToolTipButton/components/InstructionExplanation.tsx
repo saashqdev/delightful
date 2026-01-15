@@ -126,8 +126,3 @@ export const InstructionExplanation = memo(
 		)
 	},
 )
-
-
-
-
-

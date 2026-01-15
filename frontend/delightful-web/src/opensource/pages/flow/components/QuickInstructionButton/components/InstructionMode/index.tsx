@@ -55,8 +55,3 @@ export const InstructionMode = memo(({ instructionModeChange }: InstructionModeP
 		</Flex>
 	)
 })
-
-
-
-
-

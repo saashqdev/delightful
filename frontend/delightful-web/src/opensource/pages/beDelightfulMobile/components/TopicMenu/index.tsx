@@ -134,7 +134,7 @@ export default memo(function TopicMenu({
 						if (updatedWorkspace && updatedWorkspace.topics.length > 0) {
 							setSelectedThreadInfo(updatedWorkspace.topics[0])
 						} else if (updatedWorkspace && updatedWorkspace.topics.length === 0) {
-						// When the workspace has no remaining topics, set the selected topic to null
+							// When the workspace has no remaining topics, set the selected topic to null
 							setSelectedThreadInfo(null as any)
 						}
 					}
@@ -214,7 +214,7 @@ export default memo(function TopicMenu({
 			>
 				<div style={{ padding: "10px" }}>
 					<Input
-					placeholder="Please enter topic name"
+						placeholder="Please enter topic name"
 						value={newTopicName}
 						onChange={(val) => setNewTopicName(val)}
 						autoFocus

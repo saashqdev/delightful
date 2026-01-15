@@ -21,7 +21,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		icon: css`
 			margin: 3px;
 			cursor: pointer;
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.grey[8]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorScales.grey[8]};
 			transition: color 0.3s ease;
 		`,
 		handler: css`

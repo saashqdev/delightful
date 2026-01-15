@@ -317,8 +317,3 @@ export default function IntentionRecognitionV0() {
 		</div>
 	)
 }
-
-
-
-
-

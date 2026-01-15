@@ -4,10 +4,10 @@
 
 ## Properties
 
-| Property | Type    | Default | Description                          |
-| -------- | ------- | ------- | ------------------------------------ |
-| content  | string  | -       | Mind map content in Markdown format  |
-| readonly | boolean | false   | Whether in read-only mode, no editing allowed |
+| Property | Type    | Default | Description                                        |
+| -------- | ------- | ------- | -------------------------------------------------- |
+| content  | string  | -       | Mind map content in Markdown format                |
+| readonly | boolean | false   | Whether in read-only mode, no editing allowed      |
 | ...rest  | -       | -       | Support passing other HTML attributes to container |
 
 ## Basic Usage

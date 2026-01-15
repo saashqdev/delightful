@@ -29,7 +29,9 @@ const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) => {
 						: token.delightfulColorUsages.danger.default
 				} !important;
 				--${prefixCls}-color-error: ${
-			isDarkMode ? token.delightfulColorUsages.danger.default : token.delightfulColorScales.red[0]
+			isDarkMode
+				? token.delightfulColorUsages.danger.default
+				: token.delightfulColorScales.red[0]
 		};
 
 			&:hover {

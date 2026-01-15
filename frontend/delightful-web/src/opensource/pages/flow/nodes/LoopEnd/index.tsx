@@ -9,8 +9,3 @@ export const LoopEndComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

@@ -9,8 +9,3 @@ export const IntentionRecognitionComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

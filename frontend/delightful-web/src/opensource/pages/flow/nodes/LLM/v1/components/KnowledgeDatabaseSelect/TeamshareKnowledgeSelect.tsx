@@ -196,8 +196,3 @@ export default function TeamshareKnowledgeSelectV1({
 		/>
 	)
 }
-
-
-
-
-

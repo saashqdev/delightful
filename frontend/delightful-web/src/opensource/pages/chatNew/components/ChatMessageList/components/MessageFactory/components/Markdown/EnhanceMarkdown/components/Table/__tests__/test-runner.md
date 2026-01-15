@@ -52,39 +52,47 @@ npm test -- --watch Table
 
 Before submitting code, ensure all the following tests pass:
 
-- [ ] ✅ useTableI18n Hook tests (3 test cases)
-- [ ] ✅ TableCell component tests (9 test cases)
-- [ ] ✅ RowDetailDrawer component tests (9 test cases)
-- [ ] ✅ TableWrapper component tests (13 test cases)
-- [ ] ✅ useTableStyles Hook tests (5 test cases)
-- [ ] ✅ Integration tests (10 test cases)
+-   [ ] ✅ useTableI18n Hook tests (3 test cases)
+-   [ ] ✅ TableCell component tests (9 test cases)
+-   [ ] ✅ RowDetailDrawer component tests (9 test cases)
+-   [ ] ✅ TableWrapper component tests (13 test cases)
+-   [ ] ✅ useTableStyles Hook tests (5 test cases)
+-   [ ] ✅ Integration tests (10 test cases)
 
 **Total: 49 test cases**
 
 ## 🐛 Common Issue Solutions
 
 ### 1. Test File Not Found
+
 ```bash
 Error: No test suite found in file
 ```
+
 **Solution**: Ensure test file contains valid test content, check if file is empty.
 
 ### 2. Mock Dependency Issues
+
 ```bash
 TypeError: Cannot read property of undefined
 ```
+
 **Solution**: Check if vi.mock() configuration is correct, ensure all external dependencies are properly mocked.
 
 ### 3. Style Class Not Found
+
 ```bash
 Expected element to have class 'xxx' but it didn't
 ```
+
 **Solution**: Check style Mock configuration, ensure correct class names are returned.
 
 ### 4. TypeScript Type Errors
+
 ```bash
 Type 'xxx' is not assignable to type 'yyy'
 ```
+
 **Solution**: Check TypeScript configuration and type definitions, ensure test code types are correct.
 
 ## 🏃‍♂️ Quick Start
@@ -96,10 +104,10 @@ Type 'xxx' is not assignable to type 'yyy'
 
 ## 📈 Performance Metrics
 
-- **Test Execution Time**: < 2 seconds
-- **Code Coverage Target**: > 90%
-- **Number of Test Files**: 6
-- **Total Test Cases**: 49
+-   **Test Execution Time**: < 2 seconds
+-   **Code Coverage Target**: > 90%
+-   **Number of Test Files**: 6
+-   **Total Test Cases**: 49
 
 ## 🔍 Debugging Tests
 
@@ -118,4 +126,4 @@ npm test -- --inspect-brk Table
 
 ---
 
-**Note**: Please ensure you run the complete test suite before submitting code to guarantee all functionality works properly. 
+**Note**: Please ensure you run the complete test suite before submitting code to guarantee all functionality works properly.

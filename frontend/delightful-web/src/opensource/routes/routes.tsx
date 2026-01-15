@@ -56,7 +56,9 @@ export function registerRoutes(): Array<RouteObject> {
 	const Settings = lazy(() => import("../pages/settings/Settings.page"))
 
 	/** Be Delightful - Workspace */
-	const BeDelightfulWorkspace = lazy(() => import("@/opensource/pages/beDelightful/pages/Workspace"))
+	const BeDelightfulWorkspace = lazy(
+		() => import("@/opensource/pages/beDelightful/pages/Workspace"),
+	)
 
 	/** Be Delightful Share (no login required) */
 	const BeDelightfulShare = lazy(() => import("@/opensource/pages/share"))

@@ -8,8 +8,3 @@ export const VectorDatabaseMatchComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

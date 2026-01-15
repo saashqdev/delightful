@@ -125,7 +125,11 @@ const MemberCard = observer(() => {
 			{/* Header card */}
 			<Flex vertical className={styles.header} gap={10}>
 				<Flex className={styles.headerTop} gap={14} align="center">
-					<DelightfulAvatar className={styles.avatar} src={userInfo?.avatar_url} size={80}>
+					<DelightfulAvatar
+						className={styles.avatar}
+						src={userInfo?.avatar_url}
+						size={80}
+					>
 						{getUserName(userInfo)}
 					</DelightfulAvatar>
 					<span className={styles.username}>{getUserName(userInfo)}</span>

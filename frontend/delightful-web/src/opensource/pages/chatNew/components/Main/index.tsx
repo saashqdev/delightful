@@ -16,7 +16,9 @@ const useStyles = createStyles(({ isDarkMode, css, token }, { imStyle }: { imSty
 			width: "100%",
 			minWidth: 420,
 			height: "100%",
-			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.black,
+			color: isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.black,
 			flex: 1,
 			padding: imStyle === IMStyle.Modern ? "0 18px 24px" : 0,
 		},
@@ -27,7 +29,9 @@ const useStyles = createStyles(({ isDarkMode, css, token }, { imStyle }: { imSty
 		},
 
 		title: {
-			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
+			color: isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1],
 			fontSize: 50,
 			fontWeight: 600,
 			overflow: "hidden",
@@ -44,7 +48,9 @@ const useStyles = createStyles(({ isDarkMode, css, token }, { imStyle }: { imSty
 		},
 
 		description: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[2]};
 			font-size: 18px;
 			font-weight: 200;
 			line-height: 24px;
@@ -72,12 +78,14 @@ const useStyles = createStyles(({ isDarkMode, css, token }, { imStyle }: { imSty
 const data = [
 	{
 		icon: "🎯",
-		content: "Summarize meeting key points, create tasks from meeting items and notify relevant people",
+		content:
+			"Summarize meeting key points, create tasks from meeting items and notify relevant people",
 		key: "message",
 	},
 	{
 		icon: "📊",
-		content: "Analyze last month's sales using month-over-month and year-over-year comparison, and provide optimization suggestions",
+		content:
+			"Analyze last month's sales using month-over-month and year-over-year comparison, and provide optimization suggestions",
 		key: "addressBook",
 	},
 ]

@@ -412,12 +412,12 @@ const DelightfulAggregateAISearchCard = observer(
 				<ConfigProvider theme={configProviderTheme}>
 					<Flex vertical className={styles.container}>
 						<Flex vertical className={styles.timelineContainer}>
-						{/* Top question search area */}
+							{/* Top question search area */}
 							<DelightfulCollapse
 								className={styles.questionCollapse}
 								style={{
 									margin: isSearchingFinish ? undefined : "-10px",
-								// Prevent stretching width when expanded
+									// Prevent stretching width when expanded
 									maxWidth: isSearchingFinish ? size?.width : "unset",
 								}}
 								expandIcon={({ isActive }) => (
@@ -449,7 +449,7 @@ const DelightfulAggregateAISearchCard = observer(
 								/>
 							) : null}
 						</div>
-					{/* Mind map, events, search sources */}
+						{/* Mind map, events, search sources */}
 						<DelightfulCollapse className={styles.collapse} items={collapseItems} />
 					</Flex>
 				</ConfigProvider>

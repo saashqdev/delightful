@@ -65,7 +65,7 @@ const InstructionList = memo(
 			}
 		}, [instructionsList])
 
-	// Find which container the ID belongs to
+		// Find which container the ID belongs to
 		const findContainer = (id: IdType) => {
 			return list.find((container) => container.items.some((item) => item.id === id))
 				?.position
@@ -80,60 +80,60 @@ const InstructionList = memo(
 		}
 
 		// Start dragging
-	const handleDragStart = (event: DragStartEvent) => {
-		setIsDrag(true)
-	}
+		const handleDragStart = (event: DragStartEvent) => {
+			setIsDrag(true)
+		}
 
-	// During drag
-	const handleDragOver = (event: DragOverEvent) => {
-		const { over } = event
-		if (!over) return
+		// During drag
+		const handleDragOver = (event: DragOverEvent) => {
+			const { over } = event
+			if (!over) return
 
-		setIsCrossContainer(true)
-		// Target item ID or target container ID
-		const overId = over.id as IdType
+			setIsCrossContainer(true)
+			// Target item ID or target container ID
+			const overId = over.id as IdType
 
-		const isZone = over.data.current?.isContainer || false
+			const isZone = over.data.current?.isContainer || false
 
-		// If hovering over a container
-		if (isZone) {
-			// Same container, clear
-			if (activeContainer === overId) {
+			// If hovering over a container
+			if (isZone) {
+				// Same container, clear
+				if (activeContainer === overId) {
+					setPlaceholderId(null)
+				}
+				// Not the container of current moving item, set placeholder to container id
+				else if (!placeholderId) {
+					setPlaceholderId(overId)
+					return
+				}
+			}
+
+			// Hovering over an item, set placeholder to item's id
+
+			// Target container
+			const overContainer = findContainer(overId)
+
+			if (!activeContainer || !overContainer) return
+
+			// Check if drag crosses containers
+			if (overContainer !== activeContainer) {
+				// If target container is toolbar, check if target item is a system instruction, if yes cannot move, otherwise can move
+				if (overContainer === InstructionGroupType.TOOL) {
+					const overItem = over.data.current?.item
+
+					if (overItem && isSystemItem(overItem)) return
+					setPlaceholderId(overId)
+				} else if (placeholderId !== overId) {
+					setPlaceholderId(overId)
+				}
+			} else {
+				// Dragging within the same container does not set placeholder
 				setPlaceholderId(null)
 			}
-			// Not the container of current moving item, set placeholder to container id
-			else if (!placeholderId) {
-				setPlaceholderId(overId)
-				return
-			}
 		}
 
-		// Hovering over an item, set placeholder to item's id
-
-		// Target container
-		const overContainer = findContainer(overId)
-
-		if (!activeContainer || !overContainer) return
-
-		// Check if drag crosses containers
-		if (overContainer !== activeContainer) {
-			// If target container is toolbar, check if target item is a system instruction, if yes cannot move, otherwise can move
-			if (overContainer === InstructionGroupType.TOOL) {
-				const overItem = over.data.current?.item
-
-				if (overItem && isSystemItem(overItem)) return
-				setPlaceholderId(overId)
-			} else if (placeholderId !== overId) {
-				setPlaceholderId(overId)
-			}
-		} else {
-			// Dragging within the same container does not set placeholder
-			setPlaceholderId(null)
-		}
-	}
-
-	// Drag end
-	const handleDragEnd = (event: any) => {
+		// Drag end
+		const handleDragEnd = (event: any) => {
 			const { active, over } = event
 			if (!over) {
 				setPlaceholderId(null)
@@ -304,8 +304,3 @@ const InstructionList = memo(
 )
 
 export default InstructionList
-
-
-
-
-

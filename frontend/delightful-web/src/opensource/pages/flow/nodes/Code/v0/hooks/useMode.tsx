@@ -39,8 +39,3 @@ export default function useMode() {
 		setMode: set,
 	}
 }
-
-
-
-
-

@@ -140,7 +140,10 @@ const Search = memo(({ handleClickCard }: { handleClickCard: (id: string) => voi
 													}}
 													textGap4
 												/>
-												<DelightfulIcon component={IconChevronRight} size={24} />
+												<DelightfulIcon
+													component={IconChevronRight}
+													size={24}
+												/>
 											</Flex>
 										)}
 									</VirtualList>

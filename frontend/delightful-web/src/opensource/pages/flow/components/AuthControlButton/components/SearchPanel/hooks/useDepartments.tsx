@@ -37,9 +37,3 @@ export default function useDepartments() {
 		setOrganizationChecked,
 	}
 }
-
-
-
-
-
-

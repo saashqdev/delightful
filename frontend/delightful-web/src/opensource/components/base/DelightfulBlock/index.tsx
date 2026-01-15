@@ -1,7 +1,10 @@
 import type { HTMLAttributes, PropsWithChildren } from "react"
 import { useRef } from "react"
 
-function DelightfulEditBlock({ children, ...props }: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
+function DelightfulEditBlock({
+	children,
+	...props
+}: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
 	const ref = useRef<HTMLDivElement>(null)
 
 	return (

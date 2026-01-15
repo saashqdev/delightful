@@ -9,7 +9,9 @@ export const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) =>
 			height: calc(100vh - ${token.titleBarHeight}px);
 		`,
 		title: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 14px;
 			line-height: 24px;
 			margin: 0;
@@ -49,8 +51,11 @@ export const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) =>
 			font-weight: 400;
 			padding: 12px;
 			border-radius: 8px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[2]};
-			border: 1px solid ${isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[2]};
+			border: 1px solid
+				${isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder};
 			position: relative;
 		`,
 		more: css`
@@ -73,7 +78,9 @@ export const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) =>
 			display: flex;
 			align-items: center;
 			gap: 4px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[1]};
 		`,
 		selected: css`
 			background: ${isDarkMode
@@ -87,7 +94,9 @@ export const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) =>
 			margin: 12px auto;
 		`,
 		emptyTips: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[3]};
 		`,
 		EmptyImage: css``,
 		isEmptyList: css`
@@ -104,7 +113,9 @@ export const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) =>
 			}
 		`,
 		leftTitle: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 			line-height: 24px;
@@ -115,8 +126,3 @@ export const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) =>
 		`,
 	}
 })
-
-
-
-
-

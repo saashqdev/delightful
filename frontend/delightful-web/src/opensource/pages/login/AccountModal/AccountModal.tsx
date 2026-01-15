@@ -47,7 +47,9 @@ function AccountModal(props: AccountModalProps) {
 		setLoading(true)
 
 		values.device = await getDeviceInfo(i18n)
-		const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(clusterCode as string)
+		const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(
+			clusterCode as string,
+		)
 		const userSyncStep = loginService.accountSyncStep(clusterCode as string)
 		return Promise.resolve()
 			.then(overrides?.loginStep ?? loginService.loginStep(type, values))

@@ -344,10 +344,3 @@ export const AutomateFlowFieldGroup: { [key in Schema]: AutomateFlowField } = {
 		valueOptions: [],
 	},
 }
-
-
-
-
-
-
-

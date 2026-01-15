@@ -28,7 +28,9 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			top: 20px;
 			right: 20px;
 			cursor: pointer;
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 		`,
 		top: css`
 			margin-top: 50px;
@@ -43,14 +45,20 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			justifyContent: "center",
 			border: "none",
 			borderRadius: 3,
-			background: isDarkMode ? token.delightfulColorScales.grey[5] : "rgba(240, 177, 20, 0.15)",
-			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.amber[8],
+			background: isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: "rgba(240, 177, 20, 0.15)",
+			color: isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorScales.amber[8],
 			fontSize: 12,
 			fontWeight: 400,
 			lineHeight: "16px",
 		},
 		title: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			text-align: center;
 
 			font-size: 18px;
@@ -58,7 +66,9 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			line-height: 24px;
 		`,
 		description: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[3]};
 			text-align: center;
 
 			font-size: 14px;
@@ -70,17 +80,23 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			width: 100%;
 			padding: 10px 0;
 			border-top: 1px solid
-				${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
+				${isDarkMode
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorUsages.border};
 		`,
 		numLabel: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[2]};
 			text-align: center;
 			font-size: 12px;
 			font-weight: 400;
 			line-height: 16px;
 		`,
 		num: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			text-align: center;
 			font-family: D-DIN-PRO;
 			font-size: 32px;

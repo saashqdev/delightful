@@ -233,8 +233,3 @@ const ToolAddableCard = memo(
 )
 
 export default ToolAddableCard
-
-
-
-
-

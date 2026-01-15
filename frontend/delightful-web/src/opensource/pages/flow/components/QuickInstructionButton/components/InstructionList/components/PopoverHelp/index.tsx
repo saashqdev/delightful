@@ -70,8 +70,3 @@ export const PopoverHelp = memo(({ id, title, addInstruction }: PopoverHelpProps
 		</Flex>
 	)
 })
-
-
-
-
-

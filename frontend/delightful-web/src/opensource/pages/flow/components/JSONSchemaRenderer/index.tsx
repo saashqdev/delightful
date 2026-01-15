@@ -56,8 +56,3 @@ export default function JSONSchemaRenderer({ form }: JSONSchemaRenderer) {
 		</div>
 	)
 }
-
-
-
-
-

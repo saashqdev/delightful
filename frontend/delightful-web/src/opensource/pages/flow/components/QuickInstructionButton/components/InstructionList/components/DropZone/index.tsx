@@ -83,7 +83,7 @@ export const DropZone = ({
 			<SortableContext items={filterId} strategy={verticalListSortingStrategy}>
 				<Flex vertical gap={12}>
 					{adjustedItems.map((item) => {
-					// Is system instruction
+						// Is system instruction
 						const isSystem = isSystemItem(item)
 						return (
 							<DragItem
@@ -119,8 +119,3 @@ export const DropZone = ({
 		</Flex>
 	)
 }
-
-
-
-
-

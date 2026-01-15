@@ -109,7 +109,7 @@ export function curlToApiStructure(curlCommand: string) {
 									encryption_value: null,
 									items: null,
 									properties: null,
-								},
+							  },
 				},
 				params_path: {
 					id: generateComponentId(),
@@ -128,25 +128,22 @@ export function curlToApiStructure(curlCommand: string) {
 						items: null,
 						properties:
 							parsedCurl.pathParams.length > 0
-								? parsedCurl.pathParams.reduce(
-										(acc, param) => {
-											acc[param] = {
-												type: "string",
-												key: param,
-												sort: 0,
-												title: null,
-												description: null,
-												required: [],
-												value: "",
-												encryption: false,
-												encryption_value: null,
-												items: null,
-												properties: null,
-											}
-											return acc
-										},
-										{} as Record<string, any>,
-									)
+								? parsedCurl.pathParams.reduce((acc, param) => {
+										acc[param] = {
+											type: "string",
+											key: param,
+											sort: 0,
+											title: null,
+											description: null,
+											required: [],
+											value: "",
+											encryption: false,
+											encryption_value: null,
+											items: null,
+											properties: null,
+										}
+										return acc
+								  }, {} as Record<string, any>)
 								: null,
 					},
 				},
@@ -170,7 +167,7 @@ export function curlToApiStructure(curlCommand: string) {
 									encryption_value: null,
 									items: null,
 									properties: null,
-								},
+							  },
 				},
 				headers: {
 					id: generateComponentId(),
@@ -191,7 +188,7 @@ export function curlToApiStructure(curlCommand: string) {
 									encryption_value: null,
 									items: null,
 									properties: null,
-								},
+							  },
 				},
 			},
 		},
@@ -199,8 +196,3 @@ export function curlToApiStructure(curlCommand: string) {
 
 	return apiStructure
 }
-
-
-
-
-

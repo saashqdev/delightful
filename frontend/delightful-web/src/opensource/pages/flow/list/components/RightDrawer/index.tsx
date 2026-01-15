@@ -470,8 +470,3 @@ function RightDrawer({
 	)
 }
 export default memo(RightDrawer)
-
-
-
-
-

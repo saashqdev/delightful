@@ -5,50 +5,43 @@
 		}
 	}
 
-	
-
 	.inputHeader {
-        border-top: 1px solid #1C1D2314;
+		border-top: 1px solid #1c1d2314;
 		height: 44px;
 		padding-left: 12px;
-		color: #1C1D23;
+		color: #1c1d23;
 		font-size: 14px;
 		line-height: 20px;
 		font-weight: 600;
 		display: flex;
 		align-items: center;
 	}
-
 }
 
 .formItem {
-    padding: 12px;
-    padding-top: 0;
-    :global {
+	padding: 12px;
+	padding-top: 0;
+	:global {
+		.delightful-form-item-label {
+			margin-bottom: 6px;
+		}
+	}
 
-        .delightful-form-item-label {
-            margin-bottom: 6px;
-        }
-    }
-
-    .toolsSelect {
-        :global {
-            .dropdown-item {
-                padding: 0 10px;
-            }
-        }
-    }
+	.toolsSelect {
+		:global {
+			.dropdown-item {
+				padding: 0 10px;
+			}
+		}
+	}
 }
 
-
 .inputBody {
-    padding: 12px;
-    border-top: 1px solid #1C1D2314;
+	padding: 12px;
+	border-top: 1px solid #1c1d2314;
 
-    :global {
-
+	:global {
 		.label-col {
-
 			display: block;
 			flex: 0 0 20%;
 			max-width: 20%;
@@ -64,42 +57,35 @@
 			display: block;
 			flex: 0 0 50%;
 			max-width: 50%;
-
 		}
-    }
+	}
 
-    .LLMInput {
-        margin-top: 12px;
-    }
+	.LLMInput {
+		margin-top: 12px;
+	}
 
-    .promptWrapperTop {
-        margin-bottom: 0;
-    }
+	.promptWrapperTop {
+		margin-bottom: 0;
+	}
 
-    .promptWrapper {
+	.promptWrapper {
+		span {
+			color: #1c1d23;
+			font-weight: 600;
+		}
+	}
 
-        span {
-            color: #1C1D23;
-            font-weight: 600;
-        }
-
-    }
-
-    .messageFormItem {
-        margin-bottom: 12px!important;
-        :global {
-            .delightful-form-item-label {
-                label {
-                    color: #1C1D2399;
-                    font-size: 12px!important;
-                    line-height: 16px!important;
-                    margin-bottom: 10px!important;
-                }
-            }
-        }
-    }
+	.messageFormItem {
+		margin-bottom: 12px !important;
+		:global {
+			.delightful-form-item-label {
+				label {
+					color: #1c1d2399;
+					font-size: 12px !important;
+					line-height: 16px !important;
+					margin-bottom: 10px !important;
+				}
+			}
+		}
+	}
 }
-
-
-
-

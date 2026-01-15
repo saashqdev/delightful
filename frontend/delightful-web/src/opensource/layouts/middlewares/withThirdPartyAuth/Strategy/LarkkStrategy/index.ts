@@ -17,7 +17,8 @@ export const LarkStrategy: ThirdPartyLoginStrategy = {
 		if (!deployCode || !clusterConfig?.[deployCode]) {
 			throw new Error(`Private deployment configuration exception`)
 		}
-		const { appId } = clusterConfig?.[deployCode]?.loginConfig?.[Login.LoginType.LarkScanCode] || {}
+		const { appId } =
+			clusterConfig?.[deployCode]?.loginConfig?.[Login.LoginType.LarkScanCode] || {}
 		if (!appId) {
 			throw new Error(`Lark environment configuration exception - ${deployCode}`)
 		}

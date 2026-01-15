@@ -1,7 +1,7 @@
 import OrganizationDotsStore from "@/opensource/stores/chatNew/dots/OrganizationDotsStore"
 import { platformKey } from "@/utils/storage"
 import { userStore } from "@/opensource/models/user"
-import { observe } from "mobx";
+import { observe } from "mobx"
 
 class OrganizationDotsDbService {
 	delightfulId: string | undefined
@@ -17,7 +17,7 @@ class OrganizationDotsDbService {
 			}
 		})
 	}
-	
+
 	get dot_seqid_key() {
 		return platformKey(`organization_dots_seqid/${this.delightfulId}`)
 	}

@@ -4,8 +4,8 @@ DelightfulEmojiPanel is a feature-rich emoji picker for applications. It display
 
 ## Props
 
-| Prop    | Type                       | Default | Description                                  |
-| ------- | -------------------------- | ------- | -------------------------------------------- |
+| Prop    | Type                       | Default | Description                                                         |
+| ------- | -------------------------- | ------- | ------------------------------------------------------------------- |
 | onClick | (emoji: EmojiInfo) => void | -       | Callback when an emoji is clicked; receives the selected emoji info |
 
 The `EmojiInfo` type is defined as follows:

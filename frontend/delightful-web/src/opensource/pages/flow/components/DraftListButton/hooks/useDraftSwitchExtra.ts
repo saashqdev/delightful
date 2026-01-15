@@ -44,9 +44,3 @@ export default function useDraftSwitchExtra({ flow, initDraftList }: UseDraftSwi
 		saveDraft,
 	}
 }
-
-
-
-
-
-

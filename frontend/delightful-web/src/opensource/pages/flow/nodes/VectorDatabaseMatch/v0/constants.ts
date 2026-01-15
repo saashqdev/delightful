@@ -28,8 +28,3 @@ export const operator2Label: Record<string, string> = {
 	contains: i18next.t("common.contains", { ns: "flow" }),
 	no_contains: i18next.t("common.notContains", { ns: "flow" }),
 }
-
-
-
-
-

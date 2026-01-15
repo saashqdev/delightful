@@ -74,8 +74,3 @@ export default function GroupItem({ field, fieldKey, type }: GroupItemProps) {
 		</div>
 	)
 }
-
-
-
-
-

@@ -94,14 +94,16 @@ export default function useTestFunctions({
 						lineIndex += 1
 
 						try {
-						// Process the current line
-						const lineWithNewline = line.endsWith("\n") ? line : `${line}\n`
-						const encodedLine = encoder.encode(lineWithNewline)
+							// Process the current line
+							const lineWithNewline = line.endsWith("\n") ? line : `${line}\n`
+							const encodedLine = encoder.encode(lineWithNewline)
 
-						// enqueue and log
-						controller.enqueue(encodedLine)
-						console.log(
-							`sent ${lineIndex}/${sseLines.length} lines: ${line.slice(0, 50)}${line.length > 50 ? "..." : ""}`,
+							// enqueue and log
+							controller.enqueue(encodedLine)
+							console.log(
+								`sent ${lineIndex}/${sseLines.length} lines: ${line.slice(0, 50)}${
+									line.length > 50 ? "..." : ""
+								}`,
 							)
 
 							// schedule next line and set timeout protection
@@ -118,7 +120,9 @@ export default function useTestFunctions({
 					}
 
 					// start sending first line
-					console.log(`Start sending SSE stream, total${sseLines.length} lines, delay: ${safeDelay}ms`)
+					console.log(
+						`Start sending SSE stream, total${sseLines.length} lines, delay: ${safeDelay}ms`,
+					)
 					sendNextLine()
 				},
 
@@ -160,7 +164,9 @@ export default function useTestFunctions({
 				status: "loading", // initial status is loading
 			}
 
-			console.log(`start new SSE stream test session: ${testSessionId}, message ID: ${assistantMessageId}`)
+			console.log(
+				`start new SSE stream test session: ${testSessionId}, message ID: ${assistantMessageId}`,
+			)
 
 			// reset state and add message
 			setCommandQueue([]) // clear the command queue
@@ -207,7 +213,9 @@ export default function useTestFunctions({
 
 					// if message has content but is still loading, ensure status correct when processing completes
 					if (messageHasContent) {
-						console.log(`detected content but status not updated, fixing status: ${assistantMessageId}`)
+						console.log(
+							`detected content but status not updated, fixing status: ${assistantMessageId}`,
+						)
 					}
 				}, 1000)
 
@@ -217,7 +225,9 @@ export default function useTestFunctions({
 
 					// if still processing, force update message status and end processing
 					if (currentTestSessionRef.current === testSessionId && processingRef.current) {
-						console.warn(`stream processing timeout, forcing completion: ${testSessionId}`)
+						console.warn(
+							`stream processing timeout, forcing completion: ${testSessionId}`,
+						)
 
 						// update message status to done
 						setMessages((prevMessages) =>
@@ -238,11 +248,10 @@ export default function useTestFunctions({
 
 			// start progress check
 			checkStreamProgress()
-										forceCleanupState, // expose force cleanup for manual reset
-										testWithStreamEvents, // expose SSE stream test (array version)
-
-			// set response stream for StreamProcessor to process
-			setStreamResponse(mockStream)
+			forceCleanupState, // expose force cleanup for manual reset
+				testWithStreamEvents, // expose SSE stream test (array version)
+				// set response stream for StreamProcessor to process
+				setStreamResponse(mockStream)
 		},
 	)
 
@@ -308,7 +317,9 @@ export default function useTestFunctions({
 				// check whether special characters exist
 				const hasSpecialChars = /[:"\\\n\r\t]/.test(result)
 				if (hasSpecialChars) {
-					console.log("extracted content contains special characters; ensure correct handling")
+					console.log(
+						"extracted content contains special characters; ensure correct handling",
+					)
 				}
 				return result
 			}
@@ -363,7 +374,9 @@ export default function useTestFunctions({
 
 		// log special character situation
 		if (specialCharCount > 0) {
-			console.log(`Extracted ${specialCharCount} fragments with special characters from SSE events`)
+			console.log(
+				`Extracted ${specialCharCount} fragments with special characters from SSE events`,
+			)
 		}
 
 		return fragments.join("")
@@ -406,7 +419,9 @@ export default function useTestFunctions({
 				status: "loading", // initial status is loading
 			}
 
-			console.log(`start new raw content test session: ${testSessionId}, message ID: ${assistantMessageId}`)
+			console.log(
+				`start new raw content test session: ${testSessionId}, message ID: ${assistantMessageId}`,
+			)
 			console.log(`raw content length: ${fullContent.length} characters`)
 
 			// reset state and add message
@@ -420,7 +435,9 @@ export default function useTestFunctions({
 
 			// log special characters
 			if (hasSpecialChars) {
-				console.log("detected special characters; use smaller chunk size with precise encoding")
+				console.log(
+					"detected special characters; use smaller chunk size with precise encoding",
+				)
 				// simple log that special characters exist
 				console.log("found special characters; using stricter processing")
 
@@ -488,7 +505,9 @@ export default function useTestFunctions({
 						.map((c) => `${c}(${c.charCodeAt(0)})`)
 						.join(" ")
 					console.log(
-						`chunk ${Math.floor(i / safeChunkSize)} contains special characters: ${charCodes}`,
+						`chunk ${Math.floor(
+							i / safeChunkSize,
+						)} contains special characters: ${charCodes}`,
 					)
 				}
 
@@ -708,10 +727,14 @@ export default function useTestFunctions({
 						.length
 
 					if (specialCharsInEvents > specialCharsInText) {
-						console.log("Using event-array extraction; it preserves more special characters")
+						console.log(
+							"Using event-array extraction; it preserves more special characters",
+						)
 						finalContent = contentFromEvents
 					} else {
-						console.log("Using text extraction method; it preserves more special characters")
+						console.log(
+							"Using text extraction method; it preserves more special characters",
+						)
 						finalContent = contentFromText
 					}
 				} else {
@@ -772,9 +795,3 @@ export default function useTestFunctions({
 		testWithRawContent,
 	}
 }
-
-
-
-
-
-

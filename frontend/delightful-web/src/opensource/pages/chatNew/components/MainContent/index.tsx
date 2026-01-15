@@ -36,7 +36,11 @@ const MainContent = observer(function MainContent({ onInputResize, style }: Main
 
 	return (
 		<Flex style={style}>
-			<DelightfulSplitter layout="vertical" className={styles.main} onResizeEnd={onInputResize}>
+			<DelightfulSplitter
+				layout="vertical"
+				className={styles.main}
+				onResizeEnd={onInputResize}
+			>
 				<DelightfulSplitter.Panel min={60} defaultSize={60} max={60}>
 					<Header />
 				</DelightfulSplitter.Panel>

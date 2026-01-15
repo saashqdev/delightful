@@ -276,13 +276,16 @@ describe("MermaidRenderService", () => {
 
 		it("should replace Chinese punctuation with English punctuation", () => {
 			// Arrange
-			const input = "This is a test, contains Chinese symbols: semicolon; exclamation! question?"
+			const input =
+				"This is a test, contains Chinese symbols: semicolon; exclamation! question?"
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
-			expect(result).toBe("This is a test, contains Chinese symbols: semicolon; exclamation! question? ")
+			expect(result).toBe(
+				"This is a test, contains Chinese symbols: semicolon; exclamation! question? ",
+			)
 		})
 
 		it("should replace Chinese brackets and quotes", () => {

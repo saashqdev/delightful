@@ -94,7 +94,9 @@ class StreamMessageApplyService {
 	 * @param message Message
 	 */
 	addToTaskMap(messageId: string, message: StreamResponse, run: boolean = true) {
-		console.log(`[addToTaskMap] Start adding task, message ID: ${messageId}, execute immediately: ${run}`)
+		console.log(
+			`[addToTaskMap] Start adding task, message ID: ${messageId}, execute immediately: ${run}`,
+		)
 		const task = this.taskMap[messageId]
 
 		if (task) {
@@ -184,7 +186,9 @@ class StreamMessageApplyService {
 		const task = this.taskMap[messageId]
 		if (task) {
 			task.triggeredRender = true
-			console.log(`[executeType] Task status: ${task.status}, remaining tasks: ${task.tasks.length}`)
+			console.log(
+				`[executeType] Task status: ${task.status}, remaining tasks: ${task.tasks.length}`,
+			)
 
 			// Create character buffer for smooth output
 			const buffer: StreamResponse[] = []
@@ -251,7 +255,7 @@ class StreamMessageApplyService {
 						outputInterval = Math.max(10, avgInterval * 0.9)
 					} else {
 						// Adjust based on content length and avg rate
-							const targetInterval = 1000 / avgOutputRate // Target interval time
+						const targetInterval = 1000 / avgOutputRate // Target interval time
 						// Smooth transition between avg and target interval
 						outputInterval = avgInterval * 0.7 + targetInterval * 0.3
 						// Content length effect: slightly extend for longer chunks
@@ -370,7 +374,9 @@ class StreamMessageApplyService {
 	}
 
 	apply(streamMessage: StreamResponse) {
-		console.log(`[apply] Start applying stream message, target seq ID: ${streamMessage.target_seq_id}`)
+		console.log(
+			`[apply] Start applying stream message, target seq ID: ${streamMessage.target_seq_id}`,
+		)
 
 		const targetSeqInfo = this.queryMessageInfo(streamMessage.target_seq_id)
 		const aggregateAISearchCardSeqInfo = this.queryMessageInfo(
@@ -395,7 +401,7 @@ class StreamMessageApplyService {
 				this.applyAggregateAISearchCardStreamMessage(streamMessage)
 				break
 			default:
-			console.log(`[apply] Unknown message type, using default handler`)
+				console.log(`[apply] Unknown message type, using default handler`)
 		}
 	}
 
@@ -404,7 +410,9 @@ class StreamMessageApplyService {
 	 * @param streamMessage Streaming message
 	 */
 	applyTextStreamMessage(streamMessage: StreamResponse) {
-		console.log(`[applyTextStreamMessage] Start handling text stream message, status: ${streamMessage.status}`)
+		console.log(
+			`[applyTextStreamMessage] Start handling text stream message, status: ${streamMessage.status}`,
+		)
 		const { target_seq_id, reasoning_content, status, content } = streamMessage
 		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)!
 
@@ -559,7 +567,9 @@ class StreamMessageApplyService {
 
 			this.finishTask(target_seq_id)
 		}
-	console.log(`[applyAggregateAISearchCardStreamMessage] AI search card stream message handling completed`)
+		console.log(
+			`[applyAggregateAISearchCardStreamMessage] AI search card stream message handling completed`,
+		)
 		if ([StreamStatus.Start, StreamStatus.Streaming].includes(status)) {
 			if (reasoning_content) {
 				this.addToTaskMap(target_seq_id, streamMessage, false)

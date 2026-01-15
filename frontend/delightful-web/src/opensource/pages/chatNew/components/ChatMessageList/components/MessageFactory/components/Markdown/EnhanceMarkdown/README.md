@@ -4,15 +4,15 @@
 
 ## Properties
 
-| Property Name      | Type    | Default Value | Description                             |
-| ------------------ | ------- | ------ | -------------------------------- |
-| content            | string  | -      | Markdown content to render           |
-| allowHtml          | boolean | true   | Whether to allow rendering HTML content           |
-| enableLatex        | boolean | true   | Whether to enable LaTeX formula support          |
-| isSelf             | boolean | false  | Whether it's content sent by self (affects styling) |
-| hiddenDetail       | boolean | false  | Whether to hide detailed content                 |
-| isStreaming        | boolean | false  | Whether it's streaming render mode               |
-| ...MarkdownOptions | -       | -      | Support all react-markdown options   |
+| Property Name      | Type    | Default Value | Description                                         |
+| ------------------ | ------- | ------------- | --------------------------------------------------- |
+| content            | string  | -             | Markdown content to render                          |
+| allowHtml          | boolean | true          | Whether to allow rendering HTML content             |
+| enableLatex        | boolean | true          | Whether to enable LaTeX formula support             |
+| isSelf             | boolean | false         | Whether it's content sent by self (affects styling) |
+| hiddenDetail       | boolean | false         | Whether to hide detailed content                    |
+| isStreaming        | boolean | false         | Whether it's streaming render mode                  |
+| ...MarkdownOptions | -       | -             | Support all react-markdown options                  |
 
 ## Basic Usage
 

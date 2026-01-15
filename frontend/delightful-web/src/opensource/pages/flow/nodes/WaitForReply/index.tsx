@@ -16,8 +16,3 @@ export const WaitForReplyComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

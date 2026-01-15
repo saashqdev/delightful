@@ -10,7 +10,9 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			min-width: 480px;
 		`,
 		title: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 14px;
 			line-height: 24px;
 			margin: 0;
@@ -64,7 +66,9 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			display: flex;
 			align-items: center;
 			gap: 4px;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[1]};
 		`,
 		selected: css`
 			background: ${isDarkMode
@@ -78,7 +82,9 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			margin: 12px auto;
 		`,
 		emptyTips: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[3]};
 		`,
 		flowEmptyImage: css``,
 		isEmptyList: css`
@@ -96,7 +102,9 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			}
 		`,
 		leftTitle: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 			line-height: 24px;
@@ -107,8 +115,3 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 	}
 })
-
-
-
-
-

@@ -164,8 +164,3 @@ export const DragItem = ({
 		</div>
 	)
 }
-
-
-
-
-

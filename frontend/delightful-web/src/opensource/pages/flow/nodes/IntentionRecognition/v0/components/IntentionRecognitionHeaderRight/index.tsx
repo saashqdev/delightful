@@ -15,8 +15,3 @@ export default function IntentionRecognitionHeaderRightV0() {
 
 	return HeaderRight
 }
-
-
-
-
-

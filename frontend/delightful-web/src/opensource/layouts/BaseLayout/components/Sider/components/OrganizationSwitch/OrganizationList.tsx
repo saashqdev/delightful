@@ -45,7 +45,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 
 			try {
 				interfaceStore.setIsSwitchingOrganization(true)
-			// Account mismatch requires account switch
+				// Account mismatch requires account switch
 				if (accountInfo?.delightful_id !== userInfo?.delightful_id) {
 					await accountSwitch(
 						accountInfo?.delightful_id,
@@ -108,7 +108,9 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 					/>
 				) : (
 					<Badge
-						count={unreadDotsGroupByOrganization[organization.delightful_organization_code]}
+						count={
+							unreadDotsGroupByOrganization[organization.delightful_organization_code]
+						}
 					/>
 				)}
 			</Flex>

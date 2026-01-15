@@ -66,428 +66,437 @@ interface DelightfulAggregateAISearchCardV2Props {
 
 const TimelineCollapsePanelKey = "timeline"
 
-const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggregateAISearchCardV2Props) => {
-	const { fontSize } = useFontSize()
-	const { t } = useTranslation("interface")
-	const { delightfulColorUsages } = useTheme()
+const DelightfulAggregateAISearchCardV2 = observer(
+	({ content }: DelightfulAggregateAISearchCardV2Props) => {
+		const { fontSize } = useFontSize()
+		const { t } = useTranslation("interface")
+		const { delightfulColorUsages } = useTheme()
 
-	const summaryRef = useRef<HTMLDivElement>(null)
+		const summaryRef = useRef<HTMLDivElement>(null)
 
-	const size = useSize(summaryRef)
+		const size = useSize(summaryRef)
 
-	/** Summary content */
-	const llmResponse = content?.summary?.content
+		/** Summary content */
+		const llmResponse = content?.summary?.content
 
-	/** Whether search is finished */
-	const isSearchingFinish = useMemo(() => {
-		if (content?.stream_options?.status === StreamStatus.End) return true
+		/** Whether search is finished */
+		const isSearchingFinish = useMemo(() => {
+			if (content?.stream_options?.status === StreamStatus.End) return true
 
-		switch (content?.search_deep_level) {
-			case AggregateAISearchCardDeepLevel.Simple:
-				return Boolean(content?.summary?.reasoning_content || content?.summary?.content)
-			case AggregateAISearchCardDeepLevel.Deep:
-				if (isEmpty(content?.associate_questions)) return false
+			switch (content?.search_deep_level) {
+				case AggregateAISearchCardDeepLevel.Simple:
+					return Boolean(content?.summary?.reasoning_content || content?.summary?.content)
+				case AggregateAISearchCardDeepLevel.Deep:
+					if (isEmpty(content?.associate_questions)) return false
 
-				const questionFinished =
-					content?.stream_options?.steps_finished?.associate_questions
+					const questionFinished =
+						content?.stream_options?.steps_finished?.associate_questions
 
-				return (
-					questionFinished?.["question_0"]?.finished_reason === 0 &&
-					content?.associate_questions["question_0"].every(
-						(i) =>
-							questionFinished?.[`question_${i.question_id}`]?.finished_reason === 0,
+					return (
+						questionFinished?.["question_0"]?.finished_reason === 0 &&
+						content?.associate_questions["question_0"].every(
+							(i) =>
+								questionFinished?.[`question_${i.question_id}`]?.finished_reason ===
+								0,
+						)
 					)
+				default:
+					return false
+			}
+		}, [
+			content?.associate_questions,
+			content?.search_deep_level,
+			content?.stream_options?.status,
+			content?.stream_options?.steps_finished?.associate_questions,
+			content?.summary?.content,
+			content?.summary?.reasoning_content,
+		])
+
+		const { styles } = useStyles({
+			fontSize,
+			isSearchingFinish,
+			hasLlmResponse: content?.stream_options?.status === StreamStatus.End,
+		})
+
+		const isSimpleSearch = useMemo(() => {
+			return (
+				!content?.search_deep_level ||
+				content?.search_deep_level === AggregateAISearchCardDeepLevel.Simple
+			)
+		}, [content?.search_deep_level])
+
+		const [collapsed, { setFalse, setTrue }] = useBoolean(
+			!(content?.stream_options?.status === StreamStatus.End || isSimpleSearch),
+		)
+
+		const allPages = content?.no_repeat_search_details
+		const finish = content?.stream_options?.status === StreamStatus.End
+
+		/** Question search area title */
+		const titleContent = useMemo(() => {
+			if (content?.status === AggregateAISearchCardV2Status.isSearching) {
+				return (
+					<Searching
+						deepLevel={content?.search_deep_level}
+						hasAssociateQuestions={!isEmpty(content?.associate_questions)}
+					/>
 				)
-			default:
-				return false
-		}
-	}, [
-		content?.associate_questions,
-		content?.search_deep_level,
-		content?.stream_options?.status,
-		content?.stream_options?.steps_finished?.associate_questions,
-		content?.summary?.content,
-		content?.summary?.reasoning_content,
-	])
+			}
 
-	const { styles } = useStyles({
-		fontSize,
-		isSearchingFinish,
-		hasLlmResponse: content?.stream_options?.status === StreamStatus.End,
-	})
+			if (content?.status === AggregateAISearchCardV2Status.isReading) {
+				return (
+					<Reading
+						deepLevel={content?.search_deep_level}
+						allPages={
+							content?.search_web_pages?.find((i) => i.question_id === "question_0")
+								?.search
+						}
+					/>
+				)
+			}
 
-	const isSimpleSearch = useMemo(() => {
-		return (
-			!content?.search_deep_level ||
-			content?.search_deep_level === AggregateAISearchCardDeepLevel.Simple
-		)
-	}, [content?.search_deep_level])
+			if (content?.status === AggregateAISearchCardV2Status.isReasoning) {
+				return <Reasoning />
+			}
 
-	const [collapsed, { setFalse, setTrue }] = useBoolean(
-		!(content?.stream_options?.status === StreamStatus.End || isSimpleSearch),
-	)
+			if (content?.status === AggregateAISearchCardV2Status.isSummarizing || !finish) {
+				return <Summarizing />
+			}
 
-	const allPages = content?.no_repeat_search_details
-	const finish = content?.stream_options?.status === StreamStatus.End
-
-	/** Question search area title */
-	const titleContent = useMemo(() => {
-		if (content?.status === AggregateAISearchCardV2Status.isSearching) {
 			return (
-				<Searching
+				<Result
 					deepLevel={content?.search_deep_level}
-					hasAssociateQuestions={!isEmpty(content?.associate_questions)}
+					pageLength={allPages?.length}
+					searchWebPages={content?.search_web_pages}
 				/>
 			)
-		}
+		}, [
+			allPages?.length,
+			content?.associate_questions,
+			content?.search_deep_level,
+			content?.search_web_pages,
+			content?.status,
+			finish,
+		])
 
-		if (content?.status === AggregateAISearchCardV2Status.isReading) {
-			return (
-				<Reading
-					deepLevel={content?.search_deep_level}
-					allPages={
-						content?.search_web_pages?.find((i) => i.question_id === "question_0")
-							?.search
-					}
-				/>
-			)
-		}
+		const collapseItems = useMemo(() => {
+			const datas = []
 
-		if (content?.status === AggregateAISearchCardV2Status.isReasoning) {
-			return <Reasoning />
-		}
-
-		if (content?.status === AggregateAISearchCardV2Status.isSummarizing || !finish) {
-			return <Summarizing />
-		}
-
-		return (
-			<Result
-				deepLevel={content?.search_deep_level}
-				pageLength={allPages?.length}
-				searchWebPages={content?.search_web_pages}
-			/>
-		)
-	}, [
-		allPages?.length,
-		content?.associate_questions,
-		content?.search_deep_level,
-		content?.search_web_pages,
-		content?.status,
-		finish,
-	])
-
-	const collapseItems = useMemo(() => {
-		const datas = []
-
-		// If has events, display events
-		if (content?.events && content?.events.length > 0) {
-			datas.push({
-				key: AggregateAISearchCardDataType.Event,
-				label: (
-					<Flex align="center" gap={10}>
-						{t("chat.aggregate_ai_search_card.relatedEvents")}
-						<span className={styles.labelCount}>{content.events.length}</span>
-					</Flex>
-				),
-				children: <EventTable events={content.events} />,
-			})
-		}
-
-		const allSearch = content?.no_repeat_search_details ?? []
-
-		// If search results not empty and search finished, display search results
-		if (allSearch.length > 0 && content?.stream_options?.status === StreamStatus.End) {
-			datas.push({
-				key: AggregateAISearchCardDataType.Search,
-				label: (
-					<Flex align="center" gap={10}>
-						{t("chat.aggregate_ai_search_card.search")}
-						<span className={styles.labelCount}>{allSearch.length}</span>
-					</Flex>
-				),
-				children: (
-					<ol className={styles.sourceList} data-testid="sourceList">
-						{allSearch?.map((item, index) => (
-							<li key={`${item.id}_${index}`}>
-								<SourceItem
-									name={item.name}
-									url={item.url}
-									datePublished={item.datePublished}
-								/>
-							</li>
-						))}
-					</ol>
-				),
-			})
-		}
-
-		return datas
-	}, [
-		content?.events,
-		content?.no_repeat_search_details,
-		content?.stream_options?.status,
-		styles.labelCount,
-		styles.sourceList,
-		t,
-	])
-
-	// If search finished, collapse
-	useUpdateEffect(() => {
-		if (isSearchingFinish) {
-			setFalse()
-		}
-	}, [isSearchingFinish])
-
-	// If deep search and search not finished, expand
-	useUpdateEffect(() => {
-		if (
-			content?.search_deep_level === 2 &&
-			content.stream_options?.status !== StreamStatus.End
-		) {
-			setTrue()
-		}
-	}, [content?.search_deep_level, content?.stream_options?.status])
-
-	const timelineItems = useMemo(() => {
-		if (content?.search_deep_level !== 2) {
-			const keywords =
-				content?.associate_questions?.["question_ 0"]?.map((i) => i.question) ?? []
-
-			return [
-				{
-					key: "searching_page",
-					dot: (
-						<TimeLineDot
-							status={
-								content?.stream_options?.status === StreamStatus.End ||
-								keywords.length
-									? TimeLineDotStatus.SUCCESS
-									: TimeLineDotStatus.PENDING
-							}
-						/>
-					),
-					children: (
-						<Flex vertical gap={6} className={styles.timelineItem}>
-							{t("chat.aggregate_ai_search_card.search_page")}
-							<SearchKeywords items={keywords} />
+			// If has events, display events
+			if (content?.events && content?.events.length > 0) {
+				datas.push({
+					key: AggregateAISearchCardDataType.Event,
+					label: (
+						<Flex align="center" gap={10}>
+							{t("chat.aggregate_ai_search_card.relatedEvents")}
+							<span className={styles.labelCount}>{content.events.length}</span>
 						</Flex>
 					),
-				},
-				content?.status !== AggregateAISearchCardV2Status.isSearching
-					? {
-							key: "reading_page",
-							dot: (
-								<TimeLineDot
-									status={
-										llmResponse
-											? TimeLineDotStatus.SUCCESS
-											: TimeLineDotStatus.PENDING
-									}
-								/>
-							),
-							children: (
-								<Flex vertical gap={6} className={styles.timelineItem}>
-									<span className={styles.questionReadCount}>
-										{t("chat.aggregate_ai_search_card.read_page", {
-											number: allPages?.length || 0,
-										})}
-									</span>
-									{allPages?.map((item) => {
-										return (
-											<Flex key={item.id} gap={8} align="center">
-												<SourceItem
-													key={item.id}
-													name={item.name}
-													url={item.url}
-													datePublished={item.datePublished}
-												/>
-											</Flex>
-										)
-									})}
-								</Flex>
-							),
-					  }
-					: null,
-			].filter(Boolean) as TimelineProps["items"]
-		}
+					children: <EventTable events={content.events} />,
+				})
+			}
 
-		const titleMap = keyBy(content?.associate_questions?.["question_0"] ?? [], "question_id")
-		const searchWebPages = keyBy(content?.search_web_pages ?? [], "question_id")
+			const allSearch = content?.no_repeat_search_details ?? []
 
-		return content?.associate_questions?.["question_0"]
-			.map(({ question_id }, index) => {
-				const questionId = question_id
-				const item = content?.associate_questions?.[`question_${questionId}`]
-
-				const status = item ? TimeLineDotStatus.SUCCESS : TimeLineDotStatus.PENDING
-
-				const isPending =
-					content.stream_options?.status !== StreamStatus.End && !isSearchingFinish
-
-				// const searchCount = null
-				const { page_count: searchCount = 0, search = [] } =
-					searchWebPages?.[questionId] ?? {}
-
-				return {
-					key: questionId,
-					dot: <TimeLineDot status={status} />,
+			// If search results not empty and search finished, display search results
+			if (allSearch.length > 0 && content?.stream_options?.status === StreamStatus.End) {
+				datas.push({
+					key: AggregateAISearchCardDataType.Search,
+					label: (
+						<Flex align="center" gap={10}>
+							{t("chat.aggregate_ai_search_card.search")}
+							<span className={styles.labelCount}>{allSearch.length}</span>
+						</Flex>
+					),
 					children: (
-						<Flex
-							vertical
-							gap={6}
-							className={styles.timelineItem}
-							style={{
-								// @ts-ignore
-								"--index": index,
-							}}
-						>
-							<span
-								className={styles.questionTitle}
+						<ol className={styles.sourceList} data-testid="sourceList">
+							{allSearch?.map((item, index) => (
+								<li key={`${item.id}_${index}`}>
+									<SourceItem
+										name={item.name}
+										url={item.url}
+										datePublished={item.datePublished}
+									/>
+								</li>
+							))}
+						</ol>
+					),
+				})
+			}
+
+			return datas
+		}, [
+			content?.events,
+			content?.no_repeat_search_details,
+			content?.stream_options?.status,
+			styles.labelCount,
+			styles.sourceList,
+			t,
+		])
+
+		// If search finished, collapse
+		useUpdateEffect(() => {
+			if (isSearchingFinish) {
+				setFalse()
+			}
+		}, [isSearchingFinish])
+
+		// If deep search and search not finished, expand
+		useUpdateEffect(() => {
+			if (
+				content?.search_deep_level === 2 &&
+				content.stream_options?.status !== StreamStatus.End
+			) {
+				setTrue()
+			}
+		}, [content?.search_deep_level, content?.stream_options?.status])
+
+		const timelineItems = useMemo(() => {
+			if (content?.search_deep_level !== 2) {
+				const keywords =
+					content?.associate_questions?.["question_ 0"]?.map((i) => i.question) ?? []
+
+				return [
+					{
+						key: "searching_page",
+						dot: (
+							<TimeLineDot
+								status={
+									content?.stream_options?.status === StreamStatus.End ||
+									keywords.length
+										? TimeLineDotStatus.SUCCESS
+										: TimeLineDotStatus.PENDING
+								}
+							/>
+						),
+						children: (
+							<Flex vertical gap={6} className={styles.timelineItem}>
+								{t("chat.aggregate_ai_search_card.search_page")}
+								<SearchKeywords items={keywords} />
+							</Flex>
+						),
+					},
+					content?.status !== AggregateAISearchCardV2Status.isSearching
+						? {
+								key: "reading_page",
+								dot: (
+									<TimeLineDot
+										status={
+											llmResponse
+												? TimeLineDotStatus.SUCCESS
+												: TimeLineDotStatus.PENDING
+										}
+									/>
+								),
+								children: (
+									<Flex vertical gap={6} className={styles.timelineItem}>
+										<span className={styles.questionReadCount}>
+											{t("chat.aggregate_ai_search_card.read_page", {
+												number: allPages?.length || 0,
+											})}
+										</span>
+										{allPages?.map((item) => {
+											return (
+												<Flex key={item.id} gap={8} align="center">
+													<SourceItem
+														key={item.id}
+														name={item.name}
+														url={item.url}
+														datePublished={item.datePublished}
+													/>
+												</Flex>
+											)
+										})}
+									</Flex>
+								),
+						  }
+						: null,
+				].filter(Boolean) as TimelineProps["items"]
+			}
+
+			const titleMap = keyBy(
+				content?.associate_questions?.["question_0"] ?? [],
+				"question_id",
+			)
+			const searchWebPages = keyBy(content?.search_web_pages ?? [], "question_id")
+
+			return content?.associate_questions?.["question_0"]
+				.map(({ question_id }, index) => {
+					const questionId = question_id
+					const item = content?.associate_questions?.[`question_${questionId}`]
+
+					const status = item ? TimeLineDotStatus.SUCCESS : TimeLineDotStatus.PENDING
+
+					const isPending =
+						content.stream_options?.status !== StreamStatus.End && !isSearchingFinish
+
+					// const searchCount = null
+					const { page_count: searchCount = 0, search = [] } =
+						searchWebPages?.[questionId] ?? {}
+
+					return {
+						key: questionId,
+						dot: <TimeLineDot status={status} />,
+						children: (
+							<Flex
+								vertical
+								gap={6}
+								className={styles.timelineItem}
 								style={{
-									fontWeight: isPending ? 600 : 400,
-									color: isPending
-										? delightfulColorUsages.text[0]
-										: delightfulColorUsages.text[2],
+									// @ts-ignore
+									"--index": index,
 								}}
 							>
-								{titleMap[questionId]?.question}
-							</span>
-							<SearchKeywords items={search?.map((i) => i.name)} />
-							<div className={styles.questionReadCount}>
-								{isPending || !searchCount ? (
-									<SearchingQuestion searchArray={search?.map((i) => i.name)} />
-								) : (
-									resolveToString(
-										t("chat.aggregate_ai_search_card.questionReadCount"),
-										{
-											count: search?.length ?? 0,
-										},
-									)
-								)}
-							</div>
-						</Flex>
-					),
-				}
-			})
-			.filter(Boolean) as TimelineProps["items"]
-	}, [
-		allPages,
-		content?.associate_questions,
-		content?.search_deep_level,
-		content?.search_web_pages,
-		content?.status,
-		content?.stream_options?.status,
-		isSearchingFinish,
-		llmResponse,
-		delightfulColorUsages.text,
-		styles.questionReadCount,
-		styles.questionTitle,
-		styles.timelineItem,
-		t,
-	])
+								<span
+									className={styles.questionTitle}
+									style={{
+										fontWeight: isPending ? 600 : 400,
+										color: isPending
+											? delightfulColorUsages.text[0]
+											: delightfulColorUsages.text[2],
+									}}
+								>
+									{titleMap[questionId]?.question}
+								</span>
+								<SearchKeywords items={search?.map((i) => i.name)} />
+								<div className={styles.questionReadCount}>
+									{isPending || !searchCount ? (
+										<SearchingQuestion
+											searchArray={search?.map((i) => i.name)}
+										/>
+									) : (
+										resolveToString(
+											t("chat.aggregate_ai_search_card.questionReadCount"),
+											{
+												count: search?.length ?? 0,
+											},
+										)
+									)}
+								</div>
+							</Flex>
+						),
+					}
+				})
+				.filter(Boolean) as TimelineProps["items"]
+		}, [
+			allPages,
+			content?.associate_questions,
+			content?.search_deep_level,
+			content?.search_web_pages,
+			content?.status,
+			content?.stream_options?.status,
+			isSearchingFinish,
+			llmResponse,
+			delightfulColorUsages.text,
+			styles.questionReadCount,
+			styles.questionTitle,
+			styles.timelineItem,
+			t,
+		])
 
-	const questionItems = useMemo(
-		() => [
-			{
-				key: TimelineCollapsePanelKey,
-				label: titleContent,
-				children:
-					timelineItems && timelineItems.length > 0 ? (
-						<Timeline className={styles.timeline} items={timelineItems} />
-					) : null,
-			},
-		],
-		[titleContent, timelineItems, styles.timeline],
-	)
-
-	const onTimelineCollapseChange = useMemoizedFn((keys: string[]) => {
-		if (keys.includes(TimelineCollapsePanelKey)) {
-			setTrue()
-		} else {
-			setFalse()
-		}
-	})
-
-	const normalizeSources = useMemo(() => {
-		return content?.no_repeat_search_details?.map((i) =>
-			Object.entries(i).reduce((acc, [key, value]) => {
-				// @ts-ignore
-				acc[camelCase(key)] = value
-				return acc
-			}, {} as AggregateAISearchCardSearch),
+		const questionItems = useMemo(
+			() => [
+				{
+					key: TimelineCollapsePanelKey,
+					label: titleContent,
+					children:
+						timelineItems && timelineItems.length > 0 ? (
+							<Timeline className={styles.timeline} items={timelineItems} />
+						) : null,
+				},
+			],
+			[titleContent, timelineItems, styles.timeline],
 		)
-	}, [content?.no_repeat_search_details])
 
-	if (!content) return null
+		const onTimelineCollapseChange = useMemoizedFn((keys: string[]) => {
+			if (keys.includes(TimelineCollapsePanelKey)) {
+				setTrue()
+			} else {
+				setFalse()
+			}
+		})
 
-	return (
-		<DelightfulCitationProvider sources={normalizeSources}>
-			<ConfigProvider theme={configProviderTheme}>
-				<Flex vertical className={styles.container}>
-					<Flex
-						vertical
-						className={styles.timelineContainer}
-						style={{
-							background: finish
-								? delightfulColorUsages.primaryLight.default
-								: "transparent",
-						}}
-					>
-						{/* Top question search area */}
-						<DelightfulCollapse
-							className={styles.questionCollapse}
-							style={
-								finish
-									? {
-											// Avoid stretching width when expanded
-											maxWidth: size?.width,
-									  }
-									: {
-											margin: "-10px",
-											// Avoid stretching width when expanded
-											maxWidth: "unset",
-									  }
-							}
-							expandIcon={({ isActive }) => (
-								<DelightfulIcon
-									color="currentColor"
-									component={isActive ? IconChevronUp : IconChevronDown}
+		const normalizeSources = useMemo(() => {
+			return content?.no_repeat_search_details?.map((i) =>
+				Object.entries(i).reduce((acc, [key, value]) => {
+					// @ts-ignore
+					acc[camelCase(key)] = value
+					return acc
+				}, {} as AggregateAISearchCardSearch),
+			)
+		}, [content?.no_repeat_search_details])
+
+		if (!content) return null
+
+		return (
+			<DelightfulCitationProvider sources={normalizeSources}>
+				<ConfigProvider theme={configProviderTheme}>
+					<Flex vertical className={styles.container}>
+						<Flex
+							vertical
+							className={styles.timelineContainer}
+							style={{
+								background: finish
+									? delightfulColorUsages.primaryLight.default
+									: "transparent",
+							}}
+						>
+							{/* Top question search area */}
+							<DelightfulCollapse
+								className={styles.questionCollapse}
+								style={
+									finish
+										? {
+												// Avoid stretching width when expanded
+												maxWidth: size?.width,
+										  }
+										: {
+												margin: "-10px",
+												// Avoid stretching width when expanded
+												maxWidth: "unset",
+										  }
+								}
+								expandIcon={({ isActive }) => (
+									<DelightfulIcon
+										color="currentColor"
+										component={isActive ? IconChevronUp : IconChevronDown}
+									/>
+								)}
+								activeKey={collapsed ? [TimelineCollapsePanelKey] : []}
+								items={questionItems}
+								onChange={onTimelineCollapseChange}
+							/>
+						</Flex>
+						{/* Summary area */}
+						<div className={styles.summary} ref={summaryRef}>
+							{content.summary?.reasoning_content || llmResponse ? (
+								<Markdown
+									content={llmResponse}
+									reasoningContent={content?.summary?.reasoning_content}
+									isStreaming={
+										content.status ===
+										AggregateAISearchCardV2Status.isSummarizing
+									}
+									isReasoningStreaming={
+										content.status === AggregateAISearchCardV2Status.isReasoning
+									}
 								/>
-							)}
-							activeKey={collapsed ? [TimelineCollapsePanelKey] : []}
-							items={questionItems}
-							onChange={onTimelineCollapseChange}
-						/>
+							) : null}
+							{llmResponse && content?.mind_map ? (
+								<MindMap
+									data={content.mind_map}
+									pptData={content.ppt}
+									className={styles.mindmap}
+								/>
+							) : null}
+						</div>
+						{/* Mind map, events, search sources */}
+						<DelightfulCollapse className={styles.collapse} items={collapseItems} />
 					</Flex>
-					{/* Summary area */}
-					<div className={styles.summary} ref={summaryRef}>
-						{content.summary?.reasoning_content || llmResponse ? (
-							<Markdown
-								content={llmResponse}
-								reasoningContent={content?.summary?.reasoning_content}
-								isStreaming={
-									content.status === AggregateAISearchCardV2Status.isSummarizing
-								}
-								isReasoningStreaming={
-									content.status === AggregateAISearchCardV2Status.isReasoning
-								}
-							/>
-						) : null}
-						{llmResponse && content?.mind_map ? (
-							<MindMap
-								data={content.mind_map}
-								pptData={content.ppt}
-								className={styles.mindmap}
-							/>
-						) : null}
-					</div>
-					{/* Mind map, events, search sources */}
-					<DelightfulCollapse className={styles.collapse} items={collapseItems} />
-				</Flex>
-			</ConfigProvider>
-		</DelightfulCitationProvider>
-	)
-})
+				</ConfigProvider>
+			</DelightfulCitationProvider>
+		)
+	},
+)
 
 export default DelightfulAggregateAISearchCardV2

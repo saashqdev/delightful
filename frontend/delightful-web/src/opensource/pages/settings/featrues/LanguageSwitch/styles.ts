@@ -1,6 +1,6 @@
 import { createStyles } from "antd-style"
 
-export const useStyles = createStyles(({css, isDarkMode, token}) => {
+export const useStyles = createStyles(({ css, isDarkMode, token }) => {
 	return {
 		select: css`
 			width: 100%;
@@ -31,7 +31,9 @@ export const useStyles = createStyles(({css, isDarkMode, token}) => {
 			flex: 1 0 0;
 			display: flex;
 			align-items: center;
-			color: ${ isDarkMode ? token.delightfulColorScales.grey[7] : token.delightfulColorScales.grey[5] };
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[7]
+				: token.delightfulColorScales.grey[5]};
 			font-size: 12px;
 			height: 16px;
 		`,

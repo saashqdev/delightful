@@ -21,11 +21,19 @@ export const useStyles = createStyles(
 		`,
 
 		select: css`
-		--${prefixCls}-select-selector-bg: ${isDarkMode ? token.delightfulColorUsages.primaryLight.default : token.delightfulColorScales.brand[1]} !important;
+		--${prefixCls}-select-selector-bg: ${
+			isDarkMode
+				? token.delightfulColorUsages.primaryLight.default
+				: token.delightfulColorScales.brand[1]
+		} !important;
 		${
 			inSubSider
 				? `--${prefixCls}-color-bg-container-disabled: transparent;`
-				: `--${prefixCls}-color-bg-container-disabled: ${isDarkMode ? token.delightfulColorUsages.primaryLight.default : token.delightfulColorScales.brand[1]}!important;`
+				: `--${prefixCls}-color-bg-container-disabled: ${
+						isDarkMode
+							? token.delightfulColorUsages.primaryLight.default
+							: token.delightfulColorScales.brand[1]
+				  }!important;`
 		}
     ${
 		inSubSider
@@ -36,7 +44,9 @@ export const useStyles = createStyles(
     ${
 		inSubSider
 			? `--${prefixCls}-color-text-disabled: currentColor;`
-			: `--${prefixCls}-color-text-disabled: ${isDarkMode ? token.colorPrimary : token.colorPrimary};`
+			: `--${prefixCls}-color-text-disabled: ${
+					isDarkMode ? token.colorPrimary : token.colorPrimary
+			  };`
 	}
     --${prefixCls}-select-hover-border-color: transparent!important;
     --${prefixCls}-select-active-border-color: transparent!important;
@@ -115,7 +125,7 @@ export const useStyles = createStyles(
 						isDarkMode
 							? token.delightfulColorUsages.primaryLight.default
 							: token.delightfulColorScales.brand[1]
-					};`}
+				  };`}
 			color: ${inSubSider ? "currentColor" : token.colorPrimary};
 			font-size: 14px;
 			font-weight: 400;

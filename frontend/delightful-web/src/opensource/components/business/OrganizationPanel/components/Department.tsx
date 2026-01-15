@@ -27,7 +27,9 @@ export const useStyles = createStyles(({ isDarkMode, css, prefixCls, token }) =>
 		`,
 		count: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[6] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[6]
+				: token.delightfulColorUsages.text[2]};
 			text-overflow: ellipsis;
 			font-size: 12px;
 			font-weight: 400;

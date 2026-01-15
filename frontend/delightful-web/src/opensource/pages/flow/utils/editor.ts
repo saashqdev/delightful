@@ -9,13 +9,8 @@ import * as monaco from "monaco-editor"
  */
 export default function registerEditor() {
 	loader.config({
-        monaco
+		monaco,
 	})
 
 	loader.init()
 }
-
-
-
-
-

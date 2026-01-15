@@ -6,7 +6,9 @@ export const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 		height: 100%;
 		position: relative;
 		overflow: hidden;
-		background: ${isDarkMode ? token.delightfulColorUsages.bg[0] : token.delightfulColorUsages.white};
+		background: ${isDarkMode
+			? token.delightfulColorUsages.bg[0]
+			: token.delightfulColorUsages.white};
 		border-radius: 6px;
 		max-width: 100% !important;
 		max-height: 100% !important;
@@ -42,7 +44,9 @@ export const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 		margin: 0 auto;
 		border-radius: 8px;
 		padding: 4px 8px;
-		color: ${isDarkMode ? token.delightfulColorUsages.text[1] : token.delightfulColorUsages.text[1]};
+		color: ${isDarkMode
+			? token.delightfulColorUsages.text[1]
+			: token.delightfulColorUsages.text[1]};
 		background: ${isDarkMode
 			? token.delightfulColorUsages.bg[1]
 			: token.delightfulColorUsages.white} !important;

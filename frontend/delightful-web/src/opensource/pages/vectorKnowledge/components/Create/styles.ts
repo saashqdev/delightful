@@ -20,7 +20,9 @@ export const useVectorKnowledgeCreateStyles = createStyles(({ css, token, isDark
 			border-bottom: 1px solid ${token.colorBorder};
 			font-size: 18px;
 			font-weight: 600;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[9] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[9]
+				: token.delightfulColorUsages.text[1]};
 			background: ${isDarkMode ? "transparent" : token.delightfulColorUsages.white};
 			height: 50px;
 		`,
@@ -39,7 +41,9 @@ export const useVectorKnowledgeCreateStyles = createStyles(({ css, token, isDark
 			padding-bottom: 10px;
 			margin-bottom: 20px;
 			border-bottom: 1px solid
-				${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
+				${isDarkMode
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorUsages.border};
 		`,
 		label: css`
 			font-weight: 600;

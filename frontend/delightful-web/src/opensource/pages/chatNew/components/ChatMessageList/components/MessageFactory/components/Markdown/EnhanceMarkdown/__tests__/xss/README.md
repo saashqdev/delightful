@@ -20,16 +20,16 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 
 ### 1. Script Tag XSS Prevention (script label XSS prevention)
 
-```typescript
+````typescript
 // basic script injection
-'<script>window.xssAttack = true;</script>Hello World'
+"<script>window.xssAttack = true;</script>Hello World"
 
 // code block with script
-'```html\n<script>window.xssAttack2 = true;</script>\n```'
+"```html\n<script>window.xssAttack2 = true;</script>\n```"
 
 // script label with property
 '<script type="text/javascript" src="malicious.js">window.xssAttack3 = true;</script>'
-```
+````
 
 ### 2. Event Handler XSS Prevention (event handler XSS prevention)
 
@@ -41,17 +41,17 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 '<img src="invalid.jpg" onload="window.xssLoad = true;" alt="test" />'
 
 // error event
-'<img src="invalid.jpg" onerror="window.xssError = true;" alt="test" />'
-
-// other event handlers
-['onmouseover', 'onmouseout', 'onfocus', 'onblur', 'onkeypress', 'onsubmit']
+'<img src="invalid.jpg" onerror="window.xssError = true;" alt="test" />'[
+	// other event handlers
+	("onmouseover", "onmouseout", "onfocus", "onblur", "onkeypress", "onsubmit")
+]
 ```
 
 ### 3. JavaScript Protocol XSS Prevention (JavaScript protocol XSS prevention)
 
 ```typescript
 // JavaScript protocol in link
-'[Click me](javascript:window.xssJsProtocol = true;)'
+"[Click me](javascript:window.xssJsProtocol = true;)"
 
 // JavaScript protocol in image
 '<img src="javascript:window.xssJsImg = true;" alt="test" />'
@@ -64,13 +64,13 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 
 ```typescript
 // HTML entity encoding of script label
-'&lt;script&gt;window.xssEntityScript = true;&lt;/script&gt;'
+"&lt;script&gt;window.xssEntityScript = true;&lt;/script&gt;"
 
 // hexadecimal encoding
-'&#x3C;script&#x3E;window.xssHex = true;&#x3C;/script&#x3E;'
+"&#x3C;script&#x3E;window.xssHex = true;&#x3C;/script&#x3E;"
 
 // decimal encoding
-'&#60;script&#62;window.xssDecimal = true;&#60;/script&#62;'
+"&#60;script&#62;window.xssDecimal = true;&#60;/script&#62;"
 ```
 
 ### 5. CSS Injection XSS Prevention (CSS injection XSS prevention)
@@ -87,19 +87,19 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 
 ```typescript
 // Unicode script label
-'<\u0073cript>window.xssUnicode = true;</\u0073cript>'
+"<\u0073cript>window.xssUnicode = true;</\u0073cript>"
 
 // nested script label
-'<scr<script>ipt>window.xssNested = true;</scr</script>ipt>'
+"<scr<script>ipt>window.xssNested = true;</scr</script>ipt>"
 
 // case mixing
-'<ScRiPt>window.xssCase = true;</ScRiPt>'
+"<ScRiPt>window.xssCase = true;</ScRiPt>"
 
 // script in SVG
-'<svg><script>window.xssSvg = true;</script></svg>'
+"<svg><script>window.xssSvg = true;</script></svg>"
 
 // Zero-width character bypass
-'<scr\u200Bipt>window.xssZeroWidth = true;</scr\u200Bipt>'
+"<scr\u200Bipt>window.xssZeroWidth = true;</scr\u200Bipt>"
 ```
 
 ### 7. Polyglot XSS Attacks (Polyglot XSS Attacks)
@@ -116,37 +116,37 @@ This test suite is specifically for `EnhanceMarkdown` component design, used to 
 
 ```typescript
 // Comment bypass
-'<scr<!---->ipt>window.xssComment = true;</scr<!---->ipt>'
+"<scr<!---->ipt>window.xssComment = true;</scr<!---->ipt>"
 
 // Newline bypass
-'<scr\nipt>window.xssNewline = true;</scr\nipt>'
+"<scr\nipt>window.xssNewline = true;</scr\nipt>"
 
 // Tab character bypass
-'<scr\tipt>window.xssTab = true;</scr\tipt>'
+"<scr\tipt>window.xssTab = true;</scr\tipt>"
 ```
 
 ### 9. Markdown-specific Attack Vectors (Markdown-specific Attack Vectors)
 
-```typescript
+````typescript
 // Malicious reference link
-`[Click here][malicious]
+;`[Click here][malicious]
 [malicious]: javascript:window.xssReference = true;`
 
 // HTML in code block
-'```html\n<script>window.xssCodeBlock = true;</script>\n```'
+;("```html\n<script>window.xssCodeBlock = true;</script>\n```")
 
 // Script in inline code
-'This is `<script>window.xssInlineCode = true;</script>` inline code'
-```
+;("This is `<script>window.xssInlineCode = true;</script>` inline code")
+````
 
 ### 10. LaTeX Injection Security (LaTeX Injection Security)
 
 ```typescript
 // LaTeX link
-'$\\href{javascript:window.xssLatex=true}{Click}$'
+"$\\href{javascript:window.xssLatex=true}{Click}$"
 
 // LaTeX command injection
-'$$\\begin{document}\\href{javascript:window.xssLatexCmd=true}{text}\\end{document}$$'
+"$$\\begin{document}\\href{javascript:window.xssLatexCmd=true}{text}\\end{document}$$"
 ```
 
 ## Security Configuration Tests
@@ -179,9 +179,9 @@ Test that custom component configuration cannot be maliciously exploited:
 
 ```typescript
 {
-  components: {
-    script: MaliciousComponent
-  }
+	components: {
+		script: MaliciousComponent
+	}
 }
 ```
 
@@ -191,12 +191,12 @@ Test that custom component configuration cannot be maliciously exploited:
 
 ```typescript
 // Extra large content
-const largeContent = '<script>window.xssLarge = true;</script>'.repeat(10000)
+const largeContent = "<script>window.xssLarge = true;</script>".repeat(10000)
 
 // Deep nesting
-let nestedContent = '<script>window.xssNested = true;</script>'
+let nestedContent = "<script>window.xssNested = true;</script>"
 for (let i = 0; i < 100; i++) {
-  nestedContent = `<div>${nestedContent}</div>`
+	nestedContent = `<div>${nestedContent}</div>`
 }
 ```
 
@@ -204,9 +204,9 @@ for (let i = 0; i < 100; i++) {
 
 ```typescript
 // Recursive Markdown structure
-let recursiveMarkdown = '<script>window.xssRecursive = true;</script>'
+let recursiveMarkdown = "<script>window.xssRecursive = true;</script>"
 for (let i = 0; i < 50; i++) {
-  recursiveMarkdown = `> ${recursiveMarkdown}`
+	recursiveMarkdown = `> ${recursiveMarkdown}`
 }
 ```
 
@@ -223,7 +223,7 @@ const problematicContent = '<script>throw new Error("XSS attempt: " + document.c
 ### invalid Unicode sequencehandle
 
 ```typescript
-const invalidUnicode = '\uD800<script>window.xssInvalidUnicode = true;</script>\uDFFF'
+const invalidUnicode = "\uD800<script>window.xssInvalidUnicode = true;</script>\uDFFF"
 ```
 
 ## CSP (Content Security Policy) Compliance Tests
@@ -241,7 +241,7 @@ const contentWithInlineStyles = '<div style="background: red; color: blue;">Test
 Ensure that the component does not create dynamic script elements:
 
 ```typescript
-const maliciousContent = '<script>window.xssCSP = true;</script>'
+const maliciousContent = "<script>window.xssCSP = true;</script>"
 // Validate that the page does not contain script elements with malicious code
 ```
 
@@ -292,4 +292,4 @@ Recommend these security tests should cover the following scenarios:
 
 This security test suite provides comprehensive XSS attack protection tests, covering from basic script injection to advanced polyglot attack vectors. Through these tests, we can ensure the `EnhanceMarkdown` component maintains security under various attack scenarios.
 
-Regularly running these tests and updating test cases based on newly discovered attack vectors are important measures to maintain component security. 
+Regularly running these tests and updating test cases based on newly discovered attack vectors are important measures to maintain component security.

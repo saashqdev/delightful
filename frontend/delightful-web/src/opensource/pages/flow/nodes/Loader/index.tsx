@@ -17,8 +17,3 @@ export const LoaderComponentVersionMap = {
 		template: v1Template,
 	},
 }
-
-
-
-
-

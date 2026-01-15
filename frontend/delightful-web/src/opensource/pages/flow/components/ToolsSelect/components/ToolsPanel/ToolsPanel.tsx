@@ -99,8 +99,3 @@ export default function ToolsPanel({
 		</DelightfulModal>
 	)
 }
-
-
-
-
-

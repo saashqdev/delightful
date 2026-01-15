@@ -2,7 +2,9 @@ import { createStyles, cx } from "antd-style"
 
 export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, token }) => {
 	const extra = cx(css`
-		color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[1]};
+		color: ${isDarkMode
+			? token.delightfulColorScales.grey[4]
+			: token.delightfulColorUsages.text[1]};
 		cursor: pointer;
 		display: none;
 		flex-shrink: 0;
@@ -49,7 +51,9 @@ export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, toke
 		`,
 		title: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			text-overflow: ellipsis;
 			font-size: 14px;
 			font-weight: 400;
@@ -59,7 +63,9 @@ export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, toke
 		content: css`
 			flex-shrink: 1;
 			overflow: hidden;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[3]};
 			text-overflow: ellipsis;
 			font-size: 12px;
 			font-weight: 400;
@@ -69,7 +75,9 @@ export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, toke
 		`,
 		time: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[3]};
 			text-align: right;
 			text-overflow: ellipsis;
 			font-size: 12px;

@@ -63,7 +63,11 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 							? token.delightfulColorUsages.danger.default
 							: token.delightfulColorScales.red[0]
 					} !important;
-					color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.danger} !important;
+					color: ${
+						isDarkMode
+							? token.delightfulColorUsages.white
+							: token.delightfulColorUsages.danger
+					} !important;
 				}
 			}
 

@@ -25,7 +25,11 @@ const SuccessResult = memo(
 					</div>
 					<div>{t("explore.form.conversationTip")}</div>
 				</Flex>
-				<DelightfulButton type="primary" className={styles.button} onClick={handleConversation}>
+				<DelightfulButton
+					type="primary"
+					className={styles.button}
+					onClick={handleConversation}
+				>
 					{t("explore.buttonText.conversationAssistant")}
 				</DelightfulButton>
 				<DelightfulButton

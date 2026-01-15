@@ -5,9 +5,7 @@ export const useStyles = createStyles(({ css }) => {
 		draftCardItem: css`
 			background-color: #fff;
 			padding: 12px;
-			box-shadow:
-				0px 0px 1px 0px #0000004d,
-				0px 4px 14px 0px #0000001a;
+			box-shadow: 0px 0px 1px 0px #0000004d, 0px 4px 14px 0px #0000001a;
 			border-radius: 8px;
 			margin-bottom: 10px;
 
@@ -73,8 +71,3 @@ export const useStyles = createStyles(({ css }) => {
 		`,
 	}
 })
-
-
-
-
-

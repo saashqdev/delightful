@@ -51,7 +51,11 @@ const PropmtDescription = memo(
 				/>
 				<Flex align="center" vertical gap={12} className={styles.top}>
 					{data.robot_avatar ? (
-						<DelightfulAvatar src={data.robot_avatar} size={50} style={{ borderRadius: 8 }}>
+						<DelightfulAvatar
+							src={data.robot_avatar}
+							size={50}
+							style={{ borderRadius: 8 }}
+						>
 							{data.robot_name}
 						</DelightfulAvatar>
 					) : (
@@ -70,7 +74,11 @@ const PropmtDescription = memo(
 					<Flex align="center" justify="space-around" gap={4} className={styles.nums}>
 						<Flex flex={1} align="center" vertical justify="center" gap={4}>
 							<Flex align="center" className={styles.numLabel}>
-								<DelightfulIcon component={IconThumbUp} size={14} color="currentColor" />
+								<DelightfulIcon
+									component={IconThumbUp}
+									size={14}
+									color="currentColor"
+								/>
 								{t("explore.descriptionPanel.good")}
 							</Flex>
 							<span className={styles.num}>{data.created_info?.like_num}</span>
@@ -95,7 +103,11 @@ const PropmtDescription = memo(
 								type="primary"
 								className={cx(styles.button)}
 								icon={
-									<DelightfulIcon component={IconMessagePlus} size={18} color="#fff" />
+									<DelightfulIcon
+										component={IconMessagePlus}
+										size={18}
+										color="#fff"
+									/>
 								}
 								onClick={() => onAddFriend?.(data, true, true)}
 							>

@@ -521,14 +521,14 @@ export const generateNodeVersionSchema = (
 			return {
 				[nodeType]: Object.entries(nodeVersionMap).reduce(
 					(versionTemplate, [nodeVersion, nodeMap]) => {
-							/** Configuration that needs to be versioned */
-							const versionConfig = pick(nodeMap.template, [
-								"input",
-								"output",
-								"params",
-								"system_output",
-							])
-							/** Get the component for the specific version */
+						/** Configuration that needs to be versioned */
+						const versionConfig = pick(nodeMap.template, [
+							"input",
+							"output",
+							"params",
+							"system_output",
+						])
+						/** Get the component for the specific version */
 
 						const enterpriseSchemaConfigMap = getEnterpriseSchemaConfigMap()
 
@@ -555,8 +555,3 @@ export const generateNodeVersionSchema = (
 
 	return result as Record<customNodeType, Record<Version, NodeWidget>>
 }
-
-
-
-
-

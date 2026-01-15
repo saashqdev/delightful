@@ -70,7 +70,12 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		// detect command flag
 		const { hasCommands, commandCount } = detectCommands(displayContent)
 		if (hasCommands) {
-			console.log("MessageItemdiscover command flag:", id, "number of commands:", commandCount)
+			console.log(
+				"MessageItemdiscover command flag:",
+				id,
+				"number of commands:",
+				commandCount,
+			)
 		}
 
 		// display custom loading animation at instruction collection stage
@@ -189,9 +194,3 @@ function MessageItem(props: MessageProps): React.ReactElement {
 }
 
 export default MessageItem
-
-
-
-
-
-

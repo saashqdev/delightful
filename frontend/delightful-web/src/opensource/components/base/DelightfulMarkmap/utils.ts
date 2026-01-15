@@ -59,7 +59,9 @@ export function exportMarkmapToPng(data: string, width: number = 3840, height: n
 				${svgData}`
 
 			// Use base64 encoding
-			const svgBase64 = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgContent)))}`
+			const svgBase64 = `data:image/svg+xml;base64,${btoa(
+				unescape(encodeURIComponent(svgContent)),
+			)}`
 
 			// Create Image object
 			const img = new Image()

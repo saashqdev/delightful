@@ -111,7 +111,6 @@ export interface BeDelightfulContent {
 	content: string
 }
 
-
 /**
  * Message attachment
  */

@@ -132,7 +132,7 @@ export const v0Template = {
 						type: "array",
 						key: "use_tools",
 						sort: 0,
-					title: "Tools Used",
+						title: "Tools Used",
 						description: "",
 						required: null,
 						value: null,
@@ -251,8 +251,3 @@ export const v0Template = {
 	},
 	system_output: null,
 }
-
-
-
-
-

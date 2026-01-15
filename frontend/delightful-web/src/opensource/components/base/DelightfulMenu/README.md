@@ -4,8 +4,8 @@
 
 ## Props
 
-| Prop         | Type | Default | Description                     |
-| ------------ | ---- | ------- | ------------------------------- |
+| Prop         | Type | Default | Description                        |
+| ------------ | ---- | ------- | ---------------------------------- |
 | ...MenuProps | -    | -       | Supports all Ant Design Menu props |
 
 ## Basic Usage
@@ -130,9 +130,9 @@ import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 
 ## When to Use
 
-- Provide navigation within a page
-- Display a set of related actions or features
-- Show options in a dropdown menu
-- Create context menus (right-click menus)
+-   Provide navigation within a page
+-   Display a set of related actions or features
+-   Show options in a dropdown menu
+-   Create context menus (right-click menus)
 
 The `DelightfulMenu` component keeps menus clean and user-friendly while retaining all features of Ant Design's Menu.

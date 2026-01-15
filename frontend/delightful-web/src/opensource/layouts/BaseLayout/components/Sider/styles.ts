@@ -75,11 +75,15 @@ export const useStyles = createStyles(
 				}
 			`,
 			menu: css`
-				--${prefixCls}-menu-item-selected-bg: ${token.delightfulColorUsages.primaryLight.default} !important;
+				--${prefixCls}-menu-item-selected-bg: ${
+				token.delightfulColorUsages.primaryLight.default
+			} !important;
 
 				--${prefixCls}-menu-item-color: ${token.delightfulColorUsages.text[1]} !important;
 
-				--${prefixCls}-menu-item-selected-color: ${isDarkMode ? token.colorPrimary : token.delightfulColorUsages.text[1]} !important;
+				--${prefixCls}-menu-item-selected-color: ${
+				isDarkMode ? token.colorPrimary : token.delightfulColorUsages.text[1]
+			} !important;
 
 				.${prefixCls}-menu-item-selected {
 					color: ${isDarkMode ? token.colorPrimary : token.delightfulColorUsages.text[1]} !important;

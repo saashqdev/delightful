@@ -26,14 +26,18 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { colSpan }: { colSp
 			padding-top: 20px;
 		`,
 		title: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 			line-height: 24px;
 			margin-bottom: 2px;
 		`,
 		desc: css`
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[3]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.text[3]};
 			font-size: 14px;
 			margin: 0;
 			line-height: 20px;
@@ -96,7 +100,9 @@ function PropmtInner({ cards, loading = false, onCardClick }: PromptInnerProps) 
 				<div className={styles.desc}>{t("explore.promptsDesc.innerAssistant")}</div>
 			</div>
 			<DelightfulSpin section spinning={loading} className={styles.spin}>
-				{cards.length === 0 && !loading ? <DelightfulEmpty className={styles.empty} /> : null}
+				{cards.length === 0 && !loading ? (
+					<DelightfulEmpty className={styles.empty} />
+				) : null}
 				<Flex gap={12} wrap>
 					{cards.length &&
 						cards.map((item) => {

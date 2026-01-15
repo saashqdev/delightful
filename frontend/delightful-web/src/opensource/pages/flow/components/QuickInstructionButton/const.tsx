@@ -127,8 +127,3 @@ export const INSERT_OPTIONS = (t: TFunction) => [
 	{ value: InsertLocationMap.Cursor, label: t("explore.form.insertCursor") },
 	{ value: InsertLocationMap.Behind, label: t("explore.form.insertBehind") },
 ]
-
-
-
-
-

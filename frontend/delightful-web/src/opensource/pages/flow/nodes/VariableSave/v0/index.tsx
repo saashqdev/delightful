@@ -82,8 +82,3 @@ export default function VariableSaveV0() {
 		</div>
 	)
 }
-
-
-
-
-

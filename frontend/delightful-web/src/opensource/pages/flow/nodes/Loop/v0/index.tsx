@@ -132,8 +132,3 @@ export default function LoopV0() {
 		</div>
 	)
 }
-
-
-
-
-

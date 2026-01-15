@@ -34,8 +34,3 @@ export default function useToolsChangeHandlerV0() {
 		handleToolsChanged,
 	}
 }
-
-
-
-
-

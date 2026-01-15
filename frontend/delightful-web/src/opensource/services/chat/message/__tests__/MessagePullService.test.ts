@@ -325,7 +325,9 @@ describe("MessagePullService", () => {
 
 			await (service as any).doPullOfflineMessages()
 
-			expect(consoleSpy).toHaveBeenCalledWith("pullOfflineMessages: Current organization is empty")
+			expect(consoleSpy).toHaveBeenCalledWith(
+				"pullOfflineMessages: Current organization is empty",
+			)
 			expect(spy).not.toHaveBeenCalled()
 
 			consoleSpy.mockRestore()

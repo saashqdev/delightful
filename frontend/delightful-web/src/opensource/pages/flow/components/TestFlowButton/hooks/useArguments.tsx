@@ -106,8 +106,3 @@ export default function useArguments({
 		dynamicFormItems,
 	}
 }
-
-
-
-
-

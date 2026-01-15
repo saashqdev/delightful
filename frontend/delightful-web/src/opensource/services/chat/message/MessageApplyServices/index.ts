@@ -157,9 +157,10 @@ class MessageApplyService {
 				messageSeqIdService.getOrganizationRenderSeqId(message.organization_code) ?? "",
 			) <= 0
 		) {
-		console.warn("This message has already been applied", message.seq_id)
-		BroadcastChannelSender.applyMessage(message, options)
-		this.doApplyMessage(message, options)
+			console.warn("This message has already been applied", message.seq_id)
+			BroadcastChannelSender.applyMessage(message, options)
+			this.doApplyMessage(message, options)
+		}
 	}
 }
 

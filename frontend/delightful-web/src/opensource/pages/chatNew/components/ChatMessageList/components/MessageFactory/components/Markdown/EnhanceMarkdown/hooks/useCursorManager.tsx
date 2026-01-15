@@ -62,11 +62,11 @@ export const useCursorManager = (props: CursorManagerProps) => {
 
 			let targetElement = lastChild as HTMLElement
 
-		// Use requestAnimationFrame to optimize DOM operations, ensuring they occur during browser idle time
-		requestAnimationFrame(() => {
-			// Handle different tag types
-			if (targetElement.tagName === "PRE") {
-				// Code block
+			// Use requestAnimationFrame to optimize DOM operations, ensuring they occur during browser idle time
+			requestAnimationFrame(() => {
+				// Handle different tag types
+				if (targetElement.tagName === "PRE") {
+					// Code block
 					const codeElement = targetElement.querySelector("code")
 					if (codeElement) {
 						targetElement = findLastElement(codeElement)

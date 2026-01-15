@@ -52,8 +52,3 @@ export function isOnlyKnowledgeTypeChange(changeValues: any): [boolean, number?]
 
 	return [false]
 }
-
-
-
-
-

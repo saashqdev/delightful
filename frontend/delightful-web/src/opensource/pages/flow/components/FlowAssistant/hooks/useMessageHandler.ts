@@ -149,7 +149,7 @@ export function useMessageHandler({
 						msg.id === assistantMessageId
 							? {
 									...msg,
-								content: result.errorMessage || "Unknown error",
+									content: result.errorMessage || "Unknown error",
 									status: "error",
 							  }
 							: msg,
@@ -170,7 +170,7 @@ export function useMessageHandler({
 						msg.id === assistantMessageId
 							? {
 									...msg,
-								content: result.contentStr || "Server returned no content",
+									content: result.contentStr || "Server returned no content",
 									status: "done",
 							  }
 							: msg,
@@ -260,7 +260,7 @@ export function useMessageHandler({
 								msg.id === newAssistantMessageId
 									? {
 											...msg,
-										content: result.errorMessage || "Unknown error",
+											content: result.errorMessage || "Unknown error",
 											status: "error",
 									  }
 									: msg,
@@ -281,7 +281,8 @@ export function useMessageHandler({
 								msg.id === newAssistantMessageId
 									? {
 											...msg,
-										content: result.contentStr || "Server returned no content",
+											content:
+												result.contentStr || "Server returned no content",
 											status: "done",
 									  }
 									: msg,
@@ -335,8 +336,3 @@ export function useMessageHandler({
 		setProcessingMessageId,
 	}
 }
-
-
-
-
-

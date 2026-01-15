@@ -8,8 +8,3 @@ export const ExcelComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

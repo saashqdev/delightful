@@ -9,7 +9,9 @@ const useStyles = createStyles(
 			container: css`
 				border-radius: 8px;
 				border: 1px solid ${colorUsages.border};
-				background: ${isDarkMode ? token.colorBgContainer : token.delightfulColorUsages.white};
+				background: ${isDarkMode
+					? token.colorBgContainer
+					: token.delightfulColorUsages.white};
 				min-width: 33.3%;
 				width: 100%;
 			`,

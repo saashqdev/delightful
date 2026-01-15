@@ -68,8 +68,3 @@ export default function useOldKnowledgeHandle() {
 		handleOldKnowledge,
 	}
 }
-
-
-
-
-

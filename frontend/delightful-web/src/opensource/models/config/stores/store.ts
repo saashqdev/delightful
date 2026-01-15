@@ -6,9 +6,8 @@ export class ConfigStore {
 	theme = themeStore
 
 	i18n = i18nStore
-	
-	cluster = clusterStore
 
+	cluster = clusterStore
 }
 
 export const configStore = new ConfigStore()

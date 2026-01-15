@@ -51,7 +51,11 @@ vi.mock("rc-virtual-list", () => {
 vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick, data }: any) => (
-			<div data-testid="delightful-list-item" className={active ? "active" : ""} onClick={onClick}>
+			<div
+				data-testid="delightful-list-item"
+				className={active ? "active" : ""}
+				onClick={onClick}
+			>
 				{avatar && <div data-testid="avatar">{avatar}</div>}
 				<div data-testid="title">
 					{typeof title === "string" ? title : data?.title || "title object"}

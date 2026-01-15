@@ -9,8 +9,3 @@ export const CodeComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

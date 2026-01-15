@@ -28,8 +28,3 @@ export default function Output({ value, title = "Output", wrapperClassName }: Wi
 		</div>
 	)
 }
-
-
-
-
-

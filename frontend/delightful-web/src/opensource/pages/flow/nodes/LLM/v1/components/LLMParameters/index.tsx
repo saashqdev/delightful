@@ -133,7 +133,7 @@ export default function LLMParametersV1() {
 
 	const { models: options } = useFlowStore()
 
-		// Filter out models that support vision capabilities
+	// Filter out models that support vision capabilities
 	const visionModels = useMemo(() => {
 		return options.filter((model) => model.vision === true)
 	}, [options])
@@ -271,8 +271,3 @@ export default function LLMParametersV1() {
 		</Form.Item>
 	)
 }
-
-
-
-
-

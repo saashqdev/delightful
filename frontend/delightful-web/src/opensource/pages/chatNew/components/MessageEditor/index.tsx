@@ -448,7 +448,9 @@ const MessageEditor = observer(function MessageEditor({
 			<DelightfulButton
 				className={standardStyles.button}
 				type="text"
-				icon={<DelightfulIcon size={20} color="currentColor" component={IconMessage2Plus} />}
+				icon={
+					<DelightfulIcon size={20} color="currentColor" component={IconMessage2Plus} />
+				}
 				onClick={onCreateTopic}
 			>
 				{t("chat.input.newTopic")}
@@ -710,7 +712,8 @@ const MessageEditor = observer(function MessageEditor({
 				return new Promise((resolve) => {
 					DelightfulModal.confirm({
 						title: "Tip",
-						content: "The message is too long. Would you like to convert it to a document and send to the current conversation?",
+						content:
+							"The message is too long. Would you like to convert it to a document and send to the current conversation?",
 						okText: "Confirm",
 						onOk: async () => {
 							await onSend?.(json, onlyText, true)
@@ -748,7 +751,9 @@ const MessageEditor = observer(function MessageEditor({
 					{footerInstructionsNode}
 				</Flex>
 				<span className={standardStyles.tip}>
-					{isWindows ? t("placeholder.delightfulInputWindows") : t("placeholder.delightfulInput")}
+					{isWindows
+						? t("placeholder.delightfulInputWindows")
+						: t("placeholder.delightfulInput")}
 				</span>
 				<DelightfulButton
 					type="primary"

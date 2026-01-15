@@ -150,7 +150,9 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	apply(streamMessage: StreamResponseV2) {
-		console.log(`[apply] Start applying stream message, target seq ID: ${streamMessage.target_seq_id}`)
+		console.log(
+			`[apply] Start applying stream message, target seq ID: ${streamMessage.target_seq_id}`,
+		)
 
 		const targetSeqInfo = this.queryMessageInfo(streamMessage.target_seq_id)
 		const aggregateAISearchCardSeqInfo = this.queryMessageInfo(
@@ -158,7 +160,10 @@ class StreamMessageApplyServiceV2 {
 		)
 
 		if (!targetSeqInfo && !aggregateAISearchCardSeqInfo) {
-			console.log(`[apply] Message info not found, caching first, streamMessage:`, streamMessage)
+			console.log(
+				`[apply] Message info not found, caching first, streamMessage:`,
+				streamMessage,
+			)
 			// If message info not found, cache first and apply after message info is updated
 			this.addCacheStreamMessage(streamMessage)
 			return
@@ -200,9 +205,9 @@ class StreamMessageApplyServiceV2 {
 				this.applyAggregateAISearchCardV2StreamMessage(streamMessage)
 				break
 			default:
-			console.log(`[apply] Unknown message type`)
-			break
-	}
+				console.log(`[apply] Unknown message type`)
+				break
+		}
 	}
 
 	/**
@@ -211,39 +216,41 @@ class StreamMessageApplyServiceV2 {
 	 */
 	applyTextStreamMessage = (streamMessage: StreamResponseV2) => {
 		const {
-		streams: {
+			streams: {
 				stream_options: { status } = { status: StreamStatus.Streaming },
 				...keyPaths
 			},
 			target_seq_id,
 		} = streamMessage
-	console.log(`[applyTextStreamMessage] Start handling text stream message, status: ${status}`)
-	const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)!
+		console.log(
+			`[applyTextStreamMessage] Start handling text stream message, status: ${status}`,
+		)
+		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)!
 
-	if ([StreamStatus.Start, StreamStatus.Streaming].includes(status)) {
-		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-			const textMessage = m.message as TextConversationMessage
+		if ([StreamStatus.Start, StreamStatus.Streaming].includes(status)) {
+			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+				const textMessage = m.message as TextConversationMessage
 
-			for (const keyPath of Object.keys(keyPaths)) {
-				appendObject(textMessage.text, keyPath.split("."), keyPaths[keyPath])
-			}
-
-			return m
-		})
-	} else if (status === StreamStatus.End) {
-		console.log(`[applyTextStreamMessage] Handle end status message`)
-		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-			const textMessage = m.message as TextConversationMessage
-			if (textMessage.text) {
-				if (textMessage.text.stream_options) {
-					textMessage.text.stream_options.status = StreamStatus.End
+				for (const keyPath of Object.keys(keyPaths)) {
+					appendObject(textMessage.text, keyPath.split("."), keyPaths[keyPath])
 				}
-			}
-			return m
-		})
 
-		// Update conversation last message summary
-		ConversationService.updateLastReceiveMessage(conversationId, {
+				return m
+			})
+		} else if (status === StreamStatus.End) {
+			console.log(`[applyTextStreamMessage] Handle end status message`)
+			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+				const textMessage = m.message as TextConversationMessage
+				if (textMessage.text) {
+					if (textMessage.text.stream_options) {
+						textMessage.text.stream_options.status = StreamStatus.End
+					}
+				}
+				return m
+			})
+
+			// Update conversation last message summary
+			ConversationService.updateLastReceiveMessage(conversationId, {
 				time: Date.now() / 1000,
 				seq_id: messageId,
 				type: ConversationMessageType.Text,
@@ -258,14 +265,14 @@ class StreamMessageApplyServiceV2 {
 				"message.text.stream_options.status": StreamStatus.End,
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
-	console.log(`[applyTextStreamMessage] Text stream message handling completed`)
-}
+		console.log(`[applyTextStreamMessage] Text stream message handling completed`)
+	}
 
-/**
- * Apply streaming updates for Markdown messages.
- * @param streamMessage Streaming payload.
- */
-applyMarkdownStreamMessage = (streamMessage: StreamResponseV2) => {
+	/**
+	 * Apply streaming updates for Markdown messages.
+	 * @param streamMessage Streaming payload.
+	 */
+	applyMarkdownStreamMessage = (streamMessage: StreamResponseV2) => {
 		const {
 			streams: {
 				stream_options: { status } = { status: StreamStatus.Streaming },
@@ -273,22 +280,24 @@ applyMarkdownStreamMessage = (streamMessage: StreamResponseV2) => {
 			},
 			target_seq_id,
 		} = streamMessage
-	console.log(`[applyMarkdownStreamMessage] Start handling Markdown stream message, status: ${status}`)
+		console.log(
+			`[applyMarkdownStreamMessage] Start handling Markdown stream message, status: ${status}`,
+		)
 
-	const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
+		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
 
-	if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
-		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-			const textMessage = m.message as MarkdownConversationMessage
+		if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
+			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+				const textMessage = m.message as MarkdownConversationMessage
 
-			for (const keyPath of Object.keys(keyPaths)) {
-				appendObject(textMessage.markdown, keyPath.split("."), keyPaths[keyPath])
-			}
+				for (const keyPath of Object.keys(keyPaths)) {
+					appendObject(textMessage.markdown, keyPath.split("."), keyPaths[keyPath])
+				}
 
-			return { ...m }
-		})
-	} else if (status === StreamStatus.End) {
-		console.log(`[applyMarkdownStreamMessage] Handle end status message`)
+				return { ...m }
+			})
+		} else if (status === StreamStatus.End) {
+			console.log(`[applyMarkdownStreamMessage] Handle end status message`)
 			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const markdownMessage = m.message as MarkdownConversationMessage
@@ -317,16 +326,16 @@ applyMarkdownStreamMessage = (streamMessage: StreamResponseV2) => {
 				"message.markdown.stream_options.status": StreamStatus.End,
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
-	console.log(`[applyMarkdownStreamMessage] Markdown stream message handling completed`)
-}
+		console.log(`[applyMarkdownStreamMessage] Markdown stream message handling completed`)
+	}
 
-/**
- * Apply streaming updates for Aggregate AI Search Card messages.
- * @param streamMessage Streaming payload.
- */
-applyAggregateAISearchCardStreamMessage = (message: StreamResponseV2) => {
-	const {
-		streams: {
+	/**
+	 * Apply streaming updates for Aggregate AI Search Card messages.
+	 * @param streamMessage Streaming payload.
+	 */
+	applyAggregateAISearchCardStreamMessage = (message: StreamResponseV2) => {
+		const {
+			streams: {
 				stream_options: { status } = { status: StreamStatus.Streaming },
 				...keyPaths
 			},
@@ -334,44 +343,44 @@ applyAggregateAISearchCardStreamMessage = (message: StreamResponseV2) => {
 		} = message
 
 		console.log(
-		`[applyAggregateAISearchCardStreamMessage] Start handling AI search card stream message, status: ${status}`,
-	)
+			`[applyAggregateAISearchCardStreamMessage] Start handling AI search card stream message, status: ${status}`,
+		)
 
-	const { messageId, conversationId, topicId } = this.queryMessageInfo(
-		AiSearchApplyService.getAppMessageIdByLLMResponseSeqId(target_seq_id),
-	)
+		const { messageId, conversationId, topicId } = this.queryMessageInfo(
+			AiSearchApplyService.getAppMessageIdByLLMResponseSeqId(target_seq_id),
+		)
 
-	if (!isUndefined(status) && [StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
-		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-			const textMessage = m.message as AggregateAISearchCardConversationMessage<false>
+		if (!isUndefined(status) && [StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
+			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+				const textMessage = m.message as AggregateAISearchCardConversationMessage<false>
 
-			for (const keyPath of Object.keys(keyPaths)) {
-				const keyPathsArray = keyPath.split(".")
-				appendObject(
-					textMessage.aggregate_ai_search_card,
-					keyPathsArray,
-					keyPaths[keyPath],
-				)
-			}
-
-			return { ...m }
-		})
-	} else if (status === StreamStatus.End) {
-		console.log(`[applyAggregateAISearchCardStreamMessage] Handle end status message`)
-		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-			const textMessage = m.message as AggregateAISearchCardConversationMessage
-			if (textMessage.aggregate_ai_search_card) {
-				// Note: Do not update content here; typing effect updates during streaming
-				if (textMessage.aggregate_ai_search_card.stream_options) {
-					textMessage.aggregate_ai_search_card.stream_options.status =
-						StreamStatus.End
+				for (const keyPath of Object.keys(keyPaths)) {
+					const keyPathsArray = keyPath.split(".")
+					appendObject(
+						textMessage.aggregate_ai_search_card,
+						keyPathsArray,
+						keyPaths[keyPath],
+					)
 				}
-			}
-			return { ...m }
-		})
 
-		// Update conversation last message summary
-		ConversationService.updateLastReceiveMessage(conversationId, {
+				return { ...m }
+			})
+		} else if (status === StreamStatus.End) {
+			console.log(`[applyAggregateAISearchCardStreamMessage] Handle end status message`)
+			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+				const textMessage = m.message as AggregateAISearchCardConversationMessage
+				if (textMessage.aggregate_ai_search_card) {
+					// Note: Do not update content here; typing effect updates during streaming
+					if (textMessage.aggregate_ai_search_card.stream_options) {
+						textMessage.aggregate_ai_search_card.stream_options.status =
+							StreamStatus.End
+					}
+				}
+				return { ...m }
+			})
+
+			// Update conversation last message summary
+			ConversationService.updateLastReceiveMessage(conversationId, {
 				time: Date.now() / 1000,
 				seq_id: messageId,
 				type: ConversationMessageType.AggregateAISearchCard,
@@ -386,60 +395,62 @@ applyAggregateAISearchCardStreamMessage = (message: StreamResponseV2) => {
 				"message.aggregate_ai_search_card.stream_options.status": StreamStatus.End,
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
-	console.log(`[applyAggregateAISearchCardStreamMessage] AI search card stream message handling completed`)
-}
+		console.log(
+			`[applyAggregateAISearchCardStreamMessage] AI search card stream message handling completed`,
+		)
+	}
 
-/**
- * Apply streaming updates for Aggregate AI Search Card V2 messages.
- * @param streamMessage Streaming payload.
- */
-applyAggregateAISearchCardV2StreamMessage = (streamMessage: StreamResponseV2) => {
-	const {
-		streams: {
+	/**
+	 * Apply streaming updates for Aggregate AI Search Card V2 messages.
+	 * @param streamMessage Streaming payload.
+	 */
+	applyAggregateAISearchCardV2StreamMessage = (streamMessage: StreamResponseV2) => {
+		const {
+			streams: {
 				stream_options: { status } = { status: StreamStatus.Streaming },
 				...keyPaths
 			},
 			target_seq_id,
 		} = streamMessage
 
-	console.log(`Start handling AI search card V2 stream message, status: ${status}`)
+		console.log(`Start handling AI search card V2 stream message, status: ${status}`)
 
-	const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
+		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
 
-	if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
-		const updated = MessageService.updateMessage(
-			conversationId,
-			topicId,
-			messageId,
-			(m) => {
-				const textMessage = m.message as AggregateAISearchCardConversationMessageV2
+		if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
+			const updated = MessageService.updateMessage(
+				conversationId,
+				topicId,
+				messageId,
+				(m) => {
+					const textMessage = m.message as AggregateAISearchCardConversationMessageV2
 
-				for (const keyPath of Object.keys(keyPaths)) {
-					const keyPathsArray = keyPath.split(".")
+					for (const keyPath of Object.keys(keyPaths)) {
+						const keyPathsArray = keyPath.split(".")
 
-					appendObject(
-						textMessage.aggregate_ai_search_card_v2,
-						keyPathsArray,
-						keyPaths[keyPath],
-					)
+						appendObject(
+							textMessage.aggregate_ai_search_card_v2,
+							keyPathsArray,
+							keyPaths[keyPath],
+						)
 
-					// Update status
-					updateAggregateAISearchCardV2Status(
-						textMessage.aggregate_ai_search_card_v2,
-						keyPath,
-						keyPaths[keyPath],
-					)
-				}
+						// Update status
+						updateAggregateAISearchCardV2Status(
+							textMessage.aggregate_ai_search_card_v2,
+							keyPath,
+							keyPaths[keyPath],
+						)
+					}
 
-				return { ...m }
-			},
-		)
+					return { ...m }
+				},
+			)
 
-		console.log(` Update message:`, toJS(updated))
-	} else if (status === StreamStatus.End) {
-		console.log(`Handle end status message`)
-	// Update message status
-	MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+			console.log(` Update message:`, toJS(updated))
+		} else if (status === StreamStatus.End) {
+			console.log(`Handle end status message`)
+			// Update message status
+			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const textMessage = m.message as AggregateAISearchCardConversationMessageV2
 				if (textMessage.aggregate_ai_search_card_v2) {
 					// Note: Do not update content here; typing effect updates during streaming
@@ -451,26 +462,26 @@ applyAggregateAISearchCardV2StreamMessage = (streamMessage: StreamResponseV2) =>
 					}
 				}
 				return { ...m }
-	})
+			})
 
-	// Update conversation last message summary
-	ConversationService.updateLastReceiveMessage(conversationId, {
-		time: Date.now() / 1000,
-		seq_id: messageId,
-		type: ConversationMessageType.AggregateAISearchCardV2,
-		text:
-			(
-				keyPaths.summary as { content: string; reasoning_content: string }
-			)?.content?.slice(0, 50) ?? "",
-		topic_id: topicId,
-	})
+			// Update conversation last message summary
+			ConversationService.updateLastReceiveMessage(conversationId, {
+				time: Date.now() / 1000,
+				seq_id: messageId,
+				type: ConversationMessageType.AggregateAISearchCardV2,
+				text:
+					(
+						keyPaths.summary as { content: string; reasoning_content: string }
+					)?.content?.slice(0, 50) ?? "",
+				topic_id: topicId,
+			})
 
-	// Persist to DB
-	MessageService.updateDbMessage(messageId, conversationId, {
-		"message.aggregate_ai_search_card_v2": { ...streamMessage.streams },
-	} as Partial<SeqResponse<ConversationMessage>>)
-}
-}
+			// Persist to DB
+			MessageService.updateDbMessage(messageId, conversationId, {
+				"message.aggregate_ai_search_card_v2": { ...streamMessage.streams },
+			} as Partial<SeqResponse<ConversationMessage>>)
+		}
+	}
 }
 
 export default new StreamMessageApplyServiceV2()

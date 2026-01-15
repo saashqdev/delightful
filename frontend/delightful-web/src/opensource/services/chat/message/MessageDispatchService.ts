@@ -24,7 +24,12 @@ class MessageDispatchService {
 			currentConversation.current_topic_id === message.message.topic_id
 		) {
 			MessageStore.addSendMessage(renderMessage)
-			console.log("Send message to current conversation", message.conversation_id, "Message ID", message.message_id)
+			console.log(
+				"Send message to current conversation",
+				message.conversation_id,
+				"Message ID",
+				message.message_id,
+			)
 		} else {
 			console.log(
 				"Send message to non-current conversation",

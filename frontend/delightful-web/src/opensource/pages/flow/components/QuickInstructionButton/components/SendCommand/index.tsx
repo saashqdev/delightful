@@ -26,8 +26,3 @@ export const SendCommand = memo(
 		)
 	},
 )
-
-
-
-
-

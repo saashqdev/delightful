@@ -41,7 +41,9 @@ const useBindOpenApiAccountStyles = createStyles(({ css, isDarkMode, token }) =>
 			width: 40px;
 			cursor: pointer;
 			border: 1px solid transparent;
-			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.grey[4]};
+			color: ${isDarkMode
+				? token.delightfulColorUsages.white
+				: token.delightfulColorScales.grey[4]};
 			&:hover {
 				background: ${isDarkMode
 					? token.delightfulColorScales.grey[3]
@@ -236,7 +238,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 													)}
 													<span>{fieldData.name}</span>
 												</Flex>
-											<Tooltip title={`Remove ${fieldData.name}`}>
+												<Tooltip title={`Remove ${fieldData.name}`}>
 													<DelightfulIcon
 														component={IconX}
 														className={styles.iconX}
@@ -261,8 +263,3 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 }
 
 export default BindOpenApiAccount
-
-
-
-
-

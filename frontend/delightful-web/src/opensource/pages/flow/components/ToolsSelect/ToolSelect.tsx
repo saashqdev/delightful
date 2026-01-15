@@ -93,7 +93,7 @@ export default function ToolSelect({
 								onAddTool={async (tool) => {
 									add(tool)
 
-								// Update inputOutput map
+									// Update inputOutput map
 									const response = await FlowApi.getAvailableTools([tool.tool_id])
 									if (response.list.length > 0) {
 										const targetTool = response.list[0]
@@ -111,8 +111,3 @@ export default function ToolSelect({
 		</Form.Item>
 	)
 }
-
-
-
-
-

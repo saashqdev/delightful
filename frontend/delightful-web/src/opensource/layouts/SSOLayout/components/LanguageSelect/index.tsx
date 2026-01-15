@@ -48,7 +48,11 @@ function LanguageSelect() {
 	return (
 		<DelightfulSelect
 			prefix={
-				<DelightfulIcon component={IconWorld} size={20} color={isDarkMode ? "#fff" : "#000"} />
+				<DelightfulIcon
+					component={IconWorld}
+					size={20}
+					color={isDarkMode ? "#fff" : "#000"}
+				/>
 			}
 			value={lang}
 			className={cx(styles.select)}

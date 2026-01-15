@@ -27,8 +27,3 @@ export const groupTypeOptions = [
 		value: GroupConversationType.External,
 	},
 ]
-
-
-
-
-

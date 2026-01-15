@@ -35,8 +35,3 @@ export default function RenderLabelCommon({ name, url, danger = false }: RenderL
 		</Flex>
 	)
 }
-
-
-
-
-

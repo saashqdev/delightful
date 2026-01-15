@@ -25,8 +25,3 @@ export const useCommercial = (): CommercialContextProps | undefined => {
 }
 
 export default CommercialProvider
-
-
-
-
-

@@ -113,7 +113,9 @@ export default memo(function MessagePanel(props: MessagePanelProps) {
 					value={inputValue}
 					className={styles.textarea}
 					placeholder={
-						showLoading ? "You can continue chatting with me to adjust the task in real time" : "Give Be Delightful a task..."
+						showLoading
+							? "You can continue chatting with me to adjust the task in real time"
+							: "Give Be Delightful a task..."
 					}
 					onChange={(e) => {
 						setInputValue(e.target.value)
@@ -130,7 +132,11 @@ export default memo(function MessagePanel(props: MessagePanelProps) {
 									className={styles.button}
 									onClick={trigger}
 								>
-									<DelightfulIcon size={18} stroke={2} component={IconFileUpload} />
+									<DelightfulIcon
+										size={18}
+										stroke={2}
+										component={IconFileUpload}
+									/>
 									<span>File</span>
 								</MobileButton>
 							)}

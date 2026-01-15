@@ -56,7 +56,7 @@ export default memo(function Share(props: ShareProps) {
 				const newExtraData = {
 					...extraData,
 					passwordEnabled: checked,
-				// Auto-generate password if enabled
+					// Auto-generate password if enabled
 					password: checked ? generateRandomPassword(5) : extraData?.password,
 				}
 				setExtraData(newExtraData)
@@ -70,7 +70,8 @@ export default memo(function Share(props: ShareProps) {
 	const handleResetPassword = useCallback(() => {
 		DelightfulModal.confirm({
 			title: "Notice",
-			content: "After resetting the access password, the previously generated password will become invalid",
+			content:
+				"After resetting the access password, the previously generated password will become invalid",
 			onOk: () => {
 				if (setExtraData) {
 					const newExtraData = {
@@ -126,7 +127,13 @@ export default memo(function Share(props: ShareProps) {
 						size="small"
 						color="primary"
 						variant="outlined"
-						icon={<DelightfulIcon component={IconUserCog} size={16} color="currentColor" />}
+						icon={
+							<DelightfulIcon
+								component={IconUserCog}
+								size={16}
+								color="currentColor"
+							/>
+						}
 						className={styles.departmentOrMemberButton}
 						onClick={(event) => {
 							event.stopPropagation()
@@ -155,7 +162,7 @@ export default memo(function Share(props: ShareProps) {
 								className={styles.copyButton}
 								onClick={handleCopyLink}
 							>
-							Copy Link{extraData?.passwordEnabled ? " and Password" : null}
+								Copy Link{extraData?.passwordEnabled ? " and Password" : null}
 							</DelightfulButton>
 						</div>
 						<Space size={8}>
@@ -164,14 +171,14 @@ export default memo(function Share(props: ShareProps) {
 								checked={extraData?.passwordEnabled}
 								onChange={handlePasswordSwitch}
 							/>
-						<span className={styles.passwordTitle}>Access Password</span>
-						{extraData?.passwordEnabled && (
-							<>
-								<div className={styles.password}>
-									{extraData?.password || ""}
-								</div>
-								<DelightfulButton size="middle" onClick={handleResetPassword}>
-									Reset Password
+							<span className={styles.passwordTitle}>Access Password</span>
+							{extraData?.passwordEnabled && (
+								<>
+									<div className={styles.password}>
+										{extraData?.password || ""}
+									</div>
+									<DelightfulButton size="middle" onClick={handleResetPassword}>
+										Reset Password
 									</DelightfulButton>
 								</>
 							)}

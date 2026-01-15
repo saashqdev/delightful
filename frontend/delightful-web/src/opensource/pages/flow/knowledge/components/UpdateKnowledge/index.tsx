@@ -150,8 +150,3 @@ function UpdateKnowledge({ knowledge, updateKnowledge, initKnowledgeList }: Upda
 }
 
 export default UpdateKnowledge
-
-
-
-
-

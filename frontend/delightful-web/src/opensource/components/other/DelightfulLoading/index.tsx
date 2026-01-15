@@ -10,7 +10,10 @@ interface DelightfulLoadingProps extends DotLottieReactProps {
 	size?: number
 }
 
-const DelightfulLoading = memo(function DelightfulLoading({ section, ...props }: DelightfulLoadingProps) {
+const DelightfulLoading = memo(function DelightfulLoading({
+	section,
+	...props
+}: DelightfulLoadingProps) {
 	return (
 		<DotLottieReact
 			src={section ? url : url}

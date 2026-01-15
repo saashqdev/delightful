@@ -63,8 +63,3 @@ export default function useTabs() {
 		tab,
 	}
 }
-
-
-
-
-

@@ -39,7 +39,12 @@ const DelightfulFunctionLink = memo(({ href, children }: DelightfulFunctionLinkP
 	})
 
 	return (
-		<DelightfulButton type="link" size="small" style={{ display: "inline" }} onClick={handleClick}>
+		<DelightfulButton
+			type="link"
+			size="small"
+			style={{ display: "inline" }}
+			onClick={handleClick}
+		>
 			{children}
 		</DelightfulButton>
 	)

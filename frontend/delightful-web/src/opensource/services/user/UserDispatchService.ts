@@ -37,7 +37,11 @@ const UserDispatchService = {
 		delightfulUserId: string
 		delightfulOrganizationCode: string
 	}) => {
-		await userService.switchAccount(data.delightfulId, data.delightfulUserId, data.delightfulOrganizationCode)
+		await userService.switchAccount(
+			data.delightfulId,
+			data.delightfulUserId,
+			data.delightfulOrganizationCode,
+		)
 	},
 
 	/**

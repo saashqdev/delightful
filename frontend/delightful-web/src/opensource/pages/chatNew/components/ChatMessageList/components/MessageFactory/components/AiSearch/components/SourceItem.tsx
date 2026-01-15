@@ -7,7 +7,9 @@ import { A } from "../../Markdown/EnhanceMarkdown/components/A"
 const useStyles = createStyles(({ css, isDarkMode, token }) => {
 	return {
 		a: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.text[1]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[8]
+				: token.delightfulColorUsages.text[1]};
 		`,
 		date: css`
 			color: ${token.colorTextQuaternary};

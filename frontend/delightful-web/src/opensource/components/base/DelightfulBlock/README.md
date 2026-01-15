@@ -4,10 +4,10 @@
 
 ## Properties
 
-| Property  | Type                           | Default | Description                                         |
-| --------- | ------------------------------ | ------- | --------------------------------------------------- |
-| children  | ReactNode                      | -       | Content displayed inside the block                  |
-| ...props  | HTMLAttributes<HTMLDivElement> | -       | Supports all HTML attributes for the `div` element  |
+| Property | Type                           | Default | Description                                        |
+| -------- | ------------------------------ | ------- | -------------------------------------------------- |
+| children | ReactNode                      | -       | Content displayed inside the block                 |
+| ...props | HTMLAttributes<HTMLDivElement> | -       | Supports all HTML attributes for the `div` element |
 
 ## Basic Usage
 

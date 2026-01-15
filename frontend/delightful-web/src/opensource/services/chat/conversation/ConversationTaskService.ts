@@ -1,4 +1,3 @@
-
 import type { CreateTaskParams, UserTask } from "@/types/chat/task"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import { ChatApi } from "@/apis"
@@ -19,11 +18,11 @@ class ConversationTaskService {
 	getTaskList() {
 		if (!this.agentId) return Promise.resolve()
 
-		return ChatApi
-			.getTaskList({ agent_id: this.agentId, page: 1, page_size: 100 })
-			.then((res) => {
+		return ChatApi.getTaskList({ agent_id: this.agentId, page: 1, page_size: 100 }).then(
+			(res) => {
 				conversationStore.setConversationTaskList(res.list)
-			})
+			},
+		)
 	}
 
 	/**

@@ -13,10 +13,10 @@ export interface PlaceholderProps {
 }
 
 /**
-	 * Rich text editor placeholder component
+ * Rich text editor placeholder component
  *
-	 * Displays hint text when the editor is empty
-	 * Shows different colors based on editor focus state
+ * Displays hint text when the editor is empty
+ * Shows different colors based on editor focus state
  */
 const Placeholder = memo(({ placeholder, show }: PlaceholderProps) => {
 	const { styles } = useStyles()

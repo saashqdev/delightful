@@ -24,7 +24,11 @@ const UploadButton = memo(
 					onClick={onUpload}
 					icon={
 						icon || (
-							<DelightfulIcon color="currentColor" size={20} component={IconFileUpload} />
+							<DelightfulIcon
+								color="currentColor"
+								size={20}
+								component={IconFileUpload}
+							/>
 						)
 					}
 					{...props}

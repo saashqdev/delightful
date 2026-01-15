@@ -71,7 +71,9 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 		`,
 		arrow: css`
 			width: 20px !important;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorUsages.text[2]};
 		`,
 		item: css`
 			width: 100%;
@@ -111,7 +113,9 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 			flex: 1 0 0;
 			display: flex;
 			align-items: center;
-			color: ${isDarkMode ? token.delightfulColorScales.grey[7] : token.delightfulColorScales.grey[5]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[7]
+				: token.delightfulColorScales.grey[5]};
 			font-size: 12px;
 			height: 16px;
 		`,

@@ -74,7 +74,13 @@ const AiHeader = observer(({ conversation, className }: HeaderProps) => {
 					})}
 					tip={t("chat.topic.topic")}
 					type="text"
-					icon={<DelightfulIcon size={20} color="currentColor" component={IconMessageTopic} />}
+					icon={
+						<DelightfulIcon
+							size={20}
+							color="currentColor"
+							component={IconMessageTopic}
+						/>
+					}
 					onClick={topicIconClick}
 				/>
 				<DelightfulButton

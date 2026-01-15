@@ -19,8 +19,3 @@ export default function useCheckType() {
 		isAgent,
 	}
 }
-
-
-
-
-

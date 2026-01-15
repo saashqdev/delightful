@@ -18,7 +18,9 @@ const useStyles = createStyles(
 				fontWeight: 400,
 				lineHeight: "16px",
 				border: `1px solid ${token.colorBorder}`,
-				color: isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3],
+				color: isDarkMode
+					? token.delightfulColorScales.grey[4]
+					: token.delightfulColorUsages.text[3],
 				backgroundColor: token.delightfulColorUsages.nav.bg,
 				// background: isDarkMode
 				// 	? token.delightfulColorScales.grey[6]

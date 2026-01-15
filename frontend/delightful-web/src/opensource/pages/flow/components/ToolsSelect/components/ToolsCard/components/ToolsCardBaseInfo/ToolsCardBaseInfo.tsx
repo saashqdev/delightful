@@ -128,8 +128,3 @@ const ToolsCardBaseInfo = memo(
 )
 
 export default memo(ToolsCardBaseInfo)
-
-
-
-
-

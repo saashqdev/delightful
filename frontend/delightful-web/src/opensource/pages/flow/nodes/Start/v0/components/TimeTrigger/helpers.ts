@@ -26,7 +26,7 @@ export const getDefaultTimeTriggerBranches = () => {
 					type: "object",
 					key: "root",
 					sort: 0,
-						title: "root node",
+					title: "root node",
 					description: "",
 					required: ["trigger_time"],
 					value: null,
@@ -57,7 +57,7 @@ export const getDefaultTimeTriggerBranches = () => {
 					type: "object",
 					key: "root",
 					sort: 0,
-						title: "root node",
+					title: "root node",
 					description: "",
 					required: ["trigger_time"],
 					value: null,
@@ -82,8 +82,3 @@ export const getDefaultTimeTriggerBranches = () => {
 }
 
 export default {}
-
-
-
-
-

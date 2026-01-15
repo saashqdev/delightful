@@ -7,6 +7,7 @@ Based on in-depth analysis of the `EnhanceMarkdown` component, this report ident
 ## 🔍 componentarchitectureanalyze
 
 ### corecomponentstructure
+
 ```
 EnhanceMarkdown
 ├── useFontSize (font size hook)
@@ -24,12 +25,14 @@ EnhanceMarkdown
 ### 1. PreprocessService preprocessphase (🔴 highaffecting)
 
 **issuesanalyze:**
-- Complex regex operations, especially for large text blocks
-- Multiple string replace and split operations
-- LaTeX formula handling requires large number of regex matches
-- tasklisthandleinvolvescomplexnested logic
+
+-   Complex regex operations, especially for large text blocks
+-   Multiple string replace and split operations
+-   LaTeX formula handling requires large number of regex matches
+-   tasklisthandleinvolvescomplexnested logic
 
 **time-consuminganalyze:**
+
 ```typescript
 // maintime-consumingoperations
 splitBlockCode() // ~5-15ms (largedocumentation)
@@ -39,179 +42,187 @@ Quote block detection // ~1-3ms
 ```
 
 **optimizationrecommendations:**
-```typescript
+
+````typescript
 // 1. usagecacheavoidrepeated processing
 const preprocessCache = new Map<string, string[]>()
 
 const cachedPreprocess = useMemo(() => {
-  return (content: string) => {
-    const cacheKey = `${content.slice(0, 100)}-${content.length}`
-    if (preprocessCache.has(cacheKey)) {
-      return preprocessCache.get(cacheKey)!
-    }
-    
-    const result = PreprocessService.preprocess(content, optionss)
-    preprocessCache.set(cacheKey, result)
-    return result
-  }
+	return (content: string) => {
+		const cacheKey = `${content.slice(0, 100)}-${content.length}`
+		if (preprocessCache.has(cacheKey)) {
+			return preprocessCache.get(cacheKey)!
+		}
+
+		const result = PreprocessService.preprocess(content, optionss)
+		preprocessCache.set(cacheKey, result)
+		return result
+	}
 }, [optionss])
 
 // 2. Optimize regex expression performance
 const optimizedRegex = {
-  // Use more efficient regex expression
-  codeBlock: /```([a-zA-Z0-9_-]*)\s*\n([\s\S]*?)```/g,
-  inlineMath: /\$([^$\n]+)\$/g, // simplifiedmathematicalformulamatches
-  blockMath: /\$\$\s*\n([\s\S]*?)\n\s*\$\$/g
+	// Use more efficient regex expression
+	codeBlock: /```([a-zA-Z0-9_-]*)\s*\n([\s\S]*?)```/g,
+	inlineMath: /\$([^$\n]+)\$/g, // simplifiedmathematicalformulamatches
+	blockMath: /\$\$\s*\n([\s\S]*?)\n\s*\$\$/g,
 }
 
 // 3. chunkinghandlelargedocumentation
 function processLargeContent(content: string, chunkSize = 5000) {
-  if (content.length <= chunkSize) {
-    return PreprocessService.preprocess(content)
-  }
-  
-  // by paragraphchunkinghandle
-  const chunks = content.split('\n\n')
-  return chunks.map(chunk => PreprocessService.preprocess(chunk)).flat()
+	if (content.length <= chunkSize) {
+		return PreprocessService.preprocess(content)
+	}
+
+	// by paragraphchunkinghandle
+	const chunks = content.split("\n\n")
+	return chunks.map((chunk) => PreprocessService.preprocess(chunk)).flat()
 }
-```
+````
 
 ### 2. useMarkdownConfig Hook (🟡 Moderate Impact)
 
 **Issue Analysis:**
-- Large number of `useMemo` dependencies might cause excessive recalculations
-- componentoverrideconfiguration creates complexity
-- Every time props change will rebuild configuration
+
+-   Large number of `useMemo` dependencies might cause excessive recalculations
+-   componentoverrideconfiguration creates complexity
+-   Every time props change will rebuild configuration
 
 **optimizationrecommendations:**
+
 ```typescript
 // 1. stabilizecomponentconfiguration
 const stableBaseOverrides = useMemo(() => {
-  // extract unchangingcomponentconfigurationto outside component
-  return {
-    a: { component: a },
-    blockquote: { component: Blockquote },
-    // ... other unchangingconfiguration
-  }
+	// extract unchangingcomponentconfigurationto outside component
+	return {
+		a: { component: a },
+		blockquote: { component: Blockquote },
+		// ... other unchangingconfiguration
+	}
 }, []) // emptydependencyarray
 
 // 2. optimization LaTeX componentrender
 const MemoizedLatexInline = memo(({ math }: { math: string }) => {
-  const decodedMath = useMemo(() => 
-    math.replace(/&amp;/g, "&")
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'")
-        .replace(/&lt;/g, "<")
-        .replace(/&gt;/g, ">"),
-    [math]
-  )
-  
-  return <KaTeX math={decodedMath} inline={true} />
+	const decodedMath = useMemo(
+		() =>
+			math
+				.replace(/&amp;/g, "&")
+				.replace(/&quot;/g, '"')
+				.replace(/&#39;/g, "'")
+				.replace(/&lt;/g, "<")
+				.replace(/&gt;/g, ">"),
+		[math],
+	)
+
+	return <KaTeX math={decodedMath} inline={true} />
 })
 
 // 3. Reduce configuration rebuild frequency
 const options = useMemo<MarkdownToJSX.Options>(() => {
-  return {
-    overrides,
-    forceWrapper: true,
-    disableParsingRawHTML: !allowHtml
-  }
+	return {
+		overrides,
+		forceWrapper: true,
+		disableParsingRawHTML: !allowHtml,
+	}
 }, [overrides, allowHtml]) // Reduce dependency items
 ```
 
 ### 3. useTyping Streaming Render (🟡 Moderate Impact)
 
 **Issue Analysis:**
-- Frequent status updates cause multiple re-renders
-- animation effectsmightaffectingperformance
-- stringconcatenationoperationsrelativelymany
+
+-   Frequent status updates cause multiple re-renders
+-   animation effectsmightaffectingperformance
+-   stringconcatenationoperationsrelativelymany
 
 **optimizationrecommendations:**
+
 ```typescript
 // 1. usage requestIdleCallback optimizationupdate frequency
 const optimizedTyping = useCallback((text: string) => {
-  const updateChunks = []
-  for (let i = 0; i < text.length; i += 10) {
-    updateChunks.push(text.slice(i, i + 10))
-  }
-  
-  const processChunk = (index: number) => {
-    if (index >= updateChunks.length) return
-    
-    setContent(prev => prev + updateChunks[index])
-    
-    // usage requestIdleCallback avoidblocking main thread
-    requestIdleCallback(() => {
-      processChunk(index + 1)
-    })
-  }
-  
-  processChunk(0)
+	const updateChunks = []
+	for (let i = 0; i < text.length; i += 10) {
+		updateChunks.push(text.slice(i, i + 10))
+	}
+
+	const processChunk = (index: number) => {
+		if (index >= updateChunks.length) return
+
+		setContent((prev) => prev + updateChunks[index])
+
+		// usage requestIdleCallback avoidblocking main thread
+		requestIdleCallback(() => {
+			processChunk(index + 1)
+		})
+	}
+
+	processChunk(0)
 }, [])
 
 // 2. batchupdatedecreaseheavyrender
 const batchedTyping = useCallback((text: string) => {
-  // usage unstable_batchedUpdates batchupdate
-  unstable_batchedUpdates(() => {
-    setContent(text)
-    setTyping(false)
-  })
+	// usage unstable_batchedUpdates batchupdate
+	unstable_batchedUpdates(() => {
+		setContent(text)
+		setTyping(false)
+	})
 }, [])
 
 // 3. Virtualize long text
 const VirtualizedMarkdown = memo(({ content }: { content: string }) => {
-  const chunks = useMemo(() => {
-    // Chunk long text, only render visible part
-    return content.split('\n\n').map((chunk, index) => ({
-      id: index,
-      content: chunk
-    }))
-  }, [content])
-  
-  return (
-    <VirtualList 
-      items={chunks}
-      renderItem={({ content }) => <EnhanceMarkdown content={content} />}
-    />
-  )
+	const chunks = useMemo(() => {
+		// Chunk long text, only render visible part
+		return content.split("\n\n").map((chunk, index) => ({
+			id: index,
+			content: chunk,
+		}))
+	}, [content])
+
+	return (
+		<VirtualList
+			items={chunks}
+			renderItem={({ content }) => <EnhanceMarkdown content={content} />}
+		/>
+	)
 })
 ```
 
 ### 4. Markdown-to-JSX render (🔴 highaffecting)
 
 **issuesanalyze:**
-- large number of DOM nodecreate
-- complexsyntaxhighlightinghandle
-- tableandlistrenderrelativelyslow
+
+-   large number of DOM nodecreate
+-   complexsyntaxhighlightinghandle
+-   tableandlistrenderrelativelyslow
 
 **optimizationrecommendations:**
+
 ```typescript
 // 1. usage React.memo andprecisedependency
 const OptimizedMarkdown = memo(Markdown, (prevProps, nextProps) => {
-  return prevProps.children === nextProps.children &&
-         prevProps.className === nextProps.className
+	return prevProps.children === nextProps.children && prevProps.className === nextProps.className
 })
 
 // 2. codeblocklazy loading
-const LazyCodeBlock = lazy(() => import('./CodeBlock'))
+const LazyCodeBlock = lazy(() => import("./CodeBlock"))
 
 const CodeBlockWithSuspense = ({ children, ...props }: any) => (
-  <Suspense fallback={<div>Loading code...</div>}>
-    <LazyCodeBlock {...props}>{children}</LazyCodeBlock>
-  </Suspense>
+	<Suspense fallback={<div>Loading code...</div>}>
+		<LazyCodeBlock {...props}>{children}</LazyCodeBlock>
+	</Suspense>
 )
 
 // 3. virtual scrollinglargelist
 const VirtualizedList = ({ items }: { items: any[] }) => {
-  const [visibleRange, setVisibleRange] = useState({ start: 0, end: 50 })
-  
-  return (
-    <div onScroll={handleScroll}>
-      {items.slice(visibleRange.start, visibleRange.end).map(item => (
-        <ListItem key={item.id} {...item} />
-      ))}
-    </div>
-  )
+	const [visibleRange, setVisibleRange] = useState({ start: 0, end: 50 })
+
+	return (
+		<div onScroll={handleScroll}>
+			{items.slice(visibleRange.start, visibleRange.end).map((item) => (
+				<ListItem key={item.id} {...item} />
+			))}
+		</div>
+	)
 }
 ```
 
@@ -219,82 +230,97 @@ const VirtualizedList = ({ items }: { items: any[] }) => {
 
 ### optimizationfrontbackcomparison (estimated values)
 
-| testscenario | optimizationfront | optimizationback | improvementratio |
-|---------|--------|--------|----------|
-| simple text | 15ms | 8ms | 47% |
-| codeblock | 35ms | 20ms | 43% |
-| largedocumentation | 150ms | 80ms | 47% |
-| streamingupdate | 25ms | 12ms | 52% |
-| LaTeX formula | 40ms | 22ms | 45% |
+| testscenario       | optimizationfront | optimizationback | improvementratio |
+| ------------------ | ----------------- | ---------------- | ---------------- |
+| simple text        | 15ms              | 8ms              | 47%              |
+| codeblock          | 35ms              | 20ms             | 43%              |
+| largedocumentation | 150ms             | 80ms             | 47%              |
+| streamingupdate    | 25ms              | 12ms             | 52%              |
+| LaTeX formula      | 40ms              | 22ms             | 45%              |
 
 ## 🛠️ specificoptimizationimplementation plan
 
 ### Phase 1: preprocessoptimization (immediate implementation)
 
-```typescript
+````typescript
 // 1. addpreprocesscache
 const PreprocessCache = new Map<string, string[]>()
 
 // 2. Optimize regex expression
 const OPTIMIZED_REGEXES = {
-  codeBlock: /```(\w*)\n([\s\S]*?)```/g,
-  inlineMath: /\$([^$\n]+)\$/g,
-  blockMath: /\$\$\n([\s\S]+?)\n\$\$/g
+	codeBlock: /```(\w*)\n([\s\S]*?)```/g,
+	inlineMath: /\$([^$\n]+)\$/g,
+	blockMath: /\$\$\n([\s\S]+?)\n\$\$/g,
 }
 
 // 3. chunkinghandle
 function processInChunks(content: string) {
-  const CHUNK_SIZE = 5000
-  if (content.length <= CHUNK_SIZE) {
-    return processContent(content)
-  }
-  
-  return content.split('\n\n')
-    .reduce((chunks, paragraph) => {
-      const lastChunk = chunks[chunks.length - 1]
-      if (lastChunk && lastChunk.length + paragraph.length <= CHUNK_SIZE) {
-        chunks[chunks.length - 1] += '\n\n' + paragraph
-      } else {
-        chunks.push(paragraph)
-      }
-      return chunks
-    }, [] as string[])
-    .map(processContent)
-    .flat()
+	const CHUNK_SIZE = 5000
+	if (content.length <= CHUNK_SIZE) {
+		return processContent(content)
+	}
+
+	return content
+		.split("\n\n")
+		.reduce((chunks, paragraph) => {
+			const lastChunk = chunks[chunks.length - 1]
+			if (lastChunk && lastChunk.length + paragraph.length <= CHUNK_SIZE) {
+				chunks[chunks.length - 1] += "\n\n" + paragraph
+			} else {
+				chunks.push(paragraph)
+			}
+			return chunks
+		}, [] as string[])
+		.map(processContent)
+		.flat()
 }
-```
+````
 
 ### Phase 2: Component Level Optimization (Mid-term Implementation)
 
 ```typescript
 // 1. componentmemoization
 const MemoizedEnhanceMarkdown = memo(EnhanceMarkdown, (prev, next) => {
-  return prev.content === next.content &&
-         prev.isStreaming === next.isStreaming &&
-         prev.hiddenDetail === next.hiddenDetail
+	return (
+		prev.content === next.content &&
+		prev.isStreaming === next.isStreaming &&
+		prev.hiddenDetail === next.hiddenDetail
+	)
 })
 
 // 2. Hook optimization
 const useOptimizedMarkdownConfig = (props: MarkdownProps) => {
-  const stableOptions = useMemo(() => ({
-    // stableconfigurationoptions
-  }), [])
-  
-  const dynamicOptions = useMemo(() => ({
-    // dynamicconfigurationoptions
-  }), [props.allowHtml, props.enableLatex])
-  
-  return useMemo(() => ({
-    ...stableOptions,
-    ...dynamicOptions
-  }), [stableOptions, dynamicOptions])
+	const stableOptions = useMemo(
+		() => ({
+			// stableconfigurationoptions
+		}),
+		[],
+	)
+
+	const dynamicOptions = useMemo(
+		() => ({
+			// dynamicconfigurationoptions
+		}),
+		[props.allowHtml, props.enableLatex],
+	)
+
+	return useMemo(
+		() => ({
+			...stableOptions,
+			...dynamicOptions,
+		}),
+		[stableOptions, dynamicOptions],
+	)
 }
 
 // 3. Batch updates
 const useBatchedUpdates = (callback: Function) => {
-  return useCallback((...args: any[]) => {
-    unstable_batchedUpdates(() => callback(...args))
-  }, [callback])
+	return useCallback(
+		(...args: any[]) => {
+			unstable_batchedUpdates(() => callback(...args))
+		},
+		[callback],
+	)
 }
 ```
 
@@ -302,57 +328,57 @@ const useBatchedUpdates = (callback: Function) => {
 
 ```typescript
 // 1. Web Workers handle complex documents
-const preprocessWorker = new Worker('/preprocess-worker.js')
+const preprocessWorker = new Worker("/preprocess-worker.js")
 
 const useWorkerPreprocess = (content: string) => {
-  const [result, setResult] = useState<string[]>([])
-  
-  useEffect(() => {
-    if (content.length > 10000) {
-      preprocessWorker.postMessage({ content })
-      preprocessWorker.onmessage = (e) => setResult(e.data)
-    } else {
-      setResult(PreprocessService.preprocess(content))
-    }
-  }, [content])
-  
-  return result
+	const [result, setResult] = useState<string[]>([])
+
+	useEffect(() => {
+		if (content.length > 10000) {
+			preprocessWorker.postMessage({ content })
+			preprocessWorker.onmessage = (e) => setResult(e.data)
+		} else {
+			setResult(PreprocessService.preprocess(content))
+		}
+	}, [content])
+
+	return result
 }
 
 // 2. incrementalupdate
 const useIncrementalRendering = (content: string) => {
-  const [renderedContent, setRenderedContent] = useState('')
-  const timeoutRef = useRef<NodeJS.Timeout>()
-  
-  useEffect(() => {
-    // clear previous timers
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-    }
-    
-    // incrementalrender
-    const renderIncrementally = (index: number = 0) => {
-      const CHUNK_SIZE = 1000
-      const chunk = content.slice(index, index + CHUNK_SIZE)
-      
-      if (chunk) {
-        setRenderedContent(prev => prev + chunk)
-        timeoutRef.current = setTimeout(() => {
-          renderIncrementally(index + CHUNK_SIZE)
-        }, 16) // approximately60fps
-      }
-    }
-    
-    renderIncrementally()
-    
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-    }
-  }, [content])
-  
-  return renderedContent
+	const [renderedContent, setRenderedContent] = useState("")
+	const timeoutRef = useRef<NodeJS.Timeout>()
+
+	useEffect(() => {
+		// clear previous timers
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current)
+		}
+
+		// incrementalrender
+		const renderIncrementally = (index: number = 0) => {
+			const CHUNK_SIZE = 1000
+			const chunk = content.slice(index, index + CHUNK_SIZE)
+
+			if (chunk) {
+				setRenderedContent((prev) => prev + chunk)
+				timeoutRef.current = setTimeout(() => {
+					renderIncrementally(index + CHUNK_SIZE)
+				}, 16) // approximately60fps
+			}
+		}
+
+		renderIncrementally()
+
+		return () => {
+			if (timeoutRef.current) {
+				clearTimeout(timeoutRef.current)
+			}
+		}
+	}, [content])
+
+	return renderedContent
 }
 ```
 
@@ -363,46 +389,47 @@ const useIncrementalRendering = (content: string) => {
 ```typescript
 // performance-monitor.ts
 export class MarkdownPerformanceMonitor {
-  private static metrics: Map<string, number[]> = new Map()
-  
-  static startMeasure(name: string): () => void {
-    const start = performance.now()
-    return () => {
-      const duration = performance.now() - start
-      const existing = this.metrics.get(name) || []
-      existing.push(duration)
-      this.metrics.set(name, existing)
-      
-      // send to analytics platform
-      if (duration > 50) { // exceeding 50msoperations
-        console.warn(`Slow operations detected: ${name} took ${duration}ms`)
-      }
-    }
-  }
-  
-  static getReport() {
-    const report: Record<string, any> = {}
-    this.metrics.forEach((values, name) => {
-      report[name] = {
-        count: values.length,
-        avg: values.reduce((a, b) => a + b, 0) / values.length,
-        max: Math.max(...values),
-        min: Math.min(...values)
-      }
-    })
-    return report
-  }
+	private static metrics: Map<string, number[]> = new Map()
+
+	static startMeasure(name: string): () => void {
+		const start = performance.now()
+		return () => {
+			const duration = performance.now() - start
+			const existing = this.metrics.get(name) || []
+			existing.push(duration)
+			this.metrics.set(name, existing)
+
+			// send to analytics platform
+			if (duration > 50) {
+				// exceeding 50msoperations
+				console.warn(`Slow operations detected: ${name} took ${duration}ms`)
+			}
+		}
+	}
+
+	static getReport() {
+		const report: Record<string, any> = {}
+		this.metrics.forEach((values, name) => {
+			report[name] = {
+				count: values.length,
+				avg: values.reduce((a, b) => a + b, 0) / values.length,
+				max: Math.max(...values),
+				min: Math.min(...values),
+			}
+		})
+		return report
+	}
 }
 
 // atcomponentinusage
 const EnhanceMarkdown = memo((props: MarkdownProps) => {
-  const endMeasure = MarkdownPerformanceMonitor.startMeasure('EnhanceMarkdown-render')
-  
-  useEffect(() => {
-    return endMeasure
-  })
-  
-  // ... componentlogic
+	const endMeasure = MarkdownPerformanceMonitor.startMeasure("EnhanceMarkdown-render")
+
+	useEffect(() => {
+		return endMeasure
+	})
+
+	// ... componentlogic
 })
 ```
 
@@ -415,4 +442,4 @@ throughimplementing aboveoptimizationapproach，expectedcan achieve：
 3. **streamingrendersmoother**
 4. **largedocumentationhandling capabilityenhancement**
 
-Recommendations: gradually implement optimization according to three phases, and validate optimization effectiveness through performance monitoring. Focus on preprocessing phase and component memoization optimization - these two aspects can bring the most significant performance improvements. 
+Recommendations: gradually implement optimization according to three phases, and validate optimization effectiveness through performance monitoring. Focus on preprocessing phase and component memoization optimization - these two aspects can bring the most significant performance improvements.

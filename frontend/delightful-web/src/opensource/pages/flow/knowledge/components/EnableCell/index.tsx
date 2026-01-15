@@ -30,8 +30,3 @@ export default function EnableCell({
 
 	return <Switch checked={enabled} onChange={updateEnableStatus} disabled={disabled} />
 }
-
-
-
-
-

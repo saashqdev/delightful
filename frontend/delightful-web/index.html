@@ -1,11 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg?t=20250417" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-		<meta name="google" content="notranslate">
-		<title>Delightful (Delightful) - Next-generation enterprise AI application innovation engine</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+		/>
+		<meta name="google" content="notranslate" />
+		<title>
+			Delightful (Delightful) - Next-generation enterprise AI application innovation engine
+		</title>
 		<script type="module" src="/config.js"></script>
 		<!-- DingTalk Login -->
 		<script src="https://g.alicdn.com/dingding/h5-dingtalk-login/0.21.0/ddlogin.js"></script>
@@ -13,36 +18,48 @@
 		<script src="https://lf-package-cn.feishucdn.com/obj/feishu-static/lark/passport/qrcode/LarkSSOSDKWebQRCode-1.0.3.js"></script>
 		<script>
 			// Environment detection and conditional SDK loading
-			var userAgent = navigator.userAgent || '';
-			var isDingtalk = /dingtalk/.test(userAgent?.toLowerCase?.());
-			var isLark = /lark/.test(userAgent?.toLowerCase?.());
-			var isWeWork = /wxwork/.test(userAgent);
+			var userAgent = navigator.userAgent || ""
+			var isDingtalk = /dingtalk/.test(userAgent?.toLowerCase?.())
+			var isLark = /lark/.test(userAgent?.toLowerCase?.())
+			var isWeWork = /wxwork/.test(userAgent)
 
 			// Generic function to dynamically load SDKs
 			function loadScript(src, onSuccess, onError) {
-				const script = document.createElement('script');
-				script.src = src;
-				script.onload = onSuccess || function() {};
-				script.onerror = onError || function() {
-					console.error('Failed to load script:', src);
-				};
-				document.head.appendChild(script);
+				const script = document.createElement("script")
+				script.src = src
+				script.onload = onSuccess || function () {}
+				script.onerror =
+					onError ||
+					function () {
+						console.error("Failed to load script:", src)
+					}
+				document.head.appendChild(script)
 			}
 
 			if (isDingtalk) {
 				<!-- DingTalk JS SDK -->
-				loadScript('https://g.alicdn.com/dingding/dingtalk-jsapi/3.0.42/dingtalk.open.js',
-					function() { console.log('DingTalk SDK loaded successfully'); },
-					function() { console.error('Failed to load DingTalk SDK'); }
-				);
+				loadScript(
+					"https://g.alicdn.com/dingding/dingtalk-jsapi/3.0.42/dingtalk.open.js",
+					function () {
+						console.log("DingTalk SDK loaded successfully")
+					},
+					function () {
+						console.error("Failed to load DingTalk SDK")
+					},
+				)
 			}
 
 			if (isLark) {
 				<!-- Feishu JS SDK -->
-				loadScript('https://lf-scm-cn.feishucdn.com/lark/op/h5-js-sdk-1.5.35.js',
-					function() { console.log('Feishu SDK loaded successfully'); },
-					function() { console.error('Failed to load Feishu SDK'); }
-				);
+				loadScript(
+					"https://lf-scm-cn.feishucdn.com/lark/op/h5-js-sdk-1.5.35.js",
+					function () {
+						console.log("Feishu SDK loaded successfully")
+					},
+					function () {
+						console.error("Failed to load Feishu SDK")
+					},
+				)
 			}
 		</script>
 		<script>
@@ -54,15 +71,15 @@
 			}
 			if (searchParams.get("debug") === "true" || sessionStorage.getItem("debug")) {
 				// Dynamically load vconsole.min.js
-				const script = document.createElement('script');
-				script.src = '/vconsole.min.js';
-				script.onload = function() {
-					new VConsole();
-				};
-				script.onerror = function() {
-					console.error("Failed to load VConsole");
-				};
-				document.head.appendChild(script);
+				const script = document.createElement("script")
+				script.src = "/vconsole.min.js"
+				script.onload = function () {
+					new VConsole()
+				}
+				script.onerror = function () {
+					console.error("Failed to load VConsole")
+				}
+				document.head.appendChild(script)
 			}
 		</script>
 	</head>

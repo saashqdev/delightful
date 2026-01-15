@@ -34,7 +34,7 @@ export abstract class AbstractBaseRepository<T> {
 		const table = await this.getTable()
 		try {
 			await table.put(data)
-		} catch(error){
+		} catch (error) {
 			console.log("-----", data)
 			console.error(error)
 		}

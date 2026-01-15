@@ -10,7 +10,9 @@ const useStyles = createStyles(({ isDarkMode, token, css }) => {
 			minHeight: `calc(100vh - ${token.titleBarHeight}px)`,
 			width: "100%",
 			padding: "10px 12px",
-			background: isDarkMode ? token.delightfulColorUsages.bg[0] : token.delightfulColorUsages.white,
+			background: isDarkMode
+				? token.delightfulColorUsages.bg[0]
+				: token.delightfulColorUsages.white,
 			borderRight: `1px solid ${token.colorBorder}`,
 			position: "relative",
 			userSelect: "none",

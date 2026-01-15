@@ -308,7 +308,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							tools,
 						}
 					})
-						// Update tool count in the toolset
+					// Update tool count in the toolset
 					mutate((currentData: CurrentDataType) => {
 						const updatedData = currentData?.map((page) => {
 							const list = page?.list.map((item: DelightfulFlow.Flow) => {
@@ -331,7 +331,9 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 						if (!currentData) return currentData
 						const updatedData = currentData?.map((page) => ({
 							...page,
-							list: page?.list.filter((item: DelightfulFlow.Flow) => item.id !== flow.id),
+							list: page?.list.filter(
+								(item: DelightfulFlow.Flow) => item.id !== flow.id,
+							),
 						}))
 						updatedData[0].total -= 1 // Update total count
 						return updatedData
@@ -405,12 +407,12 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 		}, false)
 	})
 
-		// Update current card and list info
+	// Update current card and list info
 	const updateFlowOrTool = useMemoizedFn((flow, isTool = false, update = false) => {
-			// Tools
+		// Tools
 		if (isTool) {
 			if (update) {
-					// Update
+				// Update
 				setCurrentFlow(
 					(prev: FlowWithTools | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
 						return {
@@ -452,8 +454,8 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 				}, false)
 			}
 		} else {
-				// Flows (subflows/toolsets)
-				// Update current flow
+			// Flows (subflows/toolsets)
+			// Update current flow
 			setCurrentFlow((prev: FlowWithTools | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
 				return {
 					...prev,
@@ -486,7 +488,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 	// 	message.success(`${t("chat.copy")} ${t("flow.apiKey.success")}`)
 	// })
 
-		/** Go to vector knowledge base details */
+	/** Go to vector knowledge base details */
 	const goToKnowledgeDetail = useMemoizedFn((code: string) => {
 		navigate(`${RoutePath.VectorKnowledgeDetail}?code=${code}`)
 	})
@@ -500,7 +502,11 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							<DelightfulButton
 								justify="flex-start"
 								icon={
-									<DelightfulIcon component={IconEye} size={20} color="currentColor" />
+									<DelightfulIcon
+										component={IconEye}
+										size={20}
+										color="currentColor"
+									/>
 								}
 								size="large"
 								type="text"
@@ -515,7 +521,13 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					{hasEditRight(flow.user_operation) && (
 						<DelightfulButton
 							justify="flex-start"
-							icon={<DelightfulIcon component={IconEdit} size={20} color="currentColor" />}
+							icon={
+								<DelightfulIcon
+									component={IconEdit}
+									size={20}
+									color="currentColor"
+								/>
+							}
 							size="large"
 							type="text"
 							block
@@ -531,7 +543,11 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 						<DelightfulButton
 							justify="flex-start"
 							icon={
-								<DelightfulIcon component={IconTrash} size={20} color="currentColor" />
+								<DelightfulIcon
+									component={IconTrash}
+									size={20}
+									color="currentColor"
+								/>
 							}
 							size="large"
 							type="text"
@@ -564,7 +580,11 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							<DelightfulButton
 								justify="flex-start"
 								icon={
-									<DelightfulIcon component={IconKey} size={20} color="currentColor" />
+									<DelightfulIcon
+										component={IconKey}
+										size={20}
+										color="currentColor"
+									/>
 								}
 								size="large"
 								type="text"
@@ -576,7 +596,9 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					)}
 					<DelightfulButton
 						justify="flex-start"
-						icon={<DelightfulIcon component={IconEdit} size={20} color="currentColor" />}
+						icon={
+							<DelightfulIcon component={IconEdit} size={20} color="currentColor" />
+						}
 						size="large"
 						type="text"
 						block
@@ -610,7 +632,11 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 						<DelightfulButton
 							justify="flex-start"
 							icon={
-								<DelightfulIcon component={IconTrash} size={20} color="currentColor" />
+								<DelightfulIcon
+									component={IconTrash}
+									size={20}
+									color="currentColor"
+								/>
 							}
 							size="large"
 							type="text"
@@ -632,10 +658,10 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 	const handleCardClick = useMemoizedFn(
 		(flow: DelightfulFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
 			// Click vector knowledge base card to go directly to details
-		if (flowType === FlowRouteType.VectorKnowledge && flow.code) {
-			return goToKnowledgeDetail(flow.code)
-		}
-		const checked = currentFlow?.id === flow.id
+			if (flowType === FlowRouteType.VectorKnowledge && flow.code) {
+				return goToKnowledgeDetail(flow.code)
+			}
+			const checked = currentFlow?.id === flow.id
 			if (checked) {
 				resetCurrentFlow()
 				closeExpandPanel()
@@ -709,8 +735,3 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 		mcpEventListener,
 	}
 }
-
-
-
-
-

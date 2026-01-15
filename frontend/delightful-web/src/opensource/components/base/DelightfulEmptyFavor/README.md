@@ -4,8 +4,8 @@ DelightfulEmptyFavor is a component for displaying empty favorites state. When a
 
 ## Props
 
-| Prop | Type   | Default | Description                                              |
-| ---- | ------ | ------- | -------------------------------------------------------- |
+| Prop | Type   | Default | Description                                                    |
+| ---- | ------ | ------- | -------------------------------------------------------------- |
 | text | string | -       | Custom text to display; uses default i18n text if not provided |
 
 ## Basic Usage

@@ -40,8 +40,3 @@ export default function ModeSelect({ value, onChange }: ModeSelectProps) {
 		</Flex>
 	)
 }
-
-
-
-
-

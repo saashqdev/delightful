@@ -29,7 +29,7 @@ const RichText = memo(
 		const handleClickOn = useMemoizedFn((view, pos, node, nodePos, event, direct) => {
 			if (node.type.name === "image" || node.type.name === "delightful-emoji") {
 				event.preventDefault()
-			// Commented out: fix image unable to trigger click event after clicking
+				// Commented out: fix image unable to trigger click event after clicking
 				// event.stopPropagation()
 				return false
 			}
@@ -85,7 +85,7 @@ const RichText = memo(
 							mousedown: (_, event) => {
 								if (event.target instanceof HTMLImageElement) {
 									event.preventDefault()
-								// Commented out: Fix for image click event not firing after click
+									// Commented out: Fix for image click event not firing after click
 									// event.stopPropagation()
 									return true
 								}
@@ -94,7 +94,7 @@ const RichText = memo(
 							click: (_, event) => {
 								if (event.target instanceof HTMLImageElement) {
 									event.preventDefault()
-								// Commented out: Fix for image click event not firing after click
+									// Commented out: Fix for image click event not firing after click
 									// event.stopPropagation()
 									return true
 								}
@@ -121,12 +121,12 @@ const RichText = memo(
 			}
 		}, [content, finalSchema, handleClickOn, hiddenDetail, messageId])
 
-	// // Content update handler
-	// useEffect(() => {
-	// 	if (!editorViewRef.current || !content) return
-	// 	console.log("content update 2=====> ", content)
-	// 	try {
-	// 		// Create new EditorState instead of partial update to avoid type mismatch issues
+		// // Content update handler
+		// useEffect(() => {
+		// 	if (!editorViewRef.current || !content) return
+		// 	console.log("content update 2=====> ", content)
+		// 	try {
+		// 		// Create new EditorState instead of partial update to avoid type mismatch issues
 		// 		const newState = EditorState.create({
 		// 			doc: Node.fromJSON(finalSchema, content),
 		// 			schema: finalSchema,

@@ -11,8 +11,3 @@ export type ToolSelectedItem = {
 	name?: string
 	description?: string
 }
-
-
-
-
-

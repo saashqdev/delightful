@@ -130,8 +130,3 @@ export default function Branch() {
 
 	return <div className={styles.branch}>{BranchList}</div>
 }
-
-
-
-
-

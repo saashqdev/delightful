@@ -261,7 +261,8 @@ export const extractCommands = (content: string): { updatedContent: string; comm
 			if (command.type === "confirmOperation") {
 				console.log("found confirmation operation command:", command)
 				// replace text with confirmation prompt instead of"collecting command data"
-				const confirmMessage = command.message || "please confirm if you want to execute this operation?"
+				const confirmMessage =
+					command.message || "please confirm if you want to execute this operation?"
 				updatedContent = updatedContent.replace(fullMatch, `${confirmMessage}`)
 
 				// specially mark confirmation operation command
@@ -320,10 +321,3 @@ export const extractStatusInline = (content: string): string => {
 
 	return updatedContent
 }
-
-
-
-
-
-
-

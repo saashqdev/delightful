@@ -61,7 +61,7 @@ app.get("/config.js", (req, res) => {
 		"DELIGHTFUL_KEEWOOD_WEB_URL",
 		"DELIGHTFUL_APP_VERSION",
 		"DELIGHTFUL_APP_SHA",
-		"DELIGHTFUL_EDITION"
+		"DELIGHTFUL_EDITION",
 	]
 
 	const isSafeEnvironmentVariable = (key) => {

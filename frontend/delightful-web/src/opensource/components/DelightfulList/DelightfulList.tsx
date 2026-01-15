@@ -9,8 +9,9 @@ import type { DelightfulListItemProps } from "./DelightfulListItem"
 import DelightfulListItem from "./DelightfulListItem"
 import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 
-export interface DelightfulListProps<R extends DelightfulListItemItemType = DelightfulListItemItemType>
-	extends Omit<FlexProps, "children"> {
+export interface DelightfulListProps<
+	R extends DelightfulListItemItemType = DelightfulListItemItemType,
+> extends Omit<FlexProps, "children"> {
 	items?: (string | R)[]
 	emptyProps?: EmptyProps
 	active?: string | ((item: R, index: number) => boolean)

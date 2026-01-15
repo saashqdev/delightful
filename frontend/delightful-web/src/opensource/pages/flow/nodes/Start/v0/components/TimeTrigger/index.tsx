@@ -227,8 +227,3 @@ const TimeTrigger = ({ branchId }: TimeTriggeredProps) => {
 }
 
 export default TimeTrigger
-
-
-
-
-

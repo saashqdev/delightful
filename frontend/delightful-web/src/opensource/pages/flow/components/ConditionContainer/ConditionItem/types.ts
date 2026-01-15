@@ -12,8 +12,3 @@ export type ConditionItemProps = {
 	dataTemplate: Record<string, Sheet.Detail>
 	isSupportRowId: boolean
 }
-
-
-
-
-

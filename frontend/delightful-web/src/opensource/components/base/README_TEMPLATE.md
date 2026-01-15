@@ -4,11 +4,11 @@
 
 ## Props
 
-| Property   | Type     | Default    | Description   |
-| ---------- | -------- | ---------- | ------------- |
-| [property1] | [type]   | [default]  | [description] |
-| [property2] | [type]   | [default]  | [description] |
-| ...        | ...      | ...        | ...           |
+| Property    | Type   | Default   | Description   |
+| ----------- | ------ | --------- | ------------- |
+| [property1] | [type] | [default] | [description] |
+| [property2] | [type] | [default] | [description] |
+| ...         | ...    | ...       | ...           |
 
 ## Basic Usage
 

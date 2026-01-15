@@ -4,12 +4,12 @@ DelightfulEmoji is a simple emoji image renderer for displaying emoji symbols in
 
 ## Props
 
-| Prop   | Type   | Default   | Description                                      |
-| ------ | ------ | --------- | ------------------------------------------------ |
-| code   | string | -         | Emoji code (required)                            |
-| ns     | string | "emojis/" | Emoji namespace for constructing image path      |
-| suffix | string | ".png"    | File suffix for emoji image                      |
-| size   | number | -         | Emoji image size                                 |
+| Prop   | Type   | Default   | Description                                 |
+| ------ | ------ | --------- | ------------------------------------------- |
+| code   | string | -         | Emoji code (required)                       |
+| ns     | string | "emojis/" | Emoji namespace for constructing image path |
+| suffix | string | ".png"    | File suffix for emoji image                 |
+| size   | number | -         | Emoji image size                            |
 
 Additionally, supports all HTML `img` tag attributes except `src` and `alt`.
 

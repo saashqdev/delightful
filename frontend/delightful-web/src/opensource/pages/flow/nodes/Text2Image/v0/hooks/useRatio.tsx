@@ -96,8 +96,3 @@ export default function useRatio() {
 		tooltip,
 	}
 }
-
-
-
-
-

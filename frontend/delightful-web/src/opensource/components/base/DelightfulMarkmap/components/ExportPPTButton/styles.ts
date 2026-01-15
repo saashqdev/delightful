@@ -60,7 +60,9 @@ export const useStyles = createStyles(({ css, token, cx, prefixCls }) => {
 							.map(
 								(_, index) => `
 							${index + 1}% {
-								background: linear-gradient(${95 + index * 3.6}deg, #33d6c0 0%, #5083fb 25%, #336df4 50%, #4752e6 75%, #8d55ed 100%);
+								background: linear-gradient(${
+									95 + index * 3.6
+								}deg, #33d6c0 0%, #5083fb 25%, #336df4 50%, #4752e6 75%, #8d55ed 100%);
 								background-clip: text;
 								-webkit-background-clip: text;
 								-webkit-text-fill-color: transparent;

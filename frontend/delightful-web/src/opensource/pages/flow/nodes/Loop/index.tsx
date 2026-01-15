@@ -8,8 +8,3 @@ export const LoopComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

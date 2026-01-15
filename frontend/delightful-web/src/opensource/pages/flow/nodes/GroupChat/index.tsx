@@ -9,8 +9,3 @@ export const GroupChatComponentVersionMap = {
 		template: v0Template,
 	},
 }
-
-
-
-
-

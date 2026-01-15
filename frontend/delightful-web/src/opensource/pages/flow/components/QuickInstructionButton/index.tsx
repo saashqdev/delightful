@@ -159,15 +159,15 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 				groupList = newInstructionsList[groupIdx].items
 			}
 
-		// If it's a switch, set default_value
-		if (values.type === InstructionType.SWITCH) {
-			values.default_value = values.switch_on ? "on" : "off"
-		}
-		// For status instruction, set default_value
+			// If it's a switch, set default_value
+			if (values.type === InstructionType.SWITCH) {
+				values.default_value = values.switch_on ? "on" : "off"
+			}
+			// For status instruction, set default_value
 
 			const isEdit = groupList.findIndex((item) => item.id === values.id)
 
-		// Check for duplicate names
+			// Check for duplicate names
 			const isDuplicateName = (name: string, id?: string) =>
 				groupList.some((item) => item.name && item.name === name && (!id || item.id !== id))
 
@@ -253,10 +253,14 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 		) : (
 			<Flex vertical gap={8} className={styles.title}>
 				<Flex align="center" justify="space-between">
-					<div
-						className={styles.topTitle}
-					>{`${t("agent.quickInstruction")} (${instructionNum})`}</div>
-					<DelightfulIcon component={IconX} className={styles.pointer} onClick={setFalse} />
+					<div className={styles.topTitle}>{`${t(
+						"agent.quickInstruction",
+					)} (${instructionNum})`}</div>
+					<DelightfulIcon
+						component={IconX}
+						className={styles.pointer}
+						onClick={setFalse}
+					/>
 				</Flex>
 				<div className={styles.desc}>{t("agent.instructionsDesc")}</div>
 			</Flex>
@@ -297,7 +301,11 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 				closeIcon={null}
 				footer={
 					edit && (
-						<DelightfulButton type="primary" style={{ width: 100 }} onClick={form.submit}>
+						<DelightfulButton
+							type="primary"
+							style={{ width: 100 }}
+							onClick={form.submit}
+						>
 							{t("button.save")}
 						</DelightfulButton>
 					)
@@ -328,8 +336,3 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 		</>
 	)
 }
-
-
-
-
-

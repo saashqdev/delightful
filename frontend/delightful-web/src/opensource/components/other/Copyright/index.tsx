@@ -7,7 +7,9 @@ import { useTranslation } from "react-i18next"
 const useStyles = createStyles(({ css, isDarkMode, token }) => {
 	return {
 		brand: css`
-			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2]};
+			color: ${isDarkMode
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorUsages.text[2]};
 			width: 100%;
 			font-size: 12px;
 			font-weight: 400;

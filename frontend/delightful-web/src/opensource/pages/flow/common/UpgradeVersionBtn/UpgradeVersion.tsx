@@ -101,7 +101,10 @@ export default function UpgradeVersionBtn() {
 				title={t("common.confirmToUpdateVersion", { ns: "flow" })}
 				onConfirm={onNodeVersionUpdate}
 			>
-				<Tooltip title="Current node is in an old version, click to upgrade node version" placement="bottom">
+				<Tooltip
+					title="Current node is in an old version, click to upgrade node version"
+					placement="bottom"
+				>
 					<IconCircleArrowUp className={styles.arrowUp} size={20} />
 				</Tooltip>
 			</Popconfirm>
@@ -110,8 +113,3 @@ export default function UpgradeVersionBtn() {
 
 	return UpgradeVersionComponent
 }
-
-
-
-
-

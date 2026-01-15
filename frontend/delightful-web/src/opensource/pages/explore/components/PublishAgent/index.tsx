@@ -366,7 +366,7 @@ function PublishAgent({
 							<Form.Item>
 								<Alert
 									className={styles.alert}
-								message="Publishing to the organization will automatically initiate an approval process. Once approved by an administrator, it will be available to all members of the organization."
+									message="Publishing to the organization will automatically initiate an approval process. Once approved by an administrator, it will be available to all members of the organization."
 									type="warning"
 									showIcon
 									icon={

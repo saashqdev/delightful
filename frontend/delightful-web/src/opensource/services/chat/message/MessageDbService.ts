@@ -105,7 +105,10 @@ class MessageDbService {
 				return t
 			} catch (createErr) {
 				// If creation fails, it may be an index issue; consider rebuilding indexes
-				console.warn(`Failed to create message table, trying to rebuild index: ${tableName}`, createErr)
+				console.warn(
+					`Failed to create message table, trying to rebuild index: ${tableName}`,
+					createErr,
+				)
 				throw new Error("Failed to create message table")
 				// await this.rebuildMessageTableIndex(conversationId)
 
@@ -157,9 +160,7 @@ class MessageDbService {
 				throw new Error("Failed to get message table")
 			}
 
-			await Promise.all(
-				messageList.map((message) => table.put(message)),
-			)
+			await Promise.all(messageList.map((message) => table.put(message)))
 			return { success: true, count: messageList.length }
 		} catch (error) {
 			// Log error information
@@ -251,7 +252,10 @@ class MessageDbService {
 					.between(["", Dexie.minKey], ["", Dexie.maxKey])
 			} catch (indexError) {
 				// If compound index query fails, fall back to simple index
-				console.error("Compound index query failed, falling back to simple index", indexError)
+				console.error(
+					"Compound index query failed, falling back to simple index",
+					indexError,
+				)
 
 				if (topicId) {
 					return table.where("message.topic_id").equals(topicId)

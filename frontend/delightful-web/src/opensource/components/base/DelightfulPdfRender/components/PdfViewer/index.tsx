@@ -45,7 +45,9 @@ function PdfViewer({
 			file={file}
 			onLoadSuccess={onDocumentLoadSuccess}
 			onLoadError={onDocumentLoadError}
-			loading={<div className={styles.loading}>{t("delightfulPdfRender.status.loading")}</div>}
+			loading={
+				<div className={styles.loading}>{t("delightfulPdfRender.status.loading")}</div>
+			}
 			error={<div className={styles.error}>{t("delightfulPdfRender.status.loadFailed")}</div>}
 		>
 			{numPages > 0 && (
@@ -83,7 +85,9 @@ function PdfViewer({
 												number: currentPageNum,
 											})}
 										</div>
-										<div>{t("delightfulPdfRender.placeholders.scrollToLoad")}</div>
+										<div>
+											{t("delightfulPdfRender.placeholders.scrollToLoad")}
+										</div>
 									</div>
 								)}
 							</div>

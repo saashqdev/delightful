@@ -149,7 +149,9 @@ export default function PasswordVerification({
 					}
 				} catch (error) {
 					// Verification failed, no action taken, user needs to manually enter password
-					console.log("Verification with stored password failed, user needs to manually enter")
+					console.log(
+						"Verification with stored password failed, user needs to manually enter",
+					)
 				} finally {
 					setLoading(false)
 				}

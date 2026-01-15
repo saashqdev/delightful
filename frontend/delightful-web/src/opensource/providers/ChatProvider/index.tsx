@@ -48,7 +48,7 @@ const ChatProvider = observer(function ChatProvider({ children }: ChatServicePro
 							const seqId = payload?.seq?.seq_id
 							// eslint-disable-next-line no-console
 							console.log(
-							"%c Received message from server:",
+								"%c Received message from server:",
 								"background-color: green; color: white;",
 								seqId,
 								// @ts-ignore
@@ -63,14 +63,14 @@ const ChatProvider = observer(function ChatProvider({ children }: ChatServicePro
 									MessageService.pullOfflineMessages()
 								} else {
 									console.warn(
-									"Received message, but seqId is less than or equal to local seqId",
+										"Received message, but seqId is less than or equal to local seqId",
 										seqId,
 										localSeqId,
 									)
 								}
 							} else {
 								console.warn(
-								"Received message, but delightfulId or organizationCode does not exist",
+									"Received message, but delightfulId or organizationCode does not exist",
 									delightfulId,
 									delightfulOrganizationCode,
 								)

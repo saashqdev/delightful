@@ -4,13 +4,13 @@
 
 ## Properties
 
-| Property     | Type       | Default | Description                                  |
-| ------------ | ---------- | ------- | -------------------------------------------- |
-| icon         | ReactNode  | -       | Icon before the page title                   |
-| closeable    | boolean    | false   | Whether to show the close button             |
-| onClose      | () => void | -       | Callback function when close button clicked  |
-| className    | string     | -       | Custom class name for the container          |
-| ...CardProps | -          | -       | Supports all Ant Design Card properties      |
+| Property     | Type       | Default | Description                                 |
+| ------------ | ---------- | ------- | ------------------------------------------- |
+| icon         | ReactNode  | -       | Icon before the page title                  |
+| closeable    | boolean    | false   | Whether to show the close button            |
+| onClose      | () => void | -       | Callback function when close button clicked |
+| className    | string     | -       | Custom class name for the container         |
+| ...CardProps | -          | -       | Supports all Ant Design Card properties     |
 
 ## Basic Usage
 

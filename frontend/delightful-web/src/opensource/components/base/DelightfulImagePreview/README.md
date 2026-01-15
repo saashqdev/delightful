@@ -4,20 +4,20 @@
 
 ## Props
 
-| Prop              | Type                            | Default | Description                         |
-| ----------------- | ------------------------------- | ------- | ------------------------------------ |
-| src               | string                          | -       | Image source URL                     |
-| onNext            | () => void                      | -       | Callback for next image              |
-| onPrev            | () => void                      | -       | Callback for previous image          |
-| nextDisabled      | boolean                         | false   | Disable the next button              |
-| prevDisabled      | boolean                         | false   | Disable the previous button          |
-| rootClassName     | string                          | -       | Custom class name for root container |
+| Prop              | Type                            | Default | Description                           |
+| ----------------- | ------------------------------- | ------- | ------------------------------------- |
+| src               | string                          | -       | Image source URL                      |
+| onNext            | () => void                      | -       | Callback for next image               |
+| onPrev            | () => void                      | -       | Callback for previous image           |
+| nextDisabled      | boolean                         | false   | Disable the next button               |
+| prevDisabled      | boolean                         | false   | Disable the previous button           |
+| rootClassName     | string                          | -       | Custom class name for root container  |
 | hasCompare        | boolean                         | false   | Enable image comparison               |
-| viewType          | CompareViewType                 | -       | Comparison view type                 |
-| onChangeViewType  | (type: CompareViewType) => void | -       | Callback when comparison view changes|
-| onLongPressStart  | () => void                      | -       | Long-press start (comparison mode)   |
-| onLongPressEnd    | () => void                      | -       | Long-press end (comparison mode)     |
-| ...HTMLAttributes | -                               | -       | Supports all HTML `img` attributes   |
+| viewType          | CompareViewType                 | -       | Comparison view type                  |
+| onChangeViewType  | (type: CompareViewType) => void | -       | Callback when comparison view changes |
+| onLongPressStart  | () => void                      | -       | Long-press start (comparison mode)    |
+| onLongPressEnd    | () => void                      | -       | Long-press end (comparison mode)      |
+| ...HTMLAttributes | -                               | -       | Supports all HTML `img` attributes    |
 
 ### CompareViewType Enum
 
@@ -83,11 +83,11 @@ import { DelightfulImagePreview } from '@/components/base/DelightfulImagePreview
 
 ## When to Use
 
-- Inspect image details thoroughly
-- Perform operations like zooming and rotating
-- Compare two images (e.g., original vs processed)
-- Browse multiple images within a collection
-- Provide professional image preview functionality
-- View high-resolution image details
+-   Inspect image details thoroughly
+-   Perform operations like zooming and rotating
+-   Compare two images (e.g., original vs processed)
+-   Browse multiple images within a collection
+-   Provide professional image preview functionality
+-   View high-resolution image details
 
 The `DelightfulImagePreview` component delivers a professional image viewing experience, suitable for galleries, photo editors, product showcases, and more.

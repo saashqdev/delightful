@@ -97,8 +97,3 @@ const ToolCard = memo((props: ToolCardProps) => {
 })
 
 export default ToolCard
-
-
-
-
-

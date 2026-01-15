@@ -4,13 +4,13 @@
 
 ## Props
 
-| Prop             | Type | Default | Description                         |
-| ---------------- | ---- | ------- | ----------------------------------- |
+| Prop             | Type | Default | Description                            |
+| ---------------- | ---- | ------- | -------------------------------------- |
 | ...SplitterProps | -    | -       | Supports all Ant Design Splitter props |
 
 ## Subcomponents
 
-- `DelightfulSplitter.Panel` - Child panel for defining each resizable area
+-   `DelightfulSplitter.Panel` - Child panel for defining each resizable area
 
 ## Basic Usage
 
@@ -87,9 +87,9 @@ import { DelightfulSplitter } from '@/components/base/DelightfulSplitter';
 
 ## When to Use
 
-- Create resizable layouts
-- Split the screen into multiple interactive areas
-- Build UIs like code editors or file explorers needing flexible space
-- Let users customize the size of each area
+-   Create resizable layouts
+-   Split the screen into multiple interactive areas
+-   Build UIs like code editors or file explorers needing flexible space
+-   Let users customize the size of each area
 
 The `DelightfulSplitter` component keeps split panes clean and user-friendly while retaining all features of Ant Design's Splitter.

@@ -73,17 +73,17 @@ export const useDocumentOperations = ({
 					try {
 						let success = false
 
-					// Execute different API calls based on operation type
-					if (operationType === DocumentOperationType.DELETE) {
-						// TypeScript type assertion to ensure compilation
-						await (KnowledgeApi as any).deleteKnowledgeDocument({
-							knowledge_code: knowledgeBaseCode,
-							document_code: record.code,
-						})
-						success = true
-					} else {
-						// Enable or disable operation
-						// TypeScript type assertion to ensure compilation
+						// Execute different API calls based on operation type
+						if (operationType === DocumentOperationType.DELETE) {
+							// TypeScript type assertion to ensure compilation
+							await (KnowledgeApi as any).deleteKnowledgeDocument({
+								knowledge_code: knowledgeBaseCode,
+								document_code: record.code,
+							})
+							success = true
+						} else {
+							// Enable or disable operation
+							// TypeScript type assertion to ensure compilation
 							const data = await (KnowledgeApi as any).updateKnowledgeDocument({
 								knowledge_code: knowledgeBaseCode,
 								document_code: record.code,

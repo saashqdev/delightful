@@ -48,7 +48,9 @@ function DelightfulTable<D extends AnyObject = AnyObject>({
 		<Table<D>
 			className={styles.table}
 			loading={
-				typeof loading === "object" ? loading : { spinning: loading, ...delightfulSpinProps }
+				typeof loading === "object"
+					? loading
+					: { spinning: loading, ...delightfulSpinProps }
 			}
 			scroll={{ x: "max-content", ...scroll }}
 			{...props}

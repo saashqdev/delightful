@@ -450,7 +450,11 @@ class MessagePullService {
 			}
 
 			// Step 3: init conversations (load data first, then render to avoid duplication)
-			conversationService.initOnFirstLoad(delightfulId, organizationCode, conversationShouldHandle)
+			conversationService.initOnFirstLoad(
+				delightfulId,
+				organizationCode,
+				conversationShouldHandle,
+			)
 
 			// Step 4: pull recent messages
 			const items = await this.fetchCurrentMessages()

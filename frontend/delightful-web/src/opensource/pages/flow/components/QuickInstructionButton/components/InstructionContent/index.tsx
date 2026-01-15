@@ -64,8 +64,3 @@ export const InstructionContent = memo(
 		)
 	},
 )
-
-
-
-
-

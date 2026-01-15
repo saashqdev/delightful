@@ -92,7 +92,7 @@ export default observer(function AccountActions({
 		if (confirmed) {
 			const accounts = userStore.account.accounts
 
-		// If and only if multiple accounts exist, switch account first, then remove account
+			// If and only if multiple accounts exist, switch account first, then remove account
 			if (accounts?.length > 1) {
 				const info = userStore.user.userInfo
 				const otherAccount = accounts.filter(
@@ -112,7 +112,9 @@ export default observer(function AccountActions({
 				if (info?.delightful_id) {
 					await accountLogout(info?.delightful_id)
 					/** Broadcast account deletion */
-					BroadcastChannelSender.deleteAccount(info?.delightful_id, { navigateToLogin: false })
+					BroadcastChannelSender.deleteAccount(info?.delightful_id, {
+						navigateToLogin: false,
+					})
 				}
 			} else {
 				await accountLogout()
@@ -140,7 +142,8 @@ export default observer(function AccountActions({
 				)}
 			>
 				<div className={styles.item}>
-					<IconSwitchHorizontal className={styles.icon} /> <span>Switch Organization</span>
+					<IconSwitchHorizontal className={styles.icon} />{" "}
+					<span>Switch Organization</span>
 				</div>
 			</DelightfulDropdown>
 			<div className={cx(styles.item, styles.logoutItem)} onClick={handleLogout}>

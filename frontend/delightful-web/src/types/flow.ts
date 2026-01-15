@@ -170,7 +170,9 @@ export namespace FlowDraft {
 		modifier_info: PlatformItem
 	}
 
-	export type RequestArgs = Partial<Pick<Detail, "name" | "description" | "delightful_flow" | "id">>
+	export type RequestArgs = Partial<
+		Pick<Detail, "name" | "description" | "delightful_flow" | "id">
+	>
 
 	export type ListItem = Detail
 }

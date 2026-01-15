@@ -26,7 +26,9 @@ const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 		padding-bottom: 0 !important;
 		border-radius: 8px;
 		border: 1px solid ${token.delightfulColorUsages.border};
-		background: ${isDarkMode ? token.delightfulColorUsages.bg[1] : token.delightfulColorUsages.white};
+		background: ${isDarkMode
+			? token.delightfulColorUsages.bg[1]
+			: token.delightfulColorUsages.white};
 	`,
 }))
 

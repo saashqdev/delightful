@@ -45,8 +45,3 @@ export const getDefaultIntention = () => {
 }
 
 export default {}
-
-
-
-
-

@@ -88,8 +88,3 @@ export default function useComponentProps({
 		rightExpressionProps,
 	}
 }
-
-
-
-
-

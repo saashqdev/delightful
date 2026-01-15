@@ -58,7 +58,8 @@ export function uniqueAndSortMessageIds(messageIds: string[]) {
 	})
 }
 
-const genMaxSeqInfoKey = (delightful_id: string) => platformKey(`chat/max_seq_info/${delightful_id}`)
+const genMaxSeqInfoKey = (delightful_id: string) =>
+	platformKey(`chat/max_seq_info/${delightful_id}`)
 
 /**
  * Get maximum sequence number

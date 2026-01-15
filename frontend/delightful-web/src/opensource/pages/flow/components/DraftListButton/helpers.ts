@@ -19,8 +19,3 @@ export function compareTimes(time1: string, time2: string): boolean {
 	// Return true if date1 is earlier than date2, false otherwise
 	return date1 < date2
 }
-
-
-
-
-

@@ -5,10 +5,6 @@ export const normalizeLocale = (locale?: string): string => {
 	if (!locale) return DEFAULT_LOCALE
 
 	switch (locale) {
-		case "zh":
-		case "en-US":
-		case "zh-Hans":
-			return SupportLocales.zhCN
 		case "en":
 		case "en-US":
 			return SupportLocales.enUS

@@ -21,7 +21,7 @@ COPY . .
 RUN pnpm build
 
 # deploy
-FROM ${NODE_IMAGE} as runner
+FROM ${NODE_IMAGE} AS runner
 
 # Redefine environment variables in the runner stage
 ARG CI_COMMIT_SHA

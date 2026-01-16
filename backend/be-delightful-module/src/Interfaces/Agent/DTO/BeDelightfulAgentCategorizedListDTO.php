@@ -7,10 +7,9 @@ namespace Delightful\BeDelightful\Interfaces\Agent\DTO;
 
 class BeDelightfulAgentCategorizedlist DTO 
 {
- /** * constantuseAgentlist. * @var array<BeDelightfulAgentlist DTO>*/ 
-    public array $frequent = []; /** * All agentslist ( not containingconstantuse in ). * @var array<BeDelightfulAgentlist DTO>*/ 
-    public array $all = [];
-/** * Total amount .*/ 
+ /** * list . * @var array<BeDelightfulAgentlist DTO> */ 
+    public array $frequent = []; /** * Alllist Not containin . * @var array<BeDelightfulAgentlist DTO> */ 
+    public array $all = []; /** * Quantity. */ 
     public int $total = 0; 
     public function __construct(array $data = []) 
 {

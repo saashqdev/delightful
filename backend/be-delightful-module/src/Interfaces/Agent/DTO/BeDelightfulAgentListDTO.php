@@ -9,16 +9,16 @@ use App\Infrastructure\Core\AbstractDTO;
 
 class BeDelightfulAgentlist DTO extends AbstractDTO 
 {
- /** * AgentCode.*/ 
-    public string $id = ''; /** * AgentName.*/ 
-    public string $name = ''; /** * AgentDescription.*/ 
-    public string $description = ''; /** * Agenticon. * format: 
+ /** * AgentCode. */ 
+    public string $id = ''; /** * AgentName. */ 
+    public string $name = ''; /** * AgentDescription. */ 
+    public string $description = ''; /** * AgentIcon. * Format: 
 {
  url : ... , type : ... , color : ... 
 }
-.*/ 
-    public array $icon = []; /** * iconType 1:icon 2:Image.*/ 
-    public int $iconType = 1; /** * AgentType: 1-Built-in, 2-Custom.*/ 
+. */ 
+    public array $icon = []; /** * IconType 1:Icon 2:Image. */ 
+    public int $iconType = 1; /** * Type1-Built-in2-Custom. */ 
     public int $type = 2; 
     public function getId(): string 
 {

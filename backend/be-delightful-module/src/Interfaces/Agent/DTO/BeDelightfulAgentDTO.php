@@ -13,18 +13,18 @@ class BeDelightfulAgentDTO extends AbstractDTO
 {
  use OperatorDTOTrait;
 use StringIdDTOTrait;
-/** * AgentName.*/ 
-    public string $name = ''; /** * AgentDescription.*/ 
-    public string $description = ''; /** * Agenticon. * format: 
+/** * AgentName. */ 
+    public string $name = ''; /** * AgentDescription. */ 
+    public string $description = ''; /** * AgentIcon. * Format: 
 {
  url : ... , type : ... , color : ... 
 }
-.*/ 
-    public array $icon = []; /** * iconType 1:icon 2:Image.*/ 
-    public int $iconType = 1; /** * SystemTipword.*/ 
-    public array $prompt = []; /** * AgentType: 1-Built-in, 2-Custom.*/ 
-    public int $type = 2; /** * whetherEnable.*/ public ?bool $enabled = Null; /** * tool list.*/ 
-    public array $tools = []; /** * SystemTipwordpureTextformat.*/ public ?string $promptString = Null; 
+. */ 
+    public array $icon = []; /** * IconType 1:Icon 2:Image. */ 
+    public int $iconType = 1; /** * SystemNotice. */ 
+    public array $prompt = []; /** * Type1-Built-in2-Custom. */ 
+    public int $type = 2; /** * whether Enabled. */ public ?bool $enabled = null; /** * tool list . */ 
+    public array $tools = []; /** * SystemNoticeTextFormat. */ public ?string $promptString = null; 
     public function getName(): string 
 {
  return $this->name; 

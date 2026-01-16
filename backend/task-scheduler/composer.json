@@ -1,7 +1,7 @@
 {
   "name": "bedelightful/task-scheduler",
   "type": "library",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "keywords": [
     "php",
     "hyperf"

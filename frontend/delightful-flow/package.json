@@ -6,7 +6,7 @@
 		"type": "git",
 		"url": "https://github.com/saashqdev/delightful/delightful-flow"
 	},
-	"license": "Apache License 2.0",
+	"license": "Apache-2.0",
 	"type": "module",
 	"module": "dist/index.js",
 	"types": "dist/index.d.ts",

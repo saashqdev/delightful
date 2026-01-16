@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods;
 
 use Closure;
-use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
-use BeDelightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\MethodInterface;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\MethodInterface;
 
 abstract class AbstractMethod implements MethodInterface
 {

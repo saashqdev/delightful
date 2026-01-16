@@ -250,7 +250,7 @@ JSON, true)));
    
 5. noticethingitem:
    - avoidtosensitivecontentmake subjective judgment
-   - whennomethodcertainsomedepartmentminutecontento clock,franktablereachnotcertainproperty
+   - whennomethodcertainsomedepartmentminutecontent,franktablereachnotcertainproperty
    - maintainobjectiveprofessionallanguageair'),
         ]);
     }

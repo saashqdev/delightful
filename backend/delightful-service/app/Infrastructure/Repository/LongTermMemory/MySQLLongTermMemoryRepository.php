@@ -6,9 +6,9 @@ declare(strict_types=1);
  */
 
 namespace App\Infrastructure\Repository\LongTermMemory;
-    /**
-     * General query method (via DTO).
-     */
+
+use App\Domain\LongTermMemory\DTO\MemoryQueryDTO;
+use App\Domain\LongTermMemory\Entity\LongTermMemoryEntity;
 use App\Domain\LongTermMemory\Entity\ValueObject\MemoryCategory;
 use App\Domain\LongTermMemory\Entity\ValueObject\MemoryStatus;
 use App\Domain\LongTermMemory\Entity\ValueObject\MemoryType;

@@ -305,14 +305,21 @@ class VolcengineStandardClient
     }
 
     /**
-     * Execute standard ASR request (non-BigModel).
-    /**
-     * Validate Volcengine API response status code.
-     * Only used during task submission to confirm success (20000000).
+     * Execute Volcengine API request with standard error handling.
      *
-     * @param array $responseHeaders Response headers array
-     * @param string $requestId Request ID for logging
+     * @param string $url API endpoint URL
+     * @param array $requestData Request payload
+     * @param array $contextData Context data for logging
+     * @param string $successMessage Success log message
+     * @param string $exceptionMessage Exception message on error
+     * @return array Response data merged with headers
      */
+    private function executeVolcengineRequest(
+        string $url,
+        array $requestData,
+        array $contextData,
+        string $successMessage,
+        string $exceptionMessage
     ): array {
         try {
             $response = $this->httpClient->post($url, [

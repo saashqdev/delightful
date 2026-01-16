@@ -146,5 +146,46 @@
     "rector": "rector process --clear-cache",
     "php-accessor": "php -dopcache.enable_cli=1 -dopcache.jit_buffer_size=128M -dopcache.jit=1255 vendor/bin/php-accessor generate"
   },
-  "repositories": []
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../api-response"
+    },
+    {
+      "type": "path",
+      "url": "../async-event"
+    },
+    {
+      "type": "path",
+      "url": "../cloudfile"
+    },
+    {
+      "type": "path",
+      "url": "../easy-dingtalk"
+    },
+    {
+      "type": "path",
+      "url": "../flow-expr-engine"
+    },
+    {
+      "type": "path",
+      "url": "../rule-engine-core"
+    },
+    {
+      "type": "path",
+      "url": "../sdk-base"
+    },
+    {
+      "type": "path",
+      "url": "../be-delightful-module"
+    },
+    {
+      "type": "path",
+      "url": "../task-scheduler"
+    },
+    {
+      "type": "path",
+      "url": "../tiptap"
+    }
+  ]
 }

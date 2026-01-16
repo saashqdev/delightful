@@ -1,40 +1,68 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Facade;
 
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\SuperAgent\Service\FileEditingAppService;
 use Hyperf\HttpServer\Contract\RequestInterface;
-#[ApiResponse('low_code')]
 
-class FileEditingApi extends AbstractApi 
+#[ApiResponse('low_code')]
+class FileEditingApi extends AbstractApi
 {
- 
-    public function __construct( 
-    private readonly FileEditingAppService $fileEditingAppService, 
-    protected RequestInterface $request, ) 
-{
- parent::__construct($request); 
+    public function __construct(
+        private readonly FileEditingAppService $fileEditingAppService,
+        protected RequestInterface $request,
+    ) {
+        parent::__construct($request);
+    }
+
+    /**
+     * 加入编辑.
+     */
+    public function joinEditing(RequestContext $requestContext, string $fileId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 调用应用服务
+        $this->fileEditingAppService->joinEditing($requestContext, (int) $fileId);
+
+        return [];
+    }
+
+    /**
+     * 离开编辑.
+     */
+    public function leaveEditing(RequestContext $requestContext, string $fileId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 调用应用服务
+        $this->fileEditingAppService->leaveEditing($requestContext, (int) $fileId);
+
+        return [];
+    }
+
+    /**
+     * 获取编辑用户数量.
+     */
+    public function getEditingUsers(RequestContext $requestContext, string $fileId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 调用应用服务
+        $userCount = $this->fileEditingAppService->getEditingUsers($requestContext, (int) $fileId);
+
+        return [
+            'editing_user_count' => $userCount,
+        ];
+    }
 }
- /** * JoinEdit. */ 
-    public function joinEditing(RequestContext $requestContext, string $fileId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // call ApplyService $this->fileEditingAppService->joinEditing($requestContext, (int) $fileId); return []; 
-}
- /** * Edit. */ 
-    public function leaveEditing(RequestContext $requestContext, string $fileId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // call ApplyService $this->fileEditingAppService->leaveEditing($requestContext, (int) $fileId); return []; 
-}
- /** * GetEdituser Quantity. */ 
-    public function getEditinguser s(RequestContext $requestContext, string $fileId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // call ApplyService $userCount = $this->fileEditingAppService->getEditinguser s($requestContext, (int) $fileId); return [ 'editing_user_count' => $userCount, ]; 
-}
- 
-}
- 

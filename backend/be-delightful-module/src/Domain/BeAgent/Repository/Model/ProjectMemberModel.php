@@ -1,22 +1,47 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Model;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Repository\Model;
 
 use App\Infrastructure\Core\AbstractModel;
-/** * ItemMemberModel. */
 
-class ProjectMemberModel extends AbstractModel 
+/**
+ * 项目成员模型.
+ */
+class ProjectMemberModel extends AbstractModel
 {
- protected ?string $table = 'magic_super_agent_project_members'; 
-    protected array $fillable = [ 'id', 'project_id', 'target_type', 'target_id', 'role', 'organization_code', 'status', 'invited_by', 'created_at', 'updated_at', ]; 
-    protected array $casts = [ 'id' => 'integer', 'project_id' => 'integer', 'status' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime', ]; /** * Item. */ 
-    public function project() 
-{
- return $this->belongsTo(ProjectModel::class, 'project_id', 'id'); 
+    protected ?string $table = 'magic_super_agent_project_members';
+
+    protected array $fillable = [
+        'id',
+        'project_id',
+        'target_type',
+        'target_id',
+        'role',
+        'organization_code',
+        'status',
+        'invited_by',
+        'created_at',
+        'updated_at',
+    ];
+
+    protected array $casts = [
+        'id' => 'integer',
+        'project_id' => 'integer',
+        'status' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    /**
+     * 所属项目.
+     */
+    public function project()
+    {
+        return $this->belongsTo(ProjectModel::class, 'project_id', 'id');
+    }
 }
- 
-}
- 

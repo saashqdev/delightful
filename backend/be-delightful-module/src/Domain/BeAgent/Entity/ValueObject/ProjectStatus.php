@@ -1,38 +1,65 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * 项目状态枚举.
+ */
+enum ProjectStatus: int
+{
+    /**
+     * 活跃状态
+     */
+    case ACTIVE = 1;
 
-/** * ItemStatusEnum. */
+    /**
+     * 已归档.
+     */
+    case ARCHIVED = 2;
 
-enum ProjectStatus: int 
-{
- /** * active Status */ case ACTIVE = 1; /** * Archived. */ case ARCHIVED = 2; /** * delete d. */ case DELETED = 3; /** * GetStatusDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::ACTIVE => 'active ', self::ARCHIVED => 'Archived', self::DELETED => 'delete d', 
+    /**
+     * 已删除.
+     */
+    case DELETED = 3;
+
+    /**
+     * 获取状态描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::ACTIVE => '活跃',
+            self::ARCHIVED => '已归档',
+            self::DELETED => '已删除',
+        };
+    }
+
+    /**
+     * 是否为活跃状态
+     */
+    public function isActive(): bool
+    {
+        return $this === self::ACTIVE;
+    }
+
+    /**
+     * 是否已归档.
+     */
+    public function isArchived(): bool
+    {
+        return $this === self::ARCHIVED;
+    }
+
+    /**
+     * 是否已删除.
+     */
+    public function isDeleted(): bool
+    {
+        return $this === self::DELETED;
+    }
 }
-; 
-}
- /** * whether as active Status */ 
-    public function isActive(): bool 
-{
- return $this === self::ACTIVE; 
-}
- /** * whether Archived. */ 
-    public function isArchived(): bool 
-{
- return $this === self::ARCHIVED; 
-}
- /** * whether delete d. */ 
-    public function isdelete d(): bool 
-{
- return $this === self::DELETED; 
-}
- 
-}
- 

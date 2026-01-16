@@ -1,53 +1,98 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * Message queue status value object.
+ */
+enum MessageQueueStatus: int
+{
+    /**
+     * Pending processing.
+     */
+    case PENDING = 0;
 
-/** * Message queue status value object. */
+    /**
+     * Completed.
+     */
+    case COMPLETED = 1;
 
-enum MessageQueueStatus: int 
-{
- /** * Pending processing. */ case PENDING = 0; /** * complete d. */ case COMPLETED = 1; /** * Execution failed. */ case FAILED = 2; /** * In progress. */ case IN_PROGRESS = 3; /** * Get status description. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::PENDING => 'Pending', self::COMPLETED => 'complete d', self::FAILED => 'Failed', self::IN_PROGRESS => 'In Progress', 
+    /**
+     * Execution failed.
+     */
+    case FAILED = 2;
+
+    /**
+     * In progress.
+     */
+    case IN_PROGRESS = 3;
+
+    /**
+     * Get status description.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::PENDING => 'Pending',
+            self::COMPLETED => 'Completed',
+            self::FAILED => 'Failed',
+            self::IN_PROGRESS => 'In Progress',
+        };
+    }
+
+    /**
+     * Get all status list.
+     *
+     * @return array<int, string> Status value and description mapping
+     */
+    public static function getList(): array
+    {
+        return [
+            self::PENDING->value => self::PENDING->getDescription(),
+            self::COMPLETED->value => self::COMPLETED->getDescription(),
+            self::FAILED->value => self::FAILED->getDescription(),
+            self::IN_PROGRESS->value => self::IN_PROGRESS->getDescription(),
+        ];
+    }
+
+    /**
+     * Check if status is final (cannot be changed).
+     */
+    public function isFinal(): bool
+    {
+        return in_array($this, [self::COMPLETED, self::FAILED], true);
+    }
+
+    /**
+     * Check if status allows modification.
+     */
+    public function allowsModification(): bool
+    {
+        return $this === self::PENDING;
+    }
+
+    /**
+     * Check if status can be consumed.
+     */
+    public function canBeConsumed(): bool
+    {
+        return $this === self::PENDING;
+    }
+
+    /**
+     * Get next valid statuses.
+     */
+    public function getNextValidStatuses(): array
+    {
+        return match ($this) {
+            self::PENDING => [self::IN_PROGRESS, self::FAILED, self::COMPLETED],
+            self::IN_PROGRESS => [self::COMPLETED, self::FAILED],
+            self::COMPLETED, self::FAILED => [],
+        };
+    }
 }
-; 
-}
- /** * Get all status list. * * @return array<int, string> Status value and description mapping */ 
-    public 
-    static function getlist (): array 
-{
- return [ self::PENDING->value => self::PENDING->getDescription(), self::COMPLETED->value => self::COMPLETED->getDescription(), self::FAILED->value => self::FAILED->getDescription(), self::IN_PROGRESS->value => self::IN_PROGRESS->getDescription(), ]; 
-}
- /** * check if status is final (cannot be changed). */ 
-    public function isFinal(): bool 
-{
- return in_array($this, [self::COMPLETED, self::FAILED], true); 
-}
- /** * check if status allows modification. */ 
-    public function allowsModification(): bool 
-{
- return $this === self::PENDING; 
-}
- /** * check if status can be consumed. */ 
-    public function canBeConsumed(): bool 
-{
- return $this === self::PENDING; 
-}
- /** * Get next valid statuses. */ 
-    public function getNextValidStatuses(): array 
-{
- return match ($this) 
-{
- self::PENDING => [self::IN_PROGRESS, self::FAILED, self::COMPLETED], self::IN_PROGRESS => [self::COMPLETED, self::FAILED], self::COMPLETED, self::FAILED => [], 
-}
-; 
-}
- 
-}
- 

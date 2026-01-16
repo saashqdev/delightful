@@ -11,24 +11,24 @@ use Hyperf\HttpServer\Router\Router;
 Router::addGroup(
     '/api/v1/share',
     static function () {
-        // Share management
+        // 分享管理
         Router::addGroup('/resources', static function () {
-            // Create resource share
+            // 创建资源分享
             Router::post('/create', [ShareApi::class, 'createShare']);
-            // Update share settings
+            // 更新分享设置
             Router::post('/{id}/update', [ShareApi::class, 'updateShare']);
-            // Cancel share
+            // 取消分享
             Router::post('/{id}/cancel', [ShareApi::class, 'cancelShareByResourceId']);
 
-            // Get user share resource list
+            // 获取用户分享资源列表
             Router::post('/list', [ShareApi::class, 'getShareList']);
-            // Get share information by share code
+            // 通过分享code获取分享信息
             Router::get('/{shareCode}/setting', [ShareApi::class, 'getShareByCode']);
         });
 
-        // Access shared content
+        // 访问分享内容
         Router::addGroup('/access', static function () {
-            // Access share link
+            // 访问分享链接
             Router::post('/{shareCode}', [ShareApi::class, 'accessShare']);
         });
     },
@@ -36,8 +36,8 @@ Router::addGroup(
 );
 
 Router::addGroup('/api/v1/share', static function () {
-    // Check if password is required
+    // 查看是否需要密码
     Router::post('/resources/{shareCode}/check', [ShareApi::class, 'checkShare']);
-    // Get share details
+    // 获取分享详情
     Router::post('/resources/{shareCode}/detail', [ShareApi::class, 'getShareDetail']);
 });

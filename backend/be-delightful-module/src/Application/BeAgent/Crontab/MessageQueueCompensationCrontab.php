@@ -1,42 +1,63 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Application\SuperAgent\Crontab;
+namespace Dtyq\BeDelightful\Application\SuperAgent\Crontab;
 
 use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueCompensationAppService;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Crontab\Annotation\Crontab;
 use Throwable;
-/** * Message Queue Compensation Crontab. * MessageQueuecompensation ScheduledTask - process MessageQueuecompensation . */ #[Crontab( rule: '*/30 * * * * *', // execute every 30 seconds name: 'MessageQueueCompensationCrontab', singleton: true, // Singleton mode to prevent duplicate execution mutexExpires: 60, // Mutex lock expires in 60 seconds onOneServer: true, // execute on only one server callback: 'execute', memo: 'Message queue compensation scheduled task for handling missed message queues' )] readonly
 
-class MessageQueueCompensationCrontab 
+/**
+ * Message Queue Compensation Crontab.
+ * 消息队列补偿定时任务 - 处理遗漏的消息队列补偿.
+ */
+#[Crontab(
+    rule: '*/30 * * * * *',                    // Execute every 30 seconds
+    name: 'MessageQueueCompensationCrontab',
+    singleton: true,                           // Singleton mode to prevent duplicate execution
+    mutexExpires: 60,                          // Mutex lock expires in 60 seconds
+    onOneServer: true,                         // Execute on only one server
+    callback: 'execute',
+    memo: 'Message queue compensation scheduled task for handling missed message queues'
+)]
+readonly class MessageQueueCompensationCrontab
 {
- 
-    public function __construct( 
-    private MessageQueueCompensationAppService $messageQueueCompensationAppService, 
-    private StdoutLoggerInterface $logger, ) 
-{
- 
+    public function __construct(
+        private MessageQueueCompensationAppService $messageQueueCompensationAppService,
+        private StdoutLoggerInterface $logger,
+    ) {
+    }
+
+    /**
+     * Main execution method.
+     * 主要执行方法.
+     */
+    public function execute(): void
+    {
+        // Check if compensation is enabled in configuration
+        $enabled = config('be-delightful.user_message_queue.enabled', true);
+        if (! $enabled) {
+            return;
+        }
+
+        $startTime = microtime(true);
+        $this->logger->info('Message queue compensation task started');
+
+        try {
+            // Execute compensation through application service
+            $stats = $this->messageQueueCompensationAppService->executeCompensation();
+            $this->logger->info('Message queue compensation task completed', $stats);
+        } catch (Throwable $e) {
+            $this->logger->error('Message queue compensation task failed', [
+                'error' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+        }
+    }
 }
- /** * Main execution method. * Primaryexecute Method. */ 
-    public function execute(): void 
-{
- // check if compensation is enabled in configuration $enabled = config('super-magic.user_message_queue.enabled', true); if (! $enabled) 
-{
- return; 
-}
- $startTime = microtime(true); $this->logger->info('Message queue compensation task started'); try 
-{
- // execute compensation through application service $stats = $this->messageQueueCompensationAppService->executeCompensation(); $this->logger->info('Message queue compensation task completed', $stats); 
-}
- catch (Throwable $e) 
-{
- $this->logger->error('Message queue compensation task failed', [ 'error' => $e->getMessage(), 'file' => $e->getFile(), 'line' => $e->getLine(), ]); 
-}
- 
-}
- 
-}
- 

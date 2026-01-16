@@ -1,52 +1,71 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Service;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectOperationLogEntity;
 use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
-/** * ItemLogService */
 
-class ProjectOperationLogDomainService 
+/**
+ * 项目操作日志领域服务
+ */
+class ProjectOperationLogDomainService
 {
- 
-    public function __construct( 
-    private readonly ProjectOperationLogRepositoryInterface $projectOperationLogRepository ) 
-{
- 
+    public function __construct(
+        private readonly ProjectOperationLogRepositoryInterface $projectOperationLogRepository
+    ) {
+    }
+
+    /**
+     * 保存操作日志.
+     */
+    public function saveOperationLog(ProjectOperationLogEntity $operationLog): ProjectOperationLogEntity
+    {
+        return $this->projectOperationLogRepository->save($operationLog);
+    }
+
+    /**
+     * 获取项目操作日志列表.
+     */
+    public function getProjectOperationLogs(int $projectId, int $page = 1, int $pageSize = 20): array
+    {
+        return $this->projectOperationLogRepository->findByProjectId($projectId, $page, $pageSize);
+    }
+
+    /**
+     * 根据项目和用户获取操作日志.
+     */
+    public function getProjectUserOperationLogs(int $projectId, string $userId, int $page = 1, int $pageSize = 20): array
+    {
+        return $this->projectOperationLogRepository->findByProjectAndUser($projectId, $userId, $page, $pageSize);
+    }
+
+    /**
+     * 根据项目和操作类型获取日志.
+     * @return ProjectOperationLogEntity[]
+     */
+    public function getProjectActionOperationLogs(int $projectId, string $action, int $page = 1, int $pageSize = 20): array
+    {
+        return $this->projectOperationLogRepository->findByProjectAndAction($projectId, $action, $page, $pageSize);
+    }
+
+    /**
+     * 统计项目操作日志数量.
+     */
+    public function countProjectOperationLogs(int $projectId): int
+    {
+        return $this->projectOperationLogRepository->countByProjectId($projectId);
+    }
+
+    /**
+     * 根据组织编码获取操作日志.
+     */
+    public function getOrganizationOperationLogs(string $organizationCode, int $page = 1, int $pageSize = 20): array
+    {
+        return $this->projectOperationLogRepository->findByOrganization($organizationCode, $page, $pageSize);
+    }
 }
- /** * SaveLog. */ 
-    public function saveOperationLog(ProjectOperationLogEntity $operationLog): ProjectOperationLogEntity 
-{
- return $this->projectOperationLogRepository->save($operationLog); 
-}
- /** * GetItemLoglist . */ 
-    public function getProjectOperationLogs(int $projectId, int $page = 1, int $pageSize = 20): array 
-{
- return $this->projectOperationLogRepository->findByProjectId($projectId, $page, $pageSize); 
-}
- /** * According toItemuser GetLog. */ 
-    public function getProjectuser OperationLogs(int $projectId, string $userId, int $page = 1, int $pageSize = 20): array 
-{
- return $this->projectOperationLogRepository->findByProjectAnduser ($projectId, $userId, $page, $pageSize); 
-}
- /** * According toItemTypeGetLog. * @return ProjectOperationLogEntity[] */ 
-    public function getProjectActionOperationLogs(int $projectId, string $action, int $page = 1, int $pageSize = 20): array 
-{
- return $this->projectOperationLogRepository->findByProjectAndAction($projectId, $action, $page, $pageSize); 
-}
- /** * CountItemLogQuantity. */ 
-    public function countProjectOperationLogs(int $projectId): int 
-{
- return $this->projectOperationLogRepository->countByProjectId($projectId); 
-}
- /** * According toorganization code GetLog. */ 
-    public function getOrganizationOperationLogs(string $organizationCode, int $page = 1, int $pageSize = 20): array 
-{
- return $this->projectOperationLogRepository->findByOrganization($organizationCode, $page, $pageSize); 
-}
- 
-}
- 

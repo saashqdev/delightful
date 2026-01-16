@@ -1,38 +1,39 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Event;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 
-use App\Interfaces\Authorization\Web\Magicuser Authorization;
-/** * FileBatchdelete Event. */
+/**
+ * 文件批量删除事件.
+ */
+class FilesBatchDeletedEvent extends AbstractEvent
+{
+    public function __construct(
+        private readonly int $projectId,
+        private readonly array $fileIds,
+        private readonly MagicUserAuthorization $userAuthorization
+    ) {
+        parent::__construct();
+    }
 
-class FilesBatchdelete dEvent extends AbstractEvent 
-{
- 
-    public function __construct( 
-    private readonly int $projectId, 
-    private readonly array $fileIds, 
-    private readonly Magicuser Authorization $userAuthorization ) 
-{
- parent::__construct(); 
+    public function getProjectId(): int
+    {
+        return $this->projectId;
+    }
+
+    public function getFileIds(): array
+    {
+        return $this->fileIds;
+    }
+
+    public function getUserAuthorization(): MagicUserAuthorization
+    {
+        return $this->userAuthorization;
+    }
 }
- 
-    public function getProjectId(): int 
-{
- return $this->projectId; 
-}
- 
-    public function getFileIds(): array 
-{
- return $this->fileIds; 
-}
- 
-    public function getuser Authorization(): Magicuser Authorization 
-{
- return $this->userAuthorization; 
-}
- 
-}
- 

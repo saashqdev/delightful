@@ -1,16 +1,19 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract;
 
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract;
-
-interface ResponseInterface 
+interface ResponseInterface
 {
- 
-    public function isSuccess(): bool; 
-    public function getCode(): int; 
-    public function getMessage(): string; 
-    public function getData(): array; 
+    public function isSuccess(): bool;
+
+    public function getCode(): int;
+
+    public function getMessage(): string;
+
+    public function getData(): array;
 }
- 

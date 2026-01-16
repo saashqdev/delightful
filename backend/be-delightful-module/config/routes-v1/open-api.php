@@ -7,13 +7,13 @@ declare(strict_types=1);
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
 use Delightful\BeDelightful\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
 use Delightful\BeDelightful\Interfaces\Agent\Facade\Sandbox\BeDelightfulAgentSandboxApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\InternalApi\FileApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenProjectApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenTaskApi;
-use Delightful\BeDelightful\Interfaces\BeAgent\Facade\SandboxApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\SandboxApi;
 use Hyperf\HttpServer\Router\Router;
 
-// Sandbox open interface - naming is non-standard, needs to be deprecated
+// Sandbox open API - naming is not standardized, needs to be deprecated
 Router::addGroup('/api/v1/sandbox-openapi', static function () {
     Router::addGroup('/agents', static function () {
         Router::get('/{code}', [BeDelightfulAgentSandboxApi::class, 'show']);
@@ -21,11 +21,11 @@ Router::addGroup('/api/v1/sandbox-openapi', static function () {
     });
 });
 
-// Sandbox internal API route group - specifically for sandbox calling Be Delightful, naming is non-standard, needs to be deprecated
+// Sandbox internal API route group - specifically for sandbox to call Super Magic, naming is not standardized, needs to be deprecated
 Router::addGroup(
     '/open/internal-api',
     static function () {
-        // Super Agent related
+        // Super assistant related
         Router::addGroup('/be-agent', static function () {
             // File management related
             Router::addGroup('/file', static function () {
@@ -37,7 +37,7 @@ Router::addGroup(
     ['middleware' => [SandboxTokenAuthMiddleware::class]]
 );
 
-// Sandbox internal API route group - specifically for sandbox calling Be Delightful
+// Sandbox internal API route group - specifically for sandbox to call Super Magic
 Router::addGroup(
     '/api/v1/open-api/sandbox',
     static function () {
@@ -50,7 +50,7 @@ Router::addGroup(
     ['middleware' => [SandboxTokenAuthMiddleware::class]]
 );
 
-// Sandbox open interface
+// Sandbox open API
 Router::addGroup('/api/v1/open-api/sandbox', static function () {
     Router::addGroup('/agents', static function () {
         Router::get('/{code}', [BeDelightfulAgentSandboxApi::class, 'show']);
@@ -58,13 +58,13 @@ Router::addGroup('/api/v1/open-api/sandbox', static function () {
     });
 });
 
-// Project related - public interface
+// Project related - public API
 Router::addGroup('/api/v1/open-api/be-delightful/projects', static function () {
     // Get project basic information (project name, etc.) - no login required
     Router::get('/{id}', [OpenProjectApi::class, 'show']);
 });
 
-// be-delightful open api, note: all subsequent open APIs use be-delightful, not be-agent
+// be-delightful open API, note: subsequent open APIs all use be-delightful, not be-agent
 Router::addGroup(
     '/api/v1/open-api/be-delightful',
     static function () {
@@ -85,7 +85,7 @@ Router::addGroup(
 
         // Task related
         Router::addGroup('/task', static function () {
-            // Get attachment list under task
+            // Get task attachment list
             Router::get('/attachments', [OpenTaskApi::class, 'getOpenApiTaskAttachments']);
         });
     },

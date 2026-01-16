@@ -1,32 +1,32 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Service;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Service\MagicUserDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\UserAuthorization;
 
-use App\Domain\Contact\Entity\Magicuser Entity;
-use App\Domain\Contact\Service\Magicuser DomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\user Authorization;
+class UserDomainService
+{
+    public function __construct(
+        protected MagicUserDomainService $magicUserDomainService,
+    ) {
+    }
 
-class user DomainService 
-{
- 
-    public function __construct( 
-    protected Magicuser DomainService $magicuser DomainService, ) 
-{
- 
+    public function getUserEntity(string $userId): ?MagicUserEntity
+    {
+        return $this->magicUserDomainService->getUserById($userId);
+    }
+
+    public function getUserAuthorization(string $userId): ?UserAuthorization
+    {
+        $magicUserEntity = $this->getUserEntity($userId);
+
+        return UserAuthorization::fromUserEntity($magicUserEntity);
+    }
 }
- 
-    public function getuser Entity(string $userId): ?Magicuser Entity 
-{
- return $this->magicuser DomainService->getuser ById($userId); 
-}
- 
-    public function getuser Authorization(string $userId): ?user Authorization 
-{
- $magicuser Entity = $this->getuser Entity($userId); return user Authorization::fromuser Entity($magicuser Entity); 
-}
- 
-}
- 

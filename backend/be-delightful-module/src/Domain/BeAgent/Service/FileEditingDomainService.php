@@ -1,50 +1,75 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Service;
 
 use Hyperf\Redis\Redis;
-use Psr\including er\including erInterface;
-/** * FileEditStatusService */
+use Psr\Container\ContainerInterface;
 
-class FileEditingDomainService 
+/**
+ * 文件编辑状态领域服务
+ */
+class FileEditingDomainService
 {
- 
-    private 
-    const REDIS_KEY_PREFIX = 'file_editing_status'; 
-    private 
-    const TTL_SECONDS = 120; // 2 
-    private Redis $redis; 
-    public function __construct(including erInterface $container) 
-{
- $this->redis = $container->get(Redis::class); 
+    private const REDIS_KEY_PREFIX = 'file_editing_status';
+
+    private const TTL_SECONDS = 120; // 2分钟
+
+    private Redis $redis;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->redis = $container->get(Redis::class);
+    }
+
+    /**
+     * 加入编辑.
+     */
+    public function joinEditing(int $fileId, string $userId, string $organizationCode): void
+    {
+        $key = $this->buildRedisKey($fileId, $organizationCode);
+
+        // 添加用户到编辑列表
+        $this->redis->sadd($key, $userId);
+        $this->redis->expire($key, self::TTL_SECONDS);
+    }
+
+    /**
+     * 离开编辑.
+     */
+    public function leaveEditing(int $fileId, string $userId, string $organizationCode): void
+    {
+        $key = $this->buildRedisKey($fileId, $organizationCode);
+
+        // 从编辑列表中移除用户
+        $this->redis->srem($key, $userId);
+
+        // 如果没有用户在编辑，删除整个key
+        if ($this->redis->scard($key) === 0) {
+            $this->redis->del($key);
+        }
+    }
+
+    /**
+     * 获取编辑用户数量.
+     */
+    public function getEditingUsersCount(int $fileId, string $organizationCode): int
+    {
+        $key = $this->buildRedisKey($fileId, $organizationCode);
+
+        // 返回编辑用户数量
+        return $this->redis->scard($key);
+    }
+
+    /**
+     * 构建Redis键名.
+     */
+    public function buildRedisKey(int $fileId, string $organizationCode): string
+    {
+        return sprintf('%s:%s:%d', self::REDIS_KEY_PREFIX, $organizationCode, $fileId);
+    }
 }
- /** * JoinEdit. */ 
-    public function joinEditing(int $fileId, string $userId, string $organizationCode): void 
-{
- $key = $this->buildRedisKey($fileId, $organizationCode); // Adduser Editlist $this->redis->sadd($key, $userId); $this->redis->expire($key, self::TTL_SECONDS); 
-}
- /** * Edit. */ 
-    public function leaveEditing(int $fileId, string $userId, string $organizationCode): void 
-{
- $key = $this->buildRedisKey($fileId, $organizationCode); // FromEditlist in Removeuser $this->redis->srem($key, $userId); // IfDon't haveuser AtEditdelete key if ($this->redis->scard($key) === 0) 
-{
- $this->redis->del($key); 
-}
- 
-}
- /** * GetEdituser Quantity. */ 
-    public function getEditinguser sCount(int $fileId, string $organizationCode): int 
-{
- $key = $this->buildRedisKey($fileId, $organizationCode); // Return Edituser Quantity return $this->redis->scard($key); 
-}
- /** * BuildRedisKey. */ 
-    public function buildRedisKey(int $fileId, string $organizationCode): string 
-{
- return sprintf('%s:%s:%d', self::REDIS_KEY_PREFIX, $organizationCode, $fileId); 
-}
- 
-}
- 

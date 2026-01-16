@@ -1,46 +1,77 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\Utils;
 
-namespace Delightful\BeDelightful\Infrastructure\Utils;
+/**
+ * 可逆密码加密解密工具.
+ */
+class PasswordCrypt
+{
+    /**
+     * 加密方法.
+     *
+     * @param string $password 原始密码
+     * @return string 加密后的密码
+     */
+    public static function encrypt(string $password): string
+    {
+        if (empty($password)) {
+            return '';
+        }
 
-/** * Reversible password encryption and decryption tool. */
+        // 使用 openssl 加密
+        $method = 'AES-256-CBC';
+        $key = self::getEncryptKey();
+        $iv = substr(hash('sha256', self::getEncryptIv()), 0, 16);
 
-class PasswordCrypt 
-{
- /** * EncryptMethod. * * @param string $password Original password * @return string Encrypted password */ 
-    public 
-    static function encrypt(string $password): string 
-{
- if (empty($password)) 
-{
- return ''; 
+        $encrypted = openssl_encrypt($password, $method, $key, 0, $iv);
+        return base64_encode($encrypted);
+    }
+
+    /**
+     * 解密方法.
+     *
+     * @param string $encryptedPassword 加密后的密码
+     * @return string 解密后的原始密码
+     */
+    public static function decrypt(string $encryptedPassword): string
+    {
+        if (empty($encryptedPassword)) {
+            return '';
+        }
+
+        // 使用 openssl 解密
+        $method = 'AES-256-CBC';
+        $key = self::getEncryptKey();
+        $iv = substr(hash('sha256', self::getEncryptIv()), 0, 16);
+
+        $encrypted = base64_decode($encryptedPassword);
+        $result = openssl_decrypt($encrypted, $method, $key, 0, $iv);
+        return $result === false ? '' : $result;
+    }
+
+    /**
+     * 获取加密密钥.
+     *
+     * @return string 加密密钥
+     */
+    private static function getEncryptKey(): string
+    {
+        return config('be-delightful.share.encrypt_key');
+    }
+
+    /**
+     * 获取加密向量.
+     *
+     * @return string 加密向量
+     */
+    private static function getEncryptIv(): string
+    {
+        return config('be-delightful.share.encrypt_iv');
+    }
 }
- // Using openssl Encrypt $method = 'AES-256-CBC'; $key = self::getEncryptKey(); $iv = substr(hash('sha256', self::getEncryptIv()), 0, 16); $encrypted = openssl_encrypt($password, $method, $key, 0, $iv); return base64_encode($encrypted); 
-}
- /** * DecryptMethod. * * @param string $encryptedPassword Encrypted password * @return string Decrypted original password */ 
-    public 
-    static function decrypt(string $encryptedPassword): string 
-{
- if (empty($encryptedPassword)) 
-{
- return ''; 
-}
- // Using openssl Decrypt $method = 'AES-256-CBC'; $key = self::getEncryptKey(); $iv = substr(hash('sha256', self::getEncryptIv()), 0, 16); $encrypted = base64_decode($encryptedPassword); $result = openssl_decrypt($encrypted, $method, $key, 0, $iv); return $result === false ? '' : $result; 
-}
- /** * GetEncryptKey. * * @return string EncryptKey */ 
-    private 
-    static function getEncryptKey(): string 
-{
- return config('super-magic.share.encrypt_key'); 
-}
- /** * Get encryption vector. * * @return string Encryption vector */ 
-    private 
-    static function getEncryptIv(): string 
-{
- return config('super-magic.share.encrypt_iv'); 
-}
- 
-}
- 

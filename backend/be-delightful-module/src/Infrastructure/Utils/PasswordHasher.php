@@ -1,31 +1,57 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\Utils;
 
-namespace Delightful\BeDelightful\Infrastructure\Utils;
+/**
+ * 密码哈希工具类.
+ */
+class PasswordHasher
+{
+    protected string $hashAlgo = PASSWORD_BCRYPT;
 
-/** * Password hashing tool class. */
+    /**
+     * 密码哈希选项.
+     */
+    protected array $hashOptions = [
+        'cost' => 10,
+    ];
 
-class PasswordHasher 
-{
- 
-    protected string $hashAlgo = PASSWORD_BCRYPT; /** * Password hashing options. */ 
-    protected array $hashOptions = [ 'cost' => 10, ]; /** * Hash password. * * @param string $password Original password * @return string Hashed password */ 
-    public function hash(string $password): string 
-{
- return password_hash($password, $this->hashAlgo, $this->hashOptions); 
+    /**
+     * 对密码进行哈希处理.
+     *
+     * @param string $password 原始密码
+     * @return string 哈希后的密码
+     */
+    public function hash(string $password): string
+    {
+        return password_hash($password, $this->hashAlgo, $this->hashOptions);
+    }
+
+    /**
+     * 验证密码是否正确.
+     *
+     * @param string $password 原始密码
+     * @param string $hash 哈希后的密码
+     * @return bool 是否验证通过
+     */
+    public function verify(string $password, string $hash): bool
+    {
+        return password_verify($password, $hash);
+    }
+
+    /**
+     * 检查密码哈希是否需要重新哈希.
+     *
+     * @param string $hash 哈希后的密码
+     * @return bool 是否需要重新哈希
+     */
+    public function needsRehash(string $hash): bool
+    {
+        return password_needs_rehash($hash, $this->hashAlgo, $this->hashOptions);
+    }
 }
- /** * Validate Passwordwhether Correct. * * @param string $password Original password * @param string $hash Hashed password * @return bool whether Validate Through */ 
-    public function verify(string $password, string $hash): bool 
-{
- return password_verify($password, $hash); 
-}
- /** * check if password hash needs rehashing. * * @param string $hash Hashed password * @return bool whether rehashing is needed */ 
-    public function needsRehash(string $hash): bool 
-{
- return password_needs_rehash($hash, $this->hashAlgo, $this->hashOptions); 
-}
- 
-}
- 

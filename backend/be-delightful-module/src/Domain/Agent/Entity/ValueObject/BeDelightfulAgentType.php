@@ -1,43 +1,65 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\Agent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
+enum BeDelightfulAgentType: int
+{
+    /**
+     * 内置智能体.
+     */
+    case Built_In = 1;
 
-enum BeDelightfulAgentType: int 
-{
- /** * Built-in. */ case Built_In = 1; /** * Custom. */ case Custom = 2; /** * GetTypeDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::Built_In => 'Built-in', self::Custom => 'Custom', 
+    /**
+     * 自定义智能体.
+     */
+    case Custom = 2;
+
+    /**
+     * 获取类型描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::Built_In => '内置',
+            self::Custom => '自定义',
+        };
+    }
+
+    /**
+     * 是否为内置类型.
+     */
+    public function isBuiltIn(): bool
+    {
+        return $this === self::Built_In;
+    }
+
+    /**
+     * 是否为自定义类型.
+     */
+    public function isCustom(): bool
+    {
+        return $this === self::Custom;
+    }
+
+    /**
+     * 获取所有可用的枚举值.
+     * @return array<int>
+     */
+    public static function getAvailableValues(): array
+    {
+        return array_map(fn ($case) => $case->value, self::cases());
+    }
+
+    /**
+     * 获取所有可用的枚举值字符串（用于验证规则）.
+     */
+    public static function getValidationRule(): string
+    {
+        return implode(',', self::getAvailableValues());
+    }
 }
-; 
-}
- /** * whether as Built-inType. */ 
-    public function isBuiltIn(): bool 
-{
- return $this === self::Built_In; 
-}
- /** * whether as CustomType. */ 
-    public function isCustom(): bool 
-{
- return $this === self::Custom; 
-}
- /** * GetAllAvailableEnumValue. * @return array<int> */ 
-    public 
-    static function getAvailableValues(): array 
-{
- return array_map(fn ($case) => $case->value, self::cases()); 
-}
- /** * GetAllAvailableEnumValueStringfor Validate Rule. */ 
-    public 
-    static function getValidate Rule(): string 
-{
- return implode(',', self::getAvailableValues()); 
-}
- 
-}
- 

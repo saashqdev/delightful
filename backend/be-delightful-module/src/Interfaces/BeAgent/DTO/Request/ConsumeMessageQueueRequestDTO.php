@@ -1,33 +1,51 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Request;
 
 use App\Infrastructure\Core\AbstractRequestDTO;
-/** * Consume message queue request DTO. * Used to receive request parameters for consuming message queue. */
 
-class ConsumeMessageQueueRequestDTO extends AbstractRequestDTO 
+/**
+ * Consume message queue request DTO.
+ * Used to receive request parameters for consuming message queue.
+ */
+class ConsumeMessageQueueRequestDTO extends AbstractRequestDTO
 {
- /** * Force consume flag (optional). * If true, bypass some safety checks. */ 
-    public bool $force = false; /** * Get force consume flag. */ 
-    public function isForce(): bool 
-{
- return $this->force; 
+    /**
+     * Force consume flag (optional).
+     * If true, bypass some safety checks.
+     */
+    public bool $force = false;
+
+    /**
+     * Get force consume flag.
+     */
+    public function isForce(): bool
+    {
+        return $this->force;
+    }
+
+    /**
+     * Get validation rules.
+     */
+    protected static function getHyperfValidationRules(): array
+    {
+        return [
+            'force' => 'nullable|boolean',
+        ];
+    }
+
+    /**
+     * Get custom error messages for validation failures.
+     */
+    protected static function getHyperfValidationMessage(): array
+    {
+        return [
+            'force.boolean' => 'Force flag must be a boolean value',
+        ];
+    }
 }
- /** * Get validation rules. */ 
-    protected 
-    static function getHyperfValidate Rules(): array 
-{
- return [ 'force' => 'nullable|boolean', ]; 
-}
- /** * Get custom error messages for validation failures. */ 
-    protected 
-    static function getHyperfValidate Message(): array 
-{
- return [ 'force.boolean' => 'Force flag must be a boolean value', ]; 
-}
- 
-}
- 

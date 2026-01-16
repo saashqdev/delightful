@@ -1,20 +1,18 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Event;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
-
-class Attachmentsprocess edEvent 
+class AttachmentsProcessedEvent
 {
- 
-    public function __construct( 
-    public int $parentFileId, 
-    public int $projectId, 
-    public int $taskId = 0 ) 
-{
- 
+    public function __construct(
+        public int $parentFileId,
+        public int $projectId,
+        public int $taskId = 0
+    ) {
+    }
 }
- 
-}
- 

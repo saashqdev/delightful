@@ -1,48 +1,80 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\Share\Constant;
+namespace Dtyq\BeDelightful\Domain\Share\Constant;
 
 use RuntimeException;
-/** * ResourceTypeEnum. */
 
-enum ResourceType: int 
+/**
+ * 资源类型枚举.
+ */
+enum ResourceType: int
 {
- // HaveType case BotCode = 1; // AI case SubFlowCode = 2; // case tool Set = 3; // tool case Knowledge = 4; // Library // NewType case Topic = 5; // topic case Document = 6; // Documentation case Schedule = 7; // case Multitable = 8; // table case Form = 9; // table case MindMap = 10; // Graph case Website = 11; // Website case Project = 12; // Item case File = 13; // File case ProjectInvitation = 14; // ItemInviteLink /** * GetResourceTypeName. */ 
-    public function getBusinessName(): string 
-{
- return match ($this) 
-{
- self::BotCode => 'bot', self::SubFlowCode => 'subflow', self::tool Set => 'toolset', self::Knowledge => 'knowledge', self::Topic => 'topic', self::Document => 'document', self::Schedule => 'schedule', self::Multitable => 'multitable', self::Form => 'form', self::MindMap => 'mindmap', self::Website => 'website', self::Project => 'project', self::File => 'file', self::ProjectInvitation => 'project_invitation', 
+    // 现有类型
+    case BotCode = 1;           // AI 助理
+    case SubFlowCode = 2;       // 子流程
+    case ToolSet = 3;           // 工具集
+    case Knowledge = 4;         // 知识库
+
+    // 新增业务类型
+    case Topic = 5;             // 话题
+    case Document = 6;          // 文档
+    case Schedule = 7;          // 日程
+    case MultiTable = 8;        // 多维表格
+    case Form = 9;              // 表单
+    case MindMap = 10;          // 思维导图
+    case Website = 11;          // 网站
+    case Project = 12;          // 项目
+    case File = 13;             // 文件
+    case ProjectInvitation = 14; // 项目邀请链接
+
+    /**
+     * 获取资源类型的业务名称.
+     */
+    public function getBusinessName(): string
+    {
+        return match ($this) {
+            self::BotCode => 'bot',
+            self::SubFlowCode => 'subflow',
+            self::ToolSet => 'toolset',
+            self::Knowledge => 'knowledge',
+            self::Topic => 'topic',
+            self::Document => 'document',
+            self::Schedule => 'schedule',
+            self::MultiTable => 'multitable',
+            self::Form => 'form',
+            self::MindMap => 'mindmap',
+            self::Website => 'website',
+            self::Project => 'project',
+            self::File => 'file',
+            self::ProjectInvitation => 'project_invitation',
+        };
+    }
+
+    /**
+     * 根据业务名称获取资源类型枚举.
+     *
+     * @param string $businessName 业务名称
+     * @return ResourceType 资源类型枚举
+     * @throws RuntimeException 当找不到对应的资源类型时抛出异常
+     */
+    public static function fromBusinessName(string $businessName): self
+    {
+        foreach (self::cases() as $type) {
+            if ($type->getBusinessName() === $businessName) {
+                return $type;
+            }
+        }
+
+        throw new RuntimeException("找不到业务名称为 '{$businessName}' 的资源类型");
+    }
+
+    public static function isProjectInvitation(int $type): bool
+    {
+        return self::ProjectInvitation->value === $type;
+    }
 }
-; 
-}
- /** * According toNameGetResourceTypeEnum. * * @param string $businessName Name * @return ResourceType ResourceTypeEnum * @throws RuntimeException Whencorresponding ResourceTypeThrowException */ 
-    public 
-    static function fromBusinessName(string $businessName): self 
-{
- foreach (self::cases() as $type) 
-{
- if ($type->getBusinessName() === $businessName) 
-{
- return $type; 
-}
- 
-}
- throw new RuntimeException( Nameas '
-{
-$businessName
-}
-' ResourceType ); 
-}
- 
-    public 
-    static function isProjectInvitation(int $type): bool 
-{
- return self::ProjectInvitation->value === $type; 
-}
- 
-}
- 

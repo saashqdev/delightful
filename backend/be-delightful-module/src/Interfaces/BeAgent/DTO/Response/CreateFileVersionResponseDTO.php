@@ -1,26 +1,32 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
-/** * CreateFileVersionResponse DTO. */
 
-class CreateFileVersionResponseDTO extends AbstractDTO 
+/**
+ * 创建文件版本响应 DTO.
+ */
+class CreateFileVersionResponseDTO extends AbstractDTO
 {
- /** * CreateEmptyResponseInstance. */ 
-    public 
-    static function createEmpty(): self 
-{
- return new self(); 
+    /**
+     * 创建空响应实例.
+     */
+    public static function createEmpty(): self
+    {
+        return new self();
+    }
+
+    /**
+     * 转换为数组.
+     */
+    public function toArray(): array
+    {
+        return [];
+    }
 }
- /** * Convert toArray. */ 
-    public function toArray(): array 
-{
- return []; 
-}
- 
-}
- 

@@ -1,31 +1,45 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Request;
 
 use Hyperf\HttpServer\Contract\RequestInterface;
 
-class GetTopicMetricsRequestDTO 
+class GetTopicMetricsRequestDTO
 {
- /** * @var string OrganizationCodeOptional */ 
-    protected string $organizationCode = ''; /** * FromRequestDTO. */ 
-    public 
-    static function fromRequest(RequestInterface $request): self 
-{
- $dto = new self(); $dto->setOrganizationCode($request->input('organization_code', '')); return $dto; 
+    /**
+     * @var string 组织机构代码，可选
+     */
+    protected string $organizationCode = '';
+
+    /**
+     * 从请求构造DTO.
+     */
+    public static function fromRequest(RequestInterface $request): self
+    {
+        $dto = new self();
+        $dto->setOrganizationCode($request->input('organization_code', ''));
+        return $dto;
+    }
+
+    /**
+     * 获取组织机构代码
+     */
+    public function getOrganizationCode(): string
+    {
+        return $this->organizationCode;
+    }
+
+    /**
+     * 设置组织机构代码
+     */
+    public function setOrganizationCode(string $organizationCode): self
+    {
+        $this->organizationCode = $organizationCode;
+        return $this;
+    }
 }
- /** * GetOrganizationCode */ 
-    public function getOrganizationCode(): string 
-{
- return $this->organizationCode; 
-}
- /** * Set OrganizationCode */ 
-    public function setOrganizationCode(string $organizationCode): self 
-{
- $this->organizationCode = $organizationCode; return $this; 
-}
- 
-}
- 

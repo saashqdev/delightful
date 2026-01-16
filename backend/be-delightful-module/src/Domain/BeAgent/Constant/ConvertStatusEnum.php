@@ -1,41 +1,51 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Constant;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Constant;
 
 use InvalidArgumentException;
-/** * ConvertTaskStatusEnum. */
 
-enum ConvertStatusEnum: string 
+/**
+ * 转换任务状态枚举.
+ */
+enum ConvertStatusEnum: string
 {
- case PENDING = 'pending'; case PROCESSING = 'processing'; case COMPLETED = 'completed'; case FAILED = 'failed'; /** * GetAllValidStatusValue. */ 
-    public 
-    static function getValidStatuses(): array 
-{
- return array_map(fn (self $case) => $case->value, self::cases()); 
+    case PENDING = 'pending';
+    case PROCESSING = 'processing';
+    case COMPLETED = 'completed';
+    case FAILED = 'failed';
+
+    /**
+     * 获取所有有效状态值.
+     */
+    public static function getValidStatuses(): array
+    {
+        return array_map(fn (self $case) => $case->value, self::cases());
+    }
+
+    /**
+     * 检查状态是否有效.
+     */
+    public static function isValid(string $status): bool
+    {
+        return in_array($status, self::getValidStatuses(), true);
+    }
+
+    /**
+     * 从字符串创建枚举实例.
+     */
+    public static function fromString(string $status): self
+    {
+        return match ($status) {
+            'pending' => self::PENDING,
+            'processing' => self::PROCESSING,
+            'completed' => self::COMPLETED,
+            'failed' => self::FAILED,
+            default => throw new InvalidArgumentException("Invalid status: {$status}"),
+        };
+    }
 }
- /** * check Statuswhether valid. */ 
-    public 
-    static function isValid(string $status): bool 
-{
- return in_array($status, self::getValidStatuses(), true); 
-}
- /** * FromStringCreateEnumInstance. */ 
-    public 
-    static function fromString(string $status): self 
-{
- return match ($status) 
-{
- 'pending' => self::PENDING, 'processing' => self::PROCESSING, 'completed' => self::COMPLETED, 'failed' => self::FAILED, default => throw new InvalidArgumentException( Invalid status: 
-{
-$status
-}
- ), 
-}
-; 
-}
- 
-}
- 

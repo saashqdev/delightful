@@ -1,84 +1,80 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Application\SuperAgent\Command;
+namespace Dtyq\BeDelightful\Application\SuperAgent\Command;
 
 use Delightful\BeDelightful\Application\SuperAgent\Crontab\MessageCompensationCrontab;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
-use Psr\including er\including erInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Throwable;
-/** * Run Message Compensation Command * ManualRowMessagecompensation Task. */ #[Command]
 
-class RunMessageCompensationCommand extends HyperfCommand 
+/**
+ * Run Message Compensation Command
+ * 手动运行消息补偿任务的命令.
+ */
+#[Command]
+class RunMessageCompensationCommand extends HyperfCommand
 {
- 
-    public function __construct(
-    protected including erInterface $container) 
-{
- parent::__construct('superagent:compensation'); 
+    public function __construct(protected ContainerInterface $container)
+    {
+        parent::__construct('superagent:compensation');
+    }
+
+    public function configure(): void
+    {
+        parent::configure();
+        $this->setDescription('Run message compensation task manually');
+        $this->addOption('loop', 'l', InputOption::VALUE_NONE, 'Run in loop mode (every 5 seconds)');
+        $this->addOption('times', 't', InputOption::VALUE_OPTIONAL, 'Number of times to run (only in loop mode)', 10);
+    }
+
+    public function handle(): void
+    {
+        $messageCompensationCrontab = $this->container->get(MessageCompensationCrontab::class);
+
+        $isLoop = $this->input->getOption('loop');
+        $times = (int) $this->input->getOption('times');
+
+        if ($isLoop) {
+            $this->info('开始循环运行消息补偿任务...');
+            $this->info("将运行 {$times} 次，每次间隔 5 秒");
+
+            for ($i = 1; $i <= $times; ++$i) {
+                $this->info("--- 第 {$i} 次运行 ---");
+                $startTime = microtime(true);
+
+                try {
+                    $messageCompensationCrontab->execute();
+                    $executionTime = round((microtime(true) - $startTime) * 1000, 2);
+                    $this->info("执行完成，耗时: {$executionTime}ms");
+                } catch (Throwable $e) {
+                    $this->error('执行失败: ' . $e->getMessage());
+                }
+
+                if ($i < $times) {
+                    $this->info('等待 5 秒...');
+                    sleep(5);
+                }
+            }
+
+            $this->info('循环运行完成！');
+        } else {
+            $this->info('运行消息补偿任务...');
+            $startTime = microtime(true);
+
+            try {
+                $messageCompensationCrontab->execute();
+                $executionTime = round((microtime(true) - $startTime) * 1000, 2);
+                $this->info("任务执行完成，耗时: {$executionTime}ms");
+            } catch (Throwable $e) {
+                $this->error('任务执行失败: ' . $e->getMessage());
+            }
+        }
+    }
 }
- 
-    public function configure(): void 
-{
- parent::configure(); $this->setDescription('Run message compensation task manually'); $this->addOption('loop', 'l', InputOption::VALUE_NONE, 'Run in loop mode (every 5 seconds)'); $this->addOption('times', 't', InputOption::VALUE_OPTIONAL, 'Number of times to run (only in loop mode)', 10); 
-}
- 
-    public function handle(): void 
-{
- $messageCompensationCrontab = $this->container->get(MessageCompensationCrontab::class); $isLoop = $this->input->getOption('loop'); $times = (int) $this->input->getOption('times'); if ($isLoop) 
-{
- $this->info('Start running message compensation task loop...'); $this->info( Row 
-{
-$times
-}
- interval 5 seconds each time ); for ($i = 1; $i <= $times; ++$i) 
-{
- $this->info( --- 
-{
-$i
-}
- Row --- ); $startTime = microtime(true); try 
-{
- $messageCompensationCrontab->execute(); $executionTime = round((microtime(true) - $startTime) * 1000, 2); $this->info( Execution completed, time taken: 
-{
-$executionTime
-}
-ms ); 
-}
- catch (Throwable $e) 
-{
- $this->error('Execution failed: ' . $e->getMessage()); 
-}
- if ($i < $times) 
-{
- $this->info('Waiting 5 seconds...'); sleep(5); 
-}
- 
-}
- $this->info('loop Rowcomplete '); 
-}
- else 
-{
- $this->info('RowMessagecompensation Task...'); $startTime = microtime(true); try 
-{
- $messageCompensationCrontab->execute(); $executionTime = round((microtime(true) - $startTime) * 1000, 2); $this->info( TaskExecution completed, time taken: 
-{
-$executionTime
-}
-ms ); 
-}
- catch (Throwable $e) 
-{
- $this->error('TaskExecution failed: ' . $e->getMessage()); 
-}
- 
-}
- 
-}
- 
-}
- 

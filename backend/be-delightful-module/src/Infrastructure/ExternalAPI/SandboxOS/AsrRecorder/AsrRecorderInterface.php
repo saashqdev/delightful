@@ -1,21 +1,77 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder;
 
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Asrrecord er;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Config\AsrAudioConfig;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Config\AsrNoteFileConfig;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Config\AsrTranscriptFileConfig;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Response\AsrRecorderResponse;
 
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Asrrecord er\Config\AsrAudioConfig;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Asrrecord er\Config\AsrNoteFileConfig;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Asrrecord er\Config\AsrTranscriptFileConfig;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Asrrecord er\Response\Asrrecord erResponse;
-/** * ASR ServiceInterface. */
-
-interface Asrrecord erInterface 
+/**
+ * ASR 录音服务接口.
+ */
+interface AsrRecorderInterface
 {
- /** * ASR Task * Pairsandbox POST /api/asr/task/start. * * @param string $sandboxId Sandbox ID * @param string $taskKey TaskKey * @param string $sourceDir DirectoryRelativePath * @param string $workspaceDir workspace DirectoryDefault .workspace * @param null|AsrNoteFileConfig $noteFileConfig FileConfigurationObjectOptional * @param null|AsrTranscriptFileConfig $transcriptFileConfig FluidIdentifyConfigurationObjectOptional * @return Asrrecord erResponse ResponseResult */ 
-    public function startTask( string $sandboxId, string $taskKey, string $sourceDir, string $workspaceDir = '.workspace', ?AsrNoteFileConfig $noteFileConfig = null, ?AsrTranscriptFileConfig $transcriptFileConfig = null ): Asrrecord erResponse; /** * complete ASR TaskMerge (V2 StructureVersion) * Pairsandbox POST /api/asr/task/finish * Supportquery StatusMultiple callsSameParameter. * * @param string $sandboxId Sandbox ID * @param string $taskKey TaskKey * @param string $workspaceDir workspace Directory * @param AsrAudioConfig $audioConfig ConfigurationObject * @param null|AsrNoteFileConfig $noteFileConfig FileConfigurationObject * @param null|AsrTranscriptFileConfig $transcriptFileConfig FluidIdentifyConfigurationObject * @return Asrrecord erResponse ResponseResult */ 
-    public function finishTask( string $sandboxId, string $taskKey, string $workspaceDir, AsrAudioConfig $audioConfig, ?AsrNoteFileConfig $noteFileConfig = null, ?AsrTranscriptFileConfig $transcriptFileConfig = null ): Asrrecord erResponse; /** * cancel ASR Task * Pairsandbox POST /api/asr/task/cancel. * * @param string $sandboxId Sandbox ID * @param string $taskKey TaskKey * @param string $workspaceDir workspace DirectoryDefault .workspace * @return Asrrecord erResponse ResponseResult */ 
-    public function cancelTask( string $sandboxId, string $taskKey, string $workspaceDir = '.workspace' ): Asrrecord erResponse; 
+    /**
+     * 启动 ASR 录音任务
+     * 对应沙箱 POST /api/asr/task/start.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param string $taskKey 任务键
+     * @param string $sourceDir 音频分片目录（相对路径）
+     * @param string $workspaceDir 工作区目录，默认 .workspace
+     * @param null|AsrNoteFileConfig $noteFileConfig 笔记文件配置对象（可选）
+     * @param null|AsrTranscriptFileConfig $transcriptFileConfig 流式识别配置对象（可选）
+     * @return AsrRecorderResponse 响应结果
+     */
+    public function startTask(
+        string $sandboxId,
+        string $taskKey,
+        string $sourceDir,
+        string $workspaceDir = '.workspace',
+        ?AsrNoteFileConfig $noteFileConfig = null,
+        ?AsrTranscriptFileConfig $transcriptFileConfig = null
+    ): AsrRecorderResponse;
+
+    /**
+     * 完成 ASR 录音任务并合并 (V2 结构化版本)
+     * 对应沙箱 POST /api/asr/task/finish
+     * 支持轮询查询状态（多次调用相同参数）.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param string $taskKey 任务键
+     * @param string $workspaceDir 工作区目录
+     * @param AsrAudioConfig $audioConfig 音频配置对象
+     * @param null|AsrNoteFileConfig $noteFileConfig 笔记文件配置对象
+     * @param null|AsrTranscriptFileConfig $transcriptFileConfig 流式识别配置对象
+     * @return AsrRecorderResponse 响应结果
+     */
+    public function finishTask(
+        string $sandboxId,
+        string $taskKey,
+        string $workspaceDir,
+        AsrAudioConfig $audioConfig,
+        ?AsrNoteFileConfig $noteFileConfig = null,
+        ?AsrTranscriptFileConfig $transcriptFileConfig = null
+    ): AsrRecorderResponse;
+
+    /**
+     * 取消 ASR 录音任务
+     * 对应沙箱 POST /api/asr/task/cancel.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param string $taskKey 任务键
+     * @param string $workspaceDir 工作区目录，默认 .workspace
+     * @return AsrRecorderResponse 响应结果
+     */
+    public function cancelTask(
+        string $sandboxId,
+        string $taskKey,
+        string $workspaceDir = '.workspace'
+    ): AsrRecorderResponse;
 }
- 

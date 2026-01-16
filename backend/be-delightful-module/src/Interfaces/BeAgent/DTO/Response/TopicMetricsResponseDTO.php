@@ -1,41 +1,68 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
 
-class TopicMetricsResponseDTO extends AbstractDTO 
+class TopicMetricsResponseDTO extends AbstractDTO
 {
- /** * @var StatusMetricsDTO StatusData */ 
-    protected StatusMetricsDTO $statusMetrics; /** * @var TotalMetricsDTO Data */ 
-    protected TotalMetricsDTO $totalMetrics; /** * GetStatus. */ 
-    public function getStatusMetrics(): StatusMetricsDTO 
-{
- return $this->statusMetrics; 
+    /**
+     * @var StatusMetricsDTO 状态指标数据
+     */
+    protected StatusMetricsDTO $statusMetrics;
+
+    /**
+     * @var TotalMetricsDTO 总计指标数据
+     */
+    protected TotalMetricsDTO $totalMetrics;
+
+    /**
+     * 获取状态指标.
+     */
+    public function getStatusMetrics(): StatusMetricsDTO
+    {
+        return $this->statusMetrics;
+    }
+
+    /**
+     * 设置状态指标.
+     */
+    public function setStatusMetrics(StatusMetricsDTO $statusMetrics): self
+    {
+        $this->statusMetrics = $statusMetrics;
+        return $this;
+    }
+
+    /**
+     * 获取总计指标.
+     */
+    public function getTotalMetrics(): TotalMetricsDTO
+    {
+        return $this->totalMetrics;
+    }
+
+    /**
+     * 设置总计指标.
+     */
+    public function setTotalMetrics(TotalMetricsDTO $totalMetrics): self
+    {
+        $this->totalMetrics = $totalMetrics;
+        return $this;
+    }
+
+    /**
+     * 转换为数组.
+     */
+    public function toArray(): array
+    {
+        return [
+            'status_metrics' => $this->statusMetrics->toArray(),
+            'total_metrics' => $this->totalMetrics->toArray(),
+        ];
+    }
 }
- /** * Set Status. */ 
-    public function setStatusMetrics(StatusMetricsDTO $statusMetrics): self 
-{
- $this->statusMetrics = $statusMetrics; return $this; 
-}
- /** * Get. */ 
-    public function getTotalMetrics(): TotalMetricsDTO 
-{
- return $this->totalMetrics; 
-}
- /** * Set . */ 
-    public function setTotalMetrics(TotalMetricsDTO $totalMetrics): self 
-{
- $this->totalMetrics = $totalMetrics; return $this; 
-}
- /** * Convert toArray. */ 
-    public function toArray(): array 
-{
- return [ 'status_metrics' => $this->statusMetrics->toArray(), 'total_metrics' => $this->totalMetrics->toArray(), ]; 
-}
- 
-}
- 

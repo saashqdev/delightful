@@ -1,183 +1,237 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Infrastructure\Utils;
+namespace Dtyq\BeDelightful\Infrastructure\Utils;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-/** * Task status validation utility class. * * Provides status transition rule validation to prevent state competition caused by message disorder * * Status categories: * - Waiting status: WAITING - can transition to any status * - Active status: RUNNING - can only transition to 
-    final or suspended status * - Recoverable status: Suspended - can only transition to WAITING or 
-    final status * - Final status: FINISHED, ERROR, Stopped - can transition to WAITING or other 
-    final status */
 
-class TaskStatusValidator 
+/**
+ * 任务状态验证工具类.
+ *
+ * 提供状态转换规则验证，防止消息乱序导致的状态竞争问题
+ *
+ * 状态分类：
+ * - 等待状态：WAITING - 可以转换到任何状态
+ * - 活跃状态：RUNNING - 只能转换到终态或挂起态
+ * - 可恢复状态：Suspended - 只能转换到 WAITING 或终态
+ * - 终态状态：FINISHED, ERROR, Stopped - 可以转换到 WAITING 或其他终态
+ */
+class TaskStatusValidator
 {
- /** * Validate whether status transition is allowed. * * @param null|TaskStatus $currentStatus current status * @param TaskStatus $newStatus New status * @return bool whether transition is allowed */ 
-    public 
-    static function isTransitionAllowed(?TaskStatus $currentStatus, TaskStatus $newStatus): bool 
-{
- // If current status cannot be obtained, allow transition if ($currentStatus === null) 
-{
- return true; 
+    /**
+     * 验证状态转换是否允许.
+     *
+     * @param null|TaskStatus $currentStatus 当前状态
+     * @param TaskStatus $newStatus 新状态
+     * @return bool 是否允许转换
+     */
+    public static function isTransitionAllowed(?TaskStatus $currentStatus, TaskStatus $newStatus): bool
+    {
+        // 如果无法获取当前状态，允许转换
+        if ($currentStatus === null) {
+            return true;
+        }
+
+        // 相同状态，允许（幂等操作）
+        if ($currentStatus === $newStatus) {
+            return true;
+        }
+
+        // 应用状态转换规则
+        return self::applyTransitionRules($currentStatus, $newStatus);
+    }
+
+    /**
+     * 获取状态类型描述.
+     *
+     * @param TaskStatus $status 状态
+     * @return string 状态类型
+     */
+    public static function getStatusType(TaskStatus $status): string
+    {
+        if (self::isWaitingStatus($status)) {
+            return 'waiting';
+        }
+
+        if (self::isActiveStatus($status)) {
+            return 'active';
+        }
+
+        if (self::isFinalStatus($status)) {
+            return 'final';
+        }
+
+        if ($status === TaskStatus::Suspended) {
+            return 'suspended';
+        }
+
+        return 'unknown';
+    }
+
+    /**
+     * 获取拒绝转换的原因.
+     *
+     * @param TaskStatus $currentStatus 当前状态
+     * @param TaskStatus $newStatus 新状态
+     * @return string 拒绝原因
+     */
+    public static function getRejectReason(TaskStatus $currentStatus, TaskStatus $newStatus): string
+    {
+        if ($currentStatus === TaskStatus::RUNNING && $newStatus === TaskStatus::WAITING) {
+            return '运行中的任务不能回到等待状态';
+        }
+
+        if ($currentStatus === TaskStatus::RUNNING && ! self::isFinalStatus($newStatus) && $newStatus !== TaskStatus::Suspended) {
+            return '运行中的任务只能转换到终态或挂起态';
+        }
+
+        if (self::isFinalStatus($currentStatus) && $newStatus === TaskStatus::RUNNING) {
+            return '终态任务不能直接转换为运行状态';
+        }
+
+        if (self::isFinalStatus($currentStatus) && $newStatus === TaskStatus::Suspended) {
+            return '终态任务不能转换为挂起状态';
+        }
+
+        if ($currentStatus === TaskStatus::Suspended && $newStatus === TaskStatus::RUNNING) {
+            return '挂起任务需要先转换为等待状态才能执行';
+        }
+
+        if ($currentStatus === TaskStatus::Suspended && ! self::isFinalStatus($newStatus) && $newStatus !== TaskStatus::WAITING) {
+            return '挂起任务只能转换为等待状态或终态';
+        }
+
+        return '状态转换不符合业务规则';
+    }
+
+    /**
+     * 获取允许的下一步状态
+     *
+     * @param TaskStatus $currentStatus 当前状态
+     * @return TaskStatus[] 允许的下一步状态列表
+     */
+    public static function getAllowedNextStates(TaskStatus $currentStatus): array
+    {
+        $allowed = [];
+
+        foreach (TaskStatus::cases() as $status) {
+            if (self::isTransitionAllowed($currentStatus, $status)) {
+                $allowed[] = $status;
+            }
+        }
+
+        return $allowed;
+    }
+
+    /**
+     * 验证状态转换链是否合法.
+     *
+     * @param TaskStatus[] $statusChain 状态转换链
+     * @return array 验证结果 ['valid' => bool, 'invalid_step' => int|null, 'reason' => string]
+     */
+    public static function validateTransitionChain(array $statusChain): array
+    {
+        if (empty($statusChain)) {
+            return ['valid' => true, 'invalid_step' => null, 'reason' => ''];
+        }
+
+        $currentStatus = null;
+
+        foreach ($statusChain as $index => $status) {
+            if (! $status instanceof TaskStatus) {
+                return [
+                    'valid' => false,
+                    'invalid_step' => $index,
+                    'reason' => "步骤 {$index} 包含无效的状态值",
+                ];
+            }
+
+            if (! self::isTransitionAllowed($currentStatus, $status)) {
+                $fromStatus = $currentStatus->value ?? 'null';
+                return [
+                    'valid' => false,
+                    'invalid_step' => $index,
+                    'reason' => "步骤 {$index}: {$fromStatus} → {$status->value} 转换不被允许",
+                ];
+            }
+
+            $currentStatus = $status;
+        }
+
+        return ['valid' => true, 'invalid_step' => null, 'reason' => ''];
+    }
+
+    /**
+     * 应用状态转换规则.
+     *
+     * @param TaskStatus $currentStatus 当前状态
+     * @param TaskStatus $newStatus 新状态
+     * @return bool 是否允许转换
+     */
+    private static function applyTransitionRules(TaskStatus $currentStatus, TaskStatus $newStatus): bool
+    {
+        // 规则1：等待态可以转换到任何状态
+        if (self::isWaitingStatus($currentStatus)) {
+            return true;
+        }
+
+        // 规则2：活跃态只能转换到终态或挂起态
+        if (self::isActiveStatus($currentStatus)) {
+            return $newStatus === TaskStatus::Suspended || self::isFinalStatus($newStatus);
+        }
+
+        // 规则3：挂起态只能转换到 WAITING 或终态
+        if ($currentStatus === TaskStatus::Suspended) {
+            return $newStatus === TaskStatus::WAITING || self::isFinalStatus($newStatus);
+        }
+
+        // 规则4：终态只能转换到 WAITING 或其他终态
+        if (self::isFinalStatus($currentStatus)) {
+            return $newStatus === TaskStatus::WAITING || self::isFinalStatus($newStatus);
+        }
+
+        // 默认允许（未知状态组合）
+        return true;
+    }
+
+    /**
+     * 判断是否为等待状态
+     *
+     * @param TaskStatus $status 状态
+     * @return bool 是否为等待状态
+     */
+    private static function isWaitingStatus(TaskStatus $status): bool
+    {
+        return $status === TaskStatus::WAITING;
+    }
+
+    /**
+     * 判断是否为活跃状态
+     *
+     * @param TaskStatus $status 状态
+     * @return bool 是否为活跃状态
+     */
+    private static function isActiveStatus(TaskStatus $status): bool
+    {
+        return $status === TaskStatus::RUNNING;
+    }
+
+    /**
+     * 判断是否为终态状态
+     *
+     * @param TaskStatus $status 状态
+     * @return bool 是否为终态状态
+     */
+    private static function isFinalStatus(TaskStatus $status): bool
+    {
+        return in_array($status, [
+            TaskStatus::FINISHED,
+            TaskStatus::ERROR,
+            TaskStatus::Stopped,
+        ], true);
+    }
 }
- // Same status, allow (idempotent operation) if ($currentStatus === $newStatus) 
-{
- return true; 
-}
- // Apply status transition rules return self::applyTransitionRules($currentStatus, $newStatus); 
-}
- /** * Get status type description. * * @param TaskStatus $status Status * @return string Status type */ 
-    public 
-    static function getStatusType(TaskStatus $status): string 
-{
- if (self::isWaitingStatus($status)) 
-{
- return 'waiting'; 
-}
- if (self::isActiveStatus($status)) 
-{
- return 'active'; 
-}
- if (self::isFinalStatus($status)) 
-{
- return 'final'; 
-}
- if ($status === TaskStatus::Suspended) 
-{
- return 'suspended'; 
-}
- return 'unknown'; 
-}
- /** * Get reason for rejecting transition. * * @param TaskStatus $currentStatus current status * @param TaskStatus $newStatus New status * @return string Rejection reason */ 
-    public 
-    static function getRejectReason(TaskStatus $currentStatus, TaskStatus $newStatus): string 
-{
- if ($currentStatus === TaskStatus::RUNNING && $newStatus === TaskStatus::WAITING) 
-{
- return 'Running task cannot go back to waiting status'; 
-}
- if ($currentStatus === TaskStatus::RUNNING && ! self::isFinalStatus($newStatus) && $newStatus !== TaskStatus::Suspended) 
-{
- return 'Running task can only transition to 
-    final or suspended status'; 
-}
- if (self::isFinalStatus($currentStatus) && $newStatus === TaskStatus::RUNNING) 
-{
- return 'Final status task cannot directly transition to running status'; 
-}
- if (self::isFinalStatus($currentStatus) && $newStatus === TaskStatus::Suspended) 
-{
- return 'Final status task cannot transition to suspended status'; 
-}
- if ($currentStatus === TaskStatus::Suspended && $newStatus === TaskStatus::RUNNING) 
-{
- return 'Suspended task needs to be converted to waiting status before execution'; 
-}
- if ($currentStatus === TaskStatus::Suspended && ! self::isFinalStatus($newStatus) && $newStatus !== TaskStatus::WAITING) 
-{
- return 'Suspended task can only transition to waiting status or 
-    final status'; 
-}
- return 'Status transition does not comply with business rules'; 
-}
- /** * Get allowed next states * * @param TaskStatus $currentStatus current status * @return TaskStatus[] list of allowed next states */ 
-    public 
-    static function getAllowedNextStates(TaskStatus $currentStatus): array 
-{
- $allowed = []; foreach (TaskStatus::cases() as $status) 
-{
- if (self::isTransitionAllowed($currentStatus, $status)) 
-{
- $allowed[] = $status; 
-}
- 
-}
- return $allowed; 
-}
- /** * Validate whether status transition chain is legal. * * @param TaskStatus[] $statusChain Status transition chain * @return array Validate result ['valid' => bool, 'invalid_step' => int|null, 'reason' => string] */ 
-    public 
-    static function validateTransitionChain(array $statusChain): array 
-{
- if (empty($statusChain)) 
-{
- return ['valid' => true, 'invalid_step' => null, 'reason' => '']; 
-}
- $currentStatus = null; foreach ($statusChain as $index => $status) 
-{
- if (! $status instanceof TaskStatus) 
-{
- return [ 'valid' => false, 'invalid_step' => $index, 'reason' => Step 
-{
-$index
-}
- contains invalid status value , ]; 
-}
- if (! self::isTransitionAllowed($currentStatus, $status)) 
-{
- $fromStatus = $currentStatus->value ?? 'null'; return [ 'valid' => false, 'invalid_step' => $index, 'reason' => Step 
-{
-$index
-}
-: 
-{
-$fromStatus
-}
- → 
-{
-$status->value
-}
- transition is not allowed , ]; 
-}
- $currentStatus = $status; 
-}
- return ['valid' => true, 'invalid_step' => null, 'reason' => '']; 
-}
- /** * ApplyStatusConvertRule. * * @param TaskStatus $currentStatus current Status * @param TaskStatus $newStatus NewStatus * @return bool whether AllowConvert */ 
-    private 
-    static function applyTransitionRules(TaskStatus $currentStatus, TaskStatus $newStatus): bool 
-{
- // Rule 1: Waiting state can convert to any status if (self::isWaitingStatus($currentStatus)) 
-{
- return true; 
-}
- // Rule 2: Active state can only convert to 
-    final state or pending state if (self::isActiveStatus($currentStatus)) 
-{
- return $newStatus === TaskStatus::Suspended || self::isFinalStatus($newStatus); 
-}
- // Rule 3: Pending state can only convert to WAITING or 
-    final state if ($currentStatus === TaskStatus::Suspended) 
-{
- return $newStatus === TaskStatus::WAITING || self::isFinalStatus($newStatus); 
-}
- // Rule 4: Final state can only convert to WAITING or other 
-    final states if (self::isFinalStatus($currentStatus)) 
-{
- return $newStatus === TaskStatus::WAITING || self::isFinalStatus($newStatus); 
-}
- // Default allow (unknown status combinations) return true; 
-}
- /** * Determine if it is waiting status * * @param TaskStatus $status Status * @return bool whether it is waiting status */ 
-    private 
-    static function isWaitingStatus(TaskStatus $status): bool 
-{
- return $status === TaskStatus::WAITING; 
-}
- /** * Determine if it is active status * * @param TaskStatus $status Status * @return bool whether it is active status */ 
-    private 
-    static function isActiveStatus(TaskStatus $status): bool 
-{
- return $status === TaskStatus::RUNNING; 
-}
- /** * Determine if it is 
-    final status * * @param TaskStatus $status Status * @return bool whether it is 
-    final status */ 
-    private 
-    static function isFinalStatus(TaskStatus $status): bool 
-{
- return in_array($status, [ TaskStatus::FINISHED, TaskStatus::ERROR, TaskStatus::Stopped, ], true); 
-}
- 
-}
- 

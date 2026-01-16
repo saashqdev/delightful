@@ -1,12 +1,14 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
-
-enum MemberJoinMethod: string 
+enum MemberJoinMethod: string
 {
- case INTERNAL = 'internal'; // TeamInvite case LINK = 'link'; // InviteLink 
+    case INTERNAL = 'internal';  // 团队内邀请
+    case LINK = 'link';         // 邀请链接
 }
- 

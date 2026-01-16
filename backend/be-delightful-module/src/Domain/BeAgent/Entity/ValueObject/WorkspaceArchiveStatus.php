@@ -1,29 +1,48 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * 工作区归档状态值对象
+ */
+enum WorkspaceArchiveStatus: int
+{
+    /**
+     * 未归档.
+     */
+    case NotArchived = 0;
 
-/** * workspace StatusValueObject */
+    /**
+     * 已归档.
+     */
+    case Archived = 1;
 
-enum WorkspaceArchiveStatus: int 
-{
- /** * not archived . */ case NotArchived = 0; /** * Archived. */ case Archived = 1; /** * GetStatusDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::NotArchived => 'not archived ', self::Archived => 'Archived', 
+    /**
+     * 获取归档状态描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::NotArchived => '未归档',
+            self::Archived => '已归档',
+        };
+    }
+
+    /**
+     * 获取所有归档状态列表.
+     *
+     * @return array<int, string> 状态值与描述的映射
+     */
+    public static function getList(): array
+    {
+        return [
+            self::NotArchived->value => self::NotArchived->getDescription(),
+            self::Archived->value => self::Archived->getDescription(),
+        ];
+    }
 }
-; 
-}
- /** * GetAllStatuslist . * * @return array<int, string> StatusValueDescriptionMap */ 
-    public 
-    static function getlist (): array 
-{
- return [ self::NotArchived->value => self::NotArchived->getDescription(), self::Archived->value => self::Archived->getDescription(), ]; 
-}
- 
-}
- 

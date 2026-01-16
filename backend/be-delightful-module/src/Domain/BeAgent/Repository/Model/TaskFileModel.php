@@ -1,27 +1,78 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Model;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Repository\Model;
 
 use App\Infrastructure\Core\AbstractModel;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
-use Hyperf\Database\Model\Softdelete s;
+use Hyperf\Database\Model\SoftDeletes;
 
-class TaskFileModel extends AbstractModel 
+class TaskFileModel extends AbstractModel
 {
- use Softdelete s;
-protected ?string $table = 'magic_super_agent_task_files'; 
-    protected string $primaryKey = 'file_id'; /** * Fieldlist . */ 
-    protected array $fillable = [ 'file_id', 'user_id', 'organization_code', 'project_id', 'topic_id', 'latest_modified_topic_id', 'task_id', 'latest_modified_task_id', 'file_type', 'file_name', 'file_extension', 'file_key', 'file_size', 'external_url', 'storage_type', // TypeFileprocess AppService.processAttachmentsArrayMethod 'is_hidden', // whether as HideFile 'is_directory', // whether as Directory 'sort', // SortField 'parent_id', // parent ID 'metadata', // FileData JSON 'source', // SourceField1-First page2-ItemDirectory3-agent 'created_at', 'updated_at', 'deleted_at', ]; /** * DefaultPropertyValue */ 
-    protected array $attributes = [ 'storage_type' => StorageType::WORKSPACE->value, // DefaultTypeas workspace 'is_hidden' => 0, // DefaultIs notHideFile0-No1-yes 'is_directory' => 0, // DefaultIs notDirectory0-No1-yes 'sort' => 0, // DefaultSortas 0 'source' => TaskFileSource::HOME->value, // DefaultSourceas First page ]; /** * TypeConvert. */ 
-    protected array $casts = [ 'is_hidden' => 'boolean', // automatic Databasein 0/1Convert tofalse/true 'is_directory' => 'boolean', // automatic Databasein 0/1Convert tofalse/true 'source' => TaskFileSource::class, // automatic Databasein intConvert toTaskFileSourceEnum 'storage_type' => StorageType::class, // automatic Databasein stringConvert toStorageTypeEnum ]; 
-    public function getDates(): array 
-{
- return []; 
+    use SoftDeletes;
+
+    protected ?string $table = 'magic_super_agent_task_files';
+
+    protected string $primaryKey = 'file_id';
+
+    /**
+     * 可填充字段列表.
+     */
+    protected array $fillable = [
+        'file_id',
+        'user_id',
+        'organization_code',
+        'project_id',
+        'topic_id',
+        'latest_modified_topic_id',
+        'task_id',
+        'latest_modified_task_id',
+        'file_type',
+        'file_name',
+        'file_extension',
+        'file_key',
+        'file_size',
+        'external_url',
+        'storage_type', // 存储类型，由FileProcessAppService.processAttachmentsArray方法传入
+        'is_hidden', // 是否为隐藏文件
+        'is_directory', // 是否为目录
+        'sort', // 排序字段
+        'parent_id', // 父级ID
+        'metadata', // 文件元数据，存储 JSON
+        'source', // 来源字段：1-首页，2-项目目录，3-agent
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+    /**
+     * 默认属性值
+     */
+    protected array $attributes = [
+        'storage_type' => StorageType::WORKSPACE->value, // 默认存储类型为workspace
+        'is_hidden' => 0, // 默认不是隐藏文件：0-否，1-是
+        'is_directory' => 0, // 默认不是目录：0-否，1-是
+        'sort' => 0, // 默认排序为0
+        'source' => TaskFileSource::HOME->value, // 默认来源为首页
+    ];
+
+    /**
+     * 类型转换.
+     */
+    protected array $casts = [
+        'is_hidden' => 'boolean', // 自动将数据库中的0/1转换为false/true
+        'is_directory' => 'boolean', // 自动将数据库中的0/1转换为false/true
+        'source' => TaskFileSource::class, // 自动将数据库中的int转换为TaskFileSource枚举
+        'storage_type' => StorageType::class, // 自动将数据库中的string转换为StorageType枚举
+    ];
+
+    public function getDates(): array
+    {
+        return [];
+    }
 }
- 
-}
- 

@@ -1,44 +1,69 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Request;
 
 use App\Infrastructure\Core\AbstractRequestDTO;
-use function Hyperf\Translation\__;
-/** * UpdateItempinned StatusRequest DTO * for Receivepinned /cancel pinned ItemRequestParameter. */
 
-class UpdateProjectPinRequestDTO extends AbstractRequestDTO 
+use function Hyperf\Translation\__;
+
+/**
+ * 更新项目置顶状态请求 DTO
+ * 用于接收置顶/取消置顶项目的请求参数.
+ */
+class UpdateProjectPinRequestDTO extends AbstractRequestDTO
 {
- /** * whether pinned false-cancel pinned true-pinned . */ 
-    public bool $isPin = false; /** * Getwhether pinned . */ 
-    public function getIsPin(): bool 
-{
- return $this->isPin; 
+    /**
+     * 是否置顶：false-取消置顶，true-置顶.
+     */
+    public bool $isPin = false;
+
+    /**
+     * 获取是否置顶.
+     */
+    public function getIsPin(): bool
+    {
+        return $this->isPin;
+    }
+
+    /**
+     * 设置是否置顶.
+     */
+    public function setIsPin(bool $isPin): void
+    {
+        $this->isPin = $isPin;
+    }
+
+    /**
+     * 检查是否为置顶操作.
+     */
+    public function isPinOperation(): bool
+    {
+        return $this->isPin;
+    }
+
+    /**
+     * Get validation rules.
+     */
+    protected static function getHyperfValidationRules(): array
+    {
+        return [
+            'is_pin' => 'required|boolean',
+        ];
+    }
+
+    /**
+     * Get custom error messages for validation failures.
+     */
+    protected static function getHyperfValidationMessage(): array
+    {
+        return [
+            'is_pin.required' => __('project.pin.is_pin_required'),
+            'is_pin.boolean' => __('project.pin.is_pin_must_be_boolean'),
+        ];
+    }
 }
- /** * Set whether pinned . */ 
-    public function setIsPin(bool $isPin): void 
-{
- $this->isPin = $isPin; 
-}
- /** * check whether as pin operation . */ 
-    public function isPinOperation(): bool 
-{
- return $this->isPin; 
-}
- /** * Get validation rules. */ 
-    protected 
-    static function getHyperfValidate Rules(): array 
-{
- return [ 'is_pin' => 'required|boolean', ]; 
-}
- /** * Get custom error messages for validation failures. */ 
-    protected 
-    static function getHyperfValidate Message(): array 
-{
- return [ 'is_pin.required' => __('project.pin.is_pin_required'), 'is_pin.boolean' => __('project.pin.is_pin_must_be_boolean'), ]; 
-}
- 
-}
- 

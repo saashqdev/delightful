@@ -1,21 +1,23 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Exception;
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Exception;
 
 use RuntimeException;
 use Throwable;
-/** * sandbox ExceptionClass * for process sandbox related Exception. */
 
-class SandboxOperationException extends RuntimeException 
+/**
+ * 沙箱操作异常类
+ * 用于统一处理沙箱相关操作的异常.
+ */
+class SandboxOperationException extends RuntimeException
 {
- 
-    public function __construct(string $operation, string $message, int $code = 0, ?Throwable $previous = null) 
-{
- parent::__construct(sprintf('%s failed: %s', $operation, $message), $code, $previous); 
+    public function __construct(string $operation, string $message, int $code = 0, ?Throwable $previous = null)
+    {
+        parent::__construct(sprintf('%s failed: %s', $operation, $message), $code, $previous);
+    }
 }
- 
-}
- 

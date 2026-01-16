@@ -1,17 +1,19 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Application\Share\Service;
+namespace Dtyq\BeDelightful\Application\Share\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;
-/** * ShareApplyServiceAbstractClass. */
 
-class AbstractShareAppService extends AbstractKernelAppService 
+/**
+ * 分享应用服务抽象类.
+ */
+class AbstractShareAppService extends AbstractKernelAppService
 {
- use DataIsolationTrait;
-
+    use DataIsolationTrait;
 }
- 

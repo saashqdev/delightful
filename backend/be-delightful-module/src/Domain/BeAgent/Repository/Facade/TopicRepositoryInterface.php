@@ -1,50 +1,193 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Repository\Facade;
 
 use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
 
-interface TopicRepositoryInterface 
+interface TopicRepositoryInterface
 {
- /** * ThroughIDGettopic . */ 
-    public function getTopicById(int $id): ?TopicEntity; /** * BatchGettopic . * @return TopicEntity[] */ 
-    public function getTopicsByIds(array $ids): array; 
-    public function getTopicWithdelete d(int $id): ?TopicEntity; 
-    public function getTopicBySandboxId(string $sandboxId): ?TopicEntity; /** * According toConditionGettopic list . * SupportFilterPagingSort. * * @param array $conditions query Condition ['workspace_id' => 1, 'user_id' => 'xxx'] * @param bool $needPagination whether need Paging * @param int $pageSize PagingSize * @param int $page Page number * @param string $orderBy SortField * @param string $orderDirection Sortasc or desc * @return array
-{
-list: TopicEntity[], total: int
+    /**
+     * 通过ID获取话题.
+     */
+    public function getTopicById(int $id): ?TopicEntity;
+
+    /**
+     * 批量获取话题.
+     * @return TopicEntity[]
+     */
+    public function getTopicsByIds(array $ids): array;
+
+    public function getTopicWithDeleted(int $id): ?TopicEntity;
+
+    public function getTopicBySandboxId(string $sandboxId): ?TopicEntity;
+
+    /**
+     * 根据条件获取话题列表.
+     * 支持过滤、分页和排序.
+     *
+     * @param array $conditions 查询条件，如 ['workspace_id' => 1, 'user_id' => 'xxx']
+     * @param bool $needPagination 是否需要分页
+     * @param int $pageSize 分页大小
+     * @param int $page 页码
+     * @param string $orderBy 排序字段
+     * @param string $orderDirection 排序方向，asc 或 desc
+     * @return array{list: TopicEntity[], total: int} 话题列表和总数
+     */
+    public function getTopicsByConditions(
+        array $conditions = [],
+        bool $needPagination = true,
+        int $pageSize = 10,
+        int $page = 1,
+        string $orderBy = 'id',
+        string $orderDirection = 'desc'
+    ): array;
+
+    /**
+     * 创建话题.
+     */
+    public function createTopic(TopicEntity $topicEntity): TopicEntity;
+
+    /**
+     * 更新话题.
+     */
+    public function updateTopic(TopicEntity $topicEntity): bool;
+
+    /**
+     * 使用updated_at 作为乐观锁更新话题.
+     */
+    public function updateTopicWithUpdatedAt(TopicEntity $topicEntity, string $updatedAt): bool;
+
+    public function updateTopicByCondition(array $condition, array $data): bool;
+
+    /**
+     * 删除话题.
+     */
+    public function deleteTopic(int $id): bool;
+
+    /**
+     * 通过话题ID集合获取工作区信息.
+     *
+     * @param array $topicIds 话题ID集合
+     * @return array 以话题ID为键，工作区信息为值的关联数组
+     */
+    public function getWorkspaceInfoByTopicIds(array $topicIds): array;
+
+    /**
+     * 获取话题状态统计数据.
+     *
+     * @param array $conditions 统计条件，如 ['user_id' => '123', 'organization_code' => 'abc']
+     * @return array 包含各状态数量的数组
+     */
+    public function getTopicStatusMetrics(array $conditions = []): array;
+
+    public function updateTopicStatus(int $id, $taskId, TaskStatus $status): bool;
+
+    public function updateTopicStatusAndSandboxId(int $id, $taskId, TaskStatus $status, string $sandboxId): bool;
+
+    /**
+     * 获取最近更新时间超过指定时间的话题列表.
+     *
+     * @param string $timeThreshold 时间阈值，如果话题的更新时间早于此时间，则会被包含在结果中
+     * @param int $limit 返回结果的最大数量
+     * @return array<TopicEntity> 话题实体列表
+     */
+    public function getTopicsExceedingUpdateTime(string $timeThreshold, int $limit = 100): array;
+
+    /**
+     * 根据项目ID获取话题列表.
+     */
+    public function getTopicsByProjectId(int $projectId, string $userId): array;
+
+    public function updateTopicStatusBySandboxIds(array $sandboxIds, string $status);
+
+    /**
+     * 统计项目下的话题数量.
+     */
+    public function countTopicsByProjectId(int $projectId): int;
+
+    public function getRunningWorkspaceIds(array $workspaceIds, ?string $userId = null): array;
+
+    public function getRunningProjectIds(array $projectIds, ?string $userId = null): array;
+
+    // ======================= 消息回滚相关方法 =======================
+
+    /**
+     * 根据序列ID获取magic_message_id.
+     */
+    public function getMagicMessageIdBySeqId(string $seqId): ?string;
+
+    /**
+     * 根据magic_message_id获取所有相关的seq_id（所有视角）.
+     */
+    public function getAllSeqIdsByMagicMessageId(string $magicMessageId): array;
+
+    /**
+     * 根据基础seq_ids获取当前话题当前消息以及这条消息后面的所有消息.
+     * @param array $baseSeqIds 基础seq_ids
+     * @return array 所有相关的seq_ids
+     */
+    public function getAllSeqIdsFromCurrent(array $baseSeqIds): array;
+
+    /**
+     * 删除topic_messages数据.
+     */
+    public function deleteTopicMessages(array $seqIds): int;
+
+    /**
+     * 根据seq_ids删除messages和sequences数据.
+     */
+    public function deleteMessagesAndSequencesBySeqIds(array $seqIds): bool;
+
+    /**
+     * 根据im_seq_id删除magic_super_agent_message表中对应话题的后续消息.
+     *
+     * 删除逻辑：
+     * 1. 根据im_seq_id查询magic_super_agent_message表，获取对应的主键id和topic_id
+     * 2. 删除当前话题中id >= 查询到的主键id的所有数据
+     *
+     * @param int $seqId IM消息的序列ID
+     * @return int 删除的记录数
+     */
+    public function deleteSuperAgentMessagesFromSeqId(int $seqId): int;
+
+    /**
+     * 批量更新magic_chat_sequences表的status字段.
+     *
+     * @param array $seqIds 需要更新的序列ID数组
+     * @param MagicMessageStatus $status 目标状态
+     * @return bool 更新是否成功
+     */
+    public function batchUpdateSeqStatus(array $seqIds, MagicMessageStatus $status): bool;
+
+    /**
+     * 根据基础seq_ids获取当前话题中小于指定seq_id的所有消息.
+     *
+     * @param array $baseSeqIds 基础seq_ids
+     * @return array 小于指定seq_id的所有消息列表
+     */
+    public function getAllSeqIdsBeforeCurrent(array $baseSeqIds): array;
+
+    /**
+     * 根据话题ID获取所有撤回状态的消息seq_ids.
+     *
+     * @param int $topicId 话题ID
+     * @param string $userId 用户ID（权限验证）
+     * @return array 撤回状态的消息seq_ids
+     */
+    public function getRevokedSeqIdsByTopicId(int $topicId, string $userId): array;
+
+    /**
+     * Batch get topic names by IDs.
+     *
+     * @param array $topicIds Topic ID array
+     * @return array ['topic_id' => 'topic_name'] key-value pairs
+     */
+    public function getTopicNamesBatch(array $topicIds): array;
 }
- topic list Total */ 
-    public function getTopicsByConditions( array $conditions = [], bool $needPagination = true, int $pageSize = 10, int $page = 1, string $orderBy = 'id', string $orderDirection = 'desc' ): array; /** * Createtopic . */ 
-    public function createTopic(TopicEntity $topicEntity): TopicEntity; /** * Updatetopic . */ 
-    public function updateTopic(TopicEntity $topicEntity): bool; /** * Usingupdated_at as LockUpdatetopic . */ 
-    public function updateTopicWithUpdatedAt(TopicEntity $topicEntity, string $updatedAt): bool; 
-    public function updateTopicByCondition(array $condition, array $data): bool; /** * delete topic . */ 
-    public function deleteTopic(int $id): bool; /** * Throughtopic IDCollectionGetworkspace info . * * @param array $topicIds topic IDCollection * @return array topic IDas Keyworkspace info as ValueAssociationArray */ 
-    public function getWorkspaceinfo ByTopicIds(array $topicIds): array; /** * Gettopic StatusCountData. * * @param array $conditions CountCondition ['user_id' => '123', 'organization_code' => 'abc'] * @return array including StatusQuantityArray */ 
-    public function getTopicStatusMetrics(array $conditions = []): array; 
-    public function updateTopicStatus(int $id, $taskId, TaskStatus $status): bool; 
-    public function updateTopicStatusAndSandboxId(int $id, $taskId, TaskStatus $status, string $sandboxId): bool; /** * Getmost recently Update timespecified Timetopic list . * * @param string $timeThreshold TimeThresholdIftopic Update timeTimeincluding AtResultin * @param int $limit Return ResultMaximumQuantity * @return array<TopicEntity> topic list */ 
-    public function getTopicsExceedingUpdateTime(string $timeThreshold, int $limit = 100): array; /** * According toProject IDGettopic list . */ 
-    public function getTopicsByProjectId(int $projectId, string $userId): array; 
-    public function updateTopicStatusBySandboxIds(array $sandboxIds, string $status); /** * CountItemunder topic Quantity. */ 
-    public function countTopicsByProjectId(int $projectId): int; 
-    public function getRunningWorkspaceIds(array $workspaceIds, ?string $userId = null): array; 
-    public function getRunningProjectIds(array $projectIds, ?string $userId = null): array; // ======================= MessageRollbackrelated Method ======================= /** * According toColumnIDGetmagic_message_id. */ 
-    public function getMagicMessageIdBySeqId(string $seqId): ?string; /** * According tomagic_message_idGetAllrelated seq_idAll. */ 
-    public function getAllSeqIdsByMagicMessageId(string $magicMessageId): array; /** * According toBaseseq_idsGetcurrent topic current MessageMessageAllMessage. * @param array $baseSeqIds Baseseq_ids * @return array Allrelated seq_ids */ 
-    public function getAllSeqIdsFromcurrent (array $baseSeqIds): array; /** * delete topic_messagesData. */ 
-    public function deleteTopicMessages(array $seqIds): int; /** * According toseq_idsdelete messagessequencesData. */ 
-    public function deleteMessagesAndSequencesBySeqIds(array $seqIds): bool; /** * According toim_seq_iddelete magic_super_agent_messagetable in Pairtopic Message. * * delete  * 1. query magic_super_agent_message table by im_seq_id, get corresponding primary key id and topic_id * 2. delete all data in current topic where id >= queried primary key id * * @param int $seqId IMMessageColumnID * @return int delete record */ 
-    public function deleteSuperAgentMessagesFromSeqId(int $seqId): int; /** * BatchUpdatemagic_chat_sequencestable statusField. * * @param array $seqIds need UpdateColumnIDArray * @param MagicMessageStatus $status TargetStatus * @return bool Updatewhether Success */ 
-    public function batchUpdateSeqStatus(array $seqIds, MagicMessageStatus $status): bool; /** * According toBaseseq_idsGetcurrent topic in Less thanspecified seq_idAllMessage. * * @param array $baseSeqIds Baseseq_ids * @return array Less thanspecified seq_idAllMessagelist */ 
-    public function getAllSeqIdsBeforecurrent (array $baseSeqIds): array; /** * According totopic IDGetAllrecalled status Messageseq_ids. * * @param int $topicId topic ID * @param string $userId user IDpermission Validate  * @return array recalled status Messageseq_ids */ 
-    public function getRevokedSeqIdsByTopicId(int $topicId, string $userId): array; /** * Batch get topic names by IDs. * * @param array $topicIds Topic ID array * @return array ['topic_id' => 'topic_name'] key-value pairs */ 
-    public function getTopicNamesBatch(array $topicIds): array; 
-}
- 

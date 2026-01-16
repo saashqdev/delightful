@@ -1,37 +1,44 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
+namespace Dtyq\BeDelightful\Domain\Agent\Entity\ValueObject;
 
 use function Hyperf\Translation\trans;
 
-enum Builtintool Category: string 
+enum BuiltinToolCategory: string
 {
- case FileOperations = 'file_operations'; case SearchExtraction = 'search_extraction'; case Contentprocess ing = 'content_processing'; case SystemExecution = 'system_execution'; case AIAssistance = 'ai_assistance'; /** * GetCategoryDisplayName. */ 
-    public function getName(): string 
-{
- return trans( builtin_tool_categories.names.
-{
-$this->value
+    case FileOperations = 'file_operations';
+    case SearchExtraction = 'search_extraction';
+    case ContentProcessing = 'content_processing';
+    case SystemExecution = 'system_execution';
+    case AIAssistance = 'ai_assistance';
+
+    /**
+     * 获取分类的显示名称.
+     */
+    public function getName(): string
+    {
+        return trans("builtin_tool_categories.names.{$this->value}");
+    }
+
+    /**
+     * 获取分类的图标.
+     */
+    public function getIcon(): string
+    {
+        // 暂时返回空字符串，等待前端提供图标内容
+        return '';
+    }
+
+    /**
+     * 获取分类的描述.
+     */
+    public function getDescription(): string
+    {
+        return trans("builtin_tool_categories.descriptions.{$this->value}");
+    }
 }
- ); 
-}
- /** * GetCategoryIcon. */ 
-    public function getIcon(): string 
-{
- // TemporarilyReturn EmptyStringWaitingFrontendIconContent return ''; 
-}
- /** * GetCategoryDescription. */ 
-    public function getDescription(): string 
-{
- return trans( builtin_tool_categories.descriptions.
-{
-$this->value
-}
- ); 
-}
- 
-}
- 

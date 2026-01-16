@@ -1,17 +1,29 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter;
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter;
 
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Request\FileConverterRequest;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Response\FileConverterResponse;
 
-interface FileConverterInterface 
+interface FileConverterInterface
 {
- /** * ConvertFile. */ 
-    public function convert(string $userId, string $organizationCode, string $sandboxId, string $projectId, FileConverterRequest $request, string $workDir): FileConverterResponse; /** * query ConvertResult. * * @param string $sandboxId Sandbox ID * @param string $projectId Project ID * @param string $taskKey Taskkey * @return FileConverterResponse ConvertResult */ 
-    public function queryConvertResult(string $sandboxId, string $projectId, string $taskKey): FileConverterResponse; 
+    /**
+     * 转换文件.
+     */
+    public function convert(string $userId, string $organizationCode, string $sandboxId, string $projectId, FileConverterRequest $request, string $workDir): FileConverterResponse;
+
+    /**
+     * 查询转换结果.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param string $projectId 项目ID
+     * @param string $taskKey 任务key
+     * @return FileConverterResponse 转换结果
+     */
+    public function queryConvertResult(string $sandboxId, string $projectId, string $taskKey): FileConverterResponse;
 }
- 

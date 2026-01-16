@@ -1,24 +1,27 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Constant;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Constant;
-
-/** * related Constant. */
-
-class AgentConstant 
+/**
+ * 智能体相关常量.
+ */
+class AgentConstant
 {
- /** * Super MaggieCode */ 
-    public 
-    const string SUPER_MAGIC_CODE = 'SUPER_MAGIC'; 
-    public 
-    const string DEFAULT_TOPIC_NAME = 'Newtopic '; 
-    public 
-    const string DEFAULT_WORKSPACE_NAME = 'Newworkspace '; 
-    public 
-    const string DEFAULT_PROJECT_NAME = 'Default project'; 
-    public 
-    const string DEFAULT_PROJECT_DIR = 'project'; 
+    /**
+     * 超级麦吉代码
+     */
+    public const string SUPER_MAGIC_CODE = 'SUPER_MAGIC';
+
+    public const string DEFAULT_TOPIC_NAME = '新话题';
+
+    public const string DEFAULT_WORKSPACE_NAME = '新工作区';
+
+    public const string DEFAULT_PROJECT_NAME = '默认项目';
+
+    public const string DEFAULT_PROJECT_DIR = 'project';
 }
- 

@@ -1,54 +1,103 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\Share\DTO\Request;
+namespace Dtyq\BeDelightful\Interfaces\Share\DTO\Request;
 
 use App\Infrastructure\Core\AbstractDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
-/** * ShareRequestDTO. */
 
-class AccessShareRequestDTO extends AbstractDTO 
+/**
+ * 访问分享请求DTO.
+ */
+class AccessShareRequestDTO extends AbstractDTO
 {
- /** * Share code */ 
-    public string $shareCode = ''; /** * Password */ public ?string $password = null; /** * Source. */ 
-    public int $accessSource = 0; /** * FromRequestin CreateDTO. */ 
-    public 
-    static function fromRequest(RequestInterface $request): self 
-{
- $dto = new self(); $dto->shareCode = (string) $request->input('share_code', ''); $dto->password = $request->has('password') ? (string) $request->input('password') : null; $dto->accessSource = (int) $request->input('access_source', 0); return $dto; 
+    /**
+     * 分享代码
+     */
+    public string $shareCode = '';
+
+    /**
+     * 访问密码
+     */
+    public ?string $password = null;
+
+    /**
+     * 访问来源.
+     */
+    public int $accessSource = 0;
+
+    /**
+     * 从请求中创建DTO.
+     */
+    public static function fromRequest(RequestInterface $request): self
+    {
+        $dto = new self();
+        $dto->shareCode = (string) $request->input('share_code', '');
+        $dto->password = $request->has('password') ? (string) $request->input('password') : null;
+        $dto->accessSource = (int) $request->input('access_source', 0);
+
+        return $dto;
+    }
+
+    /**
+     * 获取分享代码
+     */
+    public function getShareCode(): string
+    {
+        return $this->shareCode;
+    }
+
+    /**
+     * 获取访问密码
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    /**
+     * 获取访问来源.
+     */
+    public function getAccessSource(): int
+    {
+        return $this->accessSource;
+    }
+
+    /**
+     * 构建验证规则.
+     */
+    public function rules(): array
+    {
+        return [
+            'share_code' => 'required|string|max:16',
+            'password' => 'nullable|string|max:32',
+            'access_source' => 'nullable|integer|min:0',
+        ];
+    }
+
+    /**
+     * 获取验证错误消息.
+     */
+    public function messages(): array
+    {
+        return [
+            'share_code.required' => '分享代码不能为空',
+        ];
+    }
+
+    /**
+     * 属性名称.
+     */
+    public function attributes(): array
+    {
+        return [
+            'share_code' => '分享代码',
+            'password' => '访问密码',
+            'access_source' => '访问来源',
+        ];
+    }
 }
- /** * GetShare code */ 
-    public function getShareCode(): string 
-{
- return $this->shareCode; 
-}
- /** * GetPassword */ 
-    public function getPassword(): ?string 
-{
- return $this->password; 
-}
- /** * GetSource. */ 
-    public function getAccessSource(): int 
-{
- return $this->accessSource; 
-}
- /** * BuildValidate Rule. */ 
-    public function rules(): array 
-{
- return [ 'share_code' => 'required|string|max:16', 'password' => 'nullable|string|max:32', 'access_source' => 'nullable|integer|min:0', ]; 
-}
- /** * GetValidate errorMessage. */ 
-    public function messages(): array 
-{
- return [ 'share_code.required' => 'Share codeCannot be empty', ]; 
-}
- /** * PropertyName. */ 
-    public function attributes(): array 
-{
- return [ 'share_code' => 'Share code', 'password' => 'Password', 'access_source' => 'Source', ]; 
-}
- 
-}
- 

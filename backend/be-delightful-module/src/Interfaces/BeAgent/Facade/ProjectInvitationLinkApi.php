@@ -1,70 +1,147 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Facade;
 
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectInvitationLinkAppService;
 use Hyperf\HttpServer\Contract\RequestInterface;
-/** * ItemInviteLinkAPI. * * ItemInviteLink */ #[ApiResponse('low_code')]
 
-class ProjectInvitationLinkApi extends AbstractApi 
+/**
+ * 项目邀请链接API.
+ *
+ * 统一管理项目邀请链接的管理和访问功能
+ */
+#[ApiResponse('low_code')]
+class ProjectInvitationLinkApi extends AbstractApi
 {
- 
-    public function __construct( 
-    protected ProjectInvitationLinkAppService $invitationLinkAppService, 
-    protected RequestInterface $request, ) 
-{
- parent::__construct($request); 
+    public function __construct(
+        protected ProjectInvitationLinkAppService $invitationLinkAppService,
+        protected RequestInterface $request,
+    ) {
+        parent::__construct($request);
+    }
+
+    /**
+     * 获取项目邀请链接信息.
+     */
+    public function getInvitationLink(RequestContext $requestContext, int $projectId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $result = $this->invitationLinkAppService->getInvitationLink($requestContext, $projectId);
+
+        return $result ? $result->toArray() : [];
+    }
+
+    /**
+     * 开启/关闭邀请链接.
+     */
+    public function toggleInvitationLink(RequestContext $requestContext, int $projectId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $enabled = (bool) $this->request->input('enabled', false);
+
+        return $this->invitationLinkAppService->toggleInvitationLink($requestContext, $projectId, $enabled)->toArray();
+    }
+
+    /**
+     * 重置邀请链接.
+     */
+    public function resetInvitationLink(RequestContext $requestContext, int $projectId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        return $this->invitationLinkAppService->resetInvitationLink($requestContext, $projectId)->toArray();
+    }
+
+    /**
+     * 设置密码保护.
+     */
+    public function setPassword(RequestContext $requestContext, int $projectId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $enabled = (bool) $this->request->input('enabled', false);
+
+        $password = $this->invitationLinkAppService->setPassword($requestContext, $projectId, $enabled);
+
+        return ['password' => $password];
+    }
+
+    /**
+     * 重新设置密码
+     */
+    public function resetPassword(RequestContext $requestContext, int $projectId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $password = $this->invitationLinkAppService->resetPassword($requestContext, $projectId);
+
+        return ['password' => $password];
+    }
+
+    /**
+     * 修改邀请链接密码
+     */
+    public function changePassword(RequestContext $requestContext, int $projectId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $newPassword = $this->request->input('password', '');
+        $password = $this->invitationLinkAppService->changePassword($requestContext, $projectId, $newPassword);
+
+        return ['password' => $password];
+    }
+
+    /**
+     * 修改权限级别.
+     */
+    public function updateDefaultJoinPermission(RequestContext $requestContext, int $projectId): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $permission = $this->request->input('default_join_permission', 'viewer');
+
+        $this->invitationLinkAppService->updateDefaultJoinPermission($requestContext, $projectId, $permission);
+
+        return ['default_join_permission' => $permission];
+    }
+
+    /**
+     * 通过Token访问邀请链接.
+     */
+    public function getInvitationByToken(RequestContext $requestContext, string $token): array
+    {
+        // 外部用户访问，但仍需要设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        return $this->invitationLinkAppService->getInvitationByToken($requestContext, $token)->toArray();
+    }
+
+    /**
+     * 加入项目（外部用户操作）.
+     */
+    public function joinProject(RequestContext $requestContext): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $token = $this->request->input('token', '');
+        $password = $this->request->input('password');
+        return $this->invitationLinkAppService->joinProject($requestContext, $token, $password)->toArray();
+    }
 }
- /** * GetItemInviteLinkinfo . */ 
-    public function getInvitationLink(RequestContext $requestContext, int $projectId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $result = $this->invitationLinkAppService->getInvitationLink($requestContext, $projectId); return $result ? $result->toArray() : []; 
-}
- /** * On/CloseInviteLink. */ 
-    public function toggleInvitationLink(RequestContext $requestContext, int $projectId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $enabled = (bool) $this->request->input('enabled', false); return $this->invitationLinkAppService->toggleInvitationLink($requestContext, $projectId, $enabled)->toArray(); 
-}
- /** * ResetInviteLink. */ 
-    public function resetInvitationLink(RequestContext $requestContext, int $projectId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); return $this->invitationLinkAppService->resetInvitationLink($requestContext, $projectId)->toArray(); 
-}
- /** * Set PasswordProtected. */ 
-    public function setPassword(RequestContext $requestContext, int $projectId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $enabled = (bool) $this->request->input('enabled', false); $password = $this->invitationLinkAppService->setPassword($requestContext, $projectId, $enabled); return ['password' => $password]; 
-}
- /** * NewSet Password */ 
-    public function resetPassword(RequestContext $requestContext, int $projectId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $password = $this->invitationLinkAppService->resetPassword($requestContext, $projectId); return ['password' => $password]; 
-}
- /** * ModifyInviteLinkPassword */ 
-    public function changePassword(RequestContext $requestContext, int $projectId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $newPassword = $this->request->input('password', ''); $password = $this->invitationLinkAppService->changePassword($requestContext, $projectId, $newPassword); return ['password' => $password]; 
-}
- /** * Modifypermission Level. */ 
-    public function updateDefaultJoinpermission (RequestContext $requestContext, int $projectId): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $permission = $this->request->input('default_join_permission', 'viewer'); $this->invitationLinkAppService->updateDefaultJoinpermission ($requestContext, $projectId, $permission); return ['default_join_permission' => $permission]; 
-}
- /** * ThroughTokenInviteLink. */ 
-    public function getInvitationByToken(RequestContext $requestContext, string $token): array 
-{
- // Externaluser need Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); return $this->invitationLinkAppService->getInvitationByToken($requestContext, $token)->toArray(); 
-}
- /** * JoinItemExternaluser . */ 
-    public function joinProject(RequestContext $requestContext): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $token = $this->request->input('token', ''); $password = $this->request->input('password'); return $this->invitationLinkAppService->joinProject($requestContext, $token, $password)->toArray(); 
-}
- 
-}
- 

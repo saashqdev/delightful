@@ -1,33 +1,46 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * 成员状态值对象
+ *
+ * 封装成员状态的业务逻辑和验证规则
+ */
+enum MemberStatus: int
+{
+    case INACTIVE = 0;
+    case ACTIVE = 1;
 
-/** * MemberStatusValueObject * * MemberStatusValidate Rule */
+    /**
+     * 是否为激活状态
+     */
+    public function isActive(): bool
+    {
+        return $this === self::ACTIVE;
+    }
 
-enum MemberStatus: int 
-{
- case INACTIVE = 0; case ACTIVE = 1; /** * whether as ActiveStatus */ 
-    public function isActive(): bool 
-{
- return $this === self::ACTIVE; 
+    /**
+     * 是否为非激活状态
+     */
+    public function isInactive(): bool
+    {
+        return $this === self::INACTIVE;
+    }
+
+    /**
+     * 获取描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::ACTIVE => 'Active',
+            self::INACTIVE => 'Inactive',
+        };
+    }
 }
- /** * whether as ActiveStatus */ 
-    public function isInactive(): bool 
-{
- return $this === self::INACTIVE; 
-}
- /** * GetDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::ACTIVE => 'Active', self::INACTIVE => 'Inactive', 
-}
-; 
-}
- 
-}
- 

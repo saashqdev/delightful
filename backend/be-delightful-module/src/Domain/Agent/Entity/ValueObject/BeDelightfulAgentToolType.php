@@ -1,33 +1,47 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
+namespace Dtyq\BeDelightful\Domain\Agent\Entity\ValueObject;
 
-enum BeDelightfulAgenttool Type: int 
+enum BeDelightfulAgentToolType: int
 {
- // 1: Built-in case BuiltIn = 1; // 2: Official case Official = 2; // 3: Custom case Custom = 3; /** * GetAllAvailableEnumValue. * @return array<int> */ 
-    public 
-    static function getAvailableValues(): array 
-{
- return array_map(fn ($case) => $case->value, self::cases()); 
+    // 1: 内置
+    case BuiltIn = 1;
+
+    // 2: 官方
+    case Official = 2;
+
+    // 3: 自定义
+    case Custom = 3;
+
+    /**
+     * 获取所有可用的枚举值.
+     * @return array<int>
+     */
+    public static function getAvailableValues(): array
+    {
+        return array_map(fn ($case) => $case->value, self::cases());
+    }
+
+    /**
+     * 获取所有可用的枚举值字符串（用于验证规则）.
+     */
+    public static function getValidationRule(): string
+    {
+        return implode(',', self::getAvailableValues());
+    }
+
+    public function isRemote(): bool
+    {
+        return in_array($this, [self::Official, self::Custom], true);
+    }
+
+    public function isBuiltIn(): bool
+    {
+        return $this === self::BuiltIn;
+    }
 }
- /** * GetAllAvailableEnumValueStringfor Validate Rule. */ 
-    public 
-    static function getValidate Rule(): string 
-{
- return implode(',', self::getAvailableValues()); 
-}
- 
-    public function isRemote(): bool 
-{
- return in_array($this, [self::Official, self::Custom], true); 
-}
- 
-    public function isBuiltIn(): bool 
-{
- return $this === self::BuiltIn; 
-}
- 
-}
- 

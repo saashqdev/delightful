@@ -1,12 +1,15 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
-
-enum ConvertType: string 
+enum ConvertType: string
 {
- case PDF = 'pdf'; case PPT = 'ppt'; case IMAGE = 'image'; 
+    case PDF = 'pdf';
+    case PPT = 'ppt';
+    case IMAGE = 'image';
 }
- 

@@ -1,102 +1,202 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Infrastructure\Utils;
+namespace Dtyq\BeDelightful\Infrastructure\Utils;
 
 use InvalidArgumentException;
-/** * Share code generator utility class. */
 
-class ShareCodeGenerator 
+/**
+ * 分享代码生成器工具类.
+ */
+class ShareCodeGenerator
 {
- /** * Share code length. */ 
-    protected int $codeLength = 18; /** * Allowed character set. */ 
-    protected string $charset = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; /** * Last generated timestamp in microseconds. */ 
-    protected int $lastMicrotime = 0; /** * Sequence number within the same microsecond. */ 
-    protected int $sequence = 0; /** * Generate a unique share code * * Generate unique code based on timestamp and sequence number, ensuring uniqueness in distributed environment * Final code will be in a friendly format like AB12XY89 * * @param string $prefix Optional prefix for business distinction, default is empty * @return string Generate d share code */ 
-    public function generate(string $prefix = ''): string 
-{
- // Get current timestamp in microseconds $currentMicro = $this->getcurrent Microseconds(); // Handle multiple calls within the same microsecond if ($currentMicro === $this->lastMicrotime) 
-{
- ++$this->sequence; 
+    /**
+     * 分享代码长度.
+     */
+    protected int $codeLength = 18;
+
+    /**
+     * 允许的字符集.
+     */
+    protected string $charset = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+    /**
+     * 最后生成的时间戳微秒值.
+     */
+    protected int $lastMicrotime = 0;
+
+    /**
+     * 同一微秒内的序列号.
+     */
+    protected int $sequence = 0;
+
+    /**
+     * 生成一个唯一的分享代码
+     *
+     * 基于时间戳和序列号生成唯一代码，保证在分布式环境中的唯一性
+     * 最终生成类似 "AB12XY89" 格式的友好分享代码
+     *
+     * @param string $prefix 可选前缀，用于业务区分，默认为空
+     * @return string 生成的分享代码
+     */
+    public function generate(string $prefix = ''): string
+    {
+        // 获取当前微秒时间戳
+        $currentMicro = $this->getCurrentMicroseconds();
+
+        // 处理同一微秒内的多次调用
+        if ($currentMicro === $this->lastMicrotime) {
+            ++$this->sequence;
+        } else {
+            $this->sequence = 0;
+            $this->lastMicrotime = $currentMicro;
+        }
+
+        // 组合唯一数据源
+        $uniqueData = $currentMicro . $this->sequence;
+
+        // 添加一个随机种子增加随机性
+        $randomSeed = random_int(1000, 9999);
+        $uniqueData .= $randomSeed;
+
+        // 计算哈希值
+        $hash = md5($uniqueData);
+
+        // 将哈希转换为分享代码友好格式
+        $code = $this->hashToReadableCode($hash);
+
+        // 确保代码长度符合要求
+        $code = substr($code, 0, $this->codeLength);
+
+        // 如果有前缀，则添加前缀
+        if (! empty($prefix)) {
+            $code = $prefix . $code;
+            // 确保总长度仍然符合要求
+            $code = substr($code, 0, $this->codeLength);
+        }
+
+        return $code;
+    }
+
+    /**
+     * 生成多个唯一的分享代码
+     *
+     * @param int $count 需要生成的代码数量
+     * @param string $prefix 可选前缀，用于业务区分，默认为空
+     * @return array 生成的分享代码数组
+     */
+    public function generateMultiple(int $count, string $prefix = ''): array
+    {
+        $codes = [];
+
+        for ($i = 0; $i < $count; ++$i) {
+            $codes[] = $this->generate($prefix);
+
+            // 确保时间间隔，增加唯一性
+            if ($i < $count - 1) {
+                usleep(1); // 休眠1微秒
+            }
+        }
+
+        return $codes;
+    }
+
+    /**
+     * 设置分享代码长度.
+     *
+     * @param int $length 代码长度
+     */
+    public function setCodeLength(int $length): self
+    {
+        if ($length < 4) {
+            throw new InvalidArgumentException('分享代码长度不能小于4');
+        }
+
+        $this->codeLength = $length;
+        return $this;
+    }
+
+    /**
+     * 设置字符集.
+     *
+     * @param string $charset 字符集
+     */
+    public function setCharset(string $charset): self
+    {
+        if (empty($charset)) {
+            throw new InvalidArgumentException('字符集不能为空');
+        }
+
+        $this->charset = $charset;
+        return $this;
+    }
+
+    /**
+     * 验证分享代码是否有效.
+     *
+     * @param string $code 待验证的分享代码
+     * @return bool 是否有效
+     */
+    public function isValid(string $code): bool
+    {
+        if (empty($code) || strlen($code) !== $this->codeLength) {
+            return false;
+        }
+
+        // 检查代码是否只包含字符集中的字符
+        for ($i = 0; $i < strlen($code); ++$i) {
+            if (strpos($this->charset, $code[$i]) === false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 将哈希值转换为易读的分享代码
+     *
+     * @param string $hash 哈希值
+     * @return string 友好格式的分享代码
+     */
+    protected function hashToReadableCode(string $hash): string
+    {
+        $result = '';
+        $charsetLength = strlen($this->charset);
+
+        // 将哈希值分组处理，每组4位
+        for ($i = 0; $i < strlen($hash); $i += 2) {
+            // 从哈希中取出2个字符，转换为16进制数值
+            $hexVal = hexdec(substr($hash, $i, 2));
+
+            // 映射到字符集范围
+            $index = $hexVal % $charsetLength;
+            $result .= $this->charset[$index];
+
+            // 达到目标长度则停止
+            if (strlen($result) >= $this->codeLength) {
+                break;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * 获取当前微秒时间戳.
+     *
+     * @return int 微秒时间戳
+     */
+    protected function getCurrentMicroseconds(): int
+    {
+        // 获取微秒级时间戳
+        $microtime = microtime(true);
+
+        // 转换为整数，乘以1000000以获得微秒级精度
+        return (int) ($microtime * 1000000);
+    }
 }
- else 
-{
- $this->sequence = 0; $this->lastMicrotime = $currentMicro; 
-}
- // Combine unique data source $uniqueData = $currentMicro . $this->sequence; // Add a random seed to increase randomness $randomSeed = random_int(1000, 9999); $uniqueData .= $randomSeed; // Calculate hash value $hash = md5($uniqueData); // Convert hash to share code friendly format $code = $this->hashToReadableCode($hash); // Ensure code length meets requirements $code = substr($code, 0, $this->codeLength); // Add prefix if provided if (! empty($prefix)) 
-{
- $code = $prefix . $code; // Ensure total length still meets requirements $code = substr($code, 0, $this->codeLength); 
-}
- return $code; 
-}
- /** * Generate multiple unique share codes * * @param int $count Number of codes to generate * @param string $prefix Optional prefix for business distinction, default is empty * @return array Array of generated share codes */ 
-    public function generateMultiple(int $count, string $prefix = ''): array 
-{
- $codes = []; for ($i = 0; $i < $count; ++$i) 
-{
- $codes[] = $this->generate($prefix); // Ensure time interval to increase uniqueness if ($i < $count - 1) 
-{
- usleep(1); // Sleep for 1 microsecond 
-}
- 
-}
- return $codes; 
-}
- /** * Set share code length. * * @param int $length Code length */ 
-    public function setCodeLength(int $length): self 
-{
- if ($length < 4) 
-{
- throw new InvalidArgumentException('Share code length cannot be less than 4'); 
-}
- $this->codeLength = $length; return $this; 
-}
- /** * Set Character set. * * @param string $charset Character set */ 
-    public function setCharset(string $charset): self 
-{
- if (empty($charset)) 
-{
- throw new InvalidArgumentException('Character set cannot be empty'); 
-}
- $this->charset = $charset; return $this; 
-}
- /** * Validate if share code is valid. * * @param string $code Share code to be validated * @return bool whether valid */ 
-    public function isValid(string $code): bool 
-{
- if (empty($code) || strlen($code) !== $this->codeLength) 
-{
- return false; 
-}
- // check if code only contains characters in character set for ($i = 0; $i < strlen($code); ++$i) 
-{
- if (strpos($this->charset, $code[$i]) === false) 
-{
- return false; 
-}
- 
-}
- return true; 
-}
- /** * Convert hash value to readable share code * * @param string $hash Hash value * @return string Friendly format share code */ 
-    protected function hashToReadableCode(string $hash): string 
-{
- $result = ''; $charsetLength = strlen($this->charset); // Group hash value for processing, 4 bits per group for ($i = 0; $i < strlen($hash); $i += 2) 
-{
- // Extract 2 characters from hash, convert to hexadecimal value $hexVal = hexdec(substr($hash, $i, 2)); // Map to character set range $index = $hexVal % $charsetLength; $result .= $this->charset[$index]; // Stop when target length is reached if (strlen($result) >= $this->codeLength) 
-{
- break; 
-}
- 
-}
- return $result; 
-}
- /** * Get current microsecond timestamp. * * @return int MicrosecondsTimestamp */ 
-    protected function getcurrent Microseconds(): int 
-{
- // Get microsecond-level timestamp $microtime = microtime(true); // Convert to integer, multiply by 1000000 to get microsecond-level precision return (int) ($microtime * 1000000); 
-}
- 
-}
- 

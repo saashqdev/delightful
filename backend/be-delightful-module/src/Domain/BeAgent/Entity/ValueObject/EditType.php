@@ -1,32 +1,46 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * 编辑类型枚举.
+ */
+enum EditType: int
+{
+    /**
+     * 人工编辑.
+     */
+    case MANUAL = 1;
 
-/** * EditTypeEnum. */
+    /**
+     * AI编辑.
+     */
+    case AI = 2;
 
-enum EditType: int 
-{
- /** * Edit. */ case MANUAL = 1; /** * AIEdit. */ case AI = 2; /** * GetEditTypeName. */ 
-    public function getName(): string 
-{
- return match ($this) 
-{
- self::MANUAL => 'Edit', self::AI => 'AIEdit', 
+    /**
+     * 获取编辑类型名称.
+     */
+    public function getName(): string
+    {
+        return match ($this) {
+            self::MANUAL => '人工编辑',
+            self::AI => 'AI编辑',
+        };
+    }
+
+    /**
+     * 获取编辑类型描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::MANUAL => '人工手动编辑的版本',
+            self::AI => 'AI自动编辑的版本',
+        };
+    }
 }
-; 
-}
- /** * GetEditTypeDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::MANUAL => 'ManualEditVersion', self::AI => 'AIautomatic EditVersion', 
-}
-; 
-}
- 
-}
- 

@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\File\Service\FileAppService;
@@ -12,7 +14,7 @@ use App\Domain\Chat\Service\MagicConversationDomainService;
 use App\Domain\Chat\Service\MagicTopicDomainService as MagicChatTopicDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\Magicuser DomainService;
+use App\Domain\Contact\Service\MagicUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\LongTermMemory\Service\LongTermMemoryDomainService;
 use App\ErrorCode\GenericErrorCode;
@@ -22,12 +24,12 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\Magicuser Authorization;
+use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
 use Delightful\BeDelightful\Application\SuperAgent\Event\Publish\StopRunningTaskPublisher;
 use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\delete DataType;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\DeleteDataType;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceArchiveStatus;
 use Delightful\BeDelightful\Domain\SuperAgent\Event\StopRunningTaskEvent;
 use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
@@ -39,300 +41,665 @@ use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine\Sandbo
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetWorkspaceTopicsRequestDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveWorkspaceRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\Workspacelist RequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\WorkspaceListRequestDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageItemDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\SaveWorkspaceResultDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\Topiclist ResponseDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TopicListResponseDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\WorkspaceItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\Workspacelist ResponseDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\WorkspaceListResponseDTO;
 use Hyperf\Amqp\Producer;
 use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class WorkspaceAppService extends AbstractAppService 
+class WorkspaceAppService extends AbstractAppService
 {
- 
-    protected LoggerInterface $logger; 
-    public function __construct( 
-    protected MagicChatMessageAppService $magicChatMessageAppService, 
-    protected MagicDepartmentDomainService $magicDepartmentDomainService, 
-    protected WorkspaceDomainService $workspaceDomainService, 
-    protected MagicConversationDomainService $magicConversationDomainService, 
-    protected Magicuser DomainService $userDomainService, 
-    protected MagicChatTopicDomainService $magicTopicDomainService, 
-    protected FileAppService $fileAppService, 
-    protected TaskDomainService $taskDomainService, 
-    protected AccountAppService $accountAppService, 
-    protected SandboxService $sandboxService, 
-    protected LockerInterface $locker, 
-    protected ChatAppService $chatAppService, 
-    protected ProjectDomainService $projectDomainService, 
-    protected TopicDomainService $topicDomainService, 
-    protected Producer $producer, 
-    protected LoggerFactory $loggerFactory, 
-    protected FileCleanupAppService $fileCleanupAppService, 
-    protected FileDomainService $fileDomainService, 
-    protected LongTermMemoryDomainService $longTermMemoryDomainService ) 
-{
- $this->logger = $loggerFactory->get(get_class($this)); 
+    protected LoggerInterface $logger;
+
+    public function __construct(
+        protected MagicChatMessageAppService $magicChatMessageAppService,
+        protected MagicDepartmentDomainService $magicDepartmentDomainService,
+        protected WorkspaceDomainService $workspaceDomainService,
+        protected MagicConversationDomainService $magicConversationDomainService,
+        protected MagicUserDomainService $userDomainService,
+        protected MagicChatTopicDomainService $magicTopicDomainService,
+        protected FileAppService $fileAppService,
+        protected TaskDomainService $taskDomainService,
+        protected AccountAppService $accountAppService,
+        protected SandboxService $sandboxService,
+        protected LockerInterface $locker,
+        protected ChatAppService $chatAppService,
+        protected ProjectDomainService $projectDomainService,
+        protected TopicDomainService $topicDomainService,
+        protected Producer $producer,
+        protected LoggerFactory $loggerFactory,
+        protected FileCleanupAppService $fileCleanupAppService,
+        protected FileDomainService $fileDomainService,
+        protected LongTermMemoryDomainService $longTermMemoryDomainService
+    ) {
+        $this->logger = $loggerFactory->get(get_class($this));
+    }
+
+    /**
+     * 获取工作区列表.
+     */
+    public function getWorkspaceList(RequestContext $requestContext, WorkspaceListRequestDTO $requestDTO): WorkspaceListResponseDTO
+    {
+        // 构建查询条件
+        $conditions = $requestDTO->buildConditions();
+
+        // 如果没有指定用户ID且有用户授权信息，使用当前用户ID
+        if (empty($conditions['user_id'])) {
+            $conditions['user_id'] = $requestContext->getUserAuthorization()->getId();
+        }
+
+        // 创建数据隔离对象
+        $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
+
+        // 通过领域服务获取工作区列表
+        $result = $this->workspaceDomainService->getWorkspacesByConditions(
+            $conditions,
+            $requestDTO->page,
+            $requestDTO->pageSize,
+            'id',
+            'desc',
+            $dataIsolation
+        );
+
+        // 设置默认值
+        $result['auto_create'] = false;
+
+        if (empty($result['list'])) {
+            $workspaceEntity = $this->workspaceDomainService->createWorkspace(
+                $dataIsolation,
+                '',
+                ''
+            );
+            $result['list'] = [$workspaceEntity->toArray()];
+            $result['total'] = 1;
+            $result['auto_create'] = true;
+        }
+
+        // 提取所有工作区ID
+        $workspaceIds = [];
+        foreach ($result['list'] as $workspace) {
+            if (is_array($workspace)) {
+                $workspaceIds[] = $workspace['id'];
+            } else {
+                $workspaceIds[] = $workspace->getId();
+            }
+        }
+        $workspaceIds = array_unique($workspaceIds);
+
+        // 批量获取工作区状态
+        $currentUserId = $dataIsolation->getCurrentUserId();
+        $workspaceStatusMap = $this->topicDomainService->calculateWorkspaceStatusBatch($workspaceIds, $currentUserId);
+
+        // 转换为响应DTO并传入状态映射
+        return WorkspaceListResponseDTO::fromResult($result, $workspaceStatusMap);
+    }
+
+    /**
+     * 获取工作区详情.
+     */
+    public function getWorkspaceDetail(RequestContext $requestContext, int $workspaceId): WorkspaceItemDTO
+    {
+        // 创建数据隔离对象
+        $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
+
+        // 获取工作区详情
+        $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($workspaceId);
+        if ($workspaceEntity === null) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
+        }
+
+        // 验证工作区是否属于当前用户
+        if ($workspaceEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied');
+        }
+
+        // 计算工作区状态
+        $workspaceStatusMap = $this->topicDomainService->calculateWorkspaceStatusBatch([$workspaceId]);
+        $workspaceStatus = $workspaceStatusMap[$workspaceId] ?? null;
+
+        // 返回工作区详情DTO
+        return WorkspaceItemDTO::fromEntity($workspaceEntity, $workspaceStatus);
+    }
+
+    public function createWorkspace(RequestContext $requestContext, SaveWorkspaceRequestDTO $requestDTO): SaveWorkspaceResultDTO
+    {
+        // Get user authorization information
+        $userAuthorization = $requestContext->getUserAuthorization();
+
+        // Create data isolation object
+        $dataIsolation = $this->createDataIsolation($userAuthorization);
+
+        $workspaceEntity = $this->workspaceDomainService->createWorkspace(
+            $dataIsolation,
+            '',
+            $requestDTO->getWorkspaceName()
+        );
+
+        return SaveWorkspaceResultDTO::fromId((int) $workspaceEntity->getId());
+    }
+
+    public function updateWorkspace(RequestContext $requestContext, SaveWorkspaceRequestDTO $requestDTO): SaveWorkspaceResultDTO
+    {
+        // Get user authorization information
+        $userAuthorization = $requestContext->getUserAuthorization();
+
+        // Create data isolation object
+        $dataIsolation = $this->createDataIsolation($userAuthorization);
+
+        if (empty($requestDTO->getWorkspaceId())) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND);
+        }
+
+        $this->workspaceDomainService->updateWorkspace($dataIsolation, (int) $requestDTO->getWorkspaceId(), $requestDTO->getWorkspaceName());
+
+        return SaveWorkspaceResultDTO::fromId((int) $requestDTO->getWorkspaceId());
+    }
+
+    /**
+     * Save workspace (create or update).
+     * @return SaveWorkspaceResultDTO Operation result, including workspace ID
+     * @throws BusinessException Throws an exception if saving fails
+     * @throws Throwable
+     */
+    public function saveWorkspace(RequestContext $requestContext, SaveWorkspaceRequestDTO $requestDTO): SaveWorkspaceResultDTO
+    {
+        Db::beginTransaction();
+        try {
+            // Get user authorization information
+            $userAuthorization = $requestContext->getUserAuthorization();
+
+            // Create data isolation object
+            $dataIsolation = $this->createDataIsolation($userAuthorization);
+
+            // Prepare workspace entity
+            if ($requestDTO->getWorkspaceId()) {
+                // Update, currently only updates workspace name
+                $this->workspaceDomainService->updateWorkspace($dataIsolation, (int) $requestDTO->getWorkspaceId(), $requestDTO->getWorkspaceName());
+                Db::commit();
+                return SaveWorkspaceResultDTO::fromId((int) $requestDTO->getWorkspaceId());
+            }
+
+            // 提交事务
+            Db::commit();
+
+            // Create, use provided workspace name if available; otherwise use default name
+            $result = $this->initUserWorkspace($dataIsolation, $requestDTO->getWorkspaceName());
+            return SaveWorkspaceResultDTO::fromId($result['workspace']->getId());
+        } catch (EventException $e) {
+            // 回滚事务
+            Db::rollBack();
+            $this->logger->error(sprintf("Error creating new workspace event: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
+            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, $e->getMessage());
+        } catch (Throwable $e) {
+            Db::rollBack();
+            $this->logger->error(sprintf("Error creating new workspace: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
+            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
+        }
+    }
+
+    /**
+     * 获取工作区下的话题列表.
+     */
+    public function getWorkspaceTopics(RequestContext $requestContext, GetWorkspaceTopicsRequestDTO $dto): TopicListResponseDTO
+    {
+        // 创建数据隔离对象
+        $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
+
+        // 通过领域服务获取工作区话题列表
+        $result = $this->workspaceDomainService->getWorkspaceTopics(
+            [$dto->getWorkspaceId()],
+            $dataIsolation,
+            true,
+            $dto->getPageSize(),
+            $dto->getPage(),
+            $dto->getOrderBy(),
+            $dto->getOrderDirection()
+        );
+
+        // 转换为响应 DTO
+        return TopicListResponseDTO::fromResult($result);
+    }
+
+    /**
+     * 获取任务的附件列表.
+     */
+    public function getTaskAttachments(MagicUserAuthorization $userAuthorization, int $taskId, int $page = 1, int $pageSize = 10): array
+    {
+        // 创建数据隔离对象
+        $dataIsolation = $this->createDataIsolation($userAuthorization);
+
+        // 获取任务附件列表
+        $result = $this->workspaceDomainService->getTaskAttachments($taskId, $dataIsolation, $page, $pageSize);
+
+        // 处理文件 URL
+        $list = [];
+        $organizationCode = $userAuthorization->getOrganizationCode();
+        $fileKeys = [];
+        // 遍历附件列表，使用TaskFileItemDTO处理
+        foreach ($result['list'] as $entity) {
+            // 创建DTO
+            $dto = new TaskFileItemDTO();
+            $dto->fileId = (string) $entity->getFileId();
+            $dto->taskId = (string) $entity->getTaskId();
+            $dto->fileType = $entity->getFileType();
+            $dto->fileName = $entity->getFileName();
+            $dto->fileExtension = $entity->getFileExtension();
+            $dto->fileKey = $entity->getFileKey();
+            $dto->fileSize = $entity->getFileSize();
+            $dto->topicId = (string) $entity->getTopicId();
+
+            // 添加 file_url 字段
+            $fileKey = $entity->getFileKey();
+            if (! empty($fileKey)) {
+                $fileLink = $this->fileAppService->getLink($organizationCode, $fileKey, StorageBucketType::SandBox);
+                if ($fileLink) {
+                    $dto->fileUrl = $fileLink->getUrl();
+                } else {
+                    $dto->fileUrl = '';
+                }
+            } else {
+                $dto->fileUrl = '';
+            }
+            // 判断filekey是否重复，如果重复，则跳过
+            if (in_array($fileKey, $fileKeys)) {
+                continue;
+            }
+            $fileKeys[] = $fileKey;
+            $list[] = $dto->toArray();
+        }
+
+        return [
+            'list' => $list,
+            'total' => $result['total'],
+        ];
+    }
+
+    /**
+     * 删除工作区.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param int $workspaceId 工作区ID
+     * @return bool 是否删除成功
+     * @throws BusinessException 如果用户无权限或工作区不存在则抛出异常
+     */
+    public function deleteWorkspace(RequestContext $requestContext, int $workspaceId): bool
+    {
+        // 获取用户授权信息
+        $userAuthorization = $requestContext->getUserAuthorization();
+
+        // 创建数据隔离对象
+        $dataIsolation = $this->createDataIsolation($userAuthorization);
+
+        // 调用领域服务执行删除
+        Db::beginTransaction();
+        try {
+            // 先获取工作区下的所有项目ID，用于删除长期记忆
+            $projectIds = $this->projectDomainService->getProjectIdsByWorkspaceId($dataIsolation, $workspaceId);
+
+            // 批量删除项目相关的长期记忆
+            if (! empty($projectIds)) {
+                $this->longTermMemoryDomainService->deleteMemoriesByProjectIds(
+                    $dataIsolation->getCurrentOrganizationCode(),
+                    AgentConstant::SUPER_MAGIC_CODE,
+                    $dataIsolation->getCurrentUserId(),
+                    $projectIds
+                );
+            }
+
+            // 删除工作区
+            $this->workspaceDomainService->deleteWorkspace($dataIsolation, $workspaceId);
+
+            // 删除工作区下的项目
+            $this->projectDomainService->deleteProjectsByWorkspaceId($dataIsolation, $workspaceId);
+
+            // 删除工作的话题
+            $this->topicDomainService->deleteTopicsByWorkspaceId($dataIsolation, $workspaceId);
+
+            // 投递消息，停止所有运行中的任务
+            $event = new StopRunningTaskEvent(
+                DeleteDataType::WORKSPACE,
+                $workspaceId,
+                $dataIsolation->getCurrentUserId(),
+                $dataIsolation->getCurrentOrganizationCode(),
+                '工作区已被删除'
+            );
+            $publisher = new StopRunningTaskPublisher($event);
+            $this->producer->produce($publisher);
+
+            $this->logger->info(sprintf(
+                '已投递停止任务消息，工作区ID: %d, 事件ID: %s',
+                $workspaceId,
+                $event->getEventId()
+            ));
+
+            Db::commit();
+        } catch (Throwable $e) {
+            Db::rollBack();
+            $this->logger->error('删除工作区失败：' . $e->getMessage());
+            throw $e;
+        }
+
+        return true;
+    }
+
+    /**
+     * 获取任务详情.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param int $taskId 任务ID
+     * @return array 任务详情
+     * @throws BusinessException 如果用户无权限或任务不存在则抛出异常
+     */
+    public function getTaskDetail(RequestContext $requestContext, int $taskId): array
+    {
+        // 获取用户授权信息
+        $userAuthorization = $requestContext->getUserAuthorization();
+
+        // 创建数据隔离对象
+        $dataIsolation = $this->createDataIsolation($userAuthorization);
+
+        // 获取任务详情
+        $taskEntity = $this->workspaceDomainService->getTaskById($taskId);
+        if (! $taskEntity) {
+            ExceptionBuilder::throw(GenericErrorCode::SystemError, 'task.not_found');
+        }
+
+        return $taskEntity->toArray();
+    }
+
+    /**
+     * 获取话题的消息列表.
+     *
+     * @param int $topicId 话题ID
+     * @param int $page 页码
+     * @param int $pageSize 每页大小
+     * @param string $sortDirection 排序方向，支持asc和desc
+     * @return array 消息列表和总数
+     */
+    public function getMessagesByTopicId(int $topicId, int $page = 1, int $pageSize = 20, string $sortDirection = 'asc'): array
+    {
+        // 获取消息列表
+        $result = $this->taskDomainService->getMessagesByTopicId($topicId, $page, $pageSize, true, $sortDirection);
+
+        // 转换为响应格式
+        $messages = [];
+        foreach ($result['list'] as $message) {
+            $messages[] = new MessageItemDTO($message->toArray());
+        }
+
+        $data = [
+            'list' => $messages,
+            'total' => $result['total'],
+        ];
+
+        // 获取 topic 信息
+        $topicEntity = $this->topicDomainService->getTopicWithDeleted($topicId);
+        if ($topicEntity != null) {
+            $data['project_id'] = (string) $topicEntity->getProjectId();
+            $projectEntity = $this->getAccessibleProject($topicEntity->getProjectId(), $topicEntity->getUserId(), $topicEntity->getUserOrganizationCode());
+            $data['project_name'] = $projectEntity->getProjectName();
+        }
+        return $data;
+    }
+
+    /**
+     * 设置工作区归档状态.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param array $workspaceIds 工作区ID数组
+     * @param int $isArchived 归档状态（0:未归档, 1:已归档）
+     * @return bool 是否操作成功
+     */
+    public function setWorkspaceArchived(RequestContext $requestContext, array $workspaceIds, int $isArchived): bool
+    {
+        // 创建数据隔离对象
+        $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
+        $currentUserId = $dataIsolation->getCurrentUserId();
+
+        // 参数验证
+        if (empty($workspaceIds)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'workspace.ids_required');
+        }
+
+        // 验证归档状态值是否有效
+        if (! in_array($isArchived, [
+            WorkspaceArchiveStatus::NotArchived->value,
+            WorkspaceArchiveStatus::Archived->value,
+        ])) {
+            ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'workspace.invalid_archive_status');
+        }
+
+        // 批量更新工作区归档状态
+        $success = true;
+        foreach ($workspaceIds as $workspaceId) {
+            // 获取工作区详情，验证所有权
+            $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail((int) $workspaceId);
+
+            // 如果工作区不存在，跳过
+            if (! $workspaceEntity) {
+                $success = false;
+                continue;
+            }
+
+            // 验证工作区是否属于当前用户
+            if ($workspaceEntity->getUserId() !== $currentUserId) {
+                ExceptionBuilder::throw(GenericErrorCode::AccessDenied, 'workspace.not_owner');
+            }
+
+            // 调用领域服务设置归档状态
+            $result = $this->workspaceDomainService->archiveWorkspace(
+                $requestContext,
+                (int) $workspaceId,
+                $isArchived === WorkspaceArchiveStatus::Archived->value
+            );
+            if (! $result) {
+                $success = false;
+            }
+        }
+
+        return $success;
+    }
+
+    /**
+     * 获取文件URL列表.
+     *
+     * @param MagicUserAuthorization $userAuthorization 用户授权信息
+     * @param array $fileIds 文件ID列表
+     * @param string $downloadMode 下载模式（download:下载, preview:预览）
+     * @param array $options 其他选项
+     * @return array 文件URL列表
+     */
+    public function getFileUrls(MagicUserAuthorization $userAuthorization, array $fileIds, string $downloadMode, array $options = []): array
+    {
+        // 创建数据隔离对象
+        $organizationCode = $userAuthorization->getOrganizationCode();
+        $result = [];
+
+        foreach ($fileIds as $fileId) {
+            // 获取文件实体
+            $fileEntity = $this->taskDomainService->getTaskFile((int) $fileId);
+            if (empty($fileEntity)) {
+                // 如果文件不存在，跳过
+                continue;
+            }
+
+            // 验证文件是否属于当前用户
+            $projectEntity = $this->getAccessibleProject($fileEntity->getProjectId(), $userAuthorization->getId(), $organizationCode);
+
+            $downloadNames = [];
+            if ($downloadMode === 'download') {
+                $downloadNames[$fileEntity->getFileKey()] = $fileEntity->getFileName();
+            }
+            $fileLink = $this->fileAppService->getLink($organizationCode, $fileEntity->getFileKey(), StorageBucketType::SandBox, $downloadNames, $options);
+            if (empty($fileLink)) {
+                // 如果获取URL失败，跳过
+                continue;
+            }
+
+            // 只添加成功的结果
+            $result[] = [
+                'file_id' => $fileId,
+                'url' => $fileLink->getUrl(),
+            ];
+        }
+
+        return $result;
+    }
+
+    public function getTopicDetail(int $topicId): string
+    {
+        $topicEntity = $this->workspaceDomainService->getTopicById($topicId);
+        if (empty($topicEntity)) {
+            return '';
+        }
+        return $topicEntity->getTopicName();
+    }
+
+    /**
+     * 获取工作区信息通过话题ID集合.
+     *
+     * @param array $topicIds 话题ID集合（字符串数组）
+     * @return array 以话题ID为键，工作区信息为值的关联数组
+     */
+    public function getWorkspaceInfoByTopicIds(array $topicIds): array
+    {
+        // 转换字符串ID为整数
+        $intTopicIds = array_map('intval', $topicIds);
+
+        // 调用领域服务获取工作区信息
+        return $this->workspaceDomainService->getWorkspaceInfoByTopicIds($intTopicIds);
+    }
+
+    /**
+     * 注册转换后的PDF文件以供定时清理.
+     */
+    public function registerConvertedPdfsForCleanup(MagicUserAuthorization $userAuthorization, array $convertedFiles): void
+    {
+        if (empty($convertedFiles)) {
+            return;
+        }
+
+        $filesForCleanup = [];
+        foreach ($convertedFiles as $file) {
+            if (empty($file['oss_key']) || empty($file['filename'])) {
+                continue;
+            }
+
+            $filesForCleanup[] = [
+                'organization_code' => $userAuthorization->getOrganizationCode(),
+                'file_key' => $file['oss_key'],
+                'file_name' => $file['filename'],
+                'file_size' => $file['size'] ?? 0, // 如果响应中没有size，默认为0
+                'source_type' => 'pdf_conversion',
+                'source_id' => $file['batch_id'] ?? null,
+                'expire_after_seconds' => 7200, // 2 小时后过期
+                'bucket_type' => 'private',
+            ];
+        }
+
+        if (! empty($filesForCleanup)) {
+            $this->fileCleanupAppService->registerFilesForCleanup($filesForCleanup);
+            $this->logger->info('[PDF Converter] Registered converted PDF files for cleanup', [
+                'user_id' => $userAuthorization->getId(),
+                'files_count' => count($filesForCleanup),
+            ]);
+        }
+    }
+
+    /**
+     * 初始化用户工作区.
+     *
+     * @param DataIsolation $dataIsolation 数据隔离对象
+     * @param string $workspaceName 工作区名称，默认为"我的工作区"
+     * @return array 创建结果，包含workspace和topic实体对象，以及auto_create标志
+     * @throws BusinessException 如果创建失败则抛出异常
+     * @throws Throwable
+     */
+    private function initUserWorkspace(
+        DataIsolation $dataIsolation,
+        string $workspaceName = ''
+    ): array {
+        $this->logger->info('开始初始化用户工作区');
+        Db::beginTransaction();
+        try {
+            // Step 1: Initialize Magic Chat Conversation
+            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+            $this->logger->info(sprintf('初始化超级麦吉, chatConversationId=%s, chatConversationTopicId=%s', $chatConversationId, $chatConversationTopicId));
+
+            // Step 2: Create workspace
+            $this->logger->info('开始创建默认工作区');
+            $workspaceEntity = $this->workspaceDomainService->createWorkspace(
+                $dataIsolation,
+                $chatConversationId,
+                $workspaceName
+            );
+            $this->logger->info(sprintf('创建默认工作区成功, workspaceId=%s', $workspaceEntity->getId()));
+            if (! $workspaceEntity->getId()) {
+                ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.create_workspace_failed');
+            }
+
+            // 创建默认项目
+            $this->logger->info('开始创建默认项目');
+            $projectEntity = $this->projectDomainService->createProject(
+                $workspaceEntity->getId(),
+                '',
+                $dataIsolation->getCurrentUserId(),
+                $dataIsolation->getCurrentOrganizationCode(),
+                '',
+                '',
+                null,
+                CreationSource::USER_CREATED->value
+            );
+            $this->logger->info(sprintf('创建默认项目成功, projectId=%s', $projectEntity->getId()));
+            // 获取工作区目录
+            $workDir = WorkDirectoryUtil::getWorkDir($dataIsolation->getCurrentUserId(), $projectEntity->getId());
+
+            // Step 4: Create default topic
+            $this->logger->info('开始创建默认话题');
+            $topicEntity = $this->topicDomainService->createTopic(
+                $dataIsolation,
+                $workspaceEntity->getId(),
+                $projectEntity->getId(),
+                $chatConversationId,
+                $chatConversationTopicId,
+                '',
+                $workDir
+            );
+            $this->logger->info(sprintf('创建默认话题成功, topicId=%s', $topicEntity->getId()));
+
+            // Step 5: Update workspace current topic
+            if ($topicEntity->getId()) {
+                // 设置工作区信息
+                $workspaceEntity->setCurrentTopicId($topicEntity->getId());
+                $workspaceEntity->setCurrentProjectId($projectEntity->getId());
+                $this->workspaceDomainService->saveWorkspaceEntity($workspaceEntity);
+                $this->logger->info(sprintf('工作区%s已设置当前话题%s', $workspaceEntity->getId(), $topicEntity->getId()));
+                // 设置项目信息
+                $projectEntity->setCurrentTopicId($topicEntity->getId());
+                $projectEntity->setWorkspaceId($workspaceEntity->getId());
+                $projectEntity->setWorkDir($workDir);
+                $this->projectDomainService->saveProjectEntity($projectEntity);
+                $this->logger->info(sprintf('项目%s已设置当前话题%s', $projectEntity->getId(), $topicEntity->getId()));
+            }
+            Db::commit();
+
+            // Return creation result
+            return [
+                'workspace' => $workspaceEntity,
+                'topic' => $topicEntity,
+                'project' => $projectEntity,
+                'auto_create' => true,
+            ];
+        } catch (Throwable $e) {
+            Db::rollBack();
+            throw $e;
+        }
+    }
 }
- /** * Getworkspace list . */ 
-    public function getWorkspacelist (RequestContext $requestContext, Workspacelist RequestDTO $requestDTO): Workspacelist ResponseDTO 
-{
- // Buildquery Condition $conditions = $requestDTO->buildConditions(); // IfDon't havespecified user IDand Haveuser Authorizeinfo Usingcurrent user ID if (empty($conditions['user_id'])) 
-{
- $conditions['user_id'] = $requestContext->getuser Authorization()->getId(); 
-}
- // CreateDataObject $dataIsolation = $this->createDataIsolation($requestContext->getuser Authorization()); // ThroughServiceGetworkspace list $result = $this->workspaceDomainService->getWorkspacesByConditions( $conditions, $requestDTO->page, $requestDTO->pageSize, 'id', 'desc', $dataIsolation ); // Set Default value $result['auto_create'] = false; if (empty($result['list'])) 
-{
- $workspaceEntity = $this->workspaceDomainService->createWorkspace( $dataIsolation, '', '' ); $result['list'] = [$workspaceEntity->toArray()]; $result['total'] = 1; $result['auto_create'] = true; 
-}
- // Allworkspace ID $workspaceIds = []; foreach ($result['list'] as $workspace) 
-{
- if (is_array($workspace)) 
-{
- $workspaceIds[] = $workspace['id']; 
-}
- else 
-{
- $workspaceIds[] = $workspace->getId(); 
-}
- 
-}
- $workspaceIds = array_unique($workspaceIds); // BatchGetworkspace Status $currentuser Id = $dataIsolation->getcurrent user Id(); $workspaceStatusMap = $this->topicDomainService->calculateWorkspaceStatusBatch($workspaceIds, $currentuser Id); // Convert toResponseDTOStatusMap return Workspacelist ResponseDTO::fromResult($result, $workspaceStatusMap); 
-}
- /** * Getworkspace Details. */ 
-    public function getWorkspaceDetail(RequestContext $requestContext, int $workspaceId): WorkspaceItemDTO 
-{
- // CreateDataObject $dataIsolation = $this->createDataIsolation($requestContext->getuser Authorization()); // Getworkspace Details $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($workspaceId); if ($workspaceEntity === null) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found'); 
-}
- // Validate workspace whether belongs to current user if ($workspaceEntity->getuser Id() !== $dataIsolation->getcurrent user Id()) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied'); 
-}
- // Calculate workspace Status $workspaceStatusMap = $this->topicDomainService->calculateWorkspaceStatusBatch([$workspaceId]); $workspaceStatus = $workspaceStatusMap[$workspaceId] ?? null; // Return workspace DetailsDTO return WorkspaceItemDTO::fromEntity($workspaceEntity, $workspaceStatus); 
-}
- 
-    public function createWorkspace(RequestContext $requestContext, SaveWorkspaceRequestDTO $requestDTO): SaveWorkspaceResultDTO 
-{
- // Get user authorization information $userAuthorization = $requestContext->getuser Authorization(); // Create data isolation object $dataIsolation = $this->createDataIsolation($userAuthorization); $workspaceEntity = $this->workspaceDomainService->createWorkspace( $dataIsolation, '', $requestDTO->getWorkspaceName() ); return SaveWorkspaceResultDTO::fromId((int) $workspaceEntity->getId()); 
-}
- 
-    public function updateWorkspace(RequestContext $requestContext, SaveWorkspaceRequestDTO $requestDTO): SaveWorkspaceResultDTO 
-{
- // Get user authorization information $userAuthorization = $requestContext->getuser Authorization(); // Create data isolation object $dataIsolation = $this->createDataIsolation($userAuthorization); if (empty($requestDTO->getWorkspaceId())) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND); 
-}
- $this->workspaceDomainService->updateWorkspace($dataIsolation, (int) $requestDTO->getWorkspaceId(), $requestDTO->getWorkspaceName()); return SaveWorkspaceResultDTO::fromId((int) $requestDTO->getWorkspaceId()); 
-}
- /** * Save workspace (create or update). * @return SaveWorkspaceResultDTO Operation result, including workspace ID * @throws BusinessException Throws an exception if saving fails * @throws Throwable */ 
-    public function saveWorkspace(RequestContext $requestContext, SaveWorkspaceRequestDTO $requestDTO): SaveWorkspaceResultDTO 
-{
- Db::beginTransaction(); try 
-{
- // Get user authorization information $userAuthorization = $requestContext->getuser Authorization(); // Create data isolation object $dataIsolation = $this->createDataIsolation($userAuthorization); // Prepare workspace entity if ($requestDTO->getWorkspaceId()) 
-{
- // Update, currently only updates workspace name $this->workspaceDomainService->updateWorkspace($dataIsolation, (int) $requestDTO->getWorkspaceId(), $requestDTO->getWorkspaceName()); Db::commit(); return SaveWorkspaceResultDTO::fromId((int) $requestDTO->getWorkspaceId()); 
-}
- // SubmitTransaction Db::commit(); // Create, use provided workspace name if available;
-otherwise use default name $result = $this->inituser Workspace($dataIsolation, $requestDTO->getWorkspaceName());
-return SaveWorkspaceResultDTO::fromId($result['workspace']->getId()); 
-}
- catch (EventException $e) 
-{
- // RollbackTransaction Db::rollReturn (); $this->logger->error(sprintf( Error creating new workspace event: %s\n%s , $e->getMessage(), $e->getTraceAsString())); ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, $e->getMessage()); 
-}
- catch (Throwable $e) 
-{
- Db::rollReturn (); $this->logger->error(sprintf( Error creating new workspace: %s\n%s , $e->getMessage(), $e->getTraceAsString())); ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed'); 
-}
- 
-}
- /** * Getworkspace under topic list . */ 
-    public function getWorkspaceTopics(RequestContext $requestContext, GetWorkspaceTopicsRequestDTO $dto): Topiclist ResponseDTO 
-{
- // CreateDataObject $dataIsolation = $this->createDataIsolation($requestContext->getuser Authorization()); // ThroughServiceGetworkspace topic list $result = $this->workspaceDomainService->getWorkspaceTopics( [$dto->getWorkspaceId()], $dataIsolation, true, $dto->getPageSize(), $dto->getPage(), $dto->getOrderBy(), $dto->getOrderDirection() ); // Convert toResponse DTO return Topiclist ResponseDTO::fromResult($result); 
-}
- /** * GetTasklist . */ 
-    public function getTaskAttachments(Magicuser Authorization $userAuthorization, int $taskId, int $page = 1, int $pageSize = 10): array 
-{
- // CreateDataObject $dataIsolation = $this->createDataIsolation($userAuthorization); // GetTasklist $result = $this->workspaceDomainService->getTaskAttachments($taskId, $dataIsolation, $page, $pageSize); // process File URL $list = []; $organizationCode = $userAuthorization->getOrganizationCode(); $fileKeys = []; // list UsingTaskFileItemDTOprocess foreach ($result['list'] as $entity) 
-{
- // CreateDTO $dto = new TaskFileItemDTO(); $dto->fileId = (string) $entity->getFileId(); $dto->taskId = (string) $entity->getTaskId(); $dto->fileType = $entity->getFileType(); $dto->fileName = $entity->getFileName(); $dto->fileExtension = $entity->getFileExtension(); $dto->fileKey = $entity->getFileKey(); $dto->fileSize = $entity->getFileSize(); $dto->topicId = (string) $entity->getTopicId(); // Add file_url Field $fileKey = $entity->getFileKey(); if (! empty($fileKey)) 
-{
- $fileLink = $this->fileAppService->getLink($organizationCode, $fileKey, StorageBucketType::SandBox); if ($fileLink) 
-{
- $dto->fileUrl = $fileLink->getUrl(); 
-}
- else 
-{
- $dto->fileUrl = ''; 
-}
- 
-}
- else 
-{
- $dto->fileUrl = ''; 
-}
- // Determinefilekeywhether DuplicateIfDuplicateSkip if (in_array($fileKey, $fileKeys)) 
-{
- continue; 
-}
- $fileKeys[] = $fileKey; $list[] = $dto->toArray(); 
-}
- return [ 'list' => $list, 'total' => $result['total'], ]; 
-}
- /** * delete workspace . * * @param RequestContext $requestContext RequestContext * @param int $workspaceId workspace ID * @return bool whether delete Success * @throws BusinessException Ifuser No permissionor workspace does not existThrowException */ 
-    public function deleteWorkspace(RequestContext $requestContext, int $workspaceId): bool 
-{
- // Getuser Authorizeinfo $userAuthorization = $requestContext->getuser Authorization(); // CreateDataObject $dataIsolation = $this->createDataIsolation($userAuthorization); // call Serviceexecute delete Db::beginTransaction(); try 
-{
- // Getworkspace under AllProject IDfor delete long-term memory $projectIds = $this->projectDomainService->getProjectIdsByWorkspaceId($dataIsolation, $workspaceId); // Batchdelete Itemrelated long-term memory if (! empty($projectIds)) 
-{
- $this->longTermMemoryDomainService->deleteMemoriesByProjectIds( $dataIsolation->getcurrent OrganizationCode(), AgentConstant::SUPER_MAGIC_CODE, $dataIsolation->getcurrent user Id(), $projectIds ); 
-}
- // delete workspace $this->workspaceDomainService->deleteWorkspace($dataIsolation, $workspaceId); // delete workspace under Item $this->projectDomainService->deleteProjectsByWorkspaceId($dataIsolation, $workspaceId); // delete topic $this->topicDomainService->deleteTopicsByWorkspaceId($dataIsolation, $workspaceId); // delivery MessageStopAllRunningTask $event = new StopRunningTaskEvent( delete DataType::WORKSPACE, $workspaceId, $dataIsolation->getcurrent user Id(), $dataIsolation->getcurrent OrganizationCode(), 'workspace delete ' ); $publisher = new StopRunningTaskPublisher($event); $this->producer->produce($publisher); $this->logger->info(sprintf( 'delivery StopTaskMessageworkspace ID: %d, EventID: %s', $workspaceId, $event->getEventId() )); Db::commit(); 
-}
- catch (Throwable $e) 
-{
- Db::rollReturn (); $this->logger->error('delete workspace Failed' . $e->getMessage()); throw $e; 
-}
- return true; 
-}
- /** * GetTaskDetails. * * @param RequestContext $requestContext RequestContext * @param int $taskId TaskID * @return array TaskDetails * @throws BusinessException Ifuser No permissionor Taskdoes not existThrowException */ 
-    public function getTaskDetail(RequestContext $requestContext, int $taskId): array 
-{
- // Getuser Authorizeinfo $userAuthorization = $requestContext->getuser Authorization(); // CreateDataObject $dataIsolation = $this->createDataIsolation($userAuthorization); // GetTaskDetails $taskEntity = $this->workspaceDomainService->getTaskById($taskId); if (! $taskEntity) 
-{
- ExceptionBuilder::throw(GenericErrorCode::SystemError, 'task.not_found'); 
-}
- return $taskEntity->toArray(); 
-}
- /** * Gettopic Messagelist . * * @param int $topicId topic ID * @param int $page Page number * @param int $pageSize Per pageSize * @param string $sortDirection SortSupportascdesc * @return array Messagelist Total */ 
-    public function getMessagesByTopicId(int $topicId, int $page = 1, int $pageSize = 20, string $sortDirection = 'asc'): array 
-{
- // GetMessagelist $result = $this->taskDomainService->getMessagesByTopicId($topicId, $page, $pageSize, true, $sortDirection); // Convert toResponseFormat $messages = []; foreach ($result['list'] as $message) 
-{
- $messages[] = new MessageItemDTO($message->toArray()); 
-}
- $data = [ 'list' => $messages, 'total' => $result['total'], ]; // Get topic info $topicEntity = $this->topicDomainService->getTopicWithdelete d($topicId); if ($topicEntity != null) 
-{
- $data['project_id'] = (string) $topicEntity->getProjectId(); $projectEntity = $this->getAccessibleProject($topicEntity->getProjectId(), $topicEntity->getuser Id(), $topicEntity->getuser OrganizationCode()); $data['project_name'] = $projectEntity->getProjectName(); 
-}
- return $data; 
-}
- /** * Set workspace Status. * * @param RequestContext $requestContext RequestContext * @param array $workspaceIds workspace IDArray * @param int $isArchived Status0:not archived , 1:Archived * @return bool whether Success */ 
-    public function setWorkspaceArchived(RequestContext $requestContext, array $workspaceIds, int $isArchived): bool 
-{
- // CreateDataObject $dataIsolation = $this->createDataIsolation($requestContext->getuser Authorization()); $currentuser Id = $dataIsolation->getcurrent user Id(); // ParameterValidate if (empty($workspaceIds)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'workspace.ids_required'); 
-}
- // Validate StatusValuewhether valid if (! in_array($isArchived, [ WorkspaceArchiveStatus::NotArchived->value, WorkspaceArchiveStatus::Archived->value, ])) 
-{
- ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'workspace.invalid_archive_status'); 
-}
- // BatchUpdateworkspace Status $success = true; foreach ($workspaceIds as $workspaceId) 
-{
- // Getworkspace DetailsValidate All $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail((int) $workspaceId); // Ifworkspace does not existSkip if (! $workspaceEntity) 
-{
- $success = false; continue; 
-}
- // Validate workspace whether belongs to current user if ($workspaceEntity->getuser Id() !== $currentuser Id) 
-{
- ExceptionBuilder::throw(GenericErrorCode::AccessDenied, 'workspace.not_owner'); 
-}
- // call ServiceSet Status $result = $this->workspaceDomainService->archiveWorkspace( $requestContext, (int) $workspaceId, $isArchived === WorkspaceArchiveStatus::Archived->value ); if (! $result) 
-{
- $success = false; 
-}
- 
-}
- return $success; 
-}
- /** * GetFileURLlist . * * @param Magicuser Authorization $userAuthorization user Authorizeinfo * @param array $fileIds FileIDlist * @param string $downloadMode DownloadSchemadownload:Download, preview:Preview * @param array $options Options * @return array FileURLlist */ 
-    public function getFileUrls(Magicuser Authorization $userAuthorization, array $fileIds, string $downloadMode, array $options = []): array 
-{
- // CreateDataObject $organizationCode = $userAuthorization->getOrganizationCode(); $result = []; foreach ($fileIds as $fileId) 
-{
- // GetFile $fileEntity = $this->taskDomainService->getTaskFile((int) $fileId); if (empty($fileEntity)) 
-{
- // IfFiledoes not existSkip continue; 
-}
- // Validate Filewhether belongs to current user $projectEntity = $this->getAccessibleProject($fileEntity->getProjectId(), $userAuthorization->getId(), $organizationCode); $downloadNames = []; if ($downloadMode === 'download') 
-{
- $downloadNames[$fileEntity->getFileKey()] = $fileEntity->getFileName(); 
-}
- $fileLink = $this->fileAppService->getLink($organizationCode, $fileEntity->getFileKey(), StorageBucketType::SandBox, $downloadNames, $options); if (empty($fileLink)) 
-{
- // IfGetURLFailedSkip continue; 
-}
- // AddSuccessResult $result[] = [ 'file_id' => $fileId, 'url' => $fileLink->getUrl(), ]; 
-}
- return $result; 
-}
- 
-    public function getTopicDetail(int $topicId): string 
-{
- $topicEntity = $this->workspaceDomainService->getTopicById($topicId); if (empty($topicEntity)) 
-{
- return ''; 
-}
- return $topicEntity->getTopicName(); 
-}
- /** * Getworkspace info Throughtopic IDCollection. * * @param array $topicIds topic IDCollectionStringArray * @return array topic IDas Keyworkspace info as ValueAssociationArray */ 
-    public function getWorkspaceinfo ByTopicIds(array $topicIds): array 
-{
- // ConvertStringIDas Integer $intTopicIds = array_map('intval', $topicIds); // call ServiceGetworkspace info return $this->workspaceDomainService->getWorkspaceinfo ByTopicIds($intTopicIds); 
-}
- /** * RegisterConvertPDFFileScheduledClean. */ 
-    public function registerConvertedPdfsForCleanup(Magicuser Authorization $userAuthorization, array $convertedFiles): void 
-{
- if (empty($convertedFiles)) 
-{
- return; 
-}
- $filesForCleanup = []; foreach ($convertedFiles as $file) 
-{
- if (empty($file['oss_key']) || empty($file['filename'])) 
-{
- continue; 
-}
- $filesForCleanup[] = [ 'organization_code' => $userAuthorization->getOrganizationCode(), 'file_key' => $file['oss_key'], 'file_name' => $file['filename'], 'file_size' => $file['size'] ?? 0, // IfResponsein Don't havesizeDefault to0 'source_type' => 'pdf_conversion', 'source_id' => $file['batch_id'] ?? null, 'expire_after_seconds' => 7200, // 2 'bucket_type' => 'private', ]; 
-}
- if (! empty($filesForCleanup)) 
-{
- $this->fileCleanupAppService->registerFilesForCleanup($filesForCleanup); $this->logger->info('[PDF Converter] Registered converted PDF files for cleanup', [ 'user_id' => $userAuthorization->getId(), 'files_count' => count($filesForCleanup), ]); 
-}
- 
-}
- /** * Initializeuser workspace . * * @param DataIsolation $dataIsolation DataObject * @param string $workspaceName workspace NameDefault to workspace * @return array CreateResultincluding workspacetopicObjectauto_createFlag * @throws BusinessException IfCreation failedThrowException * @throws Throwable */ 
-    private function inituser Workspace( DataIsolation $dataIsolation, string $workspaceName = '' ): array 
-{
- $this->logger->info('StartInitializeuser workspace '); Db::beginTransaction(); try 
-{
- // Step 1: Initialize Magic Chat Conversation [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation); $this->logger->info(sprintf('InitializeSuper Maggie, chatConversationId=%s, chatConversationTopicId=%s', $chatConversationId, $chatConversationTopicId)); // Step 2: Create workspace $this->logger->info('StartCreateDefault workspace'); $workspaceEntity = $this->workspaceDomainService->createWorkspace( $dataIsolation, $chatConversationId, $workspaceName ); $this->logger->info(sprintf('CreateDefault workspaceSuccess, workspaceId=%s', $workspaceEntity->getId())); if (! $workspaceEntity->getId()) 
-{
- ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.create_workspace_failed'); 
-}
- // CreateDefault project $this->logger->info('StartCreateDefault project'); $projectEntity = $this->projectDomainService->createProject( $workspaceEntity->getId(), '', $dataIsolation->getcurrent user Id(), $dataIsolation->getcurrent OrganizationCode(), '', '', null, CreationSource::USER_CREATED->value ); $this->logger->info(sprintf('CreateDefault projectSuccess, projectId=%s', $projectEntity->getId())); // Getworkspace Directory $workDir = WorkDirectoryUtil::getWorkDir($dataIsolation->getcurrent user Id(), $projectEntity->getId()); // Step 4: Create default topic $this->logger->info('StartCreateDefault topic'); $topicEntity = $this->topicDomainService->createTopic( $dataIsolation, $workspaceEntity->getId(), $projectEntity->getId(), $chatConversationId, $chatConversationTopicId, '', $workDir ); $this->logger->info(sprintf('CreateDefault topicSuccess, topicId=%s', $topicEntity->getId())); // Step 5: Update workspace current topic if ($topicEntity->getId()) 
-{
- // Set workspace info $workspaceEntity->setcurrent TopicId($topicEntity->getId()); $workspaceEntity->setcurrent ProjectId($projectEntity->getId()); $this->workspaceDomainService->saveWorkspaceEntity($workspaceEntity); $this->logger->info(sprintf('workspace %sSet current topic %s', $workspaceEntity->getId(), $topicEntity->getId())); // Set Iteminfo $projectEntity->setcurrent TopicId($topicEntity->getId()); $projectEntity->setWorkspaceId($workspaceEntity->getId()); $projectEntity->setWorkDir($workDir); $this->projectDomainService->saveProjectEntity($projectEntity); $this->logger->info(sprintf('Item%sSet current topic %s', $projectEntity->getId(), $topicEntity->getId())); 
-}
- Db::commit(); // Return creation result return [ 'workspace' => $workspaceEntity, 'topic' => $topicEntity, 'project' => $projectEntity, 'auto_create' => true, ]; 
-}
- catch (Throwable $e) 
-{
- Db::rollReturn (); throw $e; 
-}
- 
-}
- 
-}
- 

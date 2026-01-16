@@ -1,35 +1,46 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Constants;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Constants;
+/**
+ * 资源类型常量.
+ */
+final class ResourceType
+{
+    public const PROJECT = 'project';
 
-/** * ResourceTypeConstant. */ 
-    final class ResourceType 
-{
- 
-    public 
-    const PROJECT = 'project'; 
-    public 
-    const TOPIC = 'topic'; 
-    public 
-    const FILE = 'file'; 
-    public 
-    const DIRECTORY = 'directory'; 
-    public 
-    const MEMBER = 'member'; /** * GetAllResourceType. */ 
-    public 
-    static function getAllTypes(): array 
-{
- return [ self::PROJECT, self::TOPIC, self::FILE, self::DIRECTORY, self::MEMBER, ]; 
+    public const TOPIC = 'topic';
+
+    public const FILE = 'file';
+
+    public const DIRECTORY = 'directory';
+
+    public const MEMBER = 'member';
+
+    /**
+     * 获取所有资源类型.
+     */
+    public static function getAllTypes(): array
+    {
+        return [
+            self::PROJECT,
+            self::TOPIC,
+            self::FILE,
+            self::DIRECTORY,
+            self::MEMBER,
+        ];
+    }
+
+    /**
+     * 验证资源类型是否有效.
+     */
+    public static function isValidType(string $type): bool
+    {
+        return in_array($type, self::getAllTypes(), true);
+    }
 }
- /** * Validate ResourceTypewhether valid. */ 
-    public 
-    static function isValidType(string $type): bool 
-{
- return in_array($type, self::getAllTypes(), true); 
-}
- 
-}
- 

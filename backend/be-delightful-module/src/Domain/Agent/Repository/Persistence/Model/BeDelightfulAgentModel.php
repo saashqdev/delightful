@@ -1,22 +1,76 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\Agent\Repository\Persistence\Model;
+namespace Dtyq\BeDelightful\Domain\Agent\Repository\Persistence\Model;
 
 use App\Infrastructure\Core\AbstractModel;
 use DateTime;
-use Hyperf\Database\Model\Softdelete s;
+use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
-/** * @property int $id ID * @property string $organization_code organization code * @property string $code Encode * @property string $name AgentName * @property string $description AgentDescription * @property array $icon AgentIcon * @property int $icon_type IconType * @property array $prompt SystemNotice * @property array $tools tool list * @property int $type Type * @property bool $enabled whether Enabled * @property string $creator creator * @property DateTime $created_at Creation time * @property string $modifier Modify * @property DateTime $updated_at Update time * @property null|DateTime $deleted_at Deletion time */
 
-class BeDelightfulAgentModel extends AbstractModel 
+/**
+ * @property int $id 雪花ID
+ * @property string $organization_code 组织编码
+ * @property string $code 唯一编码
+ * @property string $name Agent名称
+ * @property string $description Agent描述
+ * @property array $icon Agent图标
+ * @property int $icon_type 图标类型
+ * @property array $prompt 系统提示词
+ * @property array $tools 工具列表
+ * @property int $type 智能体类型
+ * @property bool $enabled 是否启用
+ * @property string $creator 创建者
+ * @property DateTime $created_at 创建时间
+ * @property string $modifier 修改者
+ * @property DateTime $updated_at 更新时间
+ * @property null|DateTime $deleted_at 删除时间
+ */
+class BeDelightfulAgentModel extends AbstractModel
 {
- use Snowflake;
-use Softdelete s;
-protected ?string $table = 'magic_super_magic_agents'; 
-    protected array $fillable = [ 'id', 'organization_code', 'code', 'name', 'description', 'icon', 'icon_type', 'prompt', 'tools', 'type', 'enabled', 'creator', 'created_at', 'modifier', 'updated_at', ]; 
-    protected array $casts = [ 'id' => 'integer', 'organization_code' => 'string', 'code' => 'string', 'name' => 'string', 'description' => 'string', 'icon' => 'array', 'icon_type' => 'integer', 'prompt' => 'array', 'tools' => 'array', 'type' => 'integer', 'enabled' => 'boolean', 'creator' => 'string', 'modifier' => 'string', 'created_at' => 'datetime', 'updated_at' => 'datetime', 'deleted_at' => 'datetime', ]; 
+    use Snowflake;
+    use SoftDeletes;
+
+    protected ?string $table = 'magic_super_magic_agents';
+
+    protected array $fillable = [
+        'id',
+        'organization_code',
+        'code',
+        'name',
+        'description',
+        'icon',
+        'icon_type',
+        'prompt',
+        'tools',
+        'type',
+        'enabled',
+        'creator',
+        'created_at',
+        'modifier',
+        'updated_at',
+    ];
+
+    protected array $casts = [
+        'id' => 'integer',
+        'organization_code' => 'string',
+        'code' => 'string',
+        'name' => 'string',
+        'description' => 'string',
+        'icon' => 'array',
+        'icon_type' => 'integer',
+        'prompt' => 'array',
+        'tools' => 'array',
+        'type' => 'integer',
+        'enabled' => 'boolean',
+        'creator' => 'string',
+        'modifier' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
 }
- 

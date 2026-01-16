@@ -1,22 +1,35 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Constants;
 
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Constants;
-
-/** * sandbox API Constant * sandbox Service API Path. */
-
-class SandboxEndpoints 
+/**
+ * 沙箱 API 端点常量
+ * 统一管理沙箱服务的 API 路径.
+ */
+class SandboxEndpoints
 {
- /** * ASR Task. */ 
-    public 
-    const ASR_TASK_START = 'api/asr/task/start'; /** * ASR Taskcomplete . */ 
-    public 
-    const ASR_TASK_FINISH = 'api/asr/task/finish'; /** * ASR Taskcancel . */ 
-    public 
-    const ASR_TASK_CANCEL = 'api/asr/task/cancel'; /** * Agent Message. */ 
-    public 
-    const AGENT_MESSAGES_CHAT = 'api/v1/messages/chat'; 
+    /**
+     * ASR 任务启动端点.
+     */
+    public const ASR_TASK_START = 'api/asr/task/start';
+
+    /**
+     * ASR 任务完成端点.
+     */
+    public const ASR_TASK_FINISH = 'api/asr/task/finish';
+
+    /**
+     * ASR 任务取消端点.
+     */
+    public const ASR_TASK_CANCEL = 'api/asr/task/cancel';
+
+    /**
+     * Agent 消息聊天端点.
+     */
+    public const AGENT_MESSAGES_CHAT = 'api/v1/messages/chat';
 }
- 

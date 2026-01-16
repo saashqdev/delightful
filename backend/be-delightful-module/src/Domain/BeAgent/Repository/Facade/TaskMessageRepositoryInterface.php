@@ -1,34 +1,167 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Repository\Facade;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
 use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\TaskMessageModel;
 
-interface TaskMessageRepositoryInterface 
+interface TaskMessageRepositoryInterface
 {
- /** * ThroughIDGetMessage. */ 
-    public function getById(int $id): ?TaskMessageEntity; /** * SaveMessage. */ 
-    public function save(TaskMessageEntity $message): void; /** * BatchSaveMessage. * @param TaskMessageEntity[] $messages */ 
-    public function batchSave(array $messages): void; /** * According toTaskIDGetMessagelist . * @return TaskMessageEntity[] */ 
-    public function findByTaskId(string $taskId): array; /** * According totopic IDTaskIDGetuser Messagelist optimize Index+Filteruser Message. * @return TaskMessageEntity[] */ 
-    public function finduser MessagesByTopicIdAndTaskId(int $topicId, string $taskId): array; /** * According totopic IDGetMessagelist SupportPaging. * @param int $topicId topic ID * @param int $page Page number * @param int $pageSize Per pageSize * @param bool $shouldPage whether need Paging * @param string $sortDirection SortSupportascdesc * @param bool $showInUi whether DisplayUIVisibleMessage * @return array Return including Messagelist TotalArray ['list' => TaskMessageEntity[], 'total' => int] */ 
-    public function findByTopicId(int $topicId, int $page = 1, int $pageSize = 20, bool $shouldPage = true, string $sortDirection = 'asc', bool $showInUi = true): array; 
-    public function getuser FirstMessageByTopicId(int $topicId, string $userId): ?TaskMessageEntity; /** * According totopic_idprocess Statusquery Messagelist seq_idAscendingColumn. * @param int $topicId topic ID * @param string $processingStatus process Status * @param string $senderType SendType * @param int $limit LimitQuantity * @return TaskMessageEntity[] */ 
-    public function findPendingMessagesByTopicId(int $topicId, string $processingStatus, string $senderType = 'assistant', int $limit = 50): array; /** * UpdateMessageprocess Status. * @param int $id MessageID * @param string $processingStatus process Status * @param null|string $errorMessage Error message * @param int $retryCount Retry */ 
-    public function updateprocess ingStatus(int $id, string $processingStatus, ?string $errorMessage = null, int $retryCount = 0): void; /** * BatchUpdateMessageprocess Status. * @param array $ids MessageIDArray * @param string $processingStatus process Status */ 
-    public function batchUpdateprocess ingStatus(array $ids, string $processingStatus): void; /** * GetNextseq_id. */ 
-    public function getNextSeqId(int $topicId, int $taskId): int; /** * Saveoriginal MessageDataGenerate seq_id. * @param array $rawData original MessageData * @param TaskMessageEntity $message Message * @param string $processStatus process Status */ 
-    public function saveWithRawData(array $rawData, TaskMessageEntity $message, string $processStatus = TaskMessageModel::PROCESSING_STATUS_PENDING): void; /** * According toseq_idtopic_idquery Message. * @param int $seqId ColumnID * @param int $taskId TaskID * @param int $topicId topic ID * @return null|TaskMessageEntity Messageor null */ 
-    public function findBySeqIdAndTopicId(int $seqId, int $taskId, int $topicId): ?TaskMessageEntity; /** * According totopic_idmessage_idquery Message. * @param int $topicId topic ID * @param string $messageId MessageID * @return null|TaskMessageEntity Messageor null */ 
-    public function findByTopicIdAndMessageId(int $topicId, string $messageId): ?TaskMessageEntity; /** * UpdateHaveMessageField. * @param TaskMessageEntity $message Message */ 
-    public function updateExistingMessage(TaskMessageEntity $message): void; /** * GetPendingMessagelist for order Batchprocess . * * query Condition * - pending: Allprocess * - processing: specified as Timed out * - failed: RetryMaximumValue * * @param int $topicId topic ID * @param string $senderType SendType * @param int $timeoutMinutes process TimeoutTime * @param int $maxRetries MaximumRetry * @param int $limit LimitQuantity * @return TaskMessageEntity[] seq_idAscendingColumnMessagelist */ 
-    public function findprocess ableMessages( int $topicId, int $taskId, string $senderType = 'assistant', int $timeoutMinutes = 30, int $maxRetries = 3, int $limit = 50 ): array; /** * According totopic IDMessageIDGetneed CopyMessagelist . * * @param int $topicId topic ID * @param int $messageId MessageIDGetLess than or equal toIDMessage * @return TaskMessageEntity[] MessageArrayidAscendingColumn */ 
-    public function findMessagesToCopyByTopicIdAndMessageId(int $topicId, int $messageId): array; /** * BatchCreateMessage. * * @param TaskMessageEntity[] $messageEntities MessageArray * @return TaskMessageEntity[] CreateSuccessMessageArrayincluding Generate ID */ 
-    public function batchCreateMessages(array $messageEntities): array; /** * UpdateMessageIMColumnID. * * @param int $id MessageID * @param null|int $imSeqId IMColumnIDEmptyUpdate */ 
-    public function updateMessageSeqId(int $id, ?int $imSeqId): void; 
+    /**
+     * 通过ID获取消息.
+     */
+    public function getById(int $id): ?TaskMessageEntity;
+
+    /**
+     * 保存消息.
+     */
+    public function save(TaskMessageEntity $message): void;
+
+    /**
+     * 批量保存消息.
+     * @param TaskMessageEntity[] $messages
+     */
+    public function batchSave(array $messages): void;
+
+    /**
+     * 根据任务ID获取消息列表.
+     * @return TaskMessageEntity[]
+     */
+    public function findByTaskId(string $taskId): array;
+
+    /**
+     * 根据话题ID和任务ID获取用户消息列表（优化索引+过滤用户消息）.
+     * @return TaskMessageEntity[]
+     */
+    public function findUserMessagesByTopicIdAndTaskId(int $topicId, string $taskId): array;
+
+    /**
+     * 根据话题ID获取消息列表，支持分页.
+     * @param int $topicId 话题ID
+     * @param int $page 页码
+     * @param int $pageSize 每页大小
+     * @param bool $shouldPage 是否需要分页
+     * @param string $sortDirection 排序方向，支持asc和desc
+     * @param bool $showInUi 是否只显示UI可见的消息
+     * @return array 返回包含消息列表和总数的数组 ['list' => TaskMessageEntity[], 'total' => int]
+     */
+    public function findByTopicId(int $topicId, int $page = 1, int $pageSize = 20, bool $shouldPage = true, string $sortDirection = 'asc', bool $showInUi = true): array;
+
+    public function getUserFirstMessageByTopicId(int $topicId, string $userId): ?TaskMessageEntity;
+
+    /**
+     * 根据topic_id和处理状态查询消息列表，按seq_id升序排列.
+     * @param int $topicId 话题ID
+     * @param string $processingStatus 处理状态
+     * @param string $senderType 发送者类型
+     * @param int $limit 限制数量
+     * @return TaskMessageEntity[]
+     */
+    public function findPendingMessagesByTopicId(int $topicId, string $processingStatus, string $senderType = 'assistant', int $limit = 50): array;
+
+    /**
+     * 更新消息处理状态.
+     * @param int $id 消息ID
+     * @param string $processingStatus 处理状态
+     * @param null|string $errorMessage 错误信息
+     * @param int $retryCount 重试次数
+     */
+    public function updateProcessingStatus(int $id, string $processingStatus, ?string $errorMessage = null, int $retryCount = 0): void;
+
+    /**
+     * 批量更新消息处理状态.
+     * @param array $ids 消息ID数组
+     * @param string $processingStatus 处理状态
+     */
+    public function batchUpdateProcessingStatus(array $ids, string $processingStatus): void;
+
+    /**
+     * 获取下一个seq_id.
+     */
+    public function getNextSeqId(int $topicId, int $taskId): int;
+
+    /**
+     * 保存原始消息数据并生成seq_id.
+     * @param array $rawData 原始消息数据
+     * @param TaskMessageEntity $message 消息实体
+     * @param string $processStatus 处理状态
+     */
+    public function saveWithRawData(array $rawData, TaskMessageEntity $message, string $processStatus = TaskMessageModel::PROCESSING_STATUS_PENDING): void;
+
+    /**
+     * 根据seq_id和topic_id查询消息.
+     * @param int $seqId 序列ID
+     * @param int $taskId 任务ID
+     * @param int $topicId 话题ID
+     * @return null|TaskMessageEntity 消息实体或null
+     */
+    public function findBySeqIdAndTopicId(int $seqId, int $taskId, int $topicId): ?TaskMessageEntity;
+
+    /**
+     * 根据topic_id和message_id查询消息.
+     * @param int $topicId 话题ID
+     * @param string $messageId 消息ID
+     * @return null|TaskMessageEntity 消息实体或null
+     */
+    public function findByTopicIdAndMessageId(int $topicId, string $messageId): ?TaskMessageEntity;
+
+    /**
+     * 更新现有消息的业务字段.
+     * @param TaskMessageEntity $message 消息实体
+     */
+    public function updateExistingMessage(TaskMessageEntity $message): void;
+
+    /**
+     * 获取待处理的消息列表（用于顺序批量处理）.
+     *
+     * 查询条件：
+     * - pending: 全部处理
+     * - processing: 超过指定分钟数的（认为已超时）
+     * - failed: 重试次数不超过最大值的
+     *
+     * @param int $topicId 话题ID
+     * @param string $senderType 发送者类型
+     * @param int $timeoutMinutes 处理超时时间（分钟）
+     * @param int $maxRetries 最大重试次数
+     * @param int $limit 限制数量
+     * @return TaskMessageEntity[] 按seq_id升序排列的消息列表
+     */
+    public function findProcessableMessages(
+        int $topicId,
+        int $taskId,
+        string $senderType = 'assistant',
+        int $timeoutMinutes = 30,
+        int $maxRetries = 3,
+        int $limit = 50
+    ): array;
+
+    /**
+     * 根据话题ID和消息ID获取需要复制的消息列表.
+     *
+     * @param int $topicId 话题ID
+     * @param int $messageId 消息ID（获取小于等于此ID的消息）
+     * @return TaskMessageEntity[] 消息实体数组，按id升序排列
+     */
+    public function findMessagesToCopyByTopicIdAndMessageId(int $topicId, int $messageId): array;
+
+    /**
+     * 批量创建消息.
+     *
+     * @param TaskMessageEntity[] $messageEntities 消息实体数组
+     * @return TaskMessageEntity[] 创建成功的消息实体数组（包含生成的ID）
+     */
+    public function batchCreateMessages(array $messageEntities): array;
+
+    /**
+     * 更新消息的IM序列ID.
+     *
+     * @param int $id 消息ID
+     * @param null|int $imSeqId IM序列ID，为空时不更新
+     */
+    public function updateMessageSeqId(int $id, ?int $imSeqId): void;
 }
- 

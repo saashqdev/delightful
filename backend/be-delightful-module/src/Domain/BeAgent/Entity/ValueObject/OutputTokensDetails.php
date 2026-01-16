@@ -1,39 +1,42 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * Output Tokens Details Value Object.
+ */
+class OutputTokensDetails
+{
+    public function __construct(
+        private ?int $reasoningTokens
+    ) {
+    }
 
-/** * Output Tokens Details Value Object. */
+    public static function fromArray(?array $data): ?self
+    {
+        if (empty($data)) {
+            return null;
+        }
 
-class OutputTokensDetails 
-{
- 
-    public function __construct( private ?int $reasoningTokens ) 
-{
- 
+        return new self(
+            $data['reasoning_tokens'] ?? null
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'reasoning_tokens' => $this->reasoningTokens,
+        ];
+    }
+
+    public function getReasoningTokens(): ?int
+    {
+        return $this->reasoningTokens;
+    }
 }
- 
-    public 
-    static function fromArray(?array $data): ?self 
-{
- if (empty($data)) 
-{
- return null; 
-}
- return new self( $data['reasoning_tokens'] ?? null ); 
-}
- 
-    public function toArray(): array 
-{
- return [ 'reasoning_tokens' => $this->reasoningTokens, ]; 
-}
- 
-    public function getReasoningTokens(): ?int 
-{
- return $this->reasoningTokens; 
-}
- 
-}
- 

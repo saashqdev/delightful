@@ -1,14 +1,16 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\Agent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
-
-class BeDelightfulAgentLimit 
+class BeDelightfulAgentLimit
 {
- /** * each user MaximumQuantityLimit. */ 
-    public 
-    const MAX_AGENTS_PER_USER = 500; 
+    /**
+     * 每个用户最大智能体数量限制.
+     */
+    public const MAX_AGENTS_PER_USER = 500;
 }
- 

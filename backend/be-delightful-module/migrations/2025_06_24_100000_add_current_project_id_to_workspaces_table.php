@@ -1,11 +1,37 @@
-<?php 
-declare(strict_types=1);
- /** * Copyright (c) Be Delightful , Distributed under the MIT software license */
- use Hyperf\Database\Migrations\Migration;
- use Hyperf\Database\Schema\Blueprint;
- use Hyperf\Database\Schema\Schema;
- return new class extends Migration  {
- /** * Run migrations. */
- public function up(): void  {
- // as delightful_super_agent_workspaces tableAdd current_project_id field Schema::table('delightful_super_agent_workspaces', function (Blueprint $table) { $table->bigInteger('current_project_id')->Nullable()->comment('current project ID')->after('current_topic_id'); }); echo 'For workspace tableAddCurrentProjectIDFieldComplete' . PHP_EOL; } /** * Reverse migrations. */ public function down(): void { // Delete delightful_super_agent_workspaces table's current_project_id field Schema::table('delightful_super_agent_workspaces', function (Blueprint $table) { $table->dropColumn('current_project_id'); }); echo 'DeleteWorkspaceTable's CurrentProject IDFieldComplete' . PHP_EOL; } }; 
+<?php
 
+declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
+use Hyperf\Database\Migrations\Migration;
+use Hyperf\Database\Schema\Blueprint;
+use Hyperf\Database\Schema\Schema;
+
+return new class extends Migration {
+    /**
+     * 运行迁移.
+     */
+    public function up(): void
+    {
+        // 为 magic_super_agent_workspaces 表增加 current_project_id 字段
+        Schema::table('magic_super_agent_workspaces', function (Blueprint $table) {
+            $table->bigInteger('current_project_id')->nullable()->comment('当前项目ID')->after('current_topic_id');
+        });
+
+        echo '为工作区表添加当前项目ID字段完成' . PHP_EOL;
+    }
+
+    /**
+     * 回滚迁移.
+     */
+    public function down(): void
+    {
+        // 删除 magic_super_agent_workspaces 表的 current_project_id 字段
+        Schema::table('magic_super_agent_workspaces', function (Blueprint $table) {
+            $table->dropColumn('current_project_id');
+        });
+
+        echo '删除工作区表的当前项目ID字段完成' . PHP_EOL;
+    }
+};

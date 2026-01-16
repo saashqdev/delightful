@@ -1,37 +1,72 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * 任务文件来源枚举.
+ */
+enum TaskFileSource: int
+{
+    case DEFAULT = 0;
 
-/** * TaskFileSourceEnum. */
+    /**
+     * 首页.
+     */
+    case HOME = 1;
 
-enum TaskFileSource: int 
-{
- case DEFAULT = 0; /** * First page. */ case HOME = 1; /** * ItemDirectory. */ case PROJECT_DIRECTORY = 2; /** * Agent. */ case AGENT = 3; case COPY = 4; /** * Move. */ case MOVE = 6; /** * GetSourceName. */ 
-    public function getName(): string 
-{
- return match ($this) 
-{
- self::DEFAULT => 'Default', self::HOME => 'First page', self::PROJECT_DIRECTORY => 'ItemDirectory', self::AGENT => 'Agent', self::COPY => 'Copy', self::MOVE => 'Move', 
+    /**
+     * 项目目录.
+     */
+    case PROJECT_DIRECTORY = 2;
+
+    /**
+     * Agent.
+     */
+    case AGENT = 3;
+
+    case COPY = 4;
+
+    /**
+     * 移动.
+     */
+    case MOVE = 6;
+
+    /**
+     * 获取来源名称.
+     */
+    public function getName(): string
+    {
+        return match ($this) {
+            self::DEFAULT => '默认',
+            self::HOME => '首页',
+            self::PROJECT_DIRECTORY => '项目目录',
+            self::AGENT => 'Agent',
+            self::COPY => '复制',
+            self::MOVE => '移动',
+        };
+    }
+
+    /**
+     * 从字符串或整数创建枚举实例.
+     */
+    public static function fromValue(int|string $value): self
+    {
+        if (is_string($value)) {
+            $value = (int) $value;
+        }
+
+        return match ($value) {
+            1 => self::HOME,
+            2 => self::PROJECT_DIRECTORY,
+            3 => self::AGENT,
+            4 => self::COPY,
+            6 => self::MOVE,
+            default => self::DEFAULT,
+        };
+    }
 }
-; 
-}
- /** * FromStringor IntegerCreateEnumInstance. */ 
-    public 
-    static function fromValue(int|string $value): self 
-{
- if (is_string($value)) 
-{
- $value = (int) $value; 
-}
- return match ($value) 
-{
- 1 => self::HOME, 2 => self::PROJECT_DIRECTORY, 3 => self::AGENT, 4 => self::COPY, 6 => self::MOVE, default => self::DEFAULT, 
-}
-; 
-}
- 
-}
- 

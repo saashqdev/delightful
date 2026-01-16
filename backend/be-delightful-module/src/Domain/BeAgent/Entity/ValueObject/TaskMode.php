@@ -1,12 +1,14 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
-
-enum TaskMode: string 
+enum TaskMode: string
 {
- case Chat = 'chat'; case Plan = 'plan'; 
+    case Chat = 'chat';
+    case Plan = 'plan';
 }
- 

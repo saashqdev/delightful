@@ -1,56 +1,77 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
-/** * MemberTypeValueObject * * MemberTypeValidate Rule */
 
-enum MemberType: string 
+/**
+ * 成员类型值对象
+ *
+ * 封装成员类型的业务逻辑和验证规则
+ */
+enum MemberType: string
 {
- case USER = 'user '; case DEPARTMENT = 'Department'; /** * FromStringCreateInstance. */ 
-    public 
-    static function fromString(string $type): self 
-{
- return match ($type) 
-{
- 'user ' => self::USER, 'Department' => self::DEPARTMENT, default => ExceptionBuilder::throw(SuperAgentErrorCode::INVALID_MEMBER_TYPE) 
+    case USER = 'User';
+    case DEPARTMENT = 'Department';
+
+    /**
+     * 从字符串创建实例.
+     */
+    public static function fromString(string $type): self
+    {
+        return match ($type) {
+            'User' => self::USER,
+            'Department' => self::DEPARTMENT,
+            default => ExceptionBuilder::throw(SuperAgentErrorCode::INVALID_MEMBER_TYPE)
+        };
+    }
+
+    /**
+     * 从值创建实例.
+     */
+    public static function fromValue(string $value): self
+    {
+        return self::from($value);
+    }
+
+    /**
+     * 获取值
+     */
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    /**
+     * 是否为用户类型.
+     */
+    public function isUser(): bool
+    {
+        return $this === self::USER;
+    }
+
+    /**
+     * 是否为部门类型.
+     */
+    public function isDepartment(): bool
+    {
+        return $this === self::DEPARTMENT;
+    }
+
+    /**
+     * 获取描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::USER => 'User',
+            self::DEPARTMENT => 'Department',
+        };
+    }
 }
-; 
-}
- /** * FromValueCreateInstance. */ 
-    public 
-    static function fromValue(string $value): self 
-{
- return self::from($value); 
-}
- /** * GetValue */ 
-    public function getValue(): string 
-{
- return $this->value; 
-}
- /** * whether as user Type. */ 
-    public function isuser (): bool 
-{
- return $this === self::USER; 
-}
- /** * whether as DepartmentType. */ 
-    public function isDepartment(): bool 
-{
- return $this === self::DEPARTMENT; 
-}
- /** * GetDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::USER => 'user ', self::DEPARTMENT => 'Department', 
-}
-; 
-}
- 
-}
- 

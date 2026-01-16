@@ -1,69 +1,134 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
+namespace Dtyq\BeDelightful\Domain\Agent\Entity\ValueObject;
 
 use function Hyperf\Translation\trans;
 
-enum Builtintool : string 
+enum BuiltinTool: string
 {
- // File (FileOperations) case list Dir = 'list_dir'; case ReadFiles = 'read_files'; case WriteFile = 'write_file'; case EditFile = 'edit_file'; case MultiEditFile = 'multi_edit_file'; case delete File = 'delete_files'; case FileSearch = 'file_search'; case GrepSearch = 'grep_search'; // Search (SearchExtraction) case WebSearch = 'web_search'; case ImageSearch = 'image_search'; case ReadWebpagesAsmark down = 'read_webpages_as_markdown'; case DownloadFromUrls = 'download_from_urls'; case DownloadFrommark down = 'download_from_markdown'; // Contentprocess (Contentprocess ing) case VisualUnderstanding = 'visual_understanding'; case Generate Image = 'generate_image'; case ConvertTomark down = 'convert_to_markdown'; // Systemexecute (SystemExecution) case ShellExec = 'shell_exec'; case RunPythonSnippet = 'run_python_snippet'; /** * Gettool user Name. */ 
-    public function gettool Name(): string 
-{
- return trans( builtin_tools.names.
-{
-$this->value
+    // 文件操作 (FileOperations)
+    case ListDir = 'list_dir';
+    case ReadFiles = 'read_files';
+    case WriteFile = 'write_file';
+    case EditFile = 'edit_file';
+    case MultiEditFile = 'multi_edit_file';
+    case DeleteFile = 'delete_files';
+    case FileSearch = 'file_search';
+    case GrepSearch = 'grep_search';
+
+    // 搜索提取 (SearchExtraction)
+    case WebSearch = 'web_search';
+    case ImageSearch = 'image_search';
+    case ReadWebpagesAsMarkdown = 'read_webpages_as_markdown';
+    case DownloadFromUrls = 'download_from_urls';
+    case DownloadFromMarkdown = 'download_from_markdown';
+
+    // 内容处理 (ContentProcessing)
+    case VisualUnderstanding = 'visual_understanding';
+    case GenerateImage = 'generate_image';
+    case ConvertToMarkdown = 'convert_to_markdown';
+
+    // 系统执行 (SystemExecution)
+    case ShellExec = 'shell_exec';
+    case RunPythonSnippet = 'run_python_snippet';
+
+    /**
+     * 获取工具的用户友好名称.
+     */
+    public function getToolName(): string
+    {
+        return trans("builtin_tools.names.{$this->value}");
+    }
+
+    /**
+     * 获取工具的用户友好描述.
+     */
+    public function getToolDescription(): string
+    {
+        return trans("builtin_tools.descriptions.{$this->value}");
+    }
+
+    /**
+     * 获取工具的图标.
+     */
+    public function getToolIcon(): string
+    {
+        // 暂时返回空字符串，等待前端提供图标内容
+        return '';
+    }
+
+    /**
+     * 获取工具的分类.
+     */
+    public function getToolCategory(): BuiltinToolCategory
+    {
+        return match ($this) {
+            // 文件操作
+            self::ListDir, self::ReadFiles, self::WriteFile, self::EditFile, self::MultiEditFile,
+            self::DeleteFile, self::FileSearch, self::GrepSearch => BuiltinToolCategory::FileOperations,
+
+            // 搜索提取
+            self::WebSearch, self::ImageSearch, self::ReadWebpagesAsMarkdown,
+            self::DownloadFromUrls, self::DownloadFromMarkdown => BuiltinToolCategory::SearchExtraction,
+
+            // 内容处理
+            self::VisualUnderstanding, self::GenerateImage, self::ConvertToMarkdown => BuiltinToolCategory::ContentProcessing,
+
+            // 系统执行
+            self::ShellExec, self::RunPythonSnippet => BuiltinToolCategory::SystemExecution,
+        };
+    }
+
+    /**
+     * 获取工具类型.
+     */
+    public static function getToolType(): BeDelightfulAgentToolType
+    {
+        return BeDelightfulAgentToolType::BuiltIn;
+    }
+
+    /**
+     * 获取所有必须的工具.
+     * @return array<BuiltinTool>
+     */
+    public static function getRequiredTools(): array
+    {
+        return [
+            // 基础文件增删查改 + 目录查看
+            self::ListDir,
+            self::ReadFiles,
+            self::WriteFile,
+            self::EditFile,
+            self::MultiEditFile,
+            self::DeleteFile,
+            self::FileSearch,
+            self::GrepSearch,
+            // 互联网搜索和阅读
+            self::WebSearch,
+            self::ImageSearch,
+            self::ReadWebpagesAsMarkdown,
+            // 视觉理解
+            self::VisualUnderstanding,
+            // 命令行执行
+            self::ShellExec,
+        ];
+    }
+
+    public static function isValidTool(string $tool): bool
+    {
+        return (bool) self::tryFrom($tool);
+    }
+
+    /**
+     * 判断工具是否为必须工具.
+     */
+    public function isRequired(): bool
+    {
+        return in_array($this, self::getRequiredTools(), true);
+    }
 }
- ); 
-}
- /** * Gettool user Description. */ 
-    public function gettool Description(): string 
-{
- return trans( builtin_tools.descriptions.
-{
-$this->value
-}
- ); 
-}
- /** * Gettool Icon. */ 
-    public function gettool Icon(): string 
-{
- // TemporarilyReturn EmptyStringWaitingFrontendIconContent return ''; 
-}
- /** * Gettool Category. */ 
-    public function gettool Category(): Builtintool Category 
-{
- return match ($this) 
-{
- // File self::list Dir, self::ReadFiles, self::WriteFile, self::EditFile, self::MultiEditFile, self::delete File, self::FileSearch, self::GrepSearch => Builtintool Category::FileOperations, // Search self::WebSearch, self::ImageSearch, self::ReadWebpagesAsmark down, self::DownloadFromUrls, self::DownloadFrommark down => Builtintool Category::SearchExtraction, // Contentprocess self::VisualUnderstanding, self::Generate Image, self::ConvertTomark down => Builtintool Category::Contentprocess ing, // Systemexecute self::ShellExec, self::RunPythonSnippet => Builtintool Category::SystemExecution, 
-}
-; 
-}
- /** * Gettool Type. */ 
-    public 
-    static function gettool Type(): BeDelightfulAgenttool Type 
-{
- return BeDelightfulAgenttool Type::BuiltIn; 
-}
- /** * GetAlltool . * @return array<Builtintool > */ 
-    public 
-    static function getRequiredtool s(): array 
-{
- return [ // BaseFile + DirectoryView self::list Dir, self::ReadFiles, self::WriteFile, self::EditFile, self::MultiEditFile, self::delete File, self::FileSearch, self::GrepSearch, // Search self::WebSearch, self::ImageSearch, self::ReadWebpagesAsmark down, // self::VisualUnderstanding, // Rowexecute self::ShellExec, ]; 
-}
- 
-    public 
-    static function isValidtool (string $tool): bool 
-{
- return (bool) self::tryFrom($tool); 
-}
- /** * Determinetool whether as tool . */ 
-    public function isRequired(): bool 
-{
- return in_array($this, self::getRequiredtool s(), true); 
-}
- 
-}
- 

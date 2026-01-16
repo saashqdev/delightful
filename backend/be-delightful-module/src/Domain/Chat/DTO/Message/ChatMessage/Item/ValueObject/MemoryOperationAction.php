@@ -1,35 +1,44 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject;
+/**
+ * 记忆操作动作枚举.
+ */
+enum MemoryOperationAction: string
+{
+    case ACCEPT = 'accept';   // 接受记忆建议
+    case REJECT = 'reject';   // 拒绝记忆建议
 
-/** * memory Enum. */
+    /**
+     * 获取操作描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::ACCEPT => '接受',
+            self::REJECT => '拒绝',
+        };
+    }
 
-enum MemoryOperationAction: string 
-{
- case ACCEPT = 'accept'; // Acceptmemory Suggested case REJECT = 'reject'; // Declinememory Suggested /** * GetDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::ACCEPT => 'Accept', self::REJECT => 'Decline', 
+    /**
+     * 获取所有操作值.
+     */
+    public static function getAllValues(): array
+    {
+        return array_column(self::cases(), 'value');
+    }
+
+    /**
+     * 检查操作是否有效.
+     */
+    public static function isValid(string $action): bool
+    {
+        return in_array($action, self::getAllValues(), true);
+    }
 }
-; 
-}
- /** * GetAllValue. */ 
-    public 
-    static function getAllValues(): array 
-{
- return array_column(self::cases(), 'value'); 
-}
- /** * check whether valid. */ 
-    public 
-    static function isValid(string $action): bool 
-{
- return in_array($action, self::getAllValues(), true); 
-}
- 
-}
- 

@@ -1,12 +1,14 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Facade;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Entity\ValueObject\user Type;
+use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\ErrorCode\AgentErrorCode;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
@@ -17,17 +19,17 @@ use Dtyq\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\SuperAgent\Service\AgentAppService;
 use Delightful\BeDelightful\Application\SuperAgent\Service\TopicAppService;
 use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\check pointRollbackcheck RequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\check pointRollbackRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\check pointRollbackStartRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\delete TopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DuplicateTopiccheck RequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckpointRollbackCheckRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckpointRollbackRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckpointRollbackStartRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DeleteTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DuplicateTopicCheckRequestDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DuplicateTopicRequestDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetTopicAttachmentsRequestDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetTopicMessagesByTopicIdRequestDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\check pointRollbackcheck ResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\check pointRollbackResponseDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CheckpointRollbackCheckResponseDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CheckpointRollbackResponseDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\DuplicateTopicStatusResponseDTO;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TopicMessagesResponseDTO;
 use Exception;
@@ -35,151 +37,438 @@ use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\AuthManager;
 use Throwable;
-#[ApiResponse('low_code')]
 
-class TopicApi extends AbstractApi 
+#[ApiResponse('low_code')]
+class TopicApi extends AbstractApi
 {
- 
-    public function __construct( 
-    protected RequestInterface $request, 
-    protected WorkspaceAppService $workspaceAppService, 
-    protected TopicAppService $topicAppService, 
-    protected TranslatorInterface $translator, 
-    protected AgentAppService $agentAppService, ) 
-{
- parent::__construct($request); 
+    public function __construct(
+        protected RequestInterface $request,
+        protected WorkspaceAppService $workspaceAppService,
+        protected TopicAppService $topicAppService,
+        protected TranslatorInterface $translator,
+        protected AgentAppService $agentAppService,
+    ) {
+        parent::__construct($request);
+    }
+
+    /**
+     * 获取话题信息.
+     * @param mixed $id
+     */
+    public function getTopic(RequestContext $requestContext, $id): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+        return $this->topicAppService->getTopic($requestContext, (int) $id)->toArray();
+    }
+
+    /**
+     * 保存话题（创建或更新）
+     * 接口层负责处理HTTP请求和响应，不包含业务逻辑.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @return array 操作结果，包含话题ID
+     * @throws BusinessException 如果参数无效或操作失败则抛出异常
+     * @throws Throwable
+     */
+    public function createTopic(RequestContext $requestContext): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 从请求创建DTO
+        $requestDTO = SaveTopicRequestDTO::fromRequest($this->request);
+
+        // 调用应用服务层处理业务逻辑
+        return $this->topicAppService->createTopic($requestContext, $requestDTO)->toArray();
+    }
+
+    /**
+     * 保存话题（创建或更新）
+     * 接口层负责处理HTTP请求和响应，不包含业务逻辑.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @return array 操作结果，包含话题ID
+     * @throws BusinessException 如果参数无效或操作失败则抛出异常
+     * @throws Throwable
+     */
+    public function updateTopic(RequestContext $requestContext, string $id): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 从请求创建DTO
+        $requestDTO = SaveTopicRequestDTO::fromRequest($this->request);
+        $requestDTO->id = $id;
+
+        // 调用应用服务层处理业务逻辑
+        return $this->topicAppService->updateTopic($requestContext, $requestDTO)->toArray();
+    }
+
+    /**
+     * 删除话题（逻辑删除）
+     * 接口层负责处理HTTP请求和响应，不包含业务逻辑.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @return array 操作结果，包含被删除的话题ID
+     * @throws BusinessException 如果参数无效或操作失败则抛出异常
+     * @throws Exception
+     */
+    public function deleteTopic(RequestContext $requestContext): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 从请求创建DTO
+        $requestDTO = DeleteTopicRequestDTO::fromRequest($this->request);
+
+        // 调用应用服务层处理业务逻辑
+        return $this->topicAppService->deleteTopic($requestContext, $requestDTO)->toArray();
+    }
+
+    /**
+     * 重命名话题.
+     */
+    public function renameTopic(RequestContext $requestContext): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 话题 id
+        $authorization = $requestContext->getUserAuthorization();
+
+        $topicId = $this->request->input('id', 0);
+        $userQuestion = $this->request->input('user_question', '');
+        $language = $this->translator->getLocale();
+
+        return $this->topicAppService->renameTopic($authorization, (int) $topicId, $userQuestion, $language);
+    }
+
+    /**
+     * 获取话题的附件列表.
+     */
+    public function getTopicAttachments(RequestContext $requestContext): array
+    {
+        // 使用 fromRequest 方法从请求中创建 DTO，这样可以从路由参数中获取 topic_id
+        $dto = GetTopicAttachmentsRequestDTO::fromRequest($this->request);
+        if (! empty($dto->getToken())) {
+            // 走令牌校验的逻辑
+            return $this->topicAppService->getTopicAttachmentsByAccessToken($dto);
+        }
+        // 登录用户使用的场景
+        $requestContext->setUserAuthorization(di(AuthManager::class)->guard(name: 'web')->user());
+        $userAuthorization = $requestContext->getUserAuthorization();
+
+        return $this->topicAppService->getTopicAttachments($userAuthorization, $dto);
+    }
+
+    /**
+     * 通过话题ID获取消息列表.x.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @return array 消息列表及分页信息
+     */
+    public function getMessagesByTopicId(RequestContext $requestContext): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // 从请求创建DTO
+        $dto = GetTopicMessagesByTopicIdRequestDTO::fromRequest($this->request);
+
+        // 校验话题消息是否是自己的
+        $topicItemDTO = $this->topicAppService->getTopic($requestContext, $dto->getTopicId());
+        if ($topicItemDTO->getUserId() !== $requestContext->getUserAuthorization()->getId()) {
+            return ['list' => [], 'total' => 0];
+        }
+
+        // 调用应用服务
+        $result = $this->workspaceAppService->getMessagesByTopicId(
+            $dto->getTopicId(),
+            $dto->getPage(),
+            $dto->getPageSize(),
+            $dto->getSortDirection()
+        );
+
+        // 构建响应
+        $response = new TopicMessagesResponseDTO($result['list'], $result['total']);
+
+        return $response->toArray();
+    }
+
+    /**
+     * 回滚沙箱到指定的checkpoint.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param string $id 话题ID
+     * @return array 回滚结果
+     */
+    #[ApiResponse('low_code')]
+    public function rollbackCheckpoint(RequestContext $requestContext, string $id): array
+    {
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $requestDTO = CheckpointRollbackRequestDTO::fromRequest($this->request);
+
+        $topicId = $id;
+        $targetMessageId = $requestDTO->getTargetMessageId();
+
+        if (empty($topicId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required');
+        }
+
+        if (empty($targetMessageId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'target_message_id is required');
+        }
+
+        $authorization = $this->getAuthorization();
+
+        $dataIsolation = new DataIsolation();
+        $dataIsolation->setCurrentUserId((string) $authorization->getId());
+        $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setCurrentOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setUserType(UserType::Human);
+        $dataIsolation->setLanguage(CoContext::getLanguage());
+
+        $sandboxId = $this->agentAppService->ensureSandboxInitialized($dataIsolation, (int) $topicId);
+
+        $result = $this->agentAppService->rollbackCheckpoint($sandboxId, $targetMessageId);
+
+        if (! $result->isSuccess()) {
+            ExceptionBuilder::throw(AgentErrorCode::SANDBOX_NOT_FOUND, $result->getMessage());
+        }
+
+        $responseDTO = new CheckpointRollbackResponseDTO();
+        $responseDTO->setTargetMessageId($targetMessageId);
+        $responseDTO->setMessage($result->getMessage());
+
+        return $responseDTO->toArray();
+    }
+
+    /**
+     * 开始回滚沙箱到指定的checkpoint（标记状态而非删除）.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param string $id 话题ID
+     * @return array 回滚结果
+     */
+    #[ApiResponse('low_code')]
+    public function rollbackCheckpointStart(RequestContext $requestContext, string $id): array
+    {
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $requestDTO = CheckpointRollbackStartRequestDTO::fromRequest($this->request);
+
+        $topicId = $id;
+        $targetMessageId = $requestDTO->getTargetMessageId();
+
+        if (empty($topicId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required');
+        }
+
+        if (empty($targetMessageId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'target_message_id is required');
+        }
+
+        $authorization = $this->getAuthorization();
+
+        $dataIsolation = new DataIsolation();
+        $dataIsolation->setCurrentUserId((string) $authorization->getId());
+        $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setCurrentOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setUserType(UserType::Human);
+        $dataIsolation->setLanguage(CoContext::getLanguage());
+
+        // 调用应用服务层的rollbackCheckpointStart方法
+        $this->agentAppService->rollbackCheckpointStart($dataIsolation, (int) $topicId, $targetMessageId);
+
+        return [];
+    }
+
+    /**
+     * 提交回滚沙箱到指定的checkpoint（物理删除撤回状态的消息）.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param string $id 话题ID
+     * @return array 提交结果
+     */
+    #[ApiResponse('low_code')]
+    public function rollbackCheckpointCommit(RequestContext $requestContext, string $id): array
+    {
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $topicId = $id;
+
+        if (empty($topicId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required');
+        }
+
+        $authorization = $this->getAuthorization();
+
+        // 创建数据隔离对象
+        $dataIsolation = new DataIsolation();
+        $dataIsolation->setCurrentUserId((string) $authorization->getId());
+        $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setCurrentOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setUserType(UserType::Human);
+        $dataIsolation->setLanguage(CoContext::getLanguage());
+
+        // 调用应用服务层的rollbackCheckpointCommit方法
+        $this->agentAppService->rollbackCheckpointCommit($dataIsolation, (int) $topicId);
+
+        return [];
+    }
+
+    /**
+     * 撤销回滚沙箱checkpoint（将撤回状态的消息恢复为正常状态）.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param string $id 话题ID
+     * @return array 撤销结果
+     */
+    #[ApiResponse('low_code')]
+    public function rollbackCheckpointUndo(RequestContext $requestContext, string $id): array
+    {
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $topicId = $id;
+
+        if (empty($topicId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required');
+        }
+
+        $authorization = $this->getAuthorization();
+
+        // 创建数据隔离对象
+        $dataIsolation = new DataIsolation();
+        $dataIsolation->setCurrentUserId((string) $authorization->getId());
+        $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setCurrentOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setUserType(UserType::Human);
+        $dataIsolation->setLanguage(CoContext::getLanguage());
+
+        // 调用应用服务层的rollbackCheckpointUndo方法
+        $this->agentAppService->rollbackCheckpointUndo($dataIsolation, (int) $topicId);
+
+        return [];
+    }
+
+    /**
+     * 检查回滚沙箱到指定checkpoint的可行性.
+     *
+     * @param RequestContext $requestContext 请求上下文
+     * @param string $id 话题ID
+     * @return array 检查结果
+     */
+    #[ApiResponse('low_code')]
+    public function rollbackCheckpointCheck(RequestContext $requestContext, string $id): array
+    {
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        $requestDTO = CheckpointRollbackCheckRequestDTO::fromRequest($this->request);
+
+        $topicId = $id;
+        $targetMessageId = $requestDTO->getTargetMessageId();
+
+        if (empty($topicId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required');
+        }
+
+        if (empty($targetMessageId)) {
+            ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'target_message_id is required');
+        }
+
+        $authorization = $this->getAuthorization();
+
+        $dataIsolation = new DataIsolation();
+        $dataIsolation->setCurrentUserId((string) $authorization->getId());
+        $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setCurrentOrganizationCode($authorization->getOrganizationCode());
+        $dataIsolation->setUserType(UserType::Human);
+        $dataIsolation->setLanguage(CoContext::getLanguage());
+
+        $result = $this->agentAppService->rollbackCheckpointCheck($dataIsolation, (int) $topicId, $targetMessageId);
+
+        if (! $result->isSuccess()) {
+            ExceptionBuilder::throw(AgentErrorCode::SANDBOX_NOT_FOUND, $result->getMessage());
+        }
+
+        $responseDTO = new CheckpointRollbackCheckResponseDTO();
+        $responseDTO->setCanRollback((bool) $result->getDataValue('can_rollback', false));
+
+        return $responseDTO->toArray();
+    }
+
+    /**
+     * Duplicate topic (synchronous) - blocks until completion.
+     *
+     * @param RequestContext $requestContext Request context
+     * @param string $id Source topic ID
+     * @return array Complete result with topic info
+     * @throws BusinessException If validation fails or operation fails
+     */
+    #[ApiResponse('low_code')]
+    public function duplicateChat(RequestContext $requestContext, string $id): array
+    {
+        // Set user authorization
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // Get request DTO
+        $dto = DuplicateTopicRequestDTO::fromRequest($this->request);
+
+        // Call synchronous method
+        return $this->topicAppService->duplicateTopic($requestContext, $id, $dto);
+    }
+
+    /**
+     * Duplicate topic (asynchronous) - returns immediately with task_id.
+     *
+     * @param RequestContext $requestContext Request context
+     * @param string $id Source topic ID
+     * @return array Task info with task_id
+     * @throws BusinessException If validation fails or operation fails
+     */
+    #[ApiResponse('low_code')]
+    public function duplicateChatAsync(RequestContext $requestContext, string $id): array
+    {
+        // Set user authorization
+        $requestContext->setUserAuthorization($this->getAuthorization());
+
+        // Get request DTO
+        $dto = DuplicateTopicRequestDTO::fromRequest($this->request);
+
+        // Call asynchronous method
+        return $this->topicAppService->duplicateChatAsync($requestContext, $id, $dto);
+    }
+
+    /**
+     * Check topic duplication status.
+     *
+     * @param RequestContext $requestContext Request context
+     * @param string $id Source topic ID
+     * @return array Duplication status info
+     * @throws BusinessException If validation fails or operation fails
+     */
+    #[ApiResponse('low_code')]
+    public function duplicateChatCheck(RequestContext $requestContext, string $id): array
+    {
+        // 设置用户授权信息
+        $requestContext->setUserAuthorization($this->getAuthorization());
+        $userAuthorization = $requestContext->getUserAuthorization();
+
+        // 获取请求DTO
+        $dto = DuplicateTopicCheckRequestDTO::fromRequest($this->request);
+
+        try {
+            // 调用应用服务
+            $result = $this->topicAppService->checkDuplicateChatStatus($requestContext, $dto->getTaskKey());
+
+            $responseDTO = DuplicateTopicStatusResponseDTO::fromArray($result);
+
+            return $responseDTO->toArray();
+        } catch (Throwable $e) {
+            // TODO: 添加错误日志记录
+            throw $e;
+        }
+    }
 }
- /** * Gettopic info . * @param mixed $id */ 
-    public function getTopic(RequestContext $requestContext, $id): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); return $this->topicAppService->getTopic($requestContext, (int) $id)->toArray(); 
-}
- /** * Savetopic Createor Update * Interfaceprocess HTTPRequestResponseNot contain. * * @param RequestContext $requestContext RequestContext * @return array Resultincluding topic ID * @throws BusinessException IfParameterInvalidor FailedThrowException * @throws Throwable */ 
-    public function createTopic(RequestContext $requestContext): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // FromRequestCreateDTO $requestDTO = SaveTopicRequestDTO::fromRequest($this->request); // call ApplyServiceprocess return $this->topicAppService->createTopic($requestContext, $requestDTO)->toArray(); 
-}
- /** * Savetopic Createor Update * Interfaceprocess HTTPRequestResponseNot contain. * * @param RequestContext $requestContext RequestContext * @return array Resultincluding topic ID * @throws BusinessException IfParameterInvalidor FailedThrowException * @throws Throwable */ 
-    public function updateTopic(RequestContext $requestContext, string $id): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // FromRequestCreateDTO $requestDTO = SaveTopicRequestDTO::fromRequest($this->request); $requestDTO->id = $id; // call ApplyServiceprocess return $this->topicAppService->updateTopic($requestContext, $requestDTO)->toArray(); 
-}
- /** * delete topic delete  * Interfaceprocess HTTPRequestResponseNot contain. * * @param RequestContext $requestContext RequestContext * @return array Resultincluding delete topic ID * @throws BusinessException IfParameterInvalidor FailedThrowException * @throws Exception */ 
-    public function deleteTopic(RequestContext $requestContext): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // FromRequestCreateDTO $requestDTO = delete TopicRequestDTO::fromRequest($this->request); // call ApplyServiceprocess return $this->topicAppService->deleteTopic($requestContext, $requestDTO)->toArray(); 
-}
- /** * Renametopic . */ 
-    public function renameTopic(RequestContext $requestContext): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // topic id $authorization = $requestContext->getuser Authorization(); $topicId = $this->request->input('id', 0); $userQuestion = $this->request->input('user_question', ''); $language = $this->translator->getLocale(); return $this->topicAppService->renameTopic($authorization, (int) $topicId, $userQuestion, $language); 
-}
- /** * Gettopic list . */ 
-    public function getTopicAttachments(RequestContext $requestContext): array 
-{
- // Using fromRequest MethodFromRequestin Create DTOCanFromroute Parameterin Get topic_id $dto = GetTopicAttachmentsRequestDTO::fromRequest($this->request); if (! empty($dto->getToken())) 
-{
- // Token return $this->topicAppService->getTopicAttachmentsByAccessToken($dto); 
-}
- // Loginuser Using $requestContext->setuser Authorization(di(AuthManager::class)->guard(name: 'web')->user()); $userAuthorization = $requestContext->getuser Authorization(); return $this->topicAppService->getTopicAttachments($userAuthorization, $dto); 
-}
- /** * Throughtopic IDGetMessagelist .x. * * @param RequestContext $requestContext RequestContext * @return array Messagelist Paginginfo */ 
-    public function getMessagesByTopicId(RequestContext $requestContext): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); // FromRequestCreateDTO $dto = GetTopicMessagesByTopicIdRequestDTO::fromRequest($this->request); // topic Messagewhether yes $topicItemDTO = $this->topicAppService->getTopic($requestContext, $dto->getTopicId()); if ($topicItemDTO->getuser Id() !== $requestContext->getuser Authorization()->getId()) 
-{
- return ['list' => [], 'total' => 0]; 
-}
- // call ApplyService $result = $this->workspaceAppService->getMessagesByTopicId( $dto->getTopicId(), $dto->getPage(), $dto->getPageSize(), $dto->getSortDirection() ); // BuildResponse $response = new TopicMessagesResponseDTO($result['list'], $result['total']); return $response->toArray(); 
-}
- /** * Rollbacksandbox specified checkpoint. * * @param RequestContext $requestContext RequestContext * @param string $id topic ID * @return array RollbackResult */ #[ApiResponse('low_code')] 
-    public function rollbackcheck point(RequestContext $requestContext, string $id): array 
-{
- $requestContext->setuser Authorization($this->getAuthorization()); $requestDTO = check pointRollbackRequestDTO::fromRequest($this->request); $topicId = $id; $targetMessageId = $requestDTO->getTargetMessageId(); if (empty($topicId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required'); 
-}
- if (empty($targetMessageId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'target_message_id is required'); 
-}
- $authorization = $this->getAuthorization(); $dataIsolation = new DataIsolation(); $dataIsolation->setcurrent user Id((string) $authorization->getId()); $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setcurrent OrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setuser Type(user Type::Human); $dataIsolation->setLanguage(CoContext::getLanguage()); $sandboxId = $this->agentAppService->ensureSandboxInitialized($dataIsolation, (int) $topicId); $result = $this->agentAppService->rollbackcheck point($sandboxId, $targetMessageId); if (! $result->isSuccess()) 
-{
- ExceptionBuilder::throw(AgentErrorCode::SANDBOX_NOT_FOUND, $result->getMessage()); 
-}
- $responseDTO = new check pointRollbackResponseDTO(); $responseDTO->setTargetMessageId($targetMessageId); $responseDTO->setMessage($result->getMessage()); return $responseDTO->toArray(); 
-}
- /** * StartRollbacksandbox specified checkpointmark Statusdelete . * * @param RequestContext $requestContext RequestContext * @param string $id topic ID * @return array RollbackResult */ #[ApiResponse('low_code')] 
-    public function rollbackcheck pointStart(RequestContext $requestContext, string $id): array 
-{
- $requestContext->setuser Authorization($this->getAuthorization()); $requestDTO = check pointRollbackStartRequestDTO::fromRequest($this->request); $topicId = $id; $targetMessageId = $requestDTO->getTargetMessageId(); if (empty($topicId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required'); 
-}
- if (empty($targetMessageId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'target_message_id is required'); 
-}
- $authorization = $this->getAuthorization(); $dataIsolation = new DataIsolation(); $dataIsolation->setcurrent user Id((string) $authorization->getId()); $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setcurrent OrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setuser Type(user Type::Human); $dataIsolation->setLanguage(CoContext::getLanguage()); // call ApplyServicerollbackcheck pointStartMethod $this->agentAppService->rollbackcheck pointStart($dataIsolation, (int) $topicId, $targetMessageId); return []; 
-}
- /** * SubmitRollbacksandbox specified checkpointdelete recalled status Message. * * @param RequestContext $requestContext RequestContext * @param string $id topic ID * @return array SubmitResult */ #[ApiResponse('low_code')] 
-    public function rollbackcheck pointCommit(RequestContext $requestContext, string $id): array 
-{
- $requestContext->setuser Authorization($this->getAuthorization()); $topicId = $id; if (empty($topicId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required'); 
-}
- $authorization = $this->getAuthorization(); // CreateDataObject $dataIsolation = new DataIsolation(); $dataIsolation->setcurrent user Id((string) $authorization->getId()); $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setcurrent OrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setuser Type(user Type::Human); $dataIsolation->setLanguage(CoContext::getLanguage()); // call ApplyServicerollbackcheck pointCommitMethod $this->agentAppService->rollbackcheck pointCommit($dataIsolation, (int) $topicId); return []; 
-}
- /** * UndoRollbacksandbox checkpointrecalled status MessageResumeas NormalStatus. * * @param RequestContext $requestContext RequestContext * @param string $id topic ID * @return array UndoResult */ #[ApiResponse('low_code')] 
-    public function rollbackcheck pointUndo(RequestContext $requestContext, string $id): array 
-{
- $requestContext->setuser Authorization($this->getAuthorization()); $topicId = $id; if (empty($topicId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required'); 
-}
- $authorization = $this->getAuthorization(); // CreateDataObject $dataIsolation = new DataIsolation(); $dataIsolation->setcurrent user Id((string) $authorization->getId()); $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setcurrent OrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setuser Type(user Type::Human); $dataIsolation->setLanguage(CoContext::getLanguage()); // call ApplyServicerollbackcheck pointUndoMethod $this->agentAppService->rollbackcheck pointUndo($dataIsolation, (int) $topicId); return []; 
-}
- /** * check Rollbacksandbox specified checkpointRow. * * @param RequestContext $requestContext RequestContext * @param string $id topic ID * @return array check Result */ #[ApiResponse('low_code')] 
-    public function rollbackcheck pointcheck (RequestContext $requestContext, string $id): array 
-{
- $requestContext->setuser Authorization($this->getAuthorization()); $requestDTO = check pointRollbackcheck RequestDTO::fromRequest($this->request); $topicId = $id; $targetMessageId = $requestDTO->getTargetMessageId(); if (empty($topicId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic_id is required'); 
-}
- if (empty($targetMessageId)) 
-{
- ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'target_message_id is required'); 
-}
- $authorization = $this->getAuthorization(); $dataIsolation = new DataIsolation(); $dataIsolation->setcurrent user Id((string) $authorization->getId()); $dataIsolation->setThirdPartyOrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setcurrent OrganizationCode($authorization->getOrganizationCode()); $dataIsolation->setuser Type(user Type::Human); $dataIsolation->setLanguage(CoContext::getLanguage()); $result = $this->agentAppService->rollbackcheck pointcheck ($dataIsolation, (int) $topicId, $targetMessageId); if (! $result->isSuccess()) 
-{
- ExceptionBuilder::throw(AgentErrorCode::SANDBOX_NOT_FOUND, $result->getMessage()); 
-}
- $responseDTO = new check pointRollbackcheck ResponseDTO(); $responseDTO->setCanRollback((bool) $result->getDataValue('can_rollback', false)); return $responseDTO->toArray(); 
-}
- /** * Duplicate topic (synchronous) - blocks until completion. * * @param RequestContext $requestContext Request context * @param string $id Source topic ID * @return array complete result with topic info * @throws BusinessException If validation fails or operation fails */ #[ApiResponse('low_code')] 
-    public function duplicateChat(RequestContext $requestContext, string $id): array 
-{
- // Set user authorization $requestContext->setuser Authorization($this->getAuthorization()); // Get request DTO $dto = DuplicateTopicRequestDTO::fromRequest($this->request); // Call synchronous method return $this->topicAppService->duplicateTopic($requestContext, $id, $dto); 
-}
- /** * Duplicate topic (asynchronous) - returns immediately with task_id. * * @param RequestContext $requestContext Request context * @param string $id Source topic ID * @return array Task info with task_id * @throws BusinessException If validation fails or operation fails */ #[ApiResponse('low_code')] 
-    public function duplicateChatAsync(RequestContext $requestContext, string $id): array 
-{
- // Set user authorization $requestContext->setuser Authorization($this->getAuthorization()); // Get request DTO $dto = DuplicateTopicRequestDTO::fromRequest($this->request); // Call asynchronous method return $this->topicAppService->duplicateChatAsync($requestContext, $id, $dto); 
-}
- /** * check topic duplication status. * * @param RequestContext $requestContext Request context * @param string $id Source topic ID * @return array Duplication status info * @throws BusinessException If validation fails or operation fails */ #[ApiResponse('low_code')] 
-    public function duplicateChatcheck (RequestContext $requestContext, string $id): array 
-{
- // Set user Authorizeinfo $requestContext->setuser Authorization($this->getAuthorization()); $userAuthorization = $requestContext->getuser Authorization(); // GetRequestDTO $dto = DuplicateTopiccheck RequestDTO::fromRequest($this->request); try 
-{
- // call ApplyService $result = $this->topicAppService->checkDuplicateChatStatus($requestContext, $dto->getTaskKey()); $responseDTO = DuplicateTopicStatusResponseDTO::fromArray($result); return $responseDTO->toArray(); 
-}
- catch (Throwable $e) 
-{
- // TODO: AddErrorLogrecord throw $e; 
-}
- 
-}
- 
-}
- 

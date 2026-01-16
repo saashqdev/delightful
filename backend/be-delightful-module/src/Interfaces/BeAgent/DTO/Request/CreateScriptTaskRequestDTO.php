@@ -1,70 +1,89 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Request;
 
 use App\Infrastructure\Core\AbstractRequestDTO;
 
-class CreateScriptTaskRequestDTO extends AbstractRequestDTO 
+class CreateScriptTaskRequestDTO extends AbstractRequestDTO
 {
- 
-    protected string $taskId = ''; 
-    protected string $scriptName = ''; 
-    protected array $arguments = []; 
-    protected string $sandboxId = ''; /** * Validate Rule. */ 
-    public 
-    static function getHyperfValidate Rules(): array 
-{
- return [ 'task_id' => 'string', 'script_name' => 'required|string', 'arguments' => 'required|array', ]; 
+    protected string $taskId = '';
+
+    protected string $scriptName = '';
+
+    protected array $arguments = [];
+
+    protected string $sandboxId = '';
+
+    /**
+     * 验证规则.
+     */
+    public static function getHyperfValidationRules(): array
+    {
+        return [
+            'task_id' => 'string',
+            'script_name' => 'required|string',
+            'arguments' => 'required|array',
+        ];
+    }
+
+    public static function getHyperfValidationMessage(): array
+    {
+        return [
+            'task_id.string' => '任务ID不能为空',
+            'script_name.required' => '脚本名称不能为空',
+            'arguments.required' => '脚本参数不能为空',
+        ];
+    }
+
+    /**
+     * 属性名称.
+     */
+    public function attributes(): array
+    {
+        return [
+            'task_id' => '任务ID',
+            'script_name' => '脚本名称',
+            'arguments' => '脚本参数',
+        ];
+    }
+
+    public function getTaskId(): string
+    {
+        return $this->taskId;
+    }
+
+    public function getScriptName(): string
+    {
+        return $this->scriptName;
+    }
+
+    public function setScriptName(string $scriptName): void
+    {
+        $this->scriptName = $scriptName;
+    }
+
+    public function getArguments(): array
+    {
+        return $this->arguments;
+    }
+
+    public function setArguments(array $arguments): void
+    {
+        $this->arguments = $arguments;
+    }
+
+    public function getSandboxId(): string
+    {
+        return $this->sandboxId;
+    }
+
+    public function setSandboxId(string $sandboxId): void
+    {
+        $this->sandboxId = $sandboxId;
+    }
 }
- 
-    public 
-    static function getHyperfValidate Message(): array 
-{
- return [ 'task_id.string' => 'TaskIDCannot be empty', 'script_name.required' => 'NameCannot be empty', 'arguments.required' => 'ParameterCannot be empty', ]; 
-}
- /** * PropertyName. */ 
-    public function attributes(): array 
-{
- return [ 'task_id' => 'TaskID', 'script_name' => 'Name', 'arguments' => 'Parameter', ]; 
-}
- 
-    public function getTaskId(): string 
-{
- return $this->taskId; 
-}
- 
-    public function getScriptName(): string 
-{
- return $this->scriptName; 
-}
- 
-    public function setScriptName(string $scriptName): void 
-{
- $this->scriptName = $scriptName; 
-}
- 
-    public function getArguments(): array 
-{
- return $this->arguments; 
-}
- 
-    public function setArguments(array $arguments): void 
-{
- $this->arguments = $arguments; 
-}
- 
-    public function getSandboxId(): string 
-{
- return $this->sandboxId; 
-}
- 
-    public function setSandboxId(string $sandboxId): void 
-{
- $this->sandboxId = $sandboxId; 
-}
- 
-}
- 

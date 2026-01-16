@@ -1,8 +1,8 @@
-# Delightful behaviour with __get, __set, __call and __callStatic is not exactly static analyser-friendly :)
+# Magic behaviour with __get, __set, __call and __callStatic is not exactly static analyser-friendly :)
 # Fortunately, You can ingore it by the following config.
 #
 # vendor/bin/phpstan analyse app --memory-limit 200M -l 0
-# Delightful behaviour with __get, __set, __call and __callStatic is not exactly static analyser-friendly :)
+# Magic behaviour with __get, __set, __call and __callStatic is not exactly static analyser-friendly :)
 # Fortunately, You can ingore it by the following config.
 #
 # vendor/bin/phpstan analyse app --memory-limit 200M -l 0
@@ -13,7 +13,7 @@ parameters:
     - src
   excludePaths: []
   reportUnmatchedIgnoredErrors: false
-  # Trust types declared in PHPDoc and perform static analysis based on types
+  # 信任PHPDoc中声明的类型，并根据类型做静态分析
   treatPhpDocTypesAsCertain: true
   ignoreErrors:
     - '#Static call to instance method Hyperf\\HttpServer\\Router\\Router::[a-zA-Z0-9\\_]+\(\)#'

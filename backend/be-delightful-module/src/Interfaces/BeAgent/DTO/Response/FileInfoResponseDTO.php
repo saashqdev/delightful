@@ -1,25 +1,27 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Response;
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+class FileInfoResponseDTO
+{
+    public function __construct(
+        public readonly string $fileName,
+        public readonly int $currentVersion,
+        public readonly string $organizationCode
+    ) {
+    }
 
-class Fileinfo ResponseDTO 
-{
- 
-    public function __construct( 
-    public readonly string $fileName, 
-    public readonly int $currentVersion, 
-    public readonly string $organizationCode ) 
-{
- 
+    public function toArray(): array
+    {
+        return [
+            'file_name' => $this->fileName,
+            'version' => $this->currentVersion,
+            'organization_code' => $this->organizationCode,
+        ];
+    }
 }
- 
-    public function toArray(): array 
-{
- return [ 'file_name' => $this->fileName, 'version' => $this->currentVersion, 'organization_code' => $this->organizationCode, ]; 
-}
- 
-}
- 

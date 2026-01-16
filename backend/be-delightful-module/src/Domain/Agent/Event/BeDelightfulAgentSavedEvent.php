@@ -1,21 +1,17 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\Agent\Event;
+namespace Dtyq\BeDelightful\Domain\Agent\Event;
 
 use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
 
-class BeDelightfulAgentSavedEvent 
+class BeDelightfulAgentSavedEvent
 {
- 
-    public function __construct(
-    public BeDelightfulAgentEntity $BeDelightfulAgentEntity, 
-    public bool $create) 
-{
- 
+    public function __construct(public BeDelightfulAgentEntity $superMagicAgentEntity, public bool $create)
+    {
+    }
 }
- 
-}
- 

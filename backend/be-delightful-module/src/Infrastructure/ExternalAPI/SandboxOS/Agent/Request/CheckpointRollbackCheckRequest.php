@@ -1,41 +1,57 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
+/**
+ * Checkpoint回滚检查请求类
+ * 严格按照沙箱通信文档的checkpoint回滚检查请求格式.
+ */
+class CheckpointRollbackCheckRequest
+{
+    public function __construct(
+        private string $targetMessageId = '',
+    ) {
+    }
 
-/** * check pointRollbackcheck RequestClass * Followsandbox DocumentationcheckpointRollbackcheck RequestFormat. */
+    /**
+     * 创建一个checkpoint回滚检查请求对象
+     */
+    public static function create(
+        string $targetMessageId,
+    ): self {
+        return new self($targetMessageId);
+    }
 
-class check pointRollbackcheck Request 
-{
- 
-    public function __construct( 
-    private string $targetMessageId = '', ) 
-{
- 
+    /**
+     * 获取目标消息ID.
+     */
+    public function getTargetMessageId(): string
+    {
+        return $this->targetMessageId;
+    }
+
+    /**
+     * 设置目标消息ID.
+     */
+    public function setTargetMessageId(string $targetMessageId): self
+    {
+        $this->targetMessageId = $targetMessageId;
+        return $this;
+    }
+
+    /**
+     * 转换为API请求数组
+     * 根据沙箱通信文档的checkpoint回滚检查请求格式.
+     */
+    public function toArray(): array
+    {
+        return [
+            'target_message_id' => $this->targetMessageId,
+        ];
+    }
 }
- /** * CreatecheckpointRollbackcheck RequestObject */ 
-    public 
-    static function create( string $targetMessageId, ): self 
-{
- return new self($targetMessageId); 
-}
- /** * GetTargetMessageID. */ 
-    public function getTargetMessageId(): string 
-{
- return $this->targetMessageId; 
-}
- /** * Set TargetMessageID. */ 
-    public function setTargetMessageId(string $targetMessageId): self 
-{
- $this->targetMessageId = $targetMessageId; return $this; 
-}
- /** * Convert toAPIRequestArray * According tosandbox DocumentationcheckpointRollbackcheck RequestFormat. */ 
-    public function toArray(): array 
-{
- return [ 'target_message_id' => $this->targetMessageId, ]; 
-}
- 
-}
- 

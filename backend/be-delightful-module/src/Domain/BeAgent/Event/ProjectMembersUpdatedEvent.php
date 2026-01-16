@@ -1,39 +1,43 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Event;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
-
-use App\Interfaces\Authorization\Web\Magicuser Authorization;
+use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-/** * ItemMemberUpdatedEvent. */
 
-class ProjectMembersUpdatedEvent extends AbstractEvent 
+/**
+ * 项目成员已更新事件.
+ */
+class ProjectMembersUpdatedEvent extends AbstractEvent
 {
- /** * @param array $currentMembers current Memberlist */ 
-    public function __construct( 
-    private readonly ProjectEntity $projectEntity, 
-    private readonly array $currentMembers, 
-    private readonly Magicuser Authorization $userAuthorization ) 
-{
- parent::__construct(); 
+    /**
+     * @param array $currentMembers 当前成员列表
+     */
+    public function __construct(
+        private readonly ProjectEntity $projectEntity,
+        private readonly array $currentMembers,
+        private readonly MagicUserAuthorization $userAuthorization
+    ) {
+        parent::__construct();
+    }
+
+    public function getProjectEntity(): ProjectEntity
+    {
+        return $this->projectEntity;
+    }
+
+    public function getCurrentMembers(): array
+    {
+        return $this->currentMembers;
+    }
+
+    public function getUserAuthorization(): MagicUserAuthorization
+    {
+        return $this->userAuthorization;
+    }
 }
- 
-    public function getProjectEntity(): ProjectEntity 
-{
- return $this->projectEntity; 
-}
- 
-    public function getcurrent Members(): array 
-{
- return $this->currentMembers; 
-}
- 
-    public function getuser Authorization(): Magicuser Authorization 
-{
- return $this->userAuthorization; 
-}
- 
-}
- 

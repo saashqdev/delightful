@@ -1,38 +1,39 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Event;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-/** * FileContentSaveEvent. */
 
-class FileContentSavedEvent extends AbstractEvent 
+/**
+ * 文件内容已保存事件.
+ */
+class FileContentSavedEvent extends AbstractEvent
 {
- 
-    public function __construct( 
-    private readonly TaskFileEntity $fileEntity, 
-    private readonly string $userId, 
-    private readonly string $organizationCode, ) 
-{
- parent::__construct(); 
+    public function __construct(
+        private readonly TaskFileEntity $fileEntity,
+        private readonly string $userId,
+        private readonly string $organizationCode,
+    ) {
+        parent::__construct();
+    }
+
+    public function getFileEntity(): TaskFileEntity
+    {
+        return $this->fileEntity;
+    }
+
+    public function getUserId(): string
+    {
+        return $this->userId;
+    }
+
+    public function getOrganizationCode(): string
+    {
+        return $this->organizationCode;
+    }
 }
- 
-    public function getFileEntity(): TaskFileEntity 
-{
- return $this->fileEntity; 
-}
- 
-    public function getuser Id(): string 
-{
- return $this->userId; 
-}
- 
-    public function getOrganizationCode(): string 
-{
- return $this->organizationCode; 
-}
- 
-}
- 

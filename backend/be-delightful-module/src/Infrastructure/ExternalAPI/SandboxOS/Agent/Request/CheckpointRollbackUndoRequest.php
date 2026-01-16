@@ -1,25 +1,32 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
-
-/** * check pointRollbackUndoRequestClass * Followsandbox DocumentationcheckpointRollbackUndoRequestFormat. */
-
-class check pointRollbackUndoRequest 
+/**
+ * Checkpoint回滚撤销请求类
+ * 严格按照沙箱通信文档的checkpoint回滚撤销请求格式.
+ */
+class CheckpointRollbackUndoRequest
 {
- /** * CreatecheckpointRollbackUndoRequestObject */ 
-    public 
-    static function create(): self 
-{
- return new self(); 
+    /**
+     * 创建一个checkpoint回滚撤销请求对象
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
+     * 转换为API请求数组
+     * 根据沙箱通信文档的checkpoint回滚撤销请求格式（空请求体）.
+     */
+    public function toArray(): array
+    {
+        return [];
+    }
 }
- /** * Convert toAPIRequestArray * According tosandbox DocumentationcheckpointRollbackUndoRequestFormatEmptyRequest. */ 
-    public function toArray(): array 
-{
- return []; 
-}
- 
-}
- 

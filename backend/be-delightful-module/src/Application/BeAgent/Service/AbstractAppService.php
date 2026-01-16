@@ -1,101 +1,158 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentuser DomainService;
+use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;
-use App\Interfaces\Authorization\Web\Magicuser Authorization;
+use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
 use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
 use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
 use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
 
-class AbstractAppService extends AbstractKernelAppService 
+class AbstractAppService extends AbstractKernelAppService
 {
- use DataIsolationTrait;
-/** * Getuser accessible ItemDefaultGreater thanReadableRole. * * @return ProjectEntity Item */ 
-    public function getAccessibleProject(int $projectId, string $userId, string $organizationCode, MemberRole $requiredRole = MemberRole::VIEWER): ProjectEntity 
-{
- $projectDomainService = di(ProjectDomainService::class); $packageFilterService = di(PackageFilterInterface::class); $projectEntity = $projectDomainService->getProjectNotuser Id($projectId); /*if ($projectEntity->getuser OrganizationCode() !== $organizationCode) 
-{
- $logger->error('Project access denied', [ 'projectId' => $projectId, 'userId' => $userId, 'organizationCode' => $organizationCode, 'projectuser OrganizationCode' => $projectEntity->getuser OrganizationCode(), ]); ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED); 
+    use DataIsolationTrait;
+
+    /**
+     * 获取用户可访问的项目实体（默认大于可读角色）.
+     *
+     * @return ProjectEntity 项目实体
+     */
+    public function getAccessibleProject(int $projectId, string $userId, string $organizationCode, MemberRole $requiredRole = MemberRole::VIEWER): ProjectEntity
+    {
+        $projectDomainService = di(ProjectDomainService::class);
+        $packageFilterService = di(PackageFilterInterface::class);
+        $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
+
+        /*if ($projectEntity->getUserOrganizationCode() !== $organizationCode) {
+            $logger->error('Project access denied', [
+                'projectId' => $projectId,
+                'userId' => $userId,
+                'organizationCode' => $organizationCode,
+                'projectUserOrganizationCode' => $projectEntity->getUserOrganizationCode(),
+            ]);
+            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+        }*/
+
+        // 如果是创建者，直接返回
+        if ($projectEntity->getUserId() === $userId) {
+            return $projectEntity;
+        }
+
+        // 判断是否开启共享项目
+        if (! $projectEntity->getIsCollaborationEnabled()) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+        }
+
+        // 验证身份
+        $magicUserAuthorization = new MagicUserAuthorization();
+        $magicUserAuthorization->setOrganizationCode($organizationCode);
+        $magicUserAuthorization->setId($userId);
+        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, $requiredRole);
+
+        // 判断是否付费套餐
+        if (! $packageFilterService->isPaidSubscription($projectEntity->getUserOrganizationCode())) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+        }
+        return $projectEntity;
+    }
+
+    /**
+     * 获取用户可访问的项目实体（大于编辑角色）.
+     */
+    public function getAccessibleProjectWithEditor(int $projectId, string $userId, string $organizationCode): ProjectEntity
+    {
+        return $this->getAccessibleProject($projectId, $userId, $organizationCode, MemberRole::EDITOR);
+    }
+
+    /**
+     * 获取用户可访问的项目实体（大于管理角色）.
+     */
+    public function getAccessibleProjectWithManager(int $projectId, string $userId, string $organizationCode): ProjectEntity
+    {
+        return $this->getAccessibleProject($projectId, $userId, $organizationCode, MemberRole::MANAGE);
+    }
+
+    /**
+     * 验证管理者或所有者权限.
+     */
+    protected function validateManageOrOwnerPermission(MagicUserAuthorization $magicUserAuthorization, int $projectId): void
+    {
+        $projectDomainService = di(ProjectDomainService::class);
+        $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
+        // 判断是否开启共享项目
+        if (! $projectEntity->getIsCollaborationEnabled()) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+        }
+
+        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::MANAGE);
+    }
+
+    /**
+     * 验证可编辑者权限.
+     */
+    protected function validateEditorPermission(MagicUserAuthorization $magicUserAuthorization, int $projectId): void
+    {
+        $projectDomainService = di(ProjectDomainService::class);
+        $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
+        // 判断是否开启共享项目
+        if (! $projectEntity->getIsCollaborationEnabled()) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+        }
+
+        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::EDITOR);
+    }
+
+    /**
+     * 验证可读权限.
+     */
+    protected function validateViewerPermission(MagicUserAuthorization $magicUserAuthorization, int $projectId): void
+    {
+        $projectDomainService = di(ProjectDomainService::class);
+        $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
+        // 判断是否开启共享项目
+        if (! $projectEntity->getIsCollaborationEnabled()) {
+            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+        }
+
+        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::VIEWER);
+    }
+
+    /**
+     * 验证当前用户角色是否大于或等于指定角色.
+     */
+    protected function validateRoleHigherOrEqual(MagicUserAuthorization $magicUserAuthorization, int $projectId, MemberRole $requiredRole): void
+    {
+        $projectMemberService = di(ProjectMemberDomainService::class);
+        $magicDepartmentUserDomainService = di(MagicDepartmentUserDomainService::class);
+        $userId = $magicUserAuthorization->getId();
+
+        $projectMemberEntity = $projectMemberService->getMemberByProjectAndUser($projectId, $userId);
+
+        if ($projectMemberEntity && $projectMemberEntity->getRole()->isHigherOrEqualThan($requiredRole)) {
+            return;
+        }
+
+        $dataIsolation = DataIsolation::create($magicUserAuthorization->getOrganizationCode(), $userId);
+        $departmentIds = $magicDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
+        $projectMemberEntities = $projectMemberService->getMembersByProjectAndDepartmentIds($projectId, $departmentIds);
+
+        foreach ($projectMemberEntities as $projectMemberEntity) {
+            if ($projectMemberEntity->getRole()->isHigherOrEqualThan($requiredRole)) {
+                return;
+            }
+        }
+        ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+    }
 }
-*/ // Ifyes creator directly Return if ($projectEntity->getuser Id() === $userId) 
-{
- return $projectEntity; 
-}
- // Determinewhether OnItem if (! $projectEntity->getIsCollaborationEnabled()) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED); 
-}
- // Validate $magicuser Authorization = new Magicuser Authorization(); $magicuser Authorization->setOrganizationCode($organizationCode); $magicuser Authorization->setId($userId); $this->validateRoleHigherOrEqual($magicuser Authorization, $projectId, $requiredRole); // Determinewhether plan if (! $packageFilterService->isPaidSubscription($projectEntity->getuser OrganizationCode())) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED); 
-}
- return $projectEntity; 
-}
- /** * Getuser accessible ItemGreater thanEditRole. */ 
-    public function getAccessibleProjectWithEditor(int $projectId, string $userId, string $organizationCode): ProjectEntity 
-{
- return $this->getAccessibleProject($projectId, $userId, $organizationCode, MemberRole::EDITOR); 
-}
- /** * Getuser accessible ItemGreater thanRole. */ 
-    public function getAccessibleProjectWithManager(int $projectId, string $userId, string $organizationCode): ProjectEntity 
-{
- return $this->getAccessibleProject($projectId, $userId, $organizationCode, MemberRole::MANAGE); 
-}
- /** * Validate manager or owner permission . */ 
-    protected function validateManageOrowner permission (Magicuser Authorization $magicuser Authorization, int $projectId): void 
-{
- $projectDomainService = di(ProjectDomainService::class); $projectEntity = $projectDomainService->getProjectNotuser Id($projectId); // Determinewhether OnItem if (! $projectEntity->getIsCollaborationEnabled()) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED); 
-}
- $this->validateRoleHigherOrEqual($magicuser Authorization, $projectId, MemberRole::MANAGE); 
-}
- /** * Validate Editorpermission . */ 
-    protected function validateEditorpermission (Magicuser Authorization $magicuser Authorization, int $projectId): void 
-{
- $projectDomainService = di(ProjectDomainService::class); $projectEntity = $projectDomainService->getProjectNotuser Id($projectId); // Determinewhether OnItem if (! $projectEntity->getIsCollaborationEnabled()) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED); 
-}
- $this->validateRoleHigherOrEqual($magicuser Authorization, $projectId, MemberRole::EDITOR); 
-}
- /** * Validate Readablepermission . */ 
-    protected function validateViewerpermission (Magicuser Authorization $magicuser Authorization, int $projectId): void 
-{
- $projectDomainService = di(ProjectDomainService::class); $projectEntity = $projectDomainService->getProjectNotuser Id($projectId); // Determinewhether OnItem if (! $projectEntity->getIsCollaborationEnabled()) 
-{
- ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED); 
-}
- $this->validateRoleHigherOrEqual($magicuser Authorization, $projectId, MemberRole::VIEWER); 
-}
- /** * Validate current user Rolewhether Greater thanor Equalspecified Role. */ 
-    protected function validateRoleHigherOrEqual(Magicuser Authorization $magicuser Authorization, int $projectId, MemberRole $requiredRole): void 
-{
- $projectMemberService = di(ProjectMemberDomainService::class); $magicDepartmentuser DomainService = di(MagicDepartmentuser DomainService::class); $userId = $magicuser Authorization->getId(); $projectMemberEntity = $projectMemberService->getMemberByProjectAnduser ($projectId, $userId); if ($projectMemberEntity && $projectMemberEntity->getRole()->isHigherOrEqualThan($requiredRole)) 
-{
- return; 
-}
- $dataIsolation = DataIsolation::create($magicuser Authorization->getOrganizationCode(), $userId); $departmentIds = $magicDepartmentuser DomainService->getDepartmentIdsByuser Id($dataIsolation, $userId, true); $projectMemberEntities = $projectMemberService->getMembersByProjectAndDepartmentIds($projectId, $departmentIds); foreach ($projectMemberEntities as $projectMemberEntity) 
-{
- if ($projectMemberEntity->getRole()->isHigherOrEqualThan($requiredRole)) 
-{
- return; 
-}
- 
-}
- ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED); 
-}
- 
-}
- 

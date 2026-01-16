@@ -1,29 +1,55 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+/**
+ * 工作区状态值对象
+ */
+enum WorkspaceStatus: int
+{
+    /**
+     * 正常状态
+     */
+    case Normal = 0;
 
-/** * workspace StatusValueObject */
+    /**
+     * 禁用状态
+     */
+    case Disabled = 1;
 
-enum WorkspaceStatus: int 
-{
- /** * NormalStatus */ case Normal = 0; /** * DisabledStatus */ case Disabled = 1; /** * delete Status */ case delete d = 2; /** * GetStatusDescription. */ 
-    public function getDescription(): string 
-{
- return match ($this) 
-{
- self::Normal => 'Normal', self::Disabled => 'Disabled', self::delete d => 'delete d', 
+    /**
+     * 删除状态
+     */
+    case Deleted = 2;
+
+    /**
+     * 获取状态描述.
+     */
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::Normal => '正常',
+            self::Disabled => '禁用',
+            self::Deleted => '已删除',
+        };
+    }
+
+    /**
+     * 获取所有状态列表.
+     *
+     * @return array<int, string> 状态值与描述的映射
+     */
+    public static function getList(): array
+    {
+        return [
+            self::Normal->value => self::Normal->getDescription(),
+            self::Disabled->value => self::Disabled->getDescription(),
+            self::Deleted->value => self::Deleted->getDescription(),
+        ];
+    }
 }
-; 
-}
- /** * GetAllStatuslist . * * @return array<int, string> StatusValueDescriptionMap */ 
-    public 
-    static function getlist (): array 
-{
- return [ self::Normal->value => self::Normal->getDescription(), self::Disabled->value => self::Disabled->getDescription(), self::delete d->value => self::delete d->getDescription(), ]; 
-}
- 
-}
- 

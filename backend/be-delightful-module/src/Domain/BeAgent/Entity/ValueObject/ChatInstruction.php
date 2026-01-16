@@ -1,12 +1,20 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
-
-enum ChatInstruction: string 
+enum ChatInstruction: string
 {
- // NormalPair case Normal = 'normal'; // follow_up case FollowUp = 'follow_up'; // interrupt case Interrupted = 'interrupt'; 
+    // 正常对话，
+    case Normal = 'normal';
+
+    // follow_up 追问
+    case FollowUp = 'follow_up';
+
+    // interrupt 打断
+    case Interrupted = 'interrupt';
 }
- 

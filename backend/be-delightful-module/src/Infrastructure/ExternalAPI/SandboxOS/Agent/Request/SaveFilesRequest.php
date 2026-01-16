@@ -1,51 +1,75 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
+/**
+ * 沙箱文件保存请求类
+ * 用于调用沙箱的 /api/v1/files/edit 接口.
+ */
+class SaveFilesRequest
+{
+    private array $files;
 
-/** * sandbox FileSaveRequestClass * for call sandbox /api/v1/files/edit Interface. */
+    public function __construct(array $files)
+    {
+        $this->files = $files;
+    }
 
-class SaveFilesRequest 
-{
- 
-    private array $files; 
-    public function __construct(array $files) 
-{
- $this->files = $files; 
+    /**
+     * 创建文件保存请求
+     */
+    public static function create(array $files): self
+    {
+        return new self($files);
+    }
+
+    /**
+     * 从应用层数据创建请求
+     */
+    public static function fromFileData(array $fileDataList): self
+    {
+        $files = [];
+
+        foreach ($fileDataList as $fileData) {
+            $files[] = [
+                'file_key' => $fileData['file_key'],
+                'file_path' => $fileData['file_path'],
+                'content' => $fileData['content'],
+                'is_encrypted' => false,
+            ];
+        }
+
+        return new self($files);
+    }
+
+    /**
+     * 转换为数组格式（用于API调用）.
+     */
+    public function toArray(): array
+    {
+        return [
+            'files' => $this->files,
+        ];
+    }
+
+    /**
+     * 获取文件列表.
+     */
+    public function getFiles(): array
+    {
+        return $this->files;
+    }
+
+    /**
+     * 获取文件数量.
+     */
+    public function getFileCount(): int
+    {
+        return count($this->files);
+    }
 }
- /** * CreateFileSaveRequest */ 
-    public 
-    static function create(array $files): self 
-{
- return new self($files); 
-}
- /** * Fromapplication layer DataCreateRequest */ 
-    public 
-    static function fromFileData(array $fileDatalist ): self 
-{
- $files = []; foreach ($fileDatalist as $fileData) 
-{
- $files[] = [ 'file_key' => $fileData['file_key'], 'file_path' => $fileData['file_path'], 'content' => $fileData['content'], 'is_encrypted' => false, ]; 
-}
- return new self($files); 
-}
- /** * Convert toArrayFormatfor APIcall . */ 
-    public function toArray(): array 
-{
- return [ 'files' => $this->files, ]; 
-}
- /** * GetFilelist . */ 
-    public function getFiles(): array 
-{
- return $this->files; 
-}
- /** * GetFileQuantity. */ 
-    public function getFileCount(): int 
-{
- return count($this->files); 
-}
- 
-}
- 

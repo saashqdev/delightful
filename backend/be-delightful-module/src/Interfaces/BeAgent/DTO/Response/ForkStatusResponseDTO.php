@@ -1,34 +1,41 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Response;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectForkEntity;
-/** * Fork status response DTO. */
 
-class ForkStatusResponseDTO 
+/**
+ * Fork status response DTO.
+ */
+class ForkStatusResponseDTO
 {
- 
-    public function __construct( 
-    public readonly string $status, 
-    public readonly string $progress, 
-    public readonly string $errMsg, ) 
-{
- 
+    public function __construct(
+        public readonly string $status,
+        public readonly string $progress,
+        public readonly string $errMsg,
+    ) {
+    }
+
+    public static function fromEntity(ProjectForkEntity $projectFork): self
+    {
+        return new self(
+            status: $projectFork->getStatus()->value,
+            progress: $projectFork->getProgressPercentage(),
+            errMsg: $projectFork->getErrMsg() ?? '',
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'status' => $this->status,
+            'progress' => $this->progress,
+            'err_msg' => $this->errMsg,
+        ];
+    }
 }
- 
-    public 
-    static function fromEntity(ProjectForkEntity $projectFork): self 
-{
- return new self( status: $projectFork->getStatus()->value, progress: $projectFork->getProgressPercentage(), errMsg: $projectFork->getErrMsg() ?? '', ); 
-}
- 
-    public function toArray(): array 
-{
- return [ 'status' => $this->status, 'progress' => $this->progress, 'err_msg' => $this->errMsg, ]; 
-}
- 
-}
- 

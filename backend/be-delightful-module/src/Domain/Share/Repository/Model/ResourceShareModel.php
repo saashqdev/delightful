@@ -1,20 +1,90 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Domain\Share\Repository\Model;
+namespace Dtyq\BeDelightful\Domain\Share\Repository\Model;
 
 use App\Infrastructure\Core\AbstractModel;
-use Hyperf\Database\Model\Softdelete s;
-/** * ResourceShareModel. * * @property int $id ID * @property string $resource_id ResourceID * @property int $resource_type ResourceType * @property string $resource_name ResourceName * @property string $share_code Share code * @property int $share_type ShareType * @property null|string $password Password * @property bool $is_password_enabled whether EnabledPasswordProtected * @property null|string $expire_at Expiration time * @property int $view_count View * @property string $created_uid creator user ID * @property string $updated_uid Updateuser ID * @property string $organization_code OrganizationCode * @property null|string $target_ids TargetIDs * @property null|array $extra ExtraProperty * @property bool $is_enabled whether Enabled * @property string $created_at Creation time * @property string $updated_at Update time * @property null|string $deleted_at Deletion time */
+use Hyperf\Database\Model\SoftDeletes;
 
-class ResourceShareModel extends AbstractModel 
+/**
+ * 资源分享模型.
+ *
+ * @property int $id ID
+ * @property string $resource_id 资源ID
+ * @property int $resource_type 资源类型
+ * @property string $resource_name 资源名称
+ * @property string $share_code 分享代码
+ * @property int $share_type 分享类型
+ * @property null|string $password 访问密码
+ * @property bool $is_password_enabled 是否启用密码保护
+ * @property null|string $expire_at 过期时间
+ * @property int $view_count 查看次数
+ * @property string $created_uid 创建者用户ID
+ * @property string $updated_uid 更新者用户ID
+ * @property string $organization_code 组织代码
+ * @property null|string $target_ids 目标IDs
+ * @property null|array $extra 额外属性
+ * @property bool $is_enabled 是否启用
+ * @property string $created_at 创建时间
+ * @property string $updated_at 更新时间
+ * @property null|string $deleted_at 删除时间
+ */
+class ResourceShareModel extends AbstractModel
 {
- use Softdelete s;
-/** * table . */ protected ?string $table = 'magic_resource_shares'; /** * primary key . */ 
-    protected string $primaryKey = 'id'; /** * BatchValueProperty. */ 
-    protected array $fillable = [ 'id', 'resource_id', 'resource_type', 'resource_name', 'share_code', 'share_type', 'password', 'is_password_enabled', 'expire_at', 'view_count', 'created_uid', 'updated_uid', 'organization_code', 'target_ids', 'extra', 'is_enabled', 'deleted_at', ]; /** * automatic TypeConvert. */ 
-    protected array $casts = [ 'id' => 'integer', 'resource_type' => 'integer', 'share_type' => 'integer', 'view_count' => 'integer', 'target_ids' => 'json', 'extra' => 'json', 'is_enabled' => 'boolean', 'is_password_enabled' => 'boolean', 'created_at' => 'string', 'updated_at' => 'string', 'deleted_at' => 'string', 'expire_at' => 'string', ]; 
+    use SoftDeletes;
+
+    /**
+     * 表名.
+     */
+    protected ?string $table = 'magic_resource_shares';
+
+    /**
+     * 主键.
+     */
+    protected string $primaryKey = 'id';
+
+    /**
+     * 可批量赋值的属性.
+     */
+    protected array $fillable = [
+        'id',
+        'resource_id',
+        'resource_type',
+        'resource_name',
+        'share_code',
+        'share_type',
+        'password',
+        'is_password_enabled',
+        'expire_at',
+        'view_count',
+        'created_uid',
+        'updated_uid',
+        'organization_code',
+        'target_ids',
+        'extra',
+        'is_enabled',
+        'deleted_at',
+    ];
+
+    /**
+     * 自动类型转换.
+     */
+    protected array $casts = [
+        'id' => 'integer',
+        'resource_type' => 'integer',
+        'share_type' => 'integer',
+        'view_count' => 'integer',
+        'target_ids' => 'json',
+        'extra' => 'json',
+        'is_enabled' => 'boolean',
+        'is_password_enabled' => 'boolean',
+        'created_at' => 'string',
+        'updated_at' => 'string',
+        'deleted_at' => 'string',
+        'expire_at' => 'string',
+    ];
 }
- 

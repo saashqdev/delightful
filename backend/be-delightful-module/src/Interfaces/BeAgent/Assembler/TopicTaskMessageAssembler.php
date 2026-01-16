@@ -1,28 +1,37 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Assembler;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Assembler;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Event\TopicTaskMessageEvent;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;
-/** * topic TaskMessage. */
 
-class TopicTaskMessageAssembler 
+/**
+ * 话题任务消息装配器.
+ */
+class TopicTaskMessageAssembler
 {
- /** * DTOConvert toEvent. */ 
-    public 
-    static function toEvent(TopicTaskMessageDTO $dto): TopicTaskMessageEvent 
-{
- return new TopicTaskMessageEvent($dto->getMetadata(), $dto->getPayload(), $dto->getTokenUsageDetails()); 
+    /**
+     * 将DTO转换为领域事件.
+     */
+    public static function toEvent(TopicTaskMessageDTO $dto): TopicTaskMessageEvent
+    {
+        return new TopicTaskMessageEvent($dto->getMetadata(), $dto->getPayload(), $dto->getTokenUsageDetails());
+    }
+
+    /**
+     * 将领域事件转换为DTO.
+     */
+    public static function toDTO(TopicTaskMessageEvent $event): TopicTaskMessageDTO
+    {
+        return new TopicTaskMessageDTO(
+            $event->getMetadata(),
+            $event->getPayload(),
+            $event->getTokenUsageDetails(),
+        );
+    }
 }
- /** * EventConvert toDTO. */ 
-    public 
-    static function toDTO(TopicTaskMessageEvent $event): TopicTaskMessageDTO 
-{
- return new TopicTaskMessageDTO( $event->getMetadata(), $event->getPayload(), $event->getTokenUsageDetails(), ); 
-}
- 
-}
- 

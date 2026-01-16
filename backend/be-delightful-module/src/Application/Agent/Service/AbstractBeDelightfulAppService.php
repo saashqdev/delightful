@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Application\Agent\Service;
+namespace Dtyq\BeDelightful\Application\Agent\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Application\ModelGateway\MicroAgent\MicroAgentFactory;
@@ -15,31 +17,33 @@ use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Qbhy\HyperfAuth\Authenticatable;
 
-    abstract class AbstractBeDelightfulAppService extends AbstractKernelAppService 
+abstract class AbstractBeDelightfulAppService extends AbstractKernelAppService
 {
- 
-    protected readonly LoggerInterface $logger; 
-    public function __construct( 
-    protected BeDelightfulAgentDomainService $BeDelightfulAgentDomainService, 
-    protected MicroAgentFactory $microAgentFactory, 
-    protected LoggerFactory $loggerFactory, ) 
-{
- $this->logger = $this->loggerFactory->get(get_class($this)); 
+    protected readonly LoggerInterface $logger;
+
+    public function __construct(
+        protected BeDelightfulAgentDomainService $superMagicAgentDomainService,
+        protected MicroAgentFactory $microAgentFactory,
+        protected LoggerFactory $loggerFactory,
+    ) {
+        $this->logger = $this->loggerFactory->get(get_class($this));
+    }
+
+    protected function createBeDelightfulDataIsolation(Authenticatable|BaseDataIsolation $authorization): BeDelightfulAgentDataIsolation
+    {
+        $dataIsolation = new BeDelightfulAgentDataIsolation();
+        if ($authorization instanceof BaseDataIsolation) {
+            $dataIsolation->extends($authorization);
+            return $dataIsolation;
+        }
+        $this->handleByAuthorization($authorization, $dataIsolation);
+        return $dataIsolation;
+    }
+
+    protected function createContactDataIsolation(Authenticatable|BaseDataIsolation $authorization): ContactDataIsolation
+    {
+        // 先创建BeDelightfulDataIsolation，然后转换为ContactDataIsolation
+        $superMagicDataIsolation = $this->createBeDelightfulDataIsolation($authorization);
+        return $this->createContactDataIsolationByBase($superMagicDataIsolation);
+    }
 }
- 
-    protected function createBeDelightfulDataIsolation(Authenticatable|BaseDataIsolation $authorization): BeDelightfulAgentDataIsolation 
-{
- $dataIsolation = new BeDelightfulAgentDataIsolation(); if ($authorization instanceof BaseDataIsolation) 
-{
- $dataIsolation->extends($authorization); return $dataIsolation; 
-}
- $this->handleByAuthorization($authorization, $dataIsolation); return $dataIsolation; 
-}
- 
-    protected function createContactDataIsolation(Authenticatable|BaseDataIsolation $authorization): ContactDataIsolation 
-{
- // CreateBeDelightfulDataIsolationThenConvert toContactDataIsolation $BeDelightfulDataIsolation = $this->createBeDelightfulDataIsolation($authorization); return $this->createContactDataIsolationByBase($BeDelightfulDataIsolation); 
-}
- 
-}
- 

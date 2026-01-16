@@ -1,34 +1,57 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Response;
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+class UpdateTaskStatusResponseDTO
+{
+    /**
+     * @var string 任务ID
+     */
+    protected string $taskId;
 
-class UpdateTaskStatusResponseDTO 
-{
- /** * @var string TaskID */ 
-    protected string $taskId; /** * @var string TaskStatus */ 
-    protected string $status; /** * Function. */ 
-    public function __construct(int $taskId, string $status) 
-{
- $this->taskId = (string) $taskId; $this->status = $status; 
+    /**
+     * @var string 任务状态
+     */
+    protected string $status;
+
+    /**
+     * 构造函数.
+     */
+    public function __construct(int $taskId, string $status)
+    {
+        $this->taskId = (string) $taskId;
+        $this->status = $status;
+    }
+
+    /**
+     * 转换为数组.
+     */
+    public function toArray(): array
+    {
+        return [
+            'task_id' => $this->taskId,
+            'status' => $this->status,
+        ];
+    }
+
+    /**
+     * 获取任务ID.
+     */
+    public function getTaskId(): string
+    {
+        return $this->taskId;
+    }
+
+    /**
+     * 获取任务状态
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
 }
- /** * Convert toArray. */ 
-    public function toArray(): array 
-{
- return [ 'task_id' => $this->taskId, 'status' => $this->status, ]; 
-}
- /** * GetTaskID. */ 
-    public function getTaskId(): string 
-{
- return $this->taskId; 
-}
- /** * GetTaskStatus */ 
-    public function getStatus(): string 
-{
- return $this->status; 
-}
- 
-}
- 

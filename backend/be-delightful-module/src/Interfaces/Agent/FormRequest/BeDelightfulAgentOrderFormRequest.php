@@ -1,35 +1,70 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+namespace Dtyq\BeDelightful\Interfaces\Agent\FormRequest;
 
-namespace Delightful\BeDelightful\Interfaces\Agent\FormRequest;
+use Hyperf\Validation\Request\FormRequest;
 
-use Hyperf\Validate \Request\FormRequest;
 use function Hyperf\Translation\trans;
 
-class BeDelightfulAgentOrderFormRequest extends FormRequest 
+class BeDelightfulAgentOrderFormRequest extends FormRequest
 {
- /** * Validate Rule. */ 
-    public function rules(): array 
-{
- return [ // Sortlist 'frequent' => 'nullable|array', 'frequent.*' => 'string|max:50', // code // AllSortlist 'all' => 'nullable|array', 'all.*' => 'string|max:50', // code ]; 
+    /**
+     * 验证规则.
+     */
+    public function rules(): array
+    {
+        return [
+            // 常用智能体排序列表
+            'frequent' => 'nullable|array',
+            'frequent.*' => 'string|max:50', // 智能体code
+
+            // 全部智能体排序列表
+            'all' => 'nullable|array',
+            'all.*' => 'string|max:50', // 智能体code
+        ];
+    }
+
+    /**
+     * 字段别名.
+     */
+    public function attributes(): array
+    {
+        return [
+            'frequent' => trans('super_magic.agent.order.frequent'),
+            'frequent.*' => trans('super_magic.agent.fields.code'),
+            'all' => trans('super_magic.agent.order.all'),
+            'all.*' => trans('super_magic.agent.fields.code'),
+        ];
+    }
+
+    /**
+     * 自定义验证错误消息.
+     */
+    public function messages(): array
+    {
+        return [
+            // 常用智能体排序验证
+            'frequent.array' => trans('super_magic.agent.validation.frequent_array'),
+            'frequent.*.string' => trans('super_magic.agent.validation.frequent_code_string'),
+            'frequent.*.max' => trans('super_magic.agent.validation.frequent_code_max'),
+
+            // 全部智能体排序验证
+            'all.array' => trans('super_magic.agent.validation.all_array'),
+            'all.*.string' => trans('super_magic.agent.validation.all_code_string'),
+            'all.*.max' => trans('super_magic.agent.validation.all_code_max'),
+        ];
+    }
+
+    /**
+     * 授权验证.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
 }
- /** * Field. */ 
-    public function attributes(): array 
-{
- return [ 'frequent' => trans('super_magic.agent.order.frequent'), 'frequent.*' => trans('super_magic.agent.fields.code'), 'all' => trans('super_magic.agent.order.all'), 'all.*' => trans('super_magic.agent.fields.code'), ]; 
-}
- /** * CustomValidate errorMessage. */ 
-    public function messages(): array 
-{
- return [ // SortValidate 'frequent.array' => trans('super_magic.agent.validation.frequent_array'), 'frequent.*.string' => trans('super_magic.agent.validation.frequent_code_string'), 'frequent.*.max' => trans('super_magic.agent.validation.frequent_code_max'), // AllSortValidate 'all.array' => trans('super_magic.agent.validation.all_array'), 'all.*.string' => trans('super_magic.agent.validation.all_code_string'), 'all.*.max' => trans('super_magic.agent.validation.all_code_max'), ]; 
-}
- /** * AuthorizeValidate . */ 
-    public function authorize(): bool 
-{
- return true; 
-}
- 
-}
- 

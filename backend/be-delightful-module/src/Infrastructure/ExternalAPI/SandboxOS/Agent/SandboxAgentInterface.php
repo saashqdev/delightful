@@ -1,36 +1,125 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent;
+namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent;
 
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\ChatMessageRequest;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\check pointRollbackcheck Request;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\check pointRollbackCommitRequest;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\check pointRollbackRequest;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\check pointRollbackStartRequest;
-use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\check pointRollbackUndoRequest;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\CheckpointRollbackCheckRequest;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\CheckpointRollbackCommitRequest;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\CheckpointRollbackRequest;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\CheckpointRollbackStartRequest;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\CheckpointRollbackUndoRequest;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\InitAgentRequest;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\InterruptRequest;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\SaveFilesRequest;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\ScriptTaskRequest;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Response\AgentResponse;
-/** * sandbox AgentInterface * AgentThroughGatewayForwardImplementation. */
 
-interface SandboxAgentInterface 
+/**
+ * 沙箱Agent接口
+ * 定义Agent通信功能，通过Gateway转发实现.
+ */
+interface SandboxAgentInterface
 {
- /** * InitializeAgent. * * @param string $sandboxId Sandbox ID * @param InitAgentRequest $request InitializeRequest * @return AgentResponse InitializeResult */ 
-    public function initAgent(string $sandboxId, InitAgentRequest $request): AgentResponse; /** * SendMessagegive Agent. * * @param string $sandboxId Sandbox ID * @param ChatMessageRequest $request MessageRequest * @return AgentResponse AgentResponse */ 
-    public function sendChatMessage(string $sandboxId, ChatMessageRequest $request): AgentResponse; /** * SendInterruptMessagegive Agent. * * @param string $sandboxId Sandbox ID * @param InterruptRequest $request InterruptRequest * @return AgentResponse InterruptResponse */ 
-    public function sendInterruptMessage(string $sandboxId, InterruptRequest $request): AgentResponse; /** * Getworkspace Status. * * @param string $sandboxId Sandbox ID * @return AgentResponse workspace StatusResponse */ 
-    public function getWorkspaceStatus(string $sandboxId): AgentResponse; /** * SaveFilesandbox . * * @param string $sandboxId Sandbox ID * @param SaveFilesRequest $request FileSaveRequest * @return AgentResponse SaveResponse */ 
-    public function saveFiles(string $sandboxId, SaveFilesRequest $request): AgentResponse; /** * execute Task. * * @param string $sandboxId Sandbox ID * @param ScriptTaskRequest $request TaskRequest * @return AgentResponse execute Response */ 
-    public function executeScriptTask(string $sandboxId, ScriptTaskRequest $request): AgentResponse; /** * Rollbackspecified checkpoint. * * @param string $sandboxId Sandbox ID * @param check pointRollbackRequest $request checkpointRollbackRequest * @return AgentResponse RollbackResponse */ 
-    public function rollbackcheck point(string $sandboxId, check pointRollbackRequest $request): AgentResponse; /** * StartRollbackspecified checkpointmark Statusdelete . * * @param string $sandboxId Sandbox ID * @param check pointRollbackStartRequest $request checkpointRollbackStartRequest * @return AgentResponse RollbackResponse */ 
-    public function rollbackcheck pointStart(string $sandboxId, check pointRollbackStartRequest $request): AgentResponse; /** * SubmitRollbackspecified checkpointdelete recalled status Message. * * @param string $sandboxId Sandbox ID * @param check pointRollbackCommitRequest $request checkpointRollbackSubmitRequest * @return AgentResponse RollbackResponse */ 
-    public function rollbackcheck pointCommit(string $sandboxId, check pointRollbackCommitRequest $request): AgentResponse; /** * UndoRollbacksandbox checkpointrecalled status MessageResumeas NormalStatus. * * @param string $sandboxId Sandbox ID * @param check pointRollbackUndoRequest $request checkpointRollbackUndoRequest * @return AgentResponse RollbackResponse */ 
-    public function rollbackcheck pointUndo(string $sandboxId, check pointRollbackUndoRequest $request): AgentResponse; /** * check Rollbackspecified checkpointRow. * * @param string $sandboxId Sandbox ID * @param check pointRollbackcheck Request $request checkpointRollbackcheck Request * @return AgentResponse check Response */ 
-    public function rollbackcheck pointcheck (string $sandboxId, check pointRollbackcheck Request $request): AgentResponse; 
+    /**
+     * 初始化Agent.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param InitAgentRequest $request 初始化请求
+     * @return AgentResponse 初始化结果
+     */
+    public function initAgent(string $sandboxId, InitAgentRequest $request): AgentResponse;
+
+    /**
+     * 发送聊天消息给Agent.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param ChatMessageRequest $request 聊天消息请求
+     * @return AgentResponse Agent响应
+     */
+    public function sendChatMessage(string $sandboxId, ChatMessageRequest $request): AgentResponse;
+
+    /**
+     * 发送中断消息给Agent.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param InterruptRequest $request 中断请求
+     * @return AgentResponse 中断响应
+     */
+    public function sendInterruptMessage(string $sandboxId, InterruptRequest $request): AgentResponse;
+
+    /**
+     * 获取工作区状态.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @return AgentResponse 工作区状态响应
+     */
+    public function getWorkspaceStatus(string $sandboxId): AgentResponse;
+
+    /**
+     * 保存文件到沙箱.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param SaveFilesRequest $request 文件保存请求
+     * @return AgentResponse 保存响应
+     */
+    public function saveFiles(string $sandboxId, SaveFilesRequest $request): AgentResponse;
+
+    /**
+     * 执行脚本任务.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param ScriptTaskRequest $request 脚本任务请求
+     * @return AgentResponse 执行响应
+     */
+    public function executeScriptTask(string $sandboxId, ScriptTaskRequest $request): AgentResponse;
+
+    /**
+     * 回滚到指定的checkpoint.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param CheckpointRollbackRequest $request checkpoint回滚请求
+     * @return AgentResponse 回滚响应
+     */
+    public function rollbackCheckpoint(string $sandboxId, CheckpointRollbackRequest $request): AgentResponse;
+
+    /**
+     * 开始回滚到指定的checkpoint（标记状态而非删除）.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param CheckpointRollbackStartRequest $request checkpoint回滚开始请求
+     * @return AgentResponse 回滚响应
+     */
+    public function rollbackCheckpointStart(string $sandboxId, CheckpointRollbackStartRequest $request): AgentResponse;
+
+    /**
+     * 提交回滚到指定的checkpoint（物理删除撤回状态的消息）.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param CheckpointRollbackCommitRequest $request checkpoint回滚提交请求
+     * @return AgentResponse 回滚响应
+     */
+    public function rollbackCheckpointCommit(string $sandboxId, CheckpointRollbackCommitRequest $request): AgentResponse;
+
+    /**
+     * 撤销回滚沙箱checkpoint（将撤回状态的消息恢复为正常状态）.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param CheckpointRollbackUndoRequest $request checkpoint回滚撤销请求
+     * @return AgentResponse 回滚响应
+     */
+    public function rollbackCheckpointUndo(string $sandboxId, CheckpointRollbackUndoRequest $request): AgentResponse;
+
+    /**
+     * 检查回滚到指定checkpoint的可行性.
+     *
+     * @param string $sandboxId 沙箱ID
+     * @param CheckpointRollbackCheckRequest $request checkpoint回滚检查请求
+     * @return AgentResponse 检查响应
+     */
+    public function rollbackCheckpointCheck(string $sandboxId, CheckpointRollbackCheckRequest $request): AgentResponse;
 }
- 

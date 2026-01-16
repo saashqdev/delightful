@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
+/**
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
+ */
 
-/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
-
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Facade;
 
 use App\Application\LongTermMemory\Service\LongTermMemoryAppService;
 use App\Domain\LongTermMemory\DTO\CreateMemoryDTO;
@@ -17,76 +19,198 @@ use Dtyq\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
 use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\Validate \Contract\ValidatorFactoryInterface;
+use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use InvalidArgumentException;
-use function Hyperf\Translation\trans;
-#[ApiResponse('low_code')]
 
-class SuperAgentMemoryApi extends AbstractApi 
+use function Hyperf\Translation\trans;
+
+#[ApiResponse('low_code')]
+class SuperAgentMemoryApi extends AbstractApi
 {
- 
-    public function __construct( 
-    protected RequestInterface $request, 
-    protected ValidatorFactoryInterface $validator, 
-    protected LongTermMemoryAppService $longTermMemoryAppService, ) 
-{
- parent::__construct($request); 
+    public function __construct(
+        protected RequestInterface $request,
+        protected ValidatorFactoryInterface $validator,
+        protected LongTermMemoryAppService $longTermMemoryAppService,
+    ) {
+        parent::__construct($request);
+    }
+
+    /**
+     * 创建记忆.
+     */
+    public function createMemory(): array
+    {
+        // 校验沙箱 Token
+        $this->validateSandboxToken();
+
+        $requestData = $this->getRequestData();
+
+        $rules = [
+            'explanation' => 'required|string',
+            'memory' => 'required|string',
+            'tags' => 'array',
+            'metadata' => 'required|array',
+            'immediate_effect' => 'boolean|nullable',
+            'project_id' => 'nullable|integer|string',
+        ];
+
+        $validatedParams = $this->checkParams($requestData, $rules);
+        $metadata = $this->parseMetadata($validatedParams['metadata']);
+
+        // 根据 immediate_effect 参数决定记忆状态和内容设置
+        $immediateEffect = (bool) ($validatedParams['immediate_effect'] ?? false);
+
+        if ($immediateEffect) {
+            // 立即生效：记忆内容直接放入content，状态为active
+            $content = $validatedParams['memory'];
+            $pendingContent = null;
+            $status = MemoryStatus::ACTIVE->value;
+            $enabled = true; // active状态的记忆默认启用
+        } else {
+            // 默认行为：记忆内容放入pendingContent，状态为pending
+            $content = '';
+            $pendingContent = $validatedParams['memory'];
+            $status = MemoryStatus::PENDING->value;
+            $enabled = false; // pending状态的记忆默认不启用
+        }
+
+        $dto = new CreateMemoryDTO([
+            'content' => $content,
+            'pendingContent' => $pendingContent,
+            'explanation' => $validatedParams['explanation'],
+            'memoryType' => MemoryType::MANUAL_INPUT->value,
+            'status' => $status,
+            'enabled' => $enabled,
+            'tags' => $validatedParams['tags'] ?? [],
+            'orgId' => $metadata->getOrganizationCode(),
+            'appId' => AgentConstant::SUPER_MAGIC_CODE,
+            // 项目 id 不能从 $metadata 获取，因为这个参数是用来区分记忆是项目还是全局的。
+            'projectId' => isset($validatedParams['project_id']) ? (string) $validatedParams['project_id'] : null,
+            'userId' => $metadata->getUserId(),
+            'expiresAt' => null,
+        ]);
+
+        $memoryId = $this->longTermMemoryAppService->createMemory($dto);
+
+        return ['memory_id' => $memoryId, 'success' => true];
+    }
+
+    /**
+     * Agent更新记忆的核心逻辑.
+     */
+    public function agentUpdateMemory(string $id): array
+    {
+        // 校验沙箱 Token
+        $this->validateSandboxToken();
+
+        $requestData = $this->getRequestData();
+
+        $rules = [
+            'explanation' => 'string',
+            'memory' => 'string',
+            'tags' => 'array',
+            'metadata' => 'required|array',
+        ];
+
+        $validatedParams = $this->checkParams($requestData, $rules);
+        $metadata = $this->parseMetadata($validatedParams['metadata']);
+
+        // 检查权限
+        $this->checkMemoryPermission($id, $metadata);
+
+        // 构建更新DTO，状态转换由领域服务自动处理
+        $dto = new UpdateMemoryDTO([
+            'pendingContent' => $validatedParams['memory'] ?? null,
+            'explanation' => $validatedParams['explanation'] ?? null,
+            'tags' => $validatedParams['tags'] ?? null,
+            'metadata' => $validatedParams['metadata'] ?? null,
+        ]);
+
+        $this->longTermMemoryAppService->updateMemory($id, $dto);
+
+        return ['success' => true];
+    }
+
+    /**
+     * 删除记忆.
+     */
+    public function deleteMemory(string $id): array
+    {
+        // 校验沙箱 Token
+        $this->validateSandboxToken();
+
+        $requestData = $this->getRequestData();
+
+        $rules = [
+            'metadata' => 'required|array',
+        ];
+
+        $validatedParams = $this->checkParams($requestData, $rules);
+        $metadata = $this->parseMetadata($validatedParams['metadata']);
+
+        // 检查权限
+        $this->checkMemoryPermission($id, $metadata);
+
+        $this->longTermMemoryAppService->deleteMemory($id);
+
+        return [
+            'success' => true,
+            'message' => trans('long_term_memory.api.memory_deleted_successfully'),
+        ];
+    }
+
+    /**
+     * 校验请求参数.
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function checkParams(array $params, array $rules): array
+    {
+        $validator = $this->validator->make($params, $rules);
+
+        if ($validator->fails()) {
+            throw new InvalidArgumentException(trans('long_term_memory.api.parameter_validation_failed', ['errors' => implode(', ', $validator->errors()->all())]));
+        }
+
+        return $validator->validated();
+    }
+
+    /**
+     * 获取请求数据（处理混淆）.
+     */
+    private function getRequestData(): array
+    {
+        // 查看是否混淆
+        $isConfusion = $this->request->input('obfuscated', false);
+        if ($isConfusion) {
+            // 混淆处理
+            $rawData = ShadowCode::unShadow($this->request->input('data', ''));
+            return json_decode($rawData, true);
+        }
+
+        return $this->request->all();
+    }
+
+    /**
+     * 解析metadata.
+     */
+    private function parseMetadata(array $metadataArray): MessageMetadata
+    {
+        return MessageMetadata::fromArray($metadataArray);
+    }
+
+    /**
+     * 检查记忆权限.
+     */
+    private function checkMemoryPermission(string $memoryId, MessageMetadata $metadata): void
+    {
+        if (! $this->longTermMemoryAppService->isMemoryBelongToUser(
+            $memoryId,
+            $metadata->getOrganizationCode(),
+            AgentConstant::SUPER_MAGIC_CODE,
+            $metadata->getUserId()
+        )) {
+            ExceptionBuilder::throw(GenericErrorCode::AccessDenied, trans('long_term_memory.api.memory_not_belong_to_user'));
+        }
+    }
 }
- /** * Creatememory . */ 
-    public function createMemory(): array 
-{
- // sandbox Token $this->validateSandboxToken(); $requestData = $this->getRequestData(); $rules = [ 'explanation' => 'required|string', 'memory' => 'required|string', 'tags' => 'array', 'metadata' => 'required|array', 'immediate_effect' => 'boolean|nullable', 'project_id' => 'nullable|integer|string', ]; $validatedParams = $this->checkParams($requestData, $rules); $metadata = $this->parseMetadata($validatedParams['metadata']); // According to immediate_effect parameter decide memory StatusContentSet $immediateEffect = (bool) ($validatedParams['immediate_effect'] ?? false); if ($immediateEffect) 
-{
- // memory Contentdirectly contentStatusas active $content = $validatedParams['memory']; $pendingContent = null; $status = MemoryStatus::ACTIVE->value; $enabled = true; // Memory for active status is enabled by default 
-}
- else 
-{
- // Defaultbehavior is memory ContentpendingContentStatusas pending $content = ''; $pendingContent = $validatedParams['memory']; $status = MemoryStatus::PENDING->value; $enabled = false; // Memory for pending status is disabled by default 
-}
- $dto = new CreateMemoryDTO([ 'content' => $content, 'pendingContent' => $pendingContent, 'explanation' => $validatedParams['explanation'], 'memoryType' => MemoryType::MANUAL_INPUT->value, 'status' => $status, 'enabled' => $enabled, 'tags' => $validatedParams['tags'] ?? [], 'orgId' => $metadata->getOrganizationCode(), 'appId' => AgentConstant::SUPER_MAGIC_CODE, // Item id CannotFrom $metadata Getas Parameteryes memory yes Itemyes Global 'projectId' => isset($validatedParams['project_id']) ? (string) $validatedParams['project_id'] : null, 'userId' => $metadata->getuser Id(), 'expiresAt' => null, ]); $memoryId = $this->longTermMemoryAppService->createMemory($dto); return ['memory_id' => $memoryId, 'success' => true]; 
-}
- /** * AgentUpdatememory Core. */ 
-    public function agentUpdateMemory(string $id): array 
-{
- // sandbox Token $this->validateSandboxToken(); $requestData = $this->getRequestData(); $rules = [ 'explanation' => 'string', 'memory' => 'string', 'tags' => 'array', 'metadata' => 'required|array', ]; $validatedParams = $this->checkParams($requestData, $rules); $metadata = $this->parseMetadata($validatedParams['metadata']); // check permission $this->checkMemorypermission ($id, $metadata); // BuildUpdateDTOStatusConvertServiceautomatic process $dto = new UpdateMemoryDTO([ 'pendingContent' => $validatedParams['memory'] ?? null, 'explanation' => $validatedParams['explanation'] ?? null, 'tags' => $validatedParams['tags'] ?? null, 'metadata' => $validatedParams['metadata'] ?? null, ]); $this->longTermMemoryAppService->updateMemory($id, $dto); return ['success' => true]; 
-}
- /** * delete memory . */ 
-    public function deleteMemory(string $id): array 
-{
- // sandbox Token $this->validateSandboxToken(); $requestData = $this->getRequestData(); $rules = [ 'metadata' => 'required|array', ]; $validatedParams = $this->checkParams($requestData, $rules); $metadata = $this->parseMetadata($validatedParams['metadata']); // check permission $this->checkMemorypermission ($id, $metadata); $this->longTermMemoryAppService->deleteMemory($id); return [ 'success' => true, 'message' => trans('long_term_memory.api.memory_deleted_successfully'), ]; 
-}
- /** * RequestParameter. * * @throws InvalidArgumentException */ 
-    protected function checkParams(array $params, array $rules): array 
-{
- $validator = $this->validator->make($params, $rules); if ($validator->fails()) 
-{
- throw new InvalidArgumentException(trans('long_term_memory.api.parameter_validation_failed', ['errors' => implode(', ', $validator->errors()->all())])); 
-}
- return $validator->validated(); 
-}
- /** * GetRequestDataprocess . */ 
-    private function getRequestData(): array 
-{
- // Viewwhether $isConfusion = $this->request->input('obfuscated', false); if ($isConfusion) 
-{
- // process $rawData = ShadowCode::unShadow($this->request->input('data', '')); return json_decode($rawData, true); 
-}
- return $this->request->all(); 
-}
- /** * Parse metadata. */ 
-    private function parseMetadata(array $metadataArray): MessageMetadata 
-{
- return MessageMetadata::fromArray($metadataArray); 
-}
- /** * check memory permission . */ 
-    private function checkMemorypermission (string $memoryId, MessageMetadata $metadata): void 
-{
- if (! $this->longTermMemoryAppService->isMemoryBelongTouser ( $memoryId, $metadata->getOrganizationCode(), AgentConstant::SUPER_MAGIC_CODE, $metadata->getuser Id() )) 
-{
- ExceptionBuilder::throw(GenericErrorCode::AccessDenied, trans('long_term_memory.api.memory_not_belong_to_user')); 
-}
- 
-}
- 
-}
- 

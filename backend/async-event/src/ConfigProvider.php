@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent;
 
-use BeDelightful\AsyncEvent\Kernel\Crontab\ClearHistoryCrontab;
-use BeDelightful\AsyncEvent\Kernel\Crontab\RetryCrontab;
+use Delightful\AsyncEvent\Kernel\Crontab\ClearHistoryCrontab;
+use Delightful\AsyncEvent\Kernel\Crontab\RetryCrontab;
 use Hyperf\Crontab\Crontab;
 use Hyperf\Di\Definition\PriorityDefinition;
 use Psr\EventDispatcher\EventDispatcherInterface;

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
 
 /**
  * Fork project response DTO.

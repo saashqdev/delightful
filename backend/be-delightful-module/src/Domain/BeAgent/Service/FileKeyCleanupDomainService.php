@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
 use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

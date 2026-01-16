@@ -10,7 +10,7 @@ namespace App\Application\Provider\Event\Subscribe;
 use App\Application\Provider\Service\ProviderModelSyncAppService;
 use App\Domain\Provider\Event\ProviderConfigCreatedEvent;
 use App\Domain\Provider\Event\ProviderConfigUpdatedEvent;
-use BeDelightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;

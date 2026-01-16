@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace Delightful\TaskScheduler\Entity;
 
 use DateTime;
-use BeDelightful\TaskScheduler\Entity\ValueObject\TaskSchedulerExecuteResult;
-use BeDelightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
-use BeDelightful\TaskScheduler\Exception\TaskSchedulerParamsSchedulerException;
-use BeDelightful\TaskScheduler\Util\Functions;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskSchedulerExecuteResult;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
+use Delightful\TaskScheduler\Exception\TaskSchedulerParamsSchedulerException;
+use Delightful\TaskScheduler\Util\Functions;
 use Throwable;
 
 use function Hyperf\Support\call;

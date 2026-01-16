@@ -9,7 +9,7 @@ namespace HyperfTest\Cases\Application\MCP;
 
 use App\Application\MCP\BuiltInMCP\BeDelightfulChat\BeDelightfulChatManager;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
-use BeDelightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
+use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
 use HyperfTest\Cases\BaseTest;
 
 /**

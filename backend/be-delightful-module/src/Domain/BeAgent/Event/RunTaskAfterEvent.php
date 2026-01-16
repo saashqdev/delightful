@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TokenUsageDetails;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TokenUsageDetails;
 
 class RunTaskAfterEvent extends AbstractEvent
 {

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine;
 
-use BeDelightful\SdkBase\SdkBase;
-use BeDelightful\SdkBase\SdkBaseContext;
+use Delightful\SdkBase\SdkBase;
+use Delightful\SdkBase\SdkBaseContext;
 
 class ComponentContext
 {

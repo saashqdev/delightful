@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Expression;
 
-use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
 
 class ValueDataTypeTransform
 {

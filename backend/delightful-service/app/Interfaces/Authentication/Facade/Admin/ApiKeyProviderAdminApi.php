@@ -11,7 +11,7 @@ use App\Application\Authentication\Service\ApiKeyProviderAppService;
 use App\Domain\Authentication\Entity\ValueObject\Query\ApiKeyProviderQuery;
 use App\Interfaces\Authentication\Assembler\ApiKeyProviderAssembler;
 use App\Interfaces\Authentication\DTO\ApiKeyProviderDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

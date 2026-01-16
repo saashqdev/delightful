@@ -13,7 +13,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\Query\KnowledgeBaseFragmentQuery
 use App\Domain\KnowledgeBase\Event\KnowledgeBaseDefaultDocumentSavedEvent;
 use App\Domain\KnowledgeBase\Service\KnowledgeBaseFragmentDomainService;
 use App\Infrastructure\Core\ValueObject\Page;
-use BeDelightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Psr\Log\LoggerInterface;

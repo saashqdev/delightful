@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Task;
 
 use HyperfTest\Cases\BaseTest;
-use BeDelightful\DelightfulApiPremium\HighAvailability\Task\EndpointStatisticsAggregateTask;
+use Delightful\DelightfulApiPremium\HighAvailability\Task\EndpointStatisticsAggregateTask;
 
 /**
  * @internal

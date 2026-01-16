@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Template;
 
-use BeDelightful\FlowExprEngine\Component;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 class StartInputTemplate
 {

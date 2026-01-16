@@ -12,7 +12,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Agent\DTO\AvailableAgentDTO;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
 use App\Interfaces\Kernel\DTO\PageDTO;
-use BeDelightful\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
 
 class AgentAssembler
 {

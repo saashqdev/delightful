@@ -7,8 +7,8 @@ declare(strict_types=1);
 use App\Infrastructure\Util\Auth\Guard\WebsocketChatUserGuard;
 use App\Infrastructure\Util\Auth\Guard\WebUserGuard;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use BeDelightful\BeDelightful\Infrastructure\Utils\Auth\Guard\SandboxGuard;
-use BeDelightful\BeDelightful\Interfaces\Authorization\Web\SandboxAuthorization;
+use Delightful\BeDelightful\Infrastructure\Utils\Auth\Guard\SandboxGuard;
+use Delightful\BeDelightful\Interfaces\Authorization\Web\SandboxAuthorization;
 use Qbhy\HyperfAuth\Provider\EloquentProvider;
 
 return [

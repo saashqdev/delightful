@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript;
 
-use BeDelightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
-use BeDelightful\RuleEngineCore\Standards\Admin\Properties;
-use BeDelightful\RuleEngineCore\Standards\Exception\RuleSessionTypeUnsupportedException;
-use BeDelightful\RuleEngineCore\Standards\RuleRuntimeInterface;
-use BeDelightful\RuleEngineCore\Standards\RuleSessionInterface;
-use BeDelightful\RuleEngineCore\Standards\RuleSessionType;
+use Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
+use Delightful\RuleEngineCore\Standards\Admin\Properties;
+use Delightful\RuleEngineCore\Standards\Exception\RuleSessionTypeUnsupportedException;
+use Delightful\RuleEngineCore\Standards\RuleRuntimeInterface;
+use Delightful\RuleEngineCore\Standards\RuleSessionInterface;
+use Delightful\RuleEngineCore\Standards\RuleSessionType;
 
 class RuleRuntime implements RuleRuntimeInterface
 {

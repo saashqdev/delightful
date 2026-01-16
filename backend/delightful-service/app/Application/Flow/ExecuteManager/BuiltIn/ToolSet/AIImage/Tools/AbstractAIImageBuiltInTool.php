@@ -22,8 +22,8 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 use function di;
 

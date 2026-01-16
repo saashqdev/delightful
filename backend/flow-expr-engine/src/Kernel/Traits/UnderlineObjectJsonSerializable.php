@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Kernel\Traits;
 
-use BeDelightful\FlowExprEngine\Kernel\Utils\Functions;
+use Delightful\FlowExprEngine\Kernel\Utils\Functions;
 
 trait UnderlineObjectJsonSerializable
 {

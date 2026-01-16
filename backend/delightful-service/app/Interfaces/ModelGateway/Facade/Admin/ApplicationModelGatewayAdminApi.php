@@ -11,7 +11,7 @@ use App\Application\ModelGateway\Service\ApplicationAppService;
 use App\Domain\ModelGateway\Entity\ValueObject\Query\ApplicationQuery;
 use App\Interfaces\ModelGateway\Assembler\ApplicationAssembler;
 use App\Interfaces\ModelGateway\DTO\ApplicationDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

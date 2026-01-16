@@ -14,7 +14,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Variable\VariableValidat
 use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
-use BeDelightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 #[FlowNodeDefine(
     type: NodeType::VariableSet->value,

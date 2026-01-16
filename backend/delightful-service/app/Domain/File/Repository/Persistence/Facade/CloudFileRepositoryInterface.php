@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace App\Domain\File\Repository\Persistence\Facade;
 
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use BeDelightful\CloudFile\Kernel\Struct\ChunkUploadFile;
-use BeDelightful\CloudFile\Kernel\Struct\FileLink;
-use BeDelightful\CloudFile\Kernel\Struct\FilePreSignedUrl;
-use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FilePreSignedUrl;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 
 interface CloudFileRepositoryInterface
 {

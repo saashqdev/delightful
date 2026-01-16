@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Expression;
 
-use BeDelightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
+use Delightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
 use JsonSerializable;
 
 class ExpressionItem implements JsonSerializable

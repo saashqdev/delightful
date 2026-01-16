@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Infrastructure\Util\Locker\LockerInterface;
-use BeDelightful\BeDelightful\Domain\BeAgent\Constant\ConvertStatusEnum;
-use BeDelightful\BeDelightful\Domain\BeAgent\Constant\FileConvertConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\ConvertStatusEnum;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\FileConvertConstant;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\Redis;

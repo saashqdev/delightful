@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent\Kernel\Crontab;
 
-use BeDelightful\AsyncEvent\Kernel\AsyncEventRetry;
-use BeDelightful\AsyncEvent\Kernel\Service\AsyncEventService;
-use BeDelightful\AsyncEvent\Kernel\Utils\Locker;
+use Delightful\AsyncEvent\Kernel\AsyncEventRetry;
+use Delightful\AsyncEvent\Kernel\Service\AsyncEventService;
+use Delightful\AsyncEvent\Kernel\Utils\Locker;
 use Hyperf\Coroutine\Parallel;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

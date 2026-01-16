@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Interfaces\Agent\Facade\Sandbox;
 
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
-use BeDelightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAppService;
-use BeDelightful\BeDelightful\Interfaces\Agent\Assembler\BeDelightfulAgentAssembler;
+use Delightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAppService;
+use Delightful\BeDelightful\Interfaces\Agent\Assembler\BeDelightfulAgentAssembler;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

@@ -10,9 +10,9 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Carbon\Carbon;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleLogEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Model\MessageScheduleLogModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleLogEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\MessageScheduleLogModel;
 
 /**
  * Message schedule log repository implementation.

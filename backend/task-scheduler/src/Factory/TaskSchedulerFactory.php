@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace Delightful\TaskScheduler\Factory;
 
 use DateTime;
-use BeDelightful\TaskScheduler\Entity\TaskScheduler;
-use BeDelightful\TaskScheduler\Entity\TaskSchedulerCrontab;
-use BeDelightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
-use BeDelightful\TaskScheduler\Repository\Persistence\Model\TaskSchedulerModel;
+use Delightful\TaskScheduler\Entity\TaskScheduler;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
+use Delightful\TaskScheduler\Repository\Persistence\Model\TaskSchedulerModel;
 
 class TaskSchedulerFactory
 {

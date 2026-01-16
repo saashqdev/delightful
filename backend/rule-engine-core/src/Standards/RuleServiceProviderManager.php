@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\Standards;
 
-use BeDelightful\RuleEngineCore\Standards\Exception\ConfigurationException;
-use BeDelightful\RuleEngineCore\Standards\Exception\RuleException;
+use Delightful\RuleEngineCore\Standards\Exception\ConfigurationException;
+use Delightful\RuleEngineCore\Standards\Exception\RuleException;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use Throwable;

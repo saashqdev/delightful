@@ -20,7 +20,7 @@ use App\Infrastructure\Core\TempAuth\TempAuthInterface;
 use App\Infrastructure\Util\Odin\Agent;
 use App\Infrastructure\Util\Odin\AgentFactory;
 use DateTime;
-use BeDelightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\Component;
 use Hyperf\Odin\Contract\Model\ModelInterface;
 use Hyperf\Odin\Mcp\McpServerManager;
 use Hyperf\Odin\Memory\MemoryManager;

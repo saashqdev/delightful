@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Infrastructure\Utils;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
 use InvalidArgumentException;
 
 class WorkDirectoryUtil

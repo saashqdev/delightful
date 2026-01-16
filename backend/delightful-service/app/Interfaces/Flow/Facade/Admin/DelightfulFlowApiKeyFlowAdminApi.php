@@ -11,7 +11,7 @@ use App\Application\Flow\Service\DelightfulFlowApiKeyAppService;
 use App\Domain\Flow\Entity\ValueObject\ApiKeyType;
 use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowApiKeyQuery;
 use App\Interfaces\Flow\Assembler\ApiKey\DelightfulFlowApiKeyAssembler;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

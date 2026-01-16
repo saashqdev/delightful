@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleEntity;
 
 /**
  * Message Schedule List Item DTO.

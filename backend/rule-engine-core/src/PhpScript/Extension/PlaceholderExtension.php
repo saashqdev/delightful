@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Extension;
 
-use BeDelightful\RuleEngineCore\PhpScript\NodeVisitor\PlaceholderNodeVisitor;
+use Delightful\RuleEngineCore\PhpScript\NodeVisitor\PlaceholderNodeVisitor;
 use Twig\Extension\AbstractExtension;
 
 class PlaceholderExtension extends AbstractExtension

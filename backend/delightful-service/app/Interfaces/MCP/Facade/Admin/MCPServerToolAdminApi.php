@@ -10,7 +10,7 @@ namespace App\Interfaces\MCP\Facade\Admin;
 use App\Application\MCP\Service\MCPServerToolAppService;
 use App\Interfaces\MCP\Assembler\MCPServerToolAssembler;
 use App\Interfaces\MCP\DTO\MCPServerToolDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

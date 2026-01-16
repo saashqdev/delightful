@@ -17,8 +17,8 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
 use Closure;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use Throwable;
 
 use function di;

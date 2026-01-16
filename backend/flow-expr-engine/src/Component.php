@@ -7,23 +7,23 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine;
 
-use BeDelightful\FlowExprEngine\Builder\ApiBuilder;
-use BeDelightful\FlowExprEngine\Builder\Builder;
-use BeDelightful\FlowExprEngine\Builder\ConditionBuilder;
-use BeDelightful\FlowExprEngine\Builder\ExpressionBuilder;
-use BeDelightful\FlowExprEngine\Builder\FormBuilder;
-use BeDelightful\FlowExprEngine\Builder\ValueBuilder;
-use BeDelightful\FlowExprEngine\Builder\WidgetBuilder;
-use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
-use BeDelightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
-use BeDelightful\FlowExprEngine\Structure\Api\Api;
-use BeDelightful\FlowExprEngine\Structure\Condition\Condition;
-use BeDelightful\FlowExprEngine\Structure\Expression\Expression;
-use BeDelightful\FlowExprEngine\Structure\Expression\Value;
-use BeDelightful\FlowExprEngine\Structure\Form\Form;
-use BeDelightful\FlowExprEngine\Structure\Structure;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
-use BeDelightful\FlowExprEngine\Structure\Widget\Widget;
+use Delightful\FlowExprEngine\Builder\ApiBuilder;
+use Delightful\FlowExprEngine\Builder\Builder;
+use Delightful\FlowExprEngine\Builder\ConditionBuilder;
+use Delightful\FlowExprEngine\Builder\ExpressionBuilder;
+use Delightful\FlowExprEngine\Builder\FormBuilder;
+use Delightful\FlowExprEngine\Builder\ValueBuilder;
+use Delightful\FlowExprEngine\Builder\WidgetBuilder;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
+use Delightful\FlowExprEngine\Structure\Api\Api;
+use Delightful\FlowExprEngine\Structure\Condition\Condition;
+use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\Structure\Form\Form;
+use Delightful\FlowExprEngine\Structure\Structure;
+use Delightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Structure\Widget\Widget;
 use JsonSerializable;
 
 class Component implements JsonSerializable

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\MCP\BeDelightfulMCP;
 
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskContext;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskContext;
 
 interface BeDelightfulAgentMCPInterface
 {

@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Builder;
 
-use BeDelightful\FlowExprEngine\Structure\Expression\Expression;
-use BeDelightful\FlowExprEngine\Structure\Expression\ExpressionItem;
-use BeDelightful\FlowExprEngine\Structure\Expression\ExpressionType;
-use BeDelightful\FlowExprEngine\Structure\Expression\Value;
-use BeDelightful\FlowExprEngine\Structure\Expression\ValueType;
+use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use Delightful\FlowExprEngine\Structure\Expression\ExpressionItem;
+use Delightful\FlowExprEngine\Structure\Expression\ExpressionType;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\Structure\Expression\ValueType;
 
 class ExpressionBuilder extends Builder
 {

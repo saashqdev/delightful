@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use BeDelightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 class CreateBatchDownloadRequestDTO
 {

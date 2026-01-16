@@ -10,7 +10,7 @@ namespace App\Interfaces\Flow\Facade\Open;
 use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
 use App\Interfaces\Flow\Assembler\DelightfulFlowExecuteLogAssembler;
 use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Domain\Flow\Entity;
 
 use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
-use BeDelightful\ObjectGenerator\ObjectGeneratorFactory;
+use Delightful\ObjectGenerator\ObjectGeneratorFactory;
 
 class MockDelightfulFlowAIModelEntity
 {

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Hyperf\Listener;
 
-use BeDelightful\FlowExprEngine\Hyperf\FlowExprEngineFactory;
+use Delightful\FlowExprEngine\Hyperf\FlowExprEngineFactory;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Framework\Event\BootApplication;

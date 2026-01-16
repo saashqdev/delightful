@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\Standards\Admin;
 
-use BeDelightful\RuleEngineCore\Standards\Exception\ConfigurationException;
+use Delightful\RuleEngineCore\Standards\Exception\ConfigurationException;
 
 /**
  * @TODO: Not all enum definitions are complete yet

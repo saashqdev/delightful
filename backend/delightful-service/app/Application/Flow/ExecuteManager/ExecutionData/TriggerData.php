@@ -17,8 +17,8 @@ use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
-use BeDelightful\FlowExprEngine\Component;
-use BeDelightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 class TriggerData
 {

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Api\StandardIO;
 
-use BeDelightful\FlowExprEngine\Kernel\Utils\Functions;
+use Delightful\FlowExprEngine\Kernel\Utils\Functions;
 
 class Request
 {

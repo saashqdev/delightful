@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\Agent\Event;
 
-use BeDelightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
+use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
 
 class BeDelightfulAgentDisabledEvent
 {

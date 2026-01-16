@@ -14,7 +14,7 @@ use App\Domain\File\Repository\Persistence\CloudFileRepository;
 use App\Domain\File\Service\DefaultFileDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 use Exception;
 use Hyperf\Command\Command;
 use Psr\Container\ContainerInterface;

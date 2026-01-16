@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 /**
  * Message Queue Updated Event.

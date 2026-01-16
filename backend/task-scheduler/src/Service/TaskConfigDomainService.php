@@ -9,10 +9,10 @@ namespace Delightful\TaskScheduler\Service;
 
 use Cron\CronExpression;
 use DateTime;
-use BeDelightful\TaskScheduler\Entity\TaskSchedulerValue;
-use BeDelightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
-use BeDelightful\TaskScheduler\Entity\ValueObject\TaskType;
-use BeDelightful\TaskScheduler\Exception\TaskSchedulerParamsSchedulerException;
+use Delightful\TaskScheduler\Entity\TaskSchedulerValue;
+use Delightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
+use Delightful\TaskScheduler\Exception\TaskSchedulerParamsSchedulerException;
 use InvalidArgumentException;
 
 class TaskConfigDomainService

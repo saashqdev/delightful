@@ -16,7 +16,7 @@ use App\ErrorCode\AuthenticationErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use DateTime;
-use BeDelightful\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 
 readonly class ApiKeyProviderDomainService
 {

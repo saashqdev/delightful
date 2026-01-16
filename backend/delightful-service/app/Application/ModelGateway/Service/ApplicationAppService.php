@@ -15,7 +15,7 @@ use App\Domain\ModelGateway\Entity\ValueObject\Query\ApplicationQuery;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use BeDelightful\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
 use Qbhy\HyperfAuth\Authenticatable;
 
 class ApplicationAppService extends AbstractLLMAppService

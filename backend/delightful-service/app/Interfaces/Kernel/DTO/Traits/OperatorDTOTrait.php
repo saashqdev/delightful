@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Interfaces\Kernel\DTO\Traits;
 
 use App\Interfaces\Kernel\DTO\OperatorDTO;
-use BeDelightful\FlowExprEngine\Component;
-use BeDelightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 trait OperatorDTOTrait
 {

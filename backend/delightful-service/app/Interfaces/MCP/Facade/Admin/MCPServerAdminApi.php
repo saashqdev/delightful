@@ -12,7 +12,7 @@ use App\Domain\MCP\Entity\ValueObject\Query\MCPServerQuery;
 use App\Domain\Provider\Entity\ValueObject\Query\Page;
 use App\Interfaces\MCP\Assembler\MCPServerAssembler;
 use App\Interfaces\MCP\DTO\MCPServerDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

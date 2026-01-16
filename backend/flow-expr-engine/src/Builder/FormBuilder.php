@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Builder;
 
-use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
-use BeDelightful\FlowExprEngine\Structure\Expression\DataType;
-use BeDelightful\FlowExprEngine\Structure\Expression\Value;
-use BeDelightful\FlowExprEngine\Structure\Form\Form;
-use BeDelightful\FlowExprEngine\Structure\Form\FormType;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Structure\Expression\DataType;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\Structure\Form\Form;
+use Delightful\FlowExprEngine\Structure\Form\FormType;
 
 class FormBuilder extends Builder
 {

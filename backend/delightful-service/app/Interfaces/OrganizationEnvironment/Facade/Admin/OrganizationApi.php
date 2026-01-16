@@ -16,7 +16,7 @@ use App\Infrastructure\Util\Permission\Annotation\CheckPermission;
 use App\Interfaces\OrganizationEnvironment\Assembler\OrganizationAssembler;
 use App\Interfaces\OrganizationEnvironment\DTO\OrganizationCreatorResponseDTO;
 use App\Interfaces\OrganizationEnvironment\DTO\OrganizationListRequestDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

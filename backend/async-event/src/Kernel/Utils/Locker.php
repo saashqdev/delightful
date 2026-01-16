@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent\Kernel\Utils;
 
-use BeDelightful\AsyncEvent\Kernel\Utils\Locker\RedisLocker;
+use Delightful\AsyncEvent\Kernel\Utils\Locker\RedisLocker;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

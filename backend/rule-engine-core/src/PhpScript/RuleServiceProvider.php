@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript;
 
-use BeDelightful\RuleEngineCore\PhpScript\Admin\RuleAdministrator;
-use BeDelightful\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
-use BeDelightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
-use BeDelightful\RuleEngineCore\Standards\AbstractRuleServiceProvider;
-use BeDelightful\RuleEngineCore\Standards\Admin\RuleAdministratorInterface;
-use BeDelightful\RuleEngineCore\Standards\RuleRuntimeInterface;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleAdministrator;
+use Delightful\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
+use Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
+use Delightful\RuleEngineCore\Standards\AbstractRuleServiceProvider;
+use Delightful\RuleEngineCore\Standards\Admin\RuleAdministratorInterface;
+use Delightful\RuleEngineCore\Standards\RuleRuntimeInterface;
 use Hyperf\Di\Container;
 use Psr\Container\ContainerInterface;
 

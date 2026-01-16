@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace App\Application\Speech\Assembler;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\FileType;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
-use BeDelightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\FileType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Hyperf\Codec\Json;
 
 /**

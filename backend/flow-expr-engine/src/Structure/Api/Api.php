@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Api;
 
-use BeDelightful\FlowExprEngine\Builder\ExpressionBuilder;
-use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
-use BeDelightful\FlowExprEngine\Kernel\Utils\Functions;
-use BeDelightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRFOptions;
-use BeDelightful\FlowExprEngine\Structure\Expression\Expression;
-use BeDelightful\FlowExprEngine\Structure\Expression\ExpressionType;
-use BeDelightful\FlowExprEngine\Structure\Structure;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Builder\ExpressionBuilder;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Kernel\Utils\Functions;
+use Delightful\FlowExprEngine\Structure\Api\Safe\DefenseAgainstSSRFOptions;
+use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use Delightful\FlowExprEngine\Structure\Expression\ExpressionType;
+use Delightful\FlowExprEngine\Structure\Structure;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use FastRoute\RouteParser\Std;
 
 class Api extends Structure

@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\Agent\Repository\Persistence;
 
 use App\Infrastructure\Core\ValueObject\Page;
-use BeDelightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
-use BeDelightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
-use BeDelightful\BeDelightful\Domain\Agent\Entity\ValueObject\BeDelightfulAgentDataIsolation;
-use BeDelightful\BeDelightful\Domain\Agent\Factory\BeDelightfulAgentFactory;
-use BeDelightful\BeDelightful\Domain\Agent\Repository\Facade\BeDelightfulAgentRepositoryInterface;
-use BeDelightful\BeDelightful\Domain\Agent\Repository\Persistence\Model\BeDelightfulAgentModel;
+use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
+use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
+use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\BeDelightfulAgentDataIsolation;
+use Delightful\BeDelightful\Domain\Agent\Factory\BeDelightfulAgentFactory;
+use Delightful\BeDelightful\Domain\Agent\Repository\Facade\BeDelightfulAgentRepositoryInterface;
+use Delightful\BeDelightful\Domain\Agent\Repository\Persistence\Model\BeDelightfulAgentModel;
 
 class BeDelightfulAgentRepository extends BeDelightfulAbstractRepository implements BeDelightfulAgentRepositoryInterface
 {

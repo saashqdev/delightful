@@ -10,7 +10,7 @@ namespace App\Interfaces\Flow\Facade\Admin;
 use App\Application\Flow\Service\DelightfulFlowAIModelAppService;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Flow\Assembler\AIModel\DelightfulFlowAIModelAssembler;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

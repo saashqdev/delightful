@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Flow\Entity\ValueObject;
 
 use App\Infrastructure\Core\AbstractValueObject;
-use BeDelightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\Component;
 
 class NodeOutput extends AbstractValueObject
 {

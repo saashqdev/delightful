@@ -18,9 +18,9 @@ use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\OfficialOrganizationUtil;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use BeDelightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAppService;
-use BeDelightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
-use BeDelightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
+use Delightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAppService;
+use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
+use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
 
 class ModeAppService extends AbstractModeAppService
 {

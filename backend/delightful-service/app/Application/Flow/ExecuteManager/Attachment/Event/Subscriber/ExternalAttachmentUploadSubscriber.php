@@ -12,8 +12,8 @@ use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
 use App\Domain\Chat\Service\DelightfulChatFileDomainService;
 use App\Domain\File\Service\FileDomainService;
-use BeDelightful\AsyncEvent\Kernel\Annotation\AsyncListener;
-use BeDelightful\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 

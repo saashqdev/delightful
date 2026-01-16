@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\Options\ExecuteOption;
 
-use BeDelightful\FlowExprEngine\SdkInfo;
-use BeDelightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
-use BeDelightful\RuleEngineCore\PhpScript\RuleType;
-use BeDelightful\RuleEngineCore\Standards\Admin\InputType;
-use BeDelightful\RuleEngineCore\Standards\RuleSessionType;
+use Delightful\FlowExprEngine\SdkInfo;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use Delightful\RuleEngineCore\PhpScript\RuleType;
+use Delightful\RuleEngineCore\Standards\Admin\InputType;
+use Delightful\RuleEngineCore\Standards\RuleSessionType;
 
 class ExpressionExecuteOption extends AbstractExecuteOption
 {

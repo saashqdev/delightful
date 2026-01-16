@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
-use BeDelightful\BeDelightful\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
-use BeDelightful\BeDelightful\Interfaces\Agent\Facade\Sandbox\BeDelightfulAgentSandboxApi;
-use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\InternalApi\FileApi;
-use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenProjectApi;
-use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenTaskApi;
-use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\SandboxApi;
+use Delightful\BeDelightful\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
+use Delightful\BeDelightful\Interfaces\Agent\Facade\Sandbox\BeDelightfulAgentSandboxApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\InternalApi\FileApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenProjectApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenTaskApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\SandboxApi;
 use Hyperf\HttpServer\Router\Router;
 
 // Sandbox open interface - naming is non-standard, needs to be deprecated

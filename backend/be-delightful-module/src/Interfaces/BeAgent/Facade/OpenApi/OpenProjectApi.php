@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi;
 
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
-use BeDelightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
-use BeDelightful\BeDelightful\Interfaces\BeAgent\Facade\AbstractApi;
+use Delightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\AbstractApi;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

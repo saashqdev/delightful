@@ -11,8 +11,8 @@ use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\Structure\ModelConfig;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use Hyperf\Codec\Json;
 
 class IntentRecognitionNodeParamsConfig extends AbstractLLMNodeParamsConfig

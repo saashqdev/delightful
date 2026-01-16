@@ -18,8 +18,8 @@ use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Closure;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 #[BuiltInToolDefine]
 class AgentSendMessageToUserTool extends AbstractBuiltInTool

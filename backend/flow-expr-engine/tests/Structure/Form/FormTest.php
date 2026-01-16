@@ -1,4 +1,4 @@
-ï»¿<?php
+<?php
 
 declare(strict_types=1);
 /**
@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Form;
 
-use BeDelightful\FlowExprEngine\Builder\FormBuilder;
-use BeDelightful\FlowExprEngine\Builder\ValueBuilder;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
-use BeDelightful\FlowExprEngine\Structure\Expression\DataType;
-use BeDelightful\FlowExprEngine\Structure\Form\Form;
-use BeDelightful\FlowExprEngine\Structure\Form\FormType;
-use BeDelightful\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Builder\FormBuilder;
+use Delightful\FlowExprEngine\Builder\ValueBuilder;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Structure\Expression\DataType;
+use Delightful\FlowExprEngine\Structure\Form\Form;
+use Delightful\FlowExprEngine\Structure\Form\FormType;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal
@@ -932,10 +932,10 @@ JSON,
             ],
             'array_key' => [
                 [
-                    'array_key_child1' => 'array_key_child1_valueâ€”â€”1112',
+                    'array_key_child1' => 'array_key_child1_value——1112',
                     'array_array' => [
-                        'array_array_value_111â€”â€”1112',
-                        'array_array_value_111â€”â€”1113',
+                        'array_array_value_111——1112',
+                        'array_array_value_111——1113',
                     ],
                     'array_object' => [
                         'array_object_key1' => 'array_object_value_32',
@@ -1076,9 +1076,9 @@ JSON, true));
             ],
             'array_key' => [
                 [
-                    'array_key_child1' => 'array_key_child1_valueâ€”â€”111',
+                    'array_key_child1' => 'array_key_child1_value——111',
                     'array_array' => [
-                        'array_array_value_111â€”â€”111',
+                        'array_array_value_111——111',
                     ],
                     'array_object' => [
                         'array_object_key1' => 'array_object_value_3',
@@ -1105,9 +1105,9 @@ JSON, true));
             ],
             'array_key' => [
                 [
-                    'array_key_child1' => 'array_key_child1_valueâ€”â€”111',
+                    'array_key_child1' => 'array_key_child1_value——111',
                     'array_array' => [
-                        'array_array_value_111â€”â€”111',
+                        'array_array_value_111——111',
                     ],
                     'array_object' => [
                         'array_object_key1' => 'array_object_value_3',
@@ -1119,9 +1119,9 @@ JSON, true));
         $form = $this->builder->build($this->getFormJsonArray2());
         $result = [
             [
-                'array_key_child1' => 'array_key_child1_valueâ€”â€”111',
+                'array_key_child1' => 'array_key_child1_value——111',
                 'array_array' => [
-                    'array_array_value_111â€”â€”111',
+                    'array_array_value_111——111',
                 ],
                 'array_object' => [
                     'array_object_key1' => 'array_object_value_3',
@@ -1440,24 +1440,24 @@ JSON,
             ],
             'array_key' => [
                 [
-                    'array_key_child1' => 'array_key_child1_valueâ€”â€”111',
-                    'array_key_child2' => 'array_key_child2_valueâ€”â€”111',
+                    'array_key_child1' => 'array_key_child1_value——111',
+                    'array_key_child2' => 'array_key_child2_value——111',
                     'array_array' => [
-                        'array_array_value_111â€”â€”111',
-                        'array_array_value_222â€”â€”111',
+                        'array_array_value_111——111',
+                        'array_array_value_222——111',
                     ],
                     'array_object' => [
-                        'array_object_key1' => 'array_object_valueâ€”â€”111',
+                        'array_object_key1' => 'array_object_value——111',
                     ],
                 ], [
-                    'array_key_child1' => 'array_key_child1_valueâ€”â€”111',
-                    'array_key_child2' => 'array_key_child2_valueâ€”â€”111',
+                    'array_key_child1' => 'array_key_child1_value——111',
+                    'array_key_child2' => 'array_key_child2_value——111',
                     'array_array' => [
-                        'array_array_value_111â€”â€”111',
-                        'array_array_value_222â€”â€”111',
+                        'array_array_value_111——111',
+                        'array_array_value_222——111',
                     ],
                     'array_object' => [
-                        'array_object_key1' => 'array_object_valueâ€”â€”111',
+                        'array_object_key1' => 'array_object_value——111',
                     ],
                 ],
             ],
@@ -2519,7 +2519,7 @@ JSON, true);
                                 "const_value": [
                                     {
                                         "type": "input",
-                                        "value": "array_key_child1_valueâ€”â€”111",
+                                        "value": "array_key_child1_value——111",
                                         "name": "name",
                                         "args": null
                                     }
@@ -2567,7 +2567,7 @@ JSON, true);
                                         "const_value": [
                                             {
                                                 "type": "input",
-                                                "value": "array_array_value_111â€”â€”111",
+                                                "value": "array_array_value_111——111",
                                                 "name": "name",
                                                 "args": null
                                             }
@@ -2769,7 +2769,7 @@ JSON;
                         "const_value": [
                             {
                                 "type": "input",
-                                "value": "array_key_child1_valueâ€”â€”111",
+                                "value": "array_key_child1_value——111",
                                 "name": "name",
                                 "args": null
                             }
@@ -2817,7 +2817,7 @@ JSON;
                                 "const_value": [
                                     {
                                         "type": "input",
-                                        "value": "array_array_value_111â€”â€”111",
+                                        "value": "array_array_value_111——111",
                                         "name": "name",
                                         "args": null
                                     }

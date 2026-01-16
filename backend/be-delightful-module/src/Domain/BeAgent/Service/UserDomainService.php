@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Service\DelightfulUserDomainService;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\UserAuthorization;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\UserAuthorization;
 
 class UserDomainService
 {

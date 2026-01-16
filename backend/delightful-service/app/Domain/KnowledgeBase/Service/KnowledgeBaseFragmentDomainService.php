@@ -27,7 +27,7 @@ use App\Infrastructure\Util\Odin\TextSplitter\TokenTextSplitter;
 use App\Infrastructure\Util\Text\TextPreprocess\TextPreprocessUtil;
 use App\Infrastructure\Util\Text\TextPreprocess\ValueObject\TextPreprocessRule;
 use App\Infrastructure\Util\Time\TimeUtil;
-use BeDelightful\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Exception;
 use Hyperf\DbConnection\Annotation\Transactional;
 use Hyperf\DbConnection\Db;

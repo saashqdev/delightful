@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleLogEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleLogEntity;
 
 /**
  * Message schedule log repository interface.

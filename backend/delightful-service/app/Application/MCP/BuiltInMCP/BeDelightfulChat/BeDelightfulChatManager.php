@@ -19,8 +19,8 @@ use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
-use BeDelightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
-use BeDelightful\PhpMcp\Types\Tools\Tool;
+use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
+use Delightful\PhpMcp\Types\Tools\Tool;
 use Hyperf\Redis\RedisFactory;
 use Hyperf\Redis\RedisProxy;
 

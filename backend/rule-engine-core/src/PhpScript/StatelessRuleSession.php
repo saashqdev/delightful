@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript;
 
-use BeDelightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
-use BeDelightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
-use BeDelightful\RuleEngineCore\Standards\Admin\Properties;
-use BeDelightful\RuleEngineCore\Standards\Exception\InvalidRuleSessionException;
-use BeDelightful\RuleEngineCore\Standards\Exception\RuleExecutionSetNotFoundException;
-use BeDelightful\RuleEngineCore\Standards\ObjectFilterInterface;
-use BeDelightful\RuleEngineCore\Standards\RuleExecutionSetMetadataInterface;
-use BeDelightful\RuleEngineCore\Standards\RuleSessionType;
-use BeDelightful\RuleEngineCore\Standards\StatelessRuleSessionInterface;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
+use Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
+use Delightful\RuleEngineCore\Standards\Admin\Properties;
+use Delightful\RuleEngineCore\Standards\Exception\InvalidRuleSessionException;
+use Delightful\RuleEngineCore\Standards\Exception\RuleExecutionSetNotFoundException;
+use Delightful\RuleEngineCore\Standards\ObjectFilterInterface;
+use Delightful\RuleEngineCore\Standards\RuleExecutionSetMetadataInterface;
+use Delightful\RuleEngineCore\Standards\RuleSessionType;
+use Delightful\RuleEngineCore\Standards\StatelessRuleSessionInterface;
 
 class StatelessRuleSession implements StatelessRuleSessionInterface
 {

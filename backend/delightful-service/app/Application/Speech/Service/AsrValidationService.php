@@ -14,12 +14,12 @@ use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
-use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
-use BeDelightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
-use BeDelightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Throwable;
 
 /**

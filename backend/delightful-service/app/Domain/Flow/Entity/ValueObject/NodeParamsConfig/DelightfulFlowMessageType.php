@@ -9,8 +9,8 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig;
 
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use BeDelightful\FlowExprEngine\Component;
-use BeDelightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 enum DelightfulFlowMessageType: string
 {

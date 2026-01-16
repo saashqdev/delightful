@@ -11,7 +11,7 @@ use App\Domain\Provider\DTO\ProviderConfigModelsDTO;
 use App\Domain\Provider\DTO\ProviderModelDetailDTO;
 use App\Domain\Provider\Entity\ValueObject\ProviderType;
 use App\Interfaces\KnowledgeBase\Assembler\KnowledgeBaseProviderAssembler;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 
 #[ApiResponse(version: 'low_code')]
 class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi

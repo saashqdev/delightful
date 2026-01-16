@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\PhpScript\Repository;
 
-use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableClass;
-use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableCodeInterface;
-use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableConstant;
-use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableFunction;
-use BeDelightful\RuleEngineCore\PhpScript\Admin\ExecutableType;
-use BeDelightful\RuleEngineCore\PhpScript\Repository\DefaultExecutableCodeRepository;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableClass;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableCodeInterface;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableConstant;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableFunction;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableType;
+use Delightful\RuleEngineCore\PhpScript\Repository\DefaultExecutableCodeRepository;
 use HyperfTest\Cases\AbstractTestCase;
 use HyperfTest\Mock\ExecutableCode\TestClass;
 

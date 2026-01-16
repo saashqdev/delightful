@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceVersionEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Model\WorkspaceVersionModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceVersionEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\WorkspaceVersionModel;
 
 class WorkspaceVersionRepository implements WorkspaceVersionRepositoryInterface
 {

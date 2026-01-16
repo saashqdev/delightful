@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Admin;
 
-use BeDelightful\RuleEngineCore\PhpScript\PlaceholderProviderInterface;
-use BeDelightful\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
-use BeDelightful\RuleEngineCore\PhpScript\RuleServiceProvider;
-use BeDelightful\RuleEngineCore\Standards\Admin\Properties;
-use BeDelightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
-use BeDelightful\RuleEngineCore\Standards\Admin\RuleExecutionSetProviderInterface;
+use Delightful\RuleEngineCore\PhpScript\PlaceholderProviderInterface;
+use Delightful\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
+use Delightful\RuleEngineCore\PhpScript\RuleServiceProvider;
+use Delightful\RuleEngineCore\Standards\Admin\Properties;
+use Delightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
+use Delightful\RuleEngineCore\Standards\Admin\RuleExecutionSetProviderInterface;
 
 class StringRuleExecutionSetProvider implements RuleExecutionSetProviderInterface
 {

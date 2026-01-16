@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TaskFileVersionEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileVersionEntity;
 
 /**
  * File replaced event.

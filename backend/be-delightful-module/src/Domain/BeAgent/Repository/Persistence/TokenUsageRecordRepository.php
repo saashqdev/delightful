@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\TokenUsageRecordEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Model\TokenUsageRecordModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TokenUsageRecordEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TokenUsageRecordModel;
 
 class TokenUsageRecordRepository implements TokenUsageRecordRepositoryInterface
 {

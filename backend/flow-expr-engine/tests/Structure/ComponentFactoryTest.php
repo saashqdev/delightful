@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure;
 
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\Api\Api;
-use BeDelightful\FlowExprEngine\Structure\Condition\Condition;
-use BeDelightful\FlowExprEngine\Structure\Expression\Expression;
-use BeDelightful\FlowExprEngine\Structure\Expression\Value;
-use BeDelightful\FlowExprEngine\Structure\Form\Form;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
-use BeDelightful\FlowExprEngine\Structure\Widget\Widget;
-use BeDelightful\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\Api\Api;
+use Delightful\FlowExprEngine\Structure\Condition\Condition;
+use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\Structure\Form\Form;
+use Delightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Structure\Widget\Widget;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

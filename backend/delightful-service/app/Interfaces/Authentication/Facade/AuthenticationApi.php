@@ -10,7 +10,7 @@ namespace App\Interfaces\Authentication\Facade;
 use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Domain\Authentication\DTO\LoginCheckDTO;
 use App\Infrastructure\Core\Contract\Session\SessionInterface;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Redis\Redis;

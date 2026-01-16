@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Hyperf;
 
-use BeDelightful\FlowExprEngine\Hyperf\Listener\BootSdkListener;
+use Delightful\FlowExprEngine\Hyperf\Listener\BootSdkListener;
 use Psr\Http\Client\ClientInterface;
 
 class ConfigProvider

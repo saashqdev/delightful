@@ -9,9 +9,9 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleRepositoryInterface;
-use BeDelightful\BeDelightful\Domain\BeAgent\Repository\Model\MessageScheduleModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\MessageScheduleModel;
 use Hyperf\DbConnection\Db;
 use RuntimeException;
 

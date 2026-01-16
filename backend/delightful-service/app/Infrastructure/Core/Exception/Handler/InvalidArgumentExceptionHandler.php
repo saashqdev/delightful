@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\Exception\Handler;
 
 use App\Infrastructure\Util\SSRF\Exception\SSRFException;
-use BeDelightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
 use Throwable;
 
 class InvalidArgumentExceptionHandler extends BusinessExceptionHandler

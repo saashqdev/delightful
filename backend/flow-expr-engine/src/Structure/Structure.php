@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure;
 
-use BeDelightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
-use BeDelightful\FlowExprEngine\Structure\Expression\ExpressionItem;
+use Delightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
+use Delightful\FlowExprEngine\Structure\Expression\ExpressionItem;
 use JsonSerializable;
 
 abstract class Structure implements JsonSerializable

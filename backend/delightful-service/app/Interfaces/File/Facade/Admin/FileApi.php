@@ -10,7 +10,7 @@ namespace App\Interfaces\File\Facade\Admin;
 use App\Application\File\Service\FileAppService;
 use App\Domain\File\Constant\DefaultFileBusinessType;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Swow\Psr7\Message\UploadedFile;

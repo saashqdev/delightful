@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Builder;
 
-use BeDelightful\FlowExprEngine\Structure\Expression\Value;
-use BeDelightful\FlowExprEngine\Structure\Structure;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\Structure\Structure;
 
 class ValueBuilder extends Builder
 {

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\ImageGenerateAPI\Response;
 
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateType;
-use BeDelightful\CloudFile\Kernel\Utils\EasyFileTools;
+use Delightful\CloudFile\Kernel\Utils\EasyFileTools;
 
 class ImageGenerateResponse
 {

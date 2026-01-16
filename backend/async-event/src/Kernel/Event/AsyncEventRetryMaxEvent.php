@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent\Kernel\Event;
 
-use BeDelightful\AsyncEvent\Kernel\Persistence\Model\AsyncEventModel;
+use Delightful\AsyncEvent\Kernel\Persistence\Model\AsyncEventModel;
 
 class AsyncEventRetryMaxEvent
 {

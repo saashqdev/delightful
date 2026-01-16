@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ExternalAPI\DelightfulAIApi\Kernel;
 
-use BeDelightful\SdkBase\Kernel\Constant\RequestMethod;
-use BeDelightful\SdkBase\SdkBase;
+use Delightful\SdkBase\Kernel\Constant\RequestMethod;
+use Delightful\SdkBase\SdkBase;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;

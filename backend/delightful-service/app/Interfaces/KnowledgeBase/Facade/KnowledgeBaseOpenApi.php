@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Interfaces\KnowledgeBase\Facade;
 
 use App\Interfaces\Flow\Facade\Open\AbstractOpenApi;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 
 #[ApiResponse(version: 'low_code')]
 class KnowledgeBaseOpenApi extends AbstractOpenApi

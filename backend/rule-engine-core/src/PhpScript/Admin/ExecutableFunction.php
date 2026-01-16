@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\RuleEngineCore\PhpScript\Admin;
 
 use Closure;
-use BeDelightful\RuleEngineCore\Standards\Exception\RuleAdministrationException;
+use Delightful\RuleEngineCore\Standards\Exception\RuleAdministrationException;
 
 use function count;
 use function function_exists;

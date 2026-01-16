@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
 
 /**
  * Project fork repository interface.

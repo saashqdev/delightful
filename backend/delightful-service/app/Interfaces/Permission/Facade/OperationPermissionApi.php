@@ -13,7 +13,7 @@ use App\Infrastructure\Util\Auth\PermissionChecker;
 use App\Interfaces\Permission\Assembler\OperationPermissionAssembler;
 use App\Interfaces\Permission\DTO\ResourceAccessDTO;
 use App\Interfaces\Permission\DTO\ResourceTransferOwnerDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

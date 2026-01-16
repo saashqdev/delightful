@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Value;
 
-use BeDelightful\FlowExprEngine\Builder\ValueBuilder;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\Expression\Value;
-use BeDelightful\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Builder\ValueBuilder;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

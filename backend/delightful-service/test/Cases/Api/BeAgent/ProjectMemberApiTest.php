@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Api\BeAgent;
 
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberEntity;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberStatus;
-use BeDelightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
-use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
-use BeDelightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
 use Mockery;
 
 /**

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use BeDelightful\BeDelightful\Interfaces\BeAgent\DTO\TopicTaskMessageDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\TopicTaskMessageDTO;
 
 class RunTaskCallbackEvent extends AbstractEvent
 {

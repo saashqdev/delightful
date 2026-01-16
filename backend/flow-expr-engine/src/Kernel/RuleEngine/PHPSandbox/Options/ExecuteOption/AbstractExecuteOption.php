@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\Options\ExecuteOption;
 
-use BeDelightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
-use BeDelightful\RuleEngineCore\Standards\Admin\InputType;
-use BeDelightful\RuleEngineCore\Standards\RuleSessionType;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use Delightful\RuleEngineCore\Standards\Admin\InputType;
+use Delightful\RuleEngineCore\Standards\RuleSessionType;
 
 abstract class AbstractExecuteOption
 {

@@ -9,8 +9,8 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\V1;
 
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\AbstractSearchNodeParamsConfig;
-use BeDelightful\FlowExprEngine\ComponentFactory;
-use BeDelightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use Hyperf\Codec\Json;
 
 class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig

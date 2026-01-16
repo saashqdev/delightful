@@ -12,7 +12,7 @@ use App\Domain\Contact\Entity\ValueObject\Query\DelightfulUserSettingQuery;
 use App\Infrastructure\Core\AbstractApi;
 use App\Interfaces\Contact\Assembler\DelightfulUserSettingAssembler;
 use App\Interfaces\Contact\DTO\DelightfulUserSettingDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

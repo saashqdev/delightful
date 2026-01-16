@@ -238,7 +238,7 @@ use App\Infrastructure\Util\OrganizationEnvironment\Repository\OrganizationRepos
 use App\Infrastructure\Util\Permission\Repository\OrganizationAdminRepository;
 use App\Infrastructure\Util\Permission\Repository\RoleRepository;
 use App\Interfaces\MCP\Facade\HttpTransportHandler\ApiKeyProviderAuthenticator;
-use BeDelightful\PhpMcp\Shared\Auth\AuthenticatorInterface;
+use Delightful\PhpMcp\Shared\Auth\AuthenticatorInterface;
 use Hyperf\Config\ProviderConfig;
 use Hyperf\Crontab\Strategy\CoroutineStrategy;
 use Hyperf\Crontab\Strategy\StrategyInterface;

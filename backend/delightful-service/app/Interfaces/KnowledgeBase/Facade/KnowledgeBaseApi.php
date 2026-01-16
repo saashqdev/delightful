@@ -19,7 +19,7 @@ use App\Interfaces\KnowledgeBase\Assembler\KnowledgeBaseAssembler;
 use App\Interfaces\KnowledgeBase\Assembler\KnowledgeBaseDocumentAssembler;
 use App\Interfaces\KnowledgeBase\DTO\Request\CreateKnowledgeBaseRequestDTO;
 use App\Interfaces\KnowledgeBase\DTO\Request\UpdateKnowledgeBaseRequestDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 #[ApiResponse(version: 'low_code')]

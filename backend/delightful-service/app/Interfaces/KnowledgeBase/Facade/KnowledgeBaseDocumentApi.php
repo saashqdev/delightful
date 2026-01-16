@@ -14,7 +14,7 @@ use App\Interfaces\KnowledgeBase\Assembler\KnowledgeBaseDocumentAssembler;
 use App\Interfaces\KnowledgeBase\DTO\Request\CreateDocumentRequestDTO;
 use App\Interfaces\KnowledgeBase\DTO\Request\DocumentQueryRequestDTO;
 use App\Interfaces\KnowledgeBase\DTO\Request\UpdateDocumentRequestDTO;
-use BeDelightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 
 #[ApiResponse(version: 'low_code')]
 class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi

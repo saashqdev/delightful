@@ -9,7 +9,7 @@
   "description": "",
   "autoload": {
     "psr-4": {
-      "BeDelightful\\AsyncEvent\\": "src/"
+      "Delightful\\AsyncEvent\\": "src/"
     }
   },
   "autoload-dev": {
@@ -53,7 +53,7 @@
   },
   "extra": {
     "hyperf": {
-      "config": "BeDelightful\\AsyncEvent\\ConfigProvider"
+      "config": "Delightful\\AsyncEvent\\ConfigProvider"
     },
     "branch-alias": {
       "dev-master": "0.1-dev"

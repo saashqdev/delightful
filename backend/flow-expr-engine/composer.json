@@ -33,12 +33,12 @@
   },
   "autoload": {
     "psr-4": {
-      "BeDelightful\\FlowExprEngine\\": "src"
+      "Delightful\\FlowExprEngine\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BeDelightful\\FlowExprEngine\\Test\\": "tests/"
+      "Delightful\\FlowExprEngine\\Test\\": "tests/"
     }
   },
   "scripts": {
@@ -62,7 +62,7 @@
   ],
   "extra": {
     "hyperf": {
-      "config": "BeDelightful\\FlowExprEngine\\Hyperf\\ConfigProvider"
+      "config": "Delightful\\FlowExprEngine\\Hyperf\\ConfigProvider"
     },
     "branch-alias": {
       "dev-master": "0.1-dev"

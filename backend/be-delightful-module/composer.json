@@ -3,12 +3,12 @@
   "type": "project",
   "autoload": {
     "psr-4": {
-      "BeDelightful\\BeDelightful\\": "src/"
+      "Delightful\\BeDelightful\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BeDelightful\\BeDelightful\\Tests\\": "tests/"
+      "Delightful\\BeDelightful\\Tests\\": "tests/"
     }
   },
   "authors": [

@@ -9,12 +9,12 @@
   "description": "",
   "autoload": {
     "psr-4": {
-      "BeDelightful\\TaskScheduler\\": "src/"
+      "Delightful\\TaskScheduler\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BeDelightful\\TaskScheduler\\Test\\": "tests"
+      "Delightful\\TaskScheduler\\Test\\": "tests"
     }
   },
   "require": {

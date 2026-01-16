@@ -9,7 +9,7 @@
   "description": "",
   "autoload": {
     "psr-4": {
-      "BeDelightful\\RuleEngineCore\\": "src/"
+      "Delightful\\RuleEngineCore\\": "src/"
     }
   },
   "autoload-dev": {

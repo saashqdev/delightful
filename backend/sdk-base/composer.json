@@ -26,12 +26,12 @@
   },
   "autoload": {
     "psr-4": {
-      "BeDelightful\\SdkBase\\": "src"
+      "Delightful\\SdkBase\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BeDelightful\\SdkBase\\Tests\\": "tests"
+      "Delightful\\SdkBase\\Tests\\": "tests"
     }
   },
   "scripts": {

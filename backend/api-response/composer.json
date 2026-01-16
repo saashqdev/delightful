@@ -4,7 +4,7 @@
   "license": "Apache License 2.0",
   "autoload": {
     "psr-4": {
-      "BeDelightful\\ApiResponse\\": "src/"
+      "Delightful\\ApiResponse\\": "src/"
     }
   },
   "require": {

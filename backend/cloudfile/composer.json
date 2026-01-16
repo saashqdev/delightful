@@ -43,12 +43,12 @@
   },
   "autoload": {
     "psr-4": {
-      "BeDelightful\\CloudFile\\": "src"
+      "Delightful\\CloudFile\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "BeDelightful\\CloudFile\\Tests\\": "tests"
+      "Delightful\\CloudFile\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -64,7 +64,7 @@
   ],
   "extra": {
     "hyperf": {
-      "config": "BeDelightful\\CloudFile\\Hyperf\\ConfigProvider"
+      "config": "Delightful\\CloudFile\\Hyperf\\ConfigProvider"
     },
     "branch-alias": {
       "dev-master": "0.1-dev"

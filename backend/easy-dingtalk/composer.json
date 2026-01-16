@@ -29,7 +29,7 @@
   },
   "autoload": {
     "psr-4": {
-      "BeDelightful\\EasyDingTalk\\": "src"
+      "Delightful\\EasyDingTalk\\": "src"
     },
     "files": [
       "src/Kernel/Utils/Functions.php"
@@ -37,7 +37,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "BeDelightful\\EasyDingTalk\\Test\\": "tests/"
+      "Delightful\\EasyDingTalk\\Test\\": "tests/"
     }
   },
   "repositories": [

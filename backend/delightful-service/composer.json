@@ -169,24 +169,18 @@
     },
     {
       "type": "path",
-<<<<<<< HEAD
       "url": "../php-mcp"
     },
     {
       "type": "path",
-=======
->>>>>>> 160b1ba40366b98367d0da6fabf66ec539ec2cd5
       "url": "../rule-engine-core"
     },
     {
       "type": "path",
-<<<<<<< HEAD
       "url": "../sandbox"
     },
     {
       "type": "path",
-=======
->>>>>>> 160b1ba40366b98367d0da6fabf66ec539ec2cd5
       "url": "../sdk-base"
     },
     {
@@ -202,8 +196,4 @@
       "url": "../tiptap"
     }
   ]
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 160b1ba40366b98367d0da6fabf66ec539ec2cd5

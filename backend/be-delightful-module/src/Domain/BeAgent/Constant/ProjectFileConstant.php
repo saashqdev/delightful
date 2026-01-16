@@ -1,31 +1,24 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
 
-namespace Delightful\BeDelightful\Domain\BeAgent\Constant;
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
 
-class ProjectFileConstant
+namespace Delightful\BeDelightful\Domain\SuperAgent\Constant;
+
+class ProjectFileConstant 
 {
-    /**
-     * Project configuration file name.
-     */
-    public const PROJECT_CONFIG_FILENAME = 'delightful.project.js';
-
-    /**
-     * Slide index file name.
-     */
-    public const SLIDE_INDEX_FILENAME = 'index.html';
-
-    /**
-     * Metadata type for slide.
-     */
-    public const METADATA_TYPE_SLIDE = 'slide';
-
-    public static function isSetMetadataFile(string $fileName): bool
-    {
-        return in_array($fileName, [self::PROJECT_CONFIG_FILENAME, self::SLIDE_INDEX_FILENAME]);
-    }
+ /** * Project configuration file name. */ 
+    public 
+    const PROJECT_CONFIG_FILENAME = 'magic.project.js'; /** * Slide index file name. */ 
+    public 
+    const SLIDE_INDEX_FILENAME = 'index.html'; /** * Metadata type for slide. */ 
+    public 
+    const METADATA_TYPE_SLIDE = 'slide'; 
+    public 
+    static function isSetMetadataFile(string $fileName): bool 
+{
+ return in_array($fileName, [self::PROJECT_CONFIG_FILENAME, self::SLIDE_INDEX_FILENAME]); 
 }
+ 
+}
+ 

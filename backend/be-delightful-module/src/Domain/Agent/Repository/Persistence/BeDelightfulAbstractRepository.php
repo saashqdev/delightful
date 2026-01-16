@@ -1,15 +1,15 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
 
 namespace Delightful\BeDelightful\Domain\Agent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 
-abstract class BeDelightfulAbstractRepository extends AbstractRepository
+    abstract class BeDelightfulAbstractRepository extends AbstractRepository 
 {
-    protected bool $filterOrganizationCode = true;
+ 
+    protected bool $filterOrganizationCode = true; 
 }
+ 

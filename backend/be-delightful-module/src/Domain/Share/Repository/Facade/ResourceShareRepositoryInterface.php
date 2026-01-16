@@ -1,1 +1,24 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\Share\Repository\Facade; use Delightful\BeDelightful\Domain\Share\Entity\ResourceShareEntity; /** * Resourcesharerepository interface.*/ interface ResourceShareRepositoryInterface { /** * throughIDgetshare. * * @param int $shareId share ID * @return Null|ResourceShareEntity ResourceshareEntity*/ public function getShareById(int $shareId): ?ResourceShareEntity; /** * through sharecodegetshare. * * @param string $shareCode sharecode * @return Null|ResourceShareEntity ResourceshareEntity*/ public function getShareByCode(string $shareCode): ?ResourceShareEntity; public function getShareByResourceId(string $resourceId): ?ResourceShareEntity; /** * SaveshareEntity. * * @param ResourceShareEntity $shareEntity ResourceshareEntity * @return ResourceShareEntity Save after ResourceshareEntity*/ public function save(ResourceShareEntity $shareEntity): ResourceShareEntity; /** * Deleteshare. * * @param int $shareId share ID * @param bool $forceDelete whetherForceDelete (PhysicalDelete), defaultfalseFor softDelete * @return bool whetherSuccess*/ public function delete(int $shareId, bool $forceDelete = false): bool; /** * Addshareview count. * * @param string $shareCode sharecode * @return bool whetherSuccess*/ public function incrementViewCount(string $shareCode): bool; /** * PaginationQuery. * * @param array $conditions QueryCondition * @param int $page Page number * @param int $pageSize Per pageQuantity * @return array PaginationResult*/ public function paginate(array $conditions, int $page = 1, int $pageSize = 20): array; public function getShareByResource(string $userId, string $resourceId, int $resourceType, bool $withTrashed = true): ?ResourceShareEntity; /** * ChecksharecodewhetherAlready existsin. * * @param string $shareCode sharecode * @return bool whetherAlready existsin*/ public function isShareCodeExists(string $shareCode): bool; } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\Share\Repository\Facade;
+
+use Delightful\BeDelightful\Domain\Share\Entity\ResourceShareEntity;
+/** * ResourceShareRepository interface. */
+
+interface ResourceShareRepositoryInterface 
+{
+ /** * ThroughIDGetShare. * * @param int $shareId ShareID * @return null|ResourceShareEntity ResourceShare */ 
+    public function getShareById(int $shareId): ?ResourceShareEntity; /** * ThroughShareGetShare. * * @param string $shareCode Share * @return null|ResourceShareEntity ResourceShare */ 
+    public function getShareByCode(string $shareCode): ?ResourceShareEntity; 
+    public function getShareByResourceId(string $resourceId): ?ResourceShareEntity; /** * SaveShare. * * @param ResourceShareEntity $shareEntity ResourceShare * @return ResourceShareEntity SaveResourceShare */ 
+    public function save(ResourceShareEntity $shareEntity): ResourceShareEntity; /** * delete Share. * * @param int $shareId ShareID * @param bool $forcedelete whether Forcedelete delete Defaultfalseas delete * @return bool whether Success */ 
+    public function delete(int $shareId, bool $forcedelete = false): bool; /** * IncreaseShareView. * * @param string $shareCode Share * @return bool whether Success */ 
+    public function incrementViewCount(string $shareCode): bool; /** * Pagingquery . * * @param array $conditions query Condition * @param int $page Page number * @param int $pageSize Per pageQuantity * @return array PagingResult */ 
+    public function paginate(array $conditions, int $page = 1, int $pageSize = 20): array; 
+    public function getShareByResource(string $userId, string $resourceId, int $resourceType, bool $withTrashed = true): ?ResourceShareEntity; /** * check Sharewhether Already exists. * * @param string $shareCode Share * @return bool whether Already exists */ 
+    public function isShareCodeExists(string $shareCode): bool; 
+}
+ 

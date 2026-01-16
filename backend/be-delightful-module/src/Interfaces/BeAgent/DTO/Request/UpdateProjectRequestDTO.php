@@ -1,112 +1,62 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
 
-namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
 
 use App\Infrastructure\Core\AbstractRequestDTO;
+/** * Update project request DTO * Used to receive request parameters for updating project. */
 
-/**
- * Update project request DTO
- * Used to receive request parameters for updating project.
- */
-class UpdateProjectRequestDTO extends AbstractRequestDTO
+class UpdateProjectRequestDTO extends AbstractRequestDTO 
 {
-    /**
-     * Project ID.
-     */
-    public string $id = '';
-
-    /**
-     * Workspace ID.
-     */
-    public ?string $workspaceId = null;
-
-    /**
-     * Project name.
-     */
-    public ?string $projectName = null;
-
-    /**
-     * Project description.
-     */
-    public ?string $projectDescription = null;
-
-    public ?bool $isCollaborationEnabled = null;
-
-    public ?string $defaultJoinPermission = null;
-
-    /**
-     * Get project ID.
-     */
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get workspace ID.
-     */
-    public function getWorkspaceId(): ?int
-    {
-        if (is_null($this->workspaceId)) {
-            return null;
-        }
-        return (int) $this->workspaceId;
-    }
-
-    /**
-     * Get project name.
-     */
-    public function getProjectName(): ?string
-    {
-        return $this->projectName;
-    }
-
-    /**
-     * Get project description.
-     */
-    public function getProjectDescription(): ?string
-    {
-        return $this->projectDescription;
-    }
-
-    public function getIsCollaborationEnabled(): ?bool
-    {
-        return $this->isCollaborationEnabled;
-    }
-
-    public function getDefaultJoinPermission(): ?string
-    {
-        return $this->defaultJoinPermission;
-    }
-
-    /**
-     * Get validation rules.
-     */
-    protected static function getHyperfValidationRules(): array
-    {
-        return [
-            'workspace_id' => 'nullable|integer',
-            'project_name' => 'nullable|string|max:100',
-            'default_join_permission' => 'nullable|string|max:100',
-            'is_collaboration_enabled' => 'nullable|boolean',
-            'project_description' => 'nullable|string|max:500',
-        ];
-    }
-
-    /**
-     * Get custom error messages for validation failures.
-     */
-    protected static function getHyperfValidationMessage(): array
-    {
-        return [
-            'workspace_id.integer' => 'Workspace ID must be an integer',
-            'project_name.max' => 'Project name cannot exceed 100 characters',
-            'project_description.max' => 'Project description cannot exceed 500 characters',
-        ];
-    }
+ /** * Project ID. */ 
+    public string $id = ''; /** * Workspace ID. */ public ?string $workspaceId = null; /** * Project name. */ public ?string $projectName = null; /** * Project description. */ public ?string $projectDescription = null; public ?bool $isCollaborationEnabled = null; public ?string $defaultJoinpermission = null; /** * Get project ID. */ 
+    public function getId(): ?string 
+{
+ return $this->id; 
 }
+ /** * Get workspace ID. */ 
+    public function getWorkspaceId(): ?int 
+{
+ if (is_null($this->workspaceId)) 
+{
+ return null; 
+}
+ return (int) $this->workspaceId; 
+}
+ /** * Get project name. */ 
+    public function getProjectName(): ?string 
+{
+ return $this->projectName; 
+}
+ /** * Get project description. */ 
+    public function getProjectDescription(): ?string 
+{
+ return $this->projectDescription; 
+}
+ 
+    public function getIsCollaborationEnabled(): ?bool 
+{
+ return $this->isCollaborationEnabled; 
+}
+ 
+    public function getDefaultJoinpermission (): ?string 
+{
+ return $this->defaultJoinpermission ; 
+}
+ /** * Get validation rules. */ 
+    protected 
+    static function getHyperfValidate Rules(): array 
+{
+ return [ 'workspace_id' => 'nullable|integer', 'project_name' => 'nullable|string|max:100', 'default_join_permission' => 'nullable|string|max:100', 'is_collaboration_enabled' => 'nullable|boolean', 'project_description' => 'nullable|string|max:500', ]; 
+}
+ /** * Get custom error messages for validation failures. */ 
+    protected 
+    static function getHyperfValidate Message(): array 
+{
+ return [ 'workspace_id.integer' => 'Workspace ID must be an integer', 'project_name.max' => 'Project name cannot exceed 100 characters', 'project_description.max' => 'Project description cannot exceed 500 characters', ]; 
+}
+ 
+}
+ 

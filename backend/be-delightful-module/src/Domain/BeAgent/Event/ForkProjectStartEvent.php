@@ -1,40 +1,34 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
 
-namespace Delightful\BeDelightful\Domain\BeAgent\Event;
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
 
-class ForkProjectStartEvent extends AbstractEvent
+namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+
+class ForkProjectStartEvent extends AbstractEvent 
 {
-    public function __construct(
-        private string $organizationCode,
-        private string $userId
-    ) {
-        // Call parent constructor to generate snowflake ID
-        parent::__construct();
-    }
-
-    public function getOrganizationCode(): string
-    {
-        return $this->organizationCode;
-    }
-
-    public function getUserId(): string
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Convert the event object to array format.
-     */
-    public function toArray(): array
-    {
-        return [
-            'organizationCode' => $this->organizationCode,
-            'userId' => $this->userId,
-        ];
-    }
+ 
+    public function __construct( 
+    private string $organizationCode, 
+    private string $userId ) 
+{
+ // Call parent constructor to generate snowflake ID parent::__construct(); 
 }
+ 
+    public function getOrganizationCode(): string 
+{
+ return $this->organizationCode; 
+}
+ 
+    public function getuser Id(): string 
+{
+ return $this->userId; 
+}
+ /** * Convert the event object to array format. */ 
+    public function toArray(): array 
+{
+ return [ 'organizationCode' => $this->organizationCode, 'userId' => $this->userId, ]; 
+}
+ 
+}
+ 

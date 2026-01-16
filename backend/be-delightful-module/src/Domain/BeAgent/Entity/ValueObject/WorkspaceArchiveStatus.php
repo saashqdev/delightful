@@ -1,1 +1,29 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject; /** * WorkspaceArchiveStatusValueObject*/ enum WorkspaceArchiveStatus: int { /** *  un Archive.*/ case NotArchived = 0; /** *  already Archive.*/ case Archived = 1; /** * getArchiveStatusDescription.*/ public function getDescription(): string { return match ($this) { self::NotArchived => ' un Archive', self::Archived => 'AlreadyArchive', }; } /** * getAllArchiveStatuslist. * * @return array<int, string> StatusValueandDescriptionMapping*/ public static function getList(): array { return [ self::NotArchived->value => self::NotArchived->getDescription(), self::Archived->value => self::Archived->getDescription(), ]; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+
+/** * workspace StatusValueObject */
+
+enum WorkspaceArchiveStatus: int 
+{
+ /** * not archived . */ case NotArchived = 0; /** * Archived. */ case Archived = 1; /** * GetStatusDescription. */ 
+    public function getDescription(): string 
+{
+ return match ($this) 
+{
+ self::NotArchived => 'not archived ', self::Archived => 'Archived', 
+}
+; 
+}
+ /** * GetAllStatuslist . * * @return array<int, string> StatusValueDescriptionMap */ 
+    public 
+    static function getlist (): array 
+{
+ return [ self::NotArchived->value => self::NotArchived->getDescription(), self::Archived->value => self::Archived->getDescription(), ]; 
+}
+ 
+}
+ 

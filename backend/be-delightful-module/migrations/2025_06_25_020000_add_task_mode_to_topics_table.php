@@ -1,1 +1,11 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ use Hyperf\Database\Migrations\Migration; use Hyperf\Database\Schema\Blueprint; use Hyperf\Database\Schema\Schema; return new class extends Migration { /** * Run migrations. */ public function up(): void { // as delightful_super_agent_topics tableAdd topic_mode field Schema::table('delightful_super_agent_topics', function (Blueprint $table) { $table->string('topic_mode', 50)->default('general')->comment('Topicmode: general-Generalformode, ppt-PPTmode, data_analysis-dataAnalysismode, report-Research reportmode, meeting-Meetingmode, summary-Summarymode, be_delightful-Be Delightfulmode')->after('current_task_status'); }); echo 'ForTopicTableAddTopicModeFieldComplete' . PHP_EOL; } /** * Reverse migrations. */ public function down(): void { // Delete delightful_super_agent_topics table's topic_mode field Schema::table('delightful_super_agent_topics', function (Blueprint $table) { $table->dropColumn('topic_mode'); }); echo 'DeleteTopicTable's TopicModeFieldComplete' . PHP_EOL; } }; 
+<?php 
+declare(strict_types=1);
+ /** * Copyright (c) Be Delightful , Distributed under the MIT software license */
+ use Hyperf\Database\Migrations\Migration;
+ use Hyperf\Database\Schema\Blueprint;
+ use Hyperf\Database\Schema\Schema;
+ return new class extends Migration  {
+ /** * Run migrations. */
+ public function up(): void  {
+ // as delightful_super_agent_topics tableAdd topic_mode field Schema::table('delightful_super_agent_topics', function (Blueprint $table) { $table->string('topic_mode', 50)->default('general')->comment('Topicmode: general-Generalformode, ppt-PPTmode, data_analysis-dataAnalysismode, report-Research reportmode, meeting-Meetingmode, summary-Summarymode, be_delightful-Be Delightfulmode')->after('current_task_status'); }); echo 'ForTopicTableAddTopicModeFieldComplete' . PHP_EOL; } /** * Reverse migrations. */ public function down(): void { // Delete delightful_super_agent_topics table's topic_mode field Schema::table('delightful_super_agent_topics', function (Blueprint $table) { $table->dropColumn('topic_mode'); }); echo 'DeleteTopicTable's TopicModeFieldComplete' . PHP_EOL; } }; 
+

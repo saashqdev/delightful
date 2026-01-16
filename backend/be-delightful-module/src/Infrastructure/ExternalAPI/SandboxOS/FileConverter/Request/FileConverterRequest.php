@@ -1,1 +1,100 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Request; use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ConvertType; use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract\RequestInterface; /** * FileConvertRequest*/ class FileConverterRequest implements RequestInterface { private array $fileKeys = []; private array $options = []; private string $outputFormat = 'zip'; private bool $isDebug = false; private string $convertType; private string $taskKey = ''; private string $sandboxId = ''; private array $stsTemporaryCredential = []; private string $userId = ''; private string $organizationCode = ''; private string $topicId = ''; public function __construct(string $sandboxId, string $convertType, array $fileKeys, array $stsTemporaryCredential = [], array $options = [], string $taskKey = '', string $userId = '', string $organizationCode = '', string $topicId = '') { $this->sandboxId = $sandboxId; $this->convertType = $convertType; $this->fileKeys = $fileKeys; $this->stsTemporaryCredential = $stsTemporaryCredential; $this->taskKey = $taskKey; $this->userId = $userId; $this->organizationCode = $organizationCode; $this->topicId = $topicId; if (isset($options['is_debug'])) { $this->isDebug = (bool) $options['is_debug']; unset($options['is_debug']); } $defaultOptions = match ($convertType) { ConvertType::PDF->value => [ 'format' => 'A4', 'orientation' => 'portrait', 'wait_for_load' => 5000, 'print_background' => true, 'margin_top' => '1cm', 'margin_bottom' => '1cm', 'margin_left' => '1cm', 'margin_right' => '1cm', 'scale' => 0.8, 'display_header_footer' => false, ], ConvertType::PPT->value => [ // Add PPT default options here ], ConvertType::IMAGE->value => [ // Add Image default options here ], default => [], }; $this->options = array_merge($defaultOptions, $options); } public function getSandboxId(): string { return $this->sandboxId; } public function getConvertType(): string { return $this->convertType; } public function getFileKeys(): array { return $this->fileKeys; } public function getStsTemporaryCredential(): array { return $this->stsTemporaryCredential; } public function getUserId(): string { return $this->userId; } public function getOrganizationCode(): string { return $this->organizationCode; } public function getTopicId(): string { return $this->topicId; } public function toArray(): array { $result = [ 'file_keys' => $this->fileKeys, 'output_format' => $this->outputFormat, 'is_debug' => $this->isDebug, 'convert_type' => $this->convertType, 'task_key' => $this->taskKey, ]; // adduserRelatedfield (Only whenfieldNot beEmpty time onlycontaining) if (! empty($this->userId)) { $result['user_id'] = $this->userId; } if (! empty($this->organizationCode)) { $result['organization_code'] = $this->organizationCode; } if (! empty($this->topicId)) { $result['topic_id'] = $this->topicId; } // Only when options Not beEmpty time onlycontainingthisfield if (! empty($this->options)) { $result['options'] = $this->options; } // Only when stsTemporaryCredential Not beEmpty time onlycontainingthisfield if (! empty($this->stsTemporaryCredential)) { $result['sts_temporary_credential'] = $this->stsTemporaryCredential; } return $result; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Request;
+
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ConvertType;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract\RequestInterface;
+/** * FileConvertRequest */
+
+class FileConverterRequest implements RequestInterface 
+{
+ 
+    private array $fileKeys = []; 
+    private array $options = []; 
+    private string $outputFormat = 'zip'; 
+    private bool $isDebug = false; 
+    private string $convertType; 
+    private string $taskKey = ''; 
+    private string $sandboxId = ''; 
+    private array $ststemporary Credential = []; 
+    private string $userId = ''; 
+    private string $organizationCode = ''; 
+    private string $topicId = ''; 
+    public function __construct(string $sandboxId, string $convertType, array $fileKeys, array $ststemporary Credential = [], array $options = [], string $taskKey = '', string $userId = '', string $organizationCode = '', string $topicId = '') 
+{
+ $this->sandboxId = $sandboxId; $this->convertType = $convertType; $this->fileKeys = $fileKeys; $this->ststemporary Credential = $ststemporary Credential; $this->taskKey = $taskKey; $this->userId = $userId; $this->organizationCode = $organizationCode; $this->topicId = $topicId; if (isset($options['is_debug'])) 
+{
+ $this->isDebug = (bool) $options['is_debug']; unset($options['is_debug']); 
+}
+ $defaultOptions = match ($convertType) 
+{
+ ConvertType::PDF->value => [ 'format' => 'A4', 'orientation' => 'portrait', 'wait_for_load' => 5000, 'print_background' => true, 'margin_top' => '1cm', 'margin_bottom' => '1cm', 'margin_left' => '1cm', 'margin_right' => '1cm', 'scale' => 0.8, 'display_header_footer' => false, ], ConvertType::PPT->value => [ // Add PPT default options here ], ConvertType::IMAGE->value => [ // Add Image default options here ], default => [], 
+}
+; $this->options = array_merge($defaultOptions, $options); 
+}
+ 
+    public function getSandboxId(): string 
+{
+ return $this->sandboxId; 
+}
+ 
+    public function getConvertType(): string 
+{
+ return $this->convertType; 
+}
+ 
+    public function getFileKeys(): array 
+{
+ return $this->fileKeys; 
+}
+ 
+    public function getStstemporary Credential(): array 
+{
+ return $this->ststemporary Credential; 
+}
+ 
+    public function getuser Id(): string 
+{
+ return $this->userId; 
+}
+ 
+    public function getOrganizationCode(): string 
+{
+ return $this->organizationCode; 
+}
+ 
+    public function getTopicId(): string 
+{
+ return $this->topicId; 
+}
+ 
+    public function toArray(): array 
+{
+ $result = [ 'file_keys' => $this->fileKeys, 'output_format' => $this->outputFormat, 'is_debug' => $this->isDebug, 'convert_type' => $this->convertType, 'task_key' => $this->taskKey, ]; // Adduser related Fieldonly WhenFieldEmptyincluding  if (! empty($this->userId)) 
+{
+ $result['user_id'] = $this->userId; 
+}
+ if (! empty($this->organizationCode)) 
+{
+ $result['organization_code'] = $this->organizationCode; 
+}
+ if (! empty($this->topicId)) 
+{
+ $result['topic_id'] = $this->topicId; 
+}
+ // only When options Emptyincluding Field if (! empty($this->options)) 
+{
+ $result['options'] = $this->options; 
+}
+ // only When ststemporary Credential Emptyincluding Field if (! empty($this->ststemporary Credential)) 
+{
+ $result['sts_temporary_credential'] = $this->ststemporary Credential; 
+}
+ return $result; 
+}
+ 
+}
+ 

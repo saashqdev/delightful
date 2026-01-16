@@ -1,1 +1,35 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\Agent\FormRequest; use Hyperf\Validation\Request\FormRequest; use function Hyperf\Translation\trans; class BeDelightfulAgentQueryFormRequest extends FormRequest { /** * ValidateRule.*/ public function rules(): array { return [ // PaginationParameter 'page' => 'Nullable|integer|min:1', 'page_size' => 'Nullable|integer|min:1|max:1000', // SearchCondition -  only ReserveBeDelightfulAgentQueryActually exists ininfield 'name' => 'Nullable|string|max:80', 'enabled' => 'Nullable|boolean', 'codes' => 'Nullable|array', 'codes.*' => 'string|max:50', 'creator_id' => 'Nullable|string|max:40', ]; } /** * fieldAlias.*/ public function attributes(): array { return [ 'page' => trans('be_delightful.agent.fields.page'), 'page_size' => trans('be_delightful.agent.fields.page_size'), 'name' => trans('be_delightful.agent.fields.name'), 'enabled' => trans('be_delightful.agent.fields.enabled'), 'codes' => trans('be_delightful.agent.fields.codes'), 'codes.*' => trans('be_delightful.agent.fields.code'), 'creator_id' => trans('be_delightful.agent.fields.creator_id'), ]; } /** * CustomValidateErrorMessage.*/ public function messages(): array { return [ // PaginationParameterValidate 'page.integer' => trans('be_delightful.agent.validation.page_integer'), 'page.min' => trans('be_delightful.agent.validation.page_min'), 'page_size.integer' => trans('be_delightful.agent.validation.page_size_integer'), 'page_size.min' => trans('be_delightful.agent.validation.page_size_min'), 'page_size.max' => trans('be_delightful.agent.validation.page_size_max'), // SearchConditionValidate 'name.string' => trans('be_delightful.agent.validation.name_string'), 'name.max' => trans('be_delightful.agent.validation.name_max'), 'enabled.boolean' => trans('be_delightful.agent.validation.enabled_boolean'), 'codes.array' => trans('be_delightful.agent.validation.codes_array'), 'codes.*.string' => trans('be_delightful.agent.validation.code_string'), 'codes.*.max' => trans('be_delightful.agent.validation.code_max'), 'creator_id.string' => trans('be_delightful.agent.validation.creator_id_string'), 'creator_id.max' => trans('be_delightful.agent.validation.creator_id_max'), ]; } /** * authorizationValidate.*/ public function authorize(): bool { return true; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\Agent\FormRequest;
+
+use Hyperf\Validate \Request\FormRequest;
+use function Hyperf\Translation\trans;
+
+class BeDelightfulAgentquery FormRequest extends FormRequest 
+{
+ /** * Validate Rule. */ 
+    public function rules(): array 
+{
+ return [ // PagingParameter 'page' => 'nullable|integer|min:1', 'page_size' => 'nullable|integer|min:1|max:1000', // SearchCondition - BeDelightfulAgentquery in ActualExistField 'name' => 'nullable|string|max:80', 'enabled' => 'nullable|boolean', 'codes' => 'nullable|array', 'codes.*' => 'string|max:50', 'creator_id' => 'nullable|string|max:40', ]; 
+}
+ /** * Field. */ 
+    public function attributes(): array 
+{
+ return [ 'page' => trans('super_magic.agent.fields.page'), 'page_size' => trans('super_magic.agent.fields.page_size'), 'name' => trans('super_magic.agent.fields.name'), 'enabled' => trans('super_magic.agent.fields.enabled'), 'codes' => trans('super_magic.agent.fields.codes'), 'codes.*' => trans('super_magic.agent.fields.code'), 'creator_id' => trans('super_magic.agent.fields.creator_id'), ]; 
+}
+ /** * CustomValidate errorMessage. */ 
+    public function messages(): array 
+{
+ return [ // PagingParameterValidate 'page.integer' => trans('super_magic.agent.validation.page_integer'), 'page.min' => trans('super_magic.agent.validation.page_min'), 'page_size.integer' => trans('super_magic.agent.validation.page_size_integer'), 'page_size.min' => trans('super_magic.agent.validation.page_size_min'), 'page_size.max' => trans('super_magic.agent.validation.page_size_max'), // SearchConditionValidate 'name.string' => trans('super_magic.agent.validation.name_string'), 'name.max' => trans('super_magic.agent.validation.name_max'), 'enabled.boolean' => trans('super_magic.agent.validation.enabled_boolean'), 'codes.array' => trans('super_magic.agent.validation.codes_array'), 'codes.*.string' => trans('super_magic.agent.validation.code_string'), 'codes.*.max' => trans('super_magic.agent.validation.code_max'), 'creator_id.string' => trans('super_magic.agent.validation.creator_id_string'), 'creator_id.max' => trans('super_magic.agent.validation.creator_id_max'), ]; 
+}
+ /** * AuthorizeValidate . */ 
+    public function authorize(): bool 
+{
+ return true; 
+}
+ 
+}
+ 

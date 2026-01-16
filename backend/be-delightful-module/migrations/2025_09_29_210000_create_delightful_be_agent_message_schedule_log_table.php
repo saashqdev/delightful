@@ -1,1 +1,12 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ use Hyperf\Database\Migrations\Migration; use Hyperf\Database\Schema\Blueprint; use Hyperf\Database\Schema\Schema; return new class extends Migration { /** * Run the migrations. */ public function up(): void { Schema::create('delightful_super_agent_message_schedule_log', function (Blueprint $table) { $table->bigInteger('id')->primary()->comment('primary keyID (SnowflakeID)'); $table->bigInteger('message_schedule_id')->comment('related toconnect'sfixedwhentask ID'); $table->bigInteger('workspace_id')->unsigned()->comment('workspace ID'); $table->bigInteger('project_id')->unsigned()->comment('project ID'); $table->bigInteger('topic_id')->unsigned()->comment('topic ID'); $table->string('task_name', 255)->comment('Taskname'); $table->tinyInteger('status')->comment('Executestatus: 1-success, 2-failed, 3-Runin'); $table->dateTime('executed_at')->comment('execution time'); $table->string('error_message', 500)->Nullable()->comment('error message'); $table->timestamps(); // add index $table->index(['message_schedule_id'], 'idx_message_schedule_id'); }); } /** * Reverse the migrations. */ public function down(): void { } }; 
+<?php 
+declare(strict_types=1);
+ /** * Copyright (c) Be Delightful , Distributed under the MIT software license */
+ use Hyperf\Database\Migrations\Migration;
+ use Hyperf\Database\Schema\Blueprint;
+ use Hyperf\Database\Schema\Schema;
+ return new class extends Migration  {
+ /** * Run the migrations. */
+ public function up(): void  {
+ Schema::create('delightful_super_agent_message_schedule_log', function (Blueprint $table)  {
+ $table->bigInteger('id')->primary()->comment('primary keyID (SnowflakeID)');
+ $table->bigInteger('message_schedule_id')->comment('related toconnect'sfixedwhentask ID'); $table->bigInteger('workspace_id')->unsigned()->comment('workspace ID'); $table->bigInteger('project_id')->unsigned()->comment('project ID'); $table->bigInteger('topic_id')->unsigned()->comment('topic ID'); $table->string('task_name', 255)->comment('Taskname'); $table->tinyInteger('status')->comment('Executestatus: 1-success, 2-failed, 3-Runin'); $table->dateTime('executed_at')->comment('execution time'); $table->string('error_message', 500)->Nullable()->comment('error message'); $table->timestamps(); // add index $table->index(['message_schedule_id'], 'idx_message_schedule_id'); }); } /** * Reverse the migrations. */ public function down(): void { } }; 

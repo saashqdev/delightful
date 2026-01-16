@@ -1,1 +1,44 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response; class CheckBatchDownloadResponseDTO { /** * @var string Process/HandleStatus (ready|processing|failed)*/ protected string $status; /** * @var Null|string DownloadURL (StatusForready time Provide)*/ protected ?string $downloadUrl; /** * @var Null|int Process/Handle enter degree (0-100)*/ protected ?int $progress; /** * @var string Descriptioninformation*/ protected string $message; /** * ConstructFunction.*/ public function __construct( string $status, ?string $downloadUrl = Null, ?int $progress = Null, string $message = '' ) { $this->status = $status; $this->downloadUrl = $downloadUrl; $this->progress = $progress; $this->message = $message; } /** * Convert toArray.*/ public function toArray(): array { return [ 'status' => $this->status, 'download_url' => $this->downloadUrl, 'progress' => $this->progress, 'message' => $this->message, ]; } /** * getProcess/HandleStatus.*/ public function getStatus(): string { return $this->status; } /** * getDownloadURL.*/ public function getDownloadUrl(): ?string { return $this->downloadUrl; } /** * getProcess/Handle enter degree.*/ public function getProgress(): ?int { return $this->progress; } /** * getDescriptioninformation.*/ public function getMessage(): string { return $this->message; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+
+class check BatchDownloadResponseDTO 
+{
+ /** * @var string process Status (ready|processing|failed) */ 
+    protected string $status; /** * @var null|string DownloadURLStatusas ready */ protected ?string $downloadUrl; /** * @var null|int process 0-100 */ protected ?int $progress; /** * @var string Descriptioninfo */ 
+    protected string $message; /** * Function. */ 
+    public function __construct( string $status, ?string $downloadUrl = null, ?int $progress = null, string $message = '' ) 
+{
+ $this->status = $status; $this->downloadUrl = $downloadUrl; $this->progress = $progress; $this->message = $message; 
+}
+ /** * Convert toArray. */ 
+    public function toArray(): array 
+{
+ return [ 'status' => $this->status, 'download_url' => $this->downloadUrl, 'progress' => $this->progress, 'message' => $this->message, ]; 
+}
+ /** * Getprocess Status. */ 
+    public function getStatus(): string 
+{
+ return $this->status; 
+}
+ /** * GetDownloadURL. */ 
+    public function getDownloadUrl(): ?string 
+{
+ return $this->downloadUrl; 
+}
+ /** * Getprocess . */ 
+    public function getProgress(): ?int 
+{
+ return $this->progress; 
+}
+ /** * GetDescriptioninfo . */ 
+    public function getMessage(): string 
+{
+ return $this->message; 
+}
+ 
+}
+ 

@@ -1,1 +1,28 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ use Hyperf\Database\Migrations\Migration; use Hyperf\Database\Schema\Blueprint; use Hyperf\Database\Schema\Schema; return new class extends Migration { /** * Run the migrations. */ public function up(): void { if (Schema::hasTable('delightful_super_agent_message_queue')) { return; } Schema::create('delightful_super_agent_message_queue', function (Blueprint $table) { $table->bigInteger('id')->primary()->comment('queuecolumnID (SnowflakeID)'); $table->string('user_id', 128)->comment('user ID'); $table->string('organization_code', 64)->comment('Organization code'); $table->bigInteger('project_id')->unsigned()->comment('project ID'); $table->bigInteger('topic_id')->unsigned()->comment('topic ID'); $table->text('message_content')->comment('message content'); $table->string('message_type', 64)->comment('message type'); $table->tinyInteger('status')->default(0)->comment('status: 0-pendingProcess/Handle, 1-completed, 2-Executefailed, 3-in progress'); $table->timestamp('execute_time')->Nullable()->comment('execution time'); $table->timestamp('except_execute_time')->Nullable()->comment('Expectationexecution time'); $table->string('err_message', 500)->Nullable()->comment('ExecuteErrorMessage'); $table->timestamp('deleted_at')->Nullable()->comment('deleted time'); $table->timestamps(); // indexOptimize $table->index(['user_id', 'project_id', 'topic_id'], 'idx_user_project_topic'); // CompensationQueryspecializedforindex - Optimize getCompensationTopics Performance $table->index(['status', 'except_execute_time', 'deleted_at', 'organization_code'], 'idx_compensation'); // TopicProcess/Handleindex - Optimize getEarliestMessageByTopic and delayTopicMessages Performance $table->index(['topic_id', 'status', 'deleted_at', 'except_execute_time'], 'idx_topic_processing'); }); } /** * Reverse the migrations. */ public function down(): void { } }; 
+<?php 
+declare(strict_types=1);
+ /** * Copyright (c) Be Delightful , Distributed under the MIT software license */
+ use Hyperf\Database\Migrations\Migration;
+ use Hyperf\Database\Schema\Blueprint;
+ use Hyperf\Database\Schema\Schema;
+ return new class extends Migration  {
+ /** * Run the migrations. */
+ public function up(): void  {
+ if (Schema::hasTable('delightful_super_agent_message_queue'))  {
+ return;
+        }
+ Schema::create('delightful_super_agent_message_queue', function (Blueprint $table)  {
+ $table->bigInteger('id')->primary()->comment('queuecolumnID (SnowflakeID)');
+ $table->string('user_id', 128)->comment('user ID');
+ $table->string('organization_code', 64)->comment('Organization code');
+ $table->bigInteger('project_id')->unsigned()->comment('project ID');
+ $table->bigInteger('topic_id')->unsigned()->comment('topic ID');
+ $table->text('message_content')->comment('message content');
+ $table->string('message_type', 64)->comment('message type');
+ $table->tinyInteger('status')->default(0)->comment('status: 0-pendingProcess/Handle, 1-completed, 2-Executefailed, 3-in progress');
+ $table->timestamp('execute_time')->Nullable()->comment('execution time');
+ $table->timestamp('except_execute_time')->Nullable()->comment('Expectationexecution time');
+ $table->string('err_message', 500)->Nullable()->comment('ExecuteErrorMessage');
+ $table->timestamp('deleted_at')->Nullable()->comment('deleted time');
+ $table->timestamps();
+ // indexOptimize $table->index(['user_id', 'project_id', 'topic_id'], 'idx_user_project_topic'); // CompensationQueryspecializedforindex - Optimize getCompensationTopics Performance $table->index(['status', 'except_execute_time', 'deleted_at', 'organization_code'], 'idx_compensation'); // TopicProcess/Handleindex - Optimize getEarliestMessageByTopic and delayTopicMessages Performance $table->index(['topic_id', 'status', 'deleted_at', 'except_execute_time'], 'idx_topic_processing'); }); } /** * Reverse the migrations. */ public function down(): void { } }; 
+

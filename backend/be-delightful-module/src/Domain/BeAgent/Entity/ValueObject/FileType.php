@@ -1,1 +1,32 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject; /** * File typeEnum.*/ enum FileType: string { /** * userUpload.*/ case USER_UPLOAD = 'user_upload'; /** * Process/Handleoverprocess.*/ case PROCESS = 'process'; /** * Browsedevice.*/ case BROWSER = 'browser'; /** * SystemAutoUpload.*/ case SYSTEM_AUTO_UPLOAD = 'system_auto_upload'; /** * ToolMessageContent.*/ case TOOL_MESSAGE_CONTENT = 'tool_message_content'; /** * Document.*/ case DOCUMENT = 'document'; /** * AutoSync.*/ case AUTO_SYNC = 'auto_sync'; /** * Directory.*/ case DIRECTORY = 'directory'; /** * getFile typeName.*/ public function getName(): string { return match ($this) { self::USER_UPLOAD => 'UserUpload', self::PROCESS => 'Process/Handleoverprocess', self::BROWSER => 'Browsedevice', self::SYSTEM_AUTO_UPLOAD => 'SystemAutoUpload', self::TOOL_MESSAGE_CONTENT => 'ToolMessageContent', self::DOCUMENT => 'Document', self::AUTO_SYNC => 'AutoSync', self::DIRECTORY => 'Directory', }; } /** * getFile typeDescription.*/ public function getDescription(): string { return match ($this) { self::USER_UPLOAD => 'UsermanuallyUploadFile', self::PROCESS => 'inProcess/Handleoverprocess in produceFile', self::BROWSER => 'throughBrowsedeviceGetFile', self::SYSTEM_AUTO_UPLOAD => 'SystemAutoUploadFile', self::TOOL_MESSAGE_CONTENT => 'ToolMessage in containingFileContent', self::DOCUMENT => 'DocumentTypeFile', self::AUTO_SYNC => 'AutoSyncFile', self::DIRECTORY => 'Directory', }; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+
+/** * FileTypeEnum. */
+
+enum FileType: string 
+{
+ /** * user Upload. */ case USER_UPLOAD = 'user_upload'; /** * process . */ case PROCESS = 'process'; /** * . */ case BROWSER = 'browser'; /** * Systemautomatic Upload. */ case SYSTEM_AUTO_UPLOAD = 'system_auto_upload'; /** * tool MessageContent. */ case TOOL_MESSAGE_CONTENT = 'tool_message_content'; /** * Documentation. */ case DOCUMENT = 'document'; /** * automatic Sync. */ case AUTO_SYNC = 'auto_sync'; /** * Directory. */ case DIRECTORY = 'directory'; /** * GetFileTypeName. */ 
+    public function getName(): string 
+{
+ return match ($this) 
+{
+ self::USER_UPLOAD => 'user Upload', self::PROCESS => 'process ', self::BROWSER => '', self::SYSTEM_AUTO_UPLOAD => 'Systemautomatic Upload', self::TOOL_MESSAGE_CONTENT => 'tool MessageContent', self::DOCUMENT => 'Documentation', self::AUTO_SYNC => 'automatic Sync', self::DIRECTORY => 'Directory', 
+}
+; 
+}
+ /** * GetFileTypeDescription. */ 
+    public function getDescription(): string 
+{
+ return match ($this) 
+{
+ self::USER_UPLOAD => 'user ManualUploadFile', self::PROCESS => 'Atprocess in File', self::BROWSER => 'ThroughGetFile', self::SYSTEM_AUTO_UPLOAD => 'Systemautomatic UploadFile', self::TOOL_MESSAGE_CONTENT => 'tool Messagein including FileContent', self::DOCUMENT => 'DocumentationTypeFile', self::AUTO_SYNC => 'automatic SyncFile', self::DIRECTORY => 'Directory', 
+}
+; 
+}
+ 
+}
+ 

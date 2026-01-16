@@ -1,32 +1,26 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
 
-namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
 
-enum MessageType: string
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+
+enum MessageType: string 
 {
-    case Init = 'init';
-    case Chat = 'chat';
-    case TaskUpdate = 'task_update';
-    case Thinking = 'thinking';
-    case ToolCall = 'tool_call';
-    case Finished = 'finished';
-    case Error = 'error';
-    case Heartbeat = 'heartbeat';
-    case ProjectArchive = 'project_archive';
-    case Reminder = 'reminder';
-
-    public static function isValid(string $type): bool
-    {
-        foreach (self::cases() as $case) {
-            if ($case->value === $type) {
-                return true;
-            }
-        }
-        return false;
-    }
+ case Init = 'init'; case Chat = 'chat'; case TaskUpdate = 'task_update'; case Thinking = 'thinking'; case tool Call = 'tool_call'; case Finished = 'finished'; case Error = 'error'; case Heartbeat = 'heartbeat'; case ProjectArchive = 'project_archive'; case Reminder = 'reminder'; 
+    public 
+    static function isValid(string $type): bool 
+{
+ foreach (self::cases() as $case) 
+{
+ if ($case->value === $type) 
+{
+ return true; 
 }
+ 
+}
+ return false; 
+}
+ 
+}
+ 

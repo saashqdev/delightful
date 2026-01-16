@@ -1,1 +1,53 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Application\BeAgent\Service; use App\Application\Chat\Service\DelightfulAccountAppService; use App\Domain\Contact\Entity\AccountEntity; use App\Domain\Contact\Entity\DelightfulUserEntity; use App\Domain\Contact\Entity\ValueObject\AccountStatus; use App\Domain\Contact\Entity\ValueObject\DataIsolation; use App\Domain\Contact\Entity\ValueObject\UserType; use App\Domain\Contact\Service\DelightfulUserDomainService; use App\ErrorCode\GenericErrorCode; use App\Infrastructure\Core\Exception\ExceptionBuilder; use App\Interfaces\Authorization\Web\DelightfulUserAuthorization; use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant; use Hyperf\Logger\LoggerFactory; use Psr\Log\LoggerInterface; use Throwable; class AccountAppService extends AbstractAppService { protected LoggerInterface $logger; public function __construct( private readonly DelightfulAccountAppService $delightfulAccountAppService, private readonly DelightfulUserDomainService $userDomainService, protected LoggerFactory $loggerFactory, ) { $this->logger = $this->loggerFactory->get(get_class($this)); } /** * @throws Throwable */ public function initAccount(string $organizationCode): array { // Querywhether already through store inBe DelightfulAccount, If store inThen notUpdate $dataIsolation = new DataIsolation(); $dataIsolation->setCurrentOrganizationCode($organizationCode); $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE); if (! empty($aiUserEntity)) { ExceptionBuilder::throw(GenericErrorCode::SystemError, 'account.be_delightful_already_created'); } // InitializeAccount $accountDTO = new AccountEntity(); $accountDTO->setAiCode(AgentConstant::BE_DELIGHTFUL_CODE); $accountDTO->setStatus(AccountStatus::Normal); $accountDTO->setRealName('Be Delightful'); $userDTO = new DelightfulUserEntity(); $userDTO->setAvatarUrl('default'); $userDTO->setNickName('Be Delightful'); $userDTO->setDescription('Be DelightfulAccount，do not touch'); $authorization = new DelightfulUserAuthorization(); $authorization->setOrganizationCode($organizationCode); $authorization->setUserType(UserType::Human); try { $userEntity = $this->delightfulAccountAppService->aiRegister($userDTO, $authorization, AgentConstant::BE_DELIGHTFUL_CODE, $accountDTO); return $userEntity->toArray(); } catch (Throwable $e) { $this->logger->error('InitializeBe DelightfulAccountFailed，originalbecause：' . $e->getMessage()); throw $e; } } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+
+use App\Application\Chat\Service\MagicAccountAppService;
+use App\Domain\Contact\Entity\AccountEntity;
+use App\Domain\Contact\Entity\Magicuser Entity;
+use App\Domain\Contact\Entity\ValueObject\AccountStatus;
+use App\Domain\Contact\Entity\ValueObject\DataIsolation;
+use App\Domain\Contact\Entity\ValueObject\user Type;
+use App\Domain\Contact\Service\Magicuser DomainService;
+use App\ErrorCode\GenericErrorCode;
+use App\Infrastructure\Core\Exception\ExceptionBuilder;
+use App\Interfaces\Authorization\Web\Magicuser Authorization;
+use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
+use Hyperf\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
+use Throwable;
+
+class AccountAppService extends AbstractAppService 
+{
+ 
+    protected LoggerInterface $logger; 
+    public function __construct( 
+    private readonly MagicAccountAppService $magicAccountAppService, 
+    private readonly Magicuser DomainService $userDomainService, 
+    protected LoggerFactory $loggerFactory, ) 
+{
+ $this->logger = $this->loggerFactory->get(get_class($this)); 
+}
+ /** * @throws Throwable */ 
+    public function initAccount(string $organizationCode): array 
+{
+ // query whether already Existed Super MaggieAccountIfExistUpdate $dataIsolation = new DataIsolation(); $dataIsolation->setcurrent OrganizationCode($organizationCode); $aiuser Entity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_MAGIC_CODE); if (! empty($aiuser Entity)) 
+{
+ ExceptionBuilder::throw(GenericErrorCode::SystemError, 'account.super_magic_already_created'); 
+}
+ // InitializeAccount $accountDTO = new AccountEntity(); $accountDTO->setAiCode(AgentConstant::SUPER_MAGIC_CODE); $accountDTO->setStatus(AccountStatus::Normal); $accountDTO->setRealName('Super Maggie'); $userDTO = new Magicuser Entity(); $userDTO->setAvatarUrl('default'); $userDTO->setNickName('Super Maggie'); $userDTO->setDescription('Super Maggie account, do not modify'); $authorization = new Magicuser Authorization(); $authorization->setOrganizationCode($organizationCode); $authorization->setuser Type(user Type::Human); try 
+{
+ $userEntity = $this->magicAccountAppService->aiRegister($userDTO, $authorization, AgentConstant::SUPER_MAGIC_CODE, $accountDTO); return $userEntity->toArray(); 
+}
+ catch (Throwable $e) 
+{
+ $this->logger->error('Initialize Super Maggie account failed, reason:' . $e->getMessage()); throw $e; 
+}
+ 
+}
+ 
+}
+ 

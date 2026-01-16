@@ -1,35 +1,35 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
 
-namespace Delightful\BeDelightful\Domain\BeAgent\Event;
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
 
-class DeleteWorkspaceAfterEvent extends AbstractEvent
+namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+
+class delete WorkspaceAfterEvent extends AbstractEvent 
 {
-    public function __construct(
-        private int $workspaceId,
-        private string $organizationCode,
-        private string $userId,
-    ) {
-        // Call parent constructor to generate snowflake ID
-        parent::__construct();
-    }
-
-    public function getWorkspaceId(): int
-    {
-        return $this->workspaceId;
-    }
-
-    public function getOrganizationCode(): string
-    {
-        return $this->organizationCode;
-    }
-
-    public function getUserId(): string
-    {
-        return $this->userId;
-    }
+ 
+    public function __construct( 
+    private int $workspaceId, 
+    private string $organizationCode, 
+    private string $userId, ) 
+{
+ // Call parent constructor to generate snowflake ID parent::__construct(); 
 }
+ 
+    public function getWorkspaceId(): int 
+{
+ return $this->workspaceId; 
+}
+ 
+    public function getOrganizationCode(): string 
+{
+ return $this->organizationCode; 
+}
+ 
+    public function getuser Id(): string 
+{
+ return $this->userId; 
+}
+ 
+}
+ 

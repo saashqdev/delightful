@@ -1,1 +1,54 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\Share\DTO\Request; use App\Infrastructure\Core\AbstractDTO; use Hyperf\HttpServer\Contract\RequestInterface; /** * accessedshareRequestDTO.*/ class AccessShareRequestDTO extends AbstractDTO { /** * share code*/ public string $shareCode = ''; /** * accessedpassword*/ public ?string $password = Null; /** * accessedsource.*/ public int $accessSource = 0; /** * fromRequestCreate inDTO.*/ public static function fromRequest(RequestInterface $request): self { $dto = new self(); $dto->shareCode = (string) $request->input('share_code', ''); $dto->password = $request->has('password') ? (string) $request->input('password') : Null; $dto->accessSource = (int) $request->input('access_source', 0); return $dto; } /** * getshare code */ public function getShareCode(): string { return $this->shareCode; } /** * getaccessedpassword*/ public function getPassword(): ?string { return $this->password; } /** * getaccessedsource.*/ public function getAccessSource(): int { return $this->accessSource; } /** * BuildValidateRule.*/ public function rules(): array { return [ 'share_code' => 'required|string|max:16', 'password' => 'Nullable|string|max:32', 'access_source' => 'Nullable|integer|min:0', ]; } /** * getValidateErrorMessage.*/ public function messages(): array { return [ 'share_code.required' => 'shareCodeCannot be empty', ]; } /** * Property/AttributeName.*/ public function attributes(): array { return [ 'share_code' => 'shareCode', 'password' => 'accessedpassword', 'access_source' => 'accessedcomesource', ]; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\Share\DTO\Request;
+
+use App\Infrastructure\Core\AbstractDTO;
+use Hyperf\HttpServer\Contract\RequestInterface;
+/** * ShareRequestDTO. */
+
+class AccessShareRequestDTO extends AbstractDTO 
+{
+ /** * Share code */ 
+    public string $shareCode = ''; /** * Password */ public ?string $password = null; /** * Source. */ 
+    public int $accessSource = 0; /** * FromRequestin CreateDTO. */ 
+    public 
+    static function fromRequest(RequestInterface $request): self 
+{
+ $dto = new self(); $dto->shareCode = (string) $request->input('share_code', ''); $dto->password = $request->has('password') ? (string) $request->input('password') : null; $dto->accessSource = (int) $request->input('access_source', 0); return $dto; 
+}
+ /** * GetShare code */ 
+    public function getShareCode(): string 
+{
+ return $this->shareCode; 
+}
+ /** * GetPassword */ 
+    public function getPassword(): ?string 
+{
+ return $this->password; 
+}
+ /** * GetSource. */ 
+    public function getAccessSource(): int 
+{
+ return $this->accessSource; 
+}
+ /** * BuildValidate Rule. */ 
+    public function rules(): array 
+{
+ return [ 'share_code' => 'required|string|max:16', 'password' => 'nullable|string|max:32', 'access_source' => 'nullable|integer|min:0', ]; 
+}
+ /** * GetValidate errorMessage. */ 
+    public function messages(): array 
+{
+ return [ 'share_code.required' => 'Share codeCannot be empty', ]; 
+}
+ /** * PropertyName. */ 
+    public function attributes(): array 
+{
+ return [ 'share_code' => 'Share code', 'password' => 'Password', 'access_source' => 'Source', ]; 
+}
+ 
+}
+ 

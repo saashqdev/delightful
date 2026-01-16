@@ -1,1 +1,37 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response; use App\Infrastructure\Core\AbstractDTO; /** * DeleteTopicResultDTO * Used forencapsulateDeleteTopicOperationReturnData.*/ class DeleteTopicResultDTO extends AbstractDTO { /** *  be DeleteTaskStatusID(Primary key) * StringType.*/ public string $id; /** * ConstructFunction.*/ public function __construct(?array $data = Null) { parent::__construct($data); } /** * fromTaskStatusIDCreateDTO. * * @param int $id TaskStatusID(Primary key)*/ public static function fromId(int $id): self { $dto = new self(); $dto->id = (string) $id; return $dto; } /** * getTaskStatusID.*/ public function getId(): string { return $this->id; } /** * setTaskStatusID. * * @param int $id TaskStatusID(Primary key)*/ public function setId(int $id): self { $this->id = (string) $id; return $this; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+
+use App\Infrastructure\Core\AbstractDTO;
+/** * delete topic ResultDTO * for delete topic Return Data. */
+
+class delete TopicResultDTO extends AbstractDTO 
+{
+ /** * delete TaskStatusID(primary key ) * StringType. */ 
+    public string $id; /** * Function. */ 
+    public function __construct(?array $data = null) 
+{
+ parent::__construct($data); 
+}
+ /** * FromTaskStatusIDCreateDTO. * * @param int $id TaskStatusID(primary key ) */ 
+    public 
+    static function fromId(int $id): self 
+{
+ $dto = new self(); $dto->id = (string) $id; return $dto; 
+}
+ /** * GetTaskStatusID. */ 
+    public function getId(): string 
+{
+ return $this->id; 
+}
+ /** * Set TaskStatusID. * * @param int $id TaskStatusID(primary key ) */ 
+    public function setId(int $id): self 
+{
+ $this->id = (string) $id; return $this; 
+}
+ 
+}
+ 

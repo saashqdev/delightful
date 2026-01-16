@@ -1,1 +1,22 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Application\Share\Factory\Facade; use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO; use RuntimeException; /** * ResourceFactoryInterface * Used forCreateShareableResourceObjectFactoryInterface.*/ interface ResourceFactoryInterface { /** * getthisFactorySupportBusinessResourceTypeName.*/ public function getResourceName(string $resourceId): string; /** * ExtensionTopicsharelistData.*/ public function getResourceExtendList(array $list): array; /** * getBusinessResourceContent.*/ public function getResourceContent(string $resourceId, string $userId, string $organizationCode, int $page, int $pageSize): array; /** * By/According toResourceIDCreate a each ShareableResourceObject * * @param string $resourceId ResourceID * @param string $userId userid * @param string $organizationCode Organization code * @return ShareableResourceDTO ShareableResourceObject * @throws RuntimeException whenResourceDoes not existinOr unableCreateShareResourceThrow whenAbnormal*/ public function createResource(string $resourceId, string $userId, string $organizationCode): ShareableResourceDTO; /** * CheckResourcewhether store inAnd canBe shared. * * @param string $resourceId ResourceID * @param string $organizationCode Organization code * @return bool Resourcewhether store inAnd canShare*/ public function isResourceShareable(string $resourceId, string $organizationCode): bool; /** * Checkuserwhether have PermissionShare thisResource. * * @param string $resourceId ResourceID * @param string $userId User ID * @param string $organizationCode Organization code * @return bool whether have SharePermission*/ public function hasSharePermission(string $resourceId, string $userId, string $organizationCode): bool; } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Application\Share\Factory\Facade;
+
+use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
+use RuntimeException;
+/** * ResourceFactoryInterface * for CreateResourceObjectFactoryInterface. */
+
+interface ResourceFactoryInterface 
+{
+ /** * GetFactorySupportResourceTypeName. */ 
+    public function getResourceName(string $resourceId): string; /** * Extensiontopic Sharelist Data. */ 
+    public function getResourceExtendlist (array $list): array; /** * GetResourceContent. */ 
+    public function getResourceContent(string $resourceId, string $userId, string $organizationCode, int $page, int $pageSize): array; /** * According toResourceIDCreateResourceObject * * @param string $resourceId ResourceID * @param string $userId user id * @param string $organizationCode OrganizationCode * @return ShareableResourceDTO ResourceObject * @throws RuntimeException WhenResourcedoes not existor cannot CreateResourceThrowException */ 
+    public function createResource(string $resourceId, string $userId, string $organizationCode): ShareableResourceDTO; /** * check Resourcewhether Existand Can. * * @param string $resourceId ResourceID * @param string $organizationCode OrganizationCode * @return bool Resourcewhether Existand is shareable */ 
+    public function isResourceShareable(string $resourceId, string $organizationCode): bool; /** * check user whether Havepermission Resource. * * @param string $resourceId ResourceID * @param string $userId user ID * @param string $organizationCode OrganizationCode * @return bool whether Havepermission */ 
+    public function hasSharepermission (string $resourceId, string $userId, string $organizationCode): bool; 
+}
+ 

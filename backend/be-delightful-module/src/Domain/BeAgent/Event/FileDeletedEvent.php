@@ -1,1 +1,38 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Event; use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity; /** * File already DeleteEvent.*/ class FileDeletedEvent extends AbstractEvent { public function __construct( private readonly TaskFileEntity $fileEntity, private readonly string $userId, private readonly string $organizationCode, ) { parent::__construct(); } public function getFileEntity(): TaskFileEntity { return $this->fileEntity; } public function getUserId(): string { return $this->userId; } public function getOrganizationCode(): string { return $this->organizationCode; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+/** * Filedelete dEvent. */
+
+class Filedelete dEvent extends AbstractEvent 
+{
+ 
+    public function __construct( 
+    private readonly TaskFileEntity $fileEntity, 
+    private readonly string $userId, 
+    private readonly string $organizationCode, ) 
+{
+ parent::__construct(); 
+}
+ 
+    public function getFileEntity(): TaskFileEntity 
+{
+ return $this->fileEntity; 
+}
+ 
+    public function getuser Id(): string 
+{
+ return $this->userId; 
+}
+ 
+    public function getOrganizationCode(): string 
+{
+ return $this->organizationCode; 
+}
+ 
+}
+ 

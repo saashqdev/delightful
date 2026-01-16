@@ -1,1 +1,44 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Constant; /** * WorkspaceStatusconstant amount  * defineAgentWorkspaceVariousStatusValue.*/ class WorkspaceStatus { /** *  un Initialize - AgentDispatcher un Create or un Initialize.*/ public const int UNINITIALIZED = 0; /** * correctinInitialize - prekeepStatus, temp un Use.*/ public const int INITIALIZING = 1; /** * InitializeComplete - WorkspacecompletelyAvailable.*/ public const int READY = 2; /** * InitializeError - Initializeoverprocess in happenAbnormal.*/ public const int ERROR = -1; /** * getStatusDescription. * * @param int $status StatusValue * @return string StatusDescription*/ public static function getDescription(int $status): string { return match ($status) { self::UNINITIALIZED => ' un Initialize', self::INITIALIZING => 'correctinInitialize', self::READY => 'InitializeComplete', self::ERROR => 'InitializeError', default => 'UnknownStatus', }; } /** * CheckStatuswhetherFor readyStatus. * * @param int $status StatusValue * @return bool whetherReady*/ public static function isReady(int $status): bool { return $status === self::READY; } /** * CheckStatuswhetherForErrorStatus. * * @param int $status StatusValue * @return bool whetherError*/ public static function isError(int $status): bool { return $status === self::ERROR; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Constant;
+
+/** * workspace StatusConstant * Agentworkspace StatusValue. */
+
+class WorkspaceStatus 
+{
+ /** * Initialize - AgentDispatcherCreateor Initialize. */ 
+    public 
+    const int UNINITIALIZED = 0; /** * AtInitialize - StatusUsing. */ 
+    public 
+    const int INITIALIZING = 1; /** * Initializecomplete - workspace FullAvailable. */ 
+    public 
+    const int READY = 2; /** * InitializeError - Initializein occurred Exception. */ 
+    public 
+    const int ERROR = -1; /** * GetStatusDescription. * * @param int $status StatusValue * @return string StatusDescription */ 
+    public 
+    static function getDescription(int $status): string 
+{
+ return match ($status) 
+{
+ self::UNINITIALIZED => 'Initialize', self::INITIALIZING => 'AtInitialize', self::READY => 'Initializecomplete ', self::ERROR => 'InitializeError', default => 'UnknownStatus', 
+}
+; 
+}
+ /** * check Statuswhether as Status. * * @param int $status StatusValue * @return bool whether */ 
+    public 
+    static function isReady(int $status): bool 
+{
+ return $status === self::READY; 
+}
+ /** * check Statuswhether as ErrorStatus. * * @param int $status StatusValue * @return bool whether Error */ 
+    public 
+    static function isError(int $status): bool 
+{
+ return $status === self::ERROR; 
+}
+ 
+}
+ 

@@ -1,1 +1,69 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\Share\DTO\Request; use App\Infrastructure\Core\AbstractDTO; use Hyperf\HttpServer\Contract\RequestInterface; class GetShareDetailDTO extends AbstractDTO { /** * CurrentPage number.*/ public int $page = 1; /** * Per pagecondition count .*/ public int $pageSize = 10; /** * password.*/ public string $password = ''; /** * setPage number.*/ public function setPage(int $page): self { $this->page = $page; return $this; } /** * getPage number.*/ public function getPage(): int { return $this->page; } /** * setPer pagecondition count .*/ public function setPageSize(int $pageSize): self { $this->pageSize = $pageSize; return $this; } /** * getPer pagecondition count .*/ public function getPageSize(): int { return $this->pageSize; } public function setPassword(string $password): self { $this->password = $password; return $this; } public function getPassword(): string { return $this->password; } public static function fromRequest(RequestInterface $request): self { $dto = new self(); $dto->page = (int) $request->input('page', 1); $dto->pageSize = (int) $request->input('page_size', 10); $dto->password = $request->input('pwd', ''); return $dto; } /** * BuildValidateRule.*/ public function rules(): array { return [ 'page' => 'integer|min:1', 'page_size' => 'integer|min:1|max:500', 'password' => 'Nullable|string', ]; } /** * getValidateErrorMessage.*/ public function messages(): array { return [ 'page.integer' => 'Page numberMust is Integer', 'page.min' => 'Page numberMinimum is1', 'page_size.integer' => 'Items per pageMust is Integer', 'page_size.min' => 'Items per pageMinimum is1', 'page_size.max' => 'Items per pageMaximumFor100', 'password.max' => 'relatedKeywordMaximumLengthFor255characters', ]; } /** * Property/AttributeName.*/ public function attributes(): array { return [ 'page' => 'Page number', 'page_size' => 'Items per page', 'password' => 'SearchrelatedKeyword', ]; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\Share\DTO\Request;
+
+use App\Infrastructure\Core\AbstractDTO;
+use Hyperf\HttpServer\Contract\RequestInterface;
+
+class GetShareDetailDTO extends AbstractDTO 
+{
+ /** * current Page number. */ 
+    public int $page = 1; /** * Per page. */ 
+    public int $pageSize = 10; /** * Password. */ 
+    public string $password = ''; /** * Set Page number. */ 
+    public function setPage(int $page): self 
+{
+ $this->page = $page; return $this; 
+}
+ /** * GetPage number. */ 
+    public function getPage(): int 
+{
+ return $this->page; 
+}
+ /** * Set Per page. */ 
+    public function setPageSize(int $pageSize): self 
+{
+ $this->pageSize = $pageSize; return $this; 
+}
+ /** * GetPer page. */ 
+    public function getPageSize(): int 
+{
+ return $this->pageSize; 
+}
+ 
+    public function setPassword(string $password): self 
+{
+ $this->password = $password; return $this; 
+}
+ 
+    public function getPassword(): string 
+{
+ return $this->password; 
+}
+ 
+    public 
+    static function fromRequest(RequestInterface $request): self 
+{
+ $dto = new self(); $dto->page = (int) $request->input('page', 1); $dto->pageSize = (int) $request->input('page_size', 10); $dto->password = $request->input('pwd', ''); return $dto; 
+}
+ /** * BuildValidate Rule. */ 
+    public function rules(): array 
+{
+ return [ 'page' => 'integer|min:1', 'page_size' => 'integer|min:1|max:500', 'password' => 'nullable|string', ]; 
+}
+ /** * GetValidate errorMessage. */ 
+    public function messages(): array 
+{
+ return [ 'page.integer' => 'Page numberMust beInteger', 'page.min' => 'Page numberMinimumas 1', 'page_size.integer' => 'Per pageMust beInteger', 'page_size.min' => 'Per pageMinimumas 1', 'page_size.max' => 'Per pageMaximumas 100', 'password.max' => 'CriticalMaximumLengthas 255Character', ]; 
+}
+ /** * PropertyName. */ 
+    public function attributes(): array 
+{
+ return [ 'page' => 'Page number', 'page_size' => 'Per page', 'password' => 'SearchCritical', ]; 
+}
+ 
+}
+ 

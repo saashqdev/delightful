@@ -1,1 +1,22 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\Agent\Repository\Persistence\Model; use App\Infrastructure\Core\AbstractModel; use DateTime; use Hyperf\Database\Model\SoftDeletes; use Hyperf\Snowflake\Concern\Snowflake; /** * @property int $id SnowflakeID * @property string $organization_code Organization code * @property string $code Uniqueencode * @property string $name AgentName * @property string $description AgentDescription * @property array $icon Agenticon * @property int $icon_type iconType * @property array $prompt SystemTipword * @property array $tools Toollist * @property int $type AgentType * @property bool $enabled whetherEnable * @property string $creator Creator * @property DateTime $created_at Created at * @property string $modifier Modify person  * @property DateTime $updated_at Updated at * @property Null|DateTime $deleted_at Deleted at*/ class BeDelightfulAgentModel extends AbstractModel { use Snowflake; use SoftDeletes; protected ?string $table = 'delightful_be_delightful_agents'; protected array $fillable = [ 'id', 'organization_code', 'code', 'name', 'description', 'icon', 'icon_type', 'prompt', 'tools', 'type', 'enabled', 'creator', 'created_at', 'modifier', 'updated_at', ]; protected array $casts = [ 'id' => 'integer', 'organization_code' => 'string', 'code' => 'string', 'name' => 'string', 'description' => 'string', 'icon' => 'array', 'icon_type' => 'integer', 'prompt' => 'array', 'tools' => 'array', 'type' => 'integer', 'enabled' => 'boolean', 'creator' => 'string', 'modifier' => 'string', 'created_at' => 'datetime', 'updated_at' => 'datetime', 'deleted_at' => 'datetime', ]; } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\Agent\Repository\Persistence\Model;
+
+use App\Infrastructure\Core\AbstractModel;
+use DateTime;
+use Hyperf\Database\Model\Softdelete s;
+use Hyperf\Snowflake\Concern\Snowflake;
+/** * @property int $id SnowflakeID * @property string $organization_code Organization code * @property string $code Uniqueencode * @property string $name AgentName * @property string $description AgentDescription * @property array $icon Agenticon * @property int $icon_type iconType * @property array $prompt SystemTipword * @property array $tools tool list * @property int $type AgentType * @property bool $enabled whetherEnable * @property string $creator creator * @property DateTime $created_at Created at * @property string $modifier Modify person * @property DateTime $updated_at Updated at * @property Null|DateTime $deleted_at delete d at*/
+
+class BeDelightfulAgentModel extends AbstractModel 
+{
+ use Snowflake;
+use Softdelete s;
+protected ?string $table = 'delightful_be_delightful_agents'; 
+    protected array $fillable = [ 'id', 'organization_code', 'code', 'name', 'description', 'icon', 'icon_type', 'prompt', 'tools', 'type', 'enabled', 'creator', 'created_at', 'modifier', 'updated_at', ]; 
+    protected array $casts = [ 'id' => 'integer', 'organization_code' => 'string', 'code' => 'string', 'name' => 'string', 'description' => 'string', 'icon' => 'array', 'icon_type' => 'integer', 'prompt' => 'array', 'tools' => 'array', 'type' => 'integer', 'enabled' => 'boolean', 'creator' => 'string', 'modifier' => 'string', 'created_at' => 'datetime', 'updated_at' => 'datetime', 'deleted_at' => 'datetime', ]; 
+}
+ 

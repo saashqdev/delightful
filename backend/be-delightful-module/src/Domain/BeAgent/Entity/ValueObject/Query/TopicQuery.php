@@ -1,1 +1,166 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\Query; use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus; /** * TopicQueryValueObject, encapsulateQueryCondition.*/ class TopicQuery { /** * @var Null|string TopicID*/ private ?string $topicId = Null; /** * @var Null|string TopicName*/ private ?string $topicName = Null; /** * @var Null|string TopicStatus*/ private ?string $topicStatus = Null; /** * @var Null|string SandboxID*/ private ?string $sandboxId = Null; /** * @var Null|string OrganizationOrganizationCode*/ private ?string $organizationCode = Null; /** * @var Null|array User IDlist, Used for by User IDFilter*/ private ?array $userIds = Null; /** * @var Null|string Project ID*/ private ?string $projectId = Null; /** * @var int Page number*/ private int $page = 1; /** * @var int Per pagecondition count */ private int $pageSize = 20; /** * @var string Sort field*/ private string $orderBy = 'id'; private string $order = 'desc'; /** * getTopicID.*/ public function getTopicId(): ?string { return $this->topicId; } /** * setTopicID.*/ public function setTopicId(?string $topicId): self { $this->topicId = $topicId; return $this; } /** * getTopicName.*/ public function getTopicName(): ?string { return $this->topicName; } /** * setTopicName.*/ public function setTopicName(?string $topicName): self { $this->topicName = $topicName; return $this; } /** * getTopicStatus.*/ public function getTopicStatus(): ?string { return $this->topicStatus; } /** * setTopicStatus.*/ public function setTopicStatus(?string $topicStatus): self { $this->topicStatus = $topicStatus; return $this; } /** * getSandboxID.*/ public function getSandboxId(): ?string { return $this->sandboxId; } /** * setSandboxID.*/ public function setSandboxId(?string $sandboxId): self { $this->sandboxId = $sandboxId; return $this; } /** * getOrganizationOrganizationCode*/ public function getOrganizationCode(): ?string { return $this->organizationCode; } /** * setOrganizationOrganizationCode*/ public function setOrganizationCode(?string $organizationCode): self { $this->organizationCode = $organizationCode; return $this; } /** * getUser IDlist. */ public function getUserIds(): ?array { return $this->userIds; } /** * setUser IDlist. */ public function setUserIds(?array $userIds): self { $this->userIds = $userIds; return $this; } /** * getProject ID.*/ public function getProjectId(): ?string { return $this->projectId; } /** * setProject ID.*/ public function setProjectId(?string $projectId): self { $this->projectId = $projectId; return $this; } /** * getPage number*/ public function getPage(): int { return $this->page; } /** * setPage number*/ public function setPage(int $page): self { $this->page = max(1, $page); return $this; } /** * getPer pagecondition count .*/ public function getPageSize(): int { return $this->pageSize; } /** * setPer pagecondition count .*/ public function setPageSize(int $pageSize): self { $this->pageSize = max(1, $pageSize); return $this; } public function setOrderBy(string $orderBy): self { $this->orderBy = $orderBy; return $this; } public function getOrderBy(): string { return $this->orderBy; } public function setOrder(string $order): self { $this->order = $order; return $this; } public function getOrder(): string { return $this->order; } /** * Convert toConditionArray.*/ public function toConditions(): array { $conditions = []; if ($this->topicId !== Null) { $conditions['id'] = (int) $this->topicId; } if ($this->topicName !== Null) { $conditions['topic_name'] = $this->topicName; } if ($this->topicStatus !== Null) { $conditions['current_task_status'] = $this->topicStatus; } else { $conditions['current_task_status'] = [TaskStatus::RUNNING, TaskStatus::FINISHED, TaskStatus::ERROR, TaskStatus::Suspended, TaskStatus::Stopped]; } if ($this->sandboxId !== Null) { $conditions['sandbox_id'] = $this->sandboxId; } if ($this->organizationCode !== Null) { $conditions['user_organization_code'] = $this->organizationCode; } if ($this->userIds !== Null && ! empty($this->userIds)) { $conditions['user_id'] = $this->userIds; } if ($this->projectId !== Null) { $conditions['project_id'] = (int) $this->projectId; } return $conditions; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\query ;
+
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+/** * topic query ValueObjectquery Condition. */
+
+class Topicquery 
+{
+ /** * @var null|string topic ID */ private ?string $topicId = null; /** * @var null|string topic Name */ private ?string $topicName = null; /** * @var null|string topic Status */ private ?string $topicStatus = null; /** * @var null|string ID */ private ?string $sandboxId = null; /** * @var null|string OrganizationCode */ private ?string $organizationCode = null; /** * @var null|array user IDlist for user IDFilter */ private ?array $userIds = null; /** * @var null|string Project ID */ private ?string $projectId = null; /** * @var int Page number */ 
+    private int $page = 1; /** * @var int Per page */ 
+    private int $pageSize = 20; /** * @var string SortField */ 
+    private string $orderBy = 'id'; 
+    private string $order = 'desc'; /** * Gettopic ID. */ 
+    public function getTopicId(): ?string 
+{
+ return $this->topicId; 
+}
+ /** * Set topic ID. */ 
+    public function setTopicId(?string $topicId): self 
+{
+ $this->topicId = $topicId; return $this; 
+}
+ /** * Gettopic Name. */ 
+    public function getTopicName(): ?string 
+{
+ return $this->topicName; 
+}
+ /** * Set topic Name. */ 
+    public function setTopicName(?string $topicName): self 
+{
+ $this->topicName = $topicName; return $this; 
+}
+ /** * Gettopic Status. */ 
+    public function getTopicStatus(): ?string 
+{
+ return $this->topicStatus; 
+}
+ /** * Set topic Status. */ 
+    public function setTopicStatus(?string $topicStatus): self 
+{
+ $this->topicStatus = $topicStatus; return $this; 
+}
+ /** * GetID. */ 
+    public function getSandboxId(): ?string 
+{
+ return $this->sandboxId; 
+}
+ /** * Set ID. */ 
+    public function setSandboxId(?string $sandboxId): self 
+{
+ $this->sandboxId = $sandboxId; return $this; 
+}
+ /** * GetOrganizationCode */ 
+    public function getOrganizationCode(): ?string 
+{
+ return $this->organizationCode; 
+}
+ /** * Set OrganizationCode */ 
+    public function setOrganizationCode(?string $organizationCode): self 
+{
+ $this->organizationCode = $organizationCode; return $this; 
+}
+ /** * Getuser IDlist . */ 
+    public function getuser Ids(): ?array 
+{
+ return $this->userIds; 
+}
+ /** * Set user IDlist . */ 
+    public function setuser Ids(?array $userIds): self 
+{
+ $this->userIds = $userIds; return $this; 
+}
+ /** * GetProject ID. */ 
+    public function getProjectId(): ?string 
+{
+ return $this->projectId; 
+}
+ /** * Set Project ID. */ 
+    public function setProjectId(?string $projectId): self 
+{
+ $this->projectId = $projectId; return $this; 
+}
+ /** * GetPage number */ 
+    public function getPage(): int 
+{
+ return $this->page; 
+}
+ /** * Set Page number */ 
+    public function setPage(int $page): self 
+{
+ $this->page = max(1, $page); return $this; 
+}
+ /** * GetPer page. */ 
+    public function getPageSize(): int 
+{
+ return $this->pageSize; 
+}
+ /** * Set Per page. */ 
+    public function setPageSize(int $pageSize): self 
+{
+ $this->pageSize = max(1, $pageSize); return $this; 
+}
+ 
+    public function setOrderBy(string $orderBy): self 
+{
+ $this->orderBy = $orderBy; return $this; 
+}
+ 
+    public function getOrderBy(): string 
+{
+ return $this->orderBy; 
+}
+ 
+    public function setOrder(string $order): self 
+{
+ $this->order = $order; return $this; 
+}
+ 
+    public function getOrder(): string 
+{
+ return $this->order; 
+}
+ /** * Convert toConditionArray. */ 
+    public function toConditions(): array 
+{
+ $conditions = []; if ($this->topicId !== null) 
+{
+ $conditions['id'] = (int) $this->topicId; 
+}
+ if ($this->topicName !== null) 
+{
+ $conditions['topic_name'] = $this->topicName; 
+}
+ if ($this->topicStatus !== null) 
+{
+ $conditions['current_task_status'] = $this->topicStatus; 
+}
+ else 
+{
+ $conditions['current_task_status'] = [TaskStatus::RUNNING, TaskStatus::FINISHED, TaskStatus::ERROR, TaskStatus::Suspended, TaskStatus::Stopped]; 
+}
+ if ($this->sandboxId !== null) 
+{
+ $conditions['sandbox_id'] = $this->sandboxId; 
+}
+ if ($this->organizationCode !== null) 
+{
+ $conditions['user_organization_code'] = $this->organizationCode; 
+}
+ if ($this->userIds !== null && ! empty($this->userIds)) 
+{
+ $conditions['user_id'] = $this->userIds; 
+}
+ if ($this->projectId !== null) 
+{
+ $conditions['project_id'] = (int) $this->projectId; 
+}
+ return $conditions; 
+}
+ 
+}
+ 

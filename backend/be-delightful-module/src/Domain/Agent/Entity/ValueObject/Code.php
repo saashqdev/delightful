@@ -1,18 +1,17 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
 
 namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
 
-enum Code: string
+enum Code: string 
 {
-    case BeDelightfulAgent = 'SMA';
-
-    public function gen(): string
-    {
-        return $this->value . '-' . str_replace('.', '-', uniqid('', true));
-    }
+ case BeDelightfulAgent = 'SMA'; 
+    public function gen(): string 
+{
+ return $this->value . '-' . str_replace('.', '-', uniqid('', true)); 
 }
+ 
+}
+ 

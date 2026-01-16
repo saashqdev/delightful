@@ -1,1 +1,53 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request; use App\Infrastructure\Core\AbstractRequestDTO; class UpgradeSandboxRequestDTO extends AbstractRequestDTO { protected string $messageId = ''; protected string $contextType = 'continue'; /** * ValidateRule.*/ public static function getHyperfValidationRules(): array { return [ 'message_id' => 'required|string', 'context_type' => 'required|string|in:continue', ]; } public static function getHyperfValidationMessage(): array { return [ 'message_id.required' => 'MessageIDCannot be empty', 'message_id.string' => 'MessageIDMust is String', 'context_type.required' => 'contextTypeCannot be empty', 'context_type.string' => 'contextTypeMust is String', 'context_type.in' => 'contextTypeCan only becontinue', ]; } /** * Property/AttributeName.*/ public function attributes(): array { return [ 'message_id' => 'MessageID', 'context_type' => 'contextType', ]; } public function getMessageId(): string { return $this->messageId; } public function setMessageId(string $messageId): void { $this->messageId = $messageId; } public function getContextType(): string { return $this->contextType; } public function setContextType(string $contextType): void { $this->contextType = $contextType; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+
+use App\Infrastructure\Core\AbstractRequestDTO;
+
+class UpgradeSandboxRequestDTO extends AbstractRequestDTO 
+{
+ 
+    protected string $messageId = ''; 
+    protected string $contextType = 'continue'; /** * Validate Rule. */ 
+    public 
+    static function getHyperfValidate Rules(): array 
+{
+ return [ 'message_id' => 'required|string', 'context_type' => 'required|string|in:continue', ]; 
+}
+ 
+    public 
+    static function getHyperfValidate Message(): array 
+{
+ return [ 'message_id.required' => 'MessageIDCannot be empty', 'message_id.string' => 'MessageIDMust beString', 'context_type.required' => 'ContextTypeCannot be empty', 'context_type.string' => 'ContextTypeMust beString', 'context_type.in' => 'ContextTypeas continue', ]; 
+}
+ /** * PropertyName. */ 
+    public function attributes(): array 
+{
+ return [ 'message_id' => 'MessageID', 'context_type' => 'ContextType', ]; 
+}
+ 
+    public function getMessageId(): string 
+{
+ return $this->messageId; 
+}
+ 
+    public function setMessageId(string $messageId): void 
+{
+ $this->messageId = $messageId; 
+}
+ 
+    public function getContextType(): string 
+{
+ return $this->contextType; 
+}
+ 
+    public function setContextType(string $contextType): void 
+{
+ $this->contextType = $contextType; 
+}
+ 
+}
+ 

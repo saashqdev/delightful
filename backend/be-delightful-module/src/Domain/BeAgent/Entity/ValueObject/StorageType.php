@@ -1,1 +1,42 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject; /** * storedTypeEnum.*/ enum StorageType: string { /** * Workspacestored.*/ case WORKSPACE = 'workspace'; /** * Messagestored.*/ case TOPIC = 'topic'; /** * snapshotstored.*/ case SNAPSHOT = 'snapshot'; case OBJECT_STORAGE = 'object_storage'; case OTHERS = ''; /** * getstoredTypeName.*/ public function getName(): string { return match ($this) { self::WORKSPACE => 'Workspace', self::TOPIC => 'Topic', self::SNAPSHOT => 'snapshot', self::OBJECT_STORAGE => 'ObjectStorage', self::OTHERS => 'Other', }; } /** * getstoredTypeDescription.*/ public function getDescription(): string { return match ($this) { self::WORKSPACE => 'StorageinWorkspace in File', self::TOPIC => 'StorageinMessage in File', self::SNAPSHOT => 'Storageinsnapshot in File', self::OBJECT_STORAGE => 'StorageinObjectStorage in File', self::OTHERS => 'OtherStorageMethod', }; } /** * fromStringCreateEnumInstance.*/ public static function fromValue(string $value): self { return match ($value) { 'workspace' => self::WORKSPACE, 'topic' => self::TOPIC, 'snapshot' => self::SNAPSHOT, // Bottom line: UnknownValueunifiedconvertFor WORKSPACE (Process/HandledirtyData) default => self::OTHERS, }; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+
+/** * TypeEnum. */
+
+enum StorageType: string 
+{
+ /** * Empty. */ case WORKSPACE = 'workspace'; /** * Message. */ case TOPIC = 'topic'; /** * . */ case SNAPSHOT = 'snapshot'; case OBJECT_STORAGE = 'object_storage'; case OTHERS = ''; /** * GetTypeName. */ 
+    public function getName(): string 
+{
+ return match ($this) 
+{
+ self::WORKSPACE => 'Empty', self::TOPIC => 'topic ', self::SNAPSHOT => '', self::OBJECT_STORAGE => 'Object', self::OTHERS => '', 
+}
+; 
+}
+ /** * GetTypeDescription. */ 
+    public function getDescription(): string 
+{
+ return match ($this) 
+{
+ self::WORKSPACE => 'AtEmptyin File', self::TOPIC => 'AtMessagein File', self::SNAPSHOT => 'Atin File', self::OBJECT_STORAGE => 'AtObjectin File', self::OTHERS => '', 
+}
+; 
+}
+ /** * FromStringCreateEnumInstance. */ 
+    public 
+    static function fromValue(string $value): self 
+{
+ return match ($value) 
+{
+ 'workspace' => self::WORKSPACE, 'topic' => self::TOPIC, 'snapshot' => self::SNAPSHOT, // UnknownValueas WORKSPACEprocess Data default => self::OTHERS, 
+}
+; 
+}
+ 
+}
+ 

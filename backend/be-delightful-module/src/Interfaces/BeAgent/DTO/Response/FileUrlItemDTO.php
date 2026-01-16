@@ -1,1 +1,32 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response; use App\Infrastructure\Core\AbstractDTO; class FileUrlItemDTO extends AbstractDTO { /** * FileID.*/ public string $fileId; /** * FileURL.*/ public string $fileUrl; /** * ConstructFunction.*/ public function __construct(string $fileId = '', string $fileUrl = '') { $this->fileId = $fileId; $this->fileUrl = $fileUrl; } /** * fromArrayCreateDTO.*/ public static function fromArray(array $data): self { $dto = new self(); $dto->fileId = (string) ($data['file_id'] ?? ''); $dto->fileUrl = $data['file_url'] ?? ''; return $dto; } /** * Convert toArray. * OutputKeep underscore naming, To maintainAPICompatibility.*/ public function toArray(): array { return [ 'file_id' => $this->fileId, 'file_url' => $this->fileUrl, ]; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+
+use App\Infrastructure\Core\AbstractDTO;
+
+class FileUrlItemDTO extends AbstractDTO 
+{
+ /** * FileID. */ 
+    public string $fileId; /** * FileURL. */ 
+    public string $fileUrl; /** * Function. */ 
+    public function __construct(string $fileId = '', string $fileUrl = '') 
+{
+ $this->fileId = $fileId; $this->fileUrl = $fileUrl; 
+}
+ /** * FromArrayCreateDTO. */ 
+    public 
+    static function fromArray(array $data): self 
+{
+ $dto = new self(); $dto->fileId = (string) ($data['file_id'] ?? ''); $dto->fileUrl = $data['file_url'] ?? ''; return $dto; 
+}
+ /** * Convert toArray. * OutputUnderlineAPICompatible. */ 
+    public function toArray(): array 
+{
+ return [ 'file_id' => $this->fileId, 'file_url' => $this->fileUrl, ]; 
+}
+ 
+}
+ 

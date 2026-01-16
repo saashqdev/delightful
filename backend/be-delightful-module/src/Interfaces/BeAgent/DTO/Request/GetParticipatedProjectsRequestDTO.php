@@ -1,61 +1,37 @@
 <?php
-
 declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the MIT software license
- */
 
-namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
 
-/**
- * Get participated projects request DTO
- * Used to receive request parameters for getting user participated projects list.
- */
-class GetParticipatedProjectsRequestDTO extends GetProjectListRequestDTO
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+
+/** * Get participated projects request DTO * Used to receive request parameters for getting user participated projects list. */
+
+class GetParticipatedProjectsRequestDTO extends GetProjectlist RequestDTO 
 {
-    /**
-     * Whether to show collaboration projects.
-     */
-    public int $showCollaboration = 1;
-
-    /**
-     * Get show collaboration flag.
-     */
-    public function getShowCollaboration(): bool
-    {
-        return (bool) $this->showCollaboration;
-    }
-
-    /**
-     * Set show collaboration flag.
-     */
-    public function setShowCollaboration(int|string $showCollaboration): void
-    {
-        $this->showCollaboration = (int) $showCollaboration;
-    }
-
-    /**
-     * Get validation rules.
-     */
-    protected static function getHyperfValidationRules(): array
-    {
-        $parentRules = parent::getHyperfValidationRules();
-
-        return array_merge($parentRules, [
-            'show_collaboration' => 'nullable|integer|in:0,1',
-        ]);
-    }
-
-    /**
-     * Get custom error messages for validation failures.
-     */
-    protected static function getHyperfValidationMessage(): array
-    {
-        $parentMessages = parent::getHyperfValidationMessage();
-
-        return array_merge($parentMessages, [
-            'show_collaboration.integer' => 'Show collaboration must be an integer',
-            'show_collaboration.in' => 'Show collaboration must be 0 or 1',
-        ]);
-    }
+ /** * whether to show collaboration projects. */ 
+    public int $showCollaboration = 1; /** * Get show collaboration flag. */ 
+    public function getShowCollaboration(): bool 
+{
+ return (bool) $this->showCollaboration; 
 }
+ /** * Set show collaboration flag. */ 
+    public function setShowCollaboration(int|string $showCollaboration): void 
+{
+ $this->showCollaboration = (int) $showCollaboration; 
+}
+ /** * Get validation rules. */ 
+    protected 
+    static function getHyperfValidate Rules(): array 
+{
+ $parentRules = parent::getHyperfValidate Rules(); return array_merge($parentRules, [ 'show_collaboration' => 'nullable|integer|in:0,1', ]); 
+}
+ /** * Get custom error messages for validation failures. */ 
+    protected 
+    static function getHyperfValidate Message(): array 
+{
+ $parentMessages = parent::getHyperfValidate Message(); return array_merge($parentMessages, [ 'show_collaboration.integer' => 'Show collaboration must be an integer', 'show_collaboration.in' => 'Show collaboration must be 0 or 1', ]); 
+}
+ 
+}
+ 

@@ -1,1 +1,24 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Constant; /** * AgentRelatedconstant amount .*/ class AgentConstant { /** * Be DelightfulCode*/ public const string BE_DELIGHTFUL_CODE = 'BE_DELIGHTFUL'; public const string DEFAULT_TOPIC_NAME = ' new Topic'; public const string DEFAULT_WORKSPACE_NAME = ' new Workspace'; public const string DEFAULT_PROJECT_NAME = 'DefaultProject'; public const string DEFAULT_PROJECT_DIR = 'project'; } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Constant;
+
+/** * related Constant. */
+
+class AgentConstant 
+{
+ /** * Super MaggieCode */ 
+    public 
+    const string SUPER_MAGIC_CODE = 'SUPER_MAGIC'; 
+    public 
+    const string DEFAULT_TOPIC_NAME = 'Newtopic '; 
+    public 
+    const string DEFAULT_WORKSPACE_NAME = 'Newworkspace '; 
+    public 
+    const string DEFAULT_PROJECT_NAME = 'Default project'; 
+    public 
+    const string DEFAULT_PROJECT_DIR = 'project'; 
+}
+ 

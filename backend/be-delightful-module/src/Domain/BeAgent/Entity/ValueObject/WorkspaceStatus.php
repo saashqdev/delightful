@@ -1,1 +1,29 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject; /** * WorkspaceStatusValueObject*/ enum WorkspaceStatus: int { /** * NormalStatus*/ case Normal = 0; /** * DisableStatus*/ case Disabled = 1; /** * DeleteStatus*/ case Deleted = 2; /** * getStatusDescription.*/ public function getDescription(): string { return match ($this) { self::Normal => 'Normal', self::Disabled => 'Disable', self::Deleted => 'AlreadyDelete', }; } /** * getAllStatuslist. * * @return array<int, string> StatusValueandDescriptionMapping*/ public static function getList(): array { return [ self::Normal->value => self::Normal->getDescription(), self::Disabled->value => self::Disabled->getDescription(), self::Deleted->value => self::Deleted->getDescription(), ]; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+
+/** * workspace StatusValueObject */
+
+enum WorkspaceStatus: int 
+{
+ /** * NormalStatus */ case Normal = 0; /** * DisabledStatus */ case Disabled = 1; /** * delete Status */ case delete d = 2; /** * GetStatusDescription. */ 
+    public function getDescription(): string 
+{
+ return match ($this) 
+{
+ self::Normal => 'Normal', self::Disabled => 'Disabled', self::delete d => 'delete d', 
+}
+; 
+}
+ /** * GetAllStatuslist . * * @return array<int, string> StatusValueDescriptionMap */ 
+    public 
+    static function getlist (): array 
+{
+ return [ self::Normal->value => self::Normal->getDescription(), self::Disabled->value => self::Disabled->getDescription(), self::delete d->value => self::delete d->getDescription(), ]; 
+}
+ 
+}
+ 

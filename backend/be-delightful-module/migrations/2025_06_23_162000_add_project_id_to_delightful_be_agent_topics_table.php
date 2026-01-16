@@ -1,1 +1,13 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ use Hyperf\Database\Migrations\Migration; use Hyperf\Database\Schema\Blueprint; use Hyperf\Database\Schema\Schema; return new class extends Migration { /** * Run the migrations. */ public function up(): void { if (Schema::hasTable('delightful_super_agent_topics')) { Schema::table('delightful_super_agent_topics', function (Blueprint $table) { // in workspace_id  after add project_id field if (! Schema::hasColumn('delightful_super_agent_topics', 'project_id')) { $table->unsignedBigInteger('project_id')->default(0)->after('workspace_id')->comment('project ID'); } // addProject IDindex $table->index('project_id', 'idx_project_id'); }); } } /** * Reverse the migrations. */ public function down(): void { if (Schema::hasTable('delightful_super_agent_topics')) { Schema::table('delightful_super_agent_topics', function (Blueprint $table) { // DeleteProject IDindex try { $table->dropIndex('idx_project_id'); } catch (Exception $e) { // indexMay not existin, ignoreError } // Delete project_id field if (Schema::hasColumn('delightful_super_agent_topics', 'project_id')) { $table->dropColumn('project_id'); } }); } } }; 
+<?php 
+declare(strict_types=1);
+ /** * Copyright (c) Be Delightful , Distributed under the MIT software license */
+ use Hyperf\Database\Migrations\Migration;
+ use Hyperf\Database\Schema\Blueprint;
+ use Hyperf\Database\Schema\Schema;
+ return new class extends Migration  {
+ /** * Run the migrations. */
+ public function up(): void  {
+ if (Schema::hasTable('delightful_super_agent_topics'))  {
+ Schema::table('delightful_super_agent_topics', function (Blueprint $table)  {
+ // in workspace_id  after add project_id field if (! Schema::hasColumn('delightful_super_agent_topics', 'project_id')) { $table->unsignedBigInteger('project_id')->default(0)->after('workspace_id')->comment('project ID'); } // addProject IDindex $table->index('project_id', 'idx_project_id'); }); } } /** * Reverse the migrations. */ public function down(): void { if (Schema::hasTable('delightful_super_agent_topics')) { Schema::table('delightful_super_agent_topics', function (Blueprint $table) { // DeleteProject IDindex try { $table->dropIndex('idx_project_id'); } catch (Exception $e) { // indexMay not existin, ignoreError } // Delete project_id field if (Schema::hasColumn('delightful_super_agent_topics', 'project_id')) { $table->dropColumn('project_id'); } }); } } }; 
+

@@ -1,1 +1,50 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject; enum BuiltinAgent: string { /**GeneralMode*/ case General = 'general'; /**ChatMode*/ case Chat = 'chat'; /**DataAnalysis*/ case DataAnalysis = 'data_analysis'; /** PPT */ case PPT = 'ppt'; /**Research reportMode*/ case Report = 'report'; /**RecordingSummary*/ case Summary = 'summary'; /** * getBuilt-inAgentName.*/ public function getName(): string { return match ($this) { self::General => 'GeneralMode', self::Chat => 'ChatMode', self::DataAnalysis => 'DataAnalysis', self::PPT => 'PPT', self::Report => 'Research reportMode', self::Summary => 'RecordingSummary', }; } /** * getBuilt-inAgentDescription.*/ public function getDescription(): string { return match ($this) { self::General => 'suitableUsed forVariousGeneralScenariosmartassistant', self::Chat => 'Focus onConversationCommunication assistant', self::DataAnalysis => 'ProfessionalDataAnalysisAndProcess/Handleassistant', self::PPT => 'ProfessionalPPTMakeAnddemoshowassistant', self::Report => 'Professional research report writing assistant', self::Summary => 'ProfessionalRecordingContentSummaryassistant', }; } /** * getBuilt-inAgenticon.*/ public function getIcon(): array { return match ($this) { self::General => ['type' => 'general', 'color' => ''], self::Chat => ['type' => 'IconMessages', 'color' => ''], self::DataAnalysis => ['type' => 'IconChartBarPopular', 'color' => ''], self::PPT => ['type' => 'IconPresentation', 'color' => ''], self::Report => ['type' => 'report', 'color' => ''], self::Summary => ['type' => 'IconFileDescription', 'color' => ''], }; } /** * getBuilt-inAgentTipword.*/ public function getPrompt(): array { return []; } /** * getAllBuilt-inAgent. * @return array<BuiltinAgent>*/ public static function getAllBuiltinAgents(): array { return [ self::General, self::Chat, self::DataAnalysis, self::PPT, self::Summary, ]; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
+
+enum BuiltinAgent: string 
+{
+ /** Schema */ case General = 'general'; /** Schema */ case Chat = 'chat'; /** Data */ case DataAnalysis = 'data_analysis'; /** PPT */ case PPT = 'ppt'; /** Schema */ case Report = 'report'; /** recording summary */ case Summary = 'summary'; /** * GetBuilt-inName. */ 
+    public function getName(): string 
+{
+ return match ($this) 
+{
+ self::General => 'Schema', self::Chat => 'Schema', self::DataAnalysis => 'Data', self::PPT => 'PPT', self::Report => 'Schema', self::Summary => 'recording summary ', 
+}
+; 
+}
+ /** * GetBuilt-inDescription. */ 
+    public function getDescription(): string 
+{
+ return match ($this) 
+{
+ self::General => 'for ', self::Chat => 'Pair', self::DataAnalysis => 'Dataprocess ', self::PPT => 'PPTDemo', self::Report => 'Professional research report writing assistant ', self::Summary => 'Content', 
+}
+; 
+}
+ /** * GetBuilt-inIcon. */ 
+    public function getIcon(): array 
+{
+ return match ($this) 
+{
+ self::General => ['type' => 'general', 'color' => ''], self::Chat => ['type' => 'IconMessages', 'color' => ''], self::DataAnalysis => ['type' => 'IconChartBarPopular', 'color' => ''], self::PPT => ['type' => 'IconPresentation', 'color' => ''], self::Report => ['type' => 'report', 'color' => ''], self::Summary => ['type' => 'IconFileDescription', 'color' => ''], 
+}
+; 
+}
+ /** * GetBuilt-inNotice. */ 
+    public function getPrompt(): array 
+{
+ return []; 
+}
+ /** * GetAllBuilt-in. * @return array<BuiltinAgent> */ 
+    public 
+    static function getAllBuiltinAgents(): array 
+{
+ return [ self::General, self::Chat, self::DataAnalysis, self::PPT, self::Summary, ]; 
+}
+ 
+}
+ 

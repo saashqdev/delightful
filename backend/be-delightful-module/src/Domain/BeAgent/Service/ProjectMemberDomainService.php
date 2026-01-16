@@ -1,1 +1,233 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Domain\BeAgent\Service; use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberEntity; use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberSettingEntity; use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberJoinMethod; use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole; use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType; use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberRepositoryInterface; use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface; use Hyperf\DbConnection\Db; /** * ProjectMemberDomainService * * Process/HandleProjectMemberRelatedAllbusiness logic, includePermissionValidate、Membermanagementwait*/ class ProjectMemberDomainService { public function __construct( private readonly ProjectMemberRepositoryInterface $projectMemberRepository, private readonly ProjectMemberSettingRepositoryInterface $projectMemberSettingRepository, ) { } /** * UpdateProjectMember - Main businessmethod. * * @param ProjectMemberEntity[] $memberEntities MemberEntityArray*/ public function updateProjectMembers( string $organizationCode, int $projectId, array $memberEntities ): void { // 1. For eachMemberEntitysetProject IDAndOrganization code foreach ($memberEntities as $memberEntity) { $memberEntity->setProjectId($projectId); $memberEntity->setOrganizationCode($organizationCode); } // 2. ExecuteUpdateOperation Db::transaction(function () use ($projectId, $memberEntities) { //  first DeleteAllExistingMember $this->projectMemberRepository->deleteByProjectId($projectId, [MemberRole::MANAGE->value, MemberRole::EDITOR->value, MemberRole::VIEWER->value]); // againBatchInsert new Member if (! empty($memberEntities)) { $this->projectMemberRepository->insert($memberEntities); } }); } /** * CheckuserwhetherForProjectuserlevelMember.*/ public function isProjectMemberByUser(int $projectId, string $userId): bool { return $this->projectMemberRepository->existsByProjectAndUser($projectId, $userId); } /** * CheckuserwhetherForProjectDepartmentlevelMember.*/ public function isProjectMemberByDepartments(int $projectId, array $departmentIds): bool { return $this->projectMemberRepository->existsByProjectAndDepartments($projectId, $departmentIds); } /** * By/According toProject IDgetProjectMemberlist. * * @return ProjectMemberEntity[] Array of project member entities*/ public function getProjectMembers(int $projectId, array $roles = []): array { return $this->projectMemberRepository->findByProjectId($projectId, $roles); } /** * By/According touserAndDepartmentgetProject IDlist.*/ public function deleteByProjectId(int $projectId): bool { return (bool) $this->projectMemberRepository->deleteByProjectId($projectId); } /** * Get project ID list and total by user and department. * * @return array ['total' => int, 'list' => array]*/ public function getProjectIdsByUserAndDepartmentsWithTotal( string $userId, array $departmentIds = [], ?string $name = Null, ?string $sortField = Null, string $sortDirection = 'desc', array $creatorUserIds = [], ?string $joinMethod = Null, array $organizationCodes = [] ): array { return $this->projectMemberRepository->getProjectIdsByUserAndDepartments( $userId, $departmentIds, $name, $sortField, $sortDirection, $creatorUserIds, $joinMethod, $organizationCodes ); } /** * Batch get project member counts. * * @return array [project_id => total_count]*/ public function getProjectMembersCounts(array $projectIds): array { return $this->projectMemberRepository->getProjectMembersCounts($projectIds); } /** * Batch get preview of first N members. * * @return ProjectMemberEntity[][]*/ public function getProjectMembersPreview(array $projectIds, int $limit = 4): array { return $this->projectMemberRepository->getProjectMembersPreview($projectIds, $limit); } /** * Get project ID list and total created by user with members. * * @return array ['total' => int, 'list' => array]*/ public function getSharedProjectIdsByUserWithTotal( string $userId, string $organizationCode, ?string $name = Null, int $page = 1, int $pageSize = 10, ?string $sortField = Null, string $sortDirection = 'desc', array $creatorUserIds = [] ): array { return $this->projectMemberRepository->getSharedProjectIdsByUser( $userId, $organizationCode, $name, $page, $pageSize, $sortField, $sortDirection, $creatorUserIds ); } /** * UpdateProjectPinStatus.*/ public function updateProjectPinStatus(string $userId, int $projectId, string $organizationCode, bool $isPinned): bool { // 1. CheckDatawhether store in, IfDoes not existin first CreatedefaultData $setting = $this->projectMemberSettingRepository->findByUserAndProject($userId, $projectId); if ($setting === Null) { $this->projectMemberSettingRepository->create($userId, $projectId, $organizationCode); } // 2. UpdatePinStatus return $this->projectMemberSettingRepository->updatePinStatus($userId, $projectId, $isPinned); } /** * getuserPinProject IDlist. * * @return array PinProject IDArray*/ public function getUserPinnedProjectIds(string $userId, string $organizationCode): array { return $this->projectMemberSettingRepository->getPinnedProjectIds($userId, $organizationCode); } /** * BatchgetuserinMultipleProjectset. * * @return array [project_id => ProjectMemberSettingEntity,...]*/ public function getUserProjectSettings(string $userId, array $projectIds): array { return $this->projectMemberSettingRepository->findByUserAndProjects($userId, $projectIds); } /** * UpdateuserinProjectLast active inTime.*/ public function updateUserLastActiveTime(string $userId, int $projectId, string $organizationCode): bool { // 1. CheckDatawhether store in, IfDoes not existin first CreatedefaultData $setting = $this->projectMemberSettingRepository->findByUserAndProject($userId, $projectId); if ($setting === Null) { $this->projectMemberSettingRepository->create($userId, $projectId, $organizationCode); } return $this->projectMemberSettingRepository->updateLastActiveTime($userId, $projectId); } /** * DeleteProject time CleanRelatedMemberset.*/ public function cleanupProjectSettings(int $projectId): bool { $this->projectMemberSettingRepository->deleteByProjectId($projectId); return true; } /** * Get collaboration project creator user ID list. * * @param string $userId Current user ID * @param array $departmentIds Array of department IDs user belongs to * @param string $organizationCode Organization code * @return array Array of creator user IDs*/ public function getCollaborationProjectCreatorIds( string $userId, array $departmentIds, string $organizationCode ): array { return $this->projectMemberRepository->getCollaborationProjectCreatorIds( $userId, $departmentIds, $organizationCode ); } /** * setProjectShortcut. * * @param string $userId User ID * @param int $projectId Project ID * @param int $workspaceId Workspace ID * @param string $organizationCode Organization code * @return bool setSuccessReturntrue*/ public function setProjectShortcut(string $userId, int $projectId, int $workspaceId, string $organizationCode): bool { return $this->projectMemberSettingRepository->setProjectShortcut($userId, $projectId, $workspaceId, $organizationCode); } /** * CancelProjectShortcut. * * @param string $userId User ID * @param int $projectId Project ID * @return bool CancelSuccessReturntrue*/ public function cancelProjectShortcut(string $userId, int $projectId): bool { return $this->projectMemberSettingRepository->cancelProjectShortcut($userId, $projectId); } /** * CheckProjectwhether already setShortcut. * * @param string $userId User ID * @param int $projectId Project ID * @param int $workspaceId Workspace ID * @return bool  already setReturntrue*/ public function hasProjectShortcut(string $userId, int $projectId, int $workspaceId): bool { return $this->projectMemberSettingRepository->hasProjectShortcut($userId, $projectId, $workspaceId); } /** * Get user participated project list (SupportCollaborationProjectFilter). * * @param string $userId User ID * @param int $workspaceId Workspace ID (0Tableshow not LimitWorkspace) * @param bool $showCollaboration Whether to display collaboration projects * @param Null|string $projectName Project name fuzzy search * @param int $page Page number * @param int $pageSize Page size * @param string $sortField Sort field * @param string $sortDirection Sort direction * @param Null|array $organizationCodes Organization code * @return array ['total' => int, 'list' => array]*/ public function getParticipatedProjectsWithCollaboration( string $userId, int $workspaceId, bool $showCollaboration = true, ?string $projectName = Null, int $page = 1, int $pageSize = 10, ?array $organizationCodes = Null, string $sortField = 'last_active_at', string $sortDirection = 'desc', ): array { // JudgewhetherLimitWorkspace $limitWorkspace = $workspaceId > 0; return $this->projectMemberRepository->getParticipatedProjects( $userId, $limitWorkspace ? $workspaceId : Null, $showCollaboration, $projectName, $page, $pageSize, $sortField, $sortDirection, $organizationCodes ); } /** * InitializeProjectMemberAndset. * * @param string $userId User ID * @param int $projectId Project ID * @param int $workspaceId Workspace ID * @param string $organizationCode Organization code*/ public function initializeProjectMemberAndSettings( string $userId, int $projectId, int $workspaceId, string $organizationCode ): void { // CreateProjectMemberRecord (setForAll person Role) $memberEntity = new ProjectMemberEntity(); $memberEntity->setProjectId($projectId); $memberEntity->setTargetTypeFromString('User'); $memberEntity->setTargetId($userId); $memberEntity->setRole(MemberRole::OWNER); $memberEntity->setOrganizationCode($organizationCode); $memberEntity->setInvitedBy($userId); // BatchInsertMemberRecord $this->projectMemberRepository->insert([$memberEntity]); // CreateProjectMembersetRecord (BindTo workspace) $this->projectMemberSettingRepository->setProjectShortcut($userId, $projectId, $workspaceId, $organizationCode); } /** * throughInvitation linkaddProjectMember. * * @param string $projectId Project ID * @param string $userId User ID * @param MemberRole $role MemberRole * @param string $organizationCode Organization code * @param string $invitedBy Invite user ID * @return ProjectMemberEntity CreateMemberEntity*/ public function addMemberByInvitation( string $projectId, string $userId, MemberRole $role, string $organizationCode, string $invitedBy ): ProjectMemberEntity { // Checkwhether already through is Member $isExistingMember = $this->getMemberByProjectAndUser((int) $projectId, $userId); if ($isExistingMember) { return $isExistingMember; } // Create new ProjectMemberRecord $memberEntity = new ProjectMemberEntity(); $memberEntity->setProjectId((int) $projectId); $memberEntity->setTargetTypeFromString(MemberType::USER->value); $memberEntity->setTargetId($userId); $memberEntity->setRole($role); $memberEntity->setOrganizationCode($organizationCode); $memberEntity->setInvitedBy($invitedBy); $memberEntity->setJoinMethod(MemberJoinMethod::LINK); // InsertMemberRecord $this->projectMemberRepository->insert([$memberEntity]); return $memberEntity; } /** * DeletespecifieduserProjectMemberRelationship. * * @param int $projectId Project ID * @param string $userId User ID * @return bool DeletewhetherSuccess*/ public function removeMemberByUser(int $projectId, string $userId): bool { $deletedCount = $this->projectMemberRepository->deleteByProjectAndUser($projectId, $userId); return $deletedCount > 0; } /** * DeletespecifieduserAndTarget typeProjectMemberRelationship. * * @param int $projectId Project ID * @param string $targetType Target type (User/Department) * @param string $targetId Target ID * @return bool DeletewhetherSuccess*/ public function removeMemberByTarget(int $projectId, string $targetType, string $targetId): bool { $deletedCount = $this->projectMemberRepository->deleteByProjectAndTarget($projectId, $targetType, $targetId); return $deletedCount > 0; } /** * By/According toProject IDAndUser IDgetProjectMemberinformation. * * @param int $projectId Project ID * @param string $userId User ID * @return Null|ProjectMemberEntity ProjectMemberEntity*/ public function getMemberByProjectAndUser(int $projectId, string $userId): ?ProjectMemberEntity { return $this->projectMemberRepository->getMemberByProjectAndUser($projectId, $userId); } /** * By/According toProject IDAndArray of department IDsgetProjectMemberlist. * * @param int $projectId Project ID * @param array $departmentIds Array of department IDs * @return ProjectMemberEntity[] Array of project member entities*/ public function getMembersByProjectAndDepartmentIds(int $projectId, array $departmentIds): array { return $this->projectMemberRepository->getMembersByProjectAndDepartmentIds($projectId, $departmentIds); } /** * By/According toProject IDAndArray of member IDsgetMemberlist. * * @param int $projectId Project ID * @param array $memberIds Array of member IDs * @return ProjectMemberEntity[] Array of project member entities*/ public function getMembersByIds(int $projectId, array $memberIds): array { return $this->projectMemberRepository->getMembersByIds((int) $projectId, $memberIds); } /** * BatchUpdateMemberPermission ( new format: target_type + target_id). * * @param int $projectId Project ID * @param array $roleUpdates [['target_type' => '', 'target_id' => '', 'role' => ''],...] * @return int UpdateRecord count */ public function batchUpdateRole(int $projectId, array $roleUpdates): int { $updateData = []; foreach ($roleUpdates as $member) { $memberRole = MemberRole::validatePermissionLevel($member['role']); $updateData[] = [ 'target_type' => $member['target_type'], 'target_id' => $member['target_id'], 'role' => $memberRole->value, ]; } return $this->projectMemberRepository->batchUpdateRole($projectId, $updateData); } /** * BatchDeleteMember. * * @param int $projectId Project ID * @param array $memberIds Array of member IDs * @return int Number of deleted records*/ public function deleteMembersByIds(int $projectId, array $memberIds): int { return $this->projectMemberRepository->deleteMembersByIds($projectId, $memberIds); } /** * addProjectMember (InternalInvite). * * @param ProjectMemberEntity[] $memberEntities MemberEntityArray * @param string $organizationCode Organization code*/ public function addInternalMembers(array $memberEntities, string $organizationCode): void { if (empty($memberEntities)) { return; } // For eachMemberEntitysetOrganization code foreach ($memberEntities as $memberEntity) { $memberEntity->setJoinMethod(MemberJoinMethod::INTERNAL); $memberEntity->setOrganizationCode($organizationCode); } // BatchInsertMember $this->projectMemberRepository->insert($memberEntities); } public function getProjectIdsByCollaboratorTargets(array $targetIds): array { $roles = [MemberRole::MANAGE->value, MemberRole::EDITOR->value, MemberRole::VIEWER->value]; return $this->projectMemberRepository->getProjectIdsByCollaboratorTargets($targetIds, $roles); } /** * BatchgetuserinProjectHighest inPermissionRole. * * @param array $projectIds Project IDArray * @param array $targetIds Target IDArray (User IDAndDepartmentID) * @return array [project => role] Project IDMapping to Role*/ public function getUserHighestRolesInProjects(array $projectIds, array $targetIds): array { // 1. fromRepositorygetMemberEntityData $memberEntities = $this->projectMemberRepository->getProjectMembersByTargetIds($projectIds, $targetIds); if (empty($memberEntities)) { return []; } // 2. business logic:  by ProjectGroup, calculateeveryProject most highPermissionRole $projectRoles = []; foreach ($memberEntities as $entity) { $projectId = $entity->getProjectId(); $role = $entity->getRole(); $permissionLevel = $role->getPermissionLevel(); // IfthisProjectstillNo/NoneRecord,  or CurrentRolePermission more high,  then Update if (! isset($projectRoles[$projectId]) || $permissionLevel > $projectRoles[$projectId]['level']) { $projectRoles[$projectId] = [ 'role' => $role->value, 'level' => $permissionLevel, ]; } } // 3.  only ReturnRoleValue,  not containingPermissionLevel return array_map(fn ($data) => $data['role'], $projectRoles); } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberSettingEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberJoinMethod;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberType;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberRepositoryInterface;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
+use Hyperf\DbConnection\Db;
+/** * ItemMemberService * * process ItemMemberrelated AllIncludepermission Validate Member */
+
+class ProjectMemberDomainService 
+{
+ 
+    public function __construct( 
+    private readonly ProjectMemberRepositoryInterface $projectMemberRepository, 
+    private readonly ProjectMemberSettingRepositoryInterface $projectMemberSettingRepository, ) 
+{
+ 
+}
+ /** * UpdateItemMember - MainMethod. * * @param ProjectMemberEntity[] $memberEntities MemberArray */ 
+    public function updateProjectMembers( string $organizationCode, int $projectId, array $memberEntities ): void 
+{
+ // 1. Set project ID and organization code for each member entity foreach ($memberEntities as $memberEntity) 
+{
+ $memberEntity->setProjectId($projectId); $memberEntity->setOrganizationCode($organizationCode); 
+}
+ // 2. Execute update operation Db::transaction(function () use ($projectId, $memberEntities) 
+{
+ // delete AllHaveMember $this->projectMemberRepository->deleteByProjectId($projectId, [MemberRole::MANAGE->value, MemberRole::EDITOR->value, MemberRole::VIEWER->value]);
+// BatchInsertNewMember if (! empty($memberEntities)) 
+{
+ $this->projectMemberRepository->insert($memberEntities); 
+}
+ 
+}
+); 
+}
+ /** * check user whether as Itemuser Member. */ 
+    public function isProjectMemberByuser (int $projectId, string $userId): bool 
+{
+ return $this->projectMemberRepository->existsByProjectAnduser ($projectId, $userId); 
+}
+ /** * check user whether as ItemDepartmentMember. */ 
+    public function isProjectMemberByDepartments(int $projectId, array $departmentIds): bool 
+{
+ return $this->projectMemberRepository->existsByProjectAndDepartments($projectId, $departmentIds); 
+}
+ /** * According toProject IDGetItemMemberlist . * * @return ProjectMemberEntity[] ItemMemberArray */ 
+    public function getProjectMembers(int $projectId, array $roles = []): array 
+{
+ return $this->projectMemberRepository->findByProjectId($projectId, $roles); 
+}
+ /** * According touser DepartmentGetProject IDlist . */ 
+    public function deleteByProjectId(int $projectId): bool 
+{
+ return (bool) $this->projectMemberRepository->deleteByProjectId($projectId); 
+}
+ /** * According touser DepartmentGetProject IDlist Total. * * @return array ['total' => int, 'list' => array] */ 
+    public function getProjectIdsByuser AndDepartmentsWithTotal( string $userId, array $departmentIds = [], ?string $name = null, ?string $sortField = null, string $sortDirection = 'desc', array $creatoruser Ids = [], ?string $joinMethod = null, array $organizationCodes = [] ): array 
+{
+ return $this->projectMemberRepository->getProjectIdsByuser AndDepartments( $userId, $departmentIds, $name, $sortField, $sortDirection, $creatoruser Ids, $joinMethod, $organizationCodes ); 
+}
+ /** * BatchGetItemMemberTotal. * * @return array [project_id => total_count] */ 
+    public function getProjectMembersCounts(array $projectIds): array 
+{
+ return $this->projectMemberRepository->getProjectMembersCounts($projectIds); 
+}
+ /** * BatchGetproject's first Nmembers preview . * * @return ProjectMemberEntity[][] */ 
+    public function getProjectMembersPreview(array $projectIds, int $limit = 4): array 
+{
+ return $this->projectMemberRepository->getProjectMembersPreview($projectIds, $limit); 
+}
+ /** * Getuser Createand HaveMemberProject IDlist Total. * * @return array ['total' => int, 'list' => array] */ 
+    public function getSharedProjectIdsByuser WithTotal( string $userId, string $organizationCode, ?string $name = null, int $page = 1, int $pageSize = 10, ?string $sortField = null, string $sortDirection = 'desc', array $creatoruser Ids = [] ): array 
+{
+ return $this->projectMemberRepository->getSharedProjectIdsByuser ( $userId, $organizationCode, $name, $page, $pageSize, $sortField, $sortDirection, $creatoruser Ids ); 
+}
+ /** * UpdateItempinned Status. */ 
+    public function updateProjectPinStatus(string $userId, int $projectId, string $organizationCode, bool $isPinned): bool 
+{
+ // 1. check Datawhether ExistIfdoes not existCreateDefaultData $setting = $this->projectMemberSettingRepository->findByuser AndProject($userId, $projectId); if ($setting === null) 
+{
+ $this->projectMemberSettingRepository->create($userId, $projectId, $organizationCode); 
+}
+ // 2. Updatepinned Status return $this->projectMemberSettingRepository->updatePinStatus($userId, $projectId, $isPinned); 
+}
+ /** * Getuser pinned Project IDlist . * * @return array pinned Project IDArray */ 
+    public function getuser PinnedProjectIds(string $userId, string $organizationCode): array 
+{
+ return $this->projectMemberSettingRepository->getPinnedProjectIds($userId, $organizationCode); 
+}
+ /** * BatchGetuser AtMultipleItemSet . * * @return array [project_id => ProjectMemberSettingEntity, ...] */ 
+    public function getuser ProjectSet (string $userId, array $projectIds): array 
+{
+ return $this->projectMemberSettingRepository->findByuser AndProjects($userId, $projectIds); 
+}
+ /** * Updateuser AtItemin Finallyactive Time. */ 
+    public function updateuser LastActiveTime(string $userId, int $projectId, string $organizationCode): bool 
+{
+ // 1. check Datawhether ExistIfdoes not existCreateDefaultData $setting = $this->projectMemberSettingRepository->findByuser AndProject($userId, $projectId); if ($setting === null) 
+{
+ $this->projectMemberSettingRepository->create($userId, $projectId, $organizationCode); 
+}
+ return $this->projectMemberSettingRepository->updateLastActiveTime($userId, $projectId); 
+}
+ /** * delete ItemCleanrelated MemberSet . */ 
+    public function cleanupProjectSet (int $projectId): bool 
+{
+ $this->projectMemberSettingRepository->deleteByProjectId($projectId); return true; 
+}
+ /** * Get list of creator user IDs for collaboration projects. * * @param string $userId current user ID * @param array $departmentIds user AtDepartmentIDArray * @param string $organizationCode OrganizationCode * @return array creator user IDArray */ 
+    public function getCollaborationProjectcreator Ids( string $userId, array $departmentIds, string $organizationCode ): array 
+{
+ return $this->projectMemberRepository->getCollaborationProjectcreator Ids( $userId, $departmentIds, $organizationCode ); 
+}
+ /** * Set Itemshortcut . * * @param string $userId user ID * @param int $projectId Project ID * @param int $workspaceId workspace ID * @param string $organizationCode organization code * @return bool Set SuccessReturn true */ 
+    public function setProjectShortcut(string $userId, int $projectId, int $workspaceId, string $organizationCode): bool 
+{
+ return $this->projectMemberSettingRepository->setProjectShortcut($userId, $projectId, $workspaceId, $organizationCode); 
+}
+ /** * cancel Itemshortcut . * * @param string $userId user ID * @param int $projectId Project ID * @return bool cancel SuccessReturn true */ 
+    public function cancelProjectShortcut(string $userId, int $projectId): bool 
+{
+ return $this->projectMemberSettingRepository->cancelProjectShortcut($userId, $projectId); 
+}
+ /** * check Itemwhether Set shortcut . * * @param string $userId user ID * @param int $projectId Project ID * @param int $workspaceId workspace ID * @return bool Set Return true */ 
+    public function hasProjectShortcut(string $userId, int $projectId, int $workspaceId): bool 
+{
+ return $this->projectMemberSettingRepository->hasProjectShortcut($userId, $projectId, $workspaceId); 
+}
+ /** * Get list of projects user participates inSupportcollaboration ItemFilter. * * @param string $userId user ID * @param int $workspaceId workspace ID0table Limitworkspace  * @param bool $showCollaboration whether Displaycollaboration Item * @param null|string $projectName ItemNameVagueSearch * @param int $page Page number * @param int $pageSize Per pageSize * @param string $sortField SortField * @param string $sortDirection Sort * @param null|array $organizationCodes organization code * @return array ['total' => int, 'list' => array] */ 
+    public function getParticipatedProjectsWithCollaboration( string $userId, int $workspaceId, bool $showCollaboration = true, ?string $projectName = null, int $page = 1, int $pageSize = 10, ?array $organizationCodes = null, string $sortField = 'last_active_at', string $sortDirection = 'desc', ): array 
+{
+ // Determinewhether Limitworkspace $limitWorkspace = $workspaceId > 0; return $this->projectMemberRepository->getParticipatedProjects( $userId, $limitWorkspace ? $workspaceId : null, $showCollaboration, $projectName, $page, $pageSize, $sortField, $sortDirection, $organizationCodes ); 
+}
+ /** * InitializeItemMemberSet . * * @param string $userId user ID * @param int $projectId Project ID * @param int $workspaceId workspace ID * @param string $organizationCode organization code */ 
+    public function initializeProjectMemberAndSet ( string $userId, int $projectId, int $workspaceId, string $organizationCode ): void 
+{
+ // CreateItemMemberrecord Set as owner Role $memberEntity = new ProjectMemberEntity(); $memberEntity->setProjectId($projectId); $memberEntity->setTargetTypeFromString('user '); $memberEntity->setTargetId($userId); $memberEntity->setRole(MemberRole::OWNER); $memberEntity->setOrganizationCode($organizationCode); $memberEntity->setInvitedBy($userId); // BatchInsertMemberrecord $this->projectMemberRepository->insert([$memberEntity]); // CreateItemMemberSet record Bindworkspace  $this->projectMemberSettingRepository->setProjectShortcut($userId, $projectId, $workspaceId, $organizationCode); 
+}
+ /** * ThroughInviteLinkAddItemMember. * * @param string $projectId Project ID * @param string $userId user ID * @param MemberRole $role MemberRole * @param string $organizationCode organization code * @param string $invitedBy InviteID * @return ProjectMemberEntity CreateMember */ 
+    public function addMemberByInvitation( string $projectId, string $userId, MemberRole $role, string $organizationCode, string $invitedBy ): ProjectMemberEntity 
+{
+ // check whether already yes Member $isExistingMember = $this->getMemberByProjectAnduser ((int) $projectId, $userId); if ($isExistingMember) 
+{
+ return $isExistingMember; 
+}
+ // create new ItemMemberrecord $memberEntity = new ProjectMemberEntity(); $memberEntity->setProjectId((int) $projectId); $memberEntity->setTargetTypeFromString(MemberType::USER->value); $memberEntity->setTargetId($userId); $memberEntity->setRole($role); $memberEntity->setOrganizationCode($organizationCode); $memberEntity->setInvitedBy($invitedBy); $memberEntity->setJoinMethod(MemberJoinMethod::LINK); // InsertMemberrecord $this->projectMemberRepository->insert([$memberEntity]); return $memberEntity; 
+}
+ /** * delete specified user ItemMemberRelationship. * * @param int $projectId Project ID * @param string $userId user ID * @return bool delete whether Success */ 
+    public function removeMemberByuser (int $projectId, string $userId): bool 
+{
+ $deletedCount = $this->projectMemberRepository->deleteByProjectAnduser ($projectId, $userId); return $deletedCount > 0; 
+}
+ /** * delete specified user TargetTypeItemMemberRelationship. * * @param int $projectId Project ID * @param string $targetType TargetTypeuser /Department * @param string $targetId TargetID * @return bool delete whether Success */ 
+    public function removeMemberByTarget(int $projectId, string $targetType, string $targetId): bool 
+{
+ $deletedCount = $this->projectMemberRepository->deleteByProjectAndTarget($projectId, $targetType, $targetId); return $deletedCount > 0; 
+}
+ /** * According toProject IDuser IDGetItemMemberinfo . * * @param int $projectId Project ID * @param string $userId user ID * @return null|ProjectMemberEntity ItemMember */ 
+    public function getMemberByProjectAnduser (int $projectId, string $userId): ?ProjectMemberEntity 
+{
+ return $this->projectMemberRepository->getMemberByProjectAnduser ($projectId, $userId); 
+}
+ /** * According toProject IDDepartmentIDArrayGetItemMemberlist . * * @param int $projectId Project ID * @param array $departmentIds DepartmentIDArray * @return ProjectMemberEntity[] ItemMemberArray */ 
+    public function getMembersByProjectAndDepartmentIds(int $projectId, array $departmentIds): array 
+{
+ return $this->projectMemberRepository->getMembersByProjectAndDepartmentIds($projectId, $departmentIds); 
+}
+ /** * According toProject IDMemberIDArrayGetMemberlist . * * @param int $projectId Project ID * @param array $memberIds MemberIDArray * @return ProjectMemberEntity[] ItemMemberArray */ 
+    public function getMembersByIds(int $projectId, array $memberIds): array 
+{
+ return $this->projectMemberRepository->getMembersByIds((int) $projectId, $memberIds); 
+}
+ /** * BatchUpdateMemberpermission NewFormattarget_type + target_id. * * @param int $projectId Project ID * @param array $roleUpdates [['target_type' => '', 'target_id' => '', 'role' => ''], ...] * @return int Updaterecord */ 
+    public function batchUpdateRole(int $projectId, array $roleUpdates): int 
+{
+ $updateData = []; foreach ($roleUpdates as $member) 
+{
+ $memberRole = MemberRole::validatepermission Level($member['role']); $updateData[] = [ 'target_type' => $member['target_type'], 'target_id' => $member['target_id'], 'role' => $memberRole->value, ]; 
+}
+ return $this->projectMemberRepository->batchUpdateRole($projectId, $updateData); 
+}
+ /** * Batchdelete Member. * * @param int $projectId Project ID * @param array $memberIds MemberIDArray * @return int delete record */ 
+    public function deleteMembersByIds(int $projectId, array $memberIds): int 
+{
+ return $this->projectMemberRepository->deleteMembersByIds($projectId, $memberIds); 
+}
+ /** * AddItemMemberInternalInvite. * * @param ProjectMemberEntity[] $memberEntities MemberArray * @param string $organizationCode organization code */ 
+    public function addInternalMembers(array $memberEntities, string $organizationCode): void 
+{
+ if (empty($memberEntities)) 
+{
+ return; 
+}
+ // as each MemberSet organization code foreach ($memberEntities as $memberEntity) 
+{
+ $memberEntity->setJoinMethod(MemberJoinMethod::INTERNAL); $memberEntity->setOrganizationCode($organizationCode); 
+}
+ // BatchInsertMember $this->projectMemberRepository->insert($memberEntities); 
+}
+ 
+    public function getProjectIdsByCollaboratorTargets(array $targetIds): array 
+{
+ $roles = [MemberRole::MANAGE->value, MemberRole::EDITOR->value, MemberRole::VIEWER->value]; return $this->projectMemberRepository->getProjectIdsByCollaboratorTargets($targetIds, $roles); 
+}
+ /** * BatchGetuser AtItemin highest permission Role. * * @param array $projectIds Project IDArray * @param array $targetIds TargetIDArrayuser IDDepartmentID * @return array [project => role] Project IDMap toRole */ 
+    public function getuser HighestRolesInProjects(array $projectIds, array $targetIds): array 
+{
+ // 1. Get member entity data from repository $memberEntities = $this->projectMemberRepository->getProjectMembersByTargetIds($projectIds, $targetIds); if (empty($memberEntities)) 
+{
+ return []; 
+}
+ // 2. ItemGroupCalculate each Itemhighest permission Role $projectRoles = []; foreach ($memberEntities as $entity) 
+{
+ $projectId = $entity->getProjectId(); $role = $entity->getRole(); $permissionLevel = $role->getpermission Level(); // IfItemDon't haverecord or current Rolepermission Update if (! isset($projectRoles[$projectId]) || $permissionLevel > $projectRoles[$projectId]['level']) 
+{
+ $projectRoles[$projectId] = [ 'role' => $role->value, 'level' => $permissionLevel, ]; 
+}
+ 
+}
+ // 3. Return RoleValueNot containpermission return array_map(fn ($data) => $data['role'], $projectRoles); 
+}
+ 
+}
+ 

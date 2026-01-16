@@ -1,1 +1,180 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Application\BeAgent\Service; use App\Domain\Contact\Service\DelightfulUserDomainService; use App\Domain\File\Service\FileDomainService; use App\Infrastructure\Core\Exception\ExceptionBuilder; use App\Infrastructure\Util\Context\RequestContext; use Carbon\Carbon; use Delightful\BeDelightful\Domain\Share\Constant\ResourceType; use Delightful\BeDelightful\Domain\Share\Constant\ShareAccessType; use Delightful\BeDelightful\Domain\Share\Entity\ResourceShareEntity; use Delightful\BeDelightful\Domain\Share\Service\ResourceShareDomainService; use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole; use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService; use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode; use Delightful\BeDelightful\Infrastructure\Utils\PasswordCrypt; use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\InvitationDetailResponseDTO; use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\InvitationLinkResponseDTO; use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\JoinProjectResponseDTO; /** * ProjectInvitation linkApplicationService * * ResponsiblecoordinateProjectInvitation linkRelatedbusiness logic*/ class ProjectInvitationLinkAppService extends AbstractAppService { public function __construct( private ResourceShareDomainService $resourceShareDomainService, private ProjectMemberDomainService $projectMemberDomainService, private DelightfulUserDomainService $delightfulUserDomainService, private FileDomainService $fileDomainService ) { } /** * getProjectInvitation linkinformation.*/ public function getInvitationLink(RequestContext $requestContext, int $projectId): ?InvitationLinkResponseDTO { $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode(); $currentUserId = $requestContext->getUserAuthorization()->getId(); // 1. ValidateProjectPermission $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode); $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) { return Null; } return InvitationLinkResponseDTO::fromEntity($shareEntity, $this->resourceShareDomainService); } /** * Enable/Close invitation link.*/ public function toggleInvitationLink(RequestContext $requestContext, int $projectId, bool $enabled): InvitationLinkResponseDTO { $currentUserId = $requestContext->getUserAuthorization()->getId(); $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode(); // 1. ValidatewhetherHaveProjectmanagementPermission $project = $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode); if ($project->getUserId() !== $currentUserId) { ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.invalid_permission_level'); } // 2. FindExistingInviteshare $existingShare = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if ($existingShare) { // UpdateExistingshareEnable/DisableStatus $savedShare = $this->resourceShareDomainService->toggleShareStatus( $existingShare->getId(), $enabled, $currentUserId ); return InvitationLinkResponseDTO::fromEntity($savedShare, $this->resourceShareDomainService); } if (! $enabled) { // IfDoes not existinAnd require close, ThrowAbnormal ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 3. Create new Inviteshare (through ResourceShareDomainService) $shareEntity = $this->resourceShareDomainService->saveShare( (string) $projectId, ResourceType::ProjectInvitation->value, $currentUserId, $organizationCode, [ 'resource_name' => $project->getProjectName(), 'share_type' => ShareAccessType::Internet->value, 'extra' => [ 'default_join_permission' => MemberRole::VIEWER->value, ], ], ); return InvitationLinkResponseDTO::fromEntity($shareEntity, $this->resourceShareDomainService); } /** * ResetInvitation link.*/ public function resetInvitationLink(RequestContext $requestContext, int $projectId): InvitationLinkResponseDTO { $currentUserId = $requestContext->getUserAuthorization()->getId(); $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode(); // 1. ValidateProjectPermission $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode); // 2. getExistingInviteshare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 3. SaveUpdate $savedShare = $this->resourceShareDomainService->regenerateShareCodeById($shareEntity->getId()); return InvitationLinkResponseDTO::fromEntity($savedShare, $this->resourceShareDomainService); } /** * setpasswordProtect.*/ public function setPassword(RequestContext $requestContext, int $projectId, bool $enabled): string { $currentUserId = $requestContext->getUserAuthorization()->getId(); $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode(); // 1. ValidateProjectPermission $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode); // 2. getExistingInviteshare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 3. setpasswordProtectswitch if ($enabled) { // EnablepasswordProtect $password = $shareEntity->getPassword(); // IfNo/Nonehistorypassword, Generate new password if (empty($password)) { $plainPassword = ResourceShareEntity::generateRandomPassword(); } else { $plainPassword = PasswordCrypt::decrypt($password); } $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $plainPassword); return $plainPassword; } // ClosepasswordProtect (Reservepassword) $shareEntity->setIsPasswordEnabled(false); $shareEntity->setUpdatedAt(date('Y-m-d H:i:s')); $shareEntity->setUpdatedUid($currentUserId); $this->resourceShareDomainService->saveShareByEntity($shareEntity); return ''; } /** *  re setpassword*/ public function resetPassword(RequestContext $requestContext, int $projectId): string { $currentUserId = $requestContext->getUserAuthorization()->getId(); $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode(); // 1. ValidateProjectPermission $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode); // 2. getExistingInviteshare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 3. Generate new password $newPassword = ResourceShareEntity::generateRandomPassword(); $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $newPassword); return $newPassword; } /** * ModifyInvitation linkpassword*/ public function changePassword(RequestContext $requestContext, int $projectId, string $newPassword): string { $currentUserId = $requestContext->getUserAuthorization()->getId(); $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode(); // 1. ValidateProjectPermission $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode); // 2. ValidatepasswordLength (Maximum18bit) if (strlen($newPassword) > 18 || strlen($newPassword) < 3) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT); } // 3. getInvitation link $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 4. UpdatepasswordAndEnablepasswordProtect $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $newPassword); return $newPassword; } /** * ModifyPermissionGrade.*/ public function updateDefaultJoinPermission(RequestContext $requestContext, int $projectId, string $permission): string { $currentUserId = $requestContext->getUserAuthorization()->getId(); $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode(); // 1. ValidateProjectPermission $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode); // 2. getExistingInviteshare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 3. ValidateAndUpdatePermissionGrade MemberRole::validatePermissionLevel($permission); // 4. Update extra  in  default_join_permission $extra = $shareEntity->getExtra() ?? []; $extra['default_join_permission'] = $permission; $shareEntity->setExtra($extra); $shareEntity->setUpdatedAt(date('Y-m-d H:i:s')); $shareEntity->setUpdatedUid($currentUserId); // 5. SaveUpdate $this->resourceShareDomainService->saveShareByEntity($shareEntity); return $permission; } /** * throughTokengetInviteinformation (ExternaluserPreview).*/ public function getInvitationByToken(RequestContext $requestContext, string $token): InvitationDetailResponseDTO { $currentUserId = $requestContext->getUserAuthorization()->getId(); // 1. getshare information $shareEntity = $this->resourceShareDomainService->getShareByCode($token); if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 2. Checkwhether already Enable if (! $shareEntity->getIsEnabled()) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_DISABLED); } // 3. CheckwhetherValid (Expire、Deletewait) if (! $shareEntity->isValid()) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_INVALID); } $resourceId = $shareEntity->getResourceId(); $projectId = (int) $resourceId; // 4. ValidatelinkCreatorwhether have ProjectmanagementPermission, May existinSubsequently willuserfromthisProject up Delete $project = $this->getAccessibleProjectWithManager($projectId, $shareEntity->getCreatedUid(), $shareEntity->getOrganizationCode()); // 5. ExtractCreatorID $creatorId = $project->getUserId(); $isCreator = $creatorId === $currentUserId; // 6. CheckMemberRelationship $hasJoined = $isCreator || $this->projectMemberDomainService->isProjectMemberByUser($projectId, $currentUserId); // 7. getCreatorinformation $creatorEntity = $this->delightfulUserDomainService->getByUserId($creatorId); $creatorAvatarUrl = $creatorNickName = ''; if ($creatorEntity) { $creatorNickName = $creatorEntity->getNickname(); $creatorAvatarUrl = $this->fileDomainService->getLink('', $creatorEntity->getAvatarUrl()) ?? $creatorEntity->getAvatarUrl(); } // 8. from extra get from default_join_permission $defaultJoinPermission = $shareEntity->getExtraAttribute('default_join_permission', 'viewer'); return InvitationDetailResponseDTO::fromArray([ 'project_id' => $resourceId, 'project_name' => $project->getProjectName(), 'project_description' => $project->getProjectDescription() ?? '', 'organization_code' => $project->getUserOrganizationCode() ?? '', 'creator_id' => $creatorId, 'creator_name' => $creatorNickName, 'creator_avatar' => $creatorAvatarUrl, 'default_join_permission' => $defaultJoinPermission, 'requires_password' => $shareEntity->getIsPasswordEnabled(), 'token' => $shareEntity->getShareCode(), 'has_joined' => $hasJoined, ]); } /** * JoinProject (ExternaluserOperation).*/ public function joinProject(RequestContext $requestContext, string $token, ?string $password = Null): JoinProjectResponseDTO { $currentUserId = $requestContext->getUserAuthorization()->getId(); // 1. Validatesharelink $shareEntity = $this->resourceShareDomainService->getShareByCode($token); if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND); } // 2. Checkwhether already Enable if (! $shareEntity->getIsEnabled()) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_DISABLED); } // 3. CheckwhetherValid (Expire、Deletewait) if (! $shareEntity->isValid()) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_INVALID); } // 4. Validatepassword if ($shareEntity->getIsPasswordEnabled()) { // linkEnable ed passwordProtect if (empty($password)) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT); } if (! $this->resourceShareDomainService->verifyPassword($shareEntity, $password)) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT); } } // 5. Checkwhether already through is ProjectMember (throughDomainService) $isExistingMember = $this->projectMemberDomainService->isProjectMemberByUser( (int) $shareEntity->getResourceId(), $currentUserId ); if ($isExistingMember) { ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_ALREADY_JOINED); } $projectId = (int) $shareEntity->getResourceId(); // 6. ValidatelinkCreatorwhether have ProjectmanagementPermission, May existinSubsequently willuserfromthisProject up Delete $this->getAccessibleProjectWithManager($projectId, $shareEntity->getCreatedUid(), $shareEntity->getOrganizationCode()); // 7. from extra get from default_join_permission, AndConvert toMemberRole $permission = $shareEntity->getExtraAttribute('default_join_permission', MemberRole::VIEWER->value); $memberRole = MemberRole::validatePermissionLevel($permission); // UseDomainServiceaddMember, matchDDDarchitecture $projectMemberEntity = $this->projectMemberDomainService->addMemberByInvitation( $shareEntity->getResourceId(), $currentUserId, $memberRole, $shareEntity->getOrganizationCode(), $shareEntity->getCreatedUid() // Invite user （Invitation linkCreator） ); return JoinProjectResponseDTO::fromArray([ 'project_id' => $shareEntity->getResourceId(), 'user_role' => $memberRole->value, 'join_method' => $projectMemberEntity->getJoinMethod()->value, 'joined_at' => Carbon::now()->toDateTimeString(), ]); } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+
+use App\Domain\Contact\Service\Magicuser DomainService;
+use App\Domain\File\Service\FileDomainService;
+use App\Infrastructure\Core\Exception\ExceptionBuilder;
+use App\Infrastructure\Util\Context\RequestContext;
+use Carbon\Carbon;
+use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
+use Delightful\BeDelightful\Domain\Share\Constant\ShareAccessType;
+use Delightful\BeDelightful\Domain\Share\Entity\ResourceShareEntity;
+use Delightful\BeDelightful\Domain\Share\Service\ResourceShareDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Infrastructure\Utils\PasswordCrypt;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\InvitationDetailResponseDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\InvitationLinkResponseDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\JoinProjectResponseDTO;
+/** * ItemInviteLinkApplyService * * ItemInviteLinkrelated */
+
+class ProjectInvitationLinkAppService extends AbstractAppService 
+{
+ 
+    public function __construct( 
+    private ResourceShareDomainService $resourceShareDomainService, 
+    private ProjectMemberDomainService $projectMemberDomainService, 
+    private Magicuser DomainService $magicuser DomainService, 
+    private FileDomainService $fileDomainService ) 
+{
+ 
+}
+ /** * GetItemInviteLinkinfo . */ 
+    public function getInvitationLink(RequestContext $requestContext, int $projectId): ?InvitationLinkResponseDTO 
+{
+ $organizationCode = $requestContext->getuser Authorization()->getOrganizationCode(); $currentuser Id = $requestContext->getuser Authorization()->getId(); // 1. Validate Itempermission $this->getAccessibleProjectWithManager($projectId, $currentuser Id, $organizationCode); $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) 
+{
+ return null; 
+}
+ return InvitationLinkResponseDTO::fromEntity($shareEntity, $this->resourceShareDomainService); 
+}
+ /** * On/CloseInviteLink. */ 
+    public function toggleInvitationLink(RequestContext $requestContext, int $projectId, bool $enabled): InvitationLinkResponseDTO 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); $organizationCode = $requestContext->getuser Authorization()->getOrganizationCode(); // 1. Validate if has project management permission $project = $this->getAccessibleProjectWithManager($projectId, $currentuser Id, $organizationCode); if ($project->getuser Id() !== $currentuser Id) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.invalid_permission_level'); 
+}
+ // 2. FindHaveInviteShare $existingShare = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if ($existingShare) 
+{
+ // UpdateHaveShareEnabled/DisabledStatus $savedShare = $this->resourceShareDomainService->toggleShareStatus( $existingShare->getId(), $enabled, $currentuser Id ); return InvitationLinkResponseDTO::fromEntity($savedShare, $this->resourceShareDomainService); 
+}
+ if (! $enabled) 
+{
+ // Ifdoes not existand CloseThrowException ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 3. create new InviteShare (Through ResourceShareDomainService) $shareEntity = $this->resourceShareDomainService->saveShare( (string) $projectId, ResourceType::ProjectInvitation->value, $currentuser Id, $organizationCode, [ 'resource_name' => $project->getProjectName(), 'share_type' => ShareAccessType::Internet->value, 'extra' => [ 'default_join_permission' => MemberRole::VIEWER->value, ], ], ); return InvitationLinkResponseDTO::fromEntity($shareEntity, $this->resourceShareDomainService); 
+}
+ /** * ResetInviteLink. */ 
+    public function resetInvitationLink(RequestContext $requestContext, int $projectId): InvitationLinkResponseDTO 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); $organizationCode = $requestContext->getuser Authorization()->getOrganizationCode(); // 1. Validate Itempermission $this->getAccessibleProjectWithManager($projectId, $currentuser Id, $organizationCode); // 2. GetHaveInviteShare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 3. SaveUpdate $savedShare = $this->resourceShareDomainService->regenerateShareCodeById($shareEntity->getId()); return InvitationLinkResponseDTO::fromEntity($savedShare, $this->resourceShareDomainService); 
+}
+ /** * Set PasswordProtected. */ 
+    public function setPassword(RequestContext $requestContext, int $projectId, bool $enabled): string 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); $organizationCode = $requestContext->getuser Authorization()->getOrganizationCode(); // 1. Validate Itempermission $this->getAccessibleProjectWithManager($projectId, $currentuser Id, $organizationCode); // 2. GetHaveInviteShare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 3. Set PasswordProtectedSwitch if ($enabled) 
+{
+ // OnPasswordProtected $password = $shareEntity->getPassword(); // IfDon't haveHistoryPasswordGenerate NewPassword if (empty($password)) 
+{
+ $plainPassword = ResourceShareEntity::generateRandomPassword(); 
+}
+ else 
+{
+ $plainPassword = PasswordCrypt::decrypt($password); 
+}
+ $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $plainPassword); return $plainPassword; 
+}
+ // ClosePasswordProtectedPassword $shareEntity->setIsPasswordEnabled(false); $shareEntity->setUpdatedAt(date('Y-m-d H:i:s')); $shareEntity->setUpdatedUid($currentuser Id); $this->resourceShareDomainService->saveShareByEntity($shareEntity); return ''; 
+}
+ /** * NewSet Password */ 
+    public function resetPassword(RequestContext $requestContext, int $projectId): string 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); $organizationCode = $requestContext->getuser Authorization()->getOrganizationCode(); // 1. Validate Itempermission $this->getAccessibleProjectWithManager($projectId, $currentuser Id, $organizationCode); // 2. GetHaveInviteShare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 3. Generate NewPassword $newPassword = ResourceShareEntity::generateRandomPassword(); $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $newPassword); return $newPassword; 
+}
+ /** * ModifyInviteLinkPassword */ 
+    public function changePassword(RequestContext $requestContext, int $projectId, string $newPassword): string 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); $organizationCode = $requestContext->getuser Authorization()->getOrganizationCode(); // 1. Validate Itempermission $this->getAccessibleProjectWithManager($projectId, $currentuser Id, $organizationCode); // 2. Validate PasswordLengthMaximum18 if (strlen($newPassword) > 18 || strlen($newPassword) < 3) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT); 
+}
+ // 3. GetInviteLink $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 4. UpdatePasswordEnabledPasswordProtected $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $newPassword); return $newPassword; 
+}
+ /** * Modifypermission Level. */ 
+    public function updateDefaultJoinpermission (RequestContext $requestContext, int $projectId, string $permission): string 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); $organizationCode = $requestContext->getuser Authorization()->getOrganizationCode(); // 1. Validate Itempermission $this->getAccessibleProjectWithManager($projectId, $currentuser Id, $organizationCode); // 2. GetHaveInviteShare $shareEntity = $this->resourceShareDomainService->getShareByResource( (string) $projectId, ResourceType::ProjectInvitation->value ); if (! $shareEntity) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 3. Validate Updatepermission Level MemberRole::validatepermission Level($permission); // 4. Update extra in default_join_permission $extra = $shareEntity->getExtra() ?? []; $extra['default_join_permission'] = $permission; $shareEntity->setExtra($extra); $shareEntity->setUpdatedAt(date('Y-m-d H:i:s')); $shareEntity->setUpdatedUid($currentuser Id); // 5. SaveUpdate $this->resourceShareDomainService->saveShareByEntity($shareEntity); return $permission; 
+}
+ /** * ThroughTokenGetInviteinfo Externaluser Preview. */ 
+    public function getInvitationByToken(RequestContext $requestContext, string $token): InvitationDetailResponseDTO 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); // 1. GetShareinfo $shareEntity = $this->resourceShareDomainService->getShareByCode($token); if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 2. check whether Enabled if (! $shareEntity->getIsEnabled()) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_DISABLED); 
+}
+ // 3. check whether validdelete  if (! $shareEntity->isValid()) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_INVALID); 
+}
+ $resourceId = $shareEntity->getResourceId(); $projectId = (int) $resourceId; // 4. Validate Linkcreator whether HaveItempermission Existuser FromItemdelete $project = $this->getAccessibleProjectWithManager($projectId, $shareEntity->getCreatedUid(), $shareEntity->getOrganizationCode()); // 5. creator ID $creatorId = $project->getuser Id(); $iscreator = $creatorId === $currentuser Id; // 6. check MemberRelationship $hasJoined = $iscreator || $this->projectMemberDomainService->isProjectMemberByuser ($projectId, $currentuser Id); // 7. Getcreator info $creatorEntity = $this->magicuser DomainService->getByuser Id($creatorId); $creatorAvatarUrl = $creatorNickName = ''; if ($creatorEntity) 
+{
+ $creatorNickName = $creatorEntity->getNickname(); $creatorAvatarUrl = $this->fileDomainService->getLink('', $creatorEntity->getAvatarUrl()) ?? $creatorEntity->getAvatarUrl(); 
+}
+ // 8. From extra in Get default_join_permission $defaultJoinpermission = $shareEntity->getExtraAttribute('default_join_permission', 'viewer'); return InvitationDetailResponseDTO::fromArray([ 'project_id' => $resourceId, 'project_name' => $project->getProjectName(), 'project_description' => $project->getProjectDescription() ?? '', 'organization_code' => $project->getuser OrganizationCode() ?? '', 'creator_id' => $creatorId, 'creator_name' => $creatorNickName, 'creator_avatar' => $creatorAvatarUrl, 'default_join_permission' => $defaultJoinpermission , 'requires_password' => $shareEntity->getIsPasswordEnabled(), 'token' => $shareEntity->getShareCode(), 'has_joined' => $hasJoined, ]); 
+}
+ /** * JoinItemExternaluser . */ 
+    public function joinProject(RequestContext $requestContext, string $token, ?string $password = null): JoinProjectResponseDTO 
+{
+ $currentuser Id = $requestContext->getuser Authorization()->getId(); // 1. Validate ShareLink $shareEntity = $this->resourceShareDomainService->getShareByCode($token); if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND); 
+}
+ // 2. check whether Enabled if (! $shareEntity->getIsEnabled()) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_DISABLED); 
+}
+ // 3. check whether validdelete  if (! $shareEntity->isValid()) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_INVALID); 
+}
+ // 4. Validate Password if ($shareEntity->getIsPasswordEnabled()) 
+{
+ // LinkEnableded PasswordProtected if (empty($password)) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT); 
+}
+ if (! $this->resourceShareDomainService->verifyPassword($shareEntity, $password)) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT); 
+}
+ 
+}
+ // 5. check whether already yes ItemMemberThroughDomainService $isExistingMember = $this->projectMemberDomainService->isProjectMemberByuser ( (int) $shareEntity->getResourceId(), $currentuser Id ); if ($isExistingMember) 
+{
+ ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_ALREADY_JOINED); 
+}
+ $projectId = (int) $shareEntity->getResourceId(); // 6. Validate Linkcreator whether HaveItempermission Existuser FromItemdelete $this->getAccessibleProjectWithManager($projectId, $shareEntity->getCreatedUid(), $shareEntity->getOrganizationCode()); // 7. From extra in Get default_join_permissionConvert toMemberRole $permission = $shareEntity->getExtraAttribute('default_join_permission', MemberRole::VIEWER->value); $memberRole = MemberRole::validatepermission Level($permission); // UsingDomainServiceAddMemberComply withDDD $projectMemberEntity = $this->projectMemberDomainService->addMemberByInvitation( $shareEntity->getResourceId(), $currentuser Id, $memberRole, $shareEntity->getOrganizationCode(), $shareEntity->getCreatedUid() // Inviter (invitation link creator) ); return JoinProjectResponseDTO::fromArray([ 'project_id' => $shareEntity->getResourceId(), 'user_role' => $memberRole->value, 'join_method' => $projectMemberEntity->getJoinMethod()->value, 'joined_at' => Carbon::now()->toDateTimeString(), ]); 
+}
+ 
+}
+ 

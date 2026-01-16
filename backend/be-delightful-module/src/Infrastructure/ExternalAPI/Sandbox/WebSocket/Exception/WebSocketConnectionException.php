@@ -1,1 +1,15 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket\Exception; use RuntimeException; /** * WebSocketConnectRelatedAbnormal.*/ class WebSocketConnectionException extends RuntimeException { } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket\Exception;
+
+use RuntimeException;
+/** * WebSocket connection related exception. */
+
+class WebSocketConnectionException extends RuntimeException 
+{
+ 
+}
+ 

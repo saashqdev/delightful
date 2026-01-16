@@ -1,1 +1,40 @@
-<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the MIT software license */ namespace Delightful\BeDelightful\Interfaces\Agent\Assembler; use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\BuiltinTool; use Delightful\BeDelightful\Interfaces\Agent\DTO\BuiltinToolCategoryDTO; use Delightful\BeDelightful\Interfaces\Agent\DTO\BuiltinToolDTO; class BuiltinToolAssembler { /** * Create toolCategorylistDTO (Hierarchyformat). * @return array<BuiltinToolCategoryDTO>*/ public static function createToolCategoryListDTO(): array { $categoryDTOs = []; //  by CategoryGroupToolAnddirectlyCreateCategoryDTO foreach (BuiltinTool::cases() as $toolEnum) { $toolCode = $toolEnum->value; $category = $toolEnum->getToolCategory(); $categoryCode = $category->value; // IfCategoryDTOstillDoes not existin, Create it if (! isset($categoryDTOs[$categoryCode])) { $categoryDTOs[$categoryCode] = new BuiltinToolCategoryDTO([ 'name' => $category->getName(), 'icon' => $category->getIcon(), 'description' => $category->getDescription(), 'tools' => [], ]); } // addTool to Pair should Category $categoryDTOs[$categoryCode]->addTool(new BuiltinToolDTO([ 'code' => $toolCode, 'name' => $toolEnum->getToolName(), 'description' => $toolEnum->getToolDescription(), 'icon' => $toolEnum->getToolIcon(), 'required' => $toolEnum->isRequired(), ])); } return array_values($categoryDTOs); } /** * Create toollistDTO (tileformat). * @return array<BuiltinToolDTO>*/ public static function createToolListDTO(): array { $tools = []; foreach (BuiltinTool::cases() as $toolEnum) { $tools[] = new BuiltinToolDTO([ 'code' => $toolEnum->value, 'name' => $toolEnum->getToolName(), 'description' => $toolEnum->getToolDescription(), 'icon' => $toolEnum->getToolIcon(), 'required' => $toolEnum->isRequired(), ]); } return $tools; } } 
+<?php
+declare(strict_types=1);
+
+/** * Copyright (c) Be Delightful , Distributed under the MIT software license */ 
+
+namespace Delightful\BeDelightful\Interfaces\Agent\Assembler;
+
+use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Builtintool ;
+use Delightful\BeDelightful\Interfaces\Agent\DTO\Builtintool CategoryDTO;
+use Delightful\BeDelightful\Interfaces\Agent\DTO\Builtintool DTO;
+
+class Builtintool Assembler 
+{
+ /** * Createtool Categorylist DTOZ-indexFormat. * @return array<Builtintool CategoryDTO> */ 
+    public 
+    static function createtool Categorylist DTO(): array 
+{
+ $categoryDTOs = []; // CategoryGrouptool directly CreateCategoryDTO foreach (Builtintool ::cases() as $toolEnum) 
+{
+ $toolCode = $toolEnum->value; $category = $toolEnum->gettool Category(); $categoryCode = $category->value; // IfCategoryDTOdoes not existCreate if (! isset($categoryDTOs[$categoryCode])) 
+{
+ $categoryDTOs[$categoryCode] = new Builtintool CategoryDTO([ 'name' => $category->getName(), 'icon' => $category->getIcon(), 'description' => $category->getDescription(), 'tools' => [], ]); 
+}
+ // Addtool PairCategory $categoryDTOs[$categoryCode]->addtool (new Builtintool DTO([ 'code' => $toolCode, 'name' => $toolEnum->gettool Name(), 'description' => $toolEnum->gettool Description(), 'icon' => $toolEnum->gettool Icon(), 'required' => $toolEnum->isRequired(), ])); 
+}
+ return array_values($categoryDTOs); 
+}
+ /** * Createtool list DTOFormat. * @return array<Builtintool DTO> */ 
+    public 
+    static function createtool list DTO(): array 
+{
+ $tools = []; foreach (Builtintool ::cases() as $toolEnum) 
+{
+ $tools[] = new Builtintool DTO([ 'code' => $toolEnum->value, 'name' => $toolEnum->gettool Name(), 'description' => $toolEnum->gettool Description(), 'icon' => $toolEnum->gettool Icon(), 'required' => $toolEnum->isRequired(), ]); 
+}
+ return $tools; 
+}
+ 
+}
+ 

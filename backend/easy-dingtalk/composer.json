@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=8.1",
-    "bedelightful/sdk-base": "~0.1",
+    "bedelightful/sdk-base": "dev-main",
     "guzzlehttp/guzzle": "^6.0|^7.0",
     "ext-openssl": "*",
     "ext-json": "*"

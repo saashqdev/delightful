@@ -40,7 +40,7 @@
     "hyperf/websocket-client": "^3.1",
     "hyperf/websocket-server": "~3.1.0",
     "overtrue/chinese-calendar": "^1.0",
-    "bedelightful/api-response": "~0.1",
+    "bedelightful/api-response": "dev-main",
     "96qbhy/hyperf-auth": "^3.1"
   },
   "require-dev": {

@@ -25,17 +25,17 @@
     "96qbhy/hyperf-auth": "^3.1",
     "doctrine/dbal": "^3.9",
     "dragonmantank/cron-expression": "^3.3",
-    "bedelightful/api-response": "~0.1",
-    "bedelightful/async-event": "~0.1",
-    "bedelightful/cloudfile": "~0.1",
-    "bedelightful/easy-dingtalk": "~0.1",
-    "bedelightful/flow-expr-engine": "~0.1",
-    "bedelightful/php-mcp": "0.1.*",
-    "bedelightful/rule-engine-core": "~0.1",
-    "bedelightful/sdk-base": "~0.1",
-    "bedelightful/be-delightful-module": "^v0.1",
-    "bedelightful/task-scheduler": "~0.1",
-    "bedelightful/tiptap": "~0.1",
+    "bedelightful/api-response": "dev-main",
+    "bedelightful/async-event": "dev-main",
+    "bedelightful/cloudfile": "dev-main",
+    "bedelightful/easy-dingtalk": "dev-main",
+    "bedelightful/flow-expr-engine": "dev-main",
+    "bedelightful/php-mcp": "dev-main",
+    "bedelightful/rule-engine-core": "dev-main",
+    "bedelightful/sdk-base": "dev-main",
+    "bedelightful/be-delightful-module": "dev-main",
+    "bedelightful/task-scheduler": "dev-main",
+    "bedelightful/tiptap": "dev-main",
     "facile-it/php-openid-client": "^0.3.5",
     "firebase/php-jwt": "^6.10",
     "giggsey/libphonenumber-for-php": "8.13.29",
@@ -73,7 +73,7 @@
     "phpoffice/phpspreadsheet": "^2.0",
     "phpoffice/phpword": "^1.0",
     "spomky-labs/aes-key-wrap": "^7.0",
-    "swow/swow": "^1.6",
+    "swow/swow": "~1.6.1",
     "symfony/css-selector": "^7.1",
     "symfony/dom-crawler": "^7.1",
     "symfony/mime": "^7.1",
@@ -146,5 +146,54 @@
     "rector": "rector process --clear-cache",
     "php-accessor": "php -dopcache.enable_cli=1 -dopcache.jit_buffer_size=128M -dopcache.jit=1255 vendor/bin/php-accessor generate"
   },
-  "repositories": []
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../api-response"
+    },
+    {
+      "type": "path",
+      "url": "../async-event"
+    },
+    {
+      "type": "path",
+      "url": "../cloudfile"
+    },
+    {
+      "type": "path",
+      "url": "../easy-dingtalk"
+    },
+    {
+      "type": "path",
+      "url": "../flow-expr-engine"
+    },
+    {
+      "type": "path",
+      "url": "../php-mcp"
+    },
+    {
+      "type": "path",
+      "url": "../rule-engine-core"
+    },
+    {
+      "type": "path",
+      "url": "../sandbox"
+    },
+    {
+      "type": "path",
+      "url": "../sdk-base"
+    },
+    {
+      "type": "path",
+      "url": "../be-delightful-module"
+    },
+    {
+      "type": "path",
+      "url": "../task-scheduler"
+    },
+    {
+      "type": "path",
+      "url": "../tiptap"
+    }
+  ]
 }

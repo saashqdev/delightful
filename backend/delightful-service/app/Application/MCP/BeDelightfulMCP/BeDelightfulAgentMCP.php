@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Application\MCP\SupperDelightfulMCP;
+namespace App\Application\MCP\BeDelightfulMCP;
 
 use App\Application\Contact\UserSetting\UserSettingKey;
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
@@ -34,7 +34,7 @@ use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInterface
+readonly class BeDelightfulAgentMCP implements BeDelightfulAgentMCPInterface
 {
     protected LoggerInterface $logger;
 
@@ -46,7 +46,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
         protected DelightfulFlowDomainService $delightfulFlowDomainService,
         LoggerFactory $loggerFactory,
     ) {
-        $this->logger = $loggerFactory->get('SupperDelightfulAgentMCP');
+        $this->logger = $loggerFactory->get('BeDelightfulAgentMCP');
     }
 
     public function createChatMessageRequestMcpConfig(MCPDataIsolation $dataIsolation, TaskContext $taskContext, array $agentIds = [], array $mcpIds = [], array $toolIds = []): ?array

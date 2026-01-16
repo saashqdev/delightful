@@ -28,8 +28,8 @@ use App\Application\KnowledgeBase\VectorDatabase\Similarity\Driver\FullTextSimil
 use App\Application\KnowledgeBase\VectorDatabase\Similarity\Driver\GraphSimilaritySearchInterface;
 use App\Application\KnowledgeBase\VectorDatabase\Similarity\Driver\HybridSimilaritySearchInterface;
 use App\Application\KnowledgeBase\VectorDatabase\Similarity\Driver\SemanticSimilaritySearchInterface;
-use App\Application\MCP\SupperDelightfulMCP\SupperDelightfulAgentMCP;
-use App\Application\MCP\SupperDelightfulMCP\SupperDelightfulAgentMCPInterface;
+use App\Application\MCP\BeDelightfulMCP\BeDelightfulAgentMCP;
+use App\Application\MCP\BeDelightfulMCP\BeDelightfulAgentMCPInterface;
 use App\Application\MCP\Utils\MCPExecutor\ExternalHttpExecutor;
 use App\Application\MCP\Utils\MCPExecutor\ExternalHttpExecutorInterface;
 use App\Application\MCP\Utils\MCPExecutor\ExternalStdioExecutor;
@@ -335,7 +335,7 @@ $dependencies = [
     MCPServerToolRepositoryInterface::class => MCPServerToolRepository::class,
     AuthenticatorInterface::class => ApiKeyProviderAuthenticator::class,
     MCPUserSettingRepositoryInterface::class => MCPUserSettingRepository::class,
-    SupperDelightfulAgentMCPInterface::class => SupperDelightfulAgentMCP::class,
+    BeDelightfulAgentMCPInterface::class => BeDelightfulAgentMCP::class,
     ExternalStdioExecutorInterface::class => ExternalStdioExecutor::class,
     ExternalHttpExecutorInterface::class => ExternalHttpExecutor::class,
 

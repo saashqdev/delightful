@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
 /**
  * Checkpoint回滚检查请求类

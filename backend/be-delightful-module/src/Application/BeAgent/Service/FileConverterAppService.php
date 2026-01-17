@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\File\Service\FileAppService;
 use App\Application\File\Service\FileCleanupAppService;
@@ -336,22 +336,22 @@ class FileConverterAppService extends AbstractAppService
     /**
      * Generates a temporary directory path based on the working directory.
      *
-     * @param string $workDir The working directory path, e.g., /SUPER_MAGIC/usi_xxx/project_803277391451111425
-     * @return string The temporary directory path, e.g., /SUPER_MAGIC/usi_xxx/temp
+     * @param string $workDir The working directory path, e.g., /BE_DELIGHTFUL/usi_xxx/project_803277391451111425
+     * @return string The temporary directory path, e.g., /BE_DELIGHTFUL/usi_xxx/temp
      */
     private function generateTempDir(string $workDir): string
     {
         // Remove trailing slash
         $workDir = rtrim($workDir, '/');
 
-        // Extract the first two parts of the path (/SUPER_MAGIC/usi_xxx)
+        // Extract the first two parts of the path (/BE_DELIGHTFUL/usi_xxx)
         $pathParts = explode('/', $workDir);
 
         // Reassemble the user-level base path
         $userBasePath = '';
         if (count($pathParts) >= 3) {
             // $pathParts[0] is an empty string (because the path starts with /)
-            // $pathParts[1] is SUPER_MAGIC
+            // $pathParts[1] is BE_DELIGHTFUL
             // $pathParts[2] is the user ID
             $userBasePath = '/' . $pathParts[1] . '/' . $pathParts[2];
         }

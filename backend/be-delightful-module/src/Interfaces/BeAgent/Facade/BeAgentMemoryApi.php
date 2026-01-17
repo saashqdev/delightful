@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
 
 use App\Application\LongTermMemory\Service\LongTermMemoryAppService;
 use App\Domain\LongTermMemory\DTO\CreateMemoryDTO;
@@ -83,7 +83,7 @@ class SuperAgentMemoryApi extends AbstractApi
             'enabled' => $enabled,
             'tags' => $validatedParams['tags'] ?? [],
             'orgId' => $metadata->getOrganizationCode(),
-            'appId' => AgentConstant::SUPER_MAGIC_CODE,
+            'appId' => AgentConstant::BE_DELIGHTFUL_CODE,
             // 项目 id 不能从 $metadata 获取，因为这个参数是用来区分记忆是项目还是全局的。
             'projectId' => isset($validatedParams['project_id']) ? (string) $validatedParams['project_id'] : null,
             'userId' => $metadata->getUserId(),
@@ -207,7 +207,7 @@ class SuperAgentMemoryApi extends AbstractApi
         if (! $this->longTermMemoryAppService->isMemoryBelongToUser(
             $memoryId,
             $metadata->getOrganizationCode(),
-            AgentConstant::SUPER_MAGIC_CODE,
+            AgentConstant::BE_DELIGHTFUL_CODE,
             $metadata->getUserId()
         )) {
             ExceptionBuilder::throw(GenericErrorCode::AccessDenied, trans('long_term_memory.api.memory_not_belong_to_user'));

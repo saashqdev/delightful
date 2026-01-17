@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant;
 
 /**
  * 沙箱状态常量

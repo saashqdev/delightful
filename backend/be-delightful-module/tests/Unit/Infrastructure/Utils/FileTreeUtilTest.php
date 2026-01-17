@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Tests\Unit\Infrastructure\Utils;
+namespace Delightful\BeDelightful\Tests\Unit\Infrastructure\Utils;
 
 use Delightful\BeDelightful\Infrastructure\Utils\FileTreeUtil;
 use PHPUnit\Framework\TestCase;
@@ -109,7 +109,7 @@ class FileTreeUtilTest extends TestCase
                 'file_type' => 'user_upload',
                 'file_name' => 'runtime',
                 'file_extension' => '',
-                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/runtime/',
+                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/runtime/',
                 'file_size' => 0,
                 'relative_file_path' => '/runtime/',
                 'file_url' => 'https://example.com/runtime/',
@@ -123,7 +123,7 @@ class FileTreeUtilTest extends TestCase
                 'file_type' => 'system_auto_upload',
                 'file_name' => 'index.md',
                 'file_extension' => 'md',
-                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/index.md',
+                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/index.md',
                 'file_size' => 838,
                 'relative_file_path' => '/shehu-brand-introduction/index.md',
                 'file_url' => 'https://example.com/shehu-brand-introduction/index.md',
@@ -137,7 +137,7 @@ class FileTreeUtilTest extends TestCase
                 'file_type' => 'system_auto_upload',
                 'file_name' => 'shehu-brand-highlights.md',
                 'file_extension' => 'md',
-                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/shehu-brand-highlights.md',
+                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/shehu-brand-highlights.md',
                 'file_size' => 1753,
                 'relative_file_path' => '/shehu-brand-introduction/shehu-brand-highlights.md',
                 'file_url' => 'https://example.com/shehu-brand-introduction/shehu-brand-highlights.md',
@@ -151,7 +151,7 @@ class FileTreeUtilTest extends TestCase
                 'file_type' => 'system_auto_upload',
                 'file_name' => 'shehu-brand-summary.md',
                 'file_extension' => 'md',
-                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/shehu-brand-summary.md',
+                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/shehu-brand-summary.md',
                 'file_size' => 1101,
                 'relative_file_path' => '/shehu-brand-introduction/shehu-brand-summary.md',
                 'file_url' => 'https://example.com/shehu-brand-introduction/shehu-brand-summary.md',
@@ -165,7 +165,7 @@ class FileTreeUtilTest extends TestCase
                 'file_type' => 'process',
                 'file_name' => 'shehu-brand-profile.md',
                 'file_extension' => 'md',
-                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/shehu-brand-profile.md',
+                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/shehu-brand-introduction/shehu-brand-profile.md',
                 'file_size' => 3131,
                 'relative_file_path' => '/shehu-brand-introduction/shehu-brand-profile.md',
                 'file_url' => 'https://example.com/shehu-brand-introduction/shehu-brand-profile.md',
@@ -179,7 +179,7 @@ class FileTreeUtilTest extends TestCase
                 'file_type' => 'system_auto_upload',
                 'file_name' => 'extract_shehu_brand.py',
                 'file_extension' => 'py',
-                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/extract_shehu_brand.py',
+                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/extract_shehu_brand.py',
                 'file_size' => 2549,
                 'relative_file_path' => '/extract_shehu_brand.py',
                 'file_url' => 'https://example.com/extract_shehu_brand.py',
@@ -193,7 +193,7 @@ class FileTreeUtilTest extends TestCase
                 'file_type' => 'user_upload',
                 'file_name' => '她互与大人糖品牌对比报告(1).xlsx',
                 'file_extension' => 'xlsx',
-                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/uploads/她互与大人糖品牌对比报告(1).xlsx',
+                'file_key' => 'DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_516c3a162c868e6f02de247a10e59d05/project_804396912083546113/uploads/她互与大人糖品牌对比报告(1).xlsx',
                 'file_size' => 12677,
                 'relative_file_path' => '/uploads/她互与大人糖品牌对比报告(1).xlsx',
                 'file_url' => 'https://example.com/uploads/file.xlsx',

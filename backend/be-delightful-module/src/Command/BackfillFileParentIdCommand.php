@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Command;
+namespace Delightful\BeDelightful\Command;
 
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
@@ -120,7 +120,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
      * @param string $type 存储类型 (workspace 或其他)
      * @param string $fileKey 原始文件路径
      * @param string $prefix 新前缀，如：DT001/588417216353927169
-     * @param string $oldPrefix 旧前缀，如：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_xxx
+     * @param string $oldPrefix 旧前缀，如：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx
      * @param bool $isDirectory 是否为目录
      * @return string 转换后的文件路径
      */
@@ -142,8 +142,8 @@ class BackfillFileParentIdCommand extends HyperfCommand
 
         if ($storageTypeValue == 'workspace') {
             // workspace 类型：添加 /workspace
-            // 源：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_xxx/project_804590875311198209/新建文件.php
-            // 或：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_xxx/topic_804590875311198209/新建文件.php
+            // 源：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/project_804590875311198209/新建文件.php
+            // 或：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/topic_804590875311198209/新建文件.php
             // 目标：DT001/588417216353927169/project_804590875311198209/workspace/新建文件.php
 
             // 找到 project_ 或 topic_ 开头的部分
@@ -172,8 +172,8 @@ class BackfillFileParentIdCommand extends HyperfCommand
             }
         } else {
             // 非 workspace 类型：添加 /runtime/message
-            // 源：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_xxx/project_808853145743884288/task_xxx/.chat/file.md
-            // 或：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/SUPER_MAGIC/usi_xxx/topic_808853145743884288/task_xxx/.chat/file.md
+            // 源：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/project_808853145743884288/task_xxx/.chat/file.md
+            // 或：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/topic_808853145743884288/task_xxx/.chat/file.md
             // 目标：DT001/588417216353927169/project_808853145743884288/runtime/message/task_xxx/.chat/file.md
 
             // 找到 project_ 或 topic_ 开头的部分
@@ -313,7 +313,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
 
         $md5Key = md5(StorageBucketType::Private->value);
         $prefix = $this->taskFileDomainService->getFullPrefix($updatedProject->getUserOrganizationCode());
-        $oldPrefix = $prefix . $md5Key . '/SUPER_MAGIC/' . $updatedProject->getUserId();
+        $oldPrefix = $prefix . $md5Key . '/BE_DELIGHTFUL/' . $updatedProject->getUserId();
 
         // Process files in chunks to avoid memory issues
         // 🔄 支持重复执行：只处理需要处理的文件
@@ -499,10 +499,10 @@ class BackfillFileParentIdCommand extends HyperfCommand
 
     /**
      * 转换 work_dir 路径格式（简化版）
-     * 将 /SUPER_MAGIC/usi_xxx/project_xxx/workspace 转换为 /project_xxx/workspace.
+     * 将 /BE_DELIGHTFUL/usi_xxx/project_xxx/workspace 转换为 /project_xxx/workspace.
      *
      * @param string $workDir 原始 work_dir 路径
-     * @param string $oldPrefix 旧前缀，如：SUPER_MAGIC/usi_xxx
+     * @param string $oldPrefix 旧前缀，如：BE_DELIGHTFUL/usi_xxx
      * @return string 转换后的路径
      */
     private function convertWorkDir(string $workDir, string $oldPrefix): string
@@ -593,7 +593,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
 
         try {
             $originalWorkDir = $project->getWorkDir();
-            $oldWorkDirPrefix = 'SUPER_MAGIC/' . $project->getUserId();
+            $oldWorkDirPrefix = 'BE_DELIGHTFUL/' . $project->getUserId();
             $convertedWorkDir = $this->convertWorkDir($originalWorkDir, $oldWorkDirPrefix);
 
             // 记录转换结果

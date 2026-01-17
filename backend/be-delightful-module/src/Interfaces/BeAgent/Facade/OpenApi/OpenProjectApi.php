@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi;
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi;
 
 use Dtyq\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;

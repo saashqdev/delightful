@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\Share\Assembler;
+namespace Delightful\BeDelightful\Interfaces\Share\Assembler;
 
 use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Entity\ResourceShareEntity;

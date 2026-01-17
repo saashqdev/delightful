@@ -5,79 +5,79 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Config;
+namespace Delightful\BeDelightful\Application\SuperAgent\Config;
 
 /**
  * Batch Process Configuration.
- * 批量处理配置类 - 统一管理批量文件保存的各项参数.
+ * Batch processing configuration class - centrally manages various parameters for batch file saving.
  */
 class BatchProcessConfig
 {
     /**
-     * 并发控制配置.
+     * Concurrency control configuration.
      */
-    public const int DEFAULT_MAX_CONCURRENCY = 5;   // 默认最大并发数（考虑文件IO和内存占用）
+    public const int DEFAULT_MAX_CONCURRENCY = 5;   // Default maximum concurrency (considering file IO and memory usage)
 
-    public const int MIN_CONCURRENCY = 1;           // 最小并发数
+    public const int MIN_CONCURRENCY = 1;           // Minimum concurrency
 
-    public const int MAX_CONCURRENCY = 8;           // 最大并发数上限（文件处理不宜过高）
+    public const int MAX_CONCURRENCY = 8;           // Maximum concurrency limit (file processing should not be too high)
 
     /**
-     * 批量大小限制.
+     * Batch size limit.
      */
-    public const int DEFAULT_BATCH_SIZE_LIMIT = 50; // 默认批量大小限制
+    public const int DEFAULT_BATCH_SIZE_LIMIT = 50; // Default batch size limit
 
-    public const int MAX_BATCH_SIZE_LIMIT = 100;    // 最大批量大小上限
+    public const int MAX_BATCH_SIZE_LIMIT = 100;    // Maximum batch size limit
 
     /**
-     * 功能开关.
+     * Feature switches.
      */
-    public const bool ENABLE_PERFORMANCE_MONITORING = true; // 性能监控开关
+    public const bool ENABLE_PERFORMANCE_MONITORING = true; // Performance monitoring switch
 
-    public const bool ENABLE_DETAILED_LOGGING = true;       // 详细日志开关
+    public const bool ENABLE_DETAILED_LOGGING = true;       // Detailed logging switch
 
     /**
-     * 获取最大并发数.
-     * 文件处理是IO密集型操作，需要考虑内存占用和系统资源限制.
+     * Get maximum concurrency.
+     * File processing is an IO-intensive operation, requiring consideration of memory usage and system resource limits.
      *
-     * @param int $fileCount 文件数量
-     * @return int 实际并发数
+     * @param int $fileCount File count
+     * @return int Actual concurrency
      */
     public static function getMaxConcurrency(int $fileCount): int
     {
-        // 文件处理并发策略：
-        // 1. 考虑到每个文件最大10MB，过多并发会占用大量内存
-        // 2. 文件上传涉及临时文件、网络IO，资源消耗较大
-        // 3. 分布式锁、数据库连接等也有限制
+        // File processing concurrency strategy:
+        // 1. Considering each file is up to 10MB, too much concurrency will consume a lot of memory
+        // 2. File upload involves temporary files and network IO, which consumes significant resources
+        // 3. Distributed locks and database connections also have limitations
 
         if ($fileCount == 1) {
             return 1;
         }
 
         if ($fileCount <= 3) {
-            return 3;  // 少量文件用3个并发
+            return 3;  // Use 3 concurrent for small number of files
         }
 
-        // 无论多少文件，最大并发数都不超过5个
+        // Maximum concurrency does not exceed 5 regardless of file count
         return self::DEFAULT_MAX_CONCURRENCY;
     }
 
     /**
-     * 是否启用并发处理.
+     * Whether to enable concurrent processing.
      *
-     * @param int $fileCount 文件数量
-     * @return bool 是否启用并发
+     * @param int $fileCount File count
+     * @return bool Whether to enable concurrency
      */
     public static function shouldEnableConcurrency(int $fileCount): bool
     {
-        // 文件数量小于2时不使用并发
+        // Do not use concurrency when file count is less than 2
         return $fileCount >= 2;
     }
 
     /**
-     * 获取批量大小限制.
+     * Get batch size limit.
      *
-     * @return int 批量大小限制
+     * @return int Batch size limit
      */
     public static function getBatchSizeLimit(): int
     {
@@ -85,9 +85,9 @@ class BatchProcessConfig
     }
 
     /**
-     * 是否启用性能监控.
+     * Whether performance monitoring is enabled.
      *
-     * @return bool 是否启用性能监控
+     * @return bool Whether performance monitoring is enabled
      */
     public static function isPerformanceMonitoringEnabled(): bool
     {
@@ -95,9 +95,9 @@ class BatchProcessConfig
     }
 
     /**
-     * 是否启用详细日志.
+     * Whether detailed logging is enabled.
      *
-     * @return bool 是否启用详细日志
+     * @return bool Whether detailed logging is enabled
      */
     public static function isDetailedLoggingEnabled(): bool
     {

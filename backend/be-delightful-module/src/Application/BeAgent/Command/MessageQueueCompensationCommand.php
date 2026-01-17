@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Command;
+namespace Delightful\BeDelightful\Application\SuperAgent\Command;
 
 use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueCompensationAppService;
 use Hyperf\Command\Annotation\Command;
@@ -18,7 +18,7 @@ use Throwable;
 
 /**
  * Message Queue Compensation Command.
- * 消息队列补偿验证命令 - 手动执行补偿任务验证功能.
+ * Message queue compensation verification command - manually execute compensation tasks to verify functionality.
  */
 #[Command]
 class MessageQueueCompensationCommand extends HyperfCommand
@@ -63,7 +63,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Show command header.
-     * 显示命令头部信息.
      */
     private function showHeader(): void
     {
@@ -75,7 +74,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Show current configuration.
-     * 显示当前配置信息.
      */
     private function showConfiguration(bool $isLoop, int $times, int $interval, bool $debug, bool $statsOnly): void
     {
@@ -104,7 +102,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Run single compensation execution.
-     * 运行单次补偿执行.
      */
     private function runSingleMode(bool $debug, bool $statsOnly): void
     {
@@ -119,7 +116,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Run loop mode compensation execution.
-     * 运行循环模式补偿执行.
      */
     private function runLoopMode(int $times, int $interval, bool $debug, bool $statsOnly): void
     {
@@ -157,7 +153,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Execute compensation with timing.
-     * 执行补偿并计时.
      */
     private function executeCompensationWithTiming(bool $debug, bool $statsOnly): array
     {
@@ -195,7 +190,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Show detailed execution result.
-     * 显示详细执行结果.
      */
     private function showExecutionResult(array $result, int $executionNumber): void
     {
@@ -215,7 +209,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Show compact result for loop mode.
-     * 显示循环模式的紧凑结果.
      */
     private function showCompactResult(array $result, int $executionNumber): void
     {
@@ -234,7 +227,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Show statistics table.
-     * 显示统计表格.
      */
     private function showStatsTable(array $stats): void
     {
@@ -257,7 +249,6 @@ class MessageQueueCompensationCommand extends HyperfCommand
 
     /**
      * Show loop execution summary.
-     * 显示循环执行总结.
      */
     private function showLoopSummary(array $totalStats, array $executionTimes, int $totalExecutions): void
     {

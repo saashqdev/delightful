@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\SuperAgent\Repository\Facade;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
 

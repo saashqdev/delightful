@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder;
 
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AbstractSandboxOS;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Config\AsrAudioConfig;

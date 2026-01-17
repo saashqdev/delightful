@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\Agent\Facade\Admin;
+namespace Delightful\BeDelightful\Interfaces\Agent\Facade\Admin;
 
 use App\Application\Flow\Service\MagicFlowAppService;
 use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
@@ -29,10 +29,10 @@ use Hyperf\Di\Annotation\Inject;
 class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
 {
     #[Inject]
-    protected BeDelightfulAgentAppService $superMagicAgentAppService;
+    protected BeDelightfulAgentAppService $beDelightfulAgentAppService;
 
     #[Inject]
-    protected BeDelightfulAgentAiOptimizeAppService $superMagicAgentAiOptimizeAppService;
+    protected BeDelightfulAgentAiOptimizeAppService $beDelightfulAgentAiOptimizeAppService;
 
     #[Inject]
     protected MagicFlowAppService $magicFlowAppService;
@@ -51,8 +51,8 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
 
         $DO = BeDelightfulAgentAssembler::createDO($DTO);
 
-        $entity = $this->superMagicAgentAppService->save($authorization, $DO);
-        $users = $this->superMagicAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
+        $entity = $this->beDelightfulAgentAppService->save($authorization, $DO);
+        $users = $this->beDelightfulAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
 
         return BeDelightfulAgentAssembler::createDTO($entity, $users);
     }
@@ -65,7 +65,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
         $query = new BeDelightfulAgentQuery($requestData);
         $page = $this->createPage();
 
-        $result = $this->superMagicAgentAppService->queries($authorization, $query, $page);
+        $result = $this->beDelightfulAgentAppService->queries($authorization, $query, $page);
 
         return BeDelightfulAgentAssembler::createCategorizedListDTO(
             frequent: $result['frequent'],
@@ -79,11 +79,11 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
         $authorization = $this->getAuthorization();
         $withToolSchema = (bool) $this->request->input('with_tool_schema', false);
 
-        $entity = $this->superMagicAgentAppService->show($authorization, $code, $withToolSchema);
+        $entity = $this->beDelightfulAgentAppService->show($authorization, $code, $withToolSchema);
 
         $withPromptString = (bool) $this->request->input('with_prompt_string', false);
 
-        $users = $this->superMagicAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
+        $users = $this->beDelightfulAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
 
         return BeDelightfulAgentAssembler::createDTO($entity, $users, $withPromptString);
     }
@@ -91,7 +91,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     public function destroy(string $code)
     {
         $authorization = $this->getAuthorization();
-        $result = $this->superMagicAgentAppService->delete($authorization, $code);
+        $result = $this->beDelightfulAgentAppService->delete($authorization, $code);
 
         return ['success' => $result];
     }
@@ -99,9 +99,9 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     public function enable(string $code)
     {
         $authorization = $this->getAuthorization();
-        $entity = $this->superMagicAgentAppService->enable($authorization, $code);
+        $entity = $this->beDelightfulAgentAppService->enable($authorization, $code);
 
-        $users = $this->superMagicAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
+        $users = $this->beDelightfulAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
 
         return BeDelightfulAgentAssembler::createDTO($entity, $users);
     }
@@ -109,9 +109,9 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     public function disable(string $code)
     {
         $authorization = $this->getAuthorization();
-        $entity = $this->superMagicAgentAppService->disable($authorization, $code);
+        $entity = $this->beDelightfulAgentAppService->disable($authorization, $code);
 
-        $users = $this->superMagicAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
+        $users = $this->beDelightfulAgentAppService->getUsers($entity->getOrganizationCode(), [$entity->getCreator(), $entity->getModifier()]);
 
         return BeDelightfulAgentAssembler::createDTO($entity, $users);
     }
@@ -129,7 +129,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
             'all' => $requestData['all'],
         ];
 
-        $this->superMagicAgentAppService->saveOrderConfig($authorization, $orderConfig);
+        $this->beDelightfulAgentAppService->saveOrderConfig($authorization, $orderConfig);
 
         return ['message' => 'Agent order saved successfully'];
     }
@@ -174,7 +174,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
         }
 
         // 调用优化服务
-        $optimizedEntity = $this->superMagicAgentAiOptimizeAppService->optimizeAgent(
+        $optimizedEntity = $this->beDelightfulAgentAiOptimizeAppService->optimizeAgent(
             $authorization,
             $optimizationType,
             $agentEntity,

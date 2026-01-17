@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\LongTermMemory\Enum\AppCodeEnum;
 use App\Domain\Contact\Entity\MagicUserEntity;
@@ -357,7 +357,7 @@ class HandleTaskMessageAppService extends AbstractAppService
         // user long term memory
         $memory = $this->longTermMemoryDomainService->getEffectiveMemoriesForPrompt(
             $dataIsolation->getCurrentOrganizationCode(),
-            AppCodeEnum::SUPER_MAGIC->value,
+            AppCodeEnum::BE_DELIGHTFUL->value,
             $dataIsolation->getCurrentUserId(),
             (string) $taskContext->getProjectId(),
         );

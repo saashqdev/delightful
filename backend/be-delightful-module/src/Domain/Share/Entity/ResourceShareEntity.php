@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\Share\Entity;
+namespace Delightful\BeDelightful\Domain\Share\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
 use DateTime;

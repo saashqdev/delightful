@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item;
+namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item;
 
 use App\Infrastructure\Core\AbstractDTO;
 use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\ErrorCode\GenericErrorCode;
@@ -886,6 +886,6 @@ class WorkspaceDomainService
      */
     private function generateWorkDir(string $userId, int $topicId): string
     {
-        return sprintf('/%s/%s/topic_%d', AgentConstant::SUPER_MAGIC_CODE, $userId, $topicId);
+        return sprintf('/%s/%s/topic_%d', AgentConstant::BE_DELIGHTFUL_CODE, $userId, $topicId);
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\Share\Service;
+namespace Delightful\BeDelightful\Application\Share\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;

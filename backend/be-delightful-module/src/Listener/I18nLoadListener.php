@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Listener;
+namespace Delightful\BeDelightful\Listener;
 
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\Event\Contract\ListenerInterface;

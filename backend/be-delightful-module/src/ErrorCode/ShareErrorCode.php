@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\ErrorCode;
+namespace Delightful\BeDelightful\ErrorCode;
 
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 

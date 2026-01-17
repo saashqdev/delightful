@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO;
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;

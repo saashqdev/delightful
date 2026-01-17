@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\Chat\DTO\Message\ChatMessage;
+namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage;
 
 use App\Domain\Chat\DTO\Message\ChatMessage\AbstractChatMessageStruct;
 use App\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessageInterface;

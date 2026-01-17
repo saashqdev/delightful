@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\Utils;
+namespace Delightful\BeDelightful\Infrastructure\Utils;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use InvalidArgumentException;
@@ -152,13 +152,13 @@ class WorkDirectoryUtil
         // Remove trailing slash if exists
         $workDir = rtrim($workDir, '/');
 
-        // Check if it contains the expected pattern: SUPER_MAGIC/{userId}/project_{projectId}[/workspace]
+        // Check if it contains the expected pattern: BE_DELIGHTFUL/{userId}/project_{projectId}[/workspace]
         // Supports both legacy format (project_id only) and new format (with /workspace suffix)
         // The pattern should work for both relative and absolute paths
         $pattern = sprintf(
             '/(?:.*\/%s|^%s)\/%s\/project_\d+(\/workspace)?$/',
-            preg_quote(AgentConstant::SUPER_MAGIC_CODE, '/'),
-            preg_quote(AgentConstant::SUPER_MAGIC_CODE, '/'),
+            preg_quote(AgentConstant::BE_DELIGHTFUL_CODE, '/'),
+            preg_quote(AgentConstant::BE_DELIGHTFUL_CODE, '/'),
             preg_quote($userId, '/')
         );
 
@@ -214,14 +214,14 @@ class WorkDirectoryUtil
         // Remove trailing slash if exists
         $workDir = rtrim($workDir, '/');
 
-        // Expected format: path/to/SUPER_MAGIC/{userId}/project_{projectId}[/workspace]
+        // Expected format: path/to/BE_DELIGHTFUL/{userId}/project_{projectId}[/workspace]
         // Supports both legacy format (project_id only) and new format (with /workspace suffix)
-        // We need to find the pattern: SUPER_MAGIC/{specificUserId}/project_{projectId}
+        // We need to find the pattern: BE_DELIGHTFUL/{specificUserId}/project_{projectId}
         // The pattern should work for both relative and absolute paths
         $pattern = sprintf(
             '/(?:.*\/%s|^%s)\/%s\/project_(\d+)(?:\/workspace)?$/',
-            preg_quote(AgentConstant::SUPER_MAGIC_CODE, '/'),
-            preg_quote(AgentConstant::SUPER_MAGIC_CODE, '/'),
+            preg_quote(AgentConstant::BE_DELIGHTFUL_CODE, '/'),
+            preg_quote(AgentConstant::BE_DELIGHTFUL_CODE, '/'),
             preg_quote($userId, '/')
         );
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\LongTermMemory\Service\LongTermMemoryDomainService;
@@ -279,7 +279,7 @@ class ProjectAppService extends AbstractAppService
             // 删除项目相关的长期记忆
             $this->longTermMemoryDomainService->deleteMemoriesByProjectIds(
                 $dataIsolation->getCurrentOrganizationCode(),
-                AgentConstant::SUPER_MAGIC_CODE, // app_id 固定为 be-delightful
+                AgentConstant::BE_DELIGHTFUL_CODE, // app_id 固定为 be-delightful
                 $dataIsolation->getCurrentUserId(),
                 [(string) $projectId]
             );

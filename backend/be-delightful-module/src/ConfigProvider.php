@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful;
+namespace Delightful\BeDelightful;
 
 use App\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessageInterface;
 use App\Domain\Chat\Event\Agent\AgentExecuteInterface;
@@ -82,7 +82,7 @@ class ConfigProvider
 {
     public function __invoke(): array
     {
-        define('SUPER_MAGIC_MODULE_PATH', BASE_PATH . '/vendor/dtyq/be-delightful-module');
+        define('BE_DELIGHTFUL_MODULE_PATH', BASE_PATH . '/vendor/dtyq/be-delightful-module');
 
         $publishConfigs = [];
 

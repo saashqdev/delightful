@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
 
 use JsonSerializable;
 
@@ -52,7 +52,7 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
     /**
      * 超级Magic任务ID.
      */
-    private string $superMagicTaskId = '';
+    private string $beDelightfulTaskId = '';
 
     /**
      * 从请求数据创建DTO.
@@ -71,7 +71,7 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
             $instance->chatTopicId = $metadata['chat_topic_id'] ?? '';
             $instance->instruction = $metadata['instruction'] ?? '';
             $instance->sandboxId = $metadata['sandbox_id'] ?? '';
-            $instance->superMagicTaskId = $metadata['super_magic_task_id'] ?? '';
+            $instance->beDelightfulTaskId = $metadata['super_magic_task_id'] ?? '';
         }
 
         return $instance;
@@ -156,12 +156,12 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
 
     public function getBeDelightfulTaskId(): string
     {
-        return $this->superMagicTaskId;
+        return $this->beDelightfulTaskId;
     }
 
-    public function setBeDelightfulTaskId(string $superMagicTaskId): self
+    public function setBeDelightfulTaskId(string $beDelightfulTaskId): self
     {
-        $this->superMagicTaskId = $superMagicTaskId;
+        $this->beDelightfulTaskId = $beDelightfulTaskId;
         return $this;
     }
 
@@ -178,7 +178,7 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
             'chat_topic_id' => $this->chatTopicId,
             'instruction' => $this->instruction,
             'sandbox_id' => $this->sandboxId,
-            'super_magic_task_id' => $this->superMagicTaskId,
+            'super_magic_task_id' => $this->beDelightfulTaskId,
         ];
     }
 }

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
 /**
  * Project Mode Value Object
@@ -19,7 +19,7 @@ enum ProjectMode: string
     case REPORT = 'report';            // 研报模式
     case MEETING = 'meeting';          // 会议模式
     case SUMMARY = 'summary';          // 总结模式
-    case SUPER_MAGIC = 'super_magic';  // 超级麦吉模式
+    case BE_DELIGHTFUL = 'super_magic';  // 超级麦吉模式
 
     /**
      * Get all available project modes.
@@ -33,7 +33,7 @@ enum ProjectMode: string
             self::REPORT->value,
             self::MEETING->value,
             self::SUMMARY->value,
-            self::SUPER_MAGIC->value,
+            self::BE_DELIGHTFUL->value,
         ];
     }
 
@@ -49,7 +49,7 @@ enum ProjectMode: string
             self::REPORT => '研报模式',
             self::MEETING => '会议模式',
             self::SUMMARY => '总结模式',
-            self::SUPER_MAGIC => '超级麦吉模式',
+            self::BE_DELIGHTFUL => '超级麦吉模式',
         };
     }
 }

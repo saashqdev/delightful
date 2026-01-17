@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\Share\DTO\Response;
+namespace Delightful\BeDelightful\Interfaces\Share\DTO\Response;
 
 /**
  * 分享项目DTO.

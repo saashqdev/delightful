@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\Share\Factory\Facade;
+namespace Delightful\BeDelightful\Application\Share\Factory\Facade;
 
 use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
 use RuntimeException;

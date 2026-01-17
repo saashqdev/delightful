@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Request;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Request;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ConvertType;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract\RequestInterface;

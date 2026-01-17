@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\Share\DTO;
+namespace Delightful\BeDelightful\Application\Share\DTO;
 
 use App\Infrastructure\Core\AbstractDTO;
 

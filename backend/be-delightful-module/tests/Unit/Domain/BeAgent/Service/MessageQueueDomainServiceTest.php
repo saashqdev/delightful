@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Tests\Unit\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Tests\Unit\Domain\SuperAgent\Service;
 
 use App\Infrastructure\Util\Locker\LockerInterface;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;

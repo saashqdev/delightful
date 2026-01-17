@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\Agent\Assembler;
+namespace Delightful\BeDelightful\Interfaces\Agent\Assembler;
 
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Kernel\Assembler\OperatorAssembler;
@@ -17,61 +17,61 @@ use Delightful\BeDelightful\Interfaces\Agent\DTO\BeDelightfulAgentListDTO;
 
 class BeDelightfulAgentAssembler
 {
-    public static function createDTO(BeDelightfulAgentEntity $superMagicAgentEntity, array $users = [], bool $withPromptString = false): BeDelightfulAgentDTO
+    public static function createDTO(BeDelightfulAgentEntity $beDelightfulAgentEntity, array $users = [], bool $withPromptString = false): BeDelightfulAgentDTO
     {
         $DTO = new BeDelightfulAgentDTO();
-        $DTO->setId($superMagicAgentEntity->getCode());
-        $DTO->setName($superMagicAgentEntity->getName());
-        $DTO->setDescription($superMagicAgentEntity->getDescription());
-        $DTO->setIcon($superMagicAgentEntity->getIcon());
-        $DTO->setIconType($superMagicAgentEntity->getIconType());
-        $DTO->setPrompt($superMagicAgentEntity->getPrompt());
-        $DTO->setType($superMagicAgentEntity->getType()->value);
-        $DTO->setEnabled($superMagicAgentEntity->isEnabled());
-        $DTO->setTools($superMagicAgentEntity->getTools());
+        $DTO->setId($beDelightfulAgentEntity->getCode());
+        $DTO->setName($beDelightfulAgentEntity->getName());
+        $DTO->setDescription($beDelightfulAgentEntity->getDescription());
+        $DTO->setIcon($beDelightfulAgentEntity->getIcon());
+        $DTO->setIconType($beDelightfulAgentEntity->getIconType());
+        $DTO->setPrompt($beDelightfulAgentEntity->getPrompt());
+        $DTO->setType($beDelightfulAgentEntity->getType()->value);
+        $DTO->setEnabled($beDelightfulAgentEntity->isEnabled());
+        $DTO->setTools($beDelightfulAgentEntity->getTools());
 
         // Set promptString if requested
         if ($withPromptString) {
-            $DTO->setPromptString($superMagicAgentEntity->getPromptString());
+            $DTO->setPromptString($beDelightfulAgentEntity->getPromptString());
         }
 
-        $DTO->setCreator($superMagicAgentEntity->getCreator());
-        $DTO->setCreatedAt($superMagicAgentEntity->getCreatedAt());
-        $DTO->setModifier($superMagicAgentEntity->getModifier());
-        $DTO->setUpdatedAt($superMagicAgentEntity->getUpdatedAt());
-        $DTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$superMagicAgentEntity->getCreator()] ?? null, $superMagicAgentEntity->getCreatedAt()));
-        $DTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$superMagicAgentEntity->getModifier()] ?? null, $superMagicAgentEntity->getUpdatedAt()));
+        $DTO->setCreator($beDelightfulAgentEntity->getCreator());
+        $DTO->setCreatedAt($beDelightfulAgentEntity->getCreatedAt());
+        $DTO->setModifier($beDelightfulAgentEntity->getModifier());
+        $DTO->setUpdatedAt($beDelightfulAgentEntity->getUpdatedAt());
+        $DTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$beDelightfulAgentEntity->getCreator()] ?? null, $beDelightfulAgentEntity->getCreatedAt()));
+        $DTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$beDelightfulAgentEntity->getModifier()] ?? null, $beDelightfulAgentEntity->getUpdatedAt()));
 
         return $DTO;
     }
 
-    public static function createDO(BeDelightfulAgentDTO $superMagicAgentDTO): BeDelightfulAgentEntity
+    public static function createDO(BeDelightfulAgentDTO $beDelightfulAgentDTO): BeDelightfulAgentEntity
     {
-        $superMagicAgentEntity = new BeDelightfulAgentEntity();
-        $superMagicAgentEntity->setCode((string) $superMagicAgentDTO->getId());
-        $superMagicAgentEntity->setName($superMagicAgentDTO->getName());
-        $superMagicAgentEntity->setDescription($superMagicAgentDTO->getDescription());
-        $superMagicAgentEntity->setIcon($superMagicAgentDTO->getIcon());
-        $superMagicAgentEntity->setIconType($superMagicAgentDTO->getIconType());
-        $superMagicAgentEntity->setPrompt($superMagicAgentDTO->getPrompt());
-        $superMagicAgentEntity->setTools($superMagicAgentDTO->getTools());
+        $beDelightfulAgentEntity = new BeDelightfulAgentEntity();
+        $beDelightfulAgentEntity->setCode((string) $beDelightfulAgentDTO->getId());
+        $beDelightfulAgentEntity->setName($beDelightfulAgentDTO->getName());
+        $beDelightfulAgentEntity->setDescription($beDelightfulAgentDTO->getDescription());
+        $beDelightfulAgentEntity->setIcon($beDelightfulAgentDTO->getIcon());
+        $beDelightfulAgentEntity->setIconType($beDelightfulAgentDTO->getIconType());
+        $beDelightfulAgentEntity->setPrompt($beDelightfulAgentDTO->getPrompt());
+        $beDelightfulAgentEntity->setTools($beDelightfulAgentDTO->getTools());
 
-        if ($superMagicAgentDTO->getEnabled() !== null) {
-            $superMagicAgentEntity->setEnabled($superMagicAgentDTO->getEnabled());
+        if ($beDelightfulAgentDTO->getEnabled() !== null) {
+            $beDelightfulAgentEntity->setEnabled($beDelightfulAgentDTO->getEnabled());
         }
 
-        return $superMagicAgentEntity;
+        return $beDelightfulAgentEntity;
     }
 
-    public static function createListDTO(BeDelightfulAgentEntity $superMagicAgentEntity): BeDelightfulAgentListDTO
+    public static function createListDTO(BeDelightfulAgentEntity $beDelightfulAgentEntity): BeDelightfulAgentListDTO
     {
         $DTO = new BeDelightfulAgentListDTO();
-        $DTO->setId($superMagicAgentEntity->getCode());
-        $DTO->setName($superMagicAgentEntity->getName());
-        $DTO->setDescription($superMagicAgentEntity->getDescription());
-        $DTO->setIcon($superMagicAgentEntity->getIcon());
-        $DTO->setIconType($superMagicAgentEntity->getIconType());
-        $DTO->setType($superMagicAgentEntity->getType()->value);
+        $DTO->setId($beDelightfulAgentEntity->getCode());
+        $DTO->setName($beDelightfulAgentEntity->getName());
+        $DTO->setDescription($beDelightfulAgentEntity->getDescription());
+        $DTO->setIcon($beDelightfulAgentEntity->getIcon());
+        $DTO->setIconType($beDelightfulAgentEntity->getIconType());
+        $DTO->setType($beDelightfulAgentEntity->getType()->value);
 
         return $DTO;
     }

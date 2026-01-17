@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\Agent\Service;
+namespace Delightful\BeDelightful\Application\Agent\Service;
 
 use DateTime;
 use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
@@ -32,23 +32,23 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             return $agentEntity;
         }
 
-        // 检查优化前提条件，不满足条件时直接返回原实体
+        // Check optimization preconditions, return original entity if conditions not met
         if ($this->checkOptimizationPreconditions($optimizationType, $agentEntity)) {
             $this->logger->info('Optimization preconditions not met, returning original entity.');
             return $agentEntity;
         }
 
-        // 1. 获取优化 Agent（指定文件路径）
-        $agentFilePath = SUPER_MAGIC_MODULE_PATH . '/src/Application/Agent/MicroAgent/AgentOptimizer.agent.yaml'; // @phpstan-ignore-line
+        // 1. Get optimization Agent (specify file path)
+        $agentFilePath = BE_DELIGHTFUL_MODULE_PATH . '/src/Application/Agent/MicroAgent/AgentOptimizer.agent.yaml'; // @phpstan-ignore-line
         $optimizerAgent = $this->microAgentFactory->getAgent('BeDelightfulAgentOptimizer', $agentFilePath);
 
-        // 2. 设置优化工具
+        // 2. Set optimization tools
         $optimizerAgent->setTools($this->getAgentOptimizerTools());
 
-        // 3. 构建用户提示词
+        // 3. Build user prompt
         $userPrompt = $this->buildUserPrompt($optimizationType, $agentEntity, $availableTools);
 
-        // 4. 调用 AI 进行优化
+        // 4. Call AI for optimization
         $response = $optimizerAgent->easyCall(
             organizationCode: $dataIsolation->getCurrentOrganizationCode(),
             userPrompt: $userPrompt,
@@ -59,29 +59,29 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             ]
         );
 
-        // 5. 提取工具调用结果并更新实体
+        // 5. Extract tool call result and update entity
         return $this->extractToolCallResult($response, $agentEntity, $availableTools);
     }
 
     private function getAgentOptimizerTools(): array
     {
         return [
-            // 1. 优化名称和描述工具
+            // 1. Optimize name and description tool
             [
                 'type' => 'function',
                 'function' => [
                     'name' => BeDelightfulAgentOptimizationType::OptimizeNameDescription->value,
-                    'description' => '根据内容为智能体优化命名及描述',
+                    'description' => 'Optimize agent name and description based on content',
                     'parameters' => [
                         'type' => 'object',
                         'properties' => [
                             'name' => [
                                 'type' => 'string',
-                                'description' => '智能体名称（必须是2-10个字符的简洁名称，如：小红书大师、文案专家）',
+                                'description' => 'Agent name (must be a concise name of 2-10 characters, e.g., Social Media Master, Copywriting Expert)',
                             ],
                             'description' => [
                                 'type' => 'string',
-                                'description' => '智能体描述（20-100个字符的功能描述）',
+                                'description' => 'Agent description (20-100 characters functional description)',
                             ],
                         ],
                         'required' => ['name', 'description'],
@@ -89,25 +89,25 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
                 ],
             ],
 
-            // 2. 优化内容工具
+            // 2. Optimize content tool
             [
                 'type' => 'function',
                 'function' => [
                     'name' => BeDelightfulAgentOptimizationType::OptimizeContent->value,
-                    'description' => '根据名称和描述为智能体优化内容',
+                    'description' => 'Optimize agent content based on name and description',
                     'parameters' => [
                         'type' => 'object',
                         'properties' => [
                             'prompt' => [
                                 'type' => 'string',
-                                'description' => '系统提示词内容',
+                                'description' => 'System prompt content',
                             ],
                             'tools' => [
                                 'type' => 'array',
                                 'items' => [
                                     'type' => 'string',
                                 ],
-                                'description' => '推荐的工具代码列表，只返回工具的code字段',
+                                'description' => 'List of recommended tool codes, only return the code field of tools',
                             ],
                         ],
                         'required' => ['prompt'],
@@ -115,18 +115,18 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
                 ],
             ],
 
-            // 3. 优化名称工具
+            // 3. Optimize name tool
             [
                 'type' => 'function',
                 'function' => [
                     'name' => BeDelightfulAgentOptimizationType::OptimizeName->value,
-                    'description' => '根据已填写的所有信息优化智能体名称',
+                    'description' => 'Optimize agent name based on all filled information',
                     'parameters' => [
                         'type' => 'object',
                         'properties' => [
                             'name' => [
                                 'type' => 'string',
-                                'description' => '优化后的智能体名称（必须是2-10个字符的简洁名称，不能是完整句子）',
+                                'description' => 'Optimized agent name (must be a concise name of 2-10 characters, cannot be a complete sentence)',
                             ],
                         ],
                         'required' => ['name'],
@@ -134,18 +134,18 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
                 ],
             ],
 
-            // 4. 优化描述工具
+            // 4. Optimize description tool
             [
                 'type' => 'function',
                 'function' => [
                     'name' => BeDelightfulAgentOptimizationType::OptimizeDescription->value,
-                    'description' => '根据已填写的所有信息优化智能体描述',
+                    'description' => 'Optimize agent description based on all filled information',
                     'parameters' => [
                         'type' => 'object',
                         'properties' => [
                             'description' => [
                                 'type' => 'string',
-                                'description' => '优化后的智能体描述',
+                                'description' => 'Optimized agent description',
                             ],
                         ],
                         'required' => ['description'],
@@ -164,7 +164,7 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             'tools' => $agentEntity->getTools(),
         ];
 
-        // 语言提示：若包含中文字符，则提示中文，否则自动
+        // Language hint: if contains Chinese characters, set to Chinese, otherwise auto
         $combined = (string) ($agentData['name'] . $agentData['description'] . $agentData['prompt']);
         $languageHint = preg_match('/\p{Han}/u', $combined) ? 'zh' : 'auto';
 
@@ -188,22 +188,22 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             ],
         ];
 
-        // 如果是优化内容且有可用工具，添加到请求数据中
+        // If optimizing content and available tools exist, add to request data
         if ($optimizationType === BeDelightfulAgentOptimizationType::OptimizeContent && ! empty($availableTools)) {
             $requestData['available_tools'] = array_values($availableTools);
         }
 
         $jsonString = json_encode($requestData, JSON_UNESCAPED_UNICODE);
 
-        $instruction = '按 rules 进行一次优化，仅调用与 ot 对应的单一工具。输入(JSON)：';
+        $instruction = 'Perform one optimization according to rules, only call the single tool corresponding to ot. Input (JSON): ';
 
         return $instruction . $jsonString;
     }
 
     private function extractToolCallResult(ChatCompletionResponse $response, BeDelightfulAgentEntity $agentEntity, array $availableTools): BeDelightfulAgentEntity
     {
-        // 解析 response 中的工具调用
-        // 如果没有工具调用或解析失败，返回原始实体
+        // Parse tool calls in response
+        // If no tool calls or parsing fails, return original entity
 
         $assistantMessage = $response->getFirstChoice()?->getMessage();
         if (! $assistantMessage instanceof AssistantMessage) {
@@ -230,7 +230,7 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
                     break;
                 case BeDelightfulAgentOptimizationType::OptimizeContent->value:
                     if (isset($arguments['prompt'])) {
-                        // 处理转义字符，将 \\n、\\t、\\r 等转换为实际的换行符和制表符
+                        // Process escape characters, convert \\n, \\t, \\r etc. to actual newlines and tabs
                         $processedPrompt = stripcslashes($arguments['prompt']);
 
                         $promptData = [
@@ -242,7 +242,7 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
                         $agentEntity->setPrompt($promptData);
                     }
 
-                    // 处理工具推荐：只添加新工具，不修改或删除原有工具
+                    // Handle tool recommendations: only add new tools, do not modify or delete existing tools
                     if (isset($arguments['tools']) && is_array($arguments['tools'])) {
                         foreach ($arguments['tools'] as $toolCode) {
                             $tool = $this->createToolFromAvailableTools($toolCode, $availableTools);
@@ -269,11 +269,11 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
     }
 
     /**
-     * 检查优化前提条件.
+     * Check optimization preconditions.
      */
     private function checkOptimizationPreconditions(BeDelightfulAgentOptimizationType $optimizationType, BeDelightfulAgentEntity $agentEntity): bool
     {
-        // 如果全部内容为空，则不进行优化
+        // If all content is empty, do not optimize
         if (empty($agentEntity->getName()) && empty($agentEntity->getDescription()) && empty($agentEntity->getPromptString())) {
             return true;
         }
@@ -281,11 +281,11 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
     }
 
     /**
-     * 从可用工具列表中创建 BeDelightfulAgentTool 对象
+     * Create BeDelightfulAgentTool object from available tools list.
      */
     private function createToolFromAvailableTools(string $toolCode, array $availableTools): ?BeDelightfulAgentTool
     {
-        // 第一次查找：通过 code 字段匹配
+        // First search: match by code field
         if (isset($availableTools[$toolCode])) {
             $toolInfo = $availableTools[$toolCode];
             return new BeDelightfulAgentTool([
@@ -296,7 +296,7 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             ]);
         }
 
-        // 第二次查找：通过 name 字段匹配（容错机制）
+        // Second search: match by name field (fault tolerance mechanism)
         foreach ($availableTools as $tool) {
             if (($tool['name'] ?? '') === $toolCode) {
                 return new BeDelightfulAgentTool([
@@ -308,7 +308,7 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             }
         }
 
-        // 如果两次查找都没有找到，返回 null
+        // If both searches fail to find, return null
         return null;
     }
 }

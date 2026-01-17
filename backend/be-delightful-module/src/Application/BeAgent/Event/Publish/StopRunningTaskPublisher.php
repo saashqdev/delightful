@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Event\Publish;
+namespace Delightful\BeDelightful\Application\SuperAgent\Event\Publish;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Event\StopRunningTaskEvent;
 use Hyperf\Amqp\Annotation\Producer;

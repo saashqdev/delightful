@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\Agent\Service;
+namespace Delightful\BeDelightful\Domain\Agent\Service;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
@@ -26,14 +26,14 @@ use Delightful\BeDelightful\ErrorCode\BeDelightfulErrorCode;
 readonly class BeDelightfulAgentDomainService
 {
     public function __construct(
-        protected BeDelightfulAgentRepositoryInterface $superMagicAgentRepository
+        protected BeDelightfulAgentRepositoryInterface $beDelightfulAgentRepository
     ) {
     }
 
     public function getByCode(BeDelightfulAgentDataIsolation $dataIsolation, string $code): ?BeDelightfulAgentEntity
     {
         $this->checkBuiltinAgentOperation($code);
-        return $this->superMagicAgentRepository->getByCode($dataIsolation, $code);
+        return $this->beDelightfulAgentRepository->getByCode($dataIsolation, $code);
     }
 
     /**
@@ -41,7 +41,7 @@ readonly class BeDelightfulAgentDomainService
      */
     public function queries(BeDelightfulAgentDataIsolation $dataIsolation, BeDelightfulAgentQuery $query, Page $page): array
     {
-        return $this->superMagicAgentRepository->queries($dataIsolation, $query, $page);
+        return $this->beDelightfulAgentRepository->queries($dataIsolation, $query, $page);
     }
 
     public function save(BeDelightfulAgentDataIsolation $dataIsolation, BeDelightfulAgentEntity $savingEntity): BeDelightfulAgentEntity
@@ -53,7 +53,7 @@ readonly class BeDelightfulAgentDomainService
 
         if ($isCreate) {
             // 检查用户创建的智能体数量是否超过限制
-            $currentCount = $this->superMagicAgentRepository->countByCreator($dataIsolation, $dataIsolation->getCurrentUserId());
+            $currentCount = $this->beDelightfulAgentRepository->countByCreator($dataIsolation, $dataIsolation->getCurrentUserId());
             if ($currentCount >= BeDelightfulAgentLimit::MAX_AGENTS_PER_USER) {
                 ExceptionBuilder::throw(
                     BeDelightfulErrorCode::AgentLimitExceeded,
@@ -67,7 +67,7 @@ readonly class BeDelightfulAgentDomainService
         } else {
             $this->checkBuiltinAgentOperation($savingEntity->getCode());
 
-            $entity = $this->superMagicAgentRepository->getByCode($dataIsolation, $savingEntity->getCode());
+            $entity = $this->beDelightfulAgentRepository->getByCode($dataIsolation, $savingEntity->getCode());
             if (! $entity) {
                 ExceptionBuilder::throw(BeDelightfulErrorCode::NotFound, 'common.not_found', ['label' => $savingEntity->getCode()]);
             }
@@ -75,7 +75,7 @@ readonly class BeDelightfulAgentDomainService
             $savingEntity->prepareForModification($entity);
         }
 
-        $savedEntity = $this->superMagicAgentRepository->save($dataIsolation, $entity);
+        $savedEntity = $this->beDelightfulAgentRepository->save($dataIsolation, $entity);
 
         AsyncEventUtil::dispatch(new BeDelightfulAgentSavedEvent($savedEntity, $isCreate));
 
@@ -86,12 +86,12 @@ readonly class BeDelightfulAgentDomainService
     {
         $this->checkBuiltinAgentOperation($code);
 
-        $entity = $this->superMagicAgentRepository->getByCode($dataIsolation, $code);
+        $entity = $this->beDelightfulAgentRepository->getByCode($dataIsolation, $code);
         if (! $entity) {
             ExceptionBuilder::throw(BeDelightfulErrorCode::NotFound, 'common.not_found', ['label' => $code]);
         }
 
-        $result = $this->superMagicAgentRepository->delete($dataIsolation, $code);
+        $result = $this->beDelightfulAgentRepository->delete($dataIsolation, $code);
 
         if ($result) {
             AsyncEventUtil::dispatch(new BeDelightfulAgentDeletedEvent($entity));
@@ -109,7 +109,7 @@ readonly class BeDelightfulAgentDomainService
         $entity->setModifier($dataIsolation->getCurrentUserId());
         $entity->setUpdatedAt(new DateTime());
 
-        $savedEntity = $this->superMagicAgentRepository->save($dataIsolation, $entity);
+        $savedEntity = $this->beDelightfulAgentRepository->save($dataIsolation, $entity);
 
         AsyncEventUtil::dispatch(new BeDelightfulAgentEnabledEvent($savedEntity));
 
@@ -126,7 +126,7 @@ readonly class BeDelightfulAgentDomainService
         $entity->setModifier($dataIsolation->getCurrentUserId());
         $entity->setUpdatedAt(new DateTime());
 
-        $savedEntity = $this->superMagicAgentRepository->save($dataIsolation, $entity);
+        $savedEntity = $this->beDelightfulAgentRepository->save($dataIsolation, $entity);
 
         AsyncEventUtil::dispatch(new BeDelightfulAgentDisabledEvent($savedEntity));
 
@@ -137,7 +137,7 @@ readonly class BeDelightfulAgentDomainService
     {
         $this->checkBuiltinAgentOperation($code);
 
-        $entity = $this->superMagicAgentRepository->getByCode($dataIsolation, $code);
+        $entity = $this->beDelightfulAgentRepository->getByCode($dataIsolation, $code);
         if (! $entity) {
             ExceptionBuilder::throw(BeDelightfulErrorCode::NotFound, 'common.not_found', ['label' => $code]);
         }

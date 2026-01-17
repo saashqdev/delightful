@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Command\SuperAgent;
+namespace Delightful\BeDelightful\Command\SuperAgent;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
 use Hyperf\Command\Annotation\Command;

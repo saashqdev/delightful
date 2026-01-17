@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\SuperAgent\Assembler;
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\Assembler;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Event\TopicTaskMessageEvent;
 use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\Chat\Service\MagicUserInfoAppService;
@@ -732,7 +732,7 @@ class TaskAppService extends AbstractAppService
             chatTopicId: $taskContext->getChatTopicId(),
             instruction: $taskContext->getInstruction()->value,
             sandboxId: $taskContext->getSandboxId(),
-            superMagicTaskId: (string) $task->getId(),
+            beDelightfulTaskId: (string) $task->getId(),
             userInfo: $userInfo
         );
 

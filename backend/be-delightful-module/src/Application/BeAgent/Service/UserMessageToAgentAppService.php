@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
@@ -279,7 +279,7 @@ class UserMessageToAgentAppService extends AbstractAppService
      */
     private function getAgentUserEntity(DataIsolation $dataIsolation): mixed
     {
-        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_MAGIC_CODE);
+        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE);
 
         if (empty($aiUserEntity)) {
             $this->logger->error('Agent user not found, skip processing', [

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Tests\Unit\Infrastructure\Utils;
+namespace Delightful\BeDelightful\Tests\Unit\Infrastructure\Utils;
 
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use PHPUnit\Framework\TestCase;
@@ -25,23 +25,23 @@ class WorkDirectoryUtilDemoTest extends TestCase
 
         $testCases = [
             // Legacy format (without /workspace)
-            '/some/path/SUPER_MAGIC/user123/project_456' => true,
-            'SUPER_MAGIC/user123/project_789' => true,
+            '/some/path/BE_DELIGHTFUL/user123/project_456' => true,
+            'BE_DELIGHTFUL/user123/project_789' => true,
 
             // New format (with /workspace)
-            '/some/path/SUPER_MAGIC/user123/project_456/workspace' => true,
-            'SUPER_MAGIC/user123/project_789/workspace' => true,
+            '/some/path/BE_DELIGHTFUL/user123/project_456/workspace' => true,
+            'BE_DELIGHTFUL/user123/project_789/workspace' => true,
 
             // With trailing slash
-            '/some/path/SUPER_MAGIC/user123/project_456/' => true,
-            '/some/path/SUPER_MAGIC/user123/project_456/workspace/' => true,
+            '/some/path/BE_DELIGHTFUL/user123/project_456/' => true,
+            '/some/path/BE_DELIGHTFUL/user123/project_456/workspace/' => true,
 
             // Invalid cases
             '' => false,
-            '/some/path/SUPER_MAGIC/wronguser/project_456' => false,
-            '/some/path/SUPER_MAGIC/user123/project_abc' => false,
-            '/some/path/SUPER_MAGIC/user123/project_456/invalid_suffix' => false,
-            '/some/path/SUPER_MAGIC/user123/wrongformat' => false,
+            '/some/path/BE_DELIGHTFUL/wronguser/project_456' => false,
+            '/some/path/BE_DELIGHTFUL/user123/project_abc' => false,
+            '/some/path/BE_DELIGHTFUL/user123/project_456/invalid_suffix' => false,
+            '/some/path/BE_DELIGHTFUL/user123/wrongformat' => false,
         ];
 
         echo sprintf("%-60s | %-8s | %-8s\n", '测试路径', '期望', '实际');
@@ -75,26 +75,26 @@ class WorkDirectoryUtilDemoTest extends TestCase
 
         $testCases = [
             // Legacy format
-            '/some/path/SUPER_MAGIC/user123/project_456' => '456',
-            'SUPER_MAGIC/user123/project_789' => '789',
+            '/some/path/BE_DELIGHTFUL/user123/project_456' => '456',
+            'BE_DELIGHTFUL/user123/project_789' => '789',
 
             // New format (with /workspace)
-            '/some/path/SUPER_MAGIC/user123/project_456/workspace' => '456',
-            'SUPER_MAGIC/user123/project_789/workspace' => '789',
+            '/some/path/BE_DELIGHTFUL/user123/project_456/workspace' => '456',
+            'BE_DELIGHTFUL/user123/project_789/workspace' => '789',
 
             // With trailing slash
-            '/some/path/SUPER_MAGIC/user123/project_456/' => '456',
-            '/some/path/SUPER_MAGIC/user123/project_456/workspace/' => '456',
+            '/some/path/BE_DELIGHTFUL/user123/project_456/' => '456',
+            '/some/path/BE_DELIGHTFUL/user123/project_456/workspace/' => '456',
 
             // Large project ID
-            '/some/path/SUPER_MAGIC/user123/project_123456789/workspace' => '123456789',
+            '/some/path/BE_DELIGHTFUL/user123/project_123456789/workspace' => '123456789',
 
             // Invalid cases
             '' => null,
-            '/some/path/SUPER_MAGIC/wronguser/project_456' => null,
-            '/some/path/SUPER_MAGIC/user123/project_abc' => null,
-            '/some/path/SUPER_MAGIC/user123/project_456/invalid_suffix' => null,
-            '/some/path/SUPER_MAGIC/user123/wrongformat' => null,
+            '/some/path/BE_DELIGHTFUL/wronguser/project_456' => null,
+            '/some/path/BE_DELIGHTFUL/user123/project_abc' => null,
+            '/some/path/BE_DELIGHTFUL/user123/project_456/invalid_suffix' => null,
+            '/some/path/BE_DELIGHTFUL/user123/wrongformat' => null,
         ];
 
         echo sprintf("%-60s | %-10s | %-10s\n", '测试路径', '期望ID', '提取ID');

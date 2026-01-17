@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Response;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Response;
 
 /**
  * 转换结果中的文件项.

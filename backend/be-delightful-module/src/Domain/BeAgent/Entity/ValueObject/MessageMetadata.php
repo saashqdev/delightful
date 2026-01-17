@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
 /**
  * 消息元数据值对象.
@@ -25,7 +25,7 @@ class MessageMetadata
      * @param string $topicId 话题ID
      * @param string $instruction 指令
      * @param string $sandboxId 沙箱ID
-     * @param string $superMagicTaskId 超级助手任务ID
+     * @param string $beDelightfulTaskId 超级助手任务ID
      * @param string $workspaceId 工作区ID
      * @param string $projectId 项目ID
      * @param string $language 用户语言
@@ -41,7 +41,7 @@ class MessageMetadata
         private string $topicId = '',
         private string $instruction = '',
         private string $sandboxId = '',
-        private string $superMagicTaskId = '',
+        private string $beDelightfulTaskId = '',
         private string $workspaceId = '',
         private string $projectId = '',
         private string $language = '',
@@ -97,7 +97,7 @@ class MessageMetadata
             'topic_id' => $this->topicId,
             'instruction' => $this->instruction,
             'sandbox_id' => $this->sandboxId,
-            'super_magic_task_id' => $this->superMagicTaskId,
+            'super_magic_task_id' => $this->beDelightfulTaskId,
             'workspace_id' => $this->workspaceId,
             'project_id' => $this->projectId,
             'language' => $this->language,
@@ -155,7 +155,7 @@ class MessageMetadata
 
     public function getBeDelightfulTaskId(): string
     {
-        return $this->superMagicTaskId;
+        return $this->beDelightfulTaskId;
     }
 
     public function getWorkspaceId(): string
@@ -246,10 +246,10 @@ class MessageMetadata
         return $clone;
     }
 
-    public function withBeDelightfulTaskId(string $superMagicTaskId): self
+    public function withBeDelightfulTaskId(string $beDelightfulTaskId): self
     {
         $clone = clone $this;
-        $clone->superMagicTaskId = $superMagicTaskId;
+        $clone->beDelightfulTaskId = $beDelightfulTaskId;
         return $clone;
     }
 

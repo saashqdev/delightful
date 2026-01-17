@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Command;
+namespace Delightful\BeDelightful\Application\SuperAgent\Command;
 
 use Delightful\BeDelightful\Application\SuperAgent\Crontab\MessageCompensationCrontab;
 use Hyperf\Command\Annotation\Command;
@@ -16,7 +16,7 @@ use Throwable;
 
 /**
  * Run Message Compensation Command
- * 手动运行消息补偿任务的命令.
+ * Command to manually run message compensation tasks.
  */
 #[Command]
 class RunMessageCompensationCommand extends HyperfCommand
@@ -42,38 +42,38 @@ class RunMessageCompensationCommand extends HyperfCommand
         $times = (int) $this->input->getOption('times');
 
         if ($isLoop) {
-            $this->info('开始循环运行消息补偿任务...');
-            $this->info("将运行 {$times} 次，每次间隔 5 秒");
+            $this->info('Starting loop mode for message compensation task...');
+            $this->info("Will run {$times} times, with 5 second intervals");
 
             for ($i = 1; $i <= $times; ++$i) {
-                $this->info("--- 第 {$i} 次运行 ---");
+                $this->info("--- Run #{$i} ---");
                 $startTime = microtime(true);
 
                 try {
                     $messageCompensationCrontab->execute();
                     $executionTime = round((microtime(true) - $startTime) * 1000, 2);
-                    $this->info("执行完成，耗时: {$executionTime}ms");
+                    $this->info("Execution completed, time elapsed: {$executionTime}ms");
                 } catch (Throwable $e) {
-                    $this->error('执行失败: ' . $e->getMessage());
+                    $this->error('Execution failed: ' . $e->getMessage());
                 }
 
                 if ($i < $times) {
-                    $this->info('等待 5 秒...');
+                    $this->info('Waiting 5 seconds...');
                     sleep(5);
                 }
             }
 
-            $this->info('循环运行完成！');
+            $this->info('Loop execution completed!');
         } else {
-            $this->info('运行消息补偿任务...');
+            $this->info('Running message compensation task...');
             $startTime = microtime(true);
 
             try {
                 $messageCompensationCrontab->execute();
                 $executionTime = round((microtime(true) - $startTime) * 1000, 2);
-                $this->info("任务执行完成，耗时: {$executionTime}ms");
+                $this->info("Task completed, time elapsed: {$executionTime}ms");
             } catch (Throwable $e) {
-                $this->error('任务执行失败: ' . $e->getMessage());
+                $this->error('Task execution failed: ' . $e->getMessage());
             }
         }
     }

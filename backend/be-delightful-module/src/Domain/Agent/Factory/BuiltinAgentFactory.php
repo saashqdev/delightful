@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\Agent\Factory;
+namespace Delightful\BeDelightful\Domain\Agent\Factory;
 
 use DateTime;
 use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;

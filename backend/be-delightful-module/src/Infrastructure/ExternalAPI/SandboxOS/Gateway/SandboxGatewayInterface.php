@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway;
 
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Result\BatchStatusResult;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Result\GatewayResult;

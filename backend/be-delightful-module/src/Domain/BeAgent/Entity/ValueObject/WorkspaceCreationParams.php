@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
 
 /**
  * 工作区创建参数值对象

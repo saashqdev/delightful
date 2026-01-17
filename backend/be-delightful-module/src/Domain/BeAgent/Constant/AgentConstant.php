@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\SuperAgent\Constant;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Constant;
 
 /**
  * 智能体相关常量.
@@ -15,7 +15,7 @@ class AgentConstant
     /**
      * 超级麦吉代码
      */
-    public const string SUPER_MAGIC_CODE = 'SUPER_MAGIC';
+    public const string BE_DELIGHTFUL_CODE = 'BE_DELIGHTFUL';
 
     public const string DEFAULT_TOPIC_NAME = '新话题';
 

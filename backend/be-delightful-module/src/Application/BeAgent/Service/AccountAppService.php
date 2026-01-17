@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\MagicAccountAppService;
 use App\Domain\Contact\Entity\AccountEntity;
@@ -42,14 +42,14 @@ class AccountAppService extends AbstractAppService
         // 查询是否已经存在了超级麦吉账号，如果存在则不更新
         $dataIsolation = new DataIsolation();
         $dataIsolation->setCurrentOrganizationCode($organizationCode);
-        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_MAGIC_CODE);
+        $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE);
         if (! empty($aiUserEntity)) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'account.super_magic_already_created');
         }
 
         // 初始化账号
         $accountDTO = new AccountEntity();
-        $accountDTO->setAiCode(AgentConstant::SUPER_MAGIC_CODE);
+        $accountDTO->setAiCode(AgentConstant::BE_DELIGHTFUL_CODE);
         $accountDTO->setStatus(AccountStatus::Normal);
         $accountDTO->setRealName('超级麦吉');
 
@@ -62,7 +62,7 @@ class AccountAppService extends AbstractAppService
         $authorization->setOrganizationCode($organizationCode);
         $authorization->setUserType(UserType::Human);
         try {
-            $userEntity = $this->magicAccountAppService->aiRegister($userDTO, $authorization, AgentConstant::SUPER_MAGIC_CODE, $accountDTO);
+            $userEntity = $this->magicAccountAppService->aiRegister($userDTO, $authorization, AgentConstant::BE_DELIGHTFUL_CODE, $accountDTO);
             return $userEntity->toArray();
         } catch (Throwable $e) {
             $this->logger->error('初始化超级麦吉账号失败，原因：' . $e->getMessage());

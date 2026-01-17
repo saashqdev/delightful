@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket;
 
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Config\WebSocketConfig;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket\Exception\WebSocketConnectionException;

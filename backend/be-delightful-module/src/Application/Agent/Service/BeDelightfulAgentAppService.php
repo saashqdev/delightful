@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\Agent\Service;
+namespace Delightful\BeDelightful\Application\Agent\Service;
 
 use App\Application\Contact\UserSetting\UserSettingKey;
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
@@ -40,7 +40,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
         $dataIsolation = $this->createBeDelightfulDataIsolation($authorization);
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
 
-        $agent = $this->superMagicAgentDomainService->getByCodeWithException($dataIsolation, $code);
+        $agent = $this->beDelightfulAgentDomainService->getByCodeWithException($dataIsolation, $code);
         if ($withToolSchema) {
             $remoteToolCodes = [];
             foreach ($agent->getTools() as $tool) {
@@ -48,7 +48,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
                     $remoteToolCodes[] = $tool->getCode();
                 }
             }
-            // 获取工具定义
+            // Get tool definitions
             $remoteTools = ToolsExecutor::getToolFlows($flowDataIsolation, $remoteToolCodes, true);
             foreach ($agent->getTools() as $tool) {
                 $remoteTool = $remoteTools[$tool->getCode()] ?? null;
@@ -67,21 +67,21 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
     {
         $dataIsolation = $this->createBeDelightfulDataIsolation($authorization);
 
-        // 目前只能查询自己的，全量查询
+        // Currently can only query own agents, full query
         $query->setCreatorId($authorization->getId());
         $page->disable();
         $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'icon_type']); // Only select necessary fields for list
 
-        $result = $this->superMagicAgentDomainService->queries($dataIsolation, $query, $page);
+        $result = $this->beDelightfulAgentDomainService->queries($dataIsolation, $query, $page);
 
-        // 合并内置模型
+        // Merge builtin models
         $builtinAgents = $this->getBuiltinAgent($dataIsolation);
         if (! $page->isEnabled()) {
             $result['list'] = array_merge($builtinAgents, $result['list']);
             $result['total'] += count($builtinAgents);
         }
 
-        // 根据用户排列配置对结果进行分类
+        // Categorize results based on user arrangement configuration
         $orderConfig = $this->getOrderConfig($authorization);
 
         return $this->categorizeAgents($result['list'], $result['total'], $orderConfig);
@@ -91,32 +91,32 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
     {
         $dataIsolation = $this->createBeDelightfulDataIsolation($authorization);
 
-        return $this->superMagicAgentDomainService->save($dataIsolation, $entity);
+        return $this->beDelightfulAgentDomainService->save($dataIsolation, $entity);
     }
 
     public function delete(Authenticatable $authorization, string $code): bool
     {
         $dataIsolation = $this->createBeDelightfulDataIsolation($authorization);
 
-        return $this->superMagicAgentDomainService->delete($dataIsolation, $code);
+        return $this->beDelightfulAgentDomainService->delete($dataIsolation, $code);
     }
 
     public function enable(Authenticatable $authorization, string $code): BeDelightfulAgentEntity
     {
         $dataIsolation = $this->createBeDelightfulDataIsolation($authorization);
 
-        return $this->superMagicAgentDomainService->enable($dataIsolation, $code);
+        return $this->beDelightfulAgentDomainService->enable($dataIsolation, $code);
     }
 
     public function disable(Authenticatable $authorization, string $code): BeDelightfulAgentEntity
     {
         $dataIsolation = $this->createBeDelightfulDataIsolation($authorization);
 
-        return $this->superMagicAgentDomainService->disable($dataIsolation, $code);
+        return $this->beDelightfulAgentDomainService->disable($dataIsolation, $code);
     }
 
     /**
-     * 保存智能体排列配置.
+     * Save agent arrangement configuration.
      * @param array{frequent: array<string>, all: array<string>} $orderConfig
      */
     public function saveOrderConfig(Authenticatable $authorization, array $orderConfig): MagicUserSettingEntity
@@ -130,7 +130,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
     }
 
     /**
-     * 获取智能体排列配置.
+     * Get agent arrangement configuration.
      * @return null|array{frequent: array<string>, all: array<string>}
      */
     public function getOrderConfig(Authenticatable $authorization): ?array
@@ -169,11 +169,11 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
     }
 
     /**
-     * 将智能体列表按照用户配置分类为frequent和all.
+     * Categorize agent list into frequent and all according to user configuration.
      */
     private function categorizeAgents(array $agents, int $total, ?array $orderConfig): array
     {
-        // 如果没有用户配置，使用默认配置：内置智能体的前6个作为frequent
+        // If no user configuration, use default configuration: first 6 builtin agents as frequent
         if (empty($orderConfig)) {
             $orderConfig = $this->getDefaultOrderConfig($agents);
         }
@@ -181,13 +181,13 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
         $frequentCodes = $orderConfig['frequent'] ?? [];
         $allOrder = $orderConfig['all'] ?? [];
 
-        // 创建code到entity的映射
+        // Create code to entity mapping
         $agentMap = [];
         foreach ($agents as $agent) {
             $agentMap[$agent->getCode()] = $agent;
         }
 
-        // 构建frequent列表
+        // Build frequent list
         $frequent = [];
         foreach ($frequentCodes as $code) {
             if (isset($agentMap[$code])) {
@@ -196,11 +196,11 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
             }
         }
 
-        // 构建all列表（排除frequent中的）
+        // Build all list (excluding those in frequent)
         $all = [];
         $frequentCodesSet = array_flip($frequentCodes);
 
-        // 如果有排序配置，按配置排序
+        // If sort configuration exists, sort by configuration
         if (! empty($allOrder)) {
             foreach ($allOrder as $code) {
                 if (isset($agentMap[$code]) && ! isset($frequentCodesSet[$code])) {
@@ -209,7 +209,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
                 }
             }
 
-            // 添加不在排序配置中的智能体
+            // Add agents not in sort configuration
             foreach ($agents as $agent) {
                 $code = $agent->getCode();
                 if (! in_array($code, $allOrder) && ! isset($frequentCodesSet[$code])) {
@@ -218,7 +218,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
                 }
             }
         } else {
-            // 没有排序配置，直接过滤frequent
+            // No sort configuration, directly filter frequent
             foreach ($agents as $agent) {
                 if (! isset($frequentCodesSet[$agent->getCode()])) {
                     $agent->setCategory('all');
@@ -235,7 +235,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
     }
 
     /**
-     * 获取默认排序配置：内置智能体的前6个作为frequent.
+     * Get default sort configuration: first 6 builtin agents as frequent.
      * @param array<BeDelightfulAgentEntity> $agents
      */
     private function getDefaultOrderConfig(array $agents): array
@@ -251,10 +251,10 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
             }
         }
 
-        // 内置智能体的前6个作为frequent
+        // First 6 builtin agents as frequent
         $frequent = array_slice($builtinCodes, 0, 6);
 
-        // all包含所有智能体（内置+自定义）
+        // all includes all agents (builtin + custom)
         $all = array_merge($builtinCodes, $customCodes);
 
         return [
@@ -266,25 +266,25 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
     /**
      * @return array<BeDelightfulAgentEntity>
      */
-    private function getBuiltinAgent(BeDelightfulAgentDataIsolation $superMagicAgentDataIsolation): array
+    private function getBuiltinAgent(BeDelightfulAgentDataIsolation $beDelightfulAgentDataIsolation): array
     {
-        $modeDataIsolation = $this->createModeDataIsolation($superMagicAgentDataIsolation);
+        $modeDataIsolation = $this->createModeDataIsolation($beDelightfulAgentDataIsolation);
         $modeDataIsolation->setOnlyOfficialOrganization(true);
         $query = new ModeQuery(excludeDefault: true, status: true);
         $modesResult = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage());
         $list = [];
         foreach ($modesResult['list'] as $mode) {
-            $list[] = $this->createBuiltinAgentEntityByMode($superMagicAgentDataIsolation, $mode);
+            $list[] = $this->createBuiltinAgentEntityByMode($beDelightfulAgentDataIsolation, $mode);
         }
         return $list;
     }
 
-    private function createBuiltinAgentEntityByMode(BeDelightfulAgentDataIsolation $superMagicAgentDataIsolation, ModeEntity $modeEntity): BeDelightfulAgentEntity
+    private function createBuiltinAgentEntityByMode(BeDelightfulAgentDataIsolation $beDelightfulAgentDataIsolation, ModeEntity $modeEntity): BeDelightfulAgentEntity
     {
         $entity = new BeDelightfulAgentEntity();
 
-        // 设置基本信息
-        $entity->setOrganizationCode($superMagicAgentDataIsolation->getCurrentOrganizationCode());
+        // Set basic information
+        $entity->setOrganizationCode($beDelightfulAgentDataIsolation->getCurrentOrganizationCode());
         $entity->setCode($modeEntity->getIdentifier());
         $entity->setName($modeEntity->getName());
         $entity->setDescription($modeEntity->getPlaceholder());
@@ -299,7 +299,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
         $entity->setPrompt([]);
         $entity->setTools([]);
 
-        // 设置系统创建信息
+        // Set system creation information
         $entity->setCreator('system');
         $entity->setCreatedAt(new DateTime());
         $entity->setModifier('system');

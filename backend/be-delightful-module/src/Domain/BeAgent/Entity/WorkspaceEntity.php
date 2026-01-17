@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\SuperAgent\Entity;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceArchiveStatus;

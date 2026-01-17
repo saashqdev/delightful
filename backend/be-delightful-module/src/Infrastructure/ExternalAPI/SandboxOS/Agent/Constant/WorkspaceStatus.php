@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Constant;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Constant;
 
 /**
  * 工作区状态常量

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
 
 use App\Application\Chat\Service\MagicAgentEventAppService;
 use App\Application\Chat\Service\MagicChatMessageAppService;
@@ -50,7 +50,7 @@ class SuperAgentMessageSubscriberV2 extends MagicAgentEventAppService
     public function agentExecEvent(UserCallAgentEvent $userCallAgentEvent)
     {
         // Determine if Be Delightful needs to be called
-        if ($userCallAgentEvent->agentAccountEntity->getAiCode() === AppCodeEnum::SUPER_MAGIC->value) {
+        if ($userCallAgentEvent->agentAccountEntity->getAiCode() === AppCodeEnum::BE_DELIGHTFUL->value) {
             $this->handlerBeDelightfulMessage($userCallAgentEvent);
         } else {
             // Process messages through normal agent handling

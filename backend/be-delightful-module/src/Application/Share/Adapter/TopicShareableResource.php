@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\Share\Adapter;
+namespace Delightful\BeDelightful\Application\Share\Adapter;
 
 use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
 use Delightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;

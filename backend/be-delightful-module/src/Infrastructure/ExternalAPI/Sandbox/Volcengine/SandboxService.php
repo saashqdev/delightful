@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine;
 
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\AbstractSandbox;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\SandboxResult;

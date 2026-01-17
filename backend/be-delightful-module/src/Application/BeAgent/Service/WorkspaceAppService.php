@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\File\Service\FileAppService;
@@ -347,7 +347,7 @@ class WorkspaceAppService extends AbstractAppService
             if (! empty($projectIds)) {
                 $this->longTermMemoryDomainService->deleteMemoriesByProjectIds(
                     $dataIsolation->getCurrentOrganizationCode(),
-                    AgentConstant::SUPER_MAGIC_CODE,
+                    AgentConstant::BE_DELIGHTFUL_CODE,
                     $dataIsolation->getCurrentUserId(),
                     $projectIds
                 );

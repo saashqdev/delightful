@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Tests\Unit\Domain\SuperAgent\Repository;
+namespace Delightful\BeDelightful\Tests\Unit\Domain\SuperAgent\Repository;
 
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
 use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;

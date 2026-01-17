@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Infrastructure\Utils\Middleware;
+namespace Delightful\BeDelightful\Infrastructure\Utils\Middleware;
 
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;

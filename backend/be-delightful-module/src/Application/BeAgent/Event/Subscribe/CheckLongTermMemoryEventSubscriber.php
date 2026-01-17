@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\LongTermMemory\DTO\EvaluateConversationRequestDTO;
@@ -90,7 +90,7 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
             $dto = new EvaluateConversationRequestDTO([
                 'modelName' => $modelName,
                 'conversationContent' => $conversationContent,
-                'appId' => AppCodeEnum::SUPER_MAGIC->value,
+                'appId' => AppCodeEnum::BE_DELIGHTFUL->value,
             ]);
             // 调用 delightful-service 的长期记忆评估服务
             $this->getLongTermMemoryApp()->evaluateAndCreateMemory($dto, $authorization);
@@ -139,7 +139,7 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
         $authorization = new MagicUserAuthorization();
         $authorization->setId($userId);
         $authorization->setOrganizationCode($organizationCode);
-        $authorization->setApplicationCode(AppCodeEnum::SUPER_MAGIC->value);
+        $authorization->setApplicationCode(AppCodeEnum::BE_DELIGHTFUL->value);
         return $authorization;
     }
 

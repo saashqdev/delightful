@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Domain\Agent\Repository\Facade;
+namespace Delightful\BeDelightful\Domain\Agent\Repository\Facade;
 
 use App\Infrastructure\Core\ValueObject\Page;
 use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;

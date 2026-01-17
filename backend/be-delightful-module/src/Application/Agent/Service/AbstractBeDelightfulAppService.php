@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Application\Agent\Service;
+namespace Delightful\BeDelightful\Application\Agent\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Application\ModelGateway\MicroAgent\MicroAgentFactory;
@@ -22,7 +22,7 @@ abstract class AbstractBeDelightfulAppService extends AbstractKernelAppService
     protected readonly LoggerInterface $logger;
 
     public function __construct(
-        protected BeDelightfulAgentDomainService $superMagicAgentDomainService,
+        protected BeDelightfulAgentDomainService $beDelightfulAgentDomainService,
         protected MicroAgentFactory $microAgentFactory,
         protected LoggerFactory $loggerFactory,
     ) {
@@ -42,8 +42,8 @@ abstract class AbstractBeDelightfulAppService extends AbstractKernelAppService
 
     protected function createContactDataIsolation(Authenticatable|BaseDataIsolation $authorization): ContactDataIsolation
     {
-        // 先创建BeDelightfulDataIsolation，然后转换为ContactDataIsolation
-        $superMagicDataIsolation = $this->createBeDelightfulDataIsolation($authorization);
-        return $this->createContactDataIsolationByBase($superMagicDataIsolation);
+        // First create BeDelightfulDataIsolation, then convert to ContactDataIsolation
+        $beDelightfulDataIsolation = $this->createBeDelightfulDataIsolation($authorization);
+        return $this->createContactDataIsolationByBase($beDelightfulDataIsolation);
     }
 }

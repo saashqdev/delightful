@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\BeDelightful\Interfaces\Agent\Assembler;
+namespace Delightful\BeDelightful\Interfaces\Agent\Assembler;
 
 use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\BuiltinTool;
 use Delightful\BeDelightful\Interfaces\Agent\DTO\BuiltinToolCategoryDTO;

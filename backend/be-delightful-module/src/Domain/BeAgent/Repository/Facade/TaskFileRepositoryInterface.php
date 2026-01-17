@@ -13,113 +13,113 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 interface TaskFileRepositoryInterface
 {
     /**
-     * 根据ID获取文件.
+     * Get file by ID.
      */
     public function getById(int $id): ?TaskFileEntity;
 
     /**
-     * 根据ID批量获取文件.
+     * Batch get files by IDs.
      * @return TaskFileEntity[]
      */
     public function getFilesByIds(array $fileIds, int $projectId = 0): array;
 
     /**
-     * 根据ID批量获取文件.
+     * Batch get files by IDs.
      * @return TaskFileEntity[]
      */
     public function getTaskFilesByIds(array $ids, int $projectId = 0): array;
 
     /**
-     * 根据fileKey获取文件.
+     * Get file by fileKey.
      *
-     * @param string $fileKey 文件键
-     * @param null|int $topicId 话题ID，默认为0
-     * @param bool $withTrash 是否包含已删除的文件，默认为false
+     * @param string $fileKey File key
+     * @param null|int $topicId Topic ID, default is 0
+     * @param bool $withTrash Whether to include deleted files, default is false
      */
     public function getByFileKey(string $fileKey, ?int $topicId = 0, bool $withTrash = false): ?TaskFileEntity;
 
     /**
-     * 根据fileKey数组批量获取文件.
+     * Batch get files by fileKey array.
      *
-     * @param array $fileKeys 文件Key数组
-     * @return TaskFileEntity[] 文件实体数组，以file_key为键
+     * @param array $fileKeys File key array
+     * @return TaskFileEntity[] File entity array, indexed by file_key
      */
     public function getByFileKeys(array $fileKeys): array;
 
     /**
-     * 根据项目ID和fileKey获取文件.
+     * Get file by project ID and fileKey.
      */
     public function getByProjectIdAndFileKey(int $projectId, string $fileKey): ?TaskFileEntity;
 
     /**
-     * 根据话题ID获取文件列表.
+     * Get file list by topic ID.
      *
-     * @param int $topicId 话题ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @param array $fileType 文件类型过滤
-     * @param string $storageType 存储类型
-     * @return array{list: TaskFileEntity[], total: int} 文件列表和总数
+     * @param int $topicId Topic ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @param array $fileType File type filter
+     * @param string $storageType Storage type
+     * @return array{list: TaskFileEntity[], total: int} File list and total count
      */
     public function getByTopicId(int $topicId, int $page, int $pageSize, array $fileType = [], string $storageType = 'workspace'): array;
 
     /**
-     * 根据项目ID获取文件列表.
+     * Get file list by project ID.
      *
-     * @param int $projectId 项目ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @param array $fileType 文件类型过滤
-     * @param string $storageType 存储类型过滤
-     * @param null|string $updatedAfter 更新时间过滤（查询此时间之后更新的文件）
-     * @return array{list: TaskFileEntity[], total: int} 文件列表和总数
+     * @param int $projectId Project ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @param array $fileType File type filter
+     * @param string $storageType Storage type filter
+     * @param null|string $updatedAfter Updated time filter (query files updated after this time)
+     * @return array{list: TaskFileEntity[], total: int} File list and total count
      */
     public function getByProjectId(int $projectId, int $page, int $pageSize = 200, array $fileType = [], string $storageType = '', ?string $updatedAfter = null): array;
 
     /**
-     * 根据任务ID获取文件列表.
+     * Get file list by task ID.
      *
-     * @param int $taskId 任务ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array{list: TaskFileEntity[], total: int} 文件列表和总数
+     * @param int $taskId Task ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array{list: TaskFileEntity[], total: int} File list and total count
      */
     public function getByTaskId(int $taskId, int $page, int $pageSize): array;
 
     /**
-     * 根据话题任务ID获取文件列表.
+     * Get file list by topic task ID.
      *
-     * @param int $topicTaskId 话题任务ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array{list: TaskFileEntity[], total: int} 文件列表和总数
-     * @deprecated 使用 getByTopicId 和 getByTaskId 方法替代
+     * @param int $topicTaskId Topic task ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array{list: TaskFileEntity[], total: int} File list and total count
+     * @deprecated Use getByTopicId and getByTaskId methods instead
      */
     public function getByTopicTaskId(int $topicTaskId, int $page, int $pageSize): array;
 
     /**
-     * 插入文件.
+     * Insert file.
      */
     public function insert(TaskFileEntity $entity): TaskFileEntity;
 
     /**
-     * 插入文件，如果存在冲突则忽略.
-     * 根据file_key和topic_id判断是否存在冲突
+     * Insert file, ignore if conflict exists.
+     * Determines conflict based on file_key and topic_id
      */
     public function insertOrIgnore(TaskFileEntity $entity): ?TaskFileEntity;
 
     /**
-     * 插入或更新文件.
-     * 使用 INSERT ... ON DUPLICATE KEY UPDATE 语法
-     * 当 file_key 冲突时更新现有记录，否则插入新记录.
+     * Insert or update file.
+     * Uses INSERT ... ON DUPLICATE KEY UPDATE syntax
+     * Updates existing record when file_key conflicts, otherwise inserts new record.
      *
-     * @param TaskFileEntity $entity 文件实体
-     * @return TaskFileEntity 插入或更新后的文件实体
+     * @param TaskFileEntity $entity File entity
+     * @return TaskFileEntity File entity after insert or update
      */
     public function insertOrUpdate(TaskFileEntity $entity): TaskFileEntity;
 
     /**
-     * 更新文件.
+     * Update file.
      */
     public function updateById(TaskFileEntity $entity): TaskFileEntity;
 
@@ -134,11 +134,11 @@ interface TaskFileRepositoryInterface
     public function deleteByFileKeyAndProjectId(string $fileKey, int $projectId): int;
 
     /**
-     * 根据文件ID数组和用户ID批量获取用户文件.
+     * Batch get user files by file ID array and user ID.
      *
-     * @param array $fileIds 文件ID数组
-     * @param string $userId 用户ID
-     * @return TaskFileEntity[] 用户文件列表
+     * @param array $fileIds File ID array
+     * @param string $userId User ID
+     * @return TaskFileEntity[] User file list
      */
     public function findUserFilesByIds(array $fileIds, string $userId): array;
 
@@ -147,69 +147,69 @@ interface TaskFileRepositoryInterface
     public function findUserFilesByProjectId(string $projectId): array;
 
     /**
-     * @return TaskFileEntity[] 用户文件列表
+     * @return TaskFileEntity[] User file list
      */
     public function findFilesByProjectIdAndIds(int $projectId, array $fileIds): array;
 
     /**
-     * 根据项目ID获取所有文件的file_key列表（高性能查询）.
+     * Get all file_key list by project ID (high performance query).
      */
     public function getFileKeysByProjectId(int $projectId, int $limit = 1000): array;
 
     /**
-     * 批量插入新文件记录.
+     * Batch insert new file records.
      */
     public function batchInsertFiles(DataIsolation $dataIsolation, int $projectId, array $newFileKeys, array $objectStorageFiles = []): void;
 
     /**
-     * 批量标记文件为已删除.
+     * Batch mark files as deleted.
      */
     public function batchMarkAsDeleted(array $deletedFileKeys): void;
 
     /**
-     * 获取指定父目录下的最小排序值.
+     * Get minimum sort value under specified parent directory.
      */
     public function getMinSortByParentId(?int $parentId, int $projectId): ?int;
 
     /**
-     * 获取指定父目录下的最大排序值.
+     * Get maximum sort value under specified parent directory.
      */
     public function getMaxSortByParentId(?int $parentId, int $projectId): ?int;
 
     /**
-     * 获取指定文件的排序值.
+     * Get sort value of specified file.
      */
     public function getSortByFileId(int $fileId): ?int;
 
     /**
-     * 获取指定排序值之后的下一个排序值.
+     * Get next sort value after specified sort value.
      */
     public function getNextSortAfter(?int $parentId, int $currentSort, int $projectId): ?int;
 
     /**
-     * 获取同一父目录下的所有兄弟节点.
+     * Get all sibling nodes under the same parent directory.
      */
     public function getSiblingsByParentId(?int $parentId, int $projectId, string $orderBy = 'sort', string $direction = 'ASC'): array;
 
     public function getSiblingCountByParentId(int $parentId, int $projectId): int;
 
     /**
-     * 批量更新排序值.
+     * Batch update sort values.
      */
     public function batchUpdateSort(array $updates): void;
 
     /**
-     * 批量更新文件信息.
+     * Batch update file information.
      */
     public function batchUpdateFiles(array $updatedFileKeys): void;
 
     /**
-     * 根据目录路径查找文件列表.
+     * Find file list by directory path.
      *
-     * @param int $projectId 项目ID
-     * @param string $directoryPath 目录路径
-     * @param int $limit 查询限制
-     * @return TaskFileEntity[] 文件列表
+     * @param int $projectId Project ID
+     * @param string $directoryPath Directory path
+     * @param int $limit Query limit
+     * @return TaskFileEntity[] File list
      */
     public function findFilesByDirectoryPath(int $projectId, string $directoryPath, int $limit = 1000): array;
 
@@ -243,16 +243,16 @@ interface TaskFileRepositoryInterface
     public function batchUpdateFileKeys(array $updateBatch): int;
 
     /**
-     * 批量删除文件.
+     * Batch delete files.
      *
-     * @param array $fileIds 文件ID数组
+     * @param array $fileIds File ID array
      */
     public function deleteByIds(array $fileIds): void;
 
     /**
-     * 根据文件Keys批量删除文件.
+     * Batch delete files by file keys.
      *
-     * @param array $fileKeys 文件Key数组
+     * @param array $fileKeys File key array
      */
     public function deleteByFileKeys(array $fileKeys): void;
 
@@ -306,9 +306,9 @@ interface TaskFileRepositoryInterface
     public function getAllChildrenByParentId(int $parentId): array;
 
     /**
-     * 恢复被删除的文件.
+     * Restore deleted file.
      *
-     * @param int $fileId 文件ID
+     * @param int $fileId File ID
      */
     public function restoreFile(int $fileId): void;
 }

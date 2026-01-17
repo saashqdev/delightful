@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * 文件已删除事件.
+ * File deleted event.
  */
 class FileDeletedEvent extends AbstractEvent
 {

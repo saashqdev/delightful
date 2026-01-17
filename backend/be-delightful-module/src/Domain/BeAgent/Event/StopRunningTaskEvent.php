@@ -10,19 +10,19 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\DeleteDataType;
 
 /**
- * 停止运行中任务事件
- * 当工作区、项目或话题被删除时触发，用于异步停止相关的运行中任务
+ * Stop running task event
+ * Triggered when workspace, project or topic is deleted, used to asynchronously stop related running tasks
  */
 class StopRunningTaskEvent extends AbstractEvent
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param DeleteDataType $dataType 数据类型（工作区、项目、话题）
-     * @param int $dataId 数据ID
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织编码
-     * @param string $reason 停止原因
+     * @param DeleteDataType $dataType Data type (workspace, project, topic)
+     * @param int $dataId Data ID
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @param string $reason Stop reason
      */
     public function __construct(
         private DeleteDataType $dataType,
@@ -41,9 +41,9 @@ class StopRunningTaskEvent extends AbstractEvent
     }
 
     /**
-     * 从数组创建事件.
+     * Create event from array.
      *
-     * @param array $data 事件数据数组
+     * @param array $data Event data array
      */
     public static function fromArray(array $data): self
     {
@@ -57,9 +57,9 @@ class StopRunningTaskEvent extends AbstractEvent
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      *
-     * @return array 事件数据数组
+     * @return array Event data array
      */
     public function toArray(): array
     {
@@ -75,7 +75,7 @@ class StopRunningTaskEvent extends AbstractEvent
     }
 
     /**
-     * 获取数据类型.
+     * Get data type.
      */
     public function getDataType(): DeleteDataType
     {
@@ -83,7 +83,7 @@ class StopRunningTaskEvent extends AbstractEvent
     }
 
     /**
-     * 获取数据ID.
+     * Get data ID.
      */
     public function getDataId(): int
     {
@@ -91,7 +91,7 @@ class StopRunningTaskEvent extends AbstractEvent
     }
 
     /**
-     * 获取用户ID.
+     * Get user ID.
      */
     public function getUserId(): string
     {
@@ -99,7 +99,7 @@ class StopRunningTaskEvent extends AbstractEvent
     }
 
     /**
-     * 获取组织编码.
+     * Get organization code.
      */
     public function getOrganizationCode(): string
     {
@@ -107,7 +107,7 @@ class StopRunningTaskEvent extends AbstractEvent
     }
 
     /**
-     * 获取停止原因.
+     * Get stop reason.
      */
     public function getReason(): string
     {

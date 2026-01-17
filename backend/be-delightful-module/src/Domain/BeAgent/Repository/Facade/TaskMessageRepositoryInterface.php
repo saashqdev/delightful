@@ -13,123 +13,123 @@ use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TaskMessageModel;
 interface TaskMessageRepositoryInterface
 {
     /**
-     * 通过ID获取消息.
+     * Get message by ID.
      */
     public function getById(int $id): ?TaskMessageEntity;
 
     /**
-     * 保存消息.
+     * Save message.
      */
     public function save(TaskMessageEntity $message): void;
 
     /**
-     * 批量保存消息.
+     * Batch save messages.
      * @param TaskMessageEntity[] $messages
      */
     public function batchSave(array $messages): void;
 
     /**
-     * 根据任务ID获取消息列表.
+     * Get message list by task ID.
      * @return TaskMessageEntity[]
      */
     public function findByTaskId(string $taskId): array;
 
     /**
-     * 根据话题ID和任务ID获取用户消息列表（优化索引+过滤用户消息）.
+     * Get user message list by topic ID and task ID (optimized index + filter user messages).
      * @return TaskMessageEntity[]
      */
     public function findUserMessagesByTopicIdAndTaskId(int $topicId, string $taskId): array;
 
     /**
-     * 根据话题ID获取消息列表，支持分页.
-     * @param int $topicId 话题ID
-     * @param int $page 页码
-     * @param int $pageSize 每页大小
-     * @param bool $shouldPage 是否需要分页
-     * @param string $sortDirection 排序方向，支持asc和desc
-     * @param bool $showInUi 是否只显示UI可见的消息
-     * @return array 返回包含消息列表和总数的数组 ['list' => TaskMessageEntity[], 'total' => int]
+     * Get message list by topic ID with pagination support.
+     * @param int $topicId Topic ID
+     * @param int $page Page number
+     * @param int $pageSize Page size
+     * @param bool $shouldPage Whether pagination is needed
+     * @param string $sortDirection Sort direction, supports asc and desc
+     * @param bool $showInUi Whether to only show UI-visible messages
+     * @return array Returns array containing message list and total count ['list' => TaskMessageEntity[], 'total' => int]
      */
     public function findByTopicId(int $topicId, int $page = 1, int $pageSize = 20, bool $shouldPage = true, string $sortDirection = 'asc', bool $showInUi = true): array;
 
     public function getUserFirstMessageByTopicId(int $topicId, string $userId): ?TaskMessageEntity;
 
     /**
-     * 根据topic_id和处理状态查询消息列表，按seq_id升序排列.
-     * @param int $topicId 话题ID
-     * @param string $processingStatus 处理状态
-     * @param string $senderType 发送者类型
-     * @param int $limit 限制数量
+     * Query message list by topic_id and processing status, sorted by seq_id in ascending order.
+     * @param int $topicId Topic ID
+     * @param string $processingStatus Processing status
+     * @param string $senderType Sender type
+     * @param int $limit Limit count
      * @return TaskMessageEntity[]
      */
     public function findPendingMessagesByTopicId(int $topicId, string $processingStatus, string $senderType = 'assistant', int $limit = 50): array;
 
     /**
-     * 更新消息处理状态.
-     * @param int $id 消息ID
-     * @param string $processingStatus 处理状态
-     * @param null|string $errorMessage 错误信息
-     * @param int $retryCount 重试次数
+     * Update message processing status.
+     * @param int $id Message ID
+     * @param string $processingStatus Processing status
+     * @param null|string $errorMessage Error message
+     * @param int $retryCount Retry count
      */
     public function updateProcessingStatus(int $id, string $processingStatus, ?string $errorMessage = null, int $retryCount = 0): void;
 
     /**
-     * 批量更新消息处理状态.
-     * @param array $ids 消息ID数组
-     * @param string $processingStatus 处理状态
+     * Batch update message processing status.
+     * @param array $ids Message ID array
+     * @param string $processingStatus Processing status
      */
     public function batchUpdateProcessingStatus(array $ids, string $processingStatus): void;
 
     /**
-     * 获取下一个seq_id.
+     * Get next seq_id.
      */
     public function getNextSeqId(int $topicId, int $taskId): int;
 
     /**
-     * 保存原始消息数据并生成seq_id.
-     * @param array $rawData 原始消息数据
-     * @param TaskMessageEntity $message 消息实体
-     * @param string $processStatus 处理状态
+     * Save raw message data and generate seq_id.
+     * @param array $rawData Raw message data
+     * @param TaskMessageEntity $message Message entity
+     * @param string $processStatus Processing status
      */
     public function saveWithRawData(array $rawData, TaskMessageEntity $message, string $processStatus = TaskMessageModel::PROCESSING_STATUS_PENDING): void;
 
     /**
-     * 根据seq_id和topic_id查询消息.
-     * @param int $seqId 序列ID
-     * @param int $taskId 任务ID
-     * @param int $topicId 话题ID
-     * @return null|TaskMessageEntity 消息实体或null
+     * Query message by seq_id and topic_id.
+     * @param int $seqId Sequence ID
+     * @param int $taskId Task ID
+     * @param int $topicId Topic ID
+     * @return null|TaskMessageEntity Message entity or null
      */
     public function findBySeqIdAndTopicId(int $seqId, int $taskId, int $topicId): ?TaskMessageEntity;
 
     /**
-     * 根据topic_id和message_id查询消息.
-     * @param int $topicId 话题ID
-     * @param string $messageId 消息ID
-     * @return null|TaskMessageEntity 消息实体或null
+     * Query message by topic_id and message_id.
+     * @param int $topicId Topic ID
+     * @param string $messageId Message ID
+     * @return null|TaskMessageEntity Message entity or null
      */
     public function findByTopicIdAndMessageId(int $topicId, string $messageId): ?TaskMessageEntity;
 
     /**
-     * 更新现有消息的业务字段.
-     * @param TaskMessageEntity $message 消息实体
+     * Update business fields of existing message.
+     * @param TaskMessageEntity $message Message entity
      */
     public function updateExistingMessage(TaskMessageEntity $message): void;
 
     /**
-     * 获取待处理的消息列表（用于顺序批量处理）.
+     * Get list of messages pending processing (for sequential batch processing).
      *
-     * 查询条件：
-     * - pending: 全部处理
-     * - processing: 超过指定分钟数的（认为已超时）
-     * - failed: 重试次数不超过最大值的
+     * Query conditions:
+     * - pending: Process all
+     * - processing: Those exceeding specified minutes (considered timed out)
+     * - failed: Those with retry count not exceeding maximum
      *
-     * @param int $topicId 话题ID
-     * @param string $senderType 发送者类型
-     * @param int $timeoutMinutes 处理超时时间（分钟）
-     * @param int $maxRetries 最大重试次数
-     * @param int $limit 限制数量
-     * @return TaskMessageEntity[] 按seq_id升序排列的消息列表
+     * @param int $topicId Topic ID
+     * @param string $senderType Sender type
+     * @param int $timeoutMinutes Processing timeout (minutes)
+     * @param int $maxRetries Maximum retry count
+     * @param int $limit Limit count
+     * @return TaskMessageEntity[] Message list sorted by seq_id in ascending order
      */
     public function findProcessableMessages(
         int $topicId,
@@ -141,27 +141,27 @@ interface TaskMessageRepositoryInterface
     ): array;
 
     /**
-     * 根据话题ID和消息ID获取需要复制的消息列表.
+     * Get list of messages to copy by topic ID and message ID.
      *
-     * @param int $topicId 话题ID
-     * @param int $messageId 消息ID（获取小于等于此ID的消息）
-     * @return TaskMessageEntity[] 消息实体数组，按id升序排列
+     * @param int $topicId Topic ID
+     * @param int $messageId Message ID (get messages less than or equal to this ID)
+     * @return TaskMessageEntity[] Message entity array, sorted by id in ascending order
      */
     public function findMessagesToCopyByTopicIdAndMessageId(int $topicId, int $messageId): array;
 
     /**
-     * 批量创建消息.
+     * Batch create messages.
      *
-     * @param TaskMessageEntity[] $messageEntities 消息实体数组
-     * @return TaskMessageEntity[] 创建成功的消息实体数组（包含生成的ID）
+     * @param TaskMessageEntity[] $messageEntities Message entity array
+     * @return TaskMessageEntity[] Successfully created message entity array (with generated IDs)
      */
     public function batchCreateMessages(array $messageEntities): array;
 
     /**
-     * 更新消息的IM序列ID.
+     * Update message's IM sequence ID.
      *
-     * @param int $id 消息ID
-     * @param null|int $imSeqId IM序列ID，为空时不更新
+     * @param int $id Message ID
+     * @param null|int $imSeqId IM sequence ID, not updated when null
      */
     public function updateMessageSeqId(int $id, ?int $imSeqId): void;
 }

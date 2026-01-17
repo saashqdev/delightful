@@ -10,35 +10,35 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
- * 项目仓储接口.
+ * Project repository interface.
  */
 interface ProjectRepositoryInterface
 {
     /**
-     * 根据ID查找项目.
+     * Find project by ID.
      */
     public function findById(int $id): ?ProjectEntity;
 
     /**
-     * 保存项目.
+     * Save project.
      */
     public function save(ProjectEntity $project): ProjectEntity;
 
     public function create(ProjectEntity $project): ProjectEntity;
 
     /**
-     * 删除项目（软删除）.
+     * Delete project (soft delete).
      */
     public function delete(ProjectEntity $project): bool;
 
     /**
-     * 批量获取项目信息.
+     * Batch get project information.
      */
     public function findByIds(array $ids): array;
 
     /**
-     * 根据条件获取项目列表
-     * 支持分页和排序.
+     * Get project list by conditions
+     * Supports pagination and sorting.
      */
     public function getProjectsByConditions(
         array $conditions = [],
@@ -51,17 +51,17 @@ interface ProjectRepositoryInterface
     public function updateProjectByCondition(array $condition, array $data): bool;
 
     /**
-     * 更新项目的updated_at为当前时间.
+     * Update project's updated_at to current time.
      */
     public function updateUpdatedAtToNow(int $projectId): bool;
 
     /**
-     * 根据工作区ID获取项目ID列表.
+     * Get project ID list by workspace ID.
      *
-     * @param int $workspaceId 工作区ID
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织代码
-     * @return array 项目ID列表
+     * @param int $workspaceId Workspace ID
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @return array Project ID list
      */
     public function getProjectIdsByWorkspaceId(int $workspaceId, string $userId, string $organizationCode): array;
 

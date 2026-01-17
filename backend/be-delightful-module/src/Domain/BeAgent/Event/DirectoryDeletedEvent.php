@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * 目录已删除事件.
+ * Directory deleted event.
  */
 class DirectoryDeletedEvent extends AbstractEvent
 {

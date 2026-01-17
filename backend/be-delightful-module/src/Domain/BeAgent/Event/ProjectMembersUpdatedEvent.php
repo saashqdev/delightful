@@ -11,12 +11,12 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
- * 项目成员已更新事件.
+ * Project members updated event.
  */
 class ProjectMembersUpdatedEvent extends AbstractEvent
 {
     /**
-     * @param array $currentMembers 当前成员列表
+     * @param array $currentMembers Current members list
      */
     public function __construct(
         private readonly ProjectEntity $projectEntity,

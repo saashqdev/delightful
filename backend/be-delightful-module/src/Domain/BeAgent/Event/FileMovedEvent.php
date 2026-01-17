@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * 文件已移动事件.
+ * File moved event.
  */
 class FileMovedEvent extends AbstractEvent
 {

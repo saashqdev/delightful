@@ -17,7 +17,7 @@ use App\Infrastructure\Core\AbstractEvent;
 use Hyperf\Codec\Json;
 
 /**
- * 检查是否需要长期记忆事件.
+ * Check if long-term memory is needed event.
  */
 class CheckLongTermMemoryEvent extends AbstractEvent
 {
@@ -79,13 +79,13 @@ class CheckLongTermMemoryEvent extends AbstractEvent
 
     public function getMentions(): ?string
     {
-        // 简化实现，避免复杂的类型检查
+        // Simplified implementation to avoid complex type checking
         return null;
     }
 
     public function getRawContent(): ?string
     {
-        // 由于原始内容的构建需要复杂的逻辑，这里返回基本信息
+        // Since building raw content requires complex logic, return basic information here
         return Json::encode([
             'seq_id' => $this->seqEntity->getSeqId(),
             'message_id' => $this->seqEntity->getMessageId(),
@@ -94,7 +94,7 @@ class CheckLongTermMemoryEvent extends AbstractEvent
     }
 
     /**
-     * 获取事件ID（使用seq_id作为事件的唯一标识）.
+     * Get event ID (using seq_id as the unique identifier for the event).
      */
     public function getEventId(): string
     {
@@ -102,9 +102,9 @@ class CheckLongTermMemoryEvent extends AbstractEvent
     }
 
     /**
-     * 转换为数组格式.
+     * Convert to array format.
      *
-     * @return array 事件数据数组
+     * @return array Event data array
      */
     public function toArray(): array
     {

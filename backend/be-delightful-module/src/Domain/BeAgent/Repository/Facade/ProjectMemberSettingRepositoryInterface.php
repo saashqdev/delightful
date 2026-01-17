@@ -10,120 +10,120 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberSettingEntity;
 
 /**
- * 项目成员设置仓储接口.
+ * Project member setting repository interface.
  *
- * 提供项目成员设置数据的持久化操作
+ * Provides persistence operations for project member setting data
  */
 interface ProjectMemberSettingRepositoryInterface
 {
     /**
-     * 根据用户ID和项目ID查找设置.
+     * Find setting by user ID and project ID.
      *
-     * @param string $userId 用户ID
-     * @param int $projectId 项目ID
-     * @return null|ProjectMemberSettingEntity 设置实体或null
+     * @param string $userId User ID
+     * @param int $projectId Project ID
+     * @return null|ProjectMemberSettingEntity Setting entity or null
      */
     public function findByUserAndProject(string $userId, int $projectId): ?ProjectMemberSettingEntity;
 
     /**
-     * 创建项目成员设置.
+     * Create project member setting.
      *
-     * @param string $userId 用户ID
-     * @param int $projectId 项目ID
-     * @param string $organizationCode 组织编码
-     * @return ProjectMemberSettingEntity 创建的设置实体
+     * @param string $userId User ID
+     * @param int $projectId Project ID
+     * @param string $organizationCode Organization code
+     * @return ProjectMemberSettingEntity Created setting entity
      */
     public function create(string $userId, int $projectId, string $organizationCode): ProjectMemberSettingEntity;
 
     /**
-     * 创建或更新项目成员设置.
+     * Create or update project member setting.
      *
-     * @param ProjectMemberSettingEntity $entity 设置实体
-     * @return ProjectMemberSettingEntity 保存后的实体
+     * @param ProjectMemberSettingEntity $entity Setting entity
+     * @return ProjectMemberSettingEntity Saved entity
      */
     public function save(ProjectMemberSettingEntity $entity): ProjectMemberSettingEntity;
 
     /**
-     * 更新置顶状态（假设记录已存在）.
+     * Update pin status (assuming record already exists).
      *
-     * @param string $userId 用户ID
-     * @param int $projectId 项目ID
-     * @param bool $isPinned 是否置顶
-     * @return bool 更新成功返回true
+     * @param string $userId User ID
+     * @param int $projectId Project ID
+     * @param bool $isPinned Whether pinned
+     * @return bool Returns true on successful update
      */
     public function updatePinStatus(string $userId, int $projectId, bool $isPinned): bool;
 
     /**
-     * 批量获取用户的置顶项目ID列表.
+     * Batch get user's pinned project ID list.
      *
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织编码
-     * @return array 置顶的项目ID数组
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @return array Array of pinned project IDs
      */
     public function getPinnedProjectIds(string $userId, string $organizationCode): array;
 
     /**
-     * 批量获取用户在多个项目的设置.
+     * Batch get user's settings for multiple projects.
      *
-     * @param string $userId 用户ID
-     * @param array $projectIds 项目ID数组
+     * @param string $userId User ID
+     * @param array $projectIds Array of project IDs
      * @return array [project_id => ProjectMemberSettingEntity, ...]
      */
     public function findByUserAndProjects(string $userId, array $projectIds): array;
 
     /**
-     * 更新最后活跃时间.
+     * Update last active time.
      *
-     * @param string $userId 用户ID
-     * @param int $projectId 项目ID
-     * @return bool 更新成功返回true
+     * @param string $userId User ID
+     * @param int $projectId Project ID
+     * @return bool Returns true on successful update
      */
     public function updateLastActiveTime(string $userId, int $projectId): bool;
 
     /**
-     * 删除项目相关的所有设置.
+     * Delete all settings related to project.
      *
-     * @param int $projectId 项目ID
-     * @return int 删除的记录数
+     * @param int $projectId Project ID
+     * @return int Number of deleted records
      */
     public function deleteByProjectId(int $projectId): int;
 
     /**
-     * 删除用户相关的所有设置.
+     * Delete all settings related to user.
      *
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织编码
-     * @return int 删除的记录数
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @return int Number of deleted records
      */
     public function deleteByUser(string $userId, string $organizationCode): int;
 
     /**
-     * 设置项目快捷方式（绑定到工作区）.
+     * Set project shortcut (bind to workspace).
      *
-     * @param string $userId 用户ID
-     * @param int $projectId 项目ID
-     * @param int $workspaceId 工作区ID
-     * @param string $organizationCode 组织编码
-     * @return bool 设置成功返回true
+     * @param string $userId User ID
+     * @param int $projectId Project ID
+     * @param int $workspaceId Workspace ID
+     * @param string $organizationCode Organization code
+     * @return bool Returns true on successful setting
      */
     public function setProjectShortcut(string $userId, int $projectId, int $workspaceId, string $organizationCode): bool;
 
     /**
-     * 取消项目快捷方式（取消工作区绑定）.
+     * Cancel project shortcut (cancel workspace binding).
      *
-     * @param string $userId 用户ID
-     * @param int $projectId 项目ID
-     * @return bool 取消成功返回true
+     * @param string $userId User ID
+     * @param int $projectId Project ID
+     * @return bool Returns true on successful cancellation
      */
     public function cancelProjectShortcut(string $userId, int $projectId): bool;
 
     /**
-     * 检查项目是否已设置快捷方式.
+     * Check if project has shortcut set.
      *
-     * @param string $userId 用户ID
-     * @param int $projectId 项目ID
-     * @param int $workspaceId 工作区ID
-     * @return bool 已设置返回true
+     * @param string $userId User ID
+     * @param int $projectId Project ID
+     * @param int $workspaceId Workspace ID
+     * @return bool Returns true if set
      */
     public function hasProjectShortcut(string $userId, int $projectId, int $workspaceId): bool;
 }

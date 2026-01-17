@@ -12,16 +12,16 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessagePayload;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TokenUsageDetails;
 
 /**
- * 话题任务消息事件.
+ * Topic task message event.
  */
 class TopicTaskMessageEvent extends AbstractEvent
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param MessageMetadata $metadata 消息元数据
-     * @param MessagePayload $payload 消息负载
-     * @param null|TokenUsageDetails $tokenUsageDetails Token 使用详情
+     * @param MessageMetadata $metadata Message metadata
+     * @param MessagePayload $payload Message payload
+     * @param null|TokenUsageDetails $tokenUsageDetails Token usage details
      */
     public function __construct(
         private MessageMetadata $metadata,
@@ -33,9 +33,9 @@ class TopicTaskMessageEvent extends AbstractEvent
     }
 
     /**
-     * 从数组创建消息事件.
+     * Create message event from array.
      *
-     * @param array $data 消息数据数组
+     * @param array $data Message data array
      */
     public static function fromArray(array $data): self
     {
@@ -55,9 +55,9 @@ class TopicTaskMessageEvent extends AbstractEvent
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      *
-     * @return array 消息数据数组
+     * @return array Message data array
      */
     public function toArray(): array
     {
@@ -69,7 +69,7 @@ class TopicTaskMessageEvent extends AbstractEvent
     }
 
     /**
-     * 获取消息元数据.
+     * Get message metadata.
      */
     public function getMetadata(): MessageMetadata
     {
@@ -77,7 +77,7 @@ class TopicTaskMessageEvent extends AbstractEvent
     }
 
     /**
-     * 获取消息负载.
+     * Get message payload.
      */
     public function getPayload(): MessagePayload
     {

@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * 文件内容已保存事件.
+ * File content saved event.
  */
 class FileContentSavedEvent extends AbstractEvent
 {

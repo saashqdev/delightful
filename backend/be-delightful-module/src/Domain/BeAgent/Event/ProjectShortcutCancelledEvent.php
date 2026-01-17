@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
- * 项目快捷方式取消事件.
+ * Project shortcut cancelled event.
  */
 class ProjectShortcutCancelledEvent extends AbstractEvent
 {

@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * 文件已上传事件.
+ * File uploaded event.
  */
 class FileUploadedEvent extends AbstractEvent
 {

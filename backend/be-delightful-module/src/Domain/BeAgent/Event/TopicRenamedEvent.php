@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 /**
- * 话题已重命名事件.
+ * Topic renamed event.
  */
 class TopicRenamedEvent extends AbstractEvent
 {

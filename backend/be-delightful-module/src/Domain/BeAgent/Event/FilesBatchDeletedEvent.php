@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 
 /**
- * 文件批量删除事件.
+ * Files batch deleted event.
  */
 class FilesBatchDeletedEvent extends AbstractEvent
 {

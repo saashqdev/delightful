@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
- * 项目已创建事件.
+ * Project created event.
  */
 class ProjectCreatedEvent extends AbstractEvent
 {

@@ -14,148 +14,148 @@ use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TaskModel;
 interface TaskRepositoryInterface
 {
     /**
-     * 获取任务模型实例.
+     * Get task model instance.
      *
-     * @return TaskModel 任务模型实例
+     * @return TaskModel Task model instance
      */
     public function getModel(): TaskModel;
 
     /**
-     * 通过ID获取任务
+     * Get task by ID
      */
     public function getTaskById(int $id): ?TaskEntity;
 
     /**
-     * 通过任务ID(沙箱服务返回的taskId)获取任务
+     * Get task by task ID (taskId returned by sandbox service)
      */
     public function getTaskByTaskId(string $taskId): ?TaskEntity;
 
     /**
-     * 通过话题ID获取任务列表.
+     * Get task list by topic ID.
      * @return array{list: TaskEntity[], total: int}
      */
     public function getTasksByTopicId(int $topicId, int $page, int $pageSize, array $conditions = []): array;
 
     /**
-     * 创建任务
+     * Create task
      */
     public function createTask(TaskEntity $taskEntity): TaskEntity;
 
     /**
-     * 更新任务
+     * Update task
      */
     public function updateTask(TaskEntity $taskEntity): bool;
 
     /**
-     * 更新任务状态
+     * Update task status
      */
     public function updateTaskStatus(int $id, TaskStatus $status): bool;
 
     /**
-     * 更新任务状态和错误信息.
+     * Update task status and error message.
      */
     public function updateTaskStatusAndErrMsg(int $id, TaskStatus $status, ?string $errMsg = null): bool;
 
     /**
-     * 根据沙箱任务ID更新任务状态
+     * Update task status by sandbox task ID
      */
     public function updateTaskStatusByTaskId(int $id, TaskStatus $status): bool;
 
     /**
-     * 根据沙箱任务ID更新任务状态和错误信息.
+     * Update task status and error message by sandbox task ID.
      */
     public function updateTaskStatusAndErrMsgByTaskId(int $id, TaskStatus $status, ?string $errMsg = null): bool;
 
     /**
-     * 删除任务
+     * Delete task
      */
     public function deleteTask(int $id): bool;
 
     /**
-     * 批量删除指定话题下的所有任务（软删除）.
+     * Batch delete all tasks under specified topic (soft delete).
      *
-     * @param int $topicId 话题ID
-     * @return int 被删除的任务数量
+     * @param int $topicId Topic ID
+     * @return int Number of deleted tasks
      */
     public function deleteTasksByTopicId(int $topicId): int;
 
     /**
-     * 通过用户ID和任务ID(沙箱服务返回的taskId)获取任务
+     * Get task by user ID and task ID (taskId returned by sandbox service)
      */
     public function getTaskByUserIdAndTaskId(string $userId, string $taskId): ?TaskEntity;
 
     /**
-     * 通过沙箱ID获取任务
+     * Get task by sandbox ID
      */
     public function getTaskBySandboxId(string $sandboxId): ?TaskEntity;
 
     /**
-     * 根据用户ID获取任务列表.
+     * Get task list by user ID.
      *
-     * @param string $userId 用户ID
-     * @param array $conditions 条件数组，如 ['task_status' => 'running']
-     * @return array 任务列表
+     * @param string $userId User ID
+     * @param array $conditions Condition array, e.g. ['task_status' => 'running']
+     * @return array Task list
      */
     public function getTasksByUserId(string $userId, array $conditions = []): array;
 
     /**
-     * 更新长时间处于运行状态的任务为错误状态
+     * Update tasks in running state for a long time to error state
      *
-     * @param string $timeThreshold 时间阈值，早于此时间的运行中任务将被标记为错误
-     * @return int 更新的任务数量
+     * @param string $timeThreshold Time threshold, running tasks earlier than this time will be marked as error
+     * @return int Number of updated tasks
      */
     public function updateStaleRunningTasks(string $timeThreshold): int;
 
     /**
-     * 获取指定状态的任务列表.
+     * Get task list by specified status.
      *
-     * @param TaskStatus $status 任务状态
-     * @return array<TaskEntity> 任务实体列表
+     * @param TaskStatus $status Task status
+     * @return array<TaskEntity> Task entity list
      */
     public function getTasksByStatus(TaskStatus $status): array;
 
     /**
-     * 获取最近更新时间超过指定时间的任务列表.
+     * Get task list with last update time exceeding specified time.
      *
-     * @param string $timeThreshold 时间阈值，如果任务的更新时间早于此时间，则会被包含在结果中
-     * @param int $limit 返回结果的最大数量
-     * @return array<TaskEntity> 任务实体列表
+     * @param string $timeThreshold Time threshold, tasks with update time earlier than this will be included in results
+     * @param int $limit Maximum number of results to return
+     * @return array<TaskEntity> Task entity list
      */
     public function getTasksExceedingUpdateTime(string $timeThreshold, int $limit = 100): array;
 
     /**
-     * 获取指定话题下的任务数量.
+     * Get task count under specified topic.
      */
     public function getTaskCountByTopicId(int $topicId): int;
 
     /**
-     * 根据项目ID获取任务列表.
+     * Get task list by project ID.
      */
     public function getTasksByProjectId(int $projectId, string $userId): array;
 
     public function updateTaskStatusBySandboxIds(array $sandboxIds, string $status, string $errMsg = ''): int;
 
     /**
-     * 统计项目下的任务数量.
+     * Count tasks under project.
      */
     public function countTasksByProjectId(int $projectId): int;
 
     public function updateTaskByCondition(array $condition, array $data): bool;
 
     /**
-     * 根据话题ID和任务ID列表获取任务实体列表.
+     * Get task entity list by topic ID and task ID list.
      *
-     * @param int $topicId 话题ID
-     * @param array $taskIds 任务ID列表
-     * @return TaskEntity[] 任务实体数组
+     * @param int $topicId Topic ID
+     * @param array $taskIds Task ID list
+     * @return TaskEntity[] Task entity array
      */
     public function getTasksByTopicIdAndTaskIds(int $topicId, array $taskIds): array;
 
     /**
-     * 批量创建任务
+     * Batch create tasks
      *
-     * @param TaskEntity[] $taskEntities 任务实体数组
-     * @return TaskEntity[] 创建成功的任务实体数组（包含生成的ID）
+     * @param TaskEntity[] $taskEntities Task entity array
+     * @return TaskEntity[] Successfully created task entity array (with generated IDs)
      */
     public function batchCreateTasks(array $taskEntities): array;
 }

@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
- * 项目快捷方式设置事件.
+ * Project shortcut set event.
  */
 class ProjectShortcutSetEvent extends AbstractEvent
 {

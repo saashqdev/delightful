@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * 文件已重命名事件.
+ * File renamed event.
  */
 class FileRenamedEvent extends AbstractEvent
 {

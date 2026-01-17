@@ -10,62 +10,62 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectOperationLogEntity;
 
 /**
- * 项目操作日志仓储接口.
+ * Project operation log repository interface.
  */
 interface ProjectOperationLogRepositoryInterface
 {
     /**
-     * 保存操作日志.
+     * Save operation log.
      */
     public function save(ProjectOperationLogEntity $operationLog): ProjectOperationLogEntity;
 
     /**
-     * 根据项目ID查找操作日志列表.
+     * Find operation log list by project ID.
      *
-     * @param int $projectId 项目ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array 日志列表
+     * @param int $projectId Project ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array Log list
      */
     public function findByProjectId(int $projectId, int $page = 1, int $pageSize = 20): array;
 
     /**
-     * 根据项目和用户查找操作日志.
+     * Find operation logs by project and user.
      *
-     * @param int $projectId 项目ID
-     * @param string $userId 用户ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array 日志列表
+     * @param int $projectId Project ID
+     * @param string $userId User ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array Log list
      */
     public function findByProjectAndUser(int $projectId, string $userId, int $page = 1, int $pageSize = 20): array;
 
     /**
-     * 根据项目和操作类型查找日志.
+     * Find logs by project and action type.
      *
-     * @param int $projectId 项目ID
-     * @param string $action 操作类型
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array 日志列表
+     * @param int $projectId Project ID
+     * @param string $action Action type
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array Log list
      */
     public function findByProjectAndAction(int $projectId, string $action, int $page = 1, int $pageSize = 20): array;
 
     /**
-     * 根据项目ID统计操作日志数量.
+     * Count operation logs by project ID.
      *
-     * @param int $projectId 项目ID
-     * @return int 日志数量
+     * @param int $projectId Project ID
+     * @return int Log count
      */
     public function countByProjectId(int $projectId): int;
 
     /**
-     * 根据组织编码查找操作日志.
+     * Find operation logs by organization code.
      *
-     * @param string $organizationCode 组织编码
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array 日志列表
+     * @param string $organizationCode Organization code
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array Log list
      */
     public function findByOrganization(string $organizationCode, int $page = 1, int $pageSize = 20): array;
 }

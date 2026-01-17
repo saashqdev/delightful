@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 /**
- * 话题已更新事件.
+ * Topic updated event.
  */
 class TopicUpdatedEvent extends AbstractEvent
 {

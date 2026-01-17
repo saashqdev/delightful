@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
- * 项目已删除事件.
+ * Project deleted event.
  */
 class ProjectDeletedEvent extends AbstractEvent
 {

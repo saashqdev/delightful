@@ -11,7 +11,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 /**
- * 话题已删除事件.
+ * Topic deleted event.
  */
 class TopicDeletedEvent extends AbstractEvent
 {

@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
 /**
- * 话题消息处理事件（轻量级）.
- * 只通知有消息需要处理，不传递具体消息内容.
+ * Topic message process event (lightweight).
+ * Only notifies that there is a message to process, does not pass specific message content.
  */
 class TopicMessageProcessEvent extends AbstractEvent
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param int $topicId 话题ID
-     * @param int $taskId 任务ID
+     * @param int $topicId Topic ID
+     * @param int $taskId Task ID
      */
     public function __construct(
         private readonly int $topicId,
@@ -28,7 +28,7 @@ class TopicMessageProcessEvent extends AbstractEvent
     }
 
     /**
-     * 从数组创建事件.
+     * Create event from array.
      */
     public static function fromArray(array $data): self
     {
@@ -39,7 +39,7 @@ class TopicMessageProcessEvent extends AbstractEvent
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -51,7 +51,7 @@ class TopicMessageProcessEvent extends AbstractEvent
     }
 
     /**
-     * 获取话题ID.
+     * Get topic ID.
      */
     public function getTopicId(): int
     {
@@ -59,7 +59,7 @@ class TopicMessageProcessEvent extends AbstractEvent
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): int
     {

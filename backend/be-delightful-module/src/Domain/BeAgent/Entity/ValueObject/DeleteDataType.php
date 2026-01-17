@@ -8,42 +8,42 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 删除数据类型枚举
- * 用于标识被删除的数据类型，以便查询相关的运行中任务
+ * Delete data type enum
+ * Used to identify the type of deleted data for querying related running tasks
  */
 enum DeleteDataType: string
 {
     /**
-     * 工作区.
+     * Workspace.
      */
     case WORKSPACE = 'workspace';
 
     /**
-     * 项目.
+     * Project.
      */
     case PROJECT = 'project';
 
     /**
-     * 话题.
+     * Topic.
      */
     case TOPIC = 'topic';
 
     /**
-     * 获取类型描述.
+     * Get type description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::WORKSPACE => '工作区',
-            self::PROJECT => '项目',
-            self::TOPIC => '话题',
+            self::WORKSPACE => 'Workspace',
+            self::PROJECT => 'Project',
+            self::TOPIC => 'Topic',
         };
     }
 
     /**
-     * 获取所有类型列表.
+     * Get all type list.
      *
-     * @return array<string, string> 类型值与描述的映射
+     * @return array<string, string> Mapping of type values to descriptions
      */
     public static function getList(): array
     {

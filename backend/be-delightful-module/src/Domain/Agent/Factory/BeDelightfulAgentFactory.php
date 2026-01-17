@@ -17,7 +17,7 @@ class BeDelightfulAgentFactory
     {
         $entity = new BeDelightfulAgentEntity();
 
-        // 必填字段
+        // Required fields
         if ($model->id !== null) {
             $entity->setId($model->id);
         }
@@ -34,7 +34,7 @@ class BeDelightfulAgentFactory
             $entity->setName($model->name);
         }
 
-        // 可选字段，按需设置
+        // Optional fields, set as needed
         if ($model->description !== null && $model->description !== '') {
             $entity->setDescription($model->description);
         }

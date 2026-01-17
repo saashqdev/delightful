@@ -12,87 +12,87 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 use Throwable;
 
 /**
- * 话题实体.
+ * Topic entity.
  */
 class TopicEntity extends AbstractEntity
 {
     /**
-     * @var int 话题ID
+     * @var int Topic ID
      */
     protected int $id;
 
     /**
-     * @var string 用户ID
+     * @var string User ID
      */
     protected string $userId;
 
     /**
-     * @var string 用户组织编码
+     * @var string User organization code
      */
     protected string $userOrganizationCode = '';
 
     /**
-     * @var int 工作区ID
+     * @var int Workspace ID
      */
     protected int $workspaceId = 0;
 
     /**
-     * @var int 项目ID
+     * @var int Project ID
      */
     protected int $projectId = 0;
 
     /**
-     * @var null|int 复制来源话题ID
+     * @var null|int Copy source topic ID
      */
     protected ?int $fromTopicId = null;
 
     /**
-     * @var string Chat话题ID
+     * @var string Chat topic ID
      */
     protected string $chatTopicId = '';
 
     /**
-     * @var string Chat会话ID
+     * @var string Chat conversation ID
      */
     protected string $chatConversationId = '';
 
     /**
-     * @var string 沙箱ID
+     * @var string Sandbox ID
      */
     protected string $sandboxId = '';
 
     /**
-     * @var null|string 沙箱配置信息（JSON字符串）
+     * @var null|string Sandbox configuration information (JSON string)
      */
     protected ?string $sandboxConfig = null;
 
     /**
-     * @var string 工作目录
+     * @var string Working directory
      */
     protected string $workDir = '';
 
     /**
-     * @var string 话题名称
+     * @var string Topic name
      */
     protected string $topicName = '';
 
     /**
-     * @var null|string 话题描述
+     * @var null|string Topic description
      */
     protected ?string $description = null;
 
     /**
-     * @var string 任务模式（chat: 聊天模式, plan: 规划模式）
+     * @var string Task mode (chat: chat mode, plan: planning mode)
      */
     protected string $taskMode = 'chat';
 
     /**
-     * @var string 话题模式 (支持自定义字符串)
+     * @var string Topic mode (supports custom string)
      */
     protected string $topicMode = '';
 
     /**
-     * @var float 话题成本
+     * @var float Topic cost
      */
     protected float $cost = 0.0;
 
@@ -107,37 +107,37 @@ class TopicEntity extends AbstractEntity
     protected ?string $sourceId = null;
 
     /**
-     * @var null|int 当前任务ID
+     * @var null|int Current task ID
      */
     protected ?int $currentTaskId = null;
 
     /**
-     * @var null|TaskStatus 当前任务状态
+     * @var null|TaskStatus Current task status
      */
     protected ?TaskStatus $currentTaskStatus = null;
 
     /**
-     * @var null|string 创建时间
+     * @var null|string Creation time
      */
     protected ?string $createdAt = null;
 
     /**
-     * @var null|string 更新时间
+     * @var null|string Update time
      */
     protected ?string $updatedAt = null;
 
     /**
-     * @var null|string 删除时间
+     * @var null|string Deletion time
      */
     protected ?string $deletedAt = null;
 
     /**
-     * @var string 创建者用户ID
+     * @var string Creator user ID
      */
     protected string $createdUid = '';
 
     /**
-     * @var string 更新者用户ID
+     * @var string Updater user ID
      */
     protected string $updatedUid = '';
 
@@ -154,7 +154,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -188,7 +188,7 @@ class TopicEntity extends AbstractEntity
             'chat_history_commit_hash' => $this->chatHistoryCommitHash,
         ];
 
-        // 移除null值
+        // Remove null values
         return array_filter($result, function ($value) {
             return $value !== null;
         });
@@ -201,7 +201,7 @@ class TopicEntity extends AbstractEntity
 
     public function setId($id): self
     {
-        // 当输入不是整数时进行转换
+        // Convert when input is not an integer
         if (! is_int($id)) {
             $id = (int) $id;
         }
@@ -239,7 +239,7 @@ class TopicEntity extends AbstractEntity
 
     public function setWorkspaceId($workspaceId): self
     {
-        // 当输入不是整数时进行转换
+        // Convert when input is not an integer
         if (! is_int($workspaceId)) {
             $workspaceId = (int) $workspaceId;
         }
@@ -255,7 +255,7 @@ class TopicEntity extends AbstractEntity
 
     public function setProjectId($projectId): self
     {
-        // 当输入不是整数时进行转换
+        // Convert when input is not an integer
         if (! is_int($projectId)) {
             $projectId = (int) $projectId;
         }
@@ -271,7 +271,7 @@ class TopicEntity extends AbstractEntity
 
     public function setFromTopicId($fromTopicId): self
     {
-        // 当输入不是整数时进行转换，null保持null
+        // Convert when input is not an integer, keep null as null
         if ($fromTopicId !== null && ! is_int($fromTopicId)) {
             $fromTopicId = (int) $fromTopicId;
         }
@@ -281,7 +281,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取Chat话题ID.
+     * Get Chat topic ID.
      */
     public function getChatTopicId(): string
     {
@@ -289,7 +289,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置Chat话题ID.
+     * Set Chat topic ID.
      */
     public function setChatTopicId(string $chatTopicId): self
     {
@@ -298,7 +298,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取Chat会话ID.
+     * Get Chat conversation ID.
      */
     public function getChatConversationId(): string
     {
@@ -306,7 +306,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置Chat会话ID.
+     * Set Chat conversation ID.
      */
     public function setChatConversationId(string $chatConversationId): self
     {
@@ -315,7 +315,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取沙箱ID.
+     * Get sandbox ID.
      */
     public function getSandboxId(): string
     {
@@ -323,7 +323,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置沙箱ID.
+     * Set sandbox ID.
      */
     public function setSandboxId(string $sandboxId): self
     {
@@ -332,7 +332,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取沙箱配置.
+     * Get sandbox configuration.
      */
     public function getSandboxConfig(): ?string
     {
@@ -340,7 +340,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置沙箱配置.
+     * Set sandbox configuration.
      */
     public function setSandboxConfig(?string $sandboxConfig): self
     {
@@ -349,7 +349,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取工作目录.
+     * Get working directory.
      */
     public function getWorkDir(): string
     {
@@ -357,7 +357,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置工作目录.
+     * Set working directory.
      */
     public function setWorkDir(string $workDir): self
     {
@@ -394,7 +394,7 @@ class TopicEntity extends AbstractEntity
 
     public function setCurrentTaskId($currentTaskId): self
     {
-        // 当输入不是整数时进行转换
+        // Convert when input is not an integer
         if ($currentTaskId !== null && ! is_int($currentTaskId)) {
             $currentTaskId = (int) $currentTaskId;
         }
@@ -410,12 +410,12 @@ class TopicEntity extends AbstractEntity
 
     public function setCurrentTaskStatus($currentTaskStatus): self
     {
-        // 如果输入不是TaskStatus类型但不为空，尝试转换
+        // If input is not TaskStatus type but not null, try to convert
         if ($currentTaskStatus !== null && ! ($currentTaskStatus instanceof TaskStatus)) {
             try {
                 $currentTaskStatus = TaskStatus::from($currentTaskStatus);
             } catch (Throwable $e) {
-                // 转换失败时设为null
+                // Set to null when conversion fails
                 $currentTaskStatus = null;
             }
         }
@@ -458,7 +458,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取创建者用户ID.
+     * Get creator user ID.
      */
     public function getCreatedUid(): string
     {
@@ -466,18 +466,18 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置创建者用户ID.
+     * Set creator user ID.
      * @param mixed $createdUid
      */
     public function setCreatedUid($createdUid): self
     {
-        // 如果传入null，则设置为空字符串
+        // If null is passed, set to empty string
         $this->createdUid = $createdUid === null ? '' : (string) $createdUid;
         return $this;
     }
 
     /**
-     * 获取更新者用户ID.
+     * Get updater user ID.
      */
     public function getUpdatedUid(): string
     {
@@ -485,18 +485,18 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置更新者用户ID.
+     * Set updater user ID.
      * @param mixed $updatedUid
      */
     public function setUpdatedUid($updatedUid): self
     {
-        // 如果传入null，则设置为空字符串
+        // If null is passed, set to empty string
         $this->updatedUid = $updatedUid === null ? '' : (string) $updatedUid;
         return $this;
     }
 
     /**
-     * 获取任务模式.
+     * Get task mode.
      */
     public function getTaskMode(): string
     {
@@ -504,7 +504,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置任务模式.
+     * Set task mode.
      */
     public function setTaskMode(string $taskMode): self
     {
@@ -513,7 +513,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取话题模式.
+     * Get topic mode.
      */
     public function getTopicMode(): string
     {
@@ -521,7 +521,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置话题模式.
+     * Set topic mode.
      */
     public function setTopicMode(string $topicMode): self
     {
@@ -530,7 +530,7 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 获取话题成本.
+     * Get topic cost.
      */
     public function getCost(): float
     {
@@ -538,12 +538,12 @@ class TopicEntity extends AbstractEntity
     }
 
     /**
-     * 设置话题成本.
+     * Set topic cost.
      * @param mixed $cost
      */
     public function setCost($cost): self
     {
-        // 当输入不是浮点数时进行转换
+        // Convert when input is not a float
         if (! is_float($cost)) {
             $cost = (float) $cost;
         }

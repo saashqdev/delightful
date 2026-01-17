@@ -14,13 +14,13 @@ use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use function Hyperf\Translation\__;
 
 /**
- * 项目成员设置实体.
+ * Project member setting entity.
  *
- * 表示项目成员的个人设置，如置顶状态、最后活跃时间等
+ * Represents personal settings for project members, such as pinned status, last active time, etc.
  */
 class ProjectMemberSettingEntity extends AbstractEntity
 {
-    /** @var int 主键ID */
+    /** @var int Primary key ID */
     protected int $id = 0;
 
     protected string $userId = '';
@@ -98,7 +98,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     {
         $this->isPinned = $isPinned;
 
-        // 设置置顶时间
+        // Set pinned time
         if ($isPinned) {
             $this->pinnedAt = date('Y-m-d H:i:s');
         } else {
@@ -137,7 +137,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 设置工作区绑定.
+     * Set workspace binding.
      */
     public function bindToWorkspace(int $workspaceId): void
     {
@@ -146,7 +146,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 取消工作区绑定.
+     * Cancel workspace binding.
      */
     public function unbindWorkspace(): void
     {
@@ -165,7 +165,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 更新最后活跃时间为当前时间.
+     * Update last active time to current time.
      */
     public function updateLastActiveTime(): void
     {
@@ -193,7 +193,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 从数据库模型创建实体.
+     * Create entity from database model.
      */
     public static function modelToEntity(array $data): ProjectMemberSettingEntity
     {
@@ -204,12 +204,12 @@ class ProjectMemberSettingEntity extends AbstractEntity
         $entity->setOrganizationCode($data['organization_code']);
         $entity->setIsPinned((bool) $data['is_pinned']);
 
-        // 处理置顶时间
+        // Handle pinned time
         if (! empty($data['pinned_at'])) {
             $entity->setPinnedAt($data['pinned_at']);
         }
 
-        // 处理工作区绑定字段
+        // Handle workspace binding fields
         if (isset($data['is_bind_workspace'])) {
             $entity->setIsBindWorkspace((bool) $data['is_bind_workspace']);
         }
@@ -217,7 +217,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
             $entity->setBindWorkspaceId((int) $data['bind_workspace_id']);
         }
 
-        // 处理最后活跃时间
+        // Handle last active time
         $entity->setLastActiveAt($data['last_active_at']);
 
         $entity->setCreatedAt($data['created_at']);
@@ -227,7 +227,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 转换为数组格式.
+     * Convert to array format.
      */
     public function toArray(): array
     {
@@ -247,7 +247,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 转换为数据库插入格式.
+     * Convert to database insert format.
      */
     public function toInsertArray(): array
     {
@@ -269,7 +269,7 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 切换置顶状态.
+     * Toggle pinned status.
      */
     public function togglePin(): void
     {
@@ -277,15 +277,15 @@ class ProjectMemberSettingEntity extends AbstractEntity
     }
 
     /**
-     * 验证实体数据完整性.
+     * Validate entity data integrity.
      */
     private function validateEntity(): void
     {
         if (empty($this->userId) && empty($this->projectId)) {
-            return; // 允许初始化时为空
+            return; // Allow empty during initialization
         }
 
-        // 基本验证：确保userId和projectId有值
+        // Basic validation: ensure userId and projectId have values
         if (empty(trim($this->userId))) {
             ExceptionBuilder::throw(BeAgentErrorCode::MEMBER_VALIDATION_FAILED, __('project.setting.user_id_required'));
         }

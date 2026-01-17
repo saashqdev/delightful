@@ -14,19 +14,19 @@ use App\Domain\Contact\Entity\ValueObject\UserType;
 class UserAuthorization
 {
     /**
-     * 账号在某个组织下的id,即user_id.
+     * Account ID under a specific organization, i.e., user_id.
      */
     protected string $id = '';
 
     /**
-     * 用户注册后生成的delightful_id,全局唯一
+     * Delightful ID generated after user registration, globally unique.
      */
     protected string $delightfulId = '';
 
     protected UserType $userType;
 
     /**
-     * 用户在该组织下的状态:0:冻结,1:已激活,2:已离职,3:已退出.
+     * User status under this organization: 0: frozen, 1: activated, 2: resigned, 3: quit.
      */
     protected string $status;
 
@@ -37,34 +37,34 @@ class UserAuthorization
     protected string $avatar = '';
 
     /**
-     * 用户当前选择的组织.
+     * Organization currently selected by the user.
      */
     protected string $organizationCode = '';
 
     protected string $applicationCode = '';
 
     /**
-     * 手机号,不带国际冠码
+     * Mobile number, without international dialing code.
      */
     protected string $mobile = '';
 
     /**
-     * 手机号的国际冠码
+     * International dialing code for mobile number.
      */
     protected string $countryCode = '';
 
     protected array $permissions = [];
 
-    // 当前用户所处的环境id
+    // Environment ID where the current user is located
     protected int $delightfulEnvId = 0;
 
-    // 第三方平台的原始组织编码
+    // Original organization code from third-party platform
     protected string $thirdPlatformOrganizationCode = '';
 
-    // 第三方平台的原始用户 ID
+    // Original user ID from third-party platform
     protected ?string $thirdPlatformUserId = '';
 
-    // 第三方平台类型
+    // Third-party platform type
     protected ?PlatformType $thirdPlatformType = null;
 
     public function __construct()

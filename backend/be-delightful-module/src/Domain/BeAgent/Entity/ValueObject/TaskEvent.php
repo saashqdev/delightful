@@ -8,33 +8,33 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 任务事件枚举.
+ * Task Event Enum.
  */
 enum TaskEvent: string
 {
     /**
-     * 任务挂起.
+     * Task Suspended.
      */
     case SUSPENDED = 'suspended';
 
     /**
-     * 任务终止.
+     * Task Terminated.
      */
     case TERMINATED = 'terminated';
 
     /**
-     * 获取事件描述.
+     * Get event description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::SUSPENDED => '任务挂起',
-            self::TERMINATED => '任务终止',
+            self::SUSPENDED => 'Task Suspended',
+            self::TERMINATED => 'Task Terminated',
         };
     }
 
     /**
-     * 是否为挂起状态
+     * Is suspended state
      */
     public function isSuspended(): bool
     {
@@ -42,7 +42,7 @@ enum TaskEvent: string
     }
 
     /**
-     * 是否为终止状态
+     * Is terminated state
      */
     public function isTerminated(): bool
     {

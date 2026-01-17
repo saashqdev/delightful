@@ -8,39 +8,39 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 编辑类型枚举.
+ * Edit type enum.
  */
 enum EditType: int
 {
     /**
-     * 人工编辑.
+     * Manual edit.
      */
     case MANUAL = 1;
 
     /**
-     * AI编辑.
+     * AI edit.
      */
     case AI = 2;
 
     /**
-     * 获取编辑类型名称.
+     * Get edit type name.
      */
     public function getName(): string
     {
         return match ($this) {
-            self::MANUAL => '人工编辑',
-            self::AI => 'AI编辑',
+            self::MANUAL => 'Manual edit',
+            self::AI => 'AI edit',
         };
     }
 
     /**
-     * 获取编辑类型描述.
+     * Get edit type description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::MANUAL => '人工手动编辑的版本',
-            self::AI => 'AI自动编辑的版本',
+            self::MANUAL => 'Version manually edited by humans',
+            self::AI => 'Version automatically edited by AI',
         };
     }
 }

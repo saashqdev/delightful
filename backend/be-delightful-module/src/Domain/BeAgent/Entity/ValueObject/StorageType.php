@@ -8,22 +8,22 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 存储类型枚举.
+ * Storage type enum.
  */
 enum StorageType: string
 {
     /**
-     * 工作空间存储.
+     * Workspace storage.
      */
     case WORKSPACE = 'workspace';
 
     /**
-     * 消息存储.
+     * Message storage.
      */
     case TOPIC = 'topic';
 
     /**
-     * 快照存储.
+     * Snapshot storage.
      */
     case SNAPSHOT = 'snapshot';
 
@@ -31,35 +31,35 @@ enum StorageType: string
     case OTHERS = '';
 
     /**
-     * 获取存储类型名称.
+     * Get storage type name.
      */
     public function getName(): string
     {
         return match ($this) {
-            self::WORKSPACE => '工作空间',
-            self::TOPIC => '话题',
-            self::SNAPSHOT => '快照',
-            self::OBJECT_STORAGE => '对象存储',
-            self::OTHERS => '其他',
+            self::WORKSPACE => 'Workspace',
+            self::TOPIC => 'Topic',
+            self::SNAPSHOT => 'Snapshot',
+            self::OBJECT_STORAGE => 'Object storage',
+            self::OTHERS => 'Others',
         };
     }
 
     /**
-     * 获取存储类型描述.
+     * Get storage type description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::WORKSPACE => '存储在工作空间中的文件',
-            self::TOPIC => '存储在消息中的文件',
-            self::SNAPSHOT => '存储在快照中的文件',
-            self::OBJECT_STORAGE => '存储在对象存储中的文件',
-            self::OTHERS => '其他存储方式',
+            self::WORKSPACE => 'Files stored in workspace',
+            self::TOPIC => 'Files stored in messages',
+            self::SNAPSHOT => 'Files stored in snapshots',
+            self::OBJECT_STORAGE => 'Files stored in object storage',
+            self::OTHERS => 'Other storage methods',
         };
     }
 
     /**
-     * 从字符串创建枚举实例.
+     * Create enum instance from string.
      */
     public static function fromValue(string $value): self
     {
@@ -67,7 +67,7 @@ enum StorageType: string
             'workspace' => self::WORKSPACE,
             'topic' => self::TOPIC,
             'snapshot' => self::SNAPSHOT,
-            // 兜底：未知值统一转为 WORKSPACE（处理脏数据）
+            // Fallback: unknown values are converted to OTHERS (handle dirty data)
             default => self::OTHERS,
         };
     }

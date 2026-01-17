@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Constant;
 use InvalidArgumentException;
 
 /**
- * 话题复制任务状态枚举.
+ * Topic duplication task status enum.
  */
 enum DuplicateStatusEnum: string
 {
@@ -19,7 +19,7 @@ enum DuplicateStatusEnum: string
     case ERROR = 'error';
 
     /**
-     * 获取所有有效状态值
+     * Get all valid status values
      */
     public static function getValidStatuses(): array
     {
@@ -27,7 +27,7 @@ enum DuplicateStatusEnum: string
     }
 
     /**
-     * 检查状态是否有效.
+     * Check if status is valid.
      */
     public static function isValid(string $status): bool
     {
@@ -35,7 +35,7 @@ enum DuplicateStatusEnum: string
     }
 
     /**
-     * 从字符串创建枚举实例.
+     * Create enum instance from string.
      */
     public static function fromString(string $status): self
     {

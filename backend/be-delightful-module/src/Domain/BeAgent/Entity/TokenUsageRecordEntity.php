@@ -11,102 +11,102 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 
 /**
- * Token使用记录实体.
+ * Token usage record entity.
  */
 class TokenUsageRecordEntity extends AbstractEntity
 {
     /**
-     * @var int 主键ID
+     * @var int Primary key ID
      */
     protected int $id = 0;
 
     /**
-     * @var int 话题ID
+     * @var int Topic ID
      */
     protected int $topicId = 0;
 
     /**
-     * @var string 任务ID
+     * @var string Task ID
      */
     protected string $taskId = '';
 
     /**
-     * @var null|string 沙箱ID
+     * @var null|string Sandbox ID
      */
     protected ?string $sandboxId = null;
 
     /**
-     * @var string 组织代码
+     * @var string Organization code
      */
     protected string $organizationCode = '';
 
     /**
-     * @var string 用户ID
+     * @var string User ID
      */
     protected string $userId = '';
 
     /**
-     * @var string 任务状态
+     * @var string Task status
      */
     protected string $taskStatus = '';
 
     /**
-     * @var string 使用类型(summary/item)
+     * @var string Usage type (summary/item)
      */
     protected string $usageType = '';
 
     /**
-     * @var int 总输入token数
+     * @var int Total input tokens
      */
     protected int $totalInputTokens = 0;
 
     /**
-     * @var int 总输出token数
+     * @var int Total output tokens
      */
     protected int $totalOutputTokens = 0;
 
     /**
-     * @var int 总token数
+     * @var int Total tokens
      */
     protected int $totalTokens = 0;
 
     /**
-     * @var null|string 模型ID
+     * @var null|string Model ID
      */
     protected ?string $modelId = null;
 
     /**
-     * @var null|string 模型名称
+     * @var null|string Model name
      */
     protected ?string $modelName = null;
 
     /**
-     * @var int 缓存token数
+     * @var int Cached tokens
      */
     protected int $cachedTokens = 0;
 
     /**
-     * @var int 缓存写入token数
+     * @var int Cache write tokens
      */
     protected int $cacheWriteTokens = 0;
 
     /**
-     * @var int 推理token数
+     * @var int Reasoning tokens
      */
     protected int $reasoningTokens = 0;
 
     /**
-     * @var null|array 完整的使用详情JSON
+     * @var null|array Complete usage details JSON
      */
     protected ?array $usageDetails = null;
 
     /**
-     * @var null|string 创建时间
+     * @var null|string Creation time
      */
     protected ?string $createdAt = null;
 
     /**
-     * @var null|string 更新时间
+     * @var null|string Update time
      */
     protected ?string $updatedAt = null;
 

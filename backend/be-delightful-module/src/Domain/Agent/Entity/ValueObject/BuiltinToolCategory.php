@@ -18,7 +18,7 @@ enum BuiltinToolCategory: string
     case AIAssistance = 'ai_assistance';
 
     /**
-     * 获取分类的显示名称.
+     * Get category display name.
      */
     public function getName(): string
     {
@@ -26,16 +26,16 @@ enum BuiltinToolCategory: string
     }
 
     /**
-     * 获取分类的图标.
+     * Get category icon.
      */
     public function getIcon(): string
     {
-        // 暂时返回空字符串，等待前端提供图标内容
+        // Temporarily return empty string, waiting for frontend to provide icon content
         return '';
     }
 
     /**
-     * 获取分类的描述.
+     * Get category description.
      */
     public function getDescription(): string
     {

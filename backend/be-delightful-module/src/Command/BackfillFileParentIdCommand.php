@@ -114,75 +114,75 @@ class BackfillFileParentIdCommand extends HyperfCommand
     }
 
     /**
-     * 根据存储类型处理文件路径，将旧格式的路径转换为新格式
-     * 简化版：直接用新前缀替换旧前缀，然后添加相应的路径段.
+     * Process file path based on storage type, convert old format path to new format
+     * Simplified version: directly replace old prefix with new prefix, then add corresponding path segments.
      *
-     * @param string $type 存储类型 (workspace 或其他)
-     * @param string $fileKey 原始文件路径
-     * @param string $prefix 新前缀，如：DT001/588417216353927169
-     * @param string $oldPrefix 旧前缀，如：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx
-     * @param bool $isDirectory 是否为目录
-     * @return string 转换后的文件路径
+     * @param string $type Storage type (workspace or other)
+     * @param string $fileKey Original file path
+     * @param string $prefix New prefix, e.g.: DT001/588417216353927169
+     * @param string $oldPrefix Old prefix, e.g.: DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx
+     * @param bool $isDirectory Whether it is a directory
+     * @return string Converted file path
      */
     public function handleFileKeyByType($type, $fileKey, $prefix, $oldPrefix, bool $isDirectory = false): string
     {
         $storageTypeValue = $type instanceof StorageType ? $type->value : $type;
 
-        // 检查是否包含旧前缀，如果不包含则返回原路径
+        // Check if old prefix is included, return original path if not included
         if (strpos($fileKey, $oldPrefix . '/') !== 0) {
             return $fileKey;
         }
 
-        // 移除旧前缀，获取相对路径部分
+        // Remove old prefix, get relative path part
         $relativePath = substr($fileKey, strlen($oldPrefix . '/'));
 
-        // 先规范化相对路径，移除双斜杠
+        // Normalize relative path first, remove double slashes
         $relativePath = preg_replace('#/+#', '/', $relativePath);
         $relativePath = trim($relativePath, '/');
 
         if ($storageTypeValue == 'workspace') {
-            // workspace 类型：添加 /workspace
-            // 源：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/project_804590875311198209/新建文件.php
-            // 或：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/topic_804590875311198209/新建文件.php
-            // 目标：DT001/588417216353927169/project_804590875311198209/workspace/新建文件.php
+            // workspace type: add /workspace
+            // Source: DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/project_804590875311198209/new_file.php
+            // Or: DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/topic_804590875311198209/new_file.php
+            // Target: DT001/588417216353927169/project_804590875311198209/workspace/new_file.php
 
-            // 找到 project_ 或 topic_ 开头的部分
+            // Find the part starting with project_ or topic_
             $pathParts = explode('/', $relativePath);
             for ($i = 0; $i < count($pathParts); ++$i) {
                 if (strpos($pathParts[$i], 'project_') === 0 || strpos($pathParts[$i], 'topic_') === 0) {
                     $entityName = $pathParts[$i];
 
-                    // 如果是 topic_，需要转换为 project_ 格式
+                    // If topic_, need to convert to project_ format
                     if (strpos($entityName, 'topic_') === 0) {
                         $entityName = str_replace('topic_', 'project_', $entityName);
                     }
 
-                    // 检查是否已经包含 workspace
+                    // Check if already contains workspace
                     if ($i + 1 < count($pathParts) && $pathParts[$i + 1] === 'workspace') {
-                        // 已经有 workspace，保留 workspace 之后的路径
+                        // Already has workspace, preserve path after workspace
                         $remainingParts = array_slice($pathParts, $i + 2);
                         $finalPath = empty($remainingParts) ? '' : implode('/', $remainingParts);
                         return $this->normalizePath($prefix . '/' . $entityName . '/workspace/' . $finalPath, $isDirectory);
                     }
-                    // 需要添加 workspace
+                    // Need to add workspace
                     $remainingParts = array_slice($pathParts, $i + 1);
                     $finalPath = empty($remainingParts) ? '' : implode('/', $remainingParts);
                     return $this->normalizePath($prefix . '/' . $entityName . '/workspace/' . $finalPath, $isDirectory);
                 }
             }
         } else {
-            // 非 workspace 类型：添加 /runtime/message
-            // 源：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/project_808853145743884288/task_xxx/.chat/file.md
-            // 或：DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/topic_808853145743884288/task_xxx/.chat/file.md
-            // 目标：DT001/588417216353927169/project_808853145743884288/runtime/message/task_xxx/.chat/file.md
+            // Non-workspace type: add /runtime/message
+            // Source: DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/project_808853145743884288/task_xxx/.chat/file.md
+            // Or: DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/BE_DELIGHTFUL/usi_xxx/topic_808853145743884288/task_xxx/.chat/file.md
+            // Target: DT001/588417216353927169/project_808853145743884288/runtime/message/task_xxx/.chat/file.md
 
-            // 找到 project_ 或 topic_ 开头的部分
+            // Find the part starting with project_ or topic_
             $pathParts = explode('/', $relativePath);
             for ($i = 0; $i < count($pathParts); ++$i) {
                 if (strpos($pathParts[$i], 'project_') === 0 || strpos($pathParts[$i], 'topic_') === 0) {
                     $entityName = $pathParts[$i];
 
-                    // 如果是 topic_，需要转换为 project_ 格式
+                    // If topic_, need to convert to project_ format
                     if (strpos($entityName, 'topic_') === 0) {
                         $entityName = str_replace('topic_', 'project_', $entityName);
                     }
@@ -190,13 +190,13 @@ class BackfillFileParentIdCommand extends HyperfCommand
                     $remainingParts = array_slice($pathParts, $i + 1);
                     $finalPath = empty($remainingParts) ? '' : implode('/', $remainingParts);
 
-                    // 处理空路径，避免双斜杠
+                    // Handle empty path, avoid double slashes
                     return $this->normalizePath($prefix . '/' . $entityName . '/runtime/message/' . $finalPath, $isDirectory);
                 }
             }
         }
 
-        // 如果找不到 project_ 部分，返回原路径
+        // If cannot find project_ part, return original path
         return $fileKey;
     }
 
@@ -264,8 +264,8 @@ class BackfillFileParentIdCommand extends HyperfCommand
     /**
      * Process a single project.
      *
-     * @param ProjectEntity $project 项目实体
-     * @return array 处理结果
+     * @param ProjectEntity $project Project entity
+     * @return array Processing result
      */
     private function processProject(ProjectEntity $project): array
     {
@@ -293,7 +293,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
             return $projectResult;
         }
 
-        // 🎯 第一步：更新 work_dir（必须在处理文件之前，因为后续处理依赖新的 work_dir）
+        // 🎯 Step 1: Update work_dir (must be before processing files, as subsequent processing depends on new work_dir)
         $updatedProject = $this->updateWorkDirectories($project);
         if ($updatedProject === null) {
             $this->error(sprintf('❌ Failed to update work_dir for project %d, skipping...', $project->getId()));
@@ -308,7 +308,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
         $errorCount = 0;
         $cacheHitCount = 0;
 
-        // 核心优化：维护目录路径与 parent_id 的缓存映射
+        // Core optimization: maintain cache mapping of directory paths and parent_id
         $directoryPathCache = [];
 
         $md5Key = md5(StorageBucketType::Private->value);
@@ -316,32 +316,32 @@ class BackfillFileParentIdCommand extends HyperfCommand
         $oldPrefix = $prefix . $md5Key . '/BE_DELIGHTFUL/' . $updatedProject->getUserId();
 
         // Process files in chunks to avoid memory issues
-        // 🔄 支持重复执行：只处理需要处理的文件
+        // 🔄 Support repeated execution: only process files that need processing
         TaskFileModel::query()
             ->where('project_id', $updatedProject->getId())
             // ->where('is_directory', false)
             ->where(function ($query) use ($oldPrefix) {
-                // 只处理需要转换的文件：包含旧前缀的文件 或 parent_id 为空的文件
+                // Only process files that need conversion: files containing old prefix or files with empty parent_id
                 $query->where('file_key', 'like', $oldPrefix . '/%')
                     ->orWhereNull('parent_id');
             })
             ->chunkById(100, function ($files) use ($updatedProject, $prefix, $oldPrefix, &$processedCount, &$errorCount, &$cacheHitCount, &$directoryPathCache) {
                 foreach ($files as $file) {
                     try {
-                        // 根据类型处理路径，将旧格式转换为新格式
+                        // Process path based on type, convert old format to new format
                         $storageTypeValue = $file['storage_type'] instanceof StorageType ? $file['storage_type']->value : $file['storage_type'];
                         $isDirectory = $file['is_directory'] == 1;
                         $newFileKey = $this->handleFileKeyByType($storageTypeValue, $file['file_key'], $prefix, $oldPrefix, $isDirectory);
 
                         $this->logger->info(sprintf('Processing file ID: %d, File key: %s', $file->file_id, $newFileKey));
 
-                        // 如果路径发生了变化，更新 file_key
+                        // If path changed, update file_key
                         if ($newFileKey !== $file['file_key']) {
                             $this->logger->info(sprintf('File key converted: %s -> %s', $file['file_key'], $newFileKey));
                             $file->file_key = $newFileKey;
                         }
 
-                        $parentId = 0; // 初始化 parentId
+                        $parentId = 0; // Initialize parentId
 
                         if ($file['storage_type'] == StorageType::WORKSPACE && $file['is_directory'] == 0) {
                             $parentId = $this->getFileParentIdWithCache($file, $updatedProject, $directoryPathCache, $cacheHitCount);
@@ -406,30 +406,30 @@ class BackfillFileParentIdCommand extends HyperfCommand
     }
 
     /**
-     * 获取文件的 parent_id，优先使用缓存，缓存未命中时调用领域服务
+     * Get file's parent_id, use cache first, call domain service if cache miss
      *
-     * @param mixed $file 文件模型
-     * @param ProjectEntity $project 项目实体
-     * @param array $directoryPathCache 目录路径缓存 [dirPath => parentId]
-     * @param int $cacheHitCount 缓存命中计数（引用传递）
+     * @param mixed $file File model
+     * @param ProjectEntity $project Project entity
+     * @param array $directoryPathCache Directory path cache [dirPath => parentId]
+     * @param int $cacheHitCount Cache hit count (pass by reference)
      * @return int parent_id
      */
     private function getFileParentIdWithCache($file, ProjectEntity $project, array &$directoryPathCache, int &$cacheHitCount): int
     {
         $this->logger->info(sprintf('Processing file ID: %d, File Key: %s', $file->file_id, $file->file_key));
 
-        // 提取文件的目录路径（去掉文件名）
+        // Extract file's directory path (remove filename)
         $directoryPath = dirname($file->file_key);
 
-        // 规范化路径，避免 "." 和空路径的问题
+        // Normalize path, avoid "." and empty path issues
         if ($directoryPath === '.' || $directoryPath === '' || $directoryPath === '/') {
-            $directoryPath = '/'; // 根目录统一用 '/'
+            $directoryPath = '/'; // Root directory unified as '/'
         }
 
-        // 创建缓存键：项目ID + 目录路径
+        // Create cache key: project ID + directory path
         $cacheKey = $project->getId() . ':' . $directoryPath;
 
-        // 优先检查缓存
+        // Check cache first
         if (isset($directoryPathCache[$cacheKey])) {
             $parentId = $directoryPathCache[$cacheKey];
             ++$cacheHitCount;
@@ -444,7 +444,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
             return $parentId;
         }
 
-        // 缓存未命中，调用领域服务获取 parent_id
+        // Cache miss, call domain service to get parent_id
         $this->logger->info(sprintf(
             'Cache miss for directory "%s", calling domain service (file: %d)',
             $directoryPath,
@@ -460,7 +460,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
             workDir: $project->getWorkDir(),
         );
 
-        // 将结果存入缓存
+        // Store result in cache
         if ($parentId > 0) {
             $directoryPathCache[$cacheKey] = $parentId;
             $this->logger->info(sprintf(
@@ -475,22 +475,22 @@ class BackfillFileParentIdCommand extends HyperfCommand
     }
 
     /**
-     * 规范化路径，移除多余的斜杠.
+     * Normalize path, remove unnecessary slashes.
      *
-     * @param string $path 原始路径
-     * @param bool $isDirectory 是否为目录（目录需要保留末尾斜杠）
-     * @return string 规范化后的路径
+     * @param string $path Original path
+     * @param bool $isDirectory Whether it is a directory (directories need to keep trailing slash)
+     * @return string Normalized path
      */
     private function normalizePath(string $path, bool $isDirectory = false): string
     {
-        // 移除多个连续的斜杠，但保留路径开头的斜杠
+        // Remove multiple consecutive slashes, but keep the slash at path start
         $normalized = preg_replace('#/+#', '/', $path);
 
-        // 对于目录，保留末尾的斜杠；对于文件，移除末尾的斜杠（除非是根目录）
+        // For directories, keep trailing slash; for files, remove trailing slash (unless it's root directory)
         if (! $isDirectory && strlen($normalized) > 1) {
             $normalized = rtrim($normalized, '/');
         } elseif ($isDirectory && ! str_ends_with($normalized, '/') && $normalized !== '/') {
-            // 确保目录以斜杠结尾
+            // Ensure directory ends with slash
             $normalized .= '/';
         }
 
@@ -498,28 +498,28 @@ class BackfillFileParentIdCommand extends HyperfCommand
     }
 
     /**
-     * 转换 work_dir 路径格式（简化版）
-     * 将 /BE_DELIGHTFUL/usi_xxx/project_xxx/workspace 转换为 /project_xxx/workspace.
+     * Convert work_dir path format (simplified version)
+     * Convert /BE_DELIGHTFUL/usi_xxx/project_xxx/workspace to /project_xxx/workspace.
      *
-     * @param string $workDir 原始 work_dir 路径
-     * @param string $oldPrefix 旧前缀，如：BE_DELIGHTFUL/usi_xxx
-     * @return string 转换后的路径
+     * @param string $workDir Original work_dir path
+     * @param string $oldPrefix Old prefix, e.g.: BE_DELIGHTFUL/usi_xxx
+     * @return string Converted path
      */
     private function convertWorkDir(string $workDir, string $oldPrefix): string
     {
-        // 标准化路径，确保以 / 开头
+        // Standardize path, ensure starts with /
         $workDir = '/' . ltrim($workDir, '/');
         $searchPrefix = '/' . trim($oldPrefix, '/') . '/';
 
-        // 检查是否包含旧前缀
+        // Check if contains old prefix
         if (strpos($workDir, $searchPrefix) !== false) {
-            // 移除旧前缀部分
+            // Remove old prefix part
             $convertedPath = str_replace($searchPrefix, '/', $workDir);
 
-            // 🔄 将 topic_ 开头的路径替换为 project_
+            // 🔄 Replace path starting with topic_ to project_
             $convertedPath = preg_replace('#/topic_(\d+)#', '/project_$1', $convertedPath);
 
-            // 检查是否需要补充 workspace
+            // Check if need to add workspace
             if (! str_ends_with($convertedPath, '/workspace')) {
                 $convertedPath = rtrim($convertedPath, '/') . '/workspace';
             }
@@ -527,7 +527,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
             return $convertedPath;
         }
 
-        // 不匹配转换模式，检查是否需要补充 workspace
+        // Does not match conversion pattern, check if need to add workspace
         if (! str_ends_with($workDir, '/workspace')) {
             $workDir = rtrim($workDir, '/') . '/workspace';
         }
@@ -536,10 +536,10 @@ class BackfillFileParentIdCommand extends HyperfCommand
     }
 
     /**
-     * 将执行结果写入文件.
+     * Write execution results to file.
      *
-     * @param array $resultLog 执行结果日志
-     * @param string $status 执行状态
+     * @param array $resultLog Execution result log
+     * @param string $status Execution status
      */
     private function writeResultsToFile(array $resultLog, string $status): void
     {
@@ -581,10 +581,10 @@ class BackfillFileParentIdCommand extends HyperfCommand
     }
 
     /**
-     * 更新项目、文件表、话题表、任务表的 work_dir.
+     * Update work_dir for projects, files table, topics table, and tasks table.
      *
-     * @param ProjectEntity $project 项目实体
-     * @return null|ProjectEntity 更新后的项目实体，失败时返回 null
+     * @param ProjectEntity $project Project entity
+     * @return null|ProjectEntity Updated project entity, null if update failed
      */
     private function updateWorkDirectories(ProjectEntity $project): ?ProjectEntity
     {
@@ -596,24 +596,24 @@ class BackfillFileParentIdCommand extends HyperfCommand
             $oldWorkDirPrefix = 'BE_DELIGHTFUL/' . $project->getUserId();
             $convertedWorkDir = $this->convertWorkDir($originalWorkDir, $oldWorkDirPrefix);
 
-            // 记录转换结果
+            // Record conversion result
             if ($originalWorkDir !== $convertedWorkDir) {
                 $this->line(sprintf('  📝 work_dir converted: %s -> %s', $originalWorkDir, $convertedWorkDir));
                 $this->logger->info(sprintf('work_dir converted: %s -> %s', $originalWorkDir, $convertedWorkDir));
 
-                // 1. 更新项目表的 work_dir
+                // 1. Update project table work_dir
                 $this->projectRepository->updateProjectByCondition(
                     ['id' => $project->getId()],
                     ['work_dir' => $convertedWorkDir, 'updated_at' => date('Y-m-d H:i:s')]
                 );
 
-                // 2. 更新话题表的 work_dir
+                // 2. Update topics table work_dir
                 $this->topicRepository->updateTopicByCondition(
                     ['project_id' => $project->getId()],
                     ['work_dir' => $convertedWorkDir, 'updated_at' => date('Y-m-d H:i:s')]
                 );
 
-                // 3. 更新任务表的 work_dir
+                // 3. Update tasks table work_dir
                 TaskModel::query()
                     ->where('project_id', $project->getId())
                     ->update([
@@ -624,21 +624,21 @@ class BackfillFileParentIdCommand extends HyperfCommand
                 $this->line(sprintf('  ✅ Updated work_dir in project, topics, and tasks tables'));
                 $this->logger->info(sprintf('Updated work_dir for project %d and its topics and tasks', $project->getId()));
 
-                // 创建更新后的项目实体
+                // Create updated project entity
                 $updatedProject = clone $project;
                 $updatedProject->setWorkDir($convertedWorkDir);
                 return $updatedProject;
             }
             $this->line(sprintf('  ✅ work_dir already in correct format: %s', $originalWorkDir));
             $this->logger->info(sprintf('work_dir already in correct format for project %d: %s', $project->getId(), $originalWorkDir));
-            return $project; // 无需更新，返回原项目
+            return $project; // No need to update, return original project
         } catch (Throwable $e) {
             $this->warn(sprintf('  ⚠️  Failed to update work_dir for project %d: %s', $project->getId(), $e->getMessage()));
             $this->logger->error(sprintf('Failed to update work_dir for project %d: %s', $project->getId(), $e->getMessage()), [
                 'project_id' => $project->getId(),
                 'exception' => $e,
             ]);
-            return null; // 更新失败，返回 null
+            return null; // Update failed, return null
         }
     }
 }

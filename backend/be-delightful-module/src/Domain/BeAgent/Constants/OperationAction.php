@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Constants;
 
 /**
- * 项目操作动作常量.
+ * Project operation action constants.
  */
 final class OperationAction
 {
-    // 项目操作
+    // Project operations
     public const CREATE_PROJECT = 'create_project';
 
     public const UPDATE_PROJECT = 'update_project';
@@ -21,7 +21,7 @@ final class OperationAction
 
     public const FORK_PROJECT = 'fork_project';
 
-    // 话题操作
+    // Topic operations
     public const CREATE_TOPIC = 'create_topic';
 
     public const UPDATE_TOPIC = 'update_topic';
@@ -30,7 +30,7 @@ final class OperationAction
 
     public const RENAME_TOPIC = 'rename_topic';
 
-    // 文件操作
+    // File operations
     public const UPLOAD_FILE = 'upload_file';
 
     public const DELETE_FILE = 'delete_file';
@@ -49,16 +49,16 @@ final class OperationAction
 
     public const BATCH_DELETE_FILE = 'batch_delete_file';
 
-    // 项目成员操作
+    // Project member operations
     public const UPDATE_PROJECT_MEMBERS = 'update_project_members';
 
-    // 项目快捷方式操作
+    // Project shortcut operations
     public const SET_PROJECT_SHORTCUT = 'set_project_shortcut';
 
     public const CANCEL_PROJECT_SHORTCUT = 'cancel_project_shortcut';
 
     /**
-     * 获取所有操作动作.
+     * Get all operation actions.
      */
     public static function getAllActions(): array
     {
@@ -87,7 +87,7 @@ final class OperationAction
     }
 
     /**
-     * 验证操作动作是否有效.
+     * Validate if operation action is valid.
      */
     public static function isValidAction(string $action): bool
     {

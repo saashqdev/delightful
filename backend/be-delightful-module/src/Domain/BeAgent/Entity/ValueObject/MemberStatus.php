@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 成员状态值对象
+ * Member status value object
  *
- * 封装成员状态的业务逻辑和验证规则
+ * Encapsulates business logic and validation rules for member status
  */
 enum MemberStatus: int
 {
@@ -18,7 +18,7 @@ enum MemberStatus: int
     case ACTIVE = 1;
 
     /**
-     * 是否为激活状态
+     * Whether is active status
      */
     public function isActive(): bool
     {
@@ -26,7 +26,7 @@ enum MemberStatus: int
     }
 
     /**
-     * 是否为非激活状态
+     * Whether is inactive status
      */
     public function isInactive(): bool
     {
@@ -34,7 +34,7 @@ enum MemberStatus: int
     }
 
     /**
-     * 获取描述.
+     * Get description.
      */
     public function getDescription(): string
     {

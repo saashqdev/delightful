@@ -18,21 +18,21 @@ enum BeDelightfulAgentOptimizationType: string
     case OptimizeDescription = 'optimize_description';
 
     /**
-     * 获取枚举描述.
+     * Get enum description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::OptimizeNameDescription => '优化名称和描述',
-            self::OptimizeContent => '优化内容',
-            self::OptimizeName => '优化名称',
-            self::OptimizeDescription => '优化描述',
+            self::OptimizeNameDescription => 'Optimize name and description',
+            self::OptimizeContent => 'Optimize content',
+            self::OptimizeName => 'Optimize name',
+            self::OptimizeDescription => 'Optimize description',
             self::None => throw new Exception('To be implemented'),
         };
     }
 
     /**
-     * 获取所有枚举值.
+     * Get all enum values.
      */
     public static function values(): array
     {
@@ -40,7 +40,7 @@ enum BeDelightfulAgentOptimizationType: string
     }
 
     /**
-     * 从字符串创建枚举实例.
+     * Create enum instance from string.
      */
     public static function fromString(string $value): self
     {

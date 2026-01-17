@@ -9,12 +9,12 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 enum ChatInstruction: string
 {
-    // 正常对话，
+    // Normal conversation
     case Normal = 'normal';
 
-    // follow_up 追问
+    // follow_up Follow-up question
     case FollowUp = 'follow_up';
 
-    // interrupt 打断
+    // interrupt Interrupt
     case Interrupted = 'interrupt';
 }

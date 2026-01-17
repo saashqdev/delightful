@@ -16,13 +16,13 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
 use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 /**
- * 项目成员实体.
+ * Project member entity.
  *
- * 表示项目中的成员，支持用户和部门两种类型
+ * Represents members in a project, supporting both user and department types
  */
 class ProjectMemberEntity extends AbstractEntity
 {
-    /** @var int 主键ID */
+    /** @var int Primary key ID */
     protected int $id = 0;
 
     protected int $projectId = 0;
@@ -49,13 +49,13 @@ class ProjectMemberEntity extends AbstractEntity
 
     public function __construct(array $data = [])
     {
-        // 设置默认状态为激活
+        // Set default status to active
         $this->status = MemberStatus::ACTIVE;
-        // 设置默认成员类型为用户
+        // Set default member type to user
         $this->targetType = MemberType::USER;
-        // 设置默认角色为编辑者
+        // Set default role to editor
         $this->role = MemberRole::EDITOR;
-        // 设置默认加入为团队内邀请
+        // Set default join method to internal team invitation
         $this->joinMethod = MemberJoinMethod::INTERNAL;
 
         $this->initProperty($data);
@@ -93,7 +93,7 @@ class ProjectMemberEntity extends AbstractEntity
     }
 
     /**
-     * 从字符串设置成员类型.
+     * Set member type from string.
      */
     public function setTargetTypeFromString(string $targetType): void
     {
@@ -121,12 +121,12 @@ class ProjectMemberEntity extends AbstractEntity
     }
 
     /**
-     * 从字符串设置成员角色.
+     * Set member role from string.
      */
     public function setRoleFromString(string $role): void
     {
         if (empty($role)) {
-            // 如果角色为空，设置为默认的编辑者角色，而不是 null
+            // If role is empty, set to default editor role instead of null
             $this->role = MemberRole::EDITOR;
         } else {
             $this->role = MemberRole::fromString($role);
@@ -134,7 +134,7 @@ class ProjectMemberEntity extends AbstractEntity
     }
 
     /**
-     * 获取角色的字符串值.
+     * Get role string value.
      */
     public function getRoleValue(): string
     {
@@ -220,7 +220,7 @@ class ProjectMemberEntity extends AbstractEntity
         $entity->setTargetId($data['target_id']);
         $entity->setRoleFromString($data['role']);
         $entity->setOrganizationCode($data['organization_code']);
-        $entity->setStatus(MemberStatus::from((int) $data['status'])); // 转换为MemberStatus枚举
+        $entity->setStatus(MemberStatus::from((int) $data['status'])); // Convert to MemberStatus enum
         $entity->setJoinMethod(MemberJoinMethod::from($data['join_method'] ?? MemberJoinMethod::INTERNAL->value));
         $entity->setInvitedBy($data['invited_by']);
         $entity->setCreatedAt($data['created_at']);
@@ -230,7 +230,7 @@ class ProjectMemberEntity extends AbstractEntity
     }
 
     /**
-     * 转换为数组格式.
+     * Convert to array format.
      */
     public function toArray(): array
     {
@@ -250,15 +250,15 @@ class ProjectMemberEntity extends AbstractEntity
     }
 
     /**
-     * 验证实体数据完整性.
+     * Validate entity data integrity.
      */
     private function validateEntity(): void
     {
         if (empty($this->targetId)) {
-            return; // 允许初始化时为空
+            return; // Allow empty during initialization
         }
 
-        // 基本验证：确保targetId有值
+        // Basic validation: ensure targetId has a value
         if (empty(trim($this->targetId))) {
             ExceptionBuilder::throw(BeAgentErrorCode::MEMBER_VALIDATION_FAILED);
         }

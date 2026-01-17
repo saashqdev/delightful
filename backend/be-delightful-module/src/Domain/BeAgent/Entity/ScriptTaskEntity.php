@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 use App\Infrastructure\Core\AbstractEntity;
 
 /**
- * 任务实体.
+ * Task entity.
  */
 class ScriptTaskEntity extends AbstractEntity
 {
@@ -24,12 +24,12 @@ class ScriptTaskEntity extends AbstractEntity
 
     public function __construct(array $data = [])
     {
-        // 默认设置
+        // Default settings
         parent::__construct($data);
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -39,7 +39,7 @@ class ScriptTaskEntity extends AbstractEntity
             'script_name' => $this->scriptName,
         ];
 
-        // 移除空值
+        // Remove empty values
         return array_filter($result, function ($value) {
             return ! empty($value);
         });

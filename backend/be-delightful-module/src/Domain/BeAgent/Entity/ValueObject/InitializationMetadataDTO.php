@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 初始化元数据 DTO.
- * 用于封装初始化 Agent 时的元数据配置，方便后续扩展.
+ * Initialization metadata DTO.
+ * Used to encapsulate metadata configuration when initializing Agent, convenient for future expansion.
  */
 class InitializationMetadataDTO
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param ?bool $skipInitMessages 是否跳过初始化消息，用于 ASR 场景
-     * @param ?string $authorization 授权信息
+     * @param ?bool $skipInitMessages Whether to skip initialization messages, used for ASR scenarios
+     * @param ?string $authorization Authorization information
      */
     public function __construct(
         private ?bool $skipInitMessages = null,
@@ -26,7 +26,7 @@ class InitializationMetadataDTO
     }
 
     /**
-     * 创建默认实例.
+     * Create default instance.
      */
     public static function createDefault(): self
     {
@@ -34,9 +34,9 @@ class InitializationMetadataDTO
     }
 
     /**
-     * 获取是否跳过初始化消息.
+     * Get whether to skip initialization messages.
      *
-     * @return ?bool 是否跳过初始化消息
+     * @return ?bool Whether to skip initialization messages
      */
     public function getSkipInitMessages(): ?bool
     {
@@ -44,10 +44,10 @@ class InitializationMetadataDTO
     }
 
     /**
-     * 设置是否跳过初始化消息.
+     * Set whether to skip initialization messages.
      *
-     * @param ?bool $skipInitMessages 是否跳过初始化消息
-     * @return self 新的实例
+     * @param ?bool $skipInitMessages Whether to skip initialization messages
+     * @return self New instance
      */
     public function withSkipInitMessages(?bool $skipInitMessages): self
     {
@@ -57,9 +57,9 @@ class InitializationMetadataDTO
     }
 
     /**
-     * 获取授权信息.
+     * Get authorization information.
      *
-     * @return ?string 授权信息
+     * @return ?string Authorization information
      */
     public function getAuthorization(): ?string
     {
@@ -67,10 +67,10 @@ class InitializationMetadataDTO
     }
 
     /**
-     * 设置授权信息.
+     * Set authorization information.
      *
-     * @param ?string $authorization 授权信息
-     * @return self 新的实例
+     * @param ?string $authorization Authorization information
+     * @return self New instance
      */
     public function withAuthorization(?string $authorization): self
     {

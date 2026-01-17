@@ -8,29 +8,29 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 消息元数据值对象.
+ * Message metadata value object.
  */
 class MessageMetadata
 {
     private ?UserInfoValueObject $userInfo = null;
 
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param string $agentUserId 智能体用户ID
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织代码
-     * @param string $chatConversationId 聊天会话ID
-     * @param string $chatTopicId 聊天话题ID
-     * @param string $topicId 话题ID
-     * @param string $instruction 指令
-     * @param string $sandboxId 沙箱ID
-     * @param string $beDelightfulTaskId 超级助手任务ID
-     * @param string $workspaceId 工作区ID
-     * @param string $projectId 项目ID
-     * @param string $language 用户语言
-     * @param null|UserInfoValueObject $userInfo 用户信息对象
-     * @param bool $skipInitMessages 是否跳过初始化消息
+     * @param string $agentUserId Agent user ID
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @param string $chatConversationId Chat conversation ID
+     * @param string $chatTopicId Chat topic ID
+     * @param string $topicId Topic ID
+     * @param string $instruction Instruction
+     * @param string $sandboxId Sandbox ID
+     * @param string $beDelightfulTaskId Super assistant task ID
+     * @param string $workspaceId Workspace ID
+     * @param string $projectId Project ID
+     * @param string $language User language
+     * @param null|UserInfoValueObject $userInfo User information object
+     * @param bool $skipInitMessages Whether to skip initialization messages
      */
     public function __construct(
         private string $agentUserId = '',
@@ -52,9 +52,9 @@ class MessageMetadata
     }
 
     /**
-     * 从数组创建元数据对象.
+     * Create metadata object from array.
      *
-     * @param array $data 元数据数组
+     * @param array $data Metadata array
      */
     public static function fromArray(array $data): self
     {
@@ -82,9 +82,9 @@ class MessageMetadata
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      *
-     * @return array 元数据数组
+     * @return array Metadata array
      */
     public function toArray(): array
     {
@@ -104,7 +104,7 @@ class MessageMetadata
             'skip_init_messages' => $this->skipInitMessages,
         ];
 
-        // 添加用户信息（如果存在）
+        // Add user information (if exists)
         if ($this->userInfo !== null) {
             $result['user'] = $this->userInfo->toArray();
         }
@@ -180,9 +180,9 @@ class MessageMetadata
     }
 
     /**
-     * 获取用户信息.
+     * Get user information.
      *
-     * @return null|UserInfoValueObject 用户信息对象
+     * @return null|UserInfoValueObject User information object
      */
     public function getUserInfo(): ?UserInfoValueObject
     {
@@ -275,10 +275,10 @@ class MessageMetadata
     }
 
     /**
-     * 设置用户信息.
+     * Set user information.
      *
-     * @param null|UserInfoValueObject $userInfo 用户信息对象
-     * @return self 新的实例
+     * @param null|UserInfoValueObject $userInfo User information object
+     * @return self New instance
      */
     public function withUserInfo(?UserInfoValueObject $userInfo): self
     {
@@ -288,9 +288,9 @@ class MessageMetadata
     }
 
     /**
-     * 检查是否有用户信息.
+     * Check if has user information.
      *
-     * @return bool 是否有用户信息
+     * @return bool Whether has user information
      */
     public function hasUserInfo(): bool
     {
@@ -298,9 +298,9 @@ class MessageMetadata
     }
 
     /**
-     * 获取是否跳过初始化消息.
+     * Get whether to skip initialization messages.
      *
-     * @return bool 是否跳过初始化消息
+     * @return bool Whether to skip initialization messages
      */
     public function getSkipInitMessages(): bool
     {
@@ -308,10 +308,10 @@ class MessageMetadata
     }
 
     /**
-     * 设置是否跳过初始化消息.
+     * Set whether to skip initialization messages.
      *
-     * @param bool $skipInitMessages 是否跳过初始化消息
-     * @return self 新的实例
+     * @param bool $skipInitMessages Whether to skip initialization messages
+     * @return self New instance
      */
     public function withSkipInitMessages(bool $skipInitMessages): self
     {

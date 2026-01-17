@@ -12,27 +12,27 @@ use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
 
 /**
- * 任务上下文对象，用于封装任务相关的上下文参数.
+ * Task context object used to encapsulate task-related context parameters.
  *
- * 该类是一个不可变的值对象，符合DDD设计模式
+ * This class is an immutable value object that conforms to DDD design patterns
  */
 class TaskContext
 {
     /**
-     * @param TaskEntity $task 任务实体
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param string $chatConversationId 聊天会话ID
-     * @param string $chatTopicId 聊天主题ID
-     * @param string $agentUserId Agent用户ID
-     * @param string $sandboxId 沙箱ID
-     * @param string $taskId 任务ID
-     * @param ChatInstruction $instruction 聊天指令
-     * @param string $agentMode Agent模式
-     * @param array $mcpConfig MCP配置
-     * @param string $workspaceId 工作区ID
-     * @param string $messageId 消息ID
-     * @param bool $isFirstTask 是否为首次任务
-     * @param null|BeAgentExtra $extra 扩展参数
+     * @param TaskEntity $task Task entity
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param string $chatConversationId Chat conversation ID
+     * @param string $chatTopicId Chat topic ID
+     * @param string $agentUserId Agent user ID
+     * @param string $sandboxId Sandbox ID
+     * @param string $taskId Task ID
+     * @param ChatInstruction $instruction Chat instruction
+     * @param string $agentMode Agent mode
+     * @param array $mcpConfig MCP configuration
+     * @param string $workspaceId Workspace ID
+     * @param string $messageId Message ID
+     * @param bool $isFirstTask Whether is first task
+     * @param null|BeAgentExtra $extra Extension parameters
      */
     public function __construct(
         private readonly TaskEntity $task,
@@ -55,7 +55,7 @@ class TaskContext
     }
 
     /**
-     * 获取任务实体.
+     * Get task entity.
      */
     public function getTask(): TaskEntity
     {
@@ -63,7 +63,7 @@ class TaskContext
     }
 
     /**
-     * 获取数据隔离对象
+     * Get data isolation object
      */
     public function getDataIsolation(): DataIsolation
     {
@@ -71,7 +71,7 @@ class TaskContext
     }
 
     /**
-     * 获取聊天会话ID.
+     * Get chat conversation ID.
      */
     public function getChatConversationId(): string
     {
@@ -79,7 +79,7 @@ class TaskContext
     }
 
     /**
-     * 获取聊天主题ID.
+     * Get chat topic ID.
      */
     public function getChatTopicId(): string
     {
@@ -87,7 +87,7 @@ class TaskContext
     }
 
     /**
-     * 获取Agent用户ID.
+     * Get Agent user ID.
      */
     public function getAgentUserId(): string
     {
@@ -95,7 +95,7 @@ class TaskContext
     }
 
     /**
-     * 获取沙箱ID.
+     * Get sandbox ID.
      */
     public function getSandboxId(): string
     {
@@ -103,7 +103,7 @@ class TaskContext
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): string
     {
@@ -111,7 +111,7 @@ class TaskContext
     }
 
     /**
-     * 获取原始任务ID（从任务实体中获取）.
+     * Get original task ID (retrieved from task entity).
      */
     public function getOriginalTaskId(): string
     {
@@ -119,7 +119,7 @@ class TaskContext
     }
 
     /**
-     * 获取任务实体ID.
+     * Get task entity ID.
      */
     public function getTaskEntityId(): int
     {
@@ -127,7 +127,7 @@ class TaskContext
     }
 
     /**
-     * 获取任务主题ID.
+     * Get task topic ID.
      */
     public function getTopicId(): int
     {
@@ -135,7 +135,7 @@ class TaskContext
     }
 
     /**
-     * 获取项目ID.
+     * Get project ID.
      */
     public function getProjectId(): int
     {
@@ -143,7 +143,7 @@ class TaskContext
     }
 
     /**
-     * 获取当前用户ID.
+     * Get current user ID.
      */
     public function getCurrentUserId(): string
     {
@@ -151,7 +151,7 @@ class TaskContext
     }
 
     /**
-     * 获取当前组织代码
+     * Get current organization code
      */
     public function getCurrentOrganizationCode(): string
     {
@@ -159,7 +159,7 @@ class TaskContext
     }
 
     /**
-     * 获取聊天指令.
+     * Get chat instruction.
      */
     public function getInstruction(): ChatInstruction
     {
@@ -167,7 +167,7 @@ class TaskContext
     }
 
     /**
-     * 获取Agent模式.
+     * Get Agent mode.
      */
     public function getAgentMode(): string
     {
@@ -180,7 +180,7 @@ class TaskContext
     }
 
     /**
-     * 创建一个带有新任务但保留其他参数的上下文.
+     * Create a context with a new task while retaining other parameters.
      */
     public function withTask(TaskEntity $newTask): self
     {
@@ -248,7 +248,7 @@ class TaskContext
     public function getDynamicConfig(): array
     {
         if (! empty($this->modelId) && empty($this->dynamicConfig['models'][$this->getModelId()])) {
-            // 添加默认配置
+            // Add default configuration
             $this->dynamicConfig['models'][$this->getModelId()] = [
                 'api_key' => '${MAGIC_API_KEY}',
                 'api_base_url' => '${MAGIC_API_BASE_URL}',
@@ -277,7 +277,7 @@ class TaskContext
     }
 
     /**
-     * 获取消息ID.
+     * Get message ID.
      */
     public function getMessageId(): string
     {
@@ -285,7 +285,7 @@ class TaskContext
     }
 
     /**
-     * 设置消息ID.
+     * Set message ID.
      */
     public function setMessageId(string $messageId): self
     {
@@ -294,7 +294,7 @@ class TaskContext
     }
 
     /**
-     * 获取是否为首次任务.
+     * Get whether is first task.
      */
     public function getIsFirstTask(): bool
     {
@@ -302,7 +302,7 @@ class TaskContext
     }
 
     /**
-     * 设置是否为首次任务.
+     * Set whether is first task.
      */
     public function setIsFirstTask(bool $isFirstTask): self
     {
@@ -311,7 +311,7 @@ class TaskContext
     }
 
     /**
-     * 获取扩展参数.
+     * Get extension parameters.
      */
     public function getExtra(): ?BeAgentExtra
     {
@@ -319,7 +319,7 @@ class TaskContext
     }
 
     /**
-     * 设置扩展参数.
+     * Set extension parameters.
      */
     public function setExtra(?BeAgentExtra $extra): self
     {

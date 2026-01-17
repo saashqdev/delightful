@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 部门信息值对象.
+ * Department information value object.
  */
 class DepartmentInfoValueObject
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param string $id 部门ID
-     * @param string $name 部门名称
-     * @param string $path 部门路径
+     * @param string $id Department ID
+     * @param string $name Department name
+     * @param string $path Department path
      */
     public function __construct(
         private string $id = '',
@@ -27,9 +27,9 @@ class DepartmentInfoValueObject
     }
 
     /**
-     * 从数组创建部门信息对象.
+     * Create department information object from array.
      *
-     * @param array $data 部门信息数组
+     * @param array $data Department information array
      */
     public static function fromArray(array $data): self
     {
@@ -41,9 +41,9 @@ class DepartmentInfoValueObject
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      *
-     * @return array 部门信息数组
+     * @return array Department information array
      */
     public function toArray(): array
     {
@@ -93,7 +93,7 @@ class DepartmentInfoValueObject
     }
 
     /**
-     * 检查部门信息是否为空.
+     * Check if department information is empty.
      */
     public function isEmpty(): bool
     {
@@ -101,7 +101,7 @@ class DepartmentInfoValueObject
     }
 
     /**
-     * 检查部门信息是否有效.
+     * Check if department information is valid.
      */
     public function isValid(): bool
     {

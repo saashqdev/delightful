@@ -11,9 +11,9 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 /**
- * 成员类型值对象
+ * Member type value object
  *
- * 封装成员类型的业务逻辑和验证规则
+ * Encapsulates business logic and validation rules for member type
  */
 enum MemberType: string
 {
@@ -21,7 +21,7 @@ enum MemberType: string
     case DEPARTMENT = 'Department';
 
     /**
-     * 从字符串创建实例.
+     * Create instance from string.
      */
     public static function fromString(string $type): self
     {
@@ -33,7 +33,7 @@ enum MemberType: string
     }
 
     /**
-     * 从值创建实例.
+     * Create instance from value.
      */
     public static function fromValue(string $value): self
     {
@@ -41,7 +41,7 @@ enum MemberType: string
     }
 
     /**
-     * 获取值
+     * Get value
      */
     public function getValue(): string
     {
@@ -49,7 +49,7 @@ enum MemberType: string
     }
 
     /**
-     * 是否为用户类型.
+     * Whether is user type.
      */
     public function isUser(): bool
     {
@@ -57,7 +57,7 @@ enum MemberType: string
     }
 
     /**
-     * 是否为部门类型.
+     * Whether is department type.
      */
     public function isDepartment(): bool
     {
@@ -65,7 +65,7 @@ enum MemberType: string
     }
 
     /**
-     * 获取描述.
+     * Get description.
      */
     public function getDescription(): string
     {

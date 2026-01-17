@@ -8,28 +8,28 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 消息负载值对象.
+ * Message payload value object.
  */
 class MessagePayload
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param string $messageId 消息ID
-     * @param string $type 消息类型
-     * @param string $taskId 任务ID
-     * @param string $status 状态
-     * @param string $content 内容
-     * @param null|array $steps 步骤
-     * @param null|array $tool 工具
-     * @param int $sendTimestamp 发送时间戳
-     * @param string $event 事件
-     * @param array $attachments 附件列表
-     * @param null|array $projectArchive 项目归档数据
-     * @param bool $showInUi 是否在UI中显示
-     * @param string $remark 备注
-     * @param int $seqId 序列ID
-     * @param null|string $correlationId 关联ID
+     * @param string $messageId Message ID
+     * @param string $type Message type
+     * @param string $taskId Task ID
+     * @param string $status Status
+     * @param string $content Content
+     * @param null|array $steps Steps
+     * @param null|array $tool Tools
+     * @param int $sendTimestamp Send timestamp
+     * @param string $event Event
+     * @param array $attachments Attachments list
+     * @param null|array $projectArchive Project archive data
+     * @param bool $showInUi Whether to show in UI
+     * @param string $remark Remark
+     * @param int $seqId Sequence ID
+     * @param null|string $correlationId Correlation ID
      */
     public function __construct(
         private string $messageId = '',
@@ -51,9 +51,9 @@ class MessagePayload
     }
 
     /**
-     * 从数组创建负载对象.
+     * Create payload object from array.
      *
-     * @param array $data 负载数据数组
+     * @param array $data Payload data array
      */
     public static function fromArray(array $data): self
     {
@@ -77,9 +77,9 @@ class MessagePayload
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      *
-     * @return array 负载数据数组
+     * @return array Payload data array
      */
     public function toArray(): array
     {
@@ -154,7 +154,7 @@ class MessagePayload
     }
 
     /**
-     * 获取项目归档数据.
+     * Get project archive data.
      */
     public function getProjectArchive(): ?array
     {
@@ -248,7 +248,7 @@ class MessagePayload
     }
 
     /**
-     * 设置项目归档数据.
+     * Set project archive data.
      */
     public function withProjectArchive(?array $projectArchive): self
     {

@@ -10,72 +10,72 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 use App\Infrastructure\Core\AbstractEntity;
 
 /**
- * 项目操作日志实体.
+ * Project operation log entity.
  */
 class ProjectOperationLogEntity extends AbstractEntity
 {
     /**
-     * @var int 主键ID
+     * @var int Primary key ID
      */
     protected int $id = 0;
 
     /**
-     * @var int 项目ID
+     * @var int Project ID
      */
     protected int $projectId = 0;
 
     /**
-     * @var string 用户ID
+     * @var string User ID
      */
     protected string $userId = '';
 
     /**
-     * @var string 组织编码
+     * @var string Organization code
      */
     protected string $organizationCode = '';
 
     /**
-     * @var string 操作动作
+     * @var string Operation action
      */
     protected string $operationAction = '';
 
     /**
-     * @var string 资源类型
+     * @var string Resource type
      */
     protected string $resourceType = '';
 
     /**
-     * @var string 资源ID
+     * @var string Resource ID
      */
     protected string $resourceId = '';
 
     /**
-     * @var string 资源名称
+     * @var string Resource name
      */
     protected string $resourceName = '';
 
     /**
-     * @var array 操作详情
+     * @var array Operation details
      */
     protected array $operationDetails = [];
 
     /**
-     * @var string 操作状态
+     * @var string Operation status
      */
     protected string $operationStatus = 'success';
 
     /**
-     * @var null|string IP地址
+     * @var null|string IP address
      */
     protected ?string $ipAddress = null;
 
     /**
-     * @var string 创建时间
+     * @var string Creation time
      */
     protected string $createdAt = '';
 
     /**
-     * @var string 更新时间
+     * @var string Update time
      */
     protected string $updatedAt = '';
 

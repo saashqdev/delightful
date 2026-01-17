@@ -8,19 +8,19 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 用户信息值对象.
+ * User information value object.
  */
 class UserInfoValueObject
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param string $id 用户ID
-     * @param string $nickname 用户昵称
-     * @param string $realName 真实姓名
-     * @param string $workNumber 工号
-     * @param string $position 职位
-     * @param array $departments 部门信息数组
+     * @param string $id User ID
+     * @param string $nickname User nickname
+     * @param string $realName Real name
+     * @param string $workNumber Work number
+     * @param string $position Position
+     * @param array $departments Department information array
      */
     public function __construct(
         private string $id = '',
@@ -39,9 +39,9 @@ class UserInfoValueObject
     }
 
     /**
-     * 从数组创建用户信息对象.
+     * Create user information object from array.
      *
-     * @param array $data 用户信息数组
+     * @param array $data User information array
      */
     public static function fromArray(array $data): self
     {
@@ -65,9 +65,9 @@ class UserInfoValueObject
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      *
-     * @return array 用户信息数组
+     * @return array User information array
      */
     public function toArray(): array
     {
@@ -163,7 +163,7 @@ class UserInfoValueObject
     }
 
     /**
-     * 检查用户信息是否为空.
+     * Check if user information is empty.
      */
     public function isEmpty(): bool
     {
@@ -171,7 +171,7 @@ class UserInfoValueObject
     }
 
     /**
-     * 检查用户信息是否有效.
+     * Check if user information is valid.
      */
     public function isValid(): bool
     {
@@ -179,7 +179,7 @@ class UserInfoValueObject
     }
 
     /**
-     * 获取主要部门（第一个部门）.
+     * Get primary department (first department).
      */
     public function getPrimaryDepartment(): ?DepartmentInfoValueObject
     {
@@ -187,7 +187,7 @@ class UserInfoValueObject
     }
 
     /**
-     * 检查用户是否属于指定部门.
+     * Check if user belongs to specified department.
      */
     public function belongsToDepartment(string $departmentId): bool
     {

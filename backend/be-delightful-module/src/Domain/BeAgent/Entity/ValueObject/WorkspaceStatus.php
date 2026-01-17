@@ -8,41 +8,41 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 工作区状态值对象
+ * Workspace status value object.
  */
 enum WorkspaceStatus: int
 {
     /**
-     * 正常状态
+     * Normal status.
      */
     case Normal = 0;
 
     /**
-     * 禁用状态
+     * Disabled status.
      */
     case Disabled = 1;
 
     /**
-     * 删除状态
+     * Deleted status.
      */
     case Deleted = 2;
 
     /**
-     * 获取状态描述.
+     * Get status description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::Normal => '正常',
-            self::Disabled => '禁用',
-            self::Deleted => '已删除',
+            self::Normal => 'Normal',
+            self::Disabled => 'Disabled',
+            self::Deleted => 'Deleted',
         };
     }
 
     /**
-     * 获取所有状态列表.
+     * Get all status list.
      *
-     * @return array<int, string> 状态值与描述的映射
+     * @return array<int, string> Mapping of status values to descriptions
      */
     public static function getList(): array
     {

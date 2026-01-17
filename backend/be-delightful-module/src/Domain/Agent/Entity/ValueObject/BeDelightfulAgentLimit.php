@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
 class BeDelightfulAgentLimit
 {
     /**
-     * 每个用户最大智能体数量限制.
+     * Maximum number of agents per user limit.
      */
     public const MAX_AGENTS_PER_USER = 500;
 }

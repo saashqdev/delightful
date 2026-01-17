@@ -8,19 +8,17 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 任务文件来源枚举.
+ * Task file source enumeration.
  */
 enum TaskFileSource: int
 {
     case DEFAULT = 0;
 
-    /**
-     * 首页.
-     */
+    // Home page.
     case HOME = 1;
 
     /**
-     * 项目目录.
+     * Project directory.
      */
     case PROJECT_DIRECTORY = 2;
 
@@ -32,27 +30,27 @@ enum TaskFileSource: int
     case COPY = 4;
 
     /**
-     * 移动.
+     * Move.
      */
     case MOVE = 6;
 
     /**
-     * 获取来源名称.
+     * Get source name.
      */
     public function getName(): string
     {
         return match ($this) {
-            self::DEFAULT => '默认',
-            self::HOME => '首页',
-            self::PROJECT_DIRECTORY => '项目目录',
+            self::DEFAULT => 'Default',
+            self::HOME => 'Home',
+            self::PROJECT_DIRECTORY => 'Project Directory',
             self::AGENT => 'Agent',
-            self::COPY => '复制',
-            self::MOVE => '移动',
+            self::COPY => 'Copy',
+            self::MOVE => 'Move',
         };
     }
 
     /**
-     * 从字符串或整数创建枚举实例.
+     * Create enum instance from string or integer.
      */
     public static function fromValue(int|string $value): self
     {

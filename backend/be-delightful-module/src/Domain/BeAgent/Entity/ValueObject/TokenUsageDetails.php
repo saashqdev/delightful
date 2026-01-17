@@ -15,8 +15,8 @@ class TokenUsageDetails
     /**
      * Constructor.
      *
-     * @param null|string $type 类型："summary" 或 "item"
-     * @param null|array $usages Token使用记录数组
+     * @param null|string $type Type: "summary" or "item"
+     * @param null|array $usages Token usage records array
      */
     public function __construct(
         private ?string $type,
@@ -76,7 +76,7 @@ class TokenUsageDetails
     }
 
     /**
-     * 获取类型.
+     * Get type.
      */
     public function getType(): ?string
     {
@@ -84,9 +84,9 @@ class TokenUsageDetails
     }
 
     /**
-     * 获取使用记录数组.
+     * Get usage records array.
      *
-     * @return null|array 返回TokenUsage对象数组或null
+     * @return null|array Returns TokenUsage object array or null
      */
     public function getUsages(): ?array
     {

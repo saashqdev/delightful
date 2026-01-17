@@ -9,6 +9,6 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 enum MemberJoinMethod: string
 {
-    case INTERNAL = 'internal';  // 团队内邀请
-    case LINK = 'link';         // 邀请链接
+    case INTERNAL = 'internal';  // Internal team invitation
+    case LINK = 'link';         // Invitation link
 }

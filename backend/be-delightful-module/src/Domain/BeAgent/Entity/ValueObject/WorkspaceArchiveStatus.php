@@ -8,35 +8,35 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 工作区归档状态值对象
+ * Workspace archive status value object.
  */
 enum WorkspaceArchiveStatus: int
 {
     /**
-     * 未归档.
+     * Not archived.
      */
     case NotArchived = 0;
 
     /**
-     * 已归档.
+     * Archived.
      */
     case Archived = 1;
 
     /**
-     * 获取归档状态描述.
+     * Get archive status description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::NotArchived => '未归档',
-            self::Archived => '已归档',
+            self::NotArchived => 'Not Archived',
+            self::Archived => 'Archived',
         };
     }
 
     /**
-     * 获取所有归档状态列表.
+     * Get all archive status list.
      *
-     * @return array<int, string> 状态值与描述的映射
+     * @return array<int, string> Mapping of status values to descriptions
      */
     public static function getList(): array
     {

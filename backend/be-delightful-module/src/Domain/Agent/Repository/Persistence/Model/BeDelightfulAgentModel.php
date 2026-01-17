@@ -13,22 +13,22 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * @property int $id 雪花ID
- * @property string $organization_code 组织编码
- * @property string $code 唯一编码
- * @property string $name Agent名称
- * @property string $description Agent描述
- * @property array $icon Agent图标
- * @property int $icon_type 图标类型
- * @property array $prompt 系统提示词
- * @property array $tools 工具列表
- * @property int $type 智能体类型
- * @property bool $enabled 是否启用
- * @property string $creator 创建者
- * @property DateTime $created_at 创建时间
- * @property string $modifier 修改者
- * @property DateTime $updated_at 更新时间
- * @property null|DateTime $deleted_at 删除时间
+ * @property int $id Snowflake ID
+ * @property string $organization_code Organization code
+ * @property string $code Unique code
+ * @property string $name Agent name
+ * @property string $description Agent description
+ * @property array $icon Agent icon
+ * @property int $icon_type Icon type
+ * @property array $prompt System prompt
+ * @property array $tools Tools list
+ * @property int $type Agent type
+ * @property bool $enabled Whether enabled
+ * @property string $creator Creator
+ * @property DateTime $created_at Creation time
+ * @property string $modifier Modifier
+ * @property DateTime $updated_at Update time
+ * @property null|DateTime $deleted_at Deletion time
  */
 class BeDelightfulAgentModel extends AbstractModel
 {

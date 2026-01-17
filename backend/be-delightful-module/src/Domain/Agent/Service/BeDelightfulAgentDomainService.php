@@ -52,7 +52,7 @@ readonly class BeDelightfulAgentDomainService
         $isCreate = $savingEntity->shouldCreate();
 
         if ($isCreate) {
-            // 检查用户创建的智能体数量是否超过限制
+            // Check if the number of agents created by the user exceeds the limit
             $currentCount = $this->beDelightfulAgentRepository->countByCreator($dataIsolation, $dataIsolation->getCurrentUserId());
             if ($currentCount >= BeDelightfulAgentLimit::MAX_AGENTS_PER_USER) {
                 ExceptionBuilder::throw(
@@ -146,7 +146,7 @@ readonly class BeDelightfulAgentDomainService
     }
 
     /**
-     * 检查是否为内置智能体，如果是则抛出异常.
+     * Check if it is a built-in agent, if so throw an exception.
      */
     private function checkBuiltinAgentOperation(string $code): void
     {

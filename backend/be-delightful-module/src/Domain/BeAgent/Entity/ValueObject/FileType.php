@@ -8,81 +8,81 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 文件类型枚举.
+ * File type enum.
  */
 enum FileType: string
 {
     /**
-     * 用户上传.
+     * User upload.
      */
     case USER_UPLOAD = 'user_upload';
 
     /**
-     * 处理过程.
+     * Processing.
      */
     case PROCESS = 'process';
 
     /**
-     * 浏览器.
+     * Browser.
      */
     case BROWSER = 'browser';
 
     /**
-     * 系统自动上传.
+     * System auto upload.
      */
     case SYSTEM_AUTO_UPLOAD = 'system_auto_upload';
 
     /**
-     * 工具消息内容.
+     * Tool message content.
      */
     case TOOL_MESSAGE_CONTENT = 'tool_message_content';
 
     /**
-     * 文档.
+     * Document.
      */
     case DOCUMENT = 'document';
 
     /**
-     * 自动同步.
+     * Auto sync.
      */
     case AUTO_SYNC = 'auto_sync';
 
     /**
-     * 目录.
+     * Directory.
      */
     case DIRECTORY = 'directory';
 
     /**
-     * 获取文件类型名称.
+     * Get file type name.
      */
     public function getName(): string
     {
         return match ($this) {
-            self::USER_UPLOAD => '用户上传',
-            self::PROCESS => '处理过程',
-            self::BROWSER => '浏览器',
-            self::SYSTEM_AUTO_UPLOAD => '系统自动上传',
-            self::TOOL_MESSAGE_CONTENT => '工具消息内容',
-            self::DOCUMENT => '文档',
-            self::AUTO_SYNC => '自动同步',
-            self::DIRECTORY => '目录',
+            self::USER_UPLOAD => 'User upload',
+            self::PROCESS => 'Processing',
+            self::BROWSER => 'Browser',
+            self::SYSTEM_AUTO_UPLOAD => 'System auto upload',
+            self::TOOL_MESSAGE_CONTENT => 'Tool message content',
+            self::DOCUMENT => 'Document',
+            self::AUTO_SYNC => 'Auto sync',
+            self::DIRECTORY => 'Directory',
         };
     }
 
     /**
-     * 获取文件类型描述.
+     * Get file type description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::USER_UPLOAD => '用户手动上传的文件',
-            self::PROCESS => '在处理过程中产生的文件',
-            self::BROWSER => '通过浏览器获取的文件',
-            self::SYSTEM_AUTO_UPLOAD => '系统自动上传的文件',
-            self::TOOL_MESSAGE_CONTENT => '工具消息中包含的文件内容',
-            self::DOCUMENT => '文档类型的文件',
-            self::AUTO_SYNC => '自动同步的文件',
-            self::DIRECTORY => '目录',
+            self::USER_UPLOAD => 'File manually uploaded by user',
+            self::PROCESS => 'File generated during processing',
+            self::BROWSER => 'File obtained through browser',
+            self::SYSTEM_AUTO_UPLOAD => 'File automatically uploaded by system',
+            self::TOOL_MESSAGE_CONTENT => 'File content contained in tool messages',
+            self::DOCUMENT => 'Document type file',
+            self::AUTO_SYNC => 'File automatically synced',
+            self::DIRECTORY => 'Directory',
         };
     }
 }

@@ -15,13 +15,13 @@ use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\BeDelightfulAgentTyp
 class BuiltinAgentFactory
 {
     /**
-     * 创建内置智能体实体.
+     * Create built-in agent entity.
      */
     public static function createEntity(BuiltinAgent $builtinAgent, string $organizationCode): BeDelightfulAgentEntity
     {
         $entity = new BeDelightfulAgentEntity();
 
-        // 设置基本信息
+        // Set basic information
         $entity->setOrganizationCode($organizationCode);
         $entity->setCode($builtinAgent->value);
         $entity->setName($builtinAgent->getName());
@@ -32,7 +32,7 @@ class BuiltinAgentFactory
         $entity->setPrompt($builtinAgent->getPrompt());
         $entity->setTools([]);
 
-        // 设置系统创建信息
+        // Set system creation information
         $entity->setCreator('system');
         $entity->setCreatedAt(new DateTime());
         $entity->setModifier('system');
@@ -42,7 +42,7 @@ class BuiltinAgentFactory
     }
 
     /**
-     * 创建所有内置智能体实体.
+     * Create all built-in agent entities.
      * @return array<BeDelightfulAgentEntity>
      */
     public static function createAllBuiltinEntities(string $organizationCode): array

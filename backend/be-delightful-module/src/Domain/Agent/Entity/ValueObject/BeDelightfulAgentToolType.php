@@ -9,17 +9,17 @@ namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
 
 enum BeDelightfulAgentToolType: int
 {
-    // 1: 内置
+    // 1: Built-in
     case BuiltIn = 1;
 
-    // 2: 官方
+    // 2: Official
     case Official = 2;
 
-    // 3: 自定义
+    // 3: Custom
     case Custom = 3;
 
     /**
-     * 获取所有可用的枚举值.
+     * Get all available enum values.
      * @return array<int>
      */
     public static function getAvailableValues(): array
@@ -28,7 +28,7 @@ enum BeDelightfulAgentToolType: int
     }
 
     /**
-     * 获取所有可用的枚举值字符串（用于验证规则）.
+     * Get all available enum value strings (for validation rules).
      */
     public static function getValidationRule(): string
     {

@@ -8,20 +8,20 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Constant;
 
 /**
- * 智能体相关常量.
+ * Agent-related constants.
  */
 class AgentConstant
 {
     /**
-     * 超级麦吉代码
+     * Super Magi code
      */
     public const string BE_DELIGHTFUL_CODE = 'BE_DELIGHTFUL';
 
-    public const string DEFAULT_TOPIC_NAME = '新话题';
+    public const string DEFAULT_TOPIC_NAME = 'New Topic';
 
-    public const string DEFAULT_WORKSPACE_NAME = '新工作区';
+    public const string DEFAULT_WORKSPACE_NAME = 'New Workspace';
 
-    public const string DEFAULT_PROJECT_NAME = '默认项目';
+    public const string DEFAULT_PROJECT_NAME = 'Default Project';
 
     public const string DEFAULT_PROJECT_DIR = 'project';
 }

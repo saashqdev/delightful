@@ -14,7 +14,7 @@ use Hyperf\Codec\Json;
 
 class TaskMessageEntity extends AbstractEntity
 {
-    // 处理状态常量
+    // Processing status constants
     public const PROCESSING_STATUS_PENDING = 'pending';
 
     public const PROCESSING_STATUS_PROCESSING = 'processing';
@@ -24,134 +24,134 @@ class TaskMessageEntity extends AbstractEntity
     public const PROCESSING_STATUS_FAILED = 'failed';
 
     /**
-     * @var int 消息ID
+     * @var int Message ID
      */
     protected int $id = 0;
 
     /**
-     * @var string 发送者类型(user/ai)
+     * @var string Sender type (user/ai)
      */
     protected string $senderType = '';
 
     /**
-     * @var string 发送者ID
+     * @var string Sender ID
      */
     protected string $senderUid = '';
 
     /**
-     * @var string 接收者ID
+     * @var string Receiver ID
      */
     protected string $receiverUid = '';
 
     /**
-     * @var string 消息ID
+     * @var string Message ID
      */
     protected string $messageId = '';
 
     /**
-     * @var string 消息类型
+     * @var string Message type
      */
     protected string $type = '';
 
     /**
-     * @var string 任务ID
+     * @var string Task ID
      */
     protected string $taskId = '';
 
     /**
-     * @var null|int|string 话题ID
+     * @var null|int|string Topic ID
      */
     protected $topicId;
 
     /**
-     * @var null|string 任务状态
+     * @var null|string Task status
      */
     protected ?string $status = null;
 
     /**
-     * @var string 消息内容
+     * @var string Message content
      */
     protected string $content = '';
 
     /**
-     * @var null|string 原始消息内容
+     * @var null|string Original message content
      */
     protected ?string $rawContent = null;
 
     /**
-     * @var null|array 步骤信息
+     * @var null|array Step information
      */
     protected ?array $steps = null;
 
     /**
-     * @var null|array 工具调用信息
+     * @var null|array Tool call information
      */
     protected ?array $tool = null;
 
     /**
-     * @var null|array 附件信息
+     * @var null|array Attachment information
      */
     protected ?array $attachments = null;
 
     /**
-     * @var null|array 提及信息
+     * @var null|array Mention information
      */
     protected ?array $mentions = null;
 
     /**
-     * @var string 事件类型
+     * @var string Event type
      */
     protected string $event = '';
 
     /**
-     * @var int 发送时间戳
+     * @var int Send timestamp
      */
     protected int $sendTimestamp = 0;
 
     protected bool $showInUi = true;
 
     /**
-     * @var null|string 原始投递消息JSON数据
+     * @var null|string Original delivered message JSON data
      */
     protected ?string $rawData = null;
 
     /**
-     * @var null|int 序列ID，用于消息排序
+     * @var null|int Sequence ID, used for message sorting
      */
     protected ?int $seqId = null;
 
     /**
-     * @var string 消息处理状态
+     * @var string Message processing status
      */
     protected string $processingStatus = self::PROCESSING_STATUS_PENDING;
 
     /**
-     * @var null|string 处理失败时的错误信息
+     * @var null|string Error message when processing fails
      */
     protected ?string $errorMessage = null;
 
     /**
-     * @var int 重试次数
+     * @var int Retry count
      */
     protected int $retryCount = 0;
 
     /**
-     * @var null|string 处理完成时间
+     * @var null|string Processing completion time
      */
     protected ?string $processedAt = null;
 
     /**
-     * @var null|int IM 序列ID，用于消息顺序追踪
+     * @var null|int IM sequence ID, used for message order tracking
      */
     protected ?int $imSeqId = null;
 
     /**
-     * @var null|int IM 状态（来自delightful_chat_sequences表的status字段）
+     * @var null|int IM status (from status field of delightful_chat_sequences table)
      */
     protected ?int $imStatus = null;
 
     /**
-     * @var null|string 关联ID，用于消息追踪和关联
+     * @var null|string Correlation ID, used for message tracking and association
      */
     protected ?string $correlationId = null;
 
@@ -354,7 +354,7 @@ class TaskMessageEntity extends AbstractEntity
             if (! empty($mentions) && json_validate($mentions)) {
                 $mentions = Json::decode($mentions);
             } else {
-                // 无效的 JSON 字符串或空字符串，设置为 null
+                // Invalid JSON string or empty string, set to null
                 $mentions = null;
             }
         }
@@ -520,7 +520,7 @@ class TaskMessageEntity extends AbstractEntity
             'event' => $this->event,
             'send_timestamp' => $this->sendTimestamp,
             'show_in_ui' => $this->showInUi,
-            // 新增的队列处理字段
+            // Newly added queue processing fields
             'raw_data' => $this->rawData,
             'seq_id' => $this->seqId,
             'processing_status' => $this->processingStatus,

@@ -56,16 +56,16 @@ class TopicDuplicateConstant
      */
     public static function generateTaskKey(string $sourceTopicId, string $userId): string
     {
-        // 1. 保留易识别的前缀
+        // 1. Keep easily identifiable prefix
         $prefix = 'duplicate_topic';
 
-        // 2. 缩短 topic_id (取后9位，足够区分)
+        // 2. Shorten topic_id (take last 9 digits, enough to distinguish)
         $shortTopicId = substr($sourceTopicId, -9);
 
-        // 3. 用户ID哈希化 (取前6位MD5)
+        // 3. Hash user ID (take first 6 digits MD5)
         $userHash = substr(md5($userId), 0, 6);
 
-        // 4. 时间戳后5位 + 随机3位 = 8位混合标识符
+        // 4. Timestamp last 5 digits + random 3 digits = 8-digit hybrid identifier
         $timeSuffix = substr((string) time(), -5);
         $random = substr(uniqid(), -3);
         $timeRandom = $timeSuffix . $random;

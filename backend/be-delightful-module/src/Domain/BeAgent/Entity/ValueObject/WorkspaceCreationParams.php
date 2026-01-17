@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 工作区创建参数值对象
- * 遵循DDD中值对象的规范，封装相关参数并确保不可变性.
+ * Workspace creation parameters value object.
+ * Follows DDD value object specifications, encapsulating related parameters and ensuring immutability.
  */
 readonly class WorkspaceCreationParams
 {
     /**
-     * @param string $chatConversationId 会话ID
-     * @param string $workspaceName 工作区名称
-     * @param string $chatConversationTopicId 会话话题ID
-     * @param string $topicName 话题名称
+     * @param string $chatConversationId Conversation ID
+     * @param string $workspaceName Workspace name
+     * @param string $chatConversationTopicId Conversation topic ID
+     * @param string $topicName Topic name
      */
     public function __construct(
         private string $chatConversationId,
@@ -28,7 +28,7 @@ readonly class WorkspaceCreationParams
     }
 
     /**
-     * 获取会话ID.
+     * Get conversation ID.
      */
     public function getChatConversationId(): string
     {
@@ -36,7 +36,7 @@ readonly class WorkspaceCreationParams
     }
 
     /**
-     * 获取工作区名称.
+     * Get workspace name.
      */
     public function getWorkspaceName(): string
     {
@@ -44,7 +44,7 @@ readonly class WorkspaceCreationParams
     }
 
     /**
-     * 获取话题ID.
+     * Get topic ID.
      */
     public function getChatConversationTopicId(): string
     {
@@ -52,7 +52,7 @@ readonly class WorkspaceCreationParams
     }
 
     /**
-     * 获取话题名称.
+     * Get topic name.
      */
     public function getTopicName(): string
     {
@@ -60,11 +60,11 @@ readonly class WorkspaceCreationParams
     }
 
     /**
-     * 创建一个新的实例，修改指定的属性
-     * 由于值对象的不可变性，我们创建一个新实例而不是修改原有实例.
+     * Create a new instance with specified properties modified.
+     * Due to value object immutability, we create a new instance rather than modifying the existing one.
      *
-     * @param array $params 要修改的属性和值
-     * @return self 新的实例
+     * @param array $params Properties and values to modify
+     * @return self New instance
      */
     public function with(array $params): self
     {

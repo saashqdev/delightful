@@ -42,17 +42,17 @@ class ProjectEntity extends AbstractEntity
     protected string $projectName = '';
 
     /**
-     * @var string 项目描述
+     * @var string Project description
      */
     protected string $projectDescription = '';
 
     /**
-     * @var string 项目目录
+     * @var string Project directory
      */
     protected string $workDir = '';
 
     /**
-     * @var string 项目模式
+     * @var string Project mode
      */
     protected string $projectMode = '';
 
@@ -67,47 +67,47 @@ class ProjectEntity extends AbstractEntity
     protected ProjectStatus $projectStatus = ProjectStatus::ACTIVE;
 
     /**
-     * @var MemberRole 默认加入权限
+     * @var MemberRole Default join permission
      */
     protected MemberRole $defaultJoinPermission = MemberRole::EDITOR;
 
     /**
-     * @var null|int 当前话题ID
+     * @var null|int Current topic ID
      */
     protected ?int $currentTopicId = null;
 
     /**
-     * @var string 当前话题状态
+     * @var string Current topic status
      */
     protected string $currentTopicStatus = '';
 
     /**
-     * @var bool 是否启用协作功能
+     * @var bool Whether collaboration feature is enabled
      */
     protected bool $isCollaborationEnabled = true;
 
     /**
-     * @var string 创建者用户ID
+     * @var string Creator user ID
      */
     protected string $createdUid = '';
 
     /**
-     * @var string 更新者用户ID
+     * @var string Updater user ID
      */
     protected string $updatedUid = '';
 
     /**
-     * @var null|string 创建时间
+     * @var null|string Creation time
      */
     protected ?string $createdAt = null;
 
     /**
-     * @var null|string 更新时间
+     * @var null|string Update time
      */
     protected ?string $updatedAt = null;
 
     /**
-     * @var null|string 删除时间
+     * @var null|string Deletion time
      */
     protected ?string $deletedAt = null;
 
@@ -117,7 +117,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -143,7 +143,7 @@ class ProjectEntity extends AbstractEntity
             'deleted_at' => $this->deletedAt,
         ];
 
-        // 移除null值
+        // Remove null values
         return array_filter($result, function ($value) {
             return $value !== null;
         });
@@ -315,7 +315,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 检查项目是否已删除.
+     * Check if project is deleted.
      */
     public function isDeleted(): bool
     {
@@ -323,7 +323,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 获取项目状态
+     * Get project status.
      */
     public function getStatus(): ProjectStatus
     {
@@ -335,7 +335,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 标记项目为已删除.
+     * Mark project as deleted.
      */
     public function markAsDeleted(): self
     {
@@ -345,7 +345,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 恢复已删除的项目.
+     * Restore deleted project.
      */
     public function restore(): self
     {
@@ -355,7 +355,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 归档项目.
+     * Archive project.
      */
     public function archive(): self
     {
@@ -364,7 +364,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 激活项目.
+     * Activate project.
      */
     public function activate(): self
     {
@@ -373,7 +373,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 检查项目是否活跃.
+     * Check if project is active.
      */
     public function isActive(): bool
     {
@@ -381,7 +381,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 检查项目是否已归档.
+     * Check if project is archived.
      */
     public function isArchived(): bool
     {
@@ -389,7 +389,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 获取项目模式.
+     * Get project mode.
      */
     public function getProjectMode(): ?string
     {
@@ -397,7 +397,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 设置项目模式.
+     * Set project mode.
      */
     public function setProjectMode(?string $projectMode): self
     {
@@ -423,7 +423,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 获取协作功能开关状态.
+     * Get collaboration feature switch status.
      */
     public function getIsCollaborationEnabled(): bool
     {
@@ -431,7 +431,7 @@ class ProjectEntity extends AbstractEntity
     }
 
     /**
-     * 设置协作功能开关状态.
+     * Set collaboration feature switch status.
      */
     public function setIsCollaborationEnabled(bool|int|string $isCollaborationEnabled): self
     {

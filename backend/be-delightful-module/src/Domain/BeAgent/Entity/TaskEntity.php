@@ -11,124 +11,124 @@ use App\Infrastructure\Core\AbstractEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 
 /**
- * 任务实体.
+ * Task entity.
  */
 class TaskEntity extends AbstractEntity
 {
     /**
-     * @var int 主键ID
+     * @var int Primary key ID
      */
     protected int $id = 0;
 
     /**
-     * @var string 用户ID
+     * @var string User ID
      */
     protected string $userId = '';
 
     /**
-     * @var int 工作区ID
+     * @var int Workspace ID
      */
     protected int $workspaceId = 0;
 
     /**
-     * @var int 项目ID
+     * @var int Project ID
      */
     protected int $projectId = 0;
 
     /**
-     * @var int 话题ID
+     * @var int Topic ID
      */
     protected int $topicId = 0;
 
     /**
-     * @var null|int 复制来源任务ID
+     * @var null|int Copy source task ID
      */
     protected ?int $fromTaskId = null;
 
     /**
-     * @var string 任务ID（沙箱服务返回的）
+     * @var string Task ID (returned by sandbox service)
      */
     protected string $taskId = '';
 
     /**
-     * @var string 沙箱ID
+     * @var string Sandbox ID
      */
     protected string $sandboxId = '';
 
     /**
-     * @var string 用户的问题
+     * @var string User question
      */
     protected string $prompt = '';
 
     /**
-     * @var string 用户上传的附件信息(JSON格式)
+     * @var string User uploaded attachment information (JSON format)
      */
     protected string $attachments = '';
 
     /**
-     * @var string 提及信息(JSON格式)
+     * @var string Mention information (JSON format)
      */
     protected ?string $mentions;
 
     /**
-     * @var string 任务状态
+     * @var string Task status
      */
     protected string $taskStatus = '';
 
     /**
-     * @var string 工作区目录
+     * @var string Workspace directory
      */
     protected string $workDir = '';
 
     /**
-     * @var string 任务模式（chat: 聊天模式, plan: 规划模式）
+     * @var string Task mode (chat: chat mode, plan: planning mode)
      */
     protected string $taskMode = 'chat';
 
     /**
-     * @var null|string 错误信息
+     * @var null|string Error message
      */
     protected ?string $errMsg = null;
 
     /**
-     * @var null|string 会话ID
+     * @var null|string Conversation ID
      */
     protected ?string $conversationId = null;
 
     /**
-     * @var null|string 任务开始时间
+     * @var null|string Task start time
      */
     protected ?string $startedAt = null;
 
     /**
-     * @var null|string 任务结束时间
+     * @var null|string Task end time
      */
     protected ?string $finishedAt = null;
 
     /**
-     * @var null|string 创建时间
+     * @var null|string Creation time
      */
     protected ?string $createdAt = null;
 
     /**
-     * @var null|string 更新时间
+     * @var null|string Update time
      */
     protected ?string $updatedAt = null;
 
     /**
-     * @var null|string 删除时间
+     * @var null|string Deletion time
      */
     protected ?string $deletedAt = null;
 
     public function __construct(array $data = [])
     {
-        // 默认设置
+        // Default settings
         $this->taskStatus = TaskStatus::WAITING->value;
         parent::__construct($data);
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -156,7 +156,7 @@ class TaskEntity extends AbstractEntity
             'deleted_at' => $this->deletedAt,
         ];
 
-        // 移除null值
+        // Remove null values
         return array_filter($result, function ($value) {
             return $value !== null;
         });
@@ -325,7 +325,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 设置任务状态（TaskStatus 枚举类型）.
+     * Set task status (TaskStatus enum type).
      */
     public function setStatus(TaskStatus $status): self
     {
@@ -334,7 +334,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 获取任务状态（TaskStatus 枚举类型）.
+     * Get task status (TaskStatus enum type).
      */
     public function getStatus(): TaskStatus
     {
@@ -397,7 +397,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 获取任务模式.
+     * Get task mode.
      */
     public function getTaskMode(): string
     {
@@ -405,7 +405,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 设置任务模式.
+     * Set task mode.
      */
     public function setTaskMode(string $taskMode): self
     {
@@ -414,7 +414,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 获取错误信息.
+     * Get error message.
      */
     public function getErrMsg(): ?string
     {
@@ -422,7 +422,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 设置错误信息.
+     * Set error message.
      */
     public function setErrMsg(?string $errMsg): self
     {
@@ -431,7 +431,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 获取任务开始时间.
+     * Get task start time.
      */
     public function getStartedAt(): ?string
     {
@@ -439,7 +439,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 设置任务开始时间.
+     * Set task start time.
      */
     public function setStartedAt(?string $startedAt): self
     {
@@ -448,7 +448,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 获取任务结束时间.
+     * Get task end time.
      */
     public function getFinishedAt(): ?string
     {
@@ -456,7 +456,7 @@ class TaskEntity extends AbstractEntity
     }
 
     /**
-     * 设置任务结束时间.
+     * Set task end time.
      */
     public function setFinishedAt(?string $finishedAt): self
     {

@@ -10,28 +10,28 @@ namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
 enum BeDelightfulAgentType: int
 {
     /**
-     * 内置智能体.
+     * Built-in agent.
      */
     case Built_In = 1;
 
     /**
-     * 自定义智能体.
+     * Custom agent.
      */
     case Custom = 2;
 
     /**
-     * 获取类型描述.
+     * Get type description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::Built_In => '内置',
-            self::Custom => '自定义',
+            self::Built_In => 'Built-in',
+            self::Custom => 'Custom',
         };
     }
 
     /**
-     * 是否为内置类型.
+     * Whether it is a built-in type.
      */
     public function isBuiltIn(): bool
     {
@@ -39,7 +39,7 @@ enum BeDelightfulAgentType: int
     }
 
     /**
-     * 是否为自定义类型.
+     * Whether it is a custom type.
      */
     public function isCustom(): bool
     {
@@ -47,7 +47,7 @@ enum BeDelightfulAgentType: int
     }
 
     /**
-     * 获取所有可用的枚举值.
+     * Get all available enum values.
      * @return array<int>
      */
     public static function getAvailableValues(): array
@@ -56,7 +56,7 @@ enum BeDelightfulAgentType: int
     }
 
     /**
-     * 获取所有可用的枚举值字符串（用于验证规则）.
+     * Get all available enum value strings (for validation rules).
      */
     public static function getValidationRule(): string
     {

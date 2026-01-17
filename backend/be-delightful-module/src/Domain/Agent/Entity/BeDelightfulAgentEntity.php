@@ -24,27 +24,27 @@ class BeDelightfulAgentEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一编码，仅在创建时生成，用作给前端的id.
+     * Unique code, generated only at creation time, used as id for frontend.
      */
     protected string $code;
 
     /**
-     * Agent名称.
+     * Agent name.
      */
     protected string $name;
 
     /**
-     * Agent描述.
+     * Agent description.
      */
     protected string $description = '';
 
     /**
-     * Agent图标.
+     * Agent icon.
      */
     protected array $icon = [];
 
     /**
-     * 图标类型 1:图标 2:图片.
+     * Icon type 1: icon 2: image.
      */
     protected int $iconType = 1;
 
@@ -54,18 +54,18 @@ class BeDelightfulAgentEntity extends AbstractEntity
     protected array $tools = [];
 
     /**
-     * 系统提示词.
+     * System prompt.
      * Format: {"version": "1.0.0", "structure": {"string": "prompt text"}}.
      */
     protected array $prompt = [];
 
     /**
-     * 智能体类型.
+     * Agent type.
      */
     protected BeDelightfulAgentType $type = BeDelightfulAgentType::Custom;
 
     /**
-     * 是否启用.
+     * Whether enabled.
      */
     protected ?bool $enabled = null;
 
@@ -116,7 +116,7 @@ class BeDelightfulAgentEntity extends AbstractEntity
         $this->updatedAt = $this->createdAt;
         $this->code = Code::BeDelightfulAgent->gen();
         $this->enabled = $this->enabled ?? true;
-        // 强制设置为自定义类型，用户创建的智能体只能是自定义类型
+        // Force set to custom type, user-created agents can only be custom type
         $this->type = BeDelightfulAgentType::Custom;
         $this->id = null;
     }
@@ -139,7 +139,7 @@ class BeDelightfulAgentEntity extends AbstractEntity
             ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'be_delightful.agent.fields.prompt']);
         }
 
-        // 将新值设置到原始实体上
+        // Set new values to original entity
         $originalEntity->setName($this->name);
         $originalEntity->setDescription($this->description);
         $originalEntity->setIcon($this->icon);
@@ -235,10 +235,10 @@ class BeDelightfulAgentEntity extends AbstractEntity
     {
         $result = [];
 
-        // 获取必填工具列表，按照 getRequiredTools 的顺序
+        // Get required tools list, in the order of getRequiredTools
         $requiredTools = BuiltinTool::getRequiredTools();
 
-        // 1. 先添加必填工具（按照 getRequiredTools 的顺序）
+        // 1. Add required tools first (in the order of getRequiredTools)
         foreach ($requiredTools as $requiredTool) {
             $tool = new BeDelightfulAgentTool();
             $tool->setCode($requiredTool->value);
@@ -251,10 +251,10 @@ class BeDelightfulAgentEntity extends AbstractEntity
             $result[$tool->getCode()] = $tool;
         }
 
-        // 2. 再添加原始工具列表中的其他工具（跳过已存在的必填工具）
+        // 2. Add other tools from original list (skip required tools that already exist)
         foreach ($this->tools as $tool) {
             if ($tool->getType()->isBuiltIn()) {
-                // 但是不在目前已有的内置列表中，则跳过
+                // But not in current built-in list, then skip
                 if (! BuiltinTool::isValidTool($tool->getCode())) {
                     continue;
                 }
@@ -268,7 +268,7 @@ class BeDelightfulAgentEntity extends AbstractEntity
     }
 
     /**
-     * 获取原始工具列表（不包含自动添加的必填工具）.
+     * Get original tools list (without auto-added required tools).
      * @return array<BeDelightfulAgentTool>
      */
     public function getOriginalTools(): array
@@ -289,7 +289,7 @@ class BeDelightfulAgentEntity extends AbstractEntity
     }
 
     /**
-     * 添加工具，如果工具已存在则不添加.
+     * Add tool, do not add if tool already exists.
      */
     public function addTool(BeDelightfulAgentTool $tool): void
     {

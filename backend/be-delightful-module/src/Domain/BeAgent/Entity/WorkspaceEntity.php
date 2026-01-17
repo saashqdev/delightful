@@ -97,7 +97,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 获取工作区归档状态
+     * Get workspace archive status.
      */
     public function getIsArchived(): int
     {
@@ -105,7 +105,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 获取工作区归档状态（枚举对象）.
+     * Get workspace archive status (enum object).
      */
     public function getArchiveStatus(): WorkspaceArchiveStatus
     {
@@ -113,7 +113,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 设置工作区归档状态
+     * Set workspace archive status.
      */
     public function setIsArchived(int $isArchived): self
     {
@@ -122,7 +122,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 设置工作区归档状态（通过枚举对象）.
+     * Set workspace archive status (via enum object).
      */
     public function setArchiveStatus(WorkspaceArchiveStatus $archiveStatus): self
     {
@@ -208,7 +208,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 获取工作区状态
+     * Get workspace status.
      */
     public function getStatus(): int
     {
@@ -216,7 +216,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 获取工作区状态（枚举对象）.
+     * Get workspace status (enum object).
      */
     public function getWorkspaceStatus(): WorkspaceStatus
     {
@@ -224,7 +224,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 设置工作区状态
+     * Set workspace status.
      */
     public function setStatus(int $status): self
     {
@@ -233,7 +233,7 @@ class WorkspaceEntity extends AbstractEntity
     }
 
     /**
-     * 设置工作区状态（通过枚举对象）.
+     * Set workspace status (via enum object).
      */
     public function setWorkspaceStatus(WorkspaceStatus $status): self
     {

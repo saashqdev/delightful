@@ -22,17 +22,17 @@ interface BeDelightfulAgentRepositoryInterface
     public function queries(BeDelightfulAgentDataIsolation $dataIsolation, BeDelightfulAgentQuery $query, Page $page): array;
 
     /**
-     * 保存BeDelightful Agent.
+     * Save BeDelightful Agent.
      */
     public function save(BeDelightfulAgentDataIsolation $dataIsolation, BeDelightfulAgentEntity $entity): BeDelightfulAgentEntity;
 
     /**
-     * 删除BeDelightful Agent.
+     * Delete BeDelightful Agent.
      */
     public function delete(BeDelightfulAgentDataIsolation $dataIsolation, string $code): bool;
 
     /**
-     * 统计指定创建者的智能体数量.
+     * Count the number of agents created by the specified creator.
      */
     public function countByCreator(BeDelightfulAgentDataIsolation $dataIsolation, string $creator): int;
 }

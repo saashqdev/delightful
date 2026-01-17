@@ -9,56 +9,56 @@ namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
 
 enum BuiltinAgent: string
 {
-    /** 通用模式 */
+    /** General mode */
     case General = 'general';
 
-    /** 聊天模式 */
+    /** Chat mode */
     case Chat = 'chat';
 
-    /** 数据分析 */
+    /** Data analysis */
     case DataAnalysis = 'data_analysis';
 
     /** PPT */
     case PPT = 'ppt';
 
-    /** 研报模式 */
+    /** Research report mode */
     case Report = 'report';
 
-    /** 录音总结 */
+    /** Recording summary */
     case Summary = 'summary';
 
     /**
-     * 获取内置智能体名称.
+     * Get built-in agent name.
      */
     public function getName(): string
     {
         return match ($this) {
-            self::General => '通用模式',
-            self::Chat => '聊天模式',
-            self::DataAnalysis => '数据分析',
+            self::General => 'General mode',
+            self::Chat => 'Chat mode',
+            self::DataAnalysis => 'Data analysis',
             self::PPT => 'PPT',
-            self::Report => '研报模式',
-            self::Summary => '录音总结',
+            self::Report => 'Research report mode',
+            self::Summary => 'Recording summary',
         };
     }
 
     /**
-     * 获取内置智能体描述.
+     * Get built-in agent description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::General => '适用于各种通用场景的智能助手',
-            self::Chat => '专注于对话交流的智能助手',
-            self::DataAnalysis => '专业的数据分析和处理助手',
-            self::PPT => '专业的PPT制作和演示助手',
-            self::Report => '专业的研究报告撰写助手',
-            self::Summary => '专业的录音内容总结助手',
+            self::General => 'A smart assistant suitable for various general scenarios',
+            self::Chat => 'A smart assistant focused on conversation',
+            self::DataAnalysis => 'A professional data analysis and processing assistant',
+            self::PPT => 'A professional PPT creation and presentation assistant',
+            self::Report => 'A professional research report writing assistant',
+            self::Summary => 'A professional recording content summary assistant',
         };
     }
 
     /**
-     * 获取内置智能体图标.
+     * Get built-in agent icon.
      */
     public function getIcon(): array
     {
@@ -73,7 +73,7 @@ enum BuiltinAgent: string
     }
 
     /**
-     * 获取内置智能体提示词.
+     * Get built-in agent prompt.
      */
     public function getPrompt(): array
     {
@@ -81,7 +81,7 @@ enum BuiltinAgent: string
     }
 
     /**
-     * 获取所有内置智能体.
+     * Get all built-in agents.
      * @return array<BuiltinAgent>
      */
     public static function getAllBuiltinAgents(): array

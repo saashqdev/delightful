@@ -8,59 +8,59 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 任务状态值对象
+ * Task status value object.
  */
 enum TaskStatus: string
 {
     /**
-     * 等待中.
+     * Waiting.
      */
     case WAITING = 'waiting';
 
     /**
-     * 运行中.
+     * Running.
      */
     case RUNNING = 'running';
 
     /**
-     * 已完成.
+     * Finished.
      */
     case FINISHED = 'finished';
 
     /**
-     * 挂起.
+     * Suspended.
      */
     case Suspended = 'suspended';
 
     /**
-     * 终止.
+     * Stopped.
      */
     case Stopped = 'stopped';
 
     /**
-     * 错误.
+     * Error.
      */
     case ERROR = 'error';
 
     /**
-     * 获取状态描述.
+     * Get status description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::WAITING => '等待中',
-            self::RUNNING => '运行中',
-            self::FINISHED => '已完成',
-            self::ERROR => '错误',
-            self::Suspended => '挂起',
-            self::Stopped => '终止',
+            self::WAITING => 'Waiting',
+            self::RUNNING => 'Running',
+            self::FINISHED => 'Finished',
+            self::ERROR => 'Error',
+            self::Suspended => 'Suspended',
+            self::Stopped => 'Stopped',
         };
     }
 
     /**
-     * 获取所有状态列表.
+     * Get all status list.
      *
-     * @return array<string, string> 状态值与描述的映射
+     * @return array<string, string> Mapping of status values to descriptions
      */
     public static function getList(): array
     {
@@ -75,7 +75,7 @@ enum TaskStatus: string
     }
 
     /**
-     * 是否为终态
+     * Is final state.
      */
     public function isFinal(): bool
     {
@@ -83,7 +83,7 @@ enum TaskStatus: string
     }
 
     /**
-     * 是否为活跃状态
+     * Is active state.
      */
     public function isActive(): bool
     {

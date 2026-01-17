@@ -9,17 +9,17 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
  * Project Mode Value Object
- * 项目模式值对象
+ * Project mode value object
  */
 enum ProjectMode: string
 {
-    case GENERAL = 'general';           // 通用模式
-    case PPT = 'ppt';                  // PPT模式
-    case DATA_ANALYSIS = 'data_analysis'; // 数据分析模式
-    case REPORT = 'report';            // 研报模式
-    case MEETING = 'meeting';          // 会议模式
-    case SUMMARY = 'summary';          // 总结模式
-    case BE_DELIGHTFUL = 'be_delightful';  // 超级麦吉模式
+    case GENERAL = 'general';           // General mode
+    case PPT = 'ppt';                  // PPT mode
+    case DATA_ANALYSIS = 'data_analysis'; // Data analysis mode
+    case REPORT = 'report';            // Research report mode
+    case MEETING = 'meeting';          // Meeting mode
+    case SUMMARY = 'summary';          // Summary mode
+    case BE_DELIGHTFUL = 'be_delightful';  // Super Magi mode
 
     /**
      * Get all available project modes.
@@ -43,13 +43,13 @@ enum ProjectMode: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::GENERAL => '通用模式',
-            self::PPT => 'PPT模式',
-            self::DATA_ANALYSIS => '数据分析模式',
-            self::REPORT => '研报模式',
-            self::MEETING => '会议模式',
-            self::SUMMARY => '总结模式',
-            self::BE_DELIGHTFUL => '超级麦吉模式',
+            self::GENERAL => 'General mode',
+            self::PPT => 'PPT mode',
+            self::DATA_ANALYSIS => 'Data analysis mode',
+            self::REPORT => 'Research report mode',
+            self::MEETING => 'Meeting mode',
+            self::SUMMARY => 'Summary mode',
+            self::BE_DELIGHTFUL => 'Super Magi mode',
         };
     }
 }

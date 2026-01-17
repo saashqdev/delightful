@@ -13,9 +13,9 @@ use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use function Hyperf\Translation\trans;
 
 /**
- * 成员角色值对象
+ * Member role value object
  *
- * 封装成员角色的业务逻辑和权限验证规则
+ * Encapsulates business logic and permission validation rules for member roles
  */
 enum MemberRole: string
 {
@@ -25,7 +25,7 @@ enum MemberRole: string
     case VIEWER = 'viewer';
 
     /**
-     * 从字符串创建实例.
+     * Create instance from string.
      */
     public static function fromString(string $role): self
     {
@@ -39,7 +39,7 @@ enum MemberRole: string
     }
 
     /**
-     * 从值创建实例.
+     * Create instance from value.
      */
     public static function fromValue(string $value): self
     {
@@ -47,7 +47,7 @@ enum MemberRole: string
     }
 
     /**
-     * 获取值
+     * Get value
      */
     public function getValue(): string
     {
@@ -55,7 +55,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否为所有者角色.
+     * Whether is owner role.
      */
     public function isOwner(): bool
     {
@@ -63,7 +63,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否为管理者角色.
+     * Whether is manager role.
      */
     public function isManager(): bool
     {
@@ -71,7 +71,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否为编辑者角色.
+     * Whether is editor role.
      */
     public function isEditor(): bool
     {
@@ -79,7 +79,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否为查看者角色.
+     * Whether is viewer role.
      */
     public function isViewer(): bool
     {
@@ -87,7 +87,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否有写入权限.
+     * Whether has write permission.
      */
     public function hasWritePermission(): bool
     {
@@ -98,7 +98,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否有删除权限.
+     * Whether has delete permission.
      */
     public function hasDeletePermission(): bool
     {
@@ -106,7 +106,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否有管理权限（邀请成员、设置权限等）.
+     * Whether has manage permission (invite members, set permissions, etc).
      */
     public function hasManagePermission(): bool
     {
@@ -117,7 +117,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否有分享权限.
+     * Whether has share permission.
      */
     public function hasSharePermission(): bool
     {
@@ -128,7 +128,7 @@ enum MemberRole: string
     }
 
     /**
-     * 是否可以设置快捷方式.
+     * Whether can set shortcut.
      */
     public function canSetShortcut(): bool
     {
@@ -136,7 +136,7 @@ enum MemberRole: string
     }
 
     /**
-     * 获取权限等级（数字越大权限越高）.
+     * Get permission level (larger numbers mean higher permissions).
      */
     public function getPermissionLevel(): int
     {
@@ -149,7 +149,7 @@ enum MemberRole: string
     }
 
     /**
-     * 比较角色权限等级.
+     * Compare role permission level.
      */
     public function isHigherOrEqualThan(self $other): bool
     {
@@ -157,7 +157,7 @@ enum MemberRole: string
     }
 
     /**
-     * 获取所有可用的角色.
+     * Get all available roles.
      */
     public static function getAllRoles(): array
     {
@@ -165,7 +165,7 @@ enum MemberRole: string
     }
 
     /**
-     * 获取所有角色的字符串值.
+     * Get string values of all roles.
      */
     public static function getAllRoleValues(): array
     {
@@ -173,7 +173,7 @@ enum MemberRole: string
     }
 
     /**
-     * 验证权限级别.
+     * Validate permission level.
      */
     public static function validatePermissionLevel(string $permission): MemberRole
     {

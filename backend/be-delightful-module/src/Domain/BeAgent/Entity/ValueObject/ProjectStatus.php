@@ -8,39 +8,39 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 /**
- * 项目状态枚举.
+ * Project status enum.
  */
 enum ProjectStatus: int
 {
     /**
-     * 活跃状态
+     * Active status
      */
     case ACTIVE = 1;
 
     /**
-     * 已归档.
+     * Archived.
      */
     case ARCHIVED = 2;
 
     /**
-     * 已删除.
+     * Deleted.
      */
     case DELETED = 3;
 
     /**
-     * 获取状态描述.
+     * Get status description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::ACTIVE => '活跃',
-            self::ARCHIVED => '已归档',
-            self::DELETED => '已删除',
+            self::ACTIVE => 'Active',
+            self::ARCHIVED => 'Archived',
+            self::DELETED => 'Deleted',
         };
     }
 
     /**
-     * 是否为活跃状态
+     * Whether is active status
      */
     public function isActive(): bool
     {
@@ -48,7 +48,7 @@ enum ProjectStatus: int
     }
 
     /**
-     * 是否已归档.
+     * Whether is archived.
      */
     public function isArchived(): bool
     {
@@ -56,7 +56,7 @@ enum ProjectStatus: int
     }
 
     /**
-     * 是否已删除.
+     * Whether is deleted.
      */
     public function isDeleted(): bool
     {

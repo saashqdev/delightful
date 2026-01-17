@@ -11,7 +11,7 @@ use function Hyperf\Translation\trans;
 
 enum BuiltinTool: string
 {
-    // 文件操作 (FileOperations)
+    // File operations (FileOperations)
     case ListDir = 'list_dir';
     case ReadFiles = 'read_files';
     case WriteFile = 'write_file';
@@ -21,24 +21,24 @@ enum BuiltinTool: string
     case FileSearch = 'file_search';
     case GrepSearch = 'grep_search';
 
-    // 搜索提取 (SearchExtraction)
+    // Search extraction (SearchExtraction)
     case WebSearch = 'web_search';
     case ImageSearch = 'image_search';
     case ReadWebpagesAsMarkdown = 'read_webpages_as_markdown';
     case DownloadFromUrls = 'download_from_urls';
     case DownloadFromMarkdown = 'download_from_markdown';
 
-    // 内容处理 (ContentProcessing)
+    // Content processing (ContentProcessing)
     case VisualUnderstanding = 'visual_understanding';
     case GenerateImage = 'generate_image';
     case ConvertToMarkdown = 'convert_to_markdown';
 
-    // 系统执行 (SystemExecution)
+    // System execution (SystemExecution)
     case ShellExec = 'shell_exec';
     case RunPythonSnippet = 'run_python_snippet';
 
     /**
-     * 获取工具的用户友好名称.
+     * Get tool user-friendly name.
      */
     public function getToolName(): string
     {
@@ -46,7 +46,7 @@ enum BuiltinTool: string
     }
 
     /**
-     * 获取工具的用户友好描述.
+     * Get tool user-friendly description.
      */
     public function getToolDescription(): string
     {
@@ -54,38 +54,38 @@ enum BuiltinTool: string
     }
 
     /**
-     * 获取工具的图标.
+     * Get tool icon.
      */
     public function getToolIcon(): string
     {
-        // 暂时返回空字符串，等待前端提供图标内容
+        // Temporarily return empty string, waiting for frontend to provide icon content
         return '';
     }
 
     /**
-     * 获取工具的分类.
+     * Get tool category.
      */
     public function getToolCategory(): BuiltinToolCategory
     {
         return match ($this) {
-            // 文件操作
+            // File operations
             self::ListDir, self::ReadFiles, self::WriteFile, self::EditFile, self::MultiEditFile,
             self::DeleteFile, self::FileSearch, self::GrepSearch => BuiltinToolCategory::FileOperations,
 
-            // 搜索提取
+            // Search extraction
             self::WebSearch, self::ImageSearch, self::ReadWebpagesAsMarkdown,
             self::DownloadFromUrls, self::DownloadFromMarkdown => BuiltinToolCategory::SearchExtraction,
 
-            // 内容处理
+            // Content processing
             self::VisualUnderstanding, self::GenerateImage, self::ConvertToMarkdown => BuiltinToolCategory::ContentProcessing,
 
-            // 系统执行
+            // System execution
             self::ShellExec, self::RunPythonSnippet => BuiltinToolCategory::SystemExecution,
         };
     }
 
     /**
-     * 获取工具类型.
+     * Get tool type.
      */
     public static function getToolType(): BeDelightfulAgentToolType
     {
@@ -93,13 +93,13 @@ enum BuiltinTool: string
     }
 
     /**
-     * 获取所有必须的工具.
+     * Get all required tools.
      * @return array<BuiltinTool>
      */
     public static function getRequiredTools(): array
     {
         return [
-            // 基础文件增删查改 + 目录查看
+            // Basic file CRUD + directory view
             self::ListDir,
             self::ReadFiles,
             self::WriteFile,
@@ -108,13 +108,13 @@ enum BuiltinTool: string
             self::DeleteFile,
             self::FileSearch,
             self::GrepSearch,
-            // 互联网搜索和阅读
+            // Internet search and reading
             self::WebSearch,
             self::ImageSearch,
             self::ReadWebpagesAsMarkdown,
-            // 视觉理解
+            // Visual understanding
             self::VisualUnderstanding,
-            // 命令行执行
+            // Command line execution
             self::ShellExec,
         ];
     }
@@ -125,7 +125,7 @@ enum BuiltinTool: string
     }
 
     /**
-     * 判断工具是否为必须工具.
+     * Determine whether tool is required.
      */
     public function isRequired(): bool
     {

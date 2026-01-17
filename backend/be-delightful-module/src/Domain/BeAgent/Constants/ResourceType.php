@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Constants;
 
 /**
- * 资源类型常量.
+ * Resource type constants.
  */
 final class ResourceType
 {
@@ -23,7 +23,7 @@ final class ResourceType
     public const MEMBER = 'member';
 
     /**
-     * 获取所有资源类型.
+     * Get all resource types.
      */
     public static function getAllTypes(): array
     {
@@ -37,7 +37,7 @@ final class ResourceType
     }
 
     /**
-     * 验证资源类型是否有效.
+     * Validate if resource type is valid.
      */
     public static function isValidType(string $type): bool
     {

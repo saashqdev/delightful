@@ -10,64 +10,64 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\Query;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 
 /**
- * 话题查询值对象，封装查询条件.
+ * Topic query value object that encapsulates query conditions.
  */
 class TopicQuery
 {
     /**
-     * @var null|string 话题ID
+     * @var null|string Topic ID
      */
     private ?string $topicId = null;
 
     /**
-     * @var null|string 话题名称
+     * @var null|string Topic name
      */
     private ?string $topicName = null;
 
     /**
-     * @var null|string 话题状态
+     * @var null|string Topic status
      */
     private ?string $topicStatus = null;
 
     /**
-     * @var null|string 沙盒ID
+     * @var null|string Sandbox ID
      */
     private ?string $sandboxId = null;
 
     /**
-     * @var null|string 组织机构代码
+     * @var null|string Organization code
      */
     private ?string $organizationCode = null;
 
     /**
-     * @var null|array 用户ID列表，用于按用户ID过滤
+     * @var null|array User ID list, used to filter by user ID
      */
     private ?array $userIds = null;
 
     /**
-     * @var null|string 项目ID
+     * @var null|string Project ID
      */
     private ?string $projectId = null;
 
     /**
-     * @var int 页码
+     * @var int Page number
      */
     private int $page = 1;
 
     /**
-     * @var int 每页条数
+     * @var int Results per page
      */
     private int $pageSize = 20;
 
     /**
-     * @var string 排序字段
+     * @var string Sort field
      */
     private string $orderBy = 'id';
 
     private string $order = 'desc';
 
     /**
-     * 获取话题ID.
+     * Get Topic ID.
      */
     public function getTopicId(): ?string
     {
@@ -75,7 +75,7 @@ class TopicQuery
     }
 
     /**
-     * 设置话题ID.
+     * Set Topic ID.
      */
     public function setTopicId(?string $topicId): self
     {
@@ -84,7 +84,7 @@ class TopicQuery
     }
 
     /**
-     * 获取话题名称.
+     * Get Topic name.
      */
     public function getTopicName(): ?string
     {
@@ -92,7 +92,7 @@ class TopicQuery
     }
 
     /**
-     * 设置话题名称.
+     * Set Topic name.
      */
     public function setTopicName(?string $topicName): self
     {
@@ -101,7 +101,7 @@ class TopicQuery
     }
 
     /**
-     * 获取话题状态.
+     * Get Topic status.
      */
     public function getTopicStatus(): ?string
     {
@@ -109,7 +109,7 @@ class TopicQuery
     }
 
     /**
-     * 设置话题状态.
+     * Set Topic status.
      */
     public function setTopicStatus(?string $topicStatus): self
     {
@@ -118,7 +118,7 @@ class TopicQuery
     }
 
     /**
-     * 获取沙盒ID.
+     * Get Sandbox ID.
      */
     public function getSandboxId(): ?string
     {
@@ -126,7 +126,7 @@ class TopicQuery
     }
 
     /**
-     * 设置沙盒ID.
+     * Set Sandbox ID.
      */
     public function setSandboxId(?string $sandboxId): self
     {
@@ -135,7 +135,7 @@ class TopicQuery
     }
 
     /**
-     * 获取组织机构代码
+     * Get Organization code
      */
     public function getOrganizationCode(): ?string
     {
@@ -143,7 +143,7 @@ class TopicQuery
     }
 
     /**
-     * 设置组织机构代码
+     * Set Organization code
      */
     public function setOrganizationCode(?string $organizationCode): self
     {
@@ -152,7 +152,7 @@ class TopicQuery
     }
 
     /**
-     * 获取用户ID列表.
+     * Get User ID list.
      */
     public function getUserIds(): ?array
     {
@@ -160,7 +160,7 @@ class TopicQuery
     }
 
     /**
-     * 设置用户ID列表.
+     * Set User ID list.
      */
     public function setUserIds(?array $userIds): self
     {
@@ -169,7 +169,7 @@ class TopicQuery
     }
 
     /**
-     * 获取项目ID.
+     * Get Project ID.
      */
     public function getProjectId(): ?string
     {
@@ -177,7 +177,7 @@ class TopicQuery
     }
 
     /**
-     * 设置项目ID.
+     * Set Project ID.
      */
     public function setProjectId(?string $projectId): self
     {
@@ -186,7 +186,7 @@ class TopicQuery
     }
 
     /**
-     * 获取页码
+     * Get page number
      */
     public function getPage(): int
     {
@@ -194,7 +194,7 @@ class TopicQuery
     }
 
     /**
-     * 设置页码
+     * Set page number
      */
     public function setPage(int $page): self
     {
@@ -203,7 +203,7 @@ class TopicQuery
     }
 
     /**
-     * 获取每页条数.
+     * Get results per page.
      */
     public function getPageSize(): int
     {
@@ -211,7 +211,7 @@ class TopicQuery
     }
 
     /**
-     * 设置每页条数.
+     * Set results per page.
      */
     public function setPageSize(int $pageSize): self
     {
@@ -242,7 +242,7 @@ class TopicQuery
     }
 
     /**
-     * 转换为条件数组.
+     * Convert to conditions array.
      */
     public function toConditions(): array
     {

@@ -80,19 +80,19 @@ class TopicAppService extends AbstractAppService
 
     public function getTopic(RequestContext $requestContext, int $id): TopicItemDTO
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 获取话题内容
+        // Get topic content
         $topicEntity = $this->topicDomainService->getTopicById($id);
         if (! $topicEntity) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
-        // 判断话题是否是本人
+        // Determine if topic belongs to self
         if ($topicEntity->getUserId() !== $userAuthorization->getId()) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
         }
@@ -102,7 +102,7 @@ class TopicAppService extends AbstractAppService
 
     public function getTopicById(int $id): TopicItemDTO
     {
-        // 获取话题内容
+        // Get topic content
         $topicEntity = $this->topicDomainService->getTopicById($id);
         if (! $topicEntity) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
@@ -112,49 +112,49 @@ class TopicAppService extends AbstractAppService
 
     public function createTopic(RequestContext $requestContext, SaveTopicRequestDTO $requestDTO): TopicItemDTO
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
         $projectEntity = $this->getAccessibleProjectWithEditor((int) $requestDTO->getProjectId(), $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 创建新话题，使用事务确保原子性
+        // Create new topic，Use transaction to ensure atomicity
         Db::beginTransaction();
         try {
-            // 1. 初始化 chat 的会话和话题
+            // 1. Initialize chat conversation and topic
             [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
-            // 2. 创建话题
+            // 2. Create topic
             $topicEntity = $this->topicDomainService->createTopic(
                 $dataIsolation,
                 $projectEntity->getWorkspaceId(),
                 (int) $requestDTO->getProjectId(),
                 $chatConversationId,
-                $chatConversationTopicId, // 会话的话题ID
+                $chatConversationTopicId, // Conversation topicID
                 $requestDTO->getTopicName(),
                 $projectEntity->getWorkDir(),
                 $requestDTO->getTopicMode()
             );
 
-            // 3. 如果传入了 project_mode，更新项目的模式
+            // 3. If passed project_mode，Update project mode
             if (! empty($requestDTO->getProjectMode())) {
                 $projectEntity->setProjectMode($requestDTO->getProjectMode());
                 $projectEntity->setUpdatedAt(date('Y-m-d H:i:s'));
                 $this->projectDomainService->saveProjectEntity($projectEntity);
             }
-            // 提交事务
+            // Commit transaction
             Db::commit();
 
-            // 发布话题已创建事件
+            // PublishTopicAlreadyCreateEvent
             $topicCreatedEvent = new TopicCreatedEvent($topicEntity, $userAuthorization);
             $this->eventDispatcher->dispatch($topicCreatedEvent);
 
-            // 返回结果
+            // Return result
             return TopicItemDTO::fromEntity($topicEntity);
         } catch (Throwable $e) {
-            // 回滚事务
+            // Rollback transaction
             Db::rollBack();
             $this->logger->error(sprintf("Error creating new topic: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
             ExceptionBuilder::throw(BeAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
@@ -163,44 +163,44 @@ class TopicAppService extends AbstractAppService
 
     public function createTopicNotValidateAccessibleProject(RequestContext $requestContext, SaveTopicRequestDTO $requestDTO): ?TopicItemDTO
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
         $projectEntity = $this->projectDomainService->getProjectNotUserId((int) $requestDTO->getProjectId());
 
-        // 创建新话题，使用事务确保原子性
+        // Create new topic，Use transaction to ensure atomicity
         Db::beginTransaction();
         try {
-            // 1. 初始化 chat 的会话和话题
+            // 1. Initialize chat conversation and topic
             [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
-            // 2. 创建话题
+            // 2. Create topic
             $topicEntity = $this->topicDomainService->createTopic(
                 $dataIsolation,
                 (int) $requestDTO->getWorkspaceId(),
                 (int) $requestDTO->getProjectId(),
                 $chatConversationId,
-                $chatConversationTopicId, // 会话的话题ID
+                $chatConversationTopicId, // Conversation topicID
                 $requestDTO->getTopicName(),
                 $projectEntity->getWorkDir(),
                 $requestDTO->getTopicMode(),
             );
 
-            // 3. 如果传入了 project_mode，更新项目的模式
+            // 3. If passed project_mode，Update project mode
             if (! empty($requestDTO->getProjectMode())) {
                 $projectEntity->setProjectMode($requestDTO->getProjectMode());
                 $projectEntity->setUpdatedAt(date('Y-m-d H:i:s'));
                 $this->projectDomainService->saveProjectEntity($projectEntity);
             }
-            // 提交事务
+            // Commit transaction
             Db::commit();
-            // 返回结果
+            // Return result
             return TopicItemDTO::fromEntity($topicEntity);
         } catch (Throwable $e) {
-            // 回滚事务
+            // Rollback transaction
             Db::rollBack();
             $this->logger->error(sprintf("Error creating new topic: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
             ExceptionBuilder::throw(BeAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
@@ -209,18 +209,18 @@ class TopicAppService extends AbstractAppService
 
     public function updateTopic(RequestContext $requestContext, SaveTopicRequestDTO $requestDTO): SaveTopicResultDTO
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
         $this->topicDomainService->updateTopic($dataIsolation, (int) $requestDTO->getId(), $requestDTO->getTopicName());
 
-        // 获取更新后的话题实体用于事件发布
+        // Get updated topic entity for event publishing
         $topicEntity = $this->topicDomainService->getTopicById((int) $requestDTO->getId());
 
-        // 发布话题已更新事件
+        // PublishTopicAlreadyUpdateEvent
         if ($topicEntity) {
             $topicUpdatedEvent = new TopicUpdatedEvent($topicEntity, $userAuthorization);
             $this->eventDispatcher->dispatch($topicUpdatedEvent);
@@ -231,20 +231,20 @@ class TopicAppService extends AbstractAppService
 
     public function renameTopic(DelightfulUserAuthorization $authorization, int $topicId, string $userQuestion, string $language = 'zh_CN'): array
     {
-        // 获取话题内容
+        // Get topic content
         $topicEntity = $this->workspaceDomainService->getTopicById($topicId);
         if (! $topicEntity) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
-        // 调用领域服务执行重命名（这一步与delightful-service进行绑定）
+        // Call domain service to execute rename(This step withdelightful-serviceBinding)
         try {
             $text = $this->delightfulChatMessageAppService->summarizeText($authorization, $userQuestion, $language);
-            // 更新话题名称
+            // UpdateTopicName
             $dataIsolation = $this->createDataIsolation($authorization);
             $this->topicDomainService->updateTopicName($dataIsolation, $topicId, $text);
 
-            // 获取更新后的话题实体并发布重命名事件
+            // Get updated topic entity and publish rename event
             $updatedTopicEntity = $this->topicDomainService->getTopicById($topicId);
             if ($updatedTopicEntity) {
                 $topicRenamedEvent = new TopicRenamedEvent($updatedTopicEntity, $authorization);
@@ -259,33 +259,33 @@ class TopicAppService extends AbstractAppService
     }
 
     /**
-     * 删除话题.
+     * DeleteTopic.
      *
-     * @param RequestContext $requestContext 请求上下文
-     * @param DeleteTopicRequestDTO $requestDTO 请求DTO
-     * @return DeleteTopicResultDTO 删除结果
-     * @throws BusinessException|Exception 如果用户无权限、话题不存在或任务正在运行
+     * @param RequestContext $requestContext Request context
+     * @param DeleteTopicRequestDTO $requestDTO RequestDTO
+     * @return DeleteTopicResultDTO Deletion result
+     * @throws BusinessException|Exception If user has no permission,Topicdoes not exist or task is running
      */
     public function deleteTopic(RequestContext $requestContext, DeleteTopicRequestDTO $requestDTO): DeleteTopicResultDTO
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 获取话题ID
+        // GetTopicID
         $topicId = $requestDTO->getId();
 
-        // 先获取话题实体用于事件发布
+        // First get topic entity for event publishing
         $topicEntity = $this->topicDomainService->getTopicById((int) $topicId);
 
-        // 调用领域服务执行删除
+        // Call domain service to execute deletion
         $result = $this->topicDomainService->deleteTopic($dataIsolation, (int) $topicId);
 
-        // 投递事件，停止服务
+        // Deliver event，Stop service
         if ($result) {
-            // 发布话题已删除事件
+            // PublishTopicAlreadyDeleteEvent
             if ($topicEntity) {
                 $topicDeletedEvent = new TopicDeletedEvent($topicEntity, $userAuthorization);
                 $this->eventDispatcher->dispatch($topicDeletedEvent);
@@ -296,27 +296,27 @@ class TopicAppService extends AbstractAppService
                 (int) $topicId,
                 $dataIsolation->getCurrentUserId(),
                 $dataIsolation->getCurrentOrganizationCode(),
-                '话题已被删除'
+                'Topic already deleted'
             );
             $publisher = new StopRunningTaskPublisher($event);
             $this->producer->produce($publisher);
         }
 
-        // 如果删除失败，抛出异常
+        // If deletion fails，Throw exception
         if (! $result) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'topic.delete_failed');
         }
 
-        // 返回删除结果
+        // ReturnDeletion result
         return DeleteTopicResultDTO::fromId((int) $topicId);
     }
 
     /**
-     * 获取最近更新时间超过指定时间的话题列表.
+     * Get topics with recent update time exceeding specified time.
      *
-     * @param string $timeThreshold 时间阈值，如果话题的更新时间早于此时间，则会被包含在结果中
-     * @param int $limit 返回结果的最大数量
-     * @return array<TopicEntity> 话题实体列表
+     * @param string $timeThreshold Time threshold, if topic update time is before this time, will be included in result
+     * @param int $limit Maximum number of results returned
+     * @return array<TopicEntity> Topic entity list
      */
     public function getTopicsExceedingUpdateTime(string $timeThreshold, int $limit = 100): array
     {
@@ -331,11 +331,11 @@ class TopicAppService extends AbstractAppService
     public function getTopicAttachmentsByAccessToken(GetTopicAttachmentsRequestDTO $requestDto): array
     {
         $token = $requestDto->getToken();
-        // 从缓存里获取数据
+        // Get data from cache
         if (! AccessTokenUtil::validate($token)) {
             ExceptionBuilder::throw(GenericErrorCode::AccessDenied, 'task_file.access_denied');
         }
-        // 从token 获取内容
+        // Get content from token
         $shareId = AccessTokenUtil::getShareId($token);
         $shareEntity = $this->resourceShareDomainService->getValidShareById($shareId);
         if (! $shareEntity) {
@@ -347,14 +347,14 @@ class TopicAppService extends AbstractAppService
         $organizationCode = AccessTokenUtil::getOrganizationCode($token);
         $requestDto->setTopicId($shareEntity->getResourceId());
 
-        // 创建DataIsolation
+        // CreateDataIsolation
         $dataIsolation = DataIsolation::simpleMake($organizationCode, '');
         return $this->getTopicAttachmentList($dataIsolation, $requestDto);
     }
 
     public function getTopicAttachmentList(DataIsolation $dataIsolation, GetTopicAttachmentsRequestDTO $requestDto): array
     {
-        // 判断话题是否存在
+        // DetermineTopicWhether exists
         $topicEntity = $this->topicDomainService->getTopicById((int) $requestDto->getTopicId());
         if (empty($topicEntity)) {
             return [];
@@ -365,7 +365,7 @@ class TopicAppService extends AbstractAppService
         $sandboxId = $topicEntity->getSandboxId();
         $workDir = $topicEntity->getWorkDir();
 
-        // 通过领域服务获取话题附件列表
+        // Get topic attachment list through domain service
         $result = $this->taskDomainService->getTaskAttachmentsByTopicId(
             (int) $requestDto->getTopicId(),
             $dataIsolation,
@@ -374,13 +374,13 @@ class TopicAppService extends AbstractAppService
             $requestDto->getFileType()
         );
 
-        // 处理文件 URL
+        // ProcessFile URL
         $list = [];
         $projectOrganizationCode = $projectEntity->getUserOrganizationCode();
 
-        // 遍历附件列表，使用TaskFileItemDTO处理
+        // Traverse attachment list, use TaskFileItemDTO to process
         foreach ($result['list'] as $entity) {
-            // 创建DTO
+            // CreateDTO
             $dto = new TaskFileItemDTO();
             $dto->fileId = (string) $entity->getFileId();
             $dto->taskId = (string) $entity->getTaskId();
@@ -401,7 +401,7 @@ class TopicAppService extends AbstractAppService
                 $dto->relativeFilePath = $fileKey; // If workDir not found, use original fileKey
             }
 
-            // 添加 file_url 字段
+            // Add file_url Field
             $fileKey = $entity->getFileKey();
             if (! empty($fileKey)) {
                 $fileLink = $this->fileAppService->getLink($projectOrganizationCode, $fileKey, StorageBucketType::SandBox);
@@ -417,7 +417,7 @@ class TopicAppService extends AbstractAppService
             $list[] = $dto->toArray();
         }
 
-        // 构建树状结构
+        // Build tree structure
         $tree = FileTreeUtil::assembleFilesTree($list);
 
         return [
@@ -428,40 +428,40 @@ class TopicAppService extends AbstractAppService
     }
 
     /**
-     * 获取话题的附件列表.(管理后台使用).
+     * GetTopicofAttachmentlist.(For admin backend use).
      *
-     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
-     * @param GetTopicAttachmentsRequestDTO $requestDto 话题附件请求DTO
-     * @return array 附件列表
+     * @param DelightfulUserAuthorization $userAuthorization User authorization information
+     * @param GetTopicAttachmentsRequestDTO $requestDto TopicAttachmentRequestDTO
+     * @return array Attachmentlist
      */
     public function getTopicAttachments(DelightfulUserAuthorization $userAuthorization, GetTopicAttachmentsRequestDTO $requestDto): array
     {
-        // 获取当前话题的创建者
+        // Get current topic creator
         $topicEntity = $this->topicDomainService->getTopicById((int) $requestDto->getTopicId());
         if ($topicEntity === null) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         return $this->getTopicAttachmentList($dataIsolation, $requestDto);
     }
 
     /**
-     * 获取用户话题消息列表.
+     * Get user topic message list.
      *
-     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
-     * @param int $topicId 话题ID
-     * @param int $page 页码
-     * @param int $pageSize 每页大小
-     * @param string $sortDirection 排序方向
-     * @return array 消息列表及总数
+     * @param DelightfulUserAuthorization $userAuthorization User authorization information
+     * @param int $topicId TopicID
+     * @param int $page Page number
+     * @param int $pageSize Page size
+     * @param string $sortDirection Sort direction
+     * @return array Message list and total count
      */
     public function getUserTopicMessage(DelightfulUserAuthorization $userAuthorization, int $topicId, int $page, int $pageSize, string $sortDirection): array
     {
-        // 获取消息列表
+        // Get message list
         $result = $this->taskDomainService->getMessagesByTopicId($topicId, $page, $pageSize, true, $sortDirection);
 
-        // 转换为响应格式
+        // Convert to response format
         $messages = [];
         foreach ($result['list'] as $message) {
             $messages[] = new MessageItemDTO($message->toArray());
@@ -474,21 +474,21 @@ class TopicAppService extends AbstractAppService
     }
 
     /**
-     * 获取用户话题附件 URL. (管理后台使用).
+     * Get user topic attachment URL. (For admin backend use).
      *
-     * @param string $topicId 话题 ID
-     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
-     * @param array $fileIds 文件ID列表
-     * @return array 包含附件 URL 的数组
+     * @param string $topicId Topic ID
+     * @param DelightfulUserAuthorization $userAuthorization User authorization information
+     * @param array $fileIds FileIDlist
+     * @return array Array containing attachment URLs
      */
     public function getTopicAttachmentUrl(DelightfulUserAuthorization $userAuthorization, string $topicId, array $fileIds, string $downloadMode): array
     {
         $result = [];
         foreach ($fileIds as $fileId) {
-            // 获取文件实体
+            // Get file entity
             $fileEntity = $this->taskDomainService->getTaskFile((int) $fileId);
             if (empty($fileEntity)) {
-                // 如果文件不存在，跳过
+                // If file does not exist, skip
                 continue;
             }
             $downloadNames = [];
@@ -498,7 +498,7 @@ class TopicAppService extends AbstractAppService
 
             $fileLink = $this->fileAppService->getLink($fileEntity->getOrganizationCode(), $fileEntity->getFileKey(), StorageBucketType::SandBox, $downloadNames);
             if (empty($fileLink)) {
-                // 如果获取链接失败，跳过
+                // If getting link fails, skip
                 continue;
             }
 
@@ -593,7 +593,7 @@ class TopicAppService extends AbstractAppService
      */
     public function duplicateChatAsync(RequestContext $requestContext, string $sourceTopicId, DuplicateTopicRequestDTO $requestDTO): array
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
         $this->logger->info('Starting topic duplication async (skeleton sync + message copy async)', [
@@ -603,24 +603,24 @@ class TopicAppService extends AbstractAppService
             'new_topic_name' => $requestDTO->getNewTopicName(),
         ]);
 
-        // 验证话题存在和权限
+        // VerifyTopicExistence and permissions
         $sourceTopicEntity = $this->topicDomainService->getTopicById((int) $sourceTopicId);
         if (! $sourceTopicEntity) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
-        // 判断话题是否是本人
+        // Determine if topic belongs to self
         if ($sourceTopicEntity->getUserId() !== $userAuthorization->getId()) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
         }
 
-        // === 同步部分：创建话题骨架 ===
+        // === Synchronization part:Create topicSkeleton ===
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 在事务中创建话题骨架
+        // In transactionCreate topicSkeleton
         Db::beginTransaction();
         try {
-            // 调用 Domain 层创建话题骨架（包含 IM 会话）
+            // Call domain layer to create topic skeleton (includes IM session)
             $duplicateResult = $this->topicDomainService->duplicateTopicSkeleton(
                 $dataIsolation,
                 $sourceTopicEntity,
@@ -630,7 +630,7 @@ class TopicAppService extends AbstractAppService
             $newTopicEntity = $duplicateResult['topic_entity'];
             $imConversationResult = $duplicateResult['im_conversation'];
 
-            // 提交事务
+            // Commit transaction
             Db::commit();
 
             $this->logger->info('Topic skeleton created successfully (sync)', [
@@ -646,55 +646,55 @@ class TopicAppService extends AbstractAppService
             throw $e;
         }
 
-        // 将话题实体转换为 DTO
+        // Convert topic entity to DTO
         $topicItemDTO = TopicItemDTO::fromEntity($newTopicEntity);
 
-        // 生成任务键
+        // Generate task key
         $taskKey = TopicDuplicateConstant::generateTaskKey($sourceTopicId, $userAuthorization->getId());
 
-        // 初始化异步任务
+        // Initialize async task
         $taskData = [
             'source_topic_id' => $sourceTopicId,
             'target_message_id' => $requestDTO->getTargetMessageId(),
             'new_topic_name' => $requestDTO->getNewTopicName(),
             'user_id' => $userAuthorization->getId(),
-            'new_topic_id' => $newTopicEntity->getId(), // 保存新话题ID
-            'im_conversation' => $imConversationResult, // 保存 IM 会话信息
+            'new_topic_id' => $newTopicEntity->getId(), // Save new topic ID
+            'im_conversation' => $imConversationResult, // Save IM session information
         ];
 
         $this->topicDuplicateStatusManager->initializeTask($taskKey, $userAuthorization->getId(), $taskData);
 
-        // 获取当前请求ID
+        // Get current request ID
         $requestId = CoContext::getRequestId() ?: (string) IdGenerator::getSnowId();
 
-        // === 异步部分：复制消息 ===
+        // === Async part: copy messages ===
         go(function () use ($sourceTopicEntity, $newTopicEntity, $requestDTO, $imConversationResult, $taskKey, $requestId) {
-            // 复制请求上下文
+            // Copy request context
             CoContext::setRequestId($requestId);
 
             try {
-                // 更新任务状态：开始复制消息
+                // Update task status: start copying messages
                 $this->topicDuplicateStatusManager->setTaskProgress($taskKey, 10, 'Starting to copy messages');
 
-                // 开始数据库事务
+                // Start database transaction
                 Db::beginTransaction();
                 try {
-                    // 执行消息复制逻辑
+                    // Execute message copy logic
                     $this->topicDomainService->copyTopicMessageFromOthers(
                         $sourceTopicEntity,
                         $newTopicEntity,
                         (int) $requestDTO->getTargetMessageId(),
                         $imConversationResult,
-                        // 进度回调函数
+                        // Progress callback function
                         function (string $status, int $progress, string $message) use ($taskKey) {
                             $this->topicDuplicateStatusManager->setTaskProgress($taskKey, $progress, $message);
                         }
                     );
 
-                    // 提交事务
+                    // Commit transaction
                     Db::commit();
 
-                    // 任务完成
+                    // Task complete
                     $this->topicDuplicateStatusManager->setTaskCompleted($taskKey, [
                         'topic_id' => $newTopicEntity->getId(),
                         'topic_name' => $newTopicEntity->getTopicName(),
@@ -708,12 +708,12 @@ class TopicAppService extends AbstractAppService
                         'new_topic_id' => $newTopicEntity->getId(),
                     ]);
                 } catch (Throwable $e) {
-                    // 回滚事务
+                    // Rollback transaction
                     Db::rollBack();
-                    throw $e; // 重新抛出异常，让外层catch处理
+                    throw $e; // Re-throw exception, let outer catch process
                 }
             } catch (Throwable $e) {
-                // 任务失败
+                // Task failed
                 $this->topicDuplicateStatusManager->setTaskFailed($taskKey, $e->getMessage());
 
                 $this->logger->error('Async topic message copy failed', [
@@ -728,26 +728,26 @@ class TopicAppService extends AbstractAppService
             }
         });
 
-        // 立即返回任务信息和新创建的话题
+        // Immediately return task information and newly created topic
         return [
             'task_id' => $taskKey,
             'status' => 'copying',
             'message' => 'Topic created, copying messages in background',
-            'topic' => $topicItemDTO->toArray(), // 新增：立即返回话题信息
+            'topic' => $topicItemDTO->toArray(), // New: immediately return topic information
         ];
     }
 
     /**
-     * 检查话题复制状态
+     * Check topic copy status
      *
-     * @param RequestContext $requestContext 请求上下文
-     * @param string $taskKey 任务键
-     * @return array 复制状态信息
-     * @throws BusinessException 如果参数无效或操作失败则抛出异常
+     * @param RequestContext $requestContext Request context
+     * @param string $taskKey Task key
+     * @return array Copy status information
+     * @throws BusinessException If parameter invalid or operation fails then throw exception
      */
     public function checkDuplicateChatStatus(RequestContext $requestContext, string $taskKey): array
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
         $this->logger->info('Checking topic duplication status', [
@@ -756,25 +756,25 @@ class TopicAppService extends AbstractAppService
         ]);
 
         try {
-            // 验证用户权限
+            // Verify user permissions
             if (! $this->topicDuplicateStatusManager->verifyUserPermission($taskKey, $userAuthorization->getId())) {
                 ExceptionBuilder::throw(BeAgentErrorCode::TASK_ACCESS_DENIED, 'Task access denied');
             }
 
-            // 获取任务状态
+            // Get task status
             $taskStatus = $this->topicDuplicateStatusManager->getTaskStatus($taskKey);
             if (! $taskStatus) {
                 ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'Task not found or expired');
             }
 
-            // 构建返回结果
+            // Build return result
             $result = [
                 'task_id' => $taskKey,
                 'status' => $taskStatus['status'], // running, completed, failed
                 'message' => $taskStatus['message'] ?? 'Topic duplication in progress',
             ];
 
-            // 添加进度信息
+            // Add progress information
             if (isset($taskStatus['progress'])) {
                 $result['progress'] = [
                     'percentage' => $taskStatus['progress']['percentage'],
@@ -782,13 +782,13 @@ class TopicAppService extends AbstractAppService
                 ];
             }
 
-            // 如果任务完成，返回结果信息
+            // If task complete, return result information
             if ($taskStatus['status'] === 'completed' && isset($taskStatus['result'])) {
                 $topicEntity = $this->topicDomainService->getTopicById($taskStatus['result']['topic_id']);
                 $result['result'] = TopicItemDTO::fromEntity($topicEntity)->toArray();
             }
 
-            // 如果任务失败，返回错误信息
+            // If task failed, return error information
             if ($taskStatus['status'] === 'failed' && isset($taskStatus['error'])) {
                 $result['error'] = $taskStatus['error'];
             }

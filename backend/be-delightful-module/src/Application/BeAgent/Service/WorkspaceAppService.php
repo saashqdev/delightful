@@ -83,22 +83,22 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 获取工作区列表.
+     * GetWorkspaceList.
      */
     public function getWorkspaceList(RequestContext $requestContext, WorkspaceListRequestDTO $requestDTO): WorkspaceListResponseDTO
     {
-        // 构建查询条件
+        // Build query conditions
         $conditions = $requestDTO->buildConditions();
 
-        // 如果没有指定用户ID且有用户授权信息，使用当前用户ID
+        // If no user specifiedIDand has user authorization information，Use current userID
         if (empty($conditions['user_id'])) {
             $conditions['user_id'] = $requestContext->getUserAuthorization()->getId();
         }
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
 
-        // 通过领域服务获取工作区列表
+        // Get workspace list through domain service
         $result = $this->workspaceDomainService->getWorkspacesByConditions(
             $conditions,
             $requestDTO->page,
@@ -108,7 +108,7 @@ class WorkspaceAppService extends AbstractAppService
             $dataIsolation
         );
 
-        // 设置默认值
+        // Set default values
         $result['auto_create'] = false;
 
         if (empty($result['list'])) {
@@ -122,7 +122,7 @@ class WorkspaceAppService extends AbstractAppService
             $result['auto_create'] = true;
         }
 
-        // 提取所有工作区ID
+        // Extract all Workspace IDs
         $workspaceIds = [];
         foreach ($result['list'] as $workspace) {
             if (is_array($workspace)) {
@@ -133,38 +133,38 @@ class WorkspaceAppService extends AbstractAppService
         }
         $workspaceIds = array_unique($workspaceIds);
 
-        // 批量获取工作区状态
+        // Batch get workspace status
         $currentUserId = $dataIsolation->getCurrentUserId();
         $workspaceStatusMap = $this->topicDomainService->calculateWorkspaceStatusBatch($workspaceIds, $currentUserId);
 
-        // 转换为响应DTO并传入状态映射
+        // Convert to responseDTOand pass status mapping
         return WorkspaceListResponseDTO::fromResult($result, $workspaceStatusMap);
     }
 
     /**
-     * 获取工作区详情.
+     * GetWorkspaceDetails.
      */
     public function getWorkspaceDetail(RequestContext $requestContext, int $workspaceId): WorkspaceItemDTO
     {
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
 
-        // 获取工作区详情
+        // GetWorkspaceDetails
         $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($workspaceId);
         if ($workspaceEntity === null) {
             ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
         }
 
-        // 验证工作区是否属于当前用户
+        // VerifyWorkspaceWhether belongs to current user
         if ($workspaceEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied');
         }
 
-        // 计算工作区状态
+        // CalculateWorkspaceStatus
         $workspaceStatusMap = $this->topicDomainService->calculateWorkspaceStatusBatch([$workspaceId]);
         $workspaceStatus = $workspaceStatusMap[$workspaceId] ?? null;
 
-        // 返回工作区详情DTO
+        // ReturnWorkspaceDetailsDTO
         return WorkspaceItemDTO::fromEntity($workspaceEntity, $workspaceStatus);
     }
 
@@ -226,14 +226,14 @@ class WorkspaceAppService extends AbstractAppService
                 return SaveWorkspaceResultDTO::fromId((int) $requestDTO->getWorkspaceId());
             }
 
-            // 提交事务
+            // Commit transaction
             Db::commit();
 
             // Create, use provided workspace name if available; otherwise use default name
             $result = $this->initUserWorkspace($dataIsolation, $requestDTO->getWorkspaceName());
             return SaveWorkspaceResultDTO::fromId($result['workspace']->getId());
         } catch (EventException $e) {
-            // 回滚事务
+            // Rollback transaction
             Db::rollBack();
             $this->logger->error(sprintf("Error creating new workspace event: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
             ExceptionBuilder::throw(BeAgentErrorCode::CREATE_TOPIC_FAILED, $e->getMessage());
@@ -245,14 +245,14 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 获取工作区下的话题列表.
+     * GetWorkspaceunderTopicList.
      */
     public function getWorkspaceTopics(RequestContext $requestContext, GetWorkspaceTopicsRequestDTO $dto): TopicListResponseDTO
     {
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
 
-        // 通过领域服务获取工作区话题列表
+        // Get workspace topic list through domain service
         $result = $this->workspaceDomainService->getWorkspaceTopics(
             [$dto->getWorkspaceId()],
             $dataIsolation,
@@ -263,28 +263,28 @@ class WorkspaceAppService extends AbstractAppService
             $dto->getOrderDirection()
         );
 
-        // 转换为响应 DTO
+        // Convert to response DTO
         return TopicListResponseDTO::fromResult($result);
     }
 
     /**
-     * 获取任务的附件列表.
+     * Get task attachment list.
      */
     public function getTaskAttachments(DelightfulUserAuthorization $userAuthorization, int $taskId, int $page = 1, int $pageSize = 10): array
     {
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 获取任务附件列表
+        // Get task attachment list
         $result = $this->workspaceDomainService->getTaskAttachments($taskId, $dataIsolation, $page, $pageSize);
 
-        // 处理文件 URL
+        // ProcessFile URL
         $list = [];
         $organizationCode = $userAuthorization->getOrganizationCode();
         $fileKeys = [];
-        // 遍历附件列表，使用TaskFileItemDTO处理
+        // Traverse attachmentList，UseTaskFileItemDTOProcess
         foreach ($result['list'] as $entity) {
-            // 创建DTO
+            // CreateDTO
             $dto = new TaskFileItemDTO();
             $dto->fileId = (string) $entity->getFileId();
             $dto->taskId = (string) $entity->getTaskId();
@@ -295,7 +295,7 @@ class WorkspaceAppService extends AbstractAppService
             $dto->fileSize = $entity->getFileSize();
             $dto->topicId = (string) $entity->getTopicId();
 
-            // 添加 file_url 字段
+            // Add file_url Field
             $fileKey = $entity->getFileKey();
             if (! empty($fileKey)) {
                 $fileLink = $this->fileAppService->getLink($organizationCode, $fileKey, StorageBucketType::SandBox);
@@ -307,7 +307,7 @@ class WorkspaceAppService extends AbstractAppService
             } else {
                 $dto->fileUrl = '';
             }
-            // 判断filekey是否重复，如果重复，则跳过
+            // DeterminefilekeyWhether duplicate，If duplicate，ThenSkip
             if (in_array($fileKey, $fileKeys)) {
                 continue;
             }
@@ -322,28 +322,28 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 删除工作区.
+     * DeleteWorkspace.
      *
-     * @param RequestContext $requestContext 请求上下文
-     * @param int $workspaceId 工作区ID
-     * @return bool 是否删除成功
-     * @throws BusinessException 如果用户无权限或工作区不存在则抛出异常
+     * @param RequestContext $requestContext Request context
+     * @param int $workspaceId WorkspaceID
+     * @return bool Whether deletion is successful
+     * @throws BusinessException If user has no permission or workspace does not exist then throw exception
      */
     public function deleteWorkspace(RequestContext $requestContext, int $workspaceId): bool
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 调用领域服务执行删除
+        // Call domain service to execute deletion
         Db::beginTransaction();
         try {
-            // 先获取工作区下的所有项目ID，用于删除长期记忆
+            // First get all project IDs under workspace, for deleting long-term memory
             $projectIds = $this->projectDomainService->getProjectIdsByWorkspaceId($dataIsolation, $workspaceId);
 
-            // 批量删除项目相关的长期记忆
+            // Batch delete project-related long-term memory
             if (! empty($projectIds)) {
                 $this->longTermMemoryDomainService->deleteMemoriesByProjectIds(
                     $dataIsolation->getCurrentOrganizationCode(),
@@ -353,28 +353,28 @@ class WorkspaceAppService extends AbstractAppService
                 );
             }
 
-            // 删除工作区
+            // DeleteWorkspace
             $this->workspaceDomainService->deleteWorkspace($dataIsolation, $workspaceId);
 
-            // 删除工作区下的项目
+            // Delete projects under workspace
             $this->projectDomainService->deleteProjectsByWorkspaceId($dataIsolation, $workspaceId);
 
-            // 删除工作的话题
+            // Delete workspace topics
             $this->topicDomainService->deleteTopicsByWorkspaceId($dataIsolation, $workspaceId);
 
-            // 投递消息，停止所有运行中的任务
+            // Deliver message，Stop all running tasks
             $event = new StopRunningTaskEvent(
                 DeleteDataType::WORKSPACE,
                 $workspaceId,
                 $dataIsolation->getCurrentUserId(),
                 $dataIsolation->getCurrentOrganizationCode(),
-                '工作区已被删除'
+                'Workspace already deleted'
             );
             $publisher = new StopRunningTaskPublisher($event);
             $this->producer->produce($publisher);
 
             $this->logger->info(sprintf(
-                '已投递停止任务消息，工作区ID: %d, 事件ID: %s',
+                'Stop task message already delivered，WorkspaceID: %d, EventID: %s',
                 $workspaceId,
                 $event->getEventId()
             ));
@@ -382,7 +382,7 @@ class WorkspaceAppService extends AbstractAppService
             Db::commit();
         } catch (Throwable $e) {
             Db::rollBack();
-            $this->logger->error('删除工作区失败：' . $e->getMessage());
+            $this->logger->error('DeleteWorkspaceFailed:' . $e->getMessage());
             throw $e;
         }
 
@@ -390,22 +390,22 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 获取任务详情.
+     * Get task details.
      *
-     * @param RequestContext $requestContext 请求上下文
-     * @param int $taskId 任务ID
-     * @return array 任务详情
-     * @throws BusinessException 如果用户无权限或任务不存在则抛出异常
+     * @param RequestContext $requestContext Request context
+     * @param int $taskId TaskID
+     * @return array TaskDetails
+     * @throws BusinessException If user has no permission or task does not exist then throw exception
      */
     public function getTaskDetail(RequestContext $requestContext, int $taskId): array
     {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 获取任务详情
+        // Get task details
         $taskEntity = $this->workspaceDomainService->getTaskById($taskId);
         if (! $taskEntity) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'task.not_found');
@@ -415,20 +415,20 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 获取话题的消息列表.
+     * GetTopicmessageList.
      *
-     * @param int $topicId 话题ID
-     * @param int $page 页码
-     * @param int $pageSize 每页大小
-     * @param string $sortDirection 排序方向，支持asc和desc
-     * @return array 消息列表和总数
+     * @param int $topicId TopicID
+     * @param int $page Page number
+     * @param int $pageSize Page size
+     * @param string $sortDirection Sort direction，Supportascanddesc
+     * @return array MessageListandTotal count
      */
     public function getMessagesByTopicId(int $topicId, int $page = 1, int $pageSize = 20, string $sortDirection = 'asc'): array
     {
-        // 获取消息列表
+        // GetMessageList
         $result = $this->taskDomainService->getMessagesByTopicId($topicId, $page, $pageSize, true, $sortDirection);
 
-        // 转换为响应格式
+        // Convert to responseFormat
         $messages = [];
         foreach ($result['list'] as $message) {
             $messages[] = new MessageItemDTO($message->toArray());
@@ -439,7 +439,7 @@ class WorkspaceAppService extends AbstractAppService
             'total' => $result['total'],
         ];
 
-        // 获取 topic 信息
+        // Get topic Information
         $topicEntity = $this->topicDomainService->getTopicWithDeleted($topicId);
         if ($topicEntity != null) {
             $data['project_id'] = (string) $topicEntity->getProjectId();
@@ -450,25 +450,25 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 设置工作区归档状态.
+     * SetWorkspaceArchive status.
      *
-     * @param RequestContext $requestContext 请求上下文
-     * @param array $workspaceIds 工作区ID数组
-     * @param int $isArchived 归档状态（0:未归档, 1:已归档）
-     * @return bool 是否操作成功
+     * @param RequestContext $requestContext Request context
+     * @param array $workspaceIds WorkspaceIDArray
+     * @param int $isArchived Archive status(0:Not archived, 1:Already archived)
+     * @return bool Whether operation is successful
      */
     public function setWorkspaceArchived(RequestContext $requestContext, array $workspaceIds, int $isArchived): bool
     {
-        // 创建数据隔离对象
+        // Create data isolation object
         $dataIsolation = $this->createDataIsolation($requestContext->getUserAuthorization());
         $currentUserId = $dataIsolation->getCurrentUserId();
 
-        // 参数验证
+        // Parameter verification
         if (empty($workspaceIds)) {
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'workspace.ids_required');
         }
 
-        // 验证归档状态值是否有效
+        // Verify if archive status value is valid
         if (! in_array($isArchived, [
             WorkspaceArchiveStatus::NotArchived->value,
             WorkspaceArchiveStatus::Archived->value,
@@ -476,24 +476,24 @@ class WorkspaceAppService extends AbstractAppService
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'workspace.invalid_archive_status');
         }
 
-        // 批量更新工作区归档状态
+        // Batch updateWorkspaceArchive status
         $success = true;
         foreach ($workspaceIds as $workspaceId) {
-            // 获取工作区详情，验证所有权
+            // Get workspace details, verify ownership
             $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail((int) $workspaceId);
 
-            // 如果工作区不存在，跳过
+            // IfWorkspaceDoes not exist，Skip
             if (! $workspaceEntity) {
                 $success = false;
                 continue;
             }
 
-            // 验证工作区是否属于当前用户
+            // VerifyWorkspaceWhether belongs to current user
             if ($workspaceEntity->getUserId() !== $currentUserId) {
                 ExceptionBuilder::throw(GenericErrorCode::AccessDenied, 'workspace.not_owner');
             }
 
-            // 调用领域服务设置归档状态
+            // Call domain service to set archive status
             $result = $this->workspaceDomainService->archiveWorkspace(
                 $requestContext,
                 (int) $workspaceId,
@@ -508,29 +508,29 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 获取文件URL列表.
+     * GetFileURLList.
      *
-     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
-     * @param array $fileIds 文件ID列表
-     * @param string $downloadMode 下载模式（download:下载, preview:预览）
-     * @param array $options 其他选项
-     * @return array 文件URL列表
+     * @param DelightfulUserAuthorization $userAuthorization User authorization information
+     * @param array $fileIds File ID list
+     * @param string $downloadMode Download mode (download: download, preview: preview)
+     * @param array $options Other options
+     * @return array FileURLList
      */
     public function getFileUrls(DelightfulUserAuthorization $userAuthorization, array $fileIds, string $downloadMode, array $options = []): array
     {
-        // 创建数据隔离对象
+        // Create data isolation object
         $organizationCode = $userAuthorization->getOrganizationCode();
         $result = [];
 
         foreach ($fileIds as $fileId) {
-            // 获取文件实体
+            // Get file entity
             $fileEntity = $this->taskDomainService->getTaskFile((int) $fileId);
             if (empty($fileEntity)) {
-                // 如果文件不存在，跳过
+                // IfFileDoes not exist，Skip
                 continue;
             }
 
-            // 验证文件是否属于当前用户
+            // VerifyFileWhether belongs to current user
             $projectEntity = $this->getAccessibleProject($fileEntity->getProjectId(), $userAuthorization->getId(), $organizationCode);
 
             $downloadNames = [];
@@ -539,11 +539,11 @@ class WorkspaceAppService extends AbstractAppService
             }
             $fileLink = $this->fileAppService->getLink($organizationCode, $fileEntity->getFileKey(), StorageBucketType::SandBox, $downloadNames, $options);
             if (empty($fileLink)) {
-                // 如果获取URL失败，跳过
+                // IfGetURLFailed，Skip
                 continue;
             }
 
-            // 只添加成功的结果
+            // Only add successful results
             $result[] = [
                 'file_id' => $fileId,
                 'url' => $fileLink->getUrl(),
@@ -563,22 +563,22 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 获取工作区信息通过话题ID集合.
+     * Get workspace information through topic ID collection.
      *
-     * @param array $topicIds 话题ID集合（字符串数组）
-     * @return array 以话题ID为键，工作区信息为值的关联数组
+     * @param array $topicIds Topic ID collection (string array)
+     * @return array Associative array with topic ID as key and workspace information as value
      */
     public function getWorkspaceInfoByTopicIds(array $topicIds): array
     {
-        // 转换字符串ID为整数
+        // Convert string ID to integer
         $intTopicIds = array_map('intval', $topicIds);
 
-        // 调用领域服务获取工作区信息
+        // Call domain service to get workspace information
         return $this->workspaceDomainService->getWorkspaceInfoByTopicIds($intTopicIds);
     }
 
     /**
-     * 注册转换后的PDF文件以供定时清理.
+     * Register converted PDF file for scheduled cleanup.
      */
     public function registerConvertedPdfsForCleanup(DelightfulUserAuthorization $userAuthorization, array $convertedFiles): void
     {
@@ -596,10 +596,10 @@ class WorkspaceAppService extends AbstractAppService
                 'organization_code' => $userAuthorization->getOrganizationCode(),
                 'file_key' => $file['oss_key'],
                 'file_name' => $file['filename'],
-                'file_size' => $file['size'] ?? 0, // 如果响应中没有size，默认为0
+                'file_size' => $file['size'] ?? 0, // If response does not have size, default is 0
                 'source_type' => 'pdf_conversion',
                 'source_id' => $file['batch_id'] ?? null,
-                'expire_after_seconds' => 7200, // 2 小时后过期
+                'expire_after_seconds' => 7200, // Expires after 2 hours
                 'bucket_type' => 'private',
             ];
         }
@@ -614,39 +614,39 @@ class WorkspaceAppService extends AbstractAppService
     }
 
     /**
-     * 初始化用户工作区.
+     * Initialize user workspace.
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param string $workspaceName 工作区名称，默认为"我的工作区"
-     * @return array 创建结果，包含workspace和topic实体对象，以及auto_create标志
-     * @throws BusinessException 如果创建失败则抛出异常
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param string $workspaceName Workspace name, default is "My Workspace"
+     * @return array Creation result, includes workspace and topic entity objects, and auto_create flag
+     * @throws BusinessException If creation failed then throw exception
      * @throws Throwable
      */
     private function initUserWorkspace(
         DataIsolation $dataIsolation,
         string $workspaceName = ''
     ): array {
-        $this->logger->info('开始初始化用户工作区');
+        $this->logger->info('Start initializing user workspace');
         Db::beginTransaction();
         try {
             // Step 1: Initialize Delightful Chat Conversation
             [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
-            $this->logger->info(sprintf('初始化超级麦吉, chatConversationId=%s, chatConversationTopicId=%s', $chatConversationId, $chatConversationTopicId));
+            $this->logger->info(sprintf('Initialize super Maggie, chatConversationId=%s, chatConversationTopicId=%s', $chatConversationId, $chatConversationTopicId));
 
             // Step 2: Create workspace
-            $this->logger->info('开始创建默认工作区');
+            $this->logger->info('StartCreateDefaultWorkspace');
             $workspaceEntity = $this->workspaceDomainService->createWorkspace(
                 $dataIsolation,
                 $chatConversationId,
                 $workspaceName
             );
-            $this->logger->info(sprintf('创建默认工作区成功, workspaceId=%s', $workspaceEntity->getId()));
+            $this->logger->info(sprintf('CreateDefaultWorkspaceSuccess, workspaceId=%s', $workspaceEntity->getId()));
             if (! $workspaceEntity->getId()) {
                 ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.create_workspace_failed');
             }
 
-            // 创建默认项目
-            $this->logger->info('开始创建默认项目');
+            // Create default project
+            $this->logger->info('Start creating default project');
             $projectEntity = $this->projectDomainService->createProject(
                 $workspaceEntity->getId(),
                 '',
@@ -657,12 +657,12 @@ class WorkspaceAppService extends AbstractAppService
                 null,
                 CreationSource::USER_CREATED->value
             );
-            $this->logger->info(sprintf('创建默认项目成功, projectId=%s', $projectEntity->getId()));
-            // 获取工作区目录
+            $this->logger->info(sprintf('Create default project success, projectId=%s', $projectEntity->getId()));
+            // Get workspace directory
             $workDir = WorkDirectoryUtil::getWorkDir($dataIsolation->getCurrentUserId(), $projectEntity->getId());
 
             // Step 4: Create default topic
-            $this->logger->info('开始创建默认话题');
+            $this->logger->info('StartCreateDefaultTopic');
             $topicEntity = $this->topicDomainService->createTopic(
                 $dataIsolation,
                 $workspaceEntity->getId(),
@@ -672,21 +672,21 @@ class WorkspaceAppService extends AbstractAppService
                 '',
                 $workDir
             );
-            $this->logger->info(sprintf('创建默认话题成功, topicId=%s', $topicEntity->getId()));
+            $this->logger->info(sprintf('CreateDefaultTopicSuccess, topicId=%s', $topicEntity->getId()));
 
             // Step 5: Update workspace current topic
             if ($topicEntity->getId()) {
-                // 设置工作区信息
+                // SetWorkspaceInformation
                 $workspaceEntity->setCurrentTopicId($topicEntity->getId());
                 $workspaceEntity->setCurrentProjectId($projectEntity->getId());
                 $this->workspaceDomainService->saveWorkspaceEntity($workspaceEntity);
-                $this->logger->info(sprintf('工作区%s已设置当前话题%s', $workspaceEntity->getId(), $topicEntity->getId()));
-                // 设置项目信息
+                $this->logger->info(sprintf('Workspace %s has set current topic %s', $workspaceEntity->getId(), $topicEntity->getId()));
+                // Set project information
                 $projectEntity->setCurrentTopicId($topicEntity->getId());
                 $projectEntity->setWorkspaceId($workspaceEntity->getId());
                 $projectEntity->setWorkDir($workDir);
                 $this->projectDomainService->saveProjectEntity($projectEntity);
-                $this->logger->info(sprintf('项目%s已设置当前话题%s', $projectEntity->getId(), $topicEntity->getId()));
+                $this->logger->info(sprintf('Project %s has set current topic %s', $projectEntity->getId(), $topicEntity->getId()));
             }
             Db::commit();
 

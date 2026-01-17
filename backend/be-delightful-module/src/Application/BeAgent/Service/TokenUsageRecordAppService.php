@@ -15,7 +15,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * Token使用记录应用服务.
+ * TokenToken usage record application service.
  */
 class TokenUsageRecordAppService
 {

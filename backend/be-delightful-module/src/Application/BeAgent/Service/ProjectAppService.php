@@ -68,7 +68,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * 项目应用服务
+ * Project Application Service
  */
 class ProjectAppService extends AbstractAppService
 {
@@ -93,24 +93,24 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 创建项目.
+     * Create project.
      */
     public function createProject(RequestContext $requestContext, CreateProjectRequestDTO $requestDTO): array
     {
-        $this->logger->info('开始初始化用户项目');
+        $this->logger->info('Begin initializing user project');
         // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
 
         // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 检查话题是否存在
+        // Check if topic exists
         $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($requestDTO->getWorkspaceId());
         if (empty($workspaceEntity)) {
             ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
         }
 
-        // 如果指定了工作目录，需要从工作目录里提取项目id
+        // If work directory is specified, extract project id from work directory
         $projectId = '';
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($dataIsolation->getCurrentOrganizationCode());
         if (! empty($requestDTO->getWorkDir()) && WorkDirectoryUtil::isValidWorkDirectory($fullPrefix, $requestDTO->getWorkDir())) {
@@ -119,8 +119,8 @@ class ProjectAppService extends AbstractAppService
 
         Db::beginTransaction();
         try {
-            // 创建默认项目
-            $this->logger->info('创建默认项目');
+            // Create default project
+            $this->logger->info('Create default project');
             $projectEntity = $this->projectDomainService->createProject(
                 $workspaceEntity->getId(),
                 $requestDTO->getProjectName(),
@@ -130,16 +130,16 @@ class ProjectAppService extends AbstractAppService
                 '',
                 $requestDTO->getProjectMode() ?: null
             );
-            $this->logger->info(sprintf('创建默认项目, projectId=%s', $projectEntity->getId()));
-            // 获取项目目录
+            $this->logger->info(sprintf('Create default project, projectId=%s', $projectEntity->getId()));
+            // Get project directory
             $workDir = WorkDirectoryUtil::getWorkDir($dataIsolation->getCurrentUserId(), $projectEntity->getId());
 
             // Initialize Delightful Chat Conversation
             [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
-            // 创建会话
+            // Create conversation
             // Step 4: Create default topic
-            $this->logger->info('开始创建默认话题');
+            $this->logger->info('Begin creating default topic');
             $topicEntity = $this->topicDomainService->createTopic(
                 $dataIsolation,
                 $workspaceEntity->getId(),
@@ -149,22 +149,22 @@ class ProjectAppService extends AbstractAppService
                 '',
                 $workDir
             );
-            $this->logger->info(sprintf('创建默认话题成功, topicId=%s', $topicEntity->getId()));
+            $this->logger->info(sprintf('Create default topic successful, topicId=%s', $topicEntity->getId()));
 
-            // 设置工作区信息
+            // Set workspace information
             $workspaceEntity->setCurrentTopicId($topicEntity->getId());
             $workspaceEntity->setCurrentProjectId($projectEntity->getId());
             $this->workspaceDomainService->saveWorkspaceEntity($workspaceEntity);
-            $this->logger->info(sprintf('工作区%s已设置当前话题%s', $workspaceEntity->getId(), $topicEntity->getId()));
+            $this->logger->info(sprintf('Workspace %s has set current topic %s', $workspaceEntity->getId(), $topicEntity->getId()));
 
-            // 设置项目信息
+            // Set project information
             $projectEntity->setCurrentTopicId($topicEntity->getId());
             $projectEntity->setWorkspaceId($workspaceEntity->getId());
             $projectEntity->setWorkDir($workDir);
             $this->projectDomainService->saveProjectEntity($projectEntity);
-            $this->logger->info(sprintf('项目%s已设置当前话题%s', $projectEntity->getId(), $topicEntity->getId()));
+            $this->logger->info(sprintf('Project %s has set current topic %s', $projectEntity->getId(), $topicEntity->getId()));
 
-            // 如果附件不为空，且附件是未绑定的状态，则保存附件， 并初始化目录
+            // If attachments are not empty and attachments are unbound state, save attachments and initialize directories
             if ($requestDTO->getFiles()) {
                 $this->taskFileDomainService->bindProjectFiles(
                     $dataIsolation,
@@ -173,7 +173,7 @@ class ProjectAppService extends AbstractAppService
                     $projectEntity->getWorkDir()
                 );
             } else {
-                // 如果没有附件，就只初始化项目根目录文件
+                // If no attachments, only initialize project root directory files
                 $this->taskFileDomainService->findOrCreateProjectRootDirectory(
                     projectId: $projectEntity->getId(),
                     workDir: $projectEntity->getWorkDir(),
@@ -183,7 +183,7 @@ class ProjectAppService extends AbstractAppService
                 );
             }
 
-            // 初始化项目成员和设置
+            // Initialize project members and settings
             $this->projectMemberDomainService->initializeProjectMemberAndSettings(
                 $dataIsolation->getCurrentUserId(),
                 $projectEntity->getId(),
@@ -193,7 +193,7 @@ class ProjectAppService extends AbstractAppService
 
             Db::commit();
 
-            // 发布项目已创建事件
+            // Publish project created event
             $userAuthorization = $requestContext->getUserAuthorization();
             $projectCreatedEvent = new ProjectCreatedEvent($projectEntity, $userAuthorization);
             $this->eventDispatcher->dispatch($projectCreatedEvent);
@@ -207,7 +207,7 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 更新项目.
+     * Update project.
      */
     public function updateProject(RequestContext $requestContext, UpdateProjectRequestDTO $requestDTO): array
     {
@@ -217,7 +217,7 @@ class ProjectAppService extends AbstractAppService
         // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 获取项目信息
+        // Get project information
         $projectEntity = $this->projectDomainService->getProject((int) $requestDTO->getId(), $dataIsolation->getCurrentUserId());
 
         if (! is_null($requestDTO->getProjectName())) {
@@ -227,7 +227,7 @@ class ProjectAppService extends AbstractAppService
             $projectEntity->setProjectDescription($requestDTO->getProjectDescription());
         }
         if (! is_null($requestDTO->getWorkspaceId())) {
-            // 检查话题是否存在
+            // Check if topic exists
             $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($requestDTO->getWorkspaceId());
             if (empty($workspaceEntity)) {
                 ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
@@ -243,7 +243,7 @@ class ProjectAppService extends AbstractAppService
 
         $this->projectDomainService->saveProjectEntity($projectEntity);
 
-        // 发布项目已更新事件
+        // Publish project updated event
         $userAuthorization = $requestContext->getUserAuthorization();
         $projectUpdatedEvent = new ProjectUpdatedEvent($projectEntity, $userAuthorization);
         $this->eventDispatcher->dispatch($projectUpdatedEvent);
@@ -252,7 +252,7 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 删除项目.
+     * Delete project.
      */
     #[Transactional]
     public function deleteProject(RequestContext $requestContext, int $projectId): bool
@@ -263,28 +263,28 @@ class ProjectAppService extends AbstractAppService
         // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 先获取项目实体用于事件发布
+        // First get project entity for event dispatch
         $projectEntity = $this->projectDomainService->getProject($projectId, $dataIsolation->getCurrentUserId());
 
         $result = Db::transaction(function () use ($projectId, $dataIsolation) {
-            // 删除项目
+            // Delete project
             $result = $this->projectDomainService->deleteProject($projectId, $dataIsolation->getCurrentUserId());
 
-            // 删除项目协作关系
+            // Delete project collaboration relationships
             $this->projectMemberDomainService->deleteByProjectId($projectId);
             return $result;
         });
 
         if ($result) {
-            // 删除项目相关的长期记忆
+            // Delete long-term memory related to project
             $this->longTermMemoryDomainService->deleteMemoriesByProjectIds(
                 $dataIsolation->getCurrentOrganizationCode(),
-                AgentConstant::BE_DELIGHTFUL_CODE, // app_id 固定为 be-delightful
+                AgentConstant::BE_DELIGHTFUL_CODE, // app_id fixed as be-delightful
                 $dataIsolation->getCurrentUserId(),
                 [(string) $projectId]
             );
 
-            // 发布项目已删除事件
+            // Publish project deleted event
             $projectDeletedEvent = new ProjectDeletedEvent($projectEntity, $userAuthorization);
             $this->eventDispatcher->dispatch($projectDeletedEvent);
 
@@ -294,13 +294,13 @@ class ProjectAppService extends AbstractAppService
                 $projectId,
                 $dataIsolation->getCurrentUserId(),
                 $dataIsolation->getCurrentOrganizationCode(),
-                '项目已被删除'
+                'Project has been deleted'
             );
             $publisher = new StopRunningTaskPublisher($event);
             $this->producer->produce($publisher);
 
             $this->logger->info(sprintf(
-                '已投递停止任务消息，项目ID: %d, 事件ID: %s',
+                'Stop task message delivered, project ID: %d, event ID: %s',
                 $projectId,
                 $event->getEventId()
             ));
@@ -310,7 +310,7 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目详情.
+     * Get project details.
      */
     public function getProjectInfo(RequestContext $requestContext, int $projectId): ProjectEntity
     {
@@ -318,7 +318,7 @@ class ProjectAppService extends AbstractAppService
 
         $project = $this->getAccessibleProject($projectId, $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 如果当前组织未付费套餐，则禁止项目协作
+        // If current organization has no paid plan, disable project collaboration
         if (! $this->packageFilterService->isPaidSubscription($project->getUserOrganizationCode())) {
             $project->setIsCollaborationEnabled(false);
         }
@@ -327,7 +327,7 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目详情.
+     * Get project details.
      */
     public function getProject(RequestContext $requestContext, int $projectId): ProjectEntity
     {
@@ -336,7 +336,7 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目详情.
+     * Get project details.
      */
     public function getProjectNotUserId(int $projectId): ?ProjectEntity
     {
@@ -349,7 +349,7 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目列表（带分页）.
+     * Get project list (with pagination).
      */
     public function getProjectList(RequestContext $requestContext, GetProjectListRequestDTO $requestDTO): array
     {
@@ -380,28 +380,28 @@ class ProjectAppService extends AbstractAppService
             'desc'
         );
 
-        // 提取所有项目ID和工作区ID
+        // Extract all project IDs and workspace IDs
         $projectIds = array_unique(array_map(fn ($project) => $project->getId(), $result['list'] ?? []));
         $workspaceIds = array_unique(array_map(fn ($project) => $project->getWorkspaceId(), $result['list'] ?? []));
 
-        // 批量获取项目状态
+        // Batch get project status
         $projectStatusMap = $this->topicDomainService->calculateProjectStatusBatch($projectIds, $dataIsolation->getCurrentUserId());
 
-        // 批量获取工作区名称
+        // Batch get workspace names
         $workspaceNameMap = $this->workspaceDomainService->getWorkspaceNamesBatch($workspaceIds);
 
-        // 批量获取项目成员数量，判断是否存在协作成员
+        // Batch get project member count, determine if there are collaboration members
         $projectMemberCounts = $this->projectMemberDomainService->getProjectMembersCounts($projectIds);
         $projectIdsWithMember = array_keys(array_filter($projectMemberCounts, fn ($count) => $count > 0));
 
-        // 创建响应DTO并传入项目状态映射和工作区名称映射
+        // Create response DTO and pass project status map and workspace name map
         $listResponseDTO = ProjectListResponseDTO::fromResult($result, $workspaceNameMap, $projectIdsWithMember, $projectStatusMap);
 
         return $listResponseDTO->toArray();
     }
 
     /**
-     * 获取项目下的话题列表.
+     * Get topic list under project.
      */
     public function getProjectTopics(RequestContext $requestContext, int $projectId, int $page = 1, int $pageSize = 10): array
     {
@@ -411,10 +411,10 @@ class ProjectAppService extends AbstractAppService
         // Create data isolation object
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 验证项目权限
+        // Verify project access rights
         $this->getAccessibleProject($projectId, $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 通过话题领域服务获取项目下的话题列表
+        // Get project topic list through topic domain service
         $result = $this->topicDomainService->getProjectTopicsWithPagination(
             $projectId,
             $dataIsolation->getCurrentUserId(),
@@ -422,7 +422,7 @@ class ProjectAppService extends AbstractAppService
             $pageSize
         );
 
-        // 转换为 TopicItemDTO
+        // Convert to TopicItemDTO
         $topicDTOs = [];
         foreach ($result['list'] as $topic) {
             $topicDTOs[] = TopicItemDTO::fromEntity($topic)->toArray();
@@ -440,7 +440,7 @@ class ProjectAppService extends AbstractAppService
 
         //        $projectEntity = $this->projectDomainService->getProject($projectId, $userAuthorization->getId());
 
-        // 通过领域服务获取话题附件列表
+        // Get topic attachment list through domain service
         //        $result = $this->taskDomainService->getTaskAttachmentsByTopicId(
         //            (int) $projectEntity->getCurrentTopicId(),
         //            $dataIsolation,
@@ -451,7 +451,7 @@ class ProjectAppService extends AbstractAppService
         //        $lastUpdatedAt = $this->taskFileDomainService->getLatestUpdatedByProjectId($projectId);
         //        $topicEntity = $this->topicDomainService->getTopicById($projectEntity->getCurrentTopicId());
         //        $taskEntity = $this->taskDomainService->getTaskBySandboxId($topicEntity->getSandboxId());
-        //        # #检测git version 跟database 的files表是否匹配
+        //        # #Check if git version matches database files table
         //        $result = $this->workspaceDomainService->diffFileListAndVersionFile($result, $projectId, $dataIsolation->getCurrentOrganizationCode(), (string) $taskEntity->getId(), $topicEntity->getSandboxId());
         //        if ($result) {
         //            $lastUpdatedAt = date('Y-m-d H:i:s');
@@ -465,41 +465,41 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目附件列表（登录用户模式）.
+     * Get project attachment list (logged-in user mode).
      */
     public function getProjectAttachments(RequestContext $requestContext, GetProjectAttachmentsRequestDTO $requestDTO): array
     {
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 验证项目存在性和所有权
+        // Verify project existence and ownership
         $projectEntity = $this->getAccessibleProject((int) $requestDTO->getProjectId(), $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 创建基于用户的数据隔离
+        // Create user-based data isolation
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 获取附件列表（传入workDir用于相对路径计算）
+        // Get attachment list (pass workDir for relative path calculation)
         return $this->getProjectAttachmentList($dataIsolation, $requestDTO, $projectEntity->getWorkDir() ?? '');
     }
 
     /**
-     * 获取项目附件列表 V2（登录用户模式，不返回树状结构，支持时间过滤）.
+     * Get project attachment list V2 (logged-in user mode, no tree structure, supports time filtering).
      */
     public function getProjectAttachmentsV2(RequestContext $requestContext, GetProjectAttachmentsV2RequestDTO $requestDTO): array
     {
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 验证项目存在性和所有权
+        // Verify project existence and ownership
         $projectEntity = $this->getAccessibleProject((int) $requestDTO->getProjectId(), $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 创建基于用户的数据隔离
+        // Create user-based data isolation
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // 获取附件列表，不返回树状结构，不使用 storage_type 过滤
+        // Get attachment list, no tree structure, no storage_type filtering
         return $this->getProjectAttachmentListV2($dataIsolation, $requestDTO, $projectEntity->getWorkDir() ?? '');
     }
 
     /**
-     * 审查页面获取的项目附件列表.
+     * Get project attachment list from audit page.
      */
     public function getProjectAttachmentsFromAudit(RequestContext $requestContext, GetProjectAttachmentsRequestDTO $requestDTO): array
     {
@@ -507,20 +507,20 @@ class ProjectAppService extends AbstractAppService
 
         $projectEntity = $this->projectDomainService->getProjectNotUserId((int) $requestDTO->getProjectId());
 
-        // 创建基于用户的数据隔离
+        // Create user-based data isolation
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
         return $this->getProjectAttachmentList($dataIsolation, $requestDTO, $projectEntity->getWorkDir() ?? '');
     }
 
     /**
-     * 通过访问令牌获取项目附件列表.
+     * Get project attachment list through access token.
      */
     public function getProjectAttachmentsByAccessToken(GetProjectAttachmentsRequestDTO $requestDto): array
     {
         $token = $requestDto->getToken();
 
-        // 从缓存里获取数据
+        // Get data from cache
         if (! AccessTokenUtil::validate($token)) {
             ExceptionBuilder::throw(ShareErrorCode::PARAMETER_CHECK_FAILURE, 'share.parameter_check_failure');
         }
@@ -531,7 +531,7 @@ class ProjectAppService extends AbstractAppService
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_NOT_FOUND, 'share.resource_not_found');
         }
 
-        // 由于前端当前的分享话题也会获取项目列表的接口，所以这里需要兼容分享类型是话题的情况，否则直接处理 ResourceType::Project 即可
+        // Since the frontend's current topic sharing also obtains the project list interface, we need to handle the case where the share type is a topic, otherwise directly handle ResourceType::Project
         $projectId = '';
         $workDir = '';
         switch ($shareEntity->getResourceType()) {
@@ -557,21 +557,21 @@ class ProjectAppService extends AbstractAppService
 
         $requestDto->setProjectId($projectId);
         $organizationCode = AccessTokenUtil::getOrganizationCode($token);
-        // 创建DataIsolation
+        // Create DataIsolation
         $dataIsolation = DataIsolation::simpleMake($organizationCode, '');
 
-        // 令牌模式不需要workDir处理，传空字符串
+        // Token mode does not require workDir processing, pass empty string
         return $this->getProjectAttachmentList($dataIsolation, $requestDto, $workDir);
     }
 
     /**
-     * 通过访问令牌获取项目附件列表 V2（不返回树状结构）.
+     * Get project attachment list through access token V2 (no tree structure).
      */
     public function getProjectAttachmentsByAccessTokenV2(GetProjectAttachmentsV2RequestDTO $requestDto): array
     {
         $token = $requestDto->getToken();
 
-        // 从缓存里获取数据
+        // Get data from cache
         if (! AccessTokenUtil::validate($token)) {
             ExceptionBuilder::throw(ShareErrorCode::PARAMETER_CHECK_FAILURE, 'share.parameter_check_failure');
         }
@@ -582,7 +582,7 @@ class ProjectAppService extends AbstractAppService
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_NOT_FOUND, 'share.resource_not_found');
         }
 
-        // 由于前端当前的分享话题也会获取项目列表的接口，所以这里需要兼容分享类型是话题的情况，否则直接处理 ResourceType::Project 即可
+        // Since the frontend's current topic sharing also obtains the project list interface, we need to handle the case where the share type is a topic, otherwise directly handle ResourceType::Project
         $projectId = '';
         $workDir = '';
         switch ($shareEntity->getResourceType()) {
@@ -608,10 +608,10 @@ class ProjectAppService extends AbstractAppService
 
         $requestDto->setProjectId($projectId);
         $organizationCode = AccessTokenUtil::getOrganizationCode($token);
-        // 创建DataIsolation
+        // Create DataIsolation
         $dataIsolation = DataIsolation::simpleMake($organizationCode, '');
 
-        // 令牌模式不需要workDir处理，传空字符串，V2 不返回树状结构
+        // Token mode does not require workDir processing, pass empty string, V2 does not return tree structure
         return $this->getProjectAttachmentListV2($dataIsolation, $requestDto, $workDir);
     }
 
@@ -699,14 +699,14 @@ class ProjectAppService extends AbstractAppService
                 $forkProjectRecordEntity->getId()
             ));
 
-            $this->logger->info(sprintf('创建默认项目, projectId=%s', $forkProjectEntity->getId()));
+            $this->logger->info(sprintf('Create default project, projectId=%s', $forkProjectEntity->getId()));
             $workDir = WorkDirectoryUtil::getWorkDir($dataIsolation->getCurrentUserId(), $forkProjectEntity->getId());
 
             // Initialize Delightful Chat Conversation
             [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
             // Step 4: Create default topic
-            $this->logger->info('开始创建默认话题');
+            $this->logger->info('Begin creating default topic');
             $topicEntity = $this->topicDomainService->createTopic(
                 $dataIsolation,
                 $workspaceEntity->getId(),
@@ -716,19 +716,19 @@ class ProjectAppService extends AbstractAppService
                 '',
                 $workDir
             );
-            $this->logger->info(sprintf('创建默认话题成功, topicId=%s', $topicEntity->getId()));
+            $this->logger->info(sprintf('Create default topic successful, topicId=%s', $topicEntity->getId()));
 
-            // 设置工作区信息
+            // Set workspace information
             $workspaceEntity->setCurrentTopicId($topicEntity->getId());
             $workspaceEntity->setCurrentProjectId($forkProjectEntity->getId());
             $this->workspaceDomainService->saveWorkspaceEntity($workspaceEntity);
-            $this->logger->info(sprintf('工作区%s已设置当前话题%s', $workspaceEntity->getId(), $topicEntity->getId()));
+            $this->logger->info(sprintf('Workspace %s has set current topic %s', $workspaceEntity->getId(), $topicEntity->getId()));
 
             $forkProjectEntity->setCurrentTopicId($topicEntity->getId());
             $forkProjectEntity->setWorkspaceId($workspaceEntity->getId());
             $forkProjectEntity->setWorkDir($workDir);
             $this->projectDomainService->saveProjectEntity($forkProjectEntity);
-            $this->logger->info(sprintf('项目%s已设置当前话题%s', $forkProjectEntity->getId(), $topicEntity->getId()));
+            $this->logger->info(sprintf('Project %s has set current topic %s', $forkProjectEntity->getId(), $topicEntity->getId()));
 
             // Publish fork event for file migration
             $event = new ProjectForkEvent(
@@ -866,11 +866,11 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目附件列表的核心逻辑.
+     * Get core logic of project attachment list.
      */
     public function getProjectAttachmentList(DataIsolation $dataIsolation, GetProjectAttachmentsRequestDTO $requestDTO, string $workDir = ''): array
     {
-        // 通过任务领域服务获取项目下的附件列表
+        // Get project attachment list through task domain service
         $result = $this->taskDomainService->getTaskAttachmentsByProjectId(
             (int) $requestDTO->getProjectId(),
             $dataIsolation,
@@ -880,15 +880,15 @@ class ProjectAppService extends AbstractAppService
             StorageType::WORKSPACE->value,
         );
 
-        // 处理文件 URL
+        // Process file URL
         $list = [];
         $fileKeys = [];
-        // 遍历附件列表，使用TaskFileItemDTO处理
+        // Traverse attachment list, process using TaskFileItemDTO
         foreach ($result['list'] as $entity) {
             /**
              * @var TaskFileEntity $entity
              */
-            // 创建DTO
+            // Create DTO
             $dto = new TaskFileItemDTO();
             $dto->fileId = (string) $entity->getFileId();
             $dto->taskId = (string) $entity->getTaskId();
@@ -903,17 +903,17 @@ class ProjectAppService extends AbstractAppService
             $dto->relativeFilePath = WorkDirectoryUtil::getRelativeFilePath($entity->getFileKey(), $workDir);
             $dto->isDirectory = $entity->getIsDirectory();
             $dto->metadata = FileMetadataUtil::getMetadataObject($entity->getMetadata());
-            // 添加 project_id 字段
+            // Add project_id field
             $dto->projectId = (string) $entity->getProjectId();
-            // 设置排序字段
+            // Set sort field
             $dto->sort = $entity->getSort();
             $dto->fileUrl = '';
             $dto->parentId = (string) $entity->getParentId();
             $dto->source = $entity->getSource();
-            // 添加 file_url 字段
+            // Add file_url field
             $fileKey = $entity->getFileKey();
-            // 判断file key是否重复，如果重复，则跳过
-            // 如果根目录，也跳过
+            // Check if file key is duplicate, if duplicate skip
+            // If root directory, also skip
             if (in_array($fileKey, $fileKeys) || empty($entity->getParentId())) {
                 continue;
             }
@@ -921,7 +921,7 @@ class ProjectAppService extends AbstractAppService
             $list[] = $dto->toArray();
         }
 
-        // 构建树状结构（登录用户模式特有功能）
+        // Build tree structure (logged-in user mode specific feature)
         $tree = FileTreeUtil::assembleFilesTreeByParentId($list);
 
         if ($result['total'] > 3000) {
@@ -936,30 +936,30 @@ class ProjectAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目附件列表的核心逻辑 V2（不返回树状结构，支持数据库级别的更新时间过滤）.
+     * Get core logic of project attachment list V2 (no tree structure, supports database-level update time filtering).
      */
     public function getProjectAttachmentListV2(DataIsolation $dataIsolation, GetProjectAttachmentsV2RequestDTO $requestDTO, string $workDir = ''): array
     {
-        // 通过任务领域服务获取项目下的附件列表，使用数据库级别的时间过滤
+        // Get attachment list under project through task domain service, use database-level time filtering
         $result = $this->taskDomainService->getTaskAttachmentsByProjectId(
             (int) $requestDTO->getProjectId(),
             $dataIsolation,
             $requestDTO->getPage(),
             $requestDTO->getPageSize(),
             $requestDTO->getFileType(),
-            StorageType::WORKSPACE->value,  // V2 固定使用 workspace 存储类型
-            $requestDTO->getUpdatedAfter()  // 数据库级别的时间过滤
+            StorageType::WORKSPACE->value,  // V2 fixed to use workspace storage type
+            $requestDTO->getUpdatedAfter()  // database-level time filtering
         );
 
-        // 处理文件 URL
+        // Process file URL
         $list = [];
         $fileKeys = [];
-        // 遍历附件列表，使用TaskFileItemDTO处理
+        // Traverse attachment list, process using TaskFileItemDTO
         foreach ($result['list'] as $entity) {
             /**
              * @var TaskFileEntity $entity
              */
-            // 创建DTO
+            // Create DTO
             $dto = new TaskFileItemDTO();
             $dto->fileId = (string) $entity->getFileId();
             $dto->taskId = (string) $entity->getTaskId();
@@ -974,17 +974,17 @@ class ProjectAppService extends AbstractAppService
             $dto->relativeFilePath = WorkDirectoryUtil::getRelativeFilePath($entity->getFileKey(), $workDir);
             $dto->isDirectory = $entity->getIsDirectory();
             $dto->metadata = FileMetadataUtil::getMetadataObject($entity->getMetadata());
-            // 添加 project_id 字段
+            // Add project_id field
             $dto->projectId = (string) $entity->getProjectId();
-            // 设置排序字段
+            // Set sort field
             $dto->sort = $entity->getSort();
             $dto->fileUrl = '';
             $dto->parentId = (string) $entity->getParentId();
             $dto->source = $entity->getSource();
-            // 添加 file_url 字段
+            // Add file_url field
             $fileKey = $entity->getFileKey();
-            // 判断file key是否重复，如果重复，则跳过
-            // 如果根目录，也跳过
+            // Check if file key is duplicate, if duplicate skip
+            // If root directory, also skip
             if (in_array($fileKey, $fileKeys) || empty($entity->getParentId())) {
                 continue;
             }

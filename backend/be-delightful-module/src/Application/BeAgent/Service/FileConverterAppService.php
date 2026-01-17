@@ -207,7 +207,7 @@ class FileConverterAppService extends AbstractAppService
         $convertType = $requestDTO->convert_type;
         $projectId = (string) $projectEntity->getId();
 
-        // 校验：不支持 md 转 ppt
+        // Verify：Not supported md Convert ppt
         if (strtolower($convertType) === 'ppt') {
             foreach ($validFiles as $fileEntity) {
                 $ext = strtolower($fileEntity->getFileExtension());
@@ -243,7 +243,7 @@ class FileConverterAppService extends AbstractAppService
             $this->sandboxGateway->setUserContext($userId, $userAuthorization->getOrganizationCode());
             $actualSandboxId = $this->sandboxGateway->ensureSandboxAvailable($sandboxId, $projectId, $fullWorkdir);
 
-            // 从第一个文件中获取 topic_id
+            // Get from first file topic_id
             $topicId = ! empty($validFiles) && $validFiles[0]->getTopicId() > 0
                 ? (string) $validFiles[0]->getTopicId()
                 : '';
@@ -446,11 +446,11 @@ class FileConverterAppService extends AbstractAppService
      */
     private function buildCompletedResponse(FileConverterResponse $response, string $taskKey, DelightfulUserAuthorization $userAuthorization): FileConvertStatusResponseDTO
     {
-        // 优先查找 zip；若不存在，则回退到 pdf/ppt/pptx 等单文件类型
+        // Priority search zip；If does not exist，fallback to pdf/ppt/pptx single file type
         $targetOssKey = null;
         $preferredTypes = ['zip', 'pdf', 'ppt', 'pptx'];
 
-        // 先尝试优先类型顺序匹配
+        // First try priority type order matching
         foreach ($preferredTypes as $preferredType) {
             foreach ($response->getConvertedFiles() as $file) {
                 if (strtolower($file->type) === $preferredType) {
@@ -460,7 +460,7 @@ class FileConverterAppService extends AbstractAppService
             }
         }
 
-        // 如果仍未找到，则回退到第一个可用文件
+        // If still not found，fallback to第一个可用文件
         if ($targetOssKey === null) {
             foreach ($response->getConvertedFiles() as $file) {
                 if (! empty($file->ossKey)) {
@@ -740,7 +740,7 @@ class FileConverterAppService extends AbstractAppService
     }
 
     /**
-     * 注册转换后的PDF文件以供定时清理.
+     * 注册Convert换后的PDFfile for scheduled cleanup.
      */
     private function registerConvertedPdfsForCleanup(DelightfulUserAuthorization $userAuthorization, array $convertedFiles): void
     {
@@ -758,10 +758,10 @@ class FileConverterAppService extends AbstractAppService
                 'organization_code' => $userAuthorization->getOrganizationCode(),
                 'file_key' => $file['oss_key'],
                 'file_name' => $file['filename'],
-                'file_size' => $file['size'] ?? 0, // 如果响应中没有size，默认为0
+                'file_size' => $file['size'] ?? 0, // If response does not havesize，Default is0
                 'source_type' => 'pdf_conversion',
                 'source_id' => $file['batch_id'] ?? null,
-                'expire_after_seconds' => 7200, // 2 小时后过期
+                'expire_after_seconds' => 7200, // 2 expires after hours
                 'bucket_type' => 'private',
             ];
         }

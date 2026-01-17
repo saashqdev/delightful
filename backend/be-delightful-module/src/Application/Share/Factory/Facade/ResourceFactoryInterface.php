@@ -11,53 +11,53 @@ use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
 use RuntimeException;
 
 /**
- * 资源工厂接口
- * 用于创建可共享资源对象的工厂接口.
+ * Resource factory interface
+ * Factory interface for creating shareable resource objects.
  */
 interface ResourceFactoryInterface
 {
     /**
-     * 获取该工厂支持的业务资源类型名称.
+     * Get the business resource type name supported by the factory.
      */
     public function getResourceName(string $resourceId): string;
 
     /**
-     * 扩展话题分享列表的数据.
+     * Extend the data of topic sharing list.
      */
     public function getResourceExtendList(array $list): array;
 
     /**
-     * 获取业务资源内容.
+     * Get business resource content.
      */
     public function getResourceContent(string $resourceId, string $userId, string $organizationCode, int $page, int $pageSize): array;
 
     /**
-     * 根据资源ID创建一个可共享资源对象
+     * Create a shareable resource object by resource ID
      *
-     * @param string $resourceId 资源ID
-     * @param string $userId 用户id
-     * @param string $organizationCode 组织代码
-     * @return ShareableResourceDTO 可共享资源对象
-     * @throws RuntimeException 当资源不存在或无法创建共享资源时抛出异常
+     * @param string $resourceId Resource ID
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @return ShareableResourceDTO Shareable resource object
+     * @throws RuntimeException Throws exception when resource does not exist or cannot create shareable resource
      */
     public function createResource(string $resourceId, string $userId, string $organizationCode): ShareableResourceDTO;
 
     /**
-     * 检查资源是否存在且可以被共享.
+     * Check if resource exists and can be shared.
      *
-     * @param string $resourceId 资源ID
-     * @param string $organizationCode 组织代码
-     * @return bool 资源是否存在且可共享
+     * @param string $resourceId Resource ID
+     * @param string $organizationCode Organization code
+     * @return bool Whether resource exists and is shareable
      */
     public function isResourceShareable(string $resourceId, string $organizationCode): bool;
 
     /**
-     * 检查用户是否有权限共享该资源.
+     * Check if user has permission to share the resource.
      *
-     * @param string $resourceId 资源ID
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织代码
-     * @return bool 是否有共享权限
+     * @param string $resourceId Resource ID
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @return bool Whether has share permission
      */
     public function hasSharePermission(string $resourceId, string $userId, string $organizationCode): bool;
 }

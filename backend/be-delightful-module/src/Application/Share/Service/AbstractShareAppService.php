@@ -11,7 +11,7 @@ use App\Application\Kernel\AbstractKernelAppService;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;
 
 /**
- * 分享应用服务抽象类.
+ * Abstract class for sharing application service.
  */
 class AbstractShareAppService extends AbstractKernelAppService
 {

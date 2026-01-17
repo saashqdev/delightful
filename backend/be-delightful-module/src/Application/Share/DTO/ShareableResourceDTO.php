@@ -12,42 +12,42 @@ use App\Infrastructure\Core\AbstractDTO;
 class ShareableResourceDTO extends AbstractDTO
 {
     /**
-     * 资源ID.
+     * Resource ID.
      */
     public string $resourceId = '';
 
     /**
-     * 资源类型.
+     * Resource type.
      */
     public string $resourceType = '';
 
     /**
-     * 资源名称.
+     * Resource name.
      */
     public string $resourceName = '';
 
     /**
-     * 资源所有者ID.
+     * Resource owner ID.
      */
     public string $ownerId = '';
 
     /**
-     * 资源描述.
+     * Resource description.
      */
     public string $description = '';
 
     /**
-     * 创建时间.
+     * Creation time.
      */
     public string $createdAt = '';
 
     /**
-     * 更新时间.
+     * Update time.
      */
     public string $updatedAt = '';
 
     /**
-     * 附加属性.
+     * Additional attributes.
      */
     public array $extraAttributes = [];
 

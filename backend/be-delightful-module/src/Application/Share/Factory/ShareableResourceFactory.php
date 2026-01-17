@@ -15,25 +15,25 @@ use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use RuntimeException;
 
 /**
- * 简单的资源工厂，根据资源类型返回对应的实现类实例.
+ * Simple resource factory that returns corresponding implementation class instances based on resource type.
  */
 class ShareableResourceFactory
 {
     /**
-     * 根据资源类型创建对应的资源工厂实例.
+     * Create corresponding resource factory instance based on resource type.
      *
-     * @param ResourceType $resourceType 资源类型
-     * @return ResourceFactoryInterface 资源工厂接口实现
-     * @throws RuntimeException 当资源类型不支持时抛出
+     * @param ResourceType $resourceType Resource type
+     * @return ResourceFactoryInterface Resource factory interface implementation
+     * @throws RuntimeException Throws when resource type is not supported
      */
     public function create(ResourceType $resourceType): ResourceFactoryInterface
     {
-        // 根据资源类型返回对应的实现
+        // Return corresponding implementation based on resource type
         $implementation = match ($resourceType) {
             ResourceType::Topic => TopicShareableResource::class,
             ResourceType::Project => ProjectShareableResource::class,
             ResourceType::File => FileShareableResource::class,
-            // 可以添加更多资源类型的映射
+            // Can add more resource type mappings
             // ResourceType::Document => DocumentShareableResource::class,
             // ResourceType::Knowledge => KnowledgeShareableResource::class,
             default => null
@@ -41,11 +41,11 @@ class ShareableResourceFactory
 
         if ($implementation === null) {
             throw new RuntimeException(
-                sprintf('不支持的资源类型: %s', $resourceType->name)
+                sprintf('Unsupported resource type: %s', $resourceType->name)
             );
         }
 
-        // 尝试通过容器获取实例
+        // Try to get instance through container
         return Di($implementation);
     }
 }

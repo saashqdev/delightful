@@ -265,7 +265,7 @@ class HandleTaskMessageAppService extends AbstractAppService
         $taskEntity = $this->taskDomainService->getTaskById($taskId);
 
         if (empty($taskEntity)) {
-            // 抛异常，任务不存在
+            // throw exception，Task does not exist
             ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'task.task_not_found');
         }
         return $taskEntity;

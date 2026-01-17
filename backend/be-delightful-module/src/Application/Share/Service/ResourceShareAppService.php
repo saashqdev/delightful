@@ -30,7 +30,7 @@ use Psr\Log\LoggerInterface;
 use RuntimeException;
 
 /**
- * 资源分享应用服务.
+ * Resource sharing application service.
  */
 class ResourceShareAppService extends AbstractShareAppService
 {
@@ -46,12 +46,12 @@ class ResourceShareAppService extends AbstractShareAppService
     }
 
     /**
-     * 创建分享.
+     * Create share.
      *
-     * @param DelightfulUserAuthorization $userAuthorization 当前用户
-     * @param CreateShareRequestDTO $dto 创建分享请求DTO
-     * @return ShareItemDTO 分享项目DTO
-     * @throws Exception 创建分享异常
+     * @param DelightfulUserAuthorization $userAuthorization Current user
+     * @param CreateShareRequestDTO $dto Create share request DTO
+     * @return ShareItemDTO Share item DTO
+     * @throws Exception Exception when creating share
      */
     public function createShare(DelightfulUserAuthorization $userAuthorization, CreateShareRequestDTO $dto): ShareItemDTO
     {
@@ -59,28 +59,28 @@ class ResourceShareAppService extends AbstractShareAppService
         $userId = $userAuthorization->getId();
         $organizationCode = $userAuthorization->getOrganizationCode();
 
-        // 验证资源类型
+        // Validate resource type
         $resourceType = ResourceType::from($dto->resourceType);
 
-        // 1. 获取对应类型的资源工厂
+        // 1. Get corresponding type resource factory
         try {
             $factory = $this->resourceFactory->create($resourceType);
         } catch (RuntimeException $e) {
-            // 使用 ExceptionBuilder 抛出不支持的资源类型异常
+            // Use ExceptionBuilder to throw unsupported resource type exception
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_TYPE_NOT_SUPPORTED, 'share.resource_type_not_supported', [$resourceType->name]);
         }
 
-        // 2. 验证资源是否存在且可分享
+        // 2. Verify resource exists and is shareable
         if (! $factory->isResourceShareable($resourceId, $organizationCode)) {
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_NOT_FOUND, 'share.resource_not_found_or_not_shareable', [$resourceId]);
         }
 
-        // 3. 验证资源所有者权限
+        // 3. Verify resource owner permission
         if (! $factory->hasSharePermission($resourceId, $userId, $organizationCode)) {
             ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.no_permission_to_share', [$resourceId]);
         }
 
-        // 4. 保存分享（创建或更新）- 使用领域服务
+        // 4. Save share (create or update) - use domain service
         $attributes = [
             'resource_name' => $factory->getResourceName($resourceId),
             'share_type' => $dto->shareType ?? ShareAccessType::Internet->value,
@@ -97,28 +97,28 @@ class ResourceShareAppService extends AbstractShareAppService
                 $dto->expireDays
             );
         } catch (Exception $e) {
-            $this->logger->error('保存话题分享失败，结果: ' . $e->getMessage());
+            $this->logger->error('Failed to save topic share, result: ' . $e->getMessage());
             ExceptionBuilder::throw(ShareErrorCode::CREATE_RESOURCES_ERROR, 'share.create_resources_error', [$resourceId]);
         }
 
-        // 5. 构建响应
+        // 5. Build response
         return $this->shareAssembler->toDto($savedEntity);
     }
 
     /**
-     * 取消分享.
+     * Cancel share.
      *
-     * @param DelightfulUserAuthorization $userAuthorization 当前用户
-     * @param int $shareId 分享ID
-     * @return bool 是否成功
-     * @throws Exception 取消分享时发生异常
+     * @param DelightfulUserAuthorization $userAuthorization Current user
+     * @param int $shareId Share ID
+     * @return bool Whether successful
+     * @throws Exception Exception when canceling share
      */
     public function cancelShare(DelightfulUserAuthorization $userAuthorization, int $shareId): bool
     {
         $userId = $userAuthorization->getId();
         $organizationCode = $userAuthorization->getOrganizationCode();
 
-        // 调用领域服务的取消分享方法
+        // Call domain service cancel share method
         return $this->shareDomainService->cancelShare($shareId, $userId, $organizationCode);
     }
 
@@ -135,18 +135,18 @@ class ResourceShareAppService extends AbstractShareAppService
             return false;
         }
 
-        // 验证资源类型
+        // Validate resource type
         $resourceType = ResourceType::from($shareEntity->getResourceType());
 
-        // 1. 获取对应类型的资源工厂
+        // 1. Get corresponding type resource factory
         try {
             $factory = $this->resourceFactory->create($resourceType);
         } catch (RuntimeException $e) {
-            // 使用 ExceptionBuilder 抛出不支持的资源类型异常
+            // Use ExceptionBuilder to throw unsupported resource type exception
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_TYPE_NOT_SUPPORTED, 'share.resource_type_not_supported', [$resourceType->name]);
         }
 
-        // 2. 验证资源所有者权限
+        // 2. Verify resource owner permission
         if (! $factory->hasSharePermission($resourceId, $userId, $organizationCode)) {
             ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.no_permission_to_share', [$resourceId]);
         }
@@ -155,7 +155,7 @@ class ResourceShareAppService extends AbstractShareAppService
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
         $shareEntity->setUpdatedUid($userId);
 
-        // 调用领域服务的取消分享方法
+        // Call domain service cancel share method
         $this->shareDomainService->saveShareByEntity($shareEntity);
         return true;
     }
@@ -174,33 +174,33 @@ class ResourceShareAppService extends AbstractShareAppService
 
     public function getShareDetail(?DelightfulUserAuthorization $userAuthorization, string $shareCode, GetShareDetailDTO $detailDTO): array
     {
-        // 先获取详情内容
+        // First get detail content
         $shareEntity = $this->shareDomainService->getShareByCode($shareCode);
         if (empty($shareEntity)) {
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_NOT_FOUND, 'share.not_found', [$shareCode]);
         }
 
-        // 校验权限，目前只有个人才有权限控制
+        // Verify permission, currently only individuals have permission control
         if ($shareEntity->getShareType() == ShareAccessType::SelfOnly->value
             && ($userAuthorization === null || $shareEntity->getCreatedUid() != $userAuthorization->getId())) {
             ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.permission_denied', [$shareCode]);
         }
 
-        // 判断密码是否正确
+        // Verify password is correct
         if (! empty($shareEntity->getPassword()) && ($detailDTO->getPassword() != PasswordCrypt::decrypt($shareEntity->getPassword()))) {
             ExceptionBuilder::throw(ShareErrorCode::PASSWORD_ERROR, 'share.password_error', [$shareCode]);
         }
 
-        // 调用工厂类，获取分 享内容数据
+        // Call factory class to get share content data
         try {
             $resourceType = ResourceType::tryFrom($shareEntity->getResourceType());
             $factory = $this->resourceFactory->create($resourceType);
         } catch (RuntimeException $e) {
-            // 使用 ExceptionBuilder 抛出不支持的资源类型异常
+            // Use ExceptionBuilder to throw unsupported resource type exception
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_TYPE_NOT_SUPPORTED, 'share.resource_type_not_supported', [$resourceType->name]);
         }
 
-        // 返回数据
+        // Return data
         return [
             'resource_type' => $resourceType,
             'resource_name' => $shareEntity->getResourceName(),
@@ -230,12 +230,12 @@ class ResourceShareAppService extends AbstractShareAppService
             ];
         }
 
-        // 扩展信息
+        // Extend information
         try {
             $resourceType = ResourceType::from($dto->getResourceType());
             $factory = $this->resourceFactory->create($resourceType);
         } catch (RuntimeException $e) {
-            // 使用 ExceptionBuilder 抛出不支持的资源类型异常
+            // Use ExceptionBuilder to throw unsupported resource type exception
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_TYPE_NOT_SUPPORTED, 'share.resource_type_not_supported', [$resourceType->name]);
         }
         $result['list'] = $factory->getResourceExtendList($result['list']);
@@ -243,40 +243,40 @@ class ResourceShareAppService extends AbstractShareAppService
     }
 
     /**
-     * 通过分享code获取分享信息（不含密码）.
+     * Get share information by share code (without password).
      *
-     * @param null|DelightfulUserAuthorization $userAuthorization 当前用户（可以为null）
-     * @param string $shareCode 分享code
-     * @return ShareItemDTO 分享项目DTO
-     * @throws Exception 获取分享信息异常
+     * @param null|DelightfulUserAuthorization $userAuthorization Current user (can be null)
+     * @param string $shareCode Share code
+     * @return ShareItemDTO Share item DTO
+     * @throws Exception Exception when getting share information
      */
     public function getShareByCode(?DelightfulUserAuthorization $userAuthorization, string $shareCode): ShareItemDTO
     {
-        // 获取并验证实体
+        // Get and validate entity
         $shareEntity = $this->getAndValidateShareEntity($userAuthorization, $shareCode);
 
-        // 使用装配器创建基础DTO（不含密码）
+        // Use assembler to create basic DTO (without password)
         return $this->shareAssembler->toDto($shareEntity);
     }
 
     /**
-     * 通过分享code获取分享信息（含明文密码）.
-     * 注意：此方法仅应在特定场景下使用，需谨慎处理返回的密码信息.
+     * Get share information by share code (with plaintext password).
+     * Note: This method should only be used in specific scenarios, handle the returned password information carefully.
      *
-     * @param null|DelightfulUserAuthorization $userAuthorization 当前用户（可以为null）
-     * @param string $shareCode 分享code
-     * @return ShareItemWithPasswordDTO 包含密码的分享项目DTO
-     * @throws Exception 获取分享信息异常
+     * @param null|DelightfulUserAuthorization $userAuthorization Current user (can be null)
+     * @param string $shareCode Share code
+     * @return ShareItemWithPasswordDTO Share item DTO containing password
+     * @throws Exception Exception when getting share information
      */
     public function getShareWithPasswordByCode(?DelightfulUserAuthorization $userAuthorization, string $shareCode): ShareItemWithPasswordDTO
     {
-        // 获取并验证实体
+        // Get and validate entity
         try {
             $shareEntity = $this->getAndValidateShareEntity($userAuthorization, $shareCode);
             //            if ($shareEntity->getCreatedUid() !== $userAuthorization->getId()) {
             //                ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.permission_denied', [$shareCode]);
             //            }
-            // 使用装配器创建包含密码的DTO
+            // Use assembler to create DTO with password
             return $this->shareAssembler->toDtoWithPassword($shareEntity);
         } catch (BusinessException $e) {
             return new ShareItemWithPasswordDTO();
@@ -284,10 +284,10 @@ class ResourceShareAppService extends AbstractShareAppService
     }
 
     /**
-     * 根据分享代码获取分享实体.
+     * Get share entity by share code.
      *
-     * @param string $shareCode 分享代码
-     * @return null|ResourceShareEntity 分享实体，如果不存在则返回null
+     * @param string $shareCode Share code
+     * @return null|ResourceShareEntity Share entity, or null if not found
      */
     public function getShare(string $shareCode): ?ResourceShareEntity
     {
@@ -295,24 +295,24 @@ class ResourceShareAppService extends AbstractShareAppService
     }
 
     /**
-     * 获取并验证分享实体.
+     * Get and validate share entity.
      *
-     * @param null|DelightfulUserAuthorization $userAuthorization 当前用户（可以为null）
-     * @param string $shareCode 分享code
-     * @return ResourceShareEntity 验证通过的分享实体
-     * @throws Exception 如果验证失败
+     * @param null|DelightfulUserAuthorization $userAuthorization Current user (can be null)
+     * @param string $shareCode Share code
+     * @return ResourceShareEntity Validated share entity
+     * @throws Exception If validation fails
      */
     private function getAndValidateShareEntity(?DelightfulUserAuthorization $userAuthorization, string $shareCode): ResourceShareEntity
     {
-        // 通过领域服务获取分享实体
+        // Get share entity through domain service
         $shareEntity = $this->shareDomainService->getShareByCode($shareCode);
 
-        // 验证分享是否存在
+        // Verify share exists
         if (empty($shareEntity)) {
             ExceptionBuilder::throw(ShareErrorCode::RESOURCE_NOT_FOUND, 'share.not_found', [$shareCode]);
         }
 
-        // 校验权限，如果分享类型是仅自己可见，则需要验证用户身份
+        // Verify permission, if share type is self-only, need to verify user identity
         if ($shareEntity->getShareType() == ShareAccessType::SelfOnly->value
             && ($userAuthorization === null || $shareEntity->getCreatedUid() != $userAuthorization->getId())) {
             ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.permission_denied', [$shareCode]);

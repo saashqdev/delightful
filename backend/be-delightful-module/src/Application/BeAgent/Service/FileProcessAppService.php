@@ -284,7 +284,7 @@ class FileProcessAppService extends AbstractAppService
 
         Db::beginTransaction();
         try {
-            // 对每个附件进行处理
+            // Process each attachment
             foreach ($attachments as $attachment) {
                 // Ensure file_key exists
                 if (empty($attachment['file_key'])) {
@@ -555,7 +555,7 @@ class FileProcessAppService extends AbstractAppService
         $versionEntity->setCreatedAt(date('Y-m-d H:i:s'));
         $versionEntity->setUpdatedAt(date('Y-m-d H:i:s'));
 
-        # 根据project_id 获取最新的一条tag，如果tag为0，则设置为1，否则设置为tag+1
+        # According toproject_id Get the latest onetag，Iftagis0，则设置is1，否则设置istag+1
         $latestVersion = $this->workspaceDomainService->getLatestVersionByProjectId($versionEntity->getProjectId());
         if ($latestVersion) {
             $versionEntity->setTag($latestVersion->getTag() + 1);
@@ -1008,7 +1008,7 @@ class FileProcessAppService extends AbstractAppService
         // 4. Update file metadata
         $this->updateFileMetadata($taskFileEntity, $result, $authorization);
 
-        // 5. 创建文件版本
+        // 5. Create file version
         $this->taskFileVersionDomainService->createFileVersion($projectEntity->getUserOrganizationCode(), $taskFileEntity);
 
         return [

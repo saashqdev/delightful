@@ -25,9 +25,9 @@ use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\InvitationLinkRespon
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\JoinProjectResponseDTO;
 
 /**
- * 项目邀请链接应用服务
+ * Project Invitation Link Application Service
  *
- * 负责协调项目邀请链接相关的业务逻辑
+ * Responsible for coordinating project invitation link-related business logic
  */
 class ProjectInvitationLinkAppService extends AbstractAppService
 {
@@ -40,14 +40,14 @@ class ProjectInvitationLinkAppService extends AbstractAppService
     }
 
     /**
-     * 获取项目邀请链接信息.
+     * Get project invitation link information.
      */
     public function getInvitationLink(RequestContext $requestContext, int $projectId): ?InvitationLinkResponseDTO
     {
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
         $currentUserId = $requestContext->getUserAuthorization()->getId();
 
-        // 1. 验证项目权限
+        // 1. Verify project access rights
         $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
         $shareEntity = $this->resourceShareDomainService->getShareByResource(
@@ -63,28 +63,28 @@ class ProjectInvitationLinkAppService extends AbstractAppService
     }
 
     /**
-     * 开启/关闭邀请链接.
+     * Enable/disable invitation link.
      */
     public function toggleInvitationLink(RequestContext $requestContext, int $projectId, bool $enabled): InvitationLinkResponseDTO
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // 1. 验证是否具有项目管理权限
+        // 1. Verify if you have project management access rights
         $project = $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
         if ($project->getUserId() !== $currentUserId) {
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.invalid_permission_level');
         }
 
-        // 2. 查找现有的邀请分享
+        // 2. Find existing invitation share
         $existingShare = $this->resourceShareDomainService->getShareByResource(
             (string) $projectId,
             ResourceType::ProjectInvitation->value
         );
 
         if ($existingShare) {
-            // 更新现有分享的启用/禁用状态
+            // Update the enabled/disabled status of the existing share
             $savedShare = $this->resourceShareDomainService->toggleShareStatus(
                 $existingShare->getId(),
                 $enabled,
@@ -94,11 +94,11 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         }
 
         if (! $enabled) {
-            // 如果不存在且要求关闭，抛出异常
+            // If it does not exist and close is required, throw an exception
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 3. 创建新的邀请分享 (通过 ResourceShareDomainService)
+        // 3. Create new invitation share (via ResourceShareDomainService)
         $shareEntity = $this->resourceShareDomainService->saveShare(
             (string) $projectId,
             ResourceType::ProjectInvitation->value,
@@ -117,17 +117,17 @@ class ProjectInvitationLinkAppService extends AbstractAppService
     }
 
     /**
-     * 重置邀请链接.
+     * Reset invitation link.
      */
     public function resetInvitationLink(RequestContext $requestContext, int $projectId): InvitationLinkResponseDTO
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // 1. 验证项目权限
+        // 1. Verify project access rights
         $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
-        // 2. 获取现有邀请分享
+        // 2. Get existing invitation share
         $shareEntity = $this->resourceShareDomainService->getShareByResource(
             (string) $projectId,
             ResourceType::ProjectInvitation->value
@@ -137,24 +137,24 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 3. 保存更新
+        // 3. Save updates
         $savedShare = $this->resourceShareDomainService->regenerateShareCodeById($shareEntity->getId());
 
         return InvitationLinkResponseDTO::fromEntity($savedShare, $this->resourceShareDomainService);
     }
 
     /**
-     * 设置密码保护.
+     * Set password protection.
      */
     public function setPassword(RequestContext $requestContext, int $projectId, bool $enabled): string
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // 1. 验证项目权限
+        // 1. Verify project access rights
         $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
-        // 2. 获取现有邀请分享
+        // 2. Get existing invitation share
         $shareEntity = $this->resourceShareDomainService->getShareByResource(
             (string) $projectId,
             ResourceType::ProjectInvitation->value
@@ -164,12 +164,12 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 3. 设置密码保护开关
+        // 3. Set password protection switch
         if ($enabled) {
-            // 开启密码保护
+            // Enable password protection
             $password = $shareEntity->getPassword();
 
-            // 如果没有历史密码，生成新密码
+            // If there is no history password, generate a new password
             if (empty($password)) {
                 $plainPassword = ResourceShareEntity::generateRandomPassword();
             } else {
@@ -179,7 +179,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             return $plainPassword;
         }
 
-        // 关闭密码保护（保留密码）
+        // Close password protection (keep password)
         $shareEntity->setIsPasswordEnabled(false);
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
         $shareEntity->setUpdatedUid($currentUserId);
@@ -188,17 +188,17 @@ class ProjectInvitationLinkAppService extends AbstractAppService
     }
 
     /**
-     * 重新设置密码
+     * Reset password.
      */
     public function resetPassword(RequestContext $requestContext, int $projectId): string
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // 1. 验证项目权限
+        // 1. Verify project access rights
         $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
-        // 2. 获取现有邀请分享
+        // 2. Get existing invitation share
         $shareEntity = $this->resourceShareDomainService->getShareByResource(
             (string) $projectId,
             ResourceType::ProjectInvitation->value
@@ -208,7 +208,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 3. 生成新密码
+        // 3. Generate new password
         $newPassword = ResourceShareEntity::generateRandomPassword();
         $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $newPassword);
 
@@ -216,22 +216,22 @@ class ProjectInvitationLinkAppService extends AbstractAppService
     }
 
     /**
-     * 修改邀请链接密码
+     * Change invitation link password
      */
     public function changePassword(RequestContext $requestContext, int $projectId, string $newPassword): string
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // 1. 验证项目权限
+        // 1. Verify project access rights
         $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
-        // 2. 验证密码长度（最大18位）
+        // 2. Verify password length (maximum 18 characters)
         if (strlen($newPassword) > 18 || strlen($newPassword) < 3) {
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
         }
 
-        // 3. 获取邀请链接
+        // 3. Get invitation link
         $shareEntity = $this->resourceShareDomainService->getShareByResource(
             (string) $projectId,
             ResourceType::ProjectInvitation->value
@@ -241,24 +241,24 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 4. 更新密码并启用密码保护
+        // 4. Update password and enable password protection
         $this->resourceShareDomainService->changePasswordById($shareEntity->getId(), $newPassword);
 
         return $newPassword;
     }
 
     /**
-     * 修改权限级别.
+     * Change permission level.
      */
     public function updateDefaultJoinPermission(RequestContext $requestContext, int $projectId, string $permission): string
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // 1. 验证项目权限
+        // 1. Verify project access rights
         $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
-        // 2. 获取现有邀请分享
+        // 2. Get existing invitation share
         $shareEntity = $this->resourceShareDomainService->getShareByResource(
             (string) $projectId,
             ResourceType::ProjectInvitation->value
@@ -268,41 +268,41 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 3. 验证并更新权限级别
+        // 3. Verify and update permission level
         MemberRole::validatePermissionLevel($permission);
 
-        // 4. 更新 extra 中的 default_join_permission
+        // 4. Update default_join_permission in extra
         $extra = $shareEntity->getExtra() ?? [];
         $extra['default_join_permission'] = $permission;
         $shareEntity->setExtra($extra);
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
         $shareEntity->setUpdatedUid($currentUserId);
 
-        // 5. 保存更新
+        // 5. Save updates
         $this->resourceShareDomainService->saveShareByEntity($shareEntity);
 
         return $permission;
     }
 
     /**
-     * 通过Token获取邀请信息（外部用户预览）.
+     * Get invitation information through Token (external user preview).
      */
     public function getInvitationByToken(RequestContext $requestContext, string $token): InvitationDetailResponseDTO
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
 
-        // 1. 获取分享信息
+        // 1. Get share information
         $shareEntity = $this->resourceShareDomainService->getShareByCode($token);
         if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) {
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 2. 检查是否已启用
+        // 2. Check if enabled
         if (! $shareEntity->getIsEnabled()) {
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_DISABLED);
         }
 
-        // 3. 检查是否有效（过期、删除等）
+        // 3. Check if valid (expired, deleted, etc)
         if (! $shareEntity->isValid()) {
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_INVALID);
         }
@@ -310,17 +310,17 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         $resourceId = $shareEntity->getResourceId();
         $projectId = (int) $resourceId;
 
-        // 4. 验证链接创建者是否有项目管理权限，可能存在后续将该用户从该项目上删除
+        // 4. Verify if the link creator has project management access rights, there may be subsequent deletion of the user from the project
         $project = $this->getAccessibleProjectWithManager($projectId, $shareEntity->getCreatedUid(), $shareEntity->getOrganizationCode());
 
-        // 5. 提取创建者ID
+        // 5. Extract creator ID
         $creatorId = $project->getUserId();
         $isCreator = $creatorId === $currentUserId;
 
-        // 6. 检查成员关系
+        // 6. Check membership relationship
         $hasJoined = $isCreator || $this->projectMemberDomainService->isProjectMemberByUser($projectId, $currentUserId);
 
-        // 7. 获取创建者信息
+        // 7. Get creator information
         $creatorEntity = $this->delightfulUserDomainService->getByUserId($creatorId);
         $creatorAvatarUrl = $creatorNickName = '';
         if ($creatorEntity) {
@@ -328,7 +328,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             $creatorAvatarUrl = $this->fileDomainService->getLink('', $creatorEntity->getAvatarUrl()) ?? $creatorEntity->getAvatarUrl();
         }
 
-        // 8. 从 extra 中获取 default_join_permission
+        // 8. Get default_join_permission from extra
         $defaultJoinPermission = $shareEntity->getExtraAttribute('default_join_permission', 'viewer');
 
         return InvitationDetailResponseDTO::fromArray([
@@ -347,31 +347,31 @@ class ProjectInvitationLinkAppService extends AbstractAppService
     }
 
     /**
-     * 加入项目（外部用户操作）.
+     * Join project (external user operation).
      */
     public function joinProject(RequestContext $requestContext, string $token, ?string $password = null): JoinProjectResponseDTO
     {
         $currentUserId = $requestContext->getUserAuthorization()->getId();
 
-        // 1. 验证分享链接
+        // 1. Verify share link
         $shareEntity = $this->resourceShareDomainService->getShareByCode($token);
         if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) {
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
-        // 2. 检查是否已启用
+        // 2. Check if enabled
         if (! $shareEntity->getIsEnabled()) {
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_DISABLED);
         }
 
-        // 3. 检查是否有效（过期、删除等）
+        // 3. Check if valid (expired, deleted, etc)
         if (! $shareEntity->isValid()) {
             ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_INVALID);
         }
 
-        // 4. 验证密码
+        // 4. Verify password
         if ($shareEntity->getIsPasswordEnabled()) {
-            // 链接启用了密码保护
+            // Link has password protection enabled
             if (empty($password)) {
                 ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
             }
@@ -380,7 +380,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             }
         }
 
-        // 5. 检查是否已经是项目成员（通过Domain服务）
+        // 5. Check if already a project member (via Domain service)
         $isExistingMember = $this->projectMemberDomainService->isProjectMemberByUser(
             (int) $shareEntity->getResourceId(),
             $currentUserId
@@ -391,20 +391,20 @@ class ProjectInvitationLinkAppService extends AbstractAppService
 
         $projectId = (int) $shareEntity->getResourceId();
 
-        // 6. 验证链接创建者是否有项目管理权限，可能存在后续将该用户从该项目上删除
+        // 6. Verify if the link creator has project management access rights, there may be subsequent deletion of the user from the project
         $this->getAccessibleProjectWithManager($projectId, $shareEntity->getCreatedUid(), $shareEntity->getOrganizationCode());
 
-        // 7. 从 extra 中获取 default_join_permission，并转换为成员角色
+        // 7. Get default_join_permission from extra, and convert to member role
         $permission = $shareEntity->getExtraAttribute('default_join_permission', MemberRole::VIEWER->value);
         $memberRole = MemberRole::validatePermissionLevel($permission);
 
-        // 使用Domain服务添加成员，符合DDD架构
+        // Add member using Domain service, consistent with DDD architecture
         $projectMemberEntity = $this->projectMemberDomainService->addMemberByInvitation(
             $shareEntity->getResourceId(),
             $currentUserId,
             $memberRole,
             $shareEntity->getOrganizationCode(),
-            $shareEntity->getCreatedUid() // 邀请人（邀请链接创建者）
+            $shareEntity->getCreatedUid() // Inviter (invitation link creator)
         );
 
         return JoinProjectResponseDTO::fromArray([

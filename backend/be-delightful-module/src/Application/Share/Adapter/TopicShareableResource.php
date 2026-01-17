@@ -20,19 +20,19 @@ class TopicShareableResource implements ResourceFactoryInterface
 
     public function createResource(string $resourceId, string $userId, string $organizationCode): ShareableResourceDTO
     {
-        // 先查询是否存在
+        // First check if it exists
         return new ShareableResourceDTO();
     }
 
     public function isResourceShareable(string $resourceId, string $organizationCode): bool
     {
-        // 目前所有的话题都能够分享
+        // Currently all topics can be shared
         return true;
     }
 
     public function hasSharePermission(string $resourceId, string $userId, string $organizationCode): bool
     {
-        // 目前没有分享权限
+        // Currently no share permission restrictions
         return true;
     }
 
@@ -52,17 +52,17 @@ class TopicShareableResource implements ResourceFactoryInterface
 
     public function getResourceExtendList(array $list): array
     {
-        // 提取 resource_id, resource_id 是话题的 id
+        // Extract resource_id, resource_id is the topic id
         $topicIds = array_column($list, 'resource_id');
 
         if (empty($topicIds)) {
             return $list;
         }
 
-        // 通过 话题 id 集合，查询出工作区的名称和工作区的id
+        // Query workspace name and workspace id by topic id collection
         try {
             $workspaceInfo = $this->workspaceAppService->getWorkspaceInfoByTopicIds($topicIds);
-            // 通过 for 循环 将工作区的名称和工作区的id组装起来
+            // Assemble workspace name and workspace id through for loop
             foreach ($list as &$item) {
                 $resourceId = $item['resource_id'];
                 $item['extend'] = [];
@@ -75,7 +75,7 @@ class TopicShareableResource implements ResourceFactoryInterface
             }
             return $list;
         } catch (Exception $e) {
-            // 记录错误日志但不影响正常流程
+            // Log error but do not affect normal flow
             return $list;
         }
     }

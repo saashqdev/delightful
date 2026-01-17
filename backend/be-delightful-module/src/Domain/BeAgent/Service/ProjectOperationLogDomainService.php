@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectOperationLogEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectOperationLogEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
 
 /**
  * 项目操作日志领域服务

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\LongTermMemory\Enum\AppCodeEnum;
 use App\Application\MCP\SupperMagicMCP\SupperMagicAgentMCPInterface;
@@ -18,26 +18,26 @@ use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Dtyq\AsyncEvent\AsyncEventUtil;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\TaskMessageDTO;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\UserMessageDTO;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\RunTaskBeforeEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\AgentDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskMessageEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\CreationSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\FileType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskContext;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskBeforeEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\AgentDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant\SandboxStatus;
 use Delightful\BeDelightful\Infrastructure\Utils\TaskEventUtil;
 use Delightful\BeDelightful\Infrastructure\Utils\TaskTerminationUtil;
@@ -87,12 +87,12 @@ class HandleUserMessageAppService extends AbstractAppService
         $this->getAccessibleProject($topicEntity->getProjectId(), $dataIsolation->getCurrentUserId(), $dataIsolation->getCurrentOrganizationCode());
 
         if (is_null($topicEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
         // Get task information
         $taskEntity = $this->taskDomainService->getTaskById($topicEntity->getCurrentTaskId());
         if (is_null($taskEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'task.task_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'task.task_not_found');
         }
         // Update task status
         $this->topicTaskAppService->updateTaskStatus(
@@ -128,7 +128,7 @@ class HandleUserMessageAppService extends AbstractAppService
     {
         $topicEntity = $this->topicDomainService->getTopicByChatTopicId($dataIsolation, $userMessageDTO->getChatTopicId());
         if (is_null($topicEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
         $data = [
@@ -191,7 +191,7 @@ class HandleUserMessageAppService extends AbstractAppService
             // Get topic information
             $topicEntity = $this->topicDomainService->getTopicByChatTopicId($dataIsolation, $userMessageDTO->getChatTopicId());
             if (is_null($topicEntity)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
             }
             $topicId = $topicEntity->getId();
             $projectId = $topicEntity->getProjectId();

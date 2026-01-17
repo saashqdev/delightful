@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\LongTermMemory\Service\LongTermMemoryDomainService;
@@ -15,48 +15,48 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Publish\ProjectForkPublisher;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Publish\StopRunningTaskPublisher;
+use Delightful\BeDelightful\Application\BeAgent\Event\Publish\ProjectForkPublisher;
+use Delightful\BeDelightful\Application\BeAgent\Event\Publish\StopRunningTaskPublisher;
 use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Service\ResourceShareDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectForkEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\DeleteDataType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ForkProjectStartEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectCreatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectForkEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectUpdatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\StopRunningTaskEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\DeleteDataType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ForkProjectStartEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectCreatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectForkEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectUpdatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\StopRunningTaskEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
 use Delightful\BeDelightful\ErrorCode\ShareErrorCode;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\AccessTokenUtil;
 use Delightful\BeDelightful\Infrastructure\Utils\FileMetadataUtil;
 use Delightful\BeDelightful\Infrastructure\Utils\FileTreeUtil;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ForkProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetProjectAttachmentsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetProjectAttachmentsV2RequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetProjectListRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\MoveProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\ForkProjectResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\ForkStatusResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\ProjectItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\ProjectListResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TopicItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ForkProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetProjectAttachmentsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetProjectAttachmentsV2RequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetProjectListRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\MoveProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\ForkProjectResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\ForkStatusResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\ProjectItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\ProjectListResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TopicItemDTO;
 use Hyperf\Amqp\Producer;
 use Hyperf\DbConnection\Annotation\Transactional;
 use Hyperf\DbConnection\Db;
@@ -107,7 +107,7 @@ class ProjectAppService extends AbstractAppService
         // 检查话题是否存在
         $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($requestDTO->getWorkspaceId());
         if (empty($workspaceEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
         }
 
         // 如果指定了工作目录，需要从工作目录里提取项目id
@@ -202,7 +202,7 @@ class ProjectAppService extends AbstractAppService
         } catch (Throwable $e) {
             Db::rollBack();
             $this->logger->error('Create Project Failed, err: ' . $e->getMessage(), ['request' => $requestDTO->toArray()]);
-            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_PROJECT_FAILED, 'project.create_project_failed');
+            ExceptionBuilder::throw(BeAgentErrorCode::CREATE_PROJECT_FAILED, 'project.create_project_failed');
         }
     }
 
@@ -230,7 +230,7 @@ class ProjectAppService extends AbstractAppService
             // 检查话题是否存在
             $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($requestDTO->getWorkspaceId());
             if (empty($workspaceEntity)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
             }
             $projectEntity->setWorkspaceId($requestDTO->getWorkspaceId());
         }
@@ -538,7 +538,7 @@ class ProjectAppService extends AbstractAppService
             case ResourceType::Topic->value:
                 $topicEntity = $this->topicDomainService->getTopicWithDeleted((int) $shareEntity->getResourceId());
                 if (empty($topicEntity)) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+                    ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
                 }
                 $projectId = (string) $topicEntity->getProjectId();
                 $workDir = $topicEntity->getWorkDir();
@@ -546,7 +546,7 @@ class ProjectAppService extends AbstractAppService
             case ResourceType::Project->value:
                 $projectEntity = $this->projectDomainService->getProjectNotUserId((int) $shareEntity->getResourceId());
                 if (empty($projectEntity)) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
+                    ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
                 }
                 $projectId = (string) $projectEntity->getId();
                 $workDir = $projectEntity->getWorkDir();
@@ -589,7 +589,7 @@ class ProjectAppService extends AbstractAppService
             case ResourceType::Topic->value:
                 $topicEntity = $this->topicDomainService->getTopicWithDeleted((int) $shareEntity->getResourceId());
                 if (empty($topicEntity)) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+                    ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
                 }
                 $projectId = (string) $topicEntity->getProjectId();
                 $workDir = $topicEntity->getWorkDir();
@@ -597,7 +597,7 @@ class ProjectAppService extends AbstractAppService
             case ResourceType::Project->value:
                 $projectEntity = $this->projectDomainService->getProjectNotUserId((int) $shareEntity->getResourceId());
                 if (empty($projectEntity)) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
+                    ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
                 }
                 $projectId = (string) $projectEntity->getId();
                 $workDir = $projectEntity->getWorkDir();
@@ -659,12 +659,12 @@ class ProjectAppService extends AbstractAppService
         // Validate target workspace exists
         $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($requestDTO->getTargetWorkspaceId());
         if (empty($workspaceEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, trans('workspace.workspace_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, trans('workspace.workspace_not_found'));
         }
 
         // Validate target workspace belongs to user
         if ($workspaceEntity->getUserId() !== $userAuthorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_ACCESS_DENIED, trans('workspace.workspace_access_denied'));
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_ACCESS_DENIED, trans('workspace.workspace_access_denied'));
         }
 
         Db::beginTransaction();
@@ -751,7 +751,7 @@ class ProjectAppService extends AbstractAppService
             return ForkProjectResponseDTO::fromEntity($forkProjectRecordEntity)->toArray();
         } catch (EventException $e) {
             Db::rollBack();
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_FORK_ACCESS_DENIED, $e->getMessage());
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_FORK_ACCESS_DENIED, $e->getMessage());
         } catch (Throwable $e) {
             Db::rollBack();
             $this->logger->error('Fork project failed, error: ' . $e->getMessage(), ['request' => $requestDTO->toArray()]);
@@ -770,12 +770,12 @@ class ProjectAppService extends AbstractAppService
         // Find fork record by fork project ID
         $projectFork = $this->projectDomainService->findByForkProjectId($projectId);
         if (! $projectFork) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
         }
 
         // Check if user has access to this fork
         if ($projectFork->getUserId() !== $userAuthorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, trans('project.project_access_denied'));
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, trans('project.project_access_denied'));
         }
 
         return ForkStatusResponseDTO::fromEntity($projectFork)->toArray();
@@ -833,11 +833,11 @@ class ProjectAppService extends AbstractAppService
         // Validate target workspace exists and belongs to user
         $targetWorkspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($requestDTO->getTargetWorkspaceId());
         if (empty($targetWorkspaceEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, trans('workspace.workspace_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, trans('workspace.workspace_not_found'));
         }
 
         if ($targetWorkspaceEntity->getUserId() !== $userAuthorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_ACCESS_DENIED, trans('workspace.workspace_access_denied'));
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_ACCESS_DENIED, trans('workspace.workspace_access_denied'));
         }
 
         // Validate source project exists and belongs to user (only project owner can move)

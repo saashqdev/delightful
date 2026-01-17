@@ -5,22 +5,22 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectForkEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ForkStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ProjectStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectForkRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TopicRepositoryInterface;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\CreationSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ForkStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ProjectStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectForkRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Hyperf\DbConnection\Db;
 
 use function Hyperf\Translation\trans;
@@ -83,12 +83,12 @@ class ProjectDomainService
     {
         $project = $this->projectRepository->findById($projectId);
         if (! $project) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
         }
 
         // Check permissions
         if ($project->getUserId() !== $userId) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
         }
 
         return $this->projectRepository->delete($project);
@@ -132,12 +132,12 @@ class ProjectDomainService
     {
         $project = $this->projectRepository->findById($projectId);
         if (! $project) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
         }
 
         // Check permissions
         if ($project->getUserId() !== $userId) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
         }
 
         return $project;
@@ -147,7 +147,7 @@ class ProjectDomainService
     {
         $project = $this->projectRepository->findById($projectId);
         if ($project === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
         }
         return $project;
     }
@@ -236,13 +236,13 @@ class ProjectDomainService
     ): array {
         // Check if user already has a running fork for this project
         if ($this->projectForkRepository->hasRunningFork($userId, $sourceProjectId)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_FORK_ALREADY_RUNNING, trans('project.fork_already_running'));
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_FORK_ALREADY_RUNNING, trans('project.fork_already_running'));
         }
 
         // Get source project entity
         $sourceProject = $this->projectRepository->findById($sourceProjectId);
         if (! $sourceProject) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
         }
 
         $currentTime = date('Y-m-d H:i:s');
@@ -300,7 +300,7 @@ class ProjectDomainService
             // Get the source project first to return updated entity
             $sourceProject = $this->projectRepository->findById($sourceProjectId);
             if (! $sourceProject) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
             }
 
             // Get original workspace ID for topic and task updates
@@ -323,7 +323,7 @@ class ProjectDomainService
             );
 
             if (! $projectUpdateResult) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::UPDATE_PROJECT_FAILED, trans('project.project_update_failed'));
+                ExceptionBuilder::throw(BeAgentErrorCode::UPDATE_PROJECT_FAILED, trans('project.project_update_failed'));
             }
 
             // Update topics workspace_id
@@ -353,7 +353,7 @@ class ProjectDomainService
             // Return updated project entity
             $updatedProject = $this->projectRepository->findById($sourceProjectId);
             if (! $updatedProject) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
             }
 
             // todo 记录操作日志

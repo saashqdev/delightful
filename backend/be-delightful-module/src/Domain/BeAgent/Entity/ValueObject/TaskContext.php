@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\SuperAgentExtra;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\BeAgentExtra;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
 
 /**
  * 任务上下文对象，用于封装任务相关的上下文参数.
@@ -32,7 +32,7 @@ class TaskContext
      * @param string $workspaceId 工作区ID
      * @param string $messageId 消息ID
      * @param bool $isFirstTask 是否为首次任务
-     * @param null|SuperAgentExtra $extra 扩展参数
+     * @param null|BeAgentExtra $extra 扩展参数
      */
     public function __construct(
         private readonly TaskEntity $task,
@@ -50,7 +50,7 @@ class TaskContext
         private string $workspaceId = '',
         private string $messageId = '',
         private bool $isFirstTask = false,
-        private ?SuperAgentExtra $extra = null,
+        private ?BeAgentExtra $extra = null,
     ) {
     }
 
@@ -313,7 +313,7 @@ class TaskContext
     /**
      * 获取扩展参数.
      */
-    public function getExtra(): ?SuperAgentExtra
+    public function getExtra(): ?BeAgentExtra
     {
         return $this->extra;
     }
@@ -321,7 +321,7 @@ class TaskContext
     /**
      * 设置扩展参数.
      */
-    public function setExtra(?SuperAgentExtra $extra): self
+    public function setExtra(?BeAgentExtra $extra): self
     {
         $this->extra = $extra;
         return $this;

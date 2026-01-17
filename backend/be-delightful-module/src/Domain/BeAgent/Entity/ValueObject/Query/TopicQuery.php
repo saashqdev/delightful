@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\Query;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\Query;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 
 /**
  * 话题查询值对象，封装查询条件.

@@ -5,20 +5,20 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileVersionDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateFileVersionRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetFileVersionsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\RollbackFileToVersionRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CreateFileVersionResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\GetFileVersionsResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\RollbackFileToVersionResponseDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileVersionDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateFileVersionRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetFileVersionsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\RollbackFileToVersionRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CreateFileVersionResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\GetFileVersionsResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\RollbackFileToVersionResponseDTO;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 
@@ -56,24 +56,24 @@ class FileVersionAppService extends AbstractAppService
         // 验证文件是否存在
         $fileEntity = $this->taskFileDomainService->getByFileKey($fileKey);
         if (! $fileEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
         }
 
         // 验证文件是否为目录
         if ($fileEntity->getIsDirectory()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_PERMISSION_DENIED, 'file.cannot_version_directory');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_PERMISSION_DENIED, 'file.cannot_version_directory');
         }
 
         $projectEntity = $this->projectDomainService->getProjectNotUserId($fileEntity->getProjectId());
         if (! $projectEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
         }
 
         // 调用Domain Service创建版本
         $versionEntity = $this->taskFileVersionDomainService->createFileVersion($projectEntity->getUserOrganizationCode(), $fileEntity, $editType);
 
         if (! $versionEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_SAVE_FAILED, 'file.version_create_failed');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_SAVE_FAILED, 'file.version_create_failed');
         }
 
         $this->logger->info('File version created successfully', [
@@ -115,12 +115,12 @@ class FileVersionAppService extends AbstractAppService
         // 验证文件是否存在
         $fileEntity = $this->taskFileDomainService->getById($fileId);
         if (! $fileEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
         }
 
         // 验证文件权限 - 确保文件属于当前组织
         /*if ($fileEntity->getOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_PERMISSION_DENIED, 'file.access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_PERMISSION_DENIED, 'file.access_denied');
         }*/
 
         // 验证项目权限
@@ -175,7 +175,7 @@ class FileVersionAppService extends AbstractAppService
         // 验证文件是否存在
         $fileEntity = $this->taskFileDomainService->getById($fileId);
         if (! $fileEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
         }
 
         // 验证项目权限
@@ -187,7 +187,7 @@ class FileVersionAppService extends AbstractAppService
 
         // 验证文件是否为目录
         if ($fileEntity->getIsDirectory()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_PERMISSION_DENIED, 'file.cannot_rollback_directory');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_PERMISSION_DENIED, 'file.cannot_rollback_directory');
         }
 
         $newVersionEntity = $this->taskFileVersionDomainService->rollbackFileToVersion(
@@ -197,7 +197,7 @@ class FileVersionAppService extends AbstractAppService
         );
 
         if (! $newVersionEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_SAVE_FAILED, 'file.rollback_failed');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_SAVE_FAILED, 'file.rollback_failed');
         }
 
         $this->logger->info('File rollback completed successfully', [

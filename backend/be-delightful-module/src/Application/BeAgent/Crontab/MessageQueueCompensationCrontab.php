@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Crontab;
+namespace Delightful\BeDelightful\Application\BeAgent\Crontab;
 
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueCompensationAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueCompensationAppService;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Crontab\Annotation\Crontab;
 use Throwable;

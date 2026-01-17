@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberSettingEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberJoinMethod;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberType;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberSettingEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberJoinMethod;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
 use Hyperf\DbConnection\Db;
 
 /**

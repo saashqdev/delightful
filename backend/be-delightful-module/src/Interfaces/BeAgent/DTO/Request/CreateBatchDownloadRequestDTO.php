@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 class CreateBatchDownloadRequestDTO
 {
@@ -69,28 +69,28 @@ class CreateBatchDownloadRequestDTO
 
         // Validation for project_id
         if (! is_string($projectId)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::VALIDATE_FAILED);
+            ExceptionBuilder::throw(BeAgentErrorCode::VALIDATE_FAILED);
         }
 
         // Validation for file_ids
         if (! is_array($fileIds)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_FILE_IDS_INVALID);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_FILE_IDS_INVALID);
         }
 
         // Either file_ids or topic_id must be provided
         if (empty($fileIds) && empty($projectId)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_FILE_IDS_OR_TOPIC_ID_REQUIRED);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_FILE_IDS_OR_TOPIC_ID_REQUIRED);
         }
 
         // If file_ids is provided, validate it
         if (! empty($fileIds)) {
             if (count($fileIds) > 1000) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_TOO_MANY_FILES);
+                ExceptionBuilder::throw(BeAgentErrorCode::BATCH_TOO_MANY_FILES);
             }
 
             foreach ($fileIds as $fileId) {
                 if (empty($fileId) || ! is_string($fileId)) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_FILE_IDS_INVALID);
+                    ExceptionBuilder::throw(BeAgentErrorCode::BATCH_FILE_IDS_INVALID);
                 }
             }
         }

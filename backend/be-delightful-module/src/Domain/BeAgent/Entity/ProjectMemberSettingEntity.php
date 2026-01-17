@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 use function Hyperf\Translation\__;
 
@@ -287,11 +287,11 @@ class ProjectMemberSettingEntity extends AbstractEntity
 
         // 基本验证：确保userId和projectId有值
         if (empty(trim($this->userId))) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::MEMBER_VALIDATION_FAILED, __('project.setting.user_id_required'));
+            ExceptionBuilder::throw(BeAgentErrorCode::MEMBER_VALIDATION_FAILED, __('project.setting.user_id_required'));
         }
 
         if ($this->projectId <= 0) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::MEMBER_VALIDATION_FAILED, __('project.setting.project_id_required'));
+            ExceptionBuilder::throw(BeAgentErrorCode::MEMBER_VALIDATION_FAILED, __('project.setting.project_id_required'));
         }
     }
 }

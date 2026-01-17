@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Chat\Entity\Items\SeqExtra;
 use App\Domain\Chat\Entity\MagicSeqEntity;
@@ -22,15 +22,15 @@ use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\Query\TopicQuery;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskMessageRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TopicRepositoryInterface;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskMessageEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\CreationSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\Query\TopicQuery;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskMessageRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Exception;
 use Hyperf\DbConnection\Db;
@@ -185,10 +185,10 @@ class TopicDomainService
         // 查找当前的话题是否是自己的
         $topicEntity = $this->topicRepository->getTopicById($id);
         if (empty($topicEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
         if ($topicEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
         }
         $topicEntity->setTopicName($topicName);
 
@@ -303,7 +303,7 @@ class TopicDomainService
 
         // 检查用户权限（检查话题是否属于当前用户）
         if ($topicEntity->getUserId() !== $userId) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
         }
 
         // 设置删除时间
@@ -459,12 +459,12 @@ class TopicDomainService
         // Get topic by ID
         $topicEntity = $this->topicRepository->getTopicById($topicId);
         if (empty($topicEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
         // Check ownership
         if ($topicEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
         }
 
         return $topicEntity;
@@ -521,7 +521,7 @@ class TopicDomainService
             $this->topicRepository->deleteMessagesAndSequencesBySeqIds($allSeqIds);
 
             // 删除magic_super_agent_message表的数据
-            $this->topicRepository->deleteSuperAgentMessagesFromSeqId((int) $targetSeqId);
+            $this->topicRepository->deleteBeAgentMessagesFromSeqId((int) $targetSeqId);
         });
     }
 
@@ -576,7 +576,7 @@ class TopicDomainService
             return;
         }
 
-        // 为了使用现有的删除逻辑，需要找到一个target_seq_id用于deleteSuperAgentMessagesFromSeqId
+        // 为了使用现有的删除逻辑，需要找到一个target_seq_id用于deleteBeAgentMessagesFromSeqId
         // 取最小的seq_id作为target（确保删除所有相关的super_agent_message）
         $targetSeqId = min($revokedSeqIds);
 
@@ -589,7 +589,7 @@ class TopicDomainService
             $this->topicRepository->deleteMessagesAndSequencesBySeqIds($revokedSeqIds);
 
             // 删除magic_super_agent_message表的数据
-            $this->topicRepository->deleteSuperAgentMessagesFromSeqId($targetSeqId);
+            $this->topicRepository->deleteBeAgentMessagesFromSeqId($targetSeqId);
         });
     }
 
@@ -705,7 +705,7 @@ class TopicDomainService
         // Get topic entity
         $topicEntity = $this->topicRepository->getTopicById($topicId);
         if (! $topicEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
         // Build file path using WorkDirectoryUtil
@@ -1020,7 +1020,7 @@ class TopicDomainService
 
         if (count($existingTopics) !== 2) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::TOPIC_NOT_FOUND,
+                BeAgentErrorCode::TOPIC_NOT_FOUND,
                 trans('super_agent.topic.im_topic_not_found')
             );
         }
@@ -1053,7 +1053,7 @@ class TopicDomainService
         // 验证会话ID都已找到
         if (empty($aiConversationId) || empty($userConversationId)) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::TOPIC_NOT_FOUND,
+                BeAgentErrorCode::TOPIC_NOT_FOUND,
                 trans('super_agent.topic.conversation_mismatch')
             );
         }
@@ -1309,8 +1309,8 @@ class TopicDomainService
             // Get original content array
             $contentArray = $originalMessage->getContent()->toArray();
 
-            // For SuperAgentCard type, directly replace fields with fixed structure
-            if ($originalMessage->getMessageType() === ChatMessageType::SuperAgentCard) {
+            // For BeAgentCard type, directly replace fields with fixed structure
+            if ($originalMessage->getMessageType() === ChatMessageType::BeAgentCard) {
                 $contentArray['message_id'] = $messageIdMapping[$contentArray['message_id']] ?? '';
                 $contentArray['topic_id'] = $newTopicId;
                 $contentArray['task_id'] = '';

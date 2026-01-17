@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Infrastructure\Utils;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 
 /**
  * 任务状态验证工具类.

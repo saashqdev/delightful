@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\DTO;
+namespace Delightful\BeDelightful\Application\BeAgent\DTO;
 
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\SuperAgentExtra;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\BeAgentExtra;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
 
 /**
  * User message DTO for initializing agent task.
@@ -36,7 +36,7 @@ class UserMessageDTO
         private readonly string $messageSeqId = '',
         private readonly string $chatMessageType = '',
         private ?array $dynamicParams = null,
-        private ?SuperAgentExtra $extra = null,
+        private ?BeAgentExtra $extra = null,
     ) {
     }
 
@@ -158,12 +158,12 @@ class UserMessageDTO
         return $this->dynamicParams[$key] ?? $default;
     }
 
-    public function getExtra(): ?SuperAgentExtra
+    public function getExtra(): ?BeAgentExtra
     {
         return $this->extra;
     }
 
-    public function setExtra(?SuperAgentExtra $extra): void
+    public function setExtra(?BeAgentExtra $extra): void
     {
         $this->extra = $extra;
     }
@@ -196,7 +196,7 @@ class UserMessageDTO
             chatMessageType: $data['chat_message_type'] ?? $data['chatMessageType'] ?? '',
             dynamicParams: $data['dynamic_params'] ?? $data['dynamicParams'] ?? null,
             extra: isset($data['extra']) && is_array($data['extra'])
-                ? new SuperAgentExtra($data['extra'])
+                ? new BeAgentExtra($data['extra'])
                 : null,
         );
     }

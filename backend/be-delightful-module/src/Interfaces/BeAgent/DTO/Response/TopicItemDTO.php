@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 class TopicItemDTO extends AbstractDTO
 {

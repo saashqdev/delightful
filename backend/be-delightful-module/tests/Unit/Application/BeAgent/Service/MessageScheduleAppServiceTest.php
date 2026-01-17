@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Tests\Unit\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Tests\Unit\Application\BeAgent\Service;
 
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use DateTime;
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageScheduleAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageScheduleAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
 use Dtyq\TaskScheduler\Service\TaskSchedulerDomainService;
 use Exception;
 use PHPUnit\Framework\TestCase;

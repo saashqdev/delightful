@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TokenUsageRecordEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TokenUsageRecordEntity;
 
 /**
  * Token使用记录仓储接口.

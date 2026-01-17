@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
-use Delightful\BeDelightful\Application\SuperAgent\Service\AccountAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\AccountAppService;
 use Hyperf\Amqp\Annotation\Consumer;
 use Hyperf\Amqp\Message\ConsumerMessage;
 use Hyperf\Amqp\Result;

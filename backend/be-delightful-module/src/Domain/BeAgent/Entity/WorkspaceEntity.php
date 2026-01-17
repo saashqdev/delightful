@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceArchiveStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceArchiveStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceStatus;
 
 class WorkspaceEntity extends AbstractEntity
 {

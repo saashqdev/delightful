@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\LongTermMemory\DTO\EvaluateConversationRequestDTO;
@@ -14,7 +14,7 @@ use App\Application\LongTermMemory\Service\LongTermMemoryAppService as MagicServ
 use App\Application\ModelGateway\Service\ModelConfigAppService;
 use App\Domain\Chat\Entity\ValueObject\LLMModelEnum;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\CheckLongTermMemoryEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\CheckLongTermMemoryEvent;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

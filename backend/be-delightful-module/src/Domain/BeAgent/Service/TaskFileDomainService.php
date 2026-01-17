@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
@@ -15,26 +15,26 @@ use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use Dtyq\AsyncEvent\AsyncEventUtil;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\ProjectFileConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectForkEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ForkStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\AttachmentsProcessedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectForkRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileVersionRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TopicRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\ProjectFileConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\FileType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ForkStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\BeDelightful\Domain\BeAgent\Event\AttachmentsProcessedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectForkRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileVersionRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\SandboxGatewayInterface;
 use Delightful\BeDelightful\Infrastructure\Utils\ContentTypeUtil;
 use Delightful\BeDelightful\Infrastructure\Utils\FileSortUtil;
@@ -339,7 +339,7 @@ class TaskFileDomainService
 
         if (empty($fileEntities)) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_NOT_FOUND,
+                BeAgentErrorCode::FILE_NOT_FOUND,
                 trans('file.files_not_found_or_no_permission')
             );
         }
@@ -398,7 +398,7 @@ class TaskFileDomainService
         // 检查输入参数
         if (empty($taskFileEntity->getFileKey())) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_NOT_FOUND,
+                BeAgentErrorCode::FILE_NOT_FOUND,
                 trans('file.file_not_found')
             );
         }
@@ -514,14 +514,14 @@ class TaskFileDomainService
         $workDir = $projectEntity->getWorkDir();
 
         if (empty($workDir)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORK_DIR_NOT_FOUND, trans('project.work_dir.not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::WORK_DIR_NOT_FOUND, trans('project.work_dir.not_found'));
         }
 
         $fullPrefix = $this->getFullPrefix($projectOrganizationCode);
         if (! empty($parentId)) {
             $parentFIleEntity = $this->taskFileRepository->getById($parentId);
             if ($parentFIleEntity === null || $parentFIleEntity->getProjectId() != $projectEntity->getId()) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
+                ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
             }
             $fileKey = rtrim($parentFIleEntity->getFileKey(), '/') . '/' . $fileName;
         } else {
@@ -534,13 +534,13 @@ class TaskFileDomainService
 
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $workDir);
         if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $fileKey)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
         }
 
         // Check if file already exists
         $existingFile = $this->taskFileRepository->getByFileKey($fileKey);
         if ($existingFile !== null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_EXIST, trans('file.file_exist'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_EXIST, trans('file.file_exist'));
         }
 
         Db::beginTransaction();
@@ -596,7 +596,7 @@ class TaskFileDomainService
         $fullPrefix = $this->getFullPrefix($projectOrganizationCode);
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $workDir);
         if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $fileEntity->getFileKey())) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
         }
 
         // Delete cloud file
@@ -808,7 +808,7 @@ class TaskFileDomainService
         $fullTargetFileKey = $dir . DIRECTORY_SEPARATOR . $targetName;
         $targetFileEntity = $this->taskFileRepository->getByFileKey($fullTargetFileKey);
         if ($targetFileEntity !== null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_EXIST, trans('file.file_exist'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_EXIST, trans('file.file_exist'));
         }
 
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir(
@@ -816,7 +816,7 @@ class TaskFileDomainService
             $workDir
         );
         if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $fullTargetFileKey)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
         }
 
         Db::beginTransaction();
@@ -853,7 +853,7 @@ class TaskFileDomainService
         // Check if target directory name already exists
         $targetFileEntity = $this->taskFileRepository->getByFileKey($newDirKey);
         if ($targetFileEntity !== null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_EXIST, trans('file.file_exist'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_EXIST, trans('file.file_exist'));
         }
 
         // Validate new directory key is within work directory
@@ -862,7 +862,7 @@ class TaskFileDomainService
             $workDir
         );
         if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $newDirKey)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
         }
 
         Db::beginTransaction();
@@ -939,13 +939,13 @@ class TaskFileDomainService
         array $keepBothFileIds = []
     ): void {
         if ($targetParentId <= 0) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
         }
 
         // 1. Get and validate target parent directory
         $targetParentEntity = $this->taskFileRepository->getById($targetParentId);
         if ($targetParentEntity === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.target_parent_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.target_parent_not_found'));
         }
 
         // 2. Validate target parent is a directory
@@ -959,7 +959,7 @@ class TaskFileDomainService
         // 3. Validate target parent belongs to target project
         if ($targetParentEntity->getProjectId() !== $targetProject->getId()) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_PERMISSION_DENIED,
+                BeAgentErrorCode::FILE_PERMISSION_DENIED,
                 trans('file.target_parent_not_in_target_project')
             );
         }
@@ -974,7 +974,7 @@ class TaskFileDomainService
             $targetProject->getWorkDir()
         );
         if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $targetPath)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
         }
 
         // 6. Check if file path actually needs to change
@@ -1070,13 +1070,13 @@ class TaskFileDomainService
         array $keepBothFileIds = []
     ): TaskFileEntity {
         if ($targetParentId <= 0) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
         }
 
         // 1. Get and validate target parent directory
         $targetParentEntity = $this->taskFileRepository->getById($targetParentId);
         if ($targetParentEntity === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.target_parent_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.target_parent_not_found'));
         }
 
         // 2. Validate target parent is a directory
@@ -1090,7 +1090,7 @@ class TaskFileDomainService
         // 3. Validate target parent belongs to target project
         if ($targetParentEntity->getProjectId() !== $targetProject->getId()) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_PERMISSION_DENIED,
+                BeAgentErrorCode::FILE_PERMISSION_DENIED,
                 trans('file.target_parent_not_in_target_project')
             );
         }
@@ -1105,7 +1105,7 @@ class TaskFileDomainService
             $targetProject->getWorkDir()
         );
         if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $targetPath)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.illegal_file_key'));
         }
 
         // 6. Check if target file already exists
@@ -1364,7 +1364,7 @@ class TaskFileDomainService
 
         if (! $lockAcquired) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_OPERATION_BUSY,
+                BeAgentErrorCode::FILE_OPERATION_BUSY,
                 trans('file.move_operation_busy')
             );
         }
@@ -1725,7 +1725,7 @@ class TaskFileDomainService
     ): string {
         // Cannot generate URL for directories
         if ($fileEntity->getIsDirectory()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.cannot_generate_url_for_directory'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_KEY, trans('file.cannot_generate_url_for_directory'));
         }
 
         // Set default filename if not provided
@@ -1750,7 +1750,7 @@ class TaskFileDomainService
             );
         } catch (Throwable $e) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_NOT_FOUND,
+                BeAgentErrorCode::FILE_NOT_FOUND,
                 trans('file.file_not_found')
             );
         }
@@ -2108,11 +2108,11 @@ class TaskFileDomainService
     {
         $fileEntity = $this->taskFileRepository->getById($fileId);
         if ($fileEntity === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
         }
 
         if ($fileEntity->getProjectId() <= 0) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
         }
 
         return $fileEntity;
@@ -2323,7 +2323,7 @@ class TaskFileDomainService
                     'target_org' => $targetProject->getUserOrganizationCode(),
                 ]);
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::FILE_COPY_FAILED,
+                    BeAgentErrorCode::FILE_COPY_FAILED,
                     trans('file.cross_organization_copy_failed')
                 );
             }
@@ -2372,7 +2372,7 @@ class TaskFileDomainService
                     'target_org' => $targetProject->getUserOrganizationCode(),
                 ]);
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::FILE_MOVE_FAILED,
+                    BeAgentErrorCode::FILE_MOVE_FAILED,
                     trans('file.cross_organization_copy_failed')
                 );
             }

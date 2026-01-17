@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Contact\Entity\MagicUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
@@ -17,22 +17,22 @@ use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Dtyq\AsyncEvent\AsyncEventUtil;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\TaskMessageDTO;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\UserMessageDTO;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\RunTaskBeforeEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\AgentDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskMessageEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\CreationSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskContext;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskBeforeEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\AgentDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Odin\Message\Role;
@@ -77,7 +77,7 @@ class HandleApiMessageAppService extends AbstractAppService
             // Get topic information
             $topicEntity = $this->topicDomainService->getTopicByChatTopicId($dataIsolation, $userMessageDTO->getChatTopicId());
             if (is_null($topicEntity)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
             }
             $topicId = $topicEntity->getId();
 
@@ -189,7 +189,7 @@ class HandleApiMessageAppService extends AbstractAppService
             // Get topic information
             $topicEntity = $this->topicDomainService->getTopicByChatTopicId($dataIsolation, $userMessageDTO->getChatTopicId());
             if (is_null($topicEntity)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
             }
             $topicId = $topicEntity->getId();
 
@@ -300,7 +300,7 @@ class HandleApiMessageAppService extends AbstractAppService
     {
         $accessToken = $this->accessTokenDomainService->getByAccessToken($apiKey);
         if (empty($accessToken)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::ACCESS_TOKEN_NOT_FOUND, 'Access token not found');
+            ExceptionBuilder::throw(BeAgentErrorCode::ACCESS_TOKEN_NOT_FOUND, 'Access token not found');
         }
 
         if (empty($uid)) {

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Request;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ConvertType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ConvertType;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract\RequestInterface;
 
 /**

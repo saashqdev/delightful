@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\Application\SuperAgent\Config\BatchProcessConfig;
+use Delightful\BeDelightful\Application\BeAgent\Config\BatchProcessConfig;
 use JsonSerializable;
 
 /**

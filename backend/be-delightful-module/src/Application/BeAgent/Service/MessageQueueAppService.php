@@ -5,22 +5,22 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueCreatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueUpdatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ConsumeMessageQueueRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageQueueRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageQueueRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageQueueRequestDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Event\MessageQueueCreatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\MessageQueueDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\MessageQueueUpdatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\MessageQueueDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ConsumeMessageQueueRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateMessageQueueRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\QueryMessageQueueRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateMessageQueueRequestDTO;
 use Hyperf\Logger\LoggerFactory;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -71,7 +71,7 @@ class MessageQueueAppService extends AbstractAppService
         $chatMessageType = ChatMessageType::tryFrom($requestDTO->getMessageType());
         if ($chatMessageType === null) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::VALIDATE_FAILED,
+                BeAgentErrorCode::VALIDATE_FAILED,
                 trans('message_queue.invalid_message_type', ['type' => $requestDTO->getMessageType()])
             );
         }
@@ -134,14 +134,14 @@ class MessageQueueAppService extends AbstractAppService
 
         // Validate ownership
         if ($existingMessage->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
         }
 
         // Validate message type against ChatMessageType enum
         $chatMessageType = ChatMessageType::tryFrom($requestDTO->getMessageType());
         if ($chatMessageType === null) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::VALIDATE_FAILED,
+                BeAgentErrorCode::VALIDATE_FAILED,
                 trans('message_queue.invalid_message_type', ['type' => $requestDTO->getMessageType()])
             );
         }
@@ -205,13 +205,13 @@ class MessageQueueAppService extends AbstractAppService
 
         // Validate ownership
         if ($existingMessage->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
         }
 
         // Check if message can be deleted (same rule as modification)
         if (! $existingMessage->canBeModified()) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::MESSAGE_STATUS_NOT_MODIFIABLE,
+                BeAgentErrorCode::MESSAGE_STATUS_NOT_MODIFIABLE,
                 trans('message_queue.status_not_modifiable')
             );
         }
@@ -280,7 +280,7 @@ class MessageQueueAppService extends AbstractAppService
             $chatMessageType = ChatMessageType::tryFrom($requestDTO->getMessageType());
             if ($chatMessageType === null) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::VALIDATE_FAILED,
+                    BeAgentErrorCode::VALIDATE_FAILED,
                     trans('message_queue.invalid_message_type', ['type' => $requestDTO->getMessageType()])
                 );
             }
@@ -342,7 +342,7 @@ class MessageQueueAppService extends AbstractAppService
         );
         // Validate ownership
         if ($existingMessage->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
         }
 
         // Consume message

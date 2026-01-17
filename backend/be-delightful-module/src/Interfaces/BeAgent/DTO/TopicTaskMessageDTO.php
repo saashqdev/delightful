@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessagePayload;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TokenUsageDetails;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskMessageEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessagePayload;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TokenUsageDetails;
 
 /**
  * 话题任务消息DTO.

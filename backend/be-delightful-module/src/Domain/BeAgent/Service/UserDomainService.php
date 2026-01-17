@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Contact\Entity\MagicUserEntity;
 use App\Domain\Contact\Service\MagicUserDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\UserAuthorization;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\UserAuthorization;
 
 class UserDomainService
 {

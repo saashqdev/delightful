@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Application\Chat\Service\MagicAgentEventAppService;
 use App\Application\Chat\Service\MagicChatMessageAppService;
@@ -19,10 +19,10 @@ use App\Domain\Chat\Service\MagicConversationDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\UserMessageDTO;
-use Delightful\BeDelightful\Application\SuperAgent\Service\HandleUserMessageAppService;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskMode;
+use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\HandleUserMessageAppService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskMode;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -32,7 +32,7 @@ use Throwable;
  *
  * Responsible for publishing agent messages based on AI code processing
  */
-class SuperAgentMessageSubscriberV2 extends MagicAgentEventAppService
+class BeAgentMessageSubscriberV2 extends MagicAgentEventAppService
 {
     protected LoggerInterface $logger;
 
@@ -77,7 +77,7 @@ class SuperAgentMessageSubscriberV2 extends MagicAgentEventAppService
             }
 
             // 更改附件的定义，附件是用户 @了 文件/mcp/agent 等
-            $superAgentExtra = $messageStruct->getExtra()?->getSuperAgent();
+            $superAgentExtra = $messageStruct->getExtra()?->getBeAgent();
             $mentions = $superAgentExtra?->getMentionsJsonStruct();
             $queueId = $superAgentExtra?->getQueueId() ?? '';
             // Extract necessary information

@@ -7,62 +7,62 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful;
 
-use App\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessageInterface;
+use App\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessageInterface;
 use App\Domain\Chat\Event\Agent\AgentExecuteInterface;
 use Delightful\BeDelightful\Application\Share\Adapter\TopicShareableResource;
 use Delightful\BeDelightful\Application\Share\Factory\ShareableResourceFactory;
 use Delightful\BeDelightful\Application\Share\Service\ResourceShareAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe\ProjectOperatorLogSubscriber;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe\SuperAgentMessageSubscriberV2;
-use Delightful\BeDelightful\Application\SuperAgent\Service\AgentAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileProcessAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\HandleAgentMessageAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageScheduleAppService;
+use Delightful\BeDelightful\Application\BeAgent\Event\Subscribe\ProjectOperatorLogSubscriber;
+use Delightful\BeDelightful\Application\BeAgent\Event\Subscribe\BeAgentMessageSubscriberV2;
+use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileProcessAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\HandleAgentMessageAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageScheduleAppService;
 use Delightful\BeDelightful\Domain\Agent\Repository\Facade\BeDelightfulAgentRepositoryInterface;
 use Delightful\BeDelightful\Domain\Agent\Repository\Persistence\BeDelightfulAgentRepository;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage;
 use Delightful\BeDelightful\Domain\Share\Repository\Facade\ResourceShareRepositoryInterface;
 use Delightful\BeDelightful\Domain\Share\Repository\Persistence\ResourceShareRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageQueueRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectForkRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileVersionRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskMessageRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TopicRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\WorkspaceRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\MessageQueueRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\MessageScheduleLogRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\MessageScheduleRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\ProjectForkRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\ProjectMemberRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\ProjectMemberSettingRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\ProjectOperationLogRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\ProjectRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\TaskFileCleanupRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\TaskFileRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\TaskFileVersionRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\TaskMessageRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\TaskRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\TokenUsageRecordRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\TopicRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\WorkspaceRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence\WorkspaceVersionRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageScheduleDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectOperationLogDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileVersionDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectForkRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileVersionRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskMessageRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageQueueRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageScheduleLogRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\MessageScheduleRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectForkRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectMemberRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectMemberSettingRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectOperationLogRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\ProjectRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileCleanupRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskFileVersionRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskMessageRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TaskRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TokenUsageRecordRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\TopicRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\WorkspaceRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence\WorkspaceVersionRepository;
+use Delightful\BeDelightful\Domain\BeAgent\Service\MessageScheduleDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectOperationLogDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileVersionDomainService;
 use Delightful\BeDelightful\ErrorCode\ShareErrorCode;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\SandboxInterface;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine\SandboxService;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\SandboxAgentInterface;
@@ -110,8 +110,8 @@ class ConfigProvider
         return [
             'dependencies_priority' => [
                 // 助理执行事件
-                AgentExecuteInterface::class => SuperAgentMessageSubscriberV2::class,
-                SuperAgentMessageInterface::class => SuperAgentMessage::class,
+                AgentExecuteInterface::class => BeAgentMessageSubscriberV2::class,
+                BeAgentMessageInterface::class => BeAgentMessage::class,
             ],
             'dependencies' => [
                 // 添加接口到实现类的映射
@@ -166,7 +166,7 @@ class ConfigProvider
             ],
             'error_message' => [
                 'error_code_mapper' => [
-                    SuperAgentErrorCode::class => [51000, 51299],
+                    BeAgentErrorCode::class => [51000, 51299],
                     ShareErrorCode::class => [51300, 51400],
                 ],
             ],

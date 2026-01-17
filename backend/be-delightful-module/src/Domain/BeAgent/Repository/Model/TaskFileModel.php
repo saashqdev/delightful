@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Model;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Model;
 
 use App\Infrastructure\Core\AbstractModel;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
 use Hyperf\Database\Model\SoftDeletes;
 
 class TaskFileModel extends AbstractModel

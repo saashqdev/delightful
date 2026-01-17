@@ -5,43 +5,43 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\AgentFileAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileBatchAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileManagementAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileProcessAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileVersionAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\SandboxFileNotificationAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\Service\AgentFileAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileBatchAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileManagementAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileProcessAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileVersionAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\SandboxFileNotificationAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkFileUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchCopyFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchDeleteFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchMoveFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchSaveFileContentRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchSaveProjectFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckBatchOperationStatusRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CopyFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateBatchDownloadRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DeleteDirectoryRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetFileUrlsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetFileVersionsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\MoveFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ProjectUploadTokenRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\RefreshStsTokenRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ReplaceFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\RollbackFileToVersionRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SandboxFileNotificationRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveProjectFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\TopicUploadTokenRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\WorkspaceAttachmentsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchCopyFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchDeleteFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchMoveFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchSaveFileContentRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchSaveProjectFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CheckBatchOperationStatusRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CopyFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateBatchDownloadRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\DeleteDirectoryRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetFileUrlsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetFileVersionsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\MoveFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ProjectUploadTokenRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\RefreshStsTokenRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ReplaceFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\RollbackFileToVersionRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SandboxFileNotificationRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveProjectFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\TopicUploadTokenRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\WorkspaceAttachmentsRequestDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\RateLimit\Annotation\RateLimit;
 use Qbhy\HyperfAuth\AuthManager;
@@ -236,7 +236,7 @@ class FileApi extends AbstractApi
 
         // Validate target_name parameter using WorkFileUtil
         if (! WorkFileUtil::isValidFileName($targetName)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_ILLEGAL_NAME, 'file.illegal_file_name');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_ILLEGAL_NAME, 'file.illegal_file_name');
         }
         return $this->fileManagementAppService->renameFile($requestContext, (int) $id, $targetName);
     }

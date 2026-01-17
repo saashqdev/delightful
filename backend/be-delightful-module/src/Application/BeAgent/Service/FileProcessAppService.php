@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Chat\Service\MagicChatFileAppService;
 use App\Application\File\Service\FileAppService;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\MentionType;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\MentionType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\File\Service\FileDomainService;
 use App\ErrorCode\GenericErrorCode;
@@ -21,30 +21,30 @@ use App\Infrastructure\Util\ShadowCode\ShadowCode;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Dtyq\AsyncEvent\AsyncEventUtil;
 use Dtyq\CloudFile\Kernel\Struct\UploadFile;
-use Delightful\BeDelightful\Application\SuperAgent\Config\BatchProcessConfig;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\ProjectFileConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\AttachmentsProcessedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileContentSavedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileVersionDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\Config\BatchProcessConfig;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\ProjectFileConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\FileType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceVersionEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Event\AttachmentsProcessedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileContentSavedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileVersionDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchSaveFileContentRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\RefreshStsTokenRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveFileContentRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\WorkspaceAttachmentsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\FileInfoResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\FileNameResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchSaveFileContentRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\RefreshStsTokenRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveFileContentRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\WorkspaceAttachmentsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\FileInfoResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\FileNameResponseDTO;
 use Hyperf\Codec\Json;
 use Hyperf\Coroutine\Parallel;
 use Hyperf\DbConnection\Db;
@@ -454,7 +454,7 @@ class FileProcessAppService extends AbstractAppService
             // Get work_dir directory from task table as working directory
             $taskEntity = $this->taskDomainService->getTaskById((int) $requestDTO->getBeDelightfulTaskId());
             if (empty($taskEntity)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'task.not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'task.not_found');
             }
             $projectDir = WorkDirectoryUtil::getRootDir($taskEntity->getUserId(), $taskEntity->getProjectId());
             // Get STS temporary credentials
@@ -510,7 +510,7 @@ class FileProcessAppService extends AbstractAppService
                 return $result;
             }
             $this->logger->warning(sprintf('Failed to acquire mutex lock for file %d. It might be held by another instance.', $fileId));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_CONCURRENT_MODIFICATION, 'file.concurrent_modification');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_CONCURRENT_MODIFICATION, 'file.concurrent_modification');
         } finally {
             // Release lock if acquired
             if ($lockAcquired) {
@@ -527,12 +527,12 @@ class FileProcessAppService extends AbstractAppService
     {
         $task = $this->taskDomainService->getTaskBySandboxId($requestDTO->getSandboxId());
         if (empty($task)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'task.not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'task.not_found');
         }
 
         $topic = $this->topicDomainService->getTopicOnlyByChatTopicId($requestDTO->getTopicId());
         if (empty($topic)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.not_found');
         }
 
         if ($requestDTO->getFolder() === '.chat_history') {
@@ -578,7 +578,7 @@ class FileProcessAppService extends AbstractAppService
                     'Failed to acquire workspace attachments lock for topic %s. Concurrent operation may be in progress.',
                     $topic->getId()
                 ));
-                ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_LOCK_FAILED, 'topic.concurrent_operation_failed');
+                ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_LOCK_FAILED, 'topic.concurrent_operation_failed');
             }
 
             $this->logger->debug(sprintf('Lock acquired for topic %s by %s', $topic->getId(), $lockOwner));
@@ -587,7 +587,7 @@ class FileProcessAppService extends AbstractAppService
             Db::transaction(function () use ($topic, $versionEntity) {
                 $bool = $this->topicDomainService->updateTopicWhereUpdatedAt($topic, $topic->getUpdatedAt());
                 if (! $bool) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_LOCK_FAILED, 'topic.concurrent_operation_failed');
+                    ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_LOCK_FAILED, 'topic.concurrent_operation_failed');
                 }
                 $this->workspaceDomainService->createWorkspaceVersion($versionEntity);
             });
@@ -601,7 +601,7 @@ class FileProcessAppService extends AbstractAppService
                 $topic->getId(),
                 $requestDTO->getSandboxId()
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_WORKSPACE_VERSION_FAILED, $e->getMessage());
+            ExceptionBuilder::throw(BeAgentErrorCode::CREATE_WORKSPACE_VERSION_FAILED, $e->getMessage());
         } finally {
             // Ensure lock is released even if an exception occurs
             if ($lockAcquired) {
@@ -934,7 +934,7 @@ class FileProcessAppService extends AbstractAppService
         $taskFileEntity = $this->taskFileDomainService->getById($fileId);
 
         if (empty($taskFileEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'file.not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'file.not_found');
         }
 
         // Create response DTO and return
@@ -954,7 +954,7 @@ class FileProcessAppService extends AbstractAppService
         $taskFileEntity = $this->taskFileDomainService->getById($fileId);
 
         if (empty($taskFileEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'file.not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'file.not_found');
         }
 
         // Get current version (latest version number) - optimized for performance
@@ -1032,12 +1032,12 @@ class FileProcessAppService extends AbstractAppService
         $taskFileEntity = $this->taskDomainService->getTaskFile($fileId);
 
         if (empty($taskFileEntity)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'file.not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'file.not_found');
         }
 
         /*// Check if current user is the file owner
         if ($taskFileEntity->getUserId() !== $authorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_PERMISSION_DENIED, 'file.permission_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_PERMISSION_DENIED, 'file.permission_denied');
         }*/
 
         $this->getAccessibleProject($taskFileEntity->getProjectId(), $authorization->getId(), $authorization->getOrganizationCode());
@@ -1136,7 +1136,7 @@ class FileProcessAppService extends AbstractAppService
                 $fileId ?? 'N/A',
                 $projectOrganizationCode
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_UPLOAD_FAILED, 'file.upload_failed');
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_UPLOAD_FAILED, 'file.upload_failed');
         }
     }
 

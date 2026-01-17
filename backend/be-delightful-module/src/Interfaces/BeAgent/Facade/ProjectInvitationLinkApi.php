@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectInvitationLinkAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectInvitationLinkAppService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

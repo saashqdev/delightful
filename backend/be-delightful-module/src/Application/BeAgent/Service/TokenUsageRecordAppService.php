@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TokenUsageRecordEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TokenUsageRecordDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TokenUsageRecordEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TokenUsageRecordDomainService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;

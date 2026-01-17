@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Application\Share\Adapter;
 
 use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
 use Delightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
-use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
 use Exception;
 
 class TopicShareableResource implements ResourceFactoryInterface

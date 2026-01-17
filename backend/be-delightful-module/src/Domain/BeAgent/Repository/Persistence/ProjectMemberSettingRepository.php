@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberSettingEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\ProjectMemberSettingModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberSettingEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberSettingRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectMemberSettingModel;
 
 /**
  * 项目成员设置仓储实现.

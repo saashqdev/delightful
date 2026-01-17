@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
@@ -13,20 +13,20 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\ShadowCode\ShadowCode;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\AgentAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileConverterAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\HandleTaskMessageAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TaskAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicTaskAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\ConvertStatusEnum;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\UserDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ConvertFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetTaskFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileConverterAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\HandleTaskMessageAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TaskAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicTaskAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\ConvertStatusEnum;
+use Delightful\BeDelightful\Domain\BeAgent\Service\UserDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ConvertFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetTaskFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\TopicTaskMessageDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -187,7 +187,7 @@ class TaskApi extends AbstractApi
         $taskKey = $this->request->input('task_key');
 
         if (empty($taskKey)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::VALIDATE_FAILED, 'validation.required');
+            ExceptionBuilder::throw(BeAgentErrorCode::VALIDATE_FAILED, 'validation.required');
         }
 
         // 设置用户授权信息
@@ -209,7 +209,7 @@ class TaskApi extends AbstractApi
                     'batch_id' => $result->getBatchId(),
                     'convert_type' => $result->getConvertType(),
                 ]);
-                ExceptionBuilder::throw(SuperAgentErrorCode::FILE_CONVERT_FAILED, 'file.convert_failed');
+                ExceptionBuilder::throw(BeAgentErrorCode::FILE_CONVERT_FAILED, 'file.convert_failed');
             }
 
             // 如果状态是 COMPLETED 但是没有下载地址，说明任务发生了错误
@@ -224,7 +224,7 @@ class TaskApi extends AbstractApi
                     'batch_id' => $result->getBatchId(),
                     'convert_type' => $result->getConvertType(),
                 ]);
-                ExceptionBuilder::throw(SuperAgentErrorCode::FILE_CONVERT_FAILED, 'file.convert_failed');
+                ExceptionBuilder::throw(BeAgentErrorCode::FILE_CONVERT_FAILED, 'file.convert_failed');
             }
 
             return $result->toArray();

@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use Delightful\BeDelightful\Application\SuperAgent\DTO\CleanupFileKeysRequestDTO;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
+use Delightful\BeDelightful\Application\BeAgent\DTO\CleanupFileKeysRequestDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Service\FileKeyCleanupDomainService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;

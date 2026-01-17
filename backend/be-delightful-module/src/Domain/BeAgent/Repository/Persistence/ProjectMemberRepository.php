@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberType;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectMemberRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\ProjectMemberModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectMemberModel;
 use Hyperf\DbConnection\Db;
 
 /**

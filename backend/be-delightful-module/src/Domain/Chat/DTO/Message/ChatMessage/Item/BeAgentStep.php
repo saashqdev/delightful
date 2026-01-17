@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 /**
  * 步骤实体类.
  */
-class SuperAgentStep extends AbstractEntity
+class BeAgentStep extends AbstractEntity
 {
     protected string $id = '';
 

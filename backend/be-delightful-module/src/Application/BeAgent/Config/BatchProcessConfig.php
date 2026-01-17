@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Config;
+namespace Delightful\BeDelightful\Application\BeAgent\Config;
 
 /**
  * Batch Process Configuration.

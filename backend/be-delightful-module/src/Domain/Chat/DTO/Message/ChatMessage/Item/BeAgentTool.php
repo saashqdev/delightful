@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 /**
  * 工具实体类.
  */
-class SuperAgentTool extends AbstractEntity
+class BeAgentTool extends AbstractEntity
 {
     /**
      * 工具ID.

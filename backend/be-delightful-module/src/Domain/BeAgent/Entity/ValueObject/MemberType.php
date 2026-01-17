@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 /**
  * 成员类型值对象
@@ -28,7 +28,7 @@ enum MemberType: string
         return match ($type) {
             'User' => self::USER,
             'Department' => self::DEPARTMENT,
-            default => ExceptionBuilder::throw(SuperAgentErrorCode::INVALID_MEMBER_TYPE)
+            default => ExceptionBuilder::throw(BeAgentErrorCode::INVALID_MEMBER_TYPE)
         };
     }
 

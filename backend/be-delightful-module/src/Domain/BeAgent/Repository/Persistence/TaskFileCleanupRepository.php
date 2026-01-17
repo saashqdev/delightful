@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\TaskFileModel;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TaskFileModel;
 use Hyperf\DbConnection\Db;
 
 class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface

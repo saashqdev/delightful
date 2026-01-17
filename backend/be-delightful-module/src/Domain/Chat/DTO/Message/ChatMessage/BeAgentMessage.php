@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage;
 
 use App\Domain\Chat\DTO\Message\ChatMessage\AbstractChatMessageStruct;
-use App\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessageInterface;
+use App\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessageInterface;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\MemoryOperation;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentStep;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentTool;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\BeAgentStep;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\BeAgentTool;
 
-class SuperAgentMessage extends AbstractChatMessageStruct implements TextContentInterface, SuperAgentMessageInterface
+class BeAgentMessage extends AbstractChatMessageStruct implements TextContentInterface, BeAgentMessageInterface
 {
     protected ?string $topicId = '';
 
@@ -35,7 +35,7 @@ class SuperAgentMessage extends AbstractChatMessageStruct implements TextContent
 
     protected ?string $role = '';
 
-    protected ?SuperAgentTool $tool = null;
+    protected ?BeAgentTool $tool = null;
 
     protected ?int $sendTimestamp = null;
 
@@ -124,27 +124,27 @@ class SuperAgentMessage extends AbstractChatMessageStruct implements TextContent
         return $this;
     }
 
-    public function getTool(): ?SuperAgentTool
+    public function getTool(): ?BeAgentTool
     {
         return $this->tool;
     }
 
-    public function setTool(null|array|string|SuperAgentTool $tool): self
+    public function setTool(null|array|string|BeAgentTool $tool): self
     {
         if ($tool === null) {
             $this->tool = null;
-        } elseif ($tool instanceof SuperAgentTool) {
+        } elseif ($tool instanceof BeAgentTool) {
             $this->tool = $tool;
         } elseif (is_string($tool)) {
             if (json_validate($tool)) {
                 $decoded = json_decode($tool, true);
-                $this->tool = new SuperAgentTool($decoded);
+                $this->tool = new BeAgentTool($decoded);
             } else {
                 // 如果不是有效的 JSON 字符串，可以选择抛出异常或忽略
                 $this->tool = null;
             }
         } else {
-            $this->tool = new SuperAgentTool($tool);
+            $this->tool = new BeAgentTool($tool);
         }
         return $this;
     }
@@ -237,10 +237,10 @@ class SuperAgentMessage extends AbstractChatMessageStruct implements TextContent
             'content' => $this->content,
             'event' => $this->event,
             'steps' => array_map(function ($step) {
-                if ($step instanceof SuperAgentStep) {
+                if ($step instanceof BeAgentStep) {
                     return $step->toArray();
                 }
-                return (new SuperAgentStep($step))->toArray();
+                return (new BeAgentStep($step))->toArray();
             }, $this->steps ?? []),
             'tool' => $this->tool?->toArray(),
             'role' => $this->role,
@@ -301,6 +301,6 @@ class SuperAgentMessage extends AbstractChatMessageStruct implements TextContent
 
     protected function setMessageType(): void
     {
-        $this->chatMessageType = ChatMessageType::SuperAgentCard;
+        $this->chatMessageType = ChatMessageType::BeAgentCard;
     }
 }

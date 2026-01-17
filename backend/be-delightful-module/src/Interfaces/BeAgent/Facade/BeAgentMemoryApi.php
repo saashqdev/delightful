@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Application\LongTermMemory\Service\LongTermMemoryAppService;
 use App\Domain\LongTermMemory\DTO\CreateMemoryDTO;
@@ -16,8 +16,8 @@ use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\ShadowCode\ShadowCode;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use InvalidArgumentException;
@@ -25,7 +25,7 @@ use InvalidArgumentException;
 use function Hyperf\Translation\trans;
 
 #[ApiResponse('low_code')]
-class SuperAgentMemoryApi extends AbstractApi
+class BeAgentMemoryApi extends AbstractApi
 {
     public function __construct(
         protected RequestInterface $request,

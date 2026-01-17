@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileVersionEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileVersionRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\TaskFileVersionModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileVersionEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileVersionRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TaskFileVersionModel;
 
 class TaskFileVersionRepository implements TaskFileVersionRepositoryInterface
 {

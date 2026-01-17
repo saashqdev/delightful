@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\File\Service\FileAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
@@ -18,43 +18,43 @@ use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Publish\FileBatchCopyPublisher;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Publish\FileBatchMovePublisher;
+use Delightful\BeDelightful\Application\BeAgent\Event\Publish\FileBatchCopyPublisher;
+use Delightful\BeDelightful\Application\BeAgent\Event\Publish\FileBatchMovePublisher;
 use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Service\ResourceShareDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\DirectoryDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileBatchCopyEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileBatchMoveEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileMovedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileRenamedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileReplacedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FilesBatchDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileUploadedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileVersionDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Event\DirectoryDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileBatchCopyEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileBatchMoveEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileMovedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileRenamedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileReplacedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FilesBatchDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileUploadedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileVersionDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
 use Delightful\BeDelightful\ErrorCode\ShareErrorCode;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\AccessTokenUtil;
 use Delightful\BeDelightful\Infrastructure\Utils\FileBatchOperationStatusManager;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchCopyFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchDeleteFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchMoveFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchSaveProjectFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckBatchOperationStatusRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DeleteDirectoryRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ProjectUploadTokenRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ReplaceFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveProjectFileRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\TopicUploadTokenRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\FileBatchOperationResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\FileBatchOperationStatusResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchCopyFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchDeleteFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchMoveFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchSaveProjectFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CheckBatchOperationStatusRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\DeleteDirectoryRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ProjectUploadTokenRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ReplaceFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveProjectFileRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\TopicUploadTokenRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\FileBatchOperationResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\FileBatchOperationStatusResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TaskFileItemDTO;
 use Hyperf\Amqp\Producer;
 use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
@@ -110,7 +110,7 @@ class FileManagementAppService extends AbstractAppService
                 $projectEntity = $this->getAccessibleProject((int) $projectId, $userId, $userAuthorization->getOrganizationCode());
                 $workDir = $projectEntity->getWorkDir();
                 if (empty($workDir)) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::WORK_DIR_NOT_FOUND, trans('project.work_dir.not_found'));
+                    ExceptionBuilder::throw(BeAgentErrorCode::WORK_DIR_NOT_FOUND, trans('project.work_dir.not_found'));
                 }
                 $organizationCode = $projectEntity->getUserOrganizationCode();
             } else {
@@ -175,7 +175,7 @@ class FileManagementAppService extends AbstractAppService
             // 生成话题工作目录
             $topicEntity = $this->topicDomainService->getTopicById((int) $topicId);
             if (empty($topicEntity)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, trans('topic.not_found'));
+                ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, trans('topic.not_found'));
             }
             $projectEntity = $this->projectDomainService->getProjectNotUserId($topicEntity->getProjectId());
             $workDir = WorkDirectoryUtil::getTopicUploadDir($userId, $topicEntity->getProjectId(), $topicEntity->getId());
@@ -236,7 +236,7 @@ class FileManagementAppService extends AbstractAppService
         // 获取自旋锁（30秒超时）
         if (! $this->locker->spinLock($lockName, $lockOwner, 30)) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_SAVE_FAILED,
+                BeAgentErrorCode::FILE_SAVE_FAILED,
                 trans('file.directory_creation_locked')
             );
         }
@@ -264,7 +264,7 @@ class FileManagementAppService extends AbstractAppService
             } else {
                 $parentFileEntity = $this->taskFileDomainService->getById((int) $requestDTO->getParentId());
                 if (empty($parentFileEntity) || $parentFileEntity->getProjectId() != (int) $projectId) {
-                    ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.not_found'));
+                    ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.not_found'));
                 }
             }
 
@@ -317,7 +317,7 @@ class FileManagementAppService extends AbstractAppService
                 $requestDTO->getProjectId(),
                 $requestDTO->getFileKey()
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_SAVE_FAILED, trans('file.file_save_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_SAVE_FAILED, trans('file.file_save_failed'));
         } finally {
             // 确保释放锁
             $this->locker->release($lockName, $lockOwner);
@@ -350,7 +350,7 @@ class FileManagementAppService extends AbstractAppService
         // 获取项目级别的锁（30秒超时）
         if (! $this->locker->spinLock($lockName, $lockOwner, 30)) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_SAVE_FAILED,
+                BeAgentErrorCode::FILE_SAVE_FAILED,
                 trans('file.batch_save_locked')
             );
         }
@@ -414,7 +414,7 @@ class FileManagementAppService extends AbstractAppService
                 $e->getMessage(),
                 $projectId
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_SAVE_FAILED, trans('file.batch_save_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_SAVE_FAILED, trans('file.batch_save_failed'));
         } finally {
             // 确保释放锁
             $this->locker->release($lockName, $lockOwner);
@@ -497,7 +497,7 @@ class FileManagementAppService extends AbstractAppService
                 $requestDTO->getProjectId(),
                 $requestDTO->getFileName()
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_CREATE_FAILED, trans('file.file_create_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_CREATE_FAILED, trans('file.file_create_failed'));
         }
     }
 
@@ -538,7 +538,7 @@ class FileManagementAppService extends AbstractAppService
                 $e->getMessage(),
                 $fileId
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_DELETE_FAILED, trans('file.file_delete_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_DELETE_FAILED, trans('file.file_delete_failed'));
         }
     }
 
@@ -558,12 +558,12 @@ class FileManagementAppService extends AbstractAppService
             // 2. 获取工作目录并拼接完整路径
             $workDir = $projectEntity->getWorkDir();
             if (empty($workDir)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::WORK_DIR_NOT_FOUND, trans('project.work_dir.not_found'));
+                ExceptionBuilder::throw(BeAgentErrorCode::WORK_DIR_NOT_FOUND, trans('project.work_dir.not_found'));
             }
 
             $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
             if (empty($fileEntity) || $fileEntity->getProjectId() != $projectId) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
+                ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.file_not_found'));
             }
 
             // 3. 构建目标删除路径
@@ -605,7 +605,7 @@ class FileManagementAppService extends AbstractAppService
                 $requestDTO->getProjectId(),
                 $requestDTO->getFileId()
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_DELETE_FAILED, trans('file.directory_delete_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_DELETE_FAILED, trans('file.directory_delete_failed'));
         }
     }
 
@@ -661,7 +661,7 @@ class FileManagementAppService extends AbstractAppService
                 $requestDTO->getProjectId(),
                 implode(',', $requestDTO->getFileIds())
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_DELETE_FAILED, trans('file.batch_delete_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_DELETE_FAILED, trans('file.batch_delete_failed'));
         }
     }
 
@@ -710,7 +710,7 @@ class FileManagementAppService extends AbstractAppService
                 $e->getMessage(),
                 $fileId
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_RENAME_FAILED, trans('file.file_rename_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_RENAME_FAILED, trans('file.file_rename_failed'));
         }
     }
 
@@ -866,7 +866,7 @@ class FileManagementAppService extends AbstractAppService
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_MOVE_FAILED, trans('file.file_move_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_MOVE_FAILED, trans('file.file_move_failed'));
         }
     }
 
@@ -1011,7 +1011,7 @@ class FileManagementAppService extends AbstractAppService
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_COPY_FAILED, trans('file.file_copy_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_COPY_FAILED, trans('file.file_copy_failed'));
         }
     }
 
@@ -1058,7 +1058,7 @@ class FileManagementAppService extends AbstractAppService
                 implode(',', $fileIds),
                 $downloadMode
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.get_urls_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.get_urls_failed'));
         }
     }
 
@@ -1091,7 +1091,7 @@ class FileManagementAppService extends AbstractAppService
                 case ResourceType::Topic->value:
                     $topicEntity = $this->topicDomainService->getTopicWithDeleted((int) $shareEntity->getResourceId());
                     if (empty($topicEntity)) {
-                        ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+                        ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
                     }
                     $projectId = $topicEntity->getProjectId();
                     break;
@@ -1119,7 +1119,7 @@ class FileManagementAppService extends AbstractAppService
                 implode(',', $fileIds),
                 $downloadMode
             ));
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.get_urls_by_token_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.get_urls_by_token_failed'));
         }
     }
 
@@ -1244,7 +1244,7 @@ class FileManagementAppService extends AbstractAppService
                 'target_parent_id' => $requestDTO->getTargetParentId(),
                 'error' => $e->getMessage(),
             ]);
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_MOVE_FAILED, trans('file.batch_move_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_MOVE_FAILED, trans('file.batch_move_failed'));
         }
     }
 
@@ -1368,7 +1368,7 @@ class FileManagementAppService extends AbstractAppService
                 'target_parent_id' => $requestDTO->getTargetParentId(),
                 'error' => $e->getMessage(),
             ]);
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_COPY_FAILED, trans('file.batch_copy_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_COPY_FAILED, trans('file.batch_copy_failed'));
         }
     }
 
@@ -1431,7 +1431,7 @@ class FileManagementAppService extends AbstractAppService
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            ExceptionBuilder::throw(SuperAgentErrorCode::FILE_NOT_FOUND, trans('file.check_batch_status_failed'));
+            ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, trans('file.check_batch_status_failed'));
         }
     }
 
@@ -1456,7 +1456,7 @@ class FileManagementAppService extends AbstractAppService
             $fileEntity = $this->taskFileDomainService->getById($fileId);
             if (empty($fileEntity)) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::FILE_NOT_FOUND,
+                    BeAgentErrorCode::FILE_NOT_FOUND,
                     trans('file.file_not_found')
                 );
             }
@@ -1464,7 +1464,7 @@ class FileManagementAppService extends AbstractAppService
             // 检查是否为目录（边界1：不允许替换目录）
             if ($fileEntity->getIsDirectory()) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::FILE_OPERATION_NOT_ALLOWED,
+                    BeAgentErrorCode::FILE_OPERATION_NOT_ALLOWED,
                     trans('file.cannot_replace_directory')
                 );
             }
@@ -1493,7 +1493,7 @@ class FileManagementAppService extends AbstractAppService
 
             if (empty($newFileInfo)) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::FILE_NOT_FOUND,
+                    BeAgentErrorCode::FILE_NOT_FOUND,
                     trans('file.source_file_not_found_in_storage')
                 );
             }
@@ -1522,7 +1522,7 @@ class FileManagementAppService extends AbstractAppService
                 $existingFile = $this->taskFileDomainService->getByFileKey($targetFileKey);
                 if (! empty($existingFile)) {
                     ExceptionBuilder::throw(
-                        SuperAgentErrorCode::FILE_EXIST,
+                        BeAgentErrorCode::FILE_EXIST,
                         trans('file.target_file_already_exists')
                     );
                 }
@@ -1534,14 +1534,14 @@ class FileManagementAppService extends AbstractAppService
 
             if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $targetFileKey)) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::FILE_ILLEGAL_KEY,
+                    BeAgentErrorCode::FILE_ILLEGAL_KEY,
                     trans('file.illegal_file_key')
                 );
             }
 
             if (! WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $newFileKey)) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::FILE_ILLEGAL_KEY,
+                    BeAgentErrorCode::FILE_ILLEGAL_KEY,
                     trans('file.source_file_key_illegal')
                 );
             }
@@ -1642,7 +1642,7 @@ class FileManagementAppService extends AbstractAppService
                 $fileId
             ));
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::FILE_REPLACE_FAILED,
+                BeAgentErrorCode::FILE_REPLACE_FAILED,
                 trans('file.file_replace_failed')
             );
         }

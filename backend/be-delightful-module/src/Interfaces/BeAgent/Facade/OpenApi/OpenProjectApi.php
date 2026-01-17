@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi;
 
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\AbstractApi;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\AbstractApi;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

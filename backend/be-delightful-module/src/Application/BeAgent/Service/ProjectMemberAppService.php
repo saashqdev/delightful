@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Contact\Entity\MagicDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
@@ -16,30 +16,30 @@ use App\Domain\Contact\Service\MagicUserDomainService;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberType;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectMembersUpdatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectShortcutCancelledEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectShortcutSetEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchUpdateMembersRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateMembersRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetCollaborationProjectListRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetParticipatedProjectsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectMembersRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectPinRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectShortcutRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CollaborationCreatorListResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CollaborationProjectListResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CollaboratorMemberDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CreatorInfoDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\ParticipatedProjectListResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\ProjectMembersResponseDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectMembersUpdatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectShortcutCancelledEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectShortcutSetEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchUpdateMembersRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateMembersRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetCollaborationProjectListRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetParticipatedProjectsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectMembersRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectPinRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectShortcutRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CollaborationCreatorListResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CollaborationProjectListResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CollaboratorMemberDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CreatorInfoDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\ParticipatedProjectListResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\ProjectMembersResponseDTO;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 
@@ -300,14 +300,14 @@ class ProjectMemberAppService extends AbstractAppService
         // 1. 验证并获取可访问的项目
         $projectEntity = $this->getAccessibleProject($projectId, $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
         if ($projectEntity->getUserId() === $userAuthorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::CANNOT_SET_SHORTCUT_FOR_OWN_PROJECT);
+            ExceptionBuilder::throw(BeAgentErrorCode::CANNOT_SET_SHORTCUT_FOR_OWN_PROJECT);
         }
 
         // 2. 根据参数决定是设置还是取消快捷方式
         if ($requestDTO->getIsBindWorkspace() === 1) {
             $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail((int) $requestDTO->getWorkspaceId());
             if (! $workspaceEntity || $workspaceEntity->getUserId() !== $userAuthorization->getId()) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND);
+                ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND);
             }
             // 设置快捷方式
             // 3. 委托给Domain层处理设置快捷方式
@@ -433,7 +433,7 @@ class ProjectMemberAppService extends AbstractAppService
 
         // 2. 检查项目协作是否开启
         if (! $project->getIsCollaborationEnabled()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.collaboration_disabled');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.collaboration_disabled');
         }
 
         // 3. 提取请求数据
@@ -487,7 +487,7 @@ class ProjectMemberAppService extends AbstractAppService
 
         // 检查是否尝试修改项目创建者权限（如果创建者是成员）
         if (in_array($project->getCreatedUid(), $targetIds, true)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.cannot_modify_creator_permission');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.cannot_modify_creator_permission');
         }
 
         // 4. 验证目标用户/部门在当前组织内
@@ -526,12 +526,12 @@ class ProjectMemberAppService extends AbstractAppService
 
         // 检查是否删除自己
         if (in_array($currentUserId, $targetIds)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
         // 不能是否删除创建者
         if (in_array($project->getUserId(), $targetIds)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
         // 1. 验证权限
@@ -765,7 +765,7 @@ class ProjectMemberAppService extends AbstractAppService
             } elseif (MemberType::fromString($member['target_type'])->isDepartment()) {
                 $departmentIds[] = $member['target_id'];
             } else {
-                ExceptionBuilder::throw(SuperAgentErrorCode::INVALID_MEMBER_TYPE);
+                ExceptionBuilder::throw(BeAgentErrorCode::INVALID_MEMBER_TYPE);
             }
         }
 
@@ -776,7 +776,7 @@ class ProjectMemberAppService extends AbstractAppService
 
             $invalidUserIds = array_diff($userIds, $validUserIds);
             if (! empty($invalidUserIds)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.member_not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.member_not_found');
             }
         }
 
@@ -788,7 +788,7 @@ class ProjectMemberAppService extends AbstractAppService
 
             $invalidDepartmentIds = array_diff($departmentIds, $validDepartmentIds);
             if (! empty($invalidDepartmentIds)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::DEPARTMENT_NOT_FOUND, 'project.department_not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::DEPARTMENT_NOT_FOUND, 'project.department_not_found');
             }
         }
     }

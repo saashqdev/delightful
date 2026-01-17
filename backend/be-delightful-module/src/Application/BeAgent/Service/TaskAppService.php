@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\Chat\Service\MagicUserInfoAppService;
@@ -29,29 +29,29 @@ use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Dtyq\AsyncEvent\AsyncEventUtil;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\TaskMessageDTO;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\UserMessageDTO;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessagePayload;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\UserInfoValueObject;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\RunTaskAfterEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\RunTaskBeforeEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\RunTaskCallbackEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageBuilderDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskMessageEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\FileType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessagePayload;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskContext;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\UserInfoValueObject;
+use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskAfterEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskBeforeEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskCallbackEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Service\MessageBuilderDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Config\WebSocketConfig;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\SandboxResult;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\SandboxStruct;
@@ -59,7 +59,7 @@ use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine\Sandbo
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket\WebSocketSession;
 use Delightful\BeDelightful\Infrastructure\Utils\TaskStatusValidator;
 use Delightful\BeDelightful\Infrastructure\Utils\ToolProcessor;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\TopicTaskMessageDTO;
 use Error;
 use Exception;
 use Hyperf\Codec\Json;
@@ -120,7 +120,7 @@ class TaskAppService extends AbstractAppService
         try {
             $topicEntity = $this->topicDomainService->getTopicByChatTopicId($dataIsolation, $chatTopicId);
             if (is_null($topicEntity)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
             }
             $topicId = $topicEntity->getId();
             // 检查用户任务数量限制和白名单
@@ -1070,7 +1070,7 @@ class TaskAppService extends AbstractAppService
         ?string $correlationId = null,
     ): void {
         // 创建消息对象
-        $message = $this->messageBuilder->createSuperAgentMessage(
+        $message = $this->messageBuilder->createBeAgentMessage(
             $topicId,
             $taskId,
             $content,
@@ -1087,7 +1087,7 @@ class TaskAppService extends AbstractAppService
         $seqDTO = new MagicSeqEntity();
         $seqDTO->setObjectType(ConversationType::Ai);
         $seqDTO->setContent($message);
-        $seqDTO->setSeqType(ChatMessageType::SuperAgentCard);
+        $seqDTO->setSeqType(ChatMessageType::BeAgentCard);
 
         $extra = new SeqExtra();
         $extra->setTopicId($chatTopicId);

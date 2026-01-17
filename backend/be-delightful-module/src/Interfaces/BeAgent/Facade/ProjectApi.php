@@ -5,22 +5,22 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectMemberAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ForkProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetParticipatedProjectsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetProjectAttachmentsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetProjectListRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\MoveProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectPinRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\ProjectItemDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectMemberAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ForkProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetParticipatedProjectsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetProjectAttachmentsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetProjectListRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\MoveProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectPinRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\ProjectItemDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\AuthManager;
 

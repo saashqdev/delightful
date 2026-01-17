@@ -5,27 +5,27 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceArchiveStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceCreationParams;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\WorkspaceEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TopicRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\WorkspaceRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceArchiveStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceCreationParams;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceVersionEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\SandboxGatewayInterface;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Exception;
@@ -215,12 +215,12 @@ class WorkspaceDomainService
 
         if (! $workspaceEntity) {
             // 使用ExceptionBuilder抛出"未找到"类型的错误
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
         }
 
         // 如果不是自己的工作区，不能删除
         if ($workspaceEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied');
         }
 
         // 设置删除时间

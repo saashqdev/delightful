@@ -69,8 +69,8 @@ To integrate Be Delightful Module with delightful-service, you need to override 
 [
     'dependencies_priority' => [
         // Assistant execution event
-        AgentExecuteInterface::class => SuperAgentMessageSubscriberV2::class,
-        SuperAgentMessageInterface::class => SuperAgentMessage::class,
+        AgentExecuteInterface::class => BeAgentMessageSubscriberV2::class,
+        BeAgentMessageInterface::class => BeAgentMessage::class,
     ]
 ]
 ```
@@ -92,16 +92,16 @@ The module is designed based on DDD architecture and includes the following main
 src/
 ├── Application/      # Application layer, handles business processes
 │   ├── Share/        # Resource sharing services
-│   └── SuperAgent/   # Super agent services
+│   └── BeAgent/   # Super agent services
 ├── Domain/           # Domain layer, contains core business logic
 │   ├── Share/        # Resource sharing domain models
-│   └── SuperAgent/   # Super agent domain models
+│   └── BeAgent/   # Super agent domain models
 ├── Infrastructure/   # Infrastructure layer, provides technical implementation
 │   ├── ExternalAPI/  # External API calls
 │   └── Utils/        # Utility classes
 ├── Interfaces/       # Interface layer, handles external interactions
 │   ├── Share/        # Resource sharing interfaces
-│   └── SuperAgent/   # Super agent interfaces
+│   └── BeAgent/   # Super agent interfaces
 ├── Listener/         # Event listeners
 └── ConfigProvider.php # Configuration provider
 ```

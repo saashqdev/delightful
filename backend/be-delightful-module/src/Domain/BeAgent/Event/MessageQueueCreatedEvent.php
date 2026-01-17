@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 /**
  * Message Queue Created Event.

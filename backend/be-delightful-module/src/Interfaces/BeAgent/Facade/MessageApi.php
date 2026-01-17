@@ -5,22 +5,22 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueProcessAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageScheduleAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ConsumeMessageQueueRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageQueueRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageScheduleRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageQueueRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageQueueRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueProcessAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageScheduleAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ConsumeMessageQueueRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateMessageQueueRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\QueryMessageQueueRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\QueryMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateMessageQueueRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;

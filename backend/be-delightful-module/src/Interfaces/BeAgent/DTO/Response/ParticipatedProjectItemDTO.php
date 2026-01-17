@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 /**
  * 参与项目条目DTO (扩展自ProjectItemDTO，添加参与项目特有字段).

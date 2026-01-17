@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
@@ -14,11 +14,11 @@ use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 class AbstractAppService extends AbstractKernelAppService
 {
@@ -42,7 +42,7 @@ class AbstractAppService extends AbstractKernelAppService
                 'organizationCode' => $organizationCode,
                 'projectUserOrganizationCode' => $projectEntity->getUserOrganizationCode(),
             ]);
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }*/
 
         // 如果是创建者，直接返回
@@ -52,7 +52,7 @@ class AbstractAppService extends AbstractKernelAppService
 
         // 判断是否开启共享项目
         if (! $projectEntity->getIsCollaborationEnabled()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
         // 验证身份
@@ -63,7 +63,7 @@ class AbstractAppService extends AbstractKernelAppService
 
         // 判断是否付费套餐
         if (! $packageFilterService->isPaidSubscription($projectEntity->getUserOrganizationCode())) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
         return $projectEntity;
     }
@@ -93,7 +93,7 @@ class AbstractAppService extends AbstractKernelAppService
         $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
         // 判断是否开启共享项目
         if (! $projectEntity->getIsCollaborationEnabled()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
         $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::MANAGE);
@@ -108,7 +108,7 @@ class AbstractAppService extends AbstractKernelAppService
         $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
         // 判断是否开启共享项目
         if (! $projectEntity->getIsCollaborationEnabled()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
         $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::EDITOR);
@@ -123,7 +123,7 @@ class AbstractAppService extends AbstractKernelAppService
         $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
         // 判断是否开启共享项目
         if (! $projectEntity->getIsCollaborationEnabled()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
         $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::VIEWER);
@@ -153,6 +153,6 @@ class AbstractAppService extends AbstractKernelAppService
                 return;
             }
         }
-        ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED);
+        ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
     }
 }

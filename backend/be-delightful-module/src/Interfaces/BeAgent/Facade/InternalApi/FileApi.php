@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade\InternalApi;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade\InternalApi;
 
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileVersionAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateFileVersionRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\AbstractApi;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileVersionAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateFileVersionRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\AbstractApi;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 #[ApiResponse('low_code')]

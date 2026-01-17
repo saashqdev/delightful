@@ -5,19 +5,19 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
 use App\Domain\Chat\Repository\Persistence\Model\MagicChatSequenceModel;
 use App\Domain\Chat\Repository\Persistence\Model\MagicChatTopicMessageModel;
 use App\Domain\Chat\Repository\Persistence\Model\MagicMessageModel;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TopicRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\TaskMessageModel;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\TopicModel;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\WorkspaceModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TopicRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TaskMessageModel;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\TopicModel;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\WorkspaceModel;
 use Exception;
 use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
@@ -579,7 +579,7 @@ class TopicRepository implements TopicRepositoryInterface
     /**
      * 根据im_seq_id删除magic_super_agent_message表中对应话题的后续消息.
      */
-    public function deleteSuperAgentMessagesFromSeqId(int $seqId): int
+    public function deleteBeAgentMessagesFromSeqId(int $seqId): int
     {
         // 1. 根据seq_id查询对应的消息记录
         $targetMessage = TaskMessageModel::query()
@@ -658,7 +658,7 @@ class TopicRepository implements TopicRepositoryInterface
      */
     public function getRevokedSeqIdsByTopicId(int $topicId, string $userId): array
     {
-        // 先获取SuperAgent话题实体
+        // 先获取BeAgent话题实体
         $topic = $this->getTopicById($topicId);
         if (! $topic) {
             return [];

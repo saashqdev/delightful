@@ -5,17 +5,17 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageQueueRepositoryInterface;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageQueueStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -96,7 +96,7 @@ class MessageQueueDomainService
             // Check if message can be modified
             if (! $entity->canBeModified()) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::MESSAGE_STATUS_NOT_MODIFIABLE,
+                    BeAgentErrorCode::MESSAGE_STATUS_NOT_MODIFIABLE,
                     trans('message_queue.status_not_modifiable')
                 );
             }
@@ -113,7 +113,7 @@ class MessageQueueDomainService
 
             if (! $this->messageQueueRepository->update($entity)) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::VALIDATE_FAILED,
+                    BeAgentErrorCode::VALIDATE_FAILED,
                     'message_queue.update_failed'
                 );
             }
@@ -133,7 +133,7 @@ class MessageQueueDomainService
         // Check if message can be deleted (same rule as modification)
         if (! $entity->canBeModified()) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::MESSAGE_STATUS_NOT_MODIFIABLE,
+                BeAgentErrorCode::MESSAGE_STATUS_NOT_MODIFIABLE,
                 trans('message_queue.status_not_modifiable')
             );
         }
@@ -186,7 +186,7 @@ class MessageQueueDomainService
         // Check if message can be consumed
         if (! $entity->canBeConsumed()) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::VALIDATE_FAILED,
+                BeAgentErrorCode::VALIDATE_FAILED,
                 'message_queue.cannot_consume_message'
             );
         }
@@ -206,7 +206,7 @@ class MessageQueueDomainService
 
             if (! $success) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::VALIDATE_FAILED,
+                    BeAgentErrorCode::VALIDATE_FAILED,
                     'message_queue.consume_failed'
                 );
             }
@@ -273,7 +273,7 @@ class MessageQueueDomainService
 
         if (! $entity) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::VALIDATE_FAILED,
+                BeAgentErrorCode::VALIDATE_FAILED,
                 'message_queue.message_not_found'
             );
         }
@@ -363,7 +363,7 @@ class MessageQueueDomainService
 
         if (! $lockAcquired) {
             ExceptionBuilder::throw(
-                SuperAgentErrorCode::TOPIC_LOCK_FAILED,
+                BeAgentErrorCode::TOPIC_LOCK_FAILED,
                 trans('message_queue.operation_locked')
             );
         }

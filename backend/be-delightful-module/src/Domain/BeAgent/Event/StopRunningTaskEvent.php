@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\DeleteDataType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\DeleteDataType;
 
 /**
  * 停止运行中任务事件

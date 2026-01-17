@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\WorkspaceEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\WorkspaceRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\WorkspaceModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\WorkspaceRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\WorkspaceModel;
 use Hyperf\DbConnection\Db;
 
 class WorkspaceRepository extends AbstractRepository implements WorkspaceRepositoryInterface

@@ -5,23 +5,23 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
 use App\Domain\Contact\Repository\Persistence\MagicUserRepository;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
 use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\DirectoryDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileBatchMoveEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileContentSavedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileMovedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileRenamedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FilesBatchDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileUploadedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\BeDelightful\Domain\BeAgent\Event\DirectoryDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileBatchMoveEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileContentSavedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileMovedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileRenamedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FilesBatchDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileUploadedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TaskFileItemDTO;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;

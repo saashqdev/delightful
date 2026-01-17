@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
  * 文件已移动事件.

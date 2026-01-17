@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 use function Hyperf\Translation\trans;
 
@@ -34,7 +34,7 @@ enum MemberRole: string
             'manage' => self::MANAGE,
             'editor' => self::EDITOR,
             'viewer' => self::VIEWER,
-            default => ExceptionBuilder::throw(SuperAgentErrorCode::INVALID_MEMBER_ROLE, trans('project.invalid_member_role'))
+            default => ExceptionBuilder::throw(BeAgentErrorCode::INVALID_MEMBER_ROLE, trans('project.invalid_member_role'))
         };
     }
 
@@ -184,7 +184,7 @@ enum MemberRole: string
         ];
 
         if (! in_array($permission, $validPermissions, true)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVALID_MEMBER_ROLE, trans('project.invalid_member_role'));
+            ExceptionBuilder::throw(BeAgentErrorCode::INVALID_MEMBER_ROLE, trans('project.invalid_member_role'));
         }
 
         return MemberRole::from($permission);

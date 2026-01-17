@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\File\Event\Publish\FileBatchCompressPublisher;
 use App\Application\File\Service\FileAppService;
@@ -15,15 +15,15 @@ use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateBatchDownloadRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CheckBatchDownloadResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CreateBatchDownloadResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateBatchDownloadRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CheckBatchDownloadResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CreateBatchDownloadResponseDTO;
 use Hyperf\Amqp\Producer;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -63,7 +63,7 @@ class FileBatchAppService extends AbstractAppService
 
         // Basic validation
         if (count($fileIds) > 1000) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_TOO_MANY_FILES);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_TOO_MANY_FILES);
         }
 
         // Check topic access
@@ -78,7 +78,7 @@ class FileBatchAppService extends AbstractAppService
 
         // Check if there are valid files
         if (empty($userFiles)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_NO_VALID_FILES);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_NO_VALID_FILES);
         }
 
         // Generate batch key
@@ -153,7 +153,7 @@ class FileBatchAppService extends AbstractAppService
 
         // Permission check
         if (! $this->statusManager->verifyUserPermission($batchKey, $userId)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_ACCESS_DENIED);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_ACCESS_DENIED);
         }
 
         // Get task status
@@ -285,7 +285,7 @@ class FileBatchAppService extends AbstractAppService
 
             // Remove lock when publish fails
             $this->statusManager->releaseLock($batchKey);
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_PUBLISH_FAILED);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_PUBLISH_FAILED);
         }
 
         $this->logger->info('File batch compress message published successfully', [

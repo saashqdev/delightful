@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Event\Publish;
+namespace Delightful\BeDelightful\Application\BeAgent\Event\Publish;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Event\ProjectForkEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\ProjectForkEvent;
 use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 use PhpAmqpLib\Message\AMQPMessage;

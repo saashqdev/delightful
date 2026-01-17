@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\ConvertStatusEnum;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\FileConvertConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\ConvertStatusEnum;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\FileConvertConstant;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\Redis;

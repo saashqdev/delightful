@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectOperationLogEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\ProjectOperationLogModel;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectOperationLogEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectOperationLogModel;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 /**
  * 项目操作日志仓储实现.
@@ -36,7 +36,7 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
             // 更新现有记录
             $model = $this->operationLogModel::query()->find($operationLog->getId());
             if (! $model) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, 'project.operation_log.not_found');
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.operation_log.not_found');
             }
             $model->update($attributes);
             return $this->modelToEntity($model->toArray());

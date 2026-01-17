@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
@@ -15,20 +15,20 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\UserMessageDTO;
-use Delightful\BeDelightful\Application\SuperAgent\Service\AgentAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\HandleTaskMessageAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicTaskAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\UserDomainService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateProjectRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\InitSandboxRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveWorkspaceRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpgradeSandboxRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\InitSandboxResponseDTO;
+use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\HandleTaskMessageAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicTaskAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\UserDomainService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateProjectRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\InitSandboxRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveWorkspaceRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpgradeSandboxRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\InitSandboxResponseDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 class SandboxApi extends AbstractApi

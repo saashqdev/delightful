@@ -19,7 +19,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
  * - Reserved1: 51200-51249 (50个)
  * - Reserved2: 51250-51299 (50个).
  */
-enum SuperAgentErrorCode: int
+enum BeAgentErrorCode: int
 {
     // Workspace related error codes (51000-51049)
     #[ErrorMessage('workspace.parameter_check_failure')]

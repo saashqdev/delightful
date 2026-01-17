@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Constant;
+namespace Delightful\BeDelightful\Domain\BeAgent\Constant;
 
 /**
  * File conversion processing related constants.

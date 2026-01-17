@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\ErrorCode\GenericErrorCode;
@@ -14,21 +14,21 @@ use App\Infrastructure\Util\Context\RequestCoContext;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\UserMessageDTO;
-use Delightful\BeDelightful\Application\SuperAgent\Service\AgentAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\HandleTaskMessageAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TaskAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicTaskAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\UserDomainService;
+use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\HandleTaskMessageAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TaskAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicTaskAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Service\UserDomainService;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant\SandboxStatus;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateAgentTaskRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateScriptTaskRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetTaskFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\AbstractApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateAgentTaskRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateScriptTaskRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetTaskFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\AbstractApi;
 use Exception;
 use Hyperf\HttpServer\Contract\RequestInterface;
 

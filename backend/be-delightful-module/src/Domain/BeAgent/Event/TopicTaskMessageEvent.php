@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessagePayload;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TokenUsageDetails;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessagePayload;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TokenUsageDetails;
 
 /**
  * 话题任务消息事件.

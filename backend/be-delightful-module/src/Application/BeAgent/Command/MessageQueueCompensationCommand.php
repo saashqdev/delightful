@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Command;
+namespace Delightful\BeDelightful\Application\BeAgent\Command;
 
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueCompensationAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueCompensationAppService;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Hyperf\Contract\StdoutLoggerInterface;

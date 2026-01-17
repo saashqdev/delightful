@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberJoinMethod;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberType;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberJoinMethod;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 /**
  * 项目成员实体.
@@ -260,7 +260,7 @@ class ProjectMemberEntity extends AbstractEntity
 
         // 基本验证：确保targetId有值
         if (empty(trim($this->targetId))) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::MEMBER_VALIDATION_FAILED);
+            ExceptionBuilder::throw(BeAgentErrorCode::MEMBER_VALIDATION_FAILED);
         }
     }
 }

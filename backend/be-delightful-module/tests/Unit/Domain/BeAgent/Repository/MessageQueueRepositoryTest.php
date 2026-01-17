@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Tests\Unit\Domain\SuperAgent\Repository;
+namespace Delightful\BeDelightful\Tests\Unit\Domain\BeAgent\Repository;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageQueueRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageQueueStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 

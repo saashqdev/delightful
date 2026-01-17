@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\File\Service\FileAppService;
 use App\Application\File\Service\FileCleanupAppService;
@@ -13,19 +13,19 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\ConvertStatusEnum;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\ConvertStatusEnum;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\FileConverterInterface;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Request\FileConverterRequest;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Response\FileConverterResponse;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Response\FileItemDTO;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\SandboxGatewayInterface;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\ConvertFilesRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\FileConvertStatusResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\ConvertFilesRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\FileConvertStatusResponseDTO;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -134,7 +134,7 @@ class FileConverterAppService extends AbstractAppService
 
         // Verify user permissions
         if (! $this->fileConvertStatusManager->verifyUserPermission($taskKey, $userId)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_ACCESS_DENIED, 'file.convert_access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_ACCESS_DENIED, 'file.convert_access_denied');
         }
 
         // Get task status
@@ -213,7 +213,7 @@ class FileConverterAppService extends AbstractAppService
                 $ext = strtolower($fileEntity->getFileExtension());
                 if ($ext === 'md' || $ext === '.md') {
                     ExceptionBuilder::throw(
-                        SuperAgentErrorCode::FILE_CONVERT_FAILED,
+                        BeAgentErrorCode::FILE_CONVERT_FAILED,
                         'file.convert_md_to_ppt_not_supported'
                     );
                 }
@@ -635,11 +635,11 @@ class FileConverterAppService extends AbstractAppService
     private function validateConvertRequest(array $fileIds): void
     {
         if (empty($fileIds)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_FILE_IDS_REQUIRED);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_FILE_IDS_REQUIRED);
         }
 
         if (count($fileIds) > 200) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_TOO_MANY_FILES);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_TOO_MANY_FILES);
         }
     }
 
@@ -654,7 +654,7 @@ class FileConverterAppService extends AbstractAppService
         $userFiles = $this->taskFileDomainService->findFilesByProjectIdAndIds($projectId, $fileIds);
 
         if (empty($userFiles)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::BATCH_NO_VALID_FILES);
+            ExceptionBuilder::throw(BeAgentErrorCode::BATCH_NO_VALID_FILES);
         }
         return $userFiles;
     }

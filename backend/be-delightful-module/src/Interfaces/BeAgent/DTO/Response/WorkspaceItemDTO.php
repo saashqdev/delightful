@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\WorkspaceEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceEntity;
 
 class WorkspaceItemDTO extends AbstractDTO
 {

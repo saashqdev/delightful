@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Tests\Unit\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Tests\Unit\Application\BeAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Domain\Contact\Service\MagicUserDomainService;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Delightful\BeDelightful\Application\SuperAgent\Service\MessageQueueCompensationAppService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueCompensationAppService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\MessageQueueDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
 use Hyperf\Logger\LoggerFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

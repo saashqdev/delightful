@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleLogEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageScheduleRepositoryInterface;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 
@@ -49,13 +49,13 @@ class MessageScheduleDomainService
     {
         $messageSchedule = $this->messageScheduleRepository->findById($id);
         if (! $messageSchedule) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::MESSAGE_SCHEDULE_NOT_FOUND, trans('message_schedule.not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::MESSAGE_SCHEDULE_NOT_FOUND, trans('message_schedule.not_found'));
         }
 
         // Check ownership
         if ($messageSchedule->getUserId() !== $dataIsolation->getCurrentUserId()
             || $messageSchedule->getOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::MESSAGE_SCHEDULE_ACCESS_DENIED, trans('message_schedule.access_denied'));
+            ExceptionBuilder::throw(BeAgentErrorCode::MESSAGE_SCHEDULE_ACCESS_DENIED, trans('message_schedule.access_denied'));
         }
 
         return $messageSchedule;
@@ -114,7 +114,7 @@ class MessageScheduleDomainService
         // Check ownership
         if ($messageSchedule->getUserId() !== $dataIsolation->getCurrentUserId()
             || $messageSchedule->getOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::MESSAGE_SCHEDULE_ACCESS_DENIED, trans('message_schedule.access_denied'));
+            ExceptionBuilder::throw(BeAgentErrorCode::MESSAGE_SCHEDULE_ACCESS_DENIED, trans('message_schedule.access_denied'));
         }
 
         $messageSchedule->setUpdatedUid($dataIsolation->getCurrentUserId())

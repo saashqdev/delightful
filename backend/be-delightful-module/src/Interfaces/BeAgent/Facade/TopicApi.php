@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
@@ -16,22 +16,22 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\AgentAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckpointRollbackCheckRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckpointRollbackRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CheckpointRollbackStartRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DeleteTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DuplicateTopicCheckRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DuplicateTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetTopicAttachmentsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetTopicMessagesByTopicIdRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CheckpointRollbackCheckResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CheckpointRollbackResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\DuplicateTopicStatusResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TopicMessagesResponseDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CheckpointRollbackCheckRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CheckpointRollbackRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CheckpointRollbackStartRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\DeleteTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\DuplicateTopicCheckRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\DuplicateTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetTopicAttachmentsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetTopicMessagesByTopicIdRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CheckpointRollbackCheckResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\CheckpointRollbackResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\DuplicateTopicStatusResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TopicMessagesResponseDTO;
 use Exception;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;

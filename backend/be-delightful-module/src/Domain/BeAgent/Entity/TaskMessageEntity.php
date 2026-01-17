@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Entity;
+namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\TaskMessageDTO;
+use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
 use Hyperf\Codec\Json;
 
 class TaskMessageEntity extends AbstractEntity

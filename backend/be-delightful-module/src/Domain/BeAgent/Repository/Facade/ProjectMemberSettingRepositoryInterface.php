@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberSettingEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberSettingEntity;
 
 /**
  * 项目成员设置仓储接口.

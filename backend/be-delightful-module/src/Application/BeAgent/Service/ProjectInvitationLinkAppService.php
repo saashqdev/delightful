@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Contact\Service\MagicUserDomainService;
 use App\Domain\File\Service\FileDomainService;
@@ -16,13 +16,13 @@ use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Constant\ShareAccessType;
 use Delightful\BeDelightful\Domain\Share\Entity\ResourceShareEntity;
 use Delightful\BeDelightful\Domain\Share\Service\ResourceShareDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\PasswordCrypt;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\InvitationDetailResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\InvitationLinkResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\JoinProjectResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\InvitationDetailResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\InvitationLinkResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\JoinProjectResponseDTO;
 
 /**
  * 项目邀请链接应用服务
@@ -74,7 +74,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         $project = $this->getAccessibleProjectWithManager($projectId, $currentUserId, $organizationCode);
 
         if ($project->getUserId() !== $currentUserId) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.invalid_permission_level');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.invalid_permission_level');
         }
 
         // 2. 查找现有的邀请分享
@@ -95,7 +95,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
 
         if (! $enabled) {
             // 如果不存在且要求关闭，抛出异常
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 3. 创建新的邀请分享 (通过 ResourceShareDomainService)
@@ -134,7 +134,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         );
 
         if (! $shareEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 3. 保存更新
@@ -161,7 +161,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         );
 
         if (! $shareEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 3. 设置密码保护开关
@@ -205,7 +205,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         );
 
         if (! $shareEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 3. 生成新密码
@@ -228,7 +228,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
 
         // 2. 验证密码长度（最大18位）
         if (strlen($newPassword) > 18 || strlen($newPassword) < 3) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
         }
 
         // 3. 获取邀请链接
@@ -238,7 +238,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         );
 
         if (! $shareEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 4. 更新密码并启用密码保护
@@ -265,7 +265,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         );
 
         if (! $shareEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 3. 验证并更新权限级别
@@ -294,17 +294,17 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         // 1. 获取分享信息
         $shareEntity = $this->resourceShareDomainService->getShareByCode($token);
         if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 2. 检查是否已启用
         if (! $shareEntity->getIsEnabled()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_DISABLED);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_DISABLED);
         }
 
         // 3. 检查是否有效（过期、删除等）
         if (! $shareEntity->isValid()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_INVALID);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_INVALID);
         }
 
         $resourceId = $shareEntity->getResourceId();
@@ -356,27 +356,27 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         // 1. 验证分享链接
         $shareEntity = $this->resourceShareDomainService->getShareByCode($token);
         if (! $shareEntity || ! ResourceType::isProjectInvitation($shareEntity->getResourceType())) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_NOT_FOUND);
         }
 
         // 2. 检查是否已启用
         if (! $shareEntity->getIsEnabled()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_DISABLED);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_DISABLED);
         }
 
         // 3. 检查是否有效（过期、删除等）
         if (! $shareEntity->isValid()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_INVALID);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_INVALID);
         }
 
         // 4. 验证密码
         if ($shareEntity->getIsPasswordEnabled()) {
             // 链接启用了密码保护
             if (empty($password)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
+                ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
             }
             if (! $this->resourceShareDomainService->verifyPassword($shareEntity, $password)) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
+                ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_PASSWORD_INCORRECT);
             }
         }
 
@@ -386,7 +386,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
             $currentUserId
         );
         if ($isExistingMember) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::INVITATION_LINK_ALREADY_JOINED);
+            ExceptionBuilder::throw(BeAgentErrorCode::INVITATION_LINK_ALREADY_JOINED);
         }
 
         $projectId = (int) $shareEntity->getResourceId();

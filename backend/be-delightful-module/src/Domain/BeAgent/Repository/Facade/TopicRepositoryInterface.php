@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Facade;
 
 use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 
 interface TopicRepositoryInterface
 {
@@ -155,7 +155,7 @@ interface TopicRepositoryInterface
      * @param int $seqId IM消息的序列ID
      * @return int 删除的记录数
      */
-    public function deleteSuperAgentMessagesFromSeqId(int $seqId): int;
+    public function deleteBeAgentMessagesFromSeqId(int $seqId): int;
 
     /**
      * 批量更新magic_chat_sequences表的status字段.

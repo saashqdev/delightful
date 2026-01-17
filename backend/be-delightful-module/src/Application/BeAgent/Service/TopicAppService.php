@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\File\Service\FileAppService;
@@ -19,34 +19,34 @@ use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Publish\StopRunningTaskPublisher;
+use Delightful\BeDelightful\Application\BeAgent\Event\Publish\StopRunningTaskPublisher;
 use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Service\ResourceShareDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\TopicDuplicateConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\DeleteDataType;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\StopRunningTaskEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\TopicCreatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\TopicDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\TopicRenamedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\TopicUpdatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\TopicDuplicateConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\DeleteDataType;
+use Delightful\BeDelightful\Domain\BeAgent\Event\StopRunningTaskEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\TopicCreatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\TopicDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\TopicRenamedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\TopicUpdatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
 use Delightful\BeDelightful\ErrorCode\ShareErrorCode;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\AccessTokenUtil;
 use Delightful\BeDelightful\Infrastructure\Utils\FileTreeUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DeleteTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\DuplicateTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetTopicAttachmentsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveTopicRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\DeleteTopicResultDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\SaveTopicResultDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TopicItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\DeleteTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\DuplicateTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetTopicAttachmentsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveTopicRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\DeleteTopicResultDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\SaveTopicResultDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TopicItemDTO;
 use Exception;
 use Hyperf\Amqp\Producer;
 use Hyperf\DbConnection\Db;
@@ -89,12 +89,12 @@ class TopicAppService extends AbstractAppService
         // 获取话题内容
         $topicEntity = $this->topicDomainService->getTopicById($id);
         if (! $topicEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
         // 判断话题是否是本人
         if ($topicEntity->getUserId() !== $userAuthorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
         }
 
         return TopicItemDTO::fromEntity($topicEntity);
@@ -105,7 +105,7 @@ class TopicAppService extends AbstractAppService
         // 获取话题内容
         $topicEntity = $this->topicDomainService->getTopicById($id);
         if (! $topicEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
         return TopicItemDTO::fromEntity($topicEntity);
     }
@@ -157,7 +157,7 @@ class TopicAppService extends AbstractAppService
             // 回滚事务
             Db::rollBack();
             $this->logger->error(sprintf("Error creating new topic: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
-            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
+            ExceptionBuilder::throw(BeAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
         }
     }
 
@@ -203,7 +203,7 @@ class TopicAppService extends AbstractAppService
             // 回滚事务
             Db::rollBack();
             $this->logger->error(sprintf("Error creating new topic: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
-            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
+            ExceptionBuilder::throw(BeAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
         }
     }
 
@@ -234,7 +234,7 @@ class TopicAppService extends AbstractAppService
         // 获取话题内容
         $topicEntity = $this->workspaceDomainService->getTopicById($topicId);
         if (! $topicEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
         // 调用领域服务执行重命名（这一步与delightful-service进行绑定）
@@ -439,7 +439,7 @@ class TopicAppService extends AbstractAppService
         // 获取当前话题的创建者
         $topicEntity = $this->topicDomainService->getTopicById((int) $requestDto->getTopicId());
         if ($topicEntity === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
         // 创建数据隔离对象
         $dataIsolation = $this->createDataIsolation($userAuthorization);
@@ -534,11 +534,11 @@ class TopicAppService extends AbstractAppService
         // Validate topic and permissions
         $sourceTopicEntity = $this->topicDomainService->getTopicById((int) $sourceTopicId);
         if (! $sourceTopicEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
         if ($sourceTopicEntity->getUserId() !== $userAuthorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
         }
 
         // Create data isolation
@@ -606,12 +606,12 @@ class TopicAppService extends AbstractAppService
         // 验证话题存在和权限
         $sourceTopicEntity = $this->topicDomainService->getTopicById((int) $sourceTopicId);
         if (! $sourceTopicEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
         }
 
         // 判断话题是否是本人
         if ($sourceTopicEntity->getUserId() !== $userAuthorization->getId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.access_denied');
         }
 
         // === 同步部分：创建话题骨架 ===
@@ -758,13 +758,13 @@ class TopicAppService extends AbstractAppService
         try {
             // 验证用户权限
             if (! $this->topicDuplicateStatusManager->verifyUserPermission($taskKey, $userAuthorization->getId())) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TASK_ACCESS_DENIED, 'Task access denied');
+                ExceptionBuilder::throw(BeAgentErrorCode::TASK_ACCESS_DENIED, 'Task access denied');
             }
 
             // 获取任务状态
             $taskStatus = $this->topicDuplicateStatusManager->getTaskStatus($taskKey);
             if (! $taskStatus) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'Task not found or expired');
+                ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'Task not found or expired');
             }
 
             // 构建返回结果

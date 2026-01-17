@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Constants;
+namespace Delightful\BeDelightful\Domain\BeAgent\Constants;
 
 /**
  * 资源类型常量.

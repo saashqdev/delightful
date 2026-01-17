@@ -7,10 +7,10 @@ declare(strict_types=1);
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
 use Delightful\BeDelightful\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
 use Delightful\BeDelightful\Interfaces\Agent\Facade\Sandbox\BeDelightfulAgentSandboxApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\SandboxApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\InternalApi\FileApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenProjectApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\OpenApi\OpenTaskApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\SandboxApi;
 use Hyperf\HttpServer\Router\Router;
 
 // Sandbox open API - naming is not standardized, needs to be deprecated

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Chat\Service\MagicChatMessageAppService;
 use App\Application\File\Service\FileAppService;
@@ -26,28 +26,28 @@ use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Event\Publish\StopRunningTaskPublisher;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\DeleteDataType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceArchiveStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\StopRunningTaskEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\Event\Publish\StopRunningTaskPublisher;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\CreationSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\DeleteDataType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceArchiveStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Event\StopRunningTaskEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\Volcengine\SandboxService;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetWorkspaceTopicsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveWorkspaceRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\WorkspaceListRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\SaveWorkspaceResultDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TopicListResponseDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\WorkspaceItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\WorkspaceListResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetWorkspaceTopicsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveWorkspaceRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\WorkspaceListRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\SaveWorkspaceResultDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TopicListResponseDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\WorkspaceItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\WorkspaceListResponseDTO;
 use Hyperf\Amqp\Producer;
 use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
@@ -152,12 +152,12 @@ class WorkspaceAppService extends AbstractAppService
         // 获取工作区详情
         $workspaceEntity = $this->workspaceDomainService->getWorkspaceDetail($workspaceId);
         if ($workspaceEntity === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
         }
 
         // 验证工作区是否属于当前用户
         if ($workspaceEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied');
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied');
         }
 
         // 计算工作区状态
@@ -194,7 +194,7 @@ class WorkspaceAppService extends AbstractAppService
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
         if (empty($requestDTO->getWorkspaceId())) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND);
         }
 
         $this->workspaceDomainService->updateWorkspace($dataIsolation, (int) $requestDTO->getWorkspaceId(), $requestDTO->getWorkspaceName());
@@ -236,11 +236,11 @@ class WorkspaceAppService extends AbstractAppService
             // 回滚事务
             Db::rollBack();
             $this->logger->error(sprintf("Error creating new workspace event: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
-            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, $e->getMessage());
+            ExceptionBuilder::throw(BeAgentErrorCode::CREATE_TOPIC_FAILED, $e->getMessage());
         } catch (Throwable $e) {
             Db::rollBack();
             $this->logger->error(sprintf("Error creating new workspace: %s\n%s", $e->getMessage(), $e->getTraceAsString()));
-            ExceptionBuilder::throw(SuperAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
+            ExceptionBuilder::throw(BeAgentErrorCode::CREATE_TOPIC_FAILED, 'topic.create_topic_failed');
         }
     }
 

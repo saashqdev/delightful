@@ -5,18 +5,18 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectMemberAppService;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\BatchUpdateMembersRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateMembersRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetCollaborationProjectListRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectMembersRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectPinRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateProjectShortcutRequestDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectMemberAppService;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\BatchUpdateMembersRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateMembersRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetCollaborationProjectListRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectMembersRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectPinRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateProjectShortcutRequestDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

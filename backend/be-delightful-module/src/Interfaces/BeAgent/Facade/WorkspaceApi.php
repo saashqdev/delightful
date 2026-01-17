@@ -5,17 +5,17 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Util\Context\RequestContext;
 use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Delightful\BeDelightful\Application\SuperAgent\Service\TopicAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Service\WorkspaceAppService;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\WorkspaceArchiveStatus;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\GetWorkspaceTopicsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SaveWorkspaceRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\WorkspaceListRequestDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\TopicAppService;
+use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceArchiveStatus;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\GetWorkspaceTopicsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SaveWorkspaceRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\WorkspaceListRequestDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;
 

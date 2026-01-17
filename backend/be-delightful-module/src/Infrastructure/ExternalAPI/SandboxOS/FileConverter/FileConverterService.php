@@ -27,11 +27,11 @@ class FileConverterService extends AbstractSandboxOS implements FileConverterInt
     {
         $requestData = $request->toArray();
         try {
-            // 使用网关的 ensureSandbox 方法，确保沙箱存在
+            // Use gateway ensureSandbox to make sure the sandbox exists
             $this->gateway->setUserContext($userId, $organizationCode);
             $actualSandboxId = $this->gateway->ensureSandboxAvailable($sandboxId, $projectId, $workDir);
 
-            // 然后直接代理请求到沙箱
+            // Then proxy the request to the sandbox
             $result = $this->gateway->proxySandboxRequest(
                 $actualSandboxId,
                 'POST',
@@ -83,7 +83,7 @@ class FileConverterService extends AbstractSandboxOS implements FileConverterInt
         ]);
 
         try {
-            // 直接查询转换结果，不检查沙箱状态，因为 create 方法会保证沙箱启动
+            // Directly query conversion result without checking sandbox status; create ensures sandbox is running
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'GET',
@@ -100,13 +100,13 @@ class FileConverterService extends AbstractSandboxOS implements FileConverterInt
                     'batch_id' => $response->getBatchId(),
                 ]);
             } else {
-                // 如果是沙箱不存在或连接失败，提供更明确的错误信息
+                // If the sandbox is missing or connection fails, provide clearer error information
                 $errorMessage = $response->getMessage();
                 if (strpos($errorMessage, 'sandbox') !== false || strpos($errorMessage, 'timeout') !== false) {
-                    $errorMessage = '沙箱不存在或已退出，无法查询转换结果。请检查沙箱状态或重新提交转换任务。';
+                    $errorMessage = 'Sandbox does not exist or has exited; cannot query conversion result. Please check sandbox status or resubmit the conversion task.';
                 }
 
-                $this->logger->error('FileConverter 查询转换结果，沙箱返回了异常', [
+                $this->logger->error('FileConverter query conversion result: sandbox returned an exception', [
                     'sandbox_id' => $sandboxId,
                     'project_id' => $projectId,
                     'task_key' => $taskKey,

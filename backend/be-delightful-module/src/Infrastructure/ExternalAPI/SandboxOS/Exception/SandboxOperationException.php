@@ -11,8 +11,8 @@ use RuntimeException;
 use Throwable;
 
 /**
- * 沙箱操作异常类
- * 用于统一处理沙箱相关操作的异常.
+ * Sandbox operation exception
+ * Used to consistently handle sandbox-related operation errors.
  */
 class SandboxOperationException extends RuntimeException
 {

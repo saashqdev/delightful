@@ -117,7 +117,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     }
 
     /**
-     * 保存智能体排列顺序.
+     * Save agent order configuration.
      */
     public function saveOrder(BeDelightfulAgentOrderFormRequest $request)
     {
@@ -135,7 +135,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     }
 
     /**
-     * 获取内置工具列表.
+     * Get built-in tools list.
      */
     public function tools()
     {
@@ -143,17 +143,17 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     }
 
     /**
-     * AI优化智能体.
+     * AI-optimize agent.
      */
     public function aiOptimize(BeDelightfulAgentAiOptimizeFormRequest $request)
     {
         $authorization = $this->getAuthorization();
         $requestData = $request->validated();
 
-        // 创建优化类型枚举实例（FormRequest 验证确保有效性）
+        // Create optimization type enum instance (FormRequest validation ensures validity)
         $optimizationType = BeDelightfulAgentOptimizationType::fromString($requestData['optimization_type']);
 
-        // 使用 BeDelightfulAgentAssembler 创建实体
+        // Use BeDelightfulAgentAssembler to create entity
         $DTO = new BeDelightfulAgentDTO($requestData['agent']);
         $promptShadow = $request->input('agent.prompt_shadow');
         if ($promptShadow) {
@@ -162,18 +162,18 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
         }
         $agentEntity = BeDelightfulAgentAssembler::createDO($DTO);
 
-        // 只有在优化内容时才查询工具信息
+        // Only query tool information when optimizing content
         $availableTools = [];
         if ($optimizationType === BeDelightfulAgentOptimizationType::OptimizeContent) {
-            // 当前用户可用的工具列表
+            // Tools available to the current user
             $builtinTools = BuiltinToolAssembler::createToolListDTO();
             $customToolSets = $this->delightfulFlowAppService->queryToolSets($authorization, false, false)['list'] ?? [];
 
-            // 合并内置工具和自定义工具为统一格式
+            // Merge built-in tools and custom tools into unified format
             $availableTools = $this->mergeAvailableTools($builtinTools, $customToolSets);
         }
 
-        // 调用优化服务
+        // Call optimization service
         $optimizedEntity = $this->beDelightfulAgentAiOptimizeAppService->optimizeAgent(
             $authorization,
             $optimizationType,
@@ -188,7 +188,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     }
 
     /**
-     * 合并内置工具和自定义工具为统一格式.
+     * Merge built-in tools and custom tools into unified format.
      * @param array<BuiltinToolDTO> $builtinTools
      * @param array<DelightfulFlowToolSetEntity> $customToolSets
      */
@@ -196,7 +196,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     {
         $tools = [];
 
-        // 处理内置工具
+        // Process built-in tools
         foreach ($builtinTools as $tool) {
             $tools[$tool->getCode()] = [
                 'code' => $tool->getCode(),
@@ -207,7 +207,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
             ];
         }
 
-        // 处理自定义工具
+        // Process custom tools
         foreach ($customToolSets as $customToolSet) {
             foreach ($customToolSet->getTools() as $tool) {
                 $tools[$tool['code']] = [

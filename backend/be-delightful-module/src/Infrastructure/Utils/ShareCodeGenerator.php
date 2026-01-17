@@ -10,45 +10,45 @@ namespace Delightful\BeDelightful\Infrastructure\Utils;
 use InvalidArgumentException;
 
 /**
- * 分享代码生成器工具类.
+ * Share code generator utility.
  */
 class ShareCodeGenerator
 {
     /**
-     * 分享代码长度.
+     * Share code length.
      */
     protected int $codeLength = 18;
 
     /**
-     * 允许的字符集.
+     * Allowed character set.
      */
     protected string $charset = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
     /**
-     * 最后生成的时间戳微秒值.
+     * Last generated timestamp in microseconds.
      */
     protected int $lastMicrotime = 0;
 
     /**
-     * 同一微秒内的序列号.
+     * Sequence number within the same microsecond.
      */
     protected int $sequence = 0;
 
     /**
-     * 生成一个唯一的分享代码
+     * Generate a unique share code.
      *
-     * 基于时间戳和序列号生成唯一代码，保证在分布式环境中的唯一性
-     * 最终生成类似 "AB12XY89" 格式的友好分享代码
+     * Generates unique codes based on timestamp and sequence number to ensure uniqueness in distributed environments.
+     * Produces user-friendly share codes in formats like "AB12XY89".
      *
-     * @param string $prefix 可选前缀，用于业务区分，默认为空
-     * @return string 生成的分享代码
+     * @param string $prefix Optional prefix for business differentiation; defaults to empty
+     * @return string Generated share code
      */
     public function generate(string $prefix = ''): string
     {
-        // 获取当前微秒时间戳
+        // Get current microsecond timestamp
         $currentMicro = $this->getCurrentMicroseconds();
 
-        // 处理同一微秒内的多次调用
+        // Handle multiple calls within the same microsecond
         if ($currentMicro === $this->lastMicrotime) {
             ++$this->sequence;
         } else {
@@ -56,26 +56,26 @@ class ShareCodeGenerator
             $this->lastMicrotime = $currentMicro;
         }
 
-        // 组合唯一数据源
+        // Combine unique data sources
         $uniqueData = $currentMicro . $this->sequence;
 
-        // 添加一个随机种子增加随机性
+        // Add a random seed to increase randomness
         $randomSeed = random_int(1000, 9999);
         $uniqueData .= $randomSeed;
 
-        // 计算哈希值
+        // Calculate hash value
         $hash = md5($uniqueData);
 
-        // 将哈希转换为分享代码友好格式
+        // Convert hash to share code friendly format
         $code = $this->hashToReadableCode($hash);
 
-        // 确保代码长度符合要求
+        // Ensure code length meets requirements
         $code = substr($code, 0, $this->codeLength);
 
-        // 如果有前缀，则添加前缀
+        // Add prefix if provided
         if (! empty($prefix)) {
             $code = $prefix . $code;
-            // 确保总长度仍然符合要求
+            // Ensure total length still meets requirements
             $code = substr($code, 0, $this->codeLength);
         }
 
@@ -83,11 +83,11 @@ class ShareCodeGenerator
     }
 
     /**
-     * 生成多个唯一的分享代码
+     * Generate multiple unique share codes.
      *
-     * @param int $count 需要生成的代码数量
-     * @param string $prefix 可选前缀，用于业务区分，默认为空
-     * @return array 生成的分享代码数组
+     * @param int $count Number of codes to generate
+     * @param string $prefix Optional prefix for business differentiation; defaults to empty
+     * @return array Array of generated share codes
      */
     public function generateMultiple(int $count, string $prefix = ''): array
     {
@@ -96,9 +96,9 @@ class ShareCodeGenerator
         for ($i = 0; $i < $count; ++$i) {
             $codes[] = $this->generate($prefix);
 
-            // 确保时间间隔，增加唯一性
+            // Ensure time interval to increase uniqueness
             if ($i < $count - 1) {
-                usleep(1); // 休眠1微秒
+                usleep(1); // Sleep for 1 microsecond
             }
         }
 
@@ -106,14 +106,14 @@ class ShareCodeGenerator
     }
 
     /**
-     * 设置分享代码长度.
+     * Set share code length.
      *
-     * @param int $length 代码长度
+     * @param int $length Code length
      */
     public function setCodeLength(int $length): self
     {
         if ($length < 4) {
-            throw new InvalidArgumentException('分享代码长度不能小于4');
+            throw new InvalidArgumentException('Share code length cannot be less than 4');
         }
 
         $this->codeLength = $length;
@@ -121,14 +121,14 @@ class ShareCodeGenerator
     }
 
     /**
-     * 设置字符集.
+     * Set character set.
      *
-     * @param string $charset 字符集
+     * @param string $charset Character set
      */
     public function setCharset(string $charset): self
     {
         if (empty($charset)) {
-            throw new InvalidArgumentException('字符集不能为空');
+            throw new InvalidArgumentException('Character set cannot be empty');
         }
 
         $this->charset = $charset;
@@ -136,10 +136,10 @@ class ShareCodeGenerator
     }
 
     /**
-     * 验证分享代码是否有效.
+     * Validate whether a share code is valid.
      *
-     * @param string $code 待验证的分享代码
-     * @return bool 是否有效
+     * @param string $code Share code to validate
+     * @return bool Whether it is valid
      */
     public function isValid(string $code): bool
     {
@@ -147,7 +147,7 @@ class ShareCodeGenerator
             return false;
         }
 
-        // 检查代码是否只包含字符集中的字符
+        // Check whether code only contains characters from the character set
         for ($i = 0; $i < strlen($code); ++$i) {
             if (strpos($this->charset, $code[$i]) === false) {
                 return false;
@@ -158,26 +158,26 @@ class ShareCodeGenerator
     }
 
     /**
-     * 将哈希值转换为易读的分享代码
+     * Convert a hash value to a readable share code.
      *
-     * @param string $hash 哈希值
-     * @return string 友好格式的分享代码
+     * @param string $hash Hash value
+     * @return string User-friendly formatted share code
      */
     protected function hashToReadableCode(string $hash): string
     {
         $result = '';
         $charsetLength = strlen($this->charset);
 
-        // 将哈希值分组处理，每组4位
+        // Process hash in groups of 4 bits each
         for ($i = 0; $i < strlen($hash); $i += 2) {
-            // 从哈希中取出2个字符，转换为16进制数值
+            // Extract 2 characters from the hash and convert to hexadecimal value
             $hexVal = hexdec(substr($hash, $i, 2));
 
-            // 映射到字符集范围
+            // Map to character set range
             $index = $hexVal % $charsetLength;
             $result .= $this->charset[$index];
 
-            // 达到目标长度则停止
+            // Stop when target length is reached
             if (strlen($result) >= $this->codeLength) {
                 break;
             }
@@ -187,16 +187,16 @@ class ShareCodeGenerator
     }
 
     /**
-     * 获取当前微秒时间戳.
+     * Get current microsecond timestamp.
      *
-     * @return int 微秒时间戳
+     * @return int Microsecond timestamp
      */
     protected function getCurrentMicroseconds(): int
     {
-        // 获取微秒级时间戳
+        // Get microsecond-level timestamp
         $microtime = microtime(true);
 
-        // 转换为整数，乘以1000000以获得微秒级精度
+        // Convert to integer, multiply by 1000000 to get microsecond precision
         return (int) ($microtime * 1000000);
     }
 }

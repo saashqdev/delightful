@@ -17,10 +17,10 @@ class WebSocketConfig
         private readonly int $readTimeout = 1800,
         private readonly int $heartbeatInterval = 30,
         private readonly string $heartbeatMessage = 'ping',
-        private readonly int $taskTimeout = 1800,      // 默认任务超时时间30分钟
-        private readonly int $maxProcessingTime = 3600, // 默认最大处理时间1小时
-        private readonly int $pongTimeout = 10,       // Pong帧超时时间（秒）
-        private readonly int $maxRetryDelay = 30      // 最大重试延迟时间（秒）
+        private readonly int $taskTimeout = 1800,      // Default task timeout 30 minutes
+        private readonly int $maxProcessingTime = 3600, // Default max processing time 1 hour
+        private readonly int $pongTimeout = 10,       // Pong frame timeout (seconds)
+        private readonly int $maxRetryDelay = 30      // Max retry delay time (seconds)
     ) {
     }
 
@@ -60,8 +60,8 @@ class WebSocketConfig
     }
 
     /**
-     * 获取任务处理超时时间（秒）
-     * 当任务执行时间超过此值时，将被视为超时.
+     * Get task processing timeout time (seconds)
+     * When task execution time exceeds this value, it will be considered a timeout.
      */
     public function getTaskTimeout(): int
     {
@@ -69,8 +69,8 @@ class WebSocketConfig
     }
 
     /**
-     * 获取最大处理时间（秒）
-     * 当消息处理循环执行时间超过此值时，将自动终止处理.
+     * Get max processing time (seconds)
+     * When message processing loop execution time exceeds this value, processing will be automatically terminated.
      */
     public function getMaxProcessingTime(): int
     {
@@ -78,8 +78,8 @@ class WebSocketConfig
     }
 
     /**
-     * 获取Pong帧响应超时时间（秒）
-     * 发送Ping帧后，如果在此时间内未收到Pong响应，则认为连接已断开.
+     * Get Pong frame response timeout time (seconds)
+     * After sending Ping frame, if Pong response is not received within this time, the connection is considered disconnected.
      */
     public function getPongTimeout(): int
     {
@@ -87,8 +87,8 @@ class WebSocketConfig
     }
 
     /**
-     * 获取最大重试延迟时间（秒）
-     * 在指数退避重试策略中，重试延迟不会超过此值.
+     * Get max retry delay time (seconds)
+     * In exponential backoff retry strategy, retry delay will not exceed this value.
      */
     public function getMaxRetryDelay(): int
     {

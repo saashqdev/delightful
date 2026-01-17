@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Response;
 
 /**
- * ASR 录音服务响应.
+ * ASR recording service response.
  */
 class AsrRecorderResponse
 {
@@ -38,7 +38,7 @@ class AsrRecorderResponse
     }
 
     /**
-     * 从沙箱网关结果创建响应.
+     * Create a response from the sandbox gateway result.
      */
     public static function fromGatewayResult(mixed $result): self
     {
@@ -59,7 +59,7 @@ class AsrRecorderResponse
     }
 
     /**
-     * 从 API 响应创建.
+     * Create from API response.
      */
     public static function fromApiResponse(array $response): self
     {
@@ -71,7 +71,7 @@ class AsrRecorderResponse
     }
 
     /**
-     * 是否成功（code = 1000）.
+     * Check success (code = 1000).
      */
     public function isSuccess(): bool
     {
@@ -79,7 +79,7 @@ class AsrRecorderResponse
     }
 
     /**
-     * 获取任务状态.
+     * Get task status.
      */
     public function getStatus(): string
     {
@@ -87,50 +87,50 @@ class AsrRecorderResponse
     }
 
     /**
-     * 获取文件路径 (兼容 V2 和旧格式).
+     * Get file path (compatible with V2 and legacy formats).
      */
     public function getFilePath(): ?string
     {
-        // V2 格式：从 files.audio_file.path 读取
+        // V2 format: read from files.audio_file.path
         if (isset($this->data['files']['audio_file']['path'])) {
             return $this->data['files']['audio_file']['path'];
         }
 
-        // 旧格式：从 file_path 读取（向后兼容）
+        // Legacy format: read from file_path (backward compatible)
         $path = $this->data['file_path'] ?? null;
         return $path !== '' ? $path : null;
     }
 
     /**
-     * 获取音频时长（秒） (兼容 V2 和旧格式).
+     * Get audio duration in seconds (compatible with V2 and legacy formats).
      */
     public function getDuration(): ?int
     {
-        // V2 格式：从 files.audio_file.duration 读取
+        // V2 format: read from files.audio_file.duration
         if (isset($this->data['files']['audio_file']['duration'])) {
             return (int) $this->data['files']['audio_file']['duration'];
         }
 
-        // 旧格式：从 duration 读取（向后兼容）
+        // Legacy format: read from duration (backward compatible)
         return $this->data['duration'] ?? null;
     }
 
     /**
-     * 获取文件大小（字节） (兼容 V2 和旧格式).
+     * Get file size in bytes (compatible with V2 and legacy formats).
      */
     public function getFileSize(): ?int
     {
-        // V2 格式：从 files.audio_file.size 读取
+        // V2 format: read from files.audio_file.size
         if (isset($this->data['files']['audio_file']['size'])) {
             return (int) $this->data['files']['audio_file']['size'];
         }
 
-        // 旧格式：从 file_size 读取（向后兼容）
+        // Legacy format: read from file_size (backward compatible)
         return $this->data['file_size'] ?? null;
     }
 
     /**
-     * 获取错误信息.
+     * Get error message.
      */
     public function getErrorMessage(): ?string
     {
@@ -138,7 +138,7 @@ class AsrRecorderResponse
     }
 
     /**
-     * 获取完整的 data 数组（用于响应处理）.
+     * Get full data array (for response handling).
      */
     public function getData(): array
     {
@@ -146,7 +146,7 @@ class AsrRecorderResponse
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {

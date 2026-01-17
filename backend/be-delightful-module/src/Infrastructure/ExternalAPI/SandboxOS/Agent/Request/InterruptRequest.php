@@ -10,8 +10,8 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Req
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 
 /**
- * 中断请求类
- * 严格按照沙箱通信文档的中断请求格式.
+ * Interrupt request class
+ * Follows the sandbox communication interrupt request format.
  */
 class InterruptRequest
 {
@@ -24,7 +24,7 @@ class InterruptRequest
     }
 
     /**
-     * 创建中断请求
+     * Create an interrupt request
      */
     public static function create(string $messageId, string $userId, string $taskId, string $remark = ''): self
     {
@@ -32,7 +32,7 @@ class InterruptRequest
     }
 
     /**
-     * 设置用户ID.
+     * Set user ID.
      */
     public function setUserId(string $userId): self
     {
@@ -41,7 +41,7 @@ class InterruptRequest
     }
 
     /**
-     * 获取用户ID.
+     * Get user ID.
      */
     public function getUserId(): string
     {
@@ -49,7 +49,7 @@ class InterruptRequest
     }
 
     /**
-     * 设置任务ID.
+     * Set task ID.
      */
     public function setTaskId(string $taskId): self
     {
@@ -58,7 +58,7 @@ class InterruptRequest
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): string
     {
@@ -66,7 +66,7 @@ class InterruptRequest
     }
 
     /**
-     * 设置消息ID.
+     * Set message ID.
      */
     public function setMessageId(string $messageId): self
     {
@@ -75,7 +75,7 @@ class InterruptRequest
     }
 
     /**
-     * 获取消息ID.
+     * Get message ID.
      */
     public function getMessageId(): string
     {
@@ -83,7 +83,7 @@ class InterruptRequest
     }
 
     /**
-     * 设置备注.
+     * Set remark.
      */
     public function setRemark(string $remark): self
     {
@@ -92,7 +92,7 @@ class InterruptRequest
     }
 
     /**
-     * 获取备注.
+     * Get remark.
      */
     public function getRemark(): string
     {
@@ -100,9 +100,9 @@ class InterruptRequest
     }
 
     /**
-     * 转换为API请求数组
-     * 根据沙箱通信文档的中断请求格式.
-     */
+    * Convert to API request array
+    * Matches the sandbox communication interrupt request format.
+    */
     public function toArray(): array
     {
         $data = [
@@ -114,7 +114,7 @@ class InterruptRequest
             'context_type' => 'interrupt',
         ];
 
-        // 如果有备注则添加到请求中
+        // Include remark when present
         if (! empty($this->remark)) {
             $data['remark'] = $this->remark;
         }

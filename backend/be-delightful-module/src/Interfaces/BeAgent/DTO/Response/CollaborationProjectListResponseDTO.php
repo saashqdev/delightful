@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 /**
- * 协作项目列表响应DTO.
+ * Collaboration project list response DTO.
  */
 class CollaborationProjectListResponseDTO
 {
@@ -19,10 +19,10 @@ class CollaborationProjectListResponseDTO
     }
 
     /**
-     * 从项目数据创建响应DTO.
+     * Create response DTO from project data.
      *
-     * @param int $total 总数
-     * @param array $userRolesMap 用户角色映射 [project => role]
+     * @param int $total Total count
+     * @param array $userRolesMap User role mapping [project => role]
      */
     public static function fromProjectData(
         array $projects,
@@ -76,7 +76,7 @@ class CollaborationProjectListResponseDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {

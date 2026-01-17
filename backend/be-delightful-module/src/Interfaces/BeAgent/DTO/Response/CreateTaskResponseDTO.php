@@ -12,22 +12,22 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
 class CreateTaskResponseDTO
 {
     /**
-     * @var string 任务ID
+     * @var string Task ID
      */
     protected string $taskId;
 
     /**
-     * @var string 任务状态
+     * @var string Task status
      */
     protected string $status;
 
     /**
-     * @var string 创建时间
+     * @var string Creation time
      */
     protected string $createdAt;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(int $taskId, string $status, string $createdAt)
     {
@@ -37,7 +37,7 @@ class CreateTaskResponseDTO
     }
 
     /**
-     * 从任务实体创建响应DTO.
+     * Create response DTO from task entity.
      */
     public static function fromEntity(TaskEntity $entity): self
     {
@@ -49,7 +49,7 @@ class CreateTaskResponseDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -61,7 +61,7 @@ class CreateTaskResponseDTO
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): string
     {
@@ -69,7 +69,7 @@ class CreateTaskResponseDTO
     }
 
     /**
-     * 获取任务状态
+     * Get task status
      */
     public function getStatus(): string
     {
@@ -77,7 +77,7 @@ class CreateTaskResponseDTO
     }
 
     /**
-     * 获取创建时间.
+     * Get creation time.
      */
     public function getCreatedAt(): string
     {

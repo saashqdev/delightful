@@ -10,19 +10,19 @@ namespace Delightful\BeDelightful\Interfaces\Agent\DTO;
 class BuiltinToolCategorizedListDTO
 {
     /**
-     * 按分类组织的工具列表.
+     * Tool list organized by category.
      * @var array<string, array<BuiltinToolDTO>>
      */
     public array $categories = [];
 
     /**
-     * 所有工具的平铺列表.
+     * Flat list of all tools.
      * @var array<BuiltinToolDTO>
      */
     public array $tools = [];
 
     /**
-     * 总数量.
+     * Total count.
      */
     public int $total = 0;
 

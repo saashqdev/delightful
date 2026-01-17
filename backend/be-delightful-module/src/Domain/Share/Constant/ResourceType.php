@@ -10,30 +10,30 @@ namespace Delightful\BeDelightful\Domain\Share\Constant;
 use RuntimeException;
 
 /**
- * 资源类型枚举.
+ * Resource type enum.
  */
 enum ResourceType: int
 {
-    // 现有类型
-    case BotCode = 1;           // AI 助理
-    case SubFlowCode = 2;       // 子流程
-    case ToolSet = 3;           // 工具集
-    case Knowledge = 4;         // 知识库
+    // Existing types
+    case BotCode = 1;           // AI Assistant
+    case SubFlowCode = 2;       // Sub-flow
+    case ToolSet = 3;           // Tool set
+    case Knowledge = 4;         // Knowledge base
 
-    // 新增业务类型
-    case Topic = 5;             // 话题
-    case Document = 6;          // 文档
-    case Schedule = 7;          // 日程
-    case MultiTable = 8;        // 多维表格
-    case Form = 9;              // 表单
-    case MindMap = 10;          // 思维导图
-    case Website = 11;          // 网站
-    case Project = 12;          // 项目
-    case File = 13;             // 文件
-    case ProjectInvitation = 14; // 项目邀请链接
+    // New business types
+    case Topic = 5;             // Topic
+    case Document = 6;          // Document
+    case Schedule = 7;          // Schedule
+    case MultiTable = 8;        // Multi-dimensional table
+    case Form = 9;              // Form
+    case MindMap = 10;          // Mind map
+    case Website = 11;          // Website
+    case Project = 12;          // Project
+    case File = 13;             // File
+    case ProjectInvitation = 14; // Project invitation link
 
     /**
-     * 获取资源类型的业务名称.
+     * Get the business name of the resource type.
      */
     public function getBusinessName(): string
     {
@@ -56,11 +56,11 @@ enum ResourceType: int
     }
 
     /**
-     * 根据业务名称获取资源类型枚举.
+     * Get resource type enum from business name.
      *
-     * @param string $businessName 业务名称
-     * @return ResourceType 资源类型枚举
-     * @throws RuntimeException 当找不到对应的资源类型时抛出异常
+     * @param string $businessName Business name
+     * @return ResourceType Resource type enum
+     * @throws RuntimeException Thrown when the corresponding resource type cannot be found
      */
     public static function fromBusinessName(string $businessName): self
     {
@@ -70,7 +70,7 @@ enum ResourceType: int
             }
         }
 
-        throw new RuntimeException("找不到业务名称为 '{$businessName}' 的资源类型");
+        throw new RuntimeException("Resource type with business name '{$businessName}' not found");
     }
 
     public static function isProjectInvitation(int $type): bool

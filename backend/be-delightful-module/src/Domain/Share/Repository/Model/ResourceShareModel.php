@@ -11,44 +11,44 @@ use App\Infrastructure\Core\AbstractModel;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
- * 资源分享模型.
+ * Resource share model.
  *
  * @property int $id ID
- * @property string $resource_id 资源ID
- * @property int $resource_type 资源类型
- * @property string $resource_name 资源名称
- * @property string $share_code 分享代码
- * @property int $share_type 分享类型
- * @property null|string $password 访问密码
- * @property bool $is_password_enabled 是否启用密码保护
- * @property null|string $expire_at 过期时间
- * @property int $view_count 查看次数
- * @property string $created_uid 创建者用户ID
- * @property string $updated_uid 更新者用户ID
- * @property string $organization_code 组织代码
- * @property null|string $target_ids 目标IDs
- * @property null|array $extra 额外属性
- * @property bool $is_enabled 是否启用
- * @property string $created_at 创建时间
- * @property string $updated_at 更新时间
- * @property null|string $deleted_at 删除时间
+ * @property string $resource_id Resource ID
+ * @property int $resource_type Resource type
+ * @property string $resource_name Resource name
+ * @property string $share_code Share code
+ * @property int $share_type Share type
+ * @property null|string $password Access password
+ * @property bool $is_password_enabled Whether password protection is enabled
+ * @property null|string $expire_at Expiration time
+ * @property int $view_count View count
+ * @property string $created_uid Creator user ID
+ * @property string $updated_uid Updater user ID
+ * @property string $organization_code Organization code
+ * @property null|string $target_ids Target IDs
+ * @property null|array $extra Extra attributes
+ * @property bool $is_enabled Whether enabled
+ * @property string $created_at Creation time
+ * @property string $updated_at Update time
+ * @property null|string $deleted_at Deletion time
  */
 class ResourceShareModel extends AbstractModel
 {
     use SoftDeletes;
 
     /**
-     * 表名.
+     * Table name.
      */
     protected ?string $table = 'delightful_resource_shares';
 
     /**
-     * 主键.
+     * Primary key.
      */
     protected string $primaryKey = 'id';
 
     /**
-     * 可批量赋值的属性.
+     * Mass assignable attributes.
      */
     protected array $fillable = [
         'id',
@@ -71,7 +71,7 @@ class ResourceShareModel extends AbstractModel
     ];
 
     /**
-     * 自动类型转换.
+     * Automatic type casting.
      */
     protected array $casts = [
         'id' => 'integer',

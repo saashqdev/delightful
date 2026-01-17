@@ -12,14 +12,14 @@ use App\Infrastructure\Core\AbstractRequestDTO;
 use function Hyperf\Translation\__;
 
 /**
- * 批量更新成员权限请求DTO.
+ * Batch update members permission request DTO.
  *
- * 封装批量更新成员权限的请求参数和验证逻辑
- * 继承AbstractRequestDTO，自动支持参数验证和类型转换
+ * Encapsulates request parameters and validation logic for batch updating member permissions
+ * Extends AbstractRequestDTO, automatically supports parameter validation and type conversion
  */
 class BatchUpdateMembersRequestDTO extends AbstractRequestDTO
 {
-    /** @var array 成员权限更新数据列表 */
+    /** @var array Member permission update data list */
     public array $members = [];
 
     public function getMembers(): array
@@ -33,7 +33,7 @@ class BatchUpdateMembersRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 定义验证规则.
+     * Define validation rules.
      */
     protected static function getHyperfValidationRules(): array
     {
@@ -46,7 +46,7 @@ class BatchUpdateMembersRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 定义验证错误消息（多语言支持）.
+     * Define validation error messages (multi-language support).
      */
     protected static function getHyperfValidationMessage(): array
     {

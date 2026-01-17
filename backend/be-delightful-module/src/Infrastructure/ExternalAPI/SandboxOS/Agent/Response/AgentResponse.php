@@ -10,8 +10,8 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Res
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Result\GatewayResult;
 
 /**
- * Agent响应类
- * 封装Agent API的响应数据.
+ * Agent response class
+ * Wraps Agent API response data.
  */
 class AgentResponse extends GatewayResult
 {
@@ -28,7 +28,7 @@ class AgentResponse extends GatewayResult
     private array $responseMetadata = [];
 
     /**
-     * 从Gateway结果创建Agent响应.
+     * Create an Agent response from a Gateway result.
      */
     public static function fromGatewayResult(GatewayResult $gatewayResult): self
     {
@@ -38,7 +38,7 @@ class AgentResponse extends GatewayResult
             $gatewayResult->getData()
         );
 
-        // 解析Agent特定的响应数据
+        // Parse Agent-specific response data
         $data = $gatewayResult->getData();
         $response->parseAgentData($data);
 
@@ -46,7 +46,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 从API响应创建Agent响应.
+     * Create an Agent response from an API response array.
      */
     public static function fromApiResponse(array $response): self
     {
@@ -62,7 +62,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 获取Agent ID.
+     * Get Agent ID.
      */
     public function getAgentId(): ?string
     {
@@ -70,7 +70,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 获取会话ID.
+     * Get session ID.
      */
     public function getSessionId(): ?string
     {
@@ -78,7 +78,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 获取消息ID.
+     * Get message ID.
      */
     public function getMessageId(): ?string
     {
@@ -86,7 +86,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 获取响应消息.
+     * Get response message.
      */
     public function getResponseMessage(): ?string
     {
@@ -94,7 +94,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 获取响应类型.
+     * Get response type.
      */
     public function getResponseType(): ?string
     {
@@ -102,7 +102,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 获取响应元数据.
+     * Get response metadata.
      */
     public function getResponseMetadata(): array
     {
@@ -110,7 +110,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 获取指定元数据值
+     * Get a specific metadata value.
      */
     public function getMetadataValue(string $key, mixed $default = null): mixed
     {
@@ -119,7 +119,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 检查是否有响应消息.
+     * Check if a response message exists.
      */
     public function hasResponseMessage(): bool
     {
@@ -127,7 +127,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 检查是否是文本响应.
+     * Check if the response is text.
      */
     public function isTextResponse(): bool
     {
@@ -135,7 +135,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 检查是否是错误响应.
+     * Check if the response is an error.
      */
     public function isErrorResponse(): bool
     {
@@ -143,7 +143,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 转换为数组（包含Agent特定字段）.
+     * Convert to array (including Agent-specific fields).
      */
     public function toArray(): array
     {
@@ -160,7 +160,7 @@ class AgentResponse extends GatewayResult
     }
 
     /**
-     * 解析Agent特定数据.
+     * Parse Agent-specific data.
      */
     private function parseAgentData(array $data): void
     {

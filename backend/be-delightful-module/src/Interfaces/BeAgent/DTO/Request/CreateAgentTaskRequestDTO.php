@@ -20,7 +20,7 @@ class CreateAgentTaskRequestDTO extends AbstractRequestDTO
     protected string $conversationId = '';
 
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public static function getHyperfValidationRules(): array
     {
@@ -33,19 +33,19 @@ class CreateAgentTaskRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'topic_id.string' => '话题ID不能为空',
-            'prompt.required' => '任务提示词不能为空',
+            'topic_id.string' => 'Topic ID cannot be empty',
+            'prompt.required' => 'Task prompt cannot be empty',
         ];
     }
 
     /**
-     * 属性名称.
+     * Attribute names.
      */
     public function attributes(): array
     {
         return [
-            'topic_id' => '话题ID',
-            'prompt' => '任务提示词',
+            'topic_id' => 'Topic ID',
+            'prompt' => 'Task prompt',
         ];
     }
 
@@ -80,7 +80,7 @@ class CreateAgentTaskRequestDTO extends AbstractRequestDTO
     }
 
     /*
-     * 准备数据.
+     * Prepare data.
      */
     // protected function prepareForValidation(): void
     // {

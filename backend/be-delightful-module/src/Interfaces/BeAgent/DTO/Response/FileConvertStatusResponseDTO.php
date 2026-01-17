@@ -8,62 +8,62 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 /**
- * 文件转换状态响应DTO.
+ * File conversion status response DTO.
  */
 class FileConvertStatusResponseDTO
 {
     /**
-     * 转换状态
+     * Conversion status
      */
     protected string $status;
 
     /**
-     * 下载链接.
+     * Download link.
      */
     protected ?string $downloadUrl;
 
     /**
-     * 进度百分比.
+     * Progress percentage.
      */
     protected ?int $progress;
 
     /**
-     * 状态消息.
+     * Status message.
      */
     protected string $message;
 
     /**
-     * 总文件数.
+     * Total file count.
      */
     protected ?int $totalFiles;
 
     /**
-     * 成功转换数.
+     * Successful conversion count.
      */
     protected ?int $successCount;
 
     /**
-     * 转换类型.
+     * Conversion type.
      */
     protected ?string $convertType;
 
     /**
-     * 批次ID.
+     * Batch ID.
      */
     protected ?string $batchId;
 
     /**
-     * 任务键.
+     * Task key.
      */
     protected ?string $taskKey;
 
     /**
-     * 转换成功率.
+     * Conversion success rate.
      */
     protected ?float $conversionRate;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(
         string $status,
@@ -90,7 +90,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 从数组创建DTO.
+     * Create DTO from array.
      */
     public static function fromArray(array $data): self
     {
@@ -109,7 +109,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -128,7 +128,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取转换状态
+     * Get conversion status
      */
     public function getStatus(): string
     {
@@ -136,7 +136,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置转换状态
+     * Set conversion status
      */
     public function setStatus(string $status): self
     {
@@ -145,7 +145,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取下载链接.
+     * Get download link.
      */
     public function getDownloadUrl(): ?string
     {
@@ -153,7 +153,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置下载链接.
+     * Set download link.
      */
     public function setDownloadUrl(?string $downloadUrl): self
     {
@@ -162,7 +162,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取进度百分比.
+     * Get progress percentage.
      */
     public function getProgress(): ?int
     {
@@ -170,7 +170,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置进度百分比.
+     * Set progress percentage.
      */
     public function setProgress(?int $progress): self
     {
@@ -179,7 +179,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取状态消息.
+     * Get status message.
      */
     public function getMessage(): string
     {
@@ -187,7 +187,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置状态消息.
+     * Set status message.
      */
     public function setMessage(string $message): self
     {
@@ -196,7 +196,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取总文件数.
+     * Get total file count.
      */
     public function getTotalFiles(): ?int
     {
@@ -204,7 +204,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置总文件数.
+     * Set total file count.
      */
     public function setTotalFiles(?int $totalFiles): self
     {
@@ -213,7 +213,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取成功转换数.
+     * Get successful conversion count.
      */
     public function getSuccessCount(): ?int
     {
@@ -221,7 +221,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置成功转换数.
+     * Set successful conversion count.
      */
     public function setSuccessCount(?int $successCount): self
     {
@@ -230,7 +230,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取转换类型.
+     * Get conversion type.
      */
     public function getConvertType(): ?string
     {
@@ -238,7 +238,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置转换类型.
+     * Set conversion type.
      */
     public function setConvertType(?string $convertType): self
     {
@@ -247,7 +247,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取批次ID.
+     * Get batch ID.
      */
     public function getBatchId(): ?string
     {
@@ -255,7 +255,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置批次ID.
+     * Set batch ID.
      */
     public function setBatchId(?string $batchId): self
     {
@@ -264,7 +264,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取任务键.
+     * Get task key.
      */
     public function getTaskKey(): ?string
     {
@@ -272,7 +272,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置任务键.
+     * Set task key.
      */
     public function setTaskKey(?string $taskKey): self
     {
@@ -281,7 +281,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 获取转换成功率.
+     * Get conversion success rate.
      */
     public function getConversionRate(): ?float
     {
@@ -289,7 +289,7 @@ class FileConvertStatusResponseDTO
     }
 
     /**
-     * 设置转换成功率.
+     * Set conversion success rate.
      */
     public function setConversionRate(?float $conversionRate): self
     {

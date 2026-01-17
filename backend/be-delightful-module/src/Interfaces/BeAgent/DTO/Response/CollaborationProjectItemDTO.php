@@ -10,12 +10,12 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
- * 协作项目条目DTO (扩展自ProjectItemDTO).
+ * Collaboration project item DTO (extends ProjectItemDTO).
  */
 class CollaborationProjectItemDTO extends ProjectItemDTO
 {
     public function __construct(
-        // 继承父类的所有字段
+        // Inherit all fields from parent class
         string $id,
         string $workspaceId,
         string $projectName,
@@ -33,7 +33,7 @@ class CollaborationProjectItemDTO extends ProjectItemDTO
         ?bool $isCollaborationEnabled,
         ?string $defaultJoinPermission,
 
-        // 新增字段
+        // New fields
         public readonly ?CreatorInfoDTO $creator,
         public readonly array $members,
         public readonly int $memberCount,
@@ -64,7 +64,7 @@ class CollaborationProjectItemDTO extends ProjectItemDTO
     }
 
     /**
-     * 从项目实体和扩展信息创建DTO.
+     * Create DTO from project entity and extended information.
      */
     public static function fromEntityWithExtendedInfo(
         ProjectEntity $project,
@@ -108,7 +108,7 @@ class CollaborationProjectItemDTO extends ProjectItemDTO
     }
 
     /**
-     * 转换为数组 (包含扩展字段).
+     * Convert to array (including extended fields).
      */
     public function toArray(): array
     {

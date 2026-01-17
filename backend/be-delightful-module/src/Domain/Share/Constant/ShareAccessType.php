@@ -8,30 +8,30 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\Share\Constant;
 
 /**
- * 分享访问类型枚举.
+ * Share access type enum.
  */
 enum ShareAccessType: int
 {
-    case SelfOnly = 1;                // 仅自己可访问
-    case OrganizationInternal = 2;    // 组织内部可访问
-    case SpecificTarget = 3;          // 指定部门/成员可访问
-    case Internet = 4;                // 互联网可访问(需要链接)
+    case SelfOnly = 1;                // Only accessible by self
+    case OrganizationInternal = 2;    // Accessible within organization
+    case SpecificTarget = 3;          // Accessible by specific departments/members
+    case Internet = 4;                // Accessible via internet (requires link)
 
     /**
-     * 获取分享类型的描述.
+     * Get the description of the share type.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::SelfOnly => '仅自己可访问',
-            self::OrganizationInternal => '组织内部可访问',
-            self::SpecificTarget => '指定部门/成员可访问',
-            self::Internet => '互联网可访问',
+            self::SelfOnly => 'Only accessible by self',
+            self::OrganizationInternal => 'Accessible within organization',
+            self::SpecificTarget => 'Accessible by specific departments/members',
+            self::Internet => 'Accessible via internet',
         };
     }
 
     /**
-     * 检查是否需要密码保护.
+     * Check if password protection is required.
      */
     public function needsPassword(): bool
     {
@@ -39,7 +39,7 @@ enum ShareAccessType: int
     }
 
     /**
-     * 检查是否需要指定目标.
+     * Check if specific targets are required.
      */
     public function needsTargets(): bool
     {

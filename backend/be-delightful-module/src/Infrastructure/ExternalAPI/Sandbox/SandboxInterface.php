@@ -10,22 +10,22 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox;
 interface SandboxInterface
 {
     /**
-     * 创建沙箱实例.
+     * Create sandbox instance.
      */
     public function create(SandboxStruct $struct): SandboxResult;
 
     /**
-     * 获取沙箱状态.
+     * Get sandbox status.
      */
     public function getStatus(string $sandboxId): SandboxResult;
 
     /**
-     * 销毁沙箱实例.
+     * Destroy sandbox instance.
      */
     public function destroy(string $sandboxId): SandboxResult;
 
     /**
-     * 获取沙箱WebSocket连接地址.
+     * Get sandbox WebSocket connection address.
      */
     public function getWebsocketUrl(string $sandboxId): string;
 }

@@ -13,128 +13,128 @@ use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Constant\ShareAccessType;
 
 /**
- * 通用资源分享实体.
+ * Generic resource share entity.
  */
 class ResourceShareEntity extends AbstractEntity
 {
     /**
-     * @var int 主键ID
+     * @var int Primary key ID
      */
     protected int $id = 0;
 
     /**
-     * @var string 资源ID
+     * @var string Resource ID
      */
     protected string $resourceId = '';
 
     /**
-     * @var int 资源类型
+     * @var int Resource type
      */
     protected int $resourceType = 0;
 
     /**
-     * @var string 资源名称
+     * @var string Resource name
      */
     protected string $resourceName = '';
 
     /**
-     * @var string 分享代码
+     * @var string Share code
      */
     protected string $shareCode = '';
 
     /**
-     * @var int 分享类型
+     * @var int Share type
      */
     protected int $shareType = 0;
 
     /**
-     * @var null|string 访问密码（可选）
+     * @var null|string Access password (optional)
      */
     protected ?string $password = null;
 
     /**
-     * @var bool 是否启用密码保护
+     * @var bool Whether password protection is enabled
      */
     protected bool $isPasswordEnabled = false;
 
     /**
-     * @var null|string 过期时间（可选）
+     * @var null|string Expiration time (optional)
      */
     protected ?string $expireAt = null;
 
     /**
-     * @var int 查看次数
+     * @var int View count
      */
     protected int $viewCount = 0;
 
     /**
-     * @var string 创建者用户ID
+     * @var string Creator user ID
      */
     protected string $createdUid = '';
 
     /**
-     * @var string 更新者用户ID
+     * @var string Updater user ID
      */
     protected string $updatedUid = '';
 
     /**
-     * @var string 组织代码
+     * @var string Organization code
      */
     protected string $organizationCode = '';
 
     /**
-     * @var string 目标IDs（SpecificTarget类型时使用）
-     *             格式：[{"type": 1, "id": "123"}, {"type": 2, "id": "456"}]
-     *             type: 1-用户，2-部门，3-群组
+     * @var string Target IDs (used for SpecificTarget type)
+     *             Format: [{"type": 1, "id": "123"}, {"type": 2, "id": "456"}]
+     *             type: 1-User, 2-Department, 3-Group
      */
     protected string $targetIds = '';
 
     /**
-     * @var null|array 额外属性（用于存储扩展信息）
+     * @var null|array Extra attributes (for storing extended information)
      */
     protected ?array $extra = null;
 
     /**
-     * @var bool 是否启用（邀请链接专用）
+     * @var bool Whether enabled (dedicated for invitation links)
      */
     protected bool $isEnabled = true;
 
     /**
-     * @var null|string 创建时间
+     * @var null|string Creation time
      */
     protected ?string $createdAt = null;
 
     /**
-     * @var null|string 更新时间
+     * @var null|string Update time
      */
     protected ?string $updatedAt = null;
 
     /**
-     * @var null|string 删除时间
+     * @var null|string Deletion time
      */
     protected ?string $deletedAt = null;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(array $data = [])
     {
-        // 默认设置
-        $this->id = 0; // 设置默认ID为0
+        // Default settings
+        $this->id = 0; // Set default ID to 0
         $this->viewCount = 0;
         $this->password = null;
         $this->expireAt = null;
         $this->deletedAt = null;
-        $this->targetIds = '[]'; // 存储为JSON字符串
+        $this->targetIds = '[]'; // Store as JSON string
         $this->extra = null;
-        $this->isEnabled = true; // 默认启用
-        $this->isPasswordEnabled = false; // 默认启用
+        $this->isEnabled = true; // Enabled by default
+        $this->isPasswordEnabled = false; // Disabled by default
 
         $this->initProperty($data);
     }
 
     /**
-     * 获取资源类型枚举.
+     * Get resource type enum.
      */
     public function getResourceTypeEnum(): ResourceType
     {
@@ -142,7 +142,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 设置资源类型枚举.
+     * Set resource type enum.
      */
     public function setResourceTypeEnum(ResourceType $resourceType): self
     {
@@ -151,7 +151,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 获取分享类型枚举.
+     * Get share type enum.
      */
     public function getShareTypeEnum(): ShareAccessType
     {
@@ -159,7 +159,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 设置分享类型枚举.
+     * Set share type enum.
      */
     public function setShareTypeEnum(ShareAccessType $shareType): self
     {
@@ -168,7 +168,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 获取目标ID数组.
+     * Get target IDs array.
      */
     public function getTargetIdsArray(): array
     {
@@ -176,7 +176,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 设置目标ID数组.
+     * Set target IDs array.
      */
     public function setTargetIdsArray(array $targetIds): self
     {
@@ -185,7 +185,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 检查分享是否已过期
+     * Check if share has expired
      */
     public function isExpired(): bool
     {
@@ -198,7 +198,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 检查分享是否已删除.
+     * Check if share has been deleted.
      */
     public function isDeleted(): bool
     {
@@ -206,7 +206,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 检查分享是否有效.
+     * Check if share is valid.
      */
     public function isValid(): bool
     {
@@ -214,7 +214,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 增加查看次数.
+     * Increment view count.
      */
     public function incrementViewCount(): void
     {
@@ -222,7 +222,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 验证密码
+     * Verify password
      */
     public function verifyPassword(string $inputPassword): bool
     {
@@ -230,12 +230,12 @@ class ResourceShareEntity extends AbstractEntity
             return true;
         }
 
-        // 实际应用中应该使用PasswordHasher进行安全的密码验证
+        // In actual applications, should use PasswordHasher for secure password verification
         return $this->password === $inputPassword;
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -261,7 +261,7 @@ class ResourceShareEntity extends AbstractEntity
             'deleted_at' => $this->deletedAt,
         ];
 
-        // 移除null值
+        // Remove null values
         return array_filter($result, function ($value) {
             return $value !== null;
         });
@@ -435,7 +435,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 获取指定的额外属性值.
+     * Get specified extra attribute value.
      */
     public function getExtraAttribute(string $key, mixed $default = null): mixed
     {
@@ -443,7 +443,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 设置指定的额外属性值.
+     * Set specified extra attribute value.
      */
     public function setExtraAttribute(string $key, mixed $value): self
     {
@@ -499,7 +499,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 启用分享.
+     * Enable share.
      */
     public function enable(): self
     {
@@ -508,7 +508,7 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 禁用分享.
+     * Disable share.
      */
     public function disable(): self
     {
@@ -517,10 +517,10 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 生成随机数字密码.
+     * Generate random numeric password.
      *
-     * @param int $length 密码长度，默认5位
-     * @return string 生成的随机密码
+     * @param int $length Password length, default 5 digits
+     * @return string Generated random password
      */
     public static function generateRandomPassword(int $length = 5): string
     {
@@ -529,11 +529,11 @@ class ResourceShareEntity extends AbstractEntity
     }
 
     /**
-     * 生成随机密码（支持自定义种子，主要用于测试）.
+     * Generate random password (supports custom seed, mainly for testing).
      *
-     * @param int $length 密码长度
-     * @param null|int $seed 随机种子，null则使用系统随机
-     * @return string 生成的随机密码
+     * @param int $length Password length
+     * @param null|int $seed Random seed, null uses system random
+     * @return string Generated random password
      */
     public static function generateRandomPasswordWithSeed(int $length = 5, ?int $seed = null): string
     {

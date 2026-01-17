@@ -92,10 +92,10 @@ class CreateFileRequestDTO extends AbstractRequestDTO
                 'required',
                 'string',
                 'max:255',
-                'regex:/^[^\/\:*?"<>|]+$/', // 禁止特殊字符
+                'regex:/^[^\/\:*?"<>|]+$/', // Prohibit special characters
             ],
             'is_directory' => 'nullable|boolean',
-            'pre_file_id' => 'integer|min:-1', // -1表示末尾，0表示第一位，>0表示指定位置
+            'pre_file_id' => 'integer|min:-1', // -1=last position, 0=first position, >0=specific position
         ];
     }
 

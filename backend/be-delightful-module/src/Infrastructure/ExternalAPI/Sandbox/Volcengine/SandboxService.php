@@ -31,9 +31,9 @@ class SandboxService extends AbstractSandbox
     }
 
     /**
-     * 检查沙箱是否存在.
+     * Check if sandbox exists.
      *
-     * 返回格式：
+     * Response format:
      * {
      *    "code": 1000,
      *    "message": "success",
@@ -45,8 +45,8 @@ class SandboxService extends AbstractSandbox
      *    }
      * }
      *
-     * @param string $sandboxId 沙箱ID
-     * @return SandboxResult 沙箱结果
+     * @param string $sandboxId Sandbox ID
+     * @return SandboxResult Sandbox result
      */
     public function checkSandboxExists(string $sandboxId): SandboxResult
     {
@@ -57,7 +57,7 @@ class SandboxService extends AbstractSandbox
 
         $result = $this->request('GET', sprintf('sandboxes/%s', $sandboxId));
 
-        // SandboxData 结构体已经确保了所有必要的字段都存在，不需要额外检查
+        // SandboxData struct ensures all necessary fields exist, no additional checks needed
 
         $this->logger->info(sprintf(
             '[Sandbox] Check sandbox result - success: %s, message: %s, data: %s, code: %d, sandbox_id: %s',

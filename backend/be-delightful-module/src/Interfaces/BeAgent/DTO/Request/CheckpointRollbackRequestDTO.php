@@ -14,7 +14,7 @@ class CheckpointRollbackRequestDTO extends AbstractRequestDTO
     protected string $targetMessageId = '';
 
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public static function getHyperfValidationRules(): array
     {
@@ -26,17 +26,17 @@ class CheckpointRollbackRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'target_message_id.required' => '目标消息ID不能为空',
+            'target_message_id.required' => 'Target message ID cannot be empty',
         ];
     }
 
     /**
-     * 属性名称.
+     * Attribute names.
      */
     public function attributes(): array
     {
         return [
-            'target_message_id' => '目标消息ID',
+            'target_message_id' => 'Target message ID',
         ];
     }
 

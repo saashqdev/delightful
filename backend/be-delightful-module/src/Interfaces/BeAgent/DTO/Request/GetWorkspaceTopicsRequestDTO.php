@@ -13,32 +13,32 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class GetWorkspaceTopicsRequestDTO extends AbstractDTO
 {
     /**
-     * @var int 工作区ID
+     * @var int Workspace ID
      */
     protected int $workspaceId = 0;
 
     /**
-     * @var int 页码
+     * @var int Page number
      */
     protected int $page = 1;
 
     /**
-     * @var int 每页数量
+     * @var int Items per page
      */
     protected int $pageSize = 20;
 
     /**
-     * @var string 排序字段
+     * @var string Sort field
      */
     protected string $orderBy = 'id';
 
     /**
-     * @var string 排序方向
+     * @var string Sort direction
      */
     protected string $orderDirection = 'desc';
 
     /**
-     * 从请求中创建 DTO.
+     * Create DTO from request.
      */
     public static function fromRequest(RequestInterface $request): self
     {

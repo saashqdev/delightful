@@ -8,24 +8,24 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\Utils;
 
 /**
- * 密码哈希工具类.
+ * Password hashing utility.
  */
 class PasswordHasher
 {
     protected string $hashAlgo = PASSWORD_BCRYPT;
 
     /**
-     * 密码哈希选项.
+     * Password hashing options.
      */
     protected array $hashOptions = [
         'cost' => 10,
     ];
 
     /**
-     * 对密码进行哈希处理.
+     * Hash a password.
      *
-     * @param string $password 原始密码
-     * @return string 哈希后的密码
+     * @param string $password Original password
+     * @return string Hashed password
      */
     public function hash(string $password): string
     {
@@ -33,11 +33,11 @@ class PasswordHasher
     }
 
     /**
-     * 验证密码是否正确.
+     * Verify whether the password is correct.
      *
-     * @param string $password 原始密码
-     * @param string $hash 哈希后的密码
-     * @return bool 是否验证通过
+     * @param string $password Original password
+     * @param string $hash Hashed password
+     * @return bool Whether verification passed
      */
     public function verify(string $password, string $hash): bool
     {
@@ -45,10 +45,10 @@ class PasswordHasher
     }
 
     /**
-     * 检查密码哈希是否需要重新哈希.
+     * Check whether the password hash needs to be rehashed.
      *
-     * @param string $hash 哈希后的密码
-     * @return bool 是否需要重新哈希
+     * @param string $hash Hashed password
+     * @return bool Whether rehashing is needed
      */
     public function needsRehash(string $hash): bool
     {

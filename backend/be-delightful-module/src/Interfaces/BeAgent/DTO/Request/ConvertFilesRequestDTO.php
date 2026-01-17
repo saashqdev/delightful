@@ -12,32 +12,32 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class ConvertFilesRequestDTO
 {
     /**
-     * 文件ID列表.
+     * File ID list.
      */
     public array $file_ids = [];
 
     /**
-     * 项目ID.
+     * Project ID.
      */
     public string $project_id = '';
 
     /**
-     * 是否调试模式.
+     * Whether in debug mode.
      */
     public bool $is_debug = false;
 
     /**
-     * 转换类型: pdf, ppt, image.
+     * Convert type: pdf, ppt, image.
      */
     public string $convert_type = '';
 
     /**
-     * 其他选项.
+     * Other options.
      */
     public array $options = [];
 
     /**
-     * 从请求创建DTO实例.
+     * Create DTO instance from request.
      */
     public static function fromRequest(RequestInterface $request): self
     {

@@ -17,48 +17,48 @@ class BeDelightfulAgentDTO extends AbstractDTO
     use StringIdDTOTrait;
 
     /**
-     * Agent名称.
+     * Agent name.
      */
     public string $name = '';
 
     /**
-     * Agent描述.
+     * Agent description.
      */
     public string $description = '';
 
     /**
-     * Agent图标.
-     * 格式: {"url": "...", "type": "...", "color": "..."}.
+     * Agent icon.
+     * Format: {"url": "...", "type": "...", "color": "..."}.
      */
     public array $icon = [];
 
     /**
-     * 图标类型 1:图标 2:图片.
+     * Icon type: 1=icon, 2=image.
      */
     public int $iconType = 1;
 
     /**
-     * 系统提示词.
+     * System prompt.
      */
     public array $prompt = [];
 
     /**
-     * 智能体类型：1-内置，2-自定义.
+     * Agent type: 1=built-in, 2=custom.
      */
     public int $type = 2;
 
     /**
-     * 是否启用.
+     * Whether enabled.
      */
     public ?bool $enabled = null;
 
     /**
-     * 工具列表.
+     * Tool list.
      */
     public array $tools = [];
 
     /**
-     * 系统提示词纯文本格式.
+     * System prompt in plain text format.
      */
     public ?string $promptString = null;
 

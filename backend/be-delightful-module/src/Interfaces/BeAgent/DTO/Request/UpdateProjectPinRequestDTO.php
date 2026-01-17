@@ -12,18 +12,18 @@ use App\Infrastructure\Core\AbstractRequestDTO;
 use function Hyperf\Translation\__;
 
 /**
- * 更新项目置顶状态请求 DTO
- * 用于接收置顶/取消置顶项目的请求参数.
+ * Update project pin status request DTO
+ * Used to receive request parameters for pinning/unpinning a project.
  */
 class UpdateProjectPinRequestDTO extends AbstractRequestDTO
 {
     /**
-     * 是否置顶：false-取消置顶，true-置顶.
+     * Whether to pin: false-unpin, true-pin.
      */
     public bool $isPin = false;
 
     /**
-     * 获取是否置顶.
+     * Get whether to pin.
      */
     public function getIsPin(): bool
     {
@@ -31,7 +31,7 @@ class UpdateProjectPinRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 设置是否置顶.
+     * Set whether to pin.
      */
     public function setIsPin(bool $isPin): void
     {
@@ -39,7 +39,7 @@ class UpdateProjectPinRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 检查是否为置顶操作.
+     * Check if it is a pin operation.
      */
     public function isPinOperation(): bool
     {

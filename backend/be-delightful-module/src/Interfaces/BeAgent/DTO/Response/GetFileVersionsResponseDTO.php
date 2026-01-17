@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileVersionEntity;
 
 /**
- * 获取文件版本列表响应DTO.
+ * Get file version list response DTO.
  */
 class GetFileVersionsResponseDTO extends AbstractDTO
 {
@@ -52,11 +52,11 @@ class GetFileVersionsResponseDTO extends AbstractDTO
     }
 
     /**
-     * 从实体数组创建响应DTO.
+     * Create response DTO from entity array.
      *
-     * @param TaskFileVersionEntity[] $entities 文件版本实体数组
-     * @param int $total 总数
-     * @param int $page 当前页码
+     * @param TaskFileVersionEntity[] $entities File version entity array
+     * @param int $total Total count
+     * @param int $page Current page number
      */
     public static function fromData(array $entities, int $total, int $page): self
     {
@@ -79,7 +79,7 @@ class GetFileVersionsResponseDTO extends AbstractDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {

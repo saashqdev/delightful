@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\Utils;
 
 /**
- * 分享URL构建器工具类.
+ * Share URL builder utility.
  */
 class ShareUrlBuilder
 {
@@ -17,11 +17,11 @@ class ShareUrlBuilder
     protected string $sharePath = '/share';
 
     /**
-     * 构建完整的分享URL.
+     * Build complete share URL.
      *
-     * @param string $shareCode 分享代码
-     * @param null|string $resourceType 资源类型名称
-     * @return string 完整的分享URL
+     * @param string $shareCode Share code
+     * @param null|string $resourceType Resource type name
+     * @return string Complete share URL
      */
     public function buildShareUrl(string $shareCode, ?string $resourceType = null): string
     {
@@ -35,9 +35,9 @@ class ShareUrlBuilder
     }
 
     /**
-     * 获取分享URL的前缀部分.
+     * Get the prefix portion of the share URL.
      *
-     * @return string 分享URL前缀
+     * @return string Share URL prefix
      */
     public function getShareUrlPrefix(): string
     {
@@ -45,10 +45,10 @@ class ShareUrlBuilder
     }
 
     /**
-     * 从完整URL中提取分享代码
+     * Extract share code from a complete URL.
      *
-     * @param string $url 完整的分享URL
-     * @return null|string 分享代码，如果无法提取则返回null
+     * @param string $url Complete share URL
+     * @return null|string Share code, or null if extraction fails
      */
     public function extractShareCodeFromUrl(string $url): ?string
     {

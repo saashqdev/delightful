@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Config;
 
 /**
- * ASR 音频配置
- * 用于 finishTask 接口的音频合并配置.
+ * ASR audio config
+ * Audio merge configuration for the finishTask API.
  */
 readonly class AsrAudioConfig
 {
     /**
-     * @param string $sourceDir 音频分片源目录（相对于 workspace）
-     * @param string $targetDir 目标目录（相对于 workspace）
-     * @param string $outputFilename 输出文件名（不含扩展名）
+     * @param string $sourceDir Audio shard source directory (relative to workspace)
+     * @param string $targetDir Target directory (relative to workspace)
+     * @param string $outputFilename Output filename (without extension)
      */
     public function __construct(
         private string $sourceDir,
@@ -41,7 +41,7 @@ readonly class AsrAudioConfig
     }
 
     /**
-     * 转换为数组（用于 HTTP 请求）.
+     * Convert to array (for HTTP request).
      */
     public function toArray(): array
     {

@@ -8,38 +8,38 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant;
 
 /**
- * 沙箱状态常量
- * 根据沙箱通信文档定义的状态值
+ * Sandbox status constants
+ * Status values defined by the sandbox communication spec
  */
 class SandboxStatus
 {
     /**
-     * 沙箱待启动状态
+     * Sandbox pending state
      */
     public const PENDING = 'Pending';
 
     /**
-     * 沙箱运行中状态
+     * Sandbox running state
      */
     public const RUNNING = 'Running';
 
     /**
-     * 沙箱已退出状态
+     * Sandbox exited state
      */
     public const EXITED = 'Exited';
 
     /**
-     * 沙箱未知状态
+     * Sandbox unknown state
      */
     public const UNKNOWN = 'Unknown';
 
     /**
-     * 沙箱未找到状态
+     * Sandbox not found state
      */
     public const NOT_FOUND = 'NotFound';
 
     /**
-     * 获取所有有效状态
+     * Get all valid statuses
      */
     public static function getAllStatuses(): array
     {
@@ -53,7 +53,7 @@ class SandboxStatus
     }
 
     /**
-     * 检查状态是否有效.
+     * Check whether a status is valid.
      */
     public static function isValidStatus(string $status): bool
     {
@@ -61,7 +61,7 @@ class SandboxStatus
     }
 
     /**
-     * 检查沙箱是否可用（运行中）.
+     * Check whether the sandbox is available (running).
      */
     public static function isAvailable(string $status): bool
     {

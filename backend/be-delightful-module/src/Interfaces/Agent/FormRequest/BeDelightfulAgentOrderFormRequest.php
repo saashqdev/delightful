@@ -14,23 +14,23 @@ use function Hyperf\Translation\trans;
 class BeDelightfulAgentOrderFormRequest extends FormRequest
 {
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public function rules(): array
     {
         return [
-            // 常用智能体排序列表
+            // Frequently used agents order list
             'frequent' => 'nullable|array',
-            'frequent.*' => 'string|max:50', // 智能体code
+            'frequent.*' => 'string|max:50', // Agent code
 
-            // 全部智能体排序列表
+            // All agents order list
             'all' => 'nullable|array',
-            'all.*' => 'string|max:50', // 智能体code
+            'all.*' => 'string|max:50', // Agent code
         ];
     }
 
     /**
-     * 字段别名.
+     * Field aliases.
      */
     public function attributes(): array
     {
@@ -43,17 +43,17 @@ class BeDelightfulAgentOrderFormRequest extends FormRequest
     }
 
     /**
-     * 自定义验证错误消息.
+     * Custom validation error messages.
      */
     public function messages(): array
     {
         return [
-            // 常用智能体排序验证
+            // Frequently used agents order validation
             'frequent.array' => trans('be_delightful.agent.validation.frequent_array'),
             'frequent.*.string' => trans('be_delightful.agent.validation.frequent_code_string'),
             'frequent.*.max' => trans('be_delightful.agent.validation.frequent_code_max'),
 
-            // 全部智能体排序验证
+            // All agents order validation
             'all.array' => trans('be_delightful.agent.validation.all_array'),
             'all.*.string' => trans('be_delightful.agent.validation.all_code_string'),
             'all.*.max' => trans('be_delightful.agent.validation.all_code_max'),
@@ -61,7 +61,7 @@ class BeDelightfulAgentOrderFormRequest extends FormRequest
     }
 
     /**
-     * 授权验证.
+     * Authorization check.
      */
     public function authorize(): bool
     {

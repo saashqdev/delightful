@@ -11,40 +11,40 @@ use Hyperf\Context\ApplicationContext;
 use Hyperf\Redis\Redis;
 
 /**
- * 临时访问令牌工具类.
- * 基于Redis管理令牌的生命周期和权限.
+ * Temporary access token utility.
+ * Manages token lifecycle and permissions via Redis.
  */
 class AccessTokenUtil
 {
     /**
-     * Redis键前缀.
+     * Redis key prefix.
      */
     protected static string $prefix = 'be_delightful_access_token:';
 
     /**
-     * 默认过期时间(秒).
+     * Default expiration time (seconds).
      */
     protected static int $defaultTtl = 3600;
 
     /**
-     * 生成临时访问令牌.
+     * Generate a temporary access token.
      *
-     * @param string $shareId 分享ID
-     * @param string $organizationCode 组织代码
-     * @param string $scope 权限范围(如：read, write, full)
-     * @param null|int $ttl 过期时间(秒)，不指定则使用默认值
-     * @param null|array $metadata 附加元数据
-     * @return string 生成的令牌
+     * @param string $shareId Share ID
+     * @param string $organizationCode Organization code
+     * @param string $scope Permission scope (e.g., read, write, full)
+     * @param null|int $ttl Expiration time (seconds); uses default when not provided
+     * @param null|array $metadata Additional metadata
+     * @return string Generated token
      */
     public static function generate(string $shareId, string $organizationCode = '', string $scope = 'read', ?int $ttl = null, ?array $metadata = null): string
     {
         $redis = self::getRedis();
         $actualTtl = $ttl ?? self::$defaultTtl;
 
-        // 基于分享ID和作用域生成确定性的令牌 + php时间戳获取
+        // Generate a deterministic token based on share ID and scope plus PHP timestamp
         $token = md5($shareId . ':' . $scope . ':' . $organizationCode . ':' . time());
 
-        // 构建令牌数据
+        // Build token data
         $tokenData = [
             'share_id' => $shareId,
             'scope' => $scope,
@@ -54,7 +54,7 @@ class AccessTokenUtil
             'organization_code' => $organizationCode,
         ];
 
-        // 存储令牌数据
+        // Store token data
         $key = self::$prefix . $token;
         $redis->set($key, json_encode($tokenData));
         $redis->expire($key, $actualTtl);
@@ -63,28 +63,28 @@ class AccessTokenUtil
     }
 
     /**
-     * 验证令牌有效性.
+     * Validate a token.
      *
-     * @param string $token 访问令牌
-     * @param null|string $requiredScope 所需权限范围
-     * @return bool 令牌是否有效
+     * @param string $token Access token
+     * @param null|string $requiredScope Required permission scope
+     * @return bool Whether the token is valid
      */
     public static function validate(string $token, ?string $requiredScope = null): bool
     {
         $data = self::getTokenData($token);
 
-        // 令牌不存在
+        // Token not found
         if (! $data) {
             return false;
         }
 
-        // 令牌已过期
+        // Token expired
         if (time() > ($data['expires_at'] ?? 0)) {
             self::revoke($token);
             return false;
         }
 
-        // 验证权限范围
+        // Validate scope
         if ($requiredScope && ($data['scope'] ?? '') !== $requiredScope) {
             return false;
         }
@@ -93,10 +93,10 @@ class AccessTokenUtil
     }
 
     /**
-     * 撤销令牌.
+     * Revoke a token.
      *
-     * @param string $token 访问令牌
-     * @return bool 操作是否成功
+     * @param string $token Access token
+     * @return bool Whether the operation succeeded
      */
     public static function revoke(string $token): bool
     {
@@ -106,11 +106,11 @@ class AccessTokenUtil
     }
 
     /**
-     * 刷新令牌有效期.
+     * Refresh token expiration.
      *
-     * @param string $token 访问令牌
-     * @param null|int $ttl 新的过期时间(秒)，不指定则使用默认值
-     * @return bool 操作是否成功
+     * @param string $token Access token
+     * @param null|int $ttl New expiration time (seconds); uses default when not provided
+     * @return bool Whether the operation succeeded
      */
     public static function refresh(string $token, ?int $ttl = null): bool
     {
@@ -130,10 +130,10 @@ class AccessTokenUtil
     }
 
     /**
-     * 获取令牌关联的分享ID.
+     * Get the share ID associated with the token.
      *
-     * @param string $token 访问令牌
-     * @return null|string 分享ID，无效令牌返回null
+     * @param string $token Access token
+     * @return null|string Share ID; null if invalid token
      */
     public static function getShareId(string $token): ?string
     {
@@ -148,10 +148,10 @@ class AccessTokenUtil
     }
 
     /**
-     * 获取令牌元数据.
+     * Get token metadata.
      *
-     * @param string $token 访问令牌
-     * @return null|array 令牌元数据，无效令牌返回null
+     * @param string $token Access token
+     * @return null|array Token metadata; null if invalid token
      */
     public static function getMetadata(string $token): ?array
     {
@@ -160,27 +160,27 @@ class AccessTokenUtil
     }
 
     /**
-     * 从请求中提取令牌.
+     * Extract token from request.
      *
-     * @param array $headers 请求头数组
-     * @param array $query 查询参数数组
-     * @param array $body 请求体数组
-     * @return null|string 提取的令牌，未找到返回null
+     * @param array $headers Request headers
+     * @param array $query Query parameters
+     * @param array $body Request body
+     * @return null|string Extracted token; null if not found
      */
     public static function extractTokenFromRequest(array $headers = [], array $query = [], array $body = []): ?string
     {
-        // 从Authorization头提取
+        // Extract from Authorization header
         $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
         if (is_string($authHeader) && str_starts_with($authHeader, 'Bearer ')) {
             return substr($authHeader, 7);
         }
 
-        // 从查询参数提取
+        // Extract from query parameters
         if (isset($query['access_token']) && is_string($query['access_token'])) {
             return $query['access_token'];
         }
 
-        // 从请求体提取
+        // Extract from request body
         if (isset($body['access_token']) && is_string($body['access_token'])) {
             return $body['access_token'];
         }
@@ -189,7 +189,7 @@ class AccessTokenUtil
     }
 
     /**
-     * 获取Redis实例.
+     * Get Redis instance.
      */
     protected static function getRedis(): Redis
     {
@@ -197,10 +197,10 @@ class AccessTokenUtil
     }
 
     /**
-     * 获取令牌数据.
+     * Get token data.
      *
-     * @param string $token 访问令牌
-     * @return null|array 令牌数据，不存在返回null
+     * @param string $token Access token
+     * @return null|array Token data; null if not found
      */
     protected static function getTokenData(string $token): ?array
     {
@@ -214,9 +214,9 @@ class AccessTokenUtil
     }
 
     /**
-     * 生成UUID字符串.
+     * Generate a UUID string.
      *
-     * @return string UUID字符串
+     * @return string UUID string
      */
     protected static function generateUuid(): string
     {

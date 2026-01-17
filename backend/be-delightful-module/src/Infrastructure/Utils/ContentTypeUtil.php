@@ -17,7 +17,7 @@ class ContentTypeUtil
      * Based on TOS documentation: https://www.volcengine.com/docs/6349/145523#%E5%B8%B8%E8%A7%81%E7%9A%84-content-type.
      */
     private static array $contentTypeMap = [
-        // Images - 图片类型
+        // Images - image types
         'jpg' => 'image/jpeg',
         'jpeg' => 'image/jpeg',
         'png' => 'image/png',
@@ -29,7 +29,7 @@ class ContentTypeUtil
         'tiff' => 'image/tiff',
         'tif' => 'image/tiff',
 
-        // Videos - 视频类型
+        // Videos - video types
         'mp4' => 'video/mp4',
         'avi' => 'video/x-msvideo',
         'mov' => 'video/quicktime',
@@ -39,7 +39,7 @@ class ContentTypeUtil
         'mkv' => 'video/x-matroska',
         '3gp' => 'video/3gpp',
 
-        // Audio - 音频类型
+        // Audio - audio types
         'mp3' => 'audio/mpeg',
         'wav' => 'audio/wav',
         'flac' => 'audio/flac',
@@ -48,7 +48,7 @@ class ContentTypeUtil
         'wma' => 'audio/x-ms-wma',
         'm4a' => 'audio/mp4',
 
-        // Documents - 文档类型
+        // Documents - document types
         'pdf' => 'application/pdf',
         'doc' => 'application/msword',
         'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -61,7 +61,7 @@ class ContentTypeUtil
         'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
         'odp' => 'application/vnd.oasis.opendocument.presentation',
 
-        // Text - 文本类型
+        // Text - text types
         'txt' => 'text/plain',
         'csv' => 'text/csv',
         'html' => 'text/html',
@@ -74,7 +74,7 @@ class ContentTypeUtil
         'yaml' => 'text/yaml',
         'yml' => 'text/yaml',
 
-        // Code - 代码类型
+        // Code - code types
         'php' => 'text/x-php',
         'py' => 'text/x-python',
         'java' => 'text/x-java-source',
@@ -84,7 +84,7 @@ class ContentTypeUtil
         'sh' => 'text/x-shellscript',
         'sql' => 'text/x-sql',
 
-        // Archives - 压缩文件
+        // Archives - compressed files
         'zip' => 'application/zip',
         'rar' => 'application/vnd.rar',
         '7z' => 'application/x-7z-compressed',
@@ -92,7 +92,7 @@ class ContentTypeUtil
         'gz' => 'application/gzip',
         'bz2' => 'application/x-bzip2',
 
-        // Other common types - 其他常见类型
+        // Other common types - miscellaneous types
         'exe' => 'application/vnd.microsoft.portable-executable',
         'dmg' => 'application/x-apple-diskimage',
         'iso' => 'application/x-iso9660-image',

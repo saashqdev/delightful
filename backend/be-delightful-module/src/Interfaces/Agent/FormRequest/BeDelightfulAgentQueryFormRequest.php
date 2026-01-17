@@ -14,16 +14,16 @@ use function Hyperf\Translation\trans;
 class BeDelightfulAgentQueryFormRequest extends FormRequest
 {
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public function rules(): array
     {
         return [
-            // 分页参数
+            // Pagination parameters
             'page' => 'nullable|integer|min:1',
             'page_size' => 'nullable|integer|min:1|max:1000',
 
-            // 搜索条件 - 只保留BeDelightfulAgentQuery中实际存在的字段
+            // Search conditions - only fields that actually exist in BeDelightfulAgentQuery
             'name' => 'nullable|string|max:80',
             'enabled' => 'nullable|boolean',
             'codes' => 'nullable|array',
@@ -33,7 +33,7 @@ class BeDelightfulAgentQueryFormRequest extends FormRequest
     }
 
     /**
-     * 字段别名.
+     * Field aliases.
      */
     public function attributes(): array
     {
@@ -49,19 +49,19 @@ class BeDelightfulAgentQueryFormRequest extends FormRequest
     }
 
     /**
-     * 自定义验证错误消息.
+     * Custom validation error messages.
      */
     public function messages(): array
     {
         return [
-            // 分页参数验证
+            // Pagination parameter validation
             'page.integer' => trans('be_delightful.agent.validation.page_integer'),
             'page.min' => trans('be_delightful.agent.validation.page_min'),
             'page_size.integer' => trans('be_delightful.agent.validation.page_size_integer'),
             'page_size.min' => trans('be_delightful.agent.validation.page_size_min'),
             'page_size.max' => trans('be_delightful.agent.validation.page_size_max'),
 
-            // 搜索条件验证
+            // Search condition validation
             'name.string' => trans('be_delightful.agent.validation.name_string'),
             'name.max' => trans('be_delightful.agent.validation.name_max'),
             'enabled.boolean' => trans('be_delightful.agent.validation.enabled_boolean'),
@@ -74,7 +74,7 @@ class BeDelightfulAgentQueryFormRequest extends FormRequest
     }
 
     /**
-     * 授权验证.
+     * Authorization check.
      */
     public function authorize(): bool
     {

@@ -10,52 +10,52 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use JsonSerializable;
 
 /**
- * STS Token 刷新请求 DTO.
+ * STS Token refresh request DTO.
  */
 class RefreshStsTokenRequestDTO implements JsonSerializable
 {
     /**
-     * 代理用户ID.
+     * Agent user ID.
      */
     private string $agentUserId = '';
 
     /**
-     * 用户ID.
+     * User ID.
      */
     private string $userId = '';
 
     /**
-     * 组织编码
+     * Organization code
      */
     private string $organizationCode = '';
 
     /**
-     * 聊天会话ID.
+     * Chat conversation ID.
      */
     private string $chatConversationId = '';
 
     /**
-     * 聊天话题ID.
+     * Chat topic ID.
      */
     private string $chatTopicId = '';
 
     /**
-     * 指令类型.
+     * Instruction type.
      */
     private string $instruction = '';
 
     /**
-     * 沙箱ID.
+     * Sandbox ID.
      */
     private string $sandboxId = '';
 
     /**
-     * 超级Delightful任务ID.
+     * Be Delightful task ID.
      */
     private string $beDelightfulTaskId = '';
 
     /**
-     * 从请求数据创建DTO.
+     * Create DTO from request data.
      */
     public static function fromRequest(array $data): self
     {
@@ -166,7 +166,7 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
     }
 
     /**
-     * 实现JsonSerializable接口.
+     * Implement JsonSerializable interface.
      */
     public function jsonSerialize(): array
     {

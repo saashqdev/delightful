@@ -11,7 +11,7 @@ use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract\Respon
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Result\GatewayResult;
 
 /**
- * 文件转换响应.
+ * File conversion response.
  */
 class FileConverterResponse implements ResponseInterface
 {
@@ -98,7 +98,7 @@ class FileConverterResponse implements ResponseInterface
     }
 
     /**
-     * 获取总文件数.
+     * Get total file count.
      */
     public function getTotalFiles(): int
     {
@@ -106,7 +106,7 @@ class FileConverterResponse implements ResponseInterface
     }
 
     /**
-     * 获取成功转换的文件数.
+     * Get successful conversion count.
      */
     public function getSuccessCount(): int
     {
@@ -114,7 +114,7 @@ class FileConverterResponse implements ResponseInterface
     }
 
     /**
-     * 获取转换率.
+     * Get conversion rate.
      */
     public function getConversionRate(): ?float
     {

@@ -10,32 +10,32 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 协作项目创建者信息 DTO.
+ * Collaboration project creator information DTO.
  */
 class CollaborationCreatorItemDTO extends AbstractDTO
 {
     /**
-     * @var string 用户ID (数字ID)
+     * @var string User ID (numeric ID)
      */
     protected string $id = '';
 
     /**
-     * @var string 用户名称
+     * @var string User name
      */
     protected string $name = '';
 
     /**
-     * @var string 用户ID (字符串ID)
+     * @var string User ID (string ID)
      */
     protected string $userId = '';
 
     /**
-     * @var string 头像URL
+     * @var string Avatar URL
      */
     protected string $avatarUrl = '';
 
     /**
-     * 从用户实体创建DTO.
+     * Create DTO from user entity.
      * @param mixed $userEntity
      */
     public static function fromUserEntity($userEntity): self
@@ -50,7 +50,7 @@ class CollaborationCreatorItemDTO extends AbstractDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {

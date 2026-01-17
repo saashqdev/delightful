@@ -10,22 +10,22 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use JsonSerializable;
 
 /**
- * 项目文件上传 STS Token 请求 DTO.
+ * Project file upload STS Token request DTO.
  */
 class ProjectUploadTokenRequestDTO implements JsonSerializable
 {
     /**
-     * 项目ID.
+     * Project ID.
      */
     private string $projectId = '';
 
     /**
-     * 凭证有效期（秒）.
+     * Credential validity period (seconds).
      */
     private int $expires = 3600;
 
     /**
-     * 从请求数据创建DTO.
+     * Create DTO from request data.
      */
     public static function fromRequest(array $data): self
     {
@@ -60,7 +60,7 @@ class ProjectUploadTokenRequestDTO implements JsonSerializable
     }
 
     /**
-     * 实现JsonSerializable接口.
+     * Implement JsonSerializable interface.
      */
     public function jsonSerialize(): array
     {

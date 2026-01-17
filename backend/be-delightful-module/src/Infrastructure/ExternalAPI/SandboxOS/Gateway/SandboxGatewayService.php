@@ -28,8 +28,8 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * 沙箱网关服务实现
- * 提供沙箱生命周期管理和代理转发功能.
+ * Sandbox gateway service implementation.
+ * Provides sandbox lifecycle management and proxy forwarding.
  */
 class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayInterface
 {
@@ -64,7 +64,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 创建沙箱.
+     * Create a sandbox.
      */
     public function createSandbox(string $projectId, string $sandboxId, string $workDir): GatewayResult
     {
@@ -99,7 +99,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
 
                     $responseData = json_decode($response->getBody()->getContents(), true);
 
-                    // 添加调试日志，打印原始API响应数据
+                    // Add debug log to print raw API response data
                     $this->logger->info('[Sandbox][Gateway] Raw API response data', [
                         'response_data' => $responseData,
                         'json_last_error' => json_last_error(),
@@ -108,7 +108,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
 
                     $result = GatewayResult::fromApiResponse($responseData ?? []);
 
-                    // 添加详细的调试日志，检查 GatewayResult 对象
+                    // Add detailed debug log to inspect the GatewayResult object
                     $this->logger->info('[Sandbox][Gateway] GatewayResult object analysis', [
                         'result_class' => get_class($result),
                         'result_is_success' => $result->isSuccess(),
@@ -168,7 +168,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 获取单个沙箱状态
+     * Get a single sandbox status.
      */
     public function getSandboxStatus(string $sandboxId): SandboxStatusResult
     {
@@ -267,7 +267,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 批量获取沙箱状态
+     * Get sandbox statuses in batch.
      */
     public function getBatchSandboxStatus(array $sandboxIds): BatchStatusResult
     {
@@ -399,7 +399,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 代理转发请求到沙箱.
+     * Proxy request to a sandbox.
      */
     public function proxySandboxRequest(
         string $sandboxId,
@@ -502,7 +502,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 确保沙箱存在并且可用.
+     * Ensure the sandbox exists and is available.
      */
     public function ensureSandboxAvailable(string $sandboxId, string $projectId, string $workDir = ''): string
     {
@@ -516,11 +516,11 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
         }
 
         try {
-            // 检查沙箱是否可用
+            // Check whether the sandbox is available
             if (! empty($sandboxId)) {
                 $statusResult = $this->getSandboxStatus($sandboxId);
 
-                // 如果沙箱存在且状态为运行中，直接返回
+                // If the sandbox exists and is running, return it directly
                 if ($statusResult->isSuccess()
                     && $statusResult->getCode() === ResponseCode::SUCCESS
                     && SandboxStatus::isAvailable($statusResult->getStatus())) {
@@ -530,7 +530,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                     return $sandboxId;
                 }
 
-                // 如果沙箱状态为 Pending，等待其变为 Running
+                // If the sandbox status is Pending, wait for it to become Running
                 if ($statusResult->isSuccess()
                     && $statusResult->getCode() === ResponseCode::SUCCESS
                     && $statusResult->getStatus() === SandboxStatus::PENDING) {
@@ -539,10 +539,10 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                     ]);
 
                     try {
-                        // 等待现有沙箱变为 Running
+                        // Wait for the existing sandbox to become Running
                         return $this->waitForSandboxRunning($sandboxId, 'existing');
                     } catch (SandboxOperationException $e) {
-                        // 如果等待失败，继续创建新沙箱
+                        // If waiting fails, proceed to create a new sandbox
                         $this->logger->warning('ensureSandboxAvailable Failed to wait for existing sandbox, creating new sandbox', [
                             'sandbox_id' => $sandboxId,
                             'error' => $e->getMessage(),
@@ -550,7 +550,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                     }
                 }
 
-                // 记录需要创建新沙箱的原因
+                // Record why a new sandbox needs to be created
                 if ($statusResult->getCode() === ResponseCode::NOT_FOUND) {
                     $this->logger->info('ensureSandboxAvailable Sandbox not found, creating new sandbox', [
                         'sandbox_id' => $sandboxId,
@@ -565,7 +565,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                 $this->logger->info('ensureSandboxAvailable Sandbox ID is empty, creating new sandbox');
             }
 
-            // 创建新沙箱
+            // Create a new sandbox
             $createResult = $this->createSandbox($projectId, $sandboxId, $workDir);
 
             if (! $createResult->isSuccess()) {
@@ -580,7 +580,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
 
             $newSandboxId = $createResult->getDataValue('sandbox_id');
 
-            // 添加调试日志，检查是否正确获取到了 sandbox_id
+            // Add debug log to verify that sandbox_id was retrieved correctly
             $this->logger->info('ensureSandboxAvailable Created sandbox, starting to wait for it to become running', [
                 'requested_sandbox_id' => $sandboxId,
                 'new_sandbox_id' => $newSandboxId,
@@ -588,7 +588,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                 'create_result_data' => $createResult->getData(),
             ]);
 
-            // 如果没有获取到 sandbox_id，直接返回错误
+            // If sandbox_id is missing, return an error
             if (empty($newSandboxId) || $newSandboxId !== $sandboxId) {
                 $this->logger->error('ensureSandboxAvailable Failed to get sandbox_id from create result', [
                     'requested_sandbox_id' => $sandboxId,
@@ -599,10 +599,10 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                 throw new SandboxOperationException('Get sandbox_id from create result', 'Failed to get sandbox_id from create result', 2001);
             }
 
-            // 等待新沙箱变为 Running
+            // Wait for the new sandbox to become Running
             return $this->waitForSandboxRunning($newSandboxId, 'new');
         } catch (SandboxOperationException $e) {
-            // 重新抛出沙箱操作异常
+            // Re-throw sandbox operation exception
             $this->logger->error('ensureSandboxAvailable Error ensuring sandbox availability', [
                 'sandbox_id' => $sandboxId,
                 'project_id' => $projectId,
@@ -620,7 +620,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 复制文件（同步操作）.
+     * Copy files (synchronous operation).
      */
     public function copyFiles(array $files): GatewayResult
     {
@@ -701,7 +701,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 升级沙箱镜像.
+     * Upgrade sandbox image.
      */
     public function upgradeSandbox(string $messageId, string $contextType = 'continue'): GatewayResult
     {
@@ -722,7 +722,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                     $response = $this->getClient()->put($this->buildApiPath('api/v1/sandboxes/upgrade'), [
                         'headers' => $this->getAuthHeaders(),
                         'json' => $config,
-                        'timeout' => 60, // 升级可能需要更长时间
+                        'timeout' => 60, // Upgrade may take longer
                     ]);
 
                     $responseData = json_decode($response->getBody()->getContents(), true);
@@ -835,7 +835,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
             $headers['delightful-organization-code'] = $this->organizationCode;
         }
 
-        # 判断header中是否包含request_id，如果没有，从上下文中获取
+        # Check whether headers contain request_id; if not, pull it from context
         if (empty($headers['request-id'])) {
             $requestId = CoContext::getRequestId() ?: (string) IdGenerator::getSnowId();
             $headers['request-id'] = $requestId;
@@ -923,17 +923,17 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
     }
 
     /**
-     * 等待沙箱变为 Running 状态
+     * Wait for the sandbox to enter the Running state.
      *
-     * @param string $sandboxId 沙箱ID
-     * @param string $type 沙箱类型（existing|new）用于日志区分
-     * @return string 返回沙箱ID（成功）
-     * @throws SandboxOperationException 当等待失败时抛出异常
+     * @param string $sandboxId Sandbox ID
+     * @param string $type Sandbox type (existing|new) for logging distinction
+     * @return string Sandbox ID on success
+     * @throws SandboxOperationException Thrown when waiting fails
      */
     private function waitForSandboxRunning(string $sandboxId, string $type): string
     {
-        $maxRetries = 15; // 最多等待约30秒
-        $retryDelay = 2; // 每次间隔2秒
+        $maxRetries = 15; // Wait up to ~30 seconds
+        $retryDelay = 2; // 2-second intervals
 
         $this->logger->info("ensureSandboxAvailable Starting to wait for {$type} sandbox to become running", [
             'sandbox_id' => $sandboxId,
@@ -954,7 +954,7 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
                 return $sandboxId;
             }
 
-            // 如果是现有沙箱且状态变为 Exited，提前退出
+            // If the existing sandbox exits while waiting, exit early
             if ($type === 'existing' && $statusResult->getStatus() === SandboxStatus::EXITED) {
                 $this->logger->info('ensureSandboxAvailable Existing sandbox exited while waiting', [
                     'sandbox_id' => $sandboxId,

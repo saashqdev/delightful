@@ -10,19 +10,19 @@ namespace Delightful\BeDelightful\Interfaces\Agent\DTO;
 class BeDelightfulAgentCategorizedListDTO
 {
     /**
-     * 常用智能体列表.
+     * Frequently used agent list.
      * @var array<BeDelightfulAgentListDTO>
      */
     public array $frequent = [];
 
     /**
-     * 全部智能体列表（不包含常用中的）.
+     * All agents list (excluding those in frequent).
      * @var array<BeDelightfulAgentListDTO>
      */
     public array $all = [];
 
     /**
-     * 总数量.
+     * Total count.
      */
     public int $total = 0;
 

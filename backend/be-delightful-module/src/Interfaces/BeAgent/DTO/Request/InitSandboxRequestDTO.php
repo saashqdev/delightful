@@ -42,63 +42,63 @@ class InitSandboxRequestDTO extends AbstractRequestDTO
     protected string $conversationId = '';
 
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public static function getHyperfValidationRules(): array
     {
         return [
-            'task_type' => 'required|string', // 任务类型，支持agent、tool、custom三种模式
-            // 'agent_name' => 'required_if:task_type,agent|string',//如果是agent模式，则需要传入agent_name
-            // 'tool_name' => 'required_if:task_type,tool|string',//如果是tool模式，则需要传入tool_name
-            // 'custom_name' => 'required_if:task_type,custom|string',//如果是custom模式，则需要传入custom_name
-            'model_id' => 'string', // 模型ID
-            'workspace_id' => 'string', // 工作区ID
-            'project_id' => 'string', // 项目ID
-            'project_mode' => 'string', // 项目模式
-            'topic_id' => 'string', // 话题ID
-            'topic_mode' => 'string', // 话题模式
-            // 'prompt' => 'required_if:task_type,agent|string',//任务提示词,如果是agent模式，则需要传入prompt
-            'params' => 'object', // 自定入params
+            'task_type' => 'required|string', // Task type, supports three modes: agent, tool, custom
+            // 'agent_name' => 'required_if:task_type,agent|string',//If agent mode, agent_name is required
+            // 'tool_name' => 'required_if:task_type,tool|string',//If tool mode, tool_name is required
+            // 'custom_name' => 'required_if:task_type,custom|string',//If custom mode, custom_name is required
+            'model_id' => 'string', // Model ID
+            'workspace_id' => 'string', // Workspace ID
+            'project_id' => 'string', // Project ID
+            'project_mode' => 'string', // Project mode
+            'topic_id' => 'string', // Topic ID
+            'topic_mode' => 'string', // Topic mode
+            // 'prompt' => 'required_if:task_type,agent|string',//Task prompt, if agent mode, prompt is required
+            'params' => 'object', // Custom params
         ];
     }
 
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'task_type.required' => '任务类型不能为空',
-            // 'agent_name.required_if' => 'agent名称不能为空',
-            // 'tool_name.required_if' => 'tool名称不能为空',
-            // 'custom_name.required_if' => 'custom名称不能为空',
-            'model_id.string' => '模型ID不能为空',
-            'workspace_id.integer' => '工作区ID不能为空',
-            'project_id.integer' => '项目ID不能为空',
-            'project_mode.string' => '项目模式不能为空',
-            'topic_id.integer' => '话题ID不能为空',
-            'topic_mode.string' => '话题模式不能为空',
-            'prompt.required_if' => '提示词不能为空',
-            'params.object' => '参数不能为空',
+            'task_type.required' => 'Task type cannot be empty',
+            // 'agent_name.required_if' => 'Agent name cannot be empty',
+            // 'tool_name.required_if' => 'Tool name cannot be empty',
+            // 'custom_name.required_if' => 'Custom name cannot be empty',
+            'model_id.string' => 'Model ID cannot be empty',
+            'workspace_id.integer' => 'Workspace ID cannot be empty',
+            'project_id.integer' => 'Project ID cannot be empty',
+            'project_mode.string' => 'Project mode cannot be empty',
+            'topic_id.integer' => 'Topic ID cannot be empty',
+            'topic_mode.string' => 'Topic mode cannot be empty',
+            'prompt.required_if' => 'Prompt cannot be empty',
+            'params.object' => 'Params cannot be empty',
         ];
     }
 
     /**
-     * 属性名称.
+     * Attribute names.
      */
     public function attributes(): array
     {
         return [
-            'task_type' => '任务类型',
-            'agent_name' => 'agent名称',
-            'tool_name' => 'tool名称',
-            'custom_name' => 'custom名称',
-            'model_id' => '模型ID',
-            'workspace_id' => '工作区ID',
-            'project_id' => '项目ID',
-            'project_mode' => '项目模式',
-            'topic_mode' => '话题模式',
-            'topic_id' => '话题ID',
-            'chat_topic_id' => '聊天话题ID',
-            'prompt' => '提示词',
-            'params' => '参数',
+            'task_type' => 'Task type',
+            'agent_name' => 'Agent name',
+            'tool_name' => 'Tool name',
+            'custom_name' => 'Custom name',
+            'model_id' => 'Model ID',
+            'workspace_id' => 'Workspace ID',
+            'project_id' => 'Project ID',
+            'project_mode' => 'Project mode',
+            'topic_mode' => 'Topic mode',
+            'topic_id' => 'Topic ID',
+            'chat_topic_id' => 'Chat topic ID',
+            'prompt' => 'Prompt',
+            'params' => 'Params',
         ];
     }
 
@@ -218,7 +218,7 @@ class InitSandboxRequestDTO extends AbstractRequestDTO
     }
 
     /*
-     * 准备数据.
+     * Prepare data.
      */
     // protected function prepareForValidation(): void
     // {

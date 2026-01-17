@@ -12,12 +12,12 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class GetTopicMetricsRequestDTO
 {
     /**
-     * @var string 组织机构代码，可选
+     * @var string Organization code, optional
      */
     protected string $organizationCode = '';
 
     /**
-     * 从请求构造DTO.
+     * Construct DTO from request.
      */
     public static function fromRequest(RequestInterface $request): self
     {
@@ -27,7 +27,7 @@ class GetTopicMetricsRequestDTO
     }
 
     /**
-     * 获取组织机构代码
+     * Get organization code
      */
     public function getOrganizationCode(): string
     {
@@ -35,7 +35,7 @@ class GetTopicMetricsRequestDTO
     }
 
     /**
-     * 设置组织机构代码
+     * Set organization code
      */
     public function setOrganizationCode(string $organizationCode): self
     {

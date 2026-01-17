@@ -11,19 +11,19 @@ use App\Infrastructure\Core\AbstractDTO;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * 删除话题请求DTO
- * 用于接收删除话题的请求参数.
+ * Delete topic request DTO
+ * Used to receive request parameters for deleting a topic.
  */
 class DeleteTopicRequestDTO extends AbstractDTO
 {
     /**
-     * 任务状态ID(主键)
-     * 字符串类型，对应任务状态表的主键.
+     * Task status ID (primary key)
+     * String type, corresponds to the primary key of the task status table.
      */
     public string $id = '';
 
     /**
-     * 获取验证规则.
+     * Get validation rules.
      */
     public function rules(): array
     {
@@ -33,18 +33,18 @@ class DeleteTopicRequestDTO extends AbstractDTO
     }
 
     /**
-     * 获取验证失败的自定义错误信息.
+     * Get custom error messages for validation failures.
      */
     public function messages(): array
     {
         return [
-            'id.required' => '任务状态ID不能为空',
-            'id.string' => '任务状态ID必须是字符串',
+            'id.required' => 'Task status ID cannot be empty',
+            'id.string' => 'Task status ID must be a string',
         ];
     }
 
     /**
-     * 从请求中创建DTO实例.
+     * Create DTO instance from request.
      */
     public static function fromRequest(RequestInterface $request): self
     {
@@ -54,7 +54,7 @@ class DeleteTopicRequestDTO extends AbstractDTO
     }
 
     /**
-     * 获取任务状态ID(主键).
+     * Get task status ID (primary key).
      */
     public function getId(): string
     {

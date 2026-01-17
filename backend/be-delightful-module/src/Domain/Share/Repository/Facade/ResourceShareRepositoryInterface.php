@@ -10,70 +10,70 @@ namespace Delightful\BeDelightful\Domain\Share\Repository\Facade;
 use Delightful\BeDelightful\Domain\Share\Entity\ResourceShareEntity;
 
 /**
- * 资源分享仓储接口.
+ * Resource share repository interface.
  */
 interface ResourceShareRepositoryInterface
 {
     /**
-     * 通过ID获取分享.
+     * Get share by ID.
      *
-     * @param int $shareId 分享ID
-     * @return null|ResourceShareEntity 资源分享实体
+     * @param int $shareId Share ID
+     * @return null|ResourceShareEntity Resource share entity
      */
     public function getShareById(int $shareId): ?ResourceShareEntity;
 
     /**
-     * 通过分享码获取分享.
+     * Get share by share code.
      *
-     * @param string $shareCode 分享码
-     * @return null|ResourceShareEntity 资源分享实体
+     * @param string $shareCode Share code
+     * @return null|ResourceShareEntity Resource share entity
      */
     public function getShareByCode(string $shareCode): ?ResourceShareEntity;
 
     public function getShareByResourceId(string $resourceId): ?ResourceShareEntity;
 
     /**
-     * 保存分享实体.
+     * Save share entity.
      *
-     * @param ResourceShareEntity $shareEntity 资源分享实体
-     * @return ResourceShareEntity 保存后的资源分享实体
+     * @param ResourceShareEntity $shareEntity Resource share entity
+     * @return ResourceShareEntity Saved resource share entity
      */
     public function save(ResourceShareEntity $shareEntity): ResourceShareEntity;
 
     /**
-     * 删除分享.
+     * Delete share.
      *
-     * @param int $shareId 分享ID
-     * @param bool $forceDelete 是否强制删除（物理删除），默认false为软删除
-     * @return bool 是否成功
+     * @param int $shareId Share ID
+     * @param bool $forceDelete Whether to force delete (physical delete), default false for soft delete
+     * @return bool Whether successful
      */
     public function delete(int $shareId, bool $forceDelete = false): bool;
 
     /**
-     * 增加分享查看次数.
+     * Increment share view count.
      *
-     * @param string $shareCode 分享码
-     * @return bool 是否成功
+     * @param string $shareCode Share code
+     * @return bool Whether successful
      */
     public function incrementViewCount(string $shareCode): bool;
 
     /**
-     * 分页查询.
+     * Paginated query.
      *
-     * @param array $conditions 查询条件
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array 分页结果
+     * @param array $conditions Query conditions
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array Pagination result
      */
     public function paginate(array $conditions, int $page = 1, int $pageSize = 20): array;
 
     public function getShareByResource(string $userId, string $resourceId, int $resourceType, bool $withTrashed = true): ?ResourceShareEntity;
 
     /**
-     * 检查分享码是否已存在.
+     * Check if share code already exists.
      *
-     * @param string $shareCode 分享码
-     * @return bool 是否已存在
+     * @param string $shareCode Share code
+     * @return bool Whether exists
      */
     public function isShareCodeExists(string $shareCode): bool;
 }

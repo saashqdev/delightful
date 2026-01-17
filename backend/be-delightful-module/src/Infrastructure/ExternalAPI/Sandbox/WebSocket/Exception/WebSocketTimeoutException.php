@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket\E
 use RuntimeException;
 
 /**
- * WebSocket超时相关异常.
+ * WebSocket timeout-related exception.
  */
 class WebSocketTimeoutException extends RuntimeException
 {

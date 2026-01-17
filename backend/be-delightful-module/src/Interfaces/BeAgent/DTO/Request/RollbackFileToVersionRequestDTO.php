@@ -10,17 +10,17 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use App\Infrastructure\Core\AbstractRequestDTO;
 
 /**
- * 文件回滚到指定版本请求DTO.
+ * Rollback file to specified version request DTO.
  */
 class RollbackFileToVersionRequestDTO extends AbstractRequestDTO
 {
     /**
-     * 文件ID（从路由参数获取）.
+     * File ID (obtained from route parameter).
      */
     protected int $fileId = 0;
 
     /**
-     * 目标版本号.
+     * Target version number.
      */
     protected int $version = 0;
 
@@ -45,7 +45,7 @@ class RollbackFileToVersionRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 获取验证规则.
+     * Get validation rules.
      */
     protected static function getHyperfValidationRules(): array
     {
@@ -56,7 +56,7 @@ class RollbackFileToVersionRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 获取验证失败的自定义错误信息.
+     * Get custom error messages for validation failures.
      */
     protected static function getHyperfValidationMessage(): array
     {

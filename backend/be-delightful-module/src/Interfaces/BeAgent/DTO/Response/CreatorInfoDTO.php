@@ -10,27 +10,27 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 创建人信息DTO.
+ * Creator information DTO.
  */
 class CreatorInfoDTO extends AbstractDTO
 {
     /**
-     * @var string 用户ID
+     * @var string User ID
      */
     protected string $userId = '';
 
     /**
-     * @var string 用户昵称
+     * @var string User nickname
      */
     protected string $nickname = '';
 
     /**
-     * @var string 头像URL
+     * @var string Avatar URL
      */
     protected string $avatarUrl = '';
 
     /**
-     * 从用户实体创建DTO.
+     * Create DTO from user entity.
      * @param mixed $userEntity
      */
     public static function fromUserEntity($userEntity): self
@@ -44,7 +44,7 @@ class CreatorInfoDTO extends AbstractDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {

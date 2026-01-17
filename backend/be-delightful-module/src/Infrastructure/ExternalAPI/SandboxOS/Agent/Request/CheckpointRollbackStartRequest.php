@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
 /**
- * Checkpoint回滚开始请求类
- * 严格按照沙箱通信文档的checkpoint回滚开始请求格式.
+ * Checkpoint rollback start request class
+ * Strictly follows the checkpoint rollback start request format in the sandbox communication documentation.
  */
 class CheckpointRollbackStartRequest
 {
@@ -19,7 +19,7 @@ class CheckpointRollbackStartRequest
     }
 
     /**
-     * 创建一个checkpoint回滚开始请求对象
+     * Create a checkpoint rollback start request object
      */
     public static function create(
         string $targetMessageId,
@@ -28,7 +28,7 @@ class CheckpointRollbackStartRequest
     }
 
     /**
-     * 获取目标消息ID.
+     * Get target message ID.
      */
     public function getTargetMessageId(): string
     {
@@ -36,7 +36,7 @@ class CheckpointRollbackStartRequest
     }
 
     /**
-     * 设置目标消息ID.
+     * Set target message ID.
      */
     public function setTargetMessageId(string $targetMessageId): self
     {
@@ -45,8 +45,8 @@ class CheckpointRollbackStartRequest
     }
 
     /**
-     * 转换为API请求数组
-     * 根据沙箱通信文档的checkpoint回滚开始请求格式.
+     * Convert to API request array
+     * According to checkpoint rollback start request format in sandbox communication documentation.
      */
     public function toArray(): array
     {

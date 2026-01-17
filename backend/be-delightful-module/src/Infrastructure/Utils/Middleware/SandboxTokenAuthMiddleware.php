@@ -15,27 +15,27 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * 沙箱Token鉴权中间件
- * 用于验证来自沙箱的内部API调用token.
+ * Sandbox token authentication middleware.
+ * Used to validate internal API call tokens originating from the sandbox.
  */
 class SandboxTokenAuthMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // // 从header中获取token
+        // // Get token from header
         // $token = $request->getHeader('token')[0] ?? '';
 
-        // // 验证token不为空
+        // // Validate that token is not empty
         // if (empty($token)) {
         //     ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'token_required');
         // }
 
-        // // 验证token等于配置值
+        // // Validate token matches configured value
         // if ($token !== config('be-delightful.sandbox.token', '')) {
         //     ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'token_invalid');
         // }
 
-        // 验证通过，继续处理请求
+        // Validation passed; continue handling the request
         return $handler->handle($request);
     }
 }

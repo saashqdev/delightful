@@ -31,22 +31,22 @@ class WebSocketSession
     }
 
     /**
-     * 建立WebSocket连接.
+     * Establish WebSocket connection.
      *
-     * @throws WebSocketConnectionException 连接失败时抛出
+     * @throws WebSocketConnectionException Thrown if connection fails
      */
     public function connect(): void
     {
         try {
             $this->client->connect();
             $this->logger->info(sprintf(
-                'WebSocket连接成功，任务ID: %s，URL: %s',
+                'WebSocket connection successful, task ID: %s, URL: %s',
                 $this->taskId,
                 $this->wsUrl
             ));
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                'WebSocket连接失败: %s，任务ID: %s',
+                'WebSocket connection failed: %s, task ID: %s',
                 $e->getMessage(),
                 $this->taskId
             ));
@@ -55,19 +55,19 @@ class WebSocketSession
     }
 
     /**
-     * 断开WebSocket连接.
+     * Disconnect WebSocket connection.
      */
     public function disconnect(): void
     {
         try {
             $this->client->disconnect();
             $this->logger->info(sprintf(
-                'WebSocket断开连接，任务ID: %s',
+                'WebSocket disconnected, task ID: %s',
                 $this->taskId
             ));
         } catch (Throwable $e) {
             $this->logger->warning(sprintf(
-                'WebSocket断开连接失败，任务ID: %s，错误: %s',
+                'Failed to disconnect WebSocket, task ID: %s, error: %s',
                 $this->taskId,
                 $e->getMessage()
             ));
@@ -75,10 +75,10 @@ class WebSocketSession
     }
 
     /**
-     * 发送WebSocket消息.
+     * Send WebSocket message.
      *
-     * @param array $data 要发送的消息数据
-     * @throws WebSocketConnectionException 发送失败时抛出
+     * @param array $data Message data to send
+     * @throws WebSocketConnectionException Thrown if sending fails
      */
     public function send(array $data): void
     {
@@ -87,7 +87,7 @@ class WebSocketSession
             $this->lastMessageTime = time();
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '发送消息失败: %s，任务ID: %s',
+                'Failed to send message: %s, task ID: %s',
                 $e->getMessage(),
                 $this->taskId
             ));
@@ -96,77 +96,77 @@ class WebSocketSession
     }
 
     /**
-     * 接收WebSocket消息，支持超时和自动重连.
+     * Receive WebSocket message with timeout and auto-reconnect support.
      *
-     * @param int $timeout 接收超时时间（秒），0表示使用配置默认值
-     * @param int $maxRetries 最大重试次数（0表示使用配置默认值）
-     * @return null|array 接收到的原始消息或null
-     * @throws WebSocketConnectionException 连接错误且重试失败时抛出
-     * @throws WebSocketTimeoutException 操作超时时抛出
+     * @param int $timeout Receive timeout (seconds), 0 uses config default value
+     * @param int $maxRetries Max retry count (0 uses config default value)
+     * @return null|array Received raw message or null
+     * @throws WebSocketConnectionException Thrown if connection error and retry fails
+     * @throws WebSocketTimeoutException Thrown on operation timeout
      */
     public function receive(
         int $timeout = 0,
         int $maxRetries = 0
     ): ?array {
-        // 确定实际使用的超时时间
+        // Determine actual timeout to use
         $actualTimeout = $timeout > 0 ? $timeout : $this->config->getReadTimeout();
         $startTime = time();
         $endTime = $startTime + $actualTimeout;
 
-        // 确定重试参数
+        // Determine retry parameters
         $retryCount = 0;
         $maxRetries = $maxRetries > 0 ? $maxRetries : $this->config->getMaxRetries();
         $baseDelay = $this->config->getRetryDelay();
 
-        // 主循环：尝试接收消息直到超时
+        // Main loop: try to receive messages until timeout
         while (time() < $endTime) {
             try {
-                // 检查连接状态
+                // Check connection status
                 if (! $this->client->isConnected()) {
-                    $this->logger->warning('WebSocket未连接，尝试重新连接', [
+                    $this->logger->warning('WebSocket not connected, attempting to reconnect', [
                         'task_id' => $this->taskId,
                     ]);
                     $this->connect();
                 }
 
-                // 设置当前接收操作的超时时间
+                // Set the timeout for current receive operation
                 $remainingTime = $endTime - time();
                 if ($remainingTime <= 0) {
-                    // 总体操作超时
+                    // Total operation timeout
                     return null;
                 }
 
-                // 设置较短的读取超时，以便定期检查状态
+                // Set shorter read timeout to check status periodically
                 $readTimeout = min($remainingTime, 180);
                 $this->client->setReadTimeout($readTimeout);
 
-                // 接收消息
+                // Receive message
                 $rawMessage = $this->client->receive();
                 if ($rawMessage === null) {
-                    continue; // 本次读取超时，继续尝试
+                    continue; // Current read timeout, continue trying
                 }
 
-                // 更新最后消息时间
+                // Update last message time
                 $this->lastMessageTime = time();
 
-                // 直接返回原始消息
+                // Directly return raw message
                 return $rawMessage;
             } catch (WebSocketConnectionException $e) {
                 ++$retryCount;
                 if ($retryCount > $maxRetries) {
                     $this->logger->error(sprintf(
-                        'WebSocket连接失败并超过最大重试次数: %s，任务ID: %s，重试次数: %d',
+                        'WebSocket connection failed and exceeded max retries: %s, task ID: %s, retry count: %d',
                         $e->getMessage(),
                         $this->taskId,
                         $retryCount
                     ));
-                    throw $e; // 超过最大重试次数，抛出异常
+                    throw $e; // Exceeded max retries, throw exception
                 }
 
-                // 计算指数退避延迟
+                // Calculate exponential backoff delay
                 $delay = min($baseDelay * pow(2, $retryCount - 1), $this->config->getMaxRetryDelay());
                 $this->logger->warning(sprintf(
-                    'WebSocket连接失败，第%d次重试，等待%d秒，任务ID: %s，错误: %s',
+                    'WebSocket connection failed, attempt %d retry, waiting %d seconds, task ID: %s, error: %s',
                     $retryCount,
                     $delay,
                     $this->taskId,
@@ -177,24 +177,24 @@ class WebSocketSession
             }
         }
 
-        // 操作超时
+        // Operation timeout
         $this->logger->warning(sprintf(
-            'WebSocket接收消息超时，任务ID: %s，超时时间: %d秒',
+            'WebSocket receive message timeout, task ID: %s, timeout: %d seconds',
             $this->taskId,
             $actualTimeout
         ));
 
         throw new WebSocketTimeoutException(sprintf(
-            'WebSocket接收消息超时，任务ID: %s，超时时间: %d秒',
+            'WebSocket receive message timeout, task ID: %s, timeout: %d seconds',
             $this->taskId,
             $actualTimeout
         ));
     }
 
     /**
-     * 检查WebSocket连接状态
+     * Check WebSocket connection status
      *
-     * @return bool 连接是否处于活跃状态
+     * @return bool Whether connection is active
      */
     public function isConnected(): bool
     {
@@ -202,9 +202,9 @@ class WebSocketSession
     }
 
     /**
-     * 检查会话是否过期（长时间未活动）.
+     * Check if session has expired (inactive for long time).
      *
-     * @return bool 会话是否过期
+     * @return bool Whether session has expired
      */
     public function isExpired(): bool
     {
@@ -212,9 +212,9 @@ class WebSocketSession
     }
 
     /**
-     * 获取当前会话的任务ID.
+     * Get task ID of current session.
      *
-     * @return string 任务ID
+     * @return string Task ID
      */
     public function getTaskId(): string
     {
@@ -222,9 +222,9 @@ class WebSocketSession
     }
 
     /**
-     * 获取当前会话的令牌.
+     * Get token of current session.
      *
-     * @return null|string 令牌值或null
+     * @return null|string Token value or null
      */
     public function getToken(): ?string
     {

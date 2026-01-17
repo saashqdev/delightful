@@ -10,19 +10,19 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 删除话题结果DTO
- * 用于封装删除话题操作的返回数据.
+ * Delete topic result DTO
+ * Used to encapsulate the return data of delete topic operation.
  */
 class DeleteTopicResultDTO extends AbstractDTO
 {
     /**
-     * 被删除的任务状态ID(主键)
-     * 字符串类型.
+     * Deleted task status ID (primary key)
+     * String type.
      */
     public string $id;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(?array $data = null)
     {
@@ -30,9 +30,9 @@ class DeleteTopicResultDTO extends AbstractDTO
     }
 
     /**
-     * 从任务状态ID创建DTO.
+     * Create DTO from task status ID.
      *
-     * @param int $id 任务状态ID(主键)
+     * @param int $id Task status ID (primary key)
      */
     public static function fromId(int $id): self
     {
@@ -42,7 +42,7 @@ class DeleteTopicResultDTO extends AbstractDTO
     }
 
     /**
-     * 获取任务状态ID.
+     * Get task status ID.
      */
     public function getId(): string
     {
@@ -50,9 +50,9 @@ class DeleteTopicResultDTO extends AbstractDTO
     }
 
     /**
-     * 设置任务状态ID.
+     * Set task status ID.
      *
-     * @param int $id 任务状态ID(主键)
+     * @param int $id Task status ID (primary key)
      */
     public function setId(int $id): self
     {

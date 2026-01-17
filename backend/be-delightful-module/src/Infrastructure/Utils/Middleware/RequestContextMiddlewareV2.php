@@ -27,7 +27,7 @@ class RequestContextMiddlewareV2 extends RequestContextMiddleware
         try {
             return di(AuthManager::class)->guard(name: 'web')->user();
         } catch (BusinessException $exception) {
-            // 如果是业务异常，直接抛出，不改变异常类型
+            // If it's a business exception, rethrow directly without changing the exception type
             throw new UnauthorizedHttpException($exception->getMessage(), 401);
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);

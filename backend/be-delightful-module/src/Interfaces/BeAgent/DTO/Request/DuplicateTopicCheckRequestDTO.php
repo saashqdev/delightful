@@ -10,17 +10,17 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use App\Infrastructure\Core\AbstractRequestDTO;
 
 /**
- * 检查话题复制状态请求DTO.
+ * Check topic duplication status request DTO.
  */
 class DuplicateTopicCheckRequestDTO extends AbstractRequestDTO
 {
     /**
-     * 任务键.
+     * Task key.
      */
     public string $taskKey = '';
 
     /**
-     * 获取任务键.
+     * Get task key.
      */
     public function getTaskKey(): string
     {

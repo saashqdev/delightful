@@ -64,10 +64,10 @@ abstract class AbstractSandbox implements SandboxInterface
 
             $rawData = $body['data'] ?? [];
 
-            // 创建沙箱数据对象
+            // Create sandbox data object
             $sandboxData = SandboxData::fromArray($rawData);
 
-            // 创建结果对象 - 只使用 SandboxData，移除冗余
+            // Create result object - only use SandboxData, remove redundancy
             $result = new SandboxResult(
                 $success,
                 $success ? 'Success' : ($body['message'] ?? 'Unknown error'),
@@ -88,7 +88,7 @@ abstract class AbstractSandbox implements SandboxInterface
             return $result;
         } catch (Throwable $e) {
             $this->logger->error(sprintf('[Sandbox] %s failed: %s', $action, $e->getMessage()));
-            // 创建一个带错误消息的空结果
+            // Create an empty result with error message
             return new SandboxResult(false, $e->getMessage());
         }
     }
@@ -96,7 +96,7 @@ abstract class AbstractSandbox implements SandboxInterface
     protected function request(string $method, string $uri, array $options = []): SandboxResult
     {
         try {
-            // 初始化客户端
+            // Initialize client
             $this->initializeClient();
 
             $this->logger->info(sprintf(
@@ -106,7 +106,7 @@ abstract class AbstractSandbox implements SandboxInterface
                 json_encode($options, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 $this->baseUrl
             ));
-            // 增加 token
+            // Add token
             if (! empty($options['headers'])) {
                 $options['headers']['token'] = $this->token;
             } else {
@@ -117,7 +117,7 @@ abstract class AbstractSandbox implements SandboxInterface
             return $this->handleResponse($uri, $response);
         } catch (GuzzleException $e) {
             $this->logger->error(sprintf('[Sandbox] Request failed: %s', $e->getMessage()));
-            // 创建一个带错误消息的空结果
+            // Create an empty result with error message
             return new SandboxResult(false, $e->getMessage());
         }
     }

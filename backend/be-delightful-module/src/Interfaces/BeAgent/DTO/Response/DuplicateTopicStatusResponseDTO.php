@@ -8,42 +8,42 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 /**
- * 话题复制状态响应DTO.
+ * Topic duplication status response DTO.
  */
 class DuplicateTopicStatusResponseDTO
 {
     /**
-     * 任务ID.
+     * Task ID.
      */
     protected string $taskId;
 
     /**
-     * 任务状态 (running, completed, failed).
+     * Task status (running, completed, failed).
      */
     protected string $status;
 
     /**
-     * 状态消息.
+     * Status message.
      */
     protected string $message;
 
     /**
-     * 进度信息.
+     * Progress information.
      */
     protected ?array $progress = null;
 
     /**
-     * 结果信息（任务完成时）.
+     * Result information (when task is completed).
      */
     protected ?array $result = null;
 
     /**
-     * 错误信息（任务失败时）.
+     * Error information (when task fails).
      */
     protected ?string $error = null;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(
         string $taskId,
@@ -62,7 +62,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -88,7 +88,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 从数组创建DTO实例.
+     * Create DTO instance from array.
      */
     public static function fromArray(array $data): self
     {
@@ -103,7 +103,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): string
     {
@@ -111,7 +111,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 设置任务ID.
+     * Set task ID.
      */
     public function setTaskId(string $taskId): self
     {
@@ -120,7 +120,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 获取任务状态
+     * Get task status
      */
     public function getStatus(): string
     {
@@ -128,7 +128,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 设置任务状态
+     * Set task status
      */
     public function setStatus(string $status): self
     {
@@ -137,7 +137,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 获取状态消息.
+     * Get status message.
      */
     public function getMessage(): string
     {
@@ -145,7 +145,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 设置状态消息.
+     * Set status message.
      */
     public function setMessage(string $message): self
     {
@@ -154,7 +154,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 获取进度信息.
+     * Get progress information.
      */
     public function getProgress(): ?array
     {
@@ -162,7 +162,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 设置进度信息.
+     * Set progress information.
      */
     public function setProgress(?array $progress): self
     {
@@ -171,7 +171,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 获取结果信息.
+     * Get result information.
      */
     public function getResult(): ?array
     {
@@ -179,7 +179,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 设置结果信息.
+     * Set result information.
      */
     public function setResult(?array $result): self
     {
@@ -188,7 +188,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 获取错误信息.
+     * Get error information.
      */
     public function getError(): ?string
     {
@@ -196,7 +196,7 @@ class DuplicateTopicStatusResponseDTO
     }
 
     /**
-     * 设置错误信息.
+     * Set error information.
      */
     public function setError(?string $error): self
     {

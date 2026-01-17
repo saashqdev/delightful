@@ -23,7 +23,7 @@ class SandboxResult
         private ?int $code = 0,
         private ?SandboxData $data = null,
     ) {
-        // 初始化空的 SandboxData 对象
+        // Initialize empty SandboxData object
         if ($this->data === null) {
             $this->data = new SandboxData();
         }
@@ -41,9 +41,9 @@ class SandboxResult
     }
 
     /**
-     * 获取沙箱ID.
+     * Get sandbox ID.
      *
-     * @return null|string 沙箱ID
+     * @return null|string Sandbox ID
      */
     public function getSandboxId(): ?string
     {
@@ -52,9 +52,9 @@ class SandboxResult
     }
 
     /**
-     * 设置沙箱ID.
+     * Set sandbox ID.
      *
-     * @param null|string $sandboxId 沙箱ID
+     * @param null|string $sandboxId Sandbox ID
      */
     public function setSandboxId(?string $sandboxId): self
     {
@@ -87,9 +87,9 @@ class SandboxResult
     }
 
     /**
-     * 获取沙箱数据对象
+     * Get sandbox data object
      *
-     * @return SandboxData 沙箱数据对象
+     * @return SandboxData Sandbox data object
      */
     public function getSandboxData(): SandboxData
     {
@@ -97,9 +97,9 @@ class SandboxResult
     }
 
     /**
-     * 设置沙箱数据对象
+     * Set sandbox data object
      *
-     * @param SandboxData $data 沙箱数据对象
+     * @param SandboxData $data Sandbox data object
      */
     public function setSandboxData(SandboxData $data): self
     {

@@ -8,53 +8,53 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Constant;
 
 /**
- * 工作区状态常量
- * 定义Agent工作区的各种状态值.
+ * Workspace status constants
+ * Define various status values of Agent workspace.
  */
 class WorkspaceStatus
 {
     /**
-     * 未初始化 - AgentDispatcher未创建或未初始化.
+     * Uninitialized - AgentDispatcher not created or not initialized.
      */
     public const int UNINITIALIZED = 0;
 
     /**
-     * 正在初始化 - 预留状态，暂未使用.
+     * Initializing - Reserved status, not used yet.
      */
     public const int INITIALIZING = 1;
 
     /**
-     * 初始化完成 - 工作区完全可用.
+     * Initialization complete - workspace fully available.
      */
     public const int READY = 2;
 
     /**
-     * 初始化错误 - 初始化过程中发生异常.
+     * Initialization error - exception occurred during initialization.
      */
     public const int ERROR = -1;
 
     /**
-     * 获取状态描述.
+     * Get status description.
      *
-     * @param int $status 状态值
-     * @return string 状态描述
+     * @param int $status Status value
+     * @return string Status description
      */
     public static function getDescription(int $status): string
     {
         return match ($status) {
-            self::UNINITIALIZED => '未初始化',
-            self::INITIALIZING => '正在初始化',
-            self::READY => '初始化完成',
-            self::ERROR => '初始化错误',
-            default => '未知状态',
+            self::UNINITIALIZED => 'Uninitialized',
+            self::INITIALIZING => 'Initializing',
+            self::READY => 'Ready',
+            self::ERROR => 'Error',
+            default => 'Unknown status',
         };
     }
 
     /**
-     * 检查状态是否为就绪状态.
+     * Check if status is ready state.
      *
-     * @param int $status 状态值
-     * @return bool 是否就绪
+     * @param int $status Status value
+     * @return bool Whether ready
      */
     public static function isReady(int $status): bool
     {
@@ -62,10 +62,10 @@ class WorkspaceStatus
     }
 
     /**
-     * 检查状态是否为错误状态.
+     * Check if status is error state.
      *
-     * @param int $status 状态值
-     * @return bool 是否错误
+     * @param int $status Status value
+     * @return bool Whether error
      */
     public static function isError(int $status): bool
     {

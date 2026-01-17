@@ -10,12 +10,12 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 创建文件版本响应 DTO.
+ * Create file version response DTO.
  */
 class CreateFileVersionResponseDTO extends AbstractDTO
 {
     /**
-     * 创建空响应实例.
+     * Create empty response instance.
      */
     public static function createEmpty(): self
     {
@@ -23,7 +23,7 @@ class CreateFileVersionResponseDTO extends AbstractDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {

@@ -33,8 +33,8 @@ class GetFileUrlsRequestDTO
     private bool $cache;
 
     /**
-     * 文件版本号映射，格式：[file_id => version_number]
-     * 如果某个文件未指定版本号，则使用当前版本.
+     * File version number mapping, format: [file_id => version_number]
+     * If a file does not specify a version number, use the current version.
      */
     private array $fileVersions;
 
@@ -55,7 +55,7 @@ class GetFileUrlsRequestDTO
     }
 
     /**
-     * 从HTTP请求创建DTO.
+     * Create DTO from HTTP request.
      */
     public static function fromRequest(RequestInterface $request): self
     {
@@ -63,7 +63,7 @@ class GetFileUrlsRequestDTO
     }
 
     /**
-     * 获取文件ID列表.
+     * Get file ID list.
      */
     public function getFileIds(): array
     {
@@ -101,7 +101,7 @@ class GetFileUrlsRequestDTO
     }
 
     /**
-     * 获取文件版本号映射.
+     * Get file version number mapping.
      */
     public function getFileVersions(): array
     {
@@ -109,7 +109,7 @@ class GetFileUrlsRequestDTO
     }
 
     /**
-     * 设置文件版本号映射.
+     * Set file version number mapping.
      */
     public function setFileVersions(array $fileVersions): void
     {
@@ -117,10 +117,10 @@ class GetFileUrlsRequestDTO
     }
 
     /**
-     * 获取指定文件的版本号.
+     * Get the version number of the specified file.
      *
-     * @param int $fileId 文件ID
-     * @return null|int 版本号，未指定则返回null
+     * @param int $fileId File ID
+     * @return null|int Version number, returns null if not specified
      */
     public function getFileVersion(int $fileId): ?int
     {
@@ -128,9 +128,9 @@ class GetFileUrlsRequestDTO
     }
 
     /**
-     * 验证请求数据.
+     * Validate request data.
      *
-     * @throws BusinessException 如果验证失败则抛出异常
+     * @throws BusinessException Throws exception if validation fails
      */
     /* @phpstan-ignore-next-line */
     private function validate(): void
@@ -143,7 +143,7 @@ class GetFileUrlsRequestDTO
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'project_id.required');
         }
 
-        // 验证文件版本号格式
+        // Validate file version number format
         if (! empty($this->fileVersions)) {
             foreach ($this->fileVersions as $fileId => $version) {
                 if (! is_numeric($fileId) || ! is_numeric($version) || (int) $version < 1) {

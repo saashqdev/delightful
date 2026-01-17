@@ -14,77 +14,77 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
 use JsonSerializable;
 
 /**
- * 保存项目文件请求 DTO.
+ * Save project file request DTO.
  */
 class SaveProjectFileRequestDTO implements JsonSerializable
 {
     /**
-     * 项目ID（可选）.
+     * Project ID (optional).
      */
     private ?string $projectId = null;
 
     /**
-     * 话题ID（可选）.
+     * Topic ID (optional).
      */
     private string $topicId = '';
 
     /**
-     * 任务ID（可选）.
+     * Task ID (optional).
      */
     private string $taskId = '';
 
     /**
-     * 文件键（OSS中的路径）.
+     * File key (path in OSS).
      */
     private string $fileKey = '';
 
     /**
-     * 文件名.
+     * File name.
      */
     private string $fileName = '';
 
     /**
-     * 文件大小（字节）.
+     * File size (bytes).
      */
     private int $fileSize = 0;
 
     /**
-     * 文件类型（可选，默认为user_upload）.
+     * File type (optional, default is user_upload).
      */
     private string $fileType = FileType::USER_UPLOAD->value;
 
     /**
-     * 是否是目录（可选，默认为false）.
+     * Is directory (optional, default is false).
      */
     private bool $isDirectory = false;
 
     /**
-     * 排序（可选，默认为0）.
+     * Sort order (optional, default is 0).
      */
     private int $sort = 0;
 
     /**
-     * 父级ID（可选，默认为null）.
+     * Parent ID (optional, default is null).
      */
     private string $parentId = '';
 
     /**
-     * 存储类型（可选，默认为空字符串）.
+     * Storage type (optional, default is empty string).
      */
     private string $storageType = StorageType::WORKSPACE->value;
 
     /**
-     * 前置文件ID，用于指定插入位置，0=第一位，-1=末尾（默认）.
+     * Previous file ID, used to specify insertion position, 0=first position, -1=last position (default).
      */
     private string $preFileId = '-1';
 
     /**
-     * 来源字段.
+     * Source field.
      */
     private int $source = 0;
 
     /**
-     * 从请求数据创建DTO.
+     * Create DTO from request data.
      */
     public static function fromRequest(array $data): self
     {
@@ -251,7 +251,7 @@ class SaveProjectFileRequestDTO implements JsonSerializable
     }
 
     /**
-     * 转换为 TaskFileEntity 实体.
+     * Convert to TaskFileEntity.
      */
     public function toEntity(): TaskFileEntity
     {
@@ -262,7 +262,7 @@ class SaveProjectFileRequestDTO implements JsonSerializable
         $taskFileEntity->setFileType($this->fileType);
         $taskFileEntity->setSource($this->source);
 
-        // 设置项目ID（如果有）
+        // Set project ID (if exists)
         if (! empty($this->projectId)) {
             $taskFileEntity->setProjectId((int) $this->projectId);
         }
@@ -270,7 +270,7 @@ class SaveProjectFileRequestDTO implements JsonSerializable
         $taskFileEntity->setParentId(! empty($this->parentId) ? (int) $this->parentId : 0);
         $taskFileEntity->setIsDirectory($this->isDirectory);
 
-        // 设置存储类型
+        // Set storage type
         if (! empty($this->storageType)) {
             $taskFileEntity->setStorageType($this->storageType);
         } else {
@@ -289,7 +289,7 @@ class SaveProjectFileRequestDTO implements JsonSerializable
     }
 
     /**
-     * 实现JsonSerializable接口.
+     * Implement JsonSerializable interface.
      */
     public function jsonSerialize(): array
     {

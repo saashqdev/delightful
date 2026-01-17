@@ -8,28 +8,28 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Constants;
 
 /**
- * 沙箱 API 端点常量
- * 统一管理沙箱服务的 API 路径.
+ * Sandbox API endpoint constants
+ * Centrally manage sandbox service API paths.
  */
 class SandboxEndpoints
 {
     /**
-     * ASR 任务启动端点.
+     * ASR task start endpoint.
      */
     public const ASR_TASK_START = 'api/asr/task/start';
 
     /**
-     * ASR 任务完成端点.
+     * ASR task finish endpoint.
      */
     public const ASR_TASK_FINISH = 'api/asr/task/finish';
 
     /**
-     * ASR 任务取消端点.
+     * ASR task cancel endpoint.
      */
     public const ASR_TASK_CANCEL = 'api/asr/task/cancel';
 
     /**
-     * Agent 消息聊天端点.
+     * Agent message chat endpoint.
      */
     public const AGENT_MESSAGES_CHAT = 'api/v1/messages/chat';
 }

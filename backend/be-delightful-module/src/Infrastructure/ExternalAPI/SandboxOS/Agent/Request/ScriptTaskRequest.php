@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
 /**
- * 中断请求类
- * 严格按照沙箱通信文档的中断请求格式.
+ * Script task request class
+ * Follows the sandbox communication script task request format.
  */
 class ScriptTaskRequest
 {
@@ -21,7 +21,7 @@ class ScriptTaskRequest
     }
 
     /**
-     * 创建中断请求
+     * Create a script task request
      */
     public static function create(string $taskId, array $arguments, string $scriptName): self
     {
@@ -29,7 +29,7 @@ class ScriptTaskRequest
     }
 
     /**
-     * 设置任务ID.
+     * Set task ID.
      */
     public function setTaskId(string $taskId): self
     {
@@ -38,7 +38,7 @@ class ScriptTaskRequest
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): string
     {
@@ -68,8 +68,8 @@ class ScriptTaskRequest
     }
 
     /**
-     * 转换为API请求数组
-     * 根据沙箱通信文档的中断请求格式.
+     * Convert to API request array
+     * Matches the sandbox communication script task request format.
      */
     public function toArray(): array
     {

@@ -45,7 +45,7 @@ class BeAgentMessage extends AbstractChatMessageStruct implements TextContentInt
 
     protected ?MemoryOperation $memoryOperation;
 
-    protected ?string $correlationId = null; // 🎯 添加 correlation_id 字段
+    protected ?string $correlationId = null; // 🎯 Add correlation_id field
 
     protected ?array $usage = null; // Usage information (only set when task is finished)
 
@@ -140,7 +140,7 @@ class BeAgentMessage extends AbstractChatMessageStruct implements TextContentInt
                 $decoded = json_decode($tool, true);
                 $this->tool = new BeAgentTool($decoded);
             } else {
-                // 如果不是有效的 JSON 字符串，可以选择抛出异常或忽略
+                // If not a valid JSON string, can choose to throw exception or ignore
                 $this->tool = null;
             }
         } else {
@@ -290,7 +290,7 @@ class BeAgentMessage extends AbstractChatMessageStruct implements TextContentInt
                 $decoded = json_decode($memoryOperation, true);
                 $this->memoryOperation = new MemoryOperation($decoded);
             } else {
-                // 如果不是有效的 JSON 字符串，可以选择抛出异常或忽略
+                // If not a valid JSON string, can choose to throw exception or ignore
                 $this->memoryOperation = null;
             }
         } else {

@@ -10,31 +10,31 @@ namespace Delightful\BeDelightful\Domain\Share\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * 分享代码值对象
- * 表示一个唯一的分享标识符.
+ * Share code value object
+ * Represents a unique share identifier.
  */
 class ShareCode
 {
     /**
-     * 分享代码最小长度.
+     * Minimum length of share code.
      */
     private const int MIN_LENGTH = 6;
 
     /**
-     * 分享代码最大长度.
+     * Maximum length of share code.
      */
     private const int MAX_LENGTH = 16;
 
     /**
-     * 分享代码值
+     * Share code value
      */
     private string $value;
 
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param string $value 分享代码值
-     * @throws InvalidArgumentException 当分享代码不合法时抛出异常
+     * @param string $value Share code value
+     * @throws InvalidArgumentException Thrown when share code is invalid
      */
     public function __construct(string $value)
     {
@@ -43,7 +43,7 @@ class ShareCode
     }
 
     /**
-     * 转换为字符串.
+     * Convert to string.
      */
     public function __toString(): string
     {
@@ -51,9 +51,9 @@ class ShareCode
     }
 
     /**
-     * 创建新的分享代码实例.
+     * Create a new share code instance.
      *
-     * @param string $value 分享代码值
+     * @param string $value Share code value
      */
     public static function create(string $value): self
     {
@@ -61,7 +61,7 @@ class ShareCode
     }
 
     /**
-     * 获取分享代码值
+     * Get share code value
      */
     public function getValue(): string
     {
@@ -69,9 +69,9 @@ class ShareCode
     }
 
     /**
-     * 判断是否等于另一个分享代码
+     * Check if equals to another share code
      *
-     * @param ShareCode $other 另一个分享代码
+     * @param ShareCode $other Another share code
      */
     public function equals(ShareCode $other): bool
     {
@@ -79,24 +79,24 @@ class ShareCode
     }
 
     /**
-     * 验证分享代码
+     * Validate share code
      *
-     * @param string $value 分享代码值
-     * @throws InvalidArgumentException 当分享代码不合法时抛出异常
+     * @param string $value Share code value
+     * @throws InvalidArgumentException Thrown when share code is invalid
      */
     private function validate(string $value): void
     {
-        // 检查长度
+        // Check length
         $length = mb_strlen($value);
         if ($length < self::MIN_LENGTH || $length > self::MAX_LENGTH) {
             throw new InvalidArgumentException(
-                sprintf('分享代码长度必须在%d到%d个字符之间', self::MIN_LENGTH, self::MAX_LENGTH)
+                sprintf('Share code length must be between %d and %d characters', self::MIN_LENGTH, self::MAX_LENGTH)
             );
         }
 
-        // 检查格式（只允许字母、数字和部分特殊字符）
+        // Check format (only allow letters, numbers and some special characters)
         if (! preg_match('/^[a-zA-Z0-9_-]+$/', $value)) {
-            throw new InvalidArgumentException('分享代码只能包含字母、数字、下划线和连字符');
+            throw new InvalidArgumentException('Share code can only contain letters, numbers, underscores and hyphens');
         }
     }
 }

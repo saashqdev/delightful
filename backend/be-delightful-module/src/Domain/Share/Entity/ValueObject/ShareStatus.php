@@ -10,53 +10,53 @@ namespace Delightful\BeDelightful\Domain\Share\Entity\ValueObject;
 use DateTime;
 
 /**
- * 分享状态值对象
- * 表示分享的当前状态（有效、过期、删除等）.
+ * Share status value object
+ * Represents the current state of a share (active, expired, deleted, etc.).
  */
 class ShareStatus
 {
     /**
-     * 状态：有效.
+     * Status: Active.
      */
     public const STATUS_ACTIVE = 'active';
 
     /**
-     * 状态：过期
+     * Status: Expired
      */
     public const STATUS_EXPIRED = 'expired';
 
     /**
-     * 状态：已删除.
+     * Status: Deleted.
      */
     public const STATUS_DELETED = 'deleted';
 
     /**
-     * 状态：密码错误.
+     * Status: Password error.
      */
     public const STATUS_PASSWORD_ERROR = 'password_error';
 
     /**
-     * 状态：无访问权限.
+     * Status: No access permission.
      */
     public const STATUS_NO_PERMISSION = 'no_permission';
 
     /**
-     * 当前状态值
+     * Current status value
      */
     private string $status;
 
     /**
-     * 过期时间.
+     * Expiration time.
      */
     private ?DateTime $expireAt;
 
     /**
-     * 删除时间.
+     * Deletion time.
      */
     private ?DateTime $deletedAt;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     private function __construct(string $status, ?DateTime $expireAt = null, ?DateTime $deletedAt = null)
     {
@@ -66,7 +66,7 @@ class ShareStatus
     }
 
     /**
-     * 转换为字符串.
+     * Convert to string.
      */
     public function __toString(): string
     {
@@ -74,7 +74,7 @@ class ShareStatus
     }
 
     /**
-     * 创建有效状态
+     * Create active status
      */
     public static function active(?DateTime $expireAt = null): self
     {
@@ -82,7 +82,7 @@ class ShareStatus
     }
 
     /**
-     * 创建过期状态
+     * Create expired status
      */
     public static function expired(DateTime $expireAt): self
     {
@@ -90,7 +90,7 @@ class ShareStatus
     }
 
     /**
-     * 创建已删除状态
+     * Create deleted status
      */
     public static function deleted(DateTime $deletedAt): self
     {
@@ -98,7 +98,7 @@ class ShareStatus
     }
 
     /**
-     * 创建密码错误状态
+     * Create password error status
      */
     public static function passwordError(): self
     {
@@ -106,7 +106,7 @@ class ShareStatus
     }
 
     /**
-     * 创建无访问权限状态
+     * Create no access permission status
      */
     public static function noPermission(): self
     {
@@ -114,7 +114,7 @@ class ShareStatus
     }
 
     /**
-     * 获取状态值
+     * Get status value
      */
     public function getStatus(): string
     {
@@ -122,7 +122,7 @@ class ShareStatus
     }
 
     /**
-     * 获取过期时间.
+     * Get expiration time.
      */
     public function getExpireAt(): ?DateTime
     {
@@ -130,7 +130,7 @@ class ShareStatus
     }
 
     /**
-     * 获取删除时间.
+     * Get deletion time.
      */
     public function getDeletedAt(): ?DateTime
     {
@@ -138,7 +138,7 @@ class ShareStatus
     }
 
     /**
-     * 检查状态是否为活跃.
+     * Check if status is active.
      */
     public function isActive(): bool
     {
@@ -146,7 +146,7 @@ class ShareStatus
     }
 
     /**
-     * 检查状态是否为过期
+     * Check if status is expired
      */
     public function isExpired(): bool
     {
@@ -154,7 +154,7 @@ class ShareStatus
     }
 
     /**
-     * 检查状态是否为已删除.
+     * Check if status is deleted.
      */
     public function isDeleted(): bool
     {
@@ -162,7 +162,7 @@ class ShareStatus
     }
 
     /**
-     * 检查状态是否为密码错误.
+     * Check if status is password error.
      */
     public function isPasswordError(): bool
     {
@@ -170,7 +170,7 @@ class ShareStatus
     }
 
     /**
-     * 检查状态是否为无访问权限.
+     * Check if status is no access permission.
      */
     public function isNoPermission(): bool
     {
@@ -178,7 +178,7 @@ class ShareStatus
     }
 
     /**
-     * 检查分享是否可访问.
+     * Check if share is accessible.
      */
     public function isAccessible(): bool
     {

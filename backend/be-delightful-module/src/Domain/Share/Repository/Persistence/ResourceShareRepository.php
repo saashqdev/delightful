@@ -17,22 +17,22 @@ use Exception;
 use Hyperf\Codec\Json;
 
 /**
- * 资源分享仓储实现.
+ * Resource share repository implementation.
  */
 class ResourceShareRepository extends AbstractRepository implements ResourceShareRepositoryInterface
 {
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(protected ResourceShareModel $model)
     {
     }
 
     /**
-     * 通过ID获取分享.
+     * Get share by ID.
      *
-     * @param int $shareId 分享ID
-     * @return null|ResourceShareEntity 资源分享实体
+     * @param int $shareId Share ID
+     * @return null|ResourceShareEntity Resource share entity
      */
     public function getShareById(int $shareId): ?ResourceShareEntity
     {
@@ -41,10 +41,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 通过分享码获取分享.
+     * Get share by share code.
      *
-     * @param string $shareCode 分享码
-     * @return null|ResourceShareEntity 资源分享实体
+     * @param string $shareCode Share code
+     * @return null|ResourceShareEntity Resource share entity
      */
     public function getShareByCode(string $shareCode): ?ResourceShareEntity
     {
@@ -59,12 +59,12 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 查找资源对应的分享.
+     * Find share corresponding to resource.
      *
-     * @param string $resourceId 资源ID
-     * @param ResourceType $resourceType 资源类型
-     * @param string $userId 用户ID
-     * @return null|ResourceShareEntity 资源分享实体
+     * @param string $resourceId Resource ID
+     * @param ResourceType $resourceType Resource type
+     * @param string $userId User ID
+     * @return null|ResourceShareEntity Resource share entity
      */
     public function findByResource(string $resourceId, ResourceType $resourceType, string $userId): ?ResourceShareEntity
     {
@@ -78,10 +78,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 创建分享记录.
+     * Create share record.
      *
-     * @param array $data 分享数据
-     * @return string 分享ID
+     * @param array $data Share data
+     * @return string Share ID
      */
     public function create(array $data): string
     {
@@ -93,10 +93,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 保存分享实体.
+     * Save share entity.
      *
-     * @param ResourceShareEntity $shareEntity 资源分享实体
-     * @return ResourceShareEntity 保存后的资源分享实体
+     * @param ResourceShareEntity $shareEntity Resource share entity
+     * @return ResourceShareEntity Saved resource share entity
      * @throws Exception
      */
     public function save(ResourceShareEntity $shareEntity): ResourceShareEntity
@@ -105,37 +105,37 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
 
         try {
             if ($shareEntity->getId() === 0) {
-                // 创建新记录
+                // Create new record
                 $data['id'] = IdGenerator::getSnowId();
                 $model = $this->model::query()->create($data);
                 $shareEntity->setId((int) $model->id);
             } else {
-                // 更新现有记录
+                // Update existing record
                 $this->model->query()->withTrashed()->where('id', $shareEntity->getId())->update($data);
             }
             return $shareEntity;
         } catch (Exception $e) {
-            throw new Exception('保存分享失败：' . $e->getMessage());
+            throw new Exception('Failed to save share: ' . $e->getMessage());
         }
     }
 
     /**
-     * 删除分享.
+     * Delete share.
      *
-     * @param int $shareId 分享ID
-     * @param bool $forceDelete 是否强制删除（物理删除），默认false为软删除
-     * @return bool 是否成功
+     * @param int $shareId Share ID
+     * @param bool $forceDelete Whether to force delete (physical delete), default false for soft delete
+     * @return bool Whether successful
      */
     public function delete(int $shareId, bool $forceDelete = false): bool
     {
         if ($forceDelete) {
-            // 物理删除：直接从数据库删除
+            // Physical delete: directly remove from database
             $model = $this->model->newQuery()->withTrashed()->find($shareId);
             if ($model) {
                 return $model->forceDelete();
             }
         } else {
-            // 软删除：使用 SoftDeletes trait
+            // Soft delete: use SoftDeletes trait
             $model = $this->model->newQuery()->find($shareId);
             if ($model) {
                 return $model->delete();
@@ -145,10 +145,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 增加分享查看次数.
+     * Increment share view count.
      *
-     * @param string $shareCode 分享码
-     * @return bool 是否成功
+     * @param string $shareCode Share code
+     * @return bool Whether successful
      */
     public function incrementViewCount(string $shareCode): bool
     {
@@ -160,10 +160,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 检查分享码是否已存在.
+     * Check if share code already exists.
      *
-     * @param string $shareCode 分享码
-     * @return bool 是否已存在
+     * @param string $shareCode Share code
+     * @return bool Whether exists
      */
     public function isShareCodeExists(string $shareCode): bool
     {
@@ -171,18 +171,18 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 获取分享记录列表.
+     * Get share record list.
      *
-     * @param array $conditions 条件
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array 分页数据 [total, list]
+     * @param array $conditions Conditions
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array Pagination data [total, list]
      */
     public function paginate(array $conditions, int $page = 1, int $pageSize = 20): array
     {
         $query = $this->model->newQuery();
 
-        // 添加查询条件
+        // Add query conditions
         foreach ($conditions as $field => $value) {
             if ($field == 'keyword') {
                 $query->where($field, 'LIKE', '%' . $value . '%');
@@ -193,20 +193,20 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
             }
         }
 
-        // 按创建时间倒序排序
+        // Sort by creation time in descending order
         $query->orderBy('id', 'desc');
 
         $query->whereNull('deleted_at');
 
-        // 计算总数
+        // Calculate total count
         $total = $query->count();
 
-        // 获取分页数据
+        // Get pagination data
         $models = $query->offset(($page - 1) * $pageSize)
             ->limit($pageSize)
             ->get();
 
-        // 将模型转换为实体
+        // Convert models to entities
         $items = [];
         foreach ($models as $model) {
             $items[] = $this->modelToEntity($model);
@@ -238,10 +238,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 将PO模型转换为实体.
+     * Convert PO model to entity.
      *
-     * @param ResourceShareModel $model 模型
-     * @return ResourceShareEntity 实体
+     * @param ResourceShareModel $model Model
+     * @return ResourceShareEntity Entity
      */
     protected function modelToEntity(ResourceShareModel $model): ?ResourceShareEntity
     {
@@ -254,7 +254,7 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
         $entity->setShareType((int) $model->share_type);
         $entity->setPassword($model->password);
 
-        // 安全处理日期 - 确保格式正确
+        // Safely handle dates - ensure correct format
         if ($model->expire_at) {
             $entity->setExpireAt($model->expire_at);
         }
@@ -263,7 +263,7 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
         $entity->setCreatedUid($model->created_uid);
         $entity->setOrganizationCode(htmlspecialchars($model->organization_code, ENT_QUOTES, 'UTF-8'));
 
-        // 处理目标ID，如果实体中有此字段
+        // Handle target IDs if entity has this field
         /* @phpstan-ignore-next-line */
         if (property_exists($model, 'target_ids') && method_exists($entity, 'setTargetIds')) {
             $entity->setTargetIds($model->target_ids ?? '[]');
@@ -273,10 +273,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
         $extra = is_array($extra) ? $extra : Json::decode($extra);
         $entity->setExtra($extra);
 
-        // 处理是否启用字段（邀请链接专用）
+        // Handle is_enabled field (dedicated for invitation links)
         $entity->setIsEnabled($model->is_enabled ?? true);
 
-        // 处理密码保护是否启用字段
+        // Handle password protection enabled field
         $entity->setIsPasswordEnabled($model->is_password_enabled ?? false);
 
         if ($model->created_at) {
@@ -295,10 +295,10 @@ class ResourceShareRepository extends AbstractRepository implements ResourceShar
     }
 
     /**
-     * 将实体转换为数组.
+     * Convert entity to array.
      *
-     * @param ResourceShareEntity $entity 实体
-     * @return array 数组
+     * @param ResourceShareEntity $entity Entity
+     * @return array Array
      */
     protected function entityToArray(ResourceShareEntity $entity): array
     {

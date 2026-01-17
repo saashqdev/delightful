@@ -12,11 +12,11 @@ use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject
 use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
 
 /**
- * 超级麦吉创建/更新记忆的工具调用，可以在消息卡片下方点击按钮进行快速操作。
+ * Super Mage memory creation/update tool call, allows quick operations by clicking buttons below message cards.
  */
 class MemoryOperation extends AbstractDTO
 {
-    // 记忆操作
+    // Memory operation
     protected MemoryOperationAction $action;
 
     protected string $memoryId;

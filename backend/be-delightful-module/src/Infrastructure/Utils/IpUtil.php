@@ -10,19 +10,19 @@ namespace Delightful\BeDelightful\Infrastructure\Utils;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * IP地址获取工具.
+ * IP address utility.
  */
 class IpUtil
 {
     /**
-     * 获取客户端IP地址
+     * Get client IP address.
      *
-     * @param RequestInterface $request HTTP请求对象
-     * @return null|string 客户端IP地址
+     * @param RequestInterface $request HTTP request object
+     * @return null|string Client IP address
      */
     public static function getClientIpAddress(RequestInterface $request): ?string
     {
-        // 优先级顺序：X-Real-IP -> X-Forwarded-For -> remote_addr
+        // Priority order: X-Real-IP -> X-Forwarded-For -> remote_addr
         $realIp = $request->getHeaderLine('x-real-ip');
         if (! empty($realIp)) {
             return $realIp;
@@ -30,7 +30,7 @@ class IpUtil
 
         $forwardedFor = $request->getHeaderLine('x-forwarded-for');
         if (! empty($forwardedFor)) {
-            // X-Forwarded-For 可能包含多个IP，取第一个
+            // X-Forwarded-For may contain multiple IPs; take the first one
             $ips = explode(',', $forwardedFor);
             return trim($ips[0]);
         }

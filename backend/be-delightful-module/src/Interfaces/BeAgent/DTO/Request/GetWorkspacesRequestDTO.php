@@ -12,12 +12,12 @@ use App\Infrastructure\Core\AbstractDTO;
 class GetWorkspacesRequestDTO extends AbstractDTO
 {
     /**
-     * 页码
+     * Page number
      */
     private int $page = 1;
 
     /**
-     * 每页数量.
+     * Items per page.
      */
     private int $pageSize = 10;
 

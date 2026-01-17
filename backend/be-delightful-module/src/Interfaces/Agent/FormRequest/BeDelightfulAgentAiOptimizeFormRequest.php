@@ -37,10 +37,10 @@ class BeDelightfulAgentAiOptimizeFormRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'optimization_type.required' => '优化类型不能为空',
-            'optimization_type.in' => '优化类型无效',
-            'agent.required' => '智能体数据不能为空',
-            'agent.array' => '智能体数据必须是数组格式',
+            'optimization_type.required' => 'Optimization type is required',
+            'optimization_type.in' => 'Invalid optimization type',
+            'agent.required' => 'Agent data is required',
+            'agent.array' => 'Agent data must be in array format',
         ];
     }
 }

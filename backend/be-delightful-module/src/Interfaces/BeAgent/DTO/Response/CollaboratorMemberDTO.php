@@ -12,32 +12,32 @@ use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 协作者成员信息DTO.
+ * Collaborator member information DTO.
  */
 class CollaboratorMemberDTO extends AbstractDTO
 {
     /**
-     * @var string 成员ID (user_id或department_id)
+     * @var string Member ID (user_id or department_id)
      */
     protected string $id = '';
 
     /**
-     * @var string 成员名称
+     * @var string Member name
      */
     protected string $name = '';
 
     /**
-     * @var string 头像URL
+     * @var string Avatar URL
      */
     protected string $avatarUrl = '';
 
     /**
-     * @var string 成员类型 User|Department
+     * @var string Member type User|Department
      */
     protected string $type = '';
 
     /**
-     * 从DelightfulUserEntity对象创建DTO.
+     * Create DTO from DelightfulUserEntity object.
      */
     public static function fromUserEntity(DelightfulUserEntity $userEntity): self
     {
@@ -51,21 +51,21 @@ class CollaboratorMemberDTO extends AbstractDTO
     }
 
     /**
-     * 从DelightfulDepartmentEntity对象创建DTO.
+     * Create DTO from DelightfulDepartmentEntity object.
      */
     public static function fromDepartmentEntity(DelightfulDepartmentEntity $departmentEntity): self
     {
         $dto = new self();
         $dto->setId($departmentEntity->getDepartmentId() ?? '');
         $dto->setName($departmentEntity->getName() ?? '');
-        $dto->setAvatarUrl(''); // 部门通常没有头像
+        $dto->setAvatarUrl(''); // Departments typically don't have avatars
         $dto->setType('Department');
 
         return $dto;
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -75,7 +75,7 @@ class CollaboratorMemberDTO extends AbstractDTO
             'type' => $this->type,
         ];
 
-        // 根据类型添加对应的ID字段
+        // Add corresponding ID field based on type
         if ($this->type === 'User') {
             $result['user_id'] = $this->id;
         } elseif ($this->type === 'Department') {

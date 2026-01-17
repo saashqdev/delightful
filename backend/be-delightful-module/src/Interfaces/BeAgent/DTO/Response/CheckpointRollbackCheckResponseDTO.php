@@ -12,7 +12,7 @@ class CheckpointRollbackCheckResponseDTO
     protected bool $canRollback = false;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct()
     {

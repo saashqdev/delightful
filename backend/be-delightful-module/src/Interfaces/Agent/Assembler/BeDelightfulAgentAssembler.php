@@ -90,7 +90,7 @@ class BeDelightfulAgentAssembler
     }
 
     /**
-     * 创建分类列表DTO.
+     * Create categorized list DTO.
      */
     public static function createCategorizedListDTO(array $frequent, array $all, int $total): BeDelightfulAgentCategorizedListDTO
     {

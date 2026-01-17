@@ -14,20 +14,20 @@ use Delightful\BeDelightful\Interfaces\Agent\DTO\BuiltinToolDTO;
 class BuiltinToolAssembler
 {
     /**
-     * 创建工具分类列表DTO（层级格式）.
+     * Create tool category list DTO (hierarchical format).
      * @return array<BuiltinToolCategoryDTO>
      */
     public static function createToolCategoryListDTO(): array
     {
         $categoryDTOs = [];
 
-        // 按分类分组工具并直接创建分类DTO
+        // Group tools by category and create category DTOs directly
         foreach (BuiltinTool::cases() as $toolEnum) {
             $toolCode = $toolEnum->value;
             $category = $toolEnum->getToolCategory();
             $categoryCode = $category->value;
 
-            // 如果分类DTO还不存在，创建它
+            // If category DTO does not exist yet, create it
             if (! isset($categoryDTOs[$categoryCode])) {
                 $categoryDTOs[$categoryCode] = new BuiltinToolCategoryDTO([
                     'name' => $category->getName(),
@@ -37,7 +37,7 @@ class BuiltinToolAssembler
                 ]);
             }
 
-            // 添加工具到对应分类
+            // Add tool to corresponding category
             $categoryDTOs[$categoryCode]->addTool(new BuiltinToolDTO([
                 'code' => $toolCode,
                 'name' => $toolEnum->getToolName(),
@@ -51,7 +51,7 @@ class BuiltinToolAssembler
     }
 
     /**
-     * 创建工具列表DTO（平铺格式）.
+     * Create tool list DTO (flat format).
      * @return array<BuiltinToolDTO>
      */
     public static function createToolListDTO(): array

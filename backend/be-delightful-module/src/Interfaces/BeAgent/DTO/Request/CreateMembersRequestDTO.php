@@ -12,14 +12,14 @@ use App\Infrastructure\Core\AbstractRequestDTO;
 use function Hyperf\Translation\__;
 
 /**
- * 创建项目成员请求DTO.
+ * Create project members request DTO.
  *
- * 封装创建项目成员的请求参数和验证逻辑
- * 继承AbstractRequestDTO，自动支持参数验证和类型转换
+ * Encapsulates request parameters and validation logic for creating project members
+ * Extends AbstractRequestDTO, automatically supports parameter validation and type conversion
  */
 class CreateMembersRequestDTO extends AbstractRequestDTO
 {
-    /** @var array 成员数据列表 */
+    /** @var array Member data list */
     public array $members = [];
 
     public function getMembers(): array
@@ -33,7 +33,7 @@ class CreateMembersRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 定义验证规则.
+     * Define validation rules.
      */
     protected static function getHyperfValidationRules(): array
     {
@@ -46,7 +46,7 @@ class CreateMembersRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 定义验证错误消息（多语言支持）.
+     * Define validation error messages (multi-language support).
      */
     protected static function getHyperfValidationMessage(): array
     {

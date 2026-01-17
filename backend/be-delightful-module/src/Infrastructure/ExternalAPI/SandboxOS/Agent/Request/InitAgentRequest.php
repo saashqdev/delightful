@@ -10,8 +10,8 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Req
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 
 /**
- * 初始化Agent请求类
- * 严格按照沙箱通信文档的初始化请求格式.
+ * Init Agent request class
+ * Follows the sandbox communication init request format.
  */
 class InitAgentRequest
 {
@@ -35,7 +35,7 @@ class InitAgentRequest
     }
 
     /**
-     * 通过数组创建初始化请求
+     * Create an init request from array data
      */
     public static function fromArray(array $data): self
     {
@@ -59,7 +59,7 @@ class InitAgentRequest
     }
 
     /**
-     * 创建默认的初始化请求
+     * Create a default init request
      */
     public static function createDefault(): self
     {
@@ -67,7 +67,7 @@ class InitAgentRequest
     }
 
     /**
-     * 创建初始化请求
+     * Create an init request
      */
     public static function create(
         string $messageId,
@@ -106,7 +106,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取上传配置.
+     * Get upload config.
      */
     public function getUploadConfig(): array
     {
@@ -114,7 +114,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置上传配置.
+     * Set upload config.
      */
     public function setUploadConfig(array $uploadConfig): self
     {
@@ -123,7 +123,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取消息订阅配置.
+     * Get message subscription config.
      */
     public function getMessageSubscriptionConfig(): array
     {
@@ -131,7 +131,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置消息订阅配置.
+     * Set message subscription config.
      */
     public function setMessageSubscriptionConfig(array $messageSubscriptionConfig): self
     {
@@ -140,7 +140,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取STS令牌刷新配置.
+     * Get STS token refresh config.
      */
     public function getStsTokenRefresh(): array
     {
@@ -148,7 +148,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置STS令牌刷新配置.
+     * Set STS token refresh config.
      */
     public function setStsTokenRefresh(array $stsTokenRefresh): self
     {
@@ -157,7 +157,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取元数据.
+     * Get metadata.
      */
     public function getMetadata(): array
     {
@@ -165,7 +165,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置元数据.
+     * Set metadata.
      */
     public function setMetadata(array $metadata): self
     {
@@ -174,7 +174,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取任务模式.
+     * Get task mode.
      */
     public function getTaskMode(): string
     {
@@ -182,7 +182,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置任务模式.
+     * Set task mode.
      */
     public function setTaskMode(string $taskMode): self
     {
@@ -191,7 +191,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置用户ID.
+     * Set user ID.
      */
     public function setUserId(string $userId): self
     {
@@ -200,7 +200,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取用户ID.
+     * Get user ID.
      */
     public function getUserId(): string
     {
@@ -208,7 +208,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置消息ID.
+     * Set message ID.
      */
     public function setMessageId(string $messageId): self
     {
@@ -217,7 +217,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取消息ID.
+     * Get message ID.
      */
     public function getMessageId(): string
     {
@@ -225,7 +225,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置项目ID.
+     * Set project ID.
      */
     public function setProjectId(string $projectId): self
     {
@@ -234,7 +234,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取项目ID.
+     * Get project ID.
      */
     public function getProjectId(): string
     {
@@ -292,7 +292,7 @@ class InitAgentRequest
     }
 
     /**
-     * 获取记忆内容.
+     * Get memory content.
      */
     public function getMemory(): ?string
     {
@@ -300,7 +300,7 @@ class InitAgentRequest
     }
 
     /**
-     * 设置记忆内容.
+     * Set memory content.
      */
     public function setMemory(?string $memory): self
     {
@@ -337,8 +337,8 @@ class InitAgentRequest
     }
 
     /**
-     * 转换为API请求数组
-     * 根据沙箱通信文档的初始化请求格式.
+     * Convert to API request array
+     * Matches the sandbox communication init request format.
      */
     public function toArray(): array
     {

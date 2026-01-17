@@ -16,7 +16,7 @@ class UpgradeSandboxRequestDTO extends AbstractRequestDTO
     protected string $contextType = 'continue';
 
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public static function getHyperfValidationRules(): array
     {
@@ -29,22 +29,22 @@ class UpgradeSandboxRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'message_id.required' => '消息ID不能为空',
-            'message_id.string' => '消息ID必须是字符串',
-            'context_type.required' => '上下文类型不能为空',
-            'context_type.string' => '上下文类型必须是字符串',
-            'context_type.in' => '上下文类型只能为continue',
+            'message_id.required' => 'Message ID cannot be empty',
+            'message_id.string' => 'Message ID must be a string',
+            'context_type.required' => 'Context type cannot be empty',
+            'context_type.string' => 'Context type must be a string',
+            'context_type.in' => 'Context type can only be continue',
         ];
     }
 
     /**
-     * 属性名称.
+     * Attribute names.
      */
     public function attributes(): array
     {
         return [
-            'message_id' => '消息ID',
-            'context_type' => '上下文类型',
+            'message_id' => 'Message ID',
+            'context_type' => 'Context type',
         ];
     }
 

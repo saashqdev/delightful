@@ -8,26 +8,26 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject;
 
 /**
- * 记忆操作场景枚举.
+ * Memory operation scenario enum.
  */
 enum MemoryOperationScenario: string
 {
-    case ADMIN_PANEL = 'admin_panel';           // 管理后台
-    case MEMORY_CARD_QUICK = 'memory_card_quick'; // 记忆卡片快捷操作
+    case ADMIN_PANEL = 'admin_panel';           // Admin panel
+    case MEMORY_CARD_QUICK = 'memory_card_quick'; // Memory card quick operation
 
     /**
-     * 获取场景描述.
+     * Get scenario description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::ADMIN_PANEL => '管理后台',
-            self::MEMORY_CARD_QUICK => '记忆卡片快捷操作',
+            self::ADMIN_PANEL => 'Admin Panel',
+            self::MEMORY_CARD_QUICK => 'Memory Card Quick Operation',
         };
     }
 
     /**
-     * 获取所有场景值.
+     * Get all scenario values.
      */
     public static function getAllValues(): array
     {
@@ -35,7 +35,7 @@ enum MemoryOperationScenario: string
     }
 
     /**
-     * 检查场景是否有效.
+     * Check if scenario is valid.
      */
     public static function isValid(string $scenario): bool
     {
@@ -43,7 +43,7 @@ enum MemoryOperationScenario: string
     }
 
     /**
-     * 获取默认场景.
+     * Get default scenario.
      */
     public static function getDefault(): self
     {

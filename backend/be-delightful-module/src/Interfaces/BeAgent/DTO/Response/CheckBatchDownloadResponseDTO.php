@@ -10,27 +10,27 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 class CheckBatchDownloadResponseDTO
 {
     /**
-     * @var string 处理状态 (ready|processing|failed)
+     * @var string Processing status (ready|processing|failed)
      */
     protected string $status;
 
     /**
-     * @var null|string 下载URL（状态为ready时提供）
+     * @var null|string Download URL (provided when status is ready)
      */
     protected ?string $downloadUrl;
 
     /**
-     * @var null|int 处理进度（0-100）
+     * @var null|int Processing progress (0-100)
      */
     protected ?int $progress;
 
     /**
-     * @var string 描述信息
+     * @var string Description message
      */
     protected string $message;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(
         string $status,
@@ -45,7 +45,7 @@ class CheckBatchDownloadResponseDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -58,7 +58,7 @@ class CheckBatchDownloadResponseDTO
     }
 
     /**
-     * 获取处理状态.
+     * Get processing status.
      */
     public function getStatus(): string
     {
@@ -66,7 +66,7 @@ class CheckBatchDownloadResponseDTO
     }
 
     /**
-     * 获取下载URL.
+     * Get download URL.
      */
     public function getDownloadUrl(): ?string
     {
@@ -74,7 +74,7 @@ class CheckBatchDownloadResponseDTO
     }
 
     /**
-     * 获取处理进度.
+     * Get processing progress.
      */
     public function getProgress(): ?int
     {
@@ -82,7 +82,7 @@ class CheckBatchDownloadResponseDTO
     }
 
     /**
-     * 获取描述信息.
+     * Get description message.
      */
     public function getMessage(): string
     {

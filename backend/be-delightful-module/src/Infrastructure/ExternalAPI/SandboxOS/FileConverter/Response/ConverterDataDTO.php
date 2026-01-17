@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\Response;
 
 /**
- * 文件转换响应中的数据对象.
+ * Data object within a file conversion response.
  */
 class ConverterDataDTO
 {

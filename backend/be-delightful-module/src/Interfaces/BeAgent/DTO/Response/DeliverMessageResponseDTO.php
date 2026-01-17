@@ -10,8 +10,8 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 class DeliverMessageResponseDTO
 {
     /**
-     * @param bool $success 是否成功
-     * @param string $messageId 消息ID
+     * @param bool $success Whether successful
+     * @param string $messageId Message ID
      */
     public function __construct(
         private bool $success,
@@ -20,7 +20,7 @@ class DeliverMessageResponseDTO
     }
 
     /**
-     * 从操作结果创建响应DTO.
+     * Create response DTO from operation result.
      */
     public static function fromResult(bool $success, string $messageId = ''): self
     {
@@ -28,7 +28,7 @@ class DeliverMessageResponseDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -39,7 +39,7 @@ class DeliverMessageResponseDTO
     }
 
     /**
-     * 判断操作是否成功.
+     * Check if operation was successful.
      */
     public function isSuccess(): bool
     {
@@ -47,7 +47,7 @@ class DeliverMessageResponseDTO
     }
 
     /**
-     * 获取消息ID.
+     * Get message ID.
      */
     public function getMessageId(): string
     {

@@ -10,19 +10,19 @@ namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item;
 use App\Domain\Chat\Entity\AbstractEntity;
 
 /**
- * 步骤实体类.
+ * Step entity class.
  */
 class BeAgentStep extends AbstractEntity
 {
     protected string $id = '';
 
     /**
-     * 步骤标题.
+     * Step title.
      */
     protected string $title = '';
 
     /**
-     * 步骤状态.
+     * Step status.
      */
     protected string $status = '';
 

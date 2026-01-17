@@ -35,12 +35,12 @@ interface SandboxGatewayInterface
     public function clearUserContext(): self;
 
     /**
-     * 创建沙箱.
+     * Create a sandbox.
      *
      * @param string $projectId Project ID
      * @param string $sandboxId Sandbox ID
      * @param string $workDir Sandbox working directory
-     * @return GatewayResult 创建结果，成功时data包含sandbox_id
+     * @return GatewayResult Creation result; when successful, data includes sandbox_id
      */
     public function createSandbox(string $projectId, string $sandboxId, string $workDir): GatewayResult;
 
@@ -79,31 +79,31 @@ interface SandboxGatewayInterface
     ): GatewayResult;
 
     /**
-     * 确保沙箱存在并且可用.
+     * Ensure the sandbox exists and is available.
      *
      * @param string $sandboxId Sandbox ID
      * @param string $projectId Project ID
      * @param string $workDir Working directory
-     * @return string 实际使用的沙箱ID
+     * @return string Actual sandbox ID used
      */
     public function ensureSandboxAvailable(string $sandboxId, string $projectId, string $workDir): string;
 
     public function uploadFile(string $sandboxId, array $filePaths, string $projectId, string $organizationCode, string $taskId): GatewayResult;
 
     /**
-     * 复制文件（同步操作）.
+     * Copy files (synchronous operation).
      *
-     * @param array $files 文件复制项目数组，格式：[['source_oss_path' => 'xxx', 'target_oss_path' => 'xxx'], ...]
-     * @return GatewayResult 复制结果
+     * @param array $files File copy items: [['source_oss_path' => 'xxx', 'target_oss_path' => 'xxx'], ...]
+     * @return GatewayResult Copy result
      */
     public function copyFiles(array $files): GatewayResult;
 
     /**
-     * 升级沙箱镜像.
+     * Upgrade sandbox image.
      *
-     * @param string $messageId 消息ID
-     * @param string $contextType 上下文类型，通常为"continue"
-     * @return GatewayResult 升级结果
+     * @param string $messageId Message ID
+     * @param string $contextType Context type, usually "continue"
+     * @return GatewayResult Upgrade result
      */
     public function upgradeSandbox(string $messageId, string $contextType = 'continue'): GatewayResult;
 }

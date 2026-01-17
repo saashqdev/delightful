@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox;
 
 /**
- * 沙箱数据结构体.
+ * Sandbox data structure.
  *
- * 对应接口返回的数据格式：
+ * Corresponding interface response data format:
  * {
  *     "sandbox_id": "be9ae617",
  *     "status": "running/exited",
@@ -21,11 +21,11 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox;
 class SandboxData
 {
     /**
-     * @param string $sandboxId 沙箱ID
-     * @param string $status 沙箱状态，可能的值: running, exited, unknown
-     * @param float $createdAt 创建时间戳
-     * @param string $ipAddress IP地址
-     * @param array $extraData 额外数据
+     * @param string $sandboxId Sandbox ID
+     * @param string $status Sandbox status, possible values: running, exited, unknown
+     * @param float $createdAt Creation timestamp
+     * @param string $ipAddress IP address
+     * @param array $extraData Extra data
      */
     public function __construct(
         private string $sandboxId = '',
@@ -40,7 +40,7 @@ class SandboxData
     }
 
     /**
-     * 从数组创建结构体实例.
+     * Create struct instance from array.
      */
     public static function fromArray(array $data): self
     {
@@ -49,7 +49,7 @@ class SandboxData
         $createdAt = (float) ($data['created_at'] ?? time());
         $ipAddress = $data['ip_address'] ?? '';
 
-        // 移除已处理的键，剩余的放入 extraData
+        // Remove processed keys, remaining ones go into extraData
         $extraData = $data;
         unset($extraData['sandbox_id'], $extraData['status'], $extraData['created_at'], $extraData['ip_address']);
 
@@ -57,7 +57,7 @@ class SandboxData
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -68,12 +68,12 @@ class SandboxData
             'ip_address' => $this->ipAddress,
         ];
 
-        // 添加额外数据
+        // Add extra data
         return array_merge($result, $this->extraData);
     }
 
     /**
-     * 获取沙箱ID.
+     * Get sandbox ID.
      */
     public function getSandboxId(): string
     {
@@ -81,7 +81,7 @@ class SandboxData
     }
 
     /**
-     * 设置沙箱ID.
+     * Set sandbox ID.
      */
     public function setSandboxId(string $sandboxId): self
     {
@@ -90,7 +90,7 @@ class SandboxData
     }
 
     /**
-     * 获取沙箱状态
+     * Get sandbox status
      */
     public function getStatus(): string
     {
@@ -98,7 +98,7 @@ class SandboxData
     }
 
     /**
-     * 设置沙箱状态
+     * Set sandbox status
      */
     public function setStatus(string $status): self
     {
@@ -107,7 +107,7 @@ class SandboxData
     }
 
     /**
-     * 获取创建时间戳.
+     * Get creation timestamp.
      */
     public function getCreatedAt(): float
     {
@@ -115,7 +115,7 @@ class SandboxData
     }
 
     /**
-     * 设置创建时间戳.
+     * Set creation timestamp.
      */
     public function setCreatedAt(float $createdAt): self
     {
@@ -124,7 +124,7 @@ class SandboxData
     }
 
     /**
-     * 获取IP地址
+     * Get IP address
      */
     public function getIpAddress(): string
     {
@@ -132,7 +132,7 @@ class SandboxData
     }
 
     /**
-     * 设置IP地址
+     * Set IP address
      */
     public function setIpAddress(string $ipAddress): self
     {
@@ -141,7 +141,7 @@ class SandboxData
     }
 
     /**
-     * 获取额外数据.
+     * Get extra data.
      */
     public function getExtraData(): array
     {
@@ -149,7 +149,7 @@ class SandboxData
     }
 
     /**
-     * 设置额外数据.
+     * Set extra data.
      */
     public function setExtraData(array $extraData): self
     {
@@ -158,7 +158,7 @@ class SandboxData
     }
 
     /**
-     * 获取额外数据中的指定字段.
+     * Get specified field from extra data.
      * @param null|mixed $default
      */
     public function getExtraValue(string $key, $default = null)
@@ -167,7 +167,7 @@ class SandboxData
     }
 
     /**
-     * 设置额外数据中的指定字段.
+     * Set specified field in extra data.
      * @param mixed $value
      */
     public function setExtraValue(string $key, $value): self

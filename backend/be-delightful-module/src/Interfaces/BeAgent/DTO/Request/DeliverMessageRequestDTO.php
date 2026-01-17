@@ -14,10 +14,10 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class DeliverMessageRequestDTO
 {
     /**
-     * 构造函数.
+     * Constructor.
      *
-     * @param array $metadata 元数据
-     * @param array $payload 消息载荷
+     * @param array $metadata Metadata
+     * @param array $payload Message payload
      */
     public function __construct(
         private array $metadata,
@@ -26,9 +26,9 @@ class DeliverMessageRequestDTO
     }
 
     /**
-     * 从HTTP请求创建DTO.
+     * Create DTO from HTTP request.
      *
-     * @param RequestInterface $request HTTP请求
+     * @param RequestInterface $request HTTP request
      */
     public static function fromRequest(RequestInterface $request): self
     {
@@ -37,7 +37,7 @@ class DeliverMessageRequestDTO
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'message_required');
         }
 
-        // 验证请求包含必要的metadata和payload字段
+        // Validate that request contains necessary metadata and payload fields
         if (! isset($requestData['metadata']) || ! isset($requestData['payload'])) {
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'metadata_and_payload_required');
         }
@@ -46,7 +46,7 @@ class DeliverMessageRequestDTO
     }
 
     /**
-     * 获取元数据.
+     * Get metadata.
      */
     public function getMetadata(): array
     {
@@ -54,9 +54,9 @@ class DeliverMessageRequestDTO
     }
 
     /**
-     * 设置元数据.
+     * Set metadata.
      *
-     * @param array $metadata 元数据
+     * @param array $metadata Metadata
      */
     public function setMetadata(array $metadata): self
     {
@@ -65,7 +65,7 @@ class DeliverMessageRequestDTO
     }
 
     /**
-     * 获取消息载荷.
+     * Get message payload.
      */
     public function getPayload(): array
     {
@@ -73,9 +73,9 @@ class DeliverMessageRequestDTO
     }
 
     /**
-     * 设置消息载荷.
+     * Set message payload.
      *
-     * @param array $payload 消息载荷
+     * @param array $payload Message payload
      */
     public function setPayload(array $payload): self
     {

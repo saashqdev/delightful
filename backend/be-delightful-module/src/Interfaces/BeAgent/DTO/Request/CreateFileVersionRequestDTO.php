@@ -10,17 +10,17 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use App\Infrastructure\Core\AbstractRequestDTO;
 
 /**
- * 创建文件版本请求 DTO.
+ * Create file version request DTO.
  */
 class CreateFileVersionRequestDTO extends AbstractRequestDTO
 {
     /**
-     * 文件Key.
+     * File key.
      */
     protected string $fileKey = '';
 
     /**
-     * 编辑类型.
+     * Edit type.
      */
     protected int $editType = 1;
 
@@ -45,7 +45,7 @@ class CreateFileVersionRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 获取验证规则.
+     * Get validation rules.
      */
     protected static function getHyperfValidationRules(): array
     {
@@ -56,7 +56,7 @@ class CreateFileVersionRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 获取验证失败的自定义错误信息.
+     * Get custom error messages for validation failures.
      */
     protected static function getHyperfValidationMessage(): array
     {

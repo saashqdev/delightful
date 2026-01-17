@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
 /**
- * 沙箱文件保存请求类
- * 用于调用沙箱的 /api/v1/files/edit 接口.
+ * Sandbox file save request class
+ * Used to call the sandbox /api/v1/files/edit endpoint.
  */
 class SaveFilesRequest
 {
@@ -21,7 +21,7 @@ class SaveFilesRequest
     }
 
     /**
-     * 创建文件保存请求
+     * Create a file save request
      */
     public static function create(array $files): self
     {
@@ -29,7 +29,7 @@ class SaveFilesRequest
     }
 
     /**
-     * 从应用层数据创建请求
+     * Create request from application-level file data
      */
     public static function fromFileData(array $fileDataList): self
     {
@@ -48,7 +48,7 @@ class SaveFilesRequest
     }
 
     /**
-     * 转换为数组格式（用于API调用）.
+     * Convert to array format (for API call)
      */
     public function toArray(): array
     {
@@ -58,7 +58,7 @@ class SaveFilesRequest
     }
 
     /**
-     * 获取文件列表.
+     * Get file list.
      */
     public function getFiles(): array
     {
@@ -66,7 +66,7 @@ class SaveFilesRequest
     }
 
     /**
-     * 获取文件数量.
+     * Get file count.
      */
     public function getFileCount(): int
     {

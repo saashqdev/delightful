@@ -10,15 +10,15 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\R
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant\SandboxStatus;
 
 /**
- * 批量沙箱状态结果类
- * 专门处理批量沙箱状态查询结果.
+ * Batch sandbox status result
+ * Handles batched sandbox status query results.
  */
 class BatchStatusResult extends GatewayResult
 {
     private array $sandboxStatuses = [];
 
     /**
-     * 从API响应创建批量状态结果.
+     * Create batch status result from API response.
      */
     public static function fromApiResponse(array $response): self
     {
@@ -28,8 +28,7 @@ class BatchStatusResult extends GatewayResult
             $response['data'] ?? []
         );
 
-        // 解析批量状态数据
-        // 根据文档，data 字段直接是沙箱状态数组
+        // Parse batch status data; per docs, data is directly the sandbox status array
         $data = $response['data'] ?? [];
         if (is_array($data)) {
             $result->sandboxStatuses = $data;
@@ -39,7 +38,7 @@ class BatchStatusResult extends GatewayResult
     }
 
     /**
-     * 获取所有沙箱状态
+     * Get all sandbox statuses
      */
     public function getSandboxStatuses(): array
     {
@@ -47,7 +46,7 @@ class BatchStatusResult extends GatewayResult
     }
 
     /**
-     * 获取指定沙箱的状态
+     * Get status for a specific sandbox
      */
     public function getSandboxStatus(string $sandboxId): ?string
     {
@@ -63,7 +62,7 @@ class BatchStatusResult extends GatewayResult
     }
 
     /**
-     * 检查指定沙箱是否运行中.
+     * Check whether a specific sandbox is running.
      */
     public function isSandboxRunning(string $sandboxId): bool
     {
@@ -72,7 +71,7 @@ class BatchStatusResult extends GatewayResult
     }
 
     /**
-     * 获取运行中的沙箱列表.
+     * Get list of running sandboxes.
      */
     public function getRunningSandboxes(): array
     {
@@ -89,7 +88,7 @@ class BatchStatusResult extends GatewayResult
     }
 
     /**
-     * 获取运行中的沙箱ID列表.
+     * Get IDs of running sandboxes.
      */
     public function getRunningSandboxIds(): array
     {
@@ -106,7 +105,7 @@ class BatchStatusResult extends GatewayResult
     }
 
     /**
-     * 获取沙箱总数.
+     * Get total sandbox count.
      */
     public function getTotalCount(): int
     {
@@ -114,7 +113,7 @@ class BatchStatusResult extends GatewayResult
     }
 
     /**
-     * 获取运行中沙箱数量.
+     * Get running sandbox count.
      */
     public function getRunningCount(): int
     {

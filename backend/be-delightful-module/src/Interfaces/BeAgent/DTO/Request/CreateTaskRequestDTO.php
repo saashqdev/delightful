@@ -12,22 +12,22 @@ use Hyperf\Validation\Request\FormRequest;
 class CreateTaskRequestDTO extends FormRequest
 {
     /**
-     * @var string 聊天话题ID
+     * @var string Chat topic ID
      */
     protected string $chatTopicId = '';
 
     /**
-     * @var string 任务提示词
+     * @var string Task prompt
      */
     protected string $prompt = '';
 
     /**
-     * @var null|string 附件信息（JSON格式）
+     * @var null|string Attachment information (JSON format)
      */
     protected ?string $attachments = null;
 
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public function rules(): array
     {
@@ -39,14 +39,14 @@ class CreateTaskRequestDTO extends FormRequest
     }
 
     /**
-     * 属性名称.
+     * Attribute names.
      */
     public function attributes(): array
     {
         return [
-            'chat_topic_id' => '聊天话题ID',
-            'prompt' => '提示词',
-            'attachments' => '附件信息',
+            'chat_topic_id' => 'Chat topic ID',
+            'prompt' => 'Prompt',
+            'attachments' => 'Attachment information',
         ];
     }
 
@@ -66,7 +66,7 @@ class CreateTaskRequestDTO extends FormRequest
     }
 
     /**
-     * 准备数据.
+     * Prepare data.
      */
     protected function prepareForValidation(): void
     {

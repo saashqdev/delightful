@@ -12,17 +12,17 @@ use App\Infrastructure\Core\AbstractDTO;
 class FileUrlItemDTO extends AbstractDTO
 {
     /**
-     * 文件ID.
+     * File ID.
      */
     public string $fileId;
 
     /**
-     * 文件URL.
+     * File URL.
      */
     public string $fileUrl;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(string $fileId = '', string $fileUrl = '')
     {
@@ -31,7 +31,7 @@ class FileUrlItemDTO extends AbstractDTO
     }
 
     /**
-     * 从数组创建DTO.
+     * Create DTO from array.
      */
     public static function fromArray(array $data): self
     {
@@ -43,8 +43,8 @@ class FileUrlItemDTO extends AbstractDTO
     }
 
     /**
-     * 转换为数组.
-     * 输出保持下划线命名，以保持API兼容性.
+     * Convert to array.
+     * Output uses underscore naming to maintain API compatibility.
      */
     public function toArray(): array
     {

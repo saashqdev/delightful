@@ -14,34 +14,34 @@ class GetTopicAttachmentsRequestDTO
     protected string $topicId;
 
     /**
-     * 非登录用户使用 token 获取信息.
+     * Non-logged-in users use token to get information.
      */
     protected string $token;
 
     /**
-     * 当前页码.
+     * Current page number.
      */
     protected int $page;
 
     /**
-     * 每页数量.
+     * Items per page.
      */
     protected int $pageSize;
 
     /**
-     * 文件类型过滤.
+     * File type filter.
      */
     protected array $fileType = [];
 
     public function __construct(array $data = [], ?string $topicId = null)
     {
-        // 优先使用传入的 topicId 参数
+        // Prioritize the passed topicId parameter
         $this->topicId = $topicId ?? (string) ($data['topic_id'] ?? '');
         $this->page = (int) ($data['page'] ?? 1);
         $this->pageSize = (int) ($data['page_size'] ?? 200);
         $this->token = (string) ($data['token'] ?? '');
 
-        // 处理文件类型，可以接收字符串或数组
+        // Process file type, can accept string or array
         if (isset($data['file_type'])) {
             if (is_array($data['file_type'])) {
                 $this->fileType = $data['file_type'];
@@ -52,10 +52,10 @@ class GetTopicAttachmentsRequestDTO
     }
 
     /**
-     * 从请求创建 DTO.
+     * Create DTO from request.
      *
-     * @param RequestInterface $request 请求对象
-     * @return self 返回一个新的 DTO 实例
+     * @param RequestInterface $request Request object
+     * @return self Returns a new DTO instance
      */
     public static function fromRequest(RequestInterface $request): self
     {
@@ -91,10 +91,10 @@ class GetTopicAttachmentsRequestDTO
     }
 
     /**
-     * 设置话题ID.
+     * Set topic ID.
      *
-     * @param string $topicId 话题ID
-     * @return self 返回当前实例，支持链式调用
+     * @param string $topicId Topic ID
+     * @return self Returns current instance, supports chaining
      */
     public function setTopicId(string $topicId): self
     {
@@ -103,10 +103,10 @@ class GetTopicAttachmentsRequestDTO
     }
 
     /**
-     * 设置当前页码.
+     * Set current page number.
      *
-     * @param int $page 当前页码
-     * @return self 返回当前实例，支持链式调用
+     * @param int $page Current page number
+     * @return self Returns current instance, supports chaining
      */
     public function setPage(int $page): self
     {
@@ -115,10 +115,10 @@ class GetTopicAttachmentsRequestDTO
     }
 
     /**
-     * 设置每页数量.
+     * Set items per page.
      *
-     * @param int $pageSize 每页数量
-     * @return self 返回当前实例，支持链式调用
+     * @param int $pageSize Items per page
+     * @return self Returns current instance, supports chaining
      */
     public function setPageSize(int $pageSize): self
     {
@@ -127,10 +127,10 @@ class GetTopicAttachmentsRequestDTO
     }
 
     /**
-     * 设置文件类型过滤.
+     * Set file type filter.
      *
-     * @param array $fileType 文件类型过滤数组
-     * @return self 返回当前实例，支持链式调用
+     * @param array $fileType File type filter array
+     * @return self Returns current instance, supports chaining
      */
     public function setFileType(array $fileType): self
     {
@@ -139,10 +139,10 @@ class GetTopicAttachmentsRequestDTO
     }
 
     /**
-     * 设置访问令牌.
+     * Set access token.
      *
-     * @param string $token 访问令牌
-     * @return self 返回当前实例，支持链式调用
+     * @param string $token Access token
+     * @return self Returns current instance, supports chaining
      */
     public function setToken(string $token): self
     {

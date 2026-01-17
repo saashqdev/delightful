@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * 错误码范围:51300-51400.
+ * Error code range: 51300-51400.
  */
 enum ShareErrorCode: int
 {

@@ -10,42 +10,42 @@ namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item;
 use App\Domain\Chat\Entity\AbstractEntity;
 
 /**
- * 工具实体类.
+ * Tool entity class.
  */
 class BeAgentTool extends AbstractEntity
 {
     /**
-     * 工具ID.
+     * Tool ID.
      */
     protected ?string $id = null;
 
     /**
-     * 工具名称.
+     * Tool name.
      */
     protected ?string $name = null;
 
     /**
-     * 工具动作.
+     * Tool action.
      */
     protected ?string $action = null;
 
     /**
-     * 工具状态.
+     * Tool status.
      */
     protected ?string $status = null;
 
     /**
-     * 工具备注.
+     * Tool remark.
      */
     protected ?string $remark = null;
 
     /**
-     * 工具详情.
+     * Tool detail.
      */
     protected ?array $detail = null;
 
     /**
-     * 工具附件.
+     * Tool attachments.
      */
     protected ?array $attachments = null;
 

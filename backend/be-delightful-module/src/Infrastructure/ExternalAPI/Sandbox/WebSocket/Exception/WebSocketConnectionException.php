@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\Sandbox\WebSocket\E
 use RuntimeException;
 
 /**
- * WebSocket连接相关异常.
+ * WebSocket connection-related exception.
  */
 class WebSocketConnectionException extends RuntimeException
 {

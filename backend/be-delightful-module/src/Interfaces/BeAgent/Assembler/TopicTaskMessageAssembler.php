@@ -11,12 +11,12 @@ use Delightful\BeDelightful\Domain\BeAgent\Event\TopicTaskMessageEvent;
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\TopicTaskMessageDTO;
 
 /**
- * 话题任务消息装配器.
+ * Topic task message assembler.
  */
 class TopicTaskMessageAssembler
 {
     /**
-     * 将DTO转换为领域事件.
+     * Convert DTO to domain event.
      */
     public static function toEvent(TopicTaskMessageDTO $dto): TopicTaskMessageEvent
     {
@@ -24,7 +24,7 @@ class TopicTaskMessageAssembler
     }
 
     /**
-     * 将领域事件转换为DTO.
+     * Convert domain event to DTO.
      */
     public static function toDTO(TopicTaskMessageEvent $event): TopicTaskMessageDTO
     {

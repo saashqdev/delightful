@@ -12,47 +12,47 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class GetUserUsageRequestDTO
 {
     /**
-     * @var int 页码
+     * @var int Page number
      */
     protected int $page = 1;
 
     /**
-     * @var int 每页大小
+     * @var int Page size
      */
     protected int $pageSize = 100;
 
     /**
-     * @var string 机构编码
+     * @var string Organization code
      */
     protected string $organizationCode = '';
 
     /**
-     * @var string 用户名称
+     * @var string User name
      */
     protected string $userName = '';
 
     /**
-     * @var string 话题名称
+     * @var string Topic name
      */
     protected string $topicName = '';
 
     /**
-     * @var string 话题状态
+     * @var string Topic status
      */
     protected string $topicStatus = '';
 
     /**
-     * @var string 话题ID
+     * @var string Topic ID
      */
     protected string $topicId = '';
 
     /**
-     * @var string 沙盒ID
+     * @var string Sandbox ID
      */
     protected string $sandboxId = '';
 
     /**
-     * 从请求数组构造.
+     * Construct from request array.
      */
     public function __construct(array $data = [])
     {
@@ -67,7 +67,7 @@ class GetUserUsageRequestDTO
     }
 
     /**
-     * 从 HTTP 请求对象创建实例.
+     * Create instance from HTTP request object.
      */
     public static function fromRequest(RequestInterface $request): self
     {

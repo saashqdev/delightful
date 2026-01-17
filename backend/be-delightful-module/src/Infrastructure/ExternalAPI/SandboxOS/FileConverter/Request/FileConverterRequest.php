@@ -11,7 +11,7 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ConvertType;
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Contract\RequestInterface;
 
 /**
- * 文件转换请求
+ * File conversion request
  */
 class FileConverterRequest implements RequestInterface
 {
@@ -123,7 +123,7 @@ class FileConverterRequest implements RequestInterface
             'task_key' => $this->taskKey,
         ];
 
-        // 添加用户相关字段（只有当字段不为空时才包含）
+        // Add user-related fields only when present
         if (! empty($this->userId)) {
             $result['user_id'] = $this->userId;
         }
@@ -136,12 +136,12 @@ class FileConverterRequest implements RequestInterface
             $result['topic_id'] = $this->topicId;
         }
 
-        // 只有当 options 不为空时才包含该字段
+        // Include options only when non-empty
         if (! empty($this->options)) {
             $result['options'] = $this->options;
         }
 
-        // 只有当 stsTemporaryCredential 不为空时才包含该字段
+        // Include stsTemporaryCredential only when non-empty
         if (! empty($this->stsTemporaryCredential)) {
             $result['sts_temporary_credential'] = $this->stsTemporaryCredential;
         }

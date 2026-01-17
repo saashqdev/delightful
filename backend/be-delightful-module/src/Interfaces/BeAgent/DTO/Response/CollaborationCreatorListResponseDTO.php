@@ -10,19 +10,19 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 协作项目创建者列表响应 DTO.
+ * Collaboration project creator list response DTO.
  */
 class CollaborationCreatorListResponseDTO extends AbstractDTO
 {
     /**
-     * @var CollaborationCreatorItemDTO[] 创建者列表
+     * @var CollaborationCreatorItemDTO[] Creator list
      */
     protected array $creators = [];
 
     /**
-     * 从用户实体数组创建响应DTO.
+     * Create response DTO from user entity array.
      *
-     * @param array $userEntities 用户实体数组
+     * @param array $userEntities User entity array
      */
     public static function fromUserEntities(array $userEntities): self
     {
@@ -38,7 +38,7 @@ class CollaborationCreatorListResponseDTO extends AbstractDTO
     }
 
     /**
-     * 创建空的响应DTO.
+     * Create empty response DTO.
      */
     public static function fromEmpty(): self
     {
@@ -46,7 +46,7 @@ class CollaborationCreatorListResponseDTO extends AbstractDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -54,7 +54,7 @@ class CollaborationCreatorListResponseDTO extends AbstractDTO
     }
 
     /**
-     * 获取创建者列表.
+     * Get creator list.
      *
      * @return CollaborationCreatorItemDTO[]
      */
@@ -64,7 +64,7 @@ class CollaborationCreatorListResponseDTO extends AbstractDTO
     }
 
     /**
-     * 设置创建者列表.
+     * Set creator list.
      *
      * @param CollaborationCreatorItemDTO[] $creators
      */

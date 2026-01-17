@@ -12,17 +12,17 @@ use Hyperf\Validation\Request\FormRequest;
 class UpdateTaskStatusRequestDTO extends FormRequest
 {
     /**
-     * @var string 任务ID
+     * @var string Task ID
      */
     protected string $taskId = '';
 
     /**
-     * @var string 任务状态
+     * @var string Task status
      */
     protected string $status = '';
 
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public function rules(): array
     {
@@ -33,18 +33,18 @@ class UpdateTaskStatusRequestDTO extends FormRequest
     }
 
     /**
-     * 属性名称.
+     * Attribute names.
      */
     public function attributes(): array
     {
         return [
-            'task_id' => '任务ID',
-            'status' => '任务状态',
+            'task_id' => 'Task ID',
+            'status' => 'Task status',
         ];
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): string
     {
@@ -52,7 +52,7 @@ class UpdateTaskStatusRequestDTO extends FormRequest
     }
 
     /**
-     * 获取任务状态
+     * Get task status
      */
     public function getStatus(): string
     {
@@ -72,7 +72,7 @@ class UpdateTaskStatusRequestDTO extends FormRequest
     }
 
     /**
-     * 准备数据.
+     * Prepare data.
      */
     protected function prepareForValidation(): void
     {

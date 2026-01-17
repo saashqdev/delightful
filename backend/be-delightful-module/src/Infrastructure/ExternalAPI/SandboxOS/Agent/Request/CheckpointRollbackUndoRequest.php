@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request;
 
 /**
- * Checkpoint回滚撤销请求类
- * 严格按照沙箱通信文档的checkpoint回滚撤销请求格式.
+ * Checkpoint rollback undo request class
+ * Strictly follows the checkpoint rollback undo request format in the sandbox communication documentation.
  */
 class CheckpointRollbackUndoRequest
 {
     /**
-     * 创建一个checkpoint回滚撤销请求对象
+     * Create a checkpoint rollback undo request object
      */
     public static function create(): self
     {
@@ -22,8 +22,8 @@ class CheckpointRollbackUndoRequest
     }
 
     /**
-     * 转换为API请求数组
-     * 根据沙箱通信文档的checkpoint回滚撤销请求格式（空请求体）.
+     * Convert to API request array
+     * According to checkpoint rollback undo request format in sandbox communication documentation (empty request body).
      */
     public function toArray(): array
     {

@@ -17,7 +17,7 @@ use Throwable;
 
 class WebSocketClient
 {
-    // WebSocket帧类型常量
+    // WebSocket frame type constants
     private const OPCODE_PING = 9;
 
     private const OPCODE_PONG = 10;
@@ -46,15 +46,15 @@ class WebSocketClient
     }
 
     /**
-     * 建立WebSocket连接.
+     * Establish WebSocket connection.
      *
-     * @throws WebSocketConnectionException 连接失败时抛出
+     * @throws WebSocketConnectionException Thrown if connection fails
      */
     public function connect(): void
     {
         $urlParts = parse_url($this->wsUrl);
         if ($urlParts === false) {
-            throw new WebSocketConnectionException('无效的WebSocket URL');
+            throw new WebSocketConnectionException('Invalid WebSocket URL');
         }
 
         $host = $urlParts['host'] ?? '';
@@ -63,14 +63,14 @@ class WebSocketClient
         $query = isset($urlParts['query']) ? '?' . $urlParts['query'] : '';
 
         if (empty($host)) {
-            throw new WebSocketConnectionException('WebSocket URL缺少主机地址');
+            throw new WebSocketConnectionException('WebSocket URL missing host address');
         }
 
         try {
             $this->client = new Client();
             $request = Psr7::createRequest('GET', $path . $query);
 
-            // 添加token到HTTP请求头
+            // Add token to HTTP request header
             if ($this->token) {
                 $request = $request->withHeader('token', $this->token);
             }
@@ -80,13 +80,13 @@ class WebSocketClient
             $this->isConnected = true;
             $this->lastPongTime = time();
 
-            $this->logger->info(sprintf('已连接到WebSocket: %s', $this->wsUrl), [
+            $this->logger->info(sprintf('Connected to WebSocket: %s', $this->wsUrl), [
                 'id' => $this->id,
             ]);
         } catch (Throwable $e) {
             $this->isConnected = false;
             throw new WebSocketConnectionException(
-                sprintf('WebSocket连接失败: %s', $e->getMessage()),
+                sprintf('WebSocket connection failed: %s', $e->getMessage()),
                 0,
                 $e
             );
@@ -94,7 +94,7 @@ class WebSocketClient
     }
 
     /**
-     * 断开WebSocket连接.
+     * Disconnect WebSocket connection.
      */
     public function disconnect(): void
     {
@@ -103,17 +103,17 @@ class WebSocketClient
             try {
                 $this->client->close();
                 $this->isConnected = false;
-                $this->logger->info(sprintf('WebSocket连接已断开: %s', $this->wsUrl));
+                $this->logger->info(sprintf('WebSocket connection disconnected: %s', $this->wsUrl));
             } catch (Throwable $e) {
-                $this->logger->warning(sprintf('关闭WebSocket连接失败: %s', $e->getMessage()));
+                $this->logger->warning(sprintf('Failed to close WebSocket connection: %s', $e->getMessage()));
             }
         }
     }
 
     /**
-     * 检查WebSocket连接是否已建立.
+     * Check if WebSocket connection is established.
      *
-     * @return bool 连接状态
+     * @return bool Connection status
      */
     public function isConnected(): bool
     {
@@ -121,15 +121,15 @@ class WebSocketClient
     }
 
     /**
-     * 发送WebSocket消息.
+     * Send WebSocket message.
      *
-     * @param array $data 要发送的消息数据
-     * @throws WebSocketConnectionException 发送失败时抛出
+     * @param array $data Message data to send
+     * @throws WebSocketConnectionException Thrown if sending fails
      */
     public function send(array $data): void
     {
         if (! $this->isConnected()) {
-            throw new WebSocketConnectionException('WebSocket未连接');
+            throw new WebSocketConnectionException('WebSocket not connected');
         }
 
         try {
@@ -138,7 +138,7 @@ class WebSocketClient
             $this->client?->sendWebSocketFrame($message);
         } catch (Throwable $e) {
             throw new WebSocketConnectionException(
-                sprintf('发送消息失败: %s', $e->getMessage()),
+                sprintf('Failed to send message: %s', $e->getMessage()),
                 0,
                 $e
             );
@@ -146,15 +146,15 @@ class WebSocketClient
     }
 
     /**
-     * 接收WebSocket消息.
+     * Receive WebSocket message.
      *
-     * @return null|array 接收到的消息数据或null（超时/无消息）
-     * @throws WebSocketConnectionException 接收失败时抛出
+     * @return null|array Received message data or null (timeout/no message)
+     * @throws WebSocketConnectionException Thrown if receiving fails
      */
     public function receive(): ?array
     {
         if (! $this->isConnected()) {
-            throw new WebSocketConnectionException('WebSocket未连接');
+            throw new WebSocketConnectionException('WebSocket not connected');
         }
 
         try {
@@ -163,18 +163,18 @@ class WebSocketClient
                 return null;
             }
 
-            // 处理Pong帧
+            // Handle Pong frame
             if ($frame->getOpcode() === self::OPCODE_PONG) {
                 $this->lastPongTime = time();
                 $this->logger->debug(sprintf(
-                    '收到Pong帧响应，ID: %s，时间: %s',
+                    'Received Pong frame, ID: %s, Time: %s',
                     $this->id,
                     date('Y-m-d H:i:s')
                 ));
-                return null; // Pong帧不需要传递给上层应用
+                return null; // Pong frame does not need to be passed to upper layer application
             }
 
-            // 处理Ping帧 - 自动响应Pong
+            // Handle Ping frame - auto respond with Pong
             if ($frame->getOpcode() === self::OPCODE_PING) {
                 try {
                     $pongFrame = Psr7::createWebSocketFrame(
@@ -185,34 +185,34 @@ class WebSocketClient
                     );
                     $this->client?->sendWebSocketFrame($pongFrame);
                     $this->logger->debug(sprintf(
-                        '收到Ping帧并自动响应Pong，ID: %s',
+                        'Received Ping frame and auto responded with Pong, ID: %s',
                         $this->id
                     ));
                 } catch (Throwable $e) {
-                    $this->logger->warning('响应Pong失败: ' . $e->getMessage());
+                    $this->logger->warning('Failed to respond with Pong: ' . $e->getMessage());
                 }
-                return null; // Ping帧不需要传递给上层应用
+                return null; // Ping frame does not need to be passed to upper layer application
             }
 
-            // 处理文本消息
+            // Handle text message
             if ($frame->getOpcode() === self::OPCODE_TEXT) {
                 $messageText = (string) $frame->getPayloadData();
                 return Json::decode($messageText);
             }
 
-            // 处理二进制消息
+            // Handle binary message
             if ($frame->getOpcode() === self::OPCODE_BINARY) {
                 $this->logger->debug(sprintf(
-                    '收到二进制帧，长度: %d，ID: %s',
+                    'Received binary frame, length: %d, ID: %s',
                     $frame->getPayloadLength(),
                     $this->id
                 ));
-                // 尝试将二进制数据解析为JSON
+                // Try to parse binary data as JSON
                 try {
                     $messageText = (string) $frame->getPayloadData();
                     return Json::decode($messageText);
                 } catch (Throwable $e) {
-                    $this->logger->warning('无法解析二进制帧为JSON: ' . $e->getMessage());
+                    $this->logger->warning('Cannot parse binary frame as JSON: ' . $e->getMessage());
                     return [
                         'type' => 'binary',
                         'data' => base64_encode((string) $frame->getPayloadData()),
@@ -221,14 +221,14 @@ class WebSocketClient
             }
 
             $this->logger->debug(sprintf(
-                '收到未知类型的帧，操作码: %d，ID: %s',
+                'Received frame of unknown type, opcode: %d, ID: %s',
                 $frame->getOpcode(),
                 $this->id
             ));
             return null;
         } catch (Throwable $e) {
             throw new WebSocketConnectionException(
-                sprintf('接收消息失败: %s', $e->getMessage()),
+                sprintf('Failed to receive message: %s', $e->getMessage()),
                 0,
                 $e
             );
@@ -236,9 +236,9 @@ class WebSocketClient
     }
 
     /**
-     * 发送WebSocket协议级Ping帧.
+     * Send WebSocket protocol-level Ping frame.
      *
-     * @return bool 发送是否成功
+     * @return bool Whether sending was successful
      */
     public function sendPing(): bool
     {
@@ -247,7 +247,7 @@ class WebSocketClient
         }
 
         try {
-            // 创建Ping帧
+            // Create Ping frame
             $pingFrame = Psr7::createWebSocketFrame(
                 opcode: self::OPCODE_PING,
                 payloadData: $this->config->getHeartbeatMessage(),
@@ -257,14 +257,14 @@ class WebSocketClient
 
             $this->client?->sendWebSocketFrame($pingFrame);
             $this->logger->debug(sprintf(
-                '发送WebSocket Ping帧，ID: %s',
+                'Sent WebSocket Ping frame, ID: %s',
                 $this->id
             ));
 
             return true;
         } catch (Throwable $e) {
             $this->logger->warning(sprintf(
-                '发送Ping帧失败: %s，ID: %s',
+                'Failed to send Ping frame: %s, ID: %s',
                 $e->getMessage(),
                 $this->id
             ));
@@ -273,9 +273,9 @@ class WebSocketClient
     }
 
     /**
-     * 检查Pong响应是否超时.
+     * Check if Pong response has timed out.
      *
-     * @return bool 如果超时返回true，否则返回false
+     * @return bool Return true if timeout, otherwise false
      */
     public function isPongTimedOut(): bool
     {
@@ -284,7 +284,7 @@ class WebSocketClient
     }
 
     /**
-     * 获取最后一次收到Pong帧的时间戳.
+     * Get the timestamp of the last received Pong frame.
      */
     public function getLastPongTime(): int
     {
@@ -292,9 +292,9 @@ class WebSocketClient
     }
 
     /**
-     * 设置读取超时时间.
+     * Set read timeout.
      *
-     * @param int $timeout 超时时间（秒）
+     * @param int $timeout Timeout (seconds)
      */
     public function setReadTimeout(int $timeout): void
     {
@@ -303,7 +303,7 @@ class WebSocketClient
     }
 
     /**
-     * 获取当前设置的读取超时时间.
+     * Get the current read timeout setting.
      */
     public function getReadTimeout(): int
     {

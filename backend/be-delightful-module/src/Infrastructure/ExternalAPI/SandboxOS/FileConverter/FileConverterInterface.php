@@ -13,17 +13,17 @@ use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\FileConverter\R
 interface FileConverterInterface
 {
     /**
-     * 转换文件.
+        * Convert files.
      */
     public function convert(string $userId, string $organizationCode, string $sandboxId, string $projectId, FileConverterRequest $request, string $workDir): FileConverterResponse;
 
     /**
-     * 查询转换结果.
+     * Query conversion result.
      *
-     * @param string $sandboxId 沙箱ID
-     * @param string $projectId 项目ID
-     * @param string $taskKey 任务key
-     * @return FileConverterResponse 转换结果
+     * @param string $sandboxId Sandbox ID
+     * @param string $projectId Project ID
+     * @param string $taskKey Task key
+     * @return FileConverterResponse Conversion result
      */
     public function queryConvertResult(string $sandboxId, string $projectId, string $taskKey): FileConverterResponse;
 }

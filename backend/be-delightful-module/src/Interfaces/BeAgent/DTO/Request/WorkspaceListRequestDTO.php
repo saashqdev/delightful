@@ -14,22 +14,22 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class WorkspaceListRequestDTO extends AbstractDTO
 {
     /**
-     * 是否归档 0否 1是.
+     * Is archived: 0=no, 1=yes.
      */
     public ?int $isArchived = null;
 
     /**
-     * 页码
+     * Page number
      */
     public int $page = 1;
 
     /**
-     * 每页数量.
+     * Items per page.
      */
     public int $pageSize = 10;
 
     /**
-     * 从请求中创建DTO.
+     * Create DTO from request.
      */
     public static function fromRequest(RequestInterface $request): self
     {
@@ -44,7 +44,7 @@ class WorkspaceListRequestDTO extends AbstractDTO
     }
 
     /**
-     * 构建查询条件.
+     * Build query conditions.
      */
     public function buildConditions(): array
     {
@@ -53,7 +53,7 @@ class WorkspaceListRequestDTO extends AbstractDTO
         if ($this->isArchived !== null) {
             $conditions['is_archived'] = $this->isArchived;
         } else {
-            // 默认归档
+            // Default: not archived
             $conditions['is_archived'] = WorkspaceArchiveStatus::NotArchived->value;
         }
 

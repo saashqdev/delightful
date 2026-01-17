@@ -20,7 +20,7 @@ class CreateScriptTaskRequestDTO extends AbstractRequestDTO
     protected string $sandboxId = '';
 
     /**
-     * 验证规则.
+     * Validation rules.
      */
     public static function getHyperfValidationRules(): array
     {
@@ -34,21 +34,21 @@ class CreateScriptTaskRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'task_id.string' => '任务ID不能为空',
-            'script_name.required' => '脚本名称不能为空',
-            'arguments.required' => '脚本参数不能为空',
+            'task_id.string' => 'Task ID cannot be empty',
+            'script_name.required' => 'Script name cannot be empty',
+            'arguments.required' => 'Script arguments cannot be empty',
         ];
     }
 
     /**
-     * 属性名称.
+     * Attribute names.
      */
     public function attributes(): array
     {
         return [
-            'task_id' => '任务ID',
-            'script_name' => '脚本名称',
-            'arguments' => '脚本参数',
+            'task_id' => 'Task ID',
+            'script_name' => 'Script name',
+            'arguments' => 'Script arguments',
         ];
     }
 

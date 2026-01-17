@@ -10,22 +10,22 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use App\Infrastructure\Core\AbstractRequestDTO;
 
 /**
- * 复制话题请求DTO.
+ * Duplicate topic request DTO.
  */
 class DuplicateTopicRequestDTO extends AbstractRequestDTO
 {
     /**
-     * 目标消息ID.
+     * Target message ID.
      */
     public string $targetMessageId = '';
 
     /**
-     * 新话题名称.
+     * New topic name.
      */
     public string $newTopicName = '';
 
     /**
-     * 获取目标消息ID.
+     * Get target message ID.
      */
     public function getTargetMessageId(): string
     {
@@ -33,7 +33,7 @@ class DuplicateTopicRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 获取新话题名称.
+     * Get new topic name.
      */
     public function getNewTopicName(): string
     {

@@ -10,8 +10,8 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Req
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 
 /**
- * 聊天消息请求类
- * 严格按照沙箱通信文档的聊天消息请求格式.
+ * Chat message request class
+ * Strictly follows the chat message request format in sandbox communication documentation.
  */
 class ChatMessageRequest
 {
@@ -31,7 +31,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 创建一个聊天消息请求对象
+     * Create a chat message request object
      */
     public static function create(
         string $messageId,
@@ -72,7 +72,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取提示内容.
+     * Get prompt content.
      */
     public function getPrompt(): string
     {
@@ -80,7 +80,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置提示内容.
+     * Set prompt content.
      */
     public function setPrompt(string $prompt): self
     {
@@ -89,7 +89,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取任务模式.
+     * Get task mode.
      */
     public function getTaskMode(): string
     {
@@ -97,7 +97,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置任务模式.
+     * Set task mode.
      */
     public function setTaskMode(string $taskMode): self
     {
@@ -106,7 +106,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取Agent模式.
+     * Get Agent mode.
      */
     public function getAgentMode(): string
     {
@@ -114,7 +114,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置Agent模式.
+     * Set Agent mode.
      */
     public function setAgentMode(string $agentMode): self
     {
@@ -123,7 +123,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取附件.
+     * Get attachments.
      */
     public function getAttachments(): array
     {
@@ -131,7 +131,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置附件.
+     * Set attachments.
      */
     public function setAttachments(array $attachments): self
     {
@@ -140,7 +140,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置用户ID.
+     * Set user ID.
      */
     public function setUserId(string $userId): self
     {
@@ -149,7 +149,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取用户ID.
+     * Get user ID.
      */
     public function getUserId(): string
     {
@@ -157,7 +157,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置任务ID.
+     * Set task ID.
      */
     public function setTaskId(string $taskId): self
     {
@@ -166,7 +166,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取任务ID.
+     * Get task ID.
      */
     public function getTaskId(): string
     {
@@ -174,7 +174,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置消息ID.
+     * Set message ID.
      */
     public function setMessageId(string $messageId): self
     {
@@ -183,7 +183,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取消息ID.
+     * Get message ID.
      */
     public function getMessageId(): string
     {
@@ -191,7 +191,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取提及.
+     * Get mentions.
      */
     public function getMentions(): array
     {
@@ -200,7 +200,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置提及.
+     * Set mentions.
      */
     public function setMentions(array $mentions): self
     {
@@ -209,7 +209,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取模型ID.
+     * Get model ID.
      */
     public function getModelId(): string
     {
@@ -217,7 +217,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置模型ID.
+     * Set model ID.
      */
     public function setModelId(string $modelId): self
     {
@@ -226,7 +226,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 获取动态配置.
+     * Get dynamic configuration.
      */
     public function getDynamicConfig(): array
     {
@@ -234,7 +234,7 @@ class ChatMessageRequest
     }
 
     /**
-     * 设置动态配置.
+     * Set dynamic configuration.
      */
     public function setDynamicConfig(array $dynamicConfig): self
     {
@@ -243,8 +243,8 @@ class ChatMessageRequest
     }
 
     /**
-     * 转换为API请求数组
-     * 根据沙箱通信文档的聊天消息请求格式.
+     * Convert to API request array
+     * According to chat message request format in sandbox communication documentation.
      */
     public function toArray(): array
     {

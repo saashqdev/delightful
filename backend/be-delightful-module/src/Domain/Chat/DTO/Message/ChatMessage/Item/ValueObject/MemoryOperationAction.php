@@ -8,26 +8,26 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject;
 
 /**
- * 记忆操作动作枚举.
+ * Memory operation action enum.
  */
 enum MemoryOperationAction: string
 {
-    case ACCEPT = 'accept';   // 接受记忆建议
-    case REJECT = 'reject';   // 拒绝记忆建议
+    case ACCEPT = 'accept';   // Accept memory suggestion
+    case REJECT = 'reject';   // Reject memory suggestion
 
     /**
-     * 获取操作描述.
+     * Get operation description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::ACCEPT => '接受',
-            self::REJECT => '拒绝',
+            self::ACCEPT => 'Accept',
+            self::REJECT => 'Reject',
         };
     }
 
     /**
-     * 获取所有操作值.
+     * Get all operation values.
      */
     public static function getAllValues(): array
     {
@@ -35,7 +35,7 @@ enum MemoryOperationAction: string
     }
 
     /**
-     * 检查操作是否有效.
+     * Check if operation is valid.
      */
     public static function isValid(string $action): bool
     {

@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\Utils;
 
 /**
- * 可逆密码加密解密工具.
+ * Reversible password encryption and decryption utility.
  */
 class PasswordCrypt
 {
     /**
-     * 加密方法.
+     * Encrypt method.
      *
-     * @param string $password 原始密码
-     * @return string 加密后的密码
+     * @param string $password Original password
+     * @return string Encrypted password
      */
     public static function encrypt(string $password): string
     {
@@ -24,7 +24,7 @@ class PasswordCrypt
             return '';
         }
 
-        // 使用 openssl 加密
+        // Encrypt using openssl
         $method = 'AES-256-CBC';
         $key = self::getEncryptKey();
         $iv = substr(hash('sha256', self::getEncryptIv()), 0, 16);
@@ -34,10 +34,10 @@ class PasswordCrypt
     }
 
     /**
-     * 解密方法.
+     * Decrypt method.
      *
-     * @param string $encryptedPassword 加密后的密码
-     * @return string 解密后的原始密码
+     * @param string $encryptedPassword Encrypted password
+     * @return string Decrypted original password
      */
     public static function decrypt(string $encryptedPassword): string
     {
@@ -45,7 +45,7 @@ class PasswordCrypt
             return '';
         }
 
-        // 使用 openssl 解密
+        // Decrypt using openssl
         $method = 'AES-256-CBC';
         $key = self::getEncryptKey();
         $iv = substr(hash('sha256', self::getEncryptIv()), 0, 16);
@@ -56,9 +56,9 @@ class PasswordCrypt
     }
 
     /**
-     * 获取加密密钥.
+     * Get encryption key.
      *
-     * @return string 加密密钥
+     * @return string Encryption key
      */
     private static function getEncryptKey(): string
     {
@@ -66,9 +66,9 @@ class PasswordCrypt
     }
 
     /**
-     * 获取加密向量.
+     * Get encryption initialization vector.
      *
-     * @return string 加密向量
+     * @return string Encryption IV
      */
     private static function getEncryptIv(): string
     {

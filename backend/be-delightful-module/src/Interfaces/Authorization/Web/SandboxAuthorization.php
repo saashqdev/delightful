@@ -25,7 +25,7 @@ class SandboxAuthorization extends DelightfulUserAuthorization
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
 
-        // todo 这里以后要改成动态 token
+        // TODO: This should be changed to dynamic token in the future
         $sandboxToken = config('be-delightful.sandbox.token', '');
         if (empty($sandboxToken) || $sandboxToken !== $token) {
             ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');

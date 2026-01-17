@@ -14,7 +14,7 @@ class CheckpointRollbackResponseDTO
     protected string $message = '';
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct()
     {

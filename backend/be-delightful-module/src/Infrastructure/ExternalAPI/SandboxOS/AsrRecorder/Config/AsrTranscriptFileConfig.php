@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Config;
 
 /**
- * ASR 流式识别文件配置
- * 用于 finishTask 接口的流式识别文件处理配置.
+ * ASR streaming transcript file config
+ * Streaming transcript file handling for the finishTask API.
  */
 readonly class AsrTranscriptFileConfig
 {
     /**
-     * @param string $sourcePath 源文件路径（相对于 workspace）
-     * @param string $action 操作类型（delete - 直接删除）
+     * @param string $sourcePath Source file path (relative to workspace)
+     * @param string $action Operation type (delete - remove directly)
      */
     public function __construct(
         private string $sourcePath,
@@ -34,7 +34,7 @@ readonly class AsrTranscriptFileConfig
     }
 
     /**
-     * 转换为数组（用于 HTTP 请求）.
+     * Convert to array (for HTTP request).
      */
     public function toArray(): array
     {

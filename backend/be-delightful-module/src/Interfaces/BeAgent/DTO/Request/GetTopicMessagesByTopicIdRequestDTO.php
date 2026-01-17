@@ -15,32 +15,32 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class GetTopicMessagesByTopicIdRequestDTO
 {
     /**
-     * 有效的排序方向.
+     * Valid sort directions.
      */
     private const VALID_SORT_DIRECTIONS = ['asc', 'desc'];
 
     /**
-     * @var int 话题ID
+     * @var int Topic ID
      */
     protected int $topicId = 0;
 
     /**
-     * @var int 页码
+     * @var int Page number
      */
     protected int $page = 1;
 
     /**
-     * @var int 每页大小
+     * @var int Page size
      */
     protected int $pageSize = 20;
 
     /**
-     * @var string 排序方向
+     * @var string Sort direction
      */
     protected string $sortDirection = 'asc';
 
     /**
-     * 从请求数组构造.
+     * Construct from request array.
      */
     public function __construct(array $data = [])
     {
@@ -51,11 +51,11 @@ class GetTopicMessagesByTopicIdRequestDTO
     }
 
     /**
-     * 从 HTTP 请求对象创建实例.
+     * Create instance from HTTP request object.
      */
     public static function fromRequest(RequestInterface $request): self
     {
-        $id = $request->route('id'); // 从路由参数获取 topic_id
+        $id = $request->route('id'); // Get topic_id from route parameter
 
         return new self([
             'topic_id' => $id,
@@ -66,7 +66,7 @@ class GetTopicMessagesByTopicIdRequestDTO
     }
 
     /**
-     * 获取话题ID.
+     * Get topic ID.
      */
     public function getTopicId(): int
     {
@@ -74,7 +74,7 @@ class GetTopicMessagesByTopicIdRequestDTO
     }
 
     /**
-     * 获取页码.
+     * Get page number.
      */
     public function getPage(): int
     {
@@ -82,7 +82,7 @@ class GetTopicMessagesByTopicIdRequestDTO
     }
 
     /**
-     * 获取每页大小.
+     * Get page size.
      */
     public function getPageSize(): int
     {
@@ -90,7 +90,7 @@ class GetTopicMessagesByTopicIdRequestDTO
     }
 
     /**
-     * 获取排序方向.
+     * Get sort direction.
      */
     public function getSortDirection(): string
     {
@@ -98,10 +98,10 @@ class GetTopicMessagesByTopicIdRequestDTO
     }
 
     /**
-     * 设置排序方向.
+     * Set sort direction.
      *
-     * @param string $sortDirection 排序方向
-     * @throws Exception 如果排序方向无效则抛出异常
+     * @param string $sortDirection Sort direction
+     * @throws Exception Throws exception if sort direction is invalid
      */
     protected function setSortDirection(string $sortDirection): void
     {

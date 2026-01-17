@@ -8,32 +8,32 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 /**
- * 话题复制响应DTO.
+ * Topic duplication response DTO.
  */
 class DuplicateTopicResponseDTO
 {
     /**
-     * 任务键.
+     * Task key.
      */
     protected string $taskKey;
 
     /**
-     * 任务状态
+     * Task status
      */
     protected string $status;
 
     /**
-     * 新话题ID.
+     * New topic ID.
      */
     protected ?string $topicId;
 
     /**
-     * 状态消息.
+     * Status message.
      */
     protected string $message;
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(
         string $taskKey,
@@ -48,7 +48,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 转换为数组.
+     * Convert to array.
      */
     public function toArray(): array
     {
@@ -61,7 +61,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 获取任务键.
+     * Get task key.
      */
     public function getTaskKey(): string
     {
@@ -69,7 +69,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 设置任务键.
+     * Set task key.
      */
     public function setTaskKey(string $taskKey): self
     {
@@ -78,7 +78,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 获取任务状态
+     * Get task status
      */
     public function getStatus(): string
     {
@@ -86,7 +86,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 设置任务状态
+     * Set task status
      */
     public function setStatus(string $status): self
     {
@@ -95,7 +95,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 获取新话题ID.
+     * Get new topic ID.
      */
     public function getTopicId(): ?string
     {
@@ -103,7 +103,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 设置新话题ID.
+     * Set new topic ID.
      */
     public function setTopicId(?string $topicId): self
     {
@@ -112,7 +112,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 获取状态消息.
+     * Get status message.
      */
     public function getMessage(): string
     {
@@ -120,7 +120,7 @@ class DuplicateTopicResponseDTO
     }
 
     /**
-     * 设置状态消息.
+     * Set status message.
      */
     public function setMessage(string $message): self
     {

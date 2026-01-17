@@ -25,8 +25,8 @@ use Exception;
 use Hyperf\Logger\LoggerFactory;
 
 /**
- * 沙箱Agent服务实现
- * 通过Gateway转发机制与Agent通信
+ * Sandbox Agent service implementation
+ * Communicates with Agent via Gateway proxy
  */
 class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInterface
 {
@@ -38,7 +38,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 初始化Agent.
+     * Initialize an Agent.
      */
     public function initAgent(string $sandboxId, InitAgentRequest $request): AgentResponse
     {
@@ -51,7 +51,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到Agent API
+            // Forward to Agent API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -91,7 +91,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 发送聊天消息给Agent.
+     * Send a chat message to the Agent.
      */
     public function sendChatMessage(string $sandboxId, ChatMessageRequest $request): AgentResponse
     {
@@ -104,7 +104,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到Agent API
+            // Forward to Agent API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -137,7 +137,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 发送中断消息给Agent.
+     * Send an interrupt message to the Agent.
      */
     public function sendInterruptMessage(string $sandboxId, InterruptRequest $request): AgentResponse
     {
@@ -149,7 +149,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到Agent API
+            // Forward to Agent API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -189,7 +189,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 获取工作区状态.
+     * Get workspace status.
      */
     public function getWorkspaceStatus(string $sandboxId): AgentResponse
     {
@@ -198,7 +198,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到Agent API
+            // Forward to Agent API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'GET',
@@ -229,7 +229,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 保存文件到沙箱.
+     * Save files to the sandbox.
      */
     public function saveFiles(string $sandboxId, SaveFilesRequest $request): AgentResponse
     {
@@ -239,7 +239,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到沙箱的文件编辑API
+            // Forward to sandbox file edit API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -285,7 +285,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到沙箱的文件编辑API
+            // Forward to sandbox file edit API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -325,7 +325,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 回滚到指定的checkpoint.
+     * Roll back to the specified checkpoint.
      */
     public function rollbackCheckpoint(string $sandboxId, CheckpointRollbackRequest $request): AgentResponse
     {
@@ -335,7 +335,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到沙箱的checkpoint回滚API
+            // Forward to sandbox checkpoint rollback API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -377,7 +377,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 开始回滚到指定的checkpoint（标记状态而非删除）.
+     * Start rollback to the specified checkpoint (mark state without deletion).
      */
     public function rollbackCheckpointStart(string $sandboxId, CheckpointRollbackStartRequest $request): AgentResponse
     {
@@ -387,7 +387,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到沙箱的checkpoint回滚开始API
+            // Forward to sandbox checkpoint rollback start API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -429,7 +429,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 提交回滚到指定的checkpoint（物理删除撤回状态的消息）.
+     * Commit rollback to the specified checkpoint (physically delete withdrawn messages).
      */
     public function rollbackCheckpointCommit(string $sandboxId, CheckpointRollbackCommitRequest $request): AgentResponse
     {
@@ -438,7 +438,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到沙箱的checkpoint回滚提交API
+            // Forward to sandbox checkpoint rollback commit API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -477,7 +477,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 撤销回滚沙箱checkpoint（将撤回状态的消息恢复为正常状态）.
+     * Undo sandbox checkpoint rollback (restore withdrawn messages to normal state).
      */
     public function rollbackCheckpointUndo(string $sandboxId, CheckpointRollbackUndoRequest $request): AgentResponse
     {
@@ -486,7 +486,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到沙箱的checkpoint回滚撤销API
+            // Forward to sandbox checkpoint rollback undo API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -525,7 +525,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
     }
 
     /**
-     * 检查回滚到指定checkpoint的可行性.
+     * Check feasibility of rolling back to the specified checkpoint.
      */
     public function rollbackCheckpointCheck(string $sandboxId, CheckpointRollbackCheckRequest $request): AgentResponse
     {
@@ -535,7 +535,7 @@ class SandboxAgentService extends AbstractSandboxOS implements SandboxAgentInter
         ]);
 
         try {
-            // 通过Gateway转发到沙箱的checkpoint回滚检查API
+            // Forward to sandbox checkpoint rollback check API via Gateway
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',

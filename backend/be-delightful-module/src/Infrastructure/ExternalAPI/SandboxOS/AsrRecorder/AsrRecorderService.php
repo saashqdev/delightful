@@ -18,7 +18,7 @@ use Exception;
 use Hyperf\Logger\LoggerFactory;
 
 /**
- * ASR 录音服务实现.
+ * ASR recording service implementation.
  */
 class AsrRecorderService extends AbstractSandboxOS implements AsrRecorderInterface
 {
@@ -43,14 +43,14 @@ class AsrRecorderService extends AbstractSandboxOS implements AsrRecorderInterfa
             'workspace_dir' => $workspaceDir,
         ];
 
-        // 添加笔记文件配置（start 阶段只传 source_path）
+        // Add note file config (start phase only sends source_path)
         if ($noteFileConfig !== null) {
             $requestData['note_file'] = [
                 'source_path' => $noteFileConfig->getSourcePath(),
             ];
         }
 
-        // 添加流式识别文件配置（start 阶段只传 source_path）
+        // Add streaming transcript file config (start phase only sends source_path)
         if ($transcriptFileConfig !== null) {
             $requestData['transcript_file'] = [
                 'source_path' => $transcriptFileConfig->getSourcePath(),
@@ -67,7 +67,7 @@ class AsrRecorderService extends AbstractSandboxOS implements AsrRecorderInterfa
                 'transcript_file_source_path' => $transcriptFileConfig?->getSourcePath(),
             ]);
 
-            // 调用沙箱 API
+            // Call sandbox API
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -116,19 +116,19 @@ class AsrRecorderService extends AbstractSandboxOS implements AsrRecorderInterfa
         ?AsrNoteFileConfig $noteFileConfig = null,
         ?AsrTranscriptFileConfig $transcriptFileConfig = null
     ): AsrRecorderResponse {
-        // 构建请求数据（V2 结构化版本）
+        // Build request data (V2 structured version)
         $requestData = [
             'task_key' => $taskKey,
             'workspace_dir' => $workspaceDir,
             'audio' => $audioConfig->toArray(),
         ];
 
-        // 添加笔记文件配置
+        // Add note file config
         if ($noteFileConfig !== null) {
             $requestData['note_file'] = $noteFileConfig->toArray();
         }
 
-        // 添加流式识别文件配置
+        // Add streaming transcript file config
         if ($transcriptFileConfig !== null) {
             $requestData['transcript_file'] = $transcriptFileConfig->toArray();
         }
@@ -143,7 +143,7 @@ class AsrRecorderService extends AbstractSandboxOS implements AsrRecorderInterfa
                 'transcript_file_config' => $transcriptFileConfig?->toArray(),
             ]);
 
-            // 调用沙箱 API
+            // Call sandbox API
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',
@@ -202,7 +202,7 @@ class AsrRecorderService extends AbstractSandboxOS implements AsrRecorderInterfa
                 'workspace_dir' => $workspaceDir,
             ]);
 
-            // 调用沙箱 API
+            // Call sandbox API
             $result = $this->gateway->proxySandboxRequest(
                 $sandboxId,
                 'POST',

@@ -14,34 +14,34 @@ class GetProjectAttachmentsRequestDTO
     protected string $projectId;
 
     /**
-     * 当前页码.
+     * Current page number.
      */
     protected int $page;
 
     /**
-     * 每页数量.
+     * Items per page.
      */
     protected int $pageSize;
 
     /**
-     * 文件类型过滤.
+     * File type filter.
      */
     protected array $fileType = [];
 
     /**
-     * 访问令牌（用于无登录模式）.
+     * Access token (for non-login mode).
      */
     protected ?string $token = null;
 
     public function __construct(array $data = [], ?string $projectId = null)
     {
-        // 优先使用传入的 projectId 参数
+        // Prioritize the passed projectId parameter
         $this->projectId = $projectId ?? (string) ($data['project_id'] ?? '');
         $this->page = (int) ($data['page'] ?? 1);
         $this->pageSize = (int) ($data['page_size'] ?? 200);
         $this->token = $data['token'] ?? null;
 
-        // 处理文件类型，可以接收字符串或数组
+        // Process file type, can accept string or array
         if (isset($data['file_type'])) {
             if (is_array($data['file_type'])) {
                 $this->fileType = $data['file_type'];
@@ -52,10 +52,10 @@ class GetProjectAttachmentsRequestDTO
     }
 
     /**
-     * 从请求创建 DTO.
+     * Create DTO from request.
      *
-     * @param RequestInterface $request 请求对象
-     * @return self 返回一个新的 DTO 实例
+     * @param RequestInterface $request Request object
+     * @return self Returns a new DTO instance
      */
     public static function fromRequest(RequestInterface $request): self
     {
@@ -86,10 +86,10 @@ class GetProjectAttachmentsRequestDTO
     }
 
     /**
-     * 设置项目ID.
+     * Set project ID.
      *
-     * @param string $projectId 项目ID
-     * @return self 返回当前实例，支持链式调用
+     * @param string $projectId Project ID
+     * @return self Returns current instance, supports chaining
      */
     public function setProjectId(string $projectId): self
     {
@@ -98,10 +98,10 @@ class GetProjectAttachmentsRequestDTO
     }
 
     /**
-     * 设置当前页码.
+     * Set current page number.
      *
-     * @param int $page 当前页码
-     * @return self 返回当前实例，支持链式调用
+     * @param int $page Current page number
+     * @return self Returns current instance, supports chaining
      */
     public function setPage(int $page): self
     {
@@ -110,10 +110,10 @@ class GetProjectAttachmentsRequestDTO
     }
 
     /**
-     * 设置每页数量.
+     * Set items per page.
      *
-     * @param int $pageSize 每页数量
-     * @return self 返回当前实例，支持链式调用
+     * @param int $pageSize Items per page
+     * @return self Returns current instance, supports chaining
      */
     public function setPageSize(int $pageSize): self
     {
@@ -122,10 +122,10 @@ class GetProjectAttachmentsRequestDTO
     }
 
     /**
-     * 设置文件类型过滤.
+     * Set file type filter.
      *
-     * @param array $fileType 文件类型过滤数组
-     * @return self 返回当前实例，支持链式调用
+     * @param array $fileType File type filter array
+     * @return self Returns current instance, supports chaining
      */
     public function setFileType(array $fileType): self
     {
@@ -134,9 +134,9 @@ class GetProjectAttachmentsRequestDTO
     }
 
     /**
-     * 获取访问令牌.
+     * Get access token.
      *
-     * @return null|string 访问令牌
+     * @return null|string Access token
      */
     public function getToken(): ?string
     {
@@ -144,10 +144,10 @@ class GetProjectAttachmentsRequestDTO
     }
 
     /**
-     * 设置访问令牌.
+     * Set access token.
      *
-     * @param null|string $token 访问令牌
-     * @return self 返回当前实例，支持链式调用
+     * @param null|string $token Access token
+     * @return self Returns current instance, supports chaining
      */
     public function setToken(?string $token): self
     {

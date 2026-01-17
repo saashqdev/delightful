@@ -10,22 +10,22 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use App\Infrastructure\Core\AbstractRequestDTO;
 
 /**
- * 获取文件版本列表请求DTO.
+ * Get file version list request DTO.
  */
 class GetFileVersionsRequestDTO extends AbstractRequestDTO
 {
     /**
-     * 页码（从1开始）.
+     * Page number (starting from 1).
      */
     public int $page = 1;
 
     /**
-     * 每页数量.
+     * Items per page.
      */
     public int $pageSize = 10;
 
     /**
-     * 文件ID.
+     * File ID.
      */
     protected int $fileId = 0;
 
@@ -60,7 +60,7 @@ class GetFileVersionsRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 获取验证规则.
+     * Get validation rules.
      */
     protected static function getHyperfValidationRules(): array
     {
@@ -72,7 +72,7 @@ class GetFileVersionsRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 获取验证失败的自定义错误信息.
+     * Get custom error messages for validation failures.
      */
     protected static function getHyperfValidationMessage(): array
     {

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Response;
 
 /**
- * 沙箱文件保存响应类
- * 解析沙箱 /api/v1/files/edit 接口的返回数据.
+ * Sandbox file save response class
+ * Parses the sandbox /api/v1/files/edit response data.
  */
 class SaveFilesResponse
 {
@@ -24,7 +24,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 从API响应数据创建响应对象
+     * Create a response object from API response data
      */
     public static function fromApiResponse(array $data): self
     {
@@ -35,7 +35,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取编辑摘要
+     * Get edit summary
      */
     public function getEditSummary(): array
     {
@@ -43,7 +43,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取详细结果列表.
+     * Get detailed result list.
      */
     public function getResults(): array
     {
@@ -51,7 +51,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 检查是否所有文件都成功
+     * Check whether all files succeeded
      */
     public function isAllSuccess(): bool
     {
@@ -59,7 +59,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 检查是否所有文件都上传成功
+     * Check whether all files were uploaded successfully
      */
     public function isAllUploaded(): bool
     {
@@ -67,7 +67,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取成功数量.
+     * Get success count.
      */
     public function getSuccessCount(): int
     {
@@ -75,7 +75,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取失败数量.
+     * Get failure count.
      */
     public function getFailedCount(): int
     {
@@ -83,7 +83,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取总数量.
+     * Get total count.
      */
     public function getTotalCount(): int
     {
@@ -91,7 +91,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取上传成功数量.
+     * Get upload success count.
      */
     public function getUploadSuccessCount(): int
     {
@@ -99,7 +99,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 转换为数组格式（保持与原接口兼容）.
+     * Convert to array format (compatible with the original API)
      */
     public function toArray(): array
     {
@@ -110,7 +110,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取失败的文件列表.
+     * Get the list of failed files.
      */
     public function getFailedFiles(): array
     {
@@ -120,7 +120,7 @@ class SaveFilesResponse
     }
 
     /**
-     * 获取成功的文件列表.
+     * Get the list of successful files.
      */
     public function getSuccessFiles(): array
     {

@@ -10,8 +10,8 @@ namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\R
 use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant\SandboxStatus;
 
 /**
- * 沙箱状态结果类
- * 专门处理单个沙箱状态查询结果.
+ * Sandbox status result
+ * Handles single sandbox status query results.
  */
 class SandboxStatusResult extends GatewayResult
 {
@@ -20,7 +20,7 @@ class SandboxStatusResult extends GatewayResult
     private ?string $status = null;
 
     /**
-     * 从API响应创建沙箱状态结果.
+     * Create sandbox status result from API response.
      */
     public static function fromApiResponse(array $response): self
     {
@@ -30,7 +30,7 @@ class SandboxStatusResult extends GatewayResult
             $response['data'] ?? []
         );
 
-        // 解析沙箱状态数据
+        // Parse sandbox status data
         $data = $response['data'] ?? [];
         if (isset($data['sandbox_id'])) {
             $result->sandboxId = $data['sandbox_id'];
@@ -43,7 +43,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 获取沙箱ID.
+     * Get sandbox ID.
      */
     public function getSandboxId(): ?string
     {
@@ -51,7 +51,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 获取沙箱状态
+     * Get sandbox status
      */
     public function getStatus(): ?string
     {
@@ -59,7 +59,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 设置沙箱ID.
+     * Set sandbox ID.
      */
     public function setSandboxId(?string $sandboxId): self
     {
@@ -68,7 +68,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 设置沙箱状态
+     * Set sandbox status
      */
     public function setStatus(?string $status): self
     {
@@ -77,7 +77,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 检查沙箱是否运行中.
+     * Check whether the sandbox is running.
      */
     public function isRunning(): bool
     {
@@ -86,7 +86,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 检查沙箱是否待启动.
+     * Check whether the sandbox is pending.
      */
     public function isPending(): bool
     {
@@ -94,7 +94,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 检查沙箱是否已退出.
+     * Check whether the sandbox is exited.
      */
     public function isExited(): bool
     {
@@ -102,7 +102,7 @@ class SandboxStatusResult extends GatewayResult
     }
 
     /**
-     * 检查状态是否有效.
+     * Check whether the status is valid.
      */
     public function hasValidStatus(): bool
     {

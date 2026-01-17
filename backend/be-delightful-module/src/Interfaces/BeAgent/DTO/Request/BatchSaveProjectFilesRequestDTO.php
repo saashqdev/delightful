@@ -10,22 +10,22 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 use App\Infrastructure\Core\AbstractRequestDTO;
 
 /**
- * 批量保存项目文件请求 DTO.
+ * Batch save project files request DTO.
  */
 class BatchSaveProjectFilesRequestDTO extends AbstractRequestDTO
 {
     /**
-     * 项目ID.
+     * Project ID.
      */
     public string $projectId = '';
 
     /**
-     * 父目录ID.
+     * Parent directory ID.
      */
     public string $parentId = '';
 
     /**
-     * 文件数组.
+     * Files array.
      */
     public array $files = [];
 
@@ -45,9 +45,9 @@ class BatchSaveProjectFilesRequestDTO extends AbstractRequestDTO
     }
 
     /**
-     * 从请求中创建DTO实例.
+     * Create DTO instance from request.
      *
-     * @param mixed $request 请求对象或数组
+     * @param mixed $request Request object or array
      * @phpstan-ignore-next-line
      */
     public static function fromRequest($request): static

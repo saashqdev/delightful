@@ -59,7 +59,7 @@ class MoveFileRequestDTO extends AbstractRequestDTO
     {
         return [
             'target_parent_id' => 'nullable|string',
-            'pre_file_id' => 'string', // -1表示末尾，0表示第一位，>0表示指定位置
+            'pre_file_id' => 'string', // -1=last position, 0=first position, >0=specific position
             'target_project_id' => 'nullable|string',
             'keep_both_file_ids' => 'nullable|array',
             'keep_both_file_ids.*' => 'string',

@@ -16,7 +16,7 @@ use Delightful\BeDelightful\Infrastructure\Utils\ShareCodeGenerator;
 use Exception;
 
 /**
- * 资源分享领域服务.
+ * Resource share domain service.
  */
 class ResourceShareDomainService
 {
@@ -30,61 +30,61 @@ class ResourceShareDomainService
         try {
             return $this->shareRepository->save($shareEntity);
         } catch (Exception $e) {
-            // 重新抛出异常
+            // Re-throw exception
             ExceptionBuilder::throw(ShareErrorCode::OPERATION_FAILED, 'share.cancel_failed: ' . $shareEntity->getId());
         }
     }
 
     /**
-     * 取消分享（逻辑删除）.
+     * Cancel share (logical delete).
      *
-     * @param int $shareId 分享ID
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织代码
-     * @return bool 是否取消成功
-     * @throws Exception 如果取消分享失败
+     * @param int $shareId Share ID
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @return bool Whether cancel was successful
+     * @throws Exception If cancel share fails
      */
     public function cancelShare(int $shareId, string $userId, string $organizationCode): bool
     {
-        // 1. 获取分享实体
+        // 1. Get share entity
         $shareEntity = $this->shareRepository->getShareById($shareId);
 
-        // 2. 验证分享是否存在
+        // 2. Verify share exists
         if (! $shareEntity) {
             ExceptionBuilder::throw(ShareErrorCode::NOT_FOUND, 'share.not_found', [$shareId]);
         }
 
-        // 3. 验证是否有权限取消分享（只有分享创建者或管理员可以取消）
+        // 3. Verify permission to cancel share (only creator or admin can cancel)
         if ($shareEntity->getCreatedUid() !== $userId) {
-            // 这里可以添加额外的权限检查，例如检查用户是否是管理员
+            // Here can add additional permission check, e.g. check if user is admin
             ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.no_permission_to_cancel', [$shareId]);
         }
 
-        // 4. 验证组织是否匹配
+        // 4. Verify organization matches
         if ($shareEntity->getOrganizationCode() !== $organizationCode) {
             ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.organization_mismatch', [$shareId]);
         }
 
-        // 5. 设置删除时间和更新信息
+        // 5. Set deletion time and update info
         $shareEntity->setDeletedAt(date('Y-m-d H:i:s'));
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
         $shareEntity->setUpdatedUid($userId);
 
-        // 6. 保存实体
+        // 6. Save entity
         try {
             $this->shareRepository->save($shareEntity);
             return true;
         } catch (Exception $e) {
-            // 重新抛出异常
+            // Re-throw exception
             ExceptionBuilder::throw(ShareErrorCode::OPERATION_FAILED, 'share.cancel_failed', [$shareId]);
         }
     }
 
     /**
-     * 获取分享详情.
+     * Get share details.
      *
-     * @param string $resourceId 资源ID
-     * @return null|ResourceShareEntity 分享实体
+     * @param string $resourceId Resource ID
+     * @return null|ResourceShareEntity Share entity
      */
     public function getShareByResourceId(string $resourceId): ?ResourceShareEntity
     {
@@ -97,11 +97,11 @@ class ResourceShareDomainService
     }
 
     /**
-     * 获取有效的分享
-     * 有效分享是指未删除且未过期的分享.
+     * Get valid share
+     * Valid share is a share that is not deleted and not expired.
      *
-     * @param string $shareId 分享ID
-     * @return null|ResourceShareEntity 分享实体
+     * @param string $shareId Share ID
+     * @return null|ResourceShareEntity Share entity
      */
     public function getValidShareById(string $shareId): ?ResourceShareEntity
     {
@@ -115,10 +115,10 @@ class ResourceShareDomainService
     }
 
     /**
-     * 通过分享码获取有效分享.
+     * Get valid share by share code.
      *
-     * @param string $shareCode 分享码
-     * @return null|ResourceShareEntity 分享实体
+     * @param string $shareCode Share code
+     * @return null|ResourceShareEntity Share entity
      */
     public function getValidShareByCode(string $shareCode): ?ResourceShareEntity
     {
@@ -132,10 +132,10 @@ class ResourceShareDomainService
     }
 
     /**
-     * 增加分享查看次数.
+     * Increment share view count.
      *
-     * @param string $shareId 分享ID
-     * @return bool 是否成功
+     * @param string $shareId Share ID
+     * @return bool Whether successful
      */
     public function incrementViewCount(string $shareId): bool
     {
@@ -153,20 +153,20 @@ class ResourceShareDomainService
 
     public function getShareList(int $page, int $pageSize, array $conditions = [], string $select = '*'): array
     {
-        // 定义需要返回的字段列表
+        // Define list of fields to return
         $allowedFields = [
             'id', 'resource_id', 'resource_name', 'resource_type',
             'created_at', 'created_uid', 'share_type',
         ];
 
         $result = $this->shareRepository->paginate($conditions, $page, $pageSize);
-        // 过滤字段
+        // Filter fields
         $filteredList = [];
         foreach ($result['list'] as $item) {
             $filteredItem = [];
-            // 将实体转为数组
+            // Convert entity to array
             $itemArray = $item instanceof ResourceShareEntity ? $item->toArray() : (array) $item;
-            // 只保留允许的字段
+            // Keep only allowed fields
             foreach ($allowedFields as $field) {
                 if (isset($itemArray[$field])) {
                     $filteredItem[$field] = $itemArray[$field];
@@ -179,17 +179,17 @@ class ResourceShareDomainService
     }
 
     /**
-     * 保存分享（创建或更新）.
+     * Save share (create or update).
      *
-     * @param string $resourceId 资源ID
-     * @param int $resourceType 资源类型
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织代码
-     * @param array $attributes 额外属性
-     * @param null|string $password 密码（可选）
-     * @param null|int $expireDays 过期时间（可选）
-     * @return ResourceShareEntity 保存后的分享实体
-     * @throws Exception 如果操作失败
+     * @param string $resourceId Resource ID
+     * @param int $resourceType Resource type
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @param array $attributes Extra attributes
+     * @param null|string $password Password (optional)
+     * @param null|int $expireDays Expiration time (optional)
+     * @return ResourceShareEntity Saved share entity
+     * @throws Exception If operation fails
      */
     public function saveShare(
         string $resourceId,
@@ -200,15 +200,15 @@ class ResourceShareDomainService
         ?string $password = null,
         ?int $expireDays = null
     ): ResourceShareEntity {
-        // 1. 查找是否已存在分享
+        // 1. Check if share already exists
         $shareEntity = $this->findExistingShare($resourceId, $resourceType, '');
 
-        // 2. 如果不存在，创建新的分享实体
+        // 2. If not exists, create new share entity
         if (! $shareEntity) {
-            // 生成分享码 - 优先使用传入的share_code，使用 resource_id 代替 分享码
+            // Generate share code - priority to passed share_code, use resource_id as fallback
             $shareCode = $attributes['share_code'] ?? $resourceId;
 
-            // 构建基本分享数据
+            // Build basic share data
             $shareData = [
                 'resource_id' => $resourceId,
                 'resource_type' => $resourceType,
@@ -219,50 +219,50 @@ class ResourceShareDomainService
                 'organization_code' => $organizationCode,
             ];
 
-            // 创建新实体
+            // Create new entity
             $shareEntity = new ResourceShareEntity($shareData);
 
-            // 设置创建时间
+            // Set creation time
             $shareEntity->setCreatedAt(date('Y-m-d H:i:s'));
         }
 
-        // 3. 更新实体属性（无论是新建还是已存在）
-        // 更新分享类型（如果提供）
+        // 3. Update entity properties (whether new or existing)
+        // Update share type (if provided)
         if (isset($attributes['share_type'])) {
             $shareEntity->setShareType($attributes['share_type']);
         }
 
-        // 更新额外属性（如果提供）
+        // Update extra attributes (if provided)
         if (isset($attributes['extra'])) {
             $shareEntity->setExtra($attributes['extra']);
         }
 
-        // 设置密码（如果提供）
+        // Set password (if provided)
         if (! empty($password)) {
-            // 使用可逆加密替代单向哈希
+            // Use reversible encryption instead of one-way hashing
             $shareEntity->setPassword(PasswordCrypt::encrypt($password));
         } else {
             $shareEntity->setPassword('');
         }
         $shareEntity->setIsPasswordEnabled((bool) $shareEntity->getPassword());
 
-        // 设置过期时间（如果提供）
+        // Set expiration time (if provided)
         if ($expireDays > 0) {
-            // 确保过期时间是字符串格式
+            // Ensure expiration time is in string format
             $expireAt = date('Y-m-d H:i:s', strtotime("+{$expireDays} days"));
             $shareEntity->setExpireAt($expireAt);
         }
 
-        // 设置更新信息
+        // Set update information
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
         $shareEntity->setUpdatedUid($userId);
         $shareEntity->setDeletedAt(null);
 
-        // 4. 保存实体
+        // 4. Save entity
         try {
             return $this->shareRepository->save($shareEntity);
         } catch (Exception $e) {
-            // 重新抛出异常
+            // Re-throw exception
             ExceptionBuilder::throw(
                 ShareErrorCode::OPERATION_FAILED,
                 'share.save_failed',
@@ -272,37 +272,37 @@ class ResourceShareDomainService
     }
 
     /**
-     * 生成分享码.
+     * Generate share code.
      *
-     * @return string 生成的分享码（12位随机字符）
+     * @return string Generated share code (12 random characters)
      */
     public function generateShareCode(): string
     {
         return (new ShareCodeGenerator())
-            ->setCodeLength(12) // 设置为12位
+            ->setCodeLength(12) // Set to 12 digits
             ->generate();
     }
 
     /**
-     * 根据ID重新生成分享码.
+     * Regenerate share code by ID.
      *
-     * @param int $shareId 分享ID
-     * @throws Exception 如果操作失败
+     * @param int $shareId Share ID
+     * @throws Exception If operation fails
      */
     public function regenerateShareCodeById(int $shareId): ResourceShareEntity
     {
-        // 1. 获取分享实体
+        // 1. Get share entity
         $shareEntity = $this->shareRepository->getShareById($shareId);
         if (! $shareEntity) {
             ExceptionBuilder::throw(ShareErrorCode::NOT_FOUND);
         }
 
-        // 3. 重新生成分享码
+        // 3. Regenerate share code
         $newShareCode = $this->generateShareCode();
         $shareEntity->setShareCode($newShareCode);
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
 
-        // 4. 保存更新
+        // 4. Save updates
         try {
             $this->shareRepository->save($shareEntity);
             return $shareEntity;
@@ -312,22 +312,22 @@ class ResourceShareDomainService
     }
 
     /**
-     * 修改密码.
+     * Change password.
      *
-     * @param int $shareId 分享ID
-     * @throws Exception 如果操作失败
+     * @param int $shareId Share ID
+     * @throws Exception If operation fails
      */
     public function changePasswordById(int $shareId, string $password): ResourceShareEntity
     {
-        // 1. 获取分享实体
+        // 1. Get share entity
         $shareEntity = $this->shareRepository->getShareById($shareId);
         if (! $shareEntity) {
             ExceptionBuilder::throw(ShareErrorCode::NOT_FOUND);
         }
 
-        // 3. 设置密码
+        // 3. Set password
         if (! empty($password)) {
-            // 使用可逆加密替代单向哈希
+            // Use reversible encryption instead of one-way hashing
             $shareEntity->setPassword(PasswordCrypt::encrypt($password));
         } else {
             $shareEntity->setPassword('');
@@ -335,7 +335,7 @@ class ResourceShareDomainService
         $shareEntity->setIsPasswordEnabled((bool) $shareEntity->getPassword());
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
 
-        // 4. 保存更新
+        // 4. Save updates
         try {
             $this->shareRepository->save($shareEntity);
             return $shareEntity;
@@ -345,10 +345,10 @@ class ResourceShareDomainService
     }
 
     /**
-     * 获取解密后的分享密码
+     * Get decrypted share password
      *
-     * @param ResourceShareEntity $shareEntity 分享实体
-     * @return string 解密后的密码
+     * @param ResourceShareEntity $shareEntity Share entity
+     * @return string Decrypted password
      */
     public function getDecryptedPassword(ResourceShareEntity $shareEntity): string
     {
@@ -361,16 +361,16 @@ class ResourceShareDomainService
     }
 
     /**
-     * 验证分享密码是否正确.
+     * Verify if share password is correct.
      *
-     * @param ResourceShareEntity $shareEntity 分享实体
-     * @param string $password 要验证的密码
-     * @return bool 密码是否正确
+     * @param ResourceShareEntity $shareEntity Share entity
+     * @param string $password Password to verify
+     * @return bool Whether password is correct
      */
     public function verifyPassword(ResourceShareEntity $shareEntity, string $password): bool
     {
         if (empty($shareEntity->getPassword())) {
-            return true; // 无密码分享，直接返回验证通过
+            return true; // No password share, pass verification directly
         }
 
         $decryptedPassword = $this->getDecryptedPassword($shareEntity);
@@ -378,33 +378,33 @@ class ResourceShareDomainService
     }
 
     /**
-     * 切换分享状态（启用/禁用）.
+     * Toggle share status (enable/disable).
      *
-     * @param int $shareId 分享ID
-     * @param bool $enabled 是否启用
-     * @param string $userId 操作用户ID
-     * @return ResourceShareEntity 更新后的分享实体
-     * @throws Exception 如果操作失败
+     * @param int $shareId Share ID
+     * @param bool $enabled Whether to enable
+     * @param string $userId Operating user ID
+     * @return ResourceShareEntity Updated share entity
+     * @throws Exception If operation fails
      */
     public function toggleShareStatus(int $shareId, bool $enabled, string $userId): ResourceShareEntity
     {
-        // 1. 获取分享实体
+        // 1. Get share entity
         $shareEntity = $this->shareRepository->getShareById($shareId);
         if (! $shareEntity) {
             ExceptionBuilder::throw(ShareErrorCode::NOT_FOUND, 'share.not_found', [$shareId]);
         }
 
-        // 2. 权限检查（只有创建者可以操作）
+        // 2. Permission check (only creator can operate)
         if ($shareEntity->getCreatedUid() !== $userId) {
             ExceptionBuilder::throw(ShareErrorCode::PERMISSION_DENIED, 'share.no_permission', [$shareId]);
         }
 
-        // 3. 更新启用状态
+        // 3. Update enable status
         $shareEntity->setIsEnabled($enabled);
         $shareEntity->setUpdatedAt(date('Y-m-d H:i:s'));
         $shareEntity->setUpdatedUid($userId);
 
-        // 4. 保存并返回
+        // 4. Save and return
         try {
             return $this->shareRepository->save($shareEntity);
         } catch (Exception $e) {
@@ -413,11 +413,11 @@ class ResourceShareDomainService
     }
 
     /**
-     * 获取指定资源的分享.
+     * Get share for specified resource.
      *
-     * @param string $resourceId 资源ID
-     * @param int $resourceType 资源类型
-     * @return null|ResourceShareEntity 分享实体
+     * @param string $resourceId Resource ID
+     * @param int $resourceType Resource type
+     * @return null|ResourceShareEntity Share entity
      */
     public function getShareByResource(string $resourceId, int $resourceType): ?ResourceShareEntity
     {
@@ -425,51 +425,51 @@ class ResourceShareDomainService
     }
 
     /**
-     * 删除指定资源的分享.
+     * Delete share for specified resource.
      *
-     * @param string $resourceId 资源ID
-     * @param int $resourceType 资源类型
-     * @param string $userId 用户ID（可选，用于权限检查）
-     * @param bool $forceDelete 是否强制删除（物理删除），默认false为软删除
-     * @return bool 删除是否成功
+     * @param string $resourceId Resource ID
+     * @param int $resourceType Resource type
+     * @param string $userId User ID (optional, for permission check)
+     * @param bool $forceDelete Whether to force delete (physical delete), default false for soft delete
+     * @return bool Whether delete was successful
      */
     public function deleteShareByResource(string $resourceId, int $resourceType, string $userId = '', bool $forceDelete = false): bool
     {
         $shareEntity = $this->shareRepository->getShareByResource($userId, $resourceId, $resourceType);
         if (! $shareEntity) {
-            return true; // 如果不存在，视为删除成功
+            return true; // If not exists, consider delete as successful
         }
 
         return $this->shareRepository->delete($shareEntity->getId(), $forceDelete);
     }
 
     /**
-     * 删除指定分享码的分享.
+     * Delete share for specified share code.
      *
-     * @param string $shareCode 分享码
-     * @return bool 删除是否成功
+     * @param string $shareCode Share code
+     * @return bool Whether delete was successful
      */
     public function deleteShareByCode(string $shareCode): bool
     {
         $shareEntity = $this->shareRepository->getShareByCode($shareCode);
         if (! $shareEntity) {
-            return true; // 如果不存在，视为删除成功
+            return true; // If not exists, consider delete as successful
         }
 
         return $this->shareRepository->delete($shareEntity->getId());
     }
 
     /**
-     * 批量删除指定资源类型的分享.
+     * Batch delete shares for specified resource type.
      *
-     * @param string $resourceId 资源ID
-     * @param int $resourceType 资源类型
-     * @return bool 删除是否成功
+     * @param string $resourceId Resource ID
+     * @param int $resourceType Resource type
+     * @return bool Whether delete was successful
      */
     public function deleteAllSharesByResource(string $resourceId, int $resourceType): bool
     {
         try {
-            // 这里可以扩展为批量删除，目前先用单个删除
+            // Can extend to batch delete here, currently use single delete
             $shareEntity = $this->shareRepository->getShareByResource('', $resourceId, $resourceType);
             if (! $shareEntity) {
                 return true;
@@ -481,12 +481,12 @@ class ResourceShareDomainService
     }
 
     /**
-     * 查找已存在的分享.
+     * Find existing share.
      *
-     * @param string $resourceId 资源ID
-     * @param int $resourceType 资源类型
-     * @param string $userId 用户ID
-     * @return null|ResourceShareEntity 如果存在则返回分享实体，否则返回null
+     * @param string $resourceId Resource ID
+     * @param int $resourceType Resource type
+     * @param string $userId User ID
+     * @return null|ResourceShareEntity Return share entity if exists, otherwise null
      */
     protected function findExistingShare(string $resourceId, int $resourceType, string $userId = ''): ?ResourceShareEntity
     {

@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\AsrRecorder\Config;
 
 /**
- * ASR 笔记文件配置
- * 用于 finishTask 接口的笔记文件处理配置.
+ * ASR note file config
+ * Note file handling config for the finishTask API.
  */
 readonly class AsrNoteFileConfig
 {
     /**
-     * @param string $sourcePath 源文件路径（相对于 workspace）
-     * @param string $targetPath 目标文件路径（相对于 workspace）
-     * @param string $action 操作类型（rename_and_move）
+     * @param string $sourcePath Source file path (relative to workspace)
+     * @param string $targetPath Target file path (relative to workspace)
+     * @param string $action Operation type (rename_and_move)
      */
     public function __construct(
         private string $sourcePath,
@@ -41,7 +41,7 @@ readonly class AsrNoteFileConfig
     }
 
     /**
-     * 转换为数组（用于 HTTP 请求）.
+     * Convert to array (for HTTP request).
      */
     public function toArray(): array
     {

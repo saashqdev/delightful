@@ -12,7 +12,7 @@ use Delightful\BeDelightful\Domain\BeAgent\Service\FileEditingDomainService;
 use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
 
 /**
- * 文件编辑状态应用服务
+ * File editing status application service.
  */
 class FileEditingAppService extends AbstractAppService
 {
@@ -23,47 +23,47 @@ class FileEditingAppService extends AbstractAppService
     }
 
     /**
-     * 加入编辑.
+     * Join editing.
      */
     public function joinEditing(RequestContext $requestContext, int $fileId): void
     {
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 权限检查
+        // Permission check
         $fileEntity = $this->taskFileDomainService->getUserFileEntityNoUser($fileId);
         $projectEntity = $this->getAccessibleProjectWithEditor($fileEntity->getProjectId(), $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 委托Domain层处理业务逻辑
+        // Delegate to Domain layer to handle business logic
         $this->fileEditingDomainService->joinEditing($fileId, $userAuthorization->getId(), $projectEntity->getUserOrganizationCode());
     }
 
     /**
-     * 离开编辑.
+     * Leave editing.
      */
     public function leaveEditing(RequestContext $requestContext, int $fileId): void
     {
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 权限检查
+        // Permission check
         $fileEntity = $this->taskFileDomainService->getUserFileEntityNoUser($fileId);
         $projectEntity = $this->getAccessibleProjectWithEditor($fileEntity->getProjectId(), $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 委托Domain层处理业务逻辑
+        // Delegate to Domain layer to handle business logic
         $this->fileEditingDomainService->leaveEditing($fileId, $userAuthorization->getId(), $projectEntity->getUserOrganizationCode());
     }
 
     /**
-     * 获取编辑用户数量.
+     * Get number of editing users.
      */
     public function getEditingUsers(RequestContext $requestContext, int $fileId): int
     {
         $userAuthorization = $requestContext->getUserAuthorization();
 
-        // 权限检查
+        // Permission check
         $fileEntity = $this->taskFileDomainService->getUserFileEntityNoUser($fileId);
         $projectEntity = $this->getAccessibleProject($fileEntity->getProjectId(), $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
 
-        // 委托Domain层查询编辑用户数量
+        // Delegate to Domain layer to query editing users count
         return $this->fileEditingDomainService->getEditingUsersCount($fileId, $projectEntity->getUserOrganizationCode());
     }
 }

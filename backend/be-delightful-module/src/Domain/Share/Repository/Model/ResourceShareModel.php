@@ -40,7 +40,7 @@ class ResourceShareModel extends AbstractModel
     /**
      * 表名.
      */
-    protected ?string $table = 'magic_resource_shares';
+    protected ?string $table = 'delightful_resource_shares';
 
     /**
      * 主键.

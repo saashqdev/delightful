@@ -19,7 +19,7 @@ enum ProjectMode: string
     case REPORT = 'report';            // 研报模式
     case MEETING = 'meeting';          // 会议模式
     case SUMMARY = 'summary';          // 总结模式
-    case BE_DELIGHTFUL = 'super_magic';  // 超级麦吉模式
+    case BE_DELIGHTFUL = 'be_delightful';  // 超级麦吉模式
 
     /**
      * Get all available project modes.

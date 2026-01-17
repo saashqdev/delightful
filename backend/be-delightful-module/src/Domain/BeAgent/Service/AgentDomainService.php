@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicUserInfoAppService;
+use App\Application\Chat\Service\DelightfulUserInfoAppService;
 use App\Application\File\Service\FileAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\DynamicConfig\DynamicConfigManager;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\InitializationMetadataDTO;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
@@ -58,7 +58,7 @@ class AgentDomainService
         private SandboxGatewayInterface $gateway,
         private SandboxAgentInterface $agent,
         private readonly FileAppService $fileAppService,
-        private readonly MagicUserInfoAppService $userInfoAppService,
+        private readonly DelightfulUserInfoAppService $userInfoAppService,
         private readonly CloudFileRepositoryInterface $cloudFileRepository,
         private readonly DynamicConfigManager $dynamicConfigManager,
     ) {
@@ -766,7 +766,7 @@ class AgentDomainService
         $storageType = StorageBucketType::SandBox->value;
         $expires = 3600; // Credential valid for 1 hour
         // Create user authorization object
-        $userAuthorization = new MagicUserAuthorization();
+        $userAuthorization = new DelightfulUserAuthorization();
         $userAuthorization->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         // Use unified FileAppService to get STS Token
         $projectDir = WorkDirectoryUtil::getRootDir($dataIsolation->getCurrentUserId(), $taskContext->getTask()->getProjectId());
@@ -824,7 +824,7 @@ class AgentDomainService
             'metadata' => $messageMetadata->toArray(),
             'task_mode' => $taskContext->getTask()->getTaskMode(),
             'agent_mode' => $taskContext->getAgentMode(),
-            'magic_service_host' => config('be-delightful.sandbox.callback_host', ''),
+            'delightful_service_host' => config('be-delightful.sandbox.callback_host', ''),
             'memory' => $memory,
             'chat_history_dir' => $fullChatWorkDir,
             'work_dir' => $fullWorkDir,

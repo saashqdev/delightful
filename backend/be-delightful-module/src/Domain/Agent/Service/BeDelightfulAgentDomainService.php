@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\Agent\Service;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use DateTime;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
 use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\BuiltinAgent;
 use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
@@ -57,7 +57,7 @@ readonly class BeDelightfulAgentDomainService
             if ($currentCount >= BeDelightfulAgentLimit::MAX_AGENTS_PER_USER) {
                 ExceptionBuilder::throw(
                     BeDelightfulErrorCode::AgentLimitExceeded,
-                    'super_magic.agent.limit_exceeded',
+                    'be_delightful.agent.limit_exceeded',
                     ['limit' => BeDelightfulAgentLimit::MAX_AGENTS_PER_USER]
                 );
             }
@@ -152,7 +152,7 @@ readonly class BeDelightfulAgentDomainService
     {
         $builtinAgent = BuiltinAgent::tryFrom($code);
         if ($builtinAgent) {
-            ExceptionBuilder::throw(BeDelightfulErrorCode::BuiltinAgentNotAllowed, 'super_magic.agent.builtin_not_allowed');
+            ExceptionBuilder::throw(BeDelightfulErrorCode::BuiltinAgentNotAllowed, 'be_delightful.agent.builtin_not_allowed');
         }
     }
 }

@@ -14,12 +14,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 为 magic_super_agent_project 表增加 project_mode 字段
-        Schema::table('magic_super_agent_project', function (Blueprint $table) {
-            if (Schema::hasColumn('magic_super_agent_project', 'project_mode')) {
+        // 为 delightful_be_agent_project 表增加 project_mode 字段
+        Schema::table('delightful_be_agent_project', function (Blueprint $table) {
+            if (Schema::hasColumn('delightful_be_agent_project', 'project_mode')) {
                 return;
             }
-            $table->string('project_mode', 50)->nullable()->default(null)->comment('项目模式: general-通用模式, ppt-PPT模式, data_analysis-数据分析模式, report-研报模式, meeting-会议模式, summary-总结模式, super_magic-超级麦吉模式')->after('current_topic_status');
+            $table->string('project_mode', 50)->nullable()->default(null)->comment('项目模式: general-通用模式, ppt-PPT模式, data_analysis-数据分析模式, report-研报模式, meeting-会议模式, summary-总结模式, be_delightful-超级麦吉模式')->after('current_topic_status');
         });
 
         echo '为项目表添加项目模式字段完成' . PHP_EOL;
@@ -30,8 +30,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 删除 magic_super_agent_project 表的 project_mode 字段
-        Schema::table('magic_super_agent_project', function (Blueprint $table) {
+        // 删除 delightful_be_agent_project 表的 project_mode 字段
+        Schema::table('delightful_be_agent_project', function (Blueprint $table) {
             $table->dropColumn('project_mode');
         });
 

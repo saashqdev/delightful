@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Event\FileBatchMoveEvent;
@@ -33,9 +33,9 @@ use Throwable;
  * Handles asynchronous batch file move operations when dealing with multiple files.
  */
 #[Consumer(
-    exchange: 'super_magic_file_batch_move',
-    routingKey: 'super_magic_file_batch_move',
-    queue: 'super_magic_file_batch_move',
+    exchange: 'be_delightful_file_batch_move',
+    routingKey: 'be_delightful_file_batch_move',
+    queue: 'be_delightful_file_batch_move',
     nums: 1
 )]
 class FileBatchMoveSubscriber extends ConsumerMessage
@@ -450,7 +450,7 @@ class FileBatchMoveSubscriber extends ConsumerMessage
         $this->updateProgress(95, 'Finalizing batch file move operation');
 
         // 发布文件批量移动完成事件
-        $userAuthorization = new MagicUserAuthorization();
+        $userAuthorization = new DelightfulUserAuthorization();
         $userAuthorization->setId($userId);
         $userAuthorization->setOrganizationCode($organizationCode);
 

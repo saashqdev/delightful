@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\ProjectFileConstant;
 use Delightful\BeDelightful\Domain\BeAgent\Event\AttachmentsProcessedEvent;
 use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMetadataDomainService;
@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * AttachmentsProcessedEvent事件监听器 - 处理project.js元数据.
+ * AttachmentsProcessedEvent listener - processes project.js metadata.
  */
 #[AsyncListener]
 #[Listener]

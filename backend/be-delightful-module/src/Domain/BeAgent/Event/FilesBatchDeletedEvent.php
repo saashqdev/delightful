@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 
 /**
  * 文件批量删除事件.
@@ -17,7 +17,7 @@ class FilesBatchDeletedEvent extends AbstractEvent
     public function __construct(
         private readonly int $projectId,
         private readonly array $fileIds,
-        private readonly MagicUserAuthorization $userAuthorization
+        private readonly DelightfulUserAuthorization $userAuthorization
     ) {
         parent::__construct();
     }
@@ -32,7 +32,7 @@ class FilesBatchDeletedEvent extends AbstractEvent
         return $this->fileIds;
     }
 
-    public function getUserAuthorization(): MagicUserAuthorization
+    public function getUserAuthorization(): DelightfulUserAuthorization
     {
         return $this->userAuthorization;
     }

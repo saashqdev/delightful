@@ -36,15 +36,15 @@ class FileVersionAppService extends AbstractAppService
     }
 
     /**
-     * 创建文件版本.
+     * Create file version.
      *
-     * @param CreateFileVersionRequestDTO $requestDTO 请求DTO
-     * @return CreateFileVersionResponseDTO 创建结果
+     * @param CreateFileVersionRequestDTO $requestDTO Request DTO
+     * @return CreateFileVersionResponseDTO Create result
      */
     public function createFileVersion(
         CreateFileVersionRequestDTO $requestDTO
     ): CreateFileVersionResponseDTO {
-        // 获取用户授权信息
+        // Get user authorization information
         $fileKey = $requestDTO->getFileKey();
         $editType = $requestDTO->getEditType();
 
@@ -53,13 +53,13 @@ class FileVersionAppService extends AbstractAppService
             'edit_type' => $editType,
         ]);
 
-        // 验证文件是否存在
+        // Verify file exists
         $fileEntity = $this->taskFileDomainService->getByFileKey($fileKey);
         if (! $fileEntity) {
             ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
         }
 
-        // 验证文件是否为目录
+        // Verify file is not a directory
         if ($fileEntity->getIsDirectory()) {
             ExceptionBuilder::throw(BeAgentErrorCode::FILE_PERMISSION_DENIED, 'file.cannot_version_directory');
         }
@@ -69,7 +69,7 @@ class FileVersionAppService extends AbstractAppService
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.project_not_found');
         }
 
-        // 调用Domain Service创建版本
+        // Call Domain Service to create version
         $versionEntity = $this->taskFileVersionDomainService->createFileVersion($projectEntity->getUserOrganizationCode(), $fileEntity, $editType);
 
         if (! $versionEntity) {
@@ -84,22 +84,22 @@ class FileVersionAppService extends AbstractAppService
             'edit_type' => $editType,
         ]);
 
-        // 返回结果
+        // Return result
         return CreateFileVersionResponseDTO::createEmpty();
     }
 
     /**
-     * 分页获取文件版本列表.
+     * Get file version list with pagination.
      *
-     * @param RequestContext $requestContext 请求上下文
-     * @param GetFileVersionsRequestDTO $requestDTO 请求DTO
-     * @return GetFileVersionsResponseDTO 查询结果
+     * @param RequestContext $requestContext Request context
+     * @param GetFileVersionsRequestDTO $requestDTO Request DTO
+     * @return GetFileVersionsResponseDTO Query result
      */
     public function getFileVersions(
         RequestContext $requestContext,
         GetFileVersionsRequestDTO $requestDTO
     ): GetFileVersionsResponseDTO {
-        // 获取用户授权信息
+        // Get user authorization information
         $userAuthorization = $requestContext->getUserAuthorization();
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $fileId = $requestDTO->getFileId();
@@ -112,18 +112,18 @@ class FileVersionAppService extends AbstractAppService
             'organization_code' => $dataIsolation->getCurrentOrganizationCode(),
         ]);
 
-        // 验证文件是否存在
+        // Verify file exists
         $fileEntity = $this->taskFileDomainService->getById($fileId);
         if (! $fileEntity) {
             ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
         }
 
-        // 验证文件权限 - 确保文件属于当前组织
+        // Verify file permission - ensure file belongs to current organization
         /*if ($fileEntity->getOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(BeAgentErrorCode::FILE_PERMISSION_DENIED, 'file.access_denied');
         }*/
 
-        // 验证项目权限
+        // Verify project permission
         if ($fileEntity->getProjectId() > 0) {
             $this->getAccessibleProject(
                 $fileEntity->getProjectId(),
@@ -132,7 +132,7 @@ class FileVersionAppService extends AbstractAppService
             );
         }
 
-        // 调用Domain Service获取分页数据
+        // Call Domain Service to get paginated data
         $result = $this->taskFileVersionDomainService->getFileVersionsWithPage(
             $fileId,
             $requestDTO->getPage(),
@@ -145,16 +145,16 @@ class FileVersionAppService extends AbstractAppService
             'current_page_count' => count($result['list']),
         ]);
 
-        // 返回结果
+        // Return result
         return GetFileVersionsResponseDTO::fromData($result['list'], $result['total'], $requestDTO->getPage());
     }
 
     /**
-     * 文件回滚到指定版本.
+     * Rollback file to specified version.
      *
-     * @param RequestContext $requestContext 请求上下文
-     * @param RollbackFileToVersionRequestDTO $requestDTO 请求DTO
-     * @return RollbackFileToVersionResponseDTO 回滚结果
+     * @param RequestContext $requestContext Request context
+     * @param RollbackFileToVersionRequestDTO $requestDTO Request DTO
+     * @return RollbackFileToVersionResponseDTO Rollback result
      */
     public function rollbackFileToVersion(
         RequestContext $requestContext,
@@ -172,20 +172,20 @@ class FileVersionAppService extends AbstractAppService
             'organization_code' => $dataIsolation->getCurrentOrganizationCode(),
         ]);
 
-        // 验证文件是否存在
+        // Verify file exists
         $fileEntity = $this->taskFileDomainService->getById($fileId);
         if (! $fileEntity) {
             ExceptionBuilder::throw(BeAgentErrorCode::FILE_NOT_FOUND, 'file.file_not_found');
         }
 
-        // 验证项目权限
+        // Verify project permission
         $projectEntity = $this->getAccessibleProject(
             $fileEntity->getProjectId(),
             $dataIsolation->getCurrentUserId(),
             $dataIsolation->getCurrentOrganizationCode()
         );
 
-        // 验证文件是否为目录
+        // Verify file is not a directory
         if ($fileEntity->getIsDirectory()) {
             ExceptionBuilder::throw(BeAgentErrorCode::FILE_PERMISSION_DENIED, 'file.cannot_rollback_directory');
         }

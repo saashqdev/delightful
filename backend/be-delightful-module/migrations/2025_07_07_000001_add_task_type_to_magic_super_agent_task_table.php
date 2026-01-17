@@ -14,12 +14,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (! Schema::hasTable('magic_super_agent_task')) {
+        if (! Schema::hasTable('delightful_be_agent_task')) {
             return;
         }
 
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
-            if (! Schema::hasColumn('magic_super_agent_task', 'task_type')) {
+        Schema::table('delightful_be_agent_task', function (Blueprint $table) {
+            if (! Schema::hasColumn('delightful_be_agent_task', 'task_type')) {
                 $table->string('task_type', 50)
                     ->default('agent')
                     ->comment('任务类型：agent-智能体任务，tool-工具任务，custom-自定义任务')
@@ -33,9 +33,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        if (Schema::hasTable('magic_super_agent_task')) {
-            Schema::table('magic_super_agent_task', function (Blueprint $table) {
-                if (Schema::hasColumn('magic_super_agent_task', 'task_type')) {
+        if (Schema::hasTable('delightful_be_agent_task')) {
+            Schema::table('delightful_be_agent_task', function (Blueprint $table) {
+                if (Schema::hasColumn('delightful_be_agent_task', 'task_type')) {
                     $table->dropColumn('task_type');
                 }
             });

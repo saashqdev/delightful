@@ -17,7 +17,7 @@ This optimization refactored the panel size calculation logic for the chat inter
 -   Same calculation logic repeated in multiple places
 -   Lack of reusability
 
-### 3. Magic Numbers
+### 3. Delightful Numbers
 
 -   Hardcoded numbers (600, 400, 0.6, 0.4, etc.)
 -   Lack of semantic constant definitions
@@ -78,7 +78,7 @@ Created the `calculatePanelSizes` utility set containing the following pure func
 
 -   **Single Responsibility Principle**: Each function is responsible for only one type of calculation logic
 -   **Functional Programming**: Pure functions with no side effects, easy to test and reason about
--   **Constantization**: All magic numbers have semantic constant names
+-   **Constantization**: All delightful numbers have semantic constant names
 
 ### 2. Improved Readability
 
@@ -181,7 +181,7 @@ Through this optimization, we refactored the complex panel size calculation logi
 Key improvements:
 
 -   ✅ Functional programming, improving code predictability
--   ✅ Constantizing magic numbers, improving maintainability
+-   ✅ Constantizing delightful numbers, improving maintainability
 -   ✅ Complete test coverage, ensuring code quality
 -   ✅ Clear documentation, reducing maintenance costs
 -   ✅ Good extensibility, supporting future requirement changes

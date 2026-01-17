@@ -8,14 +8,14 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class AddCostToMagicBeAgentTopicsTable extends Migration
+class AddCostToDelightfulBeAgentTopicsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             $table->decimal('cost', 10, 4)->default(0.0000)->comment('Topic cost amount')->after('task_mode');
         });
     }
@@ -25,7 +25,7 @@ class AddCostToMagicBeAgentTopicsTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             $table->dropColumn('cost');
         });
     }

@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
-use App\Application\Chat\Service\MagicAgentEventAppService;
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulAgentEventAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\LongTermMemory\Enum\AppCodeEnum;
-use App\Domain\Chat\DTO\Message\MagicMessageStruct;
+use App\Domain\Chat\DTO\Message\DelightfulMessageStruct;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Event\Agent\UserCallAgentEvent;
-use App\Domain\Chat\Service\MagicConversationDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
@@ -32,19 +32,19 @@ use Throwable;
  *
  * Responsible for publishing agent messages based on AI code processing
  */
-class BeAgentMessageSubscriberV2 extends MagicAgentEventAppService
+class BeAgentMessageSubscriberV2 extends DelightfulAgentEventAppService
 {
     protected LoggerInterface $logger;
 
     public function __construct(
         protected readonly HandleUserMessageAppService $handleUserMessageAppService,
-        protected readonly MagicChatMessageAppService $magicChatMessageAppService,
+        protected readonly DelightfulChatMessageAppService $delightfulChatMessageAppService,
         protected readonly LoggerFactory $loggerFactory,
-        MagicConversationDomainService $magicConversationDomainService,
+        DelightfulConversationDomainService $delightfulConversationDomainService,
     ) {
         $this->logger = $loggerFactory->get(get_class($this));
 
-        parent::__construct($magicConversationDomainService);
+        parent::__construct($delightfulConversationDomainService);
     }
 
     public function agentExecEvent(UserCallAgentEvent $userCallAgentEvent)
@@ -65,10 +65,10 @@ class BeAgentMessageSubscriberV2 extends MagicAgentEventAppService
                 'Received super agent message, event: %s',
                 json_encode($userCallAgentEvent, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
-            /** @var null|MagicMessageStruct $messageStruct */
+            /** @var null|DelightfulMessageStruct $messageStruct */
             $messageStruct = $userCallAgentEvent->messageEntity?->getContent();
             if ($messageStruct instanceof TextContentInterface) {
-                // 可能是富文本，需要处理 @
+                // May be rich text, need to handle @
                 $prompt = $messageStruct->getTextContent();
                 $chatMessageType = $userCallAgentEvent->messageEntity?->getMessageType()->value;
             } else {
@@ -76,7 +76,7 @@ class BeAgentMessageSubscriberV2 extends MagicAgentEventAppService
                 $chatMessageType = ChatMessageType::Text->value;
             }
 
-            // 更改附件的定义，附件是用户 @了 文件/mcp/agent 等
+            // Change definition of attachments: attachments are files/mcp/agents that user @mentioned
             $superAgentExtra = $messageStruct->getExtra()?->getBeAgent();
             $mentions = $superAgentExtra?->getMentionsJsonStruct();
             $queueId = $superAgentExtra?->getQueueId() ?? '';
@@ -91,7 +91,7 @@ class BeAgentMessageSubscriberV2 extends MagicAgentEventAppService
             $language = $userCallAgentEvent->messageEntity?->getLanguage() ?? '';
 
             // Get User Seq id
-            $useSeqEntity = $this->magicChatMessageAppService->getMagicSeqEntity($userCallAgentEvent->seqEntity->getMagicMessageId(), ConversationType::User);
+            $useSeqEntity = $this->delightfulChatMessageAppService->getDelightfulSeqEntity($userCallAgentEvent->seqEntity->getDelightfulMessageId(), ConversationType::User);
             if ($useSeqEntity) {
                 $messageId = $messageSeqId = $useSeqEntity->getId();
             } else {

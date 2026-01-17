@@ -14,7 +14,7 @@ class WorkspaceVersionModel extends AbstractModel
 {
     use SoftDeletes;
 
-    protected ?string $table = 'magic_super_agent_workspace_versions';
+    protected ?string $table = 'delightful_be_agent_workspace_versions';
 
     protected array $fillable = [
         'id', 'topic_id', 'sandbox_id', 'commit_hash', 'dir', 'folder', 'tag', 'created_at', 'updated_at', 'deleted_at', 'project_id',

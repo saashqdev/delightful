@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             // 添加 from_topic_id 字段，记录话题复制来源
             $table->bigInteger('from_topic_id')
                 ->nullable()

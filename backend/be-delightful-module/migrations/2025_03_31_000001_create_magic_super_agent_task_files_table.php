@@ -14,15 +14,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_super_agent_task_files')) {
+        if (Schema::hasTable('delightful_be_agent_task_files')) {
             return;
         }
-        Schema::create('magic_super_agent_task_files', static function (Blueprint $table) {
+        Schema::create('delightful_be_agent_task_files', static function (Blueprint $table) {
             $table->bigIncrements('file_id')->comment('主键');
             $table->string('user_id', 128)->comment('user_id');
             $table->string('organization_code', 64)->comment('组织编码');
-            $table->bigInteger('topic_id')->comment('magic_general_agent_topics 的id');
-            $table->bigInteger('task_id')->comment('magic_general_agent_task 的id');
+            $table->bigInteger('topic_id')->comment('delightful_general_agent_topics 的id');
+            $table->bigInteger('task_id')->comment('delightful_general_agent_task 的id');
             $table->string('file_type', 32)->default('')->comment('文件类型');
             $table->string('file_name', 256)->default('')->comment('文件名');
             $table->string('file_extension', 32)->default('')->comment('文件扩展名');
@@ -44,6 +44,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_general_agent_task_files');
+        Schema::dropIfExists('delightful_general_agent_task_files');
     }
 };

@@ -28,33 +28,33 @@ class InitAccountMessageSubscriber extends ConsumerMessage
     {
         try {
             $this->logger->debug(sprintf(
-                '接收到组织创建消息，事件: %s',
+                'Received organization created message, event: %s',
                 json_encode($event, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
 
-            // 提取必要信息
+            // Extract necessary information
             $organizationCode = $event['organization_code'] ?? '';
 
-            // 参数验证
+            // Parameter validation
             if (empty($organizationCode)) {
                 $this->logger->error(sprintf(
-                    '消息参数不完整, $organizationCode: %s',
+                    'Incomplete message parameters, $organizationCode: %s',
                     $organizationCode,
                 ));
                 return Result::ACK;
             }
             $this->accountAppService->initAccount($organizationCode);
-            $this->logger->info(sprintf('超级麦吉账户已初始化，组织code: %s', $organizationCode));
+            $this->logger->info(sprintf('Super Delightful account initialized, organization code: %s', $organizationCode));
 
             return Result::ACK;
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '处理超级麦吉账户消息失败: %s, event: %s',
+                'Failed to process Super Delightful account message: %s, event: %s',
                 $e->getMessage(),
                 json_encode($event, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
 
-            return Result::ACK; // 即使出错也确认消息，避免消息堆积
+            return Result::ACK; // Acknowledge message even on error to avoid message accumulation
         }
     }
 }

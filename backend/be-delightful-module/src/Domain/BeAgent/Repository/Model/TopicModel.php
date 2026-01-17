@@ -20,7 +20,7 @@ class TopicModel extends AbstractModel
     /**
      * 表名.
      */
-    protected ?string $table = 'magic_super_agent_topics';
+    protected ?string $table = 'delightful_be_agent_topics';
 
     /**
      * 主键.

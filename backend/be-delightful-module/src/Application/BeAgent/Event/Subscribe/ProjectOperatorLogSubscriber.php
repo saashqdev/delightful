@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Delightful\BeDelightful\Domain\BeAgent\Constants\OperationAction;
 use Delightful\BeDelightful\Domain\BeAgent\Constants\ResourceType;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectOperationLogEntity;
@@ -42,7 +42,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 项目审计日志事件监听器.
+ * Project audit log event subscriber.
  */
 #[AsyncListener]
 #[Listener]
@@ -61,23 +61,23 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
     }
 
     /**
-     * 监听的事件列表.
+     * List of events to listen to.
      */
     public function listen(): array
     {
         return [
-            // 项目操作事件
+            // Project operation events
             ProjectCreatedEvent::class,
             ProjectUpdatedEvent::class,
             ProjectDeletedEvent::class,
 
-            // 话题操作事件
+            // Topic operation events
             TopicCreatedEvent::class,
             TopicUpdatedEvent::class,
             TopicDeletedEvent::class,
             TopicRenamedEvent::class,
 
-            // 文件操作事件
+            // File operation events
             FileUploadedEvent::class,
             FileDeletedEvent::class,
             FileRenamedEvent::class,
@@ -88,17 +88,17 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
             FileBatchMoveEvent::class,
             FilesBatchDeletedEvent::class,
 
-            // 项目成员操作事件
+            // Project member operation events
             ProjectMembersUpdatedEvent::class,
 
-            // 项目快捷方式操作事件
+            // Project shortcut operation events
             ProjectShortcutSetEvent::class,
             ProjectShortcutCancelledEvent::class,
         ];
     }
 
     /**
-     * 处理事件.
+     * Process the event.
      */
     public function process(object $event): void
     {
@@ -107,22 +107,22 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
             'event_class' => get_class($event),
         ]);
 
-        // 使用 defer 延迟处理，避免阻塞主业务流程
+        // Use defer for delayed processing to avoid blocking main business flow
         try {
             $ip = IpUtil::getClientIpAddress($this->request);
             $operationLogEntity = $this->convertEventToEntity($event, $ip);
             if ($operationLogEntity !== null) {
                 $this->projectOperationLogDomainService->saveOperationLog($operationLogEntity);
-                $this->logger->info('项目操作日志已保存', [
+                $this->logger->info('Project operation log saved', [
                     'event_class' => get_class($event),
                     'project_id' => $operationLogEntity->getProjectId(),
                     'action' => $operationLogEntity->getOperationAction(),
                 ]);
             }
-            // 更新项目成员的活跃时间
+            // Update project member's last active time
             $this->updateUserLastActiveTime($event);
         } catch (Throwable $e) {
-            $this->logger->error('保存项目操作日志失败', [
+            $this->logger->error('Failed to save project operation log', [
                 'event_class' => get_class($event),
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -136,7 +136,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
         $userId = null;
         $organizationCode = null;
 
-        // 更新项目成员的活跃时间
+        // Update project member's last active time
         switch (true) {
             case $event instanceof ProjectUpdatedEvent:
                 $projectId = $event->getProjectEntity()->getId();
@@ -212,7 +212,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
     }
 
     /**
-     * 将事件转换为操作日志实体.
+     * Convert event to operation log entity.
      */
     private function convertEventToEntity(object $event, string $ip): ?ProjectOperationLogEntity
     {
@@ -221,7 +221,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
         switch (true) {
             case $event instanceof ProjectCreatedEvent:
                 $project = $event->getProjectEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -239,7 +239,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof ProjectUpdatedEvent:
                 $project = $event->getProjectEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -256,7 +256,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof ProjectDeletedEvent:
                 $project = $event->getProjectEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -269,7 +269,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof TopicCreatedEvent:
                 $topic = $event->getTopicEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -285,7 +285,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof TopicUpdatedEvent:
                 $topic = $event->getTopicEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -301,7 +301,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof TopicDeletedEvent:
                 $topic = $event->getTopicEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -314,7 +314,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof TopicRenamedEvent:
                 $topic = $event->getTopicEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -330,7 +330,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof FileUploadedEvent:
                 $file = $event->getFileEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $entity->setUserId($event->getUserId());
                 $entity->setOrganizationCode($event->getOrganizationCode());
                 $entity->setOperationStatus('success');
@@ -347,7 +347,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof FileDeletedEvent:
                 $file = $event->getFileEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $entity->setUserId($event->getUserId());
                 $entity->setOrganizationCode($event->getOrganizationCode());
                 $entity->setOperationStatus('success');
@@ -359,7 +359,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof FileRenamedEvent:
                 $file = $event->getFileEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -377,7 +377,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof FileMovedEvent:
                 $file = $event->getFileEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -395,7 +395,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof FileContentSavedEvent:
                 $file = $event->getFileEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $entity->setUserId($event->getUserId());
                 $entity->setOrganizationCode($event->getOrganizationCode());
                 $entity->setOperationStatus('success');
@@ -409,7 +409,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
             case $event instanceof FileReplacedEvent:
                 $file = $event->getFileEntity();
                 $versionEntity = $event->getVersionEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -419,14 +419,14 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 $entity->setOperationAction(OperationAction::REPLACE_FILE);
                 $entity->setResourceType(ResourceType::FILE);
                 $entity->setResourceId((string) $file->getFileId());
-                // 详细的操作信息
+                // Detailed operation information
                 $operationDetails = [
                     'file_name' => $file->getFileName(),
                     'file_extension' => $file->getFileExtension(),
                     'file_size' => $file->getFileSize(),
                     'is_cross_type_replace' => $event->isCrossTypeReplace(),
                 ];
-                // 如果创建了版本快照，记录版本ID
+                // If a version snapshot was created, record the version ID
                 if ($versionEntity !== null) {
                     $operationDetails['version_id'] = $versionEntity->getId();
                 }
@@ -434,7 +434,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 break;
             case $event instanceof DirectoryDeletedEvent:
                 $directory = $event->getDirectoryEntity();
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -460,7 +460,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 ]);
                 break;
             case $event instanceof FilesBatchDeletedEvent:
-                // 获取用户授权信息
+                // Get user authorization information
                 $userAuthorization = $event->getUserAuthorization();
                 $entity->setUserId($userAuthorization->getId());
                 $entity->setOrganizationCode($userAuthorization->getOrganizationCode());
@@ -520,7 +520,7 @@ class ProjectOperatorLogSubscriber implements ListenerInterface
                 ]);
                 break;
             default:
-                $this->logger->warning('未处理的事件类型', ['event_class' => get_class($event)]);
+                $this->logger->warning('Unhandled event type', ['event_class' => get_class($event)]);
                 return null;
         }
 

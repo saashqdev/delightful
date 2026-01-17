@@ -11,7 +11,7 @@ use Hyperf\Database\Schema\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('magic_super_agent_project_members', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_project_members', function (Blueprint $table) {
             // Add role field
             $table->string('role', 32)->default('')->comment('成员角色：owner-所有者，editor-编辑者，viewer-查看者')->after('target_id');
 

@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_super_agent_message_schedule_log', function (Blueprint $table) {
+        Schema::create('delightful_be_agent_message_schedule_log', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('主键ID (雪花ID)');
             $table->bigInteger('message_schedule_id')->comment('关联的定时任务ID');
             $table->bigInteger('workspace_id')->unsigned()->comment('工作区ID');

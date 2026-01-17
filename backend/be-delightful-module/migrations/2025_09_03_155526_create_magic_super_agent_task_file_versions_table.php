@@ -14,11 +14,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_super_agent_task_file_versions', function (Blueprint $table) {
+        Schema::create('delightful_be_agent_task_file_versions', function (Blueprint $table) {
             // 主键
             $table->bigIncrements('id');
 
-            // 文件ID，关联magic_super_agent_task_files表
+            // 文件ID，关联delightful_be_agent_task_files表
             $table->unsignedBigInteger('file_id')->comment('文件ID');
 
             // 组织编码，用于数据隔离
@@ -51,6 +51,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_super_agent_task_file_versions');
+        Schema::dropIfExists('delightful_be_agent_task_file_versions');
     }
 };

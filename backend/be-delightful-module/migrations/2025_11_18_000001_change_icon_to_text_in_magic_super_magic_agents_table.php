@@ -14,7 +14,7 @@ return new class extends Migration {
     public function up(): void
     {
         // 使用原生 SQL 修改字段类型，从 VARCHAR(100) 改为 TEXT
-        Db::statement("ALTER TABLE `magic_super_magic_agents` MODIFY COLUMN `icon` TEXT NULL COMMENT 'Agent图标'");
+        Db::statement("ALTER TABLE `delightful_be_delightful_agents` MODIFY COLUMN `icon` TEXT NULL COMMENT 'Agent图标'");
     }
 
     /**

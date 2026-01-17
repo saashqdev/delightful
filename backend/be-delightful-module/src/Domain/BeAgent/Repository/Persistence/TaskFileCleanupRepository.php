@@ -63,7 +63,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
                         WHEN MAX(is_directory) = 1 THEN 'directory'
                         ELSE 'file'
                     END as duplicate_type
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE {$whereClause}
                 GROUP BY file_key
                 HAVING COUNT(*) > 1
@@ -88,7 +88,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
             "SELECT COUNT(*) as count
             FROM (
                 SELECT file_key
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE file_key IS NOT NULL
                   AND file_key != ''
                 GROUP BY file_key
@@ -109,7 +109,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
             "SELECT COUNT(*) as count
             FROM (
                 SELECT file_key
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE file_key IS NOT NULL
                   AND file_key != ''
                   AND is_directory = 1
@@ -131,7 +131,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
             "SELECT COUNT(*) as count
             FROM (
                 SELECT file_key
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE file_key IS NOT NULL
                   AND file_key != ''
                   AND is_directory = 0
@@ -172,10 +172,10 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
 
         $results = Db::select(
             "SELECT DISTINCT t1.project_id
-            FROM magic_super_agent_task_files t1
+            FROM delightful_be_agent_task_files t1
             INNER JOIN (
                 SELECT project_id, file_key
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE {$subqueryWhereClause}
                 GROUP BY project_id, file_key
                 HAVING COUNT(*) > 1
@@ -228,7 +228,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
         // Simplified HAVING: use direct comparison instead of SUM(CASE WHEN...)
         $results = Db::select(
             "SELECT file_key
-            FROM magic_super_agent_task_files
+            FROM delightful_be_agent_task_files
             WHERE {$whereClause}
             GROUP BY project_id, file_key
             HAVING COUNT(*) > 1
@@ -269,10 +269,10 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
 
         $results = Db::select(
             "SELECT DISTINCT t1.project_id
-            FROM magic_super_agent_task_files t1
+            FROM delightful_be_agent_task_files t1
             INNER JOIN (
                 SELECT project_id, file_key
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE {$subqueryWhereClause}
                 GROUP BY project_id, file_key
                 HAVING COUNT(*) > 1
@@ -326,7 +326,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
         // Simplified HAVING: use direct comparison instead of SUM(CASE WHEN...)
         $results = Db::select(
             "SELECT file_key
-            FROM magic_super_agent_task_files
+            FROM delightful_be_agent_task_files
             WHERE {$whereClause}
             GROUP BY project_id, file_key
             HAVING COUNT(*) > 1
@@ -367,10 +367,10 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
 
         $results = Db::select(
             "SELECT DISTINCT t1.project_id
-            FROM magic_super_agent_task_files t1
+            FROM delightful_be_agent_task_files t1
             INNER JOIN (
                 SELECT project_id, file_key
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE {$subqueryWhereClause}
                 GROUP BY project_id, file_key
                 HAVING COUNT(*) > 1
@@ -424,7 +424,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
         // Simplified HAVING: use direct comparison instead of SUM(CASE WHEN...)
         $results = Db::select(
             "SELECT file_key
-            FROM magic_super_agent_task_files
+            FROM delightful_be_agent_task_files
             WHERE {$whereClause}
             GROUP BY project_id, file_key
             HAVING COUNT(*) > 1
@@ -444,7 +444,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
     {
         $results = Db::select(
             'SELECT *
-            FROM magic_super_agent_task_files
+            FROM delightful_be_agent_task_files
             WHERE file_key = ?
             ORDER BY 
                 CASE WHEN deleted_at IS NULL THEN 0 ELSE 1 END,
@@ -496,7 +496,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
                 topic_id,
                 updated_at,
                 created_at
-            FROM magic_super_agent_task_files
+            FROM delightful_be_agent_task_files
             WHERE {$whereClause}
             ORDER BY 
                 file_key,
@@ -534,7 +534,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
         $placeholders = implode(',', array_fill(0, count($deletedFileIds), '?'));
 
         return Db::update(
-            "UPDATE magic_super_agent_task_files
+            "UPDATE delightful_be_agent_task_files
             SET parent_id = ?
             WHERE parent_id IN ({$placeholders})
               AND project_id = ?
@@ -555,7 +555,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
         $placeholders = implode(',', array_fill(0, count($fileIds), '?'));
 
         return Db::delete(
-            "DELETE FROM magic_super_agent_task_files WHERE file_id IN ({$placeholders})",
+            "DELETE FROM delightful_be_agent_task_files WHERE file_id IN ({$placeholders})",
             $fileIds
         );
     }
@@ -569,7 +569,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
             "SELECT COUNT(*) as count
             FROM (
                 SELECT file_key
-                FROM magic_super_agent_task_files
+                FROM delightful_be_agent_task_files
                 WHERE file_key IS NOT NULL
                   AND file_key != ''
                 GROUP BY file_key
@@ -590,7 +590,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
                 file_key,
                 GROUP_CONCAT(DISTINCT is_directory ORDER BY is_directory) as is_directory_values,
                 COUNT(*) as record_count
-            FROM magic_super_agent_task_files
+            FROM delightful_be_agent_task_files
             WHERE file_key IS NOT NULL AND file_key != ''
             GROUP BY file_key
             HAVING COUNT(DISTINCT is_directory) > 1"
@@ -611,7 +611,7 @@ class TaskFileCleanupRepository implements TaskFileCleanupRepositoryInterface
     public function fixDirectoryFlag(string $fileKey, int $correctIsDirectory): int
     {
         return Db::update(
-            'UPDATE magic_super_agent_task_files 
+            'UPDATE delightful_be_agent_task_files 
             SET is_directory = ? 
             WHERE file_key = ?',
             [$correctIsDirectory, $fileKey]

@@ -14,25 +14,25 @@ use PhpAmqpLib\Message\AMQPMessage;
 use PhpAmqpLib\Wire\AMQPTable;
 
 /**
- * 停止运行中任务消息发布器.
+ * Stop running task message publisher.
  */
-#[Producer(exchange: 'super_magic_stop_task', routingKey: 'super_magic_stop_task')]
+#[Producer(exchange: 'be_delightful_stop_task', routingKey: 'be_delightful_stop_task')]
 class StopRunningTaskPublisher extends ProducerMessage
 {
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(StopRunningTaskEvent $event)
     {
         $this->payload = $event->toArray();
 
-        // 设置 AMQP 消息属性，包括原始时间戳
+        // Set AMQP message properties, including original timestamp
         $this->properties = [
-            'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, // 保持消息持久化
+            'delivery_mode' => AMQPMessage::DELIVERY_MODE_PERSISTENT, // Keep message persistent
             'application_headers' => new AMQPTable([
-                'x-original-timestamp' => time(), // 设置原始时间戳（秒级）
-                'x-data-type' => $event->getDataType()->value, // 设置数据类型方便路由和监控
-                'x-organization-code' => $event->getOrganizationCode(), // 设置组织编码
+                'x-original-timestamp' => time(), // Set original timestamp (seconds)
+                'x-data-type' => $event->getDataType()->value, // Set data type for routing and monitoring
+                'x-organization-code' => $event->getOrganizationCode(), // Set organization code
             ]),
         ];
     }

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 
 /**
@@ -17,7 +17,7 @@ class TopicDeletedEvent extends AbstractEvent
 {
     public function __construct(
         private readonly TopicEntity $topicEntity,
-        private readonly MagicUserAuthorization $userAuthorization
+        private readonly DelightfulUserAuthorization $userAuthorization
     ) {
         parent::__construct();
     }
@@ -27,7 +27,7 @@ class TopicDeletedEvent extends AbstractEvent
         return $this->topicEntity;
     }
 
-    public function getUserAuthorization(): MagicUserAuthorization
+    public function getUserAuthorization(): DelightfulUserAuthorization
     {
         return $this->userAuthorization;
     }

@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Interfaces\Share\Facade;
 
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Util\Context\RequestContext;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\Share\Service\ResourceShareAppService;
 use Delightful\BeDelightful\Interfaces\Share\DTO\Request\CreateShareRequestDTO;
 use Delightful\BeDelightful\Interfaces\Share\DTO\Request\GetShareDetailDTO;

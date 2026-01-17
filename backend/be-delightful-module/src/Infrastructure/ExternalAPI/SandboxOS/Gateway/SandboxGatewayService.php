@@ -828,11 +828,11 @@ class SandboxGatewayService extends AbstractSandboxOS implements SandboxGatewayI
         $headers = parent::getAuthHeaders();
 
         if ($this->userId !== null) {
-            $headers['magic-user-id'] = $this->userId;
+            $headers['delightful-user-id'] = $this->userId;
         }
 
         if ($this->organizationCode !== null) {
-            $headers['magic-organization-code'] = $this->organizationCode;
+            $headers['delightful-organization-code'] = $this->organizationCode;
         }
 
         # 判断header中是否包含request_id，如果没有，从上下文中获取

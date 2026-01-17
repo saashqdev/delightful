@@ -9,11 +9,11 @@ namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
 use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
@@ -25,9 +25,9 @@ class AbstractAppService extends AbstractKernelAppService
     use DataIsolationTrait;
 
     /**
-     * 获取用户可访问的项目实体（默认大于可读角色）.
+     * Get user-accessible project entity (default requires role higher than or equal to viewer).
      *
-     * @return ProjectEntity 项目实体
+     * @return ProjectEntity Project entity
      */
     public function getAccessibleProject(int $projectId, string $userId, string $organizationCode, MemberRole $requiredRole = MemberRole::VIEWER): ProjectEntity
     {
@@ -45,23 +45,23 @@ class AbstractAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }*/
 
-        // 如果是创建者，直接返回
+        // If creator, return directly
         if ($projectEntity->getUserId() === $userId) {
             return $projectEntity;
         }
 
-        // 判断是否开启共享项目
+        // Check if project collaboration is enabled
         if (! $projectEntity->getIsCollaborationEnabled()) {
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
-        // 验证身份
-        $magicUserAuthorization = new MagicUserAuthorization();
-        $magicUserAuthorization->setOrganizationCode($organizationCode);
-        $magicUserAuthorization->setId($userId);
-        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, $requiredRole);
+        // Validate identity
+        $delightfulUserAuthorization = new DelightfulUserAuthorization();
+        $delightfulUserAuthorization->setOrganizationCode($organizationCode);
+        $delightfulUserAuthorization->setId($userId);
+        $this->validateRoleHigherOrEqual($delightfulUserAuthorization, $projectId, $requiredRole);
 
-        // 判断是否付费套餐
+        // Check if it's a paid subscription
         if (! $packageFilterService->isPaidSubscription($projectEntity->getUserOrganizationCode())) {
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
@@ -69,7 +69,7 @@ class AbstractAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取用户可访问的项目实体（大于编辑角色）.
+     * Get user-accessible project entity (requires role higher than or equal to editor).
      */
     public function getAccessibleProjectWithEditor(int $projectId, string $userId, string $organizationCode): ProjectEntity
     {
@@ -77,7 +77,7 @@ class AbstractAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取用户可访问的项目实体（大于管理角色）.
+     * Get user-accessible project entity (requires role higher than or equal to manager).
      */
     public function getAccessibleProjectWithManager(int $projectId, string $userId, string $organizationCode): ProjectEntity
     {
@@ -85,58 +85,58 @@ class AbstractAppService extends AbstractKernelAppService
     }
 
     /**
-     * 验证管理者或所有者权限.
+     * Validate manager or owner permission.
      */
-    protected function validateManageOrOwnerPermission(MagicUserAuthorization $magicUserAuthorization, int $projectId): void
+    protected function validateManageOrOwnerPermission(DelightfulUserAuthorization $delightfulUserAuthorization, int $projectId): void
     {
         $projectDomainService = di(ProjectDomainService::class);
         $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
-        // 判断是否开启共享项目
+        // Check if project collaboration is enabled
         if (! $projectEntity->getIsCollaborationEnabled()) {
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
-        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::MANAGE);
+        $this->validateRoleHigherOrEqual($delightfulUserAuthorization, $projectId, MemberRole::MANAGE);
     }
 
     /**
-     * 验证可编辑者权限.
+     * Validate editor permission.
      */
-    protected function validateEditorPermission(MagicUserAuthorization $magicUserAuthorization, int $projectId): void
+    protected function validateEditorPermission(DelightfulUserAuthorization $delightfulUserAuthorization, int $projectId): void
     {
         $projectDomainService = di(ProjectDomainService::class);
         $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
-        // 判断是否开启共享项目
+        // Check if project collaboration is enabled
         if (! $projectEntity->getIsCollaborationEnabled()) {
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
-        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::EDITOR);
+        $this->validateRoleHigherOrEqual($delightfulUserAuthorization, $projectId, MemberRole::EDITOR);
     }
 
     /**
-     * 验证可读权限.
+     * Validate viewer permission.
      */
-    protected function validateViewerPermission(MagicUserAuthorization $magicUserAuthorization, int $projectId): void
+    protected function validateViewerPermission(DelightfulUserAuthorization $delightfulUserAuthorization, int $projectId): void
     {
         $projectDomainService = di(ProjectDomainService::class);
         $projectEntity = $projectDomainService->getProjectNotUserId($projectId);
-        // 判断是否开启共享项目
+        // Check if project collaboration is enabled
         if (! $projectEntity->getIsCollaborationEnabled()) {
             ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED);
         }
 
-        $this->validateRoleHigherOrEqual($magicUserAuthorization, $projectId, MemberRole::VIEWER);
+        $this->validateRoleHigherOrEqual($delightfulUserAuthorization, $projectId, MemberRole::VIEWER);
     }
 
     /**
-     * 验证当前用户角色是否大于或等于指定角色.
+     * Validate if current user role is higher than or equal to specified role.
      */
-    protected function validateRoleHigherOrEqual(MagicUserAuthorization $magicUserAuthorization, int $projectId, MemberRole $requiredRole): void
+    protected function validateRoleHigherOrEqual(DelightfulUserAuthorization $delightfulUserAuthorization, int $projectId, MemberRole $requiredRole): void
     {
         $projectMemberService = di(ProjectMemberDomainService::class);
-        $magicDepartmentUserDomainService = di(MagicDepartmentUserDomainService::class);
-        $userId = $magicUserAuthorization->getId();
+        $delightfulDepartmentUserDomainService = di(DelightfulDepartmentUserDomainService::class);
+        $userId = $delightfulUserAuthorization->getId();
 
         $projectMemberEntity = $projectMemberService->getMemberByProjectAndUser($projectId, $userId);
 
@@ -144,8 +144,8 @@ class AbstractAppService extends AbstractKernelAppService
             return;
         }
 
-        $dataIsolation = DataIsolation::create($magicUserAuthorization->getOrganizationCode(), $userId);
-        $departmentIds = $magicDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
+        $dataIsolation = DataIsolation::create($delightfulUserAuthorization->getOrganizationCode(), $userId);
+        $departmentIds = $delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
         $projectMemberEntities = $projectMemberService->getMembersByProjectAndDepartmentIds($projectId, $departmentIds);
 
         foreach ($projectMemberEntities as $projectMemberEntity) {

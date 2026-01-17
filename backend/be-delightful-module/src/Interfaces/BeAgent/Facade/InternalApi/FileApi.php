@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade\InternalApi;
 
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\Service\FileVersionAppService;
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateFileVersionRequestDTO;
 use Delightful\BeDelightful\Interfaces\BeAgent\Facade\AbstractApi;

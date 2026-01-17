@@ -132,7 +132,7 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
 
         // 批量查询 im_status
         if (! empty($imSeqIds)) {
-            $imStatusMap = Db::table('magic_chat_sequences')
+            $imStatusMap = Db::table('delightful_chat_sequences')
                 ->whereIn('id', array_values($imSeqIds))
                 ->pluck('status', 'id')
                 ->toArray();

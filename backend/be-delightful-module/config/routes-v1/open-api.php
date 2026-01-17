@@ -21,7 +21,7 @@ Router::addGroup('/api/v1/sandbox-openapi', static function () {
     });
 });
 
-// Sandbox internal API route group - specifically for sandbox to call Super Magic, naming is not standardized, needs to be deprecated
+// Sandbox internal API route group - specifically for sandbox to call Super Delightful, naming is not standardized, needs to be deprecated
 Router::addGroup(
     '/open/internal-api',
     static function () {
@@ -37,7 +37,7 @@ Router::addGroup(
     ['middleware' => [SandboxTokenAuthMiddleware::class]]
 );
 
-// Sandbox internal API route group - specifically for sandbox to call Super Magic
+// Sandbox internal API route group - specifically for sandbox to call Super Delightful
 Router::addGroup(
     '/api/v1/open-api/sandbox',
     static function () {

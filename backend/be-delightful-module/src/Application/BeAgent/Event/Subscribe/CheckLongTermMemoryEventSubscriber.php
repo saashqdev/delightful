@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\LongTermMemory\DTO\EvaluateConversationRequestDTO;
 use App\Application\LongTermMemory\Enum\AppCodeEnum;
-use App\Application\LongTermMemory\Service\LongTermMemoryAppService as MagicServiceLongTermMemoryAppService;
+use App\Application\LongTermMemory\Service\LongTermMemoryAppService as DelightfulServiceLongTermMemoryAppService;
 use App\Application\ModelGateway\Service\ModelConfigAppService;
 use App\Domain\Chat\Entity\ValueObject\LLMModelEnum;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Event\CheckLongTermMemoryEvent;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
@@ -21,8 +21,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 长期记忆检查事件监听器
- * 负责处理长期记忆检查事件的具体逻辑.
+ * Long-term memory check event subscriber.
+ * Responsible for handling the specific logic of long-term memory check events.
  */
 class CheckLongTermMemoryEventSubscriber implements ListenerInterface
 {
@@ -51,7 +51,7 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
         }
 
         try {
-            $this->getLogger()->info('开始处理长期记忆检查事件', [
+            $this->getLogger()->info('Starting long-term memory check event processing', [
                 'event_id' => $event->getEventId(),
                 'organization_code' => $event->getOrganizationCode(),
                 'user_id' => $event->getUserId(),
@@ -62,40 +62,40 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
                 'instructions_count' => count($event->getInstructions()),
             ]);
 
-            // 直接从事件中获取 conversationId
+            // Get conversationId directly from event
             $conversationId = $event->getConversationId();
             if (empty($conversationId)) {
-                $this->getLogger()->warning('事件中的 conversation_id 为空', [
+                $this->getLogger()->warning('conversation_id in event is empty', [
                     'chat_topic_id' => $event->getChatTopicId(),
                     'event_id' => $event->getEventId(),
                 ]);
                 return;
             }
 
-            // 构建授权对象
+            // Build authorization object
             $authorization = $this->createUserAuthorization($event->getOrganizationCode(), $event->getUserId());
 
-            // 获取历史消息
+            // Get history messages
             $historyMessages = $this->getConversationHistory($authorization, $conversationId, $event->getChatTopicId());
-            // 构建完整的对话内容
+            // Build complete conversation content
             $conversationContent = $this->buildConversationContentWithHistory($event, $historyMessages);
 
-            // 通过降级链获取模型名称
+            // Get model name through fallback chain
             $modelName = di(ModelConfigAppService::class)->getChatModelTypeByFallbackChain(
                 $event->getOrganizationCode(),
                 LLMModelEnum::DEEPSEEK_V3->value
             );
 
-            // 创建评估请求DTO
+            // Create evaluation request DTO
             $dto = new EvaluateConversationRequestDTO([
                 'modelName' => $modelName,
                 'conversationContent' => $conversationContent,
                 'appId' => AppCodeEnum::BE_DELIGHTFUL->value,
             ]);
-            // 调用 delightful-service 的长期记忆评估服务
+            // Call delightful-service long-term memory evaluation service
             $this->getLongTermMemoryApp()->evaluateAndCreateMemory($dto, $authorization);
         } catch (Throwable $e) {
-            $this->getLogger()->error('处理长期记忆检查事件时发生异常', [
+            $this->getLogger()->error('Exception occurred while processing long-term memory check event', [
                 'event_id' => $event->getEventId(),
                 'error' => $e->getMessage(),
                 'organization_code' => $event->getOrganizationCode(),
@@ -108,23 +108,23 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
     }
 
     /**
-     * 获取长期记忆应用服务
+     * Get long-term memory application service.
      */
-    private function getLongTermMemoryApp(): MagicServiceLongTermMemoryAppService
+    private function getLongTermMemoryApp(): DelightfulServiceLongTermMemoryAppService
     {
-        return \Hyperf\Support\make(MagicServiceLongTermMemoryAppService::class);
+        return \Hyperf\Support\make(DelightfulServiceLongTermMemoryAppService::class);
     }
 
     /**
-     * 获取聊天消息应用服务
+     * Get chat message application service.
      */
-    private function getMagicChatMessageApp(): MagicChatMessageAppService
+    private function getDelightfulChatMessageApp(): DelightfulChatMessageAppService
     {
-        return \Hyperf\Support\make(MagicChatMessageAppService::class);
+        return \Hyperf\Support\make(DelightfulChatMessageAppService::class);
     }
 
     /**
-     * 获取日志器.
+     * Get logger.
      */
     private function getLogger(): LoggerInterface
     {
@@ -132,11 +132,11 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
     }
 
     /**
-     * 创建用户授权对象
+     * Create user authorization object.
      */
-    private function createUserAuthorization(string $organizationCode, string $userId): MagicUserAuthorization
+    private function createUserAuthorization(string $organizationCode, string $userId): DelightfulUserAuthorization
     {
-        $authorization = new MagicUserAuthorization();
+        $authorization = new DelightfulUserAuthorization();
         $authorization->setId($userId);
         $authorization->setOrganizationCode($organizationCode);
         $authorization->setApplicationCode(AppCodeEnum::BE_DELIGHTFUL->value);
@@ -144,20 +144,20 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
     }
 
     /**
-     * 获取会话历史消息.
+     * Get conversation history messages.
      */
-    private function getConversationHistory(MagicUserAuthorization $authorization, string $conversationId, string $topicId): array
+    private function getConversationHistory(DelightfulUserAuthorization $authorization, string $conversationId, string $topicId): array
     {
         try {
-            return $this->getMagicChatMessageApp()->getConversationChatCompletionsHistory(
+            return $this->getDelightfulChatMessageApp()->getConversationChatCompletionsHistory(
                 $authorization,
                 $conversationId,
-                50, // 获取最近50条消息
+                50, // Get the most recent 50 messages
                 $topicId,
-                false // 使用传统的 role 格式（user/assistant）而不是用户昵称
+                false // Use traditional role format (user/assistant) instead of user nicknames
             );
         } catch (Throwable $e) {
-            $this->getLogger()->error('获取会话历史消息失败', [
+            $this->getLogger()->error('Failed to get conversation history messages', [
                 'conversation_id' => $conversationId,
                 'topic_id' => $topicId,
                 'error' => $e->getMessage(),
@@ -167,30 +167,30 @@ class CheckLongTermMemoryEventSubscriber implements ListenerInterface
     }
 
     /**
-     * 构建包含历史消息的对话内容.
+     * Build conversation content with history messages.
      */
     private function buildConversationContentWithHistory(CheckLongTermMemoryEvent $event, array $historyMessages): string
     {
         $content = [];
-        // 添加历史消息
+        // Add history messages
         if (! empty($historyMessages)) {
-            $content[] = '=== 历史对话 ===';
+            $content[] = '=== History Conversation ===';
             foreach ($historyMessages as $message) {
                 if (is_array($message) && isset($message['role'], $message['content'])) {
                     $content[] = $message['role'] . ': ' . $message['content'];
                 }
             }
-            $content[] = "=== 历史对话结束 ===\n";
+            $content[] = "=== End of History Conversation ===\n";
         }
-        // 添加当前用户消息
-        $content[] = '=== 当前消息 ===';
-        $content[] = "用户消息: {$event->getPrompt()}";
+        // Add current user message
+        $content[] = '=== Current Message ===';
+        $content[] = "User message: {$event->getPrompt()}";
 
-        // 添加提及信息（如果有）
+        // Add mention information (if any)
         if (! empty($event->getMentions())) {
             $mentionsData = json_decode($event->getMentions(), true);
             if (is_array($mentionsData) && ! empty($mentionsData)) {
-                $content[] = '提及: ' . json_encode($mentionsData, JSON_UNESCAPED_UNICODE);
+                $content[] = 'Mentions: ' . json_encode($mentionsData, JSON_UNESCAPED_UNICODE);
             }
         }
         return implode("\n", $content);

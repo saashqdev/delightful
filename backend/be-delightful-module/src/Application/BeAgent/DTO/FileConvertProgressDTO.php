@@ -21,13 +21,13 @@ class FileConvertProgressDTO extends AbstractDTO
 
     public function __construct(mixed $data = null, ?int $total = null, ?float $percentage = null, ?string $message = null)
     {
-        // 如果第一个参数是数组，则使用数组初始化
+        // If the first parameter is an array, use array initialization
         if (is_array($data)) {
             parent::__construct($data);
             return;
         }
 
-        // 向后兼容：如果传入的是单个参数，则按原有方式处理
+        // Backward compatibility: if a single parameter is passed, process it the original way
         if ($data !== null) {
             $this->current = (int) $data;
         }

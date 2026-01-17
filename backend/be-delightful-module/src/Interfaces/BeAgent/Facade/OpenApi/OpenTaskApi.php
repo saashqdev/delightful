@@ -12,8 +12,8 @@ use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestCoContext;
 use App\Infrastructure\Util\Context\RequestContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
 use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\HandleTaskMessageAppService;
@@ -101,9 +101,9 @@ class OpenTaskApi extends AbstractApi
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'user_not_found');
         }
 
-        $magicUserAuthorization = MagicUserAuthorization::fromUserEntity($userEntity);
+        $delightfulUserAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
 
-        $requestContext->setUserAuthorization($magicUserAuthorization);
+        $requestContext->setUserAuthorization($delightfulUserAuthorization);
     }
 
     /**
@@ -115,7 +115,7 @@ class OpenTaskApi extends AbstractApi
         // 从请求中创建DTO并验证参数
         $requestDTO = CreateAgentTaskRequestDTO::fromRequest($this->request);
 
-        $magicUserAuthorization = RequestCoContext::getUserAuthorization();
+        $delightfulUserAuthorization = RequestCoContext::getUserAuthorization();
 
         // 判断话题是否存在，不存在则初始化话题
         $topicId = $requestDTO->getTopicId();
@@ -125,10 +125,10 @@ class OpenTaskApi extends AbstractApi
         $requestDTO->setConversationId((string) $topicId);
 
         $dataIsolation = new DataIsolation();
-        $dataIsolation->setCurrentUserId((string) $magicUserAuthorization->getId());
-        $dataIsolation->setThirdPartyOrganizationCode($magicUserAuthorization->getThirdPlatformOrganizationCode());
-        $dataIsolation->setCurrentOrganizationCode($magicUserAuthorization->getOrganizationCode());
-        $dataIsolation->setUserType($magicUserAuthorization->getUserType());
+        $dataIsolation->setCurrentUserId((string) $delightfulUserAuthorization->getId());
+        $dataIsolation->setThirdPartyOrganizationCode($delightfulUserAuthorization->getThirdPlatformOrganizationCode());
+        $dataIsolation->setCurrentOrganizationCode($delightfulUserAuthorization->getOrganizationCode());
+        $dataIsolation->setUserType($delightfulUserAuthorization->getUserType());
         $sandboxId = $topicDTO->getSandboxId();
         try {
             // 检查容器是否正常
@@ -143,7 +143,7 @@ class OpenTaskApi extends AbstractApi
                     'prompt' => $requestDTO->getPrompt(),
                     'attachments' => null,
                     'mentions' => null,
-                    'agent_user_id' => (string) $magicUserAuthorization->getId(),
+                    'agent_user_id' => (string) $delightfulUserAuthorization->getId(),
                     'agent_mode' => '',
                     'task_mode' => '',
                 ];
@@ -165,7 +165,7 @@ class OpenTaskApi extends AbstractApi
                 'prompt' => $requestDTO->getPrompt(),
                 'attachments' => null,
                 'mentions' => null,
-                'agent_user_id' => (string) $magicUserAuthorization->getId(),
+                'agent_user_id' => (string) $delightfulUserAuthorization->getId(),
                 'agent_mode' => '',
                 'task_mode' => $taskEntity->getTaskMode(),
             ];

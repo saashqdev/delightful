@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
@@ -30,29 +30,29 @@ use Throwable;
 
 /**
  * Message Queue Compensation Application Service.
- * 消息队列补偿应用服务 - 负责编排补偿流程和锁控制.
+ * Responsible for orchestrating the compensation process and lock control.
  */
 class MessageQueueCompensationAppService extends AbstractAppService
 {
-    // Lock strategy constants (应用层定义)
+    // Lock strategy constants (defined in application layer)
     private const GLOBAL_LOCK_KEY = 'msg_queue_compensation:global';
 
-    // Fixed configuration constants (固定技术参数)
-    private const BATCH_SIZE = 50;              // 每批处理话题数量
+    // Fixed configuration constants (fixed technical parameters)
+    private const BATCH_SIZE = 50;              // Number of topics to process per batch
 
-    private const GLOBAL_LOCK_EXPIRE = 30;      // 全局锁过期时间(秒)
+    private const GLOBAL_LOCK_EXPIRE = 30;      // Global lock expiration time (seconds)
 
-    private const TOPIC_LOCK_EXPIRE = 300;      // 话题锁过期时间(秒) - 传递给 DomainService
+    private const TOPIC_LOCK_EXPIRE = 300;      // Topic lock expiration time (seconds) - passed to DomainService
 
-    private const DELAY_MINUTES = 5;            // 延迟时间(分钟)
+    private const DELAY_MINUTES = 5;            // Delay time (minutes)
 
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
         private readonly MessageQueueDomainService $messageQueueDomainService,
         private readonly TopicDomainService $topicDomainService,
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         private readonly LockerInterface $locker,
         LoggerFactory $loggerFactory
     ) {
@@ -61,7 +61,7 @@ class MessageQueueCompensationAppService extends AbstractAppService
 
     /**
      * Execute compensation for pending message queues.
-     * 执行消息队列补偿处理.
+     * Execute message queue compensation processing.
      */
     public function executeCompensation(): array
     {
@@ -104,7 +104,7 @@ class MessageQueueCompensationAppService extends AbstractAppService
 
     /**
      * Get topic IDs for compensation processing.
-     * 获取待处理话题ID.
+     * Get topics to be processed.
      */
     private function getTopicIds(): array
     {
@@ -129,7 +129,7 @@ class MessageQueueCompensationAppService extends AbstractAppService
 
     /**
      * Process single topic with lock protection.
-     * 使用统一的话题锁保护处理单个话题.
+     * Use unified topic lock protection to process single topic.
      */
     private function processTopicWithLock(int $topicId): string
     {
@@ -152,7 +152,7 @@ class MessageQueueCompensationAppService extends AbstractAppService
 
     /**
      * Internal topic processing logic without lock management.
-     * 话题处理内部逻辑，不包含锁管理.
+     * Topic processing internal logic without lock management.
      */
     private function processTopicInternal(int $topicId): string
     {
@@ -237,7 +237,7 @@ class MessageQueueCompensationAppService extends AbstractAppService
 
     /**
      * Send message to agent using Chat service.
-     * 使用聊天服务发送消息给助理.
+     * Send message to agent using chat service.
      * @param mixed $messageStruct
      */
     private function sendMessageToAgent(
@@ -246,8 +246,8 @@ class MessageQueueCompensationAppService extends AbstractAppService
         $messageStruct
     ): array {
         try {
-            // Create MagicSeqEntity based on message content
-            $seqEntity = new MagicSeqEntity();
+            // Create DelightfulSeqEntity based on message content
+            $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setContent($messageStruct);
             $seqEntity->setSeqType(ChatMessageType::from($message->getMessageType()));
 
@@ -309,7 +309,7 @@ class MessageQueueCompensationAppService extends AbstractAppService
 
     /**
      * Update statistics based on processing result.
-     * 根据处理结果更新统计信息.
+     * Update statistics based on processing result.
      */
     private function updateStats(array &$stats, string $result): void
     {

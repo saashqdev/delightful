@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             // 添加复合索引：project_id + current_task_status + deleted_at
             // 用于优化根据项目ID查询运行中话题的性能
             $table->index(['project_id', 'current_task_status', 'deleted_at'], 'idx_project_task_status');
@@ -26,7 +26,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             $table->dropIndex('idx_project_task_status');
         });
     }

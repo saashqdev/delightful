@@ -14,7 +14,7 @@ use Throwable;
 
 /**
  * Message Queue Compensation Crontab.
- * 消息队列补偿定时任务 - 处理遗漏的消息队列补偿.
+ * Message queue compensation scheduled task - handles missed message queue compensation.
  */
 #[Crontab(
     rule: '*/30 * * * * *',                    // Execute every 30 seconds
@@ -35,7 +35,6 @@ readonly class MessageQueueCompensationCrontab
 
     /**
      * Main execution method.
-     * 主要执行方法.
      */
     public function execute(): void
     {

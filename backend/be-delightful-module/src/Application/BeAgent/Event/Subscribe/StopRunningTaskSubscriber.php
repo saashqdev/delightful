@@ -28,32 +28,32 @@ use PhpAmqpLib\Wire\AMQPTable;
 use Throwable;
 
 /**
- * 停止运行中任务消息订阅者.
+ * Stop running task message subscriber.
  */
 #[Consumer(
-    exchange: 'super_magic_stop_task',
-    routingKey: 'super_magic_stop_task',
-    queue: 'super_magic_stop_task',
+    exchange: 'be_delightful_stop_task',
+    routingKey: 'be_delightful_stop_task',
+    queue: 'be_delightful_stop_task',
     nums: 1
 )]
 class StopRunningTaskSubscriber extends ConsumerMessage
 {
     /**
-     * @var AMQPTable|array 队列参数，用于设置优先级等
+     * @var AMQPTable|array Queue arguments for setting priority, etc.
      */
     protected AMQPTable|array $queueArguments = [];
 
     /**
-     * @var null|array QoS 配置，用于控制预取数量等
+     * @var null|array QoS configuration for controlling prefetch count, etc.
      */
     protected ?array $qos = [
-        'prefetch_count' => 1, // 每次只预取1条消息
+        'prefetch_count' => 1, // Prefetch only 1 message at a time
         'prefetch_size' => 0,
         'global' => false,
     ];
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(
         private readonly TaskRepositoryInterface $taskRepository,
@@ -61,27 +61,27 @@ class StopRunningTaskSubscriber extends ConsumerMessage
         protected LockerInterface $locker,
         private readonly StdoutLoggerInterface $logger
     ) {
-        // 设置队列优先级参数
-        $this->queueArguments['x-max-priority'] = ['I', 10]; // 设置最高优先级为10
+        // Set queue priority parameters
+        $this->queueArguments['x-max-priority'] = ['I', 10]; // Set max priority to 10
     }
 
     /**
-     * 消费消息.
+     * Consume message.
      *
-     * @param mixed $data 消息数据
-     * @param AMQPMessage $message 原始消息对象
-     * @return Result 处理结果
+     * @param mixed $data Message data
+     * @param AMQPMessage $message Raw message object
+     * @return Result Processing result
      */
     public function consumeMessage($data, AMQPMessage $message): Result
     {
         try {
-            // 记录接收到的消息内容
+            // Log received message content
             $this->logger->info(sprintf(
-                '接收到停止任务消息: %s',
+                'Received stop task message: %s',
                 json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
 
-            // 获取消息属性并检查秒级时间戳
+            // Get message properties and check second-level timestamp
             $messageProperties = $message->get_properties();
             $applicationHeaders = $messageProperties['application_headers'] ?? new AMQPTable([]);
             $originalTimestampFromHeader = $applicationHeaders->getNativeData()['x-original-timestamp'] ?? null;
@@ -92,7 +92,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
             if ($originalTimestampFromHeader !== null) {
                 $actualOriginalTimestamp = (int) $originalTimestampFromHeader;
                 $this->logger->info(sprintf(
-                    '消息已存在原始秒级时间戳: %d (%s), event_id: %s',
+                    'Message already has original second-level timestamp: %d (%s), event_id: %s',
                     $actualOriginalTimestamp,
                     date('Y-m-d H:i:s', $actualOriginalTimestamp),
                     $data['event_id'] ?? 'N/A'
@@ -100,32 +100,32 @@ class StopRunningTaskSubscriber extends ConsumerMessage
             } else {
                 $actualOriginalTimestamp = $currentTimeForLog;
                 $this->logger->warning(sprintf(
-                    '消息未找到 x-original-timestamp 头部，将使用当前时间作为本次处理的原始时间戳参考: %d (%s). Event ID: %s',
+                    'Message x-original-timestamp header not found, will use current time as reference for original timestamp in this processing: %d (%s). Event ID: %s',
                     $actualOriginalTimestamp,
                     date('Y-m-d H:i:s', $actualOriginalTimestamp),
                     $data['event_id'] ?? 'N/A'
                 ));
             }
 
-            // 验证消息格式
+            // Validate message format
             $this->validateMessageFormat($data);
 
-            // 创建事件对象
+            // Create event object
             $event = StopRunningTaskEvent::fromArray($data);
 
-            // 直接处理停止任务，锁的粒度在话题级别处理
+            // Directly process stop task, lock granularity handled at topic level
             $this->stopRunningTasks($event);
             return Result::ACK;
         } catch (BusinessException $e) {
             $this->logger->error(sprintf(
-                '处理停止任务消息失败，业务异常: %s, 消息内容: %s',
+                'Failed to process stop task message, business exception: %s, message content: %s',
                 $e->getMessage(),
                 json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
             return Result::ACK;
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '处理停止任务消息失败，系统异常: %s, 消息内容: %s',
+                'Failed to process stop task message, system exception: %s, message content: %s',
                 $e->getMessage(),
                 json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
@@ -139,10 +139,10 @@ class StopRunningTaskSubscriber extends ConsumerMessage
     }
 
     /**
-     * 验证消息格式.
+     * Validate message format.
      *
-     * @param mixed $data 消息数据
-     * @throws BusinessException 如果消息格式不正确则抛出异常
+     * @param mixed $data Message data
+     * @throws BusinessException If message format is incorrect, throw exception
      */
     private function validateMessageFormat($data): void
     {
@@ -157,7 +157,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
         foreach ($requiredFields as $field) {
             if (! isset($data[$field]) || (is_string($data[$field]) && empty($data[$field]))) {
                 $this->logger->warning(sprintf(
-                    '停止任务消息格式不正确，缺少必要字段: %s, 消息内容: %s',
+                    'Stop task message format is incorrect, missing required field: %s, message content: %s',
                     $field,
                     json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                 ));
@@ -172,15 +172,15 @@ class StopRunningTaskSubscriber extends ConsumerMessage
     }
 
     /**
-     * 停止运行中的任务.
+     * Stop running tasks.
      *
-     * @param StopRunningTaskEvent $event 停止任务事件
+     * @param StopRunningTaskEvent $event Stop task event
      * @throws BusinessException|SandboxOperationException
      */
     private function stopRunningTasks(StopRunningTaskEvent $event): void
     {
         $this->logger->info(sprintf(
-            '开始处理停止任务请求，类型: %s, ID: %d, 用户: %s, 组织: %s',
+            'Starting to process stop task request, type: %s, ID: %d, user: %s, organization: %s',
             $event->getDataType()->value,
             $event->getDataId(),
             $event->getUserId(),
@@ -188,12 +188,12 @@ class StopRunningTaskSubscriber extends ConsumerMessage
         ));
 
         try {
-            // 根据数据类型查询相关的运行中任务
+            // Query related running tasks by data type
             $runningTasks = $this->queryRunningTasksByDataType($event);
 
             if (empty($runningTasks)) {
                 $this->logger->info(sprintf(
-                    '未找到需要停止的运行中任务，类型: %s, ID: %d',
+                    'No running tasks found to stop, type: %s, ID: %d',
                     $event->getDataType()->value,
                     $event->getDataId()
                 ));
@@ -201,13 +201,13 @@ class StopRunningTaskSubscriber extends ConsumerMessage
             }
 
             $this->logger->info(sprintf(
-                '找到 %d 个需要停止的运行中任务，类型: %s, ID: %d',
+                'Found %d running tasks to stop, type: %s, ID: %d',
                 count($runningTasks),
                 $event->getDataType()->value,
                 $event->getDataId()
             ));
 
-            // 按话题ID分组任务
+            // Group tasks by topic ID
             $tasksByTopic = [];
             foreach ($runningTasks as $task) {
                 $topicId = $task->getTopicId();
@@ -217,27 +217,27 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                 $tasksByTopic[$topicId][] = $task;
             }
 
-            // 创建数据隔离对象
+            // Create data isolation object
             $dataIsolation = new DataIsolation();
             $dataIsolation->setCurrentUserId($event->getUserId());
             $dataIsolation->setCurrentOrganizationCode($event->getOrganizationCode());
 
-            // 按话题处理任务，为每个话题加锁
+            // Process tasks by topic, lock each topic
             $totalSuccessCount = 0;
             $totalFailureCount = 0;
             $skippedTopicCount = 0;
 
             foreach ($tasksByTopic as $topicId => $tasks) {
-                // 为当前话题获取锁
+                // Acquire lock for current topic
                 $lockKey = 'stop_running_tasks_topic_lock:' . $topicId;
                 $lockOwner = IdGenerator::getUniqueId32();
-                $lockExpireSeconds = 30; // 话题级别锁，设置30秒超时
+                $lockExpireSeconds = 30; // Topic-level lock, set 30 seconds timeout
 
                 $lockAcquired = $this->acquireLock($lockKey, $lockOwner, $lockExpireSeconds);
 
                 if (! $lockAcquired) {
                     $this->logger->info(sprintf(
-                        '无法获取话题 %d 的停止任务锁，跳过该话题的 %d 个任务处理，event_id: %s',
+                        'Cannot acquire stop task lock for topic %d, skipping processing of %d tasks for this topic, event_id: %s',
                         $topicId,
                         count($tasks),
                         $event->getEventId()
@@ -247,7 +247,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                 }
 
                 $this->logger->info(sprintf(
-                    '已获取话题 %d 的停止任务锁，开始处理 %d 个任务，event_id: %s',
+                    'Acquired stop task lock for topic %d, starting to process %d tasks, event_id: %s',
                     $topicId,
                     count($tasks),
                     $event->getEventId()
@@ -267,7 +267,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                             );
 
                             $this->logger->info(sprintf(
-                                '成功发送中断消息，话题ID: %d, 任务ID: %s, 沙箱ID: %s',
+                                'Successfully sent interrupt message, topic ID: %d, task ID: %s, sandbox ID: %s',
                                 $topicId,
                                 $task->getTaskId(),
                                 $task->getSandboxId()
@@ -276,7 +276,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                             ++$successCount;
                         } catch (SandboxOperationException $e) {
                             $this->logger->error(sprintf(
-                                '发送中断消息失败，话题ID: %d, 任务ID: %s, 沙箱ID: %s, 错误: %s',
+                                'Failed to send interrupt message, topic ID: %d, task ID: %s, sandbox ID: %s, error: %s',
                                 $topicId,
                                 $task->getTaskId(),
                                 $task->getSandboxId(),
@@ -285,7 +285,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                             ++$failureCount;
                         } catch (Throwable $e) {
                             $this->logger->error(sprintf(
-                                '发送中断消息时发生未知错误，话题ID: %d, 任务ID: %s, 沙箱ID: %s, 错误: %s',
+                                'Unknown error occurred while sending interrupt message, topic ID: %d, task ID: %s, sandbox ID: %s, error: %s',
                                 $topicId,
                                 $task->getTaskId(),
                                 $task->getSandboxId(),
@@ -299,7 +299,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                     $totalFailureCount += $failureCount;
 
                     $this->logger->info(sprintf(
-                        '话题 %d 任务处理完成，成功: %d, 失败: %d',
+                        'Topic %d task processing completed, success: %d, failure: %d',
                         $topicId,
                         $successCount,
                         $failureCount
@@ -307,12 +307,12 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                 } finally {
                     if ($this->releaseLock($lockKey, $lockOwner)) {
                         $this->logger->debug(sprintf(
-                            '已释放话题 %d 的停止任务锁',
+                            'Released stop task lock for topic %d',
                             $topicId
                         ));
                     } else {
                         $this->logger->error(sprintf(
-                            '释放话题 %d 的停止任务锁失败，可能需要人工干预',
+                            'Failed to release stop task lock for topic %d, manual intervention may be required',
                             $topicId
                         ));
                     }
@@ -320,7 +320,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
             }
 
             $this->logger->info(sprintf(
-                '停止任务处理完成，类型: %s, ID: %d, 总成功: %d, 总失败: %d, 跳过话题数: %d',
+                'Stop task processing completed, type: %s, ID: %d, total success: %d, total failure: %d, skipped topics: %d',
                 $event->getDataType()->value,
                 $event->getDataId(),
                 $totalSuccessCount,
@@ -329,7 +329,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
             ));
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '停止任务处理失败，类型: %s, ID: %d, 错误: %s',
+                'Stop task processing failed, type: %s, ID: %d, error: %s',
                 $event->getDataType()->value,
                 $event->getDataId(),
                 $e->getMessage()
@@ -339,10 +339,10 @@ class StopRunningTaskSubscriber extends ConsumerMessage
     }
 
     /**
-     * 根据数据类型查询相关的运行中任务.
+     * Query related running tasks by data type.
      *
-     * @param StopRunningTaskEvent $event 停止任务事件
-     * @return array 运行中的任务列表
+     * @param StopRunningTaskEvent $event Stop task event
+     * @return array List of running tasks
      */
     private function queryRunningTasksByDataType(StopRunningTaskEvent $event): array
     {
@@ -350,7 +350,7 @@ class StopRunningTaskSubscriber extends ConsumerMessage
 
         switch ($event->getDataType()) {
             case DeleteDataType::WORKSPACE:
-                // 查询工作区下所有运行中的话题（包括已删除的话题）
+                // Query all running topics in workspace (including deleted topics)
                 $topicConditions = [
                     'workspace_id' => $event->getDataId(),
                     'current_task_status' => TaskStatus::RUNNING->value,
@@ -358,14 +358,14 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                 $topicsResult = $this->queryTopicsIncludeDeleted($topicConditions);
                 $topics = $topicsResult['list'] ?? [];
 
-                // 查询这些话题下的运行中任务
+                // Query running tasks in these topics
                 foreach ($topics as $topic) {
                     $tasks = $this->getRunningTasksByTopicId($topic->getId());
                     $runningTasks = array_merge($runningTasks, $tasks);
                 }
                 break;
             case DeleteDataType::PROJECT:
-                // 查询项目下所有运行中的话题（包括已删除的话题）
+                // Query all running topics in project (including deleted topics)
                 $topicConditions = [
                     'project_id' => $event->getDataId(),
                     'current_task_status' => TaskStatus::RUNNING->value,
@@ -373,19 +373,19 @@ class StopRunningTaskSubscriber extends ConsumerMessage
                 $topicsResult = $this->queryTopicsIncludeDeleted($topicConditions);
                 $topics = $topicsResult['list'] ?? [];
 
-                // 查询这些话题下的运行中任务
+                // Query running tasks in these topics
                 foreach ($topics as $topic) {
                     $tasks = $this->getRunningTasksByTopicId($topic->getId());
                     $runningTasks = array_merge($runningTasks, $tasks);
                 }
                 break;
             case DeleteDataType::TOPIC:
-                // 直接查询话题下的运行中任务
+                // Directly query running tasks in topic
                 $runningTasks = $this->getRunningTasksByTopicId($event->getDataId());
                 break;
             default:
                 $this->logger->warning(sprintf(
-                    '未知的数据类型: %s',
+                    'Unknown data type: %s',
                     $event->getDataType()->value
                 ));
                 break;
@@ -395,20 +395,20 @@ class StopRunningTaskSubscriber extends ConsumerMessage
     }
 
     /**
-     * 查询话题，包括已删除的话题.
-     * 这个方法用于停止任务场景，需要查询到已删除话题下的运行中任务.
+     * Query topics including deleted topics.
+     * This method is used for stop task scenarios, needs to query running tasks in deleted topics.
      *
-     * @param array $conditions 查询条件
-     * @return array 话题列表
+     * @param array $conditions Query conditions
+     * @return array Topic list
      */
     private function queryTopicsIncludeDeleted(array $conditions): array
     {
-        // 由于标准的 getTopicsByConditions 会过滤掉已删除的话题，
-        // 我们需要使用 withTrashed() 方法来获取包括已删除的话题
+        // Since the standard getTopicsByConditions filters out deleted topics,
+        // we need to use the withTrashed() method to get topics including deleted ones
         /** @phpstan-ignore-next-line - TopicModel uses SoftDeletes trait which provides withTrashed() */
         $query = TopicModel::query()->withTrashed();
 
-        // 应用条件过滤
+        // Apply condition filters
         foreach ($conditions as $field => $value) {
             if (is_array($value)) {
                 $query->whereIn($field, $value);
@@ -417,16 +417,16 @@ class StopRunningTaskSubscriber extends ConsumerMessage
             }
         }
 
-        // 获取所有话题，包括已删除的
+        // Get all topics, including deleted ones
         $topics = $query->get();
 
         $this->logger->info(sprintf(
-            '查询话题（包括已删除）：找到 %d 个话题，查询条件：%s',
+            'Query topics (including deleted): found %d topics, query conditions: %s',
             $topics->count(),
             json_encode($conditions, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
         ));
 
-        // 转换为实体对象
+        // Convert to entity objects
         $list = [];
         foreach ($topics as $topic) {
             $list[] = new TopicEntity($topic->toArray());
@@ -439,10 +439,10 @@ class StopRunningTaskSubscriber extends ConsumerMessage
     }
 
     /**
-     * 根据话题ID获取运行中的任务.
+     * Get running tasks by topic ID.
      *
-     * @param int $topicId 话题ID
-     * @return array 运行中的任务列表
+     * @param int $topicId Topic ID
+     * @return array List of running tasks
      */
     private function getRunningTasksByTopicId(int $topicId): array
     {

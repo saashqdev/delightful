@@ -31,7 +31,7 @@ class WorkspaceModel extends AbstractModel
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_super_agent_workspaces';
+    protected ?string $table = 'delightful_be_agent_workspaces';
 
     /**
      * The attributes that are mass assignable.

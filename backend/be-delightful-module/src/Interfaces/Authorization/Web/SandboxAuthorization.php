@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Interfaces\Authorization\Web;
 
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\ChatErrorCode;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class SandboxAuthorization extends MagicUserAuthorization
+class SandboxAuthorization extends DelightfulUserAuthorization
 {
     public static function retrieveById($key): ?Authenticatable
     {
@@ -31,29 +31,29 @@ class SandboxAuthorization extends MagicUserAuthorization
             ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
         }
 
-        $userDomainService = di(MagicUserDomainService::class);
-        $accountDomainService = di(MagicAccountDomainService::class);
+        $userDomainService = di(DelightfulUserDomainService::class);
+        $accountDomainService = di(DelightfulAccountDomainService::class);
 
         $userEntity = $userDomainService->getUserById($userId);
         if ($userEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
 
-        $magicAccountEntity = $accountDomainService->getAccountInfoByMagicId($userEntity->getMagicId());
-        if ($magicAccountEntity === null) {
+        $delightfulAccountEntity = $accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());
+        if ($delightfulAccountEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
-        $magicUserInfo = new self();
-        $magicUserInfo->setId($userEntity->getUserId());
-        $magicUserInfo->setNickname($userEntity->getNickname());
-        $magicUserInfo->setAvatar($userEntity->getAvatarUrl());
-        $magicUserInfo->setStatus((string) $userEntity->getStatus()->value);
-        $magicUserInfo->setOrganizationCode($userEntity->getOrganizationCode());
-        $magicUserInfo->setMagicId($userEntity->getMagicId());
-        $magicUserInfo->setMobile($magicAccountEntity->getPhone());
-        $magicUserInfo->setCountryCode($magicAccountEntity->getCountryCode());
-        $magicUserInfo->setRealName($magicAccountEntity->getRealName());
-        $magicUserInfo->setUserType($userEntity->getUserType());
-        return $magicUserInfo;
+        $delightfulUserInfo = new self();
+        $delightfulUserInfo->setId($userEntity->getUserId());
+        $delightfulUserInfo->setNickname($userEntity->getNickname());
+        $delightfulUserInfo->setAvatar($userEntity->getAvatarUrl());
+        $delightfulUserInfo->setStatus((string) $userEntity->getStatus()->value);
+        $delightfulUserInfo->setOrganizationCode($userEntity->getOrganizationCode());
+        $delightfulUserInfo->setDelightfulId($userEntity->getDelightfulId());
+        $delightfulUserInfo->setMobile($delightfulAccountEntity->getPhone());
+        $delightfulUserInfo->setCountryCode($delightfulAccountEntity->getCountryCode());
+        $delightfulUserInfo->setRealName($delightfulAccountEntity->getRealName());
+        $delightfulUserInfo->setUserType($userEntity->getUserType());
+        return $delightfulUserInfo;
     }
 }

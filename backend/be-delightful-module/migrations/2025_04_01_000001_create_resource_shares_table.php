@@ -17,10 +17,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_resource_shares')) {
+        if (Schema::hasTable('delightful_resource_shares')) {
             return;
         }
-        Schema::create('magic_resource_shares', function (Blueprint $table) {
+        Schema::create('delightful_resource_shares', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('resource_id', 64)->comment('资源ID');
             $table->unsignedTinyInteger('resource_type')->comment('资源类型');
@@ -51,6 +51,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_resource_shares');
+        Schema::dropIfExists('delightful_resource_shares');
     }
 };

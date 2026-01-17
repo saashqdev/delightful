@@ -20,7 +20,7 @@ class TaskModel extends AbstractModel
     /**
      * 表名.
      */
-    protected ?string $table = 'magic_super_agent_task';
+    protected ?string $table = 'delightful_be_agent_task';
 
     /**
      * 主键.

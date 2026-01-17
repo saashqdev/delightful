@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_super_agent_message_queue')) {
+        if (Schema::hasTable('delightful_be_agent_message_queue')) {
             return;
         }
-        Schema::create('magic_super_agent_message_queue', function (Blueprint $table) {
+        Schema::create('delightful_be_agent_message_queue', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('队列ID (雪花ID)');
             $table->string('user_id', 128)->comment('用户ID');
             $table->string('organization_code', 64)->comment('组织代码');

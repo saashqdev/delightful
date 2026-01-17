@@ -11,7 +11,7 @@ use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\Service\AgentFileAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\FileBatchAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\FileManagementAppService;

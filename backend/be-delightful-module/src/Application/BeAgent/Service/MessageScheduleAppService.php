@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Contact\UserSetting\UserSettingKey;
-use App\Domain\Chat\DTO\Message\MagicMessageStruct;
+use App\Domain\Chat\DTO\Message\DelightfulMessageStruct;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicUserSettingDomainService;
+use App\Domain\Contact\Service\DelightfulUserSettingDomainService;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Cron\CronExpression;
 use DateTime;
@@ -51,10 +51,10 @@ use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateMessageSchedule
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageScheduleItemDTO;
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageScheduleListItemDTO;
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageScheduleLogItemDTO;
-use Dtyq\TaskScheduler\Entity\TaskScheduler;
-use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
-use Dtyq\TaskScheduler\Entity\ValueObject\TaskType;
-use Dtyq\TaskScheduler\Service\TaskSchedulerDomainService;
+use Delightful\TaskScheduler\Entity\TaskScheduler;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
+use Delightful\TaskScheduler\Service\TaskSchedulerDomainService;
 use Exception;
 use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
@@ -73,7 +73,7 @@ class MessageScheduleAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
         private readonly ChatAppService $chatAppService,
         private readonly MessageScheduleDomainService $messageScheduleDomainService,
         private readonly UserMessageToAgentAppService $userMessageToAgentAppService,
@@ -83,7 +83,7 @@ class MessageScheduleAppService extends AbstractAppService
         private readonly WorkspaceDomainService $workspaceDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
         private readonly TaskSchedulerDomainService $taskSchedulerDomainService,
-        private readonly MagicUserSettingDomainService $magicUserSettingDomainService,
+        private readonly DelightfulUserSettingDomainService $delightfulUserSettingDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -838,7 +838,7 @@ class MessageScheduleAppService extends AbstractAppService
         );
         $text = '';
         if ($messageStruct instanceof TextContentInterface) {
-            $authorization = new MagicUserAuthorization();
+            $authorization = new DelightfulUserAuthorization();
             $authorization->setId($dataIsolation->getCurrentUserId());
             $authorization->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
             $authorization->setUserType(UserType::Human);
@@ -856,9 +856,9 @@ class MessageScheduleAppService extends AbstractAppService
             $messageContent
         );
 
-        // Cast to MagicMessageStruct to access getExtra() method
+        // Cast to DelightfulMessageStruct to access getExtra() method
         $superAgentExtra = null;
-        if ($messageStruct instanceof MagicMessageStruct) {
+        if ($messageStruct instanceof DelightfulMessageStruct) {
             $superAgentExtra = $messageStruct->getExtra()?->getBeAgent();
         }
         $mentions = $superAgentExtra?->getMentionsJsonStruct();
@@ -943,11 +943,11 @@ class MessageScheduleAppService extends AbstractAppService
      */
     private function updateMentionsFileInfo(array &$messageContent, array $fileUpdateMapping): void
     {
-        if (! isset($messageContent['extra']['super_agent']['mentions'])) {
+        if (! isset($messageContent['extra']['be_agent']['mentions'])) {
             return;
         }
 
-        foreach ($messageContent['extra']['super_agent']['mentions'] as &$mention) {
+        foreach ($messageContent['extra']['be_agent']['mentions'] as &$mention) {
             if (
                 $mention['type'] === 'mention'
                 && isset($mention['attrs']['type'])
@@ -975,7 +975,7 @@ class MessageScheduleAppService extends AbstractAppService
             return $this->topicDomainService->getTopicById($topicId);
         }
         // 1. Initialize chat conversation and topic
-        [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+        [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
         $topicName = $this->getSummarizeMessageText($dataIsolation, $messageType, $messageContent);
 
@@ -1229,14 +1229,14 @@ class MessageScheduleAppService extends AbstractAppService
             }
 
             // Create user setting entity for project MCP servers
-            $entity = new MagicUserSettingEntity();
+            $entity = new DelightfulUserSettingEntity();
             $entity->setKey(UserSettingKey::genBeDelightfulProjectMCPServers((string) $projectId));
             $entity->setValue([
                 'servers' => $plugins['servers'],
             ]);
 
             // Save through domain service
-            $this->magicUserSettingDomainService->save($dataIsolation, $entity);
+            $this->delightfulUserSettingDomainService->save($dataIsolation, $entity);
 
             $this->logger->info('Set project MCP config from scheduled task', [
                 'project_id' => $projectId,

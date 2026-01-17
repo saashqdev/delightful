@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
@@ -30,7 +30,7 @@ class ClientMessageAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(get_class($this));
@@ -251,7 +251,7 @@ class ClientMessageAppService extends AbstractAppService
         string $chatConversationId
     ): string {
         // Create sequence entity
-        $seqDTO = new MagicSeqEntity();
+        $seqDTO = new DelightfulSeqEntity();
         $seqDTO->setObjectType(ConversationType::Ai);
         $seqDTO->setContent($message);
         $seqDTO->setSeqType(ChatMessageType::BeAgentCard);

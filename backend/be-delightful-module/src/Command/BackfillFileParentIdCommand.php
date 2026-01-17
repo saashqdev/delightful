@@ -42,7 +42,7 @@ class BackfillFileParentIdCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('Backfill parent_id for existing files in magic_super_agent_task_files table');
+        $this->setDescription('Backfill parent_id for existing files in delightful_be_agent_task_files table');
         $this->addArgument('project_id', InputArgument::OPTIONAL, 'Optional project ID to process only one project');
         $this->addArgument('organization_code', InputArgument::OPTIONAL, 'Optional organization code to process projects by organization');
     }

@@ -93,7 +93,7 @@ export function getRichTextHtml(content?: string) {
 
 // Cache emoji regular expression
 const createDelightfulEmojiRegex = memoize(() => {
-	// Create regex to match all magic emojis
+	// Create regex to match all delightful emojis
 	// Example: match [smile], [laugh] etc. format
 	return new RegExp(
 		Array.from(emojiFilePathCache.keys())

@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\Context\RequestContext;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\ProjectMemberAppService;
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateProjectRequestDTO;

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Entity;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 
@@ -19,9 +19,9 @@ class UserAuthorization
     protected string $id = '';
 
     /**
-     * 用户注册后生成的magic_id,全局唯一
+     * 用户注册后生成的delightful_id,全局唯一
      */
-    protected string $magicId = '';
+    protected string $delightfulId = '';
 
     protected UserType $userType;
 
@@ -56,7 +56,7 @@ class UserAuthorization
     protected array $permissions = [];
 
     // 当前用户所处的环境id
-    protected int $magicEnvId = 0;
+    protected int $delightfulEnvId = 0;
 
     // 第三方平台的原始组织编码
     protected string $thirdPlatformOrganizationCode = '';
@@ -188,24 +188,24 @@ class UserAuthorization
         return $this;
     }
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setMagicId(string $magicId): void
+    public function setDelightfulId(string $delightfulId): void
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
-    public function getMagicEnvId(): int
+    public function getDelightfulEnvId(): int
     {
-        return $this->magicEnvId;
+        return $this->delightfulEnvId;
     }
 
-    public function setMagicEnvId(int $magicEnvId): void
+    public function setDelightfulEnvId(int $delightfulEnvId): void
     {
-        $this->magicEnvId = $magicEnvId;
+        $this->delightfulEnvId = $delightfulEnvId;
     }
 
     public function getThirdPlatformOrganizationCode(): string
@@ -243,11 +243,11 @@ class UserAuthorization
         return $this;
     }
 
-    public static function fromUserEntity(MagicUserEntity $userEntity): UserAuthorization
+    public static function fromUserEntity(DelightfulUserEntity $userEntity): UserAuthorization
     {
         $authorization = new UserAuthorization();
         $authorization->setId($userEntity->getUserId());
-        $authorization->setMagicId($userEntity->getMagicId());
+        $authorization->setDelightfulId($userEntity->getDelightfulId());
         $authorization->setOrganizationCode($userEntity->getOrganizationCode());
         $authorization->setUserType($userEntity->getUserType());
         return $authorization;

@@ -26,7 +26,7 @@ class AsrTaskStatusDTO
     public ?string $filePath = null; // workregionfilepath
 
     // fileID(databasemiddleactualID)
-    public ?string $audioFileId = null; // audiofileID(writedelightful_super_agent_task_filestablebackreturnID)
+    public ?string $audioFileId = null; // audiofileID(writedelightful_be_agent_task_filestablebackreturnID)
 
     // note fileinfo
     public ?string $noteFileName = null; // notefilename(andaudiofileinsameonedirectory,fornullindicatenonotefile)

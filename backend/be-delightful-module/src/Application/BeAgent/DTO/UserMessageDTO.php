@@ -25,7 +25,7 @@ class UserMessageDTO
         private readonly ?string $mentions = null,
         private readonly ChatInstruction $instruction = ChatInstruction::Normal,
         private readonly string $topicMode = 'general',
-        // $taskMode 即将废弃，请勿使用
+        // $taskMode is deprecated, please do not use
         private readonly string $taskMode = '',
         private readonly ?string $rawContent = null,
         private array $mcpConfig = [],
@@ -151,7 +151,7 @@ class UserMessageDTO
     }
 
     /**
-     * 获取单个动态参数.
+     * Get a single dynamic parameter.
      */
     public function getDynamicParam(string $key, mixed $default = null): mixed
     {

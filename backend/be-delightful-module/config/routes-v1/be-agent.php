@@ -163,7 +163,7 @@ Router::addGroup(
 
         // Account related
         Router::addGroup('/accounts', static function () {
-            // Initialize Super Magic account
+            // Initialize Super Delightful account
             Router::post('/init', [AccountApi::class, 'initAccount']);
         });
 
@@ -324,7 +324,7 @@ Router::addGroup('/api/v1/be-agent', static function () {
     Router::addGroup('/file', static function () {
         // Sandbox file change notification
         Router::post('/sandbox/notifications', [FileApi::class, 'handleSandboxNotification']);
-        // Refresh STS Token (for super-magic use, exchange metadata for directory information)
+        // Refresh STS Token (for be-delightful use, exchange metadata for directory information)
         Router::post('/refresh-sts-token', [FileApi::class, 'refreshStsToken']);
         // Batch process attachments
         Router::post('/process-attachments', [FileApi::class, 'processAttachments']);

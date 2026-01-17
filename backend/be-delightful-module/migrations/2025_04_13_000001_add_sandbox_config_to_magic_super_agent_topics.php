@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             $table->json('sandbox_config')->nullable()->comment('沙箱配置信息')->after('sandbox_id');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             $table->dropColumn('sandbox_config');
         });
     }

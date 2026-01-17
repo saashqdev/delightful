@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
-use App\Domain\Chat\Entity\MagicTopicEntity;
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
+use App\Domain\Chat\Entity\DelightfulTopicEntity;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Repository\Facade\MagicChatSeqRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicChatTopicRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatSeqRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatTopicRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
@@ -47,9 +47,9 @@ class TopicDomainService
     public function __construct(
         protected TopicRepositoryInterface $topicRepository,
         protected TaskRepositoryInterface $taskRepository,
-        protected MagicMessageRepositoryInterface $magicMessageRepository,
-        protected MagicChatSeqRepositoryInterface $magicSeqRepository,
-        protected MagicChatTopicRepositoryInterface $magicChatTopicRepository,
+        protected DelightfulMessageRepositoryInterface $delightfulMessageRepository,
+        protected DelightfulChatSeqRepositoryInterface $delightfulSeqRepository,
+        protected DelightfulChatTopicRepositoryInterface $delightfulChatTopicRepository,
         protected TaskMessageRepositoryInterface $taskMessageRepository,
         protected CloudFileRepositoryInterface $cloudFileRepository,
         LoggerFactory $loggerFactory,
@@ -494,16 +494,16 @@ class TopicDomainService
      */
     public function rollbackMessages(string $targetSeqId): void
     {
-        // 根据seq_id获取magic_message_id
-        $magicMessageId = $this->topicRepository->getMagicMessageIdBySeqId($targetSeqId);
-        if (empty($magicMessageId)) {
+        // 根据seq_id获取delightful_message_id
+        $delightfulMessageId = $this->topicRepository->getDelightfulMessageIdBySeqId($targetSeqId);
+        if (empty($delightfulMessageId)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.seq_id_not_found');
         }
 
         // 获取所有相关的seq_id（所有视角）
-        $baseSeqIds = $this->topicRepository->getAllSeqIdsByMagicMessageId($magicMessageId);
+        $baseSeqIds = $this->topicRepository->getAllSeqIdsByDelightfulMessageId($delightfulMessageId);
         if (empty($baseSeqIds)) {
-            ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.magic_message_id_not_found');
+            ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.delightful_message_id_not_found');
         }
 
         // 获取从当前消息开始的所有seq_ids（当前消息和后续消息）
@@ -520,7 +520,7 @@ class TopicDomainService
             // 删除messages和sequences数据
             $this->topicRepository->deleteMessagesAndSequencesBySeqIds($allSeqIds);
 
-            // 删除magic_super_agent_message表的数据
+            // 删除delightful_be_agent_message表的数据
             $this->topicRepository->deleteBeAgentMessagesFromSeqId((int) $targetSeqId);
         });
     }
@@ -530,16 +530,16 @@ class TopicDomainService
      */
     public function rollbackMessagesStart(string $targetSeqId): void
     {
-        // 根据seq_id获取magic_message_id
-        $magicMessageId = $this->topicRepository->getMagicMessageIdBySeqId($targetSeqId);
-        if (empty($magicMessageId)) {
+        // 根据seq_id获取delightful_message_id
+        $delightfulMessageId = $this->topicRepository->getDelightfulMessageIdBySeqId($targetSeqId);
+        if (empty($delightfulMessageId)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.seq_id_not_found');
         }
 
         // 获取所有相关的seq_id（所有视角）
-        $baseSeqIds = $this->topicRepository->getAllSeqIdsByMagicMessageId($magicMessageId);
+        $baseSeqIds = $this->topicRepository->getAllSeqIdsByDelightfulMessageId($delightfulMessageId);
         if (empty($baseSeqIds)) {
-            ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.magic_message_id_not_found');
+            ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.delightful_message_id_not_found');
         }
 
         // 获取从当前消息开始的所有seq_ids（当前消息和后续消息）
@@ -555,11 +555,11 @@ class TopicDomainService
         Db::transaction(function () use ($allSeqIdsFromCurrent, $allSeqIdsBeforeCurrent) {
             // 1. 将小于target_message_id的所有消息设置为已查看状态（正常状态）
             if (! empty($allSeqIdsBeforeCurrent)) {
-                $this->topicRepository->batchUpdateSeqStatus($allSeqIdsBeforeCurrent, MagicMessageStatus::Read);
+                $this->topicRepository->batchUpdateSeqStatus($allSeqIdsBeforeCurrent, DelightfulMessageStatus::Read);
             }
 
             // 2. 标记大于等于target_message_id的消息为撤回状态
-            $this->topicRepository->batchUpdateSeqStatus($allSeqIdsFromCurrent, MagicMessageStatus::Revoked);
+            $this->topicRepository->batchUpdateSeqStatus($allSeqIdsFromCurrent, DelightfulMessageStatus::Revoked);
         });
     }
 
@@ -577,7 +577,7 @@ class TopicDomainService
         }
 
         // 为了使用现有的删除逻辑，需要找到一个target_seq_id用于deleteBeAgentMessagesFromSeqId
-        // 取最小的seq_id作为target（确保删除所有相关的super_agent_message）
+        // 取最小的seq_id作为target（确保删除所有相关的be_agent_message）
         $targetSeqId = min($revokedSeqIds);
 
         // 在事务中执行删除操作（与现有rollbackMessages逻辑一致）
@@ -588,7 +588,7 @@ class TopicDomainService
             // 删除messages和sequences数据
             $this->topicRepository->deleteMessagesAndSequencesBySeqIds($revokedSeqIds);
 
-            // 删除magic_super_agent_message表的数据
+            // 删除delightful_be_agent_message表的数据
             $this->topicRepository->deleteBeAgentMessagesFromSeqId($targetSeqId);
         });
     }
@@ -627,7 +627,7 @@ class TopicDomainService
         // 在事务中执行状态更新操作（将撤回状态恢复为已查看状态）
         Db::transaction(function () use ($revokedSeqIds) {
             // 将撤回状态的消息恢复为已查看状态
-            $this->topicRepository->batchUpdateSeqStatus($revokedSeqIds, MagicMessageStatus::Read);
+            $this->topicRepository->batchUpdateSeqStatus($revokedSeqIds, DelightfulMessageStatus::Read);
         });
 
         $this->logger->info('[TopicDomain] Message rollback undo completed successfully', [
@@ -1015,13 +1015,13 @@ class TopicDomainService
             'chat_conversation_id' => $sourceTopicEntity->getChatConversationId(),
         ]);
 
-        // 1. 通过 chat_topic_id 查询 magic_chat_topics 表获取所有相关记录
-        $existingTopics = $this->magicChatTopicRepository->getTopicsByTopicId($sourceTopicEntity->getChatTopicId());
+        // 1. 通过 chat_topic_id 查询 delightful_chat_topics 表获取所有相关记录
+        $existingTopics = $this->delightfulChatTopicRepository->getTopicsByTopicId($sourceTopicEntity->getChatTopicId());
 
         if (count($existingTopics) !== 2) {
             ExceptionBuilder::throw(
                 BeAgentErrorCode::TOPIC_NOT_FOUND,
-                trans('super_agent.topic.im_topic_not_found')
+                trans('be_agent.topic.im_topic_not_found')
             );
         }
 
@@ -1032,7 +1032,7 @@ class TopicDomainService
 
         // 3. 在循环中确定角色并直接创建记录
         foreach ($existingTopics as $topic) {
-            $newTopicEntity = new MagicTopicEntity();
+            $newTopicEntity = new DelightfulTopicEntity();
             $newTopicEntity->setTopicId($newTopicId);
             $newTopicEntity->setConversationId($topic->getConversationId());
             $newTopicEntity->setName(! empty($topicName) ? $topicName : $sourceTopicEntity->getTopicName());
@@ -1040,7 +1040,7 @@ class TopicDomainService
             $newTopicEntity->setOrganizationCode($topic->getOrganizationCode());
 
             // 保存新的话题记录
-            $this->magicChatTopicRepository->createTopic($newTopicEntity);
+            $this->delightfulChatTopicRepository->createTopic($newTopicEntity);
 
             // 确定AI和用户的会话ID
             if ($topic->getConversationId() === $sourceTopicEntity->getChatConversationId()) {
@@ -1054,7 +1054,7 @@ class TopicDomainService
         if (empty($aiConversationId) || empty($userConversationId)) {
             ExceptionBuilder::throw(
                 BeAgentErrorCode::TOPIC_NOT_FOUND,
-                trans('super_agent.topic.conversation_mismatch')
+                trans('be_agent.topic.conversation_mismatch')
             );
         }
 
@@ -1079,16 +1079,16 @@ class TopicDomainService
             'new_topic_id' => $newTopicId,
         ]);
 
-        // 处理 magic_chat_topic_messages 表
+        // 处理 delightful_chat_topic_messages 表
         // 1. 查询用户的topic messages
-        $userTopicMessages = $this->magicChatTopicRepository->getTopicMessagesBySeqId(
+        $userTopicMessages = $this->delightfulChatTopicRepository->getTopicMessagesBySeqId(
             $imConversationResult['user_conversation_id'],
             $imConversationResult['old_topic_id'],
             $userSeqId
         );
 
         // 2. 查询AI的topic messages
-        $aiTopicMessages = $this->magicChatTopicRepository->getTopicMessagesBySeqId(
+        $aiTopicMessages = $this->delightfulChatTopicRepository->getTopicMessagesBySeqId(
             $imConversationResult['ai_conversation_id'],
             $imConversationResult['old_topic_id'],
             $aiSeqId
@@ -1139,21 +1139,21 @@ class TopicDomainService
         // 4. 批量插入消息
         $insertResult = false;
         if (! empty($batchInsertData)) {
-            $insertResult = $this->magicChatTopicRepository->createTopicMessages($batchInsertData);
+            $insertResult = $this->delightfulChatTopicRepository->createTopicMessages($batchInsertData);
         }
 
-        // 5. 处理 magic_chat_sequences 表
-        $magicMessageIdMapping = [];
+        // 5. 处理 delightful_chat_sequences 表
+        $delightfulMessageIdMapping = [];
         $batchSeqInsertData = [];
 
         // 5.1 查询用户的 sequences
-        $userSequences = $this->magicSeqRepository->getSequencesByConversationIdAndSeqIds(
+        $userSequences = $this->delightfulSeqRepository->getSequencesByConversationIdAndSeqIds(
             $imConversationResult['user_conversation_id'],
             $userSeqIds
         );
 
         // 5.2 查询AI的 sequences
-        $aiSequences = $this->magicSeqRepository->getSequencesByConversationIdAndSeqIds(
+        $aiSequences = $this->delightfulSeqRepository->getSequencesByConversationIdAndSeqIds(
             $imConversationResult['ai_conversation_id'],
             $aiSeqIds
         );
@@ -1172,12 +1172,12 @@ class TopicDomainService
                 continue;
             }
 
-            // 生成或获取 magic_message_id 映射
-            $originalMagicMessageId = $userSeq->getMagicMessageId();
-            if (! isset($magicMessageIdMapping[$originalMagicMessageId])) {
-                $magicMessageIdMapping[$originalMagicMessageId] = IdGenerator::getUniqueId32();
+            // 生成或获取 delightful_message_id 映射
+            $originalDelightfulMessageId = $userSeq->getDelightfulMessageId();
+            if (! isset($delightfulMessageIdMapping[$originalDelightfulMessageId])) {
+                $delightfulMessageIdMapping[$originalDelightfulMessageId] = IdGenerator::getUniqueId32();
             }
-            $newMagicMessageId = $magicMessageIdMapping[$originalMagicMessageId];
+            $newDelightfulMessageId = $delightfulMessageIdMapping[$originalDelightfulMessageId];
 
             // 处理 extra 中的 topic_id 替换
             $extra = $userSeq->getExtra();
@@ -1197,7 +1197,7 @@ class TopicDomainService
             $appMessageId = ! empty($messageIdMapping[$originalAppMessageId]) ? $messageIdMapping[$originalAppMessageId] : (string) IdGenerator::getSnowId();
 
             // 创建新的 sequence 实体
-            $newUserSeq = new MagicSeqEntity();
+            $newUserSeq = new DelightfulSeqEntity();
             $newUserSeq->setId($newSeqId);
             $newUserSeq->setOrganizationCode($userSeq->getOrganizationCode());
             $newUserSeq->setObjectType($userSeq->getObjectType());
@@ -1205,7 +1205,7 @@ class TopicDomainService
             $newUserSeq->setSeqId($newSeqId);
             $newUserSeq->setSeqType($userSeq->getSeqType());
             $newUserSeq->setContent($userSeq->getContent());
-            $newUserSeq->setMagicMessageId($newMagicMessageId);
+            $newUserSeq->setDelightfulMessageId($newDelightfulMessageId);
             $newUserSeq->setMessageId($newSeqId);
             $newUserSeq->setReferMessageId($userSeq->getMessageId());
             $newUserSeq->setSenderMessageId($senderMessageId);
@@ -1229,12 +1229,12 @@ class TopicDomainService
                 continue;
             }
 
-            // 生成或获取 magic_message_id 映射
-            $originalMagicMessageId = $aiSeq->getMagicMessageId();
-            if (! isset($magicMessageIdMapping[$originalMagicMessageId])) {
-                $magicMessageIdMapping[$originalMagicMessageId] = IdGenerator::getUniqueId32();
+            // 生成或获取 delightful_message_id 映射
+            $originalDelightfulMessageId = $aiSeq->getDelightfulMessageId();
+            if (! isset($delightfulMessageIdMapping[$originalDelightfulMessageId])) {
+                $delightfulMessageIdMapping[$originalDelightfulMessageId] = IdGenerator::getUniqueId32();
             }
-            $newMagicMessageId = $magicMessageIdMapping[$originalMagicMessageId];
+            $newDelightfulMessageId = $delightfulMessageIdMapping[$originalDelightfulMessageId];
 
             // 处理 extra 中的 topic_id 替换
             $extra = $aiSeq->getExtra();
@@ -1254,7 +1254,7 @@ class TopicDomainService
             $appMessageId = $messageIdMapping[$originalAppMessageId] ?? '';
 
             // 创建新的 sequence 实体
-            $newAiSeq = new MagicSeqEntity();
+            $newAiSeq = new DelightfulSeqEntity();
             $newAiSeq->setId($newSeqId);
             $newAiSeq->setOrganizationCode($aiSeq->getOrganizationCode());
             $newAiSeq->setObjectType($aiSeq->getObjectType());
@@ -1262,7 +1262,7 @@ class TopicDomainService
             $newAiSeq->setSeqId($newSeqId);
             $newAiSeq->setSeqType($aiSeq->getSeqType());
             $newAiSeq->setContent($aiSeq->getContent());
-            $newAiSeq->setMagicMessageId($newMagicMessageId);
+            $newAiSeq->setDelightfulMessageId($newDelightfulMessageId);
             $newAiSeq->setMessageId($newSeqId);
             $newAiSeq->setReferMessageId('');
             $newAiSeq->setSenderMessageId($senderMessageId);
@@ -1280,29 +1280,29 @@ class TopicDomainService
         // 5.5 批量插入 sequences
         $seqInsertResult = [];
         if (! empty($batchSeqInsertData)) {
-            $seqInsertResult = $this->magicSeqRepository->batchCreateSeq($batchSeqInsertData);
+            $seqInsertResult = $this->delightfulSeqRepository->batchCreateSeq($batchSeqInsertData);
         }
 
-        // 6. 处理 magic_chat_messages 表
-        // 6.1 将 $magicMessageIdMapping 的 key 转成数组 $originalMagicMessageIds
-        $originalMagicMessageIds = array_keys($magicMessageIdMapping);
+        // 6. 处理 delightful_chat_messages 表
+        // 6.1 将 $delightfulMessageIdMapping 的 key 转成数组 $originalDelightfulMessageIds
+        $originalDelightfulMessageIds = array_keys($delightfulMessageIdMapping);
 
-        // 6.2 查询原先的 magic_chat_messages 记录
-        $originalMessages = $this->magicMessageRepository->getMessagesByMagicMessageIds($originalMagicMessageIds);
+        // 6.2 查询原先的 delightful_chat_messages 记录
+        $originalMessages = $this->delightfulMessageRepository->getMessagesByDelightfulMessageIds($originalDelightfulMessageIds);
 
         $this->logger->info('查询到原始Messages', [
-            'original_message_ids_count' => count($originalMagicMessageIds),
+            'original_message_ids_count' => count($originalDelightfulMessageIds),
             'found_messages_count' => count($originalMessages),
         ]);
 
-        // 6.3 生成新的 magic_chat_messages 记录
+        // 6.3 生成新的 delightful_chat_messages 记录
         // 直接使用 messageIdMapping，结构: [old_app_message_id] = new_message_id
         $batchMessageInsertData = [];
         foreach ($originalMessages as $originalMessage) {
-            $originalMagicMessageId = $originalMessage->getMagicMessageId();
-            $newMagicMessageId = $magicMessageIdMapping[$originalMagicMessageId] ?? null;
+            $originalDelightfulMessageId = $originalMessage->getDelightfulMessageId();
+            $newDelightfulMessageId = $delightfulMessageIdMapping[$originalDelightfulMessageId] ?? null;
 
-            if (! $newMagicMessageId) {
+            if (! $newDelightfulMessageId) {
                 continue;
             }
 
@@ -1327,7 +1327,7 @@ class TopicDomainService
                 'content' => json_encode($contentArray, JSON_UNESCAPED_UNICODE),
                 'language' => $originalMessage->getLanguage(),
                 'app_message_id' => $messageIdMapping[$originalMessage->getAppMessageId()] ?? '',
-                'magic_message_id' => $newMagicMessageId,
+                'delightful_message_id' => $newDelightfulMessageId,
                 'send_time' => $originalMessage->getSendTime(),
                 'current_version_id' => null,
                 'created_at' => $currentTime,
@@ -1335,10 +1335,10 @@ class TopicDomainService
             ];
         }
 
-        // 6.5 批量插入 magic_chat_messages
+        // 6.5 批量插入 delightful_chat_messages
         $messageInsertResult = false;
         if (! empty($batchMessageInsertData)) {
-            $messageInsertResult = $this->magicMessageRepository->batchCreateMessages($batchMessageInsertData);
+            $messageInsertResult = $this->delightfulMessageRepository->batchCreateMessages($batchMessageInsertData);
         }
 
         $result = [
@@ -1350,7 +1350,7 @@ class TopicDomainService
             'ai_sequences_count' => count($aiSequences),
             'total_sequences_copied' => count($batchSeqInsertData),
             'sequences_insert_success' => ! empty($seqInsertResult),
-            'magic_message_id_mappings' => count($magicMessageIdMapping),
+            'delightful_message_id_mappings' => count($delightfulMessageIdMapping),
             'original_messages_found' => count($originalMessages),
             'total_messages_copied' => count($batchMessageInsertData),
             'messages_insert_success' => $messageInsertResult,
@@ -1364,11 +1364,11 @@ class TopicDomainService
 
     private function getSeqIdByMessageId(string $messageId): array
     {
-        // 先通过 app_message_id 和 message_type 查询 magic_chat_messages， 获取 magic_message_id
-        $magicMessageId = $this->magicMessageRepository->getMagicMessageIdByAppMessageId($messageId);
+        // 先通过 app_message_id 和 message_type 查询 delightful_chat_messages， 获取 delightful_message_id
+        $delightfulMessageId = $this->delightfulMessageRepository->getDelightfulMessageIdByAppMessageId($messageId);
 
-        // 再通过 magic_message_id 查询 magic_chat_sequences 获取 seq_id
-        $seqList = $this->magicSeqRepository->getBothSeqListByMagicMessageId($magicMessageId);
+        // 再通过 delightful_message_id 查询 delightful_chat_sequences 获取 seq_id
+        $seqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($delightfulMessageId);
         $result = [];
         foreach ($seqList as $seq) {
             if ($seq['object_type'] === UserType::Ai->value) {

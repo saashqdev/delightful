@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Carbon\Carbon;
@@ -41,10 +41,10 @@ class MessageQueueProcessAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
         private readonly MessageQueueDomainService $messageQueueDomainService,
         private readonly TopicDomainService $topicDomainService,
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         private readonly EventDispatcherInterface $eventDispatcher,
         LoggerFactory $loggerFactory
     ) {
@@ -254,8 +254,8 @@ class MessageQueueProcessAppService extends AbstractAppService
         $messageStruct
     ): array {
         try {
-            // Create MagicSeqEntity based on message content
-            $seqEntity = new MagicSeqEntity();
+            // Create DelightfulSeqEntity based on message content
+            $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setContent($messageStruct);
             $seqEntity->setSeqType(ChatMessageType::from($message->getMessageType()));
 

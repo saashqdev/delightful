@@ -178,46 +178,46 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
                 }
             });
 
-        $query->join('magic_super_agent_project', 'magic_super_agent_project_members.project_id', '=', 'magic_super_agent_project.id')
-            ->leftJoin('magic_super_agent_project_member_settings', function ($join) use ($userId) {
-                $join->on('magic_super_agent_project_member_settings.project_id', '=', 'magic_super_agent_project.id')
-                    ->where('magic_super_agent_project_member_settings.user_id', '=', $userId);
+        $query->join('delightful_be_agent_project', 'delightful_be_agent_project_members.project_id', '=', 'delightful_be_agent_project.id')
+            ->leftJoin('delightful_be_agent_project_member_settings', function ($join) use ($userId) {
+                $join->on('delightful_be_agent_project_member_settings.project_id', '=', 'delightful_be_agent_project.id')
+                    ->where('delightful_be_agent_project_member_settings.user_id', '=', $userId);
             })
-            ->where('magic_super_agent_project.user_id', '!=', $userId)
-            ->where('magic_super_agent_project.is_collaboration_enabled', 1)
-            ->whereNull('magic_super_agent_project.deleted_at');
+            ->where('delightful_be_agent_project.user_id', '!=', $userId)
+            ->where('delightful_be_agent_project.is_collaboration_enabled', 1)
+            ->whereNull('delightful_be_agent_project.deleted_at');
 
         if (! empty($name)) {
             // 如果有项目名称搜索条件，则需要连接项目表
-            $query->where('magic_super_agent_project.project_name', 'like', '%' . $name . '%');
+            $query->where('delightful_be_agent_project.project_name', 'like', '%' . $name . '%');
         }
 
         if (! empty($creatorUserIds)) {
             // 如果有创建者用户ID搜索条件
-            $query->whereIn('magic_super_agent_project.user_id', $creatorUserIds);
+            $query->whereIn('delightful_be_agent_project.user_id', $creatorUserIds);
         }
 
         if (! empty($joinMethod)) {
             // 加入方式
-            $query->where('magic_super_agent_project_members.join_method', $joinMethod);
+            $query->where('delightful_be_agent_project_members.join_method', $joinMethod);
         }
 
         if (! empty($organizationCodes)) {
             // 根据组织编码过滤
-            $query->whereIn('magic_super_agent_project.user_organization_code', $organizationCodes);
+            $query->whereIn('delightful_be_agent_project.user_organization_code', $organizationCodes);
         }
 
         $query->select(
-            'magic_super_agent_project_members.project_id',
-            'magic_super_agent_project.updated_at',
-            'magic_super_agent_project.created_at',
-            'magic_super_agent_project_member_settings.is_pinned',
-            'magic_super_agent_project_member_settings.last_active_at',
-            'magic_super_agent_project_member_settings.is_bind_workspace',
-            'magic_super_agent_project_member_settings.bind_workspace_id'
+            'delightful_be_agent_project_members.project_id',
+            'delightful_be_agent_project.updated_at',
+            'delightful_be_agent_project.created_at',
+            'delightful_be_agent_project_member_settings.is_pinned',
+            'delightful_be_agent_project_member_settings.last_active_at',
+            'delightful_be_agent_project_member_settings.is_bind_workspace',
+            'delightful_be_agent_project_member_settings.bind_workspace_id'
         )
             ->distinct()
-            ->orderByRaw('COALESCE(magic_super_agent_project_member_settings.is_pinned, 0) DESC'); // 置顶的在前
+            ->orderByRaw('COALESCE(delightful_be_agent_project_member_settings.is_pinned, 0) DESC'); // 置顶的在前
 
         // 根据排序字段进行排序（默认按 updated_at 排序）
         $effectiveSortField = $sortField ?: 'updated_at';
@@ -225,16 +225,16 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
 
         switch ($effectiveSortField) {
             case 'updated_at':
-                $query->orderBy('magic_super_agent_project.updated_at', $effectiveSortDirection);
+                $query->orderBy('delightful_be_agent_project.updated_at', $effectiveSortDirection);
                 break;
             case 'created_at':
-                $query->orderBy('magic_super_agent_project.created_at', $effectiveSortDirection);
+                $query->orderBy('delightful_be_agent_project.created_at', $effectiveSortDirection);
                 break;
             case 'last_active_at':
-                $query->orderBy('magic_super_agent_project_member_settings.last_active_at', $effectiveSortDirection);
+                $query->orderBy('delightful_be_agent_project_member_settings.last_active_at', $effectiveSortDirection);
                 break;
             default:
-                $query->orderBy('magic_super_agent_project.updated_at', 'desc');
+                $query->orderBy('delightful_be_agent_project.updated_at', 'desc');
                 break;
         }
 
@@ -338,43 +338,43 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     ): array {
         // 构建基础查询：查找用户创建的且有成员的项目
         $query = $this->projectMemberModel::query()
-            ->join('magic_super_agent_project', 'magic_super_agent_project_members.project_id', '=', 'magic_super_agent_project.id')
-            ->leftJoin('magic_super_agent_project_member_settings', function ($join) use ($userId) {
-                $join->on('magic_super_agent_project_member_settings.project_id', '=', 'magic_super_agent_project.id')
-                    ->where('magic_super_agent_project_member_settings.user_id', '=', $userId);
+            ->join('delightful_be_agent_project', 'delightful_be_agent_project_members.project_id', '=', 'delightful_be_agent_project.id')
+            ->leftJoin('delightful_be_agent_project_member_settings', function ($join) use ($userId) {
+                $join->on('delightful_be_agent_project_member_settings.project_id', '=', 'delightful_be_agent_project.id')
+                    ->where('delightful_be_agent_project_member_settings.user_id', '=', $userId);
             })
-            ->whereIn('magic_super_agent_project_members.role', [MemberRole::MANAGE->value, MemberRole::EDITOR->value, MemberRole::VIEWER->value])
-            ->where('magic_super_agent_project.user_id', '=', $userId)
-            ->where('magic_super_agent_project.user_organization_code', '=', $organizationCode)
-            ->where('magic_super_agent_project.is_collaboration_enabled', 1)
-            ->whereNull('magic_super_agent_project.deleted_at');
+            ->whereIn('delightful_be_agent_project_members.role', [MemberRole::MANAGE->value, MemberRole::EDITOR->value, MemberRole::VIEWER->value])
+            ->where('delightful_be_agent_project.user_id', '=', $userId)
+            ->where('delightful_be_agent_project.user_organization_code', '=', $organizationCode)
+            ->where('delightful_be_agent_project.is_collaboration_enabled', 1)
+            ->whereNull('delightful_be_agent_project.deleted_at');
 
         // 如果有项目名称搜索条件
         if (! empty($name)) {
-            $query->where('magic_super_agent_project.project_name', 'like', '%' . $name . '%');
+            $query->where('delightful_be_agent_project.project_name', 'like', '%' . $name . '%');
         }
 
         // 如果有创建者用户ID搜索条件（对于shared类型，通常是当前用户创建的项目，这里主要是为了接口一致性）
         if (! empty($creatorUserIds)) {
-            $query->whereIn('magic_super_agent_project.user_id', $creatorUserIds);
+            $query->whereIn('delightful_be_agent_project.user_id', $creatorUserIds);
         }
 
         // 获取总数
         $totalQuery = clone $query;
-        $total = $totalQuery->select('magic_super_agent_project_members.project_id')->distinct()->count();
+        $total = $totalQuery->select('delightful_be_agent_project_members.project_id')->distinct()->count();
 
         // 分页查询项目ID（包含排序字段以兼容DISTINCT）
         $projects = $query->select(
-            'magic_super_agent_project_members.project_id',
-            'magic_super_agent_project.updated_at',
-            'magic_super_agent_project.created_at',
-            'magic_super_agent_project_member_settings.is_pinned',
-            'magic_super_agent_project_member_settings.last_active_at',
-            'magic_super_agent_project_member_settings.is_bind_workspace',
-            'magic_super_agent_project_member_settings.bind_workspace_id'
+            'delightful_be_agent_project_members.project_id',
+            'delightful_be_agent_project.updated_at',
+            'delightful_be_agent_project.created_at',
+            'delightful_be_agent_project_member_settings.is_pinned',
+            'delightful_be_agent_project_member_settings.last_active_at',
+            'delightful_be_agent_project_member_settings.is_bind_workspace',
+            'delightful_be_agent_project_member_settings.bind_workspace_id'
         )
             ->distinct()
-            ->orderByRaw('COALESCE(magic_super_agent_project_member_settings.is_pinned, 0) DESC'); // 置顶的在前
+            ->orderByRaw('COALESCE(delightful_be_agent_project_member_settings.is_pinned, 0) DESC'); // 置顶的在前
 
         // 根据排序字段进行排序（默认按 updated_at 排序）
         $effectiveSortField = $sortField ?: 'updated_at';
@@ -382,16 +382,16 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
 
         switch ($effectiveSortField) {
             case 'updated_at':
-                $projects->orderBy('magic_super_agent_project.updated_at', $effectiveSortDirection);
+                $projects->orderBy('delightful_be_agent_project.updated_at', $effectiveSortDirection);
                 break;
             case 'created_at':
-                $projects->orderBy('magic_super_agent_project.created_at', $effectiveSortDirection);
+                $projects->orderBy('delightful_be_agent_project.created_at', $effectiveSortDirection);
                 break;
             case 'last_active_at':
-                $projects->orderBy('magic_super_agent_project_member_settings.last_active_at', $effectiveSortDirection);
+                $projects->orderBy('delightful_be_agent_project_member_settings.last_active_at', $effectiveSortDirection);
                 break;
             default:
-                $projects->orderBy('magic_super_agent_project.updated_at', 'desc');
+                $projects->orderBy('delightful_be_agent_project.updated_at', 'desc');
                 break;
         }
 
@@ -415,26 +415,26 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
         string $organizationCode
     ): array {
         $query = $this->projectMemberModel::query()
-            ->leftJoin('magic_super_agent_project as projects', 'magic_super_agent_project_members.project_id', '=', 'projects.id')
-            ->where('magic_super_agent_project_members.organization_code', $organizationCode);
+            ->leftJoin('delightful_be_agent_project as projects', 'delightful_be_agent_project_members.project_id', '=', 'projects.id')
+            ->where('delightful_be_agent_project_members.organization_code', $organizationCode);
 
         // 构建用户权限查询条件 - 用户是项目成员或部门成员
         $query->where(function ($q) use ($userId, $departmentIds) {
             $q->where(function ($userQuery) use ($userId) {
-                $userQuery->where('magic_super_agent_project_members.target_type', 'User')
-                    ->where('magic_super_agent_project_members.target_id', $userId);
+                $userQuery->where('delightful_be_agent_project_members.target_type', 'User')
+                    ->where('delightful_be_agent_project_members.target_id', $userId);
             });
 
             if (! empty($departmentIds)) {
                 $q->orWhere(function ($deptQuery) use ($departmentIds) {
-                    $deptQuery->where('magic_super_agent_project_members.target_type', 'Department')
-                        ->whereIn('magic_super_agent_project_members.target_id', $departmentIds);
+                    $deptQuery->where('delightful_be_agent_project_members.target_type', 'Department')
+                        ->whereIn('delightful_be_agent_project_members.target_id', $departmentIds);
                 });
             }
         });
 
         // 只获取状态正常的项目成员
-        $query->where('magic_super_agent_project_members.status', '1');
+        $query->where('delightful_be_agent_project_members.status', '1');
 
         // 按创建者ID分组去重，获取不重复的创建者ID列表
         $creatorIds = $query->select('projects.user_id')
@@ -462,9 +462,9 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     ): array {
         // 构建基础查询
         $query = $this->projectMemberModel::query()
-            ->from('magic_super_agent_project_members as pm')
-            ->join('magic_super_agent_project as p', 'pm.project_id', '=', 'p.id')
-            ->leftJoin('magic_super_agent_project_member_settings as pms', function ($join) use ($userId) {
+            ->from('delightful_be_agent_project_members as pm')
+            ->join('delightful_be_agent_project as p', 'pm.project_id', '=', 'p.id')
+            ->leftJoin('delightful_be_agent_project_member_settings as pms', function ($join) use ($userId) {
                 $join->on('p.id', '=', 'pms.project_id')
                     ->where('pms.user_id', '=', $userId);
             })

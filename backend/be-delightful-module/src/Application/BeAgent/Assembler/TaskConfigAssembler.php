@@ -9,9 +9,9 @@ namespace Delightful\BeDelightful\Application\BeAgent\Assembler;
 
 use DateTime;
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\TimeConfigDTO;
-use Dtyq\TaskScheduler\Entity\ValueObject\IntervalUnit;
-use Dtyq\TaskScheduler\Entity\ValueObject\TaskType;
-use Dtyq\TaskScheduler\Service\TaskConfigDomainService;
+use Delightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
+use Delightful\TaskScheduler\Service\TaskConfigDomainService;
 use InvalidArgumentException;
 
 /**

@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Application\Chat\Service;
 
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Chat\Service\MagicTopicDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Chat\Service\DelightfulTopicDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\BeDelightful\Application\BeAgent\Service\AbstractAppService;
@@ -26,17 +26,17 @@ class ChatAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected MagicUserDomainService $userDomainService,
+        protected DelightfulUserDomainService $userDomainService,
         protected AccountAppService $accountAppService,
-        protected MagicConversationDomainService $magicConversationDomainService,
-        protected MagicTopicDomainService $topicDomainService,
+        protected DelightfulConversationDomainService $delightfulConversationDomainService,
+        protected DelightfulTopicDomainService $topicDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(get_class($this));
     }
 
     /**
-     * Initializes Magic Chat conversation and topic.
+     * Initializes Delightful Chat conversation and topic.
      * This method sets up the necessary chat infrastructure for a "Be Delightful" interaction.
      * It fetches/creates an AI user, then gets/creates a conversation for the current user
      * with this AI user, and finally generates a topic ID for this conversation.
@@ -45,7 +45,7 @@ class ChatAppService extends AbstractAppService
      * @return array an array containing the chat conversation ID and chat conversation topic ID
      * @throws Throwable if any error occurs during the process
      */
-    public function initMagicChatConversation(DataIsolation $dataIsolation): array
+    public function initDelightfulChatConversation(DataIsolation $dataIsolation): array
     {
         $aiUserEntity = $this->getOrCreateBeDelightfulUser($dataIsolation);
         $currentUserId = $dataIsolation->getCurrentUserId();
@@ -53,7 +53,7 @@ class ChatAppService extends AbstractAppService
         $this->logger->info(sprintf('Getting or creating conversation for user ID: %s with AI user ID: %s in organization: %s', $currentUserId, $aiUserId, $dataIsolation->getCurrentOrganizationCode()));
 
         // Initialize conversation and topic for user
-        $senderConversationEntity = $this->magicConversationDomainService->getOrCreateConversation(
+        $senderConversationEntity = $this->delightfulConversationDomainService->getOrCreateConversation(
             $currentUserId,
             $aiUserId,
             ConversationType::Ai
@@ -61,7 +61,7 @@ class ChatAppService extends AbstractAppService
         $this->logger->info(sprintf('Conversation obtained/created with ID: %s for user ID: %s, AI user ID: %s', $senderConversationEntity->getId(), $currentUserId, $aiUserId));
 
         // The number '3' here might refer to a specific type or flag for topic generation.
-        // It's advisable to replace magic numbers with named constants if possible.
+        // It's advisable to replace delightful numbers with named constants if possible.
         $topicId = $this->topicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 3);
         $this->logger->info(sprintf('Topic ID obtained/created for conversation ID %s: %s', $senderConversationEntity->getId(), $topicId));
 
@@ -104,7 +104,7 @@ class ChatAppService extends AbstractAppService
             $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::BE_DELIGHTFUL_CODE);
             if (empty($aiUserEntity)) {
                 $this->logger->error(sprintf('AI user with code %s still not found after attempting initialization for organization: %s', AgentConstant::BE_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
-                ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.super_magic_user_not_found');
+                ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.be_delightful_user_not_found');
             }
             $this->logger->info(sprintf('AI user with code %s found after initialization for organization: %s', AgentConstant::BE_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
         } else {

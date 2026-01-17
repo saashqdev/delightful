@@ -13,7 +13,7 @@ use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
 use Delightful\BeDelightful\Application\BeAgent\Event\Publish\ProjectForkPublisher;
 use Delightful\BeDelightful\Application\BeAgent\Event\Publish\StopRunningTaskPublisher;
@@ -134,8 +134,8 @@ class ProjectAppService extends AbstractAppService
             // 获取项目目录
             $workDir = WorkDirectoryUtil::getWorkDir($dataIsolation->getCurrentUserId(), $projectEntity->getId());
 
-            // Initialize Magic Chat Conversation
-            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+            // Initialize Delightful Chat Conversation
+            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
             // 创建会话
             // Step 4: Create default topic
@@ -702,8 +702,8 @@ class ProjectAppService extends AbstractAppService
             $this->logger->info(sprintf('创建默认项目, projectId=%s', $forkProjectEntity->getId()));
             $workDir = WorkDirectoryUtil::getWorkDir($dataIsolation->getCurrentUserId(), $forkProjectEntity->getId());
 
-            // Initialize Magic Chat Conversation
-            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+            // Initialize Delightful Chat Conversation
+            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
             // Step 4: Create default topic
             $this->logger->info('开始创建默认话题');

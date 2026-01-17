@@ -16,7 +16,7 @@ use PhpAmqpLib\Wire\AMQPTable;
 /**
  * Project fork message publisher.
  */
-#[Producer(exchange: 'super_magic_project_fork', routingKey: 'super_magic_project_fork')]
+#[Producer(exchange: 'be_delightful_project_fork', routingKey: 'be_delightful_project_fork')]
 class ProjectForkPublisher extends ProducerMessage
 {
     /**

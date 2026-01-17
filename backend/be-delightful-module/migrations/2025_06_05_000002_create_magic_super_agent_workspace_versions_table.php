@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_super_agent_workspace_versions')) {
+        if (Schema::hasTable('delightful_be_agent_workspace_versions')) {
             return;
         }
-        Schema::create('magic_super_agent_workspace_versions', function (Blueprint $table) {
+        Schema::create('delightful_be_agent_workspace_versions', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             $table->unsignedBigInteger('topic_id')->comment('话题id。');
             $table->string('sandbox_id', 255)->comment('沙箱id。');
@@ -34,6 +34,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_super_agent_workspace_versions');
+        Schema::dropIfExists('delightful_be_agent_workspace_versions');
     }
 };

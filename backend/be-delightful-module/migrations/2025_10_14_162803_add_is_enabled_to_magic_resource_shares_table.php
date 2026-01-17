@@ -8,14 +8,14 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class AddIsEnabledToMagicResourceSharesTable extends Migration
+class AddIsEnabledToDelightfulResourceSharesTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('magic_resource_shares', function (Blueprint $table) {
+        Schema::table('delightful_resource_shares', function (Blueprint $table) {
             // 添加 is_enabled 字段，默认为启用状态
             $table->tinyInteger('is_enabled')
                 ->default(1)
@@ -29,7 +29,7 @@ class AddIsEnabledToMagicResourceSharesTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('magic_resource_shares', function (Blueprint $table) {
+        Schema::table('delightful_resource_shares', function (Blueprint $table) {
             // 删除字段
             $table->dropColumn('is_enabled');
         });

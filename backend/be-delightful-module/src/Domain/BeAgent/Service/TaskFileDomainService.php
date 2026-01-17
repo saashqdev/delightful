@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\ProjectFileConstant;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectForkEntity;

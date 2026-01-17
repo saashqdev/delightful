@@ -107,7 +107,7 @@ export namespace File {
 		Personal = 1, // Personal drive
 		Official = 2, // Enterprise drive
 	}
-	// 0 directory; 1 multi-dimensional table; 2 word; 3 excel; 4 mind notes; 5 ppt; 6 pdf; 7 old cloud document; 16 new cloud document; 22 whiteboard; 24 magic app.
+	// 0 directory; 1 multi-dimensional table; 2 word; 3 excel; 4 mind notes; 5 ppt; 6 pdf; 7 old cloud document; 16 new cloud document; 22 whiteboard; 24 delightful app.
 	export enum FileType {
 		Category = 0,
 		MultiTable = 1,

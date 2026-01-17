@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
             // 添加 attachments 字段，放在 tool 字段后面
             $table->json('attachments')->nullable()->comment('附件信息')->after('tool');
         });
@@ -25,7 +25,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
             // 回滚时移除 attachments 字段
             $table->dropColumn('attachments');
         });

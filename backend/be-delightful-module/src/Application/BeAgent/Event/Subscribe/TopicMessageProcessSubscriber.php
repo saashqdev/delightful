@@ -19,28 +19,28 @@ use PhpAmqpLib\Message\AMQPMessage;
 use Throwable;
 
 /**
- * 话题消息处理订阅者（基于数据库队列）.
- * 消费轻量级的TopicMessageProcessEvent，从数据库按顺序处理消息.
+ * Topic message processing subscriber (based on database queue).
+ * Consumes lightweight TopicMessageProcessEvent, processes messages sequentially from database.
  */
 #[Consumer(
-    exchange: 'super_magic_topic_message_process',
-    routingKey: 'super_magic_topic_message_process',
-    queue: 'super_magic_topic_message_process',
+    exchange: 'be_delightful_topic_message_process',
+    routingKey: 'be_delightful_topic_message_process',
+    queue: 'be_delightful_topic_message_process',
     nums: 1
 )]
 class TopicMessageProcessSubscriber extends ConsumerMessage
 {
     /**
-     * @var null|array QoS 配置，用于控制预取数量等
+     * @var null|array QoS configuration for controlling prefetch count, etc.
      */
     protected ?array $qos = [
-        'prefetch_count' => 1, // 每次只预取1条消息
+        'prefetch_count' => 1, // Prefetch only 1 message at a time
         'prefetch_size' => 0,
         'global' => false,
     ];
 
     /**
-     * 构造函数.
+     * Constructor.
      */
     public function __construct(
         private readonly HandleAgentMessageAppService $handleAgentMessageAppService,
@@ -50,62 +50,62 @@ class TopicMessageProcessSubscriber extends ConsumerMessage
     }
 
     /**
-     * 消费消息.
+     * Consume message.
      *
-     * @param mixed $data 消息数据
-     * @param AMQPMessage $message 原始消息对象
-     * @return Result 处理结果
+     * @param mixed $data Message data
+     * @param AMQPMessage $message Raw message object
+     * @return Result Processing result
      */
     public function consumeMessage($data, AMQPMessage $message): Result
     {
         try {
-            // 记录接收到的轻量级事件
+            // Log received lightweight event
             $this->logger->debug(sprintf(
-                '接收到话题消息处理事件: %s',
+                'Received topic message processing event: %s',
                 json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
 
-            // 验证事件格式
+            // Validate event format
             $this->validateEventFormat($data);
 
-            // 获取topic_id
+            // Get topic_id
             $topicId = (int) ($data['topic_id'] ?? 0);
             $taskId = (int) ($data['task_id'] ?? 0);
             if ($topicId <= 0) {
-                $this->logger->warning('无效的topic_id，跳过处理', [
+                $this->logger->warning('Invalid topic_id, skipping processing', [
                     'topic_id' => $topicId,
                     'event_data' => $data,
                 ]);
                 return Result::ACK;
             }
 
-            // 尝试获取话题级别的锁
+            // Try to acquire topic-level lock
             $lockKey = 'handle_topic_message_lock:' . $topicId;
             $lockOwner = IdGenerator::getUniqueId32();
-            $lockExpireSeconds = 50; // 给批量处理更多时间
+            $lockExpireSeconds = 50; // Give batch processing more time
 
             $lockAcquired = $this->acquireLock($lockKey, $lockOwner, $lockExpireSeconds);
 
             if (! $lockAcquired) {
                 $this->logger->info(sprintf(
-                    '无法获取topic %d的锁，可能有其他实例正在处理该话题的消息，直接ACK',
+                    'Cannot acquire lock for topic %d, another instance may be processing messages for this topic, directly ACK',
                     $topicId
                 ));
-                return Result::ACK; // 直接ACK，不重试
+                return Result::ACK; // Directly ACK, no retry
             }
 
             $this->logger->info(sprintf(
-                '已获取topic %d的锁，持有者: %s，开始批量处理消息',
+                'Acquired lock for topic %d, owner: %s, starting batch message processing',
                 $topicId,
                 $lockOwner
             ));
 
             try {
-                // 调用批量处理方法
+                // Call batch processing method
                 $processedCount = $this->handleAgentMessageAppService->batchHandleAgentMessage($topicId, 0);
 
                 $this->logger->info(sprintf(
-                    'topic %d 批量处理完成，处理消息数量: %d',
+                    'topic %d batch processing completed, processed message count: %d',
                     $topicId,
                     $processedCount
                 ));
@@ -114,13 +114,13 @@ class TopicMessageProcessSubscriber extends ConsumerMessage
             } finally {
                 if ($this->releaseLock($lockKey, $lockOwner)) {
                     $this->logger->info(sprintf(
-                        '已释放topic %d的锁，持有者: %s',
+                        'Released lock for topic %d, owner: %s',
                         $topicId,
                         $lockOwner
                     ));
                 } else {
                     $this->logger->error(sprintf(
-                        '释放topic %d的锁失败，持有者: %s，可能需要人工干预',
+                        'Failed to release lock for topic %d, owner: %s, manual intervention may be required',
                         $topicId,
                         $lockOwner
                     ));
@@ -128,14 +128,14 @@ class TopicMessageProcessSubscriber extends ConsumerMessage
             }
         } catch (BusinessException $e) {
             $this->logger->error(sprintf(
-                '处理话题消息事件失败，业务异常: %s, 事件内容: %s',
+                'Failed to process topic message event, business exception: %s, event content: %s',
                 $e->getMessage(),
                 json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
             return Result::ACK;
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '处理话题消息事件失败，系统异常: %s, 事件内容: %s',
+                'Failed to process topic message event, system exception: %s, event content: %s',
                 $e->getMessage(),
                 json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             ));
@@ -144,7 +144,7 @@ class TopicMessageProcessSubscriber extends ConsumerMessage
     }
 
     /**
-     * 获取分布式锁.
+     * Acquire distributed lock.
      */
     public function acquireLock(string $lockKey, string $lockOwner, int $lockExpireSeconds): bool
     {
@@ -152,7 +152,7 @@ class TopicMessageProcessSubscriber extends ConsumerMessage
     }
 
     /**
-     * 释放分布式锁.
+     * Release distributed lock.
      */
     private function releaseLock(string $lockKey, string $lockOwner): bool
     {
@@ -160,19 +160,19 @@ class TopicMessageProcessSubscriber extends ConsumerMessage
     }
 
     /**
-     * 验证事件格式.
+     * Validate event format.
      *
-     * @param mixed $data 事件数据
-     * @throws BusinessException 如果事件格式不正确则抛出异常
+     * @param mixed $data Event data
+     * @throws BusinessException If event format is incorrect, throw exception
      */
     private function validateEventFormat($data): void
     {
         if (! is_array($data)) {
-            throw new BusinessException('事件数据格式错误：必须是数组');
+            throw new BusinessException('Event data format error: must be an array');
         }
 
         if (! isset($data['topic_id']) || ! is_numeric($data['topic_id'])) {
-            throw new BusinessException('事件数据格式错误：缺少有效的topic_id字段');
+            throw new BusinessException('Event data format error: missing valid topic_id field');
         }
     }
 }

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
@@ -18,7 +18,7 @@ class ProjectShortcutSetEvent extends AbstractEvent
     public function __construct(
         private readonly ProjectEntity $projectEntity,
         private readonly int $workspaceId,
-        private readonly MagicUserAuthorization $userAuthorization
+        private readonly DelightfulUserAuthorization $userAuthorization
     ) {
         parent::__construct();
     }
@@ -33,7 +33,7 @@ class ProjectShortcutSetEvent extends AbstractEvent
         return $this->workspaceId;
     }
 
-    public function getUserAuthorization(): MagicUserAuthorization
+    public function getUserAuthorization(): DelightfulUserAuthorization
     {
         return $this->userAuthorization;
     }

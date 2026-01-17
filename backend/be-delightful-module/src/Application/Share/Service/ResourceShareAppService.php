@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Application\Share\Service;
 
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Application\Share\Factory\ShareableResourceFactory;
 use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Constant\ShareAccessType;
@@ -48,12 +48,12 @@ class ResourceShareAppService extends AbstractShareAppService
     /**
      * 创建分享.
      *
-     * @param MagicUserAuthorization $userAuthorization 当前用户
+     * @param DelightfulUserAuthorization $userAuthorization 当前用户
      * @param CreateShareRequestDTO $dto 创建分享请求DTO
      * @return ShareItemDTO 分享项目DTO
      * @throws Exception 创建分享异常
      */
-    public function createShare(MagicUserAuthorization $userAuthorization, CreateShareRequestDTO $dto): ShareItemDTO
+    public function createShare(DelightfulUserAuthorization $userAuthorization, CreateShareRequestDTO $dto): ShareItemDTO
     {
         $resourceId = $dto->resourceId;
         $userId = $userAuthorization->getId();
@@ -108,12 +108,12 @@ class ResourceShareAppService extends AbstractShareAppService
     /**
      * 取消分享.
      *
-     * @param MagicUserAuthorization $userAuthorization 当前用户
+     * @param DelightfulUserAuthorization $userAuthorization 当前用户
      * @param int $shareId 分享ID
      * @return bool 是否成功
      * @throws Exception 取消分享时发生异常
      */
-    public function cancelShare(MagicUserAuthorization $userAuthorization, int $shareId): bool
+    public function cancelShare(DelightfulUserAuthorization $userAuthorization, int $shareId): bool
     {
         $userId = $userAuthorization->getId();
         $organizationCode = $userAuthorization->getOrganizationCode();
@@ -125,7 +125,7 @@ class ResourceShareAppService extends AbstractShareAppService
     /**
      * @throws Exception
      */
-    public function cancelShareByResourceId(MagicUserAuthorization $userAuthorization, string $resourceId): bool
+    public function cancelShareByResourceId(DelightfulUserAuthorization $userAuthorization, string $resourceId): bool
     {
         $userId = $userAuthorization->getId();
         $organizationCode = $userAuthorization->getOrganizationCode();
@@ -160,7 +160,7 @@ class ResourceShareAppService extends AbstractShareAppService
         return true;
     }
 
-    public function checkShare(?MagicUserAuthorization $userAuthorization, string $shareCode): array
+    public function checkShare(?DelightfulUserAuthorization $userAuthorization, string $shareCode): array
     {
         $shareEntity = $this->shareDomainService->getShareByCode($shareCode);
         if (empty($shareEntity)) {
@@ -172,7 +172,7 @@ class ResourceShareAppService extends AbstractShareAppService
         ];
     }
 
-    public function getShareDetail(?MagicUserAuthorization $userAuthorization, string $shareCode, GetShareDetailDTO $detailDTO): array
+    public function getShareDetail(?DelightfulUserAuthorization $userAuthorization, string $shareCode, GetShareDetailDTO $detailDTO): array
     {
         // 先获取详情内容
         $shareEntity = $this->shareDomainService->getShareByCode($shareCode);
@@ -215,7 +215,7 @@ class ResourceShareAppService extends AbstractShareAppService
         ];
     }
 
-    public function getShareList(MagicUserAuthorization $userAuthorization, ResourceListRequestDTO $dto): array
+    public function getShareList(DelightfulUserAuthorization $userAuthorization, ResourceListRequestDTO $dto): array
     {
         $conditions = ['created_uid' => $userAuthorization->getId()];
         if (! empty($dto->getKeyword())) {
@@ -245,12 +245,12 @@ class ResourceShareAppService extends AbstractShareAppService
     /**
      * 通过分享code获取分享信息（不含密码）.
      *
-     * @param null|MagicUserAuthorization $userAuthorization 当前用户（可以为null）
+     * @param null|DelightfulUserAuthorization $userAuthorization 当前用户（可以为null）
      * @param string $shareCode 分享code
      * @return ShareItemDTO 分享项目DTO
      * @throws Exception 获取分享信息异常
      */
-    public function getShareByCode(?MagicUserAuthorization $userAuthorization, string $shareCode): ShareItemDTO
+    public function getShareByCode(?DelightfulUserAuthorization $userAuthorization, string $shareCode): ShareItemDTO
     {
         // 获取并验证实体
         $shareEntity = $this->getAndValidateShareEntity($userAuthorization, $shareCode);
@@ -263,12 +263,12 @@ class ResourceShareAppService extends AbstractShareAppService
      * 通过分享code获取分享信息（含明文密码）.
      * 注意：此方法仅应在特定场景下使用，需谨慎处理返回的密码信息.
      *
-     * @param null|MagicUserAuthorization $userAuthorization 当前用户（可以为null）
+     * @param null|DelightfulUserAuthorization $userAuthorization 当前用户（可以为null）
      * @param string $shareCode 分享code
      * @return ShareItemWithPasswordDTO 包含密码的分享项目DTO
      * @throws Exception 获取分享信息异常
      */
-    public function getShareWithPasswordByCode(?MagicUserAuthorization $userAuthorization, string $shareCode): ShareItemWithPasswordDTO
+    public function getShareWithPasswordByCode(?DelightfulUserAuthorization $userAuthorization, string $shareCode): ShareItemWithPasswordDTO
     {
         // 获取并验证实体
         try {
@@ -297,12 +297,12 @@ class ResourceShareAppService extends AbstractShareAppService
     /**
      * 获取并验证分享实体.
      *
-     * @param null|MagicUserAuthorization $userAuthorization 当前用户（可以为null）
+     * @param null|DelightfulUserAuthorization $userAuthorization 当前用户（可以为null）
      * @param string $shareCode 分享code
      * @return ResourceShareEntity 验证通过的分享实体
      * @throws Exception 如果验证失败
      */
-    private function getAndValidateShareEntity(?MagicUserAuthorization $userAuthorization, string $shareCode): ResourceShareEntity
+    private function getAndValidateShareEntity(?DelightfulUserAuthorization $userAuthorization, string $shareCode): ResourceShareEntity
     {
         // 通过领域服务获取分享实体
         $shareEntity = $this->shareDomainService->getShareByCode($shareCode);

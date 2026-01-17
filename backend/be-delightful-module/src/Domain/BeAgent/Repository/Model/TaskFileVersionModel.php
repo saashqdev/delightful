@@ -14,7 +14,7 @@ class TaskFileVersionModel extends AbstractModel
 {
     use SoftDeletes;
 
-    protected ?string $table = 'magic_super_agent_task_file_versions';
+    protected ?string $table = 'delightful_be_agent_task_file_versions';
 
     protected string $primaryKey = 'id';
 

@@ -23,7 +23,7 @@ class TaskMessageModel extends AbstractModel
 
     public const PROCESSING_STATUS_FAILED = 'failed';
 
-    protected ?string $table = 'magic_super_agent_message';
+    protected ?string $table = 'delightful_be_agent_message';
 
     protected string $primaryKey = 'id';
 

@@ -50,7 +50,7 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
     private string $sandboxId = '';
 
     /**
-     * 超级Magic任务ID.
+     * 超级Delightful任务ID.
      */
     private string $beDelightfulTaskId = '';
 
@@ -71,7 +71,7 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
             $instance->chatTopicId = $metadata['chat_topic_id'] ?? '';
             $instance->instruction = $metadata['instruction'] ?? '';
             $instance->sandboxId = $metadata['sandbox_id'] ?? '';
-            $instance->beDelightfulTaskId = $metadata['super_magic_task_id'] ?? '';
+            $instance->beDelightfulTaskId = $metadata['be_delightful_task_id'] ?? '';
         }
 
         return $instance;
@@ -178,7 +178,7 @@ class RefreshStsTokenRequestDTO implements JsonSerializable
             'chat_topic_id' => $this->chatTopicId,
             'instruction' => $this->instruction,
             'sandbox_id' => $this->sandboxId,
-            'super_magic_task_id' => $this->beDelightfulTaskId,
+            'be_delightful_task_id' => $this->beDelightfulTaskId,
         ];
     }
 }

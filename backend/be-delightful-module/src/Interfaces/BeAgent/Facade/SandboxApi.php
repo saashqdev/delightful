@@ -13,8 +13,8 @@ use App\ErrorCode\AgentErrorCode;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
 use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\HandleTaskMessageAppService;
@@ -89,19 +89,19 @@ class SandboxApi extends AbstractApi
         }
         // $userInfoRequestDTO = new UserInfoRequestDTO(['uid' => $apiKey]);
 
-        // 判断请求头是否存在magic-user-id
-        $magicUserId = $this->request->header('magic-user-id', '');
+        // 判断请求头是否存在delightful-user-id
+        $delightfulUserId = $this->request->header('delightful-user-id', '');
 
-        $userEntity = $this->handleTaskMessageAppService->getUserAuthorization($apiKey, $magicUserId);
+        $userEntity = $this->handleTaskMessageAppService->getUserAuthorization($apiKey, $delightfulUserId);
 
         if (empty($userEntity)) {
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'user_not_found');
         }
-        $magicUserAuthorization = MagicUserAuthorization::fromUserEntity($userEntity);
+        $delightfulUserAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
 
-        $requestContext->setUserAuthorization($magicUserAuthorization);
+        $requestContext->setUserAuthorization($delightfulUserAuthorization);
 
-        return $this->initSandbox($requestContext, $requestDTO, $magicUserAuthorization);
+        return $this->initSandbox($requestContext, $requestDTO, $delightfulUserAuthorization);
     }
 
     public function initSandboxByAuthorization(RequestContext $requestContext): array
@@ -130,13 +130,13 @@ class SandboxApi extends AbstractApi
         return $this->initSandbox($requestContext, $requestDTO, $this->getAuthorization());
     }
 
-    public function initSandbox(RequestContext $requestContext, InitSandboxRequestDTO $requestDTO, $magicUserAuthorization): array
+    public function initSandbox(RequestContext $requestContext, InitSandboxRequestDTO $requestDTO, $delightfulUserAuthorization): array
     {
         // 判断工作区是否存在，不存在则初始化工作区
         $this->initWorkspace($requestContext, $requestDTO);
 
         // 判断项目是否存在，不存在则初始化项目
-        $this->initProject($requestContext, $requestDTO, $magicUserAuthorization->getId());
+        $this->initProject($requestContext, $requestDTO, $delightfulUserAuthorization->getId());
 
         // 判断话题是否存在，不存在则初始化话题
         $this->initTopic($requestContext, $requestDTO);
@@ -152,9 +152,9 @@ class SandboxApi extends AbstractApi
         $initSandboxResponseDTO->setChatTopicId($requestDTO->getChatTopicId());
         // $initSandboxResponseDTO->setConversationId($requestDTO->getTopicId());
         $dataIsolation = new DataIsolation();
-        $dataIsolation->setCurrentUserId((string) $magicUserAuthorization->getId());
-        $dataIsolation->setThirdPartyOrganizationCode($magicUserAuthorization->getOrganizationCode());
-        $dataIsolation->setCurrentOrganizationCode($magicUserAuthorization->getOrganizationCode());
+        $dataIsolation->setCurrentUserId((string) $delightfulUserAuthorization->getId());
+        $dataIsolation->setThirdPartyOrganizationCode($delightfulUserAuthorization->getOrganizationCode());
+        $dataIsolation->setCurrentOrganizationCode($delightfulUserAuthorization->getOrganizationCode());
         $dataIsolation->setUserType(UserType::Human);
         //  $dataIsolation = new DataIsolation($userEntity->getId(), $userEntity->getOrganizationCode(), $userEntity->getWorkDir());
 
@@ -165,7 +165,7 @@ class SandboxApi extends AbstractApi
             'prompt' => $requestDTO->getPrompt(),
             'attachments' => null,
             'mentions' => null,
-            'agent_user_id' => (string) $magicUserAuthorization->getId(),
+            'agent_user_id' => (string) $delightfulUserAuthorization->getId(),
             'project_mode' => $requestDTO->getProjectMode(),
             'topic_mode' => $requestDTO->getTopicMode(),
             'task_mode' => '',

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueProcessAppService;
 use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskCallbackEvent;
 use Hyperf\Event\Annotation\Listener;

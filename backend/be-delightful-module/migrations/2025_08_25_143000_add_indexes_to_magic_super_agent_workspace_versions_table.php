@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_workspace_versions', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_workspace_versions', function (Blueprint $table) {
             // 为 id 字段添加唯一索引
             $table->unique('id', 'idx_unique_id');
 
@@ -31,7 +31,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_workspace_versions', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_workspace_versions', function (Blueprint $table) {
             // 删除复合索引
             $table->dropIndex('idx_project_folder_commit');
 

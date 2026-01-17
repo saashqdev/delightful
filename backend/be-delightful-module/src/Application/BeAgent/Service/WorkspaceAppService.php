@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\File\Service\FileAppService;
 use App\Application\File\Service\FileCleanupAppService;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Chat\Service\MagicTopicDomainService as MagicChatTopicDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Chat\Service\DelightfulTopicDomainService as DelightfulChatTopicDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\LongTermMemory\Service\LongTermMemoryDomainService;
 use App\ErrorCode\GenericErrorCode;
@@ -24,7 +24,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
 use Delightful\BeDelightful\Application\BeAgent\Event\Publish\StopRunningTaskPublisher;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
@@ -59,12 +59,12 @@ class WorkspaceAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected MagicChatMessageAppService $magicChatMessageAppService,
-        protected MagicDepartmentDomainService $magicDepartmentDomainService,
+        protected DelightfulChatMessageAppService $delightfulChatMessageAppService,
+        protected DelightfulDepartmentDomainService $delightfulDepartmentDomainService,
         protected WorkspaceDomainService $workspaceDomainService,
-        protected MagicConversationDomainService $magicConversationDomainService,
-        protected MagicUserDomainService $userDomainService,
-        protected MagicChatTopicDomainService $magicTopicDomainService,
+        protected DelightfulConversationDomainService $delightfulConversationDomainService,
+        protected DelightfulUserDomainService $userDomainService,
+        protected DelightfulChatTopicDomainService $delightfulTopicDomainService,
         protected FileAppService $fileAppService,
         protected TaskDomainService $taskDomainService,
         protected AccountAppService $accountAppService,
@@ -270,7 +270,7 @@ class WorkspaceAppService extends AbstractAppService
     /**
      * 获取任务的附件列表.
      */
-    public function getTaskAttachments(MagicUserAuthorization $userAuthorization, int $taskId, int $page = 1, int $pageSize = 10): array
+    public function getTaskAttachments(DelightfulUserAuthorization $userAuthorization, int $taskId, int $page = 1, int $pageSize = 10): array
     {
         // 创建数据隔离对象
         $dataIsolation = $this->createDataIsolation($userAuthorization);
@@ -510,13 +510,13 @@ class WorkspaceAppService extends AbstractAppService
     /**
      * 获取文件URL列表.
      *
-     * @param MagicUserAuthorization $userAuthorization 用户授权信息
+     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
      * @param array $fileIds 文件ID列表
      * @param string $downloadMode 下载模式（download:下载, preview:预览）
      * @param array $options 其他选项
      * @return array 文件URL列表
      */
-    public function getFileUrls(MagicUserAuthorization $userAuthorization, array $fileIds, string $downloadMode, array $options = []): array
+    public function getFileUrls(DelightfulUserAuthorization $userAuthorization, array $fileIds, string $downloadMode, array $options = []): array
     {
         // 创建数据隔离对象
         $organizationCode = $userAuthorization->getOrganizationCode();
@@ -580,7 +580,7 @@ class WorkspaceAppService extends AbstractAppService
     /**
      * 注册转换后的PDF文件以供定时清理.
      */
-    public function registerConvertedPdfsForCleanup(MagicUserAuthorization $userAuthorization, array $convertedFiles): void
+    public function registerConvertedPdfsForCleanup(DelightfulUserAuthorization $userAuthorization, array $convertedFiles): void
     {
         if (empty($convertedFiles)) {
             return;
@@ -629,8 +629,8 @@ class WorkspaceAppService extends AbstractAppService
         $this->logger->info('开始初始化用户工作区');
         Db::beginTransaction();
         try {
-            // Step 1: Initialize Magic Chat Conversation
-            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+            // Step 1: Initialize Delightful Chat Conversation
+            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
             $this->logger->info(sprintf('初始化超级麦吉, chatConversationId=%s, chatConversationTopicId=%s', $chatConversationId, $chatConversationTopicId));
 
             // Step 2: Create workspace

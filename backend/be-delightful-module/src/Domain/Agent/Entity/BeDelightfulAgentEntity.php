@@ -94,16 +94,16 @@ class BeDelightfulAgentEntity extends AbstractEntity
             ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'organization_code']);
         }
         if (empty($this->name)) {
-            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'super_magic.agent.fields.name']);
+            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'be_delightful.agent.fields.name']);
         }
         if (empty($this->prompt)
             || ! isset($this->prompt['version'])
             || ! isset($this->prompt['structure'])) {
-            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'super_magic.agent.fields.prompt']);
+            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'be_delightful.agent.fields.prompt']);
         }
         // Check if prompt string content is empty
         if (empty(trim($this->getPromptString()))) {
-            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'super_magic.agent.fields.prompt']);
+            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'be_delightful.agent.fields.prompt']);
         }
         if (empty($this->creator)) {
             ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
@@ -127,16 +127,16 @@ class BeDelightfulAgentEntity extends AbstractEntity
             ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'organization_code']);
         }
         if (empty($this->name)) {
-            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'super_magic.agent.fields.name']);
+            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'be_delightful.agent.fields.name']);
         }
         if (empty($this->prompt)
             || ! isset($this->prompt['version'])
             || ! isset($this->prompt['structure'])) {
-            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'super_magic.agent.fields.prompt']);
+            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'be_delightful.agent.fields.prompt']);
         }
         // Check if prompt string content is empty
         if (empty(trim($this->getPromptString()))) {
-            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'super_magic.agent.fields.prompt']);
+            ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.empty', ['label' => 'be_delightful.agent.fields.prompt']);
         }
 
         // 将新值设置到原始实体上
@@ -346,7 +346,7 @@ class BeDelightfulAgentEntity extends AbstractEntity
         if (is_int($type)) {
             $type = BeDelightfulAgentType::tryFrom($type);
             if ($type === null) {
-                ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.invalid', ['label' => 'super_magic.agent.fields.type']);
+                ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.invalid', ['label' => 'be_delightful.agent.fields.type']);
             }
         }
         $this->type = $type;

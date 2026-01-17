@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\LongTermMemory\Enum\AppCodeEnum;
-use App\Application\MCP\SupperMagicMCP\SupperMagicAgentMCPInterface;
+use App\Application\MCP\SupperDelightfulMCP\SupperDelightfulAgentMCPInterface;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use App\Domain\LongTermMemory\Service\LongTermMemoryDomainService;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
 use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
@@ -58,12 +58,12 @@ class HandleUserMessageAppService extends AbstractAppService
 {
     protected LoggerInterface $logger;
 
-    private ?SupperMagicAgentMCPInterface $supperMagicAgentMCP = null;
+    private ?SupperDelightfulAgentMCPInterface $supperDelightfulAgentMCP = null;
 
     public function __construct(
         private readonly TopicDomainService $topicDomainService,
         private readonly TaskDomainService $taskDomainService,
-        private readonly MagicDepartmentUserDomainService $departmentUserDomainService,
+        private readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
         private readonly TopicTaskAppService $topicTaskAppService,
         private readonly ClientMessageAppService $clientMessageAppService,
         private readonly AgentDomainService $agentDomainService,
@@ -73,8 +73,8 @@ class HandleUserMessageAppService extends AbstractAppService
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(get_class($this));
-        if (container()->has(SupperMagicAgentMCPInterface::class)) {
-            $this->supperMagicAgentMCP = container()->get(SupperMagicAgentMCPInterface::class);
+        if (container()->has(SupperDelightfulAgentMCPInterface::class)) {
+            $this->supperDelightfulAgentMCP = container()->get(SupperDelightfulAgentMCPInterface::class);
         }
     }
 
@@ -83,7 +83,7 @@ class HandleUserMessageAppService extends AbstractAppService
         // Get topic information
         $topicEntity = $this->topicDomainService->getTopicByChatTopicId($dataIsolation, $dto->getChatTopicId());
 
-        // 检查项目是否有权限
+        // Check if project has permission
         $this->getAccessibleProject($topicEntity->getProjectId(), $dataIsolation->getCurrentUserId(), $dataIsolation->getCurrentOrganizationCode());
 
         if (is_null($topicEntity)) {
@@ -200,10 +200,10 @@ class HandleUserMessageAppService extends AbstractAppService
             $isFirstTask = (empty($topicEntity->getCurrentTaskId()) || empty($topicEntity->getSandboxId()))
                 && CreationSource::fromValue($topicEntity->getSource()) !== CreationSource::COPY;
 
-            // 提前初始化 task_id
+            // Initialize task_id in advance
             $taskId = (string) IdGenerator::getSnowId();
 
-            // 检查项目是否有权限
+            // Check if project has permission
             $projectEntity = $this->getAccessibleProject($topicEntity->getProjectId(), $dataIsolation->getCurrentUserId(), $dataIsolation->getCurrentOrganizationCode());
 
             // Check message before task starts
@@ -276,7 +276,7 @@ class HandleUserMessageAppService extends AbstractAppService
                 $dataIsolation->getCurrentOrganizationCode(),
                 $dataIsolation->getCurrentUserId()
             );
-            $mcpConfig = $this->supperMagicAgentMCP?->createChatMessageRequestMcpConfig($mcpDataIsolation, $taskContext) ?? [];
+            $mcpConfig = $this->supperDelightfulAgentMCP?->createChatMessageRequestMcpConfig($mcpDataIsolation, $taskContext) ?? [];
             $taskContext = $taskContext->setMcpConfig($mcpConfig);
 
             // Add dynamic params to task context (if present)
@@ -467,7 +467,7 @@ class HandleUserMessageAppService extends AbstractAppService
         // Convert attachments string to array if not null
         $attachmentsArray = $userMessageDTO->getAttachments() !== null ? json_decode($userMessageDTO->getAttachments(), true) : null;
 
-        // 合并原有的 raw_content 和 dynamic_params
+        // Merge existing raw_content and dynamic_params
         $rawContentJson = $this->mergeRawContentWithDynamicParams(
             $userMessageDTO->getRawContent(),
             $userMessageDTO->getDynamicParams()
@@ -645,11 +645,11 @@ class HandleUserMessageAppService extends AbstractAppService
     }
 
     /**
-     * 合并原有的 raw_content 和 dynamic_params.
+     * Merge existing raw_content and dynamic_params.
      *
-     * @param null|string $existingRawContent 原有的 raw_content
-     * @param null|array $dynamicParams 动态参数
-     * @return string 合并后的 JSON 字符串
+     * @param null|string $existingRawContent Existing raw_content
+     * @param null|array $dynamicParams Dynamic parameters
+     * @return string Merged JSON string
      */
     private function mergeRawContentWithDynamicParams(?string $existingRawContent, ?array $dynamicParams): string
     {
@@ -657,19 +657,19 @@ class HandleUserMessageAppService extends AbstractAppService
         $dynamicParams = $dynamicParams ?? [];
 
         if (! empty($existingRawContent)) {
-            // 尝试解析原有内容
+            // Try to parse existing content
             $rawData = json_decode($existingRawContent, true);
             if (is_array($rawData)) {
-                // 原内容是 JSON，合并 dynamic_params
+                // Existing content is JSON, merge dynamic_params
                 $rawData = array_merge($rawData, $dynamicParams);
                 return json_encode($rawData, JSON_UNESCAPED_UNICODE);
             }
-            // 原内容不是 JSON，保留原样（不添加 dynamic_params）
+            // Existing content is not JSON, keep original (do not add dynamic_params)
             return $existingRawContent;
         }
 
         if (! empty($dynamicParams)) {
-            // 没有原内容，只存 dynamic_params
+            // No existing content, only store dynamic_params
             return json_encode($dynamicParams, JSON_UNESCAPED_UNICODE);
         }
 

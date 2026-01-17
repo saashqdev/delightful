@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
             $table->text('raw_content')->nullable()->comment('Raw message content');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
             $table->dropColumn('raw_content');
         });
     }

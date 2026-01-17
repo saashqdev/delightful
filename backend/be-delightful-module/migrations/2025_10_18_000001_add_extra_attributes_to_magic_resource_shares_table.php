@@ -11,14 +11,14 @@ use Hyperf\Database\Schema\Schema;
 /**
  * 为资源分享表添加额外属性字段.
  */
-class AddExtraAttributesToMagicResourceSharesTable extends Migration
+class AddExtraAttributesToDelightfulResourceSharesTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('magic_resource_shares', function (Blueprint $table) {
+        Schema::table('delightful_resource_shares', function (Blueprint $table) {
             // 添加 extra JSON 字段，用于存储资源分享的额外属性
             $table->json('extra')
                 ->nullable()

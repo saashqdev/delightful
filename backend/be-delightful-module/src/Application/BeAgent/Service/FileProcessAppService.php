@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatFileAppService;
+use App\Application\Chat\Service\DelightfulChatFileAppService;
 use App\Application\File\Service\FileAppService;
 use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\MentionType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
@@ -18,9 +18,9 @@ use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Infrastructure\Util\ShadowCode\ShadowCode;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\AsyncEvent\AsyncEventUtil;
-use Dtyq\CloudFile\Kernel\Struct\UploadFile;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\AsyncEvent\AsyncEventUtil;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 use Delightful\BeDelightful\Application\BeAgent\Config\BatchProcessConfig;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\ProjectFileConstant;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
@@ -61,7 +61,7 @@ class FileProcessAppService extends AbstractAppService
     private readonly LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatFileAppService $magicChatFileAppService,
+        private readonly DelightfulChatFileAppService $delightfulChatFileAppService,
         private readonly TaskDomainService $taskDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
         private readonly FileAppService $fileAppService,
@@ -169,7 +169,7 @@ class FileProcessAppService extends AbstractAppService
                 }
 
                 // Get complete file information
-                $fileInfo = $this->magicChatFileAppService->getFileInfo($attachment['file_id']);
+                $fileInfo = $this->delightfulChatFileAppService->getFileInfo($attachment['file_id']);
                 if (empty($fileInfo)) {
                     $this->logger->warning(sprintf(
                         'Attachment file not found, File ID: %s, Task ID: %s',
@@ -464,7 +464,7 @@ class FileProcessAppService extends AbstractAppService
             $projectEntity = $this->projectDomainService->getProjectNotUserId($taskEntity->getProjectId());
 
             // Create user authorization object
-            $userAuthorization = new MagicUserAuthorization();
+            $userAuthorization = new DelightfulUserAuthorization();
             $userAuthorization->setOrganizationCode($organizationCode);
 
             // Use unified FileAppService to get STS Token
@@ -484,10 +484,10 @@ class FileProcessAppService extends AbstractAppService
      * Save file content to object storage.
      *
      * @param SaveFileContentRequestDTO $requestDTO Request DTO
-     * @param MagicUserAuthorization $authorization User authorization
+     * @param DelightfulUserAuthorization $authorization User authorization
      * @return array Response data
      */
-    public function saveFileContent(SaveFileContentRequestDTO $requestDTO, MagicUserAuthorization $authorization): array
+    public function saveFileContent(SaveFileContentRequestDTO $requestDTO, DelightfulUserAuthorization $authorization): array
     {
         $fileId = $requestDTO->getFileId();
         $lockKey = 'file_save_lock:' . $fileId;
@@ -658,10 +658,10 @@ class FileProcessAppService extends AbstractAppService
      * Batch save file content with concurrent processing.
      *
      * @param BatchSaveFileContentRequestDTO $requestDTO Batch request DTO
-     * @param MagicUserAuthorization $authorization User authorization
+     * @param DelightfulUserAuthorization $authorization User authorization
      * @return array Batch response data
      */
-    public function batchSaveFileContent(BatchSaveFileContentRequestDTO $requestDTO, MagicUserAuthorization $authorization): array
+    public function batchSaveFileContent(BatchSaveFileContentRequestDTO $requestDTO, DelightfulUserAuthorization $authorization): array
     {
         $files = $requestDTO->getFiles();
         $stats = [
@@ -973,10 +973,10 @@ class FileProcessAppService extends AbstractAppService
      * Perform actual file save logic.
      *
      * @param SaveFileContentRequestDTO $requestDTO Request DTO
-     * @param MagicUserAuthorization $authorization User authorization
+     * @param DelightfulUserAuthorization $authorization User authorization
      * @return array Response data
      */
-    private function performFileSave(SaveFileContentRequestDTO $requestDTO, MagicUserAuthorization $authorization): array
+    private function performFileSave(SaveFileContentRequestDTO $requestDTO, DelightfulUserAuthorization $authorization): array
     {
         // 1. Validate file permission
         $taskFileEntity = $this->validateFilePermission((int) $requestDTO->getFileId(), $authorization);
@@ -1023,10 +1023,10 @@ class FileProcessAppService extends AbstractAppService
      * Validate file permission.
      *
      * @param int $fileId File ID
-     * @param MagicUserAuthorization $authorization User authorization
+     * @param DelightfulUserAuthorization $authorization User authorization
      * @return TaskFileEntity Task file entity
      */
-    private function validateFilePermission(int $fileId, MagicUserAuthorization $authorization): TaskFileEntity
+    private function validateFilePermission(int $fileId, DelightfulUserAuthorization $authorization): TaskFileEntity
     {
         // Get TaskFileEntity by file_id
         $taskFileEntity = $this->taskDomainService->getTaskFile($fileId);
@@ -1145,9 +1145,9 @@ class FileProcessAppService extends AbstractAppService
      *
      * @param TaskFileEntity $taskFileEntity Task file entity
      * @param array $result Upload result
-     * @param MagicUserAuthorization $authorization User authorization
+     * @param DelightfulUserAuthorization $authorization User authorization
      */
-    private function updateFileMetadata(TaskFileEntity $taskFileEntity, array $result, MagicUserAuthorization $authorization): void
+    private function updateFileMetadata(TaskFileEntity $taskFileEntity, array $result, DelightfulUserAuthorization $authorization): void
     {
         // Update file size and modification time
         $taskFileEntity->setFileSize($result['size']);

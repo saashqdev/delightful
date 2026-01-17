@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 
 /**
@@ -21,7 +21,7 @@ class ProjectMembersUpdatedEvent extends AbstractEvent
     public function __construct(
         private readonly ProjectEntity $projectEntity,
         private readonly array $currentMembers,
-        private readonly MagicUserAuthorization $userAuthorization
+        private readonly DelightfulUserAuthorization $userAuthorization
     ) {
         parent::__construct();
     }
@@ -36,7 +36,7 @@ class ProjectMembersUpdatedEvent extends AbstractEvent
         return $this->currentMembers;
     }
 
-    public function getUserAuthorization(): MagicUserAuthorization
+    public function getUserAuthorization(): DelightfulUserAuthorization
     {
         return $this->userAuthorization;
     }

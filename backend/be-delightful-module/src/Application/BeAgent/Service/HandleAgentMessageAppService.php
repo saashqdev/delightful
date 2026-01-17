@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Application\BeAgent\Service;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentEventEnum;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
@@ -124,75 +124,75 @@ class HandleAgentMessageAppService extends AbstractAppService
 
     /**
      * Batch handle Agent messages for a specific topic.
-     * 批量处理指定话题的消息，按seq_id顺序处理.
+     * Process messages in order by seq_id.
      *
-     * @param int $topicId 话题ID
-     * @return int 处理的消息数量
+     * @param int $topicId Topic ID
+     * @return int Number of messages processed
      */
     public function batchHandleAgentMessage(int $topicId, ?int $taskId): int
     {
-        $this->logger->info(sprintf('开始批量处理topic %d的消息', $topicId));
+        $this->logger->info(sprintf('Starting batch processing of messages for topic %d', $topicId));
 
-        // 1. 获取待处理的消息列表（按seq_id升序排列）
+        // 1. Get list of processable messages (sorted by seq_id in ascending order)
         $processableMessages = $this->taskMessageDomainService->findProcessableMessages(topicId: $topicId, taskId: $taskId, senderType: 'assistant', timeoutMinutes: 30, maxRetries: 3, limit: 3);
 
         if (empty($processableMessages)) {
-            $this->logger->info(sprintf('topic %d 没有待处理的消息', $topicId));
+            $this->logger->info(sprintf('Topic %d has no processable messages', $topicId));
             return 0;
         }
 
         $this->logger->info(sprintf(
-            'topic %d 找到 %d 条待处理消息，开始按顺序处理',
-            $topicId,
-            count($processableMessages)
+            'Found %d processable messages for topic %d, starting sequential processing',
+            count($processableMessages),
+            $topicId
         ));
 
         $processedCount = 0;
         $isTermination = false;
 
-        // 2. 按顺序逐条处理消息
+        // 2. Process messages sequentially in order
         foreach ($processableMessages as $messageEntity) {
             try {
                 /*
                  * @var TaskMessageEntity $messageEntity
                  */
-                // 更新状态为处理中
+                // Update status to processing
                 $this->taskMessageDomainService->updateProcessingStatus(
                     id: $messageEntity->getId(),
                     processingStatus: TaskMessageEntity::PROCESSING_STATUS_PROCESSING
                 );
 
-                // 检查任务是否已终止
+                // Check if task has been terminated
                 $currentTaskId = $messageEntity->getTaskId();
                 if (TaskTerminationUtil::isTaskTerminated($this->redis, $this->logger, $currentTaskId) || $messageEntity->getEvent() === AgentEventEnum::AGENT_SUSPENDED) {
                     $isTermination = true;
                     $this->logger->info(sprintf(
-                        '任务 %s 已终止，跳过消息处理 message_id: %s',
+                        'Task %s has been terminated, skipping message processing message_id: %s',
                         $currentTaskId,
                         $messageEntity->getMessageId()
                     ));
 
-                    // 标记为已完成
+                    // Mark as completed
                     $this->taskMessageDomainService->updateProcessingStatus(
                         id: $messageEntity->getId(),
                         processingStatus: TaskMessageEntity::PROCESSING_STATUS_COMPLETED,
-                        errorMessage: '任务已终止'
+                        errorMessage: 'Task has been terminated'
                     );
                     continue;
                 }
 
-                // 从raw_data重建TopicTaskMessageDTO
+                // Rebuild TopicTaskMessageDTO from raw_data
                 $rawData = json_decode($messageEntity->getRawData() ?? '{}', true);
                 if (empty($rawData)) {
-                    throw new RuntimeException('无法解析原始消息数据');
+                    throw new RuntimeException('Unable to parse original message data');
                 }
 
                 $messageDTO = TopicTaskMessageDTO::fromArray($rawData);
 
-                // 调用原有的处理逻辑
+                // Call original processing logic
                 $this->handleAgentMessage($messageDTO);
 
-                // 标记为已完成
+                // Mark as completed
                 $this->taskMessageDomainService->updateProcessingStatus(
                     id: $messageEntity->getId(),
                     processingStatus: TaskMessageEntity::PROCESSING_STATUS_COMPLETED
@@ -201,21 +201,21 @@ class HandleAgentMessageAppService extends AbstractAppService
                 ++$processedCount;
 
                 $this->logger->info(sprintf(
-                    '成功处理消息 message_id: %s, seq_id: %d',
+                    'Successfully processed message message_id: %s, seq_id: %d',
                     $messageEntity->getMessageId(),
                     $messageEntity->getSeqId()
                 ));
             } catch (EventException $e) {
                 $isTermination = true;
                 $this->logger->error(sprintf(
-                    '处理消息失败 message_id: %s, seq_id: %d, error: %s',
+                    'Message processing failed message_id: %s, seq_id: %d, error: %s',
                     $messageEntity->getMessageId(),
                     $messageEntity->getSeqId(),
                     $e->getMessage()
                 ));
                 break;
             } catch (Throwable $e) {
-                // 处理失败，更新重试次数和错误信息
+                // Processing failed, update retry count and error message
                 $newRetryCount = $messageEntity->getRetryCount() + 1;
 
                 $this->taskMessageDomainService->updateProcessingStatus(
@@ -226,7 +226,7 @@ class HandleAgentMessageAppService extends AbstractAppService
                 );
 
                 $this->logger->error(sprintf(
-                    '处理消息失败 message_id: %s, seq_id: %d, error: %s, retry_count: %d',
+                    'Message processing failed message_id: %s, seq_id: %d, error: %s, retry_count: %d',
                     $messageEntity->getMessageId(),
                     $messageEntity->getSeqId(),
                     $e->getMessage(),
@@ -236,7 +236,7 @@ class HandleAgentMessageAppService extends AbstractAppService
         }
 
         $this->logger->info(sprintf(
-            'topic %d 批量处理完成，成功处理 %d 条消息',
+            'Batch processing completed for topic %d, successfully processed %d messages',
             $topicId,
             $processedCount
         ));
@@ -244,7 +244,7 @@ class HandleAgentMessageAppService extends AbstractAppService
         if ($isTermination && ! empty($taskId)) {
             TaskTerminationUtil::setTerminationFlag($this->redis, $this->logger, $taskId);
             $this->logger->info(sprintf(
-                '任务 %s 已终止，停止批量处理消息',
+                'Task %s has been terminated, stopping batch message processing',
                 $taskId
             ));
         }
@@ -367,10 +367,10 @@ class HandleAgentMessageAppService extends AbstractAppService
         // 1. Parse and validate message
         $messageData = $this->parseMessageContent($messageDTO);
 
-        // 2. Process all attachments
+        // Process all attachments
         $this->processAllAttachments($messageData, $taskContext);
 
-        // 兜底操作，如果当前任务的消息已经是完成
+        // Fallback operation, if current task message is already finished
         if ($this->isSendMessage($taskContext)) {
             // 3. Record AI message
             $messageEntity = $this->recordAgentMessage($messageData, $taskContext);
@@ -537,21 +537,21 @@ class HandleAgentMessageAppService extends AbstractAppService
     {
         $task = $taskContext->getTask();
 
-        // 先查找是否已存在该消息（通过topic_id + message_id）
+        // First check if message already exists (by topic_id + message_id)
         $existingMessage = $this->taskMessageDomainService->findByTopicIdAndMessageId(
             $task->getTopicId(),
             $messageData['messageId']
         );
 
         if ($existingMessage) {
-            // 消息已存在，直接在 app 层更新现有实体的字段
+            // Message already exists, directly update existing entity fields in app layer
             $this->logger->info(sprintf(
-                '消息已存在，更新业务字段 topic_id: %d, message_id: %s',
+                'Message already exists, updating business fields topic_id: %d, message_id: %s',
                 $task->getTopicId(),
                 $messageData['messageId']
             ));
 
-            // 直接更新现有实体的字段
+            // Directly update existing entity fields
             $existingMessage->setSenderType(Role::Assistant->value)
                 ->setSenderUid($taskContext->getAgentUserId())
                 ->setReceiverUid($task->getUserId())
@@ -569,14 +569,14 @@ class HandleAgentMessageAppService extends AbstractAppService
 
             return $existingMessage;
         }
-        // 消息不存在，创建新实体并插入新记录
+        // Message does not exist, create new entity and insert new record
         $this->logger->info(sprintf(
-            '消息不存在，插入新记录 topic_id: %d, message_id: %s',
+            'Message does not exist, inserting new record topic_id: %d, message_id: %s',
             $task->getTopicId(),
             $messageData['messageId']
         ));
 
-        // 创建 TaskMessageDTO for AI message
+        // Create TaskMessageDTO for AI message
         $taskMessageDTO = new TaskMessageDTO(
             taskId: (string) $task->getId(),
             role: Role::Assistant->value,
@@ -911,7 +911,7 @@ class HandleAgentMessageAppService extends AbstractAppService
         ?TaskContext $taskContext,
         ?TopicEntity $topicEntity
     ): void {
-        // 收到异常，设置中断信息
+        // Received exception, set interrupt information
         $this->logger->error(sprintf('Exception occurred while processing message event callback: %s', $e->getMessage()));
 
         $dataIsolation = $taskContext->getDataIsolation();

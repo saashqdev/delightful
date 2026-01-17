@@ -151,7 +151,7 @@ readonly class ChatMessageAssembler
             ],
             'attachments' => [],
             'extra' => [
-                'super_agent' => [
+                'be_agent' => [
                     'mentions' => $noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath) ? [
                         [
                             'type' => 'mention',

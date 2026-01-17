@@ -12,7 +12,7 @@ class ProjectFileConstant
     /**
      * Project configuration file name.
      */
-    public const PROJECT_CONFIG_FILENAME = 'magic.project.js';
+    public const PROJECT_CONFIG_FILENAME = 'delightful.project.js';
 
     /**
      * Slide index file name.

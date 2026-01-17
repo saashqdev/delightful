@@ -12,7 +12,7 @@ use App\Application\File\Service\FileCleanupAppService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\ConvertStatusEnum;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
@@ -63,7 +63,7 @@ class FileConverterAppService extends AbstractAppService
      * 5. Return a response in a unified format.
      * @throws Throwable
      */
-    public function convertFiles(MagicUserAuthorization $userAuthorization, ConvertFilesRequestDTO $requestDTO): array
+    public function convertFiles(DelightfulUserAuthorization $userAuthorization, ConvertFilesRequestDTO $requestDTO): array
     {
         $userId = $userAuthorization->getId();
         $fileIds = $requestDTO->file_ids;
@@ -128,7 +128,7 @@ class FileConverterAppService extends AbstractAppService
     /**
      * Checks the status of a file conversion task.
      */
-    public function checkFileConvertStatus(MagicUserAuthorization $userAuthorization, string $taskKey): FileConvertStatusResponseDTO
+    public function checkFileConvertStatus(DelightfulUserAuthorization $userAuthorization, string $taskKey): FileConvertStatusResponseDTO
     {
         $userId = $userAuthorization->getId();
 
@@ -190,14 +190,14 @@ class FileConverterAppService extends AbstractAppService
      * Processes the file conversion.
      *
      * @param string $taskKey the task key
-     * @param MagicUserAuthorization $userAuthorization user authorization
+     * @param DelightfulUserAuthorization $userAuthorization user authorization
      * @param ConvertFilesRequestDTO $requestDTO the conversion request DTO
      * @param TaskFileEntity[] $validFiles the list of valid files
      * @param ProjectEntity $projectEntity the project entity
      */
     protected function processFileConversion(
         string $taskKey,
-        MagicUserAuthorization $userAuthorization,
+        DelightfulUserAuthorization $userAuthorization,
         ConvertFilesRequestDTO $requestDTO,
         array $validFiles,
         ProjectEntity $projectEntity
@@ -364,7 +364,7 @@ class FileConverterAppService extends AbstractAppService
      * Registers converted files for scheduled cleanup.
      * @param FileItemDTO[] $convertedFiles
      */
-    private function registerConvertedFilesForCleanup(MagicUserAuthorization $userAuthorization, array $convertedFiles, ?string $batchId): void
+    private function registerConvertedFilesForCleanup(DelightfulUserAuthorization $userAuthorization, array $convertedFiles, ?string $batchId): void
     {
         if (empty($convertedFiles)) {
             return;
@@ -430,7 +430,7 @@ class FileConverterAppService extends AbstractAppService
     /**
      * Builds a response from the conversion result.
      */
-    private function buildResponseFromConvertResult(FileConverterResponse $response, string $taskKey, MagicUserAuthorization $userAuthorization): FileConvertStatusResponseDTO
+    private function buildResponseFromConvertResult(FileConverterResponse $response, string $taskKey, DelightfulUserAuthorization $userAuthorization): FileConvertStatusResponseDTO
     {
         $status = $response->getDataDTO()->status;
 
@@ -444,7 +444,7 @@ class FileConverterAppService extends AbstractAppService
     /**
      * Builds a response for the completed state.
      */
-    private function buildCompletedResponse(FileConverterResponse $response, string $taskKey, MagicUserAuthorization $userAuthorization): FileConvertStatusResponseDTO
+    private function buildCompletedResponse(FileConverterResponse $response, string $taskKey, DelightfulUserAuthorization $userAuthorization): FileConvertStatusResponseDTO
     {
         // 优先查找 zip；若不存在，则回退到 pdf/ppt/pptx 等单文件类型
         $targetOssKey = null;
@@ -664,7 +664,7 @@ class FileConverterAppService extends AbstractAppService
      *
      * @return array|string returns the taskKey for a new request, or the status of an existing task for a duplicate request
      */
-    private function handleDuplicateRequest(MagicUserAuthorization $userAuthorization, array $fileIds, string $convertType, string $userId): array|string
+    private function handleDuplicateRequest(DelightfulUserAuthorization $userAuthorization, array $fileIds, string $convertType, string $userId): array|string
     {
         $sortedFileIds = $fileIds;
         sort($sortedFileIds);
@@ -728,7 +728,7 @@ class FileConverterAppService extends AbstractAppService
     /**
      * Gets temporary STS credentials.
      */
-    private function getStsCredential(MagicUserAuthorization $userAuthorization, string $workDir, ?string $projectOrganizationCode = null): array
+    private function getStsCredential(DelightfulUserAuthorization $userAuthorization, string $workDir, ?string $projectOrganizationCode = null): array
     {
         $projectOrganizationCode = $projectOrganizationCode ?? $userAuthorization->getOrganizationCode();
         $tempDir = $this->generateTempDir($workDir);
@@ -742,7 +742,7 @@ class FileConverterAppService extends AbstractAppService
     /**
      * 注册转换后的PDF文件以供定时清理.
      */
-    private function registerConvertedPdfsForCleanup(MagicUserAuthorization $userAuthorization, array $convertedFiles): void
+    private function registerConvertedPdfsForCleanup(DelightfulUserAuthorization $userAuthorization, array $convertedFiles): void
     {
         if (empty($convertedFiles)) {
             return;

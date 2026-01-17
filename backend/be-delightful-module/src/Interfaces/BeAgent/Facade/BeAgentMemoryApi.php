@@ -15,7 +15,7 @@ use App\Domain\LongTermMemory\Entity\ValueObject\MemoryType;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\ShadowCode\ShadowCode;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
 use Hyperf\HttpServer\Contract\RequestInterface;

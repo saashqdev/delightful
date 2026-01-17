@@ -35,7 +35,7 @@ class BeDelightfulAgentModel extends AbstractModel
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_super_magic_agents';
+    protected ?string $table = 'delightful_be_delightful_agents';
 
     protected array $fillable = [
         'id',

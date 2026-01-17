@@ -1,4 +1,4 @@
-# DelightfulMarkdown - Magic Markdown Render Component
+# DelightfulMarkdown - Delightful Markdown Render Component
 
 `DelightfulMarkdown` is a powerful Markdown rendering component based on react-markdown, supporting code highlighting, LaTeX formulas, HTML content, and many other extended features.
 

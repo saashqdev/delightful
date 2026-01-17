@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
             // Add usage field for storing usage information (only set when task is finished)
-            if (! Schema::hasColumn('magic_super_agent_message', 'usage')) {
+            if (! Schema::hasColumn('delightful_be_agent_message', 'usage')) {
                 $table->json('usage')->nullable()->comment('Usage information array (token usage, API calls, etc.), only set when task is finished');
             }
         });

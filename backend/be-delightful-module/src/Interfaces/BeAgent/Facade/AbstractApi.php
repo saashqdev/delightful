@@ -9,12 +9,12 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
+use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 abstract class AbstractApi
 {
-    use MagicUserAuthorizationTrait;
+    use DelightfulUserAuthorizationTrait;
 
     public function __construct(
         protected RequestInterface $request,

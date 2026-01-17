@@ -10,8 +10,8 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 use App\Application\File\Service\FileAppService;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\Infrastructure\Util\Context\RequestContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\Service\AccountAppService;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -43,7 +43,7 @@ class AccountApi extends AbstractApi
         // 设置用户授权信息
         $requestContext->setAuthorization($this->request->header('authorization', ''));
         $requestContext->setUserAuthorization($this->getAuthorization());
-        $userAuthorization = new MagicUserAuthorization();
+        $userAuthorization = new DelightfulUserAuthorization();
         $userAuthorization->setId($requestContext->getUserId());
         $userAuthorization->setOrganizationCode($requestContext->getOrganizationCode());
         $userAuthorization->setUserType(UserType::Human);

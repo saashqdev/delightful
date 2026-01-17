@@ -22,7 +22,7 @@ class ProjectFileModel extends AbstractModel
     /**
      * 表名.
      */
-    protected ?string $table = 'magic_super_agent_project_files';
+    protected ?string $table = 'delightful_be_agent_project_files';
 
     /**
      * 主键.

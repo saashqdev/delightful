@@ -9,7 +9,7 @@ namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Util\Context\RequestContext;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\Service\TopicAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\WorkspaceAppService;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\WorkspaceArchiveStatus;

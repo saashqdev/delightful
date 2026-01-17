@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
             // ============ 添加队列处理字段 ============
 
             // 添加原始数据存储字段
@@ -45,7 +45,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
             // 删除索引
             $table->dropIndex('idx_topic_status_sender_seq');
             $table->dropIndex('idx_status_seq_asc');

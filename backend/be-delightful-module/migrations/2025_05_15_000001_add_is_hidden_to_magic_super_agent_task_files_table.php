@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_task_files', function (Blueprint $table) {
             $table->tinyInteger('is_hidden')->default(0)->comment('是否为隐藏文件：0-否，1-是');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_task_files', function (Blueprint $table) {
             $table->dropColumn('is_hidden');
         });
     }

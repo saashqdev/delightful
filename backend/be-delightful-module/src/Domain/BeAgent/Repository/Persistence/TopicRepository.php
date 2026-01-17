@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
-use App\Domain\Chat\Repository\Persistence\Model\MagicChatSequenceModel;
-use App\Domain\Chat\Repository\Persistence\Model\MagicChatTopicMessageModel;
-use App\Domain\Chat\Repository\Persistence\Model\MagicMessageModel;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulChatSequenceModel;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulChatTopicMessageModel;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulMessageModel;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
@@ -29,9 +29,9 @@ class TopicRepository implements TopicRepositoryInterface
 
     public function __construct(
         protected TopicModel $model,
-        protected MagicChatSequenceModel $magicChatSequenceModel,
-        protected MagicChatTopicMessageModel $magicChatTopicMessageModel,
-        protected MagicMessageModel $magicMessageModel,
+        protected DelightfulChatSequenceModel $delightfulChatSequenceModel,
+        protected DelightfulChatTopicMessageModel $delightfulChatTopicMessageModel,
+        protected DelightfulMessageModel $delightfulMessageModel,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(static::class);
@@ -470,25 +470,25 @@ class TopicRepository implements TopicRepositoryInterface
     // ======================= 消息回滚相关方法实现 =======================
 
     /**
-     * 根据序列ID获取magic_message_id.
+     * 根据序列ID获取delightful_message_id.
      */
-    public function getMagicMessageIdBySeqId(string $seqId): ?string
+    public function getDelightfulMessageIdBySeqId(string $seqId): ?string
     {
-        $result = $this->magicChatSequenceModel::query()
+        $result = $this->delightfulChatSequenceModel::query()
             ->where('id', $seqId)
-            ->value('magic_message_id');
+            ->value('delightful_message_id');
 
         return $result ?: null;
     }
 
     /**
-     * 根据magic_message_id获取所有相关的seq_id（所有视角）.
+     * 根据delightful_message_id获取所有相关的seq_id（所有视角）.
      */
-    public function getAllSeqIdsByMagicMessageId(string $magicMessageId): array
+    public function getAllSeqIdsByDelightfulMessageId(string $delightfulMessageId): array
     {
         // 返回所有相关的seq_id
-        return $this->magicChatSequenceModel::query()
-            ->where('magic_message_id', $magicMessageId)
+        return $this->delightfulChatSequenceModel::query()
+            ->where('delightful_message_id', $delightfulMessageId)
             ->pluck('id')
             ->toArray();
     }
@@ -503,7 +503,7 @@ class TopicRepository implements TopicRepositoryInterface
         }
 
         // 批量查询所有baseSeqIds对应的conversation_id和topic_id
-        $topicInfos = $this->magicChatTopicMessageModel::query()
+        $topicInfos = $this->delightfulChatTopicMessageModel::query()
             ->select(['seq_id', 'conversation_id', 'topic_id'])
             ->whereIn('seq_id', $baseSeqIds)
             ->get()
@@ -518,7 +518,7 @@ class TopicRepository implements TopicRepositoryInterface
         // 遍历查询到的topicInfo，获取每个话题下大于等于该seq_id的所有消息
         foreach ($topicInfos as $topicInfo) {
             // 查询该话题下大于等于该seq_id的所有消息（包含当前消息和后续消息）
-            $seqIds = $this->magicChatTopicMessageModel::query()
+            $seqIds = $this->delightfulChatTopicMessageModel::query()
                 ->where('conversation_id', $topicInfo->conversation_id)
                 ->where('topic_id', $topicInfo->topic_id)
                 ->where('seq_id', '>=', $topicInfo->seq_id)
@@ -540,7 +540,7 @@ class TopicRepository implements TopicRepositoryInterface
             return 0;
         }
 
-        return $this->magicChatTopicMessageModel::query()
+        return $this->delightfulChatTopicMessageModel::query()
             ->whereIn('seq_id', $seqIds)
             ->delete();
     }
@@ -554,22 +554,22 @@ class TopicRepository implements TopicRepositoryInterface
             return true;
         }
 
-        // 获取所有相关的magic_message_ids
-        $magicMessageIds = $this->magicChatSequenceModel::query()
+        // 获取所有相关的delightful_message_ids
+        $delightfulMessageIds = $this->delightfulChatSequenceModel::query()
             ->whereIn('id', $seqIds)
             ->distinct()
-            ->pluck('magic_message_id')
+            ->pluck('delightful_message_id')
             ->toArray();
 
-        // 删除 magic_chat_messages
-        if (! empty($magicMessageIds)) {
-            $this->magicMessageModel::query()
-                ->whereIn('magic_message_id', $magicMessageIds)
+        // 删除 delightful_chat_messages
+        if (! empty($delightfulMessageIds)) {
+            $this->delightfulMessageModel::query()
+                ->whereIn('delightful_message_id', $delightfulMessageIds)
                 ->delete();
         }
 
-        // 删除 magic_chat_sequences
-        $this->magicChatSequenceModel::query()
+        // 删除 delightful_chat_sequences
+        $this->delightfulChatSequenceModel::query()
             ->whereIn('id', $seqIds)
             ->delete();
 
@@ -577,7 +577,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据im_seq_id删除magic_super_agent_message表中对应话题的后续消息.
+     * 根据im_seq_id删除delightful_be_agent_message表中对应话题的后续消息.
      */
     public function deleteBeAgentMessagesFromSeqId(int $seqId): int
     {
@@ -601,15 +601,15 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 批量更新magic_chat_sequences表的status字段.
+     * 批量更新delightful_chat_sequences表的status字段.
      */
-    public function batchUpdateSeqStatus(array $seqIds, MagicMessageStatus $status): bool
+    public function batchUpdateSeqStatus(array $seqIds, DelightfulMessageStatus $status): bool
     {
         if (empty($seqIds)) {
             return true;
         }
 
-        return (bool) $this->magicChatSequenceModel::query()
+        return (bool) $this->delightfulChatSequenceModel::query()
             ->whereIn('id', $seqIds)
             ->update(['status' => $status->value]);
     }
@@ -624,7 +624,7 @@ class TopicRepository implements TopicRepositoryInterface
         }
 
         // 批量查询所有baseSeqIds对应的conversation_id和topic_id
-        $topicInfos = $this->magicChatTopicMessageModel::query()
+        $topicInfos = $this->delightfulChatTopicMessageModel::query()
             ->select(['seq_id', 'conversation_id', 'topic_id'])
             ->whereIn('seq_id', $baseSeqIds)
             ->get()
@@ -639,7 +639,7 @@ class TopicRepository implements TopicRepositoryInterface
         // 遍历查询到的topicInfo，获取每个话题下小于该seq_id的所有消息
         foreach ($topicInfos as $topicInfo) {
             // 查询该话题下小于该seq_id的所有消息
-            $seqIds = $this->magicChatTopicMessageModel::query()
+            $seqIds = $this->delightfulChatTopicMessageModel::query()
                 ->where('conversation_id', $topicInfo->conversation_id)
                 ->where('topic_id', $topicInfo->topic_id)
                 ->where('seq_id', '<', $topicInfo->seq_id)
@@ -671,11 +671,11 @@ class TopicRepository implements TopicRepositoryInterface
         }
 
         // 使用聊天话题ID查询该话题下所有撤回状态的消息
-        return $this->magicChatTopicMessageModel::query()
-            ->join('magic_chat_sequences', 'magic_chat_topic_messages.seq_id', '=', 'magic_chat_sequences.id')
-            ->where('magic_chat_topic_messages.topic_id', $chatTopicId)
-            ->where('magic_chat_sequences.status', MagicMessageStatus::Revoked->value)
-            ->pluck('magic_chat_topic_messages.seq_id')
+        return $this->delightfulChatTopicMessageModel::query()
+            ->join('delightful_chat_sequences', 'delightful_chat_topic_messages.seq_id', '=', 'delightful_chat_sequences.id')
+            ->where('delightful_chat_topic_messages.topic_id', $chatTopicId)
+            ->where('delightful_chat_sequences.status', DelightfulMessageStatus::Revoked->value)
+            ->pluck('delightful_chat_topic_messages.seq_id')
             ->toArray();
     }
 

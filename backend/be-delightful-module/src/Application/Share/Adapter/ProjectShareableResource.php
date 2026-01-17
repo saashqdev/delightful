@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\Share\Adapter;
 
-use App\Application\Chat\Service\MagicUserContactAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
 use Delightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
@@ -26,7 +26,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
 
     public function __construct(
         private readonly ProjectAppService $projectAppService,
-        private readonly MagicUserContactAppService $magicUserContactAppService,
+        private readonly DelightfulUserContactAppService $delightfulUserContactAppService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -44,7 +44,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
             }
 
-            $userInfo = $this->magicUserContactAppService->getByUserId($projectEntity->getUserId());
+            $userInfo = $this->delightfulUserContactAppService->getByUserId($projectEntity->getUserId());
             if (! empty($userInfo)) {
                 $creator = $userInfo->getNickname();
             } else {

@@ -12,7 +12,7 @@ use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\ShadowCode\ShadowCode;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\BeAgent\Service\AgentAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\FileConverterAppService;
 use Delightful\BeDelightful\Application\BeAgent\Service\HandleTaskMessageAppService;

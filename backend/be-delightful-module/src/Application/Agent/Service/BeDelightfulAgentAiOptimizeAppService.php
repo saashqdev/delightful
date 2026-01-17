@@ -55,7 +55,7 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             businessParams: [
                 'organization_id' => $dataIsolation->getCurrentOrganizationCode(),
                 'user_id' => $dataIsolation->getCurrentUserId(),
-                'source_id' => 'super_magic_agent_optimizer',
+                'source_id' => 'be_delightful_agent_optimizer',
             ]
         );
 
@@ -184,7 +184,7 @@ class BeDelightfulAgentAiOptimizeAppService extends AbstractBeDelightfulAppServi
             'meta' => [
                 'ts' => time(),
                 'lang_hint' => $languageHint,
-                'src' => 'super_magic_agent_optimizer',
+                'src' => 'be_delightful_agent_optimizer',
             ],
         ];
 

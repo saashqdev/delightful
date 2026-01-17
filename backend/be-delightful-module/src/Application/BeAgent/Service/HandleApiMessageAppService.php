@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\ModelGateway\Entity\ValueObject\AccessTokenType;
 use App\Domain\ModelGateway\Service\AccessTokenDomainService;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
 use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
@@ -52,12 +52,12 @@ class HandleApiMessageAppService extends AbstractAppService
     public function __construct(
         private readonly TopicDomainService $topicDomainService,
         private readonly TaskDomainService $taskDomainService,
-        private readonly MagicDepartmentUserDomainService $departmentUserDomainService,
+        private readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
         private readonly TopicTaskAppService $topicTaskAppService,
         private readonly FileProcessAppService $fileProcessAppService,
         private readonly AgentDomainService $agentDomainService,
         private readonly AccessTokenDomainService $accessTokenDomainService,
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
         private readonly ProjectDomainService $projectDomainService,
         LoggerFactory $loggerFactory
@@ -296,7 +296,7 @@ class HandleApiMessageAppService extends AbstractAppService
         }
     }
 
-    public function getUserAuthorization(string $apiKey, string $uid = ''): MagicUserEntity
+    public function getUserAuthorization(string $apiKey, string $uid = ''): DelightfulUserEntity
     {
         $accessToken = $this->accessTokenDomainService->getByAccessToken($apiKey);
         if (empty($accessToken)) {

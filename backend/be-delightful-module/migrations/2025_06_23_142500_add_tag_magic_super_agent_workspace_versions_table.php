@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_workspace_versions', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_workspace_versions', function (Blueprint $table) {
             $table->integer('tag')->default(1)->comment('版本号');
             $table->bigInteger('project_id')->default(0)->comment('项目id');
         });

@@ -19,7 +19,7 @@ return new class extends Migration {
     public function up(): void
     {
         // 1. 添加复合索引以优化排序查询性能
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_task_files', function (Blueprint $table) {
             // 为项目文件查询添加复合索引 (project_id, parent_id, sort, file_id)
             // 这个索引将大大提升按项目和父目录分组的排序查询性能
             $table->index(['project_id', 'parent_id', 'sort', 'file_id'], 'idx_project_parent_sort');
@@ -35,7 +35,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_task_files', function (Blueprint $table) {
             // 删除添加的索引
             $table->dropIndex('idx_project_parent_sort');
             $table->dropIndex('idx_topic_parent_sort');

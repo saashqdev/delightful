@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
@@ -34,7 +34,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
     public function __construct(
         private ResourceShareDomainService $resourceShareDomainService,
         private ProjectMemberDomainService $projectMemberDomainService,
-        private MagicUserDomainService $magicUserDomainService,
+        private DelightfulUserDomainService $delightfulUserDomainService,
         private FileDomainService $fileDomainService
     ) {
     }
@@ -321,7 +321,7 @@ class ProjectInvitationLinkAppService extends AbstractAppService
         $hasJoined = $isCreator || $this->projectMemberDomainService->isProjectMemberByUser($projectId, $currentUserId);
 
         // 7. 获取创建者信息
-        $creatorEntity = $this->magicUserDomainService->getByUserId($creatorId);
+        $creatorEntity = $this->delightfulUserDomainService->getByUserId($creatorId);
         $creatorAvatarUrl = $creatorNickName = '';
         if ($creatorEntity) {
             $creatorNickName = $creatorEntity->getNickname();

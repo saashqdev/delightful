@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Tests\Unit\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use Delightful\BeDelightful\Application\BeAgent\Service\MessageQueueCompensationAppService;
 use Delightful\BeDelightful\Domain\BeAgent\Service\MessageQueueDomainService;
@@ -26,13 +26,13 @@ class MessageQueueCompensationAppServiceTest extends TestCase
 {
     private MessageQueueCompensationAppService $service;
 
-    private MagicChatMessageAppService|MockObject $mockChatAppService;
+    private DelightfulChatMessageAppService|MockObject $mockChatAppService;
 
     private MessageQueueDomainService|MockObject $mockMessageQueueDomainService;
 
     private MockObject|TopicDomainService $mockTopicDomainService;
 
-    private MagicUserDomainService|MockObject $mockUserDomainService;
+    private DelightfulUserDomainService|MockObject $mockUserDomainService;
 
     private LockerInterface|MockObject $mockLocker;
 
@@ -42,10 +42,10 @@ class MessageQueueCompensationAppServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->mockChatAppService = $this->createMock(MagicChatMessageAppService::class);
+        $this->mockChatAppService = $this->createMock(DelightfulChatMessageAppService::class);
         $this->mockMessageQueueDomainService = $this->createMock(MessageQueueDomainService::class);
         $this->mockTopicDomainService = $this->createMock(TopicDomainService::class);
-        $this->mockUserDomainService = $this->createMock(MagicUserDomainService::class);
+        $this->mockUserDomainService = $this->createMock(DelightfulUserDomainService::class);
         $this->mockLocker = $this->createMock(LockerInterface::class);
         $this->mockLoggerFactory = $this->createMock(LoggerFactory::class);
 

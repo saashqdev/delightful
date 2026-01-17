@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message_scheduled', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_message_scheduled', function (Blueprint $table) {
             $table->json('plugins')->nullable()->after('time_config')->comment('MCP plugins configuration');
         });
     }

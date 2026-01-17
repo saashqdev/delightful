@@ -87,7 +87,7 @@ class MessageItemDTO implements JsonSerializable
     protected array $attachments;
 
     /**
-     * @var null|string IM状态（来自magic_chat_sequences表）
+     * @var null|string IM状态（来自delightful_chat_sequences表）
      */
     protected ?string $imStatus;
 
@@ -163,7 +163,7 @@ class MessageItemDTO implements JsonSerializable
     }
 
     /**
-     * 将IM状态数字转换为字符串（参考MagicMessageStatus枚举）.
+     * 将IM状态数字转换为字符串（参考DelightfulMessageStatus枚举）.
      */
     private function convertImStatusToString(int $status): string
     {

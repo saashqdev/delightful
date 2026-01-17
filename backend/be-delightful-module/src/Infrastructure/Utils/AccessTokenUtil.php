@@ -19,7 +19,7 @@ class AccessTokenUtil
     /**
      * Redis键前缀.
      */
-    protected static string $prefix = 'super_magic_access_token:';
+    protected static string $prefix = 'be_delightful_access_token:';
 
     /**
      * 默认过期时间(秒).

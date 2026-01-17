@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_super_agent_project_operation_logs', function (Blueprint $table) {
+        Schema::create('delightful_be_agent_project_operation_logs', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('主键ID');
             $table->bigInteger('project_id')->index()->comment('项目ID');
             $table->string('user_id', 36)->index()->comment('用户ID');
@@ -41,6 +41,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_super_agent_project_operation_logs');
+        Schema::dropIfExists('delightful_be_agent_project_operation_logs');
     }
 };

@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
@@ -54,9 +54,9 @@ class ProjectMemberAppService extends AbstractAppService
         private readonly LoggerInterface $logger,
         private readonly ProjectDomainService $projectDomainService,
         private readonly ProjectMemberDomainService $projectMemberDomainService,
-        private readonly MagicDepartmentDomainService $departmentDomainService,
-        private readonly MagicDepartmentUserDomainService $departmentUserDomainService,
-        private readonly MagicUserDomainService $magicUserDomainService,
+        private readonly DelightfulDepartmentDomainService $departmentDomainService,
+        private readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
+        private readonly DelightfulUserDomainService $delightfulUserDomainService,
         private readonly WorkspaceDomainService $workspaceDomainService,
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly PackageFilterInterface $packageFilterService,
@@ -150,7 +150,7 @@ class ProjectMemberAppService extends AbstractAppService
         $dataIsolation = $requestContext->getDataIsolation();
 
         // 获取用户所属部门
-        $departmentUsers = $this->departmentUserDomainService->getDepartmentUsersByUserIdsInMagic($userIds);
+        $departmentUsers = $this->departmentUserDomainService->getDepartmentUsersByUserIdsInDelightful($userIds);
         $userIdMapDepartmentIds = [];
         foreach ($departmentUsers as $departmentUser) {
             if (! $departmentUser->isTopLevel()) {
@@ -165,7 +165,7 @@ class ProjectMemberAppService extends AbstractAppService
         // 5. 获取用户详细信息
         $users = [];
         if (! empty($userIds)) {
-            $userEntities = $this->magicUserDomainService->getUserByIdsWithoutOrganization($userIds);
+            $userEntities = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($userIds);
             $this->updateUserAvatarUrl($dataIsolation, $userEntities);
 
             foreach ($userEntities as $userEntity) {
@@ -362,7 +362,7 @@ class ProjectMemberAppService extends AbstractAppService
         }
 
         // 3. 批量获取创建者用户详细信息
-        $userEntities = $this->magicUserDomainService->getUserByIdsWithoutOrganization($creatorUserIds);
+        $userEntities = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($creatorUserIds);
 
         // 4. 更新头像URL
         $this->updateUserAvatarUrl($dataIsolation, $userEntities);
@@ -631,7 +631,7 @@ class ProjectMemberAppService extends AbstractAppService
         $creatorUserIds = array_unique(array_map(fn ($project) => $project->getUserId(), $projects));
         $creatorInfoMap = [];
         if (! empty($creatorUserIds)) {
-            $creatorUsers = $this->magicUserDomainService->getUserByIdsWithoutOrganization($creatorUserIds);
+            $creatorUsers = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($creatorUserIds);
             foreach ($creatorUsers as $user) {
                 $creatorInfoMap[$user->getUserId()] = CreatorInfoDTO::fromUserEntity($user);
             }
@@ -669,7 +669,7 @@ class ProjectMemberAppService extends AbstractAppService
             }
 
             // 获取用户和部门信息
-            $userEntities = ! empty($userIds) ? $this->magicUserDomainService->getUserByIdsWithoutOrganization($userIds) : [];
+            $userEntities = ! empty($userIds) ? $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($userIds) : [];
             $departmentEntities = ! empty($departmentIds) ? $this->departmentDomainService->getDepartmentByIds($dataIsolation, $departmentIds) : [];
 
             // 直接创建CollaboratorMemberDTO数组
@@ -734,7 +734,7 @@ class ProjectMemberAppService extends AbstractAppService
         return array_merge($urlPaths, $avatarUrlMapRealUrl);
     }
 
-    private function assemblePathNodeByDepartmentInfo(MagicDepartmentEntity $departmentInfo): array
+    private function assemblePathNodeByDepartmentInfo(DelightfulDepartmentEntity $departmentInfo): array
     {
         return [
             // 部门名称
@@ -771,7 +771,7 @@ class ProjectMemberAppService extends AbstractAppService
 
         // 批量验证用户
         if (! empty($userIds)) {
-            $validUsers = $this->magicUserDomainService->getUserByIdsWithoutOrganization($userIds);
+            $validUsers = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($userIds);
             $validUserIds = array_map(fn ($user) => $user->getUserId(), $validUsers);
 
             $invalidUserIds = array_diff($userIds, $validUserIds);

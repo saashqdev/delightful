@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Tests\Unit\Application\BeAgent\Service;
 
 use App\Infrastructure\Util\Context\RequestContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use DateTime;
 use Delightful\BeDelightful\Application\BeAgent\Service\MessageScheduleAppService;
 use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
-use Dtyq\TaskScheduler\Service\TaskSchedulerDomainService;
+use Delightful\TaskScheduler\Service\TaskSchedulerDomainService;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -447,7 +447,7 @@ class MessageScheduleAppServiceTest extends TestCase
             $appService = di(MessageScheduleAppService::class);
 
             // 创建一个模拟的 RequestContext
-            $authorization = new MagicUserAuthorization();
+            $authorization = new DelightfulUserAuthorization();
             $authorization->setId('usi_516c3a162c868e6f02de247a10e59d05');
             $authorization->setOrganizationCode('DT001');
 
@@ -469,7 +469,7 @@ class MessageScheduleAppServiceTest extends TestCase
             $messageContentProperty->setValue($updateDTO, [
                 'instructs' => [['value' => 'plan', 'instruction' => null]],
                 'extra' => [
-                    'super_agent' => [
+                    'be_agent' => [
                         'input_mode' => 'plan',
                         'chat_mode' => 'normal',
                         'topic_pattern' => 'general',

@@ -850,7 +850,7 @@ class WorkspaceDomainService
         # 重新排序
         $gitVersionNotExistResult = array_values($gitVersionNotExistResult);
 
-        # gitVersionNotExistResult 不为空，说明有文件更新，但是没有触发suer-magic的文件上传，需要再调用suer-magic的 api 进行一次文件上传
+        # gitVersionNotExistResult 不为空，说明有文件更新，但是没有触发suer-delightful的文件上传，需要再调用suer-delightful的 api 进行一次文件上传
         if (! empty($gitVersionNotExistResult)) {
             try {
                 # 查看沙箱是否存活

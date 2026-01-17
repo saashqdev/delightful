@@ -11,7 +11,7 @@ use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\HttpMessage\Exception\UnauthorizedHttpException;
 use Qbhy\HyperfAuth\Authenticatable;
 use Qbhy\HyperfAuth\AuthManager;
@@ -20,7 +20,7 @@ use Throwable;
 class RequestContextMiddlewareV2 extends RequestContextMiddleware
 {
     /**
-     * @return MagicUserAuthorization
+     * @return DelightfulUserAuthorization
      */
     protected function getAuthorization(): Authenticatable
     {

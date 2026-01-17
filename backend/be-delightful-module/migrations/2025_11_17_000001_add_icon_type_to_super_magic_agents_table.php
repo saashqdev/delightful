@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_magic_agents', function (Blueprint $table) {
+        Schema::table('delightful_be_delightful_agents', function (Blueprint $table) {
             $table->tinyInteger('icon_type')->default(1)->comment('图标类型 1:图标 2:图片')->after('icon');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_magic_agents', function (Blueprint $table) {
+        Schema::table('delightful_be_delightful_agents', function (Blueprint $table) {
         });
     }
 };

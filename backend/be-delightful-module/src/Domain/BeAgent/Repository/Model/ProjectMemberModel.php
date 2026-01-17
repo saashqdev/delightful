@@ -14,7 +14,7 @@ use App\Infrastructure\Core\AbstractModel;
  */
 class ProjectMemberModel extends AbstractModel
 {
-    protected ?string $table = 'magic_super_agent_project_members';
+    protected ?string $table = 'delightful_be_agent_project_members';
 
     protected array $fillable = [
         'id',

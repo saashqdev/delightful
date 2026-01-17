@@ -116,7 +116,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     {
         // 注意：这里需要根据实际情况实现，比如通过外部服务或者其他Repository删除话题
         // 由于我们没有看到话题表的结构，这里仅作为示例
-        return Db::table('magic_chat_topics')
+        return Db::table('delightful_chat_topics')
             ->where('workspace_id', $workspaceId)
             ->delete() > 0;
     }

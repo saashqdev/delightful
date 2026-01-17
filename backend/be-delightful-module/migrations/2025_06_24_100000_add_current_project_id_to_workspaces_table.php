@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 为 magic_super_agent_workspaces 表增加 current_project_id 字段
-        Schema::table('magic_super_agent_workspaces', function (Blueprint $table) {
+        // 为 delightful_be_agent_workspaces 表增加 current_project_id 字段
+        Schema::table('delightful_be_agent_workspaces', function (Blueprint $table) {
             $table->bigInteger('current_project_id')->nullable()->comment('当前项目ID')->after('current_topic_id');
         });
 
@@ -27,8 +27,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 删除 magic_super_agent_workspaces 表的 current_project_id 字段
-        Schema::table('magic_super_agent_workspaces', function (Blueprint $table) {
+        // 删除 delightful_be_agent_workspaces 表的 current_project_id 字段
+        Schema::table('delightful_be_agent_workspaces', function (Blueprint $table) {
             $table->dropColumn('current_project_id');
         });
 

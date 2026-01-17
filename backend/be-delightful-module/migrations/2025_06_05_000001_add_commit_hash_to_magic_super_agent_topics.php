@@ -11,7 +11,7 @@ use Hyperf\Database\Schema\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             $table->string('workspace_commit_hash', 255)->default('')->comment('当前的提交的workspace commit hash');
             $table->string('chat_history_commit_hash', 255)->default('')->comment('当前的提交的chat_history commit hash');
         });
@@ -19,7 +19,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_topics', function (Blueprint $table) {
             $table->dropColumn('workspace_commit_hash');
             $table->dropColumn('chat_history_commit_hash');
         });

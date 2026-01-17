@@ -11,7 +11,7 @@ use Hyperf\Database\Schema\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('magic_super_agent_project_members', function (Blueprint $table) {
+        Schema::create('delightful_be_agent_project_members', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('主键');
             $table->bigInteger('project_id')->comment('项目ID');
             $table->string('target_type', 32)->comment('成员类型：User/Department');
@@ -33,6 +33,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('magic_super_agent_project_members');
+        Schema::dropIfExists('delightful_be_agent_project_members');
     }
 };

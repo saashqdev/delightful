@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_super_agent_task')) {
-            Schema::table('magic_super_agent_task', function (Blueprint $table) {
+        if (Schema::hasTable('delightful_be_agent_task')) {
+            Schema::table('delightful_be_agent_task', function (Blueprint $table) {
                 // 在 workspace_id 后添加 project_id 字段
-                if (! Schema::hasColumn('magic_super_agent_task', 'project_id')) {
+                if (! Schema::hasColumn('delightful_be_agent_task', 'project_id')) {
                     $table->unsignedBigInteger('project_id')->default(0)->after('workspace_id')->comment('项目ID');
                 }
 
@@ -32,8 +32,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        if (Schema::hasTable('magic_super_agent_task')) {
-            Schema::table('magic_super_agent_task', function (Blueprint $table) {
+        if (Schema::hasTable('delightful_be_agent_task')) {
+            Schema::table('delightful_be_agent_task', function (Blueprint $table) {
                 // 删除项目ID索引
                 try {
                     $table->dropIndex('idx_task_project_id');
@@ -42,7 +42,7 @@ return new class extends Migration {
                 }
 
                 // 删除 project_id 字段
-                if (Schema::hasColumn('magic_super_agent_task', 'project_id')) {
+                if (Schema::hasColumn('delightful_be_agent_task', 'project_id')) {
                     $table->dropColumn('project_id');
                 }
             });

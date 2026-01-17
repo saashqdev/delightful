@@ -8,14 +8,14 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class AddCollaborationEnabledToMagicBeAgentProjectTable extends Migration
+class AddCollaborationEnabledToDelightfulBeAgentProjectTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_project', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_project', function (Blueprint $table) {
             // 添加协作功能开关字段
             $table->tinyInteger('is_collaboration_enabled')
                 ->default(1)
@@ -33,7 +33,7 @@ class AddCollaborationEnabledToMagicBeAgentProjectTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_project', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_project', function (Blueprint $table) {
             $table->dropColumn('is_collaboration_enabled');
             $table->dropColumn('permission');
         });

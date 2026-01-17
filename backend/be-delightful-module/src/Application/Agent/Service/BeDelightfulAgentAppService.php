@@ -9,15 +9,15 @@ namespace Delightful\BeDelightful\Application\Agent\Service;
 
 use App\Application\Contact\UserSetting\UserSettingKey;
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
-use App\Application\Flow\Service\MagicFlowExecuteAppService;
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
-use App\Domain\Contact\Service\MagicUserSettingDomainService;
+use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
+use App\Domain\Contact\Service\DelightfulUserSettingDomainService;
 use App\Domain\Mode\Entity\ModeEntity;
 use App\Domain\Mode\Entity\ValueQuery\ModeQuery;
 use App\Domain\Mode\Service\ModeDomainService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
+use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 use DateTime;
 use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
 use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
@@ -30,7 +30,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
 {
     #[Inject]
-    protected MagicUserSettingDomainService $magicUserSettingDomainService;
+    protected DelightfulUserSettingDomainService $delightfulUserSettingDomainService;
 
     #[Inject]
     protected ModeDomainService $modeDomainService;
@@ -119,14 +119,14 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
      * Save agent arrangement configuration.
      * @param array{frequent: array<string>, all: array<string>} $orderConfig
      */
-    public function saveOrderConfig(Authenticatable $authorization, array $orderConfig): MagicUserSettingEntity
+    public function saveOrderConfig(Authenticatable $authorization, array $orderConfig): DelightfulUserSettingEntity
     {
         $dataIsolation = $this->createContactDataIsolation($authorization);
-        $entity = new MagicUserSettingEntity();
+        $entity = new DelightfulUserSettingEntity();
         $entity->setKey(UserSettingKey::BeDelightfulAgentSort->value);
         $entity->setValue($orderConfig);
 
-        return $this->magicUserSettingDomainService->save($dataIsolation, $entity);
+        return $this->delightfulUserSettingDomainService->save($dataIsolation, $entity);
     }
 
     /**
@@ -136,7 +136,7 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
     public function getOrderConfig(Authenticatable $authorization): ?array
     {
         $dataIsolation = $this->createContactDataIsolation($authorization);
-        $setting = $this->magicUserSettingDomainService->get($dataIsolation, UserSettingKey::BeDelightfulAgentSort->value);
+        $setting = $this->delightfulUserSettingDomainService->get($dataIsolation, UserSettingKey::BeDelightfulAgentSort->value);
 
         return $setting?->getValue();
     }
@@ -156,15 +156,15 @@ class BeDelightfulAgentAppService extends AbstractBeDelightfulAppService
             $label = $toolFlow ? $toolFlow->getName() : $toolCode;
             ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.disabled', ['label' => $label]);
         }
-        $apiChatDTO = new MagicFlowApiChatDTO();
+        $apiChatDTO = new DelightfulFlowApiChatDTO();
         $apiChatDTO->setParams($arguments);
         $apiChatDTO->setFlowCode($toolFlow->getCode());
         $apiChatDTO->setFlowVersionCode($toolFlow->getVersionCode());
-        $apiChatDTO->setMessage('super_magic_tool_call');
-        return di(MagicFlowExecuteAppService::class)->apiParamCallByRemoteTool(
+        $apiChatDTO->setMessage('be_delightful_tool_call');
+        return di(DelightfulFlowExecuteAppService::class)->apiParamCallByRemoteTool(
             $flowDataIsolation,
             $apiChatDTO,
-            'super_magic_tool_call'
+            'be_delightful_tool_call'
         );
     }
 

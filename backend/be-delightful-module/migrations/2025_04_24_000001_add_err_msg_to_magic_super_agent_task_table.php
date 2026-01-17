@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
-            if (! Schema::hasColumn('magic_super_agent_task', 'err_msg')) {
+        Schema::table('delightful_be_agent_task', function (Blueprint $table) {
+            if (! Schema::hasColumn('delightful_be_agent_task', 'err_msg')) {
                 $table->string('err_msg', 500)->nullable()->comment('错误信息');
             }
         });
@@ -26,8 +26,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
-            if (Schema::hasColumn('magic_super_agent_task', 'err_msg')) {
+        Schema::table('delightful_be_agent_task', function (Blueprint $table) {
+            if (Schema::hasColumn('delightful_be_agent_task', 'err_msg')) {
                 $table->dropColumn('err_msg');
             }
         });

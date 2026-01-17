@@ -8,7 +8,7 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class ExtendMagicBeAgentProjectMembersTable extends Migration
+class ExtendDelightfulBeAgentProjectMembersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class ExtendMagicBeAgentProjectMembersTable extends Migration
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_project_members', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_project_members', function (Blueprint $table) {
             // 新增 join_method 字段，记录成员加入方式
             $table->string('join_method', 32)
                 ->default('internal')

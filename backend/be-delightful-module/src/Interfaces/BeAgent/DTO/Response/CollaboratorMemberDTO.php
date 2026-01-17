@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
@@ -37,9 +37,9 @@ class CollaboratorMemberDTO extends AbstractDTO
     protected string $type = '';
 
     /**
-     * 从MagicUserEntity对象创建DTO.
+     * 从DelightfulUserEntity对象创建DTO.
      */
-    public static function fromUserEntity(MagicUserEntity $userEntity): self
+    public static function fromUserEntity(DelightfulUserEntity $userEntity): self
     {
         $dto = new self();
         $dto->setId($userEntity->getUserId());
@@ -51,9 +51,9 @@ class CollaboratorMemberDTO extends AbstractDTO
     }
 
     /**
-     * 从MagicDepartmentEntity对象创建DTO.
+     * 从DelightfulDepartmentEntity对象创建DTO.
      */
-    public static function fromDepartmentEntity(MagicDepartmentEntity $departmentEntity): self
+    public static function fromDepartmentEntity(DelightfulDepartmentEntity $departmentEntity): self
     {
         $dto = new self();
         $dto->setId($departmentEntity->getDepartmentId() ?? '');

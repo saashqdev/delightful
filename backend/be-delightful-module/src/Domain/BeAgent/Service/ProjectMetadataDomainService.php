@@ -49,7 +49,7 @@ class ProjectMetadataDomainService
             }
 
             // 2. Extract metadata using utility
-            $metadata = FileMetadataUtil::extractMagicProjectConfig($fileUrl);
+            $metadata = FileMetadataUtil::extractDelightfulProjectConfig($fileUrl);
             if ($metadata === null) {
                 $this->logger->info('No metadata extracted from project.js', [
                     'file_id' => $projectJsFileEntity->getFileId(),

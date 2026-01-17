@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
@@ -39,9 +39,9 @@ class UserMessageToAgentAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
         private readonly MessageQueueDomainService $messageQueueDomainService,
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -106,7 +106,7 @@ class UserMessageToAgentAppService extends AbstractAppService
                 $messageContent
             );
 
-            // Create MagicSeqEntity
+            // Create DelightfulSeqEntity
             $seqEntity = $this->createSeqEntity($chatMessageType, $messageStruct, $topicEntity->getChatTopicId());
 
             // Generate unique app message ID for deduplication
@@ -255,14 +255,14 @@ class UserMessageToAgentAppService extends AbstractAppService
     }
 
     /**
-     * Create MagicSeqEntity based on message content.
+     * Create DelightfulSeqEntity based on message content.
      */
     private function createSeqEntity(
         ChatMessageType $messageType,
         mixed $messageStruct,
         string $chatTopicId
-    ): MagicSeqEntity {
-        $seqEntity = new MagicSeqEntity();
+    ): DelightfulSeqEntity {
+        $seqEntity = new DelightfulSeqEntity();
         $seqEntity->setContent($messageStruct);
         $seqEntity->setSeqType($messageType);
 

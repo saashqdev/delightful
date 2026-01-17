@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
@@ -17,7 +17,7 @@ class DirectoryDeletedEvent extends AbstractEvent
 {
     public function __construct(
         private readonly TaskFileEntity $directoryEntity,
-        private readonly MagicUserAuthorization $userAuthorization
+        private readonly DelightfulUserAuthorization $userAuthorization
     ) {
         parent::__construct();
     }
@@ -27,7 +27,7 @@ class DirectoryDeletedEvent extends AbstractEvent
         return $this->directoryEntity;
     }
 
-    public function getUserAuthorization(): MagicUserAuthorization
+    public function getUserAuthorization(): DelightfulUserAuthorization
     {
         return $this->userAuthorization;
     }

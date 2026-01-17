@@ -16,7 +16,7 @@ class TaskFileModel extends AbstractModel
 {
     use SoftDeletes;
 
-    protected ?string $table = 'magic_super_agent_task_files';
+    protected ?string $table = 'delightful_be_agent_task_files';
 
     protected string $primaryKey = 'file_id';
 

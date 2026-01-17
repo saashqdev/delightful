@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\File\Service\FileAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\ErrorCode\GenericErrorCode;
@@ -17,7 +17,7 @@ use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
 use Delightful\BeDelightful\Application\BeAgent\Event\Publish\StopRunningTaskPublisher;
 use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
@@ -67,7 +67,7 @@ class TopicAppService extends AbstractAppService
         protected ProjectDomainService $projectDomainService,
         protected TopicDomainService $topicDomainService,
         protected ResourceShareDomainService $resourceShareDomainService,
-        protected MagicChatMessageAppService $magicChatMessageAppService,
+        protected DelightfulChatMessageAppService $delightfulChatMessageAppService,
         protected FileAppService $fileAppService,
         protected ChatAppService $chatAppService,
         protected Producer $producer,
@@ -124,7 +124,7 @@ class TopicAppService extends AbstractAppService
         Db::beginTransaction();
         try {
             // 1. 初始化 chat 的会话和话题
-            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
             // 2. 创建话题
             $topicEntity = $this->topicDomainService->createTopic(
@@ -175,7 +175,7 @@ class TopicAppService extends AbstractAppService
         Db::beginTransaction();
         try {
             // 1. 初始化 chat 的会话和话题
-            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+            [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
             // 2. 创建话题
             $topicEntity = $this->topicDomainService->createTopic(
@@ -229,7 +229,7 @@ class TopicAppService extends AbstractAppService
         return SaveTopicResultDTO::fromId((int) $requestDTO->getId());
     }
 
-    public function renameTopic(MagicUserAuthorization $authorization, int $topicId, string $userQuestion, string $language = 'zh_CN'): array
+    public function renameTopic(DelightfulUserAuthorization $authorization, int $topicId, string $userQuestion, string $language = 'zh_CN'): array
     {
         // 获取话题内容
         $topicEntity = $this->workspaceDomainService->getTopicById($topicId);
@@ -239,7 +239,7 @@ class TopicAppService extends AbstractAppService
 
         // 调用领域服务执行重命名（这一步与delightful-service进行绑定）
         try {
-            $text = $this->magicChatMessageAppService->summarizeText($authorization, $userQuestion, $language);
+            $text = $this->delightfulChatMessageAppService->summarizeText($authorization, $userQuestion, $language);
             // 更新话题名称
             $dataIsolation = $this->createDataIsolation($authorization);
             $this->topicDomainService->updateTopicName($dataIsolation, $topicId, $text);
@@ -430,11 +430,11 @@ class TopicAppService extends AbstractAppService
     /**
      * 获取话题的附件列表.(管理后台使用).
      *
-     * @param MagicUserAuthorization $userAuthorization 用户授权信息
+     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
      * @param GetTopicAttachmentsRequestDTO $requestDto 话题附件请求DTO
      * @return array 附件列表
      */
-    public function getTopicAttachments(MagicUserAuthorization $userAuthorization, GetTopicAttachmentsRequestDTO $requestDto): array
+    public function getTopicAttachments(DelightfulUserAuthorization $userAuthorization, GetTopicAttachmentsRequestDTO $requestDto): array
     {
         // 获取当前话题的创建者
         $topicEntity = $this->topicDomainService->getTopicById((int) $requestDto->getTopicId());
@@ -449,14 +449,14 @@ class TopicAppService extends AbstractAppService
     /**
      * 获取用户话题消息列表.
      *
-     * @param MagicUserAuthorization $userAuthorization 用户授权信息
+     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
      * @param int $topicId 话题ID
      * @param int $page 页码
      * @param int $pageSize 每页大小
      * @param string $sortDirection 排序方向
      * @return array 消息列表及总数
      */
-    public function getUserTopicMessage(MagicUserAuthorization $userAuthorization, int $topicId, int $page, int $pageSize, string $sortDirection): array
+    public function getUserTopicMessage(DelightfulUserAuthorization $userAuthorization, int $topicId, int $page, int $pageSize, string $sortDirection): array
     {
         // 获取消息列表
         $result = $this->taskDomainService->getMessagesByTopicId($topicId, $page, $pageSize, true, $sortDirection);
@@ -477,11 +477,11 @@ class TopicAppService extends AbstractAppService
      * 获取用户话题附件 URL. (管理后台使用).
      *
      * @param string $topicId 话题 ID
-     * @param MagicUserAuthorization $userAuthorization 用户授权信息
+     * @param DelightfulUserAuthorization $userAuthorization 用户授权信息
      * @param array $fileIds 文件ID列表
      * @return array 包含附件 URL 的数组
      */
-    public function getTopicAttachmentUrl(MagicUserAuthorization $userAuthorization, string $topicId, array $fileIds, string $downloadMode): array
+    public function getTopicAttachmentUrl(DelightfulUserAuthorization $userAuthorization, string $topicId, array $fileIds, string $downloadMode): array
     {
         $result = [];
         foreach ($fileIds as $fileId) {

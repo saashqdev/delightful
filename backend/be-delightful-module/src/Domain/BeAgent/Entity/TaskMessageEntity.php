@@ -146,7 +146,7 @@ class TaskMessageEntity extends AbstractEntity
     protected ?int $imSeqId = null;
 
     /**
-     * @var null|int IM 状态（来自magic_chat_sequences表的status字段）
+     * @var null|int IM 状态（来自delightful_chat_sequences表的status字段）
      */
     protected ?int $imStatus = null;
 

@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
-use App\Application\Chat\Service\MagicUserInfoAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
+use App\Application\Chat\Service\DelightfulUserInfoAppService;
 use App\Application\File\Service\FileAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\ModelGateway\Service\AccessTokenDomainService;
 use App\Domain\ModelGateway\Service\ApplicationDomainService;
 use App\ErrorCode\GenericErrorCode;
@@ -27,8 +27,8 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Application\BeAgent\DTO\TaskMessageDTO;
 use Delightful\BeDelightful\Application\BeAgent\DTO\UserMessageDTO;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
@@ -84,13 +84,13 @@ class TaskAppService extends AbstractAppService
         private readonly WorkspaceDomainService $workspaceDomainService,
         private readonly TopicDomainService $topicDomainService,
         private readonly TaskDomainService $taskDomainService,
-        private readonly MagicChatMessageAppService $chatMessageAppService,
-        private readonly MagicUserInfoAppService $userInfoAppService,
-        private readonly MagicChatFileDomainService $chatFileDomainService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulUserInfoAppService $userInfoAppService,
+        private readonly DelightfulChatFileDomainService $chatFileDomainService,
         private readonly FileAppService $fileAppService,
         private readonly SandboxService $sandboxService,
         private readonly FileProcessAppService $fileProcessAppService,
-        protected MagicUserDomainService $userDomainService,
+        protected DelightfulUserDomainService $userDomainService,
         protected TaskRepositoryInterface $taskRepository,
         protected LockerInterface $locker,
         LoggerFactory $loggerFactory,
@@ -1084,7 +1084,7 @@ class TaskAppService extends AbstractAppService
         );
 
         // 创建序列实体
-        $seqDTO = new MagicSeqEntity();
+        $seqDTO = new DelightfulSeqEntity();
         $seqDTO->setObjectType(ConversationType::Ai);
         $seqDTO->setContent($message);
         $seqDTO->setSeqType(ChatMessageType::BeAgentCard);
@@ -1105,7 +1105,7 @@ class TaskAppService extends AbstractAppService
      */
     private function getUploadCredential(string $agentUserId, string $organizationCode, string $workDir): array
     {
-        /*$userAuthorization = new MagicUserAuthorization();
+        /*$userAuthorization = new DelightfulUserAuthorization();
         $userAuthorization->setId($agentUserId);
         $userAuthorization->setOrganizationCode($organizationCode);
         $userAuthorization->setUserType(UserType::Ai);*/

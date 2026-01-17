@@ -35,10 +35,10 @@ class BeDelightfulAgentOrderFormRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'frequent' => trans('super_magic.agent.order.frequent'),
-            'frequent.*' => trans('super_magic.agent.fields.code'),
-            'all' => trans('super_magic.agent.order.all'),
-            'all.*' => trans('super_magic.agent.fields.code'),
+            'frequent' => trans('be_delightful.agent.order.frequent'),
+            'frequent.*' => trans('be_delightful.agent.fields.code'),
+            'all' => trans('be_delightful.agent.order.all'),
+            'all.*' => trans('be_delightful.agent.fields.code'),
         ];
     }
 
@@ -49,14 +49,14 @@ class BeDelightfulAgentOrderFormRequest extends FormRequest
     {
         return [
             // 常用智能体排序验证
-            'frequent.array' => trans('super_magic.agent.validation.frequent_array'),
-            'frequent.*.string' => trans('super_magic.agent.validation.frequent_code_string'),
-            'frequent.*.max' => trans('super_magic.agent.validation.frequent_code_max'),
+            'frequent.array' => trans('be_delightful.agent.validation.frequent_array'),
+            'frequent.*.string' => trans('be_delightful.agent.validation.frequent_code_string'),
+            'frequent.*.max' => trans('be_delightful.agent.validation.frequent_code_max'),
 
             // 全部智能体排序验证
-            'all.array' => trans('super_magic.agent.validation.all_array'),
-            'all.*.string' => trans('super_magic.agent.validation.all_code_string'),
-            'all.*.max' => trans('super_magic.agent.validation.all_code_max'),
+            'all.array' => trans('be_delightful.agent.validation.all_array'),
+            'all.*.string' => trans('be_delightful.agent.validation.all_code_string'),
+            'all.*.max' => trans('be_delightful.agent.validation.all_code_max'),
         ];
     }
 

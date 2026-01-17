@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_super_agent_message')) {
+        if (Schema::hasTable('delightful_be_agent_message')) {
             return;
         }
-        Schema::create('magic_super_agent_message', function (Blueprint $table) {
+        Schema::create('delightful_be_agent_message', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('sender_type', 32)->comment('发送者类型(user/ai)');
             $table->string('sender_uid', 64)->comment('发送者ID');
@@ -46,6 +46,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_general_agent_message');
+        Schema::dropIfExists('delightful_general_agent_message');
     }
 };

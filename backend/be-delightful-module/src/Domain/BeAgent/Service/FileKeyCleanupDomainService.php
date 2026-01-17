@@ -812,7 +812,7 @@ class FileKeyCleanupDomainService
 
         $results = Db::select(
             "SELECT DISTINCT file_id 
-            FROM magic_super_agent_task_files 
+            FROM delightful_be_agent_task_files 
             WHERE file_id IN ({$placeholders})
               AND deleted_at IS NULL",
             $parentIds

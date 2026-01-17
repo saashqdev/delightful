@@ -16,8 +16,8 @@ class MessageExtra extends AbstractDTO
 
     public function __construct(?array $data = null)
     {
-        if (isset($data['super_agent'])) {
-            $this->superAgent = new BeAgentExtra($data['super_agent']);
+        if (isset($data['be_agent'])) {
+            $this->superAgent = new BeAgentExtra($data['be_agent']);
         }
         parent::__construct();
     }

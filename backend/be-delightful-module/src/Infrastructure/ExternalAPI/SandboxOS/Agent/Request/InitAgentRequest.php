@@ -25,7 +25,7 @@ class InitAgentRequest
         private array $metadata = [],
         private string $taskMode = 'plan',
         private string $agentMode = '',
-        private string $magicServiceHost = '',
+        private string $delightfulServiceHost = '',
         private string $chatHistoryDir = '',
         private string $workDir = '',
         private ?string $memory = null,
@@ -49,7 +49,7 @@ class InitAgentRequest
             $data['metadata'] ?? [],
             $data['task_mode'] ?? 'plan',
             $data['agent_mode'] ?? '',
-            $data['magic_service_host'] ?? config('be-delightful.sandbox.callback_host', ''),
+            $data['delightful_service_host'] ?? config('be-delightful.sandbox.callback_host', ''),
             $data['chat_history_dir'] ?? '',
             $data['work_dir'] ?? '',
             $data['memory'] ?? null,
@@ -79,7 +79,7 @@ class InitAgentRequest
         array $metadata = [],
         string $taskMode = 'plan',
         string $agentMode = '',
-        string $magicServiceHost = '',
+        string $delightfulServiceHost = '',
         string $chatHistoryDir = '',
         string $workDir = '',
         ?string $memory = null,
@@ -96,7 +96,7 @@ class InitAgentRequest
             $metadata,
             $taskMode,
             $agentMode,
-            $magicServiceHost,
+            $delightfulServiceHost,
             $chatHistoryDir,
             $workDir,
             $memory,
@@ -252,15 +252,15 @@ class InitAgentRequest
         return $this->agentMode;
     }
 
-    public function setMagicServiceHost(string $magicServiceHost): self
+    public function setDelightfulServiceHost(string $delightfulServiceHost): self
     {
-        $this->magicServiceHost = $magicServiceHost;
+        $this->delightfulServiceHost = $delightfulServiceHost;
         return $this;
     }
 
-    public function getMagicServiceHost(): string
+    public function getDelightfulServiceHost(): string
     {
-        return $this->magicServiceHost;
+        return $this->delightfulServiceHost;
     }
 
     /**
@@ -353,7 +353,7 @@ class InitAgentRequest
             'metadata' => $this->metadata,
             'task_mode' => $this->taskMode,
             'agent_mode' => $this->agentMode,
-            'magic_service_host' => $this->magicServiceHost,
+            'delightful_service_host' => $this->delightfulServiceHost,
             'chat_history_dir' => $this->chatHistoryDir,
             'work_dir' => $this->workDir,
             'memory' => $this->memory,

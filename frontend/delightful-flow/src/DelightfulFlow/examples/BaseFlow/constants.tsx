@@ -16,7 +16,7 @@ export enum customNodeType {
 	Code = "5",
 	// Vector
 	Vector = "6",
-	// Magic Table
+	// Delightful Table
 	Table = "7",
 	// Loader
 	Loader = "8",

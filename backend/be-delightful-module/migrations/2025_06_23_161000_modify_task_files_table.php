@@ -14,16 +14,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 修改 magic_super_agent_task_files 表结构
-        if (Schema::hasTable('magic_super_agent_task_files')) {
-            Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        // 修改 delightful_be_agent_task_files 表结构
+        if (Schema::hasTable('delightful_be_agent_task_files')) {
+            Schema::table('delightful_be_agent_task_files', function (Blueprint $table) {
                 // 检查并删除 menu 字段
-                if (Schema::hasColumn('magic_super_agent_task_files', 'menu')) {
+                if (Schema::hasColumn('delightful_be_agent_task_files', 'menu')) {
                     $table->dropColumn('menu');
                 }
 
                 // 在 topic_id 前添加 project_id 字段
-                if (! Schema::hasColumn('magic_super_agent_task_files', 'project_id')) {
+                if (! Schema::hasColumn('delightful_be_agent_task_files', 'project_id')) {
                     $table->unsignedBigInteger('project_id')->after('file_id')->comment('项目ID');
                 }
 
@@ -39,8 +39,8 @@ return new class extends Migration {
     public function down(): void
     {
         // 回滚操作
-        if (Schema::hasTable('magic_super_agent_task_files')) {
-            Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        if (Schema::hasTable('delightful_be_agent_task_files')) {
+            Schema::table('delightful_be_agent_task_files', function (Blueprint $table) {
                 // 删除新增的索引
                 try {
                     $table->dropIndex('idx_project_id');
@@ -49,12 +49,12 @@ return new class extends Migration {
                 }
 
                 // 删除 project_id 字段
-                if (Schema::hasColumn('magic_super_agent_task_files', 'project_id')) {
+                if (Schema::hasColumn('delightful_be_agent_task_files', 'project_id')) {
                     $table->dropColumn('project_id');
                 }
 
                 // 恢复 menu 字段（如果需要的话）
-                if (! Schema::hasColumn('magic_super_agent_task_files', 'menu')) {
+                if (! Schema::hasColumn('delightful_be_agent_task_files', 'menu')) {
                     $table->string('menu')->nullable()->comment('菜单');
                 }
             });

@@ -11,7 +11,7 @@ use Hyperf\Database\Schema\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('magic_super_agent_project_member_settings', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_project_member_settings', function (Blueprint $table) {
             $table->tinyInteger('is_bind_workspace')->default(0)->comment('是否绑定到工作区：0-不绑定，1-绑定')->after('organization_code');
             // Add bind_workspace_id field
             $table->bigInteger('bind_workspace_id')->default(0)->comment('绑定的工作区ID')->after('is_bind_workspace');

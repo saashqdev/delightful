@@ -24,9 +24,9 @@ use Throwable;
  * Project fork message subscriber.
  */
 #[Consumer(
-    exchange: 'super_magic_project_fork',
-    routingKey: 'super_magic_project_fork',
-    queue: 'super_magic_project_fork',
+    exchange: 'be_delightful_project_fork',
+    routingKey: 'be_delightful_project_fork',
+    queue: 'be_delightful_project_fork',
     nums: 1
 )]
 class ProjectForkSubscriber extends ConsumerMessage

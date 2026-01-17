@@ -4,7 +4,7 @@
 
 Be Delightful Module is an extension package based on the Hyperf framework, designed as an enhanced extension module specifically for delightful-service. This module adopts Domain-Driven Design (DDD) architecture, providing a clear layered structure and rich functional components for applications.
 
-Be Delightful Module needs to be used in conjunction with delightful-service. Its core functionality is to establish an information transmission channel between users and the Super Magic AI agent by taking over delightful-service message events. This design enables users to seamlessly interact with the agent, thereby obtaining a more intelligent service experience.
+Be Delightful Module needs to be used in conjunction with delightful-service. Its core functionality is to establish an information transmission channel between users and the Super Delightful AI agent by taking over delightful-service message events. This design enables users to seamlessly interact with the agent, thereby obtaining a more intelligent service experience.
 
 As a bridging module, Be Delightful Module not only handles message delivery but also handles data format conversion, coordinates event flows, and provides necessary context information to ensure that the agent can accurately understand user intentions and provide appropriate responses.
 
@@ -13,7 +13,7 @@ As a bridging module, Be Delightful Module not only handles message delivery but
 - Built on Hyperf 3.1, perfectly adapted to existing delightful-service architecture
 - Follows Domain-Driven Design (DDD) architecture with clear code organization and easy maintenance
 - Provides resource sharing functionality, supporting cross-module resource access
-- Acts as a message channel, connecting users with the Super Magic AI agent
+- Acts as a message channel, connecting users with the Super Delightful AI agent
 - Supports event listening and handling, responding to user requests in real-time
 - Provides workspace management, supporting multi-topic and multi-task processing
 - Implements file management system, supporting agent file operations
@@ -24,7 +24,7 @@ As a bridging module, Be Delightful Module not only handles message delivery but
 Be Delightful Module, as an extension of delightful-service, plays the following role in the system:
 
 ```
-User Request → delightful-service → Be Delightful Module → Super Magic AI Agent
+User Request → delightful-service → Be Delightful Module → Super Delightful AI Agent
                  ↑                 |
                  └─────────────────┘
               Response Return
@@ -34,7 +34,7 @@ This module integrates with delightful-service through the following methods:
 
 1. Listen to delightful-service message events
 2. Process and transform message formats
-3. Deliver messages to the Super Magic AI agent
+3. Deliver messages to the Super Delightful AI agent
 4. Receive and process agent responses
 5. Return processing results to delightful-service
 
@@ -131,8 +131,8 @@ The basic flow for Be Delightful Module to process messages is as follows:
 1. User sends a message in delightful-service
 2. delightful-service triggers a message event
 3. Be Delightful Module listens to the event and extracts message content
-4. Message is converted to a format understandable by the Super Magic AI agent
-5. Message is sent to the Super Magic AI agent
+4. Message is converted to a format understandable by the Super Delightful AI agent
+5. Message is sent to the Super Delightful AI agent
 6. Agent processes the message and generates a response
 7. Be Delightful Module receives the response and converts the format
 8. Response is passed back to delightful-service through events
@@ -159,7 +159,7 @@ composer test
 - [Hyperf Official Documentation](https://hyperf.wiki)
 - [PSR Standards](https://www.php-fig.org/psr/)
 - [Domain-Driven Design Reference](https://www.domainlanguage.com/ddd/)
-- [Magic Service Documentation](https://docs.dtyq.com/delightful-service/)
+- [Delightful Service Documentation](https://docs.dtyq.com/delightful-service/)
 
 ## Authors
 

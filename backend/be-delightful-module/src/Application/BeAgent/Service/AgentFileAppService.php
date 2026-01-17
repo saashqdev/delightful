@@ -14,8 +14,8 @@ use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 
 /**
- * Agent消息应用服务
- * 提供高级Agent通信功能，包括自动初始化和状态管理.
+ * Agent file application service.
+ * Provides advanced Agent communication functionality, including automatic initialization and state management.
  */
 class AgentFileAppService
 {
@@ -29,10 +29,10 @@ class AgentFileAppService
     }
 
     /**
-     * 获取沙箱状态
+     * Get sandbox status.
      *
-     * @param string $sandboxId 沙箱ID
-     * @return SandboxStatusResult 沙箱状态结果
+     * @param string $sandboxId Sandbox ID
+     * @return SandboxStatusResult Sandbox status result
      */
     public function getSandboxStatus(string $sandboxId): SandboxStatusResult
     {

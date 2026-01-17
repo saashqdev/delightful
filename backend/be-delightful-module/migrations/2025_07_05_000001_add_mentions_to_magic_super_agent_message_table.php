@@ -14,15 +14,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
-            if (Schema::hasColumn('magic_super_agent_message', 'mentions')) {
+        Schema::table('delightful_be_agent_message', function (Blueprint $table) {
+            if (Schema::hasColumn('delightful_be_agent_message', 'mentions')) {
                 return;
             }
             $table->json('mentions')->nullable()->after('attachments')->comment('提及信息');
         });
 
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
-            if (Schema::hasColumn('magic_super_agent_task', 'mentions')) {
+        Schema::table('delightful_be_agent_task', function (Blueprint $table) {
+            if (Schema::hasColumn('delightful_be_agent_task', 'mentions')) {
                 return;
             }
             $table->json('mentions')->nullable()->after('attachments')->comment('提及信息');

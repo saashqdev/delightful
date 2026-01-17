@@ -15,7 +15,7 @@ class CreateBeDelightfulAgentsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_super_magic_agents', function (Blueprint $table) {
+        Schema::create('delightful_be_delightful_agents', function (Blueprint $table) {
             $table->id();
             $table->string('organization_code', 50)->comment('组织代码');
             $table->string('code', 50)->unique()->comment('唯一编码');
@@ -41,6 +41,6 @@ class CreateBeDelightfulAgentsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_super_magic_agents');
+        Schema::dropIfExists('delightful_be_delightful_agents');
     }
 }

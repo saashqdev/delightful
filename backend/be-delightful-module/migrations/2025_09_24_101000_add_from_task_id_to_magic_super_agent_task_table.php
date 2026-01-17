@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
+        Schema::table('delightful_be_agent_task', function (Blueprint $table) {
             $table->bigInteger('from_task_id')
                 ->nullable()
                 ->default(null)

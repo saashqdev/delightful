@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ProjectMode;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 use Delightful\BeDelightful\Domain\BeAgent\Event\RunTaskCallbackEvent;
@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * RunTaskCallbackEvent事件监听器 - 录音总结完成检测.
+ * RunTaskCallbackEvent listener - recording summary completion detection.
  */
 #[AsyncListener]
 #[Listener]
@@ -70,12 +70,12 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
 
     /**
      * Check recording summary completion and send notification.
-     * 检测录音总结是否完成，如果完成则推送通知.
+     * Detects if recording summary is complete, and if so, sends a notification.
      */
     private function checkRecordingSummaryCompletion(RunTaskCallbackEvent $event): void
     {
         try {
-            // 1. 检查任务状态
+            // 1. Check task status
             $status = $event->getTaskMessage()->getPayload()->getStatus();
             $taskStatus = TaskStatus::tryFrom($status);
             if ($taskStatus === null) {
@@ -86,13 +86,13 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
                 ]);
                 return;
             }
-            // 检查任务状态是否为 ERROR 或 FINISHED
+            // Check if task status is ERROR or FINISHED
             if ($taskStatus !== TaskStatus::ERROR && $taskStatus !== TaskStatus::FINISHED) {
                 return;
             }
 
-            // 2. 查询该任务的用户消息，检查是否有 summary_task 标记
-            // 使用 topicId + taskId + sender_type 查询，利用索引并只返回用户消息
+            // 2. Query user messages for this task and check for summary_task marker
+            // Use topicId + taskId + sender_type for query, leveraging index and returning only user messages
             $taskMessageRepository = di(TaskMessageRepositoryInterface::class);
             $userMessages = $taskMessageRepository->findUserMessagesByTopicIdAndTaskId($event->getTopicId(), (string) $event->getTaskId());
 
@@ -100,7 +100,7 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
             foreach ($userMessages as $message) {
                 $rawContent = $message->getRawContent();
                 if (! empty($rawContent)) {
-                    // raw_content 直接存储的就是 dynamic_params 的 JSON
+                    // raw_content directly stores the JSON of dynamic_params
                     $dynamicParams = Json::decode($rawContent);
                     if (isset($dynamicParams['summary_task'])
                         && $dynamicParams['summary_task'] === true) {
@@ -114,7 +114,7 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
                 }
             }
 
-            // 3. 如果没有 summary_task 标记，则不推送通知
+            // 3. If no summary_task marker found, don't send notification
             if (! $hasSummaryTask) {
                 $this->logger->info('checkRecordingSummary No summary_task marker found, skipping notification', [
                     'task_id' => $event->getTaskId(),
@@ -123,7 +123,7 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
                 return;
             }
 
-            // 4. 获取话题信息并检查模式（双重保障）
+            // 4. Get topic information and check mode (double guarantee)
             $topicDomainService = di(TopicDomainService::class);
             $topicEntity = $topicDomainService->getTopicById($event->getTopicId());
             if ($topicEntity === null) {
@@ -134,15 +134,15 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
                 return;
             }
 
-            // 检查话题模式是否为 summary
+            // Check if topic mode is summary
             if ($topicEntity->getTopicMode() !== ProjectMode::SUMMARY->value) {
                 return;
             }
 
-            // 5. 获取用户信息并推送通知
+            // 5. Get user information and send notification
             $userId = $event->getUserId();
-            $magicUserDomainService = di(MagicUserDomainService::class);
-            $userEntity = $magicUserDomainService->getUserById($userId);
+            $delightfulUserDomainService = di(DelightfulUserDomainService::class);
+            $userEntity = $delightfulUserDomainService->getUserById($userId);
 
             if ($userEntity === null) {
                 $this->logger->warning('checkRecordingSummary User not found for recording summary notification', [
@@ -153,7 +153,7 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
                 return;
             }
 
-            // 通过领域服务查询项目和工作区名称（只能依赖 domain/app 层）
+            // Query project and workspace names through domain service (can only depend on domain/app layer)
             $projectName = '';
             $workspaceName = '';
             try {
@@ -173,7 +173,7 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
                 ]);
             }
 
-            // 准备推送数据
+            // Prepare push data
             $pushData = [
                 'type' => 'recording_summary_result',
                 'recording_summary_result' => [
@@ -188,16 +188,16 @@ class RunTaskCallbackEventSubscriber implements ListenerInterface
                 ],
             ];
 
-            // 推送消息给客户端
+            // Send message to client
             SocketIOUtil::sendIntermediate(
                 SocketEventType::Intermediate,
-                $userEntity->getMagicId(),
+                $userEntity->getDelightfulId(),
                 $pushData
             );
 
-            $this->logger->info('checkRecordingSummary 录音总结完成通知已推送', [
+            $this->logger->info('checkRecordingSummary Recording summary completion notification sent', [
                 'user_id' => $userId,
-                'magic_id' => $userEntity->getMagicId(),
+                'delightful_id' => $userEntity->getDelightfulId(),
                 'topic_id' => $topicEntity->getId(),
                 'task_id' => $event->getTaskId(),
                 'status' => $taskStatus->value,

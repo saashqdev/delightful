@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\BeAgent\Service\UsageCalculator\UsageCalculatorInterface;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\BeDelightful\Application\BeAgent\Event\Publish\TopicMessageProcessPublisher;
 use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskEntity;
@@ -59,7 +59,7 @@ class TopicTaskAppService extends AbstractAppService
         private readonly TaskFileDomainService $taskFileDomainService,
         private readonly TaskMessageDomainService $taskMessageDomainService,
         private readonly SandboxDomainService $sandboxDomainService,
-        protected MagicUserDomainService $userDomainService,
+        protected DelightfulUserDomainService $userDomainService,
         protected LockerInterface $locker,
         protected LoggerFactory $loggerFactory,
         protected TranslatorInterface $translator,

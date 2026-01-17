@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\BeDelightful\Interfaces\Agent\Facade\Admin;
 
-use App\Application\Flow\Service\MagicFlowAppService;
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Application\Flow\Service\DelightfulFlowAppService;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Infrastructure\Util\ShadowCode\ShadowCode;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Delightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAiOptimizeAppService;
 use Delightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAppService;
 use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
@@ -35,7 +35,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     protected BeDelightfulAgentAiOptimizeAppService $beDelightfulAgentAiOptimizeAppService;
 
     #[Inject]
-    protected MagicFlowAppService $magicFlowAppService;
+    protected DelightfulFlowAppService $delightfulFlowAppService;
 
     public function save(BeDelightfulAgentSaveFormRequest $request)
     {
@@ -167,7 +167,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
         if ($optimizationType === BeDelightfulAgentOptimizationType::OptimizeContent) {
             // 当前用户可用的工具列表
             $builtinTools = BuiltinToolAssembler::createToolListDTO();
-            $customToolSets = $this->magicFlowAppService->queryToolSets($authorization, false, false)['list'] ?? [];
+            $customToolSets = $this->delightfulFlowAppService->queryToolSets($authorization, false, false)['list'] ?? [];
 
             // 合并内置工具和自定义工具为统一格式
             $availableTools = $this->mergeAvailableTools($builtinTools, $customToolSets);
@@ -190,7 +190,7 @@ class BeDelightfulAgentAdminApi extends AbstractBeDelightfulAdminApi
     /**
      * 合并内置工具和自定义工具为统一格式.
      * @param array<BuiltinToolDTO> $builtinTools
-     * @param array<MagicFlowToolSetEntity> $customToolSets
+     * @param array<DelightfulFlowToolSetEntity> $customToolSets
      */
     private function mergeAvailableTools(array $builtinTools, array $customToolSets): array
     {

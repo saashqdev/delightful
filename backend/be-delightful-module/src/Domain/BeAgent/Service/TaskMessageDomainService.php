@@ -49,27 +49,27 @@ class TaskMessageDomainService
     }
 
     /**
-     * 存储话题任务消息.
+     * Store topic task message.
      *
-     * @param TaskMessageEntity $messageEntity 消息实体
-     * @param array $rawData 原始消息数据
-     * @param string $processStatus 处理状态
-     * @return TaskMessageEntity 存储后的消息实体
+     * @param TaskMessageEntity $messageEntity Message entity
+     * @param array $rawData Raw message data
+     * @param string $processStatus Processing status
+     * @return TaskMessageEntity Stored message entity
      */
     public function storeTopicTaskMessage(TaskMessageEntity $messageEntity, array $rawData, string $processStatus = TaskMessageModel::PROCESSING_STATUS_PENDING): TaskMessageEntity
     {
-        $this->logger->info('开始存储话题任务消息', [
+        $this->logger->info('Start storing topic task message', [
             'topic_id' => $messageEntity->getTopicId(),
             'message_id' => $messageEntity->getMessageId(),
         ]);
 
-        // 1. 获取seq_id（应该已在DTO转换时设置）
+        // 1. Get seq_id (should already be set during DTO conversion)
         $seqId = $messageEntity->getSeqId();
         if ($seqId === null) {
             throw new InvalidArgumentException('seq_id must be set before storing message');
         }
 
-        // 2. 检查消息是否重复（通过seq_id + topic_id）
+        // 2. Check if message is duplicate (by seq_id + topic_id)
         $existingMessage = $this->messageRepository->findBySeqIdAndTopicId(
             $seqId,
             (int) $messageEntity->getTaskId(),
@@ -77,7 +77,7 @@ class TaskMessageDomainService
         );
 
         if ($existingMessage) {
-            $this->logger->info('消息已存在，跳过重复存储', [
+            $this->logger->info('Message already exists, skip duplicate storage', [
                 'topic_id' => $messageEntity->getTopicId(),
                 'seq_id' => $seqId,
                 'task_id' => $messageEntity->getTaskId(),
@@ -86,15 +86,15 @@ class TaskMessageDomainService
             return $existingMessage;
         }
 
-        // 3. 消息不存在，进行存储
+        // 3. Message does not exist, proceed to store
         $messageEntity->setRetryCount(0);
         $this->messageRepository->saveWithRawData(
-            $rawData, // 原始数据
+            $rawData, // Raw data
             $messageEntity,
             $processStatus
         );
 
-        $this->logger->info('话题任务消息存储完成', [
+        $this->logger->info('Topic task message storage completed', [
             'topic_id' => $messageEntity->getTopicId(),
             'seq_id' => $seqId,
             'message_id' => $messageEntity->getMessageId(),

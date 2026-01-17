@@ -17,9 +17,9 @@ use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectMemberModel;
 use Hyperf\DbConnection\Db;
 
 /**
- * 项目成员仓储实现.
+ * Project member repository implementation.
  *
- * 负责项目成员的数据持久化操作
+ * Responsible for data persistence operations of project members
  */
 class ProjectMemberRepository implements ProjectMemberRepositoryInterface
 {
@@ -29,7 +29,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 批量插入项目成员.
+     * Batch insert project members.
      */
     public function insert(array $projectMemberEntities): void
     {
@@ -39,9 +39,9 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
 
         $attributes = $this->prepareBatchInsertAttributes($projectMemberEntities);
 
-        // 使用事务确保数据一致性
+        // Use transaction to ensure data consistency
         Db::transaction(function () use ($attributes) {
-            // 分批插入，避免单次插入数据过多
+            // Batch insert to avoid inserting too much data at once
             $chunks = array_chunk($attributes, 100);
             foreach ($chunks as $chunk) {
                 $this->projectMemberModel::query()->insert($chunk);
@@ -50,7 +50,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 根据项目ID删除所有成员.
+     * Delete all members by project ID.
      */
     public function deleteByProjectId(int $projectId, array $roles = []): int
     {
@@ -62,7 +62,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 根据ID数组批量删除成员.
+     * Batch delete members by ID array.
      */
     public function deleteByIds(array $ids): int
     {
@@ -76,7 +76,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 删除指定项目和用户的成员关系.
+     * Delete member relationship for specified project and user.
      */
     public function deleteByProjectAndUser(int $projectId, string $userId): int
     {
@@ -88,7 +88,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 删除指定项目和目标的成员关系.
+     * Delete member relationship for specified project and target.
      */
     public function deleteByProjectAndTarget(int $projectId, string $targetType, string $targetId): int
     {
@@ -100,7 +100,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 检查项目和用户的成员关系是否存在.
+     * Check if member relationship exists for project and user.
      */
     public function existsByProjectAndUser(int $projectId, string $userId): bool
     {
@@ -112,7 +112,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 检查项目和部门列表的成员关系是否存在.
+     * Check if member relationship exists for project and department list.
      */
     public function existsByProjectAndDepartments(int $projectId, array $departmentIds): bool
     {
@@ -128,11 +128,11 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 根据项目ID获取所有项目成员.
+     * Get all project members by project ID.
      *
-     * @param int $projectId 项目ID
-     * @param array $roles 成员角色
-     * @return ProjectMemberEntity[] 项目成员实体数组
+     * @param int $projectId Project ID
+     * @param array $roles Member roles
+     * @return ProjectMemberEntity[] Project member entity array
      */
     public function findByProjectId(int $projectId, array $roles = []): array
     {
@@ -151,7 +151,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 根据用户和部门获取项目ID列表及总数（支持置顶排序）.
+     * Get project ID list and total by user and departments (supports pinned sorting).
      */
     public function getProjectIdsByUserAndDepartments(
         string $userId,
@@ -188,22 +188,22 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             ->whereNull('delightful_be_agent_project.deleted_at');
 
         if (! empty($name)) {
-            // 如果有项目名称搜索条件，则需要连接项目表
+            // If project name search condition exists, need to join project table
             $query->where('delightful_be_agent_project.project_name', 'like', '%' . $name . '%');
         }
 
         if (! empty($creatorUserIds)) {
-            // 如果有创建者用户ID搜索条件
+            // If creator user ID search condition exists
             $query->whereIn('delightful_be_agent_project.user_id', $creatorUserIds);
         }
 
         if (! empty($joinMethod)) {
-            // 加入方式
+            // Join method
             $query->where('delightful_be_agent_project_members.join_method', $joinMethod);
         }
 
         if (! empty($organizationCodes)) {
-            // 根据组织编码过滤
+            // Filter by organization code
             $query->whereIn('delightful_be_agent_project.user_organization_code', $organizationCodes);
         }
 
@@ -217,9 +217,9 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             'delightful_be_agent_project_member_settings.bind_workspace_id'
         )
             ->distinct()
-            ->orderByRaw('COALESCE(delightful_be_agent_project_member_settings.is_pinned, 0) DESC'); // 置顶的在前
+            ->orderByRaw('COALESCE(delightful_be_agent_project_member_settings.is_pinned, 0) DESC'); // Pinned first
 
-        // 根据排序字段进行排序（默认按 updated_at 排序）
+        // Sort by sort field (default sort by updated_at)
         $effectiveSortField = $sortField ?: 'updated_at';
         $effectiveSortDirection = $sortDirection ?: 'desc';
 
@@ -247,9 +247,9 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 批量获取项目成员总数.
+     * Batch get project members count.
      *
-     * @param array $projectIds 项目ID数组
+     * @param array $projectIds Project ID array
      * @return array [project_id => total_count]
      */
     public function getProjectMembersCounts(array $projectIds): array
@@ -258,7 +258,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             return [];
         }
 
-        // 使用单次查询优化N+1问题
+        // Optimize N+1 problem with single query
         $results = $this->projectMemberModel::query()
             ->whereIn('project_id', $projectIds)
             ->whereIn('role', [MemberRole::MANAGE->value, MemberRole::EDITOR->value, MemberRole::VIEWER->value])
@@ -268,7 +268,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             ->keyBy('project_id')
             ->toArray();
 
-        // 确保所有项目ID都有返回值，没有成员的项目返回0
+        // Ensure all project IDs have return value, projects without members return 0
         $counts = [];
         foreach ($projectIds as $projectId) {
             $counts[$projectId] = (int) ($results[$projectId]['total_count'] ?? 0);
@@ -278,10 +278,10 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 批量获取项目前N个成员预览.
+     * Batch get preview of first N members for projects.
      *
-     * @param array $projectIds 项目ID数组
-     * @param int $limit 限制数量，默认4个
+     * @param array $projectIds Project ID array
+     * @param int $limit Limit number, default 4
      * @return array [project_id => [ProjectMemberEntity[], ...]]
      */
     public function getProjectMembersPreview(array $projectIds, int $limit = 4): array
@@ -290,30 +290,30 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             return [];
         }
 
-        // 使用Eloquent查询，批量获取所有相关项目的成员
+        // Use Eloquent query to batch get all related project members
         $results = $this->projectMemberModel::query()
             ->whereIn('project_id', $projectIds)
             ->orderBy('id', 'asc')
             ->get()
             ->toArray();
 
-        // 初始化结果数组
+        // Initialize result array
         $preview = [];
         foreach ($projectIds as $projectId) {
             $preview[$projectId] = [];
         }
 
-        // 按项目分组并限制每个项目的成员数量
+        // Group by project and limit number of members per project
         $memberCounts = [];
         foreach ($results as $member) {
             $projectId = $member['project_id'];
 
-            // 初始化计数器
+            // Initialize counter
             if (! isset($memberCounts[$projectId])) {
                 $memberCounts[$projectId] = 0;
             }
 
-            // 如果未达到限制数量，则添加到结果中
+            // Add to result if limit not reached
             if ($memberCounts[$projectId] < $limit) {
                 $preview[$projectId][] = ProjectMemberEntity::modelToEntity($member);
                 ++$memberCounts[$projectId];
@@ -324,7 +324,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 获取用户创建的且有成员的项目ID列表及总数（支持置顶排序）.
+     * Get project ID list and total created by user with members (supports pinned sorting).
      */
     public function getSharedProjectIdsByUser(
         string $userId,
@@ -336,7 +336,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
         string $sortDirection = 'desc',
         array $creatorUserIds = []
     ): array {
-        // 构建基础查询：查找用户创建的且有成员的项目
+        // Build base query: find projects created by user with members
         $query = $this->projectMemberModel::query()
             ->join('delightful_be_agent_project', 'delightful_be_agent_project_members.project_id', '=', 'delightful_be_agent_project.id')
             ->leftJoin('delightful_be_agent_project_member_settings', function ($join) use ($userId) {
@@ -349,21 +349,21 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             ->where('delightful_be_agent_project.is_collaboration_enabled', 1)
             ->whereNull('delightful_be_agent_project.deleted_at');
 
-        // 如果有项目名称搜索条件
+        // If project name search condition exists
         if (! empty($name)) {
             $query->where('delightful_be_agent_project.project_name', 'like', '%' . $name . '%');
         }
 
-        // 如果有创建者用户ID搜索条件（对于shared类型，通常是当前用户创建的项目，这里主要是为了接口一致性）
+        // If creator user ID search condition exists (for shared type, usually projects created by current user, mainly for interface consistency)
         if (! empty($creatorUserIds)) {
             $query->whereIn('delightful_be_agent_project.user_id', $creatorUserIds);
         }
 
-        // 获取总数
+        // Get total
         $totalQuery = clone $query;
         $total = $totalQuery->select('delightful_be_agent_project_members.project_id')->distinct()->count();
 
-        // 分页查询项目ID（包含排序字段以兼容DISTINCT）
+        // Paginated query for project IDs (including sort fields for DISTINCT compatibility)
         $projects = $query->select(
             'delightful_be_agent_project_members.project_id',
             'delightful_be_agent_project.updated_at',
@@ -374,9 +374,9 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             'delightful_be_agent_project_member_settings.bind_workspace_id'
         )
             ->distinct()
-            ->orderByRaw('COALESCE(delightful_be_agent_project_member_settings.is_pinned, 0) DESC'); // 置顶的在前
+            ->orderByRaw('COALESCE(delightful_be_agent_project_member_settings.is_pinned, 0) DESC'); // Pinned first
 
-        // 根据排序字段进行排序（默认按 updated_at 排序）
+        // Sort by sort field (default sort by updated_at)
         $effectiveSortField = $sortField ?: 'updated_at';
         $effectiveSortDirection = $sortDirection ?: 'desc';
 
@@ -407,7 +407,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 获取协作项目的创建者用户ID列表.
+     * Get creator user ID list for collaboration projects.
      */
     public function getCollaborationProjectCreatorIds(
         string $userId,
@@ -418,7 +418,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             ->leftJoin('delightful_be_agent_project as projects', 'delightful_be_agent_project_members.project_id', '=', 'projects.id')
             ->where('delightful_be_agent_project_members.organization_code', $organizationCode);
 
-        // 构建用户权限查询条件 - 用户是项目成员或部门成员
+        // Build user permission query condition - user is project member or department member
         $query->where(function ($q) use ($userId, $departmentIds) {
             $q->where(function ($userQuery) use ($userId) {
                 $userQuery->where('delightful_be_agent_project_members.target_type', 'User')
@@ -433,21 +433,21 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             }
         });
 
-        // 只获取状态正常的项目成员
+        // Only get project members with normal status
         $query->where('delightful_be_agent_project_members.status', '1');
 
-        // 按创建者ID分组去重，获取不重复的创建者ID列表
+        // Group by creator ID to deduplicate, get unique creator ID list
         $creatorIds = $query->select('projects.user_id')
             ->whereNotNull('projects.user_id')
             ->groupBy('projects.user_id')
             ->pluck('projects.user_id')
             ->toArray();
 
-        return array_filter($creatorIds); // 过滤空值
+        return array_filter($creatorIds); // Filter empty values
     }
 
     /**
-     * 获取用户参与的项目列表（支持协作项目筛选和工作区绑定筛选）.
+     * Get list of projects participated by user (supports collaboration project filtering and workspace binding filtering).
      */
     public function getParticipatedProjects(
         string $userId,
@@ -460,7 +460,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
         string $sortDirection = 'desc',
         ?array $organizationCodes = null
     ): array {
-        // 构建基础查询
+        // Build base query
         $query = $this->projectMemberModel::query()
             ->from('delightful_be_agent_project_members as pm')
             ->join('delightful_be_agent_project as p', 'pm.project_id', '=', 'p.id')
@@ -471,19 +471,19 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             ->where('pm.target_type', MemberType::USER->value)
             ->where('pm.target_id', $userId)
             ->where('pm.status', 1)
-            ->where('p.project_status', 1) // 只查询激活状态的项目
+            ->where('p.project_status', 1) // Only query active projects
             ->whereNull('p.deleted_at');
 
-        // 工作区限制（可选）
+        // Workspace restriction (optional)
         if ($workspaceId !== null) {
             $query->where(function ($subQuery) use ($workspaceId, $userId) {
                 $subQuery
-                    // 情况1：用户自己创建的项目，在指定工作区
+                    // Case 1: Projects created by user in specified workspace
                     ->where(function ($q) use ($workspaceId, $userId) {
                         $q->where('p.user_id', $userId)
                             ->where('p.workspace_id', $workspaceId);
                     })
-                    // 情况2：协作项目，用户绑定到指定工作区
+                    // Case 2: Collaboration projects, user bound to specified workspace
                     ->orWhere(function ($q) use ($workspaceId, $userId) {
                         $q->where('p.user_id', '!=', $userId)
                             ->where('pms.is_bind_workspace', 1)
@@ -492,33 +492,33 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             });
         }
 
-        // 项目名称模糊搜索
+        // Project name fuzzy search
         if (! empty($projectName)) {
             $query->where('p.project_name', 'like', '%' . $projectName . '%');
         }
 
-        // 组织过滤
+        // Organization filter
         if (! empty($organizationCodes)) {
             $query->whereIn('p.user_organization_code', $organizationCodes);
         }
 
-        // 协作项目筛选逻辑
+        // Collaboration project filtering logic
         if (! $showCollaboration) {
-            // showCollaboration = 0 时，只显示已设置快捷方式的项目
+            // When showCollaboration = 0, only show projects with shortcuts set
             $query->where('pms.is_bind_workspace', 1);
 
-            // 如果指定了工作区，则进一步限制为绑定到该工作区的项目
+            // If workspace specified, further restrict to projects bound to that workspace
             if ($workspaceId !== null) {
                 $query->where('pms.bind_workspace_id', $workspaceId);
             }
         }
-        // showCollaboration = 1 时，显示所有参与的项目（默认情况）
+        // When showCollaboration = 1, show all participated projects (default case)
 
-        // 获取总数
+        // Get total
         $totalQuery = clone $query;
         $total = $totalQuery->select('p.id')->distinct()->count();
 
-        // 构建查询字段
+        // Build query fields
         $query->select([
             'p.id',
             'p.workspace_id',
@@ -545,15 +545,15 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
         ])
             ->addBinding($userId, 'select');
 
-        // 去重
+        // Deduplicate
         $query->distinct();
 
-        // 排序逻辑：置顶优先，置顶项目按置顶时间排序，最后按活跃时间排序
-        $query->orderByRaw('COALESCE(pms.is_pinned, 0) DESC'); // 1. 置顶的在前
-        $query->orderByRaw('pms.pinned_at DESC'); // 2. 置顶项目按置顶时间排序（最后置顶的在前）
-        $query->orderByRaw('COALESCE(pms.last_active_at, p.created_at) DESC'); // 3. 按活跃时间排序
+        // Sorting logic: pinned first, pinned projects sorted by pinned time, finally sorted by active time
+        $query->orderByRaw('COALESCE(pms.is_pinned, 0) DESC'); // 1. Pinned first
+        $query->orderByRaw('pms.pinned_at DESC'); // 2. Pinned projects sorted by pinned time (last pinned first)
+        $query->orderByRaw('COALESCE(pms.last_active_at, p.created_at) DESC'); // 3. Sorted by active time
 
-        // 分页
+        // Pagination
         $offset = ($page - 1) * $pageSize;
         $projects = $query->offset($offset)
             ->limit($pageSize)
@@ -567,7 +567,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 根据项目ID和用户ID获取项目成员信息.
+     * Get project member information by project ID and user ID.
      */
     public function getMemberByProjectAndUser(int $projectId, string $userId): ?ProjectMemberEntity
     {
@@ -585,7 +585,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 根据项目ID和成员ID数组获取成员列表.
+     * Get member list by project ID and member ID array.
      */
     public function getMembersByIds(int $projectId, array $memberIds): array
     {
@@ -607,7 +607,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 根据项目ID和部门ID数组获取项目成员列表.
+     * Get project member list by project ID and department ID array.
      */
     public function getMembersByProjectAndDepartmentIds(int $projectId, array $departmentIds): array
     {
@@ -630,7 +630,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 批量更新成员权限（新格式：target_type + target_id）.
+     * Batch update member permissions (new format: target_type + target_id).
      */
     public function batchUpdateRole(int $projectId, array $roleUpdates): int
     {
@@ -662,7 +662,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 批量删除成员（硬删除）.
+     * Batch delete members (hard delete).
      */
     public function deleteMembersByIds(int $projectId, array $memberIds): int
     {
@@ -670,7 +670,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
             return 0;
         }
 
-        // 使用硬删除，因为表没有deleted_at字段
+        // Use hard delete because table has no deleted_at field
         return $this->projectMemberModel::query()
             ->where('project_id', $projectId)
             ->whereIn('target_id', $memberIds)
@@ -678,7 +678,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 通过协作者目标ID获取项目Ids列表（排除OWNER角色）.
+     * Get project IDs list by collaborator target IDs (exclude OWNER role).
      */
     public function getProjectIdsByCollaboratorTargets(array $targetIds, array $roles): array
     {
@@ -696,7 +696,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 批量获取用户在项目中的成员记录.
+     * Batch get user's member records in projects.
      */
     public function getProjectMembersByTargetIds(array $projectIds, array $targetIds): array
     {
@@ -720,7 +720,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 准备批量插入的属性数组.
+     * Prepare attribute array for batch insert.
      */
     private function prepareBatchInsertAttributes(array $projectMemberEntities): array
     {
@@ -742,7 +742,7 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 实体转换为模型属性.
+     * Convert entity to model attributes.
      */
     private function entityToModelAttributes(ProjectMemberEntity $entity): array
     {
@@ -764,23 +764,23 @@ class ProjectMemberRepository implements ProjectMemberRepositoryInterface
     }
 
     /**
-     * 将数据数组转换为ProjectMemberEntity.
+     * Convert data array to ProjectMemberEntity.
      */
     private function toEntity(array $data): ProjectMemberEntity
     {
-        // 处理target_type字段的类型转换
+        // Handle type conversion for target_type field
         $targetType = $data['target_type'] ?? MemberType::USER->value;
         if (is_string($targetType)) {
             $targetType = MemberType::from($targetType);
         }
 
-        // 处理role字段的类型转换
+        // Handle type conversion for role field
         $role = $data['role'] ?? MemberRole::EDITOR->value;
         if (is_string($role)) {
             $role = MemberRole::from($role);
         }
 
-        // 处理status字段的类型转换
+        // Handle type conversion for status field
         $status = $data['status'] ?? MemberStatus::ACTIVE->value;
         if (is_int($status)) {
             $status = MemberStatus::from($status);

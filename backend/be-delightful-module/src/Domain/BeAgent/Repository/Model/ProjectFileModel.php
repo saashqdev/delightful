@@ -10,27 +10,27 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Model;
 use App\Infrastructure\Core\AbstractModel;
 
 /**
- * 项目文件模型（原任务文件模型）.
+ * Project file model (formerly task file model).
  */
 class ProjectFileModel extends AbstractModel
 {
     /**
-     * 软删除字段.
+     * Soft delete field.
      */
     public const DELETED_AT = 'deleted_at';
 
     /**
-     * 表名.
+     * Table name.
      */
     protected ?string $table = 'delightful_be_agent_project_files';
 
     /**
-     * 主键.
+     * Primary key.
      */
     protected string $primaryKey = 'file_id';
 
     /**
-     * 可填充字段.
+     * Fillable fields.
      */
     protected array $fillable = [
         'user_id',
@@ -49,7 +49,7 @@ class ProjectFileModel extends AbstractModel
     ];
 
     /**
-     * 字段类型转换.
+     * Field type casting.
      */
     protected array $casts = [
         'file_id' => 'integer',
@@ -64,7 +64,7 @@ class ProjectFileModel extends AbstractModel
     ];
 
     /**
-     * 日期字段.
+     * Date fields.
      */
     protected array $dates = [
         'created_at',
@@ -73,7 +73,7 @@ class ProjectFileModel extends AbstractModel
     ];
 
     /**
-     * 获取文件所属的项目.
+     * Get the project that the file belongs to.
      */
     public function project()
     {
@@ -81,7 +81,7 @@ class ProjectFileModel extends AbstractModel
     }
 
     /**
-     * 获取文件所属的话题.
+     * Get the topic that the file belongs to.
      */
     public function topic()
     {
@@ -89,7 +89,7 @@ class ProjectFileModel extends AbstractModel
     }
 
     /**
-     * 获取文件所属的任务
+     * Get the task that the file belongs to
      */
     public function task()
     {

@@ -19,7 +19,7 @@ class TaskFileVersionModel extends AbstractModel
     protected string $primaryKey = 'id';
 
     /**
-     * 可填充字段列表.
+     * Fillable fields list.
      */
     protected array $fillable = [
         'id',
@@ -34,7 +34,7 @@ class TaskFileVersionModel extends AbstractModel
     ];
 
     /**
-     * 类型转换.
+     * Type casting.
      */
     protected array $casts = [
         'id' => 'integer',

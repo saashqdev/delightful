@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TokenUsageRecordEntity;
 
 /**
- * Token使用记录仓储接口.
+ * Token usage record repository interface.
  */
 interface TokenUsageRecordRepositoryInterface
 {

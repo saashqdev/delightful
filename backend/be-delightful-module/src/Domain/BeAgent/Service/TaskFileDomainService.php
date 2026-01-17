@@ -70,7 +70,7 @@ class TaskFileDomainService
         protected ProjectForkRepositoryInterface $projectForkRepository,
         protected SandboxGatewayInterface $sandboxGateway,
         protected LockerInterface $locker,
-        protected TaskFileVersionRepositoryInterface $taskFileVersionRepository,  // 新增依赖
+        protected TaskFileVersionRepositoryInterface $taskFileVersionRepository,  // New dependency
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(get_class($this));
@@ -157,23 +157,23 @@ class TaskFileDomainService
     }
 
     /**
-     * 递归查询目录下所有文件（使用 parent_id 索引，高性能）.
-     * 利用 idx_project_parent_sort 索引进行广度优先遍历.
-     * 使用批量查询避免 N+1 问题.
+     * Recursively query all files under directory (using parent_id index, high performance).
+     * Use idx_project_parent_sort index for breadth-first traversal.
+     * Use batch queries to avoid N+1 problem.
      *
-     * @param int $projectId 项目ID
-     * @param int $parentId 父目录ID
-     * @param int $maxDepth 最大递归深度（防止无限递归）
-     * @return TaskFileEntity[] 文件实体列表
+     * @param int $projectId Project ID
+     * @param int $parentId Parent directory ID
+     * @param int $maxDepth Maximum recursion depth (prevent infinite recursion)
+     * @return TaskFileEntity[] File entity list
      */
     public function findFilesRecursivelyByParentId(int $projectId, int $parentId, int $maxDepth = 10): array
     {
         $allFiles = [];
         $currentLevelParentIds = [$parentId];
 
-        // 广度优先遍历，逐层查询
+        // Breadth-first traversal, query layer by layer
         for ($depth = 0; $depth < $maxDepth && ! empty($currentLevelParentIds); ++$depth) {
-            // 批量查询当前层所有父目录的子项（一次 SQL 查询，避免 N+1 问题）
+            // Batch query all child items of current level parent directories (one SQL query, avoid N+1 problem)
             $children = $this->taskFileRepository->getChildrenByParentIdsAndProject(
                 $projectId,
                 $currentLevelParentIds,
@@ -188,7 +188,7 @@ class TaskFileDomainService
             foreach ($children as $child) {
                 $allFiles[] = $child;
 
-                // 如果是目录，加入下一层的查询队列
+                // If it's a directory, add to next level query queue
                 if ($child->getIsDirectory()) {
                     $nextLevelParentIds[] = $child->getFileId();
                 }
@@ -218,24 +218,24 @@ class TaskFileDomainService
     {
         $lastUpdatedTime = null;
 
-        // 获取文件最新更新的时间
+        // Get file latest update time
         $lastFileEntity = $this->taskFileRepository->findLatestUpdatedByProjectId($projectId);
         if ($lastFileEntity) {
             $lastUpdatedTime = $lastFileEntity->getUpdatedAt();
         }
 
-        // 获取版本更新时间
+        // Get version update time
         $lastVersionEntity = $this->workspaceVersionRepository->getLatestUpdateVersionProjectId($projectId);
         if ($lastVersionEntity) {
             $versionUpdatedTime = $lastVersionEntity->getUpdatedAt();
 
-            // 使用 strtotime 进行更安全的时间比较
+            // Use strtotime for safer time comparison
             if ($lastUpdatedTime === null || strtotime($versionUpdatedTime) > strtotime($lastUpdatedTime)) {
                 $lastUpdatedTime = $versionUpdatedTime;
             }
         }
 
-        // 如果两个时间都为空，返回空字符串；否则返回最新时间
+        // If both times are empty, return empty string; otherwise return latest time
         return $lastUpdatedTime ?? '';
     }
 
@@ -395,7 +395,7 @@ class TaskFileDomainService
         bool $isUpdated = true,
         bool $withTrash = true,
     ): ?TaskFileEntity {
-        // 检查输入参数
+        // Check input parameters
         if (empty($taskFileEntity->getFileKey())) {
             ExceptionBuilder::throw(
                 BeAgentErrorCode::FILE_NOT_FOUND,
@@ -403,7 +403,7 @@ class TaskFileDomainService
             );
         }
         try {
-            // 查找文件是否存在
+            // Check if file exists
             $fileEntity = $this->taskFileRepository->getByFileKey($taskFileEntity->getFileKey(), withTrash: $withTrash);
             if ($withTrash && $fileEntity?->getDeletedAt() !== null) {
                 $this->taskFileRepository->restoreFile($fileEntity->getFileId());
@@ -425,7 +425,7 @@ class TaskFileDomainService
                 $fileEntity->setCreatedAt($currentTime);
             }
 
-            // id 相关设置
+            // ID related settings
             $fileEntity->setProjectId($projectEntity->getId());
             $fileEntity->setUserId($dataIsolation->getCurrentUserId());
             $fileEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -435,13 +435,13 @@ class TaskFileDomainService
             if (! empty($taskFileEntity->getTaskId()) && ($taskFileEntity->getTaskId() !== $taskFileEntity->getLatestModifiedTaskId())) {
                 $fileEntity->setLatestModifiedTaskId($taskFileEntity->getTaskId());
             }
-            // 文件信息相关设置
+            // File information related settings
             $fileEntity->setFileType(! empty($taskFileEntity->getFileType()) ? $taskFileEntity->getFileType() : FileType::PROCESS->value);
             $fileEntity->setFileName(! empty($taskFileEntity->getFileName()) ? $taskFileEntity->getFileName() : basename($taskFileEntity->getFileKey()));
             $fileEntity->setFileExtension(! empty($taskFileEntity->getFileExtension()) ? $taskFileEntity->getFileExtension() : pathinfo($fileEntity->getFileName(), PATHINFO_EXTENSION));
             $fileEntity->setFileSize(! empty($taskFileEntity->getFileSize()) ? $taskFileEntity->getFileSize() : 0);
 
-            // 设置存储类型，由于其他快照文件也存储到工作区，这里需要做下处理
+            // Set storage type, need to handle since other snapshot files are also stored in workspace
             if (empty($storageType)) {
                 if ($taskFileEntity->getStorageType() == StorageType::WORKSPACE->value && WorkFileUtil::isSnapshotFile($fileEntity->getFileKey())) {
                     $fileEntity->setStorageType(StorageType::SNAPSHOT);
@@ -617,7 +617,7 @@ class TaskFileDomainService
     {
         Db::beginTransaction();
         try {
-            // 1. 查找目录下所有文件（限制500条）
+            // 1. Find all files under directory (limit 500)
             $fileEntities = $this->taskFileRepository->findFilesByDirectoryPath($projectId, $targetPath);
 
             if (empty($fileEntities)) {
@@ -629,7 +629,7 @@ class TaskFileDomainService
             $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $workDir);
             $prefix = WorkDirectoryUtil::getPrefix($workDir);
 
-            // 3. 批量删除云存储文件
+            // 3. Batch delete cloud storage files
             $fileKeys = [];
             foreach ($fileEntities as $fileEntity) {
                 if (WorkDirectoryUtil::checkEffectiveFileKey($fullWorkdir, $fileEntity->getFileKey())) {
@@ -637,7 +637,7 @@ class TaskFileDomainService
                 }
             }
 
-            // 删除云存储文件（批量操作）
+            // Delete cloud storage files (batch operation)
             if (! empty($fileKeys)) {
                 try {
                     $deleteResult = $this->cloudFileRepository->deleteObjectsByCredential(
@@ -647,10 +647,10 @@ class TaskFileDomainService
                         StorageBucketType::SandBox
                     );
 
-                    // 统计成功删除的文件数量
+                    // Count successfully deleted files
                     $deletedCount = count($deleteResult['deleted']);
 
-                    // 记录删除失败的文件
+                    // Log failed delete files
                     if (! empty($deleteResult['errors'])) {
                         foreach ($deleteResult['errors'] as $error) {
                             $this->logger->error('Failed to delete cloud file in batch', [
@@ -672,14 +672,14 @@ class TaskFileDomainService
                         'error' => $e->getMessage(),
                     ]);
 
-                    // 批量删除失败时，记录为0个成功删除
+                    // When batch delete fails, record as 0 successfully deleted
                     $deletedCount = 0;
                 }
             }
 
-            // 4. 批量删除数据库记录
+            // 4. Batch delete database records
             $fileIds = array_map(fn ($entity) => $entity->getFileId(), $fileEntities);
-            // 根据文件ID批量删除数据库记录
+            // Delete database records by file IDs
             $this->taskFileRepository->deleteByIds($fileIds);
 
             Db::commit();
@@ -755,10 +755,10 @@ class TaskFileDomainService
                         StorageBucketType::SandBox
                     );
 
-                    // 统计成功删除的文件数量
+                    // Count successfully deleted files
                     $deletedCount = count($deleteResult['deleted']);
 
-                    // 记录删除失败的文件
+                    // Log failed delete files
                     if (! empty($deleteResult['errors'])) {
                         foreach ($deleteResult['errors'] as $error) {
                             $this->logger->error('Failed to delete cloud file in batch', [
@@ -780,14 +780,14 @@ class TaskFileDomainService
                         'error' => $e->getMessage(),
                     ]);
 
-                    // 批量删除失败时，记录为0个成功删除
+                    // When batch delete fails, record as 0 successfully deleted
                     $deletedCount = 0;
                 }
             }
 
-            // 4. 批量删除数据库记录
+            // 4. Batch delete database records
             $fileIds = array_map(fn ($entity) => $entity->getFileId(), $fileEntities);
-            // 根据文件ID批量删除数据库记录
+            // Delete database records by file IDs
             $this->taskFileRepository->deleteByIds($fileIds);
 
             return [
@@ -1313,7 +1313,7 @@ class TaskFileDomainService
     }
 
     /**
-     * 为新文件计算排序值（领域逻辑）.
+     * Calculate sort value for new file (domain logic).
      */
     public function calculateSortForNewFile(?int $parentId, int $preFileId, int $projectId): int
     {
@@ -1506,12 +1506,12 @@ class TaskFileDomainService
             return true;
         }
 
-        // todo 等所有文件迁移完成后，再删除备份文件
+        // todo: Delete backup files after all files migration is complete
         if ($existingFile->getIsDirectory()) {
-            // 去除文件key的末尾的/
+            // Remove trailing / from file key
             $fileKey = rtrim($fileKey, '/');
             $backupFile = $this->taskFileRepository->getByFileKey($fileKey);
-            // 如果备份文件存在，则删除备份文件
+            // If backup file exists, delete it
             if ($backupFile !== null) {
                 try {
                     $this->taskFileRepository->deleteById($backupFile->getFileId());
@@ -1610,24 +1610,24 @@ class TaskFileDomainService
         }
 
         foreach ($fileEntities as $fileEntity) {
-            // 跳过目录
+            // Skip directory
             if ($fileEntity->getIsDirectory()) {
                 continue;
             }
 
             try {
-                // 检查是否指定了版本号
+                // Check if version number is specified
                 $specifiedVersion = $fileVersions[$fileEntity->getFileId()] ?? null;
 
                 if ($specifiedVersion !== null) {
-                    // 查询指定版本的文件信息
+                    // Query specified version file information
                     $versionEntity = $this->taskFileVersionRepository->getByFileIdAndVersion(
                         $fileEntity->getFileId(),
                         $specifiedVersion
                     );
 
                     if (empty($versionEntity)) {
-                        $this->logger->warning(sprintf('版本%d不存在, file_id:%d', $specifiedVersion, $fileEntity->getFileId()));
+                        $this->logger->warning(sprintf('Version %d does not exist, file_id:%d', $specifiedVersion, $fileEntity->getFileId()));
                         continue;
                     }
 
@@ -1636,8 +1636,8 @@ class TaskFileDomainService
 
                 $result[] = $this->generateFileUrlForEntity($projectOrganizationCode, $fileEntity, $downloadMode, (string) $fileEntity->getFileId(), $addWatermark);
             } catch (Throwable $e) {
-                // 获取URL失败，记录日志并跳过
-                $this->logger->error(sprintf('获取文件URL失败, file_id:%d, err：%s', $fileEntity->getFileId(), $e->getMessage()));
+                // Failed to get URL, log and skip
+                $this->logger->error(sprintf('Failed to get file URL, file_id:%d, err: %s', $fileEntity->getFileId(), $e->getMessage()));
                 continue;
             }
         }
@@ -1658,10 +1658,10 @@ class TaskFileDomainService
     {
         $projectEntity = $this->projectRepository->findById($projectId);
         if (empty($projectEntity)) {
-            $this->logger->warning(sprintf('分享获取项目不存在, project_id:%d', $projectId));
+            $this->logger->warning(sprintf('Shared project does not exist, project_id:%d', $projectId));
             return [];
         }
-        // 从token获取内容
+        // Get content from token
         $fileEntities = $this->taskFileRepository->getTaskFilesByIds($fileIds, $projectId);
         if (empty($fileEntities)) {
             return [];
@@ -1669,24 +1669,24 @@ class TaskFileDomainService
 
         $result = [];
         foreach ($fileEntities as $fileEntity) {
-            // 跳过目录
+            // Skip directory
             if ($fileEntity->getIsDirectory()) {
                 continue;
             }
 
             try {
-                // 检查是否指定了版本号
+                // Check if version number is specified
                 $specifiedVersion = $fileVersions[$fileEntity->getFileId()] ?? null;
 
                 if ($specifiedVersion !== null) {
-                    // 查询指定版本的文件信息
+                    // Query specified version file information
                     $versionEntity = $this->taskFileVersionRepository->getByFileIdAndVersion(
                         $fileEntity->getFileId(),
                         $specifiedVersion
                     );
 
                     if (empty($versionEntity)) {
-                        $this->logger->warning(sprintf('版本%d不存在, file_id:%d', $specifiedVersion, $fileEntity->getFileId()));
+                        $this->logger->warning(sprintf('Version %d does not exist, file_id:%d', $specifiedVersion, $fileEntity->getFileId()));
                         continue;
                     }
 
@@ -1695,8 +1695,8 @@ class TaskFileDomainService
 
                 $result[] = $this->generateFileUrlForEntity($projectEntity->getUserOrganizationCode(), $fileEntity, $downloadMode, (string) $fileEntity->getFileId(), $addWatermark);
             } catch (Throwable $e) {
-                // 获取URL失败，记录日志并跳过
-                $this->logger->error(sprintf('获取文件URL失败, file_id:%d, err：%s', $fileEntity->getFileId(), $e->getMessage()));
+                // Failed to get URL, log and skip
+                $this->logger->error(sprintf('Failed to get file URL, file_id:%d, err: %s', $fileEntity->getFileId(), $e->getMessage()));
                 continue;
             }
         }
@@ -1763,7 +1763,7 @@ class TaskFileDomainService
      */
     public function migrateProjectFile(DataIsolation $dataIsolation, ProjectEntity $sourceProjectEntity, ProjectEntity $forkProjectEntity, ProjectForkEntity $projectForkRecordEntity): void
     {
-        // 初始化基本参数
+        // Initialize basic parameters
         $pageSize = 200; // Process 200 files at a time
         $lastFileId = $projectForkRecordEntity->getCurrentFileId();
         $forkRecordId = $projectForkRecordEntity->getId();
@@ -1787,31 +1787,31 @@ class TaskFileDomainService
             return;
         }
 
-        // 预计算工作目录路径（避免重复计算）
+        // Pre-calculate work directory paths (avoid repeated calculation)
         $sourceFullWorkDir = WorkDirectoryUtil::getFullWorkdir($this->getFullPrefix($sourceProjectEntity->getUserOrganizationCode()), $sourceProjectEntity->getWorkDir());
         $targetFullWorkDir = WorkDirectoryUtil::getFullWorkdir($this->getFullPrefix($forkProjectEntity->getUserOrganizationCode()), $forkProjectEntity->getWorkDir());
         $targetWorkDirPrefix = WorkDirectoryUtil::getPrefix($forkProjectEntity->getWorkDir());
 
-        // 设置用户上下文
+        // Set user context
         $this->sandboxGateway->setUserContext(
             $forkProjectEntity->getUserId(),
             $forkProjectEntity->getUserOrganizationCode()
         );
 
-        // 根节点单独处理
+        // Process root node separately
         $sourceRootFileId = $this->findOrCreateProjectRootDirectory($sourceProjectEntity->getId(), $sourceProjectEntity->getWorkDir(), $sourceProjectEntity->getUserId(), $sourceProjectEntity->getUserOrganizationCode(), $sourceProjectEntity->getUserOrganizationCode());
         $forkRootFileId = $this->findOrCreateProjectRootDirectory($forkProjectEntity->getId(), $forkProjectEntity->getWorkDir(), $forkProjectEntity->getUserId(), $forkProjectEntity->getUserOrganizationCode(), $forkProjectEntity->getUserOrganizationCode(), TaskFileSource::COPY);
         $sourceToNewIdMap[$sourceRootFileId] = $forkRootFileId;
 
         try {
-            // 检查是否已经处理完所有文件
+            // Check if all files are already processed
             if ($totalCount > 0 && $processedCount >= $totalCount) {
                 $this->logger->info(sprintf('Fork record %d: All %d files already processed, skipping migration', $forkRecordId, $totalCount));
                 $this->projectForkRepository->updateStatus($forkRecordId, ForkStatus::FINISHED->value, 100, '');
                 return;
             }
 
-            // 分批获取和处理文件
+            // Fetch and process files in batches
             while (true) {
                 $sourceFiles = $this->taskFileRepository->getFilesByProjectIdWithResume($sourceProjectEntity->getId(), $lastFileId, $pageSize);
                 if (empty($sourceFiles)) {
@@ -1819,18 +1819,18 @@ class TaskFileDomainService
                 }
                 foreach ($sourceFiles as $sourceFile) {
                     $newFileKey = str_replace($sourceFullWorkDir, $targetFullWorkDir, $sourceFile->getFileKey());
-                    $lastFileId = $sourceFile->getFileId(); // 更新分页游标
+                    $lastFileId = $sourceFile->getFileId(); // Update pagination cursor
 
-                    // 1. 检查文件是否存在，如果存在则跳过
+                    // 1. Check if file exists, skip if it does
                     $existingFileEntity = $this->taskFileRepository->getByFileKey($newFileKey);
                     if (! empty($existingFileEntity)) {
                         continue;
                     }
 
                     try {
-                        // 2. 处理远端附件
+                        // 2. Process remote attachments
                         if ($sourceFile->getIsDirectory()) {
-                            // 目录可以直接使用 cloud file 处理
+                            // Directory can be processed directly using cloud file
                             $metadata = WorkDirectoryUtil::generateDefaultWorkDirMetadata();
                             $this->cloudFileRepository->createFolderByCredential(
                                 $targetWorkDirPrefix,
@@ -1840,8 +1840,8 @@ class TaskFileDomainService
                                 ['metadata' => $metadata]
                             );
                         } else {
-                            // 文件拷贝需要通过远程沙箱处理
-                            // 处理文件：调用新的沙箱 copy 接口
+                            // File copy needs to be processed through remote sandbox
+                            // Process file: Call new sandbox copy interface
                             $copyResult = $this->sandboxGateway->copyFiles([
                                 [
                                     'source_oss_path' => $sourceFile->getFileKey(),
@@ -1859,7 +1859,7 @@ class TaskFileDomainService
                             }
                         }
 
-                        // 3. 保存数据库记录
+                        // 3. Save database record
                         $parentId = $sourceToNewIdMap[$sourceFile->getParentId()] ?? null;
                         // Create new TaskFileEntity for the forked project
                         $newTaskFile = $this->copyTaskFileEntity(
@@ -1872,7 +1872,7 @@ class TaskFileDomainService
                             $parentId,
                         );
                         $this->taskFileRepository->insert($newTaskFile);
-                        // 由于新的目标文件没有 parent_id，所以需要处理，为了提高处理效率，存储一下关系
+                        // Since new target file has no parent_id, need to handle it. Store the relationship for efficiency
                         $sourceToNewIdMap[$sourceFile->getFileId()] = $newTaskFile->getFileId();
                         if (is_null($newTaskFile->getParentId())) {
                             $needFixFileIds[] = [
@@ -1881,7 +1881,7 @@ class TaskFileDomainService
                             ];
                         }
 
-                        ++$processedCount; // 成功处理一个文件，计数器递增
+                        ++$processedCount; // Successfully processed one file, counter incremented
                     } catch (Throwable $e) {
                         $this->logger->error(
                             'Failed to process file during fork migration',
@@ -1894,16 +1894,16 @@ class TaskFileDomainService
                                 'processed_count' => $processedCount,
                             ]
                         );
-                        // 继续处理下一个文件，不中断整个流程
+                        // Continue processing next file, don't interrupt the entire flow
                     }
                 }
 
-                // 批次级别更新进度 (基于总文件数的准确进度计算)
+                // Batch-level progress update (based on accurate total file count)
                 if ($totalCount > 0) {
-                    // 使用准确的总文件数计算进度，文件迁移阶段占总进度的90%
+                    // Use accurate total file count to calculate progress, file migration phase takes 90% of total progress
                     $progress = min(90, max(1, intval(($processedCount / $totalCount) * 90)));
                 } else {
-                    // 如果总文件数为0，设置默认进度
+                    // If total file count is 0, set default progress
                     $progress = 50;
                 }
 
@@ -1917,17 +1917,17 @@ class TaskFileDomainService
                     $progress
                 ));
 
-                // 检查是否为最后一批
+                // Check if it's the last batch
                 if (count($sourceFiles) < $pageSize) {
                     break; // Less than page size, means it's the last batch
                 }
             }
 
-            // 最终更新进度到90%
+            // Final progress update to 90%
             $this->projectForkRepository->updateProgress($forkRecordId, $processedCount, 90);
             $this->logger->info(sprintf('Fork record %d: Successfully processed %d/%d files', $forkRecordId, $processedCount, $totalCount));
 
-            // 兜底逻辑：修复那些parent_id为null的文件
+            // Fallback logic: Fix files with null parent_id
             if (count($needFixFileIds) > 0) {
                 $this->batchFixParentIds($needFixFileIds, $sourceToNewIdMap, $userId);
                 $this->logger->info(sprintf('Fixed parent_id for %d files in fork record %d', count($needFixFileIds), $forkRecordId));
@@ -1941,7 +1941,7 @@ class TaskFileDomainService
             $this->projectForkRepository->updateStatus($forkRecordId, ForkStatus::FAILED->value, 0, 'File migration failed');
             throw $e;
         } finally {
-            // 确保用户上下文总是被清理
+            // Ensure user context is always cleaned up
             $this->sandboxGateway->clearUserContext();
         }
     }
@@ -2029,7 +2029,7 @@ class TaskFileDomainService
             return $oldFileEntity;
         }
 
-        // 重命名文件夹
+        // Rename folder
         $orgCodeForStorage = $targetOrganizationCode ?? $oldFileEntity->getOrganizationCode();
         try {
             $this->cloudFileRepository->renameObjectByCredential(WorkDirectoryUtil::getPrefix($workDir), $orgCodeForStorage, $oldFileKey, $newFileKey, StorageBucketType::SandBox);
@@ -2168,10 +2168,10 @@ class TaskFileDomainService
     }
 
     /**
-     * 根据fileKey数组批量获取文件.
+     * Batch get files by fileKey array.
      *
-     * @param array $fileKeys 文件Key数组
-     * @return TaskFileEntity[] 文件实体数组，以file_key为键
+     * @param array $fileKeys File Key array
+     * @return TaskFileEntity[] File entity array, keyed by file_key
      */
     public function getByFileKeys(array $fileKeys): array
     {
@@ -2557,14 +2557,14 @@ class TaskFileDomainService
     {
         $urlOptions = [];
 
-        // 设置Content-Type based on file extension
+        // Set Content-Type based on file extension
         $urlOptions['content_type'] = ContentTypeUtil::getContentType($filename);
 
-        // 设置Content-Disposition based on download mode and HTTP standards
+        // Set Content-Disposition based on download mode and HTTP standards
         switch (strtolower($downloadMode)) {
             case 'preview':
             case 'inline':
-                // 预览模式：如果文件可预览则inline，否则强制下载
+                // Preview mode: inline if file is previewable, otherwise force download
                 if (ContentTypeUtil::isPreviewable($filename)) {
                     $urlOptions['custom_query']['response-content-disposition']
                         = ContentTypeUtil::buildContentDispositionHeader($filename, 'inline');
@@ -2585,16 +2585,16 @@ class TaskFileDomainService
             case 'high_quality':
             case 'download':
             default:
-                // 下载模式：强制下载，使用标准的 attachment 格式
+                // Download mode: Force download, use standard attachment format
                 $urlOptions['custom_query']['response-content-disposition']
                     = ContentTypeUtil::buildContentDispositionHeader($filename, 'attachment');
                 break;
         }
 
-        // 设置Content-Type响应头
+        // Set Content-Type response header
         $urlOptions['custom_query']['response-content-type'] = $urlOptions['content_type'];
 
-        // 设置filename用于预签名URL生成
+        // Set filename for presigned URL generation
         $urlOptions['filename'] = $filename;
 
         return $urlOptions;
@@ -2616,14 +2616,14 @@ class TaskFileDomainService
         string $fileId,
         bool $addWatermark = true
     ): array {
-        // 准备下载选项，包含水印参数
+        // Prepare download options, including watermark parameters
         $filename = $fileEntity->getFileName();
         $urlOptions = $this->prepareFileUrlOptions($filename, $downloadMode, $addWatermark, $fileEntity);
 
-        // 生成预签名URL（水印参数已包含在签名中）
+        // Generate presigned URL (watermark parameters already included in signature)
         $preSignedUrl = $this->getFilePreSignedUrl($projectOrganizationCode, $fileEntity, $urlOptions);
 
-        // 返回结果数组
+        // Return result array
         return [
             'file_id' => $fileId,
             'url' => $preSignedUrl,

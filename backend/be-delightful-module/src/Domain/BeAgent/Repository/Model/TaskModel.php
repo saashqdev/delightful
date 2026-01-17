@@ -11,24 +11,24 @@ use App\Infrastructure\Core\AbstractModel;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
- * 任务模型.
+ * Task model.
  */
 class TaskModel extends AbstractModel
 {
     use SoftDeletes;
 
     /**
-     * 表名.
+     * Table name.
      */
     protected ?string $table = 'delightful_be_agent_task';
 
     /**
-     * 主键.
+     * Primary key.
      */
     protected string $primaryKey = 'id';
 
     /**
-     * 可填充字段.
+     * Fillable fields.
      */
     protected array $fillable = [
         'id',
@@ -54,7 +54,7 @@ class TaskModel extends AbstractModel
     ];
 
     /**
-     * 日期字段.
+     * Date fields.
      */
     protected array $dates = [
         'started_at',
@@ -65,7 +65,7 @@ class TaskModel extends AbstractModel
     ];
 
     /**
-     * 获取任务所属的工作区.
+     * Get the workspace that the task belongs to.
      */
     public function workspace()
     {
@@ -73,7 +73,7 @@ class TaskModel extends AbstractModel
     }
 
     /**
-     * 获取任务所属的项目.
+     * Get the project that the task belongs to.
      */
     public function project()
     {
@@ -81,7 +81,7 @@ class TaskModel extends AbstractModel
     }
 
     /**
-     * 获取任务所属的话题.
+     * Get the topic that the task belongs to.
      */
     public function topic()
     {

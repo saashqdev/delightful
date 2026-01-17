@@ -28,7 +28,7 @@ class SandboxDomainService
     }
 
     /**
-     * 调用沙箱网关，创建沙箱容器，如果 sandboxId 不存在，系统会默认创建一个.
+     * Call sandbox gateway to create sandbox container, if sandboxId does not exist, the system will create one by default.
      */
     public function createSandbox(string $projectId, string $sandboxID, string $workDir): string
     {
@@ -39,7 +39,7 @@ class SandboxDomainService
 
         $result = $this->gateway->createSandbox($projectId, $sandboxID, $workDir);
 
-        // 添加详细的调试日志，检查 result 对象
+        // Add detailed debug log to check result object
         $this->logger->info('[Sandbox][App] Gateway result analysis', [
             'result_class' => get_class($result),
             'result_is_success' => $result->isSuccess(),
@@ -71,13 +71,13 @@ class SandboxDomainService
     }
 
     /**
-     * 等待工作区就绪.
-     * 轮询工作区状态，直到初始化完成、失败或超时.
+     * Wait for workspace to be ready.
+     * Poll workspace status until initialization is complete, failed, or timeout.
      *
-     * @param string $sandboxId 沙箱ID
-     * @param int $timeoutSeconds 超时时间（秒），默认2分钟
-     * @param int $intervalSeconds 轮询间隔（秒），默认2秒
-     * @throws SandboxOperationException 当初始化失败或超时时抛出异常
+     * @param string $sandboxId Sandbox ID
+     * @param int $timeoutSeconds Timeout in seconds, default 2 minutes
+     * @param int $intervalSeconds Polling interval in seconds, default 2 seconds
+     * @throws SandboxOperationException Throws exception when initialization fails or times out
      */
     public function waitForSandboxReady(string $sandboxId, int $timeoutSeconds = 120, int $intervalSeconds = 2): void
     {
@@ -101,7 +101,7 @@ class SandboxDomainService
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // 状态为就绪时退出
+                // Exit when status is ready
                 if ($status === SandboxStatus::RUNNING) {
                     $this->logger->info('[Sandbox][App] Sandbox is ready', [
                         'sandbox_id' => $sandboxId,
@@ -110,10 +110,10 @@ class SandboxDomainService
                     return;
                 }
 
-                // 等待下一次轮询
+                // Wait for next poll
                 sleep($intervalSeconds);
             } catch (SandboxOperationException $e) {
-                // 重新抛出沙箱操作异常
+                // Rethrow sandbox operation exception
                 throw $e;
             } catch (Throwable $e) {
                 $this->logger->error('[Sandbox][App] Error while checking sandbox status', [
@@ -127,10 +127,10 @@ class SandboxDomainService
     }
 
     /**
-     * 获取沙箱状态
+     * Get sandbox status
      *
-     * @param string $sandboxId 沙箱ID
-     * @return SandboxStatusResult 沙箱状态结果
+     * @param string $sandboxId Sandbox ID
+     * @return SandboxStatusResult Sandbox status result
      */
     public function getSandboxStatus(string $sandboxId): SandboxStatusResult
     {

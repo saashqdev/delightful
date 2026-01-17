@@ -75,17 +75,17 @@ class TaskFileVersionRepository implements TaskFileVersionRepositoryInterface
 
     public function deleteOldVersionsByFileId(int $fileId, int $keepCount): int
     {
-        // 获取需要清理的版本实体列表
+        // Get the list of version entities to clean up
         $versionsToDelete = $this->getVersionsToCleanup($fileId, $keepCount);
 
         if (empty($versionsToDelete)) {
             return 0;
         }
 
-        // 提取版本ID用于批量删除
+        // Extract version IDs for batch deletion
         $idsToDelete = array_map(fn ($version) => $version->getId(), $versionsToDelete);
 
-        // 批量删除旧版本
+        // Batch delete old versions
         return $this->model::query()
             ->whereIn('id', $idsToDelete)
             ->delete();
@@ -99,11 +99,11 @@ class TaskFileVersionRepository implements TaskFileVersionRepositoryInterface
     }
 
     /**
-     * 获取需要清理的版本实体列表.
+     * Get the list of version entities to clean up.
      */
     public function getVersionsToCleanup(int $fileId, int $keepCount): array
     {
-        // 第一步：获取需要保留的版本ID（最新的keepCount个版本）
+        // Step 1: Get version IDs to keep (latest keepCount versions)
         $idsToKeep = $this->model::query()
             ->where('file_id', $fileId)
             ->orderBy('version', 'desc')
@@ -112,12 +112,12 @@ class TaskFileVersionRepository implements TaskFileVersionRepositoryInterface
             ->toArray();
 
         if (empty($idsToKeep)) {
-            // 如果没有要保留的版本，返回所有版本用于清理
+            // If there are no versions to keep, return all versions for cleanup
             $models = $this->model::query()
                 ->where('file_id', $fileId)
                 ->get();
         } else {
-            // 第二步：获取需要删除的版本记录
+            // Step 2: Get version records to delete
             $models = $this->model::query()
                 ->where('file_id', $fileId)
                 ->whereNotIn('id', $idsToKeep)
@@ -133,22 +133,22 @@ class TaskFileVersionRepository implements TaskFileVersionRepositoryInterface
     }
 
     /**
-     * 分页获取指定文件的版本列表，按版本号倒序.
+     * Get paginated version list for specified file, sorted by version number in descending order.
      */
     public function getByFileIdWithPage(int $fileId, int $page, int $pageSize): array
     {
         $query = $this->model::query()->where('file_id', $fileId);
 
-        // 获取总数
+        // Get total count
         $total = $query->count();
 
-        // 分页查询
+        // Paginated query
         $models = $query->orderBy('version', 'desc')
             ->skip(($page - 1) * $pageSize)
             ->take($pageSize)
             ->get();
 
-        // 转换为实体
+        // Convert to entities
         $entities = [];
         foreach ($models as $model) {
             $entities[] = new TaskFileVersionEntity($model->toArray());
@@ -161,7 +161,7 @@ class TaskFileVersionRepository implements TaskFileVersionRepositoryInterface
     }
 
     /**
-     * 根据文件ID和版本号获取特定版本.
+     * Get specific version by file ID and version number.
      */
     public function getByFileIdAndVersion(int $fileId, int $version): ?TaskFileVersionEntity
     {

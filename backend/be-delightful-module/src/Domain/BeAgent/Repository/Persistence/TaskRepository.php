@@ -21,9 +21,9 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 获取任务模型.
+     * Get task model.
      *
-     * @return TaskModel 任务模型
+     * @return TaskModel Task model
      */
     public function getModel(): TaskModel
     {
@@ -40,7 +40,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 通过任务ID(沙箱服务返回的taskId)获取任务
+     * Get task by task ID (taskId returned by sandbox service)
      */
     public function getTaskByTaskId(string $taskId): ?TaskEntity
     {
@@ -52,14 +52,14 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 通过话题ID获取任务列表.
+     * Get task list by topic ID.
      * @return array{list: TaskEntity[], total: int}
      */
     public function getTasksByTopicId(int $topicId, int $page, int $pageSize, array $conditions = []): array
     {
         $offset = ($page - 1) * $pageSize;
         $query = $this->model::query()->where('topic_id', $topicId);
-        // 构造条件
+        // Build conditions
         foreach ($conditions as $field => $value) {
             if (is_array($value)) {
                 $query->whereIn($field, $value);
@@ -67,10 +67,10 @@ class TaskRepository implements TaskRepositoryInterface
                 $query->where($field, $value);
             }
         }
-        // 先获取总数
+        // Get total first
         $total = $query->count();
 
-        // 获取分页数据
+        // Get paginated data
         $query = $query->skip($offset)
             ->take($pageSize)
             ->orderBy('id', 'desc');
@@ -92,7 +92,7 @@ class TaskRepository implements TaskRepositoryInterface
     {
         $date = date('Y-m-d H:i:s');
 
-        // 如果ID未设置，则自动生成
+        // If ID is not set, auto-generate
         if (empty($taskEntity->getId())) {
             $taskEntity->setId(IdGenerator::getSnowId());
         }
@@ -128,7 +128,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 根据沙箱任务ID更新任务状态
+     * Update task status by sandbox task ID
      */
     public function updateTaskStatusByTaskId(int $id, TaskStatus $status): bool
     {
@@ -150,7 +150,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 通过用户ID和任务ID(沙箱服务返回的taskId)获取任务
+     * Get task by user ID and task ID (taskId returned by sandbox service)
      */
     public function getTaskByUserIdAndTaskId(string $userId, string $taskId): ?TaskEntity
     {
@@ -167,7 +167,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 通过沙箱ID获取任务
+     * Get task by sandbox ID
      */
     public function getTaskBySandboxId(string $sandboxId): ?TaskEntity
     {
@@ -179,18 +179,18 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 根据用户ID获取任务列表.
+     * Get task list by user ID.
      *
-     * @param string $userId 用户ID
-     * @param array $conditions 条件数组，如 ['task_status' => 'running']
-     * @return array 任务列表
+     * @param string $userId User ID
+     * @param array $conditions Conditions array, e.g., ['task_status' => 'running']
+     * @return array Task list
      */
     public function getTasksByUserId(string $userId, array $conditions = []): array
     {
         $query = $this->model::query()
             ->where('user_id', $userId);
 
-        // 添加其他过滤条件
+        // Add other filter conditions
         foreach ($conditions as $field => $value) {
             $query->where($field, $value);
         }
@@ -206,10 +206,10 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 更新长时间处于运行状态的任务为错误状态
+     * Update long-running tasks to error status
      *
-     * @param string $timeThreshold 时间阈值，早于此时间的运行中任务将被标记为错误
-     * @return int 更新的任务数量
+     * @param string $timeThreshold Time threshold, running tasks earlier than this will be marked as error
+     * @return int Number of updated tasks
      */
     public function updateStaleRunningTasks(string $timeThreshold): int
     {
@@ -224,10 +224,10 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 获取指定状态的任务列表.
+     * Get task list by status.
      *
-     * @param TaskStatus $status 任务状态
-     * @return array<TaskEntity> 任务实体列表
+     * @param TaskStatus $status Task status
+     * @return array<TaskEntity> Task entity list
      */
     public function getTasksByStatus(TaskStatus $status): array
     {
@@ -245,23 +245,23 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 批量删除指定话题下的所有任务（软删除）.
+     * Batch delete all tasks under specified topic (soft delete).
      *
-     * @param int $topicId 话题ID
-     * @return int 被删除的任务数量
+     * @param int $topicId Topic ID
+     * @return int Number of deleted tasks
      */
     public function deleteTasksByTopicId(int $topicId): int
     {
-        // 使用批量更新操作，将指定话题下所有未删除的任务的 deleted_at 字段设置为当前时间
+        // Use batch update operation to set deleted_at field to current time for all non-deleted tasks under specified topic
         $now = date('Y-m-d H:i:s');
         return $this->model::query()
             ->where('topic_id', $topicId)
-            ->whereNull('deleted_at')  // 确保只更新未删除的任务
+            ->whereNull('deleted_at')  // Ensure only non-deleted tasks are updated
             ->update(['deleted_at' => $now]);
     }
 
     /**
-     * 更新任务状态和错误信息.
+     * Update task status and error message.
      */
     public function updateTaskStatusAndErrMsg(int $id, TaskStatus $status, ?string $errMsg = null): bool
     {
@@ -280,7 +280,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 根据沙箱任务ID更新任务状态和错误信息.
+     * Update task status and error message by sandbox task ID.
      */
     public function updateTaskStatusAndErrMsgByTaskId(int $id, TaskStatus $status, ?string $errMsg = null): bool
     {
@@ -299,11 +299,11 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 获取最近更新时间超过指定时间的任务列表.
+     * Get task list where last update time exceeds specified time.
      *
-     * @param string $timeThreshold 时间阈值，如果任务的更新时间早于此时间，则会被包含在结果中
-     * @param int $limit 返回结果的最大数量
-     * @return array<TaskEntity> 任务实体列表
+     * @param string $timeThreshold Time threshold, tasks updated earlier than this will be included in result
+     * @param int $limit Maximum number of results to return
+     * @return array<TaskEntity> Task entity list
      */
     public function getTasksExceedingUpdateTime(string $timeThreshold, int $limit = 100): array
     {
@@ -324,7 +324,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 获取指定话题下的任务数量.
+     * Get task count by topic ID.
      */
     public function getTaskCountByTopicId(int $topicId): int
     {
@@ -335,7 +335,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 根据项目ID获取任务列表.
+     * Get task list by project ID.
      */
     public function getTasksByProjectId(int $projectId, string $userId): array
     {
@@ -366,7 +366,7 @@ class TaskRepository implements TaskRepositoryInterface
     }
 
     /**
-     * 统计项目下的任务数量.
+     * Count tasks by project ID.
      */
     public function countTasksByProjectId(int $projectId): int
     {
@@ -414,12 +414,12 @@ class TaskRepository implements TaskRepositoryInterface
         $insertData = [];
 
         foreach ($taskEntities as $taskEntity) {
-            // 如果ID未设置，则自动生成（向下兼容）
+            // If ID is not set, auto-generate (backward compatibility)
             if (empty($taskEntity->getId())) {
                 $taskEntity->setId(IdGenerator::getSnowId());
             }
 
-            // 确保时间戳设置正确
+            // Ensure timestamps are set correctly
             if (empty($taskEntity->getCreatedAt())) {
                 $taskEntity->setCreatedAt($date);
             }
@@ -430,9 +430,9 @@ class TaskRepository implements TaskRepositoryInterface
             $insertData[] = $taskEntity->toArray();
         }
 
-        // 批量插入
+        // Batch insert
         $this->model::query()->insert($insertData);
 
-        return $taskEntities; // 直接返回传入的entities，因为它们已经包含了正确的ID
+        return $taskEntities; // Directly return passed entities since they already contain correct IDs
     }
 }

@@ -80,62 +80,62 @@ class WorkspaceDomainService
     }
 
     /**
-     * 创建工作区. 默认会初始化一个话题 (DEPRECATED - use createWorkspace + TopicDomainService::createTopic)
-     * 遵循DDD风格，领域服务负责处理业务逻辑.
-     * @return array 包含工作区实体和话题实体的数组 ['workspace' => WorkspaceEntity, 'topic' => TopicEntity|null]
+     * Create workspace. Will initialize a topic by default (DEPRECATED - use createWorkspace + TopicDomainService::createTopic)
+     * Follow DDD style, domain service handles business logic.
+     * @return array Array containing workspace entity and topic entity ['workspace' => WorkspaceEntity, 'topic' => TopicEntity|null]
      * @deprecated Use createWorkspace() and TopicDomainService::createTopic() separately
      */
     public function createWorkspaceWithTopic(DataIsolation $dataIsolation, WorkspaceCreationParams $creationParams): array
     {
-        // 从DataIsolation获取当前用户ID作为创建者ID
+        // Get current user ID from DataIsolation as creator ID
         $currentUserId = $dataIsolation->getCurrentUserId();
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 创建工作区实体
+        // Create workspace entity
         $currentTime = date('Y-m-d H:i:s');
         $workspaceEntity = new WorkspaceEntity();
-        $workspaceEntity->setUserId($currentUserId); // 使用当前用户ID
+        $workspaceEntity->setUserId($currentUserId); // Use current user ID
         $workspaceEntity->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $workspaceEntity->setChatConversationId($creationParams->getChatConversationId());
         $workspaceEntity->setName($creationParams->getWorkspaceName());
-        $workspaceEntity->setArchiveStatus(WorkspaceArchiveStatus::NotArchived); // 默认未归档
-        $workspaceEntity->setWorkspaceStatus(WorkspaceStatus::Normal); // 默认状态：正常
-        $workspaceEntity->setCreatedUid($currentUserId); // 从DataIsolation获取
-        $workspaceEntity->setUpdatedUid($currentUserId); // 创建时更新者与创建者相同
+        $workspaceEntity->setArchiveStatus(WorkspaceArchiveStatus::NotArchived); // Default: not archived
+        $workspaceEntity->setWorkspaceStatus(WorkspaceStatus::Normal); // Default status: normal
+        $workspaceEntity->setCreatedUid($currentUserId); // Get from DataIsolation
+        $workspaceEntity->setUpdatedUid($currentUserId); // Creator and updater are the same on creation
         $workspaceEntity->setCreatedAt($currentTime);
         $workspaceEntity->setUpdatedAt($currentTime);
 
-        // 使用事务保证工作区和话题同时创建成功
+        // Use transaction to ensure workspace and topic are created successfully together
         $topicEntity = null;
-        // 调用仓储层保存工作区
+        // Call repository layer to save workspace
         $savedWorkspaceEntity = $this->workspaceRepository->createWorkspace($workspaceEntity);
 
-        // 创建话题
+        // Create topic
         if ($savedWorkspaceEntity->getId() && ! empty($creationParams->getChatConversationTopicId())) {
-            // 创建话题实体
+            // Create topic entity
             $topicEntity = new TopicEntity();
             $topicEntity->setUserId($currentUserId);
             $topicEntity->setUserOrganizationCode($organizationCode);
             $topicEntity->setWorkspaceId($savedWorkspaceEntity->getId());
             $topicEntity->setChatTopicId($creationParams->getChatConversationTopicId());
             $topicEntity->setChatConversationId($creationParams->getChatConversationId());
-            $topicEntity->setSandboxId(''); // 初始为空
-            $topicEntity->setWorkDir(''); // 初始为空
+            $topicEntity->setSandboxId(''); // Initially empty
+            $topicEntity->setWorkDir(''); // Initially empty
             $topicEntity->setCurrentTaskId(0);
             $topicEntity->setTopicName($creationParams->getTopicName());
-            $topicEntity->setCurrentTaskStatus(TaskStatus::WAITING); // 默认状态：等待中
-            $topicEntity->setCreatedUid($currentUserId); // 设置创建者用户ID
-            $topicEntity->setUpdatedUid($currentUserId); // 设置更新者用户ID
+            $topicEntity->setCurrentTaskStatus(TaskStatus::WAITING); // Default status: waiting
+            $topicEntity->setCreatedUid($currentUserId); // Set creator user ID
+            $topicEntity->setUpdatedUid($currentUserId); // Set updater user ID
 
-            // 使用 topicRepository 保存话题
+            // Use topicRepository to save topic
             $savedTopicEntity = $this->topicRepository->createTopic($topicEntity);
 
             if ($savedTopicEntity->getId()) {
-                // 设置工作区的当前话题ID为新创建的话题ID
+                // Set workspace's current topic ID to newly created topic ID
                 $savedWorkspaceEntity->setCurrentTopicId($savedTopicEntity->getId());
-                // 更新工作区
+                // Update workspace
                 $this->workspaceRepository->save($savedWorkspaceEntity);
-                // 更新工作目录
+                // Update work directory
                 $topicEntity->setWorkDir($this->generateWorkDir($currentUserId, $savedTopicEntity->getId()));
                 $this->topicRepository->updateTopic($topicEntity);
             }
@@ -151,16 +151,16 @@ class WorkspaceDomainService
     }
 
     /**
-     * 更新工作区.
-     * 遵循DDD风格，领域服务负责处理业务逻辑.
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $workspaceId 工作区ID
-     * @param string $workspaceName 工作区名称
-     * @return bool 是否更新成功
+     * Update workspace.
+     * Follow DDD style, domain service handles business logic.
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $workspaceId Workspace ID
+     * @param string $workspaceName Workspace name
+     * @return bool Whether update succeeded
      */
     public function updateWorkspace(DataIsolation $dataIsolation, int $workspaceId, string $workspaceName = ''): bool
     {
-        // 获取工作区实体
+        // Get workspace entity
         $workspaceEntity = $this->workspaceRepository->getWorkspaceById($workspaceId);
 
         if (! $workspaceEntity) {
@@ -171,20 +171,20 @@ class WorkspaceDomainService
             throw new RuntimeException('You are not allowed to update this workspace');
         }
 
-        // 如果有传入工作区名称，则更新名称
+        // If workspace name is provided, update name
         if (! empty($workspaceName)) {
             $workspaceEntity->setName($workspaceName);
             $workspaceEntity->setUpdatedAt(date('Y-m-d H:i:s'));
-            $workspaceEntity->setUpdatedUid($dataIsolation->getCurrentUserId()); // 设置更新者用户ID
+            $workspaceEntity->setUpdatedUid($dataIsolation->getCurrentUserId()); // Set updater user ID
         }
 
-        // 使用通用 save 方法保存
+        // Use generic save method to save
         $this->workspaceRepository->save($workspaceEntity);
         return true;
     }
 
     /**
-     * 获取工作区详情.
+     * Get workspace details.
      */
     public function getWorkspaceDetail(int $workspaceId): ?WorkspaceEntity
     {
@@ -192,7 +192,7 @@ class WorkspaceDomainService
     }
 
     /**
-     * 归档/解除归档工作区.
+     * Archive/unarchive workspace.
      */
     public function archiveWorkspace(RequestContext $requestContext, int $workspaceId, bool $isArchived): bool
     {
@@ -201,40 +201,40 @@ class WorkspaceDomainService
     }
 
     /**
-     * 删除工作区（逻辑删除）.
+     * Delete workspace (logical deletion).
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $workspaceId 工作区ID
-     * @return bool 是否删除成功
-     * @throws RuntimeException 如果工作区不存在则抛出异常
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $workspaceId Workspace ID
+     * @return bool Whether deletion succeeded
+     * @throws RuntimeException If workspace does not exist, throws exception
      */
     public function deleteWorkspace(DataIsolation $dataIsolation, int $workspaceId): bool
     {
-        // 获取工作区实体
+        // Get workspace entity
         $workspaceEntity = $this->workspaceRepository->getWorkspaceById($workspaceId);
 
         if (! $workspaceEntity) {
-            // 使用ExceptionBuilder抛出"未找到"类型的错误
+            // Use ExceptionBuilder to throw "not found" type error
             ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, 'workspace.workspace_not_found');
         }
 
-        // 如果不是自己的工作区，不能删除
+        // If not own workspace, cannot delete
         if ($workspaceEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_ACCESS_DENIED, 'workspace.access_denied');
         }
 
-        // 设置删除时间
+        // Set deletion time
         $workspaceEntity->setDeletedAt(date('Y-m-d H:i:s'));
         $workspaceEntity->setUpdatedUid($dataIsolation->getCurrentUserId());
         $workspaceEntity->setUpdatedAt(date('Y-m-d H:i:s'));
 
-        // 保存更新
+        // Save update
         $this->workspaceRepository->save($workspaceEntity);
         return true;
     }
 
     /**
-     * 设置当前话题.
+     * Set current topic.
      */
     public function setCurrentTopic(RequestContext $requestContext, int $workspaceId, string $topicId): bool
     {
@@ -242,7 +242,7 @@ class WorkspaceDomainService
     }
 
     /**
-     * 根据条件获取工作区列表.
+     * Get workspace list by conditions.
      */
     public function getWorkspacesByConditions(
         array $conditions,
@@ -252,10 +252,10 @@ class WorkspaceDomainService
         string $orderDirection,
         DataIsolation $dataIsolation
     ): array {
-        // 应用数据隔离
+        // Apply data isolation
         $conditions = $this->applyDataIsolation($conditions, $dataIsolation);
 
-        // 调用仓储层获取数据
+        // Call repository layer to get data
         return $this->workspaceRepository->getWorkspacesByConditions(
             $conditions,
             $page,
@@ -266,15 +266,15 @@ class WorkspaceDomainService
     }
 
     /**
-     * 获取工作区下的话题列表.
-     * @param array $workspaceIds 工作区ID数组
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param bool $needPagination 是否需要分页
-     * @param int $pageSize 每页数量
-     * @param int $page 页码
-     * @param string $orderBy 排序字段
-     * @param string $orderDirection 排序方向
-     * @return array 话题列表
+     * Get workspace topic list.
+     * @param array $workspaceIds Workspace ID array
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param bool $needPagination Whether pagination is needed
+     * @param int $pageSize Items per page
+     * @param int $page Page number
+     * @param string $orderBy Sort field
+     * @param string $orderDirection Sort direction
+     * @return array Topic list
      */
     public function getWorkspaceTopics(
         array $workspaceIds,
@@ -301,60 +301,60 @@ class WorkspaceDomainService
     }
 
     /**
-     * 获取任务的附件列表.
+     * Get task attachment list.
      *
-     * @param int $taskId 任务ID
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array 附件列表和总数
+     * @param int $taskId Task ID
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array Attachment list and total count
      */
     public function getTaskAttachments(int $taskId, DataIsolation $dataIsolation, int $page = 1, int $pageSize = 20): array
     {
-        // 调用TaskFileRepository获取文件列表
+        // Call TaskFileRepository to get file list
         return $this->taskFileRepository->getByTaskId($taskId, $page, $pageSize);
-        // 直接返回实体对象列表，让应用层处理URL获取
+        // Return entity object list directly, let application layer handle URL retrieval
     }
 
     /**
-     * 创建话题.
+     * Create topic.
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $workspaceId 工作区ID
-     * @param string $chatTopicId 会话的话题ID，存储在topic_id字段中
-     * @param string $topicName 话题名称
-     * @return TopicEntity 创建的话题实体
-     * @throws Exception 如果创建失败
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $workspaceId Workspace ID
+     * @param string $chatTopicId Conversation topic ID, stored in topic_id field
+     * @param string $topicName Topic name
+     * @return TopicEntity Created topic entity
+     * @throws Exception If creation fails
      */
     public function createTopic(DataIsolation $dataIsolation, int $workspaceId, string $chatTopicId, string $topicName): TopicEntity
     {
-        // 获取当前用户ID
+        // Get current user ID
         $userId = $dataIsolation->getCurrentUserId();
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 获取工作区详情，检查工作区是否存在
+        // Get workspace details, check if workspace exists
         $workspaceEntity = $this->workspaceRepository->getWorkspaceById($workspaceId);
         if (! $workspaceEntity) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'workspace.not_found');
         }
 
-        // 检查工作区是否已归档
+        // Check if workspace is archived
         if ($workspaceEntity->getArchiveStatus() === WorkspaceArchiveStatus::Archived) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'workspace.archived');
         }
 
-        // 获取会话ID
+        // Get conversation ID
         $chatConversationId = $workspaceEntity->getChatConversationId();
         if (empty($chatConversationId)) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.conversation_id_not_found');
         }
 
-        // 如果话题ID为空，抛出异常
+        // If topic ID is empty, throw exception
         if (empty($chatTopicId)) {
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'topic.id_required');
         }
 
-        // 创建话题实体
+        // Create topic entity
         $topicEntity = new TopicEntity();
         $topicEntity->setUserId($userId);
         $topicEntity->setUserOrganizationCode($organizationCode);
@@ -362,16 +362,16 @@ class WorkspaceDomainService
         $topicEntity->setChatTopicId($chatTopicId);
         $topicEntity->setChatConversationId($chatConversationId);
         $topicEntity->setTopicName($topicName);
-        $topicEntity->setSandboxId(''); // 初始为空
-        $topicEntity->setWorkDir(''); // 初始为空
+        $topicEntity->setSandboxId(''); // Initially empty
+        $topicEntity->setWorkDir(''); // Initially empty
         $topicEntity->setCurrentTaskId(0);
-        $topicEntity->setCurrentTaskStatus(TaskStatus::WAITING); // 默认状态：等待中
-        $topicEntity->setCreatedUid($userId); // 设置创建者用户ID
-        $topicEntity->setUpdatedUid($userId); // 设置更新者用户ID
+        $topicEntity->setCurrentTaskStatus(TaskStatus::WAITING); // Default status: waiting
+        $topicEntity->setCreatedUid($userId); // Set creator user ID
+        $topicEntity->setUpdatedUid($userId); // Set updater user ID
 
-        // 保存话题
+        // Save topic
         $topicEntity = $this->topicRepository->createTopic($topicEntity);
-        // 更新工作区
+        // Update workspace
         if ($topicEntity->getId()) {
             $topicEntity->setWorkDir($this->generateWorkDir($userId, $topicEntity->getId()));
             $this->topicRepository->updateTopic($topicEntity);
@@ -380,10 +380,10 @@ class WorkspaceDomainService
     }
 
     /**
-     * 通过ID获取话题实体.
+     * Get topic entity by ID.
      *
-     * @param int $id 话题ID(主键)
-     * @return null|TopicEntity 话题实体
+     * @param int $id Topic ID (primary key)
+     * @return null|TopicEntity Topic entity
      */
     public function getTopicById(int $id): ?TopicEntity
     {
@@ -391,7 +391,7 @@ class WorkspaceDomainService
     }
 
     /**
-     * 批量获取话题.
+     * Batch get topics.
      * @return TopicEntity[]
      */
     public function getTopicsByIds(array $topicIds): array
@@ -435,10 +435,10 @@ class WorkspaceDomainService
     }
 
     /**
-     * 保存工作区实体
-     * 直接保存工作区实体，不需要重复查询.
-     * @param WorkspaceEntity $workspaceEntity 工作区实体
-     * @return WorkspaceEntity 保存后的工作区实体
+     * Save workspace entity
+     * Save workspace entity directly without redundant query.
+     * @param WorkspaceEntity $workspaceEntity Workspace entity
+     * @return WorkspaceEntity Saved workspace entity
      */
     public function saveWorkspaceEntity(WorkspaceEntity $workspaceEntity): WorkspaceEntity
     {
@@ -446,11 +446,11 @@ class WorkspaceDomainService
     }
 
     /**
-     * 获取工作区的话题列表.
+     * Get workspace topic list.
      *
-     * @param array|int $workspaceIds 工作区ID或ID数组
-     * @param string $userId 用户ID
-     * @return array 话题列表，以工作区ID为键
+     * @param array|int $workspaceIds Workspace ID or ID array
+     * @param string $userId User ID
+     * @return array Topic list with workspace ID as key
      */
     public function getWorkspaceTopicsByWorkspaceIds(array|int $workspaceIds, string $userId): array
     {
@@ -458,28 +458,28 @@ class WorkspaceDomainService
             $workspaceIds = [$workspaceIds];
         }
 
-        // 如果没有工作区ID，直接返回空数组
+        // If no workspace IDs, return empty array directly
         if (empty($workspaceIds)) {
             return [];
         }
 
-        // 定义查询条件
+        // Define query conditions
         $conditions = [
             'workspace_id' => $workspaceIds,
             'user_id' => $userId,
         ];
 
-        // 获取所有符合条件的话题
+        // Get all matching topics
         $result = $this->topicRepository->getTopicsByConditions(
             $conditions,
-            false, // 不分页，获取所有
+            false, // No pagination, get all
             100,
             1,
             'id',
             'asc'
         );
 
-        // 重新按工作区 ID 分组
+        // Regroup by workspace ID
         $topics = [];
         foreach ($result['list'] as $topic) {
             $workspaceId = $topic->getWorkspaceId();
@@ -494,10 +494,10 @@ class WorkspaceDomainService
 
     public function getUserTopics(string $userId): array
     {
-        // 考虑是否需要组织 code
+        // Consider whether organization code is needed
         $topics = $this->topicRepository->getTopicsByConditions(
             ['user_id' => $userId],
-            false, // 不分页，获取所有
+            false, // No pagination, get all
             100,
             1,
             'id',
@@ -512,8 +512,8 @@ class WorkspaceDomainService
 
     public function getTopicList(int $page, int $pageSize): array
     {
-        // 考虑是否需要组织 code
-        // 不分页，获取所有
+        // Consider whether organization code is needed
+        // No pagination, get all
         $topics = $this->topicRepository->getTopicsByConditions([], true, $pageSize, $page);
         if (empty($topics['list'])) {
             return [];
@@ -523,29 +523,29 @@ class WorkspaceDomainService
     }
 
     /**
-     * 根据任务状态获取工作区的话题列表.
+     * Get workspace topic list by task status.
      *
-     * @param array|int $workspaceIds 工作区ID或ID数组
-     * @param string $userId 用户ID
-     * @param null|TaskStatus $taskStatus 任务状态，如果为null则返回所有状态
-     * @return array 话题列表，以工作区ID为键
+     * @param array|int $workspaceIds Workspace ID or ID array
+     * @param string $userId User ID
+     * @param null|TaskStatus $taskStatus Task status, if null returns all statuses
+     * @return array Topic list with workspace ID as key
      */
     public function getWorkspaceTopicsByTaskStatus(array|int $workspaceIds, string $userId, ?TaskStatus $taskStatus = null): array
     {
-        // 获取所有话题
+        // Get all topics
         $allTopics = $this->getWorkspaceTopicsByWorkspaceIds($workspaceIds, $userId);
 
-        // 如果不需要过滤任务状态，直接返回所有话题
+        // If no task status filtering needed, return all topics directly
         if ($taskStatus === null) {
             return $allTopics;
         }
 
-        // 根据任务状态过滤话题
+        // Filter topics by task status
         $filteredTopics = [];
         foreach ($allTopics as $workspaceId => $topics) {
             $filteredTopicList = [];
             foreach ($topics as $topic) {
-                // 如果话题的当前任务状态与指定状态匹配，或者话题没有任务状态且指定的是等待状态
+                // If topic's current task status matches specified status, or topic has no task status and specified status is waiting
                 if (($topic->getCurrentTaskStatus() === $taskStatus)
                     || ($topic->getCurrentTaskStatus() === null && $taskStatus === TaskStatus::WAITING)) {
                     $filteredTopicList[] = $topic;
@@ -561,66 +561,66 @@ class WorkspaceDomainService
     }
 
     /**
-     * 删除话题（逻辑删除）.
+     * Delete topic (logical deletion).
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $id 话题ID(主键)
-     * @return bool 是否删除成功
-     * @throws Exception 如果删除失败或任务状态为运行中
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $id Topic ID (primary key)
+     * @return bool Whether deletion succeeded
+     * @throws Exception If deletion fails or task status is running
      */
     public function deleteTopic(DataIsolation $dataIsolation, int $id): bool
     {
-        // 获取当前用户ID
+        // Get current user ID
         $userId = $dataIsolation->getCurrentUserId();
 
-        // 通过主键ID获取话题
+        // Get topic by primary key ID
         $topicEntity = $this->topicRepository->getTopicById($id);
         if (! $topicEntity) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'topic.not_found');
         }
 
-        // 检查用户权限（检查话题是否属于当前用户）
+        // Check user permission (check if topic belongs to current user)
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(GenericErrorCode::AccessDenied, 'topic.access_denied');
         }
 
-        // 检查任务状态，如果是运行中则不允许删除
+        // Check task status, if running then deletion not allowed
         if ($topicEntity->getCurrentTaskStatus() === TaskStatus::RUNNING) {
-            // 向 agent 发送停止命令
+            // Send stop command to agent
             $taskEntity = $this->taskRepository->getTaskById($topicEntity->getCurrentTaskId());
             if (! empty($taskEntity)) {
                 $this->taskDomainService->handleInterruptInstruction($dataIsolation, $taskEntity);
             }
         }
 
-        // 获取工作区详情，检查工作区是否存在
+        // Get workspace details, check if workspace exists
         $workspaceEntity = $this->workspaceRepository->getWorkspaceById($topicEntity->getWorkspaceId());
         if (! $workspaceEntity) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'workspace.not_found');
         }
 
-        // 检查工作区是否已归档
+        // Check if workspace is archived
         if ($workspaceEntity->getArchiveStatus() === WorkspaceArchiveStatus::Archived) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'workspace.archived');
         }
 
-        // 删除该话题下的所有任务（调用仓储层的批量删除方法）
+        // Delete all tasks under this topic (call repository layer batch delete method)
         $this->taskRepository->deleteTasksByTopicId($id);
 
-        // 设置删除时间
+        // Set deletion time
         $topicEntity->setDeletedAt(date('Y-m-d H:i:s'));
-        // 设置更新者用户ID
+        // Set updater user ID
         $topicEntity->setUpdatedUid($userId);
 
-        // 保存更新
+        // Save update
         return $this->topicRepository->updateTopic($topicEntity);
     }
 
     /**
-     * 获取任务详情.
+     * Get task details.
      *
-     * @param int $taskId 任务ID
-     * @return null|TaskEntity 任务实体
+     * @param int $taskId Task ID
+     * @return null|TaskEntity Task entity
      */
     public function getTaskById(int $taskId): ?TaskEntity
     {
@@ -628,13 +628,13 @@ class WorkspaceDomainService
     }
 
     /**
-     * 获取话题关联的任务列表.
+     * Get topic associated task list.
      *
-     * @param int $topicId 话题ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @param null|DataIsolation $dataIsolation 数据隔离对象
-     * @return array{list: TaskEntity[], total: int} 任务列表和总数
+     * @param int $topicId Topic ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @param null|DataIsolation $dataIsolation Data isolation object
+     * @return array{list: TaskEntity[], total: int} Task list and total count
      */
     public function getTasksByTopicId(int $topicId, int $page = 1, int $pageSize = 10, ?DataIsolation $dataIsolation = null): array
     {
@@ -642,10 +642,10 @@ class WorkspaceDomainService
     }
 
     /**
-     * 通过话题ID集合获取工作区信息.
+     * Get workspace info by topic ID collection.
      *
-     * @param array $topicIds 话题ID集合
-     * @return array 以话题ID为键，工作区信息为值的关联数组
+     * @param array $topicIds Topic ID collection
+     * @return array Associative array with topic ID as key and workspace info as value
      */
     public function getWorkspaceInfoByTopicIds(array $topicIds): array
     {
@@ -668,9 +668,9 @@ class WorkspaceDomainService
     }
 
     /**
-     * 获取所有工作区的唯一组织代码列表.
+     * Get unique organization code list for all workspaces.
      *
-     * @return array 唯一的组织代码列表
+     * @return array Unique organization code list
      */
     public function getUniqueOrganizationCodes(): array
     {
@@ -718,7 +718,7 @@ class WorkspaceDomainService
     }
 
     /**
-     * 根据commit_hash 和project_id 获取tag号.
+     * Get tag number by commit_hash and project_id.
      */
     public function getTagByCommitHashAndProjectId(string $commitHash, int $projectId): int
     {
@@ -726,10 +726,10 @@ class WorkspaceDomainService
     }
 
     /**
-     * 批量获取工作区名称映射.
+     * Batch get workspace name mapping.
      *
-     * @param array $workspaceIds 工作区ID数组
-     * @return array ['workspace_id' => 'workspace_name'] 键值对
+     * @param array $workspaceIds Workspace ID array
+     * @return array ['workspace_id' => 'workspace_name'] key-value pairs
      */
     public function getWorkspaceNamesBatch(array $workspaceIds): array
     {
@@ -741,7 +741,7 @@ class WorkspaceDomainService
     }
 
     /**
-     * 通过commit hash 和话题id 获取版本后，根据dir 文件列表，过滤result.
+     * Get version by commit hash and topic id, then filter result based on dir file list.
      */
     public function filterResultByGitVersion(array $result, int $projectId, string $organizationCode, string $workDir = ''): array
     {
@@ -755,7 +755,7 @@ class WorkspaceDomainService
             return $result;
         }
 
-        # 遍历result的updatedAt ，如果updatedAt 小于workspaceVersion 的updated_at ，则保持在一个临时数组
+        # Iterate through result's updatedAt, keep items in temporary array if updatedAt is less than workspaceVersion's updated_at
         $fileResult = [];
         foreach ($result['list'] as $item) {
             if ($item['updated_at'] >= $workspaceVersion->getUpdatedAt()) {
@@ -763,7 +763,7 @@ class WorkspaceDomainService
             }
         }
         $dir = json_decode($workspaceVersion->getDir(), true);
-        # dir 是一个二维数组，遍历$dir, 判断是否是一个文件，如果没有文件后缀说明是一个目录，过滤掉目录
+        # dir is a 2D array, iterate through $dir to check if it's a file, filter out directories if no file extension
         # dir =["generated_images","generated_images\/cute-cartoon-cat.jpg","generated_images\/handdrawn-cute-cat.jpg","generated_images\/abstract-modern-generic.jpg","generated_images\/minimalist-cat-icon.jpg","generated_images\/realistic-elegant-cat.jpg","generated_images\/oilpainting-elegant-cat.jpg","generated_images\/anime-cute-cat.jpg","generated_images\/cute-cartoon-dog.jpg","generated_images\/universal-minimal-logo-3.jpg","generated_images\/universal-minimal-logo.jpg","generated_images\/universal-minimal-logo-2.jpg","generated_images\/realistic-cat-photo.jpg","generated_images\/minimal-tech-logo.jpg","logs","logs\/agentlang.log"]
         $dir = array_filter($dir, function ($item) {
             if (strpos($item, '.') === false) {
@@ -777,11 +777,11 @@ class WorkspaceDomainService
             foreach ($dir as $dirItem) {
                 $fileKey = WorkDirectoryUtil::getRelativeFilePath($item['file_key'], $workDir);
 
-                // 统一路径分隔符，将所有路径分隔符标准化为系统默认分隔符
+                // Unify path separators, normalize all path separators to system default separator
                 $fileKey = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $fileKey);
                 $dirItem = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $dirItem);
                 $dirItem = '/' . $dirItem;
-                // 调整为完全匹配
+                // Adjust to exact match
                 if ($dirItem == $fileKey) {
                     $gitVersionResult[] = $item;
                 }
@@ -790,7 +790,7 @@ class WorkspaceDomainService
 
         $newResult = array_merge($fileResult, $gitVersionResult);
 
-        # 对tempResult进行去重
+        # Deduplicate tempResult
         $result['list'] = array_unique($newResult, SORT_REGULAR);
         $result['total'] = count($result['list']);
         return $result;
@@ -807,7 +807,7 @@ class WorkspaceDomainService
             return false;
         }
         $dir = json_decode($workspaceVersion->getDir(), true);
-        # dir 是一个二维数组，遍历$dir, 判断是否是一个文件，如果没有文件后缀说明是一个目录，过滤掉目录
+        # dir is a 2D array, iterate through $dir to check if it's a file, filter out directories if no file extension
         # dir =["generated_images","generated_images\/cute-cartoon-cat.jpg","generated_images\/handdrawn-cute-cat.jpg","generated_images\/abstract-modern-generic.jpg","generated_images\/minimalist-cat-icon.jpg","generated_images\/realistic-elegant-cat.jpg","generated_images\/oilpainting-elegant-cat.jpg","generated_images\/anime-cute-cat.jpg","generated_images\/cute-cartoon-dog.jpg","generated_images\/universal-minimal-logo-3.jpg","generated_images\/universal-minimal-logo.jpg","generated_images\/universal-minimal-logo-2.jpg","generated_images\/realistic-cat-photo.jpg","generated_images\/minimal-tech-logo.jpg","logs","logs\/agentlang.log"]
 
         $dir = array_filter($dir, function ($item) {
@@ -817,7 +817,7 @@ class WorkspaceDomainService
             return true;
         });
 
-        # 遍历$result ，如果$result 的file_key 在$dir 中， dir中保存的是file_key 中一部分，需要使用字符串匹配，如果存在则保持在一个临时数组
+        # Iterate through $result, if $result's file_key is in $dir, dir saves part of file_key, need to use string matching, keep in temporary array if exists
         $gitVersionNotExistResult = [];
 
         $fileKeys = [];
@@ -844,16 +844,16 @@ class WorkspaceDomainService
         if (empty($gitVersionNotExistResult)) {
             return false;
         }
-        # 对gitVersionNotExistResult 进行去重
+        # Deduplicate gitVersionNotExistResult
         $gitVersionNotExistResult = array_unique($gitVersionNotExistResult);
 
-        # 重新排序
+        # Re-sort
         $gitVersionNotExistResult = array_values($gitVersionNotExistResult);
 
-        # gitVersionNotExistResult 不为空，说明有文件更新，但是没有触发suer-delightful的文件上传，需要再调用suer-delightful的 api 进行一次文件上传
+        # If gitVersionNotExistResult is not empty, files are updated but didn't trigger suer-delightful file upload, need to call suer-delightful api for another file upload
         if (! empty($gitVersionNotExistResult)) {
             try {
-                # 查看沙箱是否存活
+                # Check if sandbox is alive
                 $sandboxStatus = $this->gateway->getSandboxStatus($sandboxId);
                 if ($sandboxStatus->isRunning()) {
                     $gatewayResult = $this->gateway->uploadFile($sandboxId, $gitVersionNotExistResult, (string) $projectId, $organizationCode, $taskId);
@@ -871,18 +871,18 @@ class WorkspaceDomainService
     }
 
     /**
-     * 应用数据隔离到查询条件.
+     * Apply data isolation to query conditions.
      */
     private function applyDataIsolation(array $conditions, DataIsolation $dataIsolation): array
     {
-        // 用户id 和 组织代码
+        // User ID and organization code
         $conditions['user_id'] = $dataIsolation->getCurrentUserId();
         $conditions['user_organization_code'] = $dataIsolation->getCurrentOrganizationCode();
         return $conditions;
     }
 
     /**
-     * 生成工作目录.
+     * Generate work directory.
      */
     private function generateWorkDir(string $userId, int $topicId): string
     {

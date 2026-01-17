@@ -10,22 +10,22 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Model;
 use App\Infrastructure\Core\AbstractModel;
 
 /**
- * 项目操作日志模型.
+ * Project operation log model.
  */
 class ProjectOperationLogModel extends AbstractModel
 {
     /**
-     * 是否自动维护时间戳.
+     * Whether to automatically maintain timestamps.
      */
     public bool $timestamps = true;
 
     /**
-     * 表名.
+     * Table name.
      */
     protected ?string $table = 'delightful_be_agent_project_operation_logs';
 
     /**
-     * 可填充字段.
+     * Fillable fields.
      */
     protected array $fillable = [
         'id',
@@ -44,7 +44,7 @@ class ProjectOperationLogModel extends AbstractModel
     ];
 
     /**
-     * 字段类型转换.
+     * Field type casting.
      */
     protected array $casts = [
         'id' => 'integer',
@@ -55,7 +55,7 @@ class ProjectOperationLogModel extends AbstractModel
     ];
 
     /**
-     * 主键字段.
+     * Primary key field.
      */
     protected string $primaryKey = 'id';
 }

@@ -11,13 +11,13 @@ use Hyperf\Redis\Redis;
 use Psr\Container\ContainerInterface;
 
 /**
- * 文件编辑状态领域服务
+ * File editing status domain service
  */
 class FileEditingDomainService
 {
     private const REDIS_KEY_PREFIX = 'file_editing_status';
 
-    private const TTL_SECONDS = 120; // 2分钟
+    private const TTL_SECONDS = 120; // 2 minutes
 
     private Redis $redis;
 
@@ -27,46 +27,46 @@ class FileEditingDomainService
     }
 
     /**
-     * 加入编辑.
+     * Join editing.
      */
     public function joinEditing(int $fileId, string $userId, string $organizationCode): void
     {
         $key = $this->buildRedisKey($fileId, $organizationCode);
 
-        // 添加用户到编辑列表
+        // Add user to editing list
         $this->redis->sadd($key, $userId);
         $this->redis->expire($key, self::TTL_SECONDS);
     }
 
     /**
-     * 离开编辑.
+     * Leave editing.
      */
     public function leaveEditing(int $fileId, string $userId, string $organizationCode): void
     {
         $key = $this->buildRedisKey($fileId, $organizationCode);
 
-        // 从编辑列表中移除用户
+        // Remove user from editing list
         $this->redis->srem($key, $userId);
 
-        // 如果没有用户在编辑，删除整个key
+        // If no users are editing, delete the entire key
         if ($this->redis->scard($key) === 0) {
             $this->redis->del($key);
         }
     }
 
     /**
-     * 获取编辑用户数量.
+     * Get editing users count.
      */
     public function getEditingUsersCount(int $fileId, string $organizationCode): int
     {
         $key = $this->buildRedisKey($fileId, $organizationCode);
 
-        // 返回编辑用户数量
+        // Return editing users count
         return $this->redis->scard($key);
     }
 
     /**
-     * 构建Redis键名.
+     * Build Redis key name.
      */
     public function buildRedisKey(int $fileId, string $organizationCode): string
     {

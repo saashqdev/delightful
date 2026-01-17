@@ -182,7 +182,7 @@ class TopicDomainService
 
     public function updateTopic(DataIsolation $dataIsolation, int $id, string $topicName): TopicEntity
     {
-        // 查找当前的话题是否是自己的
+        // Check if current topic belongs to user
         $topicEntity = $this->topicRepository->getTopicById($id);
         if (empty($topicEntity)) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND, 'topic.topic_not_found');
@@ -283,42 +283,41 @@ class TopicDomainService
     }
 
     /**
-     * 删除话题（逻辑删除）.
+     * Delete topic (logical deletion).
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $id 话题ID(主键)
-     * @return bool 是否删除成功
-     * @throws Exception 如果删除失败或任务状态为运行中
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $id Topic ID (primary key)
+     * @return bool Whether deletion succeeded
+     * @throws Exception If deletion fails or task status is running
      */
     public function deleteTopic(DataIsolation $dataIsolation, int $id): bool
     {
-        // 获取当前用户ID
+        // Get current user ID
         $userId = $dataIsolation->getCurrentUserId();
 
-        // 通过主键ID获取话题
+        // Get topic by primary key ID
         $topicEntity = $this->topicRepository->getTopicById($id);
         if (! $topicEntity) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'topic.not_found');
         }
 
-        // 检查用户权限（检查话题是否属于当前用户）
+        // Check user permission (check if topic belongs to current user)
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_ACCESS_DENIED, 'topic.topic_access_denied');
         }
 
-        // 设置删除时间
+        // Set deletion time
         $topicEntity->setDeletedAt(date('Y-m-d H:i:s'));
-        // 设置更新者用户ID
+        // Set updater user ID
         $topicEntity->setUpdatedUid($userId);
         $topicEntity->setUpdatedAt(date('Y-m-d H:i:s'));
 
-        // 保存更新
+        // Save update
         return $this->topicRepository->updateTopic($topicEntity);
     }
 
     /**
-     * Get project topics with pagination
-     * 获取项目下的话题列表，支持分页和排序.
+     * Get project topics with pagination and sorting.
      */
     public function getProjectTopicsWithPagination(
         int $projectId,
@@ -336,17 +335,17 @@ class TopicDomainService
             true, // needPagination
             $pageSize,
             $page,
-            'id', // 按创建时间排序
-            'desc' // 降序
+            'id', // Sort by creation time
+            'desc' // Descending order
         );
     }
 
     /**
-     * 批量计算工作区状态.
+     * Batch calculate workspace status.
      *
-     * @param array $workspaceIds 工作区ID数组
-     * @param null|string $userId 可选的用户ID，指定时只计算该用户的话题状态
-     * @return array ['workspace_id' => 'status'] 键值对
+     * @param array $workspaceIds Workspace ID array
+     * @param null|string $userId Optional user ID, when specified only calculate topic status for this user
+     * @return array ['workspace_id' => 'status'] key-value pairs
      */
     public function calculateWorkspaceStatusBatch(array $workspaceIds, ?string $userId = null): array
     {
@@ -354,10 +353,10 @@ class TopicDomainService
             return [];
         }
 
-        // 从仓储层获取有运行中话题的工作区ID列表
+        // Get workspace IDs with running topics from repository layer
         $runningWorkspaceIds = $this->topicRepository->getRunningWorkspaceIds($workspaceIds, $userId);
 
-        // 计算每个工作区的状态
+        // Calculate status for each workspace
         $result = [];
         foreach ($workspaceIds as $workspaceId) {
             $result[$workspaceId] = in_array($workspaceId, $runningWorkspaceIds, true)
@@ -369,11 +368,11 @@ class TopicDomainService
     }
 
     /**
-     * 批量计算项目状态.
+     * Batch calculate project status.
      *
-     * @param array $projectIds 项目ID数组
-     * @param null|string $userId 可选的用户ID，指定时只查询该用户的话题
-     * @return array ['project_id' => 'status'] 键值对
+     * @param array $projectIds Project ID array
+     * @param null|string $userId Optional user ID, when specified only query topics for this user
+     * @return array ['project_id' => 'status'] key-value pairs
      */
     public function calculateProjectStatusBatch(array $projectIds, ?string $userId = null): array
     {
@@ -381,10 +380,10 @@ class TopicDomainService
             return [];
         }
 
-        // 从仓储层获取有运行中话题的项目ID列表
+        // Get project IDs with running topics from repository layer
         $runningProjectIds = $this->topicRepository->getRunningProjectIds($projectIds, $userId);
 
-        // 计算每个项目的状态
+        // Calculate status for each project
         $result = [];
         foreach ($projectIds as $projectId) {
             $result[$projectId] = in_array($projectId, $runningProjectIds, true)
@@ -396,26 +395,26 @@ class TopicDomainService
     }
 
     /**
-     * 更新话题名称.
+     * Update topic name.
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $id 话题主键ID
-     * @param string $topicName 话题名称
-     * @return bool 是否更新成功
-     * @throws Exception 如果更新失败
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $id Topic primary key ID
+     * @param string $topicName Topic name
+     * @return bool Whether update succeeded
+     * @throws Exception If update fails
      */
     public function updateTopicName(DataIsolation $dataIsolation, int $id, string $topicName): bool
     {
-        // 获取当前用户ID
+        // Get current user ID
         $userId = $dataIsolation->getCurrentUserId();
 
-        // 通过主键ID获取话题
+        // Get topic by primary key ID
         $topicEntity = $this->topicRepository->getTopicById($id);
         if (! $topicEntity) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'topic.not_found');
         }
 
-        // 检查用户权限（检查话题是否属于当前用户）
+        // Check user permission (check if topic belongs to current user)
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(GenericErrorCode::AccessDenied, 'topic.access_denied');
         }
@@ -428,7 +427,7 @@ class TopicDomainService
             'updated_uid' => $userId,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
-        // 保存更新
+        // Save update
         return $this->topicRepository->updateTopicByCondition($conditions, $data);
     }
 
@@ -487,117 +486,117 @@ class TopicDomainService
         }
     }
 
-    // ======================= 消息回滚相关方法 =======================
+    // ======================= Message Rollback Related Methods =======================
 
     /**
-     * 执行消息回滚逻辑.
+     * Execute message rollback logic.
      */
     public function rollbackMessages(string $targetSeqId): void
     {
-        // 根据seq_id获取delightful_message_id
+        // Get delightful_message_id by seq_id
         $delightfulMessageId = $this->topicRepository->getDelightfulMessageIdBySeqId($targetSeqId);
         if (empty($delightfulMessageId)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.seq_id_not_found');
         }
 
-        // 获取所有相关的seq_id（所有视角）
+        // Get all related seq_ids (all perspectives)
         $baseSeqIds = $this->topicRepository->getAllSeqIdsByDelightfulMessageId($delightfulMessageId);
         if (empty($baseSeqIds)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.delightful_message_id_not_found');
         }
 
-        // 获取从当前消息开始的所有seq_ids（当前消息和后续消息）
+        // Get all seq_ids starting from current message (current message and subsequent messages)
         $allSeqIds = $this->topicRepository->getAllSeqIdsFromCurrent($baseSeqIds);
         if (empty($allSeqIds)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.seq_id_not_found');
         }
 
-        // 在事务中执行删除操作
+        // Execute deletion in transaction
         Db::transaction(function () use ($allSeqIds, $targetSeqId) {
-            // 删除topic_messages数据
+            // Delete topic_messages data
             $this->topicRepository->deleteTopicMessages($allSeqIds);
 
-            // 删除messages和sequences数据
+            // Delete messages and sequences data
             $this->topicRepository->deleteMessagesAndSequencesBySeqIds($allSeqIds);
 
-            // 删除delightful_be_agent_message表的数据
+            // Delete delightful_be_agent_message table data
             $this->topicRepository->deleteBeAgentMessagesFromSeqId((int) $targetSeqId);
         });
     }
 
     /**
-     * 执行消息回滚开始逻辑（标记状态而非删除）.
+     * Execute message rollback start logic (mark status instead of deletion).
      */
     public function rollbackMessagesStart(string $targetSeqId): void
     {
-        // 根据seq_id获取delightful_message_id
+        // Get delightful_message_id by seq_id
         $delightfulMessageId = $this->topicRepository->getDelightfulMessageIdBySeqId($targetSeqId);
         if (empty($delightfulMessageId)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.seq_id_not_found');
         }
 
-        // 获取所有相关的seq_id（所有视角）
+        // Get all related seq_ids (all perspectives)
         $baseSeqIds = $this->topicRepository->getAllSeqIdsByDelightfulMessageId($delightfulMessageId);
         if (empty($baseSeqIds)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.delightful_message_id_not_found');
         }
 
-        // 获取从当前消息开始的所有seq_ids（当前消息和后续消息）
+        // Get all seq_ids starting from current message (current message and subsequent messages)
         $allSeqIdsFromCurrent = $this->topicRepository->getAllSeqIdsFromCurrent($baseSeqIds);
         if (empty($allSeqIdsFromCurrent)) {
             ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'chat.message.rollback.seq_id_not_found');
         }
 
-        // 获取小于当前消息的所有消息
+        // Get all messages before current message
         $allSeqIdsBeforeCurrent = $this->topicRepository->getAllSeqIdsBeforeCurrent($baseSeqIds);
 
-        // 在事务中执行状态更新操作
+        // Execute status update in transaction
         Db::transaction(function () use ($allSeqIdsFromCurrent, $allSeqIdsBeforeCurrent) {
-            // 1. 将小于target_message_id的所有消息设置为已查看状态（正常状态）
+            // 1. Set all messages before target_message_id to read status (normal status)
             if (! empty($allSeqIdsBeforeCurrent)) {
                 $this->topicRepository->batchUpdateSeqStatus($allSeqIdsBeforeCurrent, DelightfulMessageStatus::Read);
             }
 
-            // 2. 标记大于等于target_message_id的消息为撤回状态
+            // 2. Mark messages greater than or equal to target_message_id as revoked status
             $this->topicRepository->batchUpdateSeqStatus($allSeqIdsFromCurrent, DelightfulMessageStatus::Revoked);
         });
     }
 
     /**
-     * 执行消息回滚提交逻辑（物理删除撤回状态的消息）.
+     * Execute message rollback commit logic (physically delete revoked status messages).
      */
     public function rollbackMessagesCommit(int $topicId, string $userId): void
     {
-        // 获取该话题中所有撤回状态的消息seq_ids
+        // Get all revoked status message seq_ids in this topic
         $revokedSeqIds = $this->topicRepository->getRevokedSeqIdsByTopicId($topicId, $userId);
 
         if (empty($revokedSeqIds)) {
-            // 没有撤回状态的消息，直接返回
+            // No revoked status messages, return directly
             return;
         }
 
-        // 为了使用现有的删除逻辑，需要找到一个target_seq_id用于deleteBeAgentMessagesFromSeqId
-        // 取最小的seq_id作为target（确保删除所有相关的be_agent_message）
+        // To use existing deletion logic, need to find a target_seq_id for deleteBeAgentMessagesFromSeqId
+        // Take minimum seq_id as target (ensure all related be_agent_message are deleted)
         $targetSeqId = min($revokedSeqIds);
 
-        // 在事务中执行删除操作（与现有rollbackMessages逻辑一致）
+        // Execute deletion in transaction (consistent with existing rollbackMessages logic)
         Db::transaction(function () use ($revokedSeqIds, $targetSeqId) {
-            // 删除topic_messages数据
+            // Delete topic_messages data
             $this->topicRepository->deleteTopicMessages($revokedSeqIds);
 
-            // 删除messages和sequences数据
+            // Delete messages and sequences data
             $this->topicRepository->deleteMessagesAndSequencesBySeqIds($revokedSeqIds);
 
-            // 删除delightful_be_agent_message表的数据
+            // Delete delightful_be_agent_message table data
             $this->topicRepository->deleteBeAgentMessagesFromSeqId($targetSeqId);
         });
     }
 
     /**
-     * 执行消息撤回撤销逻辑（将撤回状态的消息恢复为正常状态）.
+     * Execute message rollback undo logic (restore revoked status messages to normal status).
      *
-     * @param int $topicId 话题ID
-     * @param string $userId 用户ID（权限验证）
+     * @param int $topicId Topic ID
+     * @param string $userId User ID (permission verification)
      */
     public function rollbackMessagesUndo(int $topicId, string $userId): void
     {
@@ -606,7 +605,7 @@ class TopicDomainService
             'user_id' => $userId,
         ]);
 
-        // 获取该话题中所有撤回状态的消息seq_ids
+        // Get all revoked status message seq_ids in this topic
         $revokedSeqIds = $this->topicRepository->getRevokedSeqIdsByTopicId($topicId, $userId);
 
         if (empty($revokedSeqIds)) {
@@ -614,7 +613,7 @@ class TopicDomainService
                 'topic_id' => $topicId,
                 'user_id' => $userId,
             ]);
-            // 没有撤回状态的消息，直接返回
+            // No revoked status messages, return directly
             return;
         }
 
@@ -624,9 +623,9 @@ class TopicDomainService
             'revoked_seq_ids_count' => count($revokedSeqIds),
         ]);
 
-        // 在事务中执行状态更新操作（将撤回状态恢复为已查看状态）
+        // Execute status update in transaction (restore revoked status to read status)
         Db::transaction(function () use ($revokedSeqIds) {
-            // 将撤回状态的消息恢复为已查看状态
+            // Restore revoked status messages to read status
             $this->topicRepository->batchUpdateSeqStatus($revokedSeqIds, DelightfulMessageStatus::Read);
         });
 
@@ -638,16 +637,16 @@ class TopicDomainService
     }
 
     /**
-     * 根据话题查询对象获取话题列表.
+     * Get topic list by topic query object.
      *
-     * @param TopicQuery $query 话题查询对象
-     * @return array{total: int, list: array<TopicEntity>} 话题列表和总数
+     * @param TopicQuery $query Topic query object
+     * @return array{total: int, list: array<TopicEntity>} Topic list and total count
      */
     public function getTopicsByQuery(TopicQuery $query): array
     {
         $conditions = $query->toConditions();
 
-        // 查询话题
+        // Query topics
         return $this->topicRepository->getTopicsByConditions(
             $conditions,
             true,
@@ -659,22 +658,22 @@ class TopicDomainService
     }
 
     /**
-     * 获取话题状态统计指标.
+     * Get topic status metrics.
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param string $organizationCode 可选的组织代码过滤
-     * @return array 话题状态统计指标数据
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param string $organizationCode Optional organization code filter
+     * @return array Topic status metrics data
      */
     public function getTopicStatusMetrics(DataIsolation $dataIsolation, string $organizationCode = ''): array
     {
-        // 构建查询条件
+        // Build query conditions
         $conditions = [];
-        // 如果提供了组织代码，添加到查询条件
+        // If organization code is provided, add to query conditions
         if (! empty($organizationCode)) {
             $conditions['user_organization_code'] = $organizationCode;
         }
 
-        // 使用仓储层查询统计数据
+        // Use repository layer to query metrics data
         return $this->topicRepository->getTopicStatusMetrics($conditions);
     }
 
@@ -929,7 +928,7 @@ class TopicDomainService
             'message_id' => $messageId,
         ]);
 
-        // 查询需要拷贝的数据
+        // Query data to copy
         $messagesToCopy = $this->taskMessageRepository->findMessagesToCopyByTopicIdAndMessageId(
             $sourceTopicEntity->getId(),
             $messageId
@@ -949,7 +948,7 @@ class TopicDomainService
             'message_count' => count($messagesToCopy),
         ]);
 
-        // 在处理消息之前，需要确保消息里都有任务进行关联，因此需要补充一下任务
+        // Before processing messages, ensure all messages have associated tasks, so need to supplement tasks
         $taskIds = [];
         foreach ($messagesToCopy as $messageToCopy) {
             if (! in_array($messageToCopy->getTaskId(), $taskIds)) {
@@ -959,14 +958,14 @@ class TopicDomainService
         // $taskIdMapping = $this->copyTopicTaskEntity($sourceTopicEntity->getId(), $targetTopicEntity->getId(), $taskIds);
 
         $newMessageEntities = [];
-        $messageIdMapping = []; // 旧消息ID => 新消息ID的映射关系
+        $messageIdMapping = []; // Old message ID => New message ID mapping
 
         foreach ($messagesToCopy as $messageToCopy) {
             $newMessageEntity = new TaskMessageEntity();
 
-            // 复制消息属性，更新为新话题ID
+            // Copy message properties, update to new topic ID
             $newMessageEntity->setSenderType($messageToCopy->getSenderType());
-            $newMessageEntity->setTopicId($targetTopicEntity->getId()); // 设置为新话题ID
+            $newMessageEntity->setTopicId($targetTopicEntity->getId()); // Set to new topic ID
             $newMessageEntity->setSenderUid($messageToCopy->getSenderUid());
             $newMessageEntity->setReceiverUid($messageToCopy->getReceiverUid());
             $newMessageEntity->setMessageId($messageToCopy->getMessageId());
@@ -990,11 +989,11 @@ class TopicDomainService
 
             $newMessageEntities[] = $newMessageEntity;
 
-            // 建立映射关系：旧消息ID => 新消息ID
+            // Establish mapping: old message ID => new message ID
             $messageIdMapping[$messageToCopy->getId()] = (string) $newMessageEntity->getId();
         }
 
-        // 批量插入到新话题中
+        // Batch insert to new topic
         $createdMessageEntities = $this->taskMessageRepository->batchCreateMessages($newMessageEntities);
 
         $this->logger->debug('Successfully copied topic share messages', [
@@ -1009,13 +1008,13 @@ class TopicDomainService
 
     private function initImConversationFromTopic(TopicEntity $sourceTopicEntity, string $topicName = ''): array
     {
-        $this->logger->info('开始从话题初始化IM会话', [
+        $this->logger->info('Starting IM conversation initialization from topic', [
             'source_topic_id' => $sourceTopicEntity->getId(),
             'chat_topic_id' => $sourceTopicEntity->getChatTopicId(),
             'chat_conversation_id' => $sourceTopicEntity->getChatConversationId(),
         ]);
 
-        // 1. 通过 chat_topic_id 查询 delightful_chat_topics 表获取所有相关记录
+        // 1. Query delightful_chat_topics table by chat_topic_id to get all related records
         $existingTopics = $this->delightfulChatTopicRepository->getTopicsByTopicId($sourceTopicEntity->getChatTopicId());
 
         if (count($existingTopics) !== 2) {
@@ -1025,12 +1024,12 @@ class TopicDomainService
             );
         }
 
-        // 2. 生成新的话题ID
+        // 2. Generate new topic ID
         $newTopicId = (string) IdGenerator::getSnowId();
         $aiConversationId = '';
         $userConversationId = '';
 
-        // 3. 在循环中确定角色并直接创建记录
+        // 3. Determine role in loop and create records directly
         foreach ($existingTopics as $topic) {
             $newTopicEntity = new DelightfulTopicEntity();
             $newTopicEntity->setTopicId($newTopicId);
@@ -1039,10 +1038,10 @@ class TopicDomainService
             $newTopicEntity->setDescription($topic->getDescription());
             $newTopicEntity->setOrganizationCode($topic->getOrganizationCode());
 
-            // 保存新的话题记录
+            // Save new topic record
             $this->delightfulChatTopicRepository->createTopic($newTopicEntity);
 
-            // 确定AI和用户的会话ID
+            // Determine AI and user conversation IDs
             if ($topic->getConversationId() === $sourceTopicEntity->getChatConversationId()) {
                 $userConversationId = $topic->getConversationId();
             } else {
@@ -1050,7 +1049,7 @@ class TopicDomainService
             }
         }
 
-        // 验证会话ID都已找到
+        // Verify conversation IDs are found
         if (empty($aiConversationId) || empty($userConversationId)) {
             ExceptionBuilder::throw(
                 BeAgentErrorCode::TOPIC_NOT_FOUND,
@@ -1065,48 +1064,48 @@ class TopicDomainService
             'new_topic_id' => $newTopicId,
         ];
 
-        $this->logger->info('IM会话初始化完成', $result);
+        $this->logger->info('IM conversation initialization completed', $result);
 
         return $result;
     }
 
     private function copyImMessages(array $imConversationResult, array $messageIdMapping, int $userSeqId, int $aiSeqId, string $newTopicId): array
     {
-        $this->logger->info('开始复制IM消息', [
+        $this->logger->info('Starting IM message copy', [
             'user_seq_id' => $userSeqId,
             'ai_seq_id' => $aiSeqId,
             'im_conversation_result' => $imConversationResult,
             'new_topic_id' => $newTopicId,
         ]);
 
-        // 处理 delightful_chat_topic_messages 表
-        // 1. 查询用户的topic messages
+        // Process delightful_chat_topic_messages table
+        // 1. Query user's topic messages
         $userTopicMessages = $this->delightfulChatTopicRepository->getTopicMessagesBySeqId(
             $imConversationResult['user_conversation_id'],
             $imConversationResult['old_topic_id'],
             $userSeqId
         );
 
-        // 2. 查询AI的topic messages
+        // 2. Query AI's topic messages
         $aiTopicMessages = $this->delightfulChatTopicRepository->getTopicMessagesBySeqId(
             $imConversationResult['ai_conversation_id'],
             $imConversationResult['old_topic_id'],
             $aiSeqId
         );
 
-        $this->logger->info('查询到IM消息', [
+        $this->logger->info('Queried IM messages', [
             'user_messages_count' => count($userTopicMessages),
             'ai_messages_count' => count($aiTopicMessages),
         ]);
 
-        // 3. 准备批量插入数据
+        // 3. Prepare batch insert data
         $batchInsertData = [];
         $userSeqIds = [];
         $aiSeqIds = [];
         $seqIdsMap = [];
         $currentTime = date('Y-m-d H:i:s');
 
-        // 处理用户消息
+        // Process user messages
         foreach ($userTopicMessages as $userMessage) {
             $newSeqId = (string) IdGenerator::getSnowId();
             $seqIdsMap[$userMessage->getSeqId()] = $newSeqId;
@@ -1121,7 +1120,7 @@ class TopicDomainService
             ];
         }
 
-        // 处理AI消息
+        // Process AI messages
         foreach ($aiTopicMessages as $aiMessage) {
             $newSeqId = (string) IdGenerator::getSnowId();
             $seqIdsMap[$aiMessage->getSeqId()] = $newSeqId;
@@ -1136,34 +1135,34 @@ class TopicDomainService
             ];
         }
 
-        // 4. 批量插入消息
+        // 4. Batch insert messages
         $insertResult = false;
         if (! empty($batchInsertData)) {
             $insertResult = $this->delightfulChatTopicRepository->createTopicMessages($batchInsertData);
         }
 
-        // 5. 处理 delightful_chat_sequences 表
+        // 5. Process delightful_chat_sequences table
         $delightfulMessageIdMapping = [];
         $batchSeqInsertData = [];
 
-        // 5.1 查询用户的 sequences
+        // 5.1 Query user's sequences
         $userSequences = $this->delightfulSeqRepository->getSequencesByConversationIdAndSeqIds(
             $imConversationResult['user_conversation_id'],
             $userSeqIds
         );
 
-        // 5.2 查询AI的 sequences
+        // 5.2 Query AI's sequences
         $aiSequences = $this->delightfulSeqRepository->getSequencesByConversationIdAndSeqIds(
             $imConversationResult['ai_conversation_id'],
             $aiSeqIds
         );
 
-        $this->logger->info('查询到Seq消息', [
+        $this->logger->info('Queried Seq messages', [
             'user_sequences_count' => count($userSequences),
             'ai_sequences_count' => count($aiSequences),
         ]);
 
-        // 5.3 处理用户 sequences
+        // 5.3 Process user sequences
         foreach ($userSequences as $userSeq) {
             $originalSeqId = $userSeq->getId();
             $newSeqId = $seqIdsMap[$originalSeqId] ?? null;
@@ -1172,14 +1171,14 @@ class TopicDomainService
                 continue;
             }
 
-            // 生成或获取 delightful_message_id 映射
+            // Generate or get delightful_message_id mapping
             $originalDelightfulMessageId = $userSeq->getDelightfulMessageId();
             if (! isset($delightfulMessageIdMapping[$originalDelightfulMessageId])) {
                 $delightfulMessageIdMapping[$originalDelightfulMessageId] = IdGenerator::getUniqueId32();
             }
             $newDelightfulMessageId = $delightfulMessageIdMapping[$originalDelightfulMessageId];
 
-            // 处理 extra 中的 topic_id 替换
+            // Process topic_id replacement in extra
             $extra = $userSeq->getExtra();
             if ($extra && $extra->getTopicId()) {
                 $extraData = $extra->toArray();
@@ -1189,14 +1188,14 @@ class TopicDomainService
                 $newExtra = $extra;
             }
 
-            // 获取 sender_message_id
+            // Get sender_message_id
             $senderMessageId = $seqIdsMap[$userSeq->getSenderMessageId()] ?? '';
 
-            // 处理 app_message_id - 使用 messageIdMapping 映射
+            // Process app_message_id - use messageIdMapping
             $originalAppMessageId = $userSeq->getAppMessageId();
             $appMessageId = ! empty($messageIdMapping[$originalAppMessageId]) ? $messageIdMapping[$originalAppMessageId] : (string) IdGenerator::getSnowId();
 
-            // 创建新的 sequence 实体
+            // Create new sequence entity
             $newUserSeq = new DelightfulSeqEntity();
             $newUserSeq->setId($newSeqId);
             $newUserSeq->setOrganizationCode($userSeq->getOrganizationCode());
@@ -1220,7 +1219,7 @@ class TopicDomainService
             $batchSeqInsertData[] = $newUserSeq;
         }
 
-        // 5.4 处理AI sequences
+        // 5.4 Process AI sequences
         foreach ($aiSequences as $aiSeq) {
             $originalSeqId = $aiSeq->getId();
             $newSeqId = $seqIdsMap[$originalSeqId] ?? null;
@@ -1229,14 +1228,14 @@ class TopicDomainService
                 continue;
             }
 
-            // 生成或获取 delightful_message_id 映射
+            // Generate or get delightful_message_id mapping
             $originalDelightfulMessageId = $aiSeq->getDelightfulMessageId();
             if (! isset($delightfulMessageIdMapping[$originalDelightfulMessageId])) {
                 $delightfulMessageIdMapping[$originalDelightfulMessageId] = IdGenerator::getUniqueId32();
             }
             $newDelightfulMessageId = $delightfulMessageIdMapping[$originalDelightfulMessageId];
 
-            // 处理 extra 中的 topic_id 替换
+            // Process topic_id replacement in extra
             $extra = $aiSeq->getExtra();
             if ($extra && $extra->getTopicId()) {
                 $extraData = $extra->toArray();
@@ -1246,14 +1245,14 @@ class TopicDomainService
                 $newExtra = $extra;
             }
 
-            // 获取 sender_message_id
+            // Get sender_message_id
             $senderMessageId = $seqIdsMap[$aiSeq->getSenderMessageId()] ?? '';
 
-            // 处理 app_message_id - 使用 messageIdMapping 映射
+            // Process app_message_id - use messageIdMapping
             $originalAppMessageId = $aiSeq->getAppMessageId();
             $appMessageId = $messageIdMapping[$originalAppMessageId] ?? '';
 
-            // 创建新的 sequence 实体
+            // Create new sequence entity
             $newAiSeq = new DelightfulSeqEntity();
             $newAiSeq->setId($newSeqId);
             $newAiSeq->setOrganizationCode($aiSeq->getOrganizationCode());
@@ -1277,26 +1276,26 @@ class TopicDomainService
             $batchSeqInsertData[] = $newAiSeq;
         }
 
-        // 5.5 批量插入 sequences
+        // 5.5 Batch insert sequences
         $seqInsertResult = [];
         if (! empty($batchSeqInsertData)) {
             $seqInsertResult = $this->delightfulSeqRepository->batchCreateSeq($batchSeqInsertData);
         }
 
-        // 6. 处理 delightful_chat_messages 表
-        // 6.1 将 $delightfulMessageIdMapping 的 key 转成数组 $originalDelightfulMessageIds
+        // 6. Process delightful_chat_messages table
+        // 6.1 Convert $delightfulMessageIdMapping keys to array $originalDelightfulMessageIds
         $originalDelightfulMessageIds = array_keys($delightfulMessageIdMapping);
 
-        // 6.2 查询原先的 delightful_chat_messages 记录
+        // 6.2 Query original delightful_chat_messages records
         $originalMessages = $this->delightfulMessageRepository->getMessagesByDelightfulMessageIds($originalDelightfulMessageIds);
 
-        $this->logger->info('查询到原始Messages', [
+        $this->logger->info('Queried original Messages', [
             'original_message_ids_count' => count($originalDelightfulMessageIds),
             'found_messages_count' => count($originalMessages),
         ]);
 
-        // 6.3 生成新的 delightful_chat_messages 记录
-        // 直接使用 messageIdMapping，结构: [old_app_message_id] = new_message_id
+        // 6.3 Generate new delightful_chat_messages records
+        // Use messageIdMapping directly, structure: [old_app_message_id] = new_message_id
         $batchMessageInsertData = [];
         foreach ($originalMessages as $originalMessage) {
             $originalDelightfulMessageId = $originalMessage->getDelightfulMessageId();
@@ -1335,7 +1334,7 @@ class TopicDomainService
             ];
         }
 
-        // 6.5 批量插入 delightful_chat_messages
+        // 6.5 Batch insert delightful_chat_messages
         $messageInsertResult = false;
         if (! empty($batchMessageInsertData)) {
             $messageInsertResult = $this->delightfulMessageRepository->batchCreateMessages($batchMessageInsertData);
@@ -1357,17 +1356,17 @@ class TopicDomainService
             'app_message_id_mappings' => count($messageIdMapping),
         ];
 
-        $this->logger->info('IM消息复制完成', $result);
+        $this->logger->info('IM message copy completed', $result);
 
         return $result;
     }
 
     private function getSeqIdByMessageId(string $messageId): array
     {
-        // 先通过 app_message_id 和 message_type 查询 delightful_chat_messages， 获取 delightful_message_id
+        // First query delightful_chat_messages by app_message_id and message_type to get delightful_message_id
         $delightfulMessageId = $this->delightfulMessageRepository->getDelightfulMessageIdByAppMessageId($messageId);
 
-        // 再通过 delightful_message_id 查询 delightful_chat_sequences 获取 seq_id
+        // Then query delightful_chat_sequences by delightful_message_id to get seq_id
         $seqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($delightfulMessageId);
         $result = [];
         foreach ($seqList as $seq) {
@@ -1396,7 +1395,7 @@ class TopicDomainService
                 bucketType: StorageBucketType::SandBox
             );
         } catch (Throwable $e) {
-            $this->logger->error('复制IM消息文件失败', [
+            $this->logger->error('Failed to copy IM message file', [
                 'error_message' => $e->getMessage(),
                 'source_path' => $sourcePath,
                 'target_path' => $targetPath,

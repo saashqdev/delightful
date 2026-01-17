@@ -12,70 +12,70 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\WorkspaceEntity;
 interface WorkspaceRepositoryInterface
 {
     /**
-     * 获取用户工作区列表.
+     * Get user workspace list.
      */
     public function getUserWorkspaces(string $userId, int $page, int $pageSize): array;
 
     /**
-     * 创建工作区.
+     * Create workspace.
      */
     public function createWorkspace(WorkspaceEntity $workspaceEntity): WorkspaceEntity;
 
     /**
-     * 更新工作区.
+     * Update workspace.
      */
     public function updateWorkspace(WorkspaceEntity $workspaceEntity): bool;
 
     /**
-     * 获取工作区详情.
+     * Get workspace details.
      */
     public function getWorkspaceById(int $workspaceId): ?WorkspaceEntity;
 
     /**
-     * 根据ID查找工作区.
+     * Find workspace by ID.
      */
     public function findById(int $workspaceId): ?WorkspaceEntity;
 
     /**
-     * 通过会话ID获取工作区.
+     * Get workspace by conversation ID.
      */
     public function getWorkspaceByConversationId(string $conversationId): ?WorkspaceEntity;
 
     /**
-     * 更新工作区归档状态.
+     * Update workspace archive status.
      */
     public function updateWorkspaceArchivedStatus(int $workspaceId, int $isArchived): bool;
 
     /**
-     * 删除工作区.
+     * Delete workspace.
      */
     public function deleteWorkspace(int $workspaceId): bool;
 
     /**
-     * 删除工作区关联的话题.
+     * Delete topics associated with workspace.
      */
     public function deleteTopicsByWorkspaceId(int $workspaceId): bool;
 
     /**
-     * 更新工作区当前话题.
+     * Update workspace current topic.
      */
     public function updateWorkspaceCurrentTopic(int $workspaceId, string $topicId): bool;
 
     /**
-     * 更新工作区状态.
+     * Update workspace status.
      */
     public function updateWorkspaceStatus(int $workspaceId, int $status): bool;
 
     /**
-     * 根据条件获取工作区列表
-     * 支持分页和排序.
+     * Get workspace list by conditions
+     * Supports pagination and sorting.
      *
-     * @param array $conditions 查询条件
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @param string $orderBy 排序字段
-     * @param string $orderDirection 排序方向
-     * @return array [total, list] 总数和工作区列表
+     * @param array $conditions Query conditions
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @param string $orderBy Sort field
+     * @param string $orderDirection Sort direction
+     * @return array [total, list] Total count and workspace list
      */
     public function getWorkspacesByConditions(
         array $conditions = [],
@@ -86,25 +86,25 @@ interface WorkspaceRepositoryInterface
     ): array;
 
     /**
-     * 保存工作区（创建或更新）.
+     * Save workspace (create or update).
      *
-     * @param WorkspaceEntity $workspaceEntity 工作区实体
-     * @return WorkspaceEntity 保存后的工作区实体
+     * @param WorkspaceEntity $workspaceEntity Workspace entity
+     * @return WorkspaceEntity Saved workspace entity
      */
     public function save(WorkspaceEntity $workspaceEntity): WorkspaceEntity;
 
     /**
-     * 获取所有工作区的唯一组织代码列表.
+     * Get unique organization code list from all workspaces.
      *
-     * @return array 唯一的组织代码列表
+     * @return array Unique organization code list
      */
     public function getUniqueOrganizationCodes(): array;
 
     /**
-     * 批量获取工作区名称映射.
+     * Batch get workspace name mapping.
      *
-     * @param array $workspaceIds 工作区ID数组
-     * @return array ['workspace_id' => 'workspace_name'] 键值对
+     * @param array $workspaceIds Workspace ID array
+     * @return array ['workspace_id' => 'workspace_name'] key-value pairs
      */
     public function getWorkspaceNamesBatch(array $workspaceIds): array;
 }

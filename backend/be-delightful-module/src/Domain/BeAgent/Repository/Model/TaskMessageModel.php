@@ -14,7 +14,7 @@ class TaskMessageModel extends AbstractModel
 {
     use SoftDeletes;
 
-    // 处理状态常量
+    // Processing status constants
     public const PROCESSING_STATUS_PENDING = 'pending';
 
     public const PROCESSING_STATUS_PROCESSING = 'processing';

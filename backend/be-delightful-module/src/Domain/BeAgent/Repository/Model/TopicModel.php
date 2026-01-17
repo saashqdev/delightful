@@ -11,24 +11,24 @@ use App\Infrastructure\Core\AbstractModel;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
- * 话题模型.
+ * Topic model.
  */
 class TopicModel extends AbstractModel
 {
     use SoftDeletes;
 
     /**
-     * 表名.
+     * Table name.
      */
     protected ?string $table = 'delightful_be_agent_topics';
 
     /**
-     * 主键.
+     * Primary key.
      */
     protected string $primaryKey = 'id';
 
     /**
-     * 可填充字段.
+     * Fillable fields.
      */
     protected array $fillable = [
         'id',
@@ -59,7 +59,7 @@ class TopicModel extends AbstractModel
     ];
 
     /**
-     * 日期字段.
+     * Date fields.
      */
     protected array $dates = [
         'created_at',

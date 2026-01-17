@@ -13,9 +13,9 @@ use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectMemberSettin
 use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectMemberSettingModel;
 
 /**
- * 项目成员设置仓储实现.
+ * Project member setting repository implementation.
  *
- * 负责项目成员设置的数据持久化操作
+ * Responsible for data persistence operations of project member settings
  */
 class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryInterface
 {
@@ -25,7 +25,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 根据用户ID和项目ID查找设置.
+     * Find setting by user ID and project ID.
      */
     public function findByUserAndProject(string $userId, int $projectId): ?ProjectMemberSettingEntity
     {
@@ -42,7 +42,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 创建项目成员设置.
+     * Create project member setting.
      */
     public function create(string $userId, int $projectId, string $organizationCode): ProjectMemberSettingEntity
     {
@@ -65,20 +65,20 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 创建或更新项目成员设置.
+     * Create or update project member setting.
      */
     public function save(ProjectMemberSettingEntity $entity): ProjectMemberSettingEntity
     {
         $attributes = $entity->toInsertArray();
         $now = date('Y-m-d H:i:s');
 
-        // 如果实体没有ID，说明是新建
+        // If entity has no ID, it's a new record
         if ($entity->getId() === 0) {
             $attributes['id'] = IdGenerator::getSnowId();
             $attributes['created_at'] = $now;
             $attributes['updated_at'] = $now;
 
-            // 使用 ON DUPLICATE KEY UPDATE 处理并发情况
+            // Use ON DUPLICATE KEY UPDATE to handle concurrency
             $this->model::query()->insertOrUpdate($attributes, [
                 'is_pinned' => $attributes['is_pinned'],
                 'pinned_at' => $attributes['pinned_at'] ?? null,
@@ -88,7 +88,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
 
             $entity->setId($attributes['id']);
         } else {
-            // 更新现有记录
+            // Update existing record
             $this->model::query()
                 ->where('id', $entity->getId())
                 ->update([
@@ -103,7 +103,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 更新置顶状态（假设记录已存在）.
+     * Update pin status (assumes record already exists).
      */
     public function updatePinStatus(string $userId, int $projectId, bool $isPinned): bool
     {
@@ -115,7 +115,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
             'updated_at' => $now,
         ];
 
-        // 更新现有记录
+        // Update existing record
         $updated = $this->model::query()
             ->where('user_id', $userId)
             ->where('project_id', $projectId)
@@ -125,7 +125,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 批量获取用户的置顶项目ID列表.
+     * Batch get user's pinned project ID list.
      */
     public function getPinnedProjectIds(string $userId, string $organizationCode): array
     {
@@ -141,7 +141,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 批量获取用户在多个项目的设置.
+     * Batch get user's settings for multiple projects.
      */
     public function findByUserAndProjects(string $userId, array $projectIds): array
     {
@@ -165,7 +165,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 更新最后活跃时间.
+     * Update last active time.
      */
     public function updateLastActiveTime(string $userId, int $projectId): bool
     {
@@ -181,7 +181,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 删除项目相关的所有设置.
+     * Delete all settings related to project.
      */
     public function deleteByProjectId(int $projectId): int
     {
@@ -191,7 +191,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 删除用户相关的所有设置.
+     * Delete all settings related to user.
      */
     public function deleteByUser(string $userId, string $organizationCode): int
     {
@@ -202,20 +202,20 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 设置项目快捷方式（绑定到工作区）.
+     * Set project shortcut (bind to workspace).
      */
     public function setProjectShortcut(string $userId, int $projectId, int $workspaceId, string $organizationCode): bool
     {
         $now = date('Y-m-d H:i:s');
 
-        // 检查记录是否存在
+        // Check if record exists
         $existing = $this->model::query()
             ->where('user_id', $userId)
             ->where('project_id', $projectId)
             ->first();
 
         if ($existing) {
-            // 更新现有记录
+            // Update existing record
             return (bool) $this->model::query()
                 ->where('user_id', $userId)
                 ->where('project_id', $projectId)
@@ -226,7 +226,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
                     'updated_at' => $now,
                 ]);
         }
-        // 创建新记录
+        // Create new record
         $attributes = [
             'id' => IdGenerator::getSnowId(),
             'user_id' => $userId,
@@ -246,7 +246,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 取消项目快捷方式（取消工作区绑定）.
+     * Cancel project shortcut (unbind from workspace).
      */
     public function cancelProjectShortcut(string $userId, int $projectId): bool
     {
@@ -264,7 +264,7 @@ class ProjectMemberSettingRepository implements ProjectMemberSettingRepositoryIn
     }
 
     /**
-     * 检查项目是否已设置快捷方式.
+     * Check if project shortcut is set.
      */
     public function hasProjectShortcut(string $userId, int $projectId, int $workspaceId): bool
     {

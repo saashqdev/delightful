@@ -283,7 +283,6 @@ class MessageQueueDomainService
 
     /**
      * Acquire topic-level mutex lock.
-     * 获取话题级互斥锁.
      */
     public function acquireTopicLock(int $topicId, int $lockTimeout = 300): ?string
     {
@@ -301,7 +300,6 @@ class MessageQueueDomainService
 
     /**
      * Release topic-level mutex lock.
-     * 释放话题级互斥锁.
      */
     public function releaseTopicLock(int $topicId, string $lockOwner): bool
     {
@@ -311,7 +309,6 @@ class MessageQueueDomainService
 
     /**
      * Get topic IDs that have pending messages for compensation.
-     * 获取有待处理消息的话题ID列表，用于补偿处理.
      */
     public function getCompensationTopics(int $limit = 50, array $organizationCodes = []): array
     {
@@ -320,7 +317,6 @@ class MessageQueueDomainService
 
     /**
      * Get earliest pending message for specific topic.
-     * 获取指定话题的最早待处理消息.
      *
      * @param int $topicId Topic ID
      * @param null|string $maxExecuteTime Max execute time filter (optional, if null then no time filter applied)
@@ -332,7 +328,6 @@ class MessageQueueDomainService
 
     /**
      * Delay execution time for all pending messages in a topic.
-     * 延迟话题下所有待处理消息的执行时间.
      */
     public function delayTopicMessages(int $topicId, int $delayMinutes): bool
     {
@@ -341,7 +336,6 @@ class MessageQueueDomainService
 
     /**
      * Update message status by message ID.
-     * 更新消息状态（补偿机制专用，简化版本）.
      */
     public function updateStatus(int $messageId, MessageQueueStatus $status, ?string $errorMessage = null): bool
     {
@@ -387,7 +381,6 @@ class MessageQueueDomainService
 
     /**
      * Generate unified topic lock key - consistent with compensation service.
-     * 生成统一的话题锁Key，与补偿服务保持一致.
      */
     private function getTopicLockKey(int $topicId): string
     {

@@ -39,7 +39,7 @@ class TopicRepository implements TopicRepositoryInterface
 
     public function getTopicById(int $id): ?TopicEntity
     {
-        // 先按 id 查询
+        // Query by id first
         $model = $this->model::query()->whereNull('deleted_at')
             ->where('id', $id)
             ->first();
@@ -49,14 +49,14 @@ class TopicRepository implements TopicRepositoryInterface
             return new TopicEntity($data);
         }
 
-        // 如果按 id 没找到，再按 chat_topic_id 查询
+        // If not found by id, query by chat_topic_id
         $model = $this->model::query()->whereNull('deleted_at')
             ->where('chat_topic_id', $id)
             ->first();
 
         if ($model) {
-            // 按 chat_topic_id 查到数据时，记录错误日志和 trace
-            $this->logger->error('TopicRepository getTopicById 按 chat_topic_id 查到数据，可能存在数据不一致问题', [
+            // When data is found by chat_topic_id, log error and trace
+            $this->logger->error('TopicRepository getTopicById found data by chat_topic_id, possible data inconsistency', [
                 'search_id' => $id,
                 'found_topic_id' => $model->id,
                 'found_chat_topic_id' => $model->chat_topic_id,
@@ -110,16 +110,16 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据条件获取话题列表.
-     * 支持过滤、分页和排序.
+     * Get topic list by conditions.
+     * Supports filtering, pagination, and sorting.
      *
-     * @param array $conditions 查询条件，如 ['workspace_id' => 1, 'user_id' => 'xxx']
-     * @param bool $needPagination 是否需要分页
-     * @param int $pageSize 分页大小
-     * @param int $page 页码
-     * @param string $orderBy 排序字段
-     * @param string $orderDirection 排序方向，asc 或 desc
-     * @return array{list: TopicEntity[], total: int} 话题列表和总数
+     * @param array $conditions Query conditions, e.g., ['workspace_id' => 1, 'user_id' => 'xxx']
+     * @param bool $needPagination Whether pagination is needed
+     * @param int $pageSize Page size
+     * @param int $page Page number
+     * @param string $orderBy Sort field
+     * @param string $orderDirection Sort direction, asc or desc
+     * @return array{list: TopicEntity[], total: int} Topic list and total count
      */
     public function getTopicsByConditions(
         array $conditions = [],
@@ -129,40 +129,40 @@ class TopicRepository implements TopicRepositoryInterface
         string $orderBy = 'id',
         string $orderDirection = 'desc'
     ): array {
-        // 构建基础查询
+        // Build base query
         $query = $this->model::query();
 
-        // 默认过滤已删除的数据
+        // Filter deleted data by default
         $query->whereNull('deleted_at');
 
-        // 应用条件过滤
+        // Apply condition filters
         foreach ($conditions as $field => $value) {
             if (is_array($value)) {
                 $query->whereIn($field, $value);
             } elseif ($field === 'topic_name') {
-                // topic_name 字段使用 like 操作进行模糊匹配
+                // Use like operation for fuzzy matching on topic_name field
                 $query->where($field, 'like', '%' . $value . '%');
             } else {
                 $query->where($field, $value);
             }
         }
 
-        // 获取总数
+        // Get total count
         $total = $query->count();
 
-        // 应用排序
+        // Apply sorting
         $query->orderBy($orderBy, $orderDirection);
 
-        // 应用分页
+        // Apply pagination
         if ($needPagination) {
             $offset = ($page - 1) * $pageSize;
             $query->skip($offset)->take($pageSize);
         }
 
-        // 获取数据
+        // Get data
         $topics = Db::select($query->toSql(), $query->getBindings());
 
-        // 转换为实体对象
+        // Convert to entity objects
         $list = [];
         foreach ($topics as $topic) {
             $list[] = new TopicEntity($topic);
@@ -200,7 +200,7 @@ class TopicRepository implements TopicRepositoryInterface
             ->update($entityArray) > 0;
     }
 
-    // 使用updated_at 作为乐观锁
+    // Use updated_at as optimistic lock
     public function updateTopicWithUpdatedAt(TopicEntity $topicEntity, string $updatedAt): bool
     {
         $topicEntity->setUpdatedAt(date('Y-m-d H:i:s'));
@@ -228,10 +228,10 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 通过话题ID集合获取工作区信息.
+     * Get workspace information by topic ID collection.
      *
-     * @param array $topicIds 话题ID集合
-     * @return array 以话题ID为键，工作区信息为值的关联数组，格式：['话题ID' => ['workspace_id' => '工作区ID', 'workspace_name' => '工作区名称']]
+     * @param array $topicIds Topic ID collection
+     * @return array Associative array with topic ID as key and workspace info as value, format: ['topic_id' => ['workspace_id' => 'workspace_id', 'workspace_name' => 'workspace_name']]
      */
     public function getWorkspaceInfoByTopicIds(array $topicIds): array
     {
@@ -239,10 +239,10 @@ class TopicRepository implements TopicRepositoryInterface
             return [];
         }
 
-        // 转换所有ID为整数
+        // Convert all IDs to integers
         $topicIds = array_map('intval', $topicIds);
 
-        // 使用原生SQL联表查询，提高性能
+        // Use raw SQL join query to improve performance
         $sql = 'SELECT t.id as topic_id, w.id as workspace_id, w.name as workspace_name
                 FROM ' . $this->model->getTable() . ' t
                 JOIN ' . (new WorkspaceModel())->getTable() . ' w ON t.workspace_id = w.id
@@ -252,7 +252,7 @@ class TopicRepository implements TopicRepositoryInterface
 
         $results = Db::select($sql);
 
-        // 整理结果为以话题ID为键的关联数组
+        // Organize results as associative array with topic ID as key
         $workspaceInfo = [];
         foreach ($results as $row) {
             $workspaceInfo[$row['topic_id']] = [
@@ -265,17 +265,17 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 获取话题状态统计数据.
+     * Get topic status statistics.
      *
-     * @param array $conditions 统计条件，如 ['user_id' => '123', 'organization_code' => 'abc']
-     * @return array 包含各状态数量的数组
+     * @param array $conditions Statistics conditions, e.g., ['user_id' => '123', 'organization_code' => 'abc']
+     * @return array Array containing counts for each status
      */
     public function getTopicStatusMetrics(array $conditions = []): array
     {
-        // 使用原生SQL查询以提高性能，按状态分组获取计数
+        // Use raw SQL query to improve performance, get counts grouped by status
         $baseQuery = $this->model::query();
 
-        // 处理过滤条件
+        // Process filter conditions
         foreach ($conditions as $field => $value) {
             if (is_array($value)) {
                 $baseQuery->whereIn($field, $value);
@@ -284,16 +284,16 @@ class TopicRepository implements TopicRepositoryInterface
             }
         }
 
-        // 默认过滤已删除的数据
+        // Filter deleted data by default
         $baseQuery->whereNull('deleted_at');
 
-        // 统计唯一用户数
+        // Count unique users
         $userCount = $baseQuery->distinct()->count('user_id');
 
-        // 统计话题总数
+        // Count total topics
         $topicCount = $baseQuery->count();
 
-        // 统计各状态的话题数量
+        // Count topics by status
         $statusCounts = $baseQuery
             ->selectRaw('current_task_status, COUNT(*) as count')
             ->groupBy('current_task_status')
@@ -304,7 +304,7 @@ class TopicRepository implements TopicRepositoryInterface
             })
             ->toArray();
 
-        // 准备返回结果
+        // Prepare return result
         return [
             'status_metrics' => [
                 'error_count' => $statusCounts['error'] ?? 0,
@@ -344,11 +344,11 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 获取最近更新时间超过指定时间的话题列表.
+     * Get topic list where last update time exceeds specified time.
      *
-     * @param string $timeThreshold 时间阈值，如果话题的更新时间早于此时间，则会被包含在结果中
-     * @param int $limit 返回结果的最大数量
-     * @return array<TopicEntity> 话题实体列表
+     * @param string $timeThreshold Time threshold, topics updated earlier than this will be included in result
+     * @param int $limit Maximum number of results to return
+     * @return array<TopicEntity> Topic entity list
      */
     public function getTopicsExceedingUpdateTime(string $timeThreshold, int $limit = 100): array
     {
@@ -380,7 +380,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据项目ID获取话题列表.
+     * Get topic list by project ID.
      */
     public function getTopicsByProjectId(int $projectId, string $userId): array
     {
@@ -401,7 +401,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 统计项目下的话题数量.
+     * Count topics by project ID.
      */
     public function countTopicsByProjectId(int $projectId): int
     {
@@ -412,11 +412,11 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 批量获取有运行中话题的工作区ID列表.
+     * Batch get workspace IDs with running topics.
      *
-     * @param array $workspaceIds 工作区ID数组
-     * @param null|string $userId 可选的用户ID，指定时只查询该用户的话题
-     * @return array 有运行中话题的工作区ID数组
+     * @param array $workspaceIds Workspace ID array
+     * @param null|string $userId Optional user ID, when specified only query topics for this user
+     * @return array Workspace ID array with running topics
      */
     public function getRunningWorkspaceIds(array $workspaceIds, ?string $userId = null): array
     {
@@ -440,11 +440,11 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 批量获取有运行中话题的项目ID列表.
+     * Batch get project IDs with running topics.
      *
-     * @param array $projectIds 项目ID数组
-     * @param null|string $userId 可选的用户ID，指定时只查询该用户的话题
-     * @return array 有运行中话题的项目ID数组
+     * @param array $projectIds Project ID array
+     * @param null|string $userId Optional user ID, when specified only query topics for this user
+     * @return array Project ID array with running topics
      */
     public function getRunningProjectIds(array $projectIds, ?string $userId = null): array
     {
@@ -467,10 +467,10 @@ class TopicRepository implements TopicRepositoryInterface
             ->toArray();
     }
 
-    // ======================= 消息回滚相关方法实现 =======================
+    // ======================= Message rollback related methods =======================
 
     /**
-     * 根据序列ID获取delightful_message_id.
+     * Get delightful_message_id by sequence ID.
      */
     public function getDelightfulMessageIdBySeqId(string $seqId): ?string
     {
@@ -482,11 +482,11 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据delightful_message_id获取所有相关的seq_id（所有视角）.
+     * Get all related seq_ids by delightful_message_id (all perspectives).
      */
     public function getAllSeqIdsByDelightfulMessageId(string $delightfulMessageId): array
     {
-        // 返回所有相关的seq_id
+        // Return all related seq_ids
         return $this->delightfulChatSequenceModel::query()
             ->where('delightful_message_id', $delightfulMessageId)
             ->pluck('id')
@@ -494,7 +494,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据基础seq_ids获取当前话题当前消息以及这条消息后面的所有消息.
+     * Get all messages from current message onwards in current topic by base seq_ids.
      */
     public function getAllSeqIdsFromCurrent(array $baseSeqIds): array
     {
@@ -502,7 +502,7 @@ class TopicRepository implements TopicRepositoryInterface
             return [];
         }
 
-        // 批量查询所有baseSeqIds对应的conversation_id和topic_id
+        // Batch query conversation_id and topic_id for all baseSeqIds
         $topicInfos = $this->delightfulChatTopicMessageModel::query()
             ->select(['seq_id', 'conversation_id', 'topic_id'])
             ->whereIn('seq_id', $baseSeqIds)
@@ -515,9 +515,9 @@ class TopicRepository implements TopicRepositoryInterface
 
         $allSeqIds = [];
 
-        // 遍历查询到的topicInfo，获取每个话题下大于等于该seq_id的所有消息
+        // Iterate through queried topicInfo, get all messages >= seq_id for each topic
         foreach ($topicInfos as $topicInfo) {
-            // 查询该话题下大于等于该seq_id的所有消息（包含当前消息和后续消息）
+            // Query all messages >= this seq_id in the topic (including current message and subsequent messages)
             $seqIds = $this->delightfulChatTopicMessageModel::query()
                 ->where('conversation_id', $topicInfo->conversation_id)
                 ->where('topic_id', $topicInfo->topic_id)
@@ -532,7 +532,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 删除topic_messages数据.
+     * Delete topic_messages data.
      */
     public function deleteTopicMessages(array $seqIds): int
     {
@@ -546,7 +546,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据seq_ids删除messages和sequences数据.
+     * Delete messages and sequences data by seq_ids.
      */
     public function deleteMessagesAndSequencesBySeqIds(array $seqIds): bool
     {
@@ -554,21 +554,21 @@ class TopicRepository implements TopicRepositoryInterface
             return true;
         }
 
-        // 获取所有相关的delightful_message_ids
+        // Get all related delightful_message_ids
         $delightfulMessageIds = $this->delightfulChatSequenceModel::query()
             ->whereIn('id', $seqIds)
             ->distinct()
             ->pluck('delightful_message_id')
             ->toArray();
 
-        // 删除 delightful_chat_messages
+        // Delete delightful_chat_messages
         if (! empty($delightfulMessageIds)) {
             $this->delightfulMessageModel::query()
                 ->whereIn('delightful_message_id', $delightfulMessageIds)
                 ->delete();
         }
 
-        // 删除 delightful_chat_sequences
+        // Delete delightful_chat_sequences
         $this->delightfulChatSequenceModel::query()
             ->whereIn('id', $seqIds)
             ->delete();
@@ -577,11 +577,11 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据im_seq_id删除delightful_be_agent_message表中对应话题的后续消息.
+     * Delete subsequent messages in corresponding topic in delightful_be_agent_message table by im_seq_id.
      */
     public function deleteBeAgentMessagesFromSeqId(int $seqId): int
     {
-        // 1. 根据seq_id查询对应的消息记录
+        // 1. Query corresponding message record by seq_id
         $targetMessage = TaskMessageModel::query()
             ->where('im_seq_id', $seqId)
             ->first(['id', 'topic_id']);
@@ -593,7 +593,7 @@ class TopicRepository implements TopicRepositoryInterface
         $messageId = (int) $targetMessage->id;
         $topicId = (int) $targetMessage->topic_id;
 
-        // 2. 删除当前话题中 id >= messageId 的所有数据
+        // 2. Delete all data where id >= messageId in current topic
         return TaskMessageModel::query()
             ->where('topic_id', $topicId)
             ->where('id', '>=', $messageId)
@@ -601,7 +601,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 批量更新delightful_chat_sequences表的status字段.
+     * Batch update status field in delightful_chat_sequences table.
      */
     public function batchUpdateSeqStatus(array $seqIds, DelightfulMessageStatus $status): bool
     {
@@ -615,7 +615,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据基础seq_ids获取当前话题中小于指定seq_id的所有消息.
+     * Get all messages before specified seq_id in current topic by base seq_ids.
      */
     public function getAllSeqIdsBeforeCurrent(array $baseSeqIds): array
     {
@@ -623,7 +623,7 @@ class TopicRepository implements TopicRepositoryInterface
             return [];
         }
 
-        // 批量查询所有baseSeqIds对应的conversation_id和topic_id
+        // Batch query conversation_id and topic_id for all baseSeqIds
         $topicInfos = $this->delightfulChatTopicMessageModel::query()
             ->select(['seq_id', 'conversation_id', 'topic_id'])
             ->whereIn('seq_id', $baseSeqIds)
@@ -636,9 +636,9 @@ class TopicRepository implements TopicRepositoryInterface
 
         $allSeqIds = [];
 
-        // 遍历查询到的topicInfo，获取每个话题下小于该seq_id的所有消息
+        // Iterate through queried topicInfo, get all messages < seq_id for each topic
         foreach ($topicInfos as $topicInfo) {
-            // 查询该话题下小于该seq_id的所有消息
+            // Query all messages < this seq_id in the topic
             $seqIds = $this->delightfulChatTopicMessageModel::query()
                 ->where('conversation_id', $topicInfo->conversation_id)
                 ->where('topic_id', $topicInfo->topic_id)
@@ -654,23 +654,23 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 根据话题ID获取所有撤回状态的消息seq_ids.
+     * Get all revoked status message seq_ids by topic ID.
      */
     public function getRevokedSeqIdsByTopicId(int $topicId, string $userId): array
     {
-        // 先获取BeAgent话题实体
+        // First get BeAgent topic entity
         $topic = $this->getTopicById($topicId);
         if (! $topic) {
             return [];
         }
 
-        // 获取对应的聊天话题ID
+        // Get corresponding chat topic ID
         $chatTopicId = $topic->getChatTopicId();
         if (empty($chatTopicId)) {
             return [];
         }
 
-        // 使用聊天话题ID查询该话题下所有撤回状态的消息
+        // Use chat topic ID to query all revoked status messages in this topic
         return $this->delightfulChatTopicMessageModel::query()
             ->join('delightful_chat_sequences', 'delightful_chat_topic_messages.seq_id', '=', 'delightful_chat_sequences.id')
             ->where('delightful_chat_topic_messages.topic_id', $chatTopicId)
@@ -703,13 +703,13 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 将数据库模型数据转换为实体数据.
-     * @param array $modelData 模型数据
-     * @return array 实体数据
+     * Convert database model data to entity data.
+     * @param array $modelData Model data
+     * @return array Entity data
      */
     private function convertModelToEntityData(array $modelData): array
     {
-        // 将下划线命名转换为驼峰命名
+        // Convert snake_case to camelCase
         $entityData = [];
         foreach ($modelData as $key => $value) {
             $camelKey = $this->snakeToCamel($key);
@@ -719,15 +719,15 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * 将下划线命名转换为驼峰命名.
-     * 例如：user_id => userId, topic_name => topicName.
+     * Convert snake_case to camelCase.
+     * Example: user_id => userId, topic_name => topicName.
      *
-     * @param string $snake 下划线命名的字符串
-     * @return string 驼峰命名的字符串
+     * @param string $snake Snake_case string
+     * @return string CamelCase string
      */
     private function snakeToCamel(string $snake): string
     {
-        // 处理连字符和下划线的情况
+        // Handle both hyphen and underscore cases
         return lcfirst(str_replace(' ', '', ucwords(str_replace(['_', '-'], ' ', $snake))));
     }
 }

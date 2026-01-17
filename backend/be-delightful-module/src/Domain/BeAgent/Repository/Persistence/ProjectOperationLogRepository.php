@@ -16,7 +16,7 @@ use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\ProjectOperationLogM
 use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 
 /**
- * 项目操作日志仓储实现.
+ * Project operation log repository implementation.
  */
 class ProjectOperationLogRepository extends AbstractRepository implements ProjectOperationLogRepositoryInterface
 {
@@ -26,14 +26,14 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
     }
 
     /**
-     * 保存操作日志.
+     * Save operation log.
      */
     public function save(ProjectOperationLogEntity $operationLog): ProjectOperationLogEntity
     {
         $attributes = $this->entityToModelAttributes($operationLog);
 
         if ($operationLog->getId() > 0) {
-            // 更新现有记录
+            // Update existing record
             $model = $this->operationLogModel::query()->find($operationLog->getId());
             if (! $model) {
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'project.operation_log.not_found');
@@ -42,14 +42,14 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
             return $this->modelToEntity($model->toArray());
         }
 
-        // 创建新记录
+        // Create new record
         $attributes['id'] = IdGenerator::getSnowId();
         $model = $this->operationLogModel::query()->create($attributes);
         return $this->modelToEntity($model->toArray());
     }
 
     /**
-     * 根据项目ID查找操作日志列表.
+     * Find operation log list by project ID.
      */
     public function findByProjectId(int $projectId, int $page = 1, int $pageSize = 20): array
     {
@@ -68,7 +68,7 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
     }
 
     /**
-     * 根据项目和用户查找操作日志.
+     * Find operation log by project and user.
      */
     public function findByProjectAndUser(int $projectId, string $userId, int $page = 1, int $pageSize = 20): array
     {
@@ -88,7 +88,7 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
     }
 
     /**
-     * 根据项目和操作类型查找日志.
+     * Find log by project and operation type.
      */
     public function findByProjectAndAction(int $projectId, string $action, int $page = 1, int $pageSize = 20): array
     {
@@ -108,7 +108,7 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
     }
 
     /**
-     * 根据项目ID统计操作日志数量.
+     * Count operation logs by project ID.
      */
     public function countByProjectId(int $projectId): int
     {
@@ -118,7 +118,7 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
     }
 
     /**
-     * 根据组织编码查找操作日志.
+     * Find operation log by organization code.
      */
     public function findByOrganization(string $organizationCode, int $page = 1, int $pageSize = 20): array
     {
@@ -137,7 +137,7 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
     }
 
     /**
-     * 将实体转换为模型属性.
+     * Convert entity to model attributes.
      */
     protected function entityToModelAttributes(ProjectOperationLogEntity $entity): array
     {
@@ -156,7 +156,7 @@ class ProjectOperationLogRepository extends AbstractRepository implements Projec
     }
 
     /**
-     * 将模型数据转换为实体.
+     * Convert model data to entity.
      */
     protected function modelToEntity(array $data): ProjectOperationLogEntity
     {

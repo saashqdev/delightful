@@ -11,7 +11,7 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectOperationLogEntity;
 use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\ProjectOperationLogRepositoryInterface;
 
 /**
- * 项目操作日志领域服务
+ * Project Operation Log Domain Service
  */
 class ProjectOperationLogDomainService
 {
@@ -21,7 +21,7 @@ class ProjectOperationLogDomainService
     }
 
     /**
-     * 保存操作日志.
+     * Save operation log.
      */
     public function saveOperationLog(ProjectOperationLogEntity $operationLog): ProjectOperationLogEntity
     {
@@ -29,7 +29,7 @@ class ProjectOperationLogDomainService
     }
 
     /**
-     * 获取项目操作日志列表.
+     * Get project operation log list.
      */
     public function getProjectOperationLogs(int $projectId, int $page = 1, int $pageSize = 20): array
     {
@@ -37,7 +37,7 @@ class ProjectOperationLogDomainService
     }
 
     /**
-     * 根据项目和用户获取操作日志.
+     * Get operation logs by project and user.
      */
     public function getProjectUserOperationLogs(int $projectId, string $userId, int $page = 1, int $pageSize = 20): array
     {
@@ -45,7 +45,7 @@ class ProjectOperationLogDomainService
     }
 
     /**
-     * 根据项目和操作类型获取日志.
+     * Get logs by project and action type.
      * @return ProjectOperationLogEntity[]
      */
     public function getProjectActionOperationLogs(int $projectId, string $action, int $page = 1, int $pageSize = 20): array
@@ -54,7 +54,7 @@ class ProjectOperationLogDomainService
     }
 
     /**
-     * 统计项目操作日志数量.
+     * Count project operation logs.
      */
     public function countProjectOperationLogs(int $projectId): int
     {
@@ -62,7 +62,7 @@ class ProjectOperationLogDomainService
     }
 
     /**
-     * 根据组织编码获取操作日志.
+     * Get operation logs by organization code.
      */
     public function getOrganizationOperationLogs(string $organizationCode, int $page = 1, int $pageSize = 20): array
     {

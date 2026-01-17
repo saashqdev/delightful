@@ -12,17 +12,17 @@ use Hyperf\Database\Model\SoftDeletes;
 
 /**
  * @property int $id
- * @property string $user_id 用户id
- * @property string $user_organization_code 用户组织编码
- * @property string $chat_conversation_id 聊天会话id
- * @property string $name 工作区名称
- * @property int $is_archived 是否归档 0否 1是
+ * @property string $user_id User ID
+ * @property string $user_organization_code User organization code
+ * @property string $chat_conversation_id Chat conversation ID
+ * @property string $name Workspace name
+ * @property int $is_archived Whether archived 0-no 1-yes
  * @property string $created_at
  * @property string $updated_at
  * @property string $deleted_at
  * @property int $current_topic_id
- * @property int $current_project_id 当前项目ID
- * @property int $status 状态 0:正常 1:不显示 2：删除
+ * @property int $current_project_id Current project ID
+ * @property int $status Status 0:normal 1:hidden 2:deleted
  */
 class WorkspaceModel extends AbstractModel
 {

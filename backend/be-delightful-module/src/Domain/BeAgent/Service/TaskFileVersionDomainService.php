@@ -33,11 +33,11 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 创建文件版本.
+     * Create file version.
      */
     public function createFileVersion(string $projectOrganizationCode, TaskFileEntity $fileEntity, int $editType = 1): ?TaskFileVersionEntity
     {
-        // 仅对非目录文件创建版本
+        // Only create version for non-directory files
         if ($fileEntity->getIsDirectory()) {
             $this->logger->info('Skipping version creation for directory file', [
                 'file_id' => $fileEntity->getFileId(),
@@ -46,13 +46,13 @@ class TaskFileVersionDomainService
             return null;
         }
 
-        // 1. 获取下一个版本号
+        // 1. Get next version number
         $nextVersion = $this->getNextVersionNumber($fileEntity->getFileId());
 
-        // 2. 生成版本文件路径
+        // 2. Generate version file path
         $versionFileKey = $this->generateVersionFileKey($fileEntity->getFileKey(), $nextVersion);
 
-        // 3. 复制OSS文件到版本路径
+        // 3. Copy OSS file to version path
         $this->logger->info('Copying file to version path', [
             'organization_code' => $fileEntity->getOrganizationCode(),
             'source_key' => $fileEntity->getFileKey(),
@@ -71,7 +71,7 @@ class TaskFileVersionDomainService
             'destination_key' => $versionFileKey,
         ]);
 
-        // 4. 创建版本记录
+        // 4. Create version record
         $versionEntity = new TaskFileVersionEntity();
         $versionEntity->setId(IdGenerator::getSnowId());
         $versionEntity->setFileId($fileEntity->getFileId());
@@ -82,7 +82,7 @@ class TaskFileVersionDomainService
 
         $savedEntity = $this->taskFileVersionRepository->insert($versionEntity);
 
-        // 5. 清理旧版本
+        // 5. Clean up old versions
         $maxVersions = (int) config('be-delightful.file_version.max_versions', 10);
         $this->cleanupOldVersions($fileEntity->getFileId(), $maxVersions);
 
@@ -97,7 +97,7 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 获取文件的历史版本列表.
+     * Get file history version list.
      */
     public function getFileVersions(int $fileId): array
     {
@@ -105,12 +105,12 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 分页获取文件的历史版本列表.
+     * Get file history version list with pagination.
      *
-     * @param int $fileId 文件ID
-     * @param int $page 页码（从1开始）
-     * @param int $pageSize 每页数量
-     * @return array 包含 list（TaskFileVersionEntity数组）和 total（总数）的数组
+     * @param int $fileId File ID
+     * @param int $page Page number (starting from 1)
+     * @param int $pageSize Items per page
+     * @return array Array containing list (TaskFileVersionEntity array) and total (total count)
      */
     public function getFileVersionsWithPage(int $fileId, int $page, int $pageSize): array
     {
@@ -120,7 +120,7 @@ class TaskFileVersionDomainService
             'page_size' => $pageSize,
         ]);
 
-        // 调用仓库层的分页查询方法
+        // Call repository layer pagination query method
         $result = $this->taskFileVersionRepository->getByFileIdWithPage($fileId, $page, $pageSize);
 
         $this->logger->info('File versions retrieved successfully', [
@@ -133,7 +133,7 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 批量清理多个文件的版本（用于定时任务等场景）.
+     * Batch cleanup versions for multiple files (for scheduled tasks and similar scenarios).
      */
     public function batchCleanupFileVersions(array $fileIds, int $maxVersions): array
     {
@@ -161,7 +161,7 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 文件回滚到指定版本.
+     * Rollback file to specified version.
      */
     public function rollbackFileToVersion(string $projectOrganizationCode, TaskFileEntity $fileEntity, int $targetVersion): ?TaskFileVersionEntity
     {
@@ -173,7 +173,7 @@ class TaskFileVersionDomainService
             'organization_code' => $projectOrganizationCode,
         ]);
 
-        // 1. 验证目标版本是否存在
+        // 1. Validate target version exists
         $targetVersionEntity = $this->taskFileVersionRepository->getByFileIdAndVersion($fileId, $targetVersion);
         if (! $targetVersionEntity) {
             $this->logger->error('Target version not found', [
@@ -189,7 +189,7 @@ class TaskFileVersionDomainService
             'version_file_key' => $targetVersionEntity->getFileKey(),
         ]);
 
-        // 2. 将版本文件复制到当前文件位置
+        // 2. Copy version file to current file location
         $currentFileKey = $fileEntity->getFileKey();
         $versionFileKey = $targetVersionEntity->getFileKey();
 
@@ -209,7 +209,7 @@ class TaskFileVersionDomainService
             'destination_key' => $currentFileKey,
         ]);
 
-        // 3. 复用createFileVersion方法为回滚后的文件创建新版本记录
+        // 3. Reuse createFileVersion method to create new version record for rolled back file
         $this->logger->info('Creating new version record after rollback using createFileVersion', [
             'file_id' => $fileId,
         ]);
@@ -235,7 +235,7 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 获取文件的最新版本号.
+     * Get file's latest version number.
      */
     public function getLatestVersionNumber(int $fileId): int
     {
@@ -243,7 +243,7 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 获取下一个版本号.
+     * Get next version number.
      */
     private function getNextVersionNumber(int $fileId): int
     {
@@ -252,39 +252,39 @@ class TaskFileVersionDomainService
     }
 
     /**
-     * 生成版本文件键.
+     * Generate version file key.
      */
     private function generateVersionFileKey(string $originalFileKey, int $version): string
     {
-        // 验证原文件路径包含 /workspace/
+        // Validate original file path contains /workspace/
         if (! str_contains($originalFileKey, '/workspace/')) {
             throw new InvalidArgumentException('Original file key must contain /workspace/ path');
         }
 
-        // 只替换第一次出现的 /workspace/ 为 /version/
+        // Only replace first occurrence of /workspace/ with /version/
         $pos = strpos($originalFileKey, '/workspace/');
         if ($pos !== false) {
             $versionBasePath = substr_replace($originalFileKey, '/version/', $pos, strlen('/workspace/'));
         } else {
-            // 理论上不会执行到这里，因为上面已经验证过
+            // Theoretically should never reach here, since already validated above
             throw new InvalidArgumentException('Original file key must contain /workspace/ path');
         }
 
-        // 在文件名后追加版本号
+        // Append version number after filename
         return $versionBasePath . '/' . $version;
     }
 
     /**
-     * 清理旧版本，保留指定数量的最新版本.
+     * Clean up old versions, keep specified number of latest versions.
      */
     private function cleanupOldVersions(int $fileId, int $maxVersions): int
     {
         try {
-            // 1. 获取当前版本数量
+            // 1. Get current version count
             $currentCount = $this->taskFileVersionRepository->countByFileId($fileId);
 
             if ($currentCount <= $maxVersions) {
-                return 0; // 不需要清理
+                return 0; // No need to cleanup
             }
 
             $this->logger->info('Starting version cleanup', [
@@ -294,14 +294,14 @@ class TaskFileVersionDomainService
                 'to_delete' => $currentCount - $maxVersions,
             ]);
 
-            // 2. 获取需要删除的版本实体列表
+            // 2. Get list of version entities to delete
             $versionsToDelete = $this->taskFileVersionRepository->getVersionsToCleanup($fileId, $maxVersions);
 
             if (empty($versionsToDelete)) {
                 return 0;
             }
 
-            // 3. 先删除OSS文件
+            // 3. Delete OSS files first
             $ossDeletedCount = 0;
             $ossFailedCount = 0;
 
@@ -323,7 +323,7 @@ class TaskFileVersionDomainService
                 ]);
             }
 
-            // 4. 批量删除数据库记录（无论OSS删除是否成功）
+            // 4. Batch delete database records (regardless of OSS deletion success)
             $dbDeletedCount = $this->taskFileVersionRepository->deleteOldVersionsByFileId($fileId, $maxVersions);
 
             $this->logger->info('Version cleanup completed', [
@@ -347,10 +347,10 @@ class TaskFileVersionDomainService
 
     private function copyFile(string $organizationCode, string $sourceKey, string $destinationKey): void
     {
-        // 从源文件路径中提取prefix（用于确定操作权限）
+        // Extract prefix from source file path (for determining operation permissions)
         $prefix = '/';
 
-        // 使用已有的复制文件功能
+        // Use existing copy file functionality
         $this->cloudFileRepository->copyObjectByCredential(
             $prefix,
             $organizationCode,
@@ -358,7 +358,7 @@ class TaskFileVersionDomainService
             $destinationKey,
             StorageBucketType::SandBox,
             [
-                'metadata_directive' => 'COPY', // 复制原文件的元数据
+                'metadata_directive' => 'COPY', // Copy original file metadata
             ]
         );
 

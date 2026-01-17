@@ -59,7 +59,7 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
     }
 
     /**
-     * 根据话题ID和任务ID获取用户消息列表（优化索引+过滤用户消息）.
+     * Get user message list by topic ID and task ID (optimized index + filter user messages).
      * @return TaskMessageEntity[]
      */
     public function findUserMessagesByTopicIdAndTaskId(int $topicId, string $taskId): array
@@ -78,66 +78,66 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
     }
 
     /**
-     * 根据话题ID获取消息列表，支持分页.
+     * Get message list by topic ID, with pagination support.
      *
-     * @param int $topicId 话题ID
-     * @param int $page 页码
-     * @param int $pageSize 每页大小
-     * @param bool $shouldPage 是否需要分页
-     * @param string $sortDirection 排序方向，支持asc和desc
-     * @param bool $showInUi 是否只显示UI可见的消息
-     * @return array 返回包含消息列表和总数的数组 ['list' => TaskMessageEntity[], 'total' => int]
+     * @param int $topicId Topic ID
+     * @param int $page Page number
+     * @param int $pageSize Page size
+     * @param bool $shouldPage Whether pagination is needed
+     * @param string $sortDirection Sort direction, supports asc and desc
+     * @param bool $showInUi Whether to show only UI-visible messages
+     * @return array Returns array containing message list and total count ['list' => TaskMessageEntity[], 'total' => int]
      */
     public function findByTopicId(int $topicId, int $page = 1, int $pageSize = 20, bool $shouldPage = true, string $sortDirection = 'asc', bool $showInUi = true): array
     {
-        // 确保排序方向是有效的
+        // Ensure sort direction is valid
         $sortDirection = strtolower($sortDirection) === 'desc' ? 'desc' : 'asc';
 
-        // 构建基础查询 - 不使用 leftJoin，避免影响 casts 转换
+        // Build base query - don't use leftJoin to avoid affecting casts conversion
         $query = $this->model::query()
             ->where('topic_id', $topicId);
 
-        // 如果 $showInUi 为 true，则添加条件过滤
+        // If $showInUi is true, add filter condition
         if ($showInUi) {
             $query->where('show_in_ui', true);
         }
 
         $query->orderBy('id', $sortDirection);
 
-        // 获取总记录数
+        // Get total record count
         $total = $query->count();
 
-        // 如果需要分页，则添加分页条件
+        // If pagination is needed, add pagination conditions
         if ($shouldPage) {
             $offset = ($page - 1) * $pageSize;
             $query->offset($offset)->limit($pageSize);
         }
 
-        // 执行查询
+        // Execute query
         $records = $query->get();
 
-        // 将查询结果转换为实体对象
+        // Convert query results to entity objects
         $messages = [];
         $imSeqIds = [];
         foreach ($records as $record) {
-            // toArray() 会自动应用 casts 转换
+            // toArray() will automatically apply casts conversion
             $entity = new TaskMessageEntity($record->toArray());
             $messages[] = $entity;
 
-            // 收集 im_seq_id 用于批量查询 im_status
+            // Collect im_seq_id for batch querying im_status
             if ($entity->getImSeqId() !== null) {
                 $imSeqIds[$entity->getImSeqId()] = $entity->getImSeqId();
             }
         }
 
-        // 批量查询 im_status
+        // Batch query im_status
         if (! empty($imSeqIds)) {
             $imStatusMap = Db::table('delightful_chat_sequences')
                 ->whereIn('id', array_values($imSeqIds))
                 ->pluck('status', 'id')
                 ->toArray();
 
-            // 将 im_status 设置到对应的实体中
+            // Set im_status to corresponding entity
             foreach ($messages as $message) {
                 if ($message->getImSeqId() !== null && isset($imStatusMap[$message->getImSeqId()])) {
                     $message->setImStatus((int) $imStatusMap[$message->getImSeqId()]);
@@ -145,7 +145,7 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
             }
         }
 
-        // 返回结构化结果
+        // Return structured result
         return [
             'list' => $messages,
             'total' => $total,
@@ -154,7 +154,7 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
 
     public function getUserFirstMessageByTopicId(int $topicId, string $userId): ?TaskMessageEntity
     {
-        // 构建基础查询
+        // Build base query
         $query = $this->model::query()
             ->where('topic_id', $topicId)
             ->where('sender_type', 'user')
@@ -219,14 +219,14 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
 
     public function getNextSeqId(int $topicId, int $taskId): int
     {
-        // 利用降序索引直接获取最大 seq_id，配合 ORDER BY seq_id DESC
+        // Use descending index to directly get max seq_id, with ORDER BY seq_id DESC
         $maxSeqId = $this->model::query()
             ->where('topic_id', $topicId)
             ->where('task_id', $taskId)
             ->orderByDesc('seq_id')
             ->value('seq_id');
 
-        // 如果没有记录，返回1；否则返回最大值+1
+        // If no record, return 1; otherwise return max value + 1
         return ($maxSeqId ?? 0) + 1;
     }
 
@@ -234,15 +234,15 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
     {
         $messageArray = $message->toArray();
 
-        // seq_id应该已经在领域服务中设置好了
+        // seq_id should already be set in domain service
         if (empty($messageArray['seq_id'])) {
             throw new InvalidArgumentException('seq_id must be set before saving');
         }
 
-        // 保存原始数据
+        // Save raw data
         $messageArray['raw_data'] = json_encode($rawData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-        // 设置初始处理状态
+        // Set initial processing status
         $messageArray['processing_status'] = $processStatus;
         $messageArray['retry_count'] = 0;
 
@@ -304,8 +304,8 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
         int $maxRetries = 3,
         int $limit = 50
     ): array {
-        // 简化SQL查询：只按topic_id + sender_type + 三个状态查询
-        // 在代码中处理复杂逻辑，避免复杂SQL在大表上的性能问题
+        // Simplified SQL query: query only by topic_id + sender_type + three statuses
+        // Handle complex logic in code to avoid performance issues with complex SQL on large tables
         $query = $this->model::query()
             ->select([
                 'id',
@@ -329,7 +329,7 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
             $query = $query->where('task_id', $taskId);
         }
 
-        $query->orderBy('seq_id', 'asc')->limit($limit * 2); // 适当放大limit，因为要在代码中过滤
+        $query->orderBy('seq_id', 'asc')->limit($limit * 2); // Appropriately expand limit since filtering is done in code
 
         $records = $query->get();
         $timeoutTime = Carbon::now()->subMinutes($timeoutMinutes);
@@ -340,16 +340,16 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
 
             switch ($record->processing_status) {
                 case TaskMessageModel::PROCESSING_STATUS_PENDING:
-                    // pending状态的全部处理
+                    // Process all pending status
                     $shouldProcess = true;
                     break;
                 case TaskMessageModel::PROCESSING_STATUS_PROCESSING:
-                    // processing状态但超过指定时间的（认为是超时）
+                    // Processing status but exceeded specified time (considered timeout)
                     $updatedAt = Carbon::parse($record->updated_at);
                     $shouldProcess = $updatedAt->lt($timeoutTime);
                     break;
                 case TaskMessageModel::PROCESSING_STATUS_FAILED:
-                    // failed状态但重试次数不超过最大值的
+                    // Failed status but retry count does not exceed maximum
                     $shouldProcess = $record->retry_count <= $maxRetries;
                     break;
             }
@@ -357,7 +357,7 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
             if ($shouldProcess) {
                 $processableMessages[] = new TaskMessageEntity($record->toArray());
 
-                // 达到目标数量就停止
+                // Stop when target count is reached
                 if (count($processableMessages) >= $limit) {
                     break;
                 }
@@ -396,7 +396,7 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
         $insertData = [];
 
         foreach ($messageEntities as $messageEntity) {
-            // 如果ID未设置，则自动生成
+            // If ID is not set, auto-generate
             if (empty($messageEntity->getId())) {
                 $messageEntity->setId(IdGenerator::getSnowId());
             }
@@ -404,20 +404,20 @@ class TaskMessageRepository implements TaskMessageRepositoryInterface
             $insertData[] = $messageEntity->toArrayWithoutOtherField();
         }
 
-        // 批量插入
+        // Batch insert
         $this->model::query()->insert($insertData);
 
-        return $messageEntities; // 直接返回传入的entities，因为它们已经包含了正确的ID
+        return $messageEntities; // Directly return passed entities since they already contain correct IDs
     }
 
     public function updateMessageSeqId(int $id, ?int $imSeqId): void
     {
-        // 如果 im_seq_id 为空，则不执行更新
+        // If im_seq_id is null, skip update
         if ($imSeqId === null) {
             return;
         }
 
-        // 只更新 im_seq_id 字段
+        // Only update im_seq_id field
         $this->model::query()
             ->where('id', $id)
             ->update(['im_seq_id' => $imSeqId]);

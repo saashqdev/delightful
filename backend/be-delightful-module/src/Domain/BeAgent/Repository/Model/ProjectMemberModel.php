@@ -10,7 +10,7 @@ namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Model;
 use App\Infrastructure\Core\AbstractModel;
 
 /**
- * 项目成员模型.
+ * Project member model.
  */
 class ProjectMemberModel extends AbstractModel
 {
@@ -38,7 +38,7 @@ class ProjectMemberModel extends AbstractModel
     ];
 
     /**
-     * 所属项目.
+     * Belongs to project.
      */
     public function project()
     {

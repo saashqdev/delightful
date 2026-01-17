@@ -20,7 +20,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 获取用户工作区列表.
+     * Get user workspace list.
      */
     public function getUserWorkspaces(string $userId, int $page, int $pageSize): array
     {
@@ -40,7 +40,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 创建工作区.
+     * Create workspace.
      */
     public function createWorkspace(WorkspaceEntity $workspaceEntity): WorkspaceEntity
     {
@@ -53,7 +53,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 更新工作区.
+     * Update workspace.
      */
     public function updateWorkspace(WorkspaceEntity $workspaceEntity): bool
     {
@@ -66,7 +66,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 获取工作区详情.
+     * Get workspace details.
      */
     public function getWorkspaceById(int $workspaceId): ?WorkspaceEntity
     {
@@ -75,7 +75,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 根据ID查找工作区.
+     * Find workspace by ID.
      */
     public function findById(int $workspaceId): ?WorkspaceEntity
     {
@@ -83,7 +83,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 通过会话ID获取工作区.
+     * Get workspace by conversation ID.
      */
     public function getWorkspaceByConversationId(string $conversationId): ?WorkspaceEntity
     {
@@ -92,7 +92,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 更新工作区归档状态.
+     * Update workspace archived status.
      */
     public function updateWorkspaceArchivedStatus(int $workspaceId, int $isArchived): bool
     {
@@ -102,7 +102,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 删除工作区.
+     * Delete workspace.
      */
     public function deleteWorkspace(int $workspaceId): bool
     {
@@ -110,19 +110,19 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 删除工作区关联的话题.
+     * Delete topics associated with workspace.
      */
     public function deleteTopicsByWorkspaceId(int $workspaceId): bool
     {
-        // 注意：这里需要根据实际情况实现，比如通过外部服务或者其他Repository删除话题
-        // 由于我们没有看到话题表的结构，这里仅作为示例
+        // Note: This needs to be implemented based on actual situation, such as deleting topics through external service or other Repository
+        // Since we don't see the structure of the topic table, this is just an example
         return Db::table('delightful_chat_topics')
             ->where('workspace_id', $workspaceId)
             ->delete() > 0;
     }
 
     /**
-     * 更新工作区当前话题.
+     * Update workspace current topic.
      */
     public function updateWorkspaceCurrentTopic(int $workspaceId, string $topicId): bool
     {
@@ -132,7 +132,7 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 更新工作区状态.
+     * Update workspace status.
      */
     public function updateWorkspaceStatus(int $workspaceId, int $status): bool
     {
@@ -142,15 +142,15 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 根据条件获取工作区列表
-     * 支持分页和排序.
+     * Get workspace list by conditions
+     * Supports pagination and sorting.
      *
-     * @param array $conditions 查询条件
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @param string $orderBy 排序字段
-     * @param string $orderDirection 排序方向
-     * @return array [total, list] 总数和工作区列表
+     * @param array $conditions Query conditions
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @param string $orderBy Sort field
+     * @param string $orderDirection Sort direction
+     * @return array [total, list] Total count and workspace list
      */
     public function getWorkspacesByConditions(
         array $conditions = [],
@@ -161,25 +161,25 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     ): array {
         $query = $this->model::query();
 
-        // 默认过滤已删除的数据
+        // Filter deleted data by default
         $query->whereNull('deleted_at');
 
-        // 应用查询条件
+        // Apply query conditions
         foreach ($conditions as $field => $value) {
-            // 默认等于查询
+            // Default equal query
             $query->where($field, $value);
         }
 
-        // 获取总数
+        // Get total count
         $total = $query->count();
 
-        // 排序和分页
+        // Sort and paginate
         $list = $query->orderBy($orderBy, $orderDirection)
             ->offset(($page - 1) * $pageSize)
             ->limit($pageSize)
             ->get();
 
-        // 转换为实体对象
+        // Convert to entity objects
         $entities = [];
         foreach ($list as $model) {
             $entities[] = $this->modelToEntity($model);
@@ -192,21 +192,21 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 保存工作区（创建或更新）.
+     * Save workspace (create or update).
      *
-     * @param WorkspaceEntity $workspaceEntity 工作区实体
-     * @return WorkspaceEntity 保存后的工作区实体
+     * @param WorkspaceEntity $workspaceEntity Workspace entity
+     * @return WorkspaceEntity Saved workspace entity
      */
     public function save(WorkspaceEntity $workspaceEntity): WorkspaceEntity
     {
         if ($workspaceEntity->getId()) {
-            // 更新已存在的工作区
+            // Update existing workspace
             $model = $this->model::query()->find($workspaceEntity->getId());
             if ($model) {
                 $model->update($workspaceEntity->toArray());
             }
         } else {
-            // 创建新工作区
+            // Create new workspace
             $model = new $this->model();
             $model->fill($workspaceEntity->toArray());
             $model->save();
@@ -217,9 +217,9 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 获取所有工作区的唯一组织代码列表.
+     * Get unique organization code list for all workspaces.
      *
-     * @return array 唯一的组织代码列表
+     * @return array Unique organization code list
      */
     public function getUniqueOrganizationCodes(): array
     {
@@ -234,10 +234,10 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 批量获取工作区名称映射.
+     * Batch get workspace name mapping.
      *
-     * @param array $workspaceIds 工作区ID数组
-     * @return array ['workspace_id' => 'workspace_name'] 键值对
+     * @param array $workspaceIds Workspace ID array
+     * @return array ['workspace_id' => 'workspace_name'] Key-value pairs
      */
     public function getWorkspaceNamesBatch(array $workspaceIds): array
     {
@@ -260,10 +260,10 @@ class WorkspaceRepository extends AbstractRepository implements WorkspaceReposit
     }
 
     /**
-     * 将模型对象转换为实体对象
+     * Convert model object to entity object
      *
-     * @param null|WorkspaceModel $model 模型对象
-     * @return null|WorkspaceEntity 实体对象
+     * @param null|WorkspaceModel $model Model object
+     * @return null|WorkspaceEntity Entity object
      */
     protected function modelToEntity($model): ?WorkspaceEntity
     {

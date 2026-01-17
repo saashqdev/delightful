@@ -11,24 +11,24 @@ use App\Infrastructure\Core\AbstractModel;
 use Hyperf\Database\Model\SoftDeletes;
 
 /**
- * 项目模型.
+ * Project model.
  */
 class ProjectModel extends AbstractModel
 {
     use SoftDeletes;
 
     /**
-     * 软删除字段.
+     * Soft delete field.
      */
     public const DELETED_AT = 'deleted_at';
 
     /**
-     * 表名.
+     * Table name.
      */
     protected ?string $table = 'delightful_be_agent_project';
 
     /**
-     * 可填充字段.
+     * Fillable fields.
      */
     protected array $fillable = [
         'id',
@@ -50,7 +50,7 @@ class ProjectModel extends AbstractModel
     ];
 
     /**
-     * 字段类型转换.
+     * Field type casting.
      */
     protected array $casts = [
         'id' => 'integer',
@@ -63,7 +63,7 @@ class ProjectModel extends AbstractModel
     ];
 
     /**
-     * 获取项目所属的工作区.
+     * Get the workspace that the project belongs to.
      */
     public function workspace()
     {
@@ -71,7 +71,7 @@ class ProjectModel extends AbstractModel
     }
 
     /**
-     * 获取项目下的话题列表.
+     * Get the topic list under the project.
      */
     public function topics()
     {
@@ -79,7 +79,7 @@ class ProjectModel extends AbstractModel
     }
 
     /**
-     * 获取项目下的文件列表.
+     * Get the file list under the project.
      */
     public function files()
     {

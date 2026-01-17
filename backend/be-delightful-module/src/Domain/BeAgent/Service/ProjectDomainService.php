@@ -110,11 +110,11 @@ class ProjectDomainService
     }
 
     /**
-     * 根据工作区ID获取项目ID列表.
+     * Get project ID list by workspace ID.
      *
-     * @param DataIsolation $dataIsolation 数据隔离对象
-     * @param int $workspaceId 工作区ID
-     * @return array 项目ID列表
+     * @param DataIsolation $dataIsolation Data isolation object
+     * @param int $workspaceId Workspace ID
+     * @return array Project ID list
      */
     public function getProjectIdsByWorkspaceId(DataIsolation $dataIsolation, int $workspaceId): array
     {
@@ -153,10 +153,10 @@ class ProjectDomainService
     }
 
     /**
-     * 批量获取项目信息（不验证用户权限）.
+     * Batch get project information (without user permission verification).
      *
-     * @param array $projectIds 项目ID数组
-     * @return array<ProjectEntity> 项目实体数组
+     * @param array $projectIds Project ID array
+     * @return array<ProjectEntity> Project entity array
      */
     public function getProjectsByIds(array $projectIds): array
     {
@@ -164,8 +164,7 @@ class ProjectDomainService
     }
 
     /**
-     * Get projects by conditions
-     * 根据条件获取项目列表，支持分页和排序.
+     * Get projects by conditions, supports pagination and sorting.
      */
     public function getProjectsByConditions(
         array $conditions = [],
@@ -356,14 +355,14 @@ class ProjectDomainService
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, trans('project.project_not_found'));
             }
 
-            // todo 记录操作日志
+            // todo: Record operation log
 
             return $updatedProject;
         });
     }
 
     /**
-     * 更新项目的updated_at时间.
+     * Update project's updated_at time.
      */
     public function updateUpdatedAtToNow(int $projectId): bool
     {

@@ -17,7 +17,7 @@ use Hyperf\DbConnection\Db;
 use RuntimeException;
 
 /**
- * 项目仓储实现.
+ * Project repository implementation.
  */
 class ProjectRepository extends AbstractRepository implements ProjectRepositoryInterface
 {
@@ -27,7 +27,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 根据ID查找项目.
+     * Find project by ID.
      */
     public function findById(int $id): ?ProjectEntity
     {
@@ -40,7 +40,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 保存项目.
+     * Save project.
      */
     public function save(ProjectEntity $project): ProjectEntity
     {
@@ -59,7 +59,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
             return $this->toEntity($model->toArray());
         }
 
-        // 创建
+        // Create
         $attributes['id'] = IdGenerator::getSnowId();
         $project->setId($attributes['id']);
         $this->projectModel::query()->create($attributes);
@@ -80,7 +80,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 删除项目（软删除）.
+     * Delete project (soft delete).
      */
     public function delete(ProjectEntity $project): bool
     {
@@ -94,7 +94,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 统计工作区下的项目数量.
+     * Count projects under workspace.
      */
     public function countByWorkspaceId(int $workspaceId): int
     {
@@ -105,7 +105,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 批量获取项目信息.
+     * Batch get project information.
      */
     public function findByIds(array $ids): array
     {
@@ -130,8 +130,8 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 根据条件获取项目列表
-     * 支持分页和排序.
+     * Get project list by conditions
+     * Supports pagination and sorting.
      */
     public function getProjectsByConditions(
         array $conditions = [],
@@ -142,33 +142,33 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     ): array {
         $query = $this->projectModel::query();
 
-        // 默认过滤已删除的数据
+        // Default filter for deleted data
         $query->whereNull('deleted_at');
 
-        // 应用查询条件
+        // Apply query conditions
         foreach ($conditions as $field => $value) {
             if (is_array($value)) {
-                // 支持project_ids数组查询
+                // Support project_ids array query
                 $query->whereIn('id', $value);
             } elseif ($field === 'project_name_like') {
                 // Support fuzzy search for project name
                 $query->where('project_name', 'like', '%' . $value . '%');
             } else {
-                // 默认等于查询
+                // Default equal query
                 $query->where($field, $value);
             }
         }
 
-        // 获取总数
+        // Get total
         $total = $query->count();
 
-        // 排序和分页
+        // Sorting and pagination
         $list = $query->orderBy($orderBy, $orderDirection)
             ->offset(($page - 1) * $pageSize)
             ->limit($pageSize)
             ->get();
 
-        // 转换为实体对象
+        // Convert to entity objects
         $entities = [];
         foreach ($list as $model) {
             /* @var ProjectModel $model */
@@ -182,7 +182,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 更新项目的updated_at为当前时间.
+     * Update project's updated_at to current time.
      */
     public function updateUpdatedAtToNow(int $projectId): bool
     {
@@ -192,12 +192,12 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 根据工作区ID获取项目ID列表.
+     * Get project ID list by workspace ID.
      *
-     * @param int $workspaceId 工作区ID
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织代码
-     * @return array 项目ID列表
+     * @param int $workspaceId Workspace ID
+     * @param string $userId User ID
+     * @param string $organizationCode Organization code
+     * @return array Project ID list
      */
     public function getProjectIdsByWorkspaceId(int $workspaceId, string $userId, string $organizationCode): array
     {
@@ -248,7 +248,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 模型转实体.
+     * Model to entity.
      */
     protected function modelToEntity(ProjectModel $model): ProjectEntity
     {
@@ -273,7 +273,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 数组结果转实体数组.
+     * Array results to entity array.
      */
     protected function toEntities(array $results): array
     {
@@ -283,7 +283,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 数组转实体.
+     * Array to entity.
      */
     protected function toEntity(array|object $data): ProjectEntity
     {
@@ -311,7 +311,7 @@ class ProjectRepository extends AbstractRepository implements ProjectRepositoryI
     }
 
     /**
-     * 实体转模型属性.
+     * Entity to model attributes.
      */
     protected function entityToModelAttributes(ProjectEntity $entity): array
     {

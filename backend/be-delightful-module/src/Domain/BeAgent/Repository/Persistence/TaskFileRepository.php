@@ -72,15 +72,15 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据fileKey获取文件.
+     * Get file by fileKey.
      *
-     * @param string $fileKey 文件键
-     * @param null|int $topicId 话题ID，默认为0
-     * @param bool $withTrash 是否包含已删除的文件，默认为false
+     * @param string $fileKey File key
+     * @param null|int $topicId Topic ID, default is 0
+     * @param bool $withTrash Whether to include deleted files, default is false
      */
     public function getByFileKey(string $fileKey, ?int $topicId = 0, bool $withTrash = false): ?TaskFileEntity
     {
-        // 根据withTrash参数决定查询范围
+        // Determine query scope based on withTrash parameter
         if ($withTrash) {
             $query = $this->model::withTrashed();
         } else {
@@ -102,7 +102,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据fileKey数组批量获取文件.
+     * Batch get files by fileKey array.
      */
     public function getByFileKeys(array $fileKeys): array
     {
@@ -124,7 +124,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据项目ID和fileKey获取文件.
+     * Get file by project ID and fileKey.
      */
     public function getByProjectIdAndFileKey(int $projectId, string $fileKey): ?TaskFileEntity
     {
@@ -140,44 +140,44 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据话题ID获取文件列表.
+     * Get file list by topic ID.
      *
-     * @param int $topicId 话题ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @param array $fileType 文件类型过滤
-     * @param string $storageType 存储类型
-     * @return array{list: TaskFileEntity[], total: int} 文件列表和总数
+     * @param int $topicId Topic ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @param array $fileType File type filter
+     * @param string $storageType Storage type
+     * @return array{list: TaskFileEntity[], total: int} File list and total
      */
     public function getByTopicId(int $topicId, int $page, int $pageSize = 200, array $fileType = [], string $storageType = 'workspace'): array
     {
         $offset = ($page - 1) * $pageSize;
 
-        // 构建查询
+        // Build query
         $query = $this->model::query()->where('topic_id', $topicId);
 
-        // 如果指定了文件类型数组且不为空，添加文件类型过滤条件
+        // If file type array is specified and not empty, add file type filter condition
         if (! empty($fileType)) {
             $query->whereIn('file_type', $fileType);
         }
 
-        // 如果指定了存储类型，添加存储类型过滤条件
+        // If storage type is specified, add storage type filter condition
         if (! empty($storageType)) {
             $query->where('storage_type', $storageType);
         }
 
-        // 过滤已经被删除的， deleted_at 不为空
+        // Filter deleted files, deleted_at is not null
         $query->whereNull('deleted_at');
 
-        // 先获取总数
+        // Get total first
         $total = $query->count();
 
-        // 获取分页数据，使用Eloquent的get()方法让$casts生效，按层级和排序字段排序
+        // Get paginated data, use Eloquent's get() method to apply $casts, sort by hierarchy and sort fields
         $models = $query->skip($offset)
             ->take($pageSize)
-            ->orderBy('parent_id', 'ASC')  // 按父目录分组
-            ->orderBy('sort', 'ASC')       // 按排序值排序
-            ->orderBy('file_id', 'ASC')    // 排序值相同时按ID排序
+            ->orderBy('parent_id', 'ASC')  // Group by parent directory
+            ->orderBy('sort', 'ASC')       // Sort by sort value
+            ->orderBy('file_id', 'ASC')    // Sort by ID when sort values are the same
             ->get();
 
         $list = [];
@@ -192,50 +192,50 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据项目ID获取文件列表.
+     * Get file list by project ID.
      *
-     * @param int $projectId 项目ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @param array $fileType 文件类型过滤
-     * @param string $storageType 存储类型过滤
-     * @param null|string $updatedAfter 更新时间过滤（查询此时间之后更新的文件）
-     * @return array{list: TaskFileEntity[], total: int} 文件列表和总数
+     * @param int $projectId Project ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @param array $fileType File type filter
+     * @param string $storageType Storage type filter
+     * @param null|string $updatedAfter Update time filter (query files updated after this time)
+     * @return array{list: TaskFileEntity[], total: int} File list and total
      */
     public function getByProjectId(int $projectId, int $page, int $pageSize = 200, array $fileType = [], string $storageType = '', ?string $updatedAfter = null): array
     {
         $offset = ($page - 1) * $pageSize;
 
-        // 构建查询
+        // Build query
         $query = $this->model::query()->where('project_id', $projectId);
 
-        // 如果指定了文件类型数组且不为空，添加文件类型过滤条件
+        // If file type array is specified and not empty, add file type filter condition
         if (! empty($fileType)) {
             $query->whereIn('file_type', $fileType);
         }
 
-        // 如果指定了存储类型，添加存储类型过滤条件
+        // If storage type is specified, add storage type filter condition
         if (! empty($storageType)) {
             $query->where('storage_type', $storageType);
         }
 
-        // 如果指定了更新时间过滤，添加时间过滤条件（数据库级别过滤）
+        // If update time filter is specified, add time filter condition (database level filter)
         if ($updatedAfter !== null) {
             $query->where('updated_at', '>', $updatedAfter);
         }
 
-        // 过滤已经被删除的， deleted_at 不为空
+        // Filter deleted files, deleted_at is not null
         $query->whereNull('deleted_at');
 
-        // 先获取总数
+        // Get total first
         $total = $query->count();
 
-        // 获取分页数据，使用Eloquent的get()方法让$casts生效，按层级和排序字段排序
+        // Get paginated data, use Eloquent's get() method to make $casts effective, sort by hierarchy and sort field
         $models = $query->skip($offset)
             ->take($pageSize)
-            ->orderBy('parent_id', 'ASC')  // 按父目录分组
-            ->orderBy('sort', 'ASC')       // 按排序值排序
-            ->orderBy('file_id', 'ASC')    // 排序值相同时按ID排序
+            ->orderBy('parent_id', 'ASC')  // Group by parent directory
+            ->orderBy('sort', 'ASC')       // Sort by sort value
+            ->orderBy('file_id', 'ASC')    // Sort by ID when sort values are the same
             ->get();
 
         $list = [];
@@ -250,23 +250,23 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据任务ID获取文件列表.
+     * Get file list by task ID.
      *
-     * @param int $taskId 任务ID
-     * @param int $page 页码
-     * @param int $pageSize 每页数量
-     * @return array{list: TaskFileEntity[], total: int} 文件列表和总数
+     * @param int $taskId Task ID
+     * @param int $page Page number
+     * @param int $pageSize Items per page
+     * @return array{list: TaskFileEntity[], total: int} File list and total
      */
     public function getByTaskId(int $taskId, int $page, int $pageSize): array
     {
         $offset = ($page - 1) * $pageSize;
 
-        // 先获取总数
+        // Get total first
         $total = $this->model::query()
             ->where('task_id', $taskId)
             ->count();
 
-        // 获取分页数据，使用Eloquent的get()方法让$casts生效
+        // Get paginated data, use Eloquent's get() method to make $casts effective
         $models = $this->model::query()
             ->where('task_id', $taskId)
             ->skip($offset)
@@ -286,14 +286,14 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 为保持向后兼容性，提供此方法.
-     * @deprecated 使用 getByTopicId 和 getByTaskId 代替
+     * Provided for backward compatibility.
+     * @deprecated Use getByTopicId and getByTaskId instead
      */
     public function getByTopicTaskId(int $topicTaskId, int $page, int $pageSize): array
     {
-        // 由于数据结构变更，此方法不再直接适用
-        // 为保持向后兼容，可以尝试查找相关数据
-        // 这里实现一个简单的空结果
+        // Due to data structure changes, this method is no longer directly applicable
+        // For backward compatibility, can try to find related data
+        // Implement a simple empty result here
         return [
             'list' => [],
             'total' => 0,
@@ -309,7 +309,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
         $entityArray = $entity->toArray();
         $model = $this->model::query()->create($entityArray);
 
-        // 设置数据库生成的ID
+        // Set database-generated ID
         if (! empty($model->file_id)) {
             $entity->setFileId($entity->getFileId());
         }
@@ -318,22 +318,22 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 插入文件，如果存在冲突则忽略.
-     * 根据file_key和topic_id判断是否存在冲突
+     * Insert file, ignore if conflict exists.
+     * Judge whether conflict exists based on file_key and topic_id
      */
     public function insertOrIgnore(TaskFileEntity $entity): ?TaskFileEntity
     {
-        // 首先检查是否已经存在相同的file_key和topic_id的记录
+        // First check if a record with the same file_key and topic_id already exists
         $existingEntity = $this->model::query()
             ->where('file_key', $entity->getFileKey())
             ->first();
 
-        // 如果已存在记录，则返回已存在的实体
+        // If record already exists, return existing entity
         if ($existingEntity) {
             return new TaskFileEntity($existingEntity->toArray());
         }
 
-        // 不存在则创建新记录
+        // Create new record if not exists
         $date = date('Y-m-d H:i:s');
         if (empty($entity->getFileId())) {
             $entity->setFileId(IdGenerator::getSnowId());
@@ -348,20 +348,20 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 插入或更新文件.
-     * 使用 INSERT ... ON DUPLICATE KEY UPDATE 语法
-     * 当 file_key 唯一索引冲突时更新现有记录，否则插入新记录.
+     * Insert or update file.
+     * Use INSERT ... ON DUPLICATE KEY UPDATE syntax
+     * When file_key unique index conflicts, update existing record, otherwise insert new record.
      *
-     * 主要用于解决高并发场景下的唯一键冲突问题：
-     * - 业务层先查询不存在
-     * - 但在插入前，其他线程已经插入了相同的 file_key
-     * - 此时使用 upsert 避免唯一键冲突报错
+     * Mainly used to solve unique key conflict problems in high concurrency scenarios:
+     * - Business layer queries and finds it doesn't exist
+     * - But before insertion, other threads have already inserted the same file_key
+     * - Use upsert at this time to avoid unique key conflict error
      */
     public function insertOrUpdate(TaskFileEntity $entity): TaskFileEntity
     {
         $date = date('Y-m-d H:i:s');
 
-        // 准备插入数据
+        // Prepare insert data
         if (empty($entity->getFileId())) {
             $entity->setFileId(IdGenerator::getSnowId());
         }
@@ -372,24 +372,24 @@ class TaskFileRepository implements TaskFileRepositoryInterface
 
         $entityArray = $entity->toArray();
 
-        // 使用 Hyperf 的 upsert 方法
-        // 第三个参数明确排除 file_id 和 created_at，确保它们不会被更新
+        // Use Hyperf's upsert method
+        // Third parameter explicitly excludes file_id and created_at to ensure they won't be updated
         $affectedRows = $this->model::query()->upsert(
-            [$entityArray],                    // 数据
-            ['file_key'],                      // 基于 file_key 唯一索引判断冲突
-            array_values(array_diff(           // 明确指定要更新的字段
+            [$entityArray],                    // Data
+            ['file_key'],                      // Judge conflict based on file_key unique index
+            array_values(array_diff(           // Explicitly specify fields to update
                 array_keys($entityArray),
-                ['file_id', 'file_key', 'created_at']  // 排除主键、唯一键、创建时间
+                ['file_id', 'file_key', 'created_at']  // Exclude primary key, unique key, created time
             ))
         );
 
-        // 处理并发冲突情况
-        // MySQL upsert 的 affected rows：
-        //   1 = 插入了新记录（正常情况）
-        //   2 = 更新了已存在记录（并发冲突）
-        //   0 = 所有字段值相同，未实际更新（极少见）
+        // Handle concurrency conflict situation
+        // MySQL upsert's affected rows:
+        //   1 = Inserted new record (normal situation)
+        //   2 = Updated existing record (concurrency conflict)
+        //   0 = All field values are the same, not actually updated (extremely rare)
         if ($affectedRows !== 1) {
-            // 发生了并发冲突，需要获取数据库中真实的 file_id 和 created_at
+            // Concurrency conflict occurred, need to get real file_id and created_at from database
             $record = $this->model::query()
                 ->where('file_key', $entity->getFileKey())
                 ->first();
@@ -433,7 +433,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据 file_key 和 project_id 删除文件（物理删除）.
+     * Delete file by file_key and project_id (physical delete).
      */
     public function deleteByFileKeyAndProjectId(string $fileKey, int $projectId): int
     {
@@ -454,11 +454,11 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据文件ID数组和用户ID批量获取用户文件.
+     * Batch get user files by file ID array and user ID.
      *
-     * @param array $fileIds 文件ID数组
-     * @param string $userId 用户ID
-     * @return TaskFileEntity[] 用户文件列表
+     * @param array $fileIds File ID array
+     * @param string $userId User ID
+     * @return TaskFileEntity[] User file list
      */
     public function findUserFilesByIds(array $fileIds, string $userId): array
     {
@@ -466,11 +466,11 @@ class TaskFileRepository implements TaskFileRepositoryInterface
             return [];
         }
 
-        // 查询属于指定用户的文件
+        // Query files belonging to specified user
         $models = $this->model::query()
             ->whereIn('file_id', $fileIds)
             ->where('user_id', $userId)
-            ->whereNull('deleted_at') // 过滤已删除的文件
+            ->whereNull('deleted_at') // Filter deleted files
             ->orderBy('file_id', 'desc')
             ->get();
 
@@ -487,7 +487,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
         $models = $this->model::query()
             ->where('topic_id', $topicId)
             ->where('is_hidden', 0)
-            ->whereNull('deleted_at') // 过滤已删除的文件
+            ->whereNull('deleted_at') // Filter deleted files
             ->orderBy('file_id', 'desc')
             ->limit(1000)
             ->get();
@@ -505,7 +505,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
         $models = $this->model::query()
             ->where('project_id', $projectId)
             ->where('is_hidden', 0)
-            ->whereNull('deleted_at') // 过滤已删除的文件
+            ->whereNull('deleted_at') // Filter deleted files
             ->orderBy('file_id', 'desc')
             ->limit(1000)
             ->get();
@@ -526,7 +526,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
         $models = $this->model::query()
             ->where('project_id', $projectId)
             ->whereIn('file_id', $fileIds)
-            ->whereNull('deleted_at') // 过滤已删除的文件
+            ->whereNull('deleted_at') // Filter deleted files
             ->orderBy('file_id', 'desc')
             ->get();
 
@@ -539,7 +539,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据项目ID获取所有文件的file_key列表（高性能查询）.
+     * Get all file_key list by project ID (high performance query).
      */
     public function getFileKeysByProjectId(int $projectId, int $limit = 1000): array
     {
@@ -553,7 +553,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 批量插入新文件记录.
+     * Batch insert new file records.
      */
     public function batchInsertFiles(DataIsolation $dataIsolation, int $projectId, array $newFileKeys, array $objectStorageFiles = []): void
     {
@@ -565,7 +565,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
         $now = date('Y-m-d H:i:s');
 
         foreach ($newFileKeys as $fileKey) {
-            // 从对象存储文件信息中获取详细信息
+            // Get detailed information from object storage file information
             $fileInfo = $objectStorageFiles[$fileKey] ?? [];
 
             $insertData[] = [
@@ -587,12 +587,12 @@ class TaskFileRepository implements TaskFileRepositoryInterface
             ];
         }
 
-        // 使用批量插入提升性能
+        // Use batch insert to improve performance
         $this->model::query()->insert($insertData);
     }
 
     /**
-     * 批量标记文件为已删除.
+     * Batch mark files as deleted.
      */
     public function batchMarkAsDeleted(array $deletedFileKeys): void
     {
@@ -610,7 +610,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 批量更新文件信息.
+     * Batch update file information.
      */
     public function batchUpdateFiles(array $updatedFileKeys): void
     {
@@ -618,7 +618,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
             return;
         }
 
-        // 简化实现：只更新修改时间
+        // Simplified implementation: only update modification time
         $this->model::query()
             ->whereIn('file_key', $updatedFileKeys)
             ->whereNull('deleted_at')
@@ -628,7 +628,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据目录路径查找文件列表.
+     * Find file list by directory path.
      */
     public function findFilesByDirectoryPath(int $projectId, string $directoryPath, int $limit = 1000): array
     {
@@ -648,8 +648,8 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据 parent_id 和 project_id 查找子文件列表.
-     * 此查询会使用索引: idx_project_parent_sort (project_id, parent_id, sort, file_id).
+     * Find child file list by parent_id and project_id.
+     * This query will use index: idx_project_parent_sort (project_id, parent_id, sort, file_id).
      */
     public function getChildrenByParentAndProject(int $projectId, int $parentId, int $limit = 500): array
     {
@@ -669,13 +669,13 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 批量查询多个父目录的子文件（使用 IN 查询，避免 N+1 问题）.
-     * 使用 idx_project_parent_sort 索引.
+     * Batch query child files of multiple parent directories (use IN query to avoid N+1 problem).
+     * Use idx_project_parent_sort index.
      *
-     * @param int $projectId 项目ID
-     * @param array $parentIds 父目录ID数组
-     * @param int $limit 限制数量
-     * @return TaskFileEntity[] 文件实体列表
+     * @param int $projectId Project ID
+     * @param array $parentIds Parent directory ID array
+     * @param int $limit Limit count
+     * @return TaskFileEntity[] File entity list
      */
     public function getChildrenByParentIdsAndProject(int $projectId, array $parentIds, int $limit = 1000): array
     {
@@ -699,11 +699,11 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 批量更新文件的 file_key.
-     * 使用 CASE WHEN 语句实现一次性批量更新.
+     * Batch update file_key of files.
+     * Use CASE WHEN statement to implement one-time batch update.
      *
      * @param array $updateBatch [['file_id' => 1, 'file_key' => 'new/path', 'updated_at' => '...'], ...]
-     * @return int 更新的文件数量
+     * @return int Number of files updated
      */
     public function batchUpdateFileKeys(array $updateBatch): int
     {
@@ -713,7 +713,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
 
         $fileIds = array_column($updateBatch, 'file_id');
 
-        // 构建 CASE WHEN 语句和绑定参数（正确的顺序）
+        // Build CASE WHEN statement and binding parameters (correct order)
         $fileKeyCases = [];
         $updatedAtCases = [];
         $fileKeyBindings = [];
@@ -723,11 +723,11 @@ class TaskFileRepository implements TaskFileRepositoryInterface
             $fileKeyCases[] = 'WHEN ? THEN ?';
             $updatedAtCases[] = 'WHEN ? THEN ?';
 
-            // file_key 的参数
+            // file_key parameters
             $fileKeyBindings[] = $item['file_id'];
             $fileKeyBindings[] = $item['file_key'];
 
-            // updated_at 的参数
+            // updated_at parameters
             $updatedAtBindings[] = $item['file_id'];
             $updatedAtBindings[] = $item['updated_at'];
         }
@@ -735,7 +735,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
         $fileKeyCasesSql = implode(' ', $fileKeyCases);
         $updatedAtCasesSql = implode(' ', $updatedAtCases);
 
-        // 构建 SQL（按照正确的顺序合并参数）
+        // Build SQL (merge parameters in correct order)
         $sql = sprintf(
             'UPDATE %s SET 
                 file_key = CASE file_id %s END,
@@ -747,14 +747,14 @@ class TaskFileRepository implements TaskFileRepositoryInterface
             implode(',', array_fill(0, count($fileIds), '?'))
         );
 
-        // 正确的参数顺序：先 file_key 的 CASE，再 updated_at 的 CASE，最后是 WHERE IN
+        // Correct parameter order: file_key CASE first, then updated_at CASE, finally WHERE IN
         $bindings = array_merge($fileKeyBindings, $updatedAtBindings, $fileIds);
 
         return Db::update($sql, $bindings);
     }
 
     /**
-     * 批量删除文件（物理删除）.
+     * Batch delete files (physical deletion).
      */
     public function deleteByIds(array $fileIds): void
     {
@@ -768,7 +768,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 根据文件Keys批量删除文件（物理删除）.
+     * Batch delete files by file keys (physical deletion).
      */
     public function deleteByFileKeys(array $fileKeys): void
     {
@@ -782,7 +782,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 获取指定父目录下的最小排序值.
+     * Get the minimum sort value under the specified parent directory.
      */
     public function getMinSortByParentId(?int $parentId, int $projectId): ?int
     {
@@ -800,7 +800,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 获取指定父目录下的最大排序值.
+     * Get the maximum sort value under the specified parent directory.
      */
     public function getMaxSortByParentId(?int $parentId, int $projectId): ?int
     {
@@ -818,7 +818,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 获取指定文件的排序值.
+     * Get the sort value of the specified file.
      */
     public function getSortByFileId(int $fileId): ?int
     {
@@ -829,7 +829,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 获取指定排序值之后的下一个排序值.
+     * Get the next sort value after the specified sort value.
      */
     public function getNextSortAfter(?int $parentId, int $currentSort, int $projectId): ?int
     {
@@ -848,7 +848,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 获取同一父目录下的所有兄弟节点.
+     * Get all sibling nodes under the same parent directory.
      */
     public function getSiblingsByParentId(?int $parentId, int $projectId, string $orderBy = 'sort', string $direction = 'ASC'): array
     {
@@ -875,7 +875,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 批量更新排序值.
+     * Batch update sort values.
      */
     public function batchUpdateSort(array $updates): void
     {
@@ -1011,7 +1011,7 @@ class TaskFileRepository implements TaskFileRepositoryInterface
     }
 
     /**
-     * 恢复被删除的文件.
+     * Restore a deleted file.
      */
     public function restoreFile(int $fileId): void
     {

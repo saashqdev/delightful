@@ -46,8 +46,8 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * Agent消息应用服务
- * 提供高级Agent通信功能，包括自动初始化和状态管理.
+ * Agent message application service
+ * Provides advanced Agent communication features, including automatic initialization and state management.
  */
 class AgentDomainService
 {
@@ -66,7 +66,7 @@ class AgentDomainService
     }
 
     /**
-     * 调用沙箱网关，创建沙箱容器，如果 sandboxId 不存在，系统会默认创建一个.
+     * Call sandbox gateway to create sandbox container. If sandboxId does not exist, the system will create one by default.
      */
     public function createSandbox(DataIsolation $dataIsolation, string $projectId, string $sandboxID, string $workDir): string
     {
@@ -79,7 +79,7 @@ class AgentDomainService
         $this->gateway->setUserContext($dataIsolation->getCurrentUserId(), $dataIsolation->getCurrentOrganizationCode());
         $result = $this->gateway->createSandbox($projectId, $sandboxID, $workDir);
 
-        // 添加详细的调试日志，检查 result 对象
+        // Add detailed debug log to check result object
         $this->logger->info('[Sandbox][App] Gateway result analysis', [
             'result_class' => get_class($result),
             'result_is_success' => $result->isSuccess(),
@@ -111,10 +111,10 @@ class AgentDomainService
     }
 
     /**
-     * 获取沙箱状态
+     * Get sandbox status
      *
-     * @param string $sandboxId 沙箱ID
-     * @return SandboxStatusResult 沙箱状态结果
+     * @param string $sandboxId Sandbox ID
+     * @return SandboxStatusResult Sandbox status result
      */
     public function getSandboxStatus(string $sandboxId): SandboxStatusResult
     {
@@ -142,10 +142,10 @@ class AgentDomainService
     }
 
     /**
-     * 批量获取沙箱状态
+     * Batch get sandbox status
      *
-     * @param array $sandboxIds 沙箱ID数组
-     * @return BatchStatusResult 批量沙箱状态结果
+     * @param array $sandboxIds Sandbox ID array
+     * @return BatchStatusResult Batch sandbox status result
      */
     public function getBatchSandboxStatus(array $sandboxIds): BatchStatusResult
     {
@@ -175,8 +175,8 @@ class AgentDomainService
     }
 
     /**
-     * @param ?string $projectOrganizationCode 项目所属组织编码，10月新增支持跨组织项目协作，所有文件都在项目组织下
-     * @param ?InitializationMetadataDTO $initMetadata 初始化元数据 DTO，用于配置初始化行为
+     * @param ?string $projectOrganizationCode Project organization code, added in October to support cross-organization project collaboration, all files are under the project organization
+     * @param ?InitializationMetadataDTO $initMetadata Initialization metadata DTO, used to configure initialization behavior
      */
     public function initializeAgent(DataIsolation $dataIsolation, TaskContext $taskContext, ?string $memory = null, ?string $projectOrganizationCode = null, ?InitializationMetadataDTO $initMetadata = null): void
     {
@@ -190,10 +190,10 @@ class AgentDomainService
             'skip_init_messages' => $initMetadata->getSkipInitMessages(),
         ]);
 
-        // 1. 构建初始化信息
+        // 1. Build initialization information
         $config = $this->generateInitializationInfo($dataIsolation, $taskContext, $memory, projectOrganizationCode: $projectOrganizationCode, initMetadata: $initMetadata);
 
-        // 2. 调用初始化接口
+        // 2. Call initialization interface
         $result = $this->agent->initAgent($taskContext->getSandboxId(), InitAgentRequest::fromArray($config));
 
         if (! $result->isSuccess()) {
@@ -207,13 +207,13 @@ class AgentDomainService
     }
 
     /**
-     * 发送消息给 agent.
+     * Send message to agent.
      */
     public function sendChatMessage(DataIsolation $dataIsolation, TaskContext $taskContext): void
     {
         $taskDynamicConfig = $taskContext->getDynamicConfig();
 
-        // 添加任意注册到 DynamicConfigManager 的动态配置。暂时通过 TaskId 进行区分。
+        // Add any dynamic configuration registered to DynamicConfigManager. Temporarily distinguished by TaskId.
         $dynamicConfigs = $this->dynamicConfigManager->getByTaskId((string) $taskContext->getTask()->getId());
         foreach ($dynamicConfigs as $key => $dynamicConfig) {
             $taskDynamicConfig[$key] = $dynamicConfig;
@@ -250,7 +250,7 @@ class AgentDomainService
         $constraintText = $this->getPromptConstraint($taskContext);
         $prompt = $userRequest . $constraintText;
 
-        // 构建参数
+        // Build parameters
         $chatMessage = ChatMessageRequest::create(
             messageId: $taskContext->getMessageId(),
             userId: $dataIsolation->getCurrentUserId(),
@@ -277,13 +277,13 @@ class AgentDomainService
     }
 
     /**
-     * 发送中断消息给Agent.
+     * Send interrupt message to Agent.
      *
-     * @param DataIsolation $dataIsolation 数据隔离上下文
-     * @param string $sandboxId 沙箱ID
-     * @param string $taskId 任务ID
-     * @param string $reason 中断原因
-     * @return AgentResponse 中断响应
+     * @param DataIsolation $dataIsolation Data isolation context
+     * @param string $sandboxId Sandbox ID
+     * @param string $taskId Task ID
+     * @param string $reason Interrupt reason
+     * @return AgentResponse Interrupt response
      */
     public function sendInterruptMessage(
         DataIsolation $dataIsolation,
@@ -298,7 +298,7 @@ class AgentDomainService
             'reason' => $reason,
         ]);
 
-        // 发送中断消息
+        // Send interrupt message
         $messageId = (string) IdGenerator::getSnowId();
         $interruptRequest = InterruptRequest::create(
             $messageId,
@@ -332,10 +332,10 @@ class AgentDomainService
     }
 
     /**
-     * 获取工作区状态.
+     * Get workspace status.
      *
-     * @param string $sandboxId 沙箱ID
-     * @return AgentResponse 工作区状态响应
+     * @param string $sandboxId Sandbox ID
+     * @return AgentResponse Workspace status response
      */
     public function getWorkspaceStatus(string $sandboxId): AgentResponse
     {
@@ -363,13 +363,13 @@ class AgentDomainService
     }
 
     /**
-     * 等待工作区就绪.
-     * 轮询工作区状态，直到初始化完成、失败或超时.
+     * Wait for workspace to be ready.
+     * Poll workspace status until initialization completes, fails, or times out.
      *
-     * @param string $sandboxId 沙箱ID
-     * @param int $timeoutSeconds 超时时间（秒），默认2分钟
-     * @param int $intervalSeconds 轮询间隔（秒），默认2秒
-     * @throws SandboxOperationException 当初始化失败或超时时抛出异常
+     * @param string $sandboxId Sandbox ID
+     * @param int $timeoutSeconds Timeout duration (seconds), default 2 minutes
+     * @param int $intervalSeconds Polling interval (seconds), default 2 seconds
+     * @throws SandboxOperationException Thrown when initialization fails or times out
      */
     public function waitForSandboxReady(string $sandboxId, int $timeoutSeconds = 120, int $intervalSeconds = 2): void
     {
@@ -393,7 +393,7 @@ class AgentDomainService
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // 状态为就绪时退出
+                // Exit when status is ready
                 if ($status === SandboxStatus::RUNNING) {
                     $this->logger->info('[Sandbox][App] Sandbox is ready', [
                         'sandbox_id' => $sandboxId,
@@ -402,10 +402,10 @@ class AgentDomainService
                     return;
                 }
 
-                // 等待下一次轮询
+                // Wait for next poll
                 sleep($intervalSeconds);
             } catch (SandboxOperationException $e) {
-                // 重新抛出沙箱操作异常
+                // Rethrow sandbox operation exception
                 throw $e;
             } catch (Throwable $e) {
                 $this->logger->error('[Sandbox][App] Error while checking sandbox status', [
@@ -419,13 +419,13 @@ class AgentDomainService
     }
 
     /**
-     * 等待工作区就绪.
-     * 轮询工作区状态，直到初始化完成、失败或超时.
+     * Wait for workspace to be ready.
+     * Poll workspace status until initialization completes, fails, or times out.
      *
-     * @param string $sandboxId 沙箱ID
-     * @param int $timeoutSeconds 超时时间（秒），默认5分钟
-     * @param float $intervalSeconds 轮询间隔（秒），默认500ms
-     * @throws SandboxOperationException 当初始化失败或超时时抛出异常
+     * @param string $sandboxId Sandbox ID
+     * @param int $timeoutSeconds Timeout duration (seconds), default 5 minutes
+     * @param float $intervalSeconds Polling interval (seconds), default 500ms
+     * @throws SandboxOperationException Thrown when initialization fails or times out
      */
     public function waitForWorkspaceReady(string $sandboxId, int $timeoutSeconds = 300, float $intervalSeconds = 0.5): void
     {
@@ -451,7 +451,7 @@ class AgentDomainService
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // 状态为就绪时退出
+                // Exit when status is ready
                 if (WorkspaceStatus::isReady($status)) {
                     $this->logger->info('[Sandbox][App] Workspace is ready', [
                         'sandbox_id' => $sandboxId,
@@ -460,7 +460,7 @@ class AgentDomainService
                     return;
                 }
 
-                // 状态为错误时抛出异常
+                // Throw exception when status is error
                 if (WorkspaceStatus::isError($status)) {
                     $this->logger->error('[Sandbox][App] Workspace initialization failed', [
                         'sandbox_id' => $sandboxId,
@@ -471,10 +471,10 @@ class AgentDomainService
                     throw new SandboxOperationException('Wait for workspace ready', 'Workspace initialization failed with status: ' . WorkspaceStatus::getDescription($status), 3001);
                 }
 
-                // 等待下一次轮询
-                usleep((int) ($intervalSeconds * 1000000)); // 转换为微秒
+                // Wait for next poll
+                usleep((int) ($intervalSeconds * 1000000)); // Convert to microseconds
             } catch (SandboxOperationException $e) {
-                // 重新抛出沙箱操作异常
+                // Rethrow sandbox operation exception
                 throw $e;
             } catch (Throwable $e) {
                 $this->logger->error('[Sandbox][App] Error while checking workspace status', [
@@ -486,7 +486,7 @@ class AgentDomainService
             }
         }
 
-        // 超时
+        // Timeout
         $this->logger->error('[Sandbox][App] Workspace ready timeout', [
             'sandbox_id' => $sandboxId,
             'timeout_seconds' => $timeoutSeconds,
@@ -495,11 +495,11 @@ class AgentDomainService
     }
 
     /**
-     * 回滚到指定的checkpoint.
+     * Rollback to specified checkpoint.
      *
-     * @param string $sandboxId 沙箱ID
-     * @param string $targetMessageId 目标消息ID
-     * @return AgentResponse 回滚响应
+     * @param string $sandboxId Sandbox ID
+     * @param string $targetMessageId Target message ID
+     * @return AgentResponse Rollback response
      */
     public function rollbackCheckpoint(string $sandboxId, string $targetMessageId): AgentResponse
     {
@@ -539,11 +539,11 @@ class AgentDomainService
     }
 
     /**
-     * 开始回滚到指定的checkpoint（调用沙箱网关）.
+     * Start rollback to specified checkpoint (call sandbox gateway).
      *
-     * @param string $sandboxId 沙箱ID
-     * @param string $targetMessageId 目标消息ID
-     * @return AgentResponse 回滚响应
+     * @param string $sandboxId Sandbox ID
+     * @param string $targetMessageId Target message ID
+     * @return AgentResponse Rollback response
      */
     public function rollbackCheckpointStart(string $sandboxId, string $targetMessageId): AgentResponse
     {
@@ -583,10 +583,10 @@ class AgentDomainService
     }
 
     /**
-     * 提交回滚到指定的checkpoint（调用沙箱网关）.
+     * Commit rollback to specified checkpoint (call sandbox gateway).
      *
-     * @param string $sandboxId 沙箱ID
-     * @return AgentResponse 回滚响应
+     * @param string $sandboxId Sandbox ID
+     * @return AgentResponse Rollback response
      */
     public function rollbackCheckpointCommit(string $sandboxId): AgentResponse
     {
@@ -622,10 +622,10 @@ class AgentDomainService
     }
 
     /**
-     * 撤销回滚沙箱checkpoint（调用沙箱网关）.
+     * Undo sandbox checkpoint rollback (call sandbox gateway).
      *
-     * @param string $sandboxId 沙箱ID
-     * @return AgentResponse 回滚响应
+     * @param string $sandboxId Sandbox ID
+     * @return AgentResponse Rollback response
      */
     public function rollbackCheckpointUndo(string $sandboxId): AgentResponse
     {
@@ -661,11 +661,11 @@ class AgentDomainService
     }
 
     /**
-     * 检查回滚到指定checkpoint的可行性.
+     * Check feasibility of rolling back to specified checkpoint.
      *
-     * @param string $sandboxId 沙箱ID
-     * @param string $targetMessageId 目标消息ID
-     * @return AgentResponse 检查响应
+     * @param string $sandboxId Sandbox ID
+     * @param string $targetMessageId Target message ID
+     * @return AgentResponse Check response
      */
     public function rollbackCheckpointCheck(string $sandboxId, string $targetMessageId): AgentResponse
     {
@@ -704,12 +704,12 @@ class AgentDomainService
     }
 
     /**
-     * 升级沙箱镜像.
+     * Upgrade sandbox image.
      *
-     * @param string $messageId 消息ID
-     * @param string $contextType 上下文类型，默认为continue
-     * @return AgentResponse 升级响应结果
-     * @throws SandboxOperationException 当升级失败时抛出异常
+     * @param string $messageId Message ID
+     * @param string $contextType Context type, default is continue
+     * @return AgentResponse Upgrade response result
+     * @throws SandboxOperationException Thrown when upgrade fails
      */
     public function upgradeSandbox(string $messageId, string $contextType = 'continue'): AgentResponse
     {
@@ -719,7 +719,7 @@ class AgentDomainService
         ]);
 
         try {
-            // 调用网关服务进行升级
+            // Call gateway service to perform upgrade
             $result = $this->gateway->upgradeSandbox($messageId, $contextType);
 
             if (! $result->isSuccess()) {
@@ -737,10 +737,10 @@ class AgentDomainService
                 'context_type' => $contextType,
             ]);
 
-            // 将GatewayResult转换为AgentResponse
+            // Convert GatewayResult to AgentResponse
             return AgentResponse::fromGatewayResult($result);
         } catch (SandboxOperationException $e) {
-            // 重新抛出沙箱操作异常
+            // Rethrow sandbox operation exception
             throw $e;
         } catch (Throwable $e) {
             $this->logger->error('[Sandbox][Domain] Unexpected error during sandbox upgrade', [
@@ -753,16 +753,16 @@ class AgentDomainService
     }
 
     /**
-     * 构建初始化消息.
+     * Build initialization message.
      *
-     * @param ?string $projectOrganizationCode 项目所属组织编码，10月新增支持跨组织项目协作，所有文件都在项目组织下
-     * @param InitializationMetadataDTO $initMetadata 初始化元数据 DTO
+     * @param ?string $projectOrganizationCode Project organization code, added in October to support cross-organization project collaboration, all files are under the project organization
+     * @param InitializationMetadataDTO $initMetadata Initialization metadata DTO
      */
     private function generateInitializationInfo(DataIsolation $dataIsolation, TaskContext $taskContext, ?string $memory = null, ?string $projectOrganizationCode = null, ?InitializationMetadataDTO $initMetadata = null): array
     {
         $initMetadata = $initMetadata ?? InitializationMetadataDTO::createDefault();
 
-        // 1. 获取上传配置信息
+        // 1. Get upload configuration information
         $storageType = StorageBucketType::SandBox->value;
         $expires = 3600; // Credential valid for 1 hour
         // Create user authorization object
@@ -772,7 +772,7 @@ class AgentDomainService
         $projectDir = WorkDirectoryUtil::getRootDir($dataIsolation->getCurrentUserId(), $taskContext->getTask()->getProjectId());
 
         $stsConfig = $this->fileAppService->getStsTemporaryCredentialV2($projectOrganizationCode, $storageType, $projectDir, $expires, false);
-        // 2. 构建元数据
+        // 2. Build metadata
         $userInfoArray = $this->userInfoAppService->getUserInfo($dataIsolation->getCurrentUserId(), $dataIsolation);
         $userInfo = UserInfoValueObject::fromArray($userInfoArray);
         $this->logger->info('[Sandbox][App] Language generateInitializationInfo', [
@@ -863,8 +863,8 @@ class AgentDomainService
     }
 
     /**
-     * @param null|string $mentionsJson mentions 的 JSON 字符串
-     * @return array 处理后的 mentions 数组
+     * @param null|string $mentionsJson mentions JSON string
+     * @return array Processed mentions array
      */
     private function buildMentionsJsonStruct(?string $mentionsJson): array
     {

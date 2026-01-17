@@ -252,7 +252,7 @@ class TaskDomainService
     }
 
     /**
-     * 批量获取任务文件.
+     * Batch get task files.
      * @return TaskFileEntity[]
      */
     public function getTaskFiles(array $fileIds): array
@@ -268,7 +268,7 @@ class TaskDomainService
      */
     public function updateTaskFile(TaskFileEntity $taskFileEntity): TaskFileEntity
     {
-        // 验证TaskFileEntity是否存在
+        // Validate TaskFileEntity exists
         $existingTaskFile = $this->taskFileRepository->getById($taskFileEntity->getFileId());
         if (! $existingTaskFile) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'Task file not found');
@@ -403,7 +403,7 @@ class TaskDomainService
     }
 
     /**
-     * 获取项目下的任务附件列表.
+     * Get task attachment list by project.
      *
      * @param int $projectId Project ID
      * @param int $page Page number

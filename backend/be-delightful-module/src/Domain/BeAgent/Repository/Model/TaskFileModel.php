@@ -21,7 +21,7 @@ class TaskFileModel extends AbstractModel
     protected string $primaryKey = 'file_id';
 
     /**
-     * 可填充字段列表.
+     * Fillable fields list.
      */
     protected array $fillable = [
         'file_id',
@@ -38,37 +38,37 @@ class TaskFileModel extends AbstractModel
         'file_key',
         'file_size',
         'external_url',
-        'storage_type', // 存储类型，由FileProcessAppService.processAttachmentsArray方法传入
-        'is_hidden', // 是否为隐藏文件
-        'is_directory', // 是否为目录
-        'sort', // 排序字段
-        'parent_id', // 父级ID
-        'metadata', // 文件元数据，存储 JSON
-        'source', // 来源字段：1-首页，2-项目目录，3-agent
+        'storage_type', // Storage type, passed in by FileProcessAppService.processAttachmentsArray method
+        'is_hidden', // Whether it is a hidden file
+        'is_directory', // Whether it is a directory
+        'sort', // Sort field
+        'parent_id', // Parent ID
+        'metadata', // File metadata, stores JSON
+        'source', // Source field: 1-home, 2-project directory, 3-agent
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
     /**
-     * 默认属性值
+     * Default attribute values
      */
     protected array $attributes = [
-        'storage_type' => StorageType::WORKSPACE->value, // 默认存储类型为workspace
-        'is_hidden' => 0, // 默认不是隐藏文件：0-否，1-是
-        'is_directory' => 0, // 默认不是目录：0-否，1-是
-        'sort' => 0, // 默认排序为0
-        'source' => TaskFileSource::HOME->value, // 默认来源为首页
+        'storage_type' => StorageType::WORKSPACE->value, // Default storage type is workspace
+        'is_hidden' => 0, // Default is not a hidden file: 0-no, 1-yes
+        'is_directory' => 0, // Default is not a directory: 0-no, 1-yes
+        'sort' => 0, // Default sort is 0
+        'source' => TaskFileSource::HOME->value, // Default source is home
     ];
 
     /**
-     * 类型转换.
+     * Type casting.
      */
     protected array $casts = [
-        'is_hidden' => 'boolean', // 自动将数据库中的0/1转换为false/true
-        'is_directory' => 'boolean', // 自动将数据库中的0/1转换为false/true
-        'source' => TaskFileSource::class, // 自动将数据库中的int转换为TaskFileSource枚举
-        'storage_type' => StorageType::class, // 自动将数据库中的string转换为StorageType枚举
+        'is_hidden' => 'boolean', // Automatically convert 0/1 in database to false/true
+        'is_directory' => 'boolean', // Automatically convert 0/1 in database to false/true
+        'source' => TaskFileSource::class, // Automatically convert int in database to TaskFileSource enum
+        'storage_type' => StorageType::class, // Automatically convert string in database to StorageType enum
     ];
 
     public function getDates(): array

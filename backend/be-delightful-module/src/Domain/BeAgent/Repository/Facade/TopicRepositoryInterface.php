@@ -14,12 +14,12 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 interface TopicRepositoryInterface
 {
     /**
-     * 通过ID获取话题.
+     * Get topic by ID.
      */
     public function getTopicById(int $id): ?TopicEntity;
 
     /**
-     * 批量获取话题.
+     * Batch get topics.
      * @return TopicEntity[]
      */
     public function getTopicsByIds(array $ids): array;
@@ -29,16 +29,16 @@ interface TopicRepositoryInterface
     public function getTopicBySandboxId(string $sandboxId): ?TopicEntity;
 
     /**
-     * 根据条件获取话题列表.
-     * 支持过滤、分页和排序.
+     * Get topic list by conditions.
+     * Supports filtering, pagination and sorting.
      *
-     * @param array $conditions 查询条件，如 ['workspace_id' => 1, 'user_id' => 'xxx']
-     * @param bool $needPagination 是否需要分页
-     * @param int $pageSize 分页大小
-     * @param int $page 页码
-     * @param string $orderBy 排序字段
-     * @param string $orderDirection 排序方向，asc 或 desc
-     * @return array{list: TopicEntity[], total: int} 话题列表和总数
+     * @param array $conditions Query conditions, e.g. ['workspace_id' => 1, 'user_id' => 'xxx']
+     * @param bool $needPagination Whether pagination is needed
+     * @param int $pageSize Page size
+     * @param int $page Page number
+     * @param string $orderBy Sort field
+     * @param string $orderDirection Sort direction, asc or desc
+     * @return array{list: TopicEntity[], total: int} Topic list and total count
      */
     public function getTopicsByConditions(
         array $conditions = [],
@@ -50,40 +50,40 @@ interface TopicRepositoryInterface
     ): array;
 
     /**
-     * 创建话题.
+     * Create topic.
      */
     public function createTopic(TopicEntity $topicEntity): TopicEntity;
 
     /**
-     * 更新话题.
+     * Update topic.
      */
     public function updateTopic(TopicEntity $topicEntity): bool;
 
     /**
-     * 使用updated_at 作为乐观锁更新话题.
+     * Update topic using updated_at as optimistic lock.
      */
     public function updateTopicWithUpdatedAt(TopicEntity $topicEntity, string $updatedAt): bool;
 
     public function updateTopicByCondition(array $condition, array $data): bool;
 
     /**
-     * 删除话题.
+     * Delete topic.
      */
     public function deleteTopic(int $id): bool;
 
     /**
-     * 通过话题ID集合获取工作区信息.
+     * Get workspace information by topic ID collection.
      *
-     * @param array $topicIds 话题ID集合
-     * @return array 以话题ID为键，工作区信息为值的关联数组
+     * @param array $topicIds Topic ID collection
+     * @return array Associative array with topic ID as key and workspace info as value
      */
     public function getWorkspaceInfoByTopicIds(array $topicIds): array;
 
     /**
-     * 获取话题状态统计数据.
+     * Get topic status statistics data.
      *
-     * @param array $conditions 统计条件，如 ['user_id' => '123', 'organization_code' => 'abc']
-     * @return array 包含各状态数量的数组
+     * @param array $conditions Statistics conditions, e.g. ['user_id' => '123', 'organization_code' => 'abc']
+     * @return array Array containing counts for each status
      */
     public function getTopicStatusMetrics(array $conditions = []): array;
 
@@ -92,23 +92,23 @@ interface TopicRepositoryInterface
     public function updateTopicStatusAndSandboxId(int $id, $taskId, TaskStatus $status, string $sandboxId): bool;
 
     /**
-     * 获取最近更新时间超过指定时间的话题列表.
+     * Get topic list with last update time exceeding specified time.
      *
-     * @param string $timeThreshold 时间阈值，如果话题的更新时间早于此时间，则会被包含在结果中
-     * @param int $limit 返回结果的最大数量
-     * @return array<TopicEntity> 话题实体列表
+     * @param string $timeThreshold Time threshold, topics with update time earlier than this will be included in results
+     * @param int $limit Maximum number of results to return
+     * @return array<TopicEntity> Topic entity list
      */
     public function getTopicsExceedingUpdateTime(string $timeThreshold, int $limit = 100): array;
 
     /**
-     * 根据项目ID获取话题列表.
+     * Get topic list by project ID.
      */
     public function getTopicsByProjectId(int $projectId, string $userId): array;
 
     public function updateTopicStatusBySandboxIds(array $sandboxIds, string $status);
 
     /**
-     * 统计项目下的话题数量.
+     * Count topics under project.
      */
     public function countTopicsByProjectId(int $projectId): int;
 
@@ -116,70 +116,70 @@ interface TopicRepositoryInterface
 
     public function getRunningProjectIds(array $projectIds, ?string $userId = null): array;
 
-    // ======================= 消息回滚相关方法 =======================
+    // ======================= Message rollback related methods =======================
 
     /**
-     * 根据序列ID获取delightful_message_id.
+     * Get delightful_message_id by sequence ID.
      */
     public function getDelightfulMessageIdBySeqId(string $seqId): ?string;
 
     /**
-     * 根据delightful_message_id获取所有相关的seq_id（所有视角）.
+     * Get all related seq_ids by delightful_message_id (all perspectives).
      */
     public function getAllSeqIdsByDelightfulMessageId(string $delightfulMessageId): array;
 
     /**
-     * 根据基础seq_ids获取当前话题当前消息以及这条消息后面的所有消息.
-     * @param array $baseSeqIds 基础seq_ids
-     * @return array 所有相关的seq_ids
+     * Get current message and all messages after it in current topic by base seq_ids.
+     * @param array $baseSeqIds Base seq_ids
+     * @return array All related seq_ids
      */
     public function getAllSeqIdsFromCurrent(array $baseSeqIds): array;
 
     /**
-     * 删除topic_messages数据.
+     * Delete topic_messages data.
      */
     public function deleteTopicMessages(array $seqIds): int;
 
     /**
-     * 根据seq_ids删除messages和sequences数据.
+     * Delete messages and sequences data by seq_ids.
      */
     public function deleteMessagesAndSequencesBySeqIds(array $seqIds): bool;
 
     /**
-     * 根据im_seq_id删除delightful_be_agent_message表中对应话题的后续消息.
+     * Delete subsequent messages in delightful_be_agent_message table for corresponding topic by im_seq_id.
      *
-     * 删除逻辑：
-     * 1. 根据im_seq_id查询delightful_be_agent_message表，获取对应的主键id和topic_id
-     * 2. 删除当前话题中id >= 查询到的主键id的所有数据
+     * Deletion logic:
+     * 1. Query delightful_be_agent_message table by im_seq_id to get corresponding primary key id and topic_id
+     * 2. Delete all data in current topic where id >= queried primary key id
      *
-     * @param int $seqId IM消息的序列ID
-     * @return int 删除的记录数
+     * @param int $seqId IM message sequence ID
+     * @return int Number of deleted records
      */
     public function deleteBeAgentMessagesFromSeqId(int $seqId): int;
 
     /**
-     * 批量更新delightful_chat_sequences表的status字段.
+     * Batch update status field in delightful_chat_sequences table.
      *
-     * @param array $seqIds 需要更新的序列ID数组
-     * @param DelightfulMessageStatus $status 目标状态
-     * @return bool 更新是否成功
+     * @param array $seqIds Sequence ID array to update
+     * @param DelightfulMessageStatus $status Target status
+     * @return bool Whether update succeeded
      */
     public function batchUpdateSeqStatus(array $seqIds, DelightfulMessageStatus $status): bool;
 
     /**
-     * 根据基础seq_ids获取当前话题中小于指定seq_id的所有消息.
+     * Get all messages in current topic less than specified seq_id by base seq_ids.
      *
-     * @param array $baseSeqIds 基础seq_ids
-     * @return array 小于指定seq_id的所有消息列表
+     * @param array $baseSeqIds Base seq_ids
+     * @return array List of all messages less than specified seq_id
      */
     public function getAllSeqIdsBeforeCurrent(array $baseSeqIds): array;
 
     /**
-     * 根据话题ID获取所有撤回状态的消息seq_ids.
+     * Get all revoked message seq_ids by topic ID.
      *
-     * @param int $topicId 话题ID
-     * @param string $userId 用户ID（权限验证）
-     * @return array 撤回状态的消息seq_ids
+     * @param int $topicId Topic ID
+     * @param string $userId User ID (for permission verification)
+     * @return array Revoked message seq_ids
      */
     public function getRevokedSeqIdsByTopicId(int $topicId, string $userId): array;
 
